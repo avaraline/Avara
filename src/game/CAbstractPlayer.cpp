@@ -200,23 +200,6 @@ void CAbstractPlayer::ReplacePartColors() {
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
     }
-    /*
-    PaletteHandle	thePalette;
-
-    teamMask = 1<<teamColor;
-    thePalette = GetPalette(itsGame->itsWindow);
-    if(thePalette)
-    {	RGBColor	theColor;
-        CSmartPart	**thePart;
-
-        GetEntryColor(thePalette, teamColor + kFirstPlayerColor - 1, &theColor);
-        longTeamColor = RGBToLongColor(&theColor);
-
-        for(thePart = partList;*thePart;thePart++)
-        {	(*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
-        }
-    }
-    */
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
