@@ -206,32 +206,39 @@ void CBall::Dispose() {
 }
 
 void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
-    // PaletteHandle	thePalette;
+    long longTeamColor;
 
     teamColor = ownerTeamColor;
     teamMask = 1 << teamColor;
     ownerScoringId = ownerId;
 
-    /*
-    thePalette = GetPalette(gCurrentGame->itsWindow);
-    if(thePalette)
-    {	RGBColor	theColor;
-        CSmartPart	**thePart;
-        long		longTeamColor;
-
-        if(teamColor)
-        {	GetEntryColor(thePalette, teamColor + kFirstPlayerColor - 1, &theColor);
-            longTeamColor = RGBToLongColor(&theColor);
-        }
-        else
-        {	longTeamColor = origLongColor;
-        }
-
-        for(thePart = partList;*thePart;thePart++)
-        {	(*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
-        }
+    switch (teamColor) {
+        case kGreenTeam:
+            longTeamColor = kGreenTeamColor;
+            break;
+        case kYellowTeam:
+            longTeamColor = kYellowTeamColor;
+            break;
+        case kRedTeam:
+            longTeamColor = kRedTeamColor;
+            break;
+        case kPinkTeam:
+            longTeamColor = kPinkTeamColor;
+            break;
+        case kPurpleTeam:
+            longTeamColor = kPurpleTeamColor;
+            break;
+        case kBlueTeam:
+            longTeamColor = kBlueTeamColor;
+            break;
+        default:
+            longTeamColor = origLongColor;
+            break;
     }
-    */
+
+    for (CSmartPart **thePart = partList; *thePart; thePart++) {
+        (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
+    }
 }
 
 void CBall::PlaceParts() {

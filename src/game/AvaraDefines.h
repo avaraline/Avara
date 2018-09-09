@@ -17,15 +17,17 @@ enum {
     kShadowGrayColor,
     kAvaraBackColor,
     kStatusGreenColor,
-    kStatusRedColor,
-    kFirstPlayerColor,
-    kFirstBrightColor = kFirstPlayerColor + kMaxTeamColors,
-    kRedGrafColor = kFirstBrightColor + kMaxTeamColors,
-    kGreenGrafColor,
-    kBlueGrafColor,
-    kFirstIndicatorColor,
-    kLastIndicatorColor = kFirstIndicatorColor + 3
+    kStatusRedColor
 };
+
+#define kGreenTeamColor 0x00006600
+#define kYellowTeamColor 0x00cccc00
+#define kRedTeamColor 0x00cc0000
+#define kPinkTeamColor 0x00cc0099
+#define kPurpleTeamColor 0x009900cc
+#define kBlueTeamColor 0x000099cc
+#define kSpecialBlackColor 0x00303030
+#define kSpecialWhiteColor 0x00e0e0e0
 
 #define kStatusAreaHeight 0 /*29*/
 #define kIndicatorAreaWidth 80
