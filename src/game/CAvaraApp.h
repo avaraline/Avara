@@ -14,6 +14,7 @@
 #include "CLevelWindow.h"
 #include "CNetworkWindow.h"
 #include "CPlayerWindow.h"
+#include "CRosterWindow.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -26,6 +27,7 @@ public:
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
+    CRosterWindow *rosterWindow;
 
     CAvaraApp();
     ~CAvaraApp();

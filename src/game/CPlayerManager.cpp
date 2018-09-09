@@ -56,7 +56,8 @@ void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *
         {"boost", 1 << kfuBoostEnergy},
         {"aimForward", 1 << kfuAimForward},
         {"scoutView", 1 << kfuScoutView},
-        {"scoutControl", 1 << kfuScoutControl}};
+        {"scoutControl", 1 << kfuScoutControl},
+        {"chatMode", 1 << kfuTypeText}};
 
     // Read the keyboard mapping prefs.
     json keys = itsGame->itsApp->Get(kKeyboardMappingTag);
@@ -79,6 +80,9 @@ void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *
         }
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
+
+    SDL_StartTextInput();
+    SDL_StopTextInput();
 
     // mainScreenRect = &(*GetMainDevice())->gdRect;
     // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
@@ -218,7 +222,21 @@ void CPlayerManager::HandleEvent(SDL_Event &event) {
         case SDL_KEYDOWN:
             keysDown |= keyMap[event.key.keysym.scancode];
             keysHeld |= keyMap[event.key.keysym.scancode];
+
+            if (TESTFUNC(kfuTypeText, keysDown)) {
+                keyboardActive = !keyboardActive;
+                if (keyboardActive) {
+                    SDL_StartTextInput();
+                }
+                else {
+                    SDL_StopTextInput();
+                }
+            }
             break;
+        case SDL_TEXTINPUT:
+            for(char* a_char = event.text.text; *a_char; ++a_char) {
+                inputBuffer.push_back(*a_char);
+            }
         case SDL_KEYUP:
             keysUp |= keyMap[event.key.keysym.scancode];
             keysHeld &= ~keyMap[event.key.keysym.scancode];
@@ -253,9 +271,27 @@ void CPlayerManager::SendFrame() {
     FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & itsGame->topSentFrame];
 
     ff->validFrame = itsGame->topSentFrame;
-    ff->ft.down = keysDown;
-    ff->ft.up = keysUp;
-    ff->ft.held = keysHeld;
+
+    if (!keyboardActive) {
+        ff->ft.down = keysDown;
+        ff->ft.up = keysUp;
+        ff->ft.held = keysHeld;
+        ff->ft.msgChar = 0;
+    }
+    else {
+        if (!inputBuffer.empty()) {
+            SDL_Log("inputBuffer.size(): %d", inputBuffer.size());
+            ff->ft.msgChar = inputBuffer.front();
+            inputBuffer.pop_front();
+        }
+        else {
+            ff->ft.msgChar = 0;
+        }
+        ff->ft.down = 0;
+        ff->ft.up = 0;
+        ff->ft.held = 0;
+    }
+
     ff->ft.mouseDelta.h = mouseX;
     ff->ft.mouseDelta.v = mouseY;
     ff->ft.buttonStatus = buttonStatus;

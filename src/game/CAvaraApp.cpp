@@ -59,7 +59,11 @@ CAvaraApp::CAvaraApp() : CApplication("Avara", 1024, 640) {
         }
     */
 
+    rosterWindow = new CRosterWindow(this);
+    rosterWindow->setFixedWidth(450);
     performLayout();
+
+    rosterWindow->setPosition(nanogui::Vector2i(240,20));
 }
 
 CAvaraApp::~CAvaraApp() {
@@ -95,6 +99,7 @@ void CAvaraApp::drawAll() {
         DrawContents();
         SDL_GL_SwapWindow(mSDLWindow);
     } else {
+        rosterWindow->UpdateRoster();
         CApplication::drawAll();
     }
 }
