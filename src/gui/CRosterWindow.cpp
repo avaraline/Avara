@@ -13,6 +13,8 @@ std::vector<Text*> names;
 std::vector<Text*> statuses;
 std::vector<Text*> chats;
 
+const int CHAT_CHARS = 50;
+
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     AdvancedGridLayout *layout = new AdvancedGridLayout();
     setLayout(layout);
@@ -66,6 +68,9 @@ void CRosterWindow::UpdateRoster() {
         std::string theStatus = GetStringStatus(status);
 
         std::string theChat((char *)thisPlayer->lineBuffer + 1, thisPlayer->lineBuffer[0]);
+        if (theChat.length() > CHAT_CHARS) {
+            theChat = theChat.substr(theChat.length() - CHAT_CHARS, CHAT_CHARS);
+        }
 
         names[i]->setValue(theName.c_str());
         statuses[i]->setValue(theStatus.c_str());

@@ -81,8 +81,8 @@ void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
-    SDL_StartTextInput();
-    SDL_StopTextInput();
+    //SDL_StartTextInput();
+    //SDL_StopTextInput();
 
     // mainScreenRect = &(*GetMainDevice())->gdRect;
     // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
