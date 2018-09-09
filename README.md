@@ -5,3 +5,22 @@ A port of the 1996 game by Juri Munkki, published by Ambrosia Software, using SD
 Originally released under the MIT license here:
 
 https://github.com/jmunkki/Avara
+
+
+## Requirements
+
+SDL2:
+
+https://www.libsdl.org/download-2.0.php
+
+SDL_net:
+
+https://www.libsdl.org/projects/SDL_net/
+
+
+## Build Instructions
+
+`make`
+
+This port has been tested on recent versions of MacOS, Windows, and various flavors of Linux. If you encounter a
+problem building, feel free to submit an issue, or ideally a pull request!
