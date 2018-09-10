@@ -40,7 +40,7 @@ public:
         Right
     };
 
-    Text(Widget *parent, const std::string &value = "Untitled");
+    Text(Widget *parent, const std::string &value = "Untitled", bool background = false);
 
     bool editable() const { return mEditable; }
     void setEditable(bool editable);
@@ -113,6 +113,7 @@ protected:
     bool mEditable;
     bool mSpinnable;
     bool mCommitted;
+    bool showBackground;
     std::string mValue;
     std::string mDefaultValue;
     Alignment mAlignment;

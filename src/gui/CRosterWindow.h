@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CApplication.h"
+#include <nanogui/common.h>
 
 class CRosterWindow : public CWindow {
 public:
@@ -11,4 +12,7 @@ public:
     virtual bool DoCommand(int theCommand);
     void UpdateRoster();
     std::string GetStringStatus(short status);
+    bool mouseEnterEvent(const nanogui::Vector2i &p, bool enter) override;
+    bool handleSDLEvent(SDL_Event &event);
+    void SendRosterMessage(int length, char* message);
 };
