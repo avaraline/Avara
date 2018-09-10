@@ -13,7 +13,12 @@ std::vector<Text*> names;
 std::vector<Text*> statuses;
 std::vector<Text*> chats;
 
-const int CHAT_CHARS = 50;
+const int CHAT_CHARS = 60;
+bool textInputStarted = false;
+char backspace[1] = {'\b'};
+char clearline[1] = {'\027'};
+char endline[2] = {'-', ' '};
+char bellline[4] = {'!', '@', '#', '$'};
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     AdvancedGridLayout *layout = new AdvancedGridLayout();
@@ -30,7 +35,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
         
-        nanogui::Text* chat = new nanogui::Text(this, "a very very very long very long stirn gits vyer long string string string");
+        nanogui::Text* chat = new nanogui::Text(this, "", true);
         layout->setAnchor(chat, AdvancedGridLayout::Anchor(0, i * 2 + 1, 2, 1));
         //layout->appendRow(1,1);
         //new nanogui::Label(this, "");
@@ -38,9 +43,8 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         name->setAlignment(Text::Alignment::Left);
         status->setAlignment(Text::Alignment::Right);
         chat->setAlignment(Text::Alignment::Left);
-        name->setFixedWidth(200);
-        status->setFixedWidth(200);
-        //chatLabel->setFixedWidth(560);
+        name->setFixedWidth(225);
+        status->setFixedWidth(225);
 
         //nameLabel->setVisible(false);
         //statusLabel->setVisible(false);
@@ -67,7 +71,7 @@ void CRosterWindow::UpdateRoster() {
         short status = thisPlayer->loadingStatus;
         std::string theStatus = GetStringStatus(status);
 
-        std::string theChat((char *)thisPlayer->lineBuffer + 1, thisPlayer->lineBuffer[0]);
+        std::string theChat(thisPlayer->lineBuffer.begin(), thisPlayer->lineBuffer.end());//theChat((char *)thisPlayer->lineBuffer + 1, thisPlayer->lineBuffer[0]);
         if (theChat.length() > CHAT_CHARS) {
             theChat = theChat.substr(theChat.length() - CHAT_CHARS, CHAT_CHARS);
         }
@@ -116,11 +120,54 @@ std::string CRosterWindow::GetStringStatus(short status) {
     else {
         strStatus = "";
     }
-
-    //const char *fmt = "(%s)";
-    //int size = std::snprintf(nullptr, 0, fmt, strStatus);
-    //std::vector<char> buffa(size+1);
-    //std::snprintf(&buffa[0], buffa.size(), fmt, strStatus);
-    //std::string s(buffa.begin(), buffa.end());
     return strStatus;
+}
+
+bool CRosterWindow::mouseEnterEvent(const nanogui::Vector2i &p, bool enter) {
+    if (enter && !textInputStarted) {
+        SDL_StartTextInput();
+        textInputStarted = true;
+    }
+    if (!enter && textInputStarted) {
+        SDL_StartTextInput();
+        textInputStarted = false;
+    }
+    return true;
+};
+
+void CRosterWindow::SendRosterMessage(int len, char* message) {
+    ((CAvaraApp *)gApplication)->gameNet->SendRosterMessage(len, message);
+}
+
+bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
+    if(!textInputStarted) return false;
+    if (event.type == SDL_TEXTINPUT) {
+        SendRosterMessage(strlen(event.text.text), event.text.text);
+        return true;
+    }
+    else if (event.type == SDL_KEYDOWN) {
+        switch(event.key.keysym.sym) {
+            case SDLK_BACKSPACE:
+                SendRosterMessage(1, backspace);
+                return true;
+            case SDLK_RETURN:
+                SendRosterMessage(2, endline);
+                return true;
+            case SDLK_CLEAR:
+            case SDLK_DELETE:
+                SendRosterMessage(1, clearline);
+                return true;
+            case SDLK_g:
+                if (SDL_GetModState() & KMOD_CTRL) {
+                    SendRosterMessage(4, bellline);
+                    return true;
+                }
+                else return false;
+            default:
+                return false;
+        }
+    }
+    else {
+        return false;
+    }
 }

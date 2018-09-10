@@ -29,6 +29,7 @@
 #include "System.h"
 
 #include <string.h>
+#include <algorithm>
 
 #define AUTOLATENCYPERIOD 64
 #define AUTOLATENCYDELAY 8
@@ -77,7 +78,8 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
 
     lastMsgTick = TickCount();
     firstMsgTick = lastMsgTick;
-    msgBufferLen = 0;
+    
+    msgBuffer.clear();
 
     lastLoginRefusal = 0;
 }
@@ -180,7 +182,7 @@ void CNetManager::ProcessQueue() {
 
     itsCommManager->ProcessQueue();
 
-    if (msgBufferLen) {
+    if (msgBuffer.size() > 0) {
         curTicks = TickCount();
 
         if ((curTicks - firstMsgTick > kMessageBufferMaxAge) ||
@@ -281,24 +283,28 @@ void CNetManager::PositionsChanged(char *p) {
 }
 
 void CNetManager::FlushMessageBuffer() {
-    if (msgBufferLen) {
-        itsCommManager->SendPacket(~(1 << itsCommManager->myId), kpRosterMessage, 0, 0, 0, msgBufferLen, msgBuffer);
-        msgBufferLen = 0;
+    if (msgBuffer.size() > 0) {
+        char *msg = new char[msgBuffer.size()];
+        std::copy(msgBuffer.begin(), msgBuffer.end(), msg);
+        itsCommManager->SendPacket(~(1 << itsCommManager->myId), kpRosterMessage, 0, 0, 0, msgBuffer.size(), msg);
+        delete [] msg;
+        msgBuffer.clear();
     }
 }
 
 void CNetManager::BufferMessage(short len, char *c) {
     if (len) {
         lastMsgTick = TickCount();
-        if (msgBufferLen == 0) {
+        if (msgBuffer.size() == 0) {
             firstMsgTick = lastMsgTick;
         }
 
         while (len--) {
-            msgBuffer[msgBufferLen++] = *c++;
+            msgBuffer.push_back(*c++);
+            //msgBuffer[msgBufferLen++] = *c++;
         }
 
-        if (msgBufferLen == kMaxChatMessageBufferLen) {
+        if (msgBuffer.size() >= kMaxChatMessageBufferLen) {
             FlushMessageBuffer();
         }
     }
@@ -311,7 +317,7 @@ void CNetManager::SendRosterMessage(short len, char *c) {
     } else {
         itsCommManager->SendPacket(1 << itsCommManager->myId, kpRosterMessage, 0, 0, 0, len, c);
 
-        if (len + msgBufferLen > kMaxChatMessageBufferLen) {
+        if (len + msgBuffer.size() > kMaxChatMessageBufferLen) {
             FlushMessageBuffer();
         }
 

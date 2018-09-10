@@ -101,6 +101,7 @@ void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *
 
     NetDisconnect();
     isLocalPlayer = false;
+    prevKeyboardActive = keyboardActive;
 }
 
 void CPlayerManager::SetPlayer(CAbstractPlayer *thePlayer) {
@@ -234,8 +235,10 @@ void CPlayerManager::HandleEvent(SDL_Event &event) {
             }
             break;
         case SDL_TEXTINPUT:
-            for(char* a_char = event.text.text; *a_char; ++a_char) {
-                inputBuffer.push_back(*a_char);
+            if (keyboardActive) {
+                for(char* a_char = event.text.text; *a_char; ++a_char) {
+                    inputBuffer.push_back(*a_char);
+                }
             }
         case SDL_KEYUP:
             keysUp |= keyMap[event.key.keysym.scancode];
@@ -277,10 +280,10 @@ void CPlayerManager::SendFrame() {
         ff->ft.up = keysUp;
         ff->ft.held = keysHeld;
         ff->ft.msgChar = 0;
+        prevKeyboardActive = keyboardActive;
     }
     else {
         if (!inputBuffer.empty()) {
-            SDL_Log("inputBuffer.size(): %d", inputBuffer.size());
             ff->ft.msgChar = inputBuffer.front();
             inputBuffer.pop_front();
         }
@@ -290,6 +293,10 @@ void CPlayerManager::SendFrame() {
         ff->ft.down = 0;
         ff->ft.up = 0;
         ff->ft.held = 0;
+        if (prevKeyboardActive == false) {
+            prevKeyboardActive = true;
+            ff->ft.down |= 1 << kfuTypeText;
+        }
     }
 
     ff->ft.mouseDelta.h = mouseX;
@@ -659,19 +666,26 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
 
         switch (theChar) {
             case 8:
-                if (lineBuffer[0])
-                    lineBuffer[0]--;
+                //if (lineBuffer[0])
+                //    lineBuffer[0]--;
+                if (lineBuffer.size()) {
+                    lineBuffer.pop_back();
+                }
                 break;
             case 13:
                 // FlushMessageText(true);
                 break;
             case 27:
-                lineBuffer[0] = 0;
+                lineBuffer.clear();
                 break;
             default:
                 if (theChar >= 32) {
-                    lineBuffer[++lineBuffer[0]] = theChar;
+                    lineBuffer.push_back(theChar);
                     if (lineBuffer[0] > 220) { // FlushMessageText(true);
+                        for (int i = 0; i < 50; ++i)
+                        {
+                            lineBuffer.pop_front();
+                        }
                     }
                 }
                 break;
@@ -705,7 +719,8 @@ void CPlayerManager::NetDisconnect() {
     globalLocation.v = 0;
 
     message[0] = 0;
-    lineBuffer[0] = 0;
+    //lineBuffer[0] = 0;
+    lineBuffer.clear();
     playerName[0] = 0;
     spaceCount = 0;
     playerRegName[0] = 0;

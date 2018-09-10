@@ -17,6 +17,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <vector>
 
 #define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
 #define SERVERNETPACKETS (16 * 2 * kMaxAvaraPlayers)
@@ -107,8 +108,9 @@ public:
 
     long lastMsgTick;
     long firstMsgTick;
-    short msgBufferLen;
-    char msgBuffer[kMaxChatMessageBufferLen];
+    //short msgBufferLen;
+    //char msgBuffer[kMaxChatMessageBufferLen];
+    std::vector<char> msgBuffer;
 
     virtual void INetManager(CAvaraGame *theGame);
     virtual void LevelReset();

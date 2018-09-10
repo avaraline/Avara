@@ -22,7 +22,7 @@
 
 NAMESPACE_BEGIN(nanogui)
 
-Text::Text(Widget *parent,const std::string &value)
+Text::Text(Widget *parent,const std::string &value, bool background)
     : Widget(parent),
       mEditable(false),
       mSpinnable(false),
@@ -43,8 +43,9 @@ Text::Text(Widget *parent,const std::string &value)
       mMouseDownModifier(0),
       mTextOffset(0),
       mLastClick(0) {
-    if (mTheme) mFontSize = mTheme->mTextBoxFontSize;
+    if (mTheme) mFontSize = mTheme->mTextBoxFontSize - 3;
     mIconExtraScale = 0.8f;// widget override
+    showBackground = background;
 }
 
 void Text::setEditable(bool editable) {
@@ -106,13 +107,29 @@ void Text::draw(NVGcontext* ctx) {
         nvgFillPaint(ctx, bg);
 
     nvgFill(ctx);
-    */
+    
     nvgBeginPath(ctx);
     nvgRoundedRect(ctx, mPos.x + 0.5f, mPos.y + 0.5f, mSize.x - 1,
                    mSize.y - 1, 2.5f);
     nvgStrokeColor(ctx, Color(0, 48));
     nvgStroke(ctx);
+    */
+    if (showBackground) {
+        nvgBeginPath(ctx);
+        nvgRect(ctx, mPos.x + 1, mPos.y + 1 + 1.0f, mSize.x - 2,
+                   mSize.y - 2);
+        NVGpaint bg =  nvgBoxGradient(ctx,
+        mPos.x + 1, mPos.y + 1 + 1.0f, mSize.x - 2, mSize.y - 2,
+        3, 4, Color(255, 32), Color(32, 32));
+        nvgFillPaint(ctx, bg);
+        nvgFill(ctx);
     
+        nvgBeginPath(ctx);
+        nvgRect(ctx, mPos.x + 0.5f, mPos.y + 0.5f, mSize.x - 1,
+                       mSize.y - 1);
+        nvgStrokeColor(ctx, Color(0, 48));
+        nvgStroke(ctx);
+    }
     nvgFontSize(ctx, fontSize());
     nvgFontFace(ctx, "sans");
     Vector2i drawPos(mPos.x, mPos.y + mSize.y * 0.5f + 1);
