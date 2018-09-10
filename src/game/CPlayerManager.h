@@ -86,7 +86,6 @@ public:
     Str255 playerRegName;
     short isRegistered;
     unsigned char message[kMaxMessageChars + 1];
-    //Str255 lineBuffer;
     std::deque<unsigned char> lineBuffer;
 
     long winFrame;

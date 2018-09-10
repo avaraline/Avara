@@ -37,7 +37,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         std::string playerName((char *)eachPlayer->itsManager->playerName + 1, eachPlayer->itsManager->playerName[0]);
         std::string playerLives = std::to_string(eachPlayer->lives);
 
-        std::string playerChat(eachPlayer->itsManager->lineBuffer.begin(), eachPlayer->itsManager->lineBuffer.end());//((char *)eachPlayer->itsManager->lineBuffer + 1, eachPlayer->itsManager->lineBuffer[0]);
+        std::string playerChat(eachPlayer->itsManager->lineBuffer.begin(), eachPlayer->itsManager->lineBuffer.end());
         if (playerChat.length() > CHAT_CHARS) {
             playerChat = playerChat.substr(playerChat.length() - CHAT_CHARS, CHAT_CHARS);
         }
