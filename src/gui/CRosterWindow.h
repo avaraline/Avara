@@ -11,7 +11,7 @@ public:
     // Handles a command broadcasted by CApplication::BroadcastCommand. Returns true if it was actually handled.
     virtual bool DoCommand(int theCommand);
     void UpdateRoster();
-    std::string GetStringStatus(short status);
+    std::string GetStringStatus(short status, Fixed winFrame);
     bool mouseEnterEvent(const nanogui::Vector2i &p, bool enter) override;
     bool handleSDLEvent(SDL_Event &event);
     void SendRosterMessage(int length, char* message);

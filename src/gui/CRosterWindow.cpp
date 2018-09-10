@@ -6,6 +6,7 @@
 #include "CAbstractPlayer.h"
 #include <nanogui/layout.h>
 #include <nanogui/text.h>
+#include <sstream>
 #include <numeric>
 using namespace nanogui;
 
@@ -69,9 +70,9 @@ void CRosterWindow::UpdateRoster() {
         const std::string theName((char *)thisPlayer->playerName + 1, thisPlayer->playerName[0]);
 
         short status = thisPlayer->loadingStatus;
-        std::string theStatus = GetStringStatus(status);
+        std::string theStatus = GetStringStatus(status, thisPlayer->winFrame);
 
-        std::string theChat(thisPlayer->lineBuffer.begin(), thisPlayer->lineBuffer.end());//theChat((char *)thisPlayer->lineBuffer + 1, thisPlayer->lineBuffer[0]);
+        std::string theChat(thisPlayer->lineBuffer.begin(), thisPlayer->lineBuffer.end());
         if (theChat.length() > CHAT_CHARS) {
             theChat = theChat.substr(theChat.length() - CHAT_CHARS, CHAT_CHARS);
         }
@@ -87,8 +88,29 @@ bool CRosterWindow::DoCommand(int theCommand) {
     return false;
 }
 
-std::string CRosterWindow::GetStringStatus(short status) {
+std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
+
     std::string strStatus;
+    if (winFrame >= 0) {
+        long timeTemp = FMulDiv(winFrame, ((CAvaraApp *)gApplication)->itsGame->frameTime, 10);
+        auto hundreds1 = timeTemp % 10;
+        timeTemp /= 10;
+        auto hundreds2 = timeTemp % 10;
+        timeTemp /= 10;
+        auto secs1 = timeTemp % 10;
+        timeTemp /= 10;
+        auto secs2 = timeTemp % 6;
+        timeTemp /= 6;
+
+        std::ostringstream os;
+        os << "[" << timeTemp 
+        << ":" << secs2 << secs1 
+        << "." << hundreds2 << hundreds1 
+        << "]";
+
+        strStatus = os.str();
+        return strStatus;
+    }
 
     if (status == kLConnected) {
         strStatus = "connected";
