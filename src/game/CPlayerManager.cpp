@@ -56,7 +56,8 @@ void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *
         {"boost", 1 << kfuBoostEnergy},
         {"aimForward", 1 << kfuAimForward},
         {"scoutView", 1 << kfuScoutView},
-        {"scoutControl", 1 << kfuScoutControl}};
+        {"scoutControl", 1 << kfuScoutControl},
+        {"chatMode", 1 << kfuTypeText}};
 
     // Read the keyboard mapping prefs.
     json keys = itsGame->itsApp->Get(kKeyboardMappingTag);
@@ -97,6 +98,7 @@ void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *
 
     NetDisconnect();
     isLocalPlayer = false;
+    prevKeyboardActive = keyboardActive;
 }
 
 void CPlayerManager::SetPlayer(CAbstractPlayer *thePlayer) {
@@ -218,7 +220,23 @@ void CPlayerManager::HandleEvent(SDL_Event &event) {
         case SDL_KEYDOWN:
             keysDown |= keyMap[event.key.keysym.scancode];
             keysHeld |= keyMap[event.key.keysym.scancode];
+
+            if (TESTFUNC(kfuTypeText, keysDown)) {
+                keyboardActive = !keyboardActive;
+                if (keyboardActive) {
+                    SDL_StartTextInput();
+                }
+                else {
+                    SDL_StopTextInput();
+                }
+            }
             break;
+        case SDL_TEXTINPUT:
+            if (keyboardActive) {
+                for(char* a_char = event.text.text; *a_char; ++a_char) {
+                    inputBuffer.push_back(*a_char);
+                }
+            }
         case SDL_KEYUP:
             keysUp |= keyMap[event.key.keysym.scancode];
             keysHeld &= ~keyMap[event.key.keysym.scancode];
@@ -253,9 +271,31 @@ void CPlayerManager::SendFrame() {
     FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & itsGame->topSentFrame];
 
     ff->validFrame = itsGame->topSentFrame;
-    ff->ft.down = keysDown;
-    ff->ft.up = keysUp;
-    ff->ft.held = keysHeld;
+
+    if (!keyboardActive) {
+        ff->ft.down = keysDown;
+        ff->ft.up = keysUp;
+        ff->ft.held = keysHeld;
+        ff->ft.msgChar = 0;
+        prevKeyboardActive = keyboardActive;
+    }
+    else {
+        if (!inputBuffer.empty()) {
+            ff->ft.msgChar = inputBuffer.front();
+            inputBuffer.pop_front();
+        }
+        else {
+            ff->ft.msgChar = 0;
+        }
+        ff->ft.down = 0;
+        ff->ft.up = 0;
+        ff->ft.held = 0;
+        if (prevKeyboardActive == false) {
+            prevKeyboardActive = true;
+            ff->ft.down |= 1 << kfuTypeText;
+        }
+    }
+
     ff->ft.mouseDelta.h = mouseX;
     ff->ft.mouseDelta.v = mouseY;
     ff->ft.buttonStatus = buttonStatus;
@@ -622,20 +662,29 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
         theChar = *c++;
 
         switch (theChar) {
+            case 7:
+                itsGame->itsApp->NotifyUser();
+                break;
             case 8:
-                if (lineBuffer[0])
-                    lineBuffer[0]--;
+                if (lineBuffer.size()) {
+                    lineBuffer.pop_back();
+                }
                 break;
             case 13:
                 // FlushMessageText(true);
                 break;
             case 27:
-                lineBuffer[0] = 0;
+                lineBuffer.clear();
                 break;
             default:
                 if (theChar >= 32) {
-                    lineBuffer[++lineBuffer[0]] = theChar;
-                    if (lineBuffer[0] > 220) { // FlushMessageText(true);
+                    lineBuffer.push_back(theChar);
+                    if (lineBuffer[0] > 220) {
+                        // FlushMessageText(true);
+                        for (int i = 0; i < 50; ++i)
+                        {
+                            lineBuffer.pop_front();
+                        }
                     }
                 }
                 break;
@@ -669,7 +718,8 @@ void CPlayerManager::NetDisconnect() {
     globalLocation.v = 0;
 
     message[0] = 0;
-    lineBuffer[0] = 0;
+    //lineBuffer[0] = 0;
+    lineBuffer.clear();
     playerName[0] = 0;
     spaceCount = 0;
     playerRegName[0] = 0;

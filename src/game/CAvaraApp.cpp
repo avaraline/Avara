@@ -59,7 +59,11 @@ CAvaraApp::CAvaraApp() : CApplication("Avara", 1024, 640) {
         }
     */
 
+    rosterWindow = new CRosterWindow(this);
+    rosterWindow->setFixedWidth(450);
     performLayout();
+
+    rosterWindow->setPosition(nanogui::Vector2i(240,20));
 }
 
 CAvaraApp::~CAvaraApp() {
@@ -83,6 +87,9 @@ void CAvaraApp::WindowResized(int width, int height) {
 
 bool CAvaraApp::handleSDLEvent(SDL_Event &event) {
     itsGame->HandleEvent(event);
+    if (!itsGame->IsPlaying()) {
+        if (rosterWindow->handleSDLEvent(event)) return true;
+    }
     return CApplication::handleSDLEvent(event);
 }
 
@@ -95,6 +102,7 @@ void CAvaraApp::drawAll() {
         DrawContents();
         SDL_GL_SwapWindow(mSDLWindow);
     } else {
+        rosterWindow->UpdateRoster();
         CApplication::drawAll();
     }
 }
@@ -187,6 +195,10 @@ OSErr CAvaraApp::LoadLevel(std::string set, OSType theLevel) {
     }
 
     return noErr;
+}
+
+void CAvaraApp::NotifyUser() {
+    // TODO: Bell sound(s)
 }
 
 // STUBBBBBZZZZZ

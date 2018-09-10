@@ -8,6 +8,8 @@ CHUD::CHUD(CAvaraGame *game) {
     itsGame = game;
 }
 
+const int CHAT_CHARS = 50;
+
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
 
@@ -35,6 +37,11 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         std::string playerName((char *)eachPlayer->itsManager->playerName + 1, eachPlayer->itsManager->playerName[0]);
         std::string playerLives = std::to_string(eachPlayer->lives);
 
+        std::string playerChat(eachPlayer->itsManager->lineBuffer.begin(), eachPlayer->itsManager->lineBuffer.end());
+        if (playerChat.length() > CHAT_CHARS) {
+            playerChat = playerChat.substr(playerChat.length() - CHAT_CHARS, CHAT_CHARS);
+        }
+
         nvgBeginPath(ctx);
         nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
         nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
@@ -49,6 +56,12 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgFontSize(ctx, fontsz_s);
         nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
         nvgText(ctx, bufferWidth - 162, pY - 3, playerLives.c_str(), NULL);
+
+
+        nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
+        nvgFontSize(ctx, fontsz_m);
+        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+        nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
 
         p++;
         eachPlayer = eachPlayer->nextPlayer;

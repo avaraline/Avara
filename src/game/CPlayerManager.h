@@ -14,6 +14,7 @@
 
 #include <SDL2/SDL.h>
 #include <map>
+#include <deque>
 
 enum {
     kLNotConnected,
@@ -35,12 +36,9 @@ enum {
 
 #define FUNCTIONBUFFERS 32
 #define MAXFRAMEDIFFERENCE 2
-#define INPUTBUFFERSIZE 32
-#define INPUTBUFFERMASK 31
 
 class CAbstractPlayer;
 class CAvaraGame;
-// class	CRosterWindow;
 class CNetManager;
 
 #define kMaxMessageChars 127
@@ -73,10 +71,11 @@ public:
     Point oldMouse;
     unsigned long lastMouseControlTime;
 
-    char inputBuffer[INPUTBUFFERSIZE];
+    std::deque<char> inputBuffer;
     short bufferEnd;
     short bufferStart;
     Boolean keyboardActive;
+    Boolean prevKeyboardActive;
 
     short position;
     short spaceCount;
@@ -84,7 +83,7 @@ public:
     Str255 playerRegName;
     short isRegistered;
     unsigned char message[kMaxMessageChars + 1];
-    Str255 lineBuffer;
+    std::deque<unsigned char> lineBuffer;
 
     long winFrame;
     short loadingStatus;
