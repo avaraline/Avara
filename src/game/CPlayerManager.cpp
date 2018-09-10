@@ -81,9 +81,6 @@ void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
-    //SDL_StartTextInput();
-    //SDL_StopTextInput();
-
     // mainScreenRect = &(*GetMainDevice())->gdRect;
     // mouseCenterPosition.h = (mainScreenRect->left + mainScreenRect->right) / 2;
     // mouseCenterPosition.v = (mainScreenRect->top + mainScreenRect->bottom) / 2;
@@ -669,8 +666,6 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
                 itsGame->itsApp->NotifyUser();
                 break;
             case 8:
-                //if (lineBuffer[0])
-                //    lineBuffer[0]--;
                 if (lineBuffer.size()) {
                     lineBuffer.pop_back();
                 }
@@ -684,7 +679,8 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
             default:
                 if (theChar >= 32) {
                     lineBuffer.push_back(theChar);
-                    if (lineBuffer[0] > 220) { // FlushMessageText(true);
+                    if (lineBuffer[0] > 220) {
+                        // FlushMessageText(true);
                         for (int i = 0; i < 50; ++i)
                         {
                             lineBuffer.pop_front();

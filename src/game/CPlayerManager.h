@@ -36,12 +36,9 @@ enum {
 
 #define FUNCTIONBUFFERS 32
 #define MAXFRAMEDIFFERENCE 2
-//#define INPUTBUFFERSIZE 32
-//#define INPUTBUFFERMASK 31
 
 class CAbstractPlayer;
 class CAvaraGame;
-// class	CRosterWindow;
 class CNetManager;
 
 #define kMaxMessageChars 127

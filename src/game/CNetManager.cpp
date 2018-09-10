@@ -29,7 +29,6 @@
 #include "System.h"
 
 #include <string.h>
-#include <algorithm>
 
 #define AUTOLATENCYPERIOD 64
 #define AUTOLATENCYDELAY 8
