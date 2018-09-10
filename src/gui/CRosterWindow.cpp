@@ -19,7 +19,7 @@ bool textInputStarted = false;
 char backspace[1] = {'\b'};
 char clearline[1] = {'\027'};
 char endline[2] = {'-', ' '};
-char bellline[4] = {'!', '@', '#', '$'};
+char bellline[5] = {'\007', '!', '@', '#', '$'};
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     AdvancedGridLayout *layout = new AdvancedGridLayout();
@@ -181,7 +181,7 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
                 return true;
             case SDLK_g:
                 if (SDL_GetModState() & KMOD_CTRL) {
-                    SendRosterMessage(4, bellline);
+                    SendRosterMessage(5, bellline);
                     return true;
                 }
                 else return false;

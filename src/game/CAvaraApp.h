@@ -41,6 +41,7 @@ public:
     virtual void drawAll();
 
     OSErr LoadLevel(std::string set, OSType theLevel);
+    void NotifyUser();
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);

@@ -197,6 +197,10 @@ OSErr CAvaraApp::LoadLevel(std::string set, OSType theLevel) {
     return noErr;
 }
 
+void CAvaraApp::NotifyUser() {
+    // TODO: Bell sound(s)
+}
+
 // STUBBBBBZZZZZ
 
 void CAvaraApp::SetIndicatorDisplay(short i, short v) {}

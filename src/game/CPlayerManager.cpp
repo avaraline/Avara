@@ -665,6 +665,9 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
         theChar = *c++;
 
         switch (theChar) {
+            case 7:
+                itsGame->itsApp->NotifyUser();
+                break;
             case 8:
                 //if (lineBuffer[0])
                 //    lineBuffer[0]--;
