@@ -1155,6 +1155,37 @@ short CAbstractActor::GetPlayerPosition() {
     return -1; //	Not a player, as far as we know, so return -1 (invalid position)
 }
 
+long CAbstractActor::GetLongTeamColorOr(long defaultColor) {
+    long longTeamColor;
+    switch (teamColor) {
+        case kNeutralTeam:
+            longTeamColor = kNeutralTeamColor;
+            break;
+        case kGreenTeam:
+            longTeamColor = kGreenTeamColor;
+            break;
+        case kYellowTeam:
+            longTeamColor = kYellowTeamColor;
+            break;
+        case kRedTeam:
+            longTeamColor = kRedTeamColor;
+            break;
+        case kPinkTeam:
+            longTeamColor = kPinkTeamColor;
+            break;
+        case kPurpleTeam:
+            longTeamColor = kPurpleTeamColor;
+            break;
+        case kBlueTeam:
+            longTeamColor = kBlueTeamColor;
+            break;
+        default:
+            longTeamColor = defaultColor;
+            break;
+    }
+    return longTeamColor;
+}
+
 short CAbstractActor::GetBallSnapPoint(long theGroup,
     Fixed *ballLocation,
     Fixed *snapDest,

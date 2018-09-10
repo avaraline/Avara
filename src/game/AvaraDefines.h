@@ -20,6 +20,7 @@ enum {
     kStatusRedColor
 };
 
+#define kNeutralTeamColor 0x00ffffff
 #define kGreenTeamColor 0x00006600
 #define kYellowTeamColor 0x00cccc00
 #define kRedTeamColor 0x00cc0000

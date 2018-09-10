@@ -44,8 +44,6 @@ public:
     CAbstractPlayer *nextPlayer;
     PlayerConfigRecord defaultConfig;
 
-    long longTeamColor; //	Team color in 0x00RRGGBB format.
-
     //	Shields & energy:
     Fixed energy;
     Fixed maxEnergy; //	Maximum stored energy level
