@@ -103,6 +103,7 @@ void CBSPPart::IBSPPart(short resId) {
         json poly = doc["polys"][i];
         // Color
         polyTable[i].color = poly["color"];
+        polyTable[i].origColor = poly["color"];
         // Normal
         polyTable[i].normal[0] = poly["normal"][0];
         polyTable[i].normal[1] = poly["normal"][1];
@@ -443,9 +444,8 @@ Matrix *CBSPPart::GetInverseTransform() {
 }
 
 void CBSPPart::ReplaceColor(int origColor, int newColor) {
-    // SDL_Log("Replacing color %x -> %x\n", origColor, newColor);
     for (int i = 0; i < polyCount; i++) {
-        if (polyTable[i].color == origColor) {
+        if (polyTable[i].origColor == origColor) {
             polyTable[i].color = newColor;
         }
     }

@@ -1158,9 +1158,6 @@ short CAbstractActor::GetPlayerPosition() {
 long CAbstractActor::GetLongTeamColorOr(long defaultColor) {
     long longTeamColor;
     switch (teamColor) {
-        case kNeutralTeam:
-            longTeamColor = kNeutralTeamColor;
-            break;
         case kGreenTeam:
             longTeamColor = kGreenTeamColor;
             break;

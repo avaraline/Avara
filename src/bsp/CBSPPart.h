@@ -39,6 +39,7 @@ typedef struct {
 
 typedef struct {
     uint32_t color;
+    uint32_t origColor;
     float normal[3];
     uint16_t triCount;
     uint16_t *triPoints;

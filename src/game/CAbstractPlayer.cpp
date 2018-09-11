@@ -181,13 +181,12 @@ void CAbstractPlayer::ReplacePartColors() {
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
-    long origColor = GetLongTeamColorOr(kMarkerColor);
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(origColor, specialColor);
+        (*thePart)->ReplaceColor(kMarkerColor, specialColor);
     }
 
     if (itsScout) {
-        itsScout->partList[0]->ReplaceColor(origColor, specialColor);
+        itsScout->partList[0]->ReplaceColor(kMarkerColor, specialColor);
     }
 }
 
