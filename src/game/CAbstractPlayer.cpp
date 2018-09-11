@@ -482,22 +482,6 @@ void CAbstractPlayer::ControlViewPoint() {
         theView->CalculateViewPyramidCorners();
     }
 
-    /*
-    infoPanel = itsGame->itsApp;
-    infoPanel->energy = FDivNZ(energy, maxEnergy);
-    infoPanel->shields = FDivNZ(shields, maxShields);
-    infoPanel->guns[1] = FDivNZ(gunEnergy[0], fullGunEnergy);
-    infoPanel->guns[0] = FDivNZ(gunEnergy[1], fullGunEnergy);
-    infoPanel->DrawGrafPanel();
-    infoPanel->SetScore(itsGame->scores[itsManager->slot]);
-    infoPanel->SetTime(itsGame->timeInSeconds);
-    infoPanel->SetLives(lives);
-    infoPanel->SetIndicatorDisplay(kliBoosters, boostsRemaining);
-    infoPanel->SetIndicatorDisplay(kliMissiles, missileCount);
-    infoPanel->SetIndicatorDisplay(kliGrenades, (grenadeCount+1)>>1);
-    infoPanel->UpdateChanged();
-    */
-
     // SetPort(itsGame->itsWindow);
     ControlSoundPoint();
 }
