@@ -24,3 +24,8 @@ https://www.libsdl.org/projects/SDL_net/
 
 This port has been tested on recent versions of MacOS, Windows, and various flavors of Linux. If you encounter a
 problem building, feel free to submit an issue, or ideally a pull request!
+
+
+## Media
+
+* [YouTube: The first successful 3-player network test game of our Avara port](https://www.youtube.com/watch?v=aOW6lSC0kQI)

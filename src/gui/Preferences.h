@@ -44,5 +44,6 @@ static json defaultPrefs = {{kYonPrefTag, 0},
             {"boost", "Left Shift"},
             {"aimForward", "2"},
             {"scoutView", "Tab"},
-            {"scoutControl", {"2", "Up", "Down", "Left", "Right"}}}},
+            {"scoutControl", {"2", "Up", "Down", "Left", "Right"}},
+            {"chatMode", "Return"}}},
     {kPlayerNameTag, "Unnamed Player"}};
