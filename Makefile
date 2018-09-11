@@ -26,6 +26,9 @@ endif
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
+# This is mine. "make macapp SIGNING_ID=yourid" if you want to use your own.
+SIGNING_ID := Y56DGU8P8X
+
 
 avara: $(BUILD_DIR)/Avara resources
 
@@ -39,7 +42,7 @@ macapp: avara
 	cp -a /Library/Frameworks/{SDL2,SDL2_net}.framework $(BUILD_DIR)/Avara.app/Contents/Frameworks
 	install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
 	install_name_tool -change @rpath/SDL2_net.framework/Versions/A/SDL2_net @executable_path/../Frameworks/SDL2_net.framework/Versions/A/SDL2_net $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
-	codesign -vvv --no-strict --deep --force -s Y56DGU8P8X $(BUILD_DIR)/Avara.app
+	codesign -vvv --no-strict --deep --force -s $(SIGNING_ID) $(BUILD_DIR)/Avara.app
 
 winapp: avara
 	$(MKDIR_P) $(BUILD_DIR)/Avara
