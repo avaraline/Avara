@@ -208,6 +208,8 @@ public:
     virtual void RayTestWithGround(RayHitRecord *hitRec, MaskType testMask);
     virtual short GetPlayerPosition();
 
+    long GetLongTeamColorOr(long defaultColor);
+
     virtual short GetBallSnapPoint(long theGroup,
         Fixed *ballLocation,
         Fixed *snapDest,

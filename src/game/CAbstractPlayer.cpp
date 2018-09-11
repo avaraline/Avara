@@ -165,37 +165,15 @@ void CAbstractPlayer::LoadScout() {
     scoutCommand = kScoutNullCommand;
 
     itsScout = new CScout;
-    itsScout->IScout(this, teamColor, longTeamColor);
+    itsScout->IScout(this, teamColor, GetLongTeamColorOr(kNeutralTeamColor));
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
 }
 
 void CAbstractPlayer::ReplacePartColors() {
+    long longTeamColor = GetLongTeamColorOr(kNeutralTeamColor);
     teamMask = 1 << teamColor;
-    switch (teamColor) {
-        case kGreenTeam:
-            longTeamColor = kGreenTeamColor;
-            break;
-        case kYellowTeam:
-            longTeamColor = kYellowTeamColor;
-            break;
-        case kRedTeam:
-            longTeamColor = kRedTeamColor;
-            break;
-        case kPinkTeam:
-            longTeamColor = kPinkTeamColor;
-            break;
-        case kPurpleTeam:
-            longTeamColor = kPurpleTeamColor;
-            break;
-        case kBlueTeam:
-            longTeamColor = kBlueTeamColor;
-            break;
-        default:
-            longTeamColor = 0x000000ff;
-            break;
-    }
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
@@ -203,7 +181,6 @@ void CAbstractPlayer::ReplacePartColors() {
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
-    longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, specialColor);
     }

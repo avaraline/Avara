@@ -24,15 +24,17 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     int p = 0;
     float pY;
+    long longTeamColor;
     int colorR, colorG, colorB;
     float fontsz_m = 15.0, fontsz_s = 10.0;
     while (eachPlayer) {
         if (p >= 6)
             break;
         pY = (bufferHeight - 72) + (11 * p);
-        colorR = (eachPlayer->longTeamColor >> 16) & 0xff;
-        colorG = (eachPlayer->longTeamColor >> 8) & 0xff;
-        colorB = eachPlayer->longTeamColor & 0xff;
+        longTeamColor = eachPlayer->GetLongTeamColorOr(kNeutralTeamColor);
+        colorR = (longTeamColor >> 16) & 0xff;
+        colorG = (longTeamColor >> 8) & 0xff;
+        colorB = longTeamColor & 0xff;
 
         std::string playerName((char *)eachPlayer->itsManager->playerName + 1, eachPlayer->itsManager->playerName[0]);
         std::string playerLives = std::to_string(eachPlayer->lives);

@@ -206,35 +206,11 @@ void CBall::Dispose() {
 }
 
 void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
-    long longTeamColor;
-
     teamColor = ownerTeamColor;
     teamMask = 1 << teamColor;
     ownerScoringId = ownerId;
 
-    switch (teamColor) {
-        case kGreenTeam:
-            longTeamColor = kGreenTeamColor;
-            break;
-        case kYellowTeam:
-            longTeamColor = kYellowTeamColor;
-            break;
-        case kRedTeam:
-            longTeamColor = kRedTeamColor;
-            break;
-        case kPinkTeam:
-            longTeamColor = kPinkTeamColor;
-            break;
-        case kPurpleTeam:
-            longTeamColor = kPurpleTeamColor;
-            break;
-        case kBlueTeam:
-            longTeamColor = kBlueTeamColor;
-            break;
-        default:
-            longTeamColor = origLongColor;
-            break;
-    }
+    long longTeamColor = GetLongTeamColorOr(origLongColor);
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
