@@ -73,7 +73,12 @@ CAvaraApp::~CAvaraApp() {
 
 void CAvaraApp::Idle() {
     CheckSockets();
-    itsGame->GameTick();
+    if(itsGame->GameTick()) {
+        glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        DrawContents();
+        SDL_GL_SwapWindow(mSDLWindow);
+    }
 }
 
 void CAvaraApp::DrawContents() {
@@ -95,13 +100,9 @@ bool CAvaraApp::handleSDLEvent(SDL_Event &event) {
 
 void CAvaraApp::drawAll() {
     if (itsGame->IsPlaying()) {
-        // Basically the same as Screen::drawAll, except skip widget rendering
-        glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         Idle();
-        DrawContents();
-        SDL_GL_SwapWindow(mSDLWindow);
     } else {
+        //DrawContents();
         rosterWindow->UpdateRoster();
         CApplication::drawAll();
     }

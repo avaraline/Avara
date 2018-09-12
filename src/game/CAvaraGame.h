@@ -208,7 +208,7 @@ public:
     virtual bool IsPlaying();
     virtual void HandleEvent(SDL_Event &event);
     virtual void GameStart();
-    virtual void GameTick();
+    virtual bool GameTick();
     virtual void GameStop();
     virtual void Dispose();
 

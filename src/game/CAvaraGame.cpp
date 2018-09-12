@@ -785,7 +785,7 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
         itsNet->HandleEvent(event);
 }
 
-void CAvaraGame::GameTick() {
+bool CAvaraGame::GameTick() {
     int32_t startTime = SDL_GetTicks();
 
     // No matter what, process any pending network packets
@@ -793,11 +793,11 @@ void CAvaraGame::GameTick() {
 
     // Not playing? Nothing to do!
     if (statusRequest != kPlayingStatus)
-        return;
+        return false;
 
     // Not time to process the next frame yet
     if (startTime < nextScheduledFrame)
-        return;
+        return false;
 
     // SDL_Log("CAvaraGame::GameTick frame=%d dt=%d start=%d end=%d\n", frameNumber, SDL_GetTicks() - lastFrameTime,
     // startTime, endTime); lastFrameTime = SDL_GetTicks();
@@ -854,6 +854,8 @@ void CAvaraGame::GameTick() {
 
     if (statusRequest != kPlayingStatus)
         GameStop();
+    
+    return true;
 }
 
 void CAvaraGame::StopGame() {
