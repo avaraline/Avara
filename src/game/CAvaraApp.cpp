@@ -71,6 +71,12 @@ CAvaraApp::~CAvaraApp() {
     DeallocParser();
 }
 
+void CAvaraApp::Done() {
+    // This will trigger a clean disconnect if connected.
+    gameNet->ChangeNet(kNullNet, "");
+    CApplication::Done();
+}
+
 void CAvaraApp::Idle() {
     CheckSockets();
     if(itsGame->GameTick()) {
@@ -91,11 +97,14 @@ void CAvaraApp::WindowResized(int width, int height) {
 }
 
 bool CAvaraApp::handleSDLEvent(SDL_Event &event) {
-    itsGame->HandleEvent(event);
-    if (!itsGame->IsPlaying()) {
-        if (rosterWindow->handleSDLEvent(event)) return true;
+    if(itsGame->IsPlaying()) {
+        itsGame->HandleEvent(event);
+        return true;
     }
-    return CApplication::handleSDLEvent(event);
+    else {
+        if (rosterWindow->handleSDLEvent(event)) return true;
+        return CApplication::handleSDLEvent(event);
+    }
 }
 
 void CAvaraApp::drawAll() {

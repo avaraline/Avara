@@ -32,13 +32,15 @@ public:
     CAvaraApp();
     ~CAvaraApp();
 
-    virtual void Idle();
-    virtual void DrawContents();
-    virtual bool DoCommand(int theCommand);
-    virtual void WindowResized(int width, int height);
+    virtual void Idle() override;
+    virtual void DrawContents() override;
+    virtual bool DoCommand(int theCommand) override;
+    virtual void WindowResized(int width, int height) override;
 
-    virtual bool handleSDLEvent(SDL_Event &event);
-    virtual void drawAll();
+    virtual void Done() override;
+
+    virtual bool handleSDLEvent(SDL_Event &event) override;
+    virtual void drawAll() override;
 
     OSErr LoadLevel(std::string set, OSType theLevel);
     void NotifyUser();
