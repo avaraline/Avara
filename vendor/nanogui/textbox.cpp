@@ -455,15 +455,15 @@ bool TextBox::keyboardEvent(int key, int /* scancode */, int action, int modifie
             } else if (key == SDLK_RETURN || key == SDLK_KP_ENTER) {
                 if (!mCommitted)
                     focusEvent(false);
-            } else if (key == SDLK_a && modifiers == SYSTEM_COMMAND_MOD) {
+            } else if (key == SDLK_a && (modifiers & SYSTEM_COMMAND_MOD)) {
                 mCursorPos = (int) mValueTemp.length();
                 mSelectionPos = 0;
-            } else if (key == SDLK_x && modifiers == SYSTEM_COMMAND_MOD) {
+            } else if (key == SDLK_x && (modifiers & SYSTEM_COMMAND_MOD)) {
                 copySelection();
                 deleteSelection();
-            } else if (key == SDLK_c && modifiers == SYSTEM_COMMAND_MOD) {
+            } else if (key == SDLK_c && (modifiers & SYSTEM_COMMAND_MOD)) {
                 copySelection();
-            } else if (key == SDLK_v && modifiers == SYSTEM_COMMAND_MOD) {
+            } else if (key == SDLK_v && (modifiers & SYSTEM_COMMAND_MOD)) {
                 deleteSelection();
                 pasteFromClipboard();
             }
