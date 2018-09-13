@@ -32,8 +32,9 @@ public:
     CAvaraApp();
     ~CAvaraApp();
 
-    virtual void Idle() override;
-    virtual void DrawContents() override;
+    virtual void idle() override;
+    virtual void drawContents() override;
+    
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
 

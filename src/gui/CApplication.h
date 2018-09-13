@@ -21,14 +21,8 @@ public:
     // Broadcast a command to myself, and then any windows, stopping at the fist one to handle it.
     void BroadcastCommand(int theCommand);
 
-    // Per-tick processing before event handling.
-    virtual void Idle() {}
-
     // Called when the application is done and the process is about to exit.
     virtual void Done();
-
-    // Draw main screen contents.
-    virtual void DrawContents() {}
 
     // Handles a command broadcasted by BroadcastCommand. Returns true if it was actually handled.
     virtual bool DoCommand(int theCommand) { return false; }
@@ -42,7 +36,6 @@ public:
     virtual void WindowResized(int width, int height) {}
 
     // Screen overrides.
-    virtual void drawContents();
     virtual bool handleSDLEvent(SDL_Event &event);
 
     std::string String(const std::string name);

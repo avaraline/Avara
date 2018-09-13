@@ -122,7 +122,7 @@ Screen::Screen()
 Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
                bool fullscreen, int colorBits, int alphaBits, int depthBits,
                int stencilBits, int nSamples,
-               unsigned int glMajor, unsigned int glMinor)
+               unsigned int glMajor, unsigned int glMinor, int fps)
     : Widget(nullptr), mSDLWindow(nullptr), mNVGContext(nullptr),
       mCursor(Cursor::Arrow), mBackground(0.3f, 0.3f, 0.32f, 1.f), mCaption(caption),
       mShutdownSDLOnDestruct(false), mFullscreen(fullscreen) {
@@ -192,6 +192,7 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
     SDL_PollEvent(&dummyEvent);
 #endif
 
+    mFrameTime = 1000 / fps;
 
     initialize(mSDLWindow, true);
 }
@@ -245,6 +246,7 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
     mDragActive = false;
     mLastInteraction = getTime();
     mProcessEvents = true;
+    mLastDrawTime = 0;
     __nanogui_screens.push_back(this);
 
     mCursors.insert(std::pair<Cursor, SDL_Cursor *>(Cursor::Arrow, SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW)));
@@ -306,13 +308,19 @@ void Screen::setSize(const Vector2i &size) {
 }
 
 void Screen::drawAll() {
+    uint32_t now = SDL_GetTicks();
+    if(now - mLastDrawTime < mFrameTime)
+        return;
+
     glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
     drawContents();
     drawWidgets();
-
+    
     SDL_GL_SwapWindow(mSDLWindow);
+
+    mLastDrawTime = now;
 }
 
 void Screen::drawWidgets() {

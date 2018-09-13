@@ -45,11 +45,6 @@ void CApplication::PrefChanged(std::string name) {
     }
 }
 
-void CApplication::drawContents() {
-    Idle();
-    DrawContents();
-}
-
 bool CApplication::handleSDLEvent(SDL_Event &event) {
     // By default, give nanogui first crack at events.
     bool handled = nanogui::Screen::handleSDLEvent(event);

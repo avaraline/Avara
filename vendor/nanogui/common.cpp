@@ -79,6 +79,7 @@ void mainloop(int refresh) {
                 if (!screen->visible()) {
                     continue;
                 }
+                screen->idle();
                 screen->drawAll();
                 numScreens++;
             }

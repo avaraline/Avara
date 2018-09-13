@@ -81,7 +81,7 @@ public:
            bool resizable = true, bool fullscreen = false, int colorBits = 8,
            int alphaBits = 8, int depthBits = 24, int stencilBits = 8,
            int nSamples = 0,
-           unsigned int glMajor = 3, unsigned int glMinor = 3);
+           unsigned int glMajor = 3, unsigned int glMinor = 3, int fps = 60);
 
     /// Release all resources
     virtual ~Screen();
@@ -109,6 +109,8 @@ public:
 
     /// Draw the window contents --- put your OpenGL draw calls here
     virtual void drawContents() { /* To be overridden */ }
+
+    virtual void idle() {}
 
     /// Return the ratio between pixel and device coordinates (e.g. >= 2 on Mac Retina displays)
     float pixelRatio() const { return mPixelRatio; }
@@ -208,6 +210,8 @@ protected:
     bool mShutdownSDLOnDestruct;
     bool mFullscreen;
     std::function<void(Vector2i)> mResizeCallback;
+    uint32_t mFrameTime;
+    uint32_t mLastDrawTime;
 };
 
 NAMESPACE_END(nanogui)

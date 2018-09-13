@@ -77,22 +77,21 @@ void CAvaraApp::Done() {
     CApplication::Done();
 }
 
-void CAvaraApp::Idle() {
+void CAvaraApp::idle() {
     CheckSockets();
     if(itsGame->GameTick()) {
         glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        DrawContents();
+        drawContents();
         SDL_GL_SwapWindow(mSDLWindow);
     }
 }
 
-void CAvaraApp::DrawContents() {
+void CAvaraApp::drawContents() {
     itsGame->Render(mNVGContext);
 }
 
 void CAvaraApp::WindowResized(int width, int height) {
-    SDL_Log("CAvaraApp::WindowResized(%d, %d)\n", width, height);
     itsGame->UpdateViewRect(width, height, mPixelRatio);
 }
 
@@ -108,10 +107,7 @@ bool CAvaraApp::handleSDLEvent(SDL_Event &event) {
 }
 
 void CAvaraApp::drawAll() {
-    if (itsGame->IsPlaying()) {
-        Idle();
-    } else {
-        //DrawContents();
+    if (!itsGame->IsPlaying()) {
         rosterWindow->UpdateRoster();
         CApplication::drawAll();
     }
