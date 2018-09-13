@@ -8,8 +8,13 @@ public:
 
     virtual ~CNetworkWindow();
 
-    virtual void PrefChanged(std::string name);
+    virtual bool DoCommand(int theCommand) override;
+
+    virtual void PrefChanged(std::string name) override;
 
 protected:
+	nanogui::TextBox *addressBox;
     nanogui::TextBox *latencyBox;
+    nanogui::Button *connectBtn;
+    nanogui::Button *startBtn;
 };

@@ -939,6 +939,7 @@ void CUDPComm::Disconnect() {
     if (stream) {
         isClosed = true;
         isConnected = false;
+        SDLNet_UDP_Close(stream);
         stream = 0;
     }
 
