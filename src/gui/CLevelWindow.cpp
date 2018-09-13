@@ -8,7 +8,8 @@
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Hard-coded for now. Eventually use the level search API.
-    levelSets = {"aa-normal", "aa-abnormal", "aa-deux-normal", "aa-deux-abnormal", "blockparty", "not-aa"};
+    levelSets = {"aa-normal", "aa-abnormal", "aa-deux-normal", "aa-deux-abnormal", "aa-tre", "blockparty", "fosfori",
+        "not-aa", "symbiosis"};
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 20, 10));
 
