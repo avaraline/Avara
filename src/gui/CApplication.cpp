@@ -11,26 +11,12 @@
 #include <string>
 #include <vector>
 
+
+json prefs = ReadPrefs();
+
+
 CApplication::CApplication(std::string title, int width, int height) :
-  nanogui::Screen(nanogui::Vector2i(width, height), title) {
-    char *prefPath = SDL_GetPrefPath("Avaraline", "Avara");
-    jsonPath = std::string(prefPath) + "prefs.json";
-    SDL_free(prefPath);
-
-    std::ifstream in(jsonPath);
-    if (in.fail()) {
-        // No prefs file, use defaults.
-        prefs = defaultPrefs;
-    } else {
-        in >> prefs;
-        for (json::iterator it = defaultPrefs.begin(); it != defaultPrefs.end(); ++it) {
-            if (prefs.find(it.key()) == prefs.end()) {
-                // A new key was added to defaultPrefs, add it to prefs.
-                prefs[it.key()] = it.value();
-            }
-        }
-    }
-
+nanogui::Screen(nanogui::Vector2i(width, height), title, true, false, 8, 8, 24, 8, prefs[kMultiSamplesTag]) {
     gApplication = this;
     InitContext();
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
@@ -39,8 +25,7 @@ CApplication::CApplication(std::string title, int width, int height) :
 CApplication::~CApplication() {}
 
 void CApplication::Done() {
-    std::ofstream out(jsonPath);
-    out << std::setw(4) << prefs << std::endl;
+    WritePrefs(prefs);
 }
 
 void CApplication::BroadcastCommand(int theCommand) {

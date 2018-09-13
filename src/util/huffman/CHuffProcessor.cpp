@@ -201,7 +201,7 @@ void CHuffProcessor::Uncompress(Ptr fromPtr, Ptr destPtr) {
     dataCount = MEM_LONG(inHeader->decodedSize);
     outPointer = destPtr;
 
-    if (destPtr && inHeader->decodedSize) {
+    if (destPtr && dataCount) {
         freqCounts = (unsigned int *)(sizeof(HuffDataHeader) + fromPtr);
 
         k = 0;

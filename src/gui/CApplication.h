@@ -54,8 +54,6 @@ public:
 
 protected:
     std::vector<CWindow *> windowList;
-    std::string jsonPath;
-    json prefs;
 };
 
 #ifdef APPLICATIONMAIN
