@@ -70,7 +70,7 @@ void CAbstractActor::UnlinkLocation() {
 
 #define LOCATORTABLESCALE (LOCATORRECTSCALE - 2)
 
-void CAbstractActor::LinkBox(register Fixed minX, register Fixed minZ, register Fixed maxX, register Fixed maxZ) {
+void CAbstractActor::LinkBox(Fixed minX, Fixed minZ, Fixed maxX, Fixed maxZ) {
     short *linkTable;
     ActorLocator *head;
     ActorLocator *loc;
@@ -741,7 +741,7 @@ void CAbstractActor::RayTestWithGround(RayHitRecord *hitRec, MaskType testMask) 
     RayTest(hitRec, testMask);
 }
 
-void CAbstractActor::RayTest(register RayHitRecord *hitRec, MaskType testMask) {
+void CAbstractActor::RayTest(RayHitRecord *hitRec, MaskType testMask) {
     int xs, zs, dxs, dzs;
     int endIndex, currentIndex;
 

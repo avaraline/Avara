@@ -420,7 +420,7 @@ void CSoundHub::HouseKeep() {
     itsMixer->HouseKeep();
 }
 
-void UpdateSoundLink(register SoundLink *theLink, register Fixed *s, register Fixed *v, unsigned int t) {
+void UpdateSoundLink(SoundLink *theLink, Fixed *s, Fixed *v, unsigned int t) {
     theLink->meta = metaNoData;
 
     theLink->nLoc[0] = *s++;
@@ -436,7 +436,7 @@ void UpdateSoundLink(register SoundLink *theLink, register Fixed *s, register Fi
     theLink->meta = metaNewData;
 }
 
-void ZeroSoundLink(register SoundLink *theLink) {
+void ZeroSoundLink(SoundLink *theLink) {
     theLink->meta = metaNoData;
 
     theLink->nLoc[0] = 0;
@@ -452,7 +452,7 @@ void ZeroSoundLink(register SoundLink *theLink) {
     theLink->meta = metaNewData;
 }
 
-void PlaceSoundLink(register SoundLink *theLink, register Fixed *s) {
+void PlaceSoundLink(SoundLink *theLink, Fixed *s) {
     theLink->meta = metaNoData;
 
     theLink->nLoc[0] = *s++;
