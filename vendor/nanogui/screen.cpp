@@ -644,7 +644,8 @@ bool Screen::handleSDLEvent(SDL_Event &event) {
         case SDL_TEXTINPUT:
             if(event.text.windowID != mWindowID)
                 return false;
-            return charCallbackEvent(utf8_decode(event.text.text, sizeof(event.text.text)));
+            return charCallbackEvent(event.text.text[0]);
+            //return charCallbackEvent(utf8_decode(event.text.text, sizeof(event.text.text)));
             break;
 
         case SDL_MOUSEBUTTONDOWN:
