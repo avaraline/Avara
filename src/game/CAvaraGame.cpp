@@ -812,7 +812,8 @@ bool CAvaraGame::GameTick() {
     teamsStanding = 0;
     teamsStandingMask = 0;
 
-    // itsNet->ViewControl();
+    itsNet->ViewControl(); // This was called by itsApp->theGameWind->DoUpdate() calling RefreshWindow
+
     soundHub->HouseKeep();
     soundTime = soundHub->ReadTime();
 
@@ -854,7 +855,7 @@ bool CAvaraGame::GameTick() {
 
     if (statusRequest != kPlayingStatus)
         GameStop();
-    
+
     return true;
 }
 
