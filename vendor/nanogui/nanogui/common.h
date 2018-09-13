@@ -482,6 +482,8 @@ extern NANOGUI_EXPORT void chdir_to_bundle_parent();
  */
 extern NANOGUI_EXPORT std::array<char, 8> utf8(int c);
 
+extern NANOGUI_EXPORT uint32_t utf8_decode(char *p, size_t len);
+
 /// Convenience function for instanting a PNG icon from the application's data segment (via bin2c)
 #define nvgImageIcon(ctx, name) nanogui::__nanogui_get_image(ctx, #name, name##_png, name##_png_size)
 

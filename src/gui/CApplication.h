@@ -13,7 +13,7 @@ using json = nlohmann::json;
 
 class CApplication : public nanogui::Screen {
 public:
-    CApplication(std::string title, int width, int height);
+    CApplication(std::string title);
     virtual ~CApplication();
 
     void Register(CWindow *win) { windowList.push_back(win); }

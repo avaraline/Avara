@@ -33,7 +33,7 @@
 // included while we fake things out
 #include "CPlayerManager.h"
 
-CAvaraApp::CAvaraApp() : CApplication("Avara", 1024, 640) {
+CAvaraApp::CAvaraApp() : CApplication("Avara") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 20, 20));
 
     playerWindow = new CPlayerWindow(this);

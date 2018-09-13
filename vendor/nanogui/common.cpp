@@ -120,6 +120,29 @@ void shutdown() {
     SDL_Quit();
 }
 
+uint32_t utf8_decode(char *p, size_t len) {
+    uint32_t codepoint = 0;
+    size_t i = 0;
+
+    if (!len)
+        return 0;
+
+    for (; i < len; ++i) {
+        if (i == 0) {
+            codepoint = (0xff >> len) & *p;
+        }
+        else {
+            codepoint <<= 6;
+            codepoint |= 0x3f & *p;
+        }
+        if (!*p)
+            return 0;
+        p++;
+    }
+
+    return codepoint;
+}
+
 std::array<char, 8> utf8(int c) {
     std::array<char, 8> seq;
     int n = 0;
