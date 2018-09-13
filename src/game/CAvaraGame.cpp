@@ -842,8 +842,8 @@ bool CAvaraGame::GameTick() {
             itsNet->FrameAction();
 
     canPreSend = true;
-    nextScheduledFrame = startTime + frameTime;
-    // nextScheduledFrame += frameTime;
+    //nextScheduledFrame = startTime + frameTime;
+    nextScheduledFrame += frameTime;
 
     itsDepot->RunSliverActions();
     itsApp->StartFrame(frameNumber);
