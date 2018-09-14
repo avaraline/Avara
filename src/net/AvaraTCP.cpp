@@ -101,9 +101,12 @@ void CheckSockets() {
 }
 
 void UDPRead(UDPsocket sock, ReadCompleteProc callback, void *userData) {
-    gReadSocket = sock;
-    gReadCallback.callback = callback;
-    gReadCallback.userData = userData;
+    if(sock) {
+        gReadSocket = sock;
+        gReadCallback.callback = callback;
+        gReadCallback.userData = userData;
+        SDLNet_UDP_AddSocket(sockSet, gReadSocket);
+    }
     // SDL_Log("UDPRead socket=%x\n", sock);
     // TODO: make sure MacTCP didn't allow queueing multiple UDPRead calls
     /*
@@ -112,15 +115,16 @@ void UDPRead(UDPsocket sock, ReadCompleteProc callback, void *userData) {
     completion->userData = userData;
     pendingReads.insert(std::pair<UDPsocket,UDPReadData*>(sock, completion));
     */
-    SDLNet_UDP_AddSocket(sockSet, gReadSocket);
 }
 
 void UDPWrite(UDPsocket sock, UDPpacket *packet, WriteCompleteProc callback, void *userData) {
     // SDL_Log("UDPWrite socket=%x dest=%lu:%d\n", sock, packet->address.host, packet->address.port);
     // TODO: I think UDP writes are non-blocking, but check
-    int sent = SDLNet_UDP_Send(sock, -1, packet);
-    if (sent <= 0) {
-        SDL_Log("Send failed: %s\n", SDLNet_GetError());
+    if(sock) {
+        int sent = SDLNet_UDP_Send(sock, -1, packet);
+        if (sent <= 0) {
+            SDL_Log("Send failed: %s\n", SDLNet_GetError());
+        }
+        callback(sent > 0 ? noErr : -1, userData);
     }
-    callback(sent > 0 ? noErr : -1, userData);
 }
