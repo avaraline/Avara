@@ -153,7 +153,7 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
         flags |= SDL_WINDOW_RESIZABLE;
     }
     if (fullscreen) {
-        flags |= SDL_WINDOW_FULLSCREEN;
+        flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
 
     mSDLWindow = SDL_CreateWindow(caption.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, flags);

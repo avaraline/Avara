@@ -29,6 +29,7 @@ using json = nlohmann::json;
 #define kWindowWidth "windowWidth"
 #define kWindowHeight "windowHeight"
 #define kMultiSamplesTag "multiSamples"
+#define kFullScreenTag "fullscreen"
 
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
@@ -60,7 +61,8 @@ static json defaultPrefs = {
     {kPlayerNameTag, "Unnamed Player"},
     {kMultiSamplesTag, 0},
     {kWindowWidth, 1024},
-    {kWindowHeight, 768}
+    {kWindowHeight, 768},
+    {kFullScreenTag, false}
 };
 
 

@@ -16,7 +16,7 @@ json prefs = ReadPrefs();
 
 
 CApplication::CApplication(std::string title) :
-nanogui::Screen(nanogui::Vector2i(prefs[kWindowWidth], prefs[kWindowHeight]), title, true, false, 8, 8, 24, 8, prefs[kMultiSamplesTag]) {
+nanogui::Screen(nanogui::Vector2i(prefs[kWindowWidth], prefs[kWindowHeight]), title, true, prefs[kFullScreenTag], 8, 8, 24, 8, prefs[kMultiSamplesTag]) {
     gApplication = this;
     InitContext();
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
