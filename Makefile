@@ -35,6 +35,7 @@ avara: $(BUILD_DIR)/Avara resources
 bspviewer: $(BUILD_DIR)/BSPViewer resources
 
 macapp: avara
+	rm -rf $(BUILD_DIR)/Avara.app
 	$(MKDIR_P) $(BUILD_DIR)/Avara.app/Contents/{Frameworks,MacOS,Resources}
 	cp platform/macos/Info.plist $(BUILD_DIR)/Avara.app/Contents
 	cp $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.app/Contents/MacOS
@@ -46,10 +47,12 @@ macapp: avara
 	codesign -vvv --no-strict --deep --force -s $(SIGNING_ID) $(BUILD_DIR)/Avara.app
 
 winapp: avara
-	$(MKDIR_P) $(BUILD_DIR)/Avara
-	cp -r $(BUILD_DIR)/{Avara.exe,bsps,levels,rsrc,shaders} $(BUILD_DIR)/Avara
-	cp platform/windows/*.dll $(BUILD_DIR)/Avara
-	cd $(BUILD_DIR) && zip -r Avara.zip Avara && cd ..
+	rm -rf $(BUILD_DIR)/WinAvara
+	$(MKDIR_P) $(BUILD_DIR)/WinAvara
+	cp -r $(BUILD_DIR)/{Avara.exe,bsps,levels,rsrc,shaders} $(BUILD_DIR)/WinAvara
+	cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
+	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1}.dll $(BUILD_DIR)/WinAvara
+	cd $(BUILD_DIR) && zip -r WinAvara.zip WinAvara && cd ..
 
 # Avara
 $(BUILD_DIR)/Avara: $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o

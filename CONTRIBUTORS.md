@@ -8,3 +8,4 @@ The following people have contributed to this port:
 * Andy Halstead <@assertivist>
 * Ryan Herriman <@rherriman>
 * Rob Marlin <@ScarletSwordfish>
+* Ryan Sommers <@ryansommers>
