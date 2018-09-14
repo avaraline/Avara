@@ -79,14 +79,6 @@ void CheckBox::draw(NVGcontext *ctx) {
     nvgFill(ctx);
 
     if (mChecked) {
-        // This is temporary until I can figure out why the icon font isn't working.
-        nvgBeginPath(ctx);
-        nvgRoundedRect(ctx, mPos.x + 2.0f, mPos.y + 2.0f, mSize.y - 4.0f,
-                       mSize.y - 4.0f, 3);
-        nvgFillColor(ctx, mEnabled ? mTheme->mIconColor
-                                   : mTheme->mDisabledTextColor);
-        nvgFill(ctx);
-
         nvgFontSize(ctx, mSize.y * icon_scale());
         nvgFontFace(ctx, "icons");
         nvgFillColor(ctx, mEnabled ? mTheme->mIconColor

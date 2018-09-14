@@ -7,18 +7,18 @@ CTrackerWindow::CTrackerWindow(CApplication *app) : CWindow(app, "Tracker") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 20, 10));
 
     nanogui::Widget *top = new nanogui::Widget(this);
-    top->setLayout(new nanogui::FlowLayout(nanogui::Orientation::Horizontal, true, 0, 10));
+    top->setLayout(new nanogui::FlowLayout(nanogui::Orientation::Horizontal, false, 0, 10));
 
     nanogui::TextBox *addressBox = new nanogui::TextBox(top);
     addressBox->setValue(app->String(kTrackerAddress));
     addressBox->setEditable(true);
 
-    nanogui::Button *refreshBtn = new nanogui::Button(top, "Refresh");
+    nanogui::Button *refreshBtn = new nanogui::Button(top, "Refresh", ENTYPO_ICON_CW);
     refreshBtn->setCallback([] {
     });
 
     nanogui::VScrollPanel *results = new nanogui::VScrollPanel(this);
-    results->setFixedSize(nanogui::Vector2i(200, 100));
+    results->setFixedSize(nanogui::Vector2i(250, 100));
 }
 
 CTrackerWindow::~CTrackerWindow() {}

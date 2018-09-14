@@ -86,8 +86,8 @@ Theme::Theme(NVGcontext *ctx) {
                                  roboto_bold_ttf_size, 0);
     mFontIcons = nvgCreateFontMem(ctx, "icons", entypo_ttf,
                                   entypo_ttf_size, 0);
-    mFontMono = nvgCreateFontMem(ctx, "mono", profont_ttf,
-                                  profont_ttf_size, 0);
+    mFontMono = nvgCreateFontMem(ctx, "mono", roboto_mono_ttf,
+                                  roboto_mono_ttf_size, 0);
     if (mFontNormal == -1 || mFontBold == -1 || mFontIcons == -1)
         throw std::runtime_error("Could not load fonts!");
 }
