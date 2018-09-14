@@ -31,6 +31,8 @@ using json = nlohmann::json;
 #define kMultiSamplesTag "multiSamples"
 #define kFullScreenTag "fullscreen"
 
+#define kTrackerAddress "tracker"
+
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -62,7 +64,8 @@ static json defaultPrefs = {
     {kMultiSamplesTag, 0},
     {kWindowWidth, 1024},
     {kWindowHeight, 768},
-    {kFullScreenTag, false}
+    {kFullScreenTag, false},
+    {kTrackerAddress, "tracker.avaraline.net"}
 };
 
 

@@ -34,7 +34,14 @@
 #include "CPlayerManager.h"
 
 CAvaraApp::CAvaraApp() : CApplication("Avara") {
-    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 20, 20));
+    itsGame = new CAvaraGame;
+    gCurrentGame = itsGame;
+    itsGame->IAvaraGame(this);
+    itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
+
+    gameNet->ChangeNet(kNullNet, "");
+
+    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
 
     playerWindow = new CPlayerWindow(this);
     playerWindow->setFixedWidth(200);
@@ -45,25 +52,13 @@ CAvaraApp::CAvaraApp() : CApplication("Avara") {
     networkWindow = new CNetworkWindow(this);
     networkWindow->setFixedWidth(200);
 
-    itsGame = new CAvaraGame;
-    gCurrentGame = itsGame;
-    itsGame->IAvaraGame(this);
-    itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
-
-    gameNet->ChangeNet(kNullNet, "");
-
-    /*
-        if(theNet->netOwner == this && theNet->PermissionQuery(kAllowLoadBit, 0))
-        {   theNet->SendLoadLevel(theTag);
-            DoCommand(kShowRosterWind);
-        }
-    */
+    trackerWindow = new CTrackerWindow(this);
+    trackerWindow->setFixedWidth(300);
 
     rosterWindow = new CRosterWindow(this);
     rosterWindow->setFixedWidth(450);
-    performLayout();
 
-    rosterWindow->setPosition(nanogui::Vector2i(240,20));
+    performLayout();
 }
 
 CAvaraApp::~CAvaraApp() {
@@ -93,6 +88,7 @@ void CAvaraApp::drawContents() {
 
 void CAvaraApp::WindowResized(int width, int height) {
     itsGame->UpdateViewRect(width, height, mPixelRatio);
+    //performLayout();
 }
 
 bool CAvaraApp::handleSDLEvent(SDL_Event &event) {

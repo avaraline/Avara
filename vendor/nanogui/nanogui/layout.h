@@ -148,6 +148,53 @@ protected:
     int mSpacing;
 };
 
+
+class NANOGUI_EXPORT FlowLayout : public Layout {
+public:
+    FlowLayout(Orientation orientation, bool packed = true, int margin = 0, int spacing = 0);
+
+    /// The Orientation this FlowLayout is using.
+    Orientation orientation() const { return mOrientation; }
+
+    /// Sets the Orientation of this FlowLayout.
+    void setOrientation(Orientation orientation) { mOrientation = orientation; }
+
+    bool packed() const { return mPacked; }
+    void setPacked(bool packed) { mPacked = packed; }
+
+    /// The margin of this FlowLayout.
+    int margin() const { return mMargin; }
+
+    /// Sets the margin of this FlowLayout.
+    void setMargin(int margin) { mMargin = margin; }
+
+    /// The spacing this FlowLayout is using to pad in between widgets.
+    int spacing() const { return mSpacing; }
+
+    /// Sets the spacing of this FlowLayout.
+    void setSpacing(int spacing) { mSpacing = spacing; }
+
+    /* Implementation of the layout interface */
+    /// See \ref Layout::preferredSize.
+    virtual Vector2i preferredSize(NVGcontext *ctx, const Widget *widget) const override;
+
+    /// See \ref Layout::performLayout.
+    virtual void performLayout(NVGcontext *ctx, Widget *widget) const override;
+
+protected:
+    /// The Orientation of this FlowLayout.
+    Orientation mOrientation;
+
+    /// The margin of this FlowLayout.
+    int mMargin;
+
+    /// The spacing between widgets of this FlowLayout.
+    int mSpacing;
+
+    /// Whether widgets should be packed when wrapping.
+    bool mPacked;
+};
+
 /**
  * \class GroupLayout layout.h nanogui/layout.h
  *

@@ -13,6 +13,8 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 20, 10));
 
+    // TODO: check load permission: theNet->PermissionQuery(kAllowLoadBit, 0)
+
     setBox = new nanogui::ComboBox(this, levelSets);
     setBox->setCallback([this](int selectedIdx) { this->SelectSet(selectedIdx); });
 

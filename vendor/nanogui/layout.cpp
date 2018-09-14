@@ -124,6 +124,110 @@ void BoxLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
     }
 }
 
+FlowLayout::FlowLayout(Orientation orientation, bool packed, int margin, int spacing)
+    : mOrientation(orientation), mPacked(packed), mMargin(margin), mSpacing(spacing) {
+}
+
+Vector2i FlowLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
+    Vector2i size(0, 0);
+
+    int axis1 = (int) mOrientation, axis2 = ((int) mOrientation + 1)%2;
+    for (auto w : widget->children()) {
+        if (!w->visible())
+            continue;
+
+        Vector2i ps = w->preferredSize(ctx), fs = w->fixedSize();
+        Vector2i targetSize(
+            fs[0] ? fs[0] : ps[0],
+            fs[1] ? fs[1] : ps[1]
+        );
+
+        size[axis1] += targetSize[axis1];
+        size[axis2] = std::max(size[axis2], targetSize[axis2]);
+    }
+
+    const Window *window = dynamic_cast<const Window *>(widget);
+    if (window && !window->title().empty()) {
+        size[1] += widget->theme()->mWindowHeaderHeight;
+    }
+
+    size[axis1] += mSpacing * (widget->childCount() - 1);
+
+    return size + Vector2i(mMargin * 2, mMargin * 2);
+}
+
+typedef struct Span {
+    int column;
+    int axis1min, axis1max;
+    int axis2max;
+} Span;
+
+void FlowLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
+    Vector2i fs_w = widget->fixedSize();
+    Vector2i containerSize(
+        fs_w[0] ? fs_w[0] : widget->width(),
+        fs_w[1] ? fs_w[1] : widget->height()
+    );
+
+    int axis1 = (int) mOrientation, axis2 = ((int) mOrientation + 1)%2;
+    int yOffset = 0;
+
+    const Window *window = dynamic_cast<const Window *>(widget);
+    if (window && !window->title().empty()) {
+        yOffset = widget->theme()->mWindowHeaderHeight;
+    }
+
+    Vector2i pos(mMargin, yOffset + mMargin);
+    int axis2max = 0, idx = 0, column = 0;
+    Span span[widget->childCount()];
+
+    for (auto w : widget->children()) {
+        if (!w->visible())
+            continue;
+
+        Vector2i ps = w->preferredSize(ctx), fs = w->fixedSize();
+        Vector2i targetSize(
+            fs[0] ? fs[0] : ps[0],
+            fs[1] ? fs[1] : ps[1]
+        );
+
+        if ((pos[axis1] + targetSize[axis1]) > (containerSize[axis1] - mMargin)) {
+            // This element won't fit, wrap onto a new column.
+            column += 1;
+            pos[axis1] = mMargin;
+            pos[axis2] += axis2max + mSpacing;
+            axis2max = 0;
+        }
+
+        if (mPacked) {
+            // Find the best axis2 position for the current axis1 position.
+            int axis2pos = 0;
+            for (int i = 0; i < idx; i++) {
+                if (span[i].column == column - 1) {
+                    // If this widget intersects the widget in the previous column on axis1, move it over.
+                    if (pos[axis1] <= span[i].axis1max && (pos[axis1] + targetSize[axis1]) >= span[i].axis1min) {
+                        axis2pos = std::max(axis2pos, span[i].axis2max);
+                    }
+                }
+            }
+            pos[axis2] = axis2pos + (column == 0 ? mMargin : mSpacing);
+        }
+
+        w->setPosition(pos);
+        w->setSize(targetSize);
+        w->performLayout(ctx);
+
+        span[idx].column = column;
+        span[idx].axis1min = pos[axis1];
+        span[idx].axis1max = pos[axis1] + targetSize[axis1];
+        span[idx].axis2max = pos[axis2] + targetSize[axis2];
+
+        pos[axis1] += targetSize[axis1] + mSpacing;
+        axis2max = std::max(axis2max, targetSize[axis2]);
+        idx += 1;
+    }
+}
+
 Vector2i GroupLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {
     int height = mMargin, width = 2*mMargin;
 

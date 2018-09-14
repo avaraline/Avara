@@ -15,6 +15,7 @@
 #include "CNetworkWindow.h"
 #include "CPlayerWindow.h"
 #include "CRosterWindow.h"
+#include "CTrackerWindow.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -28,13 +29,14 @@ public:
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
     CRosterWindow *rosterWindow;
+    CTrackerWindow *trackerWindow;
 
     CAvaraApp();
     ~CAvaraApp();
 
     virtual void idle() override;
     virtual void drawContents() override;
-    
+
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
 
