@@ -939,7 +939,7 @@ void CUDPComm::Disconnect() {
     if (stream) {
         isClosed = true;
         isConnected = false;
-        SDLNet_UDP_Close(stream);
+        DestroySocket(stream);
         stream = 0;
     }
 
@@ -1424,7 +1424,7 @@ void CUDPComm::StartServing() {
 OSErr CUDPComm::CreateStream(short streamPort) {
     localPort = streamPort;
     if (stream) {
-        SDLNet_UDP_Close(stream);
+        DestroySocket(stream);
     }
     stream = CreateSocket(localPort);
 

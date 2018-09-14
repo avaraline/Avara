@@ -29,6 +29,7 @@ typedef void ReadCompleteProc(UDPpacket *packet, void *userData);
 typedef void WriteCompleteProc(int result, void *userData);
 
 UDPsocket CreateSocket(uint16_t port);
+void DestroySocket(UDPsocket sock);
 void CheckSockets();
 
 void UDPRead(UDPsocket sock, ReadCompleteProc callback, void *userData);

@@ -53,6 +53,14 @@ UDPsocket CreateSocket(uint16_t port) {
     return sock;
 }
 
+void DestroySocket(UDPsocket sock) {
+    if(sock) {
+        SDLNet_UDP_DelSocket(sockSet, sock);
+        SDLNet_UDP_Close(sock);
+        gReadSocket = NULL;
+    }
+}
+
 void CheckSockets() {
     if (sockSet == NULL) {
         SDL_Log("CheckSockets called before OpenAvaraTCP\n");
