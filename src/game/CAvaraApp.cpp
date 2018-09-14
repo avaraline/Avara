@@ -193,11 +193,13 @@ OSErr CAvaraApp::LoadLevel(std::string set, OSType theLevel) {
     levels->Dispose();
 
     if (wasLoaded) {
-        CBSPPart *somePart = itsGame->itsWorld->GetIndPart(10);
-        itsGame->itsView->LookFrom(0, FIX(100), FIX(-30));
-        itsGame->itsView->LookAtPart(somePart);
+        Fixed pt[3];
+        itsGame->itsWorld->OverheadPoint(pt);
+        SDL_Log("overhead %f, %f, %f\n", ToFloat(pt[0]), ToFloat(pt[1]), ToFloat(pt[2]));
+        itsGame->itsView->yonBound = FIX(10000);
+        itsGame->itsView->LookFrom(pt[0] + FIX(100), pt[1] + FIX(200), pt[2] + FIX(150));
+        itsGame->itsView->LookAt(pt[0], pt[1], pt[2]);
         itsGame->itsView->PointCamera();
-        // itsGame->Render();
     }
 
     return noErr;

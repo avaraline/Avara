@@ -86,6 +86,14 @@ static json ReadPrefs() {
                 // A new key was added to defaultPrefs, add it to prefs.
                 prefs[it.key()] = it.value();
             }
+            else if (defaultPrefs[it.key()].is_object()) {
+                // Check second-level objects (like keyboard map) for missing keys.
+                for (json::iterator it2 = defaultPrefs[it.key()].begin(); it2 != defaultPrefs[it.key()].end(); ++it2) {
+                    if (prefs[it.key()].find(it2.key()) == prefs[it.key()].end()) {
+                        prefs[it.key()][it2.key()] = defaultPrefs[it.key()][it2.key()];
+                    }
+                }
+            }
         }
     }
 

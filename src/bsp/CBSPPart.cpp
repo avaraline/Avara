@@ -216,7 +216,7 @@ Boolean CBSPPart::InViewPyramid() {
     Fixed x, y;
     Fixed z;
 
-    return true;
+    //return true;
 
     vp = currentView;
 

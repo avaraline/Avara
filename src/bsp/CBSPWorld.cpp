@@ -151,6 +151,25 @@ void CBSPWorld::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
     }
 }
 
+void CBSPWorld::OverheadPoint(Fixed *c) {
+    Fixed minX = FIX(9999),
+          maxX = FIX(-9999),
+          minZ = FIX(9999),
+          maxZ = FIX(-9999),
+          maxY = 0;
+    for (int i = 0; i < partCount; i++) {
+        Fixed *t = (*partList)[i]->itsTransform[3];
+        minX = t[0] < minX ? t[0] : minX;
+        maxX = t[0] > maxX ? t[0] : maxX;
+        minZ = t[2] < minZ ? t[2] : minZ;
+        maxZ = t[2] > maxZ ? t[2] : maxZ;
+        maxY = t[1] > maxY ? t[1] : maxY;
+    }
+    c[0] = FDiv(minX + maxX, FIX(2));
+    c[1] = maxY;
+    c[2] = FDiv(minZ + maxZ, FIX(2));
+}
+
 /*
 **	Visibility sort "overlapCount" objects. The number of objects
 **	is guaranteed to be at least 2.

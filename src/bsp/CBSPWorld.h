@@ -10,6 +10,7 @@
 #pragma once
 
 #include "CDirectObject.h"
+#include "Types.h"
 
 class CBSPPart;
 class CViewParameters;
@@ -40,4 +41,6 @@ public:
 
     virtual CBSPPart *GetIndPart(short ind);
     virtual short GetPartCount();
+    
+    virtual void OverheadPoint(Fixed *pt);
 };
