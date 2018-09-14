@@ -37,6 +37,8 @@ public:
     int mFontBold;
     /// The icon font face (default: ``"icons"`` from ``resources/entypo.ttf``).
     int mFontIcons;
+    /// The monospace font face (default: ``"mono"`` from ``profont.ttf``).
+    int mFontMono;
     /**
      * The amount of scaling that is applied to each icon to fit the size of
      * NanoGUI widgets.  The default value is ``0.77f``, setting to e.g. higher

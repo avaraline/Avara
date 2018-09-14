@@ -34,11 +34,6 @@ public:
     /// Set the label's text caption
     void setCaption(const std::string &caption) { mCaption = caption; }
 
-    /// Set the currently active font (2 are available by default: 'sans' and 'sans-bold')
-    void setFont(const std::string &font) { mFont = font; }
-    /// Get the currently active font
-    const std::string &font() const { return mFont; }
-
     /// Get the label color
     Color color() const { return mColor; }
     /// Set the label color
@@ -55,7 +50,6 @@ public:
 
 protected:
     std::string mCaption;
-    std::string mFont;
     Color mColor;
 };
 

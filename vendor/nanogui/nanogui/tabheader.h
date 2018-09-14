@@ -32,8 +32,6 @@ class NANOGUI_EXPORT TabHeader : public Widget {
 public:
     TabHeader(Widget *parent, const std::string &font = "sans-bold");
 
-    void setFont(const std::string& font) { mFont = font; }
-    const std::string& font() const { return mFont; }
     bool overflowing() const { return mOverflowing; }
 
     /**
@@ -172,8 +170,6 @@ private:
     int mVisibleEnd = 0;
     int mActiveTab = 0;
     bool mOverflowing = false;
-
-    std::string mFont;
 };
 
 NAMESPACE_END(nanogui)

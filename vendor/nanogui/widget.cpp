@@ -24,7 +24,8 @@ Widget::Widget(Widget *parent)
       mPos(Vector2i()), mSize(Vector2i()),
       mFixedSize(Vector2i()), mVisible(true), mEnabled(true),
       mFocused(false), mMouseFocus(false), mTooltip(""), mFontSize(-1.0f),
-      mIconExtraScale(1.0f), mCursor(Cursor::Arrow), mLayoutDirty(false) {
+      mIconExtraScale(1.0f), mCursor(Cursor::Arrow), mLayoutDirty(false),
+      mFont("sans") {
     if (parent)
         parent->addChild(this);
 }

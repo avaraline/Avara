@@ -16,12 +16,13 @@
 NAMESPACE_BEGIN(nanogui)
 
 Label::Label(Widget *parent, const std::string &caption, const std::string &font, int fontSize)
-    : Widget(parent), mCaption(caption), mFont(font) {
+    : Widget(parent), mCaption(caption) {
     if (mTheme) {
         mFontSize = mTheme->mStandardFontSize;
         mColor = mTheme->mTextColor;
     }
     if (fontSize >= 0) mFontSize = fontSize;
+    Widget::setFont(font);
 }
 
 void Label::setTheme(Theme *theme) {

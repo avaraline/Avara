@@ -196,6 +196,11 @@ public:
     /// Return whether the font size is explicitly specified for this widget
     bool hasFontSize() const { return mFontSize > 0; }
 
+    /// Set the currently active font (2 are available by default: 'sans' and 'sans-bold')
+    void setFont(const std::string &font) { mFont = font; }
+    /// Get the currently active font
+    const std::string &font() const { return mFont; }
+
     /**
      * The amount of extra scaling applied to *icon* fonts.
      * See \ref nanogui::Widget::mIconExtraScale.
@@ -300,6 +305,7 @@ protected:
     bool mEnabled;
     bool mFocused, mMouseFocus;
     std::string mTooltip;
+    std::string mFont;
     int mFontSize;
 
     /**

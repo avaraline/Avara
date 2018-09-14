@@ -14,7 +14,7 @@ std::vector<Text*> names;
 std::vector<Text*> statuses;
 std::vector<Text*> chats;
 
-const int CHAT_CHARS = 60;
+const int CHAT_CHARS = 50;
 bool textInputStarted = false;
 char backspace[1] = {'\b'};
 char clearline[1] = {'\027'};
@@ -35,7 +35,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         layout->setAnchor(status, AdvancedGridLayout::Anchor(1, i * 2));
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
-        
+
         nanogui::Text* chat = new nanogui::Text(this, "", true);
         layout->setAnchor(chat, AdvancedGridLayout::Anchor(0, i * 2 + 1, 2, 1));
         //layout->appendRow(1,1);
@@ -44,6 +44,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         name->setAlignment(Text::Alignment::Left);
         status->setAlignment(Text::Alignment::Right);
         chat->setAlignment(Text::Alignment::Left);
+        chat->setFont("mono");
         name->setFixedWidth(225);
         status->setFixedWidth(225);
 
@@ -103,9 +104,9 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
         timeTemp /= 6;
 
         std::ostringstream os;
-        os << "[" << timeTemp 
-        << ":" << secs2 << secs1 
-        << "." << hundreds2 << hundreds1 
+        os << "[" << timeTemp
+        << ":" << secs2 << secs1
+        << "." << hundreds2 << hundreds1
         << "]";
 
         strStatus = os.str();

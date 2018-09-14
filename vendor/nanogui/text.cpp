@@ -97,8 +97,8 @@ void Text::draw(NVGcontext* ctx) {
     nvgBeginPath(ctx);
     nvgRoundedRect(ctx, mPos.x + 1, mPos.y + 1 + 1.0f, mSize.x - 2,
                    mSize.y - 2, 3);
-    
-    
+
+
     if (mEditable && focused())
         mValidFormat ? nvgFillPaint(ctx, fg1) : nvgFillPaint(ctx, fg2);
     else if (mSpinnable && mMouseDownPos.x != -1)
@@ -107,7 +107,7 @@ void Text::draw(NVGcontext* ctx) {
         nvgFillPaint(ctx, bg);
 
     nvgFill(ctx);
-    
+
     nvgBeginPath(ctx);
     nvgRoundedRect(ctx, mPos.x + 0.5f, mPos.y + 0.5f, mSize.x - 1,
                    mSize.y - 1, 2.5f);
@@ -123,7 +123,7 @@ void Text::draw(NVGcontext* ctx) {
         3, 4, Color(255, 32), Color(32, 32));
         nvgFillPaint(ctx, bg);
         nvgFill(ctx);
-    
+
         nvgBeginPath(ctx);
         nvgRect(ctx, mPos.x + 0.5f, mPos.y + 0.5f, mSize.x - 1,
                        mSize.y - 1);
@@ -131,7 +131,7 @@ void Text::draw(NVGcontext* ctx) {
         nvgStroke(ctx);
     }
     nvgFontSize(ctx, fontSize());
-    nvgFontFace(ctx, "sans");
+    nvgFontFace(ctx, mFont.c_str());
     Vector2i drawPos(mPos.x, mPos.y + mSize.y * 0.5f + 1);
 
     float xSpacing = mSize.y * 0.3f;
@@ -193,7 +193,7 @@ void Text::draw(NVGcontext* ctx) {
         }
 
         nvgFontSize(ctx, fontSize());
-        nvgFontFace(ctx, "sans");
+        nvgFontFace(ctx, mFont.c_str());
     }
 
     switch (mAlignment) {
