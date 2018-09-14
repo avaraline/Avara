@@ -28,6 +28,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     int colorR, colorG, colorB;
     float fontsz_m = 15.0, fontsz_s = 10.0;
     while (eachPlayer) {
+
         if (p >= 6)
             break;
         pY = (bufferHeight - 72) + (11 * p);
@@ -35,36 +36,36 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         colorR = (longTeamColor >> 16) & 0xff;
         colorG = (longTeamColor >> 8) & 0xff;
         colorB = longTeamColor & 0xff;
+        if (eachPlayer->itsManager) {
+            std::string playerName((char *)eachPlayer->itsManager->playerName + 1, eachPlayer->itsManager->playerName[0]);
+            std::string playerLives = std::to_string(eachPlayer->lives);
 
-        std::string playerName((char *)eachPlayer->itsManager->playerName + 1, eachPlayer->itsManager->playerName[0]);
-        std::string playerLives = std::to_string(eachPlayer->lives);
+            std::string playerChat(eachPlayer->itsManager->lineBuffer.begin(), eachPlayer->itsManager->lineBuffer.end());
+            if (playerChat.length() > CHAT_CHARS) {
+                playerChat = playerChat.substr(playerChat.length() - CHAT_CHARS, CHAT_CHARS);
+            }
 
-        std::string playerChat(eachPlayer->itsManager->lineBuffer.begin(), eachPlayer->itsManager->lineBuffer.end());
-        if (playerChat.length() > CHAT_CHARS) {
-            playerChat = playerChat.substr(playerChat.length() - CHAT_CHARS, CHAT_CHARS);
+            nvgBeginPath(ctx);
+            nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
+            nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
+            nvgFill(ctx);
+
+            nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+            nvgFontSize(ctx, fontsz_m);
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
+
+            nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
+            nvgFontSize(ctx, fontsz_s);
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            nvgText(ctx, bufferWidth - 162, pY - 3, playerLives.c_str(), NULL);
+
+
+            nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
+            nvgFontSize(ctx, fontsz_m);
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
         }
-
-        nvgBeginPath(ctx);
-        nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
-        nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
-        nvgFill(ctx);
-
-        nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
-        nvgFontSize(ctx, fontsz_m);
-        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-        nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
-
-        nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
-        nvgFontSize(ctx, fontsz_s);
-        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-        nvgText(ctx, bufferWidth - 162, pY - 3, playerLives.c_str(), NULL);
-
-
-        nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
-        nvgFontSize(ctx, fontsz_m);
-        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-        nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
-
         p++;
         eachPlayer = eachPlayer->nextPlayer;
     }
