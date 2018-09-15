@@ -17,6 +17,16 @@ class CViewParameters;
 
 class CBSPWorld : public CDirectObject {
 public:
+    virtual void AddPart(CBSPPart *thePart) {};
+    virtual void RemovePart(CBSPPart *thePart) {};
+    virtual void Render(CViewParameters *theView) {};
+    virtual void Dispose() {};
+    virtual void DisposeParts() {};
+    virtual void OverheadPoint(Fixed *pt) {};
+};
+
+class CCBSPWorld : public CBSPWorld {
+public:
     short partCount;
     short partSpace;
     short visibleCount;
@@ -25,12 +35,12 @@ public:
     CBSPPart **visibleP; //	Used while rendering when visibleList is locked down.
 
     CViewParameters *currentView;
+    virtual void AddPart(CBSPPart *thePart);
 
     virtual void IBSPWorld(short initialObjectSpace);
     virtual void DisposeParts();
     virtual void Dispose();
 
-    virtual void AddPart(CBSPPart *thePart);
     virtual void RemovePart(CBSPPart *thePart);
     virtual void Render(CViewParameters *theView);
 
@@ -41,6 +51,6 @@ public:
 
     virtual CBSPPart *GetIndPart(short ind);
     virtual short GetPartCount();
-    
+
     virtual void OverheadPoint(Fixed *pt);
 };

@@ -101,7 +101,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsApp = theApp;
 
     itsNet = new CNetManager;
-    itsApp->gameNet = itsNet;
+    itsApp->SetNet(itsNet);
     itsNet->INetManager(this);
 
     searchCount = 0;
@@ -117,11 +117,9 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     // CalcGameRect();
 
-    itsWorld = new CBSPWorld;
-    itsWorld->IBSPWorld(100);
+    itsWorld = CreateCBSPWorld(100);
 
-    hudWorld = new CBSPWorld;
-    hudWorld->IBSPWorld(16);
+    hudWorld = CreateCBSPWorld(16);
 
     soundHub = new CSoundHub;
     soundHub->ISoundHub(32, 32);
@@ -169,6 +167,12 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     // vg = AvaraVGContext();
     // font = nvgCreateFont(vg, "sans", BundlePath("fonts/Roboto-Regular.ttf"));
+}
+
+CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
+    CCBSPWorld *w = new CCBSPWorld;
+    w->IBSPWorld(initialObjectSpace);
+    return w;
 }
 
 void CAvaraGame::Dispose() {
