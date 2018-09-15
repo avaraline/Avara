@@ -6,7 +6,7 @@
 #include "CommandList.h"
 
 CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
-    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 20, 10));
+    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
     addressBox = new nanogui::TextBox(this);
     addressBox->setValue("avara.jp");
