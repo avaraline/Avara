@@ -179,6 +179,7 @@ public:
 
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
+    virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
 
     virtual void InitLocatorTable();
 

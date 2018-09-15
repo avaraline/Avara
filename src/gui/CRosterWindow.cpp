@@ -66,7 +66,7 @@ CRosterWindow::~CRosterWindow() {
 
 void CRosterWindow::UpdateRoster() {
     for(int i = 0; i < kMaxAvaraPlayers; i++) {
-        CPlayerManager *thisPlayer = ((CAvaraApp *)gApplication)->gameNet->playerTable[i];
+        CPlayerManager *thisPlayer = ((CCAvaraApp *)gApplication)->GetNet()->playerTable[i];
 
         const std::string theName((char *)thisPlayer->playerName + 1, thisPlayer->playerName[0]);
 
@@ -93,7 +93,7 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
 
     std::string strStatus;
     if (winFrame >= 0) {
-        long timeTemp = FMulDiv(winFrame, ((CAvaraApp *)gApplication)->itsGame->frameTime, 10);
+        long timeTemp = FMulDiv(winFrame, ((CAvaraApp *)gApplication)->GetGame()->frameTime, 10);
         auto hundreds1 = timeTemp % 10;
         timeTemp /= 10;
         auto hundreds2 = timeTemp % 10;
@@ -159,7 +159,7 @@ bool CRosterWindow::mouseEnterEvent(const nanogui::Vector2i &p, bool enter) {
 };
 
 void CRosterWindow::SendRosterMessage(int len, char* message) {
-    ((CAvaraApp *)gApplication)->gameNet->SendRosterMessage(len, message);
+    ((CAvaraApp *)gApplication)->GetNet()->SendRosterMessage(len, message);
 }
 
 bool CRosterWindow::handleSDLEvent(SDL_Event &event) {

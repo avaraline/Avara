@@ -77,7 +77,7 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
 
     lastMsgTick = TickCount();
     firstMsgTick = lastMsgTick;
-    
+
     msgBuffer.clear();
 
     lastLoginRefusal = 0;
@@ -114,7 +114,7 @@ Boolean CNetManager::ConfirmNetChange() {
 void CNetManager::ChangeNet(short netKind, std::string address) {
     CCommManager *newManager = NULL;
     Boolean confirm = true;
-    CAvaraApp *theApp = (CAvaraApp *)gApplication;
+    CAvaraApp *theApp = itsGame->itsApp;
 
     if (netKind != netStatus || !isConnected) {
         if (netStatus != kNullNet || !isConnected) {
@@ -392,7 +392,7 @@ void CNetManager::SendLoadLevel(std::string theSet, OSType theLevelTag) {
 
     aPacket = itsCommManager->GetPacket();
 
-    theApp = (CAvaraApp *)gApplication;
+    theApp = itsGame->itsApp;
 
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
@@ -423,7 +423,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, void *theDir, OSType theTag
 
     if (!isPlaying) {
         std::string set((char *)theDir);
-        theApp = (CAvaraApp *)gApplication;
+        theApp = itsGame->itsApp;
         iErr = theApp->LoadLevel(set, theTag);
         if (iErr) {
             itsCommManager->SendPacket(kdEveryone, kpLevelLoadErr, 0, iErr, theTag, 0, 0);

@@ -33,7 +33,7 @@
 // included while we fake things out
 #include "CPlayerManager.h"
 
-CAvaraApp::CAvaraApp() : CApplication("Avara") {
+CCAvaraApp::CCAvaraApp() : CApplication("Avara") {
     itsGame = new CAvaraGame;
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
@@ -61,18 +61,18 @@ CAvaraApp::CAvaraApp() : CApplication("Avara") {
     performLayout();
 }
 
-CAvaraApp::~CAvaraApp() {
+CCAvaraApp::~CCAvaraApp() {
     itsGame->Dispose();
     DeallocParser();
 }
 
-void CAvaraApp::Done() {
+void CCAvaraApp::Done() {
     // This will trigger a clean disconnect if connected.
     gameNet->ChangeNet(kNullNet, "");
     CApplication::Done();
 }
 
-void CAvaraApp::idle() {
+void CCAvaraApp::idle() {
     CheckSockets();
     if(itsGame->GameTick()) {
         glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
@@ -82,16 +82,16 @@ void CAvaraApp::idle() {
     }
 }
 
-void CAvaraApp::drawContents() {
+void CCAvaraApp::drawContents() {
     itsGame->Render(mNVGContext);
 }
 
-void CAvaraApp::WindowResized(int width, int height) {
+void CCAvaraApp::WindowResized(int width, int height) {
     itsGame->UpdateViewRect(width, height, mPixelRatio);
     //performLayout();
 }
 
-bool CAvaraApp::handleSDLEvent(SDL_Event &event) {
+bool CCAvaraApp::handleSDLEvent(SDL_Event &event) {
     if(itsGame->IsPlaying()) {
         itsGame->HandleEvent(event);
         return true;
@@ -102,14 +102,14 @@ bool CAvaraApp::handleSDLEvent(SDL_Event &event) {
     }
 }
 
-void CAvaraApp::drawAll() {
+void CCAvaraApp::drawAll() {
     if (!itsGame->IsPlaying()) {
         rosterWindow->UpdateRoster();
         CApplication::drawAll();
     }
 }
 
-bool CAvaraApp::DoCommand(int theCommand) {
+bool CCAvaraApp::DoCommand(int theCommand) {
     std::string name = String(kPlayerNameTag);
     Str255 userName;
     userName[0] = name.length();
@@ -160,7 +160,7 @@ bool CAvaraApp::DoCommand(int theCommand) {
     */
 }
 
-OSErr CAvaraApp::LoadLevel(std::string set, OSType theLevel) {
+OSErr CCAvaraApp::LoadLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
@@ -201,23 +201,35 @@ OSErr CAvaraApp::LoadLevel(std::string set, OSType theLevel) {
     return noErr;
 }
 
-void CAvaraApp::NotifyUser() {
+void CCAvaraApp::NotifyUser() {
     // TODO: Bell sound(s)
+}
+
+CAvaraGame* CCAvaraApp::GetGame() {
+    return itsGame;
+}
+
+CNetManager* CCAvaraApp::GetNet() {
+    return gameNet;
+}
+
+void CCAvaraApp::SetNet(CNetManager *theNet) {
+    gameNet = theNet;
 }
 
 // STUBBBBBZZZZZ
 
-void CAvaraApp::SetIndicatorDisplay(short i, short v) {}
-void CAvaraApp::NumberLine(long theNum, short align) {}
-void CAvaraApp::DrawUserInfoPart(short i, short partList) {}
-void CAvaraApp::BrightBox(long frameNum, short position) {}
-void CAvaraApp::MessageLine(short index, short align) {
-    SDL_Log("CAvaraApp::MessageLine(%d)\n", index);
+void CCAvaraApp::SetIndicatorDisplay(short i, short v) {}
+void CCAvaraApp::NumberLine(long theNum, short align) {}
+void CCAvaraApp::DrawUserInfoPart(short i, short partList) {}
+void CCAvaraApp::BrightBox(long frameNum, short position) {}
+void CCAvaraApp::MessageLine(short index, short align) {
+    SDL_Log("CCAvaraApp::MessageLine(%d)\n", index);
 }
-void CAvaraApp::LevelReset() {}
-void CAvaraApp::ParamLine(short index, short align, StringPtr param1, StringPtr param2) {
-    SDL_Log("CAvaraApp::ParamLine(%d)\n", index);
+void CCAvaraApp::LevelReset() {}
+void CCAvaraApp::ParamLine(short index, short align, StringPtr param1, StringPtr param2) {
+    SDL_Log("CCAvaraApp::ParamLine(%d)\n", index);
 }
-void CAvaraApp::StartFrame(long frameNum) {}
-void CAvaraApp::StringLine(StringPtr theString, short align) {}
-void CAvaraApp::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
+void CCAvaraApp::StartFrame(long frameNum) {}
+void CCAvaraApp::StringLine(StringPtr theString, short align) {}
+void CCAvaraApp::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
