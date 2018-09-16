@@ -59,8 +59,7 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     // theRoster = ((CAvaraApp *)gApplication)->theRosterWind;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        playerTable[i] = new CPlayerManager;
-        playerTable[i]->IPlayerManager(itsGame, i, this);
+        playerTable[i] = CreatePlayerManager(i);
         slotToPosition[i] = i;
         positionToSlot[i] = i;
         teamColors[i] = i; //(i/3) * 2;
@@ -82,6 +81,12 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     msgBuffer.clear();
 
     lastLoginRefusal = 0;
+}
+
+CPlayerManager* CNetManager::CreatePlayerManager(short id) {
+    CPlayerManagerImpl *pm = new CPlayerManagerImpl;
+    pm->IPlayerManager(itsGame, id, this);
+    return pm;
 }
 
 void CNetManager::LevelReset() {
@@ -218,11 +223,11 @@ void CNetManager::RealNameReport(short slotId, short regStatus, StringPtr realNa
 
     thePlayer = playerTable[slotId];
     if (regStatus < 0) {
-        thePlayer->isRegistered = true;
-        BlockMoveData(realName, thePlayer->playerRegName, realName[0] + 1);
+        thePlayer->IsRegistered(true);
+        BlockMoveData(realName, thePlayer->PlayerRegName(), realName[0] + 1);
     } else {
-        thePlayer->isRegistered = false;
-        GetIndString(thePlayer->playerRegName, 133, 5 + regStatus);
+        thePlayer->IsRegistered(false);
+        GetIndString(thePlayer->PlayerRegName(), 133, 5 + regStatus);
     }
 
     // theRoster->InvalidateArea(kRealNameBox, slotToPosition[slotId]);
@@ -238,7 +243,7 @@ void CNetManager::NameChange(StringPtr newName) {
     loc.h = myLocation.longitude >> 16;
     loc.v = myLocation.latitude >> 16;
     */
-    theStatus = playerTable[itsCommManager->myId]->loadingStatus;
+    theStatus = playerTable[itsCommManager->myId]->LoadingStatus();
     itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, theStatus, 0, newName[0] + 1, (Ptr)newName);
 }
 
@@ -461,9 +466,9 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, OSType
     CPlayerManager *thePlayer;
 
     thePlayer = playerTable[senderSlot];
-    thePlayer->levelCRC = crc;
-    thePlayer->levelTag = theTag;
-    thePlayer->levelErr = err;
+    thePlayer->LevelCRC(crc);
+    thePlayer->LevelTag(theTag);
+    thePlayer->LevelErr(err);
 
     if (senderSlot == loaderSlot) {
         for (i = 0; i < kMaxAvaraPlayers; i++) {
@@ -471,7 +476,7 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, OSType
         }
     } else {
         thePlayer->LoadStatusChange(
-            playerTable[loaderSlot]->levelCRC, playerTable[loaderSlot]->levelErr, playerTable[loaderSlot]->levelTag);
+            playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());
     }
 }
 
@@ -560,7 +565,7 @@ void CNetManager::ResumeGame() {
     autoLatencyVoteCount = 0;
 
     thePlayerManager = playerTable[itsCommManager->myId];
-    if (thePlayerManager->itsPlayer) {
+    if (thePlayerManager->GetPlayer()) {
         thePlayerManager->DoMouseControl(&tempPoint, true);
 
         PlayerConfigRecord copy;
@@ -582,7 +587,7 @@ void CNetManager::ResumeGame() {
 
             statusTest = 0;
             for (i = 0; i < kMaxAvaraPlayers; i++) {
-                if (playerTable[i]->loadingStatus == kLActive) {
+                if (playerTable[i]->LoadingStatus() == kLActive) {
                     statusTest |= 1 << i;
                 }
             }
@@ -707,7 +712,7 @@ void CNetManager::SendStartCommand() {
     unavailablePlayers = 0;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->loadingStatus == kLLoaded) {
+        if (playerTable[i]->LoadingStatus() == kLLoaded) {
             activePlayersDistribution |= 1 << i;
         }
     }
@@ -750,9 +755,9 @@ void CNetManager::ReceivedUnavailable(short slot, short fromSlot) {
     unavailablePlayers |= 1 << slot;
 
     if (slot == itsCommManager->myId) {
-        itsGame->itsApp->ParamLine(kmStartFailure, centerAlign, playerTable[fromSlot]->playerName, NULL);
+        itsGame->itsApp->ParamLine(kmStartFailure, centerAlign, playerTable[fromSlot]->PlayerName(), NULL);
     } else {
-        itsGame->itsApp->ParamLine(kmUnavailableNote, centerAlign, playerTable[slot]->playerName, NULL);
+        itsGame->itsApp->ParamLine(kmUnavailableNote, centerAlign, playerTable[slot]->PlayerName(), NULL);
     }
 }
 
@@ -763,7 +768,7 @@ void CNetManager::SendResumeCommand() {
     activePlayersDistribution = 0;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->itsPlayer && !playerTable[i]->itsPlayer->isOut) {
+        if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->isOut) {
             activePlayersDistribution |= 1 << i;
         }
     }
@@ -779,8 +784,8 @@ Boolean CNetManager::ResumeEnabled() {
     short i;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->itsPlayer && !playerTable[i]->itsPlayer->isOut &&
-            !(playerTable[i]->randomKey == FRandSeed && playerTable[i]->loadingStatus == kLPaused)) {
+        if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->isOut &&
+            !(playerTable[i]->RandomKey() == FRandSeed && playerTable[i]->LoadingStatus() == kLPaused)) {
             return false;
         }
     }
@@ -807,7 +812,7 @@ void CNetManager::StopGame(short newStatus) {
     }
 
     thePlayerManager = playerTable[slot];
-    thePlayer = thePlayerManager->itsPlayer;
+    thePlayer = thePlayerManager->GetPlayer();
 
     if (thePlayer) {
         winFrame = thePlayer->winFrame;
@@ -837,7 +842,7 @@ void CNetManager::StopGame(short newStatus) {
 
 void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
-        playerTable[slotId]->randomKey = randomKey;
+        playerTable[slotId]->RandomKey(randomKey);
         playerTable[slotId]->SetPlayerStatus(newStatus, winFrame);
     }
 }
@@ -863,22 +868,22 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
 
         newColors[slot] = teamColors[i];
         thePlayerMan = playerTable[slot];
-        if (((1 << slot) & startPlayersDistribution) && thePlayerMan->itsPlayer == NULL) {
+        if (((1 << slot) & startPlayersDistribution) && thePlayerMan->GetPlayer() == NULL) {
             if (playerActorList) //	Any actors left?
             {
                 playerActorList = thePlayerMan->TakeAnyActor(playerActorList);
-                if (itsCommManager->myId == 0 && thePlayerMan->itsPlayer &&
-                    thePlayerMan->playerColor != teamColors[slot]) {
+                if (itsCommManager->myId == 0 && thePlayerMan->GetPlayer() &&
+                    thePlayerMan->PlayerColor() != teamColors[slot]) {
                     changedColors = true;
-                    newColors[slot] = thePlayerMan->playerColor - kGreenTeam;
+                    newColors[slot] = thePlayerMan->PlayerColor() - kGreenTeam;
                 }
             } else {
                 if (thePlayerMan->IncarnateInAnyColor()) {
                     changedColors = true;
-                    newColors[slot] = thePlayerMan->playerColor - kGreenTeam;
+                    newColors[slot] = thePlayerMan->PlayerColor() - kGreenTeam;
                 }
 
-                if (thePlayerMan->itsPlayer == NULL && slot == itsCommManager->myId) {
+                if (thePlayerMan->GetPlayer() == NULL && slot == itsCommManager->myId) {
                     long noWin = -1;
 
                     itsCommManager->SendPacket(
@@ -889,7 +894,7 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     }
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->itsPlayer) {
+        if (playerTable[i]->GetPlayer()) {
             playerTable[i]->SpecialColorControl();
         }
     }
@@ -913,14 +918,14 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->numBoosters = ntohs(config->numBoosters);
     config->hullType = ntohs(config->hullType);
     config->latencyTolerance = ntohs(config->latencyTolerance);
-    playerTable[senderSlot]->theConfiguration = *config;
+    playerTable[senderSlot]->TheConfiguration() = *config;
 }
 
 void CNetManager::DoConfig(short senderSlot) {
-    PlayerConfigRecord *theConfig = &playerTable[senderSlot]->theConfiguration;
+    PlayerConfigRecord *theConfig = &playerTable[senderSlot]->TheConfiguration();
 
-    if (playerTable[senderSlot]->itsPlayer) {
-        playerTable[senderSlot]->itsPlayer->ReceiveConfig(theConfig);
+    if (playerTable[senderSlot]->GetPlayer()) {
+        playerTable[senderSlot]->GetPlayer()->ReceiveConfig(theConfig);
     }
 
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
@@ -939,17 +944,17 @@ void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
 
     myPlayer = playerTable[itsCommManager->myId];
 
-    if (myPlayer->mugPict == NULL) {
+    if (myPlayer->MugPict() == NULL) {
         gApplication->BroadcastCommand(kGiveMugShotCmd);
     }
 
-    mugSize = myPlayer->mugSize;
-    if (myPlayer->mugPict && mugSize > sendFrom) {
+    mugSize = myPlayer->MugSize();
+    if (myPlayer->MugPict() && mugSize > sendFrom) {
         short i;
         long sendPoint;
         long sendLen;
 
-        HLock(myPlayer->mugPict);
+        HLock(myPlayer->MugPict());
 
         sendPoint = sendFrom;
 
@@ -965,14 +970,14 @@ void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
                     sendPoint / PACKETDATABUFFERSIZE,
                     mugSize,
                     sendLen,
-                    (*myPlayer->mugPict) + sendPoint);
+                    (*myPlayer->MugPict()) + sendPoint);
 
                 sendPoint += sendLen;
             } else
                 break;
         }
 
-        HUnlock(myPlayer->mugPict);
+        HUnlock(myPlayer->MugPict());
     }
 }
 
@@ -982,33 +987,33 @@ void CNetManager::ReceiveMugShot(short fromPlayer, short seqNumber, long totalLe
     thePlayer = playerTable[fromPlayer];
 
     if (seqNumber == 0) {
-        if (thePlayer->mugPict) {
-            SetHandleSize(thePlayer->mugPict, totalLength);
+        if (thePlayer->MugPict()) {
+            SetHandleSize(thePlayer->MugPict(), totalLength);
         } else {
-            thePlayer->mugPict = NewHandle(totalLength);
+            thePlayer->MugPict(NewHandle(totalLength));
         }
 
-        thePlayer->mugState = 0;
-        thePlayer->mugSize = GetHandleSize(thePlayer->mugPict);
+        thePlayer->MugState(0);
+        thePlayer->MugSize(GetHandleSize(thePlayer->MugPict()));
     }
 
-    if (totalLength == thePlayer->mugSize) {
-        thePlayer->mugState = seqNumber * PACKETDATABUFFERSIZE;
+    if (totalLength == thePlayer->MugSize()) {
+        thePlayer->MugState(seqNumber * PACKETDATABUFFERSIZE);
 
-        BlockMoveData(dataBuffer, (*thePlayer->mugPict) + thePlayer->mugState, dataLen);
+        BlockMoveData(dataBuffer, (*thePlayer->MugPict()) + thePlayer->MugState(), dataLen);
 
-        thePlayer->mugState += dataLen;
+        thePlayer->MugState(thePlayer->MugState() + dataLen);
 
         if ((seqNumber & (kMugShotWindowSize - 1)) == 0) {
             long nextRequest;
 
-            nextRequest = thePlayer->mugState + (kMugShotWindowSize - 1) * PACKETDATABUFFERSIZE;
+            nextRequest = thePlayer->MugState() + (kMugShotWindowSize - 1) * PACKETDATABUFFERSIZE;
             if (nextRequest < totalLength) {
                 itsCommManager->SendPacket(1L << fromPlayer, kpGetMugShot, 0, 0, nextRequest, 0, NULL);
             }
         }
 
-        if (thePlayer->mugState ==
+        if (thePlayer->MugState() ==
             totalLength /* && theRoster*/) { // theRoster->InvalidateArea(kFullMapBox, slotToPosition[fromPlayer]);
         }
     }
@@ -1029,11 +1034,11 @@ void CNetManager::ZapMugShot(short slot) {
     }
 
     thePlayer = playerTable[slot];
-    DisposeHandle(thePlayer->mugPict);
+    DisposeHandle(thePlayer->MugPict());
 
-    thePlayer->mugPict = NULL;
-    thePlayer->mugSize = -1;
-    thePlayer->mugState = 0;
+    thePlayer->MugPict(NULL);
+    thePlayer->MugSize(-1);
+    thePlayer->MugState(0);
 
     // theRoster->InvalidateArea(kFullMapBox, slotToPosition[slot]);
 }
@@ -1061,8 +1066,9 @@ void CNetManager::ChangedServerOptions(short curOptions) {
 
 void CNetManager::NewArrival(short slot) {
     CPlayerManager *thePlayer = playerTable[slot];
-    std::string name((char *)thePlayer->playerName + 1, thePlayer->playerName[0]);
     itsGame->itsApp->NotifyUser();
+    std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
+    SDL_Log("%s has joined!!\n", name.c_str());
 }
 
 void CNetManager::ResultsReport(Ptr results) {
