@@ -1,6 +1,8 @@
 #pragma once
 
 #include "CApplication.h"
+#include "CNetManager.h"
+
 #include <nanogui/common.h>
 
 class CRosterWindow : public CWindow {
@@ -14,5 +16,8 @@ public:
     std::string GetStringStatus(short status, Fixed winFrame);
     bool mouseEnterEvent(const nanogui::Vector2i &p, bool enter) override;
     bool handleSDLEvent(SDL_Event &event);
-    void SendRosterMessage(int length, char* message);
+    void SendRosterMessage(int length, char *message);
+
+private:
+    CNetManager *theNet;
 };

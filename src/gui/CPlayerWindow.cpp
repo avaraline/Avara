@@ -2,6 +2,7 @@
 
 #include "CApplication.h"
 #include "Preferences.h"
+#include "CAvaraApp.h"
 
 CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
@@ -12,6 +13,12 @@ CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
     nameBox->setEditable(true);
     nameBox->setCallback([app](std::string value) -> bool {
         app->Set(kPlayerNameTag, value);
+
+        Str255 the_name;
+        the_name[0] = value.length();
+        BlockMoveData(value.c_str(), the_name + 1, value.length());
+
+        ((CAvaraApp *)gApplication)->gameNet->NameChange(the_name);
         return true;
     });
 
