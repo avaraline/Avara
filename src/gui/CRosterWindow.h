@@ -14,5 +14,5 @@ public:
     std::string GetStringStatus(short status, Fixed winFrame);
     bool mouseEnterEvent(const nanogui::Vector2i &p, bool enter) override;
     bool handleSDLEvent(SDL_Event &event);
-    void SendRosterMessage(int length, char* message);
+    void SendRosterMessage(int length, unsigned char* message);
 };

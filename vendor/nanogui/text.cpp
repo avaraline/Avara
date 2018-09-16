@@ -22,7 +22,7 @@
 
 NAMESPACE_BEGIN(nanogui)
 
-Text::Text(Widget *parent,const std::string &value, bool background)
+Text::Text(Widget *parent,const std::string &value, bool background, int font_size)
     : Widget(parent),
       mEditable(false),
       mSpinnable(false),
@@ -43,7 +43,8 @@ Text::Text(Widget *parent,const std::string &value, bool background)
       mMouseDownModifier(0),
       mTextOffset(0),
       mLastClick(0) {
-    if (mTheme) mFontSize = mTheme->mTextBoxFontSize - 3;
+    //if (mTheme) mFontSize = mTheme->mTextBoxFontSize - 3;
+    mFontSize = font_size;
     mIconExtraScale = 0.8f;// widget override
     showBackground = background;
 }

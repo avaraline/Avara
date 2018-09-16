@@ -50,6 +50,8 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
             nvgFill(ctx);
 
+            nvgFontFace(ctx, "mono");
+
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
             nvgFontSize(ctx, fontsz_m);
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));

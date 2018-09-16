@@ -14,12 +14,14 @@ std::vector<Text*> names;
 std::vector<Text*> statuses;
 std::vector<Text*> chats;
 
-const int CHAT_CHARS = 50;
+const int CHAT_CHARS = 63;
+const int ROSTER_FONT_SIZE = 13;
 bool textInputStarted = false;
 char backspace[1] = {'\b'};
 char clearline[1] = {'\027'};
-char endline[2] = {'-', ' '};
-char bellline[5] = {'\007', '!', '@', '#', '$'};
+char endline[2] = {'\108', ' '};
+char bellline[1] = {'\175'};
+char checkline[1] = {'\393'};
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     AdvancedGridLayout *layout = new AdvancedGridLayout();
@@ -29,14 +31,14 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
 
-        nanogui::Text* name = new Text(this, "");
+        nanogui::Text* name = new Text(this, "", false, ROSTER_FONT_SIZE);
         layout->setAnchor(name, AdvancedGridLayout::Anchor(0, i * 2));
-        nanogui::Text* status = new Text(this, "");
+        nanogui::Text* status = new Text(this, "", false, ROSTER_FONT_SIZE);
         layout->setAnchor(status, AdvancedGridLayout::Anchor(1, i * 2));
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
 
-        nanogui::Text* chat = new nanogui::Text(this, "", true);
+        nanogui::Text* chat = new nanogui::Text(this, "", true, ROSTER_FONT_SIZE);
         layout->setAnchor(chat, AdvancedGridLayout::Anchor(0, i * 2 + 1, 2, 1));
         //layout->appendRow(1,1);
         //new nanogui::Label(this, "");
@@ -44,7 +46,9 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         name->setAlignment(Text::Alignment::Left);
         status->setAlignment(Text::Alignment::Right);
         chat->setAlignment(Text::Alignment::Left);
+        name->setFont("mono");
         chat->setFont("mono");
+        status->setFont("mono");
         name->setFixedWidth(225);
         status->setFixedWidth(225);
 
@@ -182,7 +186,13 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
                 return true;
             case SDLK_g:
                 if (SDL_GetModState() & KMOD_CTRL) {
-                    SendRosterMessage(5, bellline);
+                    SendRosterMessage(1, bellline);
+                    return true;
+                }
+                else return false;
+            case SDLK_v:
+                if (SDL_GetModState() & KMOD_ALT) {
+                    SendRosterMessage(1, checkline);
                     return true;
                 }
                 else return false;
