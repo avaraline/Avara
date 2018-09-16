@@ -87,10 +87,6 @@ void CRosterWindow::UpdateRoster() {
         statuses[i]->setValue(theStatus.c_str());
         chats[i]->setValue(theChat.c_str());
         colors[i]->setSelectedIndex(theNet->teamColors[i]);
-        if (i == 1) {
-            colors[i]->setTextColor(Color(88, 88, 88, 255));
-        }
-
         colors[i]->setCaption(theName.c_str());
     }
 }

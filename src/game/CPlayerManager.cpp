@@ -231,6 +231,19 @@ void CPlayerManager::HandleEvent(SDL_Event &event) {
                     SDL_StopTextInput();
                 }
             }
+
+            // Handle delete and backspace in chat mode
+            if (keyboardActive && 
+                event.key.keysym.sym == SDLK_BACKSPACE) {
+                inputBuffer.push_back('\b');
+            }
+
+            if (keyboardActive && 
+                (event.key.keysym.sym == SDLK_DELETE ||
+                 event.key.keysym.sym == SDLK_CLEAR)) {
+                inputBuffer.push_back('\x1B');
+            }
+
             break;
         case SDL_TEXTINPUT:
             if (keyboardActive) {

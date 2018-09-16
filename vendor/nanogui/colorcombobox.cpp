@@ -20,7 +20,6 @@ ColorComboBox::ColorComboBox(Widget *parent) : PopupButton(parent, " "), mSelect
     mPopupScroll = new VScrollPanel(mPopup);
     mButtonWrapper = new Widget(mPopupScroll);
     mButtonWrapper->setLayout(new GroupLayout(10));
-    //mTextColor = Color(66, 66, 66, 255);
 }
 
 ColorComboBox::ColorComboBox(Widget *parent, const std::vector<long> &items)
