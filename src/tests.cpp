@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "CAvaraApp.h"
+#include "CBSPPart.h"
 #include "CPlayerManager.h"
 #include "CNetManager.h"
 #include "CAvaraGame.h"
@@ -109,14 +110,16 @@ class TestGame : public CAvaraGame {
 TEST(FAIL, ShouldFail) {
     TestApp app;
     TestGame game;
+    gCurrentGame = &game;
     game.IAvaraGame(&app);
     CWalkerActor *hector = new CWalkerActor();
     hector->IAbstractActor();
-    //app.itsGame->AddActor(hector);
+    game.AddActor(hector);
     ASSERT_NE(game.actorList, nullptr);
 }
 
 int main(int argc, char **argv) {
+    CBSPPart::actuallyRender = false;
     nanogui::init();
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);

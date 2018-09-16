@@ -11,6 +11,7 @@
 #include "AvaraTCP.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
+#include "CBSPPart.h"
 #include "FastMat.h"
 
 #include <nanogui/nanogui.h>

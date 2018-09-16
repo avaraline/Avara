@@ -13,12 +13,15 @@
 #include "CAvaraGame.h"
 #include "CViewParameters.h"
 #include "Resource.h"
+#include "CBSPPart.h"
 
 void CWorldShader::IWorldShader(CAvaraGame *theGame) {
     itsGame = theGame;
-    skyProgram = LoadShaders(BundlePath("shaders/sky_vert.glsl"), BundlePath("shaders/sky_frag.glsl"));
-    glGenVertexArrays(1, &vertexArray);
-    glGenBuffers(1, &vertexBuffer);
+    if (CBSPPart::actuallyRender) {
+        skyProgram = LoadShaders(BundlePath("shaders/sky_vert.glsl"), BundlePath("shaders/sky_frag.glsl"));
+        glGenVertexArrays(1, &vertexArray);
+        glGenBuffers(1, &vertexBuffer);
+    }
     Reset();
 }
 
@@ -132,34 +135,36 @@ void CWorldShader::ShadeWorld(CViewParameters *theView) {
     matrix[12] = matrix[13] = matrix[14] = 0;
     matrix[15] = 1;
 
-    // glDisable(GL_CULL_FACE);
-    glDisable(GL_DEPTH_TEST);
-    glBindVertexArray(vertexArray);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STREAM_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
-    glEnableVertexAttribArray(0);
-    glUseProgram(skyProgram);
-    glUniformMatrix4fv(glGetUniformLocation(skyProgram, "invMatrix"), 1, GL_FALSE, matrix);
-    glUniform3f(glGetUniformLocation(skyProgram, "groundColor"),
-        ((groundColor >> 16) & 0xFF) / 255.0,
-        ((groundColor >> 8) & 0xFF) / 255.0,
-        (groundColor & 0xFF) / 255.0);
-    glUniform3f(glGetUniformLocation(skyProgram, "horizonColor"),
-        ((lowSkyColor >> 16) & 0xFF) / 255.0,
-        ((lowSkyColor >> 8) & 0xFF) / 255.0,
-        (lowSkyColor & 0xFF) / 255.0);
-    glUniform3f(glGetUniformLocation(skyProgram, "skyColor"),
-        ((highSkyColor >> 16) & 0xFF) / 255.0,
-        ((highSkyColor >> 8) & 0xFF) / 255.0,
-        (highSkyColor & 0xFF) / 255.0);
-    glBindVertexArray(vertexArray);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glDisableVertexAttribArray(0);
-    glEnable(GL_DEPTH_TEST);
+    if (CBSPPart::actuallyRender) {
+        // glDisable(GL_CULL_FACE);
+        glDisable(GL_DEPTH_TEST);
+        glBindVertexArray(vertexArray);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STREAM_DRAW);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
+        glEnableVertexAttribArray(0);
+        glUseProgram(skyProgram);
+        glUniformMatrix4fv(glGetUniformLocation(skyProgram, "invMatrix"), 1, GL_FALSE, matrix);
+        glUniform3f(glGetUniformLocation(skyProgram, "groundColor"),
+            ((groundColor >> 16) & 0xFF) / 255.0,
+            ((groundColor >> 8) & 0xFF) / 255.0,
+            (groundColor & 0xFF) / 255.0);
+        glUniform3f(glGetUniformLocation(skyProgram, "horizonColor"),
+            ((lowSkyColor >> 16) & 0xFF) / 255.0,
+            ((lowSkyColor >> 8) & 0xFF) / 255.0,
+            (lowSkyColor & 0xFF) / 255.0);
+        glUniform3f(glGetUniformLocation(skyProgram, "skyColor"),
+            ((highSkyColor >> 16) & 0xFF) / 255.0,
+            ((highSkyColor >> 8) & 0xFF) / 255.0,
+            (highSkyColor & 0xFF) / 255.0);
+        glBindVertexArray(vertexArray);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glDisableVertexAttribArray(0);
+        glEnable(GL_DEPTH_TEST);
 
-    /*
-    if(numShades)
-        theView->RenderPlanes(numShades, shadeColors, altitudes);
-    */
+        /*
+        if(numShades)
+            theView->RenderPlanes(numShades, shadeColors, altitudes);
+        */
+    }
 }
