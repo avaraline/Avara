@@ -4,7 +4,7 @@
 #include "Preferences.h"
 
 CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
-    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 20, 10));
+    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
     std::string name = app->String(kPlayerNameTag);
     nanogui::TextBox *nameBox = new nanogui::TextBox(this);
