@@ -43,7 +43,70 @@ class CNetManager;
 
 #define kMaxMessageChars 127
 
-class CPlayerManager : public CDirectObject {
+
+class CPlayerManager {
+public:
+    virtual CAbstractPlayer* GetPlayer() = 0;
+    virtual void SetPlayer(CAbstractPlayer*) = 0;
+    virtual short Slot() = 0;
+    virtual void AbortRequest() = 0;
+    virtual Boolean IsLocalPlayer() = 0;
+    virtual void GameKeyPress(char c) = 0;
+    virtual FunctionTable *GetFunctions() = 0;
+    virtual void DeadOrDone() = 0;
+    virtual short Position() = 0;
+    virtual Str255& PlayerName() = 0;
+    virtual std::deque<unsigned char>& LineBuffer() = 0;
+    virtual void Dispose() = 0;
+    virtual void NetDisconnect() = 0;
+    virtual short IsRegistered() = 0;
+    virtual void IsRegistered(short) = 0;
+    virtual Str255& PlayerRegName() = 0;
+    virtual short LoadingStatus() = 0;
+    virtual void SetPlayerStatus(short newStatus, long theWin) = 0;
+    virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
+    virtual void SetPosition(short pos) = 0;
+    virtual void RosterKeyPress(unsigned char c) = 0;
+    virtual void RosterMessageText(short len, char *c) = 0;
+    virtual short LevelCRC() = 0;
+    virtual OSErr LevelErr() = 0;
+    virtual OSType LevelTag() = 0;
+    virtual void LevelCRC(short) = 0;
+    virtual void LevelErr(OSErr) = 0;
+    virtual void LevelTag(OSType) = 0;
+    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) = 0;
+    virtual void ResumeGame() = 0;
+    virtual uint32_t DoMouseControl(Point *deltaMouse, Boolean doCenter) = 0;
+    virtual void HandleEvent(SDL_Event &event) = 0;
+    virtual void SendFrame() = 0;
+    virtual void ViewControl() = 0;
+    virtual Fixed RandomKey() = 0;
+    virtual void RandomKey(Fixed) = 0;
+    virtual CAbstractPlayer *ChooseActor(CAbstractPlayer *actorList, short myTeamColor) = 0;
+    virtual short GetStatusChar() = 0;
+    virtual short GetMessageIndicator() = 0;
+
+    virtual void StoreMugShot(Handle mugHandle) = 0;
+    virtual Handle GetMugShot() = 0;
+
+    virtual CAbstractPlayer *TakeAnyActor(CAbstractPlayer *actorList) = 0;
+    virtual short PlayerColor() = 0;
+    virtual Boolean IncarnateInAnyColor() = 0;
+    virtual void ResendFrame(long theFrame, short requesterId, short commandCode) = 0;
+    virtual void SpecialColorControl() = 0;
+    virtual PlayerConfigRecord& TheConfiguration() = 0;
+    virtual Handle MugPict() = 0;
+    virtual void MugPict(Handle) = 0;
+    virtual long MugSize() = 0;
+    virtual long MugState() = 0;
+    virtual void MugSize(long) = 0;
+    virtual void MugState(long) = 0;
+    virtual long WinFrame() = 0;
+    virtual void ProtocolHandler(struct PacketInfo *thePacket) = 0;
+    virtual void IncrementAskAgainTime(int) = 0;
+};
+
+class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
 public:
     CAbstractPlayer *itsPlayer;
     CAvaraGame *itsGame;
@@ -153,4 +216,32 @@ public:
     // virtual	void			GetLoadingStatusString(StringPtr theStr);
 
     virtual void SpecialColorControl();
+    virtual short Slot();
+    virtual Boolean IsLocalPlayer();
+    virtual short Position();
+    virtual Str255& PlayerName();
+    virtual std::deque<unsigned char>& LineBuffer();
+    virtual CAbstractPlayer* GetPlayer();
+    virtual short IsRegistered();
+    virtual void IsRegistered(short);
+    virtual Str255& PlayerRegName();
+    virtual short LoadingStatus();
+    virtual short LevelCRC();
+    virtual OSErr LevelErr();
+    virtual OSType LevelTag();
+    virtual void LevelCRC(short);
+    virtual void LevelErr(OSErr);
+    virtual void LevelTag(OSType);
+    virtual Fixed RandomKey();
+    virtual void RandomKey(Fixed);
+    virtual PlayerConfigRecord& TheConfiguration();
+    virtual short PlayerColor();
+    virtual Handle MugPict();
+    virtual void MugPict(Handle);
+    virtual long MugSize();
+    virtual long MugState();
+    virtual void MugSize(long);
+    virtual void MugState(long);
+    virtual long WinFrame();
+    virtual void IncrementAskAgainTime(int);
 };

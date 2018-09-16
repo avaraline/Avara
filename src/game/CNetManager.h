@@ -113,6 +113,7 @@ public:
     std::vector<char> msgBuffer;
 
     virtual void INetManager(CAvaraGame *theGame);
+    virtual CPlayerManager* CreatePlayerManager(short);
     virtual void LevelReset();
     virtual void Dispose();
     virtual Boolean ConfirmNetChange();

@@ -276,7 +276,7 @@ void CAbstractPlayer::Dispose() {
     }
 
     if (itsManager) {
-        itsManager->itsPlayer = NULL;
+        itsManager->SetPlayer(NULL);
         itsManager = NULL;
     }
 
@@ -648,7 +648,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (TESTFUNC(kfuPauseGame, ft->down)) {
             itsGame->statusRequest = kPauseStatus;
-            itsGame->pausePlayer = itsManager->slot;
+            itsGame->pausePlayer = itsManager->Slot();
         }
         if (TESTFUNC(kfuAbortGame, ft->down)) {
             if (limboCount > 0 || lives == 0) {
@@ -656,10 +656,10 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                     isOut = true;
                     lives = 0;
                     itsManager->AbortRequest();
-                    itsGame->itsApp->DrawUserInfoPart(itsManager->slot, kipDrawColorBox);
+                    itsGame->itsApp->DrawUserInfoPart(itsManager->Slot(), kipDrawColorBox);
                 }
             } else {
-                if (itsManager->isLocalPlayer) {
+                if (itsManager->IsLocalPlayer()) {
                     itsGame->itsApp->MessageLine(kmSelfDestruct, centerAlign);
                     if (lives > 1)
                         itsGame->itsApp->MessageLine(kmSelfDestruct2, centerAlign);
@@ -751,7 +751,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             else
                 yonBound = LONGYON;
 
-            if (itsManager->isLocalPlayer) {
+            if (itsManager->IsLocalPlayer()) {
                 gApplication->Set(kYonPrefTag, mode);
                 itsGame->itsApp->MessageLine(kmLongView - mode, centerAlign);
             }
@@ -767,11 +767,11 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (TESTFUNC(kfuTypeText, ft->down)) {
             chatMode = !chatMode;
-            itsGame->itsApp->DrawUserInfoPart(itsManager->slot, kipDrawColorBox);
+            itsGame->itsApp->DrawUserInfoPart(itsManager->Slot(), kipDrawColorBox);
             if (chatMode) {
                 CBasicSound *theSound;
 
-                theSound = gHub->GetSoundSampler(hubRate, itsManager->isLocalPlayer ? 151 : 152);
+                theSound = gHub->GetSoundSampler(hubRate, itsManager->IsLocalPlayer() ? 151 : 152);
                 theSound->SetVolume(FIX3(250));
                 theSound->Start();
             }
@@ -860,7 +860,7 @@ void CAbstractPlayer::FrameAction() {
 void CAbstractPlayer::PlayerAction() {
     if (lives) {
         itsGame->playersStanding++;
-        if ((itsGame->frameNumber & 2047) == 2047 && itsGame->playersStanding == 1 && itsManager->isLocalPlayer) {
+        if ((itsGame->frameNumber & 2047) == 2047 && itsGame->playersStanding == 1 && itsManager->IsLocalPlayer()) {
             itsGame->scoreKeeper->NetResultsUpdate();
         }
 
@@ -1039,7 +1039,7 @@ void CAbstractPlayer::GunActions() {
 }
 
 short CAbstractPlayer::GetActorScoringId() {
-    return itsManager ? itsManager->slot : -1;
+    return itsManager ? itsManager->Slot() : -1;
 }
 
 void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean doDispose) {
@@ -1072,11 +1072,11 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     missileCount = defaultConfig.numMissiles;
     grenadeCount = defaultConfig.numGrenades;
     GoLimbo(60);
-    if (lives == 0 && itsManager->isLocalPlayer) {
+    if (lives == 0 && itsManager->IsLocalPlayer()) {
         itsGame->itsApp->MessageLine(kmGameOver, centerAlign);
     }
 
-    itsGame->itsApp->DrawUserInfoPart(itsManager->position, kipDrawColorBox);
+    itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
 }
 
 void CAbstractPlayer::GoLimbo(long limboDelay) {
@@ -1340,7 +1340,7 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     speed[1] = 0;
     speed[2] = 0;
 
-    if (itsManager->isLocalPlayer) {
+    if (itsManager->IsLocalPlayer()) {
         itsGame->itsApp->MessageLine(kmWin, centerAlign);
     }
 
@@ -1444,7 +1444,7 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
         boostsRemaining = boosterLimit;
     lives += gr->lives;
     if (gr->lives) {
-        itsGame->itsApp->DrawUserInfoPart(itsManager->position, kipDrawColorBox);
+        itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
     }
 
     shields += gr->shield;
@@ -1474,7 +1474,7 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
 }
 
 short CAbstractPlayer::GetPlayerPosition() {
-    return itsManager->position;
+    return itsManager->Position();
 }
 
 short CAbstractPlayer::GetBallSnapPoint(long theGroup,

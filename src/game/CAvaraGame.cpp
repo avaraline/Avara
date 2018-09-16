@@ -265,7 +265,7 @@ CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
 
     thePlayer = playerList;
     while (thePlayer) {
-        if (thePlayer->itsManager && thePlayer->itsManager->isLocalPlayer) {
+        if (thePlayer->itsManager && thePlayer->itsManager->IsLocalPlayer()) {
             break;
         }
 
@@ -775,7 +775,7 @@ void CAvaraGame::GameStop() {
     if (gameStatus == kAbortStatus) {
         itsApp->MessageLine(kmAborted, centerAlign);
     } else if (gameStatus == kPauseStatus) {
-        itsApp->ParamLine(kmPaused, centerAlign, itsNet->playerTable[pausePlayer]->playerName, NULL);
+        itsApp->ParamLine(kmPaused, centerAlign, itsNet->playerTable[pausePlayer]->PlayerName(), NULL);
     }
 
     scoreKeeper->StopPause(gameStatus == kPauseStatus);

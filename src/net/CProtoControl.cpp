@@ -162,7 +162,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             if (thePacket->p2 > theNet->maxRoundTripLatency)
                 theNet->maxRoundTripLatency = thePacket->p2;
 
-            theNet->playerTable[thePacket->sender]->randomKey = p3;
+            theNet->playerTable[thePacket->sender]->RandomKey(p3);
 
             if (theNet->autoLatencyVoteCount == 1) {
                 theNet->fragmentDetected = false;
@@ -223,7 +223,7 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
                 theNet->playerTable[playerIndex]->ProtocolHandler(thePacket);
         } break;
         case kpAskLater: //	Packet was not lost, so ask again later.
-            theNet->playerTable[thePacket->sender]->askAgainTime += 300;
+            theNet->playerTable[thePacket->sender]->IncrementAskAgainTime(300);
             break;
 
             /*

@@ -28,7 +28,7 @@
 
 #include <SDL2/SDL.h>
 
-void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
+void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
     // Rect	*mainScreenRect;
 
     itsGame = theGame;
@@ -101,11 +101,11 @@ void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *
     prevKeyboardActive = keyboardActive;
 }
 
-void CPlayerManager::SetPlayer(CAbstractPlayer *thePlayer) {
+void CPlayerManagerImpl::SetPlayer(CAbstractPlayer *thePlayer) {
     itsPlayer = thePlayer;
 }
 
-uint32_t CPlayerManager::DoMouseControl(Point *deltaMouse, Boolean doCenter) {
+uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter) {
     int x, y;
     uint32_t state = SDL_GetMouseState(&x, &y);
     deltaMouse->h = x - mouseCenterPosition.h;
@@ -121,7 +121,7 @@ uint32_t CPlayerManager::DoMouseControl(Point *deltaMouse, Boolean doCenter) {
     return state;
 }
 
-Boolean CPlayerManager::TestHeldKey(short funcCode) {
+Boolean CPlayerManagerImpl::TestHeldKey(short funcCode) {
     /*
     long			m0, m1;
     KeyMap			keyMap;
@@ -202,7 +202,7 @@ void FrameFunctionToPacket(FrameFunction *ff, PacketInfo *outPacket, short slot)
 
 //#define	AVARA_EVENT_MASK	(mDownMask+mUpMask+keyDownMask+keyUpMask+autoKeyMask)
 
-uint32_t CPlayerManager::GetKeyBits() {
+uint32_t CPlayerManagerImpl::GetKeyBits() {
     uint32_t keys = 0;
     const uint8_t *state = SDL_GetKeyboardState(NULL);
     for (auto it = keyMap.begin(); it != keyMap.end(); ++it) {
@@ -212,7 +212,7 @@ uint32_t CPlayerManager::GetKeyBits() {
     return keys;
 }
 
-void CPlayerManager::HandleEvent(SDL_Event &event) {
+void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     // Events coming in are for the next frame to be sent.
     // FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber + 1)];
 
@@ -264,7 +264,7 @@ void CPlayerManager::HandleEvent(SDL_Event &event) {
     }
 }
 
-void CPlayerManager::SendFrame() {
+void CPlayerManagerImpl::SendFrame() {
     // Sends the next game frame.
     itsGame->topSentFrame++;
 
@@ -333,7 +333,7 @@ void CPlayerManager::SendFrame() {
     // next->ft.held = ff->ft.held;
 }
 
-void CPlayerManager::ResendFrame(long theFrame, short requesterId, short commandCode) {
+void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short commandCode) {
     CCommManager *theComm;
     PacketInfo *outPacket;
     FrameFunction *ff;
@@ -357,12 +357,12 @@ void CPlayerManager::ResendFrame(long theFrame, short requesterId, short command
         }
     } else //	Ask me later packet
     {
-        SDL_Log("CPlayerManager::ResendFrame - ask me later\n");
+        SDL_Log("CPlayerManagerImpl::ResendFrame - ask me later\n");
         theComm->SendUrgentPacket(1 << requesterId, kpAskLater, 0, 0, theFrame, 0, 0);
     }
 }
 
-void CPlayerManager::ResumeGame() {
+void CPlayerManagerImpl::ResumeGame() {
     short i;
 
     for (i = 0; i < FUNCTIONBUFFERS; i++) {
@@ -384,7 +384,7 @@ void CPlayerManager::ResumeGame() {
     buttonStatus = 0;
 }
 
-void CPlayerManager::ProtocolHandler(struct PacketInfo *thePacket) {
+void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
     uint32_t *pd;
     uint16_t *spd;
     FrameFunction *ff;
@@ -411,24 +411,24 @@ void CPlayerManager::ProtocolHandler(struct PacketInfo *thePacket) {
     ff->ft.msgChar = thePacket->p2;
 }
 
-void CPlayerManager::ViewControl() {
+void CPlayerManagerImpl::ViewControl() {
     if (itsPlayer)
         itsPlayer->ControlViewPoint();
 }
 
-void CPlayerManager::Dispose() {
+void CPlayerManagerImpl::Dispose() {
     CDirectObject::Dispose();
 }
 
-void CPlayerManager::SendResendRequest(short askCount) {
+void CPlayerManagerImpl::SendResendRequest(short askCount) {
     if (/* theNetManager->fastTrack.addr.value || */ askCount > 0) {
         theNetManager->playerTable[theNetManager->itsCommManager->myId]->ResendFrame(
             itsGame->frameNumber, slot, kpKeyAndMouseRequest);
     }
 }
 
-FunctionTable *CPlayerManager::GetFunctions() {
-    // SDL_Log("CPlayerManager::GetFunctions\n");
+FunctionTable *CPlayerManagerImpl::GetFunctions() {
+    // SDL_Log("CPlayerManagerImpl::GetFunctions\n");
     short i = (FUNCTIONBUFFERS - 1) & itsGame->frameNumber;
 
     if (frameFuncs[i].validFrame != itsGame->frameNumber) {
@@ -506,7 +506,7 @@ FunctionTable *CPlayerManager::GetFunctions() {
     return &frameFuncs[i].ft;
 }
 
-void CPlayerManager::RosterKeyPress(unsigned char c) {
+void CPlayerManagerImpl::RosterKeyPress(unsigned char c) {
     short i;
 
     switch (c) {
@@ -581,7 +581,7 @@ OSErr	WordWrapString(
     return TruncString(kChatMessageWidth, fullLine, smTruncEnd);
 }
 
-void	CPlayerManager::FlushMessageText(
+void	CPlayerManagerImpl::FlushMessageText(
     Boolean	forceAll)
 {
     Str255			fullLine;
@@ -655,7 +655,7 @@ void	CPlayerManager::FlushMessageText(
 }
 */
 
-void CPlayerManager::RosterMessageText(short len, char *c) {
+void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
     while (len--) {
         unsigned char theChar;
 
@@ -694,11 +694,11 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
     // FlushMessageText(false);
 }
 
-void CPlayerManager::GameKeyPress(char theChar) {
+void CPlayerManagerImpl::GameKeyPress(char theChar) {
     theNetManager->ReceiveRosterMessage(slot, 1, &theChar);
 }
 
-void CPlayerManager::NetDisconnect() {
+void CPlayerManagerImpl::NetDisconnect() {
     if (itsPlayer) {
         if (theNetManager->isPlaying) {
             itsPlayer->netDestruct = true;
@@ -730,7 +730,7 @@ void CPlayerManager::NetDisconnect() {
     // theRoster->InvalidateArea(kOnePlayerBox, position);
 }
 
-void CPlayerManager::ChangeNameAndLocation(StringPtr theName, Point location) {
+void CPlayerManagerImpl::ChangeNameAndLocation(StringPtr theName, Point location) {
     StringPtr lastChar;
 
     if (loadingStatus == kLNotConnected) {
@@ -758,13 +758,13 @@ void CPlayerManager::ChangeNameAndLocation(StringPtr theName, Point location) {
     // FlushMessageText(false);
 }
 
-void CPlayerManager::SetPosition(short pos) {
+void CPlayerManagerImpl::SetPosition(short pos) {
     position = pos;
     // theRoster->InvalidateArea(kUserBox, pos);
     // theRoster->InvalidateArea(kOnePlayerBox, pos);
 }
 
-void CPlayerManager::LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) {
+void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) {
     short oldStatus;
 
     if (loadingStatus != kLNotConnected && loadingStatus != kLActive) {
@@ -806,7 +806,7 @@ void CPlayerManager::LoadStatusChange(short serverCRC, OSErr serverErr, OSType s
     }
 }
 
-CAbstractPlayer *CPlayerManager::ChooseActor(CAbstractPlayer *actorList, short myTeamColor) {
+CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, short myTeamColor) {
     CAbstractPlayer *newList;
     CAbstractPlayer **tailList;
     CAbstractPlayer *nextPlayer;
@@ -876,7 +876,7 @@ CAbstractPlayer *CPlayerManager::ChooseActor(CAbstractPlayer *actorList, short m
     return actorList;
 }
 
-Boolean CPlayerManager::IncarnateInAnyColor() {
+Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
     short i;
     CIncarnator *spotAvailable;
 
@@ -915,7 +915,7 @@ Boolean CPlayerManager::IncarnateInAnyColor() {
     return false;
 }
 
-CAbstractPlayer *CPlayerManager::TakeAnyActor(CAbstractPlayer *actorList) {
+CAbstractPlayer *CPlayerManagerImpl::TakeAnyActor(CAbstractPlayer *actorList) {
     CAbstractPlayer *nextPlayer;
 
     nextPlayer = (CAbstractPlayer *)actorList->nextActor;
@@ -928,7 +928,7 @@ CAbstractPlayer *CPlayerManager::TakeAnyActor(CAbstractPlayer *actorList) {
 
     return nextPlayer;
 }
-void CPlayerManager::SetPlayerStatus(short newStatus, long theWin) {
+void CPlayerManagerImpl::SetPlayerStatus(short newStatus, long theWin) {
     winFrame = theWin;
 
     if (newStatus != loadingStatus) {
@@ -940,18 +940,18 @@ void CPlayerManager::SetPlayerStatus(short newStatus, long theWin) {
     }
 }
 
-void CPlayerManager::AbortRequest() {
+void CPlayerManagerImpl::AbortRequest() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
     if (isLocalPlayer) {
         itsGame->statusRequest = kAbortStatus;
     }
 }
 
-void CPlayerManager::DeadOrDone() {
+void CPlayerManagerImpl::DeadOrDone() {
     theNetManager->deadOrDonePlayers |= 1 << slot;
 }
 
-short CPlayerManager::GetStatusChar() {
+short CPlayerManagerImpl::GetStatusChar() {
     if (itsPlayer == NULL || (loadingStatus != kLActive && loadingStatus != kLPaused)) {
         return -1;
     } else {
@@ -967,7 +967,7 @@ short CPlayerManager::GetStatusChar() {
     }
 }
 
-short CPlayerManager::GetMessageIndicator() {
+short CPlayerManagerImpl::GetMessageIndicator() {
     if (itsPlayer && itsPlayer->chatMode && loadingStatus == kLActive) {
         return 11;
     } else {
@@ -975,7 +975,7 @@ short CPlayerManager::GetMessageIndicator() {
     }
 }
 
-void CPlayerManager::StoreMugShot(Handle mugHandle) {
+void CPlayerManagerImpl::StoreMugShot(Handle mugHandle) {
     if (mugPict) {
         DisposeHandle(mugPict);
     }
@@ -991,7 +991,7 @@ void CPlayerManager::StoreMugShot(Handle mugHandle) {
     }
 }
 
-Handle CPlayerManager::GetMugShot() {
+Handle CPlayerManagerImpl::GetMugShot() {
     Handle result = NULL;
 
     if (mugSize == -1) {
@@ -1016,7 +1016,7 @@ Handle CPlayerManager::GetMugShot() {
 }
 
 /*
-void	CPlayerManager::GetLoadingStatusString(
+void	CPlayerManagerImpl::GetLoadingStatusString(
     StringPtr	theStr)
 {
 
@@ -1054,7 +1054,7 @@ void	CPlayerManager::GetLoadingStatusString(
 }
 */
 
-void CPlayerManager::SpecialColorControl() {
+void CPlayerManagerImpl::SpecialColorControl() {
     if (itsPlayer) {
         long repColor = -1;
 
@@ -1071,4 +1071,89 @@ void CPlayerManager::SpecialColorControl() {
             itsPlayer->SetSpecialColor(repColor);
         }
     }
+}
+
+short CPlayerManagerImpl::Slot() {
+    return slot;
+}
+Boolean CPlayerManagerImpl::IsLocalPlayer() {
+    return isLocalPlayer;
+}
+short CPlayerManagerImpl::Position() {
+    return position;
+}
+Str255& CPlayerManagerImpl::PlayerName() {
+    return playerName;
+}
+std::deque<unsigned char>& CPlayerManagerImpl::LineBuffer() {
+    return lineBuffer;
+}
+CAbstractPlayer* CPlayerManagerImpl::GetPlayer() {
+    return itsPlayer;
+}
+short CPlayerManagerImpl::IsRegistered() {
+    return isRegistered;
+}
+void CPlayerManagerImpl::IsRegistered(short reg) {
+    isRegistered = reg;
+}
+Str255& CPlayerManagerImpl::PlayerRegName() {
+    return playerRegName;
+}
+short CPlayerManagerImpl::LoadingStatus() {
+    return loadingStatus;
+}
+short CPlayerManagerImpl::LevelCRC() {
+    return levelCRC;
+}
+OSErr CPlayerManagerImpl::LevelErr() {
+    return levelErr;
+}
+OSType CPlayerManagerImpl::LevelTag() {
+    return levelTag;
+}
+void CPlayerManagerImpl::LevelCRC(short crc) {
+    levelCRC = crc;
+}
+void CPlayerManagerImpl::LevelErr(OSErr err) {
+    levelErr = err;
+}
+void CPlayerManagerImpl::LevelTag(OSType t) {
+    levelTag = t;
+}
+Fixed CPlayerManagerImpl::RandomKey() {
+    return randomKey;
+}
+void CPlayerManagerImpl::RandomKey(Fixed rk) {
+    randomKey = rk;
+}
+short CPlayerManagerImpl::PlayerColor() {
+    return playerColor;
+}
+PlayerConfigRecord& CPlayerManagerImpl::TheConfiguration() {
+    return theConfiguration;
+}
+Handle CPlayerManagerImpl::MugPict() {
+    return mugPict;
+}
+void CPlayerManagerImpl::MugPict(Handle h) {
+    mugPict = h;
+}
+void CPlayerManagerImpl::MugSize(long s) {
+    mugSize = s;
+}
+void CPlayerManagerImpl::MugState(long s) {
+    mugState = s;
+}
+long CPlayerManagerImpl::MugSize() {
+    return mugSize;
+}
+long CPlayerManagerImpl::MugState() {
+    return mugState;
+}
+long CPlayerManagerImpl::WinFrame() {
+    return winFrame;
+}
+void CPlayerManagerImpl::IncrementAskAgainTime(int amt) {
+    askAgainTime += amt;
 }

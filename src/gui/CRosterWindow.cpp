@@ -68,12 +68,12 @@ void CRosterWindow::UpdateRoster() {
     for(int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = ((CCAvaraApp *)gApplication)->GetNet()->playerTable[i];
 
-        const std::string theName((char *)thisPlayer->playerName + 1, thisPlayer->playerName[0]);
+        const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
 
-        short status = thisPlayer->loadingStatus;
-        std::string theStatus = GetStringStatus(status, thisPlayer->winFrame);
+        short status = thisPlayer->LoadingStatus();
+        std::string theStatus = GetStringStatus(status, thisPlayer->WinFrame());
 
-        std::string theChat(thisPlayer->lineBuffer.begin(), thisPlayer->lineBuffer.end());
+        std::string theChat(thisPlayer->LineBuffer().begin(), thisPlayer->LineBuffer().end());
         if (theChat.length() > CHAT_CHARS) {
             theChat = theChat.substr(theChat.length() - CHAT_CHARS, CHAT_CHARS);
         }
