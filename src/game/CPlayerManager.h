@@ -83,7 +83,7 @@ public:
     Str255 playerRegName;
     short isRegistered;
     unsigned char message[kMaxMessageChars + 1];
-    std::deque<unsigned char> lineBuffer;
+    std::deque<char> lineBuffer;
 
     long winFrame;
     short loadingStatus;
@@ -123,6 +123,7 @@ public:
 
     // virtual	void			FlushMessageText(Boolean forceAll);
     virtual void RosterMessageText(short len, char *c);
+    virtual std::string GetChatString(int maxChars);
 
     virtual void RosterKeyPress(unsigned char c);
     virtual void GameKeyPress(char c);

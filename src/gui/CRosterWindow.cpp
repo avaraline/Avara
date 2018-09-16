@@ -18,10 +18,10 @@ const int CHAT_CHARS = 63;
 const int ROSTER_FONT_SIZE = 13;
 bool textInputStarted = false;
 char backspace[1] = {'\b'};
-char clearline[1] = {'\027'};
-char endline[2] = {'\108', ' '};
-char bellline[1] = {'\175'};
-char checkline[1] = {'\393'};
+char clearline[1] = {'\x1B'};
+char endline[1] = {13};
+char bellline[1] = {7};
+char checkline[1] = {6};
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     AdvancedGridLayout *layout = new AdvancedGridLayout();
@@ -77,10 +77,7 @@ void CRosterWindow::UpdateRoster() {
         short status = thisPlayer->loadingStatus;
         std::string theStatus = GetStringStatus(status, thisPlayer->winFrame);
 
-        std::string theChat(thisPlayer->lineBuffer.begin(), thisPlayer->lineBuffer.end());
-        if (theChat.length() > CHAT_CHARS) {
-            theChat = theChat.substr(theChat.length() - CHAT_CHARS, CHAT_CHARS);
-        }
+        std::string theChat = thisPlayer->GetChatString(CHAT_CHARS);
 
         names[i]->setValue(theName.c_str());
         statuses[i]->setValue(theStatus.c_str());
@@ -169,6 +166,8 @@ void CRosterWindow::SendRosterMessage(int len, char* message) {
 bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
     if(!textInputStarted) return false;
     if (event.type == SDL_TEXTINPUT) {
+        // we already sent a checkmark, don't send a v
+        if ((SDL_GetModState() & KMOD_ALT) && strcmp(event.text.text, "v") == 0) return true;
         SendRosterMessage(strlen(event.text.text), event.text.text);
         return true;
     }
@@ -178,7 +177,7 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
                 SendRosterMessage(1, backspace);
                 return true;
             case SDLK_RETURN:
-                SendRosterMessage(2, endline);
+                SendRosterMessage(1, endline);
                 return true;
             case SDLK_CLEAR:
             case SDLK_DELETE:

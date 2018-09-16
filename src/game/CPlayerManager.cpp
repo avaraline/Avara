@@ -27,6 +27,7 @@
 #include "System.h"
 
 #include <SDL2/SDL.h>
+#include <utf8.h>
 
 void CPlayerManager::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
     // Rect	*mainScreenRect;
@@ -662,15 +663,30 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
         theChar = *c++;
 
         switch (theChar) {
+            case 6:
+                // ✓
+                lineBuffer.push_back('\xE2');
+                lineBuffer.push_back('\x88');
+                lineBuffer.push_back('\x9A');
+                break;
             case 7:
+                // Δ
+                lineBuffer.push_back('\xCE');
+                lineBuffer.push_back('\x94');
                 itsGame->itsApp->NotifyUser();
                 break;
             case 8:
                 if (lineBuffer.size()) {
-                    lineBuffer.pop_back();
+                    auto i = lineBuffer.end();
+                    utf8::previous(i, lineBuffer.begin());
+                    lineBuffer = std::deque<char>(lineBuffer.begin(), i);
                 }
                 break;
             case 13:
+                // ¬
+                lineBuffer.push_back('\xC2');
+                lineBuffer.push_back('\xAC');
+                lineBuffer.push_back(' ');
                 // FlushMessageText(true);
                 break;
             case 27:
@@ -681,10 +697,9 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
                     lineBuffer.push_back(theChar);
                     if (lineBuffer[0] > 220) {
                         // FlushMessageText(true);
-                        for (int i = 0; i < 50; ++i)
-                        {
-                            lineBuffer.pop_front();
-                        }
+                        auto i = lineBuffer.begin();
+                        utf8::advance(i, 55, lineBuffer.end());
+                        lineBuffer = std::deque<char>(i, lineBuffer.end());
                     }
                 }
                 break;
@@ -692,6 +707,14 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
     }
 
     // FlushMessageText(false);
+}
+
+std::string CPlayerManager::GetChatString(int maxChars) {
+    std::string theChat(lineBuffer.begin(), lineBuffer.end());
+    auto i = theChat.begin();
+    int over = std::max((int)utf8::distance(theChat.begin(), theChat.end()) - maxChars, 0);
+    if (over) utf8::advance(i, over, theChat.end());
+    return std::string(i, theChat.end());
 }
 
 void CPlayerManager::GameKeyPress(char theChar) {
