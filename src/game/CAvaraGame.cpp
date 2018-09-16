@@ -93,6 +93,10 @@ void CAvaraGame::InitLocatorTable() {
     }
 }
 
+CNetManager* CAvaraGame::CreateNetManager() {
+    return new CNetManager;
+}
+
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
 
@@ -100,7 +104,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     itsApp = theApp;
 
-    itsNet = new CNetManager;
+    itsNet = CreateNetManager();
     itsApp->SetNet(itsNet);
     itsNet->INetManager(this);
 
