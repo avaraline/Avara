@@ -10,10 +10,24 @@ public:
     
     TrackerInfo(nanogui::Widget *parent, std::string line1, std::string line2, bool drawLine = true)
         : nanogui::Widget(parent), mDrawLine(drawLine) {
-        setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 5));
+        nanogui::AdvancedGridLayout *layout = new nanogui::AdvancedGridLayout();
+        layout->appendRow(1, 1);
+        layout->appendRow(1, 1);
+        layout->appendCol(1, 0.75);
+        layout->appendCol(1, 0.25);
+
         nanogui::Label *line1label = new nanogui::Label(this, line1, "sans-bold");
         nanogui::Label *line2label = new nanogui::Label(this, line2, "sans", 14);
         line2label->setColor(nanogui::Color(200, 200));
+        nanogui::Button *btn = new nanogui::Button(this, "Connect");
+
+        layout->setMargin(10);
+        layout->setAnchor(line1label, nanogui::AdvancedGridLayout::Anchor(0, 0, 1, 1));
+        layout->setAnchor(line2label, nanogui::AdvancedGridLayout::Anchor(0, 1, 1, 1));
+        layout->setAnchor(btn, nanogui::AdvancedGridLayout::Anchor(1, 0, 1, 2, nanogui::Alignment::Maximum,
+            nanogui::Alignment::Minimum));
+
+        setLayout(layout);
     }
 
     void draw(NVGcontext* ctx) {
