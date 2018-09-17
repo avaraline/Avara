@@ -73,7 +73,7 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     netOwner = NULL;
     loaderSlot = 0;
 
-    serverOptions = gApplication->Number(kServerOptionsTag);
+    serverOptions = theGame->itsApp->Number(kServerOptionsTag);
 
     lastMsgTick = TickCount();
     firstMsgTick = lastMsgTick;
@@ -169,7 +169,7 @@ void CNetManager::ChangeNet(short netKind, std::string address) {
                 itsGame->LevelReset(true);
                 // theRoster->InvalidateArea(kBottomBox, 0);
             }
-            gApplication->BroadcastCommand(kNetChangedCmd);
+            itsGame->itsApp->BroadcastCommand(kNetChangedCmd);
         } else {
             if (newManager)
                 newManager->Dispose();
@@ -554,7 +554,7 @@ void CNetManager::ResumeGame() {
     }
 
     // This is what pulled the counts from CLevelListWind
-    gApplication->BroadcastCommand(kConfigurePlayerCmd);
+    itsGame->itsApp->BroadcastCommand(kConfigurePlayerCmd);
 
     fragmentDetected = false;
 
@@ -678,7 +678,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                     didChange = true;
                 } else if (maxFrameLatency > curLatency && autoLatencyVote > LOWERLATENCYCOUNT) {
                     itsGame->latencyTolerance++;
-                    gApplication->Set(kLatencyToleranceTag, itsGame->latencyTolerance);
+                    itsGame->itsApp->Set(kLatencyToleranceTag, itsGame->latencyTolerance);
                     didChange = true;
                 }
 
@@ -727,7 +727,7 @@ void CNetManager::ReceiveStartCommand(short activeDistribution, short fromSlot) 
         deadOrDonePlayers = 0;
         activePlayersDistribution = activeDistribution;
         startPlayersDistribution = activeDistribution;
-        gApplication->DoCommand(kGetReadyToStartCmd);
+        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
         isPlaying = true;
         itsGame->ResumeGame();
     } else {
@@ -742,7 +742,7 @@ void CNetManager::ReceiveResumeCommand(short activeDistribution, short fromSlot,
     if (/*gApplication->modelessLevel == 0 &&*/
         !isPlaying && randomKey == FRandSeed) { // itsGame->itsApp->DoUpdate();
 
-        gApplication->DoCommand(kGetReadyToStartCmd);
+        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
 
         isPlaying = true;
         itsGame->ResumeGame();
@@ -837,7 +837,7 @@ void CNetManager::StopGame(short newStatus) {
     itsCommManager->SendPacket(
         kdEveryone, kpPlayerStatusChange, 0, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
 
-    gApplication->BroadcastCommand(kGameResultAvailableCmd);
+    itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
 void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame) {
@@ -945,7 +945,7 @@ void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
     myPlayer = playerTable[itsCommManager->myId];
 
     if (myPlayer->MugPict() == NULL) {
-        gApplication->BroadcastCommand(kGiveMugShotCmd);
+        itsGame->itsApp->BroadcastCommand(kGiveMugShotCmd);
     }
 
     mugSize = myPlayer->MugSize();

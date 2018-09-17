@@ -49,6 +49,8 @@
 #include "CHUD.h"
 #include "Preferences.h"
 #include "Resource.h"
+#include <iostream>
+using namespace std;
 
 #define kHighShadeCount 12
 
@@ -105,8 +107,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsApp = theApp;
 
     itsNet = CreateNetManager();
-    itsApp->SetNet(itsNet);
     itsNet->INetManager(this);
+    itsApp->SetNet(itsNet);
 
     searchCount = 0;
     locatorTable = (ActorLocator **)NewPtr(sizeof(ActorLocator *) * LOCATORTABLESIZE);
@@ -751,8 +753,9 @@ void CAvaraGame::GameStart() {
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
 
-    while (frameNumber + latencyTolerance > topSentFrame)
+    while (frameNumber + latencyTolerance > topSentFrame) {
         itsNet->FrameAction();
+    }
 
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);

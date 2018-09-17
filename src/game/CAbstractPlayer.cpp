@@ -31,6 +31,8 @@
 #include "ComputerVoice.h"
 #include "Parser.h"
 #include "Preferences.h"
+#include <iostream>
+using namespace std;
 
 #define MOUSESHOOTDELAY 8
 
