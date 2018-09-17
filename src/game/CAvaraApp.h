@@ -25,6 +25,7 @@ class CNetManager;
 
 class CAvaraApp {
 public:
+    virtual bool DoCommand(int theCommand) = 0;
     virtual void MessageLine(short index, short align) = 0;
     virtual void DrawUserInfoPart(short i, short partList) = 0;
     virtual void ParamLine(short index, short align, StringPtr param1, StringPtr param2) = 0;
@@ -45,6 +46,7 @@ public:
     virtual void StringLine(StringPtr theString, short align) = 0;
     virtual CAvaraGame* GetGame() = 0;
     virtual void Done() = 0;
+    virtual void BroadcastCommand(int theCommand) = 0;
 
 };
 class CCAvaraApp : public CApplication, public CAvaraApp {

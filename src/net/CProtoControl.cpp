@@ -69,13 +69,13 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
         case kpLogin:
             itsManager->SendPacket(
-                1 << thePacket->sender, kpServerOptions, 0, gApplication->Number(kServerOptionsTag), 0, 0, NULL);
+                1 << thePacket->sender, kpServerOptions, 0, theGame->itsApp->Number(kServerOptionsTag), 0, 0, NULL);
 
             theNet->SwapPositions(0, 0); //	Broadcast order
             theNet->SendColorChange();
             break;
         case kpNameQuery:
-            gApplication->BroadcastCommand(kReportNameCmd);
+            theGame->itsApp->BroadcastCommand(kReportNameCmd);
             theNet->SendRealName(thePacket->p1);
             break;
         case kpNameChange:
@@ -101,7 +101,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->LevelLoadStatus(thePacket->sender, 0, thePacket->p2, thePacket->p3);
             break;
         case kpKillNet:
-            gApplication->BroadcastCommand(kNetChangedCmd);
+            theGame->itsApp->BroadcastCommand(kNetChangedCmd);
             break;
         case kpStartLevel:
             theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender);
