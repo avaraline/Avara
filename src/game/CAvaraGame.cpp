@@ -98,10 +98,12 @@ CNetManager* CAvaraGame::CreateNetManager() {
     return new CNetManager;
 }
 
+CAvaraGame::CAvaraGame(int frameTime) {
+    this->frameTime = frameTime; // milliseconds
+}
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
 
-    frameTime = 64; //	Milliseconds.
 
     itsApp = theApp;
 
@@ -614,7 +616,7 @@ void CAvaraGame::EndScript() {
 
     groundTraction = ReadFixedVar(iDefaultTraction);
     groundFriction = ReadFixedVar(iDefaultFriction);
-    gravityRatio = ReadFixedVar(iGravity);
+    gravityRatio = ReadFixedVar(iGravity) * double(frameTime*frameTime) / (CLASSICFRAMETIME*CLASSICFRAMETIME);
     groundStepSound = ReadLongVar(iGroundStepSound);
     gHub->LoadSample(groundStepSound);
 

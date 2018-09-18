@@ -177,6 +177,7 @@ public:
     long oldPlayersStanding;
     short oldTeamsStanding;
 
+    CAvaraGame(int frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);

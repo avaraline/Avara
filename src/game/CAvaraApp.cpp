@@ -34,7 +34,7 @@
 #include "CPlayerManager.h"
 
 CCAvaraApp::CCAvaraApp() : CApplication("Avara") {
-    itsGame = new CAvaraGame;
+    itsGame = new CAvaraGame(8);
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);

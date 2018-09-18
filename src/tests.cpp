@@ -164,13 +164,14 @@ private:
 
 class TestGame : public CAvaraGame {
 public:
+    TestGame(int frameTime) : CAvaraGame(frameTime) {}
     virtual CNetManager* CreateNetManager() { return new TestNetManager(); }
     virtual CSoundHub* CreateSoundHub() { TestSoundHub *t = new TestSoundHub(); t->ISoundHub(64,64); return t;}
 };
 
-TEST(FAIL, ShouldFail) {
+vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
     TestApp app;
-    TestGame game;
+    TestGame game(frameTime);
     gCurrentGame = &game;
     InitParser();
     game.IAvaraGame(&app);
@@ -183,26 +184,36 @@ TEST(FAIL, ShouldFail) {
     game.itsNet->playerTable[0]->SetPlayer(hector);
     hector->itsManager = game.itsNet->playerTable[0];
     hector->location[0] = hector->location[2] = 0;
-    hector->location[1] = FIX(10);
+    hector->location[1] = fromHeight;
     hector->location[3] = FIX1;
     game.AddActor(hector);
-
     game.GameStart();
-    Fixed speed[3];
-
-    ASSERT_NE(game.actorList, nullptr);
-    hector->GetSpeedEstimate(&speed[0]);
-    cout << speed[1] << endl;
-    for (int i = 0; i < 50; i++) {
+    vector<Fixed> altitudes;
+    for (int i = 0; i < steps; i++) {
         game.nextScheduledFrame = 0;
         game.itsNet->activePlayersDistribution = 1;
-        cout << hector->location[1] << endl;
-        hector->GetSpeedEstimate(&speed[0]);
-        game.GameTick();
+        altitudes.push_back(hector->location[1]);
+        for (int k = 0; k < ticksPerStep; k++) {
+            game.GameTick();
+        }
     }
-    cout << hector->location[1] << endl;
-    hector->GetSpeedEstimate(&speed[0]);
-    cout << speed[1] << endl;
+    altitudes.push_back(hector->location[1]);
+    return altitudes;
+}
+
+TEST(GRAVITY, HectorFalling) {
+    vector<Fixed> at64ms = DropHector(50, 1, FIX(200), 64);
+    vector<Fixed> at32ms = DropHector(50, 2, FIX(200), 32);
+    vector<Fixed> at16ms = DropHector(50, 4, FIX(200), 16);
+    ASSERT_EQ(at64ms.back(), 6126784) << "64ms simulation fell wrong amount";
+    ASSERT_EQ(at64ms.size(), at32ms.size()) << "DropHector didn't do ticks right";
+    for (int i = 0; i < at64ms.size(); i++) {
+        double f64 = ToFloat(at64ms[i]);
+        double f32 = ToFloat(at32ms[i]);
+        double f16 = ToFloat(at32ms[i]);
+        ASSERT_LT(abs(f64-f32)/f64, 0.01) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(abs(f64-f16)/f64, 0.01) << "not close enough after " << i << " ticks.";
+    }
 }
 
 int main(int argc, char **argv) {
