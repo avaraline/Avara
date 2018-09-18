@@ -11,7 +11,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     levelSets = {"aa-normal", "aa-abnormal", "aa-deux-normal", "aa-deux-abnormal", "aa-tre", "blockparty", "fosfori",
         "not-aa", "symbiosis"};
 
-    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 20, 10));
+    setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
     // TODO: check load permission: theNet->PermissionQuery(kAllowLoadBit, 0)
 

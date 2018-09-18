@@ -71,7 +71,7 @@ public:
     virtual void DeadOrDone() {}
     virtual short Position() { return 0; }
     virtual Str255& PlayerName() { return str; }
-    virtual std::deque<unsigned char>& LineBuffer() { return lineBuffer; }
+    virtual std::deque<char>& LineBuffer() { return lineBuffer; }
     virtual void Dispose() {}
     virtual void NetDisconnect() {}
     virtual short IsRegistered() { return 0; }
@@ -100,7 +100,7 @@ public:
     virtual CAbstractPlayer *ChooseActor(CAbstractPlayer *actorList, short myTeamColor) { return 0; }
     virtual short GetStatusChar() { return 0; }
     virtual short GetMessageIndicator() { return 0; }
-
+    virtual std::string GetChatString(int maxChars) { return ""; }
     virtual void StoreMugShot(Handle mugHandle) {}
     virtual Handle GetMugShot() { return 0; }
 
@@ -122,7 +122,7 @@ public:
 private:
     CAvaraGame *itsGame;
     CAbstractPlayer *playa;
-    std::deque<unsigned char> lineBuffer;
+    std::deque<char> lineBuffer;
     Str255 str;
     PlayerConfigRecord pcr;
 };

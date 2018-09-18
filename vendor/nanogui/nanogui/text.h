@@ -40,7 +40,7 @@ public:
         Right
     };
 
-    Text(Widget *parent, const std::string &value = "Untitled", bool background = false);
+    Text(Widget *parent, const std::string &value = "Untitled", bool background = false, int font_size = 9);
 
     bool editable() const { return mEditable; }
     void setEditable(bool editable);
