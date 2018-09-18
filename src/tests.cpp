@@ -8,10 +8,53 @@
 #include "CBSPWorld.h"
 #include <nanogui/nanogui.h>
 #include "FastMat.h"
-#include <iostream>
 #include "Parser.h"
+#include "CSoundHub.h"
+
+#include <iostream>
 using namespace std;
 
+class TestSoundHub : public CSoundHubImpl {
+public:
+    virtual Fixed* EarLocation() { return ear; }
+    /*
+    virtual Fixed DistanceToLevelOne() { return 0; }
+    virtual void MuteFlag(Boolean) {}
+    virtual void AttachMixer(CSoundMixer *aMixer) {}
+    //virtual void CreateSound(short kind) {}
+
+    virtual SampleHeaderHandle LoadSample(short resId) { return 0; }
+    virtual SampleHeaderHandle PreLoadSample(short resId) { return 0; }
+    virtual SampleHeaderHandle RequestSample(short resId) { return 0; }
+    virtual void FreeUnusedSamples() {}
+
+    virtual void FreeOldSamples() {}
+    virtual void FlagOldSamples() {}
+
+    virtual void Restock(CBasicSound *aSound) {}
+    //virtual CBasicSound *Aquire(short kind) {}
+    virtual CBasicSound *GetSoundSampler(short kind, short resId) { return 0; }
+
+    //virtual void CreateSoundLinks(short n) {}
+    //virtual void DisposeSoundLinks() {}
+    virtual SoundLink *GetSoundLink() { return 0; }
+    virtual void ReleaseLink(SoundLink *linkPtr) {}
+    virtual void ReleaseLinkAndKillSounds(SoundLink *linkPtr) {}
+
+    virtual void SetMixerLink(SoundLink *newLink) {}
+    virtual SoundLink *UpdateRightVector(Fixed *right) { return 0; }
+    virtual int ReadTime() { return 0; }
+    virtual void HouseKeep() {}
+
+    virtual void Dispose() {}
+    virtual void MixerDispose() {}
+    virtual void HushFlag(bool) {}
+    virtual bool Stereo() { return true; }
+    */
+private:
+    Fixed ear[3];
+
+};
 class TestPlayerManager : public CPlayerManager {
 public:
     TestPlayerManager(CAvaraGame* game) {
@@ -122,6 +165,7 @@ private:
 class TestGame : public CAvaraGame {
 public:
     virtual CNetManager* CreateNetManager() { return new TestNetManager(); }
+    virtual CSoundHub* CreateSoundHub() { TestSoundHub *t = new TestSoundHub(); t->ISoundHub(64,64); return t;}
 };
 
 TEST(FAIL, ShouldFail) {
@@ -149,7 +193,7 @@ TEST(FAIL, ShouldFail) {
     ASSERT_NE(game.actorList, nullptr);
     hector->GetSpeedEstimate(&speed[0]);
     cout << speed[1] << endl;
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 50; i++) {
         game.nextScheduledFrame = 0;
         game.itsNet->activePlayersDistribution = 1;
         cout << hector->location[1] << endl;

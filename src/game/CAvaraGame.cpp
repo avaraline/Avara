@@ -69,15 +69,14 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     Fixed theRate;
     short maxChan;
 
-    if (soundHub->itsMixer)
-        soundHub->itsMixer->Dispose();
+    soundHub->MixerDispose();
 
     aMixer = new CSoundMixer;
     aMixer->ISoundMixer(rate22khz, 32, 4, true, true, false);
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), frameTime);
     soundHub->AttachMixer(aMixer);
-    soundHub->muteFlag = silentFlag; //(soundOutputStyle < 0);
+    soundHub->MuteFlag(silentFlag); //(soundOutputStyle < 0);
 }
 
 void CAvaraGame::InitLocatorTable() {
@@ -127,8 +126,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     hudWorld = CreateCBSPWorld(16);
 
-    soundHub = new CSoundHub;
-    soundHub->ISoundHub(32, 32);
+    soundHub = CreateSoundHub();
     gHub = soundHub;
 
     InitMixer(true);
@@ -173,6 +171,12 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     // vg = AvaraVGContext();
     // font = nvgCreateFont(vg, "sans", BundlePath("fonts/Roboto-Regular.ttf"));
+}
+
+CSoundHub* CAvaraGame::CreateSoundHub() {
+    CSoundHubImpl *soundHub = new CSoundHubImpl;
+    soundHub->ISoundHub(32, 32);
+    return soundHub;
 }
 
 CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
@@ -871,7 +875,7 @@ bool CAvaraGame::GameTick() {
 }
 
 void CAvaraGame::StopGame() {
-    soundHub->itsMixer->hushFlag = true;
+    soundHub->HushFlag(true);
     SDL_SetRelativeMouseMode(SDL_FALSE);
     // SDL_CaptureMouse(SDL_FALSE);
     // SDL_ShowCursor(SDL_ENABLE);

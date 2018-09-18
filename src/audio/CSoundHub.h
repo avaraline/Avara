@@ -19,7 +19,43 @@ enum { hubBasic, hubRate, hubSoundKinds };
 class CSoundMixer;
 class CHuffProcessor;
 
-class CSoundHub : public CDirectObject {
+class CSoundHub {
+public:
+    virtual Fixed* EarLocation() = 0;
+    virtual Fixed DistanceToLevelOne() = 0;
+    virtual void MuteFlag(Boolean) = 0;
+    virtual void AttachMixer(CSoundMixer *aMixer) = 0;
+    //virtual void CreateSound(short kind) = 0;
+
+    virtual SampleHeaderHandle LoadSample(short resId) = 0;
+    virtual SampleHeaderHandle PreLoadSample(short resId) = 0;
+    virtual SampleHeaderHandle RequestSample(short resId) = 0;
+    virtual void FreeUnusedSamples() = 0;
+
+    virtual void FreeOldSamples() = 0;
+    virtual void FlagOldSamples() = 0;
+
+    virtual void Restock(CBasicSound *aSound) = 0;
+    //virtual CBasicSound *Aquire(short kind) = 0;
+    virtual CBasicSound *GetSoundSampler(short kind, short resId) = 0;
+
+    //virtual void CreateSoundLinks(short n) = 0;
+    //virtual void DisposeSoundLinks() = 0;
+    virtual SoundLink *GetSoundLink() = 0;
+    virtual void ReleaseLink(SoundLink *linkPtr) = 0;
+    virtual void ReleaseLinkAndKillSounds(SoundLink *linkPtr) = 0;
+
+    virtual void SetMixerLink(SoundLink *newLink) = 0;
+    virtual SoundLink *UpdateRightVector(Fixed *right) = 0;
+    virtual int ReadTime() = 0;
+    virtual void HouseKeep() = 0;
+
+    virtual void Dispose() = 0;
+    virtual void MixerDispose() = 0;
+    virtual void HushFlag(bool) = 0;
+    virtual bool Stereo() = 0;
+};
+class CSoundHubImpl : public CDirectObject, public CSoundHub {
 public:
     CHuffProcessor *itsCompressor;
     CSoundMixer *itsMixer;
@@ -57,7 +93,13 @@ public:
     virtual int ReadTime();
     virtual void HouseKeep();
 
+    virtual void MuteFlag(Boolean);
     virtual void Dispose();
+    virtual Fixed* EarLocation();
+    virtual Fixed DistanceToLevelOne();
+    virtual void MixerDispose();
+    virtual void HushFlag(bool);
+    virtual bool Stereo();
 };
 
 void UpdateSoundLink(SoundLink *theLink, Fixed *s, Fixed *v, unsigned int t);
