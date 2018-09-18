@@ -180,6 +180,7 @@ public:
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
+    virtual CSoundHub* CreateSoundHub();
     virtual CNetManager* CreateNetManager();
 
     virtual void InitLocatorTable();

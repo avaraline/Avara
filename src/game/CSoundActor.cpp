@@ -75,9 +75,6 @@ CAbstractActor *CSoundActor::EndScript() {
 }
 
 void CSoundActor::GetSound() {
-    CSoundMixer *theMixer;
-
-    theMixer = gHub->itsMixer;
     theSampler = (CRateSound *)gHub->GetSoundSampler(hubRate, soundId);
     theSampler->SetRate(rate);
 
@@ -88,7 +85,7 @@ void CSoundActor::GetSound() {
         theSampler->SetSoundLink(itsSoundLink);
         theSampler->SetVolume(volumes[0]);
     } else {
-        if (theMixer->stereo) {
+        if (gHub->Stereo()) {
             theSampler->SetDirectVolumes(volumes[0], volumes[1]);
             theSampler->currentCount[0].i -= phase;
             theSampler->currentCount[1].i += phase;

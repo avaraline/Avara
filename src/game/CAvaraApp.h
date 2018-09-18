@@ -91,6 +91,7 @@ public:
     virtual void SetNet(CNetManager*);
     virtual CNetManager* GetNet();
     virtual CAvaraGame* GetGame();
+    virtual void BroadcastCommand(int theCommand) { CApplication::BroadcastCommand(theCommand); }
     virtual json Get(const std::string name) { return CApplication::Get(name); }
     virtual void Set(const std::string name, const std::string value) { CApplication::Set(name, value); }
     virtual void Set(const std::string name, long value) { CApplication::Set(name, value); }
