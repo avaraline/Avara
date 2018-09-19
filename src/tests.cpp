@@ -10,6 +10,7 @@
 #include "FastMat.h"
 #include "Parser.h"
 #include "CSoundHub.h"
+#include "CGrenade.h"
 
 #include <iostream>
 using namespace std;
@@ -17,40 +18,6 @@ using namespace std;
 class TestSoundHub : public CSoundHubImpl {
 public:
     virtual Fixed* EarLocation() { return ear; }
-    /*
-    virtual Fixed DistanceToLevelOne() { return 0; }
-    virtual void MuteFlag(Boolean) {}
-    virtual void AttachMixer(CSoundMixer *aMixer) {}
-    //virtual void CreateSound(short kind) {}
-
-    virtual SampleHeaderHandle LoadSample(short resId) { return 0; }
-    virtual SampleHeaderHandle PreLoadSample(short resId) { return 0; }
-    virtual SampleHeaderHandle RequestSample(short resId) { return 0; }
-    virtual void FreeUnusedSamples() {}
-
-    virtual void FreeOldSamples() {}
-    virtual void FlagOldSamples() {}
-
-    virtual void Restock(CBasicSound *aSound) {}
-    //virtual CBasicSound *Aquire(short kind) {}
-    virtual CBasicSound *GetSoundSampler(short kind, short resId) { return 0; }
-
-    //virtual void CreateSoundLinks(short n) {}
-    //virtual void DisposeSoundLinks() {}
-    virtual SoundLink *GetSoundLink() { return 0; }
-    virtual void ReleaseLink(SoundLink *linkPtr) {}
-    virtual void ReleaseLinkAndKillSounds(SoundLink *linkPtr) {}
-
-    virtual void SetMixerLink(SoundLink *newLink) {}
-    virtual SoundLink *UpdateRightVector(Fixed *right) { return 0; }
-    virtual int ReadTime() { return 0; }
-    virtual void HouseKeep() {}
-
-    virtual void Dispose() {}
-    virtual void MixerDispose() {}
-    virtual void HushFlag(bool) {}
-    virtual bool Stereo() { return true; }
-    */
 private:
     Fixed ear[3];
 
@@ -60,6 +27,9 @@ public:
     TestPlayerManager(CAvaraGame* game) {
         itsGame = game;
         playa = 0;
+        this->ft = new FunctionTable();
+        FunctionTable &ft = *(this->ft);
+        ft.down = ft.up = ft.held = ft.mouseDelta.h = ft.mouseDelta.v = ft.buttonStatus = ft.msgChar = 0;
     }
     virtual CAbstractPlayer* GetPlayer() { return playa; }
     virtual void SetPlayer(CAbstractPlayer* p) { playa = p; }
@@ -67,7 +37,7 @@ public:
     virtual void AbortRequest() {}
     virtual Boolean IsLocalPlayer() { return true; }
     virtual void GameKeyPress(char c) {}
-    virtual FunctionTable *GetFunctions() { return new FunctionTable(); }
+    virtual FunctionTable *GetFunctions() { return ft; }
     virtual void DeadOrDone() {}
     virtual short Position() { return 0; }
     virtual Str255& PlayerName() { return str; }
@@ -120,6 +90,7 @@ public:
     virtual void ProtocolHandler(struct PacketInfo *thePacket) {}
     virtual void IncrementAskAgainTime(int) {}
 private:
+    FunctionTable *ft;
     CAvaraGame *itsGame;
     CAbstractPlayer *playa;
     std::deque<char> lineBuffer;
@@ -171,7 +142,8 @@ public:
 
 vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
     TestApp app;
-    TestGame game(frameTime);
+    TestGame *pgame = new TestGame(frameTime);
+    TestGame &game = *pgame;
     gCurrentGame = &game;
     InitParser();
     game.IAvaraGame(&app);
@@ -201,7 +173,70 @@ vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int fram
     return altitudes;
 }
 
-TEST(GRAVITY, HectorFalling) {
+vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+    TestApp app;
+    TestGame *pgame = new TestGame(frameTime);
+    TestGame &game = *pgame;
+    gCurrentGame = &game;
+    InitParser();
+    game.IAvaraGame(&app);
+    game.EndScript();
+    app.GetNet()->ChangeNet(kNullNet, "");
+    CWalkerActor *hector = new CWalkerActor();
+    hector->IAbstractActor();
+    hector->BeginScript();
+    hector->EndScript();
+    game.itsNet->playerTable[0]->SetPlayer(hector);
+    hector->itsManager = game.itsNet->playerTable[0];
+    hector->location[0] = hector->location[1] = hector->location[2] = 0;
+    hector->location[3] = FIX1;
+    game.AddActor(hector);
+    game.GameStart();
+    vector<VectorStruct> trajectory;
+    for (int i = 0; i < settleSteps; i++) {
+        game.nextScheduledFrame = 0;
+        game.itsNet->activePlayersDistribution = 1;
+        for (int k = 0; k < ticksPerStep; k++) {
+            game.GameTick();
+        }
+    }
+    game.nextScheduledFrame = 0;
+    game.itsNet->activePlayersDistribution = 1;
+    hector->itsManager->GetFunctions()->down = (1 << kfuLoadGrenade) | (1 << kfuFireWeapon);
+    for (int k = 0; k < ticksPerStep; k++) {
+        game.GameTick();
+        hector->itsManager->GetFunctions()->down = 0;
+    }
+    CGrenade *grenade = 0;
+    // hopefully there are two objects now. a hector and a grenade.
+    CAbstractActor *aa = game.actorList;
+    int count = 2;
+    for (count = 0; aa; aa = aa->nextActor, count++) {
+        if (aa != hector) {
+            grenade = (CGrenade*)aa;
+        }
+    }
+
+    for (int i = 0; i < steps && count == 2; i++) {
+        game.nextScheduledFrame = 0;
+        game.itsNet->activePlayersDistribution = 1;
+        trajectory.push_back(*(VectorStruct*)grenade->location);
+        for (int k = 0; k < ticksPerStep; k++) {
+            game.GameTick();
+        }
+        aa = game.actorList;
+        for (count = 0; aa; aa = aa->nextActor, count++) {
+            if (aa != hector) {
+                grenade = (CGrenade*)aa;
+            }
+        }
+    }
+
+    trajectory.push_back(*(VectorStruct*)grenade->location);
+    return trajectory;
+}
+
+TEST(HECTOR, Gravity) {
     vector<Fixed> at64ms = DropHector(50, 1, FIX(200), 64);
     vector<Fixed> at32ms = DropHector(50, 2, FIX(200), 32);
     vector<Fixed> at16ms = DropHector(50, 4, FIX(200), 16);
@@ -213,6 +248,28 @@ TEST(GRAVITY, HectorFalling) {
         double f16 = ToFloat(at32ms[i]);
         ASSERT_LT(abs(f64-f32)/f64, 0.01) << "not close enough after " << i << " ticks.";
         ASSERT_LT(abs(f64-f16)/f64, 0.01) << "not close enough after " << i << " ticks.";
+    }
+}
+
+double VecStructDist(const VectorStruct &one, const VectorStruct &two) {
+    double answer = 0;
+    double temp;
+    for (int i = 0; i < 3; i++) {
+        temp = ToFloat(one.theVec[i]) - ToFloat(two.theVec[i]);
+        answer += temp * temp;
+    }
+    return sqrt(answer);
+
+}
+
+TEST(GRENADE, Trajectory) {
+    vector<VectorStruct> at64ms = FireGrenade(20, 50, 1, 64);
+    vector<VectorStruct> at32ms = FireGrenade(20, 50, 2, 32);
+    vector<VectorStruct> at16ms = FireGrenade(20, 50, 4, 16);
+    ASSERT_EQ(at64ms.back().theVec[1], 59420) << "64ms simulation is wrong";
+    for (int i = 0; i < min(at32ms.size(), min(at64ms.size(), at16ms.size())); i++) {
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.1) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
 }
 
