@@ -17,8 +17,6 @@
 #include "CViewParameters.h"
 #include "KeyFuncs.h"
 
-#include <iostream>
-using namespace std;
 #define SCOUTPLATFORM FIX3(1500)
 #define MAXHEADHEIGHT FIX3(1750)
 #define MINHEADHEIGHT FIX3(900)

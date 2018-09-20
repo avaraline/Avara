@@ -17,8 +17,6 @@
 #include "Resource.h"
 
 #include <SDL2/SDL.h>
-#include <iostream>
-using namespace std;
 
 void CSoundHubImpl::CreateSound(short kind) {
     CBasicSound *aSound;

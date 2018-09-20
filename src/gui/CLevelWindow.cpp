@@ -44,7 +44,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     loadBtn->setCallback([this] { this->SendLoad(); });
 
     startBtn = new nanogui::Button(this, "Start Game");
-    startBtn->setCallback([app] { ((CCAvaraApp *)app)->GetGame()->SendStartCommand(); });
+    startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
 
     SelectSet(0);
 }
@@ -83,5 +83,5 @@ void CLevelWindow::SelectSet(int selected) {
 void CLevelWindow::SendLoad() {
     std::string set = levelSets[setBox->selectedIndex()];
     OSType tag = levelTags[levelBox->selectedIndex()];
-    ((CCAvaraApp *)gApplication)->GetNet()->SendLoadLevel(set, tag);
+    ((CAvaraAppImpl *)gApplication)->GetNet()->SendLoadLevel(set, tag);
 }

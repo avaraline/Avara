@@ -25,8 +25,8 @@ public:
     virtual void OverheadPoint(Fixed *pt) {};
 };
 
-class CCBSPWorld : public CBSPWorld {
-public:
+class CBSPWorldImpl : public CBSPWorld {
+private:
     short partCount;
     short partSpace;
     short visibleCount;
@@ -35,6 +35,7 @@ public:
     CBSPPart **visibleP; //	Used while rendering when visibleList is locked down.
 
     CViewParameters *currentView;
+public:
     virtual void AddPart(CBSPPart *thePart);
 
     virtual void IBSPWorld(short initialObjectSpace);

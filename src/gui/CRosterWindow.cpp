@@ -54,11 +54,10 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     playersLayer->setLayout(blayout);
     auto panel = playersLayer->add<Widget>();
     panel->setLayout(layout);
-    theNet = ((CCAvaraApp *)gApplication)->GetNet();
+    theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
-
         ColorComboBox *color = panel->add<ColorComboBox>(player_colors);
         //color->setFixedHeight(23);
         color->setSelectedIndex(theNet->teamColors[i]);
@@ -134,7 +133,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
 
 
 
-    currentLevel = ((CCAvaraApp *)gApplication)->GetGame()->loadedTag;
+    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedTag;
 
     UpdateRoster();
 }
@@ -142,10 +141,10 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
 CRosterWindow::~CRosterWindow() {}
 
 void CRosterWindow::UpdateRoster() {
-    CAvaraGame *theGame = ((CCAvaraApp *)gApplication)->GetGame();
+    CAvaraGame *theGame = ((CAvaraAppImpl *)gApplication)->GetGame();
     if (tabWidget->activeTab() == 0) {
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *thisPlayer = ((CCAvaraApp *)gApplication)->GetNet()->playerTable[i];
+            CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i];
 
             const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             short status = thisPlayer->LoadingStatus();
@@ -205,7 +204,7 @@ bool CRosterWindow::DoCommand(int theCommand) {
 std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
     std::string strStatus;
     if (winFrame >= 0) {
-        long timeTemp = FMulDiv(winFrame, ((CAvaraApp *)gApplication)->GetGame()->frameTime, 10);
+        long timeTemp = FMulDiv(winFrame, ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
         auto hundreds1 = timeTemp % 10;
         timeTemp /= 10;
         auto hundreds2 = timeTemp % 10;
@@ -258,8 +257,9 @@ bool CRosterWindow::mouseEnterEvent(const nanogui::Vector2i &p, bool enter) {
     return true;
 };
 
-void CRosterWindow::SendRosterMessage(int len, char* message) {
-    ((CCAvaraApp *)gApplication)->GetNet()->SendRosterMessage(len, message);
+
+void CRosterWindow::SendRosterMessage(int len, char *message) {
+    ((CAvaraAppImpl *)gApplication)->GetNet()->SendRosterMessage(len, message);
 }
 
 bool CRosterWindow::handleSDLEvent(SDL_Event &event) {

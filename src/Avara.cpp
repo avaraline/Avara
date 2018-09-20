@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
     OpenAvaraTCP();
 
     // The Avara application itself.
-    CAvaraApp *app = new CCAvaraApp();
+    CAvaraApp *app = new CAvaraAppImpl();
 
     mainloop(app->GetGame()->frameTime / 4);
 

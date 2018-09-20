@@ -50,11 +50,12 @@ public:
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
 };
-class CCAvaraApp : public CApplication, public CAvaraApp {
-public:
+class CAvaraAppImpl : public CApplication, public CAvaraApp {
+private:
     CAvaraGame *itsGame;
     CNetManager *gameNet;
 
+public:
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
@@ -63,8 +64,8 @@ public:
 
     std::deque<std::string> messageLines;
 
-    CCAvaraApp();
-    ~CCAvaraApp();
+    CAvaraAppImpl();
+    ~CAvaraAppImpl();
 
     virtual void idle() override;
     virtual void drawContents() override;
