@@ -49,8 +49,6 @@
 #include "CHUD.h"
 #include "Preferences.h"
 #include "Resource.h"
-#include <iostream>
-using namespace std;
 
 #define kHighShadeCount 12
 
@@ -182,7 +180,7 @@ CSoundHub* CAvaraGame::CreateSoundHub() {
 }
 
 CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
-    CCBSPWorld *w = new CCBSPWorld;
+    CBSPWorldImpl *w = new CBSPWorldImpl;
     w->IBSPWorld(initialObjectSpace);
     return w;
 }

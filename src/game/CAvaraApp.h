@@ -49,19 +49,20 @@ public:
     virtual void BroadcastCommand(int theCommand) = 0;
 
 };
-class CCAvaraApp : public CApplication, public CAvaraApp {
-public:
+class CAvaraAppImpl : public CApplication, public CAvaraApp {
+private:
     CAvaraGame *itsGame;
     CNetManager *gameNet;
 
+public:
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
 
-    CCAvaraApp();
-    ~CCAvaraApp();
+    CAvaraAppImpl();
+    ~CAvaraAppImpl();
 
     virtual void idle() override;
     virtual void drawContents() override;

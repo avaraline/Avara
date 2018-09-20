@@ -108,7 +108,7 @@ public:
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
-public:
+private:
     CAbstractPlayer *itsPlayer;
     CAvaraGame *itsGame;
     // CRosterWindow	*theRoster;
@@ -165,6 +165,7 @@ public:
 
     std::map<SDL_Scancode, uint32_t> keyMap;
 
+public:
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
 
     virtual void SetPlayer(CAbstractPlayer *thePlayer);

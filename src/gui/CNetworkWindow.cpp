@@ -56,7 +56,7 @@ CNetworkWindow::~CNetworkWindow() {}
 bool CNetworkWindow::DoCommand(int theCommand) {
     switch(theCommand) {
         case kNetChangedCmd:
-            CAvaraApp *app = (CCAvaraApp *)gApplication;
+            CAvaraApp *app = (CAvaraAppImpl *)gApplication;
             switch(app->GetNet()->netStatus) {
                 case kNullNet:
                     addressBox->setEnabled(true);
