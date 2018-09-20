@@ -173,6 +173,52 @@ vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int fram
     return altitudes;
 }
 
+vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+    TestApp app;
+    TestGame *pgame = new TestGame(frameTime);
+    TestGame &game = *pgame;
+    gCurrentGame = &game;
+    InitParser();
+    game.IAvaraGame(&app);
+    game.EndScript();
+    app.GetNet()->ChangeNet(kNullNet, "");
+    CWalkerActor *hector = new CWalkerActor();
+    hector->IAbstractActor();
+    hector->BeginScript();
+    hector->EndScript();
+    game.itsNet->playerTable[0]->SetPlayer(hector);
+    hector->itsManager = game.itsNet->playerTable[0];
+    hector->location[0] = hector->location[1] = hector->location[2] = 0;
+    hector->location[3] = FIX1;
+    game.AddActor(hector);
+    game.GameStart();
+    vector<VectorStruct> location;
+    for (int i = 0; i < settleSteps; i++) {
+        game.nextScheduledFrame = 0;
+        game.itsNet->activePlayersDistribution = 1;
+        for (int k = 0; k < ticksPerStep; k++) {
+            game.GameTick();
+        }
+    }
+    game.nextScheduledFrame = 0;
+    game.itsNet->activePlayersDistribution = 1;
+    hector->itsManager->GetFunctions()->held = (1 << kfuForward);
+    game.GameTick();
+
+    for (int i = 0; i < steps; i++) {
+        game.nextScheduledFrame = 0;
+        game.itsNet->activePlayersDistribution = 1;
+        location.push_back(*(VectorStruct*)hector->location);
+        for (int k = 0; k < ticksPerStep; k++) {
+            hector->itsManager->GetFunctions()->held = (1 << kfuForward);
+            game.GameTick();
+        }
+    }
+    location.push_back(*(VectorStruct*)hector->location);
+
+    return location;
+}
+
 vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, int frameTime) {
     TestApp app;
     TestGame *pgame = new TestGame(frameTime);
@@ -245,8 +291,8 @@ TEST(HECTOR, Gravity) {
         double f64 = ToFloat(at64ms[i]);
         double f32 = ToFloat(at32ms[i]);
         double f16 = ToFloat(at32ms[i]);
-        ASSERT_LT(abs(f64-f32)/f64, 0.01) << "not close enough after " << i << " ticks.";
-        ASSERT_LT(abs(f64-f16)/f64, 0.01) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(abs(f64-f32)/f64, 0.18) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(abs(f64-f16)/f64, 0.18) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -259,6 +305,22 @@ double VecStructDist(const VectorStruct &one, const VectorStruct &two) {
     }
     return sqrt(answer);
 
+}
+
+TEST(HECTOR, WalkForwardSpeed) {
+    vector<VectorStruct> at64ms = WalkHector(20, 50, 1, 64);
+    vector<VectorStruct> at32ms = WalkHector(20, 50, 2, 32);
+    vector<VectorStruct> at16ms = WalkHector(20, 50, 4, 16);
+    ASSERT_EQ(at64ms.back().theVec[0], 0) << "64ms simulation walked wrong amount";
+    ASSERT_EQ(at64ms.back().theVec[1], -11284) << "64ms simulation walked wrong amount";
+    ASSERT_EQ(at64ms.back().theVec[2], 1584235) << "64ms simulation walked wrong amount";
+    ASSERT_EQ(at64ms.size(), at32ms.size()) << "DropHector didn't do ticks right";
+    for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
+        EXPECT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.8) << "not close enough after " << i << " ticks.";
+    }
+    for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
+        EXPECT_LT(VecStructDist(at64ms[i], at16ms[i]), 1.1) << "not close enough after " << i << " ticks.";
+    }
 }
 
 TEST(GRENADE, Trajectory) {
