@@ -589,7 +589,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (!isInLimbo) {
             modAccel = FDivNZ(baseMass, GetTotalMass());
             modAccel = FMul(modAccel, modAccel);
-            modAccel = FMul(maxAcceleration, modAccel); //	FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
+            modAccel = FMul(maxAcceleration*double(itsGame->frameTime)/CLASSICFRAMETIME, modAccel); //	FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
             motionFlags = 0;
 
             if (TESTFUNC(kfuForward, ft->held))
@@ -803,7 +803,7 @@ void CAbstractPlayer::TractionControl() {
 void CAbstractPlayer::MotionControl() {
     Fixed avrgHeading;
     Fixed motorDir[2];
-    Fixed fric = FIX3(10); // FIX3(30);
+    Fixed fric = FIX((1 - pow(1 - 0.01, double(itsGame->frameTime)/CLASSICFRAMETIME)));// FIX3(10); // FIX3(30);
     Fixed slowDown;
     Fixed absVert;
     Fixed slide[2];
