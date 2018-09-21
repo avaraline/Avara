@@ -239,7 +239,7 @@ void CAvaraApp::MessageLine(short index, short align) {
             AddMessageLine("Aborted.");
             break;
         case kmWin:
-            AddMessageLine("You were victorious!");
+            AddMessageLine("Mission complete.");
             break;
         case kmGameOver:
             AddMessageLine("Game over.");

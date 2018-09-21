@@ -102,19 +102,30 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     levelDescription->setFixedWidth(450);
 
     Widget *scoreLayer = tabWidget->createTab("Scores");
-    scoreLayer->setLayout(new GridLayout(Orientation::Horizontal, 6, Alignment::Middle, 0, 0));
+    scoreLayer->setLayout(new GridLayout(Orientation::Horizontal, 6, Alignment::Minimum, 0, 0));
 
-    scoreLayer->add<Text>("Team", false, SCORE_FONT_SIZE);
-    scoreLayer->add<Text>("Name", false, SCORE_FONT_SIZE);
-    scoreLayer->add<Text>("XP", false, SCORE_FONT_SIZE);
-    scoreLayer->add<Text>("Score", false, SCORE_FONT_SIZE);
-    scoreLayer->add<Text>("Kills", false, SCORE_FONT_SIZE);
-    scoreLayer->add<Text>("Lives", false, SCORE_FONT_SIZE);
+    std::vector<std::string> headings = {
+        "Team",
+        "Name",
+        "XP",
+        "Score",
+        "Kills",
+        "Lives"
+    };
+
+    for(const auto &heading : headings) {
+        auto t = scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
+    }
+
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         scoreTeams.push_back(scoreLayer->add<Text>("", false, SCORE_FONT_SIZE));
-        scoreNames.push_back(scoreLayer->add<Text>("", false, SCORE_FONT_SIZE));
+        auto nameText = scoreLayer->add<Text>("", false, SCORE_FONT_SIZE);
+        nameText->setFixedWidth(150);
+        scoreNames.push_back(nameText);
         scoreExitRanks.push_back(scoreLayer->add<Text>("", false, SCORE_FONT_SIZE));
-        scoreScores.push_back(scoreLayer->add<Text>("", false, SCORE_FONT_SIZE));
+        auto scoreText = scoreLayer->add<Text>("", false, SCORE_FONT_SIZE);
+        scoreText->setFixedWidth(75);
+        scoreScores.push_back(scoreText);
         scoreKills.push_back(scoreLayer->add<Text>("", false, SCORE_FONT_SIZE));
         scoreLives.push_back(scoreLayer->add<Text>("", false, SCORE_FONT_SIZE));
     }
@@ -167,13 +178,22 @@ void CRosterWindow::UpdateRoster() {
             CPlayerManager *thisPlayer = theNet->playerTable[i];
             const std::string theName((char *)thisPlayer->playerName + 1, thisPlayer->playerName[0]);
             AvaraScoreRecord theScores = theGame->scoreKeeper->netScores;
-
-            scoreTeams[i]->setValue(std::to_string(theNet->teamColors[i]));
-            scoreNames[i]->setValue(theName.c_str());
-            scoreExitRanks[i]->setValue(std::to_string(theScores.player[i].exitRank));
-            scoreScores[i]->setValue(std::to_string(theScores.player[i].points));
-            scoreKills[i]->setValue(std::to_string(theScores.player[i].kills));
-            scoreLives[i]->setValue(std::to_string(theScores.player[i].lives));
+            if(theName.size() > 0) {
+                scoreTeams[i]->setValue(std::to_string(theNet->teamColors[i]));
+                scoreNames[i]->setValue(theName.c_str());
+                scoreExitRanks[i]->setValue(std::to_string(theScores.player[i].exitRank));
+                scoreScores[i]->setValue(std::to_string(theScores.player[i].points));
+                scoreKills[i]->setValue(std::to_string(theScores.player[i].kills));
+                scoreLives[i]->setValue(std::to_string(theScores.player[i].lives));
+            }
+            else {
+                scoreTeams[i]->setValue("");
+                scoreNames[i]->setValue("");
+                scoreExitRanks[i]->setValue("");
+                scoreScores[i]->setValue("");
+                scoreKills[i]->setValue("");
+                scoreLives[i]->setValue("");
+            }
         }
     }
 }
