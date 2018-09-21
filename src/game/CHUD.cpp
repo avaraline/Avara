@@ -20,6 +20,11 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
+    nvgBeginPath(ctx);
+    nvgRect(ctx, 0, bufferHeight - 80, bufferWidth, 80);
+    nvgFillColor(ctx, nvgRGBA(30, 30, 30, 180));
+    nvgFill(ctx);
+
     float fontsz_m = 15.0, fontsz_s = 10.0;
     nvgFontFace(ctx, "mono");
     
@@ -84,15 +89,15 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     int i, j;
     float g1X = (bufferWidth / 2.0) - 60.0;
-    float gY = bufferHeight - 50.0;
+    float gY = bufferHeight - 60.0;
     float g2X1 = (bufferWidth / 2.0) + 15.0;
-    float g2Y1 = bufferHeight - 50.0;
+    float g2Y1 = bufferHeight - 60.0;
     float g2X2 = (bufferWidth / 2.0) + 15.0 + 22.5;
-    float g2Y2 = bufferHeight - 50.0 + 7.5;
+    float g2Y2 = bufferHeight - 60.0 + 7.5;
     float g2X3 = (bufferWidth / 2.0) + 15.0 + 15.0;
-    float g2Y3 = bufferHeight - 50.0 + 30.0;
+    float g2Y3 = bufferHeight - 60.0 + 30.0;
     float g2X4 = (bufferWidth / 2.0) + 15.0 - 7.5;
-    float g2Y4 = bufferHeight - 50.0 + 22.5;
+    float g2Y4 = bufferHeight - 60.0 + 22.5;
     char scoreText[20];
     char timeText[9];
     float full = 30.0;
@@ -189,7 +194,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     NVGcolor g1c[] = {
         nvgRGBA(0, 143, 0, 255), nvgRGBA(163, 54, 0, 255), nvgRGBA(255, 54, 0, 255), nvgRGBA(0, 61, 165, 255)};
     NVGcolor g2c[] = {
-        nvgRGBA(0, 0, 102, 255), nvgRGBA(0, 0, 153, 255), nvgRGBA(0, 0, 204, 255), nvgRGBA(0, 0, 255, 255)};
+        nvgRGBA(30, 30, 102, 255), nvgRGBA(30, 30, 153, 255), nvgRGBA(30, 30, 204, 255), nvgRGBA(30, 30, 255, 255)};
     for (i = 0; i < 4; i++) { // referred to as GrafPanel in original Avara
         nvgBeginPath(ctx);
         nvgMoveTo(ctx, g1[i][0][0], g1[i][0][1]);
