@@ -19,6 +19,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <deque>
 
 class CAvaraGame;
 class CNetManager;
@@ -47,13 +48,14 @@ public:
     virtual CAvaraGame* GetGame() = 0;
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
+    virtual std::deque<std::string>& MessageLines() = 0;
 
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     CAvaraGame *itsGame;
     CNetManager *gameNet;
-
+    std::deque<std::string> messageLines;
 public:
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
@@ -64,6 +66,7 @@ public:
     CAvaraAppImpl();
     ~CAvaraAppImpl();
 
+    virtual std::deque<std::string>& MessageLines();
     virtual void idle() override;
     virtual void drawContents() override;
 
@@ -78,6 +81,7 @@ public:
     OSErr LoadLevel(std::string set, OSType theLevel);
     void NotifyUser();
 
+    virtual void AddMessageLine(const char* line);
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
     virtual void NumberLine(long theNum, short align);

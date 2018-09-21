@@ -4,6 +4,8 @@
 #include "CNetManager.h"
 
 #include <nanogui/common.h>
+#include <nanogui/text.h>
+#include <nanogui/label.h>
 
 class CRosterWindow : public CWindow {
 public:
@@ -17,6 +19,10 @@ public:
     bool mouseEnterEvent(const nanogui::Vector2i &p, bool enter) override;
     bool handleSDLEvent(SDL_Event &event);
     void SendRosterMessage(int length, char *message);
+
+    nanogui::Text *levelLoaded;
+    nanogui::Text *levelDesigner;
+    nanogui::Label *levelDescription;
 
 private:
     CNetManager *theNet;
