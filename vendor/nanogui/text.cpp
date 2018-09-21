@@ -135,7 +135,7 @@ void Text::draw(NVGcontext* ctx) {
     nvgFontFace(ctx, mFont.c_str());
     Vector2i drawPos(mPos.x, mPos.y + mSize.y * 0.5f + 1);
 
-    float xSpacing = mSize.y * 0.3f;
+    float xSpacing = mSize.y * 0.3f * 0;
 
     float unitWidth = 0;
 

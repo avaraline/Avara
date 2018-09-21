@@ -13,20 +13,36 @@ const int CHAT_CHARS = 36;
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
 
-    if (!player)
-        return;
+
+    
 
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
+    float fontsz_m = 15.0, fontsz_s = 10.0;
+    nvgFontFace(ctx, "mono");
+    
+    float mY = (bufferHeight - 72);
+    for (auto i : itsGame->itsApp->messageLines) {
+
+        nvgBeginPath(ctx);
+        nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+        nvgFontSize(ctx, fontsz_m);
+        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+        nvgText(ctx, 20, mY, i.c_str(), NULL);
+        mY += 11;
+    }
+    
+
+    if (!player)
+        return;
     CAbstractPlayer *eachPlayer = itsGame->playerList;
 
     int p = 0;
     float pY;
     long longTeamColor;
     int colorR, colorG, colorB;
-    float fontsz_m = 15.0, fontsz_s = 10.0;
     while (eachPlayer) {
 
         if (p >= 6)
@@ -45,8 +61,6 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
             nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
             nvgFill(ctx);
-
-            nvgFontFace(ctx, "mono");
 
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
             nvgFontSize(ctx, fontsz_m);

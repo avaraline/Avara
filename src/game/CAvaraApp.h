@@ -19,6 +19,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <deque>
 
 class CAvaraApp : public CApplication {
 public:
@@ -30,6 +31,8 @@ public:
     CNetworkWindow *networkWindow;
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
+
+    std::deque<std::string> messageLines;
 
     CAvaraApp();
     ~CAvaraApp();
@@ -48,6 +51,7 @@ public:
     OSErr LoadLevel(std::string set, OSType theLevel);
     void NotifyUser();
 
+    virtual void AddMessageLine(const char* line);
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
     virtual void NumberLine(long theNum, short align);

@@ -8,7 +8,6 @@
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
-#include <nanogui/text.h>
 #include <numeric>
 #include <sstream>
 using namespace nanogui;
@@ -19,8 +18,9 @@ std::vector<long> player_colors =
 std::vector<Text *> statuses;
 std::vector<Text *> chats;
 std::vector<ColorComboBox *> colors;
+OSType currentLevel;
 
-const int CHAT_CHARS = 55;
+const int CHAT_CHARS = 57;
 const int ROSTER_FONT_SIZE = 15;
 bool textInputStarted = false;
 char backspace[1] = {'\b'};
@@ -30,14 +30,19 @@ char bellline[1] = {7};
 char checkline[1] = {6};
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
+    setFixedWidth(470);
+    BoxLayout *blayout = new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 0);
     AdvancedGridLayout *layout = new AdvancedGridLayout();
-    setLayout(layout);
+    setLayout(blayout);
+    auto panel = add<Widget>();
+    panel->setLayout(layout);
     theNet = ((CAvaraApp *)gApplication)->gameNet;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
 
-        ColorComboBox *color = new ColorComboBox(this, player_colors);
+        ColorComboBox *color = new ColorComboBox(panel, player_colors);
+        //color->setFixedHeight(23);
         color->setSelectedIndex(((CAvaraApp *)gApplication)->gameNet->teamColors[i]);
         color->setCallback([this, color, i](int selectedIdx) {
             theNet->teamColors[i] = selectedIdx;
@@ -45,12 +50,12 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         });
         color->popup()->setSize(nanogui::Vector2i(50, 230));
         layout->setAnchor(color, AdvancedGridLayout::Anchor(0, i * 2));
-        Text *status = new Text(this, "", false, ROSTER_FONT_SIZE + 2);
+        Text *status = new Text(panel, "", false, ROSTER_FONT_SIZE + 2);
         layout->setAnchor(status, AdvancedGridLayout::Anchor(1, i * 2));
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
 
-        nanogui::Text *chat = new nanogui::Text(this, "", true, ROSTER_FONT_SIZE);
+        nanogui::Text *chat = new nanogui::Text(panel, "", false, ROSTER_FONT_SIZE);
         layout->setAnchor(chat, AdvancedGridLayout::Anchor(0, i * 2 + 1, 2, 1));
 
         status->setAlignment(Text::Alignment::Right);
@@ -60,13 +65,25 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
 
         status->setFixedWidth(120);
         chat->setFixedWidth(550);
+        chat->setFixedHeight(30);
         color->setFixedWidth(225);
-        color->setFixedHeight(22);
 
         statuses.push_back(status);
         chats.push_back(chat);
         colors.push_back(color);
     }
+
+    levelLoaded = new Text(this, "", false, 16);
+    levelDesigner = new Text(this, "", false, 16);
+    levelDescription = new Label(this, "No level loaded");
+
+    levelLoaded->setAlignment(Text::Alignment::Left);
+    levelDesigner->setAlignment(Text::Alignment::Left);
+    //levelDescription->setAlignment(Text::Alignment::Left);
+    levelDescription->setFixedHeight(100);
+    levelDescription->setFixedWidth(450);
+
+    currentLevel = ((CAvaraApp *)gApplication)->itsGame->loadedTag;
 
     UpdateRoster();
 }
@@ -88,6 +105,19 @@ void CRosterWindow::UpdateRoster() {
         chats[i]->setValue(theChat.c_str());
         colors[i]->setSelectedIndex(theNet->teamColors[i]);
         colors[i]->setCaption(theName.c_str());
+    }
+
+
+    CAvaraGame *theGame = ((CAvaraApp *)gApplication)->itsGame;
+    if (theGame->loadedTag != currentLevel) {
+        std::string theLevel((char* ) theGame->loadedLevel + 1, theGame->loadedLevel[0]);
+        std::string theDesigner((char *)theGame->loadedDesigner + 1, theGame->loadedDesigner[0]);
+        levelLoaded->setValue(theLevel);
+        levelDesigner->setValue(theDesigner);
+
+        std::string desc((char *)theGame->loadedInfo + 1, theGame->loadedInfo[0]);
+        if (desc.length() > 0) levelDescription->setCaption(desc);
+        currentLevel = theGame->loadedTag;
     }
 }
 
