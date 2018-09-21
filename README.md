@@ -29,3 +29,4 @@ problem building, feel free to submit an issue, or ideally a pull request!
 ## Media
 
 * [YouTube: The first successful 3-player network test game of our Avara port](https://www.youtube.com/watch?v=aOW6lSC0kQI)
+* [YouTube: Testing Grimoire (and UI preview)](https://www.youtube.com/watch?v=OX4I18PXXOI&)
