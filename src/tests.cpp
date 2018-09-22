@@ -142,145 +142,137 @@ public:
     virtual CSoundHub* CreateSoundHub() { TestSoundHub *t = new TestSoundHub(); t->ISoundHub(64,64); return t;}
 };
 
-vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
+class HectorTestScenario {
+public:
     TestApp app;
-    TestGame *pgame = new TestGame(frameTime);
-    TestGame &game = *pgame;
-    gCurrentGame = &game;
-    InitParser();
-    game.IAvaraGame(&app);
-    game.EndScript();
-    app.GetNet()->ChangeNet(kNullNet, "");
-    CWalkerActor *hector = new CWalkerActor();
-    hector->IAbstractActor();
-    hector->BeginScript();
-    hector->EndScript();
-    game.itsNet->playerTable[0]->SetPlayer(hector);
-    hector->itsManager = game.itsNet->playerTable[0];
-    hector->location[0] = hector->location[2] = 0;
-    hector->location[1] = fromHeight;
-    hector->location[3] = FIX1;
-    game.AddActor(hector);
-    game.GameStart();
+    TestGame *game;
+    CWalkerActor *hector;
+
+    HectorTestScenario(int frameTime, Fixed hectorX, Fixed hectorY, Fixed hectorZ) {
+        game = new TestGame(frameTime);
+        gCurrentGame = game;
+        InitParser();
+        game->IAvaraGame(&app);
+        game->EndScript();
+        app.GetNet()->ChangeNet(kNullNet, "");
+        hector = new CWalkerActor();
+        hector->IAbstractActor();
+        hector->BeginScript();
+        hector->EndScript();
+        game->itsNet->playerTable[0]->SetPlayer(hector);
+        hector->itsManager = game->itsNet->playerTable[0];
+        hector->location[0] = hectorX;
+        hector->location[1] = hectorY;
+        hector->location[2] = hectorZ;
+        hector->location[3] = FIX1;
+        game->AddActor(hector);
+        game->GameStart();
+    }
+};
+
+vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
+    HectorTestScenario scenario(frameTime, 0, fromHeight, 0);
     vector<Fixed> altitudes;
     for (int i = 0; i < steps; i++) {
-        game.nextScheduledFrame = 0;
-        game.itsNet->activePlayersDistribution = 1;
-        altitudes.push_back(hector->location[1]);
+        scenario.game->nextScheduledFrame = 0;
+        scenario.game->itsNet->activePlayersDistribution = 1;
+        altitudes.push_back(scenario.hector->location[1]);
         for (int k = 0; k < ticksPerStep; k++) {
-            game.GameTick();
+            scenario.game->GameTick();
         }
     }
-    altitudes.push_back(hector->location[1]);
+    altitudes.push_back(scenario.hector->location[1]);
     return altitudes;
 }
 
 vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
-    TestApp app;
-    TestGame *pgame = new TestGame(frameTime);
-    TestGame &game = *pgame;
-    gCurrentGame = &game;
-    InitParser();
-    game.IAvaraGame(&app);
-    game.EndScript();
-    app.GetNet()->ChangeNet(kNullNet, "");
-    CWalkerActor *hector = new CWalkerActor();
-    hector->IAbstractActor();
-    hector->BeginScript();
-    hector->EndScript();
-    game.itsNet->playerTable[0]->SetPlayer(hector);
-    hector->itsManager = game.itsNet->playerTable[0];
-    hector->location[0] = hector->location[1] = hector->location[2] = 0;
-    hector->location[3] = FIX1;
-    game.AddActor(hector);
-    game.GameStart();
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<VectorStruct> location;
     for (int i = 0; i < settleSteps; i++) {
-        game.nextScheduledFrame = 0;
-        game.itsNet->activePlayersDistribution = 1;
+        scenario.game->nextScheduledFrame = 0;
+        scenario.game->itsNet->activePlayersDistribution = 1;
         for (int k = 0; k < ticksPerStep; k++) {
-            game.GameTick();
+            scenario.game->GameTick();
         }
     }
-    game.nextScheduledFrame = 0;
-    game.itsNet->activePlayersDistribution = 1;
-    hector->itsManager->GetFunctions()->held = (1 << kfuForward);
-    game.GameTick();
+    scenario.game->nextScheduledFrame = 0;
+    scenario.game->itsNet->activePlayersDistribution = 1;
+    scenario.hector->itsManager->GetFunctions()->held = (1 << kfuForward);
+    scenario.game->GameTick();
 
     for (int i = 0; i < steps; i++) {
-        game.nextScheduledFrame = 0;
-        game.itsNet->activePlayersDistribution = 1;
-        location.push_back(*(VectorStruct*)hector->location);
+        scenario.game->nextScheduledFrame = 0;
+        scenario.game->itsNet->activePlayersDistribution = 1;
+        location.push_back(*(VectorStruct*)scenario.hector->location);
         for (int k = 0; k < ticksPerStep; k++) {
-            hector->itsManager->GetFunctions()->held = (1 << kfuForward);
-            game.GameTick();
+            scenario.hector->itsManager->GetFunctions()->held = (1 << kfuForward);
+            scenario.game->GameTick();
         }
     }
-    location.push_back(*(VectorStruct*)hector->location);
+    location.push_back(*(VectorStruct*)scenario.hector->location);
 
     return location;
 }
 
 vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, int frameTime) {
-    TestApp app;
-    TestGame *pgame = new TestGame(frameTime);
-    TestGame &game = *pgame;
-    gCurrentGame = &game;
-    InitParser();
-    game.IAvaraGame(&app);
-    game.EndScript();
-    app.GetNet()->ChangeNet(kNullNet, "");
-    CWalkerActor *hector = new CWalkerActor();
-    hector->IAbstractActor();
-    hector->BeginScript();
-    hector->EndScript();
-    game.itsNet->playerTable[0]->SetPlayer(hector);
-    hector->itsManager = game.itsNet->playerTable[0];
-    hector->location[0] = hector->location[1] = hector->location[2] = 0;
-    hector->location[3] = FIX1;
-    game.AddActor(hector);
-    game.GameStart();
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<VectorStruct> trajectory;
     for (int i = 0; i < settleSteps; i++) {
-        game.nextScheduledFrame = 0;
-        game.itsNet->activePlayersDistribution = 1;
+        scenario.game->nextScheduledFrame = 0;
+        scenario.game->itsNet->activePlayersDistribution = 1;
         for (int k = 0; k < ticksPerStep; k++) {
-            game.GameTick();
+            scenario.game->GameTick();
         }
     }
-    game.nextScheduledFrame = 0;
-    game.itsNet->activePlayersDistribution = 1;
-    hector->itsManager->GetFunctions()->down = (1 << kfuLoadGrenade) | (1 << kfuFireWeapon);
-    game.GameTick();
-    hector->itsManager->GetFunctions()->down = 0;
+    scenario.game->nextScheduledFrame = 0;
+    scenario.game->itsNet->activePlayersDistribution = 1;
+    scenario.hector->itsManager->GetFunctions()->down = (1 << kfuLoadGrenade) | (1 << kfuFireWeapon);
+    scenario.game->GameTick();
+    scenario.hector->itsManager->GetFunctions()->down = 0;
     CGrenade *grenade = 0;
     // hopefully there are two objects now. a hector and a grenade.
-    CAbstractActor *aa = game.actorList;
+    CAbstractActor *aa = scenario.game->actorList;
     int count = 2;
     for (count = 0; aa; aa = aa->nextActor, count++) {
-        if (aa != hector) {
+        if (aa != scenario.hector) {
             grenade = (CGrenade*)aa;
         }
     }
 
     for (int i = 0; i < steps && count == 2; i++) {
-        game.nextScheduledFrame = 0;
-        game.itsNet->activePlayersDistribution = 1;
+        scenario.game->nextScheduledFrame = 0;
+        scenario.game->itsNet->activePlayersDistribution = 1;
         trajectory.push_back(*(VectorStruct*)grenade->location);
         for (int k = 0; k < ticksPerStep; k++) {
-            game.GameTick();
+            scenario.game->GameTick();
         }
         // this intends to figure out whether the grenade has exploded.
         grenade = 0;
-        aa = game.actorList;
+        aa = scenario.game->actorList;
         for (count = 0; aa; aa = aa->nextActor, count++) {
-            if (aa != hector) {
+            if (aa != scenario.hector) {
                 grenade = (CGrenade*)aa;
             }
         }
     }
 
     return trajectory;
+}
+
+vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
+    vector<Fixed> headings;
+    for (int i = 0; i < steps; i++) {
+        scenario.game->nextScheduledFrame = 0;
+        scenario.game->itsNet->activePlayersDistribution = 1;
+        headings.push_back(scenario.hector->heading);
+        for (int k = 0; k < ticksPerStep; k++) {
+            scenario.hector->itsManager->GetFunctions()->held = (1 << kfuRight);
+            scenario.game->GameTick();
+        }
+    }
+    headings.push_back(scenario.hector->heading);
+    return headings;
 }
 
 TEST(HECTOR, Gravity) {
@@ -309,6 +301,20 @@ double VecStructDist(const VectorStruct &one, const VectorStruct &two) {
 
 }
 
+TEST(HECTOR, TurnSpeed) {
+    vector<Fixed> at64ms = TurnHector(50, 1, 64);
+    vector<Fixed> at32ms = TurnHector(50, 2, 32);
+    vector<Fixed> at16ms = TurnHector(50, 4, 16);
+    ASSERT_EQ(at64ms.back(), -30592) << "64ms simulation turned wrong amount";
+    ASSERT_EQ(at64ms.size(), at32ms.size()) << "TurnHector didn't do ticks right";
+    for (int i = 0; i < at64ms.size(); i++) {
+        EXPECT_LT(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 0) << "not close enough after " << i << " ticks.";
+    }
+    for (int i = 0; i < at64ms.size(); i++) {
+        EXPECT_LT(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 0) << "not close enough after " << i << " ticks.";
+    }
+}
+
 TEST(HECTOR, WalkForwardSpeed) {
     vector<VectorStruct> at64ms = WalkHector(20, 50, 1, 64);
     vector<VectorStruct> at32ms = WalkHector(20, 50, 2, 32);
@@ -318,10 +324,10 @@ TEST(HECTOR, WalkForwardSpeed) {
     ASSERT_EQ(at64ms.back().theVec[2], 1584235) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
-        EXPECT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.8) << "not close enough after " << i << " ticks.";
+        EXPECT_LT(VecStructDist(at64ms[i], at32ms[i]), 0) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
-        EXPECT_LT(VecStructDist(at64ms[i], at16ms[i]), 1.1) << "not close enough after " << i << " ticks.";
+        EXPECT_LT(VecStructDist(at64ms[i], at16ms[i]), 0) << "not close enough after " << i << " ticks.";
     }
 }
 
