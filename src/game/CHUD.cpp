@@ -105,10 +105,10 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     float w_pow = 15.0;
     int secs, mins;
     long timeTemp = itsGame->timeInSeconds;
-    float energy = ((float)player->energy / (float)player->maxEnergy) * full;
-    float pow_l = ((float)player->gunEnergy[0] / (float)player->fullGunEnergy) * half;
-    float pow_r = ((float)player->gunEnergy[1] / (float)player->fullGunEnergy) * half;
-    float shields = ((float)player->shields / (float)player->maxShields) * full;
+    float energy = sqrt((float)player->energy / (float)player->maxEnergy) * full;
+    float pow_l = ((float)player->gunEnergy[1] / (float)player->fullGunEnergy) * half;
+    float pow_r = ((float)player->gunEnergy[0] / (float)player->fullGunEnergy) * half;
+    float shields = sqrt((float)player->shields / (float)player->maxShields) * full;
     float g2s = 3.75;
     float g1[4][4][2] = {{{g1X, gY}, {g1X, gY + energy}, {g1X + energy, gY + energy}, {g1X, gY}},
         {{g1X + half, gY + half},

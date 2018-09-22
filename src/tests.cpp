@@ -129,8 +129,10 @@ public:
     virtual CAvaraGame* GetGame() { return 0; }
     virtual void Done() {}
     virtual void BroadcastCommand(int) {}
+    virtual std::deque<std::string>& MessageLines() { return msgLines; }
 private:
     CNetManager *itsNet;
+    std::deque<std::string> msgLines;
 };
 
 class TestGame : public CAvaraGame {

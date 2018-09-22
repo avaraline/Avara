@@ -27,6 +27,7 @@
 //#include "CTracker.h"
 #include "Preferences.h"
 #include "System.h"
+#include "Beeper.h"
 
 #include <string.h>
 
@@ -1066,7 +1067,7 @@ void CNetManager::ChangedServerOptions(short curOptions) {
 void CNetManager::NewArrival(short slot) {
     CPlayerManager *thePlayer = playerTable[slot];
     std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
-    SDL_Log("%s has joined!!\n", name.c_str());
+    itsGame->itsApp->NotifyUser();
 }
 
 void CNetManager::ResultsReport(Ptr results) {
@@ -1074,6 +1075,7 @@ void CNetManager::ResultsReport(Ptr results) {
 }
 
 void CNetManager::Beep() {
+    Beep();
     /*
     if(gAsyncBeeper)
     {	Str255		bellSoundName;

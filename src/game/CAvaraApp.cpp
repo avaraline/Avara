@@ -30,6 +30,7 @@
 #include "Resource.h"
 #include "System.h"
 #include "InfoMessages.h"
+#include "Beeper.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -204,6 +205,8 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
 
 void CAvaraAppImpl::NotifyUser() {
     // TODO: Bell sound(s)
+    SDL_Log("BEEP!!!\n");
+    Beep();
 }
 
 CAvaraGame* CAvaraAppImpl::GetGame() {
