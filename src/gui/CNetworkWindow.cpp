@@ -14,7 +14,7 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
 
     connectBtn = new nanogui::Button(this, "Connect");
     connectBtn->setCallback([this, app] {
-        CAvaraApp *avara = (CAvaraApp *)app;
+        CAvaraAppImpl *avara = (CAvaraAppImpl *)app;
         if(avara->GetNet()->netStatus == kClientNet)
             avara->GetNet()->ChangeNet(kNullNet, "");
         else
@@ -23,7 +23,7 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
 
     startBtn = new nanogui::Button(this, "Start Hosting");
     startBtn->setCallback([app] {
-        CAvaraApp *avara = (CAvaraApp *)app;
+        CAvaraAppImpl *avara = (CAvaraAppImpl *)app;
         if(avara->GetNet()->netStatus == kServerNet)
             avara->GetNet()->ChangeNet(kNullNet, "");
         else
@@ -45,7 +45,7 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
         else
             options &= ~(long)(1 << kUseAutoLatencyBit);
         app->Set(kServerOptionsTag, options);
-        ((CAvaraApp *)app)->GetNet()->ChangedServerOptions(options);
+        ((CAvaraAppImpl *)app)->GetNet()->ChangedServerOptions(options);
     });
     bool autoLatency = app->Number(kServerOptionsTag) & (1 << kUseAutoLatencyBit);
     autoLatencyBox->setChecked(autoLatency);
@@ -56,7 +56,7 @@ CNetworkWindow::~CNetworkWindow() {}
 bool CNetworkWindow::DoCommand(int theCommand) {
     switch(theCommand) {
         case kNetChangedCmd:
-            CAvaraApp *app = (CAvaraAppImpl *)gApplication;
+            CAvaraAppImpl *app = (CAvaraAppImpl *)gApplication;
             switch(app->GetNet()->netStatus) {
                 case kNullNet:
                     addressBox->setEnabled(true);
