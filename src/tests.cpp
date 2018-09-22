@@ -316,7 +316,7 @@ TEST(HECTOR, WalkForwardSpeed) {
     ASSERT_EQ(at64ms.back().theVec[0], 0) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.back().theVec[1], -11284) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.back().theVec[2], 1584235) << "64ms simulation walked wrong amount";
-    ASSERT_EQ(at64ms.size(), at32ms.size()) << "DropHector didn't do ticks right";
+    ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
         EXPECT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.8) << "not close enough after " << i << " ticks.";
     }
