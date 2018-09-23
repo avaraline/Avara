@@ -22,6 +22,7 @@ void CSmartPart::ISmartPart(short resId, CAbstractActor *anActor, short aPartCod
     FSquareAccumulate(enclosureRadius, rSquare);
 
     MoveDone();
+    UpdateOpenGLData();
 }
 
 Boolean CSmartPart::HitTestBoxes(CSmartPart *other) {

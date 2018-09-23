@@ -11,6 +11,7 @@
 #include "Parser.h"
 #include "CSoundHub.h"
 #include "CGrenade.h"
+#include "AvaraGL.h"
 
 #include <iostream>
 using namespace std;
@@ -343,7 +344,7 @@ TEST(GRENADE, Trajectory) {
 }
 
 int main(int argc, char **argv) {
-    CBSPPart::actuallyRender = false;
+    AvaraGLToggleRendering(0);
     nanogui::init();
     InitMatrix();
     ::testing::InitGoogleTest(&argc, argv);

@@ -2,13 +2,13 @@
 
 layout(location = 0) in vec3 vertexPosition;
 
-uniform mat4 invMatrix;
+uniform mat4 view;
+uniform mat4 proj;
 
-out vec3 tilt;
+out vec3 tex_coord;
 
 void main()
 {
-    gl_Position = vec4(vertexPosition, 1.0) * vec4(1.0, -1.0, -1.0, 1.0);
-    vec4 flipped = gl_Position * vec4(1.0, -0.4, 1.0, 1.0);
-    tilt = normalize(invMatrix * flipped).xyz;
+	tex_coord = vertexPosition;
+    gl_Position = proj * view * vec4(vertexPosition, 1.0);
 }

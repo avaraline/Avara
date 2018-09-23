@@ -1,6 +1,6 @@
 #version 330 core
 
-in vec3 tilt;
+in vec3 tex_coord;
 
 uniform vec3 groundColor;
 uniform vec3 horizonColor;
@@ -10,9 +10,9 @@ out vec3 color;
 
 void main()
 {
-    float gradientHeight = 0.05;
 
-    float phi = tilt.y * -1.0;
+    float gradientHeight = .05;
+    float phi = normalize(tex_coord).y;
     if (phi <= 0.0) {
         color = groundColor;
     }

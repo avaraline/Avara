@@ -17,8 +17,8 @@
 #define INIT_ADVANCE    (TIMING_GRAIN)
 */
 
+#include "AvaraGL.h"
 #include "CAvaraGame.h"
-
 #include "CAvaraApp.h"
 //#include "CGameWind.h"
 #include "CCommManager.h"
@@ -587,6 +587,7 @@ void CAvaraGame::EndScript() {
     worldShader->Apply();
 
     itsView->ambientLight = ReadFixedVar(iAmbient);
+    AvaraGLSetAmbient(ToFloat(ReadFixedVar(iAmbient)));
 
     for (i = 0; i < 4; i++) {
         intensity = ReadFixedVar(iLightsTable + 3 * i);
@@ -601,8 +602,14 @@ void CAvaraGame::EndScript() {
             x = FMul(FDegSin(-angle2), x);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
+            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f",
+                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2));
+
+            //The b angle is the compass reading and the a angle is the angle from the horizon.
+            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2));
         } else {
             itsView->SetLightValues(i, 0, 0, 0, kLightOff);
+            AvaraGLSetLight(i, 0, 0, 0);
         }
     }
 
@@ -614,7 +621,7 @@ void CAvaraGame::EndScript() {
 
     groundTraction = ReadFixedVar(iDefaultTraction);
     groundFriction = ReadFixedVar(iDefaultFriction);
-    gravityRatio = ReadFixedVar(iGravity) * double(frameTime*frameTime) / (CLASSICFRAMETIME*CLASSICFRAMETIME);
+    gravityRatio = ReadFixedVar(iGravity) * FrameTimeScale(2);
     groundStepSound = ReadLongVar(iGroundStepSound);
     gHub->LoadSample(groundStepSound);
 
@@ -917,4 +924,8 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
     }
 
     return theManager;
+}
+
+double CAvaraGame::FrameTimeScale(double exponent) {
+    return pow(double(frameTime)/CLASSICFRAMETIME, exponent);
 }

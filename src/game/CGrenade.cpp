@@ -82,11 +82,11 @@ void CGrenade::Locate() {
     fullTransform[3][2] = 0;
 
 
-    double scaling = double(CLASSICFRAMETIME)/itsGame->frameTime;
+    double scaling = itsGame->FrameTimeScale();
 
-    speed[0] += (fullTransform[1][0] + 2 * fullTransform[2][0]) / scaling;
-    speed[1] += (fullTransform[1][1] + 2 * fullTransform[2][1]) / scaling;
-    speed[2] += (fullTransform[1][2] + 2 * fullTransform[2][2]) / scaling;
+    speed[0] += (fullTransform[1][0] + 2 * fullTransform[2][0]) * scaling;
+    speed[1] += (fullTransform[1][1] + 2 * fullTransform[2][1]) * scaling;
+    speed[2] += (fullTransform[1][2] + 2 * fullTransform[2][2]) * scaling;
 
     yaw = -FOneArcTan2(fullTransform[2][2], fullTransform[0][2]);
     MRotateY(FOneSin(-yaw), FOneCos(yaw), &fullTransform);
@@ -119,7 +119,7 @@ void CGrenade::FrameAction() {
     if (flyCount) {
         RayHitRecord rayHit;
         Fixed realSpeed;
-        Fixed scaling = FIX((1 - pow(1-ToFloat(kGrenadeFriction), itsGame->frameTime/double(CLASSICFRAMETIME))));
+        Fixed scaling = FIX((1 - pow(1-ToFloat(kGrenadeFriction), itsGame->FrameTimeScale())));
 
         speed[0] -= FMul(speed[0], scaling);
         speed[1] -= gravity + FMul(speed[1], scaling);

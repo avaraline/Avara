@@ -1,6 +1,8 @@
 #include "SVGParser.h"
+#include "FastMat.h"
 #include "Types.h"
 #include "pugixml.hpp"
+#include "csscolorparser.hpp"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -12,43 +14,29 @@
 #include <SDL2/SDL.h>
 
 using std::string;
+using std::stol;
+using std::stof;
 using std::cout;
 using std::stringstream;
 
-const char* node_types[] =
-{
-    "null", "document", "element", "pcdata", "cdata", "comment", "pi", "declaration"
-};
-
 SVGParser::SVGParser() {
-    context.pnLoc.v = 0;
-    context.pnLoc.h = 0;
-    context.pnSize.v = 1;
-    context.pnSize.h = 1;
-
     callbacks.rectProc = NULL;
+    callbacks.colorProc = NULL;
+    callbacks.textProc = NULL;
+    callbacks.arcProc = NULL;
 };
 
 struct simple_walker: pugi::xml_tree_walker {
     SVGProcs* callbacks;
-    SVGContext context;
+    unsigned short thiccness;
 
     virtual bool for_each(pugi::xml_node& node) {
-        //for (int i = 0; i < depth(); ++i)
-        //  cout << " ";
-
         int node_type = node.type();
         string name = node.name();
-        string value = node.value();
-
-        //cout << node_types[node_type] << ": name=" << name << " value=" << value << "\n";
 
         switch (node_type){
             case 2: // element
                 handle_element(node, name);
-                break;
-            case 3: // pcdata (text)
-                handle_pcdata(value);
                 break;
         }
         return true;
@@ -56,7 +44,7 @@ struct simple_walker: pugi::xml_tree_walker {
 
 
     void handle_element(pugi::xml_node& node, string& name) {
-        if(name == "path") {
+        if(name.compare("path") == 0) {
 
             string d = node.attribute("d").value();
             string type = node.attribute("sodipodi:type").value();
@@ -68,100 +56,127 @@ struct simple_walker: pugi::xml_tree_walker {
                 handle_arc(node);
             }
         }
-        if(name == "rect") {
+        else if(name.compare("ellipse") == 0) {
+            handle_ellipse(node);
+        }
+        else if(name.compare("rect") == 0) {
             handle_rect(node);
         }
-
-        if (name == "text") {
-            //SDL_Log("Text Group");
-            //for (pugi::xml_node tspan: node.children("tspan")) {
-            //    SDL_Log("%s", tspan.value());
-            //}
-            //SDL_Log("End Text Group");
+        else if (name.compare("text") == 0) {
+            std::stringstream buffa;
+            for (pugi::xml_node tspan: node.children("tspan")) {
+                buffa << tspan.child_value() << (char)13;
+                //SDL_Log(tspan.child_value());
+            }
+            callbacks->textProc((unsigned char*)buffa.str().c_str());
+        }
+        else {
+            //SDL_Log("Name: %s", name.c_str());
         }
     }
 
+    int safe_int(string value) {
+        try { return stoi(value); }
+        catch (std::exception e) { return 0; }
+    }
+
+    long safe_long(string value) {
+        try { return stol(value); }
+        catch (std::exception e) { return 0; }
+    }
+
+    float safe_float(string value) {
+        try { return stof(value); }
+        catch (std::exception e) { return 0; }
+    }
+
     void handle_arc(pugi::xml_node& node) {
-        string style, cx, cy, rx, ry, start, end;
+        string style;
+        float cx, cy, rx, ry;
+        float start, end;
 
         style = node.attribute("style").value();
-        cx = node.attribute("sodipodi:cx").value();
-        cy = node.attribute("sodipodi:cy").value();
-        rx = node.attribute("sodipodi:rx").value();
-        ry = node.attribute("sodipodi:ry").value();
-        start = node.attribute("sodipodi:start").value();
-        end = node.attribute("sodipodi:end").value();
+        cx = safe_float(node.attribute("sodipodi:cx").value());
+        cy = safe_float(node.attribute("sodipodi:cy").value());
+        rx = safe_float(node.attribute("sodipodi:rx").value());
+        ry = safe_float(node.attribute("sodipodi:ry").value());
+        start = safe_float(node.attribute("sodipodi:start").value());
+        end = safe_float(node.attribute("sodipodi:end").value());
+
+        handle_style(style);
+
+        short start_angle = (short)(start * (180.0 / PI));
+        short angle_length = (short)abs(start_angle - (end * (180.0 / PI)));
+        //SDL_Log("start_angle: %d angle_length: %d", start_angle, angle_length);
+        //SDL_Log("cx: %d cy: %d", cx, cy);
+        callbacks->arcProc(cx, cy, start_angle, angle_length, rx > ry ? rx : ry);
 
         //SDL_Log("arc info: %s %s %s %s %s %s", 
         //    cx.c_str(), cy.c_str(), rx.c_str(), ry.c_str(), start.c_str(), end.c_str());
     }
 
+    void handle_ellipse(pugi::xml_node& node) {
+        string style;
+        long cx, cy, rx, ry;
+
+        style = node.attribute("style").value();
+        cx = safe_long(node.attribute("sodipodi:cx").value());
+        cy = safe_long(node.attribute("sodipodi:cy").value());
+        rx = safe_long(node.attribute("sodipodi:rx").value());
+        ry = safe_long(node.attribute("sodipodi:ry").value());
+
+        handle_style(style);
+        callbacks->ellipseProc(cx, cy, rx > ry ? rx : ry);
+    }
+
     void handle_rect(pugi::xml_node& node) {
 
         string style = node.attribute("style").value();
-        string x =  node.attribute("x").value();
-        string y = node.attribute("y").value();
-        string width = node.attribute("width").value();
-        string height = node.attribute("height").value();
-        string ry = node.attribute("ry").value();
+        int x = safe_int(node.attribute("x").value());
+        int y = safe_int(node.attribute("y").value());
+        int ry = safe_int(node.attribute("ry").value());
+        int width = safe_int(node.attribute("width").value());
+        int height = safe_int(node.attribute("height").value());
         //SDL_Log("rect style: %s", style.c_str());
         handle_style(style);
         //SDL_Log("rect info: %s %s %s %s %s", x.c_str(), y.c_str(), width.c_str(), height.c_str(), ry.c_str());
         //SDL_Log("");
         struct Rect r = {
-            (short)stoi(y),
-            (short)stoi(x),
-            (short)(stoi(y) + stoi(height)),
-            (short)(stoi(x) + stoi(width))
+            (short)y,
+            (short)x,
+            (short)(y + height),
+            (short)(x + width)
         };
-        callbacks->rectProc(&context, &r, stoi(ry));
+        callbacks->rectProc(&r, ry, thiccness);
     }
 
     void handle_style(const string& style) {
         vector<string> decls = split(style, ';');
+
         for(string decl : decls) {
             //SDL_Log("%s", decl.c_str());
             vector<string> key_value = split(decl, ':');
             string key = key_value[0];
             string value = key_value[1];
+            //SDL_Log("%s : %s", key.c_str(), value.c_str());
             if (key.compare("fill") == 0) {
-                //RGBColor *fg_color = 
-                hex_to_rgbcolor(value, true);
+                css_to_rgbcolor(value, true);
                 //SDL_Log("New fgColor");
             }
             if (key.compare("stroke") == 0) {
-                hex_to_rgbcolor(value, false);
+                css_to_rgbcolor(value, false);
                 //SDL_Log("New bgColor");
             }
             if (key.compare("stroke-width") == 0) {
-                unsigned short thickness = 
-                    (unsigned short)strtol(value.c_str(), NULL, 10);
+                thiccness = (unsigned short)safe_long(value);
             }
-            SDL_Log("%s : %s", key.c_str(), value.c_str());
         }
     }
 
-    void hex_to_rgbcolor(string& hex, bool fg) {
-        //SDL_Log("HexWhole: %s", hex.c_str());
-        unsigned short r, g, b;
-
-        string rhex = hex.substr(1, 2);
-        string ghex = hex.substr(3, 2);
-        string bhex = hex.substr(5, 2);
-
-        //SDL_Log("Hex: %s %s %s", rhex.c_str(), ghex.c_str(), bhex.c_str());
-
-        r = (unsigned short)strtol(rhex.c_str(), NULL, 16) / 255 * 65535;
-        g = (unsigned short)strtol(ghex.c_str(), NULL, 16) / 255 * 65535;
-        b = (unsigned short)strtol(bhex.c_str(), NULL, 16) / 255 * 65535;
-
-        //SDL_Log("RGB: %d %d %d", r, g, b);
-
-        callbacks->colorProc(r, g, b, fg);
-    }
-
-    void handle_pcdata(string& value) {
-        //SDL_Log("%s", value.c_str());
+    void css_to_rgbcolor(string& css_color, bool fg) {
+        const auto color = CSSColorParser::parse(css_color);
+        if (color)
+        callbacks->colorProc(color->r * 257, color->g * 257, color->b * 257, fg);
     }
 
     vector<string> split (const string &s, char delim) {
@@ -202,8 +217,9 @@ struct simple_walker: pugi::xml_tree_walker {
 
 void SVGParser::Parse() {
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file("levels/blockparty_svg/1500_ICE2_iceboxClassic.pict.svg");
-    SDL_Log("Load result: %s", result.description());
+    pugi::xml_parse_result result = doc.load_file("test_pict2svgupdates.svg");
+    //pugi::xml_parse_result result = doc.load_file("levels/classic-mix-up_svg/1004_Grim_Grimoire.svg");
+    SDL_Log("SVG load result: %s", result.description());
 
     simple_walker walker;
     walker.callbacks = &callbacks;

@@ -11,6 +11,8 @@
 
 #include "Types.h"
 
+#define PI 3.141592653589793238463
+
 static const Fixed FIX1 = 0x00010000;
 static inline float ToFloat(Fixed a) {
     return (float)a / FIX1;
@@ -18,6 +20,9 @@ static inline float ToFloat(Fixed a) {
 static inline Fixed ToFixed(float a) {
     float temp = a * FIX1;
     return (Fixed)temp;
+}
+static inline float Deg2Rad(float deg) { 
+    return deg * (PI / 180); 
 }
 
 void InitMatrix();

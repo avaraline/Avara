@@ -26,7 +26,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     nvgFontFace(ctx, "mono");
 
     float mY = (bufferHeight - 72);
-    for (auto i : itsGame->itsApp->GetMessageLines()) {
+    for (auto i : itsGame->itsApp->MessageLines()) {
 
         nvgBeginPath(ctx);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);

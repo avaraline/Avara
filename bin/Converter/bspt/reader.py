@@ -139,8 +139,8 @@ class BSP(object):
 
         try:
             import triangle
-            # import triangle.plot
-            # import matplotlib.pyplot as plt
+            import triangle.plot
+            import matplotlib.pyplot as plt
             import numpy as np
         except ImportError:
             print("Triangle library or numpy not found, will not output triangulations")
@@ -174,20 +174,17 @@ class BSP(object):
                 self.points[x].y,
                 self.points[x].z]) for x in verts]
 
-            p0 = points[0]
-            p1 = points[1]
-            u = np.linalg.norm([p0 - p1], axis=0)
-            v = np.cross(u, normal)  # u.cross(normal)
+            p0 = np.array(points[0])
+            p1 = np.array(points[1])
+            p = [p0 - p1]
+            u = p / np.linalg.norm(p)
+            v = np.cross(u, normal)
 
             def flatten_3to2(vec3):
                 return np.array([
-                    np.dot(vec3 - p0, u),
-                    np.dot(vec3 - p0, v)
+                    np.dot(vec3 - p0, u[0]),
+                    np.dot(vec3 - p0, v[0])
                 ])
-
-            centroid3 = np.mean(points, axis=0)
-
-            centroid2 = flatten_3to2(centroid3)
 
             face_points = np.array([flatten_3to2(x) for x in points])
 
@@ -197,37 +194,54 @@ class BSP(object):
                 # that crashed the triangulator
                 continue
 
+            num_face_points = len(face_points)
+            # print(F"face_points length: {num_face_points}")
+            if (num_face_points < 3):
+                # can't triangulate less than 3 points
+                continue
+            #if (num_face_points == 3):
+                # print(verts)
+                # 3 points don't need to get passed to triangulator
+            #    n = len(d["triangles_verts_poly"])
+            #    d["triangles_poly"].append([[0, 1, 2]])
+            #    d["triangles_verts_poly"].append(verts)
+            #    d["triangles_poly"].append([[2, 1, 0]])
+            #    d["triangles_verts_poly"].append(verts)
+            #    continue
 
-
+            # create input for triangle library
             the_dict = dict(vertices=face_points, segments=edges)
+            # do triangulation in planar straignt line graph mode
             result = triangle.triangulate(the_dict, 'p')
-            the_triangles = result["triangles"]
+            
+            if "triangles" not in result:
+                # the triangulator didn't work for some reason
+                continue
 
-            if not len(the_dict["vertices"]) == len(result["vertices"]):
-                print("We need to add some vertices to this shape.")
-                print("This can happen because of self-intersecting polygons.")
-                for zthing in zip_longest(face_points, result["vertices"]):
-                    if zthing[0] is None:
-                        # the triangulator added points
-                        # probably because of a  
-                        # self-intersecting polygon 
-                        new_vert = zthing[1]
-                        new_vert_3 = new_vert[0] * u + new_vert[1] * v + p0
-                        new_vert_3 = np.append(new_vert_3, [[1]])
-                        print("vert %s added" % new_vert_3)
-                        # put the point at the end of the list
-                        d["points"].append(new_vert_3.tolist())
-                        # add a pointer to this new point to the
-                        # end of this list of verts
-                        verts.append(len(d["points"]) - 1)
-                        # TODO: Fix the above
+            vert_diff = len(result["vertices"]) - len(the_dict["vertices"])
+            if vert_diff > 0:
+                #print(d["points"])
+                # print(F"We need to add {vert_diff} vertices to this shape.")
+                # print("This can happen because of self-intersecting polygons.")
 
+                #verts = []
+                for vert in result["vertices"]:
+                    if vert in the_dict["vertices"]:
+                        continue
+                    # turn 2d point back into 3d point with previous constants
+                    new_vert_3 = p0 + (vert[0] * u) + (vert[1] * v)
+                    new_vert_3 = np.append(new_vert_3, [[1]])
+                    new_vert_3 = new_vert_3.tolist()
+                    # add to shape points
+                    d["points"].append(new_vert_3)
+                    # add index to this face
+                    verts.append(len(d["points"]) - 1)
+            
             # we'll use this to count how many shape edges we hit casting a
             # ray in an arbitrary direction from the center point of each triangle.
             # this allows us to remove triangles that are part of a "hole" in the 
             # geometry
             def line_ray_intersection_point(rayOrigin, rayDirection, point1, point2):
-                # rayDirection = np.linalg.norm(rayDirection, axis=0)
                 v1 = rayOrigin - point1
                 v2 = point2 - point1
                 v3 = np.array([-rayDirection[1], rayDirection[0]])
@@ -237,12 +251,15 @@ class BSP(object):
                     return [rayOrigin + t1 * rayDirection]
                 return []
 
+            # calculate which triangles to remove
             triangles_to_remove = []
-            for tidx, t in enumerate(the_triangles):
+            for tidx, t in enumerate(result["triangles"]):
                 tpoints = np.array([result["vertices"][x] for x in t])
                 tavg = np.mean(tpoints, axis=0)
                 total_intersects = 0
                 for edge in edges:
+                    # check ray from center of all points
+                    # out to +x for each edge
                     intersects = line_ray_intersection_point(
                         tavg,
                         np.array([1, 0]), # positive x ray
@@ -250,32 +267,73 @@ class BSP(object):
                         face_points[edge[1]])
                     num_intersects = len(intersects)
                     if num_intersects == 0:
-                        # doesn't intersect
+                        # ray doesn't intersect
                         continue
                     if num_intersects > 0:
                         total_intersects += num_intersects
-                # if we hit an EVEN number of edges, remove that triangle
+                # if we intersected an EVEN number of edges, remove that triangle
                 if total_intersects % 2 == 0:
-                    print("removing triangle inside hole: %d" % tidx)
+                    # print("removing triangle inside hole: %d" % tidx)
                     triangles_to_remove.append(tidx)
 
             # remove hole triangles
-            result["triangles"] = np.delete(result["triangles"], triangles_to_remove, axis=0)
+            if len(triangles_to_remove) > 0:
+                result["triangles"] = np.delete(result["triangles"], triangles_to_remove, axis=0)
 
-            # below used for debug, shows a face before and after triangularization
-            # if (self.name == "MComplete"): # or (self.name == "SmartHairs"):
-            #     triangle.plot.compare(plt, the_dict, result)
-            #     plt.show()
-            d["triangles_poly"].append(result["triangles"].tolist())
+            # below used for debug
+
+            new_tris = result["triangles"].tolist()
+            
+            if vert_diff > 0:
+                print(d["max_bounds"])
+                print(self.name) # or (self.name == "bspNuclearWaste"):
+                the_dict["triangles"] = new_tris
+                the_dict["vertices"] = np.array([flatten_3to2(np.array(x[:3])) for x in d["points"]])
+                triangle.compare(plt, the_dict, result)
+                plt.show()
+            # print(self.name)
+            d["triangles_poly"].append(new_tris)
             d["triangles_verts_poly"].append(verts)
 
         return d
 
+    def avara_format(self):
+        d = self.serialize(int_colors=True)
+        out = {
+            'points': [p[:3] for p in d['points']],
+            'bounds': {
+                'min': d['min_bounds'][:3],
+                'max': d['max_bounds'][:3],
+            },
+            'center': d['enclosure_point'][:3],
+            'radius1': d['enclosure_point'][3],
+            'radius2': d['enclosure_radius'],
+            'polys': [],
+        }
+        for idx, (fe, ec, normal_idx, fp, bp, pvis, rs) in enumerate(d['polys']):
+            vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
+            normal = d['vectors'][vec_idx][:3]
+            color = d['colors'][color_idx]
+            tris = d['triangles_poly'][idx]
+            tri_points = d['triangles_verts_poly'][idx]
+            """
+            out['polys'].append({
+                'normal': [-x for x in normal],
+                'color': color,
+                'tris': [[tri_points[i] for i in t][::-1] for t in tris],
+            })
+            """
+            out['polys'].append({
+                'normal': normal,
+                'color': color,
+                'tris': [[tri_points[i] for i in t] for t in tris],
+            })
+            
+        return json.dumps(out, indent=2, sort_keys=True)
+
 
 def serialize_list(the_list):
     return [x.serialize() for x in the_list]
-
-
 
 def parse(resource):
     bsps = []
@@ -285,30 +343,8 @@ def parse(resource):
         bsps.append(bsp)
     return bsps
 
+def bsp2json(data, name=''):
+    bsp = BSP({'data': data, 'name': name})
+    return bsp.avara_format()
 
-def bsp2json(data):
-    bsp = BSP({'data': data, 'name': ''})
-    d = bsp.serialize(int_colors=True)
-    out = {
-        'points': [p[:3] for p in d['points']],
-        'bounds': {
-            'min': d['min_bounds'][:3],
-            'max': d['max_bounds'][:3],
-        },
-        'center': d['enclosure_point'][:3],
-        'radius1': d['enclosure_point'][3],
-        'radius2': d['enclosure_radius'],
-        'polys': [],
-    }
-    for idx, (fe, ec, normal_idx, fp, bp, pvis, rs) in enumerate(d['polys']):
-        vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
-        normal = d['vectors'][vec_idx][:3]
-        color = d['colors'][color_idx]
-        tris = d['triangles_poly'][idx]
-        tri_points = d['triangles_verts_poly'][idx]
-        out['polys'].append({
-            'normal': normal,
-            'color': color,
-            'tris': [[tri_points[i] for i in t] for t in tris],
-        })
-    return json.dumps(out, indent=2, sort_keys=True)
+

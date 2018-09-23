@@ -260,7 +260,7 @@ void CBSPWorldImpl::SortVisibleParts() {
 }
 
 void CBSPWorldImpl::Render(CViewParameters *theView) {
-    short i;
+    int i;
     CBSPPart **sp, **sd;
 
     currentView = theView;

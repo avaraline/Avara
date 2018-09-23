@@ -230,6 +230,7 @@ public:
     virtual void InitMixer(Boolean silentFlag);
 
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
+    virtual double FrameTimeScale(double exponent=1);
 };
 
 #ifndef MAINAVARAGAME

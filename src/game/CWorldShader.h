@@ -32,8 +32,6 @@ public:
     short shadeColors[MAXTOTALSHADES];
     Fixed altitudes[MAXTOTALSHADES];
 
-    GLuint skyProgram;
-    GLuint vertexArray, vertexBuffer;
 
     virtual void IWorldShader(CAvaraGame *theGame);
     virtual void Reset();
