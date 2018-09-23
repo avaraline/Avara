@@ -115,7 +115,7 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250)*double(itsGame->frameTime)/CLASSICFRAMETIME;
+    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale();
     motorFriction = FIX3(750);
     didBump = true;
 
@@ -803,12 +803,12 @@ void CAbstractPlayer::TractionControl() {
 void CAbstractPlayer::MotionControl() {
     Fixed avrgHeading;
     Fixed motorDir[2];
-    Fixed fric = FIX((1 - pow(1 - 0.01, double(itsGame->frameTime)/CLASSICFRAMETIME)));// FIX3(10); // FIX3(30);
+    Fixed fric = FIX((1 - pow(1 - 0.01, itsGame->FrameTimeScale())));// FIX3(10); // FIX3(30);
     Fixed slowDown;
     Fixed absVert;
     Fixed slide[2];
     Fixed slideLen;
-    Fixed supportFriction = FIX((1 - pow(1 - ToFloat(this->supportFriction), double(itsGame->frameTime)/CLASSICFRAMETIME)));
+    Fixed supportFriction = FIX((1 - pow(1 - ToFloat(this->supportFriction), itsGame->FrameTimeScale())));
 
     distance = (motors[0] + motors[1]) >> 1;
     headChange = FMul(motors[1] - motors[0], turningEffect);
@@ -825,8 +825,8 @@ void CAbstractPlayer::MotionControl() {
     slide[1] = motorDir[1] - speed[2] + groundSlide[2];
     slideLen = VectorLength(2, slide);
 
-    if (slideLen < supportTraction*double(itsGame->frameTime)/CLASSICFRAMETIME) {
-        double speedPortion = pow(0.25, double(itsGame->frameTime)/CLASSICFRAMETIME);
+    if (slideLen < supportTraction * itsGame->FrameTimeScale()) {
+        double speedPortion = pow(0.25, itsGame->FrameTimeScale());
         speed[0] += slide[0] - (slide[0] * speedPortion);
         speed[2] += slide[1] - (slide[1] * speedPortion);
     } else {

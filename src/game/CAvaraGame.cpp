@@ -614,7 +614,7 @@ void CAvaraGame::EndScript() {
 
     groundTraction = ReadFixedVar(iDefaultTraction);
     groundFriction = ReadFixedVar(iDefaultFriction);
-    gravityRatio = ReadFixedVar(iGravity) * double(frameTime*frameTime) / (CLASSICFRAMETIME*CLASSICFRAMETIME);
+    gravityRatio = ReadFixedVar(iGravity) * FrameTimeScale(2);
     groundStepSound = ReadLongVar(iGroundStepSound);
     gHub->LoadSample(groundStepSound);
 
@@ -917,4 +917,8 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
     }
 
     return theManager;
+}
+
+double CAvaraGame::FrameTimeScale(double exponent) {
+    return pow(double(frameTime)/CLASSICFRAMETIME, exponent);
 }
