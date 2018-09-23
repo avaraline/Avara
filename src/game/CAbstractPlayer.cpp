@@ -115,7 +115,7 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250);
+    maxAcceleration = FIX3(250)*double(itsGame->frameTime)/CLASSICFRAMETIME;
     motorFriction = FIX3(750);
     didBump = true;
 
@@ -589,7 +589,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (!isInLimbo) {
             modAccel = FDivNZ(baseMass, GetTotalMass());
             modAccel = FMul(modAccel, modAccel);
-            modAccel = FMul(maxAcceleration*double(itsGame->frameTime)/CLASSICFRAMETIME, modAccel); //	FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
+            modAccel = FMul(maxAcceleration, modAccel); //	FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
             motionFlags = 0;
 
             if (TESTFUNC(kfuForward, ft->held))
@@ -808,6 +808,7 @@ void CAbstractPlayer::MotionControl() {
     Fixed absVert;
     Fixed slide[2];
     Fixed slideLen;
+    Fixed supportFriction = FIX((1 - pow(1 - ToFloat(this->supportFriction), double(itsGame->frameTime)/CLASSICFRAMETIME)));
 
     distance = (motors[0] + motors[1]) >> 1;
     headChange = FMul(motors[1] - motors[0], turningEffect);
@@ -824,9 +825,10 @@ void CAbstractPlayer::MotionControl() {
     slide[1] = motorDir[1] - speed[2] + groundSlide[2];
     slideLen = VectorLength(2, slide);
 
-    if (slideLen < supportTraction) {
-        speed[0] += slide[0] - (slide[0] >> 2);
-        speed[2] += slide[1] - (slide[1] >> 2);
+    if (slideLen < supportTraction*double(itsGame->frameTime)/CLASSICFRAMETIME) {
+        double speedPortion = pow(0.25, double(itsGame->frameTime)/CLASSICFRAMETIME);
+        speed[0] += slide[0] - (slide[0] * speedPortion);
+        speed[2] += slide[1] - (slide[1] * speedPortion);
     } else {
         speed[0] += FMul(slide[0], supportFriction);
         speed[2] += FMul(slide[1], supportFriction);

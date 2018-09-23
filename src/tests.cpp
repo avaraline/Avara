@@ -306,10 +306,10 @@ TEST(HECTOR, TurnSpeed) {
     ASSERT_EQ(at64ms.back(), -30592) << "64ms simulation turned wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "TurnHector didn't do ticks right";
     for (int i = 0; i < at64ms.size(); i++) {
-        EXPECT_LT(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 0) << "not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 0) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < at64ms.size(); i++) {
-        EXPECT_LT(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 0) << "not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 0) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -319,13 +319,13 @@ TEST(HECTOR, WalkForwardSpeed) {
     vector<VectorStruct> at16ms = WalkHector(20, 50, 4, 16);
     ASSERT_EQ(at64ms.back().theVec[0], 0) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.back().theVec[1], -11284) << "64ms simulation walked wrong amount";
-    ASSERT_EQ(at64ms.back().theVec[2], 1584235) << "64ms simulation walked wrong amount";
+    ASSERT_LE(abs(1584235-at64ms.back().theVec[2]), 50) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
-        EXPECT_LT(VecStructDist(at64ms[i], at32ms[i]), 0) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.55) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
-        EXPECT_LT(VecStructDist(at64ms[i], at16ms[i]), 0) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.8) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -335,10 +335,10 @@ TEST(GRENADE, Trajectory) {
     vector<VectorStruct> at16ms = FireGrenade(20, 50, 4, 16);
     ASSERT_EQ(at64ms.back().theVec[1], 59420) << "64ms simulation is wrong";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
-        EXPECT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.7) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.7) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
-        EXPECT_LT(VecStructDist(at64ms[i], at16ms[i]), 1) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 1) << "not close enough after " << i << " ticks.";
     }
 }
 
