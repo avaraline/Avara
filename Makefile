@@ -12,7 +12,8 @@ CXXFLAGS ?= -std=c++1y
 
 ifeq ($(UNAME), Darwin)
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
-	LDFLAGS ?= -lstdc++ -lm -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
+	CPPFLAGS += -F/Library/Frameworks
+	LDFLAGS ?= -F/Library/Frameworks -lstdc++ -lm -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 else ifeq ($(UNAME), MINGW64_NT-10.0)
 	# Not a great conditional check for "Windows", but works for now.
