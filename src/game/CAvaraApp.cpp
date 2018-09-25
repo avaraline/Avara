@@ -213,9 +213,9 @@ void CAvaraApp::NumberLine(long theNum, short align) {}
 void CAvaraApp::DrawUserInfoPart(short i, short partList) {}
 void CAvaraApp::BrightBox(long frameNum, short position) {}
 
-void CAvaraApp::AddMessageLine(const char* line) {
+void CAvaraApp::AddMessageLine(std::string line) {
     SDL_Log("Message: %s", line);
-    messageLines.push_back(std::string(line));
+    messageLines.push_back(line);
     if (messageLines.size() > 5) {
         messageLines.pop_front();
     }
@@ -258,54 +258,31 @@ void CAvaraApp::MessageLine(short index, short align) {
 }
 void CAvaraApp::LevelReset() {}
 void CAvaraApp::ParamLine(short index, short align, StringPtr param1, StringPtr param2) {
-    SDL_Log("CAvaraApp::ParamLine(%d)\n", index);
-    const char* fmt;
-    char* buffa;
+    SDL_Log("CAvaraAppImpl::ParamLine(%d)\n", index);
+    std::ostringstream buffa;
     std::string a = std::string((char *)param1 + 1, param1[0]);
     std::string b;
     if (param2) b = std::string((char *)param2 + 1, param2[0]);
 
     switch(index) {
         case kmPaused:
-            {
-                fmt = "Game paused by %s.";
-                buffa = new char[32 + param1[0]];
-                sprintf(buffa, fmt, a.c_str());
-                AddMessageLine(buffa);
-            }
+            buffa << "Game paused by " << a << ".";
             break;
         case kmWaitingForPlayer:
-            {
-                fmt = "Waiting for %s.";
-                buffa = new char[32 + param1[0]];
-                sprintf(buffa, fmt, a.c_str());
-                AddMessageLine(buffa);
-            }
+            buffa << "Waiting for " << a << ".";
+            break;
         case kmAKilledBPlayer:
-            {
-                fmt  = "%s killed %s.";
-                buffa = new char[32 + param1[0] + param2[0]];
-                sprintf(buffa, fmt, a.c_str(), b.c_str());
-                AddMessageLine(buffa);
-            }
+            buffa << a << " killed " << b << ".";
             break;
         case kmUnavailableNote:
-            {
-                fmt = "%s is busy.";
-                buffa = new char[32 + param1[0]];
-                sprintf(buffa, fmt, a.c_str());
-                AddMessageLine(buffa);
-            }
+            buffa << a << " is busy.";
+            break;
         case kmStartFailure:
-            {
-                fmt = "Couldn't gather %s for a game.";
-                buffa = new char[32 + param1[0]];
-                sprintf(buffa, fmt, a.c_str());
-                AddMessageLine(buffa);
-            }
+            buffa << a << " wasn't ready.";
             break;
     }
-    delete buffa;
+
+    AddMessageLine(buffa.str());
 }
 void CAvaraApp::StartFrame(long frameNum) {}
 void CAvaraApp::StringLine(StringPtr theString, short align) {

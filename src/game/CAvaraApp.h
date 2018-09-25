@@ -51,7 +51,7 @@ public:
     OSErr LoadLevel(std::string set, OSType theLevel);
     void NotifyUser();
 
-    virtual void AddMessageLine(const char* line);
+    virtual void AddMessageLine(std::string line);
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
     virtual void NumberLine(long theNum, short align);
