@@ -155,6 +155,7 @@ public:
         game->IAvaraGame(&app);
         game->EndScript();
         app.GetNet()->ChangeNet(kNullNet, "");
+        game->LevelReset(false);
         hector = new CWalkerActor();
         hector->IAbstractActor();
         hector->BeginScript();
