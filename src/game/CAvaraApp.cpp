@@ -228,7 +228,7 @@ void CAvaraAppImpl::NumberLine(long theNum, short align) {}
 void CAvaraAppImpl::DrawUserInfoPart(short i, short partList) {}
 void CAvaraAppImpl::BrightBox(long frameNum, short position) {}
 
-void CAvaraApp::AddMessageLine(std::string line) {
+void CAvaraAppImpl::AddMessageLine(std::string line) {
     SDL_Log("Message: %s", line);
     messageLines.push_back(line);
     if (messageLines.size() > 5) {
@@ -271,8 +271,8 @@ void CAvaraAppImpl::MessageLine(short index, short align) {
     }
 
 }
-void CAvaraApp::LevelReset() {}
-void CAvaraApp::ParamLine(short index, short align, StringPtr param1, StringPtr param2) {
+void CAvaraAppImpl::LevelReset() {}
+void CAvaraAppImpl::ParamLine(short index, short align, StringPtr param1, StringPtr param2) {
     SDL_Log("CAvaraAppImpl::ParamLine(%d)\n", index);
     std::ostringstream buffa;
     std::string a = std::string((char *)param1 + 1, param1[0]);
