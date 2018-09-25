@@ -233,12 +233,12 @@ void CPlayerManager::HandleEvent(SDL_Event &event) {
             }
 
             // Handle delete and backspace in chat mode
-            if (keyboardActive && 
+            if (keyboardActive &&
                 event.key.keysym.sym == SDLK_BACKSPACE) {
                 inputBuffer.push_back('\b');
             }
 
-            if (keyboardActive && 
+            if (keyboardActive &&
                 (event.key.keysym.sym == SDLK_DELETE ||
                  event.key.keysym.sym == SDLK_CLEAR)) {
                 inputBuffer.push_back('\x1B');
@@ -708,7 +708,7 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
             default:
                 if (theChar >= 32) {
                     lineBuffer.push_back(theChar);
-                    if (lineBuffer[0] > 220) {
+                    if (lineBuffer[0] > (char)220) {
                         // FlushMessageText(true);
                         auto i = lineBuffer.begin();
                         utf8::advance(i, 55, lineBuffer.end());
