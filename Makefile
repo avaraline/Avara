@@ -1,5 +1,7 @@
 # Taken from https://spin.atomicobject.com/2016/08/26/makefile-c-projects/
 
+CXX = clang++
+
 BUILD_DIR ?= build
 SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui
 
@@ -7,7 +9,7 @@ UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
 INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor
-CPPFLAGS ?= $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
+CPPFLAGS ?= $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD -fPIC
 CXXFLAGS ?= -std=c++1y
 
 ifeq ($(UNAME), Darwin)
