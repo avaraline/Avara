@@ -708,7 +708,7 @@ void CPlayerManager::RosterMessageText(short len, char *c) {
             default:
                 if (theChar >= 32) {
                     lineBuffer.push_back(theChar);
-                    if (lineBuffer[0] > (char)220) {
+                    if (lineBuffer.size() > 220) {
                         // FlushMessageText(true);
                         auto i = lineBuffer.begin();
                         utf8::advance(i, 55, lineBuffer.end());
