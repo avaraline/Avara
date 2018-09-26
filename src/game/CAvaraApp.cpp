@@ -229,7 +229,7 @@ void CAvaraAppImpl::DrawUserInfoPart(short i, short partList) {}
 void CAvaraAppImpl::BrightBox(long frameNum, short position) {}
 
 void CAvaraAppImpl::AddMessageLine(std::string line) {
-    SDL_Log("Message: %s", line);
+    SDL_Log("Message: %s", line.c_str());
     messageLines.push_back(line);
     if (messageLines.size() > 5) {
         messageLines.pop_front();
