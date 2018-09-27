@@ -9,7 +9,7 @@ UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
 INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor
-CPPFLAGS ?= $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD -fPIC
+CPPFLAGS ?= $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
 CXXFLAGS ?= -std=c++1y
 
 ifeq ($(UNAME), Darwin)
@@ -23,6 +23,7 @@ else ifeq ($(UNAME), MINGW64_NT-10.0)
 	POST_PROCESS ?= ls -lh
 else
 	LDFLAGS ?= -lstdc++ -lm -lSDL2 -lSDL2_net -lGL -lGLU -lpthread -ldl
+	CPPFLAGS += -fPIC
 	POST_PROCESS ?= ls -lh
 endif
 
