@@ -115,8 +115,8 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale();
-    motorFriction = FIX3(750);
+    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale(2);
+    motorFriction = FIX((1-pow(1-0.75, itsGame->FrameTimeScale(-0.5))));
     didBump = true;
 
     groundSlide[0] = 0;
