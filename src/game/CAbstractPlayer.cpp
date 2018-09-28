@@ -116,7 +116,9 @@ void CAbstractPlayer::StartSystems() {
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
     maxAcceleration = FIX3(250)*itsGame->FrameTimeScale(2);
-    motorFriction = FIX((1-pow(1-0.75, itsGame->FrameTimeScale(-0.5))));
+#define CLASSICACCELERATION FIX3(250)
+    motorFriction = FIX(pow(0.75, itsGame->FrameTimeScale()));
+#define CLASSICMOTORFRICTION FIX3(750)
     didBump = true;
 
     groundSlide[0] = 0;
@@ -589,7 +591,15 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (!isInLimbo) {
             modAccel = FDivNZ(baseMass, GetTotalMass());
             modAccel = FMul(modAccel, modAccel);
-            modAccel = FMul(maxAcceleration, modAccel); //	FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
+            modAccel = FMul(CLASSICACCELERATION, modAccel); //	FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
+            // top speed = accel * motorFriction / (1 - motorFriction)
+            // Scale top speed: top speed * frameTime/64
+            // Use scaled top speed and scaled motor friction to figure out an adjusted acceleration
+            // THEREFORE accel = accel * frameTimeScale * classicMotorFriction * (1 - motorFriction) / ((1 - classicMotorFriction) * motorFriction)
+            if (itsGame->frameTime != 64) {
+                modAccel = FDivNZ(itsGame->FrameTimeScale() * FMul(modAccel, FMul(CLASSICMOTORFRICTION, FIX1 - motorFriction)),  FMul(motorFriction, FIX1 - CLASSICMOTORFRICTION));
+            }
+
             motionFlags = 0;
 
             if (TESTFUNC(kfuForward, ft->held))
