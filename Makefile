@@ -1,5 +1,6 @@
 # Taken from https://spin.atomicobject.com/2016/08/26/makefile-c-projects/
 
+CC = clang
 CXX = clang++
 
 BUILD_DIR ?= build
@@ -62,7 +63,7 @@ winapp: avara
 
 # Avara
 $(BUILD_DIR)/Avara: $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o
-	$(CC) $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o -o $@ $(LDFLAGS)
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
 # Tests
