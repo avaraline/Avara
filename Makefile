@@ -1,5 +1,7 @@
 # Taken from https://spin.atomicobject.com/2016/08/26/makefile-c-projects/
 
+CXX = clang++
+
 BUILD_DIR ?= build
 SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui
 
@@ -21,6 +23,7 @@ else ifeq ($(UNAME), MINGW64_NT-10.0)
 	POST_PROCESS ?= ls -lh
 else
 	LDFLAGS ?= -lstdc++ -lm -lSDL2 -lSDL2_net -lGL -lGLU -lpthread -ldl
+	CPPFLAGS += -fPIC
 	POST_PROCESS ?= ls -lh
 endif
 
