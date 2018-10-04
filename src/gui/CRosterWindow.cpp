@@ -158,6 +158,7 @@ void CRosterWindow::UpdateRoster() {
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
             colors[i]->setCaption(theName.c_str());
+            colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
         }
 
         if (theGame->loadedTag != currentLevel) {
