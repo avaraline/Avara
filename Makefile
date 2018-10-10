@@ -50,6 +50,7 @@ macapp: avara
 	install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
 	install_name_tool -change @rpath/SDL2_net.framework/Versions/A/SDL2_net @executable_path/../Frameworks/SDL2_net.framework/Versions/A/SDL2_net $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
 	codesign -vvv --no-strict --deep --force -s $(SIGNING_ID) $(BUILD_DIR)/Avara.app
+	cd $(BUILD_DIR) && zip -r Avara-Mac-`date "+%Y%m%d"`-`git rev-parse --short HEAD`.zip Avara.app && cd ..
 
 winapp: avara
 	rm -rf $(BUILD_DIR)/WinAvara
@@ -57,7 +58,7 @@ winapp: avara
 	cp -r $(BUILD_DIR)/{Avara.exe,bsps,levels,rsrc,shaders} $(BUILD_DIR)/WinAvara
 	cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1}.dll $(BUILD_DIR)/WinAvara
-	cd $(BUILD_DIR) && zip -r WinAvara.zip WinAvara && cd ..
+	cd $(BUILD_DIR) && zip -r Avara-Win-`date "+%Y%m%d"`-`git rev-parse --short HEAD`.zip WinAvara && cd ..
 
 # Avara
 $(BUILD_DIR)/Avara: $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o
@@ -84,10 +85,13 @@ $(BUILD_DIR)/%.mm.o: %.mm
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-.PHONY: clean
+.PHONY: clean publish
 
 clean:
 	$(RM) -r $(BUILD_DIR)
+
+publish:
+	scp build/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
 	cp -r bsps levels rsrc shaders $(BUILD_DIR)
