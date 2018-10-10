@@ -55,7 +55,7 @@ macapp: avara
 winapp: avara
 	rm -rf $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
-	cp $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe
+	cp $(BUILD_DIR)/Avara $(BUILD_DIR)/WinAvara/Avara.exe
 	cp -r $(BUILD_DIR)/{bsps,levels,rsrc,shaders} $(BUILD_DIR)/WinAvara
 	cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1}.dll $(BUILD_DIR)/WinAvara
