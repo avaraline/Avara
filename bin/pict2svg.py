@@ -7,6 +7,8 @@ import struct
 import sys
 import re
 import math
+from enum import Enum
+from lxml import etree
 
 
 class Rect:
@@ -77,6 +79,11 @@ class DataBuffer:
     def ushort(self):
         return self.unpack('H')[0]
 
+    def fixed(self):
+        fixd = self.unpack('l')[0]
+        print(fixd)
+        return fixd / 65536.0
+
     def byte(self):
         return self.read(1)[0]
 
@@ -94,20 +101,114 @@ class DataBuffer:
             self.pos += 1
 
 
+# XML Namespaces for lxml
+
+DCNS = "http://purl.org/dc/elements/1.1/"
+CCNS = "http://creativecommons.org/ns#"
+RDFNS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+SVGNS = "http://www.w3.org/2000/svg"
+SPNS = "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+ISNS = "http://www.inkscape.org/namespaces/inkscape"
+XMLNS = "http://www.w3.org/XML/1998/namespace"
+NSMAP = {
+    "dc": DCNS,
+    "cc": CCNS,
+    "rdf": RDFNS,
+    "svg": SVGNS,
+    "sodipodi": SPNS,
+    "inkscape": ISNS,
+    "xml": XMLNS
+}
+
+
+def ns(thing, ns):
+    return "{%s}%s" % (ns, thing)
+
+
 class SVGContext:
 
-    def __init__(self, **attrs):
-        self.xml = ''
+    def __init__(self, frame, **attrs):
+        x = frame.right
+        y = frame.bottom
+        self.root = etree.Element("svg", nsmap = NSMAP)
+        self.root.set("xmlns", "http://www.w3.org/2000/svg")
+        self.root.set("width", str(x) + "px")
+        self.root.set("height", str(y) + "px")
+        self.root.set("viewBox", "0 0 %d %d" % (x, y))
+        self.root.set("version", "1.1")
+        self.root.set("id", "svg8")
+        #TODO: set doc name properly
+        self.root.set(ns("docname", SPNS), "test.svg")
+
+        defs = etree.SubElement(self.root, "defs")
+        defs.set("id", "defs2")
+
+        view = etree.SubElement(self.root, ns("namedview", SPNS))
+        view.set("id", "base")
+        view.set("pagecolor", "#ffffff")
+        view.set("bordercolor", "#666666")
+        view.set(ns("pageopacity", ISNS), "0.0")
+        view.set(ns("zoom", ISNS), "100")
+        view.set(ns("cx", ISNS), "0")
+        view.set(ns("cy", ISNS), "0")
+        view.set(ns("document-units", ISNS), "px")
+        view.set(ns("current-layer", ISNS), "layer1")
+        view.set(ns("window-x", ISNS), "-8")
+        view.set(ns("window-y", ISNS), "-8")
+        view.set("inkscape.window-maximized", "1")
+        view.set("showguides", "true")
+        view.set(ns("guide-bbox", ISNS), "true")
+
+        grid = etree.SubElement(view, ns("grid", ISNS))
+        grid.set("type", "xygrid")
+        grid.set("id", "grid1")
+
+        meta = etree.SubElement(self.root, "metadata")
+        meta.set("id", "metadata1")
+        rdf = etree.SubElement(meta, ns("RDF", RDFNS))
+        work = etree.SubElement(rdf, ns("Work", CCNS))
+        work.set(ns("about", RDFNS), "")
+        fmt = etree.SubElement(work, ns("format", DCNS))
+        fmt.text = "image/svg+xml"
+        typ = etree.SubElement(work, ns("type", DCNS))
+        typ.set(ns("resource", RDFNS), "http://purl.org/dc/dcmitype/StillImage")
+        title = etree.SubElement(work, ns("title", DCNS))
+
+        self.layer = etree.SubElement(self.root, "g")
+        self.layer.set(ns("label", ISNS), "Layer 1")
+        self.layer.set(ns("groupmode", ISNS), "layer")
+        self.layer.set("id", "layer1")
+
+        self.current = self.layer
+        self.parents = []
+        self.depth = 0
+
+        #self.xml = ''
         self.buffered = []
         self.textpos = Point(0, 0)
-        self.write('svg', xmlns='http://www.w3.org/2000/svg', close=False, **attrs)
+        # self.write('svg', xmlns='http://www.w3.org/2000/svg', close=False, **attrs)
         self.x = 0
         self.y = 0
         self.w = 1
         self.r = Point(0, 0)
         self.fg = Color(0, 0, 0)
         self.bg = Color(255, 255, 255, bpp=8)
+        self.id = 0;
+        
+        #self.last_rect = None
+        #self.last_rrect = None
+        #self.last_arc = None
+        #self.last_oval = None
 
+        self.save_rect = None
+        self.save_rrect = None
+        self.save_oval = None
+        self.save_oval_size = None
+        self.save_arc = None
+        self.save_start_angle = None
+        self.save_arc_angle = None
+
+    """
     def write(self, element, close=True, data=None, **attrs):
         if self.buffered:
             text = '\r'.join(self.buffered)
@@ -126,17 +227,95 @@ class SVGContext:
             if close:
                 parts.append('/')
             self.xml += '<{}>\n'.format(' '.join(parts))
+    """
 
-    def text(self, s, x=None, y=None):
-        if x and not self.textpos.x:
+    def group_start(self):
+        self.depth += 1
+        print(">>>>>>>>> GROUP START %d" % self.depth)
+        self.parents.append(self.current)
+        self.current = self.element("g")
+
+    def group_close(self):
+        self.depth -= 1
+        print("<<<<<<<<< GROUP END %d" % self.depth)
+        self.current = self.parents[-1]
+        self.parents = self.parents[:-1]
+
+    def element(self, tag):
+        e = etree.SubElement(self.current, tag)
+        e.set("id", self.getid(tag))
+        return e
+
+    def getid(self, thing):
+        self.id += 1
+        return (thing + "%s") % self.id
+
+    def text(self, s, x=None, y=None, dh=None, dv=None):
+        if x: # and not self.textpos.x:
             self.textpos.x = x
-        if y and not self.textpos.y:
+        if y: # and not self.textpos.y:
             self.textpos.y = y
-        self.buffered.append(str(s))
+        if dh:
+            self.textpos.x += dh
+        if dv:
+            self.textpos.y += dv
+        self.buffered.append({
+            "string": str(s),
+            "x": self.textpos.x,
+            "y": self.textpos.y
+        })
 
-    def close(self):
-        self.xml += '</svg>\n'
-        return self.xml
+    def flush_text(self):
+        text = etree.SubElement(self.current, "text")
+        text.set(ns("space", XMLNS), "preserve")
+        text.set("style", "font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:monospace;-inkscape-font-specification:monospace;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
+        text.set("x", str(self.textpos.x))
+        text.set("y", str(self.textpos.y))
+        text.set("id", self.getid("text"))
+        # print(self.buffered)
+        # thestr = "".join(self.buffered)
+        # print(thestr.splitlines())
+        for idx, line in enumerate(self.buffered):
+            tspan = etree.SubElement(text, "tspan")
+            tspan.set(ns("role", SPNS), "line")
+            tspan.set("id", self.getid("tspan"))
+            tspan.set("x", str(line["x"]))
+            tspan.set("y", str(line["y"]))
+            tspan.set("style", "stroke-width:0.25;")
+            tspan.text = line["string"]
+        self.buffered = []
+
+
+    def fill(self, el):
+        oldstyle = el.get("style")
+        fill = "fill: %s; " % self.fg
+        if oldstyle:
+            el.set("style", oldstyle + fill)
+        else:
+            el.set("style", fill)
+
+    def stroke(self, el):
+        oldstyle = el.get("style")
+        stroke = "stroke: %s; stroke-width: %s; " % (self.fg, self.w)
+        if oldstyle:
+            el.set("style", oldstyle + stroke)
+        else:
+            el.set("style", stroke)
+
+    def rect_data(self, rect, el):
+        el.set("x", str(rect.left + self.x))
+        el.set("y", str(rect.top + self.y))
+        el.set("width", str(rect.width))
+        el.set("height", str(rect.height))
+
+
+    def close(self, filename):
+        # self.xml += '</svg>\n'
+        # return self.xml
+        #return etree.tostring(self.root)
+        tree = etree.ElementTree(self.root)
+        tree.write(filename, encoding="UTF-8")
+        return 0
 
 
 class Operation:
@@ -213,6 +392,7 @@ class Origin (Operation):
 
     def parse(self, data, context):
         dh, dv = data.unpack('hh')
+        print("Origin: %d %d" % (dh, dv))
         context.x -= dh
         context.y -= dv
 
@@ -277,7 +457,7 @@ class LongText (Operation):
         loc = data.point()
         size = data.byte()
         text = data.read(size).decode('macintosh')
-        context.text(text, x=context.x + loc.x, y=context.y + loc.y)
+        context.text(text, x=loc.x, y=loc.y)
 
 
 class DHText (Operation):
@@ -285,7 +465,7 @@ class DHText (Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode('macintosh')
-        context.text(text, x=context.x + dh, y=context.y)
+        context.text(text, dh = dh)
 
 
 class DVText (Operation):
@@ -293,7 +473,7 @@ class DVText (Operation):
     def parse(self, data, context):
         dv, size = data.read(2)
         text = data.read(size).decode('macintosh')
-        context.text(text, x=context.x, y=context.y + dv)
+        context.text(text, dv = dv)
 
 
 class DHDVText (Operation):
@@ -301,84 +481,161 @@ class DHDVText (Operation):
     def parse(self, data, context):
         dh, dv, size = data.read(3)
         text = data.read(size).decode('macintosh')
-        context.text(text, x=context.x + dh, y=context.y + dv)
+        context.text(text, dh = dh, dv = dv)
 
 
 class FrameRectangle (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
-        context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill='none', stroke=context.fg, stroke_width=context.w)
+        # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill='none', stroke=context.fg, stroke_width=context.w)
+        svgrect = context.element("rect")
+        context.rect_data(rect, svgrect)
+        context.stroke(svgrect)
+        context.last_rect = svgrect
+
 
 
 class PaintRectangle (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
-        context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill=context.fg)
-
+        # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill=context.fg)
+        svgrect = context.element("rect")
+        context.rect_data(rect, svgrect)
+        context.fill(svgrect)
+        context.last_rect = svgrect
 
 class FrameSameRectangle (Operation):
-    pass
+
+    def parse(self, data, context):
+        context.stroke(context.last_rect)
 
 
 class PaintSameRectangle (Operation):
-    pass
+
+    def parse(self, data, context):
+        context.fill(context.last_rect)
 
 
 class FrameRoundedRectangle (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
-        context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill='none', stroke=context.fg, stroke_width=context.w, rx=context.r.x, ry=context.r.y)
-
+        # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill='none', stroke=context.fg, stroke_width=context.w, rx=context.r.x, ry=context.r.y)
+        svgrrect = context.element("rect")
+        context.rect_data(rect, svgrect)
+        context.stroke(svgrrect)
+        context.last_rrect = svgrrect
 
 class PaintRoundedRectangle (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
-        context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill=context.fg, rx=context.r.x, ry=context.r.y)
+        # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill=context.fg, rx=context.r.x, ry=context.r.y)
+        svgrrect = context.element("rect")
+        context.rect_data(rect, svgrrect)
+        context.fill(svgrrect)
+        context.last_rrect = svgrrect
 
 
 class FrameSameRoundedRectangle (Operation):
-    pass
+
+    def parse(self, data, context):
+        context.stroke(context.last_rrect)
 
 
 class PaintSameRoundedRectangle (Operation):
-    pass
+    
+    def parse(self, data, context):
+        context.fill(context.last_rrect)
 
 
 class FrameOval (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
+        ellipse = context.element("ellipse")
+
+        rx = rect.width / 2.0
+        ry = rect.height / 2.0
+        cx = rect.left + rx
+        cy = rect.top + ry
+
+        ellipse.set("cx", str(cx))
+        ellipse.set("cy", str(cy))
+        ellipse.set("rx", str(rx))
+        ellipse.set("ry", str(ry))
+
+        context.stroke(ellipse)
+        context.last_oval = ellipse
 
 
 class PaintOval (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
+        ellipse = context.element("ellipse")
+
+        rx = rect.width / 2.0
+        ry = rect.height / 2.0
+        cx = rect.left + rx
+        cy = rect.top + ry
+
+        ellipse.set("cx", str(cx))
+        ellipse.set("cy", str(cy))
+        ellipse.set("rx", str(rx))
+        ellipse.set("ry", str(ry))
+
+        context.fill(ellipse)
+        context.last_oval = ellipse
+
 
 
 class FrameSameOval (Operation):
-    pass
+
+    def parse(self, data, context):
+        context.stroke(context.last_oval)
 
 
 class PaintSameOval (Operation):
-    pass
+
+    def parse(self, data, context):
+        context.fill(context.last_oval)
 
 
-def arc_path(context, rect, start, angle):
+def arc_path(context, rect, start, angle, arc):
+
     start -= 90
-    x = context.x + rect.left + (rect.width // 2)
-    y = context.y + rect.top + (rect.height // 2)
+
+    cx = context.x + rect.left + (rect.width // 2)
+    cy = context.y + rect.top + (rect.height // 2)
+
     radius = min(rect.width / 2, rect.height / 2)
-    start_x = x + (radius * math.cos(math.radians(start)))
-    start_y = y + (radius * math.sin(math.radians(start)))
-    end_x = x + (radius * math.cos(math.radians(start + angle)))
-    end_y = y + (radius * math.sin(math.radians(start + angle)))
-    d = ['M', start_x, start_y, 'A', radius, radius, 0, 1, end_x, end_y]
-    return ' '.join(str(p) for p in d)
+
+    p1 = polar_to_cartesian(cx, cy, radius, start)
+    p2 = polar_to_cartesian(cx, cy, radius, start + angle)
+
+    dfmt = "M %d %d L %d %d A %d %d %d %d %d %d %d L %d %d"
+
+    d = dfmt % (cx, cy, p1[0], p1[1], radius, radius, 0, 0, 1, p2[0], p2[1], cx, cy)
+
+    
+    arc.set(ns("type", SPNS), "arc")
+    arc.set(ns("cx", SPNS), str(cx))
+    arc.set(ns("cy", SPNS), str(cy))
+    arc.set(ns("rx", SPNS), str(radius))
+    arc.set(ns("ry", SPNS), str(radius))
+    arc.set(ns("start", SPNS), str(math.radians(start)))
+    arc.set(ns("end", SPNS), str(math.radians(start + angle)))
+    
+    arc.set("d", d)
+
+def polar_to_cartesian(cx, cy, r, angle):
+    rads = math.radians(angle)
+    x = cx + r * math.cos(rads)
+    y = cy + r * math.sin(rads)
+    return (x, y)
 
 
 class FrameArc (Operation):
@@ -386,8 +643,12 @@ class FrameArc (Operation):
     def parse(self, data, context):
         rect = data.rect()
         start, angle = data.unpack('hh')
-        path = arc_path(context, rect, start, angle)
-        context.write('path', d=path, stroke=context.fg)
+
+        arc = context.element("path")
+        arc_path(context, rect, start, angle)
+
+        context.stroke(arc)
+        context.last_arc = arc
 
 
 class PaintArc (Operation):
@@ -395,26 +656,39 @@ class PaintArc (Operation):
     def parse(self, data, context):
         rect = data.rect()
         start, angle = data.unpack('hh')
-        path = arc_path(context, rect, start, angle)
-        context.write('path', d=path, fill=context.fg)
+
+        arc = context.element("path")
+        arc_path(context, rect, start, angle, arc)
+        context.fill(arc)
+        context.last_arc = arc
 
 
 class FrameSameArc (Operation):
 
     def parse(self, data, context):
         start, angle = data.unpack('hh')
+        context.stroke(context.last_arc)
 
 
 class PaintSameArc (Operation):
 
     def parse(self, data, context):
         start, angle = data.unpack('hh')
+        context.fill(context.last_arc)
 
 
 class ShortComment (Operation):
 
     def parse(self, data, context):
         kind = data.short()
+        if kind == 151:
+            # picTextEnd
+            context.flush_text()
+        if kind == 140:
+            context.group_start()
+        if kind == 141:
+            context.group_close()
+        print("ShortComment: %d" % kind)
 
 
 class LongComment (Operation):
@@ -434,7 +708,6 @@ class Version (Operation):
 
 class Header (Operation):
     length = 24
-
 
 PICT_OPCODES = {
     0x0: NOOP,
@@ -488,22 +761,25 @@ PICT_OPCODES = {
 }
 
 
-def parse_pict(data):
+def parse_pict(data, fn):
     buf = DataBuffer(data)
     size = buf.short()
     frame = buf.rect()
-    context = SVGContext(viewBox=frame.box())
+    print(frame)
+    context = SVGContext(frame)
     while buf:
         opcode = buf.short()
         op = PICT_OPCODES[opcode]()
+        # print(opcode)
         if isinstance(op, EndPict):
             break
-        # print(op.__class__.__name__)
+        print(op.__class__.__name__)
         op.parse(buf, context)
         buf.align()
-    return context.close()
+    return context.close(fn)
 
 
 if __name__ == '__main__':
     data = open(sys.argv[1], 'rb').read()
-    print(parse_pict(data))
+    filename = sys.argv[2]
+    parse_pict(data, filename)
