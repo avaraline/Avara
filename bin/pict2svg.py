@@ -7,9 +7,7 @@ import struct
 import sys
 import re
 import math
-from enum import Enum
 from lxml import etree
-
 
 class Rect:
 
@@ -191,21 +189,21 @@ class SVGContext:
         self.y = 0
         self.w = 1
         self.r = Point(0, 0)
-        self.fg = Color(0, 0, 0)
-        self.bg = Color(255, 255, 255, bpp=8)
+        self.fg = Color(255, 255, 255)
+        self.bg = Color(255, 255, 255)
         self.id = 0;
         
-        #self.last_rect = None
-        #self.last_rrect = None
-        #self.last_arc = None
-        #self.last_oval = None
+        self.last_rect = None
+        self.last_rrect = None
+        self.last_arc = None
+        self.last_oval = None
 
         self.save_rect = None
         self.save_rrect = None
         self.save_oval = None
-        self.save_oval_size = None
+
         self.save_arc = None
-        self.save_start_angle = None
+        self.save_arc_start = None
         self.save_arc_angle = None
 
     """
@@ -488,6 +486,7 @@ class FrameRectangle (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
+        context.save_rect = rect
         # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill='none', stroke=context.fg, stroke_width=context.w)
         svgrect = context.element("rect")
         context.rect_data(rect, svgrect)
@@ -495,11 +494,11 @@ class FrameRectangle (Operation):
         context.last_rect = svgrect
 
 
-
 class PaintRectangle (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
+        context.save_rect = rect
         # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill=context.fg)
         svgrect = context.element("rect")
         context.rect_data(rect, svgrect)
@@ -642,11 +641,13 @@ class FrameArc (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
+        context.save_arc = rect
         start, angle = data.unpack('hh')
+        context.save_arc_start = start
+        context.save_arc_angle = angle
 
         arc = context.element("path")
-        arc_path(context, rect, start, angle)
-
+        arc_path(context, rect, start, angle, arc)
         context.stroke(arc)
         context.last_arc = arc
 
@@ -655,7 +656,10 @@ class PaintArc (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
+        context.save_arc = rect
         start, angle = data.unpack('hh')
+        context.save_arc_start = start
+        context.save_arc_angle = angle
 
         arc = context.element("path")
         arc_path(context, rect, start, angle, arc)
@@ -667,14 +671,28 @@ class FrameSameArc (Operation):
 
     def parse(self, data, context):
         start, angle = data.unpack('hh')
-        context.stroke(context.last_arc)
+        if (start == context.save_arc_start and
+            angle == context.save_arc_angle):
+            context.stroke(context.last_arc)
+        else:
+            arc = context.element("path")
+            arc_path(context, context.save_arc, start, angle, arc)
+            context.stroke(arc)
+            context.last_arc = arc
 
 
 class PaintSameArc (Operation):
 
     def parse(self, data, context):
         start, angle = data.unpack('hh')
-        context.fill(context.last_arc)
+        if (start == context.save_arc_start and
+            angle == context.save_arc_angle):
+            context.fill(context.last_arc)
+        else:
+            arc = context.element("path")
+            arc_path(context, context.save_arc, start, angle, arc)
+            context.fill(arc)
+            context.last_arc = arc
 
 
 class ShortComment (Operation):
@@ -773,7 +791,7 @@ def parse_pict(data, fn):
         # print(opcode)
         if isinstance(op, EndPict):
             break
-        print(op.__class__.__name__)
+        # print(op.__class__.__name__)
         op.parse(buf, context)
         buf.align()
     return context.close(fn)
