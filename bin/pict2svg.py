@@ -250,9 +250,9 @@ class SVGContext:
 
     def text(self, s, x=None, y=None, dh=None, dv=None):
         if x: # and not self.textpos.x:
-            self.textpos.x = x
+            self.textpos.x = x + self.x
         if y: # and not self.textpos.y:
-            self.textpos.y = y
+            self.textpos.y = y + self.y
         if dh:
             self.textpos.x += dh
         if dv:
@@ -294,11 +294,12 @@ class SVGContext:
 
     def stroke(self, el):
         oldstyle = el.get("style")
-        stroke = "stroke: %s; stroke-width: %s; " % (self.fg, self.w)
+        stroke = "stroke: %s; stroke-width: %s; " % (self.fg, str(self.w))
         if oldstyle:
             el.set("style", oldstyle + stroke)
         else:
             el.set("style", stroke)
+        print(stroke)
 
     def rect_data(self, rect, el):
         el.set("x", str(rect.left + self.x))
@@ -366,7 +367,8 @@ class PenSize (Operation):
 
     def parse(self, data, context):
         size = data.point()
-
+        context.w = size.x
+        print("Pensize is now %d" % context.w)
 
 class PenMode (Operation):
 
@@ -441,12 +443,16 @@ class ShortLine (Operation):
     def parse(self, data, context):
         start = data.point()
         dh, dv = data.read(2)
+        context.x += dh
+        context.y += dv
 
 
 class ShortLineFrom (Operation):
 
     def parse(self, data, context):
         dh, dv = data.read(2)
+        context.x += dh
+        context.y += dv
 
 
 class LongText (Operation):
@@ -455,6 +461,8 @@ class LongText (Operation):
         loc = data.point()
         size = data.byte()
         text = data.read(size).decode('macintosh')
+        print("New text location: %d %d" % (loc.x, loc.y))
+        print(text)
         context.text(text, x=loc.x, y=loc.y)
 
 
@@ -463,6 +471,8 @@ class DHText (Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode('macintosh')
+        print("Horizontal text adjustment: %d" % dh)
+        print(text)
         context.text(text, dh = dh)
 
 
@@ -471,6 +481,8 @@ class DVText (Operation):
     def parse(self, data, context):
         dv, size = data.read(2)
         text = data.read(size).decode('macintosh')
+        print("Vertical text adjustment: %d" % dv)
+        print(text)
         context.text(text, dv = dv)
 
 
@@ -479,6 +491,9 @@ class DHDVText (Operation):
     def parse(self, data, context):
         dh, dv, size = data.read(3)
         text = data.read(size).decode('macintosh')
+        print("Horizontal text adjustment: %d" % dh)
+        print("Vertical text adjustment: %d" % dv)
+        print(text)
         context.text(text, dh = dh, dv = dv)
 
 
@@ -607,33 +622,35 @@ def arc_path(context, rect, start, angle, arc):
 
     start -= 90
 
-    cx = context.x + rect.left + (rect.width // 2)
-    cy = context.y + rect.top + (rect.height // 2)
+    rx = rect.width // 2
+    ry = rect.height // 2
 
-    radius = min(rect.width / 2, rect.height / 2)
+    cx = context.x + rect.left + rx
+    cy = context.y + rect.top + ry
 
-    p1 = polar_to_cartesian(cx, cy, radius, start)
-    p2 = polar_to_cartesian(cx, cy, radius, start + angle)
+
+    p1 = polar_to_cartesian(cx, cy, rx, ry, start)
+    p2 = polar_to_cartesian(cx, cy, rx, ry, start + angle)
 
     dfmt = "M %d %d L %d %d A %d %d %d %d %d %d %d L %d %d"
 
-    d = dfmt % (cx, cy, p1[0], p1[1], radius, radius, 0, 0, 1, p2[0], p2[1], cx, cy)
+    d = dfmt % (cx, cy, p1[0], p1[1], rx, ry, 0, 0, 1, p2[0], p2[1], cx, cy)
 
     
     arc.set(ns("type", SPNS), "arc")
     arc.set(ns("cx", SPNS), str(cx))
     arc.set(ns("cy", SPNS), str(cy))
-    arc.set(ns("rx", SPNS), str(radius))
-    arc.set(ns("ry", SPNS), str(radius))
+    arc.set(ns("rx", SPNS), str(rx))
+    arc.set(ns("ry", SPNS), str(ry))
     arc.set(ns("start", SPNS), str(math.radians(start)))
     arc.set(ns("end", SPNS), str(math.radians(start + angle)))
     
     arc.set("d", d)
 
-def polar_to_cartesian(cx, cy, r, angle):
+def polar_to_cartesian(cx, cy, rx, ry, angle):
     rads = math.radians(angle)
-    x = cx + r * math.cos(rads)
-    y = cy + r * math.sin(rads)
+    x = cx + rx * math.cos(rads)
+    y = cy + ry * math.sin(rads)
     return (x, y)
 
 
@@ -676,6 +693,8 @@ class FrameSameArc (Operation):
             context.stroke(context.last_arc)
         else:
             arc = context.element("path")
+            context.save_arc_start = start
+            context.save_arc_angle = angle
             arc_path(context, context.save_arc, start, angle, arc)
             context.stroke(arc)
             context.last_arc = arc
@@ -690,6 +709,8 @@ class PaintSameArc (Operation):
             context.fill(context.last_arc)
         else:
             arc = context.element("path")
+            context.save_arc_start = start
+            context.save_arc_angle = angle
             arc_path(context, context.save_arc, start, angle, arc)
             context.fill(arc)
             context.last_arc = arc
@@ -791,7 +812,7 @@ def parse_pict(data, fn):
         # print(opcode)
         if isinstance(op, EndPict):
             break
-        # print(op.__class__.__name__)
+        print(op.__class__.__name__)
         op.parse(buf, context)
         buf.align()
     return context.close(fn)
