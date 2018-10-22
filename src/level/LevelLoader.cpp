@@ -14,6 +14,7 @@
 #include "FastMat.h"
 #include "Memory.h"
 #include "PICTParser.h"
+#include "SVGParser.h"
 #include "Parser.h"
 #include "Resource.h"
 
@@ -68,6 +69,19 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     return POINTTOUNIT(lastDomeRadius);
 }
 
+void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool fg) {
+    if (fg) {
+        fillColor.red = r * 100;
+        fillColor.green = g;
+        fillColor.blue = b;
+    }
+    else {
+        frameColor.red = r;
+        frameColor.green = g;
+        frameColor.blue = b;
+    }
+}
+
 int GetPixelColor() {
     return ((((int)fillColor.red) << 8) & 0xFF0000) | (fillColor.green & 0xFF00) | (fillColor.blue >> 8);
 }
@@ -94,6 +108,15 @@ Fixed GetLastOval(Fixed *theLoc) {
 
 Fixed GetLastArcDirection() {
     return FDegToOne(((long)lastArcAngle) << 16);
+}
+
+static void SvgRect(SVGContext *context, Rect *r, int radius) {
+    SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
+    SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
+    CWallActor *theWall;
+    theWall = new CWallActor;
+    theWall->IAbstractActor();
+    theWall->MakeWallFromRect(r, (short)radius, 0, true);
 }
 
 static void PeepStdRRect(PICTContext *context, GrafVerb verb, Rect *r, short ovalWidth, short ovalHeight) {
@@ -301,7 +324,7 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
 void ConvertToLevelMap(Handle levelData) {
     InitParser();
     textBuffer = NewPtr(textBufferSize);
-
+    /*
     PICTParser *parser = new PICTParser();
     parser->callbacks.arcProc = &PeepStdArc;
     parser->callbacks.rRectProc = &PeepStdRRect;
@@ -313,7 +336,14 @@ void ConvertToLevelMap(Handle levelData) {
     // parser->callbacks.getPicProc = &PeekGetPic;
     parser->Parse(levelData);
     delete parser;
+    */
 
+    SVGParser *parser = new SVGParser();
+    parser->callbacks.rectProc = &SvgRect;
+    parser->callbacks.colorProc = &SvgColor;
+
+    parser->Parse();
+    delete parser;
     /*
     TODO: replace this with a basic PICT parser with drawing function callbacks
 
