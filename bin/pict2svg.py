@@ -79,7 +79,6 @@ class DataBuffer:
 
     def fixed(self):
         fixd = self.unpack('l')[0]
-        print(fixd)
         return fixd / 65536.0
 
     def byte(self):
@@ -229,13 +228,11 @@ class SVGContext:
 
     def group_start(self):
         self.depth += 1
-        print(">>>>>>>>> GROUP START %d" % self.depth)
         self.parents.append(self.current)
         self.current = self.element("g")
 
     def group_close(self):
         self.depth -= 1
-        print("<<<<<<<<< GROUP END %d" % self.depth)
         self.current = self.parents[-1]
         self.parents = self.parents[:-1]
 
@@ -248,40 +245,58 @@ class SVGContext:
         self.id += 1
         return (thing + "%s") % self.id
 
-    def text(self, s, x=None, y=None, dh=None, dv=None):
-        if x: # and not self.textpos.x:
-            self.textpos.x = x + self.x
-        if y: # and not self.textpos.y:
-            self.textpos.y = y + self.y
+    def text(self, s, x=None, y=None, dh=0, dv=0):
+        if x:
+            self.textpos.x = x
+        if y:
+            self.textpos.y = y
         if dh:
             self.textpos.x += dh
         if dv:
             self.textpos.y += dv
-        self.buffered.append({
-            "string": str(s),
+        print(s)
+        self.buffered.extend([{
+            "string": str(x),
             "x": self.textpos.x,
             "y": self.textpos.y
-        })
+        } for x in s.split('\r')])
 
     def flush_text(self):
+        x = self.buffered[0]["x"]
+        y = self.buffered[0]["y"]
+
         text = etree.SubElement(self.current, "text")
         text.set(ns("space", XMLNS), "preserve")
-        text.set("style", "font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:monospace;-inkscape-font-specification:monospace;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
-        text.set("x", str(self.textpos.x))
-        text.set("y", str(self.textpos.y))
+        text.set("style", "font-size:10px;font-family:monospace;-inkscape-font-specification:monospace;word-spacing:0px;fill:#000000;fill-opacity:1;")
+        text.set("x", str(x))
+        text.set("y", str(y))
         text.set("id", self.getid("text"))
-        # print(self.buffered)
-        # thestr = "".join(self.buffered)
-        # print(thestr.splitlines())
+
+        last_v = self.buffered[0]["y"]
+        last_dv = 0
         for idx, line in enumerate(self.buffered):
-            tspan = etree.SubElement(text, "tspan")
-            tspan.set(ns("role", SPNS), "line")
-            tspan.set("id", self.getid("tspan"))
-            tspan.set("x", str(line["x"]))
-            tspan.set("y", str(line["y"]))
-            tspan.set("style", "stroke-width:0.25;")
-            tspan.text = line["string"]
+            # handle line breaks -- if the y difference 
+            # between these two lines is 2x the last
+            # difference, add a line break
+            dv = line["y"] - last_v
+            if dv == last_dv * 2 and dv != 0:
+                # empty tspan makes a linebreak
+                self.tspan(text, "", line["x"], dv // 2)
+            last_v = line["y"] 
+            last_dv = dv
+
+            self.tspan(text, line["string"], line["x"], line["y"])
+
         self.buffered = []
+
+    def tspan(self, text, string, x, y):
+        tspan = etree.SubElement(text, "tspan")
+        tspan.set(ns("role", SPNS), "line")
+        tspan.set("id", self.getid("tspan"))
+        tspan.set("x", str(x))
+        tspan.set("y", str(y))
+        tspan.set("style", "stroke-width:0.25;")
+        tspan.text = string
 
 
     def fill(self, el):
@@ -299,7 +314,6 @@ class SVGContext:
             el.set("style", oldstyle + stroke)
         else:
             el.set("style", stroke)
-        print(stroke)
 
     def rect_data(self, rect, el):
         el.set("x", str(rect.left + self.x))
@@ -307,11 +321,16 @@ class SVGContext:
         el.set("width", str(rect.width))
         el.set("height", str(rect.height))
 
+    def null_fill(self, el):
+        if el == None:
+            return
+        # use this to ensure that no element goes without a 
+        # fill instruction, otherwise stuff looks weird
+        style = el.get("style")
+        if "fill" not in style:
+            el.set("style", style + "fill: none;")
 
     def close(self, filename):
-        # self.xml += '</svg>\n'
-        # return self.xml
-        #return etree.tostring(self.root)
         tree = etree.ElementTree(self.root)
         tree.write(filename, encoding="UTF-8")
         return 0
@@ -368,7 +387,6 @@ class PenSize (Operation):
     def parse(self, data, context):
         size = data.point()
         context.w = size.x
-        print("Pensize is now %d" % context.w)
 
 class PenMode (Operation):
 
@@ -392,7 +410,6 @@ class Origin (Operation):
 
     def parse(self, data, context):
         dh, dv = data.unpack('hh')
-        print("Origin: %d %d" % (dh, dv))
         context.x -= dh
         context.y -= dv
 
@@ -461,9 +478,8 @@ class LongText (Operation):
         loc = data.point()
         size = data.byte()
         text = data.read(size).decode('macintosh')
-        print("New text location: %d %d" % (loc.x, loc.y))
-        print(text)
-        context.text(text, x=loc.x, y=loc.y)
+        # LongText is (top, left) so we flip x/y
+        context.text(text, x=loc.y, y=loc.x)
 
 
 class DHText (Operation):
@@ -471,8 +487,6 @@ class DHText (Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode('macintosh')
-        print("Horizontal text adjustment: %d" % dh)
-        print(text)
         context.text(text, dh = dh)
 
 
@@ -481,8 +495,6 @@ class DVText (Operation):
     def parse(self, data, context):
         dv, size = data.read(2)
         text = data.read(size).decode('macintosh')
-        print("Vertical text adjustment: %d" % dv)
-        print(text)
         context.text(text, dv = dv)
 
 
@@ -491,9 +503,6 @@ class DHDVText (Operation):
     def parse(self, data, context):
         dh, dv, size = data.read(3)
         text = data.read(size).decode('macintosh')
-        print("Horizontal text adjustment: %d" % dh)
-        print("Vertical text adjustment: %d" % dv)
-        print(text)
         context.text(text, dh = dh, dv = dv)
 
 
@@ -502,10 +511,10 @@ class FrameRectangle (Operation):
     def parse(self, data, context):
         rect = data.rect()
         context.save_rect = rect
-        # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill='none', stroke=context.fg, stroke_width=context.w)
         svgrect = context.element("rect")
         context.rect_data(rect, svgrect)
         context.stroke(svgrect)
+        context.null_fill(context.last_rect)
         context.last_rect = svgrect
 
 
@@ -514,10 +523,10 @@ class PaintRectangle (Operation):
     def parse(self, data, context):
         rect = data.rect()
         context.save_rect = rect
-        # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill=context.fg)
         svgrect = context.element("rect")
         context.rect_data(rect, svgrect)
         context.fill(svgrect)
+        context.null_fill(context.last_rect)
         context.last_rect = svgrect
 
 class FrameSameRectangle (Operation):
@@ -536,20 +545,22 @@ class FrameRoundedRectangle (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
-        # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill='none', stroke=context.fg, stroke_width=context.w, rx=context.r.x, ry=context.r.y)
         svgrrect = context.element("rect")
         context.rect_data(rect, svgrect)
+        svgrect.set("ry", context.r.y)
         context.stroke(svgrrect)
+        context.null_fill(context.last_rrect)
         context.last_rrect = svgrrect
 
 class PaintRoundedRectangle (Operation):
 
     def parse(self, data, context):
         rect = data.rect()
-        # context.write('rect', x=rect.left + context.x, y=rect.top + context.y, width=rect.width, height=rect.height, fill=context.fg, rx=context.r.x, ry=context.r.y)
         svgrrect = context.element("rect")
         context.rect_data(rect, svgrrect)
+        svgrect.set("ry", context.r.y)
         context.fill(svgrrect)
+        context.null_fill(context.last_rrect)
         context.last_rrect = svgrrect
 
 
@@ -582,6 +593,7 @@ class FrameOval (Operation):
         ellipse.set("ry", str(ry))
 
         context.stroke(ellipse)
+        context.null_fill(context.last_oval)
         context.last_oval = ellipse
 
 
@@ -602,6 +614,7 @@ class PaintOval (Operation):
         ellipse.set("ry", str(ry))
 
         context.fill(ellipse)
+        context.null_fill(context.last_oval)
         context.last_oval = ellipse
 
 
@@ -727,7 +740,6 @@ class ShortComment (Operation):
             context.group_start()
         if kind == 141:
             context.group_close()
-        print("ShortComment: %d" % kind)
 
 
 class LongComment (Operation):
@@ -804,15 +816,13 @@ def parse_pict(data, fn):
     buf = DataBuffer(data)
     size = buf.short()
     frame = buf.rect()
-    print(frame)
     context = SVGContext(frame)
     while buf:
         opcode = buf.short()
         op = PICT_OPCODES[opcode]()
-        # print(opcode)
         if isinstance(op, EndPict):
             break
-        print(op.__class__.__name__)
+        # print(op.__class__.__name__)
         op.parse(buf, context)
         buf.align()
     return context.close(fn)
