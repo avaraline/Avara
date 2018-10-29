@@ -8,6 +8,7 @@ import sys
 import re
 import math
 from lxml import etree
+from forker import get_forks
 
 class Rect:
 
@@ -816,10 +817,15 @@ def parse_pict(data, fn):
     buf = DataBuffer(data)
     size = buf.short()
     frame = buf.rect()
+    print(size, frame)
     context = SVGContext(frame)
     while buf:
         opcode = buf.short()
-        op = PICT_OPCODES[opcode]()
+        try:
+            op = PICT_OPCODES[opcode]()
+        except KeyError:
+            #print("No support for opcode %d" % opcode)
+            continue
         if isinstance(op, EndPict):
             break
         # print(op.__class__.__name__)
@@ -829,6 +835,26 @@ def parse_pict(data, fn):
 
 
 if __name__ == '__main__':
-    data = open(sys.argv[1], 'rb').read()
-    filename = sys.argv[2]
-    parse_pict(data, filename)
+    if len(sys.argv) > 2:
+        data = open(sys.argv[1], 'rb').read()
+        filename = sys.argv[2]
+        parse_pict(data, filename)
+    else:
+        # run against everything in levels
+        # and store them alongside
+        ldir = "levels"
+        for rsrc_file in os.listdir(ldir):
+            rpath = os.path.join(ldir, rsrc_file)
+            print(rpath)
+            data = open(rpath, 'rb').read()
+            rsrc = get_forks(data)
+            print(rsrc.keys())
+            if 'PICT' in rsrc:
+                dirname = rsrc_file.split('.')[0] + "_svg"
+                dirpath = os.path.join(ldir, dirname)
+                os.makedirs(dirpath, exist_ok=True)
+                picts = get_forks(data)['PICT']
+                for pict in picts:
+                    filename = "%s.svg" % str(pict["id"])
+                    print(filename)
+                    parse_pict(pict["data"], os.path.join(dirpath, filename))
