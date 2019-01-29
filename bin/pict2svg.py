@@ -8,7 +8,9 @@ import sys
 import re
 import math
 from lxml import etree
-from forker import get_forks
+#from forker import get_forks
+from Converter import resource
+import Converter.tmpl.reader as tmplReader
 
 class Rect:
 
@@ -94,6 +96,9 @@ class DataBuffer:
     def color(self):
         return Color(self.ushort(), self.ushort(), self.ushort())
 
+    def long(self):
+        return self.unpack('i')[0]
+
     def align(self):
         if self.pos % 2:
             self.pos += 1
@@ -117,6 +122,7 @@ NSMAP = {
     "inkscape": ISNS,
     "xml": XMLNS
 }
+TEXTSTYLE = "font-size:9px;font-family:monospace;-inkscape-font-specification:monospace;word-spacing:0px;fill:#000000;fill-opacity:1;"
 
 
 def ns(thing, ns):
@@ -130,47 +136,18 @@ class SVGContext:
         y = frame.bottom
         self.root = etree.Element("svg", nsmap = NSMAP)
         self.root.set("xmlns", "http://www.w3.org/2000/svg")
+
         self.root.set("width", str(x) + "px")
         self.root.set("height", str(y) + "px")
         self.root.set("viewBox", "0 0 %d %d" % (x, y))
+
         self.root.set("version", "1.1")
         self.root.set("id", "svg8")
+
         #TODO: set doc name properly
         self.root.set(ns("docname", SPNS), "test.svg")
 
-        defs = etree.SubElement(self.root, "defs")
-        defs.set("id", "defs2")
-
-        view = etree.SubElement(self.root, ns("namedview", SPNS))
-        view.set("id", "base")
-        view.set("pagecolor", "#ffffff")
-        view.set("bordercolor", "#666666")
-        view.set(ns("pageopacity", ISNS), "0.0")
-        view.set(ns("zoom", ISNS), "100")
-        view.set(ns("cx", ISNS), "0")
-        view.set(ns("cy", ISNS), "0")
-        view.set(ns("document-units", ISNS), "px")
-        view.set(ns("current-layer", ISNS), "layer1")
-        view.set(ns("window-x", ISNS), "-8")
-        view.set(ns("window-y", ISNS), "-8")
-        view.set("inkscape.window-maximized", "1")
-        view.set("showguides", "true")
-        view.set(ns("guide-bbox", ISNS), "true")
-
-        grid = etree.SubElement(view, ns("grid", ISNS))
-        grid.set("type", "xygrid")
-        grid.set("id", "grid1")
-
-        meta = etree.SubElement(self.root, "metadata")
-        meta.set("id", "metadata1")
-        rdf = etree.SubElement(meta, ns("RDF", RDFNS))
-        work = etree.SubElement(rdf, ns("Work", CCNS))
-        work.set(ns("about", RDFNS), "")
-        fmt = etree.SubElement(work, ns("format", DCNS))
-        fmt.text = "image/svg+xml"
-        typ = etree.SubElement(work, ns("type", DCNS))
-        typ.set(ns("resource", RDFNS), "http://purl.org/dc/dcmitype/StillImage")
-        title = etree.SubElement(work, ns("title", DCNS))
+        self.set_inkscape_options()
 
         self.layer = etree.SubElement(self.root, "g")
         self.layer.set(ns("label", ISNS), "Layer 1")
@@ -206,26 +183,41 @@ class SVGContext:
         self.save_arc_start = None
         self.save_arc_angle = None
 
-    """
-    def write(self, element, close=True, data=None, **attrs):
-        if self.buffered:
-            text = '\r'.join(self.buffered)
-            self.buffered = []
-            self.write('text', data=text, x=self.textpos.x, y=self.textpos.y)
-            self.textpos = Point(0, 0)
-        parts = [element]
-        for name, value in attrs.items():
-            # name = re.sub(r'([A-Z])', r'-\1', name).strip().lower()
-            name = name.replace('_', '-')
-            parts.append('{}="{}"'.format(name, str(value).replace('"', '&quot;')))
-        if data is not None:
-            data = str(data).replace('<', '&lt;').replace('>', '&gt')
-            self.xml += '<{}>{}</{}>\n'.format(' '.join(parts), data, element)
-        else:
-            if close:
-                parts.append('/')
-            self.xml += '<{}>\n'.format(' '.join(parts))
-    """
+    def set_inkscape_options(self):
+        defs = etree.SubElement(self.root, "defs")
+        defs.set("id", "defs2")
+
+        view = etree.SubElement(self.root, ns("namedview", SPNS))
+        view.set("id", "base")
+        view.set("pagecolor", "#ffffff")
+        view.set("bordercolor", "#666666")
+        view.set(ns("pageopacity", ISNS), "0.0")
+        view.set(ns("zoom", ISNS), "100")
+        view.set(ns("cx", ISNS), "0")
+        view.set(ns("cy", ISNS), "0")
+        view.set(ns("document-units", ISNS), "px")
+        view.set(ns("current-layer", ISNS), "layer1")
+        view.set(ns("window-x", ISNS), "-8")
+        view.set(ns("window-y", ISNS), "-8")
+        view.set("inkscape.window-maximized", "1")
+        view.set("showguides", "true")
+        view.set(ns("guide-bbox", ISNS), "true")
+
+        grid = etree.SubElement(view, ns("grid", ISNS))
+        grid.set("type", "xygrid")
+        grid.set("id", "grid1")
+
+        meta = etree.SubElement(self.root, "metadata")
+        meta.set("id", "metadata1")
+        rdf = etree.SubElement(meta, ns("RDF", RDFNS))
+        work = etree.SubElement(rdf, ns("Work", CCNS))
+        work.set(ns("about", RDFNS), "")
+        fmt = etree.SubElement(work, ns("format", DCNS))
+        fmt.text = "image/svg+xml"
+        typ = etree.SubElement(work, ns("type", DCNS))
+        typ.set(ns("resource", RDFNS), "http://purl.org/dc/dcmitype/StillImage")
+        title = etree.SubElement(work, ns("title", DCNS))
+
 
     def group_start(self):
         self.depth += 1
@@ -233,6 +225,9 @@ class SVGContext:
         self.current = self.element("g")
 
     def group_close(self):
+        if len(self.parents) < 1:
+            print("Group close with no group open...")
+            return
         self.depth -= 1
         self.current = self.parents[-1]
         self.parents = self.parents[:-1]
@@ -255,7 +250,7 @@ class SVGContext:
             self.textpos.x += dh
         if dv:
             self.textpos.y += dv
-        print(s)
+        # print(s.encode('ascii', 'ignore'))
         self.buffered.extend([{
             "string": str(x),
             "x": self.textpos.x,
@@ -263,12 +258,14 @@ class SVGContext:
         } for x in s.split('\r')])
 
     def flush_text(self):
+        if len(self.buffered) < 1:
+            return
         x = self.buffered[0]["x"]
         y = self.buffered[0]["y"]
 
         text = etree.SubElement(self.current, "text")
         text.set(ns("space", XMLNS), "preserve")
-        text.set("style", "font-size:10px;font-family:monospace;-inkscape-font-specification:monospace;word-spacing:0px;fill:#000000;fill-opacity:1;")
+        text.set("style", TEXTSTYLE)
         text.set("x", str(x))
         text.set("y", str(y))
         text.set("id", self.getid("text"))
@@ -291,16 +288,24 @@ class SVGContext:
         self.buffered = []
 
     def tspan(self, text, string, x, y):
+        if len(string) == 0:
+            return
         tspan = etree.SubElement(text, "tspan")
+        try:
+            tspan.text = string
+        except ValueError:
+            tspan.getparent().remove(tspan)
+            return
         tspan.set(ns("role", SPNS), "line")
         tspan.set("id", self.getid("tspan"))
         tspan.set("x", str(x))
         tspan.set("y", str(y))
         tspan.set("style", "stroke-width:0.25;")
-        tspan.text = string
-
+        # print(string.encode('ascii', 'ignore'))
 
     def fill(self, el):
+        #if not el:
+        #    return
         oldstyle = el.get("style")
         fill = "fill: %s; " % self.fg
         if oldstyle:
@@ -309,6 +314,8 @@ class SVGContext:
             el.set("style", fill)
 
     def stroke(self, el):
+        #if not el:
+        #    return
         oldstyle = el.get("style")
         stroke = "stroke: %s; stroke-width: %s; " % (self.fg, str(self.w))
         if oldstyle:
@@ -328,8 +335,11 @@ class SVGContext:
         # use this to ensure that no element goes without a 
         # fill instruction, otherwise stuff looks weird
         style = el.get("style")
-        if "fill" not in style:
-            el.set("style", style + "fill: none;")
+        #if not style:
+        #    el.set("style", "fill: none;")
+        #    return
+        #if "fill" not in style:
+        #    el.set("style", style + "fill: none;")
 
     def close(self, filename):
         tree = etree.ElementTree(self.root)
@@ -354,6 +364,138 @@ class VariableReserved (Operation):
 class NOOP (Operation):
     pass
 
+
+class SkipRegion (Operation):
+    def parse(self, data, context):
+        length = data.short()
+        # this is probably image data
+        # or a polygon description
+        stuff = data.read(length)
+
+PIXMAP_BIT = 0x8000
+def pixmap(data):
+    #base_addr = data.long()
+    row_bytes = data.short()
+    read_pixmap = row_bytes & PIXMAP_BIT != 0
+    bounds = data.rect()
+
+    if read_pixmap:
+        version = data.short()
+        pack_type = data.short()
+        pack_size = data.long()
+        hres = data.fixed()
+        vres = data.fixed()
+        pixel_type = data.short()
+        pixel_size = data.short()
+        cmp_count = data.short()
+        cmp_size = data.short()
+        plane_bytes = data.long()
+        pmtable = data.long()
+        reserved = data.long()
+
+        #print("base_addr: %s" % base_addr)
+        print("row_bytes: %s" % row_bytes)
+        print("read_pixmap: %s" % read_pixmap)
+        print("bounds: %s" % bounds)
+        print("version: %s" % version)
+        print("pack_type: %s" % pack_type)
+        print("pack_size: %s" % pack_size)
+        print("hres: %s" % hres)
+        print("vres: %s" % vres)
+        print("pixel_type: %s" % pixel_type)
+        print("pixel_size: %s" % pixel_size)
+        print("cmp_count: %s" % cmp_count)
+        print("cmp_size: %s" % cmp_size)
+        print("plane_bytes: %s" % plane_bytes)
+        print("pmtable: %s" % pmtable)
+        print("reserved: %s" % reserved)
+    else:
+        pass
+        # print(data.data)
+    return (bounds, row_bytes)
+
+
+def color_table(data):
+    ct_seed = data.long()
+    trans_index = data.short()
+    ct_size = data.short()
+    print("ct_size: %s" % ct_size)
+    ct = []
+    while ct_size > 0:
+        ct.append(data.short())
+        ct_size -= 1
+
+    print("ct_seed: %s" % ct_seed)
+    print("trans_index: %s" % trans_index)
+    print("ct: %s" % ct)
+
+def pixdata(data, pmap):
+    bounds = pmap[0]
+    row_bytes = pmap[1]
+
+    if row_bytes < 8:
+        lines_to_read = bounds.height
+        row_bytes = row_bytes & 0x7FFF
+
+        data_size = row_bytes * lines_to_read
+        print("data_size: %s" % data_size)
+        
+           
+        pixdata = data.read(data_size)
+        print("pixdata: %s" % pixdata)
+        # print(data.data[:900])
+    else:
+        scanlines = (bounds.bottom - bounds.top)
+        print("Scanlines: %d" % scanlines)
+        while scanlines > 1:
+            sl_size = 0
+            if row_bytes > 250:
+                sl_size = data.short()
+            else:
+                sl_size = data.byte()
+            scanline = data.read(sl_size)
+            scanlines -= 1
+
+
+class SkipReserved_x97 (Operation):
+    def parse(self, data, context):
+        length = data.short()
+        data.read(length)
+
+
+class BitsRect (Operation):
+    def parse(self, data, context):
+        print("BitsRect")
+        print( " ".join(format(x, '02x') for x in data.data[:300]))
+        pmap = pixmap(data)
+        #color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+
+
+        print("src_rect: %s" % src_rect)
+        print("dst_rect: %s" % dst_rect)
+        print("mode: %s" % mode)
+
+        pixdata(data, pmap)
+
+
+class BitsRgn (Operation):
+    def parse(self, data, context):
+        print("BitsRgn")
+        pmap = pixmap(data)
+        #color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+
+        mask_rgn_size = data.short()
+        mask_rgn = data.read(mask_rgn_size)
+
+        pixdata(data, pmap)
+        
+            
 
 class ClipRegion (Operation):
 
@@ -438,12 +580,14 @@ class RGBForegroundColor (Operation):
 
     def parse(self, data, context):
         context.fg = data.color()
+        # print(context.fg)
 
 
 class RGBBackgroundColor (Operation):
 
     def parse(self, data, context):
         context.bg = data.color()
+        # print(context.bg)
 
 
 class DefaultHighlight (Operation):
@@ -533,12 +677,18 @@ class PaintRectangle (Operation):
 class FrameSameRectangle (Operation):
 
     def parse(self, data, context):
+        if context.last_rect is None:
+            print("FrameSameRectangle with no last rect")
+            return
         context.stroke(context.last_rect)
 
 
 class PaintSameRectangle (Operation):
 
     def parse(self, data, context):
+        if context.last_rect is None:
+            print("PaintSameRectangle with no last rect")
+            return
         context.fill(context.last_rect)
 
 
@@ -547,8 +697,8 @@ class FrameRoundedRectangle (Operation):
     def parse(self, data, context):
         rect = data.rect()
         svgrrect = context.element("rect")
-        context.rect_data(rect, svgrect)
-        svgrect.set("ry", context.r.y)
+        context.rect_data(rect, svgrrect)
+        svgrrect.set("ry", str(context.r.y))
         context.stroke(svgrrect)
         context.null_fill(context.last_rrect)
         context.last_rrect = svgrrect
@@ -559,7 +709,7 @@ class PaintRoundedRectangle (Operation):
         rect = data.rect()
         svgrrect = context.element("rect")
         context.rect_data(rect, svgrrect)
-        svgrect.set("ry", context.r.y)
+        svgrrect.set("ry", str(context.r.y))
         context.fill(svgrrect)
         context.null_fill(context.last_rrect)
         context.last_rrect = svgrrect
@@ -568,12 +718,18 @@ class PaintRoundedRectangle (Operation):
 class FrameSameRoundedRectangle (Operation):
 
     def parse(self, data, context):
+        if context.last_rrect is None:
+            print("FrameSameRoundedRectangle with no last rrect")
+            return
         context.stroke(context.last_rrect)
 
 
 class PaintSameRoundedRectangle (Operation):
     
     def parse(self, data, context):
+        if context.last_rrect is None:
+            print("PaintSameRoundedRectangle with no last rrect")
+            return
         context.fill(context.last_rrect)
 
 
@@ -623,17 +779,25 @@ class PaintOval (Operation):
 class FrameSameOval (Operation):
 
     def parse(self, data, context):
+        if context.last_oval is None:
+            print("FrameSameOval with no last oval")
+            return
         context.stroke(context.last_oval)
 
 
 class PaintSameOval (Operation):
 
     def parse(self, data, context):
+        if context.last_oval is None:
+            print("PaintSameOval with no last oval")
+            return
         context.fill(context.last_oval)
 
 
 def arc_path(context, rect, start, angle, arc):
-
+    if not rect:
+        return
+    
     start -= 90
 
     rx = rect.width // 2
@@ -803,7 +967,18 @@ PICT_OPCODES = {
     0x61: PaintArc,
     0x68: FrameSameArc,
     0x69: PaintSameArc,
-    # 0x71: PaintPoly,
+    # these are used for region/polygon data
+    0x71: SkipRegion,
+    0x72: SkipRegion,
+    0x73: SkipRegion,
+    0x74: SkipRegion,
+    0x75: SkipRegion,
+    0x76: SkipRegion,
+    0x77: SkipRegion,
+    # picture data
+    0x90: BitsRect,
+    0x91: BitsRgn,
+    # comment fields
     0xa0: ShortComment,
     0xa1: LongComment,
     0x84: FillRegion,
@@ -824,8 +999,8 @@ def parse_pict(data, fn):
         try:
             op = PICT_OPCODES[opcode]()
         except KeyError:
-            #print("No support for opcode %d" % opcode)
-            continue
+            print("No support for opcode 0x%s" % format(opcode, '02x'))
+            exit(1)
         if isinstance(op, EndPict):
             break
         # print(op.__class__.__name__)
@@ -840,21 +1015,68 @@ if __name__ == '__main__':
         filename = sys.argv[2]
         parse_pict(data, filename)
     else:
+
+        avara_r = os.path.join("levels", "single-player.r")
+        data = open(avara_r, 'rb').read()
+
+        reader = resource.Reader()
+        avara_rsrc = reader.parse(data)
+        avara_tmpl = avara_rsrc['TMPL']
+
         # run against everything in levels
         # and store them alongside
         ldir = "levels"
+
         for rsrc_file in os.listdir(ldir):
             rpath = os.path.join(ldir, rsrc_file)
             print(rpath)
+
+            if os.path.isdir(rpath):
+                continue
+
             data = open(rpath, 'rb').read()
-            rsrc = get_forks(data)
+
+            reader = resource.Reader()
+            rsrc = reader.parse(data)
+            rsrc['TMPL'] = avara_tmpl
+
+            tmplData = tmplReader.parse(rsrc)
+            # avara reads the LEDI #128
+            set_ledi = tmplData['LEDI'][128]
+
+            # the key for the list of levels is
+            # five asterisks
+            ledi_meta = {}
+            for single_ledi in set_ledi["*****"]:
+                # store these in a dictionary by pict name
+                ledi_meta[single_ledi["Path"]] = single_ledi
+
+            #rsrc = get_forks(data)
             print(rsrc.keys())
+            if 'LEDI' not in rsrc:
+                print("No LEDI found for set %s" % rpath)
+                continue
+
+            ledi = rsrc['LEDI']
+
             if 'PICT' in rsrc:
                 dirname = rsrc_file.split('.')[0] + "_svg"
                 dirpath = os.path.join(ldir, dirname)
                 os.makedirs(dirpath, exist_ok=True)
-                picts = get_forks(data)['PICT']
+                print(rsrc['PICT'].keys())
+                picts = rsrc['PICT']
                 for pict in picts:
-                    filename = "%s.svg" % str(pict["id"])
+                    name = picts[pict]["name"]
+                    # make sure we have an LEDI for this
+                    if name not in ledi_meta:
+                        print("%s is not in LEDI, skipping" % name)
+                        continue
+
+                    meta = ledi_meta[name]
+                    data = picts[pict]["data"]
+                    
+                    filename = "%s_%s_%s.svg" % (str(pict), meta["Tag"], name)
                     print(filename)
-                    parse_pict(pict["data"], os.path.join(dirpath, filename))
+                    #print(meta["Name"].encode('macintosh'))
+                    #print(meta["Message"].encode('macintosh'))
+                    parse_pict(data, os.path.join(dirpath, filename))
