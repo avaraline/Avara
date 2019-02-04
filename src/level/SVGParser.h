@@ -14,10 +14,13 @@ typedef struct {
 	RGBColor bgColor;
 } SVGContext;
 
-typedef void SVGRectProc(Rect *r, int radius);
+typedef void SVGRectProc(SVGContext *context, Rect *r, int radius);
+typedef void SVGColorProc(unsigned short r, unsigned short g, unsigned short b, bool fg);
+
 
 struct SVGProcs {
 	SVGRectProc *rectProc;
+	SVGColorProc *colorProc;
 };
 
 class SVGParser {
@@ -31,5 +34,5 @@ public:
 
 	void Parse();
 protected:
-	vector<string> split (const string &s, char delim);
+	static vector<string> split (const string &s, char delim);
 };

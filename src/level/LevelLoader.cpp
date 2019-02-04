@@ -69,6 +69,19 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     return POINTTOUNIT(lastDomeRadius);
 }
 
+void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool fg) {
+    if (fg) {
+        fillColor.red = r * 100;
+        fillColor.green = g;
+        fillColor.blue = b;
+    }
+    else {
+        frameColor.red = r;
+        frameColor.green = g;
+        frameColor.blue = b;
+    }
+}
+
 int GetPixelColor() {
     return ((((int)fillColor.red) << 8) & 0xFF0000) | (fillColor.green & 0xFF00) | (fillColor.blue >> 8);
 }
@@ -97,7 +110,9 @@ Fixed GetLastArcDirection() {
     return FDegToOne(((long)lastArcAngle) << 16);
 }
 
-static void SvgRect(Rect *r, int radius) {
+static void SvgRect(SVGContext *context, Rect *r, int radius) {
+    SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
+    SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
     CWallActor *theWall;
     theWall = new CWallActor;
     theWall->IAbstractActor();
@@ -325,6 +340,8 @@ void ConvertToLevelMap(Handle levelData) {
 
     SVGParser *parser = new SVGParser();
     parser->callbacks.rectProc = &SvgRect;
+    parser->callbacks.colorProc = &SvgColor;
+
     parser->Parse();
     delete parser;
     /*
