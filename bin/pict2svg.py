@@ -605,6 +605,8 @@ class Origin (Operation):
         dh, dv = data.unpack('hh')
         context.x -= dh
         context.y -= dv
+        context.textpos.x -= dh
+        context.textpos.y -= dv
 
 
 class TextSize (Operation):
