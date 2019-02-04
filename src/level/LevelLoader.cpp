@@ -14,6 +14,7 @@
 #include "FastMat.h"
 #include "Memory.h"
 #include "PICTParser.h"
+#include "SVGParser.h"
 #include "Parser.h"
 #include "Resource.h"
 
@@ -94,6 +95,13 @@ Fixed GetLastOval(Fixed *theLoc) {
 
 Fixed GetLastArcDirection() {
     return FDegToOne(((long)lastArcAngle) << 16);
+}
+
+static void SvgRect(Rect *r, int radius) {
+    CWallActor *theWall;
+    theWall = new CWallActor;
+    theWall->IAbstractActor();
+    theWall->MakeWallFromRect(r, (short)radius, 0, true);
 }
 
 static void PeepStdRRect(PICTContext *context, GrafVerb verb, Rect *r, short ovalWidth, short ovalHeight) {
@@ -301,7 +309,7 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
 void ConvertToLevelMap(Handle levelData) {
     InitParser();
     textBuffer = NewPtr(textBufferSize);
-
+    /*
     PICTParser *parser = new PICTParser();
     parser->callbacks.arcProc = &PeepStdArc;
     parser->callbacks.rRectProc = &PeepStdRRect;
@@ -313,7 +321,12 @@ void ConvertToLevelMap(Handle levelData) {
     // parser->callbacks.getPicProc = &PeekGetPic;
     parser->Parse(levelData);
     delete parser;
+    */
 
+    SVGParser *parser = new SVGParser();
+    parser->callbacks.rectProc = &SvgRect;
+    parser->Parse();
+    delete parser;
     /*
     TODO: replace this with a basic PICT parser with drawing function callbacks
 
