@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
-# Converts PICT files to SVG
-# See https://developer.apple.com/library/archive/documentation/mac/QuickDraw/QuickDraw-458.html
+
+"""
+Converts Avara level PICT resources to Inkscape 0.9x compatible SVG
+https://developer.apple.com/library/archive/documentation/mac/QuickDraw/QuickDraw-458.html
+https://developer.apple.com/library/archive/documentation/mac/QuickDraw/QuickDraw-202.html#MARKER-14-167
+https://github.com/Paolo-Maffei/OpenNT/blob/5c5b979ec08c17d3ca2eb70e8aad62d26515d01c/com/ole32/olecnv32/quickdrw.c
+https://github.com/ImageMagick/ImageMagick/blob/master/coders/pict.c
+Technical Note QD14 - QuickDraw's Internal Picture Defnition
+Inside Macintosh - More Macintosh Toolbox
+Inside Macintosh - Imaging with QuickDraw
+"""
 
 import os
 import struct
@@ -180,6 +189,8 @@ class SVGContext:
         self.save_oval = None
 
         self.save_arc = None
+        self.save_arc_x = None
+        self.save_arc_y = None
         self.save_arc_start = None
         self.save_arc_angle = None
 
@@ -367,18 +378,29 @@ class NOOP (Operation):
 
 class SkipRegion (Operation):
     def parse(self, data, context):
-        length = data.short()
-        # this is probably image data
-        # or a polygon description
-        stuff = data.read(length)
+        total = data.short()
+        region = data.rect()
+        data.read(total - 10)
 
+# This function reads embedded image pixmaps
 PIXMAP_BIT = 0x8000
-def pixmap(data):
+def pixmap(data, force=False):
     #base_addr = data.long()
-    row_bytes = data.short()
-    read_pixmap = row_bytes & PIXMAP_BIT != 0
-    bounds = data.rect()
+    row_bytes = 0
+    if not force:
+        row_bytes = data.short()
+    if force:
+        unused = [data.short(), data.short()]
+        row_bytes = data.short()
 
+        print("unused: %s" % unused)
+
+    read_pixmap = (row_bytes & PIXMAP_BIT != 0) or force
+    bounds = data.rect()
+    pixel_size = 0
+
+    print("bounds: %s" % bounds)
+    print("read_pixmap: %s" % read_pixmap)
     if read_pixmap:
         version = data.short()
         pack_type = data.short()
@@ -392,11 +414,8 @@ def pixmap(data):
         plane_bytes = data.long()
         pmtable = data.long()
         reserved = data.long()
-
+        
         #print("base_addr: %s" % base_addr)
-        print("row_bytes: %s" % row_bytes)
-        print("read_pixmap: %s" % read_pixmap)
-        print("bounds: %s" % bounds)
         print("version: %s" % version)
         print("pack_type: %s" % pack_type)
         print("pack_size: %s" % pack_size)
@@ -409,12 +428,10 @@ def pixmap(data):
         print("plane_bytes: %s" % plane_bytes)
         print("pmtable: %s" % pmtable)
         print("reserved: %s" % reserved)
-    else:
-        pass
-        # print(data.data)
-    return (bounds, row_bytes)
+        
+    return (bounds, row_bytes, pixel_size)
 
-
+# Color table for embedded 32 bit color images
 def color_table(data):
     ct_seed = data.long()
     trans_index = data.short()
@@ -425,38 +442,52 @@ def color_table(data):
         ct.append(data.short())
         ct_size -= 1
 
-    print("ct_seed: %s" % ct_seed)
-    print("trans_index: %s" % trans_index)
-    print("ct: %s" % ct)
+    # print("ct_seed: %s" % ct_seed)
+    # print("trans_index: %s" % trans_index)
+    # print("ct: %s" % ct)
 
 def pixdata(data, pmap):
     bounds = pmap[0]
     row_bytes = pmap[1]
+    pixel_size = pmap[2]
 
-    if row_bytes < 8:
+    row_bytes = row_bytes & 0x7FFF
+
+    print("row_bytes: %s" % row_bytes)
+
+    if 0 < row_bytes < 8:
         lines_to_read = bounds.height
-        row_bytes = row_bytes & 0x7FFF
 
         data_size = row_bytes * lines_to_read
-        print("data_size: %s" % data_size)
         
            
         pixdata = data.read(data_size)
-        print("pixdata: %s" % pixdata)
-        # print(data.data[:900])
     else:
-        scanlines = (bounds.bottom - bounds.top)
+        scanlines = bounds.height
+        width = bounds.width
         print("Scanlines: %d" % scanlines)
-        while scanlines > 1:
-            sl_size = 0
+        
+        if pixel_size == 16:
+            width *= 2
+
+        print("pixel_size: %d" % pixel_size)
+
+        while scanlines >= 0:
+            sl_size = (width * 4) | 0x8000
+            """
             if row_bytes > 250:
                 sl_size = data.short()
             else:
                 sl_size = data.byte()
-            scanline = data.read(sl_size)
+            """
+            print(sl_size)
+            scanline = data.read(sl_size * 2)
+            #print(" ".join(format(x, '02x') for x in scanline))
+            print(scanline)
             scanlines -= 1
 
 
+# Didn't end up using this, leaving it just in case
 class SkipReserved_x97 (Operation):
     def parse(self, data, context):
         length = data.short()
@@ -468,11 +499,10 @@ class BitsRect (Operation):
         print("BitsRect")
         print( " ".join(format(x, '02x') for x in data.data[:300]))
         pmap = pixmap(data)
-        #color_table(data)
+        # color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
-
 
         print("src_rect: %s" % src_rect)
         print("dst_rect: %s" % dst_rect)
@@ -485,7 +515,7 @@ class BitsRgn (Operation):
     def parse(self, data, context):
         print("BitsRgn")
         pmap = pixmap(data)
-        #color_table(data)
+        # color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
@@ -495,7 +525,27 @@ class BitsRgn (Operation):
 
         pixdata(data, pmap)
         
-            
+
+class DirectBitsRect (Operation):
+    def parse(self, data, context):
+        print("DirectBitsRect")
+        pass
+
+
+class DirectBitsRgn (Operation):
+    def parse(self, data, context):
+        print("DirectBitsRgn")
+        pmap = pixmap(data, force=True)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+        
+        mask_rgn_size = data.short()
+        print("mask_rgn_size: %s" % mask_rgn_size)
+        mask_rgn = data.read(mask_rgn_size)
+        
+        pixdata(data, pmap)
+
 
 class ClipRegion (Operation):
 
@@ -600,6 +650,21 @@ class OpColor (Operation):
         color = data.color()
 
 
+class Line (Operation):
+    def parse(self, data, context):
+        start = data.point()
+        end = data.point()
+        context.x += end.x
+        context.y += end.y
+
+
+class LineFrom (Operation):
+    def parse(self, data, context):
+        dh, dv = data.point()
+        context.x += dh
+        context.y += dv
+
+
 class ShortLine (Operation):
 
     def parse(self, data, context):
@@ -607,14 +672,22 @@ class ShortLine (Operation):
         dh, dv = data.read(2)
         context.x += dh
         context.y += dv
+        print("%s -> %s %s" % (str(start), dh, dv))
 
 
 class ShortLineFrom (Operation):
 
     def parse(self, data, context):
         dh, dv = data.read(2)
+        line = context.element("line")
+        line.set("x1", str(context.x))
+        line.set("y1", str(context.y))
         context.x += dh
         context.y += dv
+        line.set("x2", str(context.x))
+        line.set("y2", str(context.y))
+        line.set("stroke", "black")
+        print("%s %s" % (dh, dv))
 
 
 class LongText (Operation):
@@ -628,7 +701,6 @@ class LongText (Operation):
 
 
 class DHText (Operation):
-
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode('macintosh')
@@ -795,7 +867,7 @@ class PaintSameOval (Operation):
 
 
 def arc_path(context, rect, start, angle, arc):
-    if not rect:
+    if rect is None:
         return
     
     start -= 90
@@ -840,6 +912,8 @@ class FrameArc (Operation):
         start, angle = data.unpack('hh')
         context.save_arc_start = start
         context.save_arc_angle = angle
+        context.save_arc_x = context.x
+        context.save_arc_y = context.y
 
         arc = context.element("path")
         arc_path(context, rect, start, angle, arc)
@@ -873,6 +947,8 @@ class FrameSameArc (Operation):
             arc = context.element("path")
             context.save_arc_start = start
             context.save_arc_angle = angle
+            context.save_arc_x = context.x
+            context.save_arc_y = context.y
             arc_path(context, context.save_arc, start, angle, arc)
             context.stroke(arc)
             context.last_arc = arc
@@ -883,12 +959,16 @@ class PaintSameArc (Operation):
     def parse(self, data, context):
         start, angle = data.unpack('hh')
         if (start == context.save_arc_start and
-            angle == context.save_arc_angle):
+            angle == context.save_arc_angle and
+            context.x == context.save_arc_x and
+            context.y == context.save_arc_y):
             context.fill(context.last_arc)
         else:
             arc = context.element("path")
             context.save_arc_start = start
             context.save_arc_angle = angle
+            context.save_arc_x = context.x
+            context.save_arc_y = context.y
             arc_path(context, context.save_arc, start, angle, arc)
             context.fill(arc)
             context.last_arc = arc
@@ -898,20 +978,28 @@ class ShortComment (Operation):
 
     def parse(self, data, context):
         kind = data.short()
+        try:
+            print("ShortComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
+        except KeyError:
+            print("ShortComment: %s - unknown" % kind)
         if kind == 151:
             # picTextEnd
             context.flush_text()
         if kind == 140:
+            # open group
             context.group_start()
         if kind == 141:
+            # close group
             context.group_close()
-
 
 class LongComment (Operation):
 
     def parse(self, data, context):
         kind, size = data.unpack('hh')
-        text = data.read(size).decode('macintosh')
+        value = data.read(size)
+        print("LongComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
+        print("size: %s" % size)
+        print("value: %s" % " ".join(format(x, '02x') for x in value))
 
 
 class EndPict (Operation):
@@ -919,7 +1007,9 @@ class EndPict (Operation):
 
 
 class Version (Operation):
-    pass
+    def parse(self, data, context):
+        version = data.read(1)
+        print("Version: %s" % version)
 
 
 class Header (Operation):
@@ -943,6 +1033,8 @@ PICT_OPCODES = {
     0x1b: RGBBackgroundColor,
     0x1e: DefaultHighlight,
     0x1f: OpColor,
+    0x20: Line,
+    0x21: LineFrom,
     0x22: ShortLine,
     0x23: ShortLineFrom,
     0x28: LongText,
@@ -968,6 +1060,7 @@ PICT_OPCODES = {
     0x68: FrameSameArc,
     0x69: PaintSameArc,
     # these are used for region/polygon data
+    0x70: SkipRegion,
     0x71: SkipRegion,
     0x72: SkipRegion,
     0x73: SkipRegion,
@@ -975,9 +1068,12 @@ PICT_OPCODES = {
     0x75: SkipRegion,
     0x76: SkipRegion,
     0x77: SkipRegion,
+    0x8c: NOOP,
     # picture data
     0x90: BitsRect,
     0x91: BitsRgn,
+    0x9a: DirectBitsRect,
+    0x9b: DirectBitsRgn,
     # comment fields
     0xa0: ShortComment,
     0xa1: LongComment,
@@ -987,8 +1083,45 @@ PICT_OPCODES = {
     0x0c00: Header,
 }
 
+PICT_COMMENTS = {
+    # text related
+    150: "TextBegin",
+    151: "TextEnd",
+    152: "StringBegin",
+    153: "StringEnd",
+    154: "TextCenter",
+    155: "LineLayoutOff",
+    156: "LineLayoutOn",
+    157: "ClientLineLayout",
+    # graphics related
+    160: "PolyBegin",
+    161: "PolyEnd",
+    163: "PolyIgnore",
+    164: "PolySmooth",
+    165: "PolyClose",
+    200: "RotateBegin",
+    201: "RotateEnd",
+    202: "RotateCenter",
+    # lines
+    180: "DashedLine",
+    181: "DashedStop",
+    182: "SetLineWidth",
+    # postscript
+    190: "PostScriptBegin",
+    191: "PostScriptEnd",
+    192: "PostScriptHandle",
+    193: "PostScriptFile",
+    194: "TextIsPostScript",
+    195: "ResourcePS",
+    196: "PSBeginNoSave"
+
+}
+
 
 def parse_pict(data, fn):
+    if os.path.isfile(fn):
+        print("%s was found, skipping" % fn)
+        return
     buf = DataBuffer(data)
     size = buf.short()
     frame = buf.rect()
@@ -1003,8 +1136,13 @@ def parse_pict(data, fn):
             exit(1)
         if isinstance(op, EndPict):
             break
-        # print(op.__class__.__name__)
-        op.parse(buf, context)
+        print("%s - 0x%s - %s" % (fn, format(opcode, '02x'), op.__class__.__name__))
+        try:
+            op.parse(buf, context)
+        except ValueError:
+            print("UHOH")
+            # context.close(fn)
+            exit(1)
         buf.align()
     return context.close(fn)
 
@@ -1052,7 +1190,7 @@ if __name__ == '__main__':
                 ledi_meta[single_ledi["Path"]] = single_ledi
 
             #rsrc = get_forks(data)
-            print(rsrc.keys())
+            # print(rsrc.keys())
             if 'LEDI' not in rsrc:
                 print("No LEDI found for set %s" % rpath)
                 continue
@@ -1075,7 +1213,7 @@ if __name__ == '__main__':
                     meta = ledi_meta[name]
                     data = picts[pict]["data"]
                     
-                    filename = "%s_%s_%s.svg" % (str(pict), meta["Tag"], name)
+                    filename = ("%s_%s_%s.svg" % (str(pict), meta["Tag"], name)).replace(" ", "_")
                     print(filename)
                     #print(meta["Name"].encode('macintosh'))
                     #print(meta["Message"].encode('macintosh'))
