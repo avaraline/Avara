@@ -394,6 +394,7 @@ def pixmap(data, force=False):
         row_bytes = data.short()
 
         print("unused: %s" % unused)
+        print("row bytes: %s" % row_bytes)
 
     read_pixmap = (row_bytes & PIXMAP_BIT != 0) or force
     bounds = data.rect()
@@ -535,7 +536,7 @@ class DirectBitsRect (Operation):
 class DirectBitsRgn (Operation):
     def parse(self, data, context):
         print("DirectBitsRgn")
-        pmap = pixmap(data, force=True)
+        pmap = pixmap(data, force=False)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()

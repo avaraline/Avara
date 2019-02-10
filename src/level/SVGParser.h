@@ -14,13 +14,17 @@ typedef struct {
 	RGBColor bgColor;
 } SVGContext;
 
-typedef void SVGRectProc(SVGContext *context, Rect *r, int radius);
+typedef void SVGRectProc(Rect *r, int radius, unsigned short thiccness);
 typedef void SVGColorProc(unsigned short r, unsigned short g, unsigned short b, bool fg);
+typedef void SVGTextProc(unsigned char *script);
+typedef void SVGArcProc(long x, long y, short start, short angle, long longest_radius);
 
 
 struct SVGProcs {
 	SVGRectProc *rectProc;
 	SVGColorProc *colorProc;
+	SVGTextProc *textProc;
+	SVGArcProc *arcProc;
 };
 
 class SVGParser {
