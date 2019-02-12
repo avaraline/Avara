@@ -21,11 +21,6 @@ using std::stof;
 using std::cout;
 using std::stringstream;
 
-const char* node_types[] =
-{
-    "null", "document", "element", "pcdata", "cdata", "comment", "pi", "declaration"
-};
-
 SVGParser::SVGParser() {
     callbacks.rectProc = NULL;
     callbacks.colorProc = NULL;
@@ -38,14 +33,8 @@ struct simple_walker: pugi::xml_tree_walker {
     unsigned short thiccness;
 
     virtual bool for_each(pugi::xml_node& node) {
-        //for (int i = 0; i < depth(); ++i)
-        //  cout << " ";
-
         int node_type = node.type();
         string name = node.name();
-        string value = node.value();
-
-        //cout << node_types[node_type] << ": name=" << name << " value=" << value << "\n";
 
         switch (node_type){
             case 2: // element
@@ -69,6 +58,9 @@ struct simple_walker: pugi::xml_tree_walker {
                 handle_arc(node);
             }
         }
+        else if(name.compare("ellipse") == 0) {
+            handle_ellipse(node);
+        }
         else if(name.compare("rect") == 0) {
             handle_rect(node);
         }
@@ -76,7 +68,7 @@ struct simple_walker: pugi::xml_tree_walker {
             std::stringstream buffa;
             for (pugi::xml_node tspan: node.children("tspan")) {
                 buffa << tspan.child_value() << (char)13;
-                SDL_Log(tspan.child_value());
+                //SDL_Log(tspan.child_value());
             }
             callbacks->textProc((unsigned char*)buffa.str().c_str());
         }
@@ -102,14 +94,14 @@ struct simple_walker: pugi::xml_tree_walker {
 
     void handle_arc(pugi::xml_node& node) {
         string style;
-        long cx, cy, rx, ry;
+        float cx, cy, rx, ry;
         float start, end;
 
         style = node.attribute("style").value();
-        cx = safe_long(node.attribute("sodipodi:cx").value());
-        cy = safe_long(node.attribute("sodipodi:cy").value());
-        rx = safe_long(node.attribute("sodipodi:rx").value());
-        ry = safe_long(node.attribute("sodipodi:ry").value());
+        cx = safe_float(node.attribute("sodipodi:cx").value());
+        cy = safe_float(node.attribute("sodipodi:cy").value());
+        rx = safe_float(node.attribute("sodipodi:rx").value());
+        ry = safe_float(node.attribute("sodipodi:ry").value());
         start = safe_float(node.attribute("sodipodi:start").value());
         end = safe_float(node.attribute("sodipodi:end").value());
 
@@ -118,11 +110,25 @@ struct simple_walker: pugi::xml_tree_walker {
         short start_angle = (short)(start * (180.0/PI));
         short angle_length = (short)abs(start_angle - (end* (180.0/PI)));
         //SDL_Log("start_angle: %d angle_length: %d", start_angle, angle_length);
-        SDL_Log("cx: %d cy: %d", cx, cy);
+        //SDL_Log("cx: %d cy: %d", cx, cy);
         callbacks->arcProc(cx, cy, start_angle, angle_length, rx > ry ? rx : ry);
 
         //SDL_Log("arc info: %s %s %s %s %s %s", 
         //    cx.c_str(), cy.c_str(), rx.c_str(), ry.c_str(), start.c_str(), end.c_str());
+    }
+
+    void handle_ellipse(pugi::xml_node& node) {
+        string style;
+        long cx, cy, rx, ry;
+
+        style = node.attribute("style").value();
+        cx = safe_long(node.attribute("sodipodi:cx").value());
+        cy = safe_long(node.attribute("sodipodi:cy").value());
+        rx = safe_long(node.attribute("sodipodi:rx").value());
+        ry = safe_long(node.attribute("sodipodi:ry").value());
+
+        handle_style(style);
+        callbacks->ellipseProc(cx, cy, rx > ry ? rx : ry);
     }
 
     void handle_rect(pugi::xml_node& node) {
@@ -156,7 +162,6 @@ struct simple_walker: pugi::xml_tree_walker {
             string value = key_value[1];
             //SDL_Log("%s : %s", key.c_str(), value.c_str());
             if (key.compare("fill") == 0) {
-                //RGBColor *fg_color = 
                 css_to_rgbcolor(value, true);
                 //SDL_Log("New fgColor");
             }
@@ -215,7 +220,8 @@ struct simple_walker: pugi::xml_tree_walker {
 void SVGParser::Parse() {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file("levels/blockparty_svg/1500_ICE2_iceboxClassic.pict.svg");
-    SDL_Log("Load result: %s", result.description());
+    //pugi::xml_parse_result result = doc.load_file("levels/classic-mix-up_svg/1004_Grim_Grimoire.svg");
+    SDL_Log("SVG load result: %s", result.description());
 
     simple_walker walker;
     walker.callbacks = &callbacks;

@@ -69,19 +69,6 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     return POINTTOUNIT(lastDomeRadius);
 }
 
-void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool fg) {
-    if (fg) {
-        fillColor.red = r;
-        fillColor.green = g;
-        fillColor.blue = b;
-    }
-    else {
-        frameColor.red = r;
-        frameColor.green = g;
-        frameColor.blue = b;
-    }
-}
-
 int GetPixelColor() {
     return ((((int)fillColor.red) << 8) & 0xFF0000) | (fillColor.green & 0xFF00) | (fillColor.blue >> 8);
 }
@@ -95,7 +82,6 @@ void GetLastArcLocation(Fixed *theLoc) {
     theLoc[1] = 0;
     theLoc[2] = POINTTOUNIT(lastArcPoint.v);
     theLoc[3] = 0;
-    SDL_Log("x: %f y: %f", ToFloat(theLoc[0]), ToFloat(theLoc[2]));
 }
 
 Fixed GetLastOval(Fixed *theLoc) {
@@ -111,9 +97,52 @@ Fixed GetLastArcDirection() {
     return FDegToOne(((long)lastArcAngle) << 16);
 }
 
+static void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool fg) {
+    if (fg) {
+        fillColor.red = r;
+        fillColor.green = g;
+        fillColor.blue = b;
+    }
+    else {
+        frameColor.red = r;
+        frameColor.green = g;
+        frameColor.blue = b;
+    }
+}
+
+static void SvgArc(float x, float y, short start, short angle, long largest_radius) {
+    lastArcPoint.h = (long)roundf(x * 2);
+    lastArcPoint.v = (long)roundf(y * 2);
+    lastArcAngle = (630 - (start + angle / 2)) % 360;
+    lastDomeCenter.h = (long)roundf(x * 2);
+    lastDomeCenter.v = (long)roundf(y * 2);
+    lastDomeAngle = 360 - start;
+    lastDomeSpan = angle;
+    lastDomeRadius = largest_radius;
+}
+
+static void SvgEllipse(float x, float y, long r) {
+    lastOvalPoint.h = (long)roundf(x * 2);
+    lastOvalPoint.v = (long)roundf(y * 2);
+    lastOvalRadius = r * 2;
+
+    lastDomeCenter.h = (long)roundf(x * 2);
+    lastDomeCenter.v = (long)roundf(x * 2);
+
+    lastDomeAngle = 0;
+    lastDomeSpan = 360;
+    lastDomeRadius = r * 2;
+}
+
 static void SvgRect(Rect *r, int radius, unsigned short thickness) {
     //SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
     //SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
+
+    r->left += thickness >> 1;
+    r->top += thickness >> 1;
+    r->right -= (thickness + 1) >> 1;
+    r->bottom -= (thickness + 1) >> 1;
+
     if(thickness == 1) {
         CWallActor *theWall;
         theWall = new CWallActor;
@@ -169,17 +198,6 @@ static void PeepStdRRect(PICTContext *context, GrafVerb verb, Rect *r, short ova
         // StdRect(verb, &onePixelRect);
         BlockMoveData(&context->fgColor, &fillColor, sizeof(RGBColor));
     }
-}
-
-static void SvgArc(long x, long y, short start, short angle, long largest_radius) {
-    lastArcPoint.h = x * 2;
-    lastArcPoint.v = y * 2;
-    lastArcAngle = (720 - (start + angle / 2)) % 360;
-    lastDomeCenter.h = x * 2;
-    lastDomeCenter.v = y * 2;
-    lastDomeAngle = 360 - start;
-    lastDomeSpan = angle;
-    lastDomeRadius = largest_radius;
 }
 
 static void PeepStdArc(PICTContext *context, GrafVerb verb, Rect *r, short startAngle, short arcAngle) {
@@ -365,6 +383,7 @@ void ConvertToLevelMap(Handle levelData) {
     parser->callbacks.colorProc = &SvgColor;
     parser->callbacks.textProc = &SvgText;
     parser->callbacks.arcProc = &SvgArc;
+    parser->callbacks.ellipseProc = &SvgEllipse;
 
     parser->Parse();
     delete parser;

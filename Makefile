@@ -39,6 +39,8 @@ avara: $(BUILD_DIR)/Avara resources
 
 bspviewer: $(BUILD_DIR)/BSPViewer resources
 
+levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
+
 macapp: avara
 	rm -rf $(BUILD_DIR)/Avara.app
 	$(MKDIR_P) $(BUILD_DIR)/Avara.app/Contents/{Frameworks,MacOS,Resources}
@@ -67,6 +69,11 @@ $(BUILD_DIR)/Avara: $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o
 # BSPViewer
 $(BUILD_DIR)/BSPViewer: $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o
 	$(CC) $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o -o $@ $(LDFLAGS)
+	$(POST_PROCESS) $@
+
+# LevelViewer
+$(BUILD_DIR)/AvaraLevelViewer: $(OBJS) $(BUILD_DIR)/src/AvaraLevelViewer.cpp.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/AvaraLevelViewer.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
 # c source
