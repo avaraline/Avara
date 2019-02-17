@@ -167,6 +167,25 @@ OSErr CAvaraApp::LoadLevel(std::string set, OSType theLevel) {
     itsGame->loadedTag = theLevel;
     gCurrentGame = itsGame;
 
+    char byte1 =  theLevel & 0x000000ff;
+    char byte2 = (theLevel & 0x0000ff00) >> 8;
+    char byte3 = (theLevel & 0x00ff0000) >> 16;
+    char byte4 = (theLevel & 0xff000000) >> 24;
+
+    std::string test = std::string({byte4, byte3, byte2, byte1});
+    SDL_Log("%s", test.c_str());
+
+    std::string svgdir = std::string("levels/") + set + "_svg/";
+    SDL_Log("%s", svgdir.c_str());
+    return noErr;
+}
+
+OSErr CAvaraApp::LoadLevelPICT(std::string set, OSType theLevel) {
+    SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
+    itsGame->LevelReset(false);
+    itsGame->loadedTag = theLevel;
+    gCurrentGame = itsGame;
+
     std::string rsrcFile = std::string("levels/") + set + ".r";
     UseResFile(rsrcFile);
 

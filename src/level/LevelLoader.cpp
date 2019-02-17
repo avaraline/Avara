@@ -361,10 +361,22 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
     }
 }
 
+void SVGConvertToLevelMap() {
+    SVGParser *parser = new SVGParser();
+    parser->callbacks.rectProc = &SvgRect;
+    parser->callbacks.colorProc = &SvgColor;
+    parser->callbacks.textProc = &SvgText;
+    parser->callbacks.arcProc = &SvgArc;
+    parser->callbacks.ellipseProc = &SvgEllipse;
+
+    parser->Parse();
+    delete parser;
+}
+
 void ConvertToLevelMap(Handle levelData) {
     InitParser();
     textBuffer = NewPtr(textBufferSize);
-    /*
+    
     PICTParser *parser = new PICTParser();
     parser->callbacks.arcProc = &PeepStdArc;
     parser->callbacks.rRectProc = &PeepStdRRect;
@@ -376,17 +388,7 @@ void ConvertToLevelMap(Handle levelData) {
     // parser->callbacks.getPicProc = &PeekGetPic;
     parser->Parse(levelData);
     delete parser;
-    */
-
-    SVGParser *parser = new SVGParser();
-    parser->callbacks.rectProc = &SvgRect;
-    parser->callbacks.colorProc = &SvgColor;
-    parser->callbacks.textProc = &SvgText;
-    parser->callbacks.arcProc = &SvgArc;
-    parser->callbacks.ellipseProc = &SvgEllipse;
-
-    parser->Parse();
-    delete parser;
+    
     /*
     TODO: replace this with a basic PICT parser with drawing function callbacks
 

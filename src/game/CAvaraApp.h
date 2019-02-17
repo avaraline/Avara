@@ -49,6 +49,7 @@ public:
     virtual void drawAll() override;
 
     OSErr LoadLevel(std::string set, OSType theLevel);
+    OSErr LoadLevelPICT(std::string set, OSType theLevel);
     void NotifyUser();
 
     virtual void AddMessageLine(std::string line);
