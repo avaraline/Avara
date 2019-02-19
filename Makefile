@@ -97,6 +97,7 @@ clean:
 	$(RM) -r $(BUILD_DIR)
 
 resources:
+	python3 bin/pict2svg.py
 	cp -r bsps levels rsrc shaders $(BUILD_DIR)
 
 -include $(DEPS)
