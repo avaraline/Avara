@@ -22,6 +22,9 @@ else ifeq ($(UNAME), MINGW64_NT-10.0)
 	# Not a great conditional check for "Windows", but works for now.
 	LDFLAGS ?= -lstdc++ -lm -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
 	POST_PROCESS ?= ls -lh
+else ifeq ($(UNAME), MSYS_NT-10.0)
+	LDFLAGS ?= -lstdc++ -lm -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	POST_PROCESS ?= ls -lh
 else
 	LDFLAGS ?= -lstdc++ -lm -lSDL2 -lSDL2_net -lGL -lGLU -lpthread -ldl
 	CPPFLAGS += -fPIC
@@ -39,8 +42,6 @@ SIGNING_ID := Y56DGU8P8X
 avara: $(BUILD_DIR)/Avara resources
 
 bspviewer: $(BUILD_DIR)/BSPViewer resources
-
-levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
 
 macapp: avara
 	rm -rf $(BUILD_DIR)/Avara.app
