@@ -2,7 +2,19 @@
 
 A port of the 1996 game by Juri Munkki, published by Ambrosia Software, using SDL2 and OpenGL.
 
-Originally released under the MIT license here:
+Avara is a three-dimensional action first-person shooter where you play as a remote-controlled bipedal tank. It was developed for Classic Macintoshes, even running on systems with no color, with support all the way back to System 6, using the THINK-C programming language and compilers published by Symantec. THINK-C is a "C with objects" precursor to C++. The port attempts to leave as much of the original code intact as possible, while allowing for updates and changes that enable compilation on modern systems, and user quality of life improvements that gaming enthusiasts have come to expect from modern shooters. The project targets C++11 with LLVM. The major challenges of porting included:
+
+- Avara's graphics engine was completely custom and unique. It was able to fill and shade complex polygons in screen-space, which is unheard-of in pretty much any modern graphics engine. This was acheived through heavy use of Motorola 68k assembly code. The original renderer has been replaced with an OpenGL context.
+- Because of the nature of Avara's 3d engine, all existing BSP shape data was not compatible with OpenGL, which expects only triangles. Scripts were written to convert the shape data into a modern BSP/JSON format and to decompose all complex polygons into triangles.
+- The sound engine includes a doppler/positional audio simulation which was extremely advanced for its time. The custom huffman encoder and sampling algorithms have been sucessfully ported to C++.
+- Memory handling was done internally and made extensive use of Macintosh syscalls, this fixed with backward-compatible shims to modern C++ memory management.
+- The game timer was originally handled with interrupts on early Macs--it is now cross-platform and based off of system time and callbacks
+- The original game stored assets in a resource fork, which is a special type of format used in classic Macintosh OSs. These resources were easily parsed with syscalls on the Macintosh, we were able to replace these syscalls in a backwards-compatible manner so that the port can use exactly the same assets that the original did.
+- Many of the algorithms in Avara relied on bit shifting to do math operations (this saved processor cycles on early Macintosh hardware), even on pointer types. Type widths were adjusted to ensure that these operations still work.
+- Various mathematical operations in the Avara source were written in 68k assembly only. These have been replaced with equivalent code in C++.
+- Countless conversion of Pascal strings to string classes and back, replacing arrays and pointer math with modern data structures when necessary, correcting endianness.
+
+Original source released under the MIT license here:
 
 https://github.com/jmunkki/Avara
 
@@ -37,10 +49,12 @@ To create a portable executable archive (library dlls included) on Windows, use 
 ## How to play
 
 To get into a game and look around immediately, just press the "Load Level" button, then the "Start Game" button in the "Levels" window. This will drop you into the level called Alektra. 
-* The movement controls are `WSAD`, with `S` and `D` rotating you right and left.
+* The movement controls are `WSAD`, with `A` and `D` rotating you left/right and `W` and `S` to move forward and backward.
 * Use your mouse to rotate your HECTOR's head. Note the arrow at the top of the screen, this indicates the direction of your legs. 
 * You can click to fire plasma, press `E` to fire grenades. 
 * You can load a missile with `Q` and then press the mouse button to fire it. 
+* Press `Left Shift` to use a booster and refill your shields/plasma energy levels.
+* Weight has a large effect on your speed--Try moving from one spot to another before and after firing all your ordnance
 * `Tab` will deploy your Scout camera, enabling an external view of your HECTOR. Use the arrow keys to position the Scout.
 * Press and hold `Space` to crouch, release it to jump.
 * To quit playing, press Escape once to self-destruct, then again to abort the game.
