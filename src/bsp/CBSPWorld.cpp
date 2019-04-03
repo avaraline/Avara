@@ -16,7 +16,7 @@
 extern Vector **bspPointTemp;
 extern short *bspIndexStack;
 
-void CBSPWorld::IBSPWorld(short initialObjectSpace) {
+void CBSPWorldImpl::IBSPWorld(short initialObjectSpace) {
     partSpace = initialObjectSpace;
     partCount = 0;
 
@@ -24,7 +24,7 @@ void CBSPWorld::IBSPWorld(short initialObjectSpace) {
     visibleList = (CBSPPart ***)NewHandle(sizeof(CBSPPart *) * (long)partSpace);
 }
 
-void CBSPWorld::DisposeParts() {
+void CBSPWorldImpl::DisposeParts() {
     short i;
 
     for (i = 0; i < partCount; i++) {
@@ -34,7 +34,7 @@ void CBSPWorld::DisposeParts() {
     partCount = 0;
 }
 
-void CBSPWorld::Dispose() {
+void CBSPWorldImpl::Dispose() {
     DisposeParts();
 
     DisposeHandle((Handle)partList);
@@ -43,7 +43,7 @@ void CBSPWorld::Dispose() {
     CDirectObject::Dispose();
 }
 
-void CBSPWorld::AddPart(CBSPPart *thePart) {
+void CBSPWorldImpl::AddPart(CBSPPart *thePart) {
     if (partSpace <= partCount) {
         partSpace = partCount + (partCount >> 3) + 1;
 
@@ -55,7 +55,7 @@ void CBSPWorld::AddPart(CBSPPart *thePart) {
     (*partList)[partCount++] = thePart;
 }
 
-void CBSPWorld::RemovePart(CBSPPart *thePart) {
+void CBSPWorldImpl::RemovePart(CBSPPart *thePart) {
     short i;
     CBSPPart **p;
 
@@ -77,7 +77,7 @@ void CBSPWorld::RemovePart(CBSPPart *thePart) {
     }
 }
 
-void CBSPWorld::SortByZ() {
+void CBSPWorldImpl::SortByZ() {
     short h;
     CBSPPart **ip, **jp, *vp;
     CBSPPart **lastP;
@@ -117,7 +117,7 @@ void CBSPWorld::SortByZ() {
 /*
 **	This is the old version. It doesn't work correctly in all cases.
 */
-void CBSPWorld::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
+void CBSPWorldImpl::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
     CBSPPart *compPart;
     CBSPPart **endPart, **jPart, **iPart;
 
@@ -151,7 +151,7 @@ void CBSPWorld::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
     }
 }
 
-void CBSPWorld::OverheadPoint(Fixed *c) {
+void CBSPWorldImpl::OverheadPoint(Fixed *c) {
     Fixed minX = FIX(9999),
           maxX = FIX(-9999),
           minZ = FIX(9999),
@@ -178,7 +178,7 @@ void CBSPWorld::OverheadPoint(Fixed *c) {
 #define FASTOBSCURETEST(a, b) (b->maxZ > a->minZ)
 static long totalObsCount = 0;
 
-void CBSPWorld::VisibilitySort(CBSPPart **parts, short overlapCount) {
+void CBSPWorldImpl::VisibilitySort(CBSPPart **parts, short overlapCount) {
     CBSPPart *thePart;
     CBSPPart *listStart;
     CBSPPart **prevLink;
@@ -221,7 +221,7 @@ void CBSPWorld::VisibilitySort(CBSPPart **parts, short overlapCount) {
     } while (listStart);
 }
 
-void CBSPWorld::SortVisibleParts() {
+void CBSPWorldImpl::SortVisibleParts() {
     CBSPPart **thisPart, **endPart;
     Fixed minZ, maxZ;
     short overlapCount = 0;
@@ -259,7 +259,7 @@ void CBSPWorld::SortVisibleParts() {
     }
 }
 
-void CBSPWorld::Render(CViewParameters *theView) {
+void CBSPWorldImpl::Render(CViewParameters *theView) {
     short i;
     CBSPPart **sp, **sd;
 
@@ -303,13 +303,13 @@ void CBSPWorld::Render(CViewParameters *theView) {
     HUnlock((Handle)visibleList);
 }
 
-CBSPPart *CBSPWorld::GetIndPart(short ind) {
+CBSPPart *CBSPWorldImpl::GetIndPart(short ind) {
     if (ind >= 0 && ind < partCount)
         return (*partList)[ind];
     else
         return NULL;
 }
 
-short CBSPWorld::GetPartCount() {
+short CBSPWorldImpl::GetPartCount() {
     return partCount;
 }

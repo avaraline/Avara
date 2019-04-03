@@ -11,6 +11,7 @@
 #include "AvaraTCP.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
+#include "CBSPPart.h"
 #include "FastMat.h"
 
 #include <nanogui/nanogui.h>
@@ -61,9 +62,9 @@ int main(int argc, char *argv[]) {
     OpenAvaraTCP();
 
     // The Avara application itself.
-    CAvaraApp *app = new CAvaraApp();
+    CAvaraApp *app = new CAvaraAppImpl();
 
-    mainloop(app->itsGame->frameTime / 4);
+    mainloop(app->GetGame()->frameTime / 4);
 
     app->Done();
 

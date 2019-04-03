@@ -29,7 +29,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     nvgFontFace(ctx, "mono");
 
     float mY = (bufferHeight - 72);
-    for (auto i : itsGame->itsApp->messageLines) {
+    for (auto i : itsGame->itsApp->MessageLines()) {
 
         nvgBeginPath(ctx);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
@@ -58,7 +58,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         colorG = (longTeamColor >> 8) & 0xff;
         colorB = longTeamColor & 0xff;
         if (eachPlayer->itsManager) {
-            std::string playerName((char *)eachPlayer->itsManager->playerName + 1, eachPlayer->itsManager->playerName[0]);
+            std::string playerName((char *)eachPlayer->itsManager->PlayerName() + 1, eachPlayer->itsManager->PlayerName()[0]);
             std::string playerLives = std::to_string(eachPlayer->lives);
             std::string playerChat = eachPlayer->itsManager->GetChatString(CHAT_CHARS);
 
@@ -240,7 +240,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
     nvgFontSize(ctx, fontsz_m);
     nvgTextAlign(ctx, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-    snprintf(scoreText, sizeof(scoreText), "%ld", itsGame->scores[player->itsManager->slot]);
+    snprintf(scoreText, sizeof(scoreText), "%ld", itsGame->scores[player->itsManager->Slot()]);
     nvgText(ctx, g1X + 22.5, gY + full + 10.0, scoreText, NULL);
 
     secs = timeTemp % 60;

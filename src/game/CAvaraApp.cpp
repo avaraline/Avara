@@ -35,8 +35,8 @@
 // included while we fake things out
 #include "CPlayerManager.h"
 
-CAvaraApp::CAvaraApp() : CApplication("Avara") {
-    itsGame = new CAvaraGame;
+CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
+    itsGame = new CAvaraGame(64);
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
@@ -62,18 +62,18 @@ CAvaraApp::CAvaraApp() : CApplication("Avara") {
     performLayout();
 }
 
-CAvaraApp::~CAvaraApp() {
+CAvaraAppImpl::~CAvaraAppImpl() {
     itsGame->Dispose();
     DeallocParser();
 }
 
-void CAvaraApp::Done() {
+void CAvaraAppImpl::Done() {
     // This will trigger a clean disconnect if connected.
     gameNet->ChangeNet(kNullNet, "");
     CApplication::Done();
 }
 
-void CAvaraApp::idle() {
+void CAvaraAppImpl::idle() {
     CheckSockets();
     if(itsGame->GameTick()) {
         glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
@@ -83,16 +83,16 @@ void CAvaraApp::idle() {
     }
 }
 
-void CAvaraApp::drawContents() {
+void CAvaraAppImpl::drawContents() {
     itsGame->Render(mNVGContext);
 }
 
-void CAvaraApp::WindowResized(int width, int height) {
+void CAvaraAppImpl::WindowResized(int width, int height) {
     itsGame->UpdateViewRect(width, height, mPixelRatio);
     //performLayout();
 }
 
-bool CAvaraApp::handleSDLEvent(SDL_Event &event) {
+bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
     if(itsGame->IsPlaying()) {
         itsGame->HandleEvent(event);
         return true;
@@ -103,14 +103,14 @@ bool CAvaraApp::handleSDLEvent(SDL_Event &event) {
     }
 }
 
-void CAvaraApp::drawAll() {
+void CAvaraAppImpl::drawAll() {
     if (!itsGame->IsPlaying()) {
         rosterWindow->UpdateRoster();
         CApplication::drawAll();
     }
 }
 
-bool CAvaraApp::DoCommand(int theCommand) {
+bool CAvaraAppImpl::DoCommand(int theCommand) {
     std::string name = String(kPlayerNameTag);
     Str255 userName;
     userName[0] = name.length();
@@ -161,7 +161,7 @@ bool CAvaraApp::DoCommand(int theCommand) {
     */
 }
 
-OSErr CAvaraApp::LoadLevel(std::string set, OSType theLevel) {
+OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
@@ -203,28 +203,40 @@ OSErr CAvaraApp::LoadLevel(std::string set, OSType theLevel) {
     return noErr;
 }
 
-void CAvaraApp::NotifyUser() {
+void CAvaraAppImpl::NotifyUser() {
     // TODO: Bell sound(s)
     SDL_Log("BEEP!!!\n");
     Beep();
 }
 
+CAvaraGame* CAvaraAppImpl::GetGame() {
+    return itsGame;
+}
+
+CNetManager* CAvaraAppImpl::GetNet() {
+    return gameNet;
+}
+
+void CAvaraAppImpl::SetNet(CNetManager *theNet) {
+    gameNet = theNet;
+}
+
 // STUBBBBBZZZZZ
 
-void CAvaraApp::SetIndicatorDisplay(short i, short v) {}
-void CAvaraApp::NumberLine(long theNum, short align) {}
-void CAvaraApp::DrawUserInfoPart(short i, short partList) {}
-void CAvaraApp::BrightBox(long frameNum, short position) {}
+void CAvaraAppImpl::SetIndicatorDisplay(short i, short v) {}
+void CAvaraAppImpl::NumberLine(long theNum, short align) {}
+void CAvaraAppImpl::DrawUserInfoPart(short i, short partList) {}
+void CAvaraAppImpl::BrightBox(long frameNum, short position) {}
 
-void CAvaraApp::AddMessageLine(std::string line) {
-    SDL_Log("Message: %s", line.c_str());
-    messageLines.push_back(line);
+void CAvaraAppImpl::AddMessageLine(const char* line) {
+    SDL_Log("Message: %s", line);
+    messageLines.push_back(std::string(line));
     if (messageLines.size() > 5) {
         messageLines.pop_front();
     }
 }
-void CAvaraApp::MessageLine(short index, short align) {
-    SDL_Log("CAvaraApp::MessageLine(%d)\n", index);
+void CAvaraAppImpl::MessageLine(short index, short align) {
+    SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
     switch(index) {
         case kmWelcome1:
         case kmWelcome2:
@@ -259,10 +271,11 @@ void CAvaraApp::MessageLine(short index, short align) {
     }
 
 }
-void CAvaraApp::LevelReset() {}
-void CAvaraApp::ParamLine(short index, short align, StringPtr param1, StringPtr param2) {
+void CAvaraAppImpl::LevelReset() {}
+void CAvaraAppImpl::ParamLine(short index, short align, StringPtr param1, StringPtr param2) {
     SDL_Log("CAvaraAppImpl::ParamLine(%d)\n", index);
-    std::ostringstream buffa;
+    const char* fmt;
+    char* buffa;
     std::string a = std::string((char *)param1 + 1, param1[0]);
     std::string b;
     if (param2) b = std::string((char *)param2 + 1, param2[0]);
@@ -287,10 +300,13 @@ void CAvaraApp::ParamLine(short index, short align, StringPtr param1, StringPtr 
 
     AddMessageLine(buffa.str());
 }
-void CAvaraApp::StartFrame(long frameNum) {}
-void CAvaraApp::StringLine(StringPtr theString, short align) {
+void CAvaraAppImpl::StartFrame(long frameNum) {}
+void CAvaraAppImpl::StringLine(StringPtr theString, short align) {
     AddMessageLine(std::string((char* ) theString + 1, theString[0]).c_str());
 }
-void CAvaraApp::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {
+void CAvaraAppImpl::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {
     ParamLine(index, 0, param1, param2);
+}
+std::deque<std::string>& CAvaraAppImpl::MessageLines() {
+    return messageLines;
 }

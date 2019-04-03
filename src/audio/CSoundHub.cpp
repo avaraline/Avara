@@ -18,7 +18,7 @@
 
 #include <SDL2/SDL.h>
 
-void CSoundHub::CreateSound(short kind) {
+void CSoundHubImpl::CreateSound(short kind) {
     CBasicSound *aSound;
 
     switch (kind) {
@@ -40,7 +40,7 @@ void CSoundHub::CreateSound(short kind) {
     }
 }
 
-void CSoundHub::Restock(CBasicSound *aSound) {
+void CSoundHubImpl::Restock(CBasicSound *aSound) {
     SampleHeaderHandle aSample;
 
     aSound->nextSound = soundList[aSound->hubId];
@@ -56,7 +56,7 @@ void CSoundHub::Restock(CBasicSound *aSound) {
     }
 }
 
-CBasicSound *CSoundHub::Aquire(short kind) {
+CBasicSound *CSoundHubImpl::Aquire(short kind) {
     CBasicSound *aSound;
 
     if (soundList[kind] == NULL)
@@ -71,7 +71,7 @@ CBasicSound *CSoundHub::Aquire(short kind) {
     return aSound;
 }
 
-void CSoundHub::ISoundHub(short numOfEachKind, short initialLinks) {
+void CSoundHubImpl::ISoundHub(short numOfEachKind, short initialLinks) {
     short i, j;
 
     itsMixer = NULL;
@@ -97,12 +97,12 @@ void CSoundHub::ISoundHub(short numOfEachKind, short initialLinks) {
         CreateSoundLinks(initialLinks);
 }
 
-void CSoundHub::AttachMixer(CSoundMixer *aMixer) {
+void CSoundHubImpl::AttachMixer(CSoundMixer *aMixer) {
     itsMixer = aMixer;
     muteFlag = itsMixer->maxChannels == 0;
 }
 
-SampleHeaderHandle CSoundHub::LoadSample(short resId) {
+SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
 
@@ -204,14 +204,14 @@ SampleHeaderHandle CSoundHub::LoadSample(short resId) {
     return aSample;
 }
 
-SampleHeaderHandle CSoundHub::PreLoadSample(short resId) {
+SampleHeaderHandle CSoundHubImpl::PreLoadSample(short resId) {
     if (muteFlag)
         return NULL;
     else
         return LoadSample(resId);
 }
 
-SampleHeaderHandle CSoundHub::RequestSample(short resId) {
+SampleHeaderHandle CSoundHubImpl::RequestSample(short resId) {
     SampleHeaderHandle aSample;
     SampleHeaderPtr p;
 
@@ -226,7 +226,7 @@ SampleHeaderHandle CSoundHub::RequestSample(short resId) {
     return aSample;
 }
 
-void CSoundHub::FreeUnusedSamples() {
+void CSoundHubImpl::FreeUnusedSamples() {
     SampleHeaderHandle aSample, nextSample, *prevP;
 
     prevP = &sampleList;
@@ -245,7 +245,7 @@ void CSoundHub::FreeUnusedSamples() {
     }
 }
 
-void CSoundHub::FreeOldSamples() {
+void CSoundHubImpl::FreeOldSamples() {
     SampleHeaderHandle aSample, nextSample, *prevP;
 
     prevP = &sampleList;
@@ -263,7 +263,7 @@ void CSoundHub::FreeOldSamples() {
         aSample = nextSample;
     }
 }
-void CSoundHub::FlagOldSamples() {
+void CSoundHubImpl::FlagOldSamples() {
     SampleHeaderHandle aSample;
 
     aSample = sampleList;
@@ -273,7 +273,7 @@ void CSoundHub::FlagOldSamples() {
     }
 }
 
-void CSoundHub::Dispose() {
+void CSoundHubImpl::Dispose() {
     CBasicSound *aSound, *nextSound;
     SampleHeaderHandle aSample, nextSample;
     short i;
@@ -303,7 +303,7 @@ void CSoundHub::Dispose() {
     CDirectObject::Dispose();
 }
 
-CBasicSound *CSoundHub::GetSoundSampler(short kind, short resId) {
+CBasicSound *CSoundHubImpl::GetSoundSampler(short kind, short resId) {
     CBasicSound *aSound;
     SampleHeaderHandle theSamples;
 
@@ -322,7 +322,7 @@ CBasicSound *CSoundHub::GetSoundSampler(short kind, short resId) {
     return aSound;
 }
 
-void CSoundHub::CreateSoundLinks(short n) {
+void CSoundHubImpl::CreateSoundLinks(short n) {
     Ptr newStorage;
     SoundLink *linkP;
 
@@ -340,7 +340,7 @@ void CSoundHub::CreateSoundLinks(short n) {
     }
 }
 
-void CSoundHub::DisposeSoundLinks() {
+void CSoundHubImpl::DisposeSoundLinks() {
     while (soundLinkStorage) {
         Ptr temp;
 
@@ -350,11 +350,11 @@ void CSoundHub::DisposeSoundLinks() {
     }
 }
 
-int CSoundHub::ReadTime() {
+int CSoundHubImpl::ReadTime() {
     return itsMixer->ReadTime();
 }
 
-void CSoundHub::SetMixerLink(SoundLink *newLink) {
+void CSoundHubImpl::SetMixerLink(SoundLink *newLink) {
     SoundLink *oldLink;
 
     oldLink = itsMixer->motionLink;
@@ -374,13 +374,13 @@ void CSoundHub::SetMixerLink(SoundLink *newLink) {
     }
 }
 
-SoundLink *CSoundHub::UpdateRightVector(Fixed *right) {
+SoundLink *CSoundHubImpl::UpdateRightVector(Fixed *right) {
     itsMixer->UpdateRightVector(right);
 
     return itsMixer->motionLink;
 }
 
-SoundLink *CSoundHub::GetSoundLink() {
+SoundLink *CSoundHubImpl::GetSoundLink() {
     SoundLink *theLink;
 
     theLink = firstFreeLink;
@@ -398,7 +398,7 @@ SoundLink *CSoundHub::GetSoundLink() {
     return theLink;
 }
 
-void CSoundHub::ReleaseLink(SoundLink *linkPtr) {
+void CSoundHubImpl::ReleaseLink(SoundLink *linkPtr) {
     linkPtr->refCount--;
     if (linkPtr->refCount == 0) {
         *(SoundLink **)linkPtr = firstFreeLink;
@@ -406,7 +406,7 @@ void CSoundHub::ReleaseLink(SoundLink *linkPtr) {
     }
 }
 
-void CSoundHub::ReleaseLinkAndKillSounds(SoundLink *linkPtr) {
+void CSoundHubImpl::ReleaseLinkAndKillSounds(SoundLink *linkPtr) {
     linkPtr->refCount--;
     if (linkPtr->refCount > 0) {
         linkPtr->meta = metaKillNow;
@@ -416,8 +416,31 @@ void CSoundHub::ReleaseLinkAndKillSounds(SoundLink *linkPtr) {
     }
 }
 
-void CSoundHub::HouseKeep() {
+void CSoundHubImpl::HouseKeep() {
     itsMixer->HouseKeep();
+}
+void CSoundHubImpl::MuteFlag(Boolean mute) {
+    muteFlag = mute;
+
+}
+Fixed* CSoundHubImpl::EarLocation() {
+    return itsMixer->motionLink->nLoc;
+}
+void CSoundHubImpl::MixerDispose() {
+    if (itsMixer) {
+        itsMixer->Dispose();
+    }
+}
+
+Fixed CSoundHubImpl::DistanceToLevelOne() {
+    return itsMixer->distanceToLevelOne;
+}
+void CSoundHubImpl::HushFlag(bool flag) {
+    itsMixer->hushFlag = flag;
+}
+
+bool CSoundHubImpl::Stereo() {
+    return itsMixer->stereo;
 }
 
 void UpdateSoundLink(SoundLink *theLink, Fixed *s, Fixed *v, unsigned int t) {

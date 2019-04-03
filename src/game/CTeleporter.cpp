@@ -128,7 +128,7 @@ void CTeleporter::FrameAction() {
 
             while (thePlayer) {
                 if ((thePlayer->teamMask & watchTeams) && (thePlayer->searchCount != searchCount) &&
-                    !thePlayer->isInLimbo && thePlayer->itsGame->scores[thePlayer->itsManager->slot] >= hitScore) {
+                    !thePlayer->isInLimbo && thePlayer->itsGame->scores[thePlayer->itsManager->Slot()] >= hitScore) {
                     Vector delta;
                     Fixed distance;
 

@@ -32,6 +32,8 @@ enum { kSmallSliver, kMediumSliver, kLargeSliver };
 #define kDefaultTraction FIX3(400)
 #define kDefaultFriction FIX3(100)
 
+#define CLASSICFRAMETIME 64
+
 // From CInfoPanel
 enum { rightAlign = -1, leftAlign, centerAlign };
 

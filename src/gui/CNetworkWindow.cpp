@@ -14,20 +14,20 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
 
     connectBtn = new nanogui::Button(this, "Connect");
     connectBtn->setCallback([this, app] {
-        CAvaraApp *avara = (CAvaraApp *)app;
-        if(avara->gameNet->netStatus == kClientNet)
-            avara->gameNet->ChangeNet(kNullNet, "");
+        CAvaraAppImpl *avara = (CAvaraAppImpl *)app;
+        if(avara->GetNet()->netStatus == kClientNet)
+            avara->GetNet()->ChangeNet(kNullNet, "");
         else
-            avara->gameNet->ChangeNet(kClientNet, this->addressBox->value());
+            avara->GetNet()->ChangeNet(kClientNet, this->addressBox->value());
     });
 
     startBtn = new nanogui::Button(this, "Start Hosting");
     startBtn->setCallback([app] {
-        CAvaraApp *avara = (CAvaraApp *)app;
-        if(avara->gameNet->netStatus == kServerNet)
-            avara->gameNet->ChangeNet(kNullNet, "");
+        CAvaraAppImpl *avara = (CAvaraAppImpl *)app;
+        if(avara->GetNet()->netStatus == kServerNet)
+            avara->GetNet()->ChangeNet(kNullNet, "");
         else
-            avara->gameNet->ChangeNet(kServerNet, "");
+            avara->GetNet()->ChangeNet(kServerNet, "");
     });
 
     latencyBox = new nanogui::TextBox(this);
@@ -45,7 +45,7 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
         else
             options &= ~(long)(1 << kUseAutoLatencyBit);
         app->Set(kServerOptionsTag, options);
-        ((CAvaraApp *)app)->gameNet->ChangedServerOptions(options);
+        ((CAvaraAppImpl *)app)->GetNet()->ChangedServerOptions(options);
     });
     bool autoLatency = app->Number(kServerOptionsTag) & (1 << kUseAutoLatencyBit);
     autoLatencyBox->setChecked(autoLatency);
@@ -56,8 +56,8 @@ CNetworkWindow::~CNetworkWindow() {}
 bool CNetworkWindow::DoCommand(int theCommand) {
     switch(theCommand) {
         case kNetChangedCmd:
-            CAvaraApp *app = (CAvaraApp *)gApplication;
-            switch(app->gameNet->netStatus) {
+            CAvaraAppImpl *app = (CAvaraAppImpl *)gApplication;
+            switch(app->GetNet()->netStatus) {
                 case kNullNet:
                     addressBox->setEnabled(true);
                     connectBtn->setEnabled(true);

@@ -177,8 +177,12 @@ public:
     long oldPlayersStanding;
     short oldTeamsStanding;
 
+    CAvaraGame(int frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
+    virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
+    virtual CSoundHub* CreateSoundHub();
+    virtual CNetManager* CreateNetManager();
 
     virtual void InitLocatorTable();
 
@@ -226,6 +230,7 @@ public:
     virtual void InitMixer(Boolean silentFlag);
 
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
+    virtual double FrameTimeScale(double exponent=1);
 };
 
 #ifndef MAINAVARAGAME

@@ -860,10 +860,10 @@ void CAbstractActor::DoSound(short resId, Fixed *where, Fixed volume, Fixed rate
 
     if (volume > FIX3(300)) {
         if (volume < FIX(40)) {
-            ear = gHub->itsMixer->motionLink->nLoc;
+            ear = gHub->EarLocation();
             dist = FDistanceEstimate(where[0] - ear[0], where[1] - ear[1], where[2] - ear[2]);
             if (dist > FIX(2)) {
-                estim = FMulDiv(gHub->itsMixer->distanceToLevelOne, volume, dist);
+                estim = FMulDiv(gHub->DistanceToLevelOne(), volume, dist);
                 if (estim < FIX3(800)) {
                     return;
                 }
