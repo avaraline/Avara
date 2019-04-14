@@ -14,18 +14,17 @@ CPPFLAGS ?= $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
 CXXFLAGS ?= -std=c++1y
 
 ifeq ($(UNAME), Darwin)
+	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	CPPFLAGS += -F/Library/Frameworks
 	LDFLAGS ?= -F/Library/Frameworks -lstdc++ -lm -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
-else ifeq ($(UNAME), MINGW64_NT-10.0)
-	# Not a great conditional check for "Windows", but works for now.
-	LDFLAGS ?= -lstdc++ -lm -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
-	POST_PROCESS ?= ls -lh
-else ifeq ($(UNAME), MSYS_NT-10.0)
+else ifneq (,$(findstring NT-10.0,$(UNAME)))
+	# Windows - should match for MSYS2 on Win10
 	LDFLAGS ?= -lstdc++ -lm -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
 	POST_PROCESS ?= ls -lh
 else
+	# Linux
 	LDFLAGS ?= -lstdc++ -lm -lSDL2 -lSDL2_net -lGL -lGLU -lpthread -ldl
 	CPPFLAGS += -fPIC
 	POST_PROCESS ?= ls -lh
