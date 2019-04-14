@@ -21,7 +21,17 @@ https://github.com/jmunkki/Avara
 
 ## Requirements
 
+# All platforms
+
 [SDL2](https://www.libsdl.org/download-2.0.php) and [SDL_net](https://www.libsdl.org/projects/SDL_net/)
+
+# Windows
+
+Avara targets Windows 10 and up. This is [partly because](https://github.com/avaraline/Avara/issues/30) we target OpenGL version 3.3, which some graphics cards and drivers on Windows 7 do not support. Building on Windows 10 requires the [MSYS2](https://www.msys2.org/) environment.
+
+After installing MSYS2, you can get the dependencies for building by running the following in an MSYS2 Mingw64 terminal: `pacman --noconfirm --needed -Syuu zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make`
+
+# Linux
 
 On Debian based distributions of Linux, you can install the needed dependencies for building by running `apt-get -yq install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libsdl2-net-dev`
 
@@ -31,10 +41,7 @@ On Debian based distributions of Linux, you can install the needed dependencies 
 
 `build/Avara`
 
-This port has been tested on recent versions of MacOS, Windows, and various flavors of Linux. If you encounter a
-problem building, feel free to submit an issue, or ideally a pull request!
-
-Note that to build on Windows, you must install [MSYS2](https://www.msys2.org/). You can then get the dependencies for building by running the following in an MSYS2 Mingw64 terminal: `pacman --noconfirm --needed -Syuu zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make`
+This port has been tested on recent versions of MacOS, Windows 10, and various flavors of Linux. If you encounter a problem building, feel free to submit an issue, or ideally a pull request!
 
 To create a signed app bundle on macos, you can use `make macapp SIGNING_ID=yourid`.
 
