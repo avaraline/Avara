@@ -4,7 +4,7 @@ CC = clang
 CXX = clang++
 
 BUILD_DIR ?= build
-SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml
+SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
@@ -40,6 +40,8 @@ avara: $(BUILD_DIR)/Avara resources
 tests: $(BUILD_DIR)/tests resources
 
 bspviewer: $(BUILD_DIR)/BSPViewer resources
+
+levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
 
 macapp: avara
 	rm -rf $(BUILD_DIR)/Avara.app
@@ -80,6 +82,11 @@ $(BUILD_DIR)/BSPViewer: $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o
 	$(CC) $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
+# LevelViewer
+$(BUILD_DIR)/AvaraLevelViewer: $(OBJS) $(BUILD_DIR)/src/AvaraLevelViewer.cpp.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/AvaraLevelViewer.cpp.o -o $@ $(LDFLAGS)
+	$(POST_PROCESS) $@
+
 # c source
 $(BUILD_DIR)/%.c.o: %.c
 	$(MKDIR_P) $(dir $@)
@@ -101,6 +108,7 @@ clean:
 	$(RM) -r $(BUILD_DIR)
 
 resources:
+	python3 bin/pict2svg.py
 	cp -r bsps levels rsrc shaders $(BUILD_DIR)
 
 -include $(DEPS)
