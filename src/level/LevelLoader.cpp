@@ -8,7 +8,7 @@
 */
 
 #include "LevelLoader.h"
-
+#include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
@@ -300,6 +300,9 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
 
 void ConvertToLevelMap(Handle levelData) {
     InitParser();
+    // TODO: Not a good place for this
+    AvaraGLLightDefaults();
+
     textBuffer = NewPtr(textBufferSize);
 
     PICTParser *parser = new PICTParser();

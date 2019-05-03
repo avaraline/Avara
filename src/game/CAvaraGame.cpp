@@ -17,8 +17,8 @@
 #define INIT_ADVANCE    (TIMING_GRAIN)
 */
 
+#include "AvaraGL.h"
 #include "CAvaraGame.h"
-
 #include "CAvaraApp.h"
 //#include "CGameWind.h"
 #include "CCommManager.h"
@@ -573,6 +573,7 @@ void CAvaraGame::EndScript() {
     worldShader->Apply();
 
     itsView->ambientLight = ReadFixedVar(iAmbient);
+    AvaraGLSetAmbient(ToFloat(ReadFixedVar(iAmbient)));
 
     for (i = 0; i < 4; i++) {
         intensity = ReadFixedVar(iLightsTable + 3 * i);
@@ -587,8 +588,10 @@ void CAvaraGame::EndScript() {
             x = FMul(FDegSin(-angle2), x);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
+            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle2), ToFloat(angle1));
         } else {
             itsView->SetLightValues(i, 0, 0, 0, kLightOff);
+            AvaraGLSetLight(i, 0, 0, 0);
         }
     }
 

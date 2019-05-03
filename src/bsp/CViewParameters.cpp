@@ -11,6 +11,7 @@
 
 #include "CBSPPart.h"
 #include "FastMat.h"
+#include "AvaraGL.h"
 
 #define PYRAMIDSCALE >> 2
 
@@ -251,7 +252,12 @@ void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intens
         x = FMul(FDegSin(-angle2), x);
 
         SetLightValues(n, x, y, z, mode);
+        AvaraGLSetLight(n, ToFloat(intensity), ToFloat(angle2), ToFloat(angle1));
     }
+
+    // angle1 == azimuth
+    // angle2 == elevation
+
 }
 
 void CViewParameters::DoLighting() {

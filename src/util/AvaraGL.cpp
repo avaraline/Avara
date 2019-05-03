@@ -97,7 +97,36 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
     return ProgramID;
 }
 
-void InitContext() {
+
+void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth) {
+    // THERE... ARE... FOUR LIGHTS!!!!
+    if (light_index < 0 || light_index > 3) return;
+    std::ostringstream buffa;
+    buffa << "light" << light_index;
+    glUniform3f(glGetUniformLocation(gProgram, buffa.str().c_str()), intensity, elevation, azimuth);
+}
+
+
+void AvaraGLActivateLights(float active) {
+    glUniform1f(glGetUniformLocation(gProgram, "lights_active"), active);
+}
+
+void AvaraGLSetAmbient(float ambient) {
+    glUniform1f(glGetUniformLocation(gProgram, "ambient"), ambient);
+}
+
+
+void AvaraGLLightDefaults() {
+    // called before loading a level
+    AvaraGLSetLight(0, 0.4, 45, 20);
+    AvaraGLSetLight(1, 0.3, 20, 200);
+    AvaraGLSetLight(2, 0, 0, 0);
+    AvaraGLSetLight(3, 0, 0, 0);
+    AvaraGLSetAmbient(0.4);
+}
+
+void AvaraGLInitContext() {
     gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
     glUseProgram(gProgram);
+    AvaraGLLightDefaults();
 }
