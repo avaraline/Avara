@@ -20,7 +20,7 @@ vec3 to_cartesian (in float azimuth, in float elevation)
     return vec3(1000 * sin(azimuth) * cos(elevation),
                 1000 * sin(elevation),
                 -1000 * cos(azimuth) * cos(elevation));
-};
+}
 
 vec3 add_light (vec3 light, vec3 current) {
     vec3 lightPos = to_cartesian(radians(light.z), radians(light.y));
