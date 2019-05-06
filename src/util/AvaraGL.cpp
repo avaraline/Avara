@@ -128,5 +128,8 @@ void AvaraGLLightDefaults() {
 void AvaraGLInitContext() {
     gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
     glUseProgram(gProgram);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);
+    glFrontFace(GL_CW);
     AvaraGLLightDefaults();
 }

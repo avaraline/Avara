@@ -169,6 +169,11 @@ void CBSPPart::DrawPolygons() {
     int p = 0;
 
 
+
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
+
     for (int i = 0; i < polyCount; i++) {
         poly = &polyTable[i];
         for (int v = 0; v < poly->triCount * 3; v++) {
@@ -212,6 +217,7 @@ void CBSPPart::DrawPolygons() {
 
     if (ignoreDirectionalLights) {
         AvaraGLActivateLights(0);
+        glDisable(GL_CULL_FACE);
     }
 
 
@@ -226,6 +232,7 @@ void CBSPPart::DrawPolygons() {
 
     if (ignoreDirectionalLights) {
         AvaraGLActivateLights(1);
+        glEnable(GL_CULL_FACE);
     }
 
     glDisableVertexAttribArray(0);
