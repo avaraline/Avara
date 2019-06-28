@@ -10,7 +10,7 @@ jobs:
       skip_cleanup: true
       script: bash deploy.bash linux    
       on:
-        branch: master
+        all_branches: true
   - stage: test
     os: osx
     before_install:
@@ -27,7 +27,7 @@ jobs:
       skip_cleanup: true
       script: bash deploy.bash mac
       on:
-        branch: master
+        all_branches: true
   - stage: test
     os: windows
     before_install:
