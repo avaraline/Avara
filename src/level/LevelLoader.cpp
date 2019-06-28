@@ -8,7 +8,7 @@
 */
 
 #include "LevelLoader.h"
-
+#include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
@@ -375,6 +375,9 @@ void SVGConvertToLevelMap() {
 
 void ConvertToLevelMap(Handle levelData) {
     InitParser();
+    // TODO: Not a good place for this
+    AvaraGLLightDefaults();
+
     textBuffer = NewPtr(textBufferSize);
     
     PICTParser *parser = new PICTParser();

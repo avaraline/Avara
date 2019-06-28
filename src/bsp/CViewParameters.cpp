@@ -252,6 +252,7 @@ void CViewParameters::SetLight(short n, Fixed angle1, Fixed angle2, Fixed intens
 
         SetLightValues(n, x, y, z, mode);
     }
+
 }
 
 void CViewParameters::DoLighting() {

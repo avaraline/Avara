@@ -7,6 +7,7 @@
     Modified: Monday, September 9, 1996, 00:15
 */
 
+#include "AvaraGL.h"
 #include "CBSPPart.h"
 
 #include "CViewParameters.h"
@@ -172,26 +173,22 @@ void CBSPPart::DrawPolygons() {
     float scale = 1.0; // ToFloat(currentView->screenScale);
     int p = 0;
 
-    float extra = 1.0 + ToFloat(extraAmbient);
-    if (actuallyRender) {
-
-        for (int i = 0; i < polyCount; i++) {
-            poly = &polyTable[i];
-            for (int v = 0; v < poly->triCount * 3; v++) {
-                Vector *pt = &transformedPoints[poly->triPoints[v]];
-                glData[p].x = ToFloat((*pt)[0]);
-                glData[p].y = ToFloat((*pt)[1]);
-                glData[p].z = ToFloat((*pt)[2]);
-                glData[p].r = extra * ((poly->color >> 16) & 0xFF) / 255.0;
-                glData[p].g = extra * ((poly->color >> 8) & 0xFF) / 255.0;
-                glData[p].b = extra * (poly->color & 0xFF) / 255.0;
-                glData[p].nx = poly->normal[0];
-                glData[p].ny = poly->normal[1];
-                glData[p].nz = poly->normal[2];
-                // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
-                // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
-                p++;
-            }
+    for (int i = 0; i < polyCount; i++) {
+        poly = &polyTable[i];
+        for (int v = 0; v < poly->triCount * 3; v++) {
+            Vector *pt = &transformedPoints[poly->triPoints[v]];
+            glData[p].x = ToFloat((*pt)[0]);
+            glData[p].y = ToFloat((*pt)[1]);
+            glData[p].z = ToFloat((*pt)[2]);
+            glData[p].r = ((poly->color >> 16) & 0xFF) / 255.0;
+            glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
+            glData[p].b = (poly->color & 0xFF) / 255.0;
+            glData[p].nx = poly->normal[0];
+            glData[p].ny = poly->normal[1];
+            glData[p].nz = poly->normal[2];
+            // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
+            // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
+            p++;
         }
 
         glBindVertexArray(vertexArray);
@@ -204,15 +201,41 @@ void CBSPPart::DrawPolygons() {
             glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
             glEnableVertexAttribArray(i);
         }
-
-        glUseProgram(gProgram);
-        glBindVertexArray(vertexArray);
-        glDrawArrays(GL_TRIANGLES, 0, p);
-
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
-        glDisableVertexAttribArray(2);
     }
+
+    // custom per-object lighting
+    float extra_amb = ToFloat(extraAmbient);
+    float current_amb = ToFloat(currentView->ambientLight);
+
+    if (privateAmbient != -1) {
+        AvaraGLSetAmbient(ToFloat(privateAmbient));
+    }
+
+    if (extra_amb > 0) {
+        AvaraGLSetAmbient(current_amb + extra_amb);
+    }
+
+    if (ignoreDirectionalLights) {
+        AvaraGLActivateLights(0);
+    }
+
+
+    glUseProgram(gProgram);
+    glBindVertexArray(vertexArray);
+    glDrawArrays(GL_TRIANGLES, 0, p);
+
+    // restore previous lighting state
+    if (privateAmbient != -1 || extra_amb > 0) {
+        AvaraGLSetAmbient(current_amb);
+    }
+
+    if (ignoreDirectionalLights) {
+        AvaraGLActivateLights(1);
+    }
+
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
 }
 
 Boolean CBSPPart::InViewPyramid() {
