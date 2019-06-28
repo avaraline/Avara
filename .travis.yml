@@ -32,6 +32,7 @@ jobs:
     os: windows
     before_install:
       - choco install msys2
+      - taskkill -IM "gpg-agent.exe" -F
     script: 
       - powershell -executionpolicy bypass -file travis-windows.ps1
     deploy:
@@ -39,8 +40,7 @@ jobs:
       skip_cleanup: true
       script: bash deploy.bash windows
       on:
-        branch: master
-    after_script: powershell -Command "Stop-Computer"
+        all_branches: true
 addons:
   apt:
     packages:

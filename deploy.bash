@@ -15,20 +15,22 @@ function upload_file
 	echo put $1 | sftp -i $KEY -oStrictHostKeyChecking=no -b- $DEPLOY_ADDR
 }
 
+BASEFN=Avara-$TRAVIS_BRANCH-$SHORT_HASH
+
 case $1 in
 	linux )
-		FN=LinuxAvara-$SHORT_HASH
+		FN=Linux$BASEFN
 		mv build $FN
 		zip -r $FN.zip $FN
 		upload_file $FN.zip
 		;;
 	mac )
-		FN=MacAvara-$SHORT_HASH.zip
+		FN=Mac$BASEFN
 		mv build/MacAvara.zip $FN
 		upload_file $FN
 		;;
 	windows )
-		FN=WinAvara-$SHORT_HASH.zip
+		FN=Win$BASEFN
 		mv build/WinAvara.zip $FN
 		upload_file $FN
 		;;
