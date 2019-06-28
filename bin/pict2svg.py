@@ -14,7 +14,6 @@ Inside Macintosh - Imaging with QuickDraw
 import os
 import struct
 import sys
-import re
 import math
 import json
 from lxml import etree
@@ -23,6 +22,7 @@ from Converter import resource
 import Converter.tmpl.reader as tmplReader
 import Converter.bspt.reader as bsptReader
 from pathlib import Path
+
 
 class Rect:
 
@@ -156,7 +156,7 @@ class SVGContext:
         self.root.set("version", "1.1")
         self.root.set("id", "svg8")
 
-        #TODO: set doc name properly
+        # TODO: set doc name properly
         self.root.set(ns("docname", SPNS), "test.svg")
 
         self.set_inkscape_options()
@@ -170,7 +170,7 @@ class SVGContext:
         self.parents = []
         self.depth = 0
 
-        #self.xml = ''
+        # self.xml = ''
         self.buffered = []
         self.textpos = Point(0, 0)
         # self.write('svg', xmlns='http://www.w3.org/2000/svg', close=False, **attrs)
@@ -180,8 +180,8 @@ class SVGContext:
         self.r = Point(0, 0)
         self.fg = Color(255, 255, 255)
         self.bg = Color(255, 255, 255)
-        self.id = 0;
-        
+        self.id = 0
+
         self.last_rect = None
         self.last_rrect = None
         self.last_arc = None
@@ -294,7 +294,7 @@ class SVGContext:
             if dv == last_dv * 2 and dv != 0:
                 # empty tspan makes a linebreak
                 self.tspan(text, "", line["x"], dv // 2)
-            last_v = line["y"] 
+            last_v = line["y"]
             last_dv = dv
 
             self.tspan(text, line["string"], line["x"], line["y"])
@@ -318,8 +318,6 @@ class SVGContext:
         # print(string.encode('ascii', 'ignore'))
 
     def fill(self, el):
-        #if not el:
-        #    return
         oldstyle = el.get("style")
         fill = "fill: %s; " % self.fg
         if oldstyle:
@@ -328,8 +326,6 @@ class SVGContext:
             el.set("style", fill)
 
     def stroke(self, el):
-        #if not el:
-        #    return
         oldstyle = el.get("style")
         stroke = "stroke: %s; stroke-width: %s; " % (self.fg, str(self.w))
         if oldstyle:
