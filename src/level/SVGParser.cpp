@@ -6,7 +6,6 @@
 #include <string>
 #include <sstream>
 #include <algorithm> 
-#include <optional>
 #include <cctype>
 #include <locale>
 #include <stdlib.h>
