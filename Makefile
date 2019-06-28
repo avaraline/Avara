@@ -116,7 +116,7 @@ publish:
 	scp build/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
-	python3 bin/pict2svg.py
+	# python3 bin/pict2svg.py
 	cp -r bsps levels rsrc shaders $(BUILD_DIR)
 
 -include $(DEPS)

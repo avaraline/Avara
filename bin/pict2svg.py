@@ -16,10 +16,13 @@ import struct
 import sys
 import re
 import math
+import json
 from lxml import etree
 #from forker import get_forks
 from Converter import resource
 import Converter.tmpl.reader as tmplReader
+import Converter.bspt.reader as bsptReader
+from pathlib import Path
 
 class Rect:
 
@@ -354,8 +357,9 @@ class SVGContext:
 
     def close(self, filename):
         tree = etree.ElementTree(self.root)
-        tree.write(filename, encoding="UTF-8")
-        return 0
+        # tree.write(filename, encoding="UTF-8")
+        xml_str = ElementTree.tostring(tree, encoding="UTF-8")
+        return xml_str
 
 
 class Operation:
@@ -1117,26 +1121,29 @@ PICT_COMMENTS = {
     194: "TextIsPostScript",
     195: "ResourcePS",
     196: "PSBeginNoSave"
-
 }
 
 
-def parse_pict(data, fn):
-    if os.path.isfile(fn):
-        print("%s was found, skipping" % fn)
-        return
+class PictParseError(Exception):
+    pass
+
+
+def parse_pict(fn, data):
+    print(data[:150])
     buf = DataBuffer(data)
+    buf.short()
     size = buf.short()
     frame = buf.rect()
     print(size, frame)
     context = SVGContext(frame)
     while buf:
         opcode = buf.short()
+        print(opcode)
         try:
             op = PICT_OPCODES[opcode]()
         except KeyError:
             print("No support for opcode 0x%s" % format(opcode, '02x'))
-            exit(1)
+            raise PictParseError
         if isinstance(op, EndPict):
             break
         print("%s - 0x%s - %s" % (fn, format(opcode, '02x'), op.__class__.__name__))
@@ -1147,26 +1154,98 @@ def parse_pict(data, fn):
             # context.close(fn)
             exit(1)
         buf.align()
-    return context.close(fn)
+    return context.close()
+
+
+def parse_level_rsrc(rpath, outpath, tmpl=None):
+    data = open(str(rpath), 'rb').read()
+
+    reader = resource.Reader()
+    rsrc = reader.parse(data)
+    if tmpl is not None:
+        rsrc['TMPL'] = tmpl
+    # print(rsrc.keys())
+    tmplData = tmplReader.parse(rsrc)
+
+    # avara reads the LEDI #128
+    set_ledi = tmplData['LEDI'][128]
+
+    # the key for the list of levels is
+    # five asterisks
+    ledi_meta = {}
+    for single_ledi in set_ledi["*****"]:
+        # store these in a dictionary by pict name
+        ledi_meta[single_ledi["Path"]] = single_ledi
+
+    #rsrc = get_forks(data)
+    print(rsrc.keys())
+    if 'LEDI' not in rsrc:
+        print("No LEDI found for set %s" % rpath)
+        return
+
+    ledi = rsrc['LEDI']
+
+    if 'PICT' in rsrc:
+        dirname = rpath.name.split('.')[0] + "_svg"
+        dirpath = os.path.join(outpath, dirname)
+        os.makedirs(dirpath, exist_ok=True)
+        # print(rsrc['PICT'].keys())
+        picts = rsrc['PICT']
+        for pict in picts:
+            name = picts[pict]["name"]
+            # make sure we have an LEDI for this
+            if name not in ledi_meta:
+                print("%s is not in LEDI, skipping" % name)
+                continue
+
+            meta = ledi_meta[name]
+            data = picts[pict]["data"]
+            # print(data)
+            
+            filename = ("%s_%s_%s.svg" % (str(pict), meta["Tag"], name)).replace(" ", "_")
+            # print(filename)
+            #print(meta["Name"].encode('macintosh'))
+            #print(meta["Message"].encode('macintosh'))
+            fn = os.path.join(dirpath, filename)
+            # if os.path.isfile(fn):
+                # print("%s was found, skipping" % fn)
+                # continue
+            try:
+                xml_text = parse_pict(fn, data)
+            except PictParseError:
+                print(F"Could not parse {fn} - {meta['Name']} because of unknown opcode")
+                continue
+            with open(fn, "w") as xml_file:
+                xml_file.write(xml_text)
+
+    if 'BSPT' in rsrc:
+        bsps = bsptReader.parse(rsrc['BSPT'])
+        for bsp in bsps:
+            #filename = "%d_%s.avarabsp.json" % (bsp.res_id, bsp.name)
+            filename = F"{bsp.res_id}.json"
+            fn = os.path.join(dirpath, filename)
+            # print("Writing BSPT %s" % fn)
+            with open(fn, "w") as bsp_file:
+                bsp_file.write(bsp.avara_format())
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 2:
-        data = open(sys.argv[1], 'rb').read()
-        filename = sys.argv[2]
-        parse_pict(data, filename)
+
+    ldir = "levels"
+
+    avara_r = os.path.join("levels", "single-player.r")
+    data = open(avara_r, 'rb').read()
+
+    reader = resource.Reader()
+    avara_rsrc = reader.parse(data)
+    avara_tmpl = avara_rsrc['TMPL']
+
+    print(sys.argv)
+    if len(sys.argv) > 1:
+        parse_level_rsrc(Path(sys.argv[1]), ldir, avara_tmpl)
     else:
-
-        avara_r = os.path.join("levels", "single-player.r")
-        data = open(avara_r, 'rb').read()
-
-        reader = resource.Reader()
-        avara_rsrc = reader.parse(data)
-        avara_tmpl = avara_rsrc['TMPL']
-
         # run against everything in levels
         # and store them alongside
-        ldir = "levels"
 
         for rsrc_file in os.listdir(ldir):
             rpath = os.path.join(ldir, rsrc_file)
@@ -1174,50 +1253,5 @@ if __name__ == '__main__':
 
             if os.path.isdir(rpath):
                 continue
-
-            data = open(rpath, 'rb').read()
-
-            reader = resource.Reader()
-            rsrc = reader.parse(data)
-            rsrc['TMPL'] = avara_tmpl
-
-            tmplData = tmplReader.parse(rsrc)
-            # avara reads the LEDI #128
-            set_ledi = tmplData['LEDI'][128]
-
-            # the key for the list of levels is
-            # five asterisks
-            ledi_meta = {}
-            for single_ledi in set_ledi["*****"]:
-                # store these in a dictionary by pict name
-                ledi_meta[single_ledi["Path"]] = single_ledi
-
-            #rsrc = get_forks(data)
-            # print(rsrc.keys())
-            if 'LEDI' not in rsrc:
-                print("No LEDI found for set %s" % rpath)
-                continue
-
-            ledi = rsrc['LEDI']
-
-            if 'PICT' in rsrc:
-                dirname = rsrc_file.split('.')[0] + "_svg"
-                dirpath = os.path.join(ldir, dirname)
-                os.makedirs(dirpath, exist_ok=True)
-                print(rsrc['PICT'].keys())
-                picts = rsrc['PICT']
-                for pict in picts:
-                    name = picts[pict]["name"]
-                    # make sure we have an LEDI for this
-                    if name not in ledi_meta:
-                        print("%s is not in LEDI, skipping" % name)
-                        continue
-
-                    meta = ledi_meta[name]
-                    data = picts[pict]["data"]
-                    
-                    filename = ("%s_%s_%s.svg" % (str(pict), meta["Tag"], name)).replace(" ", "_")
-                    print(filename)
-                    #print(meta["Name"].encode('macintosh'))
-                    #print(meta["Message"].encode('macintosh'))
-                    parse_pict(data, os.path.join(dirpath, filename))
+            parse_level_rsrc(Path(rpath), ldir, avara_tmpl)
+            

@@ -195,6 +195,7 @@ void CBSPPart::DrawPolygons() {
         }
 
         glBindVertexArray(vertexArray);
+        glEnable(GL_CULL_FACE);
 
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STREAM_DRAW);
