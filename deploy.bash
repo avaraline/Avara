@@ -25,12 +25,12 @@ case $1 in
 		upload_file $FN.zip
 		;;
 	mac )
-		FN=Mac$BASEFN
+		FN=Mac$BASEFN.zip
 		mv build/MacAvara.zip $FN
 		upload_file $FN
 		;;
 	windows )
-		FN=Win$BASEFN
+		FN=Win$BASEFN.zip
 		mv build/WinAvara.zip $FN
 		upload_file $FN
 		;;
