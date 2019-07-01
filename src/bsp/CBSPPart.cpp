@@ -175,6 +175,7 @@ void CBSPPart::DrawPolygons() {
 
     for (int i = 0; i < polyCount; i++) {
         poly = &polyTable[i];
+        glm::vec3 norm = glm::vec3(poly->normal[0], poly->normal[1], poly->normal[2]) * normalTransform;
         for (int v = 0; v < poly->triCount * 3; v++) {
             Vector *pt = &transformedPoints[poly->triPoints[v]];
             glData[p].x = ToFloat((*pt)[0]);
@@ -183,9 +184,10 @@ void CBSPPart::DrawPolygons() {
             glData[p].r = ((poly->color >> 16) & 0xFF) / 255.0;
             glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
             glData[p].b = (poly->color & 0xFF) / 255.0;
-            glData[p].nx = poly->normal[0];
-            glData[p].ny = poly->normal[1];
-            glData[p].nz = poly->normal[2];
+
+            glData[p].nx = norm[0];
+            glData[p].ny = norm[1];
+            glData[p].nz = norm[2];
             // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
             // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
             p++;
@@ -348,6 +350,22 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
 
             // transform all the points before rendering
             VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
+
+            // set up normal transform
+            // transpose of inverse modelview
+            //SDL_Log("*****************");
+            //PrintMatrix(&invFullTransform);Glob
+            //SDL_Log("==================");
+            for (int i = 0; i < 3; i ++) {
+                normalTransform[0][i] = ToFloat(invGlobTransform[i][0]);
+                normalTransform[1][i] = ToFloat(invGlobTransform[i][1]);
+                normalTransform[2][i] = ToFloat(invGlobTransform[i][2]);
+                //SDL_Log("%.4f %.4f %.4f\n",
+                //    normalTransform[0][i],
+                //    normalTransform[1][i],
+                //    normalTransform[2][i]);
+            }
+            
             /*
             for(int i = 0; i < pointCount; i++) {
                 SDL_Log("(%d,%d,%d) -> (%d,%d,%d)\n", pointTable[i][0], pointTable[i][1], pointTable[i][2],

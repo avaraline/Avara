@@ -14,6 +14,7 @@
 #include "Types.h"
 
 #include <SDL2/SDL.h>
+#include <glm/glm.hpp>
 
 #define MAXLIGHTS 4
 
@@ -113,11 +114,13 @@ public:
 
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
-    Matrix itsTransform; //	Transforms to world coordinates.
-    Matrix invGlobTransform;
+    Matrix itsTransform; //	Transforms to world coordinates. (model)
+    Matrix invGlobTransform; // (inverse model)
 
-    Matrix fullTransform;
-    Matrix invFullTransform;
+    Matrix fullTransform; // modelview
+    Matrix invFullTransform; // inverse modelview
+
+    glm::mat3 normalTransform; // transposed inverse modelview
 
     Fixed hither;
     Fixed yon;
