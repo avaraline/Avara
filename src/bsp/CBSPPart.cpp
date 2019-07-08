@@ -89,7 +89,7 @@ void CBSPPart::IBSPPart(short resId) {
     maxBounds.w = FIX1;
 
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
-    transformedPoints = (Vector *)NewPtr(pointCount * sizeof(Vector));
+    //transformedPoints = (Vector *)NewPtr(pointCount * sizeof(Vector));
     polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
 
     for (int i = 0; i < pointCount; i++) {
@@ -126,13 +126,15 @@ void CBSPPart::IBSPPart(short resId) {
     // Create a buffer big enough to hold vertex/color/normal for every point we draw.
     if (actuallyRender) {
 
-        
-    }
-    glDataSize = totalPoints * sizeof(GLData);
-    glData = (GLData *)NewPtr(glDataSize);
+        glDataSize = totalPoints * sizeof(GLData);
+        glData = (GLData *)NewPtr(glDataSize);
 
-    glGenVertexArrays(1, &vertexArray);
-    glGenBuffers(1, &vertexBuffer);
+        glGenVertexArrays(1, &vertexArray);
+        glGenBuffers(1, &vertexBuffer);
+
+        UpdateOpenGLData();
+    }
+    
     /*
     TODO: can some of this be set up once and re-used?
     GLuint glBuffers[3];
@@ -171,7 +173,8 @@ void CBSPPart::TransformLights() {
     localViewOrigin[2] = invFullTransform[3][2];
 }
 
-void CBSPPart::DrawPolygons() {
+void CBSPPart::UpdateOpenGLData() {
+    if (!actuallyRender) return;
     PolyRecord *poly;
     float scale = 1.0; // ToFloat(currentView->screenScale);
     int p = 0;
@@ -195,6 +198,21 @@ void CBSPPart::DrawPolygons() {
             p++;
         }
     }
+    glBindVertexArray(vertexArray);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STATIC_DRAW);
+
+    for (int i = 0; i < 3; i++) {
+        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
+        glEnableVertexAttribArray(i);
+    }
+
+    glBindVertexArray(NULL);
+}
+
+void CBSPPart::DrawPolygons() {
+    
     // custom per-object lighting
     float extra_amb = ToFloat(extraAmbient);
     float current_amb = ToFloat(currentView->ambientLight);
@@ -212,17 +230,7 @@ void CBSPPart::DrawPolygons() {
     }
 
     AvaraGLSetTransforms(&fullTransform, normalTransform);
-
-    glBindVertexArray(vertexArray);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STREAM_DRAW);
-
-    for (int i = 0; i < 3; i++) {
-        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-        glEnableVertexAttribArray(i);
-    }
-
+    
     glEnable(GL_CULL_FACE);
     glUseProgram(gProgram);
     glBindVertexArray(vertexArray);
@@ -237,9 +245,9 @@ void CBSPPart::DrawPolygons() {
         AvaraGLActivateLights(1);
     }
 
-    glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);
-    glDisableVertexAttribArray(2);
+    //glDisableVertexAttribArray(0);
+    //glDisableVertexAttribArray(1);
+    //glDisableVertexAttribArray(2);
 }
 
 Boolean CBSPPart::InViewPyramid() {
@@ -402,6 +410,7 @@ void CBSPPart::Reset() {
 //	invalidates data & calcs sphereGlobCenter
 void CBSPPart::MoveDone() {
     VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &itsTransform);
+    UpdateOpenGLData();
     invGlobDone = false;
     lightSeed = 0;
 }
@@ -493,6 +502,7 @@ void CBSPPart::ReplaceColor(int origColor, int newColor) {
             polyTable[i].color = newColor;
         }
     }
+    UpdateOpenGLData();
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -514,15 +524,10 @@ void CBSPPart::BuildBoundingVolumes() {
 }
 
 void CBSPPart::Dispose() {
-    // TODO: add/check refCount for subclasses?
-    /* Why are these failing??
-    DisposePtr((Ptr)pointTable);
-    DisposePtr((Ptr)transformedPoints);
-    */
     for (int i = 0; i < polyCount; i++) {
         DisposePtr((Ptr)polyTable[i].triPoints);
     }
-    DisposePtr((Ptr)transformedPoints);
+    //DisposePtr((Ptr)transformedPoints);
     DisposePtr((Ptr)pointTable);
     DisposePtr((Ptr)polyTable);
     if (actuallyRender) {

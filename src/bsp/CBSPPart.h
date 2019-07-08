@@ -144,7 +144,7 @@ public:
     Fixed maxY;
 
     //	members used during rendering:
-    Vector *pointTable, *transformedPoints;
+    Vector *pointTable;//, *transformedPoints;
     uint32_t pointCount;
     PolyRecord *polyTable;
     uint32_t polyCount;
@@ -177,6 +177,7 @@ public:
     virtual void ReplaceColor(int origColor, int newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
+    virtual void UpdateOpenGLData();
     virtual void DrawPolygons();
 
     virtual void PreRender();
