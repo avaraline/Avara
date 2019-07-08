@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 GLuint gProgram;
 
@@ -141,6 +142,8 @@ void AvaraGLInitContext() {
     gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
     glUseProgram(gProgram);
     AvaraGLLightDefaults();
+    glm::mat4 proj = glm::scale(glm::perspective(glm::radians(30.0f), 4.0f/3.0f, 0.5f, 500.0f), glm::vec3(-1, 1, -1));
+    glUniformMatrix4fv(glGetUniformLocation(gProgram, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
 }
 
 

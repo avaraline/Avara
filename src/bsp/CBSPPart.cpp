@@ -126,12 +126,13 @@ void CBSPPart::IBSPPart(short resId) {
     // Create a buffer big enough to hold vertex/color/normal for every point we draw.
     if (actuallyRender) {
 
-        glDataSize = totalPoints * sizeof(GLData);
-        glData = (GLData *)NewPtr(glDataSize);
-
-        glGenVertexArrays(1, &vertexArray);
-        glGenBuffers(1, &vertexBuffer);
+        
     }
+    glDataSize = totalPoints * sizeof(GLData);
+    glData = (GLData *)NewPtr(glDataSize);
+
+    glGenVertexArrays(1, &vertexArray);
+    glGenBuffers(1, &vertexBuffer);
     /*
     TODO: can some of this be set up once and re-used?
     GLuint glBuffers[3];
@@ -193,16 +194,6 @@ void CBSPPart::DrawPolygons() {
             // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
             p++;
         }
-
-        glBindVertexArray(vertexArray);
-
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STREAM_DRAW);
-
-        for (int i = 0; i < 3; i++) {
-            glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-            glEnableVertexAttribArray(i);
-        }
     }
     // custom per-object lighting
     float extra_amb = ToFloat(extraAmbient);
@@ -222,7 +213,15 @@ void CBSPPart::DrawPolygons() {
 
     AvaraGLSetTransforms(&fullTransform, normalTransform);
 
-   
+    glBindVertexArray(vertexArray);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STREAM_DRAW);
+
+    for (int i = 0; i < 3; i++) {
+        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
+        glEnableVertexAttribArray(i);
+    }
 
     glEnable(GL_CULL_FACE);
     glUseProgram(gProgram);
@@ -356,17 +355,10 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
 
             // set up normal transform
             // transpose of inverse modelview
-            //SDL_Log("*****************");
-            //PrintMatrix(&invFullTransform);Glob
-            //SDL_Log("==================");
             for (int i = 0; i < 3; i ++) {
                 normalTransform[0][i] = ToFloat(invGlobTransform[i][0]);
                 normalTransform[1][i] = ToFloat(invGlobTransform[i][1]);
                 normalTransform[2][i] = ToFloat(invGlobTransform[i][2]);
-                //SDL_Log("%.4f %.4f %.4f\n",
-                //    normalTransform[0][i],
-                //    normalTransform[1][i],
-                //    normalTransform[2][i]);
             }
             
             /*
