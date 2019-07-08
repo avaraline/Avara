@@ -152,6 +152,7 @@ public:
     GLData *glData;
     GLuint vertexArray, vertexBuffer;
     GLsizeiptr glDataSize;
+    int totalPoints;
 
     //	Lighting vectors in object space
     long lightSeed; //	Seed value to detect lights change

@@ -100,7 +100,7 @@ void CBSPPart::IBSPPart(short resId) {
         pointTable[i][3] = FIX1;
     }
 
-    int totalPoints = 0;
+    totalPoints = 0;
 
     for (int i = 0; i < polyCount; i++) {
         json poly = doc["polys"][i];
@@ -144,6 +144,8 @@ void CBSPPart::IBSPPart(short resId) {
     glBufferData(GL_ARRAY_BUFFER, glBufferSize, glData, GL_STATIC_DRAW);
     */
 
+    
+
     BuildBoundingVolumes();
     Reset();
 }
@@ -175,9 +177,8 @@ void CBSPPart::DrawPolygons() {
 
     for (int i = 0; i < polyCount; i++) {
         poly = &polyTable[i];
-        glm::vec3 norm = glm::vec3(poly->normal[0], poly->normal[1], poly->normal[2]) * normalTransform;
         for (int v = 0; v < poly->triCount * 3; v++) {
-            Vector *pt = &transformedPoints[poly->triPoints[v]];
+            Vector *pt = &pointTable[poly->triPoints[v]];
             glData[p].x = ToFloat((*pt)[0]);
             glData[p].y = ToFloat((*pt)[1]);
             glData[p].z = ToFloat((*pt)[2]);
@@ -185,16 +186,15 @@ void CBSPPart::DrawPolygons() {
             glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
             glData[p].b = (poly->color & 0xFF) / 255.0;
 
-            glData[p].nx = norm[0];
-            glData[p].ny = norm[1];
-            glData[p].nz = norm[2];
+            glData[p].nx = poly->normal[0];
+            glData[p].ny = poly->normal[1];
+            glData[p].nz = poly->normal[2];
             // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
             // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
             p++;
         }
 
         glBindVertexArray(vertexArray);
-        glEnable(GL_CULL_FACE);
 
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
         glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STREAM_DRAW);
@@ -204,7 +204,6 @@ void CBSPPart::DrawPolygons() {
             glEnableVertexAttribArray(i);
         }
     }
-
     // custom per-object lighting
     float extra_amb = ToFloat(extraAmbient);
     float current_amb = ToFloat(currentView->ambientLight);
@@ -221,10 +220,14 @@ void CBSPPart::DrawPolygons() {
         AvaraGLActivateLights(0);
     }
 
+    AvaraGLSetTransforms(&fullTransform, normalTransform);
 
+   
+
+    glEnable(GL_CULL_FACE);
     glUseProgram(gProgram);
     glBindVertexArray(vertexArray);
-    glDrawArrays(GL_TRIANGLES, 0, p);
+    glDrawArrays(GL_TRIANGLES, 0, totalPoints);
 
     // restore previous lighting state
     if (privateAmbient != -1 || extra_amb > 0) {
@@ -345,11 +348,11 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
                 invGlobDone = true;
             }
 
-            PreRender();
+            //PreRender();
             TransformLights();
 
             // transform all the points before rendering
-            VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
+            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
 
             // set up normal transform
             // transpose of inverse modelview
@@ -770,3 +773,4 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         return true;
     }
 }
+

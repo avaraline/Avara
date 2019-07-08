@@ -11,6 +11,7 @@
 
 #include "CBSPPart.h"
 #include "FastMat.h"
+#include "AvaraGL.h"
 
 #define PYRAMIDSCALE >> 2
 
@@ -221,6 +222,8 @@ void CViewParameters::PointCamera() {
         mb[2][1] = -mb[1][2];
 
         CombineTransforms(&mc, &viewMatrix, &mb);
+
+        AvaraGLSetView(FromFixedMat(&viewMatrix));
     }
 }
 

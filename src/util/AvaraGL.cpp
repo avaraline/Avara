@@ -7,6 +7,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <glm/gtc/type_ptr.hpp>
 
 GLuint gProgram;
 
@@ -115,6 +116,17 @@ void AvaraGLSetAmbient(float ambient) {
     glUniform1f(glGetUniformLocation(gProgram, "ambient"), ambient);
 }
 
+void AvaraGLSetView(glm::mat4 view) {
+    //SDL_Log("view-set");
+    //std::cout << glm::to_string(view) << std::endl;
+    glUniformMatrix4fv(glGetUniformLocation(gProgram, "view"), 1, GL_FALSE, glm::value_ptr(view));
+}
+
+void AvaraGLSetTransforms(Matrix *modelview, glm::mat4 normal_transform) {
+    glUniformMatrix4fv(glGetUniformLocation(gProgram, "modelview"), 1, GL_FALSE, glm::value_ptr(FromFixedMat(modelview)));
+    glUniformMatrix3fv(glGetUniformLocation(gProgram, "normal_transform"), 1, GL_FALSE, glm::value_ptr(normal_transform));
+}
+
 
 void AvaraGLLightDefaults() {
     // called before loading a level
@@ -129,4 +141,16 @@ void AvaraGLInitContext() {
     gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
     glUseProgram(gProgram);
     AvaraGLLightDefaults();
+}
+
+
+glm::mat4 FromFixedMat(Matrix *m) {
+    glm::mat4 mat(1.0);
+    for (int i = 0; i < 3; i ++) {
+        mat[0][i] = ToFloat((*m)[0][i]);
+        mat[1][i] = ToFloat((*m)[1][i]);
+        mat[2][i] = ToFloat((*m)[2][i]);
+        mat[3][i] = ToFloat((*m)[3][i]);
+    }
+    return mat;
 }

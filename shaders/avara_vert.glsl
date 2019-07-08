@@ -23,9 +23,9 @@ mat4 frustum(float angle_of_view, float aspect_ratio, float z_near, float z_far)
 void main()
 {
     mat4 proj = frustum(radians(30.0), 4.0/3.0, 0.5, 500.0);
-    vec4 pos = vec4(vertexPosition_modelspace, 1.0) * vec4(1.0, 1.0, 1.0, 1.0);
-    gl_Position = pos * modelview * proj;// modelview * proj * view;
+    vec4 pos = vec4(vertexPosition_modelspace, 1.0);
+    gl_Position = proj * (modelview * pos);// modelview * proj * view;
 
     fragmentColor = vertexColor;
-    fragmentNormal = vertexNormal;// * normal_transform;
+    fragmentNormal = normal_transform * vertexNormal;
 }
