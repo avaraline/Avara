@@ -209,6 +209,10 @@ void CBSPPart::UpdateOpenGLData() {
     }
 
     glBindVertexArray(NULL);
+    glBindBuffer(GL_ARRAY_BUFFER, NULL);
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
 }
 
 void CBSPPart::DrawPolygons() {
@@ -245,9 +249,6 @@ void CBSPPart::DrawPolygons() {
         AvaraGLActivateLights(1);
     }
 
-    //glDisableVertexAttribArray(0);
-    //glDisableVertexAttribArray(1);
-    //glDisableVertexAttribArray(2);
 }
 
 Boolean CBSPPart::InViewPyramid() {

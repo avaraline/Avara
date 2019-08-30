@@ -23,8 +23,8 @@ vec3 to_cartesian (in float azimuth, in float elevation)
 }
 
 vec3 calc_light (vec3 light) {
-    vec3 lightDir = to_cartesian(radians(light.z), radians(light.y));
-    //vec3 lightDir = normalize(fragmentNormal - lightPos);
+    vec3 lightPos = to_cartesian(radians(light.z), radians(light.y));
+    vec3 lightDir = normalize(fragmentNormal - lightPos);
     return max(dot(fragmentNormal, lightDir), 0.0) * lightColor * light.x;
 }
 
