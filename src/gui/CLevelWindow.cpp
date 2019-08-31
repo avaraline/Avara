@@ -21,6 +21,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "hunting-grounds", 
         "net-99",
         "not-aa",
+        "scarlet-pimpernel-beta-0919",
         "single-player",
         "symbiosis",
         "the-codex",
