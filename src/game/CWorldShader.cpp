@@ -14,14 +14,10 @@
 #include "CViewParameters.h"
 #include "Resource.h"
 #include "CBSPPart.h"
+#include "AvaraGL.h"
 
 void CWorldShader::IWorldShader(CAvaraGame *theGame) {
     itsGame = theGame;
-    if (CBSPPart::actuallyRender) {
-        skyProgram = LoadShaders(BundlePath("shaders/sky_vert.glsl"), BundlePath("shaders/sky_frag.glsl"));
-        glGenVertexArrays(1, &vertexArray);
-        glGenBuffers(1, &vertexBuffer);
-    }
     Reset();
 }
 
@@ -119,52 +115,10 @@ void CWorldShader::Apply() {
 }
 
 void CWorldShader::ShadeWorld(CViewParameters *theView) {
-    float Z = 1.0;
-    float SCALE = 1.0;
-    float points[12] = {
-        -1 * SCALE, -1 * SCALE, Z, 1 * SCALE, -1 * SCALE, Z, -1 * SCALE, 1 * SCALE, Z, 1 * SCALE, 1 * SCALE, Z};
-
-    Matrix *trans = theView->GetInverseMatrix();
-    float matrix[16];
-    for (int c = 0; c < 4; c++) {
-        for (int r = 0; r < 4; r++) {
-            matrix[(c * 4) + r] = ToFloat((*trans)[c][r]);
-        }
-    }
-    // Get rid of the translation part
-    matrix[12] = matrix[13] = matrix[14] = 0;
-    matrix[15] = 1;
-
-    if (CBSPPart::actuallyRender) {
-        // glDisable(GL_CULL_FACE);
-        glDisable(GL_DEPTH_TEST);
-        glBindVertexArray(vertexArray);
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STREAM_DRAW);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
-        glEnableVertexAttribArray(0);
-        glUseProgram(skyProgram);
-        glUniformMatrix4fv(glGetUniformLocation(skyProgram, "invMatrix"), 1, GL_FALSE, matrix);
-        glUniform3f(glGetUniformLocation(skyProgram, "groundColor"),
-            ((groundColor >> 16) & 0xFF) / 255.0,
-            ((groundColor >> 8) & 0xFF) / 255.0,
-            (groundColor & 0xFF) / 255.0);
-        glUniform3f(glGetUniformLocation(skyProgram, "horizonColor"),
-            ((lowSkyColor >> 16) & 0xFF) / 255.0,
-            ((lowSkyColor >> 8) & 0xFF) / 255.0,
-            (lowSkyColor & 0xFF) / 255.0);
-        glUniform3f(glGetUniformLocation(skyProgram, "skyColor"),
-            ((highSkyColor >> 16) & 0xFF) / 255.0,
-            ((highSkyColor >> 8) & 0xFF) / 255.0,
-            (highSkyColor & 0xFF) / 255.0);
-        glBindVertexArray(vertexArray);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        glDisableVertexAttribArray(0);
-        glEnable(GL_DEPTH_TEST);
-
-        /*
-        if(numShades)
-            theView->RenderPlanes(numShades, shadeColors, altitudes);
-        */
-    }
+    AvaraGLShadeWorld(this, theView);
+    /*
+    if(numShades)
+        theView->RenderPlanes(numShades, shadeColors, altitudes);
+    */
+    
 }

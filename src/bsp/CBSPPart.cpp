@@ -36,8 +36,6 @@ ColorRecord ***bspColorLookupTable = 0;
 
 using json = nlohmann::json;
 
-bool CBSPPart::actuallyRender = true;
-
 void CBSPPart::IBSPPart(short resId) {
     char relPath[256];
     snprintf(relPath, 256, "bsps/%d.json", resId);
@@ -123,17 +121,8 @@ void CBSPPart::IBSPPart(short resId) {
         }
     }
 
-    // Create a buffer big enough to hold vertex/color/normal for every point we draw.
-    if (actuallyRender) {
+    
 
-        glDataSize = totalPoints * sizeof(GLData);
-        glData = (GLData *)NewPtr(glDataSize);
-
-        glGenVertexArrays(1, &vertexArray);
-        glGenBuffers(1, &vertexBuffer);
-
-        UpdateOpenGLData();
-    }
     
     /*
     TODO: can some of this be set up once and re-used?
@@ -146,8 +135,6 @@ void CBSPPart::IBSPPart(short resId) {
     }
     glBufferData(GL_ARRAY_BUFFER, glBufferSize, glData, GL_STATIC_DRAW);
     */
-
-    
 
     BuildBoundingVolumes();
     Reset();
@@ -173,82 +160,8 @@ void CBSPPart::TransformLights() {
     localViewOrigin[2] = invFullTransform[3][2];
 }
 
-void CBSPPart::UpdateOpenGLData() {
-    if (!actuallyRender) return;
-    PolyRecord *poly;
-    float scale = 1.0; // ToFloat(currentView->screenScale);
-    int p = 0;
-
-    for (int i = 0; i < polyCount; i++) {
-        poly = &polyTable[i];
-        for (int v = 0; v < poly->triCount * 3; v++) {
-            Vector *pt = &pointTable[poly->triPoints[v]];
-            glData[p].x = ToFloat((*pt)[0]);
-            glData[p].y = ToFloat((*pt)[1]);
-            glData[p].z = ToFloat((*pt)[2]);
-            glData[p].r = ((poly->color >> 16) & 0xFF) / 255.0;
-            glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
-            glData[p].b = (poly->color & 0xFF) / 255.0;
-
-            glData[p].nx = poly->normal[0];
-            glData[p].ny = poly->normal[1];
-            glData[p].nz = poly->normal[2];
-            // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
-            // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
-            p++;
-        }
-    }
-    glBindVertexArray(vertexArray);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STATIC_DRAW);
-
-    for (int i = 0; i < 3; i++) {
-        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-        glEnableVertexAttribArray(i);
-    }
-
-    glBindVertexArray(NULL);
-    glBindBuffer(GL_ARRAY_BUFFER, NULL);
-    glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);
-    glDisableVertexAttribArray(2);
-}
-
 void CBSPPart::DrawPolygons() {
-    
-    // custom per-object lighting
-    float extra_amb = ToFloat(extraAmbient);
-    float current_amb = ToFloat(currentView->ambientLight);
-
-    if (privateAmbient != -1) {
-        AvaraGLSetAmbient(ToFloat(privateAmbient));
-    }
-
-    if (extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb + extra_amb);
-    }
-
-    if (ignoreDirectionalLights) {
-        AvaraGLActivateLights(0);
-    }
-
-    AvaraGLSetTransforms(&fullTransform, normalTransform);
-    
-    glEnable(GL_CULL_FACE);
-    glUseProgram(gProgram);
-    glBindVertexArray(vertexArray);
-    glDrawArrays(GL_TRIANGLES, 0, totalPoints);
-
-    // restore previous lighting state
-    if (privateAmbient != -1 || extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb);
-    }
-
-    if (ignoreDirectionalLights) {
-        AvaraGLActivateLights(1);
-    }
-
+    AvaraGLDrawPolygons(this);
 }
 
 Boolean CBSPPart::InViewPyramid() {
@@ -411,7 +324,6 @@ void CBSPPart::Reset() {
 //	invalidates data & calcs sphereGlobCenter
 void CBSPPart::MoveDone() {
     VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &itsTransform);
-    UpdateOpenGLData();
     invGlobDone = false;
     lightSeed = 0;
 }
@@ -503,7 +415,6 @@ void CBSPPart::ReplaceColor(int origColor, int newColor) {
             polyTable[i].color = newColor;
         }
     }
-    UpdateOpenGLData();
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -529,13 +440,9 @@ void CBSPPart::Dispose() {
         DisposePtr((Ptr)polyTable[i].triPoints);
     }
     //DisposePtr((Ptr)transformedPoints);
+
     DisposePtr((Ptr)pointTable);
     DisposePtr((Ptr)polyTable);
-    if (actuallyRender) {
-        DisposePtr((Ptr)glData);
-        glDeleteVertexArrays(1, &vertexArray);
-        glDeleteBuffers(1, &vertexBuffer);
-    }
     CDirectObject::Dispose();
 }
 

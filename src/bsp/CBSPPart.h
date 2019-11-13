@@ -8,12 +8,12 @@
 */
 
 #pragma once
-#include "AvaraGL.h"
 #include "CDirectObject.h"
 #include "FastMat.h"
 #include "Types.h"
 
 #include <SDL2/SDL.h>
+#include <glad/glad.h>
 #include <glm/glm.hpp>
 
 #define MAXLIGHTS 4
@@ -26,10 +26,6 @@ class CBSPPart;
 class CViewParameters;
 
 enum { noLineClip = 0, touchFrontClip = 1, touchBackClip = 2, lineVisibleClip = 4, edgeExitsFlag = 0x8000 };
-
-typedef struct GLData {
-    float x, y, z, r, g, b, nx, ny, nz;
-} GLData;
 
 typedef struct {
     Fixed x;
@@ -148,10 +144,6 @@ public:
     uint32_t pointCount;
     PolyRecord *polyTable;
     uint32_t polyCount;
-    static bool actuallyRender;
-    GLData *glData;
-    GLuint vertexArray, vertexBuffer;
-    GLsizeiptr glDataSize;
     int totalPoints;
 
     //	Lighting vectors in object space
@@ -177,7 +169,6 @@ public:
     virtual void ReplaceColor(int origColor, int newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
-    virtual void UpdateOpenGLData();
     virtual void DrawPolygons();
 
     virtual void PreRender();
