@@ -3,7 +3,6 @@
 #include "Resource.h"
 #include "CViewParameters.h"
 
-#define GLM_ENABLE_EXPERIMENTAL
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -12,11 +11,6 @@
 #include <vector>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/string_cast.hpp>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 
 bool actuallyRender = true;
