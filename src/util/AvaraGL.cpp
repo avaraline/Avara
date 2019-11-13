@@ -14,8 +14,14 @@
 
 bool actuallyRender = true;
 
+glm::mat4 proj;
+const float NEAR = .3f;
+const float FAR = 500f;
+const float DEFAULT_FOV = 45f;
+const float DEFAULT_ASPECT = 3.0f/4.0f;
+
 GLuint gProgram;
-GLuint mv_loc, nt_loc, amb_loc, lights_active_loc;
+GLuint mv_loc, nt_loc, amb_loc, lights_active_loc, proj_loc;
 
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
@@ -29,6 +35,7 @@ void AvaraGLToggleRendering(int active) {
 void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth) {
     if (!actuallyRender) return;
     // THERE... ARE... FOUR LIGHTS!!!!
+    // TODO: this is a horrible crash waiting to happen
     if (light_index < 0 || light_index > 3) return;
     std::ostringstream buffa;
     buffa << "light" << light_index;
@@ -50,14 +57,21 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4);
 }
 
+void AvaraGLUpdateProjectionMatrix(float fov, float aspect) {
+    proj = glm::scale(glm::perspective(glm::radians(fov), aspect, NEAR, FAR), glm::vec3(-1, 1, -1));
+    glUniformMatrix4fv(proj_loc, 1, GL_FALSE, glm::value_ptr(proj));
+}
+
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
     gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
     glUseProgram(gProgram);
     AvaraGLLightDefaults();
-    glm::mat4 proj = glm::scale(glm::perspective(glm::radians(30.0f), 4.0f/3.0f, 0.5f, 500.0f), glm::vec3(-1, 1, -1));
-    glUniformMatrix4fv(glGetUniformLocation(gProgram, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
+    
+    proj_loc = glGetUniformLocation(gProgram, "proj");
+    AvaraGLUpdateProjectionMatrix(DEFAULT_FOV, DEFAULT_ASPECT);
+
     mv_loc = glGetUniformLocation(gProgram, "modelview");
     nt_loc = glGetUniformLocation(gProgram, "normal_transform");
     amb_loc = glGetUniformLocation(gProgram, "ambient");
