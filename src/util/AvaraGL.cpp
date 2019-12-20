@@ -15,17 +15,62 @@
 bool actuallyRender = true;
 
 glm::mat4 proj;
-const float NEAR = .3f;
-const float FAR = 500f;
-const float DEFAULT_FOV = 45f;
+const float NEAR = .2f;
+const float FAR = 500.0f;
+const float DEFAULT_FOV = 45.0f;
 const float DEFAULT_ASPECT = 3.0f/4.0f;
+
+float skyboxVertices[] = {
+        // positions          
+        -1.0f,  1.0f, -1.0f,
+        -1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+        -1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
+
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+
+        -1.0f, -1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
+
+        -1.0f,  1.0f, -1.0f,
+         1.0f,  1.0f, -1.0f,
+         1.0f,  1.0f,  1.0f,
+         1.0f,  1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+        -1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f,  1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f,  1.0f,
+         1.0f, -1.0f,  1.0f
+    };
 
 GLuint gProgram;
 GLuint mv_loc, nt_loc, amb_loc, lights_active_loc, proj_loc;
 
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
-GLuint skyInvMatrixLoc, groundColorLoc, horizonColorLoc, skyColorLoc;
+GLuint skyViewLoc, skyProjLoc, groundColorLoc, horizonColorLoc, skyColorLoc;
 
 void AvaraGLToggleRendering(int active) {
     if (active < 1)
@@ -80,7 +125,8 @@ void AvaraGLInitContext() {
     skyProgram = LoadShaders(BundlePath("shaders/sky_vert.glsl"), BundlePath("shaders/sky_frag.glsl"));
     glGenVertexArrays(1, &skyVertArray);
     glGenBuffers(1, &skyBuffer);
-    skyInvMatrixLoc = glGetUniformLocation(skyProgram, "invMatrix");
+    skyViewLoc = glGetUniformLocation(skyProgram, "view");
+    skyProjLoc = glGetUniformLocation(skyProgram, "proj");
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
@@ -193,7 +239,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     if (!actuallyRender) return;
-    Matrix *trans = theView->GetInverseMatrix();
+    Matrix *trans = &theView->viewMatrix;
     float matrix[16];
     for (int c = 0; c < 4; c++) {
         for (int r = 0; r < 4; r++) {
@@ -202,16 +248,14 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     }
     // Get rid of the translation part
     matrix[12] = matrix[13] = matrix[14] = 0;
-    matrix[15] = 1;
 
-    // generate card for drawing on
-    float Z = 1.0;
-    float SCALE = 1.0;
-    float points[12] = {
-        -1 * SCALE, -1 * SCALE, Z, 1 * SCALE, -1 * SCALE, Z, -1 * SCALE, 1 * SCALE, Z, 1 * SCALE, 1 * SCALE, Z};
+    //glm::vec3 dir = glm::vec3(matrix[8], matrix[9], matrix[10]);
+
+    //glm::mat4 view = glm::lookAt(glm::vec3(0, 0, 0), dir, glm::vec3(matrix[4], matrix[5], matrix[6]));
+    
     glBindVertexArray(skyVertArray);
     glBindBuffer(GL_ARRAY_BUFFER, skyBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
 
     long groundColor = theShader->groundColor;
     long lowSkyColor = theShader->lowSkyColor;
@@ -222,7 +266,8 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
     glEnableVertexAttribArray(0);
     glUseProgram(skyProgram);
-    glUniformMatrix4fv(skyInvMatrixLoc, 1, GL_FALSE, matrix);
+    glUniformMatrix4fv(skyViewLoc, 1, GL_FALSE, matrix);
+    glUniformMatrix4fv(skyProjLoc, 1, GL_FALSE, glm::value_ptr(proj));
     glUniform3f(groundColorLoc,
         ((groundColor >> 16) & 0xFF) / 255.0,
         ((groundColor >> 8) & 0xFF) / 255.0,
@@ -235,8 +280,10 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
         ((highSkyColor >> 16) & 0xFF) / 255.0,
         ((highSkyColor >> 8) & 0xFF) / 255.0,
         (highSkyColor & 0xFF) / 255.0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glBindVertexArray(skyVertArray);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(skyboxVertices));
     glDisableVertexAttribArray(0);
     glEnable(GL_DEPTH_TEST);
 
