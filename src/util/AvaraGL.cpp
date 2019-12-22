@@ -15,10 +15,10 @@
 bool actuallyRender = true;
 
 glm::mat4 proj;
-const float NEAR = .2f;
-const float FAR = 500.0f;
-const float DEFAULT_FOV = 45.0f;
-const float DEFAULT_ASPECT = 3.0f/4.0f;
+const float near_dist = .3f;
+const float far_dist = 500.0f;
+const float default_fov = 45.0f;
+const float default_aspect = 3.0f/4.0f;
 
 float skyboxVertices[] = {
         // positions          
@@ -103,7 +103,7 @@ void AvaraGLLightDefaults() {
 }
 
 void AvaraGLUpdateProjectionMatrix(float fov, float aspect) {
-    proj = glm::scale(glm::perspective(glm::radians(fov), aspect, NEAR, FAR), glm::vec3(-1, 1, -1));
+    proj = glm::scale(glm::perspective(glm::radians(fov), aspect, near_dist, far_dist), glm::vec3(-1, 1, -1));
     glUniformMatrix4fv(proj_loc, 1, GL_FALSE, glm::value_ptr(proj));
 }
 
@@ -115,7 +115,7 @@ void AvaraGLInitContext() {
     AvaraGLLightDefaults();
     
     proj_loc = glGetUniformLocation(gProgram, "proj");
-    AvaraGLUpdateProjectionMatrix(DEFAULT_FOV, DEFAULT_ASPECT);
+    AvaraGLUpdateProjectionMatrix(default_fov, default_aspect);
 
     mv_loc = glGetUniformLocation(gProgram, "modelview");
     nt_loc = glGetUniformLocation(gProgram, "normal_transform");
@@ -252,6 +252,7 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     //glm::vec3 dir = glm::vec3(matrix[8], matrix[9], matrix[10]);
 
     //glm::mat4 view = glm::lookAt(glm::vec3(0, 0, 0), dir, glm::vec3(matrix[4], matrix[5], matrix[6]));
+    //glm::mat4 skyproj = glm::perspective(200.0f, 1.0f, .1f, 2.0f);
     
     glBindVertexArray(skyVertArray);
     glBindBuffer(GL_ARRAY_BUFFER, skyBuffer);

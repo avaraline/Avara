@@ -12,7 +12,7 @@ void main()
 {
     float gradientHeight = 0.05;
 
-    float phi = tex_coord.y;
+    float phi = normalize(tex_coord).y;
     if (phi <= 0.0) {
         color = groundColor;
     }
