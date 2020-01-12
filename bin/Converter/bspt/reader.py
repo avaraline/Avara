@@ -316,11 +316,13 @@ class BSP(object):
             color = d['colors'][color_idx]
             tris = d['triangles_poly'][idx]
             tri_points = d['triangles_verts_poly'][idx]
+            """
             out['polys'].append({
                 'normal': [-x for x in normal],
                 'color': color,
                 'tris': [[tri_points[i] for i in t][::-1] for t in tris],
             })
+            """
             out['polys'].append({
                 'normal': normal,
                 'color': color,

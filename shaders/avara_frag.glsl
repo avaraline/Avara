@@ -18,7 +18,7 @@ vec3 lightColor = vec3(1, 1, 1);
 vec3 to_cartesian (in float azimuth, in float elevation)
 {
     return vec3(sin(azimuth) * cos(elevation),
-                -sin(elevation),
+                -sin(elevation) * 1000,
                 -cos(azimuth) * cos(elevation));
 }
 
@@ -39,5 +39,5 @@ void main()
                                     + calc_light(light3))) * fragmentColor,
             lights_active);
     
-    //color = fragmentNormal;
+    color = fragmentNormal;
 }

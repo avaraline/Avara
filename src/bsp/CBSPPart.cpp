@@ -41,7 +41,7 @@ void CBSPPart::IBSPPart(short resId) {
     snprintf(relPath, 256, "bsps/%d.json", resId);
     char *bspName = BundlePath(relPath);
     // SDL_Log("Loading BSP: %s\n", bspName);
-
+    itsId = resId;
     lightSeed = 0;
     nextTemp = NULL;
     // colorReplacements = NULL;	//	Use default colors.
@@ -87,7 +87,6 @@ void CBSPPart::IBSPPart(short resId) {
     maxBounds.w = FIX1;
 
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
-    //transformedPoints = (Vector *)NewPtr(pointCount * sizeof(Vector));
     polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
 
     for (int i = 0; i < pointCount; i++) {
@@ -121,26 +120,45 @@ void CBSPPart::IBSPPart(short resId) {
         }
     }
 
-    
-
-    
-    /*
-    TODO: can some of this be set up once and re-used?
-    GLuint glBuffers[3];
-    glGenBuffers(3, glBuffers);
-    for(int i = 0; i < 3; i++) {
-        glBindBuffer(GL_ARRAY_BUFFER, glBuffers[i]);
-        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-        glEnableVertexAttribArray(i);
-    }
-    glBufferData(GL_ARRAY_BUFFER, glBufferSize, glData, GL_STATIC_DRAW);
-    */
-
     BuildBoundingVolumes();
     Reset();
+    UpdateOpenGLData();
 }
 
 void CBSPPart::PostRender() {}
+
+void CBSPPart::UpdateOpenGLData() {
+    glDataSize = totalPoints * sizeof(GLData);
+    glData = (GLData *)NewPtr(glDataSize);
+
+    glGenVertexArrays(1, &vertexArray);
+    glGenBuffers(1, &vertexBuffer);
+
+
+    PolyRecord *poly;
+    float scale = 1.0; // ToFloat(currentView->screenScale);
+    int p = 0;
+
+    for (int i = 0; i < polyCount; i++) {
+        poly = &polyTable[i];
+        for (int v = 0; v < poly->triCount * 3; v++) {
+            Vector *pt = &pointTable[poly->triPoints[v]];
+            glData[p].x = ToFloat((*pt)[0]);
+            glData[p].y = ToFloat((*pt)[1]);
+            glData[p].z = ToFloat((*pt)[2]);
+            glData[p].r = ((poly->color >> 16) & 0xFF) / 255.0;
+            glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
+            glData[p].b = (poly->color & 0xFF) / 255.0;
+
+            glData[p].nx = poly->normal[0];
+            glData[p].ny = poly->normal[1];
+            glData[p].nz = poly->normal[2];
+            // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
+            // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
+            p++;
+        }
+    }
+}
 
 void CBSPPart::TransformLights() {
     CViewParameters *vp;
@@ -269,7 +287,6 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
                 invGlobDone = true;
             }
 
-            //PreRender();
             TransformLights();
 
             // transform all the points before rendering
@@ -282,13 +299,6 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
                 normalTransform[1][i] = ToFloat(invGlobTransform[i][1]);
                 normalTransform[2][i] = ToFloat(invGlobTransform[i][2]);
             }
-            
-            /*
-            for(int i = 0; i < pointCount; i++) {
-                SDL_Log("(%d,%d,%d) -> (%d,%d,%d)\n", pointTable[i][0], pointTable[i][1], pointTable[i][2],
-                    transformedPoints[i][0], transformedPoints[i][1], transformedPoints[i][2]);
-            }
-            */
         }
     }
 
@@ -415,6 +425,7 @@ void CBSPPart::ReplaceColor(int origColor, int newColor) {
             polyTable[i].color = newColor;
         }
     }
+    UpdateOpenGLData();
 }
 
 void CBSPPart::BuildBoundingVolumes() {

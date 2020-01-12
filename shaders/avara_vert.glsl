@@ -16,7 +16,6 @@ void main()
 {
     vec4 pos = vec4(vertexPosition_modelspace, 1.0);
     gl_Position = proj * (modelview * pos);
-
     fragmentColor = vertexColor;
-    fragmentNormal = normal_transform * vertexNormal;
+    fragmentNormal = (vertexNormal * -1);
 }

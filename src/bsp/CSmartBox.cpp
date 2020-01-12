@@ -167,6 +167,7 @@ void CSmartBox::ISmartBox(short resId,
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
+    UpdateOpenGLData();
 }
 
 void CSmartBox::Dispose() {

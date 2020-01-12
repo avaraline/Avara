@@ -99,7 +99,7 @@ public:
     FaceVisibility		**faceTemp;
     BSPResourceHeader	header;
     */
-
+    short itsId;
     // Moved here from BSPResourceHeader
     FixedPoint enclosurePoint;
     Fixed enclosureRadius;
@@ -107,6 +107,10 @@ public:
     FixedPoint maxBounds; //  Bounding box maximums for x, y, z
 
     CViewParameters *currentView;
+
+    GLData *glData;
+    GLuint vertexArray, vertexBuffer;
+    GLsizeiptr glDataSize;
 
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
@@ -170,6 +174,7 @@ public:
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();
+    virtual void UpdateOpenGLData();
 
     virtual void PreRender();
     void PostRender();
