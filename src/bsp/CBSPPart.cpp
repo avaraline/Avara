@@ -76,15 +76,31 @@ void CBSPPart::IBSPPart(short resId) {
     enclosurePoint.z = ToFixed(doc["center"][2]);
     enclosurePoint.w = FIX1;
 
-    minBounds.x = ToFixed(doc["bounds"]["min"][0]);
-    minBounds.y = ToFixed(doc["bounds"]["min"][1]);
-    minBounds.z = ToFixed(doc["bounds"]["min"][2]);
+    float minX = doc["bounds"]["min"][0];
+    float minY = doc["bounds"]["min"][1];
+    float minZ = doc["bounds"]["min"][2];
+
+    minBounds.x = ToFixed(minX);
+    minBounds.y = ToFixed(minY);
+    minBounds.z = ToFixed(minZ);
     minBounds.w = FIX1;
 
-    maxBounds.x = ToFixed(doc["bounds"]["max"][0]);
+    float maxX = doc["bounds"]["max"][0];
+    float maxY = doc["bounds"]["max"][1];
+    float maxZ = doc["bounds"]["max"][2];
+
+    maxBounds.x = ToFixed(maxX);
     maxBounds.y = ToFixed(doc["bounds"]["max"][1]);
     maxBounds.z = ToFixed(doc["bounds"]["max"][2]);
     maxBounds.w = FIX1;
+
+    float sigma = .01f;
+
+    isDecal = (
+        abs(maxX - minX) < sigma ||
+        abs(maxY - minY) < sigma ||
+        abs(maxZ - minZ) < sigma
+    );
 
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
     polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));

@@ -105,6 +105,7 @@ public:
     Fixed enclosureRadius;
     FixedPoint minBounds; //  Bounding box minimums for x, y, z
     FixedPoint maxBounds; //  Bounding box maximums for x, y, z
+    bool isDecal; // set if the bounding box is very thin in one direction
 
     CViewParameters *currentView;
 

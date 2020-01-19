@@ -66,7 +66,7 @@ float skyboxVertices[] = {
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc;
+GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc, decalLoc;
 GLuint light0Loc, light1Loc, light2Loc, light3Loc;
 
 GLuint skyProgram;
@@ -159,6 +159,11 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4f);
 }
 
+void AvaraGLSetDecal(float active) {
+    glUseProgram(gProgram);
+    glUniform1f(decalLoc, active);
+}
+
 void SetTransforms(Matrix *modelview, glm::mat4 normal_transform) {
     glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(FromFixedMat(modelview)));
     glUniformMatrix3fv(ntLoc, 1, GL_FALSE, glm::value_ptr(normal_transform));
@@ -183,6 +188,8 @@ void AvaraGLInitContext() {
     ambLoc = glGetUniformLocation(gProgram, "ambient");
     glCheckErrors();
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
+    glCheckErrors();
+    decalLoc = glGetUniformLocation(gProgram, "decal");
     glCheckErrors();
 
 
@@ -250,6 +257,10 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
+    if (part->isDecal) {
+        AvaraGLSetDecal(1.0f);
+    }
+
     SetTransforms(&part->fullTransform, part->normalTransform);
     glCheckErrors();
     
@@ -259,6 +270,10 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
+
+    if (part->isDecal) {
+        AvaraGLSetDecal(0);
+    }
 
     // restore previous lighting state
     if (part->privateAmbient != -1 || extra_amb > 0) {
