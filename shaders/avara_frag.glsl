@@ -22,22 +22,21 @@ vec3 to_cartesian (in float azimuth, in float elevation)
                 -cos(azimuth) * cos(elevation));
 }
 
-vec3 calc_light (vec3 light) {
-    vec3 normal = vec3(fragmentNormal.x, gl_FrontFacing ? fragmentNormal.y : fragmentNormal.y * -1, fragmentNormal.z);
+vec3 calc_light (vec3 light, vec3 normal) {
     vec3 lightPos = normalize(normal - to_cartesian(radians(light.z), radians(light.y)));
     return max(dot(normal, lightPos), 0.0) * lightColor * light.x;
 }
 
 void main()
 {
-    
+    vec3 normal = vec3(fragmentNormal.x, gl_FrontFacing ? fragmentNormal.y : fragmentNormal.y * -1, fragmentNormal.z);
     color = mix(
             ambient * lightColor * fragmentColor,
-            ((ambient * lightColor) + (calc_light(light0) 
-                                    + calc_light(light1)
-                                    + calc_light(light2)
-                                    + calc_light(light3))) * fragmentColor,
+            ((ambient * lightColor) + (calc_light(light0, normal) 
+                                    + calc_light(light1, normal)
+                                    + calc_light(light2, normal)
+                                    + calc_light(light3, normal))) * fragmentColor,
             lights_active);
 
-    gl_FragDepth = mix(gl_FragCoord.z, gl_FragCoord.z * .99999, decal);
+    gl_FragDepth = gl_FragCoord.z * decal;
 }

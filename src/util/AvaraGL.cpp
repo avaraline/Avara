@@ -257,8 +257,11 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
+    // if we're drawing something thin
+    // give it a little z-buffer push towards
+    // the camera by scaling down the z-value
     if (part->isDecal) {
-        AvaraGLSetDecal(1.0f);
+        AvaraGLSetDecal(.9999f);
     }
 
     SetTransforms(&part->fullTransform, part->normalTransform);
@@ -271,8 +274,9 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
 
+    // reset z-buffer scale
     if (part->isDecal) {
-        AvaraGLSetDecal(0);
+        AvaraGLSetDecal(1.0);
     }
 
     // restore previous lighting state
