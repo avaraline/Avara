@@ -29,7 +29,7 @@ vec3 calc_light (vec3 light, vec3 normal) {
 
 void main()
 {
-    vec3 normal = vec3(fragmentNormal.x, gl_FrontFacing ? fragmentNormal.y : fragmentNormal.y * -1, fragmentNormal.z);
+    vec3 normal = fragmentNormal * mix(-1.0, 1.0, gl_FrontFacing);
     color = mix(
             ambient * lightColor * fragmentColor,
             ((ambient * lightColor) + (calc_light(light0, normal) 
