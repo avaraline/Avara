@@ -128,12 +128,33 @@ void CBSPPart::IBSPPart(short resId) {
 void CBSPPart::PostRender() {}
 
 void CBSPPart::UpdateOpenGLData() {
+
+    // set up normal transform
+    // transpose of inverse modelview
+    for (int i = 0; i < 3; i ++) {
+
+        //normalTransform[0][i] = ToFloat(invGlobTransform[i][0]);
+        //normalTransform[1][i] = ToFloat(invGlobTransform[i][1]);
+        //normalTransform[2][i] = ToFloat(invGlobTransform[i][2]);
+
+        //normalTransform[0][i] = ToFloat(invGlobTransform[0][i]);
+        //normalTransform[1][i] = ToFloat(invGlobTransform[1][i]);
+        //normalTransform[2][i] = ToFloat(invGlobTransform[2][i]);
+
+        //normalTransform[0][i] = ToFloat(itsTransform[i][0]);
+        //normalTransform[1][i] = ToFloat(itsTransform[i][1]);
+        //normalTransform[2][i] = ToFloat(itsTransform[i][2]);
+
+        normalTransform[0][i] = ToFloat(itsTransform[0][i]);
+        normalTransform[1][i] = ToFloat(itsTransform[1][i]);
+        normalTransform[2][i] = ToFloat(itsTransform[2][i]);
+    }
+
     glDataSize = totalPoints * sizeof(GLData);
     glData = (GLData *)NewPtr(glDataSize);
 
     glGenVertexArrays(1, &vertexArray);
     glGenBuffers(1, &vertexBuffer);
-
 
     PolyRecord *poly;
     float scale = 1.0; // ToFloat(currentView->screenScale);
@@ -150,9 +171,20 @@ void CBSPPart::UpdateOpenGLData() {
             glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
             glData[p].b = (poly->color & 0xFF) / 255.0;
 
-            glData[p].nx = poly->normal[0];
-            glData[p].ny = poly->normal[1];
-            glData[p].nz = poly->normal[2];
+            glm::vec3 transformed = glm::vec3(
+                poly->normal[0],
+                -poly->normal[1],
+                poly->normal[2]) * normalTransform;
+
+            glData[p].nx = transformed[0];
+            glData[p].ny = transformed[1];
+            glData[p].nz = transformed[2];
+            
+
+            //glData[p].nx = poly->normal[0];
+            //glData[p].ny = -poly->normal[1];
+            //glData[p].nz = poly->normal[2];
+
             // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
             // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
             p++;
@@ -292,13 +324,7 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
             // transform all the points before rendering
             //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
 
-            // set up normal transform
-            // transpose of inverse modelview
-            for (int i = 0; i < 3; i ++) {
-                normalTransform[0][i] = ToFloat(invGlobTransform[i][0]);
-                normalTransform[1][i] = ToFloat(invGlobTransform[i][1]);
-                normalTransform[2][i] = ToFloat(invGlobTransform[i][2]);
-            }
+            
         }
     }
 
@@ -336,6 +362,7 @@ void CBSPPart::MoveDone() {
     VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &itsTransform);
     invGlobDone = false;
     lightSeed = 0;
+    UpdateOpenGLData();
 }
 
 #ifdef TRANSLATE_PART

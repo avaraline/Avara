@@ -1,6 +1,5 @@
 #version 330 core
 
-//in vec3 fragmentPos;
 in vec3 fragmentColor;
 in vec3 fragmentNormal;
 
@@ -18,14 +17,13 @@ vec3 lightColor = vec3(1, 1, 1);
 vec3 to_cartesian (in float azimuth, in float elevation)
 {
     return vec3(sin(azimuth) * cos(elevation),
-                -sin(elevation) * 1000,
+                -sin(elevation),
                 -cos(azimuth) * cos(elevation));
 }
 
 vec3 calc_light (vec3 light) {
-    vec3 lightPos = to_cartesian(radians(light.z), radians(light.y));
-    vec3 lightDir = normalize(fragmentNormal - lightPos);
-    return max(dot(fragmentNormal, lightDir), 0.0) * lightColor * light.x;
+    vec3 normal = vec3(fragmentNormal.x, gl_FrontFacing ? fragmentNormal.y : fragmentNormal.y * -1, fragmentNormal.z);
+    return max(dot(normal, normalize(normal - to_cartesian(radians(light.z), radians(light.y)))), 0.0) * lightColor * light.x;
 }
 
 void main()
@@ -38,6 +36,4 @@ void main()
                                     + calc_light(light2)
                                     + calc_light(light3))) * fragmentColor,
             lights_active);
-    
-    color = fragmentNormal;
 }
