@@ -99,7 +99,6 @@ public:
     FaceVisibility		**faceTemp;
     BSPResourceHeader	header;
     */
-    short itsId;
     // Moved here from BSPResourceHeader
     FixedPoint enclosurePoint;
     Fixed enclosureRadius;
@@ -175,6 +174,7 @@ public:
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();
+    virtual void UpdateNormalMatrix();
     virtual void UpdateOpenGLData();
 
     virtual void PreRender();

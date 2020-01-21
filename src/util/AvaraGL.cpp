@@ -164,9 +164,9 @@ void AvaraGLSetDecal(float active) {
     glUniform1f(decalLoc, active);
 }
 
-void SetTransforms(Matrix *modelview, glm::mat4 normal_transform) {
+void SetTransforms(Matrix *modelview, glm::mat3 normal_transform) {
     glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(FromFixedMat(modelview)));
-    glUniformMatrix3fv(ntLoc, 1, GL_FALSE, glm::value_ptr(normal_transform));
+    glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_transform));
 }
 
 void AvaraGLInitContext() {
@@ -174,31 +174,21 @@ void AvaraGLInitContext() {
     if (!actuallyRender) return;
     gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
     glUseProgram(gProgram);
-    glCheckErrors();
 
     projLoc = glGetUniformLocation(gProgram, "proj");
     viewLoc = glGetUniformLocation(gProgram, "view");
-    glCheckErrors();
     AvaraGLUpdateProjectionMatrix(default_fov, default_aspect);
-    glCheckErrors();
     mvLoc = glGetUniformLocation(gProgram, "modelview");
-    glCheckErrors();
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
-    glCheckErrors();
     ambLoc = glGetUniformLocation(gProgram, "ambient");
-    glCheckErrors();
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
-    glCheckErrors();
     decalLoc = glGetUniformLocation(gProgram, "decal");
     glCheckErrors();
 
 
     light0Loc = glGetUniformLocation(gProgram, "light0");
-    glCheckErrors();
     light1Loc = glGetUniformLocation(gProgram, "light1");
-    glCheckErrors();
     light2Loc = glGetUniformLocation(gProgram, "light2");
-    glCheckErrors();
     light3Loc = glGetUniformLocation(gProgram, "light3");
     glCheckErrors();
 
@@ -206,27 +196,18 @@ void AvaraGLInitContext() {
     glCheckErrors();
 
     skyProgram = LoadShaders(BundlePath("shaders/sky_vert.glsl"), BundlePath("shaders/sky_frag.glsl"));
-    glCheckErrors();
     glGenVertexArrays(1, &skyVertArray);
-    glCheckErrors();
     glGenBuffers(1, &skyBuffer);
-    glCheckErrors();
     skyViewLoc = glGetUniformLocation(skyProgram, "view");
-    glCheckErrors();
     skyProjLoc = glGetUniformLocation(skyProgram, "proj");
-    glCheckErrors();
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
-    glCheckErrors();
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
-    glCheckErrors();
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
-    glCheckErrors();
 
 }
 
 void AvaraGLDrawPolygons(CBSPPart* part) {
     glCheckErrors();
-    //SDL_Log("bsp %i", part->itsId);
     if(!actuallyRender) return;
     // Create a buffer big enough to hold vertex/color/normal for every point we draw.
     glUseProgram(gProgram);
@@ -261,9 +242,10 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     // give it a little z-buffer push towards
     // the camera by scaling down the z-value
     if (part->isDecal) {
-        AvaraGLSetDecal(.9999f);
+        AvaraGLSetDecal(.9995f);
     }
 
+    part->UpdateNormalMatrix();
     SetTransforms(&part->fullTransform, part->normalTransform);
     glCheckErrors();
     
@@ -312,55 +294,37 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     matrix[12] = matrix[13] = matrix[14] = 0;
     
     glBindVertexArray(skyVertArray);
-    glCheckErrors();
     glBindBuffer(GL_ARRAY_BUFFER, skyBuffer);
-    glCheckErrors();
     glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
-    glCheckErrors();
 
     long groundColor = theShader->groundColor;
     long lowSkyColor = theShader->lowSkyColor;
     long highSkyColor = theShader->highSkyColor;
 
     glDisable(GL_DEPTH_TEST);
-    glCheckErrors();
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
-    glCheckErrors();
     glEnableVertexAttribArray(0);
-    glCheckErrors();
     glUseProgram(skyProgram);
-    glCheckErrors();
     glUniformMatrix4fv(skyViewLoc, 1, GL_FALSE, matrix);
-    glCheckErrors();
     glUniformMatrix4fv(skyProjLoc, 1, GL_FALSE, glm::value_ptr(proj));
-    glCheckErrors();
     glUniform3f(groundColorLoc,
         ((groundColor >> 16) & 0xFF) / 255.0,
         ((groundColor >> 8) & 0xFF) / 255.0,
         (groundColor & 0xFF) / 255.0);
-    glCheckErrors();
     glUniform3f(horizonColorLoc,
         ((lowSkyColor >> 16) & 0xFF) / 255.0,
         ((lowSkyColor >> 8) & 0xFF) / 255.0,
         (lowSkyColor & 0xFF) / 255.0);
-    glCheckErrors();
     glUniform3f(skyColorLoc,
         ((highSkyColor >> 16) & 0xFF) / 255.0,
         ((highSkyColor >> 8) & 0xFF) / 255.0,
         (highSkyColor & 0xFF) / 255.0);
-    glCheckErrors();
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glCheckErrors();
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glCheckErrors();
     glBindVertexArray(skyVertArray);
-    glCheckErrors();
     glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(skyboxVertices));
-    glCheckErrors();
     glDisableVertexAttribArray(0);
-    glCheckErrors();
     glEnable(GL_DEPTH_TEST);
-    glCheckErrors();
 }
 
 glm::mat4 FromFixedMat(Matrix *m) {
