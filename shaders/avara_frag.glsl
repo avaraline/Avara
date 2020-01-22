@@ -15,32 +15,32 @@ out vec3 color;
 
 vec3 lightColor = vec3(1, 1, 1);
 
-vec3 to_cartesian (in float azimuth, in float elevation)
-{
-    return vec3(10 * sin(azimuth) * cos(elevation),
-                10 * sin(elevation),
-                10 * cos(azimuth) * cos(elevation));
+vec3 to_cartesian (vec3 light) {
+    float x = cos(radians(light.y)) * light.x;
+    float y = sin(radians(-light.y)) * light.x;
+    float z = cos(radians(light.z)) * x;
+    x = sin(radians(-light.z)) * x;
+    return vec3(x, y, z);
 }
 
-vec3 calc_light (vec3 light, vec3 normal) {
-    vec3 lightPos = normalize(to_cartesian(radians(180 - light.y), radians(light.z)));
-    return max(dot(normal, lightPos), 0.0) * lightColor * light.x;
+vec3 calc_light (vec3 light) {
+    vec3 lightPos = to_cartesian(light);
+    vec3 dir = fragmentNormal * mix(-1.0, 1.0, gl_FrontFacing);
+    return max(dot(dir, lightPos), 0.0) * lightColor;
 }
 
 vec3 light_color() {
-    vec3 normal = fragmentNormal * mix(-1.0, 1.0, gl_FrontFacing);
+    vec3 totalLight = calc_light(light0)
+                    + calc_light(light1)
+                    + calc_light(light2)
+                    + calc_light(light3);
     return mix(
-            ambient * lightColor * fragmentColor,
-            ((ambient * lightColor) + (calc_light(light0, normal) 
-                                    + calc_light(light1, normal)
-                                    + calc_light(light2, normal)
-                                    + calc_light(light3, normal))) * fragmentColor,
-            lights_active);
+        ambient * lightColor * fragmentColor,
+        ((ambient * lightColor) + totalLight) * fragmentColor,
+        lights_active
+    );
 }
 
-void main()
-{
+void main() {
     color = light_color();
-    //color = fragmentNormal * mix(-1.0, 1.0, gl_FrontFacing);
-    //gl_FragDepth = mix(gl_FragCoord.z * decal;
 }
