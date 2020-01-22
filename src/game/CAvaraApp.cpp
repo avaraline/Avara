@@ -161,7 +161,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
     */
 }
 
-/*OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
+OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
@@ -177,9 +177,12 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 
     std::string svgdir = std::string("levels/") + set + "_svg/";
     SDL_Log("%s", svgdir.c_str());
+    SVGConvertToLevelMap();
     return noErr;
 }
-*/
+
+
+/*
 OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
@@ -221,6 +224,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
 
     return noErr;
 }
+*/
 
 void CAvaraAppImpl::NotifyUser() {
     // TODO: Bell sound(s)

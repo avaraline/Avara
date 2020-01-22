@@ -195,7 +195,7 @@ void CBSPPart::UpdateOpenGLData() {
             glData[p].b = (poly->color & 0xFF) / 255.0;
 
             glData[p].nx = poly->normal[0];
-            glData[p].ny = -poly->normal[1];
+            glData[p].ny = poly->normal[1];
             glData[p].nz = poly->normal[2];
 
             // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,

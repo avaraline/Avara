@@ -362,6 +362,7 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
 }
 
 void SVGConvertToLevelMap() {
+    InitParser();
     SVGParser *parser = new SVGParser();
     parser->callbacks.rectProc = &SvgRect;
     parser->callbacks.colorProc = &SvgColor;
@@ -371,6 +372,9 @@ void SVGConvertToLevelMap() {
 
     parser->Parse();
     delete parser;
+    TextBreak();
+    FreshCalc();
+    gCurrentGame->EndScript();
 }
 
 void ConvertToLevelMap(Handle levelData) {

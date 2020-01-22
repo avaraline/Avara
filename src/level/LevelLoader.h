@@ -312,6 +312,7 @@ enum {
 };
 
 void ConvertToLevelMap(Handle levelData);
+void SVGConvertToLevelMap();
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
