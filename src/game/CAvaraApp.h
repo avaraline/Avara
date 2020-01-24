@@ -68,6 +68,7 @@ public:
     ~CAvaraAppImpl();
 
     virtual std::deque<std::string>& MessageLines() override;
+
     virtual void idle() override;
     virtual void drawContents() override;
 
@@ -86,6 +87,7 @@ public:
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
     virtual void NumberLine(long theNum, short align);
+
     virtual void DrawUserInfoPart(short i, short partList) override;
     virtual void BrightBox(long frameNum, short position) override;
     virtual void MessageLine(short index, short align) override;

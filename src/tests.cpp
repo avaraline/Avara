@@ -41,7 +41,7 @@ public:
     virtual void DeadOrDone() {}
     virtual short Position() { return 0; }
     virtual Str255& PlayerName() { return str; }
-    virtual std::deque<unsigned char>& LineBuffer() { return lineBuffer; }
+    virtual std::deque<char>& LineBuffer() { return lineBuffer; }
     virtual void Dispose() {}
     virtual void NetDisconnect() {}
     virtual short IsRegistered() { return 0; }
@@ -93,7 +93,7 @@ private:
     FunctionTable *ft;
     CAvaraGame *itsGame;
     CAbstractPlayer *playa;
-    std::deque<unsigned char> lineBuffer;
+    std::deque<char> lineBuffer;
     Str255 str;
     PlayerConfigRecord pcr;
 };

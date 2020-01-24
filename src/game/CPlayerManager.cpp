@@ -692,7 +692,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                 if (lineBuffer.size()) {
                     auto i = lineBuffer.end();
                     utf8::previous(i, lineBuffer.begin());
-                    lineBuffer = std::deque<unsigned char>(lineBuffer.begin(), i);
+                    lineBuffer = std::deque<char>(lineBuffer.begin(), i);
                 }
                 break;
             case 13:
@@ -712,7 +712,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                         // FlushMessageText(true);
                         auto i = lineBuffer.begin();
                         utf8::advance(i, 55, lineBuffer.end());
-                        lineBuffer = std::deque<unsigned char>(i, lineBuffer.end());
+                        lineBuffer = std::deque<char>(i, lineBuffer.end());
                     }
                 }
                 break;
@@ -729,6 +729,7 @@ std::string CPlayerManagerImpl::GetChatString(int maxChars) {
     if (over) utf8::advance(i, over, theChat.end());
     return std::string(i, theChat.end());
 }
+
 void CPlayerManagerImpl::GameKeyPress(char theChar) {
     theNetManager->ReceiveRosterMessage(slot, 1, &theChar);
 }
@@ -1120,7 +1121,7 @@ short CPlayerManagerImpl::Position() {
 Str255& CPlayerManagerImpl::PlayerName() {
     return playerName;
 }
-std::deque<unsigned char>& CPlayerManagerImpl::LineBuffer() {
+std::deque<char>& CPlayerManagerImpl::LineBuffer() {
     return lineBuffer;
 }
 CAbstractPlayer* CPlayerManagerImpl::GetPlayer() {

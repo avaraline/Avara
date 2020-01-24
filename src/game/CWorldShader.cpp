@@ -120,5 +120,4 @@ void CWorldShader::ShadeWorld(CViewParameters *theView) {
     if(numShades)
         theView->RenderPlanes(numShades, shadeColors, altitudes);
     */
-    
 }

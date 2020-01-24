@@ -36,6 +36,8 @@ ColorRecord ***bspColorLookupTable = 0;
 
 using json = nlohmann::json;
 
+bool CBSPPart::actuallyRender = true;
+
 void CBSPPart::IBSPPart(short resId) {
     char relPath[256];
     snprintf(relPath, 256, "bsps/%d.json", resId);
@@ -460,6 +462,11 @@ void CBSPPart::Dispose() {
 
     DisposePtr((Ptr)pointTable);
     DisposePtr((Ptr)polyTable);
+    if (AvaraGLIsRendering()) {
+        DisposePtr((Ptr)glData);
+        glDeleteVertexArrays(1, &vertexArray);
+        glDeleteBuffers(1, &vertexBuffer);
+    }
     CDirectObject::Dispose();
 }
 

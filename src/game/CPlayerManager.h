@@ -46,6 +46,7 @@ class CNetManager;
 
 class CPlayerManager {
 public:
+    virtual std::string GetChatString(int maxChars) = 0;
     virtual CAbstractPlayer* GetPlayer() = 0;
     virtual void SetPlayer(CAbstractPlayer*) = 0;
     virtual short Slot() = 0;
@@ -56,7 +57,7 @@ public:
     virtual void DeadOrDone() = 0;
     virtual short Position() = 0;
     virtual Str255& PlayerName() = 0;
-    virtual std::deque<unsigned char>& LineBuffer() = 0;
+    virtual std::deque<char>& LineBuffer() = 0;
     virtual void Dispose() = 0;
     virtual void NetDisconnect() = 0;
     virtual short IsRegistered() = 0;
@@ -68,7 +69,6 @@ public:
     virtual void SetPosition(short pos) = 0;
     virtual void RosterKeyPress(unsigned char c) = 0;
     virtual void RosterMessageText(short len, char *c) = 0;
-    virtual std::string GetChatString(int maxChars) = 0;
     virtual short LevelCRC() = 0;
     virtual OSErr LevelErr() = 0;
     virtual OSType LevelTag() = 0;
@@ -147,7 +147,7 @@ private:
     Str255 playerRegName;
     short isRegistered;
     unsigned char message[kMaxMessageChars + 1];
-    std::deque<unsigned char> lineBuffer;
+    std::deque<char> lineBuffer;
 
     long winFrame;
     short loadingStatus;
@@ -223,7 +223,7 @@ public:
     virtual Boolean IsLocalPlayer();
     virtual short Position();
     virtual Str255& PlayerName();
-    virtual std::deque<unsigned char>& LineBuffer();
+    virtual std::deque<char>& LineBuffer();
     virtual CAbstractPlayer* GetPlayer();
     virtual short IsRegistered();
     virtual void IsRegistered(short);

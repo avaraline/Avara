@@ -238,7 +238,6 @@ CAvaraGame* CAvaraAppImpl::GetGame() {
 CNetManager* CAvaraAppImpl::GetNet() {
     return gameNet;
 }
-
 void CAvaraAppImpl::SetNet(CNetManager *theNet) {
     gameNet = theNet;
 }
@@ -251,7 +250,7 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
     }
 }
 void CAvaraAppImpl::MessageLine(short index, short align) {
-    SDL_Log("CAvaraApp::MessageLine(%d)\n", index);
+    SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
     switch(index) {
         case kmWelcome1:
         case kmWelcome2:
@@ -324,6 +323,7 @@ void CAvaraAppImpl::StringLine(StringPtr theString, short align) {
 void CAvaraAppImpl::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {
     ParamLine(index, 0, param1, param2);
 }
+
 void CAvaraAppImpl::SetIndicatorDisplay(short i, short v) {}
 void CAvaraAppImpl::NumberLine(long theNum, short align) {}
 void CAvaraAppImpl::DrawUserInfoPart(short i, short partList) {}

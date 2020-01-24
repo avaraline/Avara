@@ -146,7 +146,9 @@ public:
     uint32_t pointCount;
     PolyRecord *polyTable;
     uint32_t polyCount;
+
     int totalPoints;
+    static bool actuallyRender;
 
     //	Lighting vectors in object space
     long lightSeed; //	Seed value to detect lights change
