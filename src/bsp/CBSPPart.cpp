@@ -143,6 +143,7 @@ void CBSPPart::IBSPPart(short resId) {
 void CBSPPart::PostRender() {}
 
 void CBSPPart::UpdateOpenGLData() {
+    if (!AvaraGLIsRendering()) return;
     glDataSize = totalPoints * sizeof(GLData);
     glData = (GLData *)NewPtr(glDataSize);
 

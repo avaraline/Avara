@@ -71,7 +71,7 @@ public:
     virtual CAbstractPlayer *ChooseActor(CAbstractPlayer *actorList, short myTeamColor) { return 0; }
     virtual short GetStatusChar() { return 0; }
     virtual short GetMessageIndicator() { return 0; }
-
+    virtual std::string GetChatString(int maxChars) { return ""; }
     virtual void StoreMugShot(Handle mugHandle) {}
     virtual Handle GetMugShot() { return 0; }
 
@@ -130,8 +130,10 @@ public:
     virtual CAvaraGame* GetGame() { return 0; }
     virtual void Done() {}
     virtual void BroadcastCommand(int) {}
+    virtual std::deque<std::string>& MessageLines() { return msgLines; }
 private:
     CNetManager *itsNet;
+    std::deque<std::string> msgLines;
 };
 
 class TestGame : public CAvaraGame {

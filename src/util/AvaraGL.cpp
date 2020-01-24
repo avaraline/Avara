@@ -105,6 +105,10 @@ void AvaraGLToggleRendering(int active) {
     actuallyRender = false;
 }
 
+bool AvaraGLIsRendering() {
+    return actuallyRender;
+}
+
 void AvaraGLSetView(glm::mat4 view) {
     if (!actuallyRender) return;
     glUseProgram(gProgram);

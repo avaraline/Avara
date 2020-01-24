@@ -50,6 +50,7 @@ addons:
     - libegl1-mesa-dev
     - libgles2-mesa-dev
     - libsdl2-net-dev
+    - libdirectfb-dev
 script:
   - make -j3
 
