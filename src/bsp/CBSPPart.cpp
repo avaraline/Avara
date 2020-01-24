@@ -35,6 +35,8 @@ ColorRecord ***bspColorLookupTable = 0;
 
 using json = nlohmann::json;
 
+bool CBSPPart::actuallyRender = true;
+
 void CBSPPart::IBSPPart(short resId) {
     char relPath[256];
     snprintf(relPath, 256, "bsps/%d.json", resId);
@@ -121,11 +123,14 @@ void CBSPPart::IBSPPart(short resId) {
     }
 
     // Create a buffer big enough to hold vertex/color/normal for every point we draw.
-    glDataSize = totalPoints * sizeof(GLData);
-    glData = (GLData *)NewPtr(glDataSize);
+    if (actuallyRender) {
 
-    glGenVertexArrays(1, &vertexArray);
-    glGenBuffers(1, &vertexBuffer);
+        glDataSize = totalPoints * sizeof(GLData);
+        glData = (GLData *)NewPtr(glDataSize);
+
+        glGenVertexArrays(1, &vertexArray);
+        glGenBuffers(1, &vertexBuffer);
+    }
     /*
     TODO: can some of this be set up once and re-used?
     GLuint glBuffers[3];
@@ -168,43 +173,45 @@ void CBSPPart::DrawPolygons() {
     int p = 0;
 
     float extra = 1.0 + ToFloat(extraAmbient);
+    if (actuallyRender) {
 
-    for (int i = 0; i < polyCount; i++) {
-        poly = &polyTable[i];
-        for (int v = 0; v < poly->triCount * 3; v++) {
-            Vector *pt = &transformedPoints[poly->triPoints[v]];
-            glData[p].x = ToFloat((*pt)[0]);
-            glData[p].y = ToFloat((*pt)[1]);
-            glData[p].z = ToFloat((*pt)[2]);
-            glData[p].r = extra * ((poly->color >> 16) & 0xFF) / 255.0;
-            glData[p].g = extra * ((poly->color >> 8) & 0xFF) / 255.0;
-            glData[p].b = extra * (poly->color & 0xFF) / 255.0;
-            glData[p].nx = poly->normal[0];
-            glData[p].ny = poly->normal[1];
-            glData[p].nz = poly->normal[2];
-            // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
-            // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
-            p++;
+        for (int i = 0; i < polyCount; i++) {
+            poly = &polyTable[i];
+            for (int v = 0; v < poly->triCount * 3; v++) {
+                Vector *pt = &transformedPoints[poly->triPoints[v]];
+                glData[p].x = ToFloat((*pt)[0]);
+                glData[p].y = ToFloat((*pt)[1]);
+                glData[p].z = ToFloat((*pt)[2]);
+                glData[p].r = extra * ((poly->color >> 16) & 0xFF) / 255.0;
+                glData[p].g = extra * ((poly->color >> 8) & 0xFF) / 255.0;
+                glData[p].b = extra * (poly->color & 0xFF) / 255.0;
+                glData[p].nx = poly->normal[0];
+                glData[p].ny = poly->normal[1];
+                glData[p].nz = poly->normal[2];
+                // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
+                // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
+                p++;
+            }
         }
+
+        glBindVertexArray(vertexArray);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STREAM_DRAW);
+
+        for (int i = 0; i < 3; i++) {
+            glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
+            glEnableVertexAttribArray(i);
+        }
+
+        glUseProgram(gProgram);
+        glBindVertexArray(vertexArray);
+        glDrawArrays(GL_TRIANGLES, 0, p);
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
     }
-
-    glBindVertexArray(vertexArray);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STREAM_DRAW);
-
-    for (int i = 0; i < 3; i++) {
-        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-        glEnableVertexAttribArray(i);
-    }
-
-    glUseProgram(gProgram);
-    glBindVertexArray(vertexArray);
-    glDrawArrays(GL_TRIANGLES, 0, p);
-
-    glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);
-    glDisableVertexAttribArray(2);
 }
 
 Boolean CBSPPart::InViewPyramid() {
@@ -481,10 +488,11 @@ void CBSPPart::Dispose() {
     DisposePtr((Ptr)transformedPoints);
     DisposePtr((Ptr)pointTable);
     DisposePtr((Ptr)polyTable);
-    DisposePtr((Ptr)glData);
-
-    glDeleteVertexArrays(1, &vertexArray);
-    glDeleteBuffers(1, &vertexBuffer);
+    if (actuallyRender) {
+        DisposePtr((Ptr)glData);
+        glDeleteVertexArrays(1, &vertexArray);
+        glDeleteBuffers(1, &vertexBuffer);
+    }
     CDirectObject::Dispose();
 }
 

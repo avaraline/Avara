@@ -67,15 +67,14 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     Fixed theRate;
     short maxChan;
 
-    if (soundHub->itsMixer)
-        soundHub->itsMixer->Dispose();
+    soundHub->MixerDispose();
 
     aMixer = new CSoundMixer;
     aMixer->ISoundMixer(rate22khz, 32, 4, true, true, false);
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), frameTime);
     soundHub->AttachMixer(aMixer);
-    soundHub->muteFlag = silentFlag; //(soundOutputStyle < 0);
+    soundHub->MuteFlag(silentFlag); //(soundOutputStyle < 0);
 }
 
 void CAvaraGame::InitLocatorTable() {
@@ -93,16 +92,22 @@ void CAvaraGame::InitLocatorTable() {
     }
 }
 
+CNetManager* CAvaraGame::CreateNetManager() {
+    return new CNetManager;
+}
+
+CAvaraGame::CAvaraGame(int frameTime) {
+    this->frameTime = frameTime; // milliseconds
+}
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
 
-    frameTime = 64; //	Milliseconds.
 
     itsApp = theApp;
 
-    itsNet = new CNetManager;
-    itsApp->gameNet = itsNet;
+    itsNet = CreateNetManager();
     itsNet->INetManager(this);
+    itsApp->SetNet(itsNet);
 
     searchCount = 0;
     locatorTable = (ActorLocator **)NewPtr(sizeof(ActorLocator *) * LOCATORTABLESIZE);
@@ -117,14 +122,11 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     // CalcGameRect();
 
-    itsWorld = new CBSPWorld;
-    itsWorld->IBSPWorld(100);
+    itsWorld = CreateCBSPWorld(100);
 
-    hudWorld = new CBSPWorld;
-    hudWorld->IBSPWorld(16);
+    hudWorld = CreateCBSPWorld(16);
 
-    soundHub = new CSoundHub;
-    soundHub->ISoundHub(32, 32);
+    soundHub = CreateSoundHub();
     gHub = soundHub;
 
     InitMixer(true);
@@ -169,6 +171,18 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     // vg = AvaraVGContext();
     // font = nvgCreateFont(vg, "sans", BundlePath("fonts/Roboto-Regular.ttf"));
+}
+
+CSoundHub* CAvaraGame::CreateSoundHub() {
+    CSoundHubImpl *soundHub = new CSoundHubImpl;
+    soundHub->ISoundHub(32, 32);
+    return soundHub;
+}
+
+CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
+    CBSPWorldImpl *w = new CBSPWorldImpl;
+    w->IBSPWorld(initialObjectSpace);
+    return w;
 }
 
 void CAvaraGame::Dispose() {
@@ -261,7 +275,7 @@ CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
 
     thePlayer = playerList;
     while (thePlayer) {
-        if (thePlayer->itsManager && thePlayer->itsManager->isLocalPlayer) {
+        if (thePlayer->itsManager && thePlayer->itsManager->IsLocalPlayer()) {
             break;
         }
 
@@ -600,7 +614,7 @@ void CAvaraGame::EndScript() {
 
     groundTraction = ReadFixedVar(iDefaultTraction);
     groundFriction = ReadFixedVar(iDefaultFriction);
-    gravityRatio = ReadFixedVar(iGravity);
+    gravityRatio = ReadFixedVar(iGravity) * FrameTimeScale(2);
     groundStepSound = ReadLongVar(iGroundStepSound);
     gHub->LoadSample(groundStepSound);
 
@@ -743,8 +757,9 @@ void CAvaraGame::GameStart() {
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
 
-    while (frameNumber + latencyTolerance > topSentFrame)
+    while (frameNumber + latencyTolerance > topSentFrame) {
         itsNet->FrameAction();
+    }
 
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);
@@ -771,7 +786,7 @@ void CAvaraGame::GameStop() {
     if (gameStatus == kAbortStatus) {
         itsApp->MessageLine(kmAborted, centerAlign);
     } else if (gameStatus == kPauseStatus) {
-        itsApp->ParamLine(kmPaused, centerAlign, itsNet->playerTable[pausePlayer]->playerName, NULL);
+        itsApp->ParamLine(kmPaused, centerAlign, itsNet->playerTable[pausePlayer]->PlayerName(), NULL);
     }
 
     scoreKeeper->StopPause(gameStatus == kPauseStatus);
@@ -860,7 +875,7 @@ bool CAvaraGame::GameTick() {
 }
 
 void CAvaraGame::StopGame() {
-    soundHub->itsMixer->hushFlag = true;
+    soundHub->HushFlag(true);
     SDL_SetRelativeMouseMode(SDL_FALSE);
     // SDL_CaptureMouse(SDL_FALSE);
     // SDL_ShowCursor(SDL_ENABLE);
@@ -902,4 +917,8 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
     }
 
     return theManager;
+}
+
+double CAvaraGame::FrameTimeScale(double exponent) {
+    return pow(double(frameTime)/CLASSICFRAMETIME, exponent);
 }

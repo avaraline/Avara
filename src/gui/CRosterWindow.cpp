@@ -54,14 +54,14 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     playersLayer->setLayout(blayout);
     auto panel = playersLayer->add<Widget>();
     panel->setLayout(layout);
-    theNet = ((CAvaraApp *)gApplication)->gameNet;
+    theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
 
         ColorComboBox *color = panel->add<ColorComboBox>(player_colors);
         //color->setFixedHeight(23);
-        color->setSelectedIndex(((CAvaraApp *)gApplication)->gameNet->teamColors[i]);
+        color->setSelectedIndex(((CAvaraAppImpl *)gApplication)->GetNet()->teamColors[i]);
         color->setCallback([this, color, i](int selectedIdx) {
             theNet->teamColors[i] = selectedIdx;
             theNet->SendColorChange();
@@ -134,7 +134,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
 
 
 
-    currentLevel = ((CAvaraApp *)gApplication)->itsGame->loadedTag;
+    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedTag;
 
     UpdateRoster();
 }
@@ -142,15 +142,15 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
 CRosterWindow::~CRosterWindow() {}
 
 void CRosterWindow::UpdateRoster() {
-    CAvaraGame *theGame = ((CAvaraApp *)gApplication)->itsGame;
+    CAvaraGame *theGame = ((CAvaraAppImpl *)gApplication)->GetGame();
     if (tabWidget->activeTab() == 0) {
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             CPlayerManager *thisPlayer = theNet->playerTable[i];
 
-            const std::string theName((char *)thisPlayer->playerName + 1, thisPlayer->playerName[0]);
+            const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
 
-            short status = thisPlayer->loadingStatus;
-            std::string theStatus = GetStringStatus(status, thisPlayer->winFrame);
+            short status = thisPlayer->LoadingStatus();
+            std::string theStatus = GetStringStatus(status, thisPlayer->WinFrame());
 
             std::string theChat = thisPlayer->GetChatString(CHAT_CHARS);
 
@@ -177,7 +177,7 @@ void CRosterWindow::UpdateRoster() {
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
 
             CPlayerManager *thisPlayer = theNet->playerTable[i];
-            const std::string theName((char *)thisPlayer->playerName + 1, thisPlayer->playerName[0]);
+            const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             AvaraScoreRecord theScores = theGame->scoreKeeper->netScores;
             if(theName.size() > 0) {
                 scoreTeams[i]->setValue(std::to_string(theNet->teamColors[i]));
@@ -206,7 +206,7 @@ bool CRosterWindow::DoCommand(int theCommand) {
 std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
     std::string strStatus;
     if (winFrame >= 0) {
-        long timeTemp = FMulDiv(winFrame, ((CAvaraApp *)gApplication)->itsGame->frameTime, 10);
+        long timeTemp = FMulDiv(winFrame, ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
         auto hundreds1 = timeTemp % 10;
         timeTemp /= 10;
         auto hundreds2 = timeTemp % 10;
@@ -260,7 +260,7 @@ bool CRosterWindow::mouseEnterEvent(const nanogui::Vector2i &p, bool enter) {
 };
 
 void CRosterWindow::SendRosterMessage(int len, char *message) {
-    ((CAvaraApp *)gApplication)->gameNet->SendRosterMessage(len, message);
+    ((CAvaraAppImpl *)gApplication)->GetNet()->SendRosterMessage(len, message);
 }
 
 bool CRosterWindow::handleSDLEvent(SDL_Event &event) {

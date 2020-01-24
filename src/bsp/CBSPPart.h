@@ -145,6 +145,7 @@ public:
     uint32_t pointCount;
     PolyRecord *polyTable;
     uint32_t polyCount;
+    static bool actuallyRender;
     GLData *glData;
     GLuint vertexArray, vertexBuffer;
     GLsizeiptr glDataSize;

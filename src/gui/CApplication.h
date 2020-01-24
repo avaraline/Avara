@@ -19,7 +19,7 @@ public:
     void Register(CWindow *win) { windowList.push_back(win); }
 
     // Broadcast a command to myself, and then any windows, stopping at the fist one to handle it.
-    void BroadcastCommand(int theCommand);
+    virtual void BroadcastCommand(int theCommand);
 
     // Called when the application is done and the process is about to exit.
     virtual void Done();
