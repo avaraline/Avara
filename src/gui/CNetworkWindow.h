@@ -15,6 +15,7 @@ public:
 protected:
 	nanogui::TextBox *addressBox;
     nanogui::TextBox *latencyBox;
+    nanogui::TextBox *trackerBox;
     nanogui::Button *connectBtn;
     nanogui::Button *startBtn;
 };

@@ -20,6 +20,12 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <deque>
+#include <json.hpp>
+#include <thread>
+#include <mutex>
+
+using json = nlohmann::json;
+
 
 class CAvaraApp : public CApplication {
 public:
@@ -33,6 +39,11 @@ public:
     CTrackerWindow *trackerWindow;
 
     std::deque<std::string> messageLines;
+
+    long nextTrackerUpdate;
+    json trackerState;
+    bool trackerUpdatePending;
+    std::thread *trackerThread;
 
     CAvaraApp();
     ~CAvaraApp();
@@ -63,4 +74,7 @@ public:
     virtual void StartFrame(long frameNum);
     virtual void StringLine(StringPtr theString, short align);
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2);
+
+    void TrackerUpdate();
+    std::string TrackerPayload();
 };

@@ -31,9 +31,29 @@
 #include "System.h"
 #include "InfoMessages.h"
 #include "Beeper.h"
+#include "httplib.h"
+#include <chrono>
 
 // included while we fake things out
 #include "CPlayerManager.h"
+
+
+std::mutex trackerLock;
+
+void TrackerPinger(CAvaraApp *app) {
+    while (true) {
+        std::string payload = app->TrackerPayload();
+        if (payload.size() > 0) {
+            // Probably not thread-safe.
+            std::string address = app->String(kTrackerRegisterAddress);
+            SDL_Log("Pinging %s", address.c_str());
+            httplib::Client client(address.c_str(), 80);
+            client.Post("/api/v1/games/", payload, "application/json");
+        }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}
+
 
 CAvaraApp::CAvaraApp() : CApplication("Avara") {
     itsGame = new CAvaraGame;
@@ -60,6 +80,11 @@ CAvaraApp::CAvaraApp() : CApplication("Avara") {
     rosterWindow = new CRosterWindow(this);
 
     performLayout();
+
+    nextTrackerUpdate = 0;
+    trackerUpdatePending = false;
+    trackerThread = new std::thread(TrackerPinger, this);
+    trackerThread->detach();
 }
 
 CAvaraApp::~CAvaraApp() {
@@ -75,6 +100,7 @@ void CAvaraApp::Done() {
 
 void CAvaraApp::idle() {
     CheckSockets();
+    TrackerUpdate();
     if(itsGame->GameTick()) {
         glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -293,4 +319,34 @@ void CAvaraApp::StringLine(StringPtr theString, short align) {
 }
 void CAvaraApp::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {
     ParamLine(index, 0, param1, param2);
+}
+
+void CAvaraApp::TrackerUpdate() {
+    if (SDL_GetTicks() < nextTrackerUpdate) return;
+    if (gameNet->netStatus != kServerNet) return;
+
+    const std::lock_guard<std::mutex> lock(trackerLock);
+    long freq = Number(kTrackerRegisterFrequency);
+
+    trackerState.clear();
+
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        unsigned char *p = gameNet->playerTable[i]->playerName;
+        std::string playerName((char *)p + 1, p[0]);
+        if (playerName.size() > 0) {
+            trackerState["players"].push_back(playerName);
+        }
+    }
+
+    SDL_Log("TrackerUpdate: %s", trackerState.dump().c_str());
+
+    trackerUpdatePending = true;
+    nextTrackerUpdate = SDL_GetTicks() + (freq * 1000);
+}
+
+std::string CAvaraApp::TrackerPayload() {
+    const std::lock_guard<std::mutex> lock(trackerLock);
+    std::string payload = trackerUpdatePending && trackerState.size() > 0 ? trackerState.dump() : "";
+    trackerUpdatePending = false;
+    return payload;
 }
