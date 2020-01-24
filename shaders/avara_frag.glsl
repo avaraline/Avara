@@ -3,8 +3,8 @@
 in vec3 fragmentColor;
 in vec3 fragmentNormal;
 
-uniform vec3 light0 = vec3(-0.136808, -0.282843, 0.375877);
-uniform vec3 light1 = vec3(0.102606, -0.102606, -0.281908);
+uniform vec3 light0 = vec3(0, 0, 0);
+uniform vec3 light1 = vec3(0, 0, 0);
 uniform vec3 light2 = vec3(0, 0, 0);
 uniform vec3 light3 = vec3(0, 0, 0);
 uniform float ambient = 0;

@@ -22,7 +22,7 @@ static inline Fixed ToFixed(float a) {
     return (Fixed)temp;
 }
 static inline float Deg2Rad(float deg) { 
-    return deg * (PI / 180); 
+    return deg * PI / 180.0; 
 }
 
 void InitMatrix();
