@@ -1,4 +1,5 @@
 #include "SVGParser.h"
+#include "FastMat.h"
 #include "Types.h"
 #include "pugixml.hpp"
 #include "csscolorparser.hpp"
@@ -11,8 +12,6 @@
 #include <stdlib.h>
 
 #include <SDL2/SDL.h>
-
-#define PI 3.141592653589793238463
 
 using std::string;
 using std::stol;

@@ -8,6 +8,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <math.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -121,19 +122,25 @@ void AvaraGLUpdateProjectionMatrix(float fov, float aspect) {
 
 void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth) {
     if (!actuallyRender) return;
+    
+    float x = cos(Deg2Rad(elevation)) * intensity;
+    float y = sin(Deg2Rad(-elevation)) * intensity;
+    float z = cos(Deg2Rad(azimuth)) * intensity;
+    x = sin(Deg2Rad(-azimuth)) * intensity;
+
     glUseProgram(gProgram);
     switch (light_index) {
         case 0:
-            glUniform3f(light0Loc, intensity, elevation, azimuth);
+            glUniform3f(light0Loc, x, y, z);
             break;
         case 1:
-            glUniform3f(light1Loc, intensity, elevation, azimuth);
+            glUniform3f(light1Loc, x, y, z);
             break;
         case 2:
-            glUniform3f(light2Loc, intensity, elevation, azimuth);
+            glUniform3f(light2Loc, x, y, z);
             break;
         case 3:
-            glUniform3f(light3Loc, intensity, elevation, azimuth);
+            glUniform3f(light3Loc, x, y, z);
             break;
     }
 }
@@ -164,9 +171,17 @@ void AvaraGLSetDecal(float active) {
     glUniform1f(decalLoc, active);
 }
 
-void SetTransforms(Matrix *modelview, glm::mat3 normal_transform) {
+void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
     glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(FromFixedMat(modelview)));
-    glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_transform));
+    glm::mat3 normal_mat = glm::mat3(1.0f);
+
+    for (int i = 0; i < 3; i ++) {
+        normal_mat[0][i] = ToFloat((*normal_transform)[0][i]);
+        normal_mat[1][i] = ToFloat((*normal_transform)[1][i]);
+        normal_mat[2][i] = ToFloat((*normal_transform)[2][i]);
+    }
+
+    glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
 }
 
 void AvaraGLInitContext() {
@@ -245,8 +260,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         AvaraGLSetDecal(.9995f);
     }
 
-    part->UpdateNormalMatrix();
-    SetTransforms(&part->fullTransform, part->normalTransform);
+    SetTransforms(&part->fullTransform, &part->itsTransform);
     glCheckErrors();
     
     glBindVertexArray(part->vertexArray);

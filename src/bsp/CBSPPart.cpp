@@ -142,37 +142,7 @@ void CBSPPart::IBSPPart(short resId) {
 
 void CBSPPart::PostRender() {}
 
-void CBSPPart::UpdateNormalMatrix() {
-    // set up normal transform
-    // transpose of inverse modelview
-    
-    for (int i = 0; i < 3; i ++) {
-
-        //normalTransform[0][i] = ToFloat(invGlobTransform[i][0]);
-        //normalTransform[1][i] = ToFloat(invGlobTransform[i][1]);
-        //normalTransform[2][i] = ToFloat(invGlobTransform[i][2]);
-
-        //normalTransform[0][i] = ToFloat(invGlobTransform[0][i]);
-        //normalTransform[1][i] = ToFloat(invGlobTransform[1][i]);
-        //normalTransform[2][i] = ToFloat(invGlobTransform[2][i]);
-
-        //normalTransform[0][i] = ToFloat(itsTransform[i][0]);
-        //normalTransform[1][i] = ToFloat(itsTransform[i][1]);
-        //normalTransform[2][i] = ToFloat(itsTransform[i][2]);
-
-        normalTransform[0][i] = ToFloat(itsTransform[0][i]);
-        normalTransform[1][i] = ToFloat(itsTransform[1][i]);
-        normalTransform[2][i] = ToFloat(itsTransform[2][i]);
-
-        //normalTransform[0][i] = 1.0;
-        //normalTransform[1][i] = 1.0;
-        //normalTransform[2][i] = 1.0;
-    }
-}
-
 void CBSPPart::UpdateOpenGLData() {
-    UpdateNormalMatrix();
-
     glDataSize = totalPoints * sizeof(GLData);
     glData = (GLData *)NewPtr(glDataSize);
 
@@ -335,9 +305,7 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
             TransformLights();
 
             // transform all the points before rendering
-            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
-    
-            UpdateNormalMatrix();            
+            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);      
         }
     }
 
@@ -489,7 +457,6 @@ void CBSPPart::Dispose() {
     for (int i = 0; i < polyCount; i++) {
         DisposePtr((Ptr)polyTable[i].triPoints);
     }
-    //DisposePtr((Ptr)transformedPoints);
 
     DisposePtr((Ptr)pointTable);
     DisposePtr((Ptr)polyTable);
@@ -728,4 +695,3 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
         return true;
     }
 }
-

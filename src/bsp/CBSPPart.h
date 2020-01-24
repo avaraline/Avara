@@ -120,8 +120,6 @@ public:
     Matrix fullTransform; // modelview
     Matrix invFullTransform; // inverse modelview
 
-    glm::mat3 normalTransform; // transposed inverse modelview
-
     Fixed hither;
     Fixed yon;
     Fixed extraAmbient;
@@ -144,7 +142,7 @@ public:
     Fixed maxY;
 
     //	members used during rendering:
-    Vector *pointTable;//, *transformedPoints;
+    Vector *pointTable;
     uint32_t pointCount;
     PolyRecord *polyTable;
     uint32_t polyCount;
@@ -174,7 +172,6 @@ public:
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();
-    virtual void UpdateNormalMatrix();
     virtual void UpdateOpenGLData();
 
     virtual void PreRender();
