@@ -11,7 +11,6 @@
 #include "Parser.h"
 #include "CSoundHub.h"
 #include "CGrenade.h"
-#include "AvaraGL.h"
 
 #include <iostream>
 using namespace std;
@@ -156,6 +155,7 @@ public:
         game->IAvaraGame(&app);
         game->EndScript();
         app.GetNet()->ChangeNet(kNullNet, "");
+        game->LevelReset(false);
         hector = new CWalkerActor();
         hector->IAbstractActor();
         hector->BeginScript();
@@ -309,10 +309,10 @@ TEST(HECTOR, TurnSpeed) {
     ASSERT_EQ(at64ms.back(), -30592) << "64ms simulation turned wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "TurnHector didn't do ticks right";
     for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 0) << "not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 170) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 0) << "not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 210) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -321,14 +321,13 @@ TEST(HECTOR, WalkForwardSpeed) {
     vector<VectorStruct> at32ms = WalkHector(20, 50, 2, 32);
     vector<VectorStruct> at16ms = WalkHector(20, 50, 4, 16);
     ASSERT_EQ(at64ms.back().theVec[0], 0) << "64ms simulation walked wrong amount";
-    ASSERT_EQ(at64ms.back().theVec[1], -11284) << "64ms simulation walked wrong amount";
     ASSERT_LE(abs(1584235-at64ms.back().theVec[2]), 50) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
-        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.55) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.5) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
-        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.8) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.75) << "not close enough after " << i << " ticks.";
     }
 }
 
