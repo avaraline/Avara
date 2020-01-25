@@ -28,6 +28,7 @@ class CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) = 0;
     virtual void MessageLine(short index, short align) = 0;
+    virtual std::deque<std::string>& MessageLines() = 0;
     virtual void DrawUserInfoPart(short i, short partList) = 0;
     virtual void ParamLine(short index, short align, StringPtr param1, StringPtr param2) = 0;
     virtual void StartFrame(long frameNum) = 0;
@@ -48,20 +49,20 @@ public:
     virtual CAvaraGame* GetGame() = 0;
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
-    virtual std::deque<std::string>& MessageLines() = 0;
-
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     CAvaraGame *itsGame;
     CNetManager *gameNet;
-    std::deque<std::string> messageLines;
+
 public:
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
+
+    std::deque<std::string> messageLines;
 
     CAvaraAppImpl();
     ~CAvaraAppImpl();

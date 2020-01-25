@@ -22,6 +22,7 @@ jobs:
       - sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
     script:
       - make -j3 macapp SIGNING_ID=NONE
+      - make tests
     deploy:
       provider: script
       skip_cleanup: true
@@ -50,6 +51,8 @@ addons:
     - libegl1-mesa-dev
     - libgles2-mesa-dev
     - libsdl2-net-dev
+    - libdirectfb-dev
 script:
   - make -j3
+  - make tests
 

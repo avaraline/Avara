@@ -1066,8 +1066,9 @@ void CNetManager::ChangedServerOptions(short curOptions) {
 
 void CNetManager::NewArrival(short slot) {
     CPlayerManager *thePlayer = playerTable[slot];
-    std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
     itsGame->itsApp->NotifyUser();
+    std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
+    SDL_Log("%s has joined!!\n", name.c_str());
 }
 
 void CNetManager::ResultsReport(Ptr results) {

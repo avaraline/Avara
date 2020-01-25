@@ -26,6 +26,17 @@ void AvaraGLInitContext();
 void AvaraGLDrawPolygons(CBSPPart* part);
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView);
 void AvaraGLToggleRendering(int active);
+bool AvaraGLIsRendering();
 
-glm::mat4 FromFixedMat(Matrix *m);
+static inline glm::mat4 ToFloatMat(Matrix *m) {
+    glm::mat4 mat(1.0);
+    for (int i = 0; i < 3; i ++) {
+        mat[0][i] = ToFloat((*m)[0][i]);
+        mat[1][i] = ToFloat((*m)[1][i]);
+        mat[2][i] = ToFloat((*m)[2][i]);
+        mat[3][i] = ToFloat((*m)[3][i]);
+    }
+    return mat;
+}
+
 extern GLuint gProgram;

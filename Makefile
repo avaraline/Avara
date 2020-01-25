@@ -10,22 +10,29 @@ UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
 INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor -Ivendor/gtest/include
-CPPFLAGS ?= $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
-CXXFLAGS ?= -std=c++1y
+CPPFLAGS := ${CPPFLAGS}
+CPPFLAGS += $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
+CXXFLAGS := ${CXXFLAGS}
+CXXFLAGS += -std=c++1y
+LDFLAGS := ${LDFLAGS}
 
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	CPPFLAGS += -F/Library/Frameworks
-	LDFLAGS ?= -F/Library/Frameworks -lstdc++ -lm -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
+	LDFLAGS += -F/Library/Frameworks -lstdc++ -lm -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
-	LDFLAGS ?= -lstdc++ -lm -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	LDFLAGS += -lstdc++ -lm -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
 	POST_PROCESS ?= ls -lh
 else
 	# Linux
-	LDFLAGS ?= -lstdc++ -lm -lSDL2 -lSDL2_net -lGL -lGLU -lpthread -ldl
+	PKG_CONFIG ?= pkg-config
+	LDFLAGS += -lstdc++ -lm -lpthread -ldl
+	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l SDL2_net)
+	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l glu)
+	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I directfb)
 	CPPFLAGS += -fPIC
 	POST_PROCESS ?= ls -lh
 endif
@@ -75,13 +82,12 @@ $(BUILD_DIR)/Avara: $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o
 
 # Tests
 $(BUILD_DIR)/tests: $(OBJS) $(BUILD_DIR)/src/tests.cpp.o $(BUILD_DIR)/vendor/gtest-all.cc.o
-	$(CC) $(OBJS) $(BUILD_DIR)/vendor/gtest-all.cc.o $(BUILD_DIR)/src/tests.cpp.o -o $@ $(LDFLAGS)
+	$(CXX) $(OBJS) $(BUILD_DIR)/vendor/gtest-all.cc.o $(BUILD_DIR)/src/tests.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
 # Google test
 $(BUILD_DIR)/vendor/gtest-all.cc.o:
-	$(CC) -isystem vendor/gtest/include/ -Ivendor/gtest/ -pthread -c vendor/gtest/src/gtest-all.cc -o $@
-
+	$(CXX) -isystem vendor/gtest/include/ -Ivendor/gtest/ -pthread -c vendor/gtest/src/gtest-all.cc -o $@
 # BSPViewer
 $(BUILD_DIR)/BSPViewer: $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o
 	$(CC) $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o -o $@ $(LDFLAGS)

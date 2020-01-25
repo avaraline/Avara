@@ -105,6 +105,10 @@ void AvaraGLToggleRendering(int active) {
     actuallyRender = false;
 }
 
+bool AvaraGLIsRendering() {
+    return actuallyRender;
+}
+
 void AvaraGLSetView(glm::mat4 view) {
     if (!actuallyRender) return;
     glUseProgram(gProgram);
@@ -172,7 +176,7 @@ void AvaraGLSetDecal(float active) {
 }
 
 void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
-    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(FromFixedMat(modelview)));
+    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(ToFloatMat(modelview)));
     glm::mat3 normal_mat = glm::mat3(1.0f);
 
     for (int i = 0; i < 3; i ++) {
@@ -340,18 +344,6 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     glDisableVertexAttribArray(0);
     glEnable(GL_DEPTH_TEST);
 }
-
-glm::mat4 FromFixedMat(Matrix *m) {
-    glm::mat4 mat(1.0);
-    for (int i = 0; i < 3; i ++) {
-        mat[0][i] = ToFloat((*m)[0][i]);
-        mat[1][i] = ToFloat((*m)[1][i]);
-        mat[2][i] = ToFloat((*m)[2][i]);
-        mat[3][i] = ToFloat((*m)[3][i]);
-    }
-    return mat;
-}
-
 
 GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path) {
     // Create the shaders

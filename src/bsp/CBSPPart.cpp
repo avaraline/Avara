@@ -19,7 +19,7 @@
 #include <json.hpp>
 #include <set>
 
-/*	The following stacks are used to eliminate recursion.
+/*  The following stacks are used to eliminate recursion.
  */
 short *bspIndexStack = 0;
 
@@ -43,7 +43,7 @@ void CBSPPart::IBSPPart(short resId) {
     // SDL_Log("Loading BSP: %s\n", bspName);
     lightSeed = 0;
     nextTemp = NULL;
-    // colorReplacements = NULL;	//	Use default colors.
+    // colorReplacements = NULL;    //  Use default colors.
     isTransparent = false;
     ignoreDirectionalLights = false;
 
@@ -53,8 +53,8 @@ void CBSPPart::IBSPPart(short resId) {
     extraAmbient = 0;
     privateAmbient = -1;
 
-    hither = FIX3(500); //	50 cm	I set these variables just in case some bozo
-    yon = FIX(500); //	500 m	sets the flags above and forgets to set the values.
+    hither = FIX3(500); //  50 cm   I set these variables just in case some bozo
+    yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
     userFlags = 0;
 
     std::ifstream infile(bspName);
@@ -143,6 +143,7 @@ void CBSPPart::IBSPPart(short resId) {
 void CBSPPart::PostRender() {}
 
 void CBSPPart::UpdateOpenGLData() {
+    if (!AvaraGLIsRendering()) return;
     glDataSize = totalPoints * sizeof(GLData);
     glData = (GLData *)NewPtr(glDataSize);
 
@@ -152,7 +153,6 @@ void CBSPPart::UpdateOpenGLData() {
     PolyRecord *poly;
     float scale = 1.0; // ToFloat(currentView->screenScale);
     int p = 0;
-
     for (int i = 0; i < polyCount; i++) {
         poly = &polyTable[i];
         for (int v = 0; v < poly->triCount * 3; v++) {
@@ -254,7 +254,7 @@ Boolean CBSPPart::InViewPyramid() {
 }
 
 /*
-**	Lock handles and make pointers to data valid.
+**  Lock handles and make pointers to data valid.
 */
 void CBSPPart::PreRender() {}
 
@@ -269,8 +269,8 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 }
 
 /*
-**	See if the part is in the viewing pyramid and do calculations
-**	in preparation to shading.
+**  See if the part is in the viewing pyramid and do calculations
+**  in preparation to shading.
 */
 Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
     Boolean inPyramid = !isTransparent;
@@ -313,12 +313,12 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
 }
 
 /*
-**	Normally you would create a CBSPWorld and attach the
-**	part to that world. However, if you only have a single
-**	CBSPPart, you can call Render and you don't need a
-**	CBSPWorld. Even then it is recommended that you use a
-**	CBSPWorld, since it really doesn't add any significant
-**	overhead.
+**  Normally you would create a CBSPWorld and attach the
+**  part to that world. However, if you only have a single
+**  CBSPPart, you can call Render and you don't need a
+**  CBSPWorld. Even then it is recommended that you use a
+**  CBSPWorld, since it really doesn't add any significant
+**  overhead.
 */
 void CBSPPart::Render(CViewParameters *vp) {
     vp->DoLighting();
@@ -330,15 +330,15 @@ void CBSPPart::Render(CViewParameters *vp) {
 }
 
 /*
-**	Reset the part to the origin and to its natural
-**	orientation.
+**  Reset the part to the origin and to its natural
+**  orientation.
 */
 void CBSPPart::Reset() {
     lightSeed = 0;
     OneMatrix(&itsTransform);
 }
 
-//	invalidates data & calcs sphereGlobCenter
+//  invalidates data & calcs sphereGlobCenter
 void CBSPPart::MoveDone() {
     VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &itsTransform);
     invGlobDone = false;
@@ -347,7 +347,7 @@ void CBSPPart::MoveDone() {
 
 #ifdef TRANSLATE_PART
 /*
-**	Move by xt, yt, zt
+**  Move by xt, yt, zt
 */
 void CBSPPart::Translate(Fixed xt, Fixed yt, Fixed zt) {
     itsTransform[3][0] += xt;
@@ -460,6 +460,11 @@ void CBSPPart::Dispose() {
 
     DisposePtr((Ptr)pointTable);
     DisposePtr((Ptr)polyTable);
+    if (AvaraGLIsRendering()) {
+        DisposePtr((Ptr)glData);
+        glDeleteVertexArrays(1, &vertexArray);
+        glDeleteBuffers(1, &vertexBuffer);
+    }
     CDirectObject::Dispose();
 }
 
@@ -686,7 +691,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
             caseTable[8]++;
 #endif
 
-        //	return maxZ < other->maxZ;
+        //  return maxZ < other->maxZ;
         return minZ + maxZ < other->minZ + other->maxZ;
     } else
 #endif

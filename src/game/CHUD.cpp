@@ -13,9 +13,6 @@ const int CHAT_CHARS = 36;
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
 
-
-
-
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);

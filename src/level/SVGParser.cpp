@@ -105,8 +105,8 @@ struct simple_walker: pugi::xml_tree_walker {
 
         handle_style(style);
 
-        short start_angle = (short)(start * (180.0/PI));
-        short angle_length = (short)abs(start_angle - (end* (180.0/PI)));
+        short start_angle = (short)(start * (180.0 / PI));
+        short angle_length = (short)abs(start_angle - (end * (180.0 / PI)));
         //SDL_Log("start_angle: %d angle_length: %d", start_angle, angle_length);
         //SDL_Log("cx: %d cy: %d", cx, cy);
         callbacks->arcProc(cx, cy, start_angle, angle_length, rx > ry ? rx : ry);
