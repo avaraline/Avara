@@ -7,6 +7,7 @@
     Modified: Monday, September 9, 1996, 00:15
 */
 
+#include "AvaraGL.h"
 #include "CBSPPart.h"
 
 #include "CViewParameters.h"
@@ -18,7 +19,7 @@
 #include <json.hpp>
 #include <set>
 
-/*	The following stacks are used to eliminate recursion.
+/*  The following stacks are used to eliminate recursion.
  */
 short *bspIndexStack = 0;
 
@@ -40,10 +41,9 @@ void CBSPPart::IBSPPart(short resId) {
     snprintf(relPath, 256, "bsps/%d.json", resId);
     char *bspName = BundlePath(relPath);
     // SDL_Log("Loading BSP: %s\n", bspName);
-
     lightSeed = 0;
     nextTemp = NULL;
-    // colorReplacements = NULL;	//	Use default colors.
+    // colorReplacements = NULL;    //  Use default colors.
     isTransparent = false;
     ignoreDirectionalLights = false;
 
@@ -53,8 +53,8 @@ void CBSPPart::IBSPPart(short resId) {
     extraAmbient = 0;
     privateAmbient = -1;
 
-    hither = FIX3(500); //	50 cm	I set these variables just in case some bozo
-    yon = FIX(500); //	500 m	sets the flags above and forgets to set the values.
+    hither = FIX3(500); //  50 cm   I set these variables just in case some bozo
+    yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
     userFlags = 0;
 
     std::ifstream infile(bspName);
@@ -75,18 +75,33 @@ void CBSPPart::IBSPPart(short resId) {
     enclosurePoint.z = ToFixed(doc["center"][2]);
     enclosurePoint.w = FIX1;
 
-    minBounds.x = ToFixed(doc["bounds"]["min"][0]);
-    minBounds.y = ToFixed(doc["bounds"]["min"][1]);
-    minBounds.z = ToFixed(doc["bounds"]["min"][2]);
+    float minX = doc["bounds"]["min"][0];
+    float minY = doc["bounds"]["min"][1];
+    float minZ = doc["bounds"]["min"][2];
+
+    minBounds.x = ToFixed(minX);
+    minBounds.y = ToFixed(minY);
+    minBounds.z = ToFixed(minZ);
     minBounds.w = FIX1;
 
-    maxBounds.x = ToFixed(doc["bounds"]["max"][0]);
+    float maxX = doc["bounds"]["max"][0];
+    float maxY = doc["bounds"]["max"][1];
+    float maxZ = doc["bounds"]["max"][2];
+
+    maxBounds.x = ToFixed(maxX);
     maxBounds.y = ToFixed(doc["bounds"]["max"][1]);
     maxBounds.z = ToFixed(doc["bounds"]["max"][2]);
     maxBounds.w = FIX1;
 
+    float sigma = .001f;
+
+    isDecal = (
+        abs(maxX - minX) < sigma ||
+        abs(maxY - minY) < sigma ||
+        abs(maxZ - minZ) < sigma
+    );
+
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
-    transformedPoints = (Vector *)NewPtr(pointCount * sizeof(Vector));
     polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
 
     for (int i = 0; i < pointCount; i++) {
@@ -97,7 +112,7 @@ void CBSPPart::IBSPPart(short resId) {
         pointTable[i][3] = FIX1;
     }
 
-    int totalPoints = 0;
+    totalPoints = 0;
 
     for (int i = 0; i < polyCount; i++) {
         json poly = doc["polys"][i];
@@ -120,29 +135,45 @@ void CBSPPart::IBSPPart(short resId) {
         }
     }
 
-    // Create a buffer big enough to hold vertex/color/normal for every point we draw.
+    BuildBoundingVolumes();
+    Reset();
+    UpdateOpenGLData();
+}
+
+void CBSPPart::PostRender() {}
+
+void CBSPPart::UpdateOpenGLData() {
+    if (!AvaraGLIsRendering()) return;
     glDataSize = totalPoints * sizeof(GLData);
     glData = (GLData *)NewPtr(glDataSize);
 
     glGenVertexArrays(1, &vertexArray);
     glGenBuffers(1, &vertexBuffer);
-    /*
-    TODO: can some of this be set up once and re-used?
-    GLuint glBuffers[3];
-    glGenBuffers(3, glBuffers);
-    for(int i = 0; i < 3; i++) {
-        glBindBuffer(GL_ARRAY_BUFFER, glBuffers[i]);
-        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-        glEnableVertexAttribArray(i);
+
+    PolyRecord *poly;
+    float scale = 1.0; // ToFloat(currentView->screenScale);
+    int p = 0;
+    for (int i = 0; i < polyCount; i++) {
+        poly = &polyTable[i];
+        for (int v = 0; v < poly->triCount * 3; v++) {
+            Vector *pt = &pointTable[poly->triPoints[v]];
+            glData[p].x = ToFloat((*pt)[0]);
+            glData[p].y = ToFloat((*pt)[1]);
+            glData[p].z = ToFloat((*pt)[2]);
+            glData[p].r = ((poly->color >> 16) & 0xFF) / 255.0;
+            glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
+            glData[p].b = (poly->color & 0xFF) / 255.0;
+
+            glData[p].nx = poly->normal[0];
+            glData[p].ny = poly->normal[1];
+            glData[p].nz = poly->normal[2];
+
+            // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
+            // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
+            p++;
+        }
     }
-    glBufferData(GL_ARRAY_BUFFER, glBufferSize, glData, GL_STATIC_DRAW);
-    */
-
-    BuildBoundingVolumes();
-    Reset();
 }
-
-void CBSPPart::PostRender() {}
 
 void CBSPPart::TransformLights() {
     CViewParameters *vp;
@@ -163,48 +194,7 @@ void CBSPPart::TransformLights() {
 }
 
 void CBSPPart::DrawPolygons() {
-    PolyRecord *poly;
-    float scale = 1.0; // ToFloat(currentView->screenScale);
-    int p = 0;
-
-    float extra = 1.0 + ToFloat(extraAmbient);
-
-    for (int i = 0; i < polyCount; i++) {
-        poly = &polyTable[i];
-        for (int v = 0; v < poly->triCount * 3; v++) {
-            Vector *pt = &transformedPoints[poly->triPoints[v]];
-            glData[p].x = ToFloat((*pt)[0]);
-            glData[p].y = ToFloat((*pt)[1]);
-            glData[p].z = ToFloat((*pt)[2]);
-            glData[p].r = extra * ((poly->color >> 16) & 0xFF) / 255.0;
-            glData[p].g = extra * ((poly->color >> 8) & 0xFF) / 255.0;
-            glData[p].b = extra * (poly->color & 0xFF) / 255.0;
-            glData[p].nx = poly->normal[0];
-            glData[p].ny = poly->normal[1];
-            glData[p].nz = poly->normal[2];
-            // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
-            // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
-            p++;
-        }
-    }
-
-    glBindVertexArray(vertexArray);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, glDataSize, glData, GL_STREAM_DRAW);
-
-    for (int i = 0; i < 3; i++) {
-        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-        glEnableVertexAttribArray(i);
-    }
-
-    glUseProgram(gProgram);
-    glBindVertexArray(vertexArray);
-    glDrawArrays(GL_TRIANGLES, 0, p);
-
-    glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);
-    glDisableVertexAttribArray(2);
+    AvaraGLDrawPolygons(this);
 }
 
 Boolean CBSPPart::InViewPyramid() {
@@ -264,7 +254,7 @@ Boolean CBSPPart::InViewPyramid() {
 }
 
 /*
-**	Lock handles and make pointers to data valid.
+**  Lock handles and make pointers to data valid.
 */
 void CBSPPart::PreRender() {}
 
@@ -279,8 +269,8 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 }
 
 /*
-**	See if the part is in the viewing pyramid and do calculations
-**	in preparation to shading.
+**  See if the part is in the viewing pyramid and do calculations
+**  in preparation to shading.
 */
 Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
     Boolean inPyramid = !isTransparent;
@@ -312,17 +302,10 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
                 invGlobDone = true;
             }
 
-            PreRender();
             TransformLights();
 
             // transform all the points before rendering
-            VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
-            /*
-            for(int i = 0; i < pointCount; i++) {
-                SDL_Log("(%d,%d,%d) -> (%d,%d,%d)\n", pointTable[i][0], pointTable[i][1], pointTable[i][2],
-                    transformedPoints[i][0], transformedPoints[i][1], transformedPoints[i][2]);
-            }
-            */
+            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);      
         }
     }
 
@@ -330,12 +313,12 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
 }
 
 /*
-**	Normally you would create a CBSPWorld and attach the
-**	part to that world. However, if you only have a single
-**	CBSPPart, you can call Render and you don't need a
-**	CBSPWorld. Even then it is recommended that you use a
-**	CBSPWorld, since it really doesn't add any significant
-**	overhead.
+**  Normally you would create a CBSPWorld and attach the
+**  part to that world. However, if you only have a single
+**  CBSPPart, you can call Render and you don't need a
+**  CBSPWorld. Even then it is recommended that you use a
+**  CBSPWorld, since it really doesn't add any significant
+**  overhead.
 */
 void CBSPPart::Render(CViewParameters *vp) {
     vp->DoLighting();
@@ -347,15 +330,15 @@ void CBSPPart::Render(CViewParameters *vp) {
 }
 
 /*
-**	Reset the part to the origin and to its natural
-**	orientation.
+**  Reset the part to the origin and to its natural
+**  orientation.
 */
 void CBSPPart::Reset() {
     lightSeed = 0;
     OneMatrix(&itsTransform);
 }
 
-//	invalidates data & calcs sphereGlobCenter
+//  invalidates data & calcs sphereGlobCenter
 void CBSPPart::MoveDone() {
     VectorMatrixProduct(1, (Vector *)&enclosurePoint, &sphereGlobCenter, &itsTransform);
     invGlobDone = false;
@@ -364,7 +347,7 @@ void CBSPPart::MoveDone() {
 
 #ifdef TRANSLATE_PART
 /*
-**	Move by xt, yt, zt
+**  Move by xt, yt, zt
 */
 void CBSPPart::Translate(Fixed xt, Fixed yt, Fixed zt) {
     itsTransform[3][0] += xt;
@@ -449,6 +432,7 @@ void CBSPPart::ReplaceColor(int origColor, int newColor) {
             polyTable[i].color = newColor;
         }
     }
+    UpdateOpenGLData();
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -470,21 +454,17 @@ void CBSPPart::BuildBoundingVolumes() {
 }
 
 void CBSPPart::Dispose() {
-    // TODO: add/check refCount for subclasses?
-    /* Why are these failing??
-    DisposePtr((Ptr)pointTable);
-    DisposePtr((Ptr)transformedPoints);
-    */
     for (int i = 0; i < polyCount; i++) {
         DisposePtr((Ptr)polyTable[i].triPoints);
     }
-    DisposePtr((Ptr)transformedPoints);
+
     DisposePtr((Ptr)pointTable);
     DisposePtr((Ptr)polyTable);
-    DisposePtr((Ptr)glData);
-
-    glDeleteVertexArrays(1, &vertexArray);
-    glDeleteBuffers(1, &vertexBuffer);
+    if (AvaraGLIsRendering()) {
+        DisposePtr((Ptr)glData);
+        glDeleteVertexArrays(1, &vertexArray);
+        glDeleteBuffers(1, &vertexBuffer);
+    }
     CDirectObject::Dispose();
 }
 
@@ -711,7 +691,7 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
             caseTable[8]++;
 #endif
 
-        //	return maxZ < other->maxZ;
+        //  return maxZ < other->maxZ;
         return minZ + maxZ < other->minZ + other->maxZ;
     } else
 #endif

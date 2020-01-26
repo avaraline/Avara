@@ -31,7 +31,12 @@ using json = nlohmann::json;
 #define kMultiSamplesTag "multiSamples"
 #define kFullScreenTag "fullscreen"
 
-#define kTrackerAddress "tracker"
+// Network & Tracker
+#define kLastAddress "lastAddress"
+#define kTrackerRegister "trackerRegister"
+#define kTrackerRegisterAddress "trackerRegisterAddress"
+#define kTrackerRegisterFrequency "trackerRegisterFrequency"
+#define kTrackerAddress "trackerAddress"
 
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
@@ -65,7 +70,11 @@ static json defaultPrefs = {
     {kWindowWidth, 1024},
     {kWindowHeight, 768},
     {kFullScreenTag, false},
-    {kTrackerAddress, "tracker.avaraline.net"}
+    {kLastAddress, ""},
+    {kTrackerAddress, "avara.io"},
+    {kTrackerRegister, 1},
+    {kTrackerRegisterAddress, "avara.io"},
+    {kTrackerRegisterFrequency, 5}
 };
 
 

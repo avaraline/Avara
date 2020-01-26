@@ -1099,7 +1099,7 @@ void CUDPComm::Connect(std::string address) {
     localPort = gApplication->Number(kDefaultUDPPort);
 
     IPaddress addr;
-    CAvaraApp *app = (CAvaraApp *)gApplication;
+    CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     SDLNet_ResolveHost(&addr, address.c_str(), localPort);
 
     ContactServer(addr.host, addr.port);

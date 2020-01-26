@@ -4,12 +4,12 @@ CC = clang
 CXX = clang++
 
 BUILD_DIR ?= build
-SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui
+SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
-INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor
+INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor -Ivendor/gtest/include
 CPPFLAGS := ${CPPFLAGS}
 CPPFLAGS += $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
 CXXFLAGS := ${CXXFLAGS}
@@ -20,11 +20,11 @@ ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	CPPFLAGS += -F/Library/Frameworks
-	LDFLAGS += -F/Library/Frameworks -lstdc++ -lm -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
+	LDFLAGS += -F/Library/Frameworks -lstdc++ -lm -lpthread -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
-	LDFLAGS += -lstdc++ -lm -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
 	POST_PROCESS ?= ls -lh
 else
 	# Linux
@@ -47,7 +47,11 @@ SIGNING_ID := Y56DGU8P8X
 
 avara: $(BUILD_DIR)/Avara resources
 
+tests: $(BUILD_DIR)/tests resources
+
 bspviewer: $(BUILD_DIR)/BSPViewer resources
+
+levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
 
 macapp: avara
 	rm -rf $(BUILD_DIR)/Avara.app
@@ -76,9 +80,22 @@ $(BUILD_DIR)/Avara: $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o
 	$(CXX) $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
+# Tests
+$(BUILD_DIR)/tests: $(OBJS) $(BUILD_DIR)/src/tests.cpp.o $(BUILD_DIR)/vendor/gtest-all.cc.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/vendor/gtest-all.cc.o $(BUILD_DIR)/src/tests.cpp.o -o $@ $(LDFLAGS)
+	$(POST_PROCESS) $@
+
+# Google test
+$(BUILD_DIR)/vendor/gtest-all.cc.o:
+	$(CXX) -isystem vendor/gtest/include/ -Ivendor/gtest/ -pthread -c vendor/gtest/src/gtest-all.cc -o $@
 # BSPViewer
 $(BUILD_DIR)/BSPViewer: $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o
 	$(CC) $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o -o $@ $(LDFLAGS)
+	$(POST_PROCESS) $@
+
+# LevelViewer
+$(BUILD_DIR)/AvaraLevelViewer: $(OBJS) $(BUILD_DIR)/src/AvaraLevelViewer.cpp.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/AvaraLevelViewer.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
 # c source
@@ -101,10 +118,11 @@ $(BUILD_DIR)/%.mm.o: %.mm
 clean:
 	$(RM) -r $(BUILD_DIR)
 
-publish: 
+publish:
 	scp build/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
+	# python3 bin/pict2svg.py
 	cp -r bsps levels rsrc shaders $(BUILD_DIR)
 
 -include $(DEPS)

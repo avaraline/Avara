@@ -8,12 +8,13 @@
 */
 
 #include "LevelLoader.h"
-
+#include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
 #include "PICTParser.h"
+#include "SVGParser.h"
 #include "Parser.h"
 #include "Resource.h"
 
@@ -94,6 +95,68 @@ Fixed GetLastOval(Fixed *theLoc) {
 
 Fixed GetLastArcDirection() {
     return FDegToOne(((long)lastArcAngle) << 16);
+}
+
+static void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool fg) {
+    if (fg) {
+        fillColor.red = r;
+        fillColor.green = g;
+        fillColor.blue = b;
+    }
+    else {
+        frameColor.red = r;
+        frameColor.green = g;
+        frameColor.blue = b;
+    }
+}
+
+static void SvgArc(float x, float y, short start, short angle, long largest_radius) {
+    lastArcPoint.h = (long)roundf(x * 2);
+    lastArcPoint.v = (long)roundf(y * 2);
+    lastArcAngle = (630 - (start + angle / 2)) % 360;
+    lastDomeCenter.h = (long)roundf(x * 2);
+    lastDomeCenter.v = (long)roundf(y * 2);
+    lastDomeAngle = 360 - start;
+    lastDomeSpan = angle;
+    lastDomeRadius = largest_radius;
+}
+
+static void SvgEllipse(float x, float y, long r) {
+    lastOvalPoint.h = (long)roundf(x * 2);
+    lastOvalPoint.v = (long)roundf(y * 2);
+    lastOvalRadius = r * 2;
+
+    lastDomeCenter.h = (long)roundf(x * 2);
+    lastDomeCenter.v = (long)roundf(x * 2);
+
+    lastDomeAngle = 0;
+    lastDomeSpan = 360;
+    lastDomeRadius = r * 2;
+}
+
+static void SvgRect(Rect *r, int radius, unsigned short thickness) {
+    //SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
+    //SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
+
+    r->left += thickness >> 1;
+    r->top += thickness >> 1;
+    r->right -= (thickness + 1) >> 1;
+    r->bottom -= (thickness + 1) >> 1;
+
+    if(thickness == 1) {
+        CWallActor *theWall;
+        theWall = new CWallActor;
+        theWall->IAbstractActor();
+        theWall->MakeWallFromRect(r, (short)radius, 0, true);
+    }
+    else {
+        gLastBoxRect = *r;
+        gLastBoxRounding = radius;
+    }
+}
+
+static void SvgText(unsigned char *script) {
+    RunThis(script);
 }
 
 static void PeepStdRRect(PICTContext *context, GrafVerb verb, Rect *r, short ovalWidth, short ovalHeight) {
@@ -298,10 +361,29 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
     }
 }
 
+void SVGConvertToLevelMap() {
+    InitParser();
+    SVGParser *parser = new SVGParser();
+    parser->callbacks.rectProc = &SvgRect;
+    parser->callbacks.colorProc = &SvgColor;
+    parser->callbacks.textProc = &SvgText;
+    parser->callbacks.arcProc = &SvgArc;
+    parser->callbacks.ellipseProc = &SvgEllipse;
+
+    parser->Parse();
+    delete parser;
+    TextBreak();
+    FreshCalc();
+    gCurrentGame->EndScript();
+}
+
 void ConvertToLevelMap(Handle levelData) {
     InitParser();
-    textBuffer = NewPtr(textBufferSize);
+    // TODO: Not a good place for this
+    AvaraGLLightDefaults();
 
+    textBuffer = NewPtr(textBufferSize);
+    
     PICTParser *parser = new PICTParser();
     parser->callbacks.arcProc = &PeepStdArc;
     parser->callbacks.rRectProc = &PeepStdRRect;
@@ -313,7 +395,7 @@ void ConvertToLevelMap(Handle levelData) {
     // parser->callbacks.getPicProc = &PeekGetPic;
     parser->Parse(levelData);
     delete parser;
-
+    
     /*
     TODO: replace this with a basic PICT parser with drawing function callbacks
 

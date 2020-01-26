@@ -8,12 +8,13 @@
 */
 
 #pragma once
-#include "AvaraGL.h"
 #include "CDirectObject.h"
 #include "FastMat.h"
 #include "Types.h"
 
 #include <SDL2/SDL.h>
+#include <glad/glad.h>
+#include <glm/glm.hpp>
 
 #define MAXLIGHTS 4
 
@@ -25,10 +26,6 @@ class CBSPPart;
 class CViewParameters;
 
 enum { noLineClip = 0, touchFrontClip = 1, touchBackClip = 2, lineVisibleClip = 4, edgeExitsFlag = 0x8000 };
-
-typedef struct GLData {
-    float x, y, z, r, g, b, nx, ny, nz;
-} GLData;
 
 typedef struct {
     Fixed x;
@@ -102,22 +99,26 @@ public:
     FaceVisibility		**faceTemp;
     BSPResourceHeader	header;
     */
-
     // Moved here from BSPResourceHeader
     FixedPoint enclosurePoint;
     Fixed enclosureRadius;
     FixedPoint minBounds; //  Bounding box minimums for x, y, z
     FixedPoint maxBounds; //  Bounding box maximums for x, y, z
+    bool isDecal; // set if the bounding box is very thin in one direction
 
     CViewParameters *currentView;
 
+    GLData *glData;
+    GLuint vertexArray, vertexBuffer;
+    GLsizeiptr glDataSize;
+
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
-    Matrix itsTransform; //	Transforms to world coordinates.
-    Matrix invGlobTransform;
+    Matrix itsTransform; //	Transforms to world coordinates. (model)
+    Matrix invGlobTransform; // (inverse model)
 
-    Matrix fullTransform;
-    Matrix invFullTransform;
+    Matrix fullTransform; // modelview
+    Matrix invFullTransform; // inverse modelview
 
     Fixed hither;
     Fixed yon;
@@ -141,13 +142,11 @@ public:
     Fixed maxY;
 
     //	members used during rendering:
-    Vector *pointTable, *transformedPoints;
+    Vector *pointTable;
     uint32_t pointCount;
     PolyRecord *polyTable;
     uint32_t polyCount;
-    GLData *glData;
-    GLuint vertexArray, vertexBuffer;
-    GLsizeiptr glDataSize;
+    int totalPoints;
 
     //	Lighting vectors in object space
     long lightSeed; //	Seed value to detect lights change
@@ -173,6 +172,7 @@ public:
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();
+    virtual void UpdateOpenGLData();
 
     virtual void PreRender();
     void PostRender();

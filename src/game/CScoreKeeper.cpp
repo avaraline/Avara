@@ -125,16 +125,16 @@ void CScoreKeeper::PlayerIntros() {
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         thePlayer = theNet->playerTable[i];
-        if (thePlayer->itsPlayer) {
-            localScores.player[i].lives = thePlayer->itsPlayer->lives;
-            localScores.player[i].team = thePlayer->itsPlayer->teamColor;
+        if (thePlayer->GetPlayer()) {
+            localScores.player[i].lives = thePlayer->GetPlayer()->lives;
+            localScores.player[i].team = thePlayer->GetPlayer()->teamColor;
 
-            iface.playerLives = thePlayer->itsPlayer->lives;
-            iface.playerTeam = thePlayer->itsPlayer->teamColor;
+            iface.playerLives = thePlayer->GetPlayer()->lives;
+            iface.playerTeam = thePlayer->GetPlayer()->teamColor;
             iface.playerID = i;
             iface.command = ksiPlayerIntro;
-            iface.winFrame = thePlayer->itsPlayer->winFrame;
-            iface.playerName = thePlayer->playerName;
+            iface.winFrame = thePlayer->GetPlayer()->winFrame;
+            iface.playerName = thePlayer->PlayerName();
         }
     }
 }
@@ -152,8 +152,8 @@ void CScoreKeeper::NetResultsUpdate() {
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         thePlayer = theNet->playerTable[i];
-        if (thePlayer->itsPlayer) {
-            localScores.player[i].lives = thePlayer->itsPlayer->lives;
+        if (thePlayer->GetPlayer()) {
+            localScores.player[i].lives = thePlayer->GetPlayer()->lives;
         }
     }
 
@@ -173,7 +173,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     iface.playerID = player;
     iface.playerTeam = team;
     if (player >= 0 && player <= kMaxAvaraPlayers) {
-        iface.playerName = itsGame->itsNet->playerTable[player]->playerName;
+        iface.playerName = itsGame->itsNet->playerTable[player]->PlayerName();
         if (reason == ksiKillBonus && hitPlayer >= 0 && hitPlayer <= kMaxAvaraPlayers) {
             Str255 destStr;
 
@@ -181,7 +181,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
                 localScores.player[player].kills++;
             }
             itsGame->itsApp->ComposeParamLine(
-                destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->playerName);
+                destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
 
             iface.consoleLine = destStr;
             iface.consoleJustify = centerAlign;

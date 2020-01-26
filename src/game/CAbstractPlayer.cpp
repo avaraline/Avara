@@ -37,7 +37,7 @@
 #define MAXFOV FIX(35)
 #define MINFOV FIX(5)
 #define FOVSTEP FIX3(1500)
-#define MINSPEED FIX3(10) //	15 mm/second at 15 fps
+#define MINSPEED FIX3(10) //    15 mm/second at 15 fps
 #define BOOSTLENGTH (16 * 5)
 #define MINIBOOSTTIME 32
 
@@ -80,7 +80,7 @@ void CAbstractPlayer::LoadHUDParts() {
 }
 
 void CAbstractPlayer::StartSystems() {
-    //	Get systems running:
+    //  Get systems running:
     reEnergize = false;
     generatorPower = FIX3(30);
     maxEnergy = FIX(5);
@@ -98,8 +98,8 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FIX3(30); //	Use 0.030 per frame to repair shields
-    maxShields = FIX(3); //	Maximum shields are 3 units
+    shieldRegen = FIX3(30); //  Use 0.030 per frame to repair shields
+    maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
     motors[0] = 0;
@@ -115,8 +115,10 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250);
-    motorFriction = FIX3(750);
+    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale(2);
+#define CLASSICACCELERATION FIX3(250)
+    motorFriction = FIX(pow(0.75, itsGame->FrameTimeScale()));
+#define CLASSICMOTORFRICTION FIX3(750)
     didBump = true;
 
     groundSlide[0] = 0;
@@ -124,15 +126,15 @@ void CAbstractPlayer::StartSystems() {
     groundSlide[2] = 0;
     groundSlide[3] = 0;
 
-    fullGunEnergy = FIX3(800); //	Maximum single shot power is 0.8 units
-    activeGunEnergy = FIX3(250); //	Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FIX3(35); //	Charge gun at 0.035 units per frame
+    fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
+    activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
+    chargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;
     gunEnergy[1] = fullGunEnergy;
 
-    gunOffset[0] = FIX3(250); //	Other gun will be automatically mirrored
+    gunOffset[0] = FIX3(250); //    Other gun will be automatically mirrored
     gunOffset[1] = 0;
     gunOffset[2] = FIX3(750);
     gunOffset[3] = 0;
@@ -276,7 +278,7 @@ void CAbstractPlayer::Dispose() {
     }
 
     if (itsManager) {
-        itsManager->itsPlayer = NULL;
+        itsManager->SetPlayer(NULL);
         itsManager = NULL;
     }
 
@@ -307,11 +309,11 @@ void CAbstractPlayer::Dispose() {
 }
 
 /*
-**	We ran into something. This routines undos movement
-**	until we no longer overlap with the other object.
+**  We ran into something. This routines undos movement
+**  until we no longer overlap with the other object.
 */
 void CAbstractPlayer::AvoidBumping() {
-    //	Subclass responsibility.
+    //  Subclass responsibility.
 }
 
 void CAbstractPlayer::PlaceHUDParts() {
@@ -327,7 +329,7 @@ void CAbstractPlayer::PlaceHUDParts() {
     dirArrow->Reset();
     InitialRotatePartY(dirArrow, heading);
     TranslatePart(dirArrow, location[0], location[1] + dirArrowHeight, location[2]);
-    dirArrow->isTransparent = scoutView; //	Invisible if scout view is on.
+    dirArrow->isTransparent = scoutView; // Invisible if scout view is on.
     dirArrow->MoveDone();
 
     if (weaponIdent)
@@ -434,7 +436,7 @@ void CAbstractPlayer::ControlViewPoint() {
     CViewParameters *theView;
     Matrix tempMat;
     Fixed viewDist;
-    // CInfoPanel		*infoPanel;
+    // CInfoPanel       *infoPanel;
     Fixed frameYon;
 
     theView = itsGame->itsView;
@@ -589,7 +591,15 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (!isInLimbo) {
             modAccel = FDivNZ(baseMass, GetTotalMass());
             modAccel = FMul(modAccel, modAccel);
-            modAccel = FMul(maxAcceleration, modAccel); //	FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
+            modAccel = FMul(CLASSICACCELERATION, modAccel); //  FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
+            // top speed = accel * motorFriction / (1 - motorFriction)
+            // Scale top speed: top speed * frameTime/64
+            // Use scaled top speed and scaled motor friction to figure out an adjusted acceleration
+            // THEREFORE accel = accel * frameTimeScale * classicMotorFriction * (1 - motorFriction) / ((1 - classicMotorFriction) * motorFriction)
+            if (itsGame->frameTime != 64) {
+                modAccel = FDivNZ(itsGame->FrameTimeScale() * FMul(modAccel, FMul(CLASSICMOTORFRICTION, FIX1 - motorFriction)),  FMul(motorFriction, FIX1 - CLASSICMOTORFRICTION));
+            }
+
             motionFlags = 0;
 
             if (TESTFUNC(kfuForward, ft->held))
@@ -648,7 +658,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (TESTFUNC(kfuPauseGame, ft->down)) {
             itsGame->statusRequest = kPauseStatus;
-            itsGame->pausePlayer = itsManager->slot;
+            itsGame->pausePlayer = itsManager->Slot();
         }
         if (TESTFUNC(kfuAbortGame, ft->down)) {
             if (limboCount > 0 || lives == 0) {
@@ -656,10 +666,10 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                     isOut = true;
                     lives = 0;
                     itsManager->AbortRequest();
-                    itsGame->itsApp->DrawUserInfoPart(itsManager->slot, kipDrawColorBox);
+                    itsGame->itsApp->DrawUserInfoPart(itsManager->Slot(), kipDrawColorBox);
                 }
             } else {
-                if (itsManager->isLocalPlayer) {
+                if (itsManager->IsLocalPlayer()) {
                     itsGame->itsApp->MessageLine(kmSelfDestruct, centerAlign);
                     if (lives > 1)
                         itsGame->itsApp->MessageLine(kmSelfDestruct2, centerAlign);
@@ -751,7 +761,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             else
                 yonBound = LONGYON;
 
-            if (itsManager->isLocalPlayer) {
+            if (itsManager->IsLocalPlayer()) {
                 gApplication->Set(kYonPrefTag, mode);
                 itsGame->itsApp->MessageLine(kmLongView - mode, centerAlign);
             }
@@ -767,11 +777,11 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (TESTFUNC(kfuTypeText, ft->down)) {
             chatMode = !chatMode;
-            itsGame->itsApp->DrawUserInfoPart(itsManager->slot, kipDrawColorBox);
+            itsGame->itsApp->DrawUserInfoPart(itsManager->Slot(), kipDrawColorBox);
             if (chatMode) {
                 CBasicSound *theSound;
 
-                theSound = gHub->GetSoundSampler(hubRate, itsManager->isLocalPlayer ? 151 : 152);
+                theSound = gHub->GetSoundSampler(hubRate, itsManager->IsLocalPlayer() ? 151 : 152);
                 theSound->SetVolume(FIX3(250));
                 theSound->Start();
             }
@@ -803,11 +813,12 @@ void CAbstractPlayer::TractionControl() {
 void CAbstractPlayer::MotionControl() {
     Fixed avrgHeading;
     Fixed motorDir[2];
-    Fixed fric = FIX3(10); // FIX3(30);
+    Fixed fric = FIX((1 - pow(1 - 0.01, itsGame->FrameTimeScale())));// FIX3(10); // FIX3(30);
     Fixed slowDown;
     Fixed absVert;
     Fixed slide[2];
     Fixed slideLen;
+    Fixed supportFriction = FIX((1 - pow(1 - ToFloat(this->supportFriction), itsGame->FrameTimeScale())));
 
     distance = (motors[0] + motors[1]) >> 1;
     headChange = FMul(motors[1] - motors[0], turningEffect);
@@ -824,9 +835,10 @@ void CAbstractPlayer::MotionControl() {
     slide[1] = motorDir[1] - speed[2] + groundSlide[2];
     slideLen = VectorLength(2, slide);
 
-    if (slideLen < supportTraction) {
-        speed[0] += slide[0] - (slide[0] >> 2);
-        speed[2] += slide[1] - (slide[1] >> 2);
+    if (slideLen < supportTraction * itsGame->FrameTimeScale()) {
+        double speedPortion = pow(0.25, itsGame->FrameTimeScale());
+        speed[0] += slide[0] - (slide[0] * speedPortion);
+        speed[2] += slide[1] - (slide[1] * speedPortion);
     } else {
         speed[0] += FMul(slide[0], supportFriction);
         speed[2] += FMul(slide[1], supportFriction);
@@ -860,7 +872,7 @@ void CAbstractPlayer::FrameAction() {
 void CAbstractPlayer::PlayerAction() {
     if (lives) {
         itsGame->playersStanding++;
-        if ((itsGame->frameNumber & 2047) == 2047 && itsGame->playersStanding == 1 && itsManager->isLocalPlayer) {
+        if ((itsGame->frameNumber & 2047) == 2047 && itsGame->playersStanding == 1 && itsManager->IsLocalPlayer()) {
             itsGame->scoreKeeper->NetResultsUpdate();
         }
 
@@ -871,10 +883,10 @@ void CAbstractPlayer::PlayerAction() {
     }
 
     if (!isOut) {
-        dirArrow->isTransparent = true; //	No HUD display by default
-        targetOns[0]->isTransparent = true; //	So we hide all HUD parts now
-        targetOns[1]->isTransparent = true; //	And reveal them if necessary
-        targetOffs[0]->isTransparent = true; //	in PlaceHUDParts.
+        dirArrow->isTransparent = true; //  No HUD display by default
+        targetOns[0]->isTransparent = true; //  So we hide all HUD parts now
+        targetOns[1]->isTransparent = true; //  And reveal them if necessary
+        targetOffs[0]->isTransparent = true; // in PlaceHUDParts.
         targetOffs[1]->isTransparent = true;
 
         if (isInLimbo) {
@@ -1027,7 +1039,7 @@ void CAbstractPlayer::GunActions() {
         if (gunEnergy[i] < fullGunEnergy) {
             energy -= charge;
             if (gunEnergy[i] > activeGunEnergy) {
-                gunEnergy[i] += FMul(charge, FIX3(850)); //	Used to be: *2/3;
+                gunEnergy[i] += FMul(charge, FIX3(850)); // Used to be: *2/3;
             } else {
                 gunEnergy[i] += FMul(charge, FIX3(1050));
             }
@@ -1039,7 +1051,7 @@ void CAbstractPlayer::GunActions() {
 }
 
 short CAbstractPlayer::GetActorScoringId() {
-    return itsManager ? itsManager->slot : -1;
+    return itsManager ? itsManager->Slot() : -1;
 }
 
 void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean doDispose) {
@@ -1072,11 +1084,11 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     missileCount = defaultConfig.numMissiles;
     grenadeCount = defaultConfig.numGrenades;
     GoLimbo(60);
-    if (lives == 0 && itsManager->isLocalPlayer) {
+    if (lives == 0 && itsManager->IsLocalPlayer()) {
         itsGame->itsApp->MessageLine(kmGameOver, centerAlign);
     }
 
-    itsGame->itsApp->DrawUserInfoPart(itsManager->position, kipDrawColorBox);
+    itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
 }
 
 void CAbstractPlayer::GoLimbo(long limboDelay) {
@@ -1242,7 +1254,7 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
         if (perFrames) {
             perFrames = FMulDivNZ(theSound->GetSampleRate(), itsGame->frameTime, perFrames) >> 10;
             speedV[0] = FMul(location[0] - oldLoc[0], perFrames);
-            speedV[1] = 0; //	FMul(location[1] - oldLoc[1], perFrames);
+            speedV[1] = 0; //   FMul(location[1] - oldLoc[1], perFrames);
             speedV[2] = FMul(location[2] - oldLoc[2], perFrames);
 
             UpdateSoundLink(itsSoundLink, oldLoc, speedV, itsGame->soundTime);
@@ -1313,8 +1325,8 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
         sliverGravity = FIX3(20); //-saveGravity;
         teleport->Shatter(kSmallSliver, 1, &count, &life, FIX3(-100));
 
-        //	count = 5;
-        //	Shatter(kSmallSliver, 1, &count, &life, FIX3(-70));
+        //  count = 5;
+        //  Shatter(kSmallSliver, 1, &count, &life, FIX3(-70));
 
         sliverGravity = saveGravity;
         teleport->OffsetParts(delta);
@@ -1340,7 +1352,7 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     speed[1] = 0;
     speed[2] = 0;
 
-    if (itsManager->isLocalPlayer) {
+    if (itsManager->IsLocalPlayer()) {
         itsGame->itsApp->MessageLine(kmWin, centerAlign);
     }
 
@@ -1383,14 +1395,14 @@ void CAbstractPlayer::WinAction() {
 }
 
 /*
-void	CAbstractPlayer::FillGameResultRecord(
-    TaggedGameResult	*res)
+void    CAbstractPlayer::FillGameResultRecord(
+    TaggedGameResult    *res)
 {
     if(winFrame >= 0)
-    {	res->r.time = FMulDivNZ(winFrame, itsGame->frameTime, 10);
+    {   res->r.time = FMulDivNZ(winFrame, itsGame->frameTime, 10);
     }
     else
-    {	res->r.time = -1;
+    {   res->r.time = -1;
     }
 
     res->r.score = itsGame->scores[itsManager->slot];
@@ -1444,7 +1456,7 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
         boostsRemaining = boosterLimit;
     lives += gr->lives;
     if (gr->lives) {
-        itsGame->itsApp->DrawUserInfoPart(itsManager->position, kipDrawColorBox);
+        itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
     }
 
     shields += gr->shield;
@@ -1474,7 +1486,7 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
 }
 
 short CAbstractPlayer::GetPlayerPosition() {
-    return itsManager->position;
+    return itsManager->Position();
 }
 
 short CAbstractPlayer::GetBallSnapPoint(long theGroup,

@@ -3,11 +3,16 @@
 #include "CApplication.h"
 #include "Preferences.h"
 
+#include <json.hpp>
+#include "httplib.h"
+
+using json = nlohmann::json;
+
 
 class TrackerInfo : public nanogui::Widget {
 public:
     bool mDrawLine;
-    
+
     TrackerInfo(nanogui::Widget *parent, std::string line1, std::string line2, bool drawLine = true)
         : nanogui::Widget(parent), mDrawLine(drawLine) {
         nanogui::AdvancedGridLayout *layout = new nanogui::AdvancedGridLayout();
@@ -32,7 +37,7 @@ public:
 
     void draw(NVGcontext* ctx) {
         nanogui::Widget::draw(ctx);
-        
+
         if (mDrawLine) {
             nvgBeginPath(ctx);
             nvgMoveTo(ctx, mPos.x, mPos.y);
@@ -67,25 +72,61 @@ CTrackerWindow::CTrackerWindow(CApplication *app) : CWindow(app, "Tracker") {
     nanogui::TextBox *addressBox = new nanogui::TextBox(top);
     addressBox->setValue(app->String(kTrackerAddress));
     addressBox->setEditable(true);
+    addressBox->setCallback([app](std::string value) -> bool {
+        app->Set(kTrackerAddress, value);
+        return true;
+    });
 
     nanogui::Button *refreshBtn = new nanogui::Button(top, "Refresh", ENTYPO_ICON_CW);
-    refreshBtn->setCallback([] {
+    refreshBtn->setCallback([this] {
+        this->Query();
     });
 
     //new Divider(this);
-    
+
     nanogui::VScrollPanel *results = new nanogui::VScrollPanel(this);
     results->setFixedHeight(200); //nanogui::Vector2i(250, 100));
-    
-    nanogui::Widget *wrapper = new nanogui::Widget(results);
-    wrapper->setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 0, 0));
+
+    resultsBox = new nanogui::Widget(results);
+    resultsBox->setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 0, 0));
+    /*
     for (int i = 0; i < 10; i++) {
-        new TrackerInfo(wrapper, "Server Name", "6 players - 127.0.0.1", i > 0);
+        new TrackerInfo(resultsBox, "Server Name", "6 players - 127.0.0.1", i > 0);
     }
+    */
 }
 
 CTrackerWindow::~CTrackerWindow() {}
 
 bool CTrackerWindow::DoCommand(int theCommand) {
     return false;
+}
+
+void CTrackerWindow::Query() {
+    std::string address = gApplication->String(kTrackerAddress);
+    httplib::Client client(address.c_str(), 80);
+    auto resp = client.Get("/api/v1/games/");
+    if (resp && resp->status == 200) {
+        json apiData = json::parse(resp->body);
+
+        while (resultsBox->childCount() > 0) {
+            resultsBox->removeChild(0);
+        }
+
+        for (int i = 0; i < apiData["games"].size(); i++) {
+            auto game = apiData["games"][i];
+            std::string players;
+            bool commas = false;
+            for (const auto &p : game["players"]) {
+                if (commas) {
+                    players += ", ";
+                }
+                players += p.get<std::string>();
+                commas = true;
+            }
+            new TrackerInfo(resultsBox, game["address"].get<std::string>(), players, i > 0);
+        }
+
+        setNeedsLayout();
+    }
 }
