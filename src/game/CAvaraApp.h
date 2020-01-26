@@ -20,6 +20,12 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <deque>
+#include <json.hpp>
+#include <thread>
+#include <mutex>
+
+using json = nlohmann::json;
+
 
 class CAvaraGame;
 class CNetManager;
@@ -67,6 +73,11 @@ public:
     CAvaraAppImpl();
     ~CAvaraAppImpl();
 
+    long nextTrackerUpdate;
+    json trackerState;
+    bool trackerUpdatePending;
+    std::thread *trackerThread;
+
     virtual std::deque<std::string>& MessageLines() override;
     virtual void idle() override;
     virtual void drawContents() override;
@@ -103,4 +114,7 @@ public:
     virtual void Set(const std::string name, json value) override { CApplication::Set(name, value); }
     virtual SDL_Window* sdlWindow() override { return CApplication::sdlWindow(); }
     virtual long Number(const std::string name) override { return CApplication::Number(name); }
+
+    void TrackerUpdate();
+    std::string TrackerPayload();
 };

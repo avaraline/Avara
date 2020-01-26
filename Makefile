@@ -20,11 +20,11 @@ ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	CPPFLAGS += -F/Library/Frameworks
-	LDFLAGS += -F/Library/Frameworks -lstdc++ -lm -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
+	LDFLAGS += -F/Library/Frameworks -lstdc++ -lm -lpthread -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
-	LDFLAGS += -lstdc++ -lm -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lSDL2_net -lglu32 -lopengl32 -lws2_32 -lcomdlg32
 	POST_PROCESS ?= ls -lh
 else
 	# Linux
@@ -118,7 +118,7 @@ $(BUILD_DIR)/%.mm.o: %.mm
 clean:
 	$(RM) -r $(BUILD_DIR)
 
-publish: 
+publish:
 	scp build/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
