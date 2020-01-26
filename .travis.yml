@@ -4,7 +4,13 @@ jobs:
   include:
   - stage: test
     dist: xenial
+    services:
+      -xvfb
     os: linux
+    script:
+      - make -j3
+      - make tests
+      - build/tests
     deploy:
       provider: script
       skip_cleanup: true
@@ -20,9 +26,10 @@ jobs:
       - wget -q "https://www.libsdl.org/release/SDL2-2.0.9.dmg"
       - hdiutil attach SDL2-2.0.9.dmg
       - sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
-    script:
+    script: 
       - make -j3 macapp SIGNING_ID=NONE
       - make tests
+      - build/tests
     deploy:
       provider: script
       skip_cleanup: true
@@ -35,12 +42,15 @@ jobs:
       - choco install msys2
     script: 
       - powershell -executionpolicy bypass -file travis-windows.ps1
+      - ps -ef
     deploy:
       provider: script
       skip_cleanup: true
       script: bash deploy.bash windows
       on:
         all_branches: true
+    after_script:
+      - taskkill -IM "gpg-agent.exe" -F
 addons:
   apt:
     packages:
@@ -52,7 +62,4 @@ addons:
     - libgles2-mesa-dev
     - libsdl2-net-dev
     - libdirectfb-dev
-script:
-  - make -j3
-  - make tests
 

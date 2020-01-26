@@ -96,9 +96,9 @@ void CBSPPart::IBSPPart(short resId) {
     float sigma = .001f;
 
     isDecal = (
-        abs(maxX - minX) < sigma ||
-        abs(maxY - minY) < sigma ||
-        abs(maxZ - minZ) < sigma
+        std::abs(maxX - minX) < sigma ||
+        std::abs(maxY - minY) < sigma ||
+        std::abs(maxZ - minZ) < sigma
     );
 
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
