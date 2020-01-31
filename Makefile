@@ -53,6 +53,8 @@ bspviewer: $(BUILD_DIR)/BSPViewer resources
 
 levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
 
+hsnd2wav: $(BUILD_DIR)/hsnd2wav resources
+
 macapp: avara
 	rm -rf $(BUILD_DIR)/Avara.app
 	$(MKDIR_P) $(BUILD_DIR)/Avara.app/Contents/{Frameworks,MacOS,Resources}
@@ -96,6 +98,11 @@ $(BUILD_DIR)/BSPViewer: $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o
 # LevelViewer
 $(BUILD_DIR)/AvaraLevelViewer: $(OBJS) $(BUILD_DIR)/src/AvaraLevelViewer.cpp.o
 	$(CXX) $(OBJS) $(BUILD_DIR)/src/AvaraLevelViewer.cpp.o -o $@ $(LDFLAGS)
+	$(POST_PROCESS) $@
+
+# hsnd2wav
+$(BUILD_DIR)/hsnd2wav: $(OBJS) $(BUILD_DIR)/src/hsnd2wav.cpp.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/hsnd2wav.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
 # c source
