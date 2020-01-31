@@ -1029,10 +1029,8 @@ T AudioFile<T>::sixteenBitIntToSample (int16_t sample)
 template <class T>
 int16_t AudioFile<T>::sampleToSixteenBitInt (T sample)
 {
-    return static_cast<int16_t> (sample);
-    // XXX: this assumed that T was floating point
-    //sample = clamp (sample, -1., 1.);
-    //return static_cast<int16_t> (sample * 32767.);
+    sample = clamp (sample, -1., 1.);
+    return static_cast<int16_t> (sample * 32767.);
 }
 
 //=============================================================

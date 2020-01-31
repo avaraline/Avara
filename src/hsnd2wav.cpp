@@ -3,6 +3,7 @@
 #import "CSoundHub.h"
 #import "AudioFile.h"
 #import "CSoundMixer.h"
+#import "Resource.h"
 
 //#include <nanogui/nanogui.h>
 #include <cstdio>
@@ -10,8 +11,12 @@
 
 int main(int argc, const char * argv[]) {
     if (argc < 3) {
-        printf("Usage: hsnd2wav [hsnd_num] [outfile]\n");
+        printf("Usage: hsnd2wav [hsnd_num] [outfile] [rsrc]\n");
         return 1;
+    }
+
+    if (argc > 3) {
+        UseResFile(argv[3]);
     }
 
     //nanogui::init();
@@ -29,12 +34,13 @@ int main(int argc, const char * argv[]) {
         int len = sp->loopEnd - sp->loopStart;
         unsigned char *p = sizeof(SampleHeader) + (unsigned char *)sp;
 
-        AudioFile<short> audioFile; // defaults to 16-bit, 44100hz
+        AudioFile<float> audioFile; // defaults to 16-bit, 44100hz
         audioFile.setBitDepth(16);
         audioFile.setSampleRate(ToFloat(sp->baseRate) * 22254.54545);
         audioFile.setAudioBufferSize(1, len); // 1 channel, num samples
         for (int i = 0; i < len; i++) {
-            audioFile.samples[0][i] = (p[i+sp->loopStart] * 32767) / (0xFF >> (8-BITSPERSAMPLE));
+            audioFile.samples[0][i] = p[i+sp->loopStart] / 255.0;
+            //audioFile.samples[0][i] = (p[i+sp->loopStart] * 32767) / (0xFF >> (8-BITSPERSAMPLE));
         }
         audioFile.save(argv[2]);
     }
