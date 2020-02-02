@@ -23,10 +23,11 @@
 #include <string>
 #include <vector>
 
-using namespace std;
 
 #include "CBaseObject.h"
 #include "Types.h"
+
+using namespace std;
 
 #define DICTIONARYCLUMPSIZE (16 * sizeof(DictEntry))
 #define WORDCLUMPSIZE 256
