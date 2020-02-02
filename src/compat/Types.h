@@ -100,6 +100,7 @@ typedef struct GLData {
 } GLData;
 
 #ifdef _WIN32
+#define _HAS_STD_BYTE 0
 #include <winsock2.h>
 #include <Windows.h>
 #else
