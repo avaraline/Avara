@@ -217,7 +217,7 @@ struct simple_walker: pugi::xml_tree_walker {
 
 void SVGParser::Parse() {
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file("test_pict2svgupdates.svg");
+    pugi::xml_parse_result result = doc.load_file("test.svg");
     //pugi::xml_parse_result result = doc.load_file("levels/classic-mix-up_svg/1004_Grim_Grimoire.svg");
     SDL_Log("SVG load result: %s", result.description());
 

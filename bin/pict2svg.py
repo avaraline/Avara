@@ -354,7 +354,7 @@ class SVGContext:
     def close(self, filename):
         tree = etree.ElementTree(self.root)
         # tree.write(filename, encoding="UTF-8")
-        xml_str = ElementTree.tostring(tree, encoding="UTF-8")
+        xml_str = etree.tostring(tree, encoding="unicode")
         return xml_str
 
 
