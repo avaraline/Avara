@@ -20,6 +20,7 @@
 using namespace nanogui;
 
 #ifdef _WIN32
+#include <winsock2.h>
 #include <Windows.h>
 
 typedef enum PROCESS_DPI_AWARENESS {

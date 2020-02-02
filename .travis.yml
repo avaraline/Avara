@@ -3,7 +3,7 @@ compiler: clang
 jobs:
   include:
   - stage: test
-    dist: xenial
+    dist: bionic
     services:
       -xvfb
     os: linux
@@ -19,6 +19,7 @@ jobs:
         all_branches: true
   - stage: test
     os: osx
+    osx_image: xcode11.3
     before_install:
       - wget -q "https://www.libsdl.org/projects/SDL_net/release/SDL2_net-2.0.1.dmg"
       - hdiutil attach SDL2_net-2.0.1.dmg
