@@ -52,16 +52,10 @@ struct simple_walker: pugi::xml_tree_walker {
             //SDL_Log("path style: %s", style.c_str());
             //SDL_Log("path d: %s", d.c_str());
             //SDL_Log("path type: %s", type.c_str());
-            if (type.compare("arc") == 0) { 
-                handle_arc(node);
-            }
+            if (type.compare("arc") == 0) handle_arc(node);
         }
-        else if(name.compare("ellipse") == 0) {
-            handle_ellipse(node);
-        }
-        else if(name.compare("rect") == 0) {
-            handle_rect(node);
-        }
+        else if(name.compare("ellipse") == 0) handle_ellipse(node);
+        else if(name.compare("rect") == 0) handle_rect(node);
         else if (name.compare("text") == 0) {
             std::stringstream buffa;
             for (pugi::xml_node tspan: node.children("tspan")) {
@@ -71,23 +65,38 @@ struct simple_walker: pugi::xml_tree_walker {
             callbacks->textProc((unsigned char*)buffa.str().c_str());
         }
         else {
-            //SDL_Log("Name: %s", name.c_str());
+            //SDL_Log("Unhandleable element: %s", name.c_str());
         }
     }
 
     int safe_int(string value) {
         try { return stoi(value); }
-        catch (std::exception e) { return 0; }
+        catch (std::exception e) { 
+            if (value.length() > 0) {
+                SDL_Log("stoI failed on %s", value.c_str());
+            }
+            return 0; 
+        }
     }
 
     long safe_long(string value) {
         try { return stol(value); }
-        catch (std::exception e) { return 0; }
+        catch (std::exception e) { 
+            if (value.length() > 0) {
+                SDL_Log("stoL failed on %s", value.c_str());
+            }
+            return 0; 
+        }
     }
 
     float safe_float(string value) {
         try { return stof(value); }
-        catch (std::exception e) { return 0; }
+        catch (std::exception e) {
+            if (value.length() > 0) {
+                SDL_Log("stoF failed on %s", value.c_str());
+            }
+            return 0; 
+        }    
     }
 
     void handle_arc(pugi::xml_node& node) {
@@ -130,16 +139,16 @@ struct simple_walker: pugi::xml_tree_walker {
     }
 
     void handle_rect(pugi::xml_node& node) {
-
+        float x, y, ry, width, height;
         string style = node.attribute("style").value();
-        int x = safe_int(node.attribute("x").value());
-        int y = safe_int(node.attribute("y").value());
-        int ry = safe_int(node.attribute("ry").value());
-        int width = safe_int(node.attribute("width").value());
-        int height = safe_int(node.attribute("height").value());
+        x = safe_float(node.attribute("x").value());
+        y = safe_float(node.attribute("y").value());
+        ry = safe_float(node.attribute("ry").value());
+        width = safe_float(node.attribute("width").value());
+        height = safe_float(node.attribute("height").value());
         //SDL_Log("rect style: %s", style.c_str());
         handle_style(style);
-        //SDL_Log("rect info: %s %s %s %s %s", x.c_str(), y.c_str(), width.c_str(), height.c_str(), ry.c_str());
+        //SDL_Log("rect info: %d %d %d %d %f", (short)x, (short)y, (short)width, (short)height, ry);
         //SDL_Log("");
         struct Rect r = {
             (short)y,
