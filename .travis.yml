@@ -5,7 +5,7 @@ jobs:
   - stage: test
     dist: xenial
     services:
-      -xvfb
+      - xvfb
     os: linux
     script:
       - make -j3
@@ -13,7 +13,7 @@ jobs:
       - build/tests
     deploy:
       provider: script
-      skip_cleanup: true
+      edge: true
       script: bash deploy.bash linux    
       on:
         all_branches: true
@@ -32,7 +32,7 @@ jobs:
       - build/tests
     deploy:
       provider: script
-      skip_cleanup: true
+      edge: true
       script: bash deploy.bash mac
       on:
         all_branches: true
@@ -45,7 +45,7 @@ jobs:
       - ps -ef
     deploy:
       provider: script
-      skip_cleanup: true
+      edge: true
       script: bash deploy.bash windows
       on:
         all_branches: true
