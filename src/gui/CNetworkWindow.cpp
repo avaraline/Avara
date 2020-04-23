@@ -58,6 +58,7 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
     nanogui::CheckBox *registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
         this->trackerBox->setEditable(checked);
         this->trackerBox->setEnabled(checked);
+        app->Set(kTrackerRegister, checked);
     });
     bool shouldRegister = app->Number(kTrackerRegister) != 0;
     registerBox->setChecked(shouldRegister);
