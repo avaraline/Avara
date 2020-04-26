@@ -19,7 +19,7 @@
 #include <iostream>
 #include <algorithm>
 
-#include <SDL2/SDL_syswm.h>
+#include <SDL_syswm.h>
 
 #if defined(_WIN32)
     #include <windows.h>

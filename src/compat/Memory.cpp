@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <cstring>
 #include <map>
+#include <algorithm>
+
 
 std::map<Handle, Size> handleSizeMap;
 
@@ -73,12 +75,14 @@ Size GetHandleSize(Handle hand) {
     return handleSizeMap[hand];
 }
 
+#undef min
+
 void SetHandleSize(Handle hand, Size newSize) {
     Size oldSize = handleSizeMap[hand];
     if (newSize > oldSize) {
         Ptr newData = NewPtr(newSize);
         // Wonder if this needs to zero out first?
-        BlockMoveData(*hand, newData, std::min(oldSize, newSize));
+        BlockMoveData(*hand, newData, std::min<Size>(oldSize, newSize));
         std::free(*hand);
         *hand = newData;
     }

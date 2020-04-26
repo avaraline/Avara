@@ -3,7 +3,7 @@
 #include "CDataBuffer.h"
 #include "Memory.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 PICTParser::PICTParser() {
     context.pnLoc.v = 0;

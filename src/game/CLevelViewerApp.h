@@ -18,7 +18,7 @@
 #include "CTrackerWindow.h"
 #include "CViewParameters.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <string>
 #include <deque>
 

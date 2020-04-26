@@ -2,7 +2,7 @@
 
 #include "Types.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <nanogui/nanogui.h>
 #include <string>
 #include <vector>

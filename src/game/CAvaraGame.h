@@ -15,7 +15,7 @@
 #include "CDirectObject.h"
 #include "Types.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #define IDENTTABLESIZE 512
 

@@ -47,7 +47,7 @@
 #include "CYonBox.h"
 #include "CYonSphere.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #define LOOSESTRLIST 1024
 

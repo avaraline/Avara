@@ -15,7 +15,7 @@
 //#include "LevelScoreRecord.h"
 #include "PlayerConfig.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <string>
 #include <vector>
 

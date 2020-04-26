@@ -26,7 +26,7 @@
 #include "Preferences.h"
 #include "System.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <utf8.h>
 
 void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {

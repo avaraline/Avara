@@ -40,6 +40,7 @@
 std::mutex trackerLock;
 
 void TrackerPinger(CAvaraAppImpl *app) {
+    //return;
     while (true) {
         std::string payload = app->TrackerPayload();
         if (payload.size() > 0) {

@@ -12,9 +12,10 @@
 #include "KeyFuncs.h"
 #include "PlayerConfig.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <map>
 #include <deque>
+#include <string>
 
 enum {
     kLNotConnected,

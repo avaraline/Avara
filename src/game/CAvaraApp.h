@@ -17,7 +17,7 @@
 #include "CRosterWindow.h"
 #include "CTrackerWindow.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <string>
 #include <deque>
 #include <json.hpp>
