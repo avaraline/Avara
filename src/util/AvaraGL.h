@@ -2,7 +2,7 @@
 
 #include "nanovg.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include "FastMat.h"

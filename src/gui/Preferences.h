@@ -1,7 +1,7 @@
 #pragma once
 
 #include <json.hpp>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <fstream>
 #include <string>
 

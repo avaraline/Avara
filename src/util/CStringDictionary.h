@@ -23,8 +23,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 #include "CBaseObject.h"
 #include "Types.h"
 
@@ -76,6 +74,6 @@ public:
 
 private:
     /*	Variables:			*/
-    vector<string> wordList;
-    map<string, size_t> index;
+    std::vector<std::string> wordList;
+    std::map<std::string, size_t> index;
 };

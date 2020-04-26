@@ -14,7 +14,6 @@
 #include "AvaraGL.h"
 
 #include <iostream>
-using namespace std;
 
 class TestSoundHub : public CSoundHubImpl {
 public:

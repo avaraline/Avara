@@ -5,7 +5,7 @@
 #include "Preferences.h"
 #include "Types.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <fstream>
 #include <nanogui/nanogui.h>
 #include <string>

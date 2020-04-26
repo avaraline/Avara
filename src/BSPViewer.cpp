@@ -13,7 +13,7 @@
 #include "CBSPWorld.h"
 #include "CViewParameters.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 // These are defined all over the place right now...
 #define kMarkerColor 0x00fefefe

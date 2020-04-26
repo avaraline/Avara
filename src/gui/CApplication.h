@@ -3,7 +3,7 @@
 #include "CWindow.h"
 #include "Types.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <json.hpp>
 #include <nanogui/nanogui.h>
 #include <string>

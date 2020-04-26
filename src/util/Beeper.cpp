@@ -1,6 +1,6 @@
 #include "Beeper.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <stdint.h>
 #include <stdio.h>
 

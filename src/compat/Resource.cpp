@@ -2,7 +2,7 @@
 
 #include "Memory.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <stdint.h>
 #include <string>
 
@@ -56,7 +56,7 @@ Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string na
                 uint32_t rsrcNameOffset = mapOffset + nameListOffset + nameOffset;
                 SDL_RWseek(file, rsrcNameOffset, 0);
                 uint8_t nameLen = SDL_ReadU8(file);
-                char cName[nameLen];
+                char cName[4096];
                 SDL_RWread(file, cName, nameLen, 1);
                 std::string rsrcName(cName, nameLen);
                 nameMatch = rsrcName == name;
