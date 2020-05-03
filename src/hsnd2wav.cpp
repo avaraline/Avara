@@ -4,12 +4,13 @@
 #import "AudioFile.h"
 #import "CSoundMixer.h"
 #import "Resource.h"
+#include "SDL2/SDL.h"
 
 //#include <nanogui/nanogui.h>
 #include <cstdio>
 
 
-int main(int argc, const char * argv[]) {
+int main(int argc, char *argv[]) {
     if (argc < 3) {
         printf("Usage: hsnd2wav [hsnd_num] [outfile] [rsrc]\n");
         return 1;
@@ -30,8 +31,13 @@ int main(int argc, const char * argv[]) {
 
     if (sample) {
         SampleHeaderPtr sp = *sample;
-
+        // use loop length if it exists
         int len = sp->loopEnd - sp->loopStart;
+        // else use the total sample length
+        if (len < 1) {
+            len = sp->len;
+        }
+        SDL_Log("Length: %i", len);
         unsigned char *p = sizeof(SampleHeader) + (unsigned char *)sp;
 
         AudioFile<float> audioFile; // defaults to 16-bit, 44100hz

@@ -145,11 +145,12 @@ SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
             } else {
                 base = 1.0;
             }
-            // SDL_Log("HSNDRecord versNum=%d, loopStart=%d, loopEnd=%d, loopCount=%d, dataOffset=%d, baseRate=%f\n",
-            // ir->versNum, ir->loopStart, ir->loopEnd, ir->loopCount, ir->dataOffset, base);
 
             soundData = ir->dataOffset + *compressedData;
             len = itsCompressor->GetUncompressedLen(soundData);
+
+            //SDL_Log("HSNDRecord versNum=%d, loopStart=%d, loopEnd=%d, loopCount=%d, dataOffset=%d, baseRate=%f, len=%i\n",
+            //ir->versNum, ir->loopStart, ir->loopEnd, ir->loopCount, ir->dataOffset, base, len);
 
             aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + len);
             if (!aSample) {
