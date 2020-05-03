@@ -41,13 +41,15 @@ std::mutex trackerLock;
 
 void TrackerPinger(CAvaraAppImpl *app) {
     while (true) {
-        std::string payload = app->TrackerPayload();
-        if (payload.size() > 0) {
-            // Probably not thread-safe.
-            std::string address = app->String(kTrackerRegisterAddress);
-            SDL_Log("Pinging %s", address.c_str());
-            httplib::Client client(address.c_str(), 80);
-            client.Post("/api/v1/games/", payload, "application/json");
+        if(app->Number(kTrackerRegister) == 1) {
+            std::string payload = app->TrackerPayload();
+            if (payload.size() > 0) {
+                // Probably not thread-safe.
+               std::string address = app->String(kTrackerRegisterAddress);
+                SDL_Log("Pinging %s", address.c_str());
+                httplib::Client client(address.c_str(), 80);
+                client.Post("/api/v1/games/", payload, "application/json");
+            }
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
