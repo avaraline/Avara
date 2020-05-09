@@ -18,6 +18,8 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "blockparty",  
         "classic-mix-up",
         "fosfori", 
+        "gzr • Geriatric Ward",
+        "gzr • Liver Spots",
         "hunting-grounds", 
         "net-99",
         "not-aa",

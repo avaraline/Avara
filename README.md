@@ -12,7 +12,7 @@ Avara is a cult-classic three-dimensional networked action FPS where you play as
 
 ## Build Requirements
 ### All platforms
-[SDL2](https://www.libsdl.org/download-2.0.php) and [SDL_net](https://www.libsdl.org/projects/SDL_net/), POSIX-like environment, clang
+[SDL2](https://www.libsdl.org/download-2.0.php) and [SDL2_net](https://www.libsdl.org/projects/SDL_net/), POSIX-like environment, clang
 
 ### Windows 10
 Building on Windows 10 requires the [MSYS2](https://www.msys2.org/) environment. After installing MSYS2, you can get the dependencies for building by running the following in an MSYS2 Mingw64 terminal: 
@@ -25,7 +25,7 @@ On Debian based distributions of Linux, you can install the needed dependencies 
 `apt-get -yq install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libsdl2-net-dev`
 
 ### Apple macOS
-Avara can be built using [Xcode](https://developer.apple.com/xcode/features/) development tools or [Homebrew](https://brew.sh/). You must install SDL and ensure the libraries are available in `/Library/Frameworks`.
+Avara can be built using [Xcode](https://developer.apple.com/xcode/features/) development tools or [Homebrew](https://brew.sh/). You must install SDL and ensure the libraries are available in either `/Library/Frameworks` or `~/Library/Frameworks`.
 
 ## Build Instructions
 
