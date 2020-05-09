@@ -19,8 +19,9 @@ LDFLAGS := ${LDFLAGS}
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
-	CPPFLAGS += -F/Library/Frameworks
-	LDFLAGS += -F/Library/Frameworks -lstdc++ -lm -lpthread -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
+	FRAMEWORKS = -F/Library/Frameworks -F$(HOME)/Library/Frameworks
+	CPPFLAGS += $(FRAMEWORKS)
+	LDFLAGS += $(FRAMEWORKS) -lstdc++ -lm -lpthread -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
