@@ -19,9 +19,13 @@ LDFLAGS := ${LDFLAGS}
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
-	FRAMEWORKS = -F/Library/Frameworks -F$(HOME)/Library/Frameworks
-	CPPFLAGS += $(FRAMEWORKS)
-	LDFLAGS += $(FRAMEWORKS) -lstdc++ -lm -lpthread -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
+ifneq ("$wildcard($(HOME)/Library/Frameworks/SDL2.frameworks)", "")
+	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
+else
+	FRAMEWORK_PATH = /Library/Frameworks
+endif
+	CPPFLAGS += -F$(FRAMEWORK_PATH)
+	LDFLAGS += -F$(FRAMEWORK_PATH) -lstdc++ -lm -lpthread -framework SDL2 -framework SDL2_net -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
@@ -63,7 +67,7 @@ macapp: avara
 	cp $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.app/Contents/MacOS
 	cp -r $(BUILD_DIR)/{bsps,levels,rsrc,shaders} $(BUILD_DIR)/Avara.app/Contents/Resources
 	cp platform/macos/Avara.icns $(BUILD_DIR)/Avara.app/Contents/Resources
-	cp -a /Library/Frameworks/{SDL2,SDL2_net}.framework $(BUILD_DIR)/Avara.app/Contents/Frameworks
+	cp -a $(FRAMEWORK_PATH)/{SDL2,SDL2_net}.framework $(BUILD_DIR)/Avara.app/Contents/Frameworks
 	install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
 	install_name_tool -change @rpath/SDL2_net.framework/Versions/A/SDL2_net @executable_path/../Frameworks/SDL2_net.framework/Versions/A/SDL2_net $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
 	if [ $(SIGNING_ID) = "NONE" ]; then echo "Not signing app bundle."; else codesign -vvv --no-strict --deep --force -s $(SIGNING_ID) $(BUILD_DIR)/Avara.app; fi
