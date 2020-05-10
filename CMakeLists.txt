@@ -50,6 +50,8 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "vendor/nanovg/nanovg.c"
 )
 
+add_library(core OBJECT ${CORE_SOURCE})
+
 set(CORE_INCLUDES
     ${SDL2_INCLUDE_DIRS} 
     ${SDL2main_INCLUDE_DIRS} 
@@ -83,29 +85,36 @@ set(AVARA_COMPILE_OPTIONS -lstdc++ -lm -lpthread -ldl)
 
 add_executable(Avara 
     src/Avara.cpp
-    ${CORE_SOURCE}
+    $<TARGET_OBJECTS:core>
 )
 
 add_executable(tests
     src/tests.cpp
-    ${CORE_SOURCE}
+    $<TARGET_OBJECTS:core>
     vendor/gtest/src/gtest-all.cc
+)
+
+add_executable(hsnd2wav 
+    src/hsnd2wav.cpp
+    $<TARGET_OBJECTS:core>
 )
 
 target_compile_options(Avara PRIVATE ${AVARA_COMPILE_OPTIONS})
 target_compile_options(tests PRIVATE ${AVARA_COMPILE_OPTIONS})
+target_compile_options(hsnd2wav PRIVATE ${AVARA_COMPILE_OPTIONS})
 
-
-# Define executable target
+target_include_directories(core PUBLIC ${CORE_INCLUDES})
 target_include_directories(Avara PUBLIC ${CORE_INCLUDES})
 target_include_directories(tests PUBLIC 
     ${CORE_INCLUDES}
     vendor/gtest
     vendor/gtest/include
 )
+target_include_directories(hsnd2wav PUBLIC ${CORE_INCLUDES})
 
 target_link_libraries(Avara SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
 target_link_libraries(tests SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
+target_link_libraries(hsnd2wav SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
 
 
 if(WIN32)
