@@ -1058,7 +1058,7 @@ void RunThis(unsigned char *script) {
         ParseStatement(&statement);
 
         if (parserVar.lookahead.kind == kParseError) {
-            DEBUGPAR(printf(" ** Parse Error **\n");)
+            DEBUGPAR(printf(" ** Parse Error ** on input: %s\n", parserVar.input);)
         } else {
             if (statement.kind == kAssignment) {
                 SetHandleSize(parserVar.output, parserVar.logicalSize);
@@ -1071,7 +1071,13 @@ void RunThis(unsigned char *script) {
         DisposHandle(parserVar.output);
         SetupCompiler(parserVar.input);
 
-    } while (!(parserVar.lookahead.kind == kLexEof || parserVar.lookahead.kind == kParseError));
+        // On parse error, skip ahead a line to see if we can read past the garbage
+        if (parserVar.lookahead.kind == kParseError) {
+          DEBUGPAR(printf(" ** trying to skip past parse error **\n");)
+          SkipOneLineComment();
+          LexRead(&parserVar.lookahead);
+        }
+    } while (!(parserVar.lookahead.kind == kLexEof));
 
     DisposeHandle(parserVar.output);
 }
