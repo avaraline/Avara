@@ -26,7 +26,7 @@ find_package(SDL2 REQUIRED COMPONENTS main)
 find_package(SDL2_net REQUIRED)
 
 if(NOT WIN32)
-    find_package(OpenGL REQUIRED)
+   find_package(OpenGL REQUIRED)
 endif()
 
 if(WIN32)
@@ -34,38 +34,23 @@ if(WIN32)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:mainCRTStartup")
 endif()
 
-file(GLOB_RECURSE AUDIO RELATIVE ${CMAKE_SOURCE_DIR} "src/audio/*.cpp")
-file(GLOB_RECURSE BASE RELATIVE ${CMAKE_SOURCE_DIR} "src/base/*.cpp")
-file(GLOB_RECURSE BSP RELATIVE ${CMAKE_SOURCE_DIR} "src/bsp/*.cpp")
-file(GLOB_RECURSE COMPAT RELATIVE ${CMAKE_SOURCE_DIR} "src/compat/*.cpp")
-file(GLOB_RECURSE GAME RELATIVE ${CMAKE_SOURCE_DIR} "src/game/*.cpp")
-file(GLOB_RECURSE GUI RELATIVE ${CMAKE_SOURCE_DIR} "src/gui/*.cpp")
-file(GLOB_RECURSE LEVEL RELATIVE ${CMAKE_SOURCE_DIR} "src/level/*.cpp")
-file(GLOB_RECURSE NET RELATIVE ${CMAKE_SOURCE_DIR} "src/net/*.cpp")
-file(GLOB_RECURSE UTIL RELATIVE ${CMAKE_SOURCE_DIR} "src/util/*.cpp")
-file(GLOB_RECURSE NANOGUI RELATIVE ${CMAKE_SOURCE_DIR} "vendor/nanogui/*.cpp")
-
-add_executable(Avara 
-src/Avara.cpp
-${AUDIO}
-${BASE}
-${BSP}
-${COMPAT}
-${GAME}
-${GUI}
-${LEVEL}
-${NET}
-${UTIL}
-vendor/glad/glad.c
-vendor/glm/detail/glm.cpp
-${NANOGUI}
-vendor/nanovg/nanovg.c
+file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} 
+    "src/audio/*.cpp" 
+    "src/base/*.cpp" 
+    "src/bsp/*.cpp" 
+    "src/compat/*.cpp"
+    "src/game/*.cpp"
+    "src/level/*.cpp"
+    "src/net/*.cpp"
+    "src/util/*.cpp"
+    "src/gui/*.cpp" 
+    "vendor/nanogui/*.cpp"
+    "vendor/glad/glad.c"
+    "vendor/glm/detail/glm.cpp"
+    "vendor/nanovg/nanovg.c"
 )
 
-target_compile_options(Avara PRIVATE -lstdc++ -lm -lpthread -ldl)
-
-# Define executable target
-target_include_directories(Avara PUBLIC
+set(CORE_INCLUDES
     ${SDL2_INCLUDE_DIRS} 
     ${SDL2main_INCLUDE_DIRS} 
     ${OPENGL_INCLUDE_DIR} 
@@ -89,13 +74,39 @@ target_include_directories(Avara PUBLIC
     vendor/glm/gtc
     vendor/glm/gtx
     vednor/glm/simd
-    vendor/gtest
-    vendor/gtest/include
     vendor/nanogui
     vendor/nanovg
     vendor/utf8
 )
+
+set(AVARA_COMPILE_OPTIONS -lstdc++ -lm -lpthread -ldl)
+
+add_executable(Avara 
+    src/Avara.cpp
+    ${CORE_SOURCE}
+)
+
+add_executable(tests
+    src/tests.cpp
+    ${CORE_SOURCE}
+    vendor/gtest/src/gtest-all.cc
+)
+
+target_compile_options(Avara PRIVATE ${AVARA_COMPILE_OPTIONS})
+target_compile_options(tests PRIVATE ${AVARA_COMPILE_OPTIONS})
+
+
+# Define executable target
+target_include_directories(Avara PUBLIC ${CORE_INCLUDES})
+target_include_directories(tests PUBLIC 
+    ${CORE_INCLUDES}
+    vendor/gtest
+    vendor/gtest/include
+)
+
 target_link_libraries(Avara SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
+target_link_libraries(tests SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
+
 
 if(WIN32)
     target_link_libraries(Avara wsock32 ws2_32)
