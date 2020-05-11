@@ -19,7 +19,7 @@ LDFLAGS := ${LDFLAGS}
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
-ifneq ("$wildcard($(HOME)/Library/Frameworks/SDL2.frameworks)", "")
+ifneq ("$(wildcard $(HOME)/Library/Frameworks/SDL2.framework)", "")
 	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
 else
 	FRAMEWORK_PATH = /Library/Frameworks
