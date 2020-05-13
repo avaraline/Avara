@@ -20,6 +20,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "fosfori", 
         "gzr - Geriatric Ward",
         "gzr - Liver Spots",
+        "gzr - Balledness!",
         "hunting-grounds", 
         "net-99",
         "not-aa",
