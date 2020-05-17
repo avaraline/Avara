@@ -169,6 +169,28 @@ public:
         game->AddActor(hector);
         game->GameStart();
     }
+
+    void Settle(int steps, int ticksPerStep) {
+        for (int i = 0; i < steps; i++) {
+            game->nextScheduledFrame = 0;
+            game->itsNet->activePlayersDistribution = 1;
+            for (int k = 0; k < ticksPerStep; k++) {
+                game->GameTick();
+            }
+        }
+    }
+
+    void KeyDown(int key) {
+        hector->itsManager->GetFunctions()->down = (1 << key);
+    }
+
+    void KeyHeld(int key) {
+        hector->itsManager->GetFunctions()->held = (1 << key);
+    }
+
+    void KeyUp(int key) {
+        hector->itsManager->GetFunctions()->up = (1 << key);
+    }
 };
 
 vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
@@ -186,19 +208,37 @@ vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int fram
     return altitudes;
 }
 
-vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+vector<Fixed> JumpHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    vector<VectorStruct> location;
-    for (int i = 0; i < settleSteps; i++) {
+    vector<Fixed> crouches;
+    scenario.Settle(settleSteps, ticksPerStep);
+    scenario.game->nextScheduledFrame = 0;
+    scenario.game->itsNet->activePlayersDistribution = 1;
+    scenario.KeyDown(kfuJump);
+    scenario.game->GameTick();
+    scenario.KeyHeld(kfuJump);
+
+    for (int i = 0; i < steps; i++) {
         scenario.game->nextScheduledFrame = 0;
         scenario.game->itsNet->activePlayersDistribution = 1;
+        crouches.push_back(scenario.hector->crouch);
         for (int k = 0; k < ticksPerStep; k++) {
+            scenario.KeyHeld(kfuJump);
             scenario.game->GameTick();
         }
     }
+    crouches.push_back(scenario.hector->crouch);
+
+    return crouches;
+}
+
+vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
+    vector<VectorStruct> location;
+    scenario.Settle(settleSteps, ticksPerStep);
     scenario.game->nextScheduledFrame = 0;
     scenario.game->itsNet->activePlayersDistribution = 1;
-    scenario.hector->itsManager->GetFunctions()->held = (1 << kfuForward);
+    scenario.KeyHeld(kfuForward);
     scenario.game->GameTick();
 
     for (int i = 0; i < steps; i++) {
@@ -206,7 +246,7 @@ vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, in
         scenario.game->itsNet->activePlayersDistribution = 1;
         location.push_back(*(VectorStruct*)scenario.hector->location);
         for (int k = 0; k < ticksPerStep; k++) {
-            scenario.hector->itsManager->GetFunctions()->held = (1 << kfuForward);
+            scenario.KeyHeld(kfuForward);
             scenario.game->GameTick();
         }
     }
@@ -329,6 +369,14 @@ TEST(HECTOR, WalkForwardSpeed) {
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.75) << "not close enough after " << i << " ticks.";
     }
+}
+
+TEST(HECTOR, CrouchSpeed) {
+    vector<Fixed> at64ms = JumpHector(20, 50, 1, 64);
+    vector<Fixed> at32ms = JumpHector(20, 50, 1, 32);
+    vector<Fixed> at16ms = JumpHector(20, 50, 1, 16);
+
+
 }
 
 TEST(GRENADE, Trajectory) {
