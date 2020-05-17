@@ -193,9 +193,9 @@ public:
     }
 };
 
-vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
+std::vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, fromHeight, 0);
-    vector<Fixed> altitudes;
+    std::vector<Fixed> altitudes;
     for (int i = 0; i < steps; i++) {
         scenario.game->nextScheduledFrame = 0;
         scenario.game->itsNet->activePlayersDistribution = 1;
@@ -207,7 +207,6 @@ vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int fram
     altitudes.push_back(scenario.hector->location[1]);
     return altitudes;
 }
-
 vector<Fixed> JumpHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<Fixed> crouches;
@@ -255,9 +254,9 @@ vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, in
     return location;
 }
 
-vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+std::vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    vector<VectorStruct> trajectory;
+    std::vector<VectorStruct> trajectory;
     for (int i = 0; i < settleSteps; i++) {
         scenario.game->nextScheduledFrame = 0;
         scenario.game->itsNet->activePlayersDistribution = 1;
@@ -300,9 +299,9 @@ vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, i
     return trajectory;
 }
 
-vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
+std::vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    vector<Fixed> headings;
+    std::vector<Fixed> headings;
     for (int i = 0; i < steps; i++) {
         scenario.game->nextScheduledFrame = 0;
         scenario.game->itsNet->activePlayersDistribution = 1;
@@ -317,9 +316,9 @@ vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
 }
 
 TEST(HECTOR, Gravity) {
-    vector<Fixed> at64ms = DropHector(50, 1, FIX(200), 64);
-    vector<Fixed> at32ms = DropHector(50, 2, FIX(200), 32);
-    vector<Fixed> at16ms = DropHector(50, 4, FIX(200), 16);
+    std::vector<Fixed> at64ms = DropHector(50, 1, FIX(200), 64);
+    std::vector<Fixed> at32ms = DropHector(50, 2, FIX(200), 32);
+    std::vector<Fixed> at16ms = DropHector(50, 4, FIX(200), 16);
     ASSERT_EQ(at64ms.back(), 6126784) << "64ms simulation fell wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "DropHector didn't do ticks right";
     for (int i = 0; i < at64ms.size(); i++) {
@@ -343,9 +342,9 @@ double VecStructDist(const VectorStruct &one, const VectorStruct &two) {
 }
 
 TEST(HECTOR, TurnSpeed) {
-    vector<Fixed> at64ms = TurnHector(50, 1, 64);
-    vector<Fixed> at32ms = TurnHector(50, 2, 32);
-    vector<Fixed> at16ms = TurnHector(50, 4, 16);
+    std::vector<Fixed> at64ms = TurnHector(50, 1, 64);
+    std::vector<Fixed> at32ms = TurnHector(50, 2, 32);
+    std::vector<Fixed> at16ms = TurnHector(50, 4, 16);
     ASSERT_EQ(at64ms.back(), -30592) << "64ms simulation turned wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "TurnHector didn't do ticks right";
     for (int i = 0; i < at64ms.size(); i++) {
@@ -357,16 +356,16 @@ TEST(HECTOR, TurnSpeed) {
 }
 
 TEST(HECTOR, WalkForwardSpeed) {
-    vector<VectorStruct> at64ms = WalkHector(20, 50, 1, 64);
-    vector<VectorStruct> at32ms = WalkHector(20, 50, 2, 32);
-    vector<VectorStruct> at16ms = WalkHector(20, 50, 4, 16);
+    std::vector<VectorStruct> at64ms = WalkHector(20, 50, 1, 64);
+    std::vector<VectorStruct> at32ms = WalkHector(20, 50, 2, 32);
+    std::vector<VectorStruct> at16ms = WalkHector(20, 50, 4, 16);
     ASSERT_EQ(at64ms.back().theVec[0], 0) << "64ms simulation walked wrong amount";
     ASSERT_LE(abs(1584235-at64ms.back().theVec[2]), 50) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
-    for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < std::min(at32ms.size(), at64ms.size()); i++) {
         ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.5) << "not close enough after " << i << " ticks.";
     }
-    for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < std::min(at16ms.size(), at64ms.size()); i++) {
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.75) << "not close enough after " << i << " ticks.";
     }
 }
@@ -380,14 +379,14 @@ TEST(HECTOR, CrouchSpeed) {
 }
 
 TEST(GRENADE, Trajectory) {
-    vector<VectorStruct> at64ms = FireGrenade(20, 50, 1, 64);
-    vector<VectorStruct> at32ms = FireGrenade(20, 50, 2, 32);
-    vector<VectorStruct> at16ms = FireGrenade(20, 50, 4, 16);
+    std::vector<VectorStruct> at64ms = FireGrenade(20, 50, 1, 64);
+    std::vector<VectorStruct> at32ms = FireGrenade(20, 50, 2, 32);
+    std::vector<VectorStruct> at16ms = FireGrenade(20, 50, 4, 16);
     ASSERT_EQ(at64ms.back().theVec[1], 59420) << "64ms simulation is wrong";
-    for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < std::min(at32ms.size(), at64ms.size()); i++) {
         ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.7) << "not close enough after " << i << " ticks.";
     }
-    for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
+    for (int i = 0; i < std::min(at16ms.size(), at64ms.size()); i++) {
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 1) << "not close enough after " << i << " ticks.";
     }
 }
