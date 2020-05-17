@@ -87,6 +87,7 @@ Handle _GetResource(OSType theType, short theID, std::string theName) {
 
     // If there is a "current" resource file, look there first.
     if (currentResource.size() > 0) {
+        //SDL_Log("Loading %i : %s from %s", theID, theName.c_str(), currentResource.c_str());
         if ((file = SDL_RWFromFile(currentResource.c_str(), "rb"))) {
             data = FindResource(file, theType, theID, theName);
             SDL_RWclose(file);
@@ -95,6 +96,7 @@ Handle _GetResource(OSType theType, short theID, std::string theName) {
 
     // If there is no current resource file, or the resource wasn't found there, look in the default file.
     if (data == NULL) {
+        //SDL_Log("Loading %i : %s from Avara resource", theID, theName.c_str());
         if ((file = SDL_RWFromFile(defaultResource.c_str(), "rb"))) {
             data = FindResource(file, theType, theID, theName);
             SDL_RWclose(file);

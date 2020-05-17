@@ -13,6 +13,7 @@
 #include "CAvaraGame.h"
 #include "CBSPPart.h"
 #include "FastMat.h"
+#include "SDL2/SDL.h"
 
 #include <nanogui/nanogui.h>
 #include <string.h>
