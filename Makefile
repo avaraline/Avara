@@ -45,9 +45,9 @@ endif
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-# This is mine. "make macapp SIGNING_ID=yourid" if you want to use your own.
+# Use the command "make macapp SIGNING_ID=yourid" if you want to use your signing id.
 # Alternatively set this to "NONE" for no code signing.
-SIGNING_ID := Y56DGU8P8X
+SIGNING_ID := NONE
 
 
 avara: $(BUILD_DIR)/Avara resources
