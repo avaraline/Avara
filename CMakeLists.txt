@@ -30,7 +30,7 @@ if(NOT WIN32)
 endif()
 
 if(WIN32)
-    list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 opengl32 glu32 wsock32 ws2_32 comlg32)
+    list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 opengl32 glu32 wsock32 ws2_32)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:mainCRTStartup")
 endif()
 
@@ -55,6 +55,7 @@ add_library(core OBJECT ${CORE_SOURCE})
 set(CORE_INCLUDES
     ${SDL2_INCLUDE_DIRS} 
     ${SDL2main_INCLUDE_DIRS} 
+    ${SDL2_NET_INCLUDE_DIR}
     ${OPENGL_INCLUDE_DIR} 
     ${CMAKE_BINARY_DIR}
     src
@@ -112,9 +113,14 @@ target_include_directories(tests PUBLIC
 )
 target_include_directories(hsnd2wav PUBLIC ${CORE_INCLUDES})
 
-target_link_libraries(Avara SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
-target_link_libraries(tests SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
-target_link_libraries(hsnd2wav SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
+set(AVARA_LIBS SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
+if(WIN32)
+set(AVARA_LIBS SDL2::Main SDL2::Net ${OPENGL_LIBRARIES})
+endif()
+
+target_link_libraries(Avara ${AVARA_LIBS})
+target_link_libraries(tests ${AVARA_LIBS} ${EXTRA_LIBS})
+target_link_libraries(hsnd2wav ${AVARA_LIBS} ${EXTRA_LIBS})
 
 
 if(WIN32)

@@ -1,10 +1,10 @@
-#import "SoundSystemDefines.h"
-#import "FastMat.h"
-#import "CSoundHub.h"
-#import "AudioFile.h"
-#import "CSoundMixer.h"
-#import "Resource.h"
-#include "SDL2/SDL.h"
+#include "SoundSystemDefines.h"
+#include "FastMat.h"
+#include "CSoundHub.h"
+#include "AudioFile.h"
+#include "CSoundMixer.h"
+#include "Resource.h"
+#include "SDL.h"
 
 //#include <nanogui/nanogui.h>
 #include <cstdio>

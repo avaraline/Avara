@@ -636,11 +636,14 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
         }
 
         if (TESTFUNC(kfuJump, ft->down)) {
-            crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
+            //crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
+            crouch += FDiv((stance - crouch - MINHEADHEIGHT), ToFixed(8 * itsGame->FrameTimeScale()));
         } else if (TESTFUNC(kfuJump, ft->held)) {
-            crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
+            //crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
+            crouch += FDiv((stance - crouch - MINHEADHEIGHT), ToFixed(4 * itsGame->FrameTimeScale()));
         } else {
-            crouch >>= 1;
+            //crouch >>= 1;
+            crouch = crouch / (2 * itsGame->FrameTimeScale());
         }
 
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
