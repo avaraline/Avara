@@ -1053,8 +1053,8 @@ T AudioFile<T>::singleByteToSample (uint8_t sample)
 template <class T>
 T AudioFile<T>::clamp (T value, T minValue, T maxValue)
 {
-    value = std::min (value, maxValue);
-    value = std::max (value, minValue);
+    value = std::min<T> (value, maxValue);
+    value = std::max<T> (value, minValue);
     return value;
 }
 
