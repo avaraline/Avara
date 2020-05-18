@@ -118,7 +118,7 @@ public:
     virtual OSErr LoadLevel(std::string set, OSType theLevel) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
-    virtual json Get(const std::string name) {}
+    virtual json Get(const std::string name) { return 0; }
     virtual void Set(const std::string name, const std::string value) {}
     virtual void Set(const std::string name, long value) {}
     virtual void Set(const std::string name, json value) {}
@@ -208,9 +208,9 @@ std::vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int
     return altitudes;
 }
 
-vector<Fixed> JumpHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+std::vector<Fixed> CrouchHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    vector<Fixed> crouches;
+    std::vector<Fixed> crouches;
     scenario.Settle(settleSteps, ticksPerStep);
     scenario.game->nextScheduledFrame = 0;
     scenario.game->itsNet->activePlayersDistribution = 1;
@@ -232,9 +232,9 @@ vector<Fixed> JumpHector(int settleSteps, int steps, int ticksPerStep, int frame
     return crouches;
 }
 
-vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+std::vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    vector<VectorStruct> location;
+    std::vector<VectorStruct> location;
     scenario.Settle(settleSteps, ticksPerStep);
     scenario.game->nextScheduledFrame = 0;
     scenario.game->itsNet->activePlayersDistribution = 1;
@@ -372,11 +372,20 @@ TEST(HECTOR, WalkForwardSpeed) {
 }
 
 TEST(HECTOR, CrouchSpeed) {
-    vector<Fixed> at64ms = JumpHector(20, 50, 1, 64);
-    vector<Fixed> at32ms = JumpHector(20, 50, 1, 32);
-    vector<Fixed> at16ms = JumpHector(20, 50, 1, 16);
+    std::vector<Fixed> at64ms = CrouchHector(20, 80, 1, 64);
+    std::vector<Fixed> at32ms = CrouchHector(20, 80, 2, 32);
+    std::vector<Fixed> at16ms = CrouchHector(20, 80, 4, 16);
 
-
+    ASSERT_EQ(at64ms.back(), 52422) << "64ms simulation crouched wrong amount";
+    ASSERT_EQ(at64ms.size(), at32ms.size()) << "CrouchHector didn't do ticks right";
+    for (int i = 0; i < at64ms.size(); i++) {
+        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 170)
+            << "not close enough after " << i << " ticks.";
+    }
+    for (int i = 0; i < at64ms.size(); i++) {
+        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 210)
+            << "not close enough after " << i << " ticks.";
+    }
 }
 
 TEST(GRENADE, Trajectory) {
