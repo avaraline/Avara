@@ -211,6 +211,8 @@ std::vector<Fixed> CrouchHector(int settleSteps, int steps, int ticksPerStep, in
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     std::vector<Fixed> crouches;
     scenario.Settle(settleSteps, ticksPerStep);
+    
+    crouches.push_back(scenario.hector->crouch);
     scenario.game->nextScheduledFrame = 0;
     scenario.game->itsNet->activePlayersDistribution = 1;
     scenario.KeyDown(kfuJump);
