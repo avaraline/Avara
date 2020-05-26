@@ -183,6 +183,7 @@ void CAbstractPlayer::ReplacePartColors() {
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
+    hullColorOverride = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, specialColor);
     }

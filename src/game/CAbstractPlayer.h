@@ -44,6 +44,8 @@ public:
     CAbstractPlayer *nextPlayer;
     PlayerConfigRecord defaultConfig;
 
+    long hullColorOverride; // Hull color in 0x00RRGGBB format.
+
     //	Shields & energy:
     Fixed energy;
     Fixed maxEnergy; //	Maximum stored energy level
