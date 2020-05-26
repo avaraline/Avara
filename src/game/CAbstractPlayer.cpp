@@ -174,8 +174,8 @@ void CAbstractPlayer::LoadScout() {
 }
 
 void CAbstractPlayer::ReplacePartColors() {
-    long longTeamColor = GetLongTeamColorOr(kNeutralTeamColor);
     teamMask = 1 << teamColor;
+    longTeamColor = GetLongTeamColorOr(kNeutralTeamColor);
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
@@ -183,7 +183,7 @@ void CAbstractPlayer::ReplacePartColors() {
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
-    hullColorOverride = specialColor;
+    longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, specialColor);
     }

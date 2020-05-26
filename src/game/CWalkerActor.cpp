@@ -719,11 +719,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         viewPortPart = partList[0];
         viewPortPart->usesPrivateHither = true;
         viewPortPart->hither = FIX3(100);
-        if (hullColorOverride) {
-            viewPortPart->ReplaceColor(kMarkerColor, hullColorOverride);
-        } else {
-            viewPortPart->ReplaceColor(kMarkerColor, GetLongTeamColorOr(kNeutralTeamColor));
-        }
+        viewPortPart->ReplaceColor(kMarkerColor, longTeamColor);
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 
