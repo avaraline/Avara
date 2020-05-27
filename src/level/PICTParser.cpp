@@ -70,6 +70,9 @@ void PICTParser::Parse(Handle data) {
             case 0x9: // PenPattern
                 buf->Skip(8);
                 break;
+            case 0xa: // FillPat
+                buf->Skip(8);
+                break;
             case 0xb: // OvalSize
                 buf->ReadPoint(&context.ovSize);
                 break;
@@ -98,6 +101,9 @@ void PICTParser::Parse(Handle data) {
                 break;
             case 0x1f: // OpColor
                 buf->Skip(6);
+                break;
+            case 0x20: // Line
+                buf->Skip(8);
                 break;
             case 0x22: // ShortLine
                 buf->Skip(6);
@@ -273,8 +279,13 @@ void PICTParser::Parse(Handle data) {
                     callbacks.arcProc(&context, kQDGrafVerbPaint, &frame, start, angle);
                 }
                 break;
+            case 0x70: // FramePoly
             case 0x71: // PaintPoly
-                // TODO: poly stuff?
+            case 0x72: // ErasePoly
+            case 0x73: // InvertPoly
+            case 0x74: // FillPoly
+                size = buf->Short(); // polySize
+                buf->Skip(size-2);   // polySize includes itself
                 break;
             case 0x84: // FillRegion
                 size = buf->Short();
@@ -308,7 +319,7 @@ void PICTParser::Parse(Handle data) {
                 buf->Skip(24);
                 break;
             default:
-                SDL_Log("UNKNOWN OPCODE: %x\n", opcode);
+                SDL_Log("UNKNOWN OPCODE: %04x\n", opcode);
                 break;
         }
         // Every PICT opcode data section is word-aligned, so if we end on an odd byte, skip one.
