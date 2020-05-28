@@ -34,7 +34,7 @@
 
 #define MOUSESHOOTDELAY 8
 
-#define MAXFOV FIX(35)
+#define MAXFOV FIX(50)
 #define MINFOV FIX(5)
 #define FOVSTEP FIX3(1500)
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
@@ -727,10 +727,14 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             debugView = !debugView;
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
-        if (TESTFUNC(kfuZoomIn, ft->held))
+        if (TESTFUNC(kfuZoomIn, ft->held)){
             fieldOfView -= FOVSTEP;
-        if (TESTFUNC(kfuZoomOut, ft->held))
+            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView), 4.0f / 3.0f);
+        }
+        if (TESTFUNC(kfuZoomOut, ft->held)){
             fieldOfView += FOVSTEP;
+            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView), 4.0f / 3.0f);
+        }
 
 #define LOOKSTEP 0x1000L
 #define MAXSIDELOOK 0x8000L
