@@ -266,9 +266,11 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
     if (!textInputStarted)
         return false;
     if (event.type == SDL_TEXTINPUT) {
+        #ifndef __APPLE__
         // we already sent a checkmark, don't send a v
         if ((SDL_GetModState() & KMOD_ALT) && strcmp(event.text.text, "v") == 0)
             return true;
+        #endif
         SendRosterMessage(strlen(event.text.text), event.text.text);
         return true;
     } else if (event.type == SDL_KEYDOWN) {
@@ -289,12 +291,14 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
                     return true;
                 } else
                     return false;
+            #ifndef __APPLE__
             case SDLK_v:
                 if (SDL_GetModState() & KMOD_ALT) {
                     SendRosterMessage(1, checkline);
                     return true;
                 } else
                     return false;
+            #endif
             default:
                 return false;
         }
