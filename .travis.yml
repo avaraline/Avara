@@ -46,10 +46,11 @@ jobs:
       - choco install cmake
     script: 
       - cmake --help
-      - cmake .
-      - cmake . 
+      - cmake . || true
+      - cmake . || true
       - cmake .
       - cmake --build .
+      - cmake --install .
       - ls -laR
     deploy:
       provider: script
