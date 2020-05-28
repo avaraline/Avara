@@ -75,8 +75,6 @@ Size GetHandleSize(Handle hand) {
     return handleSizeMap[hand];
 }
 
-#undef min
-
 void SetHandleSize(Handle hand, Size newSize) {
     Size oldSize = handleSizeMap[hand];
     if (newSize > oldSize) {
