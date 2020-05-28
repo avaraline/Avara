@@ -20,7 +20,6 @@ include(TargetCopyFiles)
 if(WIN32 OR MSVC)
     set(SDL2_PATH "${CMAKE_SOURCE_DIR}/platform/windows/SDL2-2.0.12")
     set(SDL2_NET_PATH "${CMAKE_SOURCE_DIR}/platform/windows/SDL2_net-2.0.1")
-    SET(CMAKE_CXX_FLAGS "-DNANOGUI_GLAD" "/EHsc")
 endif()
 
 find_package(SDL2 REQUIRED COMPONENTS main)
