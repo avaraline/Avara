@@ -727,13 +727,13 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             debugView = !debugView;
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
-        if (TESTFUNC(kfuZoomIn, ft->held)){
+        if (TESTFUNC(kfuZoomIn, ft->held)) {
             fieldOfView -= FOVSTEP;
-            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView), 4.0f / 3.0f);
+            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView));
         }
-        if (TESTFUNC(kfuZoomOut, ft->held)){
+        if (TESTFUNC(kfuZoomOut, ft->held)) {
             fieldOfView += FOVSTEP;
-            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView), 4.0f / 3.0f);
+            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView));
         }
 
 #define LOOKSTEP 0x1000L
