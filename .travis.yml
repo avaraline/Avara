@@ -44,10 +44,11 @@ jobs:
     os: windows
     before_install:
       - choco install cmake
-      - choco install visualstudio2019community
     script: 
       - cmake --help
-      - cmake -DCMAKE_GENERATOR_PLATFORM=x64 .
+      - cmake .
+      - cmake .
+      - cmake .
       - cmake --build --config Debug
       - ls -laR
     deploy:
