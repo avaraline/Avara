@@ -8,6 +8,7 @@ jobs:
       - xvfb
     os: linux
     script:
+      - cmake .
       - make -j3
       - make tests
       - build/tests
@@ -27,8 +28,8 @@ jobs:
       - hdiutil attach SDL2-2.0.9.dmg
       - sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
     script: 
-      - make -j3 macapp SIGNING_ID=NONE
-      - make tests
+      - cmake .
+      - make
       - build/tests
     deploy:
       provider: script
@@ -39,10 +40,11 @@ jobs:
   - stage: test
     os: windows
     before_install:
-      - choco install msys2
+      - choco install cmake
     script: 
-      - powershell -executionpolicy bypass -file travis-windows.ps1
-      - ps -ef
+      - cmake .
+      - cmake --build .
+      - build/tests
     deploy:
       provider: script
       edge: true
