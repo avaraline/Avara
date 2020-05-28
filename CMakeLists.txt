@@ -150,7 +150,10 @@ if(WIN32)
 endif()
 
 
-install(TARGETS Avara)
+install(TARGETS Avara
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+)
 install(DIRECTORY rsrc/ DESTINATION bin/rsrc/)
 install(DIRECTORY shaders/ DESTINATION bin/shaders/)
 install(DIRECTORY bsps/ DESTINATION bin/bsps/)
