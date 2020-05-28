@@ -50,7 +50,7 @@ jobs:
       - cmake . || true
       - cmake .
       - cmake --build .
-      - cmake --install .
+      - cmake --build . --target install --config Debug
       - ls -laR
     deploy:
       provider: script
