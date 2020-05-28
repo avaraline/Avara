@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 project(Avara)
-
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 set(CMAKE_CXX_STANDARD 17)
 set(OpenGL_GL_PREFERENCE GLVND)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -51,9 +51,12 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
 
 if(APPLE)
 	list(APPEND CORE_SOURCE "vendor/nanogui/darwin.mm")
+	set(MACOSX_BUNDLE_GUI_IDENTIFIER com.avaraline.avara)
+	set(MACOSX_BUNDLE_BUNDLE_NAME Avara)
+	set(MACOSX_BUNDLE_INFO_PLIST "platform/macos/Info.plist")
 endif()
 
-add_library(core OBJECT ${CORE_SOURCE})
+add_library(AvaraCore OBJECT ${CORE_SOURCE})
 
 set(CORE_INCLUDES
     ${SDL2_INCLUDE_DIRS} 
@@ -89,25 +92,25 @@ set(AVARA_COMPILE_OPTIONS -lstdc++ -lm -lpthread -ldl)
 
 add_executable(Avara 
     src/Avara.cpp
-    $<TARGET_OBJECTS:core>
+    $<TARGET_OBJECTS:AvaraCore>
 )
 
 add_executable(tests
     src/tests.cpp
-    $<TARGET_OBJECTS:core>
+    $<TARGET_OBJECTS:AvaraCore>
     vendor/gtest/src/gtest-all.cc
 )
 
 add_executable(hsnd2wav 
     src/hsnd2wav.cpp
-    $<TARGET_OBJECTS:core>
+    $<TARGET_OBJECTS:AvaraCore>
 )
 
 target_compile_options(Avara PRIVATE ${AVARA_COMPILE_OPTIONS})
 target_compile_options(tests PRIVATE ${AVARA_COMPILE_OPTIONS})
 target_compile_options(hsnd2wav PRIVATE ${AVARA_COMPILE_OPTIONS})
 
-target_include_directories(core PUBLIC ${CORE_INCLUDES})
+target_include_directories(AvaraCore PUBLIC ${CORE_INCLUDES})
 target_include_directories(Avara PUBLIC ${CORE_INCLUDES})
 target_include_directories(tests PUBLIC 
     ${CORE_INCLUDES}
@@ -152,4 +155,31 @@ add_copy_directory(datafiles levels
     DESTINATION  $<TARGET_FILE_DIR:Avara>/levels
     GLOB *.r)
 
+install(TARGETS Avara)
+install(DIRECTORY shaders/ DESTINATION shaders/)
+install(DIRECTORY rsrc/ DESTINATION rsrc/)
+install(DIRECTORY bsps/ DESTINATION bsps/)
+install(DIRECTORY levels/ DESTINATION levels/)
 
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Avara - a 3d networked multiplayer shooter")
+set(CPACK_PACKAGE_VENDOR "Avaraline")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "0")
+set(CPACK_PACKAGE_VERSION_MINOR "1")
+set(CPACK_PACKAGE_VERSION_PATCH "1")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "Avara 0.1.1")
+if(WIN32 AND NOT UNIX)
+	#set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/platform/windows\\\\avara.bmp")
+	set(CPACK_NSIS_INSTALLED_ICON_NAME "build\\\\Avara.exe")
+	set(CPACK_NSIS_DISPLAY_NAME "Avara")
+	set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.github.com\\\\avaraline\\\\avara")
+	set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\avara.io")
+	set(CPACK_NSIS_CONTACT "#avaraline@avaraline.net")
+	set(CPACK_NSIS_MODIFY_PATH ON)
+else()
+	set(CPACK_STRIP_FILES "build/Avara")
+	set(CPACK_SOURCE_STRIP_FILES "")
+endif()
+set(CPACK_PACKAGE_EXECUTABLES "Avara" "Avara")
+include(CPack)
