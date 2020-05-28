@@ -10,8 +10,7 @@ jobs:
     script:
       - cmake .
       - make -j3
-      - make tests
-      - build/tests
+      - ./tests
     deploy:
       provider: script
       edge: true
@@ -30,7 +29,7 @@ jobs:
     script: 
       - cmake .
       - make
-      - build/tests
+      - ./tests
     deploy:
       provider: script
       edge: true
@@ -44,7 +43,8 @@ jobs:
     script: 
       - cmake .
       - cmake --build .
-      - build/tests
+      - copy Debug\tests.exe tests.exe
+      - tests.exe
     deploy:
       provider: script
       edge: true
