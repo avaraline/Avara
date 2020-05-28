@@ -47,9 +47,9 @@ jobs:
     script: 
       - cmake --help
       - cmake .
+      - cmake . 
       - cmake .
-      - cmake .
-      - cmake --build --config Debug
+      - cmake --build .
       - ls -laR
     deploy:
       provider: script
