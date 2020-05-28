@@ -11,6 +11,8 @@ jobs:
       - cmake .
       - make -j3
       - ./tests
+      - make package
+      - ls -laR
     deploy:
       provider: script
       edge: true
@@ -30,6 +32,8 @@ jobs:
       - cmake .
       - make
       - ./tests
+      - make package
+      - ls -laR
     deploy:
       provider: script
       edge: true
@@ -42,10 +46,11 @@ jobs:
       - choco install cmake
     script: 
       - cmake --help
-      - cmake -A x64 .
-      - cmake --build . --config Debug
-      - copy Debug\tests.exe tests.exe
-      - tests.exe
+      - cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -G "Visual Studio 16 2019" -A x64 -S . -B "build64"
+      - cmake --build build64 --config Debug
+      - out/Debug/tests.exe
+      - dir /s
+      - ls -laR
     deploy:
       provider: script
       edge: true
