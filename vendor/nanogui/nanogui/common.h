@@ -28,6 +28,7 @@
 #include <stdint.h>
 #include <array>
 #include <vector>
+#include <string>
 #include <SDL.h>
 
 #include <glm/vec3.hpp> // glm::vec3

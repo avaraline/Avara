@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 project(Avara)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 set(CMAKE_CXX_STANDARD 17)
 set(OpenGL_GL_PREFERENCE GLVND)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -32,6 +31,14 @@ if(WIN32)
     list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 opengl32 glu32 wsock32 ws2_32)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:mainCRTStartup")
 endif()
+
+
+add_custom_target(datafiles ALL)
+add_copy_directory(datafiles shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/shaders)
+add_copy_directory(datafiles rsrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/rsrc)
+add_copy_directory(datafiles bsps DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bsps)
+add_copy_directory(datafiles levels DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/levels)
+
 
 file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} 
     "src/audio/*.cpp" 
@@ -106,6 +113,10 @@ add_executable(hsnd2wav
     $<TARGET_OBJECTS:AvaraCore>
 )
 
+add_dependencies(Avara datafiles)
+add_dependencies(tests datafiles)
+add_dependencies(hsnd2wav datafiles)
+
 target_compile_options(Avara PRIVATE ${AVARA_COMPILE_OPTIONS})
 target_compile_options(tests PRIVATE ${AVARA_COMPILE_OPTIONS})
 target_compile_options(hsnd2wav PRIVATE ${AVARA_COMPILE_OPTIONS})
@@ -133,33 +144,22 @@ target_link_libraries(hsnd2wav ${AVARA_LIBS} ${EXTRA_LIBS})
 if(WIN32)
     target_link_libraries(Avara wsock32 ws2_32)
     add_custom_command(TARGET Avara POST_BUILD COMMAND
-        ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/platform/windows/SDL2_net-2.0.1/lib/x64/SDL2_net.dll $<TARGET_FILE_DIR:Avara>)
+        ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/platform/windows/SDL2_net-2.0.1/lib/x64/SDL2_net.dll ${CMAKE_CURRENT_BINARY_DIR})
     add_custom_command(TARGET Avara POST_BUILD COMMAND
-        ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/platform/windows/SDL2-2.0.12/lib/x64/SDL2.dll $<TARGET_FILE_DIR:Avara>)
+        ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/platform/windows/SDL2-2.0.12/lib/x64/SDL2.dll ${CMAKE_CURRENT_BINARY_DIR})
 endif()
 
-add_custom_target(datafiles)
-add_copy_directory(datafiles shaders
-    DESTINATION  $<TARGET_FILE_DIR:Avara>}/shaders
-    GLOB *.glsl)
-
-add_copy_directory(datafiles rsrc
-    DESTINATION  $<TARGET_FILE_DIR:Avara>/rsrc
-    GLOB *.r *.wav)
-
-add_copy_directory(datafiles bsps
-    DESTINATION  $<TARGET_FILE_DIR:Avara>/bsps
-    GLOB *.json)
-
-add_copy_directory(datafiles levels
-    DESTINATION  $<TARGET_FILE_DIR:Avara>/levels
-    GLOB *.r)
 
 install(TARGETS Avara)
-install(DIRECTORY shaders/ DESTINATION shaders/)
-install(DIRECTORY rsrc/ DESTINATION rsrc/)
-install(DIRECTORY bsps/ DESTINATION bsps/)
-install(DIRECTORY levels/ DESTINATION levels/)
+install(DIRECTORY rsrc/ DESTINATION bin/rsrc/)
+install(DIRECTORY shaders/ DESTINATION bin/shaders/)
+install(DIRECTORY bsps/ DESTINATION bin/bsps/)
+install(DIRECTORY levels/ DESTINATION bin/levels/)
+
+if(WIN32)
+    install(FILES platform/windows/SDL2_net-2.0.1/lib/x64/SDL2_net.dll DESTINATION bin/)
+    install(FILES platform/windows/SDL2-2.0.12/lib/x64/SDL2.dll DESTINATION bin/)
+endif()
 
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Avara - a 3d networked multiplayer shooter")
 set(CPACK_PACKAGE_VENDOR "Avaraline")
