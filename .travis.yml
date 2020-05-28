@@ -47,8 +47,8 @@ jobs:
       - choco install visualstudio2019community
     script: 
       - cmake --help
-      - cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -G "Visual Studio 15 2017 Win64" -S . -B "build64"
-      - cmake --build build64 --config Debug
+      - cmake -DCMAKE_GENERATOR_PLATFORM=x64 .
+      - cmake --build --config Debug
       - ls -laR
     deploy:
       provider: script
