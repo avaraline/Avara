@@ -3,7 +3,7 @@ compiler: clang
 jobs:
   include:
   - stage: test
-    dist: xenial
+    dist: bionic
     services:
       - xvfb
     os: linux
@@ -41,8 +41,9 @@ jobs:
     before_install:
       - choco install cmake
     script: 
-      - cmake .
-      - cmake --build .
+      - cmake --help
+      - cmake -A x64 .
+      - cmake --build . --config Debug
       - copy Debug\tests.exe tests.exe
       - tests.exe
     deploy:
