@@ -19,14 +19,13 @@ BASEFN=Avara-$TRAVIS_BRANCH-$SHORT_HASH
 
 case $1 in
 	linux )
-		FN=Linux$BASEFN
-		mv build $FN
-		zip -r $FN.zip $FN
-		upload_file $FN.zip
+		FN=Linux$BASEFN.tar.gz
+		mv Avara-*-Linux.tar.gz $FN
+		upload_file $FN
 		;;
 	mac )
-		FN=Mac$BASEFN.zip
-		mv build/MacAvara.zip $FN
+		FN=Mac$BASEFN.tar.gz
+		mv Avara-*-Darwin.tar.gz $FN
 		upload_file $FN
 		;;
 	windows )

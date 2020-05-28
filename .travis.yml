@@ -30,7 +30,7 @@ jobs:
       - sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
     script: 
       - cmake .
-      - make
+      - make -j3
       - ./tests
       - make package
       - ls -laR
@@ -44,12 +44,11 @@ jobs:
     os: windows
     before_install:
       - choco install cmake
+      - choco install visualstudio2019community
     script: 
       - cmake --help
       - cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -G "Visual Studio 16 2019" -A x64 -S . -B "build64"
       - cmake --build build64 --config Debug
-      - out/Debug/tests.exe
-      - dir /s
       - ls -laR
     deploy:
       provider: script
