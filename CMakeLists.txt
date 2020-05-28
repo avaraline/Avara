@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
+set(CMAKE_OSX_ARCHITECTURES "x86_64")
 project(Avara)
-
 
 set(CMAKE_CXX_STANDARD 17)
 set(OpenGL_GL_PREFERENCE GLVND)
@@ -11,8 +11,7 @@ if (POLICY CMP0074)
 endif()
 
 
-
-# Find SDL2 and OpenGL
+# Modules for copying files, finding OpenGL and SDL libraries
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 
 include(TargetCopyFiles)
@@ -49,6 +48,10 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "vendor/glm/detail/glm.cpp"
     "vendor/nanovg/nanovg.c"
 )
+
+if(APPLE)
+	list(APPEND CORE_SOURCE "vendor/nanogui/darwin.mm")
+endif()
 
 add_library(core OBJECT ${CORE_SOURCE})
 
@@ -113,7 +116,8 @@ target_include_directories(tests PUBLIC
 )
 target_include_directories(hsnd2wav PUBLIC ${CORE_INCLUDES})
 
-set(AVARA_LIBS SDL2::Main SDL2::Net ${OPENGL_LIBRARIES} dl pthread)
+set(AVARA_LIBS ${SDL2_LIBRARIES} ${SDL2_NET_LIBRARIES} ${OPENGL_LIBRARIES} dl pthread)
+
 if(WIN32)
 set(AVARA_LIBS SDL2::Main SDL2::Net ${OPENGL_LIBRARIES})
 endif()
