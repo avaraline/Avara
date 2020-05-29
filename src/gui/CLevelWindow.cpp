@@ -43,6 +43,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         this->SelectSet(selectedIdx);
         app->Set(kSelectedSet, levelSets[selectedIdx]);
         levelBox->setSelectedIndex(0);
+        app->Set(kSelectedLevel, levelNames[0]);
     });
 
     levelBox = new nanogui::DescComboBox(this, levelNames, levelIntros);
