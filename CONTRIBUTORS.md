@@ -9,3 +9,5 @@ The following people have contributed to this port:
 * Ryan Herriman <@rherriman>
 * Rob Marlin <@ScarletSwordfish>
 * Ryan Sommers <@ryansommers>
+* Eric Blenkush <@blenkush>
+* Tom Anderson <@tra>
