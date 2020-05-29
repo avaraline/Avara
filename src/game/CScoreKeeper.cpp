@@ -230,12 +230,12 @@ void CScoreKeeper::ZeroScores() {
 }
 
 void CScoreKeeper::ReceiveResults(AvaraScoreRecord *newResults) {
-    short *a, *b;
-    long len;
+    int16_t *a, *b;
+    int32_t len;
 
     len = sizeof(AvaraScoreRecord) >> 1;
-    a = (short *)newResults;
-    b = (short *)&netScores;
+    a = (int16_t *)newResults;
+    b = (int16_t *)&netScores;
 
     while (len--) {
         if (*a++ != *b++) {

@@ -14,17 +14,17 @@
 
 class CAvaraGame;
 
-typedef struct {
-    long points;
+typedef struct __attribute__ ((__packed__)) {
+    int32_t points;
     char team;
     char exitRank;
-    short lives;
-    short kills;
+    int16_t lives;
+    int16_t kills;
 } PlayerScoreRecord;
 
-typedef struct {
+typedef struct __attribute__ ((__packed__)) {
     PlayerScoreRecord player[kMaxAvaraPlayers];
-    long teamPoints[kMaxTeamColors + 1];
+    int32_t teamPoints[kMaxTeamColors + 1];
 } AvaraScoreRecord;
 
 class CScoreKeeper : public CDirectObject {
