@@ -147,18 +147,36 @@ void CScoreKeeper::StopPause(Boolean didPause) {
 
 void CScoreKeeper::NetResultsUpdate() {
     CNetManager *theNet = itsGame->itsNet;
-    short i;
+    short i, offset;
     CPlayerManager *thePlayer;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         thePlayer = theNet->playerTable[i];
+        offset = i * PLAYER_SCORE_FIELD_COUNT;
         if (thePlayer->GetPlayer()) {
             localScores.player[i].lives = thePlayer->GetPlayer()->lives;
+
+            scorePayload[offset] = htonl(localScores.player[i].points);
+            scorePayload[offset + 1] = htonl(localScores.player[i].team);
+            scorePayload[offset + 2] = htonl(localScores.player[i].exitRank);
+            scorePayload[offset + 3] = htonl(localScores.player[i].lives);
+            scorePayload[offset + 4] = htonl(localScores.player[i].kills);
+        } else {
+            scorePayload[offset] = 0;
+            scorePayload[offset + 1] = 0;
+            scorePayload[offset + 2] = 0;
+            scorePayload[offset + 3] = htonl(-1);
+            scorePayload[offset + 4] = 0;
         }
     }
 
+    offset = PLAYER_SCORE_FIELD_COUNT * kMaxAvaraPlayers;
+    for (i = 0; i <= kMaxTeamColors; i++) {
+        scorePayload[offset + i] = htonl(localScores.teamPoints[i]);
+    }
+
     theNet->itsCommManager->SendPacket(
-        kdEveryone, kpResultsReport, 0, 0, 0, sizeof(AvaraScoreRecord), (Ptr)&localScores);
+        kdEveryone, kpResultsReport, 0, 0, 0, NET_SCORES_LEN, (Ptr)&scorePayload);
 }
 
 void CScoreKeeper::Score(ScoreInterfaceReasons reason,
@@ -229,25 +247,20 @@ void CScoreKeeper::ZeroScores() {
     }
 }
 
-void CScoreKeeper::ReceiveResults(AvaraScoreRecord *newResults) {
-    int16_t *a, *b;
-    int32_t len;
+void CScoreKeeper::ReceiveResults(int32_t *newResults) {
+    short i, offset;
 
-    len = sizeof(AvaraScoreRecord) >> 1;
-    a = (int16_t *)newResults;
-    b = (int16_t *)&netScores;
-
-    while (len--) {
-        if (*a++ != *b++) {
-            break;
-        }
+    for (i = 0; i < kMaxAvaraPlayers; i++) {
+        offset = i * 5;
+        netScores.player[i].points = ntohl(newResults[offset]);
+        netScores.player[i].team = (char) ntohl(newResults[offset + 1]);
+        netScores.player[i].exitRank = (char) ntohl(newResults[offset + 2]);
+        netScores.player[i].lives = (int16_t) ntohl(newResults[offset + 3]);
+        netScores.player[i].kills = (int16_t) ntohl(newResults[offset + 4]);
     }
 
-    if (len >= 0) { // CRosterWindow	*theRoster;
-
-        netScores = *newResults;
-        // theRoster = ((CAvaraApp *)gApplication)->theRosterWind;
-
-        // theRoster->InvalidateArea(kScoreInformationBox, 0);
+    offset = PLAYER_SCORE_FIELD_COUNT * kMaxAvaraPlayers;
+    for (i = 0; i <= kMaxTeamColors; i++) {
+        netScores.teamPoints[i] = ntohl(newResults[offset + i]);
     }
 }
