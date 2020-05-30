@@ -251,7 +251,7 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
     short i, offset;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        offset = i * 5;
+        offset = i * PLAYER_SCORE_FIELD_COUNT;
         netScores.player[i].points = ntohl(newResults[offset]);
         netScores.player[i].team = (char) ntohl(newResults[offset + 1]);
         netScores.player[i].exitRank = (char) ntohl(newResults[offset + 2]);
