@@ -1069,7 +1069,6 @@ void CNetManager::NewArrival(short slot) {
     itsGame->itsApp->NotifyUser();
     std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
     SDL_Log("%s has joined!!\n", name.c_str());
-    itsGame->itsApp->AddMessageLine(name + " has joined the server.");
 }
 
 void CNetManager::ResultsReport(Ptr results) {
