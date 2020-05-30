@@ -117,7 +117,7 @@ void PICTParser::Parse(Handle data) {
                 if (callbacks.textProc) {
                     Ptr data = NewPtr(size);
                     buf->Read(data, size);
-                    callbacks.textProc(&context, size, data, NULL, NULL);
+                    callbacks.textProc(&context, size, data, true);
                     DisposePtr(data);
                 } else {
                     buf->Skip(size);
@@ -129,7 +129,9 @@ void PICTParser::Parse(Handle data) {
                 if (callbacks.textProc) {
                     Ptr data = NewPtr(size);
                     buf->Read(data, size);
-                    callbacks.textProc(&context, size, data, NULL, NULL);
+                    // DHText normally happens with text continuing on the
+                    // same line so don't prepend a newline
+                    callbacks.textProc(&context, size, data, false);
                     DisposePtr(data);
                 } else {
                     buf->Skip(size);
@@ -141,7 +143,7 @@ void PICTParser::Parse(Handle data) {
                 if (callbacks.textProc) {
                     Ptr data = NewPtr(size);
                     buf->Read(data, size);
-                    callbacks.textProc(&context, size, data, NULL, NULL);
+                    callbacks.textProc(&context, size, data, true);
                     DisposePtr(data);
                 } else {
                     buf->Skip(size);
@@ -153,7 +155,7 @@ void PICTParser::Parse(Handle data) {
                 if (callbacks.textProc) {
                     Ptr data = NewPtr(size);
                     buf->Read(data, size);
-                    callbacks.textProc(&context, size, data, NULL, NULL);
+                    callbacks.textProc(&context, size, data, true);
                     DisposePtr(data);
                 } else {
                     buf->Skip(size);

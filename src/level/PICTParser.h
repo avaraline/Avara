@@ -15,7 +15,7 @@ typedef void QDRectProc(PICTContext *context, GrafVerb verb, Rect *r);
 typedef void QDOvalProc(PICTContext *context, GrafVerb verb, Rect *r);
 typedef void QDRRectProc(PICTContext *context, GrafVerb verb, Rect *r, short ovalWidth, short ovalHeight);
 typedef void QDCommentProc(PICTContext *context, short kind, short dataSize, Handle dataHandle);
-typedef void QDTextProc(PICTContext *context, short byteCount, Ptr theText, Point *numer, Point *denom);
+typedef void QDTextProc(PICTContext *context, short byteCount, Ptr theText, Boolean prependNewline);
 
 struct QDProcs {
     QDArcProc *arcProc;
