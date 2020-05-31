@@ -15,4 +15,5 @@ public:
 
 protected:
 	nanogui::Widget *resultsBox;
+    nanogui::Label *resultsLabel;
 };
