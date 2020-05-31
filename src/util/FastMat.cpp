@@ -15,6 +15,7 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <utility>
 
 #define ARCUSTABLEBITS 9
 #define ARCUSTABLESIZE (1 + (1 << ARCUSTABLEBITS))
@@ -146,7 +147,75 @@ Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2) {
 */
 Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz) {
     // Let's see if doing it accurately affects anything.
-    return FSqrt(FMul(dx, dx) + FMul(dy, dy) + FMul(dz, dz));
+    // return FSqrt(FMul(dx, dx) + FMul(dy, dy) + FMul(dz, dz));
+
+    Fixed r0 = dx, r1 = dy, r2 = dz;
+/*
+    move.l  dx,D0
+    bpl.s   @noXNeg
+    neg.l   D0
+*/  
+    if (r0 < 0) r0 = -r0;
+/*
+@noXNeg:
+        move.l  dy,D1
+        bpl.s   @noYNeg
+        neg.l   D1
+*/
+    if (r1 < 0) r1 = -r1;
+/*
+@noYNeg:
+        cmp.l   D0,D1
+        blt.s   @noXYSwap
+        exg.l   D0,D1
+*/
+    if (r0 < r1) std::swap(r0, r1);
+/*
+@noXYSwap:
+        move.l  dz,D2
+        bpl.s   @noZNeg
+        neg.l   D2
+*/
+    if (r2 < 0) r2 = -r2;
+/*
+@noZNeg:
+        cmp.l   D1,D2
+        blt.s   @noYZSwap
+        exg.l   D1,D2
+*/
+    if (r1 < r2) std::swap(r1, r2);
+/*
+        cmp.l   D0,D1
+        blt.s   @noXZSwap
+        exg.l   D0,D1
+*/
+    if (r0 < r1) std::swap(r0, r1);
+/*
+@noXZSwap:
+@noYZSwap:
+        lsr.l   #1,D2
+        add.l   D2,D1
+        lsr.l   #1,D1
+        add.l   D1,D0
+*/
+    r2 = r2 >> 1;
+    r1 = r1 + r2;
+    r1 = r1 >> 1;
+    r0 = r1 + r0;
+/*
+        move.l  D0,D1   // scale by (1-1/8-1/256) to keep estimate from being too large.
+        lsr.l   #3,D1
+        sub.l   D1,D0
+        lsr.l   #5,D1
+        sub.l   D1,D0
+*/
+    r1 = r0;
+    r1 = r1 >> 3;
+    r0 = r0 - r1;
+    r1 = r1 >> 5;
+    r0 = r0 - r1;
+
+    return r0;
 }
 
 /*  FDistanceEstimate
@@ -161,7 +230,65 @@ Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz) {
 */
 Fixed FDistanceOverEstimate(Fixed dx, Fixed dy, Fixed dz) {
     // Let's see if doing it accurately affects anything.
-    return FSqrt(FMul(dx, dx) + FMul(dy, dy) + FMul(dz, dz));
+    //return FSqrt(FMul(dx, dx) + FMul(dy, dy) + FMul(dz, dz));
+    Fixed r0 = dx, r1 = dy, r2 = dz;
+/*
+        move.l  dx,D0
+        bpl.s   @noXNeg
+        neg.l   D0
+*/
+
+    if (r0 < 0) r0 = -r0;
+/*
+@noXNeg:
+        move.l  dy,D1
+        bpl.s   @noYNeg
+        neg.l   D1
+*/
+    if (r1 < 0) r1 = -r1;
+/*
+@noYNeg:
+        cmp.l   D0,D1
+        blt.s   @noXYSwap
+        exg.l   D0,D1
+*/
+
+    if (r0 < r1) std::swap(r0, r1);
+/*
+@noXYSwap:
+        move.l  dz,D2
+        bpl.s   @noZNeg
+        neg.l   D2
+*/
+    if (r2 < 0) r2 = -r2;
+/*
+@noZNeg:
+        cmp.l   D1,D2
+        blt.s   @noYZSwap
+        exg.l   D1,D2
+*/
+    if (r1 < r2) std::swap(r1, r2);
+/*
+        cmp.l   D0,D1
+        blt.s   @noXZSwap
+        exg.l   D0,D1
+*/
+
+    if (r0 < r1) std::swap(r0, r1);
+/*
+@noXZSwap:
+@noYZSwap:
+        lsr.l   #1,D2
+        add.l   D2,D1
+        lsr.l   #1,D1
+        add.l   D1,D0
+*/
+    r2 = r2 >> 1;
+    r1 = r1 + r2;
+    r1 = r1 >> 1;
+    r0 = r0 + r1;
+
+    return r0;
 }
 
 Fixed FMul(Fixed a, Fixed b) {
