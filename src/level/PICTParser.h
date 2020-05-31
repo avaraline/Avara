@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Types.h"
+#include "CDataBuffer.h"
 
 typedef struct {
     Point pnLoc;
@@ -39,4 +40,5 @@ public:
 
 protected:
     void CopyAdjustRect(Rect *src, Rect *dst);
+    void DirectBitsRgn(CDataBuffer *buf);
 };

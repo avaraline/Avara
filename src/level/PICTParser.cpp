@@ -47,6 +47,9 @@ void PICTParser::Parse(Handle data) {
     // context.pnLoc.h = frame.left;
     while (!doneDrawing && buf->More()) {
         short opcode = buf->Short();
+#ifdef DEBUGPARSER
+        SDL_Log("opcode = %04x\n", opcode);
+#endif
         switch (opcode) {
             case 0x0: // NOOP
                 break;
@@ -300,6 +303,10 @@ void PICTParser::Parse(Handle data) {
                     callbacks.commentProc(&context, kind, 0, NULL);
                 }
                 break;
+            case 0x9b: // DirectBitsRgn
+                DirectBitsRgn(buf);
+                break;
+
             case 0xa1: // LongComment
                 kind = buf->Short();
                 size = buf->Short();
@@ -329,4 +336,65 @@ void PICTParser::Parse(Handle data) {
     }
 
     delete buf;
+}
+
+void PICTParser::DirectBitsRgn(CDataBuffer *buf) {
+#ifdef DEBUGPARSER
+    SDL_Log("DirectBitsRgn\n");
+#endif
+    // PixMap
+    buf->Skip(4);                    // baseAddr
+    short rowBytes = buf->Short() & 0x7fff;  // rowBytes (bit 15 indicates PixMap vs BitMap)
+#ifdef DEBUGPARSER
+    SDL_Log("  PixMap: rowBytes = %d\n", rowBytes);
+#endif
+    Rect bounds;
+    buf->ReadRect(&bounds);          // bounds
+    buf->Skip(2);                    // pmVersion
+    buf->Skip(2);                    // packType
+    buf->Skip(4);                    // packSize
+    buf->Skip(4);                    // hRes 
+    buf->Skip(4);                    // vRes
+    buf->Skip(2);                    // pixelType
+    buf->Skip(2);                    // pixelSize
+    buf->Skip(2);                    // cmpCount
+    buf->Skip(2);                    // cmpSize
+    buf->Skip(4);                    // planeBytes
+    buf->Skip(4);                    // pmTable pointer
+    buf->Skip(4);                    // pmReserved
+    
+    // srcRect
+    buf->Skip(8);
+    // dstRect
+    buf->Skip(8);
+    // mode
+    buf->Skip(2);
+
+    // maskRgn (assumed to be rectangular)
+    short rgnSize = buf->Short();  // maskRgn.rgnSize
+    buf->Skip(rgnSize - 2);  // maskRgn.rgnBBox
+    
+    // PixData
+    short numRows = bounds.bottom-bounds.top;
+#ifdef DEBUGPARSER
+    SDL_Log("  PixMap:num rows = %d\n", numRows);
+#endif
+    if (rowBytes < 8) {
+        // data unpacked
+        buf->Skip(rowBytes*numRows);
+    } else {
+        // data packed
+        size_t byteCount;
+        for (int i = 0; i < numRows; i++) {
+            if (rowBytes > 250) {
+                byteCount = (size_t)buf->Short();
+            } else {
+                byteCount = (size_t)buf->Byte();
+            }
+#ifdef DEBUGPARSER
+            SDL_Log("    PixMap: %zu bytes for row %d\n", byteCount, i);
+#endif
+            buf->Skip(byteCount);
+        }
+    }
 }
