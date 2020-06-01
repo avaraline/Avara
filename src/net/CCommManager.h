@@ -16,19 +16,21 @@
 #define MINIMUMBUFFERRESERVE 64
 #define FRESHALLOCSIZE 64
 
+#pragma pack(1)
 typedef struct PacketInfo {
     struct PacketInfo *qLink;
 
-    short sender;
-    short distribution;
+    int16_t sender;
+    int16_t distribution;
     char command;
     char p1;
-    short p2;
-    int p3;
-    short dataLen;
-    short flags;
+    int16_t p2;
+    int32_t p3;
+    int16_t dataLen;
+    int16_t flags;
     char dataBuffer[PACKETDATABUFFERSIZE];
 } PacketInfo;
+#pragma pack()
 
 #define kpUrgentFlag (short)1
 
