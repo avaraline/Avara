@@ -117,9 +117,9 @@ void AvaraGLSetView(glm::mat4 view) {
 }
 
 
-void AvaraGLUpdateProjectionMatrix(float fov, float aspect) {
+void AvaraGLUpdateProjectionMatrix(float fov) {
     glUseProgram(gProgram);
-    proj = glm::scale(glm::perspective(glm::radians(fov), aspect, near_dist, far_dist), glm::vec3(-1, 1, -1));
+    proj = glm::scale(glm::perspective(glm::radians(fov), default_aspect, near_dist, far_dist), glm::vec3(-1, 1, -1));
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
     glCheckErrors();
 }
@@ -196,7 +196,7 @@ void AvaraGLInitContext() {
 
     projLoc = glGetUniformLocation(gProgram, "proj");
     viewLoc = glGetUniformLocation(gProgram, "view");
-    AvaraGLUpdateProjectionMatrix(default_fov, default_aspect);
+    AvaraGLUpdateProjectionMatrix(default_fov);
     mvLoc = glGetUniformLocation(gProgram, "modelview");
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");

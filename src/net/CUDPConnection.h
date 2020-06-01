@@ -18,14 +18,16 @@
 
 #define DEBUG_AVARA 0
 
+#pragma pack(1)
 typedef struct {
     PacketInfo packet;
 
-    int birthDate;
-    int nextSendTime;
-    short serialNumber;
+    int32_t birthDate;
+    int32_t nextSendTime;
+    int16_t serialNumber;
 
 } UDPPacketInfo;
+#pragma pack()
 
 typedef struct {
     int host;
