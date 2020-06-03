@@ -4,7 +4,7 @@ CC = clang
 CXX = clang++
 
 BUILD_DIR ?= build
-SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
+SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
@@ -72,9 +72,9 @@ winapp: avara
 	rm -rf $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
 	if [ -f $(BUILD_DIR)/Avara ]; then mv $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe; fi
-	cp -r $(BUILD_DIR)/{Avara.exe,bsps,levels,rsrc,shaders} $(BUILD_DIR)/WinAvara
-	cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
-	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1}.dll $(BUILD_DIR)/WinAvara
+	cp -r $(BUILD_DIR)/{Avara.exe,bsps,levels,rsrc,shaders,vendor,src} $(BUILD_DIR)/WinAvara
+	# cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
+	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2,SDL2_net}.dll $(BUILD_DIR)/WinAvara
 	cd $(BUILD_DIR) && zip -r WinAvara.zip WinAvara && cd ..
 
 # Avara

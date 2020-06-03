@@ -771,6 +771,7 @@ void CAvaraGame::GameStart() {
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);
     SDL_SetRelativeMouseMode(SDL_TRUE);
+    SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 
     // HideCursor();
     // FlushEvents(everyEvent, 0);

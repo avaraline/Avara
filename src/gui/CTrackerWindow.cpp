@@ -2,6 +2,7 @@
 
 #include "CApplication.h"
 #include "Preferences.h"
+#include "CAvaraApp.h"
 
 #include <json.hpp>
 #include "httplib.h"
@@ -25,6 +26,13 @@ public:
         nanogui::Label *line2label = new nanogui::Label(this, line2, "sans", 14);
         line2label->setColor(nanogui::Color(200, 200));
         nanogui::Button *btn = new nanogui::Button(this, "Connect");
+        btn->setCallback([this, line1] {
+            CAvaraAppImpl *avara = (CAvaraAppImpl *)gApplication;
+            
+            //connect if not hosting
+            if(avara->GetNet()->netStatus != kServerNet)
+                avara->GetNet()->ChangeNet(kClientNet, line1);
+        });
 
         layout->setMargin(10);
         layout->setAnchor(line1label, nanogui::AdvancedGridLayout::Anchor(0, 0, 1, 1));

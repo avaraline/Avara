@@ -50,15 +50,24 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"left", 1 << kfuLeft},
         {"right", 1 << kfuRight},
         {"jump", 1 << kfuJump},
+        {"pause", 1 << kfuPauseGame},
         {"abort", 1 << kfuAbortGame},
         {"loadMissile", 1 << kfuLoadMissile},
         {"loadGrenade", 1 << kfuLoadGrenade},
         {"fire", 1 << kfuFireWeapon},
         {"boost", 1 << kfuBoostEnergy},
+        {"verticalMotion", 1 << kfuVerticalMotion},
+        {"viewRange", 1 << kfuScanDist},
         {"aimForward", 1 << kfuAimForward},
+        {"lookLeft", 1 << kfuLookLeft},
+        {"lookRight", 1 << kfuLookRight},
+        {"zoomIn", 1 << kfuZoomIn},
+        {"zoomOut", 1 << kfuZoomOut},
         {"scoutView", 1 << kfuScoutView},
         {"scoutControl", 1 << kfuScoutControl},
-        {"chatMode", 1 << kfuTypeText}};
+        {"chatMode", 1 << kfuTypeText},
+        {"debug1", 1 << kfuDebug1},
+        {"debug2", 1 << kfuDebug2}};
 
     // Read the keyboard mapping prefs.
     json keys = itsGame->itsApp->Get(kKeyboardMappingTag);

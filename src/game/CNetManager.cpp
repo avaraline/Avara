@@ -1072,7 +1072,7 @@ void CNetManager::NewArrival(short slot) {
 }
 
 void CNetManager::ResultsReport(Ptr results) {
-    itsGame->scoreKeeper->ReceiveResults((AvaraScoreRecord *)results);
+    itsGame->scoreKeeper->ReceiveResults((int32_t *)results);
 }
 
 void CNetManager::Beep() {

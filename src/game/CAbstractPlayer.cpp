@@ -34,7 +34,7 @@
 
 #define MOUSESHOOTDELAY 8
 
-#define MAXFOV FIX(35)
+#define MAXFOV FIX(50)
 #define MINFOV FIX(5)
 #define FOVSTEP FIX3(1500)
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
@@ -174,8 +174,8 @@ void CAbstractPlayer::LoadScout() {
 }
 
 void CAbstractPlayer::ReplacePartColors() {
-    long longTeamColor = GetLongTeamColorOr(kNeutralTeamColor);
     teamMask = 1 << teamColor;
+    longTeamColor = GetLongTeamColorOr(kNeutralTeamColor);
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
@@ -183,6 +183,7 @@ void CAbstractPlayer::ReplacePartColors() {
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
+    longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, specialColor);
     }
@@ -726,6 +727,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             debugView = !debugView;
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
+
         if (TESTFUNC(kfuZoomIn, ft->held))
             fieldOfView -= FOVSTEP;
         if (TESTFUNC(kfuZoomOut, ft->held))
@@ -771,6 +773,10 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             fieldOfView = MINFOV;
         if (fieldOfView > MAXFOV)
             fieldOfView = MAXFOV;
+
+        if (itsManager->IsLocalPlayer() && 
+            (TESTFUNC(kfuZoomOut, ft->held) || TESTFUNC(kfuZoomIn, ft->held)))
+            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView));
 
         if (fireGun)
             mouseShootTime = MOUSESHOOTDELAY;
