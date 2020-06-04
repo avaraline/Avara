@@ -8,11 +8,16 @@
 */
 
 #include "CSmartPart.h"
+#include "CAbstractActor.h"
 
 #include "FastMat.h"
 
 void CSmartPart::ISmartPart(short resId, CAbstractActor *anActor, short aPartCode) {
-    CBSPPart::IBSPPart(resId);
+    if (anActor != NULL) {
+        CBSPPart::IBSPPart(resId, (char*)anActor->itsGame->loadedSet);
+    } else {
+        CBSPPart::IBSPPart(resId);
+    }
 
     theOwner = anActor;
     partCode = aPartCode;

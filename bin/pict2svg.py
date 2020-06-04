@@ -1181,10 +1181,11 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
 
     ledi = rsrc['LEDI']
 
+    dirname = rpath.name.split('.')[0] + "_svg"
+    dirpath = os.path.join(outpath, dirname)
+    os.makedirs(dirpath, exist_ok=True)
+
     if 'PICT' in rsrc:
-        dirname = rpath.name.split('.')[0] + "_svg"
-        dirpath = os.path.join(outpath, dirname)
-        os.makedirs(dirpath, exist_ok=True)
         # print(rsrc['PICT'].keys())
         picts = rsrc['PICT']
         for pict in picts:

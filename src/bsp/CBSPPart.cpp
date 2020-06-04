@@ -36,10 +36,26 @@ ColorRecord ***bspColorLookupTable = 0;
 
 using json = nlohmann::json;
 
-void CBSPPart::IBSPPart(short resId) {
+void CBSPPart::IBSPPart(short resId, char* levelsetName) {
     char relPath[256];
-    snprintf(relPath, 256, "bsps/%d.json", resId);
-    char *bspName = BundlePath(relPath);
+    char *bspName = NULL;
+
+    // first check for the resource in the levelset directory
+    if (levelsetName != NULL) {
+        snprintf(relPath, 256, "levels/%s/bsps/%d.json", levelsetName, resId);
+        bspName = BundlePath(relPath);
+        std::ifstream testFile(bspName);
+        if (testFile.fail()) {
+            bspName = NULL;
+        } else {
+            SDL_Log("Using BSP file in %s\n", bspName);
+        }
+    }
+    // haven't found the BSP file yet, try the top-level bsps directory
+    if (bspName == NULL) {
+        snprintf(relPath, 256, "bsps/%d.json", resId);
+        bspName = BundlePath(relPath);
+    }
     // SDL_Log("Loading BSP: %s\n", bspName);
     lightSeed = 0;
     nextTemp = NULL;

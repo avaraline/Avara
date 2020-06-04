@@ -69,6 +69,7 @@ class CAvaraGame : public CDirectObject {
 public:
     OSType loadedTag;
     OSType loadedDirectory;
+    Str255 loadedSet;
     Str255 loadedLevel;
     Str255 loadedDesigner;
     Str255 loadedInfo;
