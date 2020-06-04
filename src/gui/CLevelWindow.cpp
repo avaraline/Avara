@@ -24,6 +24,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "gzr - Over the Hill",
         "gzr - Grecian Formula",
         "gzr - Balledness!",
+        "gzr - R.I.P.",
         "hunting-grounds", 
         "net-99",
         "not-aa",
