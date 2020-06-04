@@ -164,7 +164,7 @@ public:
     Boolean ignoreDirectionalLights;
     short userFlags; //	Can be used for various flags by user.
 
-    virtual void IBSPPart(short resId);
+    virtual void IBSPPart(short resId, char* levelsetName = NULL);
     virtual void BuildBoundingVolumes();
     virtual void Dispose();
 

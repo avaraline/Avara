@@ -228,6 +228,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         if (curLevel->tag == theLevel) {
             std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
             levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
+            BlockMoveData(set.c_str(), itsGame->loadedSet, set.size());
             BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1);
             Handle levelData = GetNamedResource('PICT', rsrcName);
             if (levelData) {
