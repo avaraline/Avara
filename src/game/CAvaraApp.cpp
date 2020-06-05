@@ -222,10 +222,13 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     OSType setTag;
     CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
     CLevelDescriptor *curLevel = levels;
+    std::string levelName;
     bool wasLoaded = false;
     while (curLevel) {
         if (curLevel->tag == theLevel) {
             std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
+            levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
+            BlockMoveData(set.c_str(), itsGame->loadedSet, set.size());
             BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1);
             Handle levelData = GetNamedResource('PICT', rsrcName);
             if (levelData) {
@@ -240,6 +243,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     levels->Dispose();
 
     if (wasLoaded) {
+        AddMessageLine("Loaded \"" + levelName + "\" (" + set + ").");
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);
         SDL_Log("overhead %f, %f, %f\n", ToFloat(pt[0]), ToFloat(pt[1]), ToFloat(pt[2]));

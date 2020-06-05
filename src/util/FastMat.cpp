@@ -346,12 +346,12 @@ Fixed FSqrt(Fixed n) {
     return ToFixed(sqrt(ToFloat(n)));
 }
 
-#define RANDCONST ((unsigned long)(0x41A7))
-#define HIGH(x) ((unsigned int)(x >> 16))
-#define LOW(x) ((unsigned int)x)
+#define RANDCONST ((uint32_t)(0x41A7))
+#define HIGH(x) ((uint16_t)(x >> 16))
+#define LOW(x) ((uint16_t)x)
 
 Fixed FRandom() {
-    unsigned long temp;
+    uint32_t temp;
 
     temp = RANDCONST * HIGH(FRandSeed) + HIGH(RANDCONST * LOW(FRandSeed));
     FRandSeed = ((temp & 0x7fff) << 16) + HIGH(temp << 1) + LOW(RANDCONST * FRandSeed);

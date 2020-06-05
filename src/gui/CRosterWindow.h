@@ -19,10 +19,13 @@ public:
     bool mouseEnterEvent(const nanogui::Vector2i &p, bool enter) override;
     bool handleSDLEvent(SDL_Event &event);
     void SendRosterMessage(int length, char *message);
-
+    void NewChatLine(Str255 playerName, std::string message);
+    void ChatLineDelete();
+    
     nanogui::Text *levelLoaded;
     nanogui::Text *levelDesigner;
     nanogui::Label *levelDescription;
+    nanogui::Label *chatInput;
 
 private:
     CNetManager *theNet;

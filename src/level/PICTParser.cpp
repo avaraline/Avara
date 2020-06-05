@@ -47,6 +47,9 @@ void PICTParser::Parse(Handle data) {
     // context.pnLoc.h = frame.left;
     while (!doneDrawing && buf->More()) {
         short opcode = buf->Short();
+#ifdef DEBUGPARSER
+        SDL_Log("opcode = %04x\n", opcode);
+#endif
         switch (opcode) {
             case 0x0: // NOOP
                 break;
@@ -68,6 +71,9 @@ void PICTParser::Parse(Handle data) {
                 buf->Skip(2);
                 break;
             case 0x9: // PenPattern
+                buf->Skip(8);
+                break;
+            case 0xa: // FillPat
                 buf->Skip(8);
                 break;
             case 0xb: // OvalSize
@@ -99,6 +105,9 @@ void PICTParser::Parse(Handle data) {
             case 0x1f: // OpColor
                 buf->Skip(6);
                 break;
+            case 0x20: // Line
+                buf->Skip(8);
+                break;
             case 0x22: // ShortLine
                 buf->Skip(6);
                 break;
@@ -111,7 +120,7 @@ void PICTParser::Parse(Handle data) {
                 if (callbacks.textProc) {
                     Ptr data = NewPtr(size);
                     buf->Read(data, size);
-                    callbacks.textProc(&context, size, data, NULL, NULL);
+                    callbacks.textProc(&context, size, data, true);
                     DisposePtr(data);
                 } else {
                     buf->Skip(size);
@@ -123,7 +132,9 @@ void PICTParser::Parse(Handle data) {
                 if (callbacks.textProc) {
                     Ptr data = NewPtr(size);
                     buf->Read(data, size);
-                    callbacks.textProc(&context, size, data, NULL, NULL);
+                    // DHText normally happens with text continuing on the
+                    // same line so don't prepend a newline
+                    callbacks.textProc(&context, size, data, false);
                     DisposePtr(data);
                 } else {
                     buf->Skip(size);
@@ -135,7 +146,7 @@ void PICTParser::Parse(Handle data) {
                 if (callbacks.textProc) {
                     Ptr data = NewPtr(size);
                     buf->Read(data, size);
-                    callbacks.textProc(&context, size, data, NULL, NULL);
+                    callbacks.textProc(&context, size, data, true);
                     DisposePtr(data);
                 } else {
                     buf->Skip(size);
@@ -147,7 +158,7 @@ void PICTParser::Parse(Handle data) {
                 if (callbacks.textProc) {
                     Ptr data = NewPtr(size);
                     buf->Read(data, size);
-                    callbacks.textProc(&context, size, data, NULL, NULL);
+                    callbacks.textProc(&context, size, data, true);
                     DisposePtr(data);
                 } else {
                     buf->Skip(size);
@@ -273,8 +284,13 @@ void PICTParser::Parse(Handle data) {
                     callbacks.arcProc(&context, kQDGrafVerbPaint, &frame, start, angle);
                 }
                 break;
+            case 0x70: // FramePoly
             case 0x71: // PaintPoly
-                // TODO: poly stuff?
+            case 0x72: // ErasePoly
+            case 0x73: // InvertPoly
+            case 0x74: // FillPoly
+                size = buf->Short(); // polySize
+                buf->Skip(size-2);   // polySize includes itself
                 break;
             case 0x84: // FillRegion
                 size = buf->Short();
@@ -287,6 +303,10 @@ void PICTParser::Parse(Handle data) {
                     callbacks.commentProc(&context, kind, 0, NULL);
                 }
                 break;
+            case 0x9b: // DirectBitsRgn
+                DirectBitsRgn(buf);
+                break;
+
             case 0xa1: // LongComment
                 kind = buf->Short();
                 size = buf->Short();
@@ -308,7 +328,7 @@ void PICTParser::Parse(Handle data) {
                 buf->Skip(24);
                 break;
             default:
-                SDL_Log("UNKNOWN OPCODE: %x\n", opcode);
+                SDL_Log("UNKNOWN OPCODE: %04x\n", opcode);
                 break;
         }
         // Every PICT opcode data section is word-aligned, so if we end on an odd byte, skip one.
@@ -316,4 +336,65 @@ void PICTParser::Parse(Handle data) {
     }
 
     delete buf;
+}
+
+void PICTParser::DirectBitsRgn(CDataBuffer *buf) {
+#ifdef DEBUGPARSER
+    SDL_Log("DirectBitsRgn\n");
+#endif
+    // PixMap
+    buf->Skip(4);                    // baseAddr
+    short rowBytes = buf->Short() & 0x7fff;  // rowBytes (bit 15 indicates PixMap vs BitMap)
+#ifdef DEBUGPARSER
+    SDL_Log("  PixMap: rowBytes = %d\n", rowBytes);
+#endif
+    Rect bounds;
+    buf->ReadRect(&bounds);          // bounds
+    buf->Skip(2);                    // pmVersion
+    buf->Skip(2);                    // packType
+    buf->Skip(4);                    // packSize
+    buf->Skip(4);                    // hRes 
+    buf->Skip(4);                    // vRes
+    buf->Skip(2);                    // pixelType
+    buf->Skip(2);                    // pixelSize
+    buf->Skip(2);                    // cmpCount
+    buf->Skip(2);                    // cmpSize
+    buf->Skip(4);                    // planeBytes
+    buf->Skip(4);                    // pmTable pointer
+    buf->Skip(4);                    // pmReserved
+    
+    // srcRect
+    buf->Skip(8);
+    // dstRect
+    buf->Skip(8);
+    // mode
+    buf->Skip(2);
+
+    // maskRgn (assumed to be rectangular)
+    short rgnSize = buf->Short();  // maskRgn.rgnSize
+    buf->Skip(rgnSize - 2);  // maskRgn.rgnBBox
+    
+    // PixData
+    short numRows = bounds.bottom-bounds.top;
+#ifdef DEBUGPARSER
+    SDL_Log("  PixMap:num rows = %d\n", numRows);
+#endif
+    if (rowBytes < 8) {
+        // data unpacked
+        buf->Skip(rowBytes*numRows);
+    } else {
+        // data packed
+        size_t byteCount;
+        for (int i = 0; i < numRows; i++) {
+            if (rowBytes > 250) {
+                byteCount = (size_t)buf->Short();
+            } else {
+                byteCount = (size_t)buf->Byte();
+            }
+#ifdef DEBUGPARSER
+            SDL_Log("    PixMap: %zu bytes for row %d\n", byteCount, i);
+#endif
+            buf->Skip(byteCount);
+        }
+    }
 }

@@ -34,6 +34,7 @@ class CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) = 0;
     virtual void MessageLine(short index, short align) = 0;
+    virtual void AddMessageLine(std::string line) = 0;
     virtual std::deque<std::string>& MessageLines() = 0;
     virtual void DrawUserInfoPart(short i, short partList) = 0;
     virtual void ParamLine(short index, short align, StringPtr param1, StringPtr param2) = 0;
@@ -92,7 +93,7 @@ public:
 
     OSErr LoadLevel(std::string set, OSType theLevel) override;
     void NotifyUser() override;
-    virtual void AddMessageLine(std::string line);
+    virtual void AddMessageLine(std::string line) override;
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
     virtual void NumberLine(long theNum, short align);
