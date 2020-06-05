@@ -6,6 +6,7 @@
 #include "CNetManager.h"
 #include "CPlayerManager.h"
 #include "CScoreKeeper.h"
+#include "Preferences.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
@@ -33,6 +34,7 @@ std::vector<Text *> scoreLives;
 
 const int CHAT_CHARS = 57;
 const int ROSTER_FONT_SIZE = 15;
+const int ROSTER_WINDOW_WIDTH = 470;
 const int SCORE_FONT_SIZE = 16;
 bool textInputStarted = false;
 char backspace[1] = {'\b'};
@@ -40,11 +42,14 @@ char clearline[1] = {'\x1B'};
 char endline[1] = {13};
 char bellline[1] = {7};
 char checkline[1] = {6};
+Widget *chatPanel;
 
 CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     setFixedWidth(470);
 
     tabWidget = add<TabWidget>();
+    
+    //players tab
     Widget *playersLayer = tabWidget->createTab("Players");
 
     setLayout(new BoxLayout(Orientation::Vertical, Alignment::Fill, 0, 0));
@@ -100,6 +105,41 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     levelDescription->setFixedHeight(90);
     levelDescription->setFixedWidth(450);
 
+    //chat tab
+    Widget *chatTab = tabWidget->createTab("Chat");
+    chatTab->setLayout(new GridLayout(Orientation::Horizontal, 1, Alignment::Minimum, 0, 0));
+    
+    VScrollPanel *scrollPanel = new VScrollPanel(chatTab);
+    scrollPanel->setFixedWidth(ROSTER_WINDOW_WIDTH);
+    scrollPanel->setFixedHeight(400);
+    
+    chatPanel = new Widget(scrollPanel);
+    AdvancedGridLayout *chatLayout = new AdvancedGridLayout();
+    chatPanel->setLayout(chatLayout);
+    
+    //placeholder lines for now
+    for (int i = 0; i < 20; i++) {
+        chatLayout->appendRow(1, 0.1);
+        chatLayout->appendCol(1, 1);
+        
+        auto chatLine = chatPanel->add<Label>("");
+        chatLine->setFontSize(ROSTER_FONT_SIZE + 2);
+        chatLine->setFont("mono");
+        chatLine->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
+        chatLine->setFixedHeight(20);
+
+        chatLayout->setAnchor(chatLine, AdvancedGridLayout::Anchor(0, i));
+    }
+
+    //chat input
+    std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
+    chatInput = chatTab->add<Label>(theName + ": ");
+    chatInput->setFontSize(ROSTER_FONT_SIZE + 2);
+    chatInput->setFont("mono");
+    chatInput->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
+    chatInput->setFixedHeight(70);
+    
+    //scores tab
     Widget *scoreLayer = tabWidget->createTab("Scores");
     scoreLayer->setLayout(new GridLayout(Orientation::Horizontal, 6, Alignment::Minimum, 0, 0));
 
@@ -130,12 +170,10 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     }
 
     tabWidget->setActiveTab(0);
-
-
-
     currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedTag;
 
     UpdateRoster();
+    //requestFocus();
 }
 
 CRosterWindow::~CRosterWindow() {}
@@ -170,10 +208,8 @@ void CRosterWindow::UpdateRoster() {
             currentLevel = theGame->loadedTag;
         }
     }
-    else {
-
+    else if (tabWidget->activeTab() == 2) {
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-
             CPlayerManager *thisPlayer = theNet->playerTable[i];
             const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             AvaraScoreRecord theScores = theGame->scoreKeeper->netScores;
@@ -246,11 +282,14 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
 }
 
 bool CRosterWindow::mouseEnterEvent(const nanogui::Vector2i &p, bool enter) {
+    //SDL_Log("mouseEnterEvent");
     if (enter && !textInputStarted) {
+        //SDL_Log("start");
         SDL_StartTextInput();
         textInputStarted = true;
     }
     if (!enter && textInputStarted) {
+        //SDL_Log("stop");
         SDL_StartTextInput();
         textInputStarted = false;
     }
@@ -260,6 +299,37 @@ bool CRosterWindow::mouseEnterEvent(const nanogui::Vector2i &p, bool enter) {
 
 void CRosterWindow::SendRosterMessage(int len, char *message) {
     ((CAvaraAppImpl *)gApplication)->GetNet()->SendRosterMessage(len, message);
+    chatInput->setCaption(chatInput->caption() + message);
+}
+
+void CRosterWindow::ChatLineDelete() {
+    std::string s = chatInput->caption().substr(0, chatInput->caption().size() - 1);
+    chatInput->setCaption(s);
+}
+
+void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
+    std::string name = std::string((char *)playerName + 1, playerName[0]);
+    std::string chatLine = name + ": " +  message;
+ 
+    AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
+    gridLayout->appendRow(1, 0.1);
+    gridLayout->appendCol(1, 1);
+    
+    auto chatLabel = chatPanel->add<Label>(chatLine);
+    chatLabel->setFontSize(ROSTER_FONT_SIZE + 2);
+    chatLabel->setFont("mono");
+    chatLabel->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
+
+    gridLayout->setAnchor(chatLabel, AdvancedGridLayout::Anchor(0, gridLayout->rowCount() - 1));
+
+    std::string theName = ((CAvaraAppImpl *)gApplication)->String(kPlayerNameTag);
+    Screen* screen = chatLabel->screen();
+    NVGcontext* context = screen->nvgContext();
+    chatLabel->parent()->performLayout(context);
+    chatInput->setCaption(theName + ": ");
+    
+    VScrollPanel *scroll = (VScrollPanel*)chatPanel->parent();
+    scroll->setScroll(1);
 }
 
 bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
@@ -274,9 +344,14 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         SendRosterMessage(strlen(event.text.text), event.text.text);
         return true;
     } else if (event.type == SDL_KEYDOWN) {
+        //SDL_Log("CRosterWindow::handleSDLEvent SDL_KEYDOWN");
+        
         switch (event.key.keysym.sym) {
             case SDLK_BACKSPACE:
                 SendRosterMessage(1, backspace);
+                ChatLineDelete();
+                //SDL_Log("CRosterWindow::handleSDLEvent BACK");
+                
                 return true;
             case SDLK_RETURN:
                 SendRosterMessage(1, endline);
@@ -284,6 +359,8 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
             case SDLK_CLEAR:
             case SDLK_DELETE:
                 SendRosterMessage(1, clearline);
+                //SDL_Log("CRosterWindow::handleSDLEvent CLEAR");
+                
                 return true;
             case SDLK_g:
                 if (SDL_GetModState() & KMOD_CTRL) {

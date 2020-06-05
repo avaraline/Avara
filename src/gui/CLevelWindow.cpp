@@ -5,20 +5,27 @@
 #include "CLevelDescriptor.h"
 #include "CNetManager.h"
 #include "Resource.h"
+#include "Preferences.h"
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Hard-coded for now. Eventually use the level search API.
     levelSets = {
-        "aa-normal", 
-        "aa-abnormal", 
-        "aa-deux-normal", 
-        "aa-deux-abnormal", 
+        "aa-normal",
+        "aa-abnormal",
+        "aa-deux-normal",
+        "aa-deux-abnormal",
         "aa-tre",
         "a-bridge-too-far",
-        "blockparty",  
+        "blockparty",
         "classic-mix-up",
-        "fosfori", 
-        "hunting-grounds", 
+        "fosfori",
+        "gzr-geriatric-ward",
+        "gzr-liver-spots",
+        "gzr-over-the-hill",
+        "gzr-grecian-formula",
+        "gzr-balledness",
+        "gzr-rip",
+        "hunting-grounds",
         "net-99",
         "not-aa",
         "scarlet-pimpernel-beta-0919",
@@ -34,9 +41,17 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // TODO: check load permission: theNet->PermissionQuery(kAllowLoadBit, 0)
 
     setBox = new nanogui::ComboBox(this, levelSets);
-    setBox->setCallback([this](int selectedIdx) { this->SelectSet(selectedIdx); });
+    setBox->setCallback([this, app](int selectedIdx) {
+        this->SelectSet(selectedIdx);
+        app->Set(kSelectedSet, levelSets[selectedIdx]);
+        levelBox->setSelectedIndex(0);
+        app->Set(kSelectedLevel, levelNames[0]);
+    });
 
     levelBox = new nanogui::DescComboBox(this, levelNames, levelIntros);
+    levelBox->setCallback([this, app](int selectedIdx) {
+        app->Set(kSelectedLevel, levelNames[selectedIdx]);
+    });
     levelBox->popup()->setSize(nanogui::Vector2i(500, 350));
     levelBox->setEnabled(false);
 
@@ -46,7 +61,24 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     startBtn = new nanogui::Button(this, "Start Game");
     startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
 
-    SelectSet(0);
+    //select last used level set
+    int setIndex = 0;
+    auto it = std::find(levelSets.begin(), levelSets.end(), app->String(kSelectedSet));
+    if (it != levelSets.end()) {
+        setIndex = std::distance(levelSets.begin(), it);
+        setBox->setSelectedIndex(setIndex);
+    }
+
+    SelectSet(setIndex);
+
+    //select last used level
+    int levelIndex = 0;
+    auto levelIt = std::find(levelNames.begin(), levelNames.end(), app->String(kSelectedLevel));
+    if (levelIt != levelNames.end()) {
+        levelIndex = std::distance(levelNames.begin(), levelIt);
+    }
+
+    levelBox->setSelectedIndex(levelIndex);
 }
 
 CLevelWindow::~CLevelWindow() {}

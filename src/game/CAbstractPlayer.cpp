@@ -727,14 +727,11 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             debugView = !debugView;
         if (TESTFUNC(kfuDebug2, ft->down))
             debug2Flag = !debug2Flag;
-        if (TESTFUNC(kfuZoomIn, ft->held)) {
+
+        if (TESTFUNC(kfuZoomIn, ft->held))
             fieldOfView -= FOVSTEP;
-            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView));
-        }
-        if (TESTFUNC(kfuZoomOut, ft->held)) {
+        if (TESTFUNC(kfuZoomOut, ft->held))
             fieldOfView += FOVSTEP;
-            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView));
-        }
 
 #define LOOKSTEP 0x1000L
 #define MAXSIDELOOK 0x8000L
@@ -776,6 +773,10 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             fieldOfView = MINFOV;
         if (fieldOfView > MAXFOV)
             fieldOfView = MAXFOV;
+
+        if (itsManager->IsLocalPlayer() && 
+            (TESTFUNC(kfuZoomOut, ft->held) || TESTFUNC(kfuZoomIn, ft->held)))
+            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView));
 
         if (fireGun)
             mouseShootTime = MOUSESHOOTDELAY;

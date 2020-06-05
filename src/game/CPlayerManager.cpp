@@ -706,6 +706,8 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                 break;
             case 13:
                 // ¬
+                ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
+
                 lineBuffer.push_back('\xC2');
                 lineBuffer.push_back('\xAC');
                 lineBuffer.push_back(' ');
@@ -729,6 +731,17 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
     }
 
     // FlushMessageText(false);
+}
+
+std::string CPlayerManagerImpl::GetChatLine() {
+    std::string theChat(lineBuffer.begin(), lineBuffer.end());
+    std::size_t found = theChat.find_last_of("\xC2\xAC");
+    if(found == std::string::npos)
+        found = 0;
+    else
+        found += 2;
+    
+    return theChat.substr(found);
 }
 
 std::string CPlayerManagerImpl::GetChatString(int maxChars) {

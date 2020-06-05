@@ -48,6 +48,7 @@ class CNetManager;
 class CPlayerManager {
 public:
     virtual std::string GetChatString(int maxChars) = 0;
+    virtual std::string GetChatLine() = 0;
     virtual CAbstractPlayer* GetPlayer() = 0;
     virtual void SetPlayer(CAbstractPlayer*) = 0;
     virtual short Slot() = 0;
@@ -190,6 +191,7 @@ public:
     // virtual	void			FlushMessageText(Boolean forceAll);
     virtual void RosterMessageText(short len, char *c);
     virtual std::string GetChatString(int maxChars);
+    virtual std::string GetChatLine();
 
     virtual void RosterKeyPress(unsigned char c);
     virtual void GameKeyPress(char c);

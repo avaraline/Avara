@@ -266,7 +266,7 @@ static void PeepStdOval(PICTContext *context, GrafVerb verb, Rect *r) {
     }
 }
 
-static void PeepStdText(PICTContext *context, short byteCount, Ptr theText, Point *numer, Point *denom) {
+static void PeepStdText(PICTContext *context, short byteCount, Ptr theText, Boolean prependNewline) {
     short i;
     char *p;
     static Point oldPoint;
@@ -277,7 +277,7 @@ static void PeepStdText(PICTContext *context, short byteCount, Ptr theText, Poin
     if (byteCount + textInBuffer + 2 < textBufferSize) {
         p = textBuffer + textInBuffer;
 
-        if (textInBuffer && p[-1] != 13) {
+        if (textInBuffer && p[-1] != 13 && prependNewline) {
             *p++ = 13;
             textInBuffer++;
         }

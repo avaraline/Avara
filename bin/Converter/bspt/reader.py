@@ -143,7 +143,7 @@ class BSP(object):
             import matplotlib.pyplot as plt
             import numpy as np
         except ImportError:
-            print("Triangle library or numpy not found, will not output triangulations")
+            print("triangle, matplotlib and/or numpy libraries not found, will not output triangulations")
             return d
 
         d["triangles_poly"] = list()

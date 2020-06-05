@@ -30,7 +30,7 @@
 void CHuffProcessor::CreateLookupBuffer() {
     short lastLookup;
     short walkerStack[33];
-    short *stackPtr;
+    short *stackPtr, *endPtr;
     short codeLen = 1;
     int codeString = 0;
     HuffTreeNode *theNode;
@@ -44,6 +44,7 @@ void CHuffProcessor::CreateLookupBuffer() {
     // Must be branch node.
     if (!singleSymbolData) {
         stackPtr = walkerStack + 1;
+        endPtr = walkerStack + 32;
         *stackPtr++ = theNode->right;
         theNode = &nodes[theNode->left];
         lastLookup = 0;
@@ -74,7 +75,7 @@ void CHuffProcessor::CreateLookupBuffer() {
                 codeLen++;
                 codeString += codeString;
             }
-        } while (stackPtr != walkerStack);
+        } while (stackPtr <= endPtr && stackPtr != walkerStack);
 
         lastNode = lookupBuf[lastLookup];
         while (lastLookup < HUFFHANDLELOOKUPSIZE) {

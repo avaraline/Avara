@@ -26,12 +26,13 @@ public:
         nanogui::Label *line2label = new nanogui::Label(this, line2, "sans", 14);
         line2label->setColor(nanogui::Color(200, 200));
         nanogui::Button *btn = new nanogui::Button(this, "Connect");
-        btn->setCallback([this, line1] {
+        btn->setCallback([this, line1, btn] {
             CAvaraAppImpl *avara = (CAvaraAppImpl *)gApplication;
             
             //connect if not hosting
-            if(avara->GetNet()->netStatus != kServerNet)
+            if(avara->GetNet()->netStatus != kServerNet) {
                 avara->GetNet()->ChangeNet(kClientNet, line1);
+            }
         });
 
         layout->setMargin(10);
@@ -87,8 +88,10 @@ CTrackerWindow::CTrackerWindow(CApplication *app) : CWindow(app, "Tracker") {
 
     nanogui::Button *refreshBtn = new nanogui::Button(top, "Refresh", ENTYPO_ICON_CW);
     refreshBtn->setCallback([this] {
+        resultsLabel->setCaption("");
         this->Query();
     });
+    resultsLabel = new nanogui::Label(top, "");
 
     //new Divider(this);
 
@@ -121,7 +124,8 @@ void CTrackerWindow::Query() {
             resultsBox->removeChild(0);
         }
 
-        for (int i = 0; i < apiData["games"].size(); i++) {
+        int serverCount = apiData["games"].size();
+        for (int i = 0; i < serverCount; i++) {
             auto game = apiData["games"][i];
             std::string players;
             bool commas = false;
@@ -134,6 +138,11 @@ void CTrackerWindow::Query() {
             }
             new TrackerInfo(resultsBox, game["address"].get<std::string>(), players, i > 0);
         }
+        
+        std::string serverStr = std::to_string(serverCount) + " server";
+        if(serverCount != 1)
+            serverStr.append("s");
+        resultsLabel->setCaption(serverStr);
 
         setNeedsLayout();
     }
