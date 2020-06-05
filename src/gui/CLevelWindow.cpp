@@ -10,22 +10,22 @@
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Hard-coded for now. Eventually use the level search API.
     levelSets = {
-        "aa-normal", 
-        "aa-abnormal", 
-        "aa-deux-normal", 
-        "aa-deux-abnormal", 
+        "aa-normal",
+        "aa-abnormal",
+        "aa-deux-normal",
+        "aa-deux-abnormal",
         "aa-tre",
         "a-bridge-too-far",
-        "blockparty",  
+        "blockparty",
         "classic-mix-up",
-        "fosfori", 
-        "gzr - Geriatric Ward",
-        "gzr - Liver Spots",
-        "gzr - Over the Hill",
-        "gzr - Grecian Formula",
-        "gzr - Balledness!",
-        "gzr - R.I.P.",
-        "hunting-grounds", 
+        "fosfori",
+        "gzr-geriatric-ward",
+        "gzr-liver-spots",
+        "gzr-over-the-hill",
+        "gzr-grecian-formula",
+        "gzr-balledness",
+        "gzr-rip",
+        "hunting-grounds",
         "net-99",
         "not-aa",
         "scarlet-pimpernel-beta-0919",
@@ -60,7 +60,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
 
     startBtn = new nanogui::Button(this, "Start Game");
     startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
-    
+
     //select last used level set
     int setIndex = 0;
     auto it = std::find(levelSets.begin(), levelSets.end(), app->String(kSelectedSet));
@@ -70,14 +70,14 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     }
 
     SelectSet(setIndex);
-    
+
     //select last used level
     int levelIndex = 0;
     auto levelIt = std::find(levelNames.begin(), levelNames.end(), app->String(kSelectedLevel));
     if (levelIt != levelNames.end()) {
         levelIndex = std::distance(levelNames.begin(), levelIt);
     }
-    
+
     levelBox->setSelectedIndex(levelIndex);
 }
 
