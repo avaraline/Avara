@@ -1160,7 +1160,7 @@ def parse_pict(fn, data):
         try:
             op.parse(buf, context)
         except ValueError:
-            print("UHOH (ValueError on parse")
+            print("UHOH (ValueError on parse)")
             # context.close(fn)
             exit(1)
         buf.align()
