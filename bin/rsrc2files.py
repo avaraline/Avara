@@ -5,6 +5,7 @@ import Converter.tmpl.reader as tmplReader
 import Converter.bspt.reader as bsptReader
 import os
 import sys
+import json
 from pathlib import Path
 
 BSPS_DIR = "bsps"
@@ -14,6 +15,7 @@ SVG_DIR = "svg"
 DEBUG_EXPORT = True
 
 def parse_level_rsrc(rpath, outpath, tmpl=None):
+    manifest_data = {}
     data = open(str(rpath), 'rb').read()
 
     reader = resource.Reader()
@@ -25,6 +27,7 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
 
     # avara reads the LEDI #128
     set_ledi = tmplData['LEDI'][128]
+    set_tag = set_ledi["Set Tag"]
 
     # the key for the list of levels is
     # five asterisks
@@ -81,7 +84,10 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             with open(fn, "w", encoding="utf-8") as xml_file:
                 xml_file.write(xml_text.decode("utf-8"))
 
+        manifest_data["LEDI"] = {v["Tag"]:v for (_, v) in ledi_meta.items()}
+
     if 'BSPT' in rsrc:
+        bspt_meta = {}
         bspdir = os.path.join(dirpath, BSPS_DIR)
         os.makedirs(bspdir, exist_ok=True)
         bsps = bsptReader.parse(rsrc['BSPT'])
@@ -93,8 +99,14 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
                 print("Writing BSPT %s" % fn)
             with open(fn, "w") as bsp_file:
                 bsp_file.write(bsp.avara_format())
+            bspt_meta[bsp.res_id] = {
+                "name": bsp.name,
+                "file": fn
+            }
+        manifest_data["BSPT"] = bspt_meta
 
     if 'HSND' in rsrc:
+        hsnd_meta = {}
         snddir = os.path.join(dirpath, HSND_DIR)
         os.makedirs(snddir, exist_ok=True)
         for hsnd_id in rsrc['HSND'].keys():
@@ -106,6 +118,19 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
                 print(f"Found HSND {hsnd_id} {hsnd_name} {fn}")
 
             os.system(f"build\\hsnd2wav {hsnd_id} {fpath} {rpath}")
+            hsnd_meta[hsnd_id] = {
+                "name": hsnd_name,
+                "file": fn
+            }
+
+
+    if 'TEXT' in rsrc:
+        manifest_data["TEXT"] = {k:v["data"].decode("macroman") for (k,v) in rsrc["TEXT"].items()}
+  
+    if 'HULL' in rsrc:
+        manifest_data["HULL"] = tmplData["HULL"]
+
+    return set_tag, manifest_data
 
 
 
@@ -127,11 +152,17 @@ if __name__ == '__main__':
     else:
         # run against everything in levels
         # and store them alongside
-
+        manifest = {}
         for rsrc_file in os.listdir(ldir):
             rpath = os.path.join(ldir, rsrc_file)
             print(rpath)
 
             if os.path.isdir(rpath):
                 continue
-            parse_level_rsrc(Path(rpath), ldir, avara_tmpl)
+            if ".r" not in rpath:
+                continue
+            tag, manifest_data = parse_level_rsrc(Path(rpath), ldir, avara_tmpl)
+            manifest[tag] = manifest_data
+        manifest_path = os.path.join(ldir, "manifest.json")
+        with open(manifest_path, 'w') as manifest_file:
+            json.dump(manifest, manifest_file, indent=1)
