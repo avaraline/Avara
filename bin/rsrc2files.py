@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 from pict2svg import parse_pict, PictParseError
-from Converter import resource
-import Converter.tmpl.reader as tmplReader
-import Converter.bspt.reader as bsptReader
+from rsrc_tools import resource
+import rsrc_tools.tmpl.reader as tmplReader
+import rsrc_tools.bspt.reader as bsptReader
 import os
 import sys
 import json

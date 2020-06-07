@@ -1,4 +1,4 @@
-from Converter.helpers import *
+from rsrc_tools.helpers import *
 
 
 UniquePointLength = 16

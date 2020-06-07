@@ -1,4 +1,4 @@
-from Converter.helpers import *
+from rsrc_tools.helpers import *
 
 
 def tiny_int_from_single_byte(byte):

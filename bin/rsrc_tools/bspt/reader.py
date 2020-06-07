@@ -1,5 +1,5 @@
-from Converter.helpers import *
-from Converter.bspt.datatypes import *
+from rsrc_tools.helpers import *
+from rsrc_tools.bspt.datatypes import *
 from itertools import zip_longest
 import json
 
