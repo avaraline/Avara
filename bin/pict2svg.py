@@ -25,6 +25,10 @@ from pathlib import Path
 
 DEBUG_PARSER = True
 
+BSPS_DIR = "bsps"
+HSND_DIR = "snd"
+SVG_DIR = "svg"
+
 class Rect:
 
     def __init__(self, t, l, b, r):
@@ -1203,7 +1207,9 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
     dirname = rpath.name.split('.')[0]# + "_svg"
     dirpath = os.path.join(outpath, dirname)
     os.makedirs(dirpath, exist_ok=True)
-    os.makedirs(os.path.join(dirpath, "svg"), exist_ok=True)
+
+    svgdir = os.path.join(dirpath, SVG_DIR)
+    os.makedirs(svgdir, exist_ok=True)
 
     if 'PICT' in rsrc:
         print(rsrc['PICT'].keys())
@@ -1226,7 +1232,7 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             #print(meta["Name"].encode('macintosh'))
             #print(meta["Message"].encode('macintosh'))
             ledi_meta[name]["Svg"] = filename
-            fn = os.path.join(dirpath, os.path.join("svg", filename))
+            fn = os.path.join(svgdir, filename)
             # if os.path.isfile(fn):
                 # print("%s was found, skipping" % fn)
                 # continue
@@ -1239,15 +1245,32 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
                 xml_file.write(xml_text.decode("utf-8"))
 
     if 'BSPT' in rsrc:
-        os.makedirs(os.path.join(dirpath, "bsp"), exist_ok=True)
+        bspdir = os.path.join(dirpath, BSPS_DIR)
+        os.makedirs(bspdir, exist_ok=True)
         bsps = bsptReader.parse(rsrc['BSPT'])
         for bsp in bsps:
             #filename = "%d_%s.avarabsp.json" % (bsp.res_id, bsp.name)
             filename = F"{bsp.res_id}.json"
-            fn = os.path.join(dirpath, f"bsp/{filename}")
-            # print("Writing BSPT %s" % fn)
+            fn = os.path.join(bspdir, filename)
+            if DEBUG_PARSER:
+                print("Writing BSPT %s" % fn)
             with open(fn, "w") as bsp_file:
                 bsp_file.write(bsp.avara_format())
+
+    if 'HSND' in rsrc:
+        snddir = os.path.join(dirpath, HSND_DIR)
+        os.makedirs(snddir, exist_ok=True)
+        for hsnd_id in rsrc['HSND'].keys():
+            hsnd_name = rsrc['HSND'][hsnd_id]["name"]
+
+            fn = str(hsnd_id) + "_" + "".join(c for c in hsnd_name if c.isalnum() or c in ('.', '_')).rstrip() + ".wav"
+            fpath = os.path.join(snddir, fn)
+            if DEBUG_PARSER:
+                print(f"Found HSND {hsnd_id} {hsnd_name} {fn}")
+
+            os.system(f"build\\hsnd2wav {hsnd_id} {fpath} {rpath}")
+
+
 
 
 if __name__ == '__main__':

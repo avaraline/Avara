@@ -3,6 +3,8 @@ from Converter.bspt.datatypes import *
 from itertools import zip_longest
 import json
 
+DEBUG_ADDED_VERTS = False
+
 class BSP(object):
     # https://github.com/jmunkki/Avara/blob/master/src/Libraries/BSP/BSPResStructures.h
     def __init__(self, bsp_dict):
@@ -286,11 +288,12 @@ class BSP(object):
             
             if vert_diff > 0:
                 print(d["max_bounds"])
-                print(self.name) # or (self.name == "bspNuclearWaste"):
+                print(f"Adding extra verticies to {self.name}")
                 the_dict["triangles"] = new_tris
                 the_dict["vertices"] = np.array([flatten_3to2(np.array(x[:3])) for x in d["points"]])
-                triangle.compare(plt, the_dict, result)
-                plt.show()
+                if DEBUG_ADDED_VERTS:
+                    triangle.compare(plt, the_dict, result)
+                    plt.show()
             # print(self.name)
             d["triangles_poly"].append(new_tris)
             d["triangles_verts_poly"].append(verts)

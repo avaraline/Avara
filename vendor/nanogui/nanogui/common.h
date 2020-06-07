@@ -29,6 +29,7 @@
 #include <array>
 #include <vector>
 #include <SDL2/SDL.h>
+#include <string>
 
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4

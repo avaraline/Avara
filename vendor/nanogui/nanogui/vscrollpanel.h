@@ -14,6 +14,7 @@
 #pragma once
 
 #include <nanogui/widget.h>
+#include <stdexcept>
 
 NAMESPACE_BEGIN(nanogui)
 
