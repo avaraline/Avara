@@ -76,13 +76,13 @@ class DataBuffer:
         return self.pos < self.size
 
     def read(self, num):
-        buf = data[self.pos:self.pos + num]
+        buf = self.data[self.pos:self.pos + num]
         self.pos += num
         return buf
 
     def unpack(self, fmt):
         size = struct.calcsize(fmt)
-        nums = struct.unpack('!' + fmt, data[self.pos:self.pos + size])
+        nums = struct.unpack('!' + fmt, self.data[self.pos:self.pos + size])
         self.pos += size
         return nums
 
@@ -1127,7 +1127,7 @@ class PictParseError(Exception):
 def parse_pict(fn, data):
     print(data[:150])
     buf = DataBuffer(data)
-    buf.short()
+    #buf.short()
     size = buf.short()
     frame = buf.rect()
     print(size, frame)
@@ -1150,7 +1150,7 @@ def parse_pict(fn, data):
             # context.close(fn)
             exit(1)
         buf.align()
-    return context.close()
+    return context.close(fn)
 
 
 def parse_level_rsrc(rpath, outpath, tmpl=None):
@@ -1181,12 +1181,13 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
 
     ledi = rsrc['LEDI']
 
-    dirname = rpath.name.split('.')[0] + "_svg"
+    dirname = rpath.name.split('.')[0]# + "_svg"
     dirpath = os.path.join(outpath, dirname)
     os.makedirs(dirpath, exist_ok=True)
+    os.makedirs(os.path.join(dirpath, "bsp"), exist_ok=True)
 
     if 'PICT' in rsrc:
-        # print(rsrc['PICT'].keys())
+        print(rsrc['PICT'].keys())
         picts = rsrc['PICT']
         for pict in picts:
             name = picts[pict]["name"]
@@ -1203,7 +1204,8 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             # print(filename)
             #print(meta["Name"].encode('macintosh'))
             #print(meta["Message"].encode('macintosh'))
-            fn = os.path.join(dirpath, filename)
+            ledi_meta[name]["Svg"] = filename
+            fn = os.path.join(dirpath, f"svg/{filename}")
             # if os.path.isfile(fn):
                 # print("%s was found, skipping" % fn)
                 # continue
@@ -1213,14 +1215,15 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
                 print(F"Could not parse {fn} - {meta['Name']} because of unknown opcode")
                 continue
             with open(fn, "w") as xml_file:
-                xml_file.write(xml_text)
+                pass #xml_file.write(xml_text)
 
     if 'BSPT' in rsrc:
+        os.makedirs(os.path.join(dirpath, "bsp"), exist_ok=True)
         bsps = bsptReader.parse(rsrc['BSPT'])
         for bsp in bsps:
             #filename = "%d_%s.avarabsp.json" % (bsp.res_id, bsp.name)
             filename = F"{bsp.res_id}.json"
-            fn = os.path.join(dirpath, filename)
+            fn = os.path.join(dirpath, f"bsp/{filename}")
             # print("Writing BSPT %s" % fn)
             with open(fn, "w") as bsp_file:
                 bsp_file.write(bsp.avara_format())
