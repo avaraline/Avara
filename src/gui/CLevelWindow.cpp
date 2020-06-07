@@ -20,6 +20,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "butternut-squash",
         "cancer",
         "classic-mix-up",
+        "cnemies-squares",
         "disk-o-tech-light",
         "dodgeball",
         "fosfori",
@@ -29,6 +30,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "gzr-liver-spots",
         "gzr-over-the-hill",
         "gzr-rip",
+        "holy-hand-grenades",
         "hunting-grounds",
         "klaus-levels",
         "macabre",
@@ -42,6 +44,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "symbiosis",
         "the-codex",
         "the-lexicon",
+        "wild-west-collection",
         "wrestling",
         "wut"
     };
