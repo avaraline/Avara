@@ -92,6 +92,12 @@ class DataBuffer:
     def ushort(self):
         return self.unpack('H')[0]
 
+    def char(self):
+        return self.unpack('b')[0]
+
+    def uchar(self):
+        return self.unpack('B')[0]
+
     def fixed(self):
         fixd = self.unpack('l')[0]
         return fixd / 65536.0
@@ -351,12 +357,11 @@ class SVGContext:
         #if "fill" not in style:
         #    el.set("style", style + "fill: none;")
 
-    def close(self, filename):
-        tree = etree.ElementTree(self.root)
+    def close(self):
         # tree.write(filename, encoding="UTF-8")
-        xml_str = etree.tostring(tree, encoding="unicode")
+        svg = etree.ElementTree(self.root)
+        xml_str = etree.tostring(svg, pretty_print=True, encoding="UTF-8")
         return xml_str
-
 
 class Operation:
     length = 0
@@ -449,43 +454,20 @@ def color_table(data):
 
 def pixdata(data, pmap):
     bounds = pmap[0]
-    row_bytes = pmap[1]
-    pixel_size = pmap[2]
-
-    row_bytes = row_bytes & 0x7FFF
-
+    row_bytes = pmap[1] & 0x7FFF
     print("row_bytes: %s" % row_bytes)
 
-    if 0 < row_bytes < 8:
-        lines_to_read = bounds.height
+    lines_to_read = bounds.height
+    print("lines_to_read: %d" % lines_to_read)
 
+    if row_bytes < 8:
         data_size = row_bytes * lines_to_read
-        
-           
         pixdata = data.read(data_size)
     else:
-        scanlines = bounds.height
-        width = bounds.width
-        print("Scanlines: %d" % scanlines)
-        
-        if pixel_size == 16:
-            width *= 2
-
-        print("pixel_size: %d" % pixel_size)
-
-        while scanlines >= 0:
-            sl_size = (width * 4) | 0x8000
-            """
-            if row_bytes > 250:
-                sl_size = data.short()
-            else:
-                sl_size = data.byte()
-            """
-            print(sl_size)
-            scanline = data.read(sl_size * 2)
-            #print(" ".join(format(x, '02x') for x in scanline))
-            print(scanline)
-            scanlines -= 1
+        for i in range(lines_to_read):
+            sl_size = data.ushort() if row_bytes > 250 else data.uchar()
+            scanline = data.read(sl_size)
+            print("%d, %2d: 0x%0x" % (i+1, sl_size, scanline))
 
 
 # Didn't end up using this, leaving it just in case
@@ -522,7 +504,7 @@ class BitsRgn (Operation):
         mode = data.short()
 
         mask_rgn_size = data.short()
-        mask_rgn = data.read(mask_rgn_size)
+        mask_rgn = data.read(mask_rgn_size-2)
 
         pixdata(data, pmap)
         
@@ -543,7 +525,7 @@ class DirectBitsRgn (Operation):
         
         mask_rgn_size = data.short()
         print("mask_rgn_size: %s" % mask_rgn_size)
-        mask_rgn = data.read(mask_rgn_size)
+        mask_rgn = data.read(mask_rgn_size-2)
         
         pixdata(data, pmap)
 
@@ -589,6 +571,12 @@ class PenMode (Operation):
 
 
 class PenPattern (Operation):
+
+    def parse(self, data, context):
+        pattern = data.read(8)
+
+
+class FillPattern (Operation):
 
     def parse(self, data, context):
         pattern = data.read(8)
@@ -1026,6 +1014,7 @@ PICT_OPCODES = {
     0x7: PenSize,
     0x8: PenMode,
     0x9: PenPattern,
+    0xa: FillPattern,
     0xb: OvalSize,
     0xc: Origin,
     0xd: TextSize,
@@ -1127,14 +1116,13 @@ class PictParseError(Exception):
 def parse_pict(fn, data):
     print(data[:150])
     buf = DataBuffer(data)
-    #buf.short()
     size = buf.short()
     frame = buf.rect()
     print(size, frame)
     context = SVGContext(frame)
     while buf:
         opcode = buf.short()
-        print(opcode)
+        print("0x%04x" % opcode)
         try:
             op = PICT_OPCODES[opcode]()
         except KeyError:
