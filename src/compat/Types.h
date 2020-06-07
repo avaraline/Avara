@@ -7,6 +7,7 @@
 
 // included here to pull in NULL
 #include <cstdlib>
+#include <cstddef>
 #include <stdint.h>
 
 typedef bool Boolean;
@@ -101,6 +102,7 @@ typedef struct GLData {
 
 #ifdef _WIN32
 #include <winsock2.h>
+#include <Windows.h>
 #else
 #include <arpa/inet.h>
 #endif

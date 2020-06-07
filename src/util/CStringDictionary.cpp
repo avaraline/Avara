@@ -17,8 +17,6 @@
 
 #include <cstring>
 
-using namespace std;
-
 /*
 **	Given a counted string of length len, HashString
 **	will return a value from 0 to HASHTABLESIZE-1.
@@ -57,7 +55,7 @@ void CStringDictionary::GetIndEntry(short index, char *theEntry) {
 
 void CStringDictionary::GetIndEntry(short index, StringPtr theEntry) {
     if (0 <= index && index < wordList.size()) {
-        string entry = wordList.at(index);
+        std::string entry = wordList.at(index);
         theEntry[0] = entry.length();
         memcpy(theEntry + 1, entry.c_str(), entry.length());
     }
@@ -102,7 +100,7 @@ tokentype CStringDictionary::AddDictEntry(const unsigned char *entry, short len)
 }
 
 tokentype CStringDictionary::AddDictEntry(const char *entry, short len) {
-    string s;
+    std::string s;
     if (len >= 0) {
         s.append(entry, len);
     } else {
@@ -111,7 +109,7 @@ tokentype CStringDictionary::AddDictEntry(const char *entry, short len) {
 
     unsigned int idx = wordList.size();
     wordList.push_back(s);
-    index.insert(pair<string, size_t>(s, idx));
+    index.insert(std::pair<std::string, size_t>(s, idx));
     return idx;
 }
 
@@ -129,8 +127,8 @@ tokentype CStringDictionary::SearchForEntry(const unsigned char *entry, short le
     return tt;
 }
 tokentype CStringDictionary::SearchForEntry(const char *entry, short len) {
-    string s(entry, len);
-    map<string, size_t>::iterator it;
+    std::string s(entry, len);
+    std::map<std::string, size_t>::iterator it;
     it = index.find(s);
     if (it != index.end()) {
         return index.find(s)->second;
@@ -208,7 +206,7 @@ Handle CStringDictionary::WriteToHandle() {
         HLock(result);
         memcpy(p, &stringCount, sizeof(stringCount));
         p += sizeof(stringCount);
-        for (vector<string>::iterator it = wordList.begin(); it != wordList.end(); it++) {
+        for (std::vector<std::string>::iterator it = wordList.begin(); it != wordList.end(); it++) {
             len = it->length();
             memcpy(p, &len, sizeof(size_t));
             p += sizeof(size_t);
@@ -226,7 +224,7 @@ void CStringDictionary::ReadFromHandle(Handle source) {
     short stringCount;
     char cMemTags;
     size_t len;
-    string s;
+    std::string s;
 
     if (source) {
         char *p = (char *)source;

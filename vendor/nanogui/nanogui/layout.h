@@ -18,6 +18,7 @@
 #include <nanogui/compat.h>
 #include <nanogui/object.h>
 #include <string>
+#include <stdexcept>
 #include <unordered_map>
 
 NAMESPACE_BEGIN(nanogui)

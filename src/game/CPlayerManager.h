@@ -15,6 +15,7 @@
 #include <SDL2/SDL.h>
 #include <map>
 #include <deque>
+#include <string>
 
 enum {
     kLNotConnected,

@@ -14,7 +14,7 @@
 #include "FastMat.h"
 #include "Memory.h"
 #include "PICTParser.h"
-//#include "SVGParser.h"
+#include "SVGParser.h"
 #include "Parser.h"
 #include "Resource.h"
 
@@ -96,7 +96,7 @@ Fixed GetLastOval(Fixed *theLoc) {
 Fixed GetLastArcDirection() {
     return FDegToOne(((long)lastArcAngle) << 16);
 }
-/*
+
 static void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool fg) {
     if (fg) {
         fillColor.red = r;
@@ -158,7 +158,7 @@ static void SvgRect(Rect *r, int radius, unsigned short thickness) {
 static void SvgText(unsigned char *script) {
     RunThis(script);
 }
-*/
+
 static void PeepStdRRect(PICTContext *context, GrafVerb verb, Rect *r, short ovalWidth, short ovalHeight) {
     CWallActor *theWall;
 
@@ -360,7 +360,7 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
         BlockMoveData(&context->fgColor, &fillColor, sizeof(RGBColor));
     }
 }
-/*
+
 void SVGConvertToLevelMap() {
     InitParser();
     SVGParser *parser = new SVGParser();
@@ -376,7 +376,7 @@ void SVGConvertToLevelMap() {
     FreshCalc();
     gCurrentGame->EndScript();
 }
-*/
+
 void ConvertToLevelMap(Handle levelData) {
     InitParser();
     // TODO: Not a good place for this

@@ -23,10 +23,10 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 #include "CBaseObject.h"
 #include "Types.h"
+
+using namespace std;
 
 #define DICTIONARYCLUMPSIZE (16 * sizeof(DictEntry))
 #define WORDCLUMPSIZE 256
@@ -76,6 +76,6 @@ public:
 
 private:
     /*	Variables:			*/
-    vector<string> wordList;
-    map<string, size_t> index;
+    std::vector<std::string> wordList;
+    std::map<std::string, size_t> index;
 };
