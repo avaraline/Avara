@@ -174,7 +174,6 @@ if __name__ == '__main__':
     if not WAV2OGG:
         print("I need libsndfile available to convert WAV to OGG.")
         print("Install libsndfile and make sure sndfile-convert is on your PATH")
-        exit(1)
 
     ldir = "levels"
 
