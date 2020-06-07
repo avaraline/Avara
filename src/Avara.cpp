@@ -21,7 +21,6 @@
 using namespace nanogui;
 
 #ifdef _WIN32
-#include <Windows.h>
 
 typedef enum PROCESS_DPI_AWARENESS {
     PROCESS_DPI_UNAWARE = 0,

@@ -18,6 +18,7 @@
 
 #include <nanogui/common.h>
 #include <nanogui/object.h>
+#include <stdexcept>
 
 NAMESPACE_BEGIN(nanogui)
 

@@ -17,7 +17,6 @@
 
 #include <cstring>
 
-
 /*
 **	Given a counted string of length len, HashString
 **	will return a value from 0 to HASHTABLESIZE-1.

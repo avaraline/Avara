@@ -26,6 +26,8 @@
 #include "CBaseObject.h"
 #include "Types.h"
 
+using namespace std;
+
 #define DICTIONARYCLUMPSIZE (16 * sizeof(DictEntry))
 #define WORDCLUMPSIZE 256
 #define HASHTABLESIZE 128 /* Must be a power of 2	*/

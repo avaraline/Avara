@@ -188,8 +188,8 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
     */
 }
 
-/*
-OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
+
+OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
@@ -208,7 +208,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     SVGConvertToLevelMap();
     return noErr;
 }
-*/
+
 
 OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
@@ -228,7 +228,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         if (curLevel->tag == theLevel) {
             std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
             levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
-            BlockMoveData(set.c_str(), itsGame->loadedSet, set.size());
+            BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
             BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1);
             Handle levelData = GetNamedResource('PICT', rsrcName);
             if (levelData) {
@@ -255,6 +255,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
 
     return noErr;
 }
+
 
 void CAvaraAppImpl::NotifyUser() {
     // TODO: Bell sound(s)

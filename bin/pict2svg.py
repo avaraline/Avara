@@ -11,17 +11,13 @@ Inside Macintosh - More Macintosh Toolbox
 Inside Macintosh - Imaging with QuickDraw
 """
 
-import os
 import struct
-import sys
 import math
 import json
+import sys
 from lxml import etree
-#from forker import get_forks
-from Converter import resource
-import Converter.tmpl.reader as tmplReader
-import Converter.bspt.reader as bsptReader
-from pathlib import Path
+
+DEBUG_PARSER = True
 
 
 class Rect:
@@ -76,13 +72,13 @@ class DataBuffer:
         return self.pos < self.size
 
     def read(self, num):
-        buf = data[self.pos:self.pos + num]
+        buf = self.data[self.pos:self.pos + num]
         self.pos += num
         return buf
 
     def unpack(self, fmt):
         size = struct.calcsize(fmt)
-        nums = struct.unpack('!' + fmt, data[self.pos:self.pos + size])
+        nums = struct.unpack('!' + fmt, self.data[self.pos:self.pos + size])
         self.pos += size
         return nums
 
@@ -91,6 +87,12 @@ class DataBuffer:
 
     def ushort(self):
         return self.unpack('H')[0]
+
+    def char(self):
+        return self.unpack('b')[0]
+
+    def uchar(self):
+        return self.unpack('B')[0]
 
     def fixed(self):
         fixd = self.unpack('l')[0]
@@ -240,8 +242,10 @@ class SVGContext:
 
     def group_close(self):
         if len(self.parents) < 1:
-            print("Group close with no group open...")
+            if DEBUG_PARSER:
+                print("Group close with no group open...")
             return
+
         self.depth -= 1
         self.current = self.parents[-1]
         self.parents = self.parents[:-1]
@@ -264,7 +268,7 @@ class SVGContext:
             self.textpos.x += dh
         if dv:
             self.textpos.y += dv
-        # print(s.encode('ascii', 'ignore'))
+
         self.buffered.extend([{
             "string": str(x),
             "x": self.textpos.x,
@@ -351,12 +355,11 @@ class SVGContext:
         #if "fill" not in style:
         #    el.set("style", style + "fill: none;")
 
-    def close(self, filename):
-        tree = etree.ElementTree(self.root)
+    def close(self):
         # tree.write(filename, encoding="UTF-8")
-        xml_str = ElementTree.tostring(tree, encoding="UTF-8")
+        svg = etree.ElementTree(self.root)
+        xml_str = etree.tostring(svg, pretty_print=True, encoding="UTF-8")
         return xml_str
-
 
 class Operation:
     length = 0
@@ -385,7 +388,7 @@ class SkipRegion (Operation):
 # This function reads embedded image pixmaps
 PIXMAP_BIT = 0x8000
 def pixmap(data, force=False):
-    #base_addr = data.long()
+    base_addr = data.long()
     row_bytes = 0
     if not force:
         row_bytes = data.short()
@@ -399,9 +402,10 @@ def pixmap(data, force=False):
     read_pixmap = (row_bytes & PIXMAP_BIT != 0) or force
     bounds = data.rect()
     pixel_size = 0
-
-    print("bounds: %s" % bounds)
-    print("read_pixmap: %s" % read_pixmap)
+    if DEBUG_PARSER:
+        print("bounds: %s" % bounds)
+        print("read_pixmap: %s" % read_pixmap)
+    
     if read_pixmap:
         version = data.short()
         pack_type = data.short()
@@ -415,20 +419,20 @@ def pixmap(data, force=False):
         plane_bytes = data.long()
         pmtable = data.long()
         reserved = data.long()
-        
-        #print("base_addr: %s" % base_addr)
-        print("version: %s" % version)
-        print("pack_type: %s" % pack_type)
-        print("pack_size: %s" % pack_size)
-        print("hres: %s" % hres)
-        print("vres: %s" % vres)
-        print("pixel_type: %s" % pixel_type)
-        print("pixel_size: %s" % pixel_size)
-        print("cmp_count: %s" % cmp_count)
-        print("cmp_size: %s" % cmp_size)
-        print("plane_bytes: %s" % plane_bytes)
-        print("pmtable: %s" % pmtable)
-        print("reserved: %s" % reserved)
+        if DEBUG_PARSER:
+            print("base_addr: %s" % base_addr)
+            print("version: %s" % version)
+            print("pack_type: %s" % pack_type)
+            print("pack_size: %s" % pack_size)
+            print("hres: %s" % hres)
+            print("vres: %s" % vres)
+            print("pixel_type: %s" % pixel_type)
+            print("pixel_size: %s" % pixel_size)
+            print("cmp_count: %s" % cmp_count)
+            print("cmp_size: %s" % cmp_size)
+            print("plane_bytes: %s" % plane_bytes)
+            print("pmtable: %s" % pmtable)
+            print("reserved: %s" % reserved)
         
     return (bounds, row_bytes, pixel_size)
 
@@ -437,55 +441,39 @@ def color_table(data):
     ct_seed = data.long()
     trans_index = data.short()
     ct_size = data.short()
-    print("ct_size: %s" % ct_size)
+    if DEBUG_PARSER:
+        print("ct_size: %s" % ct_size)
     ct = []
     while ct_size > 0:
         ct.append(data.short())
         ct_size -= 1
-
-    # print("ct_seed: %s" % ct_seed)
-    # print("trans_index: %s" % trans_index)
-    # print("ct: %s" % ct)
+    
+    if DEBUG_PARSER:
+        print("ct_seed: %s" % ct_seed)
+        print("trans_index: %s" % trans_index)
+        print("ct: %s" % ct)
 
 def pixdata(data, pmap):
     bounds = pmap[0]
-    row_bytes = pmap[1]
-    pixel_size = pmap[2]
+    row_bytes = pmap[1] & 0x7FFF
 
-    row_bytes = row_bytes & 0x7FFF
+    lines_to_read = bounds.height
 
-    print("row_bytes: %s" % row_bytes)
+    if DEBUG_PARSER:
+        print("row_bytes: %s" % row_bytes)
+        print("lines_to_read: %d" % lines_to_read)
 
-    if 0 < row_bytes < 8:
-        lines_to_read = bounds.height
-
+    if row_bytes < 8:
         data_size = row_bytes * lines_to_read
-        
-           
         pixdata = data.read(data_size)
     else:
-        scanlines = bounds.height
-        width = bounds.width
-        print("Scanlines: %d" % scanlines)
-        
-        if pixel_size == 16:
-            width *= 2
-
-        print("pixel_size: %d" % pixel_size)
-
-        while scanlines >= 0:
-            sl_size = (width * 4) | 0x8000
-            """
-            if row_bytes > 250:
-                sl_size = data.short()
-            else:
-                sl_size = data.byte()
-            """
-            print(sl_size)
-            scanline = data.read(sl_size * 2)
-            #print(" ".join(format(x, '02x') for x in scanline))
-            print(scanline)
-            scanlines -= 1
+        for i in range(lines_to_read):
+            sl_size = data.ushort() if row_bytes > 250 else data.uchar()
+            if DEBUG_PARSER:
+                print(f"sl_size: {sl_size}")
+            scanline = data.read(sl_size)
+            if DEBUG_PARSER:
+                print(f"{i+1}, {sl_size}, {scanline}")
 
 
 # Didn't end up using this, leaving it just in case
@@ -497,24 +485,27 @@ class SkipReserved_x97 (Operation):
 
 class BitsRect (Operation):
     def parse(self, data, context):
-        print("BitsRect")
-        print( " ".join(format(x, '02x') for x in data.data[:300]))
+        if DEBUG_PARSER:
+            print("BitsRect")
+            print(" ".join(format(x, '02x') for x in data.data[:300]))
         pmap = pixmap(data)
         # color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
 
-        print("src_rect: %s" % src_rect)
-        print("dst_rect: %s" % dst_rect)
-        print("mode: %s" % mode)
+        if DEBUG_PARSER:
+            print(f"src_rect: {src_rect}")
+            print(f"dst_rect: {dst_rect}")
+            print(f"mode: {mode}")
 
         pixdata(data, pmap)
 
 
 class BitsRgn (Operation):
     def parse(self, data, context):
-        print("BitsRgn")
+        if DEBUG_PARSER:
+            print("BitsRgn")
         pmap = pixmap(data)
         # color_table(data)
         src_rect = data.rect()
@@ -522,28 +513,32 @@ class BitsRgn (Operation):
         mode = data.short()
 
         mask_rgn_size = data.short()
-        mask_rgn = data.read(mask_rgn_size)
+        mask_rgn = data.read(mask_rgn_size-2)
 
         pixdata(data, pmap)
         
 
 class DirectBitsRect (Operation):
     def parse(self, data, context):
-        print("DirectBitsRect")
+        if DEBUG_PARSER:
+            print("DirectBitsRect")
+        raise NotImplementedError
         pass
 
 
 class DirectBitsRgn (Operation):
     def parse(self, data, context):
-        print("DirectBitsRgn")
+        if DEBUG_PARSER:
+            print("DirectBitsRgn")
         pmap = pixmap(data, force=False)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
         
         mask_rgn_size = data.short()
-        print("mask_rgn_size: %s" % mask_rgn_size)
-        mask_rgn = data.read(mask_rgn_size)
+        if DEBUG_PARSER:
+            print(f"mask_rgn_size: {mask_rgn_size}")
+        mask_rgn = data.read(mask_rgn_size-2)
         
         pixdata(data, pmap)
 
@@ -589,6 +584,12 @@ class PenMode (Operation):
 
 
 class PenPattern (Operation):
+
+    def parse(self, data, context):
+        pattern = data.read(8)
+
+
+class FillPattern (Operation):
 
     def parse(self, data, context):
         pattern = data.read(8)
@@ -675,7 +676,8 @@ class ShortLine (Operation):
         dh, dv = data.read(2)
         context.x += dh
         context.y += dv
-        print("%s -> %s %s" % (str(start), dh, dv))
+        if DEBUG_PARSER:
+            print(f"{str(start)} -> {dh} {dv}")
 
 
 class ShortLineFrom (Operation):
@@ -690,7 +692,8 @@ class ShortLineFrom (Operation):
         line.set("x2", str(context.x))
         line.set("y2", str(context.y))
         line.set("stroke", "black")
-        print("%s %s" % (dh, dv))
+        if DEBUG_PARSER:
+            print(f"ShortLineFrom {dh} {dv}")
 
 
 class LongText (Operation):
@@ -753,7 +756,8 @@ class FrameSameRectangle (Operation):
 
     def parse(self, data, context):
         if context.last_rect is None:
-            print("FrameSameRectangle with no last rect")
+            if DEBUG_PARSER:
+                print("FrameSameRectangle with no last rect")
             return
         context.stroke(context.last_rect)
 
@@ -762,7 +766,8 @@ class PaintSameRectangle (Operation):
 
     def parse(self, data, context):
         if context.last_rect is None:
-            print("PaintSameRectangle with no last rect")
+            if DEBUG_PARSER:
+                print("PaintSameRectangle with no last rect")
             return
         context.fill(context.last_rect)
 
@@ -794,7 +799,8 @@ class FrameSameRoundedRectangle (Operation):
 
     def parse(self, data, context):
         if context.last_rrect is None:
-            print("FrameSameRoundedRectangle with no last rrect")
+            if DEBUG_PARSER:
+                print("FrameSameRoundedRectangle with no last rrect")
             return
         context.stroke(context.last_rrect)
 
@@ -803,7 +809,8 @@ class PaintSameRoundedRectangle (Operation):
     
     def parse(self, data, context):
         if context.last_rrect is None:
-            print("PaintSameRoundedRectangle with no last rrect")
+            if DEBUG_PARSER:
+                print("PaintSameRoundedRectangle with no last rrect")
             return
         context.fill(context.last_rrect)
 
@@ -855,7 +862,8 @@ class FrameSameOval (Operation):
 
     def parse(self, data, context):
         if context.last_oval is None:
-            print("FrameSameOval with no last oval")
+            if DEBUG_PARSER:
+                print("FrameSameOval with no last oval")
             return
         context.stroke(context.last_oval)
 
@@ -864,7 +872,8 @@ class PaintSameOval (Operation):
 
     def parse(self, data, context):
         if context.last_oval is None:
-            print("PaintSameOval with no last oval")
+            if DEBUG_PARSER:
+                print("PaintSameOval with no last oval")
             return
         context.fill(context.last_oval)
 
@@ -981,10 +990,11 @@ class ShortComment (Operation):
 
     def parse(self, data, context):
         kind = data.short()
-        try:
-            print("ShortComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
-        except KeyError:
-            print("ShortComment: %s - unknown" % kind)
+        if DEBUG_PARSER:
+            try:
+                print("ShortComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
+            except KeyError:
+                print("ShortComment: %s - unknown" % kind)
         if kind == 151:
             # picTextEnd
             context.flush_text()
@@ -1000,9 +1010,10 @@ class LongComment (Operation):
     def parse(self, data, context):
         kind, size = data.unpack('hh')
         value = data.read(size)
-        print("LongComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
-        print("size: %s" % size)
-        print("value: %s" % " ".join(format(x, '02x') for x in value))
+        if DEBUG_PARSER:
+            print("LongComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
+            print("size: %s" % size)
+            print("value: %s" % " ".join(format(x, '02x') for x in value))
 
 
 class EndPict (Operation):
@@ -1012,7 +1023,8 @@ class EndPict (Operation):
 class Version (Operation):
     def parse(self, data, context):
         version = data.read(1)
-        print("Version: %s" % version)
+        if DEBUG_PARSER:
+            print("Version: %s" % version)
 
 
 class Header (Operation):
@@ -1026,6 +1038,7 @@ PICT_OPCODES = {
     0x7: PenSize,
     0x8: PenMode,
     0x9: PenPattern,
+    0xa: FillPattern,
     0xb: OvalSize,
     0xc: Origin,
     0xd: TextSize,
@@ -1125,16 +1138,16 @@ class PictParseError(Exception):
 
 
 def parse_pict(fn, data):
-    print(data[:150])
+    #print(data[:150])
     buf = DataBuffer(data)
-    buf.short()
     size = buf.short()
     frame = buf.rect()
-    print(size, frame)
+    #print(size, frame)
     context = SVGContext(frame)
     while buf:
         opcode = buf.short()
-        print(opcode)
+        if DEBUG_PARSER:
+            print("0x%04x" % opcode)
         try:
             op = PICT_OPCODES[opcode]()
         except KeyError:
@@ -1142,113 +1155,27 @@ def parse_pict(fn, data):
             raise PictParseError
         if isinstance(op, EndPict):
             break
-        print("%s - 0x%s - %s" % (fn, format(opcode, '02x'), op.__class__.__name__))
+        if DEBUG_PARSER:
+            print("%s - 0x%s - %s" % (fn, format(opcode, '02x'), op.__class__.__name__))
         try:
             op.parse(buf, context)
         except ValueError:
-            print("UHOH")
+            print("UHOH (ValueError on parse)")
             # context.close(fn)
             exit(1)
         buf.align()
     return context.close()
 
 
-def parse_level_rsrc(rpath, outpath, tmpl=None):
-    data = open(str(rpath), 'rb').read()
-
-    reader = resource.Reader()
-    rsrc = reader.parse(data)
-    if tmpl is not None:
-        rsrc['TMPL'] = tmpl
-    # print(rsrc.keys())
-    tmplData = tmplReader.parse(rsrc)
-
-    # avara reads the LEDI #128
-    set_ledi = tmplData['LEDI'][128]
-
-    # the key for the list of levels is
-    # five asterisks
-    ledi_meta = {}
-    for single_ledi in set_ledi["*****"]:
-        # store these in a dictionary by pict name
-        ledi_meta[single_ledi["Path"]] = single_ledi
-
-    #rsrc = get_forks(data)
-    print(rsrc.keys())
-    if 'LEDI' not in rsrc:
-        print("No LEDI found for set %s" % rpath)
-        return
-
-    ledi = rsrc['LEDI']
-
-    dirname = rpath.name.split('.')[0] + "_svg"
-    dirpath = os.path.join(outpath, dirname)
-    os.makedirs(dirpath, exist_ok=True)
-
-    if 'PICT' in rsrc:
-        # print(rsrc['PICT'].keys())
-        picts = rsrc['PICT']
-        for pict in picts:
-            name = picts[pict]["name"]
-            # make sure we have an LEDI for this
-            if name not in ledi_meta:
-                print("%s is not in LEDI, skipping" % name)
-                continue
-
-            meta = ledi_meta[name]
-            data = picts[pict]["data"]
-            # print(data)
-            
-            filename = ("%s_%s_%s.svg" % (str(pict), meta["Tag"], name)).replace(" ", "_")
-            # print(filename)
-            #print(meta["Name"].encode('macintosh'))
-            #print(meta["Message"].encode('macintosh'))
-            fn = os.path.join(dirpath, filename)
-            # if os.path.isfile(fn):
-                # print("%s was found, skipping" % fn)
-                # continue
-            try:
-                xml_text = parse_pict(fn, data)
-            except PictParseError:
-                print(F"Could not parse {fn} - {meta['Name']} because of unknown opcode")
-                continue
-            with open(fn, "w") as xml_file:
-                xml_file.write(xml_text)
-
-    if 'BSPT' in rsrc:
-        bsps = bsptReader.parse(rsrc['BSPT'])
-        for bsp in bsps:
-            #filename = "%d_%s.avarabsp.json" % (bsp.res_id, bsp.name)
-            filename = F"{bsp.res_id}.json"
-            fn = os.path.join(dirpath, filename)
-            # print("Writing BSPT %s" % fn)
-            with open(fn, "w") as bsp_file:
-                bsp_file.write(bsp.avara_format())
-
-
 if __name__ == '__main__':
-
-    ldir = "levels"
-
-    avara_r = os.path.join("levels", "single-player.r")
-    data = open(avara_r, 'rb').read()
-
-    reader = resource.Reader()
-    avara_rsrc = reader.parse(data)
-    avara_tmpl = avara_rsrc['TMPL']
-
-    print(sys.argv)
-    if len(sys.argv) > 1:
-        parse_level_rsrc(Path(sys.argv[1]), ldir, avara_tmpl)
+    if len(sys.argv) != 3:
+        print("usage: pict2svg.py <pict raw data file> <output file>.svg")
+        print("see rsrc2files to export all levelset data")
+        exit(1)
     else:
-        # run against everything in levels
-        # and store them alongside
-
-        for rsrc_file in os.listdir(ldir):
-            rpath = os.path.join(ldir, rsrc_file)
-            print(rpath)
-
-            if os.path.isdir(rpath):
-                continue
-            parse_level_rsrc(Path(rpath), ldir, avara_tmpl)
-            
+        try:
+            with open(sys.argv[1], "rb") as input_file:
+                with open(sys.argv[2], "w", encoding="utf-8") as xml_file:
+                    xml_file.write(parse_pict("", input_file))
+        except:
+            raise

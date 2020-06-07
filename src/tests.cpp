@@ -71,6 +71,7 @@ public:
     virtual short GetStatusChar() { return 0; }
     virtual short GetMessageIndicator() { return 0; }
     virtual std::string GetChatString(int maxChars) { return ""; }
+    virtual std::string GetChatLine() { return ""; }
     virtual void StoreMugShot(Handle mugHandle) {}
     virtual Handle GetMugShot() { return 0; }
 
@@ -109,12 +110,14 @@ class TestApp : public CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) {return false;}
     virtual void MessageLine(short index, short align) {}
+    virtual void AddMessageLine(std::string line) {}
     virtual void DrawUserInfoPart(short i, short partList) {}
     virtual void ParamLine(short index, short align, StringPtr param1, StringPtr param2) {}
     virtual void StartFrame(long frameNum) {}
     virtual void BrightBox(long frameNum, short position) {}
     virtual void LevelReset() {}
     virtual long Number(const std::string name) { return 0; }
+    virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) { return noErr; }
     virtual OSErr LoadLevel(std::string set, OSType theLevel) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
