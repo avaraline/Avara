@@ -77,8 +77,9 @@ class DataBuffer:
         return buf
 
     def unpack(self, fmt):
-        size = struct.calcsize(fmt)
-        nums = struct.unpack('!' + fmt, self.data[self.pos:self.pos + size])
+        unpack_fmt = '!' + fmt
+        size = struct.calcsize(unpack_fmt)
+        nums = struct.unpack(unpack_fmt, self.data[self.pos:self.pos + size])
         self.pos += size
         return nums
 
