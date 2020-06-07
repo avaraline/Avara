@@ -118,6 +118,7 @@ public:
     virtual void BrightBox(long frameNum, short position) {}
     virtual void LevelReset() {}
     virtual long Number(const std::string name) { return 0; }
+    virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) { return noErr; }
     virtual OSErr LoadLevel(std::string set, OSType theLevel) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
