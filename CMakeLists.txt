@@ -56,6 +56,8 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "vendor/glad/glad.c"
     "vendor/glm/detail/glm.cpp"
     "vendor/nanovg/nanovg.c"
+    "vendor/pugixml/pugixml.cpp"
+    "vendor/csscolorparser.cpp"
 )
 
 if(APPLE)
@@ -95,6 +97,7 @@ set(CORE_INCLUDES
     vendor/nanogui
     vendor/nanovg
     vendor/utf8
+    vendor/pugixml
 )
 
 set(AVARA_COMPILE_OPTIONS -lstdc++ -lm -lpthread -ldl)

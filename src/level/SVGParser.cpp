@@ -11,7 +11,7 @@
 #include <locale>
 #include <stdlib.h>
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 using std::string;
 using std::stol;
