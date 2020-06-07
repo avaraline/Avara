@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
     // The Avara application itself.
     CLevelViewerApp *app = new CLevelViewerApp();
 
-    mainloop(app->itsGame->frameTime / 4);
+    mainloop(app->GetGame()->frameTime / 4);
 
     app->Done();
 

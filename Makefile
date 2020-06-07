@@ -4,7 +4,7 @@ CC = clang
 CXX = clang++
 
 BUILD_DIR ?= build
-SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor
+SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
@@ -13,7 +13,7 @@ INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor -Ivendor/gtest/include
 CPPFLAGS := ${CPPFLAGS}
 CPPFLAGS += $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
 CXXFLAGS := ${CXXFLAGS}
-CXXFLAGS += -std=c++1y
+CXXFLAGS += -std=c++17
 LDFLAGS := ${LDFLAGS}
 
 ifeq ($(UNAME), Darwin)
