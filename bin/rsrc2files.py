@@ -7,6 +7,7 @@ import os
 import sys
 import json
 import subprocess
+import time
 from pathlib import Path
 
 BSPS_DIR = "bsps"
@@ -16,9 +17,21 @@ SVG_DIR = "svg"
 DEBUG_EXPORT = True
 
 EXPORT_SOUND = True
-if not os.path.isfile(os.path.join("build", "hsnd2wav")) and \
-   not os.path.isfile(os.path.join("build", "hsnd2wav.exe")):
+
+
+def is_exe(path):
+    return os.path.isfile(path) and os.access(path, os.X_OK)
+
+if not is_exe(os.path.join("build", "hsnd2wav")) and \
+   not is_exe(os.path.join("build", "hsnd2wav.exe")):
     EXPORT_SOUND = False
+
+WAV2OGG = False
+for path in os.environ["PATH"].split(os.pathsep):
+    bin_file = os.path.join(path, "sndfile-convert") 
+    exe_file = bin_file + ".exe"
+    if is_exe(exe_file) or is_exe(bin_file):
+        WAV2OGG = True
 
 def parse_level_rsrc(rpath, outpath, tmpl=None):
     manifest_data = {}
@@ -118,19 +131,26 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
         for hsnd_id in rsrc['HSND'].keys():
             hsnd_name = rsrc['HSND'][hsnd_id]["name"]
 
-            fn = str(hsnd_id) + "_" + "".join(c for c in hsnd_name if c.isalnum() or c in ('.', '_')).rstrip() + ".wav"
-            fpath = os.path.join(snddir, fn)
+            fn = str(hsnd_id) + "_" + "".join(c for c in hsnd_name if c.isalnum() or c in ('.', '_')).rstrip()
+            wavpath = os.path.join(snddir, fn + ".wav")
             if DEBUG_EXPORT:
                 print(f"Found HSND {hsnd_id} {hsnd_name} {fn}")
 
-            args = [f'build{os.path.sep}hsnd2wav', str(hsnd_id), fpath, rpath]
-            print()
+            args = [f'build{os.path.sep}hsnd2wav', str(hsnd_id), wavpath, rpath]
             popen = subprocess.Popen(args, stdout=subprocess.PIPE)
             popen.wait()
 
+            if WAV2OGG:
+                oggpath = os.path.join(snddir, fn + ".ogg")
+                args = ['sndfile-convert', '-vorbis', wavpath, oggpath]
+                popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+                popen.wait()
+                os.remove(wavpath)
+
+
             hsnd_meta[hsnd_id] = {
                 "name": hsnd_name,
-                "file": fn
+                "file": wavpath if not WAV2OGG else oggpath
             }
 
     if 'TEXT' in rsrc:
@@ -149,6 +169,11 @@ if __name__ == '__main__':
     if not EXPORT_SOUND:
         print("hsnd2wav is not built! I need this to export sound.")
         print("build it with `make hsnd2wav`")
+        exit(1)
+
+    if not WAV2OGG:
+        print("I need libsndfile available to convert WAV to OGG.")
+        print("Install libsndfile and make sure sndfile-convert is on your PATH")
         exit(1)
 
     ldir = "levels"

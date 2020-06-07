@@ -389,6 +389,7 @@ class SkipRegion (Operation):
 PIXMAP_BIT = 0x8000
 def pixmap(data, force=False):
     base_addr = data.long()
+    print(f"base_addr: {base_addr}")
     row_bytes = 0
     if not force:
         row_bytes = data.short()
@@ -397,7 +398,8 @@ def pixmap(data, force=False):
         row_bytes = data.short()
 
         print("unused: %s" % unused)
-        print("row bytes: %s" % row_bytes)
+    
+    print("row bytes: %s" % row_bytes)
 
     read_pixmap = (row_bytes & PIXMAP_BIT != 0) or force
     bounds = data.rect()
@@ -406,7 +408,7 @@ def pixmap(data, force=False):
         print("bounds: %s" % bounds)
         print("read_pixmap: %s" % read_pixmap)
     
-    if read_pixmap:
+    if read_pixmap or True:
         version = data.short()
         pack_type = data.short()
         pack_size = data.long()
@@ -420,7 +422,6 @@ def pixmap(data, force=False):
         pmtable = data.long()
         reserved = data.long()
         if DEBUG_PARSER:
-            print("base_addr: %s" % base_addr)
             print("version: %s" % version)
             print("pack_type: %s" % pack_type)
             print("pack_size: %s" % pack_size)
@@ -444,7 +445,7 @@ def color_table(data):
     if DEBUG_PARSER:
         print("ct_size: %s" % ct_size)
     ct = []
-    while ct_size > 0:
+    while ct_size >= 0:
         ct.append(data.short())
         ct_size -= 1
     
@@ -489,12 +490,13 @@ class BitsRect (Operation):
             print("BitsRect")
             print(" ".join(format(x, '02x') for x in data.data[:300]))
         pmap = pixmap(data)
-        # color_table(data)
+        color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
 
         if DEBUG_PARSER:
+            print(f"pmap: {pmap}")
             print(f"src_rect: {src_rect}")
             print(f"dst_rect: {dst_rect}")
             print(f"mode: {mode}")
@@ -1100,6 +1102,11 @@ PICT_OPCODES = {
 }
 
 PICT_COMMENTS = {
+    100: "ApplicationComment",
+    130: "DrawingBegin",
+    131: "DrawingEnd",
+    140: "GroupBegin",
+    141: "GroupEnd",
     # text related
     150: "TextBegin",
     151: "TextEnd",
@@ -1110,11 +1117,18 @@ PICT_COMMENTS = {
     156: "LineLayoutOn",
     157: "ClientLineLayout",
     # graphics related
+    142: "BitmapBegin",
+    143: "BitmapEnd",
     160: "PolyBegin",
     161: "PolyEnd",
     163: "PolyIgnore",
     164: "PolySmooth",
     165: "PolyClose",
+    170: "ArrowBeginStart",
+    171: "ArrowBeginEnd",
+    172: "ArrowBeginBoth",
+    173: "ArrowEnd",
+    197: "SetGrayLevel",
     200: "RotateBegin",
     201: "RotateEnd",
     202: "RotateCenter",
