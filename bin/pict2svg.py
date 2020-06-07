@@ -668,9 +668,9 @@ class Line (Operation):
 
 class LineFrom (Operation):
     def parse(self, data, context):
-        dh, dv = data.point()
-        context.x += dh
-        context.y += dv
+        p = data.point()
+        context.x += p.x
+        context.y += p.y
 
 
 class ShortLine (Operation):

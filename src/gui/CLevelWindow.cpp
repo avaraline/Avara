@@ -10,30 +10,40 @@
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Hard-coded for now. Eventually use the level search API.
     levelSets = {
-        "aa-normal",
         "aa-abnormal",
-        "aa-deux-normal",
         "aa-deux-abnormal",
+        "aa-deux-normal",
+        "aa-normal",
         "aa-tre",
         "a-bridge-too-far",
         "blockparty",
+        "butternut-squash",
+        "cancer",
         "classic-mix-up",
+        "disk-o-tech-light",
+        "dodgeball",
         "fosfori",
+        "gzr-balledness",
         "gzr-geriatric-ward",
+        "gzr-grecian-formula",
         "gzr-liver-spots",
         "gzr-over-the-hill",
-        "gzr-grecian-formula",
-        "gzr-balledness",
         "gzr-rip",
         "hunting-grounds",
+        "klaus-levels",
+        "macabre",
         "net-99",
+        "new-moon",
         "not-aa",
+        "pastabravo",
         "scarlet-pimpernel-beta-0919",
         "single-player",
+        "strawberry",
         "symbiosis",
         "the-codex",
         "the-lexicon",
-        "wrestling"
+        "wrestling",
+        "wut"
     };
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));

@@ -145,7 +145,10 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
                 args = ['sndfile-convert', '-vorbis', wavpath, oggpath]
                 popen = subprocess.Popen(args, stdout=subprocess.PIPE)
                 popen.wait()
-                os.remove(wavpath)
+                try:
+                    os.remove(wavpath)
+                except FileNotFoundError:
+                    pass
 
 
             hsnd_meta[hsnd_id] = {

@@ -313,25 +313,27 @@ class BSP(object):
             'radius2': d['enclosure_radius'],
             'polys': [],
         }
-        for idx, (fe, ec, normal_idx, fp, bp, pvis, rs) in enumerate(d['polys']):
-            vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
-            normal = d['vectors'][vec_idx][:3]
-            color = d['colors'][color_idx]
-            tris = d['triangles_poly'][idx]
-            tri_points = d['triangles_verts_poly'][idx]
-            """
-            out['polys'].append({
-                'normal': [-x for x in normal],
-                'color': color,
-                'tris': [[tri_points[i] for i in t][::-1] for t in tris],
-            })
-            """
-            out['polys'].append({
-                'normal': normal,
-                'color': color,
-                'tris': [[tri_points[i] for i in t] for t in tris],
-            })
-            
+        try:
+            for idx, (fe, ec, normal_idx, fp, bp, pvis, rs) in enumerate(d['polys']):
+                vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
+                normal = d['vectors'][vec_idx][:3]
+                color = d['colors'][color_idx]
+                tris = d['triangles_poly'][idx]
+                tri_points = d['triangles_verts_poly'][idx]
+                """
+                out['polys'].append({
+                    'normal': [-x for x in normal],
+                    'color': color,
+                    'tris': [[tri_points[i] for i in t][::-1] for t in tris],
+                })
+                """
+                out['polys'].append({
+                    'normal': normal,
+                    'color': color,
+                    'tris': [[tri_points[i] for i in t] for t in tris],
+                })
+        except IndexError:
+            print("Invalid shape data")    
         return json.dumps(out, indent=2, sort_keys=True)
 
 
