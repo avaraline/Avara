@@ -6,6 +6,7 @@ import rsrc_tools.bspt.reader as bsptReader
 import os
 import sys
 import json
+import subprocess
 from pathlib import Path
 
 BSPS_DIR = "bsps"
@@ -13,6 +14,11 @@ HSND_DIR = "snd"
 SVG_DIR = "svg"
 
 DEBUG_EXPORT = True
+
+EXPORT_SOUND = True
+if not os.path.isfile(os.path.join("build", "hsnd2wav")) and \
+   not os.path.isfile(os.path.join("build", "hsnd2wav.exe")):
+    EXPORT_SOUND = False
 
 def parse_level_rsrc(rpath, outpath, tmpl=None):
     manifest_data = {}
@@ -105,7 +111,7 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             }
         manifest_data["BSPT"] = bspt_meta
 
-    if 'HSND' in rsrc:
+    if 'HSND' in rsrc and EXPORT_SOUND:
         hsnd_meta = {}
         snddir = os.path.join(dirpath, HSND_DIR)
         os.makedirs(snddir, exist_ok=True)
@@ -117,12 +123,15 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             if DEBUG_EXPORT:
                 print(f"Found HSND {hsnd_id} {hsnd_name} {fn}")
 
-            os.system(f"build\\hsnd2wav {hsnd_id} {fpath} {rpath}")
+            args = [f'build{os.path.sep}hsnd2wav', str(hsnd_id), fpath, rpath]
+            print()
+            popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+            popen.wait()
+
             hsnd_meta[hsnd_id] = {
                 "name": hsnd_name,
                 "file": fn
             }
-
 
     if 'TEXT' in rsrc:
         manifest_data["TEXT"] = {k:v["data"].decode("macroman") for (k,v) in rsrc["TEXT"].items()}
@@ -137,6 +146,11 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
 
 if __name__ == '__main__':
 
+    if not EXPORT_SOUND:
+        print("hsnd2wav is not built! I need this to export sound.")
+        print("build it with `make hsnd2wav`")
+        exit(1)
+
     ldir = "levels"
 
     avara_r = os.path.join("levels", "single-player.r")
@@ -145,6 +159,7 @@ if __name__ == '__main__':
     reader = resource.Reader()
     avara_rsrc = reader.parse(data)
     avara_tmpl = avara_rsrc['TMPL']
+
 
     print(sys.argv)
     if len(sys.argv) > 1:
