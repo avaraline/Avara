@@ -102,7 +102,6 @@ This means that if you have two machines using the same internet connection, whi
 A typical solution to this problem is to have the second player connect via a VPN, separate ISP connection, or proxy/tunnel.
 
 ## Known issues
-* Custom BSP shapes within levels are not yet supported. Loading a level with custom shapes will crash the game. You are safe loading any of the `aa-normal` collection levels which are shown by default.
 * There is a bug in networked multiplayer where specific types of lag spikes cause the game to lose track of timing and [play old frames at an advanced rate](https://www.youtube.com/watch?v=zxm1zzFzor0). Thankfully this is somewhat rare during normal play. 
 * [#26](https://github.com/avaraline/Avara/issues/26) Some levels have graphical "z-fighting" issues where geometry is too close to other geometry and our current graphics pipeline does not reconcile this correctly causing moire-like patterns. 
 * [#25](https://github.com/avaraline/Avara/issues/25) Avara's usage of SDL does not play well with PulseAudio on some Linux systems. If you get a segfault when launching, try telling SDL to use ALSA instead with `export SDL_AUDIODRIVER=alsa` 
