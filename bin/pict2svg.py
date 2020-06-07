@@ -390,10 +390,18 @@ PIXMAP_BIT = 0x8000
 def pixmap(data, force=False):
     base_addr = data.long()
     print(f"base_addr: {base_addr}")
-    row_bytes = data.short()
+    row_bytes = 0
+    if not force:
+        row_bytes = data.short()
+    if force:
+        unused = [data.short(), data.short()]
+        row_bytes = data.short()
+
+        print("unused: %s" % unused)
+    
     print("row bytes: %s" % row_bytes)
 
-    read_pixmap = (row_bytes & PIXMAP_BIT != 0)
+    read_pixmap = (row_bytes & PIXMAP_BIT != 0) or force
     bounds = data.rect()
     pixel_size = 0
     if DEBUG_PARSER:
@@ -414,6 +422,7 @@ def pixmap(data, force=False):
         pmtable = data.long()
         reserved = data.long()
         if DEBUG_PARSER:
+            print("base_addr: %s" % base_addr)
             print("version: %s" % version)
             print("pack_type: %s" % pack_type)
             print("pack_size: %s" % pack_size)
@@ -482,7 +491,7 @@ class BitsRect (Operation):
             print("BitsRect")
             print(" ".join(format(x, '02x') for x in data.data[:300]))
         pmap = pixmap(data)
-        #color_table(data)
+        color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
@@ -1182,6 +1191,6 @@ if __name__ == '__main__':
         try:
             with open(sys.argv[1], "rb") as input_file:
                 with open(sys.argv[2], "w", encoding="utf-8") as xml_file:
-                    xml_file.write(parse_pict("", input_file.read()))
+                    xml_file.write(parse_pict("", input_file))
         except:
             raise
