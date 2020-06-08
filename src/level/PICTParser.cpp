@@ -297,10 +297,13 @@ void PICTParser::Parse(Handle data) {
                 buf->ReadRect(&frame);
                 buf->Skip(size - 10);
                 break;
+<<<<<<< HEAD
                 
             case 0x90: // BitsRect
                 BitsRect(buf);
                 break;
+=======
+>>>>>>> Put 0x9b in numerical order
 
             case 0x9b: // DirectBitsRgn
                 DirectBitsRgn(buf);
