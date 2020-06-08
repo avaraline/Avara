@@ -297,14 +297,16 @@ void PICTParser::Parse(Handle data) {
                 buf->ReadRect(&frame);
                 buf->Skip(size - 10);
                 break;
+
+            case 0x9b: // DirectBitsRgn
+                DirectBitsRgn(buf);
+                break;
+                
             case 0xa0: // ShortComment
                 kind = buf->Short();
                 if (callbacks.commentProc) {
                     callbacks.commentProc(&context, kind, 0, NULL);
                 }
-                break;
-            case 0x9b: // DirectBitsRgn
-                DirectBitsRgn(buf);
                 break;
 
             case 0xa1: // LongComment
