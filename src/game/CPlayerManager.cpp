@@ -237,6 +237,7 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                     SDL_StartTextInput();
                 }
                 else {
+                    GameKeyPress('\r');    // spit out a return char in-game
                     SDL_StopTextInput();
                 }
             }
