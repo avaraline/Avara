@@ -73,6 +73,9 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             nvgFontSize(ctx, fontsz_s);
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
             nvgText(ctx, bufferWidth - 162, pY - 3, playerLives.c_str(), NULL);
+            if (thisPlayer->GetMessageIndicator() > 0) {
+                nvgText(ctx, bufferWidth - 162, pY + 3, "<", NULL);
+            }
         }
 
         nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
