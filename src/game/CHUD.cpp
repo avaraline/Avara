@@ -8,7 +8,7 @@ CHUD::CHUD(CAvaraGame *game) {
     itsGame = game;
 }
 
-const int CHAT_CHARS = 36;
+const int CHAT_CHARS = 40;
 
 const std::vector<long> team_colors =
     {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor};
