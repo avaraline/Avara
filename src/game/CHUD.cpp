@@ -30,7 +30,6 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     float mY = (bufferHeight - 72);
     for (auto i : itsGame->itsApp->MessageLines()) {
-
         nvgBeginPath(ctx);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
@@ -40,8 +39,6 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     }
 
 
-    if (!player)
-        return;
     float pY;
     long longTeamColor;
     int colorR, colorG, colorB;
@@ -70,6 +67,8 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         short status = thisPlayer->GetStatusChar();
         if (status > 0) {
             std::string playerLives = std::to_string(status);
+            if (status == 10) playerLives = "%";
+            if (status == 12) playerLives = "C";
             nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
             nvgFontSize(ctx, fontsz_s);
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
@@ -82,6 +81,8 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
     }
 
+    if (!player)
+        return;
     int i, j;
     float g1X = (bufferWidth / 2.0) - 60.0;
     float gY = bufferHeight - 60.0;
