@@ -170,11 +170,6 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4f);
 }
 
-void AvaraGLSetDecal(float active) {
-    glUseProgram(gProgram);
-    glUniform1f(decalLoc, active);
-}
-
 void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
     glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(ToFloatMat(modelview)));
     glm::mat3 normal_mat = glm::mat3(1.0f);
@@ -223,6 +218,7 @@ void AvaraGLInitContext() {
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
 
+
 }
 
 void AvaraGLDrawPolygons(CBSPPart* part) {
@@ -259,9 +255,10 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     // if we're drawing something thin
     // give it a little z-buffer push towards
-    // the camera by scaling down the z-value
+    // the camera by scaling the z-value
     if (part->isDecal) {
-        AvaraGLSetDecal(.9995f);
+        glEnable(GL_POLYGON_OFFSET_FILL);
+        glPolygonOffset(-.3, 1.0);
     }
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
@@ -276,7 +273,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     // reset z-buffer scale
     if (part->isDecal) {
-        AvaraGLSetDecal(1.0);
+        glDisable(GL_POLYGON_OFFSET_FILL);
     }
 
     // restore previous lighting state
@@ -295,6 +292,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     glBindBuffer(GL_ARRAY_BUFFER, NULL);
     glCheckErrors();
+
 }
 
 
