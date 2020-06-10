@@ -67,7 +67,7 @@ float skyboxVertices[] = {
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc, decalLoc;
+GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc;
 GLuint light0Loc, light1Loc, light2Loc, light3Loc;
 
 GLuint skyProgram;
@@ -196,7 +196,6 @@ void AvaraGLInitContext() {
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
-    decalLoc = glGetUniformLocation(gProgram, "decal");
     glCheckErrors();
 
 
@@ -217,8 +216,6 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
-
-
 }
 
 void AvaraGLDrawPolygons(CBSPPart* part) {
@@ -256,9 +253,10 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     // if we're drawing something thin
     // give it a little z-buffer push towards
     // the camera by scaling the z-value
-    if (part->isDecal) {
+    bool decal = part->isDecal;
+    if (decal) {
         glEnable(GL_POLYGON_OFFSET_FILL);
-        glPolygonOffset(-.3, 1.0);
+        glPolygonOffset(-1.0, 1.0);
     }
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
@@ -272,7 +270,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glDisableVertexAttribArray(2);
 
     // reset z-buffer scale
-    if (part->isDecal) {
+    if (decal) {
         glDisable(GL_POLYGON_OFFSET_FILL);
     }
 
