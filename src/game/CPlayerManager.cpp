@@ -237,7 +237,7 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                     SDL_StartTextInput();
                 }
                 else {
-                    GameKeyPress('\r');    // spit out a return char in-game
+                    inputBuffer.push_back('\r');
                     SDL_StopTextInput();
                 }
             }
@@ -304,13 +304,6 @@ void CPlayerManagerImpl::SendFrame() {
         prevKeyboardActive = keyboardActive;
     }
     else {
-        if (!inputBuffer.empty()) {
-            ff->ft.msgChar = inputBuffer.front();
-            inputBuffer.pop_front();
-        }
-        else {
-            ff->ft.msgChar = 0;
-        }
         ff->ft.down = 0;
         ff->ft.up = 0;
         ff->ft.held = 0;
@@ -318,6 +311,14 @@ void CPlayerManagerImpl::SendFrame() {
             prevKeyboardActive = true;
             ff->ft.down |= 1 << kfuTypeText;
         }
+    }
+    
+    if (!inputBuffer.empty()) {
+        ff->ft.msgChar = inputBuffer.front();
+        inputBuffer.pop_front();
+    }
+    else {
+        ff->ft.msgChar = 0;
     }
 
     ff->ft.mouseDelta.h = mouseX;
