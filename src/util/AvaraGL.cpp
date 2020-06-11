@@ -67,7 +67,7 @@ float skyboxVertices[] = {
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc, decalLoc;
+GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc;
 GLuint light0Loc, light1Loc, light2Loc, light3Loc;
 
 GLuint skyProgram;
@@ -170,11 +170,6 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4f);
 }
 
-void AvaraGLSetDecal(float active) {
-    glUseProgram(gProgram);
-    glUniform1f(decalLoc, active);
-}
-
 void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
     glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(ToFloatMat(modelview)));
     glm::mat3 normal_mat = glm::mat3(1.0f);
@@ -201,7 +196,6 @@ void AvaraGLInitContext() {
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
-    decalLoc = glGetUniformLocation(gProgram, "decal");
     glCheckErrors();
 
 
@@ -222,7 +216,6 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
-
 }
 
 void AvaraGLDrawPolygons(CBSPPart* part) {
@@ -259,9 +252,11 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     // if we're drawing something thin
     // give it a little z-buffer push towards
-    // the camera by scaling down the z-value
-    if (part->isDecal) {
-        AvaraGLSetDecal(.9995f);
+    // the camera by scaling the z-value
+    bool decal = part->isDecal;
+    if (decal) {
+        glEnable(GL_POLYGON_OFFSET_FILL);
+        glPolygonOffset(-1.0, 1.0);
     }
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
@@ -275,8 +270,8 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glDisableVertexAttribArray(2);
 
     // reset z-buffer scale
-    if (part->isDecal) {
-        AvaraGLSetDecal(1.0);
+    if (decal) {
+        glDisable(GL_POLYGON_OFFSET_FILL);
     }
 
     // restore previous lighting state
@@ -295,6 +290,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     glBindBuffer(GL_ARRAY_BUFFER, NULL);
     glCheckErrors();
+
 }
 
 

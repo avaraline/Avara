@@ -103,8 +103,9 @@ A typical solution to this problem is to have the second player connect via a VP
 
 ## Known issues
 * There is a bug in networked multiplayer where specific types of lag spikes cause the game to lose track of timing and [play old frames at an advanced rate](https://www.youtube.com/watch?v=zxm1zzFzor0). Thankfully this is somewhat rare during normal play. 
-* [#26](https://github.com/avaraline/Avara/issues/26) Some levels have graphical "z-fighting" issues where geometry is too close to other geometry and our current graphics pipeline does not reconcile this correctly causing moire-like patterns. 
 * [#25](https://github.com/avaraline/Avara/issues/25) Avara's usage of SDL does not play well with PulseAudio on some Linux systems. If you get a segfault when launching, try telling SDL to use ALSA instead with `export SDL_AUDIODRIVER=alsa` 
+
+[See other active bugs](https://github.com/avaraline/Avara/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 
 
 ## Challenges overcome while porting
