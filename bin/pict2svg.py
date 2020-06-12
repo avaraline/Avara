@@ -388,28 +388,28 @@ class SkipRegion (Operation):
 
 # This function reads embedded image pixmaps
 PIXMAP_BIT = 0x8000
-def pixmap(data, force=False):
-    base_addr = data.long()
-    print(f"base_addr: {base_addr}")
-    row_bytes = 0
-    if not force:
-        row_bytes = data.short()
-    if force:
-        unused = [data.short(), data.short()]
-        row_bytes = data.short()
-
-        print("unused: %s" % unused)
-    
-    print("row bytes: %s" % row_bytes)
-
-    read_pixmap = (row_bytes & PIXMAP_BIT != 0) or force
-    bounds = data.rect()
-    pixel_size = 0
+def pixmap(data, clipped=False):
     if DEBUG_PARSER:
-        print("bounds: %s" % bounds)
-        print("read_pixmap: %s" % read_pixmap)
+        print("pixmap")
+    if clipped:
+        if DEBUG_PARSER:
+            print("clipped, skipping 4 bytes")
+        skip = data.read(4)
+    row_bytes = data.short()
+
+    is_pixmap = (row_bytes & PIXMAP_BIT != 0)
+    row_bytes = row_bytes & 0x7FFF
+
+    if DEBUG_PARSER:
+        print(f"is_pixmap: {is_pixmap}")
+        print(f"row bytes: {row_bytes}")
+
+    bounds = data.rect()
+
+    if DEBUG_PARSER:
+        print(f"bounds: {bounds}")
     
-    if read_pixmap or True:
+    if is_pixmap:
         version = data.short()
         pack_type = data.short()
         pack_size = data.long()
@@ -423,7 +423,6 @@ def pixmap(data, force=False):
         pmtable = data.long()
         reserved = data.long()
         if DEBUG_PARSER:
-            print("base_addr: %s" % base_addr)
             print("version: %s" % version)
             print("pack_type: %s" % pack_type)
             print("pack_size: %s" % pack_size)
@@ -437,7 +436,7 @@ def pixmap(data, force=False):
             print("pmtable: %s" % pmtable)
             print("reserved: %s" % reserved)
         
-    return (bounds, row_bytes, pixel_size)
+    return (is_pixmap, bounds, row_bytes)
 
 # Color table for embedded 32 bit color images
 def color_table(data):
@@ -457,8 +456,8 @@ def color_table(data):
         print("ct: %s" % ct)
 
 def pixdata(data, pmap):
-    bounds = pmap[0]
-    row_bytes = pmap[1] & 0x7FFF
+    bounds = pmap[1]
+    row_bytes = pmap[2]
 
     lines_to_read = bounds.height
 
@@ -492,7 +491,8 @@ class BitsRect (Operation):
             print("BitsRect")
             print(" ".join(format(x, '02x') for x in data.data[data.pos:data.pos+300]))
         pmap = pixmap(data)
-        color_table(data)
+        if pmap[0]:
+            color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
@@ -511,13 +511,11 @@ class BitsRgn (Operation):
         if DEBUG_PARSER:
             print("BitsRgn")
         pmap = pixmap(data)
-        # color_table(data)
+        if pmap[0]:
+            color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
-
-        mask_rgn_size = data.short()
-        mask_rgn = data.read(mask_rgn_size-2)
 
         pixdata(data, pmap)
         
@@ -534,7 +532,7 @@ class DirectBitsRgn (Operation):
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("DirectBitsRgn")
-        pmap = pixmap(data, force=False)
+        pmap = pixmap(data, clipped=True)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
@@ -542,7 +540,7 @@ class DirectBitsRgn (Operation):
         mask_rgn_size = data.short()
         if DEBUG_PARSER:
             print(f"mask_rgn_size: {mask_rgn_size}")
-        mask_rgn = data.read(mask_rgn_size-2)
+        mask_rgn = data.read(mask_rgn_size - 2)
         
         pixdata(data, pmap)
 
@@ -678,10 +676,16 @@ class ShortLine (Operation):
     def parse(self, data, context):
         start = data.point()
         dh, dv = data.read(2)
+        line = context.element("line")
+        line.set("x1", str(start.x))
+        line.set("y1", str(start.y))
         context.x += dh
         context.y += dv
+        line.set("x2", str(context.x))
+        line.set("y2", str(context.y))
+        line.set("stroke", "black")
         if DEBUG_PARSER:
-            print(f"{str(start)} -> {dh} {dv}")
+            print(f"ShortLine {str(start)} -> {dh} {dv}")
 
 
 class ShortLineFrom (Operation):
@@ -714,6 +718,9 @@ class DHText (Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode('macintosh')
+        if DEBUG_PARSER:
+            print(f"DHText: dh {dh} size {size}")
+            print(text.encode('utf-8'))
         context.text(text, dh = dh)
 
 
@@ -722,6 +729,9 @@ class DVText (Operation):
     def parse(self, data, context):
         dv, size = data.read(2)
         text = data.read(size).decode('macintosh')
+        if DEBUG_PARSER:
+            print(f"DVText: dv {dv} size {size}")
+            print(text.encode('utf-8'))
         context.text(text, dv = dv)
 
 
@@ -730,6 +740,9 @@ class DHDVText (Operation):
     def parse(self, data, context):
         dh, dv, size = data.read(3)
         text = data.read(size).decode('macintosh')
+        if DEBUG_PARSER:
+            print(f"DHDVText: dh {dh} dv {dv} size {size}")
+            print(text.encode('utf-8'))
         context.text(text, dh = dh, dv = dv)
 
 
@@ -1168,6 +1181,7 @@ def parse_pict(fn, data):
             op = PICT_OPCODES[opcode]()
         except KeyError:
             print("No support for opcode 0x%s" % format(opcode, '02x'))
+            print(" ".join(format(x, '02x') for x in buf.data[buf.pos:buf.pos+300]))
             raise PictParseError
         if isinstance(op, EndPict):
             break
@@ -1178,7 +1192,7 @@ def parse_pict(fn, data):
         except ValueError:
             print("UHOH (ValueError on parse)")
             # context.close(fn)
-            exit(1)
+            raise
         buf.align()
     return context.close()
 
