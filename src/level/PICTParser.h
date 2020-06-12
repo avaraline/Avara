@@ -40,5 +40,9 @@ public:
 
 protected:
     void CopyAdjustRect(Rect *src, Rect *dst);
+    bool PixMap(CDataBuffer *buf, bool isClipped, short &rowBytes, Rect &bounds);
+    void PixData(CDataBuffer *buf, short rowBytes, Rect &bounds);
+    void ColorTable(CDataBuffer *buf);
+    void BitsRect(CDataBuffer *buf);
     void DirectBitsRgn(CDataBuffer *buf);
 };

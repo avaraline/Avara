@@ -490,7 +490,7 @@ class BitsRect (Operation):
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("BitsRect")
-            print(" ".join(format(x, '02x') for x in data.data[:300]))
+            print(" ".join(format(x, '02x') for x in data.data[data.pos:data.pos+300]))
         pmap = pixmap(data)
         color_table(data)
         src_rect = data.rect()
