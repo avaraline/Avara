@@ -21,9 +21,11 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
 void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth);
 void AvaraGLSetAmbient(float ambient);
 void AvaraGLSetView(glm::mat4 view);
-void AvaraGLUpdateProjectionMatrix(float fov);
+void AvaraGLSetFOV(float fov);
+void AvaraGLUpdateProjectionMatrix();
 void AvaraGLLightDefaults();
 void AvaraGLInitContext();
+void AvaraGLViewport(short width, short height);
 void AvaraGLDrawPolygons(CBSPPart* part);
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView);
 void AvaraGLToggleRendering(int active);

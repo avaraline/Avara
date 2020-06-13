@@ -16,54 +16,56 @@
 bool actuallyRender = true;
 
 glm::mat4 proj;
-const float near_dist = .47f;
+const float near_dist = .49f;
 const float far_dist = 1000.0f;
-const float default_fov = 50.0f;
-const float default_aspect = 4.0/3.0f;
+
+float current_fov = 60.0f;
+short window_height = 1;
+short window_width = 1;
 
 float skyboxVertices[] = {
         // positions          
-        -1.0f,  1.0f, -1.0f,
-        -1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
+        -5.0f,  5.0f, -5.0f,
+        -5.0f, -5.0f, -5.0f,
+         5.0f, -5.0f, -5.0f,
+         5.0f, -5.0f, -5.0f,
+         5.0f,  5.0f, -5.0f,
+        -5.0f,  5.0f, -5.0f,
 
-        -1.0f, -1.0f,  1.0f,
-        -1.0f, -1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f,  1.0f,
-        -1.0f, -1.0f,  1.0f,
+        -5.0f, -5.0f,  5.0f,
+        -5.0f, -5.0f, -5.0f,
+        -5.0f,  5.0f, -5.0f,
+        -5.0f,  5.0f, -5.0f,
+        -5.0f,  5.0f,  5.0f,
+        -5.0f, -5.0f,  5.0f,
 
-         1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
+         5.0f, -5.0f, -5.0f,
+         5.0f, -5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f, -5.0f,
+         5.0f, -5.0f, -5.0f,
 
-        -1.0f, -1.0f,  1.0f,
-        -1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f, -1.0f,  1.0f,
-        -1.0f, -1.0f,  1.0f,
+        -5.0f, -5.0f,  5.0f,
+        -5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f, -5.0f,  5.0f,
+        -5.0f, -5.0f,  5.0f,
 
-        -1.0f,  1.0f, -1.0f,
-         1.0f,  1.0f, -1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-        -1.0f,  1.0f,  1.0f,
-        -1.0f,  1.0f, -1.0f,
+        -5.0f,  5.0f, -5.0f,
+         5.0f,  5.0f, -5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+        -5.0f,  5.0f,  5.0f,
+        -5.0f,  5.0f, -5.0f,
 
-        -1.0f, -1.0f, -1.0f,
-        -1.0f, -1.0f,  1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-        -1.0f, -1.0f,  1.0f,
-         1.0f, -1.0f,  1.0f
+        -5.0f, -5.0f, -5.0f,
+        -5.0f, -5.0f,  5.0f,
+         5.0f, -5.0f, -5.0f,
+         5.0f, -5.0f, -5.0f,
+        -5.0f, -5.0f,  5.0f,
+         5.0f, -5.0f,  5.0f
     };
 
 GLuint gProgram;
@@ -73,7 +75,6 @@ GLuint light0Loc, light1Loc, light2Loc, light3Loc;
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
 GLuint skyViewLoc, skyProjLoc, groundColorLoc, horizonColorLoc, skyColorLoc;
-
 
 const char* glGetErrorString(GLenum error)
 {
@@ -117,9 +118,19 @@ void AvaraGLSetView(glm::mat4 view) {
 }
 
 
-void AvaraGLUpdateProjectionMatrix(float fov) {
+void AvaraGLSetFOV(float fov) {
+    current_fov = fov;
+    AvaraGLUpdateProjectionMatrix();
+}
+
+void AvaraGLUpdateProjectionMatrix() {
+    proj = glm::scale(glm::perspective(
+                        glm::radians(current_fov), 
+                        (float)window_width / (float)window_height, 
+                        near_dist, 
+                        far_dist)
+                     , glm::vec3(-1, 1, -1));
     glUseProgram(gProgram);
-    proj = glm::scale(glm::perspective(glm::radians(fov), default_aspect, near_dist, far_dist), glm::vec3(-1, 1, -1));
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
     glCheckErrors();
 }
@@ -191,7 +202,7 @@ void AvaraGLInitContext() {
 
     projLoc = glGetUniformLocation(gProgram, "proj");
     viewLoc = glGetUniformLocation(gProgram, "view");
-    AvaraGLUpdateProjectionMatrix(default_fov);
+    AvaraGLUpdateProjectionMatrix();
     mvLoc = glGetUniformLocation(gProgram, "modelview");
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");
@@ -216,6 +227,12 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
+}
+
+void AvaraGLViewport(short width, short height) {
+    window_width = width;
+    window_height = height;
+    AvaraGLUpdateProjectionMatrix();
 }
 
 void AvaraGLDrawPolygons(CBSPPart* part) {

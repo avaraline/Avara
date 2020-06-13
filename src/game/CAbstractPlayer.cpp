@@ -34,7 +34,7 @@
 
 #define MOUSESHOOTDELAY 8
 
-#define MAXFOV FIX(50)
+#define MAXFOV FIX(60)
 #define MINFOV FIX(5)
 #define FOVSTEP FIX3(1500)
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
@@ -776,7 +776,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (itsManager->IsLocalPlayer() && 
             (TESTFUNC(kfuZoomOut, ft->held) || TESTFUNC(kfuZoomIn, ft->held)))
-            AvaraGLUpdateProjectionMatrix(ToFloat(fieldOfView));
+            AvaraGLSetFOV(ToFloat(fieldOfView));
 
         if (fireGun)
             mouseShootTime = MOUSESHOOTDELAY;
