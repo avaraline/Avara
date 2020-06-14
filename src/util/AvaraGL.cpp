@@ -69,7 +69,7 @@ float skyboxVertices[] = {
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc, cullLoc;
+GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc;
 GLuint light0Loc, light1Loc, light2Loc, light3Loc;
 
 GLuint skyProgram;
@@ -160,12 +160,6 @@ void AvaraGLSetLight(int light_index, float intensity, float elevation, float az
     }
 }
 
-void AvaraGLSetBackfaceCulling(float toggle) {
-    if (!actuallyRender) return;
-    glUseProgram(gProgram);
-    glUniform1f(cullLoc, toggle);
-}
-
 void AvaraGLSetAmbient(float ambient) {
     if (!actuallyRender) return;
     glUseProgram(gProgram);
@@ -218,7 +212,6 @@ void AvaraGLInitContext() {
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
-    cullLoc = glGetUniformLocation(gProgram, "backface_culling");
     glCheckErrors();
 
 
@@ -329,7 +322,6 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     if (part->usesPrivateHither == true) {
         if (part->hither == FIX3(101)) {
             glDisable(GL_CULL_FACE);
-            AvaraGLSetBackfaceCulling(0.0);
         }
     }
 
