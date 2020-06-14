@@ -8,17 +8,17 @@ uniform vec3 skyColor;
 uniform float lowAlt = 0;
 uniform float highAlt = .05;
 
-out vec3 color;
+out vec4 color;
 
 void main()
 {
     float phi = normalize(tex_coord).y;
 
-    color = mix(
+    color = vec4(mix(
                 mix( // TODO: lowAlt messes up the gradient
                     mix(skyColor * (phi / highAlt) + horizonColor * (1.0 - (phi / highAlt)),
                         horizonColor, float(phi < lowAlt)
                     ), skyColor, float(phi > highAlt)
                 ), groundColor, float(phi <= 0.0)
-            );
+            ), 1.0);
 }
