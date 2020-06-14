@@ -381,10 +381,12 @@ class NOOP (Operation):
 
 
 class SkipRegion (Operation):
+
     def parse(self, data, context):
         total = data.short()
         region = data.rect()
         data.read(total - 10)
+
 
 # This function reads embedded image pixmaps
 PIXMAP_BIT = 0x8000
@@ -438,12 +440,15 @@ def pixmap(data, clipped=False):
         
     return (is_pixmap, bounds, row_bytes)
 
+
 # Color table for embedded 32 bit color images
 def color_table(data):
     ct_seed = data.long()
     trans_index = data.short()
     ct_size = data.short()
     if DEBUG_PARSER:
+        print("ct_seed: %s" % ct_seed)
+        print("trans_index: %s" % trans_index)
         print("ct_size: %s" % ct_size)
     ct = []
     while ct_size >= 0:
@@ -451,9 +456,8 @@ def color_table(data):
         ct_size -= 1
     
     if DEBUG_PARSER:
-        print("ct_seed: %s" % ct_seed)
-        print("trans_index: %s" % trans_index)
         print("ct: %s" % ct)
+
 
 def pixdata(data, pmap):
     bounds = pmap[1]
@@ -466,9 +470,13 @@ def pixdata(data, pmap):
         print("lines_to_read: %d" % lines_to_read)
 
     if row_bytes < 8:
+        if DEBUG_PARSER:
+            print("unpacked")
         data_size = row_bytes * lines_to_read
         pixdata = data.read(data_size)
     else:
+        if DEBUG_PARSER:
+            print("packed")
         for i in range(lines_to_read):
             sl_size = data.ushort() if row_bytes > 250 else data.uchar()
             if DEBUG_PARSER:
@@ -480,12 +488,14 @@ def pixdata(data, pmap):
 
 # Didn't end up using this, leaving it just in case
 class SkipReserved_x97 (Operation):
+
     def parse(self, data, context):
         length = data.short()
         data.read(length)
 
 
 class BitsRect (Operation):
+
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("BitsRect")
@@ -507,6 +517,7 @@ class BitsRect (Operation):
 
 
 class BitsRgn (Operation):
+
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("BitsRgn")
@@ -517,18 +528,68 @@ class BitsRgn (Operation):
         dst_rect = data.rect()
         mode = data.short()
 
+        mask_rgn_size = data.short()
+        if DEBUG_PARSER:
+            print(f"mask_rgn_size: {mask_rgn_size}")
+        mask_rgn = data.read(mask_rgn_size - 2)
         pixdata(data, pmap)
-        
+
+
+class PackBitsRect (Operation):
+
+    def parse(self, data, context):
+        if DEBUG_PARSER:
+            print("PackBitsRect")
+        pmap = pixmap(data)
+        if pmap[0]:
+            color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+
+        if DEBUG_PARSER:
+            print(f"pmap: {pmap}")
+            print(f"src_rect: {src_rect}")
+            print(f"dst_rect: {dst_rect}")
+            print(f"mode: {mode}")
+
+        pixdata(data, pmap)
+
+
+class PackBitsRgn (Operation):
+
+    def parse(self, data, context):
+        if DEBUG_PARSER:
+            print("PackBitsRgn")
+        pmap = pixmap(data)
+        if pmap[0]:
+            color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+        mask_rgn_size = data.short()
+        if DEBUG_PARSER:
+            print(f"mask_rgn_size: {mask_rgn_size}")
+        mask_rgn = data.read(mask_rgn_size - 2)
+
+        pixdata(data, pmap)
+
 
 class DirectBitsRect (Operation):
+
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("DirectBitsRect")
-        raise NotImplementedError
-        pass
+        pmap = pixmap(data, clipped=True)
+        src_rect = data.rect()
+        dest_rect = data.rect()
+        mode = data.short()
+
+        pixdata(data, pmap)
 
 
 class DirectBitsRgn (Operation):
+
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("DirectBitsRgn")
@@ -571,6 +632,12 @@ class TextFace (Operation):
 
     def parse(self, data, context):
         face = data.byte()
+
+
+class TextMode (Operation):
+
+    def parse (self, data, context):
+        mode = data.short()
 
 
 class PenSize (Operation):
@@ -1028,7 +1095,10 @@ class LongComment (Operation):
         kind, size = data.unpack('hh')
         value = data.read(size)
         if DEBUG_PARSER:
-            print("LongComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
+            if kind in PICT_COMMENTS:
+                print("LongComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
+            else:
+                print(f"LongComment: {kind} - unknown")
             print("size: %s" % size)
             print("value: %s" % " ".join(format(x, '02x') for x in value))
 
@@ -1052,6 +1122,7 @@ PICT_OPCODES = {
     0x1: ClipRegion,
     0x3: TextFont,
     0x4: TextFace,
+    0x5: TextMode,
     0x7: PenSize,
     0x8: PenMode,
     0x9: PenPattern,
@@ -1101,12 +1172,16 @@ PICT_OPCODES = {
     0x75: SkipRegion,
     0x76: SkipRegion,
     0x77: SkipRegion,
+    0x80: SkipRegion,
+    0x81: SkipRegion,
     0x8c: NOOP,
     # picture data
     0x90: BitsRect,
     0x91: BitsRgn,
     0x9a: DirectBitsRect,
     0x9b: DirectBitsRgn,
+    0x98: PackBitsRect,
+    0x99: PackBitsRgn,
     # comment fields
     0xa0: ShortComment,
     0xa1: LongComment,

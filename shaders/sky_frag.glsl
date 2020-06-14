@@ -5,22 +5,20 @@ in vec3 tex_coord;
 uniform vec3 groundColor;
 uniform vec3 horizonColor;
 uniform vec3 skyColor;
+uniform float lowAlt = 0;
+uniform float highAlt = .05;
 
 out vec3 color;
 
 void main()
 {
-
-    float gradientHeight = .05;
     float phi = normalize(tex_coord).y;
-    if (phi <= 0.0) {
-        color = groundColor;
-    }
-    else if (phi > gradientHeight) {
-        color = skyColor;
-    }
-    else {
-        float gradientValue = phi / gradientHeight;
-        color = skyColor * gradientValue + horizonColor * (1.0 - gradientValue);
-    }
+
+    color = mix(
+                mix( // TODO: lowAlt messes up the gradient
+                    mix(skyColor * (phi / highAlt) + horizonColor * (1.0 - (phi / highAlt)),
+                        horizonColor, float(phi < lowAlt)
+                    ), skyColor, float(phi > highAlt)
+                ), groundColor, float(phi <= 0.0)
+            );
 }

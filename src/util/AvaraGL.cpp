@@ -16,7 +16,7 @@
 bool actuallyRender = true;
 
 glm::mat4 proj;
-const float near_dist = .49f;
+const float near_dist = .1f;
 const float far_dist = 1000.0f;
 
 float current_fov = 60.0f;
@@ -69,7 +69,7 @@ float skyboxVertices[] = {
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc;
+GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc, cullLoc;
 GLuint light0Loc, light1Loc, light2Loc, light3Loc;
 
 GLuint skyProgram;
@@ -160,6 +160,12 @@ void AvaraGLSetLight(int light_index, float intensity, float elevation, float az
     }
 }
 
+void AvaraGLSetBackfaceCulling(float toggle) {
+    if (!actuallyRender) return;
+    glUseProgram(gProgram);
+    glUniform1f(cullLoc, toggle);
+}
+
 void AvaraGLSetAmbient(float ambient) {
     if (!actuallyRender) return;
     glUseProgram(gProgram);
@@ -194,6 +200,11 @@ void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
     glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
 }
 
+void AvaraGLSetDepthTest(bool doTest) {
+    if (doTest) glDepthFunc(GL_LEQUAL);
+    else glDepthFunc(GL_ALWAYS);
+}
+
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
@@ -207,6 +218,7 @@ void AvaraGLInitContext() {
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
+    cullLoc = glGetUniformLocation(gProgram, "backface_culling");
     glCheckErrors();
 
 
@@ -257,14 +269,25 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     if (part->privateAmbient != -1) {
         AvaraGLSetAmbient(ToFloat(part->privateAmbient));
     }
-
     if (extra_amb > 0) {
         AvaraGLSetAmbient(current_amb + extra_amb);
     }
-
     if (part->ignoreDirectionalLights) {
         ActivateLights(0);
         glCheckErrors();
+    }
+
+    // hack to find the viewPortPart and
+    // scout, we want to render only the
+    // front faces of these so we can see thru
+    // the back of the faces with the camera
+    if (part->usesPrivateHither == true) {
+        // magic value set for scout and head
+        if (part->hither == FIX3(101)) {
+            glEnable(GL_CULL_FACE);
+            glCullFace(GL_BACK);
+            glFrontFace(GL_CCW);
+        }
     }
 
     // if we're drawing something thin
@@ -296,10 +319,18 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         AvaraGLSetAmbient(current_amb);
         glCheckErrors();
     }
-
     if (part->ignoreDirectionalLights) {
         ActivateLights(1);
         glCheckErrors();
+    }
+
+    // turn backface culling back off for
+    // all other geometry
+    if (part->usesPrivateHither == true) {
+        if (part->hither == FIX3(101)) {
+            glDisable(GL_CULL_FACE);
+            AvaraGLSetBackfaceCulling(0.0);
+        }
     }
 
     glBindVertexArray(NULL);

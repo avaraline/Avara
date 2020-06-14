@@ -62,6 +62,8 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
 
+    AvaraGLSetFOV(Number(kFOV));
+
     gameNet->ChangeNet(kNullNet, "");
 
     setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));

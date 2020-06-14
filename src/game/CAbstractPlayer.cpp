@@ -33,8 +33,8 @@
 #include "Preferences.h"
 
 #define MOUSESHOOTDELAY 8
-
-#define MAXFOV FIX(60)
+// replaced by kFOV preference
+//#define MAXFOV FIX(60)
 #define MINFOV FIX(5)
 #define FOVSTEP FIX3(1500)
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
@@ -143,7 +143,9 @@ void CAbstractPlayer::StartSystems() {
     viewOffset[1] = FIX3(-250);
     viewOffset[2] = 0;
     viewOffset[3] = 0;
-    fieldOfView = MAXFOV;
+
+    maxFOV = FIX(itsGame->itsApp->Number(kFOV));
+    fieldOfView = maxFOV;
 
     debugView = false;
     scoutView = false;
@@ -771,8 +773,8 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (fieldOfView < MINFOV)
             fieldOfView = MINFOV;
-        if (fieldOfView > MAXFOV)
-            fieldOfView = MAXFOV;
+        if (fieldOfView > maxFOV)
+            fieldOfView = maxFOV;
 
         if (itsManager->IsLocalPlayer() && 
             (TESTFUNC(kfuZoomOut, ft->held) || TESTFUNC(kfuZoomIn, ft->held)))
@@ -904,7 +906,7 @@ void CAbstractPlayer::PlayerAction() {
                     if (lives > 0) {
                         viewYaw = 0;
                         viewPitch = 0;
-                        fieldOfView = MAXFOV;
+                        fieldOfView = maxFOV;
                         Reincarnate(NULL);
                     } else {
                         itsManager->DeadOrDone();
