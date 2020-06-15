@@ -683,36 +683,44 @@ void	CPlayerManagerImpl::FlushMessageText(
 void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
     while (len--) {
         unsigned char theChar;
-
+        const char lThing_utf8[3] = {'\xC2', '\xAC', ' '}; // ¬
+        const char checkMark_utf8[3] = {'\xE2', '\x88', '\x9A'}; // ✓
+        const char triangle_utf8[3] = {'\xCE', '\x94'}; // Δ
         theChar = *c++;
 
         switch (theChar) {
             case 6:
                 // ✓
-                lineBuffer.push_back('\xE2');
-                lineBuffer.push_back('\x88');
-                lineBuffer.push_back('\x9A');
+                //lineBuffer.push_back('\xE2');
+                //lineBuffer.push_back('\x88');
+                //lineBuffer.push_back('\x9A');
+                lineBuffer.insert(lineBuffer.end(), checkMark_utf8, checkMark_utf8 + 3);
                 break;
             case 7:
                 // Δ
-                lineBuffer.push_back('\xCE');
-                lineBuffer.push_back('\x94');
+                //lineBuffer.push_back('\xCE');
+                //lineBuffer.push_back('\x94');
+                lineBuffer.insert(lineBuffer.end(), triangle_utf8, triangle_utf8 + 2);
                 itsGame->itsApp->NotifyUser();
                 break;
             case 8:
                 if (lineBuffer.size()) {
                     auto i = lineBuffer.end();
-                    utf8::previous(i, lineBuffer.begin());
+                    try {
+                        utf8::previous(i, lineBuffer.begin());
+                    }
+                    catch (const utf8::exception& utfcpp_ex) {
+                        std::cerr << utfcpp_ex.what() << "\n";
+                        lineBuffer.clear();
+                    }
                     lineBuffer = std::deque<char>(lineBuffer.begin(), i);
                 }
                 break;
             case 13:
                 // ¬
                 ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
-
-                lineBuffer.push_back('\xC2');
-                lineBuffer.push_back('\xAC');
-                lineBuffer.push_back(' ');
+                
+                lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
                 // FlushMessageText(true);
                 break;
             case 27:
@@ -724,7 +732,13 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                     if (lineBuffer.size() > 220) {
                         // FlushMessageText(true);
                         auto i = lineBuffer.begin();
-                        utf8::advance(i, 55, lineBuffer.end());
+                        try {
+                            utf8::advance(i, 55, lineBuffer.end());
+                        }
+                        catch (const utf8::exception& utfcpp_ex) {
+                            std::cerr << utfcpp_ex.what();
+                            lineBuffer.clear();
+                        }
                         lineBuffer = std::deque<char>(i, lineBuffer.end());
                     }
                 }
@@ -749,8 +763,27 @@ std::string CPlayerManagerImpl::GetChatLine() {
 std::string CPlayerManagerImpl::GetChatString(int maxChars) {
     std::string theChat(lineBuffer.begin(), lineBuffer.end());
     auto i = theChat.begin();
-    int over = std::max((int)utf8::distance(theChat.begin(), theChat.end()) - maxChars, 0);
-    if (over) utf8::advance(i, over, theChat.end());
+    int over;
+    try {
+        over = std::max((int)utf8::distance(theChat.begin(), theChat.end()) - maxChars, 0);
+    }
+    catch (const utf8::exception& utfcpp_ex) {
+        // this happens usually because we try to access lineBuffer while a
+        // utf8 charater is being added. the library doesn't like
+        // half of a codepoint and throws an exception
+        // TODO: Lock lineBuffer
+        std::cerr << utfcpp_ex.what();
+        over = 0;
+    }
+    if (over) {
+        try {
+            utf8::advance(i, over, theChat.end());
+        }
+        catch (const utf8::exception& utfcpp_ex) {
+            std::cerr << utfcpp_ex.what();
+            return theChat;
+        }
+    }
     return std::string(i, theChat.end());
 }
 

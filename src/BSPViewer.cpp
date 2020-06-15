@@ -139,10 +139,17 @@ public:
         glBlendFunc(GL_ONE, GL_ZERO);
 
         AvaraGLViewport(mFBSize.x, mFBSize.y);
-        AvaraGLSetBackfaceCulling(cull_back_faces);
         itsView->SetViewRect(mFBSize.x, mFBSize.y, mFBSize.x / 2, mFBSize.y / 2);
         itsView->viewPixelRatio = FIX(4.0/3.0);
         itsView->CalculateViewPyramidCorners();
+
+        if (cull_back_faces) {
+            itsPart->usesPrivateHither = true;
+            itsPart->hither = FIX3(101);
+        }
+        else {
+            itsPart->usesPrivateHither = false;
+        }
 
         itsPart->Reset();
         itsPart->RotateZ(orientation[2]);
