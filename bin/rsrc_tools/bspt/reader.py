@@ -150,6 +150,7 @@ class BSP(object):
 
         d["triangles_poly"] = list()
         d["triangles_verts_poly"] = list()
+        # print(self.name)
         for poly in self.polys:
             # print(poly)
             normal_rec = self.normals[poly.normal_index]
@@ -176,6 +177,8 @@ class BSP(object):
                 self.points[x].y,
                 self.points[x].z]) for x in verts]
 
+            # grab two points from this poly to calculate the
+            # plane this face is in
             p0 = np.array(points[0])
             p1 = np.array(points[1])
             p = [p0 - p1]
@@ -190,7 +193,7 @@ class BSP(object):
 
             face_points = np.array([flatten_3to2(x) for x in points])
 
-            if (self.name == "Subway"):
+            if (self.name == "Subway" or self.name == "EURO"):
                 # uhh yeah.
                 # this is for a shape
                 # that crashed the triangulator
@@ -343,9 +346,12 @@ def serialize_list(the_list):
 def parse(resource):
     bsps = []
     for res_id in resource.keys():
-        bsp = BSP(resource[res_id])
-        bsp.res_id = res_id
-        bsps.append(bsp)
+        try:
+            bsp = BSP(resource[res_id])
+            bsp.res_id = res_id
+            bsps.append(bsp)
+        except:
+            print(f"Failed to export BSP {res_id}")
     return bsps
 
 def bsp2json(data, name=''):

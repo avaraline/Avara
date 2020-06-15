@@ -34,6 +34,7 @@ public:
 
 
     virtual void IWorldShader(CAvaraGame *theGame);
+    virtual void IWorldShader();
     virtual void Reset();
     virtual void Apply();
     virtual void ShadeWorld(CViewParameters *theView);
