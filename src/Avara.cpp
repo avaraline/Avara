@@ -70,9 +70,7 @@ int main(int argc, char *argv[]) {
         std::string arg = argv[i];
         if (arg == "-p" || arg == "--port") {
             int port = atoi(argv[++i]);  // pre-inc to next arg
-            app->Set(kDefaultClientUDPPort, port);
-        } else if (arg == "-n" || arg == "--name") {
-            app->Set(kPlayerNameTag, std::string(argv[++i]));
+            app->Set(kDefaultUDPPort, port);
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
