@@ -1,14 +1,17 @@
 #include "CHUD.h"
-
 #include "CAbstractPlayer.h"
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
+#include "AvaraDefines.h"
 
 CHUD::CHUD(CAvaraGame *game) {
     itsGame = game;
 }
 
-const int CHAT_CHARS = 36;
+const int CHAT_CHARS = 40;
+
+const std::vector<long> team_colors =
+    {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor};
 
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
@@ -27,7 +30,6 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     float mY = (bufferHeight - 72);
     for (auto i : itsGame->itsApp->MessageLines()) {
-
         nvgBeginPath(ctx);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
@@ -37,53 +39,53 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     }
 
 
-    if (!player)
-        return;
-    CAbstractPlayer *eachPlayer = itsGame->playerList;
-
-    int p = 0;
     float pY;
     long longTeamColor;
     int colorR, colorG, colorB;
-    while (eachPlayer) {
-
-        if (p >= 6)
-            break;
-        pY = (bufferHeight - 72) + (11 * p);
-        longTeamColor = eachPlayer->GetLongTeamColorOr(kNeutralTeamColor);
+    CNetManager *net = itsGame->itsApp->GetNet();
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *thisPlayer = net->playerTable[i];
+        std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
+        if (playerName.length() < 1) continue;
+        pY = (bufferHeight - 72) + (11 * i);
+        longTeamColor = team_colors[net->teamColors[i]];
         colorR = (longTeamColor >> 16) & 0xff;
         colorG = (longTeamColor >> 8) & 0xff;
         colorB = longTeamColor & 0xff;
-        if (eachPlayer->itsManager) {
-            std::string playerName((char *)eachPlayer->itsManager->PlayerName() + 1, eachPlayer->itsManager->PlayerName()[0]);
-            std::string playerLives = std::to_string(eachPlayer->lives);
-            std::string playerChat = eachPlayer->itsManager->GetChatString(CHAT_CHARS);
+        std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
 
-            nvgBeginPath(ctx);
-            nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
-            nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
-            nvgFill(ctx);
+        nvgBeginPath(ctx);
+        nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
+        nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
+        nvgFill(ctx);
 
-            nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
-            nvgFontSize(ctx, fontsz_m);
-            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-            nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
+        nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+        nvgFontSize(ctx, fontsz_m);
+        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+        nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
 
+        short status = thisPlayer->GetStatusChar();
+        if (status > 0) {
+            std::string playerLives = std::to_string(status);
+            if (status == 10) playerLives = "%";
+            if (status == 12) playerLives = "C";
             nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
             nvgFontSize(ctx, fontsz_s);
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
             nvgText(ctx, bufferWidth - 162, pY - 3, playerLives.c_str(), NULL);
-
-
-            nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
-            nvgFontSize(ctx, fontsz_m);
-            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-            nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
+            if (thisPlayer->GetMessageIndicator() > 0) {
+                nvgText(ctx, bufferWidth - 162, pY + 3, "<", NULL);
+            }
         }
-        p++;
-        eachPlayer = eachPlayer->nextPlayer;
+
+        nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
+        nvgFontSize(ctx, fontsz_m);
+        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+        nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
     }
 
+    if (!player)
+        return;
     int i, j;
     float g1X = (bufferWidth / 2.0) - 60.0;
     float gY = bufferHeight - 60.0;

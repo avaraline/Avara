@@ -9,9 +9,8 @@ uniform vec3 light2 = vec3(0, 0, 0);
 uniform vec3 light3 = vec3(0, 0, 0);
 uniform float ambient = 0;
 uniform float lights_active = 1.0;
-uniform float decal;
 
-out vec3 color;
+out vec4 color;
 
 vec3 lightColor = vec3(1, 1, 1);
 
@@ -37,5 +36,5 @@ vec3 light_color() {
 }
 
 void main() {
-    color = light_color();
+    color = vec4(light_color(), 1.0);
 }

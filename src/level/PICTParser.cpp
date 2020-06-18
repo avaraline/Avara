@@ -297,14 +297,20 @@ void PICTParser::Parse(Handle data) {
                 buf->ReadRect(&frame);
                 buf->Skip(size - 10);
                 break;
+                
+            case 0x90: // BitsRect
+                BitsRect(buf);
+                break;
+
+            case 0x9b: // DirectBitsRgn
+                DirectBitsRgn(buf);
+                break;
+                
             case 0xa0: // ShortComment
                 kind = buf->Short();
                 if (callbacks.commentProc) {
                     callbacks.commentProc(&context, kind, 0, NULL);
                 }
-                break;
-            case 0x9b: // DirectBitsRgn
-                DirectBitsRgn(buf);
                 break;
 
             case 0xa1: // LongComment
@@ -338,50 +344,77 @@ void PICTParser::Parse(Handle data) {
     delete buf;
 }
 
-void PICTParser::DirectBitsRgn(CDataBuffer *buf) {
-#ifdef DEBUGPARSER
-    SDL_Log("DirectBitsRgn\n");
-#endif
-    // PixMap
-    buf->Skip(4);                    // baseAddr
-    short rowBytes = buf->Short() & 0x7fff;  // rowBytes (bit 15 indicates PixMap vs BitMap)
-#ifdef DEBUGPARSER
-    SDL_Log("  PixMap: rowBytes = %d\n", rowBytes);
-#endif
-    Rect bounds;
-    buf->ReadRect(&bounds);          // bounds
-    buf->Skip(2);                    // pmVersion
-    buf->Skip(2);                    // packType
-    buf->Skip(4);                    // packSize
-    buf->Skip(4);                    // hRes 
-    buf->Skip(4);                    // vRes
-    buf->Skip(2);                    // pixelType
-    buf->Skip(2);                    // pixelSize
-    buf->Skip(2);                    // cmpCount
-    buf->Skip(2);                    // cmpSize
-    buf->Skip(4);                    // planeBytes
-    buf->Skip(4);                    // pmTable pointer
-    buf->Skip(4);                    // pmReserved
-    
-    // srcRect
-    buf->Skip(8);
-    // dstRect
-    buf->Skip(8);
-    // mode
-    buf->Skip(2);
+bool PICTParser::PixMap(CDataBuffer *buf, bool isClipped, short &rowBytes, Rect &bounds) {
 
-    // maskRgn (assumed to be rectangular)
-    short rgnSize = buf->Short();  // maskRgn.rgnSize
-    buf->Skip(rgnSize - 2);  // maskRgn.rgnBBox
+    // I can't find any good documentation for this but it appears that these 4
+    // bytes are skipped for the opcodes that say "CopyBits with clipped rectangle/region"
+    // In other words, isClipped is true only for opcodes 0x9a and 0x9b.
+    // See: https://github.com/ImageMagick/ImageMagick6/blob/master/coders/pict.c#L1168-L1176
+    if (!isClipped) {
+        buf->Skip(4);             // baseAddr
+    }
+
+    rowBytes = buf->Short();  // rowBytes (bit 15 indicates PixMap vs BitMap)
     
+    bool isPixMap = (rowBytes & 0x8000) != 0;
+    rowBytes = rowBytes & 0x7fff;
+
+    buf->ReadRect(&bounds);   // bounds
+
+    if (isPixMap) {
+        buf->Skip(2);         // pmVersion
+        buf->Skip(2);         // packType
+        buf->Skip(4);         // packSize
+        buf->Skip(4);         // hRes 
+        buf->Skip(4);         // vRes
+        buf->Skip(2);         // pixelType
+        buf->Skip(2);         // pixelSize
+        buf->Skip(2);         // cmpCount
+        buf->Skip(2);         // cmpSize
+        buf->Skip(4);         // planeBytes
+        buf->Skip(4);         // pmTable pointer
+        buf->Skip(4);         // pmReserved
+    }
+
+    #ifdef DEBUGPARSER
+        SDL_Log("  PixMap: isPixMap = %s\n", isPixMap ? "true" : "false");
+        SDL_Log("  PixMap: rowBytes = %d\n", rowBytes);
+        SDL_Log("  PixMap: bounds   = (%d, %d) -> (%d, %d)\n", bounds.left, bounds.top, bounds.right, bounds.bottom);
+    #endif
+
+    return isPixMap;
+}
+
+void PICTParser::ColorTable(CDataBuffer *buf) {
+    buf->Skip(4);  // ct_seed
+    buf->Skip(2);  // ctFlags
+    short numColorSpecs = buf->Short() + 1;
+    #ifdef DEBUGPARSER
+        SDL_Log("    ColorTable: num colors = %d\n", numColorSpecs);
+    #endif
+    
+    RGBColor color;
+    for (int i = 0; i < numColorSpecs; i++) {
+        short value = buf->Short();
+        buf->ReadColor(&color);
+        #ifdef DEBUGPARSER
+            SDL_Log("      ColorTable: color #%d[%d] = (%d, %d, %d)\n", i, value, color.red, color.green, color.blue);
+        #endif
+    }
+}
+
+void PICTParser::PixData(CDataBuffer *buf, short rowBytes, Rect &bounds) {
     // PixData
     short numRows = bounds.bottom-bounds.top;
 #ifdef DEBUGPARSER
-    SDL_Log("  PixMap:num rows = %d\n", numRows);
+    SDL_Log("  PixData:num rows = %d\n", numRows);
 #endif
     if (rowBytes < 8) {
         // data unpacked
-        buf->Skip(rowBytes*numRows);
+#ifdef DEBUGPARSER
+        SDL_Log("    PixData: reading all %d bytes at once\n", rowBytes * numRows);
+#endif
+        buf->Skip(rowBytes * numRows);
     } else {
         // data packed
         size_t byteCount;
@@ -392,9 +425,57 @@ void PICTParser::DirectBitsRgn(CDataBuffer *buf) {
                 byteCount = (size_t)buf->Byte();
             }
 #ifdef DEBUGPARSER
-            SDL_Log("    PixMap: %zu bytes for row %d\n", byteCount, i);
+            SDL_Log("    PixData: %zu bytes for row %d\n", byteCount, i);
 #endif
             buf->Skip(byteCount);
         }
     }
+}
+
+void PICTParser::BitsRect(CDataBuffer *buf) {
+#ifdef DEBUGPARSER
+    SDL_Log("BitsRect>\n");
+#endif
+    short rowBytes;
+    Rect bounds;
+
+    if (PixMap(buf, true, rowBytes, bounds)) {
+        // only read colorTable if it's a PixMap
+        ColorTable(buf);
+    }
+    
+    // srcRect
+    buf->Skip(8);
+    // dstRect
+    buf->Skip(8);
+    // mode
+    buf->Skip(2);
+    
+    PixData(buf, rowBytes, bounds);
+}
+
+void PICTParser::DirectBitsRgn(CDataBuffer *buf) {
+#ifdef DEBUGPARSER
+    SDL_Log("DirectBitsRgn>\n");
+#endif
+    short rowBytes;
+    Rect bounds;
+
+    PixMap(buf, false, rowBytes, bounds);
+    
+    // srcRect
+    buf->Skip(8);
+    // dstRect
+    buf->Skip(8);
+    // mode
+    buf->Skip(2);
+
+    // maskRgn (assumed to be rectangular)
+    short rgnSize = buf->Short();  // maskRgn.rgnSize
+    #ifdef DEBUGPARSER
+        SDL_Log("  maskRgn size = %d\n", rgnSize);
+    #endif
+    buf->Skip(rgnSize - 2);  // maskRgn.rgnBBox
+    
+    PixData(buf, rowBytes, bounds);
 }

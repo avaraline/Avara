@@ -77,8 +77,9 @@ class DataBuffer:
         return buf
 
     def unpack(self, fmt):
-        size = struct.calcsize(fmt)
-        nums = struct.unpack('!' + fmt, self.data[self.pos:self.pos + size])
+        unpack_fmt = '!' + fmt
+        size = struct.calcsize(unpack_fmt)
+        nums = struct.unpack(unpack_fmt, self.data[self.pos:self.pos + size])
         self.pos += size
         return nums
 
@@ -380,33 +381,37 @@ class NOOP (Operation):
 
 
 class SkipRegion (Operation):
+
     def parse(self, data, context):
         total = data.short()
         region = data.rect()
         data.read(total - 10)
 
+
 # This function reads embedded image pixmaps
 PIXMAP_BIT = 0x8000
-def pixmap(data, force=False):
-    base_addr = data.long()
-    row_bytes = 0
-    if not force:
-        row_bytes = data.short()
-    if force:
-        unused = [data.short(), data.short()]
-        row_bytes = data.short()
-
-        print("unused: %s" % unused)
-        print("row bytes: %s" % row_bytes)
-
-    read_pixmap = (row_bytes & PIXMAP_BIT != 0) or force
-    bounds = data.rect()
-    pixel_size = 0
+def pixmap(data, clipped=False):
     if DEBUG_PARSER:
-        print("bounds: %s" % bounds)
-        print("read_pixmap: %s" % read_pixmap)
+        print("pixmap")
+    if clipped:
+        if DEBUG_PARSER:
+            print("clipped, skipping 4 bytes")
+        skip = data.read(4)
+    row_bytes = data.short()
+
+    is_pixmap = (row_bytes & PIXMAP_BIT != 0)
+    row_bytes = row_bytes & 0x7FFF
+
+    if DEBUG_PARSER:
+        print(f"is_pixmap: {is_pixmap}")
+        print(f"row bytes: {row_bytes}")
+
+    bounds = data.rect()
+
+    if DEBUG_PARSER:
+        print(f"bounds: {bounds}")
     
-    if read_pixmap:
+    if is_pixmap:
         version = data.short()
         pack_type = data.short()
         pack_size = data.long()
@@ -420,7 +425,6 @@ def pixmap(data, force=False):
         pmtable = data.long()
         reserved = data.long()
         if DEBUG_PARSER:
-            print("base_addr: %s" % base_addr)
             print("version: %s" % version)
             print("pack_type: %s" % pack_type)
             print("pack_size: %s" % pack_size)
@@ -434,7 +438,8 @@ def pixmap(data, force=False):
             print("pmtable: %s" % pmtable)
             print("reserved: %s" % reserved)
         
-    return (bounds, row_bytes, pixel_size)
+    return (is_pixmap, bounds, row_bytes)
+
 
 # Color table for embedded 32 bit color images
 def color_table(data):
@@ -442,20 +447,21 @@ def color_table(data):
     trans_index = data.short()
     ct_size = data.short()
     if DEBUG_PARSER:
+        print("ct_seed: %s" % ct_seed)
+        print("trans_index: %s" % trans_index)
         print("ct_size: %s" % ct_size)
     ct = []
-    while ct_size > 0:
+    while ct_size >= 0:
         ct.append(data.short())
         ct_size -= 1
     
     if DEBUG_PARSER:
-        print("ct_seed: %s" % ct_seed)
-        print("trans_index: %s" % trans_index)
         print("ct: %s" % ct)
 
+
 def pixdata(data, pmap):
-    bounds = pmap[0]
-    row_bytes = pmap[1] & 0x7FFF
+    bounds = pmap[1]
+    row_bytes = pmap[2]
 
     lines_to_read = bounds.height
 
@@ -464,9 +470,13 @@ def pixdata(data, pmap):
         print("lines_to_read: %d" % lines_to_read)
 
     if row_bytes < 8:
+        if DEBUG_PARSER:
+            print("unpacked")
         data_size = row_bytes * lines_to_read
         pixdata = data.read(data_size)
     else:
+        if DEBUG_PARSER:
+            print("packed")
         for i in range(lines_to_read):
             sl_size = data.ushort() if row_bytes > 250 else data.uchar()
             if DEBUG_PARSER:
@@ -478,23 +488,27 @@ def pixdata(data, pmap):
 
 # Didn't end up using this, leaving it just in case
 class SkipReserved_x97 (Operation):
+
     def parse(self, data, context):
         length = data.short()
         data.read(length)
 
 
 class BitsRect (Operation):
+
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("BitsRect")
-            print(" ".join(format(x, '02x') for x in data.data[:300]))
+            print(" ".join(format(x, '02x') for x in data.data[data.pos:data.pos+300]))
         pmap = pixmap(data)
-        # color_table(data)
+        if pmap[0]:
+            color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
 
         if DEBUG_PARSER:
+            print(f"pmap: {pmap}")
             print(f"src_rect: {src_rect}")
             print(f"dst_rect: {dst_rect}")
             print(f"mode: {mode}")
@@ -503,34 +517,83 @@ class BitsRect (Operation):
 
 
 class BitsRgn (Operation):
+
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("BitsRgn")
         pmap = pixmap(data)
-        # color_table(data)
+        if pmap[0]:
+            color_table(data)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
 
         mask_rgn_size = data.short()
-        mask_rgn = data.read(mask_rgn_size-2)
+        if DEBUG_PARSER:
+            print(f"mask_rgn_size: {mask_rgn_size}")
+        mask_rgn = data.read(mask_rgn_size - 2)
+        pixdata(data, pmap)
+
+
+class PackBitsRect (Operation):
+
+    def parse(self, data, context):
+        if DEBUG_PARSER:
+            print("PackBitsRect")
+        pmap = pixmap(data)
+        if pmap[0]:
+            color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+
+        if DEBUG_PARSER:
+            print(f"pmap: {pmap}")
+            print(f"src_rect: {src_rect}")
+            print(f"dst_rect: {dst_rect}")
+            print(f"mode: {mode}")
 
         pixdata(data, pmap)
-        
+
+
+class PackBitsRgn (Operation):
+
+    def parse(self, data, context):
+        if DEBUG_PARSER:
+            print("PackBitsRgn")
+        pmap = pixmap(data)
+        if pmap[0]:
+            color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+        mask_rgn_size = data.short()
+        if DEBUG_PARSER:
+            print(f"mask_rgn_size: {mask_rgn_size}")
+        mask_rgn = data.read(mask_rgn_size - 2)
+
+        pixdata(data, pmap)
+
 
 class DirectBitsRect (Operation):
+
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("DirectBitsRect")
-        raise NotImplementedError
-        pass
+        pmap = pixmap(data, clipped=True)
+        src_rect = data.rect()
+        dest_rect = data.rect()
+        mode = data.short()
+
+        pixdata(data, pmap)
 
 
 class DirectBitsRgn (Operation):
+
     def parse(self, data, context):
         if DEBUG_PARSER:
             print("DirectBitsRgn")
-        pmap = pixmap(data, force=False)
+        pmap = pixmap(data, clipped=True)
         src_rect = data.rect()
         dst_rect = data.rect()
         mode = data.short()
@@ -538,7 +601,7 @@ class DirectBitsRgn (Operation):
         mask_rgn_size = data.short()
         if DEBUG_PARSER:
             print(f"mask_rgn_size: {mask_rgn_size}")
-        mask_rgn = data.read(mask_rgn_size-2)
+        mask_rgn = data.read(mask_rgn_size - 2)
         
         pixdata(data, pmap)
 
@@ -569,6 +632,12 @@ class TextFace (Operation):
 
     def parse(self, data, context):
         face = data.byte()
+
+
+class TextMode (Operation):
+
+    def parse (self, data, context):
+        mode = data.short()
 
 
 class PenSize (Operation):
@@ -664,9 +733,9 @@ class Line (Operation):
 
 class LineFrom (Operation):
     def parse(self, data, context):
-        dh, dv = data.point()
-        context.x += dh
-        context.y += dv
+        p = data.point()
+        context.x += p.x
+        context.y += p.y
 
 
 class ShortLine (Operation):
@@ -674,10 +743,16 @@ class ShortLine (Operation):
     def parse(self, data, context):
         start = data.point()
         dh, dv = data.read(2)
+        line = context.element("line")
+        line.set("x1", str(start.x))
+        line.set("y1", str(start.y))
         context.x += dh
         context.y += dv
+        line.set("x2", str(context.x))
+        line.set("y2", str(context.y))
+        line.set("stroke", "black")
         if DEBUG_PARSER:
-            print(f"{str(start)} -> {dh} {dv}")
+            print(f"ShortLine {str(start)} -> {dh} {dv}")
 
 
 class ShortLineFrom (Operation):
@@ -710,6 +785,9 @@ class DHText (Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode('macintosh')
+        if DEBUG_PARSER:
+            print(f"DHText: dh {dh} size {size}")
+            print(text.encode('utf-8'))
         context.text(text, dh = dh)
 
 
@@ -718,6 +796,9 @@ class DVText (Operation):
     def parse(self, data, context):
         dv, size = data.read(2)
         text = data.read(size).decode('macintosh')
+        if DEBUG_PARSER:
+            print(f"DVText: dv {dv} size {size}")
+            print(text.encode('utf-8'))
         context.text(text, dv = dv)
 
 
@@ -726,6 +807,9 @@ class DHDVText (Operation):
     def parse(self, data, context):
         dh, dv, size = data.read(3)
         text = data.read(size).decode('macintosh')
+        if DEBUG_PARSER:
+            print(f"DHDVText: dh {dh} dv {dv} size {size}")
+            print(text.encode('utf-8'))
         context.text(text, dh = dh, dv = dv)
 
 
@@ -1011,7 +1095,10 @@ class LongComment (Operation):
         kind, size = data.unpack('hh')
         value = data.read(size)
         if DEBUG_PARSER:
-            print("LongComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
+            if kind in PICT_COMMENTS:
+                print("LongComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
+            else:
+                print(f"LongComment: {kind} - unknown")
             print("size: %s" % size)
             print("value: %s" % " ".join(format(x, '02x') for x in value))
 
@@ -1035,6 +1122,7 @@ PICT_OPCODES = {
     0x1: ClipRegion,
     0x3: TextFont,
     0x4: TextFace,
+    0x5: TextMode,
     0x7: PenSize,
     0x8: PenMode,
     0x9: PenPattern,
@@ -1084,12 +1172,16 @@ PICT_OPCODES = {
     0x75: SkipRegion,
     0x76: SkipRegion,
     0x77: SkipRegion,
+    0x80: SkipRegion,
+    0x81: SkipRegion,
     0x8c: NOOP,
     # picture data
     0x90: BitsRect,
     0x91: BitsRgn,
     0x9a: DirectBitsRect,
     0x9b: DirectBitsRgn,
+    0x98: PackBitsRect,
+    0x99: PackBitsRgn,
     # comment fields
     0xa0: ShortComment,
     0xa1: LongComment,
@@ -1100,6 +1192,11 @@ PICT_OPCODES = {
 }
 
 PICT_COMMENTS = {
+    100: "ApplicationComment",
+    130: "DrawingBegin",
+    131: "DrawingEnd",
+    140: "GroupBegin",
+    141: "GroupEnd",
     # text related
     150: "TextBegin",
     151: "TextEnd",
@@ -1110,11 +1207,18 @@ PICT_COMMENTS = {
     156: "LineLayoutOn",
     157: "ClientLineLayout",
     # graphics related
+    142: "BitmapBegin",
+    143: "BitmapEnd",
     160: "PolyBegin",
     161: "PolyEnd",
     163: "PolyIgnore",
     164: "PolySmooth",
     165: "PolyClose",
+    170: "ArrowBeginStart",
+    171: "ArrowBeginEnd",
+    172: "ArrowBeginBoth",
+    173: "ArrowEnd",
+    197: "SetGrayLevel",
     200: "RotateBegin",
     201: "RotateEnd",
     202: "RotateCenter",
@@ -1152,6 +1256,7 @@ def parse_pict(fn, data):
             op = PICT_OPCODES[opcode]()
         except KeyError:
             print("No support for opcode 0x%s" % format(opcode, '02x'))
+            print(" ".join(format(x, '02x') for x in buf.data[buf.pos:buf.pos+300]))
             raise PictParseError
         if isinstance(op, EndPict):
             break
@@ -1162,7 +1267,7 @@ def parse_pict(fn, data):
         except ValueError:
             print("UHOH (ValueError on parse)")
             # context.close(fn)
-            exit(1)
+            raise
         buf.align()
     return context.close()
 

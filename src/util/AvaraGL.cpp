@@ -16,64 +16,65 @@
 bool actuallyRender = true;
 
 glm::mat4 proj;
-const float near_dist = .47f;
+const float near_dist = .1f;
 const float far_dist = 1000.0f;
-const float default_fov = 50.0f;
-const float default_aspect = 4.0/3.0f;
+
+float current_fov = 60.0f;
+short window_height = 1;
+short window_width = 1;
 
 float skyboxVertices[] = {
         // positions          
-        -1.0f,  1.0f, -1.0f,
-        -1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
+        -5.0f,  5.0f, -5.0f,
+        -5.0f, -5.0f, -5.0f,
+         5.0f, -5.0f, -5.0f,
+         5.0f, -5.0f, -5.0f,
+         5.0f,  5.0f, -5.0f,
+        -5.0f,  5.0f, -5.0f,
 
-        -1.0f, -1.0f,  1.0f,
-        -1.0f, -1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f,  1.0f,
-        -1.0f, -1.0f,  1.0f,
+        -5.0f, -5.0f,  5.0f,
+        -5.0f, -5.0f, -5.0f,
+        -5.0f,  5.0f, -5.0f,
+        -5.0f,  5.0f, -5.0f,
+        -5.0f,  5.0f,  5.0f,
+        -5.0f, -5.0f,  5.0f,
 
-         1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
+         5.0f, -5.0f, -5.0f,
+         5.0f, -5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f, -5.0f,
+         5.0f, -5.0f, -5.0f,
 
-        -1.0f, -1.0f,  1.0f,
-        -1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f, -1.0f,  1.0f,
-        -1.0f, -1.0f,  1.0f,
+        -5.0f, -5.0f,  5.0f,
+        -5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f, -5.0f,  5.0f,
+        -5.0f, -5.0f,  5.0f,
 
-        -1.0f,  1.0f, -1.0f,
-         1.0f,  1.0f, -1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-        -1.0f,  1.0f,  1.0f,
-        -1.0f,  1.0f, -1.0f,
+        -5.0f,  5.0f, -5.0f,
+         5.0f,  5.0f, -5.0f,
+         5.0f,  5.0f,  5.0f,
+         5.0f,  5.0f,  5.0f,
+        -5.0f,  5.0f,  5.0f,
+        -5.0f,  5.0f, -5.0f,
 
-        -1.0f, -1.0f, -1.0f,
-        -1.0f, -1.0f,  1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-        -1.0f, -1.0f,  1.0f,
-         1.0f, -1.0f,  1.0f
+        -5.0f, -5.0f, -5.0f,
+        -5.0f, -5.0f,  5.0f,
+         5.0f, -5.0f, -5.0f,
+         5.0f, -5.0f, -5.0f,
+        -5.0f, -5.0f,  5.0f,
+         5.0f, -5.0f,  5.0f
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc, decalLoc;
+GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc;
 GLuint light0Loc, light1Loc, light2Loc, light3Loc;
 
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
 GLuint skyViewLoc, skyProjLoc, groundColorLoc, horizonColorLoc, skyColorLoc;
-
 
 const char* glGetErrorString(GLenum error)
 {
@@ -117,9 +118,19 @@ void AvaraGLSetView(glm::mat4 view) {
 }
 
 
-void AvaraGLUpdateProjectionMatrix(float fov) {
+void AvaraGLSetFOV(float fov) {
+    current_fov = fov;
+    AvaraGLUpdateProjectionMatrix();
+}
+
+void AvaraGLUpdateProjectionMatrix() {
+    proj = glm::scale(glm::perspective(
+                        glm::radians(current_fov), 
+                        (float)window_width / (float)window_height, 
+                        near_dist, 
+                        far_dist)
+                     , glm::vec3(-1, 1, -1));
     glUseProgram(gProgram);
-    proj = glm::scale(glm::perspective(glm::radians(fov), default_aspect, near_dist, far_dist), glm::vec3(-1, 1, -1));
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
     glCheckErrors();
 }
@@ -170,11 +181,6 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4f);
 }
 
-void AvaraGLSetDecal(float active) {
-    glUseProgram(gProgram);
-    glUniform1f(decalLoc, active);
-}
-
 void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
     glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(ToFloatMat(modelview)));
     glm::mat3 normal_mat = glm::mat3(1.0f);
@@ -188,6 +194,11 @@ void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
     glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
 }
 
+void AvaraGLSetDepthTest(bool doTest) {
+    if (doTest) glDepthFunc(GL_LEQUAL);
+    else glDepthFunc(GL_ALWAYS);
+}
+
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
@@ -196,12 +207,11 @@ void AvaraGLInitContext() {
 
     projLoc = glGetUniformLocation(gProgram, "proj");
     viewLoc = glGetUniformLocation(gProgram, "view");
-    AvaraGLUpdateProjectionMatrix(default_fov);
+    AvaraGLUpdateProjectionMatrix();
     mvLoc = glGetUniformLocation(gProgram, "modelview");
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
-    decalLoc = glGetUniformLocation(gProgram, "decal");
     glCheckErrors();
 
 
@@ -222,7 +232,12 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
+}
 
+void AvaraGLViewport(short width, short height) {
+    window_width = width;
+    window_height = height;
+    AvaraGLUpdateProjectionMatrix();
 }
 
 void AvaraGLDrawPolygons(CBSPPart* part) {
@@ -247,21 +262,34 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     if (part->privateAmbient != -1) {
         AvaraGLSetAmbient(ToFloat(part->privateAmbient));
     }
-
     if (extra_amb > 0) {
         AvaraGLSetAmbient(current_amb + extra_amb);
     }
-
     if (part->ignoreDirectionalLights) {
         ActivateLights(0);
         glCheckErrors();
     }
 
+    // hack to find the viewPortPart and
+    // scout, we want to render only the
+    // front faces of these so we can see thru
+    // the back of the faces with the camera
+    if (part->usesPrivateHither == true) {
+        // magic value set for scout and head
+        if (part->hither == FIX3(101)) {
+            glEnable(GL_CULL_FACE);
+            glCullFace(GL_BACK);
+            glFrontFace(GL_CCW);
+        }
+    }
+
     // if we're drawing something thin
     // give it a little z-buffer push towards
-    // the camera by scaling down the z-value
-    if (part->isDecal) {
-        AvaraGLSetDecal(.9995f);
+    // the camera by scaling the z-value
+    bool decal = part->isDecal;
+    if (decal) {
+        glEnable(GL_POLYGON_OFFSET_FILL);
+        glPolygonOffset(-1.0, 1.0);
     }
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
@@ -275,8 +303,8 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glDisableVertexAttribArray(2);
 
     // reset z-buffer scale
-    if (part->isDecal) {
-        AvaraGLSetDecal(1.0);
+    if (decal) {
+        glDisable(GL_POLYGON_OFFSET_FILL);
     }
 
     // restore previous lighting state
@@ -284,10 +312,17 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         AvaraGLSetAmbient(current_amb);
         glCheckErrors();
     }
-
     if (part->ignoreDirectionalLights) {
         ActivateLights(1);
         glCheckErrors();
+    }
+
+    // turn backface culling back off for
+    // all other geometry
+    if (part->usesPrivateHither == true) {
+        if (part->hither == FIX3(101)) {
+            glDisable(GL_CULL_FACE);
+        }
     }
 
     glBindVertexArray(NULL);
@@ -295,6 +330,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     glBindBuffer(GL_ARRAY_BUFFER, NULL);
     glCheckErrors();
+
 }
 
 

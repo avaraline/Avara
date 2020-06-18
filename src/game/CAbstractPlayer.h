@@ -110,6 +110,7 @@ public:
     Fixed oldPitch;
 
     Fixed yonBound;
+    Fixed maxFOV;
     Fixed fieldOfView; //	Angle of field of view.
     Fixed scoutBaseHeight;
 

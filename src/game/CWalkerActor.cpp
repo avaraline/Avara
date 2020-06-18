@@ -721,7 +721,9 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         viewPortPart = partList[0];
         viewPortPart->usesPrivateHither = true;
-        viewPortPart->hither = FIX3(100);
+        // set magic value to turn on backface culling
+        // for this part (so we can see through it with the camera)
+        viewPortPart->hither = FIX3(101);
         viewPortPart->ReplaceColor(kMarkerColor, longTeamColor);
 
         proximityRadius = viewPortPart->enclosureRadius << 2;

@@ -12,43 +12,69 @@
 #include "CBSPPart.h"
 #include "CBSPWorld.h"
 #include "CViewParameters.h"
+#include "CWorldShader.h"
 
 #include <SDL.h>
+#include <iostream>
+#include <string>
+#include <sstream>
 
 // These are defined all over the place right now...
 #define kMarkerColor 0x00fefefe
 #define kOtherMarkerColor 0x00fe0000
 
+bool cull_back_faces = false;
+
 class BSPViewer : public CApplication {
 public:
     CBSPPart *itsPart;
-    CBSPWorld *itsWorld;
+    CBSPWorldImpl *itsWorld;
     CViewParameters *itsView;
+    CWorldShader *worldShader;
 
     Vector location, orientation;
+    int current_id;
 
-    BSPViewer() : CApplication("BSP Viewer", 800, 600) {
-        itsWorld = new CBSPWorld;
+    BSPViewer(int id) : CApplication("BSP Viewer") {
+        current_id = id;
+        itsWorld = new CBSPWorldImpl;
         itsWorld->IBSPWorld(1);
-
-        itsPart = new CBSPPart;
-        itsPart->IBSPPart(215);
-        itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
-        itsPart->ReplaceColor(kOtherMarkerColor, 13421568); // yellow
-        itsWorld->AddPart(itsPart);
+        newPart(current_id);
 
         itsView = new CViewParameters;
         itsView->IViewParameters();
-        itsView->SetLight(1, FIX(30), FIX(-20), FIX3(200), kLightGlobalCoordinates);
-        itsView->yonBound = FIX(10000);
+
+        itsView->yonBound = FIX(100);
+        itsView->dirtyLook = true;
+
+        itsView->LookFrom(0, 0, FIX(1.5));
+        itsView->LookAtPart(itsPart);
+        itsView->PointCamera();
+
+        worldShader = new CWorldShader;
+        worldShader->IWorldShader();
+        worldShader->skyShadeCount = 12;
+
 
         location[0] = FIX(0);
-        location[0] = FIX(0);
-        location[2] = FIX(25);
+        location[1] = FIX(0);
+        location[2] = FIX(0);
 
         orientation[0] = FIX(0);
         orientation[1] = FIX(0);
         orientation[2] = FIX(0);
+    }
+
+    void newPart(int id) {
+        if (itsWorld->GetPartCount() > 0) {
+            itsWorld->RemovePart(itsPart);
+        }
+        itsPart = new CBSPPart;
+        itsPart->IBSPPart(current_id);
+        itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
+        itsPart->ReplaceColor(kOtherMarkerColor, 13421568); // yellow
+        itsPart->UpdateOpenGLData();
+        itsWorld->AddPart(itsPart);
     }
 
     bool HandleEvent(SDL_Event &event) {
@@ -56,6 +82,11 @@ public:
             case SDL_MOUSEMOTION:
                 if (event.motion.state & SDL_BUTTON(SDL_BUTTON_LEFT)) {
                     location[2] += FIX((float)event.motion.yrel / 5.0);
+                    return true;
+                }
+                if (event.motion.state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
+                    orientation[0] += FIX((float)event.motion.yrel / 5.0);
+                    orientation[1] += FIX((float)event.motion.xrel / 5.0);
                     return true;
                 }
                 break;
@@ -73,19 +104,52 @@ public:
                     case SDLK_UP:
                         orientation[0] += FIX(5);
                         return true;
+                    case SDLK_w:
+                        orientation[0] = FIX(90);
+                        orientation[1] = FIX(0);
+                        return true;
+                    case SDLK_s:
+                        orientation[0] = FIX(-90);
+                        orientation[1] = FIX(0);
+                        return true;
+                    case SDLK_d:
+                        orientation[0] = FIX(0);
+                        orientation[1] = FIX(90);
+                        return true;
+                    case SDLK_a:
+                        orientation[0] = FIX(0);
+                        orientation[1] = FIX(-90);
+                        return true;
+                    case SDLK_b:
+                        cull_back_faces = !cull_back_faces;
+                        return true;
+                    case SDLK_r:
+                        newPart(current_id);
+                        return true;
                 }
                 break;
         }
         return false;
     }
 
-    void DrawContents() {
+    void drawContents() {
         // Maybe put this at the CApplication level?
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glBlendFunc(GL_ONE, GL_ZERO);
 
+        AvaraGLViewport(mFBSize.x, mFBSize.y);
         itsView->SetViewRect(mFBSize.x, mFBSize.y, mFBSize.x / 2, mFBSize.y / 2);
+        itsView->viewPixelRatio = FIX(4.0/3.0);
+        itsView->CalculateViewPyramidCorners();
+
+        if (cull_back_faces) {
+            itsPart->usesPrivateHither = true;
+            itsPart->hither = FIX3(101);
+        }
+        else {
+            itsPart->usesPrivateHither = false;
+        }
 
         itsPart->Reset();
         itsPart->RotateZ(orientation[2]);
@@ -93,11 +157,23 @@ public:
         itsPart->RotateX(orientation[0]);
         TranslatePart(itsPart, location[0], location[1], location[2]);
         itsPart->MoveDone();
+
+        worldShader->ShadeWorld(itsView);
+
         itsWorld->Render(itsView);
+    }
+
+    void idle() {
+        glClearColor(0, 0, 0, 1);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        drawContents();
+        SDL_GL_SwapWindow(mSDLWindow);
     }
 };
 
 int main(int argc, char *argv[]) {
+
+
     // Init SDL and nanogui.
     nanogui::init();
 
@@ -105,7 +181,10 @@ int main(int argc, char *argv[]) {
     InitMatrix();
 
     // The BSPViewer application itself.
-    BSPViewer *app = new BSPViewer();
+    if (argc > 1)
+        BSPViewer *app = new BSPViewer(atoi(argv[1]));
+    else
+        BSPViewer *app = new BSPViewer(215);
 
     // Wait at most 10ms for any event.
     nanogui::mainloop(10);

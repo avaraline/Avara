@@ -45,6 +45,10 @@ void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, long longTeamColo
     partCount = 1;
     LoadPart(0, kScoutBSP);
     partList[0]->ReplaceColor(kMarkerColor, longTeamColor);
+    // set magic value to turn on backface culling
+    // for this part (so we can see through it with the camera)
+    partList[0]->usesPrivateHither = true;
+    partList[0]->hither = FIX3(101);
 
     hitSoundId = 220;
     gHub->PreLoadSample(hitSoundId);
@@ -240,7 +244,7 @@ void CScout::ControlViewPoint() {
     CViewParameters *theView;
 
     theView = itsGame->itsView;
-    theView->LookFrom(location[0] + FIX3(100), location[1], location[2]);
+    theView->LookFrom(location[0] + FIX3(100), location[1] + FIX3(100), location[2]);
     theView->LookAtPart(itsPlayer->viewPortPart);
     theView->PointCamera();
 }
