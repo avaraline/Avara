@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
         std::string arg = argv[i];
         if (arg == "-p" || arg == "--port") {
             int port = atoi(argv[++i]);  // pre-inc to next arg
-            app->Set(kDefaultUDPPort, port);
+            app->Set(kDefaultClientUDPPort, port);
         } else if (arg == "-n" || arg == "--name") {
             app->Set(kPlayerNameTag, std::string(argv[++i]));
         } else {
