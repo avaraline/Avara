@@ -39,8 +39,8 @@ using json = nlohmann::json;
 #define kTrackerAddress "trackerAddress"
 
 // Levels
-#define kSelectedSet "selectedSet"
-#define kSelectedLevel "selectedLevel"
+#define kRecentSets "recentSets"
+#define kRecentLevels "recentLevels"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -87,9 +87,8 @@ static json defaultPrefs = {
     {kTrackerRegister, 1},
     {kTrackerRegisterAddress, "avara.io"},
     {kTrackerRegisterFrequency, 5},
-    {kSelectedSet, "aa-normal"},
-    {kSelectedLevel, "Alektra"}
-
+    {kRecentSets, {}},
+    {kRecentLevels, {}}
 };
 
 

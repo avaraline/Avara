@@ -125,7 +125,13 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
         return true;
     }
     else {
-        if (rosterWindow->handleSDLEvent(event)) return true;
+        if(playerWindow->focused() || networkWindow->focused()) {
+            CApplication::handleSDLEvent(event);
+            return true;
+        }
+        else if (rosterWindow->handleSDLEvent(event))
+            return true;
+
         return CApplication::handleSDLEvent(event);
     }
 }
@@ -135,6 +141,11 @@ void CAvaraAppImpl::drawAll() {
         rosterWindow->UpdateRoster();
         CApplication::drawAll();
     }
+}
+
+void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
+    MessageLine(kmStarted, centerAlign);
+    levelWindow->AddRecent(set, level);
 }
 
 bool CAvaraAppImpl::DoCommand(int theCommand) {
@@ -243,7 +254,8 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     levels->Dispose();
 
     if (wasLoaded) {
-        AddMessageLine("Loaded \"" + levelName + "\" (" + set + ").");
+        AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
+        levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);
         SDL_Log("overhead %f, %f, %f\n", ToFloat(pt[0]), ToFloat(pt[1]), ToFloat(pt[2]));
