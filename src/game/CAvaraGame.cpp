@@ -886,6 +886,8 @@ bool CAvaraGame::GameTick() {
 void CAvaraGame::StopGame() {
     soundHub->HushFlag(true);
     SDL_SetRelativeMouseMode(SDL_FALSE);
+    SDL_StartTextInput();
+
     // SDL_CaptureMouse(SDL_FALSE);
     // SDL_ShowCursor(SDL_ENABLE);
 }

@@ -838,8 +838,6 @@ void CNetManager::StopGame(short newStatus) {
         kdEveryone, kpPlayerStatusChange, 0, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
 
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
-    
-    SDL_StartTextInput();
 }
 
 void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame) {
