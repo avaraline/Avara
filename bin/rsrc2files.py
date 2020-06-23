@@ -6,6 +6,8 @@ import rsrc_tools.bspt.reader as bsptReader
 import os
 import sys
 import json
+import subprocess
+import time
 from pathlib import Path
 
 BSPS_DIR = "bsps"
@@ -14,16 +16,43 @@ SVG_DIR = "svg"
 
 DEBUG_EXPORT = True
 
+EXPORT_SOUND = True
+
+
+def is_exe(path):
+    return os.path.isfile(path) and os.access(path, os.X_OK)
+
+if not is_exe(os.path.join("build", "hsnd2wav")) and \
+   not is_exe(os.path.join("build", "hsnd2wav.exe")):
+    EXPORT_SOUND = False
+
+WAV2OGG = False
+for path in os.environ["PATH"].split(os.pathsep):
+    bin_file = os.path.join(path, "sndfile-convert") 
+    exe_file = bin_file + ".exe"
+    if is_exe(exe_file) or is_exe(bin_file):
+        WAV2OGG = True
+
 def parse_level_rsrc(rpath, outpath, tmpl=None):
     manifest_data = {}
     data = open(str(rpath), 'rb').read()
 
     reader = resource.Reader()
-    rsrc = reader.parse(data)
+    try:
+        rsrc = reader.parse(data)
+    except:
+        return (None, None)
+
     if tmpl is not None:
         rsrc['TMPL'] = tmpl
-    # print(rsrc.keys())
-    tmplData = tmplReader.parse(rsrc)
+    try:
+        tmplData = tmplReader.parse(rsrc)
+    except:
+        print(f"Failed parsing TMPL for {rpath}")
+        return (None, None)
+    if 'LEDI' not in tmplData:
+        print(f"No LEDI in file {rpath}")
+        return (None, None)
 
     # avara reads the LEDI #128
     set_ledi = tmplData['LEDI'][128]
@@ -48,6 +77,9 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
     dirpath = os.path.join(outpath, dirname)
     os.makedirs(dirpath, exist_ok=True)
 
+    logpath = os.path.join(dirpath, "log.txt")
+    sys.stdout = open(logpath, "w")
+
     svgdir = os.path.join(dirpath, SVG_DIR)
     os.makedirs(svgdir, exist_ok=True)
 
@@ -65,9 +97,11 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             data = picts[pict]["data"]
             # print(data)
             
-            filename = ("%s_%s_%s.svg" % (str(pict), meta["Tag"], name)).replace(" ", "_")
+            filename = ("%s_%s.svg" % (str(pict), name)).replace(" ", "_")
 
             if DEBUG_EXPORT:
+                print(pict)
+                print(name)
                 print(filename)
             #print(meta["Name"].encode('macintosh'))
             #print(meta["Message"].encode('macintosh'))
@@ -81,8 +115,11 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             except PictParseError:
                 print(F"Could not parse {fn} - {meta['Name']} because of unknown opcode")
                 continue
-            with open(fn, "w", encoding="utf-8") as xml_file:
-                xml_file.write(xml_text.decode("utf-8"))
+            try:
+                with open(fn, "w", encoding="utf-8") as xml_file:
+                    xml_file.write(xml_text.decode("utf-8"))
+            except:
+                print(f"Couldn't write {fn}, probably because it is stupid")
 
         manifest_data["LEDI"] = {v["Tag"]:v for (_, v) in ledi_meta.items()}
 
@@ -105,37 +142,70 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             }
         manifest_data["BSPT"] = bspt_meta
 
-    if 'HSND' in rsrc:
+    if 'HSND' in rsrc and EXPORT_SOUND:
         hsnd_meta = {}
         snddir = os.path.join(dirpath, HSND_DIR)
         os.makedirs(snddir, exist_ok=True)
         for hsnd_id in rsrc['HSND'].keys():
             hsnd_name = rsrc['HSND'][hsnd_id]["name"]
 
-            fn = str(hsnd_id) + "_" + "".join(c for c in hsnd_name if c.isalnum() or c in ('.', '_')).rstrip() + ".wav"
-            fpath = os.path.join(snddir, fn)
+            fn = str(hsnd_id) + "_" + "".join(c for c in hsnd_name if c.isalnum() or c in ('.', '_')).rstrip()
+            wavpath = os.path.join(snddir, fn + ".wav")
             if DEBUG_EXPORT:
                 print(f"Found HSND {hsnd_id} {hsnd_name} {fn}")
 
-            os.system(f"build\\hsnd2wav {hsnd_id} {fpath} {rpath}")
+            args = [f'build{os.path.sep}hsnd2wav', str(hsnd_id), wavpath, str(rpath)]
+            print(args)
+            popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+            popen.wait()
+
+            if WAV2OGG:
+                oggpath = os.path.join(snddir, fn + ".ogg")
+                args = ['sndfile-convert', '-vorbis', wavpath, oggpath]
+                popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+                popen.wait()
+                try:
+                    os.remove(wavpath)
+                except FileNotFoundError:
+                    pass
+
+
             hsnd_meta[hsnd_id] = {
                 "name": hsnd_name,
-                "file": fn
+                "file": wavpath if not WAV2OGG else oggpath
             }
 
-
     if 'TEXT' in rsrc:
-        manifest_data["TEXT"] = {k:v["data"].decode("macroman") for (k,v) in rsrc["TEXT"].items()}
+        txts = "".join({k:v["data"].decode("macroman") for (k,v) in rsrc["TEXT"].items()}.values())
+        txtpath = os.path.join(dirpath, "default.avarascript")
+        with open(txtpath, "w", encoding="utf-8") as txtfile:
+            txtfile.write(txts.replace("\r", "\n"))
+
   
     if 'HULL' in rsrc:
         manifest_data["HULL"] = tmplData["HULL"]
 
+    manifest_path = os.path.join(dirpath, "set.json")
+    manifest_data["manifest_path"] = manifest_path
+
+    with open(manifest_path, 'w') as manifest_file:
+        json.dump(manifest_data, manifest_file, indent=1)
+    sys.stdout.close()
     return set_tag, manifest_data
 
 
 
 
 if __name__ == '__main__':
+
+    if not EXPORT_SOUND:
+        print("hsnd2wav is not built! I need this to export sound.")
+        print("build it with `make hsnd2wav`")
+        exit(1)
+
+    if not WAV2OGG:
+        print("I need libsndfile available to convert WAV to OGG.")
+        print("Install libsndfile and make sure sndfile-convert is on your PATH")
 
     ldir = "levels"
 
@@ -146,7 +216,7 @@ if __name__ == '__main__':
     avara_rsrc = reader.parse(data)
     avara_tmpl = avara_rsrc['TMPL']
 
-    print(sys.argv)
+    sys.stdout = open("rsrc2files.log", "w")
     if len(sys.argv) > 1:
         parse_level_rsrc(Path(sys.argv[1]), ldir, avara_tmpl)
     else:
@@ -155,14 +225,19 @@ if __name__ == '__main__':
         manifest = {}
         for rsrc_file in os.listdir(ldir):
             rpath = os.path.join(ldir, rsrc_file)
-            print(rpath)
-
+            if DEBUG_EXPORT:
+                print(rpath)
             if os.path.isdir(rpath):
                 continue
-            if ".r" not in rpath:
+            if not str(rpath).endswith(".r"):
                 continue
             tag, manifest_data = parse_level_rsrc(Path(rpath), ldir, avara_tmpl)
-            manifest[tag] = manifest_data
+            sys.stdout = open("rsrc2files.log", "a")
+            if not tag:
+                print(f"Couldn't read {rpath}")
+                continue
+            manifest[tag] = manifest_data["manifest_path"]
+
         manifest_path = os.path.join(ldir, "manifest.json")
         with open(manifest_path, 'w') as manifest_file:
             json.dump(manifest, manifest_file, indent=1)

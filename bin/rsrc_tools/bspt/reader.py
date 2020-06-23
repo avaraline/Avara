@@ -150,6 +150,7 @@ class BSP(object):
 
         d["triangles_poly"] = list()
         d["triangles_verts_poly"] = list()
+        # print(self.name)
         for poly in self.polys:
             # print(poly)
             normal_rec = self.normals[poly.normal_index]
@@ -176,6 +177,8 @@ class BSP(object):
                 self.points[x].y,
                 self.points[x].z]) for x in verts]
 
+            # grab two points from this poly to calculate the
+            # plane this face is in
             p0 = np.array(points[0])
             p1 = np.array(points[1])
             p = [p0 - p1]
@@ -190,7 +193,7 @@ class BSP(object):
 
             face_points = np.array([flatten_3to2(x) for x in points])
 
-            if (self.name == "Subway"):
+            if (self.name == "Subway" or self.name == "EURO"):
                 # uhh yeah.
                 # this is for a shape
                 # that crashed the triangulator
@@ -313,25 +316,27 @@ class BSP(object):
             'radius2': d['enclosure_radius'],
             'polys': [],
         }
-        for idx, (fe, ec, normal_idx, fp, bp, pvis, rs) in enumerate(d['polys']):
-            vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
-            normal = d['vectors'][vec_idx][:3]
-            color = d['colors'][color_idx]
-            tris = d['triangles_poly'][idx]
-            tri_points = d['triangles_verts_poly'][idx]
-            """
-            out['polys'].append({
-                'normal': [-x for x in normal],
-                'color': color,
-                'tris': [[tri_points[i] for i in t][::-1] for t in tris],
-            })
-            """
-            out['polys'].append({
-                'normal': normal,
-                'color': color,
-                'tris': [[tri_points[i] for i in t] for t in tris],
-            })
-            
+        try:
+            for idx, (fe, ec, normal_idx, fp, bp, pvis, rs) in enumerate(d['polys']):
+                vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
+                normal = d['vectors'][vec_idx][:3]
+                color = d['colors'][color_idx]
+                tris = d['triangles_poly'][idx]
+                tri_points = d['triangles_verts_poly'][idx]
+                """
+                out['polys'].append({
+                    'normal': [-x for x in normal],
+                    'color': color,
+                    'tris': [[tri_points[i] for i in t][::-1] for t in tris],
+                })
+                """
+                out['polys'].append({
+                    'normal': normal,
+                    'color': color,
+                    'tris': [[tri_points[i] for i in t] for t in tris],
+                })
+        except IndexError:
+            print("Invalid shape data")    
         return json.dumps(out, indent=2, sort_keys=True)
 
 
@@ -341,9 +346,12 @@ def serialize_list(the_list):
 def parse(resource):
     bsps = []
     for res_id in resource.keys():
-        bsp = BSP(resource[res_id])
-        bsp.res_id = res_id
-        bsps.append(bsp)
+        try:
+            bsp = BSP(resource[res_id])
+            bsp.res_id = res_id
+            bsps.append(bsp)
+        except:
+            print(f"Failed to export BSP {res_id}")
     return bsps
 
 def bsp2json(data, name=''):

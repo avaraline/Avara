@@ -21,6 +21,10 @@ void CWorldShader::IWorldShader(CAvaraGame *theGame) {
     Reset();
 }
 
+void CWorldShader::IWorldShader() {
+    Reset();
+}
+
 void CWorldShader::Reset() {
 #ifdef USE_OLD_COLORS
     lowSkyColor = 0xC05020;
