@@ -12,12 +12,12 @@ Avara is a cult-classic three-dimensional networked action FPS where you play as
 
 ## Build Requirements
 ### All platforms
-[SDL2](https://www.libsdl.org/download-2.0.php) and [SDL2_net](https://www.libsdl.org/projects/SDL_net/), POSIX-like environment, clang
+[SDL2](https://www.libsdl.org/download-2.0.php) and [SDL2_net](https://www.libsdl.org/projects/SDL_net/), cmake
+
+Avara can be built with the GNU compiler collection, but we target clang, so to be compatible with other copies you should use clang.
 
 ### Windows 10
-Building on Windows 10 requires the [MSYS2](https://www.msys2.org/) environment. After installing MSYS2, you can get the dependencies for building by running the following in an MSYS2 Mingw64 terminal: 
-
-`pacman --noconfirm --needed -Syuu zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make`
+You can open the repository folder as a CMake project in Visual Studio (tested on "Community 2019" version). You may need to install CMake and C++ extensions for Visual Studio.
 
 ### Linux
 On Debian based distributions of Linux, you can install the needed dependencies for building by running the following in a terminal:
@@ -25,19 +25,25 @@ On Debian based distributions of Linux, you can install the needed dependencies 
 `apt-get -yq install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libsdl2-net-dev`
 
 ### Apple macOS
-Avara can be built using [Xcode](https://developer.apple.com/xcode/features/) development tools or [Homebrew](https://brew.sh/). You must install SDL and ensure the libraries are available in either `/Library/Frameworks` or `~/Library/Frameworks`.
+Avara can be built using [Xcode](https://developer.apple.com/xcode/features/) development tools or [Homebrew](https://brew.sh/). 
 
 ## Build Instructions
 
-Running `make` will produce a binary at `build/Avara`.
+Enter the source directory: `cd Avara`
+Create and enter a build folder: `mkdir build && cd build`
+Run cmake (with options, see below): `cmake ..`
 
-This Makefile has been tested on recent versions of macOS, Windows 10, and various flavors of Linux. If you encounter a problem building, feel free to submit an issue, or ideally a pull request!
+### CMake options
+On linux to ensure that you are using clang/clang++:
+```
+CC=$(which clang) CXX=$(which clang) cmake ..
+```
+This will generate a Makefile, with which you can run `make` normally.
 
-To create a signed app bundle on macOS, you can use `make macapp SIGNING_ID=yourid`.
-
-To create a portable executable archive (library dlls included) on Windows 10, use `make winapp`.
-
-There are many intermediate compiled files and you can drastically speed up Avara's build times by offering a number of jobs to run simultaneously to the `make` command. On a quad-core machine, try `make -j5`. Typically you can safely use a number of jobs that is one more than the number of cores on your machine.
+On macos, you can generate an XCode project file with
+```
+cmake -G Xcode ..
+```
 
 ## How to play
 To get into a game and look around, just press the "Load Level" button, then the "Start Game" button in the "Levels" window. This will drop you into the level called Alektra. You're now in control of a lethal bipedal machine called a Hostile Environment Combat and Tactical Operations Remote (HECTOR), equipped with homing missiles, high-explosive contact grenades, and reactive plasma cannons! The controls shown below are the defaults. To change them, see the Configuring your Controls section.

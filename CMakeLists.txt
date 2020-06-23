@@ -11,6 +11,10 @@ if (POLICY CMP0074)
   cmake_policy(SET CMP0074 NEW)
 endif()
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+
 
 # Modules for copying files, finding OpenGL and SDL libraries
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
@@ -93,7 +97,7 @@ set(CORE_INCLUDES
     vendor/glm/ext
     vendor/glm/gtc
     vendor/glm/gtx
-    vednor/glm/simd
+    vendor/glm/simd
     vendor/nanogui
     vendor/nanovg
     vendor/utf8
