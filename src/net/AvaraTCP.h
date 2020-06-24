@@ -10,12 +10,7 @@
 #pragma once
 
 #include "Types.h"
-
-#ifdef __APPLE__
-#include <SDL2_net/SDL_net.h>
-#else
 #include <SDL_net.h>
-#endif
 
 #define UDPSTREAMBUFFERSIZE 16384
 #define UDPSENDBUFFERSIZE 1024
