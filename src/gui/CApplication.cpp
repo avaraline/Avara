@@ -27,6 +27,7 @@ CApplication::~CApplication() {}
 void CApplication::Done() {
     prefs[kWindowWidth] = mSize[0];
     prefs[kWindowHeight] = mSize[1];
+    prefs.erase(kDefaultClientUDPPort);  // don't save client port
     WritePrefs(prefs);
 }
 
@@ -60,6 +61,13 @@ std::string CApplication::String(const std::string name) {
 
 long CApplication::Number(const std::string name) {
     return prefs[name];
+}
+
+long CApplication::Number(const std::string name, const long defaultValue) {
+    if (prefs[name].is_number()) {
+        return prefs[name];
+    }
+    return defaultValue;
 }
 
 json CApplication::Get(const std::string name) {

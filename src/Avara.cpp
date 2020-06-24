@@ -14,6 +14,7 @@
 #include "CBSPPart.h"
 #include "FastMat.h"
 #include "SDL.h"
+#include "Preferences.h"
 
 #include <nanogui/nanogui.h>
 #include <string.h>
@@ -63,6 +64,20 @@ int main(int argc, char *argv[]) {
 
     // The Avara application itself.
     CAvaraApp *app = new CAvaraAppImpl();
+
+    // process command-line arguments
+    for (int i = 1; i < argc; i++) {
+        std::string arg = argv[i];
+        if (arg == "-p" || arg == "--port") {
+            int port = atoi(argv[++i]);  // pre-inc to next arg
+            app->Set(kDefaultClientUDPPort, port);
+        } else if (arg == "-n" || arg == "--name") {
+            app->Set(kPlayerNameTag, std::string(argv[++i]));
+        } else {
+            SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
+            exit(1);
+        }
+    }
 
     mainloop(app->GetGame()->frameTime / 4);
 

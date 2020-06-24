@@ -27,6 +27,7 @@ typedef unsigned char UnsignedByte;
 typedef signed char SignedByte;
 
 typedef uint32_t ip_addr;
+typedef uint16_t port_num;
 
 struct Rect {
     short top;
