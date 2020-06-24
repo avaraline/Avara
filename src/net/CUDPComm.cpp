@@ -75,6 +75,25 @@ enum {
     kServerTrackerInviteItem
 };
 
+// A utility function to byte-swap the host & port and create a human-readable format
+static std::string FormatAddr(IPaddress addr) {
+    std::ostringstream os;
+    ip_addr ipaddr = SDL_SwapBE32(addr.host);
+    os << (ipaddr >> 24) << "."
+       << ((ipaddr >> 16) & 0xff) << "."
+       << ((ipaddr >> 8) & 0xff) << "."
+       << (ipaddr & 0xff) <<  ":"
+       << SDL_SwapBE16(addr.port);
+    return os.str();
+}
+static std::string FormatAddr(ip_addr host, port_num port) {
+    IPaddress ip;
+    ip.host = host;
+    ip.port = port;
+    return FormatAddr(ip);
+}
+
+
 static void UDPReadComplete(UDPpacket *packet, void *userData) {
     CUDPComm *theComm = (CUDPComm *)userData;
     theComm->ReadComplete(packet);
@@ -107,6 +126,11 @@ void CUDPComm::WriteAndSignPacket(PacketInfo *thePacket) {
     short dummyStackVar;
 
     thePacket->sender = myId; //	Sign it.
+    
+    // SDL_Log("CUDPComm::WriteAndSignPacket   num=%d cmd=%d p1=%d p2=%d p3=%d sndr=%d dist=0x%02hx\n",
+    //         thePacket->serialNumber,thePacket->packet.command,
+    //         thePacket->packet.p1, thePacket->packet.p2, thePacket->packet.p3,
+    //         thePacket->packet.sender, thePacket->packet.distribution);
 
     if (!isClosed) { //	Queue it to be sent out:
 
@@ -263,7 +287,7 @@ void CUDPComm::SendConnectionTable() {
     }
 }
 
-void CUDPComm::SendRejectPacket(ip_addr remoteHost, short remotePort, OSErr loginErr) {
+void CUDPComm::SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr) {
     SDL_Log("CUDPComm::SendRejectPacket\n");
     /*
     charWordLongP	outData;
@@ -305,7 +329,7 @@ void CUDPComm::SendRejectPacket(ip_addr remoteHost, short remotePort, OSErr logi
 
 CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
     ip_addr remoteHost;
-    short remotePort;
+    port_num remotePort;
     short i;
     OSErr loginErr = noErr;
     CUDPConnection *newConn;
@@ -313,7 +337,7 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
 
     remoteHost = udp->address.host;
     remotePort = udp->address.port;
-    SDL_Log("DoLogin from %u:%d\n", remoteHost, remotePort);
+    SDL_Log("DoLogin from %s\n", FormatAddr(udp->address).c_str());
     // remoteHost = receivePB.csParam.receive.remoteHost;
     // remotePort = receivePB.csParam.receive.remotePort;
 
@@ -382,6 +406,8 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
 
     // SDL_Log("CUDPComm::PacketHandler command=%d p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->p1,
     // thePacket->p2, thePacket->p3);
+    // SDL_Log("   CUDPComm::PacketHandler    <<<<  cmd=%d sender=%d  p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->sender,
+    //         thePacket->p1, thePacket->p2, thePacket->p3);
 
     switch (thePacket->command) {
         case kpPacketProtocolReject:
@@ -513,9 +539,9 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             inData.c += p->dataLen;
                         }
 
-                        // SDL_Log("CUDPComm::ReadComplete cmd=%d p1=%d p2=%d p3=%d flags=%d sender=%d
-                        // distribution=%d\n", p->command,
-                        //    p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution);
+                        // SDL_Log("  CUDPComm::ReadComplete  << num=%d cmd=%d p1=%d p2=%d p3=%d flags=%d sender=%d dist=0x%02x from %s\n",
+                        //         thePacket->serialNumber, p->command, p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution,
+                        //         FormatAddr(packet->address).c_str());
 
                         if (conn) {
                             conn->ReceivedPacket(thePacket);
@@ -744,9 +770,8 @@ Boolean CUDPComm::AsyncWrite() {
                 thePacket = NULL;
             }
 
-            // SDL_Log("Sending packet cmd=%d p1=%d p2=%d p3=%d flags=%d dist=%d sender=%d\n", p->command, p->p1, p->p2,
-            // p->p3, p->flags,
-            //    p->distribution, p->sender);
+            // SDL_Log(" Preparing packet >>> cmd=%d p1=%d p2=%d p3=%d flags=%d sndr=%d dist=%d\n",
+            //         p->command, p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution);
         }
 
         theConnection->quota -= kHeaderQuota;
@@ -790,6 +815,8 @@ Boolean CUDPComm::AsyncWrite() {
         }
 
         if (stream && theConnection->port) {
+            // SDL_Log("   WRITING UDP packet to %s using stream %p\n",
+            //         FormatAddr(udp->address).c_str(), stream);
             UDPWrite(stream, udp, UDPWriteComplete, this);
             result = true;
         }
@@ -1029,7 +1056,7 @@ void CUDPComm::CreateServer() {
     //	And that's all there is to it!
 }
 
-OSErr CUDPComm::ContactServer(ip_addr serverHost, short serverPort) {
+OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
     if (noErr == CreateStream(localPort)) {
         long startTime;
         SDL_Event theEvent;
@@ -1039,7 +1066,7 @@ OSErr CUDPComm::ContactServer(ip_addr serverHost, short serverPort) {
         connections->port = serverPort;
         connections->ipAddr = serverHost;
 
-        SDL_Log("Connecting to %u:%d (seed=%ld)\n", serverHost, serverPort, seed);
+        SDL_Log("Connecting to %s (seed=%ld) from port %d\n", FormatAddr(serverHost, serverPort).c_str(), seed, localPort);
 
         AsyncRead();
         SendPacket(kdServerOnly, kpPacketProtocolLogin, 0, 0, seed, password[0] + 1, (Ptr)password);
@@ -1093,14 +1120,18 @@ OSErr CUDPComm::ContactServer(ip_addr serverHost, short serverPort) {
     return noErr;
 }
 
-void CUDPComm::Connect(std::string address) {
+void CUDPComm::Connect(std::string address) {\
+    SDL_Log("Connect address = %s\n", address.c_str());
+
     OpenAvaraTCP();
 
-    localPort = gApplication->Number(kDefaultUDPPort);
+    long serverPort = gApplication->Number(kDefaultUDPPort);
+    // if kDefaultClientUDPPort not specified, fall back to kDefaultUDPPort
+    localPort = gApplication->Number(kDefaultClientUDPPort, serverPort);
 
     IPaddress addr;
     CAvaraApp *app = (CAvaraAppImpl *)gApplication;
-    SDLNet_ResolveHost(&addr, address.c_str(), localPort);
+    SDLNet_ResolveHost(&addr, address.c_str(), serverPort);
 
     ContactServer(addr.host, addr.port);
     /*
@@ -1421,12 +1452,14 @@ void CUDPComm::StartServing() {
     */
 }
 
-OSErr CUDPComm::CreateStream(short streamPort) {
+OSErr CUDPComm::CreateStream(port_num streamPort) {
     localPort = streamPort;
     if (stream) {
         DestroySocket(stream);
     }
+    // SDL_Log("   CREATING SOCKET on port %d\n", localPort);
     stream = CreateSocket(localPort);
+    // SDL_Log("   CREATED STREAM addr = %p\n", stream);
 
     // This is almost certainly useless - should make it a preference
     IPaddress addr;

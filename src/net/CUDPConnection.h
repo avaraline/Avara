@@ -30,8 +30,8 @@ typedef struct {
 #pragma pack()
 
 typedef struct {
-    int host;
-    short port;
+    ip_addr host;
+    port_num port;
 } CompleteAddress;
 
 typedef struct {
@@ -60,8 +60,8 @@ public:
 
     long seed;
 
-    int ipAddr;
-    short port;
+    ip_addr ipAddr;
+    port_num port;
 
     short myId;
 
@@ -121,7 +121,7 @@ public:
 
     virtual Boolean AreYouDone();
 
-    virtual void FreshClient(long remoteHost, short remotePort, long firstReceiveSerial);
+    virtual void FreshClient(ip_addr remoteHost, port_num remotePort, long firstReceiveSerial);
 
 #if DEBUG_AVARA
     virtual void DebugPacket(char eType, UDPPacketInfo *p);

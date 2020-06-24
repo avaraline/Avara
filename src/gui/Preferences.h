@@ -17,6 +17,7 @@ using json = nlohmann::json;
 
 // UDP stuff
 #define kDefaultUDPPort "udpDefaultPort"
+#define kDefaultClientUDPPort "udpDefaultClientPort"
 #define kUDPResendPrefTag "udpResend"
 #define kUDPConnectionSpeedTag "udpConnectionSpeed"
 

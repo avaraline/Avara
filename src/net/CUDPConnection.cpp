@@ -27,13 +27,15 @@
 
 #if DEBUG_AVARA
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) num=%d cmd=%d p1=%d p2=%d p3=%d\n",
+    SDL_Log("CUDPConnection::DebugPacket(%c) num=%d cmd=%d p1=%d p2=%d p3=%d sndr=%x dist=0x%02x\n",
         eType,
         p->serialNumber,
         p->packet.command,
         p->packet.p1,
         p->packet.p2,
-        p->packet.p3);
+        p->packet.p3,
+        p->packet.sender,
+        p->packet.distribution);
 }
 #endif
 
@@ -137,6 +139,9 @@ void CUDPConnection::SendQueuePacket(UDPPacketInfo *thePacket, short theDistribu
 void CUDPConnection::RoutePacket(UDPPacketInfo *thePacket) {
     short extendedRouting = routingMask | (1 << myId);
 
+    #if DEBUG_AVARA
+        DebugPacket('=', thePacket);
+    #endif
     SendQueuePacket(thePacket, thePacket->packet.distribution & extendedRouting);
     thePacket->packet.distribution &= ~extendedRouting;
 }
@@ -597,8 +602,8 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
         next->OpenNewConnections(origTable);
 }
 
-void CUDPConnection::FreshClient(long remoteHost, short remotePort, long firstReceiveSerial) {
-    SDL_Log("CUDPConnection::FreshClient(%lu, %d)\n", remoteHost, remotePort);
+void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, long firstReceiveSerial) {
+    SDL_Log("CUDPConnection::FreshClient(%u, %hu)\n", remoteHost, remotePort);
     FlushQueues();
     serialNumber = 0;
     receiveSerial = firstReceiveSerial;
