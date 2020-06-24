@@ -17,8 +17,8 @@ public:
     long *codeStrings;
     short *codeLengths;
     HuffTreeNode **lookupBuf;
-    Boolean singleSymbolData;
-    unsigned char theSingleSymbol;
+    Boolean singleSymbolData = 0;
+    unsigned char theSingleSymbol = 0;
 
     CHuffmanHandler() {}
     virtual ~CHuffmanHandler() {}

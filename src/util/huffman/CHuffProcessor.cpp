@@ -337,7 +337,7 @@ void CHuffProcessor::Compress(Ptr fromPtr, Ptr destPtr) {
 
         k = 0;
         for (i = 0; i < (NUMSYMBOLS >> 5); i++) {
-            int flags;
+            int flags = 0;
             for (j = 0; j < 32; j++) {
                 flags += flags;
                 flags |= (symbCounters[k++] != 0);

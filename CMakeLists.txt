@@ -20,10 +20,12 @@ include(TargetCopyFiles)
 if(WIN32 OR MSVC)
     set(SDL2_PATH "${CMAKE_SOURCE_DIR}/platform/windows/SDL2-2.0.12")
     set(SDL2_NET_PATH "${CMAKE_SOURCE_DIR}/platform/windows/SDL2_net-2.0.1")
+    # standard exception handling on windows
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
 endif()
 
-find_package(SDL2 REQUIRED COMPONENTS main)
-find_package(SDL2_net REQUIRED)
+find_package(SDL2 REQUIRED COMPONENTS MAIN)
+find_package(SDL2_NET REQUIRED)
 
 if(NOT WIN32)
    find_package(OpenGL REQUIRED)
@@ -70,7 +72,7 @@ endif()
 add_library(AvaraCore OBJECT ${CORE_SOURCE})
 
 set(CORE_INCLUDES
-    ${SDL2_INCLUDE_DIRS} 
+    "${SDL2_INCLUDE_DIR}"
     ${SDL2main_INCLUDE_DIRS} 
     ${SDL2_NET_INCLUDE_DIR}
     ${OPENGL_INCLUDE_DIR} 
@@ -100,7 +102,9 @@ set(CORE_INCLUDES
     vendor/pugixml
 )
 
-set(AVARA_COMPILE_OPTIONS -lstdc++ -lm -lpthread -ldl)
+if (NOT APPLE AND NOT MSVC AND NOT WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++ -lm -lpthread -ldl")
+endif()
 
 add_executable(Avara 
     src/Avara.cpp
