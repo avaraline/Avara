@@ -8,7 +8,9 @@ jobs:
       - xvfb
     os: linux
     script:
-      - cmake .
+      - mkdir build
+      - cd build
+      - cmake ..
       - make -j3
       - ./tests
       - make package
@@ -30,7 +32,9 @@ jobs:
       - hdiutil attach SDL2-2.0.9.dmg
       - sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
     script: 
-      - cmake .
+      - mkdir build
+      - cd build
+      - cmake ..
       - make -j3
       - ./tests
       - make package
@@ -47,11 +51,13 @@ jobs:
       - choco install cmake
     script: 
       - cmake --help
-      - cmake . || true
-      - cmake . || true
-      - cmake .
-      - cmake --build .
-      - cmake --build . --target install --config Debug
+      - mkdir build
+      - cd build
+      - cmake .. || true
+      - cmake .. || true
+      - cmake ..
+      - cmake --build ..
+      - cmake --build .. --target install --config Debug
       - ls -laR
     deploy:
       provider: script
