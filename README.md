@@ -29,9 +29,10 @@ Avara can be built using [Xcode](https://developer.apple.com/xcode/features/) de
 
 ## Build Instructions
 
-Enter the source directory: `cd Avara`
-Create and enter a build folder: `mkdir build && cd build`
-Run cmake (with options, see below): `cmake ..`
+* Enter the source directory: `cd Avara`
+* Create and enter a build folder: `mkdir build && cd build`
+* Run cmake (with options, see below): `cmake ..`
+* Run your build tool of choice, or just `make`
 
 ### CMake options
 On linux to ensure that you are using clang/clang++:
@@ -43,6 +44,10 @@ This will generate a Makefile, with which you can run `make` normally.
 On macos, you can generate an XCode project file with
 ```
 cmake -G Xcode ..
+```
+If you installed Xcode in the wrong place, or you have multiple versions, you might get an error like `Xcode 1.5 not supported. CMake Error: Could not create named generator Xcode`, one way to remedy this is by running
+```
+sudo /usr/bin/xcode-select --switch /Path/To/Xcode.app
 ```
 
 ## How to play
