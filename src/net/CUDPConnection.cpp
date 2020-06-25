@@ -368,7 +368,7 @@ void CUDPConnection::RunValidate() {
     }
 }
 
-static long lastAckMap;
+static int32_t lastAckMap;
 
 char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
     short transmittedSerial;
@@ -379,11 +379,11 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
     validateInfo += sizeof(short);
 
     if (transmittedSerial & 1) {
-        long ackMap;
+        int32_t ackMap;
 
         transmittedSerial &= ~1;
 
-        ackMap = *(long *)validateInfo;
+        ackMap = *(int32_t *)validateInfo;
         lastAckMap = ackMap;
 
         for (thePacket = (UDPPacketInfo *)queues[kTransmitQ].qHead; thePacket; thePacket = nextPacket) {
@@ -547,7 +547,7 @@ char *CUDPConnection::WriteAcks(char *dest) {
             char *deltas;
 
             *mainAck = ackBase;
-            *(long *)dest = ackBitmap;
+            *(int32_t *)dest = ackBitmap;
             dest += sizeof(ackBitmap);
             offsetBufferBusy = NULL;
         }
