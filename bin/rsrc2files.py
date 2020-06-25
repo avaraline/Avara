@@ -38,11 +38,21 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
     data = open(str(rpath), 'rb').read()
 
     reader = resource.Reader()
-    rsrc = reader.parse(data)
+    try:
+        rsrc = reader.parse(data)
+    except:
+        return (None, None)
+
     if tmpl is not None:
         rsrc['TMPL'] = tmpl
-    # print(rsrc.keys())
-    tmplData = tmplReader.parse(rsrc)
+    try:
+        tmplData = tmplReader.parse(rsrc)
+    except:
+        print(f"Failed parsing TMPL for {rpath}")
+        return (None, None)
+    if 'LEDI' not in tmplData:
+        print(f"No LEDI in file {rpath}")
+        return (None, None)
 
     # avara reads the LEDI #128
     set_ledi = tmplData['LEDI'][128]
@@ -67,6 +77,9 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
     dirpath = os.path.join(outpath, dirname)
     os.makedirs(dirpath, exist_ok=True)
 
+    logpath = os.path.join(dirpath, "log.txt")
+    sys.stdout = open(logpath, "w")
+
     svgdir = os.path.join(dirpath, SVG_DIR)
     os.makedirs(svgdir, exist_ok=True)
 
@@ -84,9 +97,11 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             data = picts[pict]["data"]
             # print(data)
             
-            filename = ("%s_%s_%s.svg" % (str(pict), meta["Tag"], name)).replace(" ", "_")
+            filename = ("%s_%s.svg" % (str(pict), name)).replace(" ", "_")
 
             if DEBUG_EXPORT:
+                print(pict)
+                print(name)
                 print(filename)
             #print(meta["Name"].encode('macintosh'))
             #print(meta["Message"].encode('macintosh'))
@@ -100,8 +115,11 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             except PictParseError:
                 print(F"Could not parse {fn} - {meta['Name']} because of unknown opcode")
                 continue
-            with open(fn, "w", encoding="utf-8") as xml_file:
-                xml_file.write(xml_text.decode("utf-8"))
+            try:
+                with open(fn, "w", encoding="utf-8") as xml_file:
+                    xml_file.write(xml_text.decode("utf-8"))
+            except:
+                print(f"Couldn't write {fn}, probably because it is stupid")
 
         manifest_data["LEDI"] = {v["Tag"]:v for (_, v) in ledi_meta.items()}
 
@@ -136,7 +154,8 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             if DEBUG_EXPORT:
                 print(f"Found HSND {hsnd_id} {hsnd_name} {fn}")
 
-            args = [f'build{os.path.sep}hsnd2wav', str(hsnd_id), wavpath, rpath]
+            args = [f'build{os.path.sep}hsnd2wav', str(hsnd_id), wavpath, str(rpath)]
+            print(args)
             popen = subprocess.Popen(args, stdout=subprocess.PIPE)
             popen.wait()
 
@@ -157,11 +176,21 @@ def parse_level_rsrc(rpath, outpath, tmpl=None):
             }
 
     if 'TEXT' in rsrc:
-        manifest_data["TEXT"] = {k:v["data"].decode("macroman") for (k,v) in rsrc["TEXT"].items()}
+        txts = "".join({k:v["data"].decode("macroman") for (k,v) in rsrc["TEXT"].items()}.values())
+        txtpath = os.path.join(dirpath, "default.avarascript")
+        with open(txtpath, "w", encoding="utf-8") as txtfile:
+            txtfile.write(txts.replace("\r", "\n"))
+
   
     if 'HULL' in rsrc:
         manifest_data["HULL"] = tmplData["HULL"]
 
+    manifest_path = os.path.join(dirpath, "set.json")
+    manifest_data["manifest_path"] = manifest_path
+
+    with open(manifest_path, 'w') as manifest_file:
+        json.dump(manifest_data, manifest_file, indent=1)
+    sys.stdout.close()
     return set_tag, manifest_data
 
 
@@ -187,8 +216,7 @@ if __name__ == '__main__':
     avara_rsrc = reader.parse(data)
     avara_tmpl = avara_rsrc['TMPL']
 
-
-    print(sys.argv)
+    sys.stdout = open("rsrc2files.log", "w")
     if len(sys.argv) > 1:
         parse_level_rsrc(Path(sys.argv[1]), ldir, avara_tmpl)
     else:
@@ -197,14 +225,19 @@ if __name__ == '__main__':
         manifest = {}
         for rsrc_file in os.listdir(ldir):
             rpath = os.path.join(ldir, rsrc_file)
-            print(rpath)
-
+            if DEBUG_EXPORT:
+                print(rpath)
             if os.path.isdir(rpath):
                 continue
-            if ".r" not in rpath:
+            if not str(rpath).endswith(".r"):
                 continue
             tag, manifest_data = parse_level_rsrc(Path(rpath), ldir, avara_tmpl)
-            manifest[tag] = manifest_data
+            sys.stdout = open("rsrc2files.log", "a")
+            if not tag:
+                print(f"Couldn't read {rpath}")
+                continue
+            manifest[tag] = manifest_data["manifest_path"]
+
         manifest_path = os.path.join(ldir, "manifest.json")
         with open(manifest_path, 'w') as manifest_file:
             json.dump(manifest, manifest_file, indent=1)

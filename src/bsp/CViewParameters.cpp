@@ -89,9 +89,9 @@ void CViewParameters::SetViewRect(short width, short height, short centerX, shor
         viewPixelCenter.v = centerY;
         viewPixelDimensions.h = width;
         viewPixelDimensions.v = height;
-
         viewWidth = FMulDivNZ(FIX3(220), viewPixelDimensions.h, 640);
 
+        AvaraGLViewport(width, height);
         Recalculate();
     }
 }

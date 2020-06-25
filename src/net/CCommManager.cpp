@@ -84,12 +84,12 @@ void CCommManager::Dispose() {
 **	send the packet.
 */
 OSErr CCommManager::SendPacket(short distribution,
-    char command,
-    char p1,
-    short p2,
-    long p3,
-    short dataLen,
-    Ptr dataPtr) {
+                               char command,
+                               char p1,
+                               short p2,
+                               long p3,
+                               short dataLen,
+                               Ptr dataPtr) {
     long len;
     Ptr ps, pd;
 

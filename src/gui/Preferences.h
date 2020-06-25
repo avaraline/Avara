@@ -17,6 +17,7 @@ using json = nlohmann::json;
 
 // UDP stuff
 #define kDefaultUDPPort "udpDefaultPort"
+#define kDefaultClientUDPPort "udpDefaultClientPort"
 #define kUDPResendPrefTag "udpResend"
 #define kUDPConnectionSpeedTag "udpConnectionSpeed"
 
@@ -30,6 +31,7 @@ using json = nlohmann::json;
 #define kWindowHeight "windowHeight"
 #define kMultiSamplesTag "multiSamples"
 #define kFullScreenTag "fullscreen"
+#define kFOV "fov"
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
@@ -82,6 +84,7 @@ static json defaultPrefs = {
     {kWindowWidth, 1024},
     {kWindowHeight, 768},
     {kFullScreenTag, false},
+    {kFOV, 50.0},
     {kLastAddress, ""},
     {kTrackerAddress, "avara.io"},
     {kTrackerRegister, 1},

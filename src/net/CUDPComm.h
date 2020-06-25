@@ -64,8 +64,8 @@ public:
     long lastClock;
     long lastQuotaTime;
 
-    long localIP; //	Just a guess, but that's all we need for the tracker.
-    short localPort;
+    ip_addr localIP; //	Just a guess, but that's all we need for the tracker.
+    port_num localPort;
     UDPsocket stream;
     // char				streamBuffer[UDPSTREAMBUFFERSIZE];
     // char				sendBuffer[UDPSENDBUFFERSIZE];
@@ -105,7 +105,7 @@ public:
     virtual void SendConnectionTable();
     virtual void ReadFromTOC(PacketInfo *thePacket);
 
-    virtual void SendRejectPacket(ip_addr remoteHost, short remotePort, OSErr loginErr);
+    virtual void SendRejectPacket(ip_addr remoteHost, port_num remotePort, OSErr loginErr);
 
     virtual CUDPConnection *DoLogin(PacketInfo *thePacket, UDPpacket *udp);
 
@@ -116,10 +116,10 @@ public:
 
     virtual void ReceivedGoodPacket(PacketInfo *thePacket);
 
-    virtual OSErr CreateStream(short streamPort);
+    virtual OSErr CreateStream(port_num streamPort);
 
     virtual void CreateServer();
-    virtual OSErr ContactServer(ip_addr serverHost, short serverPort);
+    virtual OSErr ContactServer(ip_addr serverHost, port_num serverPort);
 
     virtual Boolean ServerSetupDialog(Boolean disableSome);
 

@@ -200,11 +200,15 @@ void CRosterWindow::UpdateRoster() {
         if (theGame->loadedTag != currentLevel) {
             std::string theLevel((char* ) theGame->loadedLevel + 1, theGame->loadedLevel[0]);
             std::string theDesigner((char *)theGame->loadedDesigner + 1, theGame->loadedDesigner[0]);
-            levelLoaded->setValue(theLevel);
-            levelDesigner->setValue(theDesigner);
+
+            if (theLevel.length() > 0) levelLoaded->setValue(theLevel);
+            else levelLoaded->setValue("");
+            if (theDesigner.length() > 0) levelDesigner->setValue(theDesigner);
+            else levelDesigner->setValue("");
 
             std::string desc((char *)theGame->loadedInfo + 1, theGame->loadedInfo[0]);
             if (desc.length() > 0) levelDescription->setCaption(desc);
+            else levelDescription->setCaption("No additional information about this mission is available.");
             currentLevel = theGame->loadedTag;
         }
     }

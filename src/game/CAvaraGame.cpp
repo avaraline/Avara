@@ -899,10 +899,6 @@ void CAvaraGame::UpdateViewRect(int width, int height, float pixelRatio) {
 }
 
 void CAvaraGame::Render(NVGcontext *ctx) {
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    glBlendFunc(GL_ONE, GL_ZERO);
 
     worldShader->ShadeWorld(itsView);
 
@@ -911,10 +907,10 @@ void CAvaraGame::Render(NVGcontext *ctx) {
         itsNet->ViewControl();
         itsWorld->Render(itsView);
 
-        glDepthFunc(GL_ALWAYS);
+        AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
         hud->Render(itsView, ctx);
-        glDepthFunc(GL_LEQUAL);
+        AvaraGLSetDepthTest(true);
     }
 }
 
