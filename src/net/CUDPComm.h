@@ -14,7 +14,11 @@
 
 #include <string>
 
-#define ROUTER_CAPABLE
+#define ROUTER_CAPABLE 1
+#define ROUTE_THRU_SERVER 1  // experimental!
+#if ROUTE_THRU_SERVER
+  #define ROUTER_CAPABLE 1
+#endif
 
 #define CRAMTIME 5000 //	About 20 seconds.
 #define CRAMPACKSIZE 64
@@ -99,6 +103,7 @@ public:
     virtual void WriteComplete(int result);
 
     virtual void WriteAndSignPacket(PacketInfo *thePacket);
+    virtual void FastForwardPacket(UDPpacket *udp, int16_t distribution);
     virtual void ForwardPacket(PacketInfo *thePacket);
     virtual void ProcessQueue();
 

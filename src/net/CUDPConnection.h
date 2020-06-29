@@ -11,8 +11,6 @@
 #include "CCommManager.h"
 #include "CDirectObject.h"
 
-#define ROUTER_CAPABLE
-
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
 

@@ -27,13 +27,14 @@
 
 #if DEBUG_AVARA
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) num=%d cmd=%d p1=%d p2=%d p3=%d sndr=%x dist=0x%02x\n",
+    SDL_Log("CUDPConnection::DebugPacket(%c) num=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
         eType,
         p->serialNumber,
         p->packet.command,
         p->packet.p1,
         p->packet.p2,
         p->packet.p3,
+        p->packet.flags,
         p->packet.sender,
         p->packet.distribution);
 }
@@ -559,13 +560,13 @@ char *CUDPConnection::WriteAcks(char *dest) {
 void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
     short i;
 
-    if (next)
+    if (next)  // recurse down the chain of connections
         next->MarkOpenConnections(table);
 
     if (port && myId != 0) {
         for (i = 0; i < itsOwner->maxClients; i++) {
             if (table->host == ipAddr && table->port == port) {
-                table->host = 0;
+                table->host = 0; // this connection is already open
                 table->port = 0;
                 return;
             }
@@ -598,7 +599,7 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
         }
     }
 
-    if (next)
+    if (next)  // recurse down the chain of connections
         next->OpenNewConnections(origTable);
 }
 
