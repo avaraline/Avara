@@ -27,7 +27,7 @@
 
 #if DEBUG_AVARA
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) num=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+    SDL_Log("CUDPConnection::DebugPacket(%c) sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
         eType,
         p->serialNumber,
         p->packet.command,
@@ -344,10 +344,10 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
         }
 
 #if DEBUG_AVARA
-        if (thePacket->packet.command == kpKeyAndMouse) {
-            DebugPacket('/', thePacket);
-        }
-        DebugPacket('X', thePacket);
+        // if (thePacket->packet.command == kpKeyAndMouse) {
+        //     DebugPacket('/', thePacket);
+        // }
+        // DebugPacket('X', thePacket);
 #endif
         itsOwner->ReleasePacket((PacketInfo *)thePacket);
     }
@@ -440,7 +440,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
             UDPPacketInfo *nextPack;
 
 #if DEBUG_AVARA
-            DebugPacket('%', thePacket);
+            // DebugPacket('%', thePacket);
 #endif
             receiveSerial = thePacket->serialNumber + kSerialNumberStepSize;
             itsOwner->ReceivedGoodPacket(&thePacket->packet);

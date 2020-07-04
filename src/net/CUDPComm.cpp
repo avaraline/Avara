@@ -162,21 +162,26 @@ void CUDPComm::WriteAndSignPacket(PacketInfo *thePacket) {
     ReleasePacket(thePacket);
 }
 
-#if ROUTE_THRU_SERVER
 void CUDPComm::FastForwardPacket(UDPpacket *udp, int16_t distribution) {
     if (distribution != 0) {
         for (CUDPConnection *conn = connections; conn != NULL; conn = conn->next) {
             if (distribution & (1 << conn->myId)) {
+
+                #if DEBUG_AVARA
+                    SDL_Log("CUDPComm::FastForwardPacket    sn=%d cmd=%d?, %s --> %s\n",
+                            ((uint16_t *)udp->data)[2],  // sn is at byte 4
+                            ((uint8_t  *)udp->data)[7],  // cmd is at byte 7 (usually)
+                            FormatAddr(udp->address).c_str(),
+                            FormatAddr(conn->ipAddr, conn->port).c_str());
+                #endif
+
                 udp->address.host = conn->ipAddr;
                 udp->address.port = conn->port;
-
-                // SDL_Log("CUDPComm::FastForwardPacket to %s\n", FormatAddr(udp->address).c_str());
                 UDPWrite(stream, udp, UDPWriteComplete, this);
             }
         }
     }
 }
-#endif
 
 void CUDPComm::ForwardPacket(PacketInfo *thePacket) {
     CUDPConnection *conn;
@@ -556,9 +561,9 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         else
                             p->sender = conn != NULL ? conn->myId : 0;
 
-                        #if DEBUG_AVARA
-                            SDL_Log("CUDPComm::ReadComplete cmd=%d sndr=%d, FLAGS=0x%02x dist=0x%02x myId=%d\n",
-                                    p->command, p->sender, p->flags, p->distribution, myId);
+                        #if EXTRA_DEBUG_AVARA
+                            SDL_Log("        CUDPComm::ReadComplete sn=%d cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+                                    thePacket->serialNumber, p->command, p->flags, p->sender, p->distribution);
                         #endif
 #endif
                         if (p->dataLen) {
@@ -626,7 +631,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
 }
 
 void CUDPComm::ReceivedGoodPacket(PacketInfo *thePacket) {
-    #if DEBUG_AVARA
+    #if EXTRA_DEBUG_AVARA
         SDL_Log("CUDPComm::ReceivedGoodPacket cmd=%d sndr=%d dist=0x%02x myId=%d\n", thePacket->command,
                 thePacket->sender, thePacket->distribution, myId);
     #endif
@@ -838,7 +843,7 @@ Boolean CUDPComm::AsyncWrite() {
             packetList = thePacket;
 
             #if DEBUG_AVARA
-                SDL_Log(" Preparing packet >>> num=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x...\n",
+                SDL_Log("          preparing packet >>> sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
                         thePacket->serialNumber, p->command, p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution);
             #endif
 
@@ -863,8 +868,8 @@ Boolean CUDPComm::AsyncWrite() {
             }
         #endif
         #if DEBUG_AVARA
-            SDL_Log("... destination host is %s\n", FormatAddr(theConnection->ipAddr, theConnection->port).c_str());
-            SDL_Log("... transmitting packet(s) to %s\n", FormatAddr(udp->address).c_str());
+            SDL_Log("           destination host is %s\n", FormatAddr(theConnection->ipAddr, theConnection->port).c_str());
+            SDL_Log("     transmitting packet(s) to %s\n", FormatAddr(udp->address).c_str());
         #endif
 
         udp->len = outData.c - (char *)udp->data;
@@ -905,8 +910,10 @@ Boolean CUDPComm::AsyncWrite() {
         }
 
         if (stream && theConnection->port) {
-            // SDL_Log("   WRITING UDP packet to %s using stream %p\n",
-            //         FormatAddr(udp->address).c_str(), stream);
+            #if EXTRA_DEBUG_AVARA
+                SDL_Log("   WRITING UDP packet to %s using stream %p\n",
+                        FormatAddr(udp->address).c_str(), stream);
+            #endif
             UDPWrite(stream, udp, UDPWriteComplete, this);
             result = true;
         }
