@@ -176,6 +176,14 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
 
     bestPacket = (UDPPacketInfo *)queues[kTransmitQ].qHead;
     oldestBirth = curTime;
+    
+    while (bestPacket != NULL) {
+        // make sure the we are actually beyond packet's nextSendTime, avoids extra resends
+        if (curTime >= bestPacket->nextSendTime) {
+            break;
+        }
+        bestPacket = (UDPPacketInfo *)bestPacket->packet.qLink;
+     }
 
     if (bestPacket) {
         while (bestPacket && (bestPacket->serialNumber - maxValid > kSerialNumberStepSize * kMaxReceiveQueueLength)) {
