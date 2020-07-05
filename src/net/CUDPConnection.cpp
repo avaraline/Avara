@@ -25,7 +25,7 @@
 #define DEVIATIONSMOOTHFACTOR 4
 #define PESSIMISTSMOOTHFACTOR 5
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
     SDL_Log("CUDPConnection::DebugPacket(%c) sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
         eType,
@@ -126,7 +126,7 @@ void CUDPConnection::SendQueuePacket(UDPPacketInfo *thePacket, short theDistribu
 
         Enqueue((QElemPtr)thePacket, &queues[kBusyQ]);
         busyQLen++;
-#if DEBUG_AVARA
+#if PACKET_DEBUG
         if (thePacket->packet.command == kpKeyAndMouse) {
             DebugPacket('>', thePacket);
         }
@@ -140,7 +140,7 @@ void CUDPConnection::SendQueuePacket(UDPPacketInfo *thePacket, short theDistribu
 void CUDPConnection::RoutePacket(UDPPacketInfo *thePacket) {
     short extendedRouting = routingMask | (1 << myId);
 
-    #if DEBUG_AVARA
+    #if PACKET_DEBUG
         DebugPacket('=', thePacket);
     #endif
     SendQueuePacket(thePacket, thePacket->packet.distribution & extendedRouting);
@@ -191,8 +191,9 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
             bestPacket = (UDPPacketInfo *)bestPacket->packet.qLink;
         }
 
-        if (bestPacket->birthDate != bestPacket->nextSendTime)
+        if (bestPacket->birthDate != bestPacket->nextSendTime) {
             oldestBirth = bestPacket->birthDate;
+        }
     }
 
     if (bestPacket) {
@@ -219,7 +220,12 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
                 if (thePacket->packet.flags & kpUrgentFlag)
                     theSendTime -= urgencyAdjust;
 
-                if (bestSendTime - theSendTime > 0) {
+                #if PACKET_DEBUG > 1
+                    DebugPacket('C', thePacket);  // 'C' for Candidate
+                    SDL_Log(" CUDPConnection::FindBestPacket bestSendTime = %ld\n", bestSendTime);
+                    SDL_Log(" CUDPConnection::FindBestPacket theSendTime = %ld\n", theSendTime);
+                #endif
+                if (bestSendTime > theSendTime) {
                     bestSendTime = theSendTime;
                     bestPacket = thePacket;
                 }
@@ -292,9 +298,9 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
         nextAckTime = curTime + kAckRetransmitBase + retransmitTime;
         nextWriteTime = curTime + retransmitTime;
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
         if (thePacket == kPleaseSendAcknowledge) {
-            SDL_Log("ACK\n");
+            SDL_Log("CUDPConnection::DebugPacket(S) ACK\n");
         } else {
             DebugPacket('S', thePacket);
         }
@@ -305,6 +311,9 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
 }
 
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
+    #if PACKET_DEBUG > 1
+        DebugPacket('V', thePacket);
+    #endif
     if (noErr == Dequeue((QElemPtr)thePacket, &queues[kTransmitQ])) {
         long roundTrip;
 
@@ -351,11 +360,11 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
                 retransmitTime = kMaxAllowedRetransmitTime;
         }
 
-#if DEBUG_AVARA
-        // if (thePacket->packet.command == kpKeyAndMouse) {
-        //     DebugPacket('/', thePacket);
-        // }
-        // DebugPacket('X', thePacket);
+#if PACKET_DEBUG > 1
+        if (thePacket->packet.command == kpKeyAndMouse) {
+            DebugPacket('/', thePacket);
+        }
+        DebugPacket('X', thePacket);
 #endif
         itsOwner->ReleasePacket((PacketInfo *)thePacket);
     }
@@ -365,11 +374,13 @@ void CUDPConnection::RunValidate() {
     UDPPacketInfo *thePacket, *nextPacket;
 
     thePacket = (UDPPacketInfo *)queues[kTransmitQ].qHead;
-
+    #if PACKET_DEBUG > 1
+        SDL_Log("   CUDPConnection::RunValidate maxValid=%d\n", maxValid);
+    #endif
     while (thePacket) {
         nextPacket = (UDPPacketInfo *)thePacket->packet.qLink;
 
-        if (thePacket->serialNumber - maxValid <= 0) {
+        if (thePacket->serialNumber <= maxValid) {
             ValidatePacket(thePacket, validTime);
         }
 
@@ -379,7 +390,7 @@ void CUDPConnection::RunValidate() {
 
 static long lastAckMap;
 
-char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
+char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) {
     short transmittedSerial;
     short dummyStackVar;
     UDPPacketInfo *thePacket, *nextPacket;
@@ -400,9 +411,6 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
 
             if (ackMap & (1 << (((thePacket->serialNumber - transmittedSerial) >> 1) - 1))) {
                 ValidatePacket(thePacket, curTime);
-#if DEBUG_AVARA
-                DebugPacket('V', thePacket);
-#endif
             }
         }
 
@@ -411,7 +419,10 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
 
     validTime = curTime;
 
-    if (maxValid - transmittedSerial < 0) {
+    #if PACKET_DEBUG > 1
+        SDL_Log("ValidateReceivedPackets transmittedSerial=%d, maxValid = %d\n", transmittedSerial, maxValid);
+    #endif
+    if (maxValid < transmittedSerial) {
         maxValid = transmittedSerial;
         RunValidate();
     }
@@ -431,7 +442,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
     UDPPacketInfo *pack;
     Boolean changeInReceiveQueue = false;
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
     DebugPacket('R', thePacket);
 #endif
 
@@ -439,7 +450,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 
     haveToSendAck = true;
 
-    if (thePacket->serialNumber - receiveSerial < 0) { //	We already got this one, so just release it.
+    if (thePacket->serialNumber < receiveSerial) { //	We already got this one, so just release it.
 
         itsOwner->ReleasePacket((PacketInfo *)thePacket);
     } else {
@@ -447,8 +458,8 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
             receiveSerial) { //	Packet was next in line to arrive, so it may release others from the received queue
             UDPPacketInfo *nextPack;
 
-#if DEBUG_AVARA
-            // DebugPacket('%', thePacket);
+#if PACKET_DEBUG > 1
+            DebugPacket('%', thePacket);
 #endif
             receiveSerial = thePacket->serialNumber + kSerialNumberStepSize;
             itsOwner->ReceivedGoodPacket(&thePacket->packet);
@@ -456,19 +467,19 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
             for (pack = (UDPPacketInfo *)queues[kReceiveQ].qHead; pack; pack = nextPack) {
                 nextPack = (UDPPacketInfo *)pack->packet.qLink;
 
-                if (receiveSerial - pack->serialNumber >= 0) {
+                if (pack->serialNumber <= receiveSerial) {
                     OSErr theErr;
 
                     theErr = Dequeue((QElemPtr)pack, &queues[kReceiveQ]);
                     if (theErr == noErr) {
                         if (pack->serialNumber == receiveSerial) {
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                             DebugPacket('+', pack);
 #endif
                             receiveSerial = pack->serialNumber + kSerialNumberStepSize;
                             itsOwner->ReceivedGoodPacket(&pack->packet);
                         } else {
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                             DebugPacket('-', pack);
 #endif
                             itsOwner->ReleasePacket(&pack->packet);
@@ -477,7 +488,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                         changeInReceiveQueue = true;
                         nextPack = (UDPPacketInfo *)queues[kReceiveQ].qHead;
                     }
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                     else {
                         SDL_Log("Dequeue failed for received packet.\n");
                     }
@@ -494,12 +505,12 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
             }
 
             if (pack) { //	The queue already contains this packet.
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                 DebugPacket('D', pack);
 #endif
                 itsOwner->ReleasePacket((PacketInfo *)thePacket);
             } else {
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                 DebugPacket('Q', thePacket);
 #endif
                 changeInReceiveQueue = true;

@@ -15,9 +15,9 @@
 #include <string>
 
 #define ROUTER_CAPABLE 1
-#define ROUTE_THRU_SERVER 1  // experimental!
+#define ROUTE_THRU_SERVER 1  // non-zero to route all messages through the server
 #if ROUTE_THRU_SERVER
-  #define ROUTER_CAPABLE 1
+  #define ROUTER_CAPABLE 1   // ROUTE_THRU_SERVER needs ROUTER_CAPABLE to be set
 #endif
 
 #define CRAMTIME 5000 //	About 20 seconds.
@@ -103,7 +103,10 @@ public:
     virtual void WriteComplete(int result);
 
     virtual void WriteAndSignPacket(PacketInfo *thePacket);
+    #if ROUTE_THRU_SERVER
     virtual void FastForwardPacket(UDPpacket *udp, int16_t distribution);
+    virtual CUDPConnection * ConnectionForPacket(UDPpacket *udp);
+    #endif
     virtual void ForwardPacket(PacketInfo *thePacket);
     virtual void ProcessQueue();
 
