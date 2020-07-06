@@ -13,6 +13,7 @@
 //#include "PolyColor.h"
 #include "CLevelWindow.h"
 #include "CNetworkWindow.h"
+#include "CServerWindow.h"
 #include "CPlayerWindow.h"
 #include "CRosterWindow.h"
 #include "CTrackerWindow.h"
@@ -68,6 +69,7 @@ public:
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
+    CServerWindow *serverWindow;
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
 

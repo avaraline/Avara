@@ -35,6 +35,9 @@ using json = nlohmann::json;
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
+#define kServerDescription "serverDescription"
+#define kServerPassword "serverPassword"
+#define kClientPassword "clientPassword"
 #define kTrackerRegister "trackerRegister"
 #define kTrackerRegisterAddress "trackerRegisterAddress"
 #define kTrackerRegisterFrequency "trackerRegisterFrequency"
@@ -86,6 +89,9 @@ static json defaultPrefs = {
     {kFullScreenTag, false},
     {kFOV, 50.0},
     {kLastAddress, ""},
+    {kServerDescription, ""},
+    {kServerPassword, ""},
+    {kClientPassword, ""},
     {kTrackerAddress, "avara.io"},
     {kTrackerRegister, 1},
     {kTrackerRegisterAddress, "avara.io"},
