@@ -874,7 +874,7 @@ Boolean CUDPComm::AsyncWrite() {
         outData.c = theConnection->WriteAcks(outData.c);
 
         if (thePacket == kPleaseSendAcknowledge) {
-            thePacket = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
+            packetList = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
             SDL_Log("Sending ACK to %s\n", FormatAddr(theConnection).c_str());
             #if ROUTE_THRU_SERVER
                 // if going through server, add the sender/dist so the server can figure out where to forward it
@@ -997,7 +997,7 @@ Boolean CUDPComm::AsyncWrite() {
         theConnection->quota -= udp->len;
 
         curTime = GetClock();
-        while (packetList) {
+        while (packetList && packetList != kPleaseSendAcknowledge) {
             thePacket = (UDPPacketInfo *)packetList->packet.qLink;
 
             if (packetList->birthDate ==
