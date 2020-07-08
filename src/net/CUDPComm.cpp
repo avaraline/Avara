@@ -700,7 +700,7 @@ Boolean CUDPComm::AsyncWrite() {
         outData.c = theConnection->WriteAcks(outData.c);
 
         if (thePacket == kPleaseSendAcknowledge) {
-            thePacket = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
+            packetList = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
         }
 
         while (thePacket && thePacket != kPleaseSendAcknowledge) {
@@ -785,7 +785,7 @@ Boolean CUDPComm::AsyncWrite() {
         theConnection->quota -= udp->len;
 
         curTime = GetClock();
-        while (packetList) {
+        while (packetList && packetList != kPleaseSendAcknowledge) {
             thePacket = (UDPPacketInfo *)packetList->packet.qLink;
 
             if (packetList->birthDate ==
