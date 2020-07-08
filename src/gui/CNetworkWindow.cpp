@@ -26,15 +26,6 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
             avara->GetNet()->ChangeNet(kClientNet, this->addressBox->value());
     });
 
-    startBtn = new nanogui::Button(this, "Start Hosting");
-    startBtn->setCallback([app] {
-        CAvaraAppImpl *avara = (CAvaraAppImpl *)app;
-        if(avara->GetNet()->netStatus == kServerNet)
-            avara->GetNet()->ChangeNet(kNullNet, "");
-        else
-            avara->GetNet()->ChangeNet(kServerNet, "");
-    });
-
     latencyBox = new nanogui::TextBox(this);
     latencyBox->setValue(std::to_string(app->Number(kLatencyToleranceTag)));
     latencyBox->setEditable(true);
@@ -54,25 +45,13 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
     });
     bool autoLatency = app->Number(kServerOptionsTag) & (1 << kUseAutoLatencyBit);
     autoLatencyBox->setChecked(autoLatency);
-
-    nanogui::CheckBox *registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
-        this->trackerBox->setEditable(checked);
-        this->trackerBox->setEnabled(checked);
-        app->Set(kTrackerRegister, checked);
-    });
-    bool shouldRegister = app->Number(kTrackerRegister) != 0;
-    registerBox->setChecked(shouldRegister);
-
-    trackerBox = new nanogui::TextBox(this);
-    trackerBox->setValue(app->String(kTrackerRegisterAddress));
-    trackerBox->setEditable(true);
-    trackerBox->setCallback([app](std::string value) -> bool {
-        app->Set(kTrackerRegisterAddress, value);
-        return true;
-    });
 }
 
 CNetworkWindow::~CNetworkWindow() {}
+
+bool CNetworkWindow::editing() {
+    return addressBox->focused() || latencyBox->focused();
+}
 
 bool CNetworkWindow::DoCommand(int theCommand) {
     switch(theCommand) {
@@ -82,19 +61,15 @@ bool CNetworkWindow::DoCommand(int theCommand) {
                 case kNullNet:
                     addressBox->setEnabled(true);
                     connectBtn->setEnabled(true);
-                    connectBtn->setEnabled("Connect");
-                    startBtn->setEnabled(true);
-                    startBtn->setCaption("Start Hosting");
+                    connectBtn->setCaption("Connect");
                     break;
                 case kClientNet:
                     addressBox->setEnabled(false);
                     connectBtn->setCaption("Disconnect");
-                    startBtn->setEnabled(false);
                     break;
                 case kServerNet:
                     addressBox->setEnabled(false);
                     connectBtn->setEnabled(false);
-                    startBtn->setCaption("Stop Hosting");
                     break;
             }
             break;

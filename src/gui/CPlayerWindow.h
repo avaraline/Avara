@@ -13,6 +13,8 @@ public:
 
     virtual void PrefChanged(std::string name) override;
     
+    virtual bool editing() override;
+    
 protected:
     nanogui::TextBox *nameBox;
     nanogui::ComboBox *hullBox;

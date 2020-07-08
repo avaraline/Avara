@@ -16,7 +16,6 @@ public:
     virtual bool DoCommand(int theCommand) override;
     void UpdateRoster();
     std::string GetStringStatus(short status, Fixed winFrame);
-    bool mouseEnterEvent(const nanogui::Vector2i &p, bool enter) override;
     bool handleSDLEvent(SDL_Event &event);
     void SendRosterMessage(int length, char *message);
     void NewChatLine(Str255 playerName, std::string message);

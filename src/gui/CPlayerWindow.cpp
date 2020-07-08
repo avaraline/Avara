@@ -32,6 +32,10 @@ CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
 
 CPlayerWindow::~CPlayerWindow() {}
 
+bool CPlayerWindow::editing() {
+    return nameBox->focused();
+}
+
 bool CPlayerWindow::DoCommand(int theCommand) {
     return false;
 }

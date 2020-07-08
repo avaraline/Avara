@@ -36,7 +36,6 @@ const int CHAT_CHARS = 57;
 const int ROSTER_FONT_SIZE = 15;
 const int ROSTER_WINDOW_WIDTH = 470;
 const int SCORE_FONT_SIZE = 16;
-bool textInputStarted = false;
 char backspace[1] = {'\b'};
 char clearline[1] = {'\x1B'};
 char endline[1] = {13};
@@ -173,7 +172,8 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedTag;
 
     UpdateRoster();
-    //requestFocus();
+    
+    requestFocus();
 }
 
 CRosterWindow::~CRosterWindow() {}
@@ -285,30 +285,13 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
     return strStatus;
 }
 
-bool CRosterWindow::mouseEnterEvent(const nanogui::Vector2i &p, bool enter) {
-    //SDL_Log("mouseEnterEvent");
-    if (enter && !textInputStarted) {
-        //SDL_Log("start");
-        SDL_StartTextInput();
-        textInputStarted = true;
-    }
-    if (!enter && textInputStarted) {
-        //SDL_Log("stop");
-        SDL_StartTextInput();
-        textInputStarted = false;
-    }
-    return true;
-};
-
-
 void CRosterWindow::SendRosterMessage(int len, char *message) {
     ((CAvaraAppImpl *)gApplication)->GetNet()->SendRosterMessage(len, message);
     chatInput->setCaption(chatInput->caption() + message);
 }
 
 void CRosterWindow::ChatLineDelete() {
-    std::string s = chatInput->caption().substr(0, chatInput->caption().size() - 1);
-    chatInput->setCaption(s);
+    chatInput->setCaption(chatInput->caption().substr(0, chatInput->caption().size() - 1));
 }
 
 void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
@@ -337,8 +320,6 @@ void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
 }
 
 bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
-    if (!textInputStarted)
-        return false;
     if (event.type == SDL_TEXTINPUT) {
         #ifndef __APPLE__
         // we already sent a checkmark, don't send a v

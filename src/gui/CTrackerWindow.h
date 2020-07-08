@@ -12,8 +12,11 @@ public:
     virtual bool DoCommand(int theCommand);
 
     void Query();
+    
+    virtual bool editing();
 
 protected:
+    nanogui::TextBox *addressBox;
 	nanogui::Widget *resultsBox;
     nanogui::Label *resultsLabel;
 };
