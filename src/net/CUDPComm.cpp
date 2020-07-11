@@ -488,9 +488,14 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
         if (newConn == NULL) {
             loginErr = mFulErr;
         } else {
+            std::string passwordStr =  gApplication->String(kServerPassword);
+            password[0] = passwordStr.length();
+            BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+            
             for (i = 0; i <= password[0]; i++) {
                 if (password[i] != thePacket->dataBuffer[i]) {
                     loginErr = afpPwdExpiredErr;
+                    SDL_Log("Password mismatch");
                 }
             }
         }
@@ -1337,8 +1342,12 @@ OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
     return noErr;
 }
 
-void CUDPComm::Connect(std::string address) {\
-    SDL_Log("Connect address = %s\n", address.c_str());
+void CUDPComm::Connect(std::string address) {
+    Connect(address, "");
+}
+
+void CUDPComm::Connect(std::string address, std::string passwordStr) {
+    SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
     OpenAvaraTCP();
 
@@ -1350,6 +1359,9 @@ void CUDPComm::Connect(std::string address) {\
     CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     SDLNet_ResolveHost(&addr, address.c_str(), serverPort);
 
+    password[0] = passwordStr.length();
+    BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+    
     ContactServer(addr.host, addr.port);
     /*
     DialogPtr		clientDialog;

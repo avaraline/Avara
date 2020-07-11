@@ -16,15 +16,21 @@ public:
     virtual bool DoCommand(int theCommand);
 
     void SelectSet(int selected);
+    void SelectSet(std::string set);
+    void SelectLevel(std::string set, std::string levelName);
+    void AddRecent(std::string set, std::string levelName);
     void SetIntro(int selected);
     void SendLoad();
 
+    nanogui::DescComboBox *recentsBox;
     nanogui::ComboBox *setBox;
     nanogui::DescComboBox *levelBox;
     nanogui::Label *levelIntro;
     nanogui::Button *loadBtn;
     nanogui::Button *startBtn;
 
+    std::vector<std::string> recentSets;
+    std::vector<std::string> recentLevels;
     std::vector<std::string> levelSets;
     std::vector<std::string> levelNames;
     std::vector<std::string> levelIntros;

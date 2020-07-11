@@ -12,10 +12,10 @@ public:
 
     virtual void PrefChanged(std::string name) override;
 
+    virtual bool editing() override;
+    
 protected:
 	nanogui::TextBox *addressBox;
     nanogui::TextBox *latencyBox;
-    nanogui::TextBox *trackerBox;
     nanogui::Button *connectBtn;
-    nanogui::Button *startBtn;
 };

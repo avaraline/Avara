@@ -695,7 +695,8 @@ void CAvaraGame::ResumeGame() {
         short oldEventMask;
 
         if (freshMission) {
-            itsApp->MessageLine(kmStarted, centerAlign);
+            itsApp->GameStarted(std::string((char *)loadedSet),
+                                std::string((char *)loadedLevel + 1, loadedLevel[0]));
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
             freshPlayerList = NULL;
         } else {
@@ -885,6 +886,8 @@ bool CAvaraGame::GameTick() {
 void CAvaraGame::StopGame() {
     soundHub->HushFlag(true);
     SDL_SetRelativeMouseMode(SDL_FALSE);
+    SDL_StartTextInput();
+
     // SDL_CaptureMouse(SDL_FALSE);
     // SDL_ShowCursor(SDL_ENABLE);
 }
