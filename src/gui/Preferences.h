@@ -35,14 +35,17 @@ using json = nlohmann::json;
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
+#define kServerDescription "serverDescription"
+#define kServerPassword "serverPassword"
+#define kClientPassword "clientPassword"
 #define kTrackerRegister "trackerRegister"
 #define kTrackerRegisterAddress "trackerRegisterAddress"
 #define kTrackerRegisterFrequency "trackerRegisterFrequency"
 #define kTrackerAddress "trackerAddress"
 
 // Levels
-#define kSelectedSet "selectedSet"
-#define kSelectedLevel "selectedLevel"
+#define kRecentSets "recentSets"
+#define kRecentLevels "recentLevels"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -86,13 +89,15 @@ static json defaultPrefs = {
     {kFullScreenTag, false},
     {kFOV, 50.0},
     {kLastAddress, ""},
+    {kServerDescription, ""},
+    {kServerPassword, ""},
+    {kClientPassword, ""},
     {kTrackerAddress, "avara.io"},
     {kTrackerRegister, 1},
     {kTrackerRegisterAddress, "avara.io"},
     {kTrackerRegisterFrequency, 5},
-    {kSelectedSet, "aa-normal"},
-    {kSelectedLevel, "Alektra"}
-
+    {kRecentSets, {}},
+    {kRecentLevels, {}}
 };
 
 

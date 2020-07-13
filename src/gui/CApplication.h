@@ -17,6 +17,7 @@ public:
     virtual ~CApplication();
 
     void Register(CWindow *win) { windowList.push_back(win); }
+    void Unregister(CWindow *win);
 
     // Broadcast a command to myself, and then any windows, stopping at the fist one to handle it.
     virtual void BroadcastCommand(int theCommand);

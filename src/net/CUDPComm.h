@@ -124,6 +124,8 @@ public:
     virtual Boolean ServerSetupDialog(Boolean disableSome);
 
     virtual void Connect(std::string address); //	Client
+    virtual void Connect(std::string address, std::string passwordStr);
+
     virtual void StartServing(); //	Server.
 
     virtual void OptionCommand(long theCommand);

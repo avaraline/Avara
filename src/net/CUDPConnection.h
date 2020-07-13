@@ -94,7 +94,7 @@ public:
 #endif
 
     volatile short *offsetBufferBusy;
-    long ackBitmap;
+    int32_t ackBitmap;
     short ackBase;
 
     Boolean killed;

@@ -24,6 +24,12 @@ nanogui::Screen(nanogui::Vector2i(prefs[kWindowWidth], prefs[kWindowHeight]), ti
 
 CApplication::~CApplication() {}
 
+void CApplication::Unregister(CWindow *win) {
+    std::vector<CWindow*>::iterator position = std::find(windowList.begin(), windowList.end(), win);
+    if (position != windowList.end())
+        windowList.erase(position);
+}
+
 void CApplication::Done() {
     prefs[kWindowWidth] = mSize[0];
     prefs[kWindowHeight] = mSize[1];

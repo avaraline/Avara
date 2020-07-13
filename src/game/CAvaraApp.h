@@ -13,6 +13,7 @@
 //#include "PolyColor.h"
 #include "CLevelWindow.h"
 #include "CNetworkWindow.h"
+#include "CServerWindow.h"
 #include "CPlayerWindow.h"
 #include "CRosterWindow.h"
 #include "CTrackerWindow.h"
@@ -33,6 +34,7 @@ class CNetManager;
 class CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) = 0;
+    virtual void GameStarted(std::string set, std::string level) = 0;
     virtual void MessageLine(short index, short align) = 0;
     virtual void AddMessageLine(std::string line) = 0;
     virtual std::deque<std::string>& MessageLines() = 0;
@@ -67,6 +69,7 @@ public:
     CPlayerWindow *playerWindow;
     CLevelWindow *levelWindow;
     CNetworkWindow *networkWindow;
+    CServerWindow *serverWindow;
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
 
@@ -95,6 +98,8 @@ public:
     OSErr LoadLevel(std::string set, OSType theLevel) override;
     void NotifyUser() override;
     virtual void AddMessageLine(std::string line) override;
+    virtual void GameStarted(std::string set, std::string level) override;
+
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
     virtual void NumberLine(long theNum, short align);

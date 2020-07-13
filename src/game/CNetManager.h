@@ -118,6 +118,7 @@ public:
     virtual void Dispose();
     virtual Boolean ConfirmNetChange();
     virtual void ChangeNet(short netKind, std::string address);
+    virtual void ChangeNet(short netKind, std::string address, std::string password);
 
     virtual void ProcessQueue();
     virtual void SendRealName(short toSlot);

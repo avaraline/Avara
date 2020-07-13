@@ -51,22 +51,33 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "wut"
     };
 
+    json sets = app->Get(kRecentSets);
+    for (json::iterator it = sets.begin(); it != sets.end(); ++it) {
+        recentSets.push_back(it.value());
+    }
+    json levels = app->Get(kRecentLevels);
+    for (json::iterator itLev = levels.begin(); itLev != levels.end(); ++itLev) {
+        recentLevels.push_back(itLev.value());
+    }
+    
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
     // TODO: check load permission: theNet->PermissionQuery(kAllowLoadBit, 0)
 
+    recentsBox = new nanogui::DescComboBox(this, recentLevels, recentSets);
+    recentsBox->setCaption("Recents");
+    recentsBox->setCallback([this](int selectedIdx) {
+        this->SelectLevel(recentSets[selectedIdx], recentLevels[selectedIdx]);
+        recentsBox->setCaption("Recents");
+    });
+
     setBox = new nanogui::ComboBox(this, levelSets);
     setBox->setCallback([this, app](int selectedIdx) {
         this->SelectSet(selectedIdx);
-        app->Set(kSelectedSet, levelSets[selectedIdx]);
         levelBox->setSelectedIndex(0);
-        app->Set(kSelectedLevel, levelNames[0]);
     });
 
     levelBox = new nanogui::DescComboBox(this, levelNames, levelIntros);
-    levelBox->setCallback([this, app](int selectedIdx) {
-        app->Set(kSelectedLevel, levelNames[selectedIdx]);
-    });
     levelBox->popup()->setSize(nanogui::Vector2i(500, 350));
     levelBox->setEnabled(false);
 
@@ -75,25 +86,14 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
 
     startBtn = new nanogui::Button(this, "Start Game");
     startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
-
-    //select last used level set
-    int setIndex = 0;
-    auto it = std::find(levelSets.begin(), levelSets.end(), app->String(kSelectedSet));
-    if (it != levelSets.end()) {
-        setIndex = std::distance(levelSets.begin(), it);
-        setBox->setSelectedIndex(setIndex);
+    
+    if(recentSets.size() > 0) {
+        SelectLevel(recentSets[0], recentLevels[0]);
     }
-
-    SelectSet(setIndex);
-
-    //select last used level
-    int levelIndex = 0;
-    auto levelIt = std::find(levelNames.begin(), levelNames.end(), app->String(kSelectedLevel));
-    if (levelIt != levelNames.end()) {
-        levelIndex = std::distance(levelNames.begin(), levelIt);
+    else {
+        SelectSet(0);
+        levelBox->setSelectedIndex(0);
     }
-
-    levelBox->setSelectedIndex(levelIndex);
 }
 
 CLevelWindow::~CLevelWindow() {}
@@ -102,8 +102,55 @@ bool CLevelWindow::DoCommand(int theCommand) {
     return false;
 }
 
+void CLevelWindow::AddRecent(std::string set, std::string levelName) {
+    //remove level if it is already in recents
+    for(unsigned i = 0; i < recentSets.size(); i++) {
+        if(recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
+            recentSets.erase(recentSets.begin() + i);
+            recentLevels.erase(recentLevels.begin() + i);
+            break;
+        }
+    }
+    
+    recentSets.insert(recentSets.begin(), set);
+    recentLevels.insert(recentLevels.begin(), levelName);
+    
+    if(recentSets.size() > 10) {
+        recentSets.pop_back();
+        recentLevels.pop_back();
+    }
+    
+    recentsBox->setItems(recentLevels, recentSets);
+    recentsBox->setCaption("Recents");
+    recentsBox->setNeedsLayout();
+    
+    mApplication->Set(kRecentSets, recentSets);
+    mApplication->Set(kRecentLevels, recentLevels);
+}
+
+void CLevelWindow::SelectLevel(std::string set, std::string levelName) {
+    SelectSet(set);
+
+    int levelIndex = 0;
+    auto levelIt = std::find(levelNames.begin(), levelNames.end(), levelName);
+    if (levelIt != levelNames.end()) {
+        levelIndex = std::distance(levelNames.begin(), levelIt);
+    }
+    
+    levelBox->setSelectedIndex(levelIndex);
+}
+
 void CLevelWindow::SelectSet(int selected) {
-    std::string rsrcPath = std::string("levels/") + levelSets[selected] + ".r";
+    SelectSet(levelSets[selected]);
+}
+
+void CLevelWindow::SelectSet(std::string set) {
+    std::vector<std::string>::iterator itr = std::find(levelSets.begin(), levelSets.end(), set);
+    if (itr != levelSets.end()) {
+        setBox->setSelectedIndex(std::distance(levelSets.begin(), itr));
+    }
+    
+    std::string rsrcPath = std::string("levels/") + set + ".r";
     OSType setTag;
     UseResFile(rsrcPath);
     CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);

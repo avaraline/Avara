@@ -118,6 +118,10 @@ Boolean CNetManager::ConfirmNetChange() {
 }
 
 void CNetManager::ChangeNet(short netKind, std::string address) {
+    ChangeNet(netKind, address, "");
+}
+
+void CNetManager::ChangeNet(short netKind, std::string address, std::string password) {
     CCommManager *newManager = NULL;
     Boolean confirm = true;
     CAvaraApp *theApp = itsGame->itsApp;
@@ -147,7 +151,7 @@ void CNetManager::ChangeNet(short netKind, std::string address) {
                     CUDPComm *theClient;
                     theClient = new CUDPComm;
                     theClient->IUDPComm(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
-                    theClient->Connect(address);
+                    theClient->Connect(address, password);
                     newManager = theClient;
                     confirm = theClient->isConnected;
                     break;
