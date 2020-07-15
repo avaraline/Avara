@@ -83,6 +83,7 @@ public:
     Boolean isClosed;
     Boolean isClosing;
     Boolean turboMode;
+    long turboCount;
 
     // Boolean				readIsComplete;
     // Boolean				writeIsComplete;
