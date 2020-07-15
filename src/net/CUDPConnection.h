@@ -23,6 +23,7 @@ typedef struct {
     PacketInfo packet;
 
     int32_t birthDate;
+    // int32_t lastSendTime;
     int32_t nextSendTime;
     int16_t serialNumber;
 
@@ -75,12 +76,10 @@ public:
 
     long validTime;
 
+    float meanRoundTripTime;
+    float varRoundTripTime;
     long retransmitTime;
-    long roundTripTime;
-    long pessimistTime;
-    long optimistTime;
-    long realRoundTrip;
-    long deviation;
+    long urgentRetransmitTime;
 
     long quota;
     short cramData;
@@ -91,6 +90,9 @@ public:
 #if DEBUG_AVARA
     short dp;
     OSType d[kDebugBufferSize];
+    
+    long totalSent;
+    long totalResent;
 #endif
 
     volatile short *offsetBufferBusy;

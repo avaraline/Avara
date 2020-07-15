@@ -6,6 +6,7 @@
     Created: Monday, January 29, 1996, 13:45
     Modified: Saturday, January 3, 1998, 02:04
 */
+// #include <unistd.h> // for usleep()
 
 #include "CUDPComm.h"
 
@@ -208,6 +209,7 @@ void CUDPComm::ProcessQueue() {
     //	Check to see if there's something we should write.
     if (turboMode) {
         if (nextWriteTime - GetClock() < 0 && !isClosed) {
+            turboCount = 3; // max messages to send in turboMode
             AsyncWrite();
         }
     } else {
@@ -567,8 +569,8 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
     }
 
     if (!isClosed) {
-        AsyncRead();
         AsyncWrite();
+        AsyncRead();
     }
 }
 
@@ -581,7 +583,7 @@ void CUDPComm::ReceivedGoodPacket(PacketInfo *thePacket) {
 }
 
 void CUDPComm::WriteComplete(int result) {
-    if (turboMode && !isClosed && result == noErr) {
+    if (turboMode && turboCount-- > 0 && !isClosed && result == noErr) {
         AsyncWrite();
     }
 }
@@ -647,11 +649,11 @@ Boolean CUDPComm::AsyncWrite() {
 
                 if (conn->busyQLen > longestBusyQ) {
                     theConnection = conn;
-                    highestRoundTrip = conn->realRoundTrip;
+                    highestRoundTrip = conn->meanRoundTripTime;
                     longestBusyQ = conn->busyQLen;
-                } else if (conn->busyQLen == longestBusyQ && conn->realRoundTrip > highestRoundTrip) {
+                } else if (conn->busyQLen == longestBusyQ && conn->meanRoundTripTime > highestRoundTrip) {
                     theConnection = conn;
-                    highestRoundTrip = conn->realRoundTrip;
+                    highestRoundTrip = conn->meanRoundTripTime;
                 }
             }
         }
@@ -799,9 +801,8 @@ Boolean CUDPComm::AsyncWrite() {
                 packetList->birthDate = curTime;
 
                 if (origCramCount) {
-                    if ((packetList->packet.flags & kpUrgentFlag) &&
-                        urgentResendTime <= theConnection->retransmitTime) {
-                        packetList->nextSendTime = curTime + urgentResendTime;
+                    if (packetList->packet.flags & kpUrgentFlag) {
+                        packetList->nextSendTime = curTime + theConnection->urgentRetransmitTime;
                     } else {
                         packetList->packet.flags &= ~kpUrgentFlag;
                         packetList->nextSendTime = curTime + theConnection->retransmitTime;
@@ -820,8 +821,11 @@ Boolean CUDPComm::AsyncWrite() {
         }
 
         if (stream && theConnection->port) {
-            // SDL_Log("   WRITING UDP packet to %s using stream %p\n",
-            //         FormatAddr(udp->address).c_str(), stream);
+            #if PACKET_DEBUG > 1
+                SDL_Log("   WRITING UDP packet to %s using stream %p\n",
+                        FormatAddr(udp->address).c_str(), stream);
+            #endif
+            // usleep(30000 + int(10000*float(rand())/RAND_MAX)); // simulate network latencies
             UDPWrite(stream, udp, UDPWriteComplete, this);
             result = true;
         }
@@ -907,6 +911,7 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, lon
     nextWriteTime = lastQuotaTime;
     isClosing = false;
     turboMode = true; // was set to true
+    turboCount = 0;
 
     localPort = 0;
     localIP = 0;
@@ -1621,8 +1626,8 @@ long CUDPComm::GetMaxRoundTrip(short distribution) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            if (conn->realRoundTrip > maxTrip)
-                maxTrip = conn->optimistTime;
+            if (conn->meanRoundTripTime > maxTrip)
+                maxTrip = conn->meanRoundTripTime;
         }
     }
 
