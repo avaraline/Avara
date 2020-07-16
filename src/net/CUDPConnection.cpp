@@ -294,7 +294,7 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
         nextAckTime = curTime + kAckRetransmitBase + retransmitTime;
         nextWriteTime = curTime + retransmitTime;
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
         if (thePacket == kPleaseSendAcknowledge) {
             SDL_Log("ACK\n");
         } else {
