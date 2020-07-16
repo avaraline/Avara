@@ -194,7 +194,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
             bestPacket = (UDPPacketInfo *)bestPacket->packet.qLink;
         }
 
-        if (bestPacket->birthDate != bestPacket->nextSendTime) {
+        if (bestPacket && bestPacket->birthDate != bestPacket->nextSendTime) {
             oldestBirth = bestPacket->birthDate;
         }
     }
