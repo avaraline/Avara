@@ -12,6 +12,7 @@
 #include "CUDPComm.h"
 #include "CommDefs.h"
 #include "System.h"
+#include <algorithm>
 
 #define kInitialRetransmitTime 480 //	2	seconds
 #define kInitialRoundTripTime 240 //	<1 second
@@ -341,8 +342,8 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             urgentRetransmitTime = meanRoundTripTime + (long)(2*stdevRoundTripTime);
             
             // don't let the retransmit times fall below threshold based on frame rate
-            retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
-            urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
+            retransmitTime = std::max<long>(retransmitTime, itsOwner->urgentResendTime);
+            urgentRetransmitTime = std::max<long>(urgentRetransmitTime, itsOwner->urgentResendTime);
 
             #if PACKET_DEBUG
                 SDL_Log("conn=%d, roundTrip = %ld, meanRTT = %.1f, varRTT = %.1f, stdRTT = %.1f, retransmitTime = %ld, urgentRetransmit = %ld\n",
