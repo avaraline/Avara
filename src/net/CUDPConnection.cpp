@@ -21,7 +21,7 @@
 #define kMaxTransmitQueueLength 128 //	128 packets going out...
 #define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
 
-#define RTTSMOOTHFACTOR_UP 3
+#define RTTSMOOTHFACTOR_UP 2
 #define RTTSMOOTHFACTOR_DOWN 5
 
 #if DEBUG_AVARA
@@ -60,7 +60,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     maxValid = -kSerialNumberStepSize;
 
     retransmitTime = kInitialRetransmitTime;
-    urgentRetransmitTime = theOwner->urgentResendTime;
+    urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
     varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
     haveToSendAck = false;
@@ -335,10 +335,10 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             varRoundTripTime = (1 - alpha) * (varRoundTripTime + difference * increment);
             float stdevRoundTripTime = sqrt(varRoundTripTime);
 
-            // use +3 sigma(probability 99%) for retransmitTime, +2 sigma (95%) for urgentRetransmitTime
+            // use +3 sigma(probability 99%) for retransmitTime, +2.5 sigma (98%) for urgentRetransmitTime
             // (thought: consider dynamically adjusting the multiplier based on % of resends?)
             retransmitTime = meanRoundTripTime + (long)(3*stdevRoundTripTime);
-            urgentRetransmitTime = meanRoundTripTime + (long)(2*stdevRoundTripTime);
+            urgentRetransmitTime = meanRoundTripTime + (long)(2.5*stdevRoundTripTime);
             
             // don't let the retransmit times fall below threshold based on frame rate
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
