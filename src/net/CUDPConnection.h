@@ -77,6 +77,7 @@ public:
     long validTime;
 
     float meanRoundTripTime;
+    float stableRoundTripTime;
     float varRoundTripTime;
     long retransmitTime;
     long urgentRetransmitTime;
@@ -87,7 +88,7 @@ public:
 
     short routingMask;
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
     short dp;
     OSType d[kDebugBufferSize];
     
