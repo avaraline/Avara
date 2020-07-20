@@ -1842,12 +1842,13 @@ long CUDPComm::GetMaxRoundTrip(short distribution) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            if (conn->meanRoundTripTime > maxTrip)
+            if (conn->meanRoundTripTime > maxTrip) {
                 maxTrip = conn->meanRoundTripTime;
+            }
         }
     }
 
-    { maxTrip = ((maxTrip << 9) + 256) / 125; }
+    maxTrip = maxTrip*1000/240;
 
     return maxTrip;
 }

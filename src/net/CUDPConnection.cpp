@@ -21,8 +21,8 @@
 #define kMaxTransmitQueueLength 128 //	128 packets going out...
 #define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
 
-#define RTTSMOOTHFACTOR_UP 3
-#define RTTSMOOTHFACTOR_DOWN 5
+#define RTTSMOOTHFACTOR_UP 5
+#define RTTSMOOTHFACTOR_DOWN 30
 
 #if PACKET_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
@@ -61,8 +61,9 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     maxValid = -kSerialNumberStepSize;
 
     retransmitTime = kInitialRetransmitTime;
-    urgentRetransmitTime = theOwner->urgentResendTime;
+    urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
+    stableRoundTripTime = kInitialRoundTripTime;
     varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
     haveToSendAck = false;
     nextAckTime = 0;
@@ -307,7 +308,6 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
         } else {
             totalSent++;
             if (thePacket->birthDate != thePacket->nextSendTime) {
-            // if (thePacket->lastSendTime > 0) {
                 totalResent++;
                 SDL_Log("CUDPConnection::GetOutPacket   RESENDING sn=%d, age=%ld, percentResends = %.1f\n",
                         thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent);
@@ -318,6 +318,17 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
     }
 
     return thePacket;
+}
+
+bool UseCommandForStats(long command) {
+    // only use faster commands for stats
+    switch(command) {
+       case kpPing:
+       case kpRosterMessage:
+       case kpKeyAndMouse:
+           return true;
+    }
+    return false;
 }
 
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
@@ -334,25 +345,33 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
                 meanRoundTripTime = roundTrip;
                 varRoundTripTime = roundTrip * roundTrip;  // err on the high side initially
             }
-        } else {
+        } else if (UseCommandForStats(thePacket->packet.command)) {
+            #if PACKET_DEBUG > 1
+                SDL_Log("CUDPConnection::ValidatePacket command = %d, roundTrip = %d\n", thePacket->packet.command, roundTrip);
+            #endif
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
             // quicker to move up on latency spikes, slower to move down
-            float alpha =  1.0 / (1 << ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN));
+            float alpha =  1.0 / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
             varRoundTripTime = (1 - alpha) * (varRoundTripTime + difference * increment);
             float stdevRoundTripTime = sqrt(varRoundTripTime);
 
-            // use +3 sigma(probability 99%) for retransmitTime, +2 sigma (95%) for urgentRetransmitTime
+            // for display purposes, use a more stable slow-moving alpha (TBR)
+            stableRoundTripTime = meanRoundTripTime + difference / RTTSMOOTHFACTOR_DOWN;
+
+            // use +3 sigma(probability 99%) for retransmitTime, +2.5 sigma (98%) for urgentRetransmitTime
             // (thought: consider dynamically adjusting the multiplier based on % of resends?)
             retransmitTime = meanRoundTripTime + (long)(3*stdevRoundTripTime);
-            urgentRetransmitTime = meanRoundTripTime + (long)(2*stdevRoundTripTime);
+            urgentRetransmitTime = meanRoundTripTime + (long)(2.5*stdevRoundTripTime);
             
-            // don't let the retransmit times fall below threshold based on frame rate
+            // don't let the retransmit times fall below threshold based on frame rate or go abvoe kMaxAllowedRetransmitTime
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
+            retransmitTime = std::min(retransmitTime, (long)kMaxAllowedRetransmitTime);
             urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
+            urgentRetransmitTime = std::min(urgentRetransmitTime, (long)kMaxAllowedRetransmitTime);
 
             #if PACKET_DEBUG
                 SDL_Log("conn=%d, roundTrip = %ld, meanRTT = %.1f, varRTT = %.1f, stdRTT = %.1f, retransmitTime = %ld, urgentRetransmit = %ld\n",
