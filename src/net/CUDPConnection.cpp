@@ -314,13 +314,14 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
 }
 
 bool UseCommandForStats(long command) {
-    // some really slow commands such as level loading shouldn't be used for stats
+    // only use faster commands for stats
     switch(command) {
-       case kpLoadLevel:
-       case kpLevelLoaded:
-           return false;
+       case kpPing:
+       case kpRosterMessage:
+       case kpKeyAndMouse:
+           return true;
     }
-    return true;
+    return false;
 }
 
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
@@ -356,9 +357,11 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             retransmitTime = meanRoundTripTime + (long)(3*stdevRoundTripTime);
             urgentRetransmitTime = meanRoundTripTime + (long)(2.5*stdevRoundTripTime);
             
-            // don't let the retransmit times fall below threshold based on frame rate
+            // don't let the retransmit times fall below threshold based on frame rate or go abvoe kMaxAllowedRetransmitTime
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
+            retransmitTime = std::min(retransmitTime, (long)kMaxAllowedRetransmitTime);
             urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
+            urgentRetransmitTime = std::min(urgentRetransmitTime, (long)kMaxAllowedRetransmitTime);
 
             #if PACKET_DEBUG
                 SDL_Log("conn=%d, roundTrip = %ld, meanRTT = %.1f, varRTT = %.1f, stdRTT = %.1f, retransmitTime = %ld, urgentRetransmit = %ld\n",
