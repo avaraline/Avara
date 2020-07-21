@@ -14,7 +14,7 @@
 
 #include <string>
 
-#define ROUTER_CAPABLE
+#define ROUTE_THRU_SERVER 0  // non-zero to route all messages through the server
 
 #define CRAMTIME 5000 //	About 20 seconds.
 #define CRAMPACKSIZE 64
@@ -79,6 +79,7 @@ public:
     Boolean isClosed;
     Boolean isClosing;
     Boolean turboMode;
+    long turboCount;
 
     // Boolean				readIsComplete;
     // Boolean				writeIsComplete;
@@ -99,6 +100,10 @@ public:
     virtual void WriteComplete(int result);
 
     virtual void WriteAndSignPacket(PacketInfo *thePacket);
+    #if ROUTE_THRU_SERVER
+    virtual void FastForwardPacket(UDPpacket *udp, int16_t distribution);
+    virtual CUDPConnection * ConnectionForPacket(UDPpacket *udp);
+    #endif
     virtual void ForwardPacket(PacketInfo *thePacket);
     virtual void ProcessQueue();
 
