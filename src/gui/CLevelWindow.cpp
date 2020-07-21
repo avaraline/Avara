@@ -116,7 +116,7 @@ bool CLevelWindow::DoCommand(int theCommand) {
 }
 
 void CLevelWindow::AddRecent(std::string set, std::string levelName) {
-    if(json::accept("['" + set + "',  '" + levelName + "']")) {
+    if(json::accept("[\"" + set + "\", \"" + levelName + "\"]")) {
         //remove level if it is already in recents
         for(unsigned i = 0; i < recentSets.size(); i++) {
             if(recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
