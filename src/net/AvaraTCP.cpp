@@ -40,14 +40,16 @@ OSErr OpenAvaraTCP() {
         return noErr;
     }
     SDL_Log("OpenAvaraTCP\n");
-    sockSet = SDLNet_AllocSocketSet(16); // kMaxAvaraPlayers? Or maybe just 1-2?
+    sockSet = SDLNet_AllocSocketSet(1);  // only need 1 UDP socket
     gAvaraTCPOpen = true;
     return noErr;
 }
 
 UDPsocket CreateSocket(uint16_t port) {
     UDPsocket sock = SDLNet_UDP_Open(port);
-    if (!sock) {
+    if (sock) {
+        SDLNet_UDP_AddSocket(sockSet, sock);
+    } else {
         SDL_Log("Failed to create socket on port %d: %s\n", port, SDLNet_GetError());
     }
     return sock;
@@ -55,9 +57,9 @@ UDPsocket CreateSocket(uint16_t port) {
 
 void DestroySocket(UDPsocket sock) {
     if(sock) {
+        gReadSocket = NULL;
         SDLNet_UDP_DelSocket(sockSet, sock);
         SDLNet_UDP_Close(sock);
-        gReadSocket = NULL;
     }
 }
 
@@ -66,14 +68,14 @@ void CheckSockets() {
         SDL_Log("CheckSockets called before OpenAvaraTCP\n");
         return;
     }
-    if (int ready = SDLNet_CheckSockets(sockSet, 0) > 0) {
+
+    if (gReadSocket && SDLNet_CheckSockets(sockSet, 0) > 0) {
         if (SDLNet_SocketReady(gReadSocket)) {
             UDPpacket *packet = SDLNet_AllocPacket(UDPSTREAMBUFFERSIZE);
             while (SDLNet_UDP_Recv(gReadSocket, packet) > 0) {
                 gReadCallback.callback(packet, gReadCallback.userData);
             }
             SDLNet_FreePacket(packet);
-            SDLNet_UDP_DelSocket(sockSet, gReadSocket);
         }
         /*
         for(auto it = pendingReads.cbegin(); it != pendingReads.cend(); ) {
@@ -102,10 +104,10 @@ void CheckSockets() {
 
 void UDPRead(UDPsocket sock, ReadCompleteProc callback, void *userData) {
     if(sock) {
-        gReadSocket = sock;
         gReadCallback.callback = callback;
         gReadCallback.userData = userData;
-        SDLNet_UDP_AddSocket(sockSet, gReadSocket);
+        // setting gReadSocket signals to CheckSockets that we're ready to start accepting data
+        gReadSocket = sock;
     }
     // SDL_Log("UDPRead socket=%x\n", sock);
     // TODO: make sure MacTCP didn't allow queueing multiple UDPRead calls
