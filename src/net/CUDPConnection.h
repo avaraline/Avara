@@ -14,7 +14,7 @@
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
 
-#define PACKET_DEBUG 1   // set to 1 for packet debug outpu, 2 for more detail
+#define PACKET_DEBUG 0   // set to 1 for packet debug outpu, 2 for more detail
 
 #pragma pack(1)
 typedef struct {
