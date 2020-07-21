@@ -665,18 +665,16 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         p->flags = flags;
                         p->command = *inData.c++;
 
-#if ROUTER_CAPABLE
                         if (flags & 64)
                             p->distribution = *inData.w++;
                         else
                             p->distribution = 1 << myId;
-#endif
+
                         p->p3 = (flags & 4) ? *inData.l++ : (flags & 32) ? *inData.uw++ : 0;
                         p->p2 = (flags & 2) ? *inData.w++ : 0;
                         p->dataLen = (flags & 8) ? *inData.w++ : (flags & 16) ? *inData.uc++ : 0;
                         p->p1 = (flags & 1) ? *inData.c++ : 0;
 
-#if ROUTER_CAPABLE
                         if (flags & 128)
                             p->sender = *inData.c++;
                         else
@@ -686,7 +684,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             SDL_Log("        CUDPComm::ReadComplete sn=%d cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
                                     thePacket->serialNumber, p->command, p->flags, p->sender, p->distribution);
                         #endif
-#endif
+
                         if (p->dataLen) {
                             BlockMoveData(inData.c, p->dataBuffer, p->dataLen);
                             inData.c += p->dataLen;
@@ -903,20 +901,20 @@ Boolean CUDPComm::AsyncWrite() {
             fp = outData.c++;
 
             *outData.c++ = p->command;
-            #if ROUTER_CAPABLE
-                #if ROUTE_THRU_SERVER
-                    // if a client tries to send to anyone other than just the server
-                    if (!isServing && p->distribution != kdServerOnly) {
-                        *outData.w++ = p->distribution;
-                        flags |= 64;
-                    }
-                #else
-                    if (p->distribution != 1 << theConnection->myId) {
-                        *outData.w++ = p->distribution;
-                        flags |= 64;
-                    }
-                #endif
+
+            #if ROUTE_THRU_SERVER
+                // if a client tries to send to anyone other than just the server
+                if (!isServing && p->distribution != kdServerOnly) {
+                    *outData.w++ = p->distribution;
+                    flags |= 64;
+                }
+            #else
+                if (p->distribution != 1 << theConnection->myId) {
+                    *outData.w++ = p->distribution;
+                    flags |= 64;
+                }
             #endif
+
             if (p->p3 & ~0xFFFFL) {
                 flags |= 4;
                 *outData.l++ = p->p3;
@@ -943,19 +941,18 @@ Boolean CUDPComm::AsyncWrite() {
                 *outData.c++ = p->p1;
             }
 
-            #if ROUTER_CAPABLE
-                #if ROUTE_THRU_SERVER
-                    if (!isServing && p->distribution != kdServerOnly) {  // any client to any other client
-                        *outData.c++ = p->sender;
-                        flags |= 128;
-                    }
-                #else
-                    if (p->sender != myId) {
-                        *outData.c++ = p->sender;
-                        flags |= 128;
-                    }
-                #endif
+            #if ROUTE_THRU_SERVER
+                if (!isServing && p->distribution != kdServerOnly) {  // any client to any other client
+                    *outData.c++ = p->sender;
+                    flags |= 128;
+                }
+            #else
+                if (p->sender != myId) {
+                    *outData.c++ = p->sender;
+                    flags |= 128;
+                }
             #endif
+
             *fp = flags;
             p->flags = flags;  // stick flags in the packet structure
 

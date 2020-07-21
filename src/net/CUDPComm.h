@@ -14,11 +14,7 @@
 
 #include <string>
 
-#define ROUTER_CAPABLE 1
-#define ROUTE_THRU_SERVER 1  // non-zero to route all messages through the server
-#if ROUTE_THRU_SERVER
-  #define ROUTER_CAPABLE 1   // ROUTE_THRU_SERVER needs ROUTER_CAPABLE to be set
-#endif
+#define ROUTE_THRU_SERVER 0  // non-zero to route all messages through the server
 
 #define CRAMTIME 5000 //	About 20 seconds.
 #define CRAMPACKSIZE 64
