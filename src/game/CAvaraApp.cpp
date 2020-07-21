@@ -395,6 +395,9 @@ void CAvaraAppImpl::TrackerUpdate() {
             trackerState["players"].push_back(playerName);
         }
     }
+    if(trackerState["players"].empty()) {
+        trackerState["players"].push_back(String(kPlayerNameTag));
+    }
     trackerState["description"] = String(kServerDescription);
     trackerState["password"] = String(kServerPassword).length() > 0 ? true : false;
 
