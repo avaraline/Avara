@@ -138,6 +138,16 @@ static json ReadPrefs() {
 }
 
 static void WritePrefs(json prefs) {
-    std::ofstream out(PrefPath());
-    out << std::setw(4) << prefs << std::endl;
+    try {
+        std::ostringstream oss;
+        oss << std::setw(4) << prefs << std::endl;
+        
+        std::ofstream out(PrefPath());
+        out << oss.str();
+    }
+    catch (std::exception& e)
+    {
+        SDL_Log("ERROR WRITING PREFS FILE=%s", e.what());
+    }
+
 }
