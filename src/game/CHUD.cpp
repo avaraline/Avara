@@ -11,24 +11,36 @@ CHUD::CHUD(CAvaraGame *game) {
 const int CHAT_CHARS = 40;
 
 const std::vector<long> team_colors =
-    {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor};
+    {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor, kOrangeTeamColor, kLimeTeamColor};
 
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
+    CNetManager *net = itsGame->itsApp->GetNet();
+    
+    int playerCount = 0;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *thisPlayer = net->playerTable[i];
+        std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
+        if (playerName.length() > 0)
+            playerCount++;
+    }
+    int playerSlots = std::max(6, playerCount);
 
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
-
+    int chudHeight = 13 * playerSlots;
+    //SDL_Log("CHUD::Render %d %d", bufferHeight, chudHeight);
+    
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
     nvgBeginPath(ctx);
-    nvgRect(ctx, 0, bufferHeight - 80, bufferWidth, 80);
+    nvgRect(ctx, 0, bufferHeight - chudHeight, bufferWidth, chudHeight);
     nvgFillColor(ctx, nvgRGBA(30, 30, 30, 180));
     nvgFill(ctx);
 
     float fontsz_m = 15.0, fontsz_s = 10.0;
     nvgFontFace(ctx, "mono");
 
-    float mY = (bufferHeight - 72);
+    float mY = (bufferHeight - chudHeight + 8);
     for (auto i : itsGame->itsApp->MessageLines()) {
         nvgBeginPath(ctx);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
@@ -38,16 +50,14 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         mY += 11;
     }
 
-
     float pY;
     long longTeamColor;
     int colorR, colorG, colorB;
-    CNetManager *net = itsGame->itsApp->GetNet();
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = net->playerTable[i];
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
         if (playerName.length() < 1) continue;
-        pY = (bufferHeight - 72) + (11 * i);
+        pY = (bufferHeight - chudHeight + 8) + (11 * i);
         longTeamColor = team_colors[net->teamColors[i]];
         colorR = (longTeamColor >> 16) & 0xff;
         colorG = (longTeamColor >> 8) & 0xff;

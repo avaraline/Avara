@@ -1176,6 +1176,12 @@ long CAbstractActor::GetLongTeamColorOr(long defaultColor) {
         case kBlueTeam:
             longTeamColor = kBlueTeamColor;
             break;
+        case kOrangeTeam:
+            longTeamColor = kOrangeTeamColor;
+            break;
+        case kLimeTeam:
+            longTeamColor = kLimeTeamColor;
+            break;
         default:
             longTeamColor = defaultColor;
             break;
