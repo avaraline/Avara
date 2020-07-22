@@ -95,7 +95,7 @@ public:
         layout->setAnchor(descriptionLabel, nanogui::AdvancedGridLayout::Anchor(0, 0, 1, 2, nanogui::Alignment::Fill, nanogui::Alignment::Middle));
         layout->setAnchor(btn, nanogui::AdvancedGridLayout::Anchor(1, 0, 1, 1, nanogui::Alignment::Fill, nanogui::Alignment::Minimum));
         layout->setAnchor(addressLabel, nanogui::AdvancedGridLayout::Anchor(0, 2, 1, 1));
-        layout->setAnchor(playersLabel, nanogui::AdvancedGridLayout::Anchor(0, 3, 1, 1));
+        layout->setAnchor(playersLabel, nanogui::AdvancedGridLayout::Anchor(0, 3, 2, 1));
 
         setLayout(layout);
     }

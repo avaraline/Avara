@@ -116,29 +116,34 @@ bool CLevelWindow::DoCommand(int theCommand) {
 }
 
 void CLevelWindow::AddRecent(std::string set, std::string levelName) {
-    //remove level if it is already in recents
-    for(unsigned i = 0; i < recentSets.size(); i++) {
-        if(recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
-            recentSets.erase(recentSets.begin() + i);
-            recentLevels.erase(recentLevels.begin() + i);
-            break;
+    if(json::accept("[\"" + set + "\", \"" + levelName + "\"]")) {
+        //remove level if it is already in recents
+        for(unsigned i = 0; i < recentSets.size(); i++) {
+            if(recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
+                recentSets.erase(recentSets.begin() + i);
+                recentLevels.erase(recentLevels.begin() + i);
+                break;
+            }
         }
+        
+        recentSets.insert(recentSets.begin(), set);
+        recentLevels.insert(recentLevels.begin(), levelName);
+        
+        if(recentSets.size() > 10) {
+            recentSets.pop_back();
+            recentLevels.pop_back();
+        }
+        
+        recentsBox->setItems(recentLevels, recentSets);
+        recentsBox->setCaption("Recents");
+        recentsBox->setNeedsLayout();
+        
+        mApplication->Set(kRecentSets, recentSets);
+        mApplication->Set(kRecentLevels, recentLevels);
     }
-    
-    recentSets.insert(recentSets.begin(), set);
-    recentLevels.insert(recentLevels.begin(), levelName);
-    
-    if(recentSets.size() > 10) {
-        recentSets.pop_back();
-        recentLevels.pop_back();
+    else {
+        SDL_Log("AddRecent ignoring bad set/level name.");
     }
-    
-    recentsBox->setItems(recentLevels, recentSets);
-    recentsBox->setCaption("Recents");
-    recentsBox->setNeedsLayout();
-    
-    mApplication->Set(kRecentSets, recentSets);
-    mApplication->Set(kRecentLevels, recentLevels);
 }
 
 void CLevelWindow::SelectLevel(std::string set, std::string levelName) {

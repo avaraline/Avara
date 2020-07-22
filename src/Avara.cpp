@@ -73,6 +73,8 @@ int main(int argc, char *argv[]) {
             app->Set(kDefaultClientUDPPort, port);
         } else if (arg == "-n" || arg == "--name") {
             app->Set(kPlayerNameTag, std::string(argv[++i]));
+        } else if (arg == "-c" || arg == "--connect") {
+            app->GetNet()->ChangeNet(kClientNet, std::string(argv[++i]));
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
