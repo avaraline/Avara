@@ -699,11 +699,11 @@ void CAvaraGame::ResumeGame() {
                                 std::string((char *)loadedLevel + 1, loadedLevel[0]));
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
             freshPlayerList = NULL;
+            InitMixer(false);
         } else {
             itsApp->MessageLine(kmRestarted, centerAlign);
+            soundHub->MuteFlag(false);
         }
-
-        InitMixer(false);
 
         // TODO: syncing start dialog
         scoreKeeper->StartResume(gameStatus == kReadyStatus);
@@ -781,7 +781,7 @@ void CAvaraGame::GameStart() {
 // Run when the game is paused or aborted
 void CAvaraGame::GameStop() {
     // Mute the mixer
-    InitMixer(true);
+    soundHub->MuteFlag(true);
 
     if (statusRequest == kPauseStatus) {
         PauseActors();

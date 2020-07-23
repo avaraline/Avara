@@ -11,12 +11,10 @@
 #include "CCommManager.h"
 #include "CDirectObject.h"
 
-#define ROUTER_CAPABLE
-
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
 
-#define DEBUG_AVARA 0
+#define PACKET_DEBUG 0   // set to 1 for packet debug outpu, 2 for more detail
 
 #pragma pack(1)
 typedef struct {
@@ -77,6 +75,7 @@ public:
     long validTime;
 
     float meanRoundTripTime;
+    float stableRoundTripTime;
     float varRoundTripTime;
     long retransmitTime;
     long urgentRetransmitTime;
@@ -87,7 +86,7 @@ public:
 
     short routingMask;
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
     short dp;
     OSType d[kDebugBufferSize];
     
@@ -112,7 +111,7 @@ public:
     virtual void RunValidate();
 
     virtual void ValidatePacket(UDPPacketInfo *thePacket, long when);
-    virtual char *ValidatePackets(char *validateInfo, long curTime);
+    virtual char *ValidateReceivedPackets(char *validateInfo, long curTime);
     virtual void ReceivedPacket(UDPPacketInfo *thePacket);
 
     virtual void FlushQueues();
@@ -125,7 +124,7 @@ public:
 
     virtual void FreshClient(ip_addr remoteHost, port_num remotePort, long firstReceiveSerial);
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
     virtual void DebugPacket(char eType, UDPPacketInfo *p);
 #endif
     virtual void CloseSlot(short theId);

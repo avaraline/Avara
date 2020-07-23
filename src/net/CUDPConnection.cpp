@@ -22,18 +22,19 @@
 #define kMaxTransmitQueueLength 128 //	128 packets going out...
 #define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
 
-#define RTTSMOOTHFACTOR_UP 3
-#define RTTSMOOTHFACTOR_DOWN 5
+#define RTTSMOOTHFACTOR_UP 5
+#define RTTSMOOTHFACTOR_DOWN 30
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) num=%d cmd=%d p1=%d p2=%d p3=%d sndr=%x dist=0x%02x\n",
+    SDL_Log("CUDPConnection::DebugPacket(%c) sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
         eType,
         p->serialNumber,
         p->packet.command,
         p->packet.p1,
         p->packet.p2,
         p->packet.p3,
+        p->packet.flags,
         p->packet.sender,
         p->packet.distribution);
 }
@@ -61,8 +62,9 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     maxValid = -kSerialNumberStepSize;
 
     retransmitTime = kInitialRetransmitTime;
-    urgentRetransmitTime = theOwner->urgentResendTime;
+    urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
+    stableRoundTripTime = kInitialRoundTripTime;
     varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
     haveToSendAck = false;
     nextAckTime = 0;
@@ -128,7 +130,7 @@ void CUDPConnection::SendQueuePacket(UDPPacketInfo *thePacket, short theDistribu
 
         Enqueue((QElemPtr)thePacket, &queues[kBusyQ]);
         busyQLen++;
-#if DEBUG_AVARA
+#if PACKET_DEBUG
         if (thePacket->packet.command == kpKeyAndMouse) {
             thePacket->serialNumber = -1;  // assigned later
             DebugPacket('>', thePacket);
@@ -143,7 +145,7 @@ void CUDPConnection::SendQueuePacket(UDPPacketInfo *thePacket, short theDistribu
 void CUDPConnection::RoutePacket(UDPPacketInfo *thePacket) {
     short extendedRouting = routingMask | (1 << myId);
 
-    #if DEBUG_AVARA
+    #if PACKET_DEBUG
         DebugPacket('=', thePacket);
     #endif
     SendQueuePacket(thePacket, thePacket->packet.distribution & extendedRouting);
@@ -194,8 +196,9 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
             bestPacket = (UDPPacketInfo *)bestPacket->packet.qLink;
         }
 
-        if (bestPacket && bestPacket->birthDate != bestPacket->nextSendTime)
+        if (bestPacket && bestPacket->birthDate != bestPacket->nextSendTime) {
             oldestBirth = bestPacket->birthDate;
+        }
     }
 
     if (bestPacket) {
@@ -222,7 +225,12 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
                 if (thePacket->packet.flags & kpUrgentFlag)
                     theSendTime -= urgencyAdjust;
 
-                if (bestSendTime - theSendTime > 0) {
+                #if PACKET_DEBUG > 1
+                    DebugPacket('C', thePacket);  // 'C' for Candidate
+                    SDL_Log(" CUDPConnection::FindBestPacket bestSendTime = %ld\n", bestSendTime);
+                    SDL_Log(" CUDPConnection::FindBestPacket theSendTime = %ld\n", theSendTime);
+                #endif
+                if (bestSendTime > theSendTime) {
                     bestSendTime = theSendTime;
                     bestPacket = thePacket;
                 }
@@ -297,11 +305,10 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
 
 #if PACKET_DEBUG
         if (thePacket == kPleaseSendAcknowledge) {
-            SDL_Log("ACK\n");
+            SDL_Log("CUDPConnection::DebugPacket(S) ACK\n");
         } else {
             totalSent++;
             if (thePacket->birthDate != thePacket->nextSendTime) {
-            // if (thePacket->lastSendTime > 0) {
                 totalResent++;
                 SDL_Log("CUDPConnection::GetOutPacket   RESENDING sn=%d, age=%ld, percentResends = %.1f\n",
                         thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent);
@@ -314,7 +321,21 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
     return thePacket;
 }
 
+bool UseCommandForStats(long command) {
+    // only use faster commands for stats
+    switch(command) {
+       case kpPing:
+       case kpRosterMessage:
+       case kpKeyAndMouse:
+           return true;
+    }
+    return false;
+}
+
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
+    #if PACKET_DEBUG > 1
+        DebugPacket('V', thePacket);
+    #endif
     if (noErr == Dequeue((QElemPtr)thePacket, &queues[kTransmitQ])) {
         long roundTrip;
 
@@ -325,25 +346,33 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
                 meanRoundTripTime = roundTrip;
                 varRoundTripTime = roundTrip * roundTrip;  // err on the high side initially
             }
-        } else {
+        } else if (UseCommandForStats(thePacket->packet.command)) {
+            #if PACKET_DEBUG > 1
+                SDL_Log("CUDPConnection::ValidatePacket command = %d, roundTrip = %d\n", thePacket->packet.command, roundTrip);
+            #endif
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
             // quicker to move up on latency spikes, slower to move down
-            float alpha =  1.0 / (1 << ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN));
+            float alpha =  1.0 / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
             varRoundTripTime = (1 - alpha) * (varRoundTripTime + difference * increment);
             float stdevRoundTripTime = sqrt(varRoundTripTime);
 
-            // use +3 sigma(probability 99%) for retransmitTime, +2 sigma (95%) for urgentRetransmitTime
+            // for display purposes, use a more stable slow-moving alpha (TBR)
+            stableRoundTripTime = meanRoundTripTime + difference / RTTSMOOTHFACTOR_DOWN;
+
+            // use +3 sigma(probability 99%) for retransmitTime, +2.5 sigma (98%) for urgentRetransmitTime
             // (thought: consider dynamically adjusting the multiplier based on % of resends?)
             retransmitTime = meanRoundTripTime + (long)(3*stdevRoundTripTime);
-            urgentRetransmitTime = meanRoundTripTime + (long)(2*stdevRoundTripTime);
+            urgentRetransmitTime = meanRoundTripTime + (long)(2.5*stdevRoundTripTime);
             
-            // don't let the retransmit times fall below threshold based on frame rate
+            // don't let the retransmit times fall below threshold based on frame rate or go abvoe kMaxAllowedRetransmitTime
             retransmitTime = std::max<long>(retransmitTime, itsOwner->urgentResendTime);
+            retransmitTime = std::min<long>(retransmitTime, (long)kMaxAllowedRetransmitTime);
             urgentRetransmitTime = std::max<long>(urgentRetransmitTime, itsOwner->urgentResendTime);
+            urgentRetransmitTime = std::min<long>(urgentRetransmitTime, (long)kMaxAllowedRetransmitTime);
 
             #if PACKET_DEBUG
                 SDL_Log("conn=%d, roundTrip = %ld, meanRTT = %.1f, varRTT = %.1f, stdRTT = %.1f, retransmitTime = %ld, urgentRetransmit = %ld\n",
@@ -351,7 +380,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             #endif
         }
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG > 1
         if (thePacket->packet.command == kpKeyAndMouse) {
             DebugPacket('/', thePacket);
         }
@@ -365,11 +394,13 @@ void CUDPConnection::RunValidate() {
     UDPPacketInfo *thePacket, *nextPacket;
 
     thePacket = (UDPPacketInfo *)queues[kTransmitQ].qHead;
-
+    #if PACKET_DEBUG > 1
+        SDL_Log("   CUDPConnection::RunValidate maxValid=%d\n", maxValid);
+    #endif
     while (thePacket) {
         nextPacket = (UDPPacketInfo *)thePacket->packet.qLink;
 
-        if (thePacket->serialNumber - maxValid <= 0) {
+        if (thePacket->serialNumber <= maxValid) {
             ValidatePacket(thePacket, validTime);
         }
 
@@ -379,7 +410,7 @@ void CUDPConnection::RunValidate() {
 
 static int32_t lastAckMap;
 
-char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
+char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) {
     short transmittedSerial;
     short dummyStackVar;
     UDPPacketInfo *thePacket, *nextPacket;
@@ -400,9 +431,6 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
 
             if (ackMap & (1 << (((thePacket->serialNumber - transmittedSerial) >> 1) - 1))) {
                 ValidatePacket(thePacket, curTime);
-#if DEBUG_AVARA
-                DebugPacket('V', thePacket);
-#endif
             }
         }
 
@@ -434,7 +462,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
     UDPPacketInfo *pack;
     Boolean changeInReceiveQueue = false;
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG
     DebugPacket('R', thePacket);
 #endif
 
@@ -452,7 +480,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
             receiveSerial) { //	Packet was next in line to arrive, so it may release others from the received queue
             UDPPacketInfo *nextPack;
 
-#if DEBUG_AVARA
+#if PACKET_DEBUG > 1
             DebugPacket('%', thePacket);
 #endif
             receiveSerial = thePacket->serialNumber + kSerialNumberStepSize;
@@ -461,19 +489,19 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
             for (pack = (UDPPacketInfo *)queues[kReceiveQ].qHead; pack; pack = nextPack) {
                 nextPack = (UDPPacketInfo *)pack->packet.qLink;
 
-                if (receiveSerial - pack->serialNumber >= 0) {
+                if (pack->serialNumber <= receiveSerial) {
                     OSErr theErr;
 
                     theErr = Dequeue((QElemPtr)pack, &queues[kReceiveQ]);
                     if (theErr == noErr) {
                         if (pack->serialNumber == receiveSerial) {
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                             DebugPacket('+', pack);
 #endif
                             receiveSerial = pack->serialNumber + kSerialNumberStepSize;
                             itsOwner->ReceivedGoodPacket(&pack->packet);
                         } else {
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                             DebugPacket('-', pack);
 #endif
                             itsOwner->ReleasePacket(&pack->packet);
@@ -482,7 +510,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                         changeInReceiveQueue = true;
                         nextPack = (UDPPacketInfo *)queues[kReceiveQ].qHead;
                     }
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                     else {
                         SDL_Log("Dequeue failed for received packet.\n");
                     }
@@ -499,12 +527,12 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
             }
 
             if (pack) { //	The queue already contains this packet.
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                 DebugPacket('D', pack);
 #endif
                 itsOwner->ReleasePacket((PacketInfo *)thePacket);
             } else {
-#if DEBUG_AVARA
+#if PACKET_DEBUG
                 DebugPacket('Q', thePacket);
 #endif
                 changeInReceiveQueue = true;
@@ -575,13 +603,13 @@ char *CUDPConnection::WriteAcks(char *dest) {
 void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
     short i;
 
-    if (next)
+    if (next)  // recurse down the chain of connections
         next->MarkOpenConnections(table);
 
     if (port && myId != 0) {
         for (i = 0; i < itsOwner->maxClients; i++) {
             if (table->host == ipAddr && table->port == port) {
-                table->host = 0;
+                table->host = 0; // this connection is already open
                 table->port = 0;
                 return;
             }
@@ -614,7 +642,7 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
         }
     }
 
-    if (next)
+    if (next)  // recurse down the chain of connections
         next->OpenNewConnections(origTable);
 }
 

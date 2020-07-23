@@ -88,12 +88,16 @@ CAbstractActor *CSwitchActor::EndScript() {
 }
 
 void CSwitchActor::PlaceParts() {
-    if (shownState && partCount > 1) {
+    if (shownState) {
         partList[0]->isTransparent = true;
-        partList[1]->isTransparent = false;
+        if(partCount > 1) {
+            partList[1]->isTransparent = false;
+        }
     } else {
         partList[0]->isTransparent = false;
-        partList[1]->isTransparent = true;
+        if(partCount > 1) {
+            partList[1]->isTransparent = true;
+        }
     }
 
     LinkPartSpheres();

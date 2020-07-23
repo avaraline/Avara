@@ -10,6 +10,7 @@
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Hard-coded for now. Eventually use the level search API.
     levelSets = {
+    //$ ls -w1 levels/*.r | sed -E 's/levels.(.+)\.r/"\1",/g'
         "aa-abnormal",
         "aa-deux-abnormal",
         "aa-deux-normal",
@@ -20,10 +21,13 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "butternut-squash",
         "cancer",
         "classic-mix-up",
+        "clockwork-blue-b4",
         "cnemies-squares",
         "crescent",
+        "dildensburg",
         "disk-o-tech-light",
         "dodgeball",
+        "emotion",
         "fosfori",
         "gzr-balledness",
         "gzr-geriatric-ward",
@@ -36,16 +40,25 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "iya",
         "klaus-levels",
         "macabre",
+        "medievos",
         "net-99",
+        "net-levels",
         "new-moon",
         "not-aa",
+        "oddities-v4",
         "pastabravo",
         "scarlet-pimpernel-beta-0919",
         "single-player",
+        "someset",
         "strawberry",
         "symbiosis",
         "the-codex",
         "the-lexicon",
+        "t-plus-5-part-a",
+        "t-plus-5-part-b",
+        "t-plus-5-part-c",
+        "we-be-ground-pounders",
+        "wide-open",
         "wild-west-collection",
         "wrestling",
         "wut"
@@ -103,29 +116,34 @@ bool CLevelWindow::DoCommand(int theCommand) {
 }
 
 void CLevelWindow::AddRecent(std::string set, std::string levelName) {
-    //remove level if it is already in recents
-    for(unsigned i = 0; i < recentSets.size(); i++) {
-        if(recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
-            recentSets.erase(recentSets.begin() + i);
-            recentLevels.erase(recentLevels.begin() + i);
-            break;
+    if(json::accept("[\"" + set + "\", \"" + levelName + "\"]")) {
+        //remove level if it is already in recents
+        for(unsigned i = 0; i < recentSets.size(); i++) {
+            if(recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
+                recentSets.erase(recentSets.begin() + i);
+                recentLevels.erase(recentLevels.begin() + i);
+                break;
+            }
         }
+        
+        recentSets.insert(recentSets.begin(), set);
+        recentLevels.insert(recentLevels.begin(), levelName);
+        
+        if(recentSets.size() > 10) {
+            recentSets.pop_back();
+            recentLevels.pop_back();
+        }
+        
+        recentsBox->setItems(recentLevels, recentSets);
+        recentsBox->setCaption("Recents");
+        recentsBox->setNeedsLayout();
+        
+        mApplication->Set(kRecentSets, recentSets);
+        mApplication->Set(kRecentLevels, recentLevels);
     }
-    
-    recentSets.insert(recentSets.begin(), set);
-    recentLevels.insert(recentLevels.begin(), levelName);
-    
-    if(recentSets.size() > 10) {
-        recentSets.pop_back();
-        recentLevels.pop_back();
+    else {
+        SDL_Log("AddRecent ignoring bad set/level name.");
     }
-    
-    recentsBox->setItems(recentLevels, recentSets);
-    recentsBox->setCaption("Recents");
-    recentsBox->setNeedsLayout();
-    
-    mApplication->Set(kRecentSets, recentSets);
-    mApplication->Set(kRecentLevels, recentLevels);
 }
 
 void CLevelWindow::SelectLevel(std::string set, std::string levelName) {

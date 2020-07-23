@@ -184,7 +184,10 @@ void CRosterWindow::UpdateRoster() {
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i];
 
-            const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
+            std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
+            if (i != theNet->itsCommManager->myId && theName.length() > 0) {
+                theName += std::string(" (") + std::to_string(theNet->itsCommManager->GetMaxRoundTrip(1 << i)) + " ms)";
+            }
             short status = thisPlayer->LoadingStatus();
             std::string theStatus = GetStringStatus(status, thisPlayer->WinFrame());
 
