@@ -656,7 +656,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
 
                 while (inEnd > inData.c) {
                     PacketInfo *p;
-                    Byte flags;
+                    uint8_t flags;
 
                     thePacket = (UDPPacketInfo *)GetPacket();
 
@@ -895,7 +895,7 @@ Boolean CUDPComm::AsyncWrite() {
         while (thePacket && thePacket != kPleaseSendAcknowledge) {
             PacketInfo *p;
             char *fp;
-            Byte flags = 0;
+            uint8_t flags = 0;
             short len;
 
             p = &thePacket->packet;
