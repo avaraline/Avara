@@ -9,8 +9,8 @@
 
 #pragma once
 
-#define kMaxAvaraPlayers 6
-#define kMaxTeamColors 6
+#define kMaxAvaraPlayers 8
+#define kMaxTeamColors 8
 
 #define kNeutralTeamColor 0x00ffffff
 #define kGreenTeamColor 0x00006600
@@ -19,6 +19,8 @@
 #define kPinkTeamColor 0x00cc0099
 #define kPurpleTeamColor 0x009900cc
 #define kBlueTeamColor 0x000099cc
+#define kOrangeTeamColor 0x00FFA500
+#define kLimeTeamColor 0x0089C4C7
 #define kSpecialBlackColor 0x00303030
 #define kSpecialWhiteColor 0x00e0e0e0
 

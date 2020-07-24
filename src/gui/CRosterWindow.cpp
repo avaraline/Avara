@@ -16,7 +16,7 @@
 using namespace nanogui;
 
 std::vector<long> player_colors =
-    {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor};
+    {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor, kOrangeTeamColor, kLimeTeamColor};
 
 std::vector<Text *> statuses;
 std::vector<Text *> chats;
@@ -69,7 +69,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
             theNet->teamColors[i] = selectedIdx;
             theNet->SendColorChange();
         });
-        color->popup()->setSize(nanogui::Vector2i(50, 230));
+        color->popup()->setSize(nanogui::Vector2i(50, 38 * player_colors.size()));
         layout->setAnchor(color, AdvancedGridLayout::Anchor(0, i * 2));
         Text *status = panel->add<Text>("", false, ROSTER_FONT_SIZE + 2);
         layout->setAnchor(status, AdvancedGridLayout::Anchor(1, i * 2));
@@ -110,7 +110,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     
     VScrollPanel *scrollPanel = new VScrollPanel(chatTab);
     scrollPanel->setFixedWidth(ROSTER_WINDOW_WIDTH);
-    scrollPanel->setFixedHeight(400);
+    scrollPanel->setFixedHeight(500);
     
     chatPanel = new Widget(scrollPanel);
     AdvancedGridLayout *chatLayout = new AdvancedGridLayout();
