@@ -25,6 +25,8 @@
 #define RTTSMOOTHFACTOR_UP 5
 #define RTTSMOOTHFACTOR_DOWN 30
 
+#define MAX_RESENDS_WITHOUT_RECEIVE 2
+
 #if PACKET_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
     SDL_Log("CUDPConnection::DebugPacket(%c) sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
@@ -86,10 +88,9 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
 
     routingMask = 0;
     
-    #if PACKET_DEBUG
-        totalSent = 0;
-        totalResent = 0;
-    #endif
+    totalSent = 0;
+    totalResent = 0;
+    numResendsWithoutReceive = 0;
 }
 
 void CUDPConnection::FlushQueues() {
@@ -184,7 +185,8 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
     
     while (bestPacket != NULL) {
         // make sure the we are actually beyond packet's nextSendTime, avoids extra resends
-        if (curTime >= bestPacket->nextSendTime) {
+        if (curTime >= bestPacket->nextSendTime &&
+            (bestPacket->birthDate == bestPacket->nextSendTime || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
             break;
         }
         bestPacket = (UDPPacketInfo *)bestPacket->packet.qLink;
@@ -230,7 +232,10 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
                     SDL_Log(" CUDPConnection::FindBestPacket bestSendTime = %ld\n", bestSendTime);
                     SDL_Log(" CUDPConnection::FindBestPacket theSendTime = %ld\n", theSendTime);
                 #endif
-                if (bestSendTime > theSendTime) {
+                // if this candidate packet has a smaller sendTime AND (it's never been sent OR we haven't reached the resend limit)
+                if (bestSendTime > theSendTime &&
+                    (thePacket->birthDate == thePacket->nextSendTime || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
+                    // this is the NEW bestPacket
                     bestSendTime = theSendTime;
                     bestPacket = thePacket;
                 }
@@ -303,19 +308,24 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
         nextAckTime = curTime + kAckRetransmitBase + retransmitTime;
         nextWriteTime = curTime + retransmitTime;
 
-#if PACKET_DEBUG
         if (thePacket == kPleaseSendAcknowledge) {
-            SDL_Log("CUDPConnection::DebugPacket(S) ACK\n");
+            #if PACKET_DEBUG
+                SDL_Log("CUDPConnection::DebugPacket(S) ACK\n");
+            #endif
         } else {
             totalSent++;
             if (thePacket->birthDate != thePacket->nextSendTime) {
                 totalResent++;
-                SDL_Log("CUDPConnection::GetOutPacket   RESENDING sn=%d, age=%ld, percentResends = %.1f\n",
-                        thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent);
+                numResendsWithoutReceive++;
+                #if PACKET_DEBUG
+                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING sn=%d, age=%ld, percentResends = %.1f, numResendsWithoutReceive = %ld\n",
+                            thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent, numResendsWithoutReceive);
+                #endif
             }
-            DebugPacket('S', thePacket);
+            #if PACKET_DEBUG
+                DebugPacket('S', thePacket);
+            #endif
         }
-#endif
     }
 
     return thePacket;
@@ -367,8 +377,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // (thought: consider dynamically adjusting the multiplier based on % of resends?)
             retransmitTime = meanRoundTripTime + (long)(3.5*stdevRoundTripTime);
             urgentRetransmitTime = meanRoundTripTime + (long)(3.0*stdevRoundTripTime);
-            
-            // don't let the retransmit times fall below threshold based on frame rate or go abvoe kMaxAllowedRetransmitTime
+
             retransmitTime = std::max<long>(retransmitTime, itsOwner->urgentResendTime);
             retransmitTime = std::min<long>(retransmitTime, (long)kMaxAllowedRetransmitTime);
             urgentRetransmitTime = std::max<long>(urgentRetransmitTime, itsOwner->urgentResendTime);
@@ -414,6 +423,9 @@ char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) 
     short transmittedSerial;
     short dummyStackVar;
     UDPPacketInfo *thePacket, *nextPacket;
+
+    // received something, reset the counter
+    numResendsWithoutReceive = 0;
 
     transmittedSerial = *(short *)validateInfo;
     validateInfo += sizeof(short);
