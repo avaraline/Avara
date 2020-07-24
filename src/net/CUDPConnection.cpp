@@ -129,7 +129,7 @@ void CUDPConnection::SendQueuePacket(UDPPacketInfo *thePacket, short theDistribu
 
         Enqueue((QElemPtr)thePacket, &queues[kBusyQ]);
         busyQLen++;
-#if PACKET_DEBUG
+#if PACKET_DEBUG > 1
         if (thePacket->packet.command == kpKeyAndMouse) {
             thePacket->serialNumber = -1;  // assigned later
             DebugPacket('>', thePacket);
@@ -362,10 +362,10 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // for display purposes, use a more stable slow-moving alpha (TBR)
             stableRoundTripTime = meanRoundTripTime + difference / RTTSMOOTHFACTOR_DOWN;
 
-            // use +3 sigma(probability 99%) for retransmitTime, +2.5 sigma (98%) for urgentRetransmitTime
+            // use +3.5 sigma(probability 99.9%) for retransmitTime, +3 sigma (99.7%) for urgentRetransmitTime
             // (thought: consider dynamically adjusting the multiplier based on % of resends?)
-            retransmitTime = meanRoundTripTime + (long)(3*stdevRoundTripTime);
-            urgentRetransmitTime = meanRoundTripTime + (long)(2.5*stdevRoundTripTime);
+            retransmitTime = meanRoundTripTime + (long)(3.5*stdevRoundTripTime);
+            urgentRetransmitTime = meanRoundTripTime + (long)(3.0*stdevRoundTripTime);
             
             // don't let the retransmit times fall below threshold based on frame rate or go abvoe kMaxAllowedRetransmitTime
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
