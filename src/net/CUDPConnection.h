@@ -14,7 +14,7 @@
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
 
-#define PACKET_DEBUG 0   // set to 1 for packet debug outpu, 2 for more detail
+#define PACKET_DEBUG 0   // set to 1 for packet debug output, 2 for extra detail
 
 #pragma pack(1)
 typedef struct {
@@ -89,10 +89,11 @@ public:
 #if PACKET_DEBUG
     short dp;
     OSType d[kDebugBufferSize];
+#endif
     
     long totalSent;
     long totalResent;
-#endif
+    long numResendsWithoutReceive;
 
     volatile short *offsetBufferBusy;
     int32_t ackBitmap;
