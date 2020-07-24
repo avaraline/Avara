@@ -6,7 +6,10 @@
     Created: Monday, January 29, 1996, 13:45
     Modified: Saturday, January 3, 1998, 02:04
 */
-// #include <unistd.h> // for usleep()
+#define SIMULATE_LATENCY_ON_CLIENTS 0
+#if SIMULATE_LATENCY_ON_CLIENTS
+#include <unistd.h> // for usleep()
+#endif
 
 #include "CUDPComm.h"
 
@@ -1038,7 +1041,12 @@ Boolean CUDPComm::AsyncWrite() {
                 SDL_Log("   WRITING UDP packet to %s using stream %p\n",
                         FormatAddr(udp->address).c_str(), stream);
             #endif
-            // usleep(30000 + int(10000*float(rand())/RAND_MAX)); // simulate network latencies
+            
+            #if SIMULATE_LATENCY_ON_CLIENTS
+                if (myId >= 1) {
+                    usleep(50000 + int(20000*float(rand())/RAND_MAX)); // simulate network latencies
+                }
+            #endif
             UDPWrite(stream, udp, UDPWriteComplete, this);
             result = true;
         }

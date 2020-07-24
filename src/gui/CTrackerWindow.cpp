@@ -72,6 +72,7 @@ public:
             
         nanogui::Label *addressLabel = new nanogui::Label(this, line1, "sans", 14);
         nanogui::Label *playersLabel = new nanogui::Label(this, line2, "sans-bold");
+        playersLabel->setFixedWidth(300);
         playersLabel->setColor(nanogui::Color(200, 200));
         nanogui::Label *descriptionLabel = new nanogui::Label(this, description, "sans-bold");
         descriptionLabel->setFixedWidth(200);

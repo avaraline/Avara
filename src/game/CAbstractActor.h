@@ -44,7 +44,7 @@
 
 #define kAllKindsBits -1
 
-enum { kNeutralTeam, kGreenTeam, kYellowTeam, kRedTeam, kPinkTeam, kPurpleTeam, kBlueTeam };
+enum { kNeutralTeam, kGreenTeam, kYellowTeam, kRedTeam, kPinkTeam, kPurpleTeam, kBlueTeam, kOrangeTeam, kLimeTeam };
 
 enum { kIsInactive = 0, kIsActive = 1, kIsGlowing = 2, kHasImpulse = 4, kHasMessage = 8 };
 
