@@ -45,12 +45,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: https://uploads.github.com/repos/assertivist/Avara/releases/28953734/assets{?name,label}
-          release_id: 28953734
+          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
+          release_id: 28954246
           asset_path: ./build/WinAvara.zip
           asset_name: Avara-Windows-Nightly-$$.zip
           asset_content_type: application/zip
-          max_releases: 6
+          max_releases: 1
 
   macOS:
     name: macOS
@@ -76,9 +76,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: https://uploads.github.com/repos/assertivist/Avara/releases/28953734/assets{?name,label}
-          release_id: 28953734
+          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
+          release_id: 28954246
           asset_path: ./build/MacAvara.zip
           asset_name: Avara-macOS-Nightly-$$.zip
           asset_content_type: application/zip
-          max_releases: 6
+          max_releases: 1
