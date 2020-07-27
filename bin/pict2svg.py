@@ -179,7 +179,8 @@ class SVGContext:
         # self.write('svg', xmlns='http://www.w3.org/2000/svg', close=False, **attrs)
         self.x = 0
         self.y = 0
-        self.w = 1
+        self.pen_w = 0
+        self.pen_h = 0
         self.r = Point(0, 0)
         self.fg = Color(255, 255, 255)
         self.bg = Color(255, 255, 255)
@@ -311,15 +312,16 @@ class SVGContext:
             return
         tspan = etree.SubElement(text, "tspan")
         try:
-            tspan.text = string
+            tspan.text = string.replace('\r', '\n')
         except ValueError:
             tspan.getparent().remove(tspan)
             return
         tspan.set(ns("role", SPNS), "line")
+        tspan.set(ns("space", XMLNS), "preserve")
+        tspan.set("style", "font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;word-spacing:0px;fill:#000000;fill-opacity:1;text-align:start;text-anchor:start")
         tspan.set("id", self.getid("tspan"))
         tspan.set("x", str(x))
         tspan.set("y", str(y))
-        tspan.set("style", "stroke-width:0.25;")
         # print(string.encode('ascii', 'ignore'))
 
     def fill(self, el):
@@ -332,7 +334,7 @@ class SVGContext:
 
     def stroke(self, el):
         oldstyle = el.get("style")
-        stroke = "stroke: %s; stroke-width: %s; " % (self.fg, str(self.w))
+        stroke = "stroke: %s; stroke-width: %s; " % (self.fg, str(self.pen_w))
         if oldstyle:
             el.set("style", oldstyle + stroke)
         else:
@@ -359,7 +361,7 @@ class SVGContext:
     def close(self):
         # tree.write(filename, encoding="UTF-8")
         svg = etree.ElementTree(self.root)
-        xml_str = etree.tostring(svg, pretty_print=True, encoding="UTF-8")
+        xml_str = etree.tostring(svg, pretty_print=False, encoding="UTF-8")
         return xml_str
 
 class Operation:
@@ -644,7 +646,8 @@ class PenSize (Operation):
 
     def parse(self, data, context):
         size = data.point()
-        context.w = size.x
+        context.pen_w = size.x
+        context.pen_h = size.y
 
 class PenMode (Operation):
 
@@ -743,11 +746,13 @@ class ShortLine (Operation):
     def parse(self, data, context):
         start = data.point()
         dh, dv = data.read(2)
+        context.x += dh
+        context.y += dv
+        if context.pen_w == 0 or context.pen_h == 0:
+            return
         line = context.element("line")
         line.set("x1", str(start.x))
         line.set("y1", str(start.y))
-        context.x += dh
-        context.y += dv
         line.set("x2", str(context.x))
         line.set("y2", str(context.y))
         line.set("stroke", "black")
@@ -764,6 +769,8 @@ class ShortLineFrom (Operation):
         line.set("y1", str(context.y))
         context.x += dh
         context.y += dv
+        if context.pen_w == 0 or context.pen_h == 0:
+            return
         line.set("x2", str(context.x))
         line.set("y2", str(context.y))
         line.set("stroke", "black")
