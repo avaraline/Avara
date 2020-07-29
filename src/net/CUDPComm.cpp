@@ -7,8 +7,12 @@
     Modified: Saturday, January 3, 1998, 02:04
 */
 #define SIMULATE_LATENCY_ON_CLIENTS 0
-#if SIMULATE_LATENCY_ON_CLIENTS
+#define RANDOMLY_DROP_PACKETS 0
+#if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
+#endif
+#if RANDOMLY_DROP_PACKETS
+int numToDrop = 0;
 #endif
 
 #include "CUDPComm.h"
@@ -652,6 +656,10 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         while (*inData.c++)
                             ;
                     }
+                } else if (inData.c == inEnd) {
+                    #if PACKET_DEBUG
+                        SDL_Log("     CUDPComm::ReadComplete(R) <ACK> cn=%d rsn=%d\n", conn->myId, conn->maxValid);
+                    #endif
                 }
 
                 while (inEnd > inData.c) {
@@ -967,9 +975,9 @@ Boolean CUDPComm::AsyncWrite() {
             thePacket->packet.qLink = (PacketInfo *)packetList;
             packetList = thePacket;
 
-            #if PACKET_DEBUG
-                SDL_Log("          preparing packet >>> rsn=%d sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
-                        *(short*)&udp->data[2], thePacket->serialNumber, p->command, p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution);
+            #if PACKET_DEBUG > 1 || ROUTE_THRU_SERVER // to see how flags get changed on ROUTE_THRU_SERVER
+                SDL_Log("          preparing packet >>> cn=%d rsn=%d sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+                        myId, *(short*)&udp->data[2], thePacket->serialNumber, p->command, p->p1, p->p2, p->p3, p->flags, p->sender, p->distribution);
             #endif
 
             // See if there are other messages that could be sent in this packet payload
@@ -991,9 +999,9 @@ Boolean CUDPComm::AsyncWrite() {
                 udp->address.host = connections->ipAddr;
                 udp->address.port = connections->port;
             }
+            SDL_Log("           destination host is %s\n", FormatAddr(theConnection).c_str());
         #endif
         #if PACKET_DEBUG
-            SDL_Log("           destination host is %s\n", FormatAddr(theConnection).c_str());
             SDL_Log("     transmitting packet(s) to %s\n", FormatAddr(udp->address).c_str());
         #endif
 
@@ -1042,12 +1050,21 @@ Boolean CUDPComm::AsyncWrite() {
                         FormatAddr(udp->address).c_str(), stream);
             #endif
             
+            #if RANDOMLY_DROP_PACKETS
+                if (rand() < RAND_MAX/256 || numToDrop > 0) {          // drop frequency = (1/N)
+                    numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
+                    SDL_Log("           ---------> DROPPING PACKET <---------\n");
+                } else {
+            #endif
             #if SIMULATE_LATENCY_ON_CLIENTS
                 if (myId >= 1) {
                     usleep(50000 + int(20000*float(rand())/RAND_MAX)); // simulate network latencies
                 }
             #endif
             UDPWrite(stream, udp, UDPWriteComplete, this);
+            #if RANDOMLY_DROP_PACKETS
+                }
+            #endif
             result = true;
         }
     } else {

@@ -510,6 +510,17 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     break;
                 }
                 */
+
+                #define KICK_WAITING_FOR_PLAYER 1
+                #if KICK_WAITING_FOR_PLAYER
+                    // kick the offending player from the server so everyone else can continue
+                    AbortRequest();  // clears the player from distribution so they can come back in to the server (not the game)
+                    if (theNetManager->itsCommManager->myId == 0) { // the server kicks the unresponsive player
+                        itsGame->itsApp->AddMessageLine("Kicking unresponsive player: " + std::string((char*)&playerName[1], (size_t)playerName[0]));
+                        theNetManager->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
+                    }
+                    break;
+                #endif
             }
 
         } while (frameFuncs[i].validFrame != itsGame->frameNumber);

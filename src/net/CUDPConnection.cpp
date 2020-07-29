@@ -28,8 +28,10 @@
 
 #if PACKET_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+    SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
         eType,
+        myId,
+        receiveSerial,
         p->serialNumber,
         p->packet.command,
         p->packet.p1,
@@ -309,7 +311,7 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
 
         if (thePacket == kPleaseSendAcknowledge) {
             #if PACKET_DEBUG
-                SDL_Log("CUDPConnection::DebugPacket(S) ACK\n");
+                SDL_Log("CUDPConnection::DebugPacket(S) <ACK> cn=%d rsn=%d\n", myId, receiveSerial - kSerialNumberStepSize);
             #endif
         } else {
             totalSent++;
@@ -317,8 +319,8 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
                 totalResent++;
                 numResendsWithoutReceive++;
                 #if PACKET_DEBUG
-                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING sn=%d, age=%ld, percentResends = %.1f, numResendsWithoutReceive = %ld\n",
-                            thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent, numResendsWithoutReceive);
+                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d, age=%ld, percentResends = %.1f, numResendsWithoutReceive = %ld\n",
+                            myId, thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent, numResendsWithoutReceive);
                 #endif
             }
             #if PACKET_DEBUG
@@ -342,7 +344,7 @@ bool UseCommandForStats(long command) {
 }
 
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
-    #if PACKET_DEBUG > 1
+    #if PACKET_DEBUG
         DebugPacket('V', thePacket);
     #endif
     if (noErr == Dequeue((QElemPtr)thePacket, &queues[kTransmitQ])) {
@@ -356,9 +358,6 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
                 varRoundTripTime = roundTrip * roundTrip;  // err on the high side initially
             }
         } else if (UseCommandForStats(thePacket->packet.command)) {
-            #if PACKET_DEBUG > 1
-                SDL_Log("CUDPConnection::ValidatePacket command = %d, roundTrip = %d\n", thePacket->packet.command, roundTrip);
-            #endif
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
@@ -384,8 +383,8 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             urgentRetransmitTime = std::min(urgentRetransmitTime, (long)kMaxAllowedRetransmitTime);
 
             #if PACKET_DEBUG
-                SDL_Log("conn=%d, roundTrip = %ld, meanRTT = %.1f, varRTT = %.1f, stdRTT = %.1f, retransmitTime = %ld, urgentRetransmit = %ld\n",
-                        myId, roundTrip, meanRoundTripTime, varRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
+                SDL_Log("                               roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
+                        roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
             #endif
         }
 
@@ -417,8 +416,6 @@ void CUDPConnection::RunValidate() {
     }
 }
 
-static int32_t lastAckMap;
-
 char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) {
     short transmittedSerial;
     short dummyStackVar;
@@ -430,13 +427,19 @@ char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) 
     transmittedSerial = *(short *)validateInfo;
     validateInfo += sizeof(short);
 
+    #if PACKET_DEBUG
+        SDL_Log("ValidateReceivedPackets transmittedSerial=%d, maxValid = %d\n", transmittedSerial, maxValid);
+    #endif
+
     if (transmittedSerial & 1) {
         int32_t ackMap;
 
         transmittedSerial &= ~1;
 
         ackMap = *(int32_t *)validateInfo;
-        lastAckMap = ackMap;
+        #if PACKET_DEBUG
+            SDL_Log("           ------------ AckMap = 0x%04x ----------\n", ackMap);
+        #endif
 
         for (thePacket = (UDPPacketInfo *)queues[kTransmitQ].qHead; thePacket; thePacket = nextPacket) {
             nextPacket = (UDPPacketInfo *)thePacket->packet.qLink;
@@ -451,9 +454,6 @@ char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) 
 
     validTime = curTime;
 
-    #if PACKET_DEBUG
-        SDL_Log("ValidateReceivedPackets transmittedSerial=%d, maxValid = %d\n", transmittedSerial, maxValid);
-    #endif
     if (maxValid < transmittedSerial) {
         maxValid = transmittedSerial;
         RunValidate();
