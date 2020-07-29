@@ -66,6 +66,8 @@ int main(int argc, char *argv[]) {
     CAvaraApp *app = new CAvaraAppImpl();
 
     // process command-line arguments
+    std::string connectAddress;
+    bool host = false;
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
         if (arg == "-p" || arg == "--port") {
@@ -74,11 +76,19 @@ int main(int argc, char *argv[]) {
         } else if (arg == "-n" || arg == "--name") {
             app->Set(kPlayerNameTag, std::string(argv[++i]));
         } else if (arg == "-c" || arg == "--connect") {
-            app->GetNet()->ChangeNet(kClientNet, std::string(argv[++i]));
+            connectAddress = std::string(argv[++i]);
+        } else if (arg == "-h" || arg == "--host") {
+            host = true;
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
         }
+    }
+    
+    if(host == true) {
+        app->GetNet()->ChangeNet(kServerNet, "");
+    } else if(connectAddress.size() > 0) {
+        app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
     mainloop(app->GetGame()->frameTime / 4);
