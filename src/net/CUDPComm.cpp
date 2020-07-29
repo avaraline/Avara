@@ -656,13 +656,11 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         while (*inData.c++)
                             ;
                     }
-                }
-
-                #if PACKET_DEBUG
-                    if (inData.c == inEnd) {
+                } else if (inData.c == inEnd) {
+                    #if PACKET_DEBUG
                         SDL_Log("     CUDPComm::ReadComplete(R) <ACK> cn=%d rsn=%d\n", conn->myId, conn->maxValid);
-                    }
-                #endif
+                    #endif
+                }
 
                 while (inEnd > inData.c) {
                     PacketInfo *p;
