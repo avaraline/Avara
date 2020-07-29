@@ -7,8 +7,12 @@
     Modified: Saturday, January 3, 1998, 02:04
 */
 #define SIMULATE_LATENCY_ON_CLIENTS 0
-#if SIMULATE_LATENCY_ON_CLIENTS
+#define RANDOMLY_DROP_PACKETS 0
+#if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
+#endif
+#if RANDOMLY_DROP_PACKETS
+int numToDrop = 0;
 #endif
 
 #include "CUDPComm.h"
@@ -1048,12 +1052,21 @@ Boolean CUDPComm::AsyncWrite() {
                         FormatAddr(udp->address).c_str(), stream);
             #endif
             
+            #if RANDOMLY_DROP_PACKETS
+                if (rand() < RAND_MAX/256 || numToDrop > 0) {          // drop frequency = (1/N)
+                    numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
+                    SDL_Log("           ---------> DROPPING PACKET <---------\n");
+                } else {
+            #endif
             #if SIMULATE_LATENCY_ON_CLIENTS
                 if (myId >= 1) {
                     usleep(50000 + int(20000*float(rand())/RAND_MAX)); // simulate network latencies
                 }
             #endif
             UDPWrite(stream, udp, UDPWriteComplete, this);
+            #if RANDOMLY_DROP_PACKETS
+                }
+            #endif
             result = true;
         }
     } else {
