@@ -86,10 +86,6 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         }
         else
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-
- 
-
- 
         
         //player name
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);

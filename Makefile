@@ -130,7 +130,8 @@ publish:
 
 resources:
 	# python3 bin/pict2svg.py
-	cp -r bsps levels rsrc shaders $(BUILD_DIR)
+	# cp -r bsps levels rsrc shaders $(BUILD_DIR)
+	rsync -av bsps levels rsrc shaders $(BUILD_DIR)
 
 -include $(DEPS)
 
