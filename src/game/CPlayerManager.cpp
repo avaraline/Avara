@@ -65,6 +65,8 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"zoomOut", 1 << kfuZoomOut},
         {"scoutView", 1 << kfuScoutView},
         {"scoutControl", 1 << kfuScoutControl},
+        {"spectateNext", 1 << kfuSpectateNext},
+        {"spectatePrevious", 1 << kfuSpectatePrevious},
         {"chatMode", 1 << kfuTypeText},
         {"debug1", 1 << kfuDebug1},
         {"debug2", 1 << kfuDebug2}};
@@ -1188,6 +1190,9 @@ short CPlayerManagerImpl::Position() {
 }
 Str255& CPlayerManagerImpl::PlayerName() {
     return playerName;
+}
+std::string CPlayerManagerImpl::GetPlayerName() {
+    return std::string((char *)playerName + 1, playerName[0]);
 }
 std::deque<char>& CPlayerManagerImpl::LineBuffer() {
     return lineBuffer;

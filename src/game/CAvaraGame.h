@@ -90,6 +90,7 @@ public:
 
     CAbstractPlayer *playerList;
     CAbstractPlayer *nextPlayer;
+    CAbstractPlayer *spectatePlayer;
     long playersStanding;
     short teamsStandingMask;
     short teamsStanding;
@@ -191,6 +192,7 @@ public:
     virtual void GetIdent(CAbstractActor *theActor);
     virtual void RemoveIdent(long ident);
 
+    virtual CAbstractPlayer *GetSpectatePlayer();
     virtual CAbstractPlayer *GetLocalPlayer();
 
     virtual void AddActor(CAbstractActor *theActor);
@@ -216,6 +218,9 @@ public:
     virtual bool GameTick();
     virtual void GameStop();
     virtual void Dispose();
+    
+    virtual void SpectateNext();
+    virtual void SpectatePrevious();
 
     virtual void UpdateViewRect(int width, int height, float pixelRatio);
 
@@ -227,10 +232,13 @@ public:
 
     virtual void StopGame();
     virtual void Render(NVGcontext *ctx);
+    virtual void ViewControl();
 
     virtual void InitMixer(Boolean silentFlag);
 
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
+    virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
+
     virtual double FrameTimeScale(double exponent=1);
 };
 

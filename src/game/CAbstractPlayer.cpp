@@ -658,6 +658,16 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if (TESTFUNC(kfuLoadMissile, ft->down))
                 ArmSmartMissile();
         }
+        else {
+
+        }
+        
+        if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
+            itsGame->SpectateNext();
+        }
+        if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
+            itsGame->SpectatePrevious();
+        }
 
         if (TESTFUNC(kfuPauseGame, ft->down)) {
             itsGame->statusRequest = kPauseStatus;

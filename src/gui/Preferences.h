@@ -78,6 +78,8 @@ static json defaultPrefs = {
         {"zoomOut", "-"},
         {"scoutView", "Tab"},
         {"scoutControl", {"2", "Up", "Down", "Left", "Right"}},
+        {"spectateNext", "]"},
+        {"spectatePrevious", "["},
         {"chatMode", "Return"},
         {"debug1", "5"},
         {"debug2", "6"}}

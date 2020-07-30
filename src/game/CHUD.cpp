@@ -15,6 +15,7 @@ const std::vector<long> team_colors =
 
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
+    CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
     
     int playerCount = 0;
@@ -64,16 +65,37 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         colorB = longTeamColor & 0xff;
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
 
+        //player color box
         nvgBeginPath(ctx);
-        nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
+        if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer)
+            nvgRect(ctx, bufferWidth - 160, pY, 150.0, 10.0);
+        else
+            nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
+        
         nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
         nvgFill(ctx);
+        
+        //highlight player if spectating
+        if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
+//            nvgBeginPath(ctx);
+//            nvgRoundedRect(ctx, bufferWidth - 148, pY, 144.0, 10.0, 2.0);
+//            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 220));
+//            nvgFill(ctx);
 
+            nvgFillColor(ctx, nvgRGBA(0, 0, 0, 255));
+        }
+        else
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+
+ 
+
+ 
+        
+        //player name
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
-        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
         nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
-
+        
         short status = thisPlayer->GetStatusChar();
         if (status > 0) {
             std::string playerLives = std::to_string(status);
@@ -96,6 +118,10 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     if (!player)
         return;
+    
+    if(spectatePlayer != NULL)
+        player = spectatePlayer;
+    
     int i, j;
     float g1X = (bufferWidth / 2.0) - 60.0;
     float gY = bufferHeight - 60.0;
