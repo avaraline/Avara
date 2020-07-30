@@ -241,3 +241,4 @@ if __name__ == '__main__':
         manifest_path = os.path.join(ldir, "manifest.json")
         with open(manifest_path, 'w') as manifest_file:
             json.dump(manifest, manifest_file, indent=1)
+
