@@ -658,15 +658,13 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if (TESTFUNC(kfuLoadMissile, ft->down))
                 ArmSmartMissile();
         }
-        else {
-
-        }
-        
-        if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
-            itsGame->SpectateNext();
-        }
-        if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
-            itsGame->SpectatePrevious();
+        else if(lives == 0) {
+            if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
+                itsGame->SpectateNext();
+            }
+            if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
+                itsGame->SpectatePrevious();
+            }
         }
 
         if (TESTFUNC(kfuPauseGame, ft->down)) {
