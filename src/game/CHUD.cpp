@@ -17,7 +17,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
-    
+
     int playerCount = 0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = net->playerTable[i];
@@ -66,28 +66,22 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
 
         //player color box
+        NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
+        float colorBoxWidth = 10.0;
         nvgBeginPath(ctx);
-        if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer)
-            nvgRect(ctx, bufferWidth - 160, pY, 150.0, 10.0);
-        else
-            nvgRect(ctx, bufferWidth - 160, pY, 10.0, 10.0);
-        
-        nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
-        nvgFill(ctx);
         
         //highlight player if spectating
         if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
-//            nvgBeginPath(ctx);
-//            nvgRoundedRect(ctx, bufferWidth - 148, pY, 144.0, 10.0, 2.0);
-//            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 220));
-//            nvgFill(ctx);
-
-            nvgFillColor(ctx, nvgRGBA(0, 0, 0, 255));
+            textColor = nvgRGBA(0, 0, 0, 255);
+            colorBoxWidth = 150.0;
         }
-        else
-            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+
+        nvgRect(ctx, bufferWidth - 160, pY, colorBoxWidth, 10.0);
+        nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
+        nvgFill(ctx);
         
         //player name
+        nvgFillColor(ctx, textColor);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
         nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
@@ -110,6 +104,28 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgFontSize(ctx, fontsz_m);
         nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
         nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
+        
+        //spectating onscreen name
+        if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
+            int x = 20;
+            int y = 20;
+            
+            //draw box for text
+            nvgBeginPath(ctx);
+            nvgRoundedRect(ctx, x, y, 350.0, 28.0, 3.0);
+            nvgFillColor(ctx, nvgRGBA(0, 0, 0, 175));
+            nvgFill(ctx);
+            
+            //draw text
+            float fontsz_m = 24.0;
+            nvgFontFace(ctx, "mono");
+            nvgBeginPath(ctx);
+            nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
+            nvgFontSize(ctx, fontsz_m);
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            std::string specMessage("Spectating " + playerName);
+            nvgText(ctx, x + 5, y + 14, specMessage.c_str(), NULL);
+        }
     }
 
     if (!player)

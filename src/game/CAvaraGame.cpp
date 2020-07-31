@@ -999,33 +999,7 @@ void CAvaraGame::Render(NVGcontext *ctx) {
         AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
         hud->Render(itsView, ctx);
-        AvaraGLSetDepthTest(true);
-        
-        if(spectatePlayer != NULL) {
-            //draw "Spectating" message
-            CPlayerManager *spectateManager = FindPlayerManager(spectatePlayer);
-
-            if(spectateManager != NULL) {
-                int x = 20;
-                int y = 20;
-                
-                //draw box for text
-                nvgBeginPath(ctx);
-                nvgRoundedRect(ctx, x, y, 350.0, 28.0, 3.0);
-                nvgFillColor(ctx, nvgRGBA(0, 0, 0, 175));
-                nvgFill(ctx);
-
-                //draw text
-                float fontsz_m = 24.0;
-                nvgFontFace(ctx, "mono");
-                nvgBeginPath(ctx);
-                nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
-                nvgFontSize(ctx, fontsz_m);
-                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                std::string specMessage("Spectating " + spectateManager->GetPlayerName());
-                nvgText(ctx, x + 5, y + 14, specMessage.c_str(), NULL);
-            }
-        }
+        AvaraGLSetDepthTest(true);        
     }
 }
 
