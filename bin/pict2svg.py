@@ -728,15 +728,15 @@ class Line (Operation):
     def parse(self, data, context):
         start = data.point()
         end = data.point()
-        context.pen_pos.x += end.x
-        context.pen_pos.y += end.y
+        #context.pen_pos.x += end.x
+        #context.pen_pos.y += end.y
 
 
 class LineFrom (Operation):
     def parse(self, data, context):
         p = data.point()
-        context.pen_pos.x += p.x
-        context.pen_pos.y += p.y
+        #context.pen_pos.x += p.x
+        #context.pen_pos.y += p.y
 
 
 class ShortLine (Operation):
@@ -746,8 +746,8 @@ class ShortLine (Operation):
         dh, dv = data.read(2)
         old_x = context.pen_pos.x
         old_y = context.pen_pos.y
-        context.pen_pos.x += dh
-        context.pen_pos.y += dv
+        #context.pen_pos.x += dh
+        #context.pen_pos.y += dv
         if DEBUG_PARSER:
             print(f"Pen was at {old_x} {old_y}")
             print(f"ShortLine {start.x} {start.y} -> {dh} {dv}")
@@ -769,8 +769,8 @@ class ShortLineFrom (Operation):
         dh, dv = data.read(2)
         old_x = context.pen_pos.x
         old_y = context.pen_pos.y
-        context.pen_pos.x += dh
-        context.pen_pos.y += dv
+        #context.pen_pos.x += dh
+        #context.pen_pos.y += dv
 
         if DEBUG_PARSER:
             print(f"Pen was at {old_x} {old_y}")

@@ -200,8 +200,11 @@ if __name__ == '__main__':
 
     if not EXPORT_SOUND:
         print("hsnd2wav is not built! I need this to export sound.")
-        print("build it with `make hsnd2wav`")
-        exit(1)
+        print("Building hsnd2wav...")
+        args = ['make', '-j', 'hsnd2wav']
+        popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+        popen.wait()
+        print("Done!")
 
     if not WAV2OGG:
         print("I need libsndfile available to convert WAV to OGG.")
