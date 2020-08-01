@@ -502,7 +502,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 //				itsGame->timer.currentStep += 2;
             }
 
-            if (askCount > 2) {
+            if (askCount > 4) {
                 /* TODO: waiting dialog
                 gApplication->BroadcastCommand(kBusyTimeCmd);
                 if(gApplication->commandResult)
