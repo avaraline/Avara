@@ -3,9 +3,15 @@
 #include "CApplication.h"
 #include "Preferences.h"
 #include "CAvaraApp.h"
+#include "GitVersion.h"
 
 CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
+
+    auto versionLabel = new nanogui::Text(this);
+    versionLabel->setFont("mono");
+    versionLabel->setFontSize(15);
+    versionLabel->setValue(GIT_VERSION);
 
     std::string name = app->String(kPlayerNameTag);
     nameBox = new nanogui::TextBox(this);
