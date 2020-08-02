@@ -251,8 +251,8 @@ class BSP(object):
                 v2 = point2 - point1
                 v3 = np.array([-rayDirection[1], rayDirection[0]])
                 divisor = np.dot(v2, v3)
-                t1 = (np.cross(v2, v1) / divisor)
-                t2 = (np.dot(v1, v3) / divisor) 
+                t1 = (np.cross(v2, v1) / divisor) if divisor != 0 else 1000000
+                t2 = (np.dot(v1, v3) / divisor) if divisor != 0 else 1000000
                 if t1 >= 0.0 and t2 >= 0.0 and t2 <= 1.0:
                     return [rayOrigin + t1 * rayDirection]
                 return []
