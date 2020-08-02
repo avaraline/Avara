@@ -273,6 +273,8 @@ class SVGContext:
             "string": str(line),
             "x": self.text_pos.x,
             "y": self.text_pos.y
+            #"x": self.pen_pos.x,
+            #"y": self.pen_pos.y
         } for line in thestr.split('\r')])
 
     def flush_text(self):
@@ -1099,6 +1101,9 @@ class ShortComment (Operation):
                 print("ShortComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
             except KeyError:
                 print("ShortComment: %s - unknown" % kind)
+        if kind == 150:
+            # picTextBegin
+            context.text_pos = context.pen_pos
         if kind == 151:
             # picTextEnd
             context.flush_text()
