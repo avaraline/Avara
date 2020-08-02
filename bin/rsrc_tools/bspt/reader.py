@@ -326,6 +326,7 @@ class BSP(object):
                 color = d['colors'][color_idx]
                 tris = d['triangles_poly'][idx]
                 tri_points = d['triangles_verts_poly'][idx]
+                # uncomment this to wind triangles in the opposite direction
                 """
                 out['polys'].append({
                     'normal': [-x for x in normal],
