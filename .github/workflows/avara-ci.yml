@@ -42,7 +42,7 @@ jobs:
           make tests
           build/tests
       - name: deploy nightly
-        if: startsWith(env.GITHUB_REPOSITORY, 'avaraline') && contains(env.GITHUB_REF, 'master')
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'master')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -76,7 +76,7 @@ jobs:
       - name: print env variables
         run: echo $GITHUB_REPOSITORY && echo $GITHUB_REF
       - name: deploy nightly
-        if: startsWith(env.GITHUB_REPOSITORY, 'avaraline') && contains(env.GITHUB_REF, 'master')
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'master')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
