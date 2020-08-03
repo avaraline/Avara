@@ -900,6 +900,21 @@ void CAvaraGame::ViewControl() {
     }
 }
 
+bool CAvaraGame::canBeSpectated(CAbstractPlayer *player) {
+    if(player == NULL)
+        return false;
+    
+    if(player->isInLimbo == false) {
+        return true;
+    }
+    
+    if(player == GetLocalPlayer() && player->scoutView == true && player->lives == 0) {
+        return true;
+    }
+    
+    return false;
+}
+
 void CAvaraGame::SpectateNext() {
     if(spectatePlayer == NULL)
         spectatePlayer = GetLocalPlayer();
@@ -907,17 +922,17 @@ void CAvaraGame::SpectateNext() {
     CAbstractPlayer *nextPlayer = NULL;
     CAbstractPlayer *firstPlayer = NULL;
     CAbstractPlayer *currentPlayer = NULL;
-    bool found = false;
+    bool foundCurrentSpectate = false;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         currentPlayer = itsNet->playerTable[i]->GetPlayer();
         if(currentPlayer != NULL) {
-            if(firstPlayer == NULL && currentPlayer->isInLimbo == false) {
+            if(firstPlayer == NULL && canBeSpectated(currentPlayer)) {
                 firstPlayer = currentPlayer;
             }
             if(currentPlayer == spectatePlayer) {
-                found = true;
+                foundCurrentSpectate = true;
             }
-            else if(found == true && nextPlayer == NULL && currentPlayer->isInLimbo == false) {
+            else if(foundCurrentSpectate == true && nextPlayer == NULL && canBeSpectated(currentPlayer)) {
                 nextPlayer = currentPlayer;
             }
         }
@@ -926,20 +941,11 @@ void CAvaraGame::SpectateNext() {
     spectatePlayer = nextPlayer;
     if(spectatePlayer == NULL)
         spectatePlayer = firstPlayer;
-    
-    //SDL_Log("spec name=%s", FindPlayerManager(spectatePlayer)->GetPlayerName().c_str());
 }
 
 void CAvaraGame::SpectatePrevious() {
-    SDL_Log("CAvaraGame::SpectatePrevious()");
-    
-    if(spectatePlayer == NULL) {
-        SDL_Log("spec null");
+    if(spectatePlayer == NULL)
         spectatePlayer = GetLocalPlayer();
-    }
-    else {
-        SDL_Log("spec not null");
-    }
 
     CAbstractPlayer *previousPlayer = NULL;
     CAbstractPlayer *currentPlayer = NULL;
@@ -953,7 +959,7 @@ void CAvaraGame::SpectatePrevious() {
                     spectatePlayer = previousPlayer;
                 }
             }
-            else if(currentPlayer->isInLimbo == false) {
+            else if(canBeSpectated(currentPlayer)) {
                 previousPlayer = currentPlayer;
             }
         }
@@ -961,8 +967,6 @@ void CAvaraGame::SpectatePrevious() {
     
     if(!found && previousPlayer != NULL)
         spectatePlayer = previousPlayer;
-
-    SDL_Log("spec name=%s", FindPlayerManager(spectatePlayer)->GetPlayerName().c_str());
 }
 
 CPlayerManager *CAvaraGame::FindPlayerManager(CAbstractPlayer *thePlayer) {

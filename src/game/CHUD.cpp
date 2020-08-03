@@ -16,12 +16,11 @@ const std::vector<long> team_colors =
 
 void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
     if(itsGame->gameStatus != kPlayingStatus) {
-        std::string set((char *)itsGame->loadedSet);
         std::string level((char *)itsGame->loadedLevel + 1, itsGame->loadedLevel[0]);
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
         float x = 0.0;
-        int y = bufferHeight - 130;
+        float y = bufferHeight - 130.0;
         float bounds[4];
         
         nvgBeginPath(ctx);
@@ -30,11 +29,11 @@ void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
         nvgTextBounds(ctx, x,y, level.c_str(), NULL, bounds);
         x = (bufferWidth / 2) - (bounds[2]-bounds[0]) / 2;
         nvgFillColor(ctx, BACKGROUND_COLOR);
-        nvgRect(ctx, x-5,bounds[1]-2, (int)(bounds[2]-bounds[0])+10, (int)(bounds[3]-bounds[1])+4);
+        nvgRect(ctx, x-5,y, (int)(bounds[2]-bounds[0])+10, (int)(bounds[3]-bounds[1])+4);
         nvgFill(ctx);
         
         nvgFillColor(ctx, nvgRGBA(255,255,255,220));
-        nvgText(ctx, x,y, level.c_str(), NULL);
+        nvgText(ctx, x,y+(bounds[3]-bounds[1])-3, level.c_str(), NULL);
     }
 }
 
@@ -160,21 +159,24 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
             int x = 20;
             int y = 20;
-            
+            float fontsz_m = 24.0;
+            float bounds[4];
+            std::string specMessage("Spectating " + playerName);
+
+            nvgBeginPath(ctx);
+            nvgFontFace(ctx, "mono");
+            nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
+            nvgFontSize(ctx, fontsz_m);
+            nvgTextBounds(ctx, x,y, specMessage.c_str(), NULL, bounds);
+
             //draw box for text
             nvgBeginPath(ctx);
-            nvgRoundedRect(ctx, x, y, 350.0, 28.0, 3.0);
+            nvgRoundedRect(ctx, x, y, (bounds[2]-bounds[0])+10, 28.0, 3.0);
             nvgFillColor(ctx, BACKGROUND_COLOR);
             nvgFill(ctx);
             
             //draw text
-            float fontsz_m = 24.0;
-            nvgFontFace(ctx, "mono");
-            nvgBeginPath(ctx);
-            nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
-            nvgFontSize(ctx, fontsz_m);
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-            std::string specMessage("Spectating " + playerName);
             nvgText(ctx, x + 5, y + 14, specMessage.c_str(), NULL);
         }
     }
@@ -338,8 +340,10 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
     nvgFontSize(ctx, fontsz_m);
     nvgTextAlign(ctx, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-    snprintf(scoreText, sizeof(scoreText), "%ld", itsGame->scores[player->itsManager->Slot()]);
-    nvgText(ctx, g1X + 22.5, gY + full + 10.0, scoreText, NULL);
+    if(player->itsManager != NULL) {
+        snprintf(scoreText, sizeof(scoreText), "%ld", itsGame->scores[player->itsManager->Slot()]);
+        nvgText(ctx, g1X + 22.5, gY + full + 10.0, scoreText, NULL);
+    }
 
     secs = timeTemp % 60;
     timeTemp /= 60;

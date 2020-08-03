@@ -221,6 +221,8 @@ public:
     
     virtual void SpectateNext();
     virtual void SpectatePrevious();
+    virtual bool canBeSpectated(CAbstractPlayer *player);
+
 
     virtual void UpdateViewRect(int width, int height, float pixelRatio);
 
