@@ -32,7 +32,7 @@ jobs:
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
         with:
-          install: zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make
+          install: zip git mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make
       - uses: actions/checkout@v2
       - name: make
         shell: msys2 {0}
@@ -41,6 +41,7 @@ jobs:
           make tests
           build/tests
       - name: deploy nightly
+        if: ${{startsWith("avaraline", env.GITHUB_REPOSITORY)}}
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -72,6 +73,7 @@ jobs:
       - name: run tests
         run: build/tests
       - name: deploy nightly
+        if: ${{startsWith("avaraline", env.GITHUB_REPOSITORY)}}
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
