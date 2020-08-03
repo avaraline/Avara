@@ -41,7 +41,7 @@ jobs:
           make tests
           build/tests
       - name: deploy nightly
-        if: ${{startsWith('avaraline', env.GITHUB_REPOSITORY)}}
+        if: ${{startsWith(env.GITHUB_REPOSITORY, 'avaraline')}}
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -73,7 +73,7 @@ jobs:
       - name: run tests
         run: build/tests
       - name: deploy nightly
-        if: ${{startsWith('avaraline', env.GITHUB_REPOSITORY)}}
+        if: ${{startsWith(env.GITHUB_REPOSITORY, 'avaraline')}}
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
