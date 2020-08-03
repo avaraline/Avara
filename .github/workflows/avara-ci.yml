@@ -37,11 +37,12 @@ jobs:
       - name: make
         shell: msys2 {0}
         run: |
+          make set-version
           make -j winapp
           make tests
           build/tests
       - name: deploy nightly
-        if: ${{startsWith(env.GITHUB_REPOSITORY, 'avaraline')}}
+        if: ${{startsWith(env.GITHUB_REPOSITORY, 'avaraline') && contains(github.ref, 'master')}}
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -73,7 +74,7 @@ jobs:
       - name: run tests
         run: build/tests
       - name: deploy nightly
-        if: ${{startsWith(env.GITHUB_REPOSITORY, 'avaraline')}}
+        if: ${{startsWith(env.GITHUB_REPOSITORY, 'avaraline') && contains(github.ref, 'master')}}
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
