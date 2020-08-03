@@ -103,10 +103,16 @@ class DataBuffer:
         return self.read(1)[0]
 
     def rect(self):
-        return Rect(self.short(), self.short(), self.short(), self.short())
+        r = Rect(self.short(), self.short(), self.short(), self.short())
+        if DEBUG_PARSER:
+            print(f"rect: {r}")
+        return r
 
     def point(self):
-        return Point(self.short(), self.short())
+        p = Point(self.short(), self.short())
+        if DEBUG_PARSER:
+            print(f"point: {p}")
+        return p
 
     def color(self):
         return Color(self.ushort(), self.ushort(), self.ushort())
@@ -198,6 +204,7 @@ class SVGContext:
         self.save_arc_y = None
         self.save_arc_start = None
         self.save_arc_angle = None
+        self.frame = frame
 
     def set_inkscape_options(self):
         defs = etree.SubElement(self.root, "defs")
@@ -259,23 +266,50 @@ class SVGContext:
         self.id += 1
         return (thing + "%s") % self.id
 
-    def text(self, thestr, x=None, y=None, dh=0, dv=0):
+    def get_pen(self):
+        return Point(self.pen_pos.x, self.pen_pos.y)
+
+    def zero_pen(self):
+        return self.pen_size.x == 0 or self.pen_size.y == 0
+
+    def set_pen(self, x=None, y=None, dh=0, dv=0):
+        prev_pen = self.get_pen()
+        print(prev_pen)
         if x:
-            self.text_pos.x = x
-        if y:
-            self.text_pos.y = y
+            self.pen_pos.x = x
+        if y: 
+            self.pen_pos.y = y
         if dh:
-            self.text_pos.x += dh
+            self.pen_pos.x += dh
         if dv:
-            self.text_pos.y += dv
+            self.pen_pos.y += dv
+        new_pen = self.get_pen()
+        if DEBUG_PARSER:
+            print(f"Pen changed {prev_pen} -> {new_pen}")
+            self.line(prev_pen, new_pen, "#444")
+
+
+    def text(self, thestr, x=None, y=None, dh=0, dv=0):
+        start = self.get_pen()
+        end = self.get_pen()
+        if x:
+            end.x = x
+        if y:
+            end.y = y
+        if dh:
+            end.x += dh
+        if dv:
+            end.y += dv
 
         self.buffered.extend([{
             "string": str(line),
-            "x": self.text_pos.x,
-            "y": self.text_pos.y
+            "x": end.x,
+            "y": end.y
             #"x": self.pen_pos.x,
             #"y": self.pen_pos.y
         } for line in thestr.split('\r')])
+        if DEBUG_PARSER:
+            self.line(start, end, "#FFAA33")
 
     def flush_text(self):
         if len(self.buffered) < 1:
@@ -345,6 +379,15 @@ class SVGContext:
         el.set("y", str(rect.top + self.pen_pos.y))
         el.set("width", str(rect.width))
         el.set("height", str(rect.height))
+
+    def line(self, start, end, color):
+        l = self.element("line")
+        l.set("x1", str(start.x))
+        l.set("y1", str(start.y))
+        l.set("x2", str(end.x))
+        l.set("y2", str(end.y))
+        l.set("stroke", color)
+        l.set("stroke-width", "4")
 
     def null_fill(self, el):
         if el == None:
@@ -679,8 +722,7 @@ class Origin (Operation):
         dh, dv = data.unpack('hh')
         if DEBUG_PARSER:
             print(f"Origin {dh},{dv}")
-        context.pen_pos.x -= dh
-        context.pen_pos.y -= dv
+        context.set_pen(dh = -dh, dv = -dv)
 
 
 class TextSize (Operation):
@@ -730,15 +772,21 @@ class Line (Operation):
     def parse(self, data, context):
         start = data.point()
         end = data.point()
-        #context.pen_pos.x += end.x
-        #context.pen_pos.y += end.y
-
+        if DEBUG_PARSER:
+            print(f"Line {start.x} {start.y} -> {end.x} {end.y}")
+        #context.set_pen(x = end.x, y = end.y)
+        if not context.zero_pen():
+            context.line(start, end, "#33FF33")
 
 class LineFrom (Operation):
     def parse(self, data, context):
         p = data.point()
-        #context.pen_pos.x += p.x
-        #context.pen_pos.y += p.y
+        if DEBUG_PARSER:
+            print(f"LineFrom {p.x} {p.y}")
+        #context.set_pen(dh = p.x, dv = p.y)
+        end = context.get_pen()
+        if not context.zero_pen():
+            context.line(p, end, "#44FF44")
 
 
 class ShortLine (Operation):
@@ -746,49 +794,31 @@ class ShortLine (Operation):
     def parse(self, data, context):
         start = data.point()
         dh, dv = data.read(2)
-        old_x = context.pen_pos.x
-        old_y = context.pen_pos.y
-        #context.pen_pos.x += dh
-        #context.pen_pos.y += dv
         if DEBUG_PARSER:
-            print(f"Pen was at {old_x} {old_y}")
             print(f"ShortLine {start.x} {start.y} -> {dh} {dv}")
-            print(f"Pen now at {context.pen_pos.x} {context.pen_pos.y}")
-
-        if context.pen_size.x == 0 or context.pen_size.y == 0:
-            return
-        line = context.element("line")
-        line.set("x1", str(start.x))
-        line.set("y1", str(start.y))
-        line.set("x2", str(context.pen_pos.x))
-        line.set("y2", str(context.pen_pos.y))
-        line.set("stroke", "black")
+        #context.set_pen(dh = dh, dv = dv)
+        new_pen = context.get_pen()
+        new_pen.x += dh
+        new_pen.y += dv
+        if not context.zero_pen():
+            context.line(start, new_pen, "#aa1133")
 
 
 class ShortLineFrom (Operation):
 
     def parse(self, data, context):
         dh, dv = data.read(2)
-        old_x = context.pen_pos.x
-        old_y = context.pen_pos.y
-        #context.pen_pos.x += dh
-        #context.pen_pos.y += dv
-
+        old_pen = context.get_pen()
         if DEBUG_PARSER:
-            print(f"Pen was at {old_x} {old_y}")
             print(f"ShortLineFrom {dh} {dv}")
-            print(f"Pen now at {context.pen_pos.x} {context.pen_pos.y}")
 
-        if context.pen_size.x == 0 or context.pen_size.y == 0:
-            return
+        #context.set_pen(x = dh, y = dv)
+        new_pen = context.get_pen()
+        new_pen.x += dh
+        new_pen.y += dv
 
-        line = context.element("line")
-        line.set("x1", str(old_x))
-        line.set("y1", str(old_y))
-        line.set("x2", str(context.pen_pos.x))
-        line.set("y2", str(context.pen_pos.y))
-        line.set("stroke", "black")
-
+        if not context.zero_pen():
+            context.line(old_pen, new_pen, "#aa1133")
 
 class LongText (Operation):
 
@@ -824,13 +854,13 @@ class DVText (Operation):
         context.text(text, dv = dv)
 
 
-class DHDVText (Operation):
+class text (Operation):
 
     def parse(self, data, context):
         dh, dv, size = data.read(3)
         text = data.read(size).decode('macintosh')
         if DEBUG_PARSER:
-            print(f"DHDVText: dh {dh} dv {dv} size {size}")
+            print(f"text: dh {dh} dv {dv} size {size}")
             print(text.encode('utf-8'))
         context.text(text, dh = dh, dv = dv)
 
@@ -993,8 +1023,8 @@ def arc_path(context, rect, start, angle, arc):
     rx = rect.width // 2
     ry = rect.height // 2
 
-    cx = context.pen_pos.x + rect.left + rx
-    cy = context.pen_pos.y + rect.top + ry
+    cx = (rect.left + context.pen_pos.x) + rx
+    cy = (rect.top + context.pen_pos.y) + ry
 
 
     p1 = polar_to_cartesian(cx, cy, rx, ry, start)
@@ -1169,7 +1199,7 @@ PICT_OPCODES = {
     0x28: LongText,
     0x29: DHText,
     0x2a: DVText,
-    0x2b: DHDVText,
+    0x2b: text,
     0x2c: VariableReserved,
     0x2e: VariableReserved,
     0x30: FrameRectangle,
