@@ -49,8 +49,9 @@ DEPS := $(OBJS:.o=.d)
 # Alternatively set this to "NONE" for no code signing.
 SIGNING_ID := NONE
 
+GIT_HASH := $(shell git describe --always --dirty)
 
-avara: $(BUILD_DIR)/Avara resources
+avara: $(BUILD_DIR)/Avara resources set-version
 
 tests: $(BUILD_DIR)/tests resources
 
@@ -121,6 +122,9 @@ $(BUILD_DIR)/%.mm.o: %.mm
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 .PHONY: clean publish
+
+set-version:
+	echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h
 
 clean:
 	$(RM) -r $(BUILD_DIR)

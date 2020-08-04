@@ -32,15 +32,17 @@ jobs:
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
         with:
-          install: rsync zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make
+          install: rsync git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make
       - uses: actions/checkout@v2
       - name: make
         shell: msys2 {0}
         run: |
+          make set-version
           make -j winapp
           make tests
           build/tests
       - name: deploy nightly
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'master')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -71,7 +73,10 @@ jobs:
         run: make tests
       - name: run tests
         run: build/tests
+      - name: print env variables
+        run: echo $GITHUB_REPOSITORY && echo $GITHUB_REF
       - name: deploy nightly
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'master')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
