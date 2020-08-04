@@ -59,6 +59,7 @@ public:
     virtual void DeadOrDone() = 0;
     virtual short Position() = 0;
     virtual Str255& PlayerName() = 0;
+    virtual std::string GetPlayerName() = 0;
     virtual std::deque<char>& LineBuffer() = 0;
     virtual void Dispose() = 0;
     virtual void NetDisconnect() = 0;
@@ -226,6 +227,8 @@ public:
     virtual Boolean IsLocalPlayer();
     virtual short Position();
     virtual Str255& PlayerName();
+    virtual std::string GetPlayerName();
+    
     virtual std::deque<char>& LineBuffer();
     virtual CAbstractPlayer* GetPlayer();
     virtual short IsRegistered();

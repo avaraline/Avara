@@ -42,6 +42,7 @@ public:
     virtual void DeadOrDone() {}
     virtual short Position() { return 0; }
     virtual Str255& PlayerName() { return str; }
+    virtual std::string GetPlayerName() { return std::string((char *)str + 1, str[0]); }
     virtual std::deque<char>& LineBuffer() { return lineBuffer; }
     virtual void Dispose() {}
     virtual void NetDisconnect() {}

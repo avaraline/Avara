@@ -72,6 +72,9 @@ enum {
 
     kfuScoutView,
     kfuScoutControl,
+    
+    kfuSpectateNext,
+    kfuSpectatePrevious,
 
     kfuPauseGame,
     kfuAbortGame,

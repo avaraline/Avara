@@ -117,6 +117,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     actorList = NULL;
     freshPlayerList = NULL;
     playerList = NULL;
+    spectatePlayer = NULL;
 
     soundSwitches = 0xFF;
 
@@ -189,6 +190,7 @@ void CAvaraGame::Dispose() {
     short i;
     CAbstractActor *nextActor;
 
+    spectatePlayer = NULL;
     LevelReset(false);
 
     scoreKeeper->Dispose();
@@ -268,6 +270,10 @@ void CAvaraGame::RemoveIdent(long ident) {
             theActor->ident = 0;
         }
     }
+}
+
+CAbstractPlayer *CAvaraGame::GetSpectatePlayer() {
+    return spectatePlayer;
 }
 
 CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
@@ -681,7 +687,9 @@ void CAvaraGame::ReadGamePrefs() {
 void CAvaraGame::ResumeGame() {
     Boolean doStart;
     Boolean freshMission = (gameStatus == kReadyStatus);
-
+    if (freshMission) {
+        spectatePlayer = NULL;
+    }
     // TODO: gathering players dialog
 
     ReadGamePrefs();
@@ -836,7 +844,7 @@ bool CAvaraGame::GameTick() {
     teamsStanding = 0;
     teamsStandingMask = 0;
 
-    itsNet->ViewControl(); // This was called by itsApp->theGameWind->DoUpdate() calling RefreshWindow
+    ViewControl(); // This was called by itsApp->theGameWind->DoUpdate() calling RefreshWindow
 
     soundHub->HouseKeep();
     soundTime = soundHub->ReadTime();
@@ -871,7 +879,7 @@ bool CAvaraGame::GameTick() {
 
     itsDepot->RunSliverActions();
     itsApp->StartFrame(frameNumber);
-    itsNet->ViewControl();
+    ViewControl();
 
     if ((itsNet->activePlayersDistribution & itsNet->deadOrDonePlayers) == itsNet->activePlayersDistribution) {
         statusRequest = kWinStatus; //	Just a guess, really. StopGame will change this.
@@ -883,11 +891,96 @@ bool CAvaraGame::GameTick() {
     return true;
 }
 
+void CAvaraGame::ViewControl() {
+    if(spectatePlayer != NULL && FindPlayerManager(spectatePlayer) != NULL) {
+        FindPlayerManager(spectatePlayer)->ViewControl();
+    }
+    else {
+        itsNet->ViewControl();
+    }
+}
+
+bool CAvaraGame::canBeSpectated(CAbstractPlayer *player) {
+    if(player == NULL)
+        return false;
+    
+    if(player->isInLimbo == false) {
+        return true;
+    }
+    
+    if(player == GetLocalPlayer() && player->scoutView == true && player->lives == 0) {
+        return true;
+    }
+    
+    return false;
+}
+
+void CAvaraGame::SpectateNext() {
+    if(spectatePlayer == NULL)
+        spectatePlayer = GetLocalPlayer();
+    
+    CAbstractPlayer *nextPlayer = NULL;
+    CAbstractPlayer *firstPlayer = NULL;
+    CAbstractPlayer *currentPlayer = NULL;
+    bool foundCurrentSpectate = false;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        currentPlayer = itsNet->playerTable[i]->GetPlayer();
+        if(currentPlayer != NULL) {
+            if(firstPlayer == NULL && canBeSpectated(currentPlayer)) {
+                firstPlayer = currentPlayer;
+            }
+            if(currentPlayer == spectatePlayer) {
+                foundCurrentSpectate = true;
+            }
+            else if(foundCurrentSpectate == true && nextPlayer == NULL && canBeSpectated(currentPlayer)) {
+                nextPlayer = currentPlayer;
+            }
+        }
+    }
+    
+    spectatePlayer = nextPlayer;
+    if(spectatePlayer == NULL)
+        spectatePlayer = firstPlayer;
+}
+
+void CAvaraGame::SpectatePrevious() {
+    if(spectatePlayer == NULL)
+        spectatePlayer = GetLocalPlayer();
+
+    CAbstractPlayer *previousPlayer = NULL;
+    CAbstractPlayer *currentPlayer = NULL;
+    bool found = false;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        currentPlayer = itsNet->playerTable[i]->GetPlayer();
+        if(currentPlayer != NULL) {
+            if(currentPlayer == spectatePlayer) {
+                if(previousPlayer != NULL) {
+                    found = true;
+                    spectatePlayer = previousPlayer;
+                }
+            }
+            else if(canBeSpectated(currentPlayer)) {
+                previousPlayer = currentPlayer;
+            }
+        }
+    }
+    
+    if(!found && previousPlayer != NULL)
+        spectatePlayer = previousPlayer;
+}
+
+CPlayerManager *CAvaraGame::FindPlayerManager(CAbstractPlayer *thePlayer) {
+    for (int i = 0; i < kMaxAvaraPlayers; i++)
+        if(itsNet->playerTable[i] != NULL && itsNet->playerTable[i]->GetPlayer() == thePlayer)
+            return itsNet->playerTable[i];
+    
+    return NULL;
+}
+
 void CAvaraGame::StopGame() {
     soundHub->HushFlag(true);
     SDL_SetRelativeMouseMode(SDL_FALSE);
     SDL_StartTextInput();
-
     // SDL_CaptureMouse(SDL_FALSE);
     // SDL_ShowCursor(SDL_ENABLE);
 }
@@ -904,13 +997,13 @@ void CAvaraGame::Render(NVGcontext *ctx) {
 
     if (true || gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus ||
         gameStatus == kLoseStatus) {
-        itsNet->ViewControl();
+        ViewControl();
         itsWorld->Render(itsView);
 
         AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
         hud->Render(itsView, ctx);
-        AvaraGLSetDepthTest(true);
+        AvaraGLSetDepthTest(true);        
     }
 }
 
