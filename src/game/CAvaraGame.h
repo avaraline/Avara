@@ -80,6 +80,7 @@ public:
 
     long topSentFrame;
 
+    long latencyFrameTime; //	In milliseconds.
     long frameTime; //	In milliseconds.
     short gameStatus;
     short statusRequest;

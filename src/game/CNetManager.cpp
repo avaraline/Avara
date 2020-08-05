@@ -39,7 +39,7 @@
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 7
 #else
-    #define kAvaraNetVersion 6
+    #define kAvaraNetVersion 666
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -692,6 +692,8 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
                 if (didChange) {
                     SDL_Log("*** LT set to %ld\n", itsGame->latencyTolerance);
+                    itsGame->latencyFrameTime = itsGame->frameTime * (4 + itsGame->latencyTolerance) / 4;
+                    SDL_Log("*** latencyFrameTime = %ld\n", itsGame->latencyFrameTime);
                     /*
                     if(itsGame->latencyTolerance > 1) {
                         itsGame->latencyTolerance = 1;

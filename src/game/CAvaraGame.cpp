@@ -98,6 +98,7 @@ CNetManager* CAvaraGame::CreateNetManager() {
 
 CAvaraGame::CAvaraGame(int frameTime) {
     this->frameTime = frameTime; // milliseconds
+    this->latencyFrameTime = this->frameTime;
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
@@ -875,7 +876,7 @@ bool CAvaraGame::GameTick() {
 
     canPreSend = true;
     //nextScheduledFrame = startTime + frameTime;
-    nextScheduledFrame += frameTime;
+    nextScheduledFrame += latencyFrameTime;
 
     itsDepot->RunSliverActions();
     itsApp->StartFrame(frameNumber);
