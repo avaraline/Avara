@@ -21,8 +21,8 @@
 #define kMaxTransmitQueueLength 128 //	128 packets going out...
 #define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
 
-#define RTTSMOOTHFACTOR_UP 5
-#define RTTSMOOTHFACTOR_DOWN 30
+#define RTTSMOOTHFACTOR_UP 10
+#define RTTSMOOTHFACTOR_DOWN 20
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 2
 
