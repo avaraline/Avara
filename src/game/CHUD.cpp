@@ -15,8 +15,8 @@ const std::vector<long> team_colors =
     {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor, kOrangeTeamColor, kLimeTeamColor};
 
 void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
-    if(itsGame->gameStatus != kPlayingStatus) {
-        std::string level((char *)itsGame->loadedLevel + 1, itsGame->loadedLevel[0]);
+    std::string level((char *)itsGame->loadedLevel + 1, itsGame->loadedLevel[0]);
+    if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
         float x = 0.0;
