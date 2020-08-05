@@ -6,6 +6,7 @@
     Created: Monday, May 15, 1995, 22:25
     Modified: Tuesday, September 17, 1996, 03:21
 */
+#include <algorithm> // std::max
 
 #include "CNetManager.h"
 
@@ -692,7 +693,8 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
                 if (didChange) {
                     SDL_Log("*** LT set to %ld\n", itsGame->latencyTolerance);
-                    itsGame->latencyFrameTime = itsGame->frameTime * (4 + itsGame->latencyTolerance) / 4;
+                    // standard frame rate for LT 0-1, increases beyond that
+                    itsGame->latencyFrameTime = itsGame->frameTime * std::max(3 + itsGame->latencyTolerance, (long)4) / 4;
                     SDL_Log("*** latencyFrameTime = %ld\n", itsGame->latencyFrameTime);
                     /*
                     if(itsGame->latencyTolerance > 1) {
