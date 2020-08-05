@@ -51,7 +51,7 @@ SIGNING_ID := NONE
 
 GIT_HASH := $(shell git describe --always --dirty)
 
-avara: $(BUILD_DIR)/Avara resources set-version
+avara: set-version $(BUILD_DIR)/Avara resources
 
 tests: $(BUILD_DIR)/tests resources
 
