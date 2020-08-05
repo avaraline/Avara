@@ -209,7 +209,34 @@ class SVGContext:
     def set_inkscape_options(self):
         defs = etree.SubElement(self.root, "defs")
         defs.set("id", "defs2")
+        """
+        startm = etree.SubElement(defs, "marker")
+        startm.set(ns("isstock", ISNS), "true")
+        startm.set(ns("stockid", ISNS), "Arrow1Lend")
+        startm.set("style", "overflow:visible;")
+        startm.set("id", "Arrow1Lend")
+        startm.set("refX", "0.0")
+        startm.set("refY", "0.0")
+        startm.set("orient", "auto")
+        startmp = etree.SubElement(startm, "path")
+        startmp.set("id", "path1549")
+        startmp.set("transform", "scale(0.8) rotate(180) translate(12.5,0)")
+        startmp.set("d", "M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z ")
+        startmp.set("style", "fill-rule:evenodd;stroke:#44ff44;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1")
 
+        endm = etree.SubElement(defs, "marker")
+        endm.set(ns("isstock", ISNS), "true")
+        endm.set(ns("stockid", ISNS), "EmptyDiamondMend")
+        endm.set("id", "EmptyDiamondMend")
+        endm.set("refX", "0.0")
+        endm.set("refY", "0.0")
+        endm.set("orient", "auto")
+        endmp = etree.SubElement(startm, "path")
+        endmp.set("id", "path1673")
+        endmp.set("transform","scale(0.8) rotate(180) translate(12.5,0)")
+        endmp.set("d", "M 0,-7.0710768 L -7.0710894,0 L 0,7.0710589 L 7.0710462,0 L 0,-7.0710768 z ")
+        endmp.set("style", "ill-rule:evenodd;stroke:#44ff44;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1")
+        """
         view = etree.SubElement(self.root, ns("namedview", SPNS))
         view.set("id", "base")
         view.set("pagecolor", "#ffffff")
@@ -381,13 +408,29 @@ class SVGContext:
         el.set("height", str(rect.height))
 
     def line(self, start, end, color):
-        l = self.element("line")
-        l.set("x1", str(start.x))
-        l.set("y1", str(start.y))
-        l.set("x2", str(end.x))
-        l.set("y2", str(end.y))
+        if start == end:
+            return
+        lg = self.element("g")
+        l = etree.SubElement(lg, "path")
+        l.set("id", self.getid("path"))
+        l.set("d", f"M {start.x} {start.y} L {end.x} {end.y}")
         l.set("stroke", color)
-        l.set("stroke-width", "4")
+        l.set("stroke-width", "1pt")
+        if DEBUG_PARSER:
+            # start marked with circle
+            c = etree.SubElement(lg, "circle")
+            c.set("cx", str(start.x))
+            c.set("cy", str(start.y))
+            c.set("stroke", color)
+            c.set("stroke-width", "1pt")
+            c.set("fill", "none")
+            c.set("r", "15")
+            # end marked with X
+            x = etree.SubElement(lg, "path")
+            x.set("d", f"M {end.x - 10} {end.y -10} L {end.x + 10} {end.y + 10} M {end.x - 10} {end.y + 10} L {end.x + 10} {end.y - 10}")
+            x.set("stroke", color)
+            x.set("stroke-width", "1pt")
+            x.set("fill", "none")
 
     def null_fill(self, el):
         if el == None:
@@ -776,7 +819,7 @@ class Line (Operation):
             print(f"Line {start.x} {start.y} -> {end.x} {end.y}")
         #context.set_pen(x = end.x, y = end.y)
         if not context.zero_pen():
-            context.line(start, end, "#33FF33")
+            context.line(start, end, "#005500")
 
 class LineFrom (Operation):
     def parse(self, data, context):
@@ -786,7 +829,7 @@ class LineFrom (Operation):
         #context.set_pen(dh = p.x, dv = p.y)
         end = context.get_pen()
         if not context.zero_pen():
-            context.line(p, end, "#44FF44")
+            context.line(p, end, "#88FF88")
 
 
 class ShortLine (Operation):
@@ -801,7 +844,7 @@ class ShortLine (Operation):
         new_pen.x += dh
         new_pen.y += dv
         if not context.zero_pen():
-            context.line(start, new_pen, "#aa1133")
+            context.line(start, new_pen, "#990011")
 
 
 class ShortLineFrom (Operation):
