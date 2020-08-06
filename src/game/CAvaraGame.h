@@ -243,6 +243,8 @@ public:
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
     virtual double FrameTimeScale(double exponent=1);
+
+    virtual void AdjustLatencyFrameTime();
 };
 
 #ifndef MAINAVARAGAME

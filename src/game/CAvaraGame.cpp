@@ -98,7 +98,8 @@ CNetManager* CAvaraGame::CreateNetManager() {
 
 CAvaraGame::CAvaraGame(int frameTime) {
     this->frameTime = frameTime; // milliseconds
-    this->latencyFrameTime = this->frameTime;
+    this->latencyTolerance = gApplication->Number(kLatencyToleranceTag);
+    this->AdjustLatencyFrameTime();
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
@@ -870,13 +871,14 @@ bool CAvaraGame::GameTick() {
 
     itsNet->AutoLatencyControl(frameNumber, longWait);
 
+SDL_Log("latencyTolerance = %ld\n", latencyTolerance);
     if (latencyTolerance)
         while (frameNumber + latencyTolerance > topSentFrame)
             itsNet->FrameAction();
 
     canPreSend = true;
     //nextScheduledFrame = startTime + frameTime;
-    nextScheduledFrame += latencyFrameTime;
+    nextScheduledFrame = startTime + latencyFrameTime;
 
     itsDepot->RunSliverActions();
     itsApp->StartFrame(frameNumber);
@@ -1022,4 +1024,11 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 
 double CAvaraGame::FrameTimeScale(double exponent) {
     return pow(double(frameTime)/CLASSICFRAMETIME, exponent);
+}
+
+
+void CAvaraGame::AdjustLatencyFrameTime() {
+    // user standard frame rate for LT 0-1, increase beyond that
+    latencyFrameTime = frameTime * std::max(3 + latencyTolerance, (long)4) / 4;
+    SDL_Log("*** latencyFrameTime = %ld\n", latencyFrameTime);
 }
