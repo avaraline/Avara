@@ -4,9 +4,13 @@ CC = clang
 CXX = clang++
 
 GIT_HASH := $(shell git describe --always --dirty)
-GIT_BRANCH := $(shell git branch --show-current)
+GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
-BUILD_DIR ?= build-$(GIT_BRANCH)
+ifneq ($(GIT_BRANCH),)
+    BUILD_DIR ?= build-$(GIT_BRANCH)
+else
+    BUILD_DIR ?= build
+endif
 SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
 UNAME := $(shell uname)
@@ -139,7 +143,7 @@ clean:
 	$(RM) -r $(BUILD_DIR)
 
 publish:
-	scp build/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
+	scp $(BUILD_DIR)/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
 	# python3 bin/pict2svg.py
