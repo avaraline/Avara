@@ -3,7 +3,10 @@
 CC = clang
 CXX = clang++
 
-BUILD_DIR ?= build
+GIT_HASH := $(shell git describe --always --dirty)
+GIT_BRANCH := $(shell git branch --show-current)
+
+BUILD_DIR ?= build-$(GIT_BRANCH)
 SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
 UNAME := $(shell uname)
@@ -49,9 +52,7 @@ DEPS := $(OBJS:.o=.d)
 # Alternatively set this to "NONE" for no code signing.
 SIGNING_ID := NONE
 
-GIT_HASH := $(shell git describe --always --dirty)
-
-avara: set-version $(BUILD_DIR)/Avara resources
+avara: set-version $(BUILD_DIR)/Avara resources build-link
 
 tests: $(BUILD_DIR)/tests resources
 
@@ -125,6 +126,14 @@ $(BUILD_DIR)/%.mm.o: %.mm
 
 set-version:
 	echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h
+
+build-link: $(BUILD_DIR)/Avara
+	@if [ ! -e build ] || [ -h build ]; then \
+		echo "build -> $(BUILD_DIR)" ; \
+		ln -fns $(BUILD_DIR) build ; \
+	else \
+		echo "build is not a link so not linking build -> $(BUILD_DIR)" ; \
+	fi
 
 clean:
 	$(RM) -r $(BUILD_DIR)
