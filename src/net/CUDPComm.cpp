@@ -10,6 +10,11 @@
 #define RANDOMLY_DROP_PACKETS 0
 #if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
+#define SIMULATE_LATENCY_MEAN   250000
+#define SIMULATE_LATENCY_JITTER  20000
+// split between receive & send
+#define SIMULATE_LATENCY_FORMULA (SIMULATE_LATENCY_MEAN - SIMULATE_LATENCY_JITTER/2 + int((SIMULATE_LATENCY_JITTER)*float(rand())/RAND_MAX)) / 2
+#define SIMULATE_LATENCY_DISTRIBUTION  0x02  // bitmask of who gets the latency
 #endif
 #if RANDOMLY_DROP_PACKETS
 int numToDrop = 0;
@@ -610,6 +615,12 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
         char *inEnd;
         short inLen;
 
+        #if SIMULATE_LATENCY_ON_CLIENTS
+            if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) {
+                usleep(SIMULATE_LATENCY_FORMULA); // simulate network latencies
+            }
+        #endif
+
         curTime = GetClock();
         inData.c = (char *)packet->data; // receivePB.csParam.receive.rcvBuff;
         inLen = packet->len; // receivePB.csParam.receive.rcvBuffLen;
@@ -1057,8 +1068,8 @@ Boolean CUDPComm::AsyncWrite() {
                 } else {
             #endif
             #if SIMULATE_LATENCY_ON_CLIENTS
-                if (myId >= 1) {
-                    usleep(50000 + int(20000*float(rand())/RAND_MAX)); // simulate network latencies
+                if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) {
+                    usleep(SIMULATE_LATENCY_FORMULA); // simulate network latencies
                 }
             #endif
             UDPWrite(stream, udp, UDPWriteComplete, this);
