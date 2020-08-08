@@ -1027,8 +1027,7 @@ Boolean CUDPComm::AsyncWrite() {
         while (packetList && packetList != kPleaseSendAcknowledge) {
             thePacket = (UDPPacketInfo *)packetList->packet.qLink;
 
-            if (packetList->birthDate ==
-                packetList->nextSendTime) { //	This was the first time the packet was ever sent out.
+            if (packetList->sendCount++ == 0) {  //	This is the first time to send the packet
 
                 packetList->birthDate = curTime;
 

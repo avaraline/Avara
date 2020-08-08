@@ -24,6 +24,7 @@ typedef struct {
     // int32_t lastSendTime;
     int32_t nextSendTime;
     int16_t serialNumber;
+    int16_t sendCount;
 
 } UDPPacketInfo;
 #pragma pack()

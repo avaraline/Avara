@@ -159,6 +159,7 @@ void CUDPConnection::ProcessBusyQueue(long curTime) {
 
     while ((thePacket = (UDPPacketInfo *)queues[kBusyQ].qHead)) {
         if (noErr == Dequeue((QElemPtr)thePacket, &queues[kBusyQ])) {
+            thePacket->sendCount = 0;
             thePacket->birthDate = curTime;
             thePacket->nextSendTime = curTime;
             thePacket->serialNumber = serialNumber;
@@ -187,7 +188,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
     while (bestPacket != NULL) {
         // make sure the we are actually beyond packet's nextSendTime, avoids extra resends
         if (curTime >= bestPacket->nextSendTime &&
-            (bestPacket->birthDate == bestPacket->nextSendTime || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
+            (bestPacket->sendCount == 0 || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
             break;
         }
         bestPacket = (UDPPacketInfo *)bestPacket->packet.qLink;
@@ -235,7 +236,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
                 #endif
                 // if this candidate packet has a smaller sendTime AND (it's never been sent OR we haven't reached the resend limit)
                 if (bestSendTime > theSendTime &&
-                    (thePacket->birthDate == thePacket->nextSendTime || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
+                    (thePacket->sendCount == 0 || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
                     // this is the NEW bestPacket
                     bestSendTime = theSendTime;
                     bestPacket = thePacket;
@@ -357,7 +358,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
                 meanRoundTripTime = roundTrip;
                 varRoundTripTime = roundTrip * roundTrip;  // err on the high side initially
             }
-        } else if (UseCommandForStats(thePacket->packet.command)) {
+        } else if (thePacket->sendCount == 1 && UseCommandForStats(thePacket->packet.command)) {
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
