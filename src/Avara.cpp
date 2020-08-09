@@ -68,6 +68,7 @@ int main(int argc, char *argv[]) {
     // process command-line arguments
     std::string connectAddress;
     bool host = false;
+    int svglevels = 0;
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
         if (arg == "-p" || arg == "--port") {
@@ -79,6 +80,9 @@ int main(int argc, char *argv[]) {
             connectAddress = std::string(argv[++i]);
         } else if (arg == "-h" || arg == "--host") {
             host = true;
+        } else if (arg == "--svglevels") {
+            svglevels = 1;
+            SDL_Log("SVG levels enabled");
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
@@ -90,6 +94,8 @@ int main(int argc, char *argv[]) {
     } else if(connectAddress.size() > 0) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
+
+    app->Set(kUseSVG, svglevels);
 
     mainloop(app->GetGame()->frameTime / 4);
 

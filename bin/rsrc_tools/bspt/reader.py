@@ -146,7 +146,7 @@ class BSP(object):
             import numpy as np
         except ImportError:
             print("triangle, matplotlib and/or numpy libraries not found, will not output triangulations")
-            return d
+            raise
 
         d["triangles_poly"] = list()
         d["triangles_verts_poly"] = list()

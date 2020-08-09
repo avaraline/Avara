@@ -19,6 +19,7 @@
 #include "Resource.h"
 
 #include <SDL2/SDL.h>
+#include <string.h>
 
 #define textBufferSize 4096
 
@@ -361,7 +362,7 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
     }
 }
 
-void SVGConvertToLevelMap() {
+void SVGConvertToLevelMap(std::string path) {
     InitParser();
     SVGParser *parser = new SVGParser();
     parser->callbacks.rectProc = &SvgRect;
@@ -370,7 +371,7 @@ void SVGConvertToLevelMap() {
     parser->callbacks.arcProc = &SvgArc;
     parser->callbacks.ellipseProc = &SvgEllipse;
 
-    parser->Parse();
+    parser->Parse(path);
     delete parser;
     TextBreak();
     FreshCalc();

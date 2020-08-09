@@ -9,6 +9,7 @@
 
 #pragma once
 #include "Types.h"
+#include <string>
 
 enum {
     iDesignerName,
@@ -312,7 +313,7 @@ enum {
 };
 
 void ConvertToLevelMap(Handle levelData);
-void SVGConvertToLevelMap();
+void SVGConvertToLevelMap(std::string path);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);

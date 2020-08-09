@@ -46,6 +46,7 @@ using json = nlohmann::json;
 // Levels
 #define kRecentSets "recentSets"
 #define kRecentLevels "recentLevels"
+#define kUseSVG "useSVG"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {

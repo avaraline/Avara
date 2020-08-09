@@ -33,6 +33,7 @@
 #include "Beeper.h"
 #include "httplib.h"
 #include <chrono>
+#include <json.hpp>
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -209,7 +210,6 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 
 
 OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
-    SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
     gCurrentGame = itsGame;
@@ -218,13 +218,26 @@ OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
     char byte2 = (theLevel & 0x0000ff00) >> 8;
     char byte3 = (theLevel & 0x00ff0000) >> 16;
     char byte4 = (theLevel & 0xff000000) >> 24;
+    std::string leveltag = std::string({byte4, byte3, byte2, byte1});
+    SDL_Log("LEVEL TAG STRING: %s", leveltag.c_str());
+    
 
-    std::string test = std::string({byte4, byte3, byte2, byte1});
-    SDL_Log("%s", test.c_str());
+    std::stringstream setManifestName;
+    setManifestName << "levels/" << set << "/set.json";
+    std::ifstream setManifestFile(setManifestName.str());
+    if (setManifestFile.fail()) {
+        SDL_Log("Couldn't read %s", setManifestName.str().c_str());
+        return -1;
+    }
 
-    std::string svgdir = std::string("levels/") + set + "_svg/";
+    json setManifest = json::parse(setManifestFile);
+    json ledi = setManifest["LEDI"][leveltag];
+    
+    std::string svgname = ledi["Svg"];
+    std::string svgdir = std::string("levels/") + set + "/";
     SDL_Log("%s", svgdir.c_str());
-    SVGConvertToLevelMap();
+    std::string svgpath = BundlePath((svgdir + std::string("svg/") + svgname).c_str());
+    SVGConvertToLevelMap(svgpath);
     return noErr;
 }
 
@@ -233,6 +246,11 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
+
+    if(this->Get(kUseSVG) == 1) {
+        return LoadSVGLevel(set, theLevel);
+    }
+
     gCurrentGame = itsGame;
 
     std::string rsrcFile = std::string("levels/") + set + ".r";
