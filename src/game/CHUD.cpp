@@ -42,18 +42,18 @@ void CHUD::DrawScore(int playerCount, int chudHeight, CViewParameters *view, NVG
         int colorR, colorG, colorB;
         NVGcolor aliveColor = nvgRGBA(255, 255, 255, 255);
         NVGcolor deadColor = nvgRGBA(165, 165, 165, 255);
+        NVGcolor highColor = nvgRGBA(255, 0, 0, 255);
         float colWidth = 80;
         float rankWidth = 40;
 
         //sort by highscore
+        int highKills = 0;
         std::vector<std::pair<PlayerScoreRecord, int> > sortedPlayers;
         for (int i = 0; i < kMaxAvaraPlayers; ++i) {
             sortedPlayers.push_back(std::make_pair(theScores.player[i], i));
+            highKills = std::max(highKills, (int)theScores.player[i].kills);
         }
         std::sort(sortedPlayers.begin(), sortedPlayers.end(), sortByScore);
-        
-//        for (int i = 0; i < sortedPlayers.size(); i++)
-//            SDL_Log("sortedPlayers %d", sortedPlayers[i].second);
 
         //draw score box
         nvgBeginPath(ctx);
@@ -101,6 +101,7 @@ void CHUD::DrawScore(int playerCount, int chudHeight, CViewParameters *view, NVG
             colorR = (longTeamColor >> 16) & 0xff;
             colorG = (longTeamColor >> 8) & 0xff;
             colorB = longTeamColor & 0xff;
+            NVGcolor textColor = aliveColor;
             
             if(playerName.size() > 0) {
                 playerRank++;
@@ -122,9 +123,10 @@ void CHUD::DrawScore(int playerCount, int chudHeight, CViewParameters *view, NVG
 
                 //score text settings
                 if(playerLives > 0)
-                    nvgFillColor(ctx, aliveColor);
+                    textColor = aliveColor;
                 else
-                    nvgFillColor(ctx, deadColor);
+                    textColor = deadColor;
+                nvgFillColor(ctx, textColor);
                 nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
                 nvgFontSize(ctx, fontsz_m);
 
@@ -143,7 +145,13 @@ void CHUD::DrawScore(int playerCount, int chudHeight, CViewParameters *view, NVG
                 
                 nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
                 nvgText(ctx, x + colorBoxWidth + colWidth*4, y, std::to_string(theScores.player[playerTableIndex].points).c_str(), NULL);
+
+                //kills
+                if(highKills > 0 && theScores.player[playerTableIndex].kills == highKills)
+                    nvgFillColor(ctx, highColor);
                 nvgText(ctx, x + colorBoxWidth + colWidth*5, y, std::to_string(theScores.player[playerTableIndex].kills).c_str(), NULL);
+                nvgFillColor(ctx, textColor);
+
                 //nvgText(ctx, x + colorBoxWidth + colWidth*5, y, std::to_string(theScores.player[i].lives).c_str(), NULL); //lives not set here
                 nvgText(ctx, x + colorBoxWidth + colWidth*6, y, std::to_string(playerLives).c_str(), NULL);
                 

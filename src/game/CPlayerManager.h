@@ -161,7 +161,7 @@ private:
     short slot;
     short playerColor;
     
-    bool showScoreboard;
+    bool showScoreboard = false;
 
     Point mouseCenterPosition;
     Boolean isLocalPlayer;

@@ -12,9 +12,11 @@ CWindow::~CWindow() {
 }
 
 void CWindow::restoreState() {
-    long x = mApplication->Number(title() + "X", 50);
-    long y = mApplication->Number(title() + "Y", 50);
-    setPosition(nanogui::Vector2i(x, y));
+    long x = mApplication->Number(title() + "X", LONG_MIN);
+    long y = mApplication->Number(title() + "Y", LONG_MIN);
+    
+    if(x != LONG_MIN && y != LONG_MIN)
+        setPosition(nanogui::Vector2i(x, y));
 }
 
 void CWindow::saveState() {
