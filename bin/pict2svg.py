@@ -328,9 +328,18 @@ class SVGContext:
             end.y = y
         if dh:
             end.x += dh
+            if len(self.buffered) > 0:
+                self.buffered[-1]["string"] += thestr
+                return
         if dv:
             end.y += dv
 
+        self.buffered.extend([{
+            "string": thestr.replace("\r", ""),
+            "x": end.x,
+            "y": end.y
+        }])
+        """
         self.buffered.extend([{
             "string": str(line),
             "x": end.x,
@@ -338,6 +347,7 @@ class SVGContext:
             #"x": self.pen_pos.x,
             #"y": self.pen_pos.y
         } for line in thestr.split('\r')])
+        """
         if DEBUG_PARSER:
             self.line(start, end, "#FFAA33")
 
@@ -411,7 +421,7 @@ class SVGContext:
         el.set("height", str(rect.height))
 
     def line(self, start, end, color):
-        if start == end:
+        if not DEBUG_PARSER or start == end:
             return
         lg = self.element("g")
         l = etree.SubElement(lg, "path")
@@ -419,21 +429,20 @@ class SVGContext:
         l.set("d", f"M {start.x} {start.y} L {end.x} {end.y}")
         l.set("stroke", color)
         l.set("stroke-width", "1pt")
-        if DEBUG_PARSER:
-            # start marked with circle
-            c = etree.SubElement(lg, "circle")
-            c.set("cx", str(start.x))
-            c.set("cy", str(start.y))
-            c.set("stroke", color)
-            c.set("stroke-width", "1pt")
-            c.set("fill", "none")
-            c.set("r", "15")
-            # end marked with X
-            x = etree.SubElement(lg, "path")
-            x.set("d", f"M {end.x - 10} {end.y -10} L {end.x + 10} {end.y + 10} M {end.x - 10} {end.y + 10} L {end.x + 10} {end.y - 10}")
-            x.set("stroke", color)
-            x.set("stroke-width", "1pt")
-            x.set("fill", "none")
+        # start marked with circle
+        c = etree.SubElement(lg, "circle")
+        c.set("cx", str(start.x))
+        c.set("cy", str(start.y))
+        c.set("stroke", color)
+        c.set("stroke-width", "1pt")
+        c.set("fill", "none")
+        c.set("r", "15")
+        # end marked with X
+        x = etree.SubElement(lg, "path")
+        x.set("d", f"M {end.x - 10} {end.y -10} L {end.x + 10} {end.y + 10} M {end.x - 10} {end.y + 10} L {end.x + 10} {end.y - 10}")
+        x.set("stroke", color)
+        x.set("stroke-width", "1pt")
+        x.set("fill", "none")
 
     def null_fill(self, el):
         if el == None:
