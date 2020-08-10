@@ -98,8 +98,6 @@ CNetManager* CAvaraGame::CreateNetManager() {
 
 CAvaraGame::CAvaraGame(int frameTime) {
     this->frameTime = frameTime; // milliseconds
-    this->latencyTolerance = gApplication->Number(kLatencyToleranceTag);
-    this->AdjustLatencyFrameTime();
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
@@ -684,6 +682,8 @@ static Boolean takeShot = false;
 
 void CAvaraGame::ReadGamePrefs() {
     sensitivity = itsApp->Number(kMouseSensitivityTag);
+    latencyTolerance = gApplication->Number(kLatencyToleranceTag);
+    AdjustLatencyFrameTime();
 }
 
 void CAvaraGame::ResumeGame() {
