@@ -17,7 +17,7 @@ import json
 import sys
 from lxml import etree
 
-DEBUG_PARSER = True
+DEBUG_PARSER = False
 
 
 class Rect:
@@ -291,7 +291,10 @@ class SVGContext:
 
     def getid(self, thing):
         self.id += 1
-        return (thing + "%s") % self.id
+        thingid = (thing + "%s") % self.id
+        if DEBUG_PARSER:
+            print(thingid)
+        return thingid
 
     def get_pen(self):
         return Point(self.pen_pos.x, self.pen_pos.y)
