@@ -871,7 +871,7 @@ bool CAvaraGame::GameTick() {
 
     itsNet->AutoLatencyControl(frameNumber, longWait);
 
-SDL_Log("latencyTolerance = %ld\n", latencyTolerance);
+    // SDL_Log("latencyTolerance = %ld, latencyFrameTime = %ld\n", latencyTolerance, latencyFrameTime);
     if (latencyTolerance)
         while (frameNumber + latencyTolerance > topSentFrame)
             itsNet->FrameAction();
@@ -1033,14 +1033,18 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTripTime) {
 }
 
 
-void CAvaraGame::AdjustLatencyTolerance(long newLatency) {
+void CAvaraGame::SetLatencyTolerance(long newLatency, bool limitChange) {
     if (latencyTolerance != newLatency) {
         #define MAX_LATENCY ((long)8)
         #define MAX_LATENCY_CHANGE 2
-        if (newLatency < latencyTolerance) {
-            latencyTolerance = std::max(latencyTolerance-MAX_LATENCY_CHANGE, newLatency);
+        if (limitChange) {
+            if (newLatency < latencyTolerance) {
+                latencyTolerance = std::max(latencyTolerance-MAX_LATENCY_CHANGE, newLatency);
+            } else {
+                latencyTolerance = std::min(latencyTolerance+MAX_LATENCY_CHANGE, std::min(newLatency, MAX_LATENCY));
+            }
         } else {
-            latencyTolerance = std::min(latencyTolerance+MAX_LATENCY_CHANGE, std::min(newLatency, MAX_LATENCY));
+            latencyTolerance = newLatency;
         }
         SDL_Log("*** LT set to %ld\n", latencyTolerance);
         AdjustFrameTime();

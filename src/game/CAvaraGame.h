@@ -245,7 +245,7 @@ public:
     virtual double FrameTimeScale(double exponent=1);
 
     virtual long RoundTripToFrameLatency(long rtt);
-    virtual void AdjustLatencyTolerance(long newLatency);
+    virtual void SetLatencyTolerance(long newLatency, bool limitChange = true);
     virtual void AdjustFrameTime();
 };
 

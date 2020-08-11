@@ -682,7 +682,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                 SDL_Log("*** maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d frameTime=%ld\n",
                         maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency, itsGame->frameTime);
 
-                itsGame->AdjustLatencyTolerance(maxFrameLatency);
+                itsGame->SetLatencyTolerance(maxFrameLatency);
             }
 
             autoLatencyVote = 0;
@@ -923,10 +923,10 @@ void CNetManager::DoConfig(short senderSlot) {
 
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
         if (itsGame->latencyTolerance < theConfig->latencyTolerance)
-            itsGame->latencyTolerance = theConfig->latencyTolerance;
+            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, false);
     } else {
         if (senderSlot == 0) {
-            itsGame->latencyTolerance = theConfig->latencyTolerance;
+            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, false);
         }
     }
 }
