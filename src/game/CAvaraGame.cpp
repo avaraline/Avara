@@ -683,7 +683,7 @@ static Boolean takeShot = false;
 void CAvaraGame::ReadGamePrefs() {
     sensitivity = itsApp->Number(kMouseSensitivityTag);
     latencyTolerance = gApplication->Number(kLatencyToleranceTag);
-    AdjustLatencyFrameTime();
+    AdjustFrameTime();
 }
 
 void CAvaraGame::ResumeGame() {
@@ -877,7 +877,7 @@ SDL_Log("latencyTolerance = %ld\n", latencyTolerance);
             itsNet->FrameAction();
 
     canPreSend = true;
-    //nextScheduledFrame = startTime + frameTime;
+
     nextScheduledFrame = startTime + latencyFrameTime;
 
     itsDepot->RunSliverActions();
@@ -1027,8 +1027,57 @@ double CAvaraGame::FrameTimeScale(double exponent) {
 }
 
 
-void CAvaraGame::AdjustLatencyFrameTime() {
-    // user standard frame rate for LT 0-1, increase beyond that
-    latencyFrameTime = frameTime * std::max(3 + latencyTolerance, (long)4) / 4;
+long CAvaraGame::RoundTripToFrameLatency(long roundTripTime) {
+    // half of the roundTripTime in units of frameTime, rounded
+    return (roundTripTime + frameTime) / (2*frameTime);
+}
+
+
+void CAvaraGame::AdjustLatencyTolerance(long newLatency) {
+    if (latencyTolerance != newLatency) {
+        #define MAX_LATENCY ((long)8)
+        #define MAX_LATENCY_CHANGE 2
+        if (newLatency < latencyTolerance) {
+            latencyTolerance = std::max(latencyTolerance-MAX_LATENCY_CHANGE, newLatency);
+        } else {
+            latencyTolerance = std::min(latencyTolerance+MAX_LATENCY_CHANGE, std::min(newLatency, MAX_LATENCY));
+        }
+        SDL_Log("*** LT set to %ld\n", latencyTolerance);
+        AdjustFrameTime();
+    }
+}
+
+void CAvaraGame::AdjustFrameTime() {
+    // Why this equation?  I wanted it to be a parabolic function because of the
+    // N^2 nature of the number of messages sent for the game... (players*(players-1)).
+    // So, theoretically, the game will tend to slow down as a square of the number of players.
+    // In choosing the divisor you have to consider playability (low latency) vs
+    // recoverability (reduced message sending).
+    // If it errs too much on the side of playability then it may not recover from big latency spikes.
+    // If it errs too much on the side of recoverability, then it may not be playable for moderate latencies.
+
+    // I chose the LATENCY_DIVISOR by trying to keep LT=4 at a barely playable level.
+    // The numbers at this highest levels are not intended to be playable but to keep the game chugging
+    // along and give it a chance to catch up when things get bad.
+    // And below that point, we want to keep the game playable as long as possible so the parabolic
+    // shape tries to keep the latency as low as possible in the play zone.
+
+    #define LATENCY_DIVISOR 12
+    // The LATENCY_DIVISOR constant defines the shape of the latency curve (larger = more playable, smaller = better recovery).
+    // Here is a summary how the LATENCY_DIVISOR of 12 affects playability and recoverability:
+    //    LT  frameTime(ms) latency(ms)  messages/sec
+    //    0   64            0            16   <-- most playable (LAN)
+    //    1   64            64           16   <-- good internet
+    //    2   64            128          16
+    //    3   64            192          16   <-- somewhat playable
+    //    4   80            320          13   <-- barely playable / begin recovering?
+    //    5   128           640          8    <-- hope to never see LT > 4
+    //    6   192           1152         5
+    //    7   256           1792         4
+    //    8   336           2688         3    <-- trying to recover!  If it were a horse, I'd shoot it.
+
+    #define ATOMIC_TIME_DIVISOR 4  // actual game loop clock time is frameTime/4
+    // calculate latencyFrameTime as integer multiple of the "atomic" clock value
+    latencyFrameTime = frameTime * std::max(1.0, round(ATOMIC_TIME_DIVISOR * pow(latencyTolerance, 2) / LATENCY_DIVISOR) / ATOMIC_TIME_DIVISOR);
     SDL_Log("*** latencyFrameTime = %ld\n", latencyFrameTime);
 }

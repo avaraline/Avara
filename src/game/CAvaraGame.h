@@ -244,7 +244,9 @@ public:
 
     virtual double FrameTimeScale(double exponent=1);
 
-    virtual void AdjustLatencyFrameTime();
+    virtual long RoundTripToFrameLatency(long rtt);
+    virtual void AdjustLatencyTolerance(long newLatency);
+    virtual void AdjustFrameTime();
 };
 
 #ifndef MAINAVARAGAME

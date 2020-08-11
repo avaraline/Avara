@@ -40,7 +40,7 @@
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 8
 #else
-    #define kAvaraNetVersion 7  // in honor of Seven and his mighty latency
+    #define kAvaraNetVersion 070  // in honor of Seven and his mighty latency
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -669,8 +669,6 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             }
 
             if ((serverOptions & (1 << kUseAutoLatencyBit)) && autoLatencyVoteCount) {
-                Boolean didChange = false;
-                long curLatency = itsGame->latencyTolerance;
                 long maxFrameLatency;
 
                 autoLatencyVote /= autoLatencyVoteCount;
@@ -679,39 +677,12 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                     addOneLatency = 1;
                 }
 
-                maxFrameLatency = addOneLatency + (maxRoundTripLatency + itsGame->frameTime) /
-                                                      (itsGame->frameTime + itsGame->frameTime);
+                maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                SDL_Log("maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d frameTime=%ld\n",
+                SDL_Log("*** maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d frameTime=%ld\n",
                         maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency, itsGame->frameTime);
 
-                if (maxFrameLatency > 8)
-                    maxFrameLatency = 8;
-
-                if (maxFrameLatency < curLatency) {
-                    addOneLatency = 0;
-                    // itsGame->latencyTolerance--;
-                    // allow latency to move by as much as 2
-                    itsGame->latencyTolerance -= std::min((long)2, curLatency - maxFrameLatency);
-                    gApplication->Set(kLatencyToleranceTag, itsGame->latencyTolerance);
-                    didChange = true;
-                // } else if (maxFrameLatency > curLatency && autoLatencyVote > LOWERLATENCYCOUNT) {
-                } else if (maxFrameLatency > curLatency) {
-                    // itsGame->latencyTolerance++;
-                    itsGame->latencyTolerance += std::min((long)2, maxFrameLatency - curLatency);
-                    itsGame->itsApp->Set(kLatencyToleranceTag, itsGame->latencyTolerance);
-                    didChange = true;
-                }
-
-                if (didChange) {
-                    SDL_Log("*** LT set to %ld\n", itsGame->latencyTolerance);
-                    itsGame->AdjustLatencyFrameTime();
-                    /*
-                    if(itsGame->latencyTolerance > 1) {
-                        itsGame->latencyTolerance = 1;
-                        SDL_Log("*** Capping at LT 1\n");
-                    }*/
-                }
+                itsGame->AdjustLatencyTolerance(maxFrameLatency);
             }
 
             autoLatencyVote = 0;
