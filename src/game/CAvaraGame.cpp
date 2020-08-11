@@ -1069,21 +1069,21 @@ void CAvaraGame::AdjustFrameTime() {
     // And below that point, we want to keep the game playable as long as possible so the parabolic
     // shape tries to keep the latency as low as possible in the play zone.
 
-    #define LATENCY_DIVISOR 12.5
+    #define LATENCY_DIVISOR 16
     // The LATENCY_DIVISOR constant defines the shape of the latency curve (larger = more playable, smaller = better recovery).
     // Here is a summary how the LATENCY_DIVISOR of 12 affects playability and recoverability:
     //    LT  frameTime(ms) latency(ms)  messages/sec
     //    0   64            0            16   <-- most playable (LAN)
     //    1   64            64           16   <-- good internet
     //    2   64            128          16
-    //    3   64            192          16   <-- somewhat playable
-    //    4   80            320          13   <-- barely playable / begin recovering?
-    //    5   128           640          8    <-- hope to never see LT > 4
-    //    6   192           1152         5
-    //    7   256           1792         4
-    //    8   320           2560         3    <-- trying to recover!  If it were a horse, I'd shoot it.
+    //    3   64            192          16 
+    //    4   64            256          16   <-- somewhat playable, laggy
+    //    5   96            480          10   <-- barely playable / begin recovering
+    //    6   144           864          7    <-- hope to never see LT > 5
+    //    7   192           1344         5
+    //    8   256           2048         4    <-- trying to recover!  If it were a horse, I'd shoot it.
 
-    #define ATOMIC_TIME_DIVISOR 4  // actual game loop clock time is frameTime/4
+    #define ATOMIC_TIME_DIVISOR 4.0  // actual game loop clock time is frameTime/4
     // calculate latencyFrameTime as integer multiple of the "atomic" clock value
     latencyFrameTime = frameTime * std::max(1.0, round(ATOMIC_TIME_DIVISOR * pow(latencyTolerance, 2) / LATENCY_DIVISOR) / ATOMIC_TIME_DIVISOR);
     SDL_Log("*** latencyFrameTime = %ld\n", latencyFrameTime);
