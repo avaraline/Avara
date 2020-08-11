@@ -1044,6 +1044,7 @@ void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange) {
         } else {
             latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, MAX_LATENCY));
         }
+        gApplication->Set(kLatencyToleranceTag, latencyTolerance);
         SDL_Log("*** LT set to %ld\n", latencyTolerance);
         AdjustFrameTime();
     }
