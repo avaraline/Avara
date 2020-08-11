@@ -925,10 +925,10 @@ void CNetManager::DoConfig(short senderSlot) {
 
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
         if (itsGame->latencyTolerance < theConfig->latencyTolerance)
-            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, false);
+            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
     } else {
         if (senderSlot == 0) {
-            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, false);
+            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
         }
     }
 }
