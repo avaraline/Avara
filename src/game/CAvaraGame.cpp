@@ -1066,7 +1066,7 @@ void CAvaraGame::AdjustFrameTime() {
     // And below that point, we want to keep the game playable as long as possible so the parabolic
     // shape tries to keep the latency as low as possible in the play zone.
 
-    #define LATENCY_DIVISOR 12
+    #define LATENCY_DIVISOR 12.5
     // The LATENCY_DIVISOR constant defines the shape of the latency curve (larger = more playable, smaller = better recovery).
     // Here is a summary how the LATENCY_DIVISOR of 12 affects playability and recoverability:
     //    LT  frameTime(ms) latency(ms)  messages/sec
@@ -1078,10 +1078,16 @@ void CAvaraGame::AdjustFrameTime() {
     //    5   128           640          8    <-- hope to never see LT > 4
     //    6   192           1152         5
     //    7   256           1792         4
-    //    8   336           2688         3    <-- trying to recover!  If it were a horse, I'd shoot it.
+    //    8   320           2560         3    <-- trying to recover!  If it were a horse, I'd shoot it.
 
     #define ATOMIC_TIME_DIVISOR 4  // actual game loop clock time is frameTime/4
     // calculate latencyFrameTime as integer multiple of the "atomic" clock value
     latencyFrameTime = frameTime * std::max(1.0, round(ATOMIC_TIME_DIVISOR * pow(latencyTolerance, 2) / LATENCY_DIVISOR) / ATOMIC_TIME_DIVISOR);
     SDL_Log("*** latencyFrameTime = %ld\n", latencyFrameTime);
+}
+
+
+long CAvaraGame::TimeToFrameCount(long timeInMsec) {
+    // how many frames occur in timeInMsec?
+    return timeInMsec / latencyFrameTime;
 }

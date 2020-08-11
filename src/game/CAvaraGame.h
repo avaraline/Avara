@@ -247,6 +247,7 @@ public:
     virtual long RoundTripToFrameLatency(long rtt);
     virtual void SetLatencyTolerance(long newLatency, bool limitChange = true);
     virtual void AdjustFrameTime();
+    virtual long TimeToFrameCount(long timeInMsec);
 };
 
 #ifndef MAINAVARAGAME

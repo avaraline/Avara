@@ -32,8 +32,9 @@
 
 #include <string.h>
 
-#define AUTOLATENCYPERIOD 64
-#define AUTOLATENCYDELAY 8
+#define AUTOLATENCYPERIOD 3840  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
+                                // to ensure it happens at a consistent clock time (every 3.84 seconds).  Better safe than sorry.
+#define AUTOLATENCYDELAY  384   // msec 
 #define LOWERLATENCYCOUNT 3
 #define HIGHERLATENCYCOUNT 8
 
@@ -652,8 +653,9 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
         localLatencyNoVote++;
     }
 
-    if (frameNumber >= AUTOLATENCYPERIOD) {
-        if ((frameNumber & (AUTOLATENCYPERIOD - 1)) == 0) {
+    long autoLatencyPeriod = itsGame->TimeToFrameCount(AUTOLATENCYPERIOD);
+    if (frameNumber >= autoLatencyPeriod) {
+        if ((frameNumber & (autoLatencyPeriod - 1)) == 0) {
             long maxRoundLatency;
 
             maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution);
@@ -662,7 +664,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             SDL_Log("*** localLatencyVote=%ld localLatencyNoVote=%ld\n", localLatencyVote, localLatencyNoVote);
             localLatencyVote = 0;
             localLatencyNoVote = 0;
-        } else if (((frameNumber + AUTOLATENCYDELAY) & (AUTOLATENCYPERIOD - 1)) == 0) {
+        } else if (((frameNumber + itsGame->TimeToFrameCount(AUTOLATENCYDELAY)) & (autoLatencyPeriod - 1)) == 0) {
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, centerAlign);
                 fragmentDetected = false;
