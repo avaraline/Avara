@@ -67,7 +67,6 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
-    stableRoundTripTime = kInitialRoundTripTime;
     varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
     haveToSendAck = false;
     nextAckTime = 0;
@@ -363,14 +362,11 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
             // quicker to move up on latency spikes, slower to move down
-            float alpha =  1.0 / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
+            float alpha =  itsOwner->frameTimeScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
             varRoundTripTime = (1 - alpha) * (varRoundTripTime + difference * increment);
             float stdevRoundTripTime = sqrt(varRoundTripTime);
-
-            // for display purposes, use a more stable slow-moving alpha (TBR)
-            stableRoundTripTime = meanRoundTripTime + difference / RTTSMOOTHFACTOR_DOWN;
 
             // use +3.5 sigma(probability 99.9%) for retransmitTime, +3 sigma (99.7%) for urgentRetransmitTime
             // (thought: consider dynamically adjusting the multiplier based on % of resends?)

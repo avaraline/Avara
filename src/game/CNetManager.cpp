@@ -685,6 +685,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                         maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency, itsGame->frameTime);
 
                 itsGame->SetLatencyTolerance(maxFrameLatency);
+                itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
             }
 
             autoLatencyVote = 0;
@@ -926,9 +927,11 @@ void CNetManager::DoConfig(short senderSlot) {
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
         if (itsGame->latencyTolerance < theConfig->latencyTolerance)
             itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
+            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
     } else {
         if (senderSlot == 0) {
             itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
+            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         }
     }
 }

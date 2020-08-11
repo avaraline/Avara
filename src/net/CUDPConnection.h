@@ -76,7 +76,6 @@ public:
     long validTime;
 
     float meanRoundTripTime;
-    float stableRoundTripTime;
     float varRoundTripTime;
     long retransmitTime;
     long urgentRetransmitTime;

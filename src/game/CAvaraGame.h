@@ -243,6 +243,7 @@ public:
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
     virtual double FrameTimeScale(double exponent=1);
+    virtual double LatencyFrameTimeScale();
 
     virtual long RoundTripToFrameLatency(long rtt);
     virtual void SetLatencyTolerance(long newLatency, int maxChange = 2);

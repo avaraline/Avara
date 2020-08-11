@@ -1026,6 +1026,10 @@ double CAvaraGame::FrameTimeScale(double exponent) {
     return pow(double(frameTime)/CLASSICFRAMETIME, exponent);
 }
 
+double CAvaraGame::LatencyFrameTimeScale() {
+    return double(latencyFrameTime)/frameTime;
+}
+
 
 long CAvaraGame::RoundTripToFrameLatency(long roundTripTime) {
     // half of the roundTripTime in units of frameTime, rounded
