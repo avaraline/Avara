@@ -41,7 +41,7 @@
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 8
 #else
-    #define kAvaraNetVersion 070  // in honor of Seven and his mighty latency
+    #define kAvaraNetVersion 071  // in honor of Seven and his mighty latency
 #endif
 
 #define kMessageBufferMaxAge 90

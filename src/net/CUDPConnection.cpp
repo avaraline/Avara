@@ -10,7 +10,6 @@
 #include "CUDPConnection.h"
 
 #include "CUDPComm.h"
-#include "CommDefs.h"
 #include "System.h"
 
 #define kInitialRetransmitTime 480 //	2	seconds

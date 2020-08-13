@@ -10,12 +10,12 @@
 #pragma once
 #include "CCommManager.h"
 #include "CDirectObject.h"
+#include "CommDefs.h"
 
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
 
 #define PACKET_DEBUG 0   // set to 1 for packet debug output, 2 for extra detail
-#define LATENCY_DEBUG 1
 
 #pragma pack(1)
 typedef struct {
