@@ -1031,9 +1031,10 @@ double CAvaraGame::LatencyFrameTimeScale() {
 }
 
 
-long CAvaraGame::RoundTripToFrameLatency(long roundTripTime) {
+long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     // half of the roundTripTime in units of frameTime, rounded
-    return (roundTripTime + frameTime) / (2*frameTime);
+    SDL_Log("CAvaraGame::RoundTripToFrameLatency roundTrip=%ld, LT(unrounded)=%.2lf\n", roundTrip, (roundTrip) / (2.0*frameTime));
+    return (roundTrip + frameTime) / (2*frameTime);
 }
 
 void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange) {

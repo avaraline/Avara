@@ -1873,7 +1873,7 @@ void CUDPComm::Reconfigure() {
 }
 
 long CUDPComm::GetMaxRoundTrip(short distribution) {
-    long maxTrip = 0;
+    float maxTrip = 0;
     CUDPConnection *conn;
 
     for (conn = connections; conn; conn = conn->next) {

@@ -661,8 +661,10 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution);
             itsCommManager->SendUrgentPacket(
                 activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
-            SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld localLatencyNoVote=%ld\n",
-                    frameNumber, autoLatencyPeriod,localLatencyVote, localLatencyNoVote);
+            #if LATENCY_DEBUG
+                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld localLatencyNoVote=%ld maxRoundLatency=%ld\n",
+                        frameNumber, autoLatencyPeriod,localLatencyVote, localLatencyNoVote, maxRoundLatency);
+            #endif
             localLatencyVote = 0;
             localLatencyNoVote = 0;
         } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY)) {
@@ -676,14 +678,16 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
                 autoLatencyVote /= autoLatencyVoteCount;
 
-                if (autoLatencyVote > HIGHERLATENCYCOUNT) {
-                    addOneLatency = 1;
-                }
+                // if (autoLatencyVote > HIGHERLATENCYCOUNT) {
+                //     addOneLatency = 1;
+                // }
 
                 maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                SDL_Log("*** fn=%ld, maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d frameTime=%ld\n",
-                        frameNumber, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency, itsGame->frameTime);
+                #if LATENCY_DEBUG
+                    SDL_Log("*** fn=%ld frameTime=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
+                            frameNumber, itsGame->frameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
+                #endif
 
                 itsGame->SetLatencyTolerance(maxFrameLatency);
                 itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();

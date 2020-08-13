@@ -15,6 +15,7 @@
 #define kNumReceivedOffsets 128
 
 #define PACKET_DEBUG 0   // set to 1 for packet debug output, 2 for extra detail
+#define LATENCY_DEBUG 1
 
 #pragma pack(1)
 typedef struct {
@@ -125,7 +126,7 @@ public:
 
     virtual void FreshClient(ip_addr remoteHost, port_num remotePort, long firstReceiveSerial);
 
-#if PACKET_DEBUG
+#if PACKET_DEBUG || LATENCY_DEBUG
     virtual void DebugPacket(char eType, UDPPacketInfo *p);
 #endif
     virtual void CloseSlot(short theId);

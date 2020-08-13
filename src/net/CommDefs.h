@@ -9,6 +9,8 @@
 
 #pragma once
 
+#define LATENCY_DEBUG 1
+
 /*
 **	Communications packet commands:
 */
