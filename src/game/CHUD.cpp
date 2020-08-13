@@ -103,7 +103,7 @@ void CHUD::DrawScore(int playerCount, int chudHeight, CViewParameters *view, NVG
             colorB = longTeamColor & 0xff;
             NVGcolor textColor = aliveColor;
             
-            if(playerName.size() > 0) {
+            if(playerName.size() > 0 && thisPlayer->GetPlayer() != NULL) {
                 playerRank++;
                 int playerLives = thisPlayer->GetPlayer()->lives;
 
