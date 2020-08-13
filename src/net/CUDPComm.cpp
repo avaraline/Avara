@@ -10,11 +10,19 @@
 #define RANDOMLY_DROP_PACKETS 0
 #if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
-#define SIMULATE_LATENCY_MEAN   250000
-#define SIMULATE_LATENCY_JITTER  20000
-// split between receive & send
-#define SIMULATE_LATENCY_FORMULA (SIMULATE_LATENCY_MEAN - SIMULATE_LATENCY_JITTER/2 + int((SIMULATE_LATENCY_JITTER)*float(rand())/RAND_MAX)) / 2
+#define SIMULATE_LATENCY_LT 2
+#define SIMULATE_LATENCY_MSEC_PER_LT 58  // less than 64 because of overhead of running multiple clients
+#define SIMULATE_LATENCY_MEAN   (SIMULATE_LATENCY_LT*SIMULATE_LATENCY_MSEC_PER_LT*1000)
+#define SIMULATE_LATENCY_JITTER  0
 #define SIMULATE_LATENCY_DISTRIBUTION  0x02  // bitmask of who gets the latency
+
+#define SIMULATE_LATENCY_CODE(text) \
+if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) { \
+    useconds_t zzz = 2*(SIMULATE_LATENCY_MEAN - SIMULATE_LATENCY_JITTER/2 + int((SIMULATE_LATENCY_JITTER)*float(rand())/RAND_MAX)); \
+    SDL_Log("sleeping for %d msec on %s\n", zzz/1000, text); \
+    usleep(zzz); \
+}
+
 #endif
 #if RANDOMLY_DROP_PACKETS
 int numToDrop = 0;
@@ -616,9 +624,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
         short inLen;
 
         #if SIMULATE_LATENCY_ON_CLIENTS
-            if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) {
-                usleep(SIMULATE_LATENCY_FORMULA); // simulate network latencies
-            }
+            SIMULATE_LATENCY_CODE("read")
         #endif
 
         curTime = GetClock();
@@ -1066,11 +1072,9 @@ Boolean CUDPComm::AsyncWrite() {
                     SDL_Log("           ---------> DROPPING PACKET <---------\n");
                 } else {
             #endif
-            #if SIMULATE_LATENCY_ON_CLIENTS
-                if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) {
-                    usleep(SIMULATE_LATENCY_FORMULA); // simulate network latencies
-                }
-            #endif
+            // #if SIMULATE_LATENCY_ON_CLIENTS
+            //     SIMULATE_LATENCY_CODE("write")
+            // #endif
             UDPWrite(stream, udp, UDPWriteComplete, this);
             #if RANDOMLY_DROP_PACKETS
                 }
