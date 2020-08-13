@@ -1,6 +1,7 @@
 #include "CWindow.h"
 
 #include "CApplication.h"
+#include "limits.h"
 
 CWindow::CWindow(CApplication *app, const std::string &title) :
   nanogui::Window((nanogui::Widget *)app, title), mApplication(app) {
