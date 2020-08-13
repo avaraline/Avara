@@ -286,7 +286,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
         
         short status = thisPlayer->GetStatusChar();
-        if (status > 0) {
+        if (status >= 0) {
             std::string playerLives = std::to_string(status);
             if (status == 10) playerLives = "%";
             if (status == 12) playerLives = "C";
