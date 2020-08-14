@@ -60,9 +60,9 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
         queues[i].qTail = 0;
     }
 
-    serialNumber = 0;
-    receiveSerial = 0;
-    maxValid = -kSerialNumberStepSize;
+    serialNumber = INITIAL_SERIAL_NUMBER;
+    receiveSerial = INITIAL_SERIAL_NUMBER;
+    maxValid = INITIAL_SERIAL_NUMBER-kSerialNumberStepSize;
 
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = kInitialRoundTripTime;
@@ -667,10 +667,10 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
 void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, long firstReceiveSerial) {
     SDL_Log("CUDPConnection::FreshClient(%u, %hu)\n", remoteHost, remotePort);
     FlushQueues();
-    serialNumber = 0;
-    receiveSerial = firstReceiveSerial;
+    serialNumber = INITIAL_SERIAL_NUMBER;
+    receiveSerial = serialNumber + firstReceiveSerial;
 
-    maxValid = -kSerialNumberStepSize;
+    maxValid = INITIAL_SERIAL_NUMBER-kSerialNumberStepSize;
 
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = itsOwner->urgentResendTime;
