@@ -754,7 +754,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             #endif
 
                         } else {
-                            if (isServing && thePacket->serialNumber == 0 &&
+                            if (isServing && thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
                                 thePacket->packet.command == kpPacketProtocolLogin) {
                                 conn = DoLogin((PacketInfo *)thePacket, packet);
                             }
