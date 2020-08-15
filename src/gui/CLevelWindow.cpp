@@ -3,6 +3,7 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CLevelDescriptor.h"
+#include "JSONLevelDescriptor.h"
 #include "CNetManager.h"
 #include "Resource.h"
 #include "Preferences.h"
@@ -163,30 +164,41 @@ void CLevelWindow::SelectSet(int selected) {
 }
 
 void CLevelWindow::SelectSet(std::string set) {
+    if (set.length() < 1) return;
     std::vector<std::string>::iterator itr = std::find(levelSets.begin(), levelSets.end(), set);
     if (itr != levelSets.end()) {
         setBox->setSelectedIndex(std::distance(levelSets.begin(), itr));
     }
-    
-    std::string rsrcPath = std::string("levels/") + set + ".r";
-    OSType setTag;
-    UseResFile(rsrcPath);
-    CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
-    CLevelDescriptor *curLevel = levels;
     levelNames.clear();
     levelIntros.clear();
     levelTags.clear();
-    while (curLevel) {
-        std::string name((char *)curLevel->name + 1, curLevel->name[0]);
-        std::string intro((char *)curLevel->intro + 1, curLevel->intro[0]);
-        intro.erase(0, intro.find_first_not_of(" \r\n"));
-        // std::string access((char *)curLevel->access + 1, curLevel->access[0]);
-        levelNames.push_back(name);
-        levelIntros.push_back(intro);
-        levelTags.push_back(curLevel->tag);
-        curLevel = curLevel->nextLevel;
+
+    if (((CAvaraAppImpl *)gApplication)->Get(kUseSVG) > 0) {
+        nlohmann::json ledis = LoadLevelListFromJSON(set);
+        for (auto& ld : ledis.items()) {
+            levelNames.push_back(ld.value()["Name"]);
+            levelIntros.push_back(ld.value()["Message"]);
+            levelTags.push_back(StringOSType(ld.key()));
+        }
     }
-    levels->Dispose();
+    else {
+        std::string rsrcPath = std::string("levels/") + set + ".r";
+        OSType setTag;
+        UseResFile(rsrcPath);
+        CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
+        CLevelDescriptor *curLevel = levels;
+        while (curLevel) {
+            std::string name((char *)curLevel->name + 1, curLevel->name[0]);
+            std::string intro((char *)curLevel->intro + 1, curLevel->intro[0]);
+            intro.erase(0, intro.find_first_not_of(" \r\n"));
+            // std::string access((char *)curLevel->access + 1, curLevel->access[0]);
+            levelNames.push_back(name);
+            levelIntros.push_back(intro);
+            levelTags.push_back(curLevel->tag);
+            curLevel = curLevel->nextLevel;
+        }
+        levels->Dispose();
+    }
     levelBox->setItems(levelNames, levelIntros);
     levelBox->setEnabled(true);
     levelBox->setNeedsLayout();

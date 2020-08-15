@@ -18,6 +18,7 @@
 #include "CBSPWorld.h"
 #include "CCompactTagBase.h"
 #include "CLevelDescriptor.h"
+#include "JSONLevelDescriptor.h"
 #include "CNetManager.h"
 #include "CRC.h"
 #include "CSoundMixer.h"
@@ -213,28 +214,14 @@ OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
     gCurrentGame = itsGame;
-
-    char byte1 =  theLevel & 0x000000ff;
-    char byte2 = (theLevel & 0x0000ff00) >> 8;
-    char byte3 = (theLevel & 0x00ff0000) >> 16;
-    char byte4 = (theLevel & 0xff000000) >> 24;
-    std::string leveltag = std::string({byte4, byte3, byte2, byte1});
-    SDL_Log("LEVEL TAG STRING: %s", leveltag.c_str());
-    
-
-    std::stringstream setManifestName;
-    setManifestName << "levels/" << set << "/set.json";
-    std::ifstream setManifestFile(setManifestName.str());
-    if (setManifestFile.fail()) {
-        SDL_Log("Couldn't read %s", setManifestName.str().c_str());
-        return -1;
-    }
-
-    json setManifest = json::parse(setManifestFile);
+    std::string leveltag = OSTypeString(theLevel);
+    json setManifest = GetManifestJSON(set);
     json ledi = setManifest["LEDI"][leveltag];
-    
     std::string svgname = ledi["Svg"];
+    std::string levelname = ledi["Name"];
     std::string svgdir = std::string("levels/") + set + "/";
+    BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
+    BlockMoveData(levelname.c_str(), itsGame->loadedLevel, levelname.size() + 1);
     SDL_Log("%s", svgdir.c_str());
     std::string svgpath = BundlePath((svgdir + std::string("svg/") + svgname).c_str());
     SVGConvertToLevelMap(svgpath);
@@ -243,44 +230,46 @@ OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
 
 
 OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
-    SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
+    SDL_Log("LOADING LEVEL %s FROM %s\n", OSTypeString(theLevel).c_str(), set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
-
-    if(this->Get(kUseSVG) == 1) {
-        return LoadSVGLevel(set, theLevel);
-    }
-
-    gCurrentGame = itsGame;
-
-    std::string rsrcFile = std::string("levels/") + set + ".r";
-    UseResFile(rsrcFile);
-
-    OSType setTag;
-    CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
-    CLevelDescriptor *curLevel = levels;
-    std::string levelName;
     bool wasLoaded = false;
-    while (curLevel) {
-        if (curLevel->tag == theLevel) {
-            std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
-            levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
-            BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
-            BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1);
-            Handle levelData = GetNamedResource('PICT', rsrcName);
-            if (levelData) {
-                ConvertToLevelMap(levelData);
-                ReleaseResource(levelData);
-                wasLoaded = true;
-            }
-            break;
-        }
-        curLevel = curLevel->nextLevel;
+    std::string levelName;
+
+    if(this->Get(kUseSVG) > 0) {
+        LoadSVGLevel(set, theLevel);
+        wasLoaded = true;
     }
-    levels->Dispose();
+    else {
+        gCurrentGame = itsGame;
+
+        std::string rsrcFile = std::string("levels/") + set + ".r";
+        UseResFile(rsrcFile);
+
+        OSType setTag;
+        CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
+        CLevelDescriptor *curLevel = levels;
+        while (curLevel) {
+            if (curLevel->tag == theLevel) {
+                std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
+                levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
+                BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
+                BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1);
+                Handle levelData = GetNamedResource('PICT', rsrcName);
+                if (levelData) {
+                    ConvertToLevelMap(levelData);
+                    ReleaseResource(levelData);
+                    wasLoaded = true;
+                }
+                break;
+            }
+            curLevel = curLevel->nextLevel;
+        }
+        levels->Dispose();
+        AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
+    }
 
     if (wasLoaded) {
-        AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
         levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);

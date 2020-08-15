@@ -35,4 +35,5 @@ public:
     std::vector<std::string> levelNames;
     std::vector<std::string> levelIntros;
     std::vector<OSType> levelTags;
+    std::vector<std::string> levelTagStrings;
 };

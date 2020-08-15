@@ -19,7 +19,7 @@
 #include "Resource.h"
 
 #include <SDL2/SDL.h>
-#include <string.h>
+#include <string>
 
 #define textBufferSize 4096
 
