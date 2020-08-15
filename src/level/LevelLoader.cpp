@@ -112,6 +112,7 @@ static void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool 
 }
 
 static void SvgArc(float x, float y, short start, short angle, long largest_radius) {
+    TextBreak();
     lastArcPoint.h = (long)roundf(x * 2);
     lastArcPoint.v = (long)roundf(y * 2);
     lastArcAngle = (630 - (start + angle / 2)) % 360;
@@ -123,13 +124,14 @@ static void SvgArc(float x, float y, short start, short angle, long largest_radi
 }
 
 static void SvgEllipse(float x, float y, long r) {
+    TextBreak();
     lastOvalPoint.h = (long)roundf(x * 2);
     lastOvalPoint.v = (long)roundf(y * 2);
     lastOvalRadius = r * 2;
 
     lastDomeCenter.h = (long)roundf(x * 2);
-    lastDomeCenter.v = (long)roundf(x * 2);
-
+    lastDomeCenter.v = (long)roundf(y * 2);
+    
     lastDomeAngle = 0;
     lastDomeSpan = 360;
     lastDomeRadius = r * 2;
@@ -139,6 +141,7 @@ static void SvgRect(Rect *r, int radius, unsigned short thickness) {
     //SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
     //SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
 
+    TextBreak();
     r->left += thickness >> 1;
     r->top += thickness >> 1;
     r->right -= (thickness + 1) >> 1;
