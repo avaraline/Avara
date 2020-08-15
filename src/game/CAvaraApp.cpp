@@ -88,6 +88,10 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     rosterWindow = new CRosterWindow(this);
 
     performLayout();
+    
+    for (auto win : windowList) {
+        win->restoreState();
+    }
 
     nextTrackerUpdate = 0;
     trackerUpdatePending = false;

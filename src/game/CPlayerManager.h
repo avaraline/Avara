@@ -108,6 +108,10 @@ public:
     virtual long WinFrame() = 0;
     virtual void ProtocolHandler(struct PacketInfo *thePacket) = 0;
     virtual void IncrementAskAgainTime(int) = 0;
+    virtual void SetShowScoreboard(bool b) = 0;
+    virtual bool GetShowScoreboard() = 0;
+
+
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
@@ -156,6 +160,8 @@ private:
     short loadingStatus;
     short slot;
     short playerColor;
+    
+    bool showScoreboard = false;
 
     Point mouseCenterPosition;
     Boolean isLocalPlayer;
@@ -253,4 +259,7 @@ public:
     virtual void MugState(long);
     virtual long WinFrame();
     virtual void IncrementAskAgainTime(int);
+    virtual void SetShowScoreboard(bool b);
+    virtual bool GetShowScoreboard();
+
 };

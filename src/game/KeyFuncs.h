@@ -75,6 +75,8 @@ enum {
     
     kfuSpectateNext,
     kfuSpectatePrevious,
+    
+    kfuScoreboard,
 
     kfuPauseGame,
     kfuAbortGame,

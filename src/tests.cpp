@@ -92,6 +92,9 @@ public:
     virtual long WinFrame() { return 0; }
     virtual void ProtocolHandler(struct PacketInfo *thePacket) {}
     virtual void IncrementAskAgainTime(int) {}
+    virtual void SetShowScoreboard(bool b) {}
+    virtual bool GetShowScoreboard() { return false; }
+    
 private:
     FunctionTable *ft;
     CAvaraGame *itsGame;

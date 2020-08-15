@@ -667,6 +667,13 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             }
         }
 
+        if (itsManager->IsLocalPlayer()) {
+            if(TESTFUNC(kfuScoreboard, ft->held))
+                itsManager->SetShowScoreboard(true);
+            else
+                itsManager->SetShowScoreboard(false);
+        }
+        
         if (TESTFUNC(kfuPauseGame, ft->down)) {
             itsGame->statusRequest = kPauseStatus;
             itsGame->pausePlayer = itsManager->Slot();

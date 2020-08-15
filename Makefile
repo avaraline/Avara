@@ -59,6 +59,7 @@ SIGNING_ID := NONE
 avara: set-version $(BUILD_DIR)/Avara resources build-link
 
 tests: $(BUILD_DIR)/tests resources
+	$(BUILD_DIR)/tests
 
 bspviewer: $(BUILD_DIR)/BSPViewer resources
 
