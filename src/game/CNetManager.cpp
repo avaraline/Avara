@@ -39,9 +39,9 @@
 #define HIGHERLATENCYCOUNT 8
 
 #if ROUTE_THRU_SERVER
-    #define kAvaraNetVersion 8
+    #define kAvaraNetVersion 666
 #else
-    #define kAvaraNetVersion 7
+    #define kAvaraNetVersion 8
 #endif
 
 #define kMessageBufferMaxAge 90
