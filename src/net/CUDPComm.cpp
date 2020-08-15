@@ -925,7 +925,7 @@ Boolean CUDPComm::AsyncWrite() {
 
             p = &thePacket->packet;
 
-            *outData.w++ = thePacket->serialNumber;
+            *outData.uw++ = thePacket->serialNumber;
             fp = outData.c++;
 
             *outData.c++ = p->command;

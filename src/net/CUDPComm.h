@@ -16,7 +16,7 @@
 #include <string>
 
 // #define INITIAL_SERIAL_NUMBER     0
-#define INITIAL_SERIAL_NUMBER     (std::numeric_limits<short>::max() - 401)  // must be even
+#define INITIAL_SERIAL_NUMBER     (std::numeric_limits<uint16_t>::max() - 401)  // must be even
 
 #define ROUTE_THRU_SERVER 0  // non-zero to route all messages through the server
 
