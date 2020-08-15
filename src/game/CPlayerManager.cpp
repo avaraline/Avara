@@ -67,6 +67,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"scoutControl", 1 << kfuScoutControl},
         {"spectateNext", 1 << kfuSpectateNext},
         {"spectatePrevious", 1 << kfuSpectatePrevious},
+        {"scoreboard", 1 << kfuScoreboard},
         {"chatMode", 1 << kfuTypeText},
         {"debug1", 1 << kfuDebug1},
         {"debug2", 1 << kfuDebug2}};
@@ -1265,4 +1266,10 @@ long CPlayerManagerImpl::WinFrame() {
 }
 void CPlayerManagerImpl::IncrementAskAgainTime(int amt) {
     askAgainTime += amt;
+}
+void CPlayerManagerImpl::SetShowScoreboard(bool b) {
+    showScoreboard = b;
+}
+bool CPlayerManagerImpl::GetShowScoreboard() {
+    return showScoreboard;
 }

@@ -81,6 +81,7 @@ static json defaultPrefs = {
         {"scoutControl", {"2", "Up", "Down", "Left", "Right"}},
         {"spectateNext", "]"},
         {"spectatePrevious", "["},
+        {"scoreboard", "/"},
         {"chatMode", "Return"},
         {"debug1", "5"},
         {"debug2", "6"}}
