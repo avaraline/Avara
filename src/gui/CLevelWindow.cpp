@@ -58,6 +58,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "t-plus-5-part-a",
         "t-plus-5-part-b",
         "t-plus-5-part-c",
+        "tyyli",
         "we-be-ground-pounders",
         "wide-open",
         "wild-west-collection",
