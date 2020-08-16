@@ -10,6 +10,7 @@
 #pragma once
 #include "AvaraTCP.h"
 #include "CCommManager.h"
+#include "CommDefs.h"
 #include "Types.h"
 
 #include <string>

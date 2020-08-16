@@ -6,6 +6,7 @@
     Created: Monday, May 15, 1995, 22:25
     Modified: Tuesday, September 17, 1996, 03:21
 */
+#include <algorithm> // std::max
 
 #include "CNetManager.h"
 
@@ -31,15 +32,16 @@
 
 #include <string.h>
 
-#define AUTOLATENCYPERIOD 64
-#define AUTOLATENCYDELAY 8
+#define AUTOLATENCYPERIOD 3456  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
+                                // to ensure it happens at a consistent clock time (every 3.456 seconds).  Better safe than sorry.
+#define AUTOLATENCYDELAY  384   // msec 
 #define LOWERLATENCYCOUNT 3
 #define HIGHERLATENCYCOUNT 8
 
 #if ROUTE_THRU_SERVER
-    #define kAvaraNetVersion 7
+    #define kAvaraNetVersion 8
 #else
-    #define kAvaraNetVersion 6
+    #define kAvaraNetVersion 7
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -569,6 +571,7 @@ void CNetManager::ResumeGame() {
     maxRoundTripLatency = 0;
     addOneLatency = 0;
     localLatencyVote = 0;
+    localLatencyNoVote = 0;
     autoLatencyVote = 0;
     autoLatencyVoteCount = 0;
 
@@ -646,58 +649,48 @@ void CNetManager::FrameAction() {
 void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
     if (didWait) {
         localLatencyVote++;
+    } else {
+        localLatencyNoVote++;
     }
 
-    if (frameNumber >= AUTOLATENCYPERIOD) {
-        if ((frameNumber & (AUTOLATENCYPERIOD - 1)) == 0) {
+    long autoLatencyPeriod = itsGame->TimeToFrameCount(AUTOLATENCYPERIOD);
+    if (frameNumber >= autoLatencyPeriod) {
+        if ((frameNumber % autoLatencyPeriod) == 0) {
             long maxRoundLatency;
 
             maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution);
             itsCommManager->SendUrgentPacket(
                 activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
+            #if LATENCY_DEBUG
+                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld localLatencyNoVote=%ld maxRoundLatency=%ld\n",
+                        frameNumber, autoLatencyPeriod,localLatencyVote, localLatencyNoVote, maxRoundLatency);
+            #endif
             localLatencyVote = 0;
-        } else if (((frameNumber + AUTOLATENCYDELAY) & (AUTOLATENCYPERIOD - 1)) == 0) {
+            localLatencyNoVote = 0;
+        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY)) {
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, centerAlign);
                 fragmentDetected = false;
             }
 
             if ((serverOptions & (1 << kUseAutoLatencyBit)) && autoLatencyVoteCount) {
-                Boolean didChange = false;
-                long curLatency = itsGame->latencyTolerance;
                 long maxFrameLatency;
 
                 autoLatencyVote /= autoLatencyVoteCount;
 
-                if (autoLatencyVote > HIGHERLATENCYCOUNT) {
-                    addOneLatency = 1;
-                }
+                // if (autoLatencyVote > HIGHERLATENCYCOUNT) {
+                //     addOneLatency = 1;
+                // }
 
-                maxFrameLatency = addOneLatency + (maxRoundTripLatency + itsGame->frameTime) /
-                                                      (itsGame->frameTime + itsGame->frameTime);
+                maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                if (maxFrameLatency > 8)
-                    maxFrameLatency = 8;
+                #if LATENCY_DEBUG
+                    SDL_Log("*** fn=%ld frameTime=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
+                            frameNumber, itsGame->frameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
+                #endif
 
-                if (maxFrameLatency < curLatency) {
-                    addOneLatency = 0;
-                    itsGame->latencyTolerance--;
-                    gApplication->Set(kLatencyToleranceTag, itsGame->latencyTolerance);
-                    didChange = true;
-                } else if (maxFrameLatency > curLatency && autoLatencyVote > LOWERLATENCYCOUNT) {
-                    itsGame->latencyTolerance++;
-                    itsGame->itsApp->Set(kLatencyToleranceTag, itsGame->latencyTolerance);
-                    didChange = true;
-                }
-
-                if (didChange) {
-                    SDL_Log("*** LT set to %ld\n", itsGame->latencyTolerance);
-                    /*
-                    if(itsGame->latencyTolerance > 1) {
-                        itsGame->latencyTolerance = 1;
-                        SDL_Log("*** Capping at LT 1\n");
-                    }*/
-                }
+                itsGame->SetLatencyTolerance(maxFrameLatency);
+                itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
             }
 
             autoLatencyVote = 0;
@@ -938,10 +931,12 @@ void CNetManager::DoConfig(short senderSlot) {
 
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
         if (itsGame->latencyTolerance < theConfig->latencyTolerance)
-            itsGame->latencyTolerance = theConfig->latencyTolerance;
+            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
+            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
     } else {
         if (senderSlot == 0) {
-            itsGame->latencyTolerance = theConfig->latencyTolerance;
+            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
+            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         }
     }
 }

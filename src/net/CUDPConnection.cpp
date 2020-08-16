@@ -10,7 +10,6 @@
 #include "CUDPConnection.h"
 
 #include "CUDPComm.h"
-#include "CommDefs.h"
 #include "System.h"
 
 #define kInitialRetransmitTime 480 //	2	seconds
@@ -21,18 +20,19 @@
 #define kMaxTransmitQueueLength 128 //	128 packets going out...
 #define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
 
-#define RTTSMOOTHFACTOR_UP 5
-#define RTTSMOOTHFACTOR_DOWN 30
+#define RTTSMOOTHFACTOR_UP 80
+#define RTTSMOOTHFACTOR_DOWN 160
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 2
 
-#if PACKET_DEBUG
+#if PACKET_DEBUG || LATENCY_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+    SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d #=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
         eType,
         myId,
         receiveSerial,
         p->serialNumber,
+        p->sendCount,
         p->packet.command,
         p->packet.p1,
         p->packet.p2,
@@ -67,7 +67,6 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
-    stableRoundTripTime = kInitialRoundTripTime;
     varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
     haveToSendAck = false;
     nextAckTime = 0;
@@ -159,6 +158,7 @@ void CUDPConnection::ProcessBusyQueue(long curTime) {
 
     while ((thePacket = (UDPPacketInfo *)queues[kBusyQ].qHead)) {
         if (noErr == Dequeue((QElemPtr)thePacket, &queues[kBusyQ])) {
+            thePacket->sendCount = 0;
             thePacket->birthDate = curTime;
             thePacket->nextSendTime = curTime;
             thePacket->serialNumber = serialNumber;
@@ -187,7 +187,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
     while (bestPacket != NULL) {
         // make sure the we are actually beyond packet's nextSendTime, avoids extra resends
         if (curTime >= bestPacket->nextSendTime &&
-            (bestPacket->birthDate == bestPacket->nextSendTime || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
+            (bestPacket->sendCount == 0 || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
             break;
         }
         bestPacket = (UDPPacketInfo *)bestPacket->packet.qLink;
@@ -235,7 +235,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
                 #endif
                 // if this candidate packet has a smaller sendTime AND (it's never been sent OR we haven't reached the resend limit)
                 if (bestSendTime > theSendTime &&
-                    (thePacket->birthDate == thePacket->nextSendTime || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
+                    (thePacket->sendCount == 0 || numResendsWithoutReceive < MAX_RESENDS_WITHOUT_RECEIVE)) {
                     // this is the NEW bestPacket
                     bestSendTime = theSendTime;
                     bestPacket = thePacket;
@@ -344,7 +344,7 @@ bool UseCommandForStats(long command) {
 }
 
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
-    #if PACKET_DEBUG
+    #if PACKET_DEBUG || LATENCY_DEBUG
         DebugPacket('V', thePacket);
     #endif
     if (noErr == Dequeue((QElemPtr)thePacket, &queues[kTransmitQ])) {
@@ -362,14 +362,18 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
             // quicker to move up on latency spikes, slower to move down
-            float alpha =  1.0 / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
+            float alpha = itsOwner->frameTimeScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
+
+            if (thePacket->sendCount > 1) {
+                // Don't ignore resent packets but de-weight them.  If you ignore them it's possible on a lag spike to
+                // never re-enter this code block (previous mean & stdev is still low so it always tries to resend).
+                alpha /= thePacket->sendCount;
+            }
+            
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
             varRoundTripTime = (1 - alpha) * (varRoundTripTime + difference * increment);
             float stdevRoundTripTime = sqrt(varRoundTripTime);
-
-            // for display purposes, use a more stable slow-moving alpha (TBR)
-            stableRoundTripTime = meanRoundTripTime + difference / RTTSMOOTHFACTOR_DOWN;
 
             // use +3.5 sigma(probability 99.9%) for retransmitTime, +3 sigma (99.7%) for urgentRetransmitTime
             // (thought: consider dynamically adjusting the multiplier based on % of resends?)
@@ -382,9 +386,9 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
             urgentRetransmitTime = std::min(urgentRetransmitTime, (long)kMaxAllowedRetransmitTime);
 
-            #if PACKET_DEBUG
-                SDL_Log("                               roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
-                        roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
+            #if PACKET_DEBUG || LATENCY_DEBUG
+                SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
+                        myId, thePacket->packet.command, roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
             #endif
         }
 
@@ -395,6 +399,8 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
         DebugPacket('X', thePacket);
 #endif
         itsOwner->ReleasePacket((PacketInfo *)thePacket);
+    } else {
+        SDL_Log("ERROR dequeueing packet (sn=%d) from kTransmitQ\n", thePacket->serialNumber);
     }
 }
 

@@ -10,6 +10,7 @@
 #pragma once
 #include "CCommManager.h"
 #include "CDirectObject.h"
+#include "CommDefs.h"
 
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
@@ -24,6 +25,7 @@ typedef struct {
     // int32_t lastSendTime;
     int32_t nextSendTime;
     int16_t serialNumber;
+    int16_t sendCount;
 
 } UDPPacketInfo;
 #pragma pack()
@@ -75,7 +77,6 @@ public:
     long validTime;
 
     float meanRoundTripTime;
-    float stableRoundTripTime;
     float varRoundTripTime;
     long retransmitTime;
     long urgentRetransmitTime;
@@ -125,7 +126,7 @@ public:
 
     virtual void FreshClient(ip_addr remoteHost, port_num remotePort, long firstReceiveSerial);
 
-#if PACKET_DEBUG
+#if PACKET_DEBUG || LATENCY_DEBUG
     virtual void DebugPacket(char eType, UDPPacketInfo *p);
 #endif
     virtual void CloseSlot(short theId);
