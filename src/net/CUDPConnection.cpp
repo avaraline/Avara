@@ -387,8 +387,8 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             urgentRetransmitTime = std::min(urgentRetransmitTime, (long)kMaxAllowedRetransmitTime);
 
             #if PACKET_DEBUG || LATENCY_DEBUG
-                SDL_Log("                               roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
-                        roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
+                SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
+                        myId, thePacket->packet.command, roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
             #endif
         }
 
