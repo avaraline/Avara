@@ -14,6 +14,6 @@ public:
     void Render(CViewParameters *view, NVGcontext *ctx);
     void DrawLevelName(CViewParameters *view, NVGcontext *ctx);
     void DrawPaused(CViewParameters *view, NVGcontext *ctx);
-    void DrawScore(int playerCount, int chudHeight, CViewParameters *view, NVGcontext *ctx);
+    void DrawScore(int playingCount, int chudHeight, CViewParameters *view, NVGcontext *ctx);
 
 };

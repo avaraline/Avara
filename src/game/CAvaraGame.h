@@ -18,6 +18,7 @@
 #include <SDL2/SDL.h>
 
 #define IDENTTABLESIZE 512
+#define NETWORKUPDATEMS 5000
 
 #define MESSAGEHASH 128
 #define LOCATORTABLEBITS 6
@@ -166,6 +167,8 @@ public:
     uint32_t nextScheduledFrame;
     long lastFrameTime;
     Boolean canPreSend;
+
+    uint32_t nextNetworkUpdate = 0;
 
     Boolean didWait;
     Boolean longWait;
