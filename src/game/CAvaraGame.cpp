@@ -852,6 +852,13 @@ bool CAvaraGame::GameTick() {
     soundHub->HouseKeep();
     soundTime = soundHub->ReadTime();
 
+    if(nextNetworkUpdate < startTime) {
+        if(nextNetworkUpdate > 0) {
+            scoreKeeper->NetResultsUpdate();
+        }        
+        nextNetworkUpdate = startTime + NETWORKUPDATEMS;
+    }
+    
     // SetPort(itsWindow);
     // SetPolyWorld(&itsPolyWorld);
     // TrackWindow();
