@@ -15,6 +15,8 @@
 
 #include <string>
 
+#define INITIAL_SERIAL_NUMBER     0  // must be even
+
 #define ROUTE_THRU_SERVER 0  // non-zero to route all messages through the server
 
 #define CRAMTIME 5000 //	About 20 seconds.

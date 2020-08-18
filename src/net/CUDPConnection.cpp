@@ -30,8 +30,8 @@ void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
     SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d #=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
         eType,
         myId,
-        receiveSerial,
-        p->serialNumber,
+        (uint16_t)receiveSerial,
+        (uint16_t)p->serialNumber,
         p->sendCount,
         p->packet.command,
         p->packet.p1,
@@ -60,9 +60,9 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
         queues[i].qTail = 0;
     }
 
-    serialNumber = 0;
-    receiveSerial = 0;
-    maxValid = -kSerialNumberStepSize;
+    serialNumber = INITIAL_SERIAL_NUMBER;
+    receiveSerial = INITIAL_SERIAL_NUMBER;
+    maxValid = INITIAL_SERIAL_NUMBER-kSerialNumberStepSize;
 
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = kInitialRoundTripTime;
@@ -133,7 +133,7 @@ void CUDPConnection::SendQueuePacket(UDPPacketInfo *thePacket, short theDistribu
         busyQLen++;
 #if PACKET_DEBUG > 1
         if (thePacket->packet.command == kpKeyAndMouse) {
-            thePacket->serialNumber = -1;  // assigned later
+            thePacket->serialNumber = INITIAL_SERIAL_NUMBER-1;  // assigned later
             DebugPacket('>', thePacket);
         }
 #endif
@@ -400,7 +400,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
 #endif
         itsOwner->ReleasePacket((PacketInfo *)thePacket);
     } else {
-        SDL_Log("ERROR dequeueing packet (sn=%d) from kTransmitQ\n", thePacket->serialNumber);
+        SDL_Log("ERROR dequeueing packet (sn=%d) from kTransmitQ\n", (uint16_t)thePacket->serialNumber);
     }
 }
 
@@ -423,7 +423,7 @@ void CUDPConnection::RunValidate() {
 }
 
 char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) {
-    short transmittedSerial;
+    SerialNumber transmittedSerial;
     short dummyStackVar;
     UDPPacketInfo *thePacket, *nextPacket;
 
@@ -664,13 +664,13 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
         next->OpenNewConnections(origTable);
 }
 
-void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, long firstReceiveSerial) {
+void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16_t firstReceiveSerial) {
     SDL_Log("CUDPConnection::FreshClient(%u, %hu)\n", remoteHost, remotePort);
     FlushQueues();
-    serialNumber = 0;
-    receiveSerial = firstReceiveSerial;
+    serialNumber = INITIAL_SERIAL_NUMBER;
+    receiveSerial = serialNumber + firstReceiveSerial;
 
-    maxValid = -kSerialNumberStepSize;
+    maxValid = INITIAL_SERIAL_NUMBER - kSerialNumberStepSize;
 
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = itsOwner->urgentResendTime;

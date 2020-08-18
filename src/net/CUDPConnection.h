@@ -11,9 +11,12 @@
 #include "CCommManager.h"
 #include "CDirectObject.h"
 #include "CommDefs.h"
+#include "RolloverCounter.h"
 
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
+
+typedef RolloverCounter<uint16_t> SerialNumber;
 
 #define PACKET_DEBUG 0   // set to 1 for packet debug output, 2 for extra detail
 
@@ -24,7 +27,7 @@ typedef struct {
     int32_t birthDate;
     // int32_t lastSendTime;
     int32_t nextSendTime;
-    int16_t serialNumber;
+    SerialNumber serialNumber;
     int16_t sendCount;
 
 } UDPPacketInfo;
@@ -66,9 +69,9 @@ public:
 
     short myId;
 
-    short serialNumber;
-    short receiveSerial;
-    short maxValid;
+    SerialNumber serialNumber;
+    SerialNumber receiveSerial;
+    SerialNumber maxValid;
 
     Boolean haveToSendAck;
     long nextAckTime;
@@ -98,7 +101,7 @@ public:
 
     volatile short *offsetBufferBusy;
     int32_t ackBitmap;
-    short ackBase;
+    SerialNumber ackBase;
 
     Boolean killed;
 
@@ -124,7 +127,7 @@ public:
 
     virtual Boolean AreYouDone();
 
-    virtual void FreshClient(ip_addr remoteHost, port_num remotePort, long firstReceiveSerial);
+    virtual void FreshClient(ip_addr remoteHost, port_num remotePort, uint16_t firstReceiveSerial);
 
 #if PACKET_DEBUG || LATENCY_DEBUG
     virtual void DebugPacket(char eType, UDPPacketInfo *p);
