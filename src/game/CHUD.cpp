@@ -18,7 +18,12 @@ const std::vector<long> team_colors =
 
 
 bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecord, int> j) {
-    return i.first.points > j.first.points;
+    if(i.first.points == j.first.points) {
+        return i.second < j.second;
+    }
+    else {
+        return i.first.points > j.first.points;
+    }
 }
 
 void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NVGcontext *ctx) {
@@ -104,6 +109,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
 
         int playerRank = 0;
         nvgFontSize(ctx, fontsz_m);
+        int16_t previousScore = -32768;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             int playerTableIndex = sortedPlayers[i].second;
             CPlayerManager *thisPlayer = net->playerTable[playerTableIndex];
@@ -116,7 +122,9 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
             NVGcolor textColor = aliveColor;
             
             if(playerName.size() > 0 && thisPlayer->GetPlayer() != NULL) {
-                playerRank++;
+                if(theScores.player[playerTableIndex].points != previousScore)
+                    playerRank++;
+                
                 //int playerLives = thisPlayer->GetPlayer()->lives;
                 int playerLives = theScores.player[playerTableIndex].lives;
                 if(thisPlayer->IsLocalPlayer()) {
@@ -171,6 +179,8 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
                 nvgText(ctx, x + colorBoxWidth + colWidth*7, y, ping.c_str(), NULL);
 
                 y += colorBoxWidth + 10;
+                
+                previousScore = theScores.player[playerTableIndex].points;
              }
         }
     }
