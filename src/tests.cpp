@@ -128,7 +128,7 @@ public:
     virtual OSErr LoadLevel(std::string set, OSType theLevel) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
-    virtual json Get(const std::string name) {}
+    virtual json Get(const std::string name) { return json(); }
     virtual void Set(const std::string name, const std::string value) {}
     virtual void Set(const std::string name, long value) {}
     virtual void Set(const std::string name, json value) {}
