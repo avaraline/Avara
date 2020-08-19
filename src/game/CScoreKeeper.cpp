@@ -195,6 +195,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
         if (reason == ksiKillBonus && hitPlayer >= 0 && hitPlayer <= kMaxAvaraPlayers) {
             Str255 destStr;
 
+            localScores.player[hitPlayer].lives--;
             if (hitTeam != team) {
                 localScores.player[player].kills++;
             }
