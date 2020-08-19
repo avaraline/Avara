@@ -1872,7 +1872,7 @@ void CUDPComm::Reconfigure() {
     */
 }
 
-long CUDPComm::GetMaxRoundTrip(short distribution) {
+long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
     float maxTrip = 0;
     CUDPConnection *conn;
 
@@ -1880,6 +1880,9 @@ long CUDPComm::GetMaxRoundTrip(short distribution) {
         if (conn->port && (distribution & (1 << conn->myId))) {
             if (conn->meanRoundTripTime > maxTrip) {
                 maxTrip = conn->meanRoundTripTime;
+                if (slowPlayerId != nullptr) {
+                    *slowPlayerId = conn->myId;
+                }
             }
         }
     }

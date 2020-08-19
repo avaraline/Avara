@@ -1038,7 +1038,7 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     return (roundTrip + frameTime) / (2*frameTime);
 }
 
-void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange) {
+void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange, const char* slowPlayer) {
     if (latencyTolerance != newLatency) {
         #define MAX_LATENCY ((long)8)
         if (maxChange < 0) {
@@ -1052,6 +1052,14 @@ void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange) {
         }
         gApplication->Set(kLatencyToleranceTag, latencyTolerance);
         SDL_Log("*** LT set to %ld\n", latencyTolerance);
+        
+        if (slowPlayer != nullptr) {
+            std::ostringstream oss;
+            std::time_t t = std::time(nullptr);
+            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << std::to_string(latencyTolerance) << " (" << slowPlayer << ")";
+            itsApp->AddMessageLine(oss.str());
+        }
+
         AdjustFrameTime();
     }
 }
