@@ -48,12 +48,6 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         NVGcolor highColor = nvgRGBA(255, 0, 0, 255);
         float colWidth = 80;
         float rankWidth = 40;
-
-        //center board if game over
-//        if(itsGame->gameStatus != kPlayingStatus) {
-//            x = (bufferWidth-boardWidth) / 2;
-//            y -= 50;
-//        }
         
         //use netscores when not in the game
         if(itsGame->gameStatus != kPlayingStatus && itsGame->gameStatus != kPauseStatus) {
@@ -143,7 +137,14 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
                 nvgRoundedRect(ctx, x + rankWidth + 10, y, colorBoxWidth, colorBoxWidth, 3.0);
                 nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
                 nvgFill(ctx);
-
+                
+                //show winnner
+                if(thisPlayer->WinFrame() > 0) {
+                    std::string checkMark("\u221A");
+                    nvgFillColor(ctx, aliveColor);
+                    nvgText(ctx, x + rankWidth + 33, y, checkMark.c_str(), NULL);
+                }
+                
                 //score text settings
                 textColor = aliveColor;
                 if(playerLives == 0 && (itsGame->gameStatus == kPlayingStatus || itsGame->gameStatus == kPauseStatus))
