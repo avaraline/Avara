@@ -246,7 +246,7 @@ public:
     virtual double LatencyFrameTimeScale();
 
     virtual long RoundTripToFrameLatency(long rtt);
-    virtual void SetLatencyTolerance(long newLatency, int maxChange = 2);
+    virtual void SetLatencyTolerance(long newLatency, int maxChange = 2, const char *slowPlayer = nullptr);
     virtual void AdjustFrameTime();
     virtual long TimeToFrameCount(long timeInMsec);
 };

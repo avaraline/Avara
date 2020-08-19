@@ -141,7 +141,7 @@ public:
 
     virtual Boolean ReconfigureAvailable();
     virtual void Reconfigure();
-    virtual long GetMaxRoundTrip(short distribution);
+    virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
 
     virtual void BuildServerTags();
 };

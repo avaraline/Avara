@@ -654,11 +654,14 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
     }
 
     long autoLatencyPeriod = itsGame->TimeToFrameCount(AUTOLATENCYPERIOD);
+    static CPlayerManager *maxPlayer = nullptr;
     if (frameNumber >= autoLatencyPeriod) {
         if ((frameNumber % autoLatencyPeriod) == 0) {
             long maxRoundLatency;
+            short maxId = 0;
+            maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution, &maxId);
+            maxPlayer = playerTable[maxId];
 
-            maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution);
             itsCommManager->SendUrgentPacket(
                 activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
             #if LATENCY_DEBUG
@@ -689,7 +692,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                             frameNumber, itsGame->frameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
                 #endif
 
-                itsGame->SetLatencyTolerance(maxFrameLatency);
+                itsGame->SetLatencyTolerance(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
                 itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
             }
 
