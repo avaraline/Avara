@@ -13,6 +13,8 @@
 #include "CGrenade.h"
 #include "AvaraGL.h"
 
+#include "CUDPConnection.h"
+
 #include <iostream>
 using namespace std;
 
@@ -126,7 +128,7 @@ public:
     virtual OSErr LoadLevel(std::string set, OSType theLevel) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
-    virtual json Get(const std::string name) {}
+    virtual json Get(const std::string name) { return json(); }
     virtual void Set(const std::string name, const std::string value) {}
     virtual void Set(const std::string name, long value) {}
     virtual void Set(const std::string name, json value) {}
@@ -351,6 +353,44 @@ TEST(GRENADE, Trajectory) {
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 1) << "not close enough after " << i << " ticks.";
     }
+}
+
+template<typename T, typename TMember>
+void test_rollover(string counterName, T x, T y, TMember counter) {
+    // quick test using signed int16_t max value in case somebody changes the type...
+    x.*counter = std::numeric_limits<int16_t>::max();
+    y.*counter = x.*counter + 2;
+    EXPECT_LT(x.*counter, y.*counter)     << counterName << " failed (x < y) test for INT16_MAX";
+    EXPECT_EQ(y.*counter - x.*counter, 2) << counterName << " failed (y - x) test for INT16_MAX";
+
+    // ...but most tests should be for uint16_t
+    x.*counter = std::numeric_limits<uint16_t>::max();
+    y.*counter = x.*counter + 2;
+    // Don't use googletest operator macros such as EXPECT_LT because we are testing the operators themselves
+    EXPECT_TRUE(x.*counter < y.*counter)   << counterName << " failed (x < y) test for UINT16_MAX";
+    EXPECT_TRUE(y.*counter > x.*counter)   << counterName << " failed (y > x) test for UINT16_MAX";
+    EXPECT_TRUE(x.*counter <= y.*counter)  << counterName << " failed (x <= y) test for UINT16_MAX";
+    EXPECT_TRUE(y.*counter >= x.*counter)  << counterName << " failed (y >= x) test for UINT16_MAX";
+    EXPECT_TRUE(x.*counter != y.*counter)  << counterName << " failed (x != y) test for UINT16_MAX";
+    EXPECT_EQ(y.*counter - x.*counter, 2)  << counterName << " failed (y - x) test for UINT16_MAX";
+    EXPECT_EQ(x.*counter - y.*counter, -2) << counterName << " failed (x - y) test for UINT16_MAX";
+
+    y.*counter = x.*counter;
+    EXPECT_TRUE(x.*counter == y.*counter)  << counterName << " failed (x == y) test for equal values";
+    EXPECT_TRUE(x.*counter <= y.*counter)  << counterName << " failed (x <= y) test for equal values";
+    EXPECT_TRUE(y.*counter >= x.*counter)  << counterName << " failed (x >= y) test for equal values";
+}
+
+TEST(SERIAL_NUMBER, Rollover) {
+    // tests all instance of variable serialNumber and any field used as a serial number proxy
+    UDPPacketInfo packet1, packet2;
+    test_rollover("UDPPacketInfo::serialNumber", packet1, packet2, &UDPPacketInfo::serialNumber);
+
+    CUDPConnection conn1, conn2;
+    test_rollover("CUDPConnection::serialNumber", conn1, conn2, &CUDPConnection::serialNumber);
+    test_rollover("CUDPConnection::receiveSerial", conn1, conn2, &CUDPConnection::receiveSerial);
+    test_rollover("CUDPConnection::maxValid", conn1, conn2, &CUDPConnection::maxValid);
+    test_rollover("CUDPConnection::ackBase", conn1, conn2, &CUDPConnection::ackBase);
 }
 
 int main(int argc, char **argv) {
