@@ -744,8 +744,8 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             debugView = !debugView;
         if (TESTFUNC(kfuDebug2, ft->down)) {
             //debug2Flag = !debug2Flag;
-            ChangeSky();
-            
+            if (itsManager->IsLocalPlayer())
+                ChangeSky();
         }
 
         if (TESTFUNC(kfuZoomIn, ft->held))
