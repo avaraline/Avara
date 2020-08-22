@@ -11,6 +11,7 @@
 #include <math.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <stb_image.h>
 
 
 bool actuallyRender = true;
@@ -75,6 +76,11 @@ GLuint light0Loc, light1Loc, light2Loc, light3Loc;
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
 GLuint skyViewLoc, skyProjLoc, groundColorLoc, horizonColorLoc, skyColorLoc;
+
+GLuint textureProgram;
+unsigned int skyboxVAO, skyboxVBO;
+unsigned int cubemapTexture;
+GLuint textureViewLoc, textureProjLoc, textureGroundColorLoc;
 
 const char* glGetErrorString(GLenum error)
 {
@@ -199,6 +205,187 @@ void AvaraGLSetDepthTest(bool doTest) {
     else glDepthFunc(GL_ALWAYS);
 }
 
+// loads a cubemap texture from 6 individual texture faces
+// order: +X (right), -X (left), +Y (top), -Y (bottom), +Z (front), -Z (back)
+unsigned int loadCubemap(std::vector<std::string> faces) {
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    
+    int width, height, nrChannels;
+    for (unsigned int i = 0; i < faces.size(); i++) {
+        unsigned char *data =
+        stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+        if (data) {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width,
+                         height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            stbi_image_free(data);
+        } else {
+            std::cout << "Cubemap texture failed to load at path: " << faces[i]
+            << std::endl;
+            stbi_image_free(data);
+        }
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    
+    return textureID;
+}
+
+void textureSetup() {
+    textureProgram = LoadShaders(BundlePath("shaders/skytexture_vert.glsl"), BundlePath("shaders/skytexture_frag.glsl"));
+    //glGenVertexArrays(1, &skyVertArray);
+    //glGenBuffers(1, &skyBuffer);
+ 
+    glUseProgram(textureProgram);
+
+    glBindAttribLocation(textureProgram, 0, "in_Position");
+
+    textureViewLoc = glGetUniformLocation(textureProgram, "view");
+    textureProjLoc = glGetUniformLocation(textureProgram, "proj");
+    textureGroundColorLoc = glGetUniformLocation(textureProgram, "groundColor");
+    
+    glGenTextures(1, &cubemapTexture);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+    
+//    float skyboxTextureVertices[] = {
+        // positions
+        //        1.0f, 1.0f,  -1.0f, 1.0f, -1.0f, -1.0f, -1.0f,  -1.0f, -1.0f,
+        //        -1.0f,  -1.0f, -1.0f, -1.0f,  1.0f,  -1.0f, 1.0f, 1.0f,  -1.0f,
+        //
+        //        1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f, 1.0f, 1.0f,  -1.0f,
+        //        1.0f, 1.0f,  -1.0f, 1.0f, 1.0f,  1.0f,  1.0f, -1.0f, 1.0f,
+        //
+        //        -1.0f,  -1.0f, -1.0f, -1.0f,  -1.0f, 1.0f,  -1.0f,  1.0f,  1.0f,
+        //        -1.0f,  1.0f,  1.0f,  -1.0f,  1.0f,  -1.0f, -1.0f,  -1.0f, -1.0f,
+        //
+        //        1.0f, -1.0f, 1.0f,  1.0f, 1.0f,  1.0f,  -1.0f,  1.0f,  1.0f,
+        //        -1.0f,  1.0f,  1.0f,  -1.0f,  -1.0f, 1.0f,  1.0f, -1.0f, 1.0f,
+        //
+        //        1.0f, 1.0f,  -1.0f, -1.0f,  1.0f,  -1.0f, -1.0f,  1.0f,  1.0f,
+        //        -1.0f,  1.0f,  1.0f,  1.0f, 1.0f,  1.0f,  1.0f, 1.0f,  -1.0f,
+        //
+        //        1.0f, -1.0f, -1.0f, 1.0f, -1.0f, 1.0f,  -1.0f,  -1.0f, -1.0f,
+        //        -1.0f,  -1.0f, -1.0f, 1.0f, -1.0f, 1.0f,  -1.0f,  -1.0f, 1.0f};
+    
+    //was using below
+//        -1.0f, 1.0f,  -1.0f, -1.0f, -1.0f, -1.0f, 1.0f,  -1.0f, -1.0f,
+//        1.0f,  -1.0f, -1.0f, 1.0f,  1.0f,  -1.0f, -1.0f, 1.0f,  -1.0f,
+//
+//        -1.0f, -1.0f, 1.0f,  -1.0f, -1.0f, -1.0f, -1.0f, 1.0f,  -1.0f,
+//        -1.0f, 1.0f,  -1.0f, -1.0f, 1.0f,  1.0f,  -1.0f, -1.0f, 1.0f,
+//
+//        1.0f,  -1.0f, -1.0f, 1.0f,  -1.0f, 1.0f,  1.0f,  1.0f,  1.0f,
+//        1.0f,  1.0f,  1.0f,  1.0f,  1.0f,  -1.0f, 1.0f,  -1.0f, -1.0f,
+//
+//        -1.0f, -1.0f, 1.0f,  -1.0f, 1.0f,  1.0f,  1.0f,  1.0f,  1.0f,
+//        1.0f,  1.0f,  1.0f,  1.0f,  -1.0f, 1.0f,  -1.0f, -1.0f, 1.0f,
+//
+//        -1.0f, 1.0f,  -1.0f, 1.0f,  1.0f,  -1.0f, 1.0f,  1.0f,  1.0f,
+//        1.0f,  1.0f,  1.0f,  -1.0f, 1.0f,  1.0f,  -1.0f, 1.0f,  -1.0f,
+//
+//        -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f,  1.0f,  -1.0f, -1.0f,
+//        1.0f,  -1.0f, -1.0f, -1.0f, -1.0f, 1.0f,  1.0f,  -1.0f, 1.0f};
+    
+    // skybox VAO
+    glGenVertexArrays(1, &skyboxVAO);
+    glGenBuffers(1, &skyboxVBO);
+    glBindVertexArray(skyboxVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxTextureVertices), &skyboxTextureVertices,
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices,
+                 GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),
+                          (void *)0);
+    
+    bool flipFrontBack = false;
+    std::string skyboxDir(BundlePath("rsrc/skybox/"));
+    std::string fileExtension = ".jpg";
+    
+    //!!!   ==========================
+    // water and interstellar may have had front/back and top rotated manually so change program to swap and rotate
+    
+    //std::string skyboxPath("test/water"); //has FRONT and LEFT text in pic
+    std::string skyboxPath("test/waterorig");
+    //std::string skyboxPath("mayhem/flame"); flipFrontBack = true; //top needs rotation
+    //std::string skyboxPath("redeclipse/interstellar");
+    //std::string skyboxPath("redeclipse/grey"); flipFrontBack =true; //top needs rotation
+    //std::string skyboxPath("redeclipse/miramar"); flipFrontBack =true; //top is off
+    //std::string skyboxPath("redeclipse/stormydays"); flipFrontBack =true; //top is off
+    //std::string skyboxPath("redeclipse/sunsetflat"); flipFrontBack =true; //top needs rotation
+    //std::string skyboxPath("redeclipse/yellow"); flipFrontBack = true;  //top needs rotation
+    
+    std::vector<std::string> faces {
+        skyboxDir + skyboxPath + "_rt" + fileExtension, skyboxDir + skyboxPath + "_lf" + fileExtension,
+        //skyboxDir + skyboxPath + "_lf" + fileExtension, skyboxDir + skyboxPath + "_rt" + fileExtension,
+        skyboxDir + skyboxPath + "_up" + fileExtension, skyboxDir + skyboxPath + "_dn" + fileExtension
+    };
+    
+    if(flipFrontBack == false) {
+        faces.push_back(skyboxDir + skyboxPath + "_ft" + fileExtension);
+        faces.push_back(skyboxDir + skyboxPath + "_bk" + fileExtension);
+    }
+    else {
+        faces.push_back(skyboxDir + skyboxPath + "_bk" + fileExtension);
+        faces.push_back(skyboxDir + skyboxPath + "_ft" + fileExtension);
+    }
+    
+    cubemapTexture = loadCubemap(faces);
+    glUniform1i(glGetUniformLocation(textureProgram, "skybox"), 0);
+}
+
+int tIndex = 0;
+void ChangeSky() {
+    bool flipFrontBack = true;
+    std::string skyboxDir(BundlePath("rsrc/skybox/"));
+    std::string fileExtension = ".jpg";
+    std::string skyboxPath("redeclipse/interstellar");
+
+    tIndex++;
+    if(tIndex > 9)
+        tIndex = 0;
+
+    switch (tIndex) {
+        case 1: skyboxPath = "redeclipse/interstellar"; flipFrontBack = false; break;
+        case 2: skyboxPath = "mayhem/flame"; break;
+        case 3: skyboxPath = "redeclipse/yellow"; break;
+        case 4: skyboxPath = "redeclipse/grey"; break;
+        case 5: skyboxPath = "redeclipse/miramar"; break;
+        case 6: skyboxPath = "redeclipse/stormydays"; break;
+        case 7: skyboxPath = "redeclipse/sunsetflat"; break;
+        case 8: skyboxPath = "test/waterorig"; flipFrontBack = false; break;
+        case 9: skyboxPath = "penguins/indigo"; break;
+        default:
+            break;
+    }
+    
+    if(tIndex > 0) {
+        std::vector<std::string> faces {
+            skyboxDir + skyboxPath + "_rt" + fileExtension, skyboxDir + skyboxPath + "_lf" + fileExtension,
+            //skyboxDir + skyboxPath + "_lf" + fileExtension, skyboxDir + skyboxPath + "_rt" + fileExtension,
+            skyboxDir + skyboxPath + "_up" + fileExtension, skyboxDir + skyboxPath + "_dn" + fileExtension
+        };
+        
+        if(flipFrontBack == false) {
+            faces.push_back(skyboxDir + skyboxPath + "_ft" + fileExtension);
+            faces.push_back(skyboxDir + skyboxPath + "_bk" + fileExtension);
+        }
+        else {
+            faces.push_back(skyboxDir + skyboxPath + "_bk" + fileExtension);
+            faces.push_back(skyboxDir + skyboxPath + "_ft" + fileExtension);
+        }
+        
+        cubemapTexture = loadCubemap(faces);
+        printf("Loaded sky=%s\n", skyboxPath.c_str());
+    }
+
+}
+
+
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
@@ -225,6 +412,7 @@ void AvaraGLInitContext() {
     glCheckErrors();
 
     skyProgram = LoadShaders(BundlePath("shaders/sky_vert.glsl"), BundlePath("shaders/sky_frag.glsl"));
+
     glGenVertexArrays(1, &skyVertArray);
     glGenBuffers(1, &skyBuffer);
     skyViewLoc = glGetUniformLocation(skyProgram, "view");
@@ -232,6 +420,8 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
+    
+    textureSetup();
 }
 
 void AvaraGLViewport(short width, short height) {
@@ -333,8 +523,64 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
 }
 
-
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
+    if(tIndex == 0)
+        AvaraGLShadeWorldClassic(theShader, theView);
+    else
+        AvaraGLShadeWorldTexture(theShader, theView);
+}
+
+void AvaraGLShadeWorldTexture(CWorldShader *theShader, CViewParameters *theView) {
+    glCheckErrors();
+    if (!actuallyRender) return;
+    
+    Matrix *trans = &theView->viewMatrix;
+    float matrix[16];
+    for (int c = 0; c < 4; c++) {
+        for (int r = 0; r < 4; r++) {
+            matrix[(c * 4) + r] = ToFloat((*trans)[c][r]);
+        }
+    }
+    // Get rid of the translation part
+    matrix[12] = matrix[13] = matrix[14] = 0;
+    
+    //orig
+    //    glBindVertexArray(skyVertArray);
+    //    glBindBuffer(GL_ARRAY_BUFFER, skyBuffer);
+    //    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
+    
+    long groundColor = theShader->groundColor;
+    
+    glDisable(GL_DEPTH_TEST);
+    //glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
+    //glEnableVertexAttribArray(0);
+    glUseProgram(textureProgram);
+
+    glUniformMatrix4fv(textureViewLoc, 1, GL_FALSE, matrix);
+    glUniformMatrix4fv(textureProjLoc, 1, GL_FALSE, glm::value_ptr(proj));
+    glUniform3f(textureGroundColorLoc,
+                ((groundColor >> 16) & 0xFF) / 255.0,
+                ((groundColor >> 8) & 0xFF) / 255.0,
+                (groundColor & 0xFF) / 255.0);
+    
+        //orig
+    //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    //    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    //    glBindVertexArray(skyVertArray);
+    //    glDrawArrays(GL_TRIANGLE_STRIP, 0, sizeof(skyboxVertices));
+    //    glDisableVertexAttribArray(0);
+    
+    //glBindVertexArray(skyVertArray);
+    glBindVertexArray(skyboxVAO);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glBindVertexArray(0);
+    
+    glEnable(GL_DEPTH_TEST);
+}
+
+void AvaraGLShadeWorldClassic(CWorldShader *theShader, CViewParameters *theView) {
     glCheckErrors();
     if (!actuallyRender) return;
     Matrix *trans = &theView->viewMatrix;

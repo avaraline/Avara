@@ -742,8 +742,11 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
         if (TESTFUNC(kfuDebug1, ft->down))
             debugView = !debugView;
-        if (TESTFUNC(kfuDebug2, ft->down))
-            debug2Flag = !debug2Flag;
+        if (TESTFUNC(kfuDebug2, ft->down)) {
+            //debug2Flag = !debug2Flag;
+            ChangeSky();
+            
+        }
 
         if (TESTFUNC(kfuZoomIn, ft->held))
             fieldOfView -= FOVSTEP;

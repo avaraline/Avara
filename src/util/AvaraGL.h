@@ -29,8 +29,11 @@ void AvaraGLInitContext();
 void AvaraGLViewport(short width, short height);
 void AvaraGLDrawPolygons(CBSPPart* part);
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView);
+void AvaraGLShadeWorldTexture(CWorldShader *theShader, CViewParameters *theView);
+void AvaraGLShadeWorldClassic(CWorldShader *theShader, CViewParameters *theView);
 void AvaraGLToggleRendering(int active);
 bool AvaraGLIsRendering();
+void ChangeSky();
 
 static inline glm::mat4 ToFloatMat(Matrix *m) {
     glm::mat4 mat(1.0);
