@@ -1086,7 +1086,7 @@ void CAvaraGame::AdjustFrameTime() {
         1.00,  //  3  64            192          16 
         1.00,  //  4  64            256          16   <-- somewhat playable, laggy
         1.25,  //  5  80            400          13   <-- barely playable / begin recovering
-        1.75,  //  6  112           672          9    <-- hope to never see LT > 5
+        1.50,  //  6  96            576          10   <-- hope to never see LT > 5
         2.50,  //  7  160           1120         6
         3.75,  //  8  240           1920         4    <-- trying to recover!  If it were a horse, I'd shoot it.
     };
@@ -1099,4 +1099,13 @@ void CAvaraGame::AdjustFrameTime() {
 long CAvaraGame::TimeToFrameCount(long timeInMsec) {
     // how many frames occur in timeInMsec?
     return timeInMsec / latencyFrameTime;
+}
+
+long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
+    // Jump forward to the next full period.
+    // For example, if we are changing latencies such that we start with 48 frames/period
+    // and we're moving to 60 frames/period, and we're on frame 48, we want to 
+    // move forward to frame 120 and NOT frame 60.
+    long periodFrames = TimeToFrameCount(period);
+    return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
 }

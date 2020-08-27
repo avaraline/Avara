@@ -32,16 +32,15 @@
 
 #include <string.h>
 
-#define AUTOLATENCYPERIOD 3456  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
-                                // to ensure it happens at a consistent clock time (every 3.456 seconds).  Better safe than sorry.
-#define AUTOLATENCYDELAY  384   // msec 
+#define AUTOLATENCYPERIOD 3840  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
+#define AUTOLATENCYDELAY  480   // msec 
 #define LOWERLATENCYCOUNT 3
 #define HIGHERLATENCYCOUNT 8
 
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
 #else
-    #define kAvaraNetVersion 8
+    #define kAvaraNetVersion 9
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -571,9 +570,9 @@ void CNetManager::ResumeGame() {
     maxRoundTripLatency = 0;
     addOneLatency = 0;
     localLatencyVote = 0;
-    localLatencyNoVote = 0;
     autoLatencyVote = 0;
     autoLatencyVoteCount = 0;
+    latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
     thePlayerManager = playerTable[itsCommManager->myId];
     if (thePlayerManager->GetPlayer()) {
@@ -649,28 +648,27 @@ void CNetManager::FrameAction() {
 void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
     if (didWait) {
         localLatencyVote++;
-    } else {
-        localLatencyNoVote++;
     }
 
-    long autoLatencyPeriod = itsGame->TimeToFrameCount(AUTOLATENCYPERIOD);
     static CPlayerManager *maxPlayer = nullptr;
-    if (frameNumber >= autoLatencyPeriod) {
+    if (frameNumber >= latencyVoteFrame) {
+        long autoLatencyPeriod = itsGame->TimeToFrameCount(AUTOLATENCYPERIOD);
         if ((frameNumber % autoLatencyPeriod) == 0) {
             long maxRoundLatency;
             short maxId = 0;
+
+            latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
             maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution, &maxId);
             maxPlayer = playerTable[maxId];
 
             itsCommManager->SendUrgentPacket(
                 activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
             #if LATENCY_DEBUG
-                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld localLatencyNoVote=%ld maxRoundLatency=%ld\n",
-                        frameNumber, autoLatencyPeriod,localLatencyVote, localLatencyNoVote, maxRoundLatency);
+                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld\n",
+                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency);
             #endif
             localLatencyVote = 0;
-            localLatencyNoVote = 0;
-        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY)) {
+        } else if ((frameNumber - latencyVoteFrame) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY)) {
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, centerAlign);
                 fragmentDetected = false;
@@ -688,8 +686,8 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                 maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
                 #if LATENCY_DEBUG
-                    SDL_Log("*** fn=%ld frameTime=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
-                            frameNumber, itsGame->frameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
+                    SDL_Log("*** fn=%ld latencyFrameTime=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
+                            frameNumber, itsGame->latencyFrameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
                 #endif
 
                 itsGame->SetLatencyTolerance(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
@@ -699,6 +697,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             autoLatencyVote = 0;
             autoLatencyVoteCount = 0;
             maxRoundTripLatency = 0;
+            latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD, latencyVoteFrame);
         }
     }
 }

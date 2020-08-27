@@ -249,6 +249,7 @@ public:
     virtual void SetLatencyTolerance(long newLatency, int maxChange = 2, const char *slowPlayer = nullptr);
     virtual void AdjustFrameTime();
     virtual long TimeToFrameCount(long timeInMsec);
+    virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
 };
 
 #ifndef MAINAVARAGAME
