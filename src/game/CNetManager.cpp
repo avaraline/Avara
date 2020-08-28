@@ -668,7 +668,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                         frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency);
             #endif
             localLatencyVote = 0;
-        } else if ((frameNumber - latencyVoteFrame) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY)) {
+        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, centerAlign);
                 fragmentDetected = false;
@@ -697,6 +697,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             autoLatencyVote = 0;
             autoLatencyVoteCount = 0;
             maxRoundTripLatency = 0;
+            maxPlayer = nullptr;
             latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD, latencyVoteFrame);
         }
     }
