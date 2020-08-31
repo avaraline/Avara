@@ -99,9 +99,9 @@ public:
 
     Boolean autoLatencyEnabled;
     long localLatencyVote;
-    long localLatencyNoVote;
     long autoLatencyVote;
     long autoLatencyVoteCount;
+    long latencyVoteFrame;
     short maxRoundTripLatency;
     short addOneLatency;
 
