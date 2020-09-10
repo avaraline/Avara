@@ -377,17 +377,17 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // Use +2.5 sigma(probability 98.7%) for non-urgent retransmitTime
             retransmitTime = meanRoundTripTime + (long)(2.5*stdevRoundTripTime);
 
-            // Half of the RTT is an estimate of LT.  If we want the game to stay smooth, resend urgent game packets 
-            // near the LT so that a lost packet can be retransmitted and has a chance of getting there in time to be
-            // in the correct frame.
-            // This may result in extra re-sends but should help the game flow, especially if a connection is dropping packets.
-            urgentRetransmitTime = meanRoundTripTime / 2;
-            
-            // don't let the retransmit times fall below threshold based on frame rate or go above kMaxAllowedRetransmitTime
+            // don't let the retransmit times fall below urgentResendTime (LT =~ 2) or go above kMaxAllowedRetransmitTime
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
             retransmitTime = std::min(retransmitTime, (long)kMaxAllowedRetransmitTime);
-            urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
-            urgentRetransmitTime = std::min(urgentRetransmitTime, (long)kMaxAllowedRetransmitTime);
+            
+            // If we want the game to stay smooth, resend urgent/game packets near the overall LT (max(RTT)/2) so that
+            // lost packets can be retransmitted and have a chance of getting there in time to be only 1 frame late.
+            // This may result in extra re-sends but should help the game flow, especially if a connection is dropping packets.
+            // This latency estimate goes across all active connections so that faster connections won't be penalized and 
+            // have to re-send to each other as often.
+            urgentRetransmitTime = std::min(LatencyEstimate(), itsOwner->urgentResendTime);
+            urgentRetransmitTime = std::min(urgentRetransmitTime, (long)retransmitTime);
 
             #if PACKET_DEBUG || LATENCY_DEBUG
                 SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
@@ -756,4 +756,18 @@ void CUDPConnection::GetConnectionStatus(short slot, UDPConnectionStatus *parms)
         if (next)
             next->GetConnectionStatus(slot, parms);
     }
+}
+
+// latency estimate across all connection in internal time units
+long CUDPConnection::LatencyEstimate() {
+    float maxRTT = 0;
+
+    for (CUDPConnection *conn = itsOwner->connections; conn; conn = conn->next) {
+        // only use active connection
+        if (conn->port) {
+            maxRTT = std::max(maxRTT, conn->meanRoundTripTime);
+        }
+    }
+
+    return maxRTT/2;
 }
