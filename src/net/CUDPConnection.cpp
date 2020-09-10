@@ -23,7 +23,7 @@
 #define RTTSMOOTHFACTOR_UP 80
 #define RTTSMOOTHFACTOR_DOWN 160
 
-#define MAX_RESENDS_WITHOUT_RECEIVE 2
+#define MAX_RESENDS_WITHOUT_RECEIVE 4
 
 #if PACKET_DEBUG || LATENCY_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
@@ -318,9 +318,9 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
             if (thePacket->birthDate != thePacket->nextSendTime) {
                 totalResent++;
                 numResendsWithoutReceive++;
-                #if PACKET_DEBUG
+                #if PACKET_DEBUG | LATENCY_DEBUG
                     SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d, age=%ld, percentResends = %.1f, numResendsWithoutReceive = %ld\n",
-                            myId, thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent, numResendsWithoutReceive);
+                            myId, (uint16_t)thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent, numResendsWithoutReceive);
                 #endif
             }
             #if PACKET_DEBUG
@@ -365,9 +365,8 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             float alpha = itsOwner->frameTimeScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
             if (thePacket->sendCount > 1) {
-                // Don't ignore resent packets but de-weight them.  If you ignore them it's possible on a lag spike to
-                // never re-enter this code block (previous mean & stdev is still low so it always tries to resend).
-                alpha /= thePacket->sendCount;
+                // Don't ignore resent packets but de-weight them pretty heavily.
+                alpha /= (thePacket->sendCount*thePacket->sendCount);
             }
             
             float increment = alpha * difference;
@@ -375,10 +374,14 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             varRoundTripTime = (1 - alpha) * (varRoundTripTime + difference * increment);
             float stdevRoundTripTime = sqrt(varRoundTripTime);
 
-            // use +3.5 sigma(probability 99.9%) for retransmitTime, +3 sigma (99.7%) for urgentRetransmitTime
-            // (thought: consider dynamically adjusting the multiplier based on % of resends?)
-            retransmitTime = meanRoundTripTime + (long)(3.5*stdevRoundTripTime);
-            urgentRetransmitTime = meanRoundTripTime + (long)(3.0*stdevRoundTripTime);
+            // Use +2.5 sigma(probability 98.7%) for non-urgent retransmitTime
+            retransmitTime = meanRoundTripTime + (long)(2.5*stdevRoundTripTime);
+
+            // Half of the RTT is an estimate of LT.  If we want the game to stay smooth, resend urgent game packets 
+            // near the LT so that a lost packet can be retransmitted and has a chance of getting there in time to be
+            // in the correct frame.
+            // This may result in extra re-sends but should help the game flow, especially if a connection is dropping packets.
+            urgentRetransmitTime = meanRoundTripTime / 2;
             
             // don't let the retransmit times fall below threshold based on frame rate or go above kMaxAllowedRetransmitTime
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
