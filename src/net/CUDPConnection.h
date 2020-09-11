@@ -138,4 +138,7 @@ public:
     virtual void ReceiveControlPacket(PacketInfo *thePacket);
 
     virtual void GetConnectionStatus(short slot, UDPConnectionStatus *parms);
+    
+private:
+    long LatencyEstimate();
 };
