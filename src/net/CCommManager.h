@@ -63,6 +63,8 @@ public:
 
     short genericInfoTextRes;
 
+    double frameTimeScale = 1.0;     // when time is slowed down, this number is > 1
+
     //	For method documentation, see .c-file:
 
     virtual void ICommManager(short packetSpace);
@@ -94,5 +96,5 @@ public:
     virtual Boolean ReconfigureAvailable();
     virtual void Reconfigure();
 
-    virtual long GetMaxRoundTrip(short distribution);
+    virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
 };

@@ -10,9 +10,12 @@
 #pragma once
 #include "AvaraTCP.h"
 #include "CCommManager.h"
+#include "CommDefs.h"
 #include "Types.h"
 
 #include <string>
+
+#define INITIAL_SERIAL_NUMBER     0  // must be even
 
 #define ROUTE_THRU_SERVER 0  // non-zero to route all messages through the server
 
@@ -140,7 +143,7 @@ public:
 
     virtual Boolean ReconfigureAvailable();
     virtual void Reconfigure();
-    virtual long GetMaxRoundTrip(short distribution);
+    virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
 
     virtual void BuildServerTags();
 };

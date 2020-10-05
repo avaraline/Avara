@@ -130,7 +130,7 @@ $(BUILD_DIR)/%.mm.o: %.mm
 .PHONY: clean publish
 
 set-version:
-	echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h
+	grep -q $(GIT_HASH) src/util/GitVersion.h || (echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h)
 
 build-link: $(BUILD_DIR)/Avara
 	@if [ ! -e build ] || [ -h build ]; then \

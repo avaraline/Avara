@@ -80,6 +80,7 @@ public:
 
     long topSentFrame;
 
+    long latencyFrameTime; //	In milliseconds.
     long frameTime; //	In milliseconds.
     short gameStatus;
     short statusRequest;
@@ -242,6 +243,13 @@ public:
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
     virtual double FrameTimeScale(double exponent=1);
+    virtual double LatencyFrameTimeScale();
+
+    virtual long RoundTripToFrameLatency(long rtt);
+    virtual void SetLatencyTolerance(long newLatency, int maxChange = 2, const char *slowPlayer = nullptr);
+    virtual void AdjustFrameTime();
+    virtual long TimeToFrameCount(long timeInMsec);
+    virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
 };
 
 #ifndef MAINAVARAGAME

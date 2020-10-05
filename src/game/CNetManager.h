@@ -101,6 +101,7 @@ public:
     long localLatencyVote;
     long autoLatencyVote;
     long autoLatencyVoteCount;
+    long latencyVoteFrame;
     short maxRoundTripLatency;
     short addOneLatency;
 

@@ -10,6 +10,19 @@
 #define RANDOMLY_DROP_PACKETS 0
 #if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
+#define SIMULATE_LATENCY_LT 2
+#define SIMULATE_LATENCY_MSEC_PER_LT 58  // less than 64 because of overhead of running multiple clients
+#define SIMULATE_LATENCY_MEAN   (SIMULATE_LATENCY_LT*SIMULATE_LATENCY_MSEC_PER_LT*1000)
+#define SIMULATE_LATENCY_JITTER  0
+#define SIMULATE_LATENCY_DISTRIBUTION  0x02  // bitmask of who gets the latency
+
+#define SIMULATE_LATENCY_CODE(text) \
+if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) { \
+    useconds_t zzz = 2*(SIMULATE_LATENCY_MEAN - SIMULATE_LATENCY_JITTER/2 + int((SIMULATE_LATENCY_JITTER)*float(rand())/RAND_MAX)); \
+    SDL_Log("sleeping for %d msec on %s\n", zzz/1000, text); \
+    usleep(zzz); \
+}
+
 #endif
 #if RANDOMLY_DROP_PACKETS
 int numToDrop = 0;
@@ -610,6 +623,10 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
         char *inEnd;
         short inLen;
 
+        #if SIMULATE_LATENCY_ON_CLIENTS
+            SIMULATE_LATENCY_CODE("read")
+        #endif
+
         curTime = GetClock();
         inData.c = (char *)packet->data; // receivePB.csParam.receive.rcvBuff;
         inLen = packet->len; // receivePB.csParam.receive.rcvBuffLen;
@@ -737,7 +754,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             #endif
 
                         } else {
-                            if (isServing && thePacket->serialNumber == 0 &&
+                            if (isServing && thePacket->serialNumber == INITIAL_SERIAL_NUMBER &&
                                 thePacket->packet.command == kpPacketProtocolLogin) {
                                 conn = DoLogin((PacketInfo *)thePacket, packet);
                             }
@@ -908,7 +925,7 @@ Boolean CUDPComm::AsyncWrite() {
 
             p = &thePacket->packet;
 
-            *outData.w++ = thePacket->serialNumber;
+            *outData.uw++ = thePacket->serialNumber;
             fp = outData.c++;
 
             *outData.c++ = p->command;
@@ -1016,8 +1033,7 @@ Boolean CUDPComm::AsyncWrite() {
         while (packetList && packetList != kPleaseSendAcknowledge) {
             thePacket = (UDPPacketInfo *)packetList->packet.qLink;
 
-            if (packetList->birthDate ==
-                packetList->nextSendTime) { //	This was the first time the packet was ever sent out.
+            if (packetList->sendCount++ == 0) {  //	This is the first time to send the packet
 
                 packetList->birthDate = curTime;
 
@@ -1056,11 +1072,9 @@ Boolean CUDPComm::AsyncWrite() {
                     SDL_Log("           ---------> DROPPING PACKET <---------\n");
                 } else {
             #endif
-            #if SIMULATE_LATENCY_ON_CLIENTS
-                if (myId >= 1) {
-                    usleep(50000 + int(20000*float(rand())/RAND_MAX)); // simulate network latencies
-                }
-            #endif
+            // #if SIMULATE_LATENCY_ON_CLIENTS
+            //     SIMULATE_LATENCY_CODE("write")
+            // #endif
             UDPWrite(stream, udp, UDPWriteComplete, this);
             #if RANDOMLY_DROP_PACKETS
                 }
@@ -1858,14 +1872,17 @@ void CUDPComm::Reconfigure() {
     */
 }
 
-long CUDPComm::GetMaxRoundTrip(short distribution) {
-    long maxTrip = 0;
+long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
+    float maxTrip = 0;
     CUDPConnection *conn;
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
             if (conn->meanRoundTripTime > maxTrip) {
                 maxTrip = conn->meanRoundTripTime;
+                if (slowPlayerId != nullptr) {
+                    *slowPlayerId = conn->myId;
+                }
             }
         }
     }
