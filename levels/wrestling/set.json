@@ -1,0 +1,168 @@
+{
+ "LEDI": {
+  "ch01": {
+   "Tag": "ch01",
+   "Name": "Phuzz",
+   "Message": "",
+   "Path": "phuzz.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "134_phuzz.pict.svg"
+  },
+  "c88a": {
+   "Tag": "c88a",
+   "Name": "Cream Filling",
+   "Message": "Yum.",
+   "Path": "creamFilling.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "128_creamFilling.pict.svg"
+  },
+  "pl08": {
+   "Tag": "pl08",
+   "Name": "Greek Mind Game",
+   "Message": "",
+   "Path": "greekMindGame.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "138_greekMindGame.pict.svg"
+  },
+  "i931": {
+   "Tag": "i931",
+   "Name": "Invalid",
+   "Message": "Almost.",
+   "Path": "invalid.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "137_invalid.pict.svg"
+  },
+  "acc0": {
+   "Tag": "acc0",
+   "Name": "Cinder Cone",
+   "Message": "Don't get burned ...",
+   "Path": "cinderCone.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "129_cinderCone.pict.svg"
+  },
+  "a910": {
+   "Tag": "a910",
+   "Name": "Boxing",
+   "Message": "",
+   "Path": "boxing.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "131_boxing.pict.svg"
+  },
+  "tiac": {
+   "Tag": "tiac",
+   "Name": "Tooty Twist ",
+   "Message": "",
+   "Path": "tootyTwist.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "132_tootyTwist.pict.svg"
+  },
+  "sca0": {
+   "Tag": "sca0",
+   "Name": "Sudden Death",
+   "Message": "",
+   "Path": "suddenDeath.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "130_suddenDeath.pict.svg"
+  },
+  "acl6": {
+   "Tag": "acl6",
+   "Name": "Sudden Death Squared",
+   "Message": "",
+   "Path": "deathMatchsq.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "135_deathMatchsq.pict.svg"
+  },
+  "9877": {
+   "Tag": "9877",
+   "Name": "Aquaman",
+   "Message": "",
+   "Path": "aquaMan.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "133_aquaMan.pict.svg"
+  },
+  "c99+": {
+   "Tag": "c99+",
+   "Name": "Lagless",
+   "Message": "Is it a state of mind ? ",
+   "Path": "lagless.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "136_lagless.pict.svg"
+  }
+ },
+ "HULL": {
+  "129": {
+   "Hull Res ID": 216,
+   "Max Missiles": 3,
+   "Max Grenades": 5,
+   "Max boosters": 0,
+   "Mass": 115.0,
+   "Max Energy": 182.42432288090333,
+   "Energy Charge": 182.42432288090333,
+   "Max Shields": 182.42432288090333,
+   "Shield Charge": 182.42432288090333,
+   "Min Shot": 1.0,
+   "Max Shot": 1.0,
+   "Shot Charge": 10.0,
+   "Riding Height": 0.3500114442664225,
+   "Acceleration": 0.777233539330129,
+   "Jump Power": 1.0
+  },
+  "130": {
+   "Hull Res ID": 217,
+   "Max Missiles": 2,
+   "Max Grenades": 3,
+   "Max boosters": 0,
+   "Mass": 150.0,
+   "Max Energy": 182.42432288090333,
+   "Energy Charge": 182.42432288090333,
+   "Max Shields": 182.42432288090333,
+   "Shield Charge": 182.42432288090333,
+   "Min Shot": 1.1000076295109484,
+   "Max Shot": 1.0,
+   "Shot Charge": 10.0,
+   "Riding Height": 0.3500114442664225,
+   "Acceleration": 0.777233539330129,
+   "Jump Power": 1.0
+  },
+  "128": {
+   "Hull Res ID": 215,
+   "Max Missiles": 4,
+   "Max Grenades": 6,
+   "Max boosters": 0,
+   "Mass": 120.0,
+   "Max Energy": 15.343175402456703,
+   "Energy Charge": 16960.0,
+   "Max Shields": 15.343175402456703,
+   "Shield Charge": 16960.0,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 10.0,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 0.777233539330129,
+   "Jump Power": 1.0
+  }
+ },
+ "manifest_path": "levels/wrestling/set.json"
+}

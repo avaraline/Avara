@@ -1,0 +1,41 @@
+{
+ "LEDI": {
+  "KlHp": {
+   "Tag": "KlHp",
+   "Name": "At the pools",
+   "Message": "\rHECTOR at the Pool",
+   "Path": "Pool",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "128_Pool.svg"
+  },
+  "KlHk": {
+   "Tag": "KlHk",
+   "Name": "HECTORS Kathedral",
+   "Message": "This building is used to adore\rone of the HECTORS unknown Gods",
+   "Path": "Kathedral",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "131_Kathedral.svg"
+  },
+  "KlHt": {
+   "Tag": "KlHt",
+   "Name": "Tower",
+   "Message": "Single player\rCan you climb this tower ?",
+   "Path": "Tower",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "132_Tower.svg"
+  }
+ },
+ "BSPT": {
+  "1000": {
+   "name": "HalfSphere",
+   "file": "levels/klaus-levels/bsps/1000.json"
+  }
+ },
+ "manifest_path": "levels/klaus-levels/set.json"
+}

@@ -1,0 +1,134 @@
+{
+ "LEDI": {
+  "ALEP": {
+   "Tag": "ALEP",
+   "Name": "Aleph Null",
+   "Message": "\rThe null set contains no pudding.",
+   "Path": "Aleph.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1129_Aleph.pict.svg"
+  },
+  "ATRO": {
+   "Tag": "ATRO",
+   "Name": "Atropine",
+   "Message": "\r1 mg IV push, repeat once after 5 minutes",
+   "Path": "atropine.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1501_atropine.pict.svg"
+  },
+  "ATR2": {
+   "Tag": "ATR2",
+   "Name": "Unbalanced Atrophine",
+   "Message": "\rGive only in case of patients with an odd number of Hectors.",
+   "Path": "atropine2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1502_atropine2.pict.svg"
+  },
+  "DAVE": {
+   "Tag": "DAVE",
+   "Name": "Dave",
+   "Message": "\r(king of the hill version)",
+   "Path": "Dave.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1998_Dave.pict.svg"
+  },
+  "SCHI": {
+   "Tag": "SCHI",
+   "Name": "Schizoid Man",
+   "Message": "\rNothing he's got he really needs.  21st Century Schizoid Man.",
+   "Path": "Schizoid.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1130_Schizoid.pict.svg"
+  },
+  "WDWA": {
+   "Tag": "WDWA",
+   "Name": "WallDoor World Arena",
+   "Message": "\rIt's WallDoor World Arena!!",
+   "Path": "wdwa.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1505_wdwa.pict.svg"
+  },
+  "WDW2": {
+   "Tag": "WDW2",
+   "Name": "WallDoor World Arena 2",
+   "Message": "\rIt's WallDoor World Arena with two teams!!",
+   "Path": "wdwa2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1506_wdwa2.pict.svg"
+  },
+  "WDW3": {
+   "Tag": "WDW3",
+   "Name": "WallDoor World Arena 3",
+   "Message": "\rIt's WallDoor World Arena with three teams!!",
+   "Path": "wdwa3.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1507_wdwa3.pict.svg"
+  },
+  "WDWO": {
+   "Tag": "WDWO",
+   "Name": "WDWA Classic",
+   "Message": "\rMore polys for those blessed with excess speed.",
+   "Path": "wdwo.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1508_wdwo.pict.svg"
+  },
+  "WIMP": {
+   "Tag": "WIMP",
+   "Name": "Wimp",
+   "Message": "\rRide that freeSolid, el gapazcho grande!",
+   "Path": "Wimp.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2002_Wimp.pict.svg"
+  },
+  "ZEAL": {
+   "Tag": "ZEAL",
+   "Name": "Zealot",
+   "Message": "\rTripping over a mountain.",
+   "Path": "Zealot.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2009_Zealot.pict.svg"
+  }
+ },
+ "HULL": {
+  "131": {
+   "Hull Res ID": 217,
+   "Max Missiles": 2,
+   "Max Grenades": 16,
+   "Max boosters": 0,
+   "Mass": 140.0,
+   "Max Energy": 10.0,
+   "Energy Charge": 4.0,
+   "Max Shields": 3.0,
+   "Shield Charge": 1.5000076295109483,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 10.0,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 0.9000076295109484,
+   "Jump Power": 1.0
+  }
+ },
+ "manifest_path": "levels/aa-deux-abnormal/set.json"
+}

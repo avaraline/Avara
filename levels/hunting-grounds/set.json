@@ -1,0 +1,85 @@
+{
+ "LEDI": {
+  "Hunt": {
+   "Tag": "Hunt",
+   "Name": "Full Hunting Grounds",
+   "Message": "Four or five Yellows against one  Green.  The object is for Green to stay alive for six minutes.  That's not so hard... is it?\r",
+   "Path": "5X1.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1111_5X1.pict.svg"
+  },
+  "HtSm": {
+   "Tag": "HtSm",
+   "Name": "Small Hunting Grounds",
+   "Message": "Specially optimized for smaller games.  Two to five Yellow against one or two Green.  The object is for Green to stay alive for three minutes.  That's not so hard... is it?\r",
+   "Path": "3X1.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2222_3X1.pict.svg"
+  },
+  "BlHt": {
+   "Tag": "BlHt",
+   "Name": "Ball Hunting",
+   "Message": "Two to five Yellow try to protect the goal from one \u0005Green.  You have six minutes.  Play nice!\r",
+   "Path": "Ballhunting.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "3333_Ballhunting.pict.svg"
+  },
+  "MnFd": {
+   "Tag": "MnFd",
+   "Name": "Minefield",
+   "Message": "Two to Five Yellow against one Green.  The object is for Green to stay alive for three minutes.  That's not so hard... is it?  Oh yea, green has another weapon or two to use...\r",
+   "Path": "Minefield.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "4444_Minefield.pict.svg"
+  },
+  "TGHT": {
+   "Tag": "TGHT",
+   "Name": "The Great Hunt",
+   "Message": "Yellow tries to hunt down green in this jungle setting.  Two to five Yellow against one Green. The object is for Green to stay alive for four minutes.  \r",
+   "Path": "The Great Hunt.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "4455_The_Great_Hunt.pict.svg"
+  },
+  "Duck": {
+   "Tag": "Duck",
+   "Name": "Fish in a Barrel",
+   "Message": "Two to five Yellow try to protect their wounded HECTOR from one or two Green.  You have three minutes.\r",
+   "Path": "Ducks.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "4499_Ducks.pict.svg"
+  },
+  "Chkb": {
+   "Tag": "Chkb",
+   "Name": "ChokeBox",
+   "Message": "This is NOT a hunting level.\rLayout similiar to the infamous Choke.  But not QUITE the same.\r",
+   "Path": "Chokesque.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "5555_Chokesque.pict.svg"
+  },
+  "DefB": {
+   "Tag": "DefB",
+   "Name": "D-Ball",
+   "Message": "This is NOT a hunting level.\rYellow vs. Green ballgame.  Yellow tries to defend their goal from Green.  You have four minutes.  Play nice!\r",
+   "Path": "Ballgame.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "6666_Ballgame.pict.svg"
+  }
+ },
+ "manifest_path": "levels/hunting-grounds/set.json"
+}

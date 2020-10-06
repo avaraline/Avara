@@ -1,0 +1,114 @@
+{
+ "LEDI": {
+  "kuwt": {
+   "Tag": "kuwt",
+   "Name": "Kuwait",
+   "Message": "Stay in the center square for 100 seconds... Teams are yellow, red, or blue.",
+   "Path": "baghdad2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1005_baghdad2.pict.svg"
+  },
+  "sand": {
+   "Tag": "sand",
+   "Name": "SandStorm!",
+   "Message": "Stay in the center square for 100 seconds. Teams are yellow, red, or blue.",
+   "Path": "sand.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1004_sand.pict.svg"
+  },
+  "kotr": {
+   "Tag": "kotr",
+   "Name": "King of the Ring",
+   "Message": "Stay in the center lower square 100 seconds to win. Teams are yellow, red, or blue.",
+   "Path": "kingring.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1002_kingring.pict.svg"
+  },
+  "shw2": {
+   "Tag": "shw2",
+   "Name": "Koth Showdown",
+   "Message": "Stay in the square anywhere between the floor and the ceiling for 100 seconds. Teams are yellow, red, or blue.",
+   "Path": "showdown2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1008_showdown2.pict.svg"
+  },
+  "noth": {
+   "Tag": "noth",
+   "Name": "Nothing",
+   "Message": "Not much here, just a square, a grenade and a missle.. Teams are yellow, red, or blue.",
+   "Path": "nothing.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1007_nothing.pict.svg"
+  },
+  "32pl": {
+   "Tag": "32pl",
+   "Name": "32nd Parallel",
+   "Message": "Teams must be red and yellow.  Up to 3 people on one team. Protect your side from your opponent - first to reach 100 seconds alone on their side wins.",
+   "Path": "line.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1009_line.pict.svg"
+  },
+  "brna": {
+   "Tag": "brna",
+   "Name": "Burned Again!",
+   "Message": "Stay in the lower square 100 seconds to win. Teams are yellow, red, or blue.",
+   "Path": "burnedagain.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1003_burnedagain.pict.svg"
+  },
+  "mirs": {
+   "Tag": "mirs",
+   "Name": "Mirage",
+   "Message": "Stay on the center platform 100 seconds to win... Teams are yellow, red, or blue.",
+   "Path": "mirage.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1006_mirage.pict.svg"
+  },
+  "rode": {
+   "Tag": "rode",
+   "Name": "Rodeo",
+   "Message": "How long can you stay on the center block? It takes 100 seconds to win... Teams are yellow, red, or blue.",
+   "Path": "rodeo.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_rodeo.pict.svg"
+  }
+ },
+ "HULL": {
+  "150": {
+   "Hull Res ID": 215,
+   "Max Missiles": 8,
+   "Max Grenades": 12,
+   "Max boosters": 6,
+   "Mass": 126.64795910582131,
+   "Max Energy": 9.155275806820782,
+   "Energy Charge": 4.5776455329213395,
+   "Max Shields": 1.5258869306477454,
+   "Shield Charge": 1.5258869306477454,
+   "Min Shot": 1.0681162737468528,
+   "Max Shot": 0.9155413138017853,
+   "Shot Charge": 10.681162737468528,
+   "Riding Height": 0.3814755474174105,
+   "Acceleration": 0.9918364232852674,
+   "Jump Power": 1.2207064927138171
+  }
+ },
+ "manifest_path": "levels/gzr-over-the-hill/set.json"
+}

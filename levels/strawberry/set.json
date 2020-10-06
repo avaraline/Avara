@@ -1,0 +1,67 @@
+{
+ "LEDI": {
+  "St01": {
+   "Tag": "St01",
+   "Name": "Strawberry Banana",
+   "Message": "\r[ Juice ]",
+   "Path": "Strawberry",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_Strawberry.svg"
+  },
+  "St02": {
+   "Tag": "St02",
+   "Name": "Strawberry Kiwi",
+   "Message": "\r[ Fruity ]",
+   "Path": "Strawberry Kiwi",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_Strawberry_Kiwi.svg"
+  }
+ },
+ "BSPT": {
+  "1002": {
+   "name": "ring design",
+   "file": "levels/strawberry/bsps/1002.json"
+  }
+ },
+ "HULL": {
+  "135": {
+   "Hull Res ID": 215,
+   "Max Missiles": 0,
+   "Max Grenades": 8,
+   "Max boosters": 2,
+   "Mass": 140.0,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 4.0,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 10.0,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.2,
+   "Jump Power": 1.0
+  },
+  "136": {
+   "Hull Res ID": 215,
+   "Max Missiles": 6,
+   "Max Grenades": 0,
+   "Max boosters": 2,
+   "Mass": 140.0,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 4.0,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 10.0,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.2,
+   "Jump Power": 1.0
+  }
+ },
+ "manifest_path": "levels/strawberry/set.json"
+}

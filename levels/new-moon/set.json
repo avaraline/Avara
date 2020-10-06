@@ -1,0 +1,31 @@
+{
+ "LEDI": {
+  "NM01": {
+   "Tag": "NM01",
+   "Name": "Blue Moon",
+   "Message": "\r[ History ]",
+   "Path": "Blue Moon",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_Blue_Moon.svg"
+  },
+  "NM02": {
+   "Tag": "NM02",
+   "Name": "New Moon",
+   "Message": "\r[ Change ]",
+   "Path": "New Moon",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_New_Moon.svg"
+  }
+ },
+ "BSPT": {
+  "1001": {
+   "name": "bspNeo",
+   "file": "levels/new-moon/bsps/1001.json"
+  }
+ },
+ "manifest_path": "levels/new-moon/set.json"
+}

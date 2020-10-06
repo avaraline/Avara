@@ -1,0 +1,95 @@
+{
+ "LEDI": {
+  "burn": {
+   "Tag": "burn",
+   "Name": "Burn",
+   "Message": "Whew!  It gets hot in here!",
+   "Path": "burn.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "128_burn.pict.svg"
+  },
+  "burl": {
+   "Tag": "burl",
+   "Name": "Burn Lite",
+   "Message": "Lots of ammo and nowhere to run...",
+   "Path": "burnlite.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "129_burnlite.pict.svg"
+  },
+  "cht1": {
+   "Tag": "cht1",
+   "Name": "Chute",
+   "Message": "It's like being blasted out of a cannon!  The hidden transporters take you to the closest corner.  To get the goody in the chute you must jump on it...",
+   "Path": "chute.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "130_chute.pict.svg"
+  },
+  "dels": {
+   "Tag": "dels",
+   "Name": "Delusions",
+   "Message": "Get a lock without seeing your opponent.  Run from the missles - they are slow.  Watch out for surprise attacks from above!",
+   "Path": "delusion.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "131_delusion.pict.svg"
+  },
+  "dwlg": {
+   "Tag": "dwlg",
+   "Name": "Delusions with Grenades",
+   "Message": "Like delusions, but with grenades (missles are less powerful but faster).",
+   "Path": "delusionwg.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "132_delusionwg.pict.svg"
+  },
+  "ills": {
+   "Tag": "ills",
+   "Name": "Illusion",
+   "Message": "Solidity is a state of mind...",
+   "Path": "illusion.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "133_illusion.pict.svg"
+  },
+  "rush": {
+   "Tag": "rush",
+   "Name": "Rush!",
+   "Message": "A small grenade blasting good time!",
+   "Path": "rush.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "134_rush.pict.svg"
+  },
+  "ghos": {
+   "Tag": "ghos",
+   "Name": "Ghost Town",
+   "Message": "The ammo is plentiful, but not always easy to find - and yet, the old west ain't what it used to be...",
+   "Path": "ghost.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "135_ghost.pict.svg"
+  },
+  "tomb": {
+   "Tag": "tomb",
+   "Name": "Cowboy's Tomb",
+   "Message": "The center of the tomb (the star) is a teleporter - jump to teleport!",
+   "Path": "tomb.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "136_tomb.pict.svg"
+  }
+ },
+ "manifest_path": "levels/wild-west-collection/set.json"
+}

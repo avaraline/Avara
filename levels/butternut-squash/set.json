@@ -1,0 +1,365 @@
+{
+ "LEDI": {
+  "YAYA": {
+   "Tag": "YAYA",
+   "Name": "Cardboard Box",
+   "Message": "Escape the elusive Cardboard Box!",
+   "Path": "1.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_1.pict.svg"
+  },
+  "HAJI": {
+   "Tag": "HAJI",
+   "Name": "Cavern",
+   "Message": "12 o' clock, Last fall",
+   "Path": "2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1002_2.pict.svg"
+  },
+  "NJOY": {
+   "Tag": "NJOY",
+   "Name": "Jumpin Jack Flash",
+   "Message": "Old Man Bluff Sucks",
+   "Path": "3.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1003_3.pict.svg"
+  },
+  "WANC": {
+   "Tag": "WANC",
+   "Name": "On the Farm",
+   "Message": "Mmm...udders",
+   "Path": "4.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1004_4.pict.svg"
+  },
+  "ALLI": {
+   "Tag": "ALLI",
+   "Name": "Wind Tunnel",
+   "Message": "This Level Sucks",
+   "Path": "5.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1005_5.pict.svg"
+  },
+  "DKDK": {
+   "Tag": "DKDK",
+   "Name": "9 Incarnation Service",
+   "Message": "What just happened?",
+   "Path": "6.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1006_6.pict.svg"
+  },
+  "AIRP": {
+   "Tag": "AIRP",
+   "Name": "X-Treme Skydiving",
+   "Message": "Made a while ago, never used grr",
+   "Path": "7.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1007_7.pict.svg"
+  },
+  "HAHA": {
+   "Tag": "HAHA",
+   "Name": "Missile WAR!",
+   "Message": "Fasten your MISSILE BELT!",
+   "Path": "8.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1008_8.pict.svg"
+  },
+  "TABY": {
+   "Tag": "TABY",
+   "Name": "The Abyss",
+   "Message": "Owie",
+   "Path": "10.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1010_10.pict.svg"
+  },
+  "ARCC": {
+   "Tag": "ARCC",
+   "Name": "Arctic Chill",
+   "Message": "You're dead",
+   "Path": "11.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1011_11.pict.svg"
+  },
+  "HDUN": {
+   "Tag": "HDUN",
+   "Name": "The White Room",
+   "Message": "Agh",
+   "Path": "12.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1012_12.pict.svg"
+  },
+  "NADE": {
+   "Tag": "NADE",
+   "Name": "Nade WAR!",
+   "Message": "Fasten your NADE BELT!",
+   "Path": "13.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1013_13.pict.svg"
+  },
+  "KOTH": {
+   "Tag": "KOTH",
+   "Name": "The KOTH of DOOOOOOOM",
+   "Message": "Peanut Butter....OORRRR Jelly?",
+   "Path": "15.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1015_15.pict.svg"
+  },
+  "SPIN": {
+   "Tag": "SPIN",
+   "Name": "New D. Pick Shores!",
+   "Message": "Sicko",
+   "Path": "17.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1017_17.pict.svg"
+  },
+  "WTUN": {
+   "Tag": "WTUN",
+   "Name": "Wind Tunnel 2",
+   "Message": "So good it deserved another",
+   "Path": "18.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1018_18.pict.svg"
+  },
+  "TUNL": {
+   "Tag": "TUNL",
+   "Name": "Wind Tunnel 3",
+   "Message": "Trilogy on command",
+   "Path": "19.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1019_19.pict.svg"
+  },
+  "    ": {
+   "Tag": "    ",
+   "Name": "",
+   "Message": "",
+   "Path": "",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_.svg"
+  }
+ },
+ "BSPT": {
+  "1001": {
+   "name": "Godzilla",
+   "file": "levels/butternut-squash/bsps/1001.json"
+  },
+  "1002": {
+   "name": "Silo",
+   "file": "levels/butternut-squash/bsps/1002.json"
+  },
+  "1003": {
+   "name": "Hand",
+   "file": "levels/butternut-squash/bsps/1003.json"
+  },
+  "1008": {
+   "name": "Steering",
+   "file": "levels/butternut-squash/bsps/1008.json"
+  },
+  "129": {
+   "name": "Shark",
+   "file": "levels/butternut-squash/bsps/129.json"
+  },
+  "1005": {
+   "name": "Cloud7",
+   "file": "levels/butternut-squash/bsps/1005.json"
+  },
+  "1004": {
+   "name": "Shark4",
+   "file": "levels/butternut-squash/bsps/1004.json"
+  },
+  "1010": {
+   "name": "Ship",
+   "file": "levels/butternut-squash/bsps/1010.json"
+  },
+  "1015": {
+   "name": "Laser",
+   "file": "levels/butternut-squash/bsps/1015.json"
+  },
+  "1016": {
+   "name": "Police",
+   "file": "levels/butternut-squash/bsps/1016.json"
+  },
+  "1017": {
+   "name": "Subway",
+   "file": "levels/butternut-squash/bsps/1017.json"
+  },
+  "1018": {
+   "name": "Tickets",
+   "file": "levels/butternut-squash/bsps/1018.json"
+  },
+  "1019": {
+   "name": "Door",
+   "file": "levels/butternut-squash/bsps/1019.json"
+  },
+  "1020": {
+   "name": "Bookcase",
+   "file": "levels/butternut-squash/bsps/1020.json"
+  },
+  "1021": {
+   "name": "Guy",
+   "file": "levels/butternut-squash/bsps/1021.json"
+  },
+  "1022": {
+   "name": "Commish",
+   "file": "levels/butternut-squash/bsps/1022.json"
+  },
+  "1023": {
+   "name": "Safe",
+   "file": "levels/butternut-squash/bsps/1023.json"
+  },
+  "1024": {
+   "name": "Sun",
+   "file": "levels/butternut-squash/bsps/1024.json"
+  },
+  "1025": {
+   "name": "Cow",
+   "file": "levels/butternut-squash/bsps/1025.json"
+  },
+  "1026": {
+   "name": "Door2",
+   "file": "levels/butternut-squash/bsps/1026.json"
+  },
+  "1027": {
+   "name": "Bat",
+   "file": "levels/butternut-squash/bsps/1027.json"
+  }
+ },
+ "HULL": {
+  "2001": {
+   "Hull Res ID": 215,
+   "Max Missiles": 3,
+   "Max Grenades": 6,
+   "Max boosters": 3,
+   "Mass": 140.0,
+   "Max Energy": 4000.0,
+   "Energy Charge": 18530.27344167239,
+   "Max Shields": 899.9939116502633,
+   "Shield Charge": 2607.1694819562067,
+   "Min Shot": 2.0,
+   "Max Shot": 1.6948348210879682,
+   "Shot Charge": 13.551796749828336,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  },
+  "2002": {
+   "Hull Res ID": 215,
+   "Max Missiles": 3,
+   "Max Grenades": 6,
+   "Max boosters": 3,
+   "Mass": 140.0,
+   "Max Energy": 0.0899977111467155,
+   "Energy Charge": 9.400946059357596,
+   "Max Shields": 0.0899977111467155,
+   "Shield Charge": 0.10499732967116808,
+   "Min Shot": 0.09999237048905166,
+   "Max Shot": 0.0899977111467155,
+   "Shot Charge": 0.08973830777447166,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  },
+  "2003": {
+   "Hull Res ID": 216,
+   "Max Missiles": 4,
+   "Max Grenades": 8,
+   "Max boosters": 4,
+   "Mass": 155.0,
+   "Max Energy": 0.1100022888532845,
+   "Energy Charge": 102.49939726863508,
+   "Max Shields": 0.09999237048905166,
+   "Shield Charge": 0.09999237048905166,
+   "Min Shot": 0.09999237048905166,
+   "Max Shot": 0.09999237048905166,
+   "Shot Charge": 0.08473334859235523,
+   "Riding Height": 0.34988937209124893,
+   "Acceleration": 1.1000076295109484,
+   "Jump Power": 1.0
+  },
+  "2004": {
+   "Hull Res ID": 217,
+   "Max Missiles": 8,
+   "Max Grenades": 12,
+   "Max boosters": 5,
+   "Mass": 170.0,
+   "Max Energy": 0.1100022888532845,
+   "Energy Charge": 10.49958037689784,
+   "Max Shields": 0.1100022888532845,
+   "Shield Charge": 0.09999237048905166,
+   "Min Shot": 0.1100022888532845,
+   "Max Shot": 0.09999237048905166,
+   "Shot Charge": 0.08973830777447166,
+   "Riding Height": 0.34988937209124893,
+   "Acceleration": 1.0,
+   "Jump Power": 1.1000076295109484
+  },
+  "2005": {
+   "Hull Res ID": 215,
+   "Max Missiles": 0,
+   "Max Grenades": 0,
+   "Max boosters": 0,
+   "Mass": 140.0,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 1.0500038147554742,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": -0.1948119325551232,
+   "Max Shot": -0.14480811779964908,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  },
+  "2006": {
+   "Hull Res ID": 215,
+   "Max Missiles": 0,
+   "Max Grenades": 0,
+   "Max boosters": 0,
+   "Mass": 140.0,
+   "Max Energy": 1.3577630273899444,
+   "Energy Charge": 1526.9289234760051,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.5258869306477454,
+   "Max Shot": 1.5258869306477454,
+   "Shot Charge": 153.6379034103914,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0457770656900893,
+   "Jump Power": 1.0
+  }
+ },
+ "manifest_path": "levels/butternut-squash/set.json"
+}

@@ -1,0 +1,95 @@
+{
+ "LEDI": {
+  "dsrt": {
+   "Tag": "dsrt",
+   "Name": "Desert Storm",
+   "Message": "The battle begins shortly after dawn.",
+   "Path": "desert.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_desert.pict.svg"
+  },
+  "chtl": {
+   "Tag": "chtl",
+   "Name": "Chute Lite",
+   "Message": "To get the goody in the middle you must jump on it.  The hidden transporters take you to the closest corner...",
+   "Path": "chutelite.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1008_chutelite.pict.svg"
+  },
+  "berm": {
+   "Tag": "berm",
+   "Name": "Bermuda",
+   "Message": "Many a HECTOR has been known to disappear in the triangle.",
+   "Path": "bermuda.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_bermuda.pict.svg"
+  },
+  "ber2": {
+   "Tag": "ber2",
+   "Name": "Bermuda Shorts",
+   "Message": "Bermuda with 2 meter walls.",
+   "Path": "bermuda2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1002_bermuda2.pict.svg"
+  },
+  "ber8": {
+   "Tag": "ber8",
+   "Name": "Bermuda Grass",
+   "Message": "Bermuda with 8 meter walls.",
+   "Path": "bermuda8.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1003_bermuda8.pict.svg"
+  },
+  "spwk": {
+   "Tag": "spwk",
+   "Name": "SpaceWalk",
+   "Message": "One small step for a HECTOR, one big step for HECTOR-kind.",
+   "Path": "spacewalk.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1007_spacewalk.pict.svg"
+  },
+  "spcj": {
+   "Tag": "spcj",
+   "Name": "SpaceJam!",
+   "Message": "It's a real cliffhanger!",
+   "Path": "spacejam.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1006_spacejam.pict.svg"
+  },
+  "lddr": {
+   "Tag": "lddr",
+   "Name": "Corporate Ladder",
+   "Message": "It's lonely at the top.",
+   "Path": "ladder.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1004_ladder.pict.svg"
+  },
+  "ceil": {
+   "Tag": "ceil",
+   "Name": "Glass Ceiling",
+   "Message": "Don't let the glass ceilings impede your quest for the top.",
+   "Path": "ceiling.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1005_ceiling.pict.svg"
+  }
+ },
+ "manifest_path": "levels/gzr-liver-spots/set.json"
+}

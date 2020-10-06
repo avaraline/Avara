@@ -1,0 +1,358 @@
+{
+ "LEDI": {
+  "Em01": {
+   "Tag": "Em01",
+   "Name": "Alkaline",
+   "Message": "\r[ Power ]",
+   "Path": "Alkaline",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1016_Alkaline.svg"
+  },
+  "Em02": {
+   "Tag": "Em02",
+   "Name": "Crystalline",
+   "Message": "\r[ Burst ]",
+   "Path": "Crystalline",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1015_Crystalline.svg"
+  },
+  "Em03": {
+   "Tag": "Em03",
+   "Name": "Despairity",
+   "Message": "\r[ Torture ]",
+   "Path": "Despairity",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1002_Despairity.svg"
+  },
+  "Em04": {
+   "Tag": "Em04",
+   "Name": "Exile",
+   "Message": "\r[ Outcast ]",
+   "Path": "Exile",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1017_Exile.svg"
+  },
+  "Em05": {
+   "Tag": "Em05",
+   "Name": "Isolation",
+   "Message": "\r[ Lonesome ]",
+   "Path": "Isolation",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1010_Isolation.svg"
+  },
+  "Em06": {
+   "Tag": "Em06",
+   "Name": "Killumination",
+   "Message": "\r[ Destructive ]",
+   "Path": "Killumination",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1004_Killumination.svg"
+  },
+  "Em07": {
+   "Tag": "Em07",
+   "Name": "Mill",
+   "Message": "\r[ Breeze ]",
+   "Path": "Mill",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1013_Mill.svg"
+  },
+  "Em08": {
+   "Tag": "Em08",
+   "Name": "Naloxone",
+   "Message": "\r[ Counteract ]",
+   "Path": "Naloxone",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1018_Naloxone.svg"
+  },
+  "Em09": {
+   "Tag": "Em09",
+   "Name": "Primal",
+   "Message": "\r[ Instinct ]",
+   "Path": "Primal",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1005_Primal.svg"
+  },
+  "EmXX": {
+   "Tag": "EmXX",
+   "Name": "Primal Rmx",
+   "Message": "\rMore rumble.",
+   "Path": "Jungle.RMX",
+   "Enables reqd": 19,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1019_Jungle.RMX.svg"
+  },
+  "Em11": {
+   "Tag": "Em11",
+   "Name": "Sienna",
+   "Message": "\r[ Golden ]",
+   "Path": "Sierra",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1014_Sierra.svg"
+  },
+  "Em12": {
+   "Tag": "Em12",
+   "Name": "Stratocaster",
+   "Message": "\r[ Musical ]",
+   "Path": "Stratocaster",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1006_Stratocaster.svg"
+  },
+  "Em13": {
+   "Tag": "Em13",
+   "Name": "Stratocaster - Lite",
+   "Message": "\r[ Cheaper ]",
+   "Path": "Stratocaster - Lite",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1007_Stratocaster_-_Lite.svg"
+  },
+  "Em14": {
+   "Tag": "Em14",
+   "Name": "Trench - short",
+   "Message": "\r[ Plan ]",
+   "Path": "Trench - short",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ]
+  },
+  "Em15": {
+   "Tag": "Em15",
+   "Name": "Trench - long",
+   "Message": "\r[ Strategize ]",
+   "Path": "Trench.long",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1008_Trench.long.svg"
+  },
+  "Em16": {
+   "Tag": "Em16",
+   "Name": "Voluminous",
+   "Message": "\r[ Dark ]",
+   "Path": "Voluminous",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1003_Voluminous.svg"
+  },
+  "Em17": {
+   "Tag": "Em17",
+   "Name": "Wind",
+   "Message": "\r[ Force ]",
+   "Path": "Wind",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1020_Wind.svg"
+  },
+  "Em18": {
+   "Tag": "Em18",
+   "Name": "Yukon",
+   "Message": "\r[ Chilly ]",
+   "Path": "Yukon",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1011_Yukon.svg"
+  },
+  "Em19": {
+   "Tag": "Em19",
+   "Name": "Yukon KillFest",
+   "Message": "\r[ Nuclear ]",
+   "Path": "YukonKillFest",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1012_YukonKillFest.svg"
+  },
+  "Em20": {
+   "Tag": "Em20",
+   "Name": "Zinc",
+   "Message": "\r[ Periodic ]",
+   "Path": "Zinc",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "EmXX"
+    }
+   ],
+   "Svg": "1000_Zinc.svg"
+  }
+ },
+ "BSPT": {
+  "1001": {
+   "name": "bspBlade",
+   "file": "levels/emotion/bsps/1001.json"
+  }
+ },
+ "HULL": {
+  "131": {
+   "Hull Res ID": 215,
+   "Max Missiles": 4,
+   "Max Grenades": 8,
+   "Max boosters": 1,
+   "Mass": 140.0,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 1.0500038147554742,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  },
+  "132": {
+   "Hull Res ID": 216,
+   "Max Missiles": 5,
+   "Max Grenades": 11,
+   "Max boosters": 1,
+   "Mass": 155.0,
+   "Max Energy": 1.1000076295109484,
+   "Energy Charge": 1.0249942778667887,
+   "Max Shields": 1.0,
+   "Shield Charge": 1.0,
+   "Min Shot": 1.0,
+   "Max Shot": 1.0,
+   "Shot Charge": 1.0,
+   "Riding Height": 0.3500114442664225,
+   "Acceleration": 1.1000076295109484,
+   "Jump Power": 1.0
+  },
+  "133": {
+   "Hull Res ID": 217,
+   "Max Missiles": 11,
+   "Max Grenades": 16,
+   "Max boosters": 1,
+   "Mass": 170.0,
+   "Max Energy": 1.1000076295109484,
+   "Energy Charge": 1.0500038147554742,
+   "Max Shields": 1.1000076295109484,
+   "Shield Charge": 1.0,
+   "Min Shot": 1.1000076295109484,
+   "Max Shot": 1.0,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.3500114442664225,
+   "Acceleration": 1.0,
+   "Jump Power": 1.1000076295109484
+  }
+ },
+ "manifest_path": "levels/emotion/set.json"
+}

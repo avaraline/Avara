@@ -1,0 +1,74 @@
+{
+ "LEDI": {
+  "2Per": {
+   "Tag": "2Per",
+   "Name": "2 Person",
+   "Message": "This is the 2 person version of Dodgeball (Green & Yellow)\r",
+   "Path": "2 Person.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "3Per": {
+   "Tag": "3Per",
+   "Name": "3 Person",
+   "Message": "This is the 3 person version of Dodgeball. (Green, Red & Yellow)\r",
+   "Path": "3 Person.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "4Per": {
+   "Tag": "4Per",
+   "Name": "4 Person",
+   "Message": "This is the 4 person version of Dodgeball. (Green, Red, Magenta & Yellow)\r",
+   "Path": "4 Person.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "5Per": {
+   "Tag": "5Per",
+   "Name": "5 Person",
+   "Message": "This is the 5 person version of Dodgeball. (Green, Red, Magenta, Purple & Yellow)\r",
+   "Path": "5 Person.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "6Per": {
+   "Tag": "6Per",
+   "Name": "6 Person",
+   "Message": "This is the 6 person version of Dodgeball. (um... You figure this one out...)\r",
+   "Path": "6 Person.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "2Tea": {
+   "Tag": "2Tea",
+   "Name": "2 Teams",
+   "Message": "This is the 2 teams version of Dodgeball (Green & Yellow)\r",
+   "Path": "2 Teams.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "3Tea": {
+   "Tag": "3Tea",
+   "Name": "3 Teams",
+   "Message": "2x2x2 team version of Dodgeball. (Green, Red & Yellow)\r",
+   "Path": "3 Teams.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  }
+ },
+ "BSPT": {
+  "2012": {
+   "name": "bspDodo",
+   "file": "levels/dodgeball/bsps/2012.json"
+  }
+ },
+ "manifest_path": "levels/dodgeball/set.json"
+}

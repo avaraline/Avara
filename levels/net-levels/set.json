@@ -1,0 +1,95 @@
+{
+ "LEDI": {
+  "ICEB": {
+   "Tag": "ICEB",
+   "Name": "Icebox",
+   "Message": "\rBrrr\u2026it's cold in here.",
+   "Path": "Icebox.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1136_Icebox.pict.svg"
+  },
+  "GOBL": {
+   "Tag": "GOBL",
+   "Name": "Food Chain",
+   "Message": "\rSurvival of the fittest.",
+   "Path": "FoodChain.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1138_FoodChain.pict.svg"
+  },
+  "JAS1": {
+   "Tag": "JAS1",
+   "Name": "Net 1",
+   "Message": "\rSimple, but popular battleground.",
+   "Path": "Net1.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1014_Net1.pict.svg"
+  },
+  "BALG": {
+   "Tag": "BALG",
+   "Name": "Ballgame",
+   "Message": "\rLet's play ball.",
+   "Path": "Ballgame.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1143_Ballgame.pict.svg"
+  },
+  "RDB2": {
+   "Tag": "RDB2",
+   "Name": "Redblade",
+   "Message": "\rA castle of steel and rock.",
+   "Path": "Redblade2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1137_Redblade2.pict.svg"
+  },
+  "SLIK": {
+   "Tag": "SLIK",
+   "Name": "Slick",
+   "Message": "\rExperimental Architecture",
+   "Path": "Slick.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1139_Slick.pict.svg"
+  },
+  "JAS3": {
+   "Tag": "JAS3",
+   "Name": "Country Roads",
+   "Message": "Team play with up to 3 Blue VS 3 Yellow players.\rDestroy the shape of opposing team's color and exit via teleporter.",
+   "Path": "Country Roads.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_Country_Roads.pict.svg"
+  },
+  "FORT": {
+   "Tag": "FORT",
+   "Name": "Forts",
+   "Message": "\rBattle of two fortresses",
+   "Path": "Network.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1131_Network.pict.svg"
+  },
+  "MULT": {
+   "Tag": "MULT",
+   "Name": "Multiplayer",
+   "Message": "\rConstruction Zone...",
+   "Path": "Multiplayer.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1130_Multiplayer.pict.svg"
+  }
+ },
+ "manifest_path": "levels/net-levels/set.json"
+}

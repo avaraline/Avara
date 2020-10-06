@@ -1,0 +1,115 @@
+{
+ "LEDI": {
+  "LOGC": {
+   "Tag": "LOGC",
+   "Name": "Logic",
+   "Message": "\rYou didn't make the game; the game made you.",
+   "Path": "logic",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_logic.svg"
+  },
+  "MARD": {
+   "Tag": "MARD",
+   "Name": "Martian Darts",
+   "Message": "\rCarcinogens intensified by the Martian atmosphere.",
+   "Path": "martiandarts",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1002_martiandarts.svg"
+  },
+  "REAC": {
+   "Tag": "REAC",
+   "Name": "Reaction",
+   "Message": "\rIn every direction, nuclear culture.",
+   "Path": "reaction",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1005_reaction.svg"
+  },
+  "SBKU": {
+   "Tag": "SBKU",
+   "Name": "Sabaku",
+   "Message": "\rDust Combat",
+   "Path": "sabaku",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_sabaku.svg"
+  },
+  "TIME": {
+   "Tag": "TIME",
+   "Name": "Night time",
+   "Message": "\rDark",
+   "Path": "timenight",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1003_timenight.svg"
+  },
+  "TIMD": {
+   "Tag": "TIMD",
+   "Name": "Day time",
+   "Message": "\rLight",
+   "Path": "timeday",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1004_timeday.svg"
+  },
+  "VEIN": {
+   "Tag": "VEIN",
+   "Name": "Vein",
+   "Message": "\rBurst",
+   "Path": "vein",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1006_vein.svg"
+  },
+  "VITA": {
+   "Tag": "VITA",
+   "Name": "Vitality",
+   "Message": "\rQuick terrorism.",
+   "Path": "vitality",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1007_vitality.svg"
+  }
+ },
+ "BSPT": {
+  "1000": {
+   "name": "bspIO",
+   "file": "levels/cancer/bsps/1000.json"
+  },
+  "1001": {
+   "name": "bspMartianStar",
+   "file": "levels/cancer/bsps/1001.json"
+  },
+  "1002": {
+   "name": "bspMartianStarD",
+   "file": "levels/cancer/bsps/1002.json"
+  },
+  "1004": {
+   "name": "bspMoonArc",
+   "file": "levels/cancer/bsps/1004.json"
+  },
+  "1005": {
+   "name": "bspSquareVeins",
+   "file": "levels/cancer/bsps/1005.json"
+  },
+  "1006": {
+   "name": "bspSun",
+   "file": "levels/cancer/bsps/1006.json"
+  },
+  "1003": {
+   "name": "bspSolarSystem",
+   "file": "levels/cancer/bsps/1003.json"
+  }
+ },
+ "manifest_path": "levels/cancer/set.json"
+}

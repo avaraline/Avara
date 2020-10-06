@@ -1,0 +1,55 @@
+{
+ "LEDI": {
+  "ICE1": {
+   "Tag": "ICE1",
+   "Name": "icebox",
+   "Message": "This is the standard version of icebox.",
+   "Path": "icebox.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1502_icebox.pict.svg"
+  },
+  "ICE2": {
+   "Tag": "ICE2",
+   "Name": "icebox classic",
+   "Message": "Before Avara was released, the beta team played \rin a slightly lighter icebox...",
+   "Path": "iceboxClassic.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1500_iceboxClassic.pict.svg"
+  },
+  "ICE3": {
+   "Tag": "ICE3",
+   "Name": "icebox garish",
+   "Message": "Do not adjust your set.\r(it won't help)",
+   "Path": "iceboxGarish.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1501_iceboxGarish.pict.svg"
+  },
+  "BLOK": {
+   "Tag": "BLOK",
+   "Name": "Blockhouse",
+   "Message": "Watch out for falling blocks.\r",
+   "Path": "Blockhouse.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1503_Blockhouse.pict.svg"
+  },
+  "BLO2": {
+   "Tag": "BLO2",
+   "Name": "Blockhouse Remix",
+   "Message": "The exended dance remix of Blockhouse.",
+   "Path": "Blockhouse remix.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1504_Blockhouse_remix.pict.svg"
+  }
+ },
+ "manifest_path": "levels/blockparty/set.json"
+}

@@ -1,0 +1,197 @@
+{
+ "LEDI": {
+  "GAKA": {
+   "Tag": "GAKA",
+   "Name": "Arsenic",
+   "Message": "\rTiny bubbles in the water....tiny bubbles.",
+   "Path": "Arsenic.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2003_Arsenic.pict.svg"
+  },
+  "BBAL": {
+   "Tag": "BBAL",
+   "Name": "AvaraBasketball",
+   "Message": "Jump! Shoot! Score!!!",
+   "Path": "bbal",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1119_bbal.svg"
+  },
+  "SCCR": {
+   "Tag": "SCCR",
+   "Name": "AvaraSoccer",
+   "Message": "Can you score without picking up the ball?",
+   "Path": "sccr",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1120_sccr.svg"
+  },
+  "POLO": {
+   "Tag": "POLO",
+   "Name": "AvaraWaterPolo",
+   "Message": "A virtually wet sport.",
+   "Path": "polo",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1121_polo.svg"
+  },
+  "CHCR": {
+   "Tag": "CHCR",
+   "Name": "ChannelCrash",
+   "Message": "\rHandle your binary with care.",
+   "Path": "ChannelCrash.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2004_ChannelCrash.pict.svg"
+  },
+  "FFAB": {
+   "Tag": "FFAB",
+   "Name": "FreeForAllBall",
+   "Message": "No teams needed here",
+   "Path": "ffab",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1122_ffab.svg"
+  },
+  "FFAD": {
+   "Tag": "FFAD",
+   "Name": "FreeForAllDuo",
+   "Message": "Now with two balls.",
+   "Path": "ffad",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1123_ffad.svg"
+  },
+  "MSIE": {
+   "Tag": "MSIE",
+   "Name": "Internet Explorer",
+   "Message": "\rGee.  It's free.  That must make it good.",
+   "Path": "IE.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2005_IE.pict.svg"
+  },
+  "LION": {
+   "Tag": "LION",
+   "Name": "LionBall",
+   "Message": "Prepare yourself!  Lion Ball has more little surprises than a week old rotting duck!  The ball is on the podium in the center of the arena.  \rOnce activated this level will self destruct in 10 minutes.......",
+   "Path": "Lion Ball",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1113_Lion_Ball.svg"
+  },
+  "LIOL": {
+   "Tag": "LIOL",
+   "Name": "LionBall - Lite",
+   "Message": "This is the new lite version.  Made for slower connections (not that a 3x3 would be playable on modems)\rOnce activated this level will self destruct in 5 minutes.......",
+   "Path": "Lion Ball Lite",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1116_Lion_Ball_Lite.svg"
+  },
+  "QQLA": {
+   "Tag": "QQLA",
+   "Name": "Qbert's Qlimb (zwei)",
+   "Message": "Take it to the top!\rWatch out for missiles, though: they pack a punch.\r2 Teams: Green and Yellow.",
+   "Path": "Qbert's Qlimb A",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1115_Qbert's_Qlimb_A.svg"
+  },
+  "QQLB": {
+   "Tag": "QQLB",
+   "Name": "Qbert's Qlimb (drei)",
+   "Message": "Take it to the top!\rHow many points can you score?\r3 Teams (or solo players): Red, Purple, and Blue.",
+   "Path": "Qbert's Qlimb B",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1114_Qbert's_Qlimb_B.svg"
+  },
+  "SMQQ": {
+   "Tag": "SMQQ",
+   "Name": "Smear",
+   "Message": "Get the ball, get some points.",
+   "Path": "Smear",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1111_Smear.svg"
+  },
+  "SMQF": {
+   "Tag": "SMQF",
+   "Name": "Smear Flat",
+   "Message": "No Platform",
+   "Path": "SmearFlat",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1112_SmearFlat.svg"
+  },
+  "FIRE": {
+   "Tag": "FIRE",
+   "Name": "Firing Line",
+   "Message": "SHOOT!!! SHOOT!!! DIE!!!!",
+   "Path": "fire",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2128_fire.svg"
+  }
+ },
+ "BSPT": {
+  "2001": {
+   "name": "bsp16wall",
+   "file": "levels/aa-abnormal/bsps/2001.json"
+  },
+  "2002": {
+   "name": "bspOctahedron",
+   "file": "levels/aa-abnormal/bsps/2002.json"
+  },
+  "2003": {
+   "name": "bspHexPlatform",
+   "file": "levels/aa-abnormal/bsps/2003.json"
+  },
+  "2004": {
+   "name": "bspSqPlatform",
+   "file": "levels/aa-abnormal/bsps/2004.json"
+  },
+  "2005": {
+   "name": "bspCube",
+   "file": "levels/aa-abnormal/bsps/2005.json"
+  },
+  "2006": {
+   "name": "bspClearWall",
+   "file": "levels/aa-abnormal/bsps/2006.json"
+  },
+  "2007": {
+   "name": "bspOctahedron2",
+   "file": "levels/aa-abnormal/bsps/2007.json"
+  },
+  "5555": {
+   "name": "bspBall",
+   "file": "levels/aa-abnormal/bsps/5555.json"
+  },
+  "1661": {
+   "name": "BiggerPlane",
+   "file": "levels/aa-abnormal/bsps/1661.json"
+  },
+  "1662": {
+   "name": "Soccer",
+   "file": "levels/aa-abnormal/bsps/1662.json"
+  }
+ },
+ "manifest_path": "levels/aa-abnormal/set.json"
+}

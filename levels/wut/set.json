@@ -1,0 +1,517 @@
+{
+ "LEDI": {
+  "CNGO": {
+   "Tag": "CNGO",
+   "Name": "Congo Warfare",
+   "Message": "\rDeep in the jungle of the eastern congo",
+   "Path": "lvl-3",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "128_lvl-3.svg"
+  }
+ },
+ "BSPT": {
+  "999": {
+   "name": "- Runes",
+   "file": "levels/wut/bsps/999.json"
+  },
+  "1000": {
+   "name": "Mystic",
+   "file": "levels/wut/bsps/1000.json"
+  },
+  "1001": {
+   "name": "Mystic [Tears]",
+   "file": "levels/wut/bsps/1001.json"
+  },
+  "1002": {
+   "name": "Spiral Tele",
+   "file": "levels/wut/bsps/1002.json"
+  },
+  "1003": {
+   "name": "Alien Rune",
+   "file": "levels/wut/bsps/1003.json"
+  },
+  "1004": {
+   "name": "Jungle Rune",
+   "file": "levels/wut/bsps/1004.json"
+  },
+  "1005": {
+   "name": "Eye",
+   "file": "levels/wut/bsps/1005.json"
+  },
+  "1006": {
+   "name": "Bird",
+   "file": "levels/wut/bsps/1006.json"
+  },
+  "1007": {
+   "name": "Spider",
+   "file": "levels/wut/bsps/1007.json"
+  },
+  "1008": {
+   "name": "Life",
+   "file": "levels/wut/bsps/1008.json"
+  },
+  "1999": {
+   "name": "",
+   "file": "levels/wut/bsps/1999.json"
+  },
+  "2000": {
+   "name": "- Hills",
+   "file": "levels/wut/bsps/2000.json"
+  },
+  "2001": {
+   "name": "Distant Hill 1",
+   "file": "levels/wut/bsps/2001.json"
+  },
+  "2002": {
+   "name": "Distant Hill 2",
+   "file": "levels/wut/bsps/2002.json"
+  },
+  "2003": {
+   "name": "Close Rolling Hills",
+   "file": "levels/wut/bsps/2003.json"
+  },
+  "2004": {
+   "name": "Close Big Hill",
+   "file": "levels/wut/bsps/2004.json"
+  },
+  "2999": {
+   "name": "",
+   "file": "levels/wut/bsps/2999.json"
+  },
+  "3000": {
+   "name": "- Sky Objects",
+   "file": "levels/wut/bsps/3000.json"
+  },
+  "3001": {
+   "name": "Sun",
+   "file": "levels/wut/bsps/3001.json"
+  },
+  "3002": {
+   "name": "Cloud 1",
+   "file": "levels/wut/bsps/3002.json"
+  },
+  "3003": {
+   "name": "Cloud 2",
+   "file": "levels/wut/bsps/3003.json"
+  },
+  "3999": {
+   "name": "",
+   "file": "levels/wut/bsps/3999.json"
+  },
+  "4000": {
+   "name": "- Vegetation",
+   "file": "levels/wut/bsps/4000.json"
+  },
+  "4001": {
+   "name": "Twig Bush",
+   "file": "levels/wut/bsps/4001.json"
+  },
+  "4002": {
+   "name": "Catail Plant",
+   "file": "levels/wut/bsps/4002.json"
+  },
+  "4003": {
+   "name": "Water Trap",
+   "file": "levels/wut/bsps/4003.json"
+  },
+  "4004": {
+   "name": "Spider Plant",
+   "file": "levels/wut/bsps/4004.json"
+  },
+  "4005": {
+   "name": "Grass Blades",
+   "file": "levels/wut/bsps/4005.json"
+  },
+  "4006": {
+   "name": "Driving Range Tree",
+   "file": "levels/wut/bsps/4006.json"
+  },
+  "4007": {
+   "name": "Ground Shrub",
+   "file": "levels/wut/bsps/4007.json"
+  },
+  "4008": {
+   "name": "Canopy",
+   "file": "levels/wut/bsps/4008.json"
+  },
+  "4009": {
+   "name": "Tree Trunk",
+   "file": "levels/wut/bsps/4009.json"
+  },
+  "4010": {
+   "name": "Mushroom Stalk [1]",
+   "file": "levels/wut/bsps/4010.json"
+  },
+  "4011": {
+   "name": "Mushroom Top [1]",
+   "file": "levels/wut/bsps/4011.json"
+  },
+  "4012": {
+   "name": "Tree Trunk v2",
+   "file": "levels/wut/bsps/4012.json"
+  },
+  "4013": {
+   "name": "Fern",
+   "file": "levels/wut/bsps/4013.json"
+  },
+  "4014": {
+   "name": "Tree Root [1]",
+   "file": "levels/wut/bsps/4014.json"
+  },
+  "4015": {
+   "name": "Large Trunk [1]",
+   "file": "levels/wut/bsps/4015.json"
+  },
+  "4016": {
+   "name": "Trunk Platform [large]",
+   "file": "levels/wut/bsps/4016.json"
+  },
+  "4017": {
+   "name": "Mushroom Top [2]",
+   "file": "levels/wut/bsps/4017.json"
+  },
+  "4018": {
+   "name": "Mushroom Stalk [2]",
+   "file": "levels/wut/bsps/4018.json"
+  },
+  "4019": {
+   "name": "Swamp Pool [1]",
+   "file": "levels/wut/bsps/4019.json"
+  },
+  "4020": {
+   "name": "Swamp Pool [2]",
+   "file": "levels/wut/bsps/4020.json"
+  },
+  "4021": {
+   "name": "Swamp Pool [3]",
+   "file": "levels/wut/bsps/4021.json"
+  },
+  "4022": {
+   "name": "Tree Branch [1]",
+   "file": "levels/wut/bsps/4022.json"
+  },
+  "4023": {
+   "name": "Branch Canopy [1]",
+   "file": "levels/wut/bsps/4023.json"
+  },
+  "4024": {
+   "name": "Branch Canopy [2]",
+   "file": "levels/wut/bsps/4024.json"
+  },
+  "4025": {
+   "name": "Tree Branch [2]",
+   "file": "levels/wut/bsps/4025.json"
+  },
+  "4026": {
+   "name": "Uber Bulbeous [Blue]",
+   "file": "levels/wut/bsps/4026.json"
+  },
+  "4027": {
+   "name": "Uber Bulbeous [Red]",
+   "file": "levels/wut/bsps/4027.json"
+  },
+  "4028": {
+   "name": "Uber Podeus",
+   "file": "levels/wut/bsps/4028.json"
+  },
+  "4999": {
+   "name": "",
+   "file": "levels/wut/bsps/4999.json"
+  },
+  "5000": {
+   "name": "- Architecture",
+   "file": "levels/wut/bsps/5000.json"
+  },
+  "5001": {
+   "name": "Platform",
+   "file": "levels/wut/bsps/5001.json"
+  },
+  "5002": {
+   "name": "Pillar",
+   "file": "levels/wut/bsps/5002.json"
+  },
+  "5003": {
+   "name": "Roof Top",
+   "file": "levels/wut/bsps/5003.json"
+  },
+  "5004": {
+   "name": "RingA",
+   "file": "levels/wut/bsps/5004.json"
+  },
+  "5005": {
+   "name": "Temple Rock",
+   "file": "levels/wut/bsps/5005.json"
+  },
+  "5006": {
+   "name": "Archway [half]",
+   "file": "levels/wut/bsps/5006.json"
+  },
+  "5007": {
+   "name": "Circle [half]",
+   "file": "levels/wut/bsps/5007.json"
+  },
+  "5008": {
+   "name": "Circle [2] [half]",
+   "file": "levels/wut/bsps/5008.json"
+  },
+  "5009": {
+   "name": "Circle [3] [half]",
+   "file": "levels/wut/bsps/5009.json"
+  },
+  "5010": {
+   "name": "Rocks.A",
+   "file": "levels/wut/bsps/5010.json"
+  },
+  "5011": {
+   "name": "Rocks.B",
+   "file": "levels/wut/bsps/5011.json"
+  },
+  "5012": {
+   "name": "Circle [4] [half]",
+   "file": "levels/wut/bsps/5012.json"
+  },
+  "5013": {
+   "name": "Circle [4] [half]",
+   "file": "levels/wut/bsps/5013.json"
+  },
+  "5014": {
+   "name": "1/4Corner Circ. [edged]",
+   "file": "levels/wut/bsps/5014.json"
+  },
+  "5015": {
+   "name": "Corner Circ. [edged]",
+   "file": "levels/wut/bsps/5015.json"
+  },
+  "5016": {
+   "name": "1/4 Circ. [flat]",
+   "file": "levels/wut/bsps/5016.json"
+  },
+  "5017": {
+   "name": "Wall Support.A",
+   "file": "levels/wut/bsps/5017.json"
+  },
+  "5018": {
+   "name": "Spike",
+   "file": "levels/wut/bsps/5018.json"
+  },
+  "5019": {
+   "name": "Dome",
+   "file": "levels/wut/bsps/5019.json"
+  },
+  "5020": {
+   "name": "Tree Pillar",
+   "file": "levels/wut/bsps/5020.json"
+  },
+  "5021": {
+   "name": "Tree Pillar [Base]",
+   "file": "levels/wut/bsps/5021.json"
+  },
+  "5022": {
+   "name": "Hillside [North]",
+   "file": "levels/wut/bsps/5022.json"
+  },
+  "5023": {
+   "name": "Hillside Corner [W/N]",
+   "file": "levels/wut/bsps/5023.json"
+  },
+  "5024": {
+   "name": "Hillside [South]",
+   "file": "levels/wut/bsps/5024.json"
+  },
+  "5025": {
+   "name": "Hillside Face [South]",
+   "file": "levels/wut/bsps/5025.json"
+  },
+  "5026": {
+   "name": "Hillside [West]",
+   "file": "levels/wut/bsps/5026.json"
+  },
+  "5027": {
+   "name": "Hillside [East]",
+   "file": "levels/wut/bsps/5027.json"
+  },
+  "5028": {
+   "name": "Hillside Corner [E/N]",
+   "file": "levels/wut/bsps/5028.json"
+  },
+  "5029": {
+   "name": "Hillside Corner [E/S]",
+   "file": "levels/wut/bsps/5029.json"
+  },
+  "5030": {
+   "name": "Hillside Corner [W/S]",
+   "file": "levels/wut/bsps/5030.json"
+  },
+  "5031": {
+   "name": "Hillside Inner [W/S]",
+   "file": "levels/wut/bsps/5031.json"
+  },
+  "5032": {
+   "name": "Hillside Inner [W/N]",
+   "file": "levels/wut/bsps/5032.json"
+  },
+  "5033": {
+   "name": "Hillside Inner [E/N]",
+   "file": "levels/wut/bsps/5033.json"
+  },
+  "5034": {
+   "name": "Hillside Inner [E/S]",
+   "file": "levels/wut/bsps/5034.json"
+  },
+  "5035": {
+   "name": "Long Hillside [south]",
+   "file": "levels/wut/bsps/5035.json"
+  },
+  "5036": {
+   "name": "Long Hillside [east]",
+   "file": "levels/wut/bsps/5036.json"
+  },
+  "5037": {
+   "name": "Long Hillside [west]",
+   "file": "levels/wut/bsps/5037.json"
+  },
+  "5038": {
+   "name": "Long Hillside [north]",
+   "file": "levels/wut/bsps/5038.json"
+  },
+  "5050": {
+   "name": "SAMPLER",
+   "file": "levels/wut/bsps/5050.json"
+  },
+  "5051": {
+   "name": "Small Grass Hill",
+   "file": "levels/wut/bsps/5051.json"
+  },
+  "5999": {
+   "name": "",
+   "file": "levels/wut/bsps/5999.json"
+  },
+  "6000": {
+   "name": "- Textures",
+   "file": "levels/wut/bsps/6000.json"
+  },
+  "6001": {
+   "name": "Brick Pattern",
+   "file": "levels/wut/bsps/6001.json"
+  },
+  "6002": {
+   "name": "Vert. Brick Pattern",
+   "file": "levels/wut/bsps/6002.json"
+  },
+  "6999": {
+   "name": "",
+   "file": "levels/wut/bsps/6999.json"
+  },
+  "7000": {
+   "name": "- Critters",
+   "file": "levels/wut/bsps/7000.json"
+  },
+  "7001": {
+   "name": "Flying Bug",
+   "file": "levels/wut/bsps/7001.json"
+  },
+  "7002": {
+   "name": "Butterfly [teal]",
+   "file": "levels/wut/bsps/7002.json"
+  },
+  "7003": {
+   "name": "Butterfly [orange]",
+   "file": "levels/wut/bsps/7003.json"
+  },
+  "7004": {
+   "name": "Butterfly [cream]",
+   "file": "levels/wut/bsps/7004.json"
+  },
+  "7005": {
+   "name": "Butterfly [blue]",
+   "file": "levels/wut/bsps/7005.json"
+  },
+  "7006": {
+   "name": "Beehive Mound",
+   "file": "levels/wut/bsps/7006.json"
+  },
+  "7007": {
+   "name": "Bat",
+   "file": "levels/wut/bsps/7007.json"
+  },
+  "7999": {
+   "name": "",
+   "file": "levels/wut/bsps/7999.json"
+  },
+  "8000": {
+   "name": "- Weaponry",
+   "file": "levels/wut/bsps/8000.json"
+  },
+  "8001": {
+   "name": "Domer Turret",
+   "file": "levels/wut/bsps/8001.json"
+  },
+  "3098": {
+   "name": "",
+   "file": "levels/wut/bsps/3098.json"
+  },
+  "3099": {
+   "name": "- Soccer",
+   "file": "levels/wut/bsps/3099.json"
+  },
+  "3100": {
+   "name": "Half Circ",
+   "file": "levels/wut/bsps/3100.json"
+  },
+  "3101": {
+   "name": "Circ",
+   "file": "levels/wut/bsps/3101.json"
+  },
+  "3102": {
+   "name": "Full Circ",
+   "file": "levels/wut/bsps/3102.json"
+  },
+  "3103": {
+   "name": "Soccer Ball",
+   "file": "levels/wut/bsps/3103.json"
+  },
+  "3104": {
+   "name": "Scoreboard Post",
+   "file": "levels/wut/bsps/3104.json"
+  },
+  "3105": {
+   "name": "Net Back",
+   "file": "levels/wut/bsps/3105.json"
+  },
+  "3108": {
+   "name": "Bwadi Flag",
+   "file": "levels/wut/bsps/3108.json"
+  },
+  "3109": {
+   "name": "H\u00f6nsnia Flag",
+   "file": "levels/wut/bsps/3109.json"
+  },
+  "3111": {
+   "name": "H\u00f6nsuanga Text",
+   "file": "levels/wut/bsps/3111.json"
+  },
+  "3112": {
+   "name": "Mauddinia Text",
+   "file": "levels/wut/bsps/3112.json"
+  },
+  "3113": {
+   "name": "Blimp Bottom",
+   "file": "levels/wut/bsps/3113.json"
+  },
+  "3114": {
+   "name": "Blimp Roof",
+   "file": "levels/wut/bsps/3114.json"
+  },
+  "3115": {
+   "name": "Blimp",
+   "file": "levels/wut/bsps/3115.json"
+  },
+  "3116": {
+   "name": "Warning Strip",
+   "file": "levels/wut/bsps/3116.json"
+  }
+ },
+ "manifest_path": "levels/wut/set.json"
+}

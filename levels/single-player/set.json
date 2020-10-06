@@ -1,0 +1,1142 @@
+{
+ "LEDI": {
+  "ICED": {
+   "Tag": "ICED",
+   "Name": "Arctic Research Lab",
+   "Message": "\rBreak into the lab and destroy its contents.\r",
+   "Path": "Arctic Research Lab.pict",
+   "Enables reqd": 16,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "143_Arctic_Research_Lab.pict.svg"
+  },
+  "CITY": {
+   "Tag": "CITY",
+   "Name": "Anak City",
+   "Message": "\rTake back Anak City.\r",
+   "Path": "Anak City.pict",
+   "Enables reqd": 15,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    }
+   ],
+   "Svg": "142_Anak_City.pict.svg"
+  },
+  "MRAD": {
+   "Tag": "MRAD",
+   "Name": "Midnight Raid",
+   "Message": "\rRaid enemy complex.\r",
+   "Path": "Midnight Raid.pict",
+   "Enables reqd": 14,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    }
+   ],
+   "Svg": "141_Midnight_Raid.pict.svg"
+  },
+  "TFAC": {
+   "Tag": "TFAC",
+   "Name": "Testing Facility",
+   "Message": "\rEscape testing site.\r",
+   "Path": "Testing Facility.pict",
+   "Enables reqd": 13,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    }
+   ],
+   "Svg": "140_Testing_Facility.pict.svg"
+  },
+  "DBAS": {
+   "Tag": "DBAS",
+   "Name": "Desert Base",
+   "Message": "\rCapture enemy base.\r",
+   "Path": "Desert Base.pict",
+   "Enables reqd": 12,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    }
+   ],
+   "Svg": "139_Desert_Base.pict.svg"
+  },
+  "Resc": {
+   "Tag": "Resc",
+   "Name": "Rescue",
+   "Message": "\rRescue a captured starfighter.",
+   "Path": "Rescue.pict",
+   "Enables reqd": 11,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    }
+   ],
+   "Svg": "148_Rescue.pict.svg"
+  },
+  "BOMB": {
+   "Tag": "BOMB",
+   "Name": "Bomb Deposit",
+   "Message": "\rFlee an alien fort.\r",
+   "Path": "Bomb deposit.pict",
+   "Enables reqd": 10,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "Resc"
+    }
+   ]
+  },
+  "RCYC": {
+   "Tag": "RCYC",
+   "Name": "Syoal Recycling Plant",
+   "Message": "\rEscape from complex.\r",
+   "Path": "Recycling Plant.pict",
+   "Enables reqd": 9,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "BOMB"
+    }
+   ],
+   "Svg": "137_Recycling_Plant.pict.svg"
+  },
+  "BOAK": {
+   "Tag": "BOAK",
+   "Name": "Boake Maze",
+   "Message": "\rFind a way to get to the transporter.\r",
+   "Path": "Boake Maze.pict",
+   "Enables reqd": 8,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "RCYC"
+    }
+   ],
+   "Svg": "136_Boake_Maze.pict.svg"
+  },
+  "LOST": {
+   "Tag": "LOST",
+   "Name": "Stranded",
+   "Message": "\rBorrow an enemy transporter to return home.\r",
+   "Path": "Stranded.pict",
+   "Enables reqd": 7,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    }
+   ],
+   "Svg": "135_Stranded.pict.svg"
+  },
+  "NUKE": {
+   "Tag": "NUKE",
+   "Name": "Nuclear Winter",
+   "Message": "\rFinish what bombing should have done.\r",
+   "Path": "Nuclear Winter.pict",
+   "Enables reqd": 6,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    },
+    {
+     "Level:": "LOST"
+    }
+   ],
+   "Svg": "134_Nuclear_Winter.pict.svg"
+  },
+  "DOCS": {
+   "Tag": "DOCS",
+   "Name": "Bluewater Documents",
+   "Message": "\rSteal secret files.\r",
+   "Path": "Bluewater Documents.pict",
+   "Enables reqd": 5,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    },
+    {
+     "Level:": "LOST"
+    },
+    {
+     "Level:": "NUKE"
+    }
+   ],
+   "Svg": "133_Bluewater_Documents.pict.svg"
+  },
+  "SpyH": {
+   "Tag": "SpyH",
+   "Name": "Spy Hunt",
+   "Message": "\rPrevent spies from escaping with stolen material.",
+   "Path": "Spy Hunt.pict",
+   "Enables reqd": 4,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    },
+    {
+     "Level:": "LOST"
+    },
+    {
+     "Level:": "NUKE"
+    },
+    {
+     "Level:": "DOCS"
+    }
+   ],
+   "Svg": "147_Spy_Hunt.pict.svg"
+  },
+  "SIMM": {
+   "Tag": "SIMM",
+   "Name": "Practice Run",
+   "Message": "\rPractice makes perfect.\r",
+   "Path": "Practice Run.pict",
+   "Enables reqd": 3,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    },
+    {
+     "Level:": "LOST"
+    },
+    {
+     "Level:": "NUKE"
+    },
+    {
+     "Level:": "DOCS"
+    },
+    {
+     "Level:": "SpyH"
+    }
+   ],
+   "Svg": "132_Practice_Run.pict.svg"
+  },
+  "UFOZ": {
+   "Tag": "UFOZ",
+   "Name": "Outpost Zombie",
+   "Message": "\rProtect the outpost from a minor raid.",
+   "Path": "Outpost.pict",
+   "Enables reqd": 2,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    },
+    {
+     "Level:": "LOST"
+    },
+    {
+     "Level:": "NUKE"
+    },
+    {
+     "Level:": "DOCS"
+    },
+    {
+     "Level:": "SpyH"
+    },
+    {
+     "Level:": "SIMM"
+    }
+   ],
+   "Svg": "145_Outpost.pict.svg"
+  },
+  "FORT": {
+   "Tag": "FORT",
+   "Name": "Fort of Bob",
+   "Message": "\rRe-capture Bob's Fort\r",
+   "Path": "Fort of Bob.pict",
+   "Enables reqd": 1,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    },
+    {
+     "Level:": "LOST"
+    },
+    {
+     "Level:": "NUKE"
+    },
+    {
+     "Level:": "DOCS"
+    },
+    {
+     "Level:": "SpyH"
+    },
+    {
+     "Level:": "SIMM"
+    },
+    {
+     "Level:": "UFOZ"
+    }
+   ],
+   "Svg": "131_Fort_of_Bob.pict.svg"
+  },
+  "TrC2": {
+   "Tag": "TrC2",
+   "Name": "Training Grounds 2",
+   "Message": "a) Hit switch\rb) Step onto the round platform\rc) Exit",
+   "Path": "Training2",
+   "Enables reqd": 1,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    },
+    {
+     "Level:": "LOST"
+    },
+    {
+     "Level:": "NUKE"
+    },
+    {
+     "Level:": "DOCS"
+    },
+    {
+     "Level:": "SpyH"
+    },
+    {
+     "Level:": "SIMM"
+    },
+    {
+     "Level:": "UFOZ"
+    },
+    {
+     "Level:": "FORT"
+    }
+   ],
+   "Svg": "144_Training2.svg"
+  },
+  "TrC1": {
+   "Tag": "TrC1",
+   "Name": "Training Grounds",
+   "Message": "Click here to load the mission you want.\rThen read the briefing in the Roster window.\rNew missions appear as old ones are completed.",
+   "Path": "Tutorial1.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "-----": [
+    {
+     "Level:": "ICED"
+    },
+    {
+     "Level:": "CITY"
+    },
+    {
+     "Level:": "MRAD"
+    },
+    {
+     "Level:": "TFAC"
+    },
+    {
+     "Level:": "DBAS"
+    },
+    {
+     "Level:": "BOMB"
+    },
+    {
+     "Level:": "Resc"
+    },
+    {
+     "Level:": "RCYC"
+    },
+    {
+     "Level:": "BOAK"
+    },
+    {
+     "Level:": "LOST"
+    },
+    {
+     "Level:": "NUKE"
+    },
+    {
+     "Level:": "DOCS"
+    },
+    {
+     "Level:": "SpyH"
+    },
+    {
+     "Level:": "SIMM"
+    },
+    {
+     "Level:": "UFOZ"
+    },
+    {
+     "Level:": "FORT"
+    },
+    {
+     "Level:": "TrC2"
+    }
+   ],
+   "Svg": "146_Tutorial1.pict.svg"
+  }
+ },
+ "BSPT": {
+  "411": {
+   "name": "w1x1",
+   "file": "levels/single-player/bsps/411.json"
+  },
+  "421": {
+   "name": "w2x1",
+   "file": "levels/single-player/bsps/421.json"
+  },
+  "431": {
+   "name": "w3x1",
+   "file": "levels/single-player/bsps/431.json"
+  },
+  "441": {
+   "name": "w4x1",
+   "file": "levels/single-player/bsps/441.json"
+  },
+  "451": {
+   "name": "w5x1",
+   "file": "levels/single-player/bsps/451.json"
+  },
+  "422": {
+   "name": "w2x2",
+   "file": "levels/single-player/bsps/422.json"
+  },
+  "432": {
+   "name": "w3x2",
+   "file": "levels/single-player/bsps/432.json"
+  },
+  "433": {
+   "name": "w3x3",
+   "file": "levels/single-player/bsps/433.json"
+  },
+  "202": {
+   "name": "marker",
+   "file": "levels/single-player/bsps/202.json"
+  },
+  "203": {
+   "name": "Missile",
+   "file": "levels/single-player/bsps/203.json"
+  },
+  "204": {
+   "name": "DirInd",
+   "file": "levels/single-player/bsps/204.json"
+  },
+  "205": {
+   "name": "TargetOff",
+   "file": "levels/single-player/bsps/205.json"
+  },
+  "206": {
+   "name": "TargetOk",
+   "file": "levels/single-player/bsps/206.json"
+  },
+  "502": {
+   "name": "Sliver1",
+   "file": "levels/single-player/bsps/502.json"
+  },
+  "501": {
+   "name": "Sliver0",
+   "file": "levels/single-player/bsps/501.json"
+  },
+  "503": {
+   "name": "Sliver2",
+   "file": "levels/single-player/bsps/503.json"
+  },
+  "600": {
+   "name": "GroundStar",
+   "file": "levels/single-player/bsps/600.json"
+  },
+  "601": {
+   "name": "GroundArrow",
+   "file": "levels/single-player/bsps/601.json"
+  },
+  "602": {
+   "name": "GroundArrowLeft",
+   "file": "levels/single-player/bsps/602.json"
+  },
+  "650": {
+   "name": "TriPyramid",
+   "file": "levels/single-player/bsps/650.json"
+  },
+  "550": {
+   "name": "SimpleDoor",
+   "file": "levels/single-player/bsps/550.json"
+  },
+  "800": {
+   "name": "GuardGun",
+   "file": "levels/single-player/bsps/800.json"
+  },
+  "801": {
+   "name": "Bolt",
+   "file": "levels/single-player/bsps/801.json"
+  },
+  "217": {
+   "name": "Large HECTOR",
+   "file": "levels/single-player/bsps/217.json"
+  },
+  "211": {
+   "name": "Walker.Leg.High",
+   "file": "levels/single-player/bsps/211.json"
+  },
+  "220": {
+   "name": "ScoutCopter",
+   "file": "levels/single-player/bsps/220.json"
+  },
+  "230": {
+   "name": "transport",
+   "file": "levels/single-player/bsps/230.json"
+  },
+  "311": {
+   "name": "mine.active",
+   "file": "levels/single-player/bsps/311.json"
+  },
+  "310": {
+   "name": "mine.asleep",
+   "file": "levels/single-player/bsps/310.json"
+  },
+  "500": {
+   "name": "sliver-small",
+   "file": "levels/single-player/bsps/500.json"
+  },
+  "803": {
+   "name": "Seeker",
+   "file": "levels/single-player/bsps/803.json"
+  },
+  "804": {
+   "name": "igloo",
+   "file": "levels/single-player/bsps/804.json"
+  },
+  "806": {
+   "name": "dome",
+   "file": "levels/single-player/bsps/806.json"
+  },
+  "807": {
+   "name": "Parasite",
+   "file": "levels/single-player/bsps/807.json"
+  },
+  "808": {
+   "name": "superufo",
+   "file": "levels/single-player/bsps/808.json"
+  },
+  "809": {
+   "name": "shuriken",
+   "file": "levels/single-player/bsps/809.json"
+  },
+  "212": {
+   "name": "Walker.Leg.Low",
+   "file": "levels/single-player/bsps/212.json"
+  },
+  "560": {
+   "name": "switchOff",
+   "file": "levels/single-player/bsps/560.json"
+  },
+  "561": {
+   "name": "switchOn",
+   "file": "levels/single-player/bsps/561.json"
+  },
+  "562": {
+   "name": "wallSwitchOff",
+   "file": "levels/single-player/bsps/562.json"
+  },
+  "563": {
+   "name": "wallSwitchOn",
+   "file": "levels/single-player/bsps/563.json"
+  },
+  "812": {
+   "name": "plat.dxf",
+   "file": "levels/single-player/bsps/812.json"
+  },
+  "820": {
+   "name": "grenade",
+   "file": "levels/single-player/bsps/820.json"
+  },
+  "802": {
+   "name": "Smart Missile",
+   "file": "levels/single-player/bsps/802.json"
+  },
+  "207": {
+   "name": "SmartHairs",
+   "file": "levels/single-player/bsps/207.json"
+  },
+  "208": {
+   "name": "SmartSight",
+   "file": "levels/single-player/bsps/208.json"
+  },
+  "201": {
+   "name": "GrenadeSight.top",
+   "file": "levels/single-player/bsps/201.json"
+  },
+  "200": {
+   "name": "grenadeSight",
+   "file": "levels/single-player/bsps/200.json"
+  },
+  "240": {
+   "name": "powerup",
+   "file": "levels/single-player/bsps/240.json"
+  },
+  "216": {
+   "name": "Mid HECTOR",
+   "file": "levels/single-player/bsps/216.json"
+  },
+  "210": {
+   "name": "Walker.Head.BBox",
+   "file": "levels/single-player/bsps/210.json"
+  },
+  "215": {
+   "name": "Small HECTOR",
+   "file": "levels/single-player/bsps/215.json"
+  },
+  "462": {
+   "name": "Sphere4",
+   "file": "levels/single-player/bsps/462.json"
+  },
+  "460": {
+   "name": "Sphere16",
+   "file": "levels/single-player/bsps/460.json"
+  },
+  "461": {
+   "name": "Sphere16",
+   "file": "levels/single-player/bsps/461.json"
+  },
+  "463": {
+   "name": "Sphere4",
+   "file": "levels/single-player/bsps/463.json"
+  },
+  "464": {
+   "name": "sphere2",
+   "file": "levels/single-player/bsps/464.json"
+  },
+  "465": {
+   "name": "sphere2",
+   "file": "levels/single-player/bsps/465.json"
+  },
+  "832": {
+   "name": "Shooter2",
+   "file": "levels/single-player/bsps/832.json"
+  },
+  "831": {
+   "name": "Tractortower",
+   "file": "levels/single-player/bsps/831.json"
+  },
+  "830": {
+   "name": "starfighter",
+   "file": "levels/single-player/bsps/830.json"
+  },
+  "720": {
+   "name": "emptycube",
+   "file": "levels/single-player/bsps/720.json"
+  },
+  "721": {
+   "name": "doublecube",
+   "file": "levels/single-player/bsps/721.json"
+  },
+  "400": {
+   "name": "BoxTemplate.geom",
+   "file": "levels/single-player/bsps/400.json"
+  },
+  "401": {
+   "name": "UnitRect.geom",
+   "file": "levels/single-player/bsps/401.json"
+  },
+  "722": {
+   "name": "FloorFrame",
+   "file": "levels/single-player/bsps/722.json"
+  },
+  "724": {
+   "name": "Triangle.geom",
+   "file": "levels/single-player/bsps/724.json"
+  },
+  "723": {
+   "name": "GobbleRect.geom",
+   "file": "levels/single-player/bsps/723.json"
+  },
+  "251": {
+   "name": "goal2",
+   "file": "levels/single-player/bsps/251.json"
+  },
+  "252": {
+   "name": "Pill",
+   "file": "levels/single-player/bsps/252.json"
+  },
+  "250": {
+   "name": "football",
+   "file": "levels/single-player/bsps/250.json"
+  },
+  "100": {
+   "name": "NeoAvara",
+   "file": "levels/single-player/bsps/100.json"
+  },
+  "102": {
+   "name": "Avara A",
+   "file": "levels/single-player/bsps/102.json"
+  },
+  "101": {
+   "name": "MComplete",
+   "file": "levels/single-player/bsps/101.json"
+  },
+  "611": {
+   "name": "Crack",
+   "file": "levels/single-player/bsps/611.json"
+  },
+  "610": {
+   "name": "Vines",
+   "file": "levels/single-player/bsps/610.json"
+  },
+  "701": {
+   "name": "ON",
+   "file": "levels/single-player/bsps/701.json"
+  },
+  "702": {
+   "name": "OFF",
+   "file": "levels/single-player/bsps/702.json"
+  },
+  "703": {
+   "name": "Tower",
+   "file": "levels/single-player/bsps/703.json"
+  },
+  "704": {
+   "name": "Grid10",
+   "file": "levels/single-player/bsps/704.json"
+  },
+  "705": {
+   "name": "Mushroom",
+   "file": "levels/single-player/bsps/705.json"
+  },
+  "706": {
+   "name": "HingeDoor",
+   "file": "levels/single-player/bsps/706.json"
+  },
+  "707": {
+   "name": "Flower",
+   "file": "levels/single-player/bsps/707.json"
+  },
+  "708": {
+   "name": "Tree",
+   "file": "levels/single-player/bsps/708.json"
+  },
+  "709": {
+   "name": "Grid7.5",
+   "file": "levels/single-player/bsps/709.json"
+  },
+  "710": {
+   "name": "Hill",
+   "file": "levels/single-player/bsps/710.json"
+  },
+  "711": {
+   "name": "Street",
+   "file": "levels/single-player/bsps/711.json"
+  },
+  "712": {
+   "name": "Turn",
+   "file": "levels/single-player/bsps/712.json"
+  },
+  "713": {
+   "name": "Lock",
+   "file": "levels/single-player/bsps/713.json"
+  },
+  "714": {
+   "name": "DeadTree",
+   "file": "levels/single-player/bsps/714.json"
+  },
+  "715": {
+   "name": "BigIce",
+   "file": "levels/single-player/bsps/715.json"
+  },
+  "716": {
+   "name": "Ice",
+   "file": "levels/single-player/bsps/716.json"
+  },
+  "717": {
+   "name": "Shell",
+   "file": "levels/single-player/bsps/717.json"
+  },
+  "300": {
+   "name": "patchsphere.dxf",
+   "file": "levels/single-player/bsps/300.json"
+  }
+ },
+ "HULL": {
+  "129": {
+   "Hull Res ID": 216,
+   "Max Missiles": 4,
+   "Max Grenades": 8,
+   "Max boosters": 4,
+   "Mass": 155.0,
+   "Max Energy": 1.1000076295109484,
+   "Energy Charge": 1.0249942778667887,
+   "Max Shields": 1.0,
+   "Shield Charge": 1.0,
+   "Min Shot": 1.0,
+   "Max Shot": 1.0,
+   "Shot Charge": 1.0,
+   "Riding Height": 0.3500114442664225,
+   "Acceleration": 1.1000076295109484,
+   "Jump Power": 1.0
+  },
+  "130": {
+   "Hull Res ID": 217,
+   "Max Missiles": 8,
+   "Max Grenades": 12,
+   "Max boosters": 5,
+   "Mass": 170.0,
+   "Max Energy": 1.1000076295109484,
+   "Energy Charge": 1.0500038147554742,
+   "Max Shields": 1.1000076295109484,
+   "Shield Charge": 1.0,
+   "Min Shot": 1.1000076295109484,
+   "Max Shot": 1.0,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.3500114442664225,
+   "Acceleration": 1.0,
+   "Jump Power": 1.1000076295109484
+  },
+  "131": {
+   "Hull Res ID": 215,
+   "Max Missiles": 3,
+   "Max Grenades": 6,
+   "Max boosters": 3,
+   "Mass": 140.0,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 1.0500038147554742,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  },
+  "128": {
+   "Hull Res ID": 215,
+   "Max Missiles": 3,
+   "Max Grenades": 6,
+   "Max boosters": 3,
+   "Mass": 140.0,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 1.0500038147554742,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  },
+  "132": {
+   "Hull Res ID": 210,
+   "Max Missiles": 3,
+   "Max Grenades": 6,
+   "Max boosters": 3,
+   "Mass": 140.0,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 1.0500038147554742,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  }
+ },
+ "manifest_path": "levels/single-player/set.json"
+}

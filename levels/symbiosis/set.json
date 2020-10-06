@@ -1,0 +1,82 @@
+{
+ "LEDI": {
+  "sy02": {
+   "Tag": "sy02",
+   "Name": "Symbiosis",
+   "Message": "\rScratch my back.\r",
+   "Path": "Symbiosis",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "128_Symbiosis.svg"
+  }
+ },
+ "BSPT": {
+  "3000": {
+   "name": "bspBalconybox",
+   "file": "levels/symbiosis/bsps/3000.json"
+  },
+  "3001": {
+   "name": "bspR",
+   "file": "levels/symbiosis/bsps/3001.json"
+  },
+  "3002": {
+   "name": "bspY",
+   "file": "levels/symbiosis/bsps/3002.json"
+  }
+ },
+ "HULL": {
+  "3000": {
+   "Hull Res ID": 215,
+   "Max Missiles": 3,
+   "Max Grenades": 6,
+   "Max boosters": 3,
+   "Mass": 140.0,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 2.1000076295109484,
+   "Max Shields": 5.399969481956207,
+   "Shield Charge": 0.0,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  },
+  "3001": {
+   "Hull Res ID": 216,
+   "Max Missiles": 4,
+   "Max Grenades": 8,
+   "Max boosters": 4,
+   "Mass": 155.0,
+   "Max Energy": 1.1000076295109484,
+   "Energy Charge": 2.0499885557335773,
+   "Max Shields": 6.0,
+   "Shield Charge": 0.0,
+   "Min Shot": 1.0,
+   "Max Shot": 1.0,
+   "Shot Charge": 1.0,
+   "Riding Height": 0.3500114442664225,
+   "Acceleration": 1.1000076295109484,
+   "Jump Power": 1.0
+  },
+  "3002": {
+   "Hull Res ID": 217,
+   "Max Missiles": 8,
+   "Max Grenades": 12,
+   "Max boosters": 5,
+   "Mass": 170.0,
+   "Max Energy": 1.1000076295109484,
+   "Energy Charge": 2.1000076295109484,
+   "Max Shields": 6.60004577706569,
+   "Shield Charge": 0.0,
+   "Min Shot": 1.1000076295109484,
+   "Max Shot": 1.0,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.3500114442664225,
+   "Acceleration": 1.0,
+   "Jump Power": 1.1000076295109484
+  }
+ },
+ "manifest_path": "levels/symbiosis/set.json"
+}

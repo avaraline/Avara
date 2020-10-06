@@ -1,0 +1,55 @@
+{
+ "LEDI": {
+  "AiVo": {
+   "Tag": "AiVo",
+   "Name": "Air Voss",
+   "Message": "\rShut up and jam.",
+   "Path": "Air Voss",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_Air_Voss.svg"
+  },
+  "AirB": {
+   "Tag": "AirB",
+   "Name": "Choke Daddy",
+   "Message": "\r(Grenades only, normal gravity, normal weapons.)",
+   "Path": "Choke Daddy",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_Choke_Daddy.svg"
+  },
+  "AirC": {
+   "Tag": "AirC",
+   "Name": "Choke Daddy Down",
+   "Message": "\r(Low gravity, Showdown weapons.)",
+   "Path": "Choke Daddy Down",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1002_Choke_Daddy_Down.svg"
+  },
+  "AirD": {
+   "Tag": "AirD",
+   "Name": "Choke Daddy B",
+   "Message": "\r(Normal gravity, Baghdad weapons.)",
+   "Path": "Choke Daddy B",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1003_Choke_Daddy_B.svg"
+  },
+  "Grim": {
+   "Tag": "Grim",
+   "Name": "Grimoire",
+   "Message": "\rPurely for academic purposes, you understand.",
+   "Path": "Grimoire",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1004_Grimoire.svg"
+  }
+ },
+ "manifest_path": "levels/classic-mix-up/set.json"
+}

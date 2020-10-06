@@ -1,0 +1,147 @@
+{
+ "LEDI": {
+  "rand": {
+   "Tag": "rand",
+   "Name": "Scrambled!",
+   "Message": "\rEggs anyone?",
+   "Path": "scrambled.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1008_scrambled.pict.svg"
+  },
+  "infi": {
+   "Tag": "infi",
+   "Name": "\rInfinity",
+   "Message": "\rScrambled! without the scramble...",
+   "Path": "infinity.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1010_infinity.pict.svg"
+  },
+  "matr": {
+   "Tag": "matr",
+   "Name": "The Matrix",
+   "Message": "\rFollow the white rabbit - you never know where it will take you...",
+   "Path": "matrix.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1011_matrix.pict.svg"
+  },
+  "mypo": {
+   "Tag": "mypo",
+   "Name": "Myopia",
+   "Message": "\rOld folks tend to need bifocals...",
+   "Path": "myopia.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1003_myopia.pict.svg"
+  },
+  "bgd2": {
+   "Tag": "bgd2",
+   "Name": "Baghdad 2",
+   "Message": "\rThe Year 2000, Somewhere near Baghdad.",
+   "Path": "baghdad.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_baghdad.pict.svg"
+  },
+  "shw2": {
+   "Tag": "shw2",
+   "Name": "Showdown 2",
+   "Message": "\rA low gravity grenade fest.  Small and fast - death is quick!",
+   "Path": "showdown.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_showdown.pict.svg"
+  },
+  "hopp": {
+   "Tag": "hopp",
+   "Name": "Hopscotch 2",
+   "Message": "\rImproved and very random...",
+   "Path": "hopscotch.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1004_hopscotch.pict.svg"
+  },
+  "poly": {
+   "Tag": "poly",
+   "Name": "Five Polys Koth",
+   "Message": "\rClassic King of the Hill",
+   "Path": "fivepoly.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1006_fivepoly.pict.svg"
+  },
+  "revg": {
+   "Tag": "revg",
+   "Name": "Revenge!",
+   "Message": "\rWatch your back!",
+   "Path": "revenge.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1002_revenge.pict.svg"
+  },
+  "ranb": {
+   "Tag": "ranb",
+   "Name": "RIPball",
+   "Message": "\rShoot any color basket when available.",
+   "Path": "ripball.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1009_ripball.pict.svg"
+  },
+  "mybp": {
+   "Tag": "mybp",
+   "Name": "Myopic GzrBall",
+   "Message": "\rKeep your eyes on the ball!",
+   "Path": "myopicball.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1005_myopicball.pict.svg"
+  },
+  "gzrb": {
+   "Tag": "gzrb",
+   "Name": "GzrBall 2",
+   "Message": "\rRun to the alcoves and teleport with the ball!\r",
+   "Path": "gzrball.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1007_gzrball.pict.svg"
+  }
+ },
+ "BSPT": {
+  "5555": {
+   "name": "bspBall",
+   "file": "levels/gzr-rip/bsps/5555.json"
+  },
+  "5557": {
+   "name": "bspRabbit",
+   "file": "levels/gzr-rip/bsps/5557.json"
+  },
+  "5560": {
+   "name": "bspFloorGzr",
+   "file": "levels/gzr-rip/bsps/5560.json"
+  },
+  "5556": {
+   "name": "bspRtGzr",
+   "file": "levels/gzr-rip/bsps/5556.json"
+  },
+  "5558": {
+   "name": "bspHollowGzr",
+   "file": "levels/gzr-rip/bsps/5558.json"
+  }
+ },
+ "manifest_path": "levels/gzr-rip/set.json"
+}

@@ -1,0 +1,104 @@
+{
+ "LEDI": {
+  "Medi": {
+   "Tag": "Medi",
+   "Name": "Medievos",
+   "Message": "\rDon thy bow and arrow, and prepare yourself.\r",
+   "Path": "Medievos",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "128_Medievos.svg"
+  }
+ },
+ "BSPT": {
+  "2300": {
+   "name": "bspNewTree",
+   "file": "levels/medievos/bsps/2300.json"
+  },
+  "2500": {
+   "name": "bspFire",
+   "file": "levels/medievos/bsps/2500.json"
+  },
+  "2600": {
+   "name": "bspCircle",
+   "file": "levels/medievos/bsps/2600.json"
+  },
+  "2400": {
+   "name": "bspGate",
+   "file": "levels/medievos/bsps/2400.json"
+  },
+  "2700": {
+   "name": "bspBowl",
+   "file": "levels/medievos/bsps/2700.json"
+  },
+  "2800": {
+   "name": "bspFilledBowl",
+   "file": "levels/medievos/bsps/2800.json"
+  },
+  "2900": {
+   "name": "bspCauldron",
+   "file": "levels/medievos/bsps/2900.json"
+  },
+  "2901": {
+   "name": "bspGroundCrack",
+   "file": "levels/medievos/bsps/2901.json"
+  },
+  "2902": {
+   "name": "bspSconce",
+   "file": "levels/medievos/bsps/2902.json"
+  },
+  "2903": {
+   "name": "bspFlame",
+   "file": "levels/medievos/bsps/2903.json"
+  },
+  "2904": {
+   "name": "bspVial",
+   "file": "levels/medievos/bsps/2904.json"
+  },
+  "2905": {
+   "name": "bspCleaver",
+   "file": "levels/medievos/bsps/2905.json"
+  },
+  "2906": {
+   "name": "bspSword",
+   "file": "levels/medievos/bsps/2906.json"
+  },
+  "2907": {
+   "name": "bspKnife",
+   "file": "levels/medievos/bsps/2907.json"
+  },
+  "2200": {
+   "name": "bspBanner",
+   "file": "levels/medievos/bsps/2200.json"
+  },
+  "2001": {
+   "name": "bspNewLight",
+   "file": "levels/medievos/bsps/2001.json"
+  },
+  "2100": {
+   "name": "bspArrow",
+   "file": "levels/medievos/bsps/2100.json"
+  }
+ },
+ "HULL": {
+  "2100": {
+   "Hull Res ID": 2001,
+   "Max Missiles": 4,
+   "Max Grenades": 6,
+   "Max boosters": 3,
+   "Mass": 140.0,
+   "Max Energy": 1.8,
+   "Energy Charge": 1.0500038147554742,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 1.0500038147554742,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 1.0,
+   "Jump Power": 1.0
+  }
+ },
+ "manifest_path": "levels/medievos/set.json"
+}

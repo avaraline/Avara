@@ -1,0 +1,252 @@
+{
+ "LEDI": {
+  "nul5": {
+   "Tag": "nul5",
+   "Name": " ",
+   "Message": "\r---- Hazel ----",
+   "Path": "",
+   "Enables reqd": 0,
+   "File": true,
+   "Reserved:": 0
+  },
+  "SLYR": {
+   "Tag": "SLYR",
+   "Name": "SLAYER",
+   "Message": "Do your thing.",
+   "Path": "SLAYER",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "128_SLAYER.svg"
+  },
+  "Rumb": {
+   "Tag": "Rumb",
+   "Name": "Rumble",
+   "Message": "Put your dukes up!",
+   "Path": "ficl",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "129_ficl.svg"
+  },
+  "RSKY": {
+   "Tag": "RSKY",
+   "Name": "Redsky",
+   "Message": "The sky is red, the ground is black. This level is fun, so please come back.",
+   "Path": "Redsky.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "130_Redsky.pict.svg"
+  },
+  "BoP1": {
+   "Tag": "BoP1",
+   "Name": "A la Apollo",
+   "Message": "\rJust like the original.",
+   "Path": "apollo.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1000_apollo.pict.svg"
+  },
+  "BoP2": {
+   "Tag": "BoP2",
+   "Name": "Amazon",
+   "Message": "\rGreen Battlefield.",
+   "Path": "amazon.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_amazon.pict.svg"
+  },
+  "BoP3": {
+   "Tag": "BoP3",
+   "Name": "Gobi",
+   "Message": "\rSandy.",
+   "Path": "gobi.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1002_gobi.pict.svg"
+  },
+  "BoP4": {
+   "Tag": "BoP4",
+   "Name": "Portal",
+   "Message": "\rGateway into the future.",
+   "Path": "portal.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1003_portal.pict.svg"
+  },
+  "BoP5": {
+   "Tag": "BoP5",
+   "Name": "Python",
+   "Message": "\rTight.",
+   "Path": "python.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1004_python.pict.svg"
+  },
+  "BoP6": {
+   "Tag": "BoP6",
+   "Name": "Rustic",
+   "Message": "\rTraditional.",
+   "Path": "rustic.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1005_rustic.pict.svg"
+  },
+  "BoP7": {
+   "Tag": "BoP7",
+   "Name": "Sahara",
+   "Message": "\rScorching.",
+   "Path": "sahara.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1006_sahara.pict.svg"
+  },
+  "BoP8": {
+   "Tag": "BoP8",
+   "Name": "Whittling",
+   "Message": "\rCarved.",
+   "Path": "whittle.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1007_whittle.pict.svg"
+  },
+  "BoP9": {
+   "Tag": "BoP9",
+   "Name": "Integration",
+   "Message": "\rCombination and Segregation",
+   "Path": "integration.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1008_integration.pict.svg"
+  },
+  "HHH0": {
+   "Tag": "HHH0",
+   "Name": "Battlestage",
+   "Message": "\rPrepare to battle. Step forward with thou war machines.",
+   "Path": "Level 0.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "HHH1": {
+   "Tag": "HHH1",
+   "Name": "Jungle Hectors",
+   "Message": "\rmy my, I feel so high.",
+   "Path": "Level 1.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "HHH2": {
+   "Tag": "HHH2",
+   "Name": "Green Wave",
+   "Message": "\rBored? Nothin' a little Avara wont cure.",
+   "Path": "Level 2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "HHH3": {
+   "Tag": "HHH3",
+   "Name": "Warehouse",
+   "Message": "\rwhat a nice place for some fun.",
+   "Path": "Level 3.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "HHH4": {
+   "Tag": "HHH4",
+   "Name": "Clash Of The Clans",
+   "Message": "\rC.O.T.C.",
+   "Path": "level 4.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2004_level_4.pict.svg"
+  },
+  "HHH6": {
+   "Tag": "HHH6",
+   "Name": "Pit Ball",
+   "Message": "\rScore 5 times to win!",
+   "Path": "Level 6.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "HHH7": {
+   "Tag": "HHH7",
+   "Name": "Scouting",
+   "Message": "\rUp, up and away!",
+   "Path": "Level 7.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "HHH8": {
+   "Tag": "HHH8",
+   "Name": "Missile-Mania",
+   "Message": "\"hey, whats that?\"-\"pherhaps it's a parasite, i've heard of those. Better run!\"-\"no, wait... I remember this.. hold on.. I know it.. miss.. missile, ah, thats it!\"         ***!!BANG!!***",
+   "Path": "Level 8.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "HHH9": {
+   "Tag": "HHH9",
+   "Name": "Gerbilism",
+   "Message": "\rDigDigDig!",
+   "Path": "Level 9.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0
+  },
+  "HH10": {
+   "Tag": "HH10",
+   "Name": "Challenge",
+   "Message": "\rhow about a bet?",
+   "Path": "level 10.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "2010_level_10.pict.svg"
+  }
+ },
+ "BSPT": {
+  "1000": {
+   "name": "bspSLAYERGRAF",
+   "file": "levels/t-plus-5-part-c/bsps/1000.json"
+  },
+  "1002": {
+   "name": "bspTELEPORTER",
+   "file": "levels/t-plus-5-part-c/bsps/1002.json"
+  },
+  "1003": {
+   "name": "bspK",
+   "file": "levels/t-plus-5-part-c/bsps/1003.json"
+  },
+  "1001": {
+   "name": "bspDIAMOND",
+   "file": "levels/t-plus-5-part-c/bsps/1001.json"
+  },
+  "128": {
+   "name": "iMac",
+   "file": "levels/t-plus-5-part-c/bsps/128.json"
+  },
+  "200": {
+   "name": "Shrub",
+   "file": "levels/t-plus-5-part-c/bsps/200.json"
+  }
+ },
+ "manifest_path": "levels/t-plus-5-part-c/set.json"
+}

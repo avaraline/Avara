@@ -1,0 +1,105 @@
+{
+ "LEDI": {
+  "NEWB": {
+   "Tag": "NEWB",
+   "Name": "We Be Ground Pounders",
+   "Message": "\rYou cannot outrun it, you cannot outhide it, all you can do is fear it",
+   "Path": "pounders",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "130_pounders.svg"
+  }
+ },
+ "BSPT": {
+  "1286": {
+   "name": "CPanel",
+   "file": "levels/we-be-ground-pounders/bsps/1286.json"
+  },
+  "5000": {
+   "name": "Ship",
+   "file": "levels/we-be-ground-pounders/bsps/5000.json"
+  },
+  "5001": {
+   "name": "Distant Hill 1",
+   "file": "levels/we-be-ground-pounders/bsps/5001.json"
+  },
+  "5002": {
+   "name": "Distant Hill 2",
+   "file": "levels/we-be-ground-pounders/bsps/5002.json"
+  },
+  "5003": {
+   "name": "Close Rolling Hills",
+   "file": "levels/we-be-ground-pounders/bsps/5003.json"
+  },
+  "5004": {
+   "name": "Close Big Hill",
+   "file": "levels/we-be-ground-pounders/bsps/5004.json"
+  },
+  "5005": {
+   "name": "Platform",
+   "file": "levels/we-be-ground-pounders/bsps/5005.json"
+  },
+  "5006": {
+   "name": "Thruster",
+   "file": "levels/we-be-ground-pounders/bsps/5006.json"
+  },
+  "5007": {
+   "name": "Lights",
+   "file": "levels/we-be-ground-pounders/bsps/5007.json"
+  },
+  "5008": {
+   "name": "Close Peak",
+   "file": "levels/we-be-ground-pounders/bsps/5008.json"
+  },
+  "5009": {
+   "name": "Horizontal Circle",
+   "file": "levels/we-be-ground-pounders/bsps/5009.json"
+  },
+  "5010": {
+   "name": "Spiral Tele",
+   "file": "levels/we-be-ground-pounders/bsps/5010.json"
+  },
+  "6001": {
+   "name": "Sun",
+   "file": "levels/we-be-ground-pounders/bsps/6001.json"
+  }
+ },
+ "HULL": {
+  "6666": {
+   "Hull Res ID": 215,
+   "Max Missiles": 3,
+   "Max Grenades": 6,
+   "Max boosters": 0,
+   "Mass": 117.11181811245899,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 1.9655451285572596,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 1.9655451285572596,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 0.72480354009308,
+   "Jump Power": 1.0
+  },
+  "6667": {
+   "Hull Res ID": 215,
+   "Max Missiles": 2,
+   "Max Grenades": 4,
+   "Max boosters": 0,
+   "Mass": 117.11181811245899,
+   "Max Energy": 0.9000076295109484,
+   "Energy Charge": 1.9655451285572596,
+   "Max Shields": 0.9000076295109484,
+   "Shield Charge": 1.0500038147554742,
+   "Min Shot": 1.0,
+   "Max Shot": 0.9000076295109484,
+   "Shot Charge": 1.9655451285572596,
+   "Riding Height": 0.2500038147554742,
+   "Acceleration": 0.762951094834821,
+   "Jump Power": 1.0
+  }
+ },
+ "manifest_path": "levels/we-be-ground-pounders/set.json"
+}

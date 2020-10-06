@@ -1,0 +1,208 @@
+{
+ "LEDI": {
+  "engd": {
+   "Tag": "engd",
+   "Name": "En Garde!",
+   "Message": "Reach your opponents side as many times as possible. Teams are Red and Yellow. One point for each time - no points for kills. 5 minutes or 25 points.",
+   "Path": "engarde.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1002_engarde.pict.svg"
+  },
+  "hops": {
+   "Tag": "hops",
+   "Name": "Hopscotch",
+   "Message": "Enter the teleporter as many times as possible. One point for each time - no points for kills. 5 minutes or 25 points.",
+   "Path": "hopscotch.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1005_hopscotch.pict.svg"
+  },
+  "caff": {
+   "Tag": "caff",
+   "Name": "Caffeine",
+   "Message": "Teams are red and yellow. Reach your opponents side as many times as possible. One point for each time - no points for kills. 5 minutes or 15 points.",
+   "Path": "caffeine.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1001_caffeine.pict.svg"
+  },
+  "miss": {
+   "Tag": "miss",
+   "Name": "MisStep",
+   "Message": "Reach your opponents side as many times as possible. Teams are Red and Yellow. One point for each time - no points for kills. 5 minutes or 15 points.",
+   "Path": "misstep.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1006_misstep.pict.svg"
+  },
+  "popp": {
+   "Tag": "popp",
+   "Name": "Tweaky-Pop!",
+   "Message": "Goes the hector!  15 kills for your team to win.",
+   "Path": "pop.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1013_pop.pict.svg"
+  },
+  "minp": {
+   "Tag": "minp",
+   "Name": "Mini-Pop!",
+   "Message": "Smaller: easier to knock your opponent out!  15 kills for your team to win.",
+   "Path": "minipop.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1011_minipop.pict.svg"
+  },
+  "nsum": {
+   "Tag": "nsum",
+   "Name": "KnockOut!",
+   "Message": "No scouts or teams.  Do not fire until you are in the ring.",
+   "Path": "knockout.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1014_knockout.pict.svg"
+  },
+  "kne2": {
+   "Tag": "kne2",
+   "Name": "Robby Knievel",
+   "Message": "Knievel fun! - Get the goodie 7 times to win!",
+   "Path": "knievel2.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1004_knievel2.pict.svg"
+  },
+  "evel": {
+   "Tag": "evel",
+   "Name": "Evel Knievel",
+   "Message": "The original!",
+   "Path": "knievel1.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1003_knievel1.pict.svg"
+  },
+  "rack": {
+   "Tag": "rack",
+   "Name": "Rack!",
+   "Message": "Kick her into a gallop, or ye'll get beat to death!",
+   "Path": "rack.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1012_rack.pict.svg"
+  },
+  "RATS": {
+   "Tag": "RATS",
+   "Name": "Rat's Nest",
+   "Message": "Live like a gerbil, die like a gerbil. . .",
+   "Path": "nest.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1008_nest.pict.svg"
+  },
+  "OBE1": {
+   "Tag": "OBE1",
+   "Name": "Obelisk 1",
+   "Message": "Inspired by Ramses II, this level isn't original, but may produce some good battles.",
+   "Path": "obelisk1.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1009_obelisk1.pict.svg"
+  },
+  "life": {
+   "Tag": "life",
+   "Name": "Life and Death",
+   "Message": "The Lord giveth and the Lord taketh away...",
+   "Path": "lifedeath.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1010_lifedeath.pict.svg"
+  },
+  "bull": {
+   "Tag": "bull",
+   "Name": "Bullfight",
+   "Message": "A symphony of bulls in heat.",
+   "Path": "bullfight.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1015_bullfight.pict.svg"
+  },
+  "shot": {
+   "Tag": "shot",
+   "Name": "ShotGun",
+   "Message": "A stalking level...  ",
+   "Path": "shotgun.pict",
+   "Enables reqd": 0,
+   "File": false,
+   "Reserved:": 0,
+   "Svg": "1007_shotgun.pict.svg"
+  }
+ },
+ "HULL": {
+  "151": {
+   "Hull Res ID": 216,
+   "Max Missiles": 8,
+   "Max Grenades": 16,
+   "Max boosters": 0,
+   "Mass": 137.32910658426795,
+   "Max Energy": 10.681162737468528,
+   "Energy Charge": 6.103517204547188,
+   "Max Shields": 3.051758602273594,
+   "Shield Charge": 1.5258869306477454,
+   "Min Shot": 1.0681162737468528,
+   "Max Shot": 0.9155413138017853,
+   "Shot Charge": 10.681162737468528,
+   "Riding Height": 0.25177386129549095,
+   "Acceleration": 0.9002822919050889,
+   "Jump Power": 1.0025024795910582
+  },
+  "150": {
+   "Hull Res ID": 215,
+   "Max Missiles": 8,
+   "Max Grenades": 12,
+   "Max boosters": 3,
+   "Mass": 123.59620050354772,
+   "Max Energy": 9.155275806820782,
+   "Energy Charge": 4.5776455329213395,
+   "Max Shields": 1.5258869306477454,
+   "Shield Charge": 1.5258869306477454,
+   "Min Shot": 1.0681162737468528,
+   "Max Shot": 0.9155413138017853,
+   "Shot Charge": 10.681162737468528,
+   "Riding Height": 0.3814755474174105,
+   "Acceleration": 1.0681162737468528,
+   "Jump Power": 1.2207064927138171
+  },
+  "152": {
+   "Hull Res ID": 216,
+   "Max Missiles": 8,
+   "Max Grenades": 12,
+   "Max boosters": 3,
+   "Mass": 127.41089494163424,
+   "Max Energy": 9.155275806820782,
+   "Energy Charge": 4.5776455329213395,
+   "Max Shields": 2.2888227664606697,
+   "Shield Charge": 1.831067368581674,
+   "Min Shot": 1.0681162737468528,
+   "Max Shot": 0.9155413138017853,
+   "Shot Charge": 10.681162737468528,
+   "Riding Height": 0.3814755474174105,
+   "Acceleration": 0.8392462043183032,
+   "Jump Power": 1.0482795452811475
+  }
+ },
+ "manifest_path": "levels/gzr-grecian-formula/set.json"
+}
