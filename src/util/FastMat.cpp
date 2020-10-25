@@ -27,11 +27,11 @@ static unsigned short *arcTanOneTable = 0;
 /* FixMath */
 
 Fixed FixMul(Fixed a, Fixed b) {
-    return ((int64_t)a * (int64_t)b) >> 16;
+    return ((int64_t)a * (int64_t)b) / (1 << 16);
 }
 
 Fixed FixDiv(Fixed a, Fixed b) {
-    return ToFixed(ToFloat(a) / ToFloat(b));
+    return ((int64_t)a * (1 << 16)) / b;
 }
 
 Fixed FixATan2(Fixed x, Fixed y) {
