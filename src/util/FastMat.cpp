@@ -343,7 +343,22 @@ void Transpose(Matrix *a) {
 }
 
 Fixed FSqrt(Fixed n) {
-    return ToFixed(sqrt(ToFloat(n)));
+    // https://github.com/chmike/fpsqrt/blob/master/fpsqrt.c
+    uint32_t t, q, b, r;
+    r = n;
+    b = 0x40000000;
+    q = 0;
+    while(b > 0x40) {
+        t = q + b;
+        if(r >= t) {
+            r -= t;
+            q = t + b; // equivalent to q += 2*b
+        }
+        r <<= 1;
+        b >>= 1;
+    }
+    q >>= 8;
+    return q;
 }
 
 #define RANDCONST ((uint32_t)(0x41A7))
@@ -754,3 +769,4 @@ void CombineTransforms(Matrix *vs, Matrix *vd, Matrix *m) {
     // BlockMoveData(vs, vd, sizeof(Matrix));
     VectorMatrixProduct(4, vs[0], vd[0], m);
 }
+
