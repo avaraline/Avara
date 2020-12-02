@@ -30,7 +30,24 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
     latencyBox->setValue(std::to_string(app->Number(kLatencyToleranceTag)));
     latencyBox->setEditable(true);
     latencyBox->setCallback([app](std::string value) -> bool {
-        app->Set(kLatencyToleranceTag, std::stoi(value));
+        // make sure this string is really an integer...
+        char * p;
+        strtol(value.c_str(), &p, 10);
+
+        if (*p != 0)
+            return false;
+
+        // determining the min/max latency values from CAvaraGame::SetLatencyTolerance()
+        long maxLT = 8;
+        long newLT = std::stoi(value);
+
+        if (newLT > maxLT)
+            newLT = maxLT;
+
+        if (newLT < 0)
+            newLT = 0;
+
+        app->Set(kLatencyToleranceTag, newLT);
         return true;
     });
 
