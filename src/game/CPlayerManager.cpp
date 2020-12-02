@@ -57,7 +57,6 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"fire", 1 << kfuFireWeapon},
         {"boost", 1 << kfuBoostEnergy},
         {"verticalMotion", 1 << kfuVerticalMotion},
-        {"viewRange", 1 << kfuScanDist},
         {"aimForward", 1 << kfuAimForward},
         {"lookLeft", 1 << kfuLookLeft},
         {"lookRight", 1 << kfuLookRight},
