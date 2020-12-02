@@ -10,12 +10,9 @@ public:
 
     virtual bool DoCommand(int theCommand) override;
 
-    virtual void PrefChanged(std::string name) override;
-
     virtual bool editing() override;
     
 protected:
 	nanogui::TextBox *addressBox;
-    nanogui::TextBox *latencyBox;
     nanogui::Button *connectBtn;
 };
