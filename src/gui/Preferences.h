@@ -70,7 +70,7 @@ static json defaultPrefs = {
         {"fire", "E"},
         {"boost", "Left Shift"},
         {"verticalMotion", "Left Ctrl"},
-        {"viewRange", "T"},
+        {"viewRange", ""},
         {"aimForward", "2"},
         {"lookLeft", "1"},
         {"lookRight", "3"},
