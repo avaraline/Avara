@@ -65,8 +65,6 @@ enum {
     kfuBoostEnergy,
     kfuTypeText,
 
-    kfuScanDist,
-
     kfuZoomIn,
     kfuZoomOut,
 

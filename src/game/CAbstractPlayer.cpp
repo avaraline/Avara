@@ -199,7 +199,7 @@ void CAbstractPlayer::BeginScript() {
     itsManager = NULL;
     maskBits |= kSolidBit + kTargetBit + kPlayerBit + kCollisionDamageBit + kBallSnapBit;
 
-    yonBound = gApplication->Number(kYonPrefTag) ? SHORTYON : LONGYON;
+    yonBound = LONGYON;
 
     isOut = false;
     winFrame = -1;
@@ -768,21 +768,6 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 lookDirection -= LOOKSTEP;
             } else {
                 lookDirection >>= 1;
-            }
-        }
-
-        if (TESTFUNC(kfuScanDist, ft->down)) {
-            short mode;
-
-            mode = yonBound == LONGYON;
-            if (mode)
-                yonBound = SHORTYON;
-            else
-                yonBound = LONGYON;
-
-            if (itsManager->IsLocalPlayer()) {
-                gApplication->Set(kYonPrefTag, mode);
-                itsGame->itsApp->MessageLine(kmLongView - mode, centerAlign);
             }
         }
 
