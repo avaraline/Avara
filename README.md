@@ -10,6 +10,14 @@ Avara is a cult-classic three-dimensional networked action FPS where you play as
 * [YouTube: Testing Grimoire (and UI preview)](https://www.youtube.com/watch?v=OX4I18PXXOI&)
 * [YouTube: Demo of live level editing with Inkscape in forthcoming SVG support](https://www.youtube.com/watch?v=ArM6k6w1ItM)
 
+## Play right now!
+[Download here!](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly) These are binaries built automatically by github after every update we make. Try this out first! 
+
+These have been tested on Windows 10 and macOS Catalina. If you're running an older macOS, you will probably need to follow the build instructions below instead.
+
+### Tracker is now online!
+We now have a game tracker running full time! [Check here to see if any servers are up, without launching the game](https://avara.io/)! There's also a JSON feed available [here](http://avara.io/api/v1/games/)!
+
 ## Build Requirements
 ### All platforms
 [SDL2](https://www.libsdl.org/download-2.0.php) and [SDL2_net](https://www.libsdl.org/projects/SDL_net/), POSIX-like environment, clang
