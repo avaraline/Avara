@@ -16,7 +16,7 @@ SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg v
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
-INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor -Ivendor/gtest/include
+INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor/gtest/include
 CPPFLAGS := ${CPPFLAGS}
 CPPFLAGS += $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
 CXXFLAGS := ${CXXFLAGS}
@@ -45,6 +45,7 @@ else
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l SDL2_net)
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l glu)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I directfb)
+	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I sdl2)
 	CPPFLAGS += -fPIC
 	POST_PROCESS ?= ls -lh
 endif
