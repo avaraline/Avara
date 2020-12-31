@@ -17,12 +17,12 @@ If you're running an older macOS, you will probably need to [build it yourself](
 _Please note that this tracker is **not** compatible with the Mac OS 9 version of Avara._
 
 ## Media
+* [Downloads](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly.20201230)
 * [YouTube: The first successful 3-player network test game of our Avara port](https://www.youtube.com/watch?v=aOW6lSC0kQI)
 * [YouTube: Testing Grimoire (and UI preview)](https://www.youtube.com/watch?v=OX4I18PXXOI&)
 * [YouTube: Demo of live level editing with Inkscape in forthcoming SVG support](https://www.youtube.com/watch?v=ArM6k6w1ItM)
 
 ## Resources 
-- [Downloads](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly.20201230)
 - [Game server tracker](http://avara.io/) and [API](http://avara.io/api/v1/games/)
 - [Build Instructions](https://github.com/avaraline/Avara/wiki/Build-instructions) (tl;dr run `make`)
 - **[How to play](https://github.com/avaraline/Avara/wiki/How-to-Play)**
