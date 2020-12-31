@@ -11,7 +11,7 @@ Avara is a cult-classic three-dimensional networked action FPS where you play as
 * [YouTube: Demo of live level editing with Inkscape in forthcoming SVG support](https://www.youtube.com/watch?v=ArM6k6w1ItM)
 
 ## Play right now!
-[Download here!](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly) These are binaries built automatically by github after every update we make. Try this out first! 
+[Download here!](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly.20201230) These are binaries built automatically by github after every update we make. Try this out first! 
 
 These have been tested on Windows 10 and macOS Catalina. If you're running an older macOS, you will probably need to follow the build instructions below instead.
 
