@@ -29,14 +29,16 @@ We now have a game tracker running full time! [Check here to see if any servers 
 
 ## Build Instructions
 ### All platforms
-The project currently requires a POSIX-like environment, with GLEW, [SDL2](https://www.libsdl.org/download-2.0.php), [SDL2_net](https://www.libsdl.org/projects/SDL_net/), clang, git, rsync, and make. The Makefile is multiplatform, and produces a binary at `build-<branch name>/Avara`. You should be able to change directory into the Avara repo and `make -j`.
+The project currently requires a POSIX-like environment (which means MSYS2 on Windows), with GLEW, [SDL2](https://www.libsdl.org/download-2.0.php), [SDL2_net](https://www.libsdl.org/projects/SDL_net/), clang, git, rsync, and make. The Makefile is multiplatform, and produces a binary at `build-<branch name>/Avara`. You should be able to change directory into the Avara repo and `make -j`.
 
 ### Windows 10
 Before you do this, try the [pre-built binaries](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly.20201230). These should work for recent versions of Windows 10. 
+
+Avara does not yet support MSVC++, so the MSYS2 Mingw environment must be used.
 1. Install the [MSYS2](https://www.msys2.org/) environment. 
 2. From the Start menu, open "MSYS2 Mingw64 terminal".
 3. Update MSYS2: `pacman -Syu` As part of this process, you will need to close the terminal window, and you may need to run the command again.
-4. Once MSYS2 is up to date, run the following: `pacman --noconfirm --needed -Syuu zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make git`
+4. Once MSYS2 is up to date, run the following: `pacman --noconfirm --needed -Syuu mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make git zip rsync`
 5. You should now be able to clone the repository: `git clone https://github.com/avaraline/Avara.git`
 6. Enter the repository: `cd Avara`
 7. Build: `make -j`
@@ -46,16 +48,16 @@ Before you do this, try the [pre-built binaries](https://github.com/avaraline/Av
 ### Linux
 On Debian based distributions of Linux, you can install the needed dependencies for building by running the following in a terminal:
 
-`apt-get -yq install git make libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libsdl2-net-dev clang libdirectfb-dev`
+`apt-get -yq install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libsdl2-net-dev clang libdirectfb-dev git make rsync`
 
-directfb is an optional dependency for running headless tests.
+`libdirectfb-dev` is an optional dependency for running headless tests.
 
 `cd /path/to/avara/repo && make -j && build-master/Avara`
 
 ### Apple macOS
-Avara can be built using [Xcode](https://developer.apple.com/xcode/features/) development tools and [Homebrew](https://brew.sh/). `brew install make git sdl2 sdl2_net`
+Avara can be built using [Xcode](https://developer.apple.com/xcode/features/) development tools and [Homebrew](https://brew.sh/).
 
-You must also download SDL2.framework and SDL2_net.framework, to be included alongside the binary. To get these, go to the [SDL2 download page](https://www.libsdl.org/download-2.0.php) and the [SDL2_net download page](https://www.libsdl.org/projects/SDL_net/), and click the links for Macintosh under Developement Libraries. Copy the files into either `/Library/Frameworks` or `~/Library/Frameworks`.
+You must also download SDL2.framework and SDL2_net.framework. To get these, go to the [SDL2 download page](https://www.libsdl.org/download-2.0.php) and the [SDL2_net download page](https://www.libsdl.org/projects/SDL_net/), and click the links for Macintosh under Developement Libraries. [Copy the files](https://github.com/avaraline/Avara/blob/master/.github/workflows/avara-ci.yml#L60-L65) into either `/Library/Frameworks` or `~/Library/Frameworks`.
 
 After that, you should be able to build: `cd /path/to/avara/repo && make -j`. Use `make macapp` to create an app bundle. You can provide a `SIGNING_ID` environment variable to create a signed app bundle.
 
