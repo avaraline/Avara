@@ -5,9 +5,9 @@ A port of the [1996 game by Juri Munkki](https://en.wikipedia.org/wiki/Avara), p
 
 Avara is a cult-classic three-dimensional networked action FPS where you play as a remote-controlled bipedal tank. It was originally developed for Apple Macintosh with support all the way back to [System 6](https://en.wikipedia.org/wiki/System_6), using the [THINK C programming language](https://en.wikipedia.org/wiki/THINK_C). This port uses C++, SDL2, and OpenGL to replace code that relied on Macintosh system APIs, and is intended to run on Windows, macOS, and Linux.
 
-#### [💾 Download here!](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly.20201230)
+#### [💾 Download the beta!](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly.20201230)
 
-These are built with Windows 10 and macOS Catalina (10.15). 
+Note that this is a beta version. These are built with Windows 10 and macOS Catalina (10.15). 
 
 If you're running an older macOS, you will probably need to [build it yourself](https://github.com/avaraline/Avara/wiki/Build-instructions) due to differences in the C++ standard library between macOS versions.
 
