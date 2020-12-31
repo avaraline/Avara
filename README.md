@@ -9,7 +9,7 @@ Avara is a cult-classic three-dimensional networked action FPS where you play as
 
 These are testing builds created with Windows 10 and macOS Catalina (10.15).
 
-If you're running an older macOS, you will probably need to [build it yourself](https://github.com/avaraline/Avara/wiki/Build-instructions) due to differences in the C++ standard library between macOS versions.
+If you're running an older macOS, currently you will probably need to [build it yourself](https://github.com/avaraline/Avara/wiki/Build-instructions) due to differences in the dynamically linked C++ standard library between macOS versions.
 
 #### [🔍 Game server tracker](http://avara.io/)
 [Check the tracker](http://avara.io/) to get a list of currently active Avara servers. There's also a JSON feed available [here](http://avara.io/api/v1/games/)!
