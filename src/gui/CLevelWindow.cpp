@@ -17,6 +17,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "aa-normal",
         "aa-tre",
         "a-bridge-too-far",
+        "berserkir-fury",
         "blockparty",
         "butternut-squash",
         "cancer",
