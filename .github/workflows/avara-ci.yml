@@ -60,8 +60,8 @@ jobs:
           wget -q "https://www.libsdl.org/projects/SDL_net/release/SDL2_net-2.0.1.dmg"
           hdiutil attach SDL2_net-2.0.1.dmg
           sudo cp -R /Volumes/SDL2_net/SDL2_net.framework /Library/Frameworks/
-          wget -q "http://libsdl.org/release/SDL2-2.0.12.dmg"
-          hdiutil attach SDL2-2.0.12.dmg
+          wget -q "https://www.libsdl.org/release/SDL2-2.0.14.dmg"
+          hdiutil attach SDL2-2.0.14.dmg
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
       - uses: actions/checkout@v2
       - name: make

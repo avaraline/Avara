@@ -30,7 +30,8 @@ _Please note that this tracker is **not** compatible with the Mac OS 9 version o
 - **[Configuring your Network](https://github.com/avaraline/Avara/wiki/Configuring-your-Network)** - ⚠️ Read this if you have trouble connecting online.
 - [Known issues](https://github.com/avaraline/Avara/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 - [Read more about the porting process](https://github.com/avaraline/Avara/wiki/Porting-challenges) and how specific [obstacles](https://en.wikipedia.org/wiki/Macintosh_Toolbox) were overcome
+- [Avara Discord](https://discord.gg/yw5qnBtJd5)
+- [Avara Matrix](https://matrix.to/#/!aIYRNfvpKSzEIwbtqn:vastan.net?via=vastan.net&via=matrix.org)
 - IRC: `irc://avaraline.net:6667/avaraline`
-- Matrix: [Avaraline](https://matrix.to/#/!aIYRNfvpKSzEIwbtqn:vastan.net?via=vastan.net&via=matrix.org)
 
 
