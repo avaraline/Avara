@@ -3,13 +3,20 @@
 CC = clang
 CXX = clang++
 
-BUILD_DIR ?= build
+GIT_HASH := $(shell git describe --always --dirty)
+GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+
+ifneq ($(GIT_BRANCH),)
+    BUILD_DIR ?= build-$(GIT_BRANCH)
+else
+    BUILD_DIR ?= build
+endif
 SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
-INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor -Ivendor/gtest/include
+INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor/gtest/include
 CPPFLAGS := ${CPPFLAGS}
 CPPFLAGS += $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
 CXXFLAGS := ${CXXFLAGS}
@@ -38,6 +45,7 @@ else
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l SDL2_net)
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l glu)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I directfb)
+	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I sdl2)
 	CPPFLAGS += -fPIC
 	POST_PROCESS ?= ls -lh
 endif
@@ -49,10 +57,10 @@ DEPS := $(OBJS:.o=.d)
 # Alternatively set this to "NONE" for no code signing.
 SIGNING_ID := NONE
 
-
-avara: $(BUILD_DIR)/Avara resources
+avara: set-version $(BUILD_DIR)/Avara resources build-link
 
 tests: $(BUILD_DIR)/tests resources
+	$(BUILD_DIR)/tests
 
 bspviewer: $(BUILD_DIR)/BSPViewer resources
 
@@ -122,15 +130,27 @@ $(BUILD_DIR)/%.mm.o: %.mm
 
 .PHONY: clean publish
 
+set-version:
+	grep -q $(GIT_HASH) src/util/GitVersion.h || (echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h)
+
+build-link: $(BUILD_DIR)/Avara
+	@if [ ! -e build ] || [ -h build ]; then \
+		echo "build -> $(BUILD_DIR)" ; \
+		ln -fns $(BUILD_DIR) build ; \
+	else \
+		echo "build is not a link so not linking build -> $(BUILD_DIR)" ; \
+	fi
+
 clean:
 	$(RM) -r $(BUILD_DIR)
 
 publish:
-	scp build/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
+	scp $(BUILD_DIR)/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
 	# python3 bin/pict2svg.py
-	cp -r bsps levels rsrc shaders $(BUILD_DIR)
+	# cp -r bsps levels rsrc shaders $(BUILD_DIR)
+	rsync -av bsps levels rsrc shaders $(BUILD_DIR)
 
 -include $(DEPS)
 

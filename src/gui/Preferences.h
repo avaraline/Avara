@@ -70,7 +70,6 @@ static json defaultPrefs = {
         {"fire", "E"},
         {"boost", "Left Shift"},
         {"verticalMotion", "Left Ctrl"},
-        {"viewRange", "T"},
         {"aimForward", "2"},
         {"lookLeft", "1"},
         {"lookRight", "3"},
@@ -78,6 +77,9 @@ static json defaultPrefs = {
         {"zoomOut", "-"},
         {"scoutView", "Tab"},
         {"scoutControl", {"2", "Up", "Down", "Left", "Right"}},
+        {"spectateNext", "]"},
+        {"spectatePrevious", "["},
+        {"scoreboard", "/"},
         {"chatMode", "Return"},
         {"debug1", "5"},
         {"debug2", "6"}}

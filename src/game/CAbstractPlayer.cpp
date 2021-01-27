@@ -199,7 +199,7 @@ void CAbstractPlayer::BeginScript() {
     itsManager = NULL;
     maskBits |= kSolidBit + kTargetBit + kPlayerBit + kCollisionDamageBit + kBallSnapBit;
 
-    yonBound = gApplication->Number(kYonPrefTag) ? SHORTYON : LONGYON;
+    yonBound = LONGYON;
 
     isOut = false;
     winFrame = -1;
@@ -658,7 +658,22 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if (TESTFUNC(kfuLoadMissile, ft->down))
                 ArmSmartMissile();
         }
+        else if(lives == 0) {
+            if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectateNext, ft->down)) {
+                itsGame->SpectateNext();
+            }
+            if (itsManager->IsLocalPlayer() && TESTFUNC(kfuSpectatePrevious, ft->down)) {
+                itsGame->SpectatePrevious();
+            }
+        }
 
+        if (itsManager->IsLocalPlayer()) {
+            if(TESTFUNC(kfuScoreboard, ft->held))
+                itsManager->SetShowScoreboard(true);
+            else
+                itsManager->SetShowScoreboard(false);
+        }
+        
         if (TESTFUNC(kfuPauseGame, ft->down)) {
             itsGame->statusRequest = kPauseStatus;
             itsGame->pausePlayer = itsManager->Slot();
@@ -753,21 +768,6 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 lookDirection -= LOOKSTEP;
             } else {
                 lookDirection >>= 1;
-            }
-        }
-
-        if (TESTFUNC(kfuScanDist, ft->down)) {
-            short mode;
-
-            mode = yonBound == LONGYON;
-            if (mode)
-                yonBound = SHORTYON;
-            else
-                yonBound = LONGYON;
-
-            if (itsManager->IsLocalPlayer()) {
-                gApplication->Set(kYonPrefTag, mode);
-                itsGame->itsApp->MessageLine(kmLongView - mode, centerAlign);
             }
         }
 
@@ -880,7 +880,8 @@ void CAbstractPlayer::FrameAction() {
 void CAbstractPlayer::PlayerAction() {
     if (lives) {
         itsGame->playersStanding++;
-        if ((itsGame->frameNumber & 2047) == 2047 && itsGame->playersStanding == 1 && itsManager->IsLocalPlayer()) {
+        // Send score updates to other players every 17 seconds worth of frames
+        if ((itsGame->frameNumber & 255) == 255 && itsGame->playersStanding == 1 && itsManager->IsLocalPlayer()) {
             itsGame->scoreKeeper->NetResultsUpdate();
         }
 

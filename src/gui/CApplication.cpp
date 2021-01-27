@@ -31,6 +31,10 @@ void CApplication::Unregister(CWindow *win) {
 }
 
 void CApplication::Done() {
+    for (auto win : windowList) {
+        win->saveState();
+    }
+
     prefs[kWindowWidth] = mSize[0];
     prefs[kWindowHeight] = mSize[1];
     prefs.erase(kDefaultClientUDPPort);  // don't save client port

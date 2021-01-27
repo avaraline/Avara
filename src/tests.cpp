@@ -13,6 +13,8 @@
 #include "CGrenade.h"
 #include "AvaraGL.h"
 
+#include "CUDPConnection.h"
+
 #include <iostream>
 
 class TestSoundHub : public CSoundHubImpl {
@@ -41,6 +43,7 @@ public:
     virtual void DeadOrDone() {}
     virtual short Position() { return 0; }
     virtual Str255& PlayerName() { return str; }
+    virtual std::string GetPlayerName() { return std::string((char *)str + 1, str[0]); }
     virtual std::deque<char>& LineBuffer() { return lineBuffer; }
     virtual void Dispose() {}
     virtual void NetDisconnect() {}
@@ -90,6 +93,9 @@ public:
     virtual long WinFrame() { return 0; }
     virtual void ProtocolHandler(struct PacketInfo *thePacket) {}
     virtual void IncrementAskAgainTime(int) {}
+    virtual void SetShowScoreboard(bool b) {}
+    virtual bool GetShowScoreboard() { return false; }
+    
 private:
     FunctionTable *ft;
     CAvaraGame *itsGame;
@@ -121,7 +127,7 @@ public:
     virtual OSErr LoadLevel(std::string set, OSType theLevel) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
-    virtual json Get(const std::string name) { return 0; }
+    virtual json Get(const std::string name) { return json(); }
     virtual void Set(const std::string name, const std::string value) {}
     virtual void Set(const std::string name, long value) {}
     virtual void Set(const std::string name, json value) {}
@@ -132,6 +138,7 @@ public:
     virtual CAvaraGame* GetGame() { return 0; }
     virtual void Done() {}
     virtual void BroadcastCommand(int) {}
+    virtual void GameStarted(std::string set, std::string level) {};
     virtual std::deque<std::string>& MessageLines() { return msgLines; }
 private:
     CNetManager *itsNet;
@@ -325,7 +332,7 @@ TEST(HECTOR, Gravity) {
     std::vector<Fixed> at64ms = DropHector(50, 1, FIX(200), 64);
     std::vector<Fixed> at32ms = DropHector(50, 2, FIX(200), 32);
     std::vector<Fixed> at16ms = DropHector(50, 4, FIX(200), 16);
-    ASSERT_EQ(at64ms.back(), 6126784) << "64ms simulation fell wrong amount";
+    ASSERT_EQ(at64ms.back(), 6125961) << "64ms simulation fell wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "DropHector didn't do ticks right";
     for (int i = 0; i < at64ms.size(); i++) {
         double f64 = ToFloat(at64ms[i]);
@@ -351,13 +358,13 @@ TEST(HECTOR, TurnSpeed) {
     std::vector<Fixed> at64ms = TurnHector(50, 1, 64);
     std::vector<Fixed> at32ms = TurnHector(50, 2, 32);
     std::vector<Fixed> at16ms = TurnHector(50, 4, 16);
-    ASSERT_EQ(at64ms.back(), -30592) << "64ms simulation turned wrong amount";
+    ASSERT_EQ(at64ms.back(), -30542) << "64ms simulation turned wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "TurnHector didn't do ticks right";
     for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 170) << "not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 220) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 210) << "not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 342) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -399,13 +406,51 @@ TEST(GRENADE, Trajectory) {
     std::vector<VectorStruct> at64ms = FireGrenade(20, 50, 1, 64);
     std::vector<VectorStruct> at32ms = FireGrenade(20, 50, 2, 32);
     std::vector<VectorStruct> at16ms = FireGrenade(20, 50, 4, 16);
-    ASSERT_EQ(at64ms.back().theVec[1], 59420) << "64ms simulation is wrong";
+    ASSERT_EQ(at64ms.back().theVec[1], 59384) << "64ms simulation is wrong";
     for (int i = 0; i < std::min(at32ms.size(), at64ms.size()); i++) {
         ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.7) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < std::min(at16ms.size(), at64ms.size()); i++) {
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 1) << "not close enough after " << i << " ticks.";
     }
+}
+
+template<typename T, typename TMember>
+void test_rollover(std::string counterName, T x, T y, TMember counter) {
+    // quick test using signed int16_t max value in case somebody changes the type...
+    x.*counter = std::numeric_limits<int16_t>::max();
+    y.*counter = x.*counter + 2;
+    EXPECT_LT(x.*counter, y.*counter)     << counterName << " failed (x < y) test for INT16_MAX";
+    EXPECT_EQ(y.*counter - x.*counter, 2) << counterName << " failed (y - x) test for INT16_MAX";
+
+    // ...but most tests should be for uint16_t
+    x.*counter = std::numeric_limits<uint16_t>::max();
+    y.*counter = x.*counter + 2;
+    // Don't use googletest operator macros such as EXPECT_LT because we are testing the operators themselves
+    EXPECT_TRUE(x.*counter < y.*counter)   << counterName << " failed (x < y) test for UINT16_MAX";
+    EXPECT_TRUE(y.*counter > x.*counter)   << counterName << " failed (y > x) test for UINT16_MAX";
+    EXPECT_TRUE(x.*counter <= y.*counter)  << counterName << " failed (x <= y) test for UINT16_MAX";
+    EXPECT_TRUE(y.*counter >= x.*counter)  << counterName << " failed (y >= x) test for UINT16_MAX";
+    EXPECT_TRUE(x.*counter != y.*counter)  << counterName << " failed (x != y) test for UINT16_MAX";
+    EXPECT_EQ(y.*counter - x.*counter, 2)  << counterName << " failed (y - x) test for UINT16_MAX";
+    EXPECT_EQ(x.*counter - y.*counter, -2) << counterName << " failed (x - y) test for UINT16_MAX";
+
+    y.*counter = x.*counter;
+    EXPECT_TRUE(x.*counter == y.*counter)  << counterName << " failed (x == y) test for equal values";
+    EXPECT_TRUE(x.*counter <= y.*counter)  << counterName << " failed (x <= y) test for equal values";
+    EXPECT_TRUE(y.*counter >= x.*counter)  << counterName << " failed (x >= y) test for equal values";
+}
+
+TEST(SERIAL_NUMBER, Rollover) {
+    // tests all instance of variable serialNumber and any field used as a serial number proxy
+    UDPPacketInfo packet1, packet2;
+    test_rollover("UDPPacketInfo::serialNumber", packet1, packet2, &UDPPacketInfo::serialNumber);
+
+    CUDPConnection conn1, conn2;
+    test_rollover("CUDPConnection::serialNumber", conn1, conn2, &CUDPConnection::serialNumber);
+    test_rollover("CUDPConnection::receiveSerial", conn1, conn2, &CUDPConnection::receiveSerial);
+    test_rollover("CUDPConnection::maxValid", conn1, conn2, &CUDPConnection::maxValid);
+    test_rollover("CUDPConnection::ackBase", conn1, conn2, &CUDPConnection::ackBase);
 }
 
 int main(int argc, char **argv) {

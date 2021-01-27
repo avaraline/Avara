@@ -98,6 +98,7 @@ CNetManager* CAvaraGame::CreateNetManager() {
 
 CAvaraGame::CAvaraGame(int frameTime) {
     this->frameTime = frameTime; // milliseconds
+    this->latencyFrameTime = frameTime;
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
@@ -117,6 +118,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     actorList = NULL;
     freshPlayerList = NULL;
     playerList = NULL;
+    spectatePlayer = NULL;
 
     soundSwitches = 0xFF;
 
@@ -189,6 +191,7 @@ void CAvaraGame::Dispose() {
     short i;
     CAbstractActor *nextActor;
 
+    spectatePlayer = NULL;
     LevelReset(false);
 
     scoreKeeper->Dispose();
@@ -268,6 +271,10 @@ void CAvaraGame::RemoveIdent(long ident) {
             theActor->ident = 0;
         }
     }
+}
+
+CAbstractPlayer *CAvaraGame::GetSpectatePlayer() {
+    return spectatePlayer;
 }
 
 CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
@@ -676,12 +683,16 @@ static Boolean takeShot = false;
 
 void CAvaraGame::ReadGamePrefs() {
     sensitivity = itsApp->Number(kMouseSensitivityTag);
+    latencyTolerance = gApplication->Number(kLatencyToleranceTag);
+    AdjustFrameTime();
 }
 
 void CAvaraGame::ResumeGame() {
     Boolean doStart;
     Boolean freshMission = (gameStatus == kReadyStatus);
-
+    if (freshMission) {
+        spectatePlayer = NULL;
+    }
     // TODO: gathering players dialog
 
     ReadGamePrefs();
@@ -836,7 +847,7 @@ bool CAvaraGame::GameTick() {
     teamsStanding = 0;
     teamsStandingMask = 0;
 
-    itsNet->ViewControl(); // This was called by itsApp->theGameWind->DoUpdate() calling RefreshWindow
+    ViewControl(); // This was called by itsApp->theGameWind->DoUpdate() calling RefreshWindow
 
     soundHub->HouseKeep();
     soundTime = soundHub->ReadTime();
@@ -861,17 +872,18 @@ bool CAvaraGame::GameTick() {
 
     itsNet->AutoLatencyControl(frameNumber, longWait);
 
+    // SDL_Log("latencyTolerance = %ld, latencyFrameTime = %ld\n", latencyTolerance, latencyFrameTime);
     if (latencyTolerance)
         while (frameNumber + latencyTolerance > topSentFrame)
             itsNet->FrameAction();
 
     canPreSend = true;
-    //nextScheduledFrame = startTime + frameTime;
-    nextScheduledFrame += frameTime;
+
+    nextScheduledFrame += latencyFrameTime;
 
     itsDepot->RunSliverActions();
     itsApp->StartFrame(frameNumber);
-    itsNet->ViewControl();
+    ViewControl();
 
     if ((itsNet->activePlayersDistribution & itsNet->deadOrDonePlayers) == itsNet->activePlayersDistribution) {
         statusRequest = kWinStatus; //	Just a guess, really. StopGame will change this.
@@ -883,11 +895,96 @@ bool CAvaraGame::GameTick() {
     return true;
 }
 
+void CAvaraGame::ViewControl() {
+    if(spectatePlayer != NULL && FindPlayerManager(spectatePlayer) != NULL) {
+        FindPlayerManager(spectatePlayer)->ViewControl();
+    }
+    else {
+        itsNet->ViewControl();
+    }
+}
+
+bool CAvaraGame::canBeSpectated(CAbstractPlayer *player) {
+    if(player == NULL)
+        return false;
+    
+    if(player->isInLimbo == false) {
+        return true;
+    }
+    
+    if(player == GetLocalPlayer() && player->scoutView == true && player->lives == 0) {
+        return true;
+    }
+    
+    return false;
+}
+
+void CAvaraGame::SpectateNext() {
+    if(spectatePlayer == NULL)
+        spectatePlayer = GetLocalPlayer();
+    
+    CAbstractPlayer *nextPlayer = NULL;
+    CAbstractPlayer *firstPlayer = NULL;
+    CAbstractPlayer *currentPlayer = NULL;
+    bool foundCurrentSpectate = false;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        currentPlayer = itsNet->playerTable[i]->GetPlayer();
+        if(currentPlayer != NULL) {
+            if(firstPlayer == NULL && canBeSpectated(currentPlayer)) {
+                firstPlayer = currentPlayer;
+            }
+            if(currentPlayer == spectatePlayer) {
+                foundCurrentSpectate = true;
+            }
+            else if(foundCurrentSpectate == true && nextPlayer == NULL && canBeSpectated(currentPlayer)) {
+                nextPlayer = currentPlayer;
+            }
+        }
+    }
+    
+    spectatePlayer = nextPlayer;
+    if(spectatePlayer == NULL)
+        spectatePlayer = firstPlayer;
+}
+
+void CAvaraGame::SpectatePrevious() {
+    if(spectatePlayer == NULL)
+        spectatePlayer = GetLocalPlayer();
+
+    CAbstractPlayer *previousPlayer = NULL;
+    CAbstractPlayer *currentPlayer = NULL;
+    bool found = false;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        currentPlayer = itsNet->playerTable[i]->GetPlayer();
+        if(currentPlayer != NULL) {
+            if(currentPlayer == spectatePlayer) {
+                if(previousPlayer != NULL) {
+                    found = true;
+                    spectatePlayer = previousPlayer;
+                }
+            }
+            else if(canBeSpectated(currentPlayer)) {
+                previousPlayer = currentPlayer;
+            }
+        }
+    }
+    
+    if(!found && previousPlayer != NULL)
+        spectatePlayer = previousPlayer;
+}
+
+CPlayerManager *CAvaraGame::FindPlayerManager(CAbstractPlayer *thePlayer) {
+    for (int i = 0; i < kMaxAvaraPlayers; i++)
+        if(itsNet->playerTable[i] != NULL && itsNet->playerTable[i]->GetPlayer() == thePlayer)
+            return itsNet->playerTable[i];
+    
+    return NULL;
+}
+
 void CAvaraGame::StopGame() {
     soundHub->HushFlag(true);
     SDL_SetRelativeMouseMode(SDL_FALSE);
     SDL_StartTextInput();
-
     // SDL_CaptureMouse(SDL_FALSE);
     // SDL_ShowCursor(SDL_ENABLE);
 }
@@ -904,13 +1001,13 @@ void CAvaraGame::Render(NVGcontext *ctx) {
 
     if (true || gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus ||
         gameStatus == kLoseStatus) {
-        itsNet->ViewControl();
+        ViewControl();
         itsWorld->Render(itsView);
 
         AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
         hud->Render(itsView, ctx);
-        AvaraGLSetDepthTest(true);
+        AvaraGLSetDepthTest(true);        
     }
 }
 
@@ -928,4 +1025,87 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 
 double CAvaraGame::FrameTimeScale(double exponent) {
     return pow(double(frameTime)/CLASSICFRAMETIME, exponent);
+}
+
+double CAvaraGame::LatencyFrameTimeScale() {
+    return double(latencyFrameTime)/frameTime;
+}
+
+
+long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
+    // half of the roundTripTime in units of frameTime, rounded
+    SDL_Log("CAvaraGame::RoundTripToFrameLatency roundTrip=%ld, LT(unrounded)=%.2lf\n", roundTrip, (roundTrip) / (2.0*frameTime));
+    return (roundTrip + frameTime) / (2*frameTime);
+}
+
+void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange, const char* slowPlayer) {
+    if (latencyTolerance != newLatency) {
+        #define MAX_LATENCY ((long)8)
+        if (maxChange < 0) {
+            // allow latency to jump to any value
+            maxChange = MAX_LATENCY;
+        }
+        if (newLatency < latencyTolerance) {
+            latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, (long)0));
+        } else {
+            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, MAX_LATENCY));
+        }
+        gApplication->Set(kLatencyToleranceTag, latencyTolerance);
+        SDL_Log("*** LT set to %ld\n", latencyTolerance);
+        
+        if (slowPlayer != nullptr) {
+            std::ostringstream oss;
+            std::time_t t = std::time(nullptr);
+            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << std::to_string(latencyTolerance) << " (" << slowPlayer << ")";
+            itsApp->AddMessageLine(oss.str());
+        }
+
+        AdjustFrameTime();
+    }
+}
+
+void CAvaraGame::AdjustFrameTime() {
+    // Why this adjustment?  We want it to be a somewhat parabolic function because of the
+    // N^2 nature of the number of messages sent for the game... (players*(players-1)).
+    // So, theoretically, the game will tend to slow down as a square of the number of players.
+    // In choosing the adjustment you have to consider playability (low latency) vs
+    // recoverability (reduced message sending).
+    // If it errs too much on the side of playability then it may not recover from big latency spikes.
+    // If it errs too much on the side of recoverability, then it may not be playable for moderate latencies.
+
+    // The frameTimeMultipliers below were chosen to keep LT=5 at a barely playable level.
+    // The numbers at the higher levels are not intended to be very playable but to keep the game chugging
+    // along at a lower message rate to give it a chance to catch up and, hopefully, come back down below LT=5.
+
+    // Here is how the different latencies affect playability and recoverability:
+    static float frameTimeMultiplier[MAX_LATENCY+1] = {
+               //  LT frameTime(ms) latency(ms)  messages/sec (approx)
+        1.00,  //  0  64            0            16   <-- most playable (LAN)
+        1.00,  //  1  64            64           16   <-- good internet
+        1.00,  //  2  64            128          16
+        1.00,  //  3  64            192          16 
+        1.00,  //  4  64            256          16   <-- somewhat playable, laggy
+        1.25,  //  5  80            400          13   <-- barely playable / begin recovering
+        1.50,  //  6  96            576          10   <-- hope to never see LT > 5
+        2.50,  //  7  160           1120         6
+        3.75,  //  8  240           1920         4    <-- trying to recover!  If it were a horse, I'd shoot it.
+    };
+
+    latencyFrameTime = long(frameTime * frameTimeMultiplier[latencyTolerance]);
+    SDL_Log("*** latencyFrameTime = %ld\n", latencyFrameTime);
+}
+
+
+long CAvaraGame::TimeToFrameCount(long timeInMsec) {
+    // how many frames occur in timeInMsec?
+    return timeInMsec / latencyFrameTime;
+}
+
+long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
+    // Jump forward to the next full period.
+    // For example, if we are changing latencies such that we start with 48 frames/period
+    // and we're moving to 60 frames/period, and we're on frame 48, we want to 
+    // move forward to frame 120 and NOT frame 60.
+    long periodFrames = TimeToFrameCount(period);
+    return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
 }

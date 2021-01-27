@@ -80,6 +80,7 @@ public:
 
     long topSentFrame;
 
+    long latencyFrameTime; //	In milliseconds.
     long frameTime; //	In milliseconds.
     short gameStatus;
     short statusRequest;
@@ -90,6 +91,7 @@ public:
 
     CAbstractPlayer *playerList;
     CAbstractPlayer *nextPlayer;
+    CAbstractPlayer *spectatePlayer;
     long playersStanding;
     short teamsStandingMask;
     short teamsStanding;
@@ -191,6 +193,7 @@ public:
     virtual void GetIdent(CAbstractActor *theActor);
     virtual void RemoveIdent(long ident);
 
+    virtual CAbstractPlayer *GetSpectatePlayer();
     virtual CAbstractPlayer *GetLocalPlayer();
 
     virtual void AddActor(CAbstractActor *theActor);
@@ -216,6 +219,11 @@ public:
     virtual bool GameTick();
     virtual void GameStop();
     virtual void Dispose();
+    
+    virtual void SpectateNext();
+    virtual void SpectatePrevious();
+    virtual bool canBeSpectated(CAbstractPlayer *player);
+
 
     virtual void UpdateViewRect(int width, int height, float pixelRatio);
 
@@ -227,11 +235,21 @@ public:
 
     virtual void StopGame();
     virtual void Render(NVGcontext *ctx);
+    virtual void ViewControl();
 
     virtual void InitMixer(Boolean silentFlag);
 
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
+    virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
+
     virtual double FrameTimeScale(double exponent=1);
+    virtual double LatencyFrameTimeScale();
+
+    virtual long RoundTripToFrameLatency(long rtt);
+    virtual void SetLatencyTolerance(long newLatency, int maxChange = 2, const char *slowPlayer = nullptr);
+    virtual void AdjustFrameTime();
+    virtual long TimeToFrameCount(long timeInMsec);
+    virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
 };
 
 #ifndef MAINAVARAGAME

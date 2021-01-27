@@ -399,6 +399,6 @@ Boolean CCommManager::ReconfigureAvailable() {
 
 void CCommManager::Reconfigure() {}
 
-long CCommManager::GetMaxRoundTrip(short distribution) {
+long CCommManager::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
     return 0; //	Local net.
 }

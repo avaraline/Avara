@@ -65,13 +65,16 @@ enum {
     kfuBoostEnergy,
     kfuTypeText,
 
-    kfuScanDist,
-
     kfuZoomIn,
     kfuZoomOut,
 
     kfuScoutView,
     kfuScoutControl,
+    
+    kfuSpectateNext,
+    kfuSpectatePrevious,
+    
+    kfuScoreboard,
 
     kfuPauseGame,
     kfuAbortGame,

@@ -59,6 +59,7 @@ public:
     virtual void DeadOrDone() = 0;
     virtual short Position() = 0;
     virtual Str255& PlayerName() = 0;
+    virtual std::string GetPlayerName() = 0;
     virtual std::deque<char>& LineBuffer() = 0;
     virtual void Dispose() = 0;
     virtual void NetDisconnect() = 0;
@@ -107,6 +108,10 @@ public:
     virtual long WinFrame() = 0;
     virtual void ProtocolHandler(struct PacketInfo *thePacket) = 0;
     virtual void IncrementAskAgainTime(int) = 0;
+    virtual void SetShowScoreboard(bool b) = 0;
+    virtual bool GetShowScoreboard() = 0;
+
+
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
@@ -155,6 +160,8 @@ private:
     short loadingStatus;
     short slot;
     short playerColor;
+    
+    bool showScoreboard = false;
 
     Point mouseCenterPosition;
     Boolean isLocalPlayer;
@@ -226,6 +233,8 @@ public:
     virtual Boolean IsLocalPlayer();
     virtual short Position();
     virtual Str255& PlayerName();
+    virtual std::string GetPlayerName();
+    
     virtual std::deque<char>& LineBuffer();
     virtual CAbstractPlayer* GetPlayer();
     virtual short IsRegistered();
@@ -250,4 +259,7 @@ public:
     virtual void MugState(long);
     virtual long WinFrame();
     virtual void IncrementAskAgainTime(int);
+    virtual void SetShowScoreboard(bool b);
+    virtual bool GetShowScoreboard();
+
 };

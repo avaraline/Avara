@@ -1,4 +1,4 @@
-build
+build*
 .DS_Store
 *.patch
 *.diff
@@ -12,3 +12,4 @@ __pycache__
 .vscode
 .vs
 .gdbinit
+src/util/GitVersion.h

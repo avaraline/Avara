@@ -25,32 +25,12 @@ CNetworkWindow::CNetworkWindow(CApplication *app) : CWindow(app, "Network") {
         else
             avara->GetNet()->ChangeNet(kClientNet, this->addressBox->value());
     });
-
-    latencyBox = new nanogui::TextBox(this);
-    latencyBox->setValue(std::to_string(app->Number(kLatencyToleranceTag)));
-    latencyBox->setEditable(true);
-    latencyBox->setCallback([app](std::string value) -> bool {
-        app->Set(kLatencyToleranceTag, std::stoi(value));
-        return true;
-    });
-
-    nanogui::CheckBox *autoLatencyBox = new nanogui::CheckBox(this, "Auto Latency", [app](bool checked) {
-        long options = app->Number(kServerOptionsTag);
-        if (checked)
-            options |= 1 << kUseAutoLatencyBit;
-        else
-            options &= ~(long)(1 << kUseAutoLatencyBit);
-        app->Set(kServerOptionsTag, options);
-        ((CAvaraAppImpl *)app)->GetNet()->ChangedServerOptions(options);
-    });
-    bool autoLatency = app->Number(kServerOptionsTag) & (1 << kUseAutoLatencyBit);
-    autoLatencyBox->setChecked(autoLatency);
 }
 
 CNetworkWindow::~CNetworkWindow() {}
 
 bool CNetworkWindow::editing() {
-    return addressBox->focused() || latencyBox->focused();
+    return addressBox->focused();
 }
 
 bool CNetworkWindow::DoCommand(int theCommand) {
@@ -75,8 +55,4 @@ bool CNetworkWindow::DoCommand(int theCommand) {
             break;
     }
     return false;
-}
-
-void CNetworkWindow::PrefChanged(std::string name) {
-    latencyBox->setValue(std::to_string(mApplication->Number(kLatencyToleranceTag)));
 }

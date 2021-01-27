@@ -57,7 +57,6 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"fire", 1 << kfuFireWeapon},
         {"boost", 1 << kfuBoostEnergy},
         {"verticalMotion", 1 << kfuVerticalMotion},
-        {"viewRange", 1 << kfuScanDist},
         {"aimForward", 1 << kfuAimForward},
         {"lookLeft", 1 << kfuLookLeft},
         {"lookRight", 1 << kfuLookRight},
@@ -65,6 +64,9 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
         {"zoomOut", 1 << kfuZoomOut},
         {"scoutView", 1 << kfuScoutView},
         {"scoutControl", 1 << kfuScoutControl},
+        {"spectateNext", 1 << kfuSpectateNext},
+        {"spectatePrevious", 1 << kfuSpectatePrevious},
+        {"scoreboard", 1 << kfuScoreboard},
         {"chatMode", 1 << kfuTypeText},
         {"debug1", 1 << kfuDebug1},
         {"debug2", 1 << kfuDebug2}};
@@ -502,7 +504,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 //				itsGame->timer.currentStep += 2;
             }
 
-            if (askCount > 1) {
+            if (askCount > 4) {
                 /* TODO: waiting dialog
                 gApplication->BroadcastCommand(kBusyTimeCmd);
                 if(gApplication->commandResult)
@@ -510,6 +512,17 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     break;
                 }
                 */
+
+                #define KICK_WAITING_FOR_PLAYER 1
+                #if KICK_WAITING_FOR_PLAYER
+                    // kick the offending player from the server so everyone else can continue
+                    AbortRequest();  // clears the player from distribution so they can come back in to the server (not the game)
+                    if (theNetManager->itsCommManager->myId == 0) { // the server kicks the unresponsive player
+                        itsGame->itsApp->AddMessageLine("Kicking unresponsive player: " + std::string((char*)&playerName[1], (size_t)playerName[0]));
+                        theNetManager->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
+                    }
+                    break;
+                #endif
             }
 
         } while (frameFuncs[i].validFrame != itsGame->frameNumber);
@@ -1178,6 +1191,9 @@ short CPlayerManagerImpl::Position() {
 Str255& CPlayerManagerImpl::PlayerName() {
     return playerName;
 }
+std::string CPlayerManagerImpl::GetPlayerName() {
+    return std::string((char *)playerName + 1, playerName[0]);
+}
 std::deque<char>& CPlayerManagerImpl::LineBuffer() {
     return lineBuffer;
 }
@@ -1249,4 +1265,10 @@ long CPlayerManagerImpl::WinFrame() {
 }
 void CPlayerManagerImpl::IncrementAskAgainTime(int amt) {
     askAgainTime += amt;
+}
+void CPlayerManagerImpl::SetShowScoreboard(bool b) {
+    showScoreboard = b;
+}
+bool CPlayerManagerImpl::GetShowScoreboard() {
+    return showScoreboard;
 }

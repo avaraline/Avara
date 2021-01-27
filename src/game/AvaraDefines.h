@@ -26,7 +26,6 @@
 
 #define STANDARDMISSILERANGE FIX(100)
 #define LONGYON FIX(180)
-#define SHORTYON FIX(75)
 
 #define kSliverSizes 3
 enum { kSmallSliver, kMediumSliver, kLargeSliver };

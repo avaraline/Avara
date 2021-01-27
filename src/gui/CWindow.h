@@ -23,6 +23,9 @@ public:
     
     virtual bool editing() { return false; }
 
+    virtual void restoreState();
+    virtual void saveState();
+
 protected:
     CApplication *mApplication;
 };

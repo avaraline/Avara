@@ -6,6 +6,7 @@
     Created: Monday, May 15, 1995, 22:25
     Modified: Tuesday, September 17, 1996, 03:21
 */
+#include <algorithm> // std::max
 
 #include "CNetManager.h"
 
@@ -31,15 +32,15 @@
 
 #include <string.h>
 
-#define AUTOLATENCYPERIOD 64
-#define AUTOLATENCYDELAY 8
+#define AUTOLATENCYPERIOD 3840  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
+#define AUTOLATENCYDELAY  480   // msec 
 #define LOWERLATENCYCOUNT 3
 #define HIGHERLATENCYCOUNT 8
 
 #if ROUTE_THRU_SERVER
-    #define kAvaraNetVersion 7
+    #define kAvaraNetVersion 666
 #else
-    #define kAvaraNetVersion 6
+    #define kAvaraNetVersion 9
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -571,6 +572,7 @@ void CNetManager::ResumeGame() {
     localLatencyVote = 0;
     autoLatencyVote = 0;
     autoLatencyVoteCount = 0;
+    latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
     thePlayerManager = playerTable[itsCommManager->myId];
     if (thePlayerManager->GetPlayer()) {
@@ -648,61 +650,55 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
         localLatencyVote++;
     }
 
-    if (frameNumber >= AUTOLATENCYPERIOD) {
-        if ((frameNumber & (AUTOLATENCYPERIOD - 1)) == 0) {
+    static CPlayerManager *maxPlayer = nullptr;
+    if (frameNumber >= latencyVoteFrame) {
+        long autoLatencyPeriod = itsGame->TimeToFrameCount(AUTOLATENCYPERIOD);
+        if ((frameNumber % autoLatencyPeriod) == 0) {
             long maxRoundLatency;
+            short maxId = 0;
 
-            maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution);
+            latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
+            maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution, &maxId);
+            maxPlayer = playerTable[maxId];
+
             itsCommManager->SendUrgentPacket(
                 activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
+            #if LATENCY_DEBUG
+                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld\n",
+                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency);
+            #endif
             localLatencyVote = 0;
-        } else if (((frameNumber + AUTOLATENCYDELAY) & (AUTOLATENCYPERIOD - 1)) == 0) {
+        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, centerAlign);
                 fragmentDetected = false;
             }
 
             if ((serverOptions & (1 << kUseAutoLatencyBit)) && autoLatencyVoteCount) {
-                Boolean didChange = false;
-                long curLatency = itsGame->latencyTolerance;
                 long maxFrameLatency;
 
                 autoLatencyVote /= autoLatencyVoteCount;
 
-                if (autoLatencyVote > HIGHERLATENCYCOUNT) {
-                    addOneLatency = 1;
-                }
+                // if (autoLatencyVote > HIGHERLATENCYCOUNT) {
+                //     addOneLatency = 1;
+                // }
 
-                maxFrameLatency = addOneLatency + (maxRoundTripLatency + itsGame->frameTime) /
-                                                      (itsGame->frameTime + itsGame->frameTime);
+                maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                if (maxFrameLatency > 8)
-                    maxFrameLatency = 8;
+                #if LATENCY_DEBUG
+                    SDL_Log("*** fn=%ld latencyFrameTime=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
+                            frameNumber, itsGame->latencyFrameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
+                #endif
 
-                if (maxFrameLatency < curLatency) {
-                    addOneLatency = 0;
-                    itsGame->latencyTolerance--;
-                    gApplication->Set(kLatencyToleranceTag, itsGame->latencyTolerance);
-                    didChange = true;
-                } else if (maxFrameLatency > curLatency && autoLatencyVote > LOWERLATENCYCOUNT) {
-                    itsGame->latencyTolerance++;
-                    itsGame->itsApp->Set(kLatencyToleranceTag, itsGame->latencyTolerance);
-                    didChange = true;
-                }
-
-                if (didChange) {
-                    SDL_Log("*** LT set to %ld\n", itsGame->latencyTolerance);
-                    /*
-                    if(itsGame->latencyTolerance > 1) {
-                        itsGame->latencyTolerance = 1;
-                        SDL_Log("*** Capping at LT 1\n");
-                    }*/
-                }
+                itsGame->SetLatencyTolerance(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
+                itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
             }
 
             autoLatencyVote = 0;
             autoLatencyVoteCount = 0;
             maxRoundTripLatency = 0;
+            maxPlayer = nullptr;
+            latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD, latencyVoteFrame);
         }
     }
 }
@@ -938,10 +934,12 @@ void CNetManager::DoConfig(short senderSlot) {
 
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
         if (itsGame->latencyTolerance < theConfig->latencyTolerance)
-            itsGame->latencyTolerance = theConfig->latencyTolerance;
+            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
+            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
     } else {
         if (senderSlot == 0) {
-            itsGame->latencyTolerance = theConfig->latencyTolerance;
+            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
+            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         }
     }
 }
