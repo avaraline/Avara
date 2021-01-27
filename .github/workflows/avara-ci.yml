@@ -68,9 +68,12 @@ jobs:
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
       - uses: actions/checkout@v2
       - name: make
-        run: make -j macapp SIGNING_ID=NONE
-      - name: make tests
-        run: make tests
+        run: |
+          mkdir build && cd build
+          cmake ..
+          make -j
+      - name: tests
+        run: ./tests
       - name: print env variables
         run: echo $GITHUB_REPOSITORY && echo $GITHUB_REF
       - name: deploy nightly
