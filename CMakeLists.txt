@@ -15,8 +15,17 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 
+execute_process (
+    COMMAND git describe --always --dirty
+    OUTPUT_VARIABLE GIT_HASH
+)
+string(STRIP ${GIT_HASH} GIT_HASH)
+execute_process (
+    COMMAND echo "#define GIT_VERSION \"${GIT_HASH}\""
+    OUTPUT_FILE ${CMAKE_SOURCE_DIR}/src/util/GitVersion.h
+)
 
-# Modules for copying files, finding OpenGL and SDL libraries
+# Modules for copying file, finding OpenGL and SDL libraries
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 
 include(TargetCopyFiles)
