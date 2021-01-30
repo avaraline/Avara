@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
     OpenAvaraTCP();
 
     // The Avara application itself.
-    CAvaraApp *app = new CAvaraAppImpl();
+    CAvaraAppImpl *app = new CAvaraAppImpl();
 
     // process command-line arguments
     std::string connectAddress;
@@ -91,7 +91,23 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    mainloop(app->GetGame()->frameTime / 4);
+    bool main_loop_active = true;
+    int refresh = app->GetGame()->frameTime / 4;
+    SDL_Event event;
+
+    while (main_loop_active) {
+        if (!app->visible()) {
+            continue;
+        }
+        app->idle();
+        app->drawAll();
+        if (SDL_WaitEventTimeout(&event, refresh)) {
+            if (event.type == SDL_QUIT) {
+                main_loop_active = false;
+            }
+            app->handleSDLEvent(event);
+        }
+    }
 
     app->Done();
 
