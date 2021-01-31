@@ -3,8 +3,7 @@
 #include "CApplication.h"
 #include "limits.h"
 
-CWindow::CWindow(CApplication *app, const std::string &title) :
-  nanogui::Window((nanogui::Widget *)app, title), mApplication(app) {
+CWindow::CWindow(CApplication *app, const std::string &title) : mApplication(app) {
     app->Register(this);
 }
 
@@ -17,11 +16,12 @@ void CWindow::restoreState() {
     long y = mApplication->Number(title() + "Y", LONG_MIN);
     
     if(x != LONG_MIN && y != LONG_MIN)
-        setPosition(nanogui::Vector2i(x, y));
+        SDL_SetWindowPosition(mApplication->window, x, y);
 }
 
 void CWindow::saveState() {
-    nanogui::Vector2i position = this->position();
-    mApplication->Set(title() + "X", position.x);
-    mApplication->Set(title() + "Y", position.y);
+    int posx, posy;
+    SDL_GetWindowPosition(mApplication->window, &posx, &posy)
+    mApplication->Set(title() + "X", posx);
+    mApplication->Set(title() + "Y", posy);
 }

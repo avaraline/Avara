@@ -3,13 +3,12 @@
 #include "Types.h"
 
 #include <SDL2/SDL.h>
-#include <nanogui/nanogui.h>
 #include <string>
 #include <vector>
 
 class CApplication;
 
-class CWindow : public nanogui::Window {
+class CWindow {
 public:
     CWindow(CApplication *app, const std::string &title);
 

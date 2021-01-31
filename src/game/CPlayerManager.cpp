@@ -723,7 +723,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                         utf8::previous(i, lineBuffer.begin());
                     }
                     catch (const utf8::exception& utfcpp_ex) {
-                        std::cerr << utfcpp_ex.what() << "\n";
+                        SDL_Log("UTF8 ERROR: %s", utfcpp_ex.what());
                         lineBuffer.clear();
                     }
                     lineBuffer = std::deque<char>(lineBuffer.begin(), i);
@@ -731,7 +731,8 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                 break;
             case 13:
                 // ¬
-                ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
+                // TODO: is this necessary post nanogui?
+                //((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
                 
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
                 // FlushMessageText(true);
@@ -749,7 +750,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                             utf8::advance(i, 55, lineBuffer.end());
                         }
                         catch (const utf8::exception& utfcpp_ex) {
-                            std::cerr << utfcpp_ex.what();
+                            SDL_Log("UTF8 ERROR: %s", utfcpp_ex.what());
                             lineBuffer.clear();
                         }
                         lineBuffer = std::deque<char>(i, lineBuffer.end());
@@ -785,7 +786,7 @@ std::string CPlayerManagerImpl::GetChatString(int maxChars) {
         // utf8 charater is being added. the library doesn't like
         // half of a codepoint and throws an exception
         // TODO: Lock lineBuffer
-        std::cerr << utfcpp_ex.what();
+        SDL_Log("UTF8 ERROR: %s", utfcpp_ex.what());
         over = 0;
     }
     if (over) {
@@ -793,7 +794,7 @@ std::string CPlayerManagerImpl::GetChatString(int maxChars) {
             utf8::advance(i, over, theChat.end());
         }
         catch (const utf8::exception& utfcpp_ex) {
-            std::cerr << utfcpp_ex.what();
+            SDL_Log("UTF8 ERROR: %s", utfcpp_ex.what());
             return theChat;
         }
     }

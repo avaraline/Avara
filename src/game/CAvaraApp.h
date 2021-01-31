@@ -11,12 +11,6 @@
 
 #include "CApplication.h"
 //#include "PolyColor.h"
-#include "CLevelWindow.h"
-#include "CNetworkWindow.h"
-#include "CServerWindow.h"
-#include "CPlayerWindow.h"
-#include "CRosterWindow.h"
-#include "CTrackerWindow.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -66,12 +60,6 @@ private:
     CNetManager *gameNet;
 
 public:
-    CPlayerWindow *playerWindow;
-    CLevelWindow *levelWindow;
-    CNetworkWindow *networkWindow;
-    CServerWindow *serverWindow;
-    CRosterWindow *rosterWindow;
-    CTrackerWindow *trackerWindow;
 
     std::deque<std::string> messageLines;
 
@@ -84,8 +72,8 @@ public:
     std::thread *trackerThread;
 
     virtual std::deque<std::string>& MessageLines() override;
-    virtual void idle() override;
-    virtual void drawContents() override;
+    virtual void idle();
+    virtual void drawContents();
 
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
@@ -93,7 +81,7 @@ public:
     virtual void Done() override;
 
     virtual bool handleSDLEvent(SDL_Event &event) override;
-    virtual void drawAll() override;
+    virtual void drawAll();
     OSErr LoadSVGLevel(std::string set, OSType theLevel) override;
     OSErr LoadLevel(std::string set, OSType theLevel) override;
     void NotifyUser() override;

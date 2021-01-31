@@ -5,16 +5,19 @@
 
 #include <SDL2/SDL.h>
 #include <json.hpp>
-#include <nanogui/nanogui.h>
 #include <string>
 #include <vector>
 
+#include "nanovg.h"
+
 using json = nlohmann::json;
 
-class CApplication : public nanogui::Screen {
+class CApplication {
 public:
     CApplication(std::string title);
     virtual ~CApplication();
+    std::string window_title;
+    std::string title() { return window_title; }
 
     void Register(CWindow *win) { windowList.push_back(win); }
     void Unregister(CWindow *win);
@@ -35,9 +38,14 @@ public:
     virtual void PrefChanged(std::string name);
 
     virtual void WindowResized(int width, int height) {}
-
+    virtual bool resizeCallbackEvent(int, int);
+    std::function<bool(int, int)> resizeCallback() const { return resize_callback; }
+    void setResizeCallback(const std::function<bool(int, int)> &callback) { resize_callback = callback; }
     // Screen overrides.
     virtual bool handleSDLEvent(SDL_Event &event);
+
+    SDL_Window *sdlWindow() { return window; }
+    NVGcontext *NVGContext() { return nvg_context; }
 
     std::string String(const std::string name);
     long Number(const std::string name);
@@ -47,8 +55,19 @@ public:
     void Set(const std::string name, long value);
     void Set(const std::string name, json value);
 
+    SDL_Window *window;
+    
 protected:
     std::vector<CWindow *> windowList;
+    uint32_t window_id;
+    SDL_GLContext gl_context;
+    NVGcontext *nvg_context;
+    float pixel_ratio = 1;
+    int fb_size_x;
+    int fb_size_y;
+    int win_size_x;
+    int win_size_y;
+    std::function<bool(int, int)> resize_callback;
 };
 
 #ifdef APPLICATIONMAIN

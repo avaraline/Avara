@@ -96,9 +96,9 @@ int main(int argc, char *argv[]) {
     SDL_Event event;
 
     while (main_loop_active) {
-        if (!app->visible()) {
-            continue;
-        }
+        //if (!app->visible()) {
+        //    continue;
+        //}
         app->idle();
         app->drawAll();
         if (SDL_WaitEventTimeout(&event, refresh)) {

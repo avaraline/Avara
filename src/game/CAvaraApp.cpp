@@ -60,13 +60,13 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     itsGame = new CAvaraGame(64);
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
-    itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
+    itsGame->UpdateViewRect(win_size_x, win_size_y, pixel_ratio);
 
     AvaraGLSetFOV(Number(kFOV));
 
     gameNet->ChangeNet(kNullNet, "");
 
-    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
+    /*setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
 
     playerWindow = new CPlayerWindow(this);
     playerWindow->setFixedWidth(200);
@@ -86,7 +86,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     rosterWindow = new CRosterWindow(this);
 
     performLayout();
-    
+    */
     for (auto win : windowList) {
         win->restoreState();
     }
@@ -112,19 +112,19 @@ void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
     if(itsGame->GameTick()) {
-        glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
+        glClearColor(.3, .5, .3, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         drawContents();
-        SDL_GL_SwapWindow(mSDLWindow);
+        SDL_GL_SwapWindow(window);
     }
 }
 
 void CAvaraAppImpl::drawContents() {
-    itsGame->Render(mNVGContext);
+    itsGame->Render(nvg_context);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
-    itsGame->UpdateViewRect(width, height, mPixelRatio);
+    itsGame->UpdateViewRect(width, height, pixel_ratio);
     //performLayout();
 }
 
@@ -149,9 +149,10 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
 }
 
 void CAvaraAppImpl::drawAll() {
+    return;
     if (!itsGame->IsPlaying()) {
-        rosterWindow->UpdateRoster();
-        CApplication::drawAll();
+        //rosterWindow->UpdateRoster();
+        //CApplication::drawAll();
     }
 }
 
