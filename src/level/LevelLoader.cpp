@@ -20,6 +20,9 @@
 
 #include <SDL2/SDL.h>
 #include <sstream>
+#include <string>
+#include <algorithm>
+
 
 #define CUTE_FILES_IMPLEMENTATION
 #include <cute_files.h>
@@ -115,6 +118,7 @@ static void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool 
 }
 
 static void SvgArc(float x, float y, short start, short angle, long largest_radius) {
+    TextBreak();
     lastArcPoint.h = (long)roundf(x * 2);
     lastArcPoint.v = (long)roundf(y * 2);
     lastArcAngle = (630 - (start + angle / 2)) % 360;
@@ -126,13 +130,14 @@ static void SvgArc(float x, float y, short start, short angle, long largest_radi
 }
 
 static void SvgEllipse(float x, float y, long r) {
+    TextBreak();
     lastOvalPoint.h = (long)roundf(x * 2);
     lastOvalPoint.v = (long)roundf(y * 2);
     lastOvalRadius = r * 2;
 
     lastDomeCenter.h = (long)roundf(x * 2);
-    lastDomeCenter.v = (long)roundf(x * 2);
-
+    lastDomeCenter.v = (long)roundf(y * 2);
+    
     lastDomeAngle = 0;
     lastDomeSpan = 360;
     lastDomeRadius = r * 2;
@@ -142,6 +147,7 @@ static void SvgRect(Rect *r, int radius, unsigned short thickness) {
     //SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
     //SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
 
+    TextBreak();
     r->left += thickness >> 1;
     r->top += thickness >> 1;
     r->right -= (thickness + 1) >> 1;
@@ -365,7 +371,7 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
     }
 }
 
-void SVGConvertToLevelMap() {
+void SVGConvertToLevelMap(std::string path) {
     InitParser();
     SVGParser *parser = new SVGParser();
     parser->callbacks.rectProc = &SvgRect;
@@ -374,7 +380,7 @@ void SVGConvertToLevelMap() {
     parser->callbacks.arcProc = &SvgArc;
     parser->callbacks.ellipseProc = &SvgEllipse;
 
-    parser->Parse();
+    parser->Parse(path);
     delete parser;
     TextBreak();
     FreshCalc();
@@ -453,9 +459,13 @@ std::vector<std::string> LevelDirNameListing() {
     return levelSets;
 }
 
-std::vector<int8_t> LevelDirVersionListing() {
-    if (!listingDone) LevelDirListing();
-    return levelVersions;
+int8_t GetVersionForLevelSet(std::string levelset) {
+    std::vector<std::string>::iterator itr = std::find(levelSets.begin(), levelSets.end(), levelset);
+    int level_idx = 0;
+    if (itr != levelSets.end()) {
+        level_idx = std::distance(levelSets.begin(), itr);
+    }
+    return levelVersions[level_idx];
 }
 
 

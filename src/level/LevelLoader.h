@@ -11,7 +11,6 @@
 #include "Types.h"
 #include <string>
 #include <vector>
-#include <tuple>
 
 enum {
     iDesignerName,
@@ -315,7 +314,7 @@ enum {
 };
 
 void ConvertToLevelMap(Handle levelData);
-void SVGConvertToLevelMap();
+void SVGConvertToLevelMap(std::string path);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
@@ -327,4 +326,4 @@ Fixed GetLastOval(Fixed *theLoc);
 
 void LevelDirListing();
 std::vector<std::string> LevelDirNameListing();
-std::vector<int8_t> LevelDirVersionListing();
+int8_t GetVersionForLevelSet(std::string levelset);

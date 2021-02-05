@@ -32,8 +32,8 @@ public:
     std::vector<std::string> recentSets;
     std::vector<std::string> recentLevels;
     std::vector<std::string> levelSets;
-    std::vector<int8_t> levelVersions;
     std::vector<std::string> levelNames;
     std::vector<std::string> levelIntros;
     std::vector<OSType> levelTags;
+    std::vector<std::string> levelTagStrings;
 };

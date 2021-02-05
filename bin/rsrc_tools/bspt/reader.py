@@ -146,7 +146,7 @@ class BSP(object):
             import numpy as np
         except ImportError:
             print("triangle, matplotlib and/or numpy libraries not found, will not output triangulations")
-            return d
+            raise
 
         d["triangles_poly"] = list()
         d["triangles_verts_poly"] = list()
@@ -250,8 +250,11 @@ class BSP(object):
                 v1 = rayOrigin - point1
                 v2 = point2 - point1
                 v3 = np.array([-rayDirection[1], rayDirection[0]])
-                t1 = np.cross(v2, v1) / np.dot(v2, v3)
-                t2 = np.dot(v1, v3) / np.dot(v2, v3)
+                divisor = np.dot(v2, v3)
+                # Sometimes divisor can be zero, infinity will work but
+                # numpy gives a warning so we just put a big number instead
+                t1 = (np.cross(v2, v1) / divisor) if divisor != 0 else 1000000
+                t2 = (np.dot(v1, v3) / divisor) if divisor != 0 else 1000000
                 if t1 >= 0.0 and t2 >= 0.0 and t2 <= 1.0:
                     return [rayOrigin + t1 * rayDirection]
                 return []
@@ -323,6 +326,7 @@ class BSP(object):
                 color = d['colors'][color_idx]
                 tris = d['triangles_poly'][idx]
                 tri_points = d['triangles_verts_poly'][idx]
+                # uncomment this to wind triangles in the opposite direction
                 """
                 out['polys'].append({
                     'normal': [-x for x in normal],

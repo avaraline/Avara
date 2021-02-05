@@ -3,6 +3,7 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CLevelDescriptor.h"
+#include "JSONLevelDescriptor.h"
 #include "CNetManager.h"
 #include "Resource.h"
 #include "LevelLoader.h"
@@ -11,7 +12,6 @@
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Hard-coded for now. Eventually use the level search API.
     levelSets = LevelDirNameListing();
-    levelVersions = LevelDirVersionListing();
     /*{
     //$ ls -w1 levels/*.r | sed -E 's/levels.(.+)\.r/"\1",/g'
         "aa-abnormal",
@@ -61,6 +61,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "t-plus-5-part-a",
         "t-plus-5-part-b",
         "t-plus-5-part-c",
+        "tyyli",
         "we-be-ground-pounders",
         "wide-open",
         "wild-west-collection",
@@ -167,30 +168,43 @@ void CLevelWindow::SelectSet(int selected) {
 }
 
 void CLevelWindow::SelectSet(std::string set) {
+    if (set.length() < 1) return;
     std::vector<std::string>::iterator itr = std::find(levelSets.begin(), levelSets.end(), set);
+    int level_idx = 0;
     if (itr != levelSets.end()) {
-        setBox->setSelectedIndex(std::distance(levelSets.begin(), itr));
+        level_idx = std::distance(levelSets.begin(), itr);
+        setBox->setSelectedIndex(level_idx);
     }
-    
-    std::string rsrcPath = std::string("levels/") + set + ".r";
-    OSType setTag;
-    UseResFile(rsrcPath);
-    CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
-    CLevelDescriptor *curLevel = levels;
     levelNames.clear();
     levelIntros.clear();
     levelTags.clear();
-    while (curLevel) {
-        std::string name((char *)curLevel->name + 1, curLevel->name[0]);
-        std::string intro((char *)curLevel->intro + 1, curLevel->intro[0]);
-        intro.erase(0, intro.find_first_not_of(" \r\n"));
-        // std::string access((char *)curLevel->access + 1, curLevel->access[0]);
-        levelNames.push_back(name);
-        levelIntros.push_back(intro);
-        levelTags.push_back(curLevel->tag);
-        curLevel = curLevel->nextLevel;
+
+    if (GetVersionForLevelSet(set) > 1) {
+        nlohmann::json ledis = LoadLevelListFromJSON(set);
+        for (auto& ld : ledis.items()) {
+            levelNames.push_back(ld.value()["Name"]);
+            levelIntros.push_back(ld.value()["Message"]);
+            levelTags.push_back(StringOSType(ld.key()));
+        }
     }
-    levels->Dispose();
+    else {
+        std::string rsrcPath = std::string("levels/") + set + ".r";
+        OSType setTag;
+        UseResFile(rsrcPath);
+        CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
+        CLevelDescriptor *curLevel = levels;
+        while (curLevel) {
+            std::string name((char *)curLevel->name + 1, curLevel->name[0]);
+            std::string intro((char *)curLevel->intro + 1, curLevel->intro[0]);
+            intro.erase(0, intro.find_first_not_of(" \r\n"));
+            // std::string access((char *)curLevel->access + 1, curLevel->access[0]);
+            levelNames.push_back(name);
+            levelIntros.push_back(intro);
+            levelTags.push_back(curLevel->tag);
+            curLevel = curLevel->nextLevel;
+        }
+        levels->Dispose();
+    }
     levelBox->setItems(levelNames, levelIntros);
     levelBox->setEnabled(true);
     levelBox->setNeedsLayout();

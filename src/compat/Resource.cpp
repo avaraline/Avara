@@ -19,6 +19,19 @@ std::string OSTypeString(OSType t) {
     return std::string((char *)&x, 4);
 }
 
+OSType StringOSType(std::string s) {
+    OSType theLevel = 0;
+    uint8_t lo = (uint8_t)s[3];
+    uint8_t lohi = (uint8_t)s[2];
+    uint8_t hilo = (uint8_t)s[1];
+    uint8_t hi = (uint8_t)s[0];
+    theLevel += lo;
+    theLevel += lohi << 8;
+    theLevel += hilo << 16;
+    theLevel += hi << 24;
+    return theLevel;
+}
+
 Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string name) {
     uint32_t dataOffset = SDL_ReadBE32(file);
     uint32_t mapOffset = SDL_ReadBE32(file);

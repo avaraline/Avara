@@ -6,7 +6,8 @@
 #include <vector>
 
 void UseResFile(std::string filename);
-
+std::string OSTypeString(OSType t);
+OSType StringOSType(std::string s);
 Handle GetResource(OSType theType, short theID);
 Handle GetNamedResource(OSType theType, std::string name);
 

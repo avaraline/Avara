@@ -28,7 +28,7 @@ public:
 	SVGParser();
 	virtual ~SVGParser() {}
 
-	void Parse();
+	void Parse(std::string path);
 protected:
 	static vector<string> split (const string &s, char delim);
 };

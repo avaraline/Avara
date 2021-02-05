@@ -17,7 +17,7 @@ import json
 import sys
 from lxml import etree
 
-DEBUG_PARSER = True
+DEBUG_PARSER = False
 
 
 class Rect:
@@ -103,10 +103,16 @@ class DataBuffer:
         return self.read(1)[0]
 
     def rect(self):
-        return Rect(self.short(), self.short(), self.short(), self.short())
+        r = Rect(self.short(), self.short(), self.short(), self.short())
+        if DEBUG_PARSER:
+            print(f"rect: {r}")
+        return r
 
     def point(self):
-        return Point(self.short(), self.short())
+        p = Point(self.short(), self.short())
+        if DEBUG_PARSER:
+            print(f"point: {p}")
+        return p
 
     def color(self):
         return Color(self.ushort(), self.ushort(), self.ushort())
@@ -175,11 +181,10 @@ class SVGContext:
 
         # self.xml = ''
         self.buffered = []
-        self.textpos = Point(0, 0)
         # self.write('svg', xmlns='http://www.w3.org/2000/svg', close=False, **attrs)
-        self.x = 0
-        self.y = 0
-        self.w = 1
+        self.pen_pos = Point(0, 0)
+        self.text_pos = Point(0, 0)
+        self.pen_size = Point(0, 0)
         self.r = Point(0, 0)
         self.fg = Color(255, 255, 255)
         self.bg = Color(255, 255, 255)
@@ -199,17 +204,45 @@ class SVGContext:
         self.save_arc_y = None
         self.save_arc_start = None
         self.save_arc_angle = None
+        self.frame = frame
 
     def set_inkscape_options(self):
         defs = etree.SubElement(self.root, "defs")
         defs.set("id", "defs2")
+        """
+        startm = etree.SubElement(defs, "marker")
+        startm.set(ns("isstock", ISNS), "true")
+        startm.set(ns("stockid", ISNS), "Arrow1Lend")
+        startm.set("style", "overflow:visible;")
+        startm.set("id", "Arrow1Lend")
+        startm.set("refX", "0.0")
+        startm.set("refY", "0.0")
+        startm.set("orient", "auto")
+        startmp = etree.SubElement(startm, "path")
+        startmp.set("id", "path1549")
+        startmp.set("transform", "scale(0.8) rotate(180) translate(12.5,0)")
+        startmp.set("d", "M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z ")
+        startmp.set("style", "fill-rule:evenodd;stroke:#44ff44;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1")
 
+        endm = etree.SubElement(defs, "marker")
+        endm.set(ns("isstock", ISNS), "true")
+        endm.set(ns("stockid", ISNS), "EmptyDiamondMend")
+        endm.set("id", "EmptyDiamondMend")
+        endm.set("refX", "0.0")
+        endm.set("refY", "0.0")
+        endm.set("orient", "auto")
+        endmp = etree.SubElement(startm, "path")
+        endmp.set("id", "path1673")
+        endmp.set("transform","scale(0.8) rotate(180) translate(12.5,0)")
+        endmp.set("d", "M 0,-7.0710768 L -7.0710894,0 L 0,7.0710589 L 7.0710462,0 L 0,-7.0710768 z ")
+        endmp.set("style", "ill-rule:evenodd;stroke:#44ff44;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1")
+        """
         view = etree.SubElement(self.root, ns("namedview", SPNS))
         view.set("id", "base")
         view.set("pagecolor", "#ffffff")
         view.set("bordercolor", "#666666")
         view.set(ns("pageopacity", ISNS), "0.0")
-        view.set(ns("zoom", ISNS), "100")
+        view.set(ns("zoom", ISNS), "50")
         view.set(ns("cx", ISNS), "0")
         view.set(ns("cy", ISNS), "0")
         view.set(ns("document-units", ISNS), "px")
@@ -258,23 +291,65 @@ class SVGContext:
 
     def getid(self, thing):
         self.id += 1
-        return (thing + "%s") % self.id
+        thingid = (thing + "%s") % self.id
+        if DEBUG_PARSER:
+            print(thingid)
+        return thingid
 
-    def text(self, s, x=None, y=None, dh=0, dv=0):
+    def get_pen(self):
+        return Point(self.pen_pos.x, self.pen_pos.y)
+
+    def zero_pen(self):
+        return self.pen_size.x == 0 or self.pen_size.y == 0
+
+    def set_pen(self, x=None, y=None, dh=0, dv=0):
+        prev_pen = self.get_pen()
+        print(prev_pen)
         if x:
-            self.textpos.x = x
-        if y:
-            self.textpos.y = y
+            self.pen_pos.x = x
+        if y: 
+            self.pen_pos.y = y
         if dh:
-            self.textpos.x += dh
+            self.pen_pos.x += dh
         if dv:
-            self.textpos.y += dv
+            self.pen_pos.y += dv
+        new_pen = self.get_pen()
+        if DEBUG_PARSER:
+            print(f"Pen changed {prev_pen} -> {new_pen}")
+            self.line(prev_pen, new_pen, "#444")
+
+
+    def text(self, thestr, x=None, y=None, dh=0, dv=0):
+        start = self.get_pen()
+        end = self.get_pen()
+        if x:
+            end.x = x
+        if y:
+            end.y = y
+        if dh:
+            end.x += dh
+            if len(self.buffered) > 0:
+                self.buffered[-1]["string"] += thestr
+                return
+        if dv:
+            end.y += dv
 
         self.buffered.extend([{
-            "string": str(x),
-            "x": self.textpos.x,
-            "y": self.textpos.y
-        } for x in s.split('\r')])
+            "string": thestr.replace("\r", ""),
+            "x": end.x,
+            "y": end.y
+        }])
+        """
+        self.buffered.extend([{
+            "string": str(line),
+            "x": end.x,
+            "y": end.y
+            #"x": self.pen_pos.x,
+            #"y": self.pen_pos.y
+        } for line in thestr.split('\r')])
+        """
+        if DEBUG_PARSER:
+            self.line(start, end, "#FFAA33")
 
     def flush_text(self):
         if len(self.buffered) < 1:
@@ -311,15 +386,16 @@ class SVGContext:
             return
         tspan = etree.SubElement(text, "tspan")
         try:
-            tspan.text = string
+            tspan.text = string.replace('\r', '\n')
         except ValueError:
             tspan.getparent().remove(tspan)
             return
         tspan.set(ns("role", SPNS), "line")
+        tspan.set(ns("space", XMLNS), "preserve")
+        tspan.set("style", "font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;word-spacing:0px;fill:#000000;fill-opacity:1;text-align:start;text-anchor:start")
         tspan.set("id", self.getid("tspan"))
         tspan.set("x", str(x))
         tspan.set("y", str(y))
-        tspan.set("style", "stroke-width:0.25;")
         # print(string.encode('ascii', 'ignore'))
 
     def fill(self, el):
@@ -332,17 +408,41 @@ class SVGContext:
 
     def stroke(self, el):
         oldstyle = el.get("style")
-        stroke = "stroke: %s; stroke-width: %s; " % (self.fg, str(self.w))
+        stroke = "stroke: %s; stroke-width: %s; " % (self.fg, str(self.pen_size.x))
         if oldstyle:
             el.set("style", oldstyle + stroke)
         else:
             el.set("style", stroke)
 
     def rect_data(self, rect, el):
-        el.set("x", str(rect.left + self.x))
-        el.set("y", str(rect.top + self.y))
+        el.set("x", str(rect.left + self.pen_pos.x))
+        el.set("y", str(rect.top + self.pen_pos.y))
         el.set("width", str(rect.width))
         el.set("height", str(rect.height))
+
+    def line(self, start, end, color):
+        if not DEBUG_PARSER or start == end:
+            return
+        lg = self.element("g")
+        l = etree.SubElement(lg, "path")
+        l.set("id", self.getid("path"))
+        l.set("d", f"M {start.x} {start.y} L {end.x} {end.y}")
+        l.set("stroke", color)
+        l.set("stroke-width", "1pt")
+        # start marked with circle
+        c = etree.SubElement(lg, "circle")
+        c.set("cx", str(start.x))
+        c.set("cy", str(start.y))
+        c.set("stroke", color)
+        c.set("stroke-width", "1pt")
+        c.set("fill", "none")
+        c.set("r", "15")
+        # end marked with X
+        x = etree.SubElement(lg, "path")
+        x.set("d", f"M {end.x - 10} {end.y -10} L {end.x + 10} {end.y + 10} M {end.x - 10} {end.y + 10} L {end.x + 10} {end.y - 10}")
+        x.set("stroke", color)
+        x.set("stroke-width", "1pt")
+        x.set("fill", "none")
 
     def null_fill(self, el):
         if el == None:
@@ -350,16 +450,16 @@ class SVGContext:
         # use this to ensure that no element goes without a 
         # fill instruction, otherwise stuff looks weird
         style = el.get("style")
-        #if not style:
-        #    el.set("style", "fill: none;")
-        #    return
-        #if "fill" not in style:
-        #    el.set("style", style + "fill: none;")
+        if not style:
+            el.set("style", "fill: none;")
+            return
+        if "fill" not in style:
+            el.set("style", style + "fill: none;")
 
     def close(self):
         # tree.write(filename, encoding="UTF-8")
         svg = etree.ElementTree(self.root)
-        xml_str = etree.tostring(svg, pretty_print=True, encoding="UTF-8")
+        xml_str = etree.tostring(svg, pretty_print=False, encoding="UTF-8")
         return xml_str
 
 class Operation:
@@ -644,7 +744,8 @@ class PenSize (Operation):
 
     def parse(self, data, context):
         size = data.point()
-        context.w = size.x
+        context.pen_size.x = size.x
+        context.pen_size.y = size.y
 
 class PenMode (Operation):
 
@@ -674,10 +775,9 @@ class Origin (Operation):
 
     def parse(self, data, context):
         dh, dv = data.unpack('hh')
-        context.x -= dh
-        context.y -= dv
-        context.textpos.x -= dh
-        context.textpos.y -= dv
+        if DEBUG_PARSER:
+            print(f"Origin {dh},{dv}")
+        context.set_pen(dh = -dh, dv = -dv)
 
 
 class TextSize (Operation):
@@ -727,15 +827,21 @@ class Line (Operation):
     def parse(self, data, context):
         start = data.point()
         end = data.point()
-        context.x += end.x
-        context.y += end.y
-
+        if DEBUG_PARSER:
+            print(f"Line {start.x} {start.y} -> {end.x} {end.y}")
+        #context.set_pen(x = end.x, y = end.y)
+        if not context.zero_pen():
+            context.line(start, end, "#005500")
 
 class LineFrom (Operation):
     def parse(self, data, context):
         p = data.point()
-        context.x += p.x
-        context.y += p.y
+        if DEBUG_PARSER:
+            print(f"LineFrom {p.x} {p.y}")
+        #context.set_pen(dh = p.x, dv = p.y)
+        end = context.get_pen()
+        if not context.zero_pen():
+            context.line(p, end, "#88FF88")
 
 
 class ShortLine (Operation):
@@ -743,33 +849,31 @@ class ShortLine (Operation):
     def parse(self, data, context):
         start = data.point()
         dh, dv = data.read(2)
-        line = context.element("line")
-        line.set("x1", str(start.x))
-        line.set("y1", str(start.y))
-        context.x += dh
-        context.y += dv
-        line.set("x2", str(context.x))
-        line.set("y2", str(context.y))
-        line.set("stroke", "black")
         if DEBUG_PARSER:
-            print(f"ShortLine {str(start)} -> {dh} {dv}")
+            print(f"ShortLine {start.x} {start.y} -> {dh} {dv}")
+        #context.set_pen(dh = dh, dv = dv)
+        new_pen = context.get_pen()
+        new_pen.x += dh
+        new_pen.y += dv
+        if not context.zero_pen():
+            context.line(start, new_pen, "#990011")
 
 
 class ShortLineFrom (Operation):
 
     def parse(self, data, context):
         dh, dv = data.read(2)
-        line = context.element("line")
-        line.set("x1", str(context.x))
-        line.set("y1", str(context.y))
-        context.x += dh
-        context.y += dv
-        line.set("x2", str(context.x))
-        line.set("y2", str(context.y))
-        line.set("stroke", "black")
+        old_pen = context.get_pen()
         if DEBUG_PARSER:
             print(f"ShortLineFrom {dh} {dv}")
 
+        #context.set_pen(x = dh, y = dv)
+        new_pen = context.get_pen()
+        new_pen.x += dh
+        new_pen.y += dv
+
+        if not context.zero_pen():
+            context.line(old_pen, new_pen, "#aa1133")
 
 class LongText (Operation):
 
@@ -777,6 +881,9 @@ class LongText (Operation):
         loc = data.point()
         size = data.byte()
         text = data.read(size).decode('macintosh')
+        if DEBUG_PARSER:
+            print(f"LongText: loc.x {loc.x} loc.y {loc.y} size {size}")
+            print(text.encode('utf-8'))
         # LongText is (top, left) so we flip x/y
         context.text(text, x=loc.y, y=loc.x)
 
@@ -802,13 +909,13 @@ class DVText (Operation):
         context.text(text, dv = dv)
 
 
-class DHDVText (Operation):
+class text (Operation):
 
     def parse(self, data, context):
         dh, dv, size = data.read(3)
         text = data.read(size).decode('macintosh')
         if DEBUG_PARSER:
-            print(f"DHDVText: dh {dh} dv {dv} size {size}")
+            print(f"text: dh {dh} dv {dv} size {size}")
             print(text.encode('utf-8'))
         context.text(text, dh = dh, dv = dv)
 
@@ -971,8 +1078,8 @@ def arc_path(context, rect, start, angle, arc):
     rx = rect.width // 2
     ry = rect.height // 2
 
-    cx = context.x + rect.left + rx
-    cy = context.y + rect.top + ry
+    cx = (rect.left + context.pen_pos.x) + rx
+    cy = (rect.top + context.pen_pos.y) + ry
 
 
     p1 = polar_to_cartesian(cx, cy, rx, ry, start)
@@ -1008,8 +1115,8 @@ class FrameArc (Operation):
         start, angle = data.unpack('hh')
         context.save_arc_start = start
         context.save_arc_angle = angle
-        context.save_arc_x = context.x
-        context.save_arc_y = context.y
+        context.save_arc_x = context.pen_pos.x
+        context.save_arc_y = context.pen_pos.y
 
         arc = context.element("path")
         arc_path(context, rect, start, angle, arc)
@@ -1043,8 +1150,8 @@ class FrameSameArc (Operation):
             arc = context.element("path")
             context.save_arc_start = start
             context.save_arc_angle = angle
-            context.save_arc_x = context.x
-            context.save_arc_y = context.y
+            context.save_arc_x = context.pen_pos.x
+            context.save_arc_y = context.pen_pos.y
             arc_path(context, context.save_arc, start, angle, arc)
             context.stroke(arc)
             context.last_arc = arc
@@ -1056,15 +1163,15 @@ class PaintSameArc (Operation):
         start, angle = data.unpack('hh')
         if (start == context.save_arc_start and
             angle == context.save_arc_angle and
-            context.x == context.save_arc_x and
-            context.y == context.save_arc_y):
+            context.pen_pos.x == context.save_arc_x and
+            context.pen_pos.y == context.save_arc_y):
             context.fill(context.last_arc)
         else:
             arc = context.element("path")
             context.save_arc_start = start
             context.save_arc_angle = angle
-            context.save_arc_x = context.x
-            context.save_arc_y = context.y
+            context.save_arc_x = context.pen_pos.x
+            context.save_arc_y = context.pen_pos.y
             arc_path(context, context.save_arc, start, angle, arc)
             context.fill(arc)
             context.last_arc = arc
@@ -1079,6 +1186,9 @@ class ShortComment (Operation):
                 print("ShortComment: %s - %s" % (kind, PICT_COMMENTS[kind]))
             except KeyError:
                 print("ShortComment: %s - unknown" % kind)
+        if kind == 150:
+            # picTextBegin
+            context.text_pos = context.pen_pos
         if kind == 151:
             # picTextEnd
             context.flush_text()
@@ -1144,7 +1254,7 @@ PICT_OPCODES = {
     0x28: LongText,
     0x29: DHText,
     0x2a: DVText,
-    0x2b: DHDVText,
+    0x2b: text,
     0x2c: VariableReserved,
     0x2e: VariableReserved,
     0x30: FrameRectangle,
