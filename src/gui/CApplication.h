@@ -7,8 +7,10 @@
 #include <json.hpp>
 #include <string>
 #include <vector>
+#include <glad/glad.h>
 
-#include "nanovg.h"
+struct NVGcontext { /* Opaque handle type, never de-referenced */};
+
 
 using json = nlohmann::json;
 
@@ -54,12 +56,7 @@ public:
     void Set(const std::string name, const std::string value);
     void Set(const std::string name, long value);
     void Set(const std::string name, json value);
-
     SDL_Window *window;
-    
-protected:
-    std::vector<CWindow *> windowList;
-    uint32_t window_id;
     SDL_GLContext gl_context;
     NVGcontext *nvg_context;
     float pixel_ratio = 1;
@@ -67,7 +64,11 @@ protected:
     int fb_size_y;
     int win_size_x;
     int win_size_y;
+    
+protected:
+    std::vector<CWindow *> windowList;
     std::function<bool(int, int)> resize_callback;
+    uint32_t window_id;
 };
 
 #ifdef APPLICATIONMAIN

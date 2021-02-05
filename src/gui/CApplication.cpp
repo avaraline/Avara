@@ -1,7 +1,6 @@
 #define APPLICATIONMAIN
 #include "CApplication.h"
 
-#include "AvaraGL.h"
 #include "Preferences.h"
 #include "Types.h"
 
@@ -9,6 +8,12 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
+#define NANOVG_GL3_IMPLEMENTATION
+#include "nanovg_gl.h"
+
+#include "AvaraGL.h"
+
 
 
 static float get_pixel_ratio(SDL_Window *window) {
@@ -91,14 +96,14 @@ json prefs = ReadPrefs();
 
 
 CApplication::CApplication(std::string the_title) {
-    window_title = the_title
+    window_title = the_title;
     gApplication = this;
 
     auto glMajor = 3;
     auto glMinor = 3;
 
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, glMajor);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, glMinor);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -106,8 +111,8 @@ CApplication::CApplication(std::string the_title) {
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 
-    //SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 24);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     SDL_GL_SetAttribute(SDL_GL_SHARE_WITH_CURRENT_CONTEXT, 1);
     if (prefs[kMultiSamplesTag] > 0) {
@@ -118,7 +123,7 @@ CApplication::CApplication(std::string the_title) {
     if (prefs[kFullScreenTag]) {
         flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
-    window = SDL_CreateWindow(title.c_str(), 
+    window = SDL_CreateWindow(title().c_str(), 
         SDL_WINDOWPOS_CENTERED, 
         SDL_WINDOWPOS_CENTERED, 
         prefs[kWindowWidth], 
@@ -135,28 +140,48 @@ CApplication::CApplication(std::string the_title) {
     }
 
     SDL_GL_MakeCurrent(window, gl_context);
+    //glGetError();
 
     if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress)) {
         SDL_Log("Could not initialize GLAD!");
         return;
     }
-    glGetError(); // pull and ignore unhandled errors like GL_INVALID_ENUM
+    //glGetError(); // pull and ignore unhandled errors like GL_INVALID_ENUM
+    
     
 
-    nvg_context = nvgCreateGL3(
-        NVG_STENCIL_STROKES | NVG_ANTIALIAS);
+    window_id = SDL_GetWindowID(window);
+    SDL_GetWindowSize(window, &win_size_x, &win_size_y);
+    SDL_GL_GetDrawableSize(window, &fb_size_x, &fb_size_y);
+    pixel_ratio = get_pixel_ratio(window);
+    
+    SDL_Log("Window Size: %d by %d", win_size_x, win_size_y);
+    SDL_Log("FB Size: %d by %d", fb_size_x, fb_size_y);
+    glViewport(0, 0, fb_size_x, fb_size_y);
+    glClearColor(.2, .2, .2, 1);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    SDL_GL_SetSwapInterval(0);
+    SDL_GL_SwapWindow(window);
+
+    GLint nStencilBits = 0, nSamples = 0;
+    glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,
+        GL_STENCIL, GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE, &nStencilBits);
+    glGetIntegerv(GL_SAMPLES, &nSamples);
+    int nvgflags = 0;
+    if (nStencilBits >= 8)
+       nvgflags |= NVG_STENCIL_STROKES;
+    if (nSamples <= 1)
+       nvgflags |= NVG_ANTIALIAS;
+
+    nvg_context = nvgCreateGL3(nvgflags);
 
     if (nvg_context == nullptr) {
         SDL_Log("Could not initialize NanoVG!");
         return;
     }
 
-    SDL_GL_GetDrawableSize(window, &fb_size_x, &fb_size_y);
-    glViewport(0, 0, fb_size_x, fb_size_y);
-    glClearColor(.2, .2, .2, 1);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    SDL_GL_SetSwapInterval(0);
-    SDL_GL_SwapWindow(window);
+    nvgBeginFrame(nvg_context, win_size_x, win_size_y, pixel_ratio);
+    nvgEndFrame(nvg_context);
 #if defined(__APPLE__)
     /* Poll for events once before starting a potentially
        lengthy loading process. This is needed to be
@@ -165,13 +190,8 @@ CApplication::CApplication(std::string the_title) {
     SDL_Event dummyEvent;
     SDL_PollEvent(&dummyEvent);
 #endif
-    AvaraGLInitContext();
-    //setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
+    setResizeCallback([this](int new_x, int new_y) { this->WindowResized(new_x, new_y); return true; });
 
-    window_id = SDL_GetWindowID(window);
-    SDL_GetWindowSize(window, &win_size_x, &win_size_y);
-    SDL_GL_GetDrawableSize(window, &fb_size_x, &fb_size_y);
-    pixel_ratio = get_pixel_ratio(window);
 }
 
 CApplication::~CApplication() {
@@ -232,6 +252,7 @@ bool CApplication::resizeCallbackEvent(int, int) {
     win_size_y = win_tmp_size_y;
     return resize_callback(win_size_x, win_size_y);
 }
+
 
 bool CApplication::handleSDLEvent(SDL_Event &event) {
     // By default, give nanogui first crack at events.

@@ -1,6 +1,6 @@
 #include "CDirectObject.h"
 #include "CViewParameters.h"
-#include "nanovg.h"
+#include "CApplication.h"
 
 class CAvaraGame;
 

@@ -11,15 +11,13 @@
 #include "AvaraTCP.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
+#include "CNetManager.h"
 #include "CBSPPart.h"
 #include "FastMat.h"
 #include "SDL2/SDL.h"
 #include "Preferences.h"
 
-#include <nanogui/nanogui.h>
 #include <string.h>
-
-using namespace nanogui;
 
 #ifdef _WIN32
 
@@ -48,7 +46,17 @@ int main(int argc, char *argv[]) {
     SetHiDPI();
 
     // Init SDL and nanogui.
-    init();
+#if !defined(_WIN32)
+    /* Avoid locale-related number parsing issues */
+    setlocale(LC_NUMERIC, "C");
+#endif
+
+#if defined(__APPLE__)
+    disable_saved_application_state_osx();
+#endif
+
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+        throw std::runtime_error("Could not initialize SDL!");
 
     // Init SDL_net
     if (SDLNet_Init() != 0) {
@@ -100,19 +108,19 @@ int main(int argc, char *argv[]) {
         //    continue;
         //}
         app->idle();
-        app->drawAll();
         if (SDL_WaitEventTimeout(&event, refresh)) {
             if (event.type == SDL_QUIT) {
                 main_loop_active = false;
             }
             app->handleSDLEvent(event);
         }
+        app->drawContents();
     }
 
     app->Done();
 
     // Shut it down!!
-    shutdown();
+    SDL_Quit();
 
     return 0;
 }

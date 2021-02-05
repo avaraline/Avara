@@ -20,8 +20,8 @@ const float near_dist = .1f;
 const float far_dist = 1000.0f;
 
 float current_fov = 60.0f;
-short window_height = 1;
-short window_width = 1;
+short window_height = 100;
+short window_width = 100;
 
 float skyboxVertices[] = {
         // positions          
@@ -124,6 +124,7 @@ void AvaraGLSetFOV(float fov) {
 }
 
 void AvaraGLUpdateProjectionMatrix() {
+    SDL_Log("Window: %d x %d Near: %f Far: %f FOV: %f", window_width, window_height, near_dist, far_dist, current_fov);
     proj = glm::scale(glm::perspective(
                         glm::radians(current_fov), 
                         (float)window_width / (float)window_height, 
@@ -204,6 +205,7 @@ void AvaraGLInitContext() {
     if (!actuallyRender) return;
     gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
     glUseProgram(gProgram);
+    glCheckErrors();
 
     projLoc = glGetUniformLocation(gProgram, "proj");
     viewLoc = glGetUniformLocation(gProgram, "view");

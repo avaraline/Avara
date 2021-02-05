@@ -57,6 +57,7 @@ void TrackerPinger(CAvaraAppImpl *app) {
 
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
+    AvaraGLInitContext();
     itsGame = new CAvaraGame(64);
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
@@ -141,8 +142,8 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
             }
         }
         
-        if (rosterWindow->handleSDLEvent(event))
-            return true;
+        //if (rosterWindow->handleSDLEvent(event))
+        //    return true;
 
         return CApplication::handleSDLEvent(event);
     }
@@ -158,7 +159,7 @@ void CAvaraAppImpl::drawAll() {
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
     MessageLine(kmStarted, centerAlign);
-    levelWindow->AddRecent(set, level);
+    //levelWindow->AddRecent(set, level);
 }
 
 bool CAvaraAppImpl::DoCommand(int theCommand) {
@@ -268,7 +269,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
 
     if (wasLoaded) {
         AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
-        levelWindow->SelectLevel(set, levelName);
+        //levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);
         SDL_Log("overhead %f, %f, %f\n", ToFloat(pt[0]), ToFloat(pt[1]), ToFloat(pt[2]));

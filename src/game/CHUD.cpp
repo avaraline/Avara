@@ -1,5 +1,6 @@
 #include "CHUD.h"
 #include "CAbstractPlayer.h"
+#include "CNetManager.h"
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
 #include "AvaraDefines.h"
