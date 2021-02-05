@@ -5,6 +5,8 @@
 #include <SDL2/SDL.h>
 #include <stdint.h>
 #include <string>
+#define CUTE_FILES_IMPLEMENTATION
+#include <cute_files.h>
 
 static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
 
@@ -12,6 +14,26 @@ static std::string currentResource("");
 
 void UseResFile(std::string filename) {
     currentResource.assign(std::string(SDL_GetBasePath()) + filename);
+}
+
+std::vector<std::string> LevelDirListing() {
+    std::vector<std::string> listing = {};
+    cf_dir_t dir;
+    cf_dir_open(&dir, "levels");
+
+    while (dir.has_next) {
+        cf_file_t file;
+        cf_read_file(&dir, &file);
+        auto file_str = std::string(file.name);
+        if (file_str.size() >= 2 && 
+            file_str.compare(file_str.size() - 2, 2, ".r") == 0) {
+            listing.push_back(file_str.substr(0, file_str.size() - 2));
+            SDL_Log("Found: %s", file.name);
+        }
+        cf_dir_next(&dir);
+    }
+    cf_dir_close(&dir);
+    return listing;
 }
 
 std::string OSTypeString(OSType t) {

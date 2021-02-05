@@ -9,7 +9,9 @@
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Hard-coded for now. Eventually use the level search API.
-    levelSets = {
+
+    levelSets = LevelDirListing();
+    /*{
     //$ ls -w1 levels/*.r | sed -E 's/levels.(.+)\.r/"\1",/g'
         "aa-abnormal",
         "aa-deux-abnormal",
@@ -63,7 +65,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         "wild-west-collection",
         "wrestling",
         "wut"
-    };
+    };*/
 
     json sets = app->Get(kRecentSets);
     for (json::iterator it = sets.begin(); it != sets.end(); ++it) {

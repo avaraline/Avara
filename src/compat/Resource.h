@@ -3,8 +3,11 @@
 #include "Types.h"
 
 #include <string>
+#include <vector>
 
 void UseResFile(std::string filename);
+
+std::vector<std::string> LevelDirListing();
 
 Handle GetResource(OSType theType, short theID);
 Handle GetNamedResource(OSType theType, std::string name);
