@@ -9,6 +9,9 @@
 
 #pragma once
 #include "Types.h"
+#include <string>
+#include <vector>
+#include <tuple>
 
 enum {
     iDesignerName,
@@ -320,3 +323,8 @@ int GetPixelColor();
 int GetOtherPixelColor();
 
 Fixed GetLastOval(Fixed *theLoc);
+
+
+void LevelDirListing();
+std::vector<std::string> LevelDirNameListing();
+std::vector<int8_t> LevelDirVersionListing();

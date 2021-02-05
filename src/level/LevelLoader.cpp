@@ -19,6 +19,10 @@
 #include "Resource.h"
 
 #include <SDL2/SDL.h>
+#include <sstream>
+
+#define CUTE_FILES_IMPLEMENTATION
+#include <cute_files.h>
 
 #define textBufferSize 4096
 
@@ -430,3 +434,70 @@ void ConvertToLevelMap(Handle levelData) {
     FreshCalc();
     gCurrentGame->EndScript();
 }
+
+#if defined(_WIN32)
+#define PATHSEP "\\"
+#else
+#define PATHSEP "/"
+#endif
+
+#define LEVELDIR "levels"
+#define SETFILE "set.json"
+
+std::vector<std::string> levelSets;
+std::vector<int8_t> levelVersions;
+bool listingDone = false;
+
+std::vector<std::string> LevelDirNameListing() {
+    if (!listingDone) LevelDirListing();
+    return levelSets;
+}
+
+std::vector<int8_t> LevelDirVersionListing() {
+    if (!listingDone) LevelDirListing();
+    return levelVersions;
+}
+
+
+void LevelDirListing() {
+    cf_dir_t dir;
+    cf_dir_open(&dir, LEVELDIR);
+
+    while (dir.has_next) {
+        cf_file_t file;
+        cf_read_file(&dir, &file);
+        auto file_str = std::string(file.name);
+        
+        if (file_str.size() >= 2) {
+            bool ends_in_r = file_str.compare(file_str.size() - 2, 2, ".r") == 0;
+            if (ends_in_r) {
+                // file ends with .r, try to treat it like a binary
+                // level set file (version 1)
+                levelSets.push_back(file_str.substr(0, file_str.size() - 2));
+                levelVersions.push_back(1);
+                SDL_Log("Found RSRC level set: %s", file.name);
+            }
+        
+            if (file_str.compare(0, 1, ".")  != 0 &&
+                file_str.compare(0, 2, "..") != 0 &&
+                !ends_in_r && 
+                file.is_dir > 0) {
+                // this is a directory, try to see if there's a manifest inside
+
+                std::ostringstream ss;
+                ss << LEVELDIR << PATHSEP << file_str << PATHSEP << SETFILE;
+                if(cf_file_exists(ss.str().c_str())) {
+                    // we found a set json file so add it (as version 2)
+                    levelSets.push_back(file_str);
+                    levelVersions.push_back(2);
+                    SDL_Log("Found SVG level set: %s", file.name);
+                }
+        
+            }
+        }
+        cf_dir_next(&dir);
+    }
+    cf_dir_close(&dir);
+    listingDone = true;
+};
+

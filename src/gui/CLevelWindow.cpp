@@ -5,12 +5,13 @@
 #include "CLevelDescriptor.h"
 #include "CNetManager.h"
 #include "Resource.h"
+#include "LevelLoader.h"
 #include "Preferences.h"
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Hard-coded for now. Eventually use the level search API.
-
-    levelSets = LevelDirListing();
+    levelSets = LevelDirNameListing();
+    levelVersions = LevelDirVersionListing();
     /*{
     //$ ls -w1 levels/*.r | sed -E 's/levels.(.+)\.r/"\1",/g'
         "aa-abnormal",
