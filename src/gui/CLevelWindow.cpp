@@ -124,9 +124,7 @@ void CLevelWindow::SelectSet(std::string set) {
     levelIntros.clear();
     levelTags.clear();
 
-    // version 1 - RSRC file
-    // version 2 - SVG file(s)
-    if (GetVersionForLevelSet(set) > 1) {
+    if (GetVersionForLevelSet(set) == kSVGLevelSet) {
         nlohmann::json ledis = LoadLevelListFromJSON(set);
         for (auto &ld : ledis.items()) {
             levelNames.push_back(ld.value()["Name"]);

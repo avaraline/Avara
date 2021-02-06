@@ -217,7 +217,7 @@ struct simple_walker : pugi::xml_tree_walker {
     }
 };
 
-void SVGParser::Parse(std::string path) {
+bool SVGParser::Parse(std::string path) {
     pugi::xml_document doc;
     SDL_Log("Loading svg %s", path.c_str());
     pugi::xml_parse_result result = doc.load_file(path.c_str());
@@ -228,4 +228,5 @@ void SVGParser::Parse(std::string path) {
     walker.callbacks = &callbacks;
     doc.traverse(walker);
     // doc.child("svg")
+    return (bool)result;
 };

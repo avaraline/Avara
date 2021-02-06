@@ -315,7 +315,7 @@ enum {
 };
 
 void ConvertToLevelMap(Handle levelData);
-void SVGConvertToLevelMap(std::string path);
+bool SVGConvertToLevelMap(std::string path);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
@@ -323,6 +323,10 @@ int GetPixelColor();
 int GetOtherPixelColor();
 
 Fixed GetLastOval(Fixed *theLoc);
+
+
+#define kResourceLevelSet 1
+#define kSVGLevelSet 2
 
 void LevelDirListing();
 std::vector<std::string> LevelDirNameListing();

@@ -369,7 +369,7 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
     }
 }
 
-void SVGConvertToLevelMap(std::string path) {
+bool SVGConvertToLevelMap(std::string path) {
     InitParser();
     SVGParser *parser = new SVGParser();
     parser->callbacks.rectProc = &SvgRect;
@@ -378,11 +378,12 @@ void SVGConvertToLevelMap(std::string path) {
     parser->callbacks.arcProc = &SvgArc;
     parser->callbacks.ellipseProc = &SvgEllipse;
 
-    parser->Parse(path);
+    bool success = parser->Parse(path);
     delete parser;
     TextBreak();
     FreshCalc();
     gCurrentGame->EndScript();
+    return success;
 }
 
 void ConvertToLevelMap(Handle levelData) {
@@ -496,7 +497,7 @@ void LevelDirListing() {
                 // file ends with .r, try to treat it like a binary
                 // level set file (version 1)
                 levelSets.push_back(file_str.substr(0, file_str.size() - 2));
-                levelVersions.push_back(1);
+                levelVersions.push_back(kResourceLevelSet);
                 //SDL_Log("Found RSRC level set: %s", file_str.c_str());
             }
 
@@ -509,7 +510,7 @@ void LevelDirListing() {
                 if (cf_file_exists(ss.str().c_str())) {
                     // we found a set json file so add it (as version 2)
                     levelSets.push_back(file_str);
-                    levelVersions.push_back(2);
+                    levelVersions.push_back(kSVGLevelSet);
                     //SDL_Log("Found SVG level set: %s", file_str.c_str());
                 }
             }

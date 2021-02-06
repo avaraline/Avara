@@ -228,8 +228,13 @@ OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
     BlockMoveData(levelname.c_str(), itsGame->loadedLevel, levelname.size() + 1);
     SDL_Log("%s", svgdir.c_str());
     std::string svgpath = BundlePath((svgdir + std::string("svg/") + svgname).c_str());
-    SVGConvertToLevelMap(svgpath);
-    return noErr;
+    bool success = SVGConvertToLevelMap(svgpath);
+
+    AddMessageLine("Loaded \"" + levelname + "\" from \"" + set + "\".");
+    if (success)
+        return noErr;
+    else 
+        return fnfErr;
 }
 
 
@@ -240,11 +245,12 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     bool wasLoaded = false;
     std::string levelName;
 
-    if(GetVersionForLevelSet(set) > 1) {
-        LoadSVGLevel(set, theLevel);
+    OSErr result;
+
+    if(GetVersionForLevelSet(set) == kSVGLevelSet) {
+        result = LoadSVGLevel(set, theLevel);
         wasLoaded = true;
-    }
-    else {
+    } else {
         gCurrentGame = itsGame;
 
         std::string rsrcFile = std::string("levels/") + set + ".r";
@@ -253,16 +259,18 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         OSType setTag;
         CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
         CLevelDescriptor *curLevel = levels;
+        result = fnfErr;
         while (curLevel) {
             if (curLevel->tag == theLevel) {
                 std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
                 levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
                 BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
-                BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1);
+                BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1 );
                 Handle levelData = GetNamedResource('PICT', rsrcName);
                 if (levelData) {
                     ConvertToLevelMap(levelData);
                     ReleaseResource(levelData);
+                    result = noErr;
                     wasLoaded = true;
                 }
                 break;
@@ -273,7 +281,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
     }
 
-    if (wasLoaded) {
+    if (wasLoaded && result == noErr) {
         levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);
@@ -284,7 +292,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         itsGame->itsView->PointCamera();
     }
 
-    return noErr;
+    return result;
 }
 
 
