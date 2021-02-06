@@ -9,6 +9,7 @@
 
 #pragma once
 #include "Types.h"
+
 #include <string>
 #include <vector>
 
@@ -322,7 +323,6 @@ int GetPixelColor();
 int GetOtherPixelColor();
 
 Fixed GetLastOval(Fixed *theLoc);
-
 
 void LevelDirListing();
 std::vector<std::string> LevelDirNameListing();

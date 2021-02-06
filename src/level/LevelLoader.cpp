@@ -8,21 +8,21 @@
 */
 
 #include "LevelLoader.h"
+
 #include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
 #include "PICTParser.h"
-#include "SVGParser.h"
 #include "Parser.h"
 #include "Resource.h"
+#include "SVGParser.h"
 
 #include <SDL2/SDL.h>
+#include <algorithm>
 #include <sstream>
 #include <string>
-#include <algorithm>
-
 
 #define CUTE_FILES_IMPLEMENTATION
 #include <cute_files.h>
@@ -109,8 +109,7 @@ static void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool 
         fillColor.red = r;
         fillColor.green = g;
         fillColor.blue = b;
-    }
-    else {
+    } else {
         frameColor.red = r;
         frameColor.green = g;
         frameColor.blue = b;
@@ -137,15 +136,15 @@ static void SvgEllipse(float x, float y, long r) {
 
     lastDomeCenter.h = (long)roundf(x * 2);
     lastDomeCenter.v = (long)roundf(y * 2);
-    
+
     lastDomeAngle = 0;
     lastDomeSpan = 360;
     lastDomeRadius = r * 2;
 }
 
 static void SvgRect(Rect *r, int radius, unsigned short thickness) {
-    //SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
-    //SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
+    // SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
+    // SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
 
     TextBreak();
     r->left += thickness >> 1;
@@ -153,13 +152,12 @@ static void SvgRect(Rect *r, int radius, unsigned short thickness) {
     r->right -= (thickness + 1) >> 1;
     r->bottom -= (thickness + 1) >> 1;
 
-    if(thickness == 1) {
+    if (thickness == 1) {
         CWallActor *theWall;
         theWall = new CWallActor;
         theWall->IAbstractActor();
         theWall->MakeWallFromRect(r, (short)radius, 0, true);
-    }
-    else {
+    } else {
         gLastBoxRect = *r;
         gLastBoxRounding = radius;
     }
@@ -393,7 +391,7 @@ void ConvertToLevelMap(Handle levelData) {
     AvaraGLLightDefaults();
 
     textBuffer = NewPtr(textBufferSize);
-    
+
     PICTParser *parser = new PICTParser();
     parser->callbacks.arcProc = &PeepStdArc;
     parser->callbacks.rRectProc = &PeepStdRRect;
@@ -405,7 +403,7 @@ void ConvertToLevelMap(Handle levelData) {
     // parser->callbacks.getPicProc = &PeekGetPic;
     parser->Parse(levelData);
     delete parser;
-    
+
     /*
     TODO: replace this with a basic PICT parser with drawing function callbacks
 
@@ -455,7 +453,8 @@ std::vector<int8_t> levelVersions;
 bool listingDone = false;
 
 std::vector<std::string> LevelDirNameListing() {
-    if (!listingDone) LevelDirListing();
+    if (!listingDone)
+        LevelDirListing();
     return levelSets;
 }
 
@@ -468,16 +467,29 @@ int8_t GetVersionForLevelSet(std::string levelset) {
     return levelVersions[level_idx];
 }
 
-
 void LevelDirListing() {
     cf_dir_t dir;
     cf_dir_open(&dir, LEVELDIR);
+
+    std::vector<std::tuple<int, std::string>> raw_dir_listing;
 
     while (dir.has_next) {
         cf_file_t file;
         cf_read_file(&dir, &file);
         auto file_str = std::string(file.name);
-        
+        raw_dir_listing.push_back(std::tuple<int, std::string>(file.is_dir, file_str));
+        cf_dir_next(&dir);
+    }
+    cf_dir_close(&dir);
+    // sort directory listing alphabetically
+    std::sort(raw_dir_listing.begin(), raw_dir_listing.end(), 
+        [](std::tuple<int, std::string> &a, std::tuple<int, std::string> &b) -> bool { 
+            return std::get<1>(a) < std::get<1>(b); });
+
+    for (std::vector<std::tuple<int, std::string>>::iterator it = raw_dir_listing.begin(); it != raw_dir_listing.end(); ++it) {
+        int is_dir;
+        std::string file_str;
+        std::tie(is_dir, file_str) = *it;
         if (file_str.size() >= 2) {
             bool ends_in_r = file_str.compare(file_str.size() - 2, 2, ".r") == 0;
             if (ends_in_r) {
@@ -485,29 +497,24 @@ void LevelDirListing() {
                 // level set file (version 1)
                 levelSets.push_back(file_str.substr(0, file_str.size() - 2));
                 levelVersions.push_back(1);
-                SDL_Log("Found RSRC level set: %s", file.name);
+                //SDL_Log("Found RSRC level set: %s", file_str.c_str());
             }
-        
-            if (file_str.compare(0, 1, ".")  != 0 &&
-                file_str.compare(0, 2, "..") != 0 &&
-                !ends_in_r && 
-                file.is_dir > 0) {
+
+            if (file_str.compare(0, 1, ".") != 0 && file_str.compare(0, 2, "..") != 0 && !ends_in_r &&
+                is_dir > 0) {
                 // this is a directory, try to see if there's a manifest inside
 
                 std::ostringstream ss;
                 ss << LEVELDIR << PATHSEP << file_str << PATHSEP << SETFILE;
-                if(cf_file_exists(ss.str().c_str())) {
+                if (cf_file_exists(ss.str().c_str())) {
                     // we found a set json file so add it (as version 2)
                     levelSets.push_back(file_str);
                     levelVersions.push_back(2);
-                    SDL_Log("Found SVG level set: %s", file.name);
+                    //SDL_Log("Found SVG level set: %s", file_str.c_str());
                 }
-        
             }
         }
-        cf_dir_next(&dir);
     }
-    cf_dir_close(&dir);
+    
     listingDone = true;
 };
-

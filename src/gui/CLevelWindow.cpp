@@ -3,71 +3,16 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CLevelDescriptor.h"
-#include "JSONLevelDescriptor.h"
 #include "CNetManager.h"
-#include "Resource.h"
+#include "JSONLevelDescriptor.h"
 #include "LevelLoader.h"
 #include "Preferences.h"
+#include "Resource.h"
 
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
-    // Hard-coded for now. Eventually use the level search API.
+    // Searches "levels/" directory alongside application.
+    // will eventually use level search API
     levelSets = LevelDirNameListing();
-    /*{
-    //$ ls -w1 levels/*.r | sed -E 's/levels.(.+)\.r/"\1",/g'
-        "aa-abnormal",
-        "aa-deux-abnormal",
-        "aa-deux-normal",
-        "aa-normal",
-        "aa-tre",
-        "a-bridge-too-far",
-        "berserkir-fury",
-        "blockparty",
-        "butternut-squash",
-        "cancer",
-        "classic-mix-up",
-        "clockwork-blue-b4",
-        "cnemies-squares",
-        "crescent",
-        "dildensburg",
-        "disk-o-tech-light",
-        "dodgeball",
-        "emotion",
-        "fosfori",
-        "gzr-balledness",
-        "gzr-geriatric-ward",
-        "gzr-grecian-formula",
-        "gzr-liver-spots",
-        "gzr-over-the-hill",
-        "gzr-rip",
-        "holy-hand-grenades",
-        "hunting-grounds",
-        "iya",
-        "klaus-levels",
-        "macabre",
-        "medievos",
-        "net-99",
-        "net-levels",
-        "new-moon",
-        "not-aa",
-        "oddities-v4",
-        "pastabravo",
-        "scarlet-pimpernel-beta-0919",
-        "single-player",
-        "someset",
-        "strawberry",
-        "symbiosis",
-        "the-codex",
-        "the-lexicon",
-        "t-plus-5-part-a",
-        "t-plus-5-part-b",
-        "t-plus-5-part-c",
-        "tyyli",
-        "we-be-ground-pounders",
-        "wide-open",
-        "wild-west-collection",
-        "wrestling",
-        "wut"
-    };*/
 
     json sets = app->Get(kRecentSets);
     for (json::iterator it = sets.begin(); it != sets.end(); ++it) {
@@ -77,7 +22,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     for (json::iterator itLev = levels.begin(); itLev != levels.end(); ++itLev) {
         recentLevels.push_back(itLev.value());
     }
-    
+
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
     // TODO: check load permission: theNet->PermissionQuery(kAllowLoadBit, 0)
@@ -94,6 +39,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
         this->SelectSet(selectedIdx);
         levelBox->setSelectedIndex(0);
     });
+    setBox->popup()->setSize(nanogui::Vector2i(300, 600));
 
     levelBox = new nanogui::DescComboBox(this, levelNames, levelIntros);
     levelBox->popup()->setSize(nanogui::Vector2i(500, 350));
@@ -104,11 +50,10 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
 
     startBtn = new nanogui::Button(this, "Start Game");
     startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
-    
-    if(recentSets.size() > 0) {
+
+    if (recentSets.size() > 0) {
         SelectLevel(recentSets[0], recentLevels[0]);
-    }
-    else {
+    } else {
         SelectSet(0);
         levelBox->setSelectedIndex(0);
     }
@@ -121,32 +66,31 @@ bool CLevelWindow::DoCommand(int theCommand) {
 }
 
 void CLevelWindow::AddRecent(std::string set, std::string levelName) {
-    if(json::accept("[\"" + set + "\", \"" + levelName + "\"]")) {
-        //remove level if it is already in recents
-        for(unsigned i = 0; i < recentSets.size(); i++) {
-            if(recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
+    if (json::accept("[\"" + set + "\", \"" + levelName + "\"]")) {
+        // remove level if it is already in recents
+        for (unsigned i = 0; i < recentSets.size(); i++) {
+            if (recentSets[i].compare(set) == 0 && recentLevels[i].compare(levelName) == 0) {
                 recentSets.erase(recentSets.begin() + i);
                 recentLevels.erase(recentLevels.begin() + i);
                 break;
             }
         }
-        
+
         recentSets.insert(recentSets.begin(), set);
         recentLevels.insert(recentLevels.begin(), levelName);
-        
-        if(recentSets.size() > 10) {
+
+        if (recentSets.size() > 10) {
             recentSets.pop_back();
             recentLevels.pop_back();
         }
-        
+
         recentsBox->setItems(recentLevels, recentSets);
         recentsBox->setCaption("Recents");
         recentsBox->setNeedsLayout();
-        
+
         mApplication->Set(kRecentSets, recentSets);
         mApplication->Set(kRecentLevels, recentLevels);
-    }
-    else {
+    } else {
         SDL_Log("AddRecent ignoring bad set/level name.");
     }
 }
@@ -159,7 +103,7 @@ void CLevelWindow::SelectLevel(std::string set, std::string levelName) {
     if (levelIt != levelNames.end()) {
         levelIndex = std::distance(levelNames.begin(), levelIt);
     }
-    
+
     levelBox->setSelectedIndex(levelIndex);
 }
 
@@ -168,7 +112,8 @@ void CLevelWindow::SelectSet(int selected) {
 }
 
 void CLevelWindow::SelectSet(std::string set) {
-    if (set.length() < 1) return;
+    if (set.length() < 1)
+        return;
     std::vector<std::string>::iterator itr = std::find(levelSets.begin(), levelSets.end(), set);
     int level_idx = 0;
     if (itr != levelSets.end()) {
@@ -179,15 +124,16 @@ void CLevelWindow::SelectSet(std::string set) {
     levelIntros.clear();
     levelTags.clear();
 
+    // version 1 - RSRC file
+    // version 2 - SVG file(s)
     if (GetVersionForLevelSet(set) > 1) {
         nlohmann::json ledis = LoadLevelListFromJSON(set);
-        for (auto& ld : ledis.items()) {
+        for (auto &ld : ledis.items()) {
             levelNames.push_back(ld.value()["Name"]);
             levelIntros.push_back(ld.value()["Message"]);
             levelTags.push_back(StringOSType(ld.key()));
         }
-    }
-    else {
+    } else {
         std::string rsrcPath = std::string("levels/") + set + ".r";
         OSType setTag;
         UseResFile(rsrcPath);

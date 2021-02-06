@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Types.h"
+
 #include <string>
 #include <vector>
-using std::vector;
 using std::string;
+using std::vector;
 
 typedef void SVGRectProc(Rect *r, int radius, unsigned short thiccness);
 typedef void SVGColorProc(unsigned short r, unsigned short g, unsigned short b, bool fg);
@@ -13,22 +14,23 @@ typedef void SVGArcProc(float x, float y, short start, short angle, long longest
 typedef void SVGEllipseProc(float x, float y, long longest_radius);
 
 struct SVGProcs {
-	SVGRectProc *rectProc;
-	SVGColorProc *colorProc;
-	SVGTextProc *textProc;
-	SVGArcProc *arcProc;
-	SVGEllipseProc *ellipseProc;
+    SVGRectProc *rectProc;
+    SVGColorProc *colorProc;
+    SVGTextProc *textProc;
+    SVGArcProc *arcProc;
+    SVGEllipseProc *ellipseProc;
 };
 
 class SVGParser {
 public:
-	SVGProcs callbacks;
-	Rect lastRect, lastOval, lastArc, lastRRect;
+    SVGProcs callbacks;
+    Rect lastRect, lastOval, lastArc, lastRRect;
 
-	SVGParser();
-	virtual ~SVGParser() {}
+    SVGParser();
+    virtual ~SVGParser() {}
 
-	void Parse(std::string path);
+    void Parse(std::string path);
+
 protected:
-	static vector<string> split (const string &s, char delim);
+    static vector<string> split(const string &s, char delim);
 };

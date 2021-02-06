@@ -1,8 +1,9 @@
 #include "JSONLevelDescriptor.h"
-#include <string>
-#include <json.hpp>
+
 #include <SDL2/SDL.h>
 #include <fstream>
+#include <json.hpp>
+#include <string>
 
 nlohmann::json LoadLevelListFromJSON(std::string set) {
     return GetManifestJSON(set)["LEDI"];

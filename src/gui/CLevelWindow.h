@@ -2,9 +2,9 @@
 
 #include "CWindow.h"
 
+#include <nanogui/desccombobox.h>
 #include <string>
 #include <vector>
-#include <nanogui/desccombobox.h>
 
 class CLevelWindow : public CWindow {
 public:
