@@ -242,14 +242,12 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %s FROM %s\n", OSTypeString(theLevel).c_str(), set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
-    bool wasLoaded = false;
     std::string levelName;
 
-    OSErr result;
+    OSErr result = fnfErr;
 
     if(GetVersionForLevelSet(set) == kSVGLevelSet) {
         result = LoadSVGLevel(set, theLevel);
-        wasLoaded = true;
     } else {
         gCurrentGame = itsGame;
 
@@ -259,7 +257,6 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         OSType setTag;
         CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
         CLevelDescriptor *curLevel = levels;
-        result = fnfErr;
         while (curLevel) {
             if (curLevel->tag == theLevel) {
                 std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
@@ -271,7 +268,6 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
                     ConvertToLevelMap(levelData);
                     ReleaseResource(levelData);
                     result = noErr;
-                    wasLoaded = true;
                 }
                 break;
             }
@@ -281,7 +277,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
     }
 
-    if (wasLoaded && result == noErr) {
+    if (result == noErr) {
         levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);
