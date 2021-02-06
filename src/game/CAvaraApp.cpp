@@ -17,6 +17,7 @@
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
 #include "CCompactTagBase.h"
+#include "CharWordLongPointer.h"
 #include "CLevelDescriptor.h"
 #include "JSONLevelDescriptor.h"
 #include "CNetManager.h"
@@ -224,9 +225,11 @@ OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
     std::string svgname = ledi["Svg"];
     std::string levelname = ledi["Name"];
     std::string svgdir = std::string("levels/") + set + "/";
-    BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
-    BlockMoveData(levelname.c_str(), itsGame->loadedLevel, levelname.size() + 1);
-    SDL_Log("%s", svgdir.c_str());
+    SDL_Log("levelname %s", levelname.c_str());
+    // std::string -> pascal string
+    // yuck.
+    BlockMoveData((((char)set.size()) + set).c_str(), itsGame->loadedSet, set.size() + 2);
+    BlockMoveData((((char)levelname.size()) + levelname).c_str(), itsGame->loadedLevel, levelname.size() + 2);
     std::string svgpath = BundlePath((svgdir + std::string("svg/") + svgname).c_str());
     bool success = SVGConvertToLevelMap(svgpath);
 
@@ -261,6 +264,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
             if (curLevel->tag == theLevel) {
                 std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
                 levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
+                SDL_Log("levelname %s", levelName.c_str());
                 BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
                 BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1 );
                 Handle levelData = GetNamedResource('PICT', rsrcName);
