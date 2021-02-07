@@ -58,7 +58,7 @@ struct simple_walker : pugi::xml_tree_walker {
             handle_ellipse(node);
         else if (name.compare("rect") == 0)
             handle_rect(node);
-        else if (name.compare("text") == 0) {
+        else if (name.compare("text") == 0 || name.compare("g") == 0) {
             // don't do anything
         } else if (name.compare("tspan") == 0) {
             buffa << node.child_value() << (char)13;
