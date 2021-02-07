@@ -468,29 +468,36 @@ int8_t GetVersionForLevelSet(std::string levelset) {
     return levelVersions[level_idx];
 }
 
+
+struct AvaraDirListEntry {
+    int8_t is_dir;
+    std::string file_name;
+};
+
 void LevelDirListing() {
     cf_dir_t dir;
     cf_dir_open(&dir, LEVELDIR);
 
-    std::vector<std::tuple<int, std::string>> raw_dir_listing;
+    std::vector<AvaraDirListEntry> raw_dir_listing;
 
     while (dir.has_next) {
         cf_file_t file;
         cf_read_file(&dir, &file);
-        auto file_str = std::string(file.name);
-        raw_dir_listing.push_back(std::tuple<int, std::string>(file.is_dir, file_str));
+        AvaraDirListEntry entry;
+        entry.is_dir = file.is_dir;
+        entry.file_name = std::string(file.name);
+        raw_dir_listing.push_back(entry);
         cf_dir_next(&dir);
     }
     cf_dir_close(&dir);
     // sort directory listing alphabetically
     std::sort(raw_dir_listing.begin(), raw_dir_listing.end(), 
-        [](std::tuple<int, std::string> &a, std::tuple<int, std::string> &b) -> bool { 
-            return std::get<1>(a) < std::get<1>(b); });
+        [](AvaraDirListEntry &a, AvaraDirListEntry &b) -> bool { 
+            return a.file_name < b.file_name; });
 
-    for (std::vector<std::tuple<int, std::string>>::iterator it = raw_dir_listing.begin(); it != raw_dir_listing.end(); ++it) {
-        int is_dir;
-        std::string file_str;
-        std::tie(is_dir, file_str) = *it;
+    for (std::vector<AvaraDirListEntry>::iterator it = raw_dir_listing.begin(); it != raw_dir_listing.end(); ++it) {
+        auto file_str = it->file_name;
+        auto is_dir = it->is_dir;
         if (file_str.size() >= 2) {
             bool ends_in_r = file_str.compare(file_str.size() - 2, 2, ".r") == 0;
             if (ends_in_r) {

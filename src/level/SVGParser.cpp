@@ -30,6 +30,7 @@ SVGParser::SVGParser() {
 struct simple_walker : pugi::xml_tree_walker {
     SVGProcs *callbacks;
     unsigned short thiccness;
+    std::stringstream buffa;
 
     virtual bool for_each(pugi::xml_node &node) {
         int node_type = node.type();
@@ -58,14 +59,13 @@ struct simple_walker : pugi::xml_tree_walker {
         else if (name.compare("rect") == 0)
             handle_rect(node);
         else if (name.compare("text") == 0) {
-            std::stringstream buffa;
-            for (pugi::xml_node tspan : node.children("tspan")) {
-                buffa << tspan.child_value() << (char)13;
-                // SDL_Log(tspan.child_value());
-            }
+            // don't do anything
+        } else if (name.compare("tspan") == 0) {
+            buffa << node.child_value() << (char)13;
             callbacks->textProc((unsigned char *)buffa.str().c_str());
+            buffa.str("");
         } else {
-            // SDL_Log("Unhandleable element: %s", name.c_str());
+            SDL_Log("Unhandleable element: %s", name.c_str());
         }
     }
 
