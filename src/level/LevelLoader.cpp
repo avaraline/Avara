@@ -371,6 +371,8 @@ static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
 
 bool SVGConvertToLevelMap(std::string path) {
     InitParser();
+    AvaraGLLightDefaults();
+    
     SVGParser *parser = new SVGParser();
     parser->callbacks.rectProc = &SvgRect;
     parser->callbacks.colorProc = &SvgColor;

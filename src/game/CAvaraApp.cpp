@@ -216,8 +216,6 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 
 
 OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
-    itsGame->LevelReset(false);
-    itsGame->loadedTag = theLevel;
     gCurrentGame = itsGame;
     std::string leveltag = OSTypeString(theLevel);
     json setManifest = GetManifestJSON(set);
