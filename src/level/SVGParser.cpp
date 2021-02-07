@@ -45,27 +45,24 @@ struct simple_walker : pugi::xml_tree_walker {
     }
 
     void handle_element(pugi::xml_node &node, string &name) {
+        // this element is used for storage by editors
+        if (strcmp(node.parent().name(), "defs") == 0) {
+            return;
+        }
         if (name.compare("path") == 0) {
-            string d = node.attribute("d").value();
+            // look for inkscape specific arc values
             string type = node.attribute("sodipodi:type").value();
-
-            // SDL_Log("path style: %s", style.c_str());
-            // SDL_Log("path d: %s", d.c_str());
-            // SDL_Log("path type: %s", type.c_str());
-            if (type.compare("arc") == 0)
+            if (type.compare("arc") == 0) {
                 handle_arc(node);
-        } else if (name.compare("ellipse") == 0)
+            }
+        } else if (name.compare("ellipse") == 0) {
             handle_ellipse(node);
-        else if (name.compare("rect") == 0)
+        } else if (name.compare("rect") == 0) {
             handle_rect(node);
-        else if (name.compare("text") == 0 || name.compare("g") == 0) {
-            // don't do anything
         } else if (name.compare("tspan") == 0) {
             buffa << node.child_value() << (char)13;
             callbacks->textProc((unsigned char *)buffa.str().c_str());
             buffa.str("");
-        } else {
-            SDL_Log("Unhandleable element: %s", name.c_str());
         }
     }
 
