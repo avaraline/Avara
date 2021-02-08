@@ -68,7 +68,7 @@ struct simple_walker : pugi::xml_tree_walker {
 
     int safe_int(string value) {
         try {
-            return stoi(value);
+            return (int)round(stof(value));
         } catch (std::exception e) {
             if (value.length() > 0) {
                 SDL_Log("stoI failed on %s", value.c_str());
@@ -79,7 +79,7 @@ struct simple_walker : pugi::xml_tree_walker {
 
     long safe_long(string value) {
         try {
-            return stol(value);
+            return (long)round(stof(value));
         } catch (std::exception e) {
             if (value.length() > 0) {
                 SDL_Log("stoL failed on %s", value.c_str());
