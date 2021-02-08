@@ -442,15 +442,6 @@ void ConvertToLevelMap(Handle levelData) {
     gCurrentGame->EndScript();
 }
 
-#if defined(_WIN32)
-#define PATHSEP "\\"
-#else
-#define PATHSEP "/"
-#endif
-
-#define LEVELDIR "levels"
-#define SETFILE "set.json"
-
 std::vector<std::string> levelSets;
 std::vector<int8_t> levelVersions;
 bool listingDone = false;
@@ -501,7 +492,7 @@ void LevelDirListing() {
         auto file_str = it->file_name;
         auto is_dir = it->is_dir;
         if (file_str.size() >= 2) {
-            bool ends_in_r = file_str.compare(file_str.size() - 2, 2, ".r") == 0;
+            bool ends_in_r = file_str.compare(file_str.size() - 2, 2, RSRCEXT) == 0;
             if (ends_in_r) {
                 // file ends with .r, try to treat it like a binary
                 // level set file (version 1)

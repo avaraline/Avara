@@ -39,3 +39,19 @@ enum { kSmallSliver, kMediumSliver, kLargeSliver };
 enum { rightAlign = -1, leftAlign, centerAlign };
 
 enum { kipDrawMessage = 1, kipDrawName = 2, kipDrawColorBox = 4, kipDrawErase = 8, kipDrawValidate = 16 };
+
+// path separator
+#if defined(_WIN32)
+#define PATHSEP "\\"
+#else
+#define PATHSEP "/"
+#endif
+
+// files stuff
+#define LEVELDIR "levels"
+#define SETFILE "set.json"
+#define SVGSDIR "svg"
+#define RSRCEXT ".r"
+#define BSPSDIR "bsps"
+#define BSPSEXT ".json"
+enum { kResourceLevelSet, kSVGLevelSet };

@@ -1,4 +1,5 @@
 #include "JSONLevelDescriptor.h"
+#include "AvaraDefines.h"
 
 #include <SDL2/SDL.h>
 #include <fstream>
@@ -11,7 +12,7 @@ nlohmann::json LoadLevelListFromJSON(std::string set) {
 
 nlohmann::json GetManifestJSON(std::string set) {
     std::stringstream setManifestName;
-    setManifestName << "levels/" << set << "/set.json";
+    setManifestName << LEVELDIR << PATHSEP << set << PATHSEP << SETFILE;
     std::ifstream setManifestFile(setManifestName.str());
     if (setManifestFile.fail()) {
         SDL_Log("Couldn't read %s", setManifestName.str().c_str());

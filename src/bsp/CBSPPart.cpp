@@ -13,6 +13,7 @@
 #include "CViewParameters.h"
 #include "Memory.h"
 #include "Resource.h"
+#include "AvaraDefines.h"
 
 #include <fstream>
 #include <iostream>
@@ -37,13 +38,14 @@ ColorRecord ***bspColorLookupTable = 0;
 using json = nlohmann::json;
 
 void CBSPPart::IBSPPart(short resId, char* levelsetName) {
-    char relPath[256];
+    std::stringstream relPath;
     char *bspName = NULL;
 
     // first check for the resource in the levelset directory
     if (levelsetName != NULL) {
-        snprintf(relPath, 256, "levels/%s/bsps/%d.json", levelsetName, resId);
-        bspName = BundlePath(relPath);
+        relPath << LEVELDIR << PATHSEP << levelsetName << PATHSEP;
+        relPath << BSPSDIR << PATHSEP << resId << BSPSEXT;
+        bspName = BundlePath(relPath.str().c_str());
         std::ifstream testFile(bspName);
         if (testFile.fail()) {
             bspName = NULL;
@@ -53,10 +55,11 @@ void CBSPPart::IBSPPart(short resId, char* levelsetName) {
     }
     // haven't found the BSP file yet, try the top-level bsps directory
     if (bspName == NULL) {
-        snprintf(relPath, 256, "bsps/%d.json", resId);
-        bspName = BundlePath(relPath);
+        relPath.str("");
+        relPath << BSPSDIR << PATHSEP << resId << BSPSEXT;
+        bspName = BundlePath(relPath.str().c_str());
     }
-    // SDL_Log("Loading BSP: %s\n", bspName);
+    //SDL_Log("Loading BSP: %s\n", bspName);
     lightSeed = 0;
     nextTemp = NULL;
     // colorReplacements = NULL;    //  Use default colors.

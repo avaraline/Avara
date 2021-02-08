@@ -220,9 +220,11 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
     std::string levelName;
+    std::stringstream buffa;
 
     OSErr result = fnfErr;
     gCurrentGame = itsGame;
+    BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
 
     if(GetVersionForLevelSet(set) == kSVGLevelSet) {
         std::string leveltag = OSTypeString(theLevel);
@@ -232,8 +234,8 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         std::string svgname = ledi["Svg"];
         levelName = ledi["Name"];
 
-        std::stringstream buffa;
-        buffa << "levels/" << set << "/svg/" << svgname;
+        buffa << LEVELDIR << PATHSEP << set << PATHSEP;
+        buffa << SVGSDIR << PATHSEP << svgname;
         std::string svgpath = BundlePath(buffa.str().c_str());
 
         if(SVGConvertToLevelMap(svgpath)) {
@@ -242,9 +244,8 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
             result = noErr;
         }
     } else {
-
-        std::string rsrcFile = std::string("levels/") + set + ".r";
-        UseResFile(rsrcFile);
+        buffa << LEVELDIR << PATHSEP << set << RSRCEXT;
+        UseResFile(buffa.str().c_str());
 
         OSType setTag;
         CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
@@ -268,7 +269,6 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     }
 
     if (result == noErr) {
-        BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
         AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
         levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];

@@ -324,10 +324,6 @@ int GetOtherPixelColor();
 
 Fixed GetLastOval(Fixed *theLoc);
 
-
-#define kResourceLevelSet 1
-#define kSVGLevelSet 2
-
 void LevelDirListing();
 std::vector<std::string> LevelDirNameListing();
 int8_t GetVersionForLevelSet(std::string levelset);
