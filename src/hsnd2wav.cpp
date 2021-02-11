@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
                 loc = i + sp->loopStart;
             // convert to signed double
 
-            audioFile.samples[0][i] = ((uint8_t)p[loc] / 127.0f) - 0.5f;
+            audioFile.samples[0][i] = (((uint8_t)p[loc] / 127.0f) - 0.5f) * 2.0f;
         }
         SDL_Log("Saving %s", file_name);
         audioFile.printSummary();
