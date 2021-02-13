@@ -21,6 +21,7 @@
 
 #include <SDL2/SDL.h>
 #include <algorithm>
+#include <map>
 #include <sstream>
 #include <string>
 
@@ -442,30 +443,35 @@ void ConvertToLevelMap(Handle levelData) {
     gCurrentGame->EndScript();
 }
 
-std::vector<std::string> levelSets;
-std::vector<int8_t> levelVersions;
+struct AvaraDirListEntry {
+    int8_t is_dir;
+    std::string file_name;
+    int8_t version;
+    char *full_path;
+};
+
+std::map<std::string, AvaraDirListEntry> level_sets;
+std::vector<std::string> set_name_list;
+
 bool listingDone = false;
 
 std::vector<std::string> LevelDirNameListing() {
     if (!listingDone)
         LevelDirListing();
-    return levelSets;
+    return set_name_list;
 }
 
-int8_t GetVersionForLevelSet(std::string levelset) {
-    std::vector<std::string>::iterator itr = std::find(levelSets.begin(), levelSets.end(), levelset);
-    int level_idx = 0;
-    if (itr != levelSets.end()) {
-        level_idx = std::distance(levelSets.begin(), itr);
-    }
-    return levelVersions[level_idx];
+char* PathForLevelSet(std::string set) {
+    if (!listingDone)
+        LevelDirListing();
+    return level_sets.at(set).full_path;
 }
 
-
-struct AvaraDirListEntry {
-    int8_t is_dir;
-    std::string file_name;
-};
+int8_t GetVersionForLevelSet(std::string set) {
+    if (!listingDone)
+        LevelDirListing();
+    return level_sets.at(set).version;
+}
 
 void LevelDirListing() {
     cf_dir_t dir;
@@ -496,8 +502,11 @@ void LevelDirListing() {
             if (ends_in_r) {
                 // file ends with .r, try to treat it like a binary
                 // level set file (version 1)
-                levelSets.push_back(file_str.substr(0, file_str.size() - 2));
-                levelVersions.push_back(kResourceLevelSet);
+                std::string set_name = file_str.substr(0, file_str.size() - 2);
+                it->version = kResourceLevelSet;
+                it->full_path = BundlePath(file_str.c_str());
+                level_sets.insert(std::make_pair(set_name, (*it)));
+                set_name_list.push_back(set_name);
                 //SDL_Log("Found RSRC level set: %s", file_str.c_str());
             }
 
@@ -509,13 +518,14 @@ void LevelDirListing() {
                 ss << LEVELDIR << PATHSEP << file_str << PATHSEP << SETFILE;
                 if (cf_file_exists(ss.str().c_str())) {
                     // we found a set json file so add it (as version 2)
-                    levelSets.push_back(file_str);
-                    levelVersions.push_back(kSVGLevelSet);
+                    it->version = kSVGLevelSet;
+                    it->full_path = BundlePath(file_str.c_str());
+                    level_sets.insert(std::make_pair(file_str, (*it)));
+                    set_name_list.push_back(file_str);
                     //SDL_Log("Found SVG level set: %s", file_str.c_str());
                 }
             }
         }
     }
-    
     listingDone = true;
 };
