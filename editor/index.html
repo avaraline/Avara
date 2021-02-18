@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>ALF Editor</title>
+        <style>
+            #source {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 40%;
+                font-family: monospace;
+                border: none;
+            }
+            #preview {
+                position: absolute;
+                top: 0;
+                left: 40%;
+                bottom: 0;
+                width: 60%;
+                overflow: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <textarea id="source"></textarea>
+        <div id="preview"><canvas id="map"></canvas></div>
+    </body>
+    <script src="editor.js"></script>
+</html>
