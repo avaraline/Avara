@@ -17,8 +17,12 @@
 #include "SVGParser.h"
 #include "Parser.h"
 #include "Resource.h"
+#include "pugixml.hpp"
+#include "csscolorparser.hpp"
 
 #include <SDL2/SDL.h>
+
+#include <algorithm>
 
 #define textBufferSize 4096
 
@@ -377,13 +381,157 @@ void SVGConvertToLevelMap() {
     gCurrentGame->EndScript();
 }
 
+struct ALFWalker: pugi::xml_tree_walker {
+    virtual bool for_each(pugi::xml_node& node) {
+        string tag = node.name();
+
+        switch (node.type()){
+            case pugi::node_element:
+                handle_element(node, tag);
+                RunThis((StringPtr)node.child_value());
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
+    void read_attrs(pugi::xml_node& node, Rect *r, int *stroke) {
+        int x = std::stoi(node.attribute("x").value()),
+            y = std::stoi(node.attribute("y").value()),
+            w = std::stoi(node.attribute("w").value()),
+            h = std::stoi(node.attribute("h").value());
+
+        string s = node.attribute("s").value();
+        *stroke = s.compare("") == 0 ? 1 : std::stoi(s);
+
+        r->top = y + (*stroke >> 1);
+        r->left = x + (*stroke >> 1);
+        r->bottom = y + h - ((*stroke + 1) >> 1);
+        r->right = x + w - ((*stroke + 1) >> 1);
+
+        handle_color(node);
+    }
+
+    void handle_element(pugi::xml_node& node, string& name) {
+        if(name.compare("color") == 0) handle_color(node);
+        else if(name.compare("arc") == 0) handle_arc(node);
+        else if(name.compare("rect") == 0) handle_rect(node);
+        else if(name.compare("oval") == 0) handle_oval(node);
+        else if (name.compare("script") == 0) handle_script(node);
+        else {
+            SDL_Log("Unknown ALF element: %s", name.c_str());
+        }
+    }
+
+    void handle_color(pugi::xml_node& node) {
+        string fill = node.attribute("fill").value(),
+               frame = node.attribute("frame").value();
+
+        if (!fill.empty()) {
+            const auto color = CSSColorParser::parse(fill);
+            if (color) {
+                fillColor.red = color->r * 257;
+                fillColor.green = color->g * 257;
+                fillColor.blue = color->b * 257;
+            }
+        }
+
+        if (!frame.empty()) {
+            const auto color = CSSColorParser::parse(frame);
+            if (color) {
+                frameColor.red = color->r * 257;
+                frameColor.green = color->g * 257;
+                frameColor.blue = color->b * 257;
+            }
+        }
+    }
+
+    void handle_arc(pugi::xml_node& node) {
+        Rect r;
+        int stroke;
+
+        read_attrs(node, &r, &stroke);
+
+        int start = std::stoi(node.attribute("start").value()),
+            extent = std::stoi(node.attribute("extent").value());
+
+        lastArcPoint.h = r.left + r.right;
+        lastArcPoint.v = r.top + r.bottom;
+        lastArcAngle = (720 - (start + extent / 2)) % 360;
+        lastDomeCenter.h = r.left + r.right;
+        lastDomeCenter.v = r.top + r.bottom;
+        lastDomeAngle = 360 - start;
+        lastDomeSpan = extent;
+        lastDomeRadius = std::max(r.right - r.left, r.bottom - r.top);
+    }
+
+    void handle_rect(pugi::xml_node& node) {
+        Rect r;
+        int stroke;
+
+        read_attrs(node, &r, &stroke);
+
+        string rad = node.attribute("r").value();
+        int radius = rad.compare("") == 0 ? 0 : std::stoi(rad);
+
+        if (stroke == 1) {
+            CWallActor *theWall = new CWallActor;
+            theWall->IAbstractActor();
+            theWall->MakeWallFromRect(&r, radius, 0, true);
+        } else {
+            gLastBoxRect = r;
+            gLastBoxRounding = 0;
+        }
+    }
+
+    void handle_oval(pugi::xml_node& node) {
+        Rect r;
+        int stroke;
+
+        read_attrs(node, &r, &stroke);
+
+        int radius = std::max(r.right - r.left, r.bottom - r.top);
+
+        lastOvalPoint.h = r.left + r.right;
+        lastOvalPoint.v = r.top + r.bottom;
+        lastOvalRadius = radius + radius;
+
+        lastDomeCenter.h = r.left + r.right;
+        lastDomeCenter.v = r.top + r.bottom;
+
+        lastDomeAngle = 0;
+        lastDomeSpan = 360;
+        lastDomeRadius = radius;
+    }
+
+    void handle_script(pugi::xml_node& node) {
+        //RunThis((StringPtr)node.child_value());
+    }
+};
+
+void LoadALF(std::string levelName) {
+    InitParser();
+
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_file(levelName.c_str());
+
+    ALFWalker walker;
+    doc.traverse(walker);
+
+    TextBreak();
+    FreshCalc();
+    gCurrentGame->EndScript();
+}
+
 void ConvertToLevelMap(Handle levelData) {
     InitParser();
     // TODO: Not a good place for this
     AvaraGLLightDefaults();
 
     textBuffer = NewPtr(textBufferSize);
-    
+
     PICTParser *parser = new PICTParser();
     parser->callbacks.arcProc = &PeepStdArc;
     parser->callbacks.rRectProc = &PeepStdRRect;
@@ -395,7 +543,7 @@ void ConvertToLevelMap(Handle levelData) {
     // parser->callbacks.getPicProc = &PeekGetPic;
     parser->Parse(levelData);
     delete parser;
-    
+
     /*
     TODO: replace this with a basic PICT parser with drawing function callbacks
 

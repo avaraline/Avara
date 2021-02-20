@@ -138,11 +138,21 @@ class DrawContext:
         self.frame = frame
         self.elements = []
         self.buffered = []
+
         self.origin = Point(0, 0)
-        self.w = 1
-        self.r = Point(0, 0)
+        self.r = Point(0, 0)  # Rounding radius (oval size)
         self.fg = Color(255, 255, 255)
         self.bg = Color(255, 255, 255)
+
+        self.fillColor = self.fg
+        self.frameColor = self.fg
+        self.stroke = 0
+
+        self.wrote_text = False
+        self.tag_open = None
+        self.path = []
+        self.current_id = 0
+        self.last_id = 0
 
         self.last_rect = None
         self.last_rrect = None
@@ -153,90 +163,101 @@ class DrawContext:
         self.save_arc_x = None
         self.save_arc_y = None
         self.save_arc_start = None
-        self.save_arc_angle = None
+        self.save_arc_extent = None
 
     def group_start(self):
-        pass
+        self.current_id += 1
+        self.path.append(self.current_id)
 
     def group_close(self):
-        pass
+        if self.path:
+            self.current_id = self.path.pop()
 
-    def element(self, tag, **attrs):
+    def flush_text(self):
+        wrote_text = False
+        if self.tag_open:
+            if self.buffered:
+                if self.current_id == self.last_id:
+                    self.elements.append("\n".join(self.buffered))
+                    self.elements.append("  </%s>" % self.tag_open)
+                else:
+                    self.elements[-1] += "</%s>" % self.tag_open
+                    lines = (
+                        ['  <script type="avarascript">']
+                        + self.buffered
+                        + ["  </script>"]
+                    )
+                    self.elements.append("\n".join(lines))
+                wrote_text = True
+            else:
+                self.elements[-1] += "</%s>" % self.tag_open
+            self.tag_open = None
+        elif self.buffered:
+            lines = ['  <script type="avarascript">'] + self.buffered + ["  </script>"]
+            self.elements.append("\n".join(lines))
+            wrote_text = True
+        self.buffered = []
+        return wrote_text
+
+    def emit(self, tag, rect, **attrs):
+        frame = rect.offset(self.origin)
+        attrs.update(
+            {
+                "x": frame.left,
+                "y": frame.top,
+                "w": frame.width,
+                "h": frame.height,
+                "fill": self.fillColor,
+                "frame": self.frameColor,
+            }
+        )
+        if self.stroke:
+            attrs["s"] = self.stroke
         attrs_formatted = " ".join('%s="%s"' % (k, v) for k, v in attrs.items())
-        el = "  <%s %s></%s>" % (tag, attrs_formatted, tag)
+        el = "  <%s %s>" % (tag, attrs_formatted)
         self.elements.append(el)
+        self.tag_open = tag
+        self.last_id = self.current_id
 
-    def color(self, verb):
+    def element(self, tag, verb, rect, **attrs):
+        self.wrote_text = self.flush_text()
         if verb == Verb.FRAME:
-            self.element("color", frame=self.fg)
+            self.frameColor = self.fg
+            # If this is framing an arc that was just painted, we can remove the
+            # previous <arc> element (so long as it didn't contain script).
+            if (
+                tag == "arc"
+                and not self.wrote_text
+                and self.elements[-1].startswith("  <arc")
+                and attrs["start"] == self.save_arc_start
+                and attrs["extent"] == self.save_arc_extent
+                and self.origin.x == self.save_arc_x
+                and self.origin.y == self.save_arc_y
+            ):
+                self.elements.pop()
+            self.emit(tag, rect, **attrs)
         elif verb == Verb.PAINT:
-            self.element("color", fill=self.fg)
+            self.fillColor = self.fg
+            if tag == "arc":
+                self.emit(tag, rect, **attrs)
 
-    def rect(self, r, verb):
-        self.flush_text()
-        frame = r.offset(self.origin)
-        self.color(verb)
-        if verb == Verb.FRAME:
-            self.element(
-                "rect",
-                t=frame.top,
-                l=frame.left,
-                b=frame.bottom,
-                r=frame.right,
-                w=self.w,
-            )
-        self.last_rect = r
+    def rect(self, rect, verb):
+        self.element("rect", verb, rect)
+        self.last_rect = rect
 
-    def rrect(self, r, verb):
-        self.flush_text()
-        frame = r.offset(self.origin)
-        self.color(verb)
-        if verb == Verb.FRAME:
-            self.element(
-                "rect",
-                t=frame.top,
-                l=frame.left,
-                b=frame.bottom,
-                r=frame.right,
-                w=self.w,
-                rx=self.r.x,
-                ry=self.r.y,
-            )
-        self.last_rrect = r
+    def rrect(self, rect, verb):
+        self.element("rect", verb, rect, r=max(self.r.x, self.r.y))
+        self.last_rrect = rect
 
-    def oval(self, r, verb):
-        self.flush_text()
-        frame = r.offset(self.origin)
-        self.color(verb)
-        if verb == Verb.FRAME:
-            self.element(
-                "oval",
-                t=frame.top,
-                l=frame.left,
-                b=frame.bottom,
-                r=frame.right,
-                w=self.w,
-            )
-        self.last_oval = r
+    def oval(self, rect, verb):
+        self.element("oval", verb, rect)
+        self.last_oval = rect
 
-    def arc(self, r, start, angle, verb):
-        self.flush_text()
-        frame = r.offset(self.origin)
-        self.color(verb)
-        if verb == Verb.FRAME:
-            self.element(
-                "arc",
-                t=frame.top,
-                l=frame.left,
-                b=frame.bottom,
-                r=frame.right,
-                w=self.w,
-                start=start,
-                angle=angle,
-            )
-        self.last_arc = r
+    def arc(self, rect, start, extent, verb):
+        self.element("arc", verb, rect, start=start, extent=extent)
+        self.last_arc = rect
         self.save_arc_start = start
-        self.save_arc_angle = angle
+        self.save_arc_extent = extent
         self.save_arc_x = self.origin.x
         self.save_arc_y = self.origin.y
 
@@ -245,14 +266,8 @@ class DrawContext:
             return
         self.buffered.append("    " + s)
 
-    def flush_text(self):
-        if not self.buffered:
-            return
-        lines = ['  <script type="avarascript">'] + self.buffered + ["  </script>"]
-        self.elements.append("\n".join(lines))
-        self.buffered = []
-
     def close(self):
+        self.flush_text()
         return '<map width="%s" height="%s">\n%s\n</map>' % (
             self.frame.width,
             self.frame.height,
@@ -302,7 +317,7 @@ class TextMode(Operation):
 class PenSize(Operation):
     def parse(self, data, context):
         size = data.point()
-        context.w = size.x
+        context.stroke = max(size.x, size.y)
 
 
 class PenMode(Operation):
@@ -514,36 +529,36 @@ class FrameArc(Operation):
     def parse(self, data, context):
         rect = data.rect()
         start = data.short()
-        angle = data.short()
-        context.arc(rect, start, angle, Verb.FRAME)
+        extent = data.short()
+        context.arc(rect, start, extent, Verb.FRAME)
 
 
 class PaintArc(Operation):
     def parse(self, data, context):
         rect = data.rect()
         start = data.short()
-        angle = data.short()
-        context.arc(rect, start, angle, Verb.PAINT)
+        extent = data.short()
+        context.arc(rect, start, extent, Verb.PAINT)
 
 
 class FrameSameArc(Operation):
     def parse(self, data, context):
         start = data.short()
-        angle = data.short()
+        extent = data.short()
         if context.last_arc is None:
             debug("FrameSameArc with no last arc")
             return
-        context.arc(context.last_arc, start, angle, Verb.FRAME)
+        context.arc(context.last_arc, start, extent, Verb.FRAME)
 
 
 class PaintSameArc(Operation):
     def parse(self, data, context):
         start = data.short()
-        angle = data.short()
+        extent = data.short()
         if context.last_arc is None:
             debug("PaintSameArc with no last arc")
             return
-        context.arc(context.last_arc, start, angle, Verb.PAINT)
+        context.arc(context.last_arc, start, extent, Verb.PAINT)
 
 
 class ShortComment(Operation):

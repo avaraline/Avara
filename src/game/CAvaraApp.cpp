@@ -79,14 +79,14 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     serverWindow = new CServerWindow(this);
     serverWindow->setFixedWidth(200);
-    
+
     trackerWindow = new CTrackerWindow(this);
     trackerWindow->setFixedWidth(325);
 
     rosterWindow = new CRosterWindow(this);
 
     performLayout();
-    
+
     for (auto win : windowList) {
         win->restoreState();
     }
@@ -140,7 +140,7 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
                 return true;
             }
         }
-        
+
         if (rosterWindow->handleSDLEvent(event))
             return true;
 
@@ -239,6 +239,14 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     itsGame->loadedTag = theLevel;
     gCurrentGame = itsGame;
 
+    bool wasLoaded = true;
+    std::string levelName("grimoire.alf");
+    BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
+    itsGame->loadedLevel[0] = levelName.size();
+    BlockMoveData(levelName.c_str(), itsGame->loadedLevel + 1, levelName.size());
+    LoadALF(levelName);
+
+    /*
     std::string rsrcFile = std::string("levels/") + set + ".r";
     UseResFile(rsrcFile);
 
@@ -264,6 +272,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         curLevel = curLevel->nextLevel;
     }
     levels->Dispose();
+    */
 
     if (wasLoaded) {
         AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
