@@ -23,6 +23,36 @@ function equalish(a, b) {
     return Math.abs(a - b) < 10;
 }
 
+function handleColor(ctx, elem) {
+    if (elem.hasAttribute("frame")) {
+        ctx.strokeStyle = elem.getAttribute("frame");
+    }
+    if (elem.hasAttribute("fill")) {
+        ctx.fillStyle = elem.getAttribute("fill");
+    }
+}
+
+function getRect(elem) {
+    var x = parseInt(elem.getAttribute("x")),
+        y = parseInt(elem.getAttribute("y")),
+        w = parseInt(elem.getAttribute("w")),
+        h = parseInt(elem.getAttribute("h")),
+        s = parseInt(elem.getAttribute("s") ?? 0),
+        r = parseInt(elem.getAttribute("r") ?? 0);
+    return {
+        top: y,
+        left: x,
+        bottom: y + h,
+        right: x + w,
+        width: w,
+        height: h,
+        cx: x + (w / 2),
+        cy: y + (h / 2),
+        stroke: s,
+        radius: r
+    };
+}
+
 function redraw() {
     var doc = new DOMParser().parseFromString(source.value, "text/html");
     var map = doc.querySelector("map");
@@ -33,59 +63,48 @@ function redraw() {
     ctx.scale(scale, scale);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     [...map.children].forEach((elem) => {
+        handleColor(ctx, elem);
         switch (elem.tagName.toLowerCase()) {
             case "color":
-                if (elem.hasAttribute("frame")) {
-                    ctx.strokeStyle = elem.getAttribute("frame");
-                }
-                else if (elem.hasAttribute("fill")) {
-                    ctx.fillStyle = elem.getAttribute("fill");
-                }
                 break;
             case "rect":
-                var t = parseInt(elem.getAttribute("t")),
-                    l = parseInt(elem.getAttribute("l")),
-                    b = parseInt(elem.getAttribute("b")),
-                    r = parseInt(elem.getAttribute("r")),
-                    w = parseInt(elem.getAttribute("w"));
-                var rx = parseInt(elem.getAttribute("rx") ?? 0),
-                    ry = parseInt(elem.getAttribute("ry") ?? 0);
+                var rect = getRect(elem);
                 ctx.beginPath();
-                if (ry > 0) {
-                    ctx.roundRect(l, t, (r - l), (b - t), ry);
+                if (rect.radius > 0) {
+                    ctx.roundRect(rect.left, rect.top, rect.width, rect.height, rect.radius);
                 }
                 else {
-                    ctx.rect(l, t, (r - l), (b - t));
+                    ctx.rect(rect.left, rect.top, rect.width, rect.height);
                 }
                 ctx.fill();
-                ctx.stroke();
+                if (rect.stroke) {
+                    ctx.lineWidth = rect.stroke;
+                    ctx.stroke();
+                }
                 break;
             case "oval":
                 break;
             case "arc":
-                // <arc t="1448" l="437" b="1565" r="548" w="1" start="180" angle="90"></arc>
-                var t = parseInt(elem.getAttribute("t")),
-                    l = parseInt(elem.getAttribute("l")),
-                    b = parseInt(elem.getAttribute("b")),
-                    r = parseInt(elem.getAttribute("r")),
-                    w = parseInt(elem.getAttribute("w"));
-                var rx = (r - l) / 2,
-                    ry = (b - t) / 2,
-                    cx = l + rx,
-                    cy = t + ry;
+                var rect = getRect(elem);
+                // QuickDraw arcs were 0deg on positive-y, canvas is positive-x.
                 var start = parseInt(elem.getAttribute("start")) - 90,
-                    extent = parseInt(elem.getAttribute("angle"));
+                    extent = parseInt(elem.getAttribute("extent"));
+                var rx = rect.width / 2,
+                    ry = rect.height / 2;
                 ctx.beginPath();
                 if (equalish(rx, ry)) {
-                    ctx.moveTo(cx, cy);
-                    ctx.arc(cx, cy, rx, deg2rad(start), deg2rad(start + extent));
-                    ctx.lineTo(cx, cy);
+                    ctx.moveTo(rect.cx, rect.cy);
+                    ctx.arc(rect.cx, rect.cy, rx, deg2rad(start), deg2rad(start + extent));
+                    ctx.lineTo(rect.cx, rect.cy);
                 }
                 else {
-                    ctx.ellipse(l + rx, t + ry, rx, ry, 0, deg2rad(start), deg2rad(start + extent));
+                    ctx.ellipse(rect.cx, rect.cy, rx, ry, 0, deg2rad(start), deg2rad(start + extent));
                 }
                 ctx.fill();
-                ctx.stroke();
+                if (rect.stroke) {
+                    ctx.lineWidth = rect.stroke;
+                    ctx.stroke();
+                }
                 break;
             case "script":
                 break;
