@@ -228,6 +228,7 @@ class DrawContext:
             if (
                 tag == "arc"
                 and not self.wrote_text
+                and self.elements
                 and self.elements[-1].startswith("  <arc")
                 and attrs["start"] == self.save_arc_start
                 and attrs["extent"] == self.save_arc_extent
