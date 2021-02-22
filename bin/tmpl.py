@@ -1,75 +1,46 @@
-from rsrc_tools.helpers import *
+#!/usr/bin/env python3
+
+import sys
+import struct
+
+def bytes_to_int(some_bytes):
+    return struct.unpack('>i', some_bytes)[0]
+
+def bytes_to_string(some_bytes):
+    return some_bytes.decode("macintosh")
+
+def bytes_to_short(some_bytes):
+    return struct.unpack('>h', some_bytes)[0]
+
+def bytes_to_shorter(byte):
+    shorter = b"\x00%b" % byte
+    return struct.unpack('>h', shorter)[0]
 
 
-def tiny_int_from_single_byte(byte):
-    tiny_int = b"\x00%b" % byte
-    return struct.unpack('>h', tiny_int)[0]
-
-def tiny_int_from_two_bytes(the_bytes):
-    return struct.unpack('>h', the_bytes)[0]
-
-
-def parse(resources):
-    if 'TMPL' not in resources:
-        print("No TMPL for these resources")
-        return {}
-    
-    tmpl_res = resources['TMPL']
-    tmpls = tmpl_res.keys()
-
+def parse(tmpl, data):
     result = {}
-    result["TMPL"] = {}
-    # each TMPL resource defines another resource type
-    for key in tmpls:
-        res_name = tmpl_res[key]['name']
 
-        if res_name not in resources:
-            # skip cus we don't have this resource type
-            continue
+    structure = []
+    # we consume all the template values into a structure 
+    # to use later
+    while len(tmpl) > 1:
+        # name is a pascal string with no padding
+        namelength = tmpl[0]
+        tmpl = tmpl[1:]
+        dtname = (tmpl[0:namelength]).decode('macroman')
+        tmpl = tmpl[namelength:]
+        # always a TNAM, or four character string
+        restype = (tmpl[:4]).decode('macroman')
+        tmpl = tmpl[4:]
 
-        if res_name == "BSPT" or res_name == "HSND":
-            # skip this cus we have a different 
-            # converter for that.
-            continue
+        structure.append({
+            'name': dtname,
+            'type': restype
+            })
 
-        tmpl = tmpl_res[key]['data']
-
-        structure = []
-        # we consume all the template values into a structure 
-        # to use later
-        while len(tmpl) > 1:
-            # name is a pascal string with no padding
-            namelength = tmpl[0]
-            tmpl = tmpl[1:]
-            dtname = (tmpl[0:namelength]).decode('macroman')
-            tmpl = tmpl[namelength:]
-            # always a TNAM, or four character string
-            restype = (tmpl[:4]).decode('macroman')
-            tmpl = tmpl[4:]
-
-            structure.append({
-                'name': dtname,
-                'type': restype
-                })
-
-        result["TMPL"][res_name] = structure
-        # print(structure)
-        # now we go open the resources that we can find
-        # with these templates and attempt to parse them
-        result[res_name] = {}
-        the_res = resources[res_name]
-        for key in the_res.keys():
-            result[res_name][key] = {}
-            instance = the_res[key]
-            name = instance["name"]
-            data = instance["data"]
-
-            _, stuff = read_data_with_template(data, structure)
-            result[res_name][key] = stuff
-        # return a big dict with both the TMPL and anything else
-        # we found to parse
-        # print(result)
-    return result
+    _, stuff = read_data_with_template(data, structure)
+    
+    return stuff
 
 def read_data_with_template(data, structure):
     # this is an awful recursive thing to parse the list types available in ResEdit
@@ -154,7 +125,7 @@ def get_value(the_data, dtype):
     # padded to even length
     if dtype == "ESTR":
         eat_one_more_byte = False
-        length = tiny_int_from_single_byte(the_data[:1])
+        length = bytes_to_shorter(the_data[:1])
         # if we have an EVEN number of charcters, there is
         # a padding byte on the end, because the length byte
         # counts as one--so we need to eat an extra byte afterwards
@@ -201,3 +172,14 @@ def get_value(the_data, dtype):
     # just return everything as bytes
     if dtype == "HEXD":
         return (None, the_data)
+
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 3:
+        print("Usage: tmpl.py <TMPL.r> <RSRC.r>")  
+        sys.exit(1)
+    else:
+        with open(sys.argv[1], "rb") as tmpl_file:
+            with open(sys.argv[2], "rb") as rsrc_file:
+                print(parse(tmpl_file.read(), rsrc_file.read()))

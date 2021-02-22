@@ -19,6 +19,19 @@ const canvas2D = document.getElementById("map2D");
 let camera, scene, renderer, wallMesh;
 let overX = 0, overY = 100, overZ = 0;
 
+let unique_value = 30000;
+
+let skyColors, groundColor;
+
+let defaultscript = "";
+let variables = {};
+let builtins = {
+    "@start": 1234,
+    "@end": 1235
+}
+
+let lastWall;
+
 
 function deg2rad(d) {
     return (Math.PI / 180.0) * d;
@@ -39,11 +52,118 @@ function handleColor(ctx, draw, elem) {
     }
 }
 
-function handleScript(ctx, elem) {
-    var wa = /wa\s*=\s*([\d\.\-]+)/.exec(elem.textContent);
-    var wallHeight = /wallHeight\s*=\s*([\d\.\-]+)/.exec(elem.textContent);
-    if (wa) ctx.wa = parseFloat(wa[1]);
-    if (wallHeight) ctx.wallHeight = parseFloat(wallHeight[1]);
+function is_defined(v) {
+    if (variables[v]) return true;
+    else return false;
+}
+
+function undefine(v) {
+    if (variables[v]) delete variables[v];
+}
+
+function consume_variable(v) {
+    
+}
+
+function variable(v) {
+    if (is_defined(v)) {
+        return avarluate(variables[v]);
+    }
+    else {
+        console.log(v + " - symbol was NOT resolved");
+        return 0;
+    }
+}
+
+function builtin(msg) {
+    if(builtins[msg]) return builtins[msg];
+    else return 999999;
+}
+
+function avarluate(expr) {
+    // num
+    if (!isNaN(expr)) return expr;
+    // str
+    if (typeof expr === 'string' || expr instanceof String) return expr;
+    // name
+    if (expr["name"]) variable(expr["name"])
+    // builtin
+    if (expr["builtin"]) return builtin(expr["builtin"]);
+    // array of terms
+    if (Array.isArray(expr)) {
+        return eval(expr.reduce((res, a) => {
+            return res + " " + avarluate(a);
+        }, ""));
+    }
+
+}
+
+function handleObject(ctx, ins) {
+    switch(ins["class"]) {
+        case "Ramp":
+            ramp(ctx, ins);
+            break;
+        case "WallDoor":
+            if (ins["midYaw"]) {
+                lastWall.rotateY(deg2rad(avarluate(ins["midYaw"])));
+            }
+            break;
+    }
+}
+
+
+function handleScript(ctx, data) {
+    //console.log(elem.textContent);
+    if(data["instructions"]){
+        data["instructions"].forEach((ins) => {
+            switch(ins["type"]) {
+                case "declaration":
+                    variables[ins["variable"]] = ins["expr"];
+                    break;
+                case "object":
+                    handleObject(ctx, ins);
+                    break;
+                case "unique":
+                    ins["tokens"].forEach((tk) => {
+                        unique_value += 1;
+                        variables[tk] = unique_value;
+                    })
+                    break;
+                case "adjust":
+                    let name = ins["class"];
+                    // SkyColor or GroundColor
+                    if (name == "SkyColor") {
+                        skyColors = [
+                            ctx.frameColor,
+                            ctx.fillColor
+                        ];
+                    }
+                    if (name == "GroundColor") {
+                        groundColor = ctx.fillColor;
+                    }
+                    break;
+                case "enum":
+                    var start = ins["start"];
+                    ins["tokens"].forEach((tk) => {
+                        variables[tk] = start;
+                        start += 1;
+                    });
+                    break;
+                case "set_unique_start":
+                    unique_value = ins["start"];
+                    break;
+            }
+        })
+    }
+
+    if(is_defined("wa")) {
+        ctx.wa = variable("wa");
+        undefine("wa");
+    }
+    if(is_defined("wallHeight")) {
+        ctx.wallHeight = variable("wallHeight");
+        undefine("wallHeight");
+    }
 }
 
 function getRect(elem) {
@@ -91,14 +211,10 @@ function solveOrientation(x, y, h) {
     return solved;
 }
 
-function checkRamp(ctx, elem) {
-    if (!elem.textContent.includes("Ramp")) return;
-
-    var match = /deltaY\s*=\s*([\d\.\-]+)/m.exec(elem.textContent);
-    var deltaY = match ? parseFloat(match[1]) : 1;
-
-    match = /\by\s*=\s*([\d\.\-]+)/m.exec(elem.textContent);
-    var height = parseFloat(match[1]); // + baseHeight
+function ramp(ctx, obj) {
+    var deltaY = 0;
+    if (obj["deltaY"]) deltaY = obj["deltaY"];
+    var height = obj["y"]
 
     var heading = ctx.lastArcAngle / 360;
 
@@ -195,17 +311,11 @@ function redraw() {
                     wall.position.set(cx, cy, cz);
                     wall.scale.set(sx, sy, sz);
 
-                    // This is cheating...
-                    var match = /midYaw\s*=\s*([\d\.\-]+)/.exec(elem.textContent);
-                    var midYaw = match ? parseFloat(match[1]) : 0;
-                    if (midYaw) {
-                        wall.rotateY(deg2rad(midYaw));
-                    }
-
                     wall.material = new THREE.MeshLambertMaterial({
                         color: ctx.fillColor,
                         side: THREE.DoubleSide
                     });
+                    lastWall = wall;
                     ctx.wa = 0;
                     scene.add(wall);
                 }
@@ -242,8 +352,9 @@ function redraw() {
             default:
                 console.log("Unknown map element", elem);
         }
-        checkRamp(ctx, elem);
-        handleScript(ctx, elem);
+
+        let data = AvaraScriptParser.parse(elem.textContent);
+        handleScript(ctx, data);
     });
     overX = (minX + maxX) / 2;
     overY = maxY;
@@ -307,6 +418,7 @@ function init() {
     preview3D.appendChild(renderer.domElement);
 }
 
+
 function animation(time) {
     camera.position.x = overX + (Math.cos(time / 3000) * 100);
     camera.position.y = overY + 50;
@@ -322,8 +434,12 @@ source.addEventListener("change", (event) => {
 loadBSP(400).then((mesh) => {
     wallMesh = mesh;
     init();
-    fetch("grimoire.alf").then(response => response.text()).then((data) => {
-        source.value = data;
-        redraw();
+    fetch("default.avarascript").then(r1 => r1.text()).then((d1) => {
+        let data = AvaraScriptParser.parse(d1);
+        handleScript({}, data);
+        fetch("grimoire.alf").then(r2 => r2.text()).then((d2) => {
+            source.value = d2;
+            redraw();
+        });
     });
 });

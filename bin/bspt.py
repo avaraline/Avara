@@ -1,16 +1,233 @@
-from rsrc_tools.helpers import *
-from rsrc_tools.bspt.datatypes import *
+#!/usr/bin/env python3
+
+import sys
+import struct
 from itertools import zip_longest
 import json
 
+try:
+    import triangle
+    import triangle.plot
+    import numpy as np
+except ImportError:
+    print("triangle, numpy not found (pip install triangle numpy)")
+    sys.exit(1)
+
+
 DEBUG_ADDED_VERTS = False
+
+if DEBUG_ADDED_VERTS:
+    try:
+        import matplotlib.pyplot as plt
+    except ImportError:
+        print("added face debug is enabled but matplotlib not found (pip install matplotlib)")
+        sys.exit(1)
+
+
+
+
+def bytes_to_int(some_bytes):
+    return struct.unpack('>i', some_bytes)[0]
+
+
+def bytes_to_short(some_bytes):
+    return struct.unpack('>h', some_bytes)[0]
+
+
+def bytes_to_unsigned_short(some_bytes):
+    return struct.unpack('>H', some_bytes)[0]
+
+
+# def bytes_to_string(some_bytes):
+#    return struct.unpack('>' + str(len(some_bytes)) + 's', some_bytes)[0]
+# in python 3, we can just decode the string with "macintosh" encoding
+def bytes_to_string(some_bytes):
+    return some_bytes.decode("macintosh")
+
+
+def byte_to_unsigned_tiny_int(byte):
+    # in python 3, APPARENTLY slicing off
+    # a single byte creates an int object
+    # so we don't need to do anything here
+    return byte
+    # tiny_int = b"\x00%b" % bytes(byte)[:1]
+    # return struct.unpack('>h', tiny_int)[0]
+
+
+def byte_to_signed_tiny_int(byte):
+    num = byte_to_unsigned_tiny_int(byte)
+    if num > 127:
+        return 0 - num
+    return num
+
+
+def bytes_to_long(some_bytes):
+    return struct.unpack('>l', some_bytes)[0]
+
+
+def bytes_to_unsigned_long(some_bytes):
+    return struct.unpack('>L', some_bytes)[0]
+
+
+def bytes_to_fixed(some_bytes):
+    # "Fixed" numbers in avara are stored
+    # in a 8 bit long type, two unsigned ints
+    assert(len(some_bytes) == 4)
+    whole = bytes_to_short(some_bytes[0:2])
+    # maximum unsigned 8-bit int is 65535
+    frac = bytes_to_unsigned_short(some_bytes[2:4]) / 65535.0
+    # print("Whole: %d Frac: %f" % (whole, frac))
+    return whole + frac
+
+
+def chunks(l, n):
+    for i in range(0, len(l), n):
+        yield l[i:i + n]
+
+
+def list_of_fixedsize_recs(data, offset, size, count, the_class):
+    list_end = offset + (size * count)
+    list_data = data[offset:list_end]
+    return [the_class(x) for x in chunks(list_data, size)]
+
+
+
+UniquePointLength = 16
+
+
+class UniquePoint():
+    size = 16
+
+    def __init__(self, raw_data=None):
+        if raw_data is None:
+            self.x = 0
+            self.y = 0
+            self.z = 0
+            self.w = 0
+        else:
+            assert(len(raw_data) == UniquePointLength)
+            self.x = bytes_to_fixed(raw_data[0:4])
+            self.y = bytes_to_fixed(raw_data[4:8])
+            self.z = bytes_to_fixed(raw_data[8:12])
+            self.w = bytes_to_fixed(raw_data[12:16])
+
+    def __repr__(self):
+        tup = (self.x, self.y, self.z, self.w)
+        return "UniquePoint(%f %f %f %f)" % tup
+
+    def serialize(self):
+        return self.as_list_4()
+
+    def as_list_3(self):
+        return [self.x, self.y, self.z]
+
+    def as_list_4(self):
+        return [self.x, self.y, self.z, self.w]
+
+
+NormalRecordLength = 8
+
+
+class NormalRecord():
+    def __init__(self, raw_data):
+        assert(len(raw_data) == NormalRecordLength)
+        self.normal_index = bytes_to_unsigned_short(raw_data[0:2])
+        self.base_point_index = bytes_to_unsigned_short(raw_data[2:4])
+        self.color_index = bytes_to_unsigned_short(raw_data[4:6])
+        self.visibility_flags = bytes_to_unsigned_short(raw_data[6:8])
+
+    def __repr__(self):
+        tup = (self.normal_index, self.base_point_index, self.color_index, self.visibility_flags)
+        return "NormalRecord (%d %d %d %d)" % tup
+
+    def serialize(self):
+        return [
+            self.normal_index,
+            self.base_point_index,
+            self.color_index,
+            self.visibility_flags
+        ]
+
+
+EdgeRecordLength = 4
+
+
+class EdgeRecord():
+    def __init__(self, raw_data):
+        assert(len(raw_data) == EdgeRecordLength)
+        self.a = bytes_to_unsigned_short(raw_data[0:2])
+        self.b = bytes_to_unsigned_short(raw_data[2:4])
+
+    def __repr__(self):
+        tup = (self.a, self.b)
+        return "EdgeRecord (%d %d)" % tup
+
+    def serialize(self):
+        return [self.a, self.b]
+
+
+PolyRecordLength = 16
+
+
+class PolyRecord():
+    def __init__(self, raw_data):
+        assert(len(raw_data) == PolyRecordLength)
+        self.first_edge = bytes_to_unsigned_short(raw_data[0:2])
+        self.edge_count = bytes_to_unsigned_short(raw_data[2:4])
+        self.normal_index = bytes_to_unsigned_short(raw_data[4:6])
+        self.front_poly = bytes_to_unsigned_short(raw_data[6:8])
+        self.back_poly = bytes_to_unsigned_short(raw_data[8:10])
+        self.visibility = bytes_to_unsigned_short(raw_data[10:12])
+        self.reserved = bytes_to_unsigned_long(raw_data[12:16])
+
+    def __repr__(self):
+        tup = (self.first_edge, self.edge_count, self.normal_index, self.front_poly, self.back_poly, self.visibility)
+        return "PolyRecord (%d %d %d %d %d %d)" % tup
+
+    def serialize(self):
+        return [
+            self.first_edge,
+            self.edge_count,
+            self.normal_index,
+            self.front_poly,
+            self.back_poly,
+            self.visibility,
+            self.reserved
+        ]
+
+
+ColorRecordLength = (32 * 2) + 4
+
+
+class ColorRecord():
+    def __init__(self, raw_data):
+        assert(len(raw_data) == ColorRecordLength)
+        self.color_long = bytes_to_long(raw_data[0:4])
+        # convert to RGBA float color format
+        self.color = [
+            ((self.color_long >> 8) & 0xff) / 254.0,
+            ((self.color_long >> 16) & 0xff) / 254.0,
+            ((self.color_long >> 24) & 0xff) / 254.0,
+            (self.color_long & 0xff) / 254.0
+        ]
+        # colorCache[32] (COLORCACHESIZE)
+        # this is not useful to most people because
+        # it was used to store intermediate shades
+        # of a color when shading it with white light
+        self.color_cache = [bytes_to_unsigned_short(x)
+                            for x in chunks(raw_data[4:ColorRecordLength], 2)]
+
+    def __repr__(self):
+        tup = (self.color, self.color_cache)
+        return "ColorRecord (%s %s)" % tup
+
+    def serialize(self):
+        return self.color
+
 
 class BSP(object):
     # https://github.com/jmunkki/Avara/blob/master/src/Libraries/BSP/BSPResStructures.h
-    def __init__(self, bsp_dict):
-        self.res_id = ""
-        self.name = bsp_dict['name']
-        raw_data = bsp_dict['data']
+    def __init__(self, raw_data):
 
         self.ref_count = bytes_to_unsigned_short(raw_data[0:2])
         self.lock_count = bytes_to_unsigned_short(raw_data[2:4])
@@ -122,8 +339,6 @@ class BSP(object):
 
     def serialize(self, int_colors=False):
         d = {}
-        d["name"] = self.name
-        d["res_id"] = self.res_id
         d["enclosure_point"] = self.enclosure_point.serialize()
         d["enclosure_radius"] = self.enclosure_radius
         d["min_bounds"] = self.min_bounds.serialize()
@@ -138,15 +353,6 @@ class BSP(object):
             d["colors"] = serialize_list(self.colors)
         d["vectors"] = serialize_list(self.vectors)
         d["unique_edges"] = serialize_list(self.unique_edges)
-
-        try:
-            import triangle
-            import triangle.plot
-            import matplotlib.pyplot as plt
-            import numpy as np
-        except ImportError:
-            print("triangle, matplotlib and/or numpy libraries not found, will not output triangulations")
-            return d
 
         d["triangles_poly"] = list()
         d["triangles_verts_poly"] = list()
@@ -193,26 +399,22 @@ class BSP(object):
 
             face_points = np.array([flatten_3to2(x) for x in points])
 
-            if (self.name == "Subway" or self.name == "EURO"):
-                # uhh yeah.
-                # this is for a shape
-                # that crashed the triangulator
-                continue
-
             num_face_points = len(face_points)
             # print(F"face_points length: {num_face_points}")
             if (num_face_points < 3):
                 # can't triangulate less than 3 points
                 continue
-            #if (num_face_points == 3):
-                # print(verts)
+            """
+            if (num_face_points == 3):
+                print(verts)
                 # 3 points don't need to get passed to triangulator
-            #    n = len(d["triangles_verts_poly"])
-            #    d["triangles_poly"].append([[0, 1, 2]])
-            #    d["triangles_verts_poly"].append(verts)
-            #    d["triangles_poly"].append([[2, 1, 0]])
-            #    d["triangles_verts_poly"].append(verts)
-            #    continue
+                n = len(d["triangles_verts_poly"])
+                d["triangles_poly"].append([[0, 1, 2]])
+                d["triangles_verts_poly"].append(verts)
+                d["triangles_poly"].append([[2, 1, 0]])
+                d["triangles_verts_poly"].append(verts)
+                continue
+            """
 
             # create input for triangle library
             the_dict = dict(vertices=face_points, segments=edges)
@@ -250,8 +452,9 @@ class BSP(object):
                 v1 = rayOrigin - point1
                 v2 = point2 - point1
                 v3 = np.array([-rayDirection[1], rayDirection[0]])
-                t1 = np.cross(v2, v1) / np.dot(v2, v3)
-                t2 = np.dot(v1, v3) / np.dot(v2, v3)
+                divisor = np.dot(v2, v3)
+                t1 = np.cross(v2, v1) / divisor if divisor != 0 else 10000
+                t2 = np.dot(v1, v3) / divisor if divisor != 0 else 10000
                 if t1 >= 0.0 and t2 >= 0.0 and t2 <= 1.0:
                     return [rayOrigin + t1 * rayDirection]
                 return []
@@ -303,7 +506,7 @@ class BSP(object):
 
         return d
 
-    def avara_format(self):
+    def avara_format(self, wind_backwards=False):
         d = self.serialize(int_colors=True)
         out = {
             'points': [p[:3] for p in d['points']],
@@ -323,18 +526,19 @@ class BSP(object):
                 color = d['colors'][color_idx]
                 tris = d['triangles_poly'][idx]
                 tri_points = d['triangles_verts_poly'][idx]
-                """
-                out['polys'].append({
-                    'normal': [-x for x in normal],
-                    'color': color,
-                    'tris': [[tri_points[i] for i in t][::-1] for t in tris],
-                })
-                """
-                out['polys'].append({
-                    'normal': normal,
-                    'color': color,
-                    'tris': [[tri_points[i] for i in t] for t in tris],
-                })
+                if wind_backwards:
+                    
+                    out['polys'].append({
+                        'normal': [-x for x in normal],
+                        'color': color,
+                        'tris': [[tri_points[i] for i in t][::-1] for t in tris],
+                    })
+                else:
+                    out['polys'].append({
+                        'normal': normal,
+                        'color': color,
+                        'tris': [[tri_points[i] for i in t] for t in tris],
+                    })
         except IndexError:
             print("Invalid shape data")    
         return json.dumps(out, indent=2, sort_keys=True)
@@ -357,5 +561,14 @@ def parse(resource):
 def bsp2json(data, name=''):
     bsp = BSP({'data': data, 'name': name})
     return bsp.avara_format()
+
+
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print("Usage: bspt.py <BSPT.r>")
+        sys.exit(1)
+    else:
+        with open(sys.argv[1], "rb") as input_file:
+            print(BSP(input_file.read()).avara_format())
 
 
