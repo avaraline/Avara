@@ -682,6 +682,15 @@ void CAvaraGame::SendStartCommand() {
 static Boolean takeShot = false;
 
 void CAvaraGame::ReadGamePrefs() {
+    moJoOptions = 0;
+    /*
+    if (itsApp->Boolean(kJoystickModeTag)) {
+        moJoOptions += kJoystickMode;
+    }
+    */
+    if (itsApp->Boolean(kInvertYAxisTag)) {
+        moJoOptions += kFlipAxis;
+    }
     sensitivity = itsApp->Number(kMouseSensitivityTag);
     latencyTolerance = gApplication->Number(kLatencyToleranceTag);
     AdjustFrameTime();
@@ -907,22 +916,22 @@ void CAvaraGame::ViewControl() {
 bool CAvaraGame::canBeSpectated(CAbstractPlayer *player) {
     if(player == NULL)
         return false;
-    
+
     if(player->isInLimbo == false) {
         return true;
     }
-    
+
     if(player == GetLocalPlayer() && player->scoutView == true && player->lives == 0) {
         return true;
     }
-    
+
     return false;
 }
 
 void CAvaraGame::SpectateNext() {
     if(spectatePlayer == NULL)
         spectatePlayer = GetLocalPlayer();
-    
+
     CAbstractPlayer *nextPlayer = NULL;
     CAbstractPlayer *firstPlayer = NULL;
     CAbstractPlayer *currentPlayer = NULL;
@@ -941,7 +950,7 @@ void CAvaraGame::SpectateNext() {
             }
         }
     }
-    
+
     spectatePlayer = nextPlayer;
     if(spectatePlayer == NULL)
         spectatePlayer = firstPlayer;
@@ -968,7 +977,7 @@ void CAvaraGame::SpectatePrevious() {
             }
         }
     }
-    
+
     if(!found && previousPlayer != NULL)
         spectatePlayer = previousPlayer;
 }
@@ -977,7 +986,7 @@ CPlayerManager *CAvaraGame::FindPlayerManager(CAbstractPlayer *thePlayer) {
     for (int i = 0; i < kMaxAvaraPlayers; i++)
         if(itsNet->playerTable[i] != NULL && itsNet->playerTable[i]->GetPlayer() == thePlayer)
             return itsNet->playerTable[i];
-    
+
     return NULL;
 }
 
@@ -1007,7 +1016,7 @@ void CAvaraGame::Render(NVGcontext *ctx) {
         AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
         hud->Render(itsView, ctx);
-        AvaraGLSetDepthTest(true);        
+        AvaraGLSetDepthTest(true);
     }
 }
 
@@ -1052,7 +1061,7 @@ void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange, const char*
         }
         gApplication->Set(kLatencyToleranceTag, latencyTolerance);
         SDL_Log("*** LT set to %ld\n", latencyTolerance);
-        
+
         if (slowPlayer != nullptr) {
             std::ostringstream oss;
             std::time_t t = std::time(nullptr);
@@ -1083,7 +1092,7 @@ void CAvaraGame::AdjustFrameTime() {
         1.00,  //  0  64            0            16   <-- most playable (LAN)
         1.00,  //  1  64            64           16   <-- good internet
         1.00,  //  2  64            128          16
-        1.00,  //  3  64            192          16 
+        1.00,  //  3  64            192          16
         1.00,  //  4  64            256          16   <-- somewhat playable, laggy
         1.25,  //  5  80            400          13   <-- barely playable / begin recovering
         1.50,  //  6  96            576          10   <-- hope to never see LT > 5
@@ -1104,7 +1113,7 @@ long CAvaraGame::TimeToFrameCount(long timeInMsec) {
 long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     // Jump forward to the next full period.
     // For example, if we are changing latencies such that we start with 48 frames/period
-    // and we're moving to 60 frames/period, and we're on frame 48, we want to 
+    // and we're moving to 60 frames/period, and we're on frame 48, we want to
     // move forward to frame 120 and NOT frame 60.
     long periodFrames = TimeToFrameCount(period);
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);

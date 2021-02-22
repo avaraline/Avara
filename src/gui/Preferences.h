@@ -9,6 +9,8 @@ using json = nlohmann::json;
 
 #define kYonPrefTag "shortYon"
 #define kMouseSensitivityTag "mouseSensitivity"
+// #define kJoystickModeTag "joystickMode"
+#define kInvertYAxisTag "invertYAxis"
 #define kLatencyToleranceTag "latencyTolerance"
 #define kHullTypeTag "hull"
 
@@ -50,6 +52,8 @@ using json = nlohmann::json;
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
     {kYonPrefTag, 0},
+    // {kJoystickModeTag, false},
+    {kInvertYAxisTag, false},
     {kMouseSensitivityTag, 0},
     {kLatencyToleranceTag, 1},
     {kHullTypeTag, 0}, // 0 = light, 1 = medium, 2 = heavy
@@ -143,7 +147,7 @@ static void WritePrefs(json prefs) {
     try {
         std::ostringstream oss;
         oss << std::setw(4) << prefs << std::endl;
-        
+
         std::ofstream out(PrefPath());
         out << oss.str();
     }
