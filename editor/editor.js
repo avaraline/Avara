@@ -58,14 +58,10 @@ function is_defined(name) {
     else return false;
 }
 
-function undefine(name) {
-    if (variables[name]) delete variables[name];
-}
-
 function set_variable(name, value) {
-    if (variables[name]) variables[name]['expr'] = value;
+    if (variables[name]) variables[name]["expr"] = value;
     else {
-        variables[name] = {'idx': var_idx, 'expr': value};
+        variables[name] = {"idx": var_idx, "expr": value};
         var_idx += 1;
     }
 }
@@ -76,7 +72,7 @@ function get_variable(v) {
     }
     else {
         console.log(v + " - symbol was NOT resolved");
-        return 0;
+        return undefined;
     }
 }
 
@@ -94,7 +90,7 @@ function avarluate(atom) {
     // num
     if (!isNaN(atom)) return atom;
     // str
-    if (typeof atom === 'string' || atom instanceof String) return atom;
+    if (typeof atom === "string" || atom instanceof String) return atom;
     // name
     if (atom["name"]) get_variable(atom["name"])
     // index
@@ -177,11 +173,11 @@ function handleScript(ctx, data) {
 
     if(is_defined("wa")) {
         ctx.wa = get_variable("wa");
-        undefine("wa");
+        set_variable("wa", 0);
     }
     if(is_defined("wallHeight")) {
         ctx.wallHeight = get_variable("wallHeight");
-        undefine("wallHeight");
+        set_variable("wallHeight", 0);
     }
 }
 
