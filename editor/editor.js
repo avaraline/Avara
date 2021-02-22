@@ -25,6 +25,7 @@ let unique_value = 30000;
 
 let defaultscript = "";
 let variables = {};
+let var_idx =  0;
 let builtins = {
     "@start": 1234,
     "@end": 1235
@@ -52,22 +53,26 @@ function handleColor(ctx, draw, elem) {
     }
 }
 
-function is_defined(v) {
-    if (variables[v]) return true;
+function is_defined(name) {
+    if (variables[name]) return true;
     else return false;
 }
 
-function undefine(v) {
-    if (variables[v]) delete variables[v];
+function undefine(name) {
+    if (variables[name]) delete variables[name];
 }
 
-function consume_variable(v) {
-    
+function set_variable(name, value) {
+    if (variables[name]) variables[name]['expr'] = value;
+    else {
+        variables[name] = {'idx': var_idx, 'expr': value};
+        var_idx += 1;
+    }
 }
 
-function variable(v) {
+function get_variable(v) {
     if (is_defined(v)) {
-        return avarluate(variables[v]);
+        return avarluate(variables[v]["expr"]);
     }
     else {
         console.log(v + " - symbol was NOT resolved");
@@ -75,23 +80,28 @@ function variable(v) {
     }
 }
 
-function builtin(msg) {
+function index(msg) {
     if(builtins[msg]) return builtins[msg];
-    else return 999999;
+    var varname = msg.slice(1);
+    if(variables[varname]) return variables[varname]["idx"];
+    else {
+        set_variable(varname, 0);
+        return variables[varname]["idx"];
+    }
 }
 
-function avarluate(expr) {
+function avarluate(atom) {
     // num
-    if (!isNaN(expr)) return expr;
+    if (!isNaN(atom)) return atom;
     // str
-    if (typeof expr === 'string' || expr instanceof String) return expr;
+    if (typeof atom === 'string' || atom instanceof String) return atom;
     // name
-    if (expr["name"]) variable(expr["name"])
-    // builtin
-    if (expr["builtin"]) return builtin(expr["builtin"]);
+    if (atom["name"]) get_variable(atom["name"])
+    // index
+    if (atom["index"]) return index(atom["index"]);
     // array of terms
-    if (Array.isArray(expr)) {
-        return eval(expr.reduce((res, a) => {
+    if (Array.isArray(atom)) {
+        return eval(atom.reduce((res, a) => {
             return res + " " + avarluate(a);
         }, ""));
     }
@@ -118,15 +128,15 @@ function handleScript(ctx, data) {
         data["instructions"].forEach((ins) => {
             switch(ins["type"]) {
                 case "declaration":
-                    variables[ins["variable"]] = ins["expr"];
+                    set_variable(ins["variable"], ins["expr"]);
                     break;
                 case "object":
                     handleObject(ctx, ins);
                     break;
                 case "unique":
                     ins["tokens"].forEach((tk) => {
+                        set_variable(tk, unique_value);
                         unique_value += 1;
-                        variables[tk] = unique_value;
                     })
                     break;
                 case "adjust":
@@ -154,7 +164,7 @@ function handleScript(ctx, data) {
                 case "enum":
                     var start = ins["start"];
                     ins["tokens"].forEach((tk) => {
-                        variables[tk] = start;
+                        set_variable(tk, start);
                         start += 1;
                     });
                     break;
@@ -166,11 +176,11 @@ function handleScript(ctx, data) {
     }
 
     if(is_defined("wa")) {
-        ctx.wa = variable("wa");
+        ctx.wa = get_variable("wa");
         undefine("wa");
     }
     if(is_defined("wallHeight")) {
-        ctx.wallHeight = variable("wallHeight");
+        ctx.wallHeight = get_variable("wallHeight");
         undefine("wallHeight");
     }
 }

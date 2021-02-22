@@ -169,10 +169,10 @@ AvaraScriptParser = /*
         peg$c25 = /^[a-zA-Z[\]\\|{}_0-9.]/,
         peg$c26 = peg$classExpectation([["a", "z"], ["A", "Z"], "[", "]", "\\", "|", "{", "}", "_", ["0", "9"], "."], false, false),
         peg$c27 = function() { return {"name": text()} },
-        peg$c28 = peg$otherExpectation("builtin"),
+        peg$c28 = peg$otherExpectation("index of name"),
         peg$c29 = "@",
         peg$c30 = peg$literalExpectation("@", false),
-        peg$c31 = function() { return {"builtin": text()} },
+        peg$c31 = function() { return {"index": text()} },
         peg$c32 = peg$otherExpectation("declaration"),
         peg$c33 = "=",
         peg$c34 = peg$literalExpectation("=", false),
@@ -853,8 +853,8 @@ AvaraScriptParser = /*
       return s0;
     }
 
-    function peg$parsebuiltin() {
-      var s0, s1, s2, s3, s4;
+    function peg$parseindex() {
+      var s0, s1, s2, s3, s4, s5;
 
       peg$silentFails++;
       s0 = peg$currPos;
@@ -867,21 +867,30 @@ AvaraScriptParser = /*
         if (peg$silentFails === 0) { peg$fail(peg$c30); }
       }
       if (s2 !== peg$FAILED) {
-        s3 = peg$currPos;
-        peg$silentFails++;
-        s4 = peg$parsekeywords();
-        peg$silentFails--;
-        if (s4 === peg$FAILED) {
-          s3 = void 0;
-        } else {
-          peg$currPos = s3;
-          s3 = peg$FAILED;
+        s3 = peg$parse_();
+        if (s3 === peg$FAILED) {
+          s3 = null;
         }
         if (s3 !== peg$FAILED) {
-          s4 = peg$parsename();
+          s4 = peg$currPos;
+          peg$silentFails++;
+          s5 = peg$parsekeywords();
+          peg$silentFails--;
+          if (s5 === peg$FAILED) {
+            s4 = void 0;
+          } else {
+            peg$currPos = s4;
+            s4 = peg$FAILED;
+          }
           if (s4 !== peg$FAILED) {
-            s2 = [s2, s3, s4];
-            s1 = s2;
+            s5 = peg$parsename();
+            if (s5 !== peg$FAILED) {
+              s2 = [s2, s3, s4, s5];
+              s1 = s2;
+            } else {
+              peg$currPos = s1;
+              s1 = peg$FAILED;
+            }
           } else {
             peg$currPos = s1;
             s1 = peg$FAILED;
@@ -1459,7 +1468,7 @@ AvaraScriptParser = /*
 
       s0 = peg$parsestr();
       if (s0 === peg$FAILED) {
-        s0 = peg$parsebuiltin();
+        s0 = peg$parseindex();
         if (s0 === peg$FAILED) {
           s0 = peg$parsename();
           if (s0 === peg$FAILED) {

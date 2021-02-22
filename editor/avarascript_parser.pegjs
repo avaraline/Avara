@@ -22,9 +22,9 @@ name "variable name, starting with a letter" =
     (!keywords [a-zA-Z][a-zA-Z\[\]\\\|\{\}\_0-9\.]*)
     { return {"name": text()} }
     
-builtin "builtin" = 
-    ("@" !keywords name)
-    { return {"builtin": text()} }
+index "index of name" = 
+    ("@" _ ? !keywords name)
+    { return {"index": text()} }
 
 declaration "declaration" =
     lhs:(name) _ ? "=" _ ? rhs:(expr) _ ?
@@ -64,7 +64,7 @@ object =
     }
 
 expr_term = 
-    (str / builtin / name / num)
+    (str / index / name / num)
 
 op "operator" = 
     [\+\-\*\/\%\^\|\<\>]
