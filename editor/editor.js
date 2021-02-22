@@ -16,12 +16,12 @@ const preview3D = document.getElementById("preview3D");
 const preview2D = document.getElementById("preview2D");
 const canvas2D = document.getElementById("map2D");
 
+let skyColors, groundColor;
+
 let camera, scene, renderer, wallMesh;
 let overX = 0, overY = 100, overZ = 0;
 
 let unique_value = 30000;
-
-let skyColors, groundColor;
 
 let defaultscript = "";
 let variables = {};
@@ -140,6 +140,15 @@ function handleScript(ctx, data) {
                     }
                     if (name == "GroundColor") {
                         groundColor = ctx.fillColor;
+                    }
+
+                    if (groundColor && skyColors) {
+                        var grad =  "linear-gradient(to top, " 
+                        grad += groundColor + " 50%, " 
+                        grad += skyColors[0] + " 50%, " 
+                        grad += skyColors[1] + " 70%)";
+                        document.getElementById("preview3D")
+                            .style.background = grad;
                     }
                     break;
                 case "enum":
@@ -411,7 +420,7 @@ function init() {
     camera = new THREE.PerspectiveCamera(70, preview3D.offsetWidth / preview3D.offsetHeight, 0.1, 2000);
     scene = new THREE.Scene();
 
-    renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
     renderer.setSize(preview3D.offsetWidth, preview3D.offsetHeight);
     renderer.setAnimationLoop(animation);
 
