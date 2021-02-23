@@ -8,7 +8,11 @@ import enum
 import struct
 import sys
 
+from avarascript import parse_script
+
+
 DEBUG_PARSER = False
+METERS_PER_POINT = 5 / 72
 
 
 def debug(fmt, *args, **kwargs):
@@ -42,6 +46,14 @@ class Rect:
             self.right - origin.x,
         )
 
+    def scale(self, scale=METERS_PER_POINT):
+        return self.__class__(
+            self.top * scale,
+            self.left * scale,
+            self.bottom * scale,
+            self.right * scale,
+        )
+
 
 class Point:
     def __init__(self, x, y):
@@ -71,10 +83,6 @@ class Color:
 class Verb(enum.Enum):
     FRAME = 0
     PAINT = 1
-
-    def color(self, context):
-        attr = "frame" if self == Verb.FRAME else "fill"
-        return '<color %s="%s" />' % (attr, context.fg)
 
 
 class DataBuffer:
@@ -133,147 +141,159 @@ class DataBuffer:
             self.pos += 1
 
 
+class AvaraOperation(object):
+    def __str__(self):
+        return ""
+
+    def merge(self, other):
+        return False
+
+
+class TextOp(AvaraOperation):
+    def __init__(self, text):
+        self.tokens = parse_script(text)
+
+    def __str__(self):
+        script = "\n".join(str(t) for t in self.tokens)
+        return "<script>\n{}\n</script>".format(script)
+
+
+class GroupStart(AvaraOperation):
+    pass
+
+
+class GroupEnd(AvaraOperation):
+    pass
+
+
+class RectOp(AvaraOperation):
+    tag = "rect"
+
+    def __init__(self, context, verb, rect):
+        self.verb = verb
+        self.fill = context.fill_color
+        self.frame = context.frame_color
+        self.stroke = context.stroke
+        self.radius = context.radius
+        self.rect = rect.offset(context.origin).scale()
+
+    def attrs(self):
+        return {
+            "x": self.rect.left,
+            "z": self.rect.top,
+            "w": self.rect.width,
+            "h": self.rect.height,
+            "r": self.radius,
+            "s": self.stroke,
+            "fill": self.fill,
+            "frame": self.frame,
+        }
+
+    def __str__(self):
+        attrs = " ".join(
+            '{}="{}"'.format(name, value) for name, value in self.attrs().items()
+        )
+        return "<{tag} {attrs}></{tag}>".format(tag=self.tag, attrs=attrs)
+
+
+class RoundRectOp(RectOp):
+    pass
+
+
+class OvalOp(RectOp):
+    tag = "oval"
+
+
+class ArcOp(RectOp):
+    tag = "arc"
+
+    def __init__(self, context, verb, rect, start, extent):
+        super().__init__(context, verb, rect)
+        self.start = start
+        self.extent = extent
+
+    def attrs(self):
+        return super().attrs() | {
+            "start": self.start,
+            "extent": self.extent,
+        }
+
+
 class DrawContext:
     def __init__(self, frame, **attrs):
         self.frame = frame
-        self.elements = []
+        self.operations = []
         self.buffered = []
 
         self.origin = Point(0, 0)
-        self.r = Point(0, 0)  # Rounding radius (oval size)
-        self.fg = Color(255, 255, 255)
-        self.bg = Color(255, 255, 255)
+        self.radius = 0  # Rounding radius (oval size)
+        self.stroke = 0  # Current pen size
+        self.fg = Color(255, 255, 255)  # Current foreground
+        self.bg = Color(255, 255, 255)  # Current background (not used)
 
-        self.fillColor = self.fg
-        self.frameColor = self.fg
-        self.stroke = 0
+        # These are set from the current foreground color on paint/frame operations.
+        self.fill_color = self.fg
+        self.frame_color = self.fg
 
-        self.wrote_text = False
-        self.tag_open = None
-        self.path = []
-        self.current_id = 0
-        self.last_id = 0
-
+        # For [Frame|Paint]Same[Shape] operations.
         self.last_rect = None
         self.last_rrect = None
         self.last_arc = None
         self.last_oval = None
 
-        self.save_arc = None
-        self.save_arc_x = None
-        self.save_arc_y = None
-        self.save_arc_start = None
-        self.save_arc_extent = None
-
     def group_start(self):
-        self.current_id += 1
-        self.path.append(self.current_id)
+        self.operations.append(GroupStart())
 
     def group_close(self):
-        if self.path:
-            self.current_id = self.path.pop()
+        self.operations.append(GroupEnd())
 
     def flush_text(self):
-        wrote_text = False
-        if self.tag_open:
-            if self.buffered:
-                if self.current_id == self.last_id:
-                    self.elements.append("\n".join(self.buffered))
-                    self.elements.append("  </%s>" % self.tag_open)
-                else:
-                    self.elements[-1] += "</%s>" % self.tag_open
-                    lines = (
-                        ['  <script type="avarascript">']
-                        + self.buffered
-                        + ["  </script>"]
-                    )
-                    self.elements.append("\n".join(lines))
-                wrote_text = True
-            else:
-                self.elements[-1] += "</%s>" % self.tag_open
-            self.tag_open = None
-        elif self.buffered:
-            lines = ['  <script type="avarascript">'] + self.buffered + ["  </script>"]
-            self.elements.append("\n".join(lines))
-            wrote_text = True
+        if not self.buffered:
+            return
+        self.operations.append(TextOp("\n".join(self.buffered)))
         self.buffered = []
-        return wrote_text
 
-    def emit(self, tag, rect, **attrs):
-        frame = rect.offset(self.origin)
-        attrs.update(
-            {
-                "x": frame.left,
-                "y": frame.top,
-                "w": frame.width,
-                "h": frame.height,
-                "fill": self.fillColor,
-                "frame": self.frameColor,
-            }
-        )
-        if self.stroke:
-            attrs["s"] = self.stroke
-        attrs_formatted = " ".join('%s="%s"' % (k, v) for k, v in attrs.items())
-        el = "  <%s %s>" % (tag, attrs_formatted)
-        self.elements.append(el)
-        self.tag_open = tag
-        self.last_id = self.current_id
-
-    def element(self, tag, verb, rect, **attrs):
-        self.wrote_text = self.flush_text()
-        if verb == Verb.FRAME:
-            self.frameColor = self.fg
-            # If this is framing an arc that was just painted, we can remove the
-            # previous <arc> element (so long as it didn't contain script).
-            if (
-                tag == "arc"
-                and not self.wrote_text
-                and self.elements
-                and self.elements[-1].startswith("  <arc")
-                and attrs["start"] == self.save_arc_start
-                and attrs["extent"] == self.save_arc_extent
-                and self.origin.x == self.save_arc_x
-                and self.origin.y == self.save_arc_y
-            ):
-                self.elements.pop()
-            self.emit(tag, rect, **attrs)
-        elif verb == Verb.PAINT:
-            self.fillColor = self.fg
-            if tag == "arc":
-                self.emit(tag, rect, **attrs)
+    def update_colors(self, verb):
+        if verb == Verb.PAINT:
+            self.fill_color = self.fg
+        elif verb == Verb.FRAME:
+            self.frame_color = self.fg
 
     def rect(self, rect, verb):
-        self.element("rect", verb, rect)
+        self.update_colors(verb)
+        self.operations.append(RectOp(self, verb, rect))
         self.last_rect = rect
 
     def rrect(self, rect, verb):
-        self.element("rect", verb, rect, r=max(self.r.x, self.r.y))
+        self.update_colors(verb)
+        self.operations.append(RoundRectOp(self, verb, rect))
         self.last_rrect = rect
 
     def oval(self, rect, verb):
-        self.element("oval", verb, rect)
+        self.update_colors(verb)
+        self.operations.append(OvalOp(self, verb, rect))
         self.last_oval = rect
 
     def arc(self, rect, start, extent, verb):
-        self.element("arc", verb, rect, start=start, extent=extent)
+        self.update_colors(verb)
+        self.operations.append(ArcOp(self, verb, rect, start, extent))
         self.last_arc = rect
-        self.save_arc_start = start
-        self.save_arc_extent = extent
-        self.save_arc_x = self.origin.x
-        self.save_arc_y = self.origin.y
 
     def text(self, s):
         if not s.strip():
             return
-        self.buffered.append("    " + s)
+        self.buffered.append(s)
 
     def close(self):
         self.flush_text()
+        return "\n".join(str(op) for op in self.operations)
+        """
         return '<map width="%s" height="%s">\n%s\n</map>' % (
             self.frame.width,
             self.frame.height,
             "\n".join(self.elements),
         )
+        """
 
 
 class Operation:
@@ -338,7 +358,8 @@ class FillPattern(Operation):
 
 class OvalSize(Operation):
     def parse(self, data, context):
-        context.r = data.point()
+        size = data.point()
+        context.radius = max(size.x, size.y)
 
 
 class Origin(Operation):
