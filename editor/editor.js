@@ -28,7 +28,14 @@ let variables = {};
 let var_idx =  0;
 let builtins = {
     "@start": 1234,
-    "@end": 1235
+    "@end": 1235,
+    "random": Math.random,
+    "min": Math.min,
+    "max": Math.max,
+    "int": Math.floor,
+    "round": Math.round,
+    "sin": Math.sin,
+    "cos": Math.cos
 }
 
 let lastWall;
@@ -76,7 +83,7 @@ function get_variable(v) {
     }
 }
 
-function index(msg) {
+function ref(msg) {
     if(builtins[msg]) return builtins[msg];
     var varname = msg.slice(1);
     if(variables[varname]) return variables[varname]["idx"];
@@ -93,13 +100,31 @@ function avarluate(atom) {
     if (typeof atom === "string" || atom instanceof String) return atom;
     // name
     if (atom["name"]) get_variable(atom["name"])
-    // index
-    if (atom["index"]) return index(atom["index"]);
+    // reference
+    if (atom["reference"]) return ref(atom["reference"]);
+    // function
+    if (atom["func"]) {
+        if(builtins[atom["func"]]) {
+            return builtins[atom["func"]](avarluate(atom["expr"]));
+        }
+        else {
+            console.log("Undefined function " + atom["func"]);
+            return undefined;
+        }
+    }
+    // op
+    if (atom["op"]) {
+        return atom["op"];
+    }
+    // expr
+    if (atom["expr"]) return avarluate(atom["expr"]);
     // array of terms
     if (Array.isArray(atom)) {
-        return eval(atom.reduce((res, a) => {
+        var statement = atom.reduce((res, a) => {
             return res + " " + avarluate(a);
-        }, ""));
+        }, "");
+        console.log("going to eval: " + statement)
+        return eval(statement);
     }
 
 }
