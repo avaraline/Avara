@@ -139,6 +139,16 @@ function handleObject(ctx, ins) {
                 lastWall.rotateY(deg2rad(avarluate(ins["midYaw"])));
             }
             break;
+        case "SkyColor":
+            skyColors = [
+                ctx.frameColor,
+                ctx.fillColor
+            ];
+            break;
+        case "GroundColor":
+            groundColor = ctx.fillColor;
+            document.getElementById("preview3D").style.backgroundColor = groundColor;
+            break;
     }
 }
 
@@ -152,35 +162,14 @@ function handleScript(ctx, data) {
                     set_variable(ins["variable"], ins["expr"]);
                     break;
                 case "object":
+                case "adjust":
                     handleObject(ctx, ins);
                     break;
                 case "unique":
                     ins["tokens"].forEach((tk) => {
                         set_variable(tk, unique_value);
                         unique_value += 1;
-                    })
-                    break;
-                case "adjust":
-                    let name = ins["class"];
-                    // SkyColor or GroundColor
-                    if (name == "SkyColor") {
-                        skyColors = [
-                            ctx.frameColor,
-                            ctx.fillColor
-                        ];
-                    }
-                    if (name == "GroundColor") {
-                        groundColor = ctx.fillColor;
-                    }
-
-                    if (groundColor && skyColors) {
-                        var grad =  "linear-gradient(to top, " 
-                        grad += groundColor + " 50%, " 
-                        grad += skyColors[0] + " 50%, " 
-                        grad += skyColors[1] + " 70%)";
-                        document.getElementById("preview3D")
-                            .style.background = grad;
-                    }
+                    });
                     break;
                 case "enum":
                     var start = ins["start"];
