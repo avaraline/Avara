@@ -312,13 +312,11 @@ enum {
     StringEnd = 153 //	0	NIL	End string delimitation
 };
 
-void ConvertToLevelMap(Handle levelData);
-void SVGConvertToLevelMap();
 void LoadALF(std::string levelName);
+
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
 int GetPixelColor();
 int GetOtherPixelColor();
-
 Fixed GetLastOval(Fixed *theLoc);

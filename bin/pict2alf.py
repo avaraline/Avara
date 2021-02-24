@@ -8,8 +8,7 @@ import enum
 import struct
 import sys
 
-from avarascript import parse_script
-
+from avarascript import Element, object_context, parse_script
 
 DEBUG_PARSER = False
 METERS_PER_POINT = 5 / 72
@@ -32,8 +31,20 @@ class Rect:
     def height(self):
         return self.bottom - self.top
 
+    @property
+    def center(self):
+        return Point((self.left + self.right) / 2, (self.top + self.bottom) / 2)
+
     def __str__(self):
         return "(%d, %d) -> (%d, %d)" % (self.left, self.top, self.right, self.bottom)
+
+    def __eq__(self, other):
+        return (
+            self.top == other.top
+            and self.left == other.left
+            and self.bottom == other.bottom
+            and self.right == other.right
+        )
 
     def box(self):
         return "%d %d %d %d" % (self.left, self.top, self.width, self.height)
@@ -46,12 +57,12 @@ class Rect:
             self.right - origin.x,
         )
 
-    def scale(self, scale=METERS_PER_POINT):
+    def scale(self, scale=METERS_PER_POINT, stroke=0):
         return self.__class__(
-            self.top * scale,
-            self.left * scale,
-            self.bottom * scale,
-            self.right * scale,
+            (self.top + (stroke >> 1)) * scale,
+            (self.left + (stroke >> 1)) * scale,
+            (self.bottom - ((stroke + 1) >> 1)) * scale,
+            (self.right - ((stroke + 1) >> 1)) * scale,
         )
 
 
@@ -148,14 +159,18 @@ class AvaraOperation(object):
     def merge(self, other):
         return False
 
+    def process(self, context):
+        return []
+
 
 class TextOp(AvaraOperation):
     def __init__(self, text):
         self.tokens = parse_script(text)
 
-    def __str__(self):
-        script = "\n".join(str(t) for t in self.tokens)
-        return "<script>\n{}\n</script>".format(script)
+    def process(self, context):
+        for t in self.tokens:
+            if t.process(context):
+                yield t.element(context)
 
 
 class GroupStart(AvaraOperation):
@@ -175,33 +190,59 @@ class RectOp(AvaraOperation):
         self.frame = context.frame_color
         self.stroke = context.stroke
         self.radius = context.radius
-        self.rect = rect.offset(context.origin).scale()
+        self.rect = rect.offset(context.origin).scale(stroke=self.stroke)
 
-    def attrs(self):
-        return {
-            "x": self.rect.left,
-            "z": self.rect.top,
-            "w": self.rect.width,
-            "h": self.rect.height,
-            "r": self.radius,
-            "s": self.stroke,
-            "fill": self.fill,
-            "frame": self.frame,
-        }
-
-    def __str__(self):
-        attrs = " ".join(
-            '{}="{}"'.format(name, value) for name, value in self.attrs().items()
+    def process(self, context):
+        context.update(
+            {
+                "fill": self.fill,
+                "frame": self.frame,
+                "x": self.rect.left,
+                "z": self.rect.top,
+                "w": self.rect.width,
+                "d": self.rect.height,
+            }
         )
-        return "<{tag} {attrs}></{tag}>".format(tag=self.tag, attrs=attrs)
+        if self.stroke == 1 and self.tag == "rect":
+            attrs = object_context("Wall", context)
+            if self.radius:
+                attrs["h"] = self.radius * context["pixelToThickness"]
+            elif context.get("wallHeight"):
+                try:
+                    float(context["wallHeight"])
+                    attrs["h"] = context["wallHeight"]
+                except ValueError:
+                    pass
+            if context.get("wa"):
+                try:
+                    float(context["wa"])
+                    attrs["y"] = context["wa"]
+                except ValueError:
+                    pass
+                del context["wa"]
+            yield Element("Wall", **attrs)
 
 
 class RoundRectOp(RectOp):
-    pass
+    tag = "rect"
 
 
 class OvalOp(RectOp):
     tag = "oval"
+
+    def process(self, context):
+        context.update(
+            {
+                "fill": self.fill,
+                "frame": self.frame,
+                "cx": self.rect.center.x,
+                "cy": self.rect.center.y,
+                "r": max(self.rect.width, self.rect.height) / 2,
+                "angle": 0,
+                "extent": 360,
+            }
+        )
+        return []
 
 
 class ArcOp(RectOp):
@@ -212,11 +253,19 @@ class ArcOp(RectOp):
         self.start = start
         self.extent = extent
 
-    def attrs(self):
-        return super().attrs() | {
-            "start": self.start,
-            "extent": self.extent,
-        }
+    def process(self, context):
+        context.update(
+            {
+                "fill": self.fill,
+                "frame": self.frame,
+                "cx": self.rect.center.x,
+                "cy": self.rect.center.y,
+                "r": max(self.rect.width, self.rect.height) / 2,
+                "angle": self.start,
+                "extent": self.extent,
+            }
+        )
+        return []
 
 
 class DrawContext:
@@ -261,17 +310,20 @@ class DrawContext:
 
     def rect(self, rect, verb):
         self.update_colors(verb)
-        self.operations.append(RectOp(self, verb, rect))
+        if verb == Verb.FRAME:
+            self.operations.append(RectOp(self, verb, rect))
         self.last_rect = rect
 
     def rrect(self, rect, verb):
         self.update_colors(verb)
-        self.operations.append(RoundRectOp(self, verb, rect))
+        if verb == Verb.FRAME:
+            self.operations.append(RoundRectOp(self, verb, rect))
         self.last_rrect = rect
 
     def oval(self, rect, verb):
         self.update_colors(verb)
-        self.operations.append(OvalOp(self, verb, rect))
+        if verb == Verb.FRAME:
+            self.operations.append(OvalOp(self, verb, rect))
         self.last_oval = rect
 
     def arc(self, rect, start, extent, verb):
@@ -286,14 +338,14 @@ class DrawContext:
 
     def close(self):
         self.flush_text()
-        return "\n".join(str(op) for op in self.operations)
-        """
-        return '<map width="%s" height="%s">\n%s\n</map>' % (
-            self.frame.width,
-            self.frame.height,
-            "\n".join(self.elements),
-        )
-        """
+        context = {
+            "pixelToThickness": 1 / 8,
+        }
+        root = Element("map")
+        for op in self.operations:
+            for el in op.process(context):
+                root.children.append(el)
+        return root.xml()
 
 
 class Operation:

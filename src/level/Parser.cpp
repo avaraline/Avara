@@ -364,7 +364,7 @@ void SkipComment() {
 void SkipOneLineComment() {
     parserVar.input += 2;
     if (parserVar.input[0] != 0) {
-        while ((parserVar.input[0] != 0) && !(parserVar.input[0] == 13)) {
+        while ((parserVar.input[0] != 0) && (parserVar.input[0] != 13) && (parserVar.input[0] != 10)) {
             parserVar.input++;
         }
 

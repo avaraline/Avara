@@ -212,27 +212,6 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 }
 
 
-OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
-    SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
-    itsGame->LevelReset(false);
-    itsGame->loadedTag = theLevel;
-    gCurrentGame = itsGame;
-
-    char byte1 =  theLevel & 0x000000ff;
-    char byte2 = (theLevel & 0x0000ff00) >> 8;
-    char byte3 = (theLevel & 0x00ff0000) >> 16;
-    char byte4 = (theLevel & 0xff000000) >> 24;
-
-    std::string test = std::string({byte4, byte3, byte2, byte1});
-    SDL_Log("%s", test.c_str());
-
-    std::string svgdir = std::string("levels/") + set + "_svg/";
-    SDL_Log("%s", svgdir.c_str());
-    SVGConvertToLevelMap();
-    return noErr;
-}
-
-
 OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
@@ -240,7 +219,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     gCurrentGame = itsGame;
 
     bool wasLoaded = true;
-    std::string levelName("grimoire.alf");
+    std::string levelName("test.alf");
     BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
     itsGame->loadedLevel[0] = levelName.size();
     BlockMoveData(levelName.c_str(), itsGame->loadedLevel + 1, levelName.size());
