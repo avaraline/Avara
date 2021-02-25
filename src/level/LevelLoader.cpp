@@ -96,7 +96,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         switch (node.type()){
             case pugi::node_element:
                 handle_element(node, tag);
-                //RunThis((StringPtr)node.child_value());
+                RunThis((StringPtr)node.child_value());
                 break;
             default:
                 break;
@@ -112,8 +112,6 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_element(pugi::xml_node& node, string& name) {
-        SDL_Log("ALF element: %s", name.c_str());
-
         // Read any global state we can from the element.
         read_context(node);
 
@@ -160,13 +158,11 @@ struct ALFWalker: pugi::xml_tree_walker {
             }
         }
 
-        bool readRect = false;
         if (!x.empty() && !z.empty() && !w.empty() && !d.empty()) {
             gLastBoxRect.top = std::lround(std::stod(z) * UNITPOINTS);
             gLastBoxRect.left = std::lround(std::stod(x) * UNITPOINTS);
             gLastBoxRect.bottom = gLastBoxRect.top + std::lround(std::stod(d) * UNITPOINTS);
             gLastBoxRect.right = gLastBoxRect.left + std::lround(std::stod(w) * UNITPOINTS);
-            readRect = true;
         }
 
         if (!cx.empty() && !cy.empty()) {
@@ -218,7 +214,6 @@ struct ALFWalker: pugi::xml_tree_walker {
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             string attr = fix_attr(ait->name());
             script << attr << " = " << ait->value() << "\r";
-            SDL_Log("handle_set:\n%s", script.str().c_str());
         }
         RunThis((StringPtr)script.str().c_str());
     }
@@ -261,7 +256,6 @@ struct ALFWalker: pugi::xml_tree_walker {
             script << attr << " = " << ait->value() << "\n";
         }
         script << "end";
-        SDL_Log("handle_object:\n%s", script.str().c_str());
         RunThis((StringPtr)script.str().c_str());
     }
 };

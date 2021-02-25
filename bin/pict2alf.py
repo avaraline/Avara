@@ -19,6 +19,12 @@ def debug(fmt, *args, **kwargs):
         print(fmt % args, file=sys.stderr, flush=True)
 
 
+def dumb_round(s, zeros=6):
+    # 10.00000007 => 10
+    # 4.500000022 => 4.5
+    return str(s).split("0" * zeros, 1)[0].rstrip(".")
+
+
 class Rect:
     def __init__(self, t, l, b, r):
         self.top, self.left, self.bottom, self.right = t, l, b, r
@@ -197,52 +203,37 @@ class RectOp(AvaraOperation):
             {
                 "fill": self.fill,
                 "frame": self.frame,
-                "x": self.rect.left,
-                "z": self.rect.top,
-                "w": self.rect.width,
-                "d": self.rect.height,
+                "x": dumb_round(self.rect.left),
+                "z": dumb_round(self.rect.top),
+                "w": dumb_round(self.rect.width),
+                "d": dumb_round(self.rect.height),
             }
         )
         if self.stroke == 1 and self.tag == "rect":
             attrs = object_context("Wall", context)
             if self.radius:
-                attrs["h"] = self.radius * context["pixelToThickness"]
+                attrs["h"] = dumb_round(self.radius * context["pixelToThickness"])
             elif context.get("wallHeight"):
                 try:
+                    # If wallHeight is numeric (not a variable/forumla), promote it to "h"
                     float(context["wallHeight"])
                     attrs["h"] = context["wallHeight"]
                 except ValueError:
                     pass
             if context.get("wa"):
                 try:
+                    # If wa is numeric, promote it to "y"
                     float(context["wa"])
                     attrs["y"] = context["wa"]
                 except ValueError:
                     pass
+                # wa is reset after every Wall
                 del context["wa"]
             yield Element("Wall", **attrs)
 
 
 class RoundRectOp(RectOp):
     tag = "rect"
-
-
-class OvalOp(RectOp):
-    tag = "oval"
-
-    def process(self, context):
-        context.update(
-            {
-                "fill": self.fill,
-                "frame": self.frame,
-                "cx": self.rect.center.x,
-                "cy": self.rect.center.y,
-                "r": max(self.rect.width, self.rect.height) / 2,
-                "angle": 0,
-                "extent": 360,
-            }
-        )
-        return []
 
 
 class ArcOp(RectOp):
@@ -258,14 +249,21 @@ class ArcOp(RectOp):
             {
                 "fill": self.fill,
                 "frame": self.frame,
-                "cx": self.rect.center.x,
-                "cy": self.rect.center.y,
-                "r": max(self.rect.width, self.rect.height) / 2,
+                "cx": dumb_round(self.rect.center.x),
+                "cy": dumb_round(self.rect.center.y),
+                "r": dumb_round(max(self.rect.width, self.rect.height) / 2),
                 "angle": self.start,
                 "extent": self.extent,
             }
         )
         return []
+
+
+class OvalOp(ArcOp):
+    tag = "oval"
+
+    def __init__(self, context, verb, rect):
+        super().__init__(context, verb, rect, 0, 360)
 
 
 class DrawContext:
