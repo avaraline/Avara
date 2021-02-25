@@ -12,27 +12,31 @@ keyword = (
     | pp.Keyword("adjust")
 )
 number = pp.Regex(r"\-?[0-9\.]+")
+inline_comment = pp.Literal("//").suppress() + pp.restOfLine
+comment = pp.cStyleComment | inline_comment
 name = ~keyword + pp.Word(pp.alphas, pp.alphanums + r"._[]{}\\|")
 op = pp.oneOf("+ - * / % ^ | < >")
+unary_op = pp.oneOf("- |")
 reference = pp.Literal("@").suppress() + name
-atom = string | reference | name | number
-expr = atom + pp.ZeroOrMore(op + atom)
+atom = string | reference | number | name
+expr = pp.Optional(unary_op) + atom + pp.ZeroOrMore(op + atom)
 declaration = name + pp.Literal("=").suppress() + expr
 end = pp.Literal("end").suppress()
-obj = pp.Literal("object").suppress() + name + pp.ZeroOrMore(declaration) + end
-adjust = pp.Literal("adjust").suppress() + name + end
+obj_body = pp.ZeroOrMore(comment.suppress() | declaration)
+obj = pp.Literal("object") + name + obj_body + end
+adjust = pp.Literal("adjust") + name + obj_body + end
 unique = (
     pp.Literal("unique").suppress() + pp.Optional(number) + pp.ZeroOrMore(name) + end
 )
 enum = pp.Literal("enum").suppress() + number + pp.OneOrMore(name) + end
-inline_comment = pp.Literal("//").suppress() + pp.restOfLine
-comment = pp.cStyleComment | inline_comment
-script = pp.ZeroOrMore(comment.suppress() | declaration | unique | enum | adjust | obj)
+decl_group = pp.OneOrMore(declaration)
+script = pp.ZeroOrMore(comment.suppress() | decl_group | unique | enum | adjust | obj)
 
 
 DEFAULT_CONTEXT = ("fill", "frame", "cx", "cy", "r", "angle", "extent")
 OBJ_CONTEXT = {
-    "adjust": ("fill", "frame"),
+    "SkyColor": ("fill", "frame"),
+    "GroundColor": ("fill", "frame"),
     "Wall": ("fill", "frame", "x", "y", "z", "w", "d", "h"),
     "WallDoor": ("fill", "frame", "x", "y", "z", "w", "d", "h"),
     "Ramp": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
@@ -163,26 +167,15 @@ class Enum(ScriptObject):
         )
 
 
-class Adjust(ScriptObject):
-    def __init__(self, tokens):
-        self.name = tokens[0]
-
-    def __str__(self):
-        return "adjust {} end".format(self.name)
-
-    def element(self, context):
-        attrs = object_context("adjust", context)
-        return Element(self.name, **attrs)
-
-
 class Object(ScriptObject):
     def __init__(self, tokens):
-        self.name = tokens[0]
-        self.declarations = tokens[1:]
+        self.tag = tokens[0]
+        self.name = tokens[1]
+        self.declarations = tokens[2:]
 
     def __str__(self):
         decls = "\n".join("  " + str(d) for d in self.declarations)
-        return "object {}\n{}\nend".format(self.name, decls)
+        return "{} {}\n{}\nend".format(self.tag, self.name, decls)
 
     def element(self, context):
         attrs = {d.name: d.value for d in self.declarations}
@@ -190,14 +183,46 @@ class Object(ScriptObject):
         return Element(self.name, **attrs)
 
 
+class DeclarationGroup(ScriptObject):
+    def __init__(self, tokens):
+        self.declarations = tokens
+
+    def __str__(self):
+        return "\n".join(str(d) for d in self.declarations)
+
+    def element(self, context):
+        # Only include declaration attributes which would have been processed.
+        fake_context = {}
+        attrs = {d.name: d.value for d in self.declarations if d.process(fake_context)}
+        return Element("set", **attrs)
+
+    def process(self, context):
+        return any(d.process(context) for d in self.declarations)
+
+
 string.setParseAction(String)
 reference.setParseAction(Reference)
 enum.setParseAction(Enum)
 unique.setParseAction(Unique)
-adjust.setParseAction(Adjust)
 declaration.setParseAction(Declaration)
+decl_group.setParseAction(DeclarationGroup)
 obj.setParseAction(Object)
+adjust.setParseAction(Object)
 
 
-def parse_script(text):
-    return script.parseString(text)
+class ScriptParseError(Exception):
+    pass
+
+
+def parse_script(text, strict=True):
+    try:
+        return script.parseString(text, parseAll=strict)
+    except pp.ParseException:
+        raise ScriptParseError("Failed to parse AvaraScript:\n" + text)
+
+
+if __name__ == "__main__":
+    import sys
+
+    for t in parse_script(sys.stdin.read()):
+        print(t)

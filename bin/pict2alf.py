@@ -23,6 +23,8 @@ def dumb_round(num, repeats=6):
     s = str(num)
     if "." not in s:
         return s
+    if s.endswith(".0"):
+        return s[:-2]
     zeros = "0" * repeats
     nines = "9" * repeats
     if zeros in s:
@@ -37,7 +39,7 @@ def dumb_round(num, repeats=6):
 # How's this for continuous integration.
 assert dumb_round(10.00000007) == "10"
 assert dumb_round(4.500000022) == "4.5"
-assert dumb_round(0.999999987) == "1", dumb_round(0.999999987)
+assert dumb_round(0.999999987) == "1"
 assert dumb_round(0.049999999) == "0.05"
 
 
@@ -187,10 +189,10 @@ class AvaraOperation(object):
 
 class TextOp(AvaraOperation):
     def __init__(self, text):
-        self.tokens = parse_script(text)
+        self.text = text
 
     def process(self, context):
-        for t in self.tokens:
+        for t in parse_script(self.text):
             if t.process(context):
                 yield t.element(context)
 
@@ -313,7 +315,12 @@ class DrawContext:
     def flush_text(self):
         if not self.buffered:
             return
-        self.operations.append(TextOp("\n".join(self.buffered)))
+        text = "".join(self.buffered)
+        if self.operations and isinstance(self.operations[-1], TextOp):
+            # Group as much script text together as possible.
+            self.operations[-1].text += "\n" + text
+        else:
+            self.operations.append(TextOp(text))
         self.buffered = []
 
     def update_colors(self, verb):
@@ -345,9 +352,11 @@ class DrawContext:
         self.operations.append(ArcOp(self, verb, rect, start, extent))
         self.last_arc = rect
 
-    def text(self, s):
+    def text(self, s, newline=True):
         if not s.strip():
             return
+        if newline:
+            self.buffered.append("\n")
         self.buffered.append(s)
 
     def close(self):
@@ -384,6 +393,125 @@ class SkipRegion(Operation):
         total = data.short()
         region = data.rect()
         data.read(total - 10)
+
+
+# This function reads embedded image pixmaps
+PIXMAP_BIT = 0x8000
+
+
+def pixmap(data, clipped=False):
+    if clipped:
+        skip = data.read(4)
+    row_bytes = data.short()
+    is_pixmap = row_bytes & PIXMAP_BIT != 0
+    row_bytes = row_bytes & 0x7FFF
+    bounds = data.rect()
+    if is_pixmap:
+        version = data.short()
+        pack_type = data.short()
+        pack_size = data.long()
+        hres = data.fixed()
+        vres = data.fixed()
+        pixel_type = data.short()
+        pixel_size = data.short()
+        cmp_count = data.short()
+        cmp_size = data.short()
+        plane_bytes = data.long()
+        pmtable = data.long()
+        reserved = data.long()
+    return (is_pixmap, bounds, row_bytes)
+
+
+# Color table for embedded 32 bit color images
+def color_table(data):
+    ct_seed = data.long()
+    trans_index = data.short()
+    ct_size = data.short()
+    ct = []
+    while ct_size >= 0:
+        ct.append(data.short())
+        ct_size -= 1
+
+
+def pixdata(data, pmap):
+    bounds = pmap[1]
+    row_bytes = pmap[2]
+    lines_to_read = bounds.height
+    if row_bytes < 8:
+        data_size = row_bytes * lines_to_read
+        pixdata = data.read(data_size)
+    else:
+        for i in range(lines_to_read):
+            sl_size = data.ushort() if row_bytes > 250 else data.uchar()
+            scanline = data.read(sl_size)
+
+
+class BitsRect(Operation):
+    def parse(self, data, context):
+        pmap = pixmap(data)
+        if pmap[0]:
+            color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+        pixdata(data, pmap)
+
+
+class BitsRgn(Operation):
+    def parse(self, data, context):
+        pmap = pixmap(data)
+        if pmap[0]:
+            color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+        mask_rgn_size = data.short()
+        mask_rgn = data.read(mask_rgn_size - 2)
+        pixdata(data, pmap)
+
+
+class PackBitsRect(Operation):
+    def parse(self, data, context):
+        pmap = pixmap(data)
+        if pmap[0]:
+            color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+        pixdata(data, pmap)
+
+
+class PackBitsRgn(Operation):
+    def parse(self, data, context):
+        pmap = pixmap(data)
+        if pmap[0]:
+            color_table(data)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+        mask_rgn_size = data.short()
+        mask_rgn = data.read(mask_rgn_size - 2)
+        pixdata(data, pmap)
+
+
+class DirectBitsRect(Operation):
+    def parse(self, data, context):
+        pmap = pixmap(data, clipped=True)
+        src_rect = data.rect()
+        dest_rect = data.rect()
+        mode = data.short()
+        pixdata(data, pmap)
+
+
+class DirectBitsRgn(Operation):
+    def parse(self, data, context):
+        pmap = pixmap(data, clipped=True)
+        src_rect = data.rect()
+        dst_rect = data.rect()
+        mode = data.short()
+        mask_rgn_size = data.short()
+        mask_rgn = data.read(mask_rgn_size - 2)
+        pixdata(data, pmap)
 
 
 class TextFont(Operation):
@@ -512,7 +640,7 @@ class DHText(Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode("macintosh")
-        context.text(text)
+        context.text(text, newline=False)
 
 
 class DVText(Operation):
@@ -747,12 +875,12 @@ PICT_OPCODES = {
     0x81: SkipRegion,
     0x8C: NOOP,
     # picture data
-    # 0x90: BitsRect,
-    # 0x91: BitsRgn,
-    # 0x9A: DirectBitsRect,
-    # 0x9B: DirectBitsRgn,
-    # 0x98: PackBitsRect,
-    # 0x99: PackBitsRgn,
+    0x90: BitsRect,
+    0x91: BitsRgn,
+    0x9A: DirectBitsRect,
+    0x9B: DirectBitsRgn,
+    0x98: PackBitsRect,
+    0x99: PackBitsRgn,
     # comment fields
     0xA0: ShortComment,
     0xA1: LongComment,
