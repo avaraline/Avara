@@ -3,6 +3,8 @@
 import pyparsing as pp
 
 quote = pp.Literal('"').suppress()
+lpar = pp.Literal("(").suppress()
+rpar = pp.Literal(")").suppress()
 string = quote + pp.SkipTo(quote) + quote
 keyword = (
     pp.Keyword("unique")
@@ -18,8 +20,21 @@ name = ~keyword + pp.Word(pp.alphas, pp.alphanums + r"._[]{}\\|")
 op = pp.oneOf("+ - * / % ^ | < >")
 unary_op = pp.oneOf("- |")
 reference = pp.Literal("@").suppress() + name
+function = pp.oneOf("min max random sin cos int round")
 atom = string | reference | number | name
-expr = pp.Optional(unary_op) + atom + pp.ZeroOrMore(op + atom)
+
+# This would be great if we cared to evaluate these expressions and not just match them.
+# expr = pp.infixNotation(atom, [
+#     (unary_op, 1, pp.opAssoc.RIGHT),
+#     (function, 1, pp.opAssoc.RIGHT),
+#     (op, 2, pp.opAssoc.LEFT),
+# ])
+
+expr = pp.Forward()
+expr <<= (pp.ZeroOrMore(unary_op | function) + atom + pp.ZeroOrMore(op + expr)) | (
+    lpar + expr + rpar
+)
+
 declaration = name + pp.Literal("=").suppress() + expr
 end = pp.Literal("end").suppress()
 obj_body = pp.ZeroOrMore(comment.suppress() | declaration)
@@ -30,7 +45,10 @@ unique = (
 )
 enum = pp.Literal("enum").suppress() + number + pp.OneOrMore(name) + end
 decl_group = pp.OneOrMore(declaration)
-script = pp.ZeroOrMore(comment.suppress() | decl_group | unique | enum | adjust | obj)
+non_ascii = pp.Regex(r"[^\x00-\xff]+").suppress()
+script = pp.ZeroOrMore(
+    comment.suppress() | decl_group | unique | enum | adjust | obj | non_ascii
+)
 
 
 DEFAULT_CONTEXT = ("fill", "frame", "cx", "cy", "r", "angle", "extent")

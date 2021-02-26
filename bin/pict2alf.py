@@ -5,6 +5,7 @@ Converts Avara level PICT resources to ALF (Avara Level Format)
 """
 
 import enum
+import os
 import struct
 import sys
 
@@ -197,6 +198,7 @@ class TextOp(AvaraOperation):
                 if t.process(context):
                     yield t.element(context)
         except ScriptParseError:
+            debug("Script error in:\n%s", self.text)
             yield Element("script", self.text.strip())
 
 
@@ -643,7 +645,7 @@ class DHText(Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode("macintosh")
-        context.text(text, newline=False)
+        context.text(text)
 
 
 class DVText(Operation):
@@ -970,5 +972,15 @@ if __name__ == "__main__":
         print("usage: pict2alf.py <PICT.r>")
         sys.exit(1)
     else:
-        with open(sys.argv[1], "rb") as input_file:
-            print(parse_pict(input_file.read()))
+        path = sys.argv[1]
+        if os.path.isdir(path):
+            for name in os.listdir(path):
+                if name.startswith("."):
+                    continue
+                full_path = os.path.join(path, name)
+                with open(full_path, "rb") as input_file:
+                    with open(full_path + ".alf", "w") as output_file:
+                        output_file.write(parse_pict(input_file.read()))
+        else:
+            with open(path, "rb") as input_file:
+                print(parse_pict(input_file.read()))
