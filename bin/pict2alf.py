@@ -8,7 +8,7 @@ import enum
 import struct
 import sys
 
-from avarascript import Element, object_context, parse_script
+from avarascript import Element, ScriptParseError, object_context, parse_script
 
 DEBUG_PARSER = False
 METERS_PER_POINT = 5 / 72
@@ -192,9 +192,12 @@ class TextOp(AvaraOperation):
         self.text = text
 
     def process(self, context):
-        for t in parse_script(self.text):
-            if t.process(context):
-                yield t.element(context)
+        try:
+            for t in parse_script(self.text):
+                if t.process(context):
+                    yield t.element(context)
+        except ScriptParseError:
+            yield Element("script", self.text.strip())
 
 
 class GroupStart(AvaraOperation):
