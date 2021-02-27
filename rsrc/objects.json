@@ -4,50 +4,61 @@
             "attrs": {
                 "hitSound": {
                     "default": "hitSoundDefault",
-                    "description": "The sound that the object makes when it is hit, or something explodes close to it."
+                    "description": "The sound that the object makes when it is hit, or something explodes nearby."
                 },
                 "hitVolume": {
                     "default": 25
                 },
                 "blastSound": {
-                    "default": "snBlast"
+                    "default": "snBlast",
+                    "description": "The sound that the object makes when it is destroyed."
                 },
                 "blastVolume": {
                     "default": 40
                 },
                 "shield": {
-                    "default": -1
+                    "default": -1,
+                    "description": "The shield value for the object. Negative numbers mean an infinite shield, i.e. an indestructible object."
                 },
                 "power": {
-                    "default": 0
+                    "default": 0,
+                    "description": "The explosion damage done at a distance of 1 meter or less. Beyond this range, damage done is power / distance ^ 2. The minimum damage is 1/16 units, so a mine with a blasting power of 2 will do the minimum 0.0625 units of damage at a distance of 5.6 meters."
                 },
                 "team": {
-                    "default": 0
+                    "default": 0,
+                    "description": "Assigns a team to the object. By default, most objects belong to the computer team (team zero). Changing this value may change the behavior of certain objects and can affect how scores are calculated."
                 },
                 "isTarget": {
-                    "default": false
+                    "default": false,
+                    "description": "If true, the object is considered a target by the player HUDs and the HUD indicators will light up accordingly."
                 },
                 "hitMsg": {
-                    "default": 0
+                    "default": 0,
+                    "description": "This message is sent whenever the object has been hit (or destroyed)."
                 },
                 "killMsg": {
-                    "default": 0
+                    "default": 0,
+                    "description": "This message is sent whenever the object has been destroyed."
                 },
                 "hitScore": {
-                    "default": 0
+                    "default": 0,
+                    "description": "Points are awarded according to the power of the hit on the object (energy * hitScore)."
                 },
                 "killScore": {
-                    "default": 0
+                    "default": 0,
+                    "description": "The number of points awarded when the object has been destroyed."
                 },
                 "shapeScale": {
-                    "default": 1
+                    "default": 1,
+                    "description": "Allows you to scale the bsp shapes for the object."
                 },
                 "yon": {
                     "default": 0,
-                    "description": "Distance at which the object is clipped from view."
+                    "description": "Distance at which the object is clipped from view. If 0, the default value is used."
                 },
                 "stepOnMsg": {
-                    "default": 0
+                    "default": 0,
+                    "description": "This message is sent whenever a player steps on the object."
                 },
                 "traction": {
                     "default": "defaultTraction"
@@ -61,7 +72,46 @@
             "attrs": {
                 "y": {
                     "default": 0,
-                    "description": "The altitude of an object off the ground."
+                    "description": "The altitude of the object relative to the ground."
+                }
+            }
+        },
+        "glow": {
+            "attrs": {
+                "canGlow": {
+                    "description": "If the object type is destructible by default (i.e. has a positive `shields` property by default), `canGlow` will be true by default. Otherwise, it will be false. You can override it either way."
+                }
+            }
+        },
+        "shooter": {
+            "attrs": {
+                "mask": {
+                    "default": "allTeams",
+                    "description": "The teams the object will target."
+                },
+                "watch": {
+                    "default": "playerMask",
+                    "description": "What the object will watch for and attack. `playerMask` and `scoutMask` are valid values and may be added to combine them."
+                },
+                "activeRange": {
+                    "default": 100,
+                    "description": "The radius within which the object looks for targets to attack."
+                },
+                "shotPower": {
+                    "default": 0.5,
+                    "description": "The power of a single shot."
+                },
+                "burstLength": {
+                    "default": 2,
+                    "description": "How many shots can be fired in a single burst."
+                },
+                "burstSpeed": {
+                    "default": 5,
+                    "description": "How many frames elapse between each shot in a burst."
+                },
+                "burstCharge": {
+                    "default": 40,
+                    "description": "How many frames elapse to recharge after the first shot of a burst has been fired."
                 }
             }
         }
