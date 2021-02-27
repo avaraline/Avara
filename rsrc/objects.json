@@ -1,0 +1,308 @@
+{
+    "types": {
+        "actor": {
+            "attrs": {
+                "hitSound": {
+                    "default": "hitSoundDefault",
+                    "description": "The sound that the object makes when it is hit, or something explodes close to it."
+                },
+                "hitVolume": {
+                    "default": 25
+                },
+                "blastSound": {
+                    "default": "snBlast"
+                },
+                "blastVolume": {
+                    "default": 40
+                },
+                "shield": {
+                    "default": -1
+                },
+                "power": {
+                    "default": 0
+                },
+                "team": {
+                    "default": 0
+                },
+                "isTarget": {
+                    "default": false
+                },
+                "hitMsg": {
+                    "default": 0
+                },
+                "killMsg": {
+                    "default": 0
+                },
+                "hitScore": {
+                    "default": 0
+                },
+                "killScore": {
+                    "default": 0
+                },
+                "shapeScale": {
+                    "default": 1
+                },
+                "yon": {
+                    "default": 0,
+                    "description": "Distance at which the object is clipped from view."
+                },
+                "stepOnMsg": {
+                    "default": 0
+                },
+                "traction": {
+                    "default": "defaultTraction"
+                },
+                "friction": {
+                    "default": "defaultFriction"
+                }
+            }
+        },
+        "placed": {
+            "attrs": {
+                "y": {
+                    "default": 0,
+                    "description": "The altitude of an object off the ground."
+                }
+            }
+        }
+    },
+    "objects": {
+        "Walker": {
+            "type": [],
+            "attrs": {},
+            "index": 1,
+            "description": ""
+        },
+        "Sphere": {
+            "type": [],
+            "attrs": {},
+            "index": 2,
+            "description": ""
+        },
+        "Hologram": {
+            "type": [],
+            "attrs": {},
+            "index": 3,
+            "description": ""
+        },
+        "Solid": {
+            "type": [],
+            "attrs": {},
+            "index": 4,
+            "description": ""
+        },
+        "WallSolid": {
+            "type": [],
+            "attrs": {},
+            "index": 5,
+            "description": ""
+        },
+        "FreeSolid": {
+            "type": [],
+            "attrs": {},
+            "index": 6,
+            "description": ""
+        },
+        "Dome": {
+            "type": [
+                "placed"
+            ],
+            "attrs": {
+                "hasFloor": {
+                    "default": false,
+                    "description": "Whether the dome should render a floor."
+                },
+                "pitch": {
+                    "default": 0,
+                    "description": "Rotation around the X axis, in degrees."
+                },
+                "roll": {
+                    "default": 0,
+                    "description": "Rotation around the Z axis, in degrees."
+                }
+            },
+            "index": 7,
+            "description": ""
+        },
+        "Ramp": {
+            "type": [],
+            "attrs": {},
+            "index": 8,
+            "description": ""
+        },
+        "TriPyramid": {
+            "type": [],
+            "attrs": {},
+            "index": 9,
+            "description": ""
+        },
+        "Door": {
+            "type": [],
+            "attrs": {},
+            "index": 10,
+            "description": ""
+        },
+        "Door2": {
+            "type": [],
+            "attrs": {},
+            "index": 11,
+            "description": ""
+        },
+        "WallDoor": {
+            "type": [],
+            "attrs": {},
+            "index": 12,
+            "description": ""
+        },
+        "Area": {
+            "type": [],
+            "attrs": {},
+            "index": 13,
+            "description": ""
+        },
+        "Text": {
+            "type": [],
+            "attrs": {},
+            "index": 14,
+            "description": ""
+        },
+        "Field": {
+            "type": [],
+            "attrs": {},
+            "index": 15,
+            "description": ""
+        },
+        "Goody": {
+            "type": [],
+            "attrs": {},
+            "index": 16,
+            "description": ""
+        },
+        "Switch": {
+            "type": [],
+            "attrs": {},
+            "index": 17,
+            "description": ""
+        },
+        "Guard": {
+            "type": [],
+            "attrs": {},
+            "index": 18,
+            "description": ""
+        },
+        "GroundColor": {
+            "type": [],
+            "attrs": {},
+            "index": 19,
+            "description": ""
+        },
+        "SkyColor": {
+            "type": [],
+            "attrs": {},
+            "index": 20,
+            "description": ""
+        },
+        "Incarnator": {
+            "type": [],
+            "attrs": {},
+            "index": 21,
+            "description": ""
+        },
+        "Teleporter": {
+            "type": [],
+            "attrs": {},
+            "index": 22,
+            "description": ""
+        },
+        "Pill": {
+            "type": [],
+            "attrs": {},
+            "index": 23,
+            "description": ""
+        },
+        "Ball": {
+            "type": [],
+            "attrs": {},
+            "index": 24,
+            "description": ""
+        },
+        "Goal": {
+            "type": [],
+            "attrs": {},
+            "index": 25,
+            "description": ""
+        },
+        "Mine": {
+            "type": [],
+            "attrs": {},
+            "index": 26,
+            "description": ""
+        },
+        "Parasite": {
+            "type": [],
+            "attrs": {},
+            "index": 27,
+            "description": ""
+        },
+        "Ufo": {
+            "type": [],
+            "attrs": {},
+            "index": 28,
+            "description": ""
+        },
+        "Sound": {
+            "type": [],
+            "attrs": {},
+            "index": 29,
+            "description": ""
+        },
+        "Timer": {
+            "type": [],
+            "attrs": {},
+            "index": 30,
+            "description": ""
+        },
+        "Delay": {
+            "type": [],
+            "attrs": {},
+            "index": 31,
+            "description": ""
+        },
+        "Counter": {
+            "type": [],
+            "attrs": {},
+            "index": 32,
+            "description": ""
+        },
+        "And": {
+            "type": [],
+            "attrs": {},
+            "index": 33,
+            "description": ""
+        },
+        "Distributor": {
+            "type": [],
+            "attrs": {},
+            "index": 34,
+            "description": ""
+        },
+        "Base": {
+            "type": [],
+            "attrs": {},
+            "index": 35,
+            "description": ""
+        },
+        "YonBox": {
+            "type": [],
+            "attrs": {},
+            "index": 36,
+            "description": ""
+        },
+        "YonSphere": {
+            "type": [],
+            "attrs": {},
+            "index": 37,
+            "description": ""
+        }
+    }
+}

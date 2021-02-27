@@ -49,9 +49,12 @@
 
 #include <SDL2/SDL.h>
 
-#define LOOSESTRLIST 1024
+#include <fstream>
+#include <json.hpp>
+#include <string>
 
-static Handle objectNamesHandle = NULL;
+
+static json objectDescriptor;
 
 enum {
     koNoObject = 0,
@@ -186,41 +189,27 @@ void *CreateObjectByIndex(short objectId) {
 }
 
 void InitLinkLoose() {
-    objectNamesHandle = GetResource('STR#', LOOSESTRLIST);
+    char *objectsPath = BundlePath("rsrc/objects.json");
+    std::ifstream infile(objectsPath);
+    if (infile.fail()) {
+        SDL_Log("*** Failed to load objects.json");
+    }
+    else {
+        objectDescriptor = json::parse(infile);
+        infile.close();
+    }
 }
 
 void *CreateNamedObject(StringPtr theName) {
-    StringPtr string;
-    StringPtr charp;
-    short tokCount;
-    short ind;
-    short i;
-    short stringLen;
-
-    if (objectNamesHandle == NULL)
+    if (objectDescriptor.empty())
         InitLinkLoose();
 
-    stringLen = *theName++;
-    tokCount = ntohs(*(short *)(*objectNamesHandle));
-    string = ((StringPtr)*objectNamesHandle) + 2;
-
-    for (ind = 1; ind <= tokCount; ind++) {
-        if (string[0] == stringLen) {
-            charp = string + 1;
-
-            for (i = 0; i < stringLen; i++) {
-                if (*charp++ != theName[i]) {
-                    break;
-                }
-            }
-
-            if (i == stringLen) {
-                break;
-            }
-        }
-
-        string += string[0] + 1;
+    std::string objectName((char *)theName + 1, theName[0]);
+    if (objectDescriptor["objects"].count(objectName) == 0) {
+        SDL_Log("UNKNOWN OBJECT TYPE in CreateNamedObject(%s)\n", objectName.c_str());
+        return NULL;
     }
 
-    return CreateObjectByIndex(ind);
+    short index = objectDescriptor["objects"][objectName]["index"];
+    return CreateObjectByIndex(index);
 }

@@ -115,7 +115,8 @@ struct ALFWalker: pugi::xml_tree_walker {
         // Read any global state we can from the element.
         read_context(node);
 
-        if (name.compare("enum") == 0) handle_enum(node);
+        if (name.compare("map") == 0) handle_map(node);
+        else if (name.compare("enum") == 0) handle_enum(node);
         else if (name.compare("unique") == 0) handle_unique(node);
         else if (name.compare("set") == 0) handle_set(node);
         else if (name.compare("script") == 0) handle_script(node);
@@ -195,6 +196,9 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
 
         return true;
+    }
+
+    void handle_map(pugi::xml_node& node) {
     }
 
     void handle_enum(pugi::xml_node& node) {
