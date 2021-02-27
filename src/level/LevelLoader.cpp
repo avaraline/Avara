@@ -8,13 +8,13 @@
 */
 
 #include "LevelLoader.h"
+
 #include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
 #include "PICTParser.h"
-#include "SVGParser.h"
 #include "Parser.h"
 #include "Resource.h"
 #include "pugixml.hpp"
@@ -24,6 +24,8 @@
 
 #include <algorithm>
 #include <sstream>
+#include <fstream>
+#include <streambuf>
 #include <regex>
 
 #define POINTTOUNIT(pt) (pt * 20480 / 9)
@@ -91,7 +93,7 @@ Fixed GetLastArcDirection() {
 
 struct ALFWalker: pugi::xml_tree_walker {
     virtual bool for_each(pugi::xml_node& node) {
-        string tag = node.name();
+        std::string tag = node.name();
 
         switch (node.type()){
             case pugi::node_element:
@@ -105,13 +107,13 @@ struct ALFWalker: pugi::xml_tree_walker {
         return true;
     }
 
-    string fix_attr(string attr) {
+    std::string fix_attr(std::string attr) {
         // XML attributes can't have brackets, so we turn light.0.i into light[0].i
         std::regex subscript("\\.(\\d+)");
         return std::regex_replace(attr, subscript, "[$1]");
     }
 
-    void handle_element(pugi::xml_node& node, string& name) {
+    void handle_element(pugi::xml_node& node, std::string& name) {
         // Read any global state we can from the element.
         read_context(node);
 
@@ -124,7 +126,7 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     bool read_context(pugi::xml_node& node) {
-        string fill = node.attribute("fill").value(),
+        std::string fill = node.attribute("fill").value(),
                frame = node.attribute("frame").value(),
                x = node.attribute("x").value(),
                // y = node.attribute("y").value(),
@@ -212,7 +214,7 @@ struct ALFWalker: pugi::xml_tree_walker {
     void handle_set(pugi::xml_node& node) {
         std::stringstream script;
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
-            string attr = fix_attr(ait->name());
+            std::string attr = fix_attr(ait->name());
             script << attr << " = " << ait->value() << "\r";
         }
         RunThis((StringPtr)script.str().c_str());
@@ -223,7 +225,7 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_wall(pugi::xml_node& node) {
-        string y = node.attribute("y").value();
+        std::string y = node.attribute("y").value();
         if (!y.empty()) {
             ProgramVariable(iWallAltitude, std::stod(y));
         }
@@ -232,11 +234,11 @@ struct ALFWalker: pugi::xml_tree_walker {
         theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
     }
 
-    void handle_object(pugi::xml_node& node, string& name) {
+    void handle_object(pugi::xml_node& node, std::string& name) {
         std::stringstream script;
         script << "object " << name << "\n";
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
-            string attr = fix_attr(ait->name());
+            std::string attr = fix_attr(ait->name());
             // Ignore all the standard context attributes when parsing objects.
             if (
                 attr.compare("fill") == 0 ||
@@ -260,9 +262,23 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 };
 
-void LoadALF(std::string levelName) {
+bool LoadALF(std::string levelName) {
     InitParser();
     AvaraGLLightDefaults();
+
+    // Load and run default.avarascript
+    std::string defaultscriptpath = GetDefaultScriptPath();
+    std::ifstream t(defaultscriptpath);
+    if(t.good()) {
+        std::string defaultscript;
+        t.seekg(0, std::ios::end);   
+        defaultscript.reserve(t.tellg());
+        t.seekg(0, std::ios::beg);
+
+        defaultscript.assign((std::istreambuf_iterator<char>(t)),
+                              std::istreambuf_iterator<char>());
+        RunThis((StringPtr)defaultscript.c_str());
+    }
 
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(levelName.c_str());
@@ -272,4 +288,5 @@ void LoadALF(std::string levelName) {
 
     FreshCalc();
     gCurrentGame->EndScript();
+    return (bool)result;
 }

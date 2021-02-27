@@ -10,6 +10,7 @@
 #pragma once
 #include "Types.h"
 #include <string>
+#include <vector>
 
 enum {
     iDesignerName,
@@ -312,8 +313,7 @@ enum {
     StringEnd = 153 //	0	NIL	End string delimitation
 };
 
-void LoadALF(std::string levelName);
-
+bool LoadALF(std::string levelName);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);

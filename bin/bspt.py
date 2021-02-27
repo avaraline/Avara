@@ -453,8 +453,10 @@ class BSP(object):
                 v2 = point2 - point1
                 v3 = np.array([-rayDirection[1], rayDirection[0]])
                 divisor = np.dot(v2, v3)
-                t1 = np.cross(v2, v1) / divisor if divisor != 0 else 10000
-                t2 = np.dot(v1, v3) / divisor if divisor != 0 else 10000
+                # Sometimes divisor can be zero, infinity will work but
+                # numpy gives a warning so we just put a big number instead
+                t1 = (np.cross(v2, v1) / divisor) if divisor != 0 else 1000000
+                t2 = (np.dot(v1, v3) / divisor) if divisor != 0 else 1000000
                 if t1 >= 0.0 and t2 >= 0.0 and t2 <= 1.0:
                     return [rayOrigin + t1 * rayDirection]
                 return []
@@ -493,8 +495,8 @@ class BSP(object):
             new_tris = result["triangles"].tolist()
             
             if vert_diff > 0:
-                print(d["max_bounds"])
-                print(f"Adding extra verticies to {self.name}")
+                # print(d["max_bounds"])
+                # print(f"Adding extra verticies")
                 the_dict["triangles"] = new_tris
                 the_dict["vertices"] = np.array([flatten_3to2(np.array(x[:3])) for x in d["points"]])
                 if DEBUG_ADDED_VERTS:
@@ -539,6 +541,7 @@ class BSP(object):
                         'color': color,
                         'tris': [[tri_points[i] for i in t] for t in tris],
                     })
+
         except IndexError:
             print("Invalid shape data")    
         return json.dumps(out, indent=2, sort_keys=True)
@@ -547,18 +550,7 @@ class BSP(object):
 def serialize_list(the_list):
     return [x.serialize() for x in the_list]
 
-def parse(resource):
-    bsps = []
-    for res_id in resource.keys():
-        try:
-            bsp = BSP(resource[res_id])
-            bsp.res_id = res_id
-            bsps.append(bsp)
-        except:
-            print(f"Failed to export BSP {res_id}")
-    return bsps
-
-def bsp2json(data, name=''):
+def bsp2json(data):
     bsp = BSP({'data': data, 'name': name})
     return bsp.avara_format()
 

@@ -681,7 +681,6 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
     if (itsGame->frameNumber == 0) {
         short hullRes;
         HullConfigRecord hull;
-        Handle hullHandle;
 
         hullRes = config->hullType;
         if (hullRes < 0 || hullRes > 2)
@@ -689,27 +688,23 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = ReadLongVar(iFirstHull + hullRes);
 
-        hullHandle = GetResource('HULL', hullRes);
-        if (hullHandle == NULL)
-            hullHandle = GetResource('HULL', 129);
+        nlohmann::json hullJson = LoadHullFromSetJSON(hullRes);
 
-        // TODO: good candidate for JSON
-        hull = **(HullConfigRecord **)hullHandle;
-        hull.hullBSP = ntohs(hull.hullBSP);
-        hull.maxMissiles = ntohs(hull.maxMissiles);
-        hull.maxGrenades = ntohs(hull.maxGrenades);
-        hull.maxBoosters = ntohs(hull.maxBoosters);
-        hull.mass = ntohl(hull.mass);
-        hull.energyRatio = ntohl(hull.energyRatio);
-        hull.energyChargeRatio = ntohl(hull.energyChargeRatio);
-        hull.shieldsRatio = ntohl(hull.shieldsRatio);
-        hull.shieldsChargeRatio = ntohl(hull.shieldsChargeRatio);
-        hull.minShotRatio = ntohl(hull.minShotRatio);
-        hull.maxShotRatio = ntohl(hull.maxShotRatio);
-        hull.shotChargeRatio = ntohl(hull.shotChargeRatio);
-        hull.rideHeight = ntohl(hull.rideHeight);
-        hull.accelerationRatio = ntohl(hull.accelerationRatio);
-        hull.jumpPowerRatio = ntohl(hull.jumpPowerRatio);
+        hull.hullBSP = (short)hullJson["Hull Res ID"];
+        hull.maxMissiles = (short)hullJson["Max Missiles"];
+        hull.maxGrenades = (short)hullJson["Max Grenades"];
+        hull.maxBoosters = (short)hullJson["Max boosters"];
+        hull.mass = ToFixed(hullJson["Mass"]);
+        hull.energyRatio = ToFixed(hullJson["Max Energy"]);
+        hull.energyChargeRatio = ToFixed(hullJson["Energy Charge"]);
+        hull.shieldsRatio = ToFixed(hullJson["Max Shields"]);
+        hull.shieldsChargeRatio = ToFixed(hullJson["Shield Charge"]);
+        hull.minShotRatio = ToFixed(hullJson["Min Shot"]);
+        hull.maxShotRatio = ToFixed(hullJson["Max Shot"]);
+        hull.shotChargeRatio = ToFixed(hullJson["Shot Charge"]);
+        hull.rideHeight = ToFixed(hullJson["Riding Height"]);
+        hull.accelerationRatio = ToFixed(hullJson["Acceleration"]);
+        hull.jumpPowerRatio = ToFixed(hullJson["Jump Power"]);
 
         hullRes = hull.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);
@@ -756,9 +751,6 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         maxAcceleration = FMul(maxAcceleration, hull.accelerationRatio);
         jumpBasePower = FMul(jumpBasePower, hull.jumpPowerRatio);
-        if (hullHandle) {
-            ReleaseResource(hullHandle);
-        }
 
         gunEnergy[0] = fullGunEnergy;
         gunEnergy[1] = fullGunEnergy;

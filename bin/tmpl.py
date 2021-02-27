@@ -16,8 +16,21 @@ def bytes_to_shorter(byte):
     shorter = b"\x00%b" % byte
     return struct.unpack('>h', shorter)[0]
 
+def bytes_to_unsigned_short(some_bytes):
+    return struct.unpack('>H', some_bytes)[0]
 
-def parse(tmpl, data):
+def bytes_to_fixed(some_bytes):
+    # "Fixed" numbers in avara are stored
+    # in a 8 bit long type, two unsigned ints
+    assert(len(some_bytes) == 4)
+    whole = bytes_to_short(some_bytes[0:2])
+    # maximum unsigned 8-bit int is 65535
+    frac = bytes_to_unsigned_short(some_bytes[2:4]) / 65535.0
+    # print("Whole: %d Frac: %f" % (whole, frac))
+    return whole + frac
+
+
+def parse_tmpl(tmpl, data):
     result = {}
 
     structure = []
@@ -182,4 +195,4 @@ if __name__ == '__main__':
     else:
         with open(sys.argv[1], "rb") as tmpl_file:
             with open(sys.argv[2], "rb") as rsrc_file:
-                print(parse(tmpl_file.read(), rsrc_file.read()))
+                print(parse_tmpl(tmpl_file.read(), rsrc_file.read()))

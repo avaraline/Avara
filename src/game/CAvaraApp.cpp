@@ -17,7 +17,7 @@
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
 #include "CCompactTagBase.h"
-#include "CLevelDescriptor.h"
+#include "CharWordLongPointer.h"
 #include "CNetManager.h"
 #include "CRC.h"
 #include "CSoundMixer.h"
@@ -33,6 +33,7 @@
 #include "Beeper.h"
 #include "httplib.h"
 #include <chrono>
+#include <json.hpp>
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -213,47 +214,34 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 
 
 OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
-    SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
+    SDL_Log("LOADING LEVEL %s FROM %s\n", OSTypeString(theLevel).c_str(), set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
-    gCurrentGame = itsGame;
-
-    bool wasLoaded = true;
-    std::string levelName("test.alf");
-    BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
-    itsGame->loadedLevel[0] = levelName.size();
-    BlockMoveData(levelName.c_str(), itsGame->loadedLevel + 1, levelName.size());
-    LoadALF(levelName);
-
-    /*
-    std::string rsrcFile = std::string("levels/") + set + ".r";
-    UseResFile(rsrcFile);
-
-    OSType setTag;
-    CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
-    CLevelDescriptor *curLevel = levels;
     std::string levelName;
-    bool wasLoaded = false;
-    while (curLevel) {
-        if (curLevel->tag == theLevel) {
-            std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
-            levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
-            BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
-            BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1);
-            Handle levelData = GetNamedResource('PICT', rsrcName);
-            if (levelData) {
-                ConvertToLevelMap(levelData);
-                ReleaseResource(levelData);
-                wasLoaded = true;
-            }
-            break;
-        }
-        curLevel = curLevel->nextLevel;
-    }
-    levels->Dispose();
-    */
 
-    if (wasLoaded) {
+    OSErr result = fnfErr;
+    gCurrentGame = itsGame;
+    BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
+    UseLevelFolder(set);
+    // still needed for sounds
+    // TODO: eliminate
+    std::string rsrcPath = std::string("levels/") + set + ".r";
+    UseResFile(rsrcPath);
+
+    std::string leveltag = OSTypeString(theLevel);
+    json setManifest = GetManifestJSON(set);
+
+    json ledi = setManifest["LEDI"][leveltag];
+    std::string alfname = ledi["Alf"];
+    levelName = ledi["Name"];
+
+    if(LoadALF(GetALFPath(alfname))) {
+        // std::string -> pascal string 
+        BlockMoveData((((char)levelName.size()) + levelName).c_str(), itsGame->loadedLevel, levelName.size() + 2);
+        result = noErr;
+    }
+
+    if (result == noErr) {
         AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
         levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];
@@ -265,7 +253,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
         itsGame->itsView->PointCamera();
     }
 
-    return noErr;
+    return result;
 }
 
 
