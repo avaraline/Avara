@@ -688,23 +688,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = ReadLongVar(iFirstHull + hullRes);
 
-        nlohmann::json hullJson = LoadHullFromSetJSON(hullRes);
-
-        hull.hullBSP = (short)hullJson["Hull Res ID"];
-        hull.maxMissiles = (short)hullJson["Max Missiles"];
-        hull.maxGrenades = (short)hullJson["Max Grenades"];
-        hull.maxBoosters = (short)hullJson["Max boosters"];
-        hull.mass = ToFixed(hullJson["Mass"]);
-        hull.energyRatio = ToFixed(hullJson["Max Energy"]);
-        hull.energyChargeRatio = ToFixed(hullJson["Energy Charge"]);
-        hull.shieldsRatio = ToFixed(hullJson["Max Shields"]);
-        hull.shieldsChargeRatio = ToFixed(hullJson["Shield Charge"]);
-        hull.minShotRatio = ToFixed(hullJson["Min Shot"]);
-        hull.maxShotRatio = ToFixed(hullJson["Max Shot"]);
-        hull.shotChargeRatio = ToFixed(hullJson["Shot Charge"]);
-        hull.rideHeight = ToFixed(hullJson["Riding Height"]);
-        hull.accelerationRatio = ToFixed(hullJson["Acceleration"]);
-        hull.jumpPowerRatio = ToFixed(hullJson["Jump Power"]);
+        LoadHullFromSetJSON(&hull, hullRes);
 
         hullRes = hull.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);

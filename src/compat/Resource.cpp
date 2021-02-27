@@ -1,6 +1,7 @@
 #include "Resource.h"
 #include "AvaraDefines.h"
 #include "Memory.h"
+#include "FastMat.h"
 
 #include <SDL2/SDL.h>
 #include <stdint.h>
@@ -283,19 +284,37 @@ nlohmann::json GetManifestJSON(std::string set) {
     return nlohmann::json::parse(setManifestFile);
 }
 
-nlohmann::json LoadHullFromSetJSON(short resId) {
+void LoadHullFromSetJSON(HullConfigRecord *hull, short resId) {
     std::string key = std::to_string(resId);
     nlohmann::json manifest = GetManifestJSON(currentLevelDir);
+    nlohmann::json hullJson = NULL;
     if (manifest != -1 && manifest.find("HULL") != manifest.end() &&
         manifest["HULL"].find(key) != manifest["HULL"].end())
-        return manifest["HULL"][key];
-    else
+        hullJson = manifest["HULL"][key];
+    else {
         manifest = GetDefaultManifestJSON();
         if (manifest.find("HULL") != manifest.end() &&
             manifest["HULL"].find(key) != manifest["HULL"].end())
-            return manifest["HULL"][key];
+            hullJson = manifest["HULL"][key];
         else
-            return manifest["HULL"]["129"];
+            hullJson = manifest["HULL"]["129"];
+    }
+
+    hull->hullBSP = (short)hullJson["Hull Res ID"];
+    hull->maxMissiles = (short)hullJson["Max Missiles"];
+    hull->maxGrenades = (short)hullJson["Max Grenades"];
+    hull->maxBoosters = (short)hullJson["Max boosters"];
+    hull->mass = ToFixed(hullJson["Mass"]);
+    hull->energyRatio = ToFixed(hullJson["Max Energy"]);
+    hull->energyChargeRatio = ToFixed(hullJson["Energy Charge"]);
+    hull->shieldsRatio = ToFixed(hullJson["Max Shields"]);
+    hull->shieldsChargeRatio = ToFixed(hullJson["Shield Charge"]);
+    hull->minShotRatio = ToFixed(hullJson["Min Shot"]);
+    hull->maxShotRatio = ToFixed(hullJson["Max Shot"]);
+    hull->shotChargeRatio = ToFixed(hullJson["Shot Charge"]);
+    hull->rideHeight = ToFixed(hullJson["Riding Height"]);
+    hull->accelerationRatio = ToFixed(hullJson["Acceleration"]);
+    hull->jumpPowerRatio = ToFixed(hullJson["Jump Power"]);
 }
 
 char* GetBSPPath(int resId) {
@@ -328,9 +347,31 @@ std::string GetALFPath(std::string alfname) {
     return std::string(BundlePath(buffa.str().c_str()));
 }
 
-std::string GetDefaultScriptPath() {
+std::string GetDefaultScript() {
     std::stringstream buffa;
     buffa << LEVELDIR << PATHSEP << currentLevelDir  << PATHSEP;
     buffa << DEFAULTSCRIPT;
-    return std::string(BundlePath(buffa.str().c_str()));
+    auto path = std::string(BundlePath(buffa.str().c_str()));
+    std::ifstream t(path);
+    if(t.good()) {
+        std::string defaultscript;
+        t.seekg(0, std::ios::end);   
+        defaultscript.reserve(t.tellg());
+        t.seekg(0, std::ios::beg);
+
+        defaultscript.assign((std::istreambuf_iterator<char>(t)),
+                              std::istreambuf_iterator<char>());
+        return defaultscript;
+    }
+    else return "";
+}
+
+std::string GetBaseScript() {
+    std::stringstream buffa;
+    buffa << "rsrc" << DEFAULTSCRIPT;
+    std::ifstream t(std::string(BundlePath(buffa.str().c_str())));
+    std::string scr;
+    scr.assign((std::istreambuf_iterator<char>(t)),
+                   std::istreambuf_iterator<char>());
+    return scr;
 }

@@ -270,20 +270,8 @@ bool LoadALF(std::string levelName) {
     InitParser();
     AvaraGLLightDefaults();
 
-    // Load and run default.avarascript
-    std::string defaultscriptpath = GetDefaultScriptPath();
-    std::ifstream t(defaultscriptpath);
-    if(t.good()) {
-        std::string defaultscript;
-        t.seekg(0, std::ios::end);   
-        defaultscript.reserve(t.tellg());
-        t.seekg(0, std::ios::beg);
-
-        defaultscript.assign((std::istreambuf_iterator<char>(t)),
-                              std::istreambuf_iterator<char>());
-        RunThis((StringPtr)defaultscript.c_str());
-    }
-
+    RunThis((StringPtr)GetDefaultScript().c_str());
+    
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(levelName.c_str());
 

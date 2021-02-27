@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Types.h"
+#include "PlayerConfig.h"
 
 #include <string>
 #include <vector>
@@ -31,5 +32,6 @@ nlohmann::json GetManifestJSON(std::string set);
 
 char* GetBSPPath(int resId);
 std::string GetALFPath(std::string alfname);
-std::string GetDefaultScriptPath();
-nlohmann::json LoadHullFromSetJSON(short resId);
+std::string GetDefaultScript();
+std::string GetBaseScript();
+void LoadHullFromSetJSON(HullConfigRecord *hull, short resId);
