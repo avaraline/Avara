@@ -1,0 +1,358 @@
+{
+    "types": {
+        "actor": {
+            "attrs": {
+                "hitSound": {
+                    "default": "hitSoundDefault",
+                    "description": "The sound that the object makes when it is hit, or something explodes nearby."
+                },
+                "hitVolume": {
+                    "default": 25
+                },
+                "blastSound": {
+                    "default": "snBlast",
+                    "description": "The sound that the object makes when it is destroyed."
+                },
+                "blastVolume": {
+                    "default": 40
+                },
+                "shield": {
+                    "default": -1,
+                    "description": "The shield value for the object. Negative numbers mean an infinite shield, i.e. an indestructible object."
+                },
+                "power": {
+                    "default": 0,
+                    "description": "The explosion damage done at a distance of 1 meter or less. Beyond this range, damage done is power / distance ^ 2. The minimum damage is 1/16 units, so a mine with a blasting power of 2 will do the minimum 0.0625 units of damage at a distance of 5.6 meters."
+                },
+                "team": {
+                    "default": 0,
+                    "description": "Assigns a team to the object. By default, most objects belong to the computer team (team zero). Changing this value may change the behavior of certain objects and can affect how scores are calculated."
+                },
+                "isTarget": {
+                    "default": false,
+                    "description": "If true, the object is considered a target by the player HUDs and the HUD indicators will light up accordingly."
+                },
+                "hitMsg": {
+                    "default": 0,
+                    "description": "This message is sent whenever the object has been hit (or destroyed)."
+                },
+                "killMsg": {
+                    "default": 0,
+                    "description": "This message is sent whenever the object has been destroyed."
+                },
+                "hitScore": {
+                    "default": 0,
+                    "description": "Points are awarded according to the power of the hit on the object (energy * hitScore)."
+                },
+                "killScore": {
+                    "default": 0,
+                    "description": "The number of points awarded when the object has been destroyed."
+                },
+                "shapeScale": {
+                    "default": 1,
+                    "description": "Allows you to scale the bsp shapes for the object."
+                },
+                "yon": {
+                    "default": 0,
+                    "description": "Distance at which the object is clipped from view. If 0, the default value is used."
+                },
+                "stepOnMsg": {
+                    "default": 0,
+                    "description": "This message is sent whenever a player steps on the object."
+                },
+                "traction": {
+                    "default": "defaultTraction"
+                },
+                "friction": {
+                    "default": "defaultFriction"
+                }
+            }
+        },
+        "placed": {
+            "attrs": {
+                "y": {
+                    "default": 0,
+                    "description": "The altitude of the object relative to the ground."
+                }
+            }
+        },
+        "glow": {
+            "attrs": {
+                "canGlow": {
+                    "description": "If the object type is destructible by default (i.e. has a positive `shields` property by default), `canGlow` will be true by default. Otherwise, it will be false. You can override it either way."
+                }
+            }
+        },
+        "shooter": {
+            "attrs": {
+                "mask": {
+                    "default": "allTeams",
+                    "description": "The teams the object will target."
+                },
+                "watch": {
+                    "default": "playerMask",
+                    "description": "What the object will watch for and attack. `playerMask` and `scoutMask` are valid values and may be added to combine them."
+                },
+                "activeRange": {
+                    "default": 100,
+                    "description": "The radius within which the object looks for targets to attack."
+                },
+                "shotPower": {
+                    "default": 0.5,
+                    "description": "The power of a single shot."
+                },
+                "burstLength": {
+                    "default": 2,
+                    "description": "How many shots can be fired in a single burst."
+                },
+                "burstSpeed": {
+                    "default": 5,
+                    "description": "How many frames elapse between each shot in a burst."
+                },
+                "burstCharge": {
+                    "default": 40,
+                    "description": "How many frames elapse to recharge after the first shot of a burst has been fired."
+                }
+            }
+        }
+    },
+    "objects": {
+        "Walker": {
+            "type": [],
+            "attrs": {},
+            "index": 1,
+            "description": ""
+        },
+        "Sphere": {
+            "type": [],
+            "attrs": {},
+            "index": 2,
+            "description": ""
+        },
+        "Hologram": {
+            "type": [],
+            "attrs": {},
+            "index": 3,
+            "description": ""
+        },
+        "Solid": {
+            "type": [],
+            "attrs": {},
+            "index": 4,
+            "description": ""
+        },
+        "WallSolid": {
+            "type": [],
+            "attrs": {},
+            "index": 5,
+            "description": ""
+        },
+        "FreeSolid": {
+            "type": [],
+            "attrs": {},
+            "index": 6,
+            "description": ""
+        },
+        "Dome": {
+            "type": [
+                "placed"
+            ],
+            "attrs": {
+                "hasFloor": {
+                    "default": false,
+                    "description": "Whether the dome should render a floor."
+                },
+                "pitch": {
+                    "default": 0,
+                    "description": "Rotation around the X axis, in degrees."
+                },
+                "roll": {
+                    "default": 0,
+                    "description": "Rotation around the Z axis, in degrees."
+                }
+            },
+            "index": 7,
+            "description": ""
+        },
+        "Ramp": {
+            "type": [],
+            "attrs": {},
+            "index": 8,
+            "description": ""
+        },
+        "TriPyramid": {
+            "type": [],
+            "attrs": {},
+            "index": 9,
+            "description": ""
+        },
+        "Door": {
+            "type": [],
+            "attrs": {},
+            "index": 10,
+            "description": ""
+        },
+        "Door2": {
+            "type": [],
+            "attrs": {},
+            "index": 11,
+            "description": ""
+        },
+        "WallDoor": {
+            "type": [],
+            "attrs": {},
+            "index": 12,
+            "description": ""
+        },
+        "Area": {
+            "type": [],
+            "attrs": {},
+            "index": 13,
+            "description": ""
+        },
+        "Text": {
+            "type": [],
+            "attrs": {},
+            "index": 14,
+            "description": ""
+        },
+        "Field": {
+            "type": [],
+            "attrs": {},
+            "index": 15,
+            "description": ""
+        },
+        "Goody": {
+            "type": [],
+            "attrs": {},
+            "index": 16,
+            "description": ""
+        },
+        "Switch": {
+            "type": [],
+            "attrs": {},
+            "index": 17,
+            "description": ""
+        },
+        "Guard": {
+            "type": [],
+            "attrs": {},
+            "index": 18,
+            "description": ""
+        },
+        "GroundColor": {
+            "type": [],
+            "attrs": {},
+            "index": 19,
+            "description": ""
+        },
+        "SkyColor": {
+            "type": [],
+            "attrs": {},
+            "index": 20,
+            "description": ""
+        },
+        "Incarnator": {
+            "type": [],
+            "attrs": {},
+            "index": 21,
+            "description": ""
+        },
+        "Teleporter": {
+            "type": [],
+            "attrs": {},
+            "index": 22,
+            "description": ""
+        },
+        "Pill": {
+            "type": [],
+            "attrs": {},
+            "index": 23,
+            "description": ""
+        },
+        "Ball": {
+            "type": [],
+            "attrs": {},
+            "index": 24,
+            "description": ""
+        },
+        "Goal": {
+            "type": [],
+            "attrs": {},
+            "index": 25,
+            "description": ""
+        },
+        "Mine": {
+            "type": [],
+            "attrs": {},
+            "index": 26,
+            "description": ""
+        },
+        "Parasite": {
+            "type": [],
+            "attrs": {},
+            "index": 27,
+            "description": ""
+        },
+        "Ufo": {
+            "type": [],
+            "attrs": {},
+            "index": 28,
+            "description": ""
+        },
+        "Sound": {
+            "type": [],
+            "attrs": {},
+            "index": 29,
+            "description": ""
+        },
+        "Timer": {
+            "type": [],
+            "attrs": {},
+            "index": 30,
+            "description": ""
+        },
+        "Delay": {
+            "type": [],
+            "attrs": {},
+            "index": 31,
+            "description": ""
+        },
+        "Counter": {
+            "type": [],
+            "attrs": {},
+            "index": 32,
+            "description": ""
+        },
+        "And": {
+            "type": [],
+            "attrs": {},
+            "index": 33,
+            "description": ""
+        },
+        "Distributor": {
+            "type": [],
+            "attrs": {},
+            "index": 34,
+            "description": ""
+        },
+        "Base": {
+            "type": [],
+            "attrs": {},
+            "index": 35,
+            "description": ""
+        },
+        "YonBox": {
+            "type": [],
+            "attrs": {},
+            "index": 36,
+            "description": ""
+        },
+        "YonSphere": {
+            "type": [],
+            "attrs": {},
+            "index": 37,
+            "description": ""
+        }
+    }
+}
