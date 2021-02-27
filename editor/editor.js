@@ -95,38 +95,39 @@ function ref(msg) {
 
 function avarluate(atom) {
     // num
-    if (!isNaN(atom)) return atom;
+    if (!isNaN(atom)) return atom
     // str
-    if (typeof atom === "string" || atom instanceof String) return atom;
+    if (typeof atom === "string" || atom instanceof String) return atom
     // name
-    if (atom["name"]) get_variable(atom["name"])
+    if (atom["name"]) return get_variable(atom["name"])
     // reference
-    if (atom["reference"]) return ref(atom["reference"]);
-    // function
-    if (atom["func"]) {
-        if(builtins[atom["func"]]) {
-            return builtins[atom["func"]](avarluate(atom["expr"]));
-        }
-        else {
-            console.log("Undefined function " + atom["func"]);
-            return undefined;
-        }
-    }
+    if (atom["reference"]) return ref(atom["reference"])
     // op
     if (atom["op"]) {
-        return atom["op"];
+        return atom["op"]
     }
     // expr
     if (atom["expr"]) return avarluate(atom["expr"]);
+    // function
+    if (atom["func"]) {
+        if(builtins[atom["func"]]) {
+            //console.log("calling " + atom["func"] + " with " + atom["args"]);
+            return builtins[atom["func"]](...atom["args"].map(a => avarluate(a)))
+        }
+        else {
+            console.log("Undefined function " + atom["func"])
+            return undefined
+        }
+    }
     // array of terms
     if (Array.isArray(atom)) {
         var statement = atom.reduce((res, a) => {
-            return res + " " + avarluate(a);
-        }, "");
-        console.log("going to eval: " + statement)
-        return eval(statement);
+            return res + " " + avarluate(a)
+        }, "")
+        //console.log("going to eval: " + statement)
+        return eval(statement)
     }
-
+    return undefined
 }
 
 function handleObject(ctx, ins) {
@@ -154,36 +155,33 @@ function handleObject(ctx, ins) {
 
 
 function handleScript(ctx, data) {
-    //console.log(elem.textContent);
-    if(data["instructions"]){
-        data["instructions"].forEach((ins) => {
-            switch(ins["type"]) {
-                case "declaration":
-                    set_variable(ins["variable"], ins["expr"]);
-                    break;
-                case "object":
-                case "adjust":
-                    handleObject(ctx, ins);
-                    break;
-                case "unique":
-                    ins["tokens"].forEach((tk) => {
-                        set_variable(tk, unique_value);
-                        unique_value += 1;
-                    });
-                    break;
-                case "enum":
-                    var start = ins["start"];
-                    ins["tokens"].forEach((tk) => {
-                        set_variable(tk, start);
-                        start += 1;
-                    });
-                    break;
-                case "set_unique_start":
-                    unique_value = ins["start"];
-                    break;
-            }
-        })
-    }
+    data.forEach((ins) => {
+        switch(ins["type"]) {
+            case "declaration":
+                set_variable(ins["variable"], ins["expr"]);
+                break;
+            case "object":
+            case "adjust":
+                handleObject(ctx, ins);
+                break;
+            case "unique":
+                ins["tokens"].forEach((tk) => {
+                    set_variable(tk, unique_value);
+                    unique_value += 1;
+                });
+                break;
+            case "enum":
+                var start = ins["start"];
+                ins["tokens"].forEach((tk) => {
+                    set_variable(tk, start);
+                    start += 1;
+                });
+                break;
+            case "set_unique_start":
+                unique_value = ins["start"];
+                break;
+        }
+    });
 
     if(is_defined("wa")) {
         ctx.wa = get_variable("wa");
