@@ -232,17 +232,10 @@ class RectOp(AvaraOperation):
                 "d": dumb_round(self.rect.height),
             }
         )
-        if self.stroke == 1 and self.tag == "rect":
+        if self.stroke == 1 and self.tag in ("rect", "rrect"):
             attrs = object_context("Wall", context)
-            if self.radius:
+            if self.radius and self.tag == "rrect":
                 attrs["h"] = dumb_round(self.radius * context["pixelToThickness"])
-            elif context.get("wallHeight"):
-                try:
-                    # If wallHeight is numeric (not a variable/forumla), promote it to "h"
-                    float(context["wallHeight"])
-                    attrs["h"] = context["wallHeight"]
-                except ValueError:
-                    pass
             if context.get("wa"):
                 try:
                     # If wa is numeric, promote it to "y"
@@ -256,7 +249,7 @@ class RectOp(AvaraOperation):
 
 
 class RoundRectOp(RectOp):
-    tag = "rect"
+    tag = "rrect"
 
 
 class ArcOp(RectOp):
@@ -273,7 +266,7 @@ class ArcOp(RectOp):
                 "fill": self.fill,
                 "frame": self.frame,
                 "cx": dumb_round(self.rect.center.x),
-                "cy": dumb_round(self.rect.center.y),
+                "cz": dumb_round(self.rect.center.y),
                 "r": dumb_round(max(self.rect.width, self.rect.height) / 2),
                 "angle": self.start,
                 "extent": self.extent,

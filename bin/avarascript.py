@@ -51,12 +51,12 @@ script = pp.ZeroOrMore(
 )
 
 
-DEFAULT_CONTEXT = ("fill", "frame", "cx", "cy", "r", "angle", "extent")
+DEFAULT_CONTEXT = ("fill", "frame", "cx", "cz", "r", "angle", "extent")
 OBJ_CONTEXT = {
     "SkyColor": ("fill", "frame"),
     "GroundColor": ("fill", "frame"),
     "Wall": ("fill", "frame", "x", "y", "z", "w", "d", "h"),
-    "WallDoor": ("fill", "frame", "x", "y", "z", "w", "d", "h"),
+    "WallDoor": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "cx", "cz", "angle", "extent"),
     "Ramp": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
 }
 
@@ -148,9 +148,9 @@ class Declaration(ScriptObject):
 
     def process(self, context):
         context[self.name] = self.value
-        if self.name in ("wa", "wallHeight"):
+        if self.name == "wa":
             try:
-                # If these are just numbers, we promote them to "y" or "h" in the context.
+                # Set "wa" as "y" on the Wall object directly, not in context.
                 float(self.value)
                 return False
             except ValueError:

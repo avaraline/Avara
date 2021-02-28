@@ -136,7 +136,7 @@ struct ALFWalker: pugi::xml_tree_walker {
                h = node.attribute("h").value(),
                d = node.attribute("d").value(),
                cx = node.attribute("cx").value(),
-               cy = node.attribute("cy").value(),
+               cz = node.attribute("cz").value(),
                r = node.attribute("r").value(),
                angle = node.attribute("angle").value(),
                extent = node.attribute("extent").value();
@@ -168,18 +168,18 @@ struct ALFWalker: pugi::xml_tree_walker {
             gLastBoxRect.right = gLastBoxRect.left + std::lround(std::stod(w) * UNITPOINTS);
         }
 
-        if (!cx.empty() && !cy.empty()) {
+        if (!cx.empty() && !cz.empty()) {
             Fixed centerX = ToFixed(std::stod(cx)),
-                  centerY = ToFixed(std::stod(cy));
+                  centerZ = ToFixed(std::stod(cz));
 
             lastArcPoint.h = centerX;
-            lastArcPoint.v = centerY;
+            lastArcPoint.v = centerZ;
 
             lastDomeCenter.h = centerX;
-            lastDomeCenter.v = centerY;
+            lastDomeCenter.v = centerZ;
 
             lastOvalPoint.h = centerX;
-            lastOvalPoint.v = centerY;
+            lastOvalPoint.v = centerZ;
         }
 
         if (!r.empty()) {
@@ -254,7 +254,7 @@ struct ALFWalker: pugi::xml_tree_walker {
                 attr.compare("h") == 0 ||
                 attr.compare("d") == 0 ||
                 attr.compare("cx") == 0 ||
-                attr.compare("cy") == 0 ||
+                attr.compare("cz") == 0 ||
                 attr.compare("r") == 0 ||
                 attr.compare("angle") == 0 ||
                 attr.compare("extent") == 0
@@ -271,7 +271,7 @@ bool LoadALF(std::string levelName) {
     AvaraGLLightDefaults();
 
     RunThis((StringPtr)GetDefaultScript().c_str());
-    
+
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(levelName.c_str());
 
