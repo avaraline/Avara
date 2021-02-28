@@ -232,10 +232,10 @@ class RectOp(AvaraOperation):
                 "d": dumb_round(self.rect.height),
             }
         )
+        if self.radius and self.tag == "rrect":
+            context["h"] = dumb_round(self.radius * context["pixelToThickness"])
         if self.stroke == 1 and self.tag in ("rect", "rrect"):
             attrs = object_context("Wall", context)
-            if self.radius and self.tag == "rrect":
-                attrs["h"] = dumb_round(self.radius * context["pixelToThickness"])
             if context.get("wa"):
                 try:
                     # If wa is numeric, promote it to "y"
