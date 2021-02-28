@@ -638,7 +638,7 @@ class DHText(Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode("macintosh")
-        context.text(text)
+        context.text(text, newline=False)
 
 
 class DVText(Operation):
