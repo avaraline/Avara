@@ -4,6 +4,7 @@ import sys
 import os
 import json
 import subprocess
+import threading
 from forker import get_forks
 from tmpl import parse_tmpl
 from pict2alf import parse_pict
@@ -16,13 +17,25 @@ ALFEXT = ".alf"
 SCRIPTFILE = "default.avarascript"
 OGGDIR = "ogg"
 
+EXPORT_SOUNDS = False
+
 def is_exe(path):
     return os.path.isfile(path) and os.access(path, os.X_OK)
 
 if not is_exe(os.path.join("build", "hsnd2wav")) and \
-   not is_exe(os.path.join("build", "hsnd2wav.exe")):
+   not is_exe(os.path.join("build", "hsnd2wav.exe")) and EXPORT_SOUNDS:
     print("Please build hsnd2wav to use this utility: make hsnd2wav")
     exit(1)
+
+def writebsp(bsppath, bspd):
+    bsp = BSP(bspd).avara_format()
+    with open(bsppath, 'w', encoding="utf-8") as bspf:
+        bspf.write(bsp)
+
+def writealf(alfpath, alfd):
+    alf = parse_pict(alfd)
+    with open(alfpath, "w", encoding="utf-8") as alff:
+        alff.write(alf)
 
 sndfile_convert_found = False
 for path in os.environ["PATH"].split(os.pathsep):
@@ -31,7 +44,7 @@ for path in os.environ["PATH"].split(os.pathsep):
     if is_exe(exe_file) or is_exe(bin_file):
         sndfile_convert_found = True
 
-if not sndfile_convert_found:
+if not sndfile_convert_found and EXPORT_SOUNDS:
     print("Please install sndfile-convert to change WAV into OGG")
     exit(1)
 
@@ -74,9 +87,16 @@ def convert_to_files(datafile, thedir):
     for le in rledi["*****"]:
         alfname = sane_filename(le["Path"]) + ALFEXT
         alfpath = os.path.join(alfdir, alfname)
-        if len(le["Path"]) > 0:
-            with open(alfpath, "w", encoding="utf-8") as alff:
-                alff.write(parse_pict(picts[le["Path"].lower()]))
+        if os.path.exists(alfpath):
+            print(f"Skipping {alfpath} - exists")
+            continue
+        pictk = le["Path"].lower()
+        if len(pictk) > 0:
+            if not pictk in picts:
+                print(f"Skipping {alfpath} - Couldn't find pict '{pictk}'")
+                continue
+            print(alfpath)
+            writealf(alfpath, picts[pictk])
 
         result["LEDI"][le["Tag"]] = {
             "Alf": alfname,
@@ -87,11 +107,13 @@ def convert_to_files(datafile, thedir):
     if "HULL" in forks:
         result["HULL"] = get_tmpl(forks, "HULL")
 
-    if "HSND" in forks:
+    if "HSND" in forks and EXPORT_SOUNDS:
         # todo: export ogg and point to new file
         hsnd = get_tmpl(forks, "HSND")
         result["HSND"] = get_tmpl(forks, "HSND")
         oggpath = os.path.join(thedir, OGGDIR)
+        if os.path.exists(oggpath):
+            print(f"Skipping {oggpath} - exists")
         os.makedirs(oggpath, exist_ok=True)
         for k in result["HSND"].keys():
             oggfile = str(k) + ".ogg"
@@ -118,9 +140,28 @@ def convert_to_files(datafile, thedir):
         for k in rbsps.keys():
             bspname = str(k) + ".json"
             bsppath = os.path.join(bspspath, bspname)
-            with open(bsppath, 'w', encoding="utf-8") as bspf:
-                bspd = [x["data"] for x in forks["BSPT"] if x["id"] == k][0]
-                bspf.write(BSP(bspd).avara_format())
+            if os.path.exists(bsppath):
+                print(f"Skipping {bsppath} - exists")
+                continue
+            print(bsppath)
+
+            bspd = [x["data"] for x in forks["BSPT"] if x["id"] == k][0]
+
+            datapath = os.path.join(bspspath, str(k))
+            with open(datapath, 'wb') as datafile:
+                datafile.write(bspd)
+
+            args = ['bin/bspt.py', datapath]
+            popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+            bsp, err = popen.communicate()
+
+            with open(bsppath, 'w') as bspfile:
+                bspfile.write(bsp.decode('utf-8'))
+
+            try:
+                os.remove(datapath)
+            except FileNotFoundError:
+                pass
 
     setpath = os.path.join(thedir, SETFILE)
     with open(setpath, "w", encoding="utf-8") as setfile:
