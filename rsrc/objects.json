@@ -114,6 +114,122 @@
                     "description": "How many frames elapse to recharge after the first shot of a burst has been fired."
                 }
             }
+        },
+        "logic": {
+            "attrs": {
+                "out": {
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[0]": {
+                    "alfRepr": "out.0",
+                    "default": "out",
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[1]": {
+                    "alfRepr": "out.1",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[2]": {
+                    "alfRepr": "out.2",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[3]": {
+                    "alfRepr": "out.3",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[4]": {
+                    "alfRepr": "out.4",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[5]": {
+                    "alfRepr": "out.5",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[6]": {
+                    "alfRepr": "out.6",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[7]": {
+                    "alfRepr": "out.7",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[8]": {
+                    "alfRepr": "out.8",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[9]": {
+                    "alfRepr": "out.9",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "restart": {
+                    "default": true,
+                    "description": "If true, the same logic object can be used more than once. When the conditions are triggered and messages are sent out, the logic object is reset to its original condition."
+                },
+                "in": {
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[0]": {
+                    "alfRepr": "in.0",
+                    "default": "in",
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[1]": {
+                    "alfRepr": "in.1",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[2]": {
+                    "alfRepr": "in.2",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[3]": {
+                    "alfRepr": "in.3",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[4]": {
+                    "alfRepr": "in.4",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[5]": {
+                    "alfRepr": "in.5",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[6]": {
+                    "alfRepr": "in.6",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[7]": {
+                    "alfRepr": "in.7",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[8]": {
+                    "alfRepr": "in.8",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[9]": {
+                    "alfRepr": "in.9",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                }
+            }
         }
     },
     "objects": {
