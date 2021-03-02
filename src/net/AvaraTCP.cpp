@@ -13,18 +13,21 @@
 
 #include "Memory.h"
 
-#include <map>
+#include <SDL2/SDL.h>
+
+#include <unistd.h>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <sys/select.h>
+#include <sys/time.h>
 
 typedef struct {
     ReadCompleteProc *callback;
     void *userData;
 } UDPReadData;
 
-SDLNet_SocketSet sockSet = NULL;
-// std::map<UDPsocket, UDPReadData*> pendingReads;
-Boolean gAvaraTCPOpen = false;
-
-UDPsocket gReadSocket;
+static Boolean gAvaraTCPOpen = false;
+static int gReadSocket = -1;
 UDPReadData gReadCallback;
 
 OSErr PascalStringToAddress(StringPtr name, ip_addr *addr) {
@@ -40,93 +43,137 @@ OSErr OpenAvaraTCP() {
         return noErr;
     }
     SDL_Log("OpenAvaraTCP\n");
-    sockSet = SDLNet_AllocSocketSet(1);  // only need 1 UDP socket
     gAvaraTCPOpen = true;
     return noErr;
 }
 
-UDPsocket CreateSocket(uint16_t port) {
-    UDPsocket sock = SDLNet_UDP_Open(port);
-    if (sock) {
-        SDLNet_UDP_AddSocket(sockSet, sock);
+int CreateSocket(uint16_t port) {
+    int sock = socket(AF_INET, SOCK_DGRAM, 0);
+    if (sock != -1) {
+        //int reuseAddrValue = 1;
+        //setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &reuseAddrValue, sizeof(int));
+
+        struct sockaddr_in sock_addr;
+        memset(&sock_addr, 0, sizeof(sock_addr));
+        sock_addr.sin_family = AF_INET;
+        sock_addr.sin_addr.s_addr = INADDR_ANY;
+        sock_addr.sin_port = htons(port);
+
+        if (bind(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) == -1) {
+            SDL_Log("Failed to bind socket to port %d", port);
+            DestroySocket(sock);
+        }
     } else {
-        SDL_Log("Failed to create socket on port %d: %s\n", port, SDLNet_GetError());
+        SDL_Log("Failed to create socket on port %d", port);
     }
     return sock;
 }
 
-void DestroySocket(UDPsocket sock) {
-    if(sock) {
-        gReadSocket = NULL;
-        SDLNet_UDP_DelSocket(sockSet, sock);
-        SDLNet_UDP_Close(sock);
+void DestroySocket(int sock) {
+    if(sock != -1) {
+        gReadSocket = -1;
+        close(sock);
     }
 }
 
+UDPpacket * CreatePacket(int bufferSize) {
+    UDPpacket *packet = (UDPpacket *)malloc(sizeof(UDPpacket));
+    packet->data = (u_int8_t *)malloc(bufferSize);
+    packet->len = 0;
+    packet->data[0] = 0;
+    return packet;
+}
+
+void FreePacket(UDPpacket *packet) {
+    if (packet) {
+        free(packet->data);
+        free(packet);
+    }
+}
+
+int ResolveHost(IPaddress *address, const char *host, u_int16_t port) {
+    address->port = htons(port);
+    if (host == NULL) {
+        address->host = INADDR_ANY;
+    }
+    else {
+        address->host = inet_addr(host);
+        if (address->host == INADDR_NONE) {
+            struct hostent *hp = gethostbyname(host);
+            if (hp) {
+                memcpy(&address->host, hp->h_addr, hp->h_length);
+            } else {
+                return -1;
+            }
+        }
+    }
+    return noErr;
+}
+
 void CheckSockets() {
-    if (sockSet == NULL) {
+    if (!gAvaraTCPOpen) {
         SDL_Log("CheckSockets called before OpenAvaraTCP\n");
         return;
     }
 
-    if (gReadSocket && SDLNet_CheckSockets(sockSet, 0) > 0) {
-        if (SDLNet_SocketReady(gReadSocket)) {
-            UDPpacket *packet = SDLNet_AllocPacket(UDPSTREAMBUFFERSIZE);
-            while (SDLNet_UDP_Recv(gReadSocket, packet) > 0) {
+    if (gReadSocket == -1) return;
+
+    fd_set readSet;
+    FD_ZERO(&readSet);
+    FD_SET(gReadSocket, &readSet);
+
+    timeval timeout;
+    timeout.tv_sec = 0;
+    timeout.tv_usec = 0;
+
+    if (select(gReadSocket + 1, &readSet, NULL, NULL, &timeout) > 0) {
+        if (FD_ISSET(gReadSocket, &readSet)) {
+            struct sockaddr_in addr;
+            socklen_t len = sizeof(addr);
+            UDPpacket *packet = CreatePacket(UDPSTREAMBUFFERSIZE);
+            int status = recvfrom(
+                gReadSocket,
+                packet->data,
+                UDPSTREAMBUFFERSIZE,
+                0,
+                (struct sockaddr *)&addr,
+                &len
+            );
+            if (status > 0) {
+                packet->len = status;
+                packet->address.host = addr.sin_addr.s_addr;
+                packet->address.port = addr.sin_port;
                 gReadCallback.callback(packet, gReadCallback.userData);
             }
-            SDLNet_FreePacket(packet);
+            FreePacket(packet);
         }
-        /*
-        for(auto it = pendingReads.cbegin(); it != pendingReads.cend(); ) {
-            UDPsocket sock = it->first;
-            UDPReadData *completion = it->second;
-            if(SDLNet_SocketReady(sock)) {
-                // Remove this BEFORE the callback, since it may ask for another read...
-                it = pendingReads.erase(it);
-                //SDL_Log("Socket %x ready for action!\n", sock);
-                UDPpacket *packet = SDLNet_AllocPacket(UDPSTREAMBUFFERSIZE);
-                if(SDLNet_UDP_Recv(sock, packet)) {
-                    //SDL_Log("Socket %x received packet (len=%d)\n", sock, packet->len);
-                    completion->callback(packet, completion->userData);
-                    DisposePtr((Ptr)completion);
-                }
-                SDLNet_FreePacket(packet);
-                SDLNet_UDP_DelSocket(sockSet, sock);
-            }
-            else {
-                it = std::next(it);
-            }
-        }
-        */
     }
 }
 
-void UDPRead(UDPsocket sock, ReadCompleteProc callback, void *userData) {
-    if(sock) {
+void UDPRead(int sock, ReadCompleteProc callback, void *userData) {
+    if (sock != -1) {
         gReadCallback.callback = callback;
         gReadCallback.userData = userData;
         // setting gReadSocket signals to CheckSockets that we're ready to start accepting data
         gReadSocket = sock;
     }
-    // SDL_Log("UDPRead socket=%x\n", sock);
-    // TODO: make sure MacTCP didn't allow queueing multiple UDPRead calls
-    /*
-    UDPReadData *completion = (UDPReadData *)NewPtr(sizeof(UDPReadData));
-    completion->callback = callback;
-    completion->userData = userData;
-    pendingReads.insert(std::pair<UDPsocket,UDPReadData*>(sock, completion));
-    */
 }
 
-void UDPWrite(UDPsocket sock, UDPpacket *packet, WriteCompleteProc callback, void *userData) {
-    // SDL_Log("UDPWrite socket=%x dest=%lu:%d\n", sock, packet->address.host, packet->address.port);
-    // TODO: I think UDP writes are non-blocking, but check
-    if(sock) {
-        int sent = SDLNet_UDP_Send(sock, -1, packet);
-        if (sent <= 0) {
-            SDL_Log("Send failed: %s\n", SDLNet_GetError());
-        }
+void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *userData) {
+    if (sock != -1) {
+        struct sockaddr_in sock_addr;
+        memset(&sock_addr, 0, sizeof(sock_addr));
+        sock_addr.sin_addr.s_addr = packet->address.host;
+        sock_addr.sin_port = packet->address.port;
+        sock_addr.sin_family = AF_INET;
+        ssize_t sent = sendto(
+            sock,
+            packet->data,
+            packet->len,
+            0,
+            (struct sockaddr *)&sock_addr,
+            sizeof(sock_addr)
+        );
         callback(sent > 0 ? noErr : -1, userData);
     }
 }
