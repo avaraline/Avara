@@ -15,12 +15,12 @@
 #define UDPSENDBUFFERSIZE 1024
 
 typedef struct {
-    u_int32_t host;
-    u_int16_t port;
+    uint32_t host;
+    uint16_t port;
 } IPaddress;
 
 typedef struct {
-    u_int8_t *data;
+    uint8_t *data;
     unsigned int len;
     IPaddress address;
 } UDPpacket;
@@ -36,7 +36,7 @@ typedef void WriteCompleteProc(int result, void *userData);
 UDPpacket * CreatePacket(int bufferSize);
 void FreePacket(UDPpacket *packet);
 
-int ResolveHost(IPaddress *address, const char *host, u_int16_t port);
+int ResolveHost(IPaddress *address, const char *host, uint16_t port);
 
 int CreateSocket(uint16_t port);
 void DestroySocket(int sock);
