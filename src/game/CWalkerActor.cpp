@@ -541,7 +541,10 @@ void CWalkerActor::MoveLegs() {
             } else {
                 theLeg->touchIdent = 0;
             }
-            theLeg->x = (targetX - theSpeed + theLeg->x) >> 1;
+            // This originally subtracted theSpeed. Changed because it would cause
+            // repeated UndoLegs when crouch-walking backwards on ramps.
+            Fixed absSpeed = theSpeed > 0 ? theSpeed : -theSpeed;
+            theLeg->x = (targetX - absSpeed + theLeg->x) >> 1;
             theLeg->y = tempZ;
         }
 
