@@ -9,6 +9,21 @@
 
 #define MAIN_AVARA_TCP
 
+#ifdef _WIN32 
+typedef int socklen_t;
+/* POSIX ssize_t is not a thing on Windows */
+typedef signed long long int ssize_t;
+
+#include <winsock2.h>
+#include <WS2tcpip.h>
+#include <iphlpapi.h>
+#include <windows.h>
+#else
+#include <netdb.h>
+#include <sys/socket.h>
+#include <sys/select.h>
+#endif
+
 #include "AvaraTCP.h"
 
 #include "Memory.h"
@@ -16,9 +31,6 @@
 #include <SDL2/SDL.h>
 
 #include <unistd.h>
-#include <netdb.h>
-#include <sys/socket.h>
-#include <sys/select.h>
 #include <sys/time.h>
 
 typedef struct {
@@ -78,7 +90,7 @@ void DestroySocket(int sock) {
 
 UDPpacket * CreatePacket(int bufferSize) {
     UDPpacket *packet = (UDPpacket *)malloc(sizeof(UDPpacket));
-    packet->data = (u_int8_t *)malloc(bufferSize);
+    packet->data = (uint8_t *)malloc(bufferSize);
     packet->len = 0;
     packet->data[0] = 0;
     return packet;
@@ -91,7 +103,7 @@ void FreePacket(UDPpacket *packet) {
     }
 }
 
-int ResolveHost(IPaddress *address, const char *host, u_int16_t port) {
+int ResolveHost(IPaddress *address, const char *host, uint16_t port) {
     address->port = htons(port);
     if (host == NULL) {
         address->host = INADDR_ANY;
@@ -133,7 +145,7 @@ void CheckSockets() {
             UDPpacket *packet = CreatePacket(UDPSTREAMBUFFERSIZE);
             int status = recvfrom(
                 gReadSocket,
-                packet->data,
+                (char *)packet->data,
                 UDPSTREAMBUFFERSIZE,
                 0,
                 (struct sockaddr *)&addr,
@@ -168,7 +180,7 @@ void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *use
         sock_addr.sin_family = AF_INET;
         ssize_t sent = sendto(
             sock,
-            packet->data,
+            (char*)packet->data,
             packet->len,
             0,
             (struct sockaddr *)&sock_addr,
