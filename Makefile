@@ -43,6 +43,7 @@ else
 	PKG_CONFIG ?= pkg-config
 	LDFLAGS += -lstdc++ -lm -lpthread -ldl
 	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l glu)
+	LDFLAGS += $(shell ${PKG_CONFIG} --libs-only-l sdl2)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I directfb)
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I sdl2)
 	CPPFLAGS += -fPIC
