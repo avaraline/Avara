@@ -302,8 +302,10 @@ void CSmartPart::RayTest(RayHitRecord *hitRec) {
                             whichPlane = i;
                         }
                     }
-
-                    if (boxDist >= 0 && boxDist < hitRec->distance) {
+                    // Original was boxDist < hitRec->distance
+                    // Changed because some zero-height walls on the ground were not
+                    // triggering collisions (boxDist == hitRec->distance).
+                    if (boxDist >= 0 && boxDist <= hitRec->distance) {
                         Fixed coord;
                         for (i = 0; i < NUMDIM; i++) {
                             if (i != whichPlane) {
