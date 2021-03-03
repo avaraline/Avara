@@ -147,7 +147,7 @@ void CUDPComm::WriteAndSignPacket(PacketInfo *thePacket) {
     short dummyStackVar;
 
     thePacket->sender = myId; //	Sign it.
-    
+
     // SDL_Log("CUDPComm::WriteAndSignPacket   cmd=%d p1=%d p2=%d p3=%d sndr=%d dist=0x%02hx\n",
     //         thePacket->command, thePacket->p1, thePacket->p2, thePacket->p3,
     //         thePacket->sender, thePacket->distribution);
@@ -249,7 +249,7 @@ CUDPConnection * CUDPComm::ConnectionForPacket(UDPpacket *udp) {
         flags_offset = (rsn & 1) ? 10 : 6; // skip past ackBitmap if received sn is odd
         flags = *(int8_t *)(udp->data + flags_offset);
 
-        senderId = 0;  // default to server if senderId not in packet 
+        senderId = 0;  // default to server if senderId not in packet
         if (flags & 128) {
             // jump past the other fields to extract sender
             int sender_offset = flags_offset +
@@ -514,7 +514,7 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
             std::string passwordStr =  gApplication->String(kServerPassword);
             password[0] = passwordStr.length();
             BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
-            
+
             for (i = 0; i <= password[0]; i++) {
                 if (password[i] != thePacket->dataBuffer[i]) {
                     loginErr = afpPwdExpiredErr;
@@ -898,8 +898,7 @@ Boolean CUDPComm::AsyncWrite() {
         }
         origCramCount = cramCount--;
 
-        UDPpacket *udp = SDLNet_AllocPacket(UDPSENDBUFFERSIZE);
-        udp->channel = -1;
+        UDPpacket *udp = CreatePacket(UDPSENDBUFFERSIZE);
 
         outData.c = (char *)udp->data;
         versionCheck = outData.uw++;
@@ -1065,7 +1064,7 @@ Boolean CUDPComm::AsyncWrite() {
                 SDL_Log("   WRITING UDP packet to %s using stream %p\n",
                         FormatAddr(udp->address).c_str(), stream);
             #endif
-            
+
             #if RANDOMLY_DROP_PACKETS
                 if (rand() < RAND_MAX/256 || numToDrop > 0) {          // drop frequency = (1/N)
                     numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
@@ -1081,6 +1080,8 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
             result = true;
         }
+
+        FreePacket(udp);
     } else {
         nextWriteTime = curTime + (urgentResendTime >> 2) + 1;
     }
@@ -1397,11 +1398,11 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
 
     IPaddress addr;
     CAvaraApp *app = (CAvaraAppImpl *)gApplication;
-    SDLNet_ResolveHost(&addr, address.c_str(), serverPort);
+    ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();
     BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
-    
+
     ContactServer(addr.host, addr.port);
     /*
     DialogPtr		clientDialog;
@@ -1732,7 +1733,7 @@ OSErr CUDPComm::CreateStream(port_num streamPort) {
 
     // This is almost certainly useless - should make it a preference
     IPaddress addr;
-    SDLNet_ResolveHost(&addr, NULL, localPort);
+    ResolveHost(&addr, NULL, localPort);
     localIP = addr.host;
 
     return noErr;

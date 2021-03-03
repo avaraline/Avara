@@ -2,9 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   Ubuntu:
@@ -15,14 +15,14 @@ jobs:
       run: |
         sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
         sudo apt-get update -y -qq
-        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libsdl2-net-dev libdirectfb-dev
+        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev
     - uses: actions/checkout@v2
     - name: make
       run: make -j
     - name: Run headless test
       uses: GabrielBB/xvfb-action@v1.2
       with:
-        run: make tests 
+        run: make tests
   Windows:
     name: Windows
     runs-on: windows-latest
@@ -30,7 +30,7 @@ jobs:
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
         with:
-          install: rsync git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make
+          install: rsync git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make
       - uses: actions/checkout@v2
       - name: make
         shell: msys2 {0}
@@ -57,9 +57,6 @@ jobs:
     steps:
       - name: install dependencies
         run: |
-          wget -q "https://www.libsdl.org/projects/SDL_net/release/SDL2_net-2.0.1.dmg"
-          hdiutil attach SDL2_net-2.0.1.dmg
-          sudo cp -R /Volumes/SDL2_net/SDL2_net.framework /Library/Frameworks/
           wget -q "https://www.libsdl.org/release/SDL2-2.0.14.dmg"
           hdiutil attach SDL2-2.0.14.dmg
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
@@ -71,7 +68,7 @@ jobs:
       - name: print env variables
         run: echo $GITHUB_REPOSITORY && echo $GITHUB_REF
       - name: deploy nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'master')
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

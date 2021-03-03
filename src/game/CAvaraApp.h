@@ -44,6 +44,7 @@ public:
     virtual void BrightBox(long frameNum, short position) = 0;
     virtual void LevelReset() = 0;
     virtual long Number(const std::string name) = 0;
+    virtual bool Boolean(const std::string name) = 0;
     virtual OSErr LoadLevel(std::string set, OSType theLevel) = 0;
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) = 0;
     virtual void NotifyUser() = 0;
@@ -119,6 +120,7 @@ public:
     virtual void Set(const std::string name, json value) override { CApplication::Set(name, value); }
     virtual SDL_Window* sdlWindow() override { return CApplication::sdlWindow(); }
     virtual long Number(const std::string name) override { return CApplication::Number(name); }
+    virtual bool Boolean(const std::string name) override { return CApplication::Boolean(name); }
 
     void TrackerUpdate();
     std::string TrackerPayload();
