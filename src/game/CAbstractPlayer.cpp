@@ -668,15 +668,15 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         }
 
         if (itsManager->IsLocalPlayer()) {
-            if(TESTFUNC(kfuScoreboard, ft->held))
-                itsManager->SetShowScoreboard(true);
-            else
-                itsManager->SetShowScoreboard(false);
+            if(TESTFUNC(kfuScoreboard, ft->down))
+                itsManager->SetShowScoreboard(!itsManager->GetShowScoreboard());
         }
         
         if (TESTFUNC(kfuPauseGame, ft->down)) {
-            itsGame->statusRequest = kPauseStatus;
-            itsGame->pausePlayer = itsManager->Slot();
+            if(lives > 0) {
+                itsGame->statusRequest = kPauseStatus;
+                itsGame->pausePlayer = itsManager->Slot();
+            }
         }
         if (TESTFUNC(kfuAbortGame, ft->down)) {
             if (limboCount > 0 || lives == 0) {
