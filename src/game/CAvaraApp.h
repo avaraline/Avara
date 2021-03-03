@@ -44,7 +44,7 @@ public:
     virtual void BrightBox(long frameNum, short position) = 0;
     virtual void LevelReset() = 0;
     virtual long Number(const std::string name) = 0;
-    virtual OSErr LoadLevel(std::string set, OSType theLevel) = 0;
+    virtual OSErr LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) = 0;
     virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) = 0;
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) = 0;
     virtual void NotifyUser() = 0;
@@ -95,7 +95,7 @@ public:
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll() override;
     OSErr LoadSVGLevel(std::string set, OSType theLevel) override;
-    OSErr LoadLevel(std::string set, OSType theLevel) override;
+    OSErr LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) override;
     void NotifyUser() override;
     virtual void AddMessageLine(std::string line) override;
     virtual void GameStarted(std::string set, std::string level) override;

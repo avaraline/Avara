@@ -437,9 +437,10 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, void *theDir, OSType theTag
     short crc = 0;
 
     if (!isPlaying) {
+        CPlayerManager *sendingPlayer = playerTable[senderSlot];
         std::string set((char *)theDir);
         theApp = itsGame->itsApp;
-        iErr = theApp->LoadLevel(set, theTag);
+        iErr = theApp->LoadLevel(set, theTag, sendingPlayer);
         if (iErr) {
             itsCommManager->SendPacket(kdEveryone, kpLevelLoadErr, 0, iErr, theTag, 0, 0);
         } else {
