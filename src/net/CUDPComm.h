@@ -69,7 +69,7 @@ public:
 
     ip_addr localIP; //	Just a guess, but that's all we need for the tracker.
     port_num localPort;
-    UDPsocket stream;
+    int stream;
     // char				streamBuffer[UDPSTREAMBUFFERSIZE];
     // char				sendBuffer[UDPSENDBUFFERSIZE];
 

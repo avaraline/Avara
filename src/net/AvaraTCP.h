@@ -11,14 +11,19 @@
 
 #include "Types.h"
 
-#ifdef __APPLE__
-#include <SDL2_net/SDL_net.h>
-#else
-#include <SDL2/SDL_net.h>
-#endif
-
 #define UDPSTREAMBUFFERSIZE 16384
 #define UDPSENDBUFFERSIZE 1024
+
+typedef struct {
+    uint32_t host;
+    uint16_t port;
+} IPaddress;
+
+typedef struct {
+    uint8_t *data;
+    unsigned int len;
+    IPaddress address;
+} UDPpacket;
 
 OSErr PascalStringToAddress(StringPtr name, ip_addr *addr);
 OSErr AddressToPascalString(ip_addr addr, StringPtr name);
@@ -28,9 +33,14 @@ OSErr OpenAvaraTCP();
 typedef void ReadCompleteProc(UDPpacket *packet, void *userData);
 typedef void WriteCompleteProc(int result, void *userData);
 
-UDPsocket CreateSocket(uint16_t port);
-void DestroySocket(UDPsocket sock);
+UDPpacket * CreatePacket(int bufferSize);
+void FreePacket(UDPpacket *packet);
+
+int ResolveHost(IPaddress *address, const char *host, uint16_t port);
+
+int CreateSocket(uint16_t port);
+void DestroySocket(int sock);
 void CheckSockets();
 
-void UDPRead(UDPsocket sock, ReadCompleteProc callback, void *userData);
-void UDPWrite(UDPsocket sock, UDPpacket *packet, WriteCompleteProc callback, void *userData);
+void UDPRead(int sock, ReadCompleteProc callback, void *userData);
+void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *userData);
