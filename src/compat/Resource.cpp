@@ -22,7 +22,8 @@ std::string OSTypeString(OSType t) {
 }
 
 bool IsEquals(const std::string& str1, const std::string& str2) {
-    return std::equal(str1.begin(), str1.end(), str2.begin(),
+    return str1.length() == str2.length() && 
+    std::equal(str1.begin(), str1.end(), str2.begin(),
     [](char a, char b) {
         return tolower(a) == tolower(b);
     });
