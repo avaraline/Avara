@@ -138,7 +138,12 @@ class Declaration(ScriptObject):
 
     @property
     def value(self):
-        return " ".join(str(e) for e in self.expr)
+        parts = []
+        for t in self.expr:
+            parts.append(str(t))
+            if t not in ("-", "|"):
+                parts.append(" ")
+        return "".join(parts).strip()
 
     def __str__(self):
         return "{} = {}".format(self.name, self.value)
@@ -215,7 +220,8 @@ class DeclarationGroup(ScriptObject):
         return Element("set", **attrs)
 
     def process(self, context):
-        return any(d.process(context) for d in self.declarations)
+        bools = [d.process(context) for d in self.declarations]
+        return any(bools)
 
 
 string.setParseAction(String)

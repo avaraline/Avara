@@ -365,6 +365,9 @@ class DrawContext:
         root = Element("map")
         for op in self.operations:
             for el in op.process(context):
+                if el.tag in ("WallDoor",) and root.children:
+                    if root.children[-1].tag == "Wall":
+                        root.children.pop()
                 root.children.append(el)
         return root.xml()
 

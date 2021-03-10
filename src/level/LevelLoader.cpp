@@ -122,6 +122,10 @@ struct ALFWalker: pugi::xml_tree_walker {
         else if (name.compare("unique") == 0) handle_unique(node);
         else if (name.compare("set") == 0) handle_set(node);
         else if (name.compare("script") == 0) handle_script(node);
+        else if (name.compare("WallDoor") == 0) {
+            handle_wall(node);
+            handle_object(node, name);
+        }
         else if (name.compare("Wall") == 0) handle_wall(node);
         else handle_object(node, name);
     }
