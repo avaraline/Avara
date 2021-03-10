@@ -367,7 +367,17 @@ class DrawContext:
             for el in op.process(context):
                 if el.tag in ("WallDoor",) and root.children:
                     if root.children[-1].tag == "Wall":
-                        root.children.pop()
+                        wall = root.children.pop()
+                        if "y" in wall.attrs:
+                            if "y" in el.attrs:
+                                # If the Wall and WallDoor both have y, add them
+                                # together (this is what Avara does/did).
+                                el.attrs["y"] = dumb_round(
+                                    float(el.attrs["y"]) + float(wall.attrs["y"])
+                                )
+                            else:
+                                # Otherwise, copy the y from the Wall to the WallDoor.
+                                el.attrs["y"] = wall.attrs["y"]
                 root.children.append(el)
         return root.xml()
 
