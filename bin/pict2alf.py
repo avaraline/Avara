@@ -199,7 +199,7 @@ def fix_quirks(text):
     # Curly quotes.
     text = text.replace("“", '"').replace("”", '"')
     # Bunch of these in The Lexicon set.
-    text = text.replace("group = @centery =", "group = @center y =")
+    # text = text.replace("group = @centery =", "group = @center y =")
     # Unescaped quotes inside quotes.
     text = text.replace(' "Trotsky" ', ' ""Trotsky"" ')
     text = text.replace(' "DuKK" ', ' ""DuKK"" ')
