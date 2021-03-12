@@ -2,10 +2,9 @@
 
 import pyparsing as pp
 
-quote = pp.Literal('"').suppress()
-lpar = pp.Literal("(").suppress()
-rpar = pp.Literal(")").suppress()
-string = quote + pp.SkipTo(quote) + quote
+lpar = pp.Literal("(")
+rpar = pp.Literal(")")
+string = pp.QuotedString('"', escQuote='""', multiline=True)
 keyword = (
     pp.Keyword("unique")
     | pp.Keyword("enum")
@@ -19,9 +18,12 @@ comment = pp.cStyleComment | inline_comment
 name = ~keyword + pp.Word(pp.alphas, pp.alphanums + r"._[]{}\\|")
 op = pp.oneOf("+ - * / % ^ | < >")
 unary_op = pp.oneOf("- |")
-reference = pp.Literal("@").suppress() + name
-function = pp.oneOf("min max random sin cos int round")
+reference = pp.Literal("@").suppress() + (name | pp.Regex(r"[0-9]+"))
 atom = string | reference | number | name
+
+# TODO: are min/max even implemented in Avara?
+func0 = pp.oneOf("random")
+func1 = pp.oneOf("sin cos int round")
 
 # This would be great if we cared to evaluate these expressions and not just match them.
 # expr = pp.infixNotation(atom, [
@@ -31,11 +33,11 @@ atom = string | reference | number | name
 # ])
 
 expr = pp.Forward()
-expr <<= (pp.ZeroOrMore(unary_op | function) + atom + pp.ZeroOrMore(op + expr)) | (
-    lpar + expr + rpar
-)
+expr <<= (
+    pp.ZeroOrMore(unary_op) + (func0 | (func1 + expr) | atom) + pp.ZeroOrMore(op + expr)
+) | (pp.ZeroOrMore(unary_op) + lpar + expr + rpar)
 
-declaration = name + pp.Literal("=").suppress() + expr
+declaration = (reference | name) + pp.Literal("=").suppress() + expr
 end = pp.Literal("end").suppress()
 obj_body = pp.ZeroOrMore(comment.suppress() | declaration)
 obj = pp.Literal("object") + name + obj_body + end
@@ -47,7 +49,7 @@ enum = pp.Literal("enum").suppress() + number + pp.OneOrMore(name) + end
 decl_group = pp.OneOrMore(declaration)
 non_ascii = pp.Regex(r"[^\x00-\xff]+").suppress()
 script = pp.ZeroOrMore(
-    comment.suppress() | decl_group | unique | enum | adjust | obj | non_ascii
+    comment.suppress() | decl_group | unique | enum | adjust | obj | non_ascii | end
 )
 
 
@@ -56,7 +58,66 @@ OBJ_CONTEXT = {
     "SkyColor": ("fill", "frame"),
     "GroundColor": ("fill", "frame"),
     "Wall": ("fill", "frame", "x", "y", "z", "w", "d", "h"),
-    "WallDoor": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "cx", "cz", "angle", "extent"),
+    "WallDoor": (
+        "fill",
+        "frame",
+        "x",
+        "y",
+        "z",
+        "w",
+        "d",
+        "h",
+        "r",
+        "cx",
+        "cz",
+        "angle",
+        "extent",
+    ),
+    "WallSolid": (
+        "fill",
+        "frame",
+        "x",
+        "y",
+        "z",
+        "w",
+        "d",
+        "h",
+        "r",
+        "cx",
+        "cz",
+        "angle",
+        "extent",
+    ),
+    "FreeSolid": (
+        "fill",
+        "frame",
+        "x",
+        "y",
+        "z",
+        "w",
+        "d",
+        "h",
+        "r",
+        "cx",
+        "cz",
+        "angle",
+        "extent",
+    ),
+    "Field": (
+        "fill",
+        "frame",
+        "x",
+        "y",
+        "z",
+        "w",
+        "d",
+        "h",
+        "r",
+        "cx",
+        "cz",
+        "angle",
+        "extent",
+    ),
     "Ramp": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
 }
 
@@ -112,7 +173,7 @@ class String(ScriptObject):
         self.text = tokens[0].strip()
 
     def __str__(self):
-        return '"{}"'.format(self.text)
+        return '"{}"'.format(self.text.replace('"', '""'))
 
 
 class Number(ScriptObject):
@@ -133,7 +194,7 @@ class Reference(ScriptObject):
 
 class Declaration(ScriptObject):
     def __init__(self, tokens):
-        self.name = tokens[0].replace("[", ".").replace("]", "")
+        self.name = str(tokens[0]).replace("[", ".").replace("]", "")
         self.expr = tokens[1:]
 
     @property

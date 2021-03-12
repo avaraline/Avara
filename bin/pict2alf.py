@@ -130,10 +130,14 @@ class DataBuffer:
     def __bool__(self):
         return self.pos < self.size
 
-    def read(self, num):
+    def read(self, num, advance=True):
         buf = self.data[self.pos : self.pos + num]
-        self.pos += num
+        if advance:
+            self.pos += num
         return buf
+
+    def skip(self, num):
+        self.pos += num
 
     def unpack(self, fmt):
         unpack_fmt = "!" + fmt
@@ -188,18 +192,46 @@ class AvaraOperation(object):
         return []
 
 
+def fix_quirks(text):
+    # Fix mismatched quotes - bunch of these everywhere.
+    if text.count('"') % 2 > 0:
+        text += '"'
+    # Curly quotes.
+    text = text.replace("“", '"').replace("”", '"')
+    # Bunch of these in The Lexicon set.
+    text = text.replace("group = @centery =", "group = @center y =")
+    # Unescaped quotes inside quotes.
+    text = text.replace(' "Trotsky" ', ' ""Trotsky"" ')
+    text = text.replace(' "DuKK" ', ' ""DuKK"" ')
+    text = text.replace(' "A"s ', ' ""A""s ')
+    text = text.replace(' "Forseti" ', ' ""Forseti"" ')
+    text = text.replace(' "Seven" ', ' ""Seven"" ')
+    # Some DC3 control characters in geezer sets - senile old bags.
+    text = text.replace(chr(19), "")
+    # Fix comments.
+    text = text.replace("/ *", "/*").replace("* /", "*/")
+    # Some comments missing the trailing slash.
+    if text.endswith("*"):
+        text += "/"
+    # The parser will ignore extraneous "end"s, but some people forgot to close objects.
+    return text + "\nend"
+
+
 class TextOp(AvaraOperation):
     def __init__(self, text):
         self.text = text
 
     def process(self, context):
+        fixed_script = fix_quirks(self.text)
+        # print(fixed_script, file=sys.stderr)
         try:
-            for t in parse_script(self.text):
+            for t in parse_script(fixed_script):
                 if t.process(context):
                     yield t.element(context)
         except ScriptParseError:
-            debug("Script error in:\n%s", self.text)
-            yield Element("script", self.text.strip())
+            debug("Script error in:\n%s", fixed_script)
+            # Strip the "end" we added if there's still an error.
+            yield Element("script", fixed_script[:-3].strip())
 
 
 class GroupStart(AvaraOperation):
@@ -232,10 +264,17 @@ class RectOp(AvaraOperation):
                 "d": dumb_round(self.rect.height),
             }
         )
-        if self.radius and self.tag == "rrect":
-            context["h"] = dumb_round(self.radius * context["pixelToThickness"])
-        if self.stroke == 1 and self.tag in ("rect", "rrect"):
+        if self.tag not in ("rect", "rrect"):
+            return []
+        context["h"] = (
+            0
+            if self.tag == "rect"
+            else dumb_round(self.radius * context["pixelToThickness"])
+        )
+        if self.stroke == 1:
             attrs = object_context("Wall", context)
+            if self.tag != "rrect":
+                del attrs["h"]
             if context.get("wa"):
                 try:
                     # If wa is numeric, promote it to "y"
@@ -282,6 +321,17 @@ class OvalOp(ArcOp):
         super().__init__(context, verb, rect, 0, 360)
 
 
+def copy_attrs(wall, obj):
+    if "y" in wall.attrs:
+        if "y" in obj.attrs:
+            # If the Wall and WallDoor both have y, add them
+            # together (this is what Avara does/did).
+            obj.attrs["y"] = dumb_round(float(obj.attrs["y"]) + float(wall.attrs["y"]))
+        else:
+            # Otherwise, copy the y from the Wall to the WallDoor.
+            obj.attrs["y"] = wall.attrs["y"]
+
+
 class DrawContext:
     def __init__(self, frame, **attrs):
         self.frame = frame
@@ -289,8 +339,9 @@ class DrawContext:
         self.buffered = []
 
         self.origin = Point(0, 0)
+        self.textpos = Point(0, 0)
         self.radius = 0  # Rounding radius (oval size)
-        self.stroke = 0  # Current pen size
+        self.stroke = 1  # Current pen size
         self.fg = Color(255, 255, 255)  # Current foreground
         self.bg = Color(255, 255, 255)  # Current background (not used)
 
@@ -305,15 +356,25 @@ class DrawContext:
         self.last_oval = None
 
     def group_start(self):
-        self.operations.append(GroupStart())
+        # self.operations.append(GroupStart())
+        pass
 
     def group_close(self):
-        self.operations.append(GroupEnd())
+        # self.operations.append(GroupEnd())
+        pass
 
     def flush_text(self):
         if not self.buffered:
             return
-        text = "".join(self.buffered)
+        text = ""
+        last_y = None
+        for x, y, s in self.buffered:
+            # print(x, y, s, file=sys.stderr)
+            if y != last_y:
+                text += "\n"
+            text += s
+            last_y = y
+        # text = "".join(b[2] for b in self.buffered)
         if self.operations and isinstance(self.operations[-1], TextOp):
             # Group as much script text together as possible.
             self.operations[-1].text += "\n" + text
@@ -350,12 +411,16 @@ class DrawContext:
         self.operations.append(ArcOp(self, verb, rect, start, extent))
         self.last_arc = rect
 
-    def text(self, s, newline=True):
-        if not s.strip():
-            return
-        if newline:
-            self.buffered.append("\n")
-        self.buffered.append(s)
+    def text(self, s, x=None, y=None, dh=0, dv=0):
+        if x is not None:
+            self.textpos.x = x
+        if y is not None:
+            self.textpos.y = y
+        if dh:
+            self.textpos.x += dh
+        if dv:
+            self.textpos.y += dv
+        self.buffered.append((self.textpos.x, self.textpos.y, s))
 
     def close(self):
         self.flush_text()
@@ -365,19 +430,17 @@ class DrawContext:
         root = Element("map")
         for op in self.operations:
             for el in op.process(context):
-                if el.tag in ("WallDoor",) and root.children:
-                    if root.children[-1].tag == "Wall":
-                        wall = root.children.pop()
-                        if "y" in wall.attrs:
-                            if "y" in el.attrs:
-                                # If the Wall and WallDoor both have y, add them
-                                # together (this is what Avara does/did).
-                                el.attrs["y"] = dumb_round(
-                                    float(el.attrs["y"]) + float(wall.attrs["y"])
-                                )
-                            else:
-                                # Otherwise, copy the y from the Wall to the WallDoor.
-                                el.attrs["y"] = wall.attrs["y"]
+                if root.children:
+                    if el.tag in ("WallDoor", "WallSolid"):
+                        if root.children[-1].tag == "Wall":
+                            wall = root.children.pop()
+                            copy_attrs(wall, el)
+                    elif el.tag in ("Field", "FreeSolid"):
+                        if "shape" not in el.attrs and root.children[-1].tag == "Wall":
+                            # Fields and FreeSolids only use the last wall if there was
+                            # no custom shape set on them.
+                            wall = root.children.pop()
+                            copy_attrs(wall, el)
                 root.children.append(el)
         return root.xml()
 
@@ -572,6 +635,8 @@ class Origin(Operation):
         dh, dv = data.unpack("hh")
         context.origin.x += dh
         context.origin.y += dv
+        context.textpos.x += dh
+        context.textpos.y += dv
 
 
 class TextSize(Operation):
@@ -644,28 +709,29 @@ class LongText(Operation):
         loc = data.point()
         size = data.byte()
         text = data.read(size).decode("macintosh")
-        context.text(text)
+        # LongText is (top, left) so we flip x/y
+        context.text(text, x=loc.y, y=loc.x)
 
 
 class DHText(Operation):
     def parse(self, data, context):
         dh, size = data.read(2)
         text = data.read(size).decode("macintosh")
-        context.text(text, newline=False)
+        context.text(text, dh=dh)
 
 
 class DVText(Operation):
     def parse(self, data, context):
         dv, size = data.read(2)
         text = data.read(size).decode("macintosh")
-        context.text(text)
+        context.text(text, dv=dv)
 
 
 class DHDVText(Operation):
     def parse(self, data, context):
         dh, dv, size = data.read(3)
         text = data.read(size).decode("macintosh")
-        context.text(text)
+        context.text(text, dh=dh, dv=dv)
 
 
 class FrameRectangle(Operation):
@@ -953,6 +1019,8 @@ class PictParseError(Exception):
 
 def parse_pict(data):
     buf = DataBuffer(data)
+    if buf.read(4, advance=False) == b"PICT":
+        buf.skip(4)
     size = buf.short()
     frame = buf.rect()
     debug("Size=%s Frame=%s", size, frame)

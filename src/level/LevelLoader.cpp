@@ -84,7 +84,9 @@ Fixed GetLastOval(Fixed *theLoc) {
     theLoc[2] = lastOvalPoint.v;
     theLoc[3] = 0;
 
-    return lastOvalRadius;
+    // Instead of doubling the radius when parsing ovals, which we don't really do
+    // anymore, double it here.
+    return FMul(lastOvalRadius, FIX(2));
 }
 
 Fixed GetLastArcDirection() {
@@ -122,8 +124,16 @@ struct ALFWalker: pugi::xml_tree_walker {
         else if (name.compare("unique") == 0) handle_unique(node);
         else if (name.compare("set") == 0) handle_set(node);
         else if (name.compare("script") == 0) handle_script(node);
-        else if (name.compare("WallDoor") == 0) {
+        else if (name.compare("WallDoor") == 0 || name.compare("WallSolid") == 0) {
+            // WallDoors and WallSolids always use the last Wall.
             handle_wall(node);
+            handle_object(node, name);
+        }
+        else if (name.compare("FreeSolid") == 0 || name.compare("Field") == 0) {
+            // FreeSolids and Fields with no custom shape expect/use the last Wall.
+            if (node.attribute("shape").empty()) {
+                handle_wall(node);
+            }
             handle_object(node, name);
         }
         else if (name.compare("Wall") == 0) handle_wall(node);

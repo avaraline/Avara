@@ -22,7 +22,6 @@ def get_forks(data):
         # type list entry
         rsrc_type, num_resources, rsrc_list_offset = struct.unpack('!LHH', data[offset:offset+8])
         rsrc_offset = map_offset + type_list_offset + rsrc_list_offset
-        
         rsrc_type_string = CharConst(rsrc_type)
         ret[rsrc_type_string] = []
         for k in range(num_resources + 1):
@@ -38,14 +37,12 @@ def get_forks(data):
                 name = data[rsrc_name_offset+1:rsrc_name_offset+1+namelen].decode('macroman')
             else:
                 name = ''
-
             ret[rsrc_type_string].append({
                 'id': rsrc_id,
                 'name': name,
                 'data': rsrc_data,
                 'length': rsrc_data_len
             })
-            
             rsrc_offset += 12
         offset += 8
     return ret
@@ -70,10 +67,10 @@ if __name__ == '__main__':
 
             rsrc_path = os.path.join(rsrc_dir, filename)
             print('{} #{} [{}] ({} bytes) --> {}'.format(
-                rtype, 
-                rsrc_id, 
-                name, 
-                robj["length"], 
+                rtype,
+                rsrc_id,
+                name,
+                robj["length"],
                 rsrc_path))
             os.makedirs(rsrc_dir, exist_ok=True)
             with open(rsrc_path, 'wb') as f:
