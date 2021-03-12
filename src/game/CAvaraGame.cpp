@@ -673,7 +673,10 @@ void CAvaraGame::SendStartCommand() {
     if (gameStatus == kReadyStatus) {
         itsNet->SendStartCommand();
     } else if (gameStatus == kPauseStatus) {
-        itsNet->SendResumeCommand();
+        CAbstractPlayer *player = GetLocalPlayer();
+        if(player != NULL && player->lives > 0) {
+            itsNet->SendResumeCommand();
+        }
     }
 }
 

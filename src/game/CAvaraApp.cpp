@@ -213,7 +213,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 }
 
 
-OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
+OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) {
     SDL_Log("LOADING LEVEL %s FROM %s\n", OSTypeString(theLevel).c_str(), set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
@@ -236,13 +236,16 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     levelName = ledi["Name"];
 
     if(LoadALF(GetALFPath(alfname))) {
-        // std::string -> pascal string 
+        // std::string -> pascal string
         BlockMoveData((((char)levelName.size()) + levelName).c_str(), itsGame->loadedLevel, levelName.size() + 2);
         result = noErr;
     }
 
     if (result == noErr) {
-        AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
+        std::string msgPrefix = "Loaded";
+        if(sendingPlayer != NULL)
+            msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
+        AddMessageLine(msgPrefix + " \"" + levelName + "\" from \"" + set + "\".");
         levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);
