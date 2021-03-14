@@ -2,6 +2,7 @@
 
 import sys
 import struct
+from collections import OrderedDict
 
 def bytes_to_int(some_bytes):
     return struct.unpack('>i', some_bytes)[0]
@@ -31,7 +32,7 @@ def bytes_to_fixed(some_bytes):
 
 
 def parse_tmpl(tmpl, data):
-    result = {}
+    result = OrderedDict()
 
     structure = []
     # we consume all the template values into a structure 
@@ -57,7 +58,7 @@ def parse_tmpl(tmpl, data):
 
 def read_data_with_template(data, structure):
     # this is an awful recursive thing to parse the list types available in ResEdit
-    result = {}
+    result = OrderedDict()
     end = -1
     panic = 0
     for i, dtype in enumerate(structure):
