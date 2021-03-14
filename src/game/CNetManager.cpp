@@ -411,7 +411,7 @@ void CNetManager::SendLoadLevel(std::string theSet, OSType theLevelTag) {
 
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
-    aPacket->p2 = TickCount();
+    aPacket->p2 = (short)FRandSeed;
     aPacket->p3 = theLevelTag;
     aPacket->distribution = kdEveryone;
     aPacket->dataLen = theSet.length() + 1;
