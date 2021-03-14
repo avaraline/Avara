@@ -35,7 +35,7 @@ void CSliverPart::Activate(Fixed *origin,
     short age,
     CBSPPart *fromObject) {
     PolyRecord *borrowPoly;
-    int offset = rand() % (fromObject->polyCount);
+    int offset = FRandom() % (fromObject->polyCount);
     borrowPoly = &fromObject->polyTable[offset];
 
     ColorRecord c = borrowPoly->color;
@@ -66,9 +66,9 @@ void CSliverPart::Activate(Fixed *origin,
     lifeCount = age;
 
     Reset();
-    TranslatePartZ(this, FMul(scale, FIX3(250) + (FRandomBeta() >> 1)));
-    RotateX(spread * FRandomBeta());
-    RotateZ(360 * FRandomBeta());
+    TranslatePartZ(this, FMul(scale, FIX3(250) + (FRandom() >> 1)));
+    RotateX(spread * FRandom());
+    RotateZ(360 * FRandom());
 
     smallVector[0] = direction[0];
     smallVector[1] = direction[2];

@@ -124,11 +124,6 @@ Fixed FSqroot(int *ab) {
     return root;
 }
 
-Fixed FRandomBeta() {
-    // I don't think this is right but it works
-    return ToFixed((float)(rand() % 1000) / 1000.0);
-}
-
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2) {
     Fixed a = x1 > y1 ? x1 - y1 : y1 - x1;
     Fixed b = x2 > y2 ? x2 - y2 : y2 - x2;
@@ -154,7 +149,7 @@ Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz) {
     move.l  dx,D0
     bpl.s   @noXNeg
     neg.l   D0
-*/  
+*/
     if (r0 < 0) r0 = -r0;
 /*
 @noXNeg:
@@ -769,4 +764,3 @@ void CombineTransforms(Matrix *vs, Matrix *vd, Matrix *m) {
     // BlockMoveData(vs, vd, sizeof(Matrix));
     VectorMatrixProduct(4, vs[0], vd[0], m);
 }
-

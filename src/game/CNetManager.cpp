@@ -441,7 +441,6 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, char *theDir, OSType theTag
         std::string set(theDir);
         theApp = itsGame->itsApp;
         FRandSeed = seed; // FIX(seed)? Does it matter?
-        FRandSeedBeta = FRandSeed;
         iErr = theApp->LoadLevel(set, theTag, sendingPlayer);
         if (iErr) {
             itsCommManager->SendPacket(kdEveryone, kpLevelLoadErr, 0, iErr, theTag, 0, 0);
