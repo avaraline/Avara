@@ -118,6 +118,7 @@ OBJ_CONTEXT = {
         "angle",
         "extent",
     ),
+    "YonBox": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
     "Ramp": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
 }
 
@@ -135,6 +136,15 @@ class Element(object):
 
     def __str__(self):
         return self.xml()
+
+    def pop_last(self, tag):
+        idx = len(self.children) - 1
+        for el in reversed(self.children):
+            if el.tag == tag:
+                break
+            idx = idx - 1
+        if idx >= 0:
+            return self.children.pop(idx)
 
     def xml(self, indent=2):
         attrs = "".join(

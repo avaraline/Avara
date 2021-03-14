@@ -411,7 +411,7 @@ void CNetManager::SendLoadLevel(std::string theSet, OSType theLevelTag) {
 
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
-    aPacket->p2 = 0;
+    aPacket->p2 = TickCount();
     aPacket->p3 = theLevelTag;
     aPacket->distribution = kdEveryone;
     aPacket->dataLen = theSet.length() + 1;
@@ -431,15 +431,17 @@ void CNetManager::SendLoadLevel(std::string theSet, OSType theLevelTag) {
     itsCommManager->WriteAndSignPacket(aPacket);
 }
 
-void CNetManager::ReceiveLoadLevel(short senderSlot, void *theDir, OSType theTag) {
+void CNetManager::ReceiveLoadLevel(short senderSlot, char *theDir, OSType theTag, short seed) {
     CAvaraApp *theApp;
     OSErr iErr;
     short crc = 0;
 
     if (!isPlaying) {
         CPlayerManager *sendingPlayer = playerTable[senderSlot];
-        std::string set((char *)theDir);
+        std::string set(theDir);
         theApp = itsGame->itsApp;
+        FRandSeed = seed; // FIX(seed)? Does it matter?
+        FRandSeedBeta = FRandSeed;
         iErr = theApp->LoadLevel(set, theTag, sendingPlayer);
         if (iErr) {
             itsCommManager->SendPacket(kdEveryone, kpLevelLoadErr, 0, iErr, theTag, 0, 0);

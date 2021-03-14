@@ -206,6 +206,9 @@ def fix_quirks(text):
     text = text.replace(' "A"s ', ' ""A""s ')
     text = text.replace(' "Forseti" ', ' ""Forseti"" ')
     text = text.replace(' "Seven" ', ' ""Seven"" ')
+    # Disk-o-tech -- not sure how this worked before?
+    text = text.replace("snDoory =", "snDoor y =")
+    text = text.replace("= 0speed =", "= 0 speed =")
     # Some DC3 control characters in geezer sets - senile old bags.
     text = text.replace(chr(19), "")
     # Fix comments.
@@ -223,7 +226,6 @@ class TextOp(AvaraOperation):
 
     def process(self, context):
         fixed_script = fix_quirks(self.text)
-        # print(fixed_script, file=sys.stderr)
         try:
             for t in parse_script(fixed_script):
                 if t.process(context):
@@ -247,63 +249,74 @@ class RectOp(AvaraOperation):
 
     def __init__(self, context, verb, rect):
         self.verb = verb
-        self.fill = context.fill_color
-        self.frame = context.frame_color
+        self.color = str(context.fg)
         self.stroke = context.stroke
         self.radius = context.radius
         self.rect = rect.offset(context.origin).scale(stroke=self.stroke)
 
     def process(self, context):
-        context.update(
-            {
-                "fill": self.fill,
-                "frame": self.frame,
-                "x": dumb_round(self.rect.left),
-                "z": dumb_round(self.rect.top),
-                "w": dumb_round(self.rect.width),
-                "d": dumb_round(self.rect.height),
-            }
-        )
-        if self.tag not in ("rect", "rrect"):
-            return []
-        context["h"] = (
-            0
-            if self.tag == "rect"
-            else dumb_round(self.radius * context["pixelToThickness"])
-        )
-        if self.stroke == 1:
-            attrs = object_context("Wall", context)
-            if self.tag != "rrect":
-                del attrs["h"]
-            if context.get("wa"):
-                try:
-                    # If wa is numeric, promote it to "y"
-                    float(context["wa"])
-                    attrs["y"] = context["wa"]
-                except ValueError:
-                    pass
-                # wa is reset after every Wall
-                del context["wa"]
-            yield Element("Wall", **attrs)
+        if self.verb == Verb.PAINT:
+            context["fill"] = self.color
+        elif self.verb == Verb.FRAME:
+            context["frame"] = self.color
+            h = (
+                0
+                if self.tag == "rect"
+                else dumb_round(self.radius * context["pixelToThickness"])
+            )
+            if self.stroke == 1:
+                attrs = {
+                    "fill": context.get("fill", self.color),
+                    "frame": context.get("frame", self.color),
+                    "x": dumb_round(self.rect.left),
+                    "z": dumb_round(self.rect.top),
+                    "w": dumb_round(self.rect.width),
+                    "d": dumb_round(self.rect.height),
+                    "h": h,
+                }
+                if context.get("wa"):
+                    try:
+                        # If wa is numeric, promote it to "y"
+                        float(context["wa"])
+                        attrs["y"] = context["wa"]
+                    except ValueError:
+                        pass
+                    # wa is reset after every Wall
+                    del context["wa"]
+                yield Element("Wall", **attrs)
+            else:
+                context.update(
+                    {
+                        "x": dumb_round(self.rect.left),
+                        "z": dumb_round(self.rect.top),
+                        "w": dumb_round(self.rect.width),
+                        "d": dumb_round(self.rect.height),
+                        "h": h,
+                    }
+                )
 
 
 class RoundRectOp(RectOp):
     tag = "rrect"
 
 
-class ArcOp(RectOp):
+class ArcOp(AvaraOperation):
     tag = "arc"
 
     def __init__(self, context, verb, rect, start, extent):
-        super().__init__(context, verb, rect)
+        self.verb = verb
+        self.color = str(context.fg)
+        self.rect = rect.offset(context.origin).scale(stroke=context.stroke)
         self.start = start
         self.extent = extent
 
     def process(self, context):
+        if self.verb == Verb.PAINT:
+            context["fill"] = self.color
+        elif self.verb == Verb.FRAME:
+            context["frame"] = self.color
         context.update(
             {
-                "fill": self.fill,
-                "frame": self.frame,
                 "cx": dumb_round(self.rect.center.x),
                 "cz": dumb_round(self.rect.center.y),
                 "r": dumb_round(max(self.rect.width, self.rect.height) / 2),
@@ -311,7 +324,6 @@ class ArcOp(RectOp):
                 "extent": self.extent,
             }
         )
-        return []
 
 
 class OvalOp(ArcOp):
@@ -322,6 +334,9 @@ class OvalOp(ArcOp):
 
 
 def copy_attrs(wall, obj):
+    for attr in ("x", "z", "w", "d", "h"):
+        if attr in wall.attrs:
+            obj.attrs[attr] = wall.attrs[attr]
     if "y" in wall.attrs:
         if "y" in obj.attrs:
             # If the Wall and WallDoor both have y, add them
@@ -345,10 +360,6 @@ class DrawContext:
         self.fg = Color(255, 255, 255)  # Current foreground
         self.bg = Color(255, 255, 255)  # Current background (not used)
 
-        # These are set from the current foreground color on paint/frame operations.
-        self.fill_color = self.fg
-        self.frame_color = self.fg
-
         # For [Frame|Paint]Same[Shape] operations.
         self.last_rect = None
         self.last_rrect = None
@@ -369,12 +380,10 @@ class DrawContext:
         text = ""
         last_y = None
         for x, y, s in self.buffered:
-            # print(x, y, s, file=sys.stderr)
             if y != last_y:
                 text += "\n"
             text += s
             last_y = y
-        # text = "".join(b[2] for b in self.buffered)
         if self.operations and isinstance(self.operations[-1], TextOp):
             # Group as much script text together as possible.
             self.operations[-1].text += "\n" + text
@@ -382,32 +391,23 @@ class DrawContext:
             self.operations.append(TextOp(text))
         self.buffered = []
 
-    def update_colors(self, verb):
-        if verb == Verb.PAINT:
-            self.fill_color = self.fg
-        elif verb == Verb.FRAME:
-            self.frame_color = self.fg
-
     def rect(self, rect, verb):
-        self.update_colors(verb)
-        if verb == Verb.FRAME:
-            self.operations.append(RectOp(self, verb, rect))
+        self.flush_text()
+        self.operations.append(RectOp(self, verb, rect))
         self.last_rect = rect
 
     def rrect(self, rect, verb):
-        self.update_colors(verb)
-        if verb == Verb.FRAME:
-            self.operations.append(RoundRectOp(self, verb, rect))
+        self.flush_text()
+        self.operations.append(RoundRectOp(self, verb, rect))
         self.last_rrect = rect
 
     def oval(self, rect, verb):
-        self.update_colors(verb)
-        if verb == Verb.FRAME:
-            self.operations.append(OvalOp(self, verb, rect))
+        self.flush_text()
+        self.operations.append(OvalOp(self, verb, rect))
         self.last_oval = rect
 
     def arc(self, rect, start, extent, verb):
-        self.update_colors(verb)
+        self.flush_text()
         self.operations.append(ArcOp(self, verb, rect, start, extent))
         self.last_arc = rect
 
@@ -429,18 +429,23 @@ class DrawContext:
         }
         root = Element("map")
         for op in self.operations:
-            for el in op.process(context):
+            for el in op.process(context) or []:
                 if root.children:
                     if el.tag in ("WallDoor", "WallSolid"):
-                        if root.children[-1].tag == "Wall":
-                            wall = root.children.pop()
-                            copy_attrs(wall, el)
+                        last_wall = root.pop_last("Wall")
+                        if last_wall:
+                            copy_attrs(last_wall, el)
+                        else:
+                            print("Wall not found for", el.tag, file=sys.stderr)
                     elif el.tag in ("Field", "FreeSolid"):
-                        if "shape" not in el.attrs and root.children[-1].tag == "Wall":
+                        if "shape" not in el.attrs:
                             # Fields and FreeSolids only use the last wall if there was
                             # no custom shape set on them.
-                            wall = root.children.pop()
-                            copy_attrs(wall, el)
+                            last_wall = root.pop_last("Wall")
+                            if last_wall:
+                                copy_attrs(last_wall, el)
+                            else:
+                                print("Wall not found for", el.tag, file=sys.stderr)
                 root.children.append(el)
         return root.xml()
 

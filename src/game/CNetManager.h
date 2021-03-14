@@ -141,7 +141,7 @@ public:
     virtual void HandleDisconnect(short slotId, short why);
 
     virtual void SendLoadLevel(std::string theSet, OSType theTag);
-    virtual void ReceiveLoadLevel(short senderSlot, void *theDir, OSType theTag);
+    virtual void ReceiveLoadLevel(short senderSlot, char *theDir, OSType theTag, short seed);
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, OSType theTag);
 
     virtual void SendStartCommand();
