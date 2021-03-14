@@ -11,6 +11,7 @@ from bspt import BSP
 from forker import get_forks
 from pict2alf import parse_pict
 from tmpl import parse_tmpl
+from collections import OrderedDict
 
 SETFILE = "set.json"
 ALFDIR = "alf"
@@ -101,7 +102,7 @@ def convert_to_files(datafile, thedir):
     alfdir = os.path.join(thedir, ALFDIR)
     os.makedirs(alfdir, exist_ok=True)
 
-    result["LEDI"] = {}
+    result["LEDI"] = OrderedDict()
     # for each level
     for le in rledi["*****"]:
         alfname = slugify(le["Name"]) + ALFEXT
@@ -183,8 +184,8 @@ def convert_to_files(datafile, thedir):
                 pass
 
     setpath = os.path.join(thedir, SETFILE)
-    with open(setpath, "w", encoding="utf-8") as setfile:
-        setfile.write(json.dumps(result, indent=2, sort_keys=True))
+    with open(setpath, "wb") as setfile:
+        setfile.write(json.dumps(result, indent=2, ensure_ascii=False).encode('utf-8'))
 
     if "TEXT" in forks:
         textpath = os.path.join(thedir, SCRIPTFILE)
