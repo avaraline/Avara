@@ -47,6 +47,8 @@
 #define kMessageBufferMinAge 30
 #define kMessageWaitTime 12
 
+extern Fixed FRandSeed;
+
 void CNetManager::INetManager(CAvaraGame *theGame) {
     short i;
 

@@ -24,6 +24,8 @@
 static unsigned short *arcTanTable = 0;
 static unsigned short *arcTanOneTable = 0;
 
+Fixed FRandSeed = 1;
+
 /* FixMath */
 
 Fixed FixMul(Fixed a, Fixed b) {
@@ -357,8 +359,8 @@ Fixed FSqrt(Fixed n) {
 }
 
 #define RANDCONST ((uint32_t)(0x41A7))
-#define HIGH(x) ((uint16_t)(x >> 16))
-#define LOW(x) ((uint16_t)x)
+#define HIGH(x) ((x >> 16) & 0x0000FFFF)
+#define LOW(x) (x & 0x0000FFFF)
 
 Fixed FRandom() {
     uint32_t temp;

@@ -119,5 +119,3 @@ Fixed FDistanceOverEstimate(Fixed dx, Fixed dy, Fixed dz);
 void InverseTransform(Matrix *trans, Matrix *inv);
 
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2);
-
-static Fixed FRandSeed;
