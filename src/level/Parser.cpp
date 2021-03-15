@@ -1137,15 +1137,15 @@ long ReadColorVar(short index) {
     return (((theColor / 1000000) << 16) | (((theColor / 1000) % 1000) << 8) | (theColor % 1000));
 }
 
-void ReadStringVar(short index, StringPtr dest) {
+std::string ReadStringVar(short index) {
     short len;
     Handle result;
 
     index = EvalVariable(index + firstVariable, false);
     if (index) {
-        symTable->GetIndEntry(index, dest);
+        return symTable->GetIndEntry(index);
     } else {
-        dest[0] = 0;
+        return "";
     }
 }
 

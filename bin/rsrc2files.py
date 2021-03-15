@@ -6,12 +6,12 @@ import re
 import subprocess
 import sys
 import unicodedata
+from collections import OrderedDict
 
 from bspt import BSP
 from forker import get_forks
 from pict2alf import parse_pict
 from tmpl import parse_tmpl
-from collections import OrderedDict
 
 SETFILE = "set.json"
 ALFDIR = "alf"
@@ -102,27 +102,27 @@ def convert_to_files(datafile, thedir):
     alfdir = os.path.join(thedir, ALFDIR)
     os.makedirs(alfdir, exist_ok=True)
 
-    result["LEDI"] = OrderedDict()
+    result["LEDI"] = []
     # for each level
     for le in rledi["*****"]:
         alfname = slugify(le["Name"]) + ALFEXT
         alfpath = os.path.join(alfdir, alfname)
-        if os.path.exists(alfpath):
-            print(f"Skipping {alfpath} - exists")
-            continue
         pictk = le["Path"].lower()
         if len(pictk) > 0:
             if pictk not in picts:
                 print(f"Skipping {alfpath} - Couldn't find pict '{pictk}'")
                 continue
-            print(alfpath)
-            writealf(alfpath, picts[pictk])
+            if os.path.exists(alfpath):
+                print(f"Skipping {alfpath} - exists")
+            else:
+                print(alfpath)
+                writealf(alfpath, picts[pictk])
 
-        result["LEDI"][le["Tag"]] = {
+        result["LEDI"].append({
             "Alf": alfname,
             "Name": le["Name"],
             "Message": le["Message"].strip(),
-        }
+        })
 
     if "HULL" in forks:
         result["HULL"] = get_tmpl(forks, "HULL")
@@ -184,8 +184,8 @@ def convert_to_files(datafile, thedir):
                 pass
 
     setpath = os.path.join(thedir, SETFILE)
-    with open(setpath, "wb") as setfile:
-        setfile.write(json.dumps(result, indent=2, ensure_ascii=False).encode('utf-8'))
+    with open(setpath, "w", encoding="utf-8") as setfile:
+        setfile.write(json.dumps(result, indent=2, ensure_ascii=False))
 
     if "TEXT" in forks:
         textpath = os.path.join(thedir, SCRIPTFILE)

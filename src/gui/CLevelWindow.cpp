@@ -126,7 +126,7 @@ void CLevelWindow::SelectSet(std::string set) {
     for (auto &ld : ledis.items()) {
         levelNames.push_back(ld.value()["Name"]);
         levelIntros.push_back(ld.value()["Message"]);
-        levelTags.push_back(StringOSType(ld.key()));
+        levelTags.push_back(ld.value()["Alf"]);
     }
     levelBox->setItems(levelNames, levelIntros);
     levelBox->setEnabled(true);
@@ -135,6 +135,7 @@ void CLevelWindow::SelectSet(std::string set) {
 
 void CLevelWindow::SendLoad() {
     std::string set = levelSets[setBox->selectedIndex()];
-    OSType tag = levelTags[levelBox->selectedIndex()];
+    std::string title = levelNames[levelBox->selectedIndex()];
+    std::string tag = levelTags[levelBox->selectedIndex()];
     ((CAvaraAppImpl *)gApplication)->GetNet()->SendLoadLevel(set, tag);
 }

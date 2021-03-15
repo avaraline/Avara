@@ -71,8 +71,7 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.levelName = itsGame->loadedLevel;
     iface.levelName = itsGame->loadedDesigner;
     iface.levelName = itsGame->loadedInfo;
-    iface.directoryTag = 0;
-    iface.levelTag = 0;
+    iface.directory = itsGame->loadedTag;
     iface.playerID = 0;
     iface.playerTeam = 0;
     iface.playerLives = 0;
@@ -105,8 +104,7 @@ void CScoreKeeper::Dispose() {
 void CScoreKeeper::EndScript() {
     iface.command = ksiLevelLoaded;
     iface.levelName = itsGame->loadedLevel;
-    iface.directoryTag = itsGame->loadedTag;
-    iface.levelTag = itsGame->loadedDirectory;
+    iface.directory = itsGame->loadedSet;
 }
 
 void CScoreKeeper::StartResume(Boolean didStart) {

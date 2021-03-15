@@ -213,40 +213,40 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 }
 
 
-OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) {
-    SDL_Log("LOADING LEVEL %s FROM %s\n", OSTypeString(theLevel).c_str(), set.c_str());
+OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) {
+    SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
     itsGame->LevelReset(false);
-    itsGame->loadedTag = theLevel;
-    std::string levelName;
-
-    OSErr result = fnfErr;
     gCurrentGame = itsGame;
-    BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
+    itsGame->loadedSet = set;
     UseLevelFolder(set);
+
     // still needed for sounds
     // TODO: eliminate
     std::string rsrcPath = std::string("levels/") + set + ".r";
     UseResFile(rsrcPath);
 
-    std::string leveltag = OSTypeString(theLevel);
+    OSErr result = fnfErr;
     json setManifest = GetManifestJSON(set);
+    if(setManifest == -1) return result;
+    if(setManifest.find("LEDI") == setManifest.end()) return result;
 
-    json ledi = setManifest["LEDI"][leveltag];
-    std::string alfname = ledi["Alf"];
-    levelName = ledi["Name"];
-
-    if(LoadALF(GetALFPath(alfname))) {
-        // std::string -> pascal string
-        BlockMoveData((((char)levelName.size()) + levelName).c_str(), itsGame->loadedLevel, levelName.size() + 2);
-        result = noErr;
+    json ledi = NULL;
+    for (auto &ld : setManifest["LEDI"].items()) {
+        if (ld.value()["Alf"] == levelTag)
+            ledi = ld.value();
     }
+    if(ledi == NULL) return result;
+
+    if(LoadALF(GetALFPath(levelTag))) result = noErr;
 
     if (result == noErr) {
+        itsGame->loadedLevel = ledi["Name"];
+        itsGame->loadedTag  = levelTag;
         std::string msgPrefix = "Loaded";
         if(sendingPlayer != NULL)
             msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
-        AddMessageLine(msgPrefix + " \"" + levelName + "\" from \"" + set + "\".");
-        levelWindow->SelectLevel(set, levelName);
+        AddMessageLine(msgPrefix + " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".");
+        levelWindow->SelectLevel(set, itsGame->loadedLevel);
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);
         SDL_Log("overhead %f, %f, %f\n", ToFloat(pt[0]), ToFloat(pt[1]), ToFloat(pt[2]));
@@ -354,8 +354,8 @@ void CAvaraAppImpl::ParamLine(short index, short align, StringPtr param1, String
 }
 void CAvaraAppImpl::StartFrame(long frameNum) {}
 
-void CAvaraAppImpl::StringLine(StringPtr theString, short align) {
-    AddMessageLine(std::string((char* ) theString + 1, theString[0]).c_str());
+void CAvaraAppImpl::StringLine(std::string theString, short align) {
+    AddMessageLine(theString.c_str());
 }
 
 void CAvaraAppImpl::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {

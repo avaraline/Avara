@@ -92,13 +92,13 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceiveColorChange(thePacket->dataBuffer);
             break;
         case kpLoadLevel:
-            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->dataBuffer, thePacket->p3, thePacket->p2);
+            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->dataBuffer, thePacket->p2);
             break;
         case kpLevelLoaded:
-            theNet->LevelLoadStatus(thePacket->sender, thePacket->p2, 0, thePacket->p3);
+            theNet->LevelLoadStatus(thePacket->sender, thePacket->p2, 0, std::string(thePacket->dataBuffer));
             break;
         case kpLevelLoadErr:
-            theNet->LevelLoadStatus(thePacket->sender, 0, thePacket->p2, thePacket->p3);
+            theNet->LevelLoadStatus(thePacket->sender, 0, thePacket->p2, std::string(thePacket->dataBuffer));
             break;
         case kpKillNet:
             theGame->itsApp->BroadcastCommand(kNetChangedCmd);

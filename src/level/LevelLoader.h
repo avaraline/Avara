@@ -296,7 +296,7 @@ double ReadVariable(short index);
 Fixed ReadFixedVar(short index);
 long ReadLongVar(short index);
 long ReadColorVar(short index);
-void ReadStringVar(short index, StringPtr dest);
+std::string ReadStringVar(short index);
 
 void ProgramVariable(short index, double value);
 void ProgramFixedVar(short index, Fixed value);

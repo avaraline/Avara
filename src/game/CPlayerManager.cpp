@@ -100,7 +100,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     // theRoster = aRoster;
     theNetManager = aNetManager;
     levelCRC = 0;
-    levelTag = 0;
+    levelTag = "";
     position = id;
     itsPlayer = NULL;
 
@@ -876,7 +876,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
     // theRoster->InvalidateArea(kOnePlayerBox, pos);
 }
 
-void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) {
+void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
     if (loadingStatus != kLNotConnected && loadingStatus != kLActive) {
@@ -890,7 +890,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSTy
             else
                 loadingStatus = kLNotFound;
         } else {
-            if (serverCRC == levelCRC && serverTag == levelTag) {
+            if (serverCRC == levelCRC && serverTag.compare(levelTag) == 0) {
                 short i;
 
                 SDL_Log("Setting loadingStatus = kLLoaded\n");
@@ -903,7 +903,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSTy
                 }
 #endif
             } else {
-                if (serverTag == levelTag) {
+                if (serverTag.compare(levelTag) == 0) {
                     loadingStatus = kLMismatch;
                 }
             }
@@ -1224,7 +1224,7 @@ short CPlayerManagerImpl::LevelCRC() {
 OSErr CPlayerManagerImpl::LevelErr() {
     return levelErr;
 }
-OSType CPlayerManagerImpl::LevelTag() {
+std::string CPlayerManagerImpl::LevelTag() {
     return levelTag;
 }
 void CPlayerManagerImpl::LevelCRC(short crc) {
@@ -1233,7 +1233,7 @@ void CPlayerManagerImpl::LevelCRC(short crc) {
 void CPlayerManagerImpl::LevelErr(OSErr err) {
     levelErr = err;
 }
-void CPlayerManagerImpl::LevelTag(OSType t) {
+void CPlayerManagerImpl::LevelTag(std::string t) {
     levelTag = t;
 }
 Fixed CPlayerManagerImpl::RandomKey() {

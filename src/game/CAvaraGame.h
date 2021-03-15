@@ -16,6 +16,7 @@
 #include "Types.h"
 
 #include <SDL2/SDL.h>
+#include <string>
 
 #define IDENTTABLESIZE 512
 
@@ -67,12 +68,11 @@ class CHUD;
 
 class CAvaraGame : public CDirectObject {
 public:
-    OSType loadedTag;
-    OSType loadedDirectory;
-    Str255 loadedSet = "";
-    Str255 loadedLevel = "";
-    Str255 loadedDesigner = "";
-    Str255 loadedInfo = "";
+    std::string loadedTag = "";
+    std::string loadedLevel = "";
+    std::string loadedSet = "";
+    std::string loadedDesigner = "";
+    std::string loadedInfo = "";
     long loadedTimeLimit;
     long timeInSeconds;
     long frameNumber;

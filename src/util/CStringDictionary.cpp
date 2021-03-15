@@ -44,6 +44,12 @@ short CStringDictionary::GetDictionarySize() {
     return wordList.size();
 }
 
+
+std::string CStringDictionary::GetIndEntry(short index) {
+    if (0 <= index && index < wordList.size()) return wordList.at(index);
+    else return "";
+}
+
 /*
 **	Copy the string for entry index to theEntry
 */

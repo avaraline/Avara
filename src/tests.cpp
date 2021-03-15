@@ -126,7 +126,7 @@ public:
     virtual long Number(const std::string name) { return 0; }
     virtual bool Boolean(const std::string name) { return false; }
     virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) { return noErr; }
-    virtual OSErr LoadLevel(std::string set, OSType theLevel, CPlayerManager* sendingPlayer) { return noErr; }
+    virtual OSErr LoadLevel(std::string set, int levelIndex, CPlayerManager* sendingPlayer) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
     virtual json Get(const std::string name) { return json(); }
