@@ -70,6 +70,8 @@ hsnd2wav: $(BUILD_DIR)/hsnd2wav resources
 
 frandom: $(BUILD_DIR)/frandom
 
+fixed: $(BUILD_DIR)/fixed
+
 macapp: avara
 	rm -rf $(BUILD_DIR)/Avara.app
 	$(MKDIR_P) $(BUILD_DIR)/Avara.app/Contents/{Frameworks,MacOS,Resources}
@@ -117,6 +119,11 @@ $(BUILD_DIR)/hsnd2wav: $(OBJS) $(BUILD_DIR)/src/hsnd2wav.cpp.o
 # frandom
 $(BUILD_DIR)/frandom: $(OBJS) $(BUILD_DIR)/src/frandom.cpp.o
 	$(CXX) $(OBJS) $(BUILD_DIR)/src/frandom.cpp.o -o $@ $(LDFLAGS)
+	$(POST_PROCESS) $@
+
+# fixed
+$(BUILD_DIR)/fixed: $(OBJS) $(BUILD_DIR)/src/fixed.cpp.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/fixed.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
 # c source

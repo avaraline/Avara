@@ -169,6 +169,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
                 theNet->fragmentCheck = p3;
             } else {
                 if (theNet->fragmentCheck != p3) {
+                    SDL_Log("FRAGMENTATION %ld != %ld", theNet->fragmentCheck, p3);
                     theNet->fragmentDetected = true;
                 }
             }
