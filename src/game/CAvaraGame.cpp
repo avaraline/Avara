@@ -278,18 +278,14 @@ CAbstractPlayer *CAvaraGame::GetSpectatePlayer() {
 }
 
 CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
-    CAbstractPlayer *thePlayer;
-
-    thePlayer = playerList;
-    while (thePlayer) {
-        if (thePlayer->itsManager && thePlayer->itsManager->IsLocalPlayer()) {
-            break;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *mgr = itsNet->playerTable[i];
+        if (mgr && mgr->IsLocalPlayer()) {
+            return mgr->GetPlayer();
         }
-
-        thePlayer = thePlayer->nextPlayer;
     }
 
-    return thePlayer;
+    return NULL;
 }
 
 void CAvaraGame::AddActor(CAbstractActor *theActor) {
