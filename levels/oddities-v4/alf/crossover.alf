@@ -1,0 +1,74 @@
+<map>
+  <set StripSep="3" StripAH="100" StripBH="StripAH + StripSep" StripThick=".1" wallHeight="StripThick" floorTemplate="bspFloorFrame" goodyGrenades="3" goodyMissiles="7" goodyBoosters="1" defaultLives="6" gravity="0.78" missileTurnRate="100" missileAcceleration=".5" missilePower="grenadePower" information="&quot;Walk off the end of a strip to get ammo. 
+The switch controls whether falls are deadly.
+Missiles are faster & more powerful.
+Oh, and the switch sometimes gets flipped automatically.&quot;" />
+  <SkyColor verticalRangeMax="2000" n="15" fill="#003333" frame="#006666" />
+  <GroundColor fill="#009999" frame="#006666" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#00ee00" frame="#000000" cx="7.5" cz="25.833333333333336" r="1.875" angle="0" extent="90" />
+  <set baseHeight="StripAH" />
+  <Wall fill="#bbbbbb" frame="#000000" x="5" z="29.583333333333336" w="60" d="5" h="0" />
+  <Wall fill="#99ccff" frame="#000000" x="32.5" z="37.083333333333336" w="5" d="5" h="0" />
+  <Incarnator fill="#99ccff" frame="#000000" cx="12.5" cz="32.048611111111114" r="2.6736111111111107" angle="225" extent="90" />
+  <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="12.5" cz="32.048611111111114" r="2.6736111111111107" angle="225" extent="90" />
+  <Incarnator fill="#99ccff" frame="#000000" cx="57.5" cz="32.048611111111114" r="2.6736111111111107" angle="45" extent="90" />
+  <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="57.5" cz="32.048611111111114" r="2.6736111111111107" angle="45" extent="90" />
+  <Field deltaY="0" deltaX="1" fill="#eeeeee" frame="#000000" r="2.6736111111111107" cx="57.5" cz="32.048611111111114" angle="45" extent="90" x="0" z="29.583333333333336" w="5" d="5" h="4.5" />
+  <Field deltaY="0" deltaX="1" fill="#eeeeee" frame="#000000" r="2.6736111111111107" cx="57.5" cz="32.048611111111114" angle="45" extent="90" x="0" z="44.583333333333336" w="5" d="5" h="4.5" />
+  <unique vars="mG" />
+  <Teleporter group="@West" destGroup="@East" in="mG" sound="snGoody" spin="false" shape="0" activeRange="3" fill="#bbbbbb" frame="#000000" cx="6.875" cz="32.083333333333336" r="1.875" angle="0" extent="270" />
+  <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#bbbbbb" frame="#000000" cx="6.875" cz="32.083333333333336" r="1.875" angle="0" extent="270" />
+  <unique vars="mG" />
+  <Teleporter group="@East" destGroup="@West" in="mG" sound="snGoody" spin="false" shape="0" activeRange="3" fill="#bbbbbb" frame="#000000" cx="63.125" cz="32.083333333333336" r="1.875" angle="0" extent="270" />
+  <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#bbbbbb" frame="#000000" cx="63.125" cz="32.083333333333336" r="1.875" angle="0" extent="270" />
+  <Wall fill="#bbbbbb" frame="#000000" x="5" z="44.583333333333336" w="60" d="5" h="0" />
+  <Incarnator fill="#99ccff" frame="#000000" cx="12.5" cz="47.048611111111114" r="2.6736111111111107" angle="225" extent="90" />
+  <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="12.5" cz="47.048611111111114" r="2.6736111111111107" angle="225" extent="90" />
+  <Incarnator fill="#99ccff" frame="#000000" cx="57.5" cz="47.048611111111114" r="2.6736111111111107" angle="45" extent="90" />
+  <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="57.5" cz="47.048611111111114" r="2.6736111111111107" angle="45" extent="90" />
+  <unique vars="mG" />
+  <Teleporter group="@West" destGroup="@East" in="mG" sound="snGoody" spin="false" shape="0" activeRange="3" fill="#bbbbbb" frame="#000000" cx="6.875" cz="47.083333333333336" r="1.875" angle="0" extent="270" />
+  <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#bbbbbb" frame="#000000" cx="6.875" cz="47.083333333333336" r="1.875" angle="0" extent="270" />
+  <unique vars="mG" />
+  <Teleporter group="@East" destGroup="@West" in="mG" sound="snGoody" spin="false" shape="0" activeRange="3" fill="#bbbbbb" frame="#000000" cx="63.125" cz="47.083333333333336" r="1.875" angle="0" extent="270" />
+  <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#bbbbbb" frame="#000000" cx="63.125" cz="47.083333333333336" r="1.875" angle="0" extent="270" />
+  <Field deltaY="0" deltaX="-1" fill="#eeeeee" frame="#000000" r="1.875" cx="63.125" cz="47.083333333333336" angle="0" extent="270" x="65" z="29.583333333333336" w="5" d="5" h="4.5" />
+  <Field deltaY="0" deltaX="-1" fill="#eeeeee" frame="#000000" r="1.875" cx="63.125" cz="47.083333333333336" angle="0" extent="270" x="65" z="44.583333333333336" w="5" d="5" h="4.5" />
+  <set baseHeight="StripBH" />
+  <Wall fill="#eeeeee" frame="#000000" x="40" z="9.583333333333334" w="5" d="60" h="0" />
+  <Field deltaY="0" deltaZ="1" fill="#eeeeee" frame="#000000" r="1.875" cx="63.125" cz="47.083333333333336" angle="0" extent="270" x="25" z="4.583333333333334" w="5" d="5" h="4.5" />
+  <WallDoor open="@die" close="@reset" didOpen="@reset" deltaY="-StripSep + StripThick" shotPower="10" openDelay="5" openSpeed="15" closeSpeed="30" guardDelay="0" openSound="0" closeSound="0" stopSound="0" fill="#66ccff" frame="#000000" r="1.875" cx="63.125" cz="47.083333333333336" angle="0" extent="270" x="72.56944444444444" z="46.736111111111114" w="5" d="60" h="0" />
+  <Wall fill="#eeeeee" frame="#000000" x="25" z="9.583333333333334" w="5" d="60" h="0" />
+  <Incarnator fill="#99ccff" frame="#000000" cx="27.569444444444446" cz="62.08333333333334" r="2.6388888888888893" angle="135" extent="90" />
+  <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="27.569444444444446" cz="62.08333333333334" r="2.6388888888888893" angle="135" extent="90" />
+  <Incarnator fill="#99ccff" frame="#000000" cx="27.569444444444446" cz="17.083333333333336" r="2.6388888888888893" angle="315" extent="90" />
+  <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="27.569444444444446" cz="17.083333333333336" r="2.6388888888888893" angle="315" extent="90" />
+  <Incarnator fill="#99ccff" frame="#000000" cx="42.56944444444444" cz="62.08333333333334" r="2.6388888888888893" angle="135" extent="90" />
+  <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="42.56944444444444" cz="62.08333333333334" r="2.6388888888888893" angle="135" extent="90" />
+  <Incarnator fill="#99ccff" frame="#000000" cx="42.56944444444444" cz="17.083333333333336" r="2.6388888888888893" angle="315" extent="90" />
+  <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="42.56944444444444" cz="17.083333333333336" r="2.6388888888888893" angle="315" extent="90" />
+  <unique vars="mG" />
+  <Teleporter group="@North" destGroup="@South" in="mG" sound="snGoody" spin="false" shape="0" activeRange="3" fill="#bbbbbb" frame="#000000" cx="27.5" cz="11.458333333333334" r="1.875" angle="0" extent="270" />
+  <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#bbbbbb" frame="#000000" cx="27.5" cz="11.458333333333334" r="1.875" angle="0" extent="270" />
+  <Field deltaY="0" deltaZ="1" fill="#eeeeee" frame="#000000" r="1.875" cx="27.5" cz="11.458333333333334" angle="0" extent="270" x="40" z="4.583333333333334" w="5" d="5" h="4.5" />
+  <unique vars="mG" />
+  <Teleporter group="@North" destGroup="@South" in="mG" sound="snGoody" spin="false" shape="0" activeRange="3" fill="#bbbbbb" frame="#000000" cx="42.5" cz="11.458333333333334" r="1.875" angle="0" extent="270" />
+  <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#bbbbbb" frame="#000000" cx="42.5" cz="11.458333333333334" r="1.875" angle="0" extent="270" />
+  <unique vars="mG" />
+  <Teleporter group="@South" destGroup="@North" in="mG" sound="snGoody" spin="false" shape="0" activeRange="3" fill="#bbbbbb" frame="#000000" cx="42.5" cz="67.70833333333334" r="1.875" angle="0" extent="270" />
+  <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#bbbbbb" frame="#000000" cx="42.5" cz="67.70833333333334" r="1.875" angle="0" extent="270" />
+  <Field deltaY="0" deltaZ="-1" fill="#eeeeee" frame="#000000" r="1.875" cx="42.5" cz="67.70833333333334" angle="0" extent="270" x="40" z="69.58333333333334" w="5" d="5" h="4.5" />
+  <unique vars="mG" />
+  <Teleporter group="@South" destGroup="@North" in="mG" sound="snGoody" spin="false" shape="0" activeRange="3" fill="#bbbbbb" frame="#000000" cx="27.5" cz="67.70833333333334" r="1.875" angle="0" extent="270" />
+  <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#bbbbbb" frame="#000000" cx="27.5" cz="67.70833333333334" r="1.875" angle="0" extent="270" />
+  <Field deltaY="0" deltaZ="-1" fill="#eeeeee" frame="#000000" r="1.875" cx="27.5" cz="67.70833333333334" angle="0" extent="270" x="25" z="69.58333333333334" w="5" d="5" h="4.5" />
+  <set baseHeight="0" />
+  <Teleporter yon="0.01" y="StripBH + 10" activeRange="1000" deadRange="45" shape="0" start="@deadlyON" stop="@deadlyOFF" out="@die" status="true" destGroup="@killer" group="-1" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Teleporter yon="0.01" y="StripBH + 10" activeRange="1000" deadRange="45" shape="0" start="@deadlyOFF" stop="@deadlyON" destGroup="@killer" group="-1" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Switch shape="bspSwitchOff" out.0="@deadlyON" out.1="@deadlyOFF" y="StripBH + StripSep" blastToggle="2" targetGroup="targ1" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Guard watch="targ1" y="StripBH + 50" shotPower="3" freq="20 * 15" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Teleporter group="@killer" start="0" y="StripAH" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Teleporter group="@killer" start="0" y="StripBH" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" in="@deadlyON" text="&quot;Falls are now deadly.&quot;" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" in="@deadlyOFF" text="&quot;Falls are now safe.&quot;" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+</map>

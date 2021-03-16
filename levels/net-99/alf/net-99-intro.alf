@@ -1,0 +1,59 @@
+<map>
+  <set defaultLives="3" />
+  <Incarnator fill="#3366ff" frame="#000000" cx="67.29166666666667" cz="32.77777777777778" r="2.638888888888891" angle="359" extent="182" />
+  <SkyColor fill="#000000" frame="#000000" />
+  <GroundColor fill="#000000" frame="#8a8a8a" />
+  <Timer in="@start" out="@winTeam" wait="2100" restart="false" fill="#f41dff" frame="#000000" cx="5.625" cz="29.79166666666667" r="2.5694444444444446" angle="0" extent="90" />
+  <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#ff5a86" frame="#000000" cx="32.5" cz="2.430555555555556" r="1.3888888888888893" angle="90" extent="180" />
+  <Sound y="1" isPlaced="false" isMusic="true" isAmbient="true" rate="1" loopCount="0" sound="1112" volume="0.5" start="@start" restart="true" fill="#1f610b" frame="#000000" cx="31.111111111111114" cz="43.68055555555556" r="1.666666666666666" angle="1" extent="178" />
+  <set lightHull="1111" mediumHull="1111" HeavyHull="1111" />
+  <Text in="@start" wait="250" text="&quot;I just wanted to say 
+thanks to all of you who
+participated in Net '99!&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#1f610b" frame="#000000" cx="31.111111111111114" cz="43.68055555555556" r="1.666666666666666" angle="1" extent="178" />
+  <Door2 status="isOpen" stopSound="3301" shape="2000" y="0.5" deltaY="0" deltaZ="-500" deltaX="0" close="@start" openSpeed="0.8" volume="100" closeDelay="0" pitch="00" yaw="2000" roll="0" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <set designer="&quot;Rup-1&quot;" information="&quot;Please read the information in 
+your instruments window.  Once the text is 
+finished you will be able to play all the levels.  
+Thanks to all of you who participated !!&quot;" />
+  <Text in="@start" wait="1300" text="&quot;Designers / Credits&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="400" text="&quot;We were able to put over
+50 Levels In Net '99 from
+15 different designers!&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="550" text="&quot;Since deciding winners for
+the contest was too close to
+call-- here is how it will work.&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="700" text="&quot;You will see our top ten picks
+as well as the honorable mention
+levels in the set.&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="1000" text="&quot;Please be sure to stop by
+http://ald.avara.org
+to submit your votes for
+your favorite levels.&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="850" text="&quot;To determine the actual winners
+we will need your input.&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="1150" text="&quot;You are not limited to our
+top ten picks and thanks
+for giving Net '99 your 
+support by voting.&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="1450" text="&quot;Ben Chin
+Dark Sorcerer
+Densak
+iMatt&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="1600" text="&quot;Hazel Weigl
+Mondo
+Peter Koss
+Pimpbot 5000&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="1750" text="&quot;Plastic Chicken
+Robin Hood 
+Rup-1
+Tetra&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text in="@start" wait="1900" text="&quot;Tyrant
+Yo-Yo
+ZerO / Solucet
+Avara.org&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text sound="0" in="@start" wait="0" text="&quot;Welcome to Net '99!&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Text sound="3301" in="@start" wait="2050" text="&quot;Enjoy the levels!!
+
+-- Avara Level Design --&quot;" showEveryone="true" align="centerAlign" restart="false" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" angle="179" extent="182" />
+  <Door2 status="isOpen" stopSound="3301" shape="2001" y="-2.5" deltaY="0" deltaZ="-500" deltaX="0" close="@start" openSpeed="0.8" volume="100" closeDelay="80" pitch="00" yaw="2000" roll="0" fill="#fbffff" frame="#090909" cx="48.402777777777786" cz="32.361111111111114" r="1.6666666666666679" angle="179" extent="182" />
+</map>

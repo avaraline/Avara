@@ -1,0 +1,86 @@
+<map>
+  <set designer="&quot;The Head <tanderso@auc.trw.com>&quot;" information="&quot;Missiles up, grenades down.
+Run at the goodies to snag them and change levels.&quot;" defaultLives="3" grenadePower="2.0" missilePower="2.0" missileAcceleration="0.8" headRoom="5.5" fieldY="0.20" grenadeY="1.0" />
+  <set missileY="3.5" />
+  <set goodyDelay="180" floorYon="0.01" />
+  <set distYon="85" />
+  <set wallYon="distYon" />
+  <set wallYon="floorYon" wa="headRoom * 3" />
+  <Wall fill="#006600" frame="#000000" x="8.402777777777779" z="19.23611111111111" w="64.93055555555557" d="65" h="0" />
+  <set wallYon="distYon" wallHeight="headRoom * 3" />
+  <Wall fill="#ffffff" frame="#000000" x="8.333333333333334" z="19.23611111111111" w="65.06944444444446" d="2.5" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="70.83333333333334" z="21.73611111111111" w="2.5" d="60" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="8.333333333333334" z="81.73611111111111" w="65" d="2.5" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="8.333333333333334" z="21.73611111111111" w="2.5" d="60" h="0" />
+  <SkyColor fill="#66ff66" frame="#008800" />
+  <GroundColor fill="#002200" frame="#444444" />
+  <Teleporter shape="0" y="200" win="1200" start="@winTeam" activeRange="2000" fill="#002200" frame="#000000" cx="4.236111111111112" cz="5.625" r="2.5" angle="180" extent="90" />
+  <Teleporter group="@miss" shape="0" activeRange="0.0" fill="#ffff00" frame="#000000" cx="25.347222222222225" cz="66.73611111111111" r="2.5" angle="90" extent="300" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Hologram fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Goody shape="bspMissile" y="missileY" missiles="4" start="mShow" out="mTaken" fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <set wallHeight="headRoom" />
+  <Field deltaY="fieldY" visible="false" fill="#ffcc00" frame="#000000" r="1.875" cx="57.22222222222222" cz="35.625" angle="150" extent="300" x="54.65277777777778" z="33.05555555555556" w="5" d="5" h="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ff0000" frame="#ffff00" cx="57.15277777777778" cz="67.91666666666667" r="1.875" angle="150" extent="300" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#ff0000" frame="#ffff00" cx="57.15277777777778" cz="67.91666666666667" r="1.875" angle="150" extent="300" />
+  <Hologram fill="#ff0000" frame="#ffff00" cx="57.15277777777778" cz="67.91666666666667" r="1.875" angle="150" extent="300" />
+  <Goody shape="bspGrenade" y="2.0" grenades="6" start="mShow" out="mTaken" fill="#ff0000" frame="#ffff00" cx="57.15277777777778" cz="67.91666666666667" r="1.875" angle="150" extent="300" />
+  <Teleporter activeRange="0.18" destGroup="@gren" shape="0" fill="#ff0000" frame="#ffff00" cx="57.15277777777778" cz="67.91666666666667" r="1.875" angle="150" extent="300" />
+  <set wallYon="floorYon" />
+  <set baseHeight="headRoom * 1" wallHeight="0" />
+  <Wall fill="#00cccc" frame="#000000" x="27.15277777777778" z="65.55555555555556" w="27.5" d="16.25" h="0" />
+  <Wall fill="#00cccc" frame="#000000" x="10.902777777777779" z="21.805555555555557" w="11.25" d="60" h="0" />
+  <Wall fill="#00cccc" frame="#000000" x="59.65277777777778" z="21.805555555555557" w="11.25" d="60" h="0" />
+  <Wall fill="#00cccc" frame="#000000" x="22.15277777777778" z="21.805555555555557" w="37.5" d="11.25" h="0" />
+  <Wall fill="#00cccc" frame="#000000" x="27.15277777777778" z="33.05555555555556" w="27.5" d="5" h="0" />
+  <Wall fill="#00cccc" frame="#000000" x="22.15277777777778" z="38.05555555555556" w="5" d="43.75" h="0" />
+  <Wall fill="#00cccc" frame="#000000" x="54.65277777777778" z="38.05555555555556" w="5" d="43.75" h="0" />
+  <set wallYon="distYon" floorTemplate="bspFloorFrame" />
+  <Wall fill="#00cccc" frame="#000000" x="27.15277777777778" z="38.05555555555556" w="27.5" d="27.5" h="0" />
+  <set wallYon="floorYon" floorTemplate="bspStandardFloor" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ff0000" frame="#ffff00" cx="24.722222222222225" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#ff0000" frame="#ffff00" cx="24.722222222222225" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Hologram fill="#ff0000" frame="#ffff00" cx="24.722222222222225" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Goody shape="bspGrenade" y="grenadeY" grenades="6" start="mShow" out="mTaken" fill="#ff0000" frame="#ffff00" cx="24.722222222222225" cz="35.625" r="1.875" angle="150" extent="300" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#0000dd" frame="#0099ff" cx="24.444444444444446" cz="67.98611111111111" r="1.875" angle="150" extent="300" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#0000dd" frame="#0099ff" cx="24.444444444444446" cz="67.98611111111111" r="1.875" angle="150" extent="300" />
+  <Hologram fill="#0000dd" frame="#0099ff" cx="24.444444444444446" cz="67.98611111111111" r="1.875" angle="150" extent="300" />
+  <Goody shape="bspMissile" y="missileY" missiles="4" start="mShow" out="mTaken" fill="#0000dd" frame="#0099ff" cx="24.444444444444446" cz="67.98611111111111" r="1.875" angle="150" extent="300" />
+  <set wallHeight="headRoom" />
+  <Field deltaY="fieldY" visible="false" fill="#ffcc00" frame="#000000" r="1.875" cx="24.444444444444446" cz="67.98611111111111" angle="150" extent="300" x="22.15277777777778" z="65.55555555555556" w="5" d="5" h="0" />
+  <set baseHeight="headRoom * 2" wallHeight="0" />
+  <Wall fill="#ffcc00" frame="#000000" x="27.15277777777778" z="21.805555555555557" w="27.5" d="16.25" h="0" />
+  <Wall fill="#ffcc00" frame="#000000" x="10.902777777777779" z="21.805555555555557" w="11.25" d="60" h="0" />
+  <Wall fill="#ffcc00" frame="#000000" x="59.65277777777778" z="21.805555555555557" w="11.25" d="60" h="0" />
+  <Wall fill="#ffcc00" frame="#000000" x="22.15277777777778" z="70.55555555555556" w="37.5" d="11.25" h="0" />
+  <Wall fill="#ffcc00" frame="#000000" x="27.15277777777778" z="65.55555555555556" w="27.5" d="5" h="0" />
+  <Wall fill="#ffcc00" frame="#000000" x="22.15277777777778" z="21.805555555555557" w="5" d="43.75" h="0" />
+  <Wall fill="#ffcc00" frame="#000000" x="54.65277777777778" z="21.805555555555557" w="5" d="43.75" h="0" />
+  <set wallYon="distYon" floorTemplate="bspFloorFrame" />
+  <Wall fill="#ffcc00" frame="#000000" x="27.15277777777778" z="38.05555555555556" w="27.5" d="27.5" h="0" />
+  <set wallYon="floorYon" floorTemplate="bspStandardFloor" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ff0000" frame="#ffff00" cx="57.29166666666667" cz="68.125" r="1.875" angle="150" extent="300" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#ff0000" frame="#ffff00" cx="57.29166666666667" cz="68.125" r="1.875" angle="150" extent="300" />
+  <Hologram fill="#ff0000" frame="#ffff00" cx="57.29166666666667" cz="68.125" r="1.875" angle="150" extent="300" />
+  <Goody shape="bspGrenade" y="grenadeY" grenades="6" start="mShow" out="mTaken" fill="#ff0000" frame="#ffff00" cx="57.29166666666667" cz="68.125" r="1.875" angle="150" extent="300" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Hologram fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Goody shape="bspMissile" y="2.0" missiles="4" start="mShow" out="mTaken" fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Teleporter activeRange="0.18" destGroup="@miss" shape="0" fill="#0000dd" frame="#0099ff" cx="57.22222222222222" cz="35.625" r="1.875" angle="150" extent="300" />
+  <Teleporter group="@gren" shape="0" activeRange="0.0" fill="#ffff00" frame="#000000" cx="24.583333333333336" cz="35.55555555555556" r="1.875" angle="180" extent="270" />
+  <set baseHeight="0" />
+  <Incarnator y="headRoom * 2" fill="#008800" frame="#000000" cx="67.29166666666667" cz="77.98611111111111" r="2.5" angle="0" extent="270" />
+  <Incarnator y="headRoom" fill="#008800" frame="#000000" cx="14.583333333333336" cz="25.48611111111111" r="2.5" angle="180" extent="270" />
+  <Incarnator y="0" fill="#008800" frame="#000000" cx="67.08333333333334" cz="77.98611111111111" r="2.5" angle="0" extent="270" />
+  <Incarnator y="0" fill="#008800" frame="#000000" cx="66.94444444444444" cz="25.555555555555557" r="2.5" angle="270" extent="270" />
+  <Incarnator y="headRoom" fill="#008800" frame="#000000" cx="14.583333333333336" cz="77.98611111111111" r="2.5" angle="90" extent="270" />
+  <Incarnator y="headRoom * 2" fill="#008800" frame="#000000" cx="67.08333333333334" cz="25.555555555555557" r="2.5" angle="270" extent="270" />
+</map>

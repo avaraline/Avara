@@ -1,0 +1,182 @@
+{
+  "LEDI": [
+    {
+      "Alf": "arctic-research-lab.alf",
+      "Name": "Arctic Research Lab",
+      "Message": "Break into the lab and destroy its contents."
+    },
+    {
+      "Alf": "anak-city.alf",
+      "Name": "Anak City",
+      "Message": "Take back Anak City."
+    },
+    {
+      "Alf": "midnight-raid.alf",
+      "Name": "Midnight Raid",
+      "Message": "Raid enemy complex."
+    },
+    {
+      "Alf": "testing-facility.alf",
+      "Name": "Testing Facility",
+      "Message": "Escape testing site."
+    },
+    {
+      "Alf": "desert-base.alf",
+      "Name": "Desert Base",
+      "Message": "Capture enemy base."
+    },
+    {
+      "Alf": "rescue.alf",
+      "Name": "Rescue",
+      "Message": "Rescue a captured starfighter."
+    },
+    {
+      "Alf": "bomb-deposit.alf",
+      "Name": "Bomb Deposit",
+      "Message": "Flee an alien fort."
+    },
+    {
+      "Alf": "syoal-recycling-plant.alf",
+      "Name": "Syoal Recycling Plant",
+      "Message": "Escape from complex."
+    },
+    {
+      "Alf": "boake-maze.alf",
+      "Name": "Boake Maze",
+      "Message": "Find a way to get to the transporter."
+    },
+    {
+      "Alf": "stranded.alf",
+      "Name": "Stranded",
+      "Message": "Borrow an enemy transporter to return home."
+    },
+    {
+      "Alf": "nuclear-winter.alf",
+      "Name": "Nuclear Winter",
+      "Message": "Finish what bombing should have done."
+    },
+    {
+      "Alf": "bluewater-documents.alf",
+      "Name": "Bluewater Documents",
+      "Message": "Steal secret files."
+    },
+    {
+      "Alf": "spy-hunt.alf",
+      "Name": "Spy Hunt",
+      "Message": "Prevent spies from escaping with stolen material."
+    },
+    {
+      "Alf": "practice-run.alf",
+      "Name": "Practice Run",
+      "Message": "Practice makes perfect."
+    },
+    {
+      "Alf": "outpost-zombie.alf",
+      "Name": "Outpost Zombie",
+      "Message": "Protect the outpost from a minor raid."
+    },
+    {
+      "Alf": "fort-of-bob.alf",
+      "Name": "Fort of Bob",
+      "Message": "Re-capture Bob's Fort"
+    },
+    {
+      "Alf": "training-grounds-2.alf",
+      "Name": "Training Grounds 2",
+      "Message": "a) Hit switch\rb) Step onto the round platform\rc) Exit"
+    },
+    {
+      "Alf": "training-grounds.alf",
+      "Name": "Training Grounds",
+      "Message": "Click here to load the mission you want.\rThen read the briefing in the Roster window.\rNew missions appear as old ones are completed."
+    }
+  ],
+  "HULL": {
+    "129": {
+      "Hull Res ID": 216,
+      "Max Missiles": 4,
+      "Max Grenades": 8,
+      "Max boosters": 4,
+      "Mass": 155.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0249942778667887,
+      "Max Shields": 1.0,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.0,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.1000076295109484,
+      "Jump Power": 1.0
+    },
+    "130": {
+      "Hull Res ID": 217,
+      "Max Missiles": 8,
+      "Max Grenades": 12,
+      "Max boosters": 5,
+      "Mass": 170.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 1.1000076295109484,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.1000076295109484,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.0,
+      "Jump Power": 1.1000076295109484
+    },
+    "131": {
+      "Hull Res ID": 215,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    },
+    "128": {
+      "Hull Res ID": 215,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    },
+    "132": {
+      "Hull Res ID": 210,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    }
+  },
+  "BSPT": {}
+}
