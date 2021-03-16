@@ -472,7 +472,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         itsGame->didWait = true;
 
         if (frameFuncs[(FUNCTIONBUFFERS - 1) & (i + 1)].validFrame < itsGame->frameNumber) {
-            askAgainTime += 5 + (FRandom() & 3);
+            askAgainTime += 5 + (rand() & 3);
         }
 
         do {
