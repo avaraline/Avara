@@ -79,17 +79,41 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
             continue;
         newMap[it.key()] = it.value();
         uint32_t cmd = commandBits[it.key()];
-        if (it.value().is_array()) {
-            for (json::iterator kit = it.value().begin(); kit != it.value().end(); ++kit) {
-                SDL_Keycode key = SDL_GetKeyFromName((*kit).get<std::string>().c_str());
+        json commandKeys = it.value();
+        if (it.value().is_array() == false) {
+            commandKeys = json::array({it.value()});
+        }
+        for (json::iterator kit = commandKeys.begin(); kit != commandKeys.end(); ++kit) {
+            SDL_Keycode key = SDL_GetKeyFromName((*kit).get<std::string>().c_str());
+            if(key == SDLK_UNKNOWN) {
+                if((*kit).get<std::string>() == "Right Mouse") {
+                    keyMap[SDL_SCANCODE_APP1] |= cmd;
+                }
+                else if((*kit).get<std::string>() == "Middle Mouse") {
+                    keyMap[SDL_SCANCODE_APP2] |= cmd;
+                }
+            }
+            else {
                 SDL_Scancode scan = SDL_GetScancodeFromKey(key);
                 keyMap[scan] |= cmd;
             }
-        } else {
-            SDL_Keycode key = SDL_GetKeyFromName(it.value().get<std::string>().c_str());
-            SDL_Scancode scan = SDL_GetScancodeFromKey(key);
-            keyMap[scan] |= cmd;
         }
+//        else {
+//            SDL_Keycode key = SDL_GetKeyFromName(it.value().get<std::string>().c_str());
+//            if(key == SDLK_UNKNOWN) {
+//                if(it.value().get<std::string>() == "Right Mouse") {
+//                    keyMap[SDL_SCANCODE_APP1] |= cmd;
+//                }
+//                else if(it.value().get<std::string>() == "Middle Mouse") {
+//                    keyMap[SDL_SCANCODE_APP2] |= cmd;
+//                }
+//
+//            }
+//            else {
+//                SDL_Scancode scan = SDL_GetScancodeFromKey(key);
+//                keyMap[scan] |= cmd;
+//            }
+//        }
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
@@ -271,12 +295,33 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             keysHeld &= ~keyMap[event.key.keysym.scancode];
             break;
         case SDL_MOUSEBUTTONDOWN:
-            buttonStatus |= kbuWentDown;
-            buttonStatus |= kbuIsDown;
+            if(event.button.button == SDL_BUTTON_RIGHT) {
+                keysDown |= keyMap[SDL_SCANCODE_APP1];
+                keysHeld |= keyMap[SDL_SCANCODE_APP1];
+            }
+            else if(event.button.button == SDL_BUTTON_MIDDLE) {
+                keysDown |= keyMap[SDL_SCANCODE_APP2];
+                keysHeld |= keyMap[SDL_SCANCODE_APP2];
+            }
+            else {
+                buttonStatus |= kbuWentDown;
+                buttonStatus |= kbuIsDown;
+            }
+            
             break;
         case SDL_MOUSEBUTTONUP:
-            buttonStatus |= kbuWentUp;
-            buttonStatus &= ~kbuIsDown;
+            if(event.button.button == SDL_BUTTON_RIGHT) {
+                keysUp |= keyMap[SDL_SCANCODE_APP1];
+                keysHeld &= ~keyMap[SDL_SCANCODE_APP1];
+            }
+            else if(event.button.button == SDL_BUTTON_MIDDLE) {
+                keysUp |= keyMap[SDL_SCANCODE_APP2];
+                keysHeld &= ~keyMap[SDL_SCANCODE_APP2];
+            }
+            else {
+                buttonStatus |= kbuWentUp;
+                buttonStatus &= ~kbuIsDown;
+            }
             break;
         case SDL_MOUSEMOTION:
             int xrel = event.motion.xrel, yrel = event.motion.yrel;
