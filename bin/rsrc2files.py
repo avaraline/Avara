@@ -160,6 +160,7 @@ def convert_to_files(datafile, thedir):
         for k in rbsps.keys():
             bspname = str(k) + ".json"
             bsppath = os.path.join(bspspath, bspname)
+            result["BSPT"][k] = bsppath
             if os.path.exists(bsppath):
                 print(f"Skipping {bsppath} - exists")
                 continue
@@ -186,6 +187,7 @@ def convert_to_files(datafile, thedir):
     setpath = os.path.join(thedir, SETFILE)
     with open(setpath, "w", encoding="utf-8") as setfile:
         setfile.write(json.dumps(result, indent=2, ensure_ascii=False))
+        setfile.write("\n")
 
     if "TEXT" in forks:
         textpath = os.path.join(thedir, SCRIPTFILE)

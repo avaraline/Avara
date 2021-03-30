@@ -128,6 +128,10 @@ def object_context(name, context):
     return {k: context[k] for k in keys if k in context}
 
 
+def xmlchars(astr):
+    return astr.replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
+
+
 class Element(object):
     def __init__(self, tag, *children, **attrs):
         self.tag = tag
@@ -148,14 +152,14 @@ class Element(object):
 
     def xml(self, indent=2):
         attrs = "".join(
-            ' {}="{}"'.format(name, str(value).replace('"', "&quot;"))
+            ' {}="{}"'.format(name, xmlchars(str(value)))
             for name, value in self.attrs.items()
         )
         if self.children:
             text = "\n"
             for child in self.children:
                 if isinstance(child, str):
-                    text += child.replace("<", "&lt;").replace(">", "&gt;")
+                    text += xmlchars(child)
                 else:
                     text += (" " * indent) + str(child) + "\n"
             return "<{tag}{attrs}>{text}</{tag}>".format(
