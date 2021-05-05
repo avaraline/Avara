@@ -98,22 +98,6 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
                 keyMap[scan] |= cmd;
             }
         }
-//        else {
-//            SDL_Keycode key = SDL_GetKeyFromName(it.value().get<std::string>().c_str());
-//            if(key == SDLK_UNKNOWN) {
-//                if(it.value().get<std::string>() == "Right Mouse") {
-//                    keyMap[SDL_SCANCODE_APP1] |= cmd;
-//                }
-//                else if(it.value().get<std::string>() == "Middle Mouse") {
-//                    keyMap[SDL_SCANCODE_APP2] |= cmd;
-//                }
-//
-//            }
-//            else {
-//                SDL_Scancode scan = SDL_GetScancodeFromKey(key);
-//                keyMap[scan] |= cmd;
-//            }
-//        }
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
 
