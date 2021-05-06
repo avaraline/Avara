@@ -84,12 +84,13 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
             commandKeys = json::array({it.value()});
         }
         for (json::iterator kit = commandKeys.begin(); kit != commandKeys.end(); ++kit) {
-            SDL_Keycode key = SDL_GetKeyFromName((*kit).get<std::string>().c_str());
+            std::string name = (*kit).get<std::string>();
+            SDL_Keycode key = SDL_GetKeyFromName(name.c_str());
             if(key == SDLK_UNKNOWN) {
-                if((*kit).get<std::string>() == "Right Mouse") {
+                if(name == "Right Mouse") {
                     keyMap[SDL_SCANCODE_APP1] |= cmd;
                 }
-                else if((*kit).get<std::string>() == "Middle Mouse") {
+                else if(name == "Middle Mouse") {
                     keyMap[SDL_SCANCODE_APP2] |= cmd;
                 }
             }
