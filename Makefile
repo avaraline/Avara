@@ -157,6 +157,11 @@ build-link: $(BUILD_DIR)/Avara
 clean:
 	$(RM) -r $(BUILD_DIR)
 
+clean-levels:
+	$(RM) -r levels/*/alf/*.alf
+	$(RM) -r levels/*/default.avarascript
+	$(RM) -r levels/*/set.json
+
 publish:
 	scp $(BUILD_DIR)/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
