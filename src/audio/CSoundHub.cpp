@@ -102,7 +102,29 @@ void CSoundHubImpl::AttachMixer(CSoundMixer *aMixer) {
     muteFlag = itsMixer->maxChannels == 0;
 }
 
+SampleHeaderHandle CSoundHubImpl::LoadOggSample(short resId) {
+    SampleHeaderHandle aSample;
+    SampleHeaderPtr sampP;
+
+    aSample = sampleList;
+
+    while (aSample) {
+        sampP = *aSample;
+        if (sampP->resId == resId) {
+            sampP->flags = 0;
+            break;
+        }
+        aSample = sampP->nextSample;
+    }
+    FreeOldSamples();
+    FreeUnusedSamples();
+    aSample = LoadSampleHeaderFromSetJSON(resId, sampleList);
+    return aSample;
+}
+
 SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
+    return LoadOggSample(resId);
+    
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
 
@@ -203,6 +225,8 @@ SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
     }
 
     return aSample;
+    
+    
 }
 
 SampleHeaderHandle CSoundHubImpl::PreLoadSample(short resId) {

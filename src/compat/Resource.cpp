@@ -11,8 +11,11 @@
 #include <cctype>
 #include <map>
 #include <sstream>
+
 #define CUTE_FILES_IMPLEMENTATION
 #include <cute_files.h>
+
+#include <stb_vorbis.h>
 
 // path separator
 #if defined(_WIN32)
@@ -28,6 +31,7 @@
 #define BSPSDIR "bsps"
 #define BSPSEXT ".json"
 #define DEFAULTSCRIPT "default.avarascript"
+#define OGGDIR "ogg"
 
 static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
 
@@ -287,19 +291,7 @@ nlohmann::json GetManifestJSON(std::string set) {
 
 void LoadHullFromSetJSON(HullConfigRecord *hull, short resId) {
     std::string key = std::to_string(resId);
-    nlohmann::json manifest = GetManifestJSON(currentLevelDir);
-    nlohmann::json hullJson = NULL;
-    if (manifest != -1 && manifest.find("HULL") != manifest.end() &&
-        manifest["HULL"].find(key) != manifest["HULL"].end())
-        hullJson = manifest["HULL"][key];
-    else {
-        manifest = GetDefaultManifestJSON();
-        if (manifest.find("HULL") != manifest.end() &&
-            manifest["HULL"].find(key) != manifest["HULL"].end())
-            hullJson = manifest["HULL"][key];
-        else
-            hullJson = manifest["HULL"]["129"];
-    }
+    nlohmann::json hullJson = GetKeyFromSetJSON("HULL", key, "129");
 
     hull->hullBSP = (short)hullJson["Hull Res ID"];
     hull->maxMissiles = (short)hullJson["Max Missiles"];
@@ -375,4 +367,85 @@ std::string GetBaseScript() {
     scr.assign((std::istreambuf_iterator<char>(t)),
                    std::istreambuf_iterator<char>());
     return scr;
+}
+
+nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id) {
+    nlohmann::json manifest = GetManifestJSON(currentLevelDir);
+    nlohmann::json target = NULL;
+    if (manifest != -1 && manifest.find(rsrc) != manifest.end() && 
+        manifest[rsrc].find(key)  != manifest[rsrc].end())
+        return manifest[rsrc][key];
+    else {
+        manifest = GetDefaultManifestJSON();
+        if (manifest.find(rsrc) != manifest.end() && 
+            manifest[rsrc].find(key) != manifest[rsrc].end())
+            return manifest[rsrc][key];
+        else
+            return manifest[rsrc][default_id];
+    }
+}
+#include <math.h>
+SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList) {
+    std::string key = std::to_string(resId);
+    nlohmann::json hsndJson = GetKeyFromSetJSON("HSND", key, "129");
+
+    std::string filename = hsndJson["Ogg"];
+    std::stringstream buffa;
+    buffa << LEVELDIR << PATHSEP << "single-player" << PATHSEP;
+    buffa << OGGDIR << PATHSEP << filename;
+
+    int version = hsndJson["Version"];
+
+    int error;
+    stb_vorbis *v = stb_vorbis_open_filename(buffa.str().c_str(), &error, NULL);
+    stb_vorbis_info info = stb_vorbis_get_info(v);
+    SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
+    SDL_Log("Predicted memory needed: %d (%d + %d)\n", info.setup_memory_required + info.temp_memory_required,
+                info.setup_memory_required, info.temp_memory_required);
+
+    Fixed arate = FIX(1);
+    if (version > 1)
+    arate = ToFixed((float)hsndJson["Base Rate"]);
+    
+    SampleHeaderHandle aSample;
+    SampleHeaderPtr sampP;
+
+    aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + info.setup_memory_required + info.temp_memory_required);
+
+    sampP = *aSample;
+    sampP->baseRate = arate;
+    sampP->resId = resId;
+    sampP->refCount = 0;
+    sampP->flags = 0;
+    sampP->loopStart = hsndJson["Loop Start"];
+    sampP->loopEnd = hsndJson["Loop End"];
+    sampP->loopCount = hsndJson["Loop Count"];
+    sampP->nextSample = sampleList;
+
+    unsigned char *p;
+    HLock((Handle)aSample);
+    p = sizeof(SampleHeader) + (unsigned char *)sampP;
+    int len = 0;
+    
+    for(;;) {
+        const int buffa_length = 128;
+        int16_t buffa[buffa_length];
+        int n;
+        n = stb_vorbis_get_samples_short_interleaved(v, 1, buffa, buffa_length);
+        if (n == 0) break;
+        for (int i = 0; i < buffa_length; ++i) {
+            SDL_Log("%d", buffa[i] / 4096);
+            *p++ = buffa[i] / 4096; 
+            len ++;
+        }
+    }
+
+
+    stb_vorbis_close(v);
+    SDL_Log("Len: %d", len);
+
+    sampP->len = len;
+
+    HUnlock((Handle)aSample);
+    return aSample;
 }

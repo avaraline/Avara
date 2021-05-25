@@ -2,6 +2,7 @@
 
 #include "Types.h"
 #include "PlayerConfig.h"
+#include "SoundSystemDefines.h"
 
 #include <string>
 #include <vector>
@@ -29,9 +30,12 @@ int8_t GetVersionForLevelSet(std::string levelset);
 
 nlohmann::json LoadLevelListFromJSON(std::string set);
 nlohmann::json GetManifestJSON(std::string set);
+nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id);
 
 char* GetBSPPath(int resId);
 std::string GetALFPath(std::string alfname);
 std::string GetDefaultScript();
 std::string GetBaseScript();
 void LoadHullFromSetJSON(HullConfigRecord *hull, short resId);
+SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList);
+

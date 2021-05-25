@@ -20,7 +20,7 @@ ALFEXT = ".alf"
 SCRIPTFILE = "default.avarascript"
 OGGDIR = "ogg"
 
-EXPORT_SOUNDS = False
+EXPORT_SOUNDS = True
 
 
 def is_exe(path):
@@ -132,14 +132,17 @@ def convert_to_files(datafile, thedir):
         # hsnd = get_tmpl(forks, "HSND")
         result["HSND"] = get_tmpl(forks, "HSND")
         oggpath = os.path.join(thedir, OGGDIR)
-        if os.path.exists(oggpath):
-            print(f"Skipping {oggpath} - exists")
         os.makedirs(oggpath, exist_ok=True)
         for k in result["HSND"].keys():
             oggfile = str(k) + ".ogg"
             result["HSND"][k]["Sound"] = 0
             result["HSND"][k]["Ogg"] = oggfile
             thepath = os.path.join(oggpath, oggfile)
+
+            if os.path.exists(thepath):
+                print(f"Skipping {thepath} - exists")
+                continue
+
             wavpath = os.path.join(oggpath, str(k) + ".wav")
             args = [f"build{os.path.sep}hsnd2wav", str(k), wavpath, str(datafile)]
             popen = subprocess.Popen(args, stdout=subprocess.PIPE)
