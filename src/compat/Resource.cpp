@@ -429,13 +429,13 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     
     for(;;) {
         const int buffa_length = 128;
-        int16_t buffa[buffa_length];
+        float buffa[buffa_length];
         int n;
-        n = stb_vorbis_get_samples_short_interleaved(v, 1, buffa, buffa_length);
+        n = stb_vorbis_get_samples_float_interleaved(v, 1, buffa, buffa_length);
         if (n == 0) break;
         for (int i = 0; i < buffa_length; ++i) {
-            SDL_Log("%d", buffa[i] / 4096);
-            *p++ = buffa[i] / 4096; 
+            //(((uint8_t)p[loc] / 127.0f) - 0.5f) * 2.0f;
+            *p++ = (uint8_t)(((buffa[i] + 1.0) * 63));
             len ++;
         }
     }
