@@ -2,6 +2,7 @@
 #include "AvaraDefines.h"
 #include "Memory.h"
 #include "FastMat.h"
+#include "AudioFile.h"
 
 #include <SDL2/SDL.h>
 #include <stdint.h>
@@ -32,6 +33,7 @@
 #define BSPSEXT ".json"
 #define DEFAULTSCRIPT "default.avarascript"
 #define OGGDIR "ogg"
+#define WAVDIR "wav"
 
 static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
 
@@ -66,7 +68,7 @@ OSType StringOSType(std::string s) {
 }
 
 bool IsEquals(const std::string& str1, const std::string& str2) {
-    return str1.length() == str2.length() && 
+    return str1.length() == str2.length() &&
     std::equal(str1.begin(), str1.end(), str2.begin(),
     [](char a, char b) {
         return tolower(a) == tolower(b);
@@ -238,8 +240,8 @@ void LevelDirListing() {
     }
     cf_dir_close(&dir);
     // sort directory listing alphabetically
-    std::sort(raw_dir_listing.begin(), raw_dir_listing.end(), 
-        [](AvaraDirListEntry &a, AvaraDirListEntry &b) -> bool { 
+    std::sort(raw_dir_listing.begin(), raw_dir_listing.end(),
+        [](AvaraDirListEntry &a, AvaraDirListEntry &b) -> bool {
             return a.file_name < b.file_name; });
 
     for (std::vector<AvaraDirListEntry>::iterator it = raw_dir_listing.begin(); it != raw_dir_listing.end(); ++it) {
@@ -348,7 +350,7 @@ std::string GetDefaultScript() {
     std::ifstream t(path);
     if(t.good()) {
         std::string defaultscript;
-        t.seekg(0, std::ios::end);   
+        t.seekg(0, std::ios::end);
         defaultscript.reserve(t.tellg());
         t.seekg(0, std::ios::beg);
 
@@ -372,12 +374,12 @@ std::string GetBaseScript() {
 nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id) {
     nlohmann::json manifest = GetManifestJSON(currentLevelDir);
     nlohmann::json target = NULL;
-    if (manifest != -1 && manifest.find(rsrc) != manifest.end() && 
+    if (manifest != -1 && manifest.find(rsrc) != manifest.end() &&
         manifest[rsrc].find(key)  != manifest[rsrc].end())
         return manifest[rsrc][key];
     else {
         manifest = GetDefaultManifestJSON();
-        if (manifest.find(rsrc) != manifest.end() && 
+        if (manifest.find(rsrc) != manifest.end() &&
             manifest[rsrc].find(key) != manifest[rsrc].end())
             return manifest[rsrc][key];
         else
@@ -409,12 +411,11 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
 
         for(;;) {
             const int buffa_length = 96;
-            float buffa[buffa_length];
-            int n;
-            n = stb_vorbis_get_samples_float_interleaved(v, 1, buffa, buffa_length);
+            short buffa[buffa_length];
+            int n = stb_vorbis_get_samples_short_interleaved(v, 1, buffa, buffa_length);
             if (n == 0) break;
             for (int i = 0; i < buffa_length; ++i) {
-                sound.push_back((uint8_t)(((buffa[i] + 1.5f) / 3.0f) * 127.0f));
+                sound.push_back((buffa[i] + 32768) >> 9);
             }
         }
         sound_cash[resId] = sound;
@@ -424,7 +425,7 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     Fixed arate = FIX(1);
     if (version > 1)
     arate = ToFixed((float)hsndJson["Base Rate"]);
-    
+
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
     int len = sound_cash[resId].size();
@@ -445,7 +446,7 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     unsigned char *p;
     HLock((Handle)aSample);
     p = sizeof(SampleHeader) + (unsigned char *)sampP;
-    
+
     for (int i = 0; i < len; ++i) {
         *p++ = sound_cash[resId][i];
     }

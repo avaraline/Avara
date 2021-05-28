@@ -19,6 +19,7 @@ BSPDIR = "bsps"
 ALFEXT = ".alf"
 SCRIPTFILE = "default.avarascript"
 OGGDIR = "ogg"
+WAVDIR = "wav"
 
 EXPORT_SOUNDS = True
 
@@ -48,15 +49,15 @@ def writealf(alfpath, alfd):
         alff.write(alf)
 
 
-sndfile_convert_found = False
+ffmpeg_found = False
 for path in os.environ["PATH"].split(os.pathsep):
-    bin_file = os.path.join(path, "sndfile-convert")
+    bin_file = os.path.join(path, "ffmpeg")
     exe_file = bin_file + ".exe"
     if is_exe(exe_file) or is_exe(bin_file):
-        sndfile_convert_found = True
+        ffmpeg_found = True
 
-if not sndfile_convert_found and EXPORT_SOUNDS:
-    print("Please install sndfile-convert to change WAV into OGG")
+if not ffmpeg_found and EXPORT_SOUNDS:
+    print("Please install ffmpeg to change WAV into OGG")
     exit(1)
 
 
@@ -131,29 +132,30 @@ def convert_to_files(datafile, thedir):
         # todo: export ogg and point to new file
         # hsnd = get_tmpl(forks, "HSND")
         result["HSND"] = get_tmpl(forks, "HSND")
-        oggpath = os.path.join(thedir, OGGDIR)
-        os.makedirs(oggpath, exist_ok=True)
+        oggdir = os.path.join(thedir, OGGDIR)
+        os.makedirs(oggdir, exist_ok=True)
+        wavdir = os.path.join(thedir, WAVDIR)
+        os.makedirs(wavdir, exist_ok=True)
         for k in result["HSND"].keys():
             oggfile = str(k) + ".ogg"
+            wavfile = str(k) + ".wav"
             result["HSND"][k]["Sound"] = 0
             result["HSND"][k]["Ogg"] = oggfile
-            thepath = os.path.join(oggpath, oggfile)
+            result["HSND"][k]["Wav"] = wavfile
 
-            if os.path.exists(thepath):
-                print(f"Skipping {thepath} - exists")
-                continue
+            oggpath = os.path.join(oggdir, oggfile)
+            wavpath = os.path.join(wavdir, wavfile)
+            #if os.path.exists(oggpath):
+            #    print(f"Skipping {oggpath} - exists")
+            #    continue
 
-            wavpath = os.path.join(oggpath, str(k) + ".wav")
+
             args = [f"build{os.path.sep}hsnd2wav", str(k), wavpath, str(datafile)]
             popen = subprocess.Popen(args, stdout=subprocess.PIPE)
             popen.wait()
-            args = ["sndfile-convert", "-vorbis", wavpath, thepath]
+            args = ["ffmpeg", "-i", wavpath, "-acodec", "libvorbis", oggpath]
             popen = subprocess.Popen(args, stdout=subprocess.PIPE)
             popen.wait()
-            try:
-                os.remove(wavpath)
-            except FileNotFoundError:
-                pass
 
     if "BSPT" in forks:
         result["BSPT"] = {}

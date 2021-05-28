@@ -124,7 +124,7 @@ SampleHeaderHandle CSoundHubImpl::LoadOggSample(short resId) {
 
 SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
     return LoadOggSample(resId);
-    
+
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
 
@@ -225,8 +225,8 @@ SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
     }
 
     return aSample;
-    
-    
+
+
 }
 
 SampleHeaderHandle CSoundHubImpl::PreLoadSample(short resId) {
