@@ -414,7 +414,7 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
             n = stb_vorbis_get_samples_float_interleaved(v, 1, buffa, buffa_length);
             if (n == 0) break;
             for (int i = 0; i < buffa_length; ++i) {
-                sound.push_back((uint8_t)(((buffa[i] + 1.0f) / 2.0f) * 127.0f));
+                sound.push_back((uint8_t)(((buffa[i] + 1.5f) / 3.0f) * 127.0f));
             }
         }
         sound_cash[resId] = sound;
