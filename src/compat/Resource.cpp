@@ -393,13 +393,20 @@ std::map<short, std::vector<uint8_t>> sound_cash;
 SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList) {
     std::string key = std::to_string(resId);
     nlohmann::json hsndJson = GetKeyFromSetJSON("HSND", key, "129");
+    int version = hsndJson["Version"];
 
     std::string filename = hsndJson["Ogg"];
     std::stringstream buffa;
-    buffa << LEVELDIR << PATHSEP << "single-player" << PATHSEP;
+    buffa << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     buffa << OGGDIR << PATHSEP << filename;
 
-    int version = hsndJson["Version"];
+    std::ifstream t(buffa.str());
+    if(!t.good()) {
+        std::stringstream temp;
+        buffa.swap(temp);
+        buffa << LEVELDIR << PATHSEP << "single-player" << PATHSEP;
+        buffa << OGGDIR << PATHSEP << filename;
+    }
 
     if (sound_cash.count(resId) == 0) {
         int error;

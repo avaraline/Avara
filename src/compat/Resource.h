@@ -38,4 +38,3 @@ std::string GetDefaultScript();
 std::string GetBaseScript();
 void LoadHullFromSetJSON(HullConfigRecord *hull, short resId);
 SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList);
-
