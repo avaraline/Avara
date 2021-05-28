@@ -385,6 +385,9 @@ nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string 
     }
 }
 #include <math.h>
+
+std::map<short, std::vector<uint8_t>> sound_cash;
+
 SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList) {
     std::string key = std::to_string(resId);
     nlohmann::json hsndJson = GetKeyFromSetJSON("HSND", key, "129");
@@ -396,12 +399,27 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
 
     int version = hsndJson["Version"];
 
-    int error;
-    stb_vorbis *v = stb_vorbis_open_filename(buffa.str().c_str(), &error, NULL);
-    stb_vorbis_info info = stb_vorbis_get_info(v);
-    SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
-    SDL_Log("Predicted memory needed: %d (%d + %d)\n", info.setup_memory_required + info.temp_memory_required,
-                info.setup_memory_required, info.temp_memory_required);
+    if (sound_cash.count(resId) == 0) {
+        int error;
+        stb_vorbis *v = stb_vorbis_open_filename(buffa.str().c_str(), &error, NULL);
+        stb_vorbis_info info = stb_vorbis_get_info(v);
+        SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
+
+        auto sound = std::vector<uint8_t>();
+
+        for(;;) {
+            const int buffa_length = 96;
+            float buffa[buffa_length];
+            int n;
+            n = stb_vorbis_get_samples_float_interleaved(v, 1, buffa, buffa_length);
+            if (n == 0) break;
+            for (int i = 0; i < buffa_length; ++i) {
+                sound.push_back((uint8_t)(((buffa[i] + 1.0f) / 2.0f) * 127.0f));
+            }
+        }
+        sound_cash[resId] = sound;
+        stb_vorbis_close(v);
+    }
 
     Fixed arate = FIX(1);
     if (version > 1)
@@ -409,42 +427,28 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
+    int len = sound_cash[resId].size();
 
-    aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + info.setup_memory_required + info.temp_memory_required);
+    aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + len);
 
     sampP = *aSample;
     sampP->baseRate = arate;
     sampP->resId = resId;
     sampP->refCount = 0;
     sampP->flags = 0;
-    sampP->loopStart = hsndJson["Loop Start"];
-    sampP->loopEnd = hsndJson["Loop End"];
+    sampP->loopStart = 0;//hsndJson["Loop Start"];
+    sampP->loopEnd = len;//hsndJson["Loop End"];
     sampP->loopCount = hsndJson["Loop Count"];
     sampP->nextSample = sampleList;
+    sampP->len = len;
 
     unsigned char *p;
     HLock((Handle)aSample);
     p = sizeof(SampleHeader) + (unsigned char *)sampP;
-    int len = 0;
     
-    for(;;) {
-        const int buffa_length = 128;
-        float buffa[buffa_length];
-        int n;
-        n = stb_vorbis_get_samples_float_interleaved(v, 1, buffa, buffa_length);
-        if (n == 0) break;
-        for (int i = 0; i < buffa_length; ++i) {
-            //(((uint8_t)p[loc] / 127.0f) - 0.5f) * 2.0f;
-            *p++ = (uint8_t)(((buffa[i] + 1.0) * 63));
-            len ++;
-        }
+    for (int i = 0; i < len; ++i) {
+        *p++ = sound_cash[resId][i];
     }
-
-
-    stb_vorbis_close(v);
-    SDL_Log("Len: %d", len);
-
-    sampP->len = len;
 
     HUnlock((Handle)aSample);
     return aSample;
