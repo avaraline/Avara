@@ -12,6 +12,11 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#define OBJ_VERT "rsrc/shaders/avara_vert.glsl"
+#define OBJ_FRAG "rsrc/shaders/avara_frag.glsl"
+
+#define SKY_VERT "rsrc/shaders/sky_vert.glsl"
+#define SKY_FRAG "rsrc/shaders/sky_frag.glsl"
 
 bool actuallyRender = true;
 
@@ -202,7 +207,7 @@ void AvaraGLSetDepthTest(bool doTest) {
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
-    gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
+    gProgram = LoadShaders(BundlePath(OBJ_VERT), BundlePath(OBJ_FRAG));
     glUseProgram(gProgram);
 
     projLoc = glGetUniformLocation(gProgram, "proj");
@@ -224,7 +229,7 @@ void AvaraGLInitContext() {
     AvaraGLLightDefaults();
     glCheckErrors();
 
-    skyProgram = LoadShaders(BundlePath("shaders/sky_vert.glsl"), BundlePath("shaders/sky_frag.glsl"));
+    skyProgram = LoadShaders(BundlePath(SKY_VERT), BundlePath(SKY_FRAG));
     glGenVertexArrays(1, &skyVertArray);
     glGenBuffers(1, &skyBuffer);
     skyViewLoc = glGetUniformLocation(skyProgram, "view");

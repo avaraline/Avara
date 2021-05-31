@@ -61,7 +61,7 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.frameTime = itsGame->frameTime;
     iface.frameNumber = -1;
 
-    iface.resultsHandle = GetResource('TEXT', 300);
+    iface.resultsHandle = NULL; //GetResource('TEXT', 300);
     // DetachResource(iface.resultsHandle);
 
     iface.resultsChanged = false;

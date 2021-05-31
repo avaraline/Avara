@@ -52,6 +52,7 @@ public:
     virtual void IsRegistered(short) {}
     virtual Str255& PlayerRegName() { return str; }
     virtual short LoadingStatus() { return 0; }
+    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
     virtual void SetPlayerStatus(short newStatus, long theWin) {}
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) {}
     virtual void SetPosition(short pos) {}
@@ -59,11 +60,10 @@ public:
     virtual void RosterMessageText(short len, char *c) {}
     virtual short LevelCRC() { return 0; }
     virtual OSErr LevelErr() { return noErr; }
-    virtual OSType LevelTag() { return 0; }
+    virtual std::string LevelTag() { return 0; }
     virtual void LevelCRC(short) {}
     virtual void LevelErr(OSErr) {}
-    virtual void LevelTag(OSType) {}
-    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) {}
+    virtual void LevelTag(std::string) {}
     virtual void ResumeGame() {}
     virtual uint32_t DoMouseControl(Point *deltaMouse, Boolean doCenter) { return 0; }
     virtual void HandleEvent(SDL_Event &event) {}
@@ -126,7 +126,7 @@ public:
     virtual long Number(const std::string name) { return 0; }
     virtual bool Boolean(const std::string name) { return false; }
     virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) { return noErr; }
-    virtual OSErr LoadLevel(std::string set, int levelIndex, CPlayerManager* sendingPlayer) { return noErr; }
+    virtual OSErr LoadLevel(std::string set, std::string leveltag, CPlayerManager* sendingPlayer) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
     virtual json Get(const std::string name) { return json(); }
@@ -136,7 +136,7 @@ public:
     virtual CNetManager* GetNet() { return itsNet; }
     virtual void SetNet(CNetManager* net) { itsNet = net; }
     virtual SDL_Window* sdlWindow() { return 0; }
-    virtual void StringLine(StringPtr theString, short align) {}
+    virtual void StringLine(std::string theString, short align) {}
     virtual CAvaraGame* GetGame() { return 0; }
     virtual void Done() {}
     virtual void BroadcastCommand(int) {}

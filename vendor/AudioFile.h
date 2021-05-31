@@ -32,6 +32,7 @@
 #include <unordered_map>
 #include <iterator>
 #include <algorithm>
+#include <limits>
 
 // disable some warnings on Windows
 #if defined (_MSC_VER)

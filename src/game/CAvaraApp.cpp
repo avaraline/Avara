@@ -96,6 +96,9 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerUpdatePending = false;
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
+
+
+    LoadDefaultOggFiles();
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -219,11 +222,6 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     gCurrentGame = itsGame;
     itsGame->loadedSet = set;
     UseLevelFolder(set);
-
-    // still needed for sounds
-    // TODO: eliminate
-    std::string rsrcPath = std::string("levels/") + set + ".r";
-    UseResFile(rsrcPath);
 
     OSErr result = fnfErr;
     json setManifest = GetManifestJSON(set);

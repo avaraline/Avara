@@ -123,8 +123,10 @@ SampleHeaderHandle CSoundHubImpl::LoadOggSample(short resId) {
 }
 
 SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
+    #ifndef USE_LEGACY_HSND
     return LoadOggSample(resId);
-
+    #else
+    
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
 
@@ -225,8 +227,7 @@ SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
     }
 
     return aSample;
-
-
+    #endif
 }
 
 SampleHeaderHandle CSoundHubImpl::PreLoadSample(short resId) {

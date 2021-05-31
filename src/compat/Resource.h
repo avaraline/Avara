@@ -37,4 +37,7 @@ std::string GetALFPath(std::string alfname);
 std::string GetDefaultScript();
 std::string GetBaseScript();
 void LoadHullFromSetJSON(HullConfigRecord *hull, short resId);
+void LoadDefaultOggFiles();
+void LoadLevelOggFiles(std::string set);
+void LoadOggFile(short resId, const char* filename);
 SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList);

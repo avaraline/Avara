@@ -1,3 +1,4 @@
+#define USE_LEGACY_HSND
 #import "AudioFile.h"
 #import "CSoundHub.h"
 #import "CSoundMixer.h"
