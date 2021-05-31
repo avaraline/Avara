@@ -19,6 +19,7 @@
 #define SKY_FRAG "rsrc/shaders/sky_frag.glsl"
 
 bool actuallyRender = true;
+bool ready = false;
 
 glm::mat4 proj;
 const float near_dist = .1f;
@@ -237,6 +238,7 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
+    ready = true;
 }
 
 void AvaraGLViewport(short width, short height) {
@@ -247,7 +249,7 @@ void AvaraGLViewport(short width, short height) {
 
 void AvaraGLDrawPolygons(CBSPPart* part) {
     glCheckErrors();
-    if(!actuallyRender) return;
+    if(!actuallyRender || !ready) return;
     // Create a buffer big enough to hold vertex/color/normal for every point we draw.
     glUseProgram(gProgram);
     glBindVertexArray(part->vertexArray);
@@ -341,7 +343,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     glCheckErrors();
-    if (!actuallyRender) return;
+    if (!actuallyRender || !ready) return;
     Matrix *trans = &theView->viewMatrix;
     float matrix[16];
     for (int c = 0; c < 4; c++) {
