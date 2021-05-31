@@ -158,11 +158,10 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     allowBackgroundProcessing = false;
 
-    loadedTag = 0;
-    loadedDirectory = 0;
-    loadedLevel[0] = 0;
-    loadedDesigner[0] = 0;
-    loadedInfo[0] = 0;
+    loadedTag = "";
+    loadedLevel = "";
+    loadedDesigner = "";
+    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
     simpleExplosions = false;
@@ -512,11 +511,9 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     gHub->FlagOldSamples();
 
-    loadedTag = 0;
-    loadedDirectory = 0;
-    loadedLevel[0] = 0;
-    loadedDesigner[0] = 0;
-    loadedInfo[0] = 0;
+    loadedLevel = "";
+    loadedDesigner = "";
+    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
 
@@ -618,8 +615,8 @@ void CAvaraGame::EndScript() {
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
 
-    ReadStringVar(iDesignerName, loadedDesigner);
-    ReadStringVar(iLevelInformation, loadedInfo);
+    loadedDesigner = ReadStringVar(iDesignerName);
+    loadedInfo = ReadStringVar(iLevelInformation);
     loadedTimeLimit = ReadLongVar(iTimeLimit);
 
     groundTraction = ReadFixedVar(iDefaultTraction);
@@ -714,8 +711,8 @@ void CAvaraGame::ResumeGame() {
         short oldEventMask;
 
         if (freshMission) {
-            itsApp->GameStarted(std::string((char *)loadedSet),
-                                std::string((char *)loadedLevel + 1, loadedLevel[0]));
+            itsApp->GameStarted(loadedSet,
+                                loadedLevel);
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
             freshPlayerList = NULL;
             InitMixer(false);

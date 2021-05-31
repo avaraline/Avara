@@ -188,7 +188,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
 }
 
 void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
-    std::string level((char *)itsGame->loadedLevel + 1, itsGame->loadedLevel[0]);
+    std::string level = itsGame->loadedLevel;
     if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;

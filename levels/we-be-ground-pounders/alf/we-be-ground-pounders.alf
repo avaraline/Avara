@@ -1,0 +1,264 @@
+<map>
+  <set defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
+  <TriPyramid scale=".65" fill="#3a3a3a" frame="#000000" cx="226.18055555555557" cz="200.83333333333334" r="1.875" angle="270" extent="90" />
+  <set wallHeight="4.5" />
+  <Wall fill="#ffffff" frame="#000000" x="291.18055555555554" z="278.40277777777777" w="5" d="0.625" h="0" y="4.5" />
+  <set wallHeight=".35" />
+  <Wall fill="#3a3a3a" frame="#000000" x="278.05555555555554" z="267.70833333333337" w="2.5" d="2.5" h="0" />
+  <set wallHeight="2.65" />
+  <Wall fill="#212121" frame="#000000" x="278.68055555555554" z="268.33333333333337" w="1.25" d="1.25" h="0" y=".35" />
+  <set designer="&quot;Daniel Sphinx Amor&quot;" information="&quot;Objective:
+Evade and destroy the Ra'Shari. It is suggested you exit the observer one at a time. Upon exiting, you will be 
+sensed by the Ra'Shari and attacked. Only when the 6 Ra'Shari have been destroyed, are you granted freedom.&quot;" />
+  <GroundColor fill="#3a3a3a" frame="#212121" />
+  <SkyColor n="15" fill="#ebebeb" frame="#ababab" />
+  <Ball scale="50" customGravity="0" yon="10000" hitVolume="0" y="200" canGlow="true" shape="6001" fill="#bfbfbf" frame="#000000" cx="49.44444444444445" cz="1029.0972222222222" r="1.25" angle="135" extent="90" />
+  <set wallYon=".01" />
+  <WallDoor guardDelay="0" open="@start" deltaY="0" deltaZ="-5" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" r="1.25" cx="49.44444444444445" cz="1029.0972222222222" angle="135" extent="90" x="47.083333333333336" z="1029.3055555555557" w="5.625" d="1.25" h="2" y="205" />
+  <set wallYon="defaultYon" />
+  <Ramp yon=".1" y="200" thickness="1.5" deltaY="0" fill="#7f7f7f" frame="#000000" x="47.15277777777778" z="1028.6805555555557" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" angle="45" extent="90" />
+  <Hologram scale="45" yon="10000" y="150" shape="6001" fill="#bfbfbf" frame="#000000" cx="1158.5416666666667" cz="8.75" r="1.25" angle="225" extent="90" />
+  <Hologram scale="40" yon="10000" y="130" shape="6001" fill="#bfbfbf" frame="#000000" cx="892.4305555555555" cz="194.51388888888889" r="1.25" angle="45" extent="90" />
+  <Hologram scale="20" yon="10000" y="170" shape="6001" fill="#bfbfbf" frame="#000000" cx="894.3055555555555" cz="152.63888888888889" r="1.25" angle="45" extent="90" />
+  <Hologram shape="5003" scale="2" isAmbient="false" yon="5000" fill="#333333" frame="#333333" cx="454.86111111111114" cz="1794.5833333333335" r="1.875" angle="315" extent="90" />
+  <Hologram shape="5004" scale="1" isAmbient="false" yon="5000" fill="#333333" frame="#333333" cx="201.45833333333334" cz="1793.5416666666667" r="1.875" angle="315" extent="90" />
+  <Hologram shape="5008" scale="2" isAmbient="false" yon="5000" fill="#5c5c5c" frame="#5c5c5c" cx="906.875" cz="67.70833333333334" r="1.875" angle="135" extent="90" />
+  <set ambient="0" light.0.i="0.4" light.0.a="30" light.0.b="10" light.1.i="0.2" light.1.a="15" light.1.b="220" light.2.i="0.5" light.2.a="90" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <Door2 guardDelay="0" y="3" shape="5005" fill="#7d7d7d" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" r="2.5" angle="270" extent="90" />
+  <Door2 guardDelay="0" y="11" scale="10.125" midYaw="22.25" shape="465" fill="#7d7d7d" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" r="2.5" angle="90" extent="90" />
+  <set wallHeight="8" />
+  <Wall fill="#cfcfcf" frame="#000000" x="289.93055555555554" z="278.19444444444446" w="7.5" d="0.20833333333331439" h="0" y="3" />
+  <set wallHeight="3.5" />
+  <Wall fill="#b5b992" frame="#000000" x="290.4166666666667" z="278.125" w="0.8333333333333144" d="0.06944444444445708" h="0" y="3.25" />
+  <set wallHeight=".5" />
+  <Wall fill="#b5b992" frame="#000000" x="291.31944444444446" z="278.125" w="3.3333333333333144" d="0.06944444444445708" h="0" y="3.25" />
+  <set wallHeight="6" />
+  <Wall fill="#7d7d7d" frame="#000000" x="296.25" z="277.84722222222223" w="0.625" d="0.34722222222222854" h="0" y="4" />
+  <set wallHeight="2" />
+  <Wall fill="#540000" frame="#000000" x="293.05555555555554" z="277.70833333333337" w="1.875" d="0.48611111111108585" h="0" y="6" />
+  <set wallHeight=".5" />
+  <Wall fill="#1e1e1e" frame="#000000" x="291.18055555555554" z="266.45833333333337" w="5" d="5" h="0" y="1.5" />
+  <Ramp fill="#1e1e1e" frame="#000000" x="293.05555555555554" z="271.45833333333337" w="1.25" d="6.25" h="0" r="1.875" angle="315" extent="90" />
+  <set y="0" />
+  <set deltaY="2" />
+  <set thickness="0.5" />
+  <Ramp fill="#1e1e1e" frame="#000000" x="293.05555555555554" y="0" z="260.20833333333337" w="1.25" d="6.25" h="0" r="1.875" angle="135" extent="90" />
+  <set y="0" />
+  <set deltaY="2" />
+  <set thickness="0.5" />
+  <Ramp fill="#1e1e1e" frame="#000000" x="284.93055555555554" y="0" z="268.33333333333337" w="6.25" d="1.25" h="0" r="1.875" angle="45" extent="90" />
+  <set y="0" />
+  <set deltaY="2" />
+  <set thickness="0.5" />
+  <Ramp fill="#1e1e1e" frame="#000000" x="296.18055555555554" y="0" z="268.33333333333337" w="6.25" d="1.25" h="0" r="1.875" angle="225" extent="90" />
+  <set y="0" />
+  <set deltaY="2" />
+  <set thickness="0.5" />
+  <set wallHeight="8" />
+  <Wall fill="#cfcfcf" frame="#000000" x="302.9166666666667" z="271.18055555555554" w="0.20833333333331439" d="1.4583333333333712" h="0" y="3" />
+  <set wallHeight="8" />
+  <Wall fill="#cfcfcf" frame="#000000" x="302.9166666666667" z="265.20833333333337" w="0.20833333333331439" d="1.4583333333333144" h="0" y="3" />
+  <set wallHeight="1.25" />
+  <Wall fill="#cfcfcf" frame="#000000" x="302.9166666666667" z="266.6666666666667" w="0.20833333333331439" d="4.513888888888857" h="0" y="3" />
+  <set wallHeight="1.25" />
+  <Wall fill="#cfcfcf" frame="#000000" x="302.9166666666667" z="266.6666666666667" w="0.20833333333331439" d="4.513888888888857" h="0" y="9.75" />
+  <set wallHeight="8" />
+  <Wall fill="#cfcfcf" frame="#000000" x="289.86111111111114" z="259.5138888888889" w="1.5277777777777715" d="0.20833333333331439" h="0" y="3" />
+  <set wallHeight="1.25" />
+  <Wall fill="#cfcfcf" frame="#000000" x="291.3888888888889" z="259.5138888888889" w="4.444444444444457" d="0.20833333333331439" h="0" y="3" />
+  <set wallHeight="8" />
+  <Wall fill="#cfcfcf" frame="#000000" x="295.83333333333337" z="259.5138888888889" w="1.5277777777777715" d="0.20833333333331439" h="0" y="3" />
+  <set wallHeight="1.25" />
+  <Wall fill="#cfcfcf" frame="#000000" x="291.3888888888889" z="259.5138888888889" w="4.444444444444457" d="0.20833333333331439" h="0" y="9.75" />
+  <set wallHeight="8" />
+  <Wall fill="#cfcfcf" frame="#000000" x="284.23611111111114" z="271.18055555555554" w="0.20833333333331439" d="1.4583333333333712" h="0" y="3" />
+  <set wallHeight="8" />
+  <Wall fill="#cfcfcf" frame="#000000" x="284.23611111111114" z="265.20833333333337" w="0.20833333333331439" d="1.4583333333333144" h="0" y="3" />
+  <set wallHeight="1.25" />
+  <Wall fill="#cfcfcf" frame="#000000" x="284.23611111111114" z="266.6666666666667" w="0.20833333333331439" d="4.513888888888857" h="0" y="9.75" />
+  <set wallHeight=".25" />
+  <Wall fill="#cfcfcf" frame="#000000" x="284.23611111111114" z="266.6666666666667" w="0.20833333333331439" d="4.513888888888857" h="0" y="3" />
+  <set wallHeight=".25" />
+  <Wall fill="#3a3a3a" frame="#000000" x="278.61111111111114" z="266.6666666666667" w="5.625" d="4.513888888888857" h="0" y="3" />
+  <Ramp fill="#3a3a3a" frame="#000000" x="272.98611111111114" y="0" z="266.6666666666667" w="5.625" d="4.513888888888857" h="0" r="1.875" angle="45" extent="90" />
+  <set y="0" />
+  <set deltaY="3.25" />
+  <set thickness="0.25" />
+  <set wallHeight="0" />
+  <Wall fill="#3a3a3a" frame="#000000" x="284.23611111111114" z="266.6666666666667" w="0.20833333333331439" d="4.513888888888857" h="0" y="3.25" />
+  <set wallHeight="1.25" />
+  <WallDoor midYaw="44" fill="#9c9c9c" frame="#000000" x="287.0138888888889" y="3" z="271.59722222222223" w="0.20833333333331439" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="1.25" />
+  <WallDoor midYaw="44" fill="#9c9c9c" frame="#000000" x="287.0138888888889" y="9.75" z="271.59722222222223" w="0.20833333333331439" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="8" wallYon=".1" />
+  <WallDoor midYaw="44" fill="#cfcfcf" frame="#000000" x="287.0138888888889" y="3" z="271.59722222222223" w="0.20833333333331439" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="8" wallYon=".01" />
+  <Wall fill="#cfcfcf" frame="#000000" x="302.9166666666667" z="266.6666666666667" w="0.20833333333331439" d="4.513888888888857" h="0" y="3" />
+  <set wallHeight="8" wallYon=".01" />
+  <Wall fill="#cfcfcf" frame="#000000" x="291.3888888888889" z="259.5138888888889" w="4.444444444444457" d="0.20833333333331439" h="0" y="3" />
+  <set wallHeight="1.25" wallYon="0" />
+  <WallDoor midYaw="135" fill="#cfcfcf" frame="#000000" x="300.1388888888889" y="3" z="271.52777777777777" w="0.1388888888888573" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="1.25" wallYon="0" />
+  <WallDoor midYaw="135" fill="#cfcfcf" frame="#000000" x="300.1388888888889" y="9.75" z="271.52777777777777" w="0.1388888888888573" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="8" wallYon=".01" />
+  <WallDoor midYaw="135" fill="#cfcfcf" frame="#000000" x="300.1388888888889" y="3" z="271.52777777777777" w="0.1388888888888573" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="1.25" wallYon="0" />
+  <WallDoor midYaw="45" fill="#7d7d7d" frame="#000000" x="300.1388888888889" y="3" z="258.47222222222223" w="0.1388888888888573" d="7.916666666666686" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="1.25" wallYon="0" />
+  <WallDoor midYaw="45" fill="#7d7d7d" frame="#000000" x="300.1388888888889" y="9.75" z="258.47222222222223" w="0.1388888888888573" d="7.916666666666686" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="8" wallYon=".01" />
+  <WallDoor midYaw="45" fill="#7d7d7d" frame="#000000" x="300.1388888888889" y="3" z="258.47222222222223" w="0.1388888888888573" d="7.916666666666686" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="1.25" wallYon="0" />
+  <WallDoor midYaw="135" fill="#cfcfcf" frame="#000000" x="286.94444444444446" y="3" z="258.47222222222223" w="0.20833333333331439" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="8" wallYon=".01" />
+  <WallDoor midYaw="135" fill="#cfcfcf" frame="#000000" x="286.94444444444446" y="3" z="258.47222222222223" w="0.20833333333331439" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <set wallHeight="1.25" wallYon="0" />
+  <WallDoor midYaw="135" fill="#cfcfcf" frame="#000000" x="286.94444444444446" y="9.75" z="258.47222222222223" w="0.20833333333331439" d="7.8472222222222285" h="0" r="1.875" cx="273.68055555555554" cz="269.02777777777777" angle="45" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="283.68055555555554" cz="288.95833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".75" fill="#5c5c5c" frame="#000000" cx="315.55555555555554" cz="302.70833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="332.43055555555554" cz="270.20833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale="1" fill="#5c5c5c" frame="#000000" cx="309.93055555555554" cz="249.58333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="271.18055555555554" cz="256.45833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".9" fill="#3a3a3a" frame="#000000" cx="282.43055555555554" cz="318.95833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="299.30555555555554" cz="278.95833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="287.43055555555554" cz="236.45833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".65" fill="#5c5c5c" frame="#000000" cx="246.18055555555557" cz="285.20833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="240.55555555555557" cz="262.08333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="261.18055555555554" cz="302.08333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="341.18055555555554" cz="300.20833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="238.68055555555557" cz="308.33333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="307.43055555555554" cz="321.45833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".75" fill="#5c5c5c" frame="#000000" cx="249.30555555555557" cz="232.08333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="271.80555555555554" cz="210.20833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".65" fill="#5c5c5c" frame="#000000" cx="311.80555555555554" cz="217.08333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="368.6805555555556" cz="212.70833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="338.05555555555554" cz="243.33333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale="1" fill="#5c5c5c" frame="#000000" cx="381.8055555555556" cz="284.58333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="340.55555555555554" cz="333.95833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="206.18055555555557" cz="323.33333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".75" fill="#5c5c5c" frame="#000000" cx="207.43055555555557" cz="237.08333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="198.68055555555557" cz="278.33333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="298.05555555555554" cz="360.20833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="244.93055555555557" cz="351.45833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="299.30555555555554" cz="174.58333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="361.1805555555556" cz="173.95833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale="1" fill="#5c5c5c" frame="#000000" cx="440.5555555555556" cz="270.20833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".65" fill="#5c5c5c" frame="#000000" cx="431.1805555555556" cz="203.95833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="398.0555555555556" cz="336.45833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="351.18055555555554" cz="389.58333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".65" fill="#5c5c5c" frame="#000000" cx="257.43055555555554" cz="403.33333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".75" fill="#5c5c5c" frame="#000000" cx="178.68055555555557" cz="372.70833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#5c5c5c" frame="#000000" cx="143.05555555555557" cz="250.20833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".65" fill="#5c5c5c" frame="#000000" cx="227.43055555555557" cz="146.45833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".5" fill="#3a3a3a" frame="#000000" cx="171.80555555555557" cz="188.95833333333334" r="1.875" angle="270" extent="90" />
+  <Door2 guardDelay="0" shape="bspHill" yon="5000" scale="6" fill="#3a3a3a" frame="#000000" cx="92.0138888888889" cz="1030.763888888889" r="1.875" angle="90" extent="90" />
+  <TriPyramid scale="1" fill="#5c5c5c" frame="#000000" cx="308.68055555555554" cz="421.45833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale="1" fill="#3a3a3a" frame="#000000" cx="127.43055555555557" cz="307.70833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale="6" yon="5000" y="-8" fill="#3a3a3a" frame="#000000" cx="687.0138888888889" cz="178.33333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="76.80555555555556" cz="272.08333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="164.93055555555557" cz="125.20833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="296.80555555555554" cz="124.58333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#5c5c5c" frame="#000000" cx="465.5555555555556" cz="333.33333333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".25" fill="#5c5c5c" frame="#000000" cx="398.0555555555556" cz="130.83333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".25" fill="#5c5c5c" frame="#000000" cx="413.0555555555556" cz="393.95833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".25" fill="#5c5c5c" frame="#000000" cx="118.05555555555556" cz="199.58333333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".25" fill="#5c5c5c" frame="#000000" cx="111.80555555555556" cz="368.95833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#3a3a3a" frame="#000000" cx="186.80555555555557" cz="431.45833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".25" fill="#5c5c5c" frame="#000000" cx="278.68055555555554" cz="467.70833333333337" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale=".15" fill="#3a3a3a" frame="#000000" cx="373.6805555555556" cz="458.95833333333337" r="1.875" angle="270" extent="90" />
+  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="29 * 5" destGroup="@recenter" shape="0" spin="false" fill="#1c1fff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" r="1.875" angle="0" extent="90" />
+  <Teleporter group="@recenter" y="6" activeRange="001 * 5" deadRange=".001 * 5" shape="0" spin="false" fill="#1db53e" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" r="1.875" angle="180" extent="90" />
+  <set defaultLives="1" />
+  <set hull.0="6666" hull.1="6666" hull.2="6666" />
+  <set missileTurnRate="0.1" missileAcceleration="0.8" />
+  <TriPyramid scale="1" fill="#5c5c5c" frame="#000000" cx="392.4305555555556" cz="247.70833333333334" r="1.875" angle="270" extent="90" />
+  <TriPyramid scale="1" fill="#5c5c5c" frame="#000000" cx="218.05555555555557" cz="294.58333333333337" r="1.875" angle="270" extent="90" />
+  <set wallYon=".01" />
+  <WallDoor guardDelay="0" open="@open1" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="182.91666666666669" y="170" z="249.09722222222223" w="16.875" d="15" h="2" r="1.875" cx="218.05555555555557" cz="294.58333333333337" angle="270" extent="90" />
+  <set wallYon="defaultYon" />
+  <Parasite shape="5000" scale=".25" yon="0" y="175" shield="4" activeRange="30000" targetGroup="targ1" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0c0c0c" frame="#0c0c0c" cx="227.29166666666669" cz="229.09722222222223" r="2.5" angle="180" extent="90" />
+  <Area watch="targ1" freq="1" exit="@open1" fill="#0c0c0c" frame="#1ef1ff" cx="300.24305555555554" cz="274.27083333333337" r="212.8125" angle="0" extent="360" />
+  <Area watch="targ2" freq="1" exit="@open2" fill="#0c0c0c" frame="#1ef1ff" cx="300.24305555555554" cz="275.1041666666667" r="212.8125" angle="0" extent="360" />
+  <Area watch="targ3" freq="1" exit="@open3" fill="#0c0c0c" frame="#1ef1ff" cx="299.61805555555554" cz="273.64583333333337" r="212.8125" angle="0" extent="360" />
+  <Area watch="targ4" freq="1" exit="@open4" fill="#0c0c0c" frame="#1ef1ff" cx="299.61805555555554" cz="273.64583333333337" r="212.8125" angle="0" extent="360" />
+  <Area watch="targ5" freq="1" exit="@open5" fill="#0c0c0c" frame="#1ef1ff" cx="299.61805555555554" cz="273.64583333333337" r="212.8125" angle="0" extent="360" />
+  <Area watch="targ6" freq="1" exit="@fin" fill="#0c0c0c" frame="#1ef1ff" cx="298.9930555555556" cz="273.2291666666667" r="212.8125" angle="0" extent="360" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ2" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0c0c0c" frame="#0c0c0c" cx="191.18055555555557" cz="256.45833333333337" r="2.5" angle="180" extent="90" />
+  <set wallYon=".01" />
+  <WallDoor guardDelay="0" open="@open2" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="281.18055555555554" y="170" z="199.58333333333334" w="16.875" d="15" h="2" r="2.5" cx="191.18055555555557" cz="256.45833333333337" angle="180" extent="90" />
+  <set wallYon="defaultYon" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ3" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0c0c0c" frame="#0c0c0c" cx="289.30555555555554" cz="206.45833333333334" r="2.5" angle="180" extent="90" />
+  <set wallYon=".01" />
+  <WallDoor guardDelay="0" open="@open3" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="249.30555555555557" y="170" z="321.45833333333337" w="16.875" d="15" h="2" r="2.5" cx="289.30555555555554" cz="206.45833333333334" angle="180" extent="90" />
+  <set wallYon="defaultYon" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ4" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0c0c0c" frame="#0c0c0c" cx="257.43055555555554" cz="328.33333333333337" r="2.5" angle="180" extent="90" />
+  <set wallYon=".01" />
+  <WallDoor guardDelay="0" open="@open4" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="185.55555555555557" y="170" z="300.20833333333337" w="16.875" d="15" h="2" r="2.5" cx="257.43055555555554" cz="328.33333333333337" angle="180" extent="90" />
+  <set wallYon="defaultYon" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ5" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0c0c0c" frame="#0c0c0c" cx="193.68055555555557" cz="307.08333333333337" r="2.5" angle="180" extent="90" />
+  <set wallYon=".01" />
+  <WallDoor guardDelay="0" open="@open5" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="206.18055555555557" y="170" z="187.70833333333334" w="16.875" d="15" h="2" r="2.5" cx="193.68055555555557" cz="307.08333333333337" angle="180" extent="90" />
+  <set wallYon="defaultYon" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ6" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0c0c0c" frame="#0c0c0c" cx="214.30555555555557" cz="194.58333333333334" r="2.5" angle="180" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#1ef1ff" frame="#ff0707" cx="293.68055555555554" cz="268.95833333333337" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="5" fill="#1ef1ff" frame="#ff0707" cx="293.68055555555554" cz="268.95833333333337" r="1.25" angle="180" extent="90" />
+  <Goody shape="bspGrenade" y="5.75" yon=".01" speed="6" missiles="1" grenades="1" sound="8502" start="mShow" out="mTaken" fill="#1ef1ff" frame="#ff0707" cx="293.68055555555554" cz="268.95833333333337" r="1.25" angle="180" extent="90" />
+  <Teleporter shape="5010" win="1000" scale="1.25" start="@fin" y="3.76" fill="#1ef1ff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" r="1.875" angle="45" extent="90" />
+  <Switch shape="1286" altShape="1286" restart="true" hitSound="8503" hitVolume="50" y="7" scale="2.5" out="@on" fill="#000000" frame="#000000" cx="293.95833333333337" cz="277.70833333333337" r="1.875" angle="315" extent="90" />
+  <set wallHeight="6.5" />
+  <WallDoor open="@on" close="@off" deltaX="-3" roll="90" deltaY="3.25" openSound="0" closeSound="0" volume="50" shotPower="1" openSpeed="6" closeSpeed="4" fill="#9c9c9c" frame="#000000" x="283.8888888888889" y="3.25" z="266.6666666666667" w="0.34722222222222854" d="4.513888888888857" h="0" r="1.875" cx="293.95833333333337" cz="277.70833333333337" angle="315" extent="90" />
+  <Timer in.1="@on" wait="100" out.1="@off" fill="#9c9c9c" frame="#000000" cx="293.95833333333337" cz="277.70833333333337" r="1.875" angle="315" extent="90" />
+  <Switch shape="1286" altShape="1286" restart="true" hitSound="8503" hitVolume="50" y="5.5" scale="1.75" out="@on" fill="#000000" frame="#000000" cx="284.23611111111114" cz="265.97222222222223" r="1.875" angle="225" extent="90" />
+  <set wallHeght="4" />
+  <Field watch="targ1" deltaX="-.1" fill="#cfcfcf" frame="#000000" x="271.80555555555554" y="0" z="265.20833333333337" w="12.5" d="7.5" h="0" r="1.875" cx="284.23611111111114" cz="265.97222222222223" angle="225" extent="90" />
+  <set wallHeght="4" />
+  <Field watch="targ2" deltaX="-.1" fill="#cfcfcf" frame="#000000" x="271.80555555555554" y="0" z="265.20833333333337" w="12.5" d="7.5" h="0" r="1.875" cx="284.23611111111114" cz="265.97222222222223" angle="225" extent="90" />
+  <set wallHeght="4" />
+  <Field watch="targ3" deltaX="-.1" fill="#cfcfcf" frame="#000000" x="271.80555555555554" y="0" z="265.20833333333337" w="12.5" d="7.5" h="0" r="1.875" cx="284.23611111111114" cz="265.97222222222223" angle="225" extent="90" />
+  <set wallHeght="4" />
+  <Field watch="targ4" deltaX="-.1" fill="#cfcfcf" frame="#000000" x="271.80555555555554" y="0" z="265.20833333333337" w="12.5" d="7.5" h="0" r="1.875" cx="284.23611111111114" cz="265.97222222222223" angle="225" extent="90" />
+  <set wallHeght="4" />
+  <Field watch="targ5" deltaX="-.1" fill="#cfcfcf" frame="#000000" x="271.80555555555554" y="0" z="265.20833333333337" w="12.5" d="7.5" h="0" r="1.875" cx="284.23611111111114" cz="265.97222222222223" angle="225" extent="90" />
+  <set wallHeght="4" />
+  <Field watch="targ6" deltaX="-.1" fill="#cfcfcf" frame="#000000" x="271.80555555555554" y="0" z="265.20833333333337" w="12.5" d="7.5" h="0" r="1.875" cx="284.23611111111114" cz="265.97222222222223" angle="225" extent="90" />
+  <Incarnator mask="T6" y="4" fill="#cfcfcf" frame="#000000" cx="293.68055555555554" cz="262.70833333333337" r="2.5" angle="315" extent="90" />
+  <Incarnator mask="T6" y="4" fill="#cfcfcf" frame="#000000" cx="293.68055555555554" cz="275.20833333333337" r="2.5" angle="135" extent="90" />
+  <Incarnator mask="T6" y="4" fill="#cfcfcf" frame="#000000" cx="289.30555555555554" cz="264.58333333333337" r="2.5" angle="270" extent="90" />
+  <Incarnator mask="T6" y="4" fill="#cfcfcf" frame="#000000" cx="298.05555555555554" cz="273.33333333333337" r="2.5" angle="90" extent="90" />
+  <Incarnator mask="T6" y="4" fill="#cfcfcf" frame="#000000" cx="298.05555555555554" cz="264.58333333333337" r="2.5" angle="0" extent="90" />
+  <Incarnator mask="T6" y="4" fill="#cfcfcf" frame="#000000" cx="289.30555555555554" cz="273.33333333333337" r="2.5" angle="180" extent="90" />
+  <Solid shape="bspHill" y="11" pitch="180" scale=".2" fill="#9c9c9c" frame="#000000" cx="293.68055555555554" cz="268.8888888888889" r="1.875" angle="90" extent="90" />
+  <Ball shape="5009" sound="0" customGravity="0" hitVolume="0" y="10.25" scale="2" pitch="90" canGlow="true" fill="#ffffff" frame="#000000" cx="293.75" cz="268.95833333333337" r="1.875" angle="270" extent="90" />
+  <set wallYon=".01" />
+  <set wallHeight=".15" />
+  <WallDoor guardDelay="0" open="@start" deltaY="-5" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="293.33333333333337" y="10.5" z="268.81944444444446" w="0.625" d="0.625" h="0" r="1.875" cx="293.75" cz="268.95833333333337" angle="270" extent="90" />
+  <set wallYon="defaultYon" />
+  <set wallHeight=".76" wallYon=".01" />
+  <Wall fill="#ffffff" frame="#000000" x="294.02777777777777" z="267.9166666666667" w="0.625" d="1.875" h="0" y="9.55" />
+  <set wallHeight=".76" wallYon=".01" />
+  <Wall fill="#ffffff" frame="#000000" x="292.70833333333337" z="268.19444444444446" w="0.625" d="1.875" h="0" y="9.55" />
+  <Door2 guardDelay="0" shape="bspHill" y="3" scale=".2" fill="#7d7d7d" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" r="1.875" angle="90" extent="90" />
+  <Ball shape="5009" sound="0" customGravity="0" hitVolume="0" y="3.75" scale="2" pitch="90" canGlow="true" fill="#ffffff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" r="1.875" angle="270" extent="90" />
+  <set wallYon=".01" />
+  <set wallHeight=".25" />
+  <WallDoor guardDelay="0" open="@start" deltaY="-5" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="293.33333333333337" y="4" z="268.68055555555554" w="0.625" d="0.625" h="0" r="1.875" cx="293.68055555555554" cz="268.95833333333337" angle="270" extent="90" />
+  <set wallYon="defaultYon" />
+  <set wallHeight=".76" wallYon=".01" />
+  <Wall fill="#ffffff" frame="#000000" x="294.65277777777777" z="267.77777777777777" w="0.625" d="1.875" h="0" y="3" />
+  <set wallHeight=".76" wallYon=".01" />
+  <Wall fill="#ffffff" frame="#000000" x="292.08333333333337" z="268.05555555555554" w="0.625" d="1.875" h="0" y="3" />
+  <set wallHeight=".76" wallYon=".01" />
+  <Wall fill="#ffffff" frame="#000000" x="293.125" z="270.1388888888889" w="1.319444444444457" d="0.5555555555555429" h="0" y="3" />
+  <set wallHeight=".76" wallYon=".01" />
+  <Wall fill="#ffffff" frame="#000000" x="292.70833333333337" z="266.80555555555554" w="1.3194444444444002" d="0.5555555555555998" h="0" y="3" />
+  <set wallHeight=".76" wallYon=".01" />
+  <Wall fill="#ffffff" frame="#000000" x="292.9166666666667" z="267.9166666666667" w="1.319444444444457" d="0.5555555555555429" h="0" y="3" />
+  <set wallHeight=".76" wallYon=".01" />
+  <Wall fill="#ffffff" frame="#000000" x="292.98611111111114" z="269.44444444444446" w="1.3194444444444002" d="0.5555555555555429" h="0" y="3" />
+  <Ball scale="4" customGravity="0" hitVolume="0" y="11" canGlow="true" shape="5007" fill="#7f7f7f" frame="#000000" cx="294.09722222222223" cz="269.375" r="1.25" angle="135" extent="90" />
+  <set wallYon=".01" />
+  <WallDoor guardDelay="0" open="@start" deltaY="-5" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="291.73611111111114" y="11.5" z="269.58333333333337" w="5.625" d="1.25" h="2" r="1.25" cx="294.09722222222223" cz="269.375" angle="135" extent="90" />
+  <set wallYon="defaultYon" />
+  <Ramp yon=".1" y="0" thickness="1.5" deltaY="0" fill="#7f7f7f" frame="#000000" x="291.80555555555554" z="268.95833333333337" w="5.277777777777828" d="0.9027777777777715" h="0" r="1.25" angle="45" extent="90" />
+</map>

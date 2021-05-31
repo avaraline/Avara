@@ -10,7 +10,7 @@
 #include "CYonBox.h"
 
 extern Rect gLastBoxRect;
-extern short gLastBoxRounding;
+extern Fixed gLastBoxRounding;
 
 void CYonBox::BeginScript() {
     CAbstractYon::BeginScript();
@@ -30,7 +30,7 @@ CAbstractActor *CYonBox::EndScript() {
 
         deltaY = ReadFixedVar(iDeltaY);
         if (deltaY <= 0) {
-            deltaY = gLastBoxRounding * ReadFixedVar(iPixelToThickness);
+            deltaY = gLastBoxRounding;// * ReadFixedVar(iPixelToThickness);
         }
 
         if (deltaY <= 0) {

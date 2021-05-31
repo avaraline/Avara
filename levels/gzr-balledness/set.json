@@ -1,0 +1,157 @@
+{
+  "LEDI": [
+    {
+      "Alf": "gzrball.alf",
+      "Name": "GzrBall",
+      "Message": "Use the teleporters in the alcoves behind the baskets to get ammo. A player can teleport with the ball..."
+    },
+    {
+      "Alf": "snapball.alf",
+      "Name": "SnapBall",
+      "Message": "Which way did the basket go?"
+    },
+    {
+      "Alf": "worldball.alf",
+      "Name": "WorldBall",
+      "Message": "Remember that ball game with the big ball that you used to play in elementary school?"
+    },
+    {
+      "Alf": "mountain-ball.alf",
+      "Name": "Mountain Ball",
+      "Message": "Carry the ball up the mountain and drop it in the top..."
+    },
+    {
+      "Alf": "rampball.alf",
+      "Name": "RampBall",
+      "Message": "Use the teleporters for a quick escape to the other side..."
+    },
+    {
+      "Alf": "ramball---at-the-beach.alf",
+      "Name": "RamBall - at the beach",
+      "Message": "The ball goes in the goal easily if you take a direct shot."
+    },
+    {
+      "Alf": "heimlich.alf",
+      "Name": "Heimlich",
+      "Message": "It's like choke, except with a ball."
+    },
+    {
+      "Alf": "heimlich-free-for-all.alf",
+      "Name": "Heimlich Free For All",
+      "Message": "Heimlich Without Teams."
+    },
+    {
+      "Alf": "heimlich-eunuch.alf",
+      "Name": "Heimlich Eunuch",
+      "Message": "The goal is to kill each other as much as possible. No ball."
+    }
+  ],
+  "HULL": {
+    "150": {
+      "Hull Res ID": 215,
+      "Max Missiles": 8,
+      "Max Grenades": 12,
+      "Max boosters": 6,
+      "Mass": 124.35913633936065,
+      "Max Energy": 9.155275806820782,
+      "Energy Charge": 4.5776455329213395,
+      "Max Shields": 1.5258869306477454,
+      "Shield Charge": 1.5258869306477454,
+      "Min Shot": 1.1444113832303349,
+      "Max Shot": 2.2888227664606697,
+      "Shot Charge": 1.1444113832303349,
+      "Riding Height": 0.3814755474174105,
+      "Acceleration": 1.0528572518501564,
+      "Jump Power": 0.9918364232852674
+    },
+    "131": {
+      "Hull Res ID": 215,
+      "Max Missiles": 3,
+      "Max Grenades": 8,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    },
+    "132": {
+      "Hull Res ID": 216,
+      "Max Missiles": 4,
+      "Max Grenades": 10,
+      "Max boosters": 4,
+      "Mass": 155.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0249942778667887,
+      "Max Shields": 1.0,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.0,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.1000076295109484,
+      "Jump Power": 1.0
+    },
+    "133": {
+      "Hull Res ID": 217,
+      "Max Missiles": 8,
+      "Max Grenades": 14,
+      "Max boosters": 5,
+      "Mass": 170.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 1.1000076295109484,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.1000076295109484,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.0,
+      "Jump Power": 1.1000076295109484
+    }
+  },
+  "HSND": {
+    "1503": {
+      "Version": 2,
+      "Loop Start": 15488,
+      "Loop End": 15488,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "1503.ogg",
+      "Wav": "1503.wav"
+    },
+    "1504": {
+      "Version": 2,
+      "Loop Start": 19518,
+      "Loop End": 19519,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "1504.ogg",
+      "Wav": "1504.wav"
+    },
+    "1502": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "1502.ogg",
+      "Wav": "1502.wav"
+    }
+  },
+  "BSPT": {
+    "5555": "levels/gzr-balledness/bsps/5555.json"
+  }
+}

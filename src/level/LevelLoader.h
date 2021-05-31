@@ -9,6 +9,8 @@
 
 #pragma once
 #include "Types.h"
+#include <string>
+#include <vector>
 
 enum {
     iDesignerName,
@@ -294,7 +296,7 @@ double ReadVariable(short index);
 Fixed ReadFixedVar(short index);
 long ReadLongVar(short index);
 long ReadColorVar(short index);
-void ReadStringVar(short index, StringPtr dest);
+std::string ReadStringVar(short index);
 
 void ProgramVariable(short index, double value);
 void ProgramFixedVar(short index, Fixed value);
@@ -311,12 +313,10 @@ enum {
     StringEnd = 153 //	0	NIL	End string delimitation
 };
 
-void ConvertToLevelMap(Handle levelData);
-void SVGConvertToLevelMap();
+bool LoadALF(std::string levelName);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
 int GetPixelColor();
 int GetOtherPixelColor();
-
 Fixed GetLastOval(Fixed *theLoc);

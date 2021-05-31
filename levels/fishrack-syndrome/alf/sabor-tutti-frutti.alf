@@ -1,0 +1,82 @@
+<map>
+  <set baseHeight="200" />
+  <set designer="&quot;Plastic Chicken&quot;" information="&quot;This is a thing, and no, it's not a perfect thing.&quot;" gravity=".9" maxStartBoosts="2" />
+  <SkyColor fill="#000033" frame="#663366" />
+  <GroundColor fill="#222222" frame="#0033cc" />
+  <Incarnator y="5" fill="#ee0000" frame="#000000" cx="45.625" cz="33.75" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="120" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="240" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="360" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6002" midYaw="60" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6002" midYaw="180" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6002" midYaw="300" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="60" y="7" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="180" y="7" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="300" y="7" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="60" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="180" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Door2 shape="6001" midYaw="300" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Teleporter group="2" shape="false" y="1" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Teleporter group="3" shape="false" y="20" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Teleporter y="-10" shape="false" deadRange="60" activeRange="2000" destGroup="3" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <unique vars="mHi mDie" />
+  <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="12" missiles="8" y="2" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Timer in="mDie" wait="60" out="mHi" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <And in="@start" out="mHi" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="270" extent="90" />
+  <Dome hasFloor="true" pitch="180" fill="#888888" frame="#000000" cx="60" cz="48.125" r="6.25" angle="0" extent="360" />
+  <Dome hasFloor="true" y="7.7" fill="#888888" frame="#000000" cx="60" cz="48.125" r="6.25" angle="0" extent="360" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="55.625" cz="43.75" r="3.125" angle="270" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="53.125" cz="41.25" r="4.375" angle="270" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="49.375" cz="37.5" r="5.625" angle="270" extent="90" />
+  <Teleporter destGroup="2" shape="bspFloorFrame" scale=".4" y="-13" activeRange="1" fill="#003333" frame="#000000" cx="49.375" cz="37.5" r="5.625" angle="270" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="64.375" cz="43.75" r="3.125" angle="0" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="66.875" cz="41.25" r="4.375" angle="0" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="70.625" cz="37.5" r="5.625" angle="0" extent="90" />
+  <Teleporter destGroup="2" shape="bspFloorFrame" scale=".4" y="-13" activeRange="1" fill="#003333" frame="#000000" cx="70.625" cz="37.5" r="5.625" angle="0" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="55.625" cz="52.5" r="3.125" angle="180" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="53.125" cz="55" r="4.375" angle="180" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="49.375" cz="58.75" r="5.625" angle="180" extent="90" />
+  <Teleporter destGroup="2" shape="bspFloorFrame" scale=".4" y="-13" activeRange="1" fill="#003333" frame="#000000" cx="49.375" cz="58.75" r="5.625" angle="180" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="64.375" cz="52.5" r="3.125" angle="90" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="66.875" cz="55" r="4.375" angle="90" extent="90" />
+  <Dome hasFloor="true" fill="#003333" frame="#000000" cx="70.625" cz="58.75" r="5.625" angle="90" extent="90" />
+  <Teleporter destGroup="2" shape="bspFloorFrame" scale=".4" y="-13" activeRange="1" fill="#003333" frame="#000000" cx="70.625" cz="58.75" r="5.625" angle="90" extent="90" />
+  <set wallHeight="0" />
+  <Wall fill="#003333" frame="#000000" x="43.75" z="31.875" w="32.5" d="32.5" h="0" y="-8" />
+  <Wall fill="#003333" frame="#000000" x="38.125" z="26.25" w="11.875" d="11.875" h="0" y="-13" />
+  <Wall fill="#003333" frame="#000000" x="70" z="26.25" w="11.875" d="11.875" h="0" y="-13" />
+  <Wall fill="#003333" frame="#000000" x="70" z="58.125" w="11.875" d="11.875" h="0" y="-13" />
+  <Wall fill="#003333" frame="#000000" x="38.125" z="58.125" w="11.875" d="11.875" h="0" y="-13" />
+  <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="45.625" cz="70" r="7.5" angle="180" extent="90" />
+  <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="38.125" cz="62.5" r="7.5" angle="180" extent="90" />
+  <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="38.125" cz="33.75" r="7.5" angle="270" extent="90" />
+  <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="45.625" cz="26.25" r="7.5" angle="270" extent="90" />
+  <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="74.375" cz="26.25" r="7.5" angle="0" extent="90" />
+  <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="81.875" cz="33.75" r="7.5" angle="0" extent="90" />
+  <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="81.875" cz="62.5" r="7.5" angle="90" extent="90" />
+  <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="74.375" cz="70" r="7.5" angle="90" extent="90" />
+  <unique vars="mHi mDie" />
+  <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="5" missiles="5" y="-11" fill="#3300ff" frame="#333366" cx="40.625" cz="28.75" r="2.5" angle="270" extent="90" />
+  <Timer in="mDie" wait="60" out="mHi" fill="#3300ff" frame="#333366" cx="40.625" cz="28.75" r="2.5" angle="270" extent="90" />
+  <And in="@start" out="mHi" fill="#3300ff" frame="#333366" cx="40.625" cz="28.75" r="2.5" angle="270" extent="90" />
+  <unique vars="mHi mDie" />
+  <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="5" missiles="5" y="-11" fill="#3300ff" frame="#333366" cx="79.375" cz="28.75" r="2.5" angle="0" extent="90" />
+  <Timer in="mDie" wait="60" out="mHi" fill="#3300ff" frame="#333366" cx="79.375" cz="28.75" r="2.5" angle="0" extent="90" />
+  <And in="@start" out="mHi" fill="#3300ff" frame="#333366" cx="79.375" cz="28.75" r="2.5" angle="0" extent="90" />
+  <unique vars="mHi mDie" />
+  <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="5" missiles="5" y="-11" fill="#3300ff" frame="#333366" cx="79.375" cz="67.5" r="2.5" angle="90" extent="90" />
+  <Timer in="mDie" wait="60" out="mHi" fill="#3300ff" frame="#333366" cx="79.375" cz="67.5" r="2.5" angle="90" extent="90" />
+  <And in="@start" out="mHi" fill="#3300ff" frame="#333366" cx="79.375" cz="67.5" r="2.5" angle="90" extent="90" />
+  <unique vars="mHi mDie" />
+  <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="5" missiles="5" y="-11" fill="#3300ff" frame="#333366" cx="40.625" cz="67.5" r="2.5" angle="180" extent="90" />
+  <Timer in="mDie" wait="60" out="mHi" fill="#3300ff" frame="#333366" cx="40.625" cz="67.5" r="2.5" angle="180" extent="90" />
+  <And in="@start" out="mHi" fill="#3300ff" frame="#333366" cx="40.625" cz="67.5" r="2.5" angle="180" extent="90" />
+  <Teleporter shape="false" win="1000" start="@winTeam" activeRange="2000" fill="#ee0000" frame="#000000" cx="61.59722222222223" cz="1.875" r="2.0138888888888893" angle="270" extent="90" />
+  <Incarnator y="5" fill="#ee0000" frame="#000000" cx="74.375" cz="62.5" r="1.875" angle="90" extent="90" />
+  <Incarnator y="5" fill="#ee0000" frame="#000000" cx="45.625" cz="62.5" r="1.875" angle="180" extent="90" />
+  <Incarnator y="5" fill="#ee0000" frame="#000000" cx="74.375" cz="33.75" r="1.875" angle="0" extent="90" />
+  <Incarnator y="1" fill="#ee0000" frame="#000000" cx="42.5" cz="30.625" r="1.875" angle="270" extent="90" />
+  <Incarnator y="1" fill="#ee0000" frame="#000000" cx="77.5" cz="30.625" r="1.875" angle="0" extent="90" />
+  <Incarnator y="1" fill="#ee0000" frame="#000000" cx="77.5" cz="65.625" r="1.875" angle="90" extent="90" />
+  <Incarnator y="1" fill="#ee0000" frame="#000000" cx="42.5" cz="65.625" r="1.875" angle="180" extent="90" />
+</map>

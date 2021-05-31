@@ -684,7 +684,6 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
     if (itsGame->frameNumber == 0) {
         short hullRes;
         HullConfigRecord hull;
-        Handle hullHandle;
 
         hullRes = config->hullType;
         if (hullRes < 0 || hullRes > 2)
@@ -692,27 +691,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = ReadLongVar(iFirstHull + hullRes);
 
-        hullHandle = GetResource('HULL', hullRes);
-        if (hullHandle == NULL)
-            hullHandle = GetResource('HULL', 129);
-
-        // TODO: good candidate for JSON
-        hull = **(HullConfigRecord **)hullHandle;
-        hull.hullBSP = ntohs(hull.hullBSP);
-        hull.maxMissiles = ntohs(hull.maxMissiles);
-        hull.maxGrenades = ntohs(hull.maxGrenades);
-        hull.maxBoosters = ntohs(hull.maxBoosters);
-        hull.mass = ntohl(hull.mass);
-        hull.energyRatio = ntohl(hull.energyRatio);
-        hull.energyChargeRatio = ntohl(hull.energyChargeRatio);
-        hull.shieldsRatio = ntohl(hull.shieldsRatio);
-        hull.shieldsChargeRatio = ntohl(hull.shieldsChargeRatio);
-        hull.minShotRatio = ntohl(hull.minShotRatio);
-        hull.maxShotRatio = ntohl(hull.maxShotRatio);
-        hull.shotChargeRatio = ntohl(hull.shotChargeRatio);
-        hull.rideHeight = ntohl(hull.rideHeight);
-        hull.accelerationRatio = ntohl(hull.accelerationRatio);
-        hull.jumpPowerRatio = ntohl(hull.jumpPowerRatio);
+        LoadHullFromSetJSON(&hull, hullRes);
 
         hullRes = hull.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);
@@ -759,9 +738,6 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         maxAcceleration = FMul(maxAcceleration, hull.accelerationRatio);
         jumpBasePower = FMul(jumpBasePower, hull.jumpPowerRatio);
-        if (hullHandle) {
-            ReleaseResource(hullHandle);
-        }
 
         gunEnergy[0] = fullGunEnergy;
         gunEnergy[1] = fullGunEnergy;

@@ -43,7 +43,7 @@ CAbstractActor *CTextActor::EndScript() {
 
         RegisterReceiver(&in, ReadLongVar(iInVar));
         showEveryone = ReadLongVar(iShowEveryone);
-        ReadStringVar(iText, theMessage);
+        theMessage = ReadStringVar(iText);
 
         RegisterReceiver(&startMsg, ReadLongVar(iStartMsg));
         RegisterReceiver(&stopMsg, ReadLongVar(iStopMsg));

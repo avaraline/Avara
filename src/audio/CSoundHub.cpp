@@ -116,6 +116,27 @@ SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
         }
         aSample = sampP->nextSample;
     }
+    FreeOldSamples();
+    FreeUnusedSamples();
+    aSample = LoadSampleHeaderFromSetJSON(resId, sampleList);
+    return aSample;
+}
+
+SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
+    
+    SampleHeaderHandle aSample;
+    SampleHeaderPtr sampP;
+
+    aSample = sampleList;
+
+    while (aSample) {
+        sampP = *aSample;
+        if (sampP->resId == resId) {
+            sampP->flags = 0;
+            break;
+        }
+        aSample = sampP->nextSample;
+    }
 
     if (!aSample) {
         Handle compressedData;

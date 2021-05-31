@@ -1,0 +1,127 @@
+<map>
+  <set designer="&quot;PatH &lt;avara@play.at&gt;&quot;" information="&quot;When worlds collide...&quot;" wallHeight="0.25" defaultLives="5" lives="defaultLives" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="69.375" z="18.47222222222222" w="6.736111111111114" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="76.11111111111111" z="18.47222222222222" w="6.736111111111114" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="82.84722222222223" z="18.47222222222222" w="6.736111111111114" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="89.58333333333334" z="18.47222222222222" w="6.7361111111111" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="89.58333333333334" z="25.208333333333336" w="6.7361111111111" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="89.58333333333334" z="31.944444444444446" w="6.7361111111111" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="89.58333333333334" z="38.68055555555556" w="6.7361111111111" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="82.84722222222223" z="38.68055555555556" w="6.736111111111114" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="76.11111111111111" z="38.68055555555556" w="6.736111111111114" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="69.375" z="38.68055555555556" w="6.736111111111114" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="69.375" z="31.944444444444446" w="6.736111111111114" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="69.375" z="25.208333333333336" w="6.736111111111114" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="76.11111111111111" z="25.208333333333336" w="6.736111111111114" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="82.84722222222223" z="25.208333333333336" w="6.736111111111114" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="82.84722222222223" z="31.944444444444446" w="6.736111111111114" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="76.11111111111111" z="31.944444444444446" w="6.736111111111114" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="55.90277777777778" z="18.47222222222222" w="6.736111111111114" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="62.63888888888889" z="18.47222222222222" w="6.736111111111107" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="62.63888888888889" z="38.68055555555556" w="6.736111111111107" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="55.90277777777778" z="38.68055555555556" w="6.736111111111114" d="6.736111111111114" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="55.90277777777778" z="31.944444444444446" w="6.736111111111114" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="55.90277777777778" z="25.208333333333336" w="6.736111111111114" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="62.63888888888889" z="25.208333333333336" w="6.736111111111107" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="62.63888888888889" z="31.944444444444446" w="6.736111111111107" d="6.736111111111111" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="69.375" z="5" w="6.736111111111114" d="6.7361111111111125" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="76.11111111111111" z="5" w="6.736111111111114" d="6.7361111111111125" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="82.84722222222223" z="5" w="6.736111111111114" d="6.7361111111111125" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="89.58333333333334" z="5" w="6.7361111111111" d="6.7361111111111125" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="89.58333333333334" z="11.736111111111112" w="6.7361111111111" d="6.736111111111109" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="69.375" z="11.736111111111112" w="6.736111111111114" d="6.736111111111109" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="76.11111111111111" z="11.736111111111112" w="6.736111111111114" d="6.736111111111109" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="82.84722222222223" z="11.736111111111112" w="6.736111111111114" d="6.736111111111109" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="55.90277777777778" z="5" w="6.736111111111114" d="6.7361111111111125" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="62.63888888888889" z="5" w="6.736111111111107" d="6.7361111111111125" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#555555" frame="#000000" x="55.90277777777778" z="11.736111111111112" w="6.736111111111114" d="6.736111111111109" h="0" />
+  <unique vars="eUp eDown" />
+  <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="62.63888888888889" z="11.736111111111112" w="6.736111111111107" d="6.736111111111109" h="0" />
+  <set wallHeight="8" />
+  <Wall fill="#ffffff" frame="#000000" x="53.958333333333336" z="4.930555555555555" w="1.875" d="42.43055555555556" h="0" />
+  <set wallHeight="0.25" />
+  <set wallHeight="8" />
+  <Wall fill="#ffffff" frame="#000000" x="55.833333333333336" z="45.486111111111114" w="42.36111111111111" d="1.875" h="0" />
+  <set wallHeight="0.25" />
+  <set wallHeight="8" />
+  <Wall fill="#ffffff" frame="#000000" x="96.3888888888889" z="3.1944444444444446" w="1.805555555555543" d="42.29166666666667" h="0" />
+  <set wallHeight="0.25" />
+  <set wallHeight="8" />
+  <Wall fill="#ffffff" frame="#000000" x="53.958333333333336" z="3.1944444444444446" w="42.430555555555564" d="1.7361111111111107" h="0" />
+  <set wallHeight="0.25" />
+  <Wall fill="#ffffff" frame="#000000" x="53.958333333333336" z="3.1944444444444446" w="44.23611111111111" d="44.16666666666667" h="0" y="8" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="76.07638888888889" cz="11.70138888888889" r="3.0902777777777786" angle="315" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="76.07638888888889" cz="38.645833333333336" r="2.5347222222222214" angle="135" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="62.60416666666667" cz="25.173611111111114" r="2.743055555555557" angle="225" extent="90" />
+  <Incarnator y="4" fill="#ffffff" frame="#000000" cx="62.60416666666667" cz="25.173611111111114" r="2.743055555555557" angle="225" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="89.54861111111111" cz="25.173611111111114" r="3.2986111111111143" angle="45" extent="90" />
+  <Incarnator y="4" fill="#ffffff" frame="#000000" cx="89.54861111111111" cz="25.173611111111114" r="3.2986111111111143" angle="45" extent="90" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" fill="#000000" frame="#000000" cx="58.99305555555556" cz="8.090277777777779" r="1.2152777777777786" angle="180" extent="90" />
+  <Timer in="gTaken" out="gShow" wait="250" fill="#000000" frame="#000000" cx="58.99305555555556" cz="8.090277777777779" r="1.2152777777777786" angle="180" extent="90" />
+  <Goody shape="bspGrenade" speed="2" yon="40" y="2" grenades="6" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="58.99305555555556" cz="8.090277777777779" r="1.2152777777777786" angle="180" extent="90" />
+  <unique vars="hShow hTaken" />
+  <And in="@start" out="hShow" fill="#000000" frame="#000000" cx="58.99305555555556" cz="8.090277777777779" r="1.2152777777777786" angle="180" extent="90" />
+  <Timer in="hTaken" out="hShow" wait="250" fill="#000000" frame="#000000" cx="58.99305555555556" cz="8.090277777777779" r="1.2152777777777786" angle="180" extent="90" />
+  <Goody shape="bspGrenade" speed="2" yon="40" y="6" grenades="6" start="hShow" out="hTaken" fill="#000000" frame="#000000" cx="58.99305555555556" cz="8.090277777777779" r="1.2152777777777786" angle="180" extent="90" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" fill="#000000" frame="#000000" cx="92.88194444444446" cz="41.97916666666667" r="1.2152777777777786" angle="180" extent="90" />
+  <Timer in="gTaken" out="gShow" wait="250" fill="#000000" frame="#000000" cx="92.88194444444446" cz="41.97916666666667" r="1.2152777777777786" angle="180" extent="90" />
+  <Goody shape="bspGrenade" speed="2" yon="40" y="2" grenades="6" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="92.88194444444446" cz="41.97916666666667" r="1.2152777777777786" angle="180" extent="90" />
+  <unique vars="hShow hTaken" />
+  <And in="@start" out="hShow" fill="#000000" frame="#000000" cx="92.88194444444446" cz="41.97916666666667" r="1.2152777777777786" angle="180" extent="90" />
+  <Timer in="hTaken" out="hShow" wait="250" fill="#000000" frame="#000000" cx="92.88194444444446" cz="41.97916666666667" r="1.2152777777777786" angle="180" extent="90" />
+  <Goody shape="bspGrenade" speed="2" yon="40" y="6" grenades="6" start="hShow" out="hTaken" fill="#000000" frame="#000000" cx="92.88194444444446" cz="41.97916666666667" r="1.2152777777777786" angle="180" extent="90" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" fill="#000000" frame="#000000" cx="92.88194444444446" cz="8.368055555555555" r="1.2152777777777786" angle="180" extent="90" />
+  <Timer in="gTaken" out="gShow" wait="250" fill="#000000" frame="#000000" cx="92.88194444444446" cz="8.368055555555555" r="1.2152777777777786" angle="180" extent="90" />
+  <Goody shape="bspMissile" speed="2" yon="40" y="2" missiles="3" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="92.88194444444446" cz="8.368055555555555" r="1.2152777777777786" angle="180" extent="90" />
+  <unique vars="hShow hTaken" />
+  <And in="@start" out="hShow" fill="#000000" frame="#000000" cx="92.88194444444446" cz="8.368055555555555" r="1.2152777777777786" angle="180" extent="90" />
+  <Timer in="hTaken" out="hShow" wait="250" fill="#000000" frame="#000000" cx="92.88194444444446" cz="8.368055555555555" r="1.2152777777777786" angle="180" extent="90" />
+  <Goody shape="bspMissile" speed="2" yon="40" y="6" missiles="3" start="hShow" out="hTaken" fill="#000000" frame="#000000" cx="92.88194444444446" cz="8.368055555555555" r="1.2152777777777786" angle="180" extent="90" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" fill="#000000" frame="#000000" cx="59.20138888888889" cz="42.048611111111114" r="1.2152777777777786" angle="180" extent="90" />
+  <Timer in="gTaken" out="gShow" wait="250" fill="#000000" frame="#000000" cx="59.20138888888889" cz="42.048611111111114" r="1.2152777777777786" angle="180" extent="90" />
+  <Goody shape="bspMissile" speed="2" yon="40" y="2" missiles="3" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="59.20138888888889" cz="42.048611111111114" r="1.2152777777777786" angle="180" extent="90" />
+  <unique vars="hShow hTaken" />
+  <And in="@start" out="hShow" fill="#000000" frame="#000000" cx="59.20138888888889" cz="42.048611111111114" r="1.2152777777777786" angle="180" extent="90" />
+  <Timer in="hTaken" out="hShow" wait="250" fill="#000000" frame="#000000" cx="59.20138888888889" cz="42.048611111111114" r="1.2152777777777786" angle="180" extent="90" />
+  <Goody shape="bspMissile" speed="2" yon="40" y="6" missiles="3" start="hShow" out="hTaken" fill="#000000" frame="#000000" cx="59.20138888888889" cz="42.048611111111114" r="1.2152777777777786" angle="180" extent="90" />
+  <Teleporter shape="0" win="1000" start="@win" activeRange="1000" fill="#ffffff" frame="#000000" cx="44.895833333333336" cz="19.96527777777778" r="2.743055555555557" angle="270" extent="90" />
+</map>

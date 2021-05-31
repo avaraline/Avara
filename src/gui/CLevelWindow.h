@@ -2,9 +2,9 @@
 
 #include "CWindow.h"
 
+#include <nanogui/desccombobox.h>
 #include <string>
 #include <vector>
-#include <nanogui/desccombobox.h>
 
 class CLevelWindow : public CWindow {
 public:
@@ -34,5 +34,6 @@ public:
     std::vector<std::string> levelSets;
     std::vector<std::string> levelNames;
     std::vector<std::string> levelIntros;
-    std::vector<OSType> levelTags;
+    std::vector<std::string> levelTags;
+    std::vector<std::string> levelTagStrings;
 };

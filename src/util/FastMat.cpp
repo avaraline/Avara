@@ -24,6 +24,8 @@
 static unsigned short *arcTanTable = 0;
 static unsigned short *arcTanOneTable = 0;
 
+Fixed FRandSeed = 1;
+
 /* FixMath */
 
 Fixed FixMul(Fixed a, Fixed b) {
@@ -124,11 +126,6 @@ Fixed FSqroot(int *ab) {
     return root;
 }
 
-Fixed FRandomBeta() {
-    // I don't think this is right but it works
-    return ToFixed((float)(rand() % 1000) / 1000.0);
-}
-
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2) {
     Fixed a = x1 > y1 ? x1 - y1 : y1 - x1;
     Fixed b = x2 > y2 ? x2 - y2 : y2 - x2;
@@ -154,7 +151,7 @@ Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz) {
     move.l  dx,D0
     bpl.s   @noXNeg
     neg.l   D0
-*/  
+*/
     if (r0 < 0) r0 = -r0;
 /*
 @noXNeg:
@@ -362,8 +359,8 @@ Fixed FSqrt(Fixed n) {
 }
 
 #define RANDCONST ((uint32_t)(0x41A7))
-#define HIGH(x) ((uint16_t)(x >> 16))
-#define LOW(x) ((uint16_t)x)
+#define HIGH(x) ((x >> 16) & 0x0000FFFF)
+#define LOW(x) (x & 0x0000FFFF)
 
 Fixed FRandom() {
     uint32_t temp;
@@ -769,4 +766,3 @@ void CombineTransforms(Matrix *vs, Matrix *vd, Matrix *m) {
     // BlockMoveData(vs, vd, sizeof(Matrix));
     VectorMatrixProduct(4, vs[0], vd[0], m);
 }
-

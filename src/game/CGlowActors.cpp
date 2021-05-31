@@ -11,6 +11,8 @@
 
 #include "CSmartPart.h"
 
+extern Fixed FRandSeed;
+
 void CGlowActors::IAbstractActor() {
     CPlacedActors::IAbstractActor();
     canGlow = true;
