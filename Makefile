@@ -77,7 +77,7 @@ macapp: avara
 	$(MKDIR_P) $(BUILD_DIR)/Avara.app/Contents/{Frameworks,MacOS,Resources}
 	cp platform/macos/Info.plist $(BUILD_DIR)/Avara.app/Contents
 	cp $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.app/Contents/MacOS
-	cp -r $(BUILD_DIR)/{bsps,levels,rsrc,shaders} $(BUILD_DIR)/Avara.app/Contents/Resources
+	cp -r $(BUILD_DIR)/{levels,rsrc} $(BUILD_DIR)/Avara.app/Contents/Resources
 	cp platform/macos/Avara.icns $(BUILD_DIR)/Avara.app/Contents/Resources
 	cp -a $(FRAMEWORK_PATH)/SDL2.framework $(BUILD_DIR)/Avara.app/Contents/Frameworks
 	install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
@@ -88,7 +88,7 @@ winapp: avara
 	rm -rf $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
 	if [ -f $(BUILD_DIR)/Avara ]; then mv $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe; fi
-	cp -r $(BUILD_DIR)/{Avara.exe,bsps,levels,rsrc,shaders,vendor,src} $(BUILD_DIR)/WinAvara
+	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc,vendor,src} $(BUILD_DIR)/WinAvara
 	# cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2}.dll $(BUILD_DIR)/WinAvara
 	cd $(BUILD_DIR) && zip -r WinAvara.zip WinAvara && cd ..
