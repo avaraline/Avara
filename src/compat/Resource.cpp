@@ -26,6 +26,7 @@
 #endif
 
 // files stuff
+#define RSRCDIR "rsrc"
 #define LEVELDIR "levels"
 #define SETFILE "set.json"
 #define ALFDIR "alf"
@@ -341,7 +342,7 @@ char* GetBSPPath(int resId) {
     // haven't found the BSP file yet, try the top-level bsps directory
     if (bspName == NULL) {
         relPath.str("");
-        relPath << BSPSDIR << PATHSEP << resId << BSPSEXT;
+        relPath << RSRCDIR << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
         bspName = BundlePath(relPath.str().c_str());
     }
     return bspName;
@@ -418,7 +419,7 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     if(!t.good()) {
         std::stringstream temp;
         buffa.swap(temp);
-        buffa << "rsrc" << PATHSEP;
+        buffa << RSRCDIR << PATHSEP;
         buffa << OGGDIR << PATHSEP << filename;
     }
 
