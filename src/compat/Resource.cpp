@@ -212,6 +212,9 @@ char *BundlePath(const char *rel) {
     return path;
 }
 
+char *BundlePath(std::stringstream &buffa) {
+    return BundlePath(buffa.str().c_str());
+}
 
 struct AvaraDirListEntry {
     int8_t is_dir;
@@ -238,7 +241,7 @@ char* PathForLevelSet(std::string set) {
 
 void LevelDirListing() {
     cf_dir_t dir;
-    cf_dir_open(&dir, LEVELDIR);
+    cf_dir_open(&dir, BundlePath(LEVELDIR));
 
     std::vector<AvaraDirListEntry> raw_dir_listing;
 
@@ -266,9 +269,9 @@ void LevelDirListing() {
                 is_dir > 0) {
                 // this is a directory, try to see if there's a manifest inside
 
-                std::ostringstream ss;
+                std::stringstream ss;
                 ss << LEVELDIR << PATHSEP << file_str << PATHSEP << SETFILE;
-                if (cf_file_exists(ss.str().c_str())) {
+                if (cf_file_exists(BundlePath(ss))) {
                     // we found a set json file so add it (as version 2)
                     it->full_path = BundlePath(file_str.c_str());
                     level_sets.insert(std::make_pair(file_str, (*it)));
@@ -287,7 +290,7 @@ nlohmann::json LoadLevelListFromJSON(std::string set) {
 nlohmann::json GetDefaultManifestJSON() {
     std::stringstream setManifestName;
     setManifestName << "rsrc" << PATHSEP << SETFILE;
-    std::ifstream setManifestFile(setManifestName.str());
+    std::ifstream setManifestFile(std::string(BundlePath(setManifestName)));
     return nlohmann::json::parse(setManifestFile);
 }
 
@@ -295,7 +298,7 @@ nlohmann::json GetManifestJSON(std::string set) {
     if (set.length() < 1) return GetDefaultManifestJSON();
     std::stringstream setManifestName;
     setManifestName << LEVELDIR << PATHSEP << set << PATHSEP << SETFILE;
-    std::ifstream setManifestFile(setManifestName.str());
+    std::ifstream setManifestFile(BundlePath(setManifestName));
     if (setManifestFile.fail()) {
         SDL_Log("Couldn't read %s", setManifestName.str().c_str());
         return -1;
@@ -332,7 +335,7 @@ char* GetBSPPath(int resId) {
     // first check for the resource in the levelset directory
     relPath << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     relPath << BSPSDIR << PATHSEP << resId << BSPSEXT;
-    bspName = BundlePath(relPath.str().c_str());
+    bspName = BundlePath(relPath);
     std::ifstream testFile(bspName);
     if (testFile.fail()) {
         bspName = NULL;
@@ -343,7 +346,7 @@ char* GetBSPPath(int resId) {
     if (bspName == NULL) {
         relPath.str("");
         relPath << RSRCDIR << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
-        bspName = BundlePath(relPath.str().c_str());
+        bspName = BundlePath(relPath);
     }
     return bspName;
 }
@@ -359,7 +362,7 @@ std::string GetDefaultScript() {
     std::stringstream buffa;
     buffa << LEVELDIR << PATHSEP << currentLevelDir  << PATHSEP;
     buffa << DEFAULTSCRIPT;
-    auto path = std::string(BundlePath(buffa.str().c_str()));
+    auto path = std::string(BundlePath(buffa));
     std::ifstream t(path);
     if(t.good()) {
         std::string defaultscript;
@@ -377,7 +380,7 @@ std::string GetDefaultScript() {
 std::string GetBaseScript() {
     std::stringstream buffa;
     buffa << "rsrc" << DEFAULTSCRIPT;
-    std::ifstream t(std::string(BundlePath(buffa.str().c_str())));
+    std::ifstream t(std::string(BundlePath(buffa)));
     std::string scr;
     scr.assign((std::istreambuf_iterator<char>(t)),
                    std::istreambuf_iterator<char>());
@@ -415,7 +418,7 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     buffa << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     buffa << OGGDIR << PATHSEP << filename;
 
-    std::ifstream t(buffa.str());
+    std::ifstream t(BundlePath(buffa.str().c_str()));
     if(!t.good()) {
         std::stringstream temp;
         buffa.swap(temp);
@@ -426,7 +429,7 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     SDL_Log("Loading %s", buffa.str().c_str());
 
     int error;
-    stb_vorbis *v = stb_vorbis_open_filename(buffa.str().c_str(), &error, NULL);
+    stb_vorbis *v = stb_vorbis_open_filename(BundlePath(buffa.str().c_str()), &error, NULL);
     stb_vorbis_info info = stb_vorbis_get_info(v);
     SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
 
