@@ -1,0 +1,56 @@
+<map>
+  <set designer="&quot;Carlos Castillo-Garsow    cc96@cornell.edu&quot;" />
+  <GroundColor fill="#440000" frame="#000000" />
+  <Wall fill="#222222" frame="#000000" x="15.625" z="15" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="71.25" z="16.875" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="44.375" z="35" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="17.5" z="53.125" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="44.375" z="71.25" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="93.125" z="57.5" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="11.875" z="94.375" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="73.125" z="90" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="93.125" z="127.5" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="113.125" z="90" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="7.5" z="131.25" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="41.875" z="110.625" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="105" z="10" w="5" d="5" h="12.5" />
+  <Wall fill="#222222" frame="#000000" x="85" z="35" w="5" d="5" h="12.5" />
+  <Solid shield="-1" shape="bspHullLight" fill="#555555" frame="#000000" cx="19.23611111111111" cz="36.94444444444444" r="2.5" angle="315" extent="90" />
+  <Solid shield="-1" shape="bspHullLight" fill="#555555" frame="#000000" cx="110.69444444444444" cz="121.80555555555556" r="2.5" angle="225" extent="90" />
+  <Solid shield="-1" shape="bspHullLight" fill="#555555" frame="#000000" cx="64.44444444444444" cz="70.06944444444444" r="2.5" angle="270" extent="90" />
+  <Solid shield="-1" shape="bspHullLight" fill="#555555" frame="#000000" cx="75.06944444444444" cz="133.05555555555557" r="2.5" angle="45" extent="90" />
+  <Solid shield="-1" shape="bspUfo" fill="#330066" frame="#000000" cx="50.97222222222222" cz="25.069444444444446" r="2.5" angle="180" extent="90" />
+  <Solid shield="-1" shape="bspUfo" fill="#330066" frame="#000000" cx="40.34722222222222" cz="137.56944444444446" r="2.5" angle="270" extent="90" />
+  <Solid shield="-1" shape="bspUfo" fill="#330066" frame="#000000" cx="53.47222222222222" cz="97.56944444444444" r="2.5" angle="0" extent="90" />
+  <Solid shield="-1" shape="bspUfo" fill="#330066" frame="#000000" cx="32.84722222222222" cz="60.06944444444445" r="2.5" angle="90" extent="90" />
+  <Timer in="@get" wait="300" out="@transform" fill="#ffffff" frame="#000000" cx="5.069444444444445" cz="4.652777777777778" r="2.5" angle="0" extent="90" />
+  <Goody shape="bspGrenade" y="1.8" start="@transform" out="@get" grenades="2" fill="#ffff00" frame="#000000" cx="10.208333333333334" cz="122.70833333333334" r="2.5" angle="180" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="49.375" cz="89.375" r="2.5" angle="0" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="75.625" cz="33.88888888888889" r="2.5" angle="0" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="71.875" cz="147.63888888888889" r="2.5" angle="0" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="6.25" cz="48.88888888888889" r="2.5" angle="0" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="86.875" cz="75.13888888888889" r="2.5" angle="0" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="112.5" cz="8.88888888888889" r="2.5" angle="0" extent="90" />
+  <set designer="&quot;Lord Anon III&quot;" information="&quot;An old battlefield, the ruined machinery
+is a gold mine of information on the design of HECTORs
+and UFOs during this period. WARNING: there appear 
+to be some mines still about. the are unmarked and
+very dangerous.&quot;" />
+  <Timer in="@start" wait="300" out="@transform" fill="#ffffff" frame="#000000" cx="5.069444444444445" cz="4.652777777777778" r="2.5" angle="0" extent="90" />
+  <Goody shape="bspGrenade" y="1.8" start="@transform" out="@get" grenades="2" fill="#ffff00" frame="#000000" cx="15.208333333333336" cz="77.70833333333334" r="2.5" angle="180" extent="90" />
+  <Goody shape="bspGrenade" y="1.8" start="@transform" out="@get" grenades="2" fill="#ffff00" frame="#000000" cx="74.58333333333334" cz="10.833333333333334" r="2.5" angle="180" extent="90" />
+  <Goody shape="bspGrenade" y="1.8" start="@transform" out="@get" grenades="2" fill="#ffff00" frame="#000000" cx="106.45833333333334" cz="98.95833333333334" r="2.5" angle="180" extent="90" />
+  <Goody shape="bspMissile" y="1.8" start="@transform" out="@get" missiles="2" fill="#ffff00" frame="#000000" cx="10.833333333333334" cz="27.083333333333336" r="2.5" angle="180" extent="90" />
+  <Goody shape="bspMissile" y="1.8" start="@transform" out="@get" missiles="2" fill="#ffff00" frame="#000000" cx="106.45833333333334" cz="55.833333333333336" r="2.5" angle="180" extent="90" />
+  <Goody shape="bspMissile" y="1.8" start="@transform" out="@get" missiles="2" fill="#ffff00" frame="#000000" cx="68.95833333333334" cz="122.08333333333334" r="2.5" angle="180" extent="90" />
+  <Goody shape="bspMissile" y="1.8" start="@transform" out="@get" missiles="2" fill="#ffff00" frame="#000000" cx="104.58333333333334" cz="143.95833333333334" r="2.5" angle="180" extent="90" />
+  <Solid shield="-1" shape="bspScout" fill="#555555" frame="#000000" cx="43.19444444444444" cz="13.819444444444446" r="2.5" angle="270" extent="90" />
+  <Solid shield="-1" shape="bspScout" fill="#555555" frame="#000000" cx="74.44444444444444" cz="55.06944444444445" r="2.5" angle="270" extent="90" />
+  <Solid shield="-1" shape="bspScout" fill="#555555" frame="#000000" cx="81.94444444444444" cz="111.31944444444444" r="2.5" angle="270" extent="90" />
+  <Solid shield="-1" shape="bspScout" fill="#555555" frame="#000000" cx="74.44444444444444" cz="55.06944444444445" r="2.5" angle="270" extent="90" />
+  <Solid shield="-1" shape="bspHullLight" fill="#555555" frame="#000000" cx="92.56944444444444" cz="21.944444444444446" r="2.5" angle="270" extent="90" />
+  <Solid shield="-1" shape="bspHullLight" fill="#555555" frame="#000000" cx="26.73611111111111" cz="93.19444444444444" r="2.5" angle="315" extent="90" />
+  <Solid shield="-1" shape="bspHullLight" fill="#555555" frame="#000000" cx="94.44444444444444" cz="85.55555555555556" r="2.5" angle="45" extent="90" />
+  <Solid shield="-1" shape="bspHullLight" fill="#555555" frame="#000000" cx="20.069444444444446" cz="129.44444444444446" r="2.5" angle="270" extent="90" />
+  <Solid shield="-1" shape="bspScout" fill="#555555" frame="#000000" cx="9.444444444444445" cz="107.56944444444444" r="2.5" angle="270" extent="90" />
+</map>

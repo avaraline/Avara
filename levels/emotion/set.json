@@ -1,0 +1,173 @@
+{
+  "LEDI": [
+    {
+      "Alf": "alkaline.alf",
+      "Name": "Alkaline",
+      "Message": "[ Power ]"
+    },
+    {
+      "Alf": "crystalline.alf",
+      "Name": "Crystalline",
+      "Message": "[ Burst ]"
+    },
+    {
+      "Alf": "despairity.alf",
+      "Name": "Despairity",
+      "Message": "[ Torture ]"
+    },
+    {
+      "Alf": "exile.alf",
+      "Name": "Exile",
+      "Message": "[ Outcast ]"
+    },
+    {
+      "Alf": "isolation.alf",
+      "Name": "Isolation",
+      "Message": "[ Lonesome ]"
+    },
+    {
+      "Alf": "killumination.alf",
+      "Name": "Killumination",
+      "Message": "[ Destructive ]"
+    },
+    {
+      "Alf": "mill.alf",
+      "Name": "Mill",
+      "Message": "[ Breeze ]"
+    },
+    {
+      "Alf": "naloxone.alf",
+      "Name": "Naloxone",
+      "Message": "[ Counteract ]"
+    },
+    {
+      "Alf": "primal.alf",
+      "Name": "Primal",
+      "Message": "[ Instinct ]"
+    },
+    {
+      "Alf": "primal-rmx.alf",
+      "Name": "Primal Rmx",
+      "Message": "More rumble."
+    },
+    {
+      "Alf": "sienna.alf",
+      "Name": "Sienna",
+      "Message": "[ Golden ]"
+    },
+    {
+      "Alf": "stratocaster.alf",
+      "Name": "Stratocaster",
+      "Message": "[ Musical ]"
+    },
+    {
+      "Alf": "stratocaster---lite.alf",
+      "Name": "Stratocaster - Lite",
+      "Message": "[ Cheaper ]"
+    },
+    {
+      "Alf": "trench---short.alf",
+      "Name": "Trench - short",
+      "Message": "[ Plan ]"
+    },
+    {
+      "Alf": "trench---long.alf",
+      "Name": "Trench - long",
+      "Message": "[ Strategize ]"
+    },
+    {
+      "Alf": "voluminous.alf",
+      "Name": "Voluminous",
+      "Message": "[ Dark ]"
+    },
+    {
+      "Alf": "wind.alf",
+      "Name": "Wind",
+      "Message": "[ Force ]"
+    },
+    {
+      "Alf": "yukon.alf",
+      "Name": "Yukon",
+      "Message": "[ Chilly ]"
+    },
+    {
+      "Alf": "yukon-killfest.alf",
+      "Name": "Yukon KillFest",
+      "Message": "[ Nuclear ]"
+    },
+    {
+      "Alf": "zinc.alf",
+      "Name": "Zinc",
+      "Message": "[ Periodic ]"
+    }
+  ],
+  "HULL": {
+    "131": {
+      "Hull Res ID": 215,
+      "Max Missiles": 4,
+      "Max Grenades": 8,
+      "Max boosters": 1,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    },
+    "132": {
+      "Hull Res ID": 216,
+      "Max Missiles": 5,
+      "Max Grenades": 11,
+      "Max boosters": 1,
+      "Mass": 155.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0249942778667887,
+      "Max Shields": 1.0,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.0,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.1000076295109484,
+      "Jump Power": 1.0
+    },
+    "133": {
+      "Hull Res ID": 217,
+      "Max Missiles": 11,
+      "Max Grenades": 16,
+      "Max boosters": 1,
+      "Mass": 170.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 1.1000076295109484,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.1000076295109484,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.0,
+      "Jump Power": 1.1000076295109484
+    }
+  },
+  "HSND": {
+    "1000": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "1000.ogg",
+      "Wav": "1000.wav"
+    }
+  },
+  "BSPT": {
+    "1001": "levels/emotion/bsps/1001.json"
+  }
+}

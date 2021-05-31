@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (argc > 3) {
+        SDL_Log("UseResFile: %s", argv[3]);
         UseResFile(argv[3]);
     }
 
@@ -27,7 +28,7 @@ int main(int argc, char *argv[]) {
     soundHub->ISoundHub(32, 32);
 
     int resId = std::stoi(argv[1]);
-    SampleHeaderHandle header = soundHub->LoadSample(resId);
+    SampleHeaderHandle header = soundHub->LoadSampleLegacy(resId);
 
     if (header) {
         SampleHeaderPtr sp = *header;

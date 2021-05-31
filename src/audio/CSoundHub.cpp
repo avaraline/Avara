@@ -102,7 +102,7 @@ void CSoundHubImpl::AttachMixer(CSoundMixer *aMixer) {
     muteFlag = itsMixer->maxChannels == 0;
 }
 
-SampleHeaderHandle CSoundHubImpl::LoadOggSample(short resId) {
+SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
 
@@ -122,10 +122,7 @@ SampleHeaderHandle CSoundHubImpl::LoadOggSample(short resId) {
     return aSample;
 }
 
-SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
-    #ifndef USE_LEGACY_HSND
-    return LoadOggSample(resId);
-    #else
+SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
     
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
@@ -227,7 +224,6 @@ SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
     }
 
     return aSample;
-    #endif
 }
 
 SampleHeaderHandle CSoundHubImpl::PreLoadSample(short resId) {

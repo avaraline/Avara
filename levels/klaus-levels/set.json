@@ -1,0 +1,112 @@
+{
+  "LEDI": [
+    {
+      "Alf": "at-the-pools.alf",
+      "Name": "At the pools",
+      "Message": "HECTOR at the Pool"
+    },
+    {
+      "Alf": "hectors-kathedral.alf",
+      "Name": "HECTORS Kathedral",
+      "Message": "This building is used to adore\rone of the HECTORS unknown Gods"
+    },
+    {
+      "Alf": "tower.alf",
+      "Name": "Tower",
+      "Message": "Single player\rCan you climb this tower ?"
+    }
+  ],
+  "HSND": {
+    "500": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "500.ogg",
+      "Wav": "500.wav"
+    },
+    "501": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "501.ogg",
+      "Wav": "501.wav"
+    },
+    "502": {
+      "Version": 2,
+      "Loop Start": 3520,
+      "Loop End": 29376,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "502.ogg",
+      "Wav": "502.wav"
+    },
+    "503": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "503.ogg",
+      "Wav": "503.wav"
+    },
+    "504": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 117088,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "504.ogg",
+      "Wav": "504.wav"
+    },
+    "505": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "505.ogg",
+      "Wav": "505.wav"
+    },
+    "507": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "507.ogg",
+      "Wav": "507.wav"
+    },
+    "506": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 171520,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "506.ogg",
+      "Wav": "506.wav"
+    }
+  },
+  "BSPT": {
+    "1000": "levels/klaus-levels/bsps/1000.json"
+  }
+}

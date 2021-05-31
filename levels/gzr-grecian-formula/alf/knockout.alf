@@ -1,0 +1,387 @@
+<map>
+  <set designer="&quot;Cowboy - jmcald@destiny.esd105.wednet.edu&quot;" information="&quot;NO TEAMS! NO SCOUTS! Using these will screw up game play. Either kill or knock you opponent off the mat 15 times to win. If you get ‘tossed’ you lose a point - a kill earns a point. Firing before you enter the ring means death...&quot;" missilePower="3" missileAcceleration="0.3" grenadePower="2" timeLimit="300" lightHull="152" mediumHull="152" heavyHull="152" kDefaultLives="15" kInfinity="10000" kSnText="snTextBlip" gameLength="4685" />
+  <Timer in="@start" out="@gameEnds" wait="gameLength" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
+  <Field mask="T6" exit="@blueExits" enter="@blueEnters" deltaY="0" fill="#00ccff" frame="#000000" x="141.25" z="98.2638888888889" w="30" d="30" h="12" />
+  <Field mask="T5" exit="@purpleExits" enter="@purpleEnters" deltaY="0" fill="#00ccff" frame="#000000" x="141.25" z="98.2638888888889" w="30" d="30" h="12" />
+  <Field mask="T4" exit="@pinkExits" enter="@pinkEnters" deltaY="0" fill="#00ccff" frame="#000000" x="141.25" z="98.2638888888889" w="30" d="30" h="12" />
+  <Field mask="T2" exit="@yellowExits" enter="@yellowEnters" deltaY="0" fill="#00ccff" frame="#000000" x="141.25" z="98.2638888888889" w="30" d="30" h="12" />
+  <Field mask="T3" exit="@redExits" enter="@redEnters" deltaY="0" fill="#00ccff" frame="#000000" x="141.25" z="98.2638888888889" w="30" d="30" h="12" />
+  <Field mask="T1" exit="@greenExits" enter="@greenEnters" deltaY="0" fill="#00ccff" frame="#000000" x="141.25" z="98.2638888888889" w="30" d="30" h="12" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenEnters" stop="@greenDies" mask="T1" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowEnters" stop="@yellowDies" mask="T2" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redEnters" stop="@redDies" mask="T3" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkEnters" stop="@pinkDies" mask="T4" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleEnters" stop="@purpleDies" mask="T5" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueEnters" stop="@blueDies" mask="T6" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@greenDies" stop="@greenEnters" mask="T1" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@yellowDies" stop="@yellowEnters" mask="T2" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@redDies" stop="@redEnters" mask="T3" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@pinkDies" stop="@pinkEnters" mask="T4" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@purpleDies" stop="@purpleEnters" mask="T5" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="171.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="111.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="171.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="141.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="0" deltaZ=".3" fill="#9933ff" frame="#000000" x="111.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX=".3" deltaZ=".3" fill="#9933ff" frame="#000000" x="81.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="-.3" deltaZ=".3" fill="#9933ff" frame="#000000" x="201.25" z="38.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="0" fill="#9933ff" frame="#000000" x="201.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="128.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="98.2638888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX=".3" deltaZ="0" fill="#9933ff" frame="#000000" x="81.25" z="68.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="-.3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="201.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX=".3" deltaZ="-.3" fill="#9933ff" frame="#000000" x="81.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="141.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="171.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Field start="@blueDies" stop="@blueEnters" mask="T6" deltaY=".01" deltaX="0" deltaZ="-.3" fill="#9933ff" frame="#000000" x="111.25" z="158.26388888888889" w="30" d="30" h="4" y="0" />
+  <Timer in="@switchammo1" out="@makeammo2" wait="60" fill="#ff6600" frame="#000000" cx="151.25" cz="103.8888888888889" r="1.25" angle="180" extent="90" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="@makeammo2" out="@switchagain1" fill="#ff6600" frame="#000000" cx="151.25" cz="103.8888888888889" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="@makeammo3" fill="#ff6600" frame="#000000" cx="151.25" cz="122.6388888888889" r="1.25" angle="180" extent="90" />
+  <Timer in="@switchagain2" out="@makeammo3" wait="60" fill="#ff6600" frame="#000000" cx="151.25" cz="122.6388888888889" r="1.25" angle="180" extent="90" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="@makeammo3" out="@switchammo2" fill="#ff6600" frame="#000000" cx="151.25" cz="122.6388888888889" r="1.25" angle="180" extent="90" />
+  <Timer in="@switchammo2" out="@makeammo4" wait="60" fill="#ff6600" frame="#000000" cx="161.25" cz="122.6388888888889" r="1.25" angle="180" extent="90" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="@makeammo4" out="@switchagain2" fill="#ff6600" frame="#000000" cx="161.25" cz="122.6388888888889" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="@makeammo1" fill="#ff6600" frame="#000000" cx="161.25" cz="103.8888888888889" r="1.25" angle="180" extent="90" />
+  <Timer in="@switchagain1" out="@makeammo1" wait="60" fill="#ff6600" frame="#000000" cx="161.25" cz="103.8888888888889" r="1.25" angle="180" extent="90" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="@makeammo1" out="@switchammo1" fill="#ff6600" frame="#000000" cx="161.25" cz="103.8888888888889" r="1.25" angle="180" extent="90" />
+  <SkyColor fill="#ffff33" frame="#ff6600" />
+  <GroundColor fill="#000000" frame="#000000" />
+  <Wall fill="#0000dd" frame="#000000" x="138.75" z="128.26388888888889" w="35" d="2.5" h="0.25" />
+  <Wall fill="#0000dd" frame="#000000" x="138.75" z="95.7638888888889" w="35" d="2.5" h="0.25" />
+  <Wall fill="#0000dd" frame="#000000" x="171.25" z="98.2638888888889" w="2.5" d="30" h="0.25" />
+  <Wall fill="#0000dd" frame="#000000" x="138.75" z="98.2638888888889" w="2.5" d="30" h="0.25" />
+  <And in="@onTele" out="@time" fill="#666666" frame="#000000" cx="19.23611111111111" cz="574.9305555555555" r="3.125" angle="0" extent="90" />
+  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" out="@time" fill="#666666" frame="#000000" cx="19.23611111111111" cz="574.9305555555555" r="3.125" angle="0" extent="90" />
+  <Timer in="@time" out="@whoop" wait="1" fill="#666666" frame="#000000" cx="19.23611111111111" cz="574.9305555555555" r="3.125" angle="0" extent="90" />
+  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" out.6="@six" out.7="@seven" fill="#666666" frame="#000000" cx="19.23611111111111" cz="574.9305555555555" r="3.125" angle="0" extent="90" />
+  <And in="@onTele" out="@time" fill="#666666" frame="#000000" cx="10.13888888888889" cz="575.2083333333334" r="3.125" angle="0" extent="90" />
+  <Counter in.0="@zero" in.1="@one" out="@time" fill="#666666" frame="#000000" cx="10.13888888888889" cz="575.2083333333334" r="3.125" angle="0" extent="90" />
+  <Timer in="@time" out="@whoop" wait="30" fill="#666666" frame="#000000" cx="10.13888888888889" cz="575.2083333333334" r="3.125" angle="0" extent="90" />
+  <Distributor in="@whoop" out.0="@zero" out.1="@one" fill="#666666" frame="#000000" cx="10.13888888888889" cz="575.2083333333334" r="3.125" angle="0" extent="90" />
+  <WallDoor wallYon=".001" open="@one" close="@two" deltaY="20" shotPower="9999" guardDelay=".1" openSound="0" closeSound="0" stopSound="0" didOpen="@two" openSpeed="75" closeSpeed="75" stepOnMsg="@one" fill="#000000" frame="#000000" r="3.125" cx="10.13888888888889" cz="575.2083333333334" angle="0" extent="90" x="6.875" z="518.6805555555555" w="6.25" d="6.25" h="0" y="0" />
+  <Teleporter y="5" shape="0" group="@death" spin="false" sound="0" fill="#00ccff" frame="#000000" cx="9.930555555555555" cz="521.7361111111111" r="2.5" angle="60" extent="60" />
+  <Teleporter start="@inArena" group="-1" y="18" activeRange="100" deadRange="75" destGroup="@death" shape="0" fill="#0066ff" frame="#000000" cx="156.25" cz="113.2638888888889" r="2.5" angle="180" extent="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#0066ff" frame="#000000" cx="156.25" cz="113.2638888888889" r="2.5" angle="180" extent="90" />
+  <Incarnator status="false" y="5" start="@five" stop="@six" fill="#ff0000" frame="#000000" cx="113.92361111111111" cz="70" r="2.743055555555557" angle="285" extent="60" />
+  <Incarnator status="false" y="5" start="@one" stop="@two" fill="#ff0000" frame="#000000" cx="198.71527777777777" cz="155.13888888888889" r="2.743055555555557" angle="105" extent="60" />
+  <Incarnator status="false" y="5" start="@seven" stop="@eight" fill="#ff0000" frame="#000000" cx="113.26388888888889" cz="155.76388888888889" r="2.7777777777777786" angle="195" extent="60" />
+  <Incarnator status="false" y="5" start="@three" stop="@four" fill="#ff0000" frame="#000000" cx="198.09027777777777" cz="70.625" r="2.743055555555557" angle="15" extent="60" />
+  <Incarnator status="false" y="5" start="@six" stop="@seven" fill="#ff0000" frame="#000000" cx="96.07638888888889" cz="112.6388888888889" r="2.74305555555555" angle="240" extent="60" />
+  <Incarnator status="false" y="5" start="@four" stop="@five" fill="#ff0000" frame="#000000" cx="156.35416666666669" cz="53.26388888888889" r="2.743055555555557" angle="330" extent="60" />
+  <Incarnator status="false" y="5" start="@two" stop="@three" fill="#ff0000" frame="#000000" cx="215.59027777777777" cz="113.2638888888889" r="2.743055555555557" angle="60" extent="60" />
+  <Incarnator status="false" y="5" start="@zero" stop="@one" fill="#ff0000" frame="#000000" cx="156.45833333333334" cz="173.26388888888889" r="2.7777777777777715" angle="153" extent="60" />
+  <Walker killScore="1" hitScore="0" isTarget="false" lives="kDefaultLives" team="1" y="5" fill="#008800" frame="#000000" cx="156.28472222222223" cz="53.19444444444444" r="2.604166666666657" angle="330" extent="60" />
+  <Walker killScore="1" hitScore="0" isTarget="false" lives="kDefaultLives" team="2" y="5" fill="#ffff33" frame="#000000" cx="215.59027777777777" cz="113.19444444444446" r="2.6041666666666714" angle="60" extent="60" />
+  <Walker killScore="1" hitScore="0" isTarget="false" lives="kDefaultLives" team="5" y="5" fill="#9900cc" frame="#000000" cx="198.09027777777777" cz="70.69444444444446" r="2.6041666666666714" angle="15" extent="60" />
+  <Walker killScore="1" hitScore="0" isTarget="false" lives="kDefaultLives" team="4" y="5" fill="#ff0099" frame="#000000" cx="113.125" cz="155.76388888888889" r="2.638888888888893" angle="195" extent="60" />
+  <Walker killScore="1" hitScore="0" isTarget="false" lives="kDefaultLives" team="6" y="5" fill="#00ccff" frame="#000000" cx="95.9375" cz="112.56944444444446" r="2.6041666666666643" angle="240" extent="60" />
+  <Walker killScore="1" hitScore="0" isTarget="false" lives="kDefaultLives" team="3" y="5" fill="#ff0000" frame="#000000" cx="156.28472222222223" cz="173.26388888888889" r="2.604166666666657" angle="150" extent="60" />
+  <Base in="@start" out="@greenDies" fill="#ff0000" frame="#000000" cx="26.736111111111114" cz="573.125" r="3.958333333333334" angle="60" extent="60" />
+  <Base in="@start" out="@yellowDies" fill="#ff0000" frame="#000000" cx="26.736111111111114" cz="573.125" r="3.958333333333334" angle="60" extent="60" />
+  <Base in="@start" out="@redDies" fill="#ff0000" frame="#000000" cx="26.736111111111114" cz="573.125" r="3.958333333333334" angle="60" extent="60" />
+  <Base in="@start" out="@pinkDies" fill="#ff0000" frame="#000000" cx="26.736111111111114" cz="573.125" r="3.958333333333334" angle="60" extent="60" />
+  <Base in="@start" out="@purpleDies" fill="#ff0000" frame="#000000" cx="26.736111111111114" cz="573.125" r="3.958333333333334" angle="60" extent="60" />
+  <Base in="@start" out="@blueDies" fill="#ff0000" frame="#000000" cx="26.736111111111114" cz="573.125" r="3.958333333333334" angle="60" extent="60" />
+  <Timer in="@greenExits" wait="45" out="@greenDies" fill="#00ccff" frame="#000000" cx="41.875" cz="573.1944444444445" r="3.75" angle="60" extent="60" />
+  <Timer in="@yellowExits" wait="45" out="@yellowDies" fill="#00ccff" frame="#000000" cx="41.875" cz="573.1944444444445" r="3.75" angle="60" extent="60" />
+  <Timer in="@redExits" wait="45" out="@redDies" fill="#00ccff" frame="#000000" cx="41.875" cz="573.1944444444445" r="3.75" angle="60" extent="60" />
+  <Timer in="@pinkExits" wait="45" out="@pinkDies" fill="#00ccff" frame="#000000" cx="41.875" cz="573.1944444444445" r="3.75" angle="60" extent="60" />
+  <Timer in="@purpleExits" wait="45" out="@purpleDies" fill="#00ccff" frame="#000000" cx="41.875" cz="573.1944444444445" r="3.75" angle="60" extent="60" />
+  <Timer in="@blueExits" wait="45" out="@blueDies" fill="#00ccff" frame="#000000" cx="41.875" cz="573.1944444444445" r="3.75" angle="60" extent="60" />
+  <Timer in="@start" wait="1" out="@inArena" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
+  <Text in="@inArena" showEveryone="true" text="&quot;Stepping on or over the line 
+means death!&quot;" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@inArena" showEveryone="true" text="&quot;Do not fire until you are in the 
+ring!&quot;" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
+  <Timer in="@start" wait="30" out="@onTele" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
+  <Timer in="@start" wait="4216" out="@thirtyLeft" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Text in="@thirtyLeft" sound="kSnText" volume="5" showEveryone="true" text="&quot;Thirty Seconds Left!&quot;" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@thirtyLeft" wait="312" out="@ten10" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@ten10" wait="15" out="@nine9" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@nine9" wait="15" out="@eight8" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@eight8" wait="15" out="@seven7" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@seven7" wait="15" out="@six6" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@six6" wait="15" out="@five5" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@five5" wait="15" out="@four4" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@four4" wait="15" out="@three3" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@three3" wait="15" out="@two2" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Timer in="@two2" wait="15" out="@one1" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@ten10" showEveryone="true" text="&quot;Ten!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@nine9" showEveryone="true" text="&quot;Nine!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@eight8" showEveryone="true" text="&quot;Eight!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@seven7" showEveryone="true" text="&quot;Seven!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@six6" showEveryone="true" text="&quot;Six!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@five5" showEveryone="true" text="&quot;Five!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@four4" showEveryone="true" text="&quot;Four!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@three3" showEveryone="true" text="&quot;Three!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@two2" showEveryone="true" text="&quot;Two!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="&quot;Game Over!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="&quot;One!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+</map>

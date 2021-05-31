@@ -27,8 +27,8 @@ public:
     virtual void AttachMixer(CSoundMixer *aMixer) = 0;
     //virtual void CreateSound(short kind) = 0;
 
-    virtual SampleHeaderHandle LoadOggSample(short resId) = 0;
     virtual SampleHeaderHandle LoadSample(short resId) = 0;
+    virtual SampleHeaderHandle LoadSampleLegacy(short resId) = 0;
     virtual SampleHeaderHandle PreLoadSample(short resId) = 0;
     virtual SampleHeaderHandle RequestSample(short resId) = 0;
     virtual void FreeUnusedSamples() = 0;
@@ -71,8 +71,8 @@ public:
     virtual void AttachMixer(CSoundMixer *aMixer);
     virtual void CreateSound(short kind);
 
-    virtual SampleHeaderHandle LoadOggSample(short resId);
     virtual SampleHeaderHandle LoadSample(short resId);
+    virtual SampleHeaderHandle LoadSampleLegacy(short resId);
     virtual SampleHeaderHandle PreLoadSample(short resId);
     virtual SampleHeaderHandle RequestSample(short resId);
     virtual void FreeUnusedSamples();

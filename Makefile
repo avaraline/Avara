@@ -161,6 +161,8 @@ clean-levels:
 	$(RM) -r levels/*/alf/*.alf
 	$(RM) -r levels/*/default.avarascript
 	$(RM) -r levels/*/set.json
+	$(RM) -r levels/*/ogg/*.ogg
+	$(RM) -r levels/*/wav/*.wav
 
 publish:
 	scp $(BUILD_DIR)/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/

@@ -1,0 +1,45 @@
+<map>
+  <set designer="&quot;Carlos Castillo-Garsow&quot;" information="&quot;Copyright ©1996
+E-mail: cc96@cornell.edu&quot;" />
+  <Wall fill="#0000dd" frame="#000000" x="0.06944444444444445" z="9.444444444444445" w="5" d="65" h="7.5" />
+  <Wall fill="#0000dd" frame="#000000" x="0.06944444444444445" z="4.444444444444445" w="65" d="5" h="7.5" />
+  <Wall fill="#0000dd" frame="#000000" x="65.06944444444444" z="4.444444444444445" w="5" d="65" h="7.5" />
+  <Wall fill="#0000dd" frame="#000000" x="5.069444444444445" z="69.44444444444444" w="65" d="5" h="7.5" />
+  <WallDoor deltaY="0" deltaZ="40" open="@trans1" close="@trans2" fill="#00ee00" frame="#000000" x="5.138888888888889" z="37.01388888888889" w="20" d="5" h="4.5" />
+  <WallDoor deltaY="0" deltaZ="-40" open="@trans1" close="@trans2" fill="#00ee00" frame="#000000" x="45.13888888888889" z="37.01388888888889" w="20" d="5" h="4.5" />
+  <WallDoor deltaY="0" deltaX="-40" open="@trans1" close="@trans2" fill="#00ee00" frame="#000000" x="32.63888888888889" z="9.51388888888889" w="5" d="20" h="4.5" />
+  <WallDoor deltaY="0" deltaX="40" open="@trans1" close="@trans2" fill="#00ee00" frame="#000000" x="32.63888888888889" z="49.51388888888889" w="5" d="20" h="4.5" />
+  <Switch y="1.8" shape="bspSwitchOff" out.0="@trans2" out.1="@trans1" fill="#00ee00" frame="#000000" cx="35.208333333333336" cz="39.51388888888889" r="1.875" angle="135" extent="90" />
+  <Incarnator y="30" fill="#ff6600" frame="#000000" cx="52.63888888888889" cz="22.01388888888889" r="2.5" angle="0" extent="90" />
+  <Incarnator y="30" fill="#ff6600" frame="#000000" cx="17.63888888888889" cz="22.01388888888889" r="2.5" angle="270" extent="90" />
+  <Incarnator y="30" fill="#ff6600" frame="#000000" cx="52.63888888888889" cz="57.01388888888889" r="2.5" angle="90" extent="90" />
+  <Incarnator y="30" fill="#ff6600" frame="#000000" cx="17.63888888888889" cz="57.01388888888889" r="2.5" angle="180" extent="90" />
+  <Switch y="1.8" shape="bspSwitchOff" out.0="@purp1" out.1="@purp2" in.0="@purp1" in.1="@purp2" fill="#00ee00" frame="#000000" cx="7.083333333333334" cz="39.51388888888889" r="1.875" angle="135" extent="90" />
+  <Switch y="1.8" shape="bspSwitchOff" out.0="@purp1" out.1="@purp2" in.0="@purp1" in.1="@purp2" fill="#00ee00" frame="#000000" cx="35.208333333333336" cz="12.01388888888889" r="1.875" angle="135" extent="90" />
+  <Switch y="1.8" shape="bspSwitchOff" out.0="@purp1" out.1="@purp2" in.0="@purp1" in.1="@purp2" fill="#00ee00" frame="#000000" cx="63.33333333333334" cz="39.51388888888889" r="1.875" angle="135" extent="90" />
+  <Switch y="1.8" shape="bspSwitchOff" out.0="@purp1" out.1="@purp2" in.0="@purp1" in.1="@purp2" fill="#00ee00" frame="#000000" cx="35.208333333333336" cz="67.01388888888889" r="1.875" angle="135" extent="90" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="10.13888888888889" z="14.51388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="22.63888888888889" z="14.51388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="10.13888888888889" z="27.01388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="25.13888888888889" z="29.51388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="45.13888888888889" z="14.51388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="57.63888888888889" z="14.51388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="57.63888888888889" z="27.01388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="42.63888888888889" z="29.51388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="57.63888888888889" z="49.51388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="42.63888888888889" z="47.01388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="45.13888888888889" z="62.01388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="57.63888888888889" z="62.01388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="10.13888888888889" z="49.51388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="25.13888888888889" z="47.01388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="10.13888888888889" z="62.01388888888889" w="2.5" d="2.5" h="7.5" />
+  <WallDoor deltaY="30" open="@purp2" close="@purp1" fill="#9900cc" frame="#000000" r="1.875" cx="35.208333333333336" cz="67.01388888888889" angle="135" extent="90" x="22.63888888888889" z="62.01388888888889" w="2.5" d="2.5" h="7.5" />
+  <Switch y="1.8" shape="bspSwitchOff" out="@re" fill="#00ee00" frame="#000000" cx="11.458333333333334" cz="15.76388888888889" r="1.875" angle="135" extent="90" />
+  <Switch y="1.8" shape="bspSwitchOff" out="@re" fill="#00ee00" frame="#000000" cx="58.958333333333336" cz="15.76388888888889" r="1.875" angle="135" extent="90" />
+  <Switch y="1.8" shape="bspSwitchOff" out="@re" fill="#00ee00" frame="#000000" cx="11.458333333333334" cz="63.263888888888886" r="1.875" angle="135" extent="90" />
+  <Switch y="1.8" shape="bspSwitchOff" out="@re" fill="#00ee00" frame="#000000" cx="58.958333333333336" cz="63.263888888888886" r="1.875" angle="135" extent="90" />
+  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="1.8" fill="#9900cc" frame="#000000" cx="26.11111111111111" cz="49.02777777777778" r="2.5" angle="0" extent="90" />
+  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="1.8" fill="#9900cc" frame="#000000" cx="43.611111111111114" cz="31.52777777777778" r="2.5" angle="0" extent="90" />
+  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="1.8" fill="#9900cc" frame="#000000" cx="26.38888888888889" cz="31.111111111111114" r="2.5" angle="0" extent="90" />
+  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="1.8" fill="#9900cc" frame="#000000" cx="43.611111111111114" cz="49.02777777777778" r="2.5" angle="0" extent="90" />
+</map>
