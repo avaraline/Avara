@@ -1,0 +1,106 @@
+<map>
+  <script>
+information = 
+&quot;The teleporter will take you to the “switch room”
+where you can use the switches to drop blocks on your
+opponents. If you stick around for more than 10 seconds,
+though, the wall and the force-fields will make sure you
+leave.&quot;
+wallHeight =</script>
+  <unique vars="mReset" />
+  <WallDoor deltaY="5" status="isOpen" close="@DropB" open="mReset" didClose="mReset" closeDelay="3" guardDelay="0" shotPower="100" openSpeed="2" closeSpeed="40" openDelay="20" fill="#0000dd" frame="#000000" x="37.43055555555556" z="24.305555555555557" w="15" d="10.625" h="0" />
+  <unique vars="mReset" />
+  <WallDoor deltaY="5" status="isOpen" close="@DropD" open="mReset" didClose="mReset" closeDelay="3" guardDelay="0" shotPower="100" openSpeed="2" closeSpeed="40" openDelay="20" fill="#ff0000" frame="#000000" x="37.43055555555556" z="36.18055555555556" w="15" d="10.625" h="0" />
+  <unique vars="mReset" />
+  <WallDoor deltaY="5" status="isOpen" close="@DropA" open="mReset" didClose="mReset" closeDelay="3" guardDelay="0" shotPower="100" openSpeed="2" closeSpeed="40" openDelay="20" fill="#ff0000" frame="#000000" x="21.180555555555557" z="24.305555555555557" w="15" d="10.625" h="0" />
+  <unique vars="mReset" />
+  <WallDoor deltaY="5" status="isOpen" close="@DropC" open="mReset" didClose="mReset" closeDelay="3" guardDelay="0" shotPower="100" openSpeed="2" closeSpeed="40" openDelay="20" fill="#0000dd" frame="#000000" x="21.180555555555557" z="36.18055555555556" w="15" d="10.625" h="0" />
+  <Wall fill="#009999" frame="#000000" x="20.555555555555557" z="21.805555555555557" w="10" d="1.875" h="0" />
+  <Wall fill="#009999" frame="#000000" x="18.680555555555557" z="6.805555555555556" w="1.875" d="40.625" h="0" />
+  <Wall fill="#009999" frame="#000000" x="18.680555555555557" z="47.43055555555556" w="36.25" d="1.875" h="0" />
+  <Wall fill="#009999" frame="#000000" x="53.05555555555556" z="23.680555555555557" w="1.875" d="23.75" h="0" />
+  <Wall fill="#009999" frame="#000000" x="43.05555555555556" z="21.805555555555557" w="11.875" d="1.875" h="0" />
+  <Wall fill="#009999" frame="#000000" x="18.680555555555557" z="4.930555555555555" w="36.25" d="1.875" h="0" />
+  <Wall fill="#009999" frame="#000000" x="54.93055555555556" z="6.805555555555556" w="0" d="15" h="0" />
+  <Field deltaY="0" deltaX="-.05" start="@atrap" stop="@rtrap" fill="#777777" frame="#000000" x="38.05555555555556" z="6.805555555555556" w="15" d="15" h="0" />
+  <Field deltaY="0" deltaX="-.05" start="@atrap" stop="@rtrap" fill="#777777" frame="#000000" x="23.680555555555557" z="6.805555555555556" w="13.125" d="15" h="0" />
+  <Field deltaY="0" deltaZ="-.1" start="@atrap" stop="@rtrap" fill="#777777" frame="#000000" x="20.555555555555557" z="9.930555555555555" w="2.5" d="11.875" h="0" />
+  <unique vars="mA" />
+  <Switch shape="bspOffSwitch" altShape="bspOnSwitch" out.1="mA" in.0="mA" out.0="@DropA" fill="#ff0000" frame="#777777" cx="32.395833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <unique vars="mA" />
+  <Switch shape="bspOffSwitch" altShape="bspOnSwitch" out.1="mA" in.0="mA" out.0="@DropB" fill="#0000dd" frame="#777777" cx="41.770833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <unique vars="mA" />
+  <Switch shape="bspOffSwitch" altShape="bspOnSwitch" out.1="mA" in.0="mA" out.0="@DropD" fill="#ff0000" frame="#777777" cx="38.645833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <unique vars="mA" />
+  <Switch shape="bspOffSwitch" altShape="bspOnSwitch" out.1="mA" in.0="mA" out.0="@DropC" fill="#0000dd" frame="#777777" cx="35.520833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <set wallYon="0.001" />
+  <WallSolid hitMsg="@flash" fill="#009999" frame="#000000" r="0.625" cx="35.520833333333336" cz="23.055555555555557" angle="270" extent="180" x="30.555555555555557" z="23.055555555555557" w="12.5" d="0.625" h="0" />
+  <set wallYon="0" />
+  <WallDoor deltaX="-6.5 * 5" open="@atrap" close="@rtrap" didOpen="@swout" shotPower="100" deltaY="0" openSpeed=".4" volume="2" stopSound="0" fill="#009999" frame="#000000" r="0.625" cx="35.520833333333336" cz="23.055555555555557" angle="270" extent="180" x="53.05555555555556" z="6.805555555555556" w="30" d="15" h="0" />
+  <WallDoor deltaY="5" close="@CloseWin" open="@swin" closeSpeed="10" fill="#009999" frame="#000000" r="0.625" cx="35.520833333333336" cz="23.055555555555557" angle="270" extent="180" x="30.555555555555557" z="21.805555555555557" w="12.5" d="0.625" h="0" />
+  <Counter n="1" in.0="@DropA" in.1="@DropB" in.2="@DropC" in.3="@DropD" out="@Switch" fill="#009999" frame="#000000" cx="35.520833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <Delay wait="8" in.0="@Switch" in.1="@swout" out="@CloseWin" fill="#009999" frame="#000000" cx="35.520833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <Timer in="@swin" out="@atrap" wait="15 * 10" fill="#009999" frame="#000000" cx="35.520833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <Counter n="1" in.0="@swout" in.1="@swin" out="@rtrap" fill="#009999" frame="#000000" cx="35.520833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <set missilePower="1.5" missileAcceleration="1" missileTurnRate="3" defaultLives="5" />
+  <Distributor in="@swout" out.0="@tel3" out.1="@tel1" out.2="@tel2" out.3="@tel3" out.4="@tel4" out.5="@tel1" out.6="@tel4" out.7="@tel2" out.8="@tel2" out.9="@tel3" fill="#009999" frame="#000000" cx="35.520833333333336" cz="23.055555555555557" r="0.625" angle="270" extent="180" />
+  <set wallHeight="8" />
+  <Wall fill="#009999" frame="#000000" x="30.555555555555557" z="22.430555555555557" w="12.5" d="1.25" h="0" y="5" />
+  <WallDoor deltaY="5" close="@CloseWin" open="@swin" closeSpeed="10" hitMsg="@flash" fill="#009999" frame="#000000" r="0.625" cx="35.520833333333336" cz="23.055555555555557" angle="270" extent="180" x="30.555555555555557" z="23.680555555555557" w="12.5" d="0" h="0" />
+  <Teleporter destGroup="@main" group="@swr4" in="@swin" out="@swout" spin="false" shape="bspFloorFrame" scale=".25" start="@atrap" stop="@rtrap" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="9.305555555555555" r="2.5" angle="180" extent="270" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="36.80555555555556" cz="26.180555555555557" r="2.5" angle="315" extent="90" />
+  <Teleporter group="@main" start="0" fill="#00ee00" frame="#000000" cx="36.80555555555556" cz="26.180555555555557" r="2.5" angle="315" extent="90" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="61.80555555555556" cz="26.805555555555557" r="1.875" angle="0" extent="90" />
+  <set wallHeight="5" />
+  <unique vars="mOpen" />
+  <WallDoor deltaY="500" close="@flash" open="mOpen" status="isOpen" didClose="mOpen" volume="0" openSpeed="100" closeSpeed="100" hitMsg="@flash" fill="#ffff00" frame="#000000" r="1.875" cx="61.80555555555556" cz="26.805555555555557" angle="0" extent="90" x="30.555555555555557" z="23.055555555555557" w="12.5" d="0.625" h="0" />
+  <set wallHeight="2" />
+  <Wall fill="#0099ff" frame="#000000" x="24.305555555555557" z="31.180555555555557" w="0.625" d="8.75" h="0" />
+  <Wall fill="#0099ff" frame="#000000" x="48.68055555555556" z="31.180555555555557" w="0.625" d="8.75" h="0" />
+  <Wall fill="#0099ff" frame="#000000" x="36.52777777777778" z="28.055555555555557" w="0.5555555555555571" d="15" h="0" />
+  <Field deltaY="0" deltaZ="-1" fill="#777777" frame="#000000" r="1.875" cx="61.80555555555556" cz="26.805555555555557" angle="0" extent="90" x="30.555555555555557" z="21.180555555555557" w="12.5" d="1.875" h="0" />
+  <set gGrenades="4" gMissiles="8" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspGrenade" y="1.5" speed="2" grenades="gGrenades" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="38.68055555555556" cz="35.55555555555556" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="38.68055555555556" cz="35.55555555555556" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="38.68055555555556" cz="35.55555555555556" r="1.25" angle="180" extent="90" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspMissile" y="1.5" speed="2" missiles="gMissiles" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="34.93055555555556" cz="35.55555555555556" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="34.93055555555556" cz="35.55555555555556" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="34.93055555555556" cz="35.55555555555556" r="1.25" angle="180" extent="90" />
+  <set wallHeight="3" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="gGrenades" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="21.805555555555557" cz="24.930555555555557" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="21.805555555555557" cz="24.930555555555557" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="21.805555555555557" cz="24.930555555555557" r="1.25" angle="180" extent="90" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="gGrenades" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="21.805555555555557" cz="46.18055555555556" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="21.805555555555557" cz="46.18055555555556" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="21.805555555555557" cz="46.18055555555556" r="1.25" angle="180" extent="90" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="gMissiles" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="46.18055555555556" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="46.18055555555556" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="46.18055555555556" r="1.25" angle="180" extent="90" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="gMissiles" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="24.930555555555557" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="24.930555555555557" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="24.930555555555557" r="1.25" angle="180" extent="90" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="36.736111111111114" cz="44.93055555555556" r="2.5" angle="135" extent="90" />
+  <Teleporter group="@main" start="0" fill="#00ee00" frame="#000000" cx="36.736111111111114" cz="44.93055555555556" r="2.5" angle="135" extent="90" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="23.055555555555557" cz="35.486111111111114" r="2.5" angle="225" extent="90" />
+  <Teleporter group="@main" start="0" fill="#00ee00" frame="#000000" cx="23.055555555555557" cz="35.486111111111114" r="2.5" angle="225" extent="90" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="50.55555555555556" cz="35.486111111111114" r="2.5" angle="45" extent="90" />
+  <Teleporter group="@main" start="0" fill="#00ee00" frame="#000000" cx="50.55555555555556" cz="35.486111111111114" r="2.5" angle="45" extent="90" />
+  <Incarnator start="@swin" stop="@tel3" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="26.180555555555557" r="2.5" angle="270" extent="270" />
+  <Teleporter destGroup="@swr3" group="@main" start="@tel3" stop="@swin" shape="bspFloorFrame" scale=".25" activeRange="1" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="26.180555555555557" r="2.5" angle="270" extent="270" />
+  <Incarnator start="@swin" stop="@tel2" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="44.93055555555556" r="2.5" angle="90" extent="270" />
+  <Teleporter destGroup="@swr2" group="@main" start="@tel2" stop="@swin" shape="bspFloorFrame" scale=".25" activeRange="1" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="44.93055555555556" r="2.5" angle="90" extent="270" />
+  <Incarnator start="@swin" stop="@tel1" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="26.180555555555557" r="2.5" angle="180" extent="270" />
+  <Teleporter destGroup="@swr1" group="@main" start="@tel1" stop="@swin" shape="bspFloorFrame" scale=".25" activeRange="1" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="26.180555555555557" r="2.5" angle="180" extent="270" />
+  <Incarnator start="@swin" stop="@tel4" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="44.93055555555556" r="2.5" angle="0" extent="270" />
+  <Teleporter destGroup="@swr4" group="@main" start="@tel4" stop="@swin" status="true" shape="bspFloorFrame" scale=".25" activeRange="1" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="44.93055555555556" r="2.5" angle="0" extent="270" />
+  <Teleporter group="@swr3" start="0" in="@swin" spin="false" shape="bspFloorFrame" scale=".25" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="19.305555555555557" r="2.5" angle="180" extent="270" />
+  <Teleporter group="@swr1" start="0" in="@swin" spin="false" shape="bspFloorFrame" scale=".25" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="19.305555555555557" r="2.5" angle="180" extent="270" />
+  <Teleporter group="@swr2" start="0" in="@swin" spin="false" shape="bspFloorFrame" scale=".25" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="9.305555555555555" r="2.5" angle="180" extent="270" />
+  <WallDoor deltaX="-6.5 * 5" open="@atrap" close="@rtrap" shotPower="100" deltaY="0" openSpeed=".4" volume="2" stopSound="0" fill="#009999" frame="#000000" r="2.5" cx="50.55555555555556" cz="9.305555555555555" angle="180" extent="270" x="83.05555555555556" z="6.805555555555556" w="30" d="15" h="0" />
+</map>

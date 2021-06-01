@@ -21,7 +21,7 @@ std::vector<long> player_colors =
 std::vector<Text *> statuses;
 std::vector<Text *> chats;
 std::vector<ColorComboBox *> colors;
-OSType currentLevel;
+std::string currentLevel;
 TabWidget *tabWidget;
 
 
@@ -200,17 +200,16 @@ void CRosterWindow::UpdateRoster() {
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
         }
 
-        if (theGame->loadedTag != currentLevel) {
-            std::string theLevel((char* ) theGame->loadedLevel + 1, theGame->loadedLevel[0]);
-            std::string theDesigner((char *)theGame->loadedDesigner + 1, theGame->loadedDesigner[0]);
+        if (theGame->loadedTag.compare(currentLevel) != 0) {
+            std::string theLevel = theGame->loadedLevel;
+            std::string theDesigner = theGame->loadedDesigner;
 
             if (theLevel.length() > 0) levelLoaded->setValue(theLevel);
             else levelLoaded->setValue("");
             if (theDesigner.length() > 0) levelDesigner->setValue(theDesigner);
             else levelDesigner->setValue("");
 
-            std::string desc((char *)theGame->loadedInfo + 1, theGame->loadedInfo[0]);
-            if (desc.length() > 0) levelDescription->setCaption(desc);
+            if (theGame->loadedInfo.length() > 0) levelDescription->setCaption(theGame->loadedInfo);
             else levelDescription->setCaption("No additional information about this mission is available.");
             currentLevel = theGame->loadedTag;
         }

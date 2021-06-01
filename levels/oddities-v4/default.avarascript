@@ -1,0 +1,86 @@
+SetOK = 1
+designer = "Kevin Reid (Tetra)     <kpreid@attglobal.net>"
+
+//--------------------------------------------------------
+// HULL IDs
+
+// This is probably the largest number of HULLs ever in
+// one set.
+enum 1001
+  hullNoWeap        // Used by Tightropes, Dodge Mirrored
+  hullExtraShield   // Used by The Race
+  hullNort
+  hullKOTHLight
+  hullKOTHMedium    // Not used by anything in this version
+  hullKOTHHeavy
+  hullInternalLight
+  hullInternalHeavy
+  hullCarrier       // Not used for anything (yet)
+  hullRoom          // Used by Ravar
+  hullSpeed         // Used by Speed
+  hullSuper         // Stupid thingy used by Test Area
+  hullExtraLight    // Used by Blight
+  hullExtraMedium
+  hullExtraHeavy
+end
+
+//--------------------------------------------------------
+// HSND IDs
+
+// Undocumented HSNDs in Avara
+enum 160
+  snStepGround
+  snStepObject
+  snStepMetal
+  snStepShort
+  snStepEcho
+end
+
+enum 1000
+  snExplosion
+  snBonusMusic
+end
+
+//--------------------------------------------------------
+// BSP IDs
+enum 1000
+  bspSpeedCap
+  bspSavePost
+  bspSaveBall
+  bspRing
+end
+
+//--------------------------------------------------------
+// Speed capsule params
+scLrgS = .3  scLrgM = -80
+scMedS = .2  scMedM = -60
+scSmlS = .09 scSmlM = -40
+
+//--------------------------------------------------------
+// Standard goody params
+gConeY = 1.5 gConeSpd = 5
+gAmmoY = 2   gAmmoSpd = 3
+
+gTimeLong = 20 * 15
+gTimeMed = 10 * 15
+gTimeShort = 5 * 15
+
+gQtFullG = 12 gQtFullM = 8 gQtFullB = 5
+gQtLrgG  = 10 gQtLrgM  = 6 gQtLrgB  = 4
+gQtMedG  = 8  gQtMedM  = 4 gQtMedB  = 2
+gQtSmlG  = 4  gQtSmlM  = 2 gQtSmlB  = 1
+
+//--------------------------------------------------------
+// Misc constants
+
+kFPS = 15            // Avara runs at 15 FPS, theoretically.
+kInfinity = 32760    // largest possible number
+kYonInvisible = 0.01
+kYonDefault = 0
+
+//--------------------------------------------------------
+// Uncomment these for an interesting result (but make
+// sure you do it on a copy of the set).
+
+// wallTemplate = bspCubeFrame
+// floorTemplate = bspFloorFrame

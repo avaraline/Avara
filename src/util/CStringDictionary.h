@@ -63,6 +63,7 @@ public:
     virtual void ReadFromStringList(short strListID);
 
     virtual short GetDictionarySize();
+    virtual std::string GetIndEntry(short index);
     virtual void GetIndEntry(short index, StringPtr theEntry);
     virtual void GetIndEntry(short index, char *theEntry);
 

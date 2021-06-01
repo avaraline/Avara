@@ -158,11 +158,10 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     allowBackgroundProcessing = false;
 
-    loadedTag = 0;
-    loadedDirectory = 0;
-    loadedLevel[0] = 0;
-    loadedDesigner[0] = 0;
-    loadedInfo[0] = 0;
+    loadedTag = "";
+    loadedLevel = "";
+    loadedDesigner = "";
+    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
     simpleExplosions = false;
@@ -278,18 +277,14 @@ CAbstractPlayer *CAvaraGame::GetSpectatePlayer() {
 }
 
 CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
-    CAbstractPlayer *thePlayer;
-
-    thePlayer = playerList;
-    while (thePlayer) {
-        if (thePlayer->itsManager && thePlayer->itsManager->IsLocalPlayer()) {
-            break;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *mgr = itsNet->playerTable[i];
+        if (mgr && mgr->IsLocalPlayer()) {
+            return mgr->GetPlayer();
         }
-
-        thePlayer = thePlayer->nextPlayer;
     }
 
-    return thePlayer;
+    return NULL;
 }
 
 void CAvaraGame::AddActor(CAbstractActor *theActor) {
@@ -516,11 +511,9 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     gHub->FlagOldSamples();
 
-    loadedTag = 0;
-    loadedDirectory = 0;
-    loadedLevel[0] = 0;
-    loadedDesigner[0] = 0;
-    loadedInfo[0] = 0;
+    loadedLevel = "";
+    loadedDesigner = "";
+    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
 
@@ -622,8 +615,8 @@ void CAvaraGame::EndScript() {
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
 
-    ReadStringVar(iDesignerName, loadedDesigner);
-    ReadStringVar(iLevelInformation, loadedInfo);
+    loadedDesigner = ReadStringVar(iDesignerName);
+    loadedInfo = ReadStringVar(iLevelInformation);
     loadedTimeLimit = ReadLongVar(iTimeLimit);
 
     groundTraction = ReadFixedVar(iDefaultTraction);
@@ -673,7 +666,10 @@ void CAvaraGame::SendStartCommand() {
     if (gameStatus == kReadyStatus) {
         itsNet->SendStartCommand();
     } else if (gameStatus == kPauseStatus) {
-        itsNet->SendResumeCommand();
+        CAbstractPlayer *player = GetLocalPlayer();
+        if(player != NULL && player->lives > 0) {
+            itsNet->SendResumeCommand();
+        }
     }
 }
 
@@ -715,8 +711,8 @@ void CAvaraGame::ResumeGame() {
         short oldEventMask;
 
         if (freshMission) {
-            itsApp->GameStarted(std::string((char *)loadedSet),
-                                std::string((char *)loadedLevel + 1, loadedLevel[0]));
+            itsApp->GameStarted(loadedSet,
+                                loadedLevel);
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
             freshPlayerList = NULL;
             InitMixer(false);

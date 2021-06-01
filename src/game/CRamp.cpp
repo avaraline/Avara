@@ -12,7 +12,7 @@
 #include "CSmartBox.h"
 
 extern Rect gLastBoxRect;
-extern short gLastBoxRounding;
+extern Fixed gLastBoxRounding;
 
 static void SolveOrientation(Fixed x, Fixed y, Fixed h, Fixed *w, Fixed *angle) {
     Fixed guess;
@@ -46,7 +46,8 @@ void CRamp::BeginScript() {
     CPlacedActors::BeginScript();
 
     ProgramLongVar(iDeltaY, 1);
-    ProgramOffsetMultiply(iThickness, iPixelToThickness, gLastBoxRounding);
+    ProgramFixedVar(iThickness, gLastBoxRounding);
+    //ProgramOffsetMultiply(iThickness, iPixelToThickness, gLastBoxRounding);
 }
 
 CAbstractActor *CRamp::EndScript() {

@@ -79,16 +79,25 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
             continue;
         newMap[it.key()] = it.value();
         uint32_t cmd = commandBits[it.key()];
-        if (it.value().is_array()) {
-            for (json::iterator kit = it.value().begin(); kit != it.value().end(); ++kit) {
-                SDL_Keycode key = SDL_GetKeyFromName((*kit).get<std::string>().c_str());
+        json commandKeys = it.value();
+        if (it.value().is_array() == false) {
+            commandKeys = json::array({it.value()});
+        }
+        for (json::iterator kit = commandKeys.begin(); kit != commandKeys.end(); ++kit) {
+            std::string name = (*kit).get<std::string>();
+            SDL_Keycode key = SDL_GetKeyFromName(name.c_str());
+            if(key == SDLK_UNKNOWN) {
+                if(name == "Right Mouse") {
+                    keyMap[SDL_SCANCODE_APP1] |= cmd;
+                }
+                else if(name == "Middle Mouse") {
+                    keyMap[SDL_SCANCODE_APP2] |= cmd;
+                }
+            }
+            else {
                 SDL_Scancode scan = SDL_GetScancodeFromKey(key);
                 keyMap[scan] |= cmd;
             }
-        } else {
-            SDL_Keycode key = SDL_GetKeyFromName(it.value().get<std::string>().c_str());
-            SDL_Scancode scan = SDL_GetScancodeFromKey(key);
-            keyMap[scan] |= cmd;
         }
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
@@ -100,7 +109,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     // theRoster = aRoster;
     theNetManager = aNetManager;
     levelCRC = 0;
-    levelTag = 0;
+    levelTag = "";
     position = id;
     itsPlayer = NULL;
 
@@ -271,12 +280,33 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             keysHeld &= ~keyMap[event.key.keysym.scancode];
             break;
         case SDL_MOUSEBUTTONDOWN:
-            buttonStatus |= kbuWentDown;
-            buttonStatus |= kbuIsDown;
+            if(event.button.button == SDL_BUTTON_RIGHT) {
+                keysDown |= keyMap[SDL_SCANCODE_APP1];
+                keysHeld |= keyMap[SDL_SCANCODE_APP1];
+            }
+            else if(event.button.button == SDL_BUTTON_MIDDLE) {
+                keysDown |= keyMap[SDL_SCANCODE_APP2];
+                keysHeld |= keyMap[SDL_SCANCODE_APP2];
+            }
+            else {
+                buttonStatus |= kbuWentDown;
+                buttonStatus |= kbuIsDown;
+            }
+            
             break;
         case SDL_MOUSEBUTTONUP:
-            buttonStatus |= kbuWentUp;
-            buttonStatus &= ~kbuIsDown;
+            if(event.button.button == SDL_BUTTON_RIGHT) {
+                keysUp |= keyMap[SDL_SCANCODE_APP1];
+                keysHeld &= ~keyMap[SDL_SCANCODE_APP1];
+            }
+            else if(event.button.button == SDL_BUTTON_MIDDLE) {
+                keysUp |= keyMap[SDL_SCANCODE_APP2];
+                keysHeld &= ~keyMap[SDL_SCANCODE_APP2];
+            }
+            else {
+                buttonStatus |= kbuWentUp;
+                buttonStatus &= ~kbuIsDown;
+            }
             break;
         case SDL_MOUSEMOTION:
             int xrel = event.motion.xrel, yrel = event.motion.yrel;
@@ -472,7 +502,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         itsGame->didWait = true;
 
         if (frameFuncs[(FUNCTIONBUFFERS - 1) & (i + 1)].validFrame < itsGame->frameNumber) {
-            askAgainTime += 5 + (FRandom() & 3);
+            askAgainTime += 5 + (rand() & 3);
         }
 
         do {
@@ -876,7 +906,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
     // theRoster->InvalidateArea(kOnePlayerBox, pos);
 }
 
-void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) {
+void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
     if (loadingStatus != kLNotConnected && loadingStatus != kLActive) {
@@ -890,7 +920,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSTy
             else
                 loadingStatus = kLNotFound;
         } else {
-            if (serverCRC == levelCRC && serverTag == levelTag) {
+            if (serverCRC == levelCRC && serverTag.compare(levelTag) == 0) {
                 short i;
 
                 SDL_Log("Setting loadingStatus = kLLoaded\n");
@@ -903,7 +933,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSTy
                 }
 #endif
             } else {
-                if (serverTag == levelTag) {
+                if (serverTag.compare(levelTag) == 0) {
                     loadingStatus = kLMismatch;
                 }
             }
@@ -1224,7 +1254,7 @@ short CPlayerManagerImpl::LevelCRC() {
 OSErr CPlayerManagerImpl::LevelErr() {
     return levelErr;
 }
-OSType CPlayerManagerImpl::LevelTag() {
+std::string CPlayerManagerImpl::LevelTag() {
     return levelTag;
 }
 void CPlayerManagerImpl::LevelCRC(short crc) {
@@ -1233,7 +1263,7 @@ void CPlayerManagerImpl::LevelCRC(short crc) {
 void CPlayerManagerImpl::LevelErr(OSErr err) {
     levelErr = err;
 }
-void CPlayerManagerImpl::LevelTag(OSType t) {
+void CPlayerManagerImpl::LevelTag(std::string t) {
     levelTag = t;
 }
 Fixed CPlayerManagerImpl::RandomKey() {

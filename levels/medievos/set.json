@@ -1,0 +1,126 @@
+{
+  "LEDI": [
+    {
+      "Alf": "medievos.alf",
+      "Name": "Medievos",
+      "Message": "Don thy bow and arrow, and prepare yourself."
+    }
+  ],
+  "HULL": {
+    "2100": {
+      "Hull Res ID": 2001,
+      "Max Missiles": 4,
+      "Max Grenades": 6,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 1.8,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    }
+  },
+  "HSND": {
+    "2100": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "2100.ogg",
+      "Wav": "2100.wav"
+    },
+    "2200": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.018646524757763,
+      "Sound": 0,
+      "Ogg": "2200.ogg",
+      "Wav": "2200.wav"
+    },
+    "2400": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.970748455024033,
+      "Sound": 0,
+      "Ogg": "2400.ogg",
+      "Wav": "2400.wav"
+    },
+    "2300": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "2300.ogg",
+      "Wav": "2300.wav"
+    },
+    "2500": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "2500.ogg",
+      "Wav": "2500.wav"
+    },
+    "2600": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 2680,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.5140154116121156,
+      "Sound": 0,
+      "Ogg": "2600.ogg",
+      "Wav": "2600.wav"
+    },
+    "2700": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "2700.ogg",
+      "Wav": "2700.wav"
+    }
+  },
+  "BSPT": {
+    "2300": "levels/medievos/bsps/2300.json",
+    "2500": "levels/medievos/bsps/2500.json",
+    "2600": "levels/medievos/bsps/2600.json",
+    "2400": "levels/medievos/bsps/2400.json",
+    "2700": "levels/medievos/bsps/2700.json",
+    "2800": "levels/medievos/bsps/2800.json",
+    "2900": "levels/medievos/bsps/2900.json",
+    "2901": "levels/medievos/bsps/2901.json",
+    "2902": "levels/medievos/bsps/2902.json",
+    "2903": "levels/medievos/bsps/2903.json",
+    "2904": "levels/medievos/bsps/2904.json",
+    "2905": "levels/medievos/bsps/2905.json",
+    "2906": "levels/medievos/bsps/2906.json",
+    "2907": "levels/medievos/bsps/2907.json",
+    "2200": "levels/medievos/bsps/2200.json",
+    "2001": "levels/medievos/bsps/2001.json",
+    "2100": "levels/medievos/bsps/2100.json"
+  }
+}
