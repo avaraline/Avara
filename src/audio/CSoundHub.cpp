@@ -116,14 +116,19 @@ SampleHeaderHandle CSoundHubImpl::LoadSample(short resId) {
         }
         aSample = sampP->nextSample;
     }
-    FreeOldSamples();
-    FreeUnusedSamples();
-    aSample = LoadSampleHeaderFromSetJSON(resId, sampleList);
+
+    if (!aSample) {
+        FreeOldSamples();
+        //FreeUnusedSamples();
+        aSample = LoadSampleHeaderFromSetJSON(resId, sampleList);
+        if (aSample) sampleList = aSample;
+    }
+
     return aSample;
 }
 
 SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
-    
+
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
 
