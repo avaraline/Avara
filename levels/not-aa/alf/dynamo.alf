@@ -1,8 +1,7 @@
 <map>
   <SkyColor n="10" fill="#ffffff" frame="#cca8a6" />
   <GroundColor fill="#33252e" frame="#33252e" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Bound in writhing coils and ready to explode.&quot;" />
-  <set wallHeight="6" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Bound in writhing coils and ready to explode.&quot;" wallHeight="6" />
   <Wall fill="#776c73" frame="#000000" x="27.083333333333336" z="27.083333333333336" w="32.5" d="32.5" h="0" />
   <set wallHeight="6" />
   <Wall fill="#776c73" frame="#000000" x="27.083333333333336" z="89.58333333333334" w="32.5" d="32.5" h="0" />
@@ -26,8 +25,7 @@
   <Wall fill="#33252e" frame="#000000" x="27.083333333333336" z="24.583333333333336" w="95" d="2.5" h="0" />
   <set wallHeight="16" />
   <Wall fill="#33252e" frame="#000000" x="27.083333333333336" z="122.08333333333334" w="95" d="2.5" h="0" />
-  <set wallYon="0.01" />
-  <set wallHeight="200" />
+  <set wallYon="0.01" wallHeight="200" />
   <Wall fill="#33252e" frame="#000000" x="24.583333333333336" z="24.583333333333336" w="2.5" d="100" h="0" />
   <set wallHeight="200" />
   <Wall fill="#33252e" frame="#000000" x="122.08333333333334" z="24.583333333333336" w="2.5" d="100" h="0" />
@@ -35,8 +33,7 @@
   <Wall fill="#33252e" frame="#000000" x="27.083333333333336" z="24.583333333333336" w="95" d="2.5" h="0" />
   <set wallHeight="200" />
   <Wall fill="#33252e" frame="#000000" x="27.083333333333336" z="122.08333333333334" w="95" d="2.5" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
+  <set wallYon="defaultYon" wallHeight="6" />
   <Wall fill="#aea5ab" frame="#000000" x="35.833333333333336" z="35.833333333333336" w="1.25" d="23.75" h="0" y="6" />
   <set wallHeight="6" />
   <Wall fill="#aea5ab" frame="#000000" x="37.083333333333336" z="35.833333333333336" w="22.5" d="1.25" h="0" y="6" />

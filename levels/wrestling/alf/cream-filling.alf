@@ -24,8 +24,7 @@
   <set baseHeight="0" />
   <Teleporter y="100" activeRange="2000" deadRange="110" shape="0" fill="#463caf" frame="#000000" cx="29.65277777777778" cz="29.930555555555557" r="1.25" angle="90" extent="90" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#463caf" frame="#000000" cx="29.65277777777778" cz="29.930555555555557" r="1.25" angle="90" extent="90" />
-  <set ambient="0.4" light.0.i="0.6" light.0.a="45" light.0.b="-90" light.1.i="0.3" light.1.a="90" light.1.b="360" />
-  <set designer="&quot;Red Cap - redcap3000@earthlink.net&quot;" information="&quot;Cream Filling , gee, Didn’t know that was their.&quot;" />
+  <set ambient="0.4" light.0.i="0.6" light.0.a="45" light.0.b="-90" light.1.i="0.3" light.1.a="90" light.1.b="360" designer="&quot;Red Cap - redcap3000@earthlink.net&quot;" information="&quot;Cream Filling , gee, Didn’t know that was their.&quot;" />
   <SkyColor verticalRangeMin="100" verticalRangeMax="3000" n="6" fill="#885981" frame="#5f59bc" />
   <GroundColor verticalRangeMin="0" verticalRangeMax="50" n="6" fill="#450006" frame="#aaafe4" />
   <set wallYon=".001" />
@@ -69,7 +68,6 @@
   <Wall fill="#f65ace" frame="#000000" x="14.375" z="45" w="30.625" d="0.625" h="0" />
   <Wall fill="#f65ace" frame="#000000" x="45" z="15" w="0.625" d="30.625" h="0" />
   <Wall fill="#f65ace" frame="#000000" x="14.375" z="14.375" w="31.25" d="0.625" h="0" />
-  <set baseHeight="20" wallHeight="0" wallYon="30" />
   <set baseHeight="15" wallHeight="0" wallYon="30" />
   <Wall fill="#f65ace" frame="#000000" x="14.375" z="15" w="0.625" d="30" h="0" />
   <Wall fill="#f65ace" frame="#000000" x="14.375" z="45" w="30.625" d="0.625" h="0" />

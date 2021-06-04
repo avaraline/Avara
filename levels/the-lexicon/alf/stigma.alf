@@ -63,7 +63,8 @@ y = 18
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
+speed = 0
+end</script>
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#444444" frame="#cc9900" cx="74.47916666666667" cz="86.66666666666667" r="1.1458333333333286" angle="180" extent="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#996600" frame="#ffffcc" cx="113.68055555555556" cz="41.25" r="1.1805555555555571" angle="0" extent="90" />
@@ -101,8 +102,7 @@ speed = 0</script>
   <Incarnator y="10" fill="#ff0000" frame="#000000" cx="27.430555555555557" cz="61.80555555555556" r="1.25" angle="225" extent="90" />
   <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Jack bore his burden well, but he 
 deserved the disfigurement after making fun of so 
-many others who had it.&quot;" />
-  <set wallHeight="0" />
+many others who had it.&quot;" wallHeight="0" />
   <set wallHeight="0.25" />
   <Wall fill="#ffffcc" frame="#000000" x="68.68055555555556" z="36.18055555555556" w="15" d="10" h="0" y="5.75" />
   <Wall fill="#ffffcc" frame="#000000" x="47.43055555555556" z="36.18055555555556" w="15" d="10" h="0" y="5.75" />

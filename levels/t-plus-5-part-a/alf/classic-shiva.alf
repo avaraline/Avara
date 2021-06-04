@@ -56,8 +56,7 @@ I would like to thank Mark for all the time and effort he put into T Plus 5 and 
   <Wall fill="#975b59" frame="#000000" x="53.05555555555556" z="39.30555555555556" w="25" d="5" h="0" />
   <Wall fill="#975b59" frame="#000000" x="53.05555555555556" z="59.30555555555556" w="25" d="5" h="0" />
   <Wall fill="#561b19" frame="#000000" x="28.055555555555557" z="24.305555555555557" w="0" d="55" h="0" />
-  <set wallHeight="0" />
-  <set wallYon="0.01" />
+  <set wallHeight="0" wallYon="0.01" />
   <Wall fill="#561b19" frame="#0000ee" x="28.055555555555557" z="24.305555555555557" w="25" d="55" h="0" y="6" />
   <Ramp y="6" deltaY="4" fill="#3c0100" frame="#000000" x="78.05555555555556" z="44.30555555555556" w="25" d="1.875" h="0" r="1.875" angle="45" extent="90" />
   <Ramp y="6" deltaY="4" fill="#3c0100" frame="#000000" x="78.05555555555556" z="57.43055555555556" w="25" d="1.875" h="0" r="1.875" angle="45" extent="90" />
@@ -98,8 +97,7 @@ I would like to thank Mark for all the time and effort he put into T Plus 5 and 
   <set baseHeight="10" wallHeight="2" />
   <Wall fill="#703433" frame="#000000" x="103.05555555555556" z="34.30555555555556" w="10" d="10" h="0" />
   <Wall fill="#703433" frame="#000000" x="103.05555555555556" z="59.30555555555556" w="10" d="10" h="0" />
-  <set baseHeight="0" />
-  <set wallHeight=".5" />
+  <set baseHeight="0" wallHeight=".5" />
   <Wall fill="#f3cac7" frame="#000000" x="148.05555555555557" z="29.305555555555557" w="0" d="45" h="0" y=".6" />
   <Wall fill="#f3cac7" frame="#000000" x="148.05555555555557" z="29.305555555555557" w="0" d="45" h="0" y="1.5" />
   <Wall fill="#f3cac7" frame="#000000" x="28.055555555555557" z="24.305555555555557" w="105" d="0" h="0" y=".6" />

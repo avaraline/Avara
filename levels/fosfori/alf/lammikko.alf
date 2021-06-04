@@ -1,9 +1,7 @@
 <map>
-  <set wallYon=".001" />
-  <set wallHeight="2" />
+  <set wallYon=".001" wallHeight="2" />
   <Wall fill="#444444" frame="#000000" x="69.02777777777779" z="58.40277777777778" w="120" d="120" h="0" y="13" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
+  <set wallYon="defaultYon" wallHeight="6" />
   <Wall fill="#304530" frame="#000000" x="89.02777777777779" z="78.40277777777779" w="15" d="15" h="0" />
   <Ramp y="2" deltaY="4" fill="#6a796a" frame="#000000" x="79.02777777777779" z="78.40277777777779" w="10" d="15" h="0" r="1.875" angle="315" extent="90" />
   <Ramp y="2" deltaY="4" fill="#6a796a" frame="#000000" x="89.02777777777779" z="68.40277777777779" w="15" d="10" h="0" r="1.875" angle="225" extent="90" />

@@ -4,11 +4,9 @@
   <Wall fill="#ffff66" frame="#000000" x="84.23611111111111" z="16.73611111111111" w="1.25" d="31.875" h="0" />
   <Wall fill="#ffff66" frame="#000000" x="35.486111111111114" z="15.486111111111112" w="50" d="1.25" h="0" />
   <Wall fill="#ffff66" frame="#000000" x="35.486111111111114" z="48.611111111111114" w="50" d="1.25" h="0" />
-  <set wallYon="0" wallHeight="10" />
   <set wallYon="0.01" wallHeight="1" />
   <Wall fill="#ffff66" frame="#000000" x="30.48611111111111" z="15.486111111111112" w="55" d="34.375" h="0" y="-1" />
-  <set wallYon="0" />
-  <set iceY="iceY + 8" icePower="10" iceGrav="0.02" />
+  <set wallYon="0" iceY="iceY + 8" icePower="10" iceGrav="0.02" />
   <set iceMass="20" iceShield="6.5" targBall="targ1" targIce="targ2" targStop="targ3" wallHeight="10" defaultLives="6" playerBlast="1.7" />
   <Timer in.0="@start" in.1="@Throw" wait="20 * 15" out.0="in[1]" fill="#ffff66" frame="#000000" />
   <And in="@start" out.0="@OpenDisp" out.1="@FieldA" fill="#ffff66" frame="#000000" />

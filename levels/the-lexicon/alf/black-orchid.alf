@@ -71,7 +71,8 @@ y = 15
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
+speed = 0
+end</script>
   <Goody speed="4" shape="bspStandardFloor" y="-0.2" start="@mTaken1" stop="@goYellow1" sound="0" volume="0" fill="#880000" frame="#000000" cx="71.25" cz="30.694444444444446" r="1.25" angle="45" extent="90" />
   <Timer in="@mTaken1" wait="200" out="@goYellow1" fill="#880000" frame="#000000" cx="71.25" cz="30.694444444444446" r="1.25" angle="45" extent="90" />
   <Goody speed="8" shape="bspStandardFloor" y="-0.2" start="@goYellow1" stop="@goGreen1" sound="0" volume="0" fill="#ffcc00" frame="#000000" cx="71.25" cz="30.694444444444446" r="1.25" angle="45" extent="90" />

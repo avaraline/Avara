@@ -3,14 +3,38 @@
   <Teleporter activeRange=".8" group="1" destGroup="1" shape="809" scale="5" y="5.9" fill="#6600cc" frame="#cc0099" cx="94.93055555555556" cz="96.25" r="8.611111111111114" angle="265" extent="10" />
   <Teleporter activeRange=".8" group="1" destGroup="1" shape="809" scale="5" y=".3" fill="#6600cc" frame="#cc0099" cx="94.93055555555556" cz="24.375" r="8.611111111111112" angle="265" extent="10" />
   <Teleporter activeRange=".8" group="1" destGroup="1" shape="809" scale="5" y="5.9" fill="#6600cc" frame="#cc0099" cx="94.93055555555556" cz="24.375" r="8.611111111111112" angle="265" extent="10" />
-  <Teleporter activeRange=".8" group="1" destGroup="1" shape="809" scale="5" y=".3" fill="#6600cc" frame="#cc0099" cx="23.055555555555557" cz="96.25" r="8.611111111111114" angle="265" extent="10" />
-  <Teleporter activeRange=".8" group="1" destGroup="1" shape="809" scale="5" y="5.9" fill="#6600cc" frame="#cc0099" cx="23.055555555555557" cz="96.25" r="8.611111111111114" angle="265" extent="10" />
   <script>
-HEY!!  WHY ARE YA LOOKIN' AT THI</script>
-  <set designer="&quot;Plastic Chicken&quot;" />
-  <set information="&quot;The sum of the squares of the legs of a right triangle is eqaul to the square of the hypotinuse.&quot;" />
-  <script>
-Now with amm</script>
+object Teleporter
+activeRange=.8
+group=1
+destGroup=1
+shape=809
+scale=5
+y=.3
+end
+
+object Teleporter
+activeRange=.8
+group=1
+destGroup=1
+shape=809
+scale=5
+y=5.9
+end
+
+//
+
+HEY!!  WHY ARE YA LOOKIN' AT THIS??
+
+
+
+designer=&quot;Plastic Chicken&quot;
+
+information=&quot;The sum of the squares of the legs of a right triangle is eqaul to the square of the hypotinuse.
+
+
+
+Now with ammo!&quot;</script>
   <SkyColor fill="#000077" frame="#00cc66" />
   <GroundColor fill="#3399cc" frame="#3399cc" />
   <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" fill="#33cc66" frame="#00cc66" cx="37.01388888888889" cz="6.319444444444445" r="1.25" angle="180" extent="90" />

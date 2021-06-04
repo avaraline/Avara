@@ -161,12 +161,10 @@
   <Wall fill="#67818e" frame="#000000" x="124.86111111111111" z="130.48611111111111" w="10" d="10" h="0" />
   <Ramp y="0" deltaY="4" fill="#dcffe8" frame="#000000" x="124.86111111111111" z="112.98611111111111" w="10" d="17.5" h="0" r="1.875" angle="225" extent="90" />
   <Ramp y="0" deltaY="4" fill="#dcffe8" frame="#000000" x="39.861111111111114" z="112.98611111111111" w="10" d="17.5" h="0" r="1.875" angle="45" extent="90" />
-  <set ambient="0.2" light.0.i="0.8" light.0.a="10" light.0.b="-45" light.1.i="0.4" light.1.a="-10" light.1.b="45" />
-  <set designer="&quot;silverfox &lt;ryan@avara.org&gt;&quot;" information="&quot;I've seen Kasparov in a bath tub.
+  <set ambient="0.2" light.0.i="0.8" light.0.a="10" light.0.b="-45" light.1.i="0.4" light.1.a="-10" light.1.b="45" designer="&quot;silverfox &lt;ryan@avara.org&gt;&quot;" information="&quot;I've seen Kasparov in a bath tub.
 Teams are red and blue. Get points by capturing the 
 control points marked with an Avara A. The more A's 
-you have, the faster the points come.  150 points.&quot;" />
-  <set wallHeight="0" />
+you have, the faster the points come.  150 points.&quot;" wallHeight="0" />
   <WallDoor midYaw="45" fill="#dcffe8" frame="#000000" x="86.11111111111111" z="91.73611111111111" w="2.5" d="2.5" h="0" r="1.875" cx="41.736111111111114" cz="121.18055555555556" angle="45" extent="90" y="0" />
   <set wallHeight="0" />
   <WallDoor midYaw="45" fill="#dcffe8" frame="#000000" x="86.11111111111111" z="149.23611111111111" w="2.5" d="2.5" h="0" r="1.875" cx="41.736111111111114" cz="121.18055555555556" angle="45" extent="90" y="0" />

@@ -193,8 +193,7 @@
   <Timer in="@onTimerYellow" out="@onTeleYellow" wait="675" fill="#dcffff" frame="#000000" cx="60.208333333333336" cz="67.5" r="1.875" angle="0" extent="90" />
   <Timer in="@onTimerBlue" out="@onTeleBlue" wait="675" fill="#dcffff" frame="#000000" cx="110.83333333333334" cz="120" r="1.875" angle="0" extent="90" />
   <Field enter="@onTimerBlue" exit="@offTeleBlue" fill="#bedae0" frame="#000000" x="110.83333333333334" z="113.125" w="15" d="13.75" h="4.5" r="1.875" cx="110.83333333333334" cz="120" angle="0" extent="90" />
-  <set wallYon=".001" />
-  <set wallHeight=".3" />
+  <set wallYon=".001" wallHeight=".3" />
   <Wall fill="#444444" frame="#000000" x="45.833333333333336" z="57.5" w="9.375" d="0.625" h="0" y="0" />
   <set wallHeight=".3" />
   <Wall fill="#444444" frame="#000000" x="116.45833333333334" z="111.875" w="9.375" d="0.625" h="0" y="0" />
@@ -237,8 +236,7 @@
   <Base in="@start" out="@tDone6" fill="#0093d2" frame="#000000" cx="134.58333333333334" cz="136.25" r="2.5" angle="0" extent="90" />
   <Timer in="@aTaken6" out="@tDone6" wait="250" fill="#0093d2" frame="#000000" cx="134.58333333333334" cz="136.25" r="2.5" angle="0" extent="90" />
   <Goody speed="5" shape="bspGrenade" sound="snYes" y="4" grenades="4" start="@tDone6" stop="@aOff6" out="@aTaken6" fill="#0093d2" frame="#000000" cx="134.58333333333334" cz="136.25" r="2.5" angle="0" extent="90" />
-  <set wallYon="defaultYon" />
-  <set wallHeight=".001" />
+  <set wallYon="defaultYon" wallHeight=".001" />
   <Wall fill="#dcffff" frame="#000000" x="109.58333333333334" z="121.875" w="1.25" d="5" h="0" y="4" />
   <set wallHeight=".001" />
   <Wall fill="#dcffff" frame="#000000" x="120.83333333333334" z="111.875" w="5" d="1.25" h="0" y="4" />
@@ -314,9 +312,7 @@ blue or yellow.&quot;" sound="0" fill="#ffffff" frame="#000000" cx="3.3333333333
   <Walker team="5" defaultLives="0" fill="#ffffff" frame="#000000" cx="3.333333333333334" cz="392.5" r="1.875" angle="270" extent="90" />
   <Walker team="5" defaultLives="0" fill="#ffffff" frame="#000000" cx="3.333333333333334" cz="392.5" r="1.875" angle="270" extent="90" />
   <Teleporter shape="0" y="100" win="0" start="@badHectors" activeRange="9999" fill="#ffffff" frame="#000000" cx="86.45833333333334" cz="85" r="1.875" angle="90" extent="90" />
-  <set missilePower="2" />
-  <set missileAcceleration="1.3" />
-  <set missileTurnRate="1.3" />
+  <set missilePower="2" missileAcceleration="1.3" missileTurnRate="1.3" />
   <Walker team="2" y="4" defaultLives="99" isTarget="false" fill="#dcffff" frame="#000000" cx="53.333333333333336" cz="41.25" r="1.875" angle="270" extent="90" />
   <Walker team="6" y="4" defaultLives="99" isTarget="false" fill="#dcffff" frame="#000000" cx="118.33333333333334" cz="128.75" r="1.875" angle="90" extent="90" />
   <set wallHeight="3" />

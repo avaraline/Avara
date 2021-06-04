@@ -7,8 +7,7 @@ Run at the goodies to snag them and change levels.&quot;" defaultLives="3" grena
   <set wallYon="distYon" />
   <set wallYon="floorYon" wa="headRoom * 3" />
   <Wall fill="#006600" frame="#000000" x="8.402777777777779" z="19.23611111111111" w="64.93055555555557" d="65" h="0" />
-  <set wallYon="distYon" />
-  <set wallHeight="headRoom * 3" />
+  <set wallYon="distYon" wallHeight="headRoom * 3" />
   <Wall fill="#ffffff" frame="#000000" x="8.333333333333334" z="19.23611111111111" w="65.06944444444446" d="2.5" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="70.83333333333334" z="21.73611111111111" w="2.5" d="60" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="8.333333333333334" z="81.73611111111111" w="65" d="2.5" h="0" />

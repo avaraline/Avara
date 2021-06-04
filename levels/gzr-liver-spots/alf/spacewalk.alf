@@ -30,8 +30,7 @@
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="101.80555555555556" cz="51.111111111111114" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="101.80555555555556" cz="51.111111111111114" r="1.25" angle="180" extent="90" />
   <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="101.80555555555556" cz="51.111111111111114" r="1.25" angle="180" extent="90" />
-  <set defaultLives="3" grenadePower="3.5" missilePower="2.5" missileTurnRate="1" missileAcceleration=".5" maxStartGrenades="12" maxStartMissiles="8" maxStartBoosts="8" />
-  <set designer="&quot;Cowboy - jmcald@destiny.esd105.wednet.edu&quot;" information="&quot;SpaceWalk&quot;" />
+  <set defaultLives="3" grenadePower="3.5" missilePower="2.5" missileTurnRate="1" missileAcceleration=".5" maxStartGrenades="12" maxStartMissiles="8" maxStartBoosts="8" designer="&quot;Cowboy - jmcald@destiny.esd105.wednet.edu&quot;" information="&quot;SpaceWalk&quot;" />
   <SkyColor fill="#000000" frame="#000000" />
   <Incarnator y="520" fill="#008800" frame="#000000" cx="172.0138888888889" cz="101.11111111111111" r="4.722222222222214" angle="60" extent="60" />
   <GroundColor fill="#000000" frame="#000000" />

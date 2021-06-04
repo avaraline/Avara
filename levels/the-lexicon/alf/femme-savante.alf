@@ -3,8 +3,7 @@
   <SkyColor fill="#ffffff" frame="#ffcc00" />
   <Incarnator y="30" fill="#ff0000" frame="#000000" cx="31.180555555555557" cz="44.583333333333336" r="1.25" angle="225" extent="90" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#444444" frame="#cc9900" cx="3.0208333333333335" cz="13.541666666666668" r="1.1458333333333335" angle="180" extent="90" />
-  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Beautiful. Silky. Smart.&quot;" />
-  <set wallHeight="4" />
+  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Beautiful. Silky. Smart.&quot;" wallHeight="4" />
   <Wall fill="#ffcc00" frame="#000000" x="43.05555555555556" z="64.58333333333334" w="10" d="10" h="0" />
   <set wallHeight="2" />
   <Wall fill="#ffffff" frame="#000000" x="43.05555555555556" z="59.583333333333336" w="15" d="5" h="0" />
@@ -122,7 +121,8 @@ y = 18
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
+speed = 0
+end</script>
   <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" fill="#ccff66" frame="#000000" cx="73.05555555555556" cz="43.333333333333336" r="1.25" angle="180" extent="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#ffffcc" cx="65.55555555555556" cz="52.15277777777778" r="1.1805555555555571" angle="0" extent="90" />

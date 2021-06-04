@@ -54,8 +54,7 @@
   <Teleporter group="@center" y="-10" activeRange="2000" deadRange="range" destGroup="@recenter" shape="0" fill="#0033ff" frame="#ff0000" cx="70.48611111111111" cz="44.44444444444444" r="1.25" angle="150" extent="300" />
   <Teleporter y="4" group="@recenter" shape="0" fill="#0033ff" frame="#ff0000" cx="70.48611111111111" cz="44.44444444444444" r="1.25" angle="150" extent="300" />
   <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" fill="#0033ff" frame="#000000" cx="102.5" cz="3.6111111111111116" r="2.5" angle="180" extent="90" />
-  <set baseHeight="9" />
-  <set wallHeight="headRoom" />
+  <set baseHeight="9" wallHeight="headRoom" />
   <Field deltaY="fieldY" visible="fieldVis" fill="#ffcc00" frame="#000000" x="74.51388888888889" z="43.19444444444444" w="6.25" d="2.5" h="2.5" r="2.5" cx="102.5" cz="3.6111111111111116" angle="180" extent="90" />
   <Field deltaY="fieldY" visible="fieldVis" fill="#ffcc00" frame="#000000" x="65.76388888888889" z="43.81944444444444" w="8.75" d="1.25" h="3.5" r="2.5" cx="102.5" cz="3.6111111111111116" angle="180" extent="90" />
   <set wallHeight="headRoom" />

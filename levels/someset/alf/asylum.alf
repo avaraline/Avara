@@ -1,50 +1,27 @@
 <map>
   <Wall fill="#336666" frame="#000000" x="6.25" z="15.833333333333334" w="80.625" d="113.75" h="0" y="30" />
-  <set wallYon="200" />
-  <set wallHeight="3" />
+  <set wallYon="200" wallHeight="3" />
   <Wall fill="#00cccc" frame="#000000" x="70" z="20.833333333333336" w="10.625" d="10" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallYon="200" />
-  <set wallHeight="3" />
+  <set wallYon="200" wallHeight="3" />
   <Wall fill="#00cccc" frame="#000000" x="70" z="67.70833333333334" w="10.625" d="10" h="0" y="0" />
-  <set wallYon="defaultYon" />
-  <set wallYon="200" />
-  <set wallHeight="3" />
+  <set wallYon="200" wallHeight="3" />
   <Wall fill="#00cccc" frame="#000000" x="70" z="114.58333333333334" w="10.625" d="10" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallYon="200" />
-  <set wallHeight="3" />
+  <set wallYon="200" wallHeight="3" />
   <Wall fill="#00cccc" frame="#000000" x="12.5" z="114.58333333333334" w="10.625" d="10" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallYon="200" />
-  <set wallHeight="3" />
+  <set wallYon="200" wallHeight="3" />
   <Wall fill="#00cccc" frame="#000000" x="12.5" z="67.70833333333334" w="10.625" d="10" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallYon="200" />
-  <set wallHeight="3" />
+  <set wallYon="200" wallHeight="3" />
   <Wall fill="#00cccc" frame="#000000" x="12.5" z="20.833333333333336" w="10.625" d="10" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="5" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="5" />
   <Wall fill="#ffffff" frame="#000000" x="6.25" z="15.833333333333334" w="80.625" d="5" h="0" y="-5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="5" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="5" />
   <Wall fill="#ffffff" frame="#000000" x="6.25" z="124.58333333333334" w="80.625" d="5" h="0" y="-5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="5" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="5" />
   <Wall fill="#ffffff" frame="#000000" x="80.625" z="20.833333333333336" w="6.25" d="103.75" h="0" y="-5" />
-  <set wallYon="defaultYon" />
-  <set wallYon="0.05" />
-  <set wallHeight="5" />
-  <set wallHeight="5" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="5" />
   <Wall fill="#ffffff" frame="#000000" x="6.25" z="20.833333333333336" w="6.25" d="103.75" h="0" y="-5" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="40.625" z="65.20833333333334" w="13.125" d="15" h="0" y="10" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="40.625" z="65.20833333333334" w="13.125" d="15" h="0" y="20" />
   <set wallYon="defaultYon" />
@@ -141,16 +118,11 @@
   <Wall fill="#006666" frame="#000000" x="53.75" z="64.58333333333334" w="0.625" d="16.25" h="0" y="20" />
   <set wallHeight="0.5" />
   <Wall fill="#006666" frame="#000000" x="40.625" z="64.51388888888889" w="13.125" d="0.625" h="0" y="20" />
-  <set wallHeight="10" />
-  <set wallYon="0.5" />
+  <set wallHeight="10" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="40.625" z="80.20833333333334" w="13.125" d="0.625" h="0" y="10" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="10" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="10" />
   <Wall fill="#ffffff" frame="#000000" x="40" z="65.20833333333334" w="0.625" d="15" h="0" y="10" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="10" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="10" />
   <Wall fill="#ffffff" frame="#000000" x="40.625" z="64.58333333333334" w="13.125" d="0.625" h="0" y="10" />
   <set wallYon="defaultYon" />
   <unique vars="mShow mTaken" />
@@ -183,11 +155,9 @@
   <Incarnator start="@t4" stop="@f4" y="15" fill="#00cccc" frame="#000000" cx="73.75" cz="118.33333333333334" r="3.125" angle="90" extent="90" />
   <Incarnator start="@t5" stop="@f5" y="15" fill="#00cccc" frame="#000000" cx="19.375" cz="27.083333333333336" r="3.125" angle="270" extent="90" />
   <Incarnator start="@t3" stop="@f3" y="15" fill="#000000" frame="#006600" cx="17.32638888888889" cz="72.67361111111111" r="3.7152777777777777" angle="135" extent="270" />
-  <set wallHeight="10" />
-  <set wallYon="0.5" />
+  <set wallHeight="10" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="53.75" z="65.20833333333334" w="0.625" d="15" h="0" y="10" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.5" />
+  <set wallYon="defaultYon" wallHeight="0.5" />
   <Wall fill="#006666" frame="#000000" x="40.625" z="80.20833333333334" w="13.125" d="0.625" h="0" y="20" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="28.680555555555557" cz="108.95833333333334" r="1.875" angle="0" extent="90" />
@@ -205,8 +175,7 @@
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="64.375" cz="108.95833333333334" r="1.875" angle="270" extent="90" />
   <Timer in="mTaken" out="mShow" wait="315" fill="#ffffff" frame="#000000" cx="64.375" cz="108.95833333333334" r="1.875" angle="270" extent="90" />
   <Goody shape="bspMissile" y="2" yon="100" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="64.375" cz="108.95833333333334" r="1.875" angle="270" extent="90" />
-  <set blastSoundDefault="1301" />
-  <set incarnateSound="1302" />
+  <set blastSoundDefault="1301" incarnateSound="1302" />
   <And in="@start" out="@t1" fill="#ffffff" frame="#000000" cx="64.375" cz="108.95833333333334" r="1.875" angle="270" extent="90" />
   <And in="@t1" out.0="@f1" out.1="@t2" fill="#ffffff" frame="#000000" cx="64.375" cz="108.95833333333334" r="1.875" angle="270" extent="90" />
   <And in="@t2" out.0="@f2" out.1="@t3" fill="#ffffff" frame="#000000" cx="64.375" cz="108.95833333333334" r="1.875" angle="270" extent="90" />

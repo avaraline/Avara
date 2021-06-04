@@ -126,8 +126,6 @@
   <set wallHeight="8" />
   <Wall fill="#0e1c37" frame="#000000" x="59.16666666666667" z="91.73611111111111" w="30.625" d="15.625" h="0" y="4" />
   <set wallHeight="4" />
-  <set wallHeight="4" />
-  <set wallHeight="4" />
   <Wall fill="#0e1c37" frame="#000000" x="47.29166666666667" z="91.73611111111111" w="0.625" d="15.625" h="0" />
   <set wallHeight="4" />
   <Wall fill="#0e1c37" frame="#000000" x="17.291666666666668" z="132.36111111111111" w="16.25" d="0.625" h="0" />
@@ -300,8 +298,7 @@
   <Incarnator y="14" fill="#ffffff" frame="#000000" cx="54.236111111111114" cz="154.86111111111111" r="1.875" angle="135" extent="90" />
   <Incarnator y="6" fill="#ffffff" frame="#000000" cx="97.36111111111111" cz="126.73611111111111" r="1.875" angle="45" extent="90" />
   <Incarnator y="6" fill="#ffffff" frame="#000000" cx="9.861111111111112" cz="126.73611111111111" r="1.875" angle="225" extent="90" />
-  <set wallYon="0.0001" />
-  <set wallHeight="99" />
+  <set wallYon="0.0001" wallHeight="99" />
   <Wall fill="#ffffff" frame="#000000" x="1.7361111111111112" z="76.73611111111111" w="0.625" d="100" h="0" />
   <set wallHeight="99" />
   <Wall fill="#ffffff" frame="#000000" x="1.7361111111111112" z="176.73611111111111" w="104.375" d="0.625" h="0" />

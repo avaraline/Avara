@@ -1,8 +1,5 @@
 <map>
-  <set maxStartBoosts="0" grenadePower="2.25" missilePower="2" />
-  <set hull.0="3000" hull.1="3001" hull.2="3002" />
-  <set defaultLives="99" />
-  <set wallHeight="0" />
+  <set maxStartBoosts="0" grenadePower="2.25" missilePower="2" hull.0="3000" hull.1="3001" hull.2="3002" defaultLives="99" wallHeight="0" />
   <Wall fill="#010023" frame="#000000" x="29.583333333333336" z="22.083333333333336" w="37.5" d="105" h="0" y="20" />
   <set wallHeight="0" />
   <Wall fill="#010023" frame="#000000" x="97.08333333333334" z="22.083333333333336" w="37.5" d="105" h="0" y="20" />
@@ -26,8 +23,7 @@
   <Ramp y="15" deltaY="5" thickness="0" fill="#1e2141" frame="#000000" x="97.08333333333334" z="87.08333333333334" w="25" d="2.5" h="0" r="0.625" angle="180" extent="180" />
   <SkyColor verticalRangeMax="15000" n="12" fill="#c9d0dd" frame="#000000" />
   <GroundColor fill="#49536d" frame="#49536d" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;4 players only w/ red and yellow teams. Other colors will put you into the spectator balcony. Touch your team's stripe for 3 secs to switch with your teammate. 3 kills to win. Don't try to cheat by self-destructing, it'll get you in a rut.&quot;" />
-  <set wallHeight="3" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;4 players only w/ red and yellow teams. Other colors will put you into the spectator balcony. Touch your team's stripe for 3 secs to switch with your teammate. 3 kills to win. Don't try to cheat by self-destructing, it'll get you in a rut.&quot;" wallHeight="3" />
   <Wall fill="#2c314f" frame="#000000" x="62.083333333333336" z="54.583333333333336" w="7.5" d="7.5" h="0" />
   <set wallHeight="3" />
   <Wall fill="#2c314f" frame="#000000" x="94.58333333333334" z="54.583333333333336" w="7.5" d="7.5" h="0" />
@@ -245,11 +241,9 @@
   <Sound sound="3002" start="@snApplause" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="4.583333333333334" cz="124.58333333333334" r="1.875" angle="225" extent="90" />
   <Sound sound="3003" start="@snBoo" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="4.583333333333334" cz="124.58333333333334" r="1.875" angle="225" extent="90" />
   <Sound sound="3001" start="@gameEnd" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="4.583333333333334" cz="124.58333333333334" r="1.875" angle="225" extent="90" />
-  <set ambient="0.3" light.0.i="0.8" light.0.a="-60" light.0.b="45" light.1.i="0.5" light.1.a="60" light.1.b="-90" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
-  <set wallHeight="3" wallYon="0.01" />
+  <set ambient="0.3" light.0.i="0.8" light.0.a="-60" light.0.b="45" light.1.i="0.5" light.1.a="60" light.1.b="-90" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" wallHeight="3" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="57.083333333333336" z="59.583333333333336" w="2.5" d="30" h="0" y="17" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="3" wallYon="0.01" />
+  <set wallYon="0.01" wallHeight="3" />
   <Wall fill="#ffffff" frame="#000000" x="104.58333333333334" z="59.583333333333336" w="2.5" d="30" h="0" y="17" />
   <set wallYon="defaultYon" />
   <Field shape="3000" y="15" watch="playerMask" enter="@rIncarnSp" fill="#000000" frame="#000000" x="94.58333333333334" z="62.083333333333336" w="5" d="25" h="0" r="1.875" cx="49.65277777777778" cz="74.58333333333334" angle="135" extent="90" />

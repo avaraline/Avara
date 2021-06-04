@@ -6,8 +6,7 @@
   <set information="&quot;Shoot the blocks to clear them out of your way.
     Light & medium hulls have 4x shot power, but have no missiles or grenades; the heavy hull behaves like a standard medium.
     15 minute time limit.
-    WARNING: Complex level. Expect lag.&quot;" TheWall="10" wallHeight="TheWall" gravity="0.75" CPlatThick=".6" eyeHeight="1.23" lower="0" muddle="3" upper="6" ceiling="9" timeLimit="15 * 60" />
-  <set wa="ceiling" />
+    WARNING: Complex level. Expect lag.&quot;" TheWall="10" wallHeight="TheWall" gravity="0.75" CPlatThick=".6" eyeHeight="1.23" lower="0" muddle="3" upper="6" ceiling="9" timeLimit="15 * 60" wa="ceiling" />
   <Wall fill="#ff9999" frame="#000000" x="10" z="19.930555555555557" w="50" d="50" h="0" />
   <Incarnator y="upper" fill="#ffffff" frame="#000000" cx="34.93055555555556" cz="16.180555555555557" r="2.5" angle="315" extent="90" />
   <Wall fill="#444444" frame="#000000" x="38.75" z="18.055555555555557" w="21.25" d="1.875" h="0" />
@@ -376,8 +375,7 @@
   <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" r="1.875" cx="12.5" cz="22.430555555555557" angle="0" extent="90" x="37.5" z="42.43055555555556" w="2.5" d="7.5" h="3" />
   <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" r="1.875" cx="12.5" cz="22.430555555555557" angle="0" extent="90" x="30" z="39.93055555555556" w="2.5" d="7.5" h="3" />
   <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" r="1.875" cx="12.5" cz="22.430555555555557" angle="0" extent="90" x="30" z="47.43055555555556" w="7.5" d="2.5" h="3" />
-  <set wallHeight="TheWall" baseHeight="0" />
-  <set wallHeight="0" />
+  <set wallHeight="0" baseHeight="0" />
   <set wallHeight="10" />
   <unique vars="mReset mGo mStart" />
   <WallDoor deltaY="upper + CPlatThick" open="mGo" close="mReset" didOpen="mReset" openSpeed="3" closeSpeed="100" fill="#ff6600" frame="#000000" r="3.125" cx="35" cz="44.93055555555556" angle="0" extent="90" x="32.5" z="42.43055555555556" w="5" d="5" h="0" />

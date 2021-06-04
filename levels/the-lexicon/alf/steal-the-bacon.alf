@@ -4,8 +4,7 @@
   <Teleporter y="200" shape="0" win="0" start="@endGame" activeRange="2000" fill="#444444" frame="#cc9900" cx="126.14583333333334" cz="26.041666666666668" r="1.1458333333333357" angle="180" extent="90" />
   <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Play for points. 3 minutes. Snag the 
 center A for 1000 points and run for your life.
-Taking the A arms everyone else.&quot;" />
-  <set wallHeight="2" />
+Taking the A arms everyone else.&quot;" wallHeight="2" />
   <Wall fill="#ffcc66" frame="#000000" x="57.43055555555556" z="51.458333333333336" w="5" d="20" h="0" />
   <Wall fill="#ffcc66" frame="#000000" x="72.43055555555556" z="56.458333333333336" w="5" d="15" h="0" />
   <Wall fill="#ffcc66" frame="#000000" x="62.43055555555556" z="51.458333333333336" w="15" d="5" h="0" />
@@ -45,7 +44,8 @@ y = 18
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
+speed = 0
+end</script>
   <Incarnator y="30" fill="#ff0000" frame="#000000" cx="46.18055555555556" cz="61.458333333333336" r="1.25" angle="225" extent="90" />
   <Incarnator y="30" fill="#ff0000" frame="#000000" cx="91.18055555555556" cz="62.083333333333336" r="1.25" angle="45" extent="90" />
   <Incarnator y="30" fill="#ff0000" frame="#000000" cx="69.30555555555556" cz="37.708333333333336" r="1.25" angle="315" extent="90" />
@@ -69,8 +69,7 @@ speed = 0</script>
   <set defaultLives="100" />
   <Timer in="@start" wait="2400" out="@warn" fill="#ffffff" frame="#000000" cx="91.80555555555556" cz="88.33333333333334" r="1.25" angle="90" extent="90" />
   <Text in="@warn" showEveryone="true" text="&quot;Time is almost up.&quot;" fill="#ffffff" frame="#000000" cx="91.80555555555556" cz="88.33333333333334" r="1.25" angle="90" extent="90" />
-  <set maxStartBoosts="1" grenadePower="2.5" missilePower="1.5" missileAcceleration="0.8" missileTurnRate="0.05" />
-  <set wallHeight="8" />
+  <set maxStartBoosts="1" grenadePower="2.5" missilePower="1.5" missileAcceleration="0.8" missileTurnRate="0.05" wallHeight="8" />
   <Wall fill="#ffcc99" frame="#000000" x="22.430555555555557" z="16.458333333333336" w="10" d="35" h="0" />
   <Wall fill="#ffcc99" frame="#000000" x="77.43055555555556" z="16.458333333333336" w="25" d="10" h="0" />
   <Wall fill="#ffcc99" frame="#000000" x="102.43055555555556" z="71.45833333333334" w="10" d="35" h="0" />

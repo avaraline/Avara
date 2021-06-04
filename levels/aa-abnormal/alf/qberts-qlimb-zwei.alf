@@ -1,17 +1,11 @@
 <map>
-  <set designer="&quot;rupture &lt;nirschl@scripps.edu&gt;&quot;" />
-  <set information="&quot;Every trip to the top of the mountain
+  <set designer="&quot;rupture &lt;nirschl@scripps.edu&gt;&quot;" information="&quot;Every trip to the top of the mountain
 awards you a point. The team with the most points
 at the end of the time period wins.
 
-2 teams: Green and Yellow&quot;" />
-  <set timeLimit="300" />
-  <set defaultLives="100" />
-  <set friendlyHitMultiplier="1" />
-  <set killScore="0" hitScore="0" gravity="0.75" missilePower="3" />
+2 teams: Green and Yellow&quot;" timeLimit="300" defaultLives="100" friendlyHitMultiplier="1" killScore="0" hitScore="0" gravity="0.75" missilePower="3" />
   <Incarnator fill="#000000" frame="#000000" cx="35.83333333333333" cz="42.91666666666667" r="3.6111111111111107" angle="154" extent="206" />
-  <Teleporter fill="#000000" frame="#000000" cx="102.77777777777777" cz="28.958333333333336" r="2.9166666666666643" angle="97" extent="263" />
-  <set y="17.5" activeRange="3" group="@mainT" destGroup="@mainT" shape="0" />
+  <Teleporter y="17.5" activeRange="3" group="@mainT" destGroup="@mainT" shape="0" fill="#000000" frame="#000000" cx="102.77777777777777" cz="28.958333333333336" r="2.9166666666666643" angle="97" extent="263" />
   <Incarnator fill="#000000" frame="#000000" cx="35.625" cz="57.29166666666667" r="3.6111111111111107" angle="130" extent="230" />
   <Incarnator fill="#000000" frame="#000000" cx="41.31944444444444" cz="70.48611111111111" r="3.6111111111111107" angle="130" extent="230" />
   <Incarnator fill="#000000" frame="#000000" cx="45.34722222222223" cz="83.47222222222223" r="3.6111111111111107" angle="130" extent="230" />

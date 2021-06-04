@@ -65,8 +65,7 @@
   <set wallHeight="1" />
   <Wall fill="#311d45" frame="#000000" x="84.65277777777779" z="125.90277777777779" w="28.75" d="7.5" h="0" y="7" />
   <Ramp y="0" deltaY="8" fill="#88759b" frame="#000000" x="69.65277777777779" z="125.90277777777779" w="20" d="7.5" h="0" r="1.875" angle="225" extent="90" />
-  <set wallYon=".001" />
-  <set wallHeight="40" />
+  <set wallYon=".001" wallHeight="40" />
   <Wall fill="#444444" frame="#000000" x="59.65277777777778" z="79.65277777777779" w="125" d="5" h="0" />
   <set wallHeight="40" />
   <Wall fill="#444444" frame="#000000" x="59.65277777777778" z="174.65277777777777" w="125" d="5" h="0" />
@@ -74,8 +73,7 @@
   <Wall fill="#444444" frame="#000000" x="59.65277777777778" z="84.65277777777779" w="5" d="90" h="0" />
   <set wallHeight="40" />
   <Wall fill="#444444" frame="#000000" x="179.6527777777778" z="84.65277777777779" w="5" d="90" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="8" />
+  <set wallYon="defaultYon" wallHeight="8" />
   <Wall fill="#311d45" frame="#000000" x="64.65277777777779" z="125.90277777777779" w="5" d="7.5" h="0" />
   <set wallHeight="8" />
   <Wall fill="#311d45" frame="#000000" x="174.65277777777777" z="125.90277777777779" w="5" d="7.5" h="0" />
@@ -127,8 +125,7 @@
   <Wall fill="#311d45" frame="#000000" x="113.40277777777779" z="125.90277777777779" w="1.25" d="7.5" h="0" y="7" />
   <set wallHeight="1" />
   <Wall fill="#311d45" frame="#000000" x="129.65277777777777" z="125.90277777777779" w="1.25" d="7.5" h="0" y="7" />
-  <set wallYon=".01" />
-  <set wallHeight="3.5" />
+  <set wallYon=".01" wallHeight="3.5" />
   <Wall fill="#444444" frame="#000000" x="114.65277777777779" z="124.65277777777779" w="15" d="1.25" h="0" y="4" />
   <set wallHeight="3.5" />
   <Wall fill="#444444" frame="#000000" x="114.65277777777779" z="133.40277777777777" w="15" d="1.25" h="0" y="4" />
@@ -147,8 +144,7 @@
   <Incarnator y="7" fill="#eddbff" frame="#000000" cx="122.22222222222223" cz="89.65277777777779" r="1.875" angle="315" extent="90" />
   <Incarnator y="7" fill="#eddbff" frame="#000000" cx="122.22222222222223" cz="169.65277777777777" r="1.875" angle="135" extent="90" />
   <Teleporter y="200" shape="0" win="1000" start="@winTeam" activeRange="2000" fill="#eddbff" frame="#000000" cx="122.15277777777779" cz="129.65277777777777" r="1.875" angle="180" extent="90" />
-  <set wallYon="defaultYon" />
-  <set wallHeight=".3" />
+  <set wallYon="defaultYon" wallHeight=".3" />
   <WallDoor midYaw="45" fill="#eddbff" frame="#000000" x="118.40277777777779" z="100.90277777777779" w="7.5" d="7.5" h="0" r="1.875" cx="122.15277777777779" cz="129.65277777777777" angle="180" extent="90" />
   <set wallHeight=".3" />
   <WallDoor midYaw="45" fill="#eddbff" frame="#000000" x="118.40277777777779" z="150.90277777777777" w="7.5" d="7.5" h="0" r="1.875" cx="122.15277777777779" cz="129.65277777777777" angle="180" extent="90" />

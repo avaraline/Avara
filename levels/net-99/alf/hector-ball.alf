@@ -5,8 +5,7 @@
 From:  Me
 Contents:  One HECTOR Model Timed Grenade
 
-Red vs. Green —— 6 minutes&quot;" defaultLives="99" />
-  <set baseHeight="100" wallHeight=".2" />
+Red vs. Green —— 6 minutes&quot;" defaultLives="99" baseHeight="100" wallHeight=".2" />
   <Distributor in="@openClose" out.0="@dda" out.1="@ddb" out.2="@ddc" out.3="@ddd" out.4="@dde" restart="true" fill="#eeeeee" frame="#eeeeee" cx="6.875" cz="3.75" r="1.875" angle="180" extent="90" />
   <Timer in.0="@start" in.1="@openClose" wait="3" out="@openClose" fill="#eeeeee" frame="#eeeeee" cx="6.875" cz="3.75" r="1.875" angle="180" extent="90" />
   <Wall fill="#000000" frame="#000000" x="35.625" z="12.5" w="21.25" d="23.125" h="0" />

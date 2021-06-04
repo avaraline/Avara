@@ -48,10 +48,8 @@
   <GroundColor fill="#000000" frame="#000000" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#000000" frame="#000000" cx="4.305555555555555" cz="1.8055555555555558" r="3.75" angle="90" extent="180" />
   <SkyColor n="15" fill="#000e28" frame="#bdbdbd" />
-  <set ambient="0.4" light.0.i="0.6" light.0.a="45" light.0.b="20" light.1.i="0.4" light.1.a="20" light.1.b="200" light.2.i="0.1" light.2.a="0" light.2.b="0" />
-  <set designer="&quot;S. Carmel&quot;" information="&quot;reciprocity:
-brain chemisty fluxuations reduce my doctored brain to hopeless mush on a lab table.&quot;" />
-  <set wallHeight=".25" />
+  <set ambient="0.4" light.0.i="0.6" light.0.a="45" light.0.b="20" light.1.i="0.4" light.1.a="20" light.1.b="200" light.2.i="0.1" light.2.a="0" light.2.b="0" designer="&quot;S. Carmel&quot;" information="&quot;reciprocity:
+brain chemisty fluxuations reduce my doctored brain to hopeless mush on a lab table.&quot;" wallHeight=".25" />
   <Wall fill="#f3f3f3" frame="#000000" x="38.611111111111114" z="28.61111111111111" w="30" d="5" h="0" y="4.75" />
   <set wallHeight=".25" />
   <Wall fill="#f3f3f3" frame="#000000" x="33.611111111111114" z="33.611111111111114" w="5" d="30" h="0" y="4.75" />
@@ -178,9 +176,7 @@ brain chemisty fluxuations reduce my doctored brain to hopeless mush on a lab ta
   <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="86.11111111111111" cz="91.11111111111111" r="1.25" angle="180" extent="90" />
   <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="86.11111111111111" cz="91.11111111111111" r="1.25" angle="180" extent="90" />
   <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="86.11111111111111" cz="91.11111111111111" r="1.25" angle="180" extent="90" />
-  <set maxStartGrenades="12" />
-  <set maxStartMissiles="0" />
-  <set wallHeight="1.5" />
+  <set maxStartGrenades="12" maxStartMissiles="0" wallHeight="1.5" />
   <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" r="1.25" cx="86.11111111111111" cz="91.11111111111111" angle="180" extent="90" x="93.61111111111111" z="96.11111111111111" w="20" d="5" h="0" />
   <set wallHeight="1.5" />
   <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" r="1.25" cx="86.11111111111111" cz="91.11111111111111" angle="180" extent="90" x="43.611111111111114" z="46.111111111111114" w="20" d="5" h="0" />

@@ -64,16 +64,13 @@ Energizer, it keeps going, and going, and....&quot;" />
   <Ramp y="4" deltaY="4" thickness="0" fill="#bbbbbb" frame="#000000" x="47.77777777777778" z="24.23611111111111" w="12.5" d="5" h="0" r="2.5" angle="0" extent="180" />
   <Ramp y="4" deltaY="4" thickness="0" fill="#bbbbbb" frame="#000000" x="47.77777777777778" z="79.23611111111111" w="12.5" d="5" h="0" r="2.5" angle="0" extent="180" />
   <Ramp y="4" deltaY="4" thickness="0" fill="#bbbbbb" frame="#000000" x="65.27777777777779" z="79.23611111111111" w="12.5" d="5" h="0" r="2.5" angle="180" extent="180" />
-  <set wallHeight="8" />
-  <set wallHeight="3" />
-  <set baseHeight="13" />
+  <set wallHeight="3" baseHeight="13" />
   <Wall fill="#777777" frame="#000000" x="50.27777777777778" z="36.736111111111114" w="2.5" d="2.5" h="0" />
   <Wall fill="#777777" frame="#000000" x="72.77777777777779" z="36.736111111111114" w="2.5" d="2.5" h="0" />
   <Wall fill="#777777" frame="#000000" x="72.77777777777779" z="66.73611111111111" w="2.5" d="2.5" h="0" />
   <Wall fill="#777777" frame="#000000" x="50.27777777777778" z="66.73611111111111" w="2.5" d="2.5" h="0" />
   <Solid shape="1457" y="0" scale="2.5" roll="180" fill="#777777" frame="#0000dd" cx="51.52777777777778" cz="67.98611111111111" r="2.5" angle="0" extent="180" />
-  <set baseHeight="8" />
-  <set wallHeight="0" />
+  <set baseHeight="8" wallHeight="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="60.27777777777778" z="24.23611111111111" w="5" d="30" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="60.27777777777778" z="54.236111111111114" w="5" d="30" h="0" />
   <set baseHeight="8" />
@@ -118,8 +115,7 @@ Energizer, it keeps going, and going, and....&quot;" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="4.375" cz="17.15277777777778" r="1.25" angle="0" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="4.375" cz="17.15277777777778" r="1.25" angle="0" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="4.375" cz="17.15277777777778" r="1.25" angle="0" extent="90" />
-  <set baseHeight="6" />
-  <set wallHeight="4" />
+  <set baseHeight="6" wallHeight="4" />
   <WallDoor deltaY="0" deltaX="0" deltaZ="-100" open="@openSide1" close="@closeSide1" closeDelay="0" openSpeed="3" closeSpeed="100" shotPower="0" openSound="snBallBuzz" closeSound="0" stopSound="0" volume="5" fill="#0000dd" frame="#000000" x="42.77777777777778" z="96.52777777777779" w="0" d="0.48611111111111427" h="0" r="1.25" cx="4.375" cz="17.15277777777778" angle="0" extent="90" />
   <WallDoor deltaY="0" deltaX="0" deltaZ="-100" open="@openSide1" close="@closeSide1" closeDelay="0" openSpeed="3" closeSpeed="100" shotPower="0" openSound="0" closeSound="0" stopSound="0" fill="#0066ff" frame="#000000" x="42.77777777777778" z="97.0138888888889" w="0" d="0.48611111111110006" h="0" r="1.25" cx="4.375" cz="17.15277777777778" angle="0" extent="90" />
   <WallDoor deltaY="0" deltaX="0" deltaZ="-100" open="@openSide1" close="@closeSide1" closeDelay="0" openSpeed="3" closeSpeed="100" shotPower="0" openSound="0" closeSound="0" stopSound="0" fill="#0066ff" frame="#000000" x="42.77777777777778" z="96.04166666666667" w="0" d="0.48611111111111427" h="0" r="1.25" cx="4.375" cz="17.15277777777778" angle="0" extent="90" />

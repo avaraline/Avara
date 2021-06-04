@@ -5,8 +5,9 @@
 prototype device that allows them to see through 
 small, basic structures. The enemy HECTORs have also 
 discovered this technology, so remember to keep 
-running, because you can’t hide.&quot;" />
-  <set wallHeight="0.6" />
+running, because you can’t hide.
+
+wallHeight = 0.6&quot;" />
   <Wall fill="#006666" frame="#000000" x="21.875" z="68.33333333333334" w="8.75" d="0.625" h="0" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="30" z="60.833333333333336" w="0.625" d="7.5" h="0" />
@@ -22,27 +23,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="30" z="60.208333333333336" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="30" z="68.33333333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="30" z="60.833333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="21.875" z="60.833333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="30" z="60.833333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="22.5" z="60.208333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="22.5" z="68.33333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="21.875" z="60.208333333333336" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="21.875" z="68.33333333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -66,27 +57,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="94.375" z="50.833333333333336" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="94.375" z="58.958333333333336" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="94.375" z="51.458333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="86.25" z="51.458333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="94.375" z="51.458333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="50.833333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="58.958333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="86.25" z="50.833333333333336" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="86.25" z="58.958333333333336" w="8.75" d="0.625" h="0" y="6.6" />
@@ -110,27 +91,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="63.125" z="33.333333333333336" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="63.125" z="41.458333333333336" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="63.125" z="33.958333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="55" z="33.958333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="63.125" z="33.958333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="55.625" z="33.333333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="55.625" z="41.458333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="55" z="33.333333333333336" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="55" z="41.458333333333336" w="8.75" d="0.625" h="0" y="6.6" />
@@ -154,27 +125,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="46.875" z="77.70833333333334" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="46.875" z="85.83333333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="46.875" z="78.33333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="38.75" z="78.33333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="46.875" z="78.33333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="77.70833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="85.83333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="38.75" z="77.70833333333334" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="38.75" z="85.83333333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -198,27 +159,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="92.70833333333334" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="100.83333333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="93.33333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="78.75" z="93.33333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="93.33333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="79.375" z="92.70833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="79.375" z="100.83333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="78.75" z="92.70833333333334" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="78.75" z="100.83333333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -242,27 +193,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="42.708333333333336" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="50.833333333333336" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="43.333333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="31.25" z="43.333333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="43.333333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="31.875" z="42.708333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="31.875" z="50.833333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="31.25" z="42.708333333333336" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="31.25" z="50.833333333333336" w="8.75" d="0.625" h="0" y="6.6" />
@@ -286,27 +227,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="71.875" z="108.95833333333334" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="71.875" z="117.08333333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="71.875" z="109.58333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="63.75" z="109.58333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="71.875" z="109.58333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="108.95833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="117.08333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="63.75" z="108.95833333333334" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="63.75" z="117.08333333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -330,27 +261,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="90.20833333333334" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="98.33333333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="90.83333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="56.25" z="90.83333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="90.83333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="56.875" z="90.20833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="56.875" z="98.33333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="56.25" z="90.20833333333334" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="56.25" z="98.33333333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -374,27 +295,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="53.125" z="59.583333333333336" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="53.125" z="67.70833333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="53.125" z="60.208333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="45" z="60.208333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="53.125" z="60.208333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="45.625" z="59.583333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="45.625" z="67.70833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="45" z="59.583333333333336" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="45" z="67.70833333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -418,27 +329,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="72.5" z="70.20833333333334" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="72.5" z="78.33333333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="72.5" z="70.83333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="70.83333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="72.5" z="70.83333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="65" z="70.20833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="65" z="78.33333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="70.20833333333334" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="78.33333333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -462,27 +363,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="98.33333333333334" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="106.45833333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="98.95833333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="31.25" z="98.95833333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="98.95833333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="31.875" z="98.33333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="31.875" z="106.45833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="31.25" z="98.33333333333334" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="31.25" z="106.45833333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -506,27 +397,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="24.375" z="81.45833333333334" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="24.375" z="89.58333333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="24.375" z="82.08333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="16.25" z="82.08333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="24.375" z="82.08333333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="16.875" z="81.45833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="16.875" z="89.58333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="16.25" z="81.45833333333334" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="16.25" z="89.58333333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -536,8 +417,7 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="24.375" z="82.08333333333334" w="0.625" d="7.5" h="0" y="6.6" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="72.70833333333334" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="65" z="56.458333333333336" w="8.75" d="0.625" h="0" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="73.125" z="48.958333333333336" w="0.625" d="7.5" h="0" />
@@ -553,27 +433,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="73.125" z="48.333333333333336" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="73.125" z="56.458333333333336" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="73.125" z="48.958333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="65" z="48.958333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="73.125" z="48.958333333333336" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="65.625" z="48.333333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="65.625" z="56.458333333333336" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="65" z="48.333333333333336" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="65" z="56.458333333333336" w="8.75" d="0.625" h="0" y="6.6" />
@@ -597,27 +467,17 @@ running, because you can’t hide.&quot;" />
   <Wall fill="#006666" frame="#000000" x="94.375" z="72.08333333333334" w="0.625" d="0.625" h="0" y="0.6" />
   <set wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="94.375" z="80.20833333333334" w="0.625" d="0.625" h="0" y="0.6" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallHeight="6" wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="94.375" z="72.70833333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="86.25" z="72.70833333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="94.375" z="72.70833333333334" w="0.625" d="7.5" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="72.08333333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="6" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="80.20833333333334" w="7.5" d="0.625" h="0" y="0.6" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.6" />
+  <set wallYon="defaultYon" wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="86.25" z="72.08333333333334" w="8.75" d="0.625" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="86.25" z="80.20833333333334" w="8.75" d="0.625" h="0" y="6.6" />
@@ -649,40 +509,28 @@ running, because you can’t hide.&quot;" />
   <Goody shape="bspGrenade" y="2" yon="300" speed="10" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="80" cz="64.86111111111111" r="1.875" angle="0" extent="90" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="79.375" z="93.33333333333334" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="64.375" z="109.58333333333334" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="65.625" z="48.958333333333336" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="65" z="70.83333333333334" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="56.875" z="90.83333333333334" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="55.625" z="33.958333333333336" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="45.625" z="60.208333333333336" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="39.375" z="78.33333333333334" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="31.875" z="43.333333333333336" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="31.875" z="98.95833333333334" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="22.5" z="60.833333333333336" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="16.875" z="82.08333333333334" w="7.5" d="7.5" h="0" y="6.6" />
-  <set wallYon="defaultYon" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="86.875" z="51.458333333333336" w="7.5" d="7.5" h="0" y="6.6" />
   <set wallYon="defaultYon" />

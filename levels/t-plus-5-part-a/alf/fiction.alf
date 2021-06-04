@@ -1,16 +1,48 @@
 <map>
   <SkyColor verticalRangeMax="5000" verticalRangeMin="0" n="8" fill="#fcff26" frame="#ffd100" />
-  <GroundColor fill="#612b3d" frame="#000000" />
-  <set designer="&quot;Parexis&quot;" />
-  <set information="&quot;The large pillars near the center are destroyable.&quot;" />
-  <set ambient=".3" light.0.i="6" light.0.a="0" light.0.b="10" light.1.i=".8" light.1.a="20" light.1.b="190" light.2.i=".4" light.2.a="-90" light.2.b="0" defaultLives="3" allHulls="lightHull" />
-  <set hull.3="allHulls" hull.4="allHulls" hull.5="allHulls" hull.6="allHulls" hull.7="allHulls" hull.8="allHulls" hull.9="allHulls" />
-  <set mTract="defaultTraction" mFrict="defaultFriction" wallTraction="mTract" wallFriction="mFrict" />
   <script>
+adjust GroundColor
+end
+
+designer=&quot;Parexis&quot;
+
+information=&quot;The large pillars near the center are destroyable.&quot;
+
+ambient = .3
+light[0].i=6
+light[0].a=0
+light[0].b=10
+light[1].i=.8
+light[1].a=20
+light[1].b=190
+light[2].i=.4
+light[2].a=-90
+light[2].b=0
+defaultLives=3
+allHulls=lightHull
+//hull[0]=allHulls
+//hull[1]=allHulls
+//hull[2]=allHulls
+hull[3]=allHulls
+hull[4]=allHulls
+hull[5]=allHulls
+hull[6]=allHulls
+hull[7]=allHulls
+hull[8]=allHulls
+hull[9]=allHulls
+//missileAcceleration=.4
+//missileTurnRate=.09
+//grenadePower=2
+mTract=defaultTraction
+mFrict=defaultFriction
+wallTraction=mTract
+wallFriction=mFrict
+
 started  8-6-00
 v1.0   8-6-00
-© Gus Wiseman 20</script>
-  <set wallHeight="2" />
+© Gus Wiseman 2000.
+
+wallHeight=2</script>
   <Wall fill="#e69900" frame="#000000" x="65.20833333333334" z="51.18055555555556" w="10" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#e69900" frame="#000000" x="65.20833333333334" z="11.180555555555555" w="10" d="20" h="0" y="8" />
@@ -32,8 +64,6 @@ v1.0   8-6-00
   <Wall fill="#e69900" frame="#000000" x="35.208333333333336" z="31.180555555555557" w="10" d="10" h="0" />
   <set wallHeight="2" />
   <Wall fill="#e69900" frame="#000000" x="85.20833333333334" z="1.1805555555555556" w="10" d="20" h="0" />
-  <set wallHeight="0" />
-  <set wallHeight="0" />
   <set wallHeight="2" />
   <Wall fill="#ffc44c" frame="#000000" x="35.208333333333336" z="41.18055555555556" w="30" d="5" h="0" y="4" />
   <set wallHeight="4" />
@@ -108,8 +138,7 @@ v1.0   8-6-00
   <WallSolid canGlow="true" shield="pillar" fill="#e69900" frame="#000000" x="70.20833333333334" z="31.180555555555557" w="5" d="5" h="0" r="1.25" cx="85.20833333333334" cz="46.18055555555556" angle="270" extent="90" />
   <WallSolid canGlow="true" shield="pillar" fill="#e69900" frame="#000000" x="65.20833333333334" z="36.18055555555556" w="5" d="5" h="0" r="1.25" cx="85.20833333333334" cz="46.18055555555556" angle="270" extent="90" />
   <WallSolid canGlow="true" shield="pillar" fill="#e69900" frame="#000000" x="70.20833333333334" z="36.18055555555556" w="5" d="5" h="0" r="1.25" cx="85.20833333333334" cz="46.18055555555556" angle="270" extent="90" />
-  <set baseHeight="0" />
-  <set wallHeight="2" />
+  <set baseHeight="0" wallHeight="2" />
   <Wall fill="#e69900" frame="#000000" x="95.20833333333334" z="31.180555555555557" w="10" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#e69900" frame="#000000" x="95.20833333333334" z="61.18055555555556" w="10" d="20" h="0" y="8" />
@@ -125,8 +154,6 @@ v1.0   8-6-00
   <Wall fill="#e69900" frame="#000000" x="125.20833333333334" z="51.18055555555556" w="10" d="10" h="0" />
   <set wallHeight="2" />
   <Wall fill="#e69900" frame="#000000" x="75.20833333333334" z="71.18055555555556" w="10" d="20" h="0" />
-  <set wallHeight="0" />
-  <set wallHeight="0" />
   <set wallHeight="2" />
   <Wall fill="#ffc44c" frame="#000000" x="105.20833333333334" z="46.18055555555556" w="30" d="5" h="0" y="4" />
   <set wallHeight="4" />
@@ -220,8 +247,7 @@ v1.0   8-6-00
   <Wall fill="#e69900" frame="#000000" x="105.20833333333334" z="80.55555555555556" w="1.875" d="0.625" h="0" />
   <set wallHeight="0" />
   <Wall fill="#996600" frame="#000000" x="105.20833333333334" z="72.43055555555556" w="10" d="7.5" h="0" />
-  <set wallHeight="4" />
-  <set baseHeight="4" />
+  <set wallHeight="4" baseHeight="4" />
   <Wall fill="#e69900" frame="#000000" x="63.333333333333336" z="11.180555555555555" w="1.875" d="0.625" h="0" />
   <Wall fill="#e69900" frame="#000000" x="60.833333333333336" z="11.180555555555555" w="1.25" d="0.625" h="0" />
   <Wall fill="#e69900" frame="#000000" x="58.333333333333336" z="11.180555555555555" w="1.25" d="0.625" h="0" />

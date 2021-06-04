@@ -213,6 +213,5 @@
   <Teleporter spin="0" y="-10" activeRange="25 * 5" deadRange="23 * 5" sound="0" shape="0" destGroup="@recenter" group="-1" fill="#00cc99" frame="#000000" cx="147.36111111111111" cz="79.79166666666667" r="1.875" angle="180" extent="90" />
   <Teleporter shape="0" spin="0" y="50" group="@recenter" destGroup="-1" fill="#00cc99" frame="#000000" cx="147.36111111111111" cz="79.79166666666667" r="1.875" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#00cc99" frame="#000000" cx="147.36111111111111" cz="79.79166666666667" r="1.875" angle="180" extent="90" />
-  <set incarnateSound="snRamp" incarnateVolume="3000" />
-  <set loseSound="106" loseVolume="99999999999" blastSoundDefault="106" blastDefaultVolume="9999999999" winSound="107" winVolume="2000" />
+  <set incarnateSound="snRamp" incarnateVolume="3000" loseSound="106" loseVolume="99999999999" blastSoundDefault="106" blastDefaultVolume="9999999999" winSound="107" winVolume="2000" />
 </map>

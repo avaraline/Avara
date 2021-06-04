@@ -1,11 +1,9 @@
 <map>
   <set wallHeight="2.0" />
-  <set wallHeight="2.0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="61.90972222222223" cz="100.17361111111111" r="1.8402777777777786" angle="135" extent="90" />
   <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="61.90972222222223" cz="100.17361111111111" r="1.8402777777777786" angle="135" extent="90" />
   <Goody y="1.7" speed="2" shape="bspGoody" boosters="1" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="61.90972222222223" cz="100.17361111111111" r="1.8402777777777786" angle="135" extent="90" />
-  <set wallHeight="2.0" />
   <set wallHeight="2.0" />
   <Wall fill="#eeeeee" frame="#000000" x="45" z="52.708333333333336" w="5.555555555555557" d="16.80555555555555" h="0" />
   <set designer="&quot;Pimpbot 5000 -  John Kyle  
@@ -82,11 +80,8 @@
   <set wallHeight="2.0" />
   <Wall fill="#eeeeee" frame="#000000" x="79.375" z="88.95833333333334" w="18.75" d="3.75" h="0" />
   <set wallHeight="2.0" />
-  <set wallHeight="2.0" />
-  <set wallHeight="2.0" />
   <Wall fill="#eeeeee" frame="#000000" x="58.75" z="45.208333333333336" w="4.375" d="24.375" h="0" />
   <Wall fill="#eeeeee" frame="#000000" x="58.75" z="42.083333333333336" w="24.375" d="3.125" h="0" />
-  <set wallHeight="2.0" />
   <set wallHeight="2.0" />
   <Wall fill="#eeeeee" frame="#000000" x="78.75" z="45.208333333333336" w="4.375" d="24.375" h="0" />
   <Wall fill="#eeeeee" frame="#000000" x="68.75" z="45.208333333333336" w="4.375" d="24.375" h="0" />

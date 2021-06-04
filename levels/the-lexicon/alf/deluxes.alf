@@ -2,8 +2,7 @@
   <GroundColor fill="#ffffff" frame="#ffffff" />
   <SkyColor verticalRangeMax="10000" n="200" fill="#ffffff" frame="#004992" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#444444" frame="#cc9900" cx="11.145833333333334" cz="14.722222222222223" r="1.145833333333334" angle="180" extent="90" />
-  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Ha ha! &quot;&quot;Deluxes&quot;&quot; for 87 points! I win!&quot;" />
-  <set wallHeight="0" wallYon="0.001" />
+  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Ha ha! &quot;&quot;Deluxes&quot;&quot; for 87 points! I win!&quot;" wallHeight="0" wallYon="0.001" />
   <Wall fill="#ffffff" frame="#000000" x="42.43055555555556" z="28.88888888888889" w="30" d="30" h="0" y="100" />
   <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="58.88888888888889" w="30" d="30" h="0" y="100" />
   <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="43.88888888888889" w="14.375" d="15" h="0" y="100" />
@@ -115,10 +114,18 @@ y = 118
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
-  <set wallHeight="1.62" />
-  <set wallHeight="0.25" />
-  <Wall fill="#004992" frame="#000000" x="28.055555555555557" z="28.88888888888889" w="0" d="15" h="0" y="104.5" />
+speed = 0
+end
+
+wallHeight = 1.62
+/* edging */
+
+wallHeight = 0.25
+/* wall trim */
+
+wa = 104.5
+/* trim */</script>
+  <Wall fill="#004992" frame="#000000" x="28.055555555555557" z="28.88888888888889" w="0" d="15" h="0" />
   <Wall fill="#004992" frame="#000000" x="88.05555555555556" z="103.8888888888889" w="14.375" d="0" h="0" y="104.5" />
   <Wall fill="#004992" frame="#000000" x="42.43055555555556" z="13.88888888888889" w="14.375" d="0" h="0" y="104.5" />
   <Incarnator y="130" fill="#ff0000" frame="#000000" cx="46.18055555555556" cz="55.13888888888889" r="1.25" angle="225" extent="90" />

@@ -4,8 +4,7 @@ Shields and energy don’t recharge automatically; grab mushrooms and shots to c
 Missile ammo is present but hidden.&quot;" />
   <SkyColor fill="#663300" frame="#440000" />
   <GroundColor fill="#444444" frame="#440000" />
-  <set pitCeilingY="3" floor1Y="6" floor1CeilingY="floor1Y + 5" floor2Y="floor1CeilingY + 1" floor2CeilingY="floor2Y + 5" groundStepSound="snStepObject" missileAcceleration="0.05" missileTurnRate="100" missilePower="10" grenadePower="1" defaultLives="6" hull.0="hullRoom" hull.1="hullRoom" hull.2="hullRoom" gEnergy="35" gGrenades="15" gMissiles="1" MM=".35" yonPlat="50" yonDecor="25" />
-  <set wallHeight="5" baseHeight="floor2CeilingY" />
+  <set pitCeilingY="3" floor1Y="6" floor1CeilingY="floor1Y + 5" floor2Y="floor1CeilingY + 1" floor2CeilingY="floor2Y + 5" groundStepSound="snStepObject" missileAcceleration="0.05" missileTurnRate="100" missilePower="10" grenadePower="1" defaultLives="6" hull.0="hullRoom" hull.1="hullRoom" hull.2="hullRoom" gEnergy="35" gGrenades="15" gMissiles="1" MM=".35" yonPlat="50" yonDecor="25" wallHeight="5" baseHeight="floor2CeilingY" />
   <Wall fill="#444444" frame="#000000" x="36.18055555555556" z="26.458333333333336" w="61.25" d="61.25" h="0" />
   <set stepSound="snStepGround" hxitSoundDefault="snHit1" baseHeight="floor1Y" wallHeight="0" />
   <Wall fill="#777777" frame="#000000" x="49.30555555555556" z="39.583333333333336" w="35" d="15" h="0" />
@@ -102,8 +101,7 @@ Missile ammo is present but hidden.&quot;" />
   <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ffff33" frame="#ff0000" cx="83.05555555555556" cz="40.833333333333336" r="1.25" angle="180" extent="270" />
   <And in="@start" out="mShow" fill="#ffff33" frame="#ff0000" cx="83.05555555555556" cz="40.833333333333336" r="1.25" angle="180" extent="270" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" fill="#ffff33" frame="#ff0000" cx="83.05555555555556" cz="40.833333333333336" r="1.25" angle="180" extent="270" />
-  <set baseHeight="floor1Y + .1" wallHeight=".25" wallYon="yonPlat" PlatUpSpd="2" PlatDownSpd="3" PlatDelta="floor2Y -baseHeight -wallHeight" field2wa="-baseHeight + floor2Y" />
-  <set stepSound="snStepMetal" />
+  <set baseHeight="floor1Y + .1" wallHeight=".25" wallYon="yonPlat" PlatUpSpd="2" PlatDownSpd="3" PlatDelta="floor2Y -baseHeight -wallHeight" field2wa="-baseHeight + floor2Y" stepSound="snStepMetal" />
   <unique vars="mOpen mClose mStep" />
   <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#440000" frame="#000000" x="36.80555555555556" z="27.083333333333336" w="5" d="5" h="0" r="1.25" cx="83.05555555555556" cz="40.833333333333336" angle="180" extent="270" />
   <And in="mStep" out.0="mOpen" out.1="mClose" fill="#440000" frame="#000000" cx="83.05555555555556" cz="40.833333333333336" r="1.25" angle="180" extent="270" />

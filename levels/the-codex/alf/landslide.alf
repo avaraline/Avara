@@ -1,8 +1,7 @@
 <map>
   <SkyColor verticalRangeMax="500" n="12" fill="#9f886c" frame="#dfcab8" />
   <GroundColor fill="#9f886c" frame="#9f886c" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;There goes the rock face.&quot;" />
-  <set wallHeight="3" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;There goes the rock face.&quot;" wallHeight="3" />
   <Wall fill="#c298a4" frame="#000000" x="69.58333333333334" z="64.58333333333334" w="20" d="20" h="0" />
   <set wallHeight="9" />
   <Wall fill="#996678" frame="#000000" x="39.583333333333336" z="54.583333333333336" w="10" d="40" h="0" />
@@ -16,7 +15,6 @@
   <Ramp y="5" deltaY="1" thickness="0" fill="#ead5c5" frame="#ffe2cc" x="49.583333333333336" z="39.583333333333336" w="5" d="25" h="0" r="0.625" angle="180" extent="180" />
   <Ramp y="5" deltaY="1" thickness="0" fill="#ead5c5" frame="#ffe2cc" x="49.583333333333336" z="84.58333333333334" w="5" d="25" h="0" r="0.625" angle="180" extent="180" />
   <Ramp y="8" deltaY="4" thickness="0" fill="#ead5c5" frame="#ffe2cc" x="19.583333333333336" z="64.58333333333334" w="20" d="20" h="0" r="0.625" angle="180" extent="180" />
-  <set wallHeight="8" />
   <set wallHeight="12" />
   <Ramp y="6" deltaY="4" thickness="0" fill="#ead5c5" frame="#ffe2cc" x="29.583333333333336" z="94.58333333333334" w="20" d="15" h="0" r="0.625" angle="180" extent="180" />
   <Ramp y="2" deltaY="4" thickness="0" fill="#ead5c5" frame="#ffe2cc" x="49.583333333333336" z="63.958333333333336" w="20" d="21.25" h="0" r="0.625" angle="180" extent="180" />
@@ -80,8 +78,7 @@
   <Ramp y="2" deltaY="4" thickness="0" fill="#dfcab8" frame="#ffe2cc" x="89.58333333333334" z="63.958333333333336" w="20" d="21.25" h="0" r="0.625" angle="0" extent="180" />
   <set wallHeight="0.5" />
   <Wall fill="#b88c99" frame="#000000" x="64.58333333333334" z="99.58333333333334" w="30" d="10" h="0" y="11.5" />
-  <set wallYon="0.01" />
-  <set wallHeight="100" />
+  <set wallYon="0.01" wallHeight="100" />
   <Wall fill="#ffffff" frame="#000000" x="17.083333333333336" z="17.083333333333336" w="2.5" d="115" h="0" />
   <set wallHeight="100" />
   <Wall fill="#ffffff" frame="#000000" x="139.58333333333334" z="17.083333333333336" w="2.5" d="115" h="0" />

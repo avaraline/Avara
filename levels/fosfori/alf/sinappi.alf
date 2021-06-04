@@ -236,8 +236,7 @@
   <set wallHeight="0" />
   <Wall fill="#434d11" frame="#000000" x="61.52777777777778" z="72.77777777777779" w="11.25" d="1.875" h="0" y="2" />
   <Teleporter y="200" activeRange="2000" shape="0" win="1000" start="@winTeam" fill="#fbffea" frame="#000000" cx="67.15277777777779" cz="67.15277777777779" r="1.875" angle="180" extent="90" />
-  <set information="rSinappi" />
-  <set wallHeight="10" />
+  <set information="rSinappi" wallHeight="10" />
   <Wall fill="#81885a" frame="#000000" x="24.65277777777778" z="24.65277777777778" w="20" d="20" h="0" />
   <set wallHeight="2" />
   <Wall fill="#5c652e" frame="#000000" x="24.65277777777778" z="24.65277777777778" w="10" d="10" h="0" y="10" />
@@ -301,7 +300,6 @@
   <Incarnator y="12" mask="T3" fill="#fbffea" frame="#000000" cx="107.15277777777779" cz="100.90277777777779" r="1.875" angle="90" extent="90" />
   <Walker y="12" team="3" defaultLives="100" fill="#fbffea" frame="#000000" cx="104.02777777777779" cz="104.02777777777779" r="1.875" angle="90" extent="90" />
   <Incarnator y="12" mask="T3" fill="#fbffea" frame="#000000" cx="104.02777777777779" cz="104.02777777777779" r="1.875" angle="90" extent="90" />
-  <set wallHeight="10" />
   <set wallHeight="10" />
   <Walker y="12" team="1" defaultLives="100" fill="#fbffea" frame="#000000" cx="33.40277777777778" cz="33.40277777777778" r="1.875" angle="270" extent="90" />
   <Incarnator y="12" mask="T1" fill="#fbffea" frame="#000000" cx="33.40277777777778" cz="33.40277777777778" r="1.875" angle="270" extent="90" />

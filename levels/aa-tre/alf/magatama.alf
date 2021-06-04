@@ -15,9 +15,14 @@
   <Wall fill="#1b3738" frame="#000000" x="125.55555555555556" z="105.83333333333334" w="1.25" d="11.875" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#1b3738" frame="#000000" x="125.55555555555556" z="117.70833333333334" w="10" d="13.125" h="0" />
-  <Ramp y="0" deltaY="3.5" thickness="0" fill="#ccc893" frame="#000000" x="135.55555555555557" z="117.70833333333334" w="11.875" d="8.75" h="0" r="7.5" angle="265" extent="10" />
   <script>
-wallHeight</script>
+object Ramp
+y = 0
+deltaY = 3.5
+thickness = 0
+end
+
+wallHeight =</script>
   <Wall fill="#1b3738" frame="#000000" x="135.55555555555557" z="126.45833333333334" w="11.875" d="1.25" h="0" />
   <Ramp y="0" deltaY="3.5" thickness="0" fill="#ccc893" frame="#000000" x="147.43055555555557" z="105.83333333333334" w="8.75" d="11.875" h="0" r="7.5" angle="355" extent="10" />
   <set wallHeight="3.5" />
@@ -40,7 +45,6 @@ wallHeight</script>
   <Ramp y="0" deltaY="3.5" thickness="0" fill="#ccc893" frame="#000000" x="193.05555555555557" z="151.45833333333334" w="8.75" d="11.875" h="0" r="7.5" angle="355" extent="10" />
   <set wallHeight="3.5" />
   <Wall fill="#1b3738" frame="#000000" x="201.80555555555557" z="151.45833333333334" w="1.25" d="11.875" h="0" />
-  <set wallHeight=".001" />
   <set wallHeight="1.5" />
   <Wall fill="#324a44" frame="#000000" x="135.55555555555557" z="127.70833333333334" w="11.875" d="5" h="0" />
   <set wallHeight="1.5" />
@@ -55,8 +59,7 @@ wallHeight</script>
   <Wall fill="#959a76" frame="#000000" x="179.30555555555557" z="87.08333333333334" w="25" d="5.625" h="0" />
   <set wallHeight="1.5" />
   <Wall fill="#1b3738" frame="#000000" x="188.05555555555557" z="92.70833333333334" w="10" d="10" h="0" />
-  <set light.0.i="0.5" light.0.a="43" light.0.b="18" light.1.i="0.3" light.1.a="18" light.1.b="190" light.2.i="0.0" light.2.a="0" light.2.b="0" />
-  <set wallHeight="4" />
+  <set light.0.i="0.5" light.0.a="43" light.0.b="18" light.1.i="0.3" light.1.a="18" light.1.b="190" light.2.i="0.0" light.2.a="0" light.2.b="0" wallHeight="4" />
   <Wall fill="#566756" frame="#000000" x="179.30555555555557" z="69.58333333333334" w="25" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#566756" frame="#000000" x="204.30555555555557" z="69.58333333333334" w="17.5" d="17.5" h="0" />
@@ -106,7 +109,7 @@ wallHeight</script>
   <set wallHeight="4" />
   <Wall fill="#566756" frame="#000000" x="107.43055555555556" z="68.95833333333334" w="11.875" d="11.875" h="0" />
   <script>
-wallHeight</script>
+wallHeight =</script>
   <Wall fill="#566756" frame="#000000" x="107.43055555555556" z="80.83333333333334" w="1.25" d="12.5" h="0" />
   <set wallHeight="4" />
   <Wall fill="#566756" frame="#000000" x="116.18055555555556" z="80.83333333333334" w="1.25" d="12.5" h="0" />
@@ -129,7 +132,7 @@ wallHeight</script>
   <set wallHeight="4" />
   <Wall fill="#566756" frame="#000000" x="211.18055555555557" z="177.08333333333334" w="11.875" d="11.875" h="0" />
   <script>
-wallHeight</script>
+wallHeight =</script>
   <Wall fill="#566756" frame="#000000" x="213.05555555555557" z="164.58333333333334" w="1.25" d="12.5" h="0" />
   <set wallHeight="4" />
   <Wall fill="#566756" frame="#000000" x="221.80555555555557" z="164.58333333333334" w="1.25" d="12.5" h="0" />
@@ -140,8 +143,7 @@ wallHeight</script>
   <set wallHeight="4" />
   <Wall fill="#566756" frame="#000000" x="149.93055555555557" z="186.45833333333334" w="12.5" d="1.25" h="0" />
   <set designer="&quot;M. Matthews  [uno]&quot;" information="&quot;Magatama:
-The eye of the tiger has a cataract.&quot;" />
-  <set wallHeight=".001" />
+The eye of the tiger has a cataract.&quot;" wallHeight=".001" />
   <WallDoor midYaw="45" fill="#697660" frame="#000000" x="161.25" z="129.09722222222223" w="5" d="5" h="0" r="7.5" cx="153.75" cz="180.20833333333334" angle="265" extent="10" />
   <Teleporter group="-1" y="-30" activeRange="32 * 5" deadRange="22 * 5" destGroup="@center" shape="0" fill="#ffffff" frame="#000000" cx="163.68055555555557" cz="131.45833333333334" r="1.25" angle="270" extent="90" />
   <Teleporter y="30" shape="0" group="@center" fill="#ffffff" frame="#000000" cx="163.68055555555557" cz="131.45833333333334" r="1.25" angle="270" extent="90" />

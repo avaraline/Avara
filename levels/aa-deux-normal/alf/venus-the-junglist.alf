@@ -25,14 +25,14 @@
   <Wall fill="#004400" frame="#000000" x="110.1388888888889" z="152.29166666666669" w="7.083333333333329" d="7.083333333333314" h="37.5" />
   <Wall fill="#002200" frame="#000000" x="121.52777777777779" z="140.41666666666669" w="7.083333333333329" d="7.083333333333314" h="37.5" />
   <GroundColor fill="#002200" frame="#66ff66" />
-  <SkyColor fill="#ffffcc" frame="#66ff66" />
   <script>
+adjust SkyColor end
+
 ambient  =  .5
 light[0] . i = 0.4light [0] . a  =  20light [0] . b = 90 
-light[1] . i = 0.1light [1] . a  =  45light [1] . b =</script>
+light[1] . i = 0.1light [1] . a  =  45light [1] . b = 180</script>
   <Incarnator y="15" fill="#0000dd" frame="#ff0000" cx="88.81944444444444" cz="87.91666666666667" r="1.25" angle="225" extent="270" />
-  <set timeLimit="300" defaultLives="100" grenadePower="2.25" missilePower="1.75" missileTurnRate="0.2" missileAcceleration="0.4" maxStartGrenades="12" maxStartMissiles="4" />
-  <set designer="&quot;blassty &lt;r-reyes@neiu.edu&gt;&quot;" information="&quot;ruff in da jungle bizness
+  <set timeLimit="300" defaultLives="100" grenadePower="2.25" missilePower="1.75" missileTurnRate="0.2" missileAcceleration="0.4" maxStartGrenades="12" maxStartMissiles="4" designer="&quot;blassty &lt;r-reyes@neiu.edu&gt;&quot;" information="&quot;ruff in da jungle bizness
 venusian spears are deadly. use trees for cover.
 5 minute time limit...kill as many as you can.&quot;" />
   <set gameLength="4687" />

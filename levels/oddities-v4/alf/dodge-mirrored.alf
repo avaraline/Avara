@@ -73,12 +73,12 @@
   <script>
 information = &quot;Each switch triggers a block to drop on both sides.
 Red and blue players only.
-No, I did NOT copy the floor/reflections from Sarmaror, I happened to come up with the same idea after seeing “Oasis”.&quot;
+No, I did NOT copy the floor/reflections from Sarmaror, I happened to come up with the same idea after seeing &quot;Oasis&quot;.&quot;
 wallHeight = 13
 hull[0] = hullNoWeap
 hull[1] = hull[0]
 hull[2] = hull[1]
-defaultLives</script>
+defaultLives = 6</script>
   <unique vars="mReset" />
   <WallDoor deltaY="5" status="isOpen" close="@DropB" open="mReset" didClose="mReset" closeDelay="3" guardDelay="0" shotPower="100" openSpeed="40" closeSpeed="40" openDelay="0" fill="#ff0000" frame="#000000" x="33.75" z="29.930555555555557" w="15" d="10.625" h="0" />
   <unique vars="mReset" />

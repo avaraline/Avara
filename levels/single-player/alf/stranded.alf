@@ -75,7 +75,8 @@ object WallDoor
 open = @oGdoor
 close = @cGdoor
 de;taY = 0
-deltaX = - 2.5</script>
+deltaX = - 2.5
+end</script>
   <WallDoor open="@oGdoor" close="@cGdoor" deltaY="0" deltaX="2.5" fill="#003399" frame="#000000" x="130.83333333333334" z="59.583333333333336" w="8.125" d="1.25" h="4" r="1.875" cx="155.48611111111111" cz="54.236111111111114" angle="135" extent="90" />
   <WallDoor open="@oGdoor" close="@cGdoor" deltaY="0" deltaZ="2.5" fill="#003399" frame="#000000" x="128.33333333333334" z="52.083333333333336" w="1.25" d="8.125" h="4" r="1.875" cx="155.48611111111111" cz="54.236111111111114" angle="135" extent="90" />
   <WallDoor open="@oGdoor" close="@cGdoor" deltaY="0" deltaZ="-2.5" fill="#003399" frame="#000000" x="138.33333333333334" z="50.208333333333336" w="1.25" d="8.125" h="4" r="1.875" cx="155.48611111111111" cz="54.236111111111114" angle="135" extent="90" />

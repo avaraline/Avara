@@ -65,24 +65,18 @@ Ni, NI, NI!!!&quot;" />
   <set wallHeight="1" />
   <Wall fill="#cc9900" frame="#000000" x="7.916666666666667" z="13.055555555555555" w="57.5" d="5" h="0" />
   <Incarnator start="@t3" stop="@f3" y="10" fill="#ffffff" frame="#000000" cx="11.666666666666668" cz="69.30555555555556" r="3.75" angle="180" extent="90" />
-  <set wallHeight="50" />
-  <set wallYon="0.5" />
+  <set wallHeight="50" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="6.041666666666667" z="11.180555555555555" w="1.875" d="63.75" h="0" />
   <set wallYon="defaultYon" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="10.416666666666668" cz="43.05555555555556" r="3.75" angle="180" extent="180" />
   <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="10.416666666666668" cz="43.05555555555556" r="3.75" angle="180" extent="180" />
   <Goody shape="bspMissile" y="3" yon="100" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="10.416666666666668" cz="43.05555555555556" r="3.75" angle="180" extent="180" />
-  <set wallHeight="50" />
-  <set wallYon="0.5" />
+  <set wallHeight="50" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="65.41666666666667" z="11.180555555555555" w="1.875" d="63.75" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="50" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="50" />
   <Wall fill="#ffffff" frame="#000000" x="7.916666666666667" z="11.180555555555555" w="57.5" d="1.875" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="50" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="50" />
   <Wall fill="#ffffff" frame="#000000" x="7.916666666666667" z="73.05555555555556" w="57.5" d="1.875" h="0" />
   <set wallYon="defaultYon" />
   <unique vars="mShow mTaken" />

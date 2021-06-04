@@ -11,8 +11,7 @@ Yellow, 4 goals is a win for Green.&quot;" />
   <Teleporter y="30" activeRange="10000" yon="0.01" start="@gameEnds" win="1" fill="#ffffff" frame="#000000" cx="51.97916666666667" cz="153.2638888888889" r="3.854166666666668" angle="270" extent="90" />
   <Teleporter group="-1" y="100" activeRange="35 * 5" deadRange="30 * 5" destGroup="@recenter" shape="0" fill="#ffff00" frame="#000000" cx="73.26388888888889" cz="73.64583333333334" r="4.236111111111107" angle="180" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffff00" frame="#000000" cx="73.26388888888889" cz="73.64583333333334" r="4.236111111111107" angle="180" extent="90" />
-  <set defaultLives="99" />
-  <set wallYon=".5" wallHeight="50" />
+  <set defaultLives="99" wallYon=".5" wallHeight="50" />
   <Wall fill="#7f0000" frame="#000000" x="53.75" z="144.30555555555557" w="53.75" d="3.75" h="0" />
   <Wall fill="#7f0000" frame="#000000" x="0" z="144.30555555555557" w="53.75" d="3.75" h="0" />
   <Wall fill="#7f0000" frame="#000000" x="140.625" z="98.68055555555556" w="3.75" d="45.625" h="0" />

@@ -17,8 +17,7 @@
   <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" x="182.43055555555557" z="79.375" w="5" d="5" h="0" y="0" />
   <WallDoor wallYon=".001" open="@one" close="@two" deltaY="20" shotPower="9999" guardDelay=".1" openSound="0" closeSound="0" stopSound="0" didOpen="@two" openSpeed="75" closeSpeed="75" stepOnMsg="@one" fill="#000000" frame="#000000" x="16.805555555555557" z="383.75" w="6.25" d="6.25" h="0" y="0" />
   <Teleporter y="5" shape="0" group="@death" spin="false" sound="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
-  <set wallYon=".001" wallHeight="wh" />
-  <set timeLimit="300" lightHull="151" mediumHull="151" heavyHull="151" missilePower="7" grenadePower="1.25" missileAcceleration="0.3" fieldY=".22" fieldX=".02" fieldZ=".02" wh="6" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="15" kSnText="snTextBlip" kTextVolume="0.3" gameLength="4685" />
+  <set wallYon=".001" wallHeight="wh" timeLimit="300" lightHull="151" mediumHull="151" heavyHull="151" missilePower="7" grenadePower="1.25" missileAcceleration="0.3" fieldY=".22" fieldX=".02" fieldZ=".02" wh="6" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="15" kSnText="snTextBlip" kTextVolume="0.3" gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />

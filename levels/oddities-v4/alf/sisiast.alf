@@ -9,8 +9,7 @@ There’s more ammo up than down.&quot;" stripHeight="7" buildingHeight="5" />
   <Wall fill="#0099ff" frame="#000000" x="147.01388888888889" z="150" w="5" d="100" h="0.5" />
   <Wall fill="#0099ff" frame="#000000" x="147.01388888888889" z="0" w="5" d="100" h="0.5" />
   <Wall fill="#666699" frame="#000000" x="124.5138888888889" z="100" w="50" d="50" h="0.5" />
-  <set baseHeight=".5" wallHeight="stripHeight" />
-  <set wa="stripHeight" />
+  <set baseHeight=".5" wallHeight="stripHeight" wa="stripHeight" />
   <Wall fill="#6e6ebd" frame="#000000" x="168.26388888888889" z="106.25" w="2.5" d="40" h="0.5" />
   <set wa="stripHeight" />
   <Wall fill="#6e6ebd" frame="#000000" x="128.26388888888889" z="103.75" w="2.5" d="40" h="0.5" />

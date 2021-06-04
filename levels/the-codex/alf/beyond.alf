@@ -1,8 +1,7 @@
 <map>
   <SkyColor verticalRangeMax="2500" n="12" fill="#ffffff" frame="#e3edff" />
   <GroundColor fill="#bdc7e4" frame="#bdc7e4" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Falling deeper into the infinite depths of the soul.&quot;" />
-  <set wallHeight="8" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Falling deeper into the infinite depths of the soul.&quot;" wallHeight="8" />
   <Wall fill="#223175" frame="#000000" x="49.583333333333336" z="74.58333333333334" w="15" d="15" h="0" />
   <Ramp y="1" deltaY="3" thickness="0" fill="#e3edff" frame="#ffe2cc" x="49.583333333333336" z="89.58333333333334" w="15" d="12.5" h="0" r="0.625" angle="0" extent="180" />
   <set wallHeight="8" />
@@ -127,8 +126,7 @@
   <Ramp y="1" deltaY="3" thickness="0" fill="#e3edff" frame="#ffe2cc" x="129.58333333333334" z="74.58333333333334" w="12.5" d="15" h="0" r="0.625" angle="90" extent="180" />
   <set wallHeight="1" />
   <Wall fill="#e3edff" frame="#000000" x="129.58333333333334" z="74.58333333333334" w="12.5" d="0" h="0" />
-  <set wallYon="30" />
-  <set wallHeight="0" />
+  <set wallYon="30" wallHeight="0" />
   <WallDoor midYaw="45" fill="#e3edff" frame="#000000" x="120.83333333333334" z="35.833333333333336" w="2.5" d="2.5" h="0" r="0.625" cx="135.90277777777777" cz="77.77777777777779" angle="90" extent="180" y="8" />
   <set wallHeight="0" />
   <WallDoor midYaw="45" fill="#e3edff" frame="#000000" x="55.833333333333336" z="80.83333333333334" w="2.5" d="2.5" h="0" r="0.625" cx="135.90277777777777" cz="77.77777777777779" angle="90" extent="180" y="8" />
@@ -146,8 +144,7 @@
   <WallDoor midYaw="45" fill="#223175" frame="#000000" x="123.33333333333334" z="49.583333333333336" w="2.5" d="2.5" h="0" r="0.625" cx="135.90277777777777" cz="77.77777777777779" angle="90" extent="180" />
   <set wallHeight="0" />
   <WallDoor midYaw="45" fill="#223175" frame="#000000" x="88.33333333333334" z="58.333333333333336" w="2.5" d="2.5" h="0" r="0.625" cx="135.90277777777777" cz="77.77777777777779" angle="90" extent="180" />
-  <set wallYon="180" />
-  <set wallHeight="0" />
+  <set wallYon="180" wallHeight="0" />
   <Wall fill="#7c89b6" frame="#000000" x="83.95833333333334" z="54.583333333333336" w="0.625" d="10" h="0" y="6" />
   <set wallHeight="0" />
   <Wall fill="#7c89b6" frame="#000000" x="94.58333333333334" z="54.583333333333336" w="0.625" d="10" h="0" y="6" />

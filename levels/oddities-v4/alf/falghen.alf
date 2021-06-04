@@ -1,6 +1,5 @@
 <map>
-  <set beamY.0="1" beamY.1="2.2" beamY.2="3.4" />
-  <set defaultLives="3" friendlyHitMultiplier="-10" MainWall="7" CornerWall="MainWall + 1" RoofH=".625" guardHeight="CornerWall + 3" guardFreq="7" guardSpeed="5" GtClSpd="8" GtOpSpd="1" GtPower="2" GtDelay="1" hull.0="hull[1]" />
+  <set beamY.0="1" beamY.1="2.2" beamY.2="3.4" defaultLives="3" friendlyHitMultiplier="-10" MainWall="7" CornerWall="MainWall + 1" RoofH=".625" guardHeight="CornerWall + 3" guardFreq="7" guardSpeed="5" GtClSpd="8" GtOpSpd="1" GtPower="2" GtDelay="1" hull.0="hull[1]" />
   <Text in="@INTRUDER" text="&quot;Intruder Detected!&quot;" showEveryone="true" />
   <set information="&quot;Remove the cube and place it in the goal without setting off the security system.
 The light hull is not available.&quot;" />
@@ -143,10 +142,21 @@ The light hull is not available.&quot;" />
   <Wall fill="#770000" frame="#000000" x="118.68055555555556" z="42.083333333333336" w="11.25" d="1.25" h="0" />
   <Wall fill="#770000" frame="#000000" x="128.68055555555557" z="27.083333333333336" w="1.25" d="15" h="0" />
   <set baseHeight="0" />
-  <Ball shape="bspDoubleCube" scale=".7" y="4" hitScore="-100" changeOwnerTime="32767" hitMsg="@INTRUDER" ejectPower=".1" stop="@INTRUDER" fill="#aa0000" frame="#00ccff" cx="124.375" cz="34.65277777777778" r="1.875" angle="180" extent="90" />
   <script>
-wallHeig</script>
-  <set wallHeight="0" />
+object Ball
+  shape = bspDoubleCube
+  scale = .7
+  y = 4
+  hitScore = -100
+  changeOwnerTime = 32767
+  hitMsg = @INTRUDER
+  ejectPower = .1
+  stop = @INTRUDER
+end
+
+wallHeight 
+
+wallHeight = 0</script>
   <Ramp deltaY="3" y="0" fill="#99ccff" frame="#000000" x="73.05555555555556" z="26.458333333333336" w="6.25" d="2.5" h="0" r="1.25" angle="0" extent="180" />
   <Wall fill="#99ccff" frame="#000000" x="79.30555555555556" z="26.458333333333336" w="2.5" d="2.5" h="0" y="3" />
   <Ramp deltaY="3" y="3" fill="#99ccff" frame="#000000" x="79.30555555555556" z="20.208333333333336" w="2.5" d="6.25" h="0" r="1.25" angle="270" extent="180" />
@@ -189,7 +199,8 @@ YonBo
 x
   
 delta
-Y = 9</script>
+Y = 9
+end</script>
   <Field start="@INTRUDER" stop="@INT_RESET" deltaX=".5" fill="#ffcccc" frame="#000000" x="43.68055555555556" z="29.583333333333336" w="1.25" d="10" h="0" r="1.875" cx="76.80555555555556" cz="22.708333333333336" angle="180" extent="90" />
   <set wallHeight="3" bShield=".8" pShield=".5" />
   <Wall fill="#ffccff" frame="#000000" x="49.30555555555556" z="44.583333333333336" w="18.125" d="5.625" h="0.25" y="3" />

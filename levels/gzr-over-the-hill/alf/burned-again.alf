@@ -1,6 +1,5 @@
 <map>
-  <set lightHull="150" mediumHull="150" heavyHull="150" />
-  <set designer="&quot;Cowboy &lt;jmcald@destiny.esd105.wednet.edu&gt;&quot;" information="&quot;Scripting by Hybrid. Teams must be red, blue or yellow.  Up to 3 people on one team. First team to reach 100 seconds in the center square wins.&quot;" missilePower="3.5" missileAcceleration="0.3" grenadePower="2.5" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" snYeeha="0" kADelay="2" kDefaultLives="300" kSnText="snTextBlip" kTextVolume="0.3" />
+  <set lightHull="150" mediumHull="150" heavyHull="150" designer="&quot;Cowboy &lt;jmcald@destiny.esd105.wednet.edu&gt;&quot;" information="&quot;Scripting by Hybrid. Teams must be red, blue or yellow.  Up to 3 people on one team. First team to reach 100 seconds in the center square wins.&quot;" missilePower="3.5" missileAcceleration="0.3" grenadePower="2.5" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" snYeeha="0" kADelay="2" kDefaultLives="300" kSnText="snTextBlip" kTextVolume="0.3" />
   <And in="@start" out="@time" fill="#666666" frame="#000000" cx="10.208333333333334" cz="24.65277777777778" r="3.125" angle="0" extent="90" />
   <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" out="@time" fill="#666666" frame="#000000" cx="10.208333333333334" cz="24.65277777777778" r="3.125" angle="0" extent="90" />
   <Timer in="@time" out="@show" wait="175" fill="#666666" frame="#000000" cx="10.208333333333334" cz="24.65277777777778" r="3.125" angle="0" extent="90" />

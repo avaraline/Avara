@@ -1,77 +1,24 @@
 <map>
-  <set grenadePower="4.5" />
-  <set missilePower="3" />
-  <set missileTurnRate="0.1" />
-  <set missileAcceleration="0.8" />
-  <set defaultLives="5" />
-  <set hull.0="2001" />
-  <set hull.1="2001" />
-  <set hull.2="2001" />
-  <set baseHeight="120" />
+  <set grenadePower="4.5" missilePower="3" missileTurnRate="0.1" missileAcceleration="0.8" defaultLives="5" hull.0="2001" hull.1="2001" hull.2="2001" baseHeight="120" />
   <SkyColor n="12" fill="#220000" frame="#220000" />
   <GroundColor fill="#220000" frame="#ff4043" />
-  <set designer="&quot;Edgar Hons&quot;" />
-  <set information="&quot;I think I 
+  <set designer="&quot;Edgar Hons&quot;" information="&quot;I think I 
 dropped my contact in 
 there&quot;" />
-  <Ramp fill="#4a3b20" frame="#000000" x="161.38888888888889" z="82.63888888888889" w="17.708333333333343" d="30.208333333333343" h="0" r="4.027777777777778" angle="90" extent="180" />
-  <set y="38" />
-  <set deltaY="0" />
-  <set thickness="0" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="130.83333333333331" cz="75.83333333333334" r="1.3194444444444429" angle="270" extent="90" />
-  <set y="38" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="129.79166666666669" cz="78.40277777777779" r="1.3194444444444429" angle="315" extent="90" />
-  <set y="38" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="69.79166666666667" cz="105.27777777777779" r="1.3194444444444429" angle="135" extent="90" />
-  <set y="38" />
+  <Ramp y="38" deltaY="0" thickness="0" fill="#4a3b20" frame="#000000" x="161.38888888888889" z="82.63888888888889" w="17.708333333333343" d="30.208333333333343" h="0" r="4.027777777777778" angle="90" extent="180" />
+  <Incarnator y="38" fill="#ffffff" frame="#000000" cx="130.83333333333331" cz="75.83333333333334" r="1.3194444444444429" angle="270" extent="90" />
+  <Incarnator y="38" fill="#ffffff" frame="#000000" cx="129.79166666666669" cz="78.40277777777779" r="1.3194444444444429" angle="315" extent="90" />
+  <Incarnator y="38" fill="#ffffff" frame="#000000" cx="69.79166666666667" cz="105.27777777777779" r="1.3194444444444429" angle="135" extent="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#e9d3b1" frame="#e9d3b1" cx="100.90277777777779" cz="104.65277777777779" r="1.3888888888888857" angle="180" extent="270" />
-  <Timer fill="#e9d3b1" frame="#e9d3b1" cx="100.90277777777779" cz="104.65277777777779" r="1.3888888888888857" angle="180" extent="270" />
-  <set in="mTaken" />
-  <set out="mShow" />
-  <set wait="90" />
-  <Goody fill="#e9d3b1" frame="#e9d3b1" cx="100.90277777777779" cz="104.65277777777779" r="1.3888888888888857" angle="180" extent="270" />
-  <set shape="bspAvaraA" />
-  <set y="40" />
-  <set speed="2" />
-  <set grenades="6" />
-  <set missiles="3" />
-  <set start="mShow" />
-  <set out="mTaken" />
-  <Teleporter fill="#6c6c6d" frame="#000000" cx="106.52777777777779" cz="94.65277777777779" r="1.3194444444444429" angle="180" extent="270" />
-  <set group="-1" />
-  <set y="0" />
-  <set activeRange="110" />
-  <set deadRange="100" />
-  <set destGroup="@recenter" />
-  <set shape="0" />
-  <Teleporter fill="#6c6c6d" frame="#000000" cx="106.52777777777779" cz="94.65277777777779" r="1.3194444444444429" angle="180" extent="270" />
-  <set y="-120" />
-  <set shape="0" />
-  <set group="@recenter" />
-  <set volume="0" />
-  <Teleporter fill="#6c6c6d" frame="#000000" cx="106.52777777777779" cz="94.65277777777779" r="1.3194444444444429" angle="180" extent="270" />
-  <set shape="0" />
-  <set y="200" />
-  <set win="1000" />
-  <set start="@winTeam" />
-  <set activeRange="2000" />
+  <Timer in="mTaken" out="mShow" wait="90" fill="#e9d3b1" frame="#e9d3b1" cx="100.90277777777779" cz="104.65277777777779" r="1.3888888888888857" angle="180" extent="270" />
+  <Goody shape="bspAvaraA" y="40" speed="2" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#e9d3b1" frame="#e9d3b1" cx="100.90277777777779" cz="104.65277777777779" r="1.3888888888888857" angle="180" extent="270" />
+  <Teleporter group="-1" y="0" activeRange="110" deadRange="100" destGroup="@recenter" shape="0" fill="#6c6c6d" frame="#000000" cx="106.52777777777779" cz="94.65277777777779" r="1.3194444444444429" angle="180" extent="270" />
+  <Teleporter y="-120" shape="0" group="@recenter" volume="0" fill="#6c6c6d" frame="#000000" cx="106.52777777777779" cz="94.65277777777779" r="1.3194444444444429" angle="180" extent="270" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#6c6c6d" frame="#000000" cx="106.52777777777779" cz="94.65277777777779" r="1.3194444444444429" angle="180" extent="270" />
   <set wallHeight="4" />
-  <WallDoor fill="#ffffff" frame="#000000" x="98.95833333333334" y="80" z="92.08333333333334" w="0.6944444444444429" d="5.069444444444443" h="0" r="1.3194444444444429" cx="106.52777777777779" cz="94.65277777777779" angle="180" extent="270" />
-  <set open="@crush" />
-  <set close="@uncrush" />
-  <set didOpen="@uncrush" />
-  <set didClose="@crush" />
-  <set openSpeed="20" />
-  <set closeSpeed="100" />
-  <set deltaY="0" />
-  <set deltaX="10" />
-  <set volume="0" />
-  <set shotPower="5000" />
-  <set guardDelay="0" />
-  <And fill="#ffffff" frame="#000000" cx="106.52777777777779" cz="94.65277777777779" r="1.3194444444444429" angle="180" extent="270" />
-  <set in="@start" />
-  <set out="@crush" />
+  <WallDoor open="@crush" close="@uncrush" didOpen="@uncrush" didClose="@crush" openSpeed="20" closeSpeed="100" deltaY="0" deltaX="10" volume="0" shotPower="5000" guardDelay="0" fill="#ffffff" frame="#000000" x="98.95833333333334" z="92.08333333333334" w="0.6944444444444429" d="5.069444444444443" h="0" r="1.3194444444444429" cx="106.52777777777779" cz="94.65277777777779" angle="180" extent="270" y="-120" />
+  <And in="@start" out="@crush" fill="#ffffff" frame="#000000" cx="106.52777777777779" cz="94.65277777777779" r="1.3194444444444429" angle="180" extent="270" />
   <set wallHeight="20" />
   <Wall fill="#994c00" frame="#ff4043" x="75" z="68.125" w="68.125" d="13.75" h="0" y="18" />
   <set wallHeight="20" />
@@ -214,8 +161,6 @@ there&quot;" />
   <Wall fill="#261300" frame="#ffff66" x="103.125" z="105.625" w="0.625" d="0.625" h="0" y="-16" />
   <set wallHeight="7" />
   <Wall fill="#261300" frame="#ffff66" x="102.5" z="101.25" w="0.625" d="0.625" h="0" y="-16" />
-  <set wallHeight="7" />
-  <set wallHeight="30" />
   <set wallHeight="30" />
   <Wall fill="#261300" frame="#ffff66" x="96.25" z="120.625" w="36.875" d="7.5" h="0" y="-46" />
   <set wallHeight="30" />
@@ -224,8 +169,6 @@ there&quot;" />
   <Wall fill="#663300" frame="#ffff66" x="60" z="67.5" w="0.625" d="84.375" h="0" y="38" />
   <set wallHeight="42" />
   <Wall fill="#663300" frame="#ffff66" x="60.625" z="67.5" w="96.25" d="0.625" h="0" y="38" />
-  <set wallHeight="22" />
-  <set wallHeight="22" />
   <set wallHeight="10" />
   <Wall fill="#994c00" frame="#ffff66" x="60.625" z="140.625" w="2.5" d="5.625" h="0" y="38" />
   <set wallHeight="10" />
@@ -434,62 +377,8 @@ there&quot;" />
   <set wallHeight="1" />
   <Wall fill="#4c2600" frame="#220000" x="60" z="67.5" w="96.875" d="84.375" h="0" y="80" />
   <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#0e36fd" frame="#000000" cx="23.26388888888889" cz="22.430555555555557" r="1.5972222222222214" angle="90" extent="180" />
-  <Ufo fill="#000000" frame="#220000" cx="110" cz="112.5" r="6.25" angle="0" extent="90" />
-  <set y="50" />
-  <set shape="1027" />
-  <set shotPower="0" />
-  <set attack="0" />
-  <set accel=".03" />
-  <set scale=".5" />
-  <set verticalRangeMin="-10" />
-  <set verticalRangeMax="10" />
-  <set motionRange="20" />
-  <set pitchrange="360" />
-  <set checkPeriod="10" />
-  <set shield="1000" />
-  <set homeSick="2" />
-  <set watch="false" />
-  <Ufo fill="#000000" frame="#220000" cx="130.76388888888889" cz="122.22222222222223" r="6.25" angle="0" extent="90" />
-  <set y="70" />
-  <set shape="1027" />
-  <set shotPower="0" />
-  <set attack="0" />
-  <set accel=".03" />
-  <set scale=".5" />
-  <set verticalRangeMin="50" />
-  <set verticalRangeMax="80" />
-  <set motionRange="20" />
-  <set pitchrange="360" />
-  <set checkPeriod="10" />
-  <set shield="1000" />
-  <set watch="false" />
-  <Ufo fill="#000000" frame="#220000" cx="92.01388888888889" cz="130.34722222222223" r="6.25" angle="0" extent="90" />
-  <set y="60" />
-  <set shape="1027" />
-  <set shotPower="0" />
-  <set attack="0" />
-  <set accel=".03" />
-  <set scale=".5" />
-  <set verticalRangeMin="40" />
-  <set verticalRangeMax="80" />
-  <set motionRange="20" />
-  <set pitchrange="360" />
-  <set checkPeriod="10" />
-  <set shield="1000" />
-  <set watch="false" />
-  <Ufo fill="#000000" frame="#220000" cx="125.41666666666669" cz="88.125" r="6.25" angle="0" extent="90" />
-  <set y="50" />
-  <set shape="1027" />
-  <set shotPower="0" />
-  <set attack="0" />
-  <set accel=".03" />
-  <set scale=".5" />
-  <set verticalRangeMin="30" />
-  <set verticalRangeMax="80" />
-  <set motionRange="20" />
-  <set pitchrange="360" />
-  <set checkPeriod="10" />
-  <set shield="1000" />
-  <set homesick="10" />
-  <set watch="false" />
+  <Ufo y="50" shape="1027" shotPower="0" attack="0" accel=".03" scale=".5" verticalRangeMin="-10" verticalRangeMax="10" motionRange="20" pitchrange="360" checkPeriod="10" shield="1000" homeSick="2" watch="false" fill="#000000" frame="#220000" cx="110" cz="112.5" r="6.25" angle="0" extent="90" />
+  <Ufo y="70" shape="1027" shotPower="0" attack="0" accel=".03" scale=".5" verticalRangeMin="50" verticalRangeMax="80" motionRange="20" pitchrange="360" checkPeriod="10" shield="1000" watch="false" fill="#000000" frame="#220000" cx="130.76388888888889" cz="122.22222222222223" r="6.25" angle="0" extent="90" />
+  <Ufo y="60" shape="1027" shotPower="0" attack="0" accel=".03" scale=".5" verticalRangeMin="40" verticalRangeMax="80" motionRange="20" pitchrange="360" checkPeriod="10" shield="1000" watch="false" fill="#000000" frame="#220000" cx="92.01388888888889" cz="130.34722222222223" r="6.25" angle="0" extent="90" />
+  <Ufo y="50" shape="1027" shotPower="0" attack="0" accel=".03" scale=".5" verticalRangeMin="30" verticalRangeMax="80" motionRange="20" pitchrange="360" checkPeriod="10" shield="1000" homesick="10" watch="false" fill="#000000" frame="#220000" cx="125.41666666666669" cz="88.125" r="6.25" angle="0" extent="90" />
 </map>

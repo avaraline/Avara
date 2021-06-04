@@ -1,8 +1,7 @@
 <map>
   <SkyColor verticalRangeMax="2500" n="24" fill="#fff0d7" frame="#434449" />
   <GroundColor fill="#4b4a40" frame="#4b4a40" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Do or die.&quot;" />
-  <set wallHeight="2" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Do or die.&quot;" wallHeight="2" />
   <Wall fill="#e4d6bf" frame="#000000" x="79.58333333333334" z="69.58333333333334" w="5" d="5" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#b4b3a1" frame="#000000" x="74.58333333333334" z="64.58333333333334" w="5" d="10" h="0" />
@@ -85,8 +84,7 @@
   <Ramp y="0" deltaY="2" thickness="0" fill="#8c8f95" frame="#000000" x="134.58333333333334" z="99.58333333333334" w="10" d="10" h="0" r="0.625" angle="180" extent="180" />
   <Ramp y="0" deltaY="2" thickness="0" fill="#8c8f95" frame="#000000" x="124.58333333333334" z="109.58333333333334" w="10" d="10" h="0" r="0.625" angle="270" extent="180" />
   <Ramp y="0" deltaY="2" thickness="0" fill="#8c8f95" frame="#000000" x="44.583333333333336" z="39.583333333333336" w="10" d="10" h="0" r="0.625" angle="90" extent="180" />
-  <set ambient="0" light.0.i="0.8" light.0.a="80" light.0.b="-45" light.1.i="0.4" light.1.a="-60" light.1.b="45" />
-  <set wallHeight="2" />
+  <set ambient="0" light.0.i="0.8" light.0.a="80" light.0.b="-45" light.1.i="0.4" light.1.a="-60" light.1.b="45" wallHeight="2" />
   <Wall fill="#e4d6bf" frame="#000000" x="134.58333333333334" z="64.58333333333334" w="5" d="5" h="0" />
   <set wallHeight="0" />
   <Wall fill="#92898f" frame="#000000" x="74.58333333333334" z="64.58333333333334" w="5" d="10" h="0" y="3.5" />

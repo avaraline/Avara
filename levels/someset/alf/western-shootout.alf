@@ -1,12 +1,9 @@
 <map>
   <set wallHeight="0.2" />
   <WallDoor y="2.5" deltaY="-1.25" shield="4.5" isTarget="false" canGlow="true" openSpeed="25" open="@fallTwo" volume="0" openSound="0" StopSound="0" fill="#996633" frame="#000000" x="25" z="67.84722222222223" w="5" d="5" h="0" />
-  <set wallHeight="3" />
-  <set wallYon="0.05" />
+  <set wallHeight="3" wallYon="0.05" />
   <Wall fill="#cc9900" frame="#000000" x="23.125" z="77.22222222222223" w="3.75" d="31.25" h="0" y="-3" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="3" />
-  <set wallYon="0.05" />
+  <set wallYon="0.05" wallHeight="3" />
   <Wall fill="#cc9900" frame="#000000" x="86.875" z="49.72222222222222" w="3.75" d="25.625" h="0" y="-3" />
   <set wallYon="defaultYon" />
   <set wallHeight="1" />
@@ -36,7 +33,6 @@
   <set wallHeight="7" />
   <Wall fill="#cc9900" frame="#000000" x="36.875" z="66.59722222222223" w="0.625" d="10" h="0" />
   <Wall fill="#cc9900" frame="#000000" x="36.875" z="52.84722222222222" w="0.625" d="10" h="0" />
-  <set wallHeight="7" />
   <set wallHeight="7" />
   <Wall fill="#cc9900" frame="#000000" x="5.625" z="52.84722222222222" w="31.25" d="0.625" h="0" />
   <set wallHeight="8" />

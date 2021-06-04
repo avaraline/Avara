@@ -1,9 +1,7 @@
 <map>
   <SkyColor fill="#dcffe5" frame="#a5bfab" />
   <GroundColor fill="#212622" frame="#000000" />
-  <set designer="&quot;Mondo&quot;" />
-  <set information="&quot;&quot;" />
-  <set ambient=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" />
+  <set designer="&quot;Mondo&quot;" information="&quot;&quot;" ambient=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" />
   <Incarnator fill="#6e7f72" frame="#000000" cx="43.333333333333336" cz="71.18055555555556" r="1.25" angle="180" extent="90" />
   <Ramp deltaY="3" thickness="0" fill="#a5bfab" frame="#000000" x="48.333333333333336" z="56.18055555555556" w="10" d="15" h="0" r="1.25" angle="0" extent="180" />
   <Ramp deltaY="3" thickness="0" fill="#a5bfab" frame="#000000" x="73.33333333333334" z="56.18055555555556" w="10" d="15" h="0" r="1.25" angle="180" extent="180" />
@@ -68,7 +66,6 @@
   <Wall fill="#6e7f72" frame="#000000" x="8.333333333333334" z="111.18055555555556" w="20" d="10" h="0" />
   <Wall fill="#6e7f72" frame="#000000" x="8.333333333333334" z="71.18055555555556" w="10" d="40" h="0" />
   <Wall fill="#6e7f72" frame="#000000" x="18.333333333333336" z="71.18055555555556" w="10" d="30" h="0" />
-  <set wallHeight="15" />
   <set wallHeight="15" />
   <WallSolid canGlow="true" shield="-1" fill="#373f39" frame="#000000" x="18.333333333333336" z="101.18055555555556" w="10" d="10" h="0" r="1.25" cx="38.333333333333336" cz="71.80555555555556" angle="180" extent="180" />
   <set wallHeight="15" />

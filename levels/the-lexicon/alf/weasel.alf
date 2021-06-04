@@ -2,8 +2,7 @@
   <GroundColor fill="#ffffff" frame="#ffffff" />
   <SkyColor fill="#ffffff" frame="#33ffff" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#444444" frame="#cc9900" cx="6.770833333333334" cz="0.9722222222222223" r="1.1458333333333335" angle="180" extent="90" />
-  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Pop pop.&quot;" />
-  <set wallHeight="2.25" />
+  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Pop pop.&quot;" wallHeight="2.25" />
   <Wall fill="#cc6699" frame="#000000" x="33.05555555555556" z="23.88888888888889" w="70" d="10" h="0" />
   <Wall fill="#cc6699" frame="#000000" x="33.05555555555556" z="33.88888888888889" w="10" d="60" h="0" />
   <Wall fill="#cc6699" frame="#000000" x="93.05555555555556" z="33.88888888888889" w="10" d="60" h="0" />
@@ -73,7 +72,8 @@ y = 18
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
+speed = 0
+end</script>
   <Incarnator y="20" fill="#ff0000" frame="#000000" cx="28.680555555555557" cz="58.88888888888889" r="1.25" angle="225" extent="90" />
   <Incarnator y="20" fill="#ff0000" frame="#000000" cx="106.80555555555556" cz="57.63888888888889" r="1.25" angle="45" extent="90" />
   <Incarnator y="20" fill="#ff0000" frame="#000000" cx="67.43055555555556" cz="98.2638888888889" r="1.25" angle="135" extent="90" />

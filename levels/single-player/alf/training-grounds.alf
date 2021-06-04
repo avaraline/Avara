@@ -2,10 +2,8 @@
   <SkyColor n="7" fill="#ff6699" frame="#006699" />
   <GroundColor fill="#004400" frame="#663300" />
   <set designer="&quot;Juri Munkki&quot;" information="&quot;This training mission introduces you to the HECTOR.
-Collect at least 5 ‘A’ markers along the course and enter the exit teleporter to complete the mission. You will be offered more missions after you complete this one.&quot;" />
-  <set ambient="0.4" light.0.i="0.4" light.0.a="20" light.0.b="240" light.1.i="0.4" light.1.a="40" light.1.b="320" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
-  <set wallHeight="0.2" baseHeight="0" />
-  <set wallHeight="3" />
+Collect at least 5 ‘A’ markers along the course and enter the exit teleporter to complete the mission. You will be offered more missions after you complete this one.&quot;" ambient="0.4" light.0.i="0.4" light.0.a="20" light.0.b="240" light.1.i="0.4" light.1.a="40" light.1.b="320" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set wallHeight="3" baseHeight="0" />
   <Wall fill="#dddddd" frame="#000000" x="77.70833333333334" z="69.09722222222223" w="15" d="5" h="0" />
   <Dome fill="#dddddd" frame="#000000" cx="92.70833333333334" cz="70.34722222222223" r="5" angle="0" extent="180" />
   <Wall fill="#dddddd" frame="#000000" x="67.70833333333334" z="74.09722222222223" w="15" d="15" h="0" />
@@ -24,8 +22,7 @@ Collect at least 5 ‘A’ markers along the course and enter the exit teleporte
   <Wall fill="#dddddd" frame="#000000" x="87.70833333333334" z="96.59722222222223" w="2.5" d="2.5" h="0" />
   <Ramp y="-baseHeight" thickness="0" deltaY="2.5" fill="#dddddd" frame="#000000" x="60.208333333333336" z="101.59722222222223" w="7.5" d="7.569444444444443" h="0" r="3.784722222222218" angle="339" extent="46" />
   <Ramp y="-baseHeight" thickness="0" deltaY="2.5" fill="#dddddd" frame="#000000" x="82.70833333333334" z="101.59722222222223" w="7.5" d="7.569444444444443" h="0" r="3.7152777777777786" angle="339" extent="46" />
-  <set towerHeight="7.5" towerStep="towerHeight / 3" wallHeight="0" baseHeight="0" />
-  <set wa="towerStep" />
+  <set towerHeight="7.5" towerStep="towerHeight / 3" wallHeight="0" baseHeight="0" wa="towerStep" />
   <Wall fill="#aaaaaa" frame="#000000" x="97.08333333333334" z="151.59722222222223" w="3.125" d="3.125" h="0" />
   <Ramp y="0" deltaY="towerStep" fill="#aaaaaa" frame="#000000" x="97.08333333333334" z="144.09722222222223" w="3.125" d="7.5" h="0" r="3.7152777777777715" angle="169" extent="26" />
   <set wa="2 * towerStep" />

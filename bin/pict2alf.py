@@ -225,15 +225,15 @@ class TextOp(AvaraOperation):
         self.text = text
 
     def process(self, context):
-        for script in self.text.split("\n\n"):
-            try:
-                for t in parse_script(fix_quirks(script)):
-                    if t.process(context):
-                        yield t.element(context)
-            except ScriptParseError:
-                debug("Script error in:\n%s", script)
-                # Strip the "end" we added if there's still an error.
-                yield Element("script", script[:-3].strip())
+        fixed_script = fix_quirks(self.text)
+        try:
+            for t in parse_script(fixed_script):
+                if t.process(context):
+                    yield t.element(context)
+        except ScriptParseError:
+            debug("Script error in:\n%s", fixed_script)
+            # Strip the "end" we added if there's still an error.
+            yield Element("script", fixed_script[:-3].strip())
 
 
 class GroupStart(AvaraOperation):

@@ -36,8 +36,7 @@
   <And in="@start" out="mShow" fill="#3300cc" frame="#000000" cx="128.95833333333334" cz="113.95833333333334" r="0.625" angle="90" extent="359" />
   <Timer in="mTaken" out="mShow" wait="600" fill="#3300cc" frame="#000000" cx="128.95833333333334" cz="113.95833333333334" r="0.625" angle="90" extent="359" />
   <Goody shape="bspAvaraA" y="blockThree + 2" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#3300cc" frame="#000000" cx="128.95833333333334" cz="113.95833333333334" r="0.625" angle="90" extent="359" />
-  <set wallHeight="blockTwo" />
-  <set wa="midPlatform" wallHeight="0" />
+  <set wallHeight="0" wa="midPlatform" />
   <Wall fill="#00bb57" frame="#000000" x="148.95833333333334" z="113.95833333333334" w="5" d="13.75" h="0" />
   <set wa="midPlatform" wallHeight="0" />
   <Wall fill="#00bb57" frame="#000000" x="103.95833333333334" z="100.20833333333334" w="5" d="13.75" h="0" />

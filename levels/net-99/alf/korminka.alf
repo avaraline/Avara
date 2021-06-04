@@ -1,13 +1,9 @@
 <map>
   <SkyColor fill="#faf2be" frame="#877443" />
   <GroundColor fill="#211c13" frame="#000000" />
-  <set designer="&quot;Mondo&quot;" />
-  <set information="&quot;Many blocks near the center are destroyable.
-Nades only.&quot;" />
-  <set ambient=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" maxStartMissiles="0" />
-  <set wallHeight="2" />
+  <set designer="&quot;Mondo&quot;" information="&quot;Many blocks near the center are destroyable.
+Nades only.&quot;" ambient=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" maxStartMissiles="0" wallHeight="2" />
   <Wall fill="#c2b17e" frame="#000000" x="15.208333333333334" z="101.80555555555556" w="15" d="15" h="0" />
-  <set wallHeight="6" />
   <set wallHeight="4" />
   <Wall fill="#877443" frame="#000000" x="25.833333333333336" z="72.43055555555556" w="8.75" d="25" h="0" />
   <Wall fill="#877443" frame="#000000" x="30.833333333333336" z="101.18055555555556" w="3.75" d="5" h="0" />
@@ -34,7 +30,6 @@ Nades only.&quot;" />
   <Wall fill="#eeffdc" frame="#000000" x="25.833333333333336" z="71.80555555555556" w="8.75" d="0.625" h="0" />
   <set wallHeight="2" />
   <Wall fill="#c2b17e" frame="#000000" x="15.208333333333334" z="16.805555555555557" w="15" d="15" h="0" />
-  <set wallHeight="6" />
   <set wallHeight="4" />
   <Wall fill="#877443" frame="#000000" x="34.583333333333336" z="27.430555555555557" w="25" d="8.75" h="0" />
   <Wall fill="#877443" frame="#000000" x="25.833333333333336" z="32.43055555555556" w="5" d="3.75" h="0" />
@@ -59,7 +54,6 @@ Nades only.&quot;" />
   <Wall fill="#eeffdc" frame="#000000" x="59.583333333333336" z="27.430555555555557" w="0.625" d="8.75" h="0" />
   <set wallHeight="2" />
   <Wall fill="#c2b17e" frame="#000000" x="100.20833333333334" z="16.805555555555557" w="15" d="15" h="0" />
-  <set wallHeight="6" />
   <set wallHeight="4" />
   <Wall fill="#877443" frame="#000000" x="95.83333333333334" z="36.18055555555556" w="8.75" d="25" h="0" />
   <Wall fill="#877443" frame="#000000" x="95.83333333333334" z="27.430555555555557" w="3.75" d="5" h="0" />
@@ -86,7 +80,6 @@ Nades only.&quot;" />
   <Wall fill="#eeffdc" frame="#000000" x="95.83333333333334" z="61.18055555555556" w="8.75" d="0.625" h="0" />
   <set wallHeight="2" />
   <Wall fill="#c2b17e" frame="#000000" x="100.20833333333334" z="101.80555555555556" w="15" d="15" h="0" />
-  <set wallHeight="6" />
   <set wallHeight="4" />
   <Wall fill="#877443" frame="#000000" x="70.83333333333334" z="97.43055555555556" w="25" d="8.75" h="0" />
   <Wall fill="#877443" frame="#000000" x="99.58333333333334" z="97.43055555555556" w="5" d="3.75" h="0" />
@@ -109,7 +102,6 @@ Nades only.&quot;" />
   <Wall fill="#eeffdc" frame="#000000" x="95.20833333333334" z="72.43055555555556" w="0.625" d="25" h="0" />
   <Wall fill="#eeffdc" frame="#000000" x="70.20833333333334" z="96.80555555555556" w="25" d="0.625" h="0" />
   <Wall fill="#eeffdc" frame="#000000" x="70.20833333333334" z="97.43055555555556" w="0.625" d="8.75" h="0" />
-  <set wallHeight="12" />
   <set wallHeight="6" />
   <WallSolid canGlow="true" shield="12" fill="#877443" frame="#000000" x="45.208333333333336" z="71.80555555555556" w="5" d="10" h="0" r="1.25" cx="80.20833333333334" cz="76.80555555555556" angle="180" extent="180" />
   <set wallHeight="3" />
@@ -199,7 +191,6 @@ Nades only.&quot;" />
   <Wall fill="#c2b17e" frame="#000000" x="70.20833333333334" z="71.80555555555556" w="0" d="10" h="0" />
   <Wall fill="#c2b17e" frame="#000000" x="50.208333333333336" z="71.80555555555556" w="10" d="0" h="0" />
   <set wallHeight="9" />
-  <set wallHeight="9" />
   <Wall fill="#877443" frame="#000000" x="90.20833333333334" z="91.80555555555556" w="25" d="10" h="0" y="16" />
   <set wallHeight="9" />
   <Wall fill="#877443" frame="#000000" x="90.20833333333334" z="101.80555555555556" w="10" d="15" h="0" y="16" />
@@ -209,9 +200,31 @@ Nades only.&quot;" />
   <Incarnator y="30" fill="#877443" frame="#000000" cx="107.70833333333334" cz="109.30555555555556" r="1.25" angle="90" extent="90" />
   <Incarnator y="30" fill="#877443" frame="#000000" cx="61.458333333333336" cz="63.05555555555556" r="1.25" angle="90" extent="90" />
   <Incarnator y="30" fill="#877443" frame="#000000" cx="68.95833333333334" cz="70.55555555555556" r="1.25" angle="270" extent="90" />
-  <Teleporter spin="0" y="-10" activeRange="16 * 5" deadRange="14 * 5" sound="0" shape="0" destGroup="@recenter" group="-1" fill="#faf2be" frame="#000000" cx="65.20833333333334" cz="66.80555555555556" r="1.25" angle="0" extent="90" />
-  <Teleporter shape="0" spin="0" y="50" group="@recenter" destGroup="-1" fill="#faf2be" frame="#000000" cx="65.20833333333334" cz="66.80555555555556" r="1.25" angle="0" extent="90" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#faf2be" frame="#000000" cx="65.20833333333334" cz="66.80555555555556" r="1.25" angle="0" extent="90" />
   <script>
-v1.0 - 9/5</script>
+object Teleporter
+spin = 0
+y = -10
+activeRange = 16 * 5
+deadRange = 14 * 5
+sound = 0
+shape = 0
+destGroup = @recenter
+group = -1
+end
+object Teleporter
+shape = 0
+spin = 0
+y = 50
+group = @recenter
+destGroup = -1
+end
+object Teleporter
+shape = 0
+y = 200
+win = 1000
+start = @winTeam
+activeRange = 2000
+end
+
+v1.0 - 9/5/99</script>
 </map>

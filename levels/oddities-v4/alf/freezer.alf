@@ -30,8 +30,7 @@ There are two separate areas in the level.&quot;" />
   <Wall fill="#99ccff" frame="#000000" x="32.43055555555556" z="32.708333333333336" w="0.625" d="3.75" h="0" />
   <Wall fill="#99ccff" frame="#000000" x="33.05555555555556" z="32.083333333333336" w="3.75" d="0.625" h="0" />
   <Wall fill="#99ccff" frame="#000000" x="33.05555555555556" z="36.458333333333336" w="3.75" d="0.625" h="0" />
-  <set baseHeight="0" />
-  <set wa="freezerHeight + wallHeight" />
+  <set baseHeight="0" wa="freezerHeight + wallHeight" />
   <Wall fill="#99ccff" frame="#000000" x="32.43055555555556" z="32.083333333333336" w="5" d="5" h="0.5" />
   <set wa="freezerHeight + wallHeight" />
   <Field watch="collisionDamageMask" deltaY="fieldForce" deltaX=".5" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="31.805555555555557" z="31.458333333333336" w="6.25" d="6.25" h="1.5" />
@@ -70,8 +69,7 @@ There are two separate areas in the level.&quot;" />
   <Wall fill="#99ccff" frame="#000000" x="83.05555555555556" z="82.70833333333334" w="3.75" d="3.75" h="0.5" />
   <set baseHeight="freezerHeight" />
   <Wall fill="#99ccff" frame="#000000" x="82.43055555555556" z="82.08333333333334" w="5" d="5" h="0.5" />
-  <set baseHeight="0" />
-  <set wallHeight="freezerHeight" />
+  <set baseHeight="0" wallHeight="freezerHeight" />
   <Wall fill="#00ccff" frame="#000000" x="82.43055555555556" z="82.08333333333334" w="0.625" d="0.625" h="0" />
   <Wall fill="#00ccff" frame="#000000" x="82.43055555555556" z="86.45833333333334" w="0.625" d="0.625" h="0" />
   <Wall fill="#00ccff" frame="#000000" x="86.80555555555556" z="86.45833333333334" w="0.625" d="0.625" h="0" />

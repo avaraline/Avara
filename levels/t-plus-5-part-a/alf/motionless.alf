@@ -18,10 +18,7 @@
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#4f483d" frame="#353028" cx="4.305555555555555" cz="1.8055555555555558" r="3.75" angle="90" extent="180" />
   <set designer="&quot;S. Carmel&quot;" information="&quot;motionless:
 life stands still for a moment, everything is quiet, and then you realize, youâ€™re just locked in your closet.&quot;" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="133.61111111111111" z="63.611111111111114" w="10" d="10" h="0" r="2.569444444444443" angle="225" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="133.61111111111111" z="63.611111111111114" w="10" d="10" h="0" r="2.569444444444443" angle="225" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#4f483d" frame="#000000" x="123.61111111111111" z="93.61111111111111" w="20" d="10" h="0" />
   <set wallHeight="4" />
@@ -36,30 +33,15 @@ life stands still for a moment, everything is quiet, and then you realize, youâ€
   <Wall fill="#4f483d" frame="#000000" x="113.61111111111111" z="53.611111111111114" w="30" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="123.61111111111111" z="63.611111111111114" w="10" d="10" h="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="133.61111111111111" y="0" z="83.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="225" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="133.61111111111111" y="0" z="103.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="225" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="133.61111111111111" z="83.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="225" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="133.61111111111111" z="103.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="225" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="123.61111111111111" z="83.61111111111111" w="10" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="123.61111111111111" z="103.61111111111111" w="10" d="10" h="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="113.61111111111111" y="0" z="103.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="45" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="113.61111111111111" y="2" z="83.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="45" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="113.61111111111111" y="2" z="63.611111111111114" w="10" d="10" h="0" r="2.569444444444443" angle="45" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="113.61111111111111" z="103.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="45" extent="90" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="113.61111111111111" z="83.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="45" extent="90" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="113.61111111111111" z="63.611111111111114" w="10" d="10" h="0" r="2.569444444444443" angle="45" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#4f483d" frame="#000000" x="113.61111111111111" z="33.611111111111114" w="10" d="20" h="0" />
   <set wallHeight="4" />
@@ -112,106 +94,40 @@ life stands still for a moment, everything is quiet, and then you realize, youâ€
   <Wall fill="#838d9c" frame="#000000" x="73.61111111111111" z="103.61111111111111" w="30" d="10" h="0" />
   <set wallHeight="2" />
   <Wall fill="#838d9c" frame="#000000" x="73.61111111111111" z="63.611111111111114" w="30" d="10" h="0" />
-  <Ramp fill="#7a8491" frame="#000000" x="93.61111111111111" y="2" z="83.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="45" extent="90" />
-  <set deltaY="2" />
-  <set y="0" />
-  <set thickness="0" />
-  <Ramp fill="#7a8491" frame="#000000" x="73.61111111111111" y="0" z="83.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="225" extent="90" />
-  <set deltaY="2" />
-  <set y="0" />
-  <set thickness="0" />
-  <Ramp fill="#7a8491" frame="#000000" x="83.61111111111111" y="0" z="73.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="315" extent="90" />
-  <set deltaY="2" />
-  <set y="0" />
-  <set thickness="0" />
-  <Ramp fill="#7a8491" frame="#000000" x="83.61111111111111" y="0" z="93.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="135" extent="90" />
-  <set deltaY="2" />
-  <set y="0" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="33.611111111111114" y="0" z="103.61111111111111" w="10" d="10" h="0" r="2.5694444444444446" angle="45" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
+  <Ramp deltaY="2" y="0" thickness="0" fill="#7a8491" frame="#000000" x="93.61111111111111" z="83.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="45" extent="90" />
+  <Ramp deltaY="2" y="0" thickness="0" fill="#7a8491" frame="#000000" x="73.61111111111111" z="83.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="225" extent="90" />
+  <Ramp deltaY="2" y="0" thickness="0" fill="#7a8491" frame="#000000" x="83.61111111111111" z="73.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="315" extent="90" />
+  <Ramp deltaY="2" y="0" thickness="0" fill="#7a8491" frame="#000000" x="83.61111111111111" z="93.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="135" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="33.611111111111114" z="103.61111111111111" w="10" d="10" h="0" r="2.5694444444444446" angle="45" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="43.611111111111114" z="103.61111111111111" w="10" d="10" h="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="53.611111111111114" y="0" z="103.61111111111111" w="10" d="10" h="0" r="2.5694444444444464" angle="225" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="33.611111111111114" y="2" z="83.61111111111111" w="10" d="10" h="0" r="2.5694444444444446" angle="45" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="53.611111111111114" z="103.61111111111111" w="10" d="10" h="0" r="2.5694444444444464" angle="225" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="33.611111111111114" z="83.61111111111111" w="10" d="10" h="0" r="2.5694444444444446" angle="45" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="43.611111111111114" z="83.61111111111111" w="10" d="10" h="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="53.611111111111114" y="0" z="83.61111111111111" w="10" d="10" h="0" r="2.5694444444444464" angle="225" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="33.611111111111114" y="2" z="63.611111111111114" w="10" d="10" h="0" r="2.5694444444444446" angle="45" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="53.611111111111114" z="83.61111111111111" w="10" d="10" h="0" r="2.5694444444444464" angle="225" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="33.611111111111114" z="63.611111111111114" w="10" d="10" h="0" r="2.5694444444444446" angle="45" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="43.611111111111114" z="63.611111111111114" w="10" d="10" h="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="53.611111111111114" y="0" z="63.611111111111114" w="10" d="10" h="0" r="2.5694444444444464" angle="225" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="103.61111111111111" y="2" z="33.611111111111114" w="10" d="10" h="0" r="2.5694444444444446" angle="135" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="103.61111111111111" y="0" z="53.611111111111114" w="10" d="10" h="0" r="2.5694444444444464" angle="315" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="83.61111111111111" y="2" z="33.611111111111114" w="10" d="10" h="0" r="2.5694444444444446" angle="135" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="83.61111111111111" y="0" z="53.611111111111114" w="10" d="10" h="0" r="2.5694444444444464" angle="315" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="63.611111111111114" y="2" z="33.611111111111114" w="10" d="10" h="0" r="2.5694444444444446" angle="135" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="63.611111111111114" y="0" z="53.611111111111114" w="10" d="10" h="0" r="2.5694444444444464" angle="315" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="63.611111111111114" y="2" z="133.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="315" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="53.611111111111114" z="63.611111111111114" w="10" d="10" h="0" r="2.5694444444444464" angle="225" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="103.61111111111111" z="33.611111111111114" w="10" d="10" h="0" r="2.5694444444444446" angle="135" extent="90" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="103.61111111111111" z="53.611111111111114" w="10" d="10" h="0" r="2.5694444444444464" angle="315" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="83.61111111111111" z="33.611111111111114" w="10" d="10" h="0" r="2.5694444444444446" angle="135" extent="90" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="83.61111111111111" z="53.611111111111114" w="10" d="10" h="0" r="2.5694444444444464" angle="315" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="63.611111111111114" z="33.611111111111114" w="10" d="10" h="0" r="2.5694444444444446" angle="135" extent="90" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="63.611111111111114" z="53.611111111111114" w="10" d="10" h="0" r="2.5694444444444464" angle="315" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="63.611111111111114" z="133.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="315" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="63.611111111111114" z="123.61111111111111" w="10" d="10" h="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="63.611111111111114" y="0" z="113.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="135" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="83.61111111111111" y="2" z="133.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="315" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="63.611111111111114" z="113.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="135" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="83.61111111111111" z="133.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="315" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="83.61111111111111" z="123.61111111111111" w="10" d="10" h="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="83.61111111111111" y="0" z="113.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="135" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="103.61111111111111" y="2" z="133.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="315" extent="90" />
-  <set deltaY="4" />
-  <set y="0" />
-  <set thickness="0" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="83.61111111111111" z="113.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="135" extent="90" />
+  <Ramp deltaY="4" y="0" thickness="0" fill="#9ca6b5" frame="#000000" x="103.61111111111111" z="133.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="315" extent="90" />
   <set wallHeight="4" />
   <Wall fill="#afb9c7" frame="#000000" x="103.61111111111111" z="123.61111111111111" w="10" d="10" h="0" />
-  <Ramp fill="#9ca6b5" frame="#000000" x="103.61111111111111" y="0" z="113.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="135" extent="90" />
-  <set deltaY="2" />
-  <set y="2" />
-  <set thickness="0" />
+  <Ramp deltaY="2" y="2" thickness="0" fill="#9ca6b5" frame="#000000" x="103.61111111111111" z="113.61111111111111" w="10" d="10" h="0" r="2.569444444444443" angle="135" extent="90" />
   <set wallHeight="0" />
   <Wall fill="#5e5648" frame="#000000" x="132.36111111111111" z="117.36111111111111" w="2.5" d="2.5" h="0" y="4" />
   <set wallHeight="0" />

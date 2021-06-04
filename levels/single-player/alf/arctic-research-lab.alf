@@ -1,7 +1,6 @@
 <map>
   <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="1500" />
-  <set ambient=".91" />
-  <set wallHeight="0" />
+  <set ambient=".91" wallHeight="0" />
   <SkyColor verticalRangeMin="0" verticalRangeMax="2000" n="8" fill="#ffffff" frame="#ccffff" />
   <GroundColor fill="#eeeeee" frame="#ccffff" />
   <Incarnator fill="#bbbbbb" frame="#000000" cx="44.30555555555556" cz="11.805555555555555" r="2.5" angle="45" extent="90" />

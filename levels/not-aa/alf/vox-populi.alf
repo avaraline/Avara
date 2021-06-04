@@ -1,8 +1,7 @@
 <map>
   <SkyColor verticalRangeMax="2500" n="24" fill="#f0fff4" frame="#c5d4c8" />
   <GroundColor fill="#c0c3b8" frame="#c0c3b8" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;(Similar to Vatnajökull) Everybody agrees with me.&quot;" />
-  <set wallHeight="2" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;(Similar to Vatnajökull) Everybody agrees with me.&quot;" wallHeight="2" />
   <Wall fill="#305346" frame="#000000" x="39.583333333333336" z="94.58333333333334" w="7.5" d="7.5" h="0" />
   <set wallHeight="2" />
   <Wall fill="#305346" frame="#000000" x="54.583333333333336" z="94.58333333333334" w="17.5" d="7.5" h="0" />
@@ -17,7 +16,6 @@
   <Wall fill="#103727" frame="#000000" x="62.083333333333336" z="79.58333333333334" w="10" d="15" h="0" />
   <set wallHeight="0.5" />
   <Wall fill="#103727" frame="#000000" x="62.083333333333336" z="69.58333333333334" w="10" d="10" h="0" y="3.5" />
-  <set wallHeight="4" />
   <set wallHeight="4" />
   <Wall fill="#103727" frame="#000000" x="39.583333333333336" z="59.583333333333336" w="32.5" d="10" h="0" />
   <Ramp y="2" deltaY="2" thickness="0" fill="#d2d1bc" frame="#cfd2c9" x="39.583333333333336" z="69.58333333333334" w="12.5" d="10" h="0" r="0.625" angle="270" extent="180" />
@@ -61,8 +59,7 @@
   <Wall fill="#305346" frame="#000000" x="58.333333333333336" z="29.583333333333336" w="13.75" d="12.5" h="0" />
   <set wallHeight="2" />
   <Wall fill="#305346" frame="#000000" x="32.083333333333336" z="29.583333333333336" w="13.75" d="12.5" h="0" />
-  <set light.0.i="0.3" light.1.i="0.6" />
-  <set wallHeight="2" />
+  <set light.0.i="0.3" light.1.i="0.6" wallHeight="2" />
   <Wall fill="#305346" frame="#000000" x="72.08333333333334" z="59.583333333333336" w="7.5" d="7.5" h="0" />
   <Ramp y="2" deltaY="2" thickness="0" fill="#d2d1bc" frame="#cfd2c9" x="107.08333333333334" z="74.58333333333334" w="7.5" d="10" h="0" r="0.625" angle="90" extent="180" />
   <set wallHeight="4" />

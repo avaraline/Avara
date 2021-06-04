@@ -61,7 +61,8 @@ activeRange = 2000
 deadRange = 90
 destGroup = @recenter
 y = 30
-shape = 0</script>
+shape = 0
+end</script>
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#444444" frame="#cc9900" cx="16.21527777777778" cz="0.34722222222222227" r="1.145833333333333" angle="180" extent="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#eeeeee" frame="#ffffcc" cx="91.52777777777779" cz="91.11111111111111" r="1.1805555555555571" angle="0" extent="90" />

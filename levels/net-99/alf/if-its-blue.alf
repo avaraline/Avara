@@ -4,8 +4,7 @@
   <set designer="&quot;Peter Koss (mcad@avara.net)&quot;" information="&quot;’When you make a level you should 
 base the whole thing on one colour’
 - Dan Royer
-You think this is what he meant?....&quot;" />
-  <set wallHeight="25" />
+You think this is what he meant?....&quot;" wallHeight="25" />
   <Wall fill="#010066" frame="#000000" x="23.541666666666668" z="2.7777777777777777" w="3.680555555555557" d="100.55555555555557" h="0" />
   <set wallHeight="25" />
   <Wall fill="#010066" frame="#000000" x="27.222222222222225" z="2.7777777777777777" w="93.19444444444444" d="3.0555555555555562" h="0" />
@@ -498,9 +497,7 @@ You think this is what he meant?....&quot;" />
   <And in="@start" out="mShow" fill="#dd0806" frame="#000000" cx="97.67361111111111" cz="66.21527777777777" r="1.8402777777777786" angle="0" extent="90" />
   <Timer in="mTaken" out="mShow" wait="50" fill="#dd0806" frame="#000000" cx="97.67361111111111" cz="66.21527777777777" r="1.8402777777777786" angle="0" extent="90" />
   <Goody y="5" shape="bspMissile" speed="5" missiles="6" start="mShow" out="mTaken" fill="#dd0806" frame="#000000" cx="97.67361111111111" cz="66.21527777777777" r="1.8402777777777786" angle="0" extent="90" />
-  <set light.0.i="0.8" light.0.a="20" light.0.b="10" />
-  <set wallYon="0.01" />
-  <set wallHeight="20" />
+  <set light.0.i="0.8" light.0.a="20" light.0.b="10" wallYon="0.01" wallHeight="20" />
   <Wall fill="#c0c0c0" frame="#000000" x="23.541666666666668" z="0.9027777777777778" w="100.55555555555556" d="1.875" h="0" y="24" />
   <set wallHeight="20" />
   <Wall fill="#c0c0c0" frame="#000000" x="124.09722222222223" z="0.9027777777777778" w="2.430555555555557" d="104.30555555555557" h="0" y="24" />

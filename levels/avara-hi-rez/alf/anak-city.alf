@@ -1,7 +1,6 @@
 <map>
   <Sound y="80" sound="snBubbles" isAmbient="true" loopCount="-1" volume="750" />
-  <set ambient=".25" />
-  <set wallHeight="0" />
+  <set ambient=".25" wallHeight="0" />
   <SkyColor verticalRangeMin="0" verticalRangeMax="1000" n="8" fill="#00ccff" frame="#000055" />
   <GroundColor fill="#002200" frame="#00ccff" />
   <Wall fill="#bbbbbb" frame="#000000" x="154.30555555555557" z="65.55555555555556" w="5" d="40" h="5" y="5" />

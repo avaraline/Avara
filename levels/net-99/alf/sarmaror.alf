@@ -1,10 +1,7 @@
 <map>
   <SkyColor fill="#ffffe6" frame="#7b877a" />
   <GroundColor fill="#111111" frame="#000000" />
-  <set designer="&quot;Mondo&quot;" />
-  <set information="&quot;Use sound options to turn the music on or off.&quot;" />
-  <set ambient=".2" light.0.i="1" light.0.a="30" light.0.b="0" defaultLives="3" wallTraction="1" wallFriction="1" lightHull="787" mediumHull="788" heavyHull="789" />
-  <set wallHeight="8" />
+  <set designer="&quot;Mondo&quot;" information="&quot;Use sound options to turn the music on or off.&quot;" ambient=".2" light.0.i="1" light.0.a="30" light.0.b="0" defaultLives="3" wallTraction="1" wallFriction="1" lightHull="787" mediumHull="788" heavyHull="789" wallHeight="8" />
   <Wall fill="#7b877a" frame="#000000" x="40.97222222222222" z="45.55555555555556" w="10" d="15" h="0" />
   <set wallHeight="16" />
   <Wall fill="#423b41" frame="#000000" x="30.972222222222225" z="35.55555555555556" w="2.5" d="35" h="0" />
@@ -92,8 +89,7 @@
   <Wall fill="#282628" frame="#000000" x="68.47222222222223" z="90.55555555555556" w="10" d="15" h="0" />
   <set wallHeight="6" baseHeight="-6" />
   <Wall fill="#494c48" frame="#000000" x="68.47222222222223" z="75.55555555555556" w="15" d="15" h="0" />
-  <set baseHeight="0" />
-  <set wallHeight="2" baseHeight="-2" />
+  <set baseHeight="-2" wallHeight="2" />
   <Wall fill="#b3b3aa" frame="#000000" x="100.97222222222223" z="40.55555555555556" w="15" d="15" h="0" />
   <set wallHeight="4" baseHeight="-4" />
   <Wall fill="#494c48" frame="#000000" x="90.97222222222223" z="30.555555555555557" w="10" d="15" h="0" />
@@ -326,7 +322,9 @@
   <Incarnator fill="#7b877a" frame="#000000" cx="38.47222222222222" cz="78.05555555555556" r="1.25" angle="270" extent="90" />
   <Incarnator fill="#7b877a" frame="#000000" cx="118.47222222222223" cz="88.05555555555556" r="1.25" angle="90" extent="90" />
   <Incarnator fill="#7b877a" frame="#000000" cx="108.47222222222223" cz="58.05555555555556" r="1.25" angle="0" extent="90" />
-  <Incarnator fill="#7b877a" frame="#000000" cx="48.47222222222222" cz="108.05555555555556" r="1.25" angle="180" extent="90" />
   <script>
-v1.0 - 9/6</script>
+object Incarnator
+end
+
+v1.0 - 9/6/99</script>
 </map>

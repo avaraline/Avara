@@ -40,7 +40,6 @@ Goodies are only visible within 6 meters.&quot;" funnelAHeight="7.5" funnelBHeig
   <set baseHeight="pitHeight" wallHeight="funnelBHeight" />
   <Wall fill="#ff0000" frame="#000000" x="39.583333333333336" z="24.51388888888889" w="0" d="25" h="0" />
   <Wall fill="#ff0000" frame="#000000" x="44.583333333333336" z="24.51388888888889" w="0" d="25" h="0" />
-  <set baseHeight="0" />
   <set baseHeight="pitHeight + funnelBHeight" wallHeight="funnelAHeight" />
   <Wall fill="#ff0000" frame="#000000" x="29.583333333333336" z="24.51388888888889" w="25" d="0" h="0" />
   <Wall fill="#ff0000" frame="#000000" x="29.583333333333336" z="49.51388888888889" w="25" d="0" h="0" />

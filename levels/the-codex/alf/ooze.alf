@@ -1,8 +1,7 @@
 <map>
   <SkyColor verticalRangeMax="2500" n="10" fill="#ffffff" frame="#e3edff" />
   <GroundColor fill="#ead5c5" frame="#ead5c5" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;It all began with an ooze.&quot;" />
-  <set wallHeight="0.1" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;It all began with an ooze.&quot;" wallHeight="0.1" />
   <Wall fill="#cab49f" frame="#000000" x="9.583333333333334" z="69.58333333333334" w="60" d="10" h="0" y="4.9" />
   <set wallHeight="0.1" />
   <Wall fill="#cab49f" frame="#000000" x="59.583333333333336" z="19.583333333333336" w="10" d="50" h="0" y="4.9" />
@@ -17,11 +16,9 @@
   <Incarnator y="0" fill="#284c2a" frame="#000000" cx="18.333333333333336" cz="78.54166666666667" r="1.25" angle="225" extent="90" />
   <set wallHeight="0.1" />
   <Wall fill="#cab49f" frame="#000000" x="69.58333333333334" z="77.08333333333334" w="30" d="2.5" h="0" y="4.9" />
-  <set wallYon="0.01" />
-  <set wallHeight="0.1" />
+  <set wallYon="0.01" wallHeight="0.1" />
   <Wall fill="#ffffff" frame="#000000" x="69.58333333333334" z="79.58333333333334" w="30" d="30" h="0" y="4.9" />
-  <set wallYon="180" />
-  <set wallHeight="0" />
+  <set wallYon="180" wallHeight="0" />
   <Wall fill="#485791" frame="#000000" x="80.83333333333334" z="90.83333333333334" w="7.5" d="7.5" h="0" y="5" />
   <set wallHeight="4.9" />
   <WallDoor midYaw="45" fill="#485791" frame="#000000" r="1.25" cx="18.333333333333336" cz="78.54166666666667" angle="225" extent="90" x="83.33333333333334" z="93.33333333333334" w="2.5" d="2.5" h="0" />
@@ -75,8 +72,7 @@
   <And in="@start" out="mShow" fill="#e3edff" frame="#e3edff" cx="54.65277777777778" cz="82.15277777777779" r="1.25" angle="180" extent="270" />
   <Timer in="mTaken" out="mShow" wait="150" fill="#e3edff" frame="#e3edff" cx="54.65277777777778" cz="82.15277777777779" r="1.25" angle="180" extent="270" />
   <Goody shape="bspMissile" y="12" speed="2" missiles="3" start="mShow" out="mTaken" fill="#e3edff" frame="#e3edff" cx="54.65277777777778" cz="82.15277777777779" r="1.25" angle="180" extent="270" />
-  <set wallYon="0.01" />
-  <set wallHeight="100" />
+  <set wallYon="0.01" wallHeight="100" />
   <Wall fill="#ffffff" frame="#000000" x="9.583333333333334" z="19.583333333333336" w="50" d="50" h="0" />
   <set wallHeight="100" />
   <Wall fill="#ffffff" frame="#000000" x="9.583333333333334" z="14.583333333333334" w="100" d="5" h="0" />
@@ -86,8 +82,7 @@
   <Wall fill="#ffffff" frame="#000000" x="4.583333333333334" z="14.583333333333334" w="5" d="110" h="0" />
   <set wallHeight="100" />
   <Wall fill="#ffffff" frame="#000000" x="9.583333333333334" z="119.58333333333334" w="100" d="5" h="0" />
-  <set wallYon="180" />
-  <set wallHeight="13" />
+  <set wallYon="180" wallHeight="13" />
   <Wall fill="#6f7cad" frame="#000000" x="9.583333333333334" z="119.58333333333334" w="100" d="1.25" h="0" />
   <set wallHeight="13" />
   <Wall fill="#6f7cad" frame="#000000" x="9.583333333333334" z="68.33333333333334" w="50" d="1.25" h="0" />

@@ -270,7 +270,8 @@ Use scout view for a better view of the maze.&quot;" TallWall="10" MazeWall="4" 
   <Wall fill="#006666" frame="#000000" x="59.93055555555556" z="70.20833333333334" w="0.625" d="35" h="0" />
   <script>
 wallHeight = DomeWall
-RD = (DomeSlope + 1)</script>
+RD = (DomeSlope + 1) 
+/ 4</script>
   <Wall fill="#555555" frame="#000000" x="64.30555555555556" z="83.95833333333334" w="1.25" d="3.75" h="0" />
   <Wall fill="#555555" frame="#000000" x="74.30555555555556" z="103.95833333333334" w="11.25" d="1.25" h="0" />
   <Wall fill="#555555" frame="#000000" x="94.30555555555556" z="83.95833333333334" w="1.25" d="11.25" h="0" />
@@ -288,8 +289,7 @@ RD = (DomeSlope + 1)</script>
   <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#555555" frame="#000000" x="75" z="74.65277777777779" w="10" d="10" h="1" r="3.125" angle="135" extent="90" />
   <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#555555" frame="#000000" x="85" z="84.65277777777779" w="10" d="10" h="1" r="3.125" angle="225" extent="90" />
   <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#555555" frame="#000000" x="75" z="94.65277777777779" w="10" d="10" h="1" r="3.125" angle="315" extent="90" />
-  <set baseHeight="DomeWall" wallHeight="RD" />
-  <set wa="RD * 0" />
+  <set baseHeight="DomeWall" wallHeight="RD" wa="RD * 0" />
   <WallDoor midYaw="45" fill="#555555" frame="#000000" x="64.58333333333334" z="79.58333333333334" w="11.875" d="1.25" h="0" r="3.125" cx="80.55555555555556" cz="99.54861111111111" angle="315" extent="90" />
   <set wa="RD * 1" />
   <WallDoor midYaw="45" fill="#555555" frame="#000000" x="66.18055555555556" z="80.55555555555556" w="10" d="1.25" h="0" r="3.125" cx="80.55555555555556" cz="99.54861111111111" angle="315" extent="90" />

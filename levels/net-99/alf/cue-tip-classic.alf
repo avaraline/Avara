@@ -375,8 +375,7 @@
   <Incarnator y="60" fill="#008800" frame="#000000" cx="69.51388888888889" cz="129.51388888888889" r="1.25" angle="135" extent="90" />
   <Incarnator y="60" fill="#008800" frame="#000000" cx="29.51388888888889" cz="89.58333333333334" r="1.25" angle="225" extent="90" />
   <Incarnator y="60" fill="#008800" frame="#000000" cx="39.583333333333336" cz="119.65277777777779" r="1.25" angle="180" extent="90" />
-  <set wallYon="0.01" />
-  <set wallHeight="0.5" />
+  <set wallYon="0.01" wallHeight="0.5" />
   <WallDoor deltaY="-10" open="@blue1" close="@yello1" openSpeed="100" closeSpeed="100" volume="0" fill="#ffffcc" frame="#000000" r="1.25" cx="39.583333333333336" cz="119.65277777777779" angle="180" extent="90" x="134.58333333333334" z="138.33333333333334" w="0.625" d="0.625" h="0" y="29.5" />
   <set wallHeight="0.5" />
   <WallDoor deltaY="-10" open="@blue2" close="@yello2" openSpeed="100" closeSpeed="100" volume="0" fill="#ffffcc" frame="#000000" r="1.25" cx="39.583333333333336" cz="119.65277777777779" angle="180" extent="90" x="135.20833333333334" z="138.33333333333334" w="0.625" d="0.625" h="0" y="29.5" />

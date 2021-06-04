@@ -117,8 +117,7 @@ Don’t stay on the ground too long.&quot;" TowerHeight="12" GuardFreq="20 / 3" 
   <Goody shape="bspGoody" y="TowerHeight + 2" speed="2" scale=".5" missiles="10" grenades="20" boosters="1" start="mShow" out="mTaken" fill="#ff0099" frame="#00ee00" cx="84.65277777777779" cz="118.8888888888889" r="1.875" angle="180" extent="270" />
   <And in="@start" out="mShow" fill="#ff0099" frame="#00ee00" cx="84.65277777777779" cz="118.8888888888889" r="1.875" angle="180" extent="270" />
   <Timer in="mTaken" out="mShow" wait="30 * 15" fill="#ff0099" frame="#00ee00" cx="84.65277777777779" cz="118.8888888888889" r="1.875" angle="180" extent="270" />
-  <set wallHeight="8" />
-  <set switchY="1.8" markerShape="bspTower" markerScale=".25" />
+  <set wallHeight="8" switchY="1.8" markerShape="bspTower" markerScale=".25" />
   <Wall fill="#ffffff" frame="#777777" x="26.458333333333336" z="152.08333333333334" w="4.027777777777775" d="0.625" h="0" />
   <Wall fill="#eeeeee" frame="#777777" x="30.48611111111111" z="152.08333333333334" w="4.097222222222225" d="0.625" h="0" />
   <Wall fill="#dddddd" frame="#777777" x="34.583333333333336" z="152.08333333333334" w="4.027777777777779" d="0.625" h="0" />

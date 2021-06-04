@@ -1,9 +1,7 @@
 <map>
   <SkyColor verticalRangeMax="5000" n="10" fill="#1e1d16" frame="#1e1d16" />
   <GroundColor fill="#000000" frame="#000000" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Watching from the darkness.&quot;" />
-  <set ambient="0" light.0.i="0.2" light.1.i="0.15" light.2.i="0.6" light.2.a="90" />
-  <set wallHeight="1.5" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Watching from the darkness.&quot;" ambient="0" light.0.i="0.2" light.1.i="0.15" light.2.i="0.6" light.2.a="90" wallHeight="1.5" />
   <Wall fill="#cfd2c9" frame="#000000" x="69.58333333333334" z="74.58333333333334" w="30" d="30" h="0" />
   <set wallHeight="1.5" />
   <Wall fill="#a3a597" frame="#000000" x="77.70833333333334" z="82.70833333333334" w="13.75" d="13.75" h="0" y="1.5" />
@@ -40,8 +38,7 @@
   <set wallHeight="20" />
   <Wall fill="#1e1d16" frame="#000000" x="122.08333333333334" z="52.083333333333336" w="2.5" d="75" h="0" />
   <Incarnator y="15" fill="#606e3c" frame="#000000" cx="62.708333333333336" cz="111.45833333333334" r="1.25" angle="180" extent="90" />
-  <set wallYon="0.01" />
-  <set wallHeight="200" />
+  <set wallYon="0.01" wallHeight="200" />
   <Wall fill="#1e1d16" frame="#000000" x="44.583333333333336" z="49.583333333333336" w="80" d="2.5" h="0" />
   <set wallHeight="200" />
   <Wall fill="#1e1d16" frame="#000000" x="44.583333333333336" z="127.08333333333334" w="80" d="2.5" h="0" />

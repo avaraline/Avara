@@ -108,8 +108,7 @@ One player only.&quot;" hull.2="mediumHull" Floor1Height="5" Floor2Height="10" w
   <FreeSolid mass="WallMass" customGravity="WallGrav" accel="WallAccel" shotPower="WallShot" start="WallStart" fill="#777777" frame="#000000" x="53.958333333333336" z="21.458333333333336" w="20" d="0.625" h="0" r="1.875" cx="56.458333333333336" cz="23.958333333333336" angle="90" extent="90" />
   <FreeSolid mass="WallMass" customGravity="WallGrav" accel="WallAccel" shotPower="WallShot" start="WallStart" fill="#777777" frame="#000000" x="53.958333333333336" z="22.083333333333336" w="0.625" d="20" h="0" r="1.875" cx="56.458333333333336" cz="23.958333333333336" angle="90" extent="90" />
   <Incarnator status="0" start="@CoreWarning" stop="@ReactorBlow" fill="#00ee00" frame="#000000" cx="99.30555555555557" cz="79.47916666666667" r="1.7013888888888857" angle="135" extent="90" />
-  <set baseHeight="0" />
-  <set wa="Floor2Base + Floor2Height" />
+  <set baseHeight="0" wa="Floor2Base + Floor2Height" />
   <FreeSolid mass="WallMass" customGravity="WallGrav" accel="WallAccel" shotPower="WallShot" start="WallStart" fill="#0000aa" frame="#000000" x="54.583333333333336" z="22.083333333333336" w="15" d="15" h="1" r="1.7013888888888857" cx="99.30555555555557" cz="79.47916666666667" angle="135" extent="90" />
   <set wa="Floor2Base + Floor2Height" />
   <FreeSolid mass="WallMass" customGravity="WallGrav" accel="WallAccel" shotPower="WallShot" start="WallStart" fill="#0000aa" frame="#000000" x="54.583333333333336" z="37.083333333333336" w="15" d="15" h="1" r="1.7013888888888857" cx="99.30555555555557" cz="79.47916666666667" angle="135" extent="90" />

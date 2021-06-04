@@ -39,8 +39,11 @@ y = 15
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
-  <set wallHeight="2.1" />
+speed = 0
+end
+
+wallHeight = 2.1
+/* bwadi blocks */</script>
   <Wall fill="#003366" frame="#000000" x="41.18055555555556" z="9.027777777777779" w="25" d="7.5" h="0" />
   <Wall fill="#003366" frame="#000000" x="41.18055555555556" z="16.52777777777778" w="7.5" d="17.5" h="0" />
   <Wall fill="#003366" frame="#000000" x="41.18055555555556" z="39.02777777777778" w="5" d="5" h="0" />

@@ -64,8 +64,7 @@
   <set designer="&quot;Red Cap&quot;" />
   <SkyColor n="12" fill="#aa0000" frame="#0000dd" />
   <GroundColor fill="#777777" frame="#66ccff" />
-  <set ambient="0" light.0.i="0.0" light.0.a="45" light.0.b="73" light.1.i=".2" light.1.a="12" light.1.b="13" light.2.i=".5" light.2.a="11" light.2.b="9" light.3.i=".5" light.3.a="90" light.3.b="-90" />
-  <set baseHeight="45" wallHeight="0" />
+  <set ambient="0" light.0.i="0.0" light.0.a="45" light.0.b="73" light.1.i=".2" light.1.a="12" light.1.b="13" light.2.i=".5" light.2.a="11" light.2.b="9" light.3.i=".5" light.3.a="90" light.3.b="-90" baseHeight="45" wallHeight="0" />
   <WallDoor stepOnMsg="@open" didOpen="@close" openSpeed="20" closeSpeed="1" shotPower="9999" open="@open" close="@close" openSound="0" closeSound="0" stopSound="0" deltaY="5" fill="#660099" frame="#000000" x="25" z="25" w="10" d="10" h="0" r="3.75" cx="4.444444444444445" cz="65.06944444444444" angle="90" extent="180" />
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" fill="#660099" frame="#000000" cx="31.25" cz="29.375" r="1.875" angle="180" extent="90" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#660099" frame="#000000" cx="31.25" cz="29.375" r="1.875" angle="180" extent="90" />
@@ -80,8 +79,7 @@
   <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" in.8="@eight" out="@time" fill="#330066" frame="#000000" cx="63.125" cz="29.375" r="3.125" angle="0" extent="90" />
   <Timer in="@time" out="@whoop" wait="1" fill="#330066" frame="#000000" cx="63.125" cz="29.375" r="3.125" angle="0" extent="90" />
   <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" out.6="@six" out.7="@seven" out.8="@eight" fill="#330066" frame="#000000" cx="63.125" cz="29.375" r="3.125" angle="0" extent="90" />
-  <set grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" />
-  <set baseHeight="50" />
+  <set grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" baseHeight="50" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="41.25" cz="18.958333333333336" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="90" fill="#ffffff" frame="#000000" cx="41.25" cz="18.958333333333336" r="1.25" angle="180" extent="90" />

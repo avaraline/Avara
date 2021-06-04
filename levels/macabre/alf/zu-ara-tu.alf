@@ -3,8 +3,7 @@
   <GroundColor fill="#070c08" frame="#070c08" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#070c08" frame="#070c08" cx="4.305555555555555" cz="2.5" r="3.75" angle="90" extent="180" />
   <set designer="&quot;S. Carmel&quot;" information="&quot;Players: 2-4
-.&quot;" />
-  <set wallHeight="1" />
+.&quot;" wallHeight="1" />
   <Wall fill="#bdfff7" frame="#000000" x="118.61111111111111" z="102.43055555555556" w="2.5" d="5" h="0" />
   <set wallHeight="1" />
   <Wall fill="#bdfff7" frame="#000000" x="103.61111111111111" z="102.43055555555556" w="5" d="5" h="0" />
@@ -34,8 +33,7 @@
   <Wall fill="#103827" frame="#000000" x="123.61111111111111" z="87.43055555555556" w="2.5" d="5" h="0" y="1" />
   <set wallHeight="2" />
   <Wall fill="#103827" frame="#000000" x="103.61111111111111" z="92.43055555555556" w="10" d="10" h="0" y="4" />
-  <set ambient="0" light.0.i="0.6" light.0.a="80" light.0.b="-45" light.1.i="0.2" light.1.a="-60" light.1.b="45" light.2.i="0.0" light.2.a="45" light.2.b="90" />
-  <set wallHeight="1" />
+  <set ambient="0" light.0.i="0.6" light.0.a="80" light.0.b="-45" light.1.i="0.2" light.1.a="-60" light.1.b="45" light.2.i="0.0" light.2.a="45" light.2.b="90" wallHeight="1" />
   <Wall fill="#bdfff7" frame="#000000" x="69.23611111111111" z="119.93055555555556" w="2.5" d="5" h="0" />
   <set wallHeight="5" />
   <Wall fill="#103827" frame="#000000" x="69.23611111111111" z="119.93055555555556" w="2.5" d="5" h="0" y="1" />

@@ -153,7 +153,6 @@
   <Ramp y="2" deltaY="0" fill="#0033ff" frame="#000000" x="164.30555555555557" z="20" w="2.5" d="25" h="0" r="1.25" angle="180" extent="90" />
   <Ramp y="2" deltaY="0" fill="#0033ff" frame="#000000" x="139.30555555555557" z="45" w="25" d="2.5" h="0" r="1.25" angle="180" extent="90" />
   <Ramp y="2" deltaY="0" fill="#0033ff" frame="#000000" x="139.30555555555557" z="17.5" w="25" d="2.5" h="0" r="1.25" angle="180" extent="90" />
-  <set wallHeight="3" />
   <set wallHeight="5" />
   <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="23 * 5" destGroup="2" shape="0" fill="#ffffff" frame="#000000" cx="99.30555555555556" cz="84.51388888888889" r="2.5" angle="180" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffffff" frame="#000000" cx="99.30555555555556" cz="84.51388888888889" r="2.5" angle="180" extent="90" />
@@ -237,8 +236,7 @@
   <Ramp y="35" deltaY="5" fill="#66ffff" frame="#000000" x="49.30555555555556" z="135" w="7.5" d="5" h="0" r="1.25" angle="45" extent="90" />
   <Ramp y="35" deltaY="5" fill="#66ffff" frame="#000000" x="49.30555555555556" z="30" w="7.5" d="5" h="0" r="1.25" angle="45" extent="90" />
   <Ramp y="35" deltaY="5" fill="#66ffff" frame="#000000" x="44.30555555555556" z="35" w="5" d="7.5" h="0" r="1.25" angle="135" extent="90" />
-  <set wallHeight="10" />
-  <set wallYon="0.01" />
+  <set wallHeight="10" wallYon="0.01" />
   <Wall fill="#00ccff" frame="#000000" x="134.30555555555557" z="85" w="35" d="0" h="0" y="40" />
   <Wall fill="#00ccff" frame="#000000" x="99.30555555555556" z="120" w="0" d="35" h="0" y="40" />
   <Wall fill="#00ccff" frame="#000000" x="29.305555555555557" z="85" w="35" d="0" h="0" y="40" />

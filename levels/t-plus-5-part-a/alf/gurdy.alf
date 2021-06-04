@@ -1,17 +1,30 @@
 <map>
   <SkyColor verticalRangeMax="5000" verticalRangeMin="0" n="10" fill="#fff7dc" frame="#a67f5d" />
-  <GroundColor fill="#3a230b" frame="#000000" />
-  <set designer="&quot;Gus (Mondo) Wiseman - guswise@jps.net&quot;" />
-  <set information="&quot;Some people can't handle information.&quot;" />
-  <set ambient=".3" light.0.i="1" light.0.a="0" light.0.b="10" light.1.i="1" light.1.a="0" light.1.b="190" light.2.i="1" light.2.a="90" light.2.b="0" defaultLives="3" />
   <script>
+adjust GroundColor
+end
+
+designer=&quot;Gus (Mondo) Wiseman - guswise@jps.net&quot;
+
+information=&quot;Some people can't handle information.&quot;
+
+ambient = .3
+light[0].i=1
+light[0].a=0
+light[0].b=10
+light[1].i=1
+light[1].a=0
+light[1].b=190
+light[2].i=1
+light[2].a=90
+light[2].b=0
+defaultLives=3
+
 started  6-18-00
 v1.0   6-8-00
 v1.1   4-14-01
-© Gus Wiseman 2001.  All rights reserv</script>
+© Gus Wiseman 2001.  All rights reserved.</script>
   <Ramp deltaY="2" thickness="0" fill="#fff7dc" frame="#000000" x="152.70833333333334" z="99.93055555555556" w="7.5" d="20" h="0" r="1.25" angle="0" extent="180" />
-  <set wallHeight="4" />
-  <set wallHeight="2" />
   <set wallHeight="2" />
   <Wall fill="#3a230b" frame="#000000" x="160.20833333333334" z="89.93055555555556" w="15" d="30" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="175.20833333333334" z="74.93055555555556" w="15" d="45" h="0" />
@@ -105,8 +118,7 @@ v1.1   4-14-01
   <Wall fill="#3a230b" frame="#000000" x="178.33333333333334" z="58.05555555555556" w="1.25" d="1.25" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="178.33333333333334" z="60.55555555555556" w="1.25" d="1.25" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="178.33333333333334" z="63.05555555555556" w="1.25" d="1.25" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="5.5" />
+  <set wallYon="defaultYon" wallHeight="5.5" />
   <Wall fill="#3a230b" frame="#000000" x="137.70833333333334" z="92.43055555555556" w="2.5" d="2.5" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="137.70833333333334" z="142.43055555555557" w="2.5" d="2.5" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="185.20833333333334" z="142.43055555555557" w="2.5" d="2.5" h="0" />
@@ -163,8 +175,7 @@ v1.1   4-14-01
   <Wall fill="#3a230b" frame="#000000" x="185.83333333333334" z="135.55555555555557" w="1.25" d="1.25" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="185.83333333333334" z="133.05555555555557" w="1.25" d="1.25" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="185.83333333333334" z="130.55555555555557" w="1.25" d="1.25" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="5.5" />
+  <set wallYon="defaultYon" wallHeight="5.5" />
   <Wall fill="#3a230b" frame="#000000" x="152.70833333333334" z="64.93055555555556" w="2.5" d="2.5" h="0" />
   <set wallHeight="2.5" baseHeight="5.5" />
   <Wall fill="#3a230b" frame="#000000" x="155.20833333333334" z="64.93055555555556" w="15" d="2.5" h="0" />
@@ -182,8 +193,7 @@ v1.1   4-14-01
   <Wall fill="#3a230b" frame="#000000" x="163.33333333333334" z="65.55555555555556" w="1.25" d="1.25" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="165.83333333333334" z="65.55555555555556" w="1.25" d="1.25" h="0" />
   <Wall fill="#3a230b" frame="#000000" x="168.33333333333334" z="65.55555555555556" w="1.25" d="1.25" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="5.5" />
+  <set wallYon="defaultYon" wallHeight="5.5" />
   <Wall fill="#3a230b" frame="#000000" x="210.20833333333334" z="127.43055555555556" w="2.5" d="2.5" h="0" />
   <set wallHeight="2.5" baseHeight="5.5" />
   <Wall fill="#3a230b" frame="#000000" x="195.20833333333334" z="127.43055555555556" w="15" d="2.5" h="0" />

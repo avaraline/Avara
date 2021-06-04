@@ -1,8 +1,7 @@
 <map>
   <set designer="&quot;Cowboy - jmcald@usa.net&quot;" information="&quot;Shoot at your OWN basket! Teleport for ammo (alcoves behind baskets). Special thanks to Taz! and Archer for input and ideas, Head for the Bermuda layout, and other Geezer friends for beta testing. Teams are red, yellow or blue. 5 minutes or 7 baskets.&quot;" missilePower="1.3" missileAcceleration="0.3" startY="9" />
   <set grenDelay="125" numGren="8" />
-  <set missDelay="200" numMiss="4" range="90" fieldVis="false" zPower=".5" xPower=".5" yPower="0" />
-  <set timeLimit="300" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="7" kSnText="1503" kTextVolume="0.3" gameLength="4685" />
+  <set missDelay="200" numMiss="4" range="90" fieldVis="false" zPower=".5" xPower=".5" yPower="0" timeLimit="300" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="7" kSnText="1503" kTextVolume="0.3" gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />

@@ -1,9 +1,7 @@
 <map>
-  <set wallHeight="3" />
-  <set wallYon="0.1" />
+  <set wallHeight="3" wallYon="0.1" />
   <Wall fill="#ffffff" frame="#000000" x="62.15277777777778" z="62.56944444444445" w="1.25" d="2.5" h="0" y="1.5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="1.5" />
+  <set wallYon="defaultYon" wallHeight="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="62.15277777777778" z="62.56944444444445" w="1.25" d="2.5" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#ffffff" frame="#000000" x="62.15277777777778" z="62.56944444444445" w="1.25" d="2.5" h="0" y="4.5" />
@@ -68,15 +66,11 @@
   <Incarnator start="@t4" stop="@f4" fill="#000000" frame="#000000" cx="56.52777777777778" cz="59.44444444444444" r="5.625" angle="90" extent="90" />
   <Incarnator start="@t5" stop="@f5" fill="#000000" frame="#000000" cx="71.52777777777779" cz="74.44444444444444" r="5.625" angle="90" extent="90" />
   <Incarnator start="@t3" stop="@f3" fill="#000000" frame="#000000" cx="30.27777777777778" cz="33.19444444444444" r="5.625" angle="270" extent="90" />
-  <set wallHeight="3" />
-  <set wallYon="0.5" />
+  <set wallHeight="3" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="26.319444444444446" w="3.75" d="1.25" h="0" y="1.5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="3" />
-  <set wallYon="0.1" />
+  <set wallYon="0.1" wallHeight="3" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="27.569444444444446" w="1.25" d="2.5" h="0" y="1.5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="1.5" />
+  <set wallYon="defaultYon" wallHeight="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="26.319444444444446" w="3.75" d="1.25" h="0" />
   <set wallHeight="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="27.569444444444446" w="1.25" d="2.5" h="0" />
@@ -84,53 +78,41 @@
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="27.569444444444446" w="1.25" d="2.5" h="0" y="4.5" />
   <set wallHeight="3.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="26.319444444444446" w="3.75" d="1.25" h="0" y="4.5" />
-  <set wallHeight="3" />
-  <set wallYon="0.5" />
+  <set wallHeight="3" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="59.65277777777778" z="26.319444444444446" w="3.75" d="1.25" h="0" y="1.5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="1.5" />
+  <set wallYon="defaultYon" wallHeight="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="59.65277777777778" z="26.319444444444446" w="3.75" d="1.25" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#ffffff" frame="#000000" x="59.65277777777778" z="26.319444444444446" w="3.75" d="1.25" h="0" y="4.5" />
-  <set wallHeight="3" />
-  <set wallYon="0.1" />
+  <set wallHeight="3" wallYon="0.1" />
   <Wall fill="#ffffff" frame="#000000" x="62.15277777777778" z="27.569444444444446" w="1.25" d="2.5" h="0" y="1.5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="1.5" />
+  <set wallYon="defaultYon" wallHeight="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="62.15277777777778" z="27.569444444444446" w="1.25" d="2.5" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#ffffff" frame="#000000" x="62.15277777777778" z="27.569444444444446" w="1.25" d="2.5" h="0" y="4.5" />
-  <set wallHeight="3" />
-  <set wallYon="0.5" />
+  <set wallHeight="3" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="59.65277777777778" z="65.06944444444444" w="3.75" d="1.25" h="0" y="1.5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="1.5" />
+  <set wallYon="defaultYon" wallHeight="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="59.65277777777778" z="65.06944444444444" w="3.75" d="1.25" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#ffffff" frame="#000000" x="59.65277777777778" z="65.06944444444444" w="3.75" d="1.25" h="0" y="4.5" />
-  <set wallHeight="3" />
-  <set wallYon="0.5" />
+  <set wallHeight="3" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="65.06944444444444" w="3.75" d="1.25" h="0" y="1.5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="1.5" />
+  <set wallYon="defaultYon" wallHeight="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="65.06944444444444" w="3.75" d="1.25" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="65.06944444444444" w="3.75" d="1.25" h="0" y="4.5" />
-  <set wallHeight="3" />
-  <set wallYon="0.1" />
+  <set wallHeight="3" wallYon="0.1" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="62.56944444444445" w="1.25" d="2.5" h="0" y="1.5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="1.5" />
+  <set wallYon="defaultYon" wallHeight="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="62.56944444444445" w="1.25" d="2.5" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#ffffff" frame="#000000" x="23.40277777777778" z="62.56944444444445" w="1.25" d="2.5" h="0" y="4.5" />
   <SkyColor fill="#777777" frame="#555555" />
   <GroundColor fill="#bbbbbb" frame="#777777" />
-  <set defaultLives="4" />
-  <set designer="&quot;SomeGuy &lt;someguy@avara.net&gt;&quot;" information="&quot;Tired of having to constantly reset their clocks, 
+  <set defaultLives="4" designer="&quot;SomeGuy &lt;someguy@avara.net&gt;&quot;" information="&quot;Tired of having to constantly reset their clocks, 
 the inhabitants of Avara created a HECTOR-proof 
-power reactor.&quot;" />
-  <set wallHeight="0" />
+power reactor.&quot;" wallHeight="0" />
   <Wall fill="#ffff00" frame="#000000" x="37.15277777777778" z="52.56944444444445" w="12.5" d="0.625" h="0" />
   <set wallHeight="0" />
   <Wall fill="#ffff00" frame="#000000" x="37.15277777777778" z="39.44444444444444" w="12.5" d="0.625" h="0" />

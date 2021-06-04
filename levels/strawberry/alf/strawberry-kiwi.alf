@@ -79,8 +79,7 @@
   <Teleporter y="20" shape="0" scale=".3" spin="false" group="@pillar" fill="#dcffdc" frame="#000000" cx="32.986111111111114" cz="43.611111111111114" r="1.875" angle="180" extent="90" />
   <Teleporter y="20" shape="0" scale=".3" spin="false" group="@pillar" fill="#dcffdc" frame="#000000" cx="27.98611111111111" cz="66.11111111111111" r="1.875" angle="180" extent="90" />
   <Teleporter y="20" shape="0" scale=".3" spin="false" group="@pillar" fill="#dcffdc" frame="#000000" cx="65.48611111111111" cz="43.611111111111114" r="1.875" angle="180" extent="90" />
-  <set wallYon=".001" />
-  <set wallHeight="100" />
+  <set wallYon=".001" wallHeight="100" />
   <Wall fill="#555555" frame="#000000" x="12.986111111111112" z="28.61111111111111" w="67.5" d="1.25" h="0" />
   <set wallHeight="100" />
   <Wall fill="#555555" frame="#000000" x="12.986111111111112" z="79.86111111111111" w="67.5" d="1.25" h="0" />
@@ -88,8 +87,7 @@
   <Wall fill="#555555" frame="#000000" x="12.986111111111112" z="29.86111111111111" w="1.25" d="50" h="0" />
   <set wallHeight="100" />
   <Wall fill="#555555" frame="#000000" x="79.23611111111111" z="29.86111111111111" w="1.25" d="50" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="1" />
+  <set wallYon="defaultYon" wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="14.236111111111112" z="29.86111111111111" w="65" d="0" h="0" y="1.5" />
   <set wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="14.236111111111112" z="79.86111111111111" w="65" d="0" h="0" y="1.5" />

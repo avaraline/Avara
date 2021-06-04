@@ -141,9 +141,16 @@ y = 18
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
-  <set wallHeight="8.25" wallYon="0" />
-  <Wall fill="#ffffcc" frame="#000000" x="73.61111111111111" z="13.88888888888889" w="0" d="11.25" h="0" y="11.75" />
+speed = 0
+end
+
+wallHeight = 8.25
+wallYon = 0
+/* wall fix */
+
+wa = 11.75
+/* wall fix */</script>
+  <Wall fill="#ffffcc" frame="#000000" x="73.61111111111111" z="13.88888888888889" w="0" d="11.25" h="0" />
   <Wall fill="#ffffcc" frame="#000000" x="72.36111111111111" z="13.88888888888889" w="0" d="11.25" h="0" y="11.75" />
   <set wallHeight="4.25" />
   <Wall fill="#ffffcc" frame="#000000" x="72.36111111111111" z="19.51388888888889" w="1.25" d="5.625" h="0" y="11.75" />

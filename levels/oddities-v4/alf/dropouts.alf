@@ -19,14 +19,12 @@ Don't fall.&quot;" EdgeWall="BlockHeight * 8 + 4" Alt="100" IncHeight="EdgeWall 
   <WallSolid hitSound="WallSound" fill="#444444" frame="#000000" r="15" cx="30.208333333333336" cz="33.333333333333336" angle="180" extent="90" x="17.708333333333336" z="43.333333333333336" w="22.5" d="1.875" h="0" />
   <WallSolid hitSound="WallSound" fill="#444444" frame="#000000" r="15" cx="30.208333333333336" cz="33.333333333333336" angle="180" extent="90" x="17.708333333333336" z="20.833333333333336" w="1.875" d="22.5" h="0" />
   <WallSolid hitSound="WallSound" fill="#444444" frame="#000000" r="15" cx="30.208333333333336" cz="33.333333333333336" angle="180" extent="90" x="40.208333333333336" z="22.708333333333336" w="1.875" d="22.5" h="0" />
-  <set wallYon="0" />
-  <set baseHeight="Alt + EdgeWall" wallHeight="0" />
+  <set wallYon="0" baseHeight="Alt + EdgeWall" wallHeight="0" />
   <Wall fill="#444444" frame="#000000" x="19.583333333333336" z="20.833333333333336" w="22.5" d="1.875" h="0" />
   <Wall fill="#444444" frame="#000000" x="17.708333333333336" z="43.333333333333336" w="22.5" d="1.875" h="0" />
   <Wall fill="#444444" frame="#000000" x="17.708333333333336" z="20.833333333333336" w="1.875" d="22.5" h="0" />
   <Wall fill="#444444" frame="#000000" x="40.208333333333336" z="22.708333333333336" w="1.875" d="22.5" h="0" />
-  <set wallHeight="BlockHeight" />
-  <set baseHeight="Alt + BlockHeight * 0" />
+  <set wallHeight="BlockHeight" baseHeight="Alt + BlockHeight * 0" />
   <unique vars="mGoody" />
   <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" r="15" cx="30.208333333333336" cz="33.333333333333336" angle="180" extent="90" x="19.583333333333336" z="22.708333333333336" w="6.875" d="6.875" h="0" />
   <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" r="15" cx="30.208333333333336" cz="33.333333333333336" angle="180" extent="90" x="26.458333333333336" z="22.708333333333336" w="6.875" d="6.875" h="0" />

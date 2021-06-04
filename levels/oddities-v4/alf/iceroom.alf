@@ -1,6 +1,5 @@
 <map>
-  <set IceVSpace="6" IceShot="10" IceGrav="0" FFScale=".3" gravity="0.2" hull.2="hull[1]" targIce="targ1" RoomHeight="IceVSpace * 8" wallHeight="RoomHeight / 4" wallYon="200" AmbY="IceVSpace * 4 -baseHeight" AmbSound="snArcticWind" AmbVol="20" />
-  <set designer="&quot;Kevin Reid &lt;kpreid@ibm.net&gt;&quot;" information="&quot;Icebox cubed!
+  <set IceVSpace="6" IceShot="10" IceGrav="0" FFScale=".3" gravity="0.2" hull.2="hull[1]" targIce="targ1" RoomHeight="IceVSpace * 8" wallHeight="RoomHeight / 4" wallYon="200" AmbY="IceVSpace * 4 -baseHeight" AmbSound="snArcticWind" AmbVol="20" designer="&quot;Kevin Reid &lt;kpreid@ibm.net&gt;&quot;" information="&quot;Icebox cubed!
 The guard tends to attack stationary scouts.
 The red goody is worth getting.&quot;" />
   <SkyColor fill="#0066ff" frame="#003399" />
@@ -26,9 +25,7 @@ The red goody is worth getting.&quot;" />
   <Wall fill="#3399ff" frame="#000000" x="2.5" z="1.875" w="92.5" d="7.5" h="0" />
   <Wall fill="#3399ff" frame="#000000" x="95" z="1.875" w="7.5" d="92.5" h="0" />
   <Wall fill="#3399ff" frame="#000000" x="2.5" z="9.375" w="7.5" d="92.5" h="0" />
-  <set baseHeight="0" />
-  <set wallHeight="6" baseHeight="RoomHeight" />
-  <set wa="wallHeight" />
+  <set baseHeight="RoomHeight" wallHeight="6" wa="wallHeight" />
   <Wall fill="#3366ff" frame="#000000" x="2.5" z="1.875" w="7.5" d="7.5" h="0" />
   <Wall fill="#3366ff" frame="#000000" x="2.5" z="1.875" w="3.75" d="7.5" h="0" />
   <Wall fill="#3366ff" frame="#000000" x="6.25" z="1.875" w="3.75" d="3.75" h="0" />
@@ -68,8 +65,7 @@ The red goody is worth getting.&quot;" />
   <And in="@start" out="mShow" fill="#3366ff" frame="#000000" cx="97.5" cz="6.875" r="0.625" angle="180" extent="270" />
   <Timer in="mTaken" out="mShow" wait="150" fill="#3366ff" frame="#000000" cx="97.5" cz="6.875" r="0.625" angle="180" extent="270" />
   <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" fill="#3366ff" frame="#000000" cx="97.5" cz="6.875" r="0.625" angle="180" extent="270" />
-  <set baseHeight="0" />
-  <set wallYon="0" />
+  <set baseHeight="0" wallYon="0" />
   <Wall fill="#3366ff" frame="#000000" x="10" z="9.375" w="7.5" d="7.5" h="3" />
   <Wall fill="#3366ff" frame="#000000" x="87.5" z="9.375" w="7.5" d="7.5" h="3" />
   <Wall fill="#3366ff" frame="#000000" x="87.5" z="86.875" w="7.5" d="7.5" h="3" />

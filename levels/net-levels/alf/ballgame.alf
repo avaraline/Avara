@@ -34,16 +34,21 @@ The ball will appear at the top platform. The objective of the game is to move t
   <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="75" z="63.75" w="15" d="2.5" h="0" r="1.25" angle="45" extent="90" />
   <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="100" z="63.75" w="15" d="2.5" h="0" r="1.25" angle="225" extent="90" />
   <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="75" z="88.75" w="15" d="2.5" h="0" r="1.25" angle="45" extent="90" />
-  <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="100" z="88.75" w="15" d="2.5" h="0" r="1.25" angle="225" extent="90" />
   <script>
+object Ramp
+deltaY = platHeight + thickness
+y = wallHeight - thickness
+thickness = rampThickness
+end
+
 saveBase &lt;- baseHeight
-baseHeight &lt;- level3 - 0</script>
+baseHeight &lt;- level3 - 0.25</script>
   <Wall fill="#669999" frame="#000000" x="90" z="72.5" w="10" d="3.75" h="0.5" />
   <Wall fill="#669999" frame="#000000" x="90" z="78.75" w="10" d="3.75" h="0.5" />
   <Wall fill="#669999" frame="#000000" x="90" z="76.25" w="3.75" d="2.5" h="0.5" />
   <Wall fill="#669999" frame="#000000" x="96.25" z="76.25" w="3.75" d="2.5" h="0.5" />
   <script>
-baseHeight &lt;- saveB</script>
+baseHeight &lt;- saveBase</script>
   <Wall fill="#669999" frame="#000000" x="51.875" z="65" w="3.125" d="10" h="1.5" />
   <Wall fill="#669999" frame="#000000" x="51.875" z="80" w="3.125" d="10" h="1.5" />
   <Wall fill="#669999" frame="#000000" x="135" z="65.625" w="3.125" d="10" h="1.5" />
@@ -51,7 +56,7 @@ baseHeight &lt;- saveB</script>
   <Ball carryScore="2" y="25" fill="#ee0000" frame="#ee0000" cx="95.06944444444444" cz="77.56944444444444" r="1.875" angle="0" extent="90" />
   <script>
 wallHeight &lt;- 2
-baseHeight &lt;-</script>
+baseHeight &lt;- 15</script>
   <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="55" z="95" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
   <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="70" z="105" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
   <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="85" z="110" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />

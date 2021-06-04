@@ -1,8 +1,7 @@
 <map>
   <SkyColor n="1000" verticalRangeMax="2000" fill="#eff3f3" frame="#003c3b" />
   <GroundColor fill="#003c3b" frame="#000000" />
-  <set information="rStratocaster" />
-  <set wallHeight="12" />
+  <set information="rStratocaster" wallHeight="12" />
   <Wall fill="#225655" frame="#000000" x="54.65277777777778" z="64.65277777777779" w="5" d="5" h="0" />
   <Ramp y="10" deltaY="2" fill="#dee6e6" frame="#000000" x="54.65277777777778" z="69.65277777777779" w="5" d="15" h="0" r="1.875" angle="45" extent="90" />
   <set wallHeight="12" />
@@ -155,7 +154,6 @@
   <Ramp y="10" deltaY="2" fill="#dee6e6" frame="#000000" x="99.65277777777779" z="79.65277777777779" w="15" d="5" h="0" r="1.875" angle="315" extent="90" />
   <Ramp y="10" deltaY="2" fill="#dee6e6" frame="#000000" x="54.65277777777778" z="24.65277777777778" w="15" d="5" h="0" r="1.875" angle="135" extent="90" />
   <Wall fill="#ffffff" frame="#000000" x="57.77777777777778" z="39.65277777777778" w="5" d="0" h="0" />
-  <set wallYon="20" />
   <set wallYon="defaultYon" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" fill="#ffffff" frame="#ffffff" cx="74.65277777777779" cz="37.15277777777778" r="1.875" angle="0" extent="90" />

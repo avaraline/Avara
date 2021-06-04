@@ -10,8 +10,7 @@
   <Field deltaY="0" mask="T4" start="@fifteen" stop="@sixteen" enter="@enterT4" exit="@exitT4" visible="fieldVis" fill="#ffff33" frame="#000000" x="45.69444444444445" z="63.81944444444445" w="15" d="15" h="0" />
   <Field deltaY="0" mask="T3" start="@fifteen" stop="@sixteen" enter="@enterT3" exit="@exitT3" visible="fieldVis" fill="#ffff33" frame="#000000" x="45.69444444444445" z="63.81944444444445" w="15" d="15" h="0" />
   <Field deltaY="0" mask="T2" start="@fifteen" stop="@sixteen" enter="@enterT2" exit="@exitT2" visible="fieldVis" fill="#ffff33" frame="#000000" x="45.69444444444445" z="63.81944444444445" w="15" d="15" h="0" />
-  <set baseHeight="0" />
-  <set timeLimit="300" kSnText="1504" kTextVolume="0.1" gameLength="4685" />
+  <set baseHeight="0" timeLimit="300" kSnText="1504" kTextVolume="0.1" gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#ffff33" frame="#000000" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />

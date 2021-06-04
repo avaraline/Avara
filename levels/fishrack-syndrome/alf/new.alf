@@ -18,10 +18,7 @@
   <Wall fill="#666600" frame="#000000" x="134.375" z="47.5" w="5.625" d="124.375" h="0" />
   <Wall fill="#666600" frame="#000000" x="101.875" z="47.5" w="5.625" d="124.375" h="0" />
   <Wall fill="#666600" frame="#000000" x="69.375" z="47.5" w="5.625" d="124.375" h="0" />
-  <set wallHeight="5" wallYon="50" />
-  <set baseHeight="4" wallHeight="1" />
-  <set baseHeight="5" wallHeight=".5" />
-  <set baseHeight="0" wallHeight=".2" />
+  <set wallHeight=".2" wallYon="50" baseHeight="0" />
   <Wall fill="#cc3300" frame="#000000" x="42.5" z="88.75" w="0.625" d="3.75" h="0" />
   <Wall fill="#cc3300" frame="#000000" x="46.25" z="88.75" w="0.625" d="3.75" h="0" />
   <Wall fill="#cc3300" frame="#000000" x="50" z="88.75" w="0.625" d="3.75" h="0" />

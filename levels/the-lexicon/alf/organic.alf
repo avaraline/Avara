@@ -161,8 +161,11 @@ y = 15
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
-  <set wallHeight="3" />
+speed = 0
+end
+
+wallHeight = 3
+/* breakers */</script>
   <Wall fill="#a66d60" frame="#000000" x="81.80555555555556" z="42.56944444444444" w="2.5" d="20" h="0" />
   <Wall fill="#a66d60" frame="#000000" x="21.805555555555557" z="42.56944444444444" w="2.5" d="20" h="0" />
   <Wall fill="#a66d60" frame="#000000" x="51.80555555555556" z="42.56944444444444" w="2.5" d="20" h="0" />

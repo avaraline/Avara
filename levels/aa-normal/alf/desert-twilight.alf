@@ -13,14 +13,12 @@
   <And in="@start" out.0="mDoGrenades" out.1="mDoMissiles" out.2="mDoBoosters" fill="#602500" frame="#000044" cx="53.75" cz="7.5" r="1.25" angle="270" extent="90" />
   <set wallHeight="17" />
   <Wall fill="#cc9900" frame="#000000" x="1.25" z="1.25" w="1.25" d="1.25" h="0" />
-  <set wallHeight="3" />
   <set wallHeight="17" />
   <Wall fill="#cc9900" frame="#000000" x="120" z="165" w="1.25" d="1.25" h="0" />
   <set wallHeight="3" />
   <Wall fill="#cc9900" frame="#000000" x="2.5" z="165" w="117.5" d="1.25" h="0" />
   <set wallHeight="17" />
   <Wall fill="#cc9900" frame="#000000" x="40" z="90" w="1.25" d="1.25" h="0" />
-  <set wallHeight="3" />
   <set wallHeight="0.2" />
   <Wall fill="#999900" frame="#000000" x="17.5" z="13.125" w="1.25" d="90" h="0" />
   <Wall fill="#999966" frame="#000000" x="18.75" z="13.125" w="42.5" d="1.25" h="0" />
@@ -154,8 +152,7 @@
   <Wall fill="#f3f3d9" frame="#330033" x="85" z="35" w="15" d="15" h="0" />
   <set wallHeight="2.5" baseHeight="15.3" />
   <Wall fill="#f9f9ec" frame="#330033" x="87.5" z="37.5" w="10" d="10" h="0" />
-  <set baseHeight="0" wallHeight="3" />
-  <set wallHeight="2.5" baseHeight="12.75" />
+  <set baseHeight="12.75" wallHeight="2.5" />
   <Wall fill="#f3f3d9" frame="#330033" x="50" z="121.25" w="5" d="15" h="0" />
   <Wall fill="#f3f3d9" frame="#330033" x="40" z="121.25" w="5" d="15" h="0" />
   <set wallHeight="0.05" baseHeight="15.25" />

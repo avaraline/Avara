@@ -8,8 +8,7 @@
   <set wallYon="150" yon="150" />
   <SkyColor verticalRangeMax="2500" n="24" fill="#d9fffc" frame="#b8d6ff" />
   <GroundColor fill="#3f722b" frame="#3f722b" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;So you wish to explore the vast lands Medievos.  Fare ye well. Consult the readme for juicy hints and speed optimization advice.&quot;" />
-  <set wallHeight="3.5" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;So you wish to explore the vast lands Medievos.  Fare ye well. Consult the readme for juicy hints and speed optimization advice.&quot;" wallHeight="3.5" />
   <Wall fill="#d8b891" frame="#000000" x="309.58333333333337" z="314.58333333333337" w="1.25" d="10" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#d8b891" frame="#000000" x="330.83333333333337" z="314.58333333333337" w="1.25" d="10" h="0" />
@@ -35,8 +34,7 @@
   <Text showEveryone="true" text="&quot;Nice one, mate!&quot;" in="@black2" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
   <Text showEveryone="true" text="&quot;By the gods!&quot;" in="@black3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
   <Ball group="1" y="3.25" shield="0.25" maxShield="0.25" mass="20" ejectSound="2100" shape="2100" scale="1.5" ejectPower="4" ejectPitch="0" motionRange="1" changeOwnerTime="1000000" fill="#ffffff" frame="#000000" cx="313.2638888888889" cz="316.3888888888889" r="1.25" angle="315" extent="90" />
-  <set hull.0="2100" hull.1="2100" hull.2="2100" />
-  <set wallHeight="0" />
+  <set hull.0="2100" hull.1="2100" hull.2="2100" wallHeight="0" />
   <Wall fill="#bf986d" frame="#000000" x="354.58333333333337" z="299.58333333333337" w="205" d="20" h="0" />
   <Hologram shape="2300" scale="2" isAmbient="true" fill="#7f6543" frame="#3f722b" cx="419.58333333333337" cz="324.58333333333337" r="1.875" angle="0" extent="90" />
   <Hologram shape="2300" scale="2" isAmbient="true" fill="#7f6543" frame="#3f722b" cx="500.20833333333337" cz="289.58333333333337" r="1.875" angle="0" extent="90" />
@@ -147,8 +145,7 @@
   <Hologram isAmbient="true" scale="1.5" y="3.5" shape="2800" fill="#a3c7fd" frame="#8c6b39" cx="508.95833333333337" cz="218.33333333333334" r="1.875" angle="270" extent="90" />
   <set wallYon="0.01" />
   <Hologram isAmbient="true" scale="3" y="2" shape="2900" fill="#2d2d2e" frame="#000000" cx="482.08333333333337" cz="239.58333333333334" r="1.875" angle="270" extent="90" />
-  <set wallYon="150" />
-  <set wallHeight="1.5" />
+  <set wallYon="150" wallHeight="1.5" />
   <Wall fill="#c79e71" frame="#000000" x="487.08333333333337" z="220.83333333333334" w="5" d="10" h="0" y="2" />
   <Hologram isAmbient="true" shape="2901" scale="3" y="3.5" fill="#8b1e1f" frame="#000000" cx="490.20833333333337" cz="226.45833333333334" r="1.875" angle="270" extent="90" />
   <set wallHeight="6" />
@@ -311,13 +308,11 @@
   <Wall fill="#6c6c6d" frame="#000000" x="620.8333333333334" z="227.70833333333334" w="2.5" d="3.75" h="0" y="2" />
   <set wallHeight="7" />
   <Wall fill="#6c6c6d" frame="#000000" x="620.8333333333334" z="227.70833333333334" w="2.5" d="3.75" h="0" y="5" />
-  <set wallYon="0.01" />
-  <set wallHeight="2" />
+  <set wallYon="0.01" wallHeight="2" />
   <WallSolid blastSound="2400" shield="1" fill="#ffffff" frame="#000000" r="1.25" cx="322.0138888888889" cz="320.1388888888889" angle="315" extent="90" x="475.83333333333337" z="227.70833333333334" w="2.5" d="3.75" h="0" y="3" />
   <set wallHeight="2" />
   <WallSolid blastSound="2400" shield="1" fill="#ffffff" frame="#000000" r="1.25" cx="322.0138888888889" cz="320.1388888888889" angle="315" extent="90" x="620.8333333333334" z="227.70833333333334" w="2.5" d="3.75" h="0" y="3" />
-  <set wallYon="150" />
-  <set wallHeight="6" />
+  <set wallYon="150" wallHeight="6" />
   <Wall fill="#6c6c6d" frame="#000000" x="585.8333333333334" z="225.20833333333334" w="2.5" d="3.75" h="0" y="6" />
   <set wallHeight="10" />
   <Wall fill="#6c6c6d" frame="#000000" x="595.2083333333334" z="220.83333333333334" w="2.5" d="17.5" h="0" y="2" />
@@ -390,13 +385,11 @@
   <Wall fill="#8c8c8c" frame="#000000" x="509.58333333333337" z="200.83333333333334" w="80" d="63.75" h="0" y="12" />
   <set wallHeight="0.5" />
   <Wall fill="#8c8c8c" frame="#000000" x="509.58333333333337" z="189.58333333333334" w="15" d="11.25" h="0" y="12" />
-  <set wallYon="0.01" />
-  <set wallHeight="2" />
+  <set wallYon="0.01" wallHeight="2" />
   <WallSolid blastSound="2400" shield="1" fill="#ffffff" frame="#000000" r="1.875" cx="577.3611111111111" cz="259.58333333333337" angle="270" extent="90" x="535.2083333333334" z="190.83333333333334" w="3.75" d="2.5" h="0" y="3" />
   <set wallHeight="2" />
   <WallSolid blastSound="2400" shield="1" fill="#ffffff" frame="#000000" r="1.875" cx="577.3611111111111" cz="259.58333333333337" angle="270" extent="90" x="560.8333333333334" z="190.83333333333334" w="3.75" d="2.5" h="0" y="3" />
-  <set wallYon="150" />
-  <set wallHeight="1.25" />
+  <set wallYon="150" wallHeight="1.25" />
   <Wall fill="#7c7c7c" frame="#000000" x="554.5833333333334" z="193.33333333333334" w="5" d="7.5" h="0" y="2" />
   <set wallHeight="1.25" />
   <Wall fill="#7c7c7c" frame="#000000" x="549.5833333333334" z="193.33333333333334" w="5" d="7.5" h="0" y="3.25" />
@@ -599,8 +592,7 @@
   <Wall fill="#6c6c6d" frame="#000000" x="585.8333333333334" z="239.58333333333334" w="2.5" d="3.75" h="0" y="12.5" />
   <set wallHeight="7" />
   <Wall fill="#6c6c6d" frame="#000000" x="585.8333333333334" z="239.58333333333334" w="2.5" d="3.75" h="0" y="15.5" />
-  <set wallYon="0.01" />
-  <set wallHeight="2" />
+  <set wallYon="0.01" wallHeight="2" />
   <WallSolid blastSound="2400" shield="1" fill="#ffffff" frame="#000000" r="1.875" cx="579.5833333333334" cz="269.58333333333337" angle="0" extent="90" x="534.5833333333334" z="260.83333333333337" w="3.75" d="2.5" h="0" y="13.5" />
   <set wallHeight="2" />
   <WallSolid blastSound="2400" shield="1" fill="#ffffff" frame="#000000" r="1.875" cx="579.5833333333334" cz="269.58333333333337" angle="0" extent="90" x="560.8333333333334" z="260.83333333333337" w="3.75" d="2.5" h="0" y="13.5" />
@@ -612,8 +604,7 @@
   <WallSolid blastSound="2400" shield="1" fill="#ffffff" frame="#000000" r="1.875" cx="579.5833333333334" cz="269.58333333333337" angle="0" extent="90" x="585.8333333333334" z="239.58333333333334" w="2.5" d="3.75" h="0" y="13.5" />
   <set wallHeight="2" />
   <WallSolid blastSound="2400" shield="1" fill="#ffffff" frame="#000000" r="1.875" cx="579.5833333333334" cz="269.58333333333337" angle="0" extent="90" x="585.8333333333334" z="214.58333333333334" w="2.5" d="3.75" h="0" y="13.5" />
-  <set wallYon="150" />
-  <set wallHeight="1" />
+  <set wallYon="150" wallHeight="1" />
   <Wall fill="#4a3b20" frame="#000000" x="513.3333333333334" z="254.58333333333334" w="3.75" d="6.25" h="0" y="12.5" />
   <set wallHeight="1.5" />
   <Wall fill="#4a3b20" frame="#000000" x="513.3333333333334" z="255.83333333333334" w="0.625" d="0.625" h="0" y="13.5" />

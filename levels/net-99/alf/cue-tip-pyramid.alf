@@ -1,8 +1,7 @@
 <map>
   <SkyColor n="12" fill="#777777" frame="#bbbbbb" />
   <GroundColor fill="#dddddd" frame="#dddddd" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Yellow and blue teams only. Make all the blocks your team's color to win, by touching them. Unlimited lives and time. Stay near the platform for ammo.&quot;" />
-  <set wallHeight="1" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Yellow and blue teams only. Make all the blocks your team's color to win, by touching them. Unlimited lives and time. Stay near the platform for ammo.&quot;" wallHeight="1" />
   <Wall fill="#eeeeee" frame="#000000" x="57.083333333333336" z="102.08333333333334" w="7.5" d="7.5" h="0" y="0" />
   <set wallHeight="1" />
   <Wall fill="#bbbbbb" frame="#000000" x="79.58333333333334" z="102.08333333333334" w="7.5" d="7.5" h="0" y="0" />
@@ -367,8 +366,7 @@
   <Text showEveryone="true" text="&quot;Teams must be blue or yellow.&quot;" in="@wrongTeams" fill="#996633" frame="#000000" cx="19.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <Timer in="@taken" out="@repop" wait="45" fill="#996633" frame="#000000" cx="19.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <And in="@start" out="@repop" fill="#996633" frame="#000000" cx="19.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
-  <set wallYon="0.01" />
-  <set wallHeight="0.5" />
+  <set wallYon="0.01" wallHeight="0.5" />
   <WallDoor deltaY="-10" open="@blue1" close="@yello1" openSpeed="100" closeSpeed="100" volume="0" fill="#ffffcc" frame="#000000" r="1.25" cx="19.583333333333336" cz="9.583333333333334" angle="90" extent="90" x="134.58333333333334" z="138.33333333333334" w="0.625" d="0.625" h="0" y="29.5" />
   <set wallHeight="0.5" />
   <WallDoor deltaY="-10" open="@blue2" close="@yello2" openSpeed="100" closeSpeed="100" volume="0" fill="#ffffcc" frame="#000000" r="1.25" cx="19.583333333333336" cz="9.583333333333334" angle="90" extent="90" x="135.20833333333334" z="138.33333333333334" w="0.625" d="0.625" h="0" y="29.5" />

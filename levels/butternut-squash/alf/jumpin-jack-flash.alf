@@ -56,7 +56,6 @@
   <Wall fill="#7f007f" frame="#000000" x="135.34722222222223" z="38.75" w="11.25" d="1.875" h="0" y="0" />
   <set wallHeight="9" />
   <Wall fill="#7f007f" frame="#000000" x="135.34722222222223" z="40.625" w="1.875" d="9.375" h="0" y="0" />
-  <set wallHeight="9" />
   <set wallHeight="8" />
   <Wall fill="#730073" frame="#000000" x="133.47222222222223" z="58.125" w="1.875" d="13.125" h="0" y="0" />
   <set wallHeight="8" />
@@ -105,10 +104,6 @@
   <Wall fill="#590059" frame="#000000" x="169.72222222222223" z="58.125" w="1.875" d="16.875" h="0" y="0" />
   <set wallHeight="6" />
   <Wall fill="#590059" frame="#000000" x="154.72222222222223" z="73.125" w="15" d="1.875" h="0" y="0" />
-  <set wallHeight="6" />
-  <set wallHeight="6" />
-  <set wallHeight="6" />
-  <set wallHeight="6" />
   <set wallHeight="5" />
   <Wall fill="#4c004c" frame="#000000" x="154.72222222222223" z="75" w="18.75" d="1.875" h="0" y="0" />
   <set wallHeight="5" />
@@ -186,7 +181,6 @@
   <set wallHeight="1" />
   <Wall fill="#190019" frame="#000000" x="179.09722222222223" z="58.125" w="1.875" d="24.375" h="0" y="0" />
   <set wallHeight="1" />
-  <set wallHeight="1" />
   <Wall fill="#190019" frame="#000000" x="179.09722222222223" z="23.75" w="1.875" d="26.25" h="0" y="0" />
   <set wallHeight="1" />
   <Wall fill="#190019" frame="#000000" x="154.72222222222223" z="23.75" w="24.375" d="1.875" h="0" y="0" />
@@ -212,7 +206,6 @@
   <Wall fill="#cc3399" frame="#000000" x="109.72222222222223" z="71.875" w="58.75" d="23.125" h="0" y="15" />
   <set wallHeight="1" />
   <Wall fill="#cc3399" frame="#000000" x="168.47222222222223" z="36.25" w="23.125" d="58.75" h="0" y="15" />
-  <set wallHeight="1" />
   <set wallHeight="1" />
   <Wall fill="#cc3399" frame="#000000" x="109.72222222222223" z="13.125" w="23.125" d="58.75" h="0" y="15" />
   <set wallHeight="1" />
@@ -341,7 +334,6 @@
   <Wall fill="#cc3399" frame="#000000" x="154.09722222222223" z="44.375" w="0.625" d="3.125" h="0" y="16" />
   <set wallHeight="3" />
   <Wall fill="#cc3399" frame="#000000" x="157.22222222222223" z="50" w="3.125" d="0.625" h="0" y="16" />
-  <set wallHeight="3" />
   <set wallHeight="1" />
   <Wall fill="#b32c86" frame="#000000" x="154.09722222222223" z="50.625" w="6.875" d="13.75" h="0" y="19" />
   <set wallHeight="1" />
@@ -383,7 +375,8 @@
   <set wallHeight="1" />
   <Wall fill="#b30086" frame="#000000" x="183.47222222222223" z="13.125" w="8.125" d="8.125" h="0" y="21" />
   <script>
-wallHeight=1</script>
+wallHeight=1
+wa=</script>
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#fdfd15" frame="#010c0a" cx="188.54166666666669" cz="17.361111111111114" r="2.083333333333334" angle="269" extent="182" />
   <Timer in="mTaken" out="mShow" wait="250" fill="#fdfd15" frame="#010c0a" cx="188.54166666666669" cz="17.361111111111114" r="2.083333333333334" angle="269" extent="182" />
@@ -426,24 +419,7 @@ wallHeight=1</script>
   <Wall fill="#cc3399" frame="#010c0a" x="125.97222222222223" z="95.625" w="13.75" d="11.25" h="0" y="35" />
   <set wallHeight="1" />
   <Wall fill="#cc3399" frame="#010c0a" x="109.72222222222223" z="13.125" w="81.875" d="81.875" h="0" y="35" />
-  <Ufo fill="#009900" frame="#010c0a" cx="131.59722222222223" cz="98.125" r="6.25" angle="90" extent="90" />
-  <set shape="1001" />
-  <set y="23" />
-  <set scale="2" />
-  <set shotPower="2" />
-  <set burstLength="30" />
-  <set attack="1" />
-  <set burstCharge="20" />
-  <set defense="1" />
-  <set accel=".5" />
-  <set verticalRangeMin="16" />
-  <set verticalRangeMax="15" />
-  <set motionRange="100" />
-  <set checkPeriod="10" />
-  <set shield="50" />
-  <set activeRange="1000" />
-  <set watch="playerMask + scoutMask + robotMask" />
-  <set homeSick="0.5" />
+  <Ufo shape="1001" y="23" scale="2" shotPower="2" burstLength="30" attack="1" burstCharge="20" defense="1" accel=".5" verticalRangeMin="16" verticalRangeMax="15" motionRange="100" checkPeriod="10" shield="50" activeRange="1000" watch="playerMask + scoutMask + robotMask" homeSick="0.5" fill="#009900" frame="#010c0a" cx="131.59722222222223" cz="98.125" r="6.25" angle="90" extent="90" />
   <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#0e36fd" frame="#000000" cx="125.69444444444446" cz="119.23611111111111" r="1.5972222222222214" angle="90" extent="180" />
   <Incarnator y="3" fill="#009900" frame="#010c0a" cx="156.875" cz="90.625" r="5.625" angle="0" extent="90" />
   <Incarnator y="3" fill="#009900" frame="#010c0a" cx="182.22222222222223" cz="53.611111111111114" r="5.625" angle="0" extent="90" />

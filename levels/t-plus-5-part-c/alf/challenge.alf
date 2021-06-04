@@ -41,8 +41,7 @@ I designed this level for clans to test patential members before letting them jo
   <Field deltaX="0" deltaY="0" deltaZ="0" enter="@BlockOn4" mask="T2" watch="playerMask" fill="#ffffff" frame="#000000" x="70" z="17.430555555555557" w="4.375" d="5" h="2" r="3.125" cx="57.5" cz="36.80555555555556" angle="225" extent="90" />
   <Field deltaX="0" deltaY="0" deltaZ="0" enter="@BlockOn5" mask="T2" watch="playerMask" fill="#ffffff" frame="#000000" x="70" z="11.805555555555555" w="4.375" d="5" h="2" r="3.125" cx="57.5" cz="36.80555555555556" angle="225" extent="90" />
   <Field deltaX="0" deltaY="0" deltaZ="0" enter="@BlockOn6" mask="T2" watch="playerMask" fill="#ffffff" frame="#000000" x="70" z="6.180555555555556" w="4.375" d="5" h="2" r="3.125" cx="57.5" cz="36.80555555555556" angle="225" extent="90" />
-  <set hull.0="128" hull.1="128" hull.2="128" />
-  <set maxStartGrenades="0" maxStartMissiles="0" maxStartBoosts="0" />
+  <set hull.0="128" hull.1="128" hull.2="128" maxStartGrenades="0" maxStartMissiles="0" maxStartBoosts="0" />
   <Timer in="@start" out="@greenWin" wait="1382.34" fill="#ffffff" frame="#000000" cx="57.5" cz="36.80555555555556" r="3.125" angle="225" extent="90" />
   <Teleporter activeRange="3000" win="90000" yon="0.1" mask="T2" start="@winTeam" out="@yellowMsg" fill="#f8e300" frame="#000000" cx="46.25" cz="49.93055555555556" r="2.5" angle="180" extent="90" />
   <Teleporter start="@yellowWin" out="@yellowMsg" activeRange="3000" win="0" yon="0.1" fill="#f8e300" frame="#000000" cx="46.25" cz="49.93055555555556" r="2.5" angle="180" extent="90" />

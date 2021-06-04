@@ -16,12 +16,12 @@ y = 18
 group = @recenter
 destGroup = @nullo
 shape = 0
-speed = 0</script>
+speed = 0
+end</script>
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#444444" frame="#cc9900" cx="2.743055555555556" cz="8.958333333333334" r="1.1458333333333335" angle="180" extent="90" />
   <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Studies have shown Punky's Touch 
 to be at least as important as food, water, and 
-shelter to the human condition.&quot;" />
-  <set wallHeight="1" />
+shelter to the human condition.&quot;" wallHeight="1" />
   <Wall fill="#669999" frame="#000000" x="23.40277777777778" z="32.5" w="10" d="2.5" h="0" />
   <Wall fill="#669999" frame="#000000" x="52.77777777777778" z="3.75" w="2.5" d="9.375" h="0" />
   <Wall fill="#669999" frame="#000000" x="74.02777777777779" z="32.5" w="10" d="2.5" h="0" />

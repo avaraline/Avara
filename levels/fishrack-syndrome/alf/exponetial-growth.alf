@@ -1,19 +1,40 @@
 <map>
-  <set wallHeight="0" />
   <script>
-HEY!!  WHY ARE YA LOOKIN' AT THI</script>
-  <set designer="&quot;Plastic Chicken&quot;" />
-  <set information="&quot;The haze is in the air, the wind is in your face, as you enjoy the serenity of the noon-time sun, a distant gleam of metal appears...&quot;" />
-  <set gravity=".5" />
-  <set ambient=".3" />
-  <set light.0.i=".2" light.0.a="85" light.0.b="0" />
-  <set light.1.i=".3" light.1.a="80" light.1.b="270" />
-  <set light.2.i=".1" light.2.a="-10" light.2.b="180" />
-  <set light.3.i=".1" light.3.a="45" light.3.b="90" />
-  <set hull.0="mortarLight" />
-  <set hull.1="mortarMed" />
-  <set hull.2="mortarHeavy" />
-  <set grenadePower="4.5" />
+wallHeight=0
+
+//
+
+HEY!!  WHY ARE YA LOOKIN' AT THIS??
+
+
+
+designer=&quot;Plastic Chicken&quot;
+
+information=&quot;The haze is in the air, the wind is in your face, as you enjoy the serenity of the noon-time sun, a distant gleam of metal appears...&quot;
+
+gravity=.5
+
+ambient = .3
+
+light[0].i = .2  light[0].a =  85  light[0].b = 0
+
+light[1].i = .3  light[1].a =  80  light[1].b = 270
+
+light[2].i = .1  light[2].a =  -10  light[2].b = 180
+
+light[3].i = .1  light[3].a =  45  light[3].b = 90
+
+
+
+hull[0]=mortarLight
+
+hull[1]=mortarMed
+
+hull[2]=mortarHeavy
+
+
+
+grenadePower=4.5</script>
   <SkyColor n="1024" verticalRangeMax="1500" fill="#000033" frame="#3399cc" />
   <GroundColor fill="#006600" frame="#006600" />
   <Teleporter win="1000" shape="false" start="@winTeam" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" r="1.25" angle="270" extent="90" />
@@ -156,7 +177,7 @@ HEY!!  WHY ARE YA LOOKIN' AT THI</script>
 object Hologram
 shape=10238
 scale=2
-e</script>
+endd</script>
   <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="116.25" cz="20.625" r="1.875" angle="90" extent="90" />
   <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120.625" cz="14.375" r="1.875" angle="270" extent="90" />
   <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="125.625" cz="16.875" r="1.875" angle="180" extent="90" />

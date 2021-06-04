@@ -1,12 +1,12 @@
 <map>
   <script>
 information = 
-&quot;The teleporter will take you to the “switch room”
+&quot;The teleporter will take you to the &quot;switch room&quot;
 where you can use the switches to drop blocks on your
 opponents. If you stick around for more than 10 seconds,
 though, the wall and the force-fields will make sure you
 leave.&quot;
-wallHeight =</script>
+wallHeight = 13</script>
   <unique vars="mReset" />
   <WallDoor deltaY="5" status="isOpen" close="@DropB" open="mReset" didClose="mReset" closeDelay="3" guardDelay="0" shotPower="100" openSpeed="2" closeSpeed="40" openDelay="20" fill="#0000dd" frame="#000000" x="37.43055555555556" z="24.305555555555557" w="15" d="10.625" h="0" />
   <unique vars="mReset" />

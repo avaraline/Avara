@@ -1,8 +1,7 @@
 <map>
   <SkyColor n="1000" verticalRangeMax="2000" fill="#eff3f3" frame="#003c3b" />
   <GroundColor fill="#003c3b" frame="#000000" />
-  <set information="rStratocaster" />
-  <set wallHeight="12" />
+  <set information="rStratocaster" wallHeight="12" />
   <Wall fill="#225655" frame="#000000" x="54.65277777777778" z="64.65277777777779" w="5" d="5" h="0" />
   <Ramp y="10" deltaY="2" fill="#dee6e6" frame="#000000" x="54.65277777777778" z="69.65277777777779" w="5" d="6.875" h="0" r="1.875" angle="45" extent="90" />
   <set wallHeight="12" />
@@ -261,8 +260,7 @@
   <Hologram y="4" shape="bspGroundArrow" yon="20" fill="#043f3e" frame="#043f3e" cx="86.52777777777779" cz="54.65277777777778" r="1.25" angle="180" extent="180" />
   <set baseheight="0" />
   <Hologram y="4" shape="bspGroundArrow" yon="20" fill="#043f3e" frame="#043f3e" cx="82.77777777777779" cz="54.65277777777778" r="1.25" angle="0" extent="180" />
-  <set wallYon="20" />
-  <set wallHeight=".001" />
+  <set wallYon="20" wallHeight=".001" />
   <Wall fill="#043f3e" frame="#000000" x="81.52777777777779" z="51.52777777777778" w="1.25" d="6.25" h="0" y="4" />
   <set wallHeight=".001" />
   <Wall fill="#043f3e" frame="#000000" x="86.52777777777779" z="51.52777777777778" w="1.25" d="6.25" h="0" y="4" />

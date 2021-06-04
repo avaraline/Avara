@@ -798,8 +798,7 @@
   <WallDoor shield="100" power="200" fill="#bfbfbf" frame="#000000" x="317.22222222222223" z="130.13888888888889" w="25" d="20" h="0" r="1.875" cx="48.47222222222222" cz="92.91666666666667" angle="225" extent="90" y="9.5" />
   <SkyColor n="12" fill="#d5d595" frame="#d3dcdc" />
   <GroundColor fill="#606060" frame="#606060" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;This is a gas station.&quot;" />
-  <set wallHeight="0.5" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;This is a gas station.&quot;" wallHeight="0.5" />
   <WallDoor shield="100" power="200" killMsg="@gasOff" fill="#bfbfbf" frame="#000000" x="292.22222222222223" z="130.13888888888889" w="25" d="20" h="0" r="3.75" cx="281.0416666666667" cz="46.458333333333336" angle="90" extent="180" y="9.5" />
   <set wallHeight="0.5" />
   <WallDoor shield="100" power="200" fill="#bfbfbf" frame="#000000" x="322.22222222222223" z="110.1388888888889" w="20" d="20" h="0" r="3.75" cx="281.0416666666667" cz="46.458333333333336" angle="90" extent="180" y="9.5" />
@@ -923,11 +922,9 @@
   <Wall fill="#b5b5b5" frame="#000000" x="322.22222222222223" z="87.01388888888889" w="1.25" d="5" h="0" />
   <set wallHeight="5" />
   <Wall fill="#b5b5b5" frame="#000000" x="322.22222222222223" z="87.01388888888889" w="1.25" d="5" h="0" y="3" />
-  <set wallYon="0.01" />
-  <set wallHeight="8" />
+  <set wallYon="0.01" wallHeight="8" />
   <Wall fill="#b5b5b5" frame="#000000" x="322.22222222222223" z="87.01388888888889" w="1.25" d="5" h="0" />
-  <set wallYon="180" />
-  <set wallHeight="4" />
+  <set wallYon="180" wallHeight="4" />
   <WallDoor hitMsg="@gasOpen1" open="@gasOpen1" close="@gasClose1" didOpen="@gasDTime1" volume="0" deltaY="0" deltaZ="-3.75" openSpeed="10" closeSpeed="10" fill="#555555" frame="#000000" x="302.22222222222223" z="91.3888888888889" w="0" d="3.75" h="0" r="1.25" cx="360.1388888888889" cz="124.86111111111111" angle="180" extent="270" />
   <Timer in="@gasDTime1" out="@gasClose1" wait="30" restart="true" fill="#555555" frame="#000000" cx="360.1388888888889" cz="124.86111111111111" r="1.25" angle="180" extent="270" />
   <set wallHeight="1" />
@@ -952,11 +949,9 @@
   <set wallHeight="0.4" />
   <Wall fill="#dfdfe6" frame="#000000" x="314.72222222222223" z="81.45833333333334" w="1.25" d="0.2083333333333286" h="0" y="1.5" />
   <Sound sound="2194" y="2" restart="true" start="@caching" fill="#7f3f00" frame="#000000" cx="315.34722222222223" cz="82.63888888888889" r="1.25" angle="270" extent="90" />
-  <set wallYon="0.01" />
-  <set wallHeight="1" />
+  <set wallYon="0.01" wallHeight="1" />
   <WallDoor open="@cashReg1Open" close="@cashReg1Close" didOpen="@caching" openSpeed="100" closeSpeed="100" volume="0" fill="#ffffff" frame="#000000" x="322.22222222222223" z="48.88888888888889" w="1.25" d="1.25" h="0" r="1.25" cx="315.34722222222223" cz="82.63888888888889" angle="270" extent="90" y="-150" />
-  <set wallYon="180" />
-  <set wallHeight="0.5" />
+  <set wallYon="180" wallHeight="0.5" />
   <Wall fill="#808080" frame="#000000" x="309.09722222222223" z="61.38888888888889" w="9.375" d="11.875" h="0" y="8" />
   <set wallHeight="8" />
   <Wall fill="#b5b5b5" frame="#000000" x="309.72222222222223" z="70.76388888888889" w="1.25" d="3.125" h="0" />
@@ -992,8 +987,7 @@
   <Ramp y="0" deltaY="8.5" thickness="0" fill="#555555" frame="#eadfd5" x="324.09722222222223" z="63.26388888888889" w="1.25" d="16.875" h="0" r="0.625" angle="270" extent="180" />
   <Ramp y="8.5" deltaY="0" thickness="0" fill="#555555" frame="#eadfd5" x="324.09722222222223" z="62.01388888888889" w="1.25" d="1.25" h="0" r="0.625" angle="270" extent="180" />
   <Switch y="1.5" scale="0.75" shape="bspOffSwitch" altShape="bspOnSwitch" blastToggle="1000" out.0="@lockOff" out.1="@lockOn" in.0="@gasSOff1" hitSound="2195" fill="#2a2a2a" frame="#000000" cx="310.97222222222223" cz="71.59722222222223" r="1.25" angle="45" extent="90" />
-  <set wallYon="0.01" />
-  <set wallHeight="4" />
+  <set wallYon="0.01" wallHeight="4" />
   <WallDoor open="@lockOn" close="@lockOff" volume="0" deltaY="-150" openSpeed="100" closeSpeed="100" fill="#555555" frame="#000000" x="310.34722222222223" z="67.01388888888889" w="0" d="3.75" h="0" r="1.25" cx="310.97222222222223" cz="71.59722222222223" angle="45" extent="90" y="150" />
   <And in="@gasOpen2" out="@lockOff" fill="#555555" frame="#000000" cx="310.97222222222223" cz="71.59722222222223" r="1.25" angle="45" extent="90" />
   <And in="@lockOff" out="@gasSOff1" fill="#555555" frame="#000000" cx="310.97222222222223" cz="71.59722222222223" r="1.25" angle="45" extent="90" />
@@ -1005,8 +999,7 @@
   <WallDoor open="@lockOn" close="@lockOff" deltaY="151" volume="0" openSpeed="100" closeSpeed="100" fill="#ffffff" frame="#000000" x="309.09722222222223" z="65.13888888888889" w="0.625" d="1.875" h="0" r="1.25" cx="311.80555555555554" cz="63.263888888888886" angle="135" extent="90" y="-150" />
   <set wallHeight="8" />
   <Wall fill="#b5b5b5" frame="#000000" x="300.97222222222223" z="80.76388888888889" w="1.25" d="5" h="0" />
-  <set wallYon="180" />
-  <set wallHeight="8" />
+  <set wallYon="180" wallHeight="8" />
   <Wall fill="#b5b5b5" frame="#000000" x="300.97222222222223" z="85.76388888888889" w="1.25" d="5.625" h="0" />
   <set wallHeight="1.5" />
   <Wall fill="#b5b5b5" frame="#000000" x="300.97222222222223" z="80.76388888888889" w="1.25" d="5" h="0" />

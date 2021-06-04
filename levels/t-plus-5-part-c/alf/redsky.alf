@@ -76,7 +76,6 @@
   <Door2 shape="bspHullMedium" yaw="100" scale="5" open="@up" close="@down" deltaY="15" speed="50" fill="#cc33cc" frame="#000000" cx="88.75" cz="26.25" r="2.5" angle="0" extent="90" />
   <Switch shape="bspSwitchOff" altShape="shape + 1" in.0="@down" in.1="@up" out.0="@down" out.1="@up" fill="#009999" frame="#000000" cx="99.375" cz="30.625" r="1.875" angle="0" extent="90" />
   <set wallHeight="0" />
-  <set wallHeight="0" />
   <Wall fill="#33cc66" frame="#000000" x="87.5" z="9.375" w="4.375" d="14.375" h="0" y="15" />
   <Wall fill="#33cc66" frame="#000000" x="81.875" z="13.125" w="5.625" d="3.75" h="0" y="15" />
   <Wall fill="#33cc66" frame="#000000" x="91.875" z="13.125" w="5.625" d="3.75" h="0" y="15" />

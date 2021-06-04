@@ -1,8 +1,5 @@
 <map>
-  <set wallYon="19000" />
-  <set grenadePower="4.5" missilePower="3" missileTurnRate="0.1" missileAcceleration="0.8" />
-  <set defaultLives="666" />
-  <set hull.0="2001" hull.1="2001" hull.2="2001" />
+  <set wallYon="19000" grenadePower="4.5" missilePower="3" missileTurnRate="0.1" missileAcceleration="0.8" defaultLives="666" hull.0="2001" hull.1="2001" hull.2="2001" />
   <SkyColor fill="#999933" frame="#66cc66" />
   <GroundColor fill="#999933" frame="#66cc66" />
   <set wallHeight="1" />
@@ -184,8 +181,7 @@
   <Teleporter group="-1" y="0" activeRange="30" destGroup="@recenter" shape="0" fill="#666666" frame="#000000" cx="78.05555555555556" cz="78.26388888888889" r="1.25" angle="180" extent="270" />
   <Teleporter group="-1" y="0" activeRange="30" destGroup="@recenter" shape="0" fill="#666666" frame="#000000" cx="76.80555555555556" cz="17.63888888888889" r="1.25" angle="180" extent="270" />
   <Teleporter group="-1" y="0" activeRange="30" destGroup="@recenter" shape="0" fill="#666666" frame="#000000" cx="18.055555555555557" cz="18.26388888888889" r="1.25" angle="180" extent="270" />
-  <set designer="&quot;Yo-Yo&quot;" information="&quot;#*&%)*#)^)_^#)&quot;" />
-  <set wallHeight="0.4" />
+  <set designer="&quot;Yo-Yo&quot;" information="&quot;#*&%)*#)^)_^#)&quot;" wallHeight="0.4" />
   <WallDoor open="@ha3" close="@close3" deltaY="-4" deltaZ="-4" middle="0.5" openSpeed="15" closeSpeed="100" stepOnMsg="@ha3" didOpen="@close3" closeDelay="60" openDelay="10" pitch="-90" guardDelay="0" fill="#336699" frame="#000000" r="1.25" cx="18.055555555555557" cz="18.26388888888889" angle="180" extent="270" x="43.05555555555556" z="36.736111111111114" w="7.5" d="7.5" h="0" y="40" />
   <set wallHeight="0.4" />
   <WallDoor open="@ha1" close="@close1" deltaY="-4" deltaX="-4" middle="0.5" openSpeed="15" closeSpeed="100" stepOnMsg="@ha1" didOpen="@close1" closeDelay="60" openDelay="10" roll="90" guardDelay="0" fill="#336699" frame="#000000" r="1.25" cx="18.055555555555557" cz="18.26388888888889" angle="180" extent="270" x="35.55555555555556" z="44.236111111111114" w="7.5" d="7.5" h="0" y="40" />

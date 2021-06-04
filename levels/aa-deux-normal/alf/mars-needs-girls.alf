@@ -13,12 +13,20 @@
   <Goody shape="bspMissile" speed="4" yon="20" y="8" missiles="3" start="gShow" out="gTaken" fill="#003399" frame="#000000" cx="87.56944444444444" cz="71.45833333333334" r="1.875" angle="180" extent="90" />
   <Wall fill="#770000" frame="#000000" x="24.65277777777778" z="41.59722222222222" w="5" d="3.75" h="6" />
   <GroundColor fill="#440000" frame="#440000" />
-  <SkyColor fill="#ff0000" frame="#770000" />
-  <Sound Y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" fill="#ff0000" frame="#770000" cx="1.840277777777778" cz="1.9791666666666667" r="1.5625" angle="270" extent="180" />
   <script>
+adjust SkyColor end
+
+object Sound
+Y = 50
+sound = snArcticWind
+isAmbient = true
+loopCount = -1
+volume = 100
+end
+
 ambient  =  0.1
 light[0] . i = 0.4light [0] . a  =  10light [0] . b = 45 
-light[1] . i = 0.1light [1] . a  =  45light [1] . b =</script>
+light[1] . i = 0.1light [1] . a  =  45light [1] . b = 180</script>
   <Incarnator y="15" fill="#0000dd" frame="#ff0000" cx="20.97222222222222" cz="3.8194444444444446" r="1.25" angle="180" extent="270" />
   <Wall fill="#770000" frame="#000000" x="50.27777777777778" z="18.47222222222222" w="4.375" d="3.125" h="4" />
   <Wall fill="#770000" frame="#000000" x="35.27777777777778" z="26.597222222222225" w="4.375" d="3.125" h="4" />

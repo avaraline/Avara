@@ -24,12 +24,10 @@ Special thank's to Kiff!&quot;" />
   <Wall fill="#ff0000" frame="#000000" x="54.583333333333336" z="78.47222222222223" w="0.48611111111111427" d="0.48611111111111427" h="0" />
   <Wall fill="#ff0000" frame="#000000" x="54.583333333333336" z="83.95833333333334" w="0.48611111111111427" d="0.48611111111110006" h="0" />
   <Wall fill="#ff0000" frame="#000000" x="49.09722222222222" z="83.95833333333334" w="0.48611111111111427" d="0.48611111111110006" h="0" />
-  <set wallHeight="17" />
-  <set baseHeight="3" />
+  <set wallHeight="17" baseHeight="3" />
   <Wall fill="#99ff99" frame="#000000" x="50.833333333333336" z="20.208333333333336" w="2.5" d="2.4305555555555536" h="0" />
   <Wall fill="#99ff99" frame="#000000" x="50.833333333333336" z="80.20833333333334" w="2.5" d="2.430555555555543" h="0" />
-  <set baseHeight="20" />
-  <set wallHeight="3" />
+  <set baseHeight="20" wallHeight="3" />
   <Wall fill="#777777" frame="#000000" x="47.083333333333336" z="16.458333333333336" w="10" d="10" h="0" />
   <Wall fill="#777777" frame="#000000" x="47.083333333333336" z="76.45833333333334" w="10" d="10" h="0" />
   <set wallHeight="0" />
@@ -47,7 +45,6 @@ Special thank's to Kiff!&quot;" />
   <Teleporter y="35" shape="0" group="@top" fill="#000077" frame="#777777" cx="52.083333333333336" cz="21.319444444444446" r="2.5" angle="180" extent="90" />
   <Teleporter y="0" shape="bspGoal" group="@bottom" fill="#000077" frame="#777777" cx="52.083333333333336" cz="81.38888888888889" r="2.5" angle="0" extent="90" />
   <Teleporter y="35" shape="0" group="@bottom" fill="#000077" frame="#777777" cx="52.083333333333336" cz="81.45833333333334" r="2.5" angle="180" extent="90" />
-  <set wallHeight="3" />
   <set wallHeight="0" />
   <Ramp y="0" deltaY="4" thickness="0" fill="#000077" frame="#000000" x="47.083333333333336" z="38.47222222222222" w="10" d="7.986111111111114" h="0" r="2.5" angle="90" extent="180" />
   <Ramp y="0" deltaY="4" thickness="0" fill="#000077" frame="#000000" x="47.083333333333336" z="56.458333333333336" w="10" d="7.986111111111107" h="0" r="2.5" angle="270" extent="180" />

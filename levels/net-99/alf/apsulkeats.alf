@@ -1,11 +1,7 @@
 <map>
   <SkyColor verticalRangeMax="5000" n="32" fill="#cccc99" frame="#006666" />
   <GroundColor fill="#000055" frame="#000044" />
-  <set designer="&quot;Yo-Yo&quot;" information="&quot;A normal level.&quot;" />
-  <set wallYon="160" defaultYon="160" goodyYon="30" invisoYon="0.01" />
-  <set incarnateSound="snRamp" incarnateVolume="3000" />
-  <set loseSound="106" loseVolume="99999999999" blastSoundDefault="106" blastDefaultVolume="9999999999" winSound="107" winVolume="2000" />
-  <set wallHeight="20" />
+  <set designer="&quot;Yo-Yo&quot;" information="&quot;A normal level.&quot;" wallYon="160" defaultYon="160" goodyYon="30" invisoYon="0.01" incarnateSound="snRamp" incarnateVolume="3000" loseSound="106" loseVolume="99999999999" blastSoundDefault="106" blastDefaultVolume="9999999999" winSound="107" winVolume="2000" wallHeight="20" />
   <Wall fill="#009966" frame="#000000" x="144.23611111111111" z="99.23611111111111" w="10.625" d="10" h="0" />
   <set wallHeight="20" />
   <Wall fill="#009966" frame="#000000" x="144.23611111111111" z="122.36111111111111" w="10.625" d="10" h="0" />

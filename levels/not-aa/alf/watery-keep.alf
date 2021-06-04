@@ -1,14 +1,11 @@
 <map>
-  <set defaultLives="99" />
-  <set groundStepSound="3002" />
-  <set wallHeight="9.5" />
+  <set defaultLives="99" groundStepSound="3002" wallHeight="9.5" />
   <Wall fill="#d3c97d" frame="#000000" x="54.583333333333336" z="69.58333333333334" w="5" d="40" h="0" />
   <set wallHeight="9.5" />
   <Wall fill="#d3c97d" frame="#000000" x="99.58333333333334" z="69.58333333333334" w="5" d="40" h="0" />
   <SkyColor verticalRangeMax="20000" n="10" fill="#e4d6bf" frame="#c5bb73" />
   <GroundColor fill="#302c24" frame="#302c24" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Standard CTF with tweakings: You cannot capture your opponent's flag unless your flag is in its alcove. To return your flag to its alcove transport it manually, or throw it into one of the spinning swirls. Teams are red and blue.&quot;" />
-  <set wallHeight="10" />
+  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Standard CTF with tweakings: You cannot capture your opponent's flag unless your flag is in its alcove. To return your flag to its alcove transport it manually, or throw it into one of the spinning swirls. Teams are red and blue.&quot;" wallHeight="10" />
   <Wall fill="#b6ac69" frame="#000000" x="54.583333333333336" z="39.583333333333336" w="50" d="10" h="0" />
   <set wallHeight="10" />
   <Wall fill="#b6ac69" frame="#000000" x="54.583333333333336" z="49.583333333333336" w="20" d="10" h="0" />
@@ -253,8 +250,7 @@
   <And in="@blueCaptured" out="@blueSafe" fill="#e2e2e2" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
   <set wallHeight="6" wallYon="0.01" />
   <WallDoor status="isOpen" open="@redSafe" close="@redStolen" deltaY="5000" openSpeed="100" closeSpeed="50" guardDelay="1" stopSound="0" closeSound="0" openSound="0" volume="0" fill="#ffffff" frame="#000000" x="72.08333333333334" z="159.58333333333334" w="5" d="5" h="0" r="1.875" cx="19.583333333333336" cz="19.51388888888889" angle="225" extent="90" y="14" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="6" />
+  <set wallYon="defaultYon" wallHeight="6" />
   <Field watch="targ2" deltaY="0" enter="@redSafe" exit="@redStolen" fill="#ffffff" frame="#000000" x="82.08333333333334" z="159.58333333333334" w="5" d="5" h="0" r="1.875" cx="19.583333333333336" cz="19.51388888888889" angle="225" extent="90" y="14" />
   <Text showEveryone="true" text="&quot;Red flag returned.&quot;" in="@redReturn" sound="0" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
   <Text showEveryone="true" text="&quot;Red flag stolen.&quot;" in="@redStolen" sound="0" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
@@ -355,8 +351,7 @@
   <Teleporter stop="@start" start="@teleAll" win="0" activeRange="2000" fill="#e2e2e2" frame="#000000" cx="2.7083333333333335" cz="82.70833333333334" r="1.875" angle="180" extent="90" />
   <Counter in="@blueCaptured" out="@redWon" n="6" fill="#e2e2e2" frame="#000000" cx="2.7083333333333335" cz="82.70833333333334" r="1.875" angle="180" extent="90" />
   <Counter in="@redCaptured" out="@blueWon" n="6" fill="#e2e2e2" frame="#000000" cx="2.7083333333333335" cz="82.70833333333334" r="1.875" angle="180" extent="90" />
-  <set wallYon="0.01" />
-  <set wallHeight="200" />
+  <set wallYon="0.01" wallHeight="200" />
   <Wall fill="#4f4522" frame="#000000" x="39.583333333333336" z="9.583333333333334" w="32.5" d="10" h="0" />
   <set wallHeight="200" />
   <Wall fill="#4f4522" frame="#000000" x="87.08333333333334" z="9.583333333333334" w="32.5" d="10" h="0" />
@@ -392,8 +387,7 @@
   <Wall fill="#4f4522" frame="#000000" x="77.08333333333334" z="14.583333333333334" w="5" d="5" h="0" />
   <set wallHeight="200" />
   <Wall fill="#4f4522" frame="#000000" x="77.08333333333334" z="159.58333333333334" w="5" d="5" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0.5" />
+  <set wallYon="defaultYon" wallHeight="0.5" />
   <Wall fill="#2c314f" frame="#000000" x="67.08333333333334" z="28.333333333333336" w="25" d="1.25" h="0" y="14" />
   <set wallHeight="0.5" />
   <Wall fill="#2c314f" frame="#000000" x="57.083333333333336" z="28.333333333333336" w="10" d="1.25" h="0" y="17.5" />
@@ -415,14 +409,11 @@
   <Wall fill="#2c314f" frame="#000000" x="54.583333333333336" z="28.333333333333336" w="50" d="1.25" h="0" y="19.5" />
   <set wallHeight="4" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="54.583333333333336" z="28.333333333333336" w="2.5" d="1.25" h="0" y="14" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="4" wallYon="0.01" />
+  <set wallYon="0.01" wallHeight="4" />
   <Wall fill="#ffffff" frame="#000000" x="102.08333333333334" z="28.333333333333336" w="2.5" d="1.25" h="0" y="14" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="4" wallYon="0.01" />
+  <set wallYon="0.01" wallHeight="4" />
   <Wall fill="#ffffff" frame="#000000" x="67.08333333333334" z="28.333333333333336" w="25" d="1.25" h="0" y="14" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="2" wallYon="0.01" />
+  <set wallYon="0.01" wallHeight="2" />
   <Wall fill="#ffffff" frame="#000000" x="54.583333333333336" z="28.333333333333336" w="50" d="1.25" h="0" y="18" />
   <set wallYon="defaultYon" />
   <Ramp y="10" deltaY="4" thickness="0" fill="#d3c97d" frame="#000000" x="68.33333333333334" z="29.583333333333336" w="22.5" d="10" h="0" r="0.625" angle="270" extent="180" />
@@ -450,14 +441,11 @@
   <Wall fill="#661516" frame="#000000" x="54.583333333333336" z="149.58333333333334" w="50" d="1.25" h="0" y="19.5" />
   <set wallHeight="4" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="54.583333333333336" z="149.58333333333334" w="2.5" d="1.25" h="0" y="14" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="4" wallYon="0.01" />
+  <set wallYon="0.01" wallHeight="4" />
   <Wall fill="#ffffff" frame="#000000" x="102.08333333333334" z="149.58333333333334" w="2.5" d="1.25" h="0" y="14" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="4" wallYon="0.01" />
+  <set wallYon="0.01" wallHeight="4" />
   <Wall fill="#ffffff" frame="#000000" x="67.08333333333334" z="149.58333333333334" w="25" d="1.25" h="0" y="14" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="2" wallYon="0.01" />
+  <set wallYon="0.01" wallHeight="2" />
   <Wall fill="#ffffff" frame="#000000" x="54.583333333333336" z="149.58333333333334" w="50" d="1.25" h="0" y="18" />
   <set wallYon="defaultYon" />
   <Ramp y="10" deltaY="4" thickness="0" fill="#c5bb73" frame="#000000" x="65.83333333333334" z="139.58333333333334" w="27.5" d="10" h="0" r="0.625" angle="90" extent="180" />

@@ -18,8 +18,7 @@
   <And in="@start" out="mShow" fill="#003399" frame="#000000" cx="127.01388888888889" cz="73.81944444444444" r="3.125" angle="60" extent="60" />
   <Timer in="mTaken" out="mShow" wait="20" fill="#003399" frame="#000000" cx="127.01388888888889" cz="73.81944444444444" r="3.125" angle="60" extent="60" />
   <Goody shape="bspGoody" y="3.5" speed="2" missiles="numMiss" grenades="numGren" start="mShow" out="mTaken" fill="#003399" frame="#000000" cx="127.01388888888889" cz="73.81944444444444" r="3.125" angle="60" extent="60" />
-  <set wallHeight="0" />
-  <set wa="goodyY -1" />
+  <set wallHeight="0" wa="goodyY -1" />
   <Field visible="fieldVis" deltaY="0" mask="allTeams -T6" exit="@tDone4" enter="@aOff4" stop="@aTaken4" start="@tDone4" fill="#00ccff" frame="#000000" r="3.125" cx="127.01388888888889" cz="73.81944444444444" angle="60" extent="60" x="192.98611111111111" z="77.29166666666667" w="3.125" d="3.125" h="2" />
   <Base in="@start" out="@tDone4" fill="#0033ff" frame="#ff0000" cx="194.58333333333334" cz="78.81944444444444" r="2.5" angle="60" extent="60" />
   <Timer in="@aTaken4" out="@tDone4" wait="missDelay" fill="#0033ff" frame="#ff0000" cx="194.58333333333334" cz="78.81944444444444" r="2.5" angle="60" extent="60" />

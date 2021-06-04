@@ -28,9 +28,7 @@
   <Incarnator fill="#ff6666" frame="#444444" cx="36.52777777777778" cz="35" r="4.375" angle="0" extent="90" />
   <Incarnator fill="#ff6666" frame="#444444" cx="39.02777777777778" cz="24.375" r="4.375" angle="0" extent="90" />
   <Incarnator fill="#ff6666" frame="#444444" cx="33.40277777777778" cz="16.25" r="4.375" angle="0" extent="90" />
-  <set hull.0="2005" hull.1="2005" hull.2="2005" />
-  <set designer="&quot;Edgar Hons&quot;" information="&quot;Third time's the charm&quot;" />
-  <set wallHeight="2" wallYon="0" />
+  <set hull.0="2005" hull.1="2005" hull.2="2005" designer="&quot;Edgar Hons&quot;" information="&quot;Third time's the charm&quot;" wallHeight="2" wallYon="0" />
   <Wall fill="#cc6666" frame="#000000" x="19.375" z="43.958333333333336" w="20.625" d="6.25" h="0" y="2" />
   <set wallHeight="5" wallYon="0" />
   <Wall fill="#cc6666" frame="#000000" x="19.375" z="43.958333333333336" w="4.375" d="6.25" h="0" y="4" />
@@ -45,7 +43,6 @@
   <set wallHeight="2" />
   <Wall fill="#000000" frame="#000000" x="35" z="43.333333333333336" w="3.125" d="0.625" h="0" y="12" />
   <set wallHeight="5" />
-  <set wallHeight="5" />
   <Wall fill="#000000" frame="#000000" x="23.75" z="50.208333333333336" w="11.875" d="0.625" h="0" y="4" />
   <set wallHeight="6" />
   <Wall fill="#cc6666" frame="#000000" x="26.25" z="45.208333333333336" w="6.875" d="4.375" h="0" y="-4" />
@@ -53,7 +50,6 @@
   <Wall fill="#cc6666" frame="#000000" x="33.125" z="45.833333333333336" w="23.125" d="3.125" h="0" y="-3" />
   <set wallHeight="3" />
   <Wall fill="#cc6666" frame="#000000" x="52.5" z="22.708333333333336" w="3.75" d="23.125" h="0" y="-3" />
-  <set wallHeight="3" />
   <set wallHeight="4" />
   <Wall fill="#cc6666" frame="#000000" x="46.25" z="18.958333333333336" w="1.875" d="1.875" h="0" y="0" />
   <set wallHeight="5" />
@@ -64,8 +60,7 @@
   <Wall fill="#cc6666" frame="#000000" x="46.25" z="26.458333333333336" w="1.875" d="1.875" h="0" y="0" />
   <set wallHeight="3" />
   <Wall fill="#cc6666" frame="#000000" x="46.25" z="19.583333333333336" w="6.25" d="8.125" h="0" y="-3" />
-  <set baseHeight="20" />
-  <set wallHeight="3" />
+  <set baseHeight="20" wallHeight="3" />
   <Wall fill="#cc6666" frame="#000000" x="8.75" z="45.833333333333336" w="17.5" d="3.125" h="0" y="-23" />
   <set wallHeight="3" />
   <Wall fill="#cc6666" frame="#000000" x="8.75" z="27.083333333333336" w="3.75" d="18.75" h="0" y="-23" />
@@ -73,32 +68,6 @@
   <Wall fill="#cc6666" frame="#000000" x="8.75" z="27.083333333333336" w="3.75" d="2.5" h="0" y="-20" />
   <set wallHeight="0" />
   <Wall fill="#ee0000" frame="#000000" x="8.75" z="27.083333333333336" w="3.75" d="2.5" h="0" y="-19.5" />
-  <Ufo fill="#cc6666" frame="#ffff00" cx="58.75" cz="8.75" r="5" angle="0" extent="90" />
-  <set y="2" />
-  <set shape="1003" />
-  <set shotPower="0" />
-  <set attack="0" />
-  <set accel=".03" />
-  <set scale="3" />
-  <set verticalRangeMin="1" />
-  <set verticalRangeMax="8" />
-  <set motionRange="20" />
-  <set pitchrange="360" />
-  <set checkPeriod="10" />
-  <set shield=".01" />
-  <set watch="false" />
-  <Ufo fill="#663300" frame="#ffff00" cx="3.4722222222222228" cz="11.25" r="5" angle="0" extent="90" />
-  <set y="2" />
-  <set shape="1026" />
-  <set shotPower="0" />
-  <set attack="0" />
-  <set accel=".03" />
-  <set scale="3" />
-  <set verticalRangeMin="1" />
-  <set verticalRangeMax="8" />
-  <set motionRange="20" />
-  <set pitchrange="360" />
-  <set checkPeriod="10" />
-  <set shield=".01" />
-  <set watch="false" />
+  <Ufo y="2" shape="1003" shotPower="0" attack="0" accel=".03" scale="3" verticalRangeMin="1" verticalRangeMax="8" motionRange="20" pitchrange="360" checkPeriod="10" shield=".01" watch="false" fill="#cc6666" frame="#ffff00" cx="58.75" cz="8.75" r="5" angle="0" extent="90" />
+  <Ufo y="2" shape="1026" shotPower="0" attack="0" accel=".03" scale="3" verticalRangeMin="1" verticalRangeMax="8" motionRange="20" pitchrange="360" checkPeriod="10" shield=".01" watch="false" fill="#663300" frame="#ffff00" cx="3.4722222222222228" cz="11.25" r="5" angle="0" extent="90" />
 </map>

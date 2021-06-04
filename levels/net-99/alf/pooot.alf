@@ -1,6 +1,5 @@
 <map>
-  <set wallYon="85" />
-  <set wallHeight="3" />
+  <set wallYon="85" wallHeight="3" />
   <Wall fill="#bbbbbb" frame="#000000" x="71.875" z="84.93055555555556" w="50" d="5" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="116.875" z="89.93055555555556" w="5" d="50" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="66.875" z="84.93055555555556" w="5" d="50" h="0" />
@@ -452,11 +451,7 @@
   <Timer in.1="@startAll" wait="80" out="@stopAll" fill="#004400" frame="#004400" cx="36.111111111111114" cz="27.63888888888889" r="2.5" angle="180" extent="90" />
   <Sound y="5" isPlaced="true" sound="138" isAmbient="false" loopCount="-1" volume="3000" start="@stopAll" stop="0" fill="#ffff00" frame="#004400" cx="94.375" cz="111.875" r="2.5" angle="180" extent="90" />
   <Sound y="5" isPlaced="true" sound="138" isAmbient="false" loopCount="-1" volume="3000" start="@startAll" stop="0" fill="#ffff00" frame="#004400" cx="94.375" cz="111.875" r="2.5" angle="180" extent="90" />
-  <set missilePower="60" />
-  <set missileAcceleration="1.5" />
-  <set missileTurnRate="0" />
-  <set wallHeight="120" />
-  <set maxStarMissiles="2" />
+  <set missilePower="60" missileAcceleration="1.5" missileTurnRate="0" wallHeight="120" maxStarMissiles="2" />
   <YonBox fill="#ffff00" frame="#004400" x="151.875" z="92.43055555555556" w="12.5" d="27.5" h="0" r="2.5" angle="180" extent="90" />
   <YonBox fill="#ffff00" frame="#9900cc" x="86.94444444444444" z="3.055555555555556" w="96.52777777777779" d="38.541666666666664" h="6.5" r="2.5" angle="180" extent="90" />
   <YonBox fill="#ffff00" frame="#9900cc" x="6.319444444444445" z="183.19444444444446" w="96.52777777777779" d="38.54166666666666" h="6.5" r="2.5" angle="180" extent="90" />

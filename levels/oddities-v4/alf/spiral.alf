@@ -8,9 +8,7 @@
   <TeamColor mask="T6" fill="#25ff94" frame="#ccffe6" cx="3.125" cz="45.90277777777778" r="1.25" angle="270" extent="90" />
   <TeamColor mask="T3" fill="#000000" frame="#555555" cx="3.125" cz="40.27777777777778" r="1.25" angle="270" extent="90" />
   <TeamColor mask="T4" fill="#ffffff" frame="#bbbbbb" cx="3.125" cz="42.15277777777778" r="1.25" angle="270" extent="90" />
-  <set baseHeight="secHeight" wallHeight="totHeight -secHeight" />
-  <set baseHeight="0" wallHeight="totHeight" />
-  <set wallHeight="0" baseHeight="totHeight" />
+  <set baseHeight="totHeight" wallHeight="0" />
   <Wall fill="#54dd00" frame="#000000" x="19.305555555555557" z="8.958333333333334" w="10.625" d="10.625" h="0" />
   <Wall fill="#54dd00" frame="#000000" x="29.305555555555557" z="8.958333333333334" w="11.25" d="10.625" h="0" />
   <Wall fill="#54dd00" frame="#000000" x="39.93055555555556" z="8.958333333333334" w="10.625" d="10.625" h="0" />
@@ -22,8 +20,7 @@
   <Wall fill="#54dd00" frame="#000000" x="29.305555555555557" z="18.958333333333336" w="11.25" d="11.25" h="0" />
   <set wallHeight="10" baseHeight="totHeight" wallYon="0.01" />
   <Wall fill="#54dd00" frame="#000000" x="19.305555555555557" z="8.958333333333334" w="31.25" d="31.25" h="0" />
-  <set wallYon="0" />
-  <set baseHeight="0" wallHeight="totHeight" />
+  <set wallYon="0" baseHeight="0" wallHeight="totHeight" />
   <Wall fill="#4dff3d" frame="#000000" x="29.930555555555557" z="19.583333333333336" w="0.625" d="0.625" h="0" />
   <Wall fill="#4dff3d" frame="#000000" x="39.30555555555556" z="19.583333333333336" w="0.625" d="0.625" h="0" />
   <Wall fill="#4dff3d" frame="#000000" x="29.930555555555557" z="28.958333333333336" w="0.625" d="0.625" h="0" />
@@ -37,8 +34,7 @@
   <Wall fill="#ffffff" frame="#000000" x="19.930555555555557" z="39.583333333333336" w="30" d="0.625" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="49.93055555555556" z="9.583333333333334" w="0.625" d="30" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="19.930555555555557" z="8.958333333333334" w="30" d="0.625" h="0" />
-  <set wallYon="0" />
-  <set wallHeight="0" baseHeight="totHeight -secHeight" />
+  <set wallYon="0" wallHeight="0" baseHeight="totHeight -secHeight" />
   <Wall fill="#25dd00" frame="#000000" x="19.930555555555557" z="19.583333333333336" w="10" d="20" h="0" />
   <set wallHeight="0" baseHeight="secHeight * 0" />
   <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="19.930555555555557" z="19.583333333333336" w="10" d="10" h="0" r="5" angle="90" extent="180" />
@@ -210,8 +206,7 @@
   <Wall fill="#ffffff" frame="#000000" x="52.43055555555556" z="32.708333333333336" w="8.75" d="0.625" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="61.18055555555556" z="23.958333333333336" w="0.625" d="8.75" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="52.43055555555556" z="23.333333333333336" w="8.75" d="0.625" h="0" />
-  <set wallYon="0" />
-  <set wallHeight="totHeight -secHeight" baseHeight="0" />
+  <set wallYon="0" wallHeight="totHeight -secHeight" baseHeight="0" />
   <Field deltaY="0.22" start="@FieldsOn" stop="@FieldsOff" fill="#3dffa0" frame="#000000" x="30.555555555555557" z="20.208333333333336" w="8.75" d="8.75" h="0" r="2.5" cx="22.430555555555557" cz="12.083333333333334" angle="270" extent="90" />
   <set wallHeight="secHeight" baseHeight="totHeight -secHeight" />
   <Field deltaX="-0.2" start="@FieldsOn" stop="@FieldsOff" fill="#3dffa0" frame="#000000" x="30.555555555555557" z="20.208333333333336" w="8.75" d="8.75" h="0" r="2.5" cx="22.430555555555557" cz="12.083333333333334" angle="270" extent="90" />

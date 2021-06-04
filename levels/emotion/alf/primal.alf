@@ -1,8 +1,7 @@
 <map>
   <SkyColor n="1000" verticalRangeMax="2000" fill="#dcffdc" frame="#102300" />
   <GroundColor fill="#102300" frame="#000000" />
-  <set information="rJungle" />
-  <set wallHeight="4" />
+  <set information="rJungle" wallHeight="4" />
   <Wall fill="#475e3b" frame="#000000" x="94.65277777777779" z="53.40277777777778" w="10" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#475e3b" frame="#000000" x="114.65277777777779" z="53.40277777777778" w="10" d="10" h="0" />
@@ -84,8 +83,7 @@
   <Incarnator y="20" fill="#dcffdc" frame="#000000" cx="129.65277777777777" cz="138.40277777777777" r="1.875" angle="90" extent="90" />
   <Incarnator y="20" fill="#dcffdc" frame="#000000" cx="129.65277777777777" cz="58.40277777777778" r="1.875" angle="0" extent="90" />
   <Incarnator y="20" fill="#dcffdc" frame="#000000" cx="89.65277777777779" cz="138.40277777777777" r="1.875" angle="180" extent="90" />
-  <set wallYon=".001" />
-  <set wallHeight="100" />
+  <set wallYon=".001" wallHeight="100" />
   <Wall fill="#444444" frame="#000000" x="79.65277777777779" z="48.40277777777778" w="5" d="30" h="0" />
   <set wallHeight="100" />
   <Wall fill="#444444" frame="#000000" x="134.65277777777777" z="48.40277777777778" w="5" d="30" h="0" />
@@ -109,8 +107,7 @@
   <Wall fill="#444444" frame="#000000" x="149.65277777777777" z="83.40277777777779" w="5" d="30" h="0" />
   <set wallHeight="100" />
   <Wall fill="#444444" frame="#000000" x="64.65277777777779" z="83.40277777777779" w="5" d="30" h="0" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="2" />
+  <set wallYon="defaultYon" wallHeight="2" />
   <Wall fill="#475e3b" frame="#000000" x="69.65277777777779" z="83.40277777777779" w="15" d="5" h="0" y="2" />
   <set wallHeight="2" />
   <Wall fill="#475e3b" frame="#000000" x="69.65277777777779" z="108.40277777777779" w="15" d="5" h="0" y="2" />
@@ -167,8 +164,7 @@
   <Wall fill="#ffffff" frame="#000000" x="69.65277777777779" z="83.40277777777779" w="0" d="30" h="0" y="5" />
   <set wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="149.65277777777777" z="83.40277777777779" w="0" d="30" h="0" y="5" />
-  <set ambient=".2" light.0.i=".4" />
-  <set wallHeight="1.5" />
+  <set ambient=".2" light.0.i=".4" wallHeight="1.5" />
   <Wall fill="#627b58" frame="#000000" x="104.65277777777779" z="53.40277777777778" w="10" d="0" h="0" />
   <set wallHeight="1.5" />
   <Wall fill="#627b58" frame="#000000" x="104.65277777777779" z="53.40277777777778" w="10" d="0" h="0" y="2.5" />

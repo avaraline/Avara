@@ -7,8 +7,7 @@
   <Wall fill="#002802" frame="#000000" x="54.02777777777778" z="64.65277777777779" w="3.75" d="3.75" h="0" y="5" />
   <SkyColor n="1000" verticalRangeMax="2000" fill="#cef2d3" frame="#002802" />
   <GroundColor fill="#002802" frame="#000000" />
-  <set information="rSinkki" />
-  <set wallHeight=".25" />
+  <set information="rSinkki" wallHeight=".25" />
   <Wall fill="#b0d5b5" frame="#000000" x="52.15277777777778" z="62.77777777777778" w="7.5" d="7.5" h="0" y="5.5" />
   <Incarnator y="10" fill="#cef2d3" frame="#000000" cx="24.65277777777778" cz="66.59722222222223" r="1.875" angle="225" extent="90" />
   <set wallHeight="6" />
@@ -90,8 +89,7 @@
   <Wall fill="#dcffe1" frame="#000000" x="97.15277777777779" z="106.52777777777779" w="1.25" d="7.5" h="0" y="15.3" />
   <set wallHeight="4" />
   <Field deltaY="1.5" visible="true" enter="@startTime" exit="@stopTime" fill="#a2c7a7" frame="#000000" x="55.27777777777778" z="65.90277777777779" w="1.25" d="1.25" h="0" r="1.875" cx="94.65277777777779" cz="110.27777777777779" angle="270" extent="90" y="1" />
-  <set wallYon="40" />
-  <set wallHeight=".001" />
+  <set wallYon="40" wallHeight=".001" />
   <Wall fill="#dcffe1" frame="#000000" x="24.65277777777778" z="23.40277777777778" w="0.625" d="1.875" h="0" y="0" />
   <Wall fill="#dcffe1" frame="#000000" x="27.15277777777778" z="25.27777777777778" w="0.625" d="2.5" h="0" />
   <Wall fill="#dcffe1" frame="#000000" x="24.65277777777778" z="25.27777777777778" w="2.5" d="0.625" h="0" />
@@ -139,8 +137,7 @@
   <Incarnator y="16" fill="#cef2d3" frame="#000000" cx="70.90277777777779" cz="51.52777777777778" r="1.875" angle="0" extent="90" />
   <Incarnator y="15" fill="#cef2d3" frame="#000000" cx="33.47222222222222" cz="27.77777777777778" r="1.875" angle="315" extent="90" />
   <Incarnator y="15" fill="#cef2d3" frame="#000000" cx="78.47222222222223" cz="105.27777777777779" r="1.875" angle="135" extent="90" />
-  <set wallYon=".001" />
-  <set wallHeight="500" />
+  <set wallYon=".001" wallHeight="500" />
   <Wall fill="#444444" frame="#000000" x="12.152777777777779" z="17.77777777777778" w="58.75" d="1.25" h="0" />
   <Wall fill="#444444" frame="#000000" x="69.65277777777779" z="19.02777777777778" w="1.25" d="30" h="0" />
   <Wall fill="#444444" frame="#000000" x="70.90277777777779" z="47.77777777777778" w="3.75" d="1.25" h="0" />
@@ -160,8 +157,7 @@
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="23 * 5" destGroup="@center" shape="0" fill="#ffffff" frame="#000000" cx="55.90277777777778" cz="66.52777777777779" r="2.5" angle="270" extent="90" />
   <Teleporter y="30" shape="0" group="@center" fill="#ffffff" frame="#000000" cx="55.90277777777778" cz="66.52777777777779" r="2.5" angle="270" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="55.90277777777778" cz="66.52777777777779" r="2.5" angle="270" extent="90" />
-  <set wallYon="defaultYon" />
-  <set wallHeight=".3" />
+  <set wallYon="defaultYon" wallHeight=".3" />
   <WallDoor midYaw="45" fill="#dcffe1" frame="#000000" x="85.27777777777779" z="56.52777777777778" w="9.375" d="9.375" h="0" r="2.5" cx="55.90277777777778" cz="66.52777777777779" angle="270" extent="90" />
   <unique vars="mg1 mg2 mWait mNext" />
   <And in="@start" out="mg1" fill="#dcffe1" frame="#ffffff" cx="90.27777777777779" cz="60.90277777777778" r="2.5" angle="0" extent="90" />
@@ -169,8 +165,7 @@
   <Goody shape="bspMissile" speed="2" y="2.3" start="mg2" stop="mg1" out="mWait" missiles="2" fill="#dcffe1" frame="#ffffff" cx="90.27777777777779" cz="60.90277777777778" r="2.5" angle="0" extent="90" />
   <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="200" fill="#dcffe1" frame="#ffffff" cx="90.27777777777779" cz="60.90277777777778" r="2.5" angle="0" extent="90" />
   <Distributor in="mNext" out.0="mg1" out.1="mg2" fill="#dcffe1" frame="#ffffff" cx="90.27777777777779" cz="60.90277777777778" r="2.5" angle="0" extent="90" />
-  <set wallYon="40" />
-  <set wallHeight=".001" />
+  <set wallYon="40" wallHeight=".001" />
   <WallDoor midYaw="200" fill="#dcffe1" frame="#000000" x="33.40277777777778" z="22.15277777777778" w="0.625" d="6.25" h="0" r="2.5" cx="90.27777777777779" cz="60.90277777777778" angle="0" extent="90" />
   <set wallHeight=".001" />
   <WallDoor midYaw="160" fill="#dcffe1" frame="#000000" x="35.27777777777778" z="23.40277777777778" w="0.625" d="5" h="0" r="2.5" cx="90.27777777777779" cz="60.90277777777778" angle="0" extent="90" />

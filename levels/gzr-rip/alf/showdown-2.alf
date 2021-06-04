@@ -56,7 +56,6 @@
   <And in="@start" out="@time" fill="#ff0000" frame="#000000" cx="130.97222222222223" cz="6.111111111111111" r="3.125" angle="60" extent="60" />
   <Counter in.0="@zero" in.1="@one" out="@time" fill="#ff0000" frame="#000000" cx="130.97222222222223" cz="6.111111111111111" r="3.125" angle="60" extent="60" />
   <Timer in="@time" out="@whoop" wait="30" fill="#ff0000" frame="#000000" cx="130.97222222222223" cz="6.111111111111111" r="3.125" angle="60" extent="60" />
-  <Distributor in="@whoop" out.0="@zero" out.1="@one" fill="#ff0000" frame="#000000" cx="130.97222222222223" cz="6.111111111111111" r="3.125" angle="60" extent="60" />
-  <set baseHeight="20" wallHeight="1" />
+  <Distributor in="@whoop" out.0="@zero" out.1="@one" baseHeight="20" wallHeight="1" fill="#ff0000" frame="#000000" cx="130.97222222222223" cz="6.111111111111111" r="3.125" angle="60" extent="60" />
   <Wall fill="#dddddd" frame="#000000" x="23.333333333333336" z="18.958333333333336" w="70.625" d="70" h="0" />
 </map>

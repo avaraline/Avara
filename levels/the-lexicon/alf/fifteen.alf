@@ -162,7 +162,8 @@ activeRange = 2000
 deadRange = 90
 destGroup = @recenter
 y = 30
-shape = 0</script>
+shape = 0
+end</script>
   <Teleporter y="12" group="@recenter" destGroup="@nullo" shape="0" speed="0" fill="#dddddd" frame="#000000" cx="82.43055555555556" cz="43.81944444444444" r="1.875" angle="0" extent="90" />
   <Teleporter y="12" group="@recenter" destGroup="@nullo" shape="0" speed="0" fill="#dddddd" frame="#000000" cx="41.80555555555556" cz="84.44444444444444" r="1.875" angle="180" extent="90" />
   <Incarnator y="30" fill="#ffff00" frame="#000000" cx="93.05555555555556" cz="63.888888888888886" r="1.25" angle="45" extent="90" />

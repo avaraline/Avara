@@ -73,7 +73,6 @@
   <set wallHeight="10" />
   <Wall fill="#7f0000" frame="#000000" x="33.75" z="53.125" w="0.625" d="0.625" h="0" y="0" />
   <set wallHeight="10" />
-  <set wallHeight="10" />
   <Wall fill="#7f0000" frame="#000000" x="28.125" z="53.125" w="0.625" d="0.625" h="0" y="0" />
   <set wallHeight="0.5" />
   <Wall fill="#8c0000" frame="#000000" x="22.5" z="48.125" w="28.125" d="6.25" h="0" y="10" />
@@ -135,7 +134,6 @@
   <Wall fill="#660000" frame="#000000" x="22.5" z="75.625" w="5.625" d="1.25" h="0" y="0" />
   <set wallHeight="0.5" />
   <Wall fill="#660000" frame="#000000" x="22.5" z="76.875" w="5.625" d="1.25" h="0" y="0" />
-  <set wallHeight="0.5" />
   <set wallHeight="1" />
   <Wall fill="#8c0000" frame="#000000" x="22.5" z="54.375" w="5.625" d="0" h="0" y="9.5" />
   <Ramp y="20" deltaY="10" thickness="0" fill="#993300" frame="#000000" x="21.875" z="63.125" w="29.375" d="18.125" h="0" r="5" angle="0" extent="90" />
@@ -160,7 +158,6 @@
   <Wall fill="#ffffff" frame="#000000" x="60.90277777777778" z="41.52777777777778" w="0.34722222222222143" d="0.34722222222222143" h="0" y="0" />
   <set wallHeight="3" />
   <Wall fill="#ffffff" frame="#000000" x="54.65277777777778" z="41.52777777777778" w="0.34722222222222143" d="0.34722222222222143" h="0" y="0" />
-  <set wallHeight="0.5" />
   <set wallHeight="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="61.25" z="41.52777777777778" w="5.902777777777786" d="0.34722222222222143" h="0" y="1" />
   <set wallHeight="0.5" />
@@ -326,7 +323,6 @@
   <set wallHeight="10" />
   <Wall fill="#b30000" frame="#000000" x="188.125" z="115" w="8.125" d="0.625" h="0" y="0" />
   <set wallHeight="10" />
-  <set wallHeight="10" />
   <Wall fill="#a60000" frame="#000000" x="196.25" z="115" w="12.5" d="0.625" h="0" y="0" />
   <set wallHeight="10" />
   <Wall fill="#a60000" frame="#000000" x="208.125" z="115.625" w="0.625" d="5" h="0" y="0" />
@@ -454,7 +450,6 @@
   <Wall fill="#999999" frame="#000000" x="190.625" z="121.875" w="0.625" d="0.625" h="0" y="3" />
   <set wallHeight="7" />
   <Wall fill="#999999" frame="#000000" x="197.5" z="121.875" w="0.625" d="0.625" h="0" y="3" />
-  <set wallHeight="7" />
   <set wallHeight="0.5" />
   <Wall fill="#999999" frame="#000000" x="160.625" z="115.625" w="0.625" d="6.875" h="0" y="10" />
   <set wallHeight="0.5" />
@@ -578,104 +573,13 @@
   <WallDoor y="300" deltaY="-300" openSpeed="100" deltaZ="0" open="@oDay" close="@oNight" fill="#ffff00" frame="#000000" x="140.625" z="45.625" w="2.5" d="2.5" h="0" r="5.625" cx="1.25" cz="10.625" angle="0" extent="90" />
   <set wallHeight="50" />
   <WallDoor y="300" deltaY="-300" openSpeed="100" deltaZ="0" open="@oDay" close="@oNight" fill="#ffff00" frame="#000000" x="164.375" z="61.25" w="5.625" d="8.125" h="0" r="5.625" cx="1.25" cz="10.625" angle="0" extent="90" />
-  <Ufo fill="#ffffff" frame="#000000" cx="86.875" cz="31.25" r="5" angle="0" extent="90" />
-  <set shape="1025" />
-  <set y="0" />
-  <set scale="2" />
-  <set shotPower="2" />
-  <set burstLength="30" />
-  <set attack="0" />
-  <set burstCharge="20" />
-  <set defense="1" />
-  <set accel=".5" />
-  <set verticalRangeMin="0" />
-  <set verticalRangeMax="0" />
-  <set motionRange="20" />
-  <set checkPeriod="10" />
-  <set shield="50" />
-  <set activeRange="1000" />
-  <set watch="playerMask + scoutMask + robotMask" />
-  <set homeSick="0.5" />
-  <Ufo fill="#ffffff" frame="#000000" cx="98.75" cz="196.94444444444446" r="5" angle="0" extent="90" />
-  <set shape="1025" />
-  <set y="0" />
-  <set scale="2" />
-  <set shotPower="2" />
-  <set burstLength="30" />
-  <set attack="0" />
-  <set burstCharge="20" />
-  <set defense="1" />
-  <set accel=".5" />
-  <set verticalRangeMin="0" />
-  <set verticalRangeMax="0" />
-  <set motionRange="20" />
-  <set checkPeriod="10" />
-  <set shield="50" />
-  <set activeRange="1000" />
-  <set watch="playerMask + scoutMask + robotMask" />
-  <set homeSick="0.5" />
-  <Ufo fill="#ffffff" frame="#000000" cx="63.81944444444444" cz="185.69444444444446" r="5" angle="0" extent="90" />
-  <set shape="1025" />
-  <set y="0" />
-  <set scale="2" />
-  <set shotPower="2" />
-  <set burstLength="30" />
-  <set attack="0" />
-  <set burstCharge="20" />
-  <set defense="1" />
-  <set accel=".5" />
-  <set verticalRangeMin="0" />
-  <set verticalRangeMax="0" />
-  <set motionRange="20" />
-  <set checkPeriod="10" />
-  <set shield="50" />
-  <set activeRange="1000" />
-  <set watch="playerMask + scoutMask + robotMask" />
-  <set homeSick="0.5" />
-  <Ufo fill="#ffffff" frame="#000000" cx="27.569444444444446" cz="197.63888888888889" r="5" angle="0" extent="90" />
-  <set shape="1025" />
-  <set y="0" />
-  <set scale="2" />
-  <set shotPower="2" />
-  <set burstLength="30" />
-  <set attack="0" />
-  <set burstCharge="20" />
-  <set defense="1" />
-  <set accel=".5" />
-  <set verticalRangeMin="0" />
-  <set verticalRangeMax="0" />
-  <set motionRange="20" />
-  <set checkPeriod="10" />
-  <set shield="50" />
-  <set activeRange="1000" />
-  <set watch="playerMask + scoutMask + robotMask" />
-  <set homeSick="0.5" />
-  <Ufo fill="#ffffff" frame="#000000" cx="7.569444444444445" cz="183.19444444444446" r="5" angle="0" extent="90" />
-  <set shape="1025" />
-  <set y="0" />
-  <set scale="2" />
-  <set shotPower="2" />
-  <set burstLength="30" />
-  <set attack="0" />
-  <set burstCharge="20" />
-  <set defense="1" />
-  <set accel=".5" />
-  <set verticalRangeMin="0" />
-  <set verticalRangeMax="0" />
-  <set motionRange="20" />
-  <set checkPeriod="10" />
-  <set shield="50" />
-  <set activeRange="1000" />
-  <set watch="playerMask + scoutMask + robotMask" />
-  <set homeSick="0.5" />
+  <Ufo shape="1025" y="0" scale="2" shotPower="2" burstLength="30" attack="0" burstCharge="20" defense="1" accel=".5" verticalRangeMin="0" verticalRangeMax="0" motionRange="20" checkPeriod="10" shield="50" activeRange="1000" watch="playerMask + scoutMask + robotMask" homeSick="0.5" fill="#ffffff" frame="#000000" cx="86.875" cz="31.25" r="5" angle="0" extent="90" />
+  <Ufo shape="1025" y="0" scale="2" shotPower="2" burstLength="30" attack="0" burstCharge="20" defense="1" accel=".5" verticalRangeMin="0" verticalRangeMax="0" motionRange="20" checkPeriod="10" shield="50" activeRange="1000" watch="playerMask + scoutMask + robotMask" homeSick="0.5" fill="#ffffff" frame="#000000" cx="98.75" cz="196.94444444444446" r="5" angle="0" extent="90" />
+  <Ufo shape="1025" y="0" scale="2" shotPower="2" burstLength="30" attack="0" burstCharge="20" defense="1" accel=".5" verticalRangeMin="0" verticalRangeMax="0" motionRange="20" checkPeriod="10" shield="50" activeRange="1000" watch="playerMask + scoutMask + robotMask" homeSick="0.5" fill="#ffffff" frame="#000000" cx="63.81944444444444" cz="185.69444444444446" r="5" angle="0" extent="90" />
+  <Ufo shape="1025" y="0" scale="2" shotPower="2" burstLength="30" attack="0" burstCharge="20" defense="1" accel=".5" verticalRangeMin="0" verticalRangeMax="0" motionRange="20" checkPeriod="10" shield="50" activeRange="1000" watch="playerMask + scoutMask + robotMask" homeSick="0.5" fill="#ffffff" frame="#000000" cx="27.569444444444446" cz="197.63888888888889" r="5" angle="0" extent="90" />
+  <Ufo shape="1025" y="0" scale="2" shotPower="2" burstLength="30" attack="0" burstCharge="20" defense="1" accel=".5" verticalRangeMin="0" verticalRangeMax="0" motionRange="20" checkPeriod="10" shield="50" activeRange="1000" watch="playerMask + scoutMask + robotMask" homeSick="0.5" fill="#ffffff" frame="#000000" cx="7.569444444444445" cz="183.19444444444446" r="5" angle="0" extent="90" />
   <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#0e36fd" frame="#000000" cx="105.13888888888889" cz="107.36111111111111" r="1.5972222222222214" angle="90" extent="180" />
-  <Teleporter fill="#555555" frame="#bbbbbb" cx="110.83333333333334" cz="120.48611111111111" r="5.347222222222221" angle="270" extent="90" />
-  <set group="-1" />
-  <set y="-30" />
-  <set activeRange="29 * 5" />
-  <set deadRange="27 * 5" />
-  <set destGroup="@recenter" />
-  <set shape="0" />
+  <Teleporter group="-1" y="-30" activeRange="29 * 5" deadRange="27 * 5" destGroup="@recenter" shape="0" fill="#555555" frame="#bbbbbb" cx="110.83333333333334" cz="120.48611111111111" r="5.347222222222221" angle="270" extent="90" />
   <Teleporter y="20" group="@recenter" shape="0" fill="#ffffff" frame="#000000" cx="106.25" cz="98.75" r="5.625" angle="90" extent="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#fdfd15" frame="#010c0a" cx="47.708333333333336" cz="77.98611111111111" r="2.0833333333333357" angle="269" extent="182" />

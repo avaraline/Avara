@@ -218,8 +218,7 @@
   <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" spin="false" fill="#ffffff" frame="#000000" cx="64.58333333333334" cz="63.95833333333334" r="2.5" angle="180" extent="90" />
   <Teleporter y="20" shape="0" group="@recenter" spin="false" fill="#ffffff" frame="#000000" cx="64.58333333333334" cz="63.95833333333334" r="2.5" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="64.58333333333334" cz="63.95833333333334" r="2.5" angle="180" extent="90" />
-  <set defaultLives="99" />
-  <set lightHull="131" />
+  <set defaultLives="99" lightHull="131" />
   <set gameLength="6563" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#ffffff" frame="#000000" cx="135.20833333333334" cz="12.708333333333334" r="1.875" angle="180" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="135.20833333333334" cz="12.708333333333334" r="1.875" angle="180" extent="90" />
@@ -228,11 +227,7 @@
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="135.20833333333334" cz="12.708333333333334" r="1.875" angle="180" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="135.20833333333334" cz="12.708333333333334" r="1.875" angle="180" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="135.20833333333334" cz="12.708333333333334" r="1.875" angle="180" extent="90" />
-  <set mediumHull="132" />
-  <set heavyHull="133" />
-  <set maxStartGrenades="16" />
-  <set maxStartMissiles="11" />
-  <set maxStartBoosts="1" />
+  <set mediumHull="132" heavyHull="133" maxStartGrenades="16" maxStartMissiles="11" maxStartBoosts="1" />
   <Incarnator y="20" fill="#dcfbff" frame="#000000" cx="34.583333333333336" cz="23.958333333333336" r="1.875" angle="270" extent="90" />
   <unique vars="rShow rTaken rOff" />
   <And in="@start" out="rShow" fill="#dcfbff" frame="#000000" cx="34.583333333333336" cz="23.958333333333336" r="1.875" angle="270" extent="90" />
@@ -289,7 +284,6 @@
   <Timer in="@start" out="rOff" wait="4950" fill="#dcfbff" frame="#000000" cx="124.58333333333334" cz="74.02777777777779" r="1.875" angle="45" extent="90" />
   <Timer in="rOff" out="rOff" wait="400" fill="#dcfbff" frame="#000000" cx="124.58333333333334" cz="74.02777777777779" r="1.875" angle="45" extent="90" />
   <Goody y="20" yon=".001" speed="5" volume="0" grenades="16" missiles="11" start="rShow" stop="rOff" out="rTaken" fill="#dcfbff" frame="#000000" cx="124.58333333333334" cz="74.02777777777779" r="1.875" angle="45" extent="90" />
-  <set wallYon=".001" />
   <set wallYon="defaultYon" />
   <unique vars="rShow rTaken rOff rOff1 rShow2 rTaken2" />
   <And in="@start" out="rShow" fill="#dcfbff" frame="#ffffff" cx="64.58333333333334" cz="63.95833333333334" r="1.875" angle="0" extent="90" />
@@ -317,8 +311,7 @@
   <WallDoor shield="1000" canGlow="false" fill="#75869c" frame="#000000" x="14.583333333333334" z="58.958333333333336" w="10" d="15" h="0" r="1.875" cx="64.58333333333334" cz="63.95833333333334" angle="0" extent="90" />
   <set wallHeight="6" />
   <WallDoor shield="1000" canGlow="false" fill="#75869c" frame="#000000" x="14.583333333333334" z="33.958333333333336" w="10" d="15" h="0" r="1.875" cx="64.58333333333334" cz="63.95833333333334" angle="0" extent="90" />
-  <set missileAcceleration="1.5" />
-  <set wallHeight="10" />
+  <set missileAcceleration="1.5" wallHeight="10" />
   <WallDoor shield="1000" canGlow="false" fill="#3a4362" frame="#000000" x="44.583333333333336" z="33.958333333333336" w="10" d="10" h="0" r="1.875" cx="64.58333333333334" cz="63.95833333333334" angle="0" extent="90" />
   <set wallHeight="10" />
   <WallDoor shield="1000" canGlow="false" fill="#3a4362" frame="#000000" x="84.58333333333334" z="43.958333333333336" w="10" d="10" h="0" r="1.875" cx="64.58333333333334" cz="63.95833333333334" angle="0" extent="90" />

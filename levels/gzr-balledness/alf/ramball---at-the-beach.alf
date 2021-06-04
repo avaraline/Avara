@@ -3,8 +3,7 @@
   <set grenadePower="3.5" numGren="12" />
   <set missilePower="4.5" missileTurnRate="1" missileAcceleration=".3" numMiss="8" />
   <set numBoost="5" />
-  <set fieldVis="false" xPower=".4" yPower=".1" zPower=".4" />
-  <set timeLimit="300" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="7" kSnText="1503" kTextVolume="0.3" gameLength="4685" />
+  <set fieldVis="false" xPower=".4" yPower=".1" zPower=".4" timeLimit="300" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="7" kSnText="1503" kTextVolume="0.3" gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
@@ -225,8 +224,7 @@
   <Base in="@start" out="@tDone3" fill="#ffffff" frame="#00ccff" cx="75.06944444444444" cz="28.125" r="2.5" angle="60" extent="60" />
   <Timer in="@aTaken3" out="@tDone3" wait="goodyDelay" fill="#ffffff" frame="#00ccff" cx="75.06944444444444" cz="28.125" r="2.5" angle="60" extent="60" />
   <Goody speed="2" shape="bspStandardPill" y="goodyY" grenades="numGren" missiles="numMiss" start="@tDone3" stop="@aOff3" out="@aTaken3" fill="#ffffff" frame="#00ccff" cx="75.06944444444444" cz="28.125" r="2.5" angle="60" extent="60" />
-  <set wallHeight="16.25" wallYon="150" />
-  <set wa="backHt" />
+  <set wallHeight="16.25" wallYon="150" wa="backHt" />
   <Field deltaY=".1" deltaX=".3" deltaZ="0" visible="true" fill="#00ccff" frame="#000000" x="65.06944444444444" z="18.055555555555557" w="5" d="5" h="0" r="2.5" cx="75.06944444444444" cz="28.125" angle="60" extent="60" />
   <set wa="backHt" />
   <Field deltaY=".1" deltaX="-.3" deltaZ="0" visible="true" fill="#00ccff" frame="#000000" x="80.06944444444444" z="18.055555555555557" w="5" d="5" h="0" r="2.5" cx="75.06944444444444" cz="28.125" angle="60" extent="60" />

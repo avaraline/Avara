@@ -103,8 +103,7 @@
   <Hologram y="0" shape="bspGroundArrow" yon="defaultYon" fill="#97b3af" frame="#97b3af" cx="195.9027777777778" cz="199.0277777777778" r="1.25" angle="180" extent="180" />
   <set baseheight="0" />
   <Hologram y="0" shape="bspGroundArrow" yon="defaultYon" fill="#97b3af" frame="#97b3af" cx="192.1527777777778" cz="199.0277777777778" r="1.25" angle="0" extent="180" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="0" />
+  <set wallYon="defaultYon" wallHeight="0" />
   <Wall fill="#97b3af" frame="#000000" x="190.9027777777778" z="195.9027777777778" w="1.25" d="6.25" h="0" />
   <set wallHeight="0" />
   <Wall fill="#97b3af" frame="#000000" x="195.9027777777778" z="195.9027777777778" w="1.25" d="6.25" h="0" />

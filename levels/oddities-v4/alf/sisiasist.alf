@@ -8,8 +8,7 @@ To get to the upper areas, touch the center pillar.&quot;" stripHeight="7" build
   <Wall fill="#0099ff" frame="#000000" x="147.01388888888889" z="170" w="5" d="100" h="0.5" />
   <Wall fill="#0099ff" frame="#000000" x="147.01388888888889" z="0" w="5" d="100" h="0.5" />
   <Wall fill="#666699" frame="#000000" x="114.5138888888889" z="100" w="70" d="70" h="0.5" />
-  <set baseHeight=".5" wallHeight="stripHeight" />
-  <set wa="stripHeight" />
+  <set baseHeight=".5" wallHeight="stripHeight" wa="stripHeight" />
   <Wall fill="#6e6ebd" frame="#000000" x="178.26388888888889" z="106.25" w="2.5" d="60" h="0.5" />
   <set wa="stripHeight" />
   <Wall fill="#6e6ebd" frame="#000000" x="118.2638888888889" z="103.75" w="2.5" d="60" h="0.5" />
@@ -141,8 +140,7 @@ To get to the upper areas, touch the center pillar.&quot;" stripHeight="7" build
   <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" open="@rplat" close="@aplat" openSound="0" closeSound="0" stopSound="0" fill="#0099ff" frame="#000000" x="146.38888888888889" z="131.875" w="6.25" d="6.25" h="0.5" r="0.625" cx="136.45833333333334" cz="121.94444444444444" angle="180" extent="270" />
   <Field deltaY="0.2" enter="@rplat" exit="@aplat" watch="playerMask + robotMask" fill="#009999" frame="#000000" x="147.63888888888889" z="133.125" w="3.75" d="3.75" h="0" r="0.625" cx="136.45833333333334" cz="121.94444444444444" angle="180" extent="270" y="-.5" />
   <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" open="@rplat" close="@aplat" openSound="0" closeSound="0" stopSound="0" fill="#0000dd" frame="#000000" x="148.26388888888889" z="133.75" w="2.5" d="2.5" h="0" r="0.625" cx="136.45833333333334" cz="121.94444444444444" angle="180" extent="270" />
-  <set wallHeight="buildingHeight" />
-  <set wa="buildingHeight" />
+  <set wallHeight="buildingHeight" wa="buildingHeight" />
   <Wall fill="#6666cc" frame="#000000" x="125.1388888888889" z="139.375" w="20" d="20" h="0.5" />
   <Wall fill="#6666ff" frame="#000000" x="125.7638888888889" z="140" w="0.625" d="18.125" h="0" />
   <Wall fill="#6666ff" frame="#000000" x="125.7638888888889" z="158.125" w="18.125" d="0.625" h="0" />

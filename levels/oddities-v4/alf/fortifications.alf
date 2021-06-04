@@ -379,9 +379,7 @@ See the read me file for explanations of the switches.&quot;" />
   <Wall fill="#663300" frame="#000000" x="142.77777777777777" z="166.25" w="5" d="5" h="0" />
   <set wallYon="0" />
   <unique vars="mOpenDoor mCloseDoor mOpenClamps mCloseClamps mGetBlock1 mGetBlock2" />
-  <set mStopAll="@BlueKilled" />
-  <set baseHeight="0" />
-  <set wallHeight="fortInnerWallTopY" />
+  <set mStopAll="@BlueKilled" baseHeight="0" wallHeight="fortInnerWallTopY" />
   <Wall fill="#00ccff" frame="#000000" x="53.40277777777778" z="65.625" w="1.25" d="15" h="0" />
   <set wallHeight="cheaterHeight" baseHeight="cheaterBase" />
   <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#008800" frame="#000000" r="1.25" cx="133.40277777777777" cz="215.625" angle="90" extent="180" x="29.65277777777778" z="40.625" w="22.5" d="5" h="0" />
@@ -396,8 +394,7 @@ See the read me file for explanations of the switches.&quot;" />
   <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#008800" frame="#000000" r="1.25" cx="133.40277777777777" cz="215.625" angle="90" extent="180" x="74.65277777777779" z="56.875" w="5" d="16.25" h="0" />
   <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#008800" frame="#000000" r="1.25" cx="133.40277777777777" cz="215.625" angle="90" extent="180" x="74.65277777777779" z="73.125" w="5" d="16.25" h="0" />
   <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#008800" frame="#000000" r="1.25" cx="133.40277777777777" cz="215.625" angle="90" extent="180" x="74.65277777777779" z="89.375" w="5" d="16.25" h="0" />
-  <set baseHeight="0" />
-  <set wallHeight="fortWallY" />
+  <set baseHeight="0" wallHeight="fortWallY" />
   <Wall fill="#0099ff" frame="#000000" x="29.65277777777778" z="45.625" w="45" d="5" h="0" />
   <Wall fill="#0099ff" frame="#000000" x="29.65277777777778" z="50.625" w="5" d="45" h="0" />
   <Wall fill="#0099ff" frame="#000000" x="29.65277777777778" z="95.625" w="45" d="5" h="0" />
@@ -478,8 +475,7 @@ See the read me file for explanations of the switches.&quot;" />
   <Wall fill="#00ccff" frame="#000000" x="74.65277777777779" z="55.625" w="0.625" d="5" h="0.25" />
   <set wa="-.25 + fortWindowLargeBotY" />
   <Wall fill="#00ccff" frame="#000000" x="74.65277777777779" z="85.625" w="0.625" d="5" h="0.25" />
-  <set baseHeight="0" wallHeight="fortDoorTopY + .05" />
-  <set wa="embY" />
+  <set baseHeight="0" wallHeight="fortDoorTopY + .05" wa="embY" />
   <unique vars="mHit" />
   <FreeSolid start="mGetBlock1" canGlow="true" shield="embShield" fill="#0066ff" frame="#000000" x="60.27777777777778" z="61.25" w="0.34722222222222143" d="5.902777777777786" h="0" r="1.875" cx="47.15277777777778" cz="73.125" angle="0" extent="90" />
   <set wa="embY" />
@@ -487,7 +483,6 @@ See the read me file for explanations of the switches.&quot;" />
   <FreeSolid start="mGetBlock2" canGlow="true" shield="embShield" fill="#0066ff" frame="#000000" x="60.27777777777778" z="78.75" w="0.34722222222222143" d="5.902777777777786" h="0" r="1.875" cx="47.15277777777778" cz="73.125" angle="0" extent="90" />
   <Switch out.0="mGetBlock2" status="1" restart="false" scale="1.1" fill="#00ee00" frame="#ff0000" cx="53.47222222222222" cz="76.94444444444444" r="1.25" angle="180" extent="180" />
   <Switch out.0="mGetBlock1" status="1" restart="false" scale="1.1" fill="#00ee00" frame="#ff0000" cx="53.47222222222222" cz="69.44444444444444" r="1.25" angle="180" extent="180" />
-  <set baseHeight="0" wallHeight="fortDoorTopY" />
   <set baseHeight="fortDoorTopY / 2 -.25" wallHeight=".5" />
   <Wall fill="#00ccff" frame="#000000" x="71.52777777777779" z="69.375" w="0.625" d="0.625" h="0" />
   <WallDoor middle=".66" deltaY="0" midZ="5 / 8 * -2" deltaX="5 / 8" deltaZ="5 / 8 * -2" status="1" openSpeed="clampSpeed" closeSpeed="clampSpeed" open="mOpenClamps" close="mCloseClamps" fill="#00ccff" frame="#000000" x="70.90277777777779" z="69.375" w="0.625" d="1.25" h="0" r="1.25" cx="53.47222222222222" cz="69.44444444444444" angle="180" extent="180" />
@@ -506,14 +501,12 @@ See the read me file for explanations of the switches.&quot;" />
   <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#008800" frame="#000000" x="229.6527777777778" z="56.875" w="5" d="16.25" h="0" r="1.25" cx="53.47222222222222" cz="69.44444444444444" angle="180" extent="180" />
   <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#008800" frame="#000000" x="229.6527777777778" z="73.125" w="5" d="16.25" h="0" r="1.25" cx="53.47222222222222" cz="69.44444444444444" angle="180" extent="180" />
   <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#008800" frame="#000000" x="229.6527777777778" z="89.375" w="5" d="16.25" h="0" r="1.25" cx="53.47222222222222" cz="69.44444444444444" angle="180" extent="180" />
-  <set baseHeight="0" />
-  <set wallHeight="fortWallY" />
+  <set baseHeight="0" wallHeight="fortWallY" />
   <Wall fill="#ffff00" frame="#000000" x="184.6527777777778" z="45.625" w="45" d="5" h="0" />
   <Wall fill="#ffff00" frame="#000000" x="224.6527777777778" z="50.625" w="5" d="45" h="0" />
   <Wall fill="#ffff00" frame="#000000" x="184.6527777777778" z="95.625" w="45" d="5" h="0" />
   <unique vars="mOpenDoor mCloseDoor mOpenClamps mCloseClamps mGetBlock1 mGetBlock2" />
-  <set mStopAll="@YellowKilled" />
-  <set wallHeight="fortDoorTopY" />
+  <set mStopAll="@YellowKilled" wallHeight="fortDoorTopY" />
   <Wall fill="#ffff00" frame="#000000" x="185.9027777777778" z="50.625" w="1.25" d="20" h="0" />
   <Wall fill="#ffff00" frame="#000000" x="185.9027777777778" z="75.625" w="1.25" d="20" h="0" />
   <Wall fill="#ffff00" frame="#000000" x="184.6527777777778" z="50.625" w="1.25" d="20" h="0" />
@@ -589,18 +582,24 @@ See the read me file for explanations of the switches.&quot;" />
   <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#777777" frame="#440000" cx="219.6527777777778" cz="90.625" r="1.25" angle="0" extent="270" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoMainTime" fill="#777777" frame="#440000" cx="219.6527777777778" cz="90.625" r="1.25" angle="0" extent="270" />
   <Teleporter win="5000" mask="T2" start="@YellowWin" stop="@YellowKilled" fill="#ffff00" frame="#000000" cx="212.1527777777778" cz="73.125" r="1.875" angle="270" extent="90" />
-  <Teleporter destGroup="@death" mask="allTeams -T2" start="@YellowWin" stop="@YellowKilled" speed="13" fill="#008800" frame="#000000" cx="212.1527777777778" cz="73.125" r="1.875" angle="180" extent="90" />
   <script>
+object Teleporter
+  destGroup = @death
+  mask = allTeams - T2
+  start = @YellowWin
+  stop = @YellowKilled
+  speed = 13
+end
+
 baseHeight = fortWallY
-wall</script>
+wallHwe</script>
   <YonBox deltaY="fortWindowLargeBotY" fill="#008800" frame="#ff0099" x="187.84722222222223" z="51.31944444444445" w="36.25" d="43.75" h="0" r="1.875" angle="180" extent="90" />
   <set baseHeight="fortDoorTopY / 2 -.25" wallHeight=".5" />
   <Wall fill="#ffffcc" frame="#000000" x="187.1527777777778" z="69.375" w="0.625" d="0.625" h="0" />
   <Wall fill="#ffffcc" frame="#000000" x="187.1527777777778" z="76.25" w="0.625" d="0.625" h="0" />
   <WallDoor middle=".66" deltaY="0" midZ="5 / 8 * -2" deltaX="-5 / 8" deltaZ="5 / 8 * -2" status="1" openSpeed="clampSpeed" closeSpeed="clampSpeed" open="mOpenClamps" close="mCloseClamps" fill="#ffffcc" frame="#000000" x="187.7777777777778" z="69.375" w="0.625" d="1.25" h="0" r="1.875" cx="212.1527777777778" cz="73.125" angle="180" extent="90" />
   <WallDoor middle=".66" deltaY="0" midZ="5 / 8 * 2" deltaX="-5 / 8" deltaZ="5 / 8 * 2" status="1" openSpeed="clampSpeed" closeSpeed="clampSpeed" open="mOpenClamps" close="mCloseClamps" fill="#ffffcc" frame="#000000" x="187.7777777777778" z="75.625" w="0.625" d="1.25" h="0" r="1.875" cx="212.1527777777778" cz="73.125" angle="180" extent="90" />
-  <set baseHeight="0" wallHeight="fortDoorTopY + .05" />
-  <set wa="embY" />
+  <set baseHeight="0" wallHeight="fortDoorTopY + .05" wa="embY" />
   <unique vars="mHit" />
   <FreeSolid start="mGetBlock1" canGlow="true" shield="embShield" fill="#ffcc00" frame="#000000" x="198.4027777777778" z="61.25" w="0.3472222222222001" d="5.902777777777786" h="0" r="1.875" cx="212.1527777777778" cz="73.125" angle="180" extent="90" />
   <Switch out.0="mGetBlock1" status="1" restart="false" scale="1.1" fill="#00ee00" frame="#ff0000" cx="205.97222222222223" cz="69.44444444444444" r="1.25" angle="0" extent="180" />

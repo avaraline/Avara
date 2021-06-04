@@ -25,8 +25,7 @@ To get to the upper areas, touch the center pillar.&quot;" stripHeight="7" build
   <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" open="@rplat" close="@aplat" openSound="0" closeSound="0" stopSound="0" fill="#0099ff" frame="#000000" r="3.75" cx="4.236111111111112" cz="1.9444444444444446" angle="90" extent="180" x="146.38888888888889" z="121.875" w="6.25" d="6.25" h="0.5" />
   <Field deltaY="0.2" enter="@rplat" exit="@aplat" watch="playerMask + robotMask" fill="#009999" frame="#000000" r="3.75" cx="4.236111111111112" cz="1.9444444444444446" angle="90" extent="180" x="147.63888888888889" z="123.125" w="3.75" d="3.75" h="0" />
   <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" open="@rplat" close="@aplat" openSound="0" closeSound="0" stopSound="0" fill="#0000dd" frame="#000000" r="3.75" cx="4.236111111111112" cz="1.9444444444444446" angle="90" extent="180" x="148.26388888888889" z="123.75" w="2.5" d="2.5" h="0" />
-  <set wallHeight="buildingHeight" />
-  <set wa="buildingHeight" />
+  <set wallHeight="buildingHeight" wa="buildingHeight" />
   <Wall fill="#6666cc" frame="#000000" x="125.1388888888889" z="129.375" w="20" d="20" h="0.5" />
   <Wall fill="#6666ff" frame="#000000" x="125.7638888888889" z="130" w="0.625" d="18.125" h="0" />
   <Wall fill="#6666ff" frame="#000000" x="125.7638888888889" z="148.125" w="18.125" d="0.625" h="0" />

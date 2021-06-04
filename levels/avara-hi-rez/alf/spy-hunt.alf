@@ -6,8 +6,7 @@ base and are now waiting for their long range
 transport to arrive on orbit so that they can escape 
 with stolen AI ROMs.
 
-Destroy all of them before they make their escape.&quot;" standardWall="3" highWall="5" towerHeight="14" spyShield="4" spyAccel="0.125" escapeTime="16 * 60 * 5" />
-  <set ambient="0.3" light.0.i="0.3" light.0.a="10" light.0.b="240" light.1.i="0.0" light.1.a="25" light.1.b="60" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+Destroy all of them before they make their escape.&quot;" standardWall="3" highWall="5" towerHeight="14" spyShield="4" spyAccel="0.125" escapeTime="16 * 60 * 5" ambient="0.3" light.0.i="0.3" light.0.a="10" light.0.b="240" light.1.i="0.0" light.1.a="25" light.1.b="60" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <set wallHeight="0.2" baseHeight="0" />
   <set wallHeight="standardWall" />
   <Wall fill="#996666" frame="#000000" x="100" z="109.09722222222223" w="10" d="20" h="0" />

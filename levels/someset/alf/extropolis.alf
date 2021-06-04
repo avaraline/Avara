@@ -165,8 +165,7 @@ this town, and must now fight for your life.&quot;" />
   <Teleporter y="7" sound="0" activeRange="0" deadRange="0" group="@yBoo" shape="0" fill="#dddddd" frame="#000000" cx="97.6388888888889" cz="40.208333333333336" r="1.875" angle="45" extent="270" />
   <Teleporter y="20" sound="0" destGroup="@yBot" fill="#66ffcc" frame="#000000" cx="120.7638888888889" cz="83.95833333333334" r="1.875" angle="135" extent="270" />
   <Teleporter y="7" sound="0" activeRange="0" deadRange="0" group="@yBot" shape="0" fill="#dddddd" frame="#000000" cx="120.7638888888889" cz="83.95833333333334" r="1.875" angle="135" extent="270" />
-  <set wallHeight="0" />
-  <set wallYon="0.5" />
+  <set wallHeight="0" wallYon="0.5" />
   <Wall fill="#bbbbbb" frame="#000000" x="101.3888888888889" z="43.958333333333336" w="15.625" d="4.375" h="0" y="20" />
   <set wallYon="defaultYon" />
   <set wallHeight="0.5" />
@@ -204,13 +203,9 @@ this town, and must now fight for your life.&quot;" />
   <set wallYon="0.5" />
   <set wallHeight="3" />
   <Wall fill="#000055" frame="#000000" x="112.0138888888889" z="48.958333333333336" w="0.625" d="23.125" h="0" y="20.5" />
-  <set wallYon="defaultYon" />
-  <set wallYon="0.5" />
-  <set wallHeight="1" />
+  <set wallYon="0.5" wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="101.3888888888889" z="43.958333333333336" w="15.625" d="4.375" h="0" y="23.5" />
-  <set wallYon="defaultYon" />
-  <set wallYon="0.5" />
-  <set wallHeight="1" />
+  <set wallYon="0.5" wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="112.6388888888889" z="48.333333333333336" w="4.375" d="23.75" h="0" y="23.5" />
   <set wallYon="defaultYon" />
   <set wallHeight="4.5" />
@@ -327,14 +322,11 @@ this town, and must now fight for your life.&quot;" />
   <Teleporter sound="0" activeRange="1" deadRange="0" destGroup="@yToo" fill="#66ffcc" frame="#000000" cx="88.88888888888889" cz="40.69444444444444" r="1.875" angle="225" extent="270" />
   <set wallHeight="3" />
   <FreeSolid fill="#ccffff" frame="#000000" x="82.01388888888889" z="147.08333333333334" w="5.625" d="5.625" h="0" r="1.875" cx="88.88888888888889" cz="40.69444444444444" angle="225" extent="270" y="5.1" />
-  <set shotPower="10" />
-  <set wallHeight="3" />
+  <set shotPower="10" wallHeight="3" />
   <FreeSolid fill="#ccffff" frame="#000000" x="59.51388888888889" z="147.08333333333334" w="5.625" d="5.625" h="0" r="1.875" cx="88.88888888888889" cz="40.69444444444444" angle="225" extent="270" y="5.1" />
-  <set shotPower="10" />
-  <set wallHeight="3" />
+  <set shotPower="10" wallHeight="3" />
   <FreeSolid fill="#ccffff" frame="#000000" x="82.01388888888889" z="128.95833333333334" w="5.625" d="5.625" h="0" r="1.875" cx="88.88888888888889" cz="40.69444444444444" angle="225" extent="270" y="5.1" />
-  <set shotPower="10" />
-  <set wallHeight="5" />
+  <set shotPower="10" wallHeight="5" />
   <Wall fill="#ccffff" frame="#000000" x="59.51388888888889" z="147.08333333333334" w="5.625" d="5.625" h="0" />
   <set wallHeight="5" />
   <Wall fill="#ccffff" frame="#000000" x="82.01388888888889" z="147.08333333333334" w="5.625" d="5.625" h="0" />
@@ -344,8 +336,7 @@ this town, and must now fight for your life.&quot;" />
   <Wall fill="#ccffff" frame="#000000" x="82.01388888888889" z="128.95833333333334" w="5.625" d="5.625" h="0" />
   <set wallHeight="3" />
   <FreeSolid fill="#ccffff" frame="#000000" x="59.51388888888889" z="128.95833333333334" w="5.625" d="5.625" h="0" r="1.875" cx="88.88888888888889" cz="40.69444444444444" angle="225" extent="270" y="5.1" />
-  <set shotPower="10" />
-  <set weight="0.1" />
+  <set shotPower="10" weight="0.1" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ccffff" frame="#000000" cx="62.326388888888886" cz="140.83333333333334" r="4.0625" angle="270" extent="180" />
   <Timer in="mTaken" out="mShow" wait="500" fill="#ccffff" frame="#000000" cx="62.326388888888886" cz="140.83333333333334" r="4.0625" angle="270" extent="180" />
@@ -368,12 +359,9 @@ this town, and must now fight for your life.&quot;" />
   <Sound y="3" sound="snUnderwater" isPlaced="true" isAmbient="true" volume="8" loopCount="-1" fill="#777777" frame="#000000" cx="74.02777777777777" cz="87.84722222222223" r="1.3888888888888928" angle="225" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ccffff" frame="#000000" cx="59.51388888888889" cz="101.45833333333334" r="2.5" angle="180" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ccffff" frame="#000000" cx="87.63888888888889" cz="73.33333333333334" r="2.5" angle="0" extent="90" />
-  <set wallHeight="5" />
-  <set wallYon="0.5" />
+  <set wallHeight="5" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="60.833333333333336" z="40.625" w="13.75" d="13.75" h="0" y="-5" />
-  <set wallYon="defaultYon" />
-  <set wallHeight="5" />
-  <set wallYon="0.5" />
+  <set wallYon="0.5" wallHeight="5" />
   <Wall fill="#ffffff" frame="#000000" x="46.458333333333336" z="164.375" w="54.375" d="1.25" h="0" y="-5" />
   <set wallYon="defaultYon" />
   <unique vars="mShow mTaken" />

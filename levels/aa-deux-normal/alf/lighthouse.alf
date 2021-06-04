@@ -92,7 +92,6 @@ I’d probably get fired if that were my job, after killing Jason off and countl
   <WallDoor middle="closed" deltaY="0" deltaX="0" deltaZ="0" midYaw="-45" fill="#ffffff" frame="#000000" x="56.18055555555556" z="120.83333333333334" w="1.25" d="22.5" h="1" r="10.034722222222221" cx="43.71527777777778" cz="117.11805555555557" angle="175" extent="10" />
   <WallDoor middle="closed" deltaY="0" deltaX="0" deltaZ="0" midYaw="45" fill="#ffffff" frame="#000000" x="36.18055555555556" z="115.83333333333334" w="1.25" d="22.5" h="1" r="10.034722222222221" cx="43.71527777777778" cz="117.11805555555557" angle="175" extent="10" />
   <WallDoor middle="closed" deltaY="0" deltaX="0" deltaZ="0" midYaw="45" fill="#ffffff" frame="#000000" x="31.180555555555557" z="106.45833333333334" w="21.25" d="1.25" h="1" r="10.034722222222221" cx="43.71527777777778" cz="117.11805555555557" angle="175" extent="10" />
-  <set baseHeight="0" />
   <set baseHeight="6" />
   <Teleporter group="-1" y="-30" activeRange="34 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" fill="#ffffff" frame="#000000" cx="111.18055555555556" cz="96.45833333333334" r="2.5" angle="180" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffffff" frame="#000000" cx="111.18055555555556" cz="96.45833333333334" r="2.5" angle="180" extent="90" />

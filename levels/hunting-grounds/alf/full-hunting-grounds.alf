@@ -11,13 +11,16 @@
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="56.18055555555556" z="46.80555555555556" w="15" d="6.25" h="0" r="1.875" angle="91" extent="178" />
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="71.18055555555556" z="46.80555555555556" w="15" d="6.25" h="0" r="1.875" angle="91" extent="178" />
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="56.18055555555556" z="86.80555555555556" w="15" d="6.25" h="0" r="1.875" angle="269" extent="184" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="71.18055555555556" z="86.80555555555556" w="15" d="6.25" h="0" r="1.875" angle="268" extent="185" />
   <script>
+object Ramp
+deltaY = 3
+end
+
 designer =&quot;Shakespeare - bahome@san.rr.com&quot;
 information =&quot;Can one HECTOR survive the onslaught of all comers?  
 One Green (hunted) tries to stay alive for 6 minutes 
 against all other Yellow (hunter).  
-Best for no fewer than four of five Yello</script>
+Best for no fewer than four of five Yellow.&quot;&quot;</script>
   <SkyColor fill="#0000bb" frame="#000033" />
   <GroundColor fill="#002200" frame="#000000" />
   <Wall fill="#1c3838" frame="#000000" x="49.93055555555556" z="26.180555555555557" w="0.625" d="10.625" h="6.25" />

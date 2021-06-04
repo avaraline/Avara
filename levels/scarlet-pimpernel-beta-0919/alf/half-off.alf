@@ -19,13 +19,14 @@
   <Wall fill="#663300" frame="#000000" x="62.01388888888889" z="1.875" w="6.25" d="6.25" h="0" />
   <Wall fill="#663300" frame="#000000" x="62.01388888888889" z="108.125" w="6.25" d="6.25" h="0" />
   <SkyColor n="16" verticalRangeMax="4800" fill="#99ccff" frame="#000055" />
-  <GroundColor fill="#99ccff" frame="#000000" />
   <script>
+adjust GroundColor end
+
 designer = &quot;§carlet §wordfish&quot;
 information = &quot;Based on Sol LeWitt’s sculpture 
-“Two Open Modular Cubes/Half-Off”&quot;
+&quot;Two Open Modular Cubes/Half-Off&quot;&quot;
 ambient = .2
-light[0].i = .7 light[0].a = 35 light[0].b =</script>
+light[0].i = .7 light[0].a = 35 light[0].b = 300</script>
   <Incarnator fill="#ffffff" frame="#000000" cx="55.13888888888889" cz="29.375" r="2.5" angle="270" extent="90" />
   <Wall fill="#ffffff" frame="#000000" x="57.63888888888889" z="31.875" w="2.5" d="2.5" h="2.25" />
   <Wall fill="#ffffff" frame="#000000" x="60.13888888888889" z="31.875" w="22.5" d="2.5" h="2.25" />

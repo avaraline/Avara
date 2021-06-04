@@ -82,8 +82,7 @@ Teams are Green, Red, and Blue.&quot;" />
   <Wall fill="#000055" frame="#000000" x="59.16666666666667" z="47.91666666666667" w="5" d="10" h="0" />
   <Wall fill="#000055" frame="#000000" x="49.16666666666667" z="42.91666666666667" w="10" d="5" h="0" />
   <Wall fill="#000055" frame="#000000" x="49.16666666666667" z="57.91666666666667" w="10" d="5" h="0" />
-  <set wallHeight="1" />
-  <set wallYon=".001" />
+  <set wallHeight="1" wallYon=".001" />
   <Wall fill="#ff3300" frame="#000000" x="44.16666666666667" z="57.91666666666667" w="0.625" d="5" h="0" y="5" />
   <Wall fill="#ff3300" frame="#000000" x="44.16666666666667" z="57.91666666666667" w="0.625" d="5" h="0" y="8" />
   <Wall fill="#ff3300" frame="#000000" x="44.16666666666667" z="57.91666666666667" w="0.625" d="5" h="0" y="11" />
@@ -132,9 +131,7 @@ Teams are Green, Red, and Blue.&quot;" />
   <Wall fill="#ff3300" frame="#000000" x="103.54166666666667" z="57.91666666666667" w="0.625" d="5" h="0" y="5" />
   <Wall fill="#ff3300" frame="#000000" x="103.54166666666667" z="57.91666666666667" w="0.625" d="5" h="0" y="8" />
   <Wall fill="#ff3300" frame="#000000" x="103.54166666666667" z="57.91666666666667" w="0.625" d="5" h="0" y="11" />
-  <set wallHeight="1" />
-  <set baseHeight="14" />
-  <set wallYon="100" />
+  <set wallHeight="1" baseHeight="14" wallYon="100" />
   <Wall fill="#000077" frame="#000000" x="43.54166666666667" z="47.91666666666667" w="21.25" d="10" h="0" />
   <Wall fill="#000077" frame="#000000" x="49.16666666666667" z="42.29166666666667" w="10" d="5.625" h="0" />
   <Wall fill="#000077" frame="#000000" x="49.16666666666667" z="57.91666666666667" w="10" d="5.625" h="0" />
@@ -355,8 +352,7 @@ Teams are Green, Red, and Blue.&quot;" />
   <Wall fill="#000055" frame="#000000" x="70.41666666666667" z="20.416666666666668" w="7.5" d="2.5" h="0" y="6" />
   <Solid shape="1455" scale="3" y="7" fill="#ffffcc" frame="#000000" cx="74.09722222222223" cz="21.59722222222222" r="2.5" angle="270" extent="180" />
   <Solid shape="1456" scale="3" y="7" fill="#ffffcc" frame="#000000" cx="74.09722222222223" cz="84.16666666666667" r="2.5" angle="270" extent="180" />
-  <set baseHeight="16" />
-  <set wallHeight="0.5" />
+  <set baseHeight="16" wallHeight="0.5" />
   <WallDoor deltaY="200" deltaX="0" deltaZ="0" close="@greenText1" closeDelay="0" closeSpeed="100" status="isOpen" shotPower="0" openSound="0" closeSound="0" stopSound="0" fill="#008800" frame="#000000" x="71.66666666666667" z="21.041666666666668" w="1.25" d="1.25" h="0" r="2.5" cx="74.09722222222223" cz="84.16666666666667" angle="270" extent="180" />
   <WallDoor deltaY="200" deltaX="0" deltaZ="0" close="@redText1" closeDelay="0" closeSpeed="100" status="isOpen" shotPower="0" openSound="0" closeSound="0" stopSound="0" fill="#ff0000" frame="#000000" x="73.54166666666667" z="21.041666666666668" w="1.25" d="1.25" h="0" r="2.5" cx="74.09722222222223" cz="84.16666666666667" angle="270" extent="180" />
   <WallDoor deltaY="200" deltaX="0" deltaZ="0" close="@blueText1" closeDelay="0" closeSpeed="100" status="isOpen" shotPower="0" openSound="0" closeSound="0" stopSound="0" fill="#00ccff" frame="#000000" x="75.34722222222223" z="21.041666666666668" w="1.25" d="1.25" h="0" r="2.5" cx="74.09722222222223" cz="84.16666666666667" angle="270" extent="180" />
@@ -412,10 +408,7 @@ Teams are Green, Red, and Blue.&quot;" />
   <WallDoor deltaY="200" deltaX="0" deltaZ="0" close="@greenWins2" closeDelay="0" closeSpeed="100" status="isOpen" shotPower="0" openSound="0" closeSound="0" stopSound="0" fill="#008800" frame="#000000" x="71.59722222222223" z="83.54166666666667" w="1.25" d="1.25" h="0" r="2.5" cx="74.09722222222223" cz="84.16666666666667" angle="270" extent="180" />
   <WallDoor deltaY="200" deltaX="0" deltaZ="0" close="@redWins2" closeDelay="0" closeSpeed="100" status="isOpen" shotPower="0" openSound="0" closeSound="0" stopSound="0" fill="#ff0000" frame="#000000" x="73.47222222222223" z="83.54166666666667" w="1.25" d="1.25" h="0" r="2.5" cx="74.09722222222223" cz="84.16666666666667" angle="270" extent="180" />
   <WallDoor deltaY="200" deltaX="0" deltaZ="0" close="@blueWins2" closeDelay="0" closeSpeed="100" status="isOpen" shotPower="0" openSound="0" closeSound="0" stopSound="0" fill="#00ccff" frame="#000000" x="75.34722222222223" z="83.54166666666667" w="1.25" d="1.25" h="0" r="2.5" cx="74.09722222222223" cz="84.16666666666667" angle="270" extent="180" />
-  <set hull.0="mediumHull" hull.2="mediumHull" />
-  <set baseHeight="14" />
-  <set wallHeight="10" />
-  <set wallYon=".001" />
+  <set hull.0="mediumHull" hull.2="mediumHull" baseHeight="14" wallHeight="10" wallYon=".001" />
   <Wall fill="#000055" frame="#000000" x="70.41666666666667" z="20.416666666666668" w="7.5" d="2.5" h="0" />
   <Wall fill="#000055" frame="#000000" x="70.41666666666667" z="82.91666666666667" w="7.5" d="2.5" h="0" />
   <Field visible="false" deltaY="2.5" deltaX="0" deltaZ="0" in="@start" fill="#00ee00" frame="#000000" x="70.41666666666667" z="82.91666666666667" w="7.5" d="2.5" h="0" r="2.5" cx="74.09722222222223" cz="84.16666666666667" angle="270" extent="180" y="10" />
