@@ -22,7 +22,8 @@ OGGDIR = "ogg"
 WAVDIR = "wav"
 
 EXPORT_SOUNDS = True
-
+KEEP_WAV = False
+OVERWRITE_ALF = True
 
 def is_exe(path):
     return os.path.isfile(path) and os.access(path, os.X_OK)
@@ -107,13 +108,15 @@ def convert_to_files(datafile, thedir):
     # for each level
     for le in rledi["*****"]:
         alfname = slugify(le["Name"]) + ALFEXT
+        if alfname == ".alf":
+            continue
         alfpath = os.path.join(alfdir, alfname)
         pictk = le["Path"].lower()
         if len(pictk) > 0:
             if pictk not in picts:
                 print(f"Skipping {alfpath} - Couldn't find pict '{pictk}'")
                 continue
-            if os.path.exists(alfpath):
+            if os.path.exists(alfpath) and not OVERWRITE_ALF:
                 print(f"Skipping {alfpath} - exists")
             else:
                 print(alfpath)
@@ -132,7 +135,10 @@ def convert_to_files(datafile, thedir):
         # todo: export ogg and point to new file
         # hsnd = get_tmpl(forks, "HSND")
         result["HSND"] = get_tmpl(forks, "HSND")
-        oggdir = os.path.join(thedir, OGGDIR)
+        if datafile == "levels/single-player.r":
+            oggdir = os.path.join("rsrc", OGGDIR)
+        else:
+            oggdir = os.path.join(thedir, OGGDIR)
         os.makedirs(oggdir, exist_ok=True)
         wavdir = os.path.join(thedir, WAVDIR)
         os.makedirs(wavdir, exist_ok=True)
@@ -143,24 +149,31 @@ def convert_to_files(datafile, thedir):
             result["HSND"][k]["Ogg"] = oggfile
             result["HSND"][k]["Wav"] = wavfile
 
-            oggpath = os.path.join(oggdir, oggfile)
             wavpath = os.path.join(wavdir, wavfile)
-            #if os.path.exists(oggpath):
-            #    print(f"Skipping {oggpath} - exists")
-            #    continue
+            oggpath = os.path.join(oggdir, oggfile)
+            if os.path.exists(oggpath):
+                print(f"Skipping {oggpath} - exists")
+                continue
 
+            if not os.path.exists(wavpath):
+                args = [f"build{os.path.sep}hsnd2wav", str(k), wavpath, str(datafile)]
+                popen = subprocess.Popen(args, stdout=subprocess.PIPE)
+                popen.wait()
 
-            args = [f"build{os.path.sep}hsnd2wav", str(k), wavpath, str(datafile)]
+            args = ["ffmpeg", "-y", "-i", wavpath, "-acodec", "libvorbis", oggpath]
             popen = subprocess.Popen(args, stdout=subprocess.PIPE)
             popen.wait()
-            args = ["ffmpeg", "-i", wavpath, "-acodec", "libvorbis", oggpath]
-            popen = subprocess.Popen(args, stdout=subprocess.PIPE)
-            popen.wait()
+
+            if not KEEP_WAV:
+                os.remove(wavpath)
 
     if "BSPT" in forks:
         result["BSPT"] = {}
         rbsps = get_tmpl(forks, "BSPT")
-        bspspath = os.path.join(thedir, BSPDIR)
+        if datafile == "levels/single-player.r":
+            bspspath = os.path.join("rsrc", BSPDIR)
+        else:
+            bspspath = os.path.join(thedir, BSPDIR)
         os.makedirs(bspspath, exist_ok=True)
         for k in rbsps.keys():
             bspname = str(k) + ".json"
