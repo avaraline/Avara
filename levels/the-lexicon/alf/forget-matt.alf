@@ -50,7 +50,7 @@
   <Incarnator y="5" fill="#ff0000" frame="#000000" cx="27.430555555555557" cz="12.708333333333334" r="1.25" angle="270" extent="90" />
   <Incarnator y="5" fill="#ff0000" frame="#000000" cx="65.55555555555556" cz="50.208333333333336" r="1.25" angle="90" extent="90" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#444444" frame="#cc9900" cx="36.35416666666667" cz="1.4583333333333335" r="1.1458333333333321" angle="180" extent="90" />
-  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;I am the stealer of dreams.&quot;" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="I am the stealer of dreams." />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#555555" frame="#555555" cx="46.80555555555556" cz="31.736111111111114" r="1.1805555555555571" angle="0" extent="90" />
   <Goody speed="20" shape="bspAvaraA" grenades="8" boosters="1" missiles="6" y="2" start="mShow" out="mTaken" fill="#555555" frame="#555555" cx="46.80555555555556" cz="31.736111111111114" r="1.1805555555555571" angle="0" extent="90" />

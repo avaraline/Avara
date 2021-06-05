@@ -1,8 +1,8 @@
 <map>
   <set beamY.0="1" beamY.1="2.2" beamY.2="3.4" defaultLives="3" friendlyHitMultiplier="-10" MainWall="7" CornerWall="MainWall + 1" RoofH=".625" guardHeight="CornerWall + 3" guardFreq="7" guardSpeed="5" GtClSpd="8" GtOpSpd="1" GtPower="2" GtDelay="1" hull.0="hull[1]" />
-  <Text in="@INTRUDER" text="&quot;Intruder Detected!&quot;" showEveryone="true" />
-  <set information="&quot;Remove the cube and place it in the goal without setting off the security system.
-The light hull is not available.&quot;" />
+  <Text in="@INTRUDER" text="Intruder Detected!" showEveryone="true" />
+  <set information="Remove the cube and place it in the goal without setting off the security system.
+The light hull is not available." />
   <SkyColor fill="#3366ff" frame="#ffcccc" />
   <GroundColor fill="#663399" frame="#ffcccc" />
   <Incarnator y="0" mask="T1" fill="#99ccff" frame="#000000" cx="6.805555555555555" cz="37.083333333333336" r="2.5" angle="180" extent="180" />

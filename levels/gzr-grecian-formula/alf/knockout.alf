@@ -1,5 +1,5 @@
 <map>
-  <set designer="&quot;Cowboy - jmcald@destiny.esd105.wednet.edu&quot;" information="&quot;NO TEAMS! NO SCOUTS! Using these will screw up game play. Either kill or knock you opponent off the mat 15 times to win. If you get ‘tossed’ you lose a point - a kill earns a point. Firing before you enter the ring means death...&quot;" missilePower="3" missileAcceleration="0.3" grenadePower="2" timeLimit="300" lightHull="152" mediumHull="152" heavyHull="152" kDefaultLives="15" kInfinity="10000" kSnText="snTextBlip" gameLength="4685" />
+  <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="NO TEAMS! NO SCOUTS! Using these will screw up game play. Either kill or knock you opponent off the mat 15 times to win. If you get ‘tossed’ you lose a point - a kill earns a point. Firing before you enter the ring means death..." missilePower="3" missileAcceleration="0.3" grenadePower="2" timeLimit="300" lightHull="152" mediumHull="152" heavyHull="152" kDefaultLives="15" kInfinity="10000" kSnText="snTextBlip" gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" />
@@ -356,13 +356,13 @@
   <Timer in="@purpleExits" wait="45" out="@purpleDies" fill="#00ccff" frame="#000000" cx="41.875" cz="573.1944444444445" r="3.75" angle="60" extent="60" />
   <Timer in="@blueExits" wait="45" out="@blueDies" fill="#00ccff" frame="#000000" cx="41.875" cz="573.1944444444445" r="3.75" angle="60" extent="60" />
   <Timer in="@start" wait="1" out="@inArena" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
-  <Text in="@inArena" showEveryone="true" text="&quot;Stepping on or over the line 
-means death!&quot;" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@inArena" showEveryone="true" text="&quot;Do not fire until you are in the 
-ring!&quot;" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
+  <Text in="@inArena" showEveryone="true" text="Stepping on or over the line 
+means death!" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@inArena" showEveryone="true" text="Do not fire until you are in the 
+ring!" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
   <Timer in="@start" wait="30" out="@onTele" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r="3.75" angle="60" extent="60" />
   <Timer in="@start" wait="4216" out="@thirtyLeft" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
-  <Text in="@thirtyLeft" sound="kSnText" volume="5" showEveryone="true" text="&quot;Thirty Seconds Left!&quot;" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
+  <Text in="@thirtyLeft" sound="kSnText" volume="5" showEveryone="true" text="Thirty Seconds Left!" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
   <Timer in="@thirtyLeft" wait="312" out="@ten10" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
   <Timer in="@ten10" wait="15" out="@nine9" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
   <Timer in="@nine9" wait="15" out="@eight8" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
@@ -373,15 +373,15 @@ ring!&quot;" fill="#00ccff" frame="#000000" cx="56.25" cz="506.3888888888889" r=
   <Timer in="@four4" wait="15" out="@three3" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
   <Timer in="@three3" wait="15" out="@two2" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
   <Timer in="@two2" wait="15" out="@one1" fill="#00ccff" frame="#000000" cx="69.23611111111111" cz="512.1527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@ten10" showEveryone="true" text="&quot;Ten!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@nine9" showEveryone="true" text="&quot;Nine!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@eight8" showEveryone="true" text="&quot;Eight!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@seven7" showEveryone="true" text="&quot;Seven!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@six6" showEveryone="true" text="&quot;Six!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@five5" showEveryone="true" text="&quot;Five!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@four4" showEveryone="true" text="&quot;Four!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@three3" showEveryone="true" text="&quot;Three!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@two2" showEveryone="true" text="&quot;Two!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="&quot;Game Over!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
-  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="&quot;One!&quot;" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@ten10" showEveryone="true" text="Ten!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@nine9" showEveryone="true" text="Nine!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@eight8" showEveryone="true" text="Eight!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@seven7" showEveryone="true" text="Seven!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@six6" showEveryone="true" text="Six!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@five5" showEveryone="true" text="Five!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@four4" showEveryone="true" text="Four!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@three3" showEveryone="true" text="Three!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@two2" showEveryone="true" text="Two!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="Game Over!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="1" in="@one1" showEveryone="true" text="One!" fill="#00ccff" frame="#000000" cx="57.986111111111114" cz="534.6527777777778" r="3.75" angle="60" extent="60" />
 </map>

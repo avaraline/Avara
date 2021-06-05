@@ -210,9 +210,9 @@
   <Field deltaY="0.22" start="@FieldsOn" stop="@FieldsOff" fill="#3dffa0" frame="#000000" x="30.555555555555557" z="20.208333333333336" w="8.75" d="8.75" h="0" r="2.5" cx="22.430555555555557" cz="12.083333333333334" angle="270" extent="90" />
   <set wallHeight="secHeight" baseHeight="totHeight -secHeight" />
   <Field deltaX="-0.2" start="@FieldsOn" stop="@FieldsOff" fill="#3dffa0" frame="#000000" x="30.555555555555557" z="20.208333333333336" w="8.75" d="8.75" h="0" r="2.5" cx="22.430555555555557" cz="12.083333333333334" angle="270" extent="90" />
-  <set information="&quot;Battle on a spiral.
+  <set information="Battle on a spiral.
 The flowers are ammo.
-Includes custom team colors for ScoreKeeper.&quot;" />
+Includes custom team colors for ScoreKeeper." />
   <set baseHeight="0" />
   <Incarnator y="incHeight" fill="#00dd01" frame="#000000" cx="22.430555555555557" cz="62.08333333333334" r="2.5" angle="90" extent="180" />
   <Teleporter destGroup="@inside" shape="0" activeRange="3" fill="#00dd01" frame="#000000" cx="22.430555555555557" cz="62.08333333333334" r="2.5" angle="90" extent="180" />
@@ -234,8 +234,8 @@ Includes custom team colors for ScoreKeeper.&quot;" />
   <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="0" extent="90" />
   <Timer in="@FieldsOn" wait="FieldsTime" out="@FieldsOff" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="0" extent="90" />
   <Timer in="@FieldsOff" wait="FieldsTime" out="@FieldsOn" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="0" extent="90" />
-  <Text in="@FieldsOff" showEveryone="1" text="&quot;Downward.&quot;" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="0" extent="90" />
-  <Text in="@FieldsOn" showEveryone="1" text="&quot;Upward.&quot;" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="0" extent="90" />
+  <Text in="@FieldsOff" showEveryone="1" text="Downward." fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="0" extent="90" />
+  <Text in="@FieldsOn" showEveryone="1" text="Upward." fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="0" extent="90" />
   <And in="@start" out="@FieldsOff" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="0" extent="90" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="0" extent="270" />

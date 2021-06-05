@@ -23,7 +23,7 @@
   <Ramp y="15" deltaY="5" thickness="0" fill="#1e2141" frame="#000000" x="97.08333333333334" z="87.08333333333334" w="25" d="2.5" h="0" r="0.625" angle="180" extent="180" />
   <SkyColor verticalRangeMax="15000" n="12" fill="#c9d0dd" frame="#000000" />
   <GroundColor fill="#49536d" frame="#49536d" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;4 players only w/ red and yellow teams. Other colors will put you into the spectator balcony. Touch your team's stripe for 3 secs to switch with your teammate. 3 kills to win. Don't try to cheat by self-destructing, it'll get you in a rut.&quot;" wallHeight="3" />
+  <set designer="Tyrant - rendon@earthlink.net" information="4 players only w/ red and yellow teams. Other colors will put you into the spectator balcony. Touch your team's stripe for 3 secs to switch with your teammate. 3 kills to win. Don't try to cheat by self-destructing, it'll get you in a rut." wallHeight="3" />
   <Wall fill="#2c314f" frame="#000000" x="62.083333333333336" z="54.583333333333336" w="7.5" d="7.5" h="0" />
   <set wallHeight="3" />
   <Wall fill="#2c314f" frame="#000000" x="94.58333333333334" z="54.583333333333336" w="7.5" d="7.5" h="0" />
@@ -140,7 +140,7 @@
   <Goody shape="3000" yon="0.01" y="15" speed="0" grenades="1" missiles="1" shield="0.25" start="mShow" out="mTaken" sound="0" volume="0" fill="#000000" frame="#000000" cx="114.65277777777779" cz="74.58333333333334" r="1.875" angle="135" extent="90" />
   <Incarnator y="15" mask="T3" stop="@rIncarnSp" start="@redDied" fill="#661516" frame="#000000" cx="42.01388888888889" cz="74.58333333333334" r="1.25" angle="225" extent="90" />
   <Incarnator y="15" mask="T2" fill="#fff69c" frame="#000000" cx="122.08333333333334" cz="74.58333333333334" r="1.25" angle="45" extent="90" />
-  <Text showEveryone="true" text="&quot;You need four players to play Symbiosis.&quot;" in="@fourplyrs" sound="0" fill="#fff69c" frame="#000000" cx="122.08333333333334" cz="74.58333333333334" r="1.25" angle="45" extent="90" />
+  <Text showEveryone="true" text="You need four players to play Symbiosis." in="@fourplyrs" sound="0" fill="#fff69c" frame="#000000" cx="122.08333333333334" cz="74.58333333333334" r="1.25" angle="45" extent="90" />
   <Guard y="5000" stop="@start" fireMsg="@fptst" fill="#000000" frame="#000000" cx="4.513888888888889" cz="9.583333333333334" r="1.875" angle="225" extent="90" />
   <Timer in="@start" out="@fptst" wait="4" fill="#000000" frame="#000000" cx="4.513888888888889" cz="9.583333333333334" r="1.875" angle="225" extent="90" />
   <set wallHeight="2" />
@@ -185,13 +185,13 @@
   <set wallHeight="15" />
   <Wall fill="#3b425e" frame="#000000" x="122.08333333333334" z="73.33333333333334" w="0" d="2.5" h="0" />
   <Distributor in="@redDied" out.0="@redDeath1" out.1="@redDeath2" out.2="@redDeath3" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
-  <Text showEveryone="true" text="&quot;Red team has 2 more lives.&quot;" in="@redDeath1" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
-  <Text showEveryone="true" text="&quot;Red team has 1 more life.&quot;" in="@redDeath2" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
-  <Text showEveryone="true" text="&quot;Red team has been destroyed. Yellow wins!&quot;" in="@redDeath3" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
+  <Text showEveryone="true" text="Red team has 2 more lives." in="@redDeath1" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
+  <Text showEveryone="true" text="Red team has 1 more life." in="@redDeath2" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
+  <Text showEveryone="true" text="Red team has been destroyed. Yellow wins!" in="@redDeath3" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
   <Distributor in="@yellowDied" out.0="@yellowDeath1" out.1="@yellowDeath2" out.2="@yellowDeath3" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
-  <Text showEveryone="true" text="&quot;Yellow team has 2 more lives.&quot;" in="@yellowDeath1" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
-  <Text showEveryone="true" text="&quot;Yellow team has 1 more life.&quot;" in="@yellowDeath2" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
-  <Text showEveryone="true" text="&quot;Yellow team has been destroyed. Red wins!&quot;" in="@yellowDeath3" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
+  <Text showEveryone="true" text="Yellow team has 2 more lives." in="@yellowDeath1" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
+  <Text showEveryone="true" text="Yellow team has 1 more life." in="@yellowDeath2" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
+  <Text showEveryone="true" text="Yellow team has been destroyed. Red wins!" in="@yellowDeath3" sound="0" fill="#3b425e" frame="#000000" cx="42.083333333333336" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
   <Goody shape="bspGrenade" yon="0.01" y="17" shield="100" start="@showRedgoody" stop="@hideRedgoody" sound="0" fill="#e2e2e2" frame="#000000" cx="42.15277777777778" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
   <And in="@start" out="@hideRedgoody" fill="#e2e2e2" frame="#000000" cx="42.15277777777778" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
   <And in="@redDied" out="@showRedgoody" fill="#e2e2e2" frame="#000000" cx="42.15277777777778" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
@@ -201,8 +201,8 @@
   <Goody shape="bspGrenade" yon="0.01" y="17" shield="100" start="@showYellowgoody" stop="@hideYellowgoody" sound="0" fill="#e2e2e2" frame="#000000" cx="122.15277777777779" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
   <And in="@start" out="@hideYellowgoody" fill="#e2e2e2" frame="#000000" cx="122.15277777777779" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
   <And in="@YellowDied" out="@showYellowgoody" fill="#e2e2e2" frame="#000000" cx="122.15277777777779" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
-  <Text showEveryone="true" text="&quot;Yellow has switched players.&quot;" in="@yellowSwitch" sound="0" fill="#e2e2e2" frame="#000000" cx="122.15277777777779" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
-  <Text showEveryone="true" text="&quot;Red has switched players.&quot;" in="@redSwitch" sound="0" fill="#e2e2e2" frame="#000000" cx="122.15277777777779" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
+  <Text showEveryone="true" text="Yellow has switched players." in="@yellowSwitch" sound="0" fill="#e2e2e2" frame="#000000" cx="122.15277777777779" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
+  <Text showEveryone="true" text="Red has switched players." in="@redSwitch" sound="0" fill="#e2e2e2" frame="#000000" cx="122.15277777777779" cz="74.65277777777779" r="1.25" angle="180" extent="270" />
   <Teleporter y="15" shape="0" mask="0" group="@yellowBalcony" sound="3000" fill="#ffffff" frame="#000000" cx="122.08333333333334" cz="67.08333333333334" r="1.25" angle="0" extent="270" />
   <Teleporter y="15" shape="0" mask="0" group="@yellowBalcony" sound="3000" fill="#ffffff" frame="#000000" cx="122.08333333333334" cz="82.08333333333334" r="1.25" angle="0" extent="270" />
   <set wallHeight="3" />

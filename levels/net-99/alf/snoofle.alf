@@ -415,7 +415,7 @@
   <And in="@start" out="mShow" fill="#000000" frame="#ffffff" cx="439.30555555555554" cz="148.8888888888889" r="1.3888888888888857" angle="0" extent="90" />
   <Timer in="mTaken" out="mShow" wait="500" fill="#000000" frame="#ffffff" cx="439.30555555555554" cz="148.8888888888889" r="1.3888888888888857" angle="0" extent="90" />
   <Goody shape="bspGrenade" y="11" speed="2" grenades="20" start="mShow" out="mTaken" fill="#000000" frame="#ffffff" cx="439.30555555555554" cz="148.8888888888889" r="1.3888888888888857" angle="0" extent="90" />
-  <set lightHull="1997" mediumHull="1998" heavyHull="1999" designer="&quot;Dark Sorcerer - dgraham@nfld.com&quot;" information="&quot;A BIG level as seems to fit my current style.&quot;" />
+  <set lightHull="1997" mediumHull="1998" heavyHull="1999" designer="Dark Sorcerer - dgraham@nfld.com" information="A BIG level as seems to fit my current style." />
   <Teleporter group="-1" y="-30" activeRange="50 * 5" deadRange="45 * 5" destGroup="@recenter" shape="0" fill="#0066ff" frame="#000000" cx="209.30555555555554" cz="111.25" r="2.638888888888893" angle="180" extent="90" />
   <Teleporter y="20" shape="0" group="@recenter" fill="#0066ff" frame="#000000" cx="209.30555555555554" cz="111.25" r="2.638888888888893" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#0066ff" frame="#000000" cx="209.30555555555554" cz="111.25" r="2.638888888888893" angle="180" extent="90" />

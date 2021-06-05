@@ -1,6 +1,6 @@
 <map>
-  <set designer="&quot;Kyle 'Vader' Blessing - vader@avara.org&quot;" information="&quot;This is like a KOTH, but isn't revolved around teams. Stay on the green protion of the pole for 60 seconds to win.  Good luck!
-Special thank's to Kiff!&quot;" />
+  <set designer="Kyle 'Vader' Blessing - vader@avara.org" information="This is like a KOTH, but isn't revolved around teams. Stay on the green protion of the pole for 60 seconds to win.  Good luck!
+Special thank's to Kiff!" />
   <SkyColor n="15" fill="#777777" frame="#aa0000" />
   <GroundColor fill="#ccffcc" frame="#006600" />
   <Timer in.0="@start" in.1="@now1" wait="3" out="in[1]" fill="#00ee00" frame="#000000" cx="105.10416666666667" cz="9.166666666666668" r="3.6458333333333286" angle="0" extent="90" />
@@ -90,14 +90,14 @@ Special thank's to Kiff!&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@redWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText1" text="&quot;Red has 10 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText2" text="&quot;Red has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText3" text="&quot;Red has 30 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText4" text="&quot;Red has 40 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText5" text="&quot;Red has 50 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText6" text="&quot;Red has 20 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText7" text="&quot;Red has 10 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="@redWins" text="&quot;Red wins!&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Red has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Red has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Red has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Red has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Red has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Red has 20 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Red has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@redWins" text="Red wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
   <Field mask="T5" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
@@ -105,14 +105,14 @@ Special thank's to Kiff!&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@purpleWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText1" text="&quot;Purple has 10 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText2" text="&quot;Purple has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText3" text="&quot;Purple has 30 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText4" text="&quot;Purple has 40 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText5" text="&quot;Purple has 50 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText6" text="&quot;Purple has 20 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText7" text="&quot;Purple has 10 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="@purpleWins" text="&quot;Purple wins!&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Purple has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Purple has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Purple has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Purple has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Purple has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Purple has 20 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Purple has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@purpleWins" text="Purple wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
   <Field mask="T4" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
@@ -120,14 +120,14 @@ Special thank's to Kiff!&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@pinkWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText1" text="&quot;Pink has 10 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText2" text="&quot;Pink has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText3" text="&quot;Pink has 30 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText4" text="&quot;Pink has 40 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText5" text="&quot;Pink has 50 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText6" text="&quot;Pink has 20 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText7" text="&quot;Pink has 10 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="@pinkwins" text="&quot;Pink wins!&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Pink has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Pink has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Pink has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Pink has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Pink has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Pink has 20 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Pink has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@pinkwins" text="Pink wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
   <Field mask="T2" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
@@ -135,14 +135,14 @@ Special thank's to Kiff!&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@yellowWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText1" text="&quot;Yellow has 10 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText2" text="&quot;Yellow has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText3" text="&quot;Yellow has 30 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText4" text="&quot;Yellow has 40 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText5" text="&quot;Yellow has 50 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText6" text="&quot;Yellow has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText7" text="&quot;Yellow has 10 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="@yellowWins" text="&quot;Yellow wins!&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Yellow has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Yellow has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Yellow has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Yellow has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Yellow has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Yellow has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Yellow has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@yellowWins" text="Yellow wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
   <Field mask="T1" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
@@ -150,14 +150,14 @@ Special thank's to Kiff!&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@greenWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText1" text="&quot;Green has 10 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText2" text="&quot;Green has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText3" text="&quot;Green has 30 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText4" text="&quot;Green has 40 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText5" text="&quot;Green has 50 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText6" text="&quot;Green has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText7" text="&quot;Green has 10 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="@greenWins" text="&quot;Green wins!&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Green has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Green has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Green has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Green has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Green has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Green has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Green has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@greenWins" text="Green wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
   <Field mask="T6" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
@@ -165,14 +165,14 @@ Special thank's to Kiff!&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@blueWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText1" text="&quot;Blue has 10 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText2" text="&quot;Blue has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText3" text="&quot;Blue has 30 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText4" text="&quot;Blue has 40 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText5" text="&quot;Blue has 50 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText6" text="&quot;Blue has 20 seconds.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="mText7" text="&quot;Blue has 10 seconds to go.&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" in="@blueWins" text="&quot;Blue wins!&quot;" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Blue has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Blue has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Blue has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Blue has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Blue has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Blue has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Blue has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@blueWins" text="Blue wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
   <Teleporter group="-1" y="100" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
   <Teleporter y="35" shape="0" group="@recenter" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
   <Teleporter y="35" shape="0" group="@middle" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />

@@ -25,7 +25,7 @@
   <And in="@start" out="mShow" fill="#99ccff" frame="#000000" cx="45.625" cz="18.125" r="1.875" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="16" fill="#99ccff" frame="#000000" cx="45.625" cz="18.125" r="1.875" angle="180" extent="90" />
   <Goody shape="bspAvaraA" y="2.25" grenades="12" missiles="8" speed="-3" start="mShow" out="mTaken" fill="#99ccff" frame="#000000" cx="45.625" cz="18.125" r="1.875" angle="180" extent="90" />
-  <set designer="&quot;Red Cap&quot;" information="&quot;Aquaman loves water...&quot;" />
+  <set designer="Red Cap" information="Aquaman loves water..." />
   <SkyColor fill="#000055" frame="#0033ff" />
   <GroundColor fill="#330066" frame="#222222" />
   <set ambient="0.4" light.0.i="0.6" light.0.a="45" light.0.b="90" grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" />

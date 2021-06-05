@@ -1,9 +1,9 @@
 <map>
   <SkyColor fill="#777777" frame="#000077" />
   <GroundColor fill="#996633" frame="#000000" />
-  <set information="&quot;Step on the lighter-colored platforms to raise the towers; use the switches in the white box to dissasemble them.
+  <set information="Step on the lighter-colored platforms to raise the towers; use the switches in the white box to dissasemble them.
 Step on the gray bars to teleport between towers.
-Don’t stay on the ground too long.&quot;" TowerHeight="12" GuardFreq="20 / 3" GuardPower="0.7 / 3" GuardSpeed="6" GuardSecBase=".5" GuardBlock="7" defaultLives="5" />
+Don’t stay on the ground too long." TowerHeight="12" GuardFreq="20 / 3" GuardPower="0.7 / 3" GuardSpeed="6" GuardSecBase=".5" GuardBlock="7" defaultLives="5" />
   <Incarnator fill="#ffff33" frame="#000000" cx="80.90277777777779" cz="97.77777777777779" r="3.125" angle="325" extent="61" />
   <Teleporter yon="0.01" y="-20" win="5000" start="@winTeam" activeRange="10000" fill="#00ee00" frame="#000000" cx="5.833333333333334" cz="21.458333333333336" r="1.875" angle="0" extent="90" />
   <set wallHeight="TowerHeight" />
@@ -148,7 +148,7 @@ Don’t stay on the ground too long.&quot;" TowerHeight="12" GuardFreq="20 / 3" 
   <Wall fill="#bbbbbb" frame="#777777" x="39.583333333333336" z="157.08333333333334" w="2.5" d="0.625" h="0" />
   <Switch out.0="@cSuperTower" out.1="@bSuperTower" in.1="@bSuperTower" y="switchY" shape="bspSwitchOff" fill="#cc9900" frame="#ffff00" cx="34.61805555555556" cz="159.47916666666669" r="1.1458333333333357" angle="225" extent="270" />
   <Solid shape="markerShape" scale="markerScale" fill="#cc9900" frame="#ffff00" cx="34.61805555555556" cz="159.47916666666669" r="1.1458333333333357" angle="225" extent="270" />
-  <Text text="&quot;Switches are green for collapsed towers and red for raised towers.&quot;" fill="#cc9900" frame="#000000" cx="29.895833333333336" cz="158.64583333333334" r="2.1875" angle="0" extent="360" />
+  <Text text="Switches are green for collapsed towers and red for raised towers." fill="#cc9900" frame="#000000" cx="29.895833333333336" cz="158.64583333333334" r="2.1875" angle="0" extent="360" />
   <set wa="wallHeight" />
   <Wall fill="#eeeeee" frame="#000000" x="26.458333333333336" z="152.08333333333334" w="16.25" d="21.25" h="0.5" />
   <set wa="wallHeight" />

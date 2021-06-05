@@ -17,7 +17,7 @@
   <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="104.93055555555556" cz="99.93055555555556" r="1.25" angle="180" extent="90" />
   <Goody shape="bspMissile" y="8.75" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="104.93055555555556" cz="99.93055555555556" r="1.25" angle="180" extent="90" />
   <Ramp y="0" deltaY="7" canGlow="true" fill="#000055" frame="#000000" x="97.43055555555556" z="72.08333333333334" w="10.138888888888886" d="24.791666666666657" h="0.25" r="11.076388888888893" angle="175" extent="10" />
-  <set designer="&quot;Malkavian - Oesian@jhu.edu&quot;" information="&quot;Fuchsia:  A level for more than one person.&quot;" />
+  <set designer="Malkavian - Oesian@jhu.edu" information="Fuchsia:  A level for more than one person." />
   <SkyColor fill="#ccffff" frame="#660066" />
   <GroundColor fill="#000000" frame="#000055" />
   <unique vars="mShow mTaken" />

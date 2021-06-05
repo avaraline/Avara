@@ -1,7 +1,7 @@
 <map>
-  <set information="&quot;This level was designed BEFORE Aftershock.
+  <set information="This level was designed BEFORE Aftershock.
 Shields and energy don’t recharge automatically; grab mushrooms and shots to charge them.
-Missile ammo is present but hidden.&quot;" />
+Missile ammo is present but hidden." />
   <SkyColor fill="#663300" frame="#440000" />
   <GroundColor fill="#444444" frame="#440000" />
   <set pitCeilingY="3" floor1Y="6" floor1CeilingY="floor1Y + 5" floor2Y="floor1CeilingY + 1" floor2CeilingY="floor2Y + 5" groundStepSound="snStepObject" missileAcceleration="0.05" missileTurnRate="100" missilePower="10" grenadePower="1" defaultLives="6" hull.0="hullRoom" hull.1="hullRoom" hull.2="hullRoom" gEnergy="35" gGrenades="15" gMissiles="1" MM=".35" yonPlat="50" yonDecor="25" wallHeight="5" baseHeight="floor2CeilingY" />

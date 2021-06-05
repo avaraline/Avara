@@ -72,9 +72,9 @@
   <Incarnator stop="@stopin" fill="#ffffff" frame="#000000" cx="19.930555555555557" cz="55.27777777777778" r="2.5" angle="90" extent="90" />
   <Incarnator stop="@stopin" fill="#ffffff" frame="#000000" cx="23.680555555555557" cz="39.02777777777778" r="2.5" angle="0" extent="90" />
   <Incarnator stop="@stopin" fill="#ffffff" frame="#000000" cx="23.680555555555557" cz="49.02777777777778" r="2.5" angle="90" extent="90" />
-  <set designer="&quot;Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;&quot;" information="&quot;All you know and love about FreeForAllBall with one more ball.  
+  <set designer="Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;" information="All you know and love about FreeForAllBall with one more ball.  
 The highest goal is worth 50000.  The middle goal is worth 30000.  The lowest is worth 10000.
-Each player has 200 lives and the game lasts 7 min.&quot;" />
+Each player has 200 lives and the game lasts 7 min." />
   <Wall fill="#663300" frame="#000000" x="2.430555555555556" z="12.777777777777779" w="58.125" d="1.25" h="25" y="75" />
   <Wall fill="#663300" frame="#000000" x="58.68055555555556" z="14.027777777777779" w="1.25" d="60" h="25" y="75" />
   <Wall fill="#663300" frame="#000000" x="2.430555555555556" z="74.02777777777779" w="57.5" d="1.25" h="25" y="75" />
@@ -82,9 +82,9 @@ Each player has 200 lives and the game lasts 7 min.&quot;" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@lowscore" fill="#ffffff" frame="#000000" cx="58.68055555555556" cz="4.027777777777778" r="1.25" angle="180" extent="90" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@medscore" fill="#ffffff" frame="#000000" cx="73.05555555555556" cz="4.027777777777778" r="1.25" angle="180" extent="90" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@highscore" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="14.652777777777779" r="1.25" angle="180" extent="90" />
-  <Text showEveryone="true" text="&quot;a score.&quot;" in="@lowscore" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="14.652777777777779" r="1.25" angle="180" extent="90" />
-  <Text showEveryone="true" text="&quot;SCORE!&quot;" in="@medscore" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="14.652777777777779" r="1.25" angle="180" extent="90" />
-  <Text showEveryone="true" text="&quot;BIG SCORE!!!!!&quot;" in="@highscore" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="14.652777777777779" r="1.25" angle="180" extent="90" />
+  <Text showEveryone="true" text="a score." in="@lowscore" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="14.652777777777779" r="1.25" angle="180" extent="90" />
+  <Text showEveryone="true" text="SCORE!" in="@medscore" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="14.652777777777779" r="1.25" angle="180" extent="90" />
+  <Text showEveryone="true" text="BIG SCORE!!!!!" in="@highscore" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="14.652777777777779" r="1.25" angle="180" extent="90" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="21.180555555555557" cz="16.52777777777778" r="1.875" angle="315" extent="90" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="41.18055555555556" cz="16.52777777777778" r="1.875" angle="315" extent="90" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="41.18055555555556" cz="71.52777777777779" r="1.875" angle="135" extent="90" />

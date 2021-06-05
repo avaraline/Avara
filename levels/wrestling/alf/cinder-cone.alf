@@ -16,7 +16,7 @@
   <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" out="@time" fill="#9999ff" frame="#000000" cx="33.26388888888889" cz="28.680555555555557" r="0.625" angle="0" extent="90" />
   <Timer in="@time" out="@whoop" wait="1" fill="#9999ff" frame="#000000" cx="33.26388888888889" cz="28.680555555555557" r="0.625" angle="0" extent="90" />
   <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" fill="#9999ff" frame="#000000" cx="33.26388888888889" cz="28.680555555555557" r="0.625" angle="0" extent="90" />
-  <set ambient="0.3" light.0.i="0.0" light.0.a="45" light.0.b="73" light.1.i=".2" light.1.a="12" light.1.b="13" light.2.i=".5" light.2.a="11" light.2.b="9" light.3.i=".5" light.3.a="90" light.3.b="-90" grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" designer="&quot;Red Cap-redcap3000@earthlink.net&quot;" information="&quot;Cinder Cone , fast ‘interesting’ gameplay&quot;" defaultLives="5" />
+  <set ambient="0.3" light.0.i="0.0" light.0.a="45" light.0.b="73" light.1.i=".2" light.1.a="12" light.1.b="13" light.2.i=".5" light.2.a="11" light.2.b="9" light.3.i=".5" light.3.a="90" light.3.b="-90" grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" designer="Red Cap-redcap3000@earthlink.net" information="Cinder Cone , fast ‘interesting’ gameplay" defaultLives="5" />
   <SkyColor n="4" fill="#ffcc99" frame="#9999ff" />
   <GroundColor n="1" fill="#777777" frame="#66ccff" />
   <set wallHeight="0" />

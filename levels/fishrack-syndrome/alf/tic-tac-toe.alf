@@ -1,7 +1,7 @@
 <map>
   <set wallHeight="0" />
   <Wall fill="#ffffff" frame="#000000" x="30" z="21.25" w="23.75" d="23.75" h="0" />
-  <set designer="&quot;Plastic Chicken&quot;" information="&quot;Red vs. Green -- Two players only, wait your turn.&quot;" maxStartMissiles="0" maxStartGrenades="0" maxStartBoosts="0" gravity=".9" defaultLives="99" />
+  <set designer="Plastic Chicken" information="Red vs. Green -- Two players only, wait your turn." maxStartMissiles="0" maxStartGrenades="0" maxStartBoosts="0" gravity=".9" defaultLives="99" />
   <SkyColor fill="#000000" frame="#000000" />
   <GroundColor fill="#000000" frame="#000000" />
   <set wallHeight=".2" />
@@ -39,7 +39,7 @@
   <And in.0="@gAC" in.1="@gBC" in.2="@gCC" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
   <And in.0="@gAA" in.1="@gBB" in.2="@gCC" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
   <And in.0="@gAC" in.1="@gBB" in.2="@gCA" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <Text text="&quot;Green Wins!&quot;" in="@gWin" showEveryone="true" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
+  <Text text="Green Wins!" in="@gWin" showEveryone="true" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
   <And in.0="@rAA" in.1="@rAB" in.2="@rAC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
   <And in.0="@rBA" in.1="@rBB" in.2="@rBC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
   <And in.0="@rCA" in.1="@rCB" in.2="@rCC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
@@ -48,7 +48,7 @@
   <And in.0="@rAC" in.1="@rBC" in.2="@rCC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
   <And in.0="@rAA" in.1="@rBB" in.2="@rCC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
   <And in.0="@rAC" in.1="@rBB" in.2="@rCA" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <Text text="&quot;Red Wins!&quot;" in="@rWin" showEveryone="true" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
+  <Text text="Red Wins!" in="@rWin" showEveryone="true" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
   <Teleporter mask="T1" start="@start" out="@gBA" stop="@sBA" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="25" r="1.875" angle="270" extent="90" />
   <Teleporter mask="T3" start="@start" out="@rBA" stop="@sBA" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="25" r="1.875" angle="270" extent="90" />
   <Timer in.0="@rBA" in.1="@gBA" wait="1" out="@sBA" fill="#888888" frame="#000000" cx="41.875" cz="25" r="1.875" angle="270" extent="90" />

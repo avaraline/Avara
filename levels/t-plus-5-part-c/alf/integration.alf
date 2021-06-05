@@ -1,5 +1,5 @@
 <map>
-  <set designer="&quot;PatH &lt;avara@play.at&gt;&quot;" information="&quot;When worlds collide...&quot;" wallHeight="0.25" defaultLives="5" lives="defaultLives" />
+  <set designer="PatH &lt;avara@play.at&gt;" information="When worlds collide..." wallHeight="0.25" defaultLives="5" lives="defaultLives" />
   <unique vars="eUp eDown" />
   <WallDoor deltaY="4" openSpeed="5" closeSpeed="8" openDelay="25" hitMsg="eDown" close="eDown" didClose="eUp" open="eUp" openSound="0" closeSound="0" status="1" fill="#bbbbbb" frame="#000000" x="69.375" z="18.47222222222222" w="6.736111111111114" d="6.736111111111114" h="0" />
   <unique vars="eUp eDown" />

@@ -1,7 +1,7 @@
 <map>
   <GroundColor fill="#330000" frame="#330000" />
   <SkyColor fill="#993300" frame="#330099" />
-  <set designer="&quot;Kniq - nickrobbins@yahoo.com&quot;" wallHeight="0.2" baseHeight="5" />
+  <set designer="Kniq - nickrobbins@yahoo.com" wallHeight="0.2" baseHeight="5" />
   <Wall fill="#eeeeee" frame="#000000" x="47.083333333333336" z="20.27777777777778" w="5" d="5" h="0" />
   <Wall fill="#eeeeee" frame="#000000" x="47.083333333333336" z="57.77777777777778" w="5" d="5" h="0" />
   <Wall fill="#eeeeee" frame="#000000" x="138.33333333333334" z="57.77777777777778" w="5" d="5" h="0" />
@@ -67,7 +67,7 @@
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@GameEnds" win="0" fill="#000099" frame="#000000" cx="187.36111111111111" cz="139.44444444444446" r="2.5" angle="180" extent="90" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@GameEnds" win="0" fill="#000099" frame="#000000" cx="187.36111111111111" cz="139.44444444444446" r="2.5" angle="180" extent="90" />
   <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="5" out="@GameEnds" fill="#000099" frame="#000000" cx="187.36111111111111" cz="139.44444444444446" r="2.5" angle="180" extent="90" />
-  <set information="&quot;Heimlich without the ball, just go for kills! Thanks to Chirstopher Tate for the Choke Layout, and the AA and geezers for beta-testing! Five minutes. You can use teams if you want. Oh yeah, extra nades :)&quot;" maxStartMissiles="6" maxStartBoosts="0" missileTurnRate="1" missileAcceleration="2" @TextVolume="30" @SnText="210" />
+  <set information="Heimlich without the ball, just go for kills! Thanks to Chirstopher Tate for the Choke Layout, and the AA and geezers for beta-testing! Five minutes. You can use teams if you want. Oh yeah, extra nades :)" maxStartMissiles="6" maxStartBoosts="0" missileTurnRate="1" missileAcceleration="2" @TextVolume="30" @SnText="210" />
   <set ambient="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
   <Timer in="@start" out.0="@outNW" out.1="@outNE" out.2="@outSW" out.3="@outSE" wait="150" fill="#000099" frame="#000000" cx="187.36111111111111" cz="139.44444444444446" r="2.5" angle="180" extent="90" />
   <Timer in="@midNWT" out="@inNW" wait="200" fill="#000099" frame="#000000" cx="187.36111111111111" cz="139.44444444444446" r="2.5" angle="180" extent="90" />
@@ -89,9 +89,9 @@
   <Timer in="@start" out="@thirtyLeft" wait="kMainFrame" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
   <Timer in="@thirtyLeft" out="@tenLeft" wait="kThirtySec" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
   <Timer in="@tenLeft" out="@timeUp" wait="kTenSec" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
-  <Text in="@thirtyLeft" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Thirty Seconds Left!&quot;" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
-  <Text in="@tenLeft" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Only Ten Seconds Left!&quot;" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
-  <Text in="@timeUp" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Time’s Up!&quot;" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
+  <Text in="@thirtyLeft" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Thirty Seconds Left!" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
+  <Text in="@tenLeft" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Only Ten Seconds Left!" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
+  <Text in="@timeUp" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Time’s Up!" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
   <Timer in="@timeUp" out="@GameEnds" wait="1" fill="#000099" frame="#000000" cx="118.26388888888889" cz="152.77777777777777" r="2.0833333333333357" angle="180" extent="90" />
   <Incarnator y="15" start="@three" stop="@four" fill="#cc9900" frame="#000000" cx="103.05555555555556" cz="41.52777777777778" r="1.25" angle="225" extent="90" />
   <Incarnator y="15" start="@two" stop="@three" fill="#cc9900" frame="#000000" cx="87.36111111111111" cz="41.52777777777778" r="1.25" angle="45" extent="90" />

@@ -7,7 +7,7 @@
   <Field deltaY="0" mask="T5" start="@gTaken" stop="@fieldOff" enter="@purpleCenter" visible="false" fill="#dddddd" frame="#000000" x="124.23611111111111" z="92.36111111111111" w="6.25" d="6.25" h="0" />
   <Field deltaY="0" mask="T6" start="@gTaken" stop="@fieldOff" enter="@blueCenter" visible="false" fill="#dddddd" frame="#000000" x="124.23611111111111" z="92.36111111111111" w="6.25" d="6.25" h="0" />
   <Field deltaY="0" mask="T1" start="@gTaken" stop="@fieldOff" enter="@greenCenter" visible="true" fill="#dddddd" frame="#000000" x="124.23611111111111" z="92.36111111111111" w="6.25" d="6.25" h="0" />
-  <set wallHeight="15" designer="&quot;Cowboy&quot;" information="&quot;Patterned after: bio-BOOSTED in the UFO levels. Incarnators are random.  'Yo!' sound by Andrew Welch from Ambrosia's game: Maelstrom.&quot;" />
+  <set wallHeight="15" designer="Cowboy" information="Patterned after: bio-BOOSTED in the UFO levels. Incarnators are random.  'Yo!' sound by Andrew Welch from Ambrosia's game: Maelstrom." />
   <SkyColor fill="#00ccff" frame="#0099ff" />
   <Wall fill="#ff0000" frame="#000000" x="109.86111111111111" z="62.986111111111114" w="5" d="5" h="0" />
   <Wall fill="#ff0000" frame="#000000" x="139.86111111111111" z="62.986111111111114" w="5" d="5" h="0" />
@@ -124,11 +124,11 @@
   <Goody scale="2" shape="5556" sound="0" y="4.25" speed="2" missiles="8" grenades="12" boosters="1" start="@gShow" out="@gTaken" fill="#000055" frame="#000000" cx="127.36111111111111" cz="95.48611111111111" r="3.125" angle="60" extent="60" />
   <set baseHeight="4 * hWall + .85" wallHeight="hWall" />
   <Timer wait="1" in="@gTaken" out="@fieldOff" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
-  <Text in="@greenCenter" showEveryone="true" text="&quot;Green Hector in Center!&quot;" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
-  <Text in="@yellowCenter" showEveryone="true" text="&quot;Yellow Hector in Center!&quot;" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
-  <Text in="@redCenter" showEveryone="true" text="&quot;Red Hector in Center!&quot;" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
-  <Text in="@pinkCenter" showEveryone="true" text="&quot;Pink Hector in Center!&quot;" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
-  <Text in="@purpleCenter" showEveryone="true" text="&quot;Purple Hector in Center!&quot;" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
-  <Text in="@blueCenter" showEveryone="true" text="&quot;Blue Hector in Center!&quot;" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
-  <Text in="@gTaken" sound="1504" volume=".3" showEveryone="true" text="&quot;&quot;" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
+  <Text in="@greenCenter" showEveryone="true" text="Green Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
+  <Text in="@yellowCenter" showEveryone="true" text="Yellow Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
+  <Text in="@redCenter" showEveryone="true" text="Red Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
+  <Text in="@pinkCenter" showEveryone="true" text="Pink Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
+  <Text in="@purpleCenter" showEveryone="true" text="Purple Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
+  <Text in="@blueCenter" showEveryone="true" text="Blue Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
+  <Text in="@gTaken" sound="1504" volume=".3" showEveryone="true" text="" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="28.472222222222225" r="3.75" angle="60" extent="60" />
 </map>

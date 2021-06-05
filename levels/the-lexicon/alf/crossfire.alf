@@ -1,9 +1,9 @@
 <map>
-  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Kill for 5 minutes.&quot;" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Kill for 5 minutes." />
   <Timer in="@start" wait="4685" out="@endGame" />
   <set defaultLives="100" />
   <Timer in="@start" wait="4250" out="@warn" />
-  <Text in="@warn" showEveryone="true" text="&quot;Time is almost up.&quot;" />
+  <Text in="@warn" showEveryone="true" text="Time is almost up." />
   <set maxStartBoosts="1" grenadePower="2.5" missilePower="1.5" missileAcceleration="0.8" missileTurnRate="0.05" />
   <Teleporter y="200" shape="0" win="1200" start="@endGame" activeRange="2000" fill="#444444" frame="#cc9900" cx="72.95138888888889" cz="9.86111111111111" r="1.1458333333333357" angle="180" extent="90" />
   <GroundColor fill="#111111" frame="#111111" />

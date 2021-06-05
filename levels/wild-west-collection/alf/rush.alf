@@ -5,7 +5,7 @@
   <Timer in="mTaken" out="mShow" wait="120" fill="#ffffff" frame="#000000" cx="37.63888888888889" cz="90.97222222222223" r="1.25" angle="180" extent="90" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="37.63888888888889" cz="90.97222222222223" r="1.25" angle="180" extent="90" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#bbbbbb" frame="#000000" r="1.25" cx="37.63888888888889" cz="90.97222222222223" angle="180" extent="90" x="70.97222222222223" z="81.25" w="5.555555555555557" d="0.2777777777777857" h="10" />
-  <set designer="&quot;Cowboy - jmcald@destiny.esd105.wednet.edu&quot;" information="&quot;Rush&quot;" />
+  <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Rush" />
   <SkyColor fill="#000000" frame="#003399" />
   <GroundColor fill="#444444" frame="#444444" />
   <set gravity="1" grenadePower="1" missilePower="1" missileTurnRate=".5" missileAcceleration="1" />

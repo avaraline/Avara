@@ -218,46 +218,46 @@
   <Field visible="false" watch="playerMask" mask="T1" start="@secondtimer" stop="@greenstop" enter="@greenenter" fill="#008011" frame="#000000" x="64.58333333333334" z="64.58333333333334" w="15" d="15" h="0" r="1.875" cx="47.083333333333336" cz="47.083333333333336" angle="90" extent="90" y="8" />
   <Field visible="false" watch="playerMask" mask="T2" start="@secondtimer" stop="@yellowstop" enter="@yellowenter" fill="#fcf305" frame="#000000" x="64.58333333333334" z="64.58333333333334" w="15" d="15" h="0" r="1.875" cx="47.083333333333336" cz="47.083333333333336" angle="90" extent="90" y="8" />
   <Field visible="false" watch="playerMask" mask="T3" start="@secondtimer" stop="@redstop" enter="@redenter" fill="#dd0806" frame="#000000" x="64.58333333333334" z="64.58333333333334" w="15" d="15" h="0" r="1.875" cx="47.083333333333336" cz="47.083333333333336" angle="90" extent="90" y="8" />
-  <Text in="@yellow10" text="&quot;Yellow has 10 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellow20" text="&quot;Yellow has 20 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellow30" text="&quot;Yellow has 30 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellow40" text="&quot;Yellow has 40 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellow50" text="&quot;Yellow is halfway!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellow60" text="&quot;Yellow has 60 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellow70" text="&quot;Yellow has 70 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellow80" text="&quot;Yellow has 80 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellow90" text="&quot;Yellow needs 10 more seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@yellowwin" text="&quot;Yellow Wins!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue10" text="&quot;Blue has 10 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue20" text="&quot;Blue has 20 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue30" text="&quot;Blue has 30 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue40" text="&quot;Blue has 40 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue50" text="&quot;Blue is halfway!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue60" text="&quot;Blue has 60 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue70" text="&quot;Blue has 70 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue80" text="&quot;Blue has 80 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@blue90" text="&quot;Blue needs 10 more seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@bluewin" text="&quot;Blue Wins!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red10" text="&quot;Red has 10 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red20" text="&quot;Red has 20 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red30" text="&quot;Red has 30 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red40" text="&quot;Red has 40 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red50" text="&quot;Red is halfway!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red60" text="&quot;Red has 60 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red70" text="&quot;Red has 70 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red80" text="&quot;Red has 80 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@red90" text="&quot;Red needs 10 more seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@redwin" text="&quot;Red Wins!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green10" text="&quot;Green has 10 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green20" text="&quot;Green has 20 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green30" text="&quot;Green has 30 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green40" text="&quot;Green has 40 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green50" text="&quot;Green is halfway!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green60" text="&quot;Green has 60 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green70" text="&quot;Green has 70 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green80" text="&quot;Green has 80 seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@green90" text="&quot;Green needs 10 more seconds!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
-  <Text in="@greenwin" text="&quot;Green Wins!&quot;" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow10" text="Yellow has 10 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow20" text="Yellow has 20 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow30" text="Yellow has 30 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow40" text="Yellow has 40 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow50" text="Yellow is halfway!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow60" text="Yellow has 60 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow70" text="Yellow has 70 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow80" text="Yellow has 80 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellow90" text="Yellow needs 10 more seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@yellowwin" text="Yellow Wins!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue10" text="Blue has 10 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue20" text="Blue has 20 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue30" text="Blue has 30 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue40" text="Blue has 40 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue50" text="Blue is halfway!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue60" text="Blue has 60 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue70" text="Blue has 70 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue80" text="Blue has 80 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@blue90" text="Blue needs 10 more seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@bluewin" text="Blue Wins!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red10" text="Red has 10 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red20" text="Red has 20 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red30" text="Red has 30 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red40" text="Red has 40 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red50" text="Red is halfway!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red60" text="Red has 60 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red70" text="Red has 70 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red80" text="Red has 80 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@red90" text="Red needs 10 more seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@redwin" text="Red Wins!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green10" text="Green has 10 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green20" text="Green has 20 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green30" text="Green has 30 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green40" text="Green has 40 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green50" text="Green is halfway!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green60" text="Green has 60 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green70" text="Green has 70 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green80" text="Green has 80 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@green90" text="Green needs 10 more seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
+  <Text in="@greenwin" text="Green Wins!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="90" extent="90" />
   <Counter in="@blueadd" n="10" out="@blue10" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="90" extent="90" />
   <Counter in="@blueadd" n="20" out="@blue20" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="90" extent="90" />
   <Counter in="@blueadd" n="30" out="@blue30" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="90" extent="90" />
@@ -311,7 +311,7 @@
   <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@redenter" close="@redclose" didOpen="@redadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#dd0806" frame="#000000" x="471.45833333333337" z="562.0833333333334" w="5" d="5" h="1" r="1.875" cx="452.08333333333337" cz="494.58333333333337" angle="90" extent="90" />
   <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@greenenter" close="@greenclose" didOpen="@greenadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#008011" frame="#000000" x="481.45833333333337" z="562.0833333333334" w="5" d="5" h="1" r="1.875" cx="452.08333333333337" cz="494.58333333333337" angle="90" extent="90" />
   <Base in="@badHectors" out="@teleportTheRest" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="270" extent="90" />
-  <Text in="@badHectors" showEveryone="true" text="&quot;HECTORs must be red, yellow, green, or blue.&quot;" sound="0" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="270" extent="90" />
+  <Text in="@badHectors" showEveryone="true" text="HECTORs must be red, yellow, green, or blue." sound="0" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="270" extent="90" />
   <Goody out="@badHectors" shape="bspW3x3" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="270" extent="90" />
   <Walker team="4" defaultLives="0" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="270" extent="90" />
   <Walker team="4" defaultLives="0" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="270" extent="90" />
@@ -416,5 +416,5 @@
   <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="39.583333333333336" cz="72.08333333333334" r="1.875" angle="0" extent="90" />
   <Timer in="rTaken" out="rShow" wait="150" fill="#fff1de" frame="#7e90a4" cx="39.583333333333336" cz="72.08333333333334" r="1.875" angle="0" extent="90" />
   <Goody y="2" shape="bspGrenade" speed="5" sound="snYes" grenades="4" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="39.583333333333336" cz="72.08333333333334" r="1.875" angle="0" extent="90" />
-  <set information="rMill" />
+  <set information="$rMill" />
 </map>

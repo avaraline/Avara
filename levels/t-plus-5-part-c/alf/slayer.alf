@@ -62,8 +62,8 @@
   <And in="@start" out="mShow" fill="#00ffff" frame="#000000" cx="100.55555555555556" cz="58.75" r="1.25" angle="135" extent="90" />
   <Timer in="mTaken" wait="40" out="mShow" fill="#00ffff" frame="#000000" cx="100.55555555555556" cz="58.75" r="1.25" angle="135" extent="90" />
   <Goody start="mShow" shape="bspAvaraA" speed="5" y="42.5" grenades="6" missiles="3" out="mTaken" fill="#00ffff" frame="#000000" cx="100.55555555555556" cz="58.75" r="1.25" angle="135" extent="90" />
-  <set designer="&quot;Kiff&quot;" information="&quot;Jump in the pit. It's not always safe 
-going face first. Thnx to Grimm for making it a real level.&quot;" />
+  <set designer="Kiff" information="Jump in the pit. It's not always safe 
+going face first. Thnx to Grimm for making it a real level." />
   <SkyColor fill="#000000" frame="#ee0000" />
   <GroundColor fill="#000000" frame="#000000" />
   <set wallHeight="10" />

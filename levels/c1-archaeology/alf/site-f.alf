@@ -1,5 +1,5 @@
 <map>
-  <set designer="&quot;Carlos Castillo-Garsow    cc96@cornell.edu&quot;" />
+  <set designer="Carlos Castillo-Garsow    cc96@cornell.edu" />
   <Counter in="@shot1" n="4" out="@spice" fill="#ffffff" frame="#000000" cx="2.5694444444444446" cz="0.06944444444444442" r="2.5" angle="180" extent="90" />
   <Ufo shield="-1" y="5" start="@spice" watch="playerMask + scoutMask" shape="bspStarFighter" acceleration="0.03" shotPower="1" burstLength="3" burstSpeed="7" burstCharge="25" fill="#dd0000" frame="#000000" cx="55.06944444444445" cz="50.06944444444445" r="2.5" angle="0" extent="90" />
   <Wall fill="#663399" frame="#000000" x="45" z="40" w="2.5" d="2.5" h="3" />

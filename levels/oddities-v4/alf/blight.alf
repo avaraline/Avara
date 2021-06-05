@@ -1,10 +1,10 @@
 <map>
-  <set designer="&quot;Kevin Reid (Tetra)    &lt;kpreid@ibm.net&gt;&quot;" information="&quot;Concept by TRS &lt;therisingsun@mailcity.com&gt;
+  <set designer="Kevin Reid (Tetra)    &lt;kpreid@ibm.net&gt;" information="Concept by TRS &lt;therisingsun@mailcity.com&gt;
 A gigantic maze!
 The switches shoot at you until you flip them.
 Don't injure the UFOs.
 The ammo is in the sky; get to the center to get it.
-Use scout view for a better view of the maze.&quot;" TallWall="10" MazeWall="4" DomeWall="5" DomeSlope="7" wallHeight="TallWall" SkyBase="TallWall + 30" SkyIncr="5" SkyThick=".25" GuardRange="40" DoorTime="10 * 15" DoorShot="2" DoorSpeed="10" DoorVol="0" defaultLives="2" missileTurnRate="100" wgHeight="MazeWall -1" wgScale="0" wgYon=".01" wgReset="11 * 15" wgSwScale="1" wgFreq="2.5 * 15" wgPower=".5" wgSpeed="100" />
+Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWall="5" DomeSlope="7" wallHeight="TallWall" SkyBase="TallWall + 30" SkyIncr="5" SkyThick=".25" GuardRange="40" DoorTime="10 * 15" DoorShot="2" DoorSpeed="10" DoorVol="0" defaultLives="2" missileTurnRate="100" wgHeight="MazeWall -1" wgScale="0" wgYon=".01" wgReset="11 * 15" wgSwScale="1" wgFreq="2.5 * 15" wgPower=".5" wgSpeed="100" />
   <SkyColor fill="#660066" frame="#663399" />
   <GroundColor fill="#99ffff" frame="#000000" />
   <set wallYon="10000" />

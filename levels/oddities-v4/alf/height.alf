@@ -84,12 +84,12 @@
   <Base in.0="@FieldsOn" in.1="@FieldsOff" out="@FieldToggle" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
   <Teleporter y="flyerHeight" yon="kYonInvisible" group="@bubble" mask="0" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
   <Teleporter destGroup="@bubble" group="-1" y="flyerHeight" deadRange="100" activeRange="kInfinity" yon="kYonInvisible" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
-  <Text in="@FieldsOff" text="&quot;Force fields are now off.&quot;" showEveryone="true" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
-  <Text in="@FieldsOn" text="&quot;Force fields are now on.&quot;" showEveryone="true" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
-  <Text in="@start" text="&quot;Welcome to Height! Force fields are currently off.&quot;" showEveryone="true" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
-  <set information="&quot;Battle from four platforms.
+  <Text in="@FieldsOff" text="Force fields are now off." showEveryone="true" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
+  <Text in="@FieldsOn" text="Force fields are now on." showEveryone="true" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
+  <Text in="@start" text="Welcome to Height! Force fields are currently off." showEveryone="true" fill="#ccccff" frame="#ff0000" cx="129.79166666666669" cz="90.06944444444444" r="2.5" angle="180" extent="270" />
+  <set information="Battle from four platforms.
 Heavy hulls recommended. Don’t step off the platforms unless the force fields are on. Get ammo by stepping on your own platform.
-Green, yellow, red, and pink; max 2 per team.&quot;" />
+Green, yellow, red, and pink; max 2 per team." />
   <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="145.34722222222223" cz="115" r="2.5" angle="0" extent="180" />
   <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="145.34722222222223" cz="65" r="2.5" angle="0" extent="180" />
   <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="154.72222222222223" cz="105.625" r="2.5" angle="90" extent="180" />

@@ -502,8 +502,8 @@
   <And in="@start" out="mShow" fill="#006666" frame="#000000" cx="43.125" cz="21.875" r="5" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="1" fill="#006666" frame="#000000" cx="43.125" cz="21.875" r="5" angle="180" extent="90" />
   <Goody shape="300" y="9" speed="0" missiles="0" grenades="0" boosters="5" scale="30" start="mShow" out="mTaken" volume="0" yon="0.01" fill="#006666" frame="#000000" cx="43.125" cz="21.875" r="5" angle="180" extent="90" />
-  <set maxStartGrenades="0" maxStartMissiles="0" hull.0="128" hull.1="128" hull.2="128" gravity="0.9" defaultLives="99" designer="&quot;Hazel - hazel@avara.org&quot;" information="&quot;a level just for fun!
--enjoy!&quot;" wallYon="0.01" />
+  <set maxStartGrenades="0" maxStartMissiles="0" hull.0="128" hull.1="128" hull.2="128" gravity="0.9" defaultLives="99" designer="Hazel - hazel@avara.org" information="a level just for fun!
+-enjoy!" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="62.5" z="2.5" w="1.875" d="41.25" h="250" />
   <Wall fill="#ffffff" frame="#000000" x="23.75" z="0.625" w="40.625" d="1.875" h="250" />
   <Wall fill="#ffffff" frame="#000000" x="21.25" z="0" w="2.5" d="41.25" h="250" />

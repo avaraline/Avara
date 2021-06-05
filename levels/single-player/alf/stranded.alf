@@ -83,8 +83,8 @@ end</script>
   <Teleporter win="500" fill="#dd0000" frame="#000000" cx="133.95833333333334" cz="55.208333333333336" r="1.875" angle="0" extent="90" />
   <Hologram shape="bspGroundStar" fill="#dd0000" frame="#000000" cx="133.95833333333334" cz="55.208333333333336" r="1.875" angle="0" extent="90" />
   <Ufo shield="2" fill="#ffff00" frame="#000000" cx="143.95833333333334" cz="40.208333333333336" r="1.875" angle="45" extent="90" />
-  <set designer="&quot;Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;&quot;" information="&quot;A transporter was lost in an explosion leaving you stranded.  You managed to find a neighboring complex with its own functional transporter.  Break in and use it to return home.&quot;" hull.0="mediumHull" hull.2="mediumHull" />
-  <Text in="@start" showEveryone="true" text="&quot;Light and heavy hulls are not available for this mission.&quot;" fill="#ffff00" frame="#000000" cx="143.95833333333334" cz="40.208333333333336" r="1.875" angle="45" extent="90" />
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="A transporter was lost in an explosion leaving you stranded.  You managed to find a neighboring complex with its own functional transporter.  Break in and use it to return home." hull.0="mediumHull" hull.2="mediumHull" />
+  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." fill="#ffff00" frame="#000000" cx="143.95833333333334" cz="40.208333333333336" r="1.875" angle="45" extent="90" />
   <Teleporter shape="0" y="-10" group="@lost" deadRange="100" activeRange="105" fill="#ffccff" frame="#000000" cx="73.95833333333334" cz="40.208333333333336" r="5" angle="270" extent="90" />
   <Teleporter shape="0" y="10" group="@lost" status="false" fill="#ffccff" frame="#000000" cx="73.95833333333334" cz="40.208333333333336" r="5" angle="270" extent="90" />
   <Sound sound="snArcticWind" loopCount="-1" volume="30" rate="1" fill="#ffccff" frame="#000000" cx="73.95833333333334" cz="40.208333333333336" r="5" angle="270" extent="90" />

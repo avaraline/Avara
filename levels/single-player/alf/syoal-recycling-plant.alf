@@ -115,8 +115,8 @@
   <Teleporter win="500" fill="#ffff00" frame="#000000" cx="77.22222222222223" cz="6.805555555555555" r="1.875" angle="90" extent="90" />
   <Hologram shape="bspGroundStar" fill="#ffff00" frame="#000000" cx="77.22222222222223" cz="6.805555555555555" r="1.875" angle="90" extent="90" />
   <Sound sound="snBubbles" loopCount="-1" rate=".5" volume="100" fill="#ffff00" frame="#000000" cx="77.22222222222223" cz="6.805555555555555" r="1.875" angle="90" extent="90" />
-  <set designer="&quot;Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;&quot;" information="&quot;A Hector unit is in captivity, scheduled to be disassembled within the hour.  Navigate this Hector to safety.&quot;" hull.2="mediumHull" />
-  <Text in="@start" showEveryone="true" text="&quot;The heavy hull is not available for this mission.&quot;" fill="#ffff00" frame="#000000" cx="77.22222222222223" cz="6.805555555555555" r="1.875" angle="90" extent="90" />
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="A Hector unit is in captivity, scheduled to be disassembled within the hour.  Navigate this Hector to safety." hull.2="mediumHull" />
+  <Text in="@start" showEveryone="true" text="The heavy hull is not available for this mission." fill="#ffff00" frame="#000000" cx="77.22222222222223" cz="6.805555555555555" r="1.875" angle="90" extent="90" />
   <Incarnator stop="@start" fill="#0066ff" frame="#000000" cx="77.84722222222223" cz="46.875" r="2.5" angle="0" extent="90" />
   <Incarnator stop="@start" fill="#0066ff" frame="#000000" cx="77.84722222222223" cz="58.125" r="2.5" angle="90" extent="90" />
   <Incarnator stop="@start" fill="#0066ff" frame="#000000" cx="66.59722222222223" cz="58.125" r="2.5" angle="180" extent="90" />

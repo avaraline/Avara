@@ -168,5 +168,5 @@
   <And in="@start" out="rShow" fill="#ffffdc" frame="#dce8ff" cx="59.236111111111114" cz="94.86111111111111" r="1.875" angle="0" extent="90" />
   <Timer in="rTaken" out="rShow" wait="200" fill="#ffffdc" frame="#dce8ff" cx="59.236111111111114" cz="94.86111111111111" r="1.875" angle="0" extent="90" />
   <Goody y="5" shape="bspGrenade" speed="5" grenades="4" start="rShow" out="rTaken" fill="#ffffdc" frame="#dce8ff" cx="59.236111111111114" cz="94.86111111111111" r="1.875" angle="0" extent="90" />
-  <set information="rNaloxone" />
+  <set information="$rNaloxone" />
 </map>

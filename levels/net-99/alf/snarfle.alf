@@ -375,7 +375,7 @@
   <And in="@start" out="mShowMis" fill="#440000" frame="#000000" cx="144.30555555555554" cz="101.80555555555556" r="1.3888888888888857" angle="180" extent="90" />
   <Timer in="mTakenMis" out="mShowMis" wait="200" fill="#440000" frame="#000000" cx="144.30555555555554" cz="101.80555555555556" r="1.3888888888888857" angle="180" extent="90" />
   <Goody shape="bspMissile" y="6.6" speed="2" missiles="1" start="mShowMis" out="mTakenMis" fill="#440000" frame="#000000" cx="144.30555555555554" cz="101.80555555555556" r="1.3888888888888857" angle="180" extent="90" />
-  <set designer="&quot;Dark Sorcerer - dgraham@nfld.com&quot;" information="&quot;Another fairly wide open lvl.&quot;" wallHeight="2.1" />
+  <set designer="Dark Sorcerer - dgraham@nfld.com" information="Another fairly wide open lvl." wallHeight="2.1" />
   <WallDoor midYaw="45" fill="#003333" frame="#000000" x="58.05555555555556" z="67.5" w="16.25" d="2.5" h="0" r="1.3888888888888857" cx="144.30555555555554" cz="101.80555555555556" angle="180" extent="90" />
   <WallDoor midYaw="45" fill="#003333" frame="#000000" x="131.18055555555557" z="60.625" w="2.5" d="16.25" h="0" r="1.3888888888888857" cx="144.30555555555554" cz="101.80555555555556" angle="180" extent="90" />
   <WallDoor midYaw="45" fill="#003333" frame="#000000" x="124.30555555555556" z="133.75" w="16.25" d="2.5" h="0" r="1.3888888888888857" cx="144.30555555555554" cz="101.80555555555556" angle="180" extent="90" />

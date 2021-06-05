@@ -1,7 +1,7 @@
 <map>
   <Ramp y="0" deltaY="2" fill="#222222" frame="#444444" x="64.16666666666667" z="47.91666666666667" w="20" d="2.5" h="0" r="2.5" angle="90" extent="180" />
-  <set designer="&quot;Kyle 'Vader' Blessing - vader@avara.org&quot;" information="&quot;Not only does your team get to try and take over one hill, but now they get to try and take over 2. Your team must stay on top of each hill for 80 seconds. Once you have done this, your team wins! Good luck! 
-Teams are Green, Red, and Blue.&quot;" />
+  <set designer="Kyle 'Vader' Blessing - vader@avara.org" information="Not only does your team get to try and take over one hill, but now they get to try and take over 2. Your team must stay on top of each hill for 80 seconds. Once you have done this, your team wins! Good luck! 
+Teams are Green, Red, and Blue." />
   <SkyColor n="15" fill="#000000" frame="#0000dd" />
   <GroundColor fill="#009999" frame="#009999" />
   <Ramp y="0" deltaY="2" fill="#222222" frame="#444444" x="64.16666666666667" z="55.41666666666667" w="20" d="2.5" h="0" r="2.5" angle="270" extent="180" />
@@ -238,14 +238,14 @@ Teams are Green, Red, and Blue.&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <Distributor in="mTick2" out.0="@greenText1" out.1="@greenText2" out.2="@greenText3" out.3="@greenText4" out.4="@greenText5" out.5="@greenText6" out.6="@greenText7" out.7="@greenWins" restart="false" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenText1" text="&quot;Green has 10 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenText2" text="&quot;Green has 20 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenText3" text="&quot;Green has 30 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenText4" text="&quot;Green has 40 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenText5" text="&quot;Green has 50 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenText6" text="&quot;Green has 60 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenText7" text="&quot;Green has 70 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenWins" text="&quot;Green Has 80 Seconds On Hill One!&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenText1" text="Green has 10 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenText2" text="Green has 20 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenText3" text="Green has 30 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenText4" text="Green has 40 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenText5" text="Green has 50 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenText6" text="Green has 60 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenText7" text="Green has 70 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenWins" text="Green Has 80 Seconds On Hill One!" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <unique vars="mHill mStart mTick mTick2" />
   <Field mask="T3" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="43.54166666666667" z="42.29166666666667" w="21.180555555555557" d="21.25" h="4.5" r="1.25" cx="54.16666666666667" cz="52.91666666666667" angle="270" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
@@ -253,14 +253,14 @@ Teams are Green, Red, and Blue.&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <Distributor in="mTick2" out.0="@redText1" out.1="@redText2" out.2="@redText3" out.3="@redText4" out.4="@redText5" out.5="@redText6" out.6="@redText7" out.7="@redWins" restart="false" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redText1" text="&quot;Red has 10 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redText2" text="&quot;Red has 20 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redText3" text="&quot;Red has 30 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redText4" text="&quot;Red has 40 secondson hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redText5" text="&quot;Red has 50 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redText6" text="&quot;Red has 60 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redText7" text="&quot;Red has 70 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redWins" text="&quot;Red Has 80 Seconds On Hill One!&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redText1" text="Red has 10 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redText2" text="Red has 20 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redText3" text="Red has 30 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redText4" text="Red has 40 secondson hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redText5" text="Red has 50 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redText6" text="Red has 60 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redText7" text="Red has 70 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redWins" text="Red Has 80 Seconds On Hill One!" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <unique vars="mHill mStart mTick mTick2" />
   <Field mask="T6" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="43.54166666666667" z="42.29166666666667" w="21.25" d="21.25" h="4.5" r="1.25" cx="54.16666666666667" cz="52.91666666666667" angle="270" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
@@ -268,14 +268,14 @@ Teams are Green, Red, and Blue.&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <Distributor in="mTick2" out.0="@blueText1" out.1="@blueText2" out.2="@blueText3" out.3="@blueText4" out.4="@blueText5" out.5="@blueText6" out.6="@blueText7" out.7="@blueWins" restart="false" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@blueText1" text="&quot;Blue has 10 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@blueText2" text="&quot;Blue has 20 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@blueText3" text="&quot;blue has 30 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@blueText4" text="&quot;Blue has 40 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="blueText5" text="&quot;Blue has 50 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@blueText6" text="&quot;Blue has 60 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@blueText7" text="&quot;Blue has 70 seconds on hill one.&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" in="@blueWins" text="&quot;Blue Has 80 Seconds On Hill One!&quot;" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@blueText1" text="Blue has 10 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@blueText2" text="Blue has 20 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@blueText3" text="blue has 30 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@blueText4" text="Blue has 40 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="blueText5" text="Blue has 50 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@blueText6" text="Blue has 60 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@blueText7" text="Blue has 70 seconds on hill one." fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" in="@blueWins" text="Blue Has 80 Seconds On Hill One!" fill="#ffccff" frame="#000000" cx="54.16666666666667" cz="52.91666666666667" r="1.25" angle="270" extent="90" />
   <Teleporter group="-1" y="100" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#ffff00" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffff00" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <Teleporter shape="0" y="200" win="0" start="@start" activeRange="2000" mask="T2 + T4 + T5" fill="#ffff00" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
@@ -292,14 +292,14 @@ Teams are Green, Red, and Blue.&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <Distributor in="mTick2" out.0="@greenText12" out.1="@greenText22" out.2="@greenText32" out.3="@greenText42" out.4="@greenText52" out.5="@greenText62" out.6="@greenText72" out.7="@greenWins2" restart="false" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@greenText12" text="&quot;Green has 10 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@greenText22" text="&quot;Green has 20 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@greenText32" text="&quot;Green has 30 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@greenText42" text="&quot;Green has 40 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@greenText52" text="&quot;Green has 50 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@greenText62" text="&quot;Green has 60 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@greenText72" text="&quot;Green has 70 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@greenWins2" text="&quot;Green Has 80 Seconds On Hill Two!&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@greenText12" text="Green has 10 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@greenText22" text="Green has 20 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@greenText32" text="Green has 30 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@greenText42" text="Green has 40 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@greenText52" text="Green has 50 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@greenText62" text="Green has 60 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@greenText72" text="Green has 70 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@greenWins2" text="Green Has 80 Seconds On Hill Two!" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <unique vars="mHill mStart mTick mTick2" />
   <Field mask="T3" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="83.54166666666667" z="42.29166666666667" w="21.180555555555557" d="21.180555555555557" h="4.5" r="2.5" cx="74.16666666666667" cz="52.91666666666667" angle="0" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
@@ -307,14 +307,14 @@ Teams are Green, Red, and Blue.&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <Distributor in="mTick2" out.0="@redText12" out.1="@redText22" out.2="@redText32" out.3="@redText42" out.4="@redText52" out.5="@redText62" out.6="@redText72" out.7="@redWins2" restart="false" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@redText12" text="&quot;Red has 10 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@redText22" text="&quot;Red has 20 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@redText32" text="&quot;Red has 30 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@redText42" text="&quot;Red has 40 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@redText52" text="&quot;Red has 50 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@redText62" text="&quot;Red has 60 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@redText72" text="&quot;Red has 70 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@redWins2" text="&quot;Red Has 80 Seconds On Hill Two!&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@redText12" text="Red has 10 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@redText22" text="Red has 20 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@redText32" text="Red has 30 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@redText42" text="Red has 40 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@redText52" text="Red has 50 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@redText62" text="Red has 60 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@redText72" text="Red has 70 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@redWins2" text="Red Has 80 Seconds On Hill Two!" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <unique vars="mHill mStart mTick mTick2" />
   <Field mask="T6" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="83.54166666666667" z="42.29166666666667" w="21.25" d="21.25" h="4.5" r="2.5" cx="74.16666666666667" cz="52.91666666666667" angle="0" extent="90" />
   <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
@@ -322,20 +322,20 @@ Teams are Green, Red, and Blue.&quot;" />
   <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <Distributor in="mTick2" out.0="@blueText12" out.1="@blueText22" out.2="@blueText32" out.3="@blueText42" out.4="@blueText52" out.5="@blueText62" out.6="@blueText72" out.7="@blueWins2" restart="false" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@blueText12" text="&quot;Blue has 10 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@blueText22" text="&quot;Blue has 20 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@blueText32" text="&quot;blue has 30 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@blueText42" text="&quot;Blue has 40 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@blueText52" text="&quot;Blue has 50 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@blueText62" text="&quot;Blue has 60 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@blueText72" text="&quot;Blue has 70 seconds on hill two.&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
-  <Text showEveryone="true" in="@blueWins2" text="&quot;Blue Has 80 Seconds On Hill Two!&quot;" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@blueText12" text="Blue has 10 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@blueText22" text="Blue has 20 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@blueText32" text="blue has 30 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@blueText42" text="Blue has 40 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@blueText52" text="Blue has 50 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@blueText62" text="Blue has 60 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@blueText72" text="Blue has 70 seconds on hill two." fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
+  <Text showEveryone="true" in="@blueWins2" text="Blue Has 80 Seconds On Hill Two!" fill="#ffccff" frame="#000000" cx="74.16666666666667" cz="52.91666666666667" r="2.5" angle="0" extent="90" />
   <And in.0="@greenWins" in.1="@greenWins2" out="@greenWinsFinal" restart="false" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
   <And in.0="@redWins" in.1="@redWins2" out="@redWinsFinal" restart="false" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
   <And in.0="@blueWins" in.1="@blueWins2" out="@blueWinsFinal" restart="false" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
-  <Text showEveryone="true" in="@greenWinsFinal" text="&quot;Green Is King Of Both Hills!&quot;" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
-  <Text showEveryone="true" in="@redWinsFinal" text="&quot;Red Is King Of Both Hills!&quot;" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
-  <Text showEveryone="true" in="@blueWinsFinal" text="&quot;Blue Is King Of Both Hills!&quot;" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
+  <Text showEveryone="true" in="@greenWinsFinal" text="Green Is King Of Both Hills!" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
+  <Text showEveryone="true" in="@redWinsFinal" text="Red Is King Of Both Hills!" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
+  <Text showEveryone="true" in="@blueWinsFinal" text="Blue Is King Of Both Hills!" fill="#ff6633" frame="#000000" cx="10.972222222222223" cz="106.66666666666667" r="3.125" angle="270" extent="90" />
   <Ramp y="0" deltaY="0" fill="#222222" frame="#444444" x="71.66666666666667" z="52.91666666666667" w="5" d="30" h="0" r="2.5" angle="90" extent="180" />
   <Ramp y="0" deltaY="0" fill="#222222" frame="#444444" x="71.66666666666667" z="22.916666666666668" w="5" d="30" h="0" r="2.5" angle="90" extent="180" />
   <Ramp y="0" deltaY="2" fill="#222222" frame="#444444" x="74.16666666666667" z="52.91666666666667" w="2.5" d="30" h="0" r="2.5" angle="180" extent="180" />

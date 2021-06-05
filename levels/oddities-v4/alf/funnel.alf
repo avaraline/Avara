@@ -1,6 +1,6 @@
 <map>
-  <set information="&quot;Falling into the funnel is deadly.
-Goodies are only visible within 6 meters.&quot;" funnelAHeight="7.5" funnelBHeight="7.5" funnelSHeight="7.5" pitHeight="20" incHeight="funnelAHeight + funnelSHeight + funnelBHeight + pitHeight + 4" wallHeight="funnelAHeight + funnelSHeight + funnelBHeight + pitHeight + 5" goodyGrenades="100" goodyMissiles="100" goodyBoosters="100" goodyHeight="funnelBHeight + pitHeight + funnelAHeight / 2 + 2.5" goody2Height="funnelBHeight + pitHeight + funnelAHeight + funnelSHeight * .7 + 2" goodyYon="6" ballShape="bspSphere" ballScale="0.2" ballHeight="incHeight + 10" defaultLives="5" wallYon="0.1" />
+  <set information="Falling into the funnel is deadly.
+Goodies are only visible within 6 meters." funnelAHeight="7.5" funnelBHeight="7.5" funnelSHeight="7.5" pitHeight="20" incHeight="funnelAHeight + funnelSHeight + funnelBHeight + pitHeight + 4" wallHeight="funnelAHeight + funnelSHeight + funnelBHeight + pitHeight + 5" goodyGrenades="100" goodyMissiles="100" goodyBoosters="100" goodyHeight="funnelBHeight + pitHeight + funnelAHeight / 2 + 2.5" goody2Height="funnelBHeight + pitHeight + funnelAHeight + funnelSHeight * .7 + 2" goodyYon="6" ballShape="bspSphere" ballScale="0.2" ballHeight="incHeight + 10" defaultLives="5" wallYon="0.1" />
   <SkyColor fill="#000000" frame="#dd0000" />
   <GroundColor fill="#000000" frame="#dd0000" />
   <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="6.458333333333334" cz="27.083333333333336" r="1.875" angle="0" extent="90" />

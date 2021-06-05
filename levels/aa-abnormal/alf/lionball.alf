@@ -82,13 +82,13 @@
   <Incarnator y="30" team="2" fill="#cc3300" frame="#000000" cx="115" cz="190" r="1.25" angle="180" extent="90" />
   <Incarnator y="30" team="2" fill="#008800" frame="#000000" cx="156.31944444444446" cz="237.98611111111114" r="3.9583333333333286" angle="90" extent="90" />
   <Incarnator y="30" team="2" fill="#008800" frame="#000000" cx="200" cz="191.52777777777777" r="3.9583333333333286" angle="90" extent="90" />
-  <set designer="&quot;Phy (jay9560@uidaho.edu)&quot;" information="&quot;10 minutes, 200 lives. Or, score 10 points, and
+  <set designer="Phy (jay9560@uidaho.edu)" information="10 minutes, 200 lives. Or, score 10 points, and
  you're automatically the winner!
   Music can be turned off in the sound options.
  
 Yellow shoots for Green team's goal.
  Green Shoots for Yellow team's goal. 
- Simple yes?&quot;" wallHeight="2" platHeight="3" plat2="1" level2="wallHeight + platHeight" level3="level2 + plat2" rampThickness="0.25" defaultLives="200" goodyY="7 -baseHeight" upVector="0.15" inVector="0.3" gameLength="9375" />
+ Simple yes?" wallHeight="2" platHeight="3" plat2="1" level2="wallHeight + platHeight" level3="level2 + plat2" rampThickness="0.25" defaultLives="200" goodyY="7 -baseHeight" upVector="0.15" inVector="0.3" gameLength="9375" />
   <Timer wait="gameLength" in="@start" out="@gameEnds" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="270" extent="90" />
   <Teleporter y="-20" activeRange="1000" yon="0.01" start="@gameEnds" win="10" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="270" extent="90" />
   <Teleporter y="-20" activeRange="1000" yon="0.01" start="@gameEnds" win="10" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="270" extent="90" />
@@ -229,10 +229,10 @@ Yellow shoots for Green team's goal.
   <Sound y="5" isPlaced="false" isAmbient="false" isMusic="true" sound="1502" loopCount="900" volume.0="1" volume.1="1" start="@start" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
   <Sound y="5" isPlaced="false" isAmbient="false" sound="1503" volume.0="1" volume.1="1" start="@yellowscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
   <Sound y="5" isPlaced="false" isAmbient="false" sound="1503" volume.0="1" volume.1="1" start="@greenscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
-  <Text showEveryone="true" text="&quot;Green Team Scores!&quot;" in="@greenscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
-  <Text showEveryone="true" text="&quot;Yellow Team Scores!&quot;" in="@yellowscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
-  <Text showEveryone="true" text="&quot;Green Team Wins&quot;" in="@greenwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
-  <Text showEveryone="true" text="&quot;Yellow Team Wins&quot;" in="@yellowwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
+  <Text showEveryone="true" text="Green Team Scores!" in="@greenscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
+  <Text showEveryone="true" text="Yellow Team Scores!" in="@yellowscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
+  <Text showEveryone="true" text="Green Team Wins" in="@greenwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
+  <Text showEveryone="true" text="Yellow Team Wins" in="@yellowwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
   <Timer in="@yellowwin" out="@gameOver" wait="50" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
   <Distributor in.0="@g10" out.0="@greenwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />
   <Distributor in.0="@y10" out.0="@yellowwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="180" extent="180" />

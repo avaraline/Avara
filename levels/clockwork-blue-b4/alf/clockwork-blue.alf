@@ -37,7 +37,7 @@
   <Goody shape="bspMissile" y="2" speed="5" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="42.708333333333336" r="1.875" angle="180" extent="90" />
   <Teleporter group="-1" y="-200" activeRange="100" destGroup="@die" shape="0" volume="0" fill="#ffffff" frame="#000000" cx="52.01388888888889" cz="79.09722222222223" r="2.5" angle="0" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="52.01388888888889" cz="79.09722222222223" r="2.5" angle="0" extent="90" />
-  <set designer="&quot;Poverty - mv10493@www.cedarnet.org&quot;" information="&quot;Give them the old ultra-violence.&quot;" />
+  <set designer="Poverty - mv10493@www.cedarnet.org" information="Give them the old ultra-violence." />
   <Wall fill="#555555" frame="#000000" x="6.736111111111112" z="118.68055555555556" w="84.51388888888889" d="5.625" h="5" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="115.90277777777779" r="1.875" angle="180" extent="90" />

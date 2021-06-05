@@ -3,14 +3,14 @@
   <set targDoor="targ1" targGoal="targ2" ammoSnipeTime="15 * 6" ammoSnipeQuant="3" ammoMainTime="15 * 15" ammoMainQuant="6" cheaterWatch="scoutMask" cheaterBase="fortWallY -1" cheaterHeight="6" cheaterForce="3" clampSpeed="100 / 15" embShield="26" embY="120" />
   <SkyColor fill="#3366ff" frame="#99ccff" />
   <GroundColor fill="#663300" frame="#99ccff" />
-  <set information="&quot;Yellow and blue teams.
+  <set information="Yellow and blue teams.
 Enter the other team's fort, destroy their generator, and return to your fort to win.
 Oh, and defend your fort too.
-See the read me file for explanations of the switches.&quot;" />
-  <Text in="@BlueKilled" showEveryone="true" text="&quot;Blue generator destroyed.&quot;" fill="#663300" frame="#99ccff" cx="2.1875" cz="7.569444444444445" r="2.1875" angle="90" extent="180" />
-  <Text in="@YellowKilled" showEveryone="true" text="&quot;Yellow generator destroyed.&quot;" fill="#663300" frame="#99ccff" cx="2.1875" cz="7.569444444444445" r="2.1875" angle="90" extent="180" />
-  <Text in="@YellowWin" showEveryone="true" wait="3" text="&quot;Yellow team: return to base.&quot;" fill="#663300" frame="#99ccff" cx="2.1875" cz="7.569444444444445" r="2.1875" angle="90" extent="180" />
-  <Text in="@BlueWin" showEveryone="true" wait="3" text="&quot;Blue team: return to base.&quot;" fill="#663300" frame="#99ccff" cx="2.1875" cz="7.569444444444445" r="2.1875" angle="90" extent="180" />
+See the read me file for explanations of the switches." />
+  <Text in="@BlueKilled" showEveryone="true" text="Blue generator destroyed." fill="#663300" frame="#99ccff" cx="2.1875" cz="7.569444444444445" r="2.1875" angle="90" extent="180" />
+  <Text in="@YellowKilled" showEveryone="true" text="Yellow generator destroyed." fill="#663300" frame="#99ccff" cx="2.1875" cz="7.569444444444445" r="2.1875" angle="90" extent="180" />
+  <Text in="@YellowWin" showEveryone="true" wait="3" text="Yellow team: return to base." fill="#663300" frame="#99ccff" cx="2.1875" cz="7.569444444444445" r="2.1875" angle="90" extent="180" />
+  <Text in="@BlueWin" showEveryone="true" wait="3" text="Blue team: return to base." fill="#663300" frame="#99ccff" cx="2.1875" cz="7.569444444444445" r="2.1875" angle="90" extent="180" />
   <set wallHeight="5" />
   <unique vars="mKill mReset" />
   <Wall fill="#006600" frame="#000000" x="130.90277777777777" z="71.25" w="0.625" d="3.75" h="0" />

@@ -59,7 +59,7 @@
   <And in="@start" out="gShow" fill="#660066" frame="#000000" cx="32.53472222222222" cz="23.15972222222222" r="1.2847222222222232" angle="0" extent="90" />
   <Timer in="gTaken" wait="300" out="gShow" fill="#660066" frame="#000000" cx="32.53472222222222" cz="23.15972222222222" r="1.2847222222222232" angle="0" extent="90" />
   <Goody y="8.7" shape="bspMissile" yon="35" missiles="6" start="gShow" out="gTaken" fill="#660066" frame="#000000" cx="32.53472222222222" cz="23.15972222222222" r="1.2847222222222232" angle="0" extent="90" />
-  <set designer="&quot;harlequin - alext@dc.usweb.com&quot;" information="&quot;The Lord giveth and the Lord taketh away...&quot;" />
+  <set designer="harlequin - alext@dc.usweb.com" information="The Lord giveth and the Lord taketh away..." />
   <SkyColor fill="#0066ff" frame="#ccffff" />
   <GroundColor fill="#000000" frame="#000000" />
   <Teleporter group="-1" y="-30" activeRange="125" deadRange="100" destGroup="@recenter" shape="0" fill="#ff0099" frame="#000000" cx="62.152777777777786" cz="52.361111111111114" r="2.5" angle="180" extent="90" />

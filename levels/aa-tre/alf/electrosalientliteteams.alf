@@ -1,7 +1,7 @@
 <map>
-  <set designer="&quot;design - Malkavian, teamwork - Hybrid&quot;" information="&quot;Electrosalient(liteteams):
+  <set designer="design - Malkavian, teamwork - Hybrid" information="Electrosalient(liteteams):
 Reviled by nature, claustrophic wasteland stretching as far as the eye can see.
-Each team is collectively given the sum of the lives of the opposing team.  Teams are red and green.&quot;" ambient="0.4" light.0.i="0.9" light.0.a="45" light.0.b="20" light.1.i="0.45" light.1.a="20" light.1.b="200" light.2.i="0.1" light.2.a="0" light.2.b="0" />
+Each team is collectively given the sum of the lives of the opposing team.  Teams are red and green." ambient="0.4" light.0.i="0.9" light.0.a="45" light.0.b="20" light.1.i="0.45" light.1.a="20" light.1.b="200" light.2.i="0.1" light.2.a="0" light.2.b="0" />
   <SkyColor fill="#a69b7c" frame="#333028" />
   <GroundColor fill="#222827" frame="#2b3331" />
   <Ramp y="0" thickness="0" deltaY="2" fill="#2b3331" frame="#000000" x="106.45833333333334" z="76.45833333333334" w="10" d="10" h="0" r="7.013888888888893" angle="355" extent="10" />
@@ -179,15 +179,15 @@ Each team is collectively given the sum of the lives of the opposing team.  Team
   <Ramp y="8" thickness="0" deltaY="0" fill="#8e9e9c" frame="#000000" x="140.20833333333334" z="90.20833333333334" w="2.5" d="2.5" h="0" r="4.6875" angle="175" extent="10" />
   <Ramp y="8" thickness="0" deltaY="0" fill="#98a8a6" frame="#000000" x="140.83333333333334" z="90.83333333333334" w="1.25" d="1.25" h="0" r="4.6875" angle="175" extent="10" />
   <Ramp y="8" thickness="0" deltaY="0" fill="#687a77" frame="#000000" x="136.45833333333334" z="90.20833333333334" w="3.75" d="2.5" h="0" r="7.013888888888893" angle="265" extent="10" />
-  <Text text="&quot;Red team wins!!!&quot;" in="@team1Lose" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Green team has 1 life left!&quot;" in="@team1Life1" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Green team has 2 lives left.&quot;" in="@team1Life2" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Green team has 3 lives left.&quot;" in="@team1Life3" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Green team has 4 lives left.&quot;" in="@team1Life4" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Green team has 5 lives left.&quot;" in="@team1Life5" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Green team has 6 lives left.&quot;" in="@team1Life6" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Green team has 7 lives left.&quot;" in="@team1Life7" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Green team has 8 lives left.&quot;" in="@team1Life8" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team wins!!!" in="@team1Lose" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team has 1 life left!" in="@team1Life1" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team has 2 lives left." in="@team1Life2" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team has 3 lives left." in="@team1Life3" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team has 4 lives left." in="@team1Life4" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team has 5 lives left." in="@team1Life5" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team has 6 lives left." in="@team1Life6" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team has 7 lives left." in="@team1Life7" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team has 8 lives left." in="@team1Life8" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="309.27083333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
   <Timer in="@start" wait="10" out="@endEnter" fill="#ccffcc" frame="#000000" cx="325.20833333333337" cz="462.56944444444446" r="1.25" angle="180" extent="90" />
   <Distributor in="@team1Enter" out.0="@team1Enter1" out.1="@team1Enter2" out.2="@team1Enter3" fill="#ccffcc" frame="#000000" cx="343.33333333333337" cz="462.56944444444446" r="1.25" angle="180" extent="90" />
   <And in="@team1Enter1" out.0="@team1Block1Up" out.1="@team1Block2Up" out.2="@team1Block3Up" fill="#ccffcc" frame="#000000" cx="343.33333333333337" cz="462.56944444444446" r="1.25" angle="180" extent="90" />
@@ -217,15 +217,15 @@ Each team is collectively given the sum of the lives of the opposing team.  Team
   <WallDoor hitMsg="@team1Death3Player" fill="#66ff66" frame="#000000" x="338.95833333333337" z="485.69444444444446" w="1.875" d="1.25" h="2" r="1.25" cx="333.95833333333337" cz="486.31944444444446" angle="225" extent="90" />
   <Guard y="1" fireMsg="@team1Fire1pt3" watch="0" shield="10000" fill="#ccffcc" frame="#000000" cx="333.95833333333337" cz="486.59722222222223" r="1.25" angle="225" extent="90" />
   <Guard y="1" fireMsg="@team1Fire1pt2" watch="0" shield="10000" fill="#ccffcc" frame="#000000" cx="333.95833333333337" cz="485.97222222222223" r="1.25" angle="225" extent="90" />
-  <Text text="&quot;Green team wins!!!&quot;" in="@team3Lose" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Red team has 1 life left!&quot;" in="@team3Life1" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Red team has 2 lives left.&quot;" in="@team3Life2" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Red team has 3 lives left.&quot;" in="@team3Life3" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Red team has 4 lives left.&quot;" in="@team3Life4" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Red team has 5 lives left.&quot;" in="@team3Life5" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Red team has 6 lives left.&quot;" in="@team3Life6" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Red team has 7 lives left.&quot;" in="@team3Life7" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
-  <Text text="&quot;Red team has 8 lives left.&quot;" in="@team3Life8" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Green team wins!!!" in="@team3Lose" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team has 1 life left!" in="@team3Life1" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team has 2 lives left." in="@team3Life2" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team has 3 lives left." in="@team3Life3" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team has 4 lives left." in="@team3Life4" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team has 5 lives left." in="@team3Life5" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team has 6 lives left." in="@team3Life6" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team has 7 lives left." in="@team3Life7" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
+  <Text text="Red team has 8 lives left." in="@team3Life8" showEveryone="true" restart="0" fill="#ccccff" frame="#000000" cx="387.39583333333337" cz="463.50694444444446" r="0.9375" angle="0" extent="360" />
   <Distributor in="@team3Enter" out.0="@team3Enter1" out.1="@team3Enter2" out.2="@team3Enter3" fill="#ccffcc" frame="#000000" cx="421.45833333333337" cz="462.56944444444446" r="1.25" angle="180" extent="90" />
   <And in="@team3Enter1" out.0="@team3Block1Up" out.1="@team3Block2Up" out.2="@team3Block3Up" fill="#ccffcc" frame="#000000" cx="421.45833333333337" cz="462.56944444444446" r="1.25" angle="180" extent="90" />
   <And in="@team3Enter2" out.0="@team3Block4Up" out.1="@team3Block5Up" out.2="@team3Block6Up" fill="#ccffcc" frame="#000000" cx="421.45833333333337" cz="462.56944444444446" r="1.25" angle="180" extent="90" />

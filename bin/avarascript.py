@@ -187,7 +187,7 @@ class String(ScriptObject):
         self.text = tokens[0].strip()
 
     def __str__(self):
-        return '"{}"'.format(self.text.replace('"', '""'))
+        return self.text.replace('"', '""')
 
 
 class Number(ScriptObject):
@@ -213,6 +213,12 @@ class Declaration(ScriptObject):
 
     @property
     def value(self):
+        if (
+            self.name in ("designer", "information", "text")
+            and len(self.expr) == 1
+            and not isinstance(self.expr[0], String)
+        ):
+            return "$" + str(self.expr[0])
         parts = []
         for t in self.expr:
             parts.append(str(t))

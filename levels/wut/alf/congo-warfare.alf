@@ -106,7 +106,7 @@
   <set wallTraction="0.75" wallFriction="0.75" traction="defaultTraction" friction="defaultFriction" ambient=".1" light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <GroundColor fill="#1c2204" frame="#547714" />
   <SkyColor n="1000" verticalRangeMax="2000" fill="#2a3306" frame="#1c2204" />
-  <set groundStepSound="2002" designer="&quot;The Sphinx&quot;" information="&quot;Last man standing.&quot;" wallYon="0.01" wallHeight=".15" />
+  <set groundStepSound="2002" designer="The Sphinx" information="Last man standing." wallYon="0.01" wallHeight=".15" />
   <Wall fill="#b8d6ff" frame="#000000" x="232.36111111111111" z="549.2361111111111" w="12.5" d="12.5" h="0" y=".75" />
   <set wallYon="0" />
   <Goody shape="1004" scale="4" y=".75" speed="0" start="@taken7" stop="@show7" fill="#444129" frame="#000000" cx="238.5763888888889" cz="555.4513888888889" r="2.0486111111111" angle="90" extent="90" />

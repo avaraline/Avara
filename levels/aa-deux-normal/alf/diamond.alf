@@ -19,7 +19,7 @@
   <And in="@start" out="mShow" fill="#002200" frame="#000000" cx="91.77083333333334" cz="111.42361111111111" r="1.2847222222222214" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="100" fill="#002200" frame="#000000" cx="91.77083333333334" cz="111.42361111111111" r="1.2847222222222214" angle="180" extent="90" />
   <Goody shape="bspMissile" y="2.5" speed="4" missiles="2" start="mShow" out="mTaken" fill="#002200" frame="#000000" cx="91.77083333333334" cz="111.42361111111111" r="1.2847222222222214" angle="180" extent="90" />
-  <set designer="&quot;Ryan S. &lt;Seven&gt; sommersl@destiny.esd105.wednet.edu&quot;" information="&quot;Thpppt!&quot;" />
+  <set designer="Ryan S. &lt;Seven&gt; sommersl@destiny.esd105.wednet.edu" information="Thpppt!" />
   <SkyColor fill="#660066" frame="#ffccff" />
   <GroundColor fill="#003333" frame="#000055" />
   <set gravity=".25" maxStartGrenades="0" maxStartMissiles="1" defaultLives="5" missilePower="24" missileAcceleration="0.5" />

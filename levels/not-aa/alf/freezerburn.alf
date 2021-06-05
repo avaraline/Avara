@@ -332,9 +332,9 @@
   <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="26 * 5" destGroup="@recenter" shape="0" spin="false" fill="#ffffff" frame="#000000" cx="82.36111111111111" cz="76.73611111111111" r="2.5" angle="180" extent="90" />
   <Teleporter y="15" shape="0" group="@recenter" spin="false" fill="#ffffff" frame="#000000" cx="82.36111111111111" cz="76.73611111111111" r="2.5" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="82.36111111111111" cz="76.73611111111111" r="2.5" angle="180" extent="90" />
-  <set designer="&quot;silverfox &lt;ryan@avara.org&gt;&quot;" information="&quot;Many lives have been lost in this
+  <set designer="silverfox &lt;ryan@avara.org&gt;" information="Many lives have been lost in this
 gladitorial arena.  Now it is time for
-you to try your luck.&quot;" />
+you to try your luck." />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" fill="#eedcff" frame="#eedcff" cx="104.86111111111111" cz="77.36111111111111" r="1.25" angle="0" extent="90" />
   <Timer in="rTaken" out="rShow" wait="100" fill="#eedcff" frame="#eedcff" cx="104.86111111111111" cz="77.36111111111111" r="1.25" angle="0" extent="90" />

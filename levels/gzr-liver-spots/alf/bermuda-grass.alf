@@ -1,6 +1,6 @@
 <map>
-  <set designer="&quot;The Head &lt;tanderso@auc.trw.com&gt;&quot;" information="&quot;Run away to face the center.
-Back away to get the missiles.&quot;" defaultLives="3" missilePower="1.8" missileAcceleration="0.3" startY="9" />
+  <set designer="The Head &lt;tanderso@auc.trw.com&gt;" information="Run away to face the center.
+Back away to get the missiles." defaultLives="3" missilePower="1.8" missileAcceleration="0.3" startY="9" />
   <set grenDelay="125" numGren="8" />
   <set missDelay="200" numMiss="4" range="96" wallHeight="8" />
   <Teleporter group="@centerRed" y="2 * startY" activeRange="2000" deadRange="range" destGroup="@recenterRed" shape="0" fill="#ff0000" frame="#000000" cx="31.944444444444446" cz="19.166666666666664" r="93.95833333333334" angle="90" extent="60" />

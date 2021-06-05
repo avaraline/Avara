@@ -1,5 +1,5 @@
 <map>
-  <set wallHeight="0" baseHeight="75" designer="&quot;Plastic Chicken&quot;" information="&quot;Based on a scene from the movie &quot;&quot;TRON.&quot;&quot;  Use the ball to knock out the opponent's squares.  Catch the ball before it lands to prevent your squares from falling.  Red and Cyan.  Up to four players.&quot;" hull.0="1006" hull.1="hull[0]" hull.2="hull[0]" ambient=".8" defaultLives="1" gravity=".6" />
+  <set wallHeight="0" baseHeight="75" designer="Plastic Chicken" information="Based on a scene from the movie &quot;&quot;TRON.&quot;&quot;  Use the ball to knock out the opponent's squares.  Catch the ball before it lands to prevent your squares from falling.  Red and Cyan.  Up to four players." hull.0="1006" hull.1="hull[0]" hull.2="hull[0]" ambient=".8" defaultLives="1" gravity=".6" />
   <SkyColor fill="#000000" frame="#000000" />
   <GroundColor fill="#000000" frame="#000000" />
   <Teleporter shape="false" start="@winTeam" win="1000" activeRange="2000" fill="#339966" frame="#000000" cx="3.75" cz="9.375" r="1.875" angle="270" extent="90" />

@@ -172,5 +172,5 @@
   <And in="@start" out="mShow" fill="#eddbff" frame="#ffffff" cx="165.90277777777777" cz="154.65277777777777" r="1.875" angle="0" extent="90" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#eddbff" frame="#ffffff" cx="165.90277777777777" cz="154.65277777777777" r="1.875" angle="0" extent="90" />
   <Goody y="10" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#eddbff" frame="#ffffff" cx="165.90277777777777" cz="154.65277777777777" r="1.875" angle="0" extent="90" />
-  <set information="rSilta" />
+  <set information="$rSilta" />
 </map>

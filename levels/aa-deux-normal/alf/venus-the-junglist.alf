@@ -32,9 +32,9 @@ ambient  =  .5
 light[0] . i = 0.4light [0] . a  =  20light [0] . b = 90 
 light[1] . i = 0.1light [1] . a  =  45light [1] . b = 180</script>
   <Incarnator y="15" fill="#0000dd" frame="#ff0000" cx="88.81944444444444" cz="87.91666666666667" r="1.25" angle="225" extent="270" />
-  <set timeLimit="300" defaultLives="100" grenadePower="2.25" missilePower="1.75" missileTurnRate="0.2" missileAcceleration="0.4" maxStartGrenades="12" maxStartMissiles="4" designer="&quot;blassty &lt;r-reyes@neiu.edu&gt;&quot;" information="&quot;ruff in da jungle bizness
+  <set timeLimit="300" defaultLives="100" grenadePower="2.25" missilePower="1.75" missileTurnRate="0.2" missileAcceleration="0.4" maxStartGrenades="12" maxStartMissiles="4" designer="blassty &lt;r-reyes@neiu.edu&gt;" information="ruff in da jungle bizness
 venusian spears are deadly. use trees for cover.
-5 minute time limit...kill as many as you can.&quot;" />
+5 minute time limit...kill as many as you can." />
   <set gameLength="4687" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#ffffff" frame="#000000" cx="1.7361111111111112" cz="138.19444444444446" r="1.25" angle="270" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="1.7361111111111112" cz="138.19444444444446" r="1.25" angle="270" extent="90" />

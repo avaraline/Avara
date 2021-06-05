@@ -1,8 +1,8 @@
 <map>
-  <set information="&quot;Enter building.
+  <set information="Enter building.
 Destroy reactor shields.
 Get out.
-One player only.&quot;" hull.2="mediumHull" Floor1Height="5" Floor2Height="10" wallHeight="Floor1Height" Floor2Base="Floor1Height + 1" defaultLives="1" BlastShield="30" WallMass="100" WallGrav="0.12" WallAccel="0.95" WallShot="1" WallStart="@ReactorBlow" blastBeforeTimer="15" blastBeforeRange="5" blastAfterTimer="60" blastAfterRange="7" minePower="17" />
+One player only." hull.2="mediumHull" Floor1Height="5" Floor2Height="10" wallHeight="Floor1Height" Floor2Base="Floor1Height + 1" defaultLives="1" BlastShield="30" WallMass="100" WallGrav="0.12" WallAccel="0.95" WallShot="1" WallStart="@ReactorBlow" blastBeforeTimer="15" blastBeforeRange="5" blastAfterTimer="60" blastAfterRange="7" minePower="17" />
   <Counter in="@ShieldOff" n="2" restart="false" out.0="@CoreWarning" out.1="@CountdownTick" />
   <Timer in="@CountdownTick" wait="58" out="@CountdownTick" />
   <Distributor in="@CountdownTick" restart="false" out.0="@CText9" out.1="@CText8" out.2="@CText7" out.3="@CText6" out.4="@CText5" out.5="@CText4" out.6="@CText3" out.7="@CText2" out.8="@CText1" />
@@ -144,15 +144,15 @@ One player only.&quot;" hull.2="mediumHull" Floor1Height="5" Floor2Height="10" w
   <Goody shape="bspMissionComplete" start="@Won" stop="@WinOn" scale="4" speed="6" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
   <And in="@ReactorBlow" out="@WinOn" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
   <Timer in="@Won" wait="6 * 15" out="@WinOn" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CoreWarning" showEveryone="true" text="&quot;REACTOR CORE SHIELD FAILURE!&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText9" showEveryone="true" text="&quot;Core meltdown in 36 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText8" showEveryone="true" text="&quot;Core meltdown in 32 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText7" showEveryone="true" text="&quot;Core meltdown in 28 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText6" showEveryone="true" text="&quot;Core meltdown in 24 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText5" showEveryone="true" text="&quot;Core meltdown in 20 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText4" showEveryone="true" text="&quot;Core meltdown in 16 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText3" showEveryone="true" text="&quot;Core meltdown in 12 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText2" showEveryone="true" text="&quot;Core meltdown in 08 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
-  <Text in="@CText1" showEveryone="true" text="&quot;Core meltdown in 04 seconds.&quot;" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CoreWarning" showEveryone="true" text="REACTOR CORE SHIELD FAILURE!" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText9" showEveryone="true" text="Core meltdown in 36 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText8" showEveryone="true" text="Core meltdown in 32 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText7" showEveryone="true" text="Core meltdown in 28 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText6" showEveryone="true" text="Core meltdown in 24 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText5" showEveryone="true" text="Core meltdown in 20 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText4" showEveryone="true" text="Core meltdown in 16 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText3" showEveryone="true" text="Core meltdown in 12 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText2" showEveryone="true" text="Core meltdown in 08 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
+  <Text in="@CText1" showEveryone="true" text="Core meltdown in 04 seconds." fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
   <Counter in="@BarrierGDead" n="2" out="@BarrierGDead2" fill="#000000" frame="#000000" cx="90.20833333333334" cz="54.51388888888889" r="2.5" angle="180" extent="90" />
 </map>

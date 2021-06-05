@@ -93,26 +93,26 @@
   <Timer in.0="@greenwin" in.1="@yellowwin" in.2="@redwin" wait="15" out.0="@greenwin" out.1="@yellowwin" out.2="@redwin" fill="#f6fffb" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
   <Field visible="false" watch="playerMask" mask="T3" start="@secondtimer" stop="@redstop" enter="@redenter" fill="#ff070b" frame="#000000" x="59.79166666666667" z="72.36111111111111" w="7.916666666666671" d="7.291666666666671" h="6.625" r="1.6666666666666643" cx="200.20833333333334" cz="105.625" angle="270" extent="90" />
   <unique vars="m10scds m20scds m30scds m40scds m50scds" />
-  <Text in="m10scds" text="&quot;Red team has 10 seconds!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m20scds" text="&quot;Red team has 20 seconds!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m30scds" text="&quot;Red team has 30 seconds!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m40scds" text="&quot;Red team has 40 seconds!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m50scds" text="&quot;Red team wins!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m10scds" text="Red team has 10 seconds!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m20scds" text="Red team has 20 seconds!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m30scds" text="Red team has 30 seconds!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m40scds" text="Red team has 40 seconds!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m50scds" text="Red team wins!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
   <Distributor in="@rednotify" out.0="m10scds" out.1="m20scds" out.2="m30scds" out.3="m40scds" out.4="m50scds" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
   <unique vars="m10scds m20scds m30scds m40scds m50scds" />
-  <Text in="m10scds" text="&quot;Yellow team has 10 seconds!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m20scds" text="&quot;Yellow team has 20 seconds!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m30scds" text="&quot;Yellow team has 30 seconds!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m40scds" text="&quot;Yellow team has 40 seconds!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m50scds" text="&quot;Yellow team wins!&quot;" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m10scds" text="Yellow team has 10 seconds!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m20scds" text="Yellow team has 20 seconds!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m30scds" text="Yellow team has 30 seconds!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m40scds" text="Yellow team has 40 seconds!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m50scds" text="Yellow team wins!" showEveryone="true" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
   <Distributor in="@yellownotify" out.0="m10scds" out.1="m20scds" out.2="m30scds" out.3="m40scds" out.4="m50scds" fill="#ff070b" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
   <Field visible="false" watch="playerMask" mask="T2" start="@secondtimer" stop="@yellowstop" enter="@yellowenter" fill="#fbff0c" frame="#000000" x="59.79166666666667" z="72.36111111111111" w="7.916666666666671" d="7.291666666666671" h="6.625" r="1.6666666666666643" cx="200.20833333333334" cz="105.625" angle="270" extent="90" />
   <unique vars="m10scds m20scds m30scds m40scds m50scds" />
-  <Text in="m10scds" text="&quot;Green team has 10 seconds!&quot;" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m20scds" text="&quot;Green team has 20 seconds!&quot;" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m30scds" text="&quot;Green team has 30 seconds!&quot;" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m40scds" text="&quot;Green team has 40 seconds!&quot;" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
-  <Text in="m50scds" text="&quot;Green team wins!&quot;" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m10scds" text="Green team has 10 seconds!" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m20scds" text="Green team has 20 seconds!" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m30scds" text="Green team has 30 seconds!" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m40scds" text="Green team has 40 seconds!" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
+  <Text in="m50scds" text="Green team wins!" showEveryone="true" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
   <Distributor in="@greennotify" out.0="m10scds" out.1="m20scds" out.2="m30scds" out.3="m40scds" out.4="m50scds" fill="#fbff0c" frame="#000000" cx="200.20833333333334" cz="105.625" r="1.6666666666666643" angle="270" extent="90" />
   <Field visible="false" watch="playerMask" mask="T1" start="@secondtimer" stop="@greenstop" enter="@greenenter" fill="#00ff0c" frame="#000000" x="59.79166666666667" z="72.36111111111111" w="7.916666666666671" d="7.291666666666671" h="6.625" r="1.6666666666666643" cx="200.20833333333334" cz="105.625" angle="270" extent="90" />
   <Incarnator mask="T3" y="0" fill="#ff070b" frame="#000000" cx="147.08333333333334" cz="174.5138888888889" r="1.6666666666666714" angle="90" extent="90" />
@@ -136,10 +136,10 @@
   <Wall fill="#996600" frame="#444444" x="59.375" z="79.375" w="8.75" d="21.25" h="0" />
   <set wallHeight="0" wallYon="0" />
   <Wall fill="#996600" frame="#444444" x="68.125" z="71.875" w="20" d="7.5" h="0" />
-  <set designer="&quot;Edgar Hons&quot;" information="&quot;Cool, a KOTH level that I can relate with
+  <set designer="Edgar Hons" information="Cool, a KOTH level that I can relate with
 
 Red, Green, and Yellow only BITCH!
-Stay in Center square for as long as possible before dying&quot;" />
+Stay in Center square for as long as possible before dying" />
   <Walker team="t1" fill="#996600" frame="#000000" cx="11.25" cz="41.31944444444444" r="6.388888888888889" angle="270" extent="90" />
   <Walker team="t1" fill="#996600" frame="#000000" cx="46.25" cz="8.194444444444445" r="6.388888888888889" angle="270" extent="90" />
   <Walker team="t2" fill="#996600" frame="#000000" cx="11.25" cz="123.19444444444446" r="6.388888888888893" angle="270" extent="90" />

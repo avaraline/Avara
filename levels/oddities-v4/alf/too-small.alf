@@ -7,7 +7,7 @@
   <SkyColor fill="#777777" frame="#00ccff" />
   <GroundColor fill="#008800" frame="#000000" />
   <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="26.73611111111111" cz="4.236111111111112" r="1.875" angle="0" extent="90" />
-  <set information="&quot;This level uses Random Incarnation, so don't bother trying to memorize the order.&quot;" />
+  <set information="This level uses Random Incarnation, so don't bother trying to memorize the order." />
   <Guard speed="100" shotPower="10" freq="0" shield="-1" y="wallHeight + 1" fill="#000000" frame="#ffffff" cx="20.48611111111111" cz="31.111111111111114" r="1.25" angle="0" extent="90" />
   <Incarnator start="@inc[1]on" stop="@inc[1]off" y="0" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
   <Incarnator start="@inc[2]on" stop="@inc[2]off" y="3" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />

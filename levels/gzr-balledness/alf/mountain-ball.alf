@@ -1,5 +1,5 @@
 <map>
-  <set designer="&quot;Cowboy - jmcald@destiny.esd105.wednet.edu&quot;" information="&quot;Get the ball to the top of the mountain. 5000 points each time. Game is 5 minutes. A player is allowed a total of 10 seconds on top after which teleport occurs. Special thanks to Taz!, and Gzr friends for beta testing and ideas.&quot;" defaultLives="300" missilePower="2" missileAcceleration="0.3" startY="9" />
+  <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Get the ball to the top of the mountain. 5000 points each time. Game is 5 minutes. A player is allowed a total of 10 seconds on top after which teleport occurs. Special thanks to Taz!, and Gzr friends for beta testing and ideas." defaultLives="300" missilePower="2" missileAcceleration="0.3" startY="9" />
   <set grenDelay="125" numGren="8" />
   <set missDelay="200" numMiss="4" fieldVis="false" zPower=".5" xPower=".5" yPower=".05" grenH="2" grenW="50" hWall="4.5" startHeight="30" />
   <set kTimeTele="10" kTimeWarning="5" teleY="3 * hWall -2" teleRange="8.75" dohVolume=".5" />
@@ -18,7 +18,7 @@
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ffff33" frame="#000000" />
-  <Text sound="kSnText" volume="kTextVolume" in="@basket" showEveryone="true" text="&quot;A Score!&quot;" fill="#00ccff" frame="#000000" cx="110.625" cz="28.88888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="kTextVolume" in="@basket" showEveryone="true" text="A Score!" fill="#00ccff" frame="#000000" cx="110.625" cz="28.88888888888889" r="3.75" angle="60" extent="60" />
   <Timer in="@start" out="@offOutside" wait="5" fill="#00ccff" frame="#000000" cx="110.625" cz="28.88888888888889" r="3.75" angle="60" extent="60" />
   <Timer in="@start" out="@mountainTeles" wait="5" fill="#00ccff" frame="#000000" cx="110.625" cz="28.88888888888889" r="3.75" angle="60" extent="60" />
   <unique vars="mShow mTaken" />
@@ -189,18 +189,18 @@
   <Counter in="@add1Purple" n="kTimeWarning" out="@warningPurple" restart="true" fill="#ffff00" frame="#000000" cx="345.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
   <Counter in="@add1Green" n="kTimeWarning" out="@warningGreen" restart="true" fill="#ffff00" frame="#000000" cx="345.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
   <Distributor in="@warningYellow" out.0="@yellow1" out.1="@none" fill="#666666" frame="#000000" cx="298.68055555555554" cz="543.0555555555555" r="3.125" angle="0" extent="90" />
-  <Text sound="snTextBlip" volume="1" in="@yellowMsg1" showEveryone="true" text="&quot;Yellow Time Warning!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="1502" volume="dohVolume" in="@yellowMsg2" showEveryone="true" text="&quot;Yellow Teleports!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="snTextBlip" volume="1" in="@blueMsg1" showEveryone="true" text="&quot;Blue Time Warning!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="1502" volume="dohVolume" in="@blueMsg2" showEveryone="true" text="&quot;Blue Teleports!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="snTextBlip" volume="1" in="@redMsg1" showEveryone="true" text="&quot;Red Time Warning!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="1502" volume="dohVolume" in="@redMsg2" showEveryone="true" text="&quot;Red Teleports!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="snTextBlip" volume="1" in="@pinkMsg1" showEveryone="true" text="&quot;Pink Time Warning!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="1502" volume="dohVolume" in="@pinkMsg2" showEveryone="true" text="&quot;Pink Teleports!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="snTextBlip" volume="1" in="@purpleMsg1" showEveryone="true" text="&quot;Purple Time Warning!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="1502" volume="dohVolume" in="@purpleMsg2" showEveryone="true" text="&quot;Purple Teleports!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="snTextBlip" volume="1" in="@greenMsg1" showEveryone="true" text="&quot;Green Time Warning!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="1502" volume="dohVolume" in="@greenMsg2" showEveryone="true" text="&quot;Green Teleports!&quot;" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="snTextBlip" volume="1" in="@yellowMsg1" showEveryone="true" text="Yellow Time Warning!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="1502" volume="dohVolume" in="@yellowMsg2" showEveryone="true" text="Yellow Teleports!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="snTextBlip" volume="1" in="@blueMsg1" showEveryone="true" text="Blue Time Warning!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="1502" volume="dohVolume" in="@blueMsg2" showEveryone="true" text="Blue Teleports!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="snTextBlip" volume="1" in="@redMsg1" showEveryone="true" text="Red Time Warning!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="1502" volume="dohVolume" in="@redMsg2" showEveryone="true" text="Red Teleports!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="snTextBlip" volume="1" in="@pinkMsg1" showEveryone="true" text="Pink Time Warning!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="1502" volume="dohVolume" in="@pinkMsg2" showEveryone="true" text="Pink Teleports!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="snTextBlip" volume="1" in="@purpleMsg1" showEveryone="true" text="Purple Time Warning!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="1502" volume="dohVolume" in="@purpleMsg2" showEveryone="true" text="Purple Teleports!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="snTextBlip" volume="1" in="@greenMsg1" showEveryone="true" text="Green Time Warning!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="1502" volume="dohVolume" in="@greenMsg2" showEveryone="true" text="Green Teleports!" fill="#ffff00" frame="#000000" cx="325.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
   <Distributor in="@warningYellow" out.0="@yellowMsg1" out.1="@yellowMsg2" fill="#ffff00" frame="#000000" cx="305.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
   <Distributor in="@warningBlue" out.0="@blueMsg1" out.1="@blueMsg2" fill="#ffff00" frame="#000000" cx="305.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
   <Distributor in="@warningRed" out.0="@redMsg1" out.1="@redMsg2" fill="#ffff00" frame="#000000" cx="305.625" cz="548.8888888888889" r="3.75" angle="60" extent="60" />
@@ -213,7 +213,7 @@
   <Base in="@basket" out="@onAmmo" fill="#ff6600" frame="#000000" cx="16.319444444444446" cz="113.19444444444444" r="3.125" angle="60" extent="60" />
   <Timer in="@basket" wait="15" out="@onAmmo" fill="#ff6600" frame="#000000" cx="16.319444444444446" cz="113.19444444444444" r="3.125" angle="60" extent="60" />
   <Timer in="@start" wait="3748" out="@minLeft" fill="#00ccff" frame="#000000" cx="125.90277777777777" cz="28.75" r="3.75" angle="60" extent="60" />
-  <Text sound="snTextBlip" volume="5" in="@minLeft" showEveryone="true" text="&quot;One Minute Left!&quot;" fill="#00ccff" frame="#000000" cx="125.90277777777777" cz="28.75" r="3.75" angle="60" extent="60" />
+  <Text sound="snTextBlip" volume="5" in="@minLeft" showEveryone="true" text="One Minute Left!" fill="#00ccff" frame="#000000" cx="125.90277777777777" cz="28.75" r="3.75" angle="60" extent="60" />
   <Timer in="@minLeft" wait="468" out="@thirtyLeft" fill="#00ccff" frame="#000000" cx="125.90277777777777" cz="28.75" r="3.75" angle="60" extent="60" />
-  <Text in="@thirtyLeft" sound="snTextBlip" volume="5" showEveryone="true" text="&quot;Thirty Seconds Left!&quot;" fill="#00ccff" frame="#000000" cx="125.90277777777777" cz="28.75" r="3.75" angle="60" extent="60" />
+  <Text in="@thirtyLeft" sound="snTextBlip" volume="5" showEveryone="true" text="Thirty Seconds Left!" fill="#00ccff" frame="#000000" cx="125.90277777777777" cz="28.75" r="3.75" angle="60" extent="60" />
 </map>

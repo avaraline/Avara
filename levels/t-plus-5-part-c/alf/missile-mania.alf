@@ -47,10 +47,10 @@
   <And in="@start" out="mShow" fill="#0033ff" frame="#000000" cx="59.93055555555556" cz="56.770833333333336" r="2.5" angle="90" extent="90" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#0033ff" frame="#000000" cx="59.93055555555556" cz="56.770833333333336" r="2.5" angle="90" extent="90" />
   <Goody shape="bspAvaraA" scale="1.5" y="2" speed="7" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#0033ff" frame="#000000" cx="59.93055555555556" cz="56.770833333333336" r="2.5" angle="90" extent="90" />
-  <set designer="&quot;Hazel - hazel@avara.org&quot;" information="&quot;Super Powerfull.
+  <set designer="Hazel - hazel@avara.org" information="Super Powerfull.
 Super Fast.
 Super Turn Rate.
-Mega Missiles.&quot;" />
+Mega Missiles." />
   <Teleporter y="100" shape="0" win="10000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="287.43055555555554" cz="481.1805555555556" r="8.75" angle="180" extent="90" />
   <SkyColor fill="#0033ff" frame="#0000bb" />
   <GroundColor fill="#000099" frame="#000000" />

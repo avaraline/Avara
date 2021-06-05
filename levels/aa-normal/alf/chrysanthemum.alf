@@ -17,7 +17,7 @@
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="99.58333333333334" cz="114.30555555555556" r="1.25" angle="90" extent="90" />
   <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="99.58333333333334" cz="114.30555555555556" r="1.25" angle="90" extent="90" />
   <Goody shape="bspStandardPill" y="30.75" speed="2" missiles="1" grenades="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="99.58333333333334" cz="114.30555555555556" r="1.25" angle="90" extent="90" />
-  <set designer="&quot;Malkavian - Oesian@jhu.edu&quot;" information="&quot;Chrysanthemum: No less than one player may play at a time.&quot;" />
+  <set designer="Malkavian - Oesian@jhu.edu" information="Chrysanthemum: No less than one player may play at a time." />
   <SkyColor fill="#330066" frame="#ffffff" />
   <GroundColor fill="#000000" frame="#000000" />
   <Ramp y="0" deltaY="15.25" fill="#000055" frame="#000000" x="104.16666666666667" z="109.09722222222223" w="5" d="30" h="0.25" r="11.076388888888893" angle="355" extent="10" />

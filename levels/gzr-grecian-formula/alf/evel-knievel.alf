@@ -35,7 +35,7 @@
   <Goody shape="bspGrenade" y="2" speed="2" grenades="2" start="mShow1" out="mSwitch" fill="#ff6600" frame="#000000" cx="105.24305555555557" cz="7.951388888888889" r="1.3541666666666643" angle="180" extent="90" />
   <Timer in="mSwitch" out="mShow2" wait="100" fill="#ff6600" frame="#000000" cx="105.24305555555557" cz="7.951388888888889" r="1.3541666666666643" angle="180" extent="90" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="2" start="mShow2" out="mTaken1" fill="#ff6600" frame="#000000" cx="105.24305555555557" cz="7.951388888888889" r="1.3541666666666643" angle="180" extent="90" />
-  <set designer="&quot;Head &lt;tra@idcomm.com&gt;&quot;" information="&quot;Ride baby, ride!&quot;" defaultLives="3" missilePower="1.8" missileAcceleration="0.3" startY="9" range="96" goodyDelay="20" grenDelay="125" numGren="12" numMiss="8" fieldY="0.2" fieldVis="false" />
+  <set designer="Head &lt;tra@idcomm.com&gt;" information="Ride baby, ride!" defaultLives="3" missilePower="1.8" missileAcceleration="0.3" startY="9" range="96" goodyDelay="20" grenDelay="125" numGren="12" numMiss="8" fieldY="0.2" fieldVis="false" />
   <SkyColor fill="#ffff33" frame="#ff6600" />
   <GroundColor fill="#aa0000" frame="#444444" />
   <unique vars="mShow mTaken" />
@@ -66,5 +66,5 @@
   <Field deltaY="fieldY" visible="fieldVis" fill="#006600" frame="#006600" x="67.91666666666667" z="28.40277777777778" w="5" d="3.75" h="1" r="1.388888888888891" cx="34.44444444444444" cz="32.77777777777778" angle="135" extent="270" />
   <Incarnator y="startY" fill="#006600" frame="#006600" cx="110.83333333333334" cz="53.125" r="1.3888888888888928" angle="315" extent="270" />
   <Timer in="@start" wait="1" out="@inArena" fill="#00ccff" frame="#000000" cx="3.1944444444444446" cz="34.51388888888889" r="3.75" angle="60" extent="60" />
-  <Text sound="135" volume=".5" in="@inArena" showEveryone="true" text="&quot;&quot;" fill="#00ccff" frame="#000000" cx="3.1944444444444446" cz="34.51388888888889" r="3.75" angle="60" extent="60" />
+  <Text sound="135" volume=".5" in="@inArena" showEveryone="true" text="" fill="#00ccff" frame="#000000" cx="3.1944444444444446" cz="34.51388888888889" r="3.75" angle="60" extent="60" />
 </map>

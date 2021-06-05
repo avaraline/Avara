@@ -1,8 +1,8 @@
 <map>
   <SkyColor fill="#dddddd" frame="#111111" />
   <GroundColor fill="#777777" frame="#000000" />
-  <set information="&quot;Watch out for the grinder!
-Getting ammo is tricky.&quot;" baseHeight="0.01" defaultLives="6" hull.1="hull[0]" hull.2="hull[0]" wallHeight="6" ceilingHeight="5" incY="30" grinderASpeed="30" grinderAHeight="5" grinderBSpeed="3" grinderBHeight="3" grinderBScale="12" grinderPower="10" />
+  <set information="Watch out for the grinder!
+Getting ammo is tricky." baseHeight="0.01" defaultLives="6" hull.1="hull[0]" hull.2="hull[0]" wallHeight="6" ceilingHeight="5" incY="30" grinderASpeed="30" grinderAHeight="5" grinderBSpeed="3" grinderBHeight="3" grinderBScale="12" grinderPower="10" />
   <Timer in="@start" wait="1" out="@beltOn" fill="#777777" frame="#000000" cx="4.236111111111112" cz="1.5277777777777777" r="3.75" angle="90" extent="180" />
   <set fsMass="100" fsHeight="fsHeight + 170" fsShield="5" fsShape="bspW1x1" fsScale=".6" bbeltDX="0.04" />
   <set bbeltDY="0" />

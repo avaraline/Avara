@@ -73,7 +73,7 @@
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" fragment="false" spin="false" fill="#ffffff" frame="#000000" cx="40.833333333333336" cz="41.18055555555556" r="2.5" angle="0" extent="90" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="40.833333333333336" cz="41.18055555555556" r="2.5" angle="0" extent="90" />
   <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#0000fc" frame="#000000" x="34.583333333333336" z="34.93055555555556" w="15" d="15" h="0.25" r="2.5" cx="40.833333333333336" cz="41.18055555555556" angle="0" extent="90" y="99" />
-  <set grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" designer="&quot;Red Cap&quot;" information="&quot;Tread with caution.&quot;" />
+  <set grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" designer="Red Cap" information="Tread with caution." />
   <Sound start="@start" stop="@winTeam" sound="4004" loop="-1" isMusic="true" isPlaced="false" volume="10000" fill="#ffffff" frame="#000000" cx="55.833333333333336" cz="0.5555555555555556" r="1.25" angle="180" extent="90" />
   <And in="@start" out="@time" fill="#c0a494" frame="#000000" cx="80.06944444444444" cz="37.56944444444444" r="3.125" angle="0" extent="90" />
   <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" out="@time" fill="#c0a494" frame="#000000" cx="80.06944444444444" cz="37.56944444444444" r="3.125" angle="0" extent="90" />

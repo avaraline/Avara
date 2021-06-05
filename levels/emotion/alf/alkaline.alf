@@ -149,5 +149,5 @@
   <And in="@start" out="rShow" fill="#dcf4ff" frame="#ffffff" cx="49.583333333333336" cz="144.58333333333334" r="1.875" angle="0" extent="90" />
   <Timer in="rTaken" out="rShow" wait="200" fill="#dcf4ff" frame="#ffffff" cx="49.583333333333336" cz="144.58333333333334" r="1.875" angle="0" extent="90" />
   <Goody y="2" shape="bspMissile" speed="5" sound="snYes" missiles="3" start="rShow" out="rTaken" fill="#dcf4ff" frame="#ffffff" cx="49.583333333333336" cz="144.58333333333334" r="1.875" angle="0" extent="90" />
-  <set information="rAlkaline" />
+  <set information="$rAlkaline" />
 </map>

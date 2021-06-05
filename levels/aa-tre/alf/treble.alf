@@ -50,7 +50,7 @@
   <Wall fill="#3e4b27" frame="#000000" x="61.18055555555556" z="78.19444444444444" w="8.125" d="8.125" h="0" />
   <set wallHeight="2" />
   <Wall fill="#3e4b27" frame="#000000" x="88.05555555555556" z="78.19444444444444" w="8.125" d="8.125" h="0" />
-  <set designer="&quot;M. Matthews  [uno]&quot;" information="&quot;&quot;" wallHeight=".001" />
+  <set designer="M. Matthews  [uno]" information="" wallHeight=".001" />
   <Wall fill="#81784a" frame="#000000" x="63.05555555555556" z="59.44444444444445" w="4.375" d="18.75" h="0" />
   <set wallHeight=".001" />
   <Wall fill="#81784a" frame="#000000" x="89.93055555555556" z="59.44444444444445" w="4.375" d="18.75" h="0" />
@@ -153,7 +153,7 @@
   <Wall fill="#62633a" frame="#000000" x="21.805555555555557" z="25.694444444444446" w="0.625" d="12.5" h="0" y="16" />
   <set wallHeight="6" />
   <Wall fill="#62633a" frame="#000000" x="21.805555555555557" z="81.94444444444444" w="0.625" d="12.5" h="0" y="16" />
-  <set information="&quot;feel da ridd'm wit yo' hands.&quot;" />
+  <set information="feel da ridd'm wit yo' hands." />
   <WallDoor open="@door1Up" close="@door1Down" deltaY="14.75" openSpeed="1.5" closeSpeed="3" fill="#62633a" frame="#000000" x="22.430555555555557" z="65.06944444444444" w="7.5" d="6.875" h="0.25" r="1.25" cx="33.05555555555556" cz="61.52777777777778" angle="225" extent="90" />
   <Timer in="@door1Up" wait="100" out="@door1Down" fill="#888888" frame="#000000" cx="32.43055555555556" cz="72.56944444444444" r="1.25" angle="180" extent="90" />
   <Field enter="@door1Up" deltaY="0" fill="#888888" frame="#000000" x="22.430555555555557" z="65.06944444444444" w="7.5" d="6.875" h="1" r="1.25" cx="32.43055555555556" cz="72.56944444444444" angle="180" extent="90" />

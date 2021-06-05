@@ -1,5 +1,5 @@
 <map>
-  <set designer="&quot;Cowboy&quot;" information="&quot;Take the pill to switch layouts randomly. Five minutes or five lives. 'Prize Appears' sound by Andrew Welch from Ambrosia's game: Maelstrom. Rabbit by Taz! Special thanks to Taz! - without whom these levels would never have been created...&quot;" missilePower="1.4" missileAcceleration="0.3" startY="9" hYon="14" defaultLives="5" fieldVis="false" zPower=".4" xPower=".4" yPower=".05" wallYon="150" skyStart="100" teleSound="1505" />
+  <set designer="Cowboy" information="Take the pill to switch layouts randomly. Five minutes or five lives. 'Prize Appears' sound by Andrew Welch from Ambrosia's game: Maelstrom. Rabbit by Taz! Special thanks to Taz! - without whom these levels would never have been created..." missilePower="1.4" missileAcceleration="0.3" startY="9" hYon="14" defaultLives="5" fieldVis="false" zPower=".4" xPower=".4" yPower=".05" wallYon="150" skyStart="100" teleSound="1505" />
   <Counter in="@change" n="1" rand1="int ( 1 + ( random * 4.99 ) )" out="rand1" restart="false" fill="#ffff33" frame="#000000" cx="253.125" cz="478.5416666666667" r="2.569444444444457" angle="180" extent="90" />
   <Counter in="@change" n="2" rand2="int ( 1 + ( random * 4.99 ) )" out="rand2" restart="false" fill="#ffff33" frame="#000000" cx="253.125" cz="478.5416666666667" r="2.569444444444457" angle="180" extent="90" />
   <Counter in="@change" n="3" rand3="int ( 1 + ( random * 4.99 ) )" out="rand3" restart="false" fill="#ffff33" frame="#000000" cx="253.125" cz="478.5416666666667" r="2.569444444444457" angle="180" extent="90" />
@@ -40,7 +40,7 @@
   <Timer wait="1" in="@change" out="@timeGdy" fill="#0033ff" frame="#ff0000" cx="203.33333333333334" cz="479.72222222222223" r="2.5" angle="60" extent="60" />
   <Timer in="@timeGdy" wait="469" out="@startGdy" stop="@change" fill="#0033ff" frame="#ff0000" cx="203.33333333333334" cz="479.72222222222223" r="2.5" angle="60" extent="60" />
   <Timer in="@startGdy" wait="235" out="@timeGdy" stop="@change" fill="#0033ff" frame="#ff0000" cx="203.33333333333334" cz="479.72222222222223" r="2.5" angle="60" extent="60" />
-  <Text sound="1506" volume=".75" in="@startGdy" showEveryone="true" text="&quot;Follow the White Rabbit!&quot;" fill="#0033ff" frame="#ff0000" cx="203.33333333333334" cz="479.72222222222223" r="2.5" angle="60" extent="60" />
+  <Text sound="1506" volume=".75" in="@startGdy" showEveryone="true" text="Follow the White Rabbit!" fill="#0033ff" frame="#ff0000" cx="203.33333333333334" cz="479.72222222222223" r="2.5" angle="60" extent="60" />
   <set timeLimit="300" gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#000055" frame="#000000" cx="294.1666666666667" cz="478.81944444444446" r="4.375" angle="60" extent="60" />
   <Teleporter start="@gameEnds" y="0" activeRange="2000" yon="0.01" win="0" fill="#000055" frame="#000000" cx="294.1666666666667" cz="478.81944444444446" r="4.375" angle="60" extent="60" />

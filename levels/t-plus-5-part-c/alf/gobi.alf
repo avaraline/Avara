@@ -1,5 +1,5 @@
 <map>
-  <set designer="&quot;PatH &lt;avaraa@play.at&gt;&quot;" information="&quot;Gobi -- Desert Arena. 5 minute killfest. Eat Sand.&quot;" missilePower="1.7" lives="defaultLives" defaultLives="99" wallHeight="2" />
+  <set designer="PatH &lt;avaraa@play.at&gt;" information="Gobi -- Desert Arena. 5 minute killfest. Eat Sand." missilePower="1.7" lives="defaultLives" defaultLives="99" wallHeight="2" />
   <Wall fill="#999966" frame="#000000" x="92.77777777777779" z="97.77777777777779" w="2.5" d="20" h="0" />
   <Wall fill="#999966" frame="#000000" x="95.27777777777779" z="97.77777777777779" w="15" d="2.5" h="0" />
   <Wall fill="#999966" frame="#000000" x="95.27777777777779" z="115.27777777777779" w="15" d="2.5" h="0" />
@@ -108,8 +108,8 @@
   <Teleporter y="20" shape="0" status="false" start="@gameOver" win="1000" activeRange="1000" fill="#e6e69a" frame="#000000" cx="91.52777777777779" cz="96.52777777777779" r="1.875" angle="0" extent="90" />
   <Timer in="@timersGo" wait="4687" out="@gameOver" fill="#e6e69a" frame="#000000" cx="91.52777777777779" cz="96.52777777777779" r="1.875" angle="0" extent="90" />
   <Timer in="@timersGo" wait="4219" out="@timeLow" fill="#e6e69a" frame="#000000" cx="91.52777777777779" cz="96.52777777777779" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Time is low -- Hurry up!&quot;" in="@timeLow" fill="#e6e69a" frame="#000000" cx="91.52777777777779" cz="96.52777777777779" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Time is up -- Game over!&quot;" in="@gameOver" fill="#e6e69a" frame="#000000" cx="91.52777777777779" cz="96.52777777777779" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Time is low -- Hurry up!" in="@timeLow" fill="#e6e69a" frame="#000000" cx="91.52777777777779" cz="96.52777777777779" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Time is up -- Game over!" in="@gameOver" fill="#e6e69a" frame="#000000" cx="91.52777777777779" cz="96.52777777777779" r="1.875" angle="0" extent="90" />
   <And in="@start" out="@timersGo" fill="#e6e69a" frame="#000000" cx="91.52777777777779" cz="96.52777777777779" r="1.875" angle="0" extent="90" />
   <Incarnator y="5" fill="#e6e69a" frame="#000000" cx="67.77777777777779" cz="72.77777777777779" r="1.875" angle="270" extent="90" />
   <Incarnator y="5" fill="#e6e69a" frame="#000000" cx="137.77777777777777" cz="142.77777777777777" r="1.875" angle="90" extent="90" />

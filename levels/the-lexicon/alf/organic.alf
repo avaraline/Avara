@@ -1,8 +1,8 @@
 <map>
-  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Pulled up beside me in a blue cadillac.
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Pulled up beside me in a blue cadillac.
 Said 'What kind of imagination do you possess?'
 Open a goody nook by shooting it and subsequently close 
-the one on the opposite side. Also, watch out for missiles.&quot;" missilePower="1.65" missileAcceleration="0.15" />
+the one on the opposite side. Also, watch out for missiles." missilePower="1.65" missileAcceleration="0.15" />
   <Timer in="@start" wait="1" out="@goN" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#444444" frame="#cc9900" cx="27.326388888888893" cz="0.8333333333333335" r="1.145833333333334" angle="180" extent="90" />
   <GroundColor fill="#000000" frame="#000000" />

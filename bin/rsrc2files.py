@@ -80,6 +80,7 @@ def remove_accents(input_str):
 def slugify(text):
     text = remove_accents(text)
     text = re.sub(r"[^a-zA-Z0-9\- ]", "", text)
+    text = text.replace("-", " ")
     return "-".join(text.lower().split())
 
 

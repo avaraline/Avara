@@ -4,7 +4,7 @@
   <Wall fill="#000055" frame="#000000" x="138.68055555555557" z="48.958333333333336" w="0.625" d="90" h="0" />
   <Wall fill="#000055" frame="#000000" x="48.05555555555556" z="48.333333333333336" w="91.25" d="0.625" h="0" />
   <Wall fill="#000055" frame="#000000" x="48.05555555555556" z="138.95833333333334" w="91.25" d="0.625" h="0" />
-  <set designer="&quot;Cowboy&quot;" information="&quot;Idea by Taz! Baskets are available at random times - watch the console messages for the current active basket. New unique type of random incarntors.&quot;" missilePower="1.4" missileAcceleration="0.3" startY="9" hYon="14" kDefaultLives="3" defaultLives="300" fieldVis="false" zPower=".1" xPower=".1" yPower=".05" hWall="4.5" teleHeight="1.5" teleWait="312" opSpd="100" clSpd="100" blockHeight="200" wallYon="125" kSnText="1503" kTextVolume="0.3" timeLimit="300" gameLength="4685" cPower=".2" cyPower="1" ballRange="2" />
+  <set designer="Cowboy" information="Idea by Taz! Baskets are available at random times - watch the console messages for the current active basket. New unique type of random incarntors." missilePower="1.4" missileAcceleration="0.3" startY="9" hYon="14" kDefaultLives="3" defaultLives="300" fieldVis="false" zPower=".1" xPower=".1" yPower=".05" hWall="4.5" teleHeight="1.5" teleWait="312" opSpd="100" clSpd="100" blockHeight="200" wallYon="125" kSnText="1503" kTextVolume="0.3" timeLimit="300" gameLength="4685" cPower=".2" cyPower="1" ballRange="2" />
   <set wallHeight="4.5" />
   <Wall fill="#0099ff" frame="#000000" x="81.18055555555556" z="91.45833333333334" w="2.5" d="2.5" h="0" />
   <Wall fill="#dddddd" frame="#000000" x="103.68055555555556" z="91.45833333333334" w="2.5" d="2.5" h="0" />
@@ -90,10 +90,10 @@
   <Counter in="@newRand" n="33" rand33="int ( 11 + ( random * 4 ) )" out="rand33" restart="false" fill="#ffff33" frame="#000000" cx="235.7638888888889" cz="43.611111111111114" r="2.569444444444443" angle="180" extent="90" />
   <Counter in="@newRand" n="34" rand34="int ( 11 + ( random * 4 ) )" out="rand34" restart="false" fill="#ffff33" frame="#000000" cx="235.7638888888889" cz="43.611111111111114" r="2.569444444444443" angle="180" extent="90" />
   <Counter in="@newRand" n="35" rand35="int ( 11 + ( random * 4 ) )" out="rand35" restart="false" fill="#ffff33" frame="#000000" cx="235.7638888888889" cz="43.611111111111114" r="2.569444444444443" angle="180" extent="90" />
-  <Text in="11" sound="snTextBlip" volume=".5" showEveryone="true" text="&quot;Blue Basket Active!&quot;" fill="#0000dd" frame="#aa0000" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" angle="240" extent="60" />
-  <Text in="12" sound="snTextBlip" volume=".5" showEveryone="true" text="&quot;Grey Basket Active!&quot;" fill="#0000dd" frame="#aa0000" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" angle="240" extent="60" />
-  <Text in="13" sound="snTextBlip" volume=".5" showEveryone="true" text="&quot;Red Basket Active!&quot;" fill="#0000dd" frame="#aa0000" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" angle="240" extent="60" />
-  <Text in="14" sound="snTextBlip" volume=".5" showEveryone="true" text="&quot;Green Basket Active!&quot;" fill="#0000dd" frame="#aa0000" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" angle="240" extent="60" />
+  <Text in="11" sound="snTextBlip" volume=".5" showEveryone="true" text="Blue Basket Active!" fill="#0000dd" frame="#aa0000" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" angle="240" extent="60" />
+  <Text in="12" sound="snTextBlip" volume=".5" showEveryone="true" text="Grey Basket Active!" fill="#0000dd" frame="#aa0000" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" angle="240" extent="60" />
+  <Text in="13" sound="snTextBlip" volume=".5" showEveryone="true" text="Red Basket Active!" fill="#0000dd" frame="#aa0000" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" angle="240" extent="60" />
+  <Text in="14" sound="snTextBlip" volume=".5" showEveryone="true" text="Green Basket Active!" fill="#0000dd" frame="#aa0000" cx="163.02083333333334" cz="67.11805555555557" r="2.5347222222222285" angle="240" extent="60" />
   <set randStart="int ( 11 + ( random * 4 ) )" />
   <Timer in="@start" wait="78" out="randStart" fill="#666666" frame="#000000" cx="216.5277777777778" cz="47.43055555555556" r="3.125" angle="0" extent="90" />
   <Base in="@start" out="@offGoal" fill="#666666" frame="#000000" cx="216.5277777777778" cz="47.43055555555556" r="3.125" angle="0" extent="90" />
@@ -107,7 +107,7 @@
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#0099ff" frame="#000000" cx="3.680555555555556" cz="112.0138888888889" r="3.125" angle="60" extent="60" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#0099ff" frame="#000000" cx="3.680555555555556" cz="112.0138888888889" r="3.125" angle="60" extent="60" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#0099ff" frame="#000000" cx="3.680555555555556" cz="112.0138888888889" r="3.125" angle="60" extent="60" />
-  <Text sound="kSnText" volume="kTextVolume" in="@add1Score" showEveryone="true" text="&quot;A Score!&quot;" fill="#00ccff" frame="#000000" cx="193.61111111111111" cz="85.27777777777779" r="3.75" angle="60" extent="60" />
+  <Text sound="kSnText" volume="kTextVolume" in="@add1Score" showEveryone="true" text="A Score!" fill="#00ccff" frame="#000000" cx="193.61111111111111" cz="85.27777777777779" r="3.75" angle="60" extent="60" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" fill="#00ccff" frame="#000000" cx="93.78472222222223" cz="53.923611111111114" r="1.3541666666666714" angle="180" extent="90" />
   <Timer in="mTaken1" out="mShow1" wait="150" fill="#00ccff" frame="#000000" cx="93.78472222222223" cz="53.923611111111114" r="1.3541666666666714" angle="180" extent="90" />

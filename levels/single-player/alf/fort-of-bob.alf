@@ -168,10 +168,10 @@
   <Hologram shape="bspFlower" isAmbient="true" yon="30" fill="#ffff00" frame="#000000" cx="112.32638888888889" cz="78.92361111111111" r="1.4236111111111143" angle="123" extent="90" />
   <Hologram shape="bspFlower" isAmbient="true" yon="30" fill="#ff3300" frame="#000000" cx="98.57638888888889" cz="77.63888888888889" r="1.4583333333333357" angle="123" extent="90" />
   <Teleporter shape="0" y="7.5" group="@lost" stop="@oBack" fill="#ffccff" frame="#000000" cx="105.48611111111111" cz="22.36111111111111" r="2.5" angle="0" extent="90" />
-  <set designer="&quot;Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;&quot;" information="&quot;Explore the fort and do as much damage as you can.  
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="Explore the fort and do as much damage as you can.  
 Reinforcements will arrive within the next 19 hours to 
-help take back Bob’s Fort.&quot;" />
-  <Text in="@start" showEveryone="true" text="&quot;Kill at least 7 foes before leaving.&quot;" fill="#ffccff" frame="#000000" cx="105.48611111111111" cz="22.36111111111111" r="2.5" angle="0" extent="90" />
+help take back Bob’s Fort." />
+  <Text in="@start" showEveryone="true" text="Kill at least 7 foes before leaving." fill="#ffccff" frame="#000000" cx="105.48611111111111" cz="22.36111111111111" r="2.5" angle="0" extent="90" />
   <set wallHeight="0" />
   <WallDoor open="@oFront" close="@cFront" midPitch="90" midY="1.875" deltaY="1.875" pitch="90" deltaX="-2.5" openSpeed="5" stopSound="0" closeSpeed="5" fill="#000055" frame="#000000" x="102.98611111111111" z="30.48611111111111" w="2.5" d="3.75" h="0" r="2.5" cx="105.48611111111111" cz="22.36111111111111" angle="0" extent="90" />
   <Wall fill="#000055" frame="#000000" x="100.48611111111111" z="31.736111111111114" w="2.5" d="0.625" h="3.75" />

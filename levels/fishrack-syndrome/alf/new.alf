@@ -2,7 +2,7 @@
   <set baseHeight="0" wallHeight="0" />
   <SkyColor n="1024" fill="#ffffff" frame="#3399ff" />
   <GroundColor fill="#00aa00" frame="#00aa00" />
-  <set designer="&quot;Plastic Chicken&quot;" information="&quot;New!  33% more FREE!!!!&quot;" missileAcceleration=".4" missileTurnRate=".28" grenadePower="2.75" missilePower="1.5" defaultLives="3" />
+  <set designer="Plastic Chicken" information="New!  33% more FREE!!!!" missileAcceleration=".4" missileTurnRate=".28" grenadePower="2.75" missilePower="1.5" defaultLives="3" />
   <unique vars="maact mbact mcact mdact mdie mnact" />
   <And in="@start" out="mnact" fill="#777777" frame="#00ffff" cx="62.5" cz="60.625" r="1.875" angle="270" extent="90" />
   <Distributor in="mnact" out.0="maact" out.1="mbact" out.2="mcact" out.3="mdact" restart="true" fill="#777777" frame="#00ffff" cx="62.5" cz="60.625" r="1.875" angle="270" extent="90" />

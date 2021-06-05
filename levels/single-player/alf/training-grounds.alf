@@ -1,8 +1,8 @@
 <map>
   <SkyColor n="7" fill="#ff6699" frame="#006699" />
   <GroundColor fill="#004400" frame="#663300" />
-  <set designer="&quot;Juri Munkki&quot;" information="&quot;This training mission introduces you to the HECTOR.
-Collect at least 5 ‘A’ markers along the course and enter the exit teleporter to complete the mission. You will be offered more missions after you complete this one.&quot;" ambient="0.4" light.0.i="0.4" light.0.a="20" light.0.b="240" light.1.i="0.4" light.1.a="40" light.1.b="320" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set designer="Juri Munkki" information="This training mission introduces you to the HECTOR.
+Collect at least 5 ‘A’ markers along the course and enter the exit teleporter to complete the mission. You will be offered more missions after you complete this one." ambient="0.4" light.0.i="0.4" light.0.a="20" light.0.b="240" light.1.i="0.4" light.1.a="40" light.1.b="320" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <set wallHeight="3" baseHeight="0" />
   <Wall fill="#dddddd" frame="#000000" x="77.70833333333334" z="69.09722222222223" w="15" d="5" h="0" />
   <Dome fill="#dddddd" frame="#000000" cx="92.70833333333334" cz="70.34722222222223" r="5" angle="0" extent="180" />
@@ -41,7 +41,7 @@ Collect at least 5 ‘A’ markers along the course and enter the exit teleporte
   <Wall fill="#aaaaaa" frame="#000000" x="76.45833333333334" z="172.84722222222223" w="2.5" d="2.6388888888888857" h="0" />
   <set baseHeight="0" wallHeight="towerHeight -2" />
   <Field y="-baseHeight" deltaY="0.05" fill="#aaaaaa" frame="#000000" x="93.33333333333334" z="214.72222222222223" w="3.75" d="3.75" h="0" r="3.7152777777777715" cx="109.47916666666667" cz="150.83333333333334" angle="343" extent="32" />
-  <Text text="&quot;Force field detected.&quot;" fill="#aaaaaa" frame="#000000" cx="95.20833333333334" cz="216.59722222222223" r="7.5" angle="0" extent="360" />
+  <Text text="Force field detected." fill="#aaaaaa" frame="#000000" cx="95.20833333333334" cz="216.59722222222223" r="7.5" angle="0" extent="360" />
   <Solid shape="bspAvaraA" scale="12" y="10" yon="2000" fill="#aaaaaa" frame="#000000" cx="42.083333333333336" cz="264.09722222222223" r="10" angle="270" extent="180" />
   <set baseHeight="0" wallHeight="5.12" />
   <Wall fill="#aaaaaa" frame="#000000" x="33.333333333333336" z="262.84722222222223" w="2.5" d="2.5" h="0" />
@@ -69,8 +69,8 @@ Collect at least 5 ‘A’ markers along the course and enter the exit teleporte
   <Incarnator y="5" stop="@start" fill="#cc0033" frame="#000000" cx="75.3125" cz="47.91666666666667" r="1.2847222222222214" angle="270" extent="180" />
   <Incarnator y="8" stop="@start" fill="#cc0033" frame="#000000" cx="75.3125" cz="47.91666666666667" r="1.2847222222222214" angle="270" extent="180" />
   <Goody hitScore="100" shape="bspAvaraA" y="4.5" out="@pathGoody" fill="#cc3366" frame="#000000" cx="74.58333333333334" cz="82.22222222222223" r="1.875" angle="90" extent="180" />
-  <Text in="@start" showEveryone="true" text="&quot;Use your scout to get an outside
-view of your actions.&quot;" fill="#cc3366" frame="#000000" cx="74.58333333333334" cz="82.22222222222223" r="1.875" angle="90" extent="180" />
+  <Text in="@start" showEveryone="true" text="Use your scout to get an outside
+view of your actions." fill="#cc3366" frame="#000000" cx="74.58333333333334" cz="82.22222222222223" r="1.875" angle="90" extent="180" />
   <unique vars="mTopTaken" />
   <Goody hitScore="100" shape="bspAvaraA" y="4" out="mTopTaken" fill="#cc3366" frame="#000000" cx="67.70833333333334" cz="95.34722222222223" r="1.875" angle="90" extent="180" />
   <And in="mTopTaken" out="@pathGoody" fill="#cc3366" frame="#000000" cx="67.70833333333334" cz="95.34722222222223" r="1.875" angle="90" extent="180" />

@@ -14,7 +14,7 @@
   <Timer in="mTaken" out="mShow" wait="250" fill="#ff9900" frame="#000000" cx="146.94444444444446" cz="111.18055555555556" r="1.25" angle="90" extent="90" />
   <Goody shape="bspGrenade" y="4" speed="2" grenades="4" start="mShow" out="mTaken" yon="60" fill="#ff9900" frame="#000000" cx="146.94444444444446" cz="111.18055555555556" r="1.25" angle="90" extent="90" />
   <Incarnator y="30" fill="#ff9900" frame="#000000" cx="146.94444444444446" cz="111.18055555555556" r="1.25" angle="90" extent="90" />
-  <set information="kSpaghettiInfo" />
+  <set information="$kSpaghettiInfo" />
   <SkyColor verticalRangeMax="750" fill="#ff66ff" frame="#9900cc" />
   <GroundColor fill="#000000" frame="#000000" />
   <Wall fill="#9933ff" frame="#000000" x="17.569444444444446" z="13.680555555555555" w="1.875" d="5" h="2" />

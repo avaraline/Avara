@@ -1,5 +1,5 @@
 <map>
-  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;That funky monkey. 5 minutes.&quot;" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="That funky monkey. 5 minutes." />
   <SkyColor fill="#ffffcc" frame="#ccffff" />
   <GroundColor fill="#770000" frame="#770000" />
   <Ramp y="0" deltaY="6" thickness="0" fill="#ffffcc" frame="#000000" x="14.305555555555555" z="14.027777777777779" w="20" d="5" h="0" r="1.25" angle="225" extent="90" />
@@ -35,8 +35,8 @@
   <And in="@start" out.0="@nadeRemake" out.1="@missileRemake" fill="#ffffcc" frame="#000000" cx="36.80555555555556" cz="40.90277777777778" r="1.25" angle="45" extent="90" />
   <Timer in="@missileTake" out="@missileRemake" wait="75" restart="true" fill="#ffffcc" frame="#000000" cx="36.80555555555556" cz="40.90277777777778" r="1.25" angle="45" extent="90" />
   <Timer in="@start" out="@gameOver" wait="4685" fill="#ffffcc" frame="#000000" cx="36.80555555555556" cz="40.90277777777778" r="1.25" angle="45" extent="90" />
-  <Text showEveryone="true" text="&quot;Time is up - Game over.&quot;" in="@gameOver" fill="#ffffcc" frame="#000000" cx="36.80555555555556" cz="40.90277777777778" r="1.25" angle="45" extent="90" />
-  <Text showEveryone="true" text="&quot;Time low - Hurry up!&quot;" in="@timeLow" fill="#ffffcc" frame="#000000" cx="36.80555555555556" cz="40.90277777777778" r="1.25" angle="45" extent="90" />
+  <Text showEveryone="true" text="Time is up - Game over." in="@gameOver" fill="#ffffcc" frame="#000000" cx="36.80555555555556" cz="40.90277777777778" r="1.25" angle="45" extent="90" />
+  <Text showEveryone="true" text="Time low - Hurry up!" in="@timeLow" fill="#ffffcc" frame="#000000" cx="36.80555555555556" cz="40.90277777777778" r="1.25" angle="45" extent="90" />
   <Timer in="@start" out="@timeLow" wait="4217" fill="#ffffcc" frame="#000000" cx="36.80555555555556" cz="40.90277777777778" r="1.25" angle="45" extent="90" />
   <set defaultLives="100" />
   <Teleporter win="0" stop="@start" start="@gameOver" y="10" shape="0" activeRange="2000" fill="#33ff66" frame="#000000" cx="94.375" cz="20.833333333333336" r="1.25" angle="90" extent="90" />

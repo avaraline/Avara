@@ -10,25 +10,25 @@
   <unique vars="m1 m2 m3 m4" />
   <Distributor in="@ScoreA" out.0="m1" out.1="m2" out.2="m3" out.3="m4" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
   <And in="m4" out="@WinA" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="m1" showEveryone="true" text="&quot;Green team has 1 goal!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="m2" showEveryone="true" text="&quot;Green team has 2 goals!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="m3" showEveryone="true" text="&quot;Green team has 3 goals!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="m4" showEveryone="true" text="&quot;Green team has 4 goals!
-Green team wins!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <Text in="m1" showEveryone="true" text="Green team has 1 goal!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <Text in="m2" showEveryone="true" text="Green team has 2 goals!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <Text in="m3" showEveryone="true" text="Green team has 3 goals!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <Text in="m4" showEveryone="true" text="Green team has 4 goals!
+Green team wins!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
   <unique vars="m1 m2 m3 m4" />
   <Distributor in="@ScoreB" out.0="m1" out.1="m2" out.2="m3" out.3="m4" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
   <And in="m4" out="@WinB" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="m1" showEveryone="true" text="&quot;Blue team has 1 goal!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="m2" showEveryone="true" text="&quot;Blue team has 2 goals!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="m3" showEveryone="true" text="&quot;Blue team has 3 goals!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="m4" showEveryone="true" text="&quot;Blue team has 4 goals!
-Blue team wins!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <Text in="@DEATH" showEveryone="true" text="&quot;DEATH TO THE REMAINING PLAYERS!!!&quot;" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
-  <set information="&quot;The weirdest ballgame ever! Blue vs. green.
+  <Text in="m1" showEveryone="true" text="Blue team has 1 goal!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <Text in="m2" showEveryone="true" text="Blue team has 2 goals!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <Text in="m3" showEveryone="true" text="Blue team has 3 goals!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <Text in="m4" showEveryone="true" text="Blue team has 4 goals!
+Blue team wins!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <Text in="@DEATH" showEveryone="true" text="DEATH TO THE REMAINING PLAYERS!!!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.5277777777777777" r="2.1875" angle="90" extent="180" />
+  <set information="The weirdest ballgame ever! Blue vs. green.
   The player holding the ball cannot enter teleporters or jump.
   All players will die in 15 minutes.
   The ball is only visible within 13 meters.
-  Enemy ammo doesn't work for you.&quot;" />
+  Enemy ammo doesn't work for you." />
   <Teleporter yon="0.01" y="200" win="0" activeRange="2000" mask="TA" start="@WinA" fill="#00ee00" frame="#000000" cx="38.4375" cz="15.833333333333336" r="1.875" angle="0" extent="90" />
   <Incarnator mask="TB" fill="#99ccff" frame="#000000" cx="32.77777777777778" cz="43.88888888888889" r="2.5" angle="225" extent="90" />
   <Incarnator mask="TA" fill="#99ccff" frame="#000000" cx="81.52777777777779" cz="30.138888888888893" r="2.5" angle="45" extent="90" />

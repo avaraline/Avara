@@ -1,6 +1,6 @@
 <map>
-  <set designer="&quot;Apollo &lt;apollo@avara.org&gt;&quot;" information="&quot;Slo mo fo says trick or treat.&quot;" defaultLives="5" />
-  <Text showEveryone="true" in="@goText" text="&quot;Woot.&quot;" restart="true" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Slo mo fo says trick or treat." defaultLives="5" />
+  <Text showEveryone="true" in="@goText" text="Woot." restart="true" />
   <Timer in="@goText" wait="7" out="@padsOff" />
   <Timer in="@padsOff" wait="39" out="@padsOn" />
   <Timer in="@start" wait="1" out="@padsOn" />

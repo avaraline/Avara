@@ -1,8 +1,8 @@
 <map>
-  <set StripSep="3" StripAH="100" StripBH="StripAH + StripSep" StripThick=".1" wallHeight="StripThick" floorTemplate="bspFloorFrame" goodyGrenades="3" goodyMissiles="7" goodyBoosters="1" defaultLives="6" gravity="0.78" missileTurnRate="100" missileAcceleration=".5" missilePower="grenadePower" information="&quot;Walk off the end of a strip to get ammo. 
+  <set StripSep="3" StripAH="100" StripBH="StripAH + StripSep" StripThick=".1" wallHeight="StripThick" floorTemplate="bspFloorFrame" goodyGrenades="3" goodyMissiles="7" goodyBoosters="1" defaultLives="6" gravity="0.78" missileTurnRate="100" missileAcceleration=".5" missilePower="grenadePower" information="Walk off the end of a strip to get ammo. 
 The switch controls whether falls are deadly.
 Missiles are faster & more powerful.
-Oh, and the switch sometimes gets flipped automatically.&quot;" />
+Oh, and the switch sometimes gets flipped automatically." />
   <SkyColor verticalRangeMax="2000" n="15" fill="#003333" frame="#006666" />
   <GroundColor fill="#009999" frame="#006666" />
   <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#00ee00" frame="#000000" cx="7.5" cz="25.833333333333336" r="1.875" angle="0" extent="90" />
@@ -69,6 +69,6 @@ Oh, and the switch sometimes gets flipped automatically.&quot;" />
   <Guard watch="targ1" y="StripBH + 50" shotPower="3" freq="20 * 15" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
   <Teleporter group="@killer" start="0" y="StripAH" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
   <Teleporter group="@killer" start="0" y="StripBH" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" in="@deadlyON" text="&quot;Falls are now deadly.&quot;" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" in="@deadlyOFF" text="&quot;Falls are now safe.&quot;" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" in="@deadlyON" text="Falls are now deadly." fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" in="@deadlyOFF" text="Falls are now safe." fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="0" extent="90" />
 </map>

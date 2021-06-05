@@ -2,8 +2,8 @@
   <set timeLimit="300" defaultLives="100" lightHull="131" mediumHull="131" heavyHull="131" maxStartGrenades="12" missilePower="24" missileAcceleration="0.4" />
   <SkyColor fill="#ccffff" frame="#ccffff" />
   <GroundColor fill="#000000" frame="#ccffff" />
-  <set information="&quot;Will the killing ever stop?
-Why can’t we all just get along?&quot;" />
+  <set information="Will the killing ever stop?
+Why can’t we all just get along?" />
   <set gameLength="4687" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#ffffff" frame="#000000" cx="1.0416666666666667" cz="22.430555555555557" r="1.25" angle="0" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="1.0416666666666667" cz="22.430555555555557" r="1.25" angle="0" extent="90" />

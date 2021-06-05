@@ -115,6 +115,22 @@ struct ALFWalker: pugi::xml_tree_walker {
         return std::regex_replace(attr, subscript, "[$1]");
     }
 
+    std::string quote_attr(std::string attr, std::string value) {
+        if (
+            attr.compare("text") == 0 ||
+            attr.compare("designer") == 0 ||
+            attr.compare("information") == 0
+        ) {
+            if (value[0] == '$') {
+                return value.substr(1);
+            }
+            else {
+                return std::string("\"") + value + std::string("\"");
+            }
+        }
+        return value;
+    }
+
     void handle_element(pugi::xml_node& node, std::string& name) {
         // Read any global state we can from the element.
         read_context(node);
@@ -233,7 +249,8 @@ struct ALFWalker: pugi::xml_tree_walker {
         std::stringstream script;
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             std::string attr = fix_attr(ait->name());
-            script << attr << " = " << ait->value() << "\r";
+            std::string value = quote_attr(attr, ait->value());
+            script << attr << " = " << value << "\r";
         }
         RunThis((StringPtr)script.str().c_str());
     }
@@ -257,6 +274,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         script << "object " << name << "\n";
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             std::string attr = fix_attr(ait->name());
+            std::string value = quote_attr(attr, ait->value());
             // Ignore all the standard context attributes when parsing objects.
             if (
                 attr.compare("fill") == 0 ||
@@ -273,7 +291,7 @@ struct ALFWalker: pugi::xml_tree_walker {
                 attr.compare("angle") == 0 ||
                 attr.compare("extent") == 0
             ) continue;
-            script << attr << " = " << ait->value() << "\n";
+            script << attr << " = " << value << "\n";
         }
         script << "end";
         RunThis((StringPtr)script.str().c_str());

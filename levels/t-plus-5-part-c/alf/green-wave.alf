@@ -449,8 +449,8 @@
   <Incarnator y="3" fill="#ee0000" frame="#000000" cx="104.375" cz="20.208333333333336" r="8.75" angle="45" extent="90" />
   <Incarnator y="3" fill="#ee0000" frame="#000000" cx="10.625" cz="8.958333333333334" r="8.75" angle="225" extent="90" />
   <Incarnator y="3" fill="#ee0000" frame="#000000" cx="104.375" cz="8.958333333333334" r="8.75" angle="45" extent="90" />
-  <set designer="&quot;Hazel - hazel@avara.org&quot;" information="&quot;who said this was green? It’s Lime!
-this needs a fast connection, guys!&quot;" />
+  <set designer="Hazel - hazel@avara.org" information="who said this was green? It’s Lime!
+this needs a fast connection, guys!" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ff6600" frame="#000000" cx="18.125" cz="14.583333333333334" r="7.5" angle="225" extent="90" />
   <Timer in="mTaken" out="mShow" wait="50" fill="#ff6600" frame="#000000" cx="18.125" cz="14.583333333333334" r="7.5" angle="225" extent="90" />

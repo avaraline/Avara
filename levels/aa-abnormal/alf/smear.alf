@@ -1,10 +1,10 @@
 <map>
-  <set designer="&quot;rupture &lt;nirschl@scripps.edu&gt;&quot;" information="&quot;Hold on to the ball as long as you can.
+  <set designer="rupture &lt;nirschl@scripps.edu&gt;" information="Hold on to the ball as long as you can.
 
 Suggested Colors: Purple and Yellow, but others work.
 
 For large games, a second ball is available. 
-See the Read Me.&quot;" timeLimit="300" defaultLives="100" bsp16wall="2001" bspOctahedron="2002" bspHexPlatform="2003" bspSqPlatform="2004" bspCube="2005" bspClearWall="2006" bspOctahedron2="2007" snSpin="1008" snWrong="1009" />
+See the Read Me." timeLimit="300" defaultLives="100" bsp16wall="2001" bspOctahedron="2002" bspHexPlatform="2003" bspSqPlatform="2004" bspCube="2005" bspClearWall="2006" bspOctahedron2="2007" snSpin="1008" snWrong="1009" />
   <GroundColor fill="#000000" frame="#000000" />
   <SkyColor fill="#000000" frame="#004400" />
   <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="48.611111111111114" cz="106.45833333333334" r="3.4722222222222214" angle="180" extent="180" />
@@ -187,7 +187,7 @@ See the Read Me.&quot;" timeLimit="300" defaultLives="100" bsp16wall="2001" bspO
   <Teleporter y="0" group="@controlIn" spin="false" shape="0" in="mInMessage" stop="mStopTele" fill="#000000" frame="#004400" cx="10.208333333333334" cz="98.125" r="1.875" angle="180" extent="180" />
   <Teleporter y="6" activeRange="3.8" group="@controlOut" destGroup="@arenaOut" shape="0" spin="false" fill="#000000" frame="#004400" cx="10.208333333333334" cz="98.125" r="1.875" angle="180" extent="180" />
   <Switch shape="bspSwitchOff" altShape="shape + 1" status="false" out.1="@secondBall" fill="#000000" frame="#004400" cx="23.61111111111111" cz="98.05555555555556" r="1.875" angle="270" extent="90" />
-  <Text showEveryone="true" in="@secondBall" text="&quot;Second Ball: In Play&quot;" fill="#000000" frame="#004400" cx="23.61111111111111" cz="98.05555555555556" r="1.875" angle="270" extent="90" />
+  <Text showEveryone="true" in="@secondBall" text="Second Ball: In Play" fill="#000000" frame="#004400" cx="23.61111111111111" cz="98.05555555555556" r="1.875" angle="270" extent="90" />
   <Wall fill="#000000" frame="#004400" x="24.444444444444446" z="94.65277777777779" w="1.25" d="6.25" h="0" />
   <set gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#000000" frame="#110000" cx="2.8472222222222223" cz="15.347222222222223" r="1.5972222222222232" angle="270" extent="90" />

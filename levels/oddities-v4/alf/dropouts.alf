@@ -1,6 +1,6 @@
 <map>
-  <set information="&quot;A variation on Internal.
-Don't fall.&quot;" EdgeWall="BlockHeight * 8 + 4" Alt="100" IncHeight="EdgeWall + 1" gravity="0.5" defaultLives="5" WallSound="0" />
+  <set information="A variation on Internal.
+Don't fall." EdgeWall="BlockHeight * 8 + 4" Alt="100" IncHeight="EdgeWall + 1" gravity="0.5" defaultLives="5" WallSound="0" />
   <set targBlock="targ1" BlockHeight="3" BlockPower=".3" BlockShield="8" />
   <SkyColor verticalRangeMin="Alt + IncHeight" n="9" fill="#66ffff" frame="#00ccff" />
   <GroundColor fill="#cc0099" frame="#000000" />

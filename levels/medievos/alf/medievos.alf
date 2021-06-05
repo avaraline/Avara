@@ -8,7 +8,7 @@
   <set wallYon="150" yon="150" />
   <SkyColor verticalRangeMax="2500" n="24" fill="#d9fffc" frame="#b8d6ff" />
   <GroundColor fill="#3f722b" frame="#3f722b" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;So you wish to explore the vast lands Medievos.  Fare ye well. Consult the readme for juicy hints and speed optimization advice.&quot;" wallHeight="3.5" />
+  <set designer="Tyrant - rendon@earthlink.net" information="So you wish to explore the vast lands Medievos.  Fare ye well. Consult the readme for juicy hints and speed optimization advice." wallHeight="3.5" />
   <Wall fill="#d8b891" frame="#000000" x="309.58333333333337" z="314.58333333333337" w="1.25" d="10" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#d8b891" frame="#000000" x="330.83333333333337" z="314.58333333333337" w="1.25" d="10" h="0" />
@@ -24,15 +24,15 @@
   <Distributor restart="true" in="@inTheRed" out.0="@red1" out.1="@red2" out.2="@red3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
   <Distributor restart="true" in="@inTheYellow" out.0="@yellow1" out.1="@yellow2" out.2="@yellow3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
   <Distributor restart="true" in="@inTheBlack" out.0="@black1" out.1="@black2" out.2="@black3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Terrible!&quot;" in="@red1" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Take some lessons!&quot;" in="@red2" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Hah!&quot;" in="@red3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Not bad.&quot;" in="@yellow1" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Pretty close.&quot;" in="@yellow2" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Yellow!&quot;" in="@yellow3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;In the black!&quot;" in="@black1" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Nice one, mate!&quot;" in="@black2" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;By the gods!&quot;" in="@black3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Terrible!" in="@red1" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Take some lessons!" in="@red2" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Hah!" in="@red3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Not bad." in="@yellow1" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Pretty close." in="@yellow2" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Yellow!" in="@yellow3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="In the black!" in="@black1" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="Nice one, mate!" in="@black2" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
+  <Text showEveryone="true" text="By the gods!" in="@black3" fill="#4c4d4d" frame="#000000" cx="339.58333333333337" cz="318.33333333333337" r="1.875" angle="0" extent="90" />
   <Ball group="1" y="3.25" shield="0.25" maxShield="0.25" mass="20" ejectSound="2100" shape="2100" scale="1.5" ejectPower="4" ejectPitch="0" motionRange="1" changeOwnerTime="1000000" fill="#ffffff" frame="#000000" cx="313.2638888888889" cz="316.3888888888889" r="1.25" angle="315" extent="90" />
   <set hull.0="2100" hull.1="2100" hull.2="2100" wallHeight="0" />
   <Wall fill="#bf986d" frame="#000000" x="354.58333333333337" z="299.58333333333337" w="205" d="20" h="0" />

@@ -25,8 +25,8 @@
   <WallDoor midYaw="15" fill="#008800" frame="#000000" x="57.63888888888889" z="133.47222222222223" w="4.375" d="4.375" h="12.5" />
   <WallDoor midYaw="35" fill="#002200" frame="#000000" x="58.88888888888889" z="109.09722222222223" w="4.375" d="4.375" h="17.5" />
   <WallDoor midYaw="35" fill="#66ff66" frame="#000000" x="48.88888888888889" z="125.97222222222223" w="4.375" d="4.375" h="22.5" />
-  <set designer="&quot;Shakespeare - bahome@san.rr.com&quot;" information="&quot;One Green (hunted) tries to stay alive for 4 minutes 
-against  Yellow (hunter).&quot;" />
+  <set designer="Shakespeare - bahome@san.rr.com" information="One Green (hunted) tries to stay alive for 4 minutes 
+against  Yellow (hunter)." />
   <SkyColor fill="#0000bb" frame="#000033" />
   <GroundColor fill="#000000" frame="#000000" />
   <WallDoor midYaw="25" fill="#008800" frame="#000000" r="3.75" cx="58.68055555555556" cz="12.777777777777779" angle="90" extent="180" x="106.3888888888889" z="61.59722222222222" w="4.375" d="4.375" h="12.5" />
@@ -42,8 +42,8 @@ against  Yellow (hunter).&quot;" />
   <Teleporter mask="T1" y="30" activeRange="10000" yon="0.01" start="@gameEnds" win="10000" fill="#ffffff" frame="#000000" cx="2.8125" cz="3.75" r="3.75" angle="270" extent="90" />
   <Teleporter mask="T2" y="30" activeRange="10000" yon="0.01" start="@gameEnds" win="1" fill="#ffffff" frame="#000000" cx="2.8125" cz="3.75" r="3.75" angle="270" extent="90" />
   <set defaultLives="1" />
-  <Text in="@start" wait="30" showEveryone="true" text="&quot;Yellow team. The remaining Green pilot has hidden himself in the woods. Track him down! You have four 
-minutes until his transport arrives.&quot;" fill="#ffffff" frame="#000000" cx="2.8125" cz="3.75" r="3.75" angle="270" extent="90" />
+  <Text in="@start" wait="30" showEveryone="true" text="Yellow team. The remaining Green pilot has hidden himself in the woods. Track him down! You have four 
+minutes until his transport arrives." fill="#ffffff" frame="#000000" cx="2.8125" cz="3.75" r="3.75" angle="270" extent="90" />
   <Walker team="1" y="50" fill="#ffff33" frame="#000000" cx="168.26388888888889" cz="112.15277777777779" r="2.5" angle="2" extent="176" />
   <Parasite accel=".57" y="35" drain="0" yon="1" activeRange="20" shield="2" killMsg="@killpara" mass="-30" fill="#ffff33" frame="#000000" cx="169.51388888888889" cz="112.15277777777779" r="2.5" angle="2" extent="176" />
   <WallDoor midYaw="15" fill="#008800" frame="#000000" r="2.5" cx="169.51388888888889" cz="112.15277777777779" angle="2" extent="176" x="180.76388888888889" z="139.09722222222223" w="4.375" d="4.375" h="12.5" />
@@ -129,7 +129,7 @@ minutes until his transport arrives.&quot;" fill="#ffffff" frame="#000000" cx="2
   <WallDoor midYaw="35" fill="#66ff66" frame="#000000" r="5" cx="78.125" cz="97.56944444444444" angle="180" extent="90" x="134.51388888888889" z="53.47222222222222" w="4.375" d="4.375" h="22.5" />
   <WallDoor midYaw="15" fill="#66ff66" frame="#000000" r="5" cx="78.125" cz="97.56944444444444" angle="180" extent="90" x="150.13888888888889" z="164.72222222222223" w="4.375" d="4.375" h="22.5" />
   <WallDoor midYaw="25" fill="#66ff66" frame="#000000" r="5" cx="78.125" cz="97.56944444444444" angle="180" extent="90" x="38.26388888888889" z="110.34722222222223" w="4.375" d="4.375" h="22.5" />
-  <Text in="@killpara" showEveryone="true" text="&quot;Green has been slowed down... get him NOW!&quot;" fill="#66ff66" frame="#000000" cx="78.125" cz="97.56944444444444" r="5" angle="180" extent="90" />
+  <Text in="@killpara" showEveryone="true" text="Green has been slowed down... get him NOW!" fill="#66ff66" frame="#000000" cx="78.125" cz="97.56944444444444" r="5" angle="180" extent="90" />
   <WallDoor midYaw="25" fill="#002200" frame="#000000" r="5" cx="78.125" cz="97.56944444444444" angle="180" extent="90" x="98.2638888888889" z="164.72222222222223" w="4.375" d="4.375" h="17.5" />
-  <Text in="@start" wait="250" showEveryone="true" text="&quot;Good hunting, pilots.&quot;" fill="#002200" frame="#000000" cx="78.125" cz="97.56944444444444" r="5" angle="180" extent="90" />
+  <Text in="@start" wait="250" showEveryone="true" text="Good hunting, pilots." fill="#002200" frame="#000000" cx="78.125" cz="97.56944444444444" r="5" angle="180" extent="90" />
 </map>

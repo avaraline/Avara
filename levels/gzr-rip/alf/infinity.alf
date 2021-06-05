@@ -1,5 +1,5 @@
 <map>
-  <set designer="&quot;Cowboy&quot;" information="&quot;Layout different each game  - 1024 possible layouts. Same level as Scramble without the reset each minute. Kill as many hectors as possible in five minutes.&quot;" missilePower="1.3" missileAcceleration="0.3" startY="14" hYon="14" timeLimit="300" defaultLives="1000" skyStart="500" opSpd="100" clSpd="100" blockHeight="200" wallYon="125" gameLength="4685" />
+  <set designer="Cowboy" information="Layout different each game  - 1024 possible layouts. Same level as Scramble without the reset each minute. Kill as many hectors as possible in five minutes." missilePower="1.3" missileAcceleration="0.3" startY="14" hYon="14" timeLimit="300" defaultLives="1000" skyStart="500" opSpd="100" clSpd="100" blockHeight="200" wallYon="125" gameLength="4685" />
   <set teleN1="int ( 21 + ( random * 2.999 ) )" />
   <set goodie1="int ( 1 + ( random * 8 ) )" goodie2="int ( 1 + ( random * 8 ) )" goodie3="int ( 1 + ( random * 8 ) )" goodie4="int ( 1 + ( random * 8 ) )" goodie5="int ( 1 + ( random * 8 ) )" goodie6="int ( 1 + ( random * 8 ) )" goodie7="int ( 1 + ( random * 8 ) )" goodie8="int ( 1 + ( random * 8 ) )" goodie9="int ( 1 + ( random * 8 ) )" goodie10="int ( 1 + ( random * 8 ) )" />
   <set event1="int ( 31 + ( random * 2 ) )" event2="int ( 33 + ( random * 2 ) )" event3="int ( 35 + ( random * 2 ) )" event4="int ( 37 + ( random * 2 ) )" event5="int ( 39 + ( random * 2 ) )" event6="int ( 41 + ( random * 2 ) )" event7="int ( 43 + ( random * 2 ) )" event8="int ( 45 + ( random * 2 ) )" event9="int ( 47 + ( random * 2 ) )" event10="int ( 49 + ( random * 2 ) )" />
@@ -224,9 +224,9 @@
   <Timer in="@start" wait="1" out="@playSound" fill="#0099ff" frame="#000000" cx="271.31944444444446" cz="23.47222222222222" r="5" angle="60" extent="60" />
   <Sound y="50" start="@playSound" restart="false" isPlaced="false" sound="411" volume="1" fill="#0099ff" frame="#000000" cx="271.31944444444446" cz="23.47222222222222" r="5" angle="60" extent="60" />
   <Timer in="@start" wait="4216" out="@thirtyLeft" fill="#0099ff" frame="#000000" cx="271.31944444444446" cz="23.47222222222222" r="5" angle="60" extent="60" />
-  <Text in="@thirtyLeft" sound="snTextBlip" volume="5" showEveryone="true" text="&quot;Thirty Seconds Left!&quot;" fill="#0099ff" frame="#000000" cx="271.31944444444446" cz="23.47222222222222" r="5" angle="60" extent="60" />
+  <Text in="@thirtyLeft" sound="snTextBlip" volume="5" showEveryone="true" text="Thirty Seconds Left!" fill="#0099ff" frame="#000000" cx="271.31944444444446" cz="23.47222222222222" r="5" angle="60" extent="60" />
   <Timer in="@thirtyLeft" wait="312" out="@ten10" fill="#0099ff" frame="#000000" cx="271.31944444444446" cz="23.47222222222222" r="5" angle="60" extent="60" />
-  <Text sound="snTextBlip" volume="5" in="@ten10" showEveryone="true" text="&quot;Ten Seconds Left!&quot;" fill="#0099ff" frame="#000000" cx="271.31944444444446" cz="23.47222222222222" r="5" angle="60" extent="60" />
+  <Text sound="snTextBlip" volume="5" in="@ten10" showEveryone="true" text="Ten Seconds Left!" fill="#0099ff" frame="#000000" cx="271.31944444444446" cz="23.47222222222222" r="5" angle="60" extent="60" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#ff0000" frame="#000000" cx="287.70833333333337" cz="6.597222222222223" r="3.125" angle="60" extent="60" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ff0000" frame="#000000" cx="287.70833333333337" cz="6.597222222222223" r="3.125" angle="60" extent="60" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ff0000" frame="#000000" cx="287.70833333333337" cz="6.597222222222223" r="3.125" angle="60" extent="60" />

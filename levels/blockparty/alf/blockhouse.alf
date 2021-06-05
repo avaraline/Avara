@@ -3,8 +3,8 @@
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="164.86111111111111" cz="81.73611111111111" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="164.86111111111111" cz="81.73611111111111" r="1.25" angle="180" extent="90" />
   <Goody shape="bspGrenade" yon="15" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="164.86111111111111" cz="81.73611111111111" r="1.25" angle="180" extent="90" />
-  <set designer="&quot;mantis  -  
-derek@leapnet.com&quot;" information="&quot;Blockhouse&quot;" />
+  <set designer="mantis  -  
+derek@leapnet.com" information="Blockhouse" />
   <SkyColor fill="#ffffcc" frame="#ffcc99" />
   <GroundColor fill="#663300" frame="#996633" />
   <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#663300" frame="#000000" r="1.875" cx="151.73611111111111" cz="89.86111111111111" angle="270" extent="180" />

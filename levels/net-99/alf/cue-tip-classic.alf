@@ -1,7 +1,7 @@
 <map>
   <SkyColor n="12" fill="#777777" frame="#bbbbbb" />
   <GroundColor fill="#dddddd" frame="#dddddd" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Yellow and blue teams only. Make all the blocks your team's color to win, by touching them. Unlimited lives and time. Stay near the platform for ammo.&quot;" />
+  <set designer="Tyrant - rendon@earthlink.net" information="Yellow and blue teams only. Make all the blocks your team's color to win, by touching them. Unlimited lives and time. Stay near the platform for ammo." />
   <Incarnator y="60" fill="#008800" frame="#000000" cx="29.51388888888889" cz="49.583333333333336" r="1.25" angle="225" extent="90" />
   <set wallHeight="1" />
   <Wall fill="#eeeeee" frame="#000000" x="64.58333333333334" z="87.08333333333334" w="7.5" d="7.5" h="0" y="0" />
@@ -365,7 +365,7 @@
   <WallDoor close="@yello36" open="@blue36" status="isOpen" deltaY="0" deltaX="2000" volume="0" openSpeed="100" closeSpeed="100" fill="#ffffcc" frame="#000000" r="1.25" cx="29.51388888888889" cz="49.583333333333336" angle="225" extent="90" x="64.58333333333334" z="87.08333333333334" w="7.5" d="7.5" h="0" y="1" />
   <Teleporter mask="allTeams -T2 -T6" y="60" activeRange="2000" win="0" out="@wrongTeams" shape="0" fragment="true" fill="#996633" frame="#000000" cx="4.583333333333334" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <Teleporter stop="@start" start="@wrongTeams" y="60" activeRange="2000" win="0" shape="0" fragment="true" fill="#996633" frame="#000000" cx="19.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" text="&quot;Teams must be blue or yellow.&quot;" in="@wrongTeams" fill="#996633" frame="#000000" cx="19.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" text="Teams must be blue or yellow." in="@wrongTeams" fill="#996633" frame="#000000" cx="19.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <Timer in="@taken" out="@repop" wait="45" fill="#996633" frame="#000000" cx="19.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <And in="@start" out="@repop" fill="#996633" frame="#000000" cx="19.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <Goody y="8" yon="0.01" scale="3" shape="bspStandardFloor" grenades="2" missiles="1" start="@repop" out="@taken" stop="@taken" volume="0" fill="#9966ff" frame="#000000" cx="105.83333333333334" cz="53.333333333333336" r="1.25" angle="45" extent="90" />
@@ -452,9 +452,9 @@
   <set wallHeight="1" />
   <Field deltaY="0" watch="targ1" enter="@yelloLost" fill="#ffffff" frame="#000000" r="1.25" cx="39.583333333333336" cz="119.65277777777779" angle="180" extent="90" x="134.58333333333334" z="138.33333333333334" w="22.5" d="0.625" h="0" y="29" />
   <Teleporter stop="@start" start="@yelloLost" mask="T6" y="60" activeRange="2000" win="10000" shape="0" fragment="true" fill="#99ccff" frame="#000000" cx="34.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" text="&quot;Blue team is victorious!&quot;" in="@yelloLost" fill="#99ccff" frame="#000000" cx="34.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" text="Blue team is victorious!" in="@yelloLost" fill="#99ccff" frame="#000000" cx="34.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <Teleporter stop="@start" start="@teleOthers" y="60" activeRange="2000" win="0" shape="0" fragment="true" fill="#008800" frame="#000000" cx="69.58333333333334" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
-  <Text showEveryone="true" text="&quot;Yellow team is victorious!&quot;" in="@blueLost" fill="#008800" frame="#000000" cx="69.58333333333334" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" text="Yellow team is victorious!" in="@blueLost" fill="#008800" frame="#000000" cx="69.58333333333334" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <Teleporter stop="@start" start="@blueLost" mask="T2" y="60" activeRange="2000" win="10000" shape="0" fragment="true" fill="#ffff00" frame="#000000" cx="49.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <And in="@yelloLost" out="@teleOthers" fill="#ffff00" frame="#000000" cx="49.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />
   <And in="@blueLost" out="@teleOthers" fill="#ffff00" frame="#000000" cx="49.583333333333336" cz="9.583333333333334" r="1.25" angle="90" extent="90" />

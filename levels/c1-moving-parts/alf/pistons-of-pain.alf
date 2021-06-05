@@ -126,7 +126,7 @@
   <Area enter="@inrange2" exit="@outrange2" fill="#ffffff" frame="#000000" cx="13.4375" cz="58.263888888888886" r="14.375" angle="0" extent="360" />
   <Guard start="@inrange2" stop="@outrange2" speed=".8" shield="-1" y="12" fill="#660099" frame="#000000" cx="7.5" cz="66.38888888888889" r="1.875" angle="180" extent="90" />
   <Guard start="@inrange1" stop="@outrange1" shield="-1" speed=".8" y="12" fill="#660099" frame="#000000" cx="65.625" cz="10.555555555555555" r="1.875" angle="180" extent="90" />
-  <set designer="&quot;Marc Richter (marc@vitinc.com)&quot;" information="&quot;The question was, what happens if you balance one
+  <set designer="Marc Richter (marc@vitinc.com)" information="The question was, what happens if you balance one
 object on top of another, and then shoot the bottom object?
-Add force fields to bounce, and you have this level...&quot;" />
+Add force fields to bounce, and you have this level..." />
 </map>

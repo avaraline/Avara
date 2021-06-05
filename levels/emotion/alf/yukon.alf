@@ -249,5 +249,5 @@
   <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" spin="false" fill="#ffffff" frame="#000000" cx="64.58333333333334" cz="63.95833333333334" r="2.5" angle="180" extent="90" />
   <Teleporter y="20" shape="0" group="@recenter" spin="false" fill="#ffffff" frame="#000000" cx="64.58333333333334" cz="63.95833333333334" r="2.5" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="64.58333333333334" cz="63.95833333333334" r="2.5" angle="180" extent="90" />
-  <set information="rYukon" />
+  <set information="$rYukon" />
 </map>

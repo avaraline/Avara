@@ -38,8 +38,8 @@ Best for no fewer than four of five Yellow.&quot;&quot;</script>
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffff00" frame="#000000" cx="73.19444444444446" cz="68.02083333333334" r="4.236111111111107" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="10000" start="@winTeam" activeRange="4000" fill="#ffff00" frame="#000000" cx="73.19444444444446" cz="68.02083333333334" r="4.236111111111107" angle="180" extent="90" />
   <set defaultLives="1" />
-  <Text in="@start" wait="30" showEveryone="true" text="&quot;Yellow team. Destroy the remaining Green pilot. He is alone and almost out of ammo.  His transport will arrive in 
-three minutes.&quot;" fill="#ffff00" frame="#000000" cx="73.19444444444446" cz="68.02083333333334" r="4.236111111111107" angle="180" extent="90" />
+  <Text in="@start" wait="30" showEveryone="true" text="Yellow team. Destroy the remaining Green pilot. He is alone and almost out of ammo.  His transport will arrive in 
+three minutes." fill="#ffff00" frame="#000000" cx="73.19444444444446" cz="68.02083333333334" r="4.236111111111107" angle="180" extent="90" />
   <Wall fill="#1c3838" frame="#000000" x="37.43055555555556" z="120.55555555555556" w="15.625" d="0.625" h="6.25" />
   <Wall fill="#1c3838" frame="#000000" x="61.80555555555556" z="120.55555555555556" w="15.625" d="0.625" h="6.25" />
   <Wall fill="#1c3838" frame="#000000" x="86.18055555555556" z="120.55555555555556" w="15.625" d="0.625" h="6.25" />
@@ -123,5 +123,5 @@ three minutes.&quot;" fill="#ffff00" frame="#000000" cx="73.19444444444446" cz="
   <Wall fill="#1c3838" frame="#000000" x="62.43055555555556" z="15.555555555555557" w="16.25" d="0.625" h="6.25" />
   <Guard isTarget="false" mask="T2" y="20" yon="1" shotPower="99" speed="1" freq="10" watch="scoutMask" shield="-1" fill="#7f0000" frame="#000000" cx="88.54166666666667" cz="89.375" r="1.875" angle="90" extent="90" />
   <Parasite accel=".57" mask="T1" y="35" drain="0" shield="-1" yon="1" mass="-30" activeRange="20" fill="#ffff33" frame="#000000" cx="21.73611111111111" cz="84.93055555555556" r="2.5" angle="90" extent="179" />
-  <Text in="@start" wait="230" showEveryone="true" text="&quot;Good hunting, pilots.&quot;" fill="#ffff33" frame="#000000" cx="21.73611111111111" cz="84.93055555555556" r="2.5" angle="90" extent="179" />
+  <Text in="@start" wait="230" showEveryone="true" text="Good hunting, pilots." fill="#ffff33" frame="#000000" cx="21.73611111111111" cz="84.93055555555556" r="2.5" angle="90" extent="179" />
 </map>

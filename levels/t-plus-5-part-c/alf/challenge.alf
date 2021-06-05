@@ -1,8 +1,8 @@
 <map>
   <SkyColor fill="#999999" frame="#cccccc" />
   <GroundColor fill="#9999cc" frame="#9999cc" />
-  <set designer="&quot;Hazel - hazel@avara.org&quot;" information="&quot;The objective is for the GREEN Hector/s to survive  the blocks operated by the YELLOW Hector/s for 1:30 minutes!
-I designed this level for clans to test patential members before letting them join, but it’s good fun too.&quot;" />
+  <set designer="Hazel - hazel@avara.org" information="The objective is for the GREEN Hector/s to survive  the blocks operated by the YELLOW Hector/s for 1:30 minutes!
+I designed this level for clans to test patential members before letting them join, but it’s good fun too." />
   <Teleporter mask="T1" shape="0" win="90000" start="@greenWin" out="@greenMsg" activeRange="3000" fill="#00bb00" frame="#000000" cx="31.25" cz="56.18055555555556" r="2.5" angle="0" extent="90" />
   <Teleporter mask="T2" win="0" shape="0" start="@greenWin" out="@greenMsg" activeRange="3000" fill="#00bb00" frame="#000000" cx="31.25" cz="56.18055555555556" r="2.5" angle="0" extent="90" />
   <Wall fill="#9999ff" frame="#000000" x="19.375" z="1.1805555555555556" w="67.5" d="5" h="22.5" />
@@ -45,8 +45,8 @@ I designed this level for clans to test patential members before letting them jo
   <Timer in="@start" out="@greenWin" wait="1382.34" fill="#ffffff" frame="#000000" cx="57.5" cz="36.80555555555556" r="3.125" angle="225" extent="90" />
   <Teleporter activeRange="3000" win="90000" yon="0.1" mask="T2" start="@winTeam" out="@yellowMsg" fill="#f8e300" frame="#000000" cx="46.25" cz="49.93055555555556" r="2.5" angle="180" extent="90" />
   <Teleporter start="@yellowWin" out="@yellowMsg" activeRange="3000" win="0" yon="0.1" fill="#f8e300" frame="#000000" cx="46.25" cz="49.93055555555556" r="2.5" angle="180" extent="90" />
-  <Text showEveryone="true" text="&quot;Yellow wins!&quot;" in="@yellowMsg" restart="5000" fill="#f8e300" frame="#000000" cx="46.25" cz="49.93055555555556" r="2.5" angle="180" extent="90" />
-  <Text showEveryone="true" text="&quot;Green wins!&quot;" in="@greenMsg" restart="5000" fill="#f8e300" frame="#000000" cx="46.25" cz="49.93055555555556" r="2.5" angle="180" extent="90" />
+  <Text showEveryone="true" text="Yellow wins!" in="@yellowMsg" restart="5000" fill="#f8e300" frame="#000000" cx="46.25" cz="49.93055555555556" r="2.5" angle="180" extent="90" />
+  <Text showEveryone="true" text="Green wins!" in="@greenMsg" restart="5000" fill="#f8e300" frame="#000000" cx="46.25" cz="49.93055555555556" r="2.5" angle="180" extent="90" />
   <set wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="69.375" z="5.555555555555555" w="0.625" d="34.375" h="12.5" />
   <set wallYon="deffaultYon" />

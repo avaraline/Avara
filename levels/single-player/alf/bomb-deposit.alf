@@ -73,10 +73,10 @@
   <Ramp deltaY="2" fill="#777777" frame="#000000" x="165.90277777777777" z="95.90277777777779" w="13.125" d="4.375" h="0" r="1.875" angle="315" extent="90" />
   <Teleporter shape="0" y="-5" group="@lost" deadRange="100" activeRange="105" fill="#ffccff" frame="#000000" cx="95.20833333333334" cz="100.20833333333334" r="5" angle="180" extent="90" />
   <Teleporter shape="0" y="5" group="@lost" status="false" fill="#ffccff" frame="#000000" cx="95.20833333333334" cz="75.20833333333334" r="5" angle="180" extent="90" />
-  <set designer="&quot;Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;&quot;" information="&quot;You have just deposited a bomb in the 
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="You have just deposited a bomb in the 
 heart of this alien fort.  Get to the transporter pad as 
-soon as possible.&quot;" hull.0="mediumHull" hull.2="mediumHull" />
-  <Text in="@start" showEveryone="true" text="&quot;Light and heavy hulls are not available for this mission.&quot;" fill="#ffccff" frame="#000000" cx="95.20833333333334" cz="75.20833333333334" r="5" angle="180" extent="90" />
+soon as possible." hull.0="mediumHull" hull.2="mediumHull" />
+  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." fill="#ffccff" frame="#000000" cx="95.20833333333334" cz="75.20833333333334" r="5" angle="180" extent="90" />
   <Sound sound="snArcticWind" loopCount="-1" y="100" volume="200" fill="#ffccff" frame="#000000" cx="100.20833333333334" cz="0.20833333333333348" r="5" angle="180" extent="90" />
   <Field start="@oGdoor2" stop="@sPush" deltaY="0" deltaZ=".2" fill="#ffccff" frame="#000000" x="78.33333333333334" z="82.70833333333334" w="11.25" d="3.75" h="4.5" r="5" cx="100.20833333333334" cz="0.20833333333333348" angle="180" extent="90" />
   <And in="@cGdoor" out="@sPush" fill="#ffccff" frame="#000000" cx="100.20833333333334" cz="0.20833333333333348" r="5" angle="180" extent="90" />

@@ -1,7 +1,7 @@
 <map>
   <GroundColor fill="#330000" frame="#330000" />
   <SkyColor fill="#993300" frame="#330099" />
-  <set designer="&quot;Kniq - nickrobbins@yahoo.com&quot;" wallHeight="0.2" baseHeight="5" />
+  <set designer="Kniq - nickrobbins@yahoo.com" wallHeight="0.2" baseHeight="5" />
   <Wall fill="#eeeeee" frame="#000000" x="47.01388888888889" z="20.34722222222222" w="5" d="5" h="0" />
   <Wall fill="#eeeeee" frame="#000000" x="47.01388888888889" z="57.84722222222222" w="5" d="5" h="0" />
   <Wall fill="#eeeeee" frame="#000000" x="138.26388888888889" z="57.84722222222222" w="5" d="5" h="0" />
@@ -75,7 +75,7 @@
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@GameEnds" win="0" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@GameEnds" win="0" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
   <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="5" out="@GameEnds" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
-  <set information="&quot;It's a free for all!!  No teams!  Thanks to Cowboy for the script, Christopher Tate for the Choke Layout, and the AA and geezers for beta-testing! Seven minutes.&quot;" maxStartMissiles="6" missileTurnRate="1" missileAcceleration="2" @TextVolume="30" @SnText="210" />
+  <set information="It's a free for all!!  No teams!  Thanks to Cowboy for the script, Christopher Tate for the Choke Layout, and the AA and geezers for beta-testing! Seven minutes." maxStartMissiles="6" missileTurnRate="1" missileAcceleration="2" @TextVolume="30" @SnText="210" />
   <set ambient="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
   <Timer in="@start" out.0="@outNW" out.1="@outNE" out.2="@outSW" out.3="@outSE" wait="150" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
   <Timer in="@midNWT" out="@inNW" wait="260" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
@@ -97,22 +97,22 @@
   <Timer in="@start" out="@thirtyLeft" wait="kMainFrame" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
   <Timer in="@thirtyLeft" out="@tenLeft" wait="kThirtySec" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
   <Timer in="@tenLeft" out="@timeUp" wait="kTenSec" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
-  <Text in="@thirtyLeft" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Thirty Seconds Left!&quot;" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
-  <Text in="@tenLeft" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Only Ten Seconds Left!&quot;" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
-  <Text in="@timeUp" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Time’s Up!&quot;" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
+  <Text in="@thirtyLeft" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Thirty Seconds Left!" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
+  <Text in="@tenLeft" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Only Ten Seconds Left!" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
+  <Text in="@timeUp" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Time’s Up!" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
   <Timer in="@timeUp" out="@GameEnds" wait="1" fill="#000099" frame="#000000" cx="118.19444444444446" cz="152.84722222222223" r="2.0833333333333357" angle="180" extent="90" />
   <set rand10="int ( random * 10 )" />
   <Distributor in="@goal" out.0="@msg0" out.1="@msg1" out.2="@msg2" out.3="@msg3" out.4="@msg4" out.5="@msg5" out.6="@msg6" out.7="@msg7" out.8="@msg8" out.9="@msg9" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg0" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Score!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg1" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Loser Scores!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg2" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Another Score!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg3" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Score!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg4" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Score!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg5" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Another Point!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg6" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Score!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg7" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Lamer Scores Again!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg8" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Another Score!&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
-  <Text in="@msg9" sound="@SnText" volume="@TextVolume" showEveryone="true" text="&quot;Oh, wow, you scored. Now you're cool?&quot;" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg0" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Score!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg1" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Loser Scores!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg2" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Another Score!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg3" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Score!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg4" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Score!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg5" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Another Point!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg6" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Score!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg7" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Lamer Scores Again!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg8" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Another Score!" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
+  <Text in="@msg9" sound="@SnText" volume="@TextVolume" showEveryone="true" text="Oh, wow, you scored. Now you're cool?" fill="#dd0000" frame="#bbbbbb" cx="141.73611111111111" cz="141.11111111111114" r="3.4027777777777715" angle="180" extent="90" />
   <Incarnator y="15" fill="#cc9900" frame="#000000" cx="102.98611111111111" cz="41.59722222222222" r="1.25" angle="225" extent="90" />
   <Incarnator y="15" fill="#cc9900" frame="#000000" cx="87.29166666666667" cz="41.59722222222222" r="1.25" angle="45" extent="90" />
   <Ramp deltaY="98" yon="0.01" y="10" fill="#dd0000" frame="#000000" x="45.76388888888889" z="62.91666666666667" w="20" d="20" h="0" r="2.013888888888893" angle="135" extent="90" />

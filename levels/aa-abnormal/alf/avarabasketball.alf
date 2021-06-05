@@ -177,11 +177,11 @@
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" r="1.25" angle="0" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" r="1.25" angle="0" extent="90" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" r="1.25" angle="0" extent="90" />
-  <set designer="&quot;Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;&quot;" information="&quot;A simulation of Basketball in avaraland.  
+  <set designer="Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;" information="A simulation of Basketball in avaraland.  
 Two teams, one of yellow, one of green, attempt to score in the basket of the other team's color.
-Each player has 200 lives and the game lasts 7 min.&quot;" />
-  <Text showEveryone="true" text="&quot;Yellow Scores!!&quot;" in="@yellowscore" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" r="1.25" angle="0" extent="90" />
-  <Text showEveryone="true" text="&quot;Green Scores!!&quot;" in="@greenscore" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" r="1.25" angle="0" extent="90" />
+Each player has 200 lives and the game lasts 7 min." />
+  <Text showEveryone="true" text="Yellow Scores!!" in="@yellowscore" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" r="1.25" angle="0" extent="90" />
+  <Text showEveryone="true" text="Green Scores!!" in="@greenscore" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" r="1.25" angle="0" extent="90" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@greenscore" fill="#ffffff" frame="#000000" cx="88.125" cz="1.8055555555555558" r="1.25" angle="180" extent="90" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@yellowscore" fill="#ffffff" frame="#000000" cx="102.5" cz="1.1805555555555556" r="1.25" angle="180" extent="90" />
   <Guard y="50" speed="10" shotPower="100" freq="50" watch="scoutMask" shield="100" fill="#330066" frame="#000000" cx="83.88888888888889" cz="100.41666666666667" r="1.875" angle="270" extent="90" />

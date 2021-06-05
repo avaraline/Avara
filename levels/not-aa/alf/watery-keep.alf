@@ -5,7 +5,7 @@
   <Wall fill="#d3c97d" frame="#000000" x="99.58333333333334" z="69.58333333333334" w="5" d="40" h="0" />
   <SkyColor verticalRangeMax="20000" n="10" fill="#e4d6bf" frame="#c5bb73" />
   <GroundColor fill="#302c24" frame="#302c24" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Standard CTF with tweakings: You cannot capture your opponent's flag unless your flag is in its alcove. To return your flag to its alcove transport it manually, or throw it into one of the spinning swirls. Teams are red and blue.&quot;" wallHeight="10" />
+  <set designer="Tyrant - rendon@earthlink.net" information="Standard CTF with tweakings: You cannot capture your opponent's flag unless your flag is in its alcove. To return your flag to its alcove transport it manually, or throw it into one of the spinning swirls. Teams are red and blue." wallHeight="10" />
   <Wall fill="#b6ac69" frame="#000000" x="54.583333333333336" z="39.583333333333336" w="50" d="10" h="0" />
   <set wallHeight="10" />
   <Wall fill="#b6ac69" frame="#000000" x="54.583333333333336" z="49.583333333333336" w="20" d="10" h="0" />
@@ -224,8 +224,8 @@
   <set wallHeight="6" wallYon="0.01" />
   <WallDoor status="isOpen" open="@blueSafe" close="@blueStolen" deltaY="5000" openSpeed="100" closeSpeed="50" guardDelay="1" stopSound="0" closeSound="0" openSound="0" volume="0" fill="#ffffff" frame="#000000" x="82.08333333333334" z="14.583333333333334" w="5" d="5" h="0" r="1.25" cx="74.58333333333334" cz="17.083333333333336" angle="270" extent="90" y="14" />
   <set wallYon="defaultYon" />
-  <Text showEveryone="true" text="&quot;Blue flag returned.&quot;" in="@blueReturn" sound="0" fill="#ffffff" frame="#000000" cx="74.58333333333334" cz="17.083333333333336" r="1.25" angle="270" extent="90" />
-  <Text showEveryone="true" text="&quot;Blue flag stolen.&quot;" in="@blueStolen" sound="0" fill="#ffffff" frame="#000000" cx="74.58333333333334" cz="17.083333333333336" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" text="Blue flag returned." in="@blueReturn" sound="0" fill="#ffffff" frame="#000000" cx="74.58333333333334" cz="17.083333333333336" r="1.25" angle="270" extent="90" />
+  <Text showEveryone="true" text="Blue flag stolen." in="@blueStolen" sound="0" fill="#ffffff" frame="#000000" cx="74.58333333333334" cz="17.083333333333336" r="1.25" angle="270" extent="90" />
   <Sound sound="3003" start="@blueReturn" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="74.58333333333334" cz="17.083333333333336" r="1.25" angle="270" extent="90" />
   <Sound sound="3005" start="@redCaptured" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="74.58333333333334" cz="17.083333333333336" r="1.25" angle="270" extent="90" />
   <Sound sound="3004" start="@blueStolen" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="74.58333333333334" cz="17.083333333333336" r="1.25" angle="270" extent="90" />
@@ -252,8 +252,8 @@
   <WallDoor status="isOpen" open="@redSafe" close="@redStolen" deltaY="5000" openSpeed="100" closeSpeed="50" guardDelay="1" stopSound="0" closeSound="0" openSound="0" volume="0" fill="#ffffff" frame="#000000" x="72.08333333333334" z="159.58333333333334" w="5" d="5" h="0" r="1.875" cx="19.583333333333336" cz="19.51388888888889" angle="225" extent="90" y="14" />
   <set wallYon="defaultYon" wallHeight="6" />
   <Field watch="targ2" deltaY="0" enter="@redSafe" exit="@redStolen" fill="#ffffff" frame="#000000" x="82.08333333333334" z="159.58333333333334" w="5" d="5" h="0" r="1.875" cx="19.583333333333336" cz="19.51388888888889" angle="225" extent="90" y="14" />
-  <Text showEveryone="true" text="&quot;Red flag returned.&quot;" in="@redReturn" sound="0" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
-  <Text showEveryone="true" text="&quot;Red flag stolen.&quot;" in="@redStolen" sound="0" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
+  <Text showEveryone="true" text="Red flag returned." in="@redReturn" sound="0" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
+  <Text showEveryone="true" text="Red flag stolen." in="@redStolen" sound="0" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
   <Sound sound="3003" start="@redReturn" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
   <Sound sound="3005" start="@blueCaptured" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
   <Sound sound="3004" start="@redStolen" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="19.583333333333336" cz="19.51388888888889" r="1.875" angle="225" extent="90" />
@@ -486,19 +486,19 @@
   <set wallHeight="20" />
   <Wall fill="#d3c97d" frame="#000000" x="92.08333333333334" z="69.58333333333334" w="2.5" d="5" h="0" y="40" />
   <Distributor in="@redCaptured" out.0="@blueCaptured1" out.1="@blueCaptured2" out.2="@blueCaptured3" out.3="@blueCaptured4" out.4="@blueCaptured5" out.5="@null" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Blue has 1 capture!&quot;" in="@blueCaptured1" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Blue has 2 captures!&quot;" in="@blueCaptured2" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Blue has 3 captures!&quot;" in="@blueCaptured3" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Blue has 4 captures!&quot;" in="@blueCaptured4" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Blue has 5 captures!&quot;" in="@blueCaptured5" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Blue has 6 captures - Blue wins!&quot;" in="@blueWon" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Blue has 1 capture!" in="@blueCaptured1" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Blue has 2 captures!" in="@blueCaptured2" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Blue has 3 captures!" in="@blueCaptured3" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Blue has 4 captures!" in="@blueCaptured4" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Blue has 5 captures!" in="@blueCaptured5" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Blue has 6 captures - Blue wins!" in="@blueWon" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
   <Distributor in="@blueCaptured" out.0="@redCaptured1" out.1="@redCaptured2" out.2="@redCaptured3" out.3="@redCaptured4" out.4="@redCaptured5" out.5="@null" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Red has 1 capture!&quot;" in="@redCaptured1" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Red has 2 captures!&quot;" in="@redCaptured2" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Red has 3 captures!&quot;" in="@redCaptured3" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Red has 4 captures!&quot;" in="@redCaptured4" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Red has 5 captures!&quot;" in="@redCaptured5" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
-  <Text showEveryone="true" text="&quot;Red has 6 captures - Red wins!&quot;" in="@redWon" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Red has 1 capture!" in="@redCaptured1" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Red has 2 captures!" in="@redCaptured2" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Red has 3 captures!" in="@redCaptured3" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Red has 4 captures!" in="@redCaptured4" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Red has 5 captures!" in="@redCaptured5" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
+  <Text showEveryone="true" text="Red has 6 captures - Red wins!" in="@redWon" sound="0" fill="#d3c97d" frame="#000000" cx="77.15277777777779" cz="146.52777777777777" r="0.625" angle="90" extent="180" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#fffb05" frame="#ff0004" cx="79.65277777777779" cz="25.90277777777778" r="1.25" angle="180" extent="270" />
   <Timer in="mTaken" out="mShow" wait="234" fill="#fffb05" frame="#ff0004" cx="79.65277777777779" cz="25.90277777777778" r="1.25" angle="180" extent="270" />

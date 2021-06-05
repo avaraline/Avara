@@ -1,7 +1,7 @@
 <map>
   <SkyColor n="1024" verticalRangeMax="59999" fill="#ffff33" frame="#440000" />
   <GroundColor fill="#ffff33" frame="#ffff33" />
-  <set designer="&quot;Plastic Chicken&quot;" information="&quot;you snap like a match, burn like a match, and kill like a match.  200 nades and missiles are allowed&quot;" hull.0="1005" hull.1="hull[0]" hull.2="hull[0]" missileAcceleration="5" missileTurnRate="5" grenadePower=".3" missilePower=".3" maxStartMissiles="200" maxStartGrenades="200" maxStartBoosts="0" gravity=".2" defaultLives="9" />
+  <set designer="Plastic Chicken" information="you snap like a match, burn like a match, and kill like a match.  200 nades and missiles are allowed" hull.0="1005" hull.1="hull[0]" hull.2="hull[0]" missileAcceleration="5" missileTurnRate="5" grenadePower=".3" missilePower=".3" maxStartMissiles="200" maxStartGrenades="200" maxStartBoosts="0" gravity=".2" defaultLives="9" />
   <Ufo targetGroup="targ1" y="3" watch="false" pitchRange="80" shield="-1" verticalRangeMax="1.9" verticalRangeMin="1.5" hitScore="0" yon=".001" isTarget="false" scale=".1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" r="1.875" angle="270" extent="90" />
   <Wall fill="#ffcc66" frame="#000000" x="175" z="7.5" w="8.75" d="8.75" h="0" />
   <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@aaStrt" exit="@aaStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="270" extent="90" />

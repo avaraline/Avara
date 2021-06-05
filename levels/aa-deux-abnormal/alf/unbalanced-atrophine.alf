@@ -1,10 +1,10 @@
 <map>
   <set defaultLives="10" maxStartGrenades="10" maxStartMissiles="5" />
   <Wall fill="#ffff33" frame="#000000" x="52.56944444444445" z="111.94444444444444" w="20" d="2.5" h="0" />
-  <Text in="@blueWall" showEveryone="true" text="&quot;Blue reactor core wall breach.&quot;" fill="#ffff33" frame="#000000" />
-  <Text in="@yellowWin" showEveryone="true" text="&quot;Yellow team objectives fulfilled.&quot;" fill="#ffff33" frame="#000000" />
-  <Text in="@yellowWall" showEveryone="true" text="&quot;Yellow reactor core wall breach.&quot;" fill="#ffff33" frame="#000000" />
-  <Text in="@blueWin" showEveryone="true" text="&quot;Blue team objectives fulfilled.&quot;" fill="#ffff33" frame="#000000" />
+  <Text in="@blueWall" showEveryone="true" text="Blue reactor core wall breach." fill="#ffff33" frame="#000000" />
+  <Text in="@yellowWin" showEveryone="true" text="Yellow team objectives fulfilled." fill="#ffff33" frame="#000000" />
+  <Text in="@yellowWall" showEveryone="true" text="Yellow reactor core wall breach." fill="#ffff33" frame="#000000" />
+  <Text in="@blueWin" showEveryone="true" text="Blue team objectives fulfilled." fill="#ffff33" frame="#000000" />
   <SkyColor fill="#ffccff" frame="#ccffff" />
   <GroundColor fill="#777777" frame="#ccffff" />
   <Teleporter shape="0" y="200" win="0" start="@blueWin" activeRange="2000" fill="#777777" frame="#000000" cx="6.944444444444445" cz="47.083333333333336" r="2.5" angle="180" extent="90" />
@@ -76,13 +76,13 @@
   <Incarnator y="6" mask="T6" fill="#66ffff" frame="#000000" cx="32.56944444444444" cz="16.944444444444446" r="2.5" angle="315" extent="90" />
   <Incarnator y="6" mask="T6" fill="#66ffff" frame="#000000" cx="72.56944444444444" cz="16.944444444444446" r="2.5" angle="315" extent="90" />
   <Guard y="3.8" yon="45" killMsg="@blueGun" start="@yellowIn" stop="@yellowOut" shield="20" shotPower="0.7" freq="9" speed="3" hitScore="30" killScore="1000" team="6" mask="T2" watch="playerMask" fill="#66ffff" frame="#000000" cx="52.56944444444445" cz="18.26388888888889" r="2.5" angle="315" extent="90" />
-  <Text in="@yellowGun" showEveryone="true" text="&quot;Yellow defense cannon destroyed.&quot;" fill="#66ffff" frame="#000000" cx="52.56944444444445" cz="18.26388888888889" r="2.5" angle="315" extent="90" />
-  <Text in="@blueGun" showEveryone="true" text="&quot;Blue defense cannon destroyed.&quot;" fill="#66ffff" frame="#000000" cx="52.56944444444445" cz="18.26388888888889" r="2.5" angle="315" extent="90" />
-  <set information="&quot;Special thanks to Avenger and Trotsky for their help.
+  <Text in="@yellowGun" showEveryone="true" text="Yellow defense cannon destroyed." fill="#66ffff" frame="#000000" cx="52.56944444444445" cz="18.26388888888889" r="2.5" angle="315" extent="90" />
+  <Text in="@blueGun" showEveryone="true" text="Blue defense cannon destroyed." fill="#66ffff" frame="#000000" cx="52.56944444444445" cz="18.26388888888889" r="2.5" angle="315" extent="90" />
+  <set information="Special thanks to Avenger and Trotsky for their help.
 Two teams, yellow and blue. Each player gets ten
 lives. The team with less players should take blue.
 Objective: Destroy enemy reactor core.
-You cannot enter enemy reactor core area.&quot;" />
+You cannot enter enemy reactor core area." />
   <Teleporter shape="0" y="200" win="0" start="@winTeam" activeRange="2000" fill="#66ffff" frame="#000000" cx="6.944444444444445" cz="65.06944444444444" r="2.5" angle="180" extent="90" />
   <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@blueWall" fill="#0066ff" frame="#000000" r="2.5" cx="6.944444444444445" cz="65.06944444444444" angle="180" extent="90" x="51.31944444444445" z="24.444444444444446" w="2.5" d="2.5" h="0" />
   <WallSolid canGlow="true" isTarget="true" shield="15" killMsg="@blueWall" fill="#0066ff" frame="#000000" r="2.5" cx="6.944444444444445" cz="65.06944444444444" angle="180" extent="90" x="42.56944444444444" z="20.694444444444446" w="2.5" d="3.75" h="0" />

@@ -1,8 +1,8 @@
 <map>
-  <set information="&quot;Your HECTOR leaves a trail behind. If you stop or slow
+  <set information="Your HECTOR leaves a trail behind. If you stop or slow
 down, it will catch up with you and you will die.
 Use your trail to box in the other HECTORs.
-This is the 16x16 version.&quot;" wallHeight="5" baseHeight="100" incHeight="wallHeight * 2" gridYon="32" hull.0="hullNort" hull.1="hull[0]" hull.2="hull[0]" defaultLives="1" wallYon="gridYon" OpDel="7" OpSpd="50" StartDelay="60" />
+This is the 16x16 version." wallHeight="5" baseHeight="100" incHeight="wallHeight * 2" gridYon="32" hull.0="hullNort" hull.1="hull[0]" hull.2="hull[0]" defaultLives="1" wallYon="gridYon" OpDel="7" OpSpd="50" StartDelay="60" />
   <SkyColor fill="#0000dd" frame="#222222" />
   <GroundColor fill="#0000dd" frame="#222222" />
   <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="5.277777777777778" cz="25.833333333333336" r="1.875" angle="0" extent="90" />

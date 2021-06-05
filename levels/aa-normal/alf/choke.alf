@@ -7,7 +7,7 @@
   <Wall fill="#eeeeee" frame="#000000" x="93.54166666666667" z="33.81944444444444" w="5" d="5" h="0" />
   <Wall fill="#eeeeee" frame="#000000" x="93.54166666666667" z="15.069444444444445" w="5" d="5" h="0" />
   <set baseHeight="0" />
-  <set information="&quot;Don't you just hate bottlenecks?  Down-and-dirty tactics is the key to this level.  Select a HECTOR wisely....&quot;" maxStartMissiles="0" />
+  <set information="Don't you just hate bottlenecks?  Down-and-dirty tactics is the key to this level.  Select a HECTOR wisely...." maxStartMissiles="0" />
   <set ambient="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
   <unique vars="firstWave secondWaveNET secondWaveNE secondWaveNWT secondWaveNW secondWaveSET secondWaveSE secondWaveSWT secondWaveSW thirdWaveNET thirdWaveNE thirdWaveNWT thirdWaveNW thirdWaveSET thirdWaveSE thirdWaveSWT thirdWaveSW" />
   <Timer in="@start" out="firstWave" wait="150" fill="#eeeeee" frame="#000000" />
@@ -69,5 +69,5 @@
   <unique vars="mBubble" />
   <Teleporter shape="0" status="true" activeRange="2000" deadRange="15 * 5" group="mBubble" y="30" fill="#ffcc00" frame="#000000" cx="50.41666666666667" cz="36.31944444444444" r="1.25" angle="90" extent="180" />
   <Teleporter shape="0" y="21" group="mBubble" fill="#cc6666" frame="#000000" cx="50.41666666666667" cz="36.31944444444444" r="1.25" angle="270" extent="180" />
-  <set designer="&quot;Christopher Tate &lt;ctate@world.std.com&gt;&quot;" />
+  <set designer="Christopher Tate &lt;ctate@world.std.com&gt;" />
 </map>

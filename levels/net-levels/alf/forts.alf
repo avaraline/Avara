@@ -5,7 +5,7 @@
   <Wall fill="#ffff00" frame="#000000" x="151.11111111111111" z="187.1527777777778" w="2.5" d="2.5" h="6" />
   <WallDoor middle="0.2" midZ="15 / 8" deltaZ="15 / 8" deltaY="0" deltaX="-5" open="@oGreenSouth" close="@oGreenSouth" closeDelay="100" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#008800" frame="#000000" r="4.375" cx="71.11111111111111" cz="48.125" angle="0" extent="360" x="67.36111111111111" z="47.5" w="7.5" d="1.25" h="2.5" />
   <Area mask="T1" enter="@oGreenSouth" fill="#008800" frame="#000000" cx="71.11111111111111" cz="48.125" r="4.375" angle="0" extent="360" />
-  <Text text="&quot;The password is ’rugrat’.&quot;" fill="#008800" frame="#000000" cx="71.11111111111111" cz="48.125" r="4.375" angle="0" extent="360" />
+  <Text text="The password is ’rugrat’." fill="#008800" frame="#000000" cx="71.11111111111111" cz="48.125" r="4.375" angle="0" extent="360" />
   <Incarnator mask="T1" fill="#006600" frame="#006600" cx="57.361111111111114" cz="41.25" r="1.25" angle="180" extent="270" />
   <Incarnator mask="T1" fill="#006600" frame="#006600" cx="86.11111111111111" cz="31.25" r="1.25" angle="180" extent="270" />
   <Incarnator mask="T1" fill="#006600" frame="#006600" cx="69.86111111111111" cz="14.375" r="1.25" angle="180" extent="270" />
@@ -76,11 +76,11 @@
   <Wall fill="#0099ff" frame="#000000" x="128.61111111111111" z="93.75" w="12.5" d="11.875" h="0" />
   <Wall fill="#0099ff" frame="#000000" x="42.986111111111114" z="135.625" w="18.125" d="3.125" h="2" />
   <Wall fill="#0099ff" frame="#000000" x="57.361111111111114" z="138.75" w="3.75" d="13.75" h="1.5" />
-  <set designer="&quot;Juri Munkki&quot;" information="&quot;Enter the transporter at the enemy 
+  <set designer="Juri Munkki" information="Enter the transporter at the enemy 
 fortress. Walls around the transporter can 
 be opened by hitting one of the walls. 
 (Plot needs more work, obviously.)
-6 players: green (3) and yellow (3) teams&quot;" />
+6 players: green (3) and yellow (3) teams" />
   <Wall fill="#00ee00" frame="#000000" x="91.11111111111111" z="21.25" w="2.5" d="5" h="1" />
   <Wall fill="#00ee00" frame="#000000" x="88.61111111111111" z="21.25" w="2.5" d="5" h="0.5" />
   <Wall fill="#00ee00" frame="#000000" x="49.236111111111114" z="21.875" w="2.5" d="5" h="1" />

@@ -13,9 +13,9 @@
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="107.29166666666667" z="75.20833333333334" w="15" d="6.25" h="0" r="1.875" angle="91" extent="178" />
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="92.29166666666667" z="115.20833333333334" w="15" d="6.25" h="0" r="1.875" angle="269" extent="184" />
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="107.29166666666667" z="115.20833333333334" w="15" d="6.25" h="0" r="1.875" angle="268" extent="185" />
-  <set designer="&quot;Shakespeare - bahome@san.rr..com&quot;" information="&quot;One Green (hunted) tries to stay alive for 3 
+  <set designer="Shakespeare - bahome@san.rr..com" information="One Green (hunted) tries to stay alive for 3 
 minutes against all other Yellow (hunter). This 
-time Green can fight back...&quot;" />
+time Green can fight back..." />
   <SkyColor fill="#0000bb" frame="#000033" />
   <GroundColor fill="#002200" frame="#000000" />
   <Wall fill="#1c3838" frame="#000000" x="86.04166666666667" z="54.583333333333336" w="0.625" d="10.625" h="6.25" />
@@ -33,8 +33,8 @@ time Green can fight back...&quot;" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffff00" frame="#000000" cx="109.30555555555556" cz="97.04861111111111" r="4.236111111111114" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="10000" start="@winTeam" activeRange="4000" fill="#ffff00" frame="#000000" cx="109.30555555555556" cz="97.04861111111111" r="4.236111111111114" angle="180" extent="90" />
   <set defaultLives="3" />
-  <Text in="@start" wait="30" showEveryone="true" text="&quot;Yellow Team. Destroy the remaining Green pilot.  He is alone and almost out of ammo.  His transport will arrive 
-in three minutes.&quot;" fill="#ffff00" frame="#000000" cx="109.30555555555556" cz="97.04861111111111" r="4.236111111111114" angle="180" extent="90" />
+  <Text in="@start" wait="30" showEveryone="true" text="Yellow Team. Destroy the remaining Green pilot.  He is alone and almost out of ammo.  His transport will arrive 
+in three minutes." fill="#ffff00" frame="#000000" cx="109.30555555555556" cz="97.04861111111111" r="4.236111111111114" angle="180" extent="90" />
   <Wall fill="#1c3838" frame="#000000" x="73.54166666666667" z="148.95833333333334" w="15.625" d="0.625" h="6.25" />
   <Wall fill="#1c3838" frame="#000000" x="97.91666666666667" z="148.95833333333334" w="15.625" d="0.625" h="6.25" />
   <Wall fill="#1c3838" frame="#000000" x="122.29166666666667" z="148.95833333333334" w="15.625" d="0.625" h="6.25" />
@@ -121,15 +121,15 @@ in three minutes.&quot;" fill="#ffff00" frame="#000000" cx="109.30555555555556" 
   <Timer in="@startmine1" out="@stopmine1" wait="250" fill="#7f0000" frame="#000000" cx="211.66666666666669" cz="80.83333333333334" r="2.5" angle="180" extent="90" />
   <Wall fill="#005500" frame="#000000" x="187.91666666666669" z="110.20833333333334" w="1.25" d="10.625" h="0.25" />
   <Wall fill="#005500" frame="#000000" x="189.16666666666669" z="110.20833333333334" w="9.375" d="1.25" h="0.25" />
-  <Text in="@startmine1" showEveryone="true" restart="250" text="&quot;Sensors detect brown mines are active.&quot;" fill="#005500" frame="#000000" cx="211.66666666666669" cz="80.83333333333334" r="2.5" angle="180" extent="90" />
-  <Text in="@stopmine1" restart="250" showEveryone="true" text="&quot;Brown mines have been deactivated.&quot;" fill="#005500" frame="#000000" cx="211.66666666666669" cz="80.83333333333334" r="2.5" angle="180" extent="90" />
+  <Text in="@startmine1" showEveryone="true" restart="250" text="Sensors detect brown mines are active." fill="#005500" frame="#000000" cx="211.66666666666669" cz="80.83333333333334" r="2.5" angle="180" extent="90" />
+  <Text in="@stopmine1" restart="250" showEveryone="true" text="Brown mines have been deactivated." fill="#005500" frame="#000000" cx="211.66666666666669" cz="80.83333333333334" r="2.5" angle="180" extent="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine1" stop="@stopmine1" fill="#993300" frame="#008800" cx="152.15277777777777" cz="145.83333333333334" r="1.25" angle="45" extent="90" />
   <Area mask="T1" freq="2" enter="@startmine2" fill="#7f0000" frame="#000000" cx="42.951388888888886" cz="124.30555555555557" r="2.2222222222222214" angle="0" extent="360" />
   <Timer in="@startmine2" out="@stopmine2" wait="250" fill="#7f0000" frame="#000000" cx="11.666666666666668" cz="108.95833333333334" r="2.5" angle="180" extent="90" />
   <Wall fill="#005500" frame="#000000" x="47.91666666666667" z="118.33333333333334" w="1.25" d="10.625" h="0.25" />
   <Wall fill="#005500" frame="#000000" x="38.54166666666667" z="118.33333333333334" w="9.375" d="1.25" h="0.25" />
-  <Text in="@startmine2" showEveryone="true" restart="250" text="&quot;Sensors detect green mines are active.&quot;" fill="#005500" frame="#000000" cx="11.666666666666668" cz="108.95833333333334" r="2.5" angle="180" extent="90" />
-  <Text in="@stopmine2" restart="250" showEveryone="true" text="&quot;Green mines have been deactivated.&quot;" fill="#005500" frame="#000000" cx="11.666666666666668" cz="108.95833333333334" r="2.5" angle="180" extent="90" />
+  <Text in="@startmine2" showEveryone="true" restart="250" text="Sensors detect green mines are active." fill="#005500" frame="#000000" cx="11.666666666666668" cz="108.95833333333334" r="2.5" angle="180" extent="90" />
+  <Text in="@stopmine2" restart="250" showEveryone="true" text="Green mines have been deactivated." fill="#005500" frame="#000000" cx="11.666666666666668" cz="108.95833333333334" r="2.5" angle="180" extent="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine2" stop="@stopmine2" fill="#002200" frame="#008800" cx="46.66666666666667" cz="111.66666666666667" r="1.25" angle="45" extent="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine2" stop="@stopmine2" fill="#002200" frame="#008800" cx="46.66666666666667" cz="102.29166666666667" r="1.25" angle="45" extent="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine2" stop="@stopmine2" fill="#002200" frame="#008800" cx="46.66666666666667" cz="92.91666666666667" r="1.25" angle="45" extent="90" />
@@ -141,15 +141,15 @@ in three minutes.&quot;" fill="#ffff00" frame="#000000" cx="109.30555555555556" 
   <Area restart="250" mask="T1" freq="2" enter="@startmine3" fill="#7f0000" frame="#000000" cx="106.73611111111111" cz="39.61805555555556" r="2.430555555555557" angle="0" extent="360" />
   <Timer in="@startmine3" out="@stopmine3" wait="250" fill="#7f0000" frame="#000000" cx="109.44444444444444" cz="7.5" r="2.5" angle="180" extent="90" />
   <Wall fill="#005500" frame="#000000" x="99.16666666666667" z="33.958333333333336" w="15" d="1.25" h="0.25" />
-  <Text in="@startmine3" showEveryone="true" restart="250" text="&quot;Sensors detect grey mines are active.&quot;" fill="#005500" frame="#000000" cx="109.44444444444444" cz="7.5" r="2.5" angle="180" extent="90" />
-  <Text in="@stopmine3" restart="250" showEveryone="true" text="&quot;Grey mines have been deactivated.&quot;" fill="#005500" frame="#000000" cx="109.44444444444444" cz="7.5" r="2.5" angle="180" extent="90" />
+  <Text in="@startmine3" showEveryone="true" restart="250" text="Sensors detect grey mines are active." fill="#005500" frame="#000000" cx="109.44444444444444" cz="7.5" r="2.5" angle="180" extent="90" />
+  <Text in="@stopmine3" restart="250" showEveryone="true" text="Grey mines have been deactivated." fill="#005500" frame="#000000" cx="109.44444444444444" cz="7.5" r="2.5" angle="180" extent="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="15" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine3" stop="@stopmine3" fill="#555555" frame="#008800" cx="41.875" cz="36.94444444444444" r="1.25" angle="45" extent="90" />
   <Area mask="T1" freq="2" enter="@startmine4" fill="#7f0000" frame="#000000" cx="105.41666666666667" cz="142.3263888888889" r="2.8472222222222285" angle="0" extent="360" />
   <Timer in="@startmine4" out="@stopmine4" wait="250" fill="#7f0000" frame="#000000" cx="78.26388888888889" cz="158.19444444444446" r="2.5" angle="180" extent="90" />
   <Wall fill="#005500" frame="#000000" x="97.91666666666667" z="135.83333333333334" w="1.25" d="13.125" h="0.25" />
   <Wall fill="#005500" frame="#000000" x="102.29166666666667" z="135.20833333333334" w="8.75" d="0.625" h="0.25" />
-  <Text in="@startmine4" showEveryone="true" restart="250" text="&quot;Sensors detect blue mines are active.&quot;" fill="#005500" frame="#000000" cx="78.26388888888889" cz="158.19444444444446" r="2.5" angle="180" extent="90" />
-  <Text in="@stopmine4" restart="250" showEveryone="true" text="&quot;Blue mines have been deactivated.&quot;" fill="#005500" frame="#000000" cx="78.26388888888889" cz="158.19444444444446" r="2.5" angle="180" extent="90" />
+  <Text in="@startmine4" showEveryone="true" restart="250" text="Sensors detect blue mines are active." fill="#005500" frame="#000000" cx="78.26388888888889" cz="158.19444444444446" r="2.5" angle="180" extent="90" />
+  <Text in="@stopmine4" restart="250" showEveryone="true" text="Blue mines have been deactivated." fill="#005500" frame="#000000" cx="78.26388888888889" cz="158.19444444444446" r="2.5" angle="180" extent="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine4" stop="@stopmine4" fill="#000088" frame="#008800" cx="68.81944444444444" cz="137.01388888888889" r="1.25" angle="45" extent="90" />
   <Wall fill="#005500" frame="#000000" x="112.29166666666667" z="135.83333333333334" w="1.25" d="13.125" h="0.25" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine2" stop="@stopmine2" fill="#002200" frame="#008800" cx="46.66666666666667" cz="71.04166666666667" r="1.25" angle="45" extent="90" />
@@ -261,7 +261,7 @@ in three minutes.&quot;" fill="#ffff00" frame="#000000" cx="109.30555555555556" 
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine4" stop="@stopmine4" fill="#000088" frame="#008800" cx="116.94444444444444" cz="157.63888888888889" r="1.25" angle="45" extent="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="1" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume="0" activeTimer="1" hitScore="0" start="@startmine4" stop="@stopmine4" fill="#000088" frame="#008800" cx="105.06944444444444" cz="158.88888888888889" r="1.25" angle="45" extent="90" />
   <Timer wait="15" in="@start" out="@incarn" fill="#ffffff" frame="#000000" cx="67.25694444444444" cz="211.25" r="3.854166666666668" angle="270" extent="90" />
-  <Text in="@start" wait="200" showEveryone="true" text="&quot;Be careful.  Green has set some mines in this area, and he can call in air strikes. Good hunting, pilots.&quot;" fill="#ffffff" frame="#000000" cx="67.25694444444444" cz="211.25" r="3.854166666666668" angle="270" extent="90" />
+  <Text in="@start" wait="200" showEveryone="true" text="Be careful.  Green has set some mines in this area, and he can call in air strikes. Good hunting, pilots." fill="#ffffff" frame="#000000" cx="67.25694444444444" cz="211.25" r="3.854166666666668" angle="270" extent="90" />
   <Incarnator mask="T1" y="20" start="@incarn" fill="#ffff33" frame="#000000" cx="131.66666666666669" cz="30.208333333333336" r="2.5" angle="90" extent="180" />
   <Incarnator mask="T1" start="@incarn" y="20" fill="#ffff33" frame="#000000" cx="89.16666666666667" cz="140.83333333333334" r="2.5" angle="90" extent="180" />
 </map>

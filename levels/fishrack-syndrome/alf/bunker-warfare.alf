@@ -343,6 +343,6 @@ endd</script>
   <Solid shape="bspCubeFrame" y=".5" shield="15" killMsg="@bWin" isTarget="true" canGlow="true" fill="#ee0000" frame="#ee0000" cx="55.625" cz="110.625" r="1.875" angle="90" extent="90" />
   <set baseHeight="19" />
   <Solid shape="bspCubeFrame" y=".5" shield="15" killMsg="@rWin" isTarget="true" canGlow="true" fill="#0033ff" frame="#0033ff" cx="152.5" cz="100.625" r="1.875" angle="180" extent="90" />
-  <Text text="&quot;Red Wins!&quot;" in="@rWin" showEveryone="true" fill="#0033ff" frame="#0033ff" cx="152.5" cz="100.625" r="1.875" angle="180" extent="90" />
-  <Text text="&quot;Blue Wins!&quot;" in="@bWin" showEveryone="true" fill="#0033ff" frame="#0033ff" cx="152.5" cz="100.625" r="1.875" angle="180" extent="90" />
+  <Text text="Red Wins!" in="@rWin" showEveryone="true" fill="#0033ff" frame="#0033ff" cx="152.5" cz="100.625" r="1.875" angle="180" extent="90" />
+  <Text text="Blue Wins!" in="@bWin" showEveryone="true" fill="#0033ff" frame="#0033ff" cx="152.5" cz="100.625" r="1.875" angle="180" extent="90" />
 </map>

@@ -89,8 +89,8 @@
   <Timer in="mTaken" out="mShow" wait="10" fill="#dd0000" frame="#000000" cx="121.45833333333334" cz="97.70833333333334" r="2.5" angle="0" extent="90" />
   <Goody shape="bspGrenade" y="1.75" speed="2" grenades="1" start="mShow" out="mTaken" fill="#dd0000" frame="#000000" cx="121.45833333333334" cz="97.70833333333334" r="2.5" angle="0" extent="90" />
   <Hologram shape="bspGroundStar" fill="#dd0000" frame="#000000" cx="121.45833333333334" cz="97.70833333333334" r="2.5" angle="0" extent="90" />
-  <set designer="&quot;Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;&quot;" information="&quot;A rescue mission gone bad has left you trapped in an abandoned structure.  The transporter that can take you home is right in front of you, but how will you get past the barriers?&quot;" hull.0="mediumHull" hull.2="mediumHull" />
-  <Text in="@start" showEveryone="true" text="&quot;Light and heavy hulls are not available for this mission.&quot;" fill="#dd0000" frame="#000000" cx="121.45833333333334" cz="97.70833333333334" r="2.5" angle="0" extent="90" />
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="A rescue mission gone bad has left you trapped in an abandoned structure.  The transporter that can take you home is right in front of you, but how will you get past the barriers?" hull.0="mediumHull" hull.2="mediumHull" />
+  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." fill="#dd0000" frame="#000000" cx="121.45833333333334" cz="97.70833333333334" r="2.5" angle="0" extent="90" />
   <set wallYon=".5" />
   <Wall fill="#9900cc" frame="#000000" x="32.708333333333336" z="22.708333333333336" w="45" d="27.5" h="15" />
   <Wall fill="#9900cc" frame="#000000" x="77.70833333333334" z="20.208333333333336" w="52.5" d="2.5" h="15" />

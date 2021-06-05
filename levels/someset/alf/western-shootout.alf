@@ -191,10 +191,10 @@
   <And in="@start" out="mShow" fill="#ff0000" frame="#000000" cx="76.5625" cz="104.72222222222223" r="1.875" angle="270" extent="180" />
   <Timer in="mTaken" out="mShow" wait="300" fill="#ff0000" frame="#000000" cx="76.5625" cz="104.72222222222223" r="1.875" angle="270" extent="180" />
   <Goody shape="bspGrenade" y="2" yon="100" speed="10" grenades="6" start="mShow" out="mTaken" fill="#ff0000" frame="#000000" cx="76.5625" cz="104.72222222222223" r="1.875" angle="270" extent="180" />
-  <set designer="&quot;SomeGuy &lt;someguy@avara.net&gt;&quot;" information="&quot;Are you talking to me?
+  <set designer="SomeGuy &lt;someguy@avara.net&gt;" information="Are you talking to me?
 Are you talking to me?!
 Well, I can’t see anyone else here.
-So you must be talking to me.&quot;" />
+So you must be talking to me." />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ff0000" frame="#000000" cx="27.5" cz="38.75" r="1.875" angle="180" extent="180" />
   <Timer in="mTaken" out="mShow" wait="315" fill="#ff0000" frame="#000000" cx="27.5" cz="38.75" r="1.875" angle="180" extent="180" />

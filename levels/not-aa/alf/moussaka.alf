@@ -17,7 +17,7 @@
   <set wallYon="defaultYon" />
   <SkyColor verticalRangeMax="10000" n="12" fill="#f3f8ff" frame="#c7cbd2" />
   <GroundColor fill="#000000" frame="#000000" />
-  <set designer="&quot;Tyrant - rendon@earthlink.net&quot;" information="&quot;Im telling you, there's highly advanced yetis forging a civilization in my fish tank.&quot;" />
+  <set designer="Tyrant - rendon@earthlink.net" information="Im telling you, there's highly advanced yetis forging a civilization in my fish tank." />
   <Guard y="5000" stop="@redCP1Stop" start="@redCP1" watch="targ1" freq="46.85" speed="100" fill="#661516" frame="#000000" cx="141.45833333333334" cz="987.7083333333334" r="1.875" angle="225" extent="90" />
   <set wallHeight="2" />
   <WallSolid targetGroup="targ1" hitMsg="@redPoint" hitSound="0" hitVolume="0" fill="#661516" frame="#000000" x="151.45833333333334" z="986.4583333333334" w="1.25" d="2.5" h="0" r="1.875" cx="141.45833333333334" cz="987.7083333333334" angle="225" extent="90" y="4999" />

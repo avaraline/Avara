@@ -94,7 +94,7 @@
   <Incarnator status="false" start="@oSlider" fill="#0099ff" frame="#000000" cx="129.65277777777777" cz="271.45833333333337" r="1.875" angle="315" extent="90" />
   <Guard y="25" shield="-1" track="false" start="@notGonnaHappen" fireMsg="@fire" shotPower="10" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="315" extent="90" />
   <Timer in.0="@fire" in.1="start" out="@fire" wait="100" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="315" extent="90" />
-  <set designer="&quot;Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;&quot;" information="&quot;Find the transporter and exit.&quot;" />
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="Find the transporter and exit." />
   <Incarnator stop="@start" y="0" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="315" extent="90" />
   <Incarnator stop="@start" y="3" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="315" extent="90" />
   <Incarnator stop="@start" y="6" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="315" extent="90" />
