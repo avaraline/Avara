@@ -46,7 +46,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         NVGcolor aliveColor = nvgRGBA(255, 255, 255, 255);
         NVGcolor deadColor = nvgRGBA(165, 165, 165, 255);
         NVGcolor highColor = nvgRGBA(255, 0, 0, 255);
-        float colWidth = 80;
+        float colWidth = 70;
         float rankWidth = 40;
         
         //use netscores when not in the game
@@ -56,11 +56,14 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         
         //sort by highscore
         int16_t highKills = 0;
+        int16_t highWins = 0;
         std::vector<std::pair<PlayerScoreRecord, int> > sortedPlayers;
         for (int i = 0; i < kMaxAvaraPlayers; ++i) {
             sortedPlayers.push_back(std::make_pair(theScores.player[i], i));
-            if(net->playerTable[i]->GetPlayer())
+            if(net->playerTable[i]->GetPlayer()) {
                 highKills = std::max(highKills, theScores.player[i].kills);
+                highWins = std::max(highWins, theScores.player[i].serverWins);
+            }
         }
         std::sort(sortedPlayers.begin(), sortedPlayers.end(), sortByScore);
 
@@ -98,7 +101,8 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         nvgText(ctx, x + colorBoxWidth + colWidth*4, y, "Score", NULL);
         nvgText(ctx, x + colorBoxWidth + colWidth*5, y, "Kills", NULL);
         nvgText(ctx, x + colorBoxWidth + colWidth*6, y, "Lives", NULL);
-        nvgText(ctx, x + colorBoxWidth + colWidth*7, y, "RT(ms)", NULL);
+        nvgText(ctx, x + colorBoxWidth + colWidth*7, y, "Wins", NULL);
+        nvgText(ctx, x + colorBoxWidth + colWidth*8, y, "RT(ms)", NULL);
         y+= 45;
 
         int playerRank = 0;
@@ -176,8 +180,17 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
                 nvgText(ctx, x + colorBoxWidth + colWidth*5, y, std::to_string(theScores.player[playerTableIndex].kills).c_str(), NULL);
                 nvgFillColor(ctx, textColor);
 
+                //lives
                 nvgText(ctx, x + colorBoxWidth + colWidth*6, y, std::to_string(playerLives).c_str(), NULL);
-                nvgText(ctx, x + colorBoxWidth + colWidth*7, y, ping.c_str(), NULL);
+
+                //wins
+                if(highWins > 0 && theScores.player[playerTableIndex].serverWins == highWins)
+                    nvgFillColor(ctx, highColor);
+                nvgText(ctx, x + colorBoxWidth + colWidth*7, y, std::to_string(theScores.player[playerTableIndex].serverWins).c_str(), NULL);
+                nvgFillColor(ctx, textColor);
+
+                //ping
+                nvgText(ctx, x + colorBoxWidth + colWidth*8, y, ping.c_str(), NULL);
 
                 y += colorBoxWidth + 10;
                 

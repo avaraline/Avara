@@ -12,7 +12,7 @@
 #include "AvaraScoreInterface.h"
 #include "CDirectObject.h"
 
-#define PLAYER_SCORE_FIELD_COUNT 5
+#define PLAYER_SCORE_FIELD_COUNT 6
 #define NET_SCORES_LEN ((kMaxAvaraPlayers * PLAYER_SCORE_FIELD_COUNT) + (kMaxTeamColors + 1)) * 4
 
 class CAvaraGame;
@@ -24,6 +24,7 @@ typedef struct {
     char exitRank;
     int16_t lives;
     int16_t kills;
+    int16_t serverWins = 0; //number of wins on the current server. reset when player count == 1
 } PlayerScoreRecord;
 
 typedef struct {
@@ -55,9 +56,13 @@ public:
 
     virtual void EndScript();
     virtual void StartResume(Boolean didStart);
+    virtual void ResetWins();
     virtual void PlayerIntros();
     virtual void StopPause(Boolean didPause);
     virtual void NetResultsUpdate();
+    virtual void PlayerLeft();
+    virtual void PlayerJoined();
+
 
     /*
     virtual	void			Click(EventRecord *theEvent, Rect *theRect);
@@ -73,7 +78,7 @@ public:
         short hitTeam,
         short hitPlayer);
 
-    virtual void ZeroScores();
+    virtual void ResetScores();
     virtual void ReceiveResults(int32_t *newResults);
     // virtual	void			DrawOnePlayerResults(short slot, Rect *toRect);
     // virtual	void			DrawResultsSummary(Rect *toRect);

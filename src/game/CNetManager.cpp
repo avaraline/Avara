@@ -398,6 +398,7 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
         itsCommManager->SendPacket(1 << slotId, kpKillNet, 0, 0, 0, 0, 0);
     } else {
         DisconnectSome(1L << slotId);
+        itsGame->scoreKeeper->PlayerLeft();
     }
 }
 
@@ -879,6 +880,22 @@ void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed rando
     }
 }
 
+short CNetManager::PlayerCount() {
+    CPlayerManager *thePlayer;
+    short playerCount = 0;
+
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        thePlayer = playerTable[i];
+        const std::string playerName((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
+
+        if (playerName.size() > 0) {
+            playerCount++;
+        }
+    }
+    
+    return playerCount;
+}
+
 void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     short i;
     CAbstractPlayer *nextPlayer;
@@ -1103,6 +1120,7 @@ void CNetManager::NewArrival(short slot) {
     itsGame->itsApp->NotifyUser();
     std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
     SDL_Log("%s has joined!!\n", name.c_str());
+    itsGame->scoreKeeper->PlayerJoined();
 }
 
 void CNetManager::ResultsReport(Ptr results) {
