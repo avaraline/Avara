@@ -24,7 +24,7 @@ typedef struct {
     char exitRank;
     int16_t lives;
     int16_t kills;
-    int16_t serverWins = 0; //number of wins on the current server. reset when player count == 1
+    int16_t serverWins; //number of wins on the current server. reset when player count == 1
 } PlayerScoreRecord;
 
 typedef struct {
