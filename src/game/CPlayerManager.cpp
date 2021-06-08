@@ -129,6 +129,9 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
         deltaMouse->h >>= -itsGame->sensitivity;
         deltaMouse->v >>= -itsGame->sensitivity;
     }
+    if (itsGame->moJoOptions & kFlipAxis) {
+        deltaMouse->v = -deltaMouse->v;
+	}
     SDL_WarpMouseInWindow(itsGame->itsApp->sdlWindow(), mouseCenterPosition.h, mouseCenterPosition.v);
     return state;
 }
@@ -284,6 +287,9 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                 xrel >>= -itsGame->sensitivity;
                 yrel >>= -itsGame->sensitivity;
             }
+            if (itsGame->moJoOptions & kFlipAxis) {
+                yrel = -yrel;
+            }
             mouseX += xrel;
             mouseY += yrel;
             break;
@@ -314,7 +320,7 @@ void CPlayerManagerImpl::SendFrame() {
             ff->ft.down |= 1 << kfuTypeText;
         }
     }
-    
+
     if (!inputBuffer.empty()) {
         ff->ft.msgChar = inputBuffer.front();
         inputBuffer.pop_front();
@@ -731,9 +737,10 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                 break;
             case 13:
                 // ¬
+
                 // TODO: is this necessary post nanogui?
                 //((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
-                
+
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
                 // FlushMessageText(true);
                 break;
@@ -770,7 +777,7 @@ std::string CPlayerManagerImpl::GetChatLine() {
         found = 0;
     else
         found += 2;
-    
+
     return theChat.substr(found);
 }
 

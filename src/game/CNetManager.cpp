@@ -33,7 +33,7 @@
 #include <string.h>
 
 #define AUTOLATENCYPERIOD 3840  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
-#define AUTOLATENCYDELAY  480   // msec 
+#define AUTOLATENCYDELAY  480   // msec
 #define LOWERLATENCYCOUNT 3
 #define HIGHERLATENCYCOUNT 8
 
@@ -437,9 +437,10 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, void *theDir, OSType theTag
     short crc = 0;
 
     if (!isPlaying) {
+        CPlayerManager *sendingPlayer = playerTable[senderSlot];
         std::string set((char *)theDir);
         theApp = itsGame->itsApp;
-        iErr = theApp->LoadLevel(set, theTag);
+        iErr = theApp->LoadLevel(set, theTag, sendingPlayer);
         if (iErr) {
             itsCommManager->SendPacket(kdEveryone, kpLevelLoadErr, 0, iErr, theTag, 0, 0);
         } else {
@@ -576,7 +577,7 @@ void CNetManager::ResumeGame() {
 
     thePlayerManager = playerTable[itsCommManager->myId];
     if (thePlayerManager->GetPlayer()) {
-        thePlayerManager->DoMouseControl(&tempPoint, true);
+        thePlayerManager->DoMouseControl(&tempPoint, !(itsGame->moJoOptions & kJoystickMode));
 
         PlayerConfigRecord copy;
         BlockMoveData(&config, &copy, sizeof(PlayerConfigRecord));

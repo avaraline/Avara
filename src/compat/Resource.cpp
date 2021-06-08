@@ -5,6 +5,8 @@
 #include <SDL2/SDL.h>
 #include <stdint.h>
 #include <string>
+#include <algorithm>
+#include <cctype>
 
 static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
 
@@ -17,6 +19,14 @@ void UseResFile(std::string filename) {
 std::string OSTypeString(OSType t) {
     uint32_t x = htonl(t);
     return std::string((char *)&x, 4);
+}
+
+bool IsEquals(const std::string& str1, const std::string& str2) {
+    return str1.length() == str2.length() && 
+    std::equal(str1.begin(), str1.end(), str2.begin(),
+    [](char a, char b) {
+        return tolower(a) == tolower(b);
+    });
 }
 
 Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string name) {
@@ -59,7 +69,7 @@ Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string na
                 char cName[nameLen];
                 SDL_RWread(file, cName, nameLen, 1);
                 std::string rsrcName(cName, nameLen);
-                nameMatch = rsrcName == name;
+                nameMatch = IsEquals(rsrcName, name);
             }
 
             if (rsrcType == theType && ((rsrcId == theID) || nameMatch)) {

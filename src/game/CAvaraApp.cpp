@@ -235,7 +235,7 @@ OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
 }
 
 
-OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
+OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) {
     SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
     itsGame->LevelReset(false);
     itsGame->loadedTag = theLevel;
@@ -268,7 +268,11 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
     levels->Dispose();
 
     if (wasLoaded) {
-        AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
+        std::string msgPrefix = "Loaded";
+        if(sendingPlayer != NULL)
+            msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
+
+        AddMessageLine(msgPrefix + " \"" + levelName + "\" from \"" + set + "\".");
         //levelWindow->SelectLevel(set, levelName);
         Fixed pt[3];
         itsGame->itsWorld->OverheadPoint(pt);

@@ -291,6 +291,10 @@ long CApplication::Number(const std::string name, const long defaultValue) {
     return defaultValue;
 }
 
+bool CApplication::Boolean(const std::string name) {
+    return prefs[name];
+}
+
 json CApplication::Get(const std::string name) {
     return prefs[name];
 }

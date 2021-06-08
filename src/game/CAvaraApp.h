@@ -10,6 +10,7 @@
 #pragma once
 
 #include "CApplication.h"
+#include "CPlayerManager.h"
 //#include "PolyColor.h"
 
 #include <SDL2/SDL.h>
@@ -38,7 +39,8 @@ public:
     virtual void BrightBox(long frameNum, short position) = 0;
     virtual void LevelReset() = 0;
     virtual long Number(const std::string name) = 0;
-    virtual OSErr LoadLevel(std::string set, OSType theLevel) = 0;
+    virtual bool Boolean(const std::string name) = 0;
+    virtual OSErr LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) = 0;
     virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) = 0;
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) = 0;
     virtual void NotifyUser() = 0;
@@ -83,7 +85,7 @@ public:
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll();
     OSErr LoadSVGLevel(std::string set, OSType theLevel) override;
-    OSErr LoadLevel(std::string set, OSType theLevel) override;
+    OSErr LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) override;
     void NotifyUser() override;
     virtual void AddMessageLine(std::string line) override;
     virtual void GameStarted(std::string set, std::string level) override;
@@ -109,6 +111,7 @@ public:
     virtual void Set(const std::string name, json value) override { CApplication::Set(name, value); }
     virtual SDL_Window* sdlWindow() override { return CApplication::sdlWindow(); }
     virtual long Number(const std::string name) override { return CApplication::Number(name); }
+    virtual bool Boolean(const std::string name) override { return CApplication::Boolean(name); }
 
     void TrackerUpdate();
     std::string TrackerPayload();

@@ -14,7 +14,6 @@
 #include "CNetManager.h"
 #include "CBSPPart.h"
 #include "FastMat.h"
-#include "SDL2/SDL.h"
 #include "Preferences.h"
 
 #include <string.h>
@@ -58,12 +57,6 @@ int main(int argc, char *argv[]) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         throw std::runtime_error("Could not initialize SDL!");
 
-    // Init SDL_net
-    if (SDLNet_Init() != 0) {
-        SDL_Log("Unable to initialize SDL_net: %s", SDLNet_GetError());
-        return 1;
-    }
-
     // SDL_LogSetOutputFunction(&NullLogger, NULL);
 
     // Init Avara stuff.
@@ -92,7 +85,7 @@ int main(int argc, char *argv[]) {
             exit(1);
         }
     }
-    
+
     if(host == true) {
         app->GetNet()->ChangeNet(kServerNet, "");
     } else if(connectAddress.size() > 0) {
