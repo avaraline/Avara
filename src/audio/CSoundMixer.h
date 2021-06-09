@@ -12,7 +12,7 @@
 #include "FastMat.h"
 #include "SoundSystemDefines.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 enum {
     rate48khz = (int)0xBB800000, /*48000.00000 in fixed-point*/

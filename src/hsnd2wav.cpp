@@ -4,7 +4,7 @@
 #import "CSoundMixer.h"
 #import "FastMat.h"
 #import "Resource.h"
-#include "SDL2/SDL.h"
+#include "SDL.h"
 #import "SoundSystemDefines.h"
 
 #include <cstdio>

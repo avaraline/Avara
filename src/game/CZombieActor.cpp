@@ -210,7 +210,7 @@ void CZombieActor::FrameAction() {
         Fixed newHeading;
         RayHitRecord theHit;
         Vector newPlace;
-        Fixed newScore;
+        Fixed newScore = FIX(0);
         short delta;
 
         if (watchFlip > 0)

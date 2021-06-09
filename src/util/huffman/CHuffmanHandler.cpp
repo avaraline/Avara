@@ -171,7 +171,7 @@ void CHuffmanHandler::WriteCompressed() {
 
         k = 0;
         for (i = 0; i < (NUMSYMBOLS >> 5); i++) {
-            long flags;
+            long flags = 0;
             for (j = 0; j < 32; j++) {
                 flags += flags;
                 flags |= (symbCounters[k++] != 0);

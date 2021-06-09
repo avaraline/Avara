@@ -16,7 +16,7 @@
 #include "Memory.h"
 #include "Resource.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 void CSoundHubImpl::CreateSound(short kind) {
     CBasicSound *aSound;

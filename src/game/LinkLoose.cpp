@@ -47,7 +47,7 @@
 #include "CYonBox.h"
 #include "CYonSphere.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include <fstream>
 #include <json.hpp>

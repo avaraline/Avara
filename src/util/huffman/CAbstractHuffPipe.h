@@ -15,7 +15,7 @@ typedef struct {
 
 class CAbstractHuffPipe : public CAbstractPipe {
 public:
-    long dataCount;
+    long dataCount = 0;
     int symbCounters[NUMSYMBOLS];
     HuffTreeNode nodes[NUMSYMBOLS * 2 - 1];
 

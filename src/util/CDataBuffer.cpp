@@ -2,7 +2,7 @@
 
 #include "Memory.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 /*
 CDataBuffer::CDataBuffer(const char *filename) {

@@ -5,7 +5,7 @@
 #include "Types.h"
 #include "AvaraFonts.h"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <fstream>
 #include <string>
 #include <vector>

@@ -20,7 +20,7 @@
 #include "pugixml.hpp"
 #include "csscolorparser.hpp"
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include <algorithm>
 #include <sstream>

@@ -11,6 +11,7 @@
 
 #include "CUDPComm.h"
 #include "System.h"
+#include <algorithm>
 
 #include <SDL2/SDL.h>
 

@@ -452,7 +452,7 @@ void CSoundMixer::DoubleBack(uint8_t *stream, int size) {
     gDebugMixCount = 0;
 #endif
 
-    for (whichStereo = 0; whichStereo <= stereo; whichStereo++) {
+    for (whichStereo = 0; whichStereo <= (short)stereo; whichStereo++) {
         short volumeLimit = 0;
         /*
         **  Go through channels, asking the volume for this side.

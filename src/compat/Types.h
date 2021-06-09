@@ -24,7 +24,7 @@ typedef uint32_t UnsignedFixed;
 typedef unsigned char *StringPtr;
 typedef unsigned char Str255[256];
 
-typedef unsigned char Byte;
+typedef unsigned char UnsignedByte;
 typedef signed char SignedByte;
 
 typedef uint32_t ip_addr;

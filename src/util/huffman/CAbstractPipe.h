@@ -3,7 +3,7 @@
 
 class CAbstractPipe : public CBaseObject {
 public:
-    class CAbstractPipe *outputStream;
+    class CAbstractPipe *outputStream = 0;
 
     CAbstractPipe() {}
     virtual ~CAbstractPipe() {}

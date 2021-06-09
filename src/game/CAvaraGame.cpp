@@ -705,7 +705,7 @@ void CAvaraGame::ResumeGame() {
     SDL_Log("CAvaraGame::ResumeGame (start=%d)\n", doStart);
 
     if (doStart) {
-        Byte oldCursorScale;
+        UnsignedByte oldCursorScale;
         short resRef;
         long powerGestalt;
         short oldEventMask;
