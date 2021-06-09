@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>ALF Editor</title>
+        <style>
+            #source {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 40%;
+                font-family: monospace;
+                border: none;
+                padding: 10px;
+            }
+            #preview2D {
+                position: absolute;
+                top: 0;
+                left: calc(40% + 10px);
+                height: 50%;
+                right: 0;
+                overflow: auto;
+            }
+            #preview3D {
+                position: absolute;
+                top: calc(50% + 10px);
+                left: calc(40% + 10px);
+                bottom: 0;
+                right: 0;
+                overflow: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <textarea id="source"></textarea>
+        <div id="preview2D"><canvas id="map2D"></canvas></div>
+        <div id="preview3D"></div>
+    </body>
+    <script src="three.min.js"></script>
+    <script src="avarascript_parser.js"></script>
+    <script src="editor.js"></script>
+</html>

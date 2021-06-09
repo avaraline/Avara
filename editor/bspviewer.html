@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>BSP Viewer</title>
+        <style>
+            #preview {
+                position: absolute;
+                top: 30px;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                overflow: auto;
+            }
+            #bspnum {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: calc(100% - 150px);
+                height: 30px;
+                border: none;
+                padding: 5px 10px;
+                border-bottom: 1px solid #ccc;
+            }
+            #loadbtn {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 150px;
+                height: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <input type="text" id="bspnum" value="100" autofocus />
+        <button id="loadbtn">Load BSP</button>
+        <div id="preview"></div>
+    </body>
+    <script src="three.min.js"></script>
+    <script src="bspviewer.js"></script>
+</html>

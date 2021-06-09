@@ -1,0 +1,93 @@
+<map>
+  <Wall fill="#0066ff" frame="#000000" x="0" z="85" w="15" d="15" h="2" />
+  <Wall fill="#0066ff" frame="#000000" x="2.5" z="85" w="10" d="12.5" h="1" y="2" />
+  <Wall fill="#0066ff" frame="#000000" x="24.375" z="110" w="15" d="15" h="2" />
+  <Wall fill="#0066ff" frame="#000000" x="26.875" z="112.5" w="10" d="10" h="1" y="2" />
+  <Wall fill="#0066ff" frame="#000000" x="48.75" z="133.75" w="15" d="15" h="2" />
+  <set designer="Juri Munkki" information="Rescue a captured starfighter by destorying the five tractor beam generators that are holding it. Be careful not to damage the starfighter itself." wallHeight="3" rampThickness="0.25" />
+  <Incarnator y="10" stop="@start" fill="#ffff00" frame="#aa0000" cx="2.2569444444444446" cz="21.979166666666668" r="0.9375" angle="135" extent="270" />
+  <Incarnator y="13" stop="@start" fill="#ffff00" frame="#aa0000" cx="2.2569444444444446" cz="21.979166666666668" r="0.9375" angle="135" extent="270" />
+  <Incarnator y="16" stop="@start" fill="#ffff00" frame="#aa0000" cx="2.2569444444444446" cz="21.979166666666668" r="0.9375" angle="135" extent="270" />
+  <Incarnator y="19" stop="@start" fill="#ffff00" frame="#aa0000" cx="2.2569444444444446" cz="21.979166666666668" r="0.9375" angle="135" extent="270" />
+  <Incarnator y="22" stop="@start" fill="#ffff00" frame="#aa0000" cx="2.2569444444444446" cz="21.979166666666668" r="0.9375" angle="135" extent="270" />
+  <Incarnator y="25" stop="@start" fill="#ffff00" frame="#aa0000" cx="2.2569444444444446" cz="21.979166666666668" r="0.9375" angle="135" extent="270" />
+  <Teleporter y="20" group="@centerGroup" shape="0" fill="#ffff00" frame="#aa0000" cx="2.2569444444444446" cz="21.979166666666668" r="0.9375" angle="135" extent="270" />
+  <Wall fill="#000077" frame="#000000" x="80" z="109.375" w="20" d="16.25" h="0.25" />
+  <Door2 shield="30" canGlow="true" team="1" isTarget="true" targetGroup="targ1" shape="bspStarFighter" y="1.5" midY="10" midZ="2" midPitch="-10" midYaw="-20" middle="0.5" deltaY="50" deltaZ="300" yaw="-20" pitch="-20" openSpeed="0.5" openSound="0" closeSound="0" stopSound="0" open="@missionComplete" didOpen="@complete" fill="#006666" frame="#ffff33" cx="90.625" cz="117.56944444444446" r="6.25" angle="225" extent="90" />
+  <Solid shape="bspTractorTower" y="2" killMsg="@tractorDone" shield="8" isTarget="true" canGlow="true" fill="#770000" frame="#444444" cx="105.55555555555556" cz="117.5" r="3.125" angle="84" extent="12" />
+  <Solid shape="bspTractorTower" y="2" killMsg="@tractorDone" shield="8" isTarget="true" canGlow="true" fill="#770000" frame="#444444" cx="96.18055555555556" cz="102.5" r="3.125" angle="12" extent="12" />
+  <Solid shape="bspTractorTower" y="2" killMsg="@tractorDone" shield="8" isTarget="true" canGlow="true" fill="#770000" frame="#444444" cx="74.93055555555556" cz="130.625" r="3.125" angle="228" extent="12" />
+  <Solid shape="bspTractorTower" y="2" killMsg="@tractorDone" shield="8" isTarget="true" canGlow="true" fill="#770000" frame="#444444" cx="74.93055555555556" cz="104.375" r="3.125" angle="300" extent="12" />
+  <Solid shape="bspTractorTower" y="2" killMsg="@tractorDone" shield="8" isTarget="true" canGlow="true" fill="#770000" frame="#444444" cx="96.18055555555556" cz="132.5" r="3.125" angle="156" extent="12" />
+  <Wall fill="#0066ff" frame="#000000" x="55" z="81.25" w="21.25" d="2.5" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="55" z="83.75" w="2.5" d="13.125" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="56.25" z="82.5" w="5" d="5" h="0" y="3" />
+  <Dome y="6" fill="#0066ff" frame="#000000" cx="96.18055555555556" cz="132.5" r="3.125" angle="156" extent="12" />
+  <Guard killMsg="@wave1" speed="0.7" shotPower="0.2" freq="6" shape="bspShooter" scale="2" y="1" fill="#3300ff" frame="#000000" cx="59.375" cz="86.25" r="1.875" angle="0" extent="90" />
+  <Ramp y="wallHeight" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="55" z="96.25" w="2.5" d="19.375" h="0" r="3.125" angle="135" extent="90" />
+  <Wall fill="#0066ff" frame="#000000" x="54.375" z="115.625" w="3.75" d="3.75" h="6" />
+  <Wall fill="#0066ff" frame="#000000" x="51.25" z="136.875" w="10" d="10" h="1" y="2" />
+  <Ramp y="wallHeight" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="55" z="119.375" w="2.5" d="19.375" h="0" r="3.125" angle="315" extent="90" />
+  <set ambient="0.2" light.0.i="0.6" light.0.a="10" light.0.b="20" light.1.i="0.0" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <Ramp y="wallHeight" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="35" z="116.25" w="19.375" d="2.5" h="0" r="3.125" angle="45" extent="90" />
+  <Ramp y="wallHeight" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="9.375" z="116.25" w="19.375" d="2.5" h="0" r="3.125" angle="225" extent="90" />
+  <Wall fill="#0066ff" frame="#000000" x="5.625" z="115.625" w="3.75" d="3.75" h="6" />
+  <Ramp y="wallHeight" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="6.25" z="96.25" w="2.5" d="19.375" h="0" r="3.125" angle="135" extent="90" />
+  <Dome fill="#0066ff" frame="#000000" cx="7.5" cz="85" r="5" angle="270" extent="180" />
+  <Ramp deltaY="2 * wallHeight" fill="#0066cc" frame="#000000" x="6.25" z="119.375" w="2.5" d="29.375" h="0" r="3.125" angle="315" extent="90" />
+  <Guard killMsg="@killHighGuard" speed="1.5" shotPower="0.5" freq="40" shape="bspShooter" scale="1" y="6.5" fill="#3300ff" frame="#000000" cx="56.25" cz="117.5" r="1.25" angle="180" extent="90" />
+  <Goody status="false" start="@killHighGuard" missiles="2" y="6" fill="#3300ff" frame="#000000" cx="56.25" cz="117.5" r="1.25" angle="180" extent="90" />
+  <Ramp deltaY="wallHeight" thickness="2" fill="#0066cc" frame="#000000" x="63.75" z="145" w="20" d="3.75" h="0" r="3.125" angle="315" extent="90" />
+  <Ramp deltaY="wallHeight" thickness="2" fill="#0066cc" frame="#000000" x="83.75" z="143.125" w="20" d="3.75" h="0" r="3.125" angle="135" extent="90" />
+  <SkyColor n="6" fill="#000033" frame="#0000cc" />
+  <GroundColor fill="#000033" frame="#000000" />
+  <Wall fill="#0066ff" frame="#000000" x="30" z="40" w="10" d="5" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="15" z="50" w="10" d="5" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="23.75" z="43.125" w="8.125" d="8.125" h="1" y="3" />
+  <Wall fill="#0066ff" frame="#000000" x="30" z="50" w="5" d="10" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="20" z="35" w="5" d="10" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="20" z="20" w="5" d="15" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="40" z="40" w="15" d="5" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="30" z="60" w="5" d="15" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="0" z="50" w="15" d="5" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="159.375" z="20" w="10" d="5" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="144.375" z="30" w="10" d="5" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="153.125" z="23.125" w="8.125" d="8.125" h="1" y="3" />
+  <Wall fill="#0066ff" frame="#000000" x="159.375" z="30" w="5" d="10" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="149.375" z="15" w="5" d="10" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="149.375" z="0" w="5" d="15" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="169.375" z="20" w="15" d="5" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="159.375" z="40" w="5" d="15" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="129.375" z="30" w="15" d="5" h="1.5" />
+  <Ramp deltaY="wallHeight" thickness="2" fill="#0066cc" frame="#000000" x="103.75" z="145" w="20" d="3.75" h="0" r="3.125" angle="315" extent="90" />
+  <Ramp deltaY="wallHeight" thickness="2" fill="#0066cc" frame="#000000" x="123.75" z="143.125" w="20" d="3.75" h="0" r="3.125" angle="135" extent="90" />
+  <Wall fill="#0066ff" frame="#000000" x="169.375" z="136.875" w="10" d="5" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="154.375" z="146.875" w="10" d="5" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="163.125" z="140" w="8.125" d="8.125" h="1" y="3" />
+  <Wall fill="#0066ff" frame="#000000" x="169.375" z="146.875" w="5" d="10" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="159.375" z="131.875" w="5" d="10" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="159.375" z="116.875" w="5" d="15" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="179.375" z="136.875" w="15" d="5" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="169.375" z="156.875" w="5" d="15" h="1.5" />
+  <Wall fill="#0066ff" frame="#000000" x="139.375" z="146.875" w="15" d="5" h="1.5" />
+  <Ufo y="4.5" shield="2" fill="#0033ff" frame="#ee0000" cx="28.125" cz="46.875" r="3.125" angle="180" extent="90" />
+  <Ufo y="5.5" shield="2" fill="#0033ff" frame="#ee0000" cx="28.125" cz="46.875" r="3.125" angle="180" extent="90" />
+  <Wall fill="#0066ff" frame="#000000" x="160" z="83.125" w="3.75" d="3.75" h="3.5" />
+  <Ramp y="1.5" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="160.625" z="55" w="2.5" d="25" h="0" r="3.125" angle="135" extent="90" />
+  <Ramp y="1.5" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="160.625" z="90" w="2.5" d="26.875" h="0" r="3.125" angle="315" extent="90" />
+  <Wall fill="#0066ff" frame="#000000" x="156.875" z="80" w="10" d="10" h="1" y="3.5" />
+  <Ufo y="100" start="@wave1" killMsg="@wave1kill" fill="#0033ff" frame="#ee0000" cx="124.375" cz="115.625" r="3.125" angle="180" extent="90" />
+  <Ufo y="105" start="@wave1" killMsg="@wave1kill" fill="#0033ff" frame="#ee0000" cx="124.375" cz="115.625" r="3.125" angle="180" extent="90" />
+  <Ufo y="110" start="@wave1" killMsg="@wave1kill" fill="#0033ff" frame="#ee0000" cx="124.375" cz="115.625" r="3.125" angle="180" extent="90" />
+  <Sound y="60" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="700" fill="#0066ff" frame="#000000" cx="345" cz="80" r="9.375" angle="180" extent="90" />
+  <Teleporter y="-10" activeRange="27 * 5" deadRange="25 * 5" destGroup="@centerGroup" shape="0" fill="#0066ff" frame="#000000" cx="90" cz="90" r="5" angle="270" extent="90" />
+  <Counter in="@tractorDone" out="@wave1" fill="#0066ff" frame="#000000" cx="90" cz="90" r="5" angle="270" extent="90" />
+  <Counter n="5" in="@tractorDone" out="@missionComplete" fill="#0066ff" frame="#000000" cx="90" cz="90" r="5" angle="270" extent="90" />
+  <Teleporter start="@complete" win="5000" fill="#0066ff" frame="#000000" cx="90" cz="90" r="5" angle="270" extent="90" />
+  <Incarnator status="false" y="15" start="@start" fill="#ffff00" frame="#aa0000" cx="161.28472222222223" cz="85.10416666666667" r="0.9375" angle="315" extent="270" />
+  <Ufo y="100" start="@wave2" watch="playerMask + targ1" fill="#330033" frame="#ee0000" cx="124.375" cz="120.625" r="3.125" angle="180" extent="90" />
+  <Ufo y="105" start="@wave2" watch="playerMask + targ1" fill="#330033" frame="#ee0000" cx="124.375" cz="120.625" r="3.125" angle="180" extent="90" />
+  <Ufo y="110" start="@wave2" watch="playerMask + targ1" fill="#330033" frame="#ee0000" cx="124.375" cz="120.625" r="3.125" angle="180" extent="90" />
+  <Counter n="2" in="@wave1kill" out="@wave2" fill="#330033" frame="#ee0000" cx="124.375" cz="120.625" r="3.125" angle="180" extent="90" />
+  <Counter n="4" in="@tractorDone" out="wave2" fill="#330033" frame="#ee0000" cx="124.375" cz="120.625" r="3.125" angle="180" extent="90" />
+</map>

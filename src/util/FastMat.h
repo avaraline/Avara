@@ -21,7 +21,7 @@ static inline Fixed ToFixed(float a) {
     float temp = a * FIX1;
     return (Fixed)temp;
 }
-static inline float Deg2Rad(float deg) { 
+static inline float Deg2Rad(float deg) {
     return deg * PI / 180.0;
 }
 
@@ -113,13 +113,9 @@ void FSquareSubtract(Fixed n, int *acc);
 Fixed VectorLength(long n, Fixed *v);
 Fixed NormalizeVector(long n, Fixed *v); //	Returns length
 
-Fixed FRandomBeta();
 Fixed FRandom();
 Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz);
 Fixed FDistanceOverEstimate(Fixed dx, Fixed dy, Fixed dz);
 void InverseTransform(Matrix *trans, Matrix *inv);
 
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2);
-
-static Fixed FRandSeed;
-static Fixed FRandSeedBeta;

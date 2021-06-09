@@ -1,0 +1,189 @@
+{
+  "LEDI": [
+    {
+      "Alf": "en-garde.alf",
+      "Name": "En Garde!",
+      "Message": "Reach your opponents side as many times as possible. Teams are Red and Yellow. One point for each time - no points for kills. 5 minutes or 25 points."
+    },
+    {
+      "Alf": "hopscotch.alf",
+      "Name": "Hopscotch",
+      "Message": "Enter the teleporter as many times as possible. One point for each time - no points for kills. 5 minutes or 25 points."
+    },
+    {
+      "Alf": "caffeine.alf",
+      "Name": "Caffeine",
+      "Message": "Teams are red and yellow. Reach your opponents side as many times as possible. One point for each time - no points for kills. 5 minutes or 15 points."
+    },
+    {
+      "Alf": "misstep.alf",
+      "Name": "MisStep",
+      "Message": "Reach your opponents side as many times as possible. Teams are Red and Yellow. One point for each time - no points for kills. 5 minutes or 15 points."
+    },
+    {
+      "Alf": "tweaky-pop.alf",
+      "Name": "Tweaky-Pop!",
+      "Message": "Goes the hector!  15 kills for your team to win."
+    },
+    {
+      "Alf": "mini-pop.alf",
+      "Name": "Mini-Pop!",
+      "Message": "Smaller: easier to knock your opponent out!  15 kills for your team to win."
+    },
+    {
+      "Alf": "knockout.alf",
+      "Name": "KnockOut!",
+      "Message": "No scouts or teams.  Do not fire until you are in the ring."
+    },
+    {
+      "Alf": "robby-knievel.alf",
+      "Name": "Robby Knievel",
+      "Message": "Knievel fun! - Get the goodie 7 times to win!"
+    },
+    {
+      "Alf": "evel-knievel.alf",
+      "Name": "Evel Knievel",
+      "Message": "The original!"
+    },
+    {
+      "Alf": "rack.alf",
+      "Name": "Rack!",
+      "Message": "Kick her into a gallop, or ye'll get beat to death!"
+    },
+    {
+      "Alf": "rats-nest.alf",
+      "Name": "Rat's Nest",
+      "Message": "Live like a gerbil, die like a gerbil. . ."
+    },
+    {
+      "Alf": "obelisk-1.alf",
+      "Name": "Obelisk 1",
+      "Message": "Inspired by Ramses II, this level isn't original, but may produce some good battles."
+    },
+    {
+      "Alf": "life-and-death.alf",
+      "Name": "Life and Death",
+      "Message": "The Lord giveth and the Lord taketh away..."
+    },
+    {
+      "Alf": "bullfight.alf",
+      "Name": "Bullfight",
+      "Message": "A symphony of bulls in heat."
+    },
+    {
+      "Alf": "shotgun.alf",
+      "Name": "ShotGun",
+      "Message": "A stalking level..."
+    }
+  ],
+  "HULL": {
+    "151": {
+      "Hull Res ID": 216,
+      "Max Missiles": 8,
+      "Max Grenades": 16,
+      "Max boosters": 0,
+      "Mass": 137.32910658426795,
+      "Max Energy": 10.681162737468528,
+      "Energy Charge": 6.103517204547188,
+      "Max Shields": 3.051758602273594,
+      "Shield Charge": 1.5258869306477454,
+      "Min Shot": 1.0681162737468528,
+      "Max Shot": 0.9155413138017853,
+      "Shot Charge": 10.681162737468528,
+      "Riding Height": 0.25177386129549095,
+      "Acceleration": 0.9002822919050889,
+      "Jump Power": 1.0025024795910582
+    },
+    "150": {
+      "Hull Res ID": 215,
+      "Max Missiles": 8,
+      "Max Grenades": 12,
+      "Max boosters": 3,
+      "Mass": 123.59620050354772,
+      "Max Energy": 9.155275806820782,
+      "Energy Charge": 4.5776455329213395,
+      "Max Shields": 1.5258869306477454,
+      "Shield Charge": 1.5258869306477454,
+      "Min Shot": 1.0681162737468528,
+      "Max Shot": 0.9155413138017853,
+      "Shot Charge": 10.681162737468528,
+      "Riding Height": 0.3814755474174105,
+      "Acceleration": 1.0681162737468528,
+      "Jump Power": 1.2207064927138171
+    },
+    "152": {
+      "Hull Res ID": 216,
+      "Max Missiles": 8,
+      "Max Grenades": 12,
+      "Max boosters": 3,
+      "Mass": 127.41089494163424,
+      "Max Energy": 9.155275806820782,
+      "Energy Charge": 4.5776455329213395,
+      "Max Shields": 2.2888227664606697,
+      "Shield Charge": 1.831067368581674,
+      "Min Shot": 1.0681162737468528,
+      "Max Shot": 0.9155413138017853,
+      "Shot Charge": 10.681162737468528,
+      "Riding Height": 0.3814755474174105,
+      "Acceleration": 0.8392462043183032,
+      "Jump Power": 1.0482795452811475
+    }
+  },
+  "HSND": {
+    "134": {
+      "Version": 2,
+      "Loop Start": 19518,
+      "Loop End": 19519,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "134.ogg",
+      "Wav": "134.wav"
+    },
+    "135": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "135.ogg",
+      "Wav": "135.wav"
+    },
+    "1001": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.33643091477836273,
+      "Sound": 0,
+      "Ogg": "1001.ogg",
+      "Wav": "1001.wav"
+    },
+    "1002": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.3364614328221561,
+      "Sound": 0,
+      "Ogg": "1002.ogg",
+      "Wav": "1002.wav"
+    },
+    "1003": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.33643091477836273,
+      "Sound": 0,
+      "Ogg": "1003.ogg",
+      "Wav": "1003.wav"
+    }
+  }
+}

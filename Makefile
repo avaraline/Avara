@@ -68,12 +68,16 @@ levelviewer: $(BUILD_DIR)/AvaraLevelViewer resources
 
 hsnd2wav: $(BUILD_DIR)/hsnd2wav resources
 
+frandom: $(BUILD_DIR)/frandom
+
+fixed: $(BUILD_DIR)/fixed
+
 macapp: avara
 	rm -rf $(BUILD_DIR)/Avara.app
 	$(MKDIR_P) $(BUILD_DIR)/Avara.app/Contents/{Frameworks,MacOS,Resources}
 	cp platform/macos/Info.plist $(BUILD_DIR)/Avara.app/Contents
 	cp $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.app/Contents/MacOS
-	cp -r $(BUILD_DIR)/{bsps,levels,rsrc,shaders} $(BUILD_DIR)/Avara.app/Contents/Resources
+	cp -r $(BUILD_DIR)/{levels,rsrc} $(BUILD_DIR)/Avara.app/Contents/Resources
 	cp platform/macos/Avara.icns $(BUILD_DIR)/Avara.app/Contents/Resources
 	cp -a $(FRAMEWORK_PATH)/SDL2.framework $(BUILD_DIR)/Avara.app/Contents/Frameworks
 	install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
@@ -84,7 +88,7 @@ winapp: avara
 	rm -rf $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
 	if [ -f $(BUILD_DIR)/Avara ]; then mv $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe; fi
-	cp -r $(BUILD_DIR)/{Avara.exe,bsps,levels,rsrc,shaders,vendor,src} $(BUILD_DIR)/WinAvara
+	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc,vendor,src} $(BUILD_DIR)/WinAvara
 	# cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2}.dll $(BUILD_DIR)/WinAvara
 	cd $(BUILD_DIR) && zip -r WinAvara.zip WinAvara && cd ..
@@ -110,6 +114,16 @@ $(BUILD_DIR)/BSPViewer: $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o
 # hsnd2wav
 $(BUILD_DIR)/hsnd2wav: $(OBJS) $(BUILD_DIR)/src/hsnd2wav.cpp.o
 	$(CXX) $(OBJS) $(BUILD_DIR)/src/hsnd2wav.cpp.o -o $@ $(LDFLAGS)
+	$(POST_PROCESS) $@
+
+# frandom
+$(BUILD_DIR)/frandom: $(OBJS) $(BUILD_DIR)/src/frandom.cpp.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/frandom.cpp.o -o $@ $(LDFLAGS)
+	$(POST_PROCESS) $@
+
+# fixed
+$(BUILD_DIR)/fixed: $(OBJS) $(BUILD_DIR)/src/fixed.cpp.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/fixed.cpp.o -o $@ $(LDFLAGS)
 	$(POST_PROCESS) $@
 
 # c source
@@ -143,13 +157,20 @@ build-link: $(BUILD_DIR)/Avara
 clean:
 	$(RM) -r $(BUILD_DIR)
 
+clean-levels:
+	$(RM) -r levels/*/alf/*.alf
+	$(RM) -r levels/*/default.avarascript
+	$(RM) -r levels/*/set.json
+	$(RM) -r levels/*/ogg/*.ogg
+	$(RM) -r levels/*/wav/*.wav
+
 publish:
 	scp $(BUILD_DIR)/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
 	# python3 bin/pict2svg.py
 	# cp -r bsps levels rsrc shaders $(BUILD_DIR)
-	rsync -av bsps levels rsrc shaders $(BUILD_DIR)
+	rsync -av levels rsrc $(BUILD_DIR)
 
 -include $(DEPS)
 

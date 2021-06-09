@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <cstddef>
 #include <stdint.h>
+#include <string>
 
 typedef bool Boolean;
 

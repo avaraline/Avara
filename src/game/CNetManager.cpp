@@ -47,6 +47,8 @@
 #define kMessageBufferMinAge 30
 #define kMessageWaitTime 12
 
+extern Fixed FRandSeed;
+
 void CNetManager::INetManager(CAvaraGame *theGame) {
     short i;
 
@@ -174,7 +176,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
 
             totalDistribution = 0;
             itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, 0, 0, 0L, NULL);
-            if (itsGame->loadedTag) {
+            if (itsGame->loadedTag.length() > 0) {
                 itsGame->LevelReset(true);
                 // theRoster->InvalidateArea(kBottomBox, 0);
             }
@@ -396,10 +398,11 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
         itsCommManager->SendPacket(1 << slotId, kpKillNet, 0, 0, 0, 0, 0);
     } else {
         DisconnectSome(1L << slotId);
+        itsGame->scoreKeeper->PlayerLeft();
     }
 }
 
-void CNetManager::SendLoadLevel(std::string theSet, OSType theLevelTag) {
+void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
     CAvaraApp *theApp;
     PacketInfo *aPacket;
 
@@ -412,10 +415,15 @@ void CNetManager::SendLoadLevel(std::string theSet, OSType theLevelTag) {
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
     aPacket->p2 = 0;
-    aPacket->p3 = theLevelTag;
+    aPacket->p3 = FRandSeed;
     aPacket->distribution = kdEveryone;
-    aPacket->dataLen = theSet.length() + 1;
-    BlockMoveData(theSet.c_str(), aPacket->dataBuffer, theSet.length() + 1);
+
+    std::stringstream buffa;
+    buffa << theSet << "/" << levelTag;
+    std::string setAndLevel = buffa.str();
+
+    aPacket->dataLen = setAndLevel.length() + 1;
+    BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, setAndLevel.length() + 1);
 
     /* TODO: implement
     theApp->GetDirectoryLocator((DirectoryLocator *)aPacket->dataBuffer);
@@ -431,21 +439,41 @@ void CNetManager::SendLoadLevel(std::string theSet, OSType theLevelTag) {
     itsCommManager->WriteAndSignPacket(aPacket);
 }
 
-void CNetManager::ReceiveLoadLevel(short senderSlot, void *theDir, OSType theTag) {
+void CNetManager::ReceiveLoadLevel(short senderSlot, char *theSetAndTag, Fixed seed) {
     CAvaraApp *theApp;
     OSErr iErr;
     short crc = 0;
 
     if (!isPlaying) {
         CPlayerManager *sendingPlayer = playerTable[senderSlot];
-        std::string set((char *)theDir);
+
+        std::string setAndTag(theSetAndTag);
+        int pos = setAndTag.find("/");
+        std::string set = setAndTag.substr(0, pos);
+        std::string tag = setAndTag.substr(pos + 1, std::string::npos);
+
         theApp = itsGame->itsApp;
-        iErr = theApp->LoadLevel(set, theTag, sendingPlayer);
+        FRandSeed = seed;
+        iErr = theApp->LoadLevel(set, tag, sendingPlayer);
+
+        PacketInfo *aPacket;
+        aPacket = itsCommManager->GetPacket();
+        aPacket->distribution = kdEveryone;
+        aPacket->p1 = 0;
+        aPacket->p3 = 0;
         if (iErr) {
-            itsCommManager->SendPacket(kdEveryone, kpLevelLoadErr, 0, iErr, theTag, 0, 0);
+            aPacket->command = kpLevelLoadErr;
+            aPacket->p2 = iErr;
+            //itsCommManager->SendPacket(kdEveryone, kpLevelLoadErr, 0, iErr, 0, 0, 0);
         } else {
-            itsCommManager->SendPacket(kdEveryone, kpLevelLoaded, 0, crc, theTag, 0, 0);
+            aPacket->command = kpLevelLoaded;
+            aPacket->p2 = crc;
+            //itsCommManager->SendPacket(kdEveryone, kpLevelLoaded, 0, crc, 0, 0, 0);
         }
+
+        aPacket->dataLen = tag.length() + 1;
+        BlockMoveData(tag.c_str(), aPacket->dataBuffer, tag.length() + 1);
+        itsCommManager->WriteAndSignPacket(aPacket);
     }
 
     /* TODO: implement
@@ -470,7 +498,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, void *theDir, OSType theTag
     */
 }
 
-void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, OSType theTag) {
+void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag) {
     short i;
 
     CPlayerManager *thePlayer;
@@ -852,6 +880,22 @@ void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed rando
     }
 }
 
+short CNetManager::PlayerCount() {
+    CPlayerManager *thePlayer;
+    short playerCount = 0;
+
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        thePlayer = playerTable[i];
+        const std::string playerName((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
+
+        if (playerName.size() > 0) {
+            playerCount++;
+        }
+    }
+    
+    return playerCount;
+}
+
 void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     short i;
     CAbstractPlayer *nextPlayer;
@@ -1076,6 +1120,7 @@ void CNetManager::NewArrival(short slot) {
     itsGame->itsApp->NotifyUser();
     std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
     SDL_Log("%s has joined!!\n", name.c_str());
+    itsGame->scoreKeeper->PlayerJoined();
 }
 
 void CNetManager::ResultsReport(Ptr results) {

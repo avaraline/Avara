@@ -1,0 +1,68 @@
+<map>
+  <Teleporter y="0" shape="0" group="@safety" fill="#ff0000" frame="#ff0000" cx="59.30555555555556" cz="59.236111111111114" r="1.875" angle="240" extent="60" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#aa0000" frame="#000000" r="1.875" cx="59.30555555555556" cz="59.236111111111114" angle="240" extent="60" x="96.875" z="46.875" w="4.652777777777786" d="24.72222222222223" h="3" />
+  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#ff0099" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" r="2.5" angle="180" extent="90" />
+  <Teleporter y="30" shape="0" group="@recenter" fill="#ff0099" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" r="2.5" angle="180" extent="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ff0099" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" r="2.5" angle="180" extent="90" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#000055" frame="#ffcc00" r="2.5" cx="79.86111111111111" cz="58.54166666666667" angle="180" extent="90" x="74.23611111111111" z="54.16666666666667" w="10" d="10" h="3.5" />
+  <Wall fill="#000055" frame="#00ccff" x="74.23611111111111" z="54.16666666666667" w="10" d="10" h="0.5" y="3.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#000055" frame="#000000" r="2.5" cx="79.86111111111111" cz="58.54166666666667" angle="180" extent="90" x="56.875" z="46.80555555555556" w="4.722222222222221" d="24.72222222222223" h="3" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#aa0000" frame="#000000" r="2.5" cx="79.86111111111111" cz="58.54166666666667" angle="180" extent="90" x="107.98611111111111" z="29.02777777777778" w="1.1805555555555571" d="25" h="3.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#aa0000" frame="#000000" r="2.5" cx="79.86111111111111" cz="58.54166666666667" angle="180" extent="90" x="107.98611111111111" z="64.16666666666667" w="1.1805555555555571" d="25" h="3.5" />
+  <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Illusion..." />
+  <SkyColor fill="#ffff00" frame="#00ccff" />
+  <GroundColor fill="#0066ff" frame="#000055" />
+  <set gravity="0.9" />
+  <Wall fill="#aa0000" frame="#0000dd" x="119.23611111111111" z="28.958333333333336" w="4.930555555555557" d="60.625" h="12" />
+  <Wall fill="#aa0000" frame="#0000dd" x="39.236111111111114" z="89.16666666666667" w="80" d="4.7222222222222285" h="12" />
+  <Wall fill="#000055" frame="#0000dd" x="39.236111111111114" z="24.375" w="80" d="4.652777777777779" h="12" />
+  <Wall fill="#000055" frame="#0000dd" x="34.44444444444444" z="28.958333333333336" w="4.791666666666671" d="60.34722222222222" h="12" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#ff0000" x="84.23611111111111" z="54.09722222222222" w="4.7222222222222285" d="10" h="0" r="11.354166666666671" angle="265" extent="10" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#000000" x="74.23611111111111" z="49.44444444444445" w="10" d="4.722222222222221" h="0" r="11.076388888888893" angle="175" extent="10" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#000000" x="74.23611111111111" z="64.16666666666667" w="10" d="4.722222222222214" h="0" r="11.076388888888893" angle="355" extent="10" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#ff0000" x="69.44444444444444" z="54.16666666666667" w="4.791666666666671" d="10" h="0" r="11.11111111111111" angle="85" extent="10" />
+  <set grenadePower="1" missilePower="2" missileTurnRate="1" missileAcceleration="1" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#eeeeee" x="84.30555555555556" z="52.5" w="1.4583333333333286" d="1.5277777777777786" h="7" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#eeeeee" x="72.63888888888889" z="64.23611111111111" w="1.5277777777777857" d="1.5277777777777715" h="7" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" x="39.236111111111114" z="34.583333333333336" w="5" d="0.625" h="12" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Wall fill="#002200" frame="#000000" x="44.236111111111114" z="28.958333333333336" w="0.625" d="6.25" h="12" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" x="76.73611111111111" z="34.65277777777778" w="4.930555555555557" d="0.625" h="12" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Wall fill="#002200" frame="#000000" x="81.66666666666667" z="29.02777777777778" w="0.625" d="6.25" h="12" />
+  <Wall fill="#002200" frame="#000000" x="76.11111111111111" z="29.02777777777778" w="0.625" d="6.25" h="12" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" x="39.236111111111114" z="82.98611111111111" w="5" d="0.625" h="12" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Wall fill="#002200" frame="#000000" x="44.236111111111114" z="82.98611111111111" w="0.625" d="6.25" h="12" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" x="76.73611111111111" z="82.91666666666667" w="5" d="0.625" h="12" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Wall fill="#002200" frame="#000000" x="81.73611111111111" z="82.91666666666667" w="0.625" d="6.25" h="12" />
+  <Wall fill="#002200" frame="#000000" x="76.11111111111111" z="82.91666666666667" w="0.625" d="6.25" h="12" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#eeeeee" x="72.70833333333334" z="52.56944444444445" w="1.4583333333333286" d="1.5277777777777715" h="7" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#eeeeee" x="84.30555555555556" z="64.23611111111111" w="1.4583333333333286" d="1.5277777777777715" h="7" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#000055" frame="#000000" x="49.30555555555556" z="29.02777777777778" w="1.25" d="25" h="3.5" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#000055" frame="#000000" x="49.30555555555556" z="64.16666666666667" w="1.25" d="25" h="3.5" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" x="114.23611111111111" z="34.583333333333336" w="5" d="0.625" h="12" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Wall fill="#002200" frame="#000000" x="113.61111111111111" z="28.958333333333336" w="0.625" d="6.25" h="12" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" x="114.23611111111111" z="83.05555555555556" w="5" d="0.625" h="12" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="85" extent="10" />
+  <Wall fill="#002200" frame="#000000" x="113.61111111111111" z="83.05555555555556" w="0.625" d="6.25" h="12" />
+  <Incarnator y="0" fill="#003399" frame="#000000" cx="41.388888888888886" cz="86.90972222222223" r="3.1944444444444464" angle="150" extent="60" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#003399" frame="#000000" cx="41.388888888888886" cz="86.90972222222223" r="3.1944444444444464" angle="150" extent="60" />
+  <Incarnator y="0" fill="#003399" frame="#000000" cx="116.73611111111111" cz="31.25" r="3.194444444444443" angle="330" extent="60" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#003399" frame="#000000" cx="116.73611111111111" cz="31.25" r="3.194444444444443" angle="330" extent="60" />
+  <Incarnator y="0" fill="#003399" frame="#000000" cx="41.52777777777778" cz="31.180555555555557" r="3.194444444444443" angle="330" extent="60" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#003399" frame="#000000" cx="41.52777777777778" cz="31.180555555555557" r="3.194444444444443" angle="330" extent="60" />
+  <Incarnator y="0" fill="#003399" frame="#000000" cx="116.73611111111111" cz="86.90972222222223" r="3.194444444444443" angle="150" extent="60" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#003399" frame="#000000" cx="116.73611111111111" cz="86.90972222222223" r="3.194444444444443" angle="150" extent="60" />
+  <Incarnator y="0" fill="#003399" frame="#000000" cx="79.09722222222223" cz="86.90972222222223" r="3.194444444444443" angle="150" extent="60" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#003399" frame="#000000" cx="79.09722222222223" cz="86.90972222222223" r="3.194444444444443" angle="150" extent="60" />
+  <Incarnator y="0" fill="#003399" frame="#000000" cx="79.375" cz="31.25" r="3.194444444444443" angle="330" extent="60" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#003399" frame="#000000" cx="79.375" cz="31.25" r="3.194444444444443" angle="330" extent="60" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="180" extent="90" />
+  <Goody shape="bspGoody" y="2" boosters="5" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="180" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="180" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="75" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="180" extent="90" />
+  <Goody shape="bspStandardPill" y="6" speed="16" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="180" extent="90" />
+  <Teleporter y="0" shape="0" group="@safety" fill="#ff0000" frame="#ff0000" cx="99.16666666666667" cz="59.16666666666667" r="1.875" angle="60" extent="60" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#aa0000" frame="#000000" x="64.23611111111111" z="76.66666666666667" w="30" d="1.25" h="3.5" r="1.875" cx="99.16666666666667" cz="59.16666666666667" angle="60" extent="60" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#000055" frame="#000000" x="64.23611111111111" z="40.41666666666667" w="30" d="1.25" h="3.5" r="1.875" cx="99.16666666666667" cz="59.16666666666667" angle="60" extent="60" />
+</map>

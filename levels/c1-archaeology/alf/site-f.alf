@@ -1,0 +1,65 @@
+<map>
+  <set designer="Carlos Castillo-Garsow    cc96@cornell.edu" />
+  <Counter in="@shot1" n="4" out="@spice" fill="#ffffff" frame="#000000" cx="2.5694444444444446" cz="0.06944444444444442" r="2.5" angle="180" extent="90" />
+  <Ufo shield="-1" y="5" start="@spice" watch="playerMask + scoutMask" shape="bspStarFighter" acceleration="0.03" shotPower="1" burstLength="3" burstSpeed="7" burstCharge="25" fill="#dd0000" frame="#000000" cx="55.06944444444445" cz="50.06944444444445" r="2.5" angle="0" extent="90" />
+  <Wall fill="#663399" frame="#000000" x="45" z="40" w="2.5" d="2.5" h="3" />
+  <Wall fill="#663399" frame="#000000" x="62.5" z="40" w="2.5" d="2.5" h="3" />
+  <Wall fill="#663399" frame="#000000" x="45" z="55" w="2.5" d="2.5" h="3" />
+  <Wall fill="#663399" frame="#000000" x="62.5" z="55" w="2.5" d="2.5" h="3" />
+  <Solid shield="2" killMsg="@shot1" shape="bspHullLight" canGlow="true" isTarget="true" y="3" fill="#555555" frame="#000000" cx="46.31944444444444" cz="41.31944444444444" r="2.5" angle="90" extent="90" />
+  <Solid shield="2" killMsg="@shot1" shape="bspHullLight" canGlow="true" isTarget="true" y="3" fill="#555555" frame="#000000" cx="63.81944444444444" cz="41.31944444444444" r="2.5" angle="180" extent="90" />
+  <Solid shield="2" killMsg="@shot1" shape="bspHullLight" canGlow="true" isTarget="true" y="3" fill="#555555" frame="#000000" cx="63.81944444444444" cz="56.31944444444445" r="2.5" angle="270" extent="90" />
+  <Solid shield="2" killMsg="@shot1" shape="bspHullLight" canGlow="true" isTarget="true" y="3" fill="#555555" frame="#000000" cx="46.31944444444444" cz="56.31944444444445" r="2.5" angle="0" extent="90" />
+  <Wall fill="#330066" frame="#000000" x="47.5" z="17.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="57.5" z="17.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="67.5" z="17.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="77.5" z="25" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="85" z="32.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="87.5" z="40" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="87.5" z="50" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="85" z="62.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="77.5" z="72.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="67.5" z="82.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="57.5" z="82.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="47.5" z="82.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="37.5" z="77.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="27.5" z="67.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="20" z="57.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="20" z="47.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="20" z="37.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="27.5" z="27.5" w="2.5" d="2.5" h="15" />
+  <Wall fill="#330066" frame="#000000" x="37.5" z="20" w="2.5" d="2.5" h="15" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="10.069444444444445" z="75.06944444444444" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="22.569444444444446" z="87.56944444444444" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="40.06944444444444" z="92.56944444444444" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="60.06944444444445" z="92.56944444444444" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="80.06944444444444" z="87.56944444444444" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="97.56944444444444" z="77.56944444444444" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="105.06944444444444" z="62.56944444444445" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="105.06944444444444" z="45.06944444444445" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="97.56944444444444" z="25.069444444444446" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="85.06944444444444" z="12.569444444444445" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="70.06944444444444" z="5.069444444444445" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="52.56944444444445" z="2.5694444444444446" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="35.06944444444444" z="5.069444444444445" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="20.069444444444446" z="12.569444444444445" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="5.069444444444445" z="22.569444444444446" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="2.5694444444444446" z="40.06944444444444" w="5" d="5" h="4.5" />
+  <FreeSolid fill="#330066" frame="#000000" r="2.5" cx="46.31944444444444" cz="56.31944444444445" angle="0" extent="90" x="2.5694444444444446" z="57.56944444444445" w="5" d="5" h="4.5" />
+  <Timer in="@get" wait="300" out="@re" fill="#ffffff" frame="#000000" cx="5.694444444444445" cz="2.6388888888888893" r="2.5" angle="0" extent="90" />
+  <Timer in="@start" wait="300" out="@re" fill="#ffffff" frame="#000000" cx="5.069444444444445" cz="11.38888888888889" r="2.5" angle="0" extent="90" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="2" grenades="2" fill="#ffff00" frame="#000000" cx="54.72222222222222" cz="26.041666666666668" r="2.5" angle="270" extent="90" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="2" grenades="2" fill="#ffff00" frame="#000000" cx="82.22222222222223" cz="51.04166666666667" r="2.5" angle="270" extent="90" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="2" grenades="2" fill="#ffff00" frame="#000000" cx="54.72222222222222" cz="73.54166666666667" r="2.5" angle="270" extent="90" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="2" grenades="2" fill="#ffff00" frame="#000000" cx="29.72222222222222" cz="51.04166666666667" r="2.5" angle="270" extent="90" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="2" missiles="2" fill="#ffff00" frame="#000000" cx="37.22222222222222" cz="33.54166666666667" r="2.5" angle="270" extent="90" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="2" missiles="2" fill="#ffff00" frame="#000000" cx="72.22222222222223" cz="33.54166666666667" r="2.5" angle="270" extent="90" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="2" missiles="2" fill="#ffff00" frame="#000000" cx="72.22222222222223" cz="66.04166666666667" r="2.5" angle="270" extent="90" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="2" missiles="2" fill="#ffff00" frame="#000000" cx="39.72222222222222" cz="68.54166666666667" r="2.5" angle="270" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="12.569444444444445" cz="11.38888888888889" r="2.5" angle="0" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="5.069444444444445" cz="93.8888888888889" r="2.5" angle="0" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="110.06944444444444" cz="92.56944444444444" r="2.5" angle="180" extent="90" />
+  <Incarnator fill="#ffffff" frame="#000000" cx="110.06944444444444" cz="7.569444444444445" r="2.5" angle="180" extent="90" />
+  <GroundColor fill="#770000" frame="#000000" />
+  <SkyColor fill="#ff6666" frame="#ffcccc" />
+</map>

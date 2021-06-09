@@ -1,0 +1,192 @@
+<map>
+  <set designer="Kyle 'Vader' Blessing - vader@avara.org" information="This is like a KOTH, but isn't revolved around teams. Stay on the green protion of the pole for 60 seconds to win.  Good luck!
+Special thank's to Kiff!" />
+  <SkyColor n="15" fill="#777777" frame="#aa0000" />
+  <GroundColor fill="#ccffcc" frame="#006600" />
+  <Timer in.0="@start" in.1="@now1" wait="3" out="in[1]" fill="#00ee00" frame="#000000" cx="105.10416666666667" cz="9.166666666666668" r="3.6458333333333286" angle="0" extent="90" />
+  <Distributor in="@now1" out.1="@oneOn" out.2="@twoOn" out.3="@threeOn" out.4="@fourOn" out.5="@fiveOn" out.6="@sixOn" out.7="@sevenOn" out.8="@eightOn" fill="#00ee00" frame="#000000" cx="105.10416666666667" cz="9.166666666666668" r="3.6458333333333286" angle="0" extent="90" />
+  <Timer in.0="@start" in.1="@now2" wait="2" out="in[1]" fill="#00ee00" frame="#000000" cx="105.10416666666667" cz="9.166666666666668" r="3.6458333333333286" angle="0" extent="90" />
+  <Distributor in="@now2" out.1="@oneOff" out.2="@twoOff" out.3="@threeOff" out.4="@fourOff" out.5="@fiveOff" out.6="@sixOff" out.7="@sevenOff" out.8="@eightOff" fill="#00ee00" frame="#000000" cx="105.10416666666667" cz="9.166666666666668" r="3.6458333333333286" angle="0" extent="90" />
+  <Incarnator y="20" start="@oneOn" stop="@oneOff" fill="#ff0000" frame="#000000" cx="39.65277777777778" cz="9.027777777777779" r="3.125" angle="270" extent="90" />
+  <Incarnator y="20" start="@twoOn" stop="@twoOff" fill="#ff0000" frame="#000000" cx="64.58333333333334" cz="93.95833333333334" r="3.125" angle="90" extent="90" />
+  <Incarnator y="20" start="@threeOn" stop="@threeOff" fill="#ff0000" frame="#000000" cx="39.65277777777778" cz="33.958333333333336" r="3.125" angle="180" extent="90" />
+  <Incarnator y="20" start="@fourOn" stop="@fourOff" fill="#ff0000" frame="#000000" cx="64.58333333333334" cz="69.02777777777779" r="3.125" angle="0" extent="90" />
+  <Incarnator y="20" start="@fiveOn" stop="@fiveOff" fill="#ff0000" frame="#000000" cx="64.58333333333334" cz="9.027777777777779" r="3.125" angle="0" extent="90" />
+  <Incarnator y="20" start="@sixOn" stop="@sixOff" fill="#ff0000" frame="#000000" cx="39.65277777777778" cz="93.95833333333334" r="3.125" angle="180" extent="90" />
+  <Incarnator y="20" start="@sevenOn" stop="@sevenOff" fill="#ff0000" frame="#000000" cx="64.58333333333334" cz="33.958333333333336" r="3.125" angle="90" extent="90" />
+  <Incarnator y="20" start="@eightOn" stop="@eightOff" fill="#ff0000" frame="#000000" cx="39.65277777777778" cz="69.02777777777779" r="3.125" angle="270" extent="90" />
+  <set wallHeight="20" />
+  <Wall fill="#ff0000" frame="#000000" x="49.09722222222222" z="18.47222222222222" w="0.48611111111111427" d="0.48611111111111427" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="54.583333333333336" z="18.47222222222222" w="0.48611111111111427" d="0.48611111111111427" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="54.583333333333336" z="23.958333333333336" w="0.48611111111111427" d="0.4861111111111107" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="49.09722222222222" z="23.958333333333336" w="0.48611111111111427" d="0.4861111111111107" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="49.09722222222222" z="78.47222222222223" w="0.48611111111111427" d="0.48611111111111427" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="54.583333333333336" z="78.47222222222223" w="0.48611111111111427" d="0.48611111111111427" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="54.583333333333336" z="83.95833333333334" w="0.48611111111111427" d="0.48611111111110006" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="49.09722222222222" z="83.95833333333334" w="0.48611111111111427" d="0.48611111111110006" h="0" />
+  <set wallHeight="17" baseHeight="3" />
+  <Wall fill="#99ff99" frame="#000000" x="50.833333333333336" z="20.208333333333336" w="2.5" d="2.4305555555555536" h="0" />
+  <Wall fill="#99ff99" frame="#000000" x="50.833333333333336" z="80.20833333333334" w="2.5" d="2.430555555555543" h="0" />
+  <set baseHeight="20" wallHeight="3" />
+  <Wall fill="#777777" frame="#000000" x="47.083333333333336" z="16.458333333333336" w="10" d="10" h="0" />
+  <Wall fill="#777777" frame="#000000" x="47.083333333333336" z="76.45833333333334" w="10" d="10" h="0" />
+  <set wallHeight="0" />
+  <Wall fill="#000077" frame="#000000" x="49.583333333333336" z="56.458333333333336" w="5" d="20" h="0" />
+  <Wall fill="#000077" frame="#000000" x="49.583333333333336" z="26.458333333333336" w="5" d="20" h="0" />
+  <Wall fill="#99ff99" frame="#000000" x="49.583333333333336" z="46.458333333333336" w="5" d="10" h="0" />
+  <Ramp y="0" deltaY="3" thickness="0" fill="#000077" frame="#000000" x="52.083333333333336" z="26.458333333333336" w="2.5" d="20" h="0" r="2.5" angle="180" extent="180" />
+  <Ramp y="0" deltaY="3" thickness="0" fill="#000077" frame="#000000" x="49.583333333333336" z="26.458333333333336" w="2.5" d="20" h="0" r="2.5" angle="0" extent="180" />
+  <Ramp y="0" deltaY="3" thickness="0" fill="#000077" frame="#000000" x="49.583333333333336" z="56.458333333333336" w="2.5" d="20" h="0" r="2.5" angle="0" extent="180" />
+  <Ramp y="0" deltaY="3" thickness="0" fill="#000077" frame="#000000" x="52.083333333333336" z="56.458333333333336" w="2.5" d="20" h="0" r="2.5" angle="180" extent="180" />
+  <Ramp y="0" deltaY="3" thickness="0" fill="#99ff99" frame="#000000" x="49.583333333333336" z="46.458333333333336" w="2.5" d="10" h="0" r="2.5" angle="0" extent="180" />
+  <Ramp y="0" deltaY="3" thickness="0" fill="#99ff99" frame="#000000" x="52.083333333333336" z="46.458333333333336" w="2.5" d="10" h="0" r="2.5" angle="180" extent="180" />
+  <set baseHeight="0" />
+  <Teleporter y="0" shape="bspGoal" group="@top" fill="#000077" frame="#777777" cx="52.083333333333336" cz="21.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter y="35" shape="0" group="@top" fill="#000077" frame="#777777" cx="52.083333333333336" cz="21.319444444444446" r="2.5" angle="180" extent="90" />
+  <Teleporter y="0" shape="bspGoal" group="@bottom" fill="#000077" frame="#777777" cx="52.083333333333336" cz="81.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter y="35" shape="0" group="@bottom" fill="#000077" frame="#777777" cx="52.083333333333336" cz="81.45833333333334" r="2.5" angle="180" extent="90" />
+  <set wallHeight="0" />
+  <Ramp y="0" deltaY="4" thickness="0" fill="#000077" frame="#000000" x="47.083333333333336" z="38.47222222222222" w="10" d="7.986111111111114" h="0" r="2.5" angle="90" extent="180" />
+  <Ramp y="0" deltaY="4" thickness="0" fill="#000077" frame="#000000" x="47.083333333333336" z="56.458333333333336" w="10" d="7.986111111111107" h="0" r="2.5" angle="270" extent="180" />
+  <Wall fill="#99ff99" frame="#000000" x="47.083333333333336" z="46.458333333333336" w="10" d="10" h="0" y="4" />
+  <Solid shape="bsp16Sphere" scale="8" y="0" fill="#777777" frame="#000000" cx="47.15277777777778" cz="46.52777777777778" r="2.5" angle="270" extent="180" />
+  <Solid shape="bsp16Sphere" scale="8" y="0" fill="#777777" frame="#000000" cx="57.083333333333336" cz="46.458333333333336" r="2.5" angle="0" extent="180" />
+  <Solid shape="bsp16Sphere" scale="8" y="0" fill="#777777" frame="#000000" cx="57.083333333333336" cz="56.458333333333336" r="2.5" angle="90" extent="180" />
+  <Solid shape="bsp16Sphere" scale="8" y="0" fill="#777777" frame="#000000" cx="47.15277777777778" cz="56.458333333333336" r="2.5" angle="180" extent="180" />
+  <Teleporter y="0" shape="bspGoal" group="@middle" activeRang=".1" deadRange="0" fill="#000077" frame="#777777" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="180" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="270" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="270" extent="90" />
+  <Goody shape="bspAvaraA" y="6" speed="3" grenades="12" missiles="8" booster="1" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="270" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="46.94444444444445" cz="56.52777777777778" r="1.25" angle="270" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="46.94444444444445" cz="56.52777777777778" r="1.25" angle="270" extent="90" />
+  <Goody shape="bspMissile" y="9.5" speed="3" missiles="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="46.94444444444445" cz="56.52777777777778" r="1.25" angle="270" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="46.94444444444445" cz="46.31944444444445" r="1.25" angle="270" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="46.94444444444445" cz="46.31944444444445" r="1.25" angle="270" extent="90" />
+  <Goody shape="bspMissile" y="9.5" speed="3" missiles="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="46.94444444444445" cz="46.31944444444445" r="1.25" angle="270" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="57.15277777777778" cz="46.31944444444445" r="1.25" angle="270" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="57.15277777777778" cz="46.31944444444445" r="1.25" angle="270" extent="90" />
+  <Goody shape="bspMissile" y="9.5" speed="3" missiles="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="57.15277777777778" cz="46.31944444444445" r="1.25" angle="270" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="56.94444444444445" cz="56.52777777777778" r="1.25" angle="270" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="56.94444444444445" cz="56.52777777777778" r="1.25" angle="270" extent="90" />
+  <Goody shape="bspMissile" y="9.5" speed="3" missiles="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="56.94444444444445" cz="56.52777777777778" r="1.25" angle="270" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Goody shape="bspAvaraA" y="24.5" speed="3" grenades="12" missiles="8" booster="1" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Goody shape="bspGrenade" y="2" speed="3" grenades="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <set baseHeight="20" />
+  <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
+  <Field mask="T3" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
+  <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <And in="mHill" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@redWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Red has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Red has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Red has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Red has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Red has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Red has 20 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Red has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@redWins" text="Red wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
+  <Field mask="T5" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
+  <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <And in="mHill" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@purpleWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Purple has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Purple has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Purple has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Purple has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Purple has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Purple has 20 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Purple has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@purpleWins" text="Purple wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
+  <Field mask="T4" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
+  <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <And in="mHill" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@pinkWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Pink has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Pink has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Pink has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Pink has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Pink has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Pink has 20 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Pink has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@pinkwins" text="Pink wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
+  <Field mask="T2" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
+  <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <And in="mHill" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@yellowWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Yellow has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Yellow has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Yellow has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Yellow has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Yellow has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Yellow has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Yellow has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@yellowWins" text="Yellow wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
+  <Field mask="T1" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
+  <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <And in="mHill" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@greenWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Green has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Green has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Green has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Green has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Green has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Green has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Green has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@greenWins" text="Green wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <unique vars="mHill mStart mTick mTick2 mText1 mText2 mText3 mText4 mText5 mText6 mText7 mText8" />
+  <Field mask="T6" enter="mHill" start="mStart" stop="mHill" freq="1" fill="#ffccff" frame="#000000" x="48.333333333333336" z="46.458333333333336" w="7.5" d="10" h="4.5" r="1.25" cx="52.083333333333336" cz="51.38888888888889" angle="90" extent="90" />
+  <And in="@start" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <And in="mHill" out="mStart" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mHill" out="mTick" n="16" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Counter in="mTick" out="mTick2" n="10" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Distributor in="mTick2" out.0="mText1" out.1="mText2" out.2="mText3" out.3="mText4" out.4="mText5" out.5="mText6" out.6="mText7" out.7="@blueWins" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText1" text="Blue has 10 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText2" text="Blue has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText3" text="Blue has 30 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText4" text="Blue has 40 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText5" text="Blue has 50 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText6" text="Blue has 20 seconds." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="mText7" text="Blue has 10 seconds to go." fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Text showEveryone="true" in="@blueWins" text="Blue wins!" fill="#ffccff" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="1.25" angle="90" extent="90" />
+  <Teleporter group="-1" y="100" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter y="35" shape="0" group="@recenter" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter y="35" shape="0" group="@middle" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="0" start="@greenWins" activeRange="2000" mask="allTeams -T1" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="0" start="@yellowWins" activeRange="2000" mask="allTeams -T2" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="0" start="@redWins" activeRange="2000" mask="allTeams -T3" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="0" start="@pinkWins" activeRange="2000" mask="allTeams -T4" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="0" start="@purpleWins" activeRange="2000" mask="allTeams -T5" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="0" start="@blueWins" activeRange="2000" mask="allTeams -T6" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@greenWins" activeRange="2000" mask="T1" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@yellowWins" activeRange="2000" mask="T2" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@redWins" activeRange="2000" mask="T3" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@pinkWins" activeRange="2000" mask="T4" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@purpleWins" activeRange="2000" mask="T5" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <Teleporter shape="0" y="200" win="1000" start="@blueWins" activeRange="2000" mask="T6" fill="#ffff00" frame="#000000" cx="52.083333333333336" cz="51.38888888888889" r="2.5" angle="0" extent="90" />
+  <set defaultLives="99" />
+</map>

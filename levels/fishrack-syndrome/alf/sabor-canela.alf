@@ -1,0 +1,45 @@
+<map>
+  <set designer="Plastic Chicken" information="This is weird...kinda reminds me of Descent." hull.0="descentHull" hull.1="hull[0]" hull.2="hull[0]" gravity=".1" defaultLives="3" defaultFriction="0.05" defaultTraction="0.08" />
+  <SkyColor fill="#ff9999" frame="#cc3300" />
+  <GroundColor fill="#cc6600" frame="#bb0000" />
+  <TeamColor mask="T1" fill="#003300" frame="#003300" cx="41.31944444444444" cz="3.1944444444444446" r="1.9444444444444464" angle="270" extent="90" />
+  <TeamColor mask="T2" fill="#666600" frame="#666600" cx="41.31944444444444" cz="6.319444444444445" r="1.9444444444444464" angle="270" extent="90" />
+  <TeamColor mask="T3" fill="#660000" frame="#660000" cx="41.31944444444444" cz="9.444444444444445" r="1.9444444444444464" angle="270" extent="90" />
+  <TeamColor mask="T4" fill="#660033" frame="#660033" cx="41.31944444444444" cz="12.569444444444445" r="1.9444444444444464" angle="270" extent="90" />
+  <TeamColor mask="T5" fill="#330066" frame="#330066" cx="41.31944444444444" cz="15.694444444444445" r="1.9444444444444464" angle="270" extent="90" />
+  <TeamColor mask="T6" fill="#000077" frame="#000077" cx="41.31944444444444" cz="18.819444444444443" r="1.9444444444444464" angle="270" extent="90" />
+  <set wallHeight="25" baseHeight="0" />
+  <Incarnator fill="#ff9999" frame="#cc3300" cx="46.25" cz="41.25" r="1.875" angle="270" extent="90" />
+  <Wall fill="#669900" frame="#000000" x="38.75" z="33.75" w="88.125" d="0.625" h="0" />
+  <Wall fill="#669900" frame="#000000" x="126.875" z="33.75" w="0.625" d="88.125" h="0" />
+  <Wall fill="#669900" frame="#000000" x="38.75" z="34.375" w="0.625" d="88.125" h="0" />
+  <Wall fill="#669900" frame="#000000" x="39.375" z="121.875" w="88.125" d="0.625" h="0" />
+  <Wall fill="#669900" frame="#000000" x="39.375" z="48.125" w="21.875" d="0" h="0" />
+  <Wall fill="#669900" frame="#000000" x="75.625" z="68.75" w="18.75" d="0" h="0" />
+  <Wall fill="#669900" frame="#000000" x="54.375" z="64.375" w="0" d="18.125" h="0" />
+  <Wall fill="#669900" frame="#000000" x="110" z="34.375" w="0" d="21.875" h="0" />
+  <Wall fill="#669900" frame="#000000" x="74.375" z="48.125" w="21.875" d="0" h="0" />
+  <Wall fill="#669900" frame="#000000" x="106.25" z="77.5" w="0" d="18.125" h="0" />
+  <Wall fill="#669900" frame="#000000" x="64.375" z="97.5" w="18.75" d="0" h="0" />
+  <Wall fill="#669900" frame="#000000" x="71.25" z="97.5" w="0" d="24.375" h="0" />
+  <Incarnator fill="#ff9999" frame="#cc3300" cx="115.625" cz="90" r="1.875" angle="270" extent="90" />
+  <Incarnator fill="#ff9999" frame="#cc3300" cx="73.125" cz="81.25" r="1.875" angle="270" extent="90" />
+  <Incarnator fill="#ff9999" frame="#cc3300" cx="52.5" cz="106.25" r="1.875" angle="270" extent="90" />
+  <Incarnator fill="#ff9999" frame="#cc3300" cx="82.5" cz="110" r="1.875" angle="270" extent="90" />
+  <Incarnator fill="#ff9999" frame="#cc3300" cx="95.625" cz="58.125" r="1.875" angle="270" extent="90" />
+  <unique vars="mHi mDie" />
+  <Goody shape="bspCompass" scale="3" missiles="3" grenades="6" start="mHi" out="mDie" speed="10" y="15" fill="#66ff33" frame="#000000" cx="88.95833333333334" cz="79.93055555555556" r="1.875" angle="270" extent="90" />
+  <Timer in="mDie" wait="60" out="mHi" fill="#66ff33" frame="#000000" cx="88.95833333333334" cz="79.93055555555556" r="1.875" angle="270" extent="90" />
+  <And in="@start" out="mHi" fill="#66ff33" frame="#000000" cx="88.95833333333334" cz="79.93055555555556" r="1.875" angle="270" extent="90" />
+  <set baseHeight="10" wallHeight="0" />
+  <Wall fill="#66ff33" frame="#000000" x="39.375" z="34.375" w="70.625" d="13.75" h="0" />
+  <Wall fill="#66ff33" frame="#000000" x="110" z="34.375" w="16.875" d="87.5" h="0" />
+  <Wall fill="#66ff33" frame="#000000" x="106.25" z="48.125" w="3.75" d="73.75" h="0" />
+  <Wall fill="#66ff33" frame="#000000" x="71.25" z="97.5" w="35" d="24.375" h="0" />
+  <Wall fill="#66ff33" frame="#000000" x="54.375" z="68.75" w="51.875" d="28.75" h="0" />
+  <Wall fill="#66ff33" frame="#000000" x="54.375" z="48.125" w="51.875" d="20.625" h="0" />
+  <Wall fill="#66ff33" frame="#000000" x="39.375" z="48.125" w="15" d="73.75" h="0" />
+  <Wall fill="#66ff33" frame="#000000" x="54.375" z="97.5" w="16.875" d="24.375" h="0" />
+  <Teleporter start="@winTeam" activeRange="2000" win="1000" shape="false" fill="#ff9999" frame="#cc3300" cx="75" cz="15" r="1.875" angle="270" extent="90" />
+  <Wall fill="#005500" frame="#000000" x="39.375" z="34.375" w="87.5" d="87.5" h="0" y="15" />
+</map>

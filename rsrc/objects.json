@@ -1,0 +1,556 @@
+{
+    "types": {
+        "actor": {
+            "attrs": {
+                "hitSound": {
+                    "default": "hitSoundDefault",
+                    "description": "The sound that the object makes when it is hit, or something explodes nearby."
+                },
+                "hitVolume": {
+                    "default": 25
+                },
+                "blastSound": {
+                    "default": "snBlast",
+                    "description": "The sound that the object makes when it is destroyed."
+                },
+                "blastVolume": {
+                    "default": 40
+                },
+                "shield": {
+                    "default": -1,
+                    "description": "The shield value for the object. Negative numbers mean an infinite shield, i.e. an indestructible object."
+                },
+                "power": {
+                    "default": 0,
+                    "description": "The explosion damage done at a distance of 1 meter or less. Beyond this range, damage done is `power / distance ^ 2`. The minimum damage is 1/16 units, so a mine with a blasting power of 2 will do the minimum 0.0625 units of damage at a distance of 5.6 meters."
+                },
+                "team": {
+                    "default": 0,
+                    "description": "Assigns a team to the object. By default, most objects belong to the computer team (team zero). Changing this value may change the behavior of certain objects and can affect how scores are calculated."
+                },
+                "isTarget": {
+                    "default": false,
+                    "description": "If true, the object is considered a target by the player HUDs and the HUD indicators will light up accordingly."
+                },
+                "hitMsg": {
+                    "default": 0,
+                    "description": "This message is sent whenever the object has been hit (or destroyed)."
+                },
+                "killMsg": {
+                    "default": 0,
+                    "description": "This message is sent whenever the object has been destroyed."
+                },
+                "hitScore": {
+                    "default": 0,
+                    "description": "Points are awarded according to the power of the hit on the object (`energy * hitScore`)."
+                },
+                "killScore": {
+                    "default": 0,
+                    "description": "The number of points awarded when the object has been destroyed."
+                },
+                "shapeScale": {
+                    "default": 1,
+                    "description": "Allows you to scale the bsp shapes for the object."
+                },
+                "yon": {
+                    "default": 0,
+                    "description": "Distance at which the object is clipped from view. If 0, the default value is used."
+                },
+                "stepOnMsg": {
+                    "default": 0,
+                    "description": "This message is sent whenever a player steps on the object."
+                },
+                "traction": {
+                    "default": "defaultTraction"
+                },
+                "friction": {
+                    "default": "defaultFriction"
+                }
+            }
+        },
+        "placed": {
+            "type": "actor",
+            "attrs": {
+                "y": {
+                    "default": 0,
+                    "description": "The altitude of the object relative to the ground, in meters. Since the HECTOR that the player controls is slightly under 2 meters high, placing an object at `y = 1.5` would put it at about eye level."
+                }
+            },
+            "description": "Actors in this class may designate a physical location in the world, primary and secondary colors, and/or rotation. The specifics vary from subclass to subclass."
+        },
+        "glow": {
+            "type": "placed",
+            "attrs": {
+                "canGlow": {
+                    "description": "If the object type is destructible by default (i.e. has a positive `shields` property by default), `canGlow` will be true by default. Otherwise, it will be false. You can override it either way."
+                }
+            },
+            "description": "The actors in this class glow when they are hit, assuming their shields are set to destructible by default. Glowing actors with non-negative default shield values also use a different default shield hit sound."
+        },
+        "shooter": {
+            "type": "glow",
+            "attrs": {
+                "mask": {
+                    "default": "allTeams",
+                    "description": "The teams the object will target."
+                },
+                "watch": {
+                    "default": "playerMask",
+                    "description": "What the object will watch for and attack. `playerMask` and `scoutMask` are valid values and may be added to combine them."
+                },
+                "activeRange": {
+                    "default": 100,
+                    "description": "The radius within which the object looks for targets to attack."
+                },
+                "shotPower": {
+                    "default": 0.5,
+                    "description": "The power of a single shot."
+                },
+                "burstLength": {
+                    "default": 2,
+                    "description": "How many shots can be fired in a single burst."
+                },
+                "burstSpeed": {
+                    "default": 5,
+                    "description": "How many frames elapse between each shot in a burst."
+                },
+                "burstCharge": {
+                    "default": 40,
+                    "description": "How many frames elapse to recharge after the first shot of a burst has been fired."
+                }
+            },
+            "description": "Shooters are objects that can shoot in any direction."
+        },
+        "logic": {
+            "type": "actor",
+            "attrs": {
+                "out": {
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[0]": {
+                    "alfRepr": "out.0",
+                    "default": "out",
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[1]": {
+                    "alfRepr": "out.1",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[2]": {
+                    "alfRepr": "out.2",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[3]": {
+                    "alfRepr": "out.3",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[4]": {
+                    "alfRepr": "out.4",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[5]": {
+                    "alfRepr": "out.5",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[6]": {
+                    "alfRepr": "out.6",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[7]": {
+                    "alfRepr": "out.7",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[8]": {
+                    "alfRepr": "out.8",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "out[9]": {
+                    "alfRepr": "out.9",
+                    "default": 0,
+                    "description": "This message is sent when the logic object activates. Multiple messages (up to ten) can be sent out."
+                },
+                "restart": {
+                    "default": true,
+                    "description": "If true, the same logic object can be used more than once. When the conditions are triggered and messages are sent out, the logic object is reset to its original condition."
+                },
+                "in": {
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[0]": {
+                    "alfRepr": "in.0",
+                    "default": "in",
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[1]": {
+                    "alfRepr": "in.1",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[2]": {
+                    "alfRepr": "in.2",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[3]": {
+                    "alfRepr": "in.3",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[4]": {
+                    "alfRepr": "in.4",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[5]": {
+                    "alfRepr": "in.5",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[6]": {
+                    "alfRepr": "in.6",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[7]": {
+                    "alfRepr": "in.7",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[8]": {
+                    "alfRepr": "in.8",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                },
+                "in[9]": {
+                    "alfRepr": "in.9",
+                    "default": 0,
+                    "description": "The message that triggers the logic object. Multiple messages (up to ten) can be received."
+                }
+            },
+            "description": "Logic objects are not visible, but allow you to combine messages in strange and interesting ways."
+        }
+    },
+    "objects": {
+        "Walker": {
+            "type": "glow",
+            "attrs": {
+                "team": {
+                    "default": 1,
+                    "description": "Specifies the team that the player belongs to. Team numbers range from 1 to 8 with zero reserved for the neutral team. (Zero may not be used for human players.)"
+                },
+                "incarnateSound": {
+                    "default": "snIncarnate",
+                    "description": "Defines the sound that is played when a player is created or recreated after being destroyed."
+                },
+                "incarnateVolume": {
+                    "default": 12,
+                    "description": "Defines the volume of the sound played when a player is created or recreated after being destroyed."
+                },
+                "winSound": {
+                    "default": "snWin",
+                    "description": "Defines the sound that is played when the player reaches a \"win\" teleporter and is beamed out of the game."
+                },
+                "winVolume": {
+                    "default": 12,
+                    "description": "Defines the volume of the sound played when the player reaches a \"win\" teleporter and is beamed out of the game."
+                }
+            },
+            "index": 1,
+            "description": "Biped machine controlled by the user (the HECTOR). By placing these actors in the game, you specify initial positions for players who choose the same team. Alternatively you can also use `Incarnator` objects, but then you do not have access to `Walker`'s unique attributes."
+        },
+        "Sphere": {
+            "type": "glow",
+            "attrs": {},
+            "index": 2,
+            "description": ""
+        },
+        "Hologram": {
+            "type": "placed",
+            "attrs": {
+                "shape": {
+                    "default": "bspGroundStar",
+                    "description": "The model to use. Marker white (RGB 254 254 254) is replaced with the primary color. Marker red (RGB 254 0 0) is replaced with the secondary color."
+                },
+                "roll": {
+                    "default": 0,
+                    "description": "You can rotate the model around the Z-axis."
+                },
+                "isAmbient": {
+                    "default": false,
+                    "description": "Ambient holograms can be turned off by the user to make the game run faster."
+                }
+            },
+            "index": 3,
+            "description": "Holograms can be used to place models in the world. Holograms are not solid, so you can walk (and shoot) through them."
+        },
+        "Solid": {
+            "type": "glow",
+            "attrs": {
+                "shape": {
+                    "default": "w1x1",
+                    "description": "The model to use. Marker white (RGB 254 254 254) is replaced with the primary color. Marker red (RGB 254 0 0) is replaced with the secondary color. The default model is a 5x5 meter wall that is 3 meters high."
+                },
+                "roll": {
+                    "default": 0,
+                    "description": "You can rotate the model around the Z-axis."
+                }
+            },
+            "index": 4,
+            "description": "Solids can be used to place models in the world. You should be aware that collision detection is only done with bounding boxes and spheres, so even complicated models will still behave as if they were boxes or spheres. For example, you can't shoot through a donut shaped `Solid`."
+        },
+        "WallSolid": {
+            "type": "Solid",
+            "attrs": {},
+            "index": 5,
+            "description": "Mostly useful if you want to create a destroyable wall."
+        },
+        "FreeSolid": {
+            "type": "Solid",
+            "attrs": {
+                "shape": {
+                    "default": 0,
+                    "description": "The model to use. Marker white (RGB 254 254 254) is replaced with the primary color. Marker red (RGB 254 0 0) is replaced with the secondary color. If `shape` is left unset, you can use the same attributes as a `Wall` to create a movable wall."
+                },
+                "mass": {
+                    "default": 50,
+                    "description": "Mass determines how easily the object moves when it is hit. A heavier mass will take more power to move."
+                },
+                "customGravity": {
+                    "default": 0.12,
+                    "description": "Acceleration under standard 1.0 gravity. Note that you can control the \"gravity\" variable for the whole level. The acceleration for this object is calculated by `gravity * customGravity`."
+                },
+                "accel": {
+                    "default": 0.95,
+                    "description": "When in motion, the object usually decelerates slowly. The default rate is 5% slowdown per frame. Changing the `accel` value to be closer to one will reduce the friction; making it smaller will increase the friction and the rate at which it slows. Note that `FreeSolid`s do *not* use the friction and traction values set for different surfaces when they are sliding on those surfaces. Reasonable values for this attribute range from slightly over 0 to around 1.0 (values greater than 1.0 will make the `FreeSolid` accelerate until it hits something)."
+                },
+                "shotPower": {
+                    "default": 0,
+                    "description": "Like `Door`s, `FreeSolid`s can cause damage if they hit you while they are moving."
+                },
+                "start": {
+                    "default": "@start",
+                    "description": "The message that unfreezes the `FreeSolid`, rendering it mobile. By default, `FreeSolid`s are unfrozen immediately when the game starts."
+                },
+                "stop": {
+                    "default": 0,
+                    "description": "The message that freezes the `FreeSolid`, rendering it immobile."
+                },
+                "status": {
+                    "default": false,
+                    "description": "The initial frozen/unfrozen state of the `FreeSolid`. By default, the object is motionless until it receives the message specified by the `start` attribute. (Which, by default, is `@start`--the beginning of the game.)"
+                }
+            },
+            "index": 6,
+            "description": "A bit like a `WallSolid`, but movable by external impulses from shots and explosions."
+        },
+        "Dome": {
+            "type": "placed",
+            "attrs": {
+                "hasFloor": {
+                    "default": false,
+                    "description": "Whether the dome should render a floor."
+                },
+                "pitch": {
+                    "default": 0,
+                    "description": "Rotation around the X-axis, in degrees."
+                },
+                "roll": {
+                    "default": 0,
+                    "description": "Rotation around the Z-axis, in degrees."
+                }
+            },
+            "index": 7,
+            "description": ""
+        },
+        "Ramp": {
+            "type": "actor",
+            "attrs": {},
+            "index": 8,
+            "description": ""
+        },
+        "TriPyramid": {
+            "type": "actor",
+            "attrs": {},
+            "index": 9,
+            "description": ""
+        },
+        "Door": {
+            "type": "actor",
+            "attrs": {},
+            "index": 10,
+            "description": ""
+        },
+        "Door2": {
+            "type": "actor",
+            "attrs": {},
+            "index": 11,
+            "description": ""
+        },
+        "WallDoor": {
+            "type": "actor",
+            "attrs": {},
+            "index": 12,
+            "description": ""
+        },
+        "Area": {
+            "type": "actor",
+            "attrs": {},
+            "index": 13,
+            "description": ""
+        },
+        "Text": {
+            "type": "actor",
+            "attrs": {},
+            "index": 14,
+            "description": ""
+        },
+        "Field": {
+            "type": "actor",
+            "attrs": {},
+            "index": 15,
+            "description": ""
+        },
+        "Goody": {
+            "type": "actor",
+            "attrs": {},
+            "index": 16,
+            "description": ""
+        },
+        "Switch": {
+            "type": "actor",
+            "attrs": {},
+            "index": 17,
+            "description": ""
+        },
+        "Guard": {
+            "type": "actor",
+            "attrs": {},
+            "index": 18,
+            "description": ""
+        },
+        "GroundColor": {
+            "type": "actor",
+            "attrs": {},
+            "index": 19,
+            "description": ""
+        },
+        "SkyColor": {
+            "type": "actor",
+            "attrs": {},
+            "index": 20,
+            "description": ""
+        },
+        "Incarnator": {
+            "type": "actor",
+            "attrs": {},
+            "index": 21,
+            "description": ""
+        },
+        "Teleporter": {
+            "type": "actor",
+            "attrs": {},
+            "index": 22,
+            "description": ""
+        },
+        "Pill": {
+            "type": "actor",
+            "attrs": {},
+            "index": 23,
+            "description": ""
+        },
+        "Ball": {
+            "type": "actor",
+            "attrs": {},
+            "index": 24,
+            "description": ""
+        },
+        "Goal": {
+            "type": "actor",
+            "attrs": {},
+            "index": 25,
+            "description": ""
+        },
+        "Mine": {
+            "type": "actor",
+            "attrs": {},
+            "index": 26,
+            "description": ""
+        },
+        "Parasite": {
+            "type": "actor",
+            "attrs": {},
+            "index": 27,
+            "description": ""
+        },
+        "Ufo": {
+            "type": "actor",
+            "attrs": {},
+            "index": 28,
+            "description": ""
+        },
+        "Sound": {
+            "type": "actor",
+            "attrs": {},
+            "index": 29,
+            "description": ""
+        },
+        "Timer": {
+            "type": "actor",
+            "attrs": {},
+            "index": 30,
+            "description": ""
+        },
+        "Delay": {
+            "type": "actor",
+            "attrs": {},
+            "index": 31,
+            "description": ""
+        },
+        "Counter": {
+            "type": "actor",
+            "attrs": {},
+            "index": 32,
+            "description": ""
+        },
+        "And": {
+            "type": "actor",
+            "attrs": {},
+            "index": 33,
+            "description": ""
+        },
+        "Distributor": {
+            "type": "actor",
+            "attrs": {},
+            "index": 34,
+            "description": ""
+        },
+        "Base": {
+            "type": "actor",
+            "attrs": {},
+            "index": 35,
+            "description": ""
+        },
+        "YonBox": {
+            "type": "actor",
+            "attrs": {},
+            "index": 36,
+            "description": ""
+        },
+        "YonSphere": {
+            "type": "actor",
+            "attrs": {},
+            "index": 37,
+            "description": ""
+        }
+    }
+}

@@ -12,8 +12,14 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#define OBJ_VERT "rsrc/shaders/avara_vert.glsl"
+#define OBJ_FRAG "rsrc/shaders/avara_frag.glsl"
+
+#define SKY_VERT "rsrc/shaders/sky_vert.glsl"
+#define SKY_FRAG "rsrc/shaders/sky_frag.glsl"
 
 bool actuallyRender = true;
+bool ready = false;
 
 glm::mat4 proj;
 const float near_dist = .1f;
@@ -203,7 +209,7 @@ void AvaraGLSetDepthTest(bool doTest) {
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
-    gProgram = LoadShaders(BundlePath("shaders/avara_vert.glsl"), BundlePath("shaders/avara_frag.glsl"));
+    gProgram = LoadShaders(BundlePath(OBJ_VERT), BundlePath(OBJ_FRAG));
     glUseProgram(gProgram);
     glCheckErrors();
 
@@ -226,7 +232,7 @@ void AvaraGLInitContext() {
     AvaraGLLightDefaults();
     glCheckErrors();
 
-    skyProgram = LoadShaders(BundlePath("shaders/sky_vert.glsl"), BundlePath("shaders/sky_frag.glsl"));
+    skyProgram = LoadShaders(BundlePath(SKY_VERT), BundlePath(SKY_FRAG));
     glGenVertexArrays(1, &skyVertArray);
     glGenBuffers(1, &skyBuffer);
     skyViewLoc = glGetUniformLocation(skyProgram, "view");
@@ -234,6 +240,7 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
+    ready = true;
 }
 
 void AvaraGLViewport(short width, short height) {
@@ -244,7 +251,7 @@ void AvaraGLViewport(short width, short height) {
 
 void AvaraGLDrawPolygons(CBSPPart* part) {
     glCheckErrors();
-    if(!actuallyRender) return;
+    if(!actuallyRender || !ready) return;
     // Create a buffer big enough to hold vertex/color/normal for every point we draw.
     glUseProgram(gProgram);
     glBindVertexArray(part->vertexArray);
@@ -338,7 +345,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     glCheckErrors();
-    if (!actuallyRender) return;
+    if (!actuallyRender || !ready) return;
     Matrix *trans = &theView->viewMatrix;
     float matrix[16];
     for (int c = 0; c < 4; c++) {

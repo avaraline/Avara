@@ -1,0 +1,203 @@
+<map>
+  <set wallHeight="30" wallYon="0.01" />
+  <Wall fill="#ffff66" frame="#000000" x="35.486111111111114" z="16.73611111111111" w="1.25" d="31.875" h="0" y="3" />
+  <Wall fill="#ffff66" frame="#000000" x="84.23611111111111" z="16.73611111111111" w="1.25" d="31.875" h="0" />
+  <Wall fill="#ffff66" frame="#000000" x="35.486111111111114" z="15.486111111111112" w="50" d="1.25" h="0" />
+  <Wall fill="#ffff66" frame="#000000" x="35.486111111111114" z="48.611111111111114" w="50" d="1.25" h="0" />
+  <set wallYon="0.01" wallHeight="1" />
+  <Wall fill="#ffff66" frame="#000000" x="30.48611111111111" z="15.486111111111112" w="55" d="34.375" h="0" y="-1" />
+  <set wallYon="0" iceY="iceY + 8" icePower="10" iceGrav="0.02" />
+  <set iceMass="20" iceShield="6.5" targBall="targ1" targIce="targ2" targStop="targ3" wallHeight="10" defaultLives="6" playerBlast="1.7" />
+  <Timer in.0="@start" in.1="@Throw" wait="20 * 15" out.0="in[1]" fill="#ffff66" frame="#000000" />
+  <And in="@start" out.0="@OpenDisp" out.1="@FieldA" fill="#ffff66" frame="#000000" />
+  <set SidePush=".1" />
+  <Timer in.0="@start" in.1="@IceCheck" wait="3" out.0="in[1]" fill="#ffff66" frame="#000000" />
+  <Timer in.0="@start" in.1="@IceOK" wait="60" out.0="in[1]" fill="#ffff66" frame="#000000" />
+  <Timer in="@IceOK" wait="20" out="@ClearDisp" fill="#ffff66" frame="#000000" />
+  <SkyColor fill="#777777" frame="#00ccff" />
+  <GroundColor fill="#008800" frame="#000000" />
+  <Field watch="targBall" deltaY="0.01" fill="#ffffff" frame="#000000" r="3.75" cx="4.305555555555555" cz="1.7361111111111112" angle="90" extent="180" x="36.736111111111114" z="16.73611111111111" w="23.75" d="31.875" h="1.25" />
+  <Field watch="targBall" deltaY="0.01" fill="#ffffff" frame="#000000" r="3.75" cx="4.305555555555555" cz="1.7361111111111112" angle="90" extent="180" x="60.486111111111114" z="16.73611111111111" w="23.75" d="31.875" h="1.25" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <FreeSolid y="iceY" shape="bspW1x1" shield="iceShield" targetGroup="targIce" shotPower="icePower" customGravity="iceGrav" mass="iceMass" fill="#66ffff" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" />
+  <Wall fill="#996633" frame="#000000" x="35.486111111111114" z="16.73611111111111" w="1.25" d="13.75" h="0" />
+  <Wall fill="#996633" frame="#000000" x="35.486111111111114" z="35.486111111111114" w="1.25" d="13.125" h="0" />
+  <WallDoor deltaY="3" openSpeed="4" closeSpeed="8" open="@OpenDisp" close="@CloseDisp" shotPower="1000" fill="#996633" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" x="35.486111111111114" z="30.48611111111111" w="1.25" d="5" h="0" />
+  <Field deltaY="0" watch="playerMask + collisionDamaeMask" enter="@Throw" fill="#bbbbbb" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" x="38.611111111111114" z="29.86111111111111" w="10.625" d="6.25" h="1.5" />
+  <Wall fill="#996633" frame="#000000" x="84.23611111111111" z="16.73611111111111" w="1.25" d="15.625" h="0" />
+  <Field deltaX="-0.1" watch="targIce" fill="#bbbbbb" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" x="82.36111111111111" z="16.73611111111111" w="1.875" d="31.875" h="0" />
+  <Field deltaZ="-0.1" watch="targIce" fill="#bbbbbb" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" x="60.486111111111114" z="46.736111111111114" w="23.75" d="1.875" h="0" />
+  <Field deltaX="0.1" watch="targIce" fill="#bbbbbb" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" x="36.736111111111114" z="16.73611111111111" w="1.875" d="13.75" h="0" />
+  <Field deltaX="0.1" watch="targIce" fill="#bbbbbb" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" x="36.736111111111114" z="35.486111111111114" w="1.875" d="13.125" h="0" />
+  <Field deltaZ="-0.1" watch="targIce" fill="#bbbbbb" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" x="36.736111111111114" z="46.736111111111114" w="23.75" d="1.875" h="0" />
+  <Field deltaZ="0.1" watch="targIce" fill="#bbbbbb" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="0" extent="180" x="60.486111111111114" z="16.73611111111111" w="23.75" d="1.875" h="0" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="20" start="mShow" out="mTaken" fill="#ffff00" frame="#ff0000" cx="82.43055555555556" cz="18.680555555555557" r="1.25" angle="180" extent="270" />
+  <And in="@start" out="mShow" fill="#ffff00" frame="#ff0000" cx="82.43055555555556" cz="18.680555555555557" r="1.25" angle="180" extent="270" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#ffff00" frame="#ff0000" cx="82.43055555555556" cz="18.680555555555557" r="1.25" angle="180" extent="270" />
+  <Field deltaZ="0.1" watch="targIce" fill="#bbbbbb" frame="#000000" r="1.25" cx="82.43055555555556" cz="18.680555555555557" angle="180" extent="270" x="36.736111111111114" z="16.73611111111111" w="23.75" d="1.875" h="0" />
+  <unique vars="mStop" />
+  <Field deltaY="0" deltaX=".3" start="@Throw" exit="mStop" stop="mStop" watch="targIce" fill="#bbbbbb" frame="#000000" r="1.25" cx="82.43055555555556" cz="18.680555555555557" angle="180" extent="270" x="30.48611111111111" z="30.48611111111111" w="5" d="5" h="1.5" />
+  <Ball customGravity="0.001" ejectPitch="0" y="5" targetGroup="targBall" fill="#9900cc" frame="#000000" cx="60.55555555555556" cz="19.86111111111111" r="1.3194444444444429" angle="270" extent="180" />
+  <set thisTeam="2" thisMask="T2" tY="tY + 3" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.55555555555556" cz="19.86111111111111" r="1.3194444444444429" angle="270" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.55555555555556" cz="19.86111111111111" r="1.3194444444444429" angle="270" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.55555555555556" cz="19.86111111111111" r="1.3194444444444429" angle="270" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.55555555555556" cz="19.86111111111111" r="1.3194444444444429" angle="270" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.55555555555556" cz="19.86111111111111" r="1.3194444444444429" angle="270" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.55555555555556" cz="19.86111111111111" r="1.3194444444444429" angle="270" extent="180" />
+  <Incarnator y="2" start="@start" status="false" fill="#9900cc" frame="#000000" cx="60.55555555555556" cz="19.86111111111111" r="1.3194444444444429" angle="270" extent="180" />
+  <set thisTeam="3" thisMask="T3" tY="tY + 3" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="21.11111111111111" r="2.5" angle="0" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="21.11111111111111" r="2.5" angle="0" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="21.11111111111111" r="2.5" angle="0" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="21.11111111111111" r="2.5" angle="0" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="21.11111111111111" r="2.5" angle="0" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="21.11111111111111" r="2.5" angle="0" extent="90" />
+  <Incarnator start="@start" status="false" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="21.11111111111111" r="2.5" angle="0" extent="90" />
+  <set thisTeam="4" thisMask="T4" tY="tY + 3" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="44.236111111111114" r="2.5" angle="180" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="44.236111111111114" r="2.5" angle="180" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="44.236111111111114" r="2.5" angle="180" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="44.236111111111114" r="2.5" angle="180" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="44.236111111111114" r="2.5" angle="180" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="44.236111111111114" r="2.5" angle="180" extent="90" />
+  <Incarnator start="@start" status="false" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="44.236111111111114" r="2.5" angle="180" extent="90" />
+  <set thisTeam="1" thisMask="T1" tY="tY + 3" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="21.11111111111111" r="2.5" angle="270" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="21.11111111111111" r="2.5" angle="270" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="21.11111111111111" r="2.5" angle="270" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="21.11111111111111" r="2.5" angle="270" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="21.11111111111111" r="2.5" angle="270" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="21.11111111111111" r="2.5" angle="270" extent="90" />
+  <Incarnator start="@start" status="false" fill="#00ee00" frame="#000000" cx="41.111111111111114" cz="21.11111111111111" r="2.5" angle="270" extent="90" />
+  <Wall fill="#996633" frame="#000000" x="35.486111111111114" z="15.486111111111112" w="25" d="1.25" h="0" />
+  <Wall fill="#996633" frame="#000000" x="60.486111111111114" z="15.486111111111112" w="25" d="1.25" h="0" />
+  <Wall fill="#996633" frame="#000000" x="35.486111111111114" z="48.611111111111114" w="25" d="1.25" h="0" />
+  <Wall fill="#996633" frame="#000000" x="60.486111111111114" z="48.611111111111114" w="25" d="1.25" h="0" />
+  <Wall fill="#996633" frame="#000000" x="84.23611111111111" z="32.361111111111114" w="1.25" d="16.25" h="0" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="20" start="mShow" out="mTaken" fill="#0000dd" frame="#440000" cx="82.43055555555556" cz="46.80555555555556" r="1.25" angle="180" extent="270" />
+  <And in="@start" out="mShow" fill="#0000dd" frame="#440000" cx="82.43055555555556" cz="46.80555555555556" r="1.25" angle="180" extent="270" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#0000dd" frame="#440000" cx="82.43055555555556" cz="46.80555555555556" r="1.25" angle="180" extent="270" />
+  <set thisTeam="6" thisMask="T6" tY="tY + 3" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="44.236111111111114" r="2.5" angle="90" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="44.236111111111114" r="2.5" angle="90" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="44.236111111111114" r="2.5" angle="90" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="44.236111111111114" r="2.5" angle="90" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="44.236111111111114" r="2.5" angle="90" extent="90" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="44.236111111111114" r="2.5" angle="90" extent="90" />
+  <Incarnator start="@start" status="false" fill="#00ee00" frame="#000000" cx="79.86111111111111" cz="44.236111111111114" r="2.5" angle="90" extent="90" />
+  <Goal goalMsg="@Throw" goalScore="0" pitch="90" y="2" fill="#9900cc" frame="#000000" cx="84.23611111111111" cz="32.986111111111114" r="1.25" angle="0" extent="180" />
+  <FreeSolid customGravity="0.003" shape="bspSphere" scale=".4" shotPower="icePower * 2" mass="iceMass * .75" targetGroup="targIce + targBall" y="5" isTarget="true" fill="#9900cc" frame="#000000" r="1.3541666666666679" cx="60.65972222222223" cz="45.486111111111114" angle="90" extent="180" />
+  <set thisTeam="5" thisMask="T5" tY="tY + 3" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.65972222222223" cz="45.486111111111114" r="1.3541666666666679" angle="90" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.65972222222223" cz="45.486111111111114" r="1.3541666666666679" angle="90" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.65972222222223" cz="45.486111111111114" r="1.3541666666666679" angle="90" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.65972222222223" cz="45.486111111111114" r="1.3541666666666679" angle="90" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.65972222222223" cz="45.486111111111114" r="1.3541666666666679" angle="90" extent="180" />
+  <Walker team="thisTeam" power="playerBlast" y="tY" fill="#9900cc" frame="#000000" cx="60.65972222222223" cz="45.486111111111114" r="1.3541666666666679" angle="90" extent="180" />
+  <Incarnator y="4" start="@start" status="false" fill="#9900cc" frame="#000000" cx="60.65972222222223" cz="45.486111111111114" r="1.3541666666666679" angle="90" extent="180" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@win" activeRange="2000" fill="#00ee00" frame="#000000" cx="60.486111111111114" cz="32.986111111111114" r="1.875" angle="0" extent="90" />
+  <WallDoor deltaY="3" openSpeed="4" closeSpeed="8" close="@DoneClear" open="@ClearDisp" shotPower="1000" fill="#996633" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="29.23611111111111" z="35.486111111111114" w="6.25" d="1.25" h="0" />
+  <WallDoor deltaY="3" openSpeed="4" closeSpeed="8" close="@DoneClear" open="@ClearDisp" shotPower="1000" fill="#996633" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="29.23611111111111" z="29.23611111111111" w="6.25" d="1.25" h="0" />
+  <WallDoor deltaY="3" openSpeed="4" closeSpeed="8" close="@DoneClear" open="@ClearDisp" didOpen="@DoneClear" shotPower="1000" fill="#996633" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="29.23611111111111" z="30.48611111111111" w="1.25" d="5" h="0" />
+  <Field deltaY="0" deltaZ="SidePush" watch="targIce" exit="@FieldB" start="@FieldA" stop="exit" fill="#bbbbbb" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="38.611111111111114" z="29.86111111111111" w="10.625" d="6.25" h="1.5" />
+  <Field deltaY="0" deltaZ="-SidePush" watch="targIce" exit="@FieldC" start="@FieldB" stop="exit" fill="#bbbbbb" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="38.611111111111114" z="29.86111111111111" w="10.625" d="6.25" h="1.5" />
+  <Field deltaY="0" deltaZ="0" watch="targIce" exit="@FieldA" start="@FieldC" stop="exit" fill="#bbbbbb" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="38.611111111111114" z="29.86111111111111" w="10.625" d="6.25" h="1.5" />
+  <Field deltaY="0" deltaX="SidePush" watch="targIce" fill="#bbbbbb" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="41.736111111111114" z="36.111111111111114" w="1.25" d="5" h="1.5" />
+  <unique vars="mStop" />
+  <Field deltaY="0" start="@IceCheck" stop="mStop" enter="@IceOK" watch="targIce + targStop" fill="#bbbbbb" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="30.48611111111111" z="30.48611111111111" w="5" d="5" h="1.5" />
+  <And in="@IceCheck" out="mStop" fill="#bbbbbb" frame="#000000" cx="60.486111111111114" cz="32.986111111111114" r="1.875" angle="0" extent="90" />
+  <unique vars="mStop" />
+  <Field deltaY="0" start="@IceCheck" stop="mStop" enter="@CloseDisp" watch="targStop" fill="#bbbbbb" frame="#000000" r="1.875" cx="60.486111111111114" cz="32.986111111111114" angle="0" extent="90" x="30.48611111111111" z="30.48611111111111" w="5" d="5" h="1.5" />
+  <And in="@IceCheck" out="mStop" fill="#bbbbbb" frame="#000000" cx="60.486111111111114" cz="32.986111111111114" r="1.875" angle="0" extent="90" />
+  <FreeSolid y="iceY" shape="bspW1x1" scale="0.99" targetGroup="targStop" mass="65535" customGravity="iceGrav" fill="#ff0000" frame="#000000" r="2.5" cx="32.986111111111114" cz="32.986111111111114" angle="180" extent="180" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="20" start="mShow" out="mTaken" fill="#ffff00" frame="#ff0000" cx="38.68055555555556" cz="46.80555555555556" r="1.25" angle="180" extent="270" />
+  <And in="@start" out="mShow" fill="#ffff00" frame="#ff0000" cx="38.68055555555556" cz="46.80555555555556" r="1.25" angle="180" extent="270" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#ffff00" frame="#ff0000" cx="38.68055555555556" cz="46.80555555555556" r="1.25" angle="180" extent="270" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="20" start="mShow" out="mTaken" fill="#0000dd" frame="#440000" cx="38.68055555555556" cz="18.680555555555557" r="1.25" angle="180" extent="270" />
+  <And in="@start" out="mShow" fill="#0000dd" frame="#440000" cx="38.68055555555556" cz="18.680555555555557" r="1.25" angle="180" extent="270" />
+  <Timer in="mTaken" out="mShow" wait="350" fill="#0000dd" frame="#440000" cx="38.68055555555556" cz="18.680555555555557" r="1.25" angle="180" extent="270" />
+  <unique vars="mShow mTaken" />
+  <Goody shape="bspGoody" y="6.1" scale=".5" speed="2" boosters="2" start="mShow" out="mTaken" fill="#ff3300" frame="#ff0000" cx="60.55555555555556" cz="33.05555555555556" r="1.25" angle="180" extent="270" />
+  <And in="@start" out="mShow" fill="#ff3300" frame="#ff0000" cx="60.55555555555556" cz="33.05555555555556" r="1.25" angle="180" extent="270" />
+  <Timer in="mTaken" out="mShow" wait="550" fill="#ff3300" frame="#ff0000" cx="60.55555555555556" cz="33.05555555555556" r="1.25" angle="180" extent="270" />
+  <And in="@ClearDisp" out="@CloseDisp" fill="#ff3300" frame="#ff0000" cx="60.55555555555556" cz="33.05555555555556" r="1.25" angle="180" extent="270" />
+  <And in="@DoneClear" out="@OpenDisp" fill="#ff3300" frame="#ff0000" cx="60.55555555555556" cz="33.05555555555556" r="1.25" angle="180" extent="270" />
+  <set information="Watch out for moving ice!
+The sphere is also quite deadly.
+WARNING: This level has been known to cause Avara to freeze (seriously)." />
+</map>

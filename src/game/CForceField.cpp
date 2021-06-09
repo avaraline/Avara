@@ -62,7 +62,7 @@ CAbstractActor *CForceField::EndScript() {
             partCount = 1;
             partList[0] = thePart;
 
-            TranslatePartY(thePart, ReadLongVar(iHeight));
+            //TranslatePartY(thePart, ReadLongVar(iHeight));
             VECTORCOPY(location, thePart->itsTransform[3]);
             itsGame->itsWorld->RemovePart(thePart);
 
