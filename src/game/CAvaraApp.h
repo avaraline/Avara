@@ -10,6 +10,7 @@
 #pragma once
 
 #include "CApplication.h"
+#include "CGUI.h"
 #include "CPlayerManager.h"
 //#include "PolyColor.h"
 
@@ -59,6 +60,7 @@ public:
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     CAvaraGame *itsGame;
+    CGUI *itsGUI;
     CNetManager *gameNet;
 
 public:

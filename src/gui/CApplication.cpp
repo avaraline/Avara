@@ -1,16 +1,18 @@
 #define APPLICATIONMAIN
 #include "CApplication.h"
-
+#include "Resource.h"
 #include "Preferences.h"
 #include "Types.h"
+#include "AvaraFonts.h"
 
 #include <SDL2/SDL.h>
 #include <fstream>
 #include <string>
 #include <vector>
 
-#define NANOVG_GL3_IMPLEMENTATION
+#define NANOVG_GL2_IMPLEMENTATION
 #include "nanovg_gl.h"
+#include "nanovg.h"
 
 #include "AvaraGL.h"
 
@@ -99,8 +101,8 @@ CApplication::CApplication(std::string the_title) {
     window_title = the_title;
     gApplication = this;
 
-    auto glMajor = 3;
-    auto glMinor = 3;
+    auto glMajor = 2;
+    auto glMinor = 1;
 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, glMajor);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, glMinor);
@@ -173,15 +175,22 @@ CApplication::CApplication(std::string the_title) {
     if (nSamples <= 1)
        nvgflags |= NVG_ANTIALIAS;
 
-    nvg_context = nvgCreateGL3(nvgflags);
+    nvgflags |= NVG_DEBUG;
+
+    nvg_context = nvgCreateGL2(nvgflags);
+
+    nvgCreateFontMem(nvg_context, "sans", roboto_regular_ttf, roboto_regular_ttf_size, 0);
+    nvgCreateFontMem(nvg_context, "sans-bold", roboto_bold_ttf, roboto_bold_ttf_size, 0);
+    nvgCreateFontMem(nvg_context, "icons", entypo_ttf, entypo_ttf_size, 0);
+    nvgCreateFontMem(nvg_context, "mono", roboto_mono_ttf, roboto_mono_ttf_size, 0);
 
     if (nvg_context == nullptr) {
         SDL_Log("Could not initialize NanoVG!");
         return;
     }
 
-    nvgBeginFrame(nvg_context, win_size_x, win_size_y, pixel_ratio);
-    nvgEndFrame(nvg_context);
+    //nvgBeginFrame(nvg_context, win_size_x, win_size_y, pixel_ratio);
+    //nvgEndFrame(nvg_context);
 #if defined(__APPLE__)
     /* Poll for events once before starting a potentially
        lengthy loading process. This is needed to be
@@ -196,7 +205,7 @@ CApplication::CApplication(std::string the_title) {
 
 CApplication::~CApplication() {
     if (nvg_context)
-        nvgDeleteGL3(nvg_context);
+        nvgDeleteGL2(nvg_context);
     if (window)
         SDL_DestroyWindow(window);
 }

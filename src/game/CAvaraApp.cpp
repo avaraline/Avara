@@ -57,7 +57,9 @@ void TrackerPinger(CAvaraAppImpl *app) {
 
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
+
     AvaraGLInitContext();
+    itsGUI = new CGUI(this);
     itsGame = new CAvaraGame(64);
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
@@ -115,13 +117,13 @@ void CAvaraAppImpl::idle() {
     if(itsGame->GameTick()) {
         glClearColor(.3, .5, .3, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        drawContents();
-        SDL_GL_SwapWindow(window);
+        
     }
 }
 
 void CAvaraAppImpl::drawContents() {
     itsGame->Render(nvg_context);
+    itsGUI->Render(nvg_context);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {

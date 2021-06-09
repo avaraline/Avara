@@ -108,12 +108,14 @@ int main(int argc, char *argv[]) {
             app->handleSDLEvent(event);
         }
         app->drawContents();
+
+        SDL_GL_SwapWindow(app->window);
     }
 
     app->Done();
 
     // Shut it down!!
-    SDL_Quit();
+    //SDL_Quit();
 
     return 0;
 }
