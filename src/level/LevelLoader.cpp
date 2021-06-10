@@ -14,7 +14,6 @@
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
-#include "PICTParser.h"
 #include "Parser.h"
 #include "Resource.h"
 #include "pugixml.hpp"

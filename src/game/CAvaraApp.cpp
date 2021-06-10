@@ -16,7 +16,6 @@
 #include "AvaraTCP.h"
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
-#include "CCompactTagBase.h"
 #include "CharWordLongPointer.h"
 #include "CNetManager.h"
 #include "CRC.h"
