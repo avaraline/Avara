@@ -37,6 +37,7 @@ Fixed FixDiv(Fixed a, Fixed b) {
 }
 
 Fixed FixATan2(Fixed x, Fixed y) {
+    // TODO: check out https://github.com/liballeg/allegro5/blob/master/src/math.c#L252
     return ToFixed(atan2(ToFloat(y), ToFloat(x)));
 }
 
