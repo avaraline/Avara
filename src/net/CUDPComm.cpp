@@ -32,7 +32,6 @@ int numToDrop = 0;
 
 #include "AvaraTCP.h"
 #include "CApplication.h"
-#include "CCompactTagBase.h"
 #include "CRC.h"
 #include "CUDPConnection.h"
 #include "CharWordLongPointer.h"

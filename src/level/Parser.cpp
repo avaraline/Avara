@@ -51,6 +51,7 @@ typedef struct {
 } variableValue;
 
 Handle theScript = 0;
+Ptr stackMem = NULL;
 double *stackP = 0;
 CStringDictionary *symTable = 0;
 CTagBase *variableBase = 0;
@@ -1085,7 +1086,8 @@ void RunThis(unsigned char *script) {
 void AllocParser() {
     currentLevel = 0;
     InitSymbols();
-    stackP = (double *)NewPtr(sizeof(double) * 256);
+    stackMem = NewPtr(sizeof(double) * 256);
+    stackP = (double *)stackMem;
 
     currentActor = NULL;
     LoadProgram();
@@ -1095,8 +1097,8 @@ void AllocParser() {
 void DeallocParser() {
     if (theScript)
         DisposeHandle(theScript);
-    if (stackP)
-        DisposePtr((Ptr)stackP);
+    if (stackMem)
+        DisposePtr(stackMem);
 
     if (symTable)
         symTable->Dispose();
@@ -1106,6 +1108,7 @@ void DeallocParser() {
         programBase->Dispose();
 
     theScript = NULL;
+    stackMem = NULL;
     stackP = NULL;
     symTable = NULL;
     variableBase = NULL;
