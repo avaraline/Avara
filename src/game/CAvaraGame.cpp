@@ -34,7 +34,6 @@
 #include "InfoMessages.h"
 //#include "CCapMaster.h"
 #include "AvaraDefines.h"
-#include "CCompactTagBase.h"
 #include "CSoundHub.h"
 #include "CSoundMixer.h"
 #include "CommandList.h"

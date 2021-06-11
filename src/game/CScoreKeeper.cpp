@@ -13,7 +13,6 @@
 #include "CApplication.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
-#include "CCompactTagBase.h"
 #include "CPlayerManager.h"
 //#include "CRosterWindow.h"
 //#include "Aliases.h"
@@ -259,13 +258,13 @@ void CScoreKeeper::ResetScores() {
         localScores.player[i].lives = -1;
         localScores.player[i].exitRank = 0;
         localScores.player[i].kills = 0;
-        
+
         thePlayer = itsGame->itsNet->playerTable[i];
         if (thePlayer->GetPlayer() == NULL) {
             localScores.player[i].serverWins = 0;
         }
     }
-    
+
     //clear server wins if server is empty
     if(itsGame->itsNet->PlayerCount() == 1) {
         localScores.player[0].serverWins = 0;
