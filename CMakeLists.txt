@@ -6,7 +6,6 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(VERBOSE True)
 set(OpenGL_GL_PREFERENCE GLVND)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-DNANOGUI_GLAD")
 if (POLICY CMP0074)
   cmake_policy(SET CMP0074 NEW)
 endif()
@@ -49,9 +48,7 @@ endif()
 
 
 add_custom_target(datafiles ALL)
-add_copy_directory(datafiles shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/shaders)
 add_copy_directory(datafiles rsrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/rsrc)
-add_copy_directory(datafiles bsps DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bsps)
 add_copy_directory(datafiles levels DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/levels)
 
 
@@ -174,8 +171,6 @@ install(TARGETS Avara
     LIBRARY DESTINATION lib
 )
 install(DIRECTORY rsrc/ DESTINATION bin/rsrc/)
-install(DIRECTORY shaders/ DESTINATION bin/shaders/)
-install(DIRECTORY bsps/ DESTINATION bin/bsps/)
 install(DIRECTORY levels/ DESTINATION bin/levels/)
 
 if(WIN32)
