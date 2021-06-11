@@ -12,7 +12,6 @@
 #include "Memory.h"
 #include "System.h"
 
-#include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <utility>
@@ -27,14 +26,6 @@ static unsigned short *arcTanOneTable = 0;
 Fixed FRandSeed = 1;
 
 /* FixMath */
-
-Fixed FixMul(Fixed a, Fixed b) {
-    return ((int64_t)a * (int64_t)b) / (1 << 16);
-}
-
-Fixed FixDiv(Fixed a, Fixed b) {
-    return ((int64_t)a * (1 << 16)) / b;
-}
 
 Fixed FixATan2(Fixed x, Fixed y) {
     // TODO: check out https://github.com/liballeg/allegro5/blob/master/src/math.c#L252
@@ -287,44 +278,6 @@ Fixed FDistanceOverEstimate(Fixed dx, Fixed dy, Fixed dz) {
     r0 = r0 + r1;
 
     return r0;
-}
-
-Fixed FMul(Fixed a, Fixed b) {
-    return FixMul(a, b);
-}
-
-Fixed FDiv(Fixed a, Fixed b) {
-    return FixDiv(a, b);
-}
-
-Fixed FMulDiv(Fixed a, Fixed b, Fixed c) {
-    // return FDiv(FMul(a, b), c);
-    return (long)(((double)a) * b / c);
-}
-
-Fixed FRadSin(Fixed a) {
-    return (long)(65536L * sin(a / 65536.0));
-}
-
-Fixed FRadCos(Fixed a) {
-    return (long)(65536L * cos(a / 65536.0));
-}
-
-Fixed FDegSin(Fixed a) {
-    return (long)(65536.0 * sin(a / 3754936.206169363));
-}
-
-Fixed FDegCos(Fixed a) {
-    return (long)(65536.0 * cos(a / 3754936.206169363));
-}
-
-Fixed FOneSin(Fixed a) {
-    // Looks like sin(2pi * a)?
-    return (long)(65536.0 * sin(a / 10430.3783505));
-}
-
-Fixed FOneCos(Fixed a) {
-    return (long)(65536.0 * cos(a / 10430.3783505));
 }
 
 void Transpose(Matrix *a) {
@@ -755,7 +708,7 @@ void VectorMatrixProduct(long n, Vector *vs, Vector *vd, Matrix *m) {
         for (j = 0; j < 4; j++) {
             (*vd)[j] = 0;
             for (k = 0; k < 4; k++) {
-                (*vd)[j] += FixMul((*vs)[k], (*m)[k][j]);
+                (*vd)[j] += FMul((*vs)[k], (*m)[k][j]);
             }
         }
         vd++;
