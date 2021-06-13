@@ -128,7 +128,7 @@ void CAbstractPlayer::StartSystems() {
 
     fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
     activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
+    chargeGunPerFrame = FIX3(35) / itsGame->FrameTimeInverse(); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;
@@ -1009,9 +1009,11 @@ void CAbstractPlayer::GunActions() {
                     theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
                 }
 
-                missileSpeed[0] = theHit.direction[0];
-                missileSpeed[1] = theHit.direction[1];
-                missileSpeed[2] = theHit.direction[2];
+                double scaling = itsGame->FrameTimeScale();
+
+                missileSpeed[0] = theHit.direction[0] * scaling;
+                missileSpeed[1] = theHit.direction[1] * scaling;
+                missileSpeed[2] = theHit.direction[2] * scaling;
 
                 theHit.direction[3] = 0;
                 theHit.team = teamColor;
@@ -1300,7 +1302,7 @@ void CAbstractPlayer::ResumeLevel() {
 
 extern Fixed sliverGravity;
 
-#define INTERPTIME 20
+#define INTERPTIME 20 * itsGame->FrameTimeInverse()
 
 void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     short count = 16;

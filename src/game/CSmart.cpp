@@ -9,12 +9,13 @@
 
 #include "CSmart.h"
 
+#include "AvaraDefines.h"
 #include "CDepot.h"
 #include "CSmartPart.h"
 //#include "CInfoPanel.h"
 #include "CAvaraApp.h"
 
-#define kSmartAccel itsDepot->missileAcceleration
+#define kSmartAccel (itsDepot->missileAcceleration / itsGame->FrameTimeInverse())
 #define kSmartFriction FIX3(50)
 
 void CSmart::IWeapon(CDepot *theDepot) {
@@ -298,8 +299,13 @@ void CSmart::FrameAction() {
         Fixed friction;
         RayHitRecord rayHit;
 
+//        Fixed scaling = FIX((1 - pow(1-ToFloat(kSmartFriction), itsGame->FrameTimeScale())));
+//        speed[0] -= FMul(speed[0], scaling);
+//        speed[1] -= FMul(speed[1], scaling);
+//        speed[2] -= FMul(speed[2], scaling);
+        
         TurnTowardsTarget();
-
+        
         pitchCos = FOneCos(pitch);
         accel[0] = FMul(pitchCos, FOneSin(yaw));
         accel[2] = FMul(pitchCos, FOneCos(yaw));
@@ -371,7 +377,7 @@ void CSmart::FrameAction() {
             }
         }
 
-        if (flyCount > 100) {
+        if (flyCount > 100 * itsGame->FrameTimeInverse()) {
             doExplode = true;
         }
 

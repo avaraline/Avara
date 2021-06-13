@@ -162,7 +162,7 @@ void CGrenade::FrameAction() {
             }
         }
 
-        if (flyCount > 100) {
+        if (flyCount > 100 * itsGame->FrameTimeInverse()) {
             doExplode = true;
         }
 

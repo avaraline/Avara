@@ -9,15 +9,16 @@
 
 #include "CTeleporter.h"
 
+#include "AvaraDefines.h"
 #include "CAbstractPlayer.h"
 #include "CPlayerManager.h"
 #include "CSmartPart.h"
 
 #define TELEPORTAREA FIX3(3000)
 #define ACTIVETELEPORTAREA FIX3(350)
-#define FIELDSTRENGTH FIX3(100)
+#define FIELDSTRENGTH FIX3(100) / itsGame->FrameTimeInverse()
 #define TELEPORTERMIDDLE FIX3(1500)
-#define RETRANSMITFRAMES 60
+#define RETRANSMITFRAMES 60 * itsGame->FrameTimeInverse()
 
 void CTeleporter::BeginScript() {
     ProgramLongVar(iGroup, 0);
@@ -151,8 +152,8 @@ void CTeleporter::FrameAction() {
                         delta[2] = FMul(delta[2], -FIELDSTRENGTH);
                         thePlayer->Accelerate(delta);
                         pullCounter++;
-                        if (pullCounter >= 32) {
-                            noPullTimer = 16;
+                        if (pullCounter >= 32 * itsGame->FrameTimeInverse()) {
+                            noPullTimer = 16 * itsGame->FrameTimeInverse();
                             pullCounter = 0;
                         }
                     }

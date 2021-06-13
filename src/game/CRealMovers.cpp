@@ -91,7 +91,7 @@ void CRealMovers::FindBestMovement(CSmartPart *objHit) {
         absDot = dotProd < 0 ? -dotProd : dotProd;
 
         if (absDot < bestDot) {
-            newSpeed[0] = speed[0] - FMul(norm[0], dotProd);
+            newSpeed[0] = speed[0] - FMul(norm[0], dotProd); //??
             newSpeed[1] = speed[1] - FMul(norm[1], dotProd);
             newSpeed[2] = speed[2] - FMul(norm[2], dotProd);
 

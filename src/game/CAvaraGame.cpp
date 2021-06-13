@@ -1031,6 +1031,10 @@ double CAvaraGame::FrameTimeScale(double exponent) {
     return pow(double(frameTime)/CLASSICFRAMETIME, exponent);
 }
 
+double CAvaraGame::FrameTimeInverse() {
+    return CLASSICFRAMETIME/double(frameTime);
+}
+
 double CAvaraGame::LatencyFrameTimeScale() {
     return double(latencyFrameTime)/frameTime;
 }

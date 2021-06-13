@@ -90,7 +90,7 @@ void CWalkerActor::StartSystems() {
     legs[1].touchIdent = 0;
     targetHeight = 0;
 
-    jumpBasePower = FIX3(700);
+    jumpBasePower = FIX3(700);// / itsGame->FrameTimeInverse();
 
     viewPortHeight = FIX3(350);
 }
@@ -648,7 +648,7 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
 
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
             speed[1] >>= 1;
-            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
+            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass()) / itsGame->FrameTimeInverse();
             jumpFlag = true;
         }
     }
