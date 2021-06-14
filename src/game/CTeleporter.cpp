@@ -77,7 +77,7 @@ CAbstractActor *CTeleporter::EndScript() {
 
     transportGroup = ReadLongVar(iGroup);
     destGroup = ReadLongVar(iDestGroup);
-    rotationSpeed = FDegToOne(ReadFixedVar(iSpeed));
+    rotationSpeed = FDegToOne(ReadFixedVar(iSpeed)) / itsGame->FrameTimeInverse();
 
     soundId = ReadLongVar(iSound);
     volume = ReadFixedVar(iVolume);
