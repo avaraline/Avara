@@ -16,7 +16,7 @@
 
 #define TELEPORTAREA FIX3(3000)
 #define ACTIVETELEPORTAREA FIX3(350)
-#define FIELDSTRENGTH FIX3(100) / itsGame->FrameTimeInverse()
+#define FIELDSTRENGTH FDivNZ(FIX3(100), FIX(itsGame->FrameTimeInverse()))
 #define TELEPORTERMIDDLE FIX3(1500)
 #define RETRANSMITFRAMES 60 * itsGame->FrameTimeInverse()
 

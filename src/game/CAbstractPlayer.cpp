@@ -82,7 +82,7 @@ void CAbstractPlayer::LoadHUDParts() {
 void CAbstractPlayer::StartSystems() {
     //  Get systems running:
     reEnergize = false;
-    generatorPower = FIX3(30) / itsGame->FrameTimeInverse();
+    generatorPower = FDivNZ(FIX3(30), FIX(itsGame->FrameTimeInverse()));
     maxEnergy = FIX(5);
     energy = maxEnergy;
     boostsRemaining = 3;
@@ -98,7 +98,7 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FIX3(30) / itsGame->FrameTimeInverse(); //  Use 0.030 per frame to repair shields
+    shieldRegen = FDivNZ(FIX3(30), FIX(itsGame->FrameTimeInverse())); //  Use 0.030 per frame to repair shields
     maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
@@ -128,7 +128,7 @@ void CAbstractPlayer::StartSystems() {
 
     fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
     activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FIX3(35) / itsGame->FrameTimeInverse(); //    Charge gun at 0.035 units per frame
+    chargeGunPerFrame = FDivNZ(FIX3(35), FIX(itsGame->FrameTimeInverse())); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;

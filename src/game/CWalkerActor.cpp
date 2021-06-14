@@ -639,16 +639,17 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
         }
 
         if (TESTFUNC(kfuJump, ft->down)) {
-            crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
+            crouch += FDivNZ((stance - crouch - MINHEADHEIGHT) >> 3, FIX(itsGame->FrameTimeInverse()));
         } else if (TESTFUNC(kfuJump, ft->held)) {
-            crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
+            crouch += FDivNZ((stance - crouch - MINHEADHEIGHT) >> 2, FIX(itsGame->FrameTimeInverse()));
         } else {
-            crouch >>= 1;
+            crouch = crouch - FDivNZ(crouch - (crouch >> 1), FIX(itsGame->FrameTimeInverse()));
         }
 
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
-            speed[1] >>= 1;
-            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass()) / itsGame->FrameTimeInverse();
+            //speed[1] >>= 1;
+            speed[1] = speed[1] - FDivNZ(speed[1] - (speed[1] >> 1), FIX(itsGame->FrameTimeInverse()));
+            speed[1] += FDiv(FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass()), FIX(itsGame->FrameTimeInverse()));
             jumpFlag = true;
         }
     }
