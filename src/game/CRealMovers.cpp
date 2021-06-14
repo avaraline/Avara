@@ -43,9 +43,9 @@ void CRealMovers::Accelerate(Fixed *direction) {
 
     theMass = GetTotalMass();
     if (theMass) {
-        speed[0] += FMulDivNZ(direction[0] / itsGame->FrameTimeInverse(), baseMass, theMass);
-        speed[1] += FMulDivNZ(direction[1] / itsGame->FrameTimeInverse(), baseMass, theMass);
-        speed[2] += FMulDivNZ(direction[2] / itsGame->FrameTimeInverse(), baseMass, theMass);
+        speed[0] += FMulDivNZ(direction[0], baseMass, theMass);
+        speed[1] += FMulDivNZ(direction[1], baseMass, theMass);
+        speed[2] += FMulDivNZ(direction[2], baseMass, theMass);
     }
 }
 
