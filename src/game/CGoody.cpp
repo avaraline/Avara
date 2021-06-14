@@ -77,7 +77,7 @@ CAbstractActor *CGoody::EndScript() {
             partList[1]->MoveDone();
         }
 
-        rotationSpeed = FDegToOne(ReadFixedVar(iSpeed));
+        rotationSpeed = FDegToOne(ReadFixedVar(iSpeed)) / itsGame->FrameTimeInverse();
         grenades = ReadLongVar(iGrenades);
         missiles = ReadLongVar(iMissiles);
         boosters = ReadLongVar(iBoosters);
@@ -121,6 +121,7 @@ void CGoody::FrameAction() {
         }
 
         if (startMsg.triggerCount) {
+            SDL_Log("       startMsg.triggerCount");
             startMsg.triggerCount = 0;
             DoSound(openSoundId, location, volume, FIX(1));
             enabled = true;
