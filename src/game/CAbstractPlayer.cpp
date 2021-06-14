@@ -38,8 +38,8 @@
 #define MINFOV FIX(5)
 #define FOVSTEP FIX3(1500)
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
-#define BOOSTLENGTH (16 * 5)
-#define MINIBOOSTTIME 32
+#define BOOSTLENGTH (16 * 5 * (int)itsGame->FrameTimeInverse())
+#define MINIBOOSTTIME 32 * itsGame->FrameTimeInverse()
 
 Boolean debug2Flag = false;
 
@@ -82,7 +82,7 @@ void CAbstractPlayer::LoadHUDParts() {
 void CAbstractPlayer::StartSystems() {
     //  Get systems running:
     reEnergize = false;
-    generatorPower = FIX3(30);
+    generatorPower = FIX3(30) / itsGame->FrameTimeInverse();
     maxEnergy = FIX(5);
     energy = maxEnergy;
     boostsRemaining = 3;
@@ -98,7 +98,7 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FIX3(30); //  Use 0.030 per frame to repair shields
+    shieldRegen = FIX3(30) / itsGame->FrameTimeInverse(); //  Use 0.030 per frame to repair shields
     maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
@@ -750,7 +750,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (TESTFUNC(kfuZoomOut, ft->held))
             fieldOfView += FOVSTEP;
 
-#define LOOKSTEP 0x1000L
+#define LOOKSTEP (0x1000L / itsGame->FrameTimeInverse())
 #define MAXSIDELOOK 0x8000L
 
         if (TESTFUNC(kfuLookLeft, ft->held)) {
@@ -955,7 +955,7 @@ void CAbstractPlayer::PlayerAction() {
             GunActions();
 
             if (itsGame->timeInSeconds < itsGame->loadedTimeLimit)
-                energy += generatorPower;
+                energy += generatorPower; //?
 
             if (boostEndFrame > itsGame->frameNumber) {
                 energy += 4 * generatorPower;
