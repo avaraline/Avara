@@ -208,6 +208,7 @@ public:
     virtual void ReceiveConfig(PlayerConfigRecord *config);
 
     virtual Fixed GetTotalMass();
+    virtual void Accelerate(Fixed *direction);
 
     virtual void PlayerWasMoved();
 

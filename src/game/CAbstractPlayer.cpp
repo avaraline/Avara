@@ -1210,6 +1210,19 @@ void CAbstractPlayer::Accelerate(Fixed *direction) {
 }
 #endif
 
+void CAbstractPlayer::Accelerate(Fixed *direction) {
+    Fixed theMass;
+
+    isActive |= kHasImpulse;
+
+    theMass = GetTotalMass();
+    if (theMass) {
+        speed[0] += FMulDivNZ(direction[0] / itsGame->FrameTimeInverse(), baseMass, theMass);
+        speed[1] += FMulDivNZ(direction[1] / itsGame->FrameTimeInverse(), baseMass, theMass);
+        speed[2] += FMulDivNZ(direction[2] / itsGame->FrameTimeInverse(), baseMass, theMass);
+    }
+}
+
 Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume, short options) {
     Vector oldLoc;
     Boolean couldMove;
