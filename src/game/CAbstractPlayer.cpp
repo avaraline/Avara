@@ -32,7 +32,7 @@
 #include "Parser.h"
 #include "Preferences.h"
 
-#define MOUSESHOOTDELAY 8
+#define MOUSESHOOTDELAY 8 * itsGame->FrameTimeInverse()
 // replaced by kFOV preference
 //#define MAXFOV FIX(60)
 #define MINFOV FIX(5)
