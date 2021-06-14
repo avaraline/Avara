@@ -145,7 +145,7 @@ void CAbstractMissile::Launch(Matrix *startMatrix,
     ownerIdent = theOwner->ident;
     itsGame->AddActor(this);
 
-    frameCount = maxFrameCount;
+    frameCount = maxFrameCount * itsGame->FrameTimeInverse();
 
     *(MatrixStruct *)&itsMatrix = *(MatrixStruct *)startMatrix;
     hitRec = *target;
