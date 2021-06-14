@@ -16,10 +16,10 @@ void CLogicTimer::BeginScript() {
 
 CAbstractActor *CLogicTimer::EndScript() {
     if (CLogic::EndScript()) {
-        theDelay = ReadLongVar(iTimer);
+        theDelay = ReadLongVar(iTimer) / itsGame->fpsScale;
         if (theDelay < 0) {
             theDelay = -theDelay;
-            sleepTimer = theDelay + 1;
+            sleepTimer = theDelay + 1 / itsGame->fpsScale;
         }
 
         if (theDelay)
