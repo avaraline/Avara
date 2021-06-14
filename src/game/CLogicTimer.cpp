@@ -16,7 +16,7 @@ void CLogicTimer::BeginScript() {
 
 CAbstractActor *CLogicTimer::EndScript() {
     if (CLogic::EndScript()) {
-        theDelay = ReadLongVar(iTimer);
+        theDelay = ReadLongVar(iTimer) * itsGame->FrameTimeInverse();
         if (theDelay < 0) {
             theDelay = -theDelay;
             sleepTimer = theDelay + 1;
