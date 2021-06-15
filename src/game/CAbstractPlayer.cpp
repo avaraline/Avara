@@ -1094,7 +1094,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     boostsRemaining = defaultConfig.numBoosters;
     missileCount = defaultConfig.numMissiles;
     grenadeCount = defaultConfig.numGrenades;
-    GoLimbo(60);
+    GoLimbo(60 * itsGame->FrameTimeInverse());
     if (lives == 0 && itsManager->IsLocalPlayer()) {
         itsGame->itsApp->MessageLine(kmGameOver, centerAlign);
     }
