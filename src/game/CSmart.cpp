@@ -15,7 +15,7 @@
 //#include "CInfoPanel.h"
 #include "CAvaraApp.h"
 
-#define kSmartAccel (itsDepot->missileAcceleration / itsGame->FrameTimeInverse())
+#define kSmartAccel FDiv(itsDepot->missileAcceleration, ToFixed(itsGame->FrameTimeInverse()))
 #define kSmartFriction FIX3(50)
 
 void CSmart::IWeapon(CDepot *theDepot) {
@@ -65,7 +65,7 @@ long CSmart::Arm(CSmartPart *aPart) {
     targetIdent = 0;
     targetPart = NULL;
 
-    angleStep = itsDepot->missileTurnRate;
+    angleStep = FDiv(itsDepot->missileTurnRate, ToFixed(itsGame->FrameTimeInverse()));
 
     return CWeapon::Arm(aPart);
 }
@@ -299,11 +299,6 @@ void CSmart::FrameAction() {
         Fixed friction;
         RayHitRecord rayHit;
 
-//        Fixed scaling = FIX((1 - pow(1-ToFloat(kSmartFriction), itsGame->FrameTimeScale())));
-//        speed[0] -= FMul(speed[0], scaling);
-//        speed[1] -= FMul(speed[1], scaling);
-//        speed[2] -= FMul(speed[2], scaling);
-        
         TurnTowardsTarget();
         
         pitchCos = FOneCos(pitch);
@@ -352,9 +347,9 @@ void CSmart::FrameAction() {
 
         friction = kSmartFriction + ((FIX(1) - speedDotAccel) >> 3);
 
-        speed[0] += FMul(thrust, accel[0]) - FMul(speed[0], friction);
-        speed[1] += FMul(thrust, accel[1]) - FMul(speed[1], friction);
-        speed[2] += FMul(thrust, accel[2]) - FMul(speed[2], friction);
+        speed[0] += FDiv(FMul(thrust, accel[0]) - FMul(speed[0], friction), ToFixed(itsGame->FrameTimeInverse()));
+        speed[1] += FDiv(FMul(thrust, accel[1]) - FMul(speed[1], friction), ToFixed(itsGame->FrameTimeInverse()));
+        speed[2] += FDiv(FMul(thrust, accel[2]) - FMul(speed[2], friction), ToFixed(itsGame->FrameTimeInverse()));
 
         location[0] += speed[0];
         location[1] += speed[1];
@@ -365,7 +360,7 @@ void CSmart::FrameAction() {
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount > 5) {
+            if (flyCount > 5 * itsGame->FrameTimeInverse()) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
