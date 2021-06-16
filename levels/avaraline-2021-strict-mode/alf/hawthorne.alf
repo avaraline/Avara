@@ -1,9 +1,9 @@
 <map>
   <SkyColor fill="#e33900" frame="#0066ff" />
   <GroundColor fill="#1973bd" frame="#000055" />
-  <set designer="$mSilvermalk" information="Hawthorne:&#x000A;Do not play this level with fewer than one person." light.0.i="0.9" light.0.a="60" light.0.b="0" />
+  <set designer="$mSilvermalk" information="Hawthorne:&#x000A;Do not play this level with fewer than one person." light.0.i="0.9" light.0.a="60" light.0.b="15" />
 
-  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" fill="#002200" frame="#000000" cx="2.118055555555556" cz="-1.527777777777778" r="4.0625" angle="180" extent="90" />
+  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" fill="#002200" frame="#000000" cx="2.118055555555556" cz="-1.527777777777778" r="4.0625" angle="180" extent="90" />
 
   <Teleporter group="-1" y="-30" activeRange="40 * 5" deadRange="30 * 5" destGroup="@recenter" shape="0" fill="#002200" frame="#000000" cx="1.7708333333333413" cz="-1.25" r="4.0625" angle="180" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#002200" frame="#000000" cx="1.7708333333333413" cz="-1.25" r="4.0625" angle="180" extent="90" />
@@ -54,6 +54,23 @@
   <Wall fill="#defeff" frame="#ff7700" x="27.5" z="12.5" w="5" d="5" h="9.5" y="7" />
   <Wall fill="#defeff" frame="#ff7700" x="12.5" z="-32.5" w="5" d="5" h="9.5" y="7" />
 
+  <set wallHeight="0" />
+  <Wall fill="#ff9233" frame="#283a4d" x="-1.875" z="27.5" w="29.375" d="0.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="27.5" z="17.5" w="0.625" d="10.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="28.125" z="17.5" w="4.375" d="0.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="32.5" z="12.5" w="0.625" d="5.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="33.125" z="12.5" w="20" d="0.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="52.5" z="1.875" w="0.625" d="10.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="27.5" z="1.875" w="25" d="0.625" h="0" y="7" />
+
+  <Wall fill="#ff9233" frame="#283a4d" x="-27.5" z="-28.125" w="29.375" d="0.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="-28.125" z="-28.125" w="0.625" d="10.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="-32.5" z="-18.125" w="4.375" d="0.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="-33.125" z="-18.125" w="0.625" d="5.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="-53.125" z="-13.125" w="20" d="0.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="-53.125" z="-12.5" w="0.625" d="10.625" h="0" y="7" />
+  <Wall fill="#ff9233" frame="#283a4d" x="-52.5" z="-2.5" w="25" d="0.625" h="0" y="7" />
+
   <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="2.5" z="-52.5" w="10" d="24.375" h="0.25" r="11.111111111111107" angle="355" extent="10" />
   <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="-12.5" z="28.125" w="10" d="24.375" h="0.25" r="11.11111111111111" angle="175" extent="10" />
   <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="28.125" z="2.5" w="24.375" d="10" h="0.25" r="11.076388888888893" angle="85" extent="10" />
@@ -82,6 +99,8 @@
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="0" cz="0" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="0" cz="0" r="1.25" angle="180" extent="90" />
   <Goody shape="bspGrenade" y="4" speed="2" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="0" cz="0" r="1.25" angle="180" extent="90" />
+  <Teleporter fill="#283a4d" frame="#000000" cx="0" cz="0" r="1.25" angle="0" extent="90" group="-1" shape="bspLotus" speed="-0.5" start="mShow" stop="mTaken" />
+  <Teleporter fill="#283a4d" frame="#000000" cx="0" cz="0" r="1.25" angle="0" extent="90" group="-2" shape="bspLotus" speed="0.5" start="mShow" stop="mTaken" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="35" cz="35" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="35" cz="35" r="1.25" angle="180" extent="90" />
