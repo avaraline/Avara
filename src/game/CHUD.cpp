@@ -376,35 +376,25 @@ void CHUD::DrawLevelInfo(int chudHeight, CViewParameters *view, NVGcontext *ctx)
        itsGame->gameStatus != kLoseStatus &&
        itsGame->gameStatus != kWinStatus &&
        itsGame->gameStatus != kPauseStatus) {
-        float x = 20;
-        int bufferHeight = view->viewPixelDimensions.v;
-        //float infoHeight = 60 + (colorBoxWidth + 10) * playingCount;
-        //float y = bufferHeight-chudHeight-infoHeight - 20;
-        
+
         std::vector<std::pair<std::string, std::string>> data;
         long lives = ReadLongVar(iDefaultLives);
-        Fixed gravityRatio = itsGame->gravityRatio;
-//        long grenades = ReadLongVar(iGrenades);  //not accurate
-//        //short grenades = player->grenadeCount;
-//        long missles = ReadLongVar(iMissiles);
-        //ReadFixedVar(iTimeLimit)  //not correct time limit
-
+        float x = 20;
+        int bufferHeight = view->viewPixelDimensions.v;
+        float gravity = ToFloat(ReadFixedVar(iGravity));
+        
         data.push_back(std::make_pair("Set", itsGame->loadedSet));
         data.push_back(std::make_pair("Lives", std::to_string(lives)));
-        
-        //!!! grav ratio different in fps than main??
-        //SDL_Log("GRAV=%f", ToFloat(gravityRatio));
 
-        if(gravityRatio > 68000) {
+        if(gravity > 1) {
             data.push_back(std::make_pair("Gravity", "High"));
         }
-        else if(gravityRatio < 62000) {
+        else if(gravity < 1) {
             data.push_back(std::make_pair("Gravity", "Low"));
         }
+        //!!! grav ratio different in fps than main??
+        //SDL_Log("GRAV=%f", ToFloat(itsGame->gravityRatio));
         
-        //!!! need to take care of widths
-        //!!! make rowHeight const (30) and  other settings
-
         float y = bufferHeight - chudHeight - (data.size() * 30) - 80;
         DrawTable(itsGame->loadedLevel, x, y, data, view, ctx);
     }
@@ -416,18 +406,35 @@ void CHUD::DrawLevelInfo(int chudHeight, CViewParameters *view, NVGcontext *ctx)
 void CHUD::DrawTable(std::string title, float x, float y, std::vector<std::pair<std::string, std::string>> data, CViewParameters *view, NVGcontext *ctx) {
     if(itsGame->gameStatus != kPlayingStatus) {
         NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
-
-        float colorBoxWidth = 130.0;
-        float colorBoxHeight = 30.0;
-        int bufferWidth = view->viewPixelDimensions.h;
-        int bufferHeight = view->viewPixelDimensions.v;
-        float boardWidth = 400;
-        float fontsz_m = 28.0, fontsz_s = 18.0;
+        float fontsz_m = 28.0;
         float colWidth = 175;
-        
+        int columnSpacing = 40;
         int dataRows = data.size();
+        float firstColumnWidest = 0;
         float rowHeight = 30.0;
         float boardHeight = rowHeight * dataRows + 60.0;
+                
+        //find largest string width
+        float bounds[4];
+        nvgBeginPath(ctx);
+        nvgFontSize(ctx, fontsz_m);
+        nvgTextBounds(ctx, x,y, title.c_str(), NULL, bounds);
+        float widestPair = bounds[2];
+        for(std::pair<std::string, std::string> row : data) {
+            nvgTextBounds(ctx, x,y, row.first.c_str(), NULL, bounds);
+            float firstColumn = bounds[2];
+            if(firstColumn > firstColumnWidest)
+                firstColumnWidest = firstColumn;
+            
+            nvgTextBounds(ctx, x,y, row.second.c_str(), NULL, bounds);
+            float pairWidth = firstColumn + bounds[2] + columnSpacing;
+            if(pairWidth > widestPair)
+                widestPair = pairWidth;
+        }
+        
+        float boardWidth = widestPair + 40;
+        if(boardWidth < 350)
+            boardWidth = 350;
 
         //draw window box
         nvgBeginPath(ctx);
@@ -460,13 +467,14 @@ void CHUD::DrawTable(std::string title, float x, float y, std::vector<std::pair<
         nvgText(ctx, x + 15, y, title.c_str(), NULL);
         y+= 45;
 
+        //draw text data
         for(std::pair<std::string, std::string> row : data) {
             nvgFillColor(ctx, textColor);
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
             nvgFontSize(ctx, fontsz_m);
 
             nvgText(ctx, x + 15, y, row.first.c_str(), NULL);
-            nvgText(ctx, x + colWidth*1, y, row.second.c_str(), NULL);
+            nvgText(ctx, x + firstColumnWidest + columnSpacing, y, row.second.c_str(), NULL);
 
             y += rowHeight;
         }
