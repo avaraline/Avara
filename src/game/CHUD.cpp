@@ -200,6 +200,129 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
     }
 }
 
+void CHUD::DrawRoster(int playingCount, int chudHeight, CViewParameters *view, NVGcontext *ctx) {
+    CAbstractPlayer *player = itsGame->GetLocalPlayer();
+    CPlayerManager *playerManager = itsGame->FindPlayerManager(player);
+
+    //if(playingCount > 0 && itsGame->gameStatus != kPlayingStatus) {
+    if(itsGame->gameStatus != kPlayingStatus) {
+        CNetManager *net = itsGame->itsApp->GetNet();
+        float colorBoxWidth = 130.0;
+        float colorBoxHeight = 30.0;
+        int bufferWidth = view->viewPixelDimensions.h;
+        int bufferHeight = view->viewPixelDimensions.v;
+        float boardWidth = 620;
+        float boardHeight = 60 + (colorBoxHeight + 10) * playingCount;
+        float x = 720;
+        float y = bufferHeight-chudHeight-boardHeight - 20;
+        float fontsz_m = 28.0, fontsz_s = 18.0;
+        long longTeamColor;
+        int colorR, colorG, colorB;
+        NVGcolor aliveColor = nvgRGBA(255, 255, 255, 255);
+        NVGcolor deadColor = nvgRGBA(165, 165, 165, 255);
+        NVGcolor highColor = nvgRGBA(255, 0, 0, 255);
+        float colWidth = 80;
+
+        //draw score box
+        nvgBeginPath(ctx);
+        //nvgFillColor(ctx, nvgRGBA(20, 20, 20, 160));
+        nvgFillColor(ctx, nvgRGBA(68, 76, 87, 160));
+        nvgRoundedRect(ctx, x, y, boardWidth, boardHeight, 4.0);
+        nvgFill(ctx);
+        
+        //header box
+        nvgBeginPath(ctx);
+        nvgFillColor(ctx, nvgRGBA(0, 0, 0, 160));
+        nvgRoundedRect(ctx, x, y, boardWidth, 40, 4.0);
+        nvgFill(ctx);
+        
+        //drop shadow
+        NVGpaint shadowPaint = nvgBoxGradient(ctx, x,y+2, boardWidth,boardHeight, 8, 10, nvgRGBA(0,0,0,128), nvgRGBA(0,0,0,0));
+        nvgBeginPath(ctx);
+        nvgRect(ctx, x-10,y-10, boardWidth+20,boardHeight+30);
+        nvgRoundedRect(ctx, x,y, boardWidth,boardHeight, 4.0);
+        nvgPathWinding(ctx, NVG_HOLE);
+        nvgFillPaint(ctx, shadowPaint);
+        nvgFill(ctx);
+        
+        x+=10;
+        
+        //score column text settings
+        nvgFillColor(ctx, aliveColor);
+        nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
+        nvgFontSize(ctx, fontsz_s);
+        
+        //titles
+        y+= 10;
+        nvgText(ctx, x + 10, y, "Players", NULL);
+        y+= 45;
+
+        nvgFontSize(ctx, fontsz_m);
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            //int playerTableIndex = sortedPlayers[i].second;
+            CPlayerManager *thisPlayer = net->playerTable[i];
+            const std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
+            std::string ping = "--";
+            longTeamColor = team_colors[net->teamColors[i]];
+            colorR = (longTeamColor >> 16) & 0xff;
+            colorG = (longTeamColor >> 8) & 0xff;
+            colorB = longTeamColor & 0xff;
+            NVGcolor textColor = aliveColor;
+            
+            if(playerName.size() > 0 && thisPlayer->GetPlayer() != NULL) {
+//                if(theScores.player[playerTableIndex].points != previousScore)
+//                    playerRank++;
+                
+//                int playerLives = theScores.player[playerTableIndex].lives;
+                if(thisPlayer->IsLocalPlayer()) {
+                    //self highlight
+                    nvgBeginPath(ctx);
+                    nvgRoundedRect(ctx, x - 5, y-3, boardWidth - 10, colorBoxHeight + 6, 4.0);
+                    nvgFillColor(ctx, nvgRGBA(128, 255, 0, 210));
+                    nvgFill(ctx);
+                }
+                else {
+                    ping = std::to_string(net->itsCommManager->GetMaxRoundTrip(1 << i));
+                }
+                
+                //player color box
+                nvgBeginPath(ctx);
+                nvgRoundedRect(ctx, x + 10, y, colorBoxWidth, colorBoxHeight, 3.0);
+                nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
+                nvgFill(ctx);
+                
+                //score text settings
+                textColor = aliveColor;
+//                if(playerLives == 0 && (itsGame->gameStatus == kPlayingStatus || itsGame->gameStatus == kPauseStatus))
+//                    textColor = deadColor;
+                
+                nvgFillColor(ctx, textColor);
+                nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+                nvgFontSize(ctx, fontsz_m);
+
+                //player name and scores
+                nvgText(ctx, x + 15, y, playerName.c_str(), NULL);
+                
+//                nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
+//                nvgText(ctx, x + colorBoxWidth + colWidth*4, y, std::to_string(theScores.player[playerTableIndex].points).c_str(), NULL);
+
+                //kills
+//                if(highKills > 0 && theScores.player[playerTableIndex].kills == highKills)
+//                    nvgFillColor(ctx, highColor);
+//                nvgText(ctx, x + colorBoxWidth + colWidth*5, y, std::to_string(theScores.player[playerTableIndex].kills).c_str(), NULL);
+//                nvgFillColor(ctx, textColor);
+
+//                nvgText(ctx, x + colorBoxWidth + colWidth*6, y, std::to_string(playerLives).c_str(), NULL);
+                nvgText(ctx, x + colorBoxWidth + colWidth*7, y, ping.c_str(), NULL);
+
+                y += colorBoxWidth + 10;
+                
+                //previousScore = theScores.player[playerTableIndex].points;
+             }
+        }
+    }
+}
+
 void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
     std::string level = itsGame->loadedLevel;
     if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
@@ -247,13 +370,114 @@ void CHUD::DrawPaused(CViewParameters *view, NVGcontext *ctx) {
     }
 }
 
+void CHUD::DrawLevelInfo(int chudHeight, CViewParameters *view, NVGcontext *ctx) {
+    if(itsGame->loadedLevel.length() > 0 &&
+       itsGame->gameStatus != kPlayingStatus &&
+       itsGame->gameStatus != kLoseStatus &&
+       itsGame->gameStatus != kWinStatus &&
+       itsGame->gameStatus != kPauseStatus) {
+        float x = 20;
+        int bufferHeight = view->viewPixelDimensions.v;
+        //float infoHeight = 60 + (colorBoxWidth + 10) * playingCount;
+        //float y = bufferHeight-chudHeight-infoHeight - 20;
+        
+        std::vector<std::pair<std::string, std::string>> data;
+        long lives = ReadLongVar(iDefaultLives);
+        Fixed gravityRatio = itsGame->gravityRatio;
+//        long grenades = ReadLongVar(iGrenades);  //not accurate
+//        //short grenades = player->grenadeCount;
+//        long missles = ReadLongVar(iMissiles);
+        //ReadFixedVar(iTimeLimit)  //not correct time limit
+
+        data.push_back(std::make_pair("Set", itsGame->loadedSet));
+        data.push_back(std::make_pair("Lives", std::to_string(lives)));
+        
+        //!!! grav ratio different in fps than main??
+        //SDL_Log("GRAV=%f", ToFloat(gravityRatio));
+
+        if(gravityRatio > 68000) {
+            data.push_back(std::make_pair("Gravity", "High"));
+        }
+        else if(gravityRatio < 62000) {
+            data.push_back(std::make_pair("Gravity", "Low"));
+        }
+        
+        //!!! need to take care of widths
+        //!!! make rowHeight const (30) and  other settings
+
+        float y = bufferHeight - chudHeight - (data.size() * 30) - 80;
+        DrawTable(itsGame->loadedLevel, x, y, data, view, ctx);
+    }
+}
+
+/**
+    Draw a window and display table data.
+ */
+void CHUD::DrawTable(std::string title, float x, float y, std::vector<std::pair<std::string, std::string>> data, CViewParameters *view, NVGcontext *ctx) {
+    if(itsGame->gameStatus != kPlayingStatus) {
+        NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
+
+        float colorBoxWidth = 130.0;
+        float colorBoxHeight = 30.0;
+        int bufferWidth = view->viewPixelDimensions.h;
+        int bufferHeight = view->viewPixelDimensions.v;
+        float boardWidth = 400;
+        float fontsz_m = 28.0, fontsz_s = 18.0;
+        float colWidth = 175;
+        
+        int dataRows = data.size();
+        float rowHeight = 30.0;
+        float boardHeight = rowHeight * dataRows + 60.0;
+
+        //draw window box
+        nvgBeginPath(ctx);
+        nvgFillColor(ctx, nvgRGBA(68, 76, 87, 160));
+        nvgRoundedRect(ctx, x, y, boardWidth, boardHeight, 4.0);
+        nvgFill(ctx);
+        
+        //header box
+        nvgBeginPath(ctx);
+        nvgFillColor(ctx, nvgRGBA(0, 0, 0, 160));
+        nvgRoundedRect(ctx, x, y, boardWidth, 40, 4.0);
+        nvgFill(ctx);
+        
+        //drop shadow
+        NVGpaint shadowPaint = nvgBoxGradient(ctx, x,y+2, boardWidth,boardHeight, 8, 10, nvgRGBA(0,0,0,128), nvgRGBA(0,0,0,0));
+        nvgBeginPath(ctx);
+        nvgRect(ctx, x-10,y-10, boardWidth+20,boardHeight+30);
+        nvgRoundedRect(ctx, x,y, boardWidth,boardHeight, 4.0);
+        nvgPathWinding(ctx, NVG_HOLE);
+        nvgFillPaint(ctx, shadowPaint);
+        nvgFill(ctx);
+                
+        //score column text settings
+        nvgFillColor(ctx, textColor);
+        nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+        nvgFontSize(ctx, fontsz_m);
+        
+        //title
+        y+= 5;
+        nvgText(ctx, x + 15, y, title.c_str(), NULL);
+        y+= 45;
+
+        for(std::pair<std::string, std::string> row : data) {
+            nvgFillColor(ctx, textColor);
+            nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+            nvgFontSize(ctx, fontsz_m);
+
+            nvgText(ctx, x + 15, y, row.first.c_str(), NULL);
+            nvgText(ctx, x + colWidth*1, y, row.second.c_str(), NULL);
+
+            y += rowHeight;
+        }
+    }
+
+}
+
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
-
-    DrawLevelName(view, ctx);
-    DrawPaused(view, ctx);
     
     int playerCount = 0;
     int playingCount = 0;
@@ -274,7 +498,11 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     int chudHeight = 13 * playerSlots;
     
     DrawScore(playingCount, chudHeight, view, ctx);
-    
+    //DrawRoster(playingCount, chudHeight, view, ctx);
+    //DrawLevelName(view, ctx);
+    DrawPaused(view, ctx);
+    DrawLevelInfo(chudHeight, view, ctx);
+
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
     nvgBeginPath(ctx);

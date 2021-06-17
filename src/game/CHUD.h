@@ -2,6 +2,9 @@
 #include "CViewParameters.h"
 #include "nanovg.h"
 
+#include <string>
+#include <vector>
+
 class CAvaraGame;
 
 class CHUD : CDirectObject {
@@ -15,5 +18,8 @@ public:
     void DrawLevelName(CViewParameters *view, NVGcontext *ctx);
     void DrawPaused(CViewParameters *view, NVGcontext *ctx);
     void DrawScore(int playingCount, int chudHeight, CViewParameters *view, NVGcontext *ctx);
+    void DrawRoster(int playingCount, int chudHeight, CViewParameters *view, NVGcontext *ctx);
+    void DrawLevelInfo(int chudHeight, CViewParameters *view, NVGcontext *ctx);
+    void DrawTable(std::string title, float x, float y, std::vector<std::pair<std::string, std::string>> data, CViewParameters *view, NVGcontext *ctx);
 
 };
