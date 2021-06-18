@@ -51,7 +51,7 @@ CAbstractActor *CGuardActor::EndScript() {
     RegisterReceiver(&trackingActivator, ReadLongVar(iStartMsg));
     RegisterReceiver(&trackingDeactivator, ReadLongVar(iStopMsg));
 
-    fireFrequency = ReadLongVar(iFrequency);
+    fireFrequency = ReadLongVar(iFrequency) * itsGame->FrameTimeInverse();
     rotSpeed = FDegToOne(ReadFixedVar(iSpeed));
     watchBits = ReadLongVar(iWatchMask);
     watchTeams = ReadLongVar(iMask);

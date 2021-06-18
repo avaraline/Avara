@@ -21,7 +21,7 @@ void CAbstractMissile::IAbstractMissile(CDepot *theDepot) {
     itsDepot = theDepot;
     itsGame = itsDepot->itsGame;
 
-    speed = FIX3(2000);
+    speed = FIX3(2000) / itsGame->FrameTimeInverse();
     maxFrameCount = 50;
     energy = 0;
 
