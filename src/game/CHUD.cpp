@@ -383,17 +383,15 @@ void CHUD::DrawLevelInfo(int chudHeight, CViewParameters *view, NVGcontext *ctx)
         int bufferHeight = view->viewPixelDimensions.v;
         float gravity = ToFloat(ReadFixedVar(iGravity));
         
-        data.push_back(std::make_pair("Set", itsGame->loadedSet));
-        data.push_back(std::make_pair("Lives", std::to_string(lives)));
+        data.push_back(std::make_pair(std::string("Set"), itsGame->loadedSet));
+        data.push_back(std::make_pair(std::string("Lives"), std::to_string(lives)));
 
         if(gravity > 1) {
-            data.push_back(std::make_pair("Gravity", "High"));
+            data.push_back(std::make_pair(std::string("Gravity"), std::string("High")));
         }
         else if(gravity < 1) {
-            data.push_back(std::make_pair("Gravity", "Low"));
+            data.push_back(std::make_pair(std::string("Gravity"), std::string("Low")));
         }
-        //!!! grav ratio different in fps than main??
-        //SDL_Log("GRAV=%f", ToFloat(itsGame->gravityRatio));
         
         float y = bufferHeight - chudHeight - (data.size() * 30) - 80;
         DrawTable(itsGame->loadedLevel, x, y, data, view, ctx);
