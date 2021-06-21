@@ -3,7 +3,10 @@
 import argparse
 import re
 
-from pict2alf import dumb_round, METERS_PER_POINT
+
+from dumb_round import dumb_round
+from pict2alf import METERS_PER_POINT
+
 
 class Shifter (object):
     def __init__(self, x_offset=0.0, z_offset=0.0):
@@ -50,4 +53,3 @@ if __name__ == '__main__':
     level_out = re.sub(r'\.0"', '"', level_out)
 
     print(level_out)
-

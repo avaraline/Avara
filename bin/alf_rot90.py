@@ -4,7 +4,7 @@ import argparse
 import xml.etree.ElementTree as ET
 
 
-from pict2alf import dumb_round
+from dumb_round import dumb_round
 
 
 if __name__ == '__main__':
@@ -23,8 +23,8 @@ if __name__ == '__main__':
             center_x = x + (w / 2)
             center_z = z + (d / 2)
 
-            child.attrib['x'] = str(dumb_round(center_z - (d / 2)))
-            child.attrib['z'] = str(dumb_round((-1 * center_x) - (w / 2)))
+            child.attrib['x'] = dumb_round(center_z - (d / 2))
+            child.attrib['z'] = dumb_round((-1 * center_x) - (w / 2))
             child.attrib['w'] = str(d)
             child.attrib['d'] = str(w)
         if 'cx' in child.attrib or 'cz' in child.attrib or 'angle' in child.attrib:
