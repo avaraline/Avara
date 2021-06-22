@@ -47,20 +47,20 @@
   <Wall fill="#8c99b1" frame="#000000" x="37.5" z="7.5" w="15" d="15" h="0" y="12" />
   <Wall fill="#8c99b1" frame="#000000" x="-22.5" z="-52.5" w="15" d="15" h="0" y="12" />
   <Wall fill="#8c99b1" frame="#000000" x="-52.5" z="-22.5" w="15" d="15" h="0" y="12" />
-  <WallDoor midYaw="45" fill="#26334c" frame="#000000" x="-25.625" z="-15.625" w="25" d="5" h="0.4" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="11.6" />
-  <WallDoor midYaw="45" fill="#aebbd3" frame="#000000" x="-14.722222222222223" z="-14.722222222222223" w="3.125" d="3.125" h="5.6" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="6" />
-  <WallDoor midYaw="45" fill="#26334c" frame="#000000" x="0.625" z="10.625" w="25" d="5" h="0.4" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="11.6" />
-  <WallDoor midYaw="45" fill="#aebbd3" frame="#000000" x="11.527777777777779" z="11.527777777777779" w="3.125" d="3.125" h="5.6" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="6" />
-  <WallDoor midYaw="45" fill="#aebbd3" frame="#000000" x="-21.59722222222222" z="18.40277777777778" w="3.125" d="3.125" h="5.6" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="6" />
-  <WallDoor midYaw="45" fill="#aebbd3" frame="#000000" x="18.40277777777778" z="-21.59722222222222" w="3.125" d="3.125" h="5.6" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="6" />
+  <WallDoor midYaw="45" fill="#26334c" frame="#000000" x="-25.625" z="-15.625" w="25" d="5" h="0.4" y="11.6" />
+  <WallDoor midYaw="45" fill="#aebbd3" frame="#000000" x="-14.722222222222223" z="-14.722222222222223" w="3.125" d="3.125" h="5.6" y="6" />
+  <WallDoor midYaw="45" fill="#26334c" frame="#000000" x="0.625" z="10.625" w="25" d="5" h="0.4" y="11.6" />
+  <WallDoor midYaw="45" fill="#aebbd3" frame="#000000" x="11.527777777777779" z="11.527777777777779" w="3.125" d="3.125" h="5.6" y="6" />
+  <WallDoor midYaw="45" fill="#aebbd3" frame="#000000" x="-21.59722222222222" z="18.40277777777778" w="3.125" d="3.125" h="5.6" y="6" />
+  <WallDoor midYaw="45" fill="#aebbd3" frame="#000000" x="18.40277777777778" z="-21.59722222222222" w="3.125" d="3.125" h="5.6" y="6" />
   <Wall fill="#dae7f3" frame="#000000" x="0" z="0" w="7.5" d="7.5" h="6" />
   <Wall fill="#dae7f3" frame="#000000" x="-7.5" z="-7.5" w="7.5" d="7.5" h="6" />
   <Wall fill="#f3eace" frame="#000000" x="0" z="-7.5" w="7.5" d="7.5" h="6" />
   <Wall fill="#f3eace" frame="#000000" x="-7.5" z="0" w="7.5" d="7.5" h="6" />
-  <WallDoor midYaw="45" fill="#818890" frame="#000000" x="-0.625" z="-3.125" w="1.25" d="1.25" h="0" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="6.05" />
-  <WallDoor midYaw="45" fill="#818890" frame="#000000" x="-0.625" z="1.875" w="1.25" d="1.25" h="0" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="6.05" />
-  <WallDoor midYaw="45" fill="#818890" frame="#000000" x="1.875" z="-0.625" w="1.25" d="1.25" h="0" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="6.05" />
-  <WallDoor midYaw="45" fill="#818890" frame="#000000" x="-3.125" z="-0.625" w="1.25" d="1.25" h="0" r="2.5" cx="24.375" cz="44.8611111111111" angle="45" extent="90" y="6.05" />
+  <WallDoor midYaw="45" fill="#818890" frame="#000000" x="-0.625" z="-3.125" w="1.25" d="1.25" h="0" y="6.05" />
+  <WallDoor midYaw="45" fill="#818890" frame="#000000" x="-0.625" z="1.875" w="1.25" d="1.25" h="0" y="6.05" />
+  <WallDoor midYaw="45" fill="#818890" frame="#000000" x="1.875" z="-0.625" w="1.25" d="1.25" h="0" y="6.05" />
+  <WallDoor midYaw="45" fill="#818890" frame="#000000" x="-3.125" z="-0.625" w="1.25" d="1.25" h="0" y="6.05" />
   <Wall fill="#d9b341" frame="#000000" x="-5" z="-5" w="1.25" d="1.25" h="0" y="6.05" />
   <Wall fill="#d9b341" frame="#000000" x="3.75" z="3.75" w="1.25" d="1.25" h="0" y="6.05" />
   <Wall fill="#26334c" frame="#000000" x="-5" z="3.75" w="1.25" d="1.25" h="0" y="6.05" />
@@ -71,24 +71,24 @@
   <Wall fill="#818890" frame="#000000" x="1.25" z="-1.25" w="1.25" d="2.5" h="0" y="6.05" />
   <Teleporter shape="bspFloorFrame" scale="0.15" speed="0" group="@shortCut1" destGroup="@shortCut2" spin="false" fill="#26334c" frame="#000000" cx="-20.625" cz="20.625" r="2.5" angle="90" extent="90" />
   <Teleporter shape="bspFloorFrame" scale="0.15" speed="0" group="@shortCut2" destGroup="@shortCut1" spin="false" fill="#26334c" frame="#000000" cx="20.625" cz="-20.625" r="2.5" angle="90" extent="90" />
-  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="-27.5" z="16.25" w="2.5" d="20" h="0" r="2.5" cx="20.625" cz="-20.625" angle="90" extent="90" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="-41.25" z="30" w="2.5" d="20" h="0" r="2.5" cx="20.625" cz="-20.625" angle="90" extent="90" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="25" z="-36.25" w="2.5" d="20" h="0" r="2.5" cx="20.625" cz="-20.625" angle="90" extent="90" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="38.75" z="-50" w="2.5" d="20" h="0" r="2.5" cx="20.625" cz="-20.625" angle="90" extent="90" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="48.75" z="-52.5" w="3.75" d="3.75" h="0" r="2.5" cx="20.625" cz="-20.625" angle="90" extent="90" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="-52.5" z="48.75" w="3.75" d="3.75" h="0" r="2.5" cx="20.625" cz="-20.625" angle="90" extent="90" y="-0.05" />
+  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="-27.5" z="16.25" w="2.5" d="20" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="-41.25" z="30" w="2.5" d="20" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="25" z="-36.25" w="2.5" d="20" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="38.75" z="-50" w="2.5" d="20" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="48.75" z="-52.5" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="-52.5" z="48.75" w="3.75" d="3.75" h="0" y="-0.05" />
   <Wall fill="#68748e" frame="#000000" x="-17.5" z="32.5" w="5" d="10" h="2" />
   <Wall fill="#68748e" frame="#000000" x="-42.5" z="12.5" w="10" d="5" h="2" />
   <Wall fill="#68748e" frame="#000000" x="12.5" z="-42.5" w="5" d="10" h="2" />
   <Wall fill="#68748e" frame="#000000" x="35.625" z="-17.5" w="10" d="5" h="2" />
-  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="46.875" z="-50.625" w="2.5" d="5" h="0" r="2.5" cx="20.625" cz="-20.625" angle="90" extent="90" y="-0.05" />
+  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="46.875" z="-50.625" w="2.5" d="5" h="0" y="-0.05" />
   <Dome fill="#bcc7d1" frame="#000000" cx="45" cz="-45" r="2.5" angle="0" extent="360" />
-  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="-49.375" z="45.625" w="2.5" d="5" h="0" r="2.5" cx="45" cz="-45" angle="0" extent="360" y="-0.05" />
+  <WallDoor midYaw="-45" fill="#f3eace" frame="#000000" x="-49.375" z="45.625" w="2.5" d="5" h="0" y="-0.05" />
   <Dome fill="#bcc7d1" frame="#000000" cx="-45" cz="45" r="2.5" angle="0" extent="360" />
   <Wall fill="#d9b341" frame="#000000" x="24.375" z="24.375" w="1.25" d="1.25" h="0" y="18.05" />
-  <WallDoor midYaw="45" fill="#d9b341" frame="#000000" x="24.375" z="24.375" w="1.25" d="1.25" h="0" r="2.5" cx="-45" cz="45" angle="0" extent="360" y="18.05" />
+  <WallDoor midYaw="45" fill="#d9b341" frame="#000000" x="24.375" z="24.375" w="1.25" d="1.25" h="0" y="18.05" />
   <Wall fill="#d9b341" frame="#000000" x="-25.625" z="-25.625" w="1.25" d="1.25" h="0" y="18.05" />
-  <WallDoor midYaw="45" fill="#d9b341" frame="#000000" x="-25.625" z="-25.625" w="1.25" d="1.25" h="0" r="2.5" cx="-45" cz="45" angle="0" extent="360" y="18.05" />
+  <WallDoor midYaw="45" fill="#d9b341" frame="#000000" x="-25.625" z="-25.625" w="1.25" d="1.25" h="0" y="18.05" />
   <Solid y="6.05" shape="bspGroundStar" scale="0.1" fill="#818890" frame="#000000" cx="0" cz="0" r="1.875" angle="270" extent="90" />
 
   <Teleporter y="-10" activeRange="150" deadRange="96" group="@bubble" destGroup="@recenter" shape="0" fill="#fcf305" frame="#000000" cx="0" cz="0" r="1.875" angle="180" extent="90" />
