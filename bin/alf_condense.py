@@ -7,6 +7,11 @@ import xml.etree.ElementTree as ET
 from dumb_round import dumb_round
 
 
+DEAD_ATTRS = {
+    'WallDoor': ['angle', 'cx', 'cz', 'extent', 'r']
+}
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('file', type=open)
@@ -30,6 +35,9 @@ if __name__ == '__main__':
         elif child.tag in ['Wall', 'WallSolid', 'FreeSolid', 'WallDoor', 'Field']:
             if 'h' in child.attrib and child.attrib['h'] == '0':
                 child.attrib['h'] = dumb_round(last_wallHeight)
+        if child.tag in DEAD_ATTRS.keys():
+            dead = DEAD_ATTRS[child.tag]
+            child.attrib = {k: v for k, v in child.attrib.items() if k not in dead}
     for child in to_remove:
         root.remove(child)
     print(ET.tostring(root, encoding="unicode"))
