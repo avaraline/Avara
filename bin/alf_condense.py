@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser.add_argument('file', type=open)
 
     args = parser.parse_args()
-    last_wallHeight = 0
+    last_wallHeight = 3 # This is the default value in rsrc/default.avarascript
     did_output_wallHeight_zero = False
     to_remove = []
     root = ET.fromstring(args.file.read())
