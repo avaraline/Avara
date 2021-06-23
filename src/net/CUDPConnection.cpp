@@ -669,8 +669,9 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
         next->OpenNewConnections(origTable);
 }
 
+
 void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16_t firstReceiveSerial) {
-    SDL_Log("CUDPConnection::FreshClient(%u, %hu)\n", remoteHost, remotePort);
+    SDL_Log("CUDPConnection::FreshClient connecting from %s\n", FormatHostPort(remoteHost, remotePort).c_str());
     FlushQueues();
     serialNumber = INITIAL_SERIAL_NUMBER;
     receiveSerial = serialNumber + firstReceiveSerial;

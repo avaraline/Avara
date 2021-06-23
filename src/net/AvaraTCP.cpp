@@ -189,3 +189,16 @@ void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *use
         callback(sent > 0 ? noErr : -1, userData);
     }
 }
+
+// A utility function to byte-swap the host & port and create a human-readable format
+#include <sstream>
+std::string FormatHostPort(uint32_t host, uint16_t port) {
+    std::ostringstream os;
+    ip_addr ipaddr = SDL_SwapBE32(host);
+    os << (ipaddr >> 24) << "."
+       << ((ipaddr >> 16) & 0xff) << "."
+       << ((ipaddr >> 8) & 0xff) << "."
+       << (ipaddr & 0xff) <<  ":"
+       << SDL_SwapBE16(port);
+    return os.str();
+}

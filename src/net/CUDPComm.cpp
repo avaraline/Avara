@@ -95,22 +95,11 @@ enum {
     kServerTrackerInviteItem
 };
 
-// A utility function to byte-swap the host & port and create a human-readable format
 static std::string FormatAddr(IPaddress addr) {
-    std::ostringstream os;
-    ip_addr ipaddr = SDL_SwapBE32(addr.host);
-    os << (ipaddr >> 24) << "."
-       << ((ipaddr >> 16) & 0xff) << "."
-       << ((ipaddr >> 8) & 0xff) << "."
-       << (ipaddr & 0xff) <<  ":"
-       << SDL_SwapBE16(addr.port);
-    return os.str();
+    return FormatHostPort(addr.host, addr.port);
 }
 static std::string FormatAddr(CUDPConnection *conn) {
-    IPaddress ip;
-    ip.host = conn->ipAddr;
-    ip.port = conn->port;
-    return FormatAddr(ip);
+    return FormatHostPort(conn->ipAddr, conn->port);
 }
 
 
