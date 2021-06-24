@@ -173,6 +173,7 @@ void CAvaraAppImpl::drawAll() {
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
     animatePreview = false;
+    itsGame->itsView->showTransparent = false;
     MessageLine(kmStarted, centerAlign);
     levelWindow->AddRecent(set, level);
 }
@@ -261,6 +262,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
         itsGame->itsWorld->OverheadPoint(overhead, extent);
         itsGame->itsView->yonBound = FIX(10000);
+        itsGame->itsView->showTransparent = true;
 
         previewAngle = 0;
         previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);
