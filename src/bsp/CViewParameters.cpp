@@ -143,6 +143,7 @@ void CViewParameters::IViewParameters() {
 
     dirtyLook = false;
     inverseDone = false;
+    showTransparent = false;
 }
 
 void CViewParameters::Dispose() {

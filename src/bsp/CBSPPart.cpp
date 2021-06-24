@@ -274,7 +274,7 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 **  in preparation to shading.
 */
 Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
-    Boolean inPyramid = !isTransparent;
+    Boolean inPyramid = vp->showTransparent || !isTransparent;
 
     if (inPyramid) {
         currentView = vp;
@@ -306,7 +306,7 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
             TransformLights();
 
             // transform all the points before rendering
-            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);      
+            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
         }
     }
 

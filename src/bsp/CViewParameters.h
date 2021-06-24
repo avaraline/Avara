@@ -58,6 +58,7 @@ public:
     short lightSourceCount;
     Boolean dirtyLook;
     Boolean inverseDone;
+    Boolean showTransparent;
 
     virtual void IViewParameters();
     virtual void CalculateViewPyramidCorners();
