@@ -75,6 +75,10 @@ public:
 
     std::deque<std::string> messageLines;
 
+    Fixed overhead[3], extent[6];
+    Fixed previewAngle, previewRadius;
+    bool animatePreview;
+
     CAvaraAppImpl();
     ~CAvaraAppImpl();
 
