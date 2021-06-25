@@ -441,7 +441,7 @@ void CWalkerActor::ExtendLeg(LegInfo *theLeg) {
     theLeg->lowAngle = -theLeg->lowAngle;
 }
 
-#define fConstant FIX3(650 * 1.4)
+#define fConstant FIX3(650 * 1.4) // FIX3(910) = 0.91
 void CWalkerActor::MoveLegs() {
     Fixed temp;
     Fixed phaseChange;
@@ -470,7 +470,7 @@ void CWalkerActor::MoveLegs() {
     absAvgSpeed += (legSpeeds[1] > 0) ? legSpeeds[1] : -legSpeeds[1];
 
     phaseChange = FMulDiv(FSqrt(absAvgSpeed), fConstant, elevation);
-    legPhase += phaseChange / 10;
+    legPhase += FDiv(phaseChange, FMul(FSqrt(FIX(itsGame->FrameTimeInverse())), FIX(10)));
 
     for (i = 0; i < 2; i++) {
         Fixed moveRadius;
@@ -479,7 +479,7 @@ void CWalkerActor::MoveLegs() {
         Fixed theSpeed = legSpeeds[i];
 
         theLeg = &legs[i];
-        theLeg->x -= theSpeed / 4;
+        theLeg->x -= theSpeed / (4 * itsGame->FrameTimeInverse());
 
         if (phaseChange)
             moveRadius = FDivNZ(theSpeed, phaseChange);
