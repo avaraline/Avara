@@ -8,7 +8,9 @@ from dumb_round import dumb_round
 
 
 DEAD_ATTRS = {
-    'WallDoor': ['angle', 'cx', 'cz', 'extent', 'r']
+    'WallDoor': ['angle', 'cx', 'cz', 'extent', 'r'],
+    'WallSolid': ['angle', 'cx', 'cz', 'extent', 'r'],
+    'Ramp': ['cx', 'cz', 'h', 'r'],
 }
 
 

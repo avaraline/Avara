@@ -21,27 +21,15 @@
   <Wall fill="#060f21" frame="#000000" x="22.5" z="-25" w="10" d="20" h="4" />
   <Wall fill="#242f40" frame="#000000" x="22.5" z="-5" w="10" d="10" h="0.2" y="3.8" />
   <Wall fill="#242f40" frame="#000000" x="-32.5" z="-5" w="10" d="10" h="0.2" y="3.8" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="10.625" z="25" w="2.5" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="10" z="25" w="2.5" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="10.625" z="5" w="2.5" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="10" z="5" w="2.5" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Wall fill="#060f21" frame="#000000" x="10" z="5" w="0.625" d="10" h="0" y="17" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="10.625" z="-15" w="2.5" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="10" z="-15" w="2.5" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Wall fill="#060f21" frame="#000000" x="10" z="-15" w="0.625" d="10" h="0" y="17" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="10.625" z="-35" w="2.5" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="10" z="-35" w="2.5" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="-13.125" z="-35" w="2.5" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="-12.5" z="-35" w="2.5" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Wall fill="#060f21" frame="#000000" x="-10.625" z="-35" w="21.25" d="10" h="0" y="17" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="-13.125" z="-15" w="2.5" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="-12.5" z="-15" w="2.5" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Wall fill="#060f21" frame="#000000" x="-10.625" z="-15" w="0.625" d="10" h="0" y="17" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="-13.125" z="5" w="2.5" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="-12.5" z="5" w="2.5" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Wall fill="#060f21" frame="#000000" x="-10.625" z="5" w="0.625" d="10" h="0" y="17" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="-13.125" z="25" w="2.5" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Ramp y="14" deltaY="3" fill="#060f21" frame="#000000" x="-12.5" z="25" w="2.5" d="10" h="0" r="1.875" angle="45" extent="90" />
+  <Ramp y="13.65" deltaY="3.35" thickness="0.625" fill="#060f21" frame="#000000" x="10.46" z="25" w="2.65" d="10" h="0" r="1.875" angle="225" extent="90" />
+  <Ramp y="13.65" deltaY="3.35" thickness="0.625" fill="#060f21" frame="#000000" x="10.46" z="5" w="2.65" d="10" h="0" r="1.875" angle="225" extent="90" />
+  <Ramp y="13.65" deltaY="3.35" thickness="0.625" fill="#060f21" frame="#000000" x="10.46" z="-15" w="2.65" d="10" h="0" r="1.875" angle="225" extent="90" />
+  <Ramp y="13.65" deltaY="3.35" thickness="0.625" fill="#060f21" frame="#000000" x="10.46" z="-35" w="2.65" d="10" h="0" r="1.875" angle="225" extent="90" />
+  <Ramp y="13.65" deltaY="3.35" thickness="0.625" fill="#060f21" frame="#000000" x="-13.11" z="-35" w="2.65" d="10" h="0" r="1.875" angle="45" extent="90" />
+  <Wall fill="#060f21" frame="#000000" x="-10.975" z="-35" w="21.95" d="10" h="0.625" y="16.375" />
+  <Ramp y="13.65" deltaY="3.35" thickness="0.625" fill="#060f21" frame="#000000" x="-13.11" z="-15" w="2.65" d="10" h="0" r="1.875" angle="45" extent="90" />
+  <Ramp y="13.65" deltaY="3.35" thickness="0.625" fill="#060f21" frame="#000000" x="-13.11" z="5" w="2.65" d="10" h="0" r="1.875" angle="45" extent="90" />
+  <Ramp y="13.65" deltaY="3.35" thickness="0.625" fill="#060f21" frame="#000000" x="-13.11" z="25" w="2.65" d="10" h="0" r="1.875" angle="45" extent="90" />
   <Ramp y="0" deltaY="4" fill="#60707f" frame="#000000" x="-22.5" z="15" w="9.375" d="10" h="0" r="1.875" angle="225" extent="90" />
   <Ramp y="0" deltaY="4" fill="#60707f" frame="#000000" x="-22.5" z="-25" w="9.375" d="10" h="0" r="1.875" angle="225" extent="90" />
   <Ramp y="0" deltaY="4" fill="#60707f" frame="#000000" x="13.125" z="-25" w="9.375" d="10" h="0" r="1.875" angle="45" extent="90" />
@@ -64,23 +52,23 @@
   <Ramp y="0" deltaY="2" fill="#60707f" frame="#000000" x="-7.5" z="35" w="15" d="10" h="0" r="1.875" angle="135" extent="90" />
   <Wall fill="#425060" frame="#000000" x="-7.5" z="45" w="15" d="10" h="2" />
   <Wall fill="#425060" frame="#000000" x="-7.5" z="-55" w="15" d="10" h="2" />
-  <Wall fill="#060f21" frame="#000000" x="-10.625" z="25" w="21.25" d="10" h="0" y="17" />
+  <Wall fill="#060f21" frame="#000000" x="-10.975" z="25" w="21.95" d="10" h="0.625" y="16.375" />
   <Dome fill="#425060" frame="#000000" cx="-47.5" cz="0" r="2.5" angle="0" extent="360" />
   <Dome fill="#425060" frame="#000000" cx="47.5" cz="0" r="2.5" angle="0" extent="360" />
-  <Wall fill="#060f21" frame="#000000" x="-1.25" z="48.75" w="2.5" d="2.5" h="0" y="2" />
-  <Wall fill="#060f21" frame="#000000" x="-1.25" z="-51.25" w="2.5" d="2.5" h="0" y="2" />
-  <Wall fill="#060f21" frame="#000000" x="-1.25" z="-13.75" w="2.5" d="2.5" h="0" />
-  <Wall fill="#060f21" frame="#000000" x="-1.25" z="11.25" w="2.5" d="2.5" h="0" />
-  <Wall fill="#060f21" frame="#000000" x="-28.75" z="-1.25" w="2.5" d="2.5" h="0" y="4" />
-  <Wall fill="#060f21" frame="#000000" x="26.25" z="-1.25" w="2.5" d="2.5" h="0" y="4" />
-  <Wall fill="#060f21" frame="#000000" x="-0.625" z="-5" w="1.25" d="3.75" h="0" />
-  <Wall fill="#060f21" frame="#000000" x="-1.25" z="-1.25" w="2.5" d="2.5" h="0" />
-  <Wall fill="#060f21" frame="#000000" x="-0.625" z="1.25" w="1.25" d="3.75" h="0" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="-1.25" z="48.75" w="2.5" d="2.5" h="0.005" y="2.005" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="-1.25" z="-51.25" w="2.5" d="2.5" h="0.005" y="2.005" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="-1.25" z="-13.75" w="2.5" d="2.5" h="0" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="-1.25" z="11.25" w="2.5" d="2.5" h="0" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="-28.75" z="-1.25" w="2.5" d="2.5" h="0.005" y="4.005" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="26.25" z="-1.25" w="2.5" d="2.5" h="0.005" y="4.005" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="-0.625" z="-5" w="1.25" d="3.75" h="0" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="-1.25" z="-1.25" w="2.5" d="2.5" h="0" />
+  <Field deltaY="0" visible="true" fill="#060f21" frame="#000000" x="-0.625" z="1.25" w="1.25" d="3.75" h="0" />
 
   <Teleporter group="-1" y="-30" activeRange="41 * 5" deadRange="21 * 5" destGroup="@recenter" shape="0" spin="false" fill="#f5fdfd" frame="#000000" cx="0" cz="0" r="1.875" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#f5fdfd" frame="#000000" cx="0" cz="0" r="1.875" angle="180" extent="90" />
-  <Teleporter group="@recenter" y="25" shape="0" spin="false" fill="#f5fdfd" frame="#000000" cx="0" cz="30" r="1.875" angle="180" extent="90" />
-  <Teleporter group="@recenter" y="25" shape="0" spin="false" fill="#f5fdfd" frame="#000000" cx="0" cz="-30" r="1.875" angle="180" extent="90" />
+  <Teleporter group="@recenter" y="25" shape="0" spin="true" fill="#f5fdfd" frame="#000000" cx="0" cz="30" r="1.875" angle="180" extent="90" />
+  <Teleporter group="@recenter" y="25" shape="0" spin="true" fill="#f5fdfd" frame="#000000" cx="0" cz="-30" r="1.875" angle="180" extent="90" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#d7f0fd" frame="#000000" cx="0" cz="12.5" r="1.875" angle="90" extent="90" />
