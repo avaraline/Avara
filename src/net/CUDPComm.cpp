@@ -44,6 +44,8 @@ int numToDrop = 0;
 #include <miniupnpc/upnpcommands.h>
 #include <miniupnpc/upnperrors.h>
 
+#include <thread>
+
 
 // get rid of this
 #include "CAvaraApp.h"
@@ -1287,9 +1289,9 @@ void CUDPComm::Dispose() {
 }
 
 /**
-    Setup port forwarding using upnp.
+    Set up port forwarding using upnp.
  */
-void CUDPComm::ForwardPorts() {
+void ForwardPorts(port_num port) {
     struct UPNPDev * devlist = 0;
     struct UPNPDev * dev;
     int error = 0;
@@ -1307,7 +1309,7 @@ void CUDPComm::ForwardPorts() {
     };
     
     devlist = upnpDiscoverDevices(deviceList,
-                                  10000, multicastif, minissdpdpath,
+                                  5000, multicastif, minissdpdpath,
                                   0/*localport*/, ipv6, ttl, &error, 1);
 
     if(devlist) {
@@ -1319,8 +1321,8 @@ void CUDPComm::ForwardPorts() {
             struct UPNPUrls upnp_urls;
             struct IGDdatas upnp_data;
             char aLanAddr[64];
-            std::string s = std::to_string(gApplication->Number(kDefaultUDPPort));
-            const char *pPort = s.c_str();
+            std::string portString = std::to_string(port);
+            const char *pPort = portString.c_str();
 
             // Retrieve a valid Internet Gateway Device
             int status = UPNP_GetValidIGD(dev, &upnp_urls, &upnp_data, aLanAddr,
@@ -1349,7 +1351,7 @@ void CUDPComm::ForwardPorts() {
               }
         }
     } else {
-        printf("upnpDiscoverDevices found no devices.\n");
+        SDL_Log("upnpDiscoverDevices found no devices.\n");
     }
 }
 
@@ -1358,7 +1360,8 @@ void CUDPComm::CreateServer() {
 
     localPort = gApplication->Number(kDefaultUDPPort);
 
-    ForwardPorts();
+    std::thread forwardPorts(ForwardPorts, localPort);
+    forwardPorts.detach();
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
@@ -1376,8 +1379,6 @@ void CUDPComm::CreateServer() {
     {	tracker->StartTracking();
     }
     */
-
-    //	And that's all there is to it!
 }
 
 OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
@@ -1451,6 +1452,8 @@ void CUDPComm::Connect(std::string address) {
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
     SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
+    std::thread forwardPorts(ForwardPorts, localPort);
+    forwardPorts.detach();
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
