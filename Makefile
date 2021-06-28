@@ -11,7 +11,7 @@ ifneq ($(GIT_BRANCH),)
 else
     BUILD_DIR ?= build
 endif
-SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
+SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor/miniupnpc vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')

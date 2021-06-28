@@ -128,6 +128,7 @@ public:
 
     virtual void CreateServer();
     virtual OSErr ContactServer(ip_addr serverHost, port_num serverPort);
+    virtual void ForwardPorts();
 
     virtual Boolean ServerSetupDialog(Boolean disableSome);
 
