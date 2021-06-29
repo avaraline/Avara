@@ -261,7 +261,9 @@ struct ALFWalker: pugi::xml_tree_walker {
     void handle_wall(pugi::xml_node& node) {
         std::string y = node.attribute("y").value();
         if (!y.empty()) {
-            ProgramVariable(iWallAltitude, std::stod(y));
+            std::stringstream script;
+            script << "wa = " << y << "\n";
+            RunThis((StringPtr)script.str().c_str());
         }
         CWallActor *theWall = new CWallActor;
         theWall->IAbstractActor();
