@@ -1330,28 +1330,28 @@ void ForwardPorts(port_num port) {
             //printf("status=%d, lan_addr=%s\n", status, aLanAddr);
             
             if (status == 1) {
-                SDL_Log("UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
+                SDL_Log("UPNP: UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
                 error =
                     UPNP_AddPortMapping(upnp_urls.controlURL, upnp_data.first.servicetype,
                                         pPort, // external port
                                         pPort, // internal port
-                                        aLanAddr, "My Application Name", "UDP",
+                                        aLanAddr, "Avara", "UDP",
                                         0,  // remote host
                                         "0" // lease duration, recommended 0 as some NAT
                                             // implementations may not support another value
                     );
 
                 if (error) {
-                    SDL_Log("failed to map port\n");
-                    SDL_Log("error: %s\n", strupnperror(error));
+                    SDL_Log("UPNP: failed to map port\n");
+                    SDL_Log("UPNP: error: %s\n", strupnperror(error));
                 } else
-                    SDL_Log("successfully mapped port\n");
+                    SDL_Log("UPNP: successfully mapped port\n");
               } else {
-                  SDL_Log("no valid IGD found\n");
+                  SDL_Log("UPNP: no valid IGD found\n");
               }
         }
     } else {
-        SDL_Log("upnpDiscoverDevices found no devices.\n");
+        SDL_Log("UPNP: upnpDiscoverDevices found no devices.\n");
     }
 }
 
