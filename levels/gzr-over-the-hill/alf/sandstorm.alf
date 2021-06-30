@@ -2,11 +2,11 @@
   <set designer="The Head &lt;tra@idcomm.com&gt;" information="Scripting by Hybrid. Kuwait at dusk, with non-targeting mega-missiles (scuds).  Teams must be red, blue or yellow.  Up to 3 people on one team. First team to reach 100 seconds in the center square wins." ambient="0.4" light.0.i="1.0" light.0.a="0" light.0.b="0" light.1.i="0.0" light.1.a="0" light.1.b="0" light.2.i="0.0" light.2.a="0" light.2.b="0" light.3.i="0.0" light.3.a="0" light.3.b="0" missilePower="10" missileAcceleration="0.5" startY="9" />
   <set grenDelay="250" numGren="6" />
   <set missDelay="250" numMiss="4" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" snYeeha="0" kADelay="2" kDefaultLives="300" kSnText="snTextBlip" kTextVolume="0.3" />
-  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff00" frame="#000000" x="72.77777777777779" z="52.91666666666667" w="11.25" d="11.25" h="0" />
-  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff6666" frame="#000000" x="72.77777777777779" z="52.91666666666667" w="11.25" d="11.25" h="0" y="0" />
-  <Field deltaY="0" mask="T6" stop="@sixteen" start="@fifteen" enter="@team6" fill="#00ccff" frame="#000000" x="72.77777777777779" z="52.91666666666667" w="11.25" d="11.25" h="0" y="0" />
+  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff00" frame="#000000" x="78.40277777777779" z="58.54166666666667" w="11.25" d="11.25" h="0" />
+  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff6666" frame="#000000" x="78.40277777777779" z="58.54166666666667" w="11.25" d="11.25" h="0" y="0" />
+  <Field deltaY="0" mask="T6" stop="@sixteen" start="@fifteen" enter="@team6" fill="#00ccff" frame="#000000" x="78.40277777777779" z="58.54166666666667" w="11.25" d="11.25" h="0" y="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="0" wallHeight="0" wallYon="40" />
-  <Wall fill="#ffff33" frame="#000000" x="72.77777777777779" z="52.91666666666667" w="11.25" d="11.25" h="0" />
+  <Wall fill="#ffff33" frame="#000000" x="78.40277777777779" z="58.54166666666667" w="11.25" d="11.25" h="0" />
   <SkyColor fill="#ffff00" frame="#aa0000" />
   <GroundColor fill="#440000" frame="#444444" />
   <Incarnator y="startY" fill="#006600" frame="#006600" cx="59.30555555555556" cz="27.708333333333336" r="1.3888888888888893" angle="300" extent="60" />
@@ -111,9 +111,9 @@ go!" fill="#ff0000" frame="#000000" cx="12.291666666666668" cz="397.361111111111
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="61.59722222222223" cz="396.31944444444446" r="2.569444444444457" angle="180" extent="90" />
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="61.59722222222223" cz="396.31944444444446" r="2.569444444444457" angle="180" extent="90" />
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="61.59722222222223" cz="396.31944444444446" r="2.569444444444457" angle="180" extent="90" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" r="2.569444444444457" cx="61.59722222222223" cz="396.31944444444446" angle="180" extent="90" x="126.18055555555556" z="514.4444444444445" w="2.7777777777777857" d="1.5277777777778283" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff33" frame="#000000" r="2.569444444444457" cx="61.59722222222223" cz="396.31944444444446" angle="180" extent="90" x="100.7638888888889" z="514.7222222222223" w="2.7777777777777715" d="1.5277777777777146" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ccff" frame="#000000" r="2.569444444444457" cx="61.59722222222223" cz="396.31944444444446" angle="180" extent="90" x="113.68055555555556" z="514.6527777777778" w="2.7777777777777857" d="1.5277777777777146" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" r="2.569444444444457" cx="61.59722222222223" cz="396.31944444444446" angle="180" extent="90" x="127.56944444444446" z="515.2083333333334" w="2.7777777777777857" d="1.5277777777778283" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff33" frame="#000000" r="2.569444444444457" cx="61.59722222222223" cz="396.31944444444446" angle="180" extent="90" x="102.15277777777779" z="515.4861111111111" w="2.7777777777777715" d="1.5277777777777146" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ccff" frame="#000000" r="2.569444444444457" cx="61.59722222222223" cz="396.31944444444446" angle="180" extent="90" x="115.06944444444446" z="515.4166666666667" w="2.7777777777777857" d="1.5277777777777146" h="2" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" fill="#ff0000" frame="#ffff00" cx="78.47222222222223" cz="72.70833333333334" r="1.25" angle="30" extent="300" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" fill="#ff0000" frame="#ffff00" cx="78.47222222222223" cz="72.70833333333334" r="1.25" angle="30" extent="300" />

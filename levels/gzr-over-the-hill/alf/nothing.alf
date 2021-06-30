@@ -1,8 +1,8 @@
 <map>
   <set designer="Cowboy &lt;jmcald@destiny.esd105.wednet.edu&gt;" information="Scripting by Hybrid. Minimum requirements for a game - renders very fast. Teams must be red, blue or yellow.  Up to 3 people on one team. First team to reach 100 seconds in the center square wins." missilePower="1.8" missileAcceleration="0.3" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" snYeeha="0" kADelay="2" kDefaultLives="300" kSnText="snTextBlip" kTextVolume="0.3" />
-  <Field deltaY="0" mask="T6" stop="@sixteen" start="@fifteen" enter="@team6" fill="#00ccff" frame="#000000" x="69.16666666666667" z="59.16666666666667" w="13.75" d="13.75" h="0" y="0" />
-  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff00" frame="#000000" x="69.16666666666667" z="59.16666666666667" w="13.75" d="13.75" h="0" />
-  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff6666" frame="#000000" x="69.16666666666667" z="59.16666666666667" w="13.75" d="13.75" h="0" y="0" />
+  <Field deltaY="0" mask="T6" stop="@sixteen" start="@fifteen" enter="@team6" fill="#00ccff" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" y="0" />
+  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff00" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" />
+  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff6666" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" y="0" />
   <Walker lives="kDefaultLives" team="3" y="30" fill="#ffff33" frame="#000000" cx="38.22916666666667" cz="89.13194444444446" r="2.3263888888888893" angle="195" extent="60" />
   <Walker lives="kDefaultLives" team="3" y="30" fill="#ffff33" frame="#000000" cx="45.798611111111114" cz="96.35416666666667" r="2.3263888888888893" angle="195" extent="60" />
   <Walker lives="kDefaultLives" team="3" y="30" fill="#ffff33" frame="#000000" cx="53.090277777777786" cz="104.20138888888889" r="2.3263888888888893" angle="195" extent="60" />
@@ -13,7 +13,7 @@
   <Walker lives="kDefaultLives" team="2" y="30" fill="#ffff33" frame="#000000" cx="76.31944444444446" cz="23.47222222222222" r="3.263888888888893" angle="330" extent="60" />
   <Walker lives="kDefaultLives" team="2" y="30" fill="#ffff33" frame="#000000" cx="66.31944444444446" cz="23.47222222222222" r="3.263888888888893" angle="330" extent="60" />
   <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="60" />
-  <Wall fill="#000000" frame="#000000" x="69.16666666666667" z="59.16666666666667" w="13.75" d="13.75" h="0" y="0" />
+  <Wall fill="#000000" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" y="0" />
   <Timer in="@switchammo1" out="@makeammo2" wait="75" fill="#ff6600" frame="#000000" cx="71.66666666666667" cz="61.66666666666667" r="1.25" angle="180" extent="90" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="@makeammo2" out="@switchagain1" fill="#ff6600" frame="#000000" cx="71.66666666666667" cz="61.66666666666667" r="1.25" angle="180" extent="90" />
   <Teleporter group="@center" y="18" activeRange="230" deadRange="75" destGroup="@recenter" shape="0" fill="#ffff33" frame="#ffff33" cx="76.04166666666667" cz="66.07638888888889" r="1.49305555555555" angle="60" extent="60" />
@@ -114,10 +114,10 @@ go!" fill="#ff0000" frame="#000000" cx="10.347222222222223" cz="378.611111111111
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="59.652777777777786" cz="377.56944444444446" r="2.569444444444457" angle="180" extent="90" />
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="59.652777777777786" cz="377.56944444444446" r="2.569444444444457" angle="180" extent="90" />
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="59.652777777777786" cz="377.56944444444446" r="2.569444444444457" angle="180" extent="90" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" r="2.569444444444457" cx="59.652777777777786" cz="377.56944444444446" angle="180" extent="90" x="124.16666666666667" z="495.625" w="2.7777777777777857" d="1.5277777777777715" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" r="2.569444444444457" cx="59.652777777777786" cz="377.56944444444446" angle="180" extent="90" x="125.55555555555557" z="496.3888888888889" w="2.7777777777777857" d="1.5277777777777715" h="2" />
   <Incarnator y="9" fill="#006600" frame="#006600" cx="33.54166666666667" cz="66.25" r="1.3888888888888893" angle="240" extent="60" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff33" frame="#000000" r="1.3888888888888893" cx="33.54166666666667" cz="66.25" angle="240" extent="60" x="98.75" z="495.90277777777777" w="2.7777777777777857" d="1.5277777777778283" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ccff" frame="#000000" r="1.3888888888888893" cx="33.54166666666667" cz="66.25" angle="240" extent="60" x="111.66666666666667" z="495.83333333333337" w="2.7777777777777715" d="1.5277777777777715" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff33" frame="#000000" r="1.3888888888888893" cx="33.54166666666667" cz="66.25" angle="240" extent="60" x="100.13888888888889" z="496.6666666666667" w="2.7777777777777857" d="1.5277777777778283" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ccff" frame="#000000" r="1.3888888888888893" cx="33.54166666666667" cz="66.25" angle="240" extent="60" x="113.05555555555556" z="496.5972222222223" w="2.7777777777777715" d="1.5277777777777715" h="2" />
   <Incarnator y="9" fill="#006600" frame="#006600" cx="76.31944444444446" cz="108.33333333333334" r="1.3888888888888928" angle="150" extent="60" />
   <Incarnator y="9" fill="#006600" frame="#006600" cx="118.68055555555556" cz="66.04166666666667" r="1.3888888888888857" angle="60" extent="60" />
   <Incarnator y="9" fill="#006600" frame="#006600" cx="46.31944444444444" cz="36.388888888888886" r="1.3888888888888893" angle="285" extent="60" />

@@ -173,7 +173,7 @@ See the Read Me." timeLimit="300" defaultLives="100" bsp16wall="2001" bspOctahed
   <Teleporter y="6" activeRange="3.8" group="@controlOut" destGroup="@arenaOut" shape="0" spin="false" fill="#000000" frame="#004400" cx="10.208333333333334" cz="98.125" r="1.875" angle="180" extent="180" />
   <Switch shape="bspSwitchOff" altShape="shape + 1" status="false" out.1="@secondBall" fill="#000000" frame="#004400" cx="23.61111111111111" cz="98.05555555555556" r="1.875" angle="270" extent="90" />
   <Text showEveryone="true" in="@secondBall" text="Second Ball: In Play" fill="#000000" frame="#004400" cx="23.61111111111111" cz="98.05555555555556" r="1.875" angle="270" extent="90" />
-  <Wall fill="#000000" frame="#004400" x="24.444444444444446" z="94.65277777777779" w="1.25" d="6.25" h="0" />
+  <Wall fill="#000000" frame="#004400" x="25.069444444444446" z="97.77777777777779" w="1.25" d="6.25" h="0" />
   <set gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#000000" frame="#110000" cx="2.8472222222222223" cz="15.347222222222223" r="1.5972222222222232" angle="270" extent="90" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#110000" cx="2.8472222222222223" cz="15.347222222222223" r="1.5972222222222232" angle="270" extent="90" />

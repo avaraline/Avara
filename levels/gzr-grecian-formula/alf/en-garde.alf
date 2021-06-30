@@ -58,7 +58,7 @@
   <Text sound="kSnText" volume="kTextVolume" in="@redAt24" showEveryone="true" text="Red team has only 1 point to go!" fill="#ff0000" frame="#000000" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" angle="180" extent="90" />
   <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" fill="#ff0000" frame="#000000" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" angle="180" extent="90" />
   <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
-  <Wall fill="#000000" frame="#000000" x="97.29166666666667" z="54.375" w="10" d="10" h="0" y="0" />
+  <Wall fill="#000000" frame="#000000" x="102.29166666666667" z="59.375" w="10" d="10" h="0" y="0" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" r="1.3541666666666643" angle="180" extent="90" />
   <Timer in="mTaken1" out="mShow1" wait="50" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" r="1.3541666666666643" angle="180" extent="90" />
@@ -66,13 +66,13 @@
   <Timer in="mSwitch" out="mShow2" wait="50" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" r="1.3541666666666643" angle="180" extent="90" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" r="1.3541666666666643" angle="180" extent="90" />
   <set wallHeight=".1" />
-  <Wall fill="#ff0000" frame="#000000" x="97.91666666666667" z="55" w="8.75" d="8.75" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="102.29166666666667" z="59.375" w="8.75" d="8.75" h="0" />
   <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T2" group="@yellow" destgroup="@yellow" out="@add1Yellow" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" r="1.3541666666666643" angle="1" extent="359" />
   <Hologram y="9" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" r="1.3541666666666643" angle="1" extent="359" />
   <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
-  <Wall fill="#000000" frame="#000000" x="182.43055555555557" z="54.30555555555556" w="10" d="10" h="0" y="0" />
+  <Wall fill="#000000" frame="#000000" x="187.43055555555557" z="59.30555555555556" w="10" d="10" h="0" y="0" />
   <set wallHeight=".1" />
-  <Wall fill="#ffff00" frame="#000000" x="183.05555555555557" z="54.93055555555556" w="8.75" d="8.75" h="0" />
+  <Wall fill="#ffff00" frame="#000000" x="187.43055555555557" z="59.30555555555556" w="8.75" d="8.75" h="0" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="8" fill="#ff0000" frame="#000000" cx="88.125" cz="65.48611111111111" r="3.263888888888893" angle="240" extent="60" />
   <Incarnator y="10" mask="T3" fill="#ff0000" frame="#000000" cx="88.125" cz="65.48611111111111" r="3.263888888888893" angle="240" extent="60" />
   <Teleporter y="15" group="@red" shape="0" spin="0" fill="#ff0000" frame="#000000" cx="88.125" cz="65.48611111111111" r="3.263888888888893" angle="240" extent="60" />

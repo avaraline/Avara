@@ -245,8 +245,8 @@ class RectOp(AvaraOperation):
                 attrs = {
                     "fill": context.get("fill", self.color),
                     "frame": context.get("frame", self.color),
-                    "x": dumb_round(self.rect.left),
-                    "z": dumb_round(self.rect.top),
+                    "x": dumb_round(self.rect.center.x),
+                    "z": dumb_round(self.rect.center.y),
                     "w": dumb_round(self.rect.width),
                     "d": dumb_round(self.rect.height),
                     "h": h,
@@ -264,8 +264,8 @@ class RectOp(AvaraOperation):
             else:
                 context.update(
                     {
-                        "x": dumb_round(self.rect.left),
-                        "z": dumb_round(self.rect.top),
+                        "x": dumb_round(self.rect.center.x),
+                        "z": dumb_round(self.rect.center.y),
                         "w": dumb_round(self.rect.width),
                         "d": dumb_round(self.rect.height),
                         "h": h,

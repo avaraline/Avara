@@ -41,11 +41,11 @@
   <Dome hasFloor="true" fill="#003333" frame="#000000" cx="70.625" cz="58.75" r="5.625" angle="90" extent="90" />
   <Teleporter destGroup="2" shape="bspFloorFrame" scale=".4" y="-13" activeRange="1" fill="#003333" frame="#000000" cx="70.625" cz="58.75" r="5.625" angle="90" extent="90" />
   <set wallHeight="0" />
-  <Wall fill="#003333" frame="#000000" x="43.75" z="31.875" w="32.5" d="32.5" h="0" y="-8" />
-  <Wall fill="#003333" frame="#000000" x="38.125" z="26.25" w="11.875" d="11.875" h="0" y="-13" />
-  <Wall fill="#003333" frame="#000000" x="70" z="26.25" w="11.875" d="11.875" h="0" y="-13" />
-  <Wall fill="#003333" frame="#000000" x="70" z="58.125" w="11.875" d="11.875" h="0" y="-13" />
-  <Wall fill="#003333" frame="#000000" x="38.125" z="58.125" w="11.875" d="11.875" h="0" y="-13" />
+  <Wall fill="#003333" frame="#000000" x="60" z="48.125" w="32.5" d="32.5" h="0" y="-8" />
+  <Wall fill="#003333" frame="#000000" x="44.0625" z="32.1875" w="11.875" d="11.875" h="0" y="-13" />
+  <Wall fill="#003333" frame="#000000" x="75.9375" z="32.1875" w="11.875" d="11.875" h="0" y="-13" />
+  <Wall fill="#003333" frame="#000000" x="75.9375" z="64.0625" w="11.875" d="11.875" h="0" y="-13" />
+  <Wall fill="#003333" frame="#000000" x="44.0625" z="64.0625" w="11.875" d="11.875" h="0" y="-13" />
   <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="45.625" cz="70" r="7.5" angle="180" extent="90" />
   <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="38.125" cz="62.5" r="7.5" angle="180" extent="90" />
   <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="38.125" cz="33.75" r="7.5" angle="270" extent="90" />
