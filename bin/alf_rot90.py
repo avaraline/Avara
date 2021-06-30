@@ -20,13 +20,8 @@ if __name__ == '__main__':
             w = float(child.attrib.get('w', 0))
             d = float(child.attrib.get('d', 0))
 
-            center_x = x + (w / 2)
-            center_z = z + (d / 2)
-
-            child.attrib['x'] = dumb_round(center_z - (d / 2))
-            child.attrib['z'] = dumb_round((-1 * center_x) - (w / 2))
-            child.attrib['w'] = str(d)
-            child.attrib['d'] = str(w)
+            child.attrib['x'] = dumb_round(z)
+            child.attrib['z'] = dumb_round(-1 * x)
         if 'cx' in child.attrib or 'cz' in child.attrib or 'angle' in child.attrib:
             cx = float(child.attrib.get('cx', 0))
             cz = float(child.attrib.get('cz', 0))
