@@ -93,10 +93,10 @@
 
   <Teleporter y="-10" activeRange="150" deadRange="96" group="@bubble" destGroup="@recenter" shape="0" fill="#fcf305" frame="#000000" cx="0" cz="0" r="1.875" angle="180" extent="90" />
   <Teleporter y="200" activeRange="2000" shape="0" win="1000" start="@winTeam" fill="#fcf305" frame="#000000" cx="0" cz="0" r="1.875" angle="180" extent="90" />
-  <Teleporter y="25" group="@recenter" shape="0" fill="#fcf305" frame="#000000" cx="-25" cz="-5" r="1.875" angle="225" extent="90" />
-  <Teleporter y="25" group="@recenter" shape="0" fill="#fcf305" frame="#000000" cx="25" cz="5" r="1.875" angle="45" extent="90" />
-  <Teleporter y="25" group="@recenter" shape="0" fill="#fcf305" frame="#000000" cx="5" cz="25" r="1.875" angle="135" extent="90" />
-  <Teleporter y="25" group="@recenter" shape="0" fill="#fcf305" frame="#000000" cx="-5" cz="-25" r="1.875" angle="315" extent="90" />
+  <Teleporter y="25" group="@recenter" mask="0" shape="0" fill="#fcf305" frame="#000000" cx="-25" cz="-5" r="1.875" angle="225" extent="90" />
+  <Teleporter y="25" group="@recenter" mask="0" shape="0" fill="#fcf305" frame="#000000" cx="25" cz="5" r="1.875" angle="45" extent="90" />
+  <Teleporter y="25" group="@recenter" mask="0" shape="0" fill="#fcf305" frame="#000000" cx="5" cz="25" r="1.875" angle="135" extent="90" />
+  <Teleporter y="25" group="@recenter" mask="0" shape="0" fill="#fcf305" frame="#000000" cx="-5" cz="-25" r="1.875" angle="315" extent="90" />
 
   <Incarnator y="8" fill="#008011" frame="#000000" cx="-50" cz="0" r="2.5" angle="225" extent="90" />
   <Incarnator y="8" fill="#008011" frame="#000000" cx="50" cz="0" r="2.5" angle="45" extent="90" />

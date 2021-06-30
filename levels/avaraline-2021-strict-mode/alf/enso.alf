@@ -68,8 +68,8 @@
 
   <Teleporter group="-1" y="-30" activeRange="41 * 5" deadRange="21 * 5" destGroup="@recenter" shape="0" spin="false" fill="#f5fdfd" frame="#000000" cx="0" cz="0" r="1.875" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#f5fdfd" frame="#000000" cx="0" cz="0" r="1.875" angle="180" extent="90" />
-  <Teleporter group="@recenter" y="25" shape="0" spin="true" fill="#f5fdfd" frame="#000000" cx="0" cz="30" r="1.875" angle="180" extent="90" />
-  <Teleporter group="@recenter" y="25" shape="0" spin="true" fill="#f5fdfd" frame="#000000" cx="0" cz="-30" r="1.875" angle="180" extent="90" />
+  <Teleporter group="@recenter" mask="0" y="25" shape="0" spin="true" fill="#f5fdfd" frame="#000000" cx="0" cz="30" r="1.875" angle="180" extent="90" />
+  <Teleporter group="@recenter" mask="0" y="25" shape="0" spin="true" fill="#f5fdfd" frame="#000000" cx="0" cz="-30" r="1.875" angle="180" extent="90" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#d7f0fd" frame="#000000" cx="0" cz="12.5" r="1.875" angle="90" extent="90" />
