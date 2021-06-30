@@ -37,12 +37,12 @@ small." />
   <SkyColor fill="#000000" frame="#000000" />
   <GroundColor fill="#000000" frame="#000000" />
   <set gravity="0.25" floorTemplate="bspFloorFrame" baseHeight="500" wallHeight="0" wallYon="100" />
-  <Wall fill="#ff0000" frame="#000000" x="31.736111111111114" z="31.041666666666668" w="70" d="70" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="66.73611111111111" z="66.04166666666667" w="70" d="70" h="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="506" wallHeight="0" wallYon="100" />
-  <Wall fill="#ffffff" frame="#000000" x="41.736111111111114" z="41.04166666666667" w="50" d="50" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="66.73611111111111" z="66.04166666666667" w="50" d="50" h="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="512" wallHeight="0" wallYon="100" />
-  <Wall fill="#0066ff" frame="#000000" x="51.66666666666667" z="51.111111111111114" w="30" d="30" h="0" />
+  <Wall fill="#0066ff" frame="#000000" x="66.66666666666667" z="66.11111111111111" w="30" d="30" h="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="518" wallHeight="0" wallYon="100" />
-  <Wall fill="#008800" frame="#000000" x="61.66666666666667" z="61.04166666666667" w="10" d="10" h="0" />
+  <Wall fill="#008800" frame="#000000" x="66.66666666666667" z="66.04166666666667" w="10" d="10" h="0" />
   <Solid shape="bspSphere" scale=".25" y="540" fill="#0066ff" frame="#000000" cx="115.625" cz="130.41666666666669" r="3.4027777777777786" angle="180" extent="90" />
 </map>

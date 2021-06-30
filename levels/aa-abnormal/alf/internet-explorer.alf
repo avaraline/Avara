@@ -10,21 +10,21 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Timer in="@start" wait="90" out="@open1" fill="#777777" frame="#0099ff" cx="212.1527777777778" cz="273.40277777777777" r="2.5" angle="0" extent="180" />
   <Timer in="@open1" wait="90" out="@close1" fill="#777777" frame="#0099ff" cx="212.1527777777778" cz="273.40277777777777" r="2.5" angle="0" extent="180" />
   <Timer in="@close1" wait="90" out="@open1" fill="#777777" frame="#0099ff" cx="212.1527777777778" cz="273.40277777777777" r="2.5" angle="0" extent="180" />
-  <Wall fill="#444444" frame="#000000" x="263.95833333333337" z="217.70833333333334" w="30" d="30" h="50" />
-  <WallDoor open="@open" close="@close" deltaY="0" deltaZ="-25" deltaX="-25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="268.95833333333337" z="247.70833333333334" w="20" d="20" h="3" y="47" />
-  <Wall fill="#555555" frame="#000000" x="263.95833333333337" z="267.70833333333337" w="30" d="30" h="50" />
-  <Wall fill="#555555" frame="#000000" x="263.95833333333337" z="167.70833333333334" w="30" d="30" h="50" />
-  <Wall fill="#555555" frame="#000000" x="313.95833333333337" z="217.70833333333334" w="30" d="30" h="50" />
-  <Wall fill="#555555" frame="#000000" x="213.95833333333334" z="217.70833333333334" w="30" d="30" h="50" />
-  <Wall fill="#555555" frame="#000000" x="213.95833333333334" z="167.70833333333334" w="30" d="30" h="50" />
-  <Wall fill="#555555" frame="#000000" x="313.95833333333337" z="167.70833333333334" w="30" d="30" h="50" />
-  <WallDoor open="@open1" close="@close1" deltaY="0" deltaZ="-25" deltaX="-25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="318.95833333333337" z="197.70833333333334" w="20" d="20" h="3" y="47" />
-  <WallDoor open="@open1" close="@close1" deltaY="0" deltaZ="-25" deltaX="-25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="243.95833333333334" z="272.70833333333337" w="20" d="20" h="3" y="47" />
-  <Wall fill="#555555" frame="#000000" x="213.95833333333334" z="267.70833333333337" w="30" d="30" h="50" />
-  <WallDoor open="@open1" close="@close1" deltaY="0" deltaZ="-25" deltaX="25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="293.95833333333337" z="272.70833333333337" w="20" d="20" h="3" y="47" />
-  <Wall fill="#555555" frame="#000000" x="313.95833333333337" z="267.70833333333337" w="30" d="30" h="50" />
-  <WallDoor open="@open1" close="@close1" deltaY="0" deltaZ="-25" deltaX="25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="218.95833333333334" z="197.70833333333334" w="20" d="20" h="3" y="47" />
-  <WallDoor open="@open" close="@close" deltaY="0" deltaZ="-25" deltaX="-25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="293.95833333333337" z="222.70833333333334" w="20" d="20" h="3" y="47" />
+  <Wall fill="#444444" frame="#000000" x="278.95833333333337" z="232.70833333333334" w="30" d="30" h="50" />
+  <WallDoor open="@open" close="@close" deltaY="0" deltaZ="-25" deltaX="-25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="278.95833333333337" z="257.70833333333337" w="20" d="20" h="3" y="47" />
+  <Wall fill="#555555" frame="#000000" x="278.95833333333337" z="282.70833333333337" w="30" d="30" h="50" />
+  <Wall fill="#555555" frame="#000000" x="278.95833333333337" z="182.70833333333334" w="30" d="30" h="50" />
+  <Wall fill="#555555" frame="#000000" x="328.95833333333337" z="232.70833333333334" w="30" d="30" h="50" />
+  <Wall fill="#555555" frame="#000000" x="228.95833333333334" z="232.70833333333334" w="30" d="30" h="50" />
+  <Wall fill="#555555" frame="#000000" x="228.95833333333334" z="182.70833333333334" w="30" d="30" h="50" />
+  <Wall fill="#555555" frame="#000000" x="328.95833333333337" z="182.70833333333334" w="30" d="30" h="50" />
+  <WallDoor open="@open1" close="@close1" deltaY="0" deltaZ="-25" deltaX="-25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="328.95833333333337" z="207.70833333333334" w="20" d="20" h="3" y="47" />
+  <WallDoor open="@open1" close="@close1" deltaY="0" deltaZ="-25" deltaX="-25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="253.95833333333337" z="282.70833333333337" w="20" d="20" h="3" y="47" />
+  <Wall fill="#555555" frame="#000000" x="228.95833333333334" z="282.70833333333337" w="30" d="30" h="50" />
+  <WallDoor open="@open1" close="@close1" deltaY="0" deltaZ="-25" deltaX="25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="303.95833333333337" z="282.70833333333337" w="20" d="20" h="3" y="47" />
+  <Wall fill="#555555" frame="#000000" x="328.95833333333337" z="282.70833333333337" w="30" d="30" h="50" />
+  <WallDoor open="@open1" close="@close1" deltaY="0" deltaZ="-25" deltaX="25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="228.95833333333334" z="207.70833333333334" w="20" d="20" h="3" y="47" />
+  <WallDoor open="@open" close="@close" deltaY="0" deltaZ="-25" deltaX="-25" yaw="90" openSpeed="100" closeSpeed="100" guardDelay="0" volume="2" fill="#999999" frame="#000000" r="2.5" cx="212.1527777777778" cz="273.40277777777777" angle="0" extent="180" x="303.95833333333337" z="232.70833333333334" w="20" d="20" h="3" y="47" />
   <Teleporter y="0" shape="bspFloorFrame" scale="0.25" group="@leftPort" fill="#ffffff" frame="#000000" cx="253.95833333333334" cz="207.70833333333334" r="1.875" angle="90" extent="90" />
   <Teleporter y="0" shape="bspFloorFrame" scale="0.25" group="@suckPort" fill="#ffffff" frame="#000000" cx="303.95833333333337" cz="257.70833333333337" r="1.875" angle="90" extent="90" />
   <Teleporter y="0" shape="bspFloorFrame" scale="0.25" group="@rightPort" fill="#ffffff" frame="#000000" cx="303.95833333333337" cz="207.70833333333334" r="1.875" angle="90" extent="90" />
@@ -86,9 +86,9 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Walker team="6" defaultLives="0" fill="#ffffff" frame="#000000" cx="177.08333333333334" cz="539.8611111111111" r="1.25" angle="0" extent="90" />
   <Walker team="6" defaultLives="0" fill="#ffffff" frame="#000000" cx="177.08333333333334" cz="539.8611111111111" r="1.25" angle="0" extent="90" />
   <Walker team="6" defaultLives="0" fill="#ffffff" frame="#000000" cx="177.08333333333334" cz="539.8611111111111" r="1.25" angle="0" extent="90" />
-  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff33" frame="#000000" r="1.25" cx="177.08333333333334" cz="539.8611111111111" angle="0" extent="90" x="267.70833333333337" z="221.45833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
-  <Field deltaY="0" mask="T1" stop="@sixteen" start="@fifteen" enter="@team1" fill="#00ee00" frame="#000000" r="1.25" cx="177.08333333333334" cz="539.8611111111111" angle="0" extent="90" x="267.70833333333337" z="221.45833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
-  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff6666" frame="#000000" r="1.25" cx="177.08333333333334" cz="539.8611111111111" angle="0" extent="90" x="267.70833333333337" z="221.45833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
+  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff33" frame="#000000" r="1.25" cx="177.08333333333334" cz="539.8611111111111" angle="0" extent="90" x="278.95833333333337" z="232.70833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
+  <Field deltaY="0" mask="T1" stop="@sixteen" start="@fifteen" enter="@team1" fill="#00ee00" frame="#000000" r="1.25" cx="177.08333333333334" cz="539.8611111111111" angle="0" extent="90" x="278.95833333333337" z="232.70833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
+  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff6666" frame="#000000" r="1.25" cx="177.08333333333334" cz="539.8611111111111" angle="0" extent="90" x="278.95833333333337" z="232.70833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
   <Timer in.0="@start" in.1="@fifteen" wait="15" out.0="@fifteen" fill="#ffcccc" frame="#000000" cx="605.1736111111111" cz="159.65277777777777" r="1.2847222222222285" angle="0" extent="90" />
   <Timer in="@fifteen" wait="1" out="@sixteen" fill="#ffcccc" frame="#000000" cx="605.1736111111111" cz="159.65277777777777" r="1.2847222222222285" angle="0" extent="90" />
   <Timer in="@fifteen" wait="10" out.0="@greenClose" out.1="@yellowClose" out.2="@redClose" fill="#ffcccc" frame="#000000" cx="605.1736111111111" cz="159.65277777777777" r="1.2847222222222285" angle="0" extent="90" />
@@ -133,12 +133,12 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="588.9583333333334" cz="226.73611111111111" r="2.5" angle="0" extent="90" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="588.9583333333334" cz="226.73611111111111" r="2.5" angle="0" extent="90" />
   <Timer in.0="@greenWins" in.1="@yellowWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" fill="#ffffff" frame="#000000" cx="588.9583333333334" cz="226.73611111111111" r="2.5" angle="0" extent="90" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" r="2.5" cx="588.9583333333334" cz="226.73611111111111" angle="0" extent="90" x="625.2083333333334" z="553.6111111111111" w="2.5" d="1.25" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ee00" frame="#000000" r="2.5" cx="588.9583333333334" cz="226.73611111111111" angle="0" extent="90" x="602.7083333333334" z="553.6111111111111" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" r="2.5" cx="588.9583333333334" cz="226.73611111111111" angle="0" extent="90" x="626.4583333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ee00" frame="#000000" r="2.5" cx="588.9583333333334" cz="226.73611111111111" angle="0" extent="90" x="603.9583333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
   <Walker lives="kDefaultLives" team="1" y="70" fill="#ffffff" frame="#000000" cx="338.95833333333337" cz="237.29166666666669" r="1.25" angle="45" extent="90" />
   <Walker lives="kDefaultLives" team="1" y="70" fill="#ffffff" frame="#000000" cx="338.95833333333337" cz="227.29166666666669" r="1.25" angle="45" extent="90" />
   <Walker lives="kDefaultLives" team="1" y="70" fill="#ffffff" frame="#000000" cx="338.95833333333337" cz="232.29166666666669" r="1.25" angle="45" extent="90" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff00" frame="#000000" r="1.25" cx="338.95833333333337" cz="232.29166666666669" angle="45" extent="90" x="613.9583333333334" z="553.6111111111111" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff00" frame="#000000" r="1.25" cx="338.95833333333337" cz="232.29166666666669" angle="45" extent="90" x="615.2083333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
   <Counter in="@add1Yellow" n="10" out="@yellowAt10" restart="false" fill="#ffcccc" frame="#000000" cx="576.4583333333334" cz="158.61111111111111" r="1.25" angle="90" extent="90" />
   <Counter in="@add1Yellow" n="20" out="@yellowAt20" restart="false" fill="#ffcccc" frame="#000000" cx="576.4583333333334" cz="158.61111111111111" r="1.25" angle="90" extent="90" />
   <Counter in="@add1Yellow" n="30" out="@yellowAt30" restart="false" fill="#ffcccc" frame="#000000" cx="576.4583333333334" cz="158.61111111111111" r="1.25" angle="90" extent="90" />
@@ -175,11 +175,11 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Text sound="kSnText" volume="kTextVolume" in="@redAt70" showEveryone="true" mask="T3" text="Red team has 70 seconds!" fill="#ffcccc" frame="#000000" cx="556.4583333333334" cz="159.86111111111111" r="1.25" angle="0" extent="90" />
   <Text sound="kSnText" volume="kTextVolume" in="@redAt80" showEveryone="true" mask="T3" text="Red team has 80 seconds!" fill="#ffcccc" frame="#000000" cx="556.4583333333334" cz="159.86111111111111" r="1.25" angle="0" extent="90" />
   <Text sound="kSnText" volume="kTextVolume" in="@redAt90" showEveryone="true" text="Red team has only 10 seconds to go!" fill="#ffcccc" frame="#000000" cx="556.4583333333334" cz="159.86111111111111" r="1.25" angle="0" extent="90" />
-  <Wall fill="#222222" frame="#000000" x="265.20833333333337" z="218.95833333333334" w="27.5" d="27.5" h="0.25" y="50" />
-  <Wall fill="#ff0000" frame="#000000" x="267.70833333333337" z="221.45833333333334" w="21.875" d="0.625" h="0.25" y="50.25" />
-  <Wall fill="#ff0000" frame="#000000" x="289.58333333333337" z="221.45833333333334" w="0.625" d="21.875" h="0.25" y="50.25" />
-  <Wall fill="#ff0000" frame="#000000" x="268.33333333333337" z="243.33333333333334" w="21.875" d="0.625" h="0.25" y="50.25" />
-  <Wall fill="#ff0000" frame="#000000" x="267.70833333333337" z="222.08333333333334" w="0.625" d="21.875" h="0.25" y="50.25" />
+  <Wall fill="#222222" frame="#000000" x="278.95833333333337" z="232.70833333333334" w="27.5" d="27.5" h="0.25" y="50" />
+  <Wall fill="#ff0000" frame="#000000" x="278.64583333333337" z="221.77083333333334" w="21.875" d="0.625" h="0.25" y="50.25" />
+  <Wall fill="#ff0000" frame="#000000" x="289.89583333333337" z="232.39583333333334" w="0.625" d="21.875" h="0.25" y="50.25" />
+  <Wall fill="#ff0000" frame="#000000" x="279.27083333333337" z="243.64583333333334" w="21.875" d="0.625" h="0.25" y="50.25" />
+  <Wall fill="#ff0000" frame="#000000" x="268.02083333333337" z="233.02083333333334" w="0.625" d="21.875" h="0.25" y="50.25" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="285.83333333333337" cz="232.70833333333334" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="285.83333333333337" cz="232.70833333333334" r="1.25" angle="180" extent="90" />

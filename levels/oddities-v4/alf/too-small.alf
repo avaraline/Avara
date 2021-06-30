@@ -15,10 +15,10 @@
   <Incarnator start="@inc[4]on" stop="@inc[4]off" y="9" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
   <Incarnator start="@inc[5]on" stop="@inc[5]off" y="12" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
   <Incarnator start="@inc[6]on" stop="@inc[6]off" y="15" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
-  <Wall fill="#9900cc" frame="#000000" x="12.361111111111112" z="10.48611111111111" w="4.375" d="0.625" h="0" />
-  <Wall fill="#9900cc" frame="#000000" x="11.736111111111112" z="11.11111111111111" w="0.625" d="4.375" h="0" />
-  <Wall fill="#9900cc" frame="#000000" x="16.73611111111111" z="11.11111111111111" w="0.625" d="4.375" h="0" />
-  <Wall fill="#9900cc" frame="#000000" x="12.361111111111112" z="15.486111111111112" w="4.375" d="0.625" h="0" />
+  <Wall fill="#9900cc" frame="#000000" x="14.54861111111111" z="10.79861111111111" w="4.375" d="0.625" h="0" />
+  <Wall fill="#9900cc" frame="#000000" x="12.048611111111112" z="13.29861111111111" w="0.625" d="4.375" h="0" />
+  <Wall fill="#9900cc" frame="#000000" x="17.04861111111111" z="13.29861111111111" w="0.625" d="4.375" h="0" />
+  <Wall fill="#9900cc" frame="#000000" x="14.54861111111111" z="15.79861111111111" w="4.375" d="0.625" h="0" />
   <unique vars="mGShow mMShow mBShow mSound" />
   <Goody shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" missiles="1" volume="0" start="mMShow" out="mGShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="180" extent="270" />
   <Goody shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" grenades="1" volume="0" start="mGShow" out="mBShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="180" extent="270" />

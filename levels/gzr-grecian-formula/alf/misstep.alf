@@ -1,24 +1,24 @@
 <map>
-  <Field deltaY="0" deltaZ=".3" visible="false" fill="#00ccff" frame="#000000" x="67.43055555555556" z="24.23611111111111" w="25" d="3.125" h="0" />
-  <Field deltaY="0" deltaZ=".3" visible="false" fill="#00ccff" frame="#000000" x="92.43055555555556" z="24.23611111111111" w="25" d="3.125" h="0" />
-  <Field deltaY="0" deltaZ="-.3" visible="false" fill="#00ccff" frame="#000000" x="67.43055555555556" z="96.18055555555556" w="25" d="3.125" h="0" />
-  <Field deltaY="0" deltaZ="-.3" visible="false" fill="#00ccff" frame="#000000" x="92.43055555555556" z="96.18055555555556" w="25" d="3.125" h="0" />
+  <Field deltaY="0" deltaZ=".3" visible="false" fill="#00ccff" frame="#000000" x="79.93055555555556" z="25.79861111111111" w="25" d="3.125" h="0" />
+  <Field deltaY="0" deltaZ=".3" visible="false" fill="#00ccff" frame="#000000" x="104.93055555555556" z="25.79861111111111" w="25" d="3.125" h="0" />
+  <Field deltaY="0" deltaZ="-.3" visible="false" fill="#00ccff" frame="#000000" x="79.93055555555556" z="97.74305555555556" w="25" d="3.125" h="0" />
+  <Field deltaY="0" deltaZ="-.3" visible="false" fill="#00ccff" frame="#000000" x="104.93055555555556" z="97.74305555555556" w="25" d="3.125" h="0" />
   <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br44" spin="0" fill="#000000" frame="#000000" cx="103.05555555555556" cz="94.30555555555556" r="3.75" angle="60" extent="60" />
   <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by44" spin="0" fill="#000000" frame="#000000" cx="103.05555555555556" cz="94.30555555555556" r="3.75" angle="60" extent="60" />
   <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@wr43" spin="0" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="84.30555555555556" r="3.75" angle="60" extent="60" />
   <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@wy43" spin="0" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="84.30555555555556" r="3.75" angle="60" extent="60" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="97.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="102.43055555555556" z="94.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="67.43055555555556" z="24.305555555555557" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
   <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br12" spin="0" fill="#000000" frame="#000000" cx="72.43055555555556" cz="49.30555555555556" r="3.75" angle="60" extent="60" />
   <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by12" spin="0" fill="#000000" frame="#000000" cx="72.43055555555556" cz="49.30555555555556" r="3.75" angle="60" extent="60" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="67.43055555555556" z="44.236111111111114" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="49.236111111111114" w="10" d="10" h="0" />
   <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br13" spin="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="69.30555555555556" r="3.75" angle="60" extent="60" />
   <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by13" spin="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="69.30555555555556" r="3.75" angle="60" extent="60" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="67.43055555555556" z="64.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" fill="#ffffff" frame="#000000" cx="62.465277777777786" cz="59.270833333333336" r="1.3541666666666679" angle="180" extent="90" />
   <Timer in="mTaken1" out="mShow1" wait="50" fill="#ffffff" frame="#000000" cx="62.465277777777786" cz="59.270833333333336" r="1.3541666666666679" angle="180" extent="90" />
@@ -90,37 +90,37 @@
   <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br21" spin="0" fill="#000000" frame="#000000" cx="82.43055555555556" cz="34.30555555555556" r="3.75" angle="60" extent="60" />
   <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by21" spin="0" fill="#000000" frame="#000000" cx="82.43055555555556" cz="34.30555555555556" r="3.75" angle="60" extent="60" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="87.43055555555556" z="24.305555555555557" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="92.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="77.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="82.43055555555556" z="34.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="77.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="82.43055555555556" z="74.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="107.43055555555556" z="44.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="112.43055555555556" z="49.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="107.43055555555556" z="64.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="112.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="107.43055555555556" z="84.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="112.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="87.43055555555556" z="44.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="92.43055555555556" z="49.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="87.43055555555556" z="64.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="92.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="87.43055555555556" z="84.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="92.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="67.43055555555556" z="84.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="97.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="102.43055555555556" z="34.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="97.43055555555556" z="49.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="102.43055555555556" z="54.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="97.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="102.43055555555556" z="74.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="77.43055555555556" z="49.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="82.43055555555556" z="54.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="107.43055555555556" z="24.305555555555557" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="112.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="77.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="82.43055555555556" z="94.30555555555556" w="10" d="10" h="0" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="5" fill="#ffff33" frame="#000000" cx="136.80555555555557" cz="65.48611111111111" r="3.2638888888888857" angle="60" extent="60" />
   <Incarnator y="10" mask="T2" fill="#ffff33" frame="#000000" cx="136.80555555555557" cz="65.48611111111111" r="3.2638888888888857" angle="60" extent="60" />
   <Teleporter shape="0" y="15" mask="T2" group="@yellowstart" spin="0" fill="#ffff33" frame="#000000" cx="136.80555555555557" cz="65.48611111111111" r="3.2638888888888857" angle="60" extent="60" />
@@ -185,27 +185,27 @@
   <SkyColor fill="#ffff33" frame="#00ccff" />
   <GroundColor fill="#000000" frame="#000000" />
   <set wallHeight=".1" />
-  <Wall fill="#ff0000" frame="#000000" x="58.05555555555556" z="54.93055555555556" w="8.75" d="8.75" h="0" />
+  <Wall fill="#ff0000" frame="#000000" x="62.43055555555556" z="59.30555555555556" w="8.75" d="8.75" h="0" />
   <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T2" group="@yellow" destGroup="@yellow" out="@add1Yellow" fill="#000000" frame="#000000" cx="10.45138888888889" cz="1.840277777777778" r="3.9930555555555554" angle="1" extent="359" />
   <set wallHeight=".1" />
-  <Wall fill="#ffff00" frame="#000000" x="118.05555555555556" z="54.93055555555556" w="8.75" d="8.75" h="0" />
+  <Wall fill="#ffff00" frame="#000000" x="122.43055555555556" z="59.30555555555556" w="8.75" d="8.75" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#00ccff" frame="#000000" x="36.80555555555556" z="23.680555555555557" w="116.25" d="0.625" h="0" />
+  <Wall fill="#00ccff" frame="#000000" x="94.93055555555557" z="23.993055555555557" w="116.25" d="0.625" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#00ccff" frame="#000000" x="36.80555555555556" z="99.30555555555556" w="116.25" d="0.625" h="0" />
+  <Wall fill="#00ccff" frame="#000000" x="94.93055555555557" z="99.61805555555556" w="116.25" d="0.625" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#00ccff" frame="#000000" x="36.80555555555556" z="24.305555555555557" w="0.625" d="75" h="0" />
+  <Wall fill="#00ccff" frame="#000000" x="37.11805555555556" z="61.80555555555556" w="0.625" d="75" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#00ccff" frame="#000000" x="152.43055555555557" z="24.305555555555557" w="0.625" d="75" h="0" />
+  <Wall fill="#00ccff" frame="#000000" x="152.74305555555557" z="61.80555555555556" w="0.625" d="75" h="0" />
   <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T3" group="@red" destGroup="@red" out="@add1Red" fill="#000000" frame="#000000" cx="122.43055555555556" cz="59.30555555555556" r="4.375" angle="1" extent="359" />
   <set wallYon=".001" />
-  <Wall fill="#00ccff" frame="#000000" x="32.43055555555556" z="19.305555555555557" w="125" d="4.375" h="20" />
+  <Wall fill="#00ccff" frame="#000000" x="94.93055555555557" z="21.493055555555557" w="125" d="4.375" h="20" />
   <set wallYon=".001" />
-  <Wall fill="#00ccff" frame="#000000" x="32.43055555555556" z="99.93055555555556" w="125" d="4.375" h="20" />
+  <Wall fill="#00ccff" frame="#000000" x="94.93055555555557" z="102.11805555555556" w="125" d="4.375" h="20" />
   <set wallYon=".001" />
-  <Wall fill="#00ccff" frame="#000000" x="153.05555555555557" z="23.680555555555557" w="4.375" d="76.25" h="20" />
+  <Wall fill="#00ccff" frame="#000000" x="155.24305555555557" z="61.80555555555556" w="4.375" d="76.25" h="20" />
   <set wallYon=".001" />
-  <Wall fill="#00ccff" frame="#000000" x="32.43055555555556" z="23.680555555555557" w="4.375" d="76.25" h="20" />
+  <Wall fill="#00ccff" frame="#000000" x="34.61805555555556" z="61.80555555555556" w="4.375" d="76.25" h="20" />
   <Teleporter shape="0" y="30" mask="T2" group="@yellowback" spin="0" fill="#000000" frame="#000000" cx="148.05555555555557" cz="27.708333333333336" r="3.75" angle="30" extent="60" />
   <Teleporter shape="0" y="30" mask="T3" group="@redback" spin="0" fill="#000000" frame="#000000" cx="41.736111111111114" cz="27.36111111111111" r="3.75" angle="270" extent="60" />
   <Teleporter shape="0" y="30" mask="T2" group="@yellowback" spin="0" fill="#000000" frame="#000000" cx="148.05555555555557" cz="96.18055555555556" r="3.75" angle="90" extent="60" />

@@ -7,7 +7,7 @@
   <Incarnator y="2" fill="#0000ff" frame="#000000" cx="81.25" cz="68.125" r="1.875" angle="270" extent="90" />
   <Incarnator y="16" fill="#0000ff" frame="#000000" cx="81.25" cz="68.125" r="1.875" angle="270" extent="90" />
   <set wallHeight="6.5" />
-  <Wall fill="#ccff00" frame="#000000" x="81.875" z="68.75" w="16.875" d="16.875" h="0" />
+  <Wall fill="#ccff00" frame="#000000" x="90.3125" z="77.1875" w="16.875" d="16.875" h="0" />
   <Incarnator y="2" fill="#0000ff" frame="#000000" cx="99.375" cz="68.125" r="1.875" angle="0" extent="90" />
   <Incarnator y="16" fill="#0000ff" frame="#000000" cx="99.375" cz="68.125" r="1.875" angle="0" extent="90" />
   <Incarnator y="2" fill="#0000ff" frame="#000000" cx="99.375" cz="86.25" r="1.875" angle="90" extent="90" />
@@ -15,19 +15,19 @@
   <Incarnator y="2" fill="#0000ff" frame="#000000" cx="81.25" cz="86.25" r="1.875" angle="180" extent="90" />
   <Incarnator y="16" fill="#0000ff" frame="#000000" cx="81.25" cz="86.25" r="1.875" angle="180" extent="90" />
   <set baseHeight="6.5" />
-  <Wall fill="#ccff00" frame="#000000" x="68.75" z="55.625" w="16.875" d="16.875" h="0" />
-  <Wall fill="#ccff00" frame="#000000" x="68.75" z="81.875" w="16.875" d="16.875" h="0" />
-  <Wall fill="#ccff00" frame="#000000" x="95" z="81.875" w="16.875" d="16.875" h="0" />
-  <Wall fill="#ccff00" frame="#000000" x="95" z="55.625" w="16.875" d="16.875" h="0" />
+  <Wall fill="#ccff00" frame="#000000" x="77.1875" z="64.0625" w="16.875" d="16.875" h="0" />
+  <Wall fill="#ccff00" frame="#000000" x="77.1875" z="90.3125" w="16.875" d="16.875" h="0" />
+  <Wall fill="#ccff00" frame="#000000" x="103.4375" z="90.3125" w="16.875" d="16.875" h="0" />
+  <Wall fill="#ccff00" frame="#000000" x="103.4375" z="64.0625" w="16.875" d="16.875" h="0" />
   <set baseHeight="0" />
-  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="68.75" z="98.75" w="16.875" d="35.625" h="0" r="8.611111111111114" angle="355" extent="10" />
-  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="95" z="98.75" w="16.875" d="35.625" h="0" r="8.611111111111114" angle="355" extent="10" />
-  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="95" z="20" w="16.875" d="35.625" h="0" r="8.611111111111114" angle="175" extent="10" />
-  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="68.75" z="20" w="16.875" d="35.625" h="0" r="8.611111111111114" angle="175" extent="10" />
-  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="33.125" z="55.625" w="35.625" d="16.875" h="0" r="8.61111111111111" angle="85" extent="10" />
-  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="33.125" z="81.875" w="35.625" d="16.875" h="0" r="8.611111111111114" angle="85" extent="10" />
-  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="111.875" z="55.625" w="35.625" d="16.875" h="0" r="8.61111111111111" angle="265" extent="10" />
-  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="111.875" z="81.875" w="35.625" d="16.875" h="0" r="8.611111111111114" angle="265" extent="10" />
+  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="77.1875" z="116.5625" w="16.875" d="35.625" h="0" r="8.611111111111114" angle="355" extent="10" />
+  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="103.4375" z="116.5625" w="16.875" d="35.625" h="0" r="8.611111111111114" angle="355" extent="10" />
+  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="103.4375" z="37.8125" w="16.875" d="35.625" h="0" r="8.611111111111114" angle="175" extent="10" />
+  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="77.1875" z="37.8125" w="16.875" d="35.625" h="0" r="8.611111111111114" angle="175" extent="10" />
+  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="50.9375" z="64.0625" w="35.625" d="16.875" h="0" r="8.61111111111111" angle="85" extent="10" />
+  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="50.9375" z="90.3125" w="35.625" d="16.875" h="0" r="8.611111111111114" angle="85" extent="10" />
+  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="129.6875" z="64.0625" w="35.625" d="16.875" h="0" r="8.61111111111111" angle="265" extent="10" />
+  <Ramp deltaY="13" fill="#ccff33" frame="#ffff33" x="129.6875" z="90.3125" w="35.625" d="16.875" h="0" r="8.611111111111114" angle="265" extent="10" />
   <Teleporter activeRange="2000" deadRange="110" y="70" shape="false" destGroup="2" fill="#ffcc66" frame="#000000" cx="89.58333333333334" cz="77.43055555555556" r="1.875" angle="270" extent="90" />
   <Teleporter activeRange="0" deadRange="1" y="60" shape="false" group="2" fill="#ffcc66" frame="#000000" cx="89.58333333333334" cz="77.43055555555556" r="1.875" angle="270" extent="90" />
   <Hologram y="6.5" fill="#ffcc66" frame="#000000" cx="89.58333333333334" cz="77.43055555555556" r="1.875" angle="270" extent="90" />

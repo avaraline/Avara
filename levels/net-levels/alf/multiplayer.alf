@@ -13,20 +13,20 @@
   <Incarnator mask="allTeams" fill="#66cccc" frame="#000000" cx="2.361111111111111" cz="69.0625" r="1.25" angle="244" extent="52" />
   <SkyColor n="16" fill="#ff9966" frame="#0099ff" />
   <GroundColor fill="#555555" frame="#0099ff" />
-  <Wall fill="#008800" frame="#000000" x="26.73611111111111" z="59.861111111111114" w="5" d="25" h="0" />
-  <Wall fill="#663399" frame="#000000" x="36.736111111111114" z="54.861111111111114" w="5" d="5" h="0" />
-  <Wall fill="#990066" frame="#000000" x="51.736111111111114" z="49.861111111111114" w="15" d="15" h="0" />
+  <Wall fill="#008800" frame="#000000" x="29.236111111111114" z="72.36111111111111" w="5" d="25" h="0" />
+  <Wall fill="#663399" frame="#000000" x="39.236111111111114" z="57.361111111111114" w="5" d="5" h="0" />
+  <Wall fill="#990066" frame="#000000" x="59.236111111111114" z="57.361111111111114" w="15" d="15" h="0" />
   <Teleporter group="0" start="0" speed="0.5" shape="bspAvara" y="5" showAlways="true" fill="#663399" frame="#000000" cx="59.895833333333336" cz="57.88194444444444" r="2.4652777777777786" angle="135" extent="180" />
-  <Wall fill="#008800" frame="#000000" x="26.73611111111111" z="29.86111111111111" w="5" d="25" h="0" />
-  <Wall fill="#ffff00" frame="#000000" x="31.736111111111114" z="24.86111111111111" w="25" d="5" h="0" />
-  <Wall fill="#663399" frame="#000000" x="56.736111111111114" z="34.861111111111114" w="5" d="5" h="0" />
-  <Wall fill="#ffff00" frame="#000000" x="61.736111111111114" z="24.86111111111111" w="25" d="5" h="0" />
-  <Wall fill="#dd0000" frame="#000000" x="86.73611111111111" z="29.86111111111111" w="5" d="25" h="0" />
-  <Wall fill="#663399" frame="#000000" x="76.73611111111111" z="54.861111111111114" w="5" d="5" h="0" />
-  <Wall fill="#dd0000" frame="#000000" x="86.73611111111111" z="59.861111111111114" w="5" d="25" h="0" />
-  <Wall fill="#0000dd" frame="#000000" x="61.736111111111114" z="84.86111111111111" w="25" d="5" h="0" />
-  <Wall fill="#663399" frame="#000000" x="56.736111111111114" z="74.86111111111111" w="5" d="5" h="0" />
-  <Wall fill="#0000dd" frame="#000000" x="31.736111111111114" z="84.86111111111111" w="25" d="5" h="0" />
+  <Wall fill="#008800" frame="#000000" x="29.236111111111114" z="42.361111111111114" w="5" d="25" h="0" />
+  <Wall fill="#ffff00" frame="#000000" x="44.236111111111114" z="27.36111111111111" w="25" d="5" h="0" />
+  <Wall fill="#663399" frame="#000000" x="59.236111111111114" z="37.361111111111114" w="5" d="5" h="0" />
+  <Wall fill="#ffff00" frame="#000000" x="74.23611111111111" z="27.36111111111111" w="25" d="5" h="0" />
+  <Wall fill="#dd0000" frame="#000000" x="89.23611111111111" z="42.361111111111114" w="5" d="25" h="0" />
+  <Wall fill="#663399" frame="#000000" x="79.23611111111111" z="57.361111111111114" w="5" d="5" h="0" />
+  <Wall fill="#dd0000" frame="#000000" x="89.23611111111111" z="72.36111111111111" w="5" d="25" h="0" />
+  <Wall fill="#0000dd" frame="#000000" x="74.23611111111111" z="87.36111111111111" w="25" d="5" h="0" />
+  <Wall fill="#663399" frame="#000000" x="59.236111111111114" z="77.36111111111111" w="5" d="5" h="0" />
+  <Wall fill="#0000dd" frame="#000000" x="44.236111111111114" z="87.36111111111111" w="25" d="5" h="0" />
   <Solid shape="bspW5x1" fill="#ff0099" frame="#000000" cx="11.73611111111111" cz="9.861111111111112" r="5" angle="270" extent="90" />
   <Solid shape="bspW5x1" fill="#ff0099" frame="#000000" cx="99.23611111111111" cz="12.98611111111111" r="5" angle="0" extent="90" />
   <Solid shape="bspW5x1" fill="#ff0099" frame="#000000" cx="107.36111111111111" cz="104.86111111111111" r="5" angle="90" extent="90" />
@@ -47,10 +47,10 @@
   <Switch out="@wallSTestHit" fill="#008800" frame="#dd0000" cx="26.770833333333336" cz="39.02777777777778" r="1.2847222222222232" angle="178" extent="182" />
   <And in="@wallSTestHit" out.0="@testMessage" fill="#008800" frame="#dd0000" cx="26.770833333333336" cz="39.02777777777778" r="1.2847222222222232" angle="178" extent="182" />
   <Delay in="@wallSTestHit" out.0="@testMessage" wait="10" fill="#008800" frame="#dd0000" cx="26.770833333333336" cz="39.02777777777778" r="1.2847222222222232" angle="178" extent="182" />
-  <Field visible="false" deltaX="0" deltaY="0.04" enter="@closeDoorNorth" exit="@openDoorNorth" fill="#ffff00" frame="#000000" r="1.2847222222222232" cx="26.770833333333336" cz="39.02777777777778" angle="178" extent="182" x="30.48611111111111" z="0.48611111111111116" w="12.36111111111111" d="11.111111111111112" h="6" />
-  <WallDoor status="isOpen" open="@openDoorNorth" close="@closeDoorNorth" openSpeed="2" closeSpeed="2" middle="0.5" midZ="-5" deltaY="0" deltaZ="-5" deltaX="5" shape="bspW1x1" hitMsg="@closeDoorNorth" shotPower="5" fill="#ffff00" frame="#000000" r="1.2847222222222232" cx="26.770833333333336" cz="39.02777777777778" angle="178" extent="182" x="56.736111111111114" z="24.86111111111111" w="5" d="5" h="0" />
+  <Field visible="false" deltaX="0" deltaY="0.04" enter="@closeDoorNorth" exit="@openDoorNorth" fill="#ffff00" frame="#000000" r="1.2847222222222232" cx="26.770833333333336" cz="39.02777777777778" angle="178" extent="182" x="36.666666666666664" z="6.041666666666667" w="12.36111111111111" d="11.111111111111112" h="6" />
+  <WallDoor status="isOpen" open="@openDoorNorth" close="@closeDoorNorth" openSpeed="2" closeSpeed="2" middle="0.5" midZ="-5" deltaY="0" deltaZ="-5" deltaX="5" shape="bspW1x1" hitMsg="@closeDoorNorth" shotPower="5" fill="#ffff00" frame="#000000" r="1.2847222222222232" cx="26.770833333333336" cz="39.02777777777778" angle="178" extent="182" x="59.236111111111114" z="27.36111111111111" w="5" d="5" h="0" />
   <Area enter="@openDoorSouth" exit="@closeDoorNorth" fill="#ffff00" frame="#000000" cx="26.770833333333336" cz="39.02777777777778" r="1.2847222222222232" angle="178" extent="182" />
-  <WallDoor stepOnMsg="@stepOnYelloPlat" open="@stepOnYelloPlat" close="@stepOnYelloPlat" openDelay="5" closeDelay="100" closeSpeed="5" guardDelay="0" deltaY="10" yaw="360" fill="#ffff00" frame="#000000" r="1.2847222222222232" cx="26.770833333333336" cz="39.02777777777778" angle="178" extent="182" x="91.73611111111111" z="19.86111111111111" w="4.861111111111114" d="4.861111111111114" h="0.25" />
+  <WallDoor stepOnMsg="@stepOnYelloPlat" open="@stepOnYelloPlat" close="@stepOnYelloPlat" openDelay="5" closeDelay="100" closeSpeed="5" guardDelay="0" deltaY="10" yaw="360" fill="#ffff00" frame="#000000" r="1.2847222222222232" cx="26.770833333333336" cz="39.02777777777778" angle="178" extent="182" x="94.16666666666667" z="22.291666666666668" w="4.861111111111114" d="4.861111111111114" h="0.25" />
   <Dome fill="#ffff00" frame="#000000" cx="70.625" cz="113.19444444444444" r="2.5" angle="0" extent="360" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="70.625" cz="113.19444444444444" r="1.25" angle="180" extent="90" />

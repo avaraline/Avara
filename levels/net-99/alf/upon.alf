@@ -47,10 +47,10 @@ Tip: Don't stray away....or you shall be put away!" />
   <Solid shape="bspIce" fill="#ffffff" frame="#000000" cx="64.93055555555556" cz="73.75" r="1.25" angle="0" extent="90" />
   <Solid shape="bspBigIce" fill="#ffffff" frame="#000000" cx="119.30555555555556" cz="107.5" r="1.25" angle="249" extent="90" />
   <Solid shape="bspIce" fill="#ffffff" frame="#000000" cx="111.18055555555556" cz="114.375" r="1.25" angle="59" extent="90" />
-  <Wall fill="#ffffff" frame="#000000" x="0.5555555555555556" z="70" w="5" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="145.55555555555557" z="70" w="5" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="70.55555555555556" z="145" w="10" d="5" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="70.55555555555556" z="0" w="10" d="5" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="3.0555555555555554" z="75" w="5" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="148.05555555555557" z="75" w="5" d="10" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="75.55555555555556" z="147.5" w="10" d="5" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="75.55555555555556" z="2.5" w="10" d="5" h="0" />
   <Solid shape="bspBigIce" fill="#ffffff" frame="#000000" cx="18.055555555555557" cz="36.875" r="1.25" angle="154" extent="90" />
   <Solid shape="bspIce" fill="#ffffff" frame="#000000" cx="31.805555555555557" cz="116.875" r="1.25" angle="59" extent="90" />
   <Solid shape="bspBigIce" fill="#ffffff" frame="#000000" cx="51.18055555555556" cz="117.5" r="1.25" angle="154" extent="90" />
@@ -154,6 +154,6 @@ Tip: Don't stray away....or you shall be put away!" />
   <Solid shape="bspIce" fill="#ffffff" frame="#000000" cx="94.30555555555556" cz="45.625" r="1.25" angle="100" extent="90" />
   <Solid shape="bspIce" fill="#ffffff" frame="#000000" cx="98.68055555555556" cz="40.625" r="1.25" angle="169" extent="90" />
   <set wallYon="0.1" />
-  <WallDoor openSpeed="50" closeSpeed="50" openSound="0" closeSound="0" stopSound="0" shotPower="100" stepOnMsg="@killjob" open="@killjob" didOpen="@killclose" close="@killclose" fill="#ffffff" frame="#000000" r="1.25" cx="98.68055555555556" cz="40.625" angle="169" extent="90" x="73.05555555555556" z="72.5" w="5" d="5" h="0.25" y="40" />
+  <WallDoor openSpeed="50" closeSpeed="50" openSound="0" closeSound="0" stopSound="0" shotPower="100" stepOnMsg="@killjob" open="@killjob" didOpen="@killclose" close="@killclose" fill="#ffffff" frame="#000000" r="1.25" cx="98.68055555555556" cz="40.625" angle="169" extent="90" x="75.55555555555556" z="75" w="5" d="5" h="0.25" y="40" />
   <set wallYon="standardYon" />
 </map>

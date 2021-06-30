@@ -1,18 +1,18 @@
 <map>
   <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Scripting by Hybrid.  Teams must be red, blue or yellow.  Up to 3 people on one team. First team to reach 100 seconds in the top center block wins.  Goodies will not regenerate when a hector is on top of the block." kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" snYeeha="0" kADelay="2" kDefaultLives="300" kSnText="snTextBlip" kTextVolume="0.3" />
-  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="17.083333333333336" z="48.125" w="7.569444444444443" d="7.56944444444445" h="0" r="3.090277777777775" angle="150" extent="60" />
-  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="17.083333333333336" z="63.19444444444445" w="7.569444444444443" d="7.569444444444436" h="0" r="3.1597222222222214" angle="330" extent="60" />
-  <Wall fill="#777777" frame="#000000" x="70.83333333333334" z="55.69444444444445" w="31.25" d="7.5" h="0.5" y="2.5" />
-  <Field deltaY="0" deltaX="0" deltaZ="0" start="@fieldStart" exit="@goodieRegenOn" fill="#ffffff" frame="#000000" x="54.583333333333336" z="54.51388888888889" w="10" d="10" h="7" r="3.1597222222222214" cx="20.13888888888889" cz="69.89583333333334" angle="330" extent="60" y="6.8" />
-  <Wall fill="#3366ff" frame="#000000" x="48.333333333333336" z="48.19444444444445" w="22.5" d="22.5" h="4.5" />
-  <Field deltaY="0" mask="T6" stop="@sixteen" start="@fifteen" enter="@team6" fill="#00ccff" frame="#000000" x="55.76388888888889" z="55.69444444444445" w="7.5" d="7.5" h="0.5" r="3.1597222222222214" cx="20.13888888888889" cz="69.89583333333334" angle="330" extent="60" y="6.75" />
-  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff0000" frame="#000000" x="55.76388888888889" z="55.69444444444445" w="7.5" d="7.5" h="0.5" r="3.1597222222222214" cx="20.13888888888889" cz="69.89583333333334" angle="330" extent="60" y="6.75" />
-  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff33" frame="#000000" x="55.76388888888889" z="55.69444444444445" w="7.5" d="7.5" h="0.5" r="3.1597222222222214" cx="20.13888888888889" cz="69.89583333333334" angle="330" extent="60" y="6.75" />
+  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="20.868055555555557" z="51.90972222222223" w="7.569444444444443" d="7.56944444444445" h="0" r="3.090277777777775" angle="150" extent="60" />
+  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="20.868055555555557" z="66.97916666666667" w="7.569444444444443" d="7.569444444444436" h="0" r="3.1597222222222214" angle="330" extent="60" />
+  <Wall fill="#777777" frame="#000000" x="86.45833333333334" z="59.44444444444445" w="31.25" d="7.5" h="0.5" y="2.5" />
+  <Field deltaY="0" deltaX="0" deltaZ="0" start="@fieldStart" exit="@goodieRegenOn" fill="#ffffff" frame="#000000" x="59.58333333333334" z="59.513888888888886" w="10" d="10" h="7" r="3.1597222222222214" cx="20.13888888888889" cz="69.89583333333334" angle="330" extent="60" y="6.8" />
+  <Wall fill="#3366ff" frame="#000000" x="59.58333333333334" z="59.44444444444444" w="22.5" d="22.5" h="4.5" />
+  <Field deltaY="0" mask="T6" stop="@sixteen" start="@fifteen" enter="@team6" fill="#00ccff" frame="#000000" x="59.51388888888889" z="59.44444444444445" w="7.5" d="7.5" h="0.5" r="3.1597222222222214" cx="20.13888888888889" cz="69.89583333333334" angle="330" extent="60" y="6.75" />
+  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff0000" frame="#000000" x="59.51388888888889" z="59.44444444444445" w="7.5" d="7.5" h="0.5" r="3.1597222222222214" cx="20.13888888888889" cz="69.89583333333334" angle="330" extent="60" y="6.75" />
+  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff33" frame="#000000" x="59.51388888888889" z="59.44444444444445" w="7.5" d="7.5" h="0.5" r="3.1597222222222214" cx="20.13888888888889" cz="69.89583333333334" angle="330" extent="60" y="6.75" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#00ccff" frame="#000000" cx="44.65277777777778" cz="44.44444444444444" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="150" fill="#00ccff" frame="#000000" cx="44.65277777777778" cz="44.44444444444444" r="1.25" angle="180" extent="90" />
   <Goody shape="bspGrenade" y="2" yon="35" speed="2" grenades="12" start="mShow" out="mTaken" fill="#00ccff" frame="#000000" cx="44.65277777777778" cz="44.44444444444444" r="1.25" angle="180" extent="90" />
-  <Wall fill="#777777" frame="#000000" x="54.583333333333336" z="54.51388888888889" w="10" d="10" h="2.25" y="4.5" />
+  <Wall fill="#777777" frame="#000000" x="59.58333333333334" z="59.513888888888886" w="10" d="10" h="2.25" y="4.5" />
   <Goody shape="bspStandardPill" y="9" speed="2" missiles="8" grenades="12" boosters="1" yon="35" start="@goodieRegenOn" fill="#ffffff" frame="#000000" cx="59.51388888888889" cz="59.375" r="1.25" angle="180" extent="90" />
   <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#ffffff" frame="#000000" cx="64.79166666666667" cz="55.97222222222222" r="2.5" angle="180" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffffff" frame="#000000" cx="64.79166666666667" cz="55.97222222222222" r="2.5" angle="180" extent="90" />
@@ -116,9 +116,9 @@ go!" fill="#ff0000" frame="#000000" cx="8.125" cz="684.7916666666667" r="2.56944
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="57.43055555555556" cz="683.75" r="2.569444444444457" angle="180" extent="90" />
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="57.43055555555556" cz="683.75" r="2.569444444444457" angle="180" extent="90" />
   <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="57.43055555555556" cz="683.75" r="2.569444444444457" angle="180" extent="90" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" x="122.0138888888889" z="801.875" w="2.7777777777777715" d="1.5277777777778283" h="2" r="2.569444444444457" cx="57.43055555555556" cz="683.75" angle="180" extent="90" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff33" frame="#000000" x="96.59722222222223" z="802.1527777777778" w="2.7777777777777715" d="1.5277777777777146" h="2" r="2.569444444444457" cx="57.43055555555556" cz="683.75" angle="180" extent="90" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ccff" frame="#000000" x="109.5138888888889" z="802.0833333333334" w="2.7777777777777715" d="1.5277777777778283" h="2" r="2.569444444444457" cx="57.43055555555556" cz="683.75" angle="180" extent="90" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" x="123.40277777777779" z="802.6388888888889" w="2.7777777777777715" d="1.5277777777778283" h="2" r="2.569444444444457" cx="57.43055555555556" cz="683.75" angle="180" extent="90" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff33" frame="#000000" x="97.98611111111111" z="802.9166666666667" w="2.7777777777777715" d="1.5277777777777146" h="2" r="2.569444444444457" cx="57.43055555555556" cz="683.75" angle="180" extent="90" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ccff" frame="#000000" x="110.90277777777779" z="802.8472222222223" w="2.7777777777777715" d="1.5277777777778283" h="2" r="2.569444444444457" cx="57.43055555555556" cz="683.75" angle="180" extent="90" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="96.52777777777777" cz="21.875" r="4.722222222222221" angle="15" extent="60" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="22.291666666666668" cz="97.08333333333334" r="4.722222222222221" angle="195" extent="60" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="22.361111111111114" cz="21.805555555555557" r="4.722222222222223" angle="285" extent="60" />
@@ -127,9 +127,9 @@ go!" fill="#ff0000" frame="#000000" cx="8.125" cz="684.7916666666667" r="2.56944
   <GroundColor fill="#3399ff" frame="#3399ff" />
   <Incarnator y="30" stop="@start" fill="#008800" frame="#000000" cx="45.69444444444444" cz="70.55555555555556" r="4.722222222222225" angle="280" extent="90" />
   <Incarnator y="33" stop="@start" fill="#008800" frame="#000000" cx="45.69444444444444" cz="70.55555555555556" r="4.722222222222225" angle="280" extent="90" />
-  <Wall fill="#777777" frame="#000000" x="55.833333333333336" z="16.944444444444446" w="7.5" d="31.25" h="0.5" y="2.5" />
-  <Wall fill="#777777" frame="#000000" x="55.833333333333336" z="70.69444444444444" w="7.5" d="31.25" h="0.5" y="2.5" />
-  <Wall fill="#777777" frame="#000000" x="17.083333333333336" z="55.69444444444445" w="31.25" d="7.5" h="0.5" y="2.5" />
+  <Wall fill="#777777" frame="#000000" x="59.583333333333336" z="32.56944444444445" w="7.5" d="31.25" h="0.5" y="2.5" />
+  <Wall fill="#777777" frame="#000000" x="59.583333333333336" z="86.31944444444444" w="7.5" d="31.25" h="0.5" y="2.5" />
+  <Wall fill="#777777" frame="#000000" x="32.708333333333336" z="59.44444444444445" w="31.25" d="7.5" h="0.5" y="2.5" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="59.583333333333336" cz="98.19444444444444" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="150" fill="#ffffff" frame="#000000" cx="59.583333333333336" cz="98.19444444444444" r="1.25" angle="180" extent="90" />
@@ -151,13 +151,13 @@ go!" fill="#ff0000" frame="#000000" cx="8.125" cz="684.7916666666667" r="2.56944
   <Timer in="mTaken" out="mShow" wait="150" fill="#00ccff" frame="#000000" cx="74.65277777777779" cz="74.44444444444444" r="1.25" angle="180" extent="90" />
   <Goody shape="bspGrenade" y="2" yon="35" speed="2" grenades="12" start="mShow" out="mTaken" fill="#00ccff" frame="#000000" cx="74.65277777777779" cz="74.44444444444444" r="1.25" angle="180" extent="90" />
   <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="40" />
-  <Wall fill="#000000" frame="#000000" x="55.833333333333336" z="55.69444444444445" w="7.5" d="7.5" h="0" y="6.75" />
-  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="48.26388888888889" z="16.944444444444446" w="7.569444444444443" d="7.569444444444443" h="0" r="3.1597222222222223" angle="60" extent="60" />
-  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="63.333333333333336" z="16.944444444444446" w="7.56944444444445" d="7.569444444444443" h="0" r="3.125" angle="240" extent="60" />
-  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="48.26388888888889" z="94.375" w="7.569444444444443" d="7.569444444444443" h="0" r="3.1597222222222214" angle="60" extent="60" />
-  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="63.333333333333336" z="94.375" w="7.56944444444445" d="7.569444444444443" h="0" r="3.125" angle="240" extent="60" />
-  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="94.5138888888889" z="63.19444444444445" w="7.569444444444443" d="7.569444444444436" h="0" r="3.1597222222222214" angle="330" extent="60" />
-  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="94.5138888888889" z="48.125" w="7.569444444444443" d="7.56944444444445" h="0" r="3.090277777777775" angle="150" extent="60" />
+  <Wall fill="#000000" frame="#000000" x="59.583333333333336" z="59.44444444444445" w="7.5" d="7.5" h="0" y="6.75" />
+  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="52.048611111111114" z="20.729166666666668" w="7.569444444444443" d="7.569444444444443" h="0" r="3.1597222222222223" angle="60" extent="60" />
+  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="67.11805555555556" z="20.729166666666668" w="7.56944444444445" d="7.569444444444443" h="0" r="3.125" angle="240" extent="60" />
+  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="52.048611111111114" z="98.15972222222223" w="7.569444444444443" d="7.569444444444443" h="0" r="3.1597222222222214" angle="60" extent="60" />
+  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="67.11805555555556" z="98.15972222222223" w="7.56944444444445" d="7.569444444444443" h="0" r="3.125" angle="240" extent="60" />
+  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="98.29861111111111" z="66.97916666666667" w="7.569444444444443" d="7.569444444444436" h="0" r="3.1597222222222214" angle="330" extent="60" />
+  <Ramp y="0" thickness=".25" deltaY="3" fill="#3366ff" frame="#777777" x="98.29861111111111" z="51.90972222222223" w="7.569444444444443" d="7.56944444444445" h="0" r="3.090277777777775" angle="150" extent="60" />
   <Walker lives="kDefaultLives" team="2" y="30" fill="#ffff33" frame="#000000" cx="22.32638888888889" cz="21.770833333333336" r="2.3263888888888893" angle="285" extent="60" />
   <Walker lives="kDefaultLives" team="2" y="30" fill="#ffff33" frame="#000000" cx="29.756944444444446" cz="14.270833333333336" r="2.3263888888888893" angle="285" extent="60" />
   <Walker lives="kDefaultLives" team="2" y="30" fill="#ffff33" frame="#000000" cx="14.756944444444446" cz="29.270833333333336" r="2.32638888888889" angle="285" extent="60" />
