@@ -2,7 +2,7 @@
   <set designer="Brent 'Shakespeare' Altomare" information="baa@traderpub.com
 
 To be or not to be... two" />
-  <Wall fill="#cc9900" frame="#000000" x="1.25" z="5.208333333333334" w="3.1944444444444446" d="45.06944444444444" h="5.875" />
+  <Wall fill="#cc9900" frame="#000000" x="2.8472222222222223" z="27.743055555555557" w="3.1944444444444446" d="45.06944444444444" h="5.875" />
   <SkyColor fill="#3333ff" frame="#660033" />
   <GroundColor fill="#333366" frame="#333366" />
   <unique vars="mShow mTaken" />
@@ -100,9 +100,9 @@ To be or not to be... two" />
   <Goody shape="bspMissile" y="4" speed="2" missiles="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="85.34722222222223" cz="2.5694444444444446" r="1.3194444444444446" angle="180" extent="90" />
   <FreeSolid shape="bspTower" mass="70" customGravity=".12" shotPower="10" fill="#ffff00" frame="#cc00cc" r="4.097222222222222" cx="17.291666666666668" cz="24.02777777777778" angle="180" extent="90" />
   <FreeSolid shape="bspTower" mass="70" customGravity=".12" shotPower="10" fill="#ffff00" frame="#cc00cc" r="4.0972222222222285" cx="87.91666666666667" cz="24.02777777777778" angle="180" extent="90" />
-  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222221" cx="57.77777777777778" cz="34.02777777777778" angle="180" extent="90" x="98.125" z="5.208333333333334" w="3.194444444444443" d="45.06944444444444" h="5.875" />
-  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222225" cx="42.22222222222223" cz="34.02777777777778" angle="180" extent="90" x="35.625" z="5.208333333333334" w="31.319444444444443" d="3.1944444444444446" h="5.875" />
-  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222225" cx="57.84722222222223" cz="19.65277777777778" angle="180" extent="90" x="63.75" z="18.333333333333336" w="3.194444444444443" d="28.819444444444443" h="5.875" />
-  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222225" cx="42.22222222222223" cz="19.65277777777778" angle="180" extent="90" x="33.125" z="47.083333333333336" w="33.81944444444444" d="3.194444444444443" h="5.875" />
-  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222225" cx="57.84722222222223" cz="34.02777777777778" angle="180" extent="90" x="32.5" z="5.208333333333334" w="3.194444444444443" d="31.944444444444443" h="5.875" />
+  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222221" cx="57.77777777777778" cz="34.02777777777778" angle="180" extent="90" x="99.72222222222223" z="27.743055555555557" w="3.194444444444443" d="45.06944444444444" h="5.875" />
+  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222225" cx="42.22222222222223" cz="34.02777777777778" angle="180" extent="90" x="51.28472222222222" z="6.805555555555556" w="31.319444444444443" d="3.1944444444444446" h="5.875" />
+  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222225" cx="57.84722222222223" cz="19.65277777777778" angle="180" extent="90" x="65.34722222222223" z="32.74305555555556" w="3.194444444444443" d="28.819444444444443" h="5.875" />
+  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222225" cx="42.22222222222223" cz="19.65277777777778" angle="180" extent="90" x="50.03472222222222" z="48.68055555555556" w="33.81944444444444" d="3.194444444444443" h="5.875" />
+  <WallSolid shape="bspTower" fill="#ffff00" frame="#cc00cc" r="4.097222222222225" cx="57.84722222222223" cz="34.02777777777778" angle="180" extent="90" x="34.09722222222222" z="21.180555555555557" w="3.194444444444443" d="31.944444444444443" h="5.875" />
 </map>

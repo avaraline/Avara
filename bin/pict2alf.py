@@ -10,6 +10,7 @@ import struct
 import sys
 
 from avarascript import Element, ScriptParseError, object_context, parse_script
+from dumb_round import dumb_round
 
 DEBUG_PARSER = False
 METERS_PER_POINT = 5 / 72
@@ -18,30 +19,6 @@ METERS_PER_POINT = 5 / 72
 def debug(fmt, *args, **kwargs):
     if DEBUG_PARSER:
         print(fmt % args, file=sys.stderr, flush=True)
-
-
-def dumb_round(num, repeats=6):
-    s = str(num)
-    if "." not in s:
-        return s
-    if s.endswith(".0"):
-        return s[:-2]
-    zeros = "0" * repeats
-    nines = "9" * repeats
-    if zeros in s:
-        return s.split(zeros, 1)[0].rstrip(".")
-    if nines in s:
-        # How many digits before the nines is how many we want to round to.
-        places = len(s.split(nines, 1)[0].split(".")[1]) or None
-        return str(round(num, places))
-    return s
-
-
-# How's this for continuous integration.
-assert dumb_round(10.00000007) == "10"
-assert dumb_round(4.500000022) == "4.5"
-assert dumb_round(0.999999987) == "1"
-assert dumb_round(0.049999999) == "0.05"
 
 
 class Rect:
@@ -268,8 +245,8 @@ class RectOp(AvaraOperation):
                 attrs = {
                     "fill": context.get("fill", self.color),
                     "frame": context.get("frame", self.color),
-                    "x": dumb_round(self.rect.left),
-                    "z": dumb_round(self.rect.top),
+                    "x": dumb_round(self.rect.center.x),
+                    "z": dumb_round(self.rect.center.y),
                     "w": dumb_round(self.rect.width),
                     "d": dumb_round(self.rect.height),
                     "h": h,
@@ -287,8 +264,8 @@ class RectOp(AvaraOperation):
             else:
                 context.update(
                     {
-                        "x": dumb_round(self.rect.left),
-                        "z": dumb_round(self.rect.top),
+                        "x": dumb_round(self.rect.center.x),
+                        "z": dumb_round(self.rect.center.y),
                         "w": dumb_round(self.rect.width),
                         "d": dumb_round(self.rect.height),
                         "h": h,

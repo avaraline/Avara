@@ -9,7 +9,7 @@
   <Teleporter y="0" group="@recenter" shape="0" fill="#000000" frame="#000000" cx="54.30555555555556" cz="52.43055555555556" r="1.25" angle="240" extent="300" />
   <Teleporter shape="0" y="200" win="1200" start="@winTeam" activeRange="2000" fill="#000000" frame="#000000" cx="54.30555555555556" cz="52.43055555555556" r="1.25" angle="240" extent="300" />
   <set baseHeight="headRoom * 1" wallHeight="0" floorTemplate="floor135" />
-  <Wall fill="#ff6666" frame="#000000" x="21.875" z="20" w="65" d="65" h="0" />
+  <Wall fill="#ff6666" frame="#000000" x="54.375" z="52.5" w="65" d="65" h="0" />
   <Teleporter y="0" group="@recenter" shape="0" activeRange="0.0" fill="#000000" frame="#000000" cx="54.375" cz="52.5" r="1.25" angle="240" extent="300" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ff0000" frame="#ffff33" cx="23.40277777777778" cz="21.666666666666668" r="1.25" angle="270" extent="300" />
@@ -20,7 +20,7 @@
   <Timer in="mTaken" out="mShow" wait="missDelay" fill="#0000dd" frame="#000000" cx="23.541666666666668" cz="83.19444444444444" r="1.25" angle="270" extent="300" />
   <Goody shape="bspMissile" y="2" missiles="numMiss * 2" start="mShow" out="mTaken" fill="#0000dd" frame="#000000" cx="23.541666666666668" cz="83.19444444444444" r="1.25" angle="270" extent="300" />
   <set baseHeight="headRoom * 2" wallHeight="0" floorTemplate="floor24" />
-  <Wall fill="#66ff66" frame="#000000" x="31.875" z="30" w="45" d="45" h="0" />
+  <Wall fill="#66ff66" frame="#000000" x="54.375" z="52.5" w="45" d="45" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ff0000" frame="#ffff33" cx="75.06944444444444" cz="31.944444444444443" r="1.25" angle="270" extent="300" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" fill="#ff0000" frame="#ffff33" cx="75.06944444444444" cz="31.944444444444443" r="1.25" angle="270" extent="300" />
@@ -31,7 +31,7 @@
   <Goody shape="bspMissile" y="2" missiles="numMiss * 3" start="mShow" out="mTaken" fill="#0000dd" frame="#000000" cx="75.06944444444444" cz="73.19444444444444" r="1.25" angle="270" extent="300" />
   <Teleporter y="0" group="@recenter" shape="0" activeRange="0.0" fill="#000000" frame="#000000" cx="54.375" cz="52.5" r="1.25" angle="240" extent="300" />
   <set baseHeight="headRoom * 3" wallHeight="0" floorTemplate="floor135" />
-  <Wall fill="#3399ff" frame="#000000" x="41.875" z="40" w="25" d="25" h="0" />
+  <Wall fill="#3399ff" frame="#000000" x="54.375" z="52.5" w="25" d="25" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#0000dd" frame="#000000" cx="43.81944444444444" cz="63.19444444444444" r="1.25" angle="270" extent="300" />
   <Timer in="mTaken" out="mShow" wait="missDelay" fill="#0000dd" frame="#000000" cx="43.81944444444444" cz="63.19444444444444" r="1.25" angle="270" extent="300" />
@@ -42,7 +42,7 @@
   <Goody shape="bspGrenade" y="2" grenades="numGren * 4" start="mShow" out="mTaken" fill="#ff0000" frame="#ffff33" cx="43.81944444444444" cz="41.94444444444444" r="1.25" angle="270" extent="300" />
   <Teleporter y="0" group="@recenter" shape="0" activeRange="0.0" fill="#000000" frame="#000000" cx="54.375" cz="52.5" r="1.25" angle="240" extent="300" />
   <set baseHeight="headRoom * 4" wallHeight="0" floorTemplate="floor24" />
-  <Wall fill="#ffff66" frame="#000000" x="51.875" z="50" w="5" d="5" h="0" />
+  <Wall fill="#ffff66" frame="#000000" x="54.375" z="52.5" w="5" d="5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#000000" frame="#ffff00" cx="54.44444444444445" cz="52.56944444444445" r="1.25" angle="270" extent="300" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" fill="#000000" frame="#ffff00" cx="54.44444444444445" cz="52.56944444444445" r="1.25" angle="270" extent="300" />

@@ -191,10 +191,18 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
 
         if (!x.empty() && !z.empty() && !w.empty() && !d.empty()) {
-            gLastBoxRect.top = std::lround(std::stod(z) * UNITPOINTS);
-            gLastBoxRect.left = std::lround(std::stod(x) * UNITPOINTS);
-            gLastBoxRect.bottom = gLastBoxRect.top + std::lround(std::stod(d) * UNITPOINTS);
-            gLastBoxRect.right = gLastBoxRect.left + std::lround(std::stod(w) * UNITPOINTS);
+            double boxCenterX = std::stod(x) * UNITPOINTS,
+                   boxCenterZ = std::stod(z) * UNITPOINTS,
+                   boxWidth = std::stod(w) * UNITPOINTS,
+                   boxDepth = std::stod(d) * UNITPOINTS,
+                   boxLeft = boxCenterX - (boxWidth / 2.0),
+                   boxRight = boxLeft + boxWidth,
+                   boxTop = boxCenterZ - (boxDepth / 2.0),
+                   boxBottom = boxTop + boxDepth;
+            gLastBoxRect.top = std::lround(boxTop);
+            gLastBoxRect.left = std::lround(boxLeft);
+            gLastBoxRect.bottom = std::lround(boxBottom);
+            gLastBoxRect.right = std::lround(boxRight);
         }
 
         if (!cx.empty() && !cz.empty()) {
@@ -261,7 +269,9 @@ struct ALFWalker: pugi::xml_tree_walker {
     void handle_wall(pugi::xml_node& node) {
         std::string y = node.attribute("y").value();
         if (!y.empty()) {
-            ProgramVariable(iWallAltitude, std::stod(y));
+            std::stringstream script;
+            script << "wa = " << y << "\n";
+            RunThis((StringPtr)script.str().c_str());
         }
         CWallActor *theWall = new CWallActor;
         theWall->IAbstractActor();
