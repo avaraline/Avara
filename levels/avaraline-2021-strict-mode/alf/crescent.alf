@@ -131,7 +131,7 @@
   <Wall d="5" fill="#c8cbd2" frame="#000000" h="0" w="15" x="-5" z="-5" />
   <Hologram angle="270" cx="0" cz="0" extent="90" fill="#c8cbd2" frame="#000000" r="1.875" scale="1.5" shape="bspGroundStar" />
 
-  <Teleporter activeRange="40 * 5" angle="180" cx="0" cz="0" deadRange="20 * 5" destGroup="@recenter" extent="90" fill="#f7f9fe" frame="#000000" group="-1" r="1.875" shape="0" spin="false" y="-30" />
-  <Teleporter angle="180" cx="0" cz="0" extent="90" fill="#f7f9fe" frame="#000000" group="@recenter" r="1.875" shape="0" spin="false" y="20" />
+  <Teleporter activeRange="40 * 5" angle="180" cx="0" cz="0" deadRange="20 * 5" destGroup="@recenter" extent="90" fill="#f7f9fe" frame="#000000" group="-1" r="1.875" shape="0" spin="true" y="-30" />
+  <Teleporter angle="180" cx="0" cz="0" extent="90" fill="#f7f9fe" frame="#000000" group="@recenter" mask="0" r="1.875" shape="0" spin="true" y="20" />
   <Teleporter activeRange="2000" angle="180" cx="0" cz="0" extent="90" fill="#f7f9fe" frame="#000000" r="1.875" shape="0" start="@winTeam" win="1000" y="200" />
 </map>
