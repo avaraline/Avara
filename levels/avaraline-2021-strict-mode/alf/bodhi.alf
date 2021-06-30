@@ -3,68 +3,68 @@
   <SkyColor fill="#cca3bf" frame="#cee6f2" />
   <set designer="$mSilverfox" information="Within three lifetimes, you could escape the cycle of rebirth." light.0.i="0.8" light.0.a="30" light.0.b="10" wallHeight="0" />
 
-  <Wall fill="#3d6658" frame="#000000" x="-7.5" z="-12.5" w="15" d="25" h="4" />
-  <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="-7.5" z="12.5" w="15" d="10" h="0" r="1.875" angle="315" extent="90" />
-  <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="-7.5" z="-22.5" w="15" d="10" h="0" r="1.875" angle="135" extent="90" />
-  <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="7.5" z="-12.5" w="10" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="-17.5" z="2.5" w="10" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Wall fill="#3d6658" frame="#000000" x="7.5" z="-2.5" w="10" d="15" h="2" />
-  <Wall fill="#3d6658" frame="#000000" x="-17.5" z="-12.5" w="10" d="15" h="2" />
-  <Wall fill="#3d6658" frame="#000000" x="7.5" z="-2.5" w="5" d="15" h="2" y="2" />
-  <Wall fill="#3d6658" frame="#000000" x="-12.5" z="-12.5" w="5" d="15" h="2" y="2" />
-  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="-1.25" z="-1.25" w="2.5" d="2.5" h="0" y="4.05" />
-  <Wall fill="#002619" frame="#000000" x="12.5" z="47.5" w="15" d="5" h="2" />
-  <Wall fill="#002619" frame="#000000" x="27.5" z="32.5" w="5" d="15" h="2" />
-  <Wall fill="#1a4033" frame="#000000" x="27.5" z="47.5" w="5" d="15" h="2.5" />
-  <Wall fill="#1a4033" frame="#000000" x="32.5" z="47.5" w="10" d="5" h="2.5" />
-  <Wall fill="#002619" frame="#000000" x="-27.5" z="-52.5" w="15" d="5" h="2" />
-  <Wall fill="#002619" frame="#000000" x="-32.5" z="-47.5" w="5" d="15" h="2" />
-  <Wall fill="#1a4033" frame="#000000" x="-32.5" z="-62.5" w="5" d="15" h="2.5" />
-  <Wall fill="#1a4033" frame="#000000" x="-42.5" z="-52.5" w="10" d="5" h="2.5" />
-  <Wall fill="#1a4033" frame="#000000" x="42.5" z="-42.5" w="10" d="0" h="6" />
-  <Wall fill="#1a4033" frame="#000000" x="27.5" z="-42.5" w="15" d="10" h="6" />
-  <Wall fill="#1a4033" frame="#000000" x="52.5" z="-42.5" w="5" d="10" h="6" />
-  <Wall fill="#1a4033" frame="#000000" x="42.5" z="-42.5" w="10" d="10" h="0" y="6" />
-  <Wall fill="#1a4033" frame="#000000" x="47.5" z="-52.5" w="10" d="10" h="1" y="5" />
-  <Wall fill="#002619" frame="#000000" x="42.5" z="-22.5" w="10" d="10" h="2" />
-  <Ramp y="2" deltaY="4" fill="#ffc68c" frame="#000000" x="42.5" z="-32.5" w="10" d="10" h="0" r="1.875" angle="315" extent="90" />
-  <Wall fill="#002619" frame="#000000" x="17.5" z="-52.5" w="15" d="10" h="2" />
-  <Ramp y="2" deltaY="4" fill="#ffc68c" frame="#000000" x="32.5" z="-52.5" w="15" d="10" h="0" r="1.875" angle="45" extent="90" />
-  <Wall fill="#0a3325" frame="#000000" x="42.5" z="-32.5" w="10" d="0" h="6" />
-  <Wall fill="#001a11" frame="#000000" x="42.5" z="-22.5" w="10" d="0" h="2" />
-  <Field visible="true" deltaY="0" fill="#264d40" frame="#000000" x="42.5" z="-32.5" w="10" d="10" h="0" y="0" />
-  <Wall fill="#1a4033" frame="#000000" x="-57.5" z="32.5" w="5" d="10" h="6" />
-  <Wall fill="#1a4033" frame="#000000" x="-42.5" z="32.5" w="15" d="10" h="6" />
-  <Wall fill="#1a4033" frame="#000000" x="-52.5" z="42.5" w="10" d="0" h="6" />
-  <Wall fill="#1a4033" frame="#000000" x="-52.5" z="32.5" w="10" d="10" h="0" y="6" />
-  <Wall fill="#1a4033" frame="#000000" x="-57.5" z="42.5" w="10" d="10" h="1" y="5" />
-  <Wall fill="#002619" frame="#000000" x="-52.5" z="12.5" w="10" d="10" h="2" />
-  <Ramp y="2" deltaY="4" fill="#ffc68c" frame="#000000" x="-52.5" z="22.5" w="10" d="10" h="0" r="1.875" angle="135" extent="90" />
-  <Wall fill="#002619" frame="#000000" x="-32.5" z="42.5" w="15" d="10" h="2" />
-  <Ramp y="2" deltaY="4" fill="#ffc68c" frame="#000000" x="-47.5" z="42.5" w="15" d="10" h="0" r="1.875" angle="225" extent="90" />
-  <Wall fill="#0a3325" frame="#000000" x="-52.5" z="32.5" w="10" d="0" h="6" />
-  <Wall fill="#001a11" frame="#000000" x="-52.5" z="22.5" w="10" d="0" h="2" />
-  <Field visible="true" deltaY="0" fill="#264d40" frame="#000000" x="-52.5" z="22.5" w="10" d="10" h="0" y="0" />
-  <Field visible="true" deltaY="0" fill="#264d40" frame="#000000" x="-57.5" z="42.5" w="25" d="10" h="0" y="0" />
-  <Field visible="true" deltaY="0" fill="#264d40" frame="#000000" x="32.5" z="-52.5" w="25" d="10" h="0" y="0" />
-  <WallDoor midYaw="45" fill="#002619" frame="#000000" x="-51.25" z="-16.25" w="7.5" d="7.5" h="7" />
-  <WallDoor midYaw="45" fill="#99bfb3" frame="#000000" x="-53.125" z="-18.125" w="11.25" d="11.25" h="0.5" y="7" />
-  <WallDoor midYaw="45" fill="#3d6658" frame="#000000" x="-53.75" z="-18.75" w="12.5" d="12.5" h="0.3" y="7.5" />
-  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="-33.75" z="36.25" w="2.5" d="2.5" h="0" y="6.05" />
-  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="31.25" z="-38.75" w="2.5" d="2.5" h="0" y="6.05" />
-  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="-38.75" z="-58.75" w="2.5" d="2.5" h="0" y="-0.05" />
-  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="36.25" z="56.25" w="2.5" d="2.5" h="0" y="-0.05" />
-  <Wall fill="#ffc68c" frame="#000000" x="-48.75" z="-13.75" w="2.5" d="2.5" h="0" y="7.81" />
-  <Wall fill="#3d6658" frame="#000000" x="-17.5" z="-22.5" w="10" d="10" h="4" />
-  <Wall fill="#3d6658" frame="#000000" x="7.5" z="-22.5" w="10" d="10" h="4" />
-  <Wall fill="#3d6658" frame="#000000" x="7.5" z="12.5" w="10" d="10" h="4" />
-  <Wall fill="#3d6658" frame="#000000" x="-17.5" z="12.5" w="10" d="10" h="4" />
-  <WallDoor midYaw="45" fill="#264d40" frame="#000000" x="-53.75" z="-18.75" w="12.5" d="12.5" h="0" y="-0.05" />
-  <WallDoor midYaw="45" fill="#002619" frame="#000000" x="43.75" z="8.75" w="7.5" d="7.5" h="7" />
-  <WallDoor midYaw="45" fill="#99bfb3" frame="#000000" x="41.875" z="6.875" w="11.25" d="11.25" h="0.5" y="7" />
-  <WallDoor midYaw="45" fill="#3d6658" frame="#000000" x="41.25" z="6.25" w="12.5" d="12.5" h="0.3" y="7.5" />
-  <Wall fill="#ffc68c" frame="#000000" x="46.25" z="11.25" w="2.5" d="2.5" h="0" y="7.81" />
-  <WallDoor midYaw="45" fill="#264d40" frame="#000000" x="41.25" z="6.25" w="12.5" d="12.5" h="0" y="-0.05" />
+  <Wall fill="#3d6658" frame="#000000" x="0" z="0" w="15" d="25" h="4" />
+  <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="0" z="17.5" w="15" d="10" h="0" r="1.875" angle="315" extent="90" />
+  <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="0" z="-17.5" w="15" d="10" h="0" r="1.875" angle="135" extent="90" />
+  <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="12.5" z="-7.5" w="10" d="10" h="0" r="1.875" angle="225" extent="90" />
+  <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="-12.5" z="7.5" w="10" d="10" h="0" r="1.875" angle="45" extent="90" />
+  <Wall fill="#3d6658" frame="#000000" x="12.5" z="5" w="10" d="15" h="2" />
+  <Wall fill="#3d6658" frame="#000000" x="-12.5" z="-5" w="10" d="15" h="2" />
+  <Wall fill="#3d6658" frame="#000000" x="10" z="5" w="5" d="15" h="2" y="2" />
+  <Wall fill="#3d6658" frame="#000000" x="-10" z="-5" w="5" d="15" h="2" y="2" />
+  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="0" z="0" w="2.5" d="2.5" h="0" y="4.05" />
+  <Wall fill="#002619" frame="#000000" x="20" z="50" w="15" d="5" h="2" />
+  <Wall fill="#002619" frame="#000000" x="30" z="40" w="5" d="15" h="2" />
+  <Wall fill="#1a4033" frame="#000000" x="30" z="55" w="5" d="15" h="2.5" />
+  <Wall fill="#1a4033" frame="#000000" x="37.5" z="50" w="10" d="5" h="2.5" />
+  <Wall fill="#002619" frame="#000000" x="-20" z="-50" w="15" d="5" h="2" />
+  <Wall fill="#002619" frame="#000000" x="-30" z="-40" w="5" d="15" h="2" />
+  <Wall fill="#1a4033" frame="#000000" x="-30" z="-55" w="5" d="15" h="2.5" />
+  <Wall fill="#1a4033" frame="#000000" x="-37.5" z="-50" w="10" d="5" h="2.5" />
+  <Wall fill="#1a4033" frame="#000000" x="47.5" z="-42.5" w="10" d="0" h="6" />
+  <Wall fill="#1a4033" frame="#000000" x="35" z="-37.5" w="15" d="10" h="6" />
+  <Wall fill="#1a4033" frame="#000000" x="55" z="-37.5" w="5" d="10" h="6" />
+  <Wall fill="#1a4033" frame="#000000" x="47.5" z="-37.5" w="10" d="10" h="0" y="6" />
+  <Wall fill="#1a4033" frame="#000000" x="52.5" z="-47.5" w="10" d="10" h="1" y="5" />
+  <Wall fill="#002619" frame="#000000" x="47.5" z="-17.5" w="10" d="10" h="2" />
+  <Ramp y="2" deltaY="4" fill="#ffc68c" frame="#000000" x="47.5" z="-27.5" w="10" d="10" h="0" r="1.875" angle="315" extent="90" />
+  <Wall fill="#002619" frame="#000000" x="25" z="-47.5" w="15" d="10" h="2" />
+  <Ramp y="2" deltaY="4" fill="#ffc68c" frame="#000000" x="40" z="-47.5" w="15" d="10" h="0" r="1.875" angle="45" extent="90" />
+  <Wall fill="#0a3325" frame="#000000" x="47.5" z="-32.5" w="10" d="0" h="6" />
+  <Wall fill="#001a11" frame="#000000" x="47.5" z="-22.5" w="10" d="0" h="2" />
+  <Field visible="true" deltaY="0" fill="#264d40" frame="#000000" x="47.5" z="-27.5" w="10" d="10" h="0" y="0" />
+  <Wall fill="#1a4033" frame="#000000" x="-55" z="37.5" w="5" d="10" h="6" />
+  <Wall fill="#1a4033" frame="#000000" x="-35" z="37.5" w="15" d="10" h="6" />
+  <Wall fill="#1a4033" frame="#000000" x="-47.5" z="42.5" w="10" d="0" h="6" />
+  <Wall fill="#1a4033" frame="#000000" x="-47.5" z="37.5" w="10" d="10" h="0" y="6" />
+  <Wall fill="#1a4033" frame="#000000" x="-52.5" z="47.5" w="10" d="10" h="1" y="5" />
+  <Wall fill="#002619" frame="#000000" x="-47.5" z="17.5" w="10" d="10" h="2" />
+  <Ramp y="2" deltaY="4" fill="#ffc68c" frame="#000000" x="-47.5" z="27.5" w="10" d="10" h="0" r="1.875" angle="135" extent="90" />
+  <Wall fill="#002619" frame="#000000" x="-25" z="47.5" w="15" d="10" h="2" />
+  <Ramp y="2" deltaY="4" fill="#ffc68c" frame="#000000" x="-40" z="47.5" w="15" d="10" h="0" r="1.875" angle="225" extent="90" />
+  <Wall fill="#0a3325" frame="#000000" x="-47.5" z="32.5" w="10" d="0" h="6" />
+  <Wall fill="#001a11" frame="#000000" x="-47.5" z="22.5" w="10" d="0" h="2" />
+  <Field visible="true" deltaY="0" fill="#264d40" frame="#000000" x="-47.5" z="27.5" w="10" d="10" h="0" y="0" />
+  <Field visible="true" deltaY="0" fill="#264d40" frame="#000000" x="-45" z="47.5" w="25" d="10" h="0" y="0" />
+  <Field visible="true" deltaY="0" fill="#264d40" frame="#000000" x="45" z="-47.5" w="25" d="10" h="0" y="0" />
+  <WallDoor midYaw="45" fill="#002619" frame="#000000" x="-47.5" z="-12.5" w="7.5" d="7.5" h="7" />
+  <WallDoor midYaw="45" fill="#99bfb3" frame="#000000" x="-47.5" z="-12.5" w="11.25" d="11.25" h="0.5" y="7" />
+  <WallDoor midYaw="45" fill="#3d6658" frame="#000000" x="-47.5" z="-12.5" w="12.5" d="12.5" h="0.3" y="7.5" />
+  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="-32.5" z="37.5" w="2.5" d="2.5" h="0" y="6.05" />
+  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="32.5" z="-37.5" w="2.5" d="2.5" h="0" y="6.05" />
+  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="-37.5" z="-57.5" w="2.5" d="2.5" h="0" y="-0.05" />
+  <WallDoor midYaw="45" fill="#ffc68c" frame="#000000" x="37.5" z="57.5" w="2.5" d="2.5" h="0" y="-0.05" />
+  <Wall fill="#ffc68c" frame="#000000" x="-47.5" z="-12.5" w="2.5" d="2.5" h="0" y="7.81" />
+  <Wall fill="#3d6658" frame="#000000" x="-12.5" z="-17.5" w="10" d="10" h="4" />
+  <Wall fill="#3d6658" frame="#000000" x="12.5" z="-17.5" w="10" d="10" h="4" />
+  <Wall fill="#3d6658" frame="#000000" x="12.5" z="17.5" w="10" d="10" h="4" />
+  <Wall fill="#3d6658" frame="#000000" x="-12.5" z="17.5" w="10" d="10" h="4" />
+  <WallDoor midYaw="45" fill="#264d40" frame="#000000" x="-47.5" z="-12.5" w="12.5" d="12.5" h="0" y="-0.05" />
+  <WallDoor midYaw="45" fill="#002619" frame="#000000" x="47.5" z="12.5" w="7.5" d="7.5" h="7" />
+  <WallDoor midYaw="45" fill="#99bfb3" frame="#000000" x="47.5" z="12.5" w="11.25" d="11.25" h="0.5" y="7" />
+  <WallDoor midYaw="45" fill="#3d6658" frame="#000000" x="47.5" z="12.5" w="12.5" d="12.5" h="0.3" y="7.5" />
+  <Wall fill="#ffc68c" frame="#000000" x="47.5" z="12.5" w="2.5" d="2.5" h="0" y="7.81" />
+  <WallDoor midYaw="45" fill="#264d40" frame="#000000" x="47.5" z="12.5" w="12.5" d="12.5" h="0" y="-0.05" />
   <Dome y="4" fill="#cef2e6" frame="#000000" cx="12.5" cz="17.5" r="2.5" angle="0" extent="360" />
   <Dome y="4" fill="#cef2e6" frame="#000000" cx="-12.5" cz="-17.5" r="2.5" angle="0" extent="360" />
 
