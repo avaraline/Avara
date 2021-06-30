@@ -3,7 +3,7 @@
   <GroundColor fill="#99ccff" frame="#000011" />
   <set information="A race in the sky.
 Perhaps you will die; but at least you will die so close to the stars..." baseHeight="100" StripThick=".5" wallHeight="StripThick" defaultLives="8" fWatch="playerMask" starY="40 + random * 80" starScale=".1" />
-  <Wall fill="#bbbbbb" frame="#000000" x="246.80555555555557" z="279.58333333333337" w="15" d="15" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="254.30555555555554" z="287.08333333333337" w="15" d="15" h="0" />
   <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="282.60416666666663" r="1.7013888888888857" angle="225" extent="90" />
   <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="284.47916666666663" r="1.7013888888888857" angle="225" extent="90" />
   <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="286.35416666666663" r="1.7013888888888857" angle="225" extent="90" />
@@ -14,74 +14,74 @@ Perhaps you will die; but at least you will die so close to the stars..." baseHe
   <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="285.20833333333337" r="1.875" angle="180" extent="180" />
   <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="288.95833333333337" r="1.875" angle="180" extent="180" />
   <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="180" extent="180" />
-  <Wall fill="#bbbbbb" frame="#000000" x="261.80555555555554" z="279.58333333333337" w="7.5" d="7.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="359.3055555555556" z="279.58333333333337" w="22.5" d="15" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="265.55555555555554" z="283.33333333333337" w="7.5" d="7.5" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="370.5555555555556" z="287.08333333333337" w="22.5" d="15" h="0" />
   <unique vars="mTrip mReset" />
-  <WallDoor deltaY="-3" deltaZ="-1" pitch="40" open="mTrip" close="mReset" openSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="261.80555555555554" z="287.08333333333337" w="7.5" d="7.5" h="0" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="258.68055555555554" z="287.08333333333337" w="10.625" d="7.5" h="7.5" y="-5" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" deltaZ=".04" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="261.80555555555554" z="287.08333333333337" w="7.5" d="7.5" h="7.5" y="-5" />
-  <Wall fill="#bbbbbb" frame="#000000" x="269.30555555555554" z="279.58333333333337" w="5" d="15" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="274.30555555555554" z="287.08333333333337" w="10" d="7.5" h="0" />
+  <WallDoor deltaY="-3" deltaZ="-1" pitch="40" open="mTrip" close="mReset" openSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="265.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="0" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="263.99305555555554" z="290.83333333333337" w="10.625" d="7.5" h="7.5" y="-5" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" deltaZ=".04" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="265.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="7.5" y="-5" />
+  <Wall fill="#bbbbbb" frame="#000000" x="271.80555555555554" z="287.08333333333337" w="5" d="15" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="279.30555555555554" z="290.83333333333337" w="10" d="7.5" h="0" />
   <set wallHeight="StripThick / 2" />
   <unique vars="mTrip mReset" />
-  <WallDoor deltaY="-3" open="mTrip" close="mReset" shotPower="10" openSpeed="20" closeSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="274.30555555555554" z="279.58333333333337" w="10" d="7.5" h="0" />
+  <WallDoor deltaY="-3" open="mTrip" close="mReset" shotPower="10" openSpeed="20" closeSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="279.30555555555554" z="283.33333333333337" w="10" d="7.5" h="0" />
   <set wa="wallHeight" />
-  <WallDoor deltaY="3" open="mTrip" close="mReset" shotPower="10" openSpeed="20" closeSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="274.30555555555554" z="279.58333333333337" w="10" d="7.5" h="0" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="271.18055555555554" z="279.58333333333337" w="16.25" d="8.125" h="7.5" y="-5" />
-  <Field watch="fWatch" enter="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="275.55555555555554" z="280.83333333333337" w="7.5" d="5" h="7.5" y="-5" />
+  <WallDoor deltaY="3" open="mTrip" close="mReset" shotPower="10" openSpeed="20" closeSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="279.30555555555554" z="283.33333333333337" w="10" d="7.5" h="0" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="279.30555555555554" z="283.64583333333337" w="16.25" d="8.125" h="7.5" y="-5" />
+  <Field watch="fWatch" enter="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="279.30555555555554" z="283.33333333333337" w="7.5" d="5" h="7.5" y="-5" />
   <set wallHeight="StripThick" />
-  <Wall fill="#bbbbbb" frame="#000000" x="284.30555555555554" z="279.58333333333337" w="12.5" d="15" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="290.55555555555554" z="287.08333333333337" w="12.5" d="15" h="0" />
   <set wallHeight="StripThick / 2" />
   <unique vars="mTrip mReset" />
-  <Wall fill="#bbbbbb" frame="#000000" x="296.80555555555554" z="279.58333333333337" w="9.375" d="15" h="0" />
-  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="294.93055555555554" z="279.58333333333337" w="12.5" d="15" h="7.5" />
+  <Wall fill="#bbbbbb" frame="#000000" x="301.49305555555554" z="287.08333333333337" w="9.375" d="15" h="0" />
+  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="301.18055555555554" z="287.08333333333337" w="12.5" d="15" h="7.5" />
   <set wa="wallHeight" />
-  <WallDoor middle=".4" midY=".75 * 5" deltaY=".75 * 5" midZ="-6" deltaZ=".75 * 5" midPitch="90" pitch="90" open="mTrip" close="mReset" shotPower="2" openSpeed="8" closeSpeed="5" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="296.80555555555554" z="279.58333333333337" w="9.375" d="7.5" h="0" />
+  <WallDoor middle=".4" midY=".75 * 5" deltaY=".75 * 5" midZ="-6" deltaZ=".75 * 5" midPitch="90" pitch="90" open="mTrip" close="mReset" shotPower="2" openSpeed="8" closeSpeed="5" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="301.49305555555554" z="283.33333333333337" w="9.375" d="7.5" h="0" />
   <set wa="wallHeight" />
-  <WallDoor middle=".4" midY=".75 * 5" deltaY=".75 * 5" midZ="6" deltaZ="-.75 * 5" midPitch="-90" pitch="-90" open="mTrip" close="mReset" shotPower="2" openSpeed="8" closeSpeed="5" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="296.80555555555554" z="287.08333333333337" w="9.375" d="7.5" h="0" />
+  <WallDoor middle=".4" midY=".75 * 5" deltaY=".75 * 5" midZ="6" deltaZ="-.75 * 5" midPitch="-90" pitch="-90" open="mTrip" close="mReset" shotPower="2" openSpeed="8" closeSpeed="5" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="301.49305555555554" z="290.83333333333337" w="9.375" d="7.5" h="0" />
   <set wallHeight="StripThick" />
   <Timer in="mTrip" wait="6 * 15" out="mReset" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="180" extent="180" />
-  <Wall fill="#bbbbbb" frame="#000000" x="306.18055555555554" z="279.58333333333337" w="10.625" d="15" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="316.80555555555554" z="287.08333333333337" w="7.5" d="7.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="324.30555555555554" z="279.58333333333337" w="10" d="15" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="311.49305555555554" z="287.08333333333337" w="10.625" d="15" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="320.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="329.30555555555554" z="287.08333333333337" w="10" d="15" h="0" />
   <unique vars="mTrip mReset" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="314.93055555555554" z="279.58333333333337" w="10.625" d="8.125" h="7.5" y="-5" />
-  <WallDoor open="mTrip" close="mReset" openSpeed="20" closeSpeed="20" shotPower="6" deltaY=".75 * 5" deltaX=".75 * 5 -5 / 16" roll="-90" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="316.80555555555554" z="279.58333333333337" w="7.5" d="7.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="351.80555555555554" z="279.58333333333337" w="7.5" d="7.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="341.80555555555554" z="279.58333333333337" w="10" d="15" h="0" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="320.24305555555554" z="283.64583333333337" w="10.625" d="8.125" h="7.5" y="-5" />
+  <WallDoor open="mTrip" close="mReset" openSpeed="20" closeSpeed="20" shotPower="6" deltaY=".75 * 5" deltaX=".75 * 5 -5 / 16" roll="-90" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="320.55555555555554" z="283.33333333333337" w="7.5" d="7.5" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="355.55555555555554" z="283.33333333333337" w="7.5" d="7.5" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="346.80555555555554" z="287.08333333333337" w="10" d="15" h="0" />
   <unique vars="mTrip mReset mField" />
   <Timer in="mTrip" out="mReset" wait="30" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="180" extent="180" />
   <Timer in="mTrip" out="mField" wait="5" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="180" extent="180" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="351.18055555555554" z="286.45833333333337" w="8.75" d="8.125" h="7.5" y="-5" />
-  <WallDoor open="mTrip" close="mReset" openSpeed="20" closeSpeed="20" shotPower="1" deltaY=".75 * 5" deltaX="-.75 * 5" roll="90" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="351.80555555555554" z="287.08333333333337" w="7.5" d="7.5" h="0" />
-  <Field start="mField" stop="mReset" deltaX="-3" deltaY="2" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="351.80555555555554" z="287.08333333333337" w="7.5" d="7.5" h="7.5" y="-5" />
-  <Wall fill="#bbbbbb" frame="#000000" x="334.30555555555554" z="279.58333333333337" w="7.5" d="2.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="334.30555555555554" z="292.08333333333337" w="7.5" d="2.5" h="0" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="355.55555555555554" z="290.52083333333337" w="8.75" d="8.125" h="7.5" y="-5" />
+  <WallDoor open="mTrip" close="mReset" openSpeed="20" closeSpeed="20" shotPower="1" deltaY=".75 * 5" deltaX="-.75 * 5" roll="90" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="355.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="0" />
+  <Field start="mField" stop="mReset" deltaX="-3" deltaY="2" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="355.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="7.5" y="-5" />
+  <Wall fill="#bbbbbb" frame="#000000" x="338.05555555555554" z="280.83333333333337" w="7.5" d="2.5" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="338.05555555555554" z="293.33333333333337" w="7.5" d="2.5" h="0" />
   <set wallHeight="StripThick / 2" />
   <unique vars="mTrip mReset" />
-  <Wall fill="#bbbbbb" frame="#000000" x="334.30555555555554" z="282.08333333333337" w="7.5" d="10" h="0" />
-  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="333.05555555555554" z="281.45833333333337" w="9.375" d="11.25" h="7.5" />
+  <Wall fill="#bbbbbb" frame="#000000" x="338.05555555555554" z="287.08333333333337" w="7.5" d="10" h="0" />
+  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="337.74305555555554" z="287.08333333333337" w="9.375" d="11.25" h="7.5" />
   <set wa="wallHeight" />
-  <WallDoor middle=".04" midY=".75 * 5" deltaY=".75 * 5" midRoll="-90" roll="-90" pitch="360 * 10" open="mTrip" close="mReset" shotPower="2" openSpeed=".7" closeSpeed=".7" guardDelay="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="334.30555555555554" z="282.08333333333337" w="7.5" d="5" h="0" />
+  <WallDoor middle=".04" midY=".75 * 5" deltaY=".75 * 5" midRoll="-90" roll="-90" pitch="360 * 10" open="mTrip" close="mReset" shotPower="2" openSpeed=".7" closeSpeed=".7" guardDelay="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="338.05555555555554" z="284.58333333333337" w="7.5" d="5" h="0" />
   <set wa="wallHeight" />
-  <WallDoor middle=".04" midY=".75 * 5" deltaY=".75 * 5" midRoll="-90" roll="-90" pitch="360 * 10" open="mTrip" didOpen="mReset" close="mReset" shotPower="2" openSpeed=".7" closeSpeed=".7" guardDelay="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="334.30555555555554" z="287.08333333333337" w="7.5" d="5" h="0" />
+  <WallDoor middle=".04" midY=".75 * 5" deltaY=".75 * 5" midRoll="-90" roll="-90" pitch="360 * 10" open="mTrip" didOpen="mReset" close="mReset" shotPower="2" openSpeed=".7" closeSpeed=".7" guardDelay="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="338.05555555555554" z="289.58333333333337" w="7.5" d="5" h="0" />
   <set wallHeight="StripThick" />
   <unique vars="mTrip mReset" />
   <set wallYon="30" />
-  <Wall fill="#bbbbbb" frame="#000000" x="369.3055555555556" z="294.58333333333337" w="5" d="39.93055555555554" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="369.3055555555556" z="239.58333333333334" w="5" d="40" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="371.8055555555556" z="314.54861111111114" w="5" d="39.93055555555554" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="371.8055555555556" z="259.58333333333337" w="5" d="40" h="0" />
   <set wallYon="0" />
-  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="363.0555555555556" z="279.58333333333337" w="16.875" d="15" h="7.5" />
+  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="371.4930555555556" z="287.08333333333337" w="16.875" d="15" h="7.5" />
   <Door2 shape="bspSphere" y="3" midX="-45" deltaX="45" deltaY="0" roll="-360 * 2.6" open="mTrip" didOpen="mReset" close="mReset" shotPower="2.5" guardDelay="0" openSpeed="4" closeSpeed="100" yon="30" openSound="snGobble" closeSound="0" stopSound="0" fill="#663300" frame="#000000" cx="371.73611111111114" cz="287.08333333333337" r="7.5" angle="180" extent="180" />
-  <Wall fill="#bbbbbb" frame="#000000" x="389.3055555555556" z="279.58333333333337" w="10" d="15" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="394.3055555555556" z="287.08333333333337" w="10" d="15" h="0" />
   <Teleporter win="5000" y="StripThick" fill="#0099ff" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="180" extent="180" />
-  <Wall fill="#bbbbbb" frame="#000000" x="381.8055555555556" z="287.08333333333337" w="7.5" d="7.5" h="0" />
+  <Wall fill="#bbbbbb" frame="#000000" x="385.5555555555556" z="290.83333333333337" w="7.5" d="7.5" h="0" />
   <unique vars="mTrip mReset mField" />
   <Timer in="mTrip" out="mReset" wait="30" fill="#bbbbbb" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="180" extent="180" />
   <Timer in="mTrip" out="mField" wait="7" fill="#bbbbbb" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="180" extent="180" />
-  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="381.1805555555556" z="279.58333333333337" w="8.75" d="8.125" h="7.5" y="-5" />
-  <Field start="mField" stop="mReset" exit="mReset" deltaX="-3" deltaY="3.5" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="381.8055555555556" z="279.58333333333337" w="7.5" d="7.5" h="7.5" y="3" />
-  <WallDoor open="mTrip" didOpen="mField" close="mReset" openSpeed="7" closeSpeed="4" shotPower=".5" deltaY=".75 * 5" roll="10" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="381.8055555555556" z="279.58333333333337" w="7.5694444444444" d="7.5" h="0" />
+  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="385.5555555555556" z="283.64583333333337" w="8.75" d="8.125" h="7.5" y="-5" />
+  <Field start="mField" stop="mReset" exit="mReset" deltaX="-3" deltaY="3.5" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="385.5555555555556" z="283.33333333333337" w="7.5" d="7.5" h="7.5" y="3" />
+  <WallDoor open="mTrip" didOpen="mField" close="mReset" openSpeed="7" closeSpeed="4" shotPower=".5" deltaY=".75 * 5" roll="10" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="385.5902777777778" z="283.33333333333337" w="7.5694444444444" d="7.5" h="0" />
   <Teleporter destGroup="@restart" group="-1" deadRange="baseHeight -10" activeRange="2000" shape="0" y="7.5" fill="#ffffff" frame="#000000" cx="319.30555555555554" cz="290.20833333333337" r="2.5" angle="180" extent="180" />
   <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="15.555555555555557" cz="27.708333333333336" r="1.25" angle="180" extent="359" />
   <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="12.708333333333334" r="1.25" angle="180" extent="359" />

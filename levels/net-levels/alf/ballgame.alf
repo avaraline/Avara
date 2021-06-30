@@ -21,19 +21,19 @@ The ball will appear at the top platform. The objective of the game is to move t
   <Goal goalScore="10000" team="2" fill="#ee0000" frame="#ffff00" cx="45.06944444444444" cz="77.56944444444444" r="1.25" angle="180" extent="270" />
   <Hologram shape="bspGroundArrow" fill="#ffff00" frame="#dd0000" cx="85" cz="77.5" r="1.25" angle="180" extent="180" />
   <Hologram shape="bspGroundArrow" fill="#008800" frame="#dd0000" cx="105" cz="77.5" r="1.25" angle="0" extent="180" />
-  <Wall fill="#669999" frame="#000000" x="70" z="62.5" w="5" d="5" h="0" />
-  <Wall fill="#669999" frame="#000000" x="70" z="87.5" w="5" d="5" h="0" />
-  <Wall fill="#669999" frame="#000000" x="115" z="62.5" w="5" d="5" h="0" />
-  <Wall fill="#669999" frame="#000000" x="115" z="87.5" w="5" d="5" h="0" />
+  <Wall fill="#669999" frame="#000000" x="72.5" z="65" w="5" d="5" h="0" />
+  <Wall fill="#669999" frame="#000000" x="72.5" z="90" w="5" d="5" h="0" />
+  <Wall fill="#669999" frame="#000000" x="117.5" z="65" w="5" d="5" h="0" />
+  <Wall fill="#669999" frame="#000000" x="117.5" z="90" w="5" d="5" h="0" />
   <set wa="level2 -0.5" />
-  <Wall fill="#669999" frame="#000000" x="90" z="62.5" w="10" d="5" h="0.5" />
+  <Wall fill="#669999" frame="#000000" x="95" z="65" w="10" d="5" h="0.5" />
   <set wa="level2 -0.5" />
-  <Wall fill="#669999" frame="#000000" x="90" z="87.5" w="10" d="5" h="0.5" />
-  <Ramp deltaY="plat2 + thickness" y="level2 -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="93.125" z="67.5" w="3.75" d="5" h="0" r="1.875" angle="135" extent="90" />
-  <Ramp deltaY="plat2 + thickness" y="level2 -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="93.125" z="82.5" w="3.75" d="5" h="0" r="1.875" angle="315" extent="90" />
-  <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="75" z="63.75" w="15" d="2.5" h="0" r="1.25" angle="45" extent="90" />
-  <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="100" z="63.75" w="15" d="2.5" h="0" r="1.25" angle="225" extent="90" />
-  <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="75" z="88.75" w="15" d="2.5" h="0" r="1.25" angle="45" extent="90" />
+  <Wall fill="#669999" frame="#000000" x="95" z="90" w="10" d="5" h="0.5" />
+  <Ramp deltaY="plat2 + thickness" y="level2 -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="95" z="70" w="3.75" d="5" h="0" r="1.875" angle="135" extent="90" />
+  <Ramp deltaY="plat2 + thickness" y="level2 -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="95" z="85" w="3.75" d="5" h="0" r="1.875" angle="315" extent="90" />
+  <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="82.5" z="65" w="15" d="2.5" h="0" r="1.25" angle="45" extent="90" />
+  <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="107.5" z="65" w="15" d="2.5" h="0" r="1.25" angle="225" extent="90" />
+  <Ramp deltaY="platHeight + thickness" y="wallHeight -thickness" thickness="rampThickness" fill="#669999" frame="#000000" x="82.5" z="90" w="15" d="2.5" h="0" r="1.25" angle="45" extent="90" />
   <script>
 object Ramp
 deltaY = platHeight + thickness
@@ -43,49 +43,49 @@ end
 
 saveBase &lt;- baseHeight
 baseHeight &lt;- level3 - 0.25</script>
-  <Wall fill="#669999" frame="#000000" x="90" z="72.5" w="10" d="3.75" h="0.5" />
-  <Wall fill="#669999" frame="#000000" x="90" z="78.75" w="10" d="3.75" h="0.5" />
-  <Wall fill="#669999" frame="#000000" x="90" z="76.25" w="3.75" d="2.5" h="0.5" />
-  <Wall fill="#669999" frame="#000000" x="96.25" z="76.25" w="3.75" d="2.5" h="0.5" />
+  <Wall fill="#669999" frame="#000000" x="95" z="74.375" w="10" d="3.75" h="0.5" />
+  <Wall fill="#669999" frame="#000000" x="95" z="80.625" w="10" d="3.75" h="0.5" />
+  <Wall fill="#669999" frame="#000000" x="91.875" z="77.5" w="3.75" d="2.5" h="0.5" />
+  <Wall fill="#669999" frame="#000000" x="98.125" z="77.5" w="3.75" d="2.5" h="0.5" />
   <script>
 baseHeight &lt;- saveBase</script>
-  <Wall fill="#669999" frame="#000000" x="51.875" z="65" w="3.125" d="10" h="1.5" />
-  <Wall fill="#669999" frame="#000000" x="51.875" z="80" w="3.125" d="10" h="1.5" />
-  <Wall fill="#669999" frame="#000000" x="135" z="65.625" w="3.125" d="10" h="1.5" />
-  <Wall fill="#669999" frame="#000000" x="135" z="80.625" w="3.125" d="10" h="1.5" />
+  <Wall fill="#669999" frame="#000000" x="53.4375" z="70" w="3.125" d="10" h="1.5" />
+  <Wall fill="#669999" frame="#000000" x="53.4375" z="85" w="3.125" d="10" h="1.5" />
+  <Wall fill="#669999" frame="#000000" x="136.5625" z="70.625" w="3.125" d="10" h="1.5" />
+  <Wall fill="#669999" frame="#000000" x="136.5625" z="85.625" w="3.125" d="10" h="1.5" />
   <Ball carryScore="2" y="25" fill="#ee0000" frame="#ee0000" cx="95.06944444444444" cz="77.56944444444444" r="1.875" angle="0" extent="90" />
   <script>
 wallHeight &lt;- 2
 baseHeight &lt;- 15</script>
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="55" z="95" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="70" z="105" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="85" z="110" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="102.5" z="110" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="117.5" z="105" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="132.5" z="95" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="55" z="57.5" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="70" z="47.5" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="85" z="42.5" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="102.5" z="42.5" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="117.5" z="47.5" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="132.5" z="57.5" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="56.25" z="96.25" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="71.25" z="106.25" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="86.25" z="111.25" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="103.75" z="111.25" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="118.75" z="106.25" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="133.75" z="96.25" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="56.25" z="58.75" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="71.25" z="48.75" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="86.25" z="43.75" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="103.75" z="43.75" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="118.75" z="48.75" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <FreeSolid shotPower="1" fill="#000077" frame="#000000" x="133.75" z="58.75" w="2.5" d="2.5" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
   <set baseHeight="0" wallHeight="7" />
-  <Field head="45" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="20" z="10" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="60" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="50" z="5" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="90" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="80" z="0" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="120" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="110" z="5" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="135" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="140" z="10" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="165" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="155" z="40" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="180" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="160" z="70" w="29.375" d="20" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="195" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="155" z="90" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="225" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="140.625" z="120" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="240" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="110.625" z="125" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="270" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="80.625" z="130" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="300" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="50.625" z="125" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="315" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="20.625" z="120" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="345" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="5.625" z="90" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="15" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="5.625" z="40" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
-  <Field head="0" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="0" z="70" w="29.375" d="20" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="45" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="35" z="25" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="60" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="65" z="20" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="90" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="95" z="15" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="120" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="125" z="20" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="135" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="155" z="25" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="165" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="170" z="55" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="180" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="174.6875" z="80" w="29.375" d="20" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="195" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="170" z="105" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="225" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="155.625" z="135" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="240" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="125.625" z="140" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="270" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="95.625" z="145" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="300" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="65.625" z="140" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="315" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="35.625" z="135" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="345" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="20.625" z="105" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="15" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="20.625" z="55" w="30" d="30" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
+  <Field head="0" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" x="14.6875" z="80" w="29.375" d="20" h="0" r="5" cx="60" cz="45" angle="180" extent="90" />
   <unique vars="mg1 mg2 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="goodyY" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#dd0000" frame="#ff6600" cx="95.34722222222223" cz="90.76388888888889" r="2.5" angle="180" extent="270" />
   <Goody shape="bspMissile" speed="10" y="goodyY" start="mg2" stop="mg1" out="mWait" missiles="3" fill="#dd0000" frame="#ff6600" cx="95.34722222222223" cz="90.76388888888889" r="2.5" angle="180" extent="270" />

@@ -20,27 +20,27 @@ There are two separate areas in the level." />
   <unique vars="mStop" />
   <Teleporter shape="0" y="freezerHeight" activeRange="2" start="@melt" stop="mStop" destGroup="@recenterA" fill="#9900cc" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" r="1.875" angle="270" extent="180" />
   <Timer in="@melt" wait="3" out="mStop" fill="#9900cc" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" r="1.875" angle="270" extent="180" />
-  <WallDoor stepOnMsg="@freeze" open="@freeze" didOpen="@frozen" close="@melt" deltaY="freezerHeight" guardDelay="1" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="33.05555555555556" z="32.708333333333336" w="3.75" d="3.75" h="0.5" />
+  <WallDoor stepOnMsg="@freeze" open="@freeze" didOpen="@frozen" close="@melt" deltaY="freezerHeight" guardDelay="1" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="34.93055555555556" z="34.583333333333336" w="3.75" d="3.75" h="0.5" />
   <set baseHeight="freezerHeight" />
-  <Field watch="collisionDamageMask" deltaX="-fieldForce" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="30.555555555555557" z="30.208333333333336" w="1.875" d="8.75" h="0" />
-  <Field watch="collisionDamageMask" deltaX="fieldForce" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="37.43055555555556" z="30.208333333333336" w="1.875" d="8.75" h="0" />
-  <Field watch="collisionDamageMask" deltaZ="fieldForce" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="30.555555555555557" z="37.083333333333336" w="8.75" d="1.875" h="0" />
-  <Field watch="collisionDamageMask" deltaZ="-fieldForce" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="30.555555555555557" z="30.208333333333336" w="8.75" d="1.875" h="0" />
-  <Wall fill="#99ccff" frame="#000000" x="36.80555555555556" z="32.708333333333336" w="0.625" d="3.75" h="0" />
-  <Wall fill="#99ccff" frame="#000000" x="32.43055555555556" z="32.708333333333336" w="0.625" d="3.75" h="0" />
-  <Wall fill="#99ccff" frame="#000000" x="33.05555555555556" z="32.083333333333336" w="3.75" d="0.625" h="0" />
-  <Wall fill="#99ccff" frame="#000000" x="33.05555555555556" z="36.458333333333336" w="3.75" d="0.625" h="0" />
+  <Field watch="collisionDamageMask" deltaX="-fieldForce" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="31.493055555555557" z="34.583333333333336" w="1.875" d="8.75" h="0" />
+  <Field watch="collisionDamageMask" deltaX="fieldForce" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="38.36805555555556" z="34.583333333333336" w="1.875" d="8.75" h="0" />
+  <Field watch="collisionDamageMask" deltaZ="fieldForce" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="34.93055555555556" z="38.020833333333336" w="8.75" d="1.875" h="0" />
+  <Field watch="collisionDamageMask" deltaZ="-fieldForce" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="34.93055555555556" z="31.145833333333336" w="8.75" d="1.875" h="0" />
+  <Wall fill="#99ccff" frame="#000000" x="37.11805555555556" z="34.583333333333336" w="0.625" d="3.75" h="0" />
+  <Wall fill="#99ccff" frame="#000000" x="32.74305555555556" z="34.583333333333336" w="0.625" d="3.75" h="0" />
+  <Wall fill="#99ccff" frame="#000000" x="34.93055555555556" z="32.395833333333336" w="3.75" d="0.625" h="0" />
+  <Wall fill="#99ccff" frame="#000000" x="34.93055555555556" z="36.770833333333336" w="3.75" d="0.625" h="0" />
   <set baseHeight="0" wa="freezerHeight + wallHeight" />
-  <Wall fill="#99ccff" frame="#000000" x="32.43055555555556" z="32.083333333333336" w="5" d="5" h="0.5" />
+  <Wall fill="#99ccff" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="5" d="5" h="0.5" />
   <set wa="freezerHeight + wallHeight" />
-  <Field watch="collisionDamageMask" deltaY="fieldForce" deltaX=".5" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="31.805555555555557" z="31.458333333333336" w="6.25" d="6.25" h="1.5" />
+  <Field watch="collisionDamageMask" deltaY="fieldForce" deltaX=".5" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="34.93055555555556" z="34.583333333333336" w="6.25" d="6.25" h="1.5" />
   <set wa="freezerHeight -2" />
-  <Field watch="collisionDamageMask" deltaY="-fieldForce" start="@frozen" stop="@melt" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="31.805555555555557" z="31.458333333333336" w="6.25" d="6.25" h="2" />
+  <Field watch="collisionDamageMask" deltaY="-fieldForce" start="@frozen" stop="@melt" fill="#99ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="34.93055555555556" z="34.583333333333336" w="6.25" d="6.25" h="2" />
   <set wallHeight="freezerHeight" />
-  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="32.43055555555556" z="32.083333333333336" w="0.625" d="0.625" h="0" />
-  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="32.43055555555556" z="36.458333333333336" w="0.625" d="0.625" h="0" />
-  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="36.80555555555556" z="36.458333333333336" w="0.625" d="0.625" h="0" />
-  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="36.80555555555556" z="32.083333333333336" w="0.625" d="0.625" h="0" />
+  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="32.74305555555556" z="32.395833333333336" w="0.625" d="0.625" h="0" />
+  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="32.74305555555556" z="36.770833333333336" w="0.625" d="0.625" h="0" />
+  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="37.11805555555556" z="36.770833333333336" w="0.625" d="0.625" h="0" />
+  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" r="1.875" cx="34.93055555555556" cz="34.583333333333336" angle="270" extent="180" x="37.11805555555556" z="32.395833333333336" w="0.625" d="0.625" h="0" />
   <unique vars="mTaken mReset" />
   <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="50" cz="49.65277777777778" r="1.875" angle="0" extent="270" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" fill="#99ccff" frame="#66ffff" cx="50" cz="49.65277777777778" r="1.875" angle="0" extent="270" />
@@ -66,14 +66,14 @@ There are two separate areas in the level." />
   <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="35" cz="13.402777777777779" r="1.875" angle="0" extent="270" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" fill="#99ccff" frame="#66ffff" cx="35" cz="13.402777777777779" r="1.875" angle="0" extent="270" />
   <Hologram isAmbient="true" fill="#66ffff" frame="#000000" cx="49.30555555555556" cz="34.583333333333336" r="1.875" angle="90" extent="270" />
-  <Wall fill="#99ccff" frame="#000000" x="83.05555555555556" z="82.70833333333334" w="3.75" d="3.75" h="0.5" />
+  <Wall fill="#99ccff" frame="#000000" x="84.93055555555556" z="84.58333333333334" w="3.75" d="3.75" h="0.5" />
   <set baseHeight="freezerHeight" />
-  <Wall fill="#99ccff" frame="#000000" x="82.43055555555556" z="82.08333333333334" w="5" d="5" h="0.5" />
+  <Wall fill="#99ccff" frame="#000000" x="84.93055555555556" z="84.58333333333334" w="5" d="5" h="0.5" />
   <set baseHeight="0" wallHeight="freezerHeight" />
-  <Wall fill="#00ccff" frame="#000000" x="82.43055555555556" z="82.08333333333334" w="0.625" d="0.625" h="0" />
-  <Wall fill="#00ccff" frame="#000000" x="82.43055555555556" z="86.45833333333334" w="0.625" d="0.625" h="0" />
-  <Wall fill="#00ccff" frame="#000000" x="86.80555555555556" z="86.45833333333334" w="0.625" d="0.625" h="0" />
-  <Wall fill="#00ccff" frame="#000000" x="86.80555555555556" z="82.08333333333334" w="0.625" d="0.625" h="0" />
+  <Wall fill="#00ccff" frame="#000000" x="82.74305555555556" z="82.39583333333334" w="0.625" d="0.625" h="0" />
+  <Wall fill="#00ccff" frame="#000000" x="82.74305555555556" z="86.77083333333334" w="0.625" d="0.625" h="0" />
+  <Wall fill="#00ccff" frame="#000000" x="87.11805555555556" z="86.77083333333334" w="0.625" d="0.625" h="0" />
+  <Wall fill="#00ccff" frame="#000000" x="87.11805555555556" z="82.39583333333334" w="0.625" d="0.625" h="0" />
   <unique vars="mTaken mReset" />
   <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="85.625" cz="97.77777777777779" r="1.875" angle="0" extent="270" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" fill="#99ccff" frame="#66ffff" cx="85.625" cz="97.77777777777779" r="1.875" angle="0" extent="270" />
@@ -98,7 +98,7 @@ There are two separate areas in the level." />
   <Sound sound="snArcticWind" loopCount="-1" fill="#66ffff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" r="1.875" angle="0" extent="270" />
   <Teleporter group="@recenterB" y="freezerHeight + 4" start="0" fill="#66ffff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" r="1.875" angle="0" extent="270" />
   <Teleporter destGroup="@recenterB" y="-3" activeRange="20" deadRange="17" yon="0.01" fill="#66ffff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" r="1.875" angle="0" extent="270" />
-  <WallDoor midYaw="45" fill="#99ccff" frame="#000000" r="1.875" cx="84.93055555555556" cz="84.58333333333334" angle="0" extent="270" x="47.43055555555556" z="62.083333333333336" w="29.930555555555557" d="0.625" h="0.25" />
+  <WallDoor midYaw="45" fill="#99ccff" frame="#000000" r="1.875" cx="84.93055555555556" cz="84.58333333333334" angle="0" extent="270" x="62.395833333333336" z="62.395833333333336" w="29.930555555555557" d="0.625" h="0.25" />
   <Distributor in="@TelSwitch" out.0="@TelOn" out.1="@TelOff" fill="#99ccff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" r="1.875" angle="0" extent="270" />
-  <YonBox y="5" deltaY="5" fill="#99ccff" frame="#ff0099" x="32.5" z="32.15277777777778" w="5" d="5" h="0" r="1.875" angle="0" extent="270" />
+  <YonBox y="5" deltaY="5" fill="#99ccff" frame="#ff0099" x="35" z="34.65277777777778" w="5" d="5" h="0" r="1.875" angle="0" extent="270" />
 </map>
