@@ -40,6 +40,13 @@ int numToDrop = 0;
 #include "Preferences.h"
 #include "System.h"
 
+#include <miniupnpc/miniupnpc.h>
+#include <miniupnpc/upnpcommands.h>
+#include <miniupnpc/upnperrors.h>
+
+#include <thread>
+
+
 // get rid of this
 #include "CAvaraApp.h"
 
@@ -1281,11 +1288,79 @@ void CUDPComm::Dispose() {
     CCommManager::Dispose();
 }
 
+/**
+    Set up port forwarding using upnp.
+ */
+void ForwardPorts(port_num port) {
+    struct UPNPDev * devlist = 0;
+    struct UPNPDev * dev;
+    int error = 0;
+    const char * multicastif = 0;
+    const char * minissdpdpath = 0;
+    int ipv6 = 0;
+    unsigned char ttl = 2;
+    int i;
+
+    static const char * const deviceList[] = {
+        //"urn:schemas-upnp-org:device:InternetGatewayDevice:2",
+        //"urn:schemas-upnp-org:service:WANIPConnection:2",
+        "urn:schemas-upnp-org:device:InternetGatewayDevice:1",
+        0
+    };
+    
+    devlist = upnpDiscoverDevices(deviceList,
+                                  5000, multicastif, minissdpdpath,
+                                  0/*localport*/, ipv6, ttl, &error, 1);
+
+    if(devlist) {
+        for(dev = devlist, i = 1; dev != NULL; dev = dev->pNext, i++) {
+            //printf("%3d: %-48s\n", i, dev->st);
+            //printf("     %s\n", dev->descURL);
+            //printf("     %s\n", dev->usn);
+
+            struct UPNPUrls upnp_urls;
+            struct IGDdatas upnp_data;
+            char aLanAddr[64];
+            std::string portString = std::to_string(port);
+            const char *pPort = portString.c_str();
+
+            // Retrieve a valid Internet Gateway Device
+            int status = UPNP_GetValidIGD(dev, &upnp_urls, &upnp_data, aLanAddr,
+                                          sizeof(aLanAddr));
+            //printf("status=%d, lan_addr=%s\n", status, aLanAddr);
+            
+            if (status == 1) {
+                SDL_Log("UPNP: UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
+                error = UPNP_AddPortMapping(upnp_urls.controlURL,
+                                        upnp_data.first.servicetype,
+                                        pPort, // external port
+                                        pPort, // internal port
+                                        aLanAddr, "Avara", "UDP",
+                                        0,  // remote host
+                                        "0" // lease duration, recommended 0 as some NAT
+                                            // implementations may not support another value
+                    );
+
+                if (error) {
+                    SDL_Log("UPNP: failed to map port\n");
+                    SDL_Log("UPNP: error: %s\n", strupnperror(error));
+                } else {
+                    SDL_Log("UPNP: successfully mapped port\n");
+                }
+            }
+        }
+    } else {
+        SDL_Log("UPNP: upnpDiscoverDevices found no devices.\n");
+    }
+}
+
 void CUDPComm::CreateServer() {
     OSErr theErr;
 
     localPort = gApplication->Number(kDefaultUDPPort);
 
+    std::thread forwardPorts(ForwardPorts, localPort);
+    forwardPorts.detach();
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
@@ -1303,8 +1378,6 @@ void CUDPComm::CreateServer() {
     {	tracker->StartTracking();
     }
     */
-
-    //	And that's all there is to it!
 }
 
 OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
@@ -1378,6 +1451,8 @@ void CUDPComm::Connect(std::string address) {
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
     SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
+    std::thread forwardPorts(ForwardPorts, localPort);
+    forwardPorts.detach();
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
