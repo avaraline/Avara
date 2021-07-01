@@ -247,31 +247,31 @@
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Timer in="mTaken" out="mShow" wait="250" />
+  <Timer in="mTaken" out="mShow" wait="500" />
   <Goody shape="bspAvaraA" fill="#C8725B" speed="2" grenades="12" missiles="6" boosters="1" start="mShow" out="mTaken" cx="0" cz="0" y="8" />
 
   <!-- top level goodies -->
   <unique vars="mShow mTaken" />
   <Timer in="@start" out="mShow" wait="150" />
-  <Timer in="mTaken" out="mShow" wait="150" />
+  <Timer in="mTaken" out="mShow" wait="250" />
   <Goody shape="bspGrenade" speed="2" grenades="8" start="mShow" out="mTaken" cx="-36" cz="0" y="13.75" />
   <WallDoor midYaw="45" fill="#C9E58E" frame="#000000" x="-36" z="0" w="2.5" d="2.5" h="0.2" y="11.9" />
 
   <unique vars="mShow mTaken" />
   <Timer in="@start" out="mShow" wait="150" />
-  <Timer in="mTaken" out="mShow" wait="150" />
+  <Timer in="mTaken" out="mShow" wait="250" />
   <Goody shape="bspGrenade" speed="2" grenades="8" start="mShow" out="mTaken" cx="36" cz="0" y="13.75" />
   <WallDoor midYaw="45" fill="#C9E58E" frame="#000000" x="36" z="0" w="2.5" d="2.5" h="0.2" y="11.9" />
 
   <unique vars="mShow mTaken" />
   <Timer in="@start" out="mShow" wait="150" />
-  <Timer in="mTaken" out="mShow" wait="150" />
+  <Timer in="mTaken" out="mShow" wait="250" />
   <Goody shape="bspMissile" speed="2" missiles="4" start="mShow" out="mTaken" cx="0" cz="-36" y="13.75" />
   <WallDoor midYaw="45" fill="#C9E58E" frame="#000000" x="0" z="-36" w="2.5" d="2.5" h="0.2" y="11.9" />
 
   <unique vars="mShow mTaken" />
   <Timer in="@start" out="mShow" wait="150" />
-  <Timer in="mTaken" out="mShow" wait="150" />
+  <Timer in="mTaken" out="mShow" wait="250" />
   <Goody shape="bspMissile" speed="2" missiles="4" start="mShow" out="mTaken" cx="0" cz="36" y="13.75" />
   <WallDoor midYaw="45" fill="#C9E58E" frame="#000000" x="0" z="36" w="2.5" d="2.5" h="0.2" y="11.9" />
 
@@ -328,12 +328,12 @@
   <Wall fill="#C9E58E" frame="#000000" x="-36" z="-32" w="12" d="4" h="6" />
   <Wall fill="#C9E58E" frame="#000000" x="-32" z="-38" w="4" d="8" h="6" />
   <Teleporter shape="0" start="0" group="@nw" cx="-36" cz="-36" y="12" spin="false" />
-  <Teleporter shape="bspLotus" scale="0.25" destGroup="@nw" fill="#ffffff" frame="#000000" cx="-38" cz="-38" />
+  <Teleporter shape="bspLotus" speed="2" scale="0.25" destGroup="@nw" fill="#ffffff" frame="#000000" cx="-38" cz="-38" />
 
   <Wall fill="#C9E58E" frame="#000000" x="-36" z="32" w="12" d="4" h="6" />
   <Wall fill="#C9E58E" frame="#000000" x="-32" z="38" w="4" d="8" h="6" />
   <Teleporter shape="0" start="0" group="@sw" cx="-36" cz="36" y="12" spin="false" />
-  <Teleporter shape="bspLotus" scale="0.25" destGroup="@sw" fill="#ffffff" frame="#000000" cx="-38" cz="38" />
+  <Teleporter shape="bspLotus" speed="2" scale="0.25" destGroup="@sw" fill="#ffffff" frame="#000000" cx="-38" cz="38" />
 
   <Wall fill="#C9E58E" frame="#000000" x="36" z="-32" w="12" d="4" h="6" />
   <Wall fill="#C9E58E" frame="#000000" x="32" z="-38" w="4" d="8" h="6" />
@@ -343,5 +343,5 @@
   <Wall fill="#C9E58E" frame="#000000" x="36" z="32" w="12" d="4" h="6" />
   <Wall fill="#C9E58E" frame="#000000" x="32" z="38" w="4" d="8" h="6" />
   <Teleporter shape="0" start="0" group="@se" cx="36" cz="36" y="12" spin="false" />
-  <Teleporter shape="bspLotus" scale="0.25" destGroup="@se" fill="#ffffff" frame="#000000" cx="38" cz="38" />
+  <Teleporter shape="bspLotus" speed="2" scale="0.25" destGroup="@se" fill="#ffffff" frame="#000000" cx="38" cz="38" />
 </map>
