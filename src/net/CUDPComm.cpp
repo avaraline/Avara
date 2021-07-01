@@ -1331,8 +1331,8 @@ void ForwardPorts(port_num port) {
             
             if (status == 1) {
                 SDL_Log("UPNP: UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
-                error =
-                    UPNP_AddPortMapping(upnp_urls.controlURL, upnp_data.first.servicetype,
+                error = UPNP_AddPortMapping(upnp_urls.controlURL,
+                                        upnp_data.first.servicetype,
                                         pPort, // external port
                                         pPort, // internal port
                                         aLanAddr, "Avara", "UDP",
@@ -1344,11 +1344,10 @@ void ForwardPorts(port_num port) {
                 if (error) {
                     SDL_Log("UPNP: failed to map port\n");
                     SDL_Log("UPNP: error: %s\n", strupnperror(error));
-                } else
+                } else {
                     SDL_Log("UPNP: successfully mapped port\n");
-              } else {
-                  SDL_Log("UPNP: no valid IGD found\n");
-              }
+                }
+            }
         }
     } else {
         SDL_Log("UPNP: upnpDiscoverDevices found no devices.\n");
