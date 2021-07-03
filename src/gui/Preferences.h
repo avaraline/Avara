@@ -49,6 +49,7 @@ using json = nlohmann::json;
 // Levels
 #define kRecentSets "recentSets"
 #define kRecentLevels "recentLevels"
+#define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -105,7 +106,8 @@ static json defaultPrefs = {
     {kTrackerRegisterAddress, "avara.io"},
     {kTrackerRegisterFrequency, 5},
     {kRecentSets, {}},
-    {kRecentLevels, {}}
+    {kRecentLevels, {}},
+    {kIgnoreCustomGoodySound, false}
 };
 
 

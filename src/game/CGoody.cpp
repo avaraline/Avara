@@ -14,6 +14,10 @@
 #include "CSmartPart.h"
 #include "CWallActor.h"
 #include "GoodyRecord.h"
+#include "Preferences.h"
+
+#define kGoodySound 250
+
 
 extern CWallActor *lastWallActor;
 
@@ -40,7 +44,7 @@ void CGoody::BeginScript() {
 
     ProgramLongVar(iOutVar, 0);
 
-    ProgramLongVar(iSound, 250);
+    ProgramLongVar(iSound, kGoodySound);
     ProgramFixedVar(iVolume, FIX(1));
     ProgramLongVar(iOpenSound, 0);
     ProgramLongVar(iCloseSound, 0);
@@ -85,7 +89,13 @@ CAbstractActor *CGoody::EndScript() {
         boostTime = ReadLongVar(iBoostTime);
         outMsg = ReadLongVar(iOutVar);
 
-        soundId = ReadLongVar(iSound);
+        if(itsGame->itsApp->Boolean(kIgnoreCustomGoodySound)) {
+            soundId = kGoodySound;
+        }
+        else {
+            soundId = ReadLongVar(iSound);
+        }
+        
         openSoundId = ReadLongVar(iOpenSound);
         closeSoundId = ReadLongVar(iCloseSound);
         volume = ReadFixedVar(iVolume);
