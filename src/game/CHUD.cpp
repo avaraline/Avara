@@ -375,7 +375,8 @@ void CHUD::DrawLevelInfo(int chudHeight, CViewParameters *view, NVGcontext *ctx)
        itsGame->gameStatus != kPlayingStatus &&
        itsGame->gameStatus != kLoseStatus &&
        itsGame->gameStatus != kWinStatus &&
-       itsGame->gameStatus != kPauseStatus) {
+       itsGame->gameStatus != kPauseStatus &&
+       itsGame->gameStatus != kAbortStatus) {
 
         std::vector<std::pair<std::string, std::string>> data;
         long lives = ReadLongVar(iDefaultLives);
