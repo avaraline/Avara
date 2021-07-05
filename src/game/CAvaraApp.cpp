@@ -66,8 +66,7 @@ void TrackerPinger(CAvaraAppImpl *app) {
 
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-    itsGame = new CAvaraGame(GAMETICKINTERVAL);
-    // itsGame = new CAvaraGame(64);
+    itsGame = new CAvaraGame(gApplication->Number(kFrameTime));
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);

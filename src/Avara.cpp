@@ -73,6 +73,9 @@ int main(int argc, char *argv[]) {
             connectAddress = std::string(argv[++i]);
         } else if (arg == "-h" || arg == "--host") {
             host = true;
+        } else if (arg == "-f" || arg == "--frametime") {
+            long frameTime = atol(argv[++i]);  // pre-inc to next arg
+            app->GetGame()->SetFrameTime(frameTime);
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);

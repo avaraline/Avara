@@ -34,6 +34,7 @@ using json = nlohmann::json;
 #define kMultiSamplesTag "multiSamples"
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
+#define kFrameTime "frameTime"
 
 // Other graphics settings
 #define kColorBlindMode "colorBlindMode"
@@ -101,6 +102,7 @@ static json defaultPrefs = {
     {kFOV, 50.0},
     {kColorBlindMode, 0},
     {kWeaponSightAlpha, 1.0},
+    {kFrameTime, 16},
     {kLastAddress, ""},
     {kServerDescription, ""},
     {kServerPassword, ""},
