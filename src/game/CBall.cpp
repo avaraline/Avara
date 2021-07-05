@@ -25,7 +25,7 @@ void CBall::IAbstractActor() {
     CRealShooters::IAbstractActor();
 
     mass = kStandardBallMass;
-    baseMass = kStandardBallMass;
+    baseMass = kStandardBallMass; //?? should be kBallBaseMass ?
 
     carryScoreAccumulator = 0;
 
