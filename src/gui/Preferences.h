@@ -34,6 +34,7 @@ using json = nlohmann::json;
 #define kMultiSamplesTag "multiSamples"
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
+#define kFrameTime "frameTime"
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
@@ -94,6 +95,7 @@ static json defaultPrefs = {
     {kWindowHeight, 768},
     {kFullScreenTag, false},
     {kFOV, 50.0},
+    {kFrameTime, 64},
     {kLastAddress, ""},
     {kServerDescription, ""},
     {kServerPassword, ""},

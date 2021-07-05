@@ -73,6 +73,10 @@ int main(int argc, char *argv[]) {
             connectAddress = std::string(argv[++i]);
         } else if (arg == "-h" || arg == "--host") {
             host = true;
+        } else if (arg == "-f" || arg == "--frametime") {
+            long frameTime = atol(argv[++i]);  // pre-inc to next arg
+            app->GetGame()->frameTime = frameTime;
+            app->GetGame()->latencyFrameTime = frameTime;
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
@@ -85,7 +89,7 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    mainloop(app->GetGame()->frameTime / 4);
+    mainloop(app->GetGame()->frameTime / 4); //??
 
     app->Done();
 
