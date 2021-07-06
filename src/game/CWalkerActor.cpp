@@ -470,7 +470,7 @@ void CWalkerActor::MoveLegs() {
     absAvgSpeed += (legSpeeds[1] > 0) ? legSpeeds[1] : -legSpeeds[1];
 
     phaseChange = FMulDiv(FSqrt(absAvgSpeed), fConstant, elevation);
-    legPhase += FMul(phaseChange, FDiv(FSqrt(FIX(itsGame->FrameTimeScale())), FIX(10)));
+    legPhase += FMulDiv(phaseChange, FSqrt(FIX(itsGame->FrameTimeScale())), FIX(10));
 
     for (i = 0; i < 2; i++) {
         Fixed moveRadius;
