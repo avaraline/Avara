@@ -372,7 +372,7 @@ void CSmart::FrameAction() {
             }
         }
 
-        if (flyCount > (100 * itsGame->FrameTimeScale())) {
+        if (flyCount > (100 / itsGame->FrameTimeScale())) {
             doExplode = true;
         }
 
