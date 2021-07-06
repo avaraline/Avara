@@ -18,4 +18,6 @@ public:
 protected:
     nanogui::TextBox *nameBox;
     nanogui::ComboBox *hullBox;
+    nanogui::CheckBox *fpsBox;
+
 };

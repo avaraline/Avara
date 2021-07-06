@@ -4,6 +4,7 @@
 #include "Preferences.h"
 #include "CAvaraApp.h"
 #include "GitVersion.h"
+#include "CAvaraGame.h"
 
 CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
@@ -34,6 +35,18 @@ CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
     hullBox->setCallback([app](int selectedIdx) { app->Set(kHullTypeTag, selectedIdx); });
     hullBox->popup()->setSize(nanogui::Vector2i(180, 140));
     hullBox->setSelectedIndex(app->Number(kHullTypeTag));
+    
+    CAvaraGame *game = ((CAvaraAppImpl *)gApplication)->GetGame();
+    fpsBox = new nanogui::CheckBox(this, "62.5 fps(beta)", [app,game](bool checked) {
+        if (checked) {
+            game->frameTime = 16;
+            game->latencyFrameTime = 16;
+        }
+        else {
+            game->frameTime = CLASSICFRAMETIME;
+            game->latencyFrameTime = CLASSICFRAMETIME;
+        }
+    });
 }
 
 CPlayerWindow::~CPlayerWindow() {}
