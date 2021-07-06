@@ -90,7 +90,7 @@ void CWalkerActor::StartSystems() {
     legs[1].touchIdent = 0;
     targetHeight = 0;
 
-    jumpBasePower = FIX3(700);// / itsGame->FrameTimeInverse();
+    jumpBasePower = FIX3(700);// * itsGame->FrameTimeScale();
 
     viewPortHeight = FIX3(350);
 }
@@ -470,7 +470,7 @@ void CWalkerActor::MoveLegs() {
     absAvgSpeed += (legSpeeds[1] > 0) ? legSpeeds[1] : -legSpeeds[1];
 
     phaseChange = FMulDiv(FSqrt(absAvgSpeed), fConstant, elevation);
-    legPhase += FDiv(phaseChange, FMul(FSqrt(FIX(itsGame->FrameTimeInverse())), FIX(10)));
+    legPhase += FMul(phaseChange, FDiv(FSqrt(FIX(itsGame->FrameTimeScale())), FIX(10)));
 
     for (i = 0; i < 2; i++) {
         Fixed moveRadius;
@@ -479,7 +479,7 @@ void CWalkerActor::MoveLegs() {
         Fixed theSpeed = legSpeeds[i];
 
         theLeg = &legs[i];
-        theLeg->x -= theSpeed / (4 * itsGame->FrameTimeInverse());
+        theLeg->x -= (theSpeed * itsGame->FrameTimeScale()) / 4;
 
         if (phaseChange)
             moveRadius = FDivNZ(theSpeed, phaseChange);
@@ -639,17 +639,17 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
         }
 
         if (TESTFUNC(kfuJump, ft->down)) {
-            crouch += FDivNZ((stance - crouch - MINHEADHEIGHT) >> 3, FIX(itsGame->FrameTimeInverse()));
+            crouch += FMul((stance - crouch - MINHEADHEIGHT) >> 3, FIX(itsGame->FrameTimeScale()));
         } else if (TESTFUNC(kfuJump, ft->held)) {
-            crouch += FDivNZ((stance - crouch - MINHEADHEIGHT) >> 2, FIX(itsGame->FrameTimeInverse()));
+            crouch += FMul((stance - crouch - MINHEADHEIGHT) >> 2, FIX(itsGame->FrameTimeScale()));
         } else {
-            crouch = crouch - FDivNZ(crouch - (crouch >> 1), FIX(itsGame->FrameTimeInverse()));
+            crouch = crouch - FMul(crouch - (crouch >> 1), FIX(itsGame->FrameTimeScale()));
         }
 
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
             //speed[1] >>= 1;
-            speed[1] = speed[1] - FDivNZ(speed[1] - (speed[1] >> 1), FIX(itsGame->FrameTimeInverse()));
-            speed[1] += FDiv(FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass()), FIX(itsGame->FrameTimeInverse()));
+            speed[1] = speed[1] - FMul(speed[1] - (speed[1] >> 1), FIX(itsGame->FrameTimeScale()));
+            speed[1] += FMul(FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass()), FIX(itsGame->FrameTimeScale()));
             jumpFlag = true;
         }
     }

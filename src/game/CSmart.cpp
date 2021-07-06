@@ -15,7 +15,7 @@
 //#include "CInfoPanel.h"
 #include "CAvaraApp.h"
 
-#define kSmartAccel FDiv(itsDepot->missileAcceleration, ToFixed(itsGame->FrameTimeInverse()))
+#define kSmartAccel FMul(itsDepot->missileAcceleration, ToFixed(itsGame->FrameTimeScale()))
 #define kSmartFriction FIX3(50)
 
 void CSmart::IWeapon(CDepot *theDepot) {
@@ -65,7 +65,7 @@ long CSmart::Arm(CSmartPart *aPart) {
     targetIdent = 0;
     targetPart = NULL;
 
-    angleStep = FDiv(itsDepot->missileTurnRate, ToFixed(itsGame->FrameTimeInverse()));
+    angleStep = FMul(itsDepot->missileTurnRate, ToFixed(itsGame->FrameTimeScale()));
 
     return CWeapon::Arm(aPart);
 }
@@ -347,9 +347,9 @@ void CSmart::FrameAction() {
 
         friction = kSmartFriction + ((FIX(1) - speedDotAccel) >> 3);
 
-        speed[0] += FDiv(FMul(thrust, accel[0]) - FMul(speed[0], friction), ToFixed(itsGame->FrameTimeInverse()));
-        speed[1] += FDiv(FMul(thrust, accel[1]) - FMul(speed[1], friction), ToFixed(itsGame->FrameTimeInverse()));
-        speed[2] += FDiv(FMul(thrust, accel[2]) - FMul(speed[2], friction), ToFixed(itsGame->FrameTimeInverse()));
+        speed[0] += FMul(FMul(thrust, accel[0]) - FMul(speed[0], friction), ToFixed(itsGame->FrameTimeScale()));
+        speed[1] += FMul(FMul(thrust, accel[1]) - FMul(speed[1], friction), ToFixed(itsGame->FrameTimeScale()));
+        speed[2] += FMul(FMul(thrust, accel[2]) - FMul(speed[2], friction), ToFixed(itsGame->FrameTimeScale()));
 
         location[0] += speed[0];
         location[1] += speed[1];
@@ -360,7 +360,7 @@ void CSmart::FrameAction() {
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount > 5 * itsGame->FrameTimeInverse()) {
+            if (flyCount > (5 / itsGame->FrameTimeScale())) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
@@ -372,7 +372,7 @@ void CSmart::FrameAction() {
             }
         }
 
-        if (flyCount > 100 * itsGame->FrameTimeInverse()) {
+        if (flyCount > (100 * itsGame->FrameTimeScale())) {
             doExplode = true;
         }
 

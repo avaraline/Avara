@@ -150,7 +150,7 @@ void CGrenade::FrameAction() {
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount > 5 * itsGame->FrameTimeInverse()) {
+            if (flyCount > (5 / itsGame->FrameTimeScale())) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
@@ -162,7 +162,7 @@ void CGrenade::FrameAction() {
             }
         }
 
-        if (flyCount > 100 * itsGame->FrameTimeInverse()) {
+        if (flyCount > (100 / itsGame->FrameTimeScale())) {
             doExplode = true;
         }
 

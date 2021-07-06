@@ -32,14 +32,14 @@
 #include "Parser.h"
 #include "Preferences.h"
 
-#define MOUSESHOOTDELAY 8 * itsGame->FrameTimeInverse()
+#define MOUSESHOOTDELAY (8 / itsGame->FrameTimeScale())
 // replaced by kFOV preference
 //#define MAXFOV FIX(60)
 #define MINFOV FIX(5)
 #define FOVSTEP FIX3(1500)
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
-#define BOOSTLENGTH (16 * 5 * (int)itsGame->FrameTimeInverse())
-#define MINIBOOSTTIME 32 * itsGame->FrameTimeInverse()
+#define BOOSTLENGTH int(16 * 5 / itsGame->FrameTimeScale())
+#define MINIBOOSTTIME (32 / itsGame->FrameTimeScale())
 
 Boolean debug2Flag = false;
 
@@ -82,7 +82,7 @@ void CAbstractPlayer::LoadHUDParts() {
 void CAbstractPlayer::StartSystems() {
     //  Get systems running:
     reEnergize = false;
-    generatorPower = FDivNZ(FIX3(30), FIX(itsGame->FrameTimeInverse()));
+    generatorPower = FMul(FIX3(30), FIX(itsGame->FrameTimeScale()));
     maxEnergy = FIX(5);
     energy = maxEnergy;
     boostsRemaining = 3;
@@ -98,7 +98,7 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FDivNZ(FIX3(30), FIX(itsGame->FrameTimeInverse())); //  Use 0.030 per frame to repair shields
+    shieldRegen = FMul(FIX3(30), FIX(itsGame->FrameTimeScale())); //  Use 0.030 per frame to repair shields
     maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
@@ -115,7 +115,7 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale(2);
+    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale()*itsGame->FrameTimeScale();
 #define CLASSICACCELERATION FIX3(250)
     motorFriction = FIX(pow(0.75, itsGame->FrameTimeScale()));
 #define CLASSICMOTORFRICTION FIX3(750)
@@ -128,7 +128,7 @@ void CAbstractPlayer::StartSystems() {
 
     fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
     activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FDivNZ(FIX3(35), FIX(itsGame->FrameTimeInverse())); //    Charge gun at 0.035 units per frame
+    chargeGunPerFrame = FMul(FIX3(35), FIX(itsGame->FrameTimeScale())); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;
@@ -750,7 +750,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (TESTFUNC(kfuZoomOut, ft->held))
             fieldOfView += FOVSTEP;
 
-#define LOOKSTEP (0x1000L / itsGame->FrameTimeInverse())
+#define LOOKSTEP (0x1000L * itsGame->FrameTimeScale())
 #define MAXSIDELOOK 0x8000L
 
         if (TESTFUNC(kfuLookLeft, ft->held)) {
@@ -1094,7 +1094,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     boostsRemaining = defaultConfig.numBoosters;
     missileCount = defaultConfig.numMissiles;
     grenadeCount = defaultConfig.numGrenades;
-    GoLimbo(60 * itsGame->FrameTimeInverse());
+    GoLimbo(60 / itsGame->FrameTimeScale());
     if (lives == 0 && itsManager->IsLocalPlayer()) {
         itsGame->itsApp->MessageLine(kmGameOver, centerAlign);
     }
@@ -1217,9 +1217,9 @@ void CAbstractPlayer::Accelerate(Fixed *direction) {
 
     theMass = GetTotalMass();
     if (theMass) {
-        speed[0] += FMulDivNZ(direction[0] / itsGame->FrameTimeInverse(), baseMass, theMass);
-        speed[1] += FMulDivNZ(direction[1] / itsGame->FrameTimeInverse(), baseMass, theMass);
-        speed[2] += FMulDivNZ(direction[2] / itsGame->FrameTimeInverse(), baseMass, theMass);
+        speed[0] += FMulDivNZ(direction[0] * itsGame->FrameTimeScale(), baseMass, theMass);
+        speed[1] += FMulDivNZ(direction[1] * itsGame->FrameTimeScale(), baseMass, theMass);
+        speed[2] += FMulDivNZ(direction[2] * itsGame->FrameTimeScale(), baseMass, theMass);
     }
 }
 
@@ -1315,7 +1315,7 @@ void CAbstractPlayer::ResumeLevel() {
 
 extern Fixed sliverGravity;
 
-#define INTERPTIME 20 * itsGame->FrameTimeInverse()
+#define INTERPTIME (20 / itsGame->FrameTimeScale())
 
 void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     short count = 16;

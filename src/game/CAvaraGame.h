@@ -242,8 +242,7 @@ public:
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
-    virtual double FrameTimeScale(double exponent=1);
-    virtual double FrameTimeInverse();
+    virtual double FrameTimeScale();
     virtual double LatencyFrameTimeScale();
 
     virtual long RoundTripToFrameLatency(long rtt);

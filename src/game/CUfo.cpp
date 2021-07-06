@@ -398,14 +398,14 @@ void CUfo::FrameAction() {
             didShoot = Shoot();
             if (didShoot) {
                 if (burstCount == burstLength) {
-                    burstStartFrame = itsGame->frameNumber + burstCharge * itsGame->FrameTimeInverse();;
+                    burstStartFrame = itsGame->frameNumber + (burstCharge / itsGame->FrameTimeScale());;
                 }
 
                 if (--burstCount == 0) {
                     burstCount = burstLength;
                     nextShotFrame = burstStartFrame;
                 } else {
-                    nextShotFrame = itsGame->frameNumber + burstSpeed * itsGame->FrameTimeInverse();
+                    nextShotFrame = itsGame->frameNumber + (burstSpeed / itsGame->FrameTimeScale());
                 }
             }
         }
