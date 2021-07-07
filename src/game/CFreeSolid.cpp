@@ -15,7 +15,7 @@
 
 extern CWallActor *lastWallActor;
 
-#define MINSPEED FIX3(20)
+#define MINSPEED FIX3(20 / itsGame->FrameTimeScale())
 #define kSolidGravity FIX3(120)
 #define kFriction FIX3(950)
 
