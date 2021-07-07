@@ -4,6 +4,7 @@
 #include "CPlayerManager.h"
 #include "AvaraDefines.h"
 #include "CScoreKeeper.h"
+#include "RGBAColor.h"
 
 
 CHUD::CHUD(CAvaraGame *game) {
@@ -42,18 +43,18 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         float y = bufferHeight-chudHeight-boardHeight - 20;
         float fontsz_m = 28.0, fontsz_s = 18.0;
         long longTeamColor;
-        int colorR, colorG, colorB;
+        int teamColorRGB[3];
         NVGcolor aliveColor = nvgRGBA(255, 255, 255, 255);
         NVGcolor deadColor = nvgRGBA(165, 165, 165, 255);
         NVGcolor highColor = nvgRGBA(255, 0, 0, 255);
         float colWidth = 70;
         float rankWidth = 40;
-        
+
         //use netscores when not in the game
         if(itsGame->gameStatus != kPlayingStatus && itsGame->gameStatus != kPauseStatus) {
             theScores = itsGame->scoreKeeper->netScores;
         }
-        
+
         //sort by highscore
         int16_t highKills = 0;
         int16_t highWins = 0;
@@ -72,13 +73,13 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         nvgFillColor(ctx, nvgRGBA(20, 20, 20, 160));
         nvgRoundedRect(ctx, x, y, boardWidth, boardHeight, 4.0);
         nvgFill(ctx);
-        
+
         //header box
         nvgBeginPath(ctx);
         nvgFillColor(ctx, nvgRGBA(0, 0, 0, 160));
         nvgRoundedRect(ctx, x, y, boardWidth, 40, 4.0);
         nvgFill(ctx);
-        
+
         //drop shadow
         NVGpaint shadowPaint = nvgBoxGradient(ctx, x,y+2, boardWidth,boardHeight, 8, 10, nvgRGBA(0,0,0,128), nvgRGBA(0,0,0,0));
         nvgBeginPath(ctx);
@@ -87,14 +88,14 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         nvgPathWinding(ctx, NVG_HOLE);
         nvgFillPaint(ctx, shadowPaint);
         nvgFill(ctx);
-        
+
         x+=10;
-        
+
         //score column text settings
         nvgFillColor(ctx, aliveColor);
         nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_s);
-        
+
         //column titles
         y+= 10;
         nvgText(ctx, x + colorBoxWidth + colWidth + 10, y, "Player", NULL);
@@ -114,15 +115,13 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
             const std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             std::string ping = "--";
             longTeamColor = team_colors[net->teamColors[playerTableIndex]];
-            colorR = (longTeamColor >> 16) & 0xff;
-            colorG = (longTeamColor >> 8) & 0xff;
-            colorB = longTeamColor & 0xff;
+            LongToRGBA(longTeamColor, teamColorRGB, 3);
             NVGcolor textColor = aliveColor;
-            
+
             if(playerName.size() > 0 && thisPlayer->GetPlayer() != NULL) {
                 if(theScores.player[playerTableIndex].points != previousScore)
                     playerRank++;
-                
+
                 //int playerLives = thisPlayer->GetPlayer()->lives;
                 int playerLives = theScores.player[playerTableIndex].lives;
                 if(thisPlayer->IsLocalPlayer()) {
@@ -135,25 +134,25 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
                 else {
                     ping = std::to_string(net->itsCommManager->GetMaxRoundTrip(1 << playerTableIndex));
                 }
-                
+
                 //player color box
                 nvgBeginPath(ctx);
                 nvgRoundedRect(ctx, x + rankWidth + 10, y, colorBoxWidth, colorBoxWidth, 3.0);
-                nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
+                nvgFillColor(ctx, nvgRGBA(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 255));
                 nvgFill(ctx);
-                
+
                 //show winnner
                 if(thisPlayer->WinFrame() > 0) {
                     std::string checkMark("\u221A");
                     nvgFillColor(ctx, aliveColor);
                     nvgText(ctx, x + rankWidth + 33, y, checkMark.c_str(), NULL);
                 }
-                
+
                 //score text settings
                 textColor = aliveColor;
                 if(playerLives == 0 && (itsGame->gameStatus == kPlayingStatus || itsGame->gameStatus == kPauseStatus))
                     textColor = deadColor;
-                
+
                 nvgFillColor(ctx, textColor);
                 nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
                 nvgFontSize(ctx, fontsz_m);
@@ -170,7 +169,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
 
                 //player name and scores
                 nvgText(ctx, x + colorBoxWidth + rankWidth + 15, y, playerName.c_str(), NULL);
-                
+
                 nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
                 nvgText(ctx, x + colorBoxWidth + colWidth*4, y, std::to_string(theScores.player[playerTableIndex].points).c_str(), NULL);
 
@@ -193,7 +192,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
                 nvgText(ctx, x + colorBoxWidth + colWidth*8, y, ping.c_str(), NULL);
 
                 y += colorBoxWidth + 10;
-                
+
                 previousScore = theScores.player[playerTableIndex].points;
              }
         }
@@ -208,7 +207,7 @@ void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
         float x = 0.0;
         float y = bufferHeight - 130.0;
         float bounds[4];
-        
+
         nvgBeginPath(ctx);
         nvgFontFace(ctx, "mono");
         nvgFontSize(ctx, 24.0);
@@ -217,7 +216,7 @@ void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
         nvgFillColor(ctx, BACKGROUND_COLOR);
         nvgRect(ctx, x-5,y, (int)(bounds[2]-bounds[0])+10, (int)(bounds[3]-bounds[1])+4);
         nvgFill(ctx);
-        
+
         nvgFillColor(ctx, nvgRGBA(255,255,255,220));
         nvgText(ctx, x,y+(bounds[3]-bounds[1])-3, level.c_str(), NULL);
     }
@@ -254,7 +253,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     DrawLevelName(view, ctx);
     DrawPaused(view, ctx);
-    
+
     int playerCount = 0;
     int playingCount = 0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
@@ -262,7 +261,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
         if (playerName.length() > 0) {
             playerCount++;
-    
+
             if(thisPlayer->GetPlayer() != NULL) {
                 playingCount++;
             }
@@ -272,9 +271,9 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
     int chudHeight = 13 * playerSlots;
-    
+
     DrawScore(playingCount, chudHeight, view, ctx);
-    
+
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
     nvgBeginPath(ctx);
@@ -313,7 +312,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
         float colorBoxWidth = 10.0;
         nvgBeginPath(ctx);
-        
+
         //highlight player if spectating
         if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
             textColor = nvgRGBA(0, 0, 0, 255);
@@ -323,13 +322,13 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgRect(ctx, bufferWidth - 160, pY, colorBoxWidth, 10.0);
         nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
         nvgFill(ctx);
-        
+
         //player name
         nvgFillColor(ctx, textColor);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
         nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
-        
+
         short status = thisPlayer->GetStatusChar();
         if (status >= 0) {
             std::string playerLives = std::to_string(status);
@@ -348,7 +347,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgFontSize(ctx, fontsz_m);
         nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
         nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
-        
+
         //spectating onscreen name
         if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
             int x = 20;
@@ -368,7 +367,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             nvgRoundedRect(ctx, x, y, (bounds[2]-bounds[0])+10, 28.0, 3.0);
             nvgFillColor(ctx, BACKGROUND_COLOR);
             nvgFill(ctx);
-            
+
             //draw text
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
             nvgText(ctx, x + 5, y + 14, specMessage.c_str(), NULL);
@@ -377,10 +376,10 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
     if (!player)
         return;
-    
+
     if(spectatePlayer != NULL)
         player = spectatePlayer;
-    
+
     int i, j;
     float g1X = (bufferWidth / 2.0) - 60.0;
     float gY = bufferHeight - 60.0;

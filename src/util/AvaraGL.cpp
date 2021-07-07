@@ -372,9 +372,9 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     glUseProgram(skyProgram);
     glUniformMatrix4fv(skyViewLoc, 1, GL_FALSE, matrix);
     glUniformMatrix4fv(skyProjLoc, 1, GL_FALSE, glm::value_ptr(proj));
-    glUniform3fv(groundColorLoc, 3, groundColorRGB);
-    glUniform3fv(horizonColorLoc, 3, lowSkyColorRGB);
-    glUniform3fv(skyColorLoc, 3, highSkyColorRGB);
+    glUniform3fv(groundColorLoc, 1, groundColorRGB);
+    glUniform3fv(horizonColorLoc, 1, lowSkyColorRGB);
+    glUniform3fv(skyColorLoc, 1, highSkyColorRGB);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
