@@ -780,7 +780,7 @@ void CAvaraGame::GameStart() {
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
 
-    while (frameNumber + latencyTolerance > topSentFrame) {
+    while (frameNumber + latencyTolerance / FrameTimeScale() > topSentFrame) {
         itsNet->FrameAction();
     }
 
@@ -878,11 +878,13 @@ bool CAvaraGame::GameTick() {
 
     // SDL_Log("latencyTolerance = %ld, latencyFrameTime = %ld\n", latencyTolerance, latencyFrameTime);
     if (latencyTolerance)
-        while (frameNumber + latencyTolerance > topSentFrame)
+        while (frameNumber + latencyTolerance / FrameTimeScale() > topSentFrame)
             itsNet->FrameAction();
 
     canPreSend = true;
 
+    // latencyFrameTime is normally equal to frameTime unless LT gets high (>4) in which case it
+    // is gradually increased in hopes the game can recover as the frame rate decreases
     nextScheduledFrame += latencyFrameTime;
 
     itsDepot->RunSliverActions();
@@ -1035,11 +1037,12 @@ double CAvaraGame::LatencyFrameTimeScale() {
     return double(latencyFrameTime)/frameTime;
 }
 
-
+// LT is measured in relation to CLASSICFRAMETIME so it's consistent regardless of frameTime
+// (perhaps this could be fractional when frameTime < CLASSICFRAMETIME but for now let's keep it as an integer)
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
-    // half of the roundTripTime in units of frameTime, rounded
-    SDL_Log("CAvaraGame::RoundTripToFrameLatency roundTrip=%ld, LT(unrounded)=%.2lf\n", roundTrip, (roundTrip) / (2.0*frameTime));
-    return (roundTrip + frameTime) / (2*frameTime);
+    SDL_Log("CAvaraGame::RoundTripToFrameLatency roundTrip=%ld, LT(unrounded)=%.2lf\n", roundTrip, (roundTrip) / (2.0*CLASSICFRAMETIME));
+    // half of the roundTripTime in units of CLASSICFRAMETIME, rounded
+    return (roundTrip + CLASSICFRAMETIME) / (2*CLASSICFRAMETIME);
 }
 
 void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange, const char* slowPlayer) {
@@ -1096,7 +1099,9 @@ void CAvaraGame::AdjustFrameTime() {
     };
 
     latencyFrameTime = long(frameTime * frameTimeMultiplier[latencyTolerance]);
-    SDL_Log("*** latencyFrameTime = %ld\n", latencyFrameTime);
+    // round down to nearest GAMETICKINTERVAL to avoid(?) actions being processed across different frames (FRAGs)
+    latencyFrameTime = GAMETICKINTERVAL * (latencyFrameTime / GAMETICKINTERVAL);
+    SDL_Log("*** latencyTolerance = %ld, latencyFrameTime = %ld\n", latencyTolerance, latencyFrameTime);
 }
 
 

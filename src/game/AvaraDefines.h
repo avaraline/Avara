@@ -34,6 +34,7 @@ enum { kSmallSliver, kMediumSliver, kLargeSliver };
 #define kDefaultFriction FIX3(100)
 
 #define CLASSICFRAMETIME 64
+#define GAMETICKINTERVAL 16
 
 // From CInfoPanel
 enum { rightAlign = -1, leftAlign, centerAlign };

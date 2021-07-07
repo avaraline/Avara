@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    mainloop(CLASSICFRAMETIME / 4); // 16 ms processing loop interval
+    mainloop(GAMETICKINTERVAL); // 16 ms processing interval
 
     app->Done();
 
