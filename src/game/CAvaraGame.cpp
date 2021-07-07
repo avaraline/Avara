@@ -96,8 +96,7 @@ CNetManager* CAvaraGame::CreateNetManager() {
 }
 
 CAvaraGame::CAvaraGame(int frameTime) {
-    this->frameTime = frameTime; // milliseconds
-    this->latencyFrameTime = frameTime;
+    this->SetFrameTime(frameTime); // milliseconds
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
@@ -1117,4 +1116,14 @@ long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     // move forward to frame 120 and NOT frame 60.
     long periodFrames = TimeToFrameCount(period);
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
+}
+
+void CAvaraGame::SetFrameTime(long ft) {
+    if (ft % GAMETICKINTERVAL != 0) {
+      SDL_Log("ERROR! frameTime should be multiple of %d\n", GAMETICKINTERVAL);
+      exit(1); // is exit too dramatic?
+    }
+    SDL_Log("--- Setting frameTime to %ld\n", ft);
+    frameTime = ft;
+    latencyFrameTime = ft;
 }

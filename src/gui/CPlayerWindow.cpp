@@ -39,12 +39,10 @@ CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
     CAvaraGame *game = ((CAvaraAppImpl *)gApplication)->GetGame();
     fpsBox = new nanogui::CheckBox(this, "62.5 fps(beta)", [app,game](bool checked) {
         if (checked) {
-            game->frameTime = 16;
-            game->latencyFrameTime = 16;
+            game->SetFrameTime(16);
         }
         else {
-            game->frameTime = CLASSICFRAMETIME;
-            game->latencyFrameTime = CLASSICFRAMETIME;
+            game->SetFrameTime(CLASSICFRAMETIME);
         }
     });
 }

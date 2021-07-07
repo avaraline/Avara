@@ -75,8 +75,7 @@ int main(int argc, char *argv[]) {
             host = true;
         } else if (arg == "-f" || arg == "--frametime") {
             long frameTime = atol(argv[++i]);  // pre-inc to next arg
-            app->GetGame()->frameTime = frameTime;
-            app->GetGame()->latencyFrameTime = frameTime;
+            app->GetGame()->SetFrameTime(frameTime);
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);

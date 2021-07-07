@@ -180,7 +180,7 @@ public:
     long oldPlayersStanding;
     short oldTeamsStanding;
 
-    CAvaraGame(int frameTime = 64);
+    CAvaraGame(int frameTime = CLASSICFRAMETIME);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
@@ -250,6 +250,8 @@ public:
     virtual void AdjustFrameTime();
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
+    
+    virtual void SetFrameTime(long ft);
 };
 
 #ifndef MAINAVARAGAME
