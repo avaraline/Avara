@@ -2,6 +2,7 @@
 #include "FastMat.h"
 #include "Resource.h"
 #include "CViewParameters.h"
+#include "RGBAColor.h"
 
 #include <fstream>
 #include <iostream>
@@ -30,7 +31,7 @@ short window_height = 1;
 short window_width = 1;
 
 float skyboxVertices[] = {
-        // positions          
+        // positions
         -5.0f,  5.0f, -5.0f,
         -5.0f, -5.0f, -5.0f,
          5.0f, -5.0f, -5.0f,
@@ -131,9 +132,9 @@ void AvaraGLSetFOV(float fov) {
 
 void AvaraGLUpdateProjectionMatrix() {
     proj = glm::scale(glm::perspective(
-                        glm::radians(current_fov), 
-                        (float)window_width / (float)window_height, 
-                        near_dist, 
+                        glm::radians(current_fov),
+                        (float)window_width / (float)window_height,
+                        near_dist,
                         far_dist)
                      , glm::vec3(-1, 1, -1));
     glUseProgram(gProgram);
@@ -143,7 +144,7 @@ void AvaraGLUpdateProjectionMatrix() {
 
 void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth) {
     if (!actuallyRender) return;
-    
+
     float x = cos(Deg2Rad(elevation)) * intensity;
     float y = sin(Deg2Rad(-elevation)) * intensity;
     float z = cos(Deg2Rad(azimuth)) * intensity;
@@ -301,7 +302,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
     glCheckErrors();
-    
+
     glBindVertexArray(part->vertexArray);
     glDrawArrays(GL_TRIANGLES, 0, part->totalPoints);
 
@@ -353,14 +354,17 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     }
     // Get rid of the translation part
     matrix[12] = matrix[13] = matrix[14] = 0;
-    
+
     glBindVertexArray(skyVertArray);
     glBindBuffer(GL_ARRAY_BUFFER, skyBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
 
-    long groundColor = theShader->groundColor;
-    long lowSkyColor = theShader->lowSkyColor;
-    long highSkyColor = theShader->highSkyColor;
+    float groundColorRGB[3];
+    float lowSkyColorRGB[3];
+    float highSkyColorRGB[3];
+    LongToRGBA(theShader->groundColor, groundColorRGB, 3);
+    LongToRGBA(theShader->lowSkyColor, lowSkyColorRGB, 3);
+    LongToRGBA(theShader->highSkyColor, highSkyColorRGB, 3);
 
     glDisable(GL_DEPTH_TEST);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
@@ -368,18 +372,10 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     glUseProgram(skyProgram);
     glUniformMatrix4fv(skyViewLoc, 1, GL_FALSE, matrix);
     glUniformMatrix4fv(skyProjLoc, 1, GL_FALSE, glm::value_ptr(proj));
-    glUniform3f(groundColorLoc,
-        ((groundColor >> 16) & 0xFF) / 255.0,
-        ((groundColor >> 8) & 0xFF) / 255.0,
-        (groundColor & 0xFF) / 255.0);
-    glUniform3f(horizonColorLoc,
-        ((lowSkyColor >> 16) & 0xFF) / 255.0,
-        ((lowSkyColor >> 8) & 0xFF) / 255.0,
-        (lowSkyColor & 0xFF) / 255.0);
-    glUniform3f(skyColorLoc,
-        ((highSkyColor >> 16) & 0xFF) / 255.0,
-        ((highSkyColor >> 8) & 0xFF) / 255.0,
-        (highSkyColor & 0xFF) / 255.0);
+    glUniform3fv(groundColorLoc, 3, groundColorRGB);
+    glUniform3fv(horizonColorLoc, 3, lowSkyColorRGB);
+    glUniform3fv(skyColorLoc, 3, highSkyColorRGB);
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glBindVertexArray(skyVertArray);
