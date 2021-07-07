@@ -163,9 +163,6 @@ void CBSPPart::UpdateOpenGLData() {
             glData[p].y = ToFloat((*pt)[1]);
             glData[p].z = ToFloat((*pt)[2]);
             LongToRGBA(poly->color, &glData[p].r, 3);
-            //glData[p].r = ((poly->color >> 16) & 0xFF) / 255.0;
-            //glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
-            //glData[p].b = (poly->color & 0xFF) / 255.0;
 
             glData[p].nx = poly->normal[0];
             glData[p].ny = poly->normal[1];
