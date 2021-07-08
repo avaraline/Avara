@@ -619,7 +619,7 @@ void CAvaraGame::EndScript() {
 
     groundTraction = ReadFixedVar(iDefaultTraction);
     groundFriction = ReadFixedVar(iDefaultFriction);
-    gravityRatio = ReadFixedVar(iGravity) * FrameTimeScale() * FrameTimeScale();
+    gravityRatio = ReadFixedVar(iGravity) * FrameScale();
     groundStepSound = ReadLongVar(iGroundStepSound);
     gHub->LoadSample(groundStepSound);
 
@@ -779,7 +779,7 @@ void CAvaraGame::GameStart() {
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
 
-    while (frameNumber + latencyTolerance / FrameTimeScale() > topSentFrame) {
+    while (frameNumber + latencyTolerance / FrameScale() > topSentFrame) {
         itsNet->FrameAction();
     }
 
@@ -877,7 +877,7 @@ bool CAvaraGame::GameTick() {
 
     // SDL_Log("latencyTolerance = %ld, latencyFrameTime = %ld\n", latencyTolerance, latencyFrameTime);
     if (latencyTolerance)
-        while (frameNumber + latencyTolerance / FrameTimeScale() > topSentFrame)
+        while (frameNumber + latencyTolerance / FrameScale() > topSentFrame)
             itsNet->FrameAction();
 
     canPreSend = true;
@@ -1028,8 +1028,12 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
     return theManager;
 }
 
-double CAvaraGame::FrameTimeScale() {
-    return double(frameTime)/CLASSICFRAMETIME;
+double CAvaraGame::FrameScale() {
+    return frameScale;
+}
+
+Fixed CAvaraGame::FIXFrameScale() {
+    return fixedFrameScale;
 }
 
 double CAvaraGame::LatencyFrameTimeScale() {
@@ -1126,4 +1130,6 @@ void CAvaraGame::SetFrameTime(long ft) {
     SDL_Log("--- Setting frameTime to %ld\n", ft);
     frameTime = ft;
     latencyFrameTime = ft;
+    frameScale = double(frameTime)/CLASSICFRAMETIME;
+    fixedFrameScale = FIX(frameScale);
 }

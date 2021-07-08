@@ -15,7 +15,7 @@
 
 extern CWallActor *lastWallActor;
 
-#define MINSPEED FIX3(20 / itsGame->FrameTimeScale())
+#define MINSPEED FIX3(20*itsGame->FrameScale())
 #define kSolidGravity FIX3(120)
 #define kFriction FIX3(950)
 
@@ -52,7 +52,9 @@ CAbstractActor *CFreeSolid::EndScript() {
 
         hitPower = ReadFixedVar(iShotPower); //	Collision damage to other party
         customGravity = ReadFixedVar(iCustomGravity);
+        customGravity *= itsGame->FrameScale();
         acceleration = ReadFixedVar(iAccelerate);
+        acceleration = FPow(acceleration, itsGame->FrameScale());
 
         shapeId = ReadLongVar(iShape); //	Read our shape resource ID
         if (shapeId) {

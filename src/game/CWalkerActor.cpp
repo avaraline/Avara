@@ -90,7 +90,7 @@ void CWalkerActor::StartSystems() {
     legs[1].touchIdent = 0;
     targetHeight = 0;
 
-    jumpBasePower = FIX3(700);// * itsGame->FrameTimeScale();
+    jumpBasePower = FIX3(700);// * itsGame->FrameScale();
 
     viewPortHeight = FIX3(350);
 }
@@ -470,7 +470,7 @@ void CWalkerActor::MoveLegs() {
     absAvgSpeed += (legSpeeds[1] > 0) ? legSpeeds[1] : -legSpeeds[1];
 
     phaseChange = FMulDiv(FSqrt(absAvgSpeed), fConstant, elevation);
-    legPhase += FMulDiv(phaseChange, FSqrt(FIX(itsGame->FrameTimeScale())), FIX(10));
+    legPhase += FMulDiv(phaseChange, FSqrt(itsGame->FIXFrameScale()), FIX(10));
 
     for (i = 0; i < 2; i++) {
         Fixed moveRadius;
@@ -479,7 +479,7 @@ void CWalkerActor::MoveLegs() {
         Fixed theSpeed = legSpeeds[i];
 
         theLeg = &legs[i];
-        theLeg->x -= (theSpeed * itsGame->FrameTimeScale()) / 4;
+        theLeg->x -= (theSpeed * itsGame->FrameScale()) / 4;
 
         if (phaseChange)
             moveRadius = FDivNZ(theSpeed, phaseChange);
@@ -588,10 +588,11 @@ void CWalkerActor::TractionControl() {
         motorFriction = -motorFriction;
     motorFriction = baseFriction - (motorFriction >> 2);
 
-    adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
+    adjustedGravity = FMul(FIX3(120 * itsGame->FrameScale()), itsGame->gravityRatio);
     speed[1] -= adjustedGravity;
 
-    bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
+    bounceTarget = FMul3(absAvgSpeed, itsGame->FIXFrameScale(), (0x4000 - (legPhase & 0x7FFF)) >> 2);
+    // bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
     bounceTarget += targetHeight;
@@ -639,17 +640,17 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
         }
 
         if (TESTFUNC(kfuJump, ft->down)) {
-            crouch += FMul((stance - crouch - MINHEADHEIGHT) >> 3, FIX(itsGame->FrameTimeScale()));
+            crouch += FMul((stance - crouch - MINHEADHEIGHT) >> 3, itsGame->FIXFrameScale());
         } else if (TESTFUNC(kfuJump, ft->held)) {
-            crouch += FMul((stance - crouch - MINHEADHEIGHT) >> 2, FIX(itsGame->FrameTimeScale()));
+            crouch += FMul((stance - crouch - MINHEADHEIGHT) >> 2, itsGame->FIXFrameScale());
         } else {
-            crouch = crouch - FMul(crouch - (crouch >> 1), FIX(itsGame->FrameTimeScale()));
+            crouch = crouch - FMul(crouch - (crouch >> 1), itsGame->FIXFrameScale());
         }
 
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
             //speed[1] >>= 1;
-            speed[1] = speed[1] - FMul(speed[1] - (speed[1] >> 1), FIX(itsGame->FrameTimeScale()));
-            speed[1] += FMul(FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass()), FIX(itsGame->FrameTimeScale()));
+            speed[1] = speed[1] - FMul(speed[1] - (speed[1] >> 1), itsGame->FIXFrameScale());
+            speed[1] += FMul(FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass()), itsGame->FIXFrameScale());
             jumpFlag = true;
         }
     }

@@ -81,7 +81,7 @@ CAbstractActor *CGoody::EndScript() {
             partList[1]->MoveDone();
         }
 
-        rotationSpeed = FDegToOne(ReadFixedVar(iSpeed)) * itsGame->FrameTimeScale();
+        rotationSpeed = FDegToOne(ReadFixedVar(iSpeed)) * itsGame->FrameScale();
         grenades = ReadLongVar(iGrenades);
         missiles = ReadLongVar(iMissiles);
         boosters = ReadLongVar(iBoosters);

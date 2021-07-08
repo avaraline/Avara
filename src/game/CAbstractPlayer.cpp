@@ -32,14 +32,14 @@
 #include "Parser.h"
 #include "Preferences.h"
 
-#define MOUSESHOOTDELAY (8 / itsGame->FrameTimeScale())
+#define MOUSESHOOTDELAY (8 / itsGame->FrameScale())
 // replaced by kFOV preference
 //#define MAXFOV FIX(60)
 #define MINFOV FIX(5)
 #define FOVSTEP FIX3(1500)
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
-#define BOOSTLENGTH int(16 * 5 / itsGame->FrameTimeScale())
-#define MINIBOOSTTIME (32 / itsGame->FrameTimeScale())
+#define BOOSTLENGTH int(16 * 5 / itsGame->FrameScale())
+#define MINIBOOSTTIME (32 / itsGame->FrameScale())
 
 Boolean debug2Flag = false;
 
@@ -82,7 +82,7 @@ void CAbstractPlayer::LoadHUDParts() {
 void CAbstractPlayer::StartSystems() {
     //  Get systems running:
     reEnergize = false;
-    generatorPower = FMul(FIX3(30), FIX(itsGame->FrameTimeScale()));
+    generatorPower = FIX3(30*itsGame->FrameScale());
     maxEnergy = FIX(5);
     energy = maxEnergy;
     boostsRemaining = 3;
@@ -98,7 +98,7 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FMul(FIX3(30), FIX(itsGame->FrameTimeScale())); //  Use 0.030 per frame to repair shields
+    shieldRegen = FIX3(30*itsGame->FrameScale()); //  Use 0.030 per frame to repair shields
     maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
@@ -115,9 +115,9 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale()*itsGame->FrameTimeScale();
+    maxAcceleration = FIX3(250*itsGame->FrameScale());
 #define CLASSICACCELERATION FIX3(250)
-    motorFriction = FIX(pow(0.75, itsGame->FrameTimeScale()));
+    motorFriction = FIX(pow(0.75, itsGame->FrameScale()));
 #define CLASSICMOTORFRICTION FIX3(750)
     didBump = true;
 
@@ -128,7 +128,7 @@ void CAbstractPlayer::StartSystems() {
 
     fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
     activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FMul(FIX3(35), FIX(itsGame->FrameTimeScale())); //    Charge gun at 0.035 units per frame
+    chargeGunPerFrame = FIX3(35*itsGame->FrameScale()); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;
@@ -600,7 +600,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             // Use scaled top speed and scaled motor friction to figure out an adjusted acceleration
             // THEREFORE accel = accel * frameTimeScale * classicMotorFriction * (1 - motorFriction) / ((1 - classicMotorFriction) * motorFriction)
             if (itsGame->frameTime != 64) {
-                modAccel = FDivNZ(itsGame->FrameTimeScale() * FMul(modAccel, FMul(CLASSICMOTORFRICTION, FIX1 - motorFriction)),  FMul(motorFriction, FIX1 - CLASSICMOTORFRICTION));
+                modAccel = FDivNZ(itsGame->FrameScale() * FMul3(modAccel, CLASSICMOTORFRICTION, FIX1 - motorFriction),  FMul(motorFriction, FIX1 - CLASSICMOTORFRICTION));
             }
 
             motionFlags = 0;
@@ -750,7 +750,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (TESTFUNC(kfuZoomOut, ft->held))
             fieldOfView += FOVSTEP;
 
-#define LOOKSTEP (0x1000L * itsGame->FrameTimeScale())
+#define LOOKSTEP (0x1000L * itsGame->FrameScale())
 #define MAXSIDELOOK 0x8000L
 
         if (TESTFUNC(kfuLookLeft, ft->held)) {
@@ -821,12 +821,12 @@ void CAbstractPlayer::TractionControl() {
 void CAbstractPlayer::MotionControl() {
     Fixed avrgHeading;
     Fixed motorDir[2];
-    Fixed fric = FIX((1 - pow(1 - 0.01, itsGame->FrameTimeScale())));// FIX3(10); // FIX3(30);
+    Fixed fric = FIX((1 - pow(1 - 0.01, itsGame->FrameScale())));// FIX3(10); // FIX3(30);
     Fixed slowDown;
     Fixed absVert;
     Fixed slide[2];
     Fixed slideLen;
-    Fixed supportFriction = FIX((1 - pow(1 - ToFloat(this->supportFriction), itsGame->FrameTimeScale())));
+    Fixed supportFriction = FIX((1 - pow(1 - ToFloat(this->supportFriction), itsGame->FrameScale())));
 
     distance = (motors[0] + motors[1]) >> 1;
     headChange = FMul(motors[1] - motors[0], turningEffect);
@@ -843,8 +843,8 @@ void CAbstractPlayer::MotionControl() {
     slide[1] = motorDir[1] - speed[2] + groundSlide[2];
     slideLen = VectorLength(2, slide);
 
-    if (slideLen < supportTraction * itsGame->FrameTimeScale()) {
-        double speedPortion = pow(0.25, itsGame->FrameTimeScale());
+    if (slideLen < supportTraction * itsGame->FrameScale()) {
+        double speedPortion = pow(0.25, itsGame->FrameScale());
         speed[0] += slide[0] - (slide[0] * speedPortion);
         speed[2] += slide[1] - (slide[1] * speedPortion);
     } else {
@@ -1009,7 +1009,7 @@ void CAbstractPlayer::GunActions() {
                     theHit.direction[2] = FMul(m2[2][2], PLAYERMISSILESPEED);
                 }
 
-                double scaling = itsGame->FrameTimeScale();
+                double scaling = itsGame->FrameScale();
 
                 missileSpeed[0] = theHit.direction[0] * scaling;
                 missileSpeed[1] = theHit.direction[1] * scaling;
@@ -1094,7 +1094,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     boostsRemaining = defaultConfig.numBoosters;
     missileCount = defaultConfig.numMissiles;
     grenadeCount = defaultConfig.numGrenades;
-    GoLimbo(60 / itsGame->FrameTimeScale());
+    GoLimbo(60 / itsGame->FrameScale());
     if (lives == 0 && itsManager->IsLocalPlayer()) {
         itsGame->itsApp->MessageLine(kmGameOver, centerAlign);
     }
@@ -1217,9 +1217,9 @@ void CAbstractPlayer::Accelerate(Fixed *direction) {
 
     theMass = GetTotalMass();
     if (theMass) {
-        speed[0] += FMulDivNZ(direction[0] * itsGame->FrameTimeScale(), baseMass, theMass);
-        speed[1] += FMulDivNZ(direction[1] * itsGame->FrameTimeScale(), baseMass, theMass);
-        speed[2] += FMulDivNZ(direction[2] * itsGame->FrameTimeScale(), baseMass, theMass);
+        speed[0] += FMulDivNZ(direction[0] * itsGame->FrameScale(), baseMass, theMass);
+        speed[1] += FMulDivNZ(direction[1] * itsGame->FrameScale(), baseMass, theMass);
+        speed[2] += FMulDivNZ(direction[2] * itsGame->FrameScale(), baseMass, theMass);
     }
 }
 
@@ -1315,7 +1315,7 @@ void CAbstractPlayer::ResumeLevel() {
 
 extern Fixed sliverGravity;
 
-#define INTERPTIME (20 / itsGame->FrameTimeScale())
+#define INTERPTIME (20 / itsGame->FrameScale())
 
 void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     short count = 16;

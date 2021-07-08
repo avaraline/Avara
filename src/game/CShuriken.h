@@ -10,7 +10,7 @@
 #pragma once
 #include "CAbstractMissile.h"
 
-#define SHURIKENSPEED FIX3(1500) * itsGame->FrameTimeScale()
+#define SHURIKENSPEED FIX3(1500) * itsGame->FrameScale()
 
 class CShuriken : public CAbstractMissile {
 public:

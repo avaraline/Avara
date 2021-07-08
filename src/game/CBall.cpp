@@ -94,6 +94,7 @@ void CBall::BeginScript() {
 
     ProgramFixedVar(iDropEnergy, dropDamage);
 
+    SDL_Log("Ball:customGravity = %d\n", customGravity);
     ProgramFixedVar(iCustomGravity, customGravity);
     ProgramFixedVar(iAccelerate, acceleration);
 
@@ -121,6 +122,7 @@ void CBall::BeginScript() {
 CAbstractActor *CBall::EndScript() {
     if (CRealShooters::EndScript()) {
         customGravity = ReadFixedVar(iCustomGravity);
+        SDL_Log("Ball:customGravity = %d\n", customGravity);
         acceleration = ReadFixedVar(iAccelerate);
 
         ejectPitch = ReadFixedVar(iEjectPitch);

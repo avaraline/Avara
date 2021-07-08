@@ -16,9 +16,9 @@
 
 #define TELEPORTAREA FIX3(3000)
 #define ACTIVETELEPORTAREA FIX3(350)
-#define FIELDSTRENGTH FMul(FIX3(100), FIX(itsGame->FrameTimeScale()))
+#define FIELDSTRENGTH FIX3(100 * itsGame->FrameScale())
 #define TELEPORTERMIDDLE FIX3(1500)
-#define RETRANSMITFRAMES (60 / itsGame->FrameTimeScale())
+#define RETRANSMITFRAMES (60 / itsGame->FrameScale())
 
 void CTeleporter::BeginScript() {
     ProgramLongVar(iGroup, 0);
@@ -77,7 +77,7 @@ CAbstractActor *CTeleporter::EndScript() {
 
     transportGroup = ReadLongVar(iGroup);
     destGroup = ReadLongVar(iDestGroup);
-    rotationSpeed = FDegToOne(ReadFixedVar(iSpeed)) * itsGame->FrameTimeScale();
+    rotationSpeed = FDegToOne(ReadFixedVar(iSpeed)) * itsGame->FrameScale();
 
     soundId = ReadLongVar(iSound);
     volume = ReadFixedVar(iVolume);
@@ -152,8 +152,8 @@ void CTeleporter::FrameAction() {
                         delta[2] = FMul(delta[2], -FIELDSTRENGTH);
                         thePlayer->Accelerate(delta);
                         pullCounter++;
-                        if (pullCounter >= (32 / itsGame->FrameTimeScale())) {
-                            noPullTimer = 16 / itsGame->FrameTimeScale();
+                        if (pullCounter >= (32 / itsGame->FrameScale())) {
+                            noPullTimer = 16 / itsGame->FrameScale();
                             pullCounter = 0;
                         }
                     }

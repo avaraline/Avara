@@ -14,7 +14,7 @@
 //#include "CInfoPanel.h"
 #include "CAvaraApp.h"
 
-#define kGravity FIX3(120)
+#define kGravity FIX3(120 * itsGame->FrameScale())
 #define kGrenadeFriction FIX3(10)
 
 void CGrenade::IWeapon(CDepot *theDepot) {
@@ -82,7 +82,7 @@ void CGrenade::Locate() {
     fullTransform[3][2] = 0;
 
 
-    double scaling = itsGame->FrameTimeScale();
+    double scaling = itsGame->FrameScale();
 
     speed[0] += (fullTransform[1][0] + 2 * fullTransform[2][0]) * scaling;
     speed[1] += (fullTransform[1][1] + 2 * fullTransform[2][1]) * scaling;
@@ -119,7 +119,7 @@ void CGrenade::FrameAction() {
     if (flyCount) {
         RayHitRecord rayHit;
         Fixed realSpeed;
-        Fixed scaling = FIX((1 - pow(1-ToFloat(kGrenadeFriction), itsGame->FrameTimeScale())));
+        Fixed scaling = FIX((1 - pow(1-ToFloat(kGrenadeFriction), itsGame->FrameScale())));
 
         speed[0] -= FMul(speed[0], scaling);
         speed[1] -= gravity + FMul(speed[1], scaling);
@@ -150,7 +150,7 @@ void CGrenade::FrameAction() {
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount > (5 / itsGame->FrameTimeScale())) {
+            if (flyCount > (5 / itsGame->FrameScale())) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
@@ -162,7 +162,7 @@ void CGrenade::FrameAction() {
             }
         }
 
-        if (flyCount > (100 / itsGame->FrameTimeScale())) {
+        if (flyCount > (100 / itsGame->FrameScale())) {
             doExplode = true;
         }
 

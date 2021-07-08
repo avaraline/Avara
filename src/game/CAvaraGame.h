@@ -82,6 +82,8 @@ public:
 
     long latencyFrameTime; //	In milliseconds.
     long frameTime; //	In milliseconds.
+    double frameScale;
+    Fixed fixedFrameScale;
     short gameStatus;
     short statusRequest;
     short pausePlayer;
@@ -242,7 +244,8 @@ public:
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
-    virtual double FrameTimeScale();
+    virtual double FrameScale();
+    virtual Fixed FIXFrameScale();
     virtual double LatencyFrameTimeScale();
 
     virtual long RoundTripToFrameLatency(long rtt);

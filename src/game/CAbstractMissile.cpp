@@ -21,7 +21,7 @@ void CAbstractMissile::IAbstractMissile(CDepot *theDepot) {
     itsDepot = theDepot;
     itsGame = itsDepot->itsGame;
 
-    speed = FIX3(2000) * itsGame->FrameTimeScale();
+    speed = FIX3(2000) * itsGame->FrameScale();
     maxFrameCount = 50;
     energy = 0;
 
@@ -145,7 +145,7 @@ void CAbstractMissile::Launch(Matrix *startMatrix,
     ownerIdent = theOwner->ident;
     itsGame->AddActor(this);
 
-    frameCount = maxFrameCount / itsGame->FrameTimeScale();
+    frameCount = maxFrameCount / itsGame->FrameScale();
 
     *(MatrixStruct *)&itsMatrix = *(MatrixStruct *)startMatrix;
     hitRec = *target;

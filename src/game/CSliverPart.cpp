@@ -67,7 +67,7 @@ void CSliverPart::Activate(Fixed *origin,
     fakeMaster = &borrowedColors;
     colorReplacements = (Handle)&fakeMaster;
     */
-    lifeCount = age / gCurrentGame->FrameTimeScale();
+    lifeCount = age / gCurrentGame->FrameScale();
 
     Reset();
     TranslatePartZ(this, FMul(scale, FIX3(250) + (FSysRandom() >> 1)));
@@ -93,7 +93,7 @@ void CSliverPart::Activate(Fixed *origin,
     MoveDone();
     extraAmbient = 0;
 
-    gravity = FMul(sliverGravity, FDiv(gCurrentGame->gravityRatio, FIX(gCurrentGame->FrameTimeScale())));
+    gravity = FMul(sliverGravity, gCurrentGame->gravityRatio);
 }
 
 Boolean CSliverPart::SliverAction() {
@@ -109,7 +109,7 @@ Boolean CSliverPart::SliverAction() {
         speed[1] = FMul(speed[1], FIX3(980));
         speed[2] = FMul(speed[2], FIX3(980));
 
-        extraAmbient = FIX3(500) - (FIX3(2000) >> (int)(lifeCount * gCurrentGame->FrameTimeScale()));
+        extraAmbient = FIX3(500) - (FIX3(2000) >> (int)(lifeCount * gCurrentGame->FrameScale()));
     }
 
     return lifeCount == 0;

@@ -57,6 +57,7 @@ void CRealMovers::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 
     if (shields) {
         impulsePower = hitEnergy >> 1;
+        impulsePower *= itsGame->FrameScale();
         impulseMotion[0] = FMul(impulsePower, theHit->direction[0]);
         impulseMotion[1] = FMul(impulsePower, theHit->direction[1]);
         impulseMotion[2] = FMul(impulsePower, theHit->direction[2]);
