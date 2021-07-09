@@ -48,6 +48,10 @@
 #include "CHUD.h"
 #include "Preferences.h"
 #include "Resource.h"
+#include "csscolorparser.hpp"
+#include "RGBAColor.h"
+
+#include <optional>
 
 #define kHighShadeCount 12
 
@@ -578,6 +582,8 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
 void CAvaraGame::EndScript() {
     short i;
+    std::optional<CSSColorParser::Color> ambientLightColor, color;
+    long longColor;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -586,7 +592,11 @@ void CAvaraGame::EndScript() {
     worldShader->Apply();
 
     itsView->ambientLight = ReadFixedVar(iAmbient);
-    AvaraGLSetAmbient(ToFloat(ReadFixedVar(iAmbient)));
+    ambientLightColor = CSSColorParser::parse(ReadStringVar(iAmbientColor));
+    itsView->ambientLightColor = (ambientLightColor)
+       ? RGBAToLong(*ambientLightColor)
+       : DEFAULT_LIGHT_COLOR;
+    AvaraGLSetAmbient(ToFloat(ReadFixedVar(iAmbient)), itsView->ambientLightColor);
 
     for (i = 0; i < 4; i++) {
         intensity = ReadFixedVar(iLightsTable + 3 * i);
@@ -594,21 +604,38 @@ void CAvaraGame::EndScript() {
         if (intensity >= 2048) {
             angle1 = ReadFixedVar(iLightsTable + 1 + 3 * i);
             angle2 = ReadFixedVar(iLightsTable + 2 + 3 * i);
+            switch (i) {
+                case 0:
+                    color = CSSColorParser::parse(ReadStringVar(iLight0Color));
+                    break;
+                case 1:
+                    color = CSSColorParser::parse(ReadStringVar(iLight1Color));
+                    break;
+                case 2:
+                    color = CSSColorParser::parse(ReadStringVar(iLight2Color));
+                    break;
+                case 3:
+                    color = CSSColorParser::parse(ReadStringVar(iLight3Color));
+                    break;
+            }
 
             x = FMul(FDegCos(angle1), intensity);
             y = FMul(FDegSin(-angle1), intensity);
             z = FMul(FDegCos(angle2), x);
             x = FMul(FDegSin(-angle2), x);
+            longColor = (color)
+                ? RGBAToLong(*color)
+                : DEFAULT_LIGHT_COLOR;
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
-            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f",
-                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2));
+            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %lx",
+                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), longColor);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
-            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2));
+            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), longColor);
         } else {
             itsView->SetLightValues(i, 0, 0, 0, kLightOff);
-            AvaraGLSetLight(i, 0, 0, 0);
+            AvaraGLSetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR);
         }
     }
 

@@ -288,6 +288,13 @@
   wallShield = -1
   wallBlast = 4
 
+  // Light colors
+  ambient.c = "#ffffff"
+  light[0].c = "#ffffff"
+  light[1].c = "#ffffff"
+  light[2].c = "#ffffff"
+  light[3].c = "#ffffff"
+
  	dummyVar = 0
 
 //   some defines

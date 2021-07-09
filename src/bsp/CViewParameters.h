@@ -49,6 +49,7 @@ public:
     Vector internalLights[MAXLIGHTS]; //	Vector length == light source power.
 
     Fixed ambientLight; //	Intensity of ambient (nondirectional) light
+    long ambientLightColor; // Color of ambient (nondirectional) light.
 
     Fixed yonBound;
     Fixed hitherBound;

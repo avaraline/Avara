@@ -50,7 +50,6 @@ typedef struct {
     short calcLevel;
 } variableValue;
 
-Handle theScript = 0;
 Ptr stackMem = NULL;
 double *stackP = 0;
 CStringDictionary *symTable = 0;
@@ -989,28 +988,6 @@ double EvalVariable(long token, Boolean forceCalc) {
     return theVar->value;
 }
 
-void LoadProgram() {
-    OSErr err;
-    short ref;
-    long len;
-    Handle mainScript;
-    Handle privateScript;
-
-    theScript = GetResource('TEXT', 2128);
-    DetachResource(theScript);
-    privateScript = GetResource('TEXT', 1000);
-    if (privateScript) {
-        HandAndHand(privateScript, theScript);
-        ReleaseResource(privateScript);
-    }
-
-    len = GetHandleSize(theScript);
-    HUnlock(theScript);
-    SetHandleSize(theScript, len + 1);
-    HLock(theScript);
-    (*theScript)[len] = 0; //	Append a NULL to terminate the script.
-}
-
 static unsigned long oldTicks = 0;
 
 char *fixedString(unsigned char *s) {
@@ -1090,13 +1067,11 @@ void AllocParser() {
     stackP = (double *)stackMem;
 
     currentActor = NULL;
-    LoadProgram();
-    RunThis((unsigned char *)*theScript);
+    RunThis((StringPtr)GetBaseScript().c_str());
+    RunThis((StringPtr)GetDefaultScript().c_str());
 }
 
 void DeallocParser() {
-    if (theScript)
-        DisposeHandle(theScript);
     if (stackMem)
         DisposePtr(stackMem);
 
@@ -1107,7 +1082,6 @@ void DeallocParser() {
     if (programBase)
         programBase->Dispose();
 
-    theScript = NULL;
     stackMem = NULL;
     stackP = NULL;
     symTable = NULL;

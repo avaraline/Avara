@@ -43,7 +43,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         float y = bufferHeight-chudHeight-boardHeight - 20;
         float fontsz_m = 28.0, fontsz_s = 18.0;
         long longTeamColor;
-        int teamColorRGB[3];
+        float teamColorRGB[3];
         NVGcolor aliveColor = nvgRGBA(255, 255, 255, 255);
         NVGcolor deadColor = nvgRGBA(165, 165, 165, 255);
         NVGcolor highColor = nvgRGBA(255, 0, 0, 255);
@@ -138,7 +138,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
                 //player color box
                 nvgBeginPath(ctx);
                 nvgRoundedRect(ctx, x + rankWidth + 10, y, colorBoxWidth, colorBoxWidth, 3.0);
-                nvgFillColor(ctx, nvgRGBA(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 255));
+                nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
                 nvgFill(ctx);
 
                 //show winnner

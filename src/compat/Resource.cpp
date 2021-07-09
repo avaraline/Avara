@@ -364,7 +364,7 @@ std::string GetDefaultScript() {
     buffa << DEFAULTSCRIPT;
     auto path = std::string(BundlePath(buffa));
     std::ifstream t(path);
-    if(t.good()) {
+    if (t.good()) {
         std::string defaultscript;
         t.seekg(0, std::ios::end);
         defaultscript.reserve(t.tellg());
@@ -374,17 +374,27 @@ std::string GetDefaultScript() {
                               std::istreambuf_iterator<char>());
         return defaultscript;
     }
-    else return "";
+
+    return "";
 }
 
 std::string GetBaseScript() {
     std::stringstream buffa;
-    buffa << "rsrc" << DEFAULTSCRIPT;
-    std::ifstream t(std::string(BundlePath(buffa)));
-    std::string scr;
-    scr.assign((std::istreambuf_iterator<char>(t)),
-                   std::istreambuf_iterator<char>());
-    return scr;
+    buffa << "rsrc" << PATHSEP << DEFAULTSCRIPT;
+    auto path = std::string(BundlePath(buffa));
+    std::ifstream t(path);
+    if (t.good()) {
+        std::string defaultscript;
+        t.seekg(0, std::ios::end);
+        defaultscript.reserve(t.tellg());
+        t.seekg(0, std::ios::beg);
+
+        defaultscript.assign((std::istreambuf_iterator<char>(t)),
+                              std::istreambuf_iterator<char>());
+        return defaultscript;
+    }
+
+    return "";
 }
 
 nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id) {
