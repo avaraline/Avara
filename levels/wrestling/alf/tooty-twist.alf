@@ -26,7 +26,7 @@
   <Ramp deltaY="-5" y=".25" fill="#fcfc00" frame="#000000" x="27.083333333333336" z="42.43055555555556" w="15" d="15" h="0" r="11.076388888888888" angle="85" extent="10" />
   <Ramp deltaY="-5" y=".25" fill="#fcfc00" frame="#000000" x="57.08333333333334" z="42.43055555555556" w="15" d="15" h="0" r="11.076388888888888" angle="265" extent="10" />
   <Ramp deltaY="-5" y=".25" fill="#fcfc00" frame="#000000" x="42.083333333333336" z="57.43055555555556" w="15" d="15" h="0" r="11.076388888888888" angle="355" extent="10" />
-  <set ambient="0.6" light.0.i="0.5" light.0.a="-90" light.0.b="73" light.1.1="1" />
+  <set ambient.i="0.6" light.0.i="0.5" light.0.a="-90" light.0.b="73" light.1.1="1" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="10.833333333333334" cz="11.180555555555555" r="2.5" angle="90" extent="90" />
   <Timer in="mTaken" out="mShow" wait="150" fill="#ffffff" frame="#000000" cx="10.833333333333334" cz="11.180555555555555" r="2.5" angle="90" extent="90" />

@@ -52,7 +52,7 @@ minutes until his transport arrives." fill="#ffffff" frame="#000000" cx="2.8125"
   <WallDoor midYaw="15" fill="#008800" frame="#000000" r="5" cx="66.80555555555556" cz="146.04166666666669" angle="327" extent="74" x="173.57638888888889" z="73.78472222222223" w="4.375" d="4.375" h="12.5" />
   <WallDoor midYaw="15" fill="#008800" frame="#000000" r="5" cx="66.80555555555556" cz="146.04166666666669" angle="327" extent="74" x="151.70138888888889" z="57.53472222222222" w="4.375" d="4.375" h="12.5" />
   <WallDoor midYaw="45" fill="#002200" frame="#000000" r="5" cx="66.80555555555556" cz="146.04166666666669" angle="327" extent="74" x="166.70138888888889" z="60.65972222222223" w="4.375" d="4.375" h="17.5" />
-  <set ambient="0.2" light.0.i="0.2" light.0.a="45" light.0.b="20" light.1.i="0.1" light.1.a="20" light.1.b="100" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="150" />
+  <set ambient.i="0.2" light.0.i="0.2" light.0.a="45" light.0.b="20" light.1.i="0.1" light.1.a="20" light.1.b="100" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="150" />
   <Teleporter group="-1" y="100" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#ff3300" frame="#000000" cx="125.48611111111111" cz="105" r="2.5" angle="0" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ff3300" frame="#000000" cx="125.48611111111111" cz="105" r="2.5" angle="0" extent="90" />
   <Teleporter shape="0" y="200" win="10000" start="@winTeam" activeRange="2000" fill="#ff3300" frame="#000000" cx="125.48611111111111" cz="105" r="2.5" angle="0" extent="90" />

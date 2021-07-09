@@ -20,7 +20,7 @@
   <set designer="Red Cap" information="From Wrestling 1.0 , aka Arena 4." />
   <SkyColor n="19" fill="#0000aa" frame="#ff33cc" />
   <GroundColor n="19" fill="#000000" frame="#ffff33" />
-  <set ambient="0.2" light.0.i="0.2" light.0.a="45" light.0.b="73" light.1.i="0.3" light.1.a="20" light.1.b="70" light.2.i="0.1" light.2.a="83" light.2.b="45" light.3.i="0.2" light.3.a="66" light.3.b="-90" />
+  <set ambient.i="0.2" light.0.i="0.2" light.0.a="45" light.0.b="73" light.1.i="0.3" light.1.a="20" light.1.b="70" light.2.i="0.1" light.2.a="83" light.2.b="45" light.3.i="0.2" light.3.a="66" light.3.b="-90" />
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" fill="#000000" frame="#000000" cx="41.18055555555556" cz="32.5" r="1.25" angle="0" extent="90" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#000000" frame="#000000" cx="41.18055555555556" cz="32.5" r="1.25" angle="0" extent="90" />
   <unique vars="mShow mTaken" />

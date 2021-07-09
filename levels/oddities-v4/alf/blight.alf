@@ -218,7 +218,7 @@ Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWa
   <unique vars="mA mB" />
   <And in="@start" out="mA" fill="#006666" frame="#000000" cx="46.5625" cz="5.486111111111112" r="1.875" angle="0" extent="90" />
   <WallDoor deltaX="5 -5 / 8" deltaY="0" shotPower="DoorShot" open="mA" close="mB" didOpen="mB" didClose="mA" openDelay="random * DoorTime" volume="DoorVol" closeDelay="random * DoorTime" openSpeed="DoorSpeed" closeSpeed="DoorSpeed" fill="#006666" frame="#000000" r="1.875" cx="46.5625" cz="5.486111111111112" angle="0" extent="90" x="133.05555555555557" z="119.89583333333334" w="25" d="0.625" h="0" />
-  <set ambient="0.4" light.0.i="0.6" light.0.a="45" light.0.b="20" light.1.i="0.3" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set ambient.i="0.4" light.0.i="0.6" light.0.a="45" light.0.b="20" light.1.i="0.3" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <unique vars="mStart mStop mTStart" />
   <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#555555" frame="#000000" cx="145.55555555555557" cz="35.208333333333336" r="1.25" angle="90" extent="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" fill="#555555" frame="#000000" cx="145.55555555555557" cz="35.208333333333336" r="1.25" angle="90" extent="180" />

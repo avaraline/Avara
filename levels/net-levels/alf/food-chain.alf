@@ -3,7 +3,7 @@
   <set designer="Juri Munkki" information="The HECTOR power generator is malfunctioning.
 You can only have one booster to start with.
 Collect yellow pills for energy, shields and points.
-A barrel of laughs and suspense for net play." normalWallHeight="1.5" wallHeight="normalWallHeight" homeBaseHeight="2.2" ambient="0.6" gH="0.8" gobbleYon="40" goodyY="1.6" wallFriction="0" wallTraction="0" />
+A barrel of laughs and suspense for net play." normalWallHeight="1.5" wallHeight="normalWallHeight" homeBaseHeight="2.2" ambient.i="0.6" gH="0.8" gobbleYon="40" goodyY="1.6" wallFriction="0" wallTraction="0" />
   <And in="@start" out="@gStart" fill="#ffff00" frame="#ff9966" cx="2.291666666666667" cz="2.291666666666667" r="1.875" angle="270" extent="90" />
   <Counter n="140" in="@gob" out="@gRestart" fill="#ffff00" frame="#ff9966" cx="2.291666666666667" cz="2.291666666666667" r="1.875" angle="270" extent="90" />
   <Timer wait="32" in="@gRestart" out="@gStart" fill="#ffff00" frame="#ff9966" cx="2.291666666666667" cz="2.291666666666667" r="1.875" angle="270" extent="90" />

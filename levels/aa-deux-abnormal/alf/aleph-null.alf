@@ -15,7 +15,7 @@
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="83.95833333333334" r="1.25" angle="180" extent="90" />
   <Timer in="mTaken" out="mShow" wait="250" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="83.95833333333334" r="1.25" angle="180" extent="90" />
   <Goody shape="bspGrenade" y="1.75" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="83.95833333333334" r="1.25" angle="180" extent="90" />
-  <set designer="Malkavian - moneta@avara.com" information="Two hundred and fifty dollars worth of pudding!  Awwwwww, yeah!" maxStartMissiles="0" defaultLives="4" ambient=".5" light.0.i="0.8" light.0.a="20" light.0.b="10" />
+  <set designer="Malkavian - moneta@avara.com" information="Two hundred and fifty dollars worth of pudding!  Awwwwww, yeah!" maxStartMissiles="0" defaultLives="4" ambient.i=".5" light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <SkyColor fill="#1f0009" frame="#99cccc" />
   <GroundColor fill="#550018" frame="#000055" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="7.5" shield="-1" y="0" activateEnergy="0" activeRange="3" freq="2" power="12" activateVolume=".75" activeTimer="8" hitScore="0" start="@start" fill="#bfbfbf" frame="#1f0009" cx="119.30555555555556" cz="76.38888888888889" r="1.25" angle="45" extent="90" />

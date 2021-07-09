@@ -48,7 +48,7 @@
   <set wallYon="defaultYon" />
   <GroundColor fill="#4c4c33" frame="#000000" />
   <SkyColor n="15" fill="#999966" frame="#e6e69a" />
-  <set ambient="0.2" light.0.i="0.7" light.1.i="0.1" light.2.i="0.1" light.2.a="-90" wallHeight="1.25" />
+  <set ambient.i="0.2" light.0.i="0.7" light.1.i="0.1" light.2.i="0.1" light.2.a="-90" wallHeight="1.25" />
   <Wall fill="#b3b378" frame="#000000" x="100.59027777777779" z="72.77777777777779" w="0.625" d="5" h="0" />
   <Wall fill="#b3b378" frame="#000000" x="102.77777777777779" z="74.96527777777779" w="3.75" d="0.625" h="0" />
   <Wall fill="#b3b378" frame="#000000" x="104.96527777777779" z="72.77777777777779" w="0.625" d="5" h="0" />

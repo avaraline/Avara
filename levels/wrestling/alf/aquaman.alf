@@ -28,7 +28,7 @@
   <set designer="Red Cap" information="Aquaman loves water..." />
   <SkyColor fill="#000055" frame="#0033ff" />
   <GroundColor fill="#330066" frame="#222222" />
-  <set ambient="0.4" light.0.i="0.6" light.0.a="45" light.0.b="90" grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" />
+  <set ambient.i="0.4" light.0.i="0.6" light.0.a="45" light.0.b="90" grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" />
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" spin="false" fill="#ffffff" frame="#000000" cx="43.75" cz="20" r="1.875" angle="0" extent="90" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="43.75" cz="20" r="1.875" angle="0" extent="90" />
   <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#336666" frame="#000000" r="1.875" cx="43.75" cz="20" angle="0" extent="90" x="45.625" z="18.75" w="10" d="10" h="0.25" y="100" />

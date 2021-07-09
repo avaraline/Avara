@@ -36,7 +36,7 @@
   <And in="@start" out="mShow" fill="#ff0000" frame="#ffff00" cx="37.63888888888889" cz="50.69444444444445" r="1.25" angle="150" extent="300" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" fill="#ff0000" frame="#ffff00" cx="37.63888888888889" cz="50.69444444444445" r="1.25" angle="150" extent="300" />
   <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff0000" frame="#ffff00" cx="37.63888888888889" cz="50.69444444444445" r="1.25" angle="150" extent="300" />
-  <set ambient="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
+  <set ambient.i="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
   <GroundColor fill="#330000" frame="#330000" />
   <SkyColor fill="#993300" frame="#330099" />
   <unique vars="mShow mTaken" />

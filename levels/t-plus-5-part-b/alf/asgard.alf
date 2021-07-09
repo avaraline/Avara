@@ -63,7 +63,7 @@ lie in dark torment." defaultLives="3" missilePower="1.8" missileAcceleration="0
   <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff0000" frame="#ffff00" cx="38.88888888888889" cz="44.72222222222222" r="1.25" angle="150" extent="300" />
   <set baseheight="0" />
   <Solid y="0" shape="bspDeadTree" scale="5" fill="#bbbbbb" frame="#aa0000" cx="62.29166666666667" cz="31.59722222222222" r="2.5" angle="180" extent="180" />
-  <set ambient="0.12" light.0.i="0.15" light.0.a="45" light.0.b="25" light.1.i="0.0" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set ambient.i="0.12" light.0.i="0.15" light.0.a="45" light.0.b="25" light.1.i="0.0" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <set baseheight="0" />
   <Solid y="0" shape="bspMushroom" scale="4" fill="#bbbbbb" frame="#aa0000" cx="29.02777777777778" cz="23.75" r="2.5" angle="180" extent="180" />
   <set wallHeight="50" />

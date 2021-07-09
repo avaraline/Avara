@@ -108,7 +108,7 @@
   <Wall fill="#2c401d" frame="#000000" x="89.58333333333334" z="88.33333333333334" w="0" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#2c401d" frame="#000000" x="69.58333333333334" z="88.33333333333334" w="0" d="10" h="0" />
-  <set ambient=".2" light.0.i=".4" />
+  <set ambient.i=".2" light.0.i=".4" />
   <Ramp y=".5" deltaY="3.5" fill="#99b693" frame="#000000" x="87.08333333333334" z="58.333333333333336" w="5" d="10" h="0" r="1.875" angle="315" extent="90" />
   <Ramp y=".5" deltaY="3.5" fill="#99b693" frame="#000000" x="72.08333333333334" z="98.33333333333334" w="5" d="10" h="0" r="1.875" angle="135" extent="90" />
   <Teleporter y="0" shape="bspFloorFrame" scale=".3" group="@floor" destGroup="@recenter" spin="false" fill="#dcffdc" frame="#000000" cx="79.58333333333334" cz="28.333333333333336" r="2.5" angle="90" extent="90" />

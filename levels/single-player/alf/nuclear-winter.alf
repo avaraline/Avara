@@ -93,7 +93,7 @@
   <Guard shield="1" fill="#ff3300" frame="#000000" cx="57.708333333333336" cz="132.70833333333334" r="1.875" angle="90" extent="90" />
   <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="A bomb was dropped slightly off target 
 leaving one structure untouched.  Destroy anything that 
-that moves and get out of there as quickly as possible." ambient=".2" hull.0="mediumHull" hull.2="mediumHull" />
+that moves and get out of there as quickly as possible." ambient.i=".2" hull.0="mediumHull" hull.2="mediumHull" />
   <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." fill="#ff3300" frame="#000000" cx="57.708333333333336" cz="132.70833333333334" r="1.875" angle="90" extent="90" />
   <Hologram shape="bspMushroom" isAmbient="1" fill="#ffffff" frame="#dd0000" cx="123.2638888888889" cz="152.08333333333334" r="1.875" angle="93" extent="90" />
   <Hologram shape="bspMushroom" isAmbient="1" fill="#ffffff" frame="#dd0000" cx="122.0138888888889" cz="150.20833333333334" r="1.875" angle="0" extent="90" />

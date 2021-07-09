@@ -2,7 +2,7 @@
   <set wallHeight="0" />
   <SkyColor verticalRangeMax="2500" n="24" fill="#ecccb8" frame="#d8b8ac" />
   <GroundColor fill="#5c4c44" frame="#5c4c44" />
-  <set ambient=".2" light.0.i="1" light.0.a="30" light.0.b="0" />
+  <set ambient.i=".2" light.0.i="1" light.0.a="30" light.0.b="0" />
   <set missileTurnRate="2" missilePower="1.1" grenadePower="2.4" defaultLives="4" designer="Robin Hood -&gt; http://avara.org" information="Stranded on the site of an ancient warrior tribe battleground, victory is your only hope. Use the tribes slightly more powerful than average missiles and grenades to slag it out with brute force." />
   <Wall fill="#5c4c44" frame="#000000" x="18.055555555555557" z="26.180555555555557" w="15" d="5" h="10" />
   <Wall fill="#64544c" frame="#000000" x="18.055555555555557" z="33.68055555555556" w="15" d="10" h="8" />

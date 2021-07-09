@@ -8,7 +8,7 @@
   <And in="@start" out="mMShow" fill="#fbffaa" frame="#661013" cx="17.63888888888889" cz="2.4305555555555554" r="2.8472222222222214" angle="90" extent="180" />
   <unique vars="mGShow" />
   <And in="@start" out="mGShow" fill="#fbffaa" frame="#661013" cx="17.63888888888889" cz="2.4305555555555554" r="2.8472222222222214" angle="90" extent="180" />
-  <set ambient="0.20" light.1.i="1" light.1.a="30" light.1.b="280" />
+  <set ambient.i="0.20" light.1.i="1" light.1.a="30" light.1.b="280" />
   <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#ff5a86" frame="#000000" cx="43.05555555555556" cz="46.80555555555556" r="1.3888888888888893" angle="90" extent="180" />
   <TeamColor mask="T5" fill="#440188" frame="#7a40cc" cx="38.40277777777778" cz="58.333333333333336" r="1.4583333333333357" angle="270" extent="90" />
   <TeamColor mask="T4" fill="#7e0248" frame="#cc4ead" cx="38.333333333333336" cz="60.833333333333336" r="1.4583333333333357" angle="270" extent="90" />

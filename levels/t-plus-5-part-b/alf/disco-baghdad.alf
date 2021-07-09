@@ -69,5 +69,5 @@
   <And in="@start" out="mShow" fill="#0033ff" frame="#000000" cx="45.13888888888889" cz="87.22222222222223" r="1.25" angle="45" extent="270" />
   <Timer in="mTaken" out="mShow" wait="missDelay" fill="#0033ff" frame="#000000" cx="45.13888888888889" cz="87.22222222222223" r="1.25" angle="45" extent="270" />
   <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0033ff" frame="#000000" cx="45.13888888888889" cz="87.22222222222223" r="1.25" angle="45" extent="270" />
-  <set ambient="3" light.0.i="4" light.0.a="5" light.0.b="3" />
+  <set ambient.i="3" light.0.i="4" light.0.a="5" light.0.b="3" />
 </map>

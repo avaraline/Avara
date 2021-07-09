@@ -7,7 +7,7 @@ Shall the best warrior win.
 Tip: Don't stray away....or you shall be put away!" />
   <SkyColor verticalRangeMax="2500" n="24" fill="#405080" frame="#344064" />
   <GroundColor fill="#4c4038" frame="#302420" />
-  <set ambient=".15" light.1.i=".05" />
+  <set ambient.i=".15" light.1.i=".05" />
   <set missileTurnRate="0.0001" missileAcceleration="1" missilePower="10" grenadePower="3" maxStartBoosts="1" defaultLives="5" />
   <Solid shape="bspBigIce" fill="#ffffff" frame="#000000" cx="44.30555555555556" cz="86.25" r="1.25" angle="15" extent="90" />
   <Solid shape="bspIce" fill="#ffffff" frame="#000000" cx="41.80555555555556" cz="91.875" r="1.25" angle="242" extent="90" />

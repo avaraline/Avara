@@ -13,7 +13,7 @@
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" fragment="false" spin="false" fill="#ffffff" frame="#000000" cx="23.47222222222222" cz="22.63888888888889" r="1.25" angle="0" extent="90" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="23.47222222222222" cz="22.63888888888889" r="1.25" angle="0" extent="90" />
   <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#ffffff" frame="#000000" r="1.25" cx="23.47222222222222" cz="22.63888888888889" angle="0" extent="90" x="23.47222222222222" z="22.63888888888889" w="5" d="5" h="0.25" y="99" />
-  <set ambient="0.0" light.0.i="1" light.0.a="45" light.1.i="1" light.1.b="45" />
+  <set ambient.i="0.0" light.0.i="1" light.0.a="45" light.1.i="1" light.1.b="45" />
   <Incarnator y=".25" fill="#00ee00" frame="#000000" cx="23.472222222222225" cz="32.25694444444444" r="11.11111111111111" angle="175" extent="10" />
   <Incarnator y=".25" fill="#00ee00" frame="#000000" cx="24.097222222222225" cz="13.611111111111112" r="11.11111111111111" angle="355" extent="10" />
   <set grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" defaultLives="10" />

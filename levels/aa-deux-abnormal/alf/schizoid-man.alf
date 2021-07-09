@@ -1,6 +1,6 @@
 <map>
   <set designer="Malkavian - moneta@avara.com" information="Colors recognized: Green, Blue and Purple.
-The first team that captures five of the nine zones wins.  Four of the zones are surrounded by forcefields controlled by the box-switches.  Retaking captured zones is not possible." defaultLives="9" hitScore="0" killScore="0" grenadePower="40" missilePower="1.75" missileTurnRate="0.3" missileAcceleration="0.3" ambient=".5" light.0.i="0.8" light.0.a="20" light.0.b="10" />
+The first team that captures five of the nine zones wins.  Four of the zones are surrounded by forcefields controlled by the box-switches.  Retaking captured zones is not possible." defaultLives="9" hitScore="0" killScore="0" grenadePower="40" missilePower="1.75" missileTurnRate="0.3" missileAcceleration="0.3" ambient.i=".5" light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <SkyColor fill="#3c448c" frame="#8f2e42" />
   <GroundColor fill="#0b002a" frame="#000055" />
   <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="5" out="@purpleWins" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="270" extent="90" />

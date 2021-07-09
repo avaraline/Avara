@@ -64,7 +64,7 @@
   <set designer="Red Cap" />
   <SkyColor n="12" fill="#aa0000" frame="#0000dd" />
   <GroundColor fill="#777777" frame="#66ccff" />
-  <set ambient="0" light.0.i="0.0" light.0.a="45" light.0.b="73" light.1.i=".2" light.1.a="12" light.1.b="13" light.2.i=".5" light.2.a="11" light.2.b="9" light.3.i=".5" light.3.a="90" light.3.b="-90" baseHeight="45" wallHeight="0" />
+  <set ambient.i="0" light.0.i="0.0" light.0.a="45" light.0.b="73" light.1.i=".2" light.1.a="12" light.1.b="13" light.2.i=".5" light.2.a="11" light.2.b="9" light.3.i=".5" light.3.a="90" light.3.b="-90" baseHeight="45" wallHeight="0" />
   <WallDoor stepOnMsg="@open" didOpen="@close" openSpeed="20" closeSpeed="1" shotPower="9999" open="@open" close="@close" openSound="0" closeSound="0" stopSound="0" deltaY="5" fill="#660099" frame="#000000" x="30" z="30" w="10" d="10" h="0" r="3.75" cx="4.444444444444445" cz="65.06944444444444" angle="90" extent="180" />
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" fill="#660099" frame="#000000" cx="31.25" cz="29.375" r="1.875" angle="180" extent="90" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#660099" frame="#000000" cx="31.25" cz="29.375" r="1.875" angle="180" extent="90" />
