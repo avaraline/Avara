@@ -41,8 +41,6 @@ public:
 
     Vector corners[8]; //	Corners of truncated viewing pyramid.
 
-    //	For light sources, only white light sources are currently supported.
-
     Vector lightSources[MAXLIGHTS];
 
     short lightMode[MAXLIGHTS];
