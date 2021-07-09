@@ -255,11 +255,11 @@
   wait = 0
 
   // Lights (default light settings are stored here)
-  ambient = 0.4
-  light[0].i = 0.4  light[0].a =  45  light[0].b = 20
-  light[1].i = 0.3  light[1].a =  20  light[1].b = 200
-  light[2].i = 0.0  light[2].a =  45  light[2].b = 90
-  light[3].i = 0.0  light[3].a =  45  light[3].b = 180
+  ambient    = 0.4  ambient.c  =  0
+  light[0].i = 0.4  light[0].a =  45  light[0].b = 20   light[0].c = 0
+  light[1].i = 0.3  light[1].a =  20  light[1].b = 200  light[1].c = 0
+  light[2].i = 0.0  light[2].a =  45  light[2].b = 90   light[2].c = 0
+  light[3].i = 0.0  light[3].a =  45  light[3].b = 180  light[3].c = 0
 
   // Advanced weapon powers:
   grenadePower = 2.25
@@ -287,13 +287,6 @@
 
   wallShield = -1
   wallBlast = 4
-
-  // Light colors
-  ambient.c = "#ffffff"
-  light[0].c = "#ffffff"
-  light[1].c = "#ffffff"
-  light[2].c = "#ffffff"
-  light[3].c = "#ffffff"
 
  	dummyVar = 0
 
@@ -509,5 +502,12 @@ designer = "unknown"
 information = "
 
 No additional information on this level is available."
+
+// Light colors
+ambient.c = "#ffffff"
+light[0].c = "#ffffff"
+light[1].c = "#ffffff"
+light[2].c = "#ffffff"
+light[3].c = "#ffffff"
 
 unique 32000 end

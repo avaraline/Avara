@@ -119,11 +119,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("text") == 0 ||
             attr.compare("designer") == 0 ||
             attr.compare("information") == 0 ||
-            attr.compare("ambient.c") == 0 ||
-            attr.compare("light[0].c") == 0 ||
-            attr.compare("light[1].c") == 0 ||
-            attr.compare("light[2].c") == 0 ||
-            attr.compare("light[3].c") == 0
+            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
         ) {
             if (value[0] == '$') {
                 return value.substr(1);

@@ -583,7 +583,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 void CAvaraGame::EndScript() {
     short i;
     std::optional<CSSColorParser::Color> ambientLightColor, color;
-    long longColor;
+    uint32_t longColor;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -599,25 +599,12 @@ void CAvaraGame::EndScript() {
     AvaraGLSetAmbient(ToFloat(ReadFixedVar(iAmbient)), itsView->ambientLightColor);
 
     for (i = 0; i < 4; i++) {
-        intensity = ReadFixedVar(iLightsTable + 3 * i);
+        intensity = ReadFixedVar(iLightsTable + 4 * i);
 
         if (intensity >= 2048) {
-            angle1 = ReadFixedVar(iLightsTable + 1 + 3 * i);
-            angle2 = ReadFixedVar(iLightsTable + 2 + 3 * i);
-            switch (i) {
-                case 0:
-                    color = CSSColorParser::parse(ReadStringVar(iLight0Color));
-                    break;
-                case 1:
-                    color = CSSColorParser::parse(ReadStringVar(iLight1Color));
-                    break;
-                case 2:
-                    color = CSSColorParser::parse(ReadStringVar(iLight2Color));
-                    break;
-                case 3:
-                    color = CSSColorParser::parse(ReadStringVar(iLight3Color));
-                    break;
-            }
+            angle1 = ReadFixedVar(iLightsTable + 1 + 4 * i);
+            angle2 = ReadFixedVar(iLightsTable + 2 + 4 * i);
+            color = CSSColorParser::parse(ReadStringVar(iLightsTable + 3 + 4 * i));
 
             x = FMul(FDegCos(angle1), intensity);
             y = FMul(FDegSin(-angle1), intensity);
@@ -628,7 +615,7 @@ void CAvaraGame::EndScript() {
                 : DEFAULT_LIGHT_COLOR;
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
-            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %lx",
+            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
                     i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), longColor);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.

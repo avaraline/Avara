@@ -5,7 +5,7 @@
 #include <SDL2/SDL.h>
 #include <stdint.h>
 
-static long RGBAToLong(CSSColorParser::Color rgba)
+static uint32_t RGBAToLong(CSSColorParser::Color rgba)
 {
     return (
         (static_cast<int>((rgba.a * 255.0) + 0.5) << 24) +
@@ -15,7 +15,7 @@ static long RGBAToLong(CSSColorParser::Color rgba)
     );
 }
 
-static void LongToRGBA(long in, float *out, int n = 4)
+static void LongToRGBA(uint32_t in, float *out, int n = 4)
 {
     if (n < 3 || n > 4) {
         SDL_Log("n must be 3 (for RGB) or 4 (for RGBA)");
