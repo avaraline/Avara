@@ -29,7 +29,7 @@
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" fragment="false" spin="false" fill="#ffffff" frame="#000000" cx="46.875" cz="21.805555555555557" r="1.25" angle="0" extent="90" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="46.875" cz="21.805555555555557" r="1.25" angle="0" extent="90" />
   <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#ffffff" frame="#000000" r="1.25" cx="46.875" cz="21.805555555555557" angle="0" extent="90" x="47.5" z="21.180555555555557" w="5" d="5" h="0.25" y="99" />
-  <set ambient="0.2" light.0.i="1" light.0.a="90" light.1.i="0.5" light.1.b="45" />
+  <set ambient.i="0.2" light.0.i="1" light.0.a="90" light.1.i="0.5" light.1.b="45" />
   <Wall fill="#004400" frame="#000000" x="41.25" z="21.180555555555557" w="11.25" d="23.75" h="0.25" />
   <Wall fill="#aa0000" frame="#000000" x="53.75" z="21.180555555555557" w="11.25" d="23.75" h="0.25" />
   <Wall fill="#000000" frame="#000000" x="35.3125" z="21.180555555555557" w="0.625" d="25" h="0.25" />

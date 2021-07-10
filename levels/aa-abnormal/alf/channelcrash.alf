@@ -2,7 +2,7 @@
   <Teleporter y="0" group="@leftPort" fill="#ffffff" frame="#000000" cx="62.395833333333336" cz="78.95833333333334" r="1.875" angle="90" extent="90" />
   <set designer="KOTH scripting by Hybrid, Layout by Malkavian" information="ChannelCrash:
 Don’t cancel your subscription to the intelligence that puppeteers your mind.
-This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds on top of the tower." ambient=".4" light.0.i=".2" light.0.a="20" light.0.b="0" light.1.i=".8" light.1.a="45" light.1.b="180" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
+This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds on top of the tower." ambient.i=".4" light.0.i=".2" light.0.a="20" light.0.b="0" light.1.i=".8" light.1.a="45" light.1.b="180" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
   <SkyColor fill="#deffff" frame="#99cccc" />
   <GroundColor fill="#000022" frame="#371525" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="77.56944444444444" cz="59.236111111111114" r="4.027777777777779" angle="270" extent="90" />

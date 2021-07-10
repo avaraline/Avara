@@ -6,6 +6,7 @@ Converts Avara level PICT resources to ALF (Avara Level Format)
 
 import enum
 import os
+import re
 import struct
 import sys
 
@@ -210,7 +211,9 @@ class TextOp(AvaraOperation):
         except ScriptParseError:
             debug("Script error in:\n%s", fixed_script)
             # Strip the "end" we added if there's still an error.
-            yield Element("script", fixed_script[:-3].strip())
+            text = fixed_script[:-3].strip()
+            text = re.sub(r"ambient(\s*)=", "ambient.i\1=", text)
+            yield Element("script", text)
 
 
 class GroupStart(AvaraOperation):

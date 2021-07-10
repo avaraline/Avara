@@ -76,7 +76,7 @@
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@GameEnds" win="0" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
   <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="5" out="@GameEnds" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
   <set information="It's a free for all!!  No teams!  Thanks to Cowboy for the script, Christopher Tate for the Choke Layout, and the AA and geezers for beta-testing! Seven minutes." maxStartMissiles="6" missileTurnRate="1" missileAcceleration="2" @TextVolume="30" @SnText="210" />
-  <set ambient="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
+  <set ambient.i="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
   <Timer in="@start" out.0="@outNW" out.1="@outNE" out.2="@outSW" out.3="@outSE" wait="150" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
   <Timer in="@midNWT" out="@inNW" wait="260" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />
   <Timer in="@midNET" out="@inNE" wait="260" fill="#000099" frame="#000000" cx="187.29166666666669" cz="139.5138888888889" r="2.5" angle="180" extent="90" />

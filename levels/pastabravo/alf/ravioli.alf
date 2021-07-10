@@ -312,5 +312,5 @@
   <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="106.31944444444444" cz="92.5" r="1.25" angle="180" extent="90" />
   <Goody yon="12.5" shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="106.31944444444444" cz="92.5" r="1.25" angle="180" extent="90" />
   <Teleporter y="-20" shape="0" activeRange="10000" win="10000" start="@winTeam" fill="#ffffff" frame="#000000" cx="106.31944444444444" cz="92.5" r="1.25" angle="180" extent="90" />
-  <set ambient="0.10" light.0.i="0.09" light.0.a="45" light.0.b="20" light.1.i="0.07" light.1.a="20" light.1.b="200" />
+  <set ambient.i="0.10" light.0.i="0.09" light.0.a="45" light.0.b="20" light.1.i="0.07" light.1.a="20" light.1.b="200" />
 </map>

@@ -4,7 +4,7 @@
   <set designer="Gus (Mondo) Wiseman - guswise@jps.net" information="Row, row row your boat, gently down the stream!
 Merrily, merrily, merrily, merrily!
 Life is but a dream!
-- 5 lives -" ambient=".3" light.0.i="6" light.0.a="0" light.0.b="10" light.1.i=".8" light.1.a="20" light.1.b="190" light.2.i=".4" light.2.a="-90" light.2.b="0" defaultLives="5" allHulls="lightHull" />
+- 5 lives -" ambient.i=".3" light.0.i="6" light.0.a="0" light.0.b="10" light.1.i=".8" light.1.a="20" light.1.b="190" light.2.i=".4" light.2.a="-90" light.2.b="0" defaultLives="5" allHulls="lightHull" />
   <set hull.3="allHulls" hull.4="allHulls" hull.5="allHulls" hull.6="allHulls" hull.7="allHulls" hull.8="allHulls" hull.9="allHulls" />
   <set mTract="defaultTraction" mFrict="defaultFriction" wallTraction="mTract" wallFriction="mFrict" wallYon="30" wallHeight="3" wallShield="1.5" wallBlast="0" />
   <Wall fill="#cdc7c2" frame="#000000" x="57.708333333333336" z="82.43055555555556" w="5" d="5" h="0" />

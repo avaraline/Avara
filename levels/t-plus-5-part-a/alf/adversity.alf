@@ -1,6 +1,6 @@
 <map>
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" />
-  <set ambient="0.3" light.0.i="0.3" light.0.a="60" light.0.b="0" light.1.i="0.1" light.1.a="-10" light.1.b="135" />
+  <set ambient.i="0.3" light.0.i="0.3" light.0.a="60" light.0.b="0" light.1.i="0.1" light.1.a="-10" light.1.b="135" />
   <set wallHeight="1.5" />
   <Wall fill="#cacaca" frame="#000000" x="40.625" z="67.29166666666667" w="5" d="5" h="0" />
   <set wallHeight="1.5" />

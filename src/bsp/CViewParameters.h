@@ -41,14 +41,13 @@ public:
 
     Vector corners[8]; //	Corners of truncated viewing pyramid.
 
-    //	For light sources, only white light sources are currently supported.
-
     Vector lightSources[MAXLIGHTS];
 
     short lightMode[MAXLIGHTS];
     Vector internalLights[MAXLIGHTS]; //	Vector length == light source power.
 
     Fixed ambientLight; //	Intensity of ambient (nondirectional) light
+    long ambientLightColor; // Color of ambient (nondirectional) light.
 
     Fixed yonBound;
     Fixed hitherBound;

@@ -31,7 +31,7 @@ To be or not to be... two" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffffff" frame="#000000" cx="49.583333333333336" cz="6.805555555555555" r="2.5" angle="180" extent="90" />
   <Teleporter group="-1" y="-30" activeRange="40 * 5" deadRange="30 * 3" destGroup="@recenter" shape="0" fill="#ffffff" frame="#000000" cx="49.583333333333336" cz="49.02777777777778" r="2.5" angle="180" extent="90" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffffff" frame="#000000" cx="49.583333333333336" cz="49.02777777777778" r="2.5" angle="180" extent="90" />
-  <set ambient="0.20" light.0.i="0.25" light.0.a="70" light.0.b="45" light.1.i="0.15" light.1.a="20" light.1.b="250" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set ambient.i="0.20" light.0.i="0.25" light.0.a="70" light.0.b="45" light.1.i="0.15" light.1.a="20" light.1.b="250" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <Incarnator y="30" fill="#ffffff" frame="#000000" cx="9.652777777777779" cz="14.444444444444446" r="4.375" angle="270" extent="90" />
   <Incarnator y="30" fill="#ffffff" frame="#000000" cx="9.652777777777779" cz="40.69444444444444" r="4.375" angle="180" extent="90" />
   <Incarnator y="30" fill="#ffffff" frame="#000000" cx="45.27777777777778" cz="41.94444444444444" r="4.375" angle="90" extent="90" />

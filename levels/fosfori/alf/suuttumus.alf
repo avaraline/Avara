@@ -213,7 +213,7 @@
   <Teleporter y="-10" activeRange="35 * 5" deadRange="30 * 5" group="@bubble" destGroup="@recenter" spin="false" shape="0" fill="#ffdbdb" frame="#000000" cx="124.65277777777779" cz="114.65277777777779" r="1.875" angle="180" extent="90" />
   <Teleporter y="200" activeRange="2000" shape="0" win="1000" start="@winTeam" fill="#ffdbdb" frame="#000000" cx="124.65277777777779" cz="114.65277777777779" r="1.875" angle="180" extent="90" />
   <Teleporter y="25" group="@recenter" shape="0" fill="#ffdbdb" frame="#000000" cx="124.65277777777779" cz="114.65277777777779" r="1.875" angle="180" extent="90" />
-  <set ambient=".3" light.0.i=".2" light.0.a="90" light.0.b="90" />
+  <set ambient.i=".3" light.0.i=".2" light.0.a="90" light.0.b="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffdbdb" frame="#ffffff" cx="72.15277777777779" cz="62.152777777777786" r="1.875" angle="0" extent="90" />
   <Timer in="mTaken" out="mShow" wait="300" fill="#ffdbdb" frame="#ffffff" cx="72.15277777777779" cz="62.152777777777786" r="1.875" angle="0" extent="90" />

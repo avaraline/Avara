@@ -209,6 +209,8 @@ class Reference(ScriptObject):
 class Declaration(ScriptObject):
     def __init__(self, tokens):
         self.name = str(tokens[0]).replace("[", ".").replace("]", "")
+        if self.name == "ambient":
+            self.name = "ambient.i"
         self.expr = tokens[1:]
 
     @property
@@ -297,7 +299,8 @@ class DeclarationGroup(ScriptObject):
     def element(self, context):
         # Only include declaration attributes which would have been processed.
         fake_context = {}
-        attrs = {d.name: d.value for d in self.declarations if d.process(fake_context)}
+        attrs = {d.name if d.name != "ambient" else "ambient.i": d.value
+                 for d in self.declarations if d.process(fake_context)}
         return Element("set", **attrs)
 
     def process(self, context):

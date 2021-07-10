@@ -118,7 +118,8 @@ struct ALFWalker: pugi::xml_tree_walker {
         if (
             attr.compare("text") == 0 ||
             attr.compare("designer") == 0 ||
-            attr.compare("information") == 0
+            attr.compare("information") == 0 ||
+            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
         ) {
             if (value[0] == '$') {
                 return value.substr(1);
@@ -308,10 +309,8 @@ struct ALFWalker: pugi::xml_tree_walker {
 };
 
 bool LoadALF(std::string levelName) {
-    InitParser();
     AvaraGLLightDefaults();
-
-    RunThis((StringPtr)GetDefaultScript().c_str());
+    InitParser();
 
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(levelName.c_str());

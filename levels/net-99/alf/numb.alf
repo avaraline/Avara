@@ -52,7 +52,7 @@ Ground Colored Paint  (with ScoreKeeper).
   <WallSolid power="kPower" shield="kShield" canGlow="false" isTarget="false" killMsg="@kBlock1" fill="#fffbfe" frame="#090701" r="1.6666666666666714" cx="37.708333333333336" cz="97.84722222222223" angle="269" extent="182" x="33.958333333333336" z="97.46527777777777" w="1.3888888888888857" d="6.458333333333329" h="0" />
   <set wallHeight="kWallHeight2" />
   <FreeSolid mass="kMass" start="@kBlock1" stop="@kBlockStop1" fill="#fffbfe" frame="#090701" r="1.6666666666666714" cx="37.708333333333336" cz="97.84722222222223" angle="269" extent="182" x="37.22222222222223" z="101.38888888888889" w="7.916666666666664" d="1.3888888888889" h="0" />
-  <set ambient="0.20" light.0.i="1" light.0.a="-50" light.0.b="20" light.1.i="0.6" light.1.a="60" light.1.b="150" />
+  <set ambient.i="0.20" light.0.i="1" light.0.a="-50" light.0.b="20" light.1.i="0.6" light.1.a="60" light.1.b="150" />
   <Goody speed="5" scale="2" shape="bspGrenade" y="2" grenades="12" missiles="0" start="@mGShow3" out="@mGShow4" fill="#0415fd" frame="#010c0a" cx="107.70833333333334" cz="95.76388888888889" r="1.6666666666666643" angle="269" extent="182" />
   <set wallHeight="kWallHeight2" />
   <WallSolid power="kPower" shield="kShield" canGlow="false" isTarget="false" killMsg="@kBlock3" fill="#fffbfe" frame="#090701" r="1.6666666666666643" cx="107.70833333333334" cz="95.76388888888889" angle="269" extent="182" x="104.09722222222223" z="95.24305555555557" w="1.3888888888888857" d="6.458333333333329" h="0" />

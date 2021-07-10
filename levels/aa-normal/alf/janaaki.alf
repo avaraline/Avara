@@ -37,7 +37,7 @@
   <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" fill="#ffffff" frame="#000000" cx="87.22222222222223" cz="73.29861111111111" r="4.618055555555557" angle="180" extent="90" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="87.22222222222223" cz="73.29861111111111" r="4.618055555555557" angle="180" extent="90" />
   <set designer="Malkavian - Oesian@jhu.edu" information="Janaaki:
-Falling briskly upward, lost angel wings brush against my face and I am free, climbing through feathered rain and shuddering with each tickling blow." ambient=".3" light.0.i=".5" light.0.a="20" light.0.b="0" light.1.i=".3" light.1.a="45" light.1.b="180" />
+Falling briskly upward, lost angel wings brush against my face and I am free, climbing through feathered rain and shuddering with each tickling blow." ambient.i=".3" light.0.i=".5" light.0.a="20" light.0.b="0" light.1.i=".3" light.1.a="45" light.1.b="180" />
   <SkyColor fill="#000055" frame="#ffcc99" />
   <GroundColor fill="#444444" frame="#555555" />
   <Ramp y="0" deltaY="3" fill="#ffffff" frame="#000000" x="57.08333333333334" z="83.33333333333334" w="20" d="10" h="0" r="8.368055555555557" angle="355" extent="10" />

@@ -2,7 +2,7 @@
   <set designer="Juri Munkki" information="Net play for maximum number of players." wallHeight="0.5" rampThickness="0.25" grThick="0.25" grDelta="4" grHeight="0" hLev2="2.5" lev2Delta="1" lev2Thickness="0.25" hLev3="hLev2 + 1" lev3Delta="5" lev3Thickness="0.25" hLev4="hLev3 + lev3Delta" lev4pitch="10" lev4roll="lev4pitch" hLev5="hLev4 -2" domeHeight="hLev5 + 5" rampYon="100" teleYon="80" wallYon="rampYon" />
   <SkyColor n="6" fill="#0000aa" frame="#000011" />
   <GroundColor fill="#000088" frame="#000011" />
-  <set ambient="0.4" light.0.i="0.6" light.0.a="-60" light.0.b="45" light.1.i="0.3" light.1.a="60" light.1.b="-45" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set ambient.i="0.4" light.0.i="0.6" light.0.a="-60" light.0.b="45" light.1.i="0.3" light.1.a="60" light.1.b="-45" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <Wall fill="#ffffff" frame="#000000" x="170.55555555555557" z="198.54166666666669" w="10" d="10" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="195.55555555555557" z="198.54166666666669" w="10" d="10" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="220.55555555555557" z="198.54166666666669" w="10" d="10" h="0" />

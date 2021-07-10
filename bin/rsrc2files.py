@@ -209,13 +209,12 @@ def convert_to_files(datafile, thedir):
         setfile.write("\n")
 
     if "TEXT" in forks:
+        text = "".join([e["data"].decode("macroman") for e in forks["TEXT"]])
+        text = text.replace("\r", "\n")
+        text = re.sub(r"ambient(\s*)=", "ambient.i\1=", text)
         textpath = os.path.join(thedir, SCRIPTFILE)
         with open(textpath, "w", encoding="utf-8") as textfile:
-            textfile.write(
-                "".join([e["data"].decode("macroman") for e in forks["TEXT"]]).replace(
-                    "\r", "\n"
-                )
-            )
+            textfile.write(text)
     # print(forks);
 
 

@@ -28,7 +28,7 @@
   <Wall fill="#0066ff" frame="#000000" x="56.25" z="117.5" w="3.75" d="3.75" h="6" />
   <Wall fill="#0066ff" frame="#000000" x="56.25" z="141.875" w="10" d="10" h="1" y="2" />
   <Ramp y="wallHeight" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="56.25" z="129.0625" w="2.5" d="19.375" h="0" r="3.125" angle="315" extent="90" />
-  <set ambient="0.2" light.0.i="0.6" light.0.a="10" light.0.b="20" light.1.i="0.0" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set ambient.i="0.2" light.0.i="0.6" light.0.a="10" light.0.b="20" light.1.i="0.0" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <Ramp y="wallHeight" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="44.6875" z="117.5" w="19.375" d="2.5" h="0" r="3.125" angle="45" extent="90" />
   <Ramp y="wallHeight" deltaY="wallHeight" fill="#0066cc" frame="#000000" x="19.0625" z="117.5" w="19.375" d="2.5" h="0" r="3.125" angle="225" extent="90" />
   <Wall fill="#0066ff" frame="#000000" x="7.5" z="117.5" w="3.75" d="3.75" h="6" />

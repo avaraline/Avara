@@ -186,5 +186,5 @@
   <Teleporter group="-1" y="-30" activeRange="120" deadRange="110" destGroup="@recenter" shape="0" fill="#ffee70" frame="#000000" cx="80.625" cz="84.58333333333334" r="1.25" angle="180" extent="270" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffee70" frame="#000000" cx="80.625" cz="84.58333333333334" r="1.25" angle="180" extent="270" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffee70" frame="#000000" cx="80.625" cz="84.58333333333334" r="1.25" angle="180" extent="270" />
-  <set ambient="0.3" light.0.i="0.3" />
+  <set ambient.i="0.3" light.0.i="0.3" />
 </map>

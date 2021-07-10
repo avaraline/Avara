@@ -158,7 +158,7 @@
   <And in="@start" out="mShow" fill="#ededed" frame="#000000" cx="157.15277777777777" cz="107.15277777777779" r="1.875" angle="0" extent="90" />
   <Timer in="mTaken" out="mShow" wait="100" fill="#ededed" frame="#000000" cx="157.15277777777777" cz="107.15277777777779" r="1.875" angle="0" extent="90" />
   <Goody y="16" shape="bspGrenade" sound="snYes" speed="5" grenades="6" start="mShow" out="mTaken" fill="#ededed" frame="#000000" cx="157.15277777777777" cz="107.15277777777779" r="1.875" angle="0" extent="90" />
-  <set ambient=".3" light.0.i=".6" light.0.a="90" light.0.b="90" />
+  <set ambient.i=".3" light.0.i=".6" light.0.a="90" light.0.b="90" />
   <SkyColor n="1000" verticalRangeMax="2000" fill="#b2b2b9" frame="#3d3d50" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ededed" frame="#000000" cx="117.77777777777779" cz="146.52777777777777" r="1.875" angle="0" extent="90" />

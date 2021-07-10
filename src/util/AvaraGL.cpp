@@ -2,6 +2,7 @@
 #include "FastMat.h"
 #include "Resource.h"
 #include "CViewParameters.h"
+#include "RGBAColor.h"
 
 #include <fstream>
 #include <iostream>
@@ -30,7 +31,7 @@ short window_height = 1;
 short window_width = 1;
 
 float skyboxVertices[] = {
-        // positions          
+        // positions
         -5.0f,  5.0f, -5.0f,
         -5.0f, -5.0f, -5.0f,
          5.0f, -5.0f, -5.0f,
@@ -75,8 +76,11 @@ float skyboxVertices[] = {
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, lights_activeLoc, projLoc, viewLoc;
-GLuint light0Loc, light1Loc, light2Loc, light3Loc;
+GLuint mvLoc, ntLoc, ambLoc, ambColorLoc, lights_activeLoc, projLoc, viewLoc;
+GLuint light0Loc, light0ColorLoc;
+GLuint light1Loc, light1ColorLoc;
+GLuint light2Loc, light2ColorLoc;
+GLuint light3Loc, light3ColorLoc;
 
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
@@ -131,9 +135,9 @@ void AvaraGLSetFOV(float fov) {
 
 void AvaraGLUpdateProjectionMatrix() {
     proj = glm::scale(glm::perspective(
-                        glm::radians(current_fov), 
-                        (float)window_width / (float)window_height, 
-                        near_dist, 
+                        glm::radians(current_fov),
+                        (float)window_width / (float)window_height,
+                        near_dist,
                         far_dist)
                      , glm::vec3(-1, 1, -1));
     glUseProgram(gProgram);
@@ -141,35 +145,47 @@ void AvaraGLUpdateProjectionMatrix() {
     glCheckErrors();
 }
 
-void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth) {
+void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, long color) {
     if (!actuallyRender) return;
-    
+
     float x = cos(Deg2Rad(elevation)) * intensity;
     float y = sin(Deg2Rad(-elevation)) * intensity;
     float z = cos(Deg2Rad(azimuth)) * intensity;
+    float rgb[3];
+
     x = sin(Deg2Rad(-azimuth)) * intensity;
+    LongToRGBA(color, rgb, 3);
 
     glUseProgram(gProgram);
     switch (light_index) {
         case 0:
             glUniform3f(light0Loc, x, y, z);
+            glUniform3fv(light0ColorLoc, 1, rgb);
             break;
         case 1:
             glUniform3f(light1Loc, x, y, z);
+            glUniform3fv(light1ColorLoc, 1, rgb);
             break;
         case 2:
             glUniform3f(light2Loc, x, y, z);
+            glUniform3fv(light2ColorLoc, 1, rgb);
             break;
         case 3:
             glUniform3f(light3Loc, x, y, z);
+            glUniform3fv(light3ColorLoc, 1, rgb);
             break;
     }
 }
 
-void AvaraGLSetAmbient(float ambient) {
+void AvaraGLSetAmbient(float ambient, long color) {
     if (!actuallyRender) return;
+
+    float rgb[3];
+    LongToRGBA(color, rgb, 3);
+
     glUseProgram(gProgram);
     glUniform1f(ambLoc, ambient);
+    glUniform3fv(ambColorLoc, 1, rgb);
 }
 
 void ActivateLights(float active) {
@@ -180,11 +196,11 @@ void ActivateLights(float active) {
 void AvaraGLLightDefaults() {
     if (!actuallyRender) return;
     // called before loading a level
-    AvaraGLSetLight(0, 0.4f, 45.0f, 20.0f);
-    AvaraGLSetLight(1, 0.3f, 20.0f, 200.0f);
-    AvaraGLSetLight(2, 0, 0, 0);
-    AvaraGLSetLight(3, 0, 0, 0);
-    AvaraGLSetAmbient(0.4f);
+    AvaraGLSetLight(0, 0.4f, 45.0f, 20.0f, DEFAULT_LIGHT_COLOR);
+    AvaraGLSetLight(1, 0.3f, 20.0f, 200.0f, DEFAULT_LIGHT_COLOR);
+    AvaraGLSetLight(2, 0, 0, 0, DEFAULT_LIGHT_COLOR);
+    AvaraGLSetLight(3, 0, 0, 0, DEFAULT_LIGHT_COLOR);
+    AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR);
 }
 
 void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
@@ -217,14 +233,19 @@ void AvaraGLInitContext() {
     mvLoc = glGetUniformLocation(gProgram, "modelview");
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");
+    ambColorLoc = glGetUniformLocation(gProgram, "ambientColor");
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
     glCheckErrors();
 
 
     light0Loc = glGetUniformLocation(gProgram, "light0");
+    light0ColorLoc = glGetUniformLocation(gProgram, "light0Color");
     light1Loc = glGetUniformLocation(gProgram, "light1");
+    light1ColorLoc = glGetUniformLocation(gProgram, "light1Color");
     light2Loc = glGetUniformLocation(gProgram, "light2");
+    light2ColorLoc = glGetUniformLocation(gProgram, "light2Color");
     light3Loc = glGetUniformLocation(gProgram, "light3");
+    light3ColorLoc = glGetUniformLocation(gProgram, "light3Color");
     glCheckErrors();
 
     AvaraGLLightDefaults();
@@ -267,10 +288,10 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     float current_amb = ToFloat(part->currentView->ambientLight);
 
     if (part->privateAmbient != -1) {
-        AvaraGLSetAmbient(ToFloat(part->privateAmbient));
+        AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
     }
     if (extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb + extra_amb);
+        AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor);
     }
     if (part->ignoreDirectionalLights) {
         ActivateLights(0);
@@ -301,7 +322,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
     glCheckErrors();
-    
+
     glBindVertexArray(part->vertexArray);
     glDrawArrays(GL_TRIANGLES, 0, part->totalPoints);
 
@@ -316,7 +337,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     // restore previous lighting state
     if (part->privateAmbient != -1 || extra_amb > 0) {
-        AvaraGLSetAmbient(current_amb);
+        AvaraGLSetAmbient(current_amb, part->currentView->ambientLightColor);
         glCheckErrors();
     }
     if (part->ignoreDirectionalLights) {
@@ -353,14 +374,17 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     }
     // Get rid of the translation part
     matrix[12] = matrix[13] = matrix[14] = 0;
-    
+
     glBindVertexArray(skyVertArray);
     glBindBuffer(GL_ARRAY_BUFFER, skyBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
 
-    long groundColor = theShader->groundColor;
-    long lowSkyColor = theShader->lowSkyColor;
-    long highSkyColor = theShader->highSkyColor;
+    float groundColorRGB[3];
+    float lowSkyColorRGB[3];
+    float highSkyColorRGB[3];
+    LongToRGBA(theShader->groundColor, groundColorRGB, 3);
+    LongToRGBA(theShader->lowSkyColor, lowSkyColorRGB, 3);
+    LongToRGBA(theShader->highSkyColor, highSkyColorRGB, 3);
 
     glDisable(GL_DEPTH_TEST);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
@@ -368,18 +392,10 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     glUseProgram(skyProgram);
     glUniformMatrix4fv(skyViewLoc, 1, GL_FALSE, matrix);
     glUniformMatrix4fv(skyProjLoc, 1, GL_FALSE, glm::value_ptr(proj));
-    glUniform3f(groundColorLoc,
-        ((groundColor >> 16) & 0xFF) / 255.0,
-        ((groundColor >> 8) & 0xFF) / 255.0,
-        (groundColor & 0xFF) / 255.0);
-    glUniform3f(horizonColorLoc,
-        ((lowSkyColor >> 16) & 0xFF) / 255.0,
-        ((lowSkyColor >> 8) & 0xFF) / 255.0,
-        (lowSkyColor & 0xFF) / 255.0);
-    glUniform3f(skyColorLoc,
-        ((highSkyColor >> 16) & 0xFF) / 255.0,
-        ((highSkyColor >> 8) & 0xFF) / 255.0,
-        (highSkyColor & 0xFF) / 255.0);
+    glUniform3fv(groundColorLoc, 1, groundColorRGB);
+    glUniform3fv(horizonColorLoc, 1, lowSkyColorRGB);
+    glUniform3fv(skyColorLoc, 1, highSkyColorRGB);
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glBindVertexArray(skyVertArray);

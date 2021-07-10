@@ -1,7 +1,7 @@
 <map>
   <set designer="Malkavian - moneta@avara.com" information="Wimp:
 The object is to capture the ten &quot;&quot;A&quot;&quot;s on your half of the track.  I recommend staying on your block, as it’s tough to jump and get them, and it’s hard to get your blocks started once you’ve screwed them up.  You can’t interfere with your opponent.  Sorry.
-  Concentrate on yourself." grenadePower="0" missilePower="0" ambient=".5" light.0.i="0.8" light.0.a="20" light.0.b="10" />
+  Concentrate on yourself." grenadePower="0" missilePower="0" ambient.i=".5" light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <SkyColor fill="#770c6a" frame="#eebee9" />
   <GroundColor fill="#ffffff" frame="#000000" />
   <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken1" yon="90" fill="#3399ff" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" r="1.25" angle="180" extent="90" />

@@ -258,8 +258,9 @@ enum {
 
     //	Lights
     iAmbient,
+    iAmbientColor,
     iLightsTable,
-    iLightsTableEnd = iLightsTable + 11, //	a 3 x 4 table
+    iLightsTableEnd = iLightsTable + 15, //	a 3 x 4 table
 
     // Advanced weapons
     iGrenadePower,

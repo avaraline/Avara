@@ -103,7 +103,7 @@
   <Wall fill="#553e21" frame="#000000" x="221.73611111111111" z="431.73611111111114" w="0" d="6.25" h="0" />
   <set wallHeight="2.1" />
   <Wall fill="#77572e" frame="#000000" x="225.48611111111111" z="431.73611111111114" w="0" d="6.25" h="0" />
-  <set wallTraction="0.75" wallFriction="0.75" traction="defaultTraction" friction="defaultFriction" ambient=".1" light.0.i="0.8" light.0.a="20" light.0.b="10" />
+  <set wallTraction="0.75" wallFriction="0.75" traction="defaultTraction" friction="defaultFriction" ambient.i=".1" light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <GroundColor fill="#1c2204" frame="#547714" />
   <SkyColor n="1000" verticalRangeMax="2000" fill="#2a3306" frame="#1c2204" />
   <set groundStepSound="2002" designer="The Sphinx" information="Last man standing." wallYon="0.01" wallHeight=".15" />

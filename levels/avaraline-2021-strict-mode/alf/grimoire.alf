@@ -1,7 +1,7 @@
 <map>
   <SkyColor fill="#8a96af" frame="#e8d395" />
   <GroundColor fill="#45484c" frame="#000000" />
-  <set designer="$mSilverfox" information="The thick, decrepit tome was stuffed with incantations of all sorts. Some were utilitarian in nature, allowing the magus to send messages halfway across the world. Others were more...whimsical, and could transform an owl into a mongoose." ambient="0.3" light.0.i="0.6" light.0.a="60" light.0.b="30" wallHeight="0" />
+  <set designer="$mSilverfox" information="The thick, decrepit tome was stuffed with incantations of all sorts. Some were utilitarian in nature, allowing the magus to send messages halfway across the world. Others were more...whimsical, and could transform an owl into a mongoose." ambient.i="0.3" light.0.i="0.6" light.0.a="60" light.0.b="30" wallHeight="0" />
 
   <Ramp y="0" deltaY="6" fill="#e3c97a" frame="#000000" x="2.5" z="-15" w="10" d="15" h="0" r="1.875" angle="180" extent="0" />
   <Ramp y="0" deltaY="6" fill="#e3c97a" frame="#000000" x="-2.5" z="15" w="10" d="15" h="0" r="1.875" angle="0" extent="0" />

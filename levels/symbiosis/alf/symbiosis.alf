@@ -241,7 +241,7 @@
   <Sound sound="3002" start="@snApplause" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="4.583333333333334" cz="124.58333333333334" r="1.875" angle="225" extent="90" />
   <Sound sound="3003" start="@snBoo" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="4.583333333333334" cz="124.58333333333334" r="1.875" angle="225" extent="90" />
   <Sound sound="3001" start="@gameEnd" isPlaced="false" volume.0="0.8" volume.1="0.8" fill="#ffffff" frame="#000000" cx="4.583333333333334" cz="124.58333333333334" r="1.875" angle="225" extent="90" />
-  <set ambient="0.3" light.0.i="0.8" light.0.a="-60" light.0.b="45" light.1.i="0.5" light.1.a="60" light.1.b="-90" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" wallHeight="3" wallYon="0.01" />
+  <set ambient.i="0.3" light.0.i="0.8" light.0.a="-60" light.0.b="45" light.1.i="0.5" light.1.a="60" light.1.b="-90" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" wallHeight="3" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="58.333333333333336" z="74.58333333333334" w="2.5" d="30" h="0" y="17" />
   <set wallYon="0.01" wallHeight="3" />
   <Wall fill="#ffffff" frame="#000000" x="105.83333333333334" z="74.58333333333334" w="2.5" d="30" h="0" y="17" />
