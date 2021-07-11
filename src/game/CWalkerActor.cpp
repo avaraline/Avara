@@ -591,7 +591,7 @@ void CWalkerActor::TractionControl() {
     adjustedGravity = FMul(FIX3(120 * itsGame->FrameScale()), itsGame->gravityRatio);
     speed[1] -= adjustedGravity;
 
-    bounceTarget = FMul3(absAvgSpeed, itsGame->FIXFrameScale(), (0x4000 - (legPhase & 0x7FFF)) >> 2);
+    bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
     // bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
@@ -600,7 +600,8 @@ void CWalkerActor::TractionControl() {
     extraHeight = bounceTarget + adjustedGravity * 2; // FIX3(120)*2;
 
     if (!jumpFlag && location[1] < extraHeight) {
-        speed[1] = ((bounceTarget - location[1]) >> 1) + (speed[1] >> 1);
+        // speed has already been adjusted for FrameScale so only adjust (bounce-locationY)
+        speed[1] = ((bounceTarget - location[1]) >> 1)*itsGame->FrameScale()*itsGame->FrameScale() + (speed[1] >> 1);
     }
 
     if (speed[1] < 0)
