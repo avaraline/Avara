@@ -839,8 +839,8 @@ void CAbstractPlayer::MotionControl() {
     motorDir[0] = FMul(FOneSin(avrgHeading), distance);
     motorDir[1] = FMul(FOneCos(avrgHeading), distance);
 
-    slide[0] = motorDir[0] - speed[0] + groundSlide[0];
-    slide[1] = motorDir[1] - speed[2] + groundSlide[2];
+    slide[0] = FDiv(motorDir[0] - speed[0] + groundSlide[0], itsGame->FIXFrameScale());
+    slide[1] = FDiv(motorDir[1] - speed[2] + groundSlide[2], itsGame->FIXFrameScale());
     slideLen = VectorLength(2, slide);
 
     if (slideLen < supportTraction * itsGame->FrameScale()) {
