@@ -601,7 +601,7 @@ void CWalkerActor::TractionControl() {
 
     if (!jumpFlag && location[1] < extraHeight) {
         // speed has already been adjusted for FrameScale so only adjust (bounce-locationY)
-        speed[1] = ((bounceTarget - location[1]) >> 1)*itsGame->FrameScale()*itsGame->FrameScale() + (speed[1] >> 1);
+        speed[1] = ((bounceTarget - location[1]) >> 1)*itsGame->FrameScale() + (speed[1] >> 1);
     }
 
     if (speed[1] < 0)
