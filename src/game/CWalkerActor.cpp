@@ -592,7 +592,7 @@ void CWalkerActor::TractionControl() {
     speed[1] -= adjustedGravity;
 
     bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
-    // bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
+
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
     bounceTarget += targetHeight;
@@ -600,8 +600,11 @@ void CWalkerActor::TractionControl() {
     extraHeight = bounceTarget + adjustedGravity * 2; // FIX3(120)*2;
 
     if (!jumpFlag && location[1] < extraHeight) {
-        // speed has already been adjusted for FrameScale so only adjust (bounce-locationY)
-        speed[1] = ((bounceTarget - location[1]) >> 1)*itsGame->FrameScale() + (speed[1] >> 1);
+        // alpha less than 0.5 gives more "bounciness"
+        double alpha = 0.5 * itsGame->FrameScale();         // slightly bouncy but no issues found
+        // double alpha = 0.5*sqrt(itsGame->FrameScale());  // pretty good but causes issues on some levels
+        // double alpha = 0.5;                              // not bouncy enough at higher fps
+        speed[1] = (bounceTarget - location[1]) * itsGame->FrameScale() * alpha + speed[1] * (1.0-alpha);
     }
 
     if (speed[1] < 0)
