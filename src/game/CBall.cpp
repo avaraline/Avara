@@ -210,10 +210,10 @@ void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
     teamMask = 1 << teamColor;
     ownerScoringId = ownerId;
 
-    uint32_t teamColor = GetTeamColorOr(origLongColor);
+    uint32_t longTeamColor = GetTeamColorOr(origLongColor);
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(kMarkerColor, teamColor);
+        (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
     }
 }
 

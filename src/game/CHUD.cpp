@@ -301,7 +301,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         if (playerName.length() < 1) continue;
         pY = (bufferHeight - chudHeight + 8) + (11 * i);
         longTeamColor = CColorManager::getTeamColor(net->teamColors[i] + 1).value();
-        LongToRGBA(longTeamColor, teamColorRGB, 3);\
+        LongToRGBA(longTeamColor, teamColorRGB, 3);
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
 
         //player color box
