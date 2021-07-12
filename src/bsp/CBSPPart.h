@@ -44,6 +44,11 @@ typedef struct {
 
 typedef uint32_t ColorRecord;
 
+namespace CBSPUserFlags {
+    constexpr short kIsAmbient = 1;
+    constexpr short kCullBackfaces = 2;
+}
+
 /*
 **	Special macros for rotations and translations for speed (unfortunately):
 */
@@ -104,7 +109,6 @@ public:
     Fixed enclosureRadius;
     FixedPoint minBounds; //  Bounding box minimums for x, y, z
     FixedPoint maxBounds; //  Bounding box maximums for x, y, z
-    bool isDecal; // set if the bounding box is very thin in one direction
 
     CViewParameters *currentView;
 

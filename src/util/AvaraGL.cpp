@@ -298,26 +298,14 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
-    // hack to find the viewPortPart and
-    // scout, we want to render only the
+    // we want to render only the
     // front faces of these so we can see thru
     // the back of the faces with the camera
-    if (part->usesPrivateHither == true) {
-        // magic value set for scout and head
-        if (part->hither == FIX3(101)) {
-            glEnable(GL_CULL_FACE);
-            glCullFace(GL_BACK);
-            glFrontFace(GL_CCW);
-        }
-    }
-
-    // if we're drawing something thin
-    // give it a little z-buffer push towards
-    // the camera by scaling the z-value
-    bool decal = part->isDecal;
-    if (decal) {
-        glEnable(GL_POLYGON_OFFSET_FILL);
-        glPolygonOffset(-1.0, 1.0);
+    bool cull_back_faces = (part->userFlags & CBSPUserFlags::kCullBackfaces) > 0;
+    if (cull_back_faces) {
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+        glFrontFace(GL_CCW);
     }
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
@@ -329,11 +317,6 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
-
-    // reset z-buffer scale
-    if (decal) {
-        glDisable(GL_POLYGON_OFFSET_FILL);
-    }
 
     // restore previous lighting state
     if (part->privateAmbient != -1 || extra_amb > 0) {
@@ -347,10 +330,8 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     // turn backface culling back off for
     // all other geometry
-    if (part->usesPrivateHither == true) {
-        if (part->hither == FIX3(101)) {
-            glDisable(GL_CULL_FACE);
-        }
+    if (cull_back_faces) {
+        glDisable(GL_CULL_FACE);
     }
 
     glBindVertexArray(NULL);
