@@ -2,6 +2,7 @@
 #include "CApplication.h"
 
 #include "AvaraGL.h"
+#include "CColorManager.h"
 #include "Preferences.h"
 #include "Types.h"
 
@@ -20,6 +21,8 @@ nanogui::Screen(nanogui::Vector2i(prefs[kWindowWidth], prefs[kWindowHeight]), ti
     gApplication = this;
     AvaraGLInitContext();
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
+
+    CColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
 }
 
 CApplication::~CApplication() {}

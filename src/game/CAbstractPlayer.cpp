@@ -170,7 +170,7 @@ void CAbstractPlayer::LoadScout() {
     scoutCommand = kScoutNullCommand;
 
     itsScout = new CScout;
-    itsScout->IScout(this, teamColor, GetTeamColorOr(CColorManager::getTeamColor(0).value()));
+    itsScout->IScout(this, teamColor, GetTeamColorOr(CColorManager::getDefaultTeamColor()));
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
@@ -178,7 +178,7 @@ void CAbstractPlayer::LoadScout() {
 
 void CAbstractPlayer::ReplacePartColors() {
     teamMask = 1 << teamColor;
-    longTeamColor = GetTeamColorOr(CColorManager::getTeamColor(0).value());
+    longTeamColor = GetTeamColorOr(CColorManager::getDefaultTeamColor());
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
