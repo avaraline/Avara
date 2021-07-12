@@ -1,11 +1,13 @@
 #include "CHUD.h"
 #include "CAbstractPlayer.h"
 #include "CAvaraGame.h"
+#include "CColorManager.h"
 #include "CPlayerManager.h"
 #include "AvaraDefines.h"
 #include "CScoreKeeper.h"
 #include "RGBAColor.h"
 
+#include <stdint.h>
 
 CHUD::CHUD(CAvaraGame *game) {
     itsGame = game;
@@ -13,10 +15,6 @@ CHUD::CHUD(CAvaraGame *game) {
 
 const int CHAT_CHARS = 40;
 const NVGcolor BACKGROUND_COLOR = nvgRGBA(30, 30, 30, 180);
-
-const std::vector<long> team_colors =
-    {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor, kOrangeTeamColor, kLimeTeamColor};
-
 
 bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecord, int> j) {
     if(i.first.points == j.first.points) {
@@ -42,7 +40,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         float x = 20;
         float y = bufferHeight-chudHeight-boardHeight - 20;
         float fontsz_m = 28.0, fontsz_s = 18.0;
-        long longTeamColor;
+        uint32_t longTeamColor;
         float teamColorRGB[3];
         NVGcolor aliveColor = nvgRGBA(255, 255, 255, 255);
         NVGcolor deadColor = nvgRGBA(165, 165, 165, 255);
@@ -114,7 +112,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
             CPlayerManager *thisPlayer = net->playerTable[playerTableIndex];
             const std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             std::string ping = "--";
-            longTeamColor = team_colors[net->teamColors[playerTableIndex]];
+            longTeamColor = CColorManager::getTeamColor(net->teamColors[playerTableIndex] + 1).value();
             LongToRGBA(longTeamColor, teamColorRGB, 3);
             NVGcolor textColor = aliveColor;
 
@@ -295,17 +293,15 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     }
 
     float pY;
-    long longTeamColor;
-    int colorR, colorG, colorB;
+    uint32_t longTeamColor;
+    float teamColorRGB[3];
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = net->playerTable[i];
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
         if (playerName.length() < 1) continue;
         pY = (bufferHeight - chudHeight + 8) + (11 * i);
-        longTeamColor = team_colors[net->teamColors[i]];
-        colorR = (longTeamColor >> 16) & 0xff;
-        colorG = (longTeamColor >> 8) & 0xff;
-        colorB = longTeamColor & 0xff;
+        longTeamColor = CColorManager::getTeamColor(net->teamColors[i] + 1).value();
+        LongToRGBA(longTeamColor, teamColorRGB, 3);\
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
 
         //player color box
@@ -320,7 +316,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         }
 
         nvgRect(ctx, bufferWidth - 160, pY, colorBoxWidth, 10.0);
-        nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
+        nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
         nvgFill(ctx);
 
         //player name

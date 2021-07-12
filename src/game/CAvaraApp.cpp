@@ -17,6 +17,7 @@
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
 #include "CharWordLongPointer.h"
+#include "CColorManager.h"
 #include "CNetManager.h"
 #include "CRC.h"
 #include "CSoundMixer.h"

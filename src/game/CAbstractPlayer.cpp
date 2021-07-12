@@ -12,6 +12,7 @@
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
+#include "CColorManager.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
@@ -169,7 +170,7 @@ void CAbstractPlayer::LoadScout() {
     scoutCommand = kScoutNullCommand;
 
     itsScout = new CScout;
-    itsScout->IScout(this, teamColor, GetLongTeamColorOr(kNeutralTeamColor));
+    itsScout->IScout(this, teamColor, GetTeamColorOr(CColorManager::getTeamColor(0).value()));
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
@@ -177,7 +178,7 @@ void CAbstractPlayer::LoadScout() {
 
 void CAbstractPlayer::ReplacePartColors() {
     teamMask = 1 << teamColor;
-    longTeamColor = GetLongTeamColorOr(kNeutralTeamColor);
+    longTeamColor = GetTeamColorOr(CColorManager::getTeamColor(0).value());
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
@@ -671,7 +672,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if(TESTFUNC(kfuScoreboard, ft->down))
                 itsManager->SetShowScoreboard(!itsManager->GetShowScoreboard());
         }
-        
+
         if (TESTFUNC(kfuPauseGame, ft->down)) {
             if(lives > 0) {
                 itsGame->statusRequest = kPauseStatus;
@@ -776,7 +777,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (fieldOfView > maxFOV)
             fieldOfView = maxFOV;
 
-        if (itsManager->IsLocalPlayer() && 
+        if (itsManager->IsLocalPlayer() &&
             (TESTFUNC(kfuZoomOut, ft->held) || TESTFUNC(kfuZoomIn, ft->held)))
             AvaraGLSetFOV(ToFloat(fieldOfView));
 
