@@ -82,6 +82,8 @@ public:
 
     long latencyFrameTime; //	In milliseconds.
     long frameTime; //	In milliseconds.
+    double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
+
     short gameStatus;
     short statusRequest;
     short pausePlayer;
@@ -242,7 +244,6 @@ public:
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
-    virtual double FrameTimeScale(double exponent=1);
     virtual double LatencyFrameTimeScale();
 
     virtual long RoundTripToFrameLatency(long rtt);
@@ -250,6 +251,8 @@ public:
     virtual void AdjustFrameTime();
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
+    virtual void SetFrameTime(long ft);
+    virtual bool IsClassicFrame();
 };
 
 #ifndef MAINAVARAGAME

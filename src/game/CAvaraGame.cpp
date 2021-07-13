@@ -72,7 +72,7 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     aMixer = new CSoundMixer;
     aMixer->ISoundMixer(rate22khz, 32, 4, true, true, false);
     aMixer->SetStereoSeparation(true);
-    aMixer->SetSoundEnvironment(FIX(400), FIX(5), frameTime);
+    aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
     soundHub->AttachMixer(aMixer);
     soundHub->MuteFlag(silentFlag); //(soundOutputStyle < 0);
 }
@@ -97,8 +97,7 @@ CNetManager* CAvaraGame::CreateNetManager() {
 }
 
 CAvaraGame::CAvaraGame(int frameTime) {
-    this->frameTime = frameTime; // milliseconds
-    this->latencyFrameTime = frameTime;
+    SetFrameTime(frameTime);
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     short i;
@@ -470,8 +469,10 @@ void CAvaraGame::RunFrameActions() {
 
     while (theActor) {
         nextActor = theActor->nextActor;
-        if (theActor->isActive || --(theActor->sleepTimer) == 0) {
-            theActor->FrameAction();
+        if (theActor->isActive || --(theActor->sleepTimer) <= 0) {
+            if (IsClassicFrame() || theActor->HandlesFastFPS()) {
+              theActor->FrameAction();
+            }
             // itsNet->ProcessQueue();
             /*
             if(canPreSend && SDL_GetTicks() - nextScheduledFrame >= 0)
@@ -485,9 +486,11 @@ void CAvaraGame::RunFrameActions() {
     }
 
     itsNet->ProcessQueue();
-    if (!latencyTolerance)
-        while (frameNumber > topSentFrame)
+    if (!latencyTolerance && IsClassicFrame()) {
+        while (frameNumber > topSentFrame) {
             itsNet->FrameAction();
+        }
+    }
 
     thePlayer = playerList;
     while (thePlayer) { // itsNet->ProcessQueue();
@@ -626,7 +629,7 @@ void CAvaraGame::EndScript() {
 
     groundTraction = ReadFixedVar(iDefaultTraction);
     groundFriction = ReadFixedVar(iDefaultFriction);
-    gravityRatio = ReadFixedVar(iGravity) * FrameTimeScale(2);
+    gravityRatio = ReadFixedVar(iGravity);
     groundStepSound = ReadLongVar(iGroundStepSound);
     gHub->LoadSample(groundStepSound);
 
@@ -786,7 +789,7 @@ void CAvaraGame::GameStart() {
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
 
-    while (frameNumber + latencyTolerance > topSentFrame) {
+    while (frameNumber + latencyTolerance/fpsScale > topSentFrame) {
         itsNet->FrameAction();
     }
 
@@ -882,9 +885,8 @@ bool CAvaraGame::GameTick() {
 
     itsNet->AutoLatencyControl(frameNumber, longWait);
 
-    // SDL_Log("latencyTolerance = %ld, latencyFrameTime = %ld\n", latencyTolerance, latencyFrameTime);
     if (latencyTolerance)
-        while (frameNumber + latencyTolerance > topSentFrame)
+        while (frameNumber + latencyTolerance/fpsScale > topSentFrame)
             itsNet->FrameAction();
 
     canPreSend = true;
@@ -1039,10 +1041,6 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
     return theManager;
 }
 
-double CAvaraGame::FrameTimeScale(double exponent) {
-    return pow(double(frameTime)/CLASSICFRAMETIME, exponent);
-}
-
 double CAvaraGame::LatencyFrameTimeScale() {
     return double(latencyFrameTime)/frameTime;
 }
@@ -1124,4 +1122,19 @@ long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     // move forward to frame 120 and NOT frame 60.
     long periodFrames = TimeToFrameCount(period);
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
+}
+
+void CAvaraGame::SetFrameTime(long ft) {
+    if (ft != 16 && ft != 32 && ft != 64) {
+      SDL_Log("ERROR! frameTime MUST be 16, 32 or 64 msec");
+      exit(1); // is exit too dramatic?
+    }
+    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %ld)\n", ft);
+    this->frameTime = ft;
+    this->latencyFrameTime = ft;
+    this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
+}
+
+bool CAvaraGame::IsClassicFrame() {
+    return (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
 }
