@@ -11,6 +11,8 @@ uint32_t CColorManager::pinwheel4Color = 0xff1e1eff;
 uint32_t CColorManager::plasmaGauge1Color = 0xffa33600;
 uint32_t CColorManager::plasmaGauge2Color = 0xffff3600;
 uint32_t CColorManager::shieldGaugeColor = 0xff003da5;
+uint32_t CColorManager::specialBlackColor = 0xff303030;
+uint32_t CColorManager::specialWhiteColor = 0xffe0e0e0;
 
 uint32_t CColorManager::teamColors[kMaxTeamColors + 1] = {
     0xffffffff,
@@ -49,6 +51,8 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::plasmaGauge1Color = 0xffa33600;
             CColorManager::plasmaGauge2Color = 0xffff3600;
             CColorManager::shieldGaugeColor = 0xff003da5;
+            CColorManager::specialBlackColor = 0xff303030;
+            CColorManager::specialWhiteColor = 0xffe0e0e0;
             CColorManager::teamColors[0] = 0xffffffff;
             CColorManager::teamColors[1] = 0xff006600;
             CColorManager::teamColors[2] = 0xffcccc00;
@@ -79,6 +83,8 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::plasmaGauge1Color = 0xffa33600;
             CColorManager::plasmaGauge2Color = 0xffff3600;
             CColorManager::shieldGaugeColor = 0xff0000a5;
+            CColorManager::specialBlackColor = 0xff303030;
+            CColorManager::specialWhiteColor = 0xffe0e0e0;
             CColorManager::teamColors[0] = 0xffffffff;
             CColorManager::teamColors[1] = 0xff006655;
             CColorManager::teamColors[2] = 0xffcccc00;
@@ -109,6 +115,8 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::plasmaGauge1Color = 0xffa33600;
             CColorManager::plasmaGauge2Color = 0xffff3600;
             CColorManager::shieldGaugeColor = 0xff0000a5;
+            CColorManager::specialBlackColor = 0xff303030;
+            CColorManager::specialWhiteColor = 0xffe0e0e0;
             CColorManager::teamColors[0] = 0xffffffff;
             CColorManager::teamColors[1] = 0xff006655;
             CColorManager::teamColors[2] = 0xffcccc00;
@@ -139,6 +147,8 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::plasmaGauge1Color = 0xffa33600;
             CColorManager::plasmaGauge2Color = 0xffff3600;
             CColorManager::shieldGaugeColor = 0xff003da5;
+            CColorManager::specialBlackColor = 0xff303030;
+            CColorManager::specialWhiteColor = 0xffe0e0e0;
             CColorManager::teamColors[0] = 0xffffffff;
             CColorManager::teamColors[1] = 0xff006600;
             CColorManager::teamColors[2] = 0xffcccc00;

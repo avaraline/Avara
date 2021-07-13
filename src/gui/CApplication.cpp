@@ -4,7 +4,6 @@
 #include "AvaraGL.h"
 #include "CColorManager.h"
 #include "Preferences.h"
-#include "Types.h"
 
 #include <SDL2/SDL.h>
 #include <fstream>

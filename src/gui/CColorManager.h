@@ -53,6 +53,14 @@ public:
         return shieldGaugeColor;
     }
 
+    static inline uint32_t getSpecialBlackColor() {
+        return specialBlackColor;
+    }
+
+    static inline uint32_t getSpecialWhiteColor() {
+        return specialWhiteColor;
+    }
+
     static inline std::optional<uint32_t> getTeamColor(uint8_t num) {
         return (num <= kMaxTeamColors)
             ? teamColors[num]
@@ -80,6 +88,8 @@ private:
     static uint32_t plasmaGauge1Color;
     static uint32_t plasmaGauge2Color;
     static uint32_t shieldGaugeColor;
+    static uint32_t specialBlackColor;
+    static uint32_t specialWhiteColor;
     static uint32_t teamColors[kMaxTeamColors + 1];
     static uint32_t teamTextColors[kMaxTeamColors + 1];
 };
