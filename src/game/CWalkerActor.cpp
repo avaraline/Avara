@@ -592,6 +592,7 @@ void CWalkerActor::TractionControl() {
     speed[1] -= adjustedGravity;
 
     bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
+
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
     bounceTarget += targetHeight;

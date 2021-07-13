@@ -329,7 +329,7 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 
 void CPlayerManagerImpl::SendFrame() {
     // Sends the next game frame.
-    itsGame->topSentFrame++;
+    itsGame->topSentFrame = itsGame->frameNumber;
 
     FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & itsGame->topSentFrame];
 

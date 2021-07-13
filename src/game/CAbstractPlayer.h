@@ -181,8 +181,6 @@ public:
     virtual void MotionControl();
     virtual void GunActions();
 
-    virtual void GetSpeedEstimate(Fixed *theSpeed);
-
 #if 0
     virtual	void			FindBestMovement(CSmartPart *bump);
 #endif

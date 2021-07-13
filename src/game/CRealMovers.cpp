@@ -25,9 +25,11 @@ void CRealMovers::IAbstractActor() {
 }
 
 void CRealMovers::GetSpeedEstimate(Fixed *theSpeed) {
-    *theSpeed++ = speed[0];
-    *theSpeed++ = speed[1];
-    *theSpeed++ = speed[2];
+    // callers of this method assume return value in CLASSICFRAMETIME time units so scale back to that if running at higher fps
+    int scale = this->HandlesFastFPS() ? (1/itsGame->fpsScale) : 1;
+    theSpeed[0] = speed[0] * scale;
+    theSpeed[1] = speed[1] * scale;
+    theSpeed[2] = speed[2] * scale;
 }
 
 void CRealMovers::Push(Fixed *direction) {

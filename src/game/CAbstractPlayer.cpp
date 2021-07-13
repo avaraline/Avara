@@ -120,9 +120,9 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale(2);
+    maxAcceleration = FIX3(250);
 #define CLASSICACCELERATION FIX3(250)
-    motorFriction = FIX(pow(0.75, itsGame->FrameTimeScale()));
+    motorFriction = FIX3(750);
 #define CLASSICMOTORFRICTION FIX3(750)
     didBump = true;
 
@@ -599,14 +599,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (!isInLimbo) {
             modAccel = FDivNZ(baseMass, GetTotalMass());
             modAccel = FMul(modAccel, modAccel);
-            modAccel = FMul(CLASSICACCELERATION, modAccel); //  FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
-            // top speed = accel * motorFriction / (1 - motorFriction)
-            // Scale top speed: top speed * frameTime/64
-            // Use scaled top speed and scaled motor friction to figure out an adjusted acceleration
-            // THEREFORE accel = accel * frameTimeScale * classicMotorFriction * (1 - motorFriction) / ((1 - classicMotorFriction) * motorFriction)
-            if (itsGame->frameTime != 64) {
-                modAccel = FDivNZ(itsGame->FrameTimeScale() * FMul(modAccel, FMul(CLASSICMOTORFRICTION, FIX1 - motorFriction)),  FMul(motorFriction, FIX1 - CLASSICMOTORFRICTION));
-            }
+            modAccel = FMul(CLASSICACCELERATION, modAccel);
 
             motionFlags = 0;
 
@@ -806,12 +799,6 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
     }
 }
 
-void CAbstractPlayer::GetSpeedEstimate(Fixed *theSpeed) {
-    theSpeed[0] = speed[0];
-    theSpeed[1] = speed[1];
-    theSpeed[2] = speed[2];
-}
-
 void CAbstractPlayer::Slide(Fixed *direction) {
     groundSlide[0] = *direction++;
     groundSlide[1] = *direction++;
@@ -826,12 +813,12 @@ void CAbstractPlayer::TractionControl() {
 void CAbstractPlayer::MotionControl() {
     Fixed avrgHeading;
     Fixed motorDir[2];
-    Fixed fric = FIX((1 - pow(1 - 0.01, itsGame->FrameTimeScale())));// FIX3(10); // FIX3(30);
+    Fixed fric = FIX3(10); // FIX3(30);
     Fixed slowDown;
     Fixed absVert;
     Fixed slide[2];
     Fixed slideLen;
-    Fixed supportFriction = FIX((1 - pow(1 - ToFloat(this->supportFriction), itsGame->FrameTimeScale())));
+    Fixed supportFriction = this->supportFriction;
 
     distance = (motors[0] + motors[1]) >> 1;
     headChange = FMul(motors[1] - motors[0], turningEffect);
@@ -848,8 +835,8 @@ void CAbstractPlayer::MotionControl() {
     slide[1] = motorDir[1] - speed[2] + groundSlide[2];
     slideLen = VectorLength(2, slide);
 
-    if (slideLen < supportTraction * itsGame->FrameTimeScale()) {
-        double speedPortion = pow(0.25, itsGame->FrameTimeScale());
+    if (slideLen < supportTraction) {
+        double speedPortion = 0.25;
         speed[0] += slide[0] - (slide[0] * speedPortion);
         speed[2] += slide[1] - (slide[1] * speedPortion);
     } else {
@@ -930,6 +917,7 @@ void CAbstractPlayer::PlayerAction() {
 
             fireGun = false;
 
+if (itsGame->IsClassicFrame()) {
             if (!netDestruct)
                 KeyboardControl(itsManager->GetFunctions());
 
@@ -942,6 +930,7 @@ void CAbstractPlayer::PlayerAction() {
 
             AvoidBumping();
             LinkPartSpheres();
+}
 
             if (shields < maxShields) {
                 Fixed regenRate;
@@ -1206,13 +1195,6 @@ void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
     }
 }
 
-#ifdef SPECIAL_ACCEL
-void CAbstractPlayer::Accelerate(Fixed *direction) {
-    direction[1] >>= 2;
-    CRealMovers::Accelerate(direction);
-}
-#endif
-
 Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume, short options) {
     Vector oldLoc;
     Boolean couldMove;
@@ -1305,7 +1287,7 @@ void CAbstractPlayer::ResumeLevel() {
 
 extern Fixed sliverGravity;
 
-#define INTERPTIME 20
+#define INTERPTIME (20 / itsGame->fpsScale)
 
 void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     short count = 16;
