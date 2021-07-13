@@ -310,8 +310,13 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgBeginPath(ctx);
 
         //highlight player if spectating
-        if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
-            textColor = nvgRGBA(0, 0, 0, 255);
+        if (spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
+            textColor = nvgRGBA(
+                LongToR(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
+                LongToG(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
+                LongToB(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
+                LongToA(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value())
+            );
             colorBoxWidth = 150.0;
         }
 

@@ -29,13 +29,13 @@ uint32_t CColorManager::teamColors[kMaxTeamColors + 1] = {
 uint32_t CColorManager::teamTextColors[kMaxTeamColors + 1] = {
     0xff000000,
     0xffffffff,
+    0xff000000,
     0xffffffff,
     0xffffffff,
     0xffffffff,
-    0xffffffff,
-    0xffffffff,
-    0xffffffff,
-    0xffffffff
+    0xff000000,
+    0xff000000,
+    0xff000000
 };
 
 void CColorManager::setColorBlind(ColorBlindMode mode) {
@@ -63,11 +63,11 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::teamColors[7] = 0xffffa500;
             CColorManager::teamColors[8] = 0xff89c4c7;
             CColorManager::teamTextColors[0] = 0xff000000;
-            CColorManager::teamTextColors[1] = 0xff000000;
+            CColorManager::teamTextColors[1] = 0xffffffff;
             CColorManager::teamTextColors[2] = 0xff000000;
-            CColorManager::teamTextColors[3] = 0xff000000;
-            CColorManager::teamTextColors[4] = 0xff000000;
-            CColorManager::teamTextColors[5] = 0xff000000;
+            CColorManager::teamTextColors[3] = 0xffffffff;
+            CColorManager::teamTextColors[4] = 0xffffffff;
+            CColorManager::teamTextColors[5] = 0xffffffff;
             CColorManager::teamTextColors[6] = 0xff000000;
             CColorManager::teamTextColors[7] = 0xff000000;
             CColorManager::teamTextColors[8] = 0xff000000;
@@ -95,12 +95,12 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::teamColors[7] = 0xfff5daa3;
             CColorManager::teamColors[8] = 0xff89c4c7;
             CColorManager::teamTextColors[0] = 0xff000000;
-            CColorManager::teamTextColors[1] = 0xff000000;
+            CColorManager::teamTextColors[1] = 0xffffffff;
             CColorManager::teamTextColors[2] = 0xff000000;
-            CColorManager::teamTextColors[3] = 0xff000000;
-            CColorManager::teamTextColors[4] = 0xff000000;
-            CColorManager::teamTextColors[5] = 0xff000000;
-            CColorManager::teamTextColors[6] = 0xff000000;
+            CColorManager::teamTextColors[3] = 0xffffffff;
+            CColorManager::teamTextColors[4] = 0xffffffff;
+            CColorManager::teamTextColors[5] = 0xffffffff;
+            CColorManager::teamTextColors[6] = 0xffffffff;
             CColorManager::teamTextColors[7] = 0xff000000;
             CColorManager::teamTextColors[8] = 0xff000000;
             break;
@@ -127,12 +127,12 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::teamColors[7] = 0xfff5daa3;
             CColorManager::teamColors[8] = 0xff89c4c7;
             CColorManager::teamTextColors[0] = 0xff000000;
-            CColorManager::teamTextColors[1] = 0xff000000;
+            CColorManager::teamTextColors[1] = 0xffffffff;
             CColorManager::teamTextColors[2] = 0xff000000;
-            CColorManager::teamTextColors[3] = 0xff000000;
-            CColorManager::teamTextColors[4] = 0xff000000;
-            CColorManager::teamTextColors[5] = 0xff000000;
-            CColorManager::teamTextColors[6] = 0xff000000;
+            CColorManager::teamTextColors[3] = 0xffffffff;
+            CColorManager::teamTextColors[4] = 0xffffffff;
+            CColorManager::teamTextColors[5] = 0xffffffff;
+            CColorManager::teamTextColors[6] = 0xffffffff;
             CColorManager::teamTextColors[7] = 0xff000000;
             CColorManager::teamTextColors[8] = 0xff000000;
             break;
@@ -159,12 +159,12 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::teamColors[7] = 0xffffa500;
             CColorManager::teamColors[8] = 0xff89c4c7;
             CColorManager::teamTextColors[0] = 0xff000000;
-            CColorManager::teamTextColors[1] = 0xff000000;
+            CColorManager::teamTextColors[1] = 0xffffffff;
             CColorManager::teamTextColors[2] = 0xff000000;
-            CColorManager::teamTextColors[3] = 0xff000000;
-            CColorManager::teamTextColors[4] = 0xff000000;
-            CColorManager::teamTextColors[5] = 0xff000000;
-            CColorManager::teamTextColors[6] = 0xff000000;
+            CColorManager::teamTextColors[3] = 0xffffffff;
+            CColorManager::teamTextColors[4] = 0xffffffff;
+            CColorManager::teamTextColors[5] = 0xffffffff;
+            CColorManager::teamTextColors[6] = 0xffffffff;
             CColorManager::teamTextColors[7] = 0xff000000;
             CColorManager::teamTextColors[8] = 0xff000000;
             break;
