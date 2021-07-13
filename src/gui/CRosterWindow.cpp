@@ -59,14 +59,14 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     panel->setLayout(layout);
     theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
     std::vector<long> player_colors = {
-        CColorManager::getTeamColor(1).value_or(CColorManager::getDefaultTeamColor()),
-        CColorManager::getTeamColor(2).value_or(CColorManager::getDefaultTeamColor()),
-        CColorManager::getTeamColor(3).value_or(CColorManager::getDefaultTeamColor()),
-        CColorManager::getTeamColor(4).value_or(CColorManager::getDefaultTeamColor()),
-        CColorManager::getTeamColor(5).value_or(CColorManager::getDefaultTeamColor()),
-        CColorManager::getTeamColor(6).value_or(CColorManager::getDefaultTeamColor()),
-        CColorManager::getTeamColor(7).value_or(CColorManager::getDefaultTeamColor()),
-        CColorManager::getTeamColor(8).value_or(CColorManager::getDefaultTeamColor())
+        (long) CColorManager::getTeamColor(1).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(2).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(3).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(4).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(5).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(6).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(7).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(8).value_or(CColorManager::getDefaultTeamColor())
     };
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
