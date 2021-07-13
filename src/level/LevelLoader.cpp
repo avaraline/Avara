@@ -17,13 +17,14 @@
 #include "Parser.h"
 #include "Resource.h"
 #include "pugixml.hpp"
-#include "csscolorparser.hpp"
+#include "RGBAColor.h"
 
 #include <SDL2/SDL.h>
 
 #include <algorithm>
 #include <sstream>
 #include <fstream>
+#include <optional>
 #include <streambuf>
 #include <regex>
 
@@ -49,7 +50,7 @@ static short lastDomeAngle;
 static short lastDomeSpan;
 static Fixed lastDomeRadius;
 
-static RGBColor fillColor, frameColor;
+static uint32_t fillColor, frameColor;
 
 
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
@@ -62,12 +63,12 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     return lastDomeRadius;
 }
 
-int GetPixelColor() {
-    return ((((int)fillColor.red) << 8) & 0xFF0000) | (fillColor.green & 0xFF00) | (fillColor.blue >> 8);
+uint32_t GetPixelColor() {
+    return fillColor;
 }
 
-int GetOtherPixelColor() {
-    return ((((int)frameColor.red) << 8) & 0xFF0000) | (frameColor.green & 0xFF00) | (frameColor.blue >> 8);
+uint32_t GetOtherPixelColor() {
+    return frameColor;
 }
 
 void GetLastArcLocation(Fixed *theLoc) {
@@ -174,20 +175,16 @@ struct ALFWalker: pugi::xml_tree_walker {
         gLastBoxRounding = h.empty() ? 0 : ToFixed(std::stod(h));
 
         if (!fill.empty()) {
-            const auto color = CSSColorParser::parse(fill);
+            const std::optional<uint32_t> color = ParseColor(fill);
             if (color) {
-                fillColor.red = color->r * 257;
-                fillColor.green = color->g * 257;
-                fillColor.blue = color->b * 257;
+                fillColor = color.value();
             }
         }
 
         if (!frame.empty()) {
-            const auto color = CSSColorParser::parse(frame);
+            const std::optional<uint32_t> color = ParseColor(frame);
             if (color) {
-                frameColor.red = color->r * 257;
-                frameColor.green = color->g * 257;
-                frameColor.blue = color->b * 257;
+                frameColor = color.value();
             }
         }
 
