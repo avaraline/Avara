@@ -10,6 +10,8 @@ uint32_t CColorManager::pinwheel3Color = 0xff1e1ecc;
 uint32_t CColorManager::pinwheel4Color = 0xff1e1eff;
 uint32_t CColorManager::plasmaGauge1Color = 0xffa33600;
 uint32_t CColorManager::plasmaGauge2Color = 0xffff3600;
+uint32_t CColorManager::plasmaSightsOffColor = 0xff008000;
+uint32_t CColorManager::plasmaSightsOnColor = 0xffff0000;
 uint32_t CColorManager::shieldGaugeColor = 0xff003da5;
 uint32_t CColorManager::specialBlackColor = 0xff303030;
 uint32_t CColorManager::specialWhiteColor = 0xffe0e0e0;
@@ -50,6 +52,8 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::pinwheel4Color = 0xff1e1eff;
             CColorManager::plasmaGauge1Color = 0xffa33600;
             CColorManager::plasmaGauge2Color = 0xffff3600;
+            CColorManager::plasmaSightsOffColor = 0xff008000;
+            CColorManager::plasmaSightsOnColor = 0xffff0000;
             CColorManager::shieldGaugeColor = 0xff003da5;
             CColorManager::specialBlackColor = 0xff303030;
             CColorManager::specialWhiteColor = 0xffe0e0e0;
@@ -82,6 +86,8 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::pinwheel4Color = 0xff1e1eff;
             CColorManager::plasmaGauge1Color = 0xffa33600;
             CColorManager::plasmaGauge2Color = 0xffff3600;
+            CColorManager::plasmaSightsOffColor = 0xff008055;
+            CColorManager::plasmaSightsOnColor = 0xffff5500;
             CColorManager::shieldGaugeColor = 0xff0000a5;
             CColorManager::specialBlackColor = 0xff303030;
             CColorManager::specialWhiteColor = 0xffe0e0e0;
@@ -114,6 +120,8 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::pinwheel4Color = 0xff1e1eff;
             CColorManager::plasmaGauge1Color = 0xffa33600;
             CColorManager::plasmaGauge2Color = 0xffff3600;
+            CColorManager::plasmaSightsOffColor = 0xff008055;
+            CColorManager::plasmaSightsOnColor = 0xffff5500;
             CColorManager::shieldGaugeColor = 0xff0000a5;
             CColorManager::specialBlackColor = 0xff303030;
             CColorManager::specialWhiteColor = 0xffe0e0e0;
@@ -146,6 +154,8 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::pinwheel4Color = 0xff1e1eff;
             CColorManager::plasmaGauge1Color = 0xffa33600;
             CColorManager::plasmaGauge2Color = 0xffff3600;
+            CColorManager::plasmaSightsOffColor = 0xff008000;
+            CColorManager::plasmaSightsOnColor = 0xffff0000;
             CColorManager::shieldGaugeColor = 0xff003da5;
             CColorManager::specialBlackColor = 0xff303030;
             CColorManager::specialWhiteColor = 0xffe0e0e0;

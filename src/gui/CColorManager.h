@@ -49,6 +49,14 @@ public:
         return plasmaGauge2Color;
     }
 
+    static inline uint32_t getPlasmaSightsOffColor() {
+        return plasmaSightsOffColor;
+    }
+
+    static inline uint32_t getPlasmaSightsOnColor() {
+        return plasmaSightsOnColor;
+    }
+
     static inline uint32_t getShieldGaugeColor() {
         return shieldGaugeColor;
     }
@@ -87,6 +95,8 @@ private:
     static uint32_t pinwheel4Color;
     static uint32_t plasmaGauge1Color;
     static uint32_t plasmaGauge2Color;
+    static uint32_t plasmaSightsOffColor;
+    static uint32_t plasmaSightsOnColor;
     static uint32_t shieldGaugeColor;
     static uint32_t specialBlackColor;
     static uint32_t specialWhiteColor;
