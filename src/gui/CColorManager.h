@@ -17,6 +17,10 @@ public:
         return energyGaugeColor;
     }
 
+    static inline uint32_t getLookForwardColor() {
+        return lookForwardColor;
+    }
+
     static inline uint32_t getNetDelay1Color() {
         return netDelay1Color;
     }
@@ -87,6 +91,7 @@ private:
 
     static ColorBlindMode colorBlindMode;
     static uint32_t energyGaugeColor;
+    static uint32_t lookForwardColor;
     static uint32_t netDelay1Color;
     static uint32_t netDelay2Color;
     static uint32_t pinwheel1Color;

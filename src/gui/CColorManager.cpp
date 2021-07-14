@@ -2,6 +2,7 @@
 
 ColorBlindMode CColorManager::colorBlindMode = Off;
 uint32_t CColorManager::energyGaugeColor = 0xff008f00;
+uint32_t CColorManager::lookForwardColor = 0xff000000;
 uint32_t CColorManager::netDelay1Color = 0xffffc000;
 uint32_t CColorManager::netDelay2Color = 0xffffff00;
 uint32_t CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -44,6 +45,7 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
     switch (mode) {
         case Off:
             CColorManager::energyGaugeColor = 0xff008f00;
+            CColorManager::lookForwardColor = 0xff000000;
             CColorManager::netDelay1Color = 0xffffc000;
             CColorManager::netDelay2Color = 0xffffff00;
             CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -78,6 +80,7 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             break;
         case Deuteranopia:
             CColorManager::energyGaugeColor = 0xff008f8f;
+            CColorManager::lookForwardColor = 0xff000000;
             CColorManager::netDelay1Color = 0xffffe080;
             CColorManager::netDelay2Color = 0xffffff00;
             CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -112,6 +115,7 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             break;
         case Protanopia:
             CColorManager::energyGaugeColor = 0xff008f8f;
+            CColorManager::lookForwardColor = 0xff000000;
             CColorManager::netDelay1Color = 0xffffe080;
             CColorManager::netDelay2Color = 0xffffff00;
             CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -146,6 +150,7 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             break;
         case Tritanopia:
             CColorManager::energyGaugeColor = 0xff008f00;
+            CColorManager::lookForwardColor = 0xff000000;
             CColorManager::netDelay1Color = 0xffffc000;
             CColorManager::netDelay2Color = 0xffffff00;
             CColorManager::pinwheel1Color = 0xff1e1e66;

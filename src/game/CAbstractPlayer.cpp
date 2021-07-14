@@ -77,6 +77,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrowHeight = FIX3(750);
     dirArrow = new CBSPPart;
     dirArrow->IBSPPart(kDirIndBSP);
+    dirArrow->ReplaceColor(0x00000000, CColorManager::getLookForwardColor());
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->isTransparent = true;
     hudWorld->AddPart(dirArrow);
