@@ -1,11 +1,13 @@
 #include "CHUD.h"
 #include "CAbstractPlayer.h"
 #include "CAvaraGame.h"
+#include "CColorManager.h"
 #include "CPlayerManager.h"
 #include "AvaraDefines.h"
 #include "CScoreKeeper.h"
 #include "RGBAColor.h"
 
+#include <stdint.h>
 
 CHUD::CHUD(CAvaraGame *game) {
     itsGame = game;
@@ -13,10 +15,6 @@ CHUD::CHUD(CAvaraGame *game) {
 
 const int CHAT_CHARS = 40;
 const NVGcolor BACKGROUND_COLOR = nvgRGBA(30, 30, 30, 180);
-
-const std::vector<long> team_colors =
-    {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor, kOrangeTeamColor, kLimeTeamColor};
-
 
 bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecord, int> j) {
     if(i.first.points == j.first.points) {
@@ -42,7 +40,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         float x = 20;
         float y = bufferHeight-chudHeight-boardHeight - 20;
         float fontsz_m = 28.0, fontsz_s = 18.0;
-        long longTeamColor;
+        uint32_t longTeamColor;
         float teamColorRGB[3];
         NVGcolor aliveColor = nvgRGBA(255, 255, 255, 255);
         NVGcolor deadColor = nvgRGBA(165, 165, 165, 255);
@@ -114,7 +112,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
             CPlayerManager *thisPlayer = net->playerTable[playerTableIndex];
             const std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             std::string ping = "--";
-            longTeamColor = team_colors[net->teamColors[playerTableIndex]];
+            longTeamColor = CColorManager::getTeamColor(net->teamColors[playerTableIndex] + 1).value();
             LongToRGBA(longTeamColor, teamColorRGB, 3);
             NVGcolor textColor = aliveColor;
 
@@ -295,17 +293,15 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     }
 
     float pY;
-    long longTeamColor;
-    int colorR, colorG, colorB;
+    uint32_t longTeamColor;
+    float teamColorRGB[3];
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = net->playerTable[i];
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
         if (playerName.length() < 1) continue;
         pY = (bufferHeight - chudHeight + 8) + (11 * i);
-        longTeamColor = team_colors[net->teamColors[i]];
-        colorR = (longTeamColor >> 16) & 0xff;
-        colorG = (longTeamColor >> 8) & 0xff;
-        colorB = longTeamColor & 0xff;
+        longTeamColor = CColorManager::getTeamColor(net->teamColors[i] + 1).value();
+        LongToRGBA(longTeamColor, teamColorRGB, 3);
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
 
         //player color box
@@ -314,13 +310,18 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgBeginPath(ctx);
 
         //highlight player if spectating
-        if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
-            textColor = nvgRGBA(0, 0, 0, 255);
+        if (spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
+            textColor = nvgRGBA(
+                LongToR(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
+                LongToG(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
+                LongToB(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
+                LongToA(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value())
+            );
             colorBoxWidth = 150.0;
         }
 
         nvgRect(ctx, bufferWidth - 160, pY, colorBoxWidth, 10.0);
-        nvgFillColor(ctx, nvgRGBA(colorR, colorG, colorB, 255));
+        nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
         nvgFill(ctx);
 
         //player name
@@ -485,9 +486,57 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
                 {g2X4 + (g2s * 4), g2Y4 - (g2s * 4)},
                 {g2X4 + (g2s * 3), g2Y4 - (g2s * 5)}}}};
     NVGcolor g1c[] = {
-        nvgRGBA(0, 143, 0, 255), nvgRGBA(163, 54, 0, 255), nvgRGBA(255, 54, 0, 255), nvgRGBA(0, 61, 165, 255)};
+        nvgRGBA(
+            LongToR(CColorManager::getEnergyGaugeColor()),
+            LongToG(CColorManager::getEnergyGaugeColor()),
+            LongToB(CColorManager::getEnergyGaugeColor()),
+            LongToA(CColorManager::getEnergyGaugeColor())
+        ),
+        nvgRGBA(
+            LongToR(CColorManager::getPlasmaGauge1Color()),
+            LongToG(CColorManager::getPlasmaGauge1Color()),
+            LongToB(CColorManager::getPlasmaGauge1Color()),
+            LongToA(CColorManager::getPlasmaGauge1Color())
+        ),
+        nvgRGBA(
+            LongToR(CColorManager::getPlasmaGauge2Color()),
+            LongToG(CColorManager::getPlasmaGauge2Color()),
+            LongToB(CColorManager::getPlasmaGauge2Color()),
+            LongToA(CColorManager::getPlasmaGauge2Color())
+        ),
+        nvgRGBA(
+            LongToR(CColorManager::getShieldGaugeColor()),
+            LongToG(CColorManager::getShieldGaugeColor()),
+            LongToB(CColorManager::getShieldGaugeColor()),
+            LongToA(CColorManager::getShieldGaugeColor())
+        )
+    };
     NVGcolor g2c[] = {
-        nvgRGBA(30, 30, 102, 255), nvgRGBA(30, 30, 153, 255), nvgRGBA(30, 30, 204, 255), nvgRGBA(30, 30, 255, 255)};
+        nvgRGBA(
+            LongToR(CColorManager::getPinwheel1Color()),
+            LongToG(CColorManager::getPinwheel1Color()),
+            LongToB(CColorManager::getPinwheel1Color()),
+            LongToA(CColorManager::getPinwheel1Color())
+        ),
+        nvgRGBA(
+            LongToR(CColorManager::getPinwheel2Color()),
+            LongToG(CColorManager::getPinwheel2Color()),
+            LongToB(CColorManager::getPinwheel2Color()),
+            LongToA(CColorManager::getPinwheel2Color())
+        ),
+        nvgRGBA(
+            LongToR(CColorManager::getPinwheel3Color()),
+            LongToG(CColorManager::getPinwheel3Color()),
+            LongToB(CColorManager::getPinwheel3Color()),
+            LongToA(CColorManager::getPinwheel3Color())
+        ),
+        nvgRGBA(
+            LongToR(CColorManager::getPinwheel4Color()),
+            LongToG(CColorManager::getPinwheel4Color()),
+            LongToB(CColorManager::getPinwheel4Color()),
+            LongToA(CColorManager::getPinwheel4Color())
+        )
+    };
     for (i = 0; i < 4; i++) { // referred to as GrafPanel in original Avara
         nvgBeginPath(ctx);
         nvgMoveTo(ctx, g1[i][0][0], g1[i][0][1]);
@@ -521,13 +570,23 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     if (itsGame->veryLongWait) {
         nvgBeginPath(ctx);
         nvgRect(ctx, g1X, gY, 8.0, 8.0);
-        nvgFillColor(ctx, nvgRGBA(255, 255, 0, 255));
+        nvgFillColor(ctx, nvgRGBA(
+            LongToR(CColorManager::getNetDelay2Color()),
+            LongToG(CColorManager::getNetDelay2Color()),
+            LongToB(CColorManager::getNetDelay2Color()),
+            LongToA(CColorManager::getNetDelay2Color())
+        ));
         nvgFill(ctx);
     }
     if (itsGame->longWait) {
         nvgBeginPath(ctx);
         nvgRect(ctx, g1X + 4, gY + 4, 8.0, 8.0);
-        nvgFillColor(ctx, nvgRGBA(255, 192, 0, 255));
+        nvgFillColor(ctx, nvgRGBA(
+            LongToR(CColorManager::getNetDelay1Color()),
+            LongToG(CColorManager::getNetDelay1Color()),
+            LongToB(CColorManager::getNetDelay1Color()),
+            LongToA(CColorManager::getNetDelay1Color())
+        ));
         nvgFill(ctx);
     }
     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));

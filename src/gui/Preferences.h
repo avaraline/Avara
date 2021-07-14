@@ -35,6 +35,10 @@ using json = nlohmann::json;
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
 
+// Other graphics settings
+#define kColorBlindMode "colorBlindMode"
+#define kWeaponSightAlpha "weaponSightAlpha"
+
 // Network & Tracker
 #define kLastAddress "lastAddress"
 #define kServerDescription "serverDescription"
@@ -95,6 +99,8 @@ static json defaultPrefs = {
     {kWindowHeight, 768},
     {kFullScreenTag, false},
     {kFOV, 50.0},
+    {kColorBlindMode, 0},
+    {kWeaponSightAlpha, 1.0},
     {kLastAddress, ""},
     {kServerDescription, ""},
     {kServerPassword, ""},

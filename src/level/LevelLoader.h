@@ -9,6 +9,7 @@
 
 #pragma once
 #include "Types.h"
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -318,6 +319,6 @@ bool LoadALF(std::string levelName);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
-int GetPixelColor();
-int GetOtherPixelColor();
+uint32_t GetPixelColor();
+uint32_t GetOtherPixelColor();
 Fixed GetLastOval(Fixed *theLoc);

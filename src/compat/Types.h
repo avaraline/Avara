@@ -73,26 +73,6 @@ struct QHdr {
 typedef struct QHdr QHdr;
 typedef QHdr *QHdrPtr;
 
-struct RGBColor {
-    unsigned short red;
-    unsigned short green;
-    unsigned short blue;
-};
-typedef struct RGBColor RGBColor;
-struct ColorSpec {
-    short value;
-    RGBColor rgb;
-};
-typedef struct ColorSpec ColorSpec;
-typedef ColorSpec CSpecArray[1];
-struct ColorTable {
-    long ctSeed;
-    short ctFlags;
-    short ctSize;
-    CSpecArray ctTable;
-};
-typedef struct ColorTable ColorTable;
-
 // From QuickDraw
 enum { kQDGrafVerbFrame = 0, kQDGrafVerbPaint = 1, kQDGrafVerbErase = 2, kQDGrafVerbInvert = 3, kQDGrafVerbFill = 4 };
 
