@@ -8,6 +8,7 @@
 #include "CPlayerManager.h"
 #include "CScoreKeeper.h"
 #include "Preferences.h"
+#include "RGBAColor.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
@@ -206,6 +207,12 @@ void CRosterWindow::UpdateRoster() {
             statuses[i]->setValue(theStatus.c_str());
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
+            colors[i]->setTextColor(nanogui::Color(
+                LongToR(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
+                LongToG(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
+                LongToB(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
+                LongToA(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value())
+            ));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
         }
