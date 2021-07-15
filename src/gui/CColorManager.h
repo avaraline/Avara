@@ -17,8 +17,28 @@ public:
         return energyGaugeColor;
     }
 
+    static inline uint32_t getGrenadeSightPrimaryColor() {
+        return grenadeSightPrimaryColor;
+    }
+
+    static inline uint32_t getGrenadeSightSecondaryColor() {
+        return grenadeSightSecondaryColor;
+    }
+
     static inline uint32_t getLookForwardColor() {
         return lookForwardColor;
+    }
+
+    static inline uint32_t getMissileLockColor() {
+        return missileLockColor;
+    }
+
+    static inline uint32_t getMissileSightPrimaryColor() {
+        return missileSightPrimaryColor;
+    }
+
+    static inline uint32_t getMissileSightSecondaryColor() {
+        return missileSightSecondaryColor;
     }
 
     static inline uint32_t getNetDelay1Color() {
@@ -86,12 +106,20 @@ public:
     }
 
     static void setColorBlind(ColorBlindMode mode);
+    static void setHudAlpha(float alpha);
 private:
     CColorManager() {}
 
     static ColorBlindMode colorBlindMode;
+    static float hudAlpha;
+
     static uint32_t energyGaugeColor;
+    static uint32_t grenadeSightPrimaryColor;
+    static uint32_t grenadeSightSecondaryColor;
     static uint32_t lookForwardColor;
+    static uint32_t missileLockColor;
+    static uint32_t missileSightPrimaryColor;
+    static uint32_t missileSightSecondaryColor;
     static uint32_t netDelay1Color;
     static uint32_t netDelay2Color;
     static uint32_t pinwheel1Color;
