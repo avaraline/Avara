@@ -1,5 +1,7 @@
 #include "CColorManager.h"
 
+#include <algorithm>
+
 ColorBlindMode CColorManager::colorBlindMode = Off;
 float CColorManager::hudAlpha = 1.f;
 uint32_t CColorManager::energyGaugeColor = 0xff008f00;
@@ -210,10 +212,14 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::teamTextColors[8] = 0xff333333;
             break;
     }
+    if (CColorManager::hudAlpha != 1.f) {
+        CColorManager::setHudAlpha(CColorManager::hudAlpha);
+    }
     CColorManager::colorBlindMode = mode;
 }
 
 void CColorManager::setHudAlpha(float alpha) {
+    alpha = std::clamp(alpha, 0.f, 1.f);
     uint32_t alphaSet = static_cast<uint32_t>((alpha * 255) + 0.5) << 24;
 
     CColorManager::grenadeSightPrimaryColor = (CColorManager::grenadeSightPrimaryColor & 0x00ffffff) | alphaSet;
