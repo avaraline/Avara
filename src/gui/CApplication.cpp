@@ -22,6 +22,7 @@ nanogui::Screen(nanogui::Vector2i(prefs[kWindowWidth], prefs[kWindowHeight]), ti
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
 
     CColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
+    CColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
 }
 
 CApplication::~CApplication() {}

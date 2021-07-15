@@ -1,8 +1,14 @@
 #include "CColorManager.h"
 
 ColorBlindMode CColorManager::colorBlindMode = Off;
+float CColorManager::hudAlpha = 1.f;
 uint32_t CColorManager::energyGaugeColor = 0xff008f00;
+uint32_t CColorManager::grenadeSightPrimaryColor = 0xffffff00;
+uint32_t CColorManager::grenadeSightSecondaryColor = 0xffff0000;
 uint32_t CColorManager::lookForwardColor = 0xff000000;
+uint32_t CColorManager::missileLockColor = 0xffff0000;
+uint32_t CColorManager::missileSightPrimaryColor = 0xffffff00;
+uint32_t CColorManager::missileSightSecondaryColor = 0xffff0000;
 uint32_t CColorManager::netDelay1Color = 0xffffc000;
 uint32_t CColorManager::netDelay2Color = 0xffffff00;
 uint32_t CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -45,7 +51,12 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
     switch (mode) {
         case Off:
             CColorManager::energyGaugeColor = 0xff008f00;
+            CColorManager::grenadeSightPrimaryColor = 0xffffff00;
+            CColorManager::grenadeSightSecondaryColor = 0xffff0000;
             CColorManager::lookForwardColor = 0xff000000;
+            CColorManager::missileLockColor = 0xffff0000;
+            CColorManager::missileSightPrimaryColor = 0xffffff00;
+            CColorManager::missileSightSecondaryColor = 0xffff0000;
             CColorManager::netDelay1Color = 0xffffc000;
             CColorManager::netDelay2Color = 0xffffff00;
             CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -80,7 +91,12 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             break;
         case Deuteranopia:
             CColorManager::energyGaugeColor = 0xff008f8f;
+            CColorManager::grenadeSightPrimaryColor = 0xffffff00;
+            CColorManager::grenadeSightSecondaryColor = 0xffffaa00;
             CColorManager::lookForwardColor = 0xff000000;
+            CColorManager::missileLockColor = 0xffffaa00;
+            CColorManager::missileSightPrimaryColor = 0xffffff00;
+            CColorManager::missileSightSecondaryColor = 0xffffaa00;
             CColorManager::netDelay1Color = 0xffffe080;
             CColorManager::netDelay2Color = 0xffffff00;
             CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -115,7 +131,12 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             break;
         case Protanopia:
             CColorManager::energyGaugeColor = 0xff008f8f;
+            CColorManager::grenadeSightPrimaryColor = 0xffffff00;
+            CColorManager::grenadeSightSecondaryColor = 0xffffaa00;
             CColorManager::lookForwardColor = 0xff000000;
+            CColorManager::missileLockColor = 0xffffaa00;
+            CColorManager::missileSightPrimaryColor = 0xffffff00;
+            CColorManager::missileSightSecondaryColor = 0xffffaa00;
             CColorManager::netDelay1Color = 0xffffe080;
             CColorManager::netDelay2Color = 0xffffff00;
             CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -150,7 +171,12 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             break;
         case Tritanopia:
             CColorManager::energyGaugeColor = 0xff008f00;
+            CColorManager::grenadeSightPrimaryColor = 0xffffff00;
+            CColorManager::grenadeSightSecondaryColor = 0xffff0000;
             CColorManager::lookForwardColor = 0xff000000;
+            CColorManager::missileLockColor = 0xffff0000;
+            CColorManager::missileSightPrimaryColor = 0xffffff00;
+            CColorManager::missileSightSecondaryColor = 0xffff0000;
             CColorManager::netDelay1Color = 0xffffc000;
             CColorManager::netDelay2Color = 0xffffff00;
             CColorManager::pinwheel1Color = 0xff1e1e66;
@@ -185,4 +211,19 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             break;
     }
     CColorManager::colorBlindMode = mode;
+}
+
+void CColorManager::setHudAlpha(float alpha) {
+    uint32_t alphaSet = static_cast<uint32_t>((alpha * 255) + 0.5) << 24;
+
+    CColorManager::grenadeSightPrimaryColor = (CColorManager::grenadeSightPrimaryColor & 0x00ffffff) | alphaSet;
+    CColorManager::grenadeSightSecondaryColor = (CColorManager::grenadeSightSecondaryColor & 0x00ffffff) | alphaSet;
+    CColorManager::lookForwardColor = (CColorManager::lookForwardColor & 0x00ffffff) | alphaSet;
+    CColorManager::missileLockColor = (CColorManager::missileLockColor & 0x00ffffff) | alphaSet;
+    CColorManager::missileSightPrimaryColor = (CColorManager::missileSightPrimaryColor & 0x00ffffff) | alphaSet;
+    CColorManager::missileSightSecondaryColor = (CColorManager::missileSightSecondaryColor & 0x00ffffff) | alphaSet;
+    CColorManager::plasmaSightsOffColor = (CColorManager::plasmaSightsOffColor & 0x00ffffff) | alphaSet;
+    CColorManager::plasmaSightsOnColor = (CColorManager::plasmaSightsOnColor & 0x00ffffff) | alphaSet;
+
+    CColorManager::hudAlpha = alpha;
 }
