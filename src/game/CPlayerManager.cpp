@@ -329,9 +329,10 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 
 void CPlayerManagerImpl::SendFrame() {
     // Sends the next game frame.
-    itsGame->topSentFrame = itsGame->frameNumber;
+    itsGame->topSentFrame += (1 / itsGame->fpsScale);
 
-    FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & itsGame->topSentFrame];
+    uint32_t ffi = itsGame->topSentFrame * itsGame->fpsScale;
+    FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
 
     ff->validFrame = itsGame->topSentFrame;
 
@@ -404,7 +405,9 @@ void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short com
 
     theComm = theNetManager->itsCommManager;
 
-    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
+    short ffi = theFrame * itsGame->fpsScale;
+    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
+    // ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
 
     if (ff->validFrame == theFrame) {
         outPacket = theComm->GetPacket();
@@ -459,7 +462,8 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
     frameNumber = thePacket->p3;
 
     pd = (uint32_t *)thePacket->dataBuffer;
-    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & frameNumber];
+    uint32_t ffi = frameNumber * itsGame->fpsScale;
+    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     ff->validFrame = frameNumber;
 
     ff->ft.down = (p1 & kNoDownData) ? 0 : ntohl(*pd++);
@@ -493,7 +497,8 @@ void CPlayerManagerImpl::SendResendRequest(short askCount) {
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
     // SDL_Log("CPlayerManagerImpl::GetFunctions\n");
-    short i = (FUNCTIONBUFFERS - 1) & itsGame->frameNumber;
+    uint32_t ffi = (itsGame->frameNumber * itsGame->fpsScale);
+    short i = (FUNCTIONBUFFERS - 1) & ffi;
 
     if (frameFuncs[i].validFrame != itsGame->frameNumber) {
         long quickTick;

@@ -530,7 +530,7 @@ void CAbstractPlayer::ArmSmartMissile() {
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 missileCount--;
-                nextMissileLoad = itsGame->frameNumber + 3;
+                nextMissileLoad = itsGame->FramesFromNow(3);
             }
         } else
             fireGun = false;
@@ -563,7 +563,7 @@ void CAbstractPlayer::ArmGrenade() {
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 grenadeCount--;
-                nextGrenadeLoad = itsGame->frameNumber + 2;
+                nextGrenadeLoad = itsGame->FramesFromNow(2);
             }
         } else
             fireGun = false;
@@ -625,7 +625,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 CBasicSound *theSound;
 
                 boostsRemaining--;
-                boostEndFrame = itsGame->frameNumber + BOOSTLENGTH;
+                boostEndFrame = itsGame->FramesFromNow(BOOSTLENGTH);
 
                 if (!boostControlLink)
                     boostControlLink = gHub->GetSoundLink();
@@ -635,7 +635,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 theSound->SetVolume(FIX(2));
                 theSound->SetSoundLink(itsSoundLink);
                 theSound->SetControlLink(boostControlLink);
-                theSound->SetSoundLength((BOOSTLENGTH * itsGame->frameTime) << 6);
+                theSound->SetSoundLength((BOOSTLENGTH * CLASSICFRAMETIME) << 6);
                 theSound->Start();
             }
 
@@ -930,7 +930,6 @@ if (itsGame->IsClassicFrame()) {
 
             AvoidBumping();
             LinkPartSpheres();
-}
 
             if (shields < maxShields) {
                 Fixed regenRate;
@@ -946,6 +945,7 @@ if (itsGame->IsClassicFrame()) {
                 energy -= regenRate;
             }
 
+
             GunActions();
 
             if (itsGame->timeInSeconds < itsGame->loadedTimeLimit)
@@ -960,6 +960,7 @@ if (itsGame->IsClassicFrame()) {
             else if (energy < 0)
                 energy = 0;
         }
+}
     }
 
     if (teleportSoundLink->refCount == 1) {
@@ -1171,7 +1172,7 @@ void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
         LinkPartSpheres();
 
         if (reEnergize) {
-            boostEndFrame = itsGame->frameNumber + MINIBOOSTTIME;
+            boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME);
             reEnergize = false;
             if (shields < (maxShields >> 1))
                 shields = maxShields >> 1;
@@ -1466,7 +1467,7 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
     if (gr->boostTime > 0 && (boostEndFrame < itsGame->frameNumber)) {
         CBasicSound *theSound;
 
-        boostEndFrame = itsGame->frameNumber + gr->boostTime;
+        boostEndFrame = itsGame->FramesFromNow(gr->boostTime);
 
         if (!boostControlLink)
             boostControlLink = gHub->GetSoundLink();
@@ -1476,7 +1477,7 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
         theSound->SetVolume(FIX(2));
         theSound->SetSoundLink(itsSoundLink);
         theSound->SetControlLink(boostControlLink);
-        theSound->SetSoundLength((gr->boostTime * itsGame->frameTime) << 6);
+        theSound->SetSoundLength((gr->boostTime * CLASSICFRAMETIME) << 6);
         theSound->Start();
     }
 }

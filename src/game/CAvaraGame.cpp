@@ -470,7 +470,7 @@ void CAvaraGame::RunFrameActions() {
     while (theActor) {
         nextActor = theActor->nextActor;
         if (theActor->isActive || --(theActor->sleepTimer) <= 0) {
-            if (IsClassicFrame() || theActor->HandlesFastFPS()) {
+            if (theActor->HandlesFastFPS() || IsClassicFrame()) {
               theActor->FrameAction();
             }
             // itsNet->ProcessQueue();
@@ -493,7 +493,7 @@ void CAvaraGame::RunFrameActions() {
     }
 
     thePlayer = playerList;
-    while (thePlayer) { // itsNet->ProcessQueue();
+    while (thePlayer && IsClassicFrame()) { // itsNet->ProcessQueue();
         nextPlayer = thePlayer->nextPlayer;
         thePlayer->PlayerAction();
         thePlayer = nextPlayer;
@@ -534,7 +534,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     incarnatorList = NULL;
     frameNumber = 0;
-    topSentFrame = -1;
+    topSentFrame = -1 / fpsScale;
 
     // ResetView();
 
@@ -763,7 +763,7 @@ void CAvaraGame::GameStart() {
     didWait = false;
     longWait = false;
 
-    topSentFrame = frameNumber - 1;
+    topSentFrame = FramesFromNow(-1);
 
     statusRequest = kPlayingStatus;
     itsNet->ResumeGame();
@@ -789,7 +789,7 @@ void CAvaraGame::GameStart() {
     // The difference between the last frame's time and frameTime
     frameAdjust = 0;
 
-    while (frameNumber + latencyTolerance/fpsScale > topSentFrame) {
+    while (FramesFromNow(latencyTolerance) > topSentFrame) {
         itsNet->FrameAction();
     }
 
@@ -835,6 +835,11 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
 
 bool CAvaraGame::GameTick() {
     int32_t startTime = SDL_GetTicks();
+
+    if (!IsClassicFrame()) {
+        frameNumber++;
+        return true;
+    }
 
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
@@ -886,7 +891,7 @@ bool CAvaraGame::GameTick() {
     itsNet->AutoLatencyControl(frameNumber, longWait);
 
     if (latencyTolerance)
-        while (frameNumber + latencyTolerance/fpsScale > topSentFrame)
+        while (FramesFromNow(latencyTolerance) > topSentFrame)
             itsNet->FrameAction();
 
     canPreSend = true;
@@ -1137,4 +1142,8 @@ void CAvaraGame::SetFrameTime(long ft) {
 
 bool CAvaraGame::IsClassicFrame() {
     return (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
+}
+
+long CAvaraGame::FramesFromNow(long classicFrameCount) {
+    return frameNumber + classicFrameCount / fpsScale;
 }

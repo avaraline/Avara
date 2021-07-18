@@ -22,10 +22,10 @@ CAbstractActor *CLogicDelay::EndScript() {
     }
 
     if (CLogic::EndScript()) {
-        theDelay = ReadLongVar(iTimer) / itsGame->fpsScale;
+        theDelay = ReadLongVar(iTimer);
         if (theDelay < 0) {
             theDelay = -theDelay;
-            sleepTimer = theDelay + 1 / itsGame->fpsScale;
+            sleepTimer = theDelay + 1;
         }
 
         if (theDelay)
@@ -73,7 +73,7 @@ void CLogicDelay::FrameAction() {
         while (theCount--) {
             for (i = 0; i < DELAY_PIPELINE; i++) {
                 if (scheduledFrame[i] == 0) {
-                    scheduledFrame[i] = itsGame->frameNumber + theDelay;
+                    scheduledFrame[i] = itsGame->FramesFromNow(theDelay);
                     break;
                 }
             }
