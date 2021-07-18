@@ -253,6 +253,7 @@ public:
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(long ft);
     virtual bool IsClassicFrame();
+    virtual long FramesFromNow(long classicFrames);
 };
 
 #ifndef MAINAVARAGAME
