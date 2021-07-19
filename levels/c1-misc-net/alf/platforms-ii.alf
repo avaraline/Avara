@@ -35,21 +35,21 @@ E-mail: cc96@cornell.edu" />
   <Wall fill="#009999" frame="#000000" x="25.069444444444446" z="59.44444444444444" w="10" d="10" h="0.25" y="6" />
   <Wall fill="#009999" frame="#000000" x="55.06944444444445" z="49.44444444444444" w="10" d="10" h="0.25" y="6" />
   <Wall fill="#009999" frame="#000000" x="45.06944444444444" z="59.44444444444444" w="10" d="10" h="0.25" y="6" />
-  <Incarnator fill="#777777" frame="#000000" cx="63.125" cz="10.76388888888889" r="3.125" angle="180" extent="90" />
-  <Incarnator fill="#777777" frame="#000000" cx="63.19444444444444" cz="67.56944444444444" r="3.125" angle="270" extent="90" />
-  <Incarnator fill="#777777" frame="#000000" cx="6.944444444444445" cz="67.56944444444444" r="3.125" angle="0" extent="90" />
-  <Incarnator fill="#777777" frame="#000000" cx="6.944444444444445" cz="11.319444444444445" r="3.125" angle="90" extent="90" />
-  <Timer in="@got" out="@re" wait="200" fill="#9900cc" frame="#000000" cx="99.58333333333334" cz="98.61111111111111" r="2.5" angle="270" extent="90" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="7.152777777777779" cz="12.256944444444446" r="4.0625" angle="0" extent="360" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="63.81944444444444" cz="11.5625" r="4.0625" angle="0" extent="360" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="63.81944444444444" cz="67.8125" r="4.0625" angle="0" extent="360" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="8.194444444444445" cz="67.8125" r="4.0625" angle="0" extent="360" />
-  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="23.819444444444446" cz="60.55555555555556" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="52.56944444444445" cz="49.93055555555556" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="43.19444444444444" cz="19.305555555555557" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="13.194444444444445" cz="29.930555555555557" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="53.125" cz="29.930555555555557" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="23.125" cz="20.555555555555557" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="13.75" cz="49.93055555555556" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="43.125" cz="59.93055555555556" r="2.5" angle="0" extent="90" />
+  <Incarnator fill="#777777" frame="#000000" cx="63.125" cz="10.76388888888889" r="3.125" angle="225" />
+  <Incarnator fill="#777777" frame="#000000" cx="63.19444444444444" cz="67.56944444444444" r="3.125" angle="315" />
+  <Incarnator fill="#777777" frame="#000000" cx="6.944444444444445" cz="67.56944444444444" r="3.125" angle="45" />
+  <Incarnator fill="#777777" frame="#000000" cx="6.944444444444445" cz="11.319444444444445" r="3.125" angle="135" />
+  <Timer in="@got" out="@re" wait="200" fill="#9900cc" frame="#000000" cx="99.58333333333334" cz="98.61111111111111" r="2.5" angle="315" />
+  <Area enter="@re" fill="#ffffff" frame="#000000" cx="7.152777777777779" cz="12.256944444444446" r="4.0625" angle="180" />
+  <Area enter="@re" fill="#ffffff" frame="#000000" cx="63.81944444444444" cz="11.5625" r="4.0625" angle="180" />
+  <Area enter="@re" fill="#ffffff" frame="#000000" cx="63.81944444444444" cz="67.8125" r="4.0625" angle="180" />
+  <Area enter="@re" fill="#ffffff" frame="#000000" cx="8.194444444444445" cz="67.8125" r="4.0625" angle="180" />
+  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="23.819444444444446" cz="60.55555555555556" r="2.5" angle="45" />
+  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="52.56944444444445" cz="49.93055555555556" r="2.5" angle="45" />
+  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="43.19444444444444" cz="19.305555555555557" r="2.5" angle="45" />
+  <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="13.194444444444445" cz="29.930555555555557" r="2.5" angle="45" />
+  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="53.125" cz="29.930555555555557" r="2.5" angle="45" />
+  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="23.125" cz="20.555555555555557" r="2.5" angle="45" />
+  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="13.75" cz="49.93055555555556" r="2.5" angle="45" />
+  <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="43.125" cz="59.93055555555556" r="2.5" angle="45" />
 </map>

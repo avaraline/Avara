@@ -22,6 +22,21 @@ def debug(fmt, *args, **kwargs):
         print(fmt % args, file=sys.stderr, flush=True)
 
 
+def postprocess(element: Element) -> Element:
+    # Calculate the true `angle` and remove the `extent` attribute for all
+    # "arc-based" objects.
+    if "angle" in element.attrs and "extent" in element.attrs:
+        if element.tag == "Dome":
+            element.attrs["quarters"] = str(round(element.attrs["extent"] / 90))
+            del element.attrs["extent"]
+        else:
+            angle = element.attrs["angle"] + (element.attrs["extent"] / 2)
+            angle = angle if angle < 360 else angle - 360
+            element.attrs["angle"] = dumb_round(angle)
+            del element.attrs["extent"]
+    return element
+
+
 class Rect:
     def __init__(self, t, l, b, r):
         self.top, self.left, self.bottom, self.right = t, l, b, r
@@ -207,13 +222,13 @@ class TextOp(AvaraOperation):
         try:
             for t in parse_script(fixed_script):
                 if t.process(context):
-                    yield t.element(context)
+                    yield postprocess(t.element(context))
         except ScriptParseError:
             debug("Script error in:\n%s", fixed_script)
             # Strip the "end" we added if there's still an error.
             text = fixed_script[:-3].strip()
             text = re.sub(r"ambient(\s*)=", "ambient.i\1=", text)
-            yield Element("script", text)
+            yield postprocess(Element("script", text))
 
 
 class GroupStart(AvaraOperation):
@@ -263,7 +278,7 @@ class RectOp(AvaraOperation):
                         pass
                     # wa is reset after every Wall
                     del context["wa"]
-                yield Element("Wall", **attrs)
+                yield postprocess(Element("Wall", **attrs))
             else:
                 context.update(
                     {
@@ -295,6 +310,7 @@ class ArcOp(AvaraOperation):
             context["fill"] = self.color
         elif self.verb == Verb.FRAME:
             context["frame"] = self.color
+
         context.update(
             {
                 "cx": dumb_round(self.rect.center.x),

@@ -4,39 +4,39 @@
   <SkyColor fill="#335599" frame="#009999" />
   <GroundColor fill="#2A201C" frame="#000055" />
 
-  <Incarnator y="30" cx="36" cz="-36" angle="45" extent="0" />
-  <Incarnator y="30" cx="36" cz="36" angle="135" extent="0" />
-  <Incarnator y="30" cx="-36" cz="36" angle="225" extent="0" />
-  <Incarnator y="30" cx="-36" cz="-36" angle="315" extent="0" />
+  <Incarnator y="30" cx="36" cz="-36" angle="45" />
+  <Incarnator y="30" cx="36" cz="36" angle="135" />
+  <Incarnator y="30" cx="-36" cz="36" angle="225" />
+  <Incarnator y="30" cx="-36" cz="-36" angle="315" />
 
-  <Incarnator y="30" cx="0" cz="-36" angle="0" extent="0" />
-  <Incarnator y="30" cx="36" cz="0" angle="90" extent="0" />
-  <Incarnator y="30" cx="0" cz="36" angle="180" extent="0" />
-  <Incarnator y="30" cx="-36" cz="0" angle="270" extent="0" />
+  <Incarnator y="30" cx="0" cz="-36" angle="0" />
+  <Incarnator y="30" cx="36" cz="0" angle="90" />
+  <Incarnator y="30" cx="0" cz="36" angle="180" />
+  <Incarnator y="30" cx="-36" cz="0" angle="270" />
 
   <Teleporter shape="0" status="false" win="0" start="@winTeam" activeRange="10000" cx="0" cz="0" />
 
   <Field deltaY="0" visible="true" fill="#8CB050" frame="#000000" cx="0" cz="0" scale="12" shape="bspEnso" />
 
   <Wall fill="#C9E58E" frame="#000000" x="10" z="-10" w="8" d="8" h="8" />
-  <Ramp y="0" deltaY="4" fill="#203608" frame="#000000" x="10" z="-17" w="8" d="6" h="0.1" angle="90" extent="0" />
+  <Ramp y="0" deltaY="4" fill="#203608" frame="#000000" x="10" z="-17" w="8" d="6" h="0.1" angle="90" />
   <Wall fill="#203608" frame="#000000" x="17" y="3.95" z="-17" w="6" d="6" h="0.1" />
-  <Ramp y="4" deltaY="4" fill="#203608" frame="#000000" x="17" z="-10" w="6" d="8" h="0.1" angle="180" extent="0" />
+  <Ramp y="4" deltaY="4" fill="#203608" frame="#000000" x="17" z="-10" w="6" d="8" h="0.1" angle="180" />
 
   <Wall fill="#C9E58E" frame="#000000" x="-10" z="-10" w="8" d="8" h="8" />
-  <Ramp y="0" deltaY="4" fill="#203608" frame="#000000" x="-10" z="-17" w="8" d="6" h="0.1" angle="270" extent="0" />
+  <Ramp y="0" deltaY="4" fill="#203608" frame="#000000" x="-10" z="-17" w="8" d="6" h="0.1" angle="270" />
   <Wall fill="#203608" frame="#000000" x="-17" y="3.95" z="-17" w="6" d="6" h="0.1" />
-  <Ramp y="4" deltaY="4" fill="#203608" frame="#000000" x="-17" z="-10" w="6" d="8" h="0.1" angle="180" extent="0" />
+  <Ramp y="4" deltaY="4" fill="#203608" frame="#000000" x="-17" z="-10" w="6" d="8" h="0.1" angle="180" />
 
   <Wall fill="#C9E58E" frame="#000000" x="10" z="10" w="8" d="8" h="8" />
-  <Ramp y="0" deltaY="4" fill="#203608" frame="#000000" x="10" z="17" w="8" d="6" h="0.1" angle="90" extent="0" />
+  <Ramp y="0" deltaY="4" fill="#203608" frame="#000000" x="10" z="17" w="8" d="6" h="0.1" angle="90" />
   <Wall fill="#203608" frame="#000000" x="17" y="3.95" z="17" w="6" d="6" h="0.1" />
-  <Ramp y="4" deltaY="4" fill="#203608" frame="#000000" x="17" z="10" w="6" d="8" h="0.1" angle="0" extent="0" />
+  <Ramp y="4" deltaY="4" fill="#203608" frame="#000000" x="17" z="10" w="6" d="8" h="0.1" angle="0" />
 
   <Wall fill="#C9E58E" frame="#000000" x="-10" z="10" w="8" d="8" h="8" />
-  <Ramp y="0" deltaY="4" fill="#203608" frame="#000000" x="-10" z="17" w="8" d="6" h="0.1" angle="270" extent="0" />
+  <Ramp y="0" deltaY="4" fill="#203608" frame="#000000" x="-10" z="17" w="8" d="6" h="0.1" angle="270" />
   <Wall fill="#203608" frame="#000000" x="-17" y="3.95" z="17" w="6" d="6" h="0.1" />
-  <Ramp y="4" deltaY="4" fill="#203608" frame="#000000" x="-17" z="10" w="6" d="8" h="0.1" angle="0" extent="0" />
+  <Ramp y="4" deltaY="4" fill="#203608" frame="#000000" x="-17" z="10" w="6" d="8" h="0.1" angle="0" />
 
   <Wall fill="#8CB050" frame="#000000" x="-4" y="7.9" z="-12" w="4" d="4" h="0.1" />
   <Wall fill="#455D21" frame="#000000" x="0" y="7.9" z="-12" w="4" d="4" h="0.1" />
@@ -69,11 +69,11 @@
   <Wall fill="#203608" frame="#000000" x="-17" y="7.9" z="0" w="6" d="12" h="0.1" />
   <Wall fill="#203608" frame="#000000" x="17" y="7.9" z="0" w="6" d="12" h="0.1" />
 
-  <Ramp fill="#203608" frame="#000000" x="-25" y="7.9" z="0" w="10" d="12" h="0.1" deltaY="4.1" angle="270" extent="0" />
-  <Ramp fill="#203608" frame="#000000" x="25" y="7.9" z="0" w="10" d="12" h="0.1" deltaY="4.1" angle="90" extent="0" />
+  <Ramp fill="#203608" frame="#000000" x="-25" y="7.9" z="0" w="10" d="12" h="0.1" deltaY="4.1" angle="270" />
+  <Ramp fill="#203608" frame="#000000" x="25" y="7.9" z="0" w="10" d="12" h="0.1" deltaY="4.1" angle="90" />
 
-  <Ramp fill="#203608" frame="#000000" x="0" y="7.9" z="-22" w="12" d="16" h="0.1" deltaY="4.1" angle="0" extent="0" />
-  <Ramp fill="#203608" frame="#000000" x="0" y="7.9" z="22" w="12" d="16" h="0.1" deltaY="4.1" angle="180" extent="0" />
+  <Ramp fill="#203608" frame="#000000" x="0" y="7.9" z="-22" w="12" d="16" h="0.1" deltaY="4.1" angle="0" />
+  <Ramp fill="#203608" frame="#000000" x="0" y="7.9" z="22" w="12" d="16" h="0.1" deltaY="4.1" angle="180" />
 
   <!-- outer trunks -->
   <Wall fill="#7E4939" frame="#000000" x="-36" z="0" w="12" d="12" h="12" />

@@ -16,15 +16,15 @@
   <set wallHeight="2" />
   <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" x="184.93055555555557" z="81.875" w="5" d="5" h="0" y="0" />
   <WallDoor wallYon=".001" open="@one" close="@two" deltaY="20" shotPower="9999" guardDelay=".1" openSound="0" closeSound="0" stopSound="0" didOpen="@two" openSpeed="75" closeSpeed="75" stepOnMsg="@one" fill="#000000" frame="#000000" x="19.930555555555557" z="386.875" w="6.25" d="6.25" h="0" y="0" />
-  <Teleporter y="5" shape="0" group="@death" spin="false" sound="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
+  <Teleporter y="5" shape="0" group="@death" spin="false" sound="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="90" />
   <set wallYon=".001" wallHeight="wh" timeLimit="300" lightHull="151" mediumHull="151" heavyHull="151" missilePower="7" grenadePower="1.25" missileAcceleration="0.3" fieldY=".22" fieldX=".02" fieldZ=".02" wh="6" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="15" kSnText="snTextBlip" kTextVolume="0.3" gameLength="4685" />
-  <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="60" extent="60" />
+  <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="90" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="90" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="90" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="90" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="90" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="90" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#00ccff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" r="2.5" angle="90" />
   <Wall fill="#ffff33" frame="#000000" x="164.93055555555557" z="130" w="5" d="1.25" h="0" />
   <Wall fill="#ffff33" frame="#000000" x="179.93055555555557" z="129.0625" w="5" d="3.125" h="0" />
   <Wall fill="#ffff33" frame="#000000" x="148.36805555555557" z="121.875" w="8.125" d="5" h="0" />
@@ -71,158 +71,158 @@
   <Wall fill="#99ccff" frame="#000000" x="193.05555555555557" z="101.875" w="1.25" d="5" h="0" />
   <Wall fill="#000077" frame="#000000" x="164.93055555555557" z="101.875" w="5" d="45" h="0" />
   <Wall fill="#000055" frame="#000000" x="169.93055555555557" z="101.875" w="5" d="47.5" h="0" />
-  <And in="@start" out="@time" fill="#666666" frame="#000000" cx="48.54166666666667" cz="17.916666666666668" r="3.125" angle="0" extent="90" />
-  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" out="@time" fill="#666666" frame="#000000" cx="48.54166666666667" cz="17.916666666666668" r="3.125" angle="0" extent="90" />
-  <Timer in="@time" out="@whoop" wait="1" fill="#666666" frame="#000000" cx="48.54166666666667" cz="17.916666666666668" r="3.125" angle="0" extent="90" />
-  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" fill="#666666" frame="#000000" cx="48.54166666666667" cz="17.916666666666668" r="3.125" angle="0" extent="90" />
-  <And in="@start" out="@time" fill="#666666" frame="#000000" cx="36.94444444444444" cz="18.194444444444446" r="3.125" angle="0" extent="90" />
-  <Counter in.0="@zero" in.1="@one" out="@time" fill="#666666" frame="#000000" cx="36.94444444444444" cz="18.194444444444446" r="3.125" angle="0" extent="90" />
-  <Timer in="@time" out="@whoop" wait="30" fill="#666666" frame="#000000" cx="36.94444444444444" cz="18.194444444444446" r="3.125" angle="0" extent="90" />
-  <Distributor in="@whoop" out.0="@zero" out.1="@one" fill="#666666" frame="#000000" cx="36.94444444444444" cz="18.194444444444446" r="3.125" angle="0" extent="90" />
+  <And in="@start" out="@time" fill="#666666" frame="#000000" cx="48.54166666666667" cz="17.916666666666668" r="3.125" angle="45" />
+  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" out="@time" fill="#666666" frame="#000000" cx="48.54166666666667" cz="17.916666666666668" r="3.125" angle="45" />
+  <Timer in="@time" out="@whoop" wait="1" fill="#666666" frame="#000000" cx="48.54166666666667" cz="17.916666666666668" r="3.125" angle="45" />
+  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" fill="#666666" frame="#000000" cx="48.54166666666667" cz="17.916666666666668" r="3.125" angle="45" />
+  <And in="@start" out="@time" fill="#666666" frame="#000000" cx="36.94444444444444" cz="18.194444444444446" r="3.125" angle="45" />
+  <Counter in.0="@zero" in.1="@one" out="@time" fill="#666666" frame="#000000" cx="36.94444444444444" cz="18.194444444444446" r="3.125" angle="45" />
+  <Timer in="@time" out="@whoop" wait="30" fill="#666666" frame="#000000" cx="36.94444444444444" cz="18.194444444444446" r="3.125" angle="45" />
+  <Distributor in="@whoop" out.0="@zero" out.1="@one" fill="#666666" frame="#000000" cx="36.94444444444444" cz="18.194444444444446" r="3.125" angle="45" />
   <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Intro 'Yahoo' sound by Andrew Welch from Ambrosia's game: Maelstrom. Teleporter idea by Usher. Teams are red and yellow. Up to three people on a team. Get tossed out of the ring or get killed and your opponent earns a point. 5 minutes or 15 points." />
   <GroundColor fill="#000000" frame="#000000" />
   <SkyColor fill="#990033" frame="#330033" />
-  <Counter in="@add1Red" n="1" out="@redAt1" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="2" out="@redAt2" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="3" out="@redAt3" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="4" out="@redAt4" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="5" out="@redAt5" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="6" out="@redAt6" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="7" out="@redAt7" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="8" out="@redAt8" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="9" out="@redAt9" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="10" out="@redAt10" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="11" out="@redAt11" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="12" out="@redAt12" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="13" out="@redAt13" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="14" out="@redAt14" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Red" n="kTeamScore1" out="@redWins" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt1" showEveryone="true" mask="T3" text="Red team has 1 point!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt2" showEveryone="true" mask="T3" text="Red team has 2 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt3" showEveryone="true" mask="T3" text="Red team has 3 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt4" showEveryone="true" mask="T3" text="Red team has 4 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt5" showEveryone="true" mask="T3" text="Red team has 5 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt6" showEveryone="true" mask="T3" text="Red team has 6 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt7" showEveryone="true" mask="T3" text="Red team has 7 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt8" showEveryone="true" mask="T3" text="Red team has 8 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt9" showEveryone="true" mask="T3" text="Red team has 9 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt10" showEveryone="true" mask="T3" text="Red team has 10 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt11" showEveryone="true" mask="T3" text="Red team has 11 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt12" showEveryone="true" mask="T3" text="Red team has 12 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt13" showEveryone="true" mask="T3" text="Red team has 13 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt14" showEveryone="true" text="Red team has only 1 point to go!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Base in="@badHectors" out="@teleportTheRest" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Text in="@badHectors" showEveryone="true" text="HECTORS must be red or yellow." sound="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Goody out="@badHectors" shape="bspW3x3" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="4" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="4" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="4" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="5" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="5" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="5" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="6" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="6" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Walker team="6" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="180" extent="90" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="180" extent="90" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="180" extent="90" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="180" extent="90" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="180" extent="90" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="180" extent="90" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="180" extent="90" />
-  <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="1" out="@yellowAt1" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="2" out="@yellowAt2" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="3" out="@yellowAt3" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="4" out="@yellowAt4" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="5" out="@yellowAt5" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="6" out="@yellowAt6" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="7" out="@yellowAt7" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="8" out="@yellowAt8" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="9" out="@yellowAt9" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="10" out="@yellowAt10" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="11" out="@yellowAt11" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="12" out="@yellowAt12" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="13" out="@yellowAt13" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="14" out="@yellowAt14" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Counter in="@add1Yellow" n="kTeamScore1" out="@yellowWins" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt1" showEveryone="true" mask="T2" text="Yellow team has 1 point!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt2" showEveryone="true" mask="T2" text="Yellow team has 2 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt3" showEveryone="true" mask="T2" text="Yellow team has 3 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt4" showEveryone="true" mask="T2" text="Yellow team has 4 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt5" showEveryone="true" mask="T2" text="Yellow team has 5 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt6" showEveryone="true" mask="T2" text="Yellow team has 6 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt7" showEveryone="true" mask="T2" text="Yellow team has 7 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt8" showEveryone="true" mask="T2" text="Yellow team has 8 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt9" showEveryone="true" mask="T2" text="Yellow team has 9 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt10" showEveryone="true" mask="T2" text="Yellow team has 10 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt11" showEveryone="true" mask="T2" text="Yellow team has 11 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt12" showEveryone="true" mask="T2" text="Yellow team has 12 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt13" showEveryone="true" mask="T2" text="Yellow team has 13 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt14" showEveryone="true" text="Yellow team has only 1 point to go!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowWins" showEveryone="true" text="Yellow team wins!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="180" extent="90" />
-  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="154.93055555555557" z="81.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="169.93055555555557" z="75.625" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="164.93055555555557" z="76.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="159.93055555555557" z="78.75" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="174.93055555555557" z="76.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="179.93055555555557" z="78.75" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="184.93055555555557" z="81.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="189.93055555555557" z="86.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="196.18055555555557" z="101.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="193.05555555555557" z="111.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="194.93055555555557" z="106.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="189.93055555555557" z="116.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="193.05555555555557" z="91.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="194.93055555555557" z="96.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="184.93055555555557" z="121.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="179.93055555555557" z="125" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="174.93055555555557" z="126.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="169.93055555555557" z="128.125" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="164.93055555555557" z="126.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="159.93055555555557" z="125" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="154.93055555555557" z="121.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="149.93055555555557" z="116.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="144.93055555555557" z="96.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="143.68055555555557" z="101.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="146.80555555555557" z="91.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="149.93055555555557" z="86.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="144.93055555555557" z="106.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="180" extent="90" x="146.80555555555557" z="111.875" w="5" d="5" h="0" />
-  <Incarnator y="0" start="@zero" stop="@one" fill="#ff0000" frame="#000000" cx="184.16666666666669" cz="82.77777777777777" r="3.2638888888888857" angle="0" extent="60" />
-  <Incarnator y="0" start="@two" stop="@three" fill="#ff0000" frame="#000000" cx="155.76388888888889" cz="120.97222222222223" r="3.2638888888888857" angle="180" extent="60" />
-  <Timer in="@switchammo2" out="@makeammo4" wait="75" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="91.25" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspGrenade" y="wh + 2" speed="2" grenades="12" start="@makeammo4" out="@switchagain2" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="91.25" r="1.25" angle="180" extent="90" />
-  <Timer in="@switchammo1" out="@makeammo2" wait="75" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="112.5" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspMissile" y="wh + 2" speed="2" missiles="8" start="@makeammo2" out="@switchagain1" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="112.5" r="1.25" angle="180" extent="90" />
-  <And in="@start" out="@makeammo3" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="112.5" r="1.25" angle="180" extent="90" />
-  <Timer in="@switchagain2" out="@makeammo3" wait="75" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="112.5" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspMissile" y="wh + 2" speed="2" missiles="8" start="@makeammo3" out="@switchammo2" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="112.5" r="1.25" angle="180" extent="90" />
-  <And in="@start" out="@makeammo1" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="91.25" r="1.25" angle="180" extent="90" />
-  <Timer in="@switchagain1" out="@makeammo1" wait="75" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="91.25" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspGrenade" y="wh + 2" speed="2" grenades="12" start="@makeammo1" out="@switchammo1" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="91.25" r="1.25" angle="180" extent="90" />
-  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" fill="#ffff33" frame="#000000" cx="164.96527777777777" cz="25.555555555555557" r="2.6041666666666714" angle="330" extent="60" />
-  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" fill="#ffff33" frame="#000000" cx="169.96527777777777" cz="24.444444444444446" r="2.6041666666666714" angle="330" extent="60" />
-  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" fill="#ffff33" frame="#000000" cx="174.96527777777777" cz="25.555555555555557" r="2.6041666666666714" angle="330" extent="60" />
-  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" fill="#ff0000" frame="#000000" cx="164.96527777777777" cz="178.75" r="2.6041666666666714" angle="150" extent="60" />
-  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" fill="#ff0000" frame="#000000" cx="174.96527777777777" cz="178.75" r="2.6041666666666714" angle="150" extent="60" />
-  <Incarnator y="0" start="@three" stop="@four" fill="#ff0000" frame="#000000" cx="155.83333333333334" cz="82.77777777777777" r="3.2638888888888857" angle="300" extent="60" />
-  <Incarnator y="0" start="@one" stop="@two" fill="#ff0000" frame="#000000" cx="184.16666666666669" cz="120.97222222222223" r="3.2638888888888857" angle="120" extent="60" />
-  <Base in="@start" out="@wait" fill="#ff0000" frame="#000000" cx="488.05555555555554" cz="485.06944444444446" r="3.958333333333343" angle="60" extent="60" />
-  <Timer in="@wait" wait="32" out="@inGame" fill="#ff0000" frame="#000000" cx="488.05555555555554" cz="485.06944444444446" r="3.958333333333343" angle="60" extent="60" />
-  <Teleporter group="-1" y="18" activeRange="50" deadRange="30" destGroup="@death" shape="0" fill="#0066ff" frame="#000000" cx="169.93055555555557" cz="101.875" r="2.5" angle="180" extent="90" />
-  <Teleporter stop="@start" start="@inGame" group="-2" mask="T3" y="20" activeRange="150" deadRange="75" destGroup="@redBegin" shape="0" fill="#0066ff" frame="#000000" cx="169.93055555555557" cz="101.875" r="2.5" angle="180" extent="90" />
-  <Teleporter stop="@start" start="@inGame" group="-3" mask="T2" y="20" activeRange="150" deadRange="75" destGroup="@yellowBegin" shape="0" fill="#0066ff" frame="#000000" cx="169.93055555555557" cz="101.875" r="2.5" angle="180" extent="90" />
-  <Teleporter group="@redBegin" mask="T3" y="0" shape="0" spin="false" fill="#ff0000" frame="#000000" cx="169.93055555555557" cz="127.01388888888889" r="3.2638888888888857" angle="150" extent="60" />
-  <Teleporter group="@redBegin" mask="T3" y="0" shape="0" spin="false" fill="#ff0000" frame="#000000" cx="174.93055555555557" cz="125.76388888888889" r="3.2638888888888857" angle="150" extent="60" />
-  <Teleporter group="@redBegin" mask="T3" y="0" shape="0" spin="false" fill="#ff0000" frame="#000000" cx="164.93055555555557" cz="125.76388888888889" r="3.2638888888888857" angle="150" extent="60" />
-  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#ffff33" frame="#000000" cx="169.93055555555557" cz="76.80555555555556" r="3.2638888888888857" angle="330" extent="60" />
-  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#ffff33" frame="#000000" cx="164.93055555555557" cz="78.05555555555556" r="3.2638888888888857" angle="330" extent="60" />
-  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#ffff33" frame="#000000" cx="174.93055555555557" cz="78.05555555555556" r="3.2638888888888857" angle="330" extent="60" />
-  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" fill="#ff0000" frame="#000000" cx="169.96527777777777" cz="179.375" r="2.6041666666666714" angle="150" extent="60" />
-  <Timer in="@start" wait="25" out="@inArena" fill="#00ccff" frame="#000000" cx="59.236111111111114" cz="16.73611111111111" r="3.75" angle="60" extent="60" />
-  <Text sound="134" volume="1" in="@inArena" showEveryone="true" text="" fill="#00ccff" frame="#000000" cx="59.236111111111114" cz="16.73611111111111" r="3.75" angle="60" extent="60" />
+  <Counter in="@add1Red" n="1" out="@redAt1" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="2" out="@redAt2" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="3" out="@redAt3" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="4" out="@redAt4" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="5" out="@redAt5" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="6" out="@redAt6" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="7" out="@redAt7" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="8" out="@redAt8" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="9" out="@redAt9" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="10" out="@redAt10" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="11" out="@redAt11" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="12" out="@redAt12" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="13" out="@redAt13" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="14" out="@redAt14" restart="false" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Red" n="kTeamScore1" out="@redWins" fill="#ff0000" frame="#000000" cx="506.31944444444446" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt1" showEveryone="true" mask="T3" text="Red team has 1 point!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt2" showEveryone="true" mask="T3" text="Red team has 2 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt3" showEveryone="true" mask="T3" text="Red team has 3 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt4" showEveryone="true" mask="T3" text="Red team has 4 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt5" showEveryone="true" mask="T3" text="Red team has 5 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt6" showEveryone="true" mask="T3" text="Red team has 6 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt7" showEveryone="true" mask="T3" text="Red team has 7 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt8" showEveryone="true" mask="T3" text="Red team has 8 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt9" showEveryone="true" mask="T3" text="Red team has 9 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt10" showEveryone="true" mask="T3" text="Red team has 10 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt11" showEveryone="true" mask="T3" text="Red team has 11 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt12" showEveryone="true" mask="T3" text="Red team has 12 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt13" showEveryone="true" mask="T3" text="Red team has 13 points!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt14" showEveryone="true" text="Red team has only 1 point to go!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" fill="#ff0000" frame="#000000" cx="522.5694444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Base in="@badHectors" out="@teleportTheRest" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Text in="@badHectors" showEveryone="true" text="HECTORS must be red or yellow." sound="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Goody out="@badHectors" shape="bspW3x3" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="4" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="4" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="4" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="5" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="5" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="5" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="1" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="6" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="6" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Walker team="6" defaultLives="0" fill="#ff0000" frame="#000000" cx="440.1388888888889" cz="575.625" r="2.569444444444457" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="225" />
+  <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" fill="#ff0000" frame="#000000" cx="461.45833333333337" cz="575.6944444444445" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="1" out="@yellowAt1" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="2" out="@yellowAt2" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="3" out="@yellowAt3" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="4" out="@yellowAt4" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="5" out="@yellowAt5" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="6" out="@yellowAt6" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="7" out="@yellowAt7" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="8" out="@yellowAt8" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="9" out="@yellowAt9" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="10" out="@yellowAt10" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="11" out="@yellowAt11" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="12" out="@yellowAt12" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="13" out="@yellowAt13" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="14" out="@yellowAt14" restart="false" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Counter in="@add1Yellow" n="kTeamScore1" out="@yellowWins" fill="#ffff33" frame="#000000" cx="538.8194444444445" cz="474.09722222222223" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt1" showEveryone="true" mask="T2" text="Yellow team has 1 point!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt2" showEveryone="true" mask="T2" text="Yellow team has 2 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt3" showEveryone="true" mask="T2" text="Yellow team has 3 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt4" showEveryone="true" mask="T2" text="Yellow team has 4 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt5" showEveryone="true" mask="T2" text="Yellow team has 5 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt6" showEveryone="true" mask="T2" text="Yellow team has 6 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt7" showEveryone="true" mask="T2" text="Yellow team has 7 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt8" showEveryone="true" mask="T2" text="Yellow team has 8 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt9" showEveryone="true" mask="T2" text="Yellow team has 9 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt10" showEveryone="true" mask="T2" text="Yellow team has 10 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt11" showEveryone="true" mask="T2" text="Yellow team has 11 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt12" showEveryone="true" mask="T2" text="Yellow team has 12 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt13" showEveryone="true" mask="T2" text="Yellow team has 13 points!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt14" showEveryone="true" text="Yellow team has only 1 point to go!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowWins" showEveryone="true" text="Yellow team wins!" fill="#ffff33" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" angle="225" />
+  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="154.93055555555557" z="81.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="169.93055555555557" z="75.625" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="164.93055555555557" z="76.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="159.93055555555557" z="78.75" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="174.93055555555557" z="76.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="179.93055555555557" z="78.75" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="184.93055555555557" z="81.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="189.93055555555557" z="86.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="196.18055555555557" z="101.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="193.05555555555557" z="111.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="194.93055555555557" z="106.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="189.93055555555557" z="116.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="193.05555555555557" z="91.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="194.93055555555557" z="96.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="184.93055555555557" z="121.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="179.93055555555557" z="125" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="174.93055555555557" z="126.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="169.93055555555557" z="128.125" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="164.93055555555557" z="126.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="159.93055555555557" z="125" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="154.93055555555557" z="121.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="149.93055555555557" z="116.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="144.93055555555557" z="96.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="143.68055555555557" z="101.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="146.80555555555557" z="91.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="149.93055555555557" z="86.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="144.93055555555557" z="106.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" r="2.569444444444457" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="146.80555555555557" z="111.875" w="5" d="5" h="0" />
+  <Incarnator y="0" start="@zero" stop="@one" fill="#ff0000" frame="#000000" cx="184.16666666666669" cz="82.77777777777777" r="3.2638888888888857" angle="30" />
+  <Incarnator y="0" start="@two" stop="@three" fill="#ff0000" frame="#000000" cx="155.76388888888889" cz="120.97222222222223" r="3.2638888888888857" angle="210" />
+  <Timer in="@switchammo2" out="@makeammo4" wait="75" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="91.25" r="1.25" angle="225" />
+  <Goody shape="bspGrenade" y="wh + 2" speed="2" grenades="12" start="@makeammo4" out="@switchagain2" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="91.25" r="1.25" angle="225" />
+  <Timer in="@switchammo1" out="@makeammo2" wait="75" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="112.5" r="1.25" angle="225" />
+  <Goody shape="bspMissile" y="wh + 2" speed="2" missiles="8" start="@makeammo2" out="@switchagain1" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="112.5" r="1.25" angle="225" />
+  <And in="@start" out="@makeammo3" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="112.5" r="1.25" angle="225" />
+  <Timer in="@switchagain2" out="@makeammo3" wait="75" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="112.5" r="1.25" angle="225" />
+  <Goody shape="bspMissile" y="wh + 2" speed="2" missiles="8" start="@makeammo3" out="@switchammo2" fill="#ff6600" frame="#000000" cx="162.43055555555557" cz="112.5" r="1.25" angle="225" />
+  <And in="@start" out="@makeammo1" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="91.25" r="1.25" angle="225" />
+  <Timer in="@switchagain1" out="@makeammo1" wait="75" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="91.25" r="1.25" angle="225" />
+  <Goody shape="bspGrenade" y="wh + 2" speed="2" grenades="12" start="@makeammo1" out="@switchammo1" fill="#ff6600" frame="#000000" cx="177.43055555555557" cz="91.25" r="1.25" angle="225" />
+  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" fill="#ffff33" frame="#000000" cx="164.96527777777777" cz="25.555555555555557" r="2.6041666666666714" angle="0" />
+  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" fill="#ffff33" frame="#000000" cx="169.96527777777777" cz="24.444444444444446" r="2.6041666666666714" angle="0" />
+  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" fill="#ffff33" frame="#000000" cx="174.96527777777777" cz="25.555555555555557" r="2.6041666666666714" angle="0" />
+  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" fill="#ff0000" frame="#000000" cx="164.96527777777777" cz="178.75" r="2.6041666666666714" angle="180" />
+  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" fill="#ff0000" frame="#000000" cx="174.96527777777777" cz="178.75" r="2.6041666666666714" angle="180" />
+  <Incarnator y="0" start="@three" stop="@four" fill="#ff0000" frame="#000000" cx="155.83333333333334" cz="82.77777777777777" r="3.2638888888888857" angle="330" />
+  <Incarnator y="0" start="@one" stop="@two" fill="#ff0000" frame="#000000" cx="184.16666666666669" cz="120.97222222222223" r="3.2638888888888857" angle="150" />
+  <Base in="@start" out="@wait" fill="#ff0000" frame="#000000" cx="488.05555555555554" cz="485.06944444444446" r="3.958333333333343" angle="90" />
+  <Timer in="@wait" wait="32" out="@inGame" fill="#ff0000" frame="#000000" cx="488.05555555555554" cz="485.06944444444446" r="3.958333333333343" angle="90" />
+  <Teleporter group="-1" y="18" activeRange="50" deadRange="30" destGroup="@death" shape="0" fill="#0066ff" frame="#000000" cx="169.93055555555557" cz="101.875" r="2.5" angle="225" />
+  <Teleporter stop="@start" start="@inGame" group="-2" mask="T3" y="20" activeRange="150" deadRange="75" destGroup="@redBegin" shape="0" fill="#0066ff" frame="#000000" cx="169.93055555555557" cz="101.875" r="2.5" angle="225" />
+  <Teleporter stop="@start" start="@inGame" group="-3" mask="T2" y="20" activeRange="150" deadRange="75" destGroup="@yellowBegin" shape="0" fill="#0066ff" frame="#000000" cx="169.93055555555557" cz="101.875" r="2.5" angle="225" />
+  <Teleporter group="@redBegin" mask="T3" y="0" shape="0" spin="false" fill="#ff0000" frame="#000000" cx="169.93055555555557" cz="127.01388888888889" r="3.2638888888888857" angle="180" />
+  <Teleporter group="@redBegin" mask="T3" y="0" shape="0" spin="false" fill="#ff0000" frame="#000000" cx="174.93055555555557" cz="125.76388888888889" r="3.2638888888888857" angle="180" />
+  <Teleporter group="@redBegin" mask="T3" y="0" shape="0" spin="false" fill="#ff0000" frame="#000000" cx="164.93055555555557" cz="125.76388888888889" r="3.2638888888888857" angle="180" />
+  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#ffff33" frame="#000000" cx="169.93055555555557" cz="76.80555555555556" r="3.2638888888888857" angle="0" />
+  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#ffff33" frame="#000000" cx="164.93055555555557" cz="78.05555555555556" r="3.2638888888888857" angle="0" />
+  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#ffff33" frame="#000000" cx="174.93055555555557" cz="78.05555555555556" r="3.2638888888888857" angle="0" />
+  <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" fill="#ff0000" frame="#000000" cx="169.96527777777777" cz="179.375" r="2.6041666666666714" angle="180" />
+  <Timer in="@start" wait="25" out="@inArena" fill="#00ccff" frame="#000000" cx="59.236111111111114" cz="16.73611111111111" r="3.75" angle="90" />
+  <Text sound="134" volume="1" in="@inArena" showEveryone="true" text="" fill="#00ccff" frame="#000000" cx="59.236111111111114" cz="16.73611111111111" r="3.75" angle="90" />
 </map>

@@ -4,303 +4,303 @@
   <set information="A race in the sky.
 Perhaps you will die; but at least you will die so close to the stars..." baseHeight="100" StripThick=".5" wallHeight="StripThick" defaultLives="8" fWatch="playerMask" starY="40 + random * 80" starScale=".1" />
   <Wall fill="#bbbbbb" frame="#000000" x="254.30555555555554" z="287.08333333333337" w="15" d="15" h="0" />
-  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="282.60416666666663" r="1.7013888888888857" angle="225" extent="90" />
-  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="284.47916666666663" r="1.7013888888888857" angle="225" extent="90" />
-  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="286.35416666666663" r="1.7013888888888857" angle="225" extent="90" />
-  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="288.22916666666663" r="1.7013888888888857" angle="225" extent="90" />
-  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="290.10416666666663" r="1.7013888888888857" angle="225" extent="90" />
-  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="291.97916666666663" r="1.7013888888888857" angle="225" extent="90" />
-  <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="281.45833333333337" r="1.875" angle="180" extent="180" />
-  <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="285.20833333333337" r="1.875" angle="180" extent="180" />
-  <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="288.95833333333337" r="1.875" angle="180" extent="180" />
-  <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="180" extent="180" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="282.60416666666663" r="1.7013888888888857" angle="270" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="284.47916666666663" r="1.7013888888888857" angle="270" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="286.35416666666663" r="1.7013888888888857" angle="270" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="288.22916666666663" r="1.7013888888888857" angle="270" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="290.10416666666663" r="1.7013888888888857" angle="270" />
+  <Incarnator fill="#00ee00" frame="#000000" cx="250.90277777777777" cz="291.97916666666663" r="1.7013888888888857" angle="270" />
+  <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="281.45833333333337" r="1.875" angle="270" />
+  <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="285.20833333333337" r="1.875" angle="270" />
+  <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="288.95833333333337" r="1.875" angle="270" />
+  <Teleporter group="@restart" start="0" spin="true" y="4" fill="#0099ff" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="270" />
   <Wall fill="#bbbbbb" frame="#000000" x="265.55555555555554" z="283.33333333333337" w="7.5" d="7.5" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="370.5555555555556" z="287.08333333333337" w="22.5" d="15" h="0" />
   <unique vars="mTrip mReset" />
-  <WallDoor deltaY="-3" deltaZ="-1" pitch="40" open="mTrip" close="mReset" openSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="265.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="0" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="263.99305555555554" z="290.83333333333337" w="10.625" d="7.5" h="7.5" y="-5" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" deltaZ=".04" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="265.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="7.5" y="-5" />
+  <WallDoor deltaY="-3" deltaZ="-1" pitch="40" open="mTrip" close="mReset" openSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="265.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="0" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="263.99305555555554" z="290.83333333333337" w="10.625" d="7.5" h="7.5" y="-5" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" deltaZ=".04" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="265.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="7.5" y="-5" />
   <Wall fill="#bbbbbb" frame="#000000" x="271.80555555555554" z="287.08333333333337" w="5" d="15" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="279.30555555555554" z="290.83333333333337" w="10" d="7.5" h="0" />
   <set wallHeight="StripThick / 2" />
   <unique vars="mTrip mReset" />
-  <WallDoor deltaY="-3" open="mTrip" close="mReset" shotPower="10" openSpeed="20" closeSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="279.30555555555554" z="283.33333333333337" w="10" d="7.5" h="0" />
+  <WallDoor deltaY="-3" open="mTrip" close="mReset" shotPower="10" openSpeed="20" closeSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="279.30555555555554" z="283.33333333333337" w="10" d="7.5" h="0" />
   <set wa="wallHeight" />
-  <WallDoor deltaY="3" open="mTrip" close="mReset" shotPower="10" openSpeed="20" closeSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="279.30555555555554" z="283.33333333333337" w="10" d="7.5" h="0" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="279.30555555555554" z="283.64583333333337" w="16.25" d="8.125" h="7.5" y="-5" />
-  <Field watch="fWatch" enter="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="279.30555555555554" z="283.33333333333337" w="7.5" d="5" h="7.5" y="-5" />
+  <WallDoor deltaY="3" open="mTrip" close="mReset" shotPower="10" openSpeed="20" closeSpeed="20" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="279.30555555555554" z="283.33333333333337" w="10" d="7.5" h="0" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="279.30555555555554" z="283.64583333333337" w="16.25" d="8.125" h="7.5" y="-5" />
+  <Field watch="fWatch" enter="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="279.30555555555554" z="283.33333333333337" w="7.5" d="5" h="7.5" y="-5" />
   <set wallHeight="StripThick" />
   <Wall fill="#bbbbbb" frame="#000000" x="290.55555555555554" z="287.08333333333337" w="12.5" d="15" h="0" />
   <set wallHeight="StripThick / 2" />
   <unique vars="mTrip mReset" />
   <Wall fill="#bbbbbb" frame="#000000" x="301.49305555555554" z="287.08333333333337" w="9.375" d="15" h="0" />
-  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="301.18055555555554" z="287.08333333333337" w="12.5" d="15" h="7.5" />
+  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="301.18055555555554" z="287.08333333333337" w="12.5" d="15" h="7.5" />
   <set wa="wallHeight" />
-  <WallDoor middle=".4" midY=".75 * 5" deltaY=".75 * 5" midZ="-6" deltaZ=".75 * 5" midPitch="90" pitch="90" open="mTrip" close="mReset" shotPower="2" openSpeed="8" closeSpeed="5" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="301.49305555555554" z="283.33333333333337" w="9.375" d="7.5" h="0" />
+  <WallDoor middle=".4" midY=".75 * 5" deltaY=".75 * 5" midZ="-6" deltaZ=".75 * 5" midPitch="90" pitch="90" open="mTrip" close="mReset" shotPower="2" openSpeed="8" closeSpeed="5" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="301.49305555555554" z="283.33333333333337" w="9.375" d="7.5" h="0" />
   <set wa="wallHeight" />
-  <WallDoor middle=".4" midY=".75 * 5" deltaY=".75 * 5" midZ="6" deltaZ="-.75 * 5" midPitch="-90" pitch="-90" open="mTrip" close="mReset" shotPower="2" openSpeed="8" closeSpeed="5" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="301.49305555555554" z="290.83333333333337" w="9.375" d="7.5" h="0" />
+  <WallDoor middle=".4" midY=".75 * 5" deltaY=".75 * 5" midZ="6" deltaZ="-.75 * 5" midPitch="-90" pitch="-90" open="mTrip" close="mReset" shotPower="2" openSpeed="8" closeSpeed="5" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="301.49305555555554" z="290.83333333333337" w="9.375" d="7.5" h="0" />
   <set wallHeight="StripThick" />
-  <Timer in="mTrip" wait="6 * 15" out="mReset" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="180" extent="180" />
+  <Timer in="mTrip" wait="6 * 15" out="mReset" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="270" />
   <Wall fill="#bbbbbb" frame="#000000" x="311.49305555555554" z="287.08333333333337" w="10.625" d="15" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="320.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="329.30555555555554" z="287.08333333333337" w="10" d="15" h="0" />
   <unique vars="mTrip mReset" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="320.24305555555554" z="283.64583333333337" w="10.625" d="8.125" h="7.5" y="-5" />
-  <WallDoor open="mTrip" close="mReset" openSpeed="20" closeSpeed="20" shotPower="6" deltaY=".75 * 5" deltaX=".75 * 5 -5 / 16" roll="-90" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="320.55555555555554" z="283.33333333333337" w="7.5" d="7.5" h="0" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="320.24305555555554" z="283.64583333333337" w="10.625" d="8.125" h="7.5" y="-5" />
+  <WallDoor open="mTrip" close="mReset" openSpeed="20" closeSpeed="20" shotPower="6" deltaY=".75 * 5" deltaX=".75 * 5 -5 / 16" roll="-90" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="320.55555555555554" z="283.33333333333337" w="7.5" d="7.5" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="355.55555555555554" z="283.33333333333337" w="7.5" d="7.5" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="346.80555555555554" z="287.08333333333337" w="10" d="15" h="0" />
   <unique vars="mTrip mReset mField" />
-  <Timer in="mTrip" out="mReset" wait="30" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="180" extent="180" />
-  <Timer in="mTrip" out="mField" wait="5" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="180" extent="180" />
-  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="355.55555555555554" z="290.52083333333337" w="8.75" d="8.125" h="7.5" y="-5" />
-  <WallDoor open="mTrip" close="mReset" openSpeed="20" closeSpeed="20" shotPower="1" deltaY=".75 * 5" deltaX="-.75 * 5" roll="90" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="355.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="0" />
-  <Field start="mField" stop="mReset" deltaX="-3" deltaY="2" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="355.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="7.5" y="-5" />
+  <Timer in="mTrip" out="mReset" wait="30" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="270" />
+  <Timer in="mTrip" out="mField" wait="5" fill="#bbbbbb" frame="#000000" cx="248.05555555555557" cz="292.70833333333337" r="1.875" angle="270" />
+  <Field watch="fWatch" enter="mTrip" exit="mReset" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="355.55555555555554" z="290.52083333333337" w="8.75" d="8.125" h="7.5" y="-5" />
+  <WallDoor open="mTrip" close="mReset" openSpeed="20" closeSpeed="20" shotPower="1" deltaY=".75 * 5" deltaX="-.75 * 5" roll="90" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="355.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="0" />
+  <Field start="mField" stop="mReset" deltaX="-3" deltaY="2" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="355.55555555555554" z="290.83333333333337" w="7.5" d="7.5" h="7.5" y="-5" />
   <Wall fill="#bbbbbb" frame="#000000" x="338.05555555555554" z="280.83333333333337" w="7.5" d="2.5" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="338.05555555555554" z="293.33333333333337" w="7.5" d="2.5" h="0" />
   <set wallHeight="StripThick / 2" />
   <unique vars="mTrip mReset" />
   <Wall fill="#bbbbbb" frame="#000000" x="338.05555555555554" z="287.08333333333337" w="7.5" d="10" h="0" />
-  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="337.74305555555554" z="287.08333333333337" w="9.375" d="11.25" h="7.5" />
+  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="337.74305555555554" z="287.08333333333337" w="9.375" d="11.25" h="7.5" />
   <set wa="wallHeight" />
-  <WallDoor middle=".04" midY=".75 * 5" deltaY=".75 * 5" midRoll="-90" roll="-90" pitch="360 * 10" open="mTrip" close="mReset" shotPower="2" openSpeed=".7" closeSpeed=".7" guardDelay="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="338.05555555555554" z="284.58333333333337" w="7.5" d="5" h="0" />
+  <WallDoor middle=".04" midY=".75 * 5" deltaY=".75 * 5" midRoll="-90" roll="-90" pitch="360 * 10" open="mTrip" close="mReset" shotPower="2" openSpeed=".7" closeSpeed=".7" guardDelay="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="338.05555555555554" z="284.58333333333337" w="7.5" d="5" h="0" />
   <set wa="wallHeight" />
-  <WallDoor middle=".04" midY=".75 * 5" deltaY=".75 * 5" midRoll="-90" roll="-90" pitch="360 * 10" open="mTrip" didOpen="mReset" close="mReset" shotPower="2" openSpeed=".7" closeSpeed=".7" guardDelay="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="338.05555555555554" z="289.58333333333337" w="7.5" d="5" h="0" />
+  <WallDoor middle=".04" midY=".75 * 5" deltaY=".75 * 5" midRoll="-90" roll="-90" pitch="360 * 10" open="mTrip" didOpen="mReset" close="mReset" shotPower="2" openSpeed=".7" closeSpeed=".7" guardDelay="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="338.05555555555554" z="289.58333333333337" w="7.5" d="5" h="0" />
   <set wallHeight="StripThick" />
   <unique vars="mTrip mReset" />
   <set wallYon="30" />
   <Wall fill="#bbbbbb" frame="#000000" x="371.8055555555556" z="314.54861111111114" w="5" d="39.93055555555554" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="371.8055555555556" z="259.58333333333337" w="5" d="40" h="0" />
   <set wallYon="0" />
-  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="180" extent="180" x="371.4930555555556" z="287.08333333333337" w="16.875" d="15" h="7.5" />
-  <Door2 shape="bspSphere" y="3" midX="-45" deltaX="45" deltaY="0" roll="-360 * 2.6" open="mTrip" didOpen="mReset" close="mReset" shotPower="2.5" guardDelay="0" openSpeed="4" closeSpeed="100" yon="30" openSound="snGobble" closeSound="0" stopSound="0" fill="#663300" frame="#000000" cx="371.73611111111114" cz="287.08333333333337" r="7.5" angle="180" extent="180" />
+  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="1.875" cx="248.05555555555557" cz="292.70833333333337" angle="270" x="371.4930555555556" z="287.08333333333337" w="16.875" d="15" h="7.5" />
+  <Door2 shape="bspSphere" y="3" midX="-45" deltaX="45" deltaY="0" roll="-360 * 2.6" open="mTrip" didOpen="mReset" close="mReset" shotPower="2.5" guardDelay="0" openSpeed="4" closeSpeed="100" yon="30" openSound="snGobble" closeSound="0" stopSound="0" fill="#663300" frame="#000000" cx="371.73611111111114" cz="287.08333333333337" r="7.5" angle="270" />
   <Wall fill="#bbbbbb" frame="#000000" x="394.3055555555556" z="287.08333333333337" w="10" d="15" h="0" />
-  <Teleporter win="5000" y="StripThick" fill="#0099ff" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="180" extent="180" />
+  <Teleporter win="5000" y="StripThick" fill="#0099ff" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="270" />
   <Wall fill="#bbbbbb" frame="#000000" x="385.5555555555556" z="290.83333333333337" w="7.5" d="7.5" h="0" />
   <unique vars="mTrip mReset mField" />
-  <Timer in="mTrip" out="mReset" wait="30" fill="#bbbbbb" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="180" extent="180" />
-  <Timer in="mTrip" out="mField" wait="7" fill="#bbbbbb" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="180" extent="180" />
-  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="385.5555555555556" z="283.64583333333337" w="8.75" d="8.125" h="7.5" y="-5" />
-  <Field start="mField" stop="mReset" exit="mReset" deltaX="-3" deltaY="3.5" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="385.5555555555556" z="283.33333333333337" w="7.5" d="7.5" h="7.5" y="3" />
-  <WallDoor open="mTrip" didOpen="mField" close="mReset" openSpeed="7" closeSpeed="4" shotPower=".5" deltaY=".75 * 5" roll="10" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="180" extent="180" x="385.5902777777778" z="283.33333333333337" w="7.5694444444444" d="7.5" h="0" />
-  <Teleporter destGroup="@restart" group="-1" deadRange="baseHeight -10" activeRange="2000" shape="0" y="7.5" fill="#ffffff" frame="#000000" cx="319.30555555555554" cz="290.20833333333337" r="2.5" angle="180" extent="180" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="15.555555555555557" cz="27.708333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="12.708333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="136.18055555555557" cz="27.083333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="206.18055555555557" cz="13.333333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="253.68055555555557" cz="35.833333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="311.18055555555554" cz="17.083333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="361.1805555555556" cz="38.958333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="435.5555555555556" cz="48.333333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="496.1805555555556" cz="25.208333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="559.9305555555555" cz="52.083333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="629.3055555555555" cz="20.208333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="29.305555555555557" cz="75.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="87.43055555555556" cz="60.208333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="149.93055555555557" cz="74.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="219.93055555555557" cz="60.833333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="267.43055555555554" cz="83.33333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="324.93055555555554" cz="64.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="374.9305555555556" cz="86.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="449.3055555555556" cz="95.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="509.9305555555556" cz="72.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="573.6805555555555" cz="99.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="643.0555555555555" cz="67.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="14.305555555555557" cz="125.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="72.43055555555556" cz="110.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="134.93055555555557" cz="124.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="204.93055555555557" cz="110.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="252.43055555555557" cz="133.33333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="309.93055555555554" cz="114.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="359.9305555555556" cz="136.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="434.3055555555556" cz="145.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="494.9305555555556" cz="122.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="558.6805555555555" cz="149.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="628.0555555555555" cz="117.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="29.305555555555557" cz="175.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="87.43055555555556" cz="160.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="149.93055555555557" cz="174.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="219.93055555555557" cz="160.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="267.43055555555554" cz="183.33333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="324.93055555555554" cz="164.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="374.9305555555556" cz="186.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="449.3055555555556" cz="195.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="509.9305555555556" cz="172.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="573.6805555555555" cz="199.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="643.0555555555555" cz="167.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="23.055555555555557" cz="236.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="81.18055555555556" cz="221.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="143.68055555555557" cz="235.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="213.68055555555557" cz="222.08333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="261.18055555555554" cz="244.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="318.68055555555554" cz="225.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="368.6805555555556" cz="247.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="443.0555555555556" cz="257.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="503.6805555555556" cz="233.95833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="567.4305555555555" cz="260.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="636.8055555555555" cz="228.95833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="16.805555555555557" cz="297.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="74.93055555555556" cz="282.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="137.43055555555557" cz="297.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="207.43055555555557" cz="283.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="254.93055555555554" cz="305.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="312.43055555555554" cz="287.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="362.4305555555556" cz="308.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="436.8055555555556" cz="318.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="497.4305555555556" cz="295.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="561.1805555555555" cz="322.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="630.5555555555555" cz="290.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="10.555555555555555" cz="358.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="68.68055555555556" cz="343.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="131.18055555555557" cz="358.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="201.18055555555557" cz="344.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="248.68055555555557" cz="367.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="306.18055555555554" cz="348.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="356.18055555555554" cz="370.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="430.5555555555556" cz="379.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="491.1805555555556" cz="356.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="554.9305555555555" cz="383.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="624.3055555555555" cz="351.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="32.43055555555556" cz="400.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="90.55555555555556" cz="385.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="153.05555555555557" cz="399.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="223.05555555555557" cz="385.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="270.55555555555554" cz="408.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="328.05555555555554" cz="389.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="378.0555555555556" cz="411.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="452.4305555555556" cz="420.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="513.0555555555555" cz="397.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="576.8055555555555" cz="424.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="646.1805555555555" cz="392.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="27.430555555555557" cz="440.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="85.55555555555556" cz="425.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="148.05555555555557" cz="440.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="218.05555555555557" cz="426.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="265.55555555555554" cz="448.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="323.05555555555554" cz="430.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="373.0555555555556" cz="452.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="447.4305555555556" cz="461.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="508.0555555555556" cz="438.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="571.8055555555555" cz="465.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="641.1805555555555" cz="433.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="23.680555555555557" cz="481.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="81.80555555555556" cz="466.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="144.30555555555557" cz="480.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="214.30555555555557" cz="467.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="261.80555555555554" cz="489.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="319.30555555555554" cz="470.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="369.3055555555556" cz="492.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="443.6805555555556" cz="502.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="504.3055555555556" cz="478.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="568.0555555555555" cz="505.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="637.4305555555555" cz="473.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="29.930555555555557" cz="32.708333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="88.05555555555556" cz="17.708333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="150.55555555555557" cz="32.083333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="220.55555555555557" cz="18.333333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="268.05555555555554" cz="40.833333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="325.55555555555554" cz="22.083333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="375.5555555555556" cz="43.958333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="449.9305555555556" cz="53.333333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="510.5555555555556" cz="30.208333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="574.3055555555555" cz="57.083333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="643.6805555555555" cz="25.208333333333336" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="43.68055555555556" cz="80.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="101.80555555555556" cz="65.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="164.30555555555557" cz="79.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="234.30555555555557" cz="65.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="281.80555555555554" cz="88.33333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="339.30555555555554" cz="69.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="389.3055555555556" cz="91.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="463.6805555555556" cz="100.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="524.3055555555555" cz="77.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="588.0555555555555" cz="104.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="657.4305555555555" cz="72.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="28.680555555555557" cz="130.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="86.80555555555556" cz="115.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="149.30555555555557" cz="129.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="219.30555555555557" cz="115.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="266.80555555555554" cz="138.33333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="324.30555555555554" cz="119.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="374.3055555555556" cz="141.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="448.6805555555556" cz="150.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="509.3055555555556" cz="127.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="573.0555555555555" cz="154.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="642.4305555555555" cz="122.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="43.68055555555556" cz="180.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="101.80555555555556" cz="165.20833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="164.30555555555557" cz="179.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="234.30555555555557" cz="165.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="281.80555555555554" cz="188.33333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="339.30555555555554" cz="169.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="389.3055555555556" cz="191.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="463.6805555555556" cz="200.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="524.3055555555555" cz="177.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="588.0555555555555" cz="204.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="657.4305555555555" cz="172.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="37.43055555555556" cz="241.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="95.55555555555556" cz="226.45833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="158.05555555555557" cz="240.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="228.05555555555557" cz="227.08333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="275.55555555555554" cz="249.58333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="333.05555555555554" cz="230.83333333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="383.0555555555556" cz="252.70833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="457.4305555555556" cz="262.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="518.0555555555555" cz="238.95833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="581.8055555555555" cz="265.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="651.1805555555555" cz="233.95833333333334" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="31.180555555555557" cz="302.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="89.30555555555556" cz="287.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="151.80555555555557" cz="302.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="221.80555555555557" cz="288.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="269.30555555555554" cz="310.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="326.80555555555554" cz="292.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="376.8055555555556" cz="313.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="451.1805555555556" cz="323.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="511.80555555555554" cz="300.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="575.5555555555555" cz="327.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="644.9305555555555" cz="295.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="24.930555555555557" cz="363.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="83.05555555555556" cz="348.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="145.55555555555557" cz="363.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="215.55555555555557" cz="349.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="263.05555555555554" cz="372.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="320.55555555555554" cz="353.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="370.5555555555556" cz="375.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="444.9305555555556" cz="384.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="505.5555555555556" cz="361.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="569.3055555555555" cz="388.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="638.6805555555555" cz="356.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="46.80555555555556" cz="405.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="104.93055555555556" cz="390.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="167.43055555555557" cz="404.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="237.43055555555557" cz="390.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="284.93055555555554" cz="413.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="342.43055555555554" cz="394.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="392.4305555555556" cz="416.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="466.8055555555556" cz="425.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="527.4305555555555" cz="402.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="591.1805555555555" cz="429.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="660.5555555555555" cz="397.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="41.80555555555556" cz="445.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="99.93055555555556" cz="430.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="162.43055555555557" cz="445.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="232.43055555555557" cz="431.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="279.93055555555554" cz="453.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="337.43055555555554" cz="435.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="387.4305555555556" cz="457.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="461.8055555555556" cz="466.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="522.4305555555555" cz="443.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="586.1805555555555" cz="470.20833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="655.5555555555555" cz="438.33333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="38.05555555555556" cz="486.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="96.18055555555556" cz="471.45833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="158.68055555555557" cz="485.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="228.68055555555557" cz="472.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="276.18055555555554" cz="494.58333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="333.68055555555554" cz="475.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="383.6805555555556" cz="497.70833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="458.0555555555556" cz="507.08333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="518.6805555555555" cz="483.95833333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="582.4305555555555" cz="510.83333333333337" r="1.25" angle="180" extent="359" />
-  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="651.8055555555555" cz="478.95833333333337" r="1.25" angle="180" extent="359" />
+  <Timer in="mTrip" out="mReset" wait="30" fill="#bbbbbb" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="270" />
+  <Timer in="mTrip" out="mField" wait="7" fill="#bbbbbb" frame="#000000" cx="396.8055555555556" cz="287.08333333333337" r="2.5" angle="270" />
+  <Field watch="fWatch" enter="mTrip" deltaY="0" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="270" x="385.5555555555556" z="283.64583333333337" w="8.75" d="8.125" h="7.5" y="-5" />
+  <Field start="mField" stop="mReset" exit="mReset" deltaX="-3" deltaY="3.5" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="270" x="385.5555555555556" z="283.33333333333337" w="7.5" d="7.5" h="7.5" y="3" />
+  <WallDoor open="mTrip" didOpen="mField" close="mReset" openSpeed="7" closeSpeed="4" shotPower=".5" deltaY=".75 * 5" roll="10" fill="#bbbbbb" frame="#000000" r="2.5" cx="396.8055555555556" cz="287.08333333333337" angle="270" x="385.5902777777778" z="283.33333333333337" w="7.5694444444444" d="7.5" h="0" />
+  <Teleporter destGroup="@restart" group="-1" deadRange="baseHeight -10" activeRange="2000" shape="0" y="7.5" fill="#ffffff" frame="#000000" cx="319.30555555555554" cz="290.20833333333337" r="2.5" angle="270" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="15.555555555555557" cz="27.708333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="12.708333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="136.18055555555557" cz="27.083333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="206.18055555555557" cz="13.333333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="253.68055555555557" cz="35.833333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="311.18055555555554" cz="17.083333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="361.1805555555556" cz="38.958333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="435.5555555555556" cz="48.333333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="496.1805555555556" cz="25.208333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="559.9305555555555" cz="52.083333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="629.3055555555555" cz="20.208333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="29.305555555555557" cz="75.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="87.43055555555556" cz="60.208333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="149.93055555555557" cz="74.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="219.93055555555557" cz="60.833333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="267.43055555555554" cz="83.33333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="324.93055555555554" cz="64.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="374.9305555555556" cz="86.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="449.3055555555556" cz="95.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="509.9305555555556" cz="72.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="573.6805555555555" cz="99.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="643.0555555555555" cz="67.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="14.305555555555557" cz="125.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="72.43055555555556" cz="110.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="134.93055555555557" cz="124.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="204.93055555555557" cz="110.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="252.43055555555557" cz="133.33333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="309.93055555555554" cz="114.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="359.9305555555556" cz="136.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="434.3055555555556" cz="145.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="494.9305555555556" cz="122.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="558.6805555555555" cz="149.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="628.0555555555555" cz="117.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="29.305555555555557" cz="175.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="87.43055555555556" cz="160.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="149.93055555555557" cz="174.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="219.93055555555557" cz="160.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="267.43055555555554" cz="183.33333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="324.93055555555554" cz="164.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="374.9305555555556" cz="186.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="449.3055555555556" cz="195.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="509.9305555555556" cz="172.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="573.6805555555555" cz="199.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="643.0555555555555" cz="167.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="23.055555555555557" cz="236.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="81.18055555555556" cz="221.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="143.68055555555557" cz="235.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="213.68055555555557" cz="222.08333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="261.18055555555554" cz="244.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="318.68055555555554" cz="225.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="368.6805555555556" cz="247.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="443.0555555555556" cz="257.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="503.6805555555556" cz="233.95833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="567.4305555555555" cz="260.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="636.8055555555555" cz="228.95833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="16.805555555555557" cz="297.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="74.93055555555556" cz="282.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="137.43055555555557" cz="297.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="207.43055555555557" cz="283.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="254.93055555555554" cz="305.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="312.43055555555554" cz="287.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="362.4305555555556" cz="308.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="436.8055555555556" cz="318.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="497.4305555555556" cz="295.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="561.1805555555555" cz="322.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="630.5555555555555" cz="290.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="10.555555555555555" cz="358.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="68.68055555555556" cz="343.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="131.18055555555557" cz="358.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="201.18055555555557" cz="344.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="248.68055555555557" cz="367.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="306.18055555555554" cz="348.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="356.18055555555554" cz="370.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="430.5555555555556" cz="379.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="491.1805555555556" cz="356.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="554.9305555555555" cz="383.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="624.3055555555555" cz="351.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="32.43055555555556" cz="400.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="90.55555555555556" cz="385.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="153.05555555555557" cz="399.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="223.05555555555557" cz="385.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="270.55555555555554" cz="408.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="328.05555555555554" cz="389.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="378.0555555555556" cz="411.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="452.4305555555556" cz="420.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="513.0555555555555" cz="397.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="576.8055555555555" cz="424.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="646.1805555555555" cz="392.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="27.430555555555557" cz="440.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="85.55555555555556" cz="425.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="148.05555555555557" cz="440.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="218.05555555555557" cz="426.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="265.55555555555554" cz="448.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="323.05555555555554" cz="430.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="373.0555555555556" cz="452.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="447.4305555555556" cz="461.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="508.0555555555556" cz="438.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="571.8055555555555" cz="465.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="641.1805555555555" cz="433.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="23.680555555555557" cz="481.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="81.80555555555556" cz="466.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="144.30555555555557" cz="480.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="214.30555555555557" cz="467.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="261.80555555555554" cz="489.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="319.30555555555554" cz="470.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="369.3055555555556" cz="492.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="443.6805555555556" cz="502.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="504.3055555555556" cz="478.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="568.0555555555555" cz="505.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="637.4305555555555" cz="473.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="29.930555555555557" cz="32.708333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="88.05555555555556" cz="17.708333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="150.55555555555557" cz="32.083333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="220.55555555555557" cz="18.333333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="268.05555555555554" cz="40.833333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="325.55555555555554" cz="22.083333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="375.5555555555556" cz="43.958333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="449.9305555555556" cz="53.333333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="510.5555555555556" cz="30.208333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="574.3055555555555" cz="57.083333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="643.6805555555555" cz="25.208333333333336" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="43.68055555555556" cz="80.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="101.80555555555556" cz="65.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="164.30555555555557" cz="79.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="234.30555555555557" cz="65.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="281.80555555555554" cz="88.33333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="339.30555555555554" cz="69.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="389.3055555555556" cz="91.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="463.6805555555556" cz="100.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="524.3055555555555" cz="77.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="588.0555555555555" cz="104.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="657.4305555555555" cz="72.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="28.680555555555557" cz="130.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="86.80555555555556" cz="115.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="149.30555555555557" cz="129.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="219.30555555555557" cz="115.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="266.80555555555554" cz="138.33333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="324.30555555555554" cz="119.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="374.3055555555556" cz="141.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="448.6805555555556" cz="150.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="509.3055555555556" cz="127.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="573.0555555555555" cz="154.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="642.4305555555555" cz="122.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="43.68055555555556" cz="180.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="101.80555555555556" cz="165.20833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="164.30555555555557" cz="179.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="234.30555555555557" cz="165.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="281.80555555555554" cz="188.33333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="339.30555555555554" cz="169.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="389.3055555555556" cz="191.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="463.6805555555556" cz="200.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="524.3055555555555" cz="177.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="588.0555555555555" cz="204.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="657.4305555555555" cz="172.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="37.43055555555556" cz="241.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="95.55555555555556" cz="226.45833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="158.05555555555557" cz="240.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="228.05555555555557" cz="227.08333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="275.55555555555554" cz="249.58333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="333.05555555555554" cz="230.83333333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="383.0555555555556" cz="252.70833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="457.4305555555556" cz="262.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="518.0555555555555" cz="238.95833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="581.8055555555555" cz="265.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="651.1805555555555" cz="233.95833333333334" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="31.180555555555557" cz="302.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="89.30555555555556" cz="287.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="151.80555555555557" cz="302.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="221.80555555555557" cz="288.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="269.30555555555554" cz="310.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="326.80555555555554" cz="292.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="376.8055555555556" cz="313.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="451.1805555555556" cz="323.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="511.80555555555554" cz="300.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="575.5555555555555" cz="327.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="644.9305555555555" cz="295.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="24.930555555555557" cz="363.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="83.05555555555556" cz="348.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="145.55555555555557" cz="363.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="215.55555555555557" cz="349.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="263.05555555555554" cz="372.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="320.55555555555554" cz="353.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="370.5555555555556" cz="375.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="444.9305555555556" cz="384.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="505.5555555555556" cz="361.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="569.3055555555555" cz="388.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="638.6805555555555" cz="356.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="46.80555555555556" cz="405.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="104.93055555555556" cz="390.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="167.43055555555557" cz="404.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="237.43055555555557" cz="390.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="284.93055555555554" cz="413.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="342.43055555555554" cz="394.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="392.4305555555556" cz="416.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="466.8055555555556" cz="425.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="527.4305555555555" cz="402.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="591.1805555555555" cz="429.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="660.5555555555555" cz="397.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="41.80555555555556" cz="445.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="99.93055555555556" cz="430.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="162.43055555555557" cz="445.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="232.43055555555557" cz="431.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="279.93055555555554" cz="453.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="337.43055555555554" cz="435.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="387.4305555555556" cz="457.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="461.8055555555556" cz="466.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="522.4305555555555" cz="443.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="586.1805555555555" cz="470.20833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="655.5555555555555" cz="438.33333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="38.05555555555556" cz="486.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="96.18055555555556" cz="471.45833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="158.68055555555557" cz="485.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="228.68055555555557" cz="472.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="276.18055555555554" cz="494.58333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="333.68055555555554" cz="475.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="383.6805555555556" cz="497.70833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="458.0555555555556" cz="507.08333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="518.6805555555555" cz="483.95833333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="582.4305555555555" cz="510.83333333333337" r="1.25" angle="359.5" />
+  <Solid shape="bspStandardWall" scale="starScale" yon="30000" y="starY" fill="#ffffff" frame="#000000" cx="651.8055555555555" cz="478.95833333333337" r="1.25" angle="359.5" />
 </map>

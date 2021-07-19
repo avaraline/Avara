@@ -6,24 +6,24 @@
   <Distributor in="@switchB" out.1="@inc[1]off" out.2="@inc[2]off" out.3="@inc[3]off" out.4="@inc[4]off" out.5="@inc[5]off" out.6="@inc[6]off" out.7="@inc[7]off" out.8="@inc[8]off" />
   <SkyColor fill="#777777" frame="#00ccff" />
   <GroundColor fill="#008800" frame="#000000" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="26.73611111111111" cz="4.236111111111112" r="1.875" angle="0" extent="90" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="26.73611111111111" cz="4.236111111111112" r="1.875" angle="45" />
   <set information="This level uses Random Incarnation, so don't bother trying to memorize the order." />
-  <Guard speed="100" shotPower="10" freq="0" shield="-1" y="wallHeight + 1" fill="#000000" frame="#ffffff" cx="20.48611111111111" cz="31.111111111111114" r="1.25" angle="0" extent="90" />
-  <Incarnator start="@inc[1]on" stop="@inc[1]off" y="0" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
-  <Incarnator start="@inc[2]on" stop="@inc[2]off" y="3" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
-  <Incarnator start="@inc[3]on" stop="@inc[3]off" y="6" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
-  <Incarnator start="@inc[4]on" stop="@inc[4]off" y="9" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
-  <Incarnator start="@inc[5]on" stop="@inc[5]off" y="12" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
-  <Incarnator start="@inc[6]on" stop="@inc[6]off" y="15" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="0" extent="180" />
+  <Guard speed="100" shotPower="10" freq="0" shield="-1" y="wallHeight + 1" fill="#000000" frame="#ffffff" cx="20.48611111111111" cz="31.111111111111114" r="1.25" angle="45" />
+  <Incarnator start="@inc[1]on" stop="@inc[1]off" y="0" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="90" />
+  <Incarnator start="@inc[2]on" stop="@inc[2]off" y="3" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="90" />
+  <Incarnator start="@inc[3]on" stop="@inc[3]off" y="6" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="90" />
+  <Incarnator start="@inc[4]on" stop="@inc[4]off" y="9" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="90" />
+  <Incarnator start="@inc[5]on" stop="@inc[5]off" y="12" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="90" />
+  <Incarnator start="@inc[6]on" stop="@inc[6]off" y="15" fill="#9900cc" frame="#000000" cx="14.54861111111111" cz="13.29861111111111" r="2.1875" angle="90" />
   <Wall fill="#9900cc" frame="#000000" x="14.54861111111111" z="10.79861111111111" w="4.375" d="0.625" h="0" />
   <Wall fill="#9900cc" frame="#000000" x="12.048611111111112" z="13.29861111111111" w="0.625" d="4.375" h="0" />
   <Wall fill="#9900cc" frame="#000000" x="17.04861111111111" z="13.29861111111111" w="0.625" d="4.375" h="0" />
   <Wall fill="#9900cc" frame="#000000" x="14.54861111111111" z="15.79861111111111" w="4.375" d="0.625" h="0" />
   <unique vars="mGShow mMShow mBShow mSound" />
-  <Goody shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" missiles="1" volume="0" start="mMShow" out="mGShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="180" extent="270" />
-  <Goody shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" grenades="1" volume="0" start="mGShow" out="mBShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="180" extent="270" />
-  <Goody shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" boosters="1" volume="0" start="mBShow" out="mMShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="180" extent="270" />
-  <And in="@start" out="mMShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="180" extent="270" />
-  <Field shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" enter="mSound" watch="playerMask" fill="#006666" frame="#440000" r="0.9375" cx="14.618055555555557" cz="13.368055555555555" angle="180" extent="270" />
-  <Sound start="mSound" sound="snGoody" y="gCone" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="180" extent="270" />
+  <Goody shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" missiles="1" volume="0" start="mMShow" out="mGShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="315" />
+  <Goody shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" grenades="1" volume="0" start="mGShow" out="mBShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="315" />
+  <Goody shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" boosters="1" volume="0" start="mBShow" out="mMShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="315" />
+  <And in="@start" out="mMShow" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="315" />
+  <Field shape="bspGoody" y="gConeY" scale=".25" speed="gConeSpd" enter="mSound" watch="playerMask" fill="#006666" frame="#440000" r="0.9375" cx="14.618055555555557" cz="13.368055555555555" angle="315" />
+  <Sound start="mSound" sound="snGoody" y="gCone" fill="#006666" frame="#440000" cx="14.618055555555557" cz="13.368055555555555" r="0.9375" angle="315" />
 </map>
