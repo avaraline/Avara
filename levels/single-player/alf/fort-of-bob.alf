@@ -135,7 +135,7 @@
   <GroundColor fill="#002200" frame="#000055" />
   <Area enter="@oFront" exit="@cFront" fill="#ffffff" frame="#000000" cx="105.48611111111111" cz="32.361111111111114" r="2.5" angle="180" />
   <Area enter="@oBack" exit="@cBack" fill="#ffffff" frame="#000000" cx="105.48611111111111" cz="117.36111111111111" r="2.5" angle="180" />
-  <Hologram shape="bspFlower" isAmbient="true" yon="30" fill="#ff33cc" frame="#000000" cx="29.82638888888889" cz="125.76388888888889" r="1.4583333333333357" angle="365" />
+  <Hologram shape="bspFlower" isAmbient="true" yon="30" fill="#ff33cc" frame="#000000" cx="29.82638888888889" cz="125.76388888888889" r="1.4583333333333357" angle="5" />
   <Solid shape="bspTree" yon="50" fill="#ff6666" frame="#000000" cx="25.45138888888889" cz="123.26388888888889" r="1.4583333333333357" angle="135" />
   <Door shape="bspTree" yon="50" fill="#ff6666" frame="#000000" cx="48.576388888888886" cz="132.0138888888889" r="1.4583333333333286" angle="135" />
   <Hologram shape="bspFlower" isAmbient="true" yon="30" fill="#ffff66" frame="#000000" cx="34.826388888888886" cz="146.3888888888889" r="1.4583333333333286" angle="120" />

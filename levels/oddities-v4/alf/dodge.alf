@@ -91,8 +91,8 @@ wallHeight = 13</script>
   <Teleporter group="@main" start="0" fill="#00ee00" frame="#000000" cx="23.055555555555557" cz="35.486111111111114" r="2.5" angle="270" />
   <Incarnator fill="#00ee00" frame="#000000" cx="50.55555555555556" cz="35.486111111111114" r="2.5" angle="90" />
   <Teleporter group="@main" start="0" fill="#00ee00" frame="#000000" cx="50.55555555555556" cz="35.486111111111114" r="2.5" angle="90" />
-  <Incarnator start="@swin" stop="@tel3" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="26.180555555555557" r="2.5" angle="405" />
-  <Teleporter destGroup="@swr3" group="@main" start="@tel3" stop="@swin" shape="bspFloorFrame" scale=".25" activeRange="1" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="26.180555555555557" r="2.5" angle="405" />
+  <Incarnator start="@swin" stop="@tel3" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="26.180555555555557" r="2.5" angle="45" />
+  <Teleporter destGroup="@swr3" group="@main" start="@tel3" stop="@swin" shape="bspFloorFrame" scale=".25" activeRange="1" fill="#cc3300" frame="#000000" cx="50.55555555555556" cz="26.180555555555557" r="2.5" angle="45" />
   <Incarnator start="@swin" stop="@tel2" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="44.93055555555556" r="2.5" angle="225" />
   <Teleporter destGroup="@swr2" group="@main" start="@tel2" stop="@swin" shape="bspFloorFrame" scale=".25" activeRange="1" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="44.93055555555556" r="2.5" angle="225" />
   <Incarnator start="@swin" stop="@tel1" fill="#cc3300" frame="#000000" cx="23.055555555555557" cz="26.180555555555557" r="2.5" angle="315" />

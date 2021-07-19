@@ -84,7 +84,7 @@
   <Counter in="@tractorDone" out="@wave1" fill="#0066ff" frame="#000000" cx="90" cz="90" r="5" angle="315" />
   <Counter n="5" in="@tractorDone" out="@missionComplete" fill="#0066ff" frame="#000000" cx="90" cz="90" r="5" angle="315" />
   <Teleporter start="@complete" win="5000" fill="#0066ff" frame="#000000" cx="90" cz="90" r="5" angle="315" />
-  <Incarnator status="false" y="15" start="@start" fill="#ffff00" frame="#aa0000" cx="161.28472222222223" cz="85.10416666666667" r="0.9375" angle="450" />
+  <Incarnator status="false" y="15" start="@start" fill="#ffff00" frame="#aa0000" cx="161.28472222222223" cz="85.10416666666667" r="0.9375" angle="90" />
   <Ufo y="100" start="@wave2" watch="playerMask + targ1" fill="#330033" frame="#ee0000" cx="124.375" cz="120.625" r="3.125" angle="225" />
   <Ufo y="105" start="@wave2" watch="playerMask + targ1" fill="#330033" frame="#ee0000" cx="124.375" cz="120.625" r="3.125" angle="225" />
   <Ufo y="110" start="@wave2" watch="playerMask + targ1" fill="#330033" frame="#ee0000" cx="124.375" cz="120.625" r="3.125" angle="225" />

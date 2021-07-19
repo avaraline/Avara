@@ -148,17 +148,17 @@
   <Timer in="sfTaken" out="sfShow" wait="250" fill="#02abea" frame="#000000" cx="99.65277777777779" cz="123.40277777777779" r="1.875" angle="157.5" />
   <Goody shape="bspMissile" start="sfShow" out="sfTaken" missiles="4" y="2" fill="#02abea" frame="#000000" cx="99.65277777777779" cz="123.40277777777779" r="1.875" angle="157.5" />
   <unique vars="sfShow sfTaken" />
-  <And in="@start" out="sfShow" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="100.27777777777779" r="1.875" angle="472.5" />
-  <Timer in="sfTaken" out="sfShow" wait="250" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="100.27777777777779" r="1.875" angle="472.5" />
-  <Goody shape="bspMissile" start="sfShow" out="sfTaken" missiles="4" y="2" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="100.27777777777779" r="1.875" angle="472.5" />
+  <And in="@start" out="sfShow" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="100.27777777777779" r="1.875" angle="112.5" />
+  <Timer in="sfTaken" out="sfShow" wait="250" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="100.27777777777779" r="1.875" angle="112.5" />
+  <Goody shape="bspMissile" start="sfShow" out="sfTaken" missiles="4" y="2" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="100.27777777777779" r="1.875" angle="112.5" />
   <unique vars="sfShow sfTaken" />
-  <And in="@start" out="sfShow" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="67.77777777777779" r="1.875" angle="427.5" />
-  <Timer in="sfTaken" out="sfShow" wait="250" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="67.77777777777779" r="1.875" angle="427.5" />
-  <Goody shape="bspMissile" start="sfShow" out="sfTaken" missiles="4" y="2" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="67.77777777777779" r="1.875" angle="427.5" />
+  <And in="@start" out="sfShow" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="67.77777777777779" r="1.875" angle="67.5" />
+  <Timer in="sfTaken" out="sfShow" wait="250" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="67.77777777777779" r="1.875" angle="67.5" />
+  <Goody shape="bspMissile" start="sfShow" out="sfTaken" missiles="4" y="2" fill="#02abea" frame="#000000" cx="122.77777777777779" cz="67.77777777777779" r="1.875" angle="67.5" />
   <unique vars="sfShow sfTaken" />
-  <And in="@start" out="sfShow" fill="#02abea" frame="#000000" cx="99.65277777777779" cz="44.65277777777778" r="1.875" angle="382.5" />
-  <Timer in="sfTaken" out="sfShow" wait="250" fill="#02abea" frame="#000000" cx="99.65277777777779" cz="44.65277777777778" r="1.875" angle="382.5" />
-  <Goody shape="bspMissile" start="sfShow" out="sfTaken" missiles="4" y="2" fill="#02abea" frame="#000000" cx="99.65277777777779" cz="44.65277777777778" r="1.875" angle="382.5" />
+  <And in="@start" out="sfShow" fill="#02abea" frame="#000000" cx="99.65277777777779" cz="44.65277777777778" r="1.875" angle="22.5" />
+  <Timer in="sfTaken" out="sfShow" wait="250" fill="#02abea" frame="#000000" cx="99.65277777777779" cz="44.65277777777778" r="1.875" angle="22.5" />
+  <Goody shape="bspMissile" start="sfShow" out="sfTaken" missiles="4" y="2" fill="#02abea" frame="#000000" cx="99.65277777777779" cz="44.65277777777778" r="1.875" angle="22.5" />
   <unique vars="sfShow sfTaken" />
   <And in="@start" out="sfShow" fill="#02abea" frame="#000000" cx="67.15277777777779" cz="44.65277777777778" r="1.875" angle="337.5" />
   <Timer in="sfTaken" out="sfShow" wait="250" fill="#02abea" frame="#000000" cx="67.15277777777779" cz="44.65277777777778" r="1.875" angle="337.5" />

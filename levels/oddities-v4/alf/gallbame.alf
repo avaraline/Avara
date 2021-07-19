@@ -88,25 +88,25 @@ Blue team wins!" fill="#99ccff" frame="#00ee00" cx="2.1875" cz="1.52777777777777
   <Incarnator mask="TA" fill="#99ccff" frame="#000000" cx="82.15277777777779" cz="27.083333333333336" r="2.5" angle="45" />
   <Incarnator mask="TA" fill="#99ccff" frame="#000000" cx="82.15277777777779" cz="47.083333333333336" r="2.5" angle="135" />
   <unique vars="mTaken mReset mWrong" />
-  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="25.833333333333336" r="0.625" angle="405" />
-  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="25.833333333333336" r="0.625" angle="405" />
-  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TB" enter="mWrong" exit="mReset" fill="#0099ff" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" r="0.625" cx="34.65277777777778" cz="25.833333333333336" angle="405" />
-  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="25.833333333333336" r="0.625" angle="405" />
+  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="25.833333333333336" r="0.625" angle="45" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="25.833333333333336" r="0.625" angle="45" />
+  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TB" enter="mWrong" exit="mReset" fill="#0099ff" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" r="0.625" cx="34.65277777777778" cz="25.833333333333336" angle="45" />
+  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="25.833333333333336" r="0.625" angle="45" />
   <unique vars="mTaken mReset mWrong" />
-  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="48.333333333333336" r="0.625" angle="405" />
-  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="48.333333333333336" r="0.625" angle="405" />
-  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TB" enter="mWrong" exit="mReset" fill="#0099ff" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" r="0.625" cx="34.65277777777778" cz="48.333333333333336" angle="405" />
-  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="48.333333333333336" r="0.625" angle="405" />
+  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="48.333333333333336" r="0.625" angle="45" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="48.333333333333336" r="0.625" angle="45" />
+  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TB" enter="mWrong" exit="mReset" fill="#0099ff" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" r="0.625" cx="34.65277777777778" cz="48.333333333333336" angle="45" />
+  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="48.333333333333336" r="0.625" angle="45" />
   <unique vars="mTaken mReset mWrong" />
-  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#008800" frame="#777777" cx="79.65277777777779" cz="48.333333333333336" r="0.625" angle="405" />
-  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" fill="#008800" frame="#777777" cx="79.65277777777779" cz="48.333333333333336" r="0.625" angle="405" />
-  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TA" enter="mWrong" exit="mReset" fill="#008800" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" r="0.625" cx="79.65277777777779" cz="48.333333333333336" angle="405" />
-  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" fill="#008800" frame="#777777" cx="79.65277777777779" cz="48.333333333333336" r="0.625" angle="405" />
+  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#008800" frame="#777777" cx="79.65277777777779" cz="48.333333333333336" r="0.625" angle="45" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" fill="#008800" frame="#777777" cx="79.65277777777779" cz="48.333333333333336" r="0.625" angle="45" />
+  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TA" enter="mWrong" exit="mReset" fill="#008800" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" r="0.625" cx="79.65277777777779" cz="48.333333333333336" angle="45" />
+  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" fill="#008800" frame="#777777" cx="79.65277777777779" cz="48.333333333333336" r="0.625" angle="45" />
   <unique vars="mTaken mReset mWrong" />
-  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#008800" frame="#777777" cx="79.65277777777779" cz="25.833333333333336" r="0.625" angle="405" />
-  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" fill="#008800" frame="#777777" cx="79.65277777777779" cz="25.833333333333336" r="0.625" angle="405" />
-  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TA" enter="mWrong" exit="mReset" fill="#008800" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" r="0.625" cx="79.65277777777779" cz="25.833333333333336" angle="405" />
-  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" fill="#008800" frame="#777777" cx="79.65277777777779" cz="25.833333333333336" r="0.625" angle="405" />
+  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#008800" frame="#777777" cx="79.65277777777779" cz="25.833333333333336" r="0.625" angle="45" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" fill="#008800" frame="#777777" cx="79.65277777777779" cz="25.833333333333336" r="0.625" angle="45" />
+  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TA" enter="mWrong" exit="mReset" fill="#008800" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" r="0.625" cx="79.65277777777779" cz="25.833333333333336" angle="45" />
+  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" fill="#008800" frame="#777777" cx="79.65277777777779" cz="25.833333333333336" r="0.625" angle="45" />
   <unique vars="mTaken mReset" />
   <Goody shape="bspGoody" grenades="10" missiles="20" boosters="10" start="mReset" out="mTaken" y="3" speed="15" fill="#555555" frame="#eeeeee" cx="57.22222222222222" cz="37.15277777777778" r="2.5" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="15 * 2" fill="#555555" frame="#eeeeee" cx="57.22222222222222" cz="37.15277777777778" r="2.5" angle="135" />

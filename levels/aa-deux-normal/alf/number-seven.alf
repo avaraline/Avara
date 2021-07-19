@@ -106,9 +106,9 @@ Have I begun repeating myself yet?" light.0.i="0.8" light.0.a="20" light.0.b="10
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="98.68055555555556" cz="128.95833333333334" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="98.68055555555556" cz="128.95833333333334" r="1.25" angle="225" />
   <Goody shape="bspAvaraA" y="3" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" yon="60" fill="#ffffff" frame="#000000" cx="98.68055555555556" cz="128.95833333333334" r="1.25" angle="225" />
-  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="133.99305555555557" cz="123.64583333333334" r="0.9375" angle="450" />
+  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="133.99305555555557" cz="123.64583333333334" r="0.9375" angle="90" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="93.50694444444444" cz="93.71527777777779" r="0.9375" angle="0" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="104.2013888888889" cz="163.99305555555557" r="0.9375" angle="180" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="81.07638888888889" cz="146.77083333333334" r="0.9375" angle="225" />
-  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="116.7013888888889" cz="111.14583333333334" r="0.9375" angle="405" />
+  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="116.7013888888889" cz="111.14583333333334" r="0.9375" angle="45" />
 </map>

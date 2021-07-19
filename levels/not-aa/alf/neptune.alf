@@ -157,11 +157,11 @@ combined total of 100 seconds to win." kTeamScore1="100" kInfinity="10000" kTele
   <And in="@start" out="rShow" fill="#ffff00" frame="#aa0000" cx="81.77083333333334" cz="76.42361111111111" r="0.9375" angle="0" />
   <Timer in="rTaken" out="rShow" wait="1" fill="#ffff00" frame="#aa0000" cx="81.77083333333334" cz="76.42361111111111" r="0.9375" angle="0" />
   <Goody shape="bspAvaraA" speed="5" y="84" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#ffff00" frame="#aa0000" cx="81.77083333333334" cz="76.42361111111111" r="0.9375" angle="0" />
-  <Incarnator y="85" fill="#ffff00" frame="#aa0000" cx="176.14583333333334" cz="104.54861111111111" r="0.9375" angle="450" />
+  <Incarnator y="85" fill="#ffff00" frame="#aa0000" cx="176.14583333333334" cz="104.54861111111111" r="0.9375" angle="90" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#ffff00" frame="#aa0000" cx="176.14583333333334" cz="104.54861111111111" r="0.9375" angle="450" />
-  <Timer in="rTaken" out="rShow" wait="1" fill="#ffff00" frame="#aa0000" cx="176.14583333333334" cz="104.54861111111111" r="0.9375" angle="450" />
-  <Goody shape="bspAvaraA" speed="5" y="84" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#ffff00" frame="#aa0000" cx="176.14583333333334" cz="104.54861111111111" r="0.9375" angle="450" />
+  <And in="@start" out="rShow" fill="#ffff00" frame="#aa0000" cx="176.14583333333334" cz="104.54861111111111" r="0.9375" angle="90" />
+  <Timer in="rTaken" out="rShow" wait="1" fill="#ffff00" frame="#aa0000" cx="176.14583333333334" cz="104.54861111111111" r="0.9375" angle="90" />
+  <Goody shape="bspAvaraA" speed="5" y="84" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#ffff00" frame="#aa0000" cx="176.14583333333334" cz="104.54861111111111" r="0.9375" angle="90" />
   <Incarnator y="85" fill="#ffff00" frame="#aa0000" cx="81.14583333333334" cz="133.29861111111111" r="0.9375" angle="180" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" fill="#ffff00" frame="#aa0000" cx="81.14583333333334" cz="133.29861111111111" r="0.9375" angle="180" />

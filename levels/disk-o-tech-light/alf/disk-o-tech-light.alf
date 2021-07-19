@@ -9,9 +9,9 @@ load up on ammo, then go hide in the disco balls! :)" wallHeight="0" baseHeight=
   <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="315" />
   <And in="@start" out="gReplace" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="315" />
   <unique vars="gTaken gReplace" />
-  <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="405" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="405" />
-  <And in="@start" out="gReplace" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="405" />
+  <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="45" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="45" />
+  <And in="@start" out="gReplace" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="45" />
   <unique vars="gTaken gReplace" />
   <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="225" />
   <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="225" />
@@ -30,10 +30,10 @@ load up on ammo, then go hide in the disco balls! :)" wallHeight="0" baseHeight=
   <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="55.55555555555556" cz="39.02777777777778" r="2.5" angle="337" />
   <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="55.55555555555556" cz="79.09722222222223" r="2.5" angle="157" />
   <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="35.55555555555556" cz="59.02777777777778" r="2.5" angle="247" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="75.55555555555556" cz="59.02777777777778" r="2.5" angle="427" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="75.55555555555556" cz="59.02777777777778" r="2.5" angle="67" />
   <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="84.02777777777779" r="2.5" angle="247" />
   <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="80.55555555555556" cz="84.09722222222223" r="2.5" angle="157" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="80.55555555555556" cz="34.02777777777778" r="2.5" angle="427" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="80.55555555555556" cz="34.02777777777778" r="2.5" angle="67" />
   <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="34.02777777777778" r="2.5" angle="337" />
   <Sound sound="snFreefall" start="@music" stop="outaSwitch" isPlaced="false" isAmbient="false" isMusic="true" volume="30" loopCount="-1" restart="false" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="34.02777777777778" r="2.5" angle="337" />
   <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="220" />

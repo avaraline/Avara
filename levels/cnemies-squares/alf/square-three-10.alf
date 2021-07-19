@@ -58,16 +58,16 @@ consequences." />
   <Wall fill="#444444" frame="#000000" x="117.77777777777779" z="52.777777777777786" w="2.5" d="72.5" h="12.5" />
   <Wall fill="#444444" frame="#000000" x="82.77777777777779" z="17.77777777777778" w="67.5" d="2.5" h="12.5" />
   <Wall fill="#444444" frame="#000000" x="81.52777777777779" z="87.77777777777779" w="70" d="2.5" h="12.5" />
-  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="102.3263888888889" cz="32.8125" r="0.9375" angle="450" />
+  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="102.3263888888889" cz="32.8125" r="0.9375" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="102.98611111111111" cz="32.361111111111114" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="102.98611111111111" cz="32.361111111111114" r="1.25" angle="225" />
   <Goody shape="bspGrenade" y="5" speed="2" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="102.98611111111111" cz="32.361111111111114" r="1.25" angle="225" />
-  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="102.3263888888889" cz="72.8125" r="0.9375" angle="450" />
+  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="102.3263888888889" cz="72.8125" r="0.9375" angle="90" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="102.6388888888889" cz="72.56944444444444" r="1.25" angle="225" />
   <Timer in="gTaken" out="gShow" wait="100" fill="#ffffff" frame="#000000" cx="102.6388888888889" cz="72.56944444444444" r="1.25" angle="225" />
   <Goody shape="bspMissile" speed="2" yon="20" y="5" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="102.6388888888889" cz="72.56944444444444" r="1.25" angle="225" />
   <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="71.35416666666667" cz="52.8125" r="0.9375" angle="270" />
-  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="92.3263888888889" cz="52.8125" r="0.9375" angle="450" />
+  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="92.3263888888889" cz="52.8125" r="0.9375" angle="90" />
 </map>

@@ -109,12 +109,12 @@ Using osmium tetroxide in pyridine, followed by treatment with sodium sulfate, a
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="104.30555555555556" cz="134.58333333333334" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="104.30555555555556" cz="134.58333333333334" r="1.25" angle="225" />
   <Goody shape="bspMissile" y="4.25" speed="2" missiles="3" start="mShow" out="mTaken" yon="60" fill="#ffffff" frame="#000000" cx="104.30555555555556" cz="134.58333333333334" r="1.25" angle="225" />
-  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="105.03472222222223" cz="84.34027777777779" r="0.9375" angle="450" />
+  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="105.03472222222223" cz="84.34027777777779" r="0.9375" angle="90" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="24.0625" cz="114.34027777777779" r="0.9375" angle="270" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="54.40972222222222" cz="64.40972222222223" r="0.9375" angle="0" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="84.6875" cz="134.0625" r="0.9375" angle="180" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="54.47916666666667" cz="134.6875" r="0.9375" angle="180" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="85.10416666666667" cz="64.34027777777779" r="0.9375" angle="0" />
-  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="104.89583333333334" cz="114.34027777777779" r="0.9375" angle="450" />
+  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="104.89583333333334" cz="114.34027777777779" r="0.9375" angle="90" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="29.54861111111111" cz="84.34027777777779" r="0.9375" angle="270" />
 </map>

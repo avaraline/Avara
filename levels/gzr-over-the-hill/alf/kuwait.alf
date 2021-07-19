@@ -12,11 +12,11 @@
   <Timer in="mSwitch" out="mShow2" wait="missDelay" fill="#ff0000" frame="#ffff00" cx="78.68055555555556" cz="72.70833333333334" r="1.25" angle="180" />
   <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff0000" frame="#ffff00" cx="78.68055555555556" cz="72.70833333333334" r="1.25" angle="180" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="480" />
-  <Timer in="mTaken1" out="mShow1" wait="grenDelay" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="480" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="480" />
-  <Timer in="mSwitch" out="mShow2" wait="missDelay" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="480" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="480" />
+  <And in="@start" out="mShow2" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="120" />
+  <Timer in="mTaken1" out="mShow1" wait="grenDelay" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="120" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="120" />
+  <Timer in="mSwitch" out="mShow2" wait="missDelay" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="120" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#dd0000" frame="#ffff00" cx="90.55555555555556" cz="65.97222222222223" r="1.25" angle="120" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" fill="#ff0000" frame="#ffff00" cx="66.18055555555556" cz="65.55555555555556" r="1.25" angle="240" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" fill="#ff0000" frame="#ffff00" cx="66.18055555555556" cz="65.55555555555556" r="1.25" angle="240" />
@@ -30,11 +30,11 @@
   <Timer in="mSwitch" out="mShow2" wait="missDelay" fill="#ff0000" frame="#ffff00" cx="66.11111111111111" cz="51.875" r="1.25" angle="300" />
   <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff0000" frame="#ffff00" cx="66.11111111111111" cz="51.875" r="1.25" angle="300" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="420" />
-  <Timer in="mTaken1" out="mShow1" wait="grenDelay" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="420" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="420" />
-  <Timer in="mSwitch" out="mShow2" wait="missDelay" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="420" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="420" />
+  <And in="@start" out="mShow2" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="60" />
+  <Timer in="mTaken1" out="mShow1" wait="grenDelay" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="60" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="60" />
+  <Timer in="mSwitch" out="mShow2" wait="missDelay" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="60" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff0000" frame="#ffff33" cx="90.55555555555556" cz="51.31944444444445" r="1.25" angle="60" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" fill="#ff0000" frame="#ffff33" cx="78.68055555555556" cz="44.583333333333336" r="1.25" angle="0" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" fill="#ff0000" frame="#ffff33" cx="78.68055555555556" cz="44.583333333333336" r="1.25" angle="0" />
@@ -156,7 +156,7 @@ go!" fill="#ff0000" frame="#000000" cx="12.5" cz="397.36111111111114" r="2.56944
   <Walker lives="kDefaultLives" team="6" y="startY" fill="#ffff33" frame="#000000" cx="111.35416666666667" cz="67.46527777777777" r="2.3263888888888857" angle="125" />
   <Walker lives="kDefaultLives" team="6" y="startY" fill="#ffff33" frame="#000000" cx="99.47916666666667" cz="82.95138888888889" r="2.3263888888888857" angle="135" />
   <Walker lives="kDefaultLives" team="6" y="startY" fill="#ffff33" frame="#000000" cx="106.77083333333334" cz="75.3125" r="2.326388888888893" angle="135" />
-  <Walker lives="kDefaultLives" team="2" y="startY" fill="#ffff33" frame="#000000" cx="88.75" cz="25.97222222222222" r="3.263888888888893" angle="370" />
+  <Walker lives="kDefaultLives" team="2" y="startY" fill="#ffff33" frame="#000000" cx="88.75" cz="25.97222222222222" r="3.263888888888893" angle="10" />
   <Walker lives="kDefaultLives" team="2" y="startY" fill="#ffff33" frame="#000000" cx="78.75" cz="25.069444444444446" r="3.2638888888888857" angle="0" />
   <Walker lives="kDefaultLives" team="2" y="startY" fill="#ffff33" frame="#000000" cx="68.75" cz="25.97222222222222" r="3.2638888888888857" angle="350" />
 </map>

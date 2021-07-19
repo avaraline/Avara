@@ -10,9 +10,9 @@ A barrel of laughs and suspense for net play." normalWallHeight="1.5" wallHeight
   <Teleporter yon="0.01" y="-20" win="500" start="@winTeam" activeRange="2000" fill="#ffff00" frame="#ff9966" cx="2.291666666666667" cz="2.291666666666667" r="1.875" angle="315" />
   <set gp="10" gs="0.2" ge="1.5" timeLimit="0" />
   <Incarnator stop="@start" y="10" fill="#ffff00" frame="#aa0000" cx="69.16666666666667" cz="156.66666666666669" r="1.875" angle="270" />
-  <Incarnator stop="@start" y="10" fill="#ffff00" frame="#aa0000" cx="108.61111111111111" cz="156.66666666666669" r="1.875" angle="450" />
+  <Incarnator stop="@start" y="10" fill="#ffff00" frame="#aa0000" cx="108.61111111111111" cz="156.66666666666669" r="1.875" angle="90" />
   <Incarnator stop="@start" y="10" fill="#ffff00" frame="#aa0000" cx="69.16666666666667" cz="36.66666666666667" r="1.875" angle="270" />
-  <Incarnator stop="@start" y="10" fill="#ffff00" frame="#aa0000" cx="108.61111111111111" cz="36.66666666666667" r="1.875" angle="450" />
+  <Incarnator stop="@start" y="10" fill="#ffff00" frame="#aa0000" cx="108.61111111111111" cz="36.66666666666667" r="1.875" angle="90" />
   <Incarnator y="10" fill="#ffff00" frame="#aa0000" cx="90.41666666666667" cz="95.41666666666667" r="1.875" angle="135" />
   <Incarnator y="10" fill="#ffff00" frame="#aa0000" cx="85.48611111111111" cz="95.41666666666667" r="1.875" angle="225" />
   <GroundColor fill="#66ff66" frame="#ffffcc" />

@@ -72,7 +72,7 @@ Oh!  To sail the frigid white-blue!" ambient.i="0.4" light.0.i="0.9" light.0.a="
   <And in="@start" out="mTaken" fill="#ffffff" frame="#000000" cx="88.95833333333334" cz="133.33333333333334" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="400" fill="#ffffff" frame="#000000" cx="88.95833333333334" cz="133.33333333333334" r="1.25" angle="225" />
   <Goody shape="bspMissile" y="9.75" speed="2" missiles="3" start="mShow" out="mTaken" yon="40" fill="#ffffff" frame="#000000" cx="88.95833333333334" cz="133.33333333333334" r="1.25" angle="225" />
-  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="146.21527777777777" cz="36.21527777777778" r="0.9375" angle="405" />
+  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="146.21527777777777" cz="36.21527777777778" r="0.9375" angle="45" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="31.21527777777778" cz="151.21527777777777" r="0.9375" angle="225" />
   <Ramp y="4" thickness="0" deltaY="4" fill="#516bbb" frame="#000000" x="141.45833333333334" z="93.33333333333334" w="15" d="20" h="0" r="13.99305555555555" angle="180" />
   <Wall fill="#0c2677" frame="#000000" x="36.458333333333336" z="40.833333333333336" w="15" d="15" h="3" />

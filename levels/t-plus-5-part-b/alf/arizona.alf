@@ -50,7 +50,7 @@
   <Goody shape="bspGrenade" speed="2" yon="9999" y="7" grenades="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="51.66666666666667" cz="103.68055555555556" r="1.25" angle="225" />
   <Solid shape="bspHullLight" shield="2" y="0.125" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#ffff00" frame="#ffff00" cx="82.15277777777779" cz="83.47222222222223" r="1.875" angle="270" />
   <Solid shape="bspHECTORLegLow" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#ffff00" frame="#ffff00" cx="72.84722222222223" cz="80.06944444444444" r="1.25" angle="345" />
-  <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#0099ff" frame="#0099ff" cx="114.30555555555556" cz="55.486111111111114" r="1.25" angle="404" />
+  <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#0099ff" frame="#0099ff" cx="114.30555555555556" cz="55.486111111111114" r="1.25" angle="44" />
   <Solid shape="bspHullMedium" shield="4" isTarget="true" canGlow="true" hitScore="10" destructScore="100" y="0.25" hitSound="snShieldHit2" fill="#008800" frame="#008800" cx="81.18055555555556" cz="51.04166666666667" r="1.875" angle="90" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="47.361111111111114" cz="56.458333333333336" r="1.25" angle="225" />
@@ -79,7 +79,7 @@
   <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="23 * 5" destGroup="@center" shape="0" fill="#000000" frame="#000000" cx="82.91666666666667" cz="64.58333333333334" r="5.138888888888889" angle="315" />
   <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="50.3125" cz="98.02083333333334" r="0.9375" angle="237" />
   <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="112.9513888888889" cz="36.145833333333336" r="0.9375" angle="335" />
-  <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="125.79861111111111" cz="80.9375" r="0.9375" angle="494" />
+  <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="125.79861111111111" cz="80.9375" r="0.9375" angle="134" />
   <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="54.0625" cz="41.145833333333336" r="0.9375" angle="315" />
   <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="101.35416666666667" cz="108.78472222222223" r="0.9375" angle="135" />
   <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="28.92361111111111" cz="71.35416666666667" r="0.9375" angle="270" />
@@ -89,7 +89,7 @@
   <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#ff0099" frame="#ff0099" cx="110.97222222222223" cz="69.58333333333334" r="1.25" angle="245" />
   <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#ff0099" frame="#ff0099" cx="109.58333333333334" cz="74.79166666666667" r="1.25" angle="345" />
   <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#ff0099" frame="#ff0099" cx="104.23611111111111" cz="66.31944444444444" r="1.25" angle="46" />
-  <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#008800" frame="#008800" cx="83.95833333333334" cz="46.94444444444445" r="1.25" angle="404" />
+  <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#008800" frame="#008800" cx="83.95833333333334" cz="46.94444444444445" r="1.25" angle="44" />
   <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#008800" frame="#008800" cx="90" cz="50.13888888888889" r="1.25" angle="210" />
   <Solid shape="bspHECTORLegLow" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#008800" frame="#008800" cx="78.47222222222223" cz="49.09722222222222" r="1.25" angle="290" />
   <Solid shape="bspHECTORLegHigh" shield="2" roll="90" isTarget="true" canGlow="true" hitScore="10" destructScore="100" hitSound="snShieldHit2" fill="#dd0000" frame="#dd0000" cx="63.402777777777786" cz="67.15277777777779" r="1.25" angle="69" />

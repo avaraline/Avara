@@ -49,7 +49,7 @@ win for Yellow." />
   <Wall fill="#bbbbbb" frame="#000000" x="57.5" z="87.43055555555556" w="6.25" d="6.25" h="3" />
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="86.25" z="75.86805555555556" w="6.25" d="16.875" h="0" r="2.5" angle="270.5" />
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="71.875" z="64.30555555555556" w="22.5" d="6.25" h="0" r="1.875" angle="180" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="71.875" z="87.43055555555556" w="22.5" d="6.25" h="0" r="1.875" angle="360.5" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="71.875" z="87.43055555555556" w="22.5" d="6.25" h="0" r="1.875" angle="0.5" />
   <Ramp deltaY="3" fill="#888888" frame="#000000" x="57.5" z="75.86805555555556" w="6.25" d="16.875" h="0" r="2.5" angle="90" />
   <Wall fill="#1c3838" frame="#000000" x="56.5625" z="122.74305555555556" w="15.625" d="0.625" h="6.25" />
   <Wall fill="#1c3838" frame="#000000" x="87.1875" z="122.74305555555556" w="15.625" d="0.625" h="6.25" />
@@ -125,22 +125,22 @@ win for Yellow." />
   <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="86.38888888888889" cz="63.68055555555556" r="5" angle="181" />
   <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="86.38888888888889" cz="63.68055555555556" r="5" angle="181" />
   <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="86.38888888888889" cz="63.68055555555556" r="5" angle="181" />
-  <Incarnator mask="T2" start="@incarn" y="300" fill="#ffff00" frame="#000000" cx="86.45833333333334" cz="88.125" r="5" angle="364" />
+  <Incarnator mask="T2" start="@incarn" y="300" fill="#ffff00" frame="#000000" cx="86.45833333333334" cz="88.125" r="5" angle="4" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="86.45833333333334" cz="88.125" r="5" angle="364" />
-  <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="86.45833333333334" cz="88.125" r="5" angle="364" />
-  <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="86.45833333333334" cz="88.125" r="5" angle="364" />
+  <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="86.45833333333334" cz="88.125" r="5" angle="4" />
+  <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="86.45833333333334" cz="88.125" r="5" angle="4" />
+  <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="86.45833333333334" cz="88.125" r="5" angle="4" />
   <Incarnator mask="T2" start="@incarn" y="300" fill="#ffff00" frame="#000000" cx="57.63888888888889" cz="63.68055555555556" r="5" angle="181" />
   <Walker team="2" y="10" fill="#ffff00" frame="#000000" cx="57.63888888888889" cz="63.68055555555556" r="5" angle="181" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="57.63888888888889" cz="63.68055555555556" r="5" angle="181" />
   <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="57.63888888888889" cz="63.68055555555556" r="5" angle="181" />
   <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="57.63888888888889" cz="63.68055555555556" r="5" angle="181" />
-  <Incarnator mask="T2" start="@incarn" y="300" fill="#ffff00" frame="#000000" cx="57.708333333333336" cz="88.125" r="5" angle="364" />
+  <Incarnator mask="T2" start="@incarn" y="300" fill="#ffff00" frame="#000000" cx="57.708333333333336" cz="88.125" r="5" angle="4" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="57.708333333333336" cz="88.125" r="5" angle="364" />
-  <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="57.708333333333336" cz="88.125" r="5" angle="364" />
-  <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="57.708333333333336" cz="88.125" r="5" angle="364" />
+  <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="57.708333333333336" cz="88.125" r="5" angle="4" />
+  <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="57.708333333333336" cz="88.125" r="5" angle="4" />
+  <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="57.708333333333336" cz="88.125" r="5" angle="4" />
   <Guard isTarget="false" mask="T2" team="1" y="15" yon="1" speed="1.5" shotPower="3" freq="45" start="@startguard2" shield="-1" fill="#7f0000" frame="#000000" cx="99.82638888888889" cz="101.45833333333334" r="2.048611111111107" angle="135" />
   <Guard isTarget="false" mask="T2" team="1" y="15" yon="1" speed="1.5" shotPower="3" freq="45" start="@start" shield="-1" fill="#7f0000" frame="#000000" cx="40.451388888888886" cz="47.083333333333336" r="2.0486111111111107" angle="135" />
   <Timer wait="15" in="@start" out="@incarn" fill="#ffffff" frame="#000000" cx="101.00694444444446" cz="158.54166666666669" r="3.8541666666666643" angle="315" />

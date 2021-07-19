@@ -41,7 +41,7 @@
   <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="195.55555555555557" z="158.54166666666669" w="10" d="10" h="0" r="2.5" angle="0" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="170.55555555555557" cz="248.54166666666669" r="2.5" angle="225" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="220.55555555555557" cz="248.54166666666669" r="2.5" angle="135" />
-  <Incarnator y="20" fill="#ffffff" frame="#000000" cx="220.55555555555557" cz="198.54166666666669" r="2.5" angle="405" />
+  <Incarnator y="20" fill="#ffffff" frame="#000000" cx="220.55555555555557" cz="198.54166666666669" r="2.5" angle="45" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="170.55555555555557" cz="198.54166666666669" r="2.5" angle="315" />
   <Teleporter yon="teleYon" group="@northGroup" destGroup="@southGroup" y="hLev5 -baseHeight" fill="#bb0000" frame="#000000" cx="195.55555555555557" cz="102.29166666666667" r="2.5" angle="225" />
   <Teleporter yon="teleYon" y="-baseHeight" group="-1" destGroup="@northGroup" fill="#bb0000" frame="#000000" cx="195.55555555555557" cz="102.29166666666667" r="2.5" angle="225" />

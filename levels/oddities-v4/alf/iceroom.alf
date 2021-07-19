@@ -230,8 +230,8 @@ The red goody is worth getting." />
   <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" r="2.5" cx="82.5" cz="41.875" angle="0" />
   <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" r="2.5" cx="82.5" cz="41.875" angle="0" />
   <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" r="2.5" cx="82.5" cz="41.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" fill="#008800" frame="#000000" cx="72.5" cz="31.875" r="2.5" angle="405" />
-  <Incarnator y="IceVSpace * 2 + 3" fill="#008800" frame="#000000" cx="82.5" cz="21.875" r="2.5" angle="405" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" fill="#008800" frame="#000000" cx="72.5" cz="31.875" r="2.5" angle="45" />
+  <Incarnator y="IceVSpace * 2 + 3" fill="#008800" frame="#000000" cx="82.5" cz="21.875" r="2.5" angle="45" />
   <set baseHeight="IceVSpace * 4" />
   <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" r="2.5" cx="22.5" cz="21.875" angle="0" />
   <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" r="2.5" cx="22.5" cz="21.875" angle="0" />
@@ -319,8 +319,8 @@ The red goody is worth getting." />
   <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" r="2.5" cx="82.5" cz="41.875" angle="0" />
   <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" r="2.5" cx="82.5" cz="41.875" angle="0" />
   <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" r="2.5" cx="82.5" cz="41.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" fill="#008800" frame="#000000" cx="72.5" cz="31.875" r="2.5" angle="405" />
-  <Incarnator y="IceVSpace * 2 + 3" fill="#008800" frame="#000000" cx="82.5" cz="21.875" r="2.5" angle="405" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" fill="#008800" frame="#000000" cx="72.5" cz="31.875" r="2.5" angle="45" />
+  <Incarnator y="IceVSpace * 2 + 3" fill="#008800" frame="#000000" cx="82.5" cz="21.875" r="2.5" angle="45" />
   <set baseHeight="0" />
   <Txeleporter y="-6" activeRange="2000" deadRange="80" group="-1" destGroup="@Center" yon="0.01" fill="#99ffff" frame="#ff0000" cx="52.5" cz="51.875" r="2.5" angle="315" />
   <Teleporter y="RoomHeight + 5" activeRange="2000" deadRange="75" group="-1" destGroup="@Center" yon="0.01" fill="#99ffff" frame="#ff0000" cx="52.5" cz="51.875" r="2.5" angle="315" />

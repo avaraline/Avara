@@ -538,7 +538,7 @@ wallHeight = 0.6" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="1000" fill="#777777" frame="#000000" cx="56.66666666666667" cz="78.26388888888889" r="1.3888888888888928" angle="270" />
   <Sound y="2" sound="snBubbles" isAmbient="true" loopCount="-1" volume="12" fill="#777777" frame="#000000" cx="56.66666666666667" cz="78.26388888888889" r="1.3888888888888928" angle="270" />
   <Teleporter y="15" shape="0" group="@side" fill="#006666" frame="#000000" cx="4.479166666666667" cz="95.20833333333334" r="3.854166666666667" angle="270" />
-  <Teleporter y="15" shape="0" group="@side" fill="#006666" frame="#000000" cx="107.04861111111111" cz="67.70833333333334" r="3.8541666666666714" angle="450" />
+  <Teleporter y="15" shape="0" group="@side" fill="#006666" frame="#000000" cx="107.04861111111111" cz="67.70833333333334" r="3.8541666666666714" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#66cccc" frame="#009999" cx="56.388888888888886" cz="78.33333333333334" r="3.8888888888888893" angle="270" />
   <Timer in="mTaken" out="mShow" wait="600" fill="#66cccc" frame="#009999" cx="56.388888888888886" cz="78.33333333333334" r="3.8888888888888893" angle="270" />

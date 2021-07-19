@@ -75,10 +75,10 @@ Standing on the yellow platforms" />
   <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="65.3125" cz="69.72222222222223" r="2.5" angle="315" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="65.3125" cz="69.72222222222223" r="2.5" angle="315" />
   <Goody shape="bspMissile" y="10" speed="2" missiles="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="65.3125" cz="69.72222222222223" r="2.5" angle="315" />
-  <Incarnator y="8" fill="#ffcc00" frame="#ffcc00" cx="27.22222222222222" cz="54.895833333333336" r="1.3888888888888875" angle="361.5" />
+  <Incarnator y="8" fill="#ffcc00" frame="#ffcc00" cx="27.22222222222222" cz="54.895833333333336" r="1.3888888888888875" angle="1.5" />
   <Incarnator fill="#ffcc00" frame="#ffcc00" cx="80.90277777777777" cz="111.45833333333334" r="1.3888888888888928" angle="178.5" />
   <Incarnator fill="#ffcc00" frame="#ffcc00" cx="11.666666666666668" cz="136.73611111111114" r="1.3888888888888884" angle="178.5" />
-  <Incarnator fill="#ffcc00" frame="#ffcc00" cx="77.77777777777777" cz="27.1875" r="1.3888888888888928" angle="361.5" />
+  <Incarnator fill="#ffcc00" frame="#ffcc00" cx="77.77777777777777" cz="27.1875" r="1.3888888888888928" angle="1.5" />
   <Ramp y="7.75" deltaY="2.25" fill="#0000dd" frame="#000000" x="15.555555555555557" z="42.11805555555556" w="5" d="16.875" h="0.25" r="1.4930555555555554" angle="180" />
   <Wall fill="#663300" frame="#000000" x="21.805555555555557" z="50.86805555555556" w="5" d="0.625" h="1" y="10" />
   <Wall fill="#bbbbbb" frame="#000000" x="40.55555555555556" z="125.86805555555556" w="11.25" d="0.625" h="4.5" y="3.75" />

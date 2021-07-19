@@ -30,11 +30,9 @@ def postprocess(element: Element) -> Element:
             element.attrs["quarters"] = str(round(element.attrs["extent"] / 90))
             del element.attrs["extent"]
         else:
-            angle = dumb_round(
-                element.attrs["angle"] + (element.attrs["extent"] / 2)
-            )
-            angle = angle if angle != "360" else "0"
-            element.attrs["angle"] = angle
+            angle = element.attrs["angle"] + (element.attrs["extent"] / 2)
+            angle = angle if angle < 360 else angle - 360
+            element.attrs["angle"] = dumb_round(angle)
             del element.attrs["extent"]
     return element
 

@@ -50,7 +50,7 @@ find...release...." ambient.i=".4" light.0.i="0.9" light.0.a="45" light.0.b="20"
   <Goody yon="40" shape="bspGrenade" y="1.75" speed="2" grenades="6" start="sShow" out="sTaken" fill="#070722" frame="#000000" cx="92.70833333333334" cz="65.20833333333334" r="1.25" angle="225" />
   <Timer in="sTaken" out="aShow" wait="200" fill="#070722" frame="#000000" cx="92.70833333333334" cz="65.20833333333334" r="1.25" angle="225" />
   <Goody yon="40" shape="bspMissile" y="1.75" speed="2" missiles="3" start="aShow" out="aTaken" fill="#070722" frame="#000000" cx="92.70833333333334" cz="65.20833333333334" r="1.25" angle="225" />
-  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="135.3125" cz="51.111111111111114" r="0.9375" angle="450" />
+  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="135.3125" cz="51.111111111111114" r="0.9375" angle="90" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="48.71527777777778" cz="81.73611111111111" r="0.9375" angle="270" />
   <Wall fill="#424288" frame="#000000" x="137.70833333333334" z="85.83333333333334" w="10" d="25" h="5" />
   <Ramp y="0" thickness="0" deltaY="5" fill="#131355" frame="#000000" x="97.70833333333334" z="115.83333333333334" w="20" d="15" h="0" r="14.027777777777779" angle="0" />
@@ -90,6 +90,6 @@ find...release...." ambient.i=".4" light.0.i="0.9" light.0.a="45" light.0.b="20"
   <Goody yon="40" shape="bspMissile" y="11.75" speed="2" missiles="3" start="aShow" out="aTaken" fill="#ffffff" frame="#000000" cx="65.20833333333334" cz="80.41666666666667" r="1.875" angle="135" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="72.98611111111111" cz="16.21527777777778" r="0.9375" angle="0" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="112.98611111111111" cz="116.5625" r="0.9375" angle="180" />
-  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="149.0625" cz="66.11111111111111" r="0.9375" angle="450" />
+  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="149.0625" cz="66.11111111111111" r="0.9375" angle="90" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="33.09027777777778" cz="64.86111111111111" r="0.9375" angle="270" />
 </map>

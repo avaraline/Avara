@@ -20,8 +20,8 @@ Collect at least 5 ‘A’ markers along the course and enter the exit teleporte
   <Wall fill="#dddddd" frame="#000000" x="61.458333333333336" z="97.84722222222223" w="2.5" d="2.5" h="0" />
   <Wall fill="#dddddd" frame="#000000" x="86.45833333333334" z="100.34722222222223" w="7.5" d="2.5" h="0" />
   <Wall fill="#dddddd" frame="#000000" x="88.95833333333334" z="97.84722222222223" w="2.5" d="2.5" h="0" />
-  <Ramp y="-baseHeight" thickness="0" deltaY="2.5" fill="#dddddd" frame="#000000" x="63.95833333333334" z="105.38194444444446" w="7.5" d="7.569444444444443" h="0" r="3.784722222222218" angle="362" />
-  <Ramp y="-baseHeight" thickness="0" deltaY="2.5" fill="#dddddd" frame="#000000" x="86.45833333333334" z="105.38194444444446" w="7.5" d="7.569444444444443" h="0" r="3.7152777777777786" angle="362" />
+  <Ramp y="-baseHeight" thickness="0" deltaY="2.5" fill="#dddddd" frame="#000000" x="63.95833333333334" z="105.38194444444446" w="7.5" d="7.569444444444443" h="0" r="3.784722222222218" angle="2" />
+  <Ramp y="-baseHeight" thickness="0" deltaY="2.5" fill="#dddddd" frame="#000000" x="86.45833333333334" z="105.38194444444446" w="7.5" d="7.569444444444443" h="0" r="3.7152777777777786" angle="2" />
   <set towerHeight="7.5" towerStep="towerHeight / 3" wallHeight="0" baseHeight="0" wa="towerStep" />
   <Wall fill="#aaaaaa" frame="#000000" x="98.64583333333334" z="153.15972222222223" w="3.125" d="3.125" h="0" />
   <Ramp y="0" deltaY="towerStep" fill="#aaaaaa" frame="#000000" x="98.64583333333334" z="147.84722222222223" w="3.125" d="7.5" h="0" r="3.7152777777777715" angle="182" />

@@ -167,7 +167,7 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="73.05555555555556" cz="82.70833333333334" r="1.25" angle="225" />
   <Goody shape="bspGrenade" y="10.75" speed="2" grenades="4" start="mShow" out="mTaken" yon="30" fill="#ffffff" frame="#000000" cx="73.05555555555556" cz="82.70833333333334" r="1.25" angle="225" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="89.0625" cz="58.71527777777778" r="0.9375" angle="0" />
-  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="119.40972222222223" cz="98.71527777777779" r="0.9375" angle="450" />
+  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="119.40972222222223" cz="98.71527777777779" r="0.9375" angle="90" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="48.4375" cz="88.71527777777779" r="0.9375" angle="270" />
   <Ramp y="6" thickness="0" deltaY="0" fill="#2d5388" frame="#000000" x="114.30555555555556" z="83.95833333333334" w="10" d="10" h="0" r="14.791666666666664" angle="180" />
   <Timer in="@AThreeTaken" out="@ATwoShow" wait="200" fill="#ffffff" frame="#000000" cx="81.80555555555556" cz="82.08333333333334" r="1.25" angle="225" />

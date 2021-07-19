@@ -101,9 +101,9 @@ If you can read this, you’ve broken the code!" light.0.i="0.8" light.0.a="20" 
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="51.18055555555556" cz="100.83333333333334" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="51.18055555555556" cz="100.83333333333334" r="1.25" angle="225" />
   <Goody shape="bspMissile" y="6.75" speed="2" missiles="2" start="mShow" out="mTaken" yon="60" fill="#ffffff" frame="#000000" cx="51.18055555555556" cz="100.83333333333334" r="1.25" angle="225" />
-  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="123.78472222222223" cz="138.71527777777777" r="0.9375" angle="450" />
+  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="123.78472222222223" cz="138.71527777777777" r="0.9375" angle="90" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="88.50694444444444" cz="88.71527777777779" r="0.9375" angle="0" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="63.576388888888886" cz="163.99305555555557" r="0.9375" angle="180" />
   <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="56.70138888888889" cz="126.14583333333334" r="0.9375" angle="225" />
-  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="97.3263888888889" cz="126.77083333333334" r="0.9375" angle="405" />
+  <Incarnator y="20" fill="#ffff00" frame="#aa0000" cx="97.3263888888889" cz="126.77083333333334" r="0.9375" angle="45" />
 </map>

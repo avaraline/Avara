@@ -27,12 +27,12 @@ See the Read Me." timeLimit="300" defaultLives="100" bsp16wall="2001" bspOctahed
   <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="101.04166666666667" cz="159.16666666666669" r="3.4722222222222143" angle="180" />
   <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="153.19444444444446" cz="106.45833333333334" r="3.4722222222222214" angle="90" />
   <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="153.19444444444446" cz="106.45833333333334" r="3.4722222222222214" angle="90" />
-  <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="149.23611111111111" cz="86.38888888888889" r="3.4722222222222214" angle="428" />
-  <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="149.23611111111111" cz="86.38888888888889" r="3.4722222222222214" angle="428" />
-  <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="137.98611111111111" cz="69.23611111111111" r="3.4722222222222285" angle="405" />
-  <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="137.98611111111111" cz="69.23611111111111" r="3.4722222222222285" angle="405" />
-  <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="121.18055555555556" cz="57.77777777777778" r="3.4722222222222214" angle="383" />
-  <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="121.18055555555556" cz="57.77777777777778" r="3.4722222222222214" angle="383" />
+  <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="149.23611111111111" cz="86.38888888888889" r="3.4722222222222214" angle="68" />
+  <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="149.23611111111111" cz="86.38888888888889" r="3.4722222222222214" angle="68" />
+  <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="137.98611111111111" cz="69.23611111111111" r="3.4722222222222285" angle="45" />
+  <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="137.98611111111111" cz="69.23611111111111" r="3.4722222222222285" angle="45" />
+  <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="121.18055555555556" cz="57.77777777777778" r="3.4722222222222214" angle="23" />
+  <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="121.18055555555556" cz="57.77777777777778" r="3.4722222222222214" angle="23" />
   <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="149.23611111111111" cz="126.52777777777777" r="3.4722222222222214" angle="112" />
   <Solid shape="bspClearWall" fill="#000000" frame="#000000" cx="149.23611111111111" cz="126.52777777777777" r="3.4722222222222214" angle="112" />
   <Solid shape="bsp16wall" fill="#000000" frame="#000000" cx="137.98611111111111" cz="143.68055555555554" r="3.4722222222222143" angle="135" />
@@ -93,13 +93,13 @@ See the Read Me." timeLimit="300" defaultLives="100" bsp16wall="2001" bspOctahed
   <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="123.81944444444446" cz="141.52777777777777" r="3.4722222222222143" angle="150" />
   <Walker team="1" y="10" hitScore="0" killScore="0" fill="#000000" frame="#000000" cx="123.81944444444446" cz="141.52777777777777" r="3.4722222222222143" angle="150" />
   <Incarnator y="10" fill="#000000" frame="#000000" cx="123.81944444444446" cz="141.52777777777777" r="3.4722222222222143" angle="150" />
-  <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="131.25" cz="74.09722222222223" r="3.4722222222222214" angle="390" />
-  <Walker team="3" y="10" hitScore="0" killScore="0" fill="#000000" frame="#000000" cx="131.25" cz="74.09722222222223" r="3.4722222222222214" angle="390" />
-  <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="120.83333333333334" cz="67.01388888888889" r="3.4722222222222214" angle="390" />
-  <Walker team="3" y="10" hitScore="0" killScore="0" fill="#000000" frame="#000000" cx="120.83333333333334" cz="67.01388888888889" r="3.4722222222222214" angle="390" />
-  <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="126.04166666666666" cz="70.55555555555557" r="3.4722222222222214" angle="390" />
-  <Walker team="3" y="10" hitScore="0" killScore="0" fill="#000000" frame="#000000" cx="126.04166666666666" cz="70.55555555555557" r="3.4722222222222214" angle="390" />
-  <Incarnator y="10" fill="#000000" frame="#000000" cx="126.04166666666666" cz="70.55555555555557" r="3.4722222222222214" angle="390" />
+  <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="131.25" cz="74.09722222222223" r="3.4722222222222214" angle="30" />
+  <Walker team="3" y="10" hitScore="0" killScore="0" fill="#000000" frame="#000000" cx="131.25" cz="74.09722222222223" r="3.4722222222222214" angle="30" />
+  <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="120.83333333333334" cz="67.01388888888889" r="3.4722222222222214" angle="30" />
+  <Walker team="3" y="10" hitScore="0" killScore="0" fill="#000000" frame="#000000" cx="120.83333333333334" cz="67.01388888888889" r="3.4722222222222214" angle="30" />
+  <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="126.04166666666666" cz="70.55555555555557" r="3.4722222222222214" angle="30" />
+  <Walker team="3" y="10" hitScore="0" killScore="0" fill="#000000" frame="#000000" cx="126.04166666666666" cz="70.55555555555557" r="3.4722222222222214" angle="30" />
+  <Incarnator y="10" fill="#000000" frame="#000000" cx="126.04166666666666" cz="70.55555555555557" r="3.4722222222222214" angle="30" />
   <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="80.69444444444446" cz="145.06944444444446" r="3.4722222222222285" angle="210" />
   <Walker team="6" y="10" hitScore="0" killScore="0" fill="#000000" frame="#000000" cx="80.69444444444446" cz="145.06944444444446" r="3.4722222222222285" angle="210" />
   <Solid shape="bspSqPlatform" y="10" yon="10" fill="#000000" frame="#000000" cx="70.20833333333334" cz="138.75" r="3.4722222222222285" angle="210" />
@@ -146,8 +146,8 @@ See the Read Me." timeLimit="300" defaultLives="100" bsp16wall="2001" bspOctahed
   <Solid shape="bspCube" fill="#000000" frame="#000000" cx="92.91666666666667" cz="122.15277777777779" r="1.875" angle="202" />
   <Solid shape="bspCube" fill="#000000" frame="#000000" cx="104.375" cz="122.22222222222223" r="1.875" angle="158" />
   <Solid shape="bspCube" fill="#000000" frame="#000000" cx="112.84722222222223" cz="113.47222222222223" r="1.875" angle="112" />
-  <Solid shape="bspCube" fill="#000000" frame="#000000" cx="112.77777777777779" cz="100.27777777777779" r="1.875" angle="428" />
-  <Solid shape="bspCube" fill="#000000" frame="#000000" cx="104.30555555555556" cz="91.80555555555556" r="1.875" angle="382" />
+  <Solid shape="bspCube" fill="#000000" frame="#000000" cx="112.77777777777779" cz="100.27777777777779" r="1.875" angle="68" />
+  <Solid shape="bspCube" fill="#000000" frame="#000000" cx="104.30555555555556" cz="91.80555555555556" r="1.875" angle="22" />
   <Solid shape="bspCube" fill="#000000" frame="#000000" cx="92.84722222222223" cz="91.94444444444444" r="1.875" angle="338" />
   <Solid shape="bspCube" fill="#000000" frame="#000000" cx="83.95833333333334" cz="100.34722222222223" r="1.875" angle="292" />
   <unique vars="mTaken mShow" />
@@ -175,9 +175,9 @@ See the Read Me." timeLimit="300" defaultLives="100" bsp16wall="2001" bspOctahed
   <Timer in="mTaken" wait="200" out="mShow" fill="#000000" frame="#000000" cx="112.84722222222223" cz="106.66666666666667" r="1.875" angle="90" />
   <Goody shape="bspGrenade" grenades="12" y="1.7" yon="10" start="mShow" out="mTaken" fill="#000000" frame="#000000" cx="112.84722222222223" cz="106.66666666666667" r="1.875" angle="90" />
   <unique vars="mTaken mShow" />
-  <And in="@start" out="mShow" fill="#000000" frame="#000000" cx="109.51388888888889" cz="95.55555555555557" r="1.5277777777777786" angle="405" />
-  <Timer in="mTaken" wait="200" out="mShow" fill="#000000" frame="#000000" cx="109.51388888888889" cz="95.55555555555557" r="1.5277777777777786" angle="405" />
-  <Goody shape="bspMissile" missiles="12" y="1.7" yon="10" start="mShow" out="mTaken" fill="#000000" frame="#000000" cx="109.51388888888889" cz="95.55555555555557" r="1.5277777777777786" angle="405" />
+  <And in="@start" out="mShow" fill="#000000" frame="#000000" cx="109.51388888888889" cz="95.55555555555557" r="1.5277777777777786" angle="45" />
+  <Timer in="mTaken" wait="200" out="mShow" fill="#000000" frame="#000000" cx="109.51388888888889" cz="95.55555555555557" r="1.5277777777777786" angle="45" />
+  <Goody shape="bspMissile" missiles="12" y="1.7" yon="10" start="mShow" out="mTaken" fill="#000000" frame="#000000" cx="109.51388888888889" cz="95.55555555555557" r="1.5277777777777786" angle="45" />
   <unique vars="mTaken mShow" />
   <And in="@start" out="mShow" fill="#000000" frame="#000000" cx="87.84722222222223" cz="95.48611111111111" r="1.5277777777777786" angle="315" />
   <Timer in="mTaken" wait="200" out="mShow" fill="#000000" frame="#000000" cx="87.84722222222223" cz="95.48611111111111" r="1.5277777777777786" angle="315" />

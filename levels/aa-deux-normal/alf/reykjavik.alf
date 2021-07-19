@@ -52,7 +52,7 @@ Contrary to popular belief, Iceland is located offshore of sunny California." />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="139.34027777777777" cz="64.34027777777779" r="0.9375" angle="0" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="38.71527777777778" cz="174.34027777777777" r="0.9375" angle="225" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="99.34027777777779" cz="119.96527777777779" r="0.9375" angle="270" />
-  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="79.6875" cz="119.96527777777779" r="0.9375" angle="450" />
+  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="79.6875" cz="119.96527777777779" r="0.9375" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="123.95833333333334" cz="64.58333333333334" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="400" fill="#ffffff" frame="#000000" cx="123.95833333333334" cz="64.58333333333334" r="1.25" angle="225" />

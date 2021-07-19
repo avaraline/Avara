@@ -33,9 +33,9 @@ You’re so unbelievable." light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="89.0625" cz="69.0625" r="0.9375" angle="180" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="88.4375" cz="37.46527777777778" r="0.9375" angle="0" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="60.9375" cz="53.71527777777778" r="0.9375" angle="270" />
-  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="115.03472222222223" cz="53.71527777777778" r="0.9375" angle="450" />
+  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="115.03472222222223" cz="53.71527777777778" r="0.9375" angle="90" />
   <Incarnator y="35" fill="#ffff00" frame="#aa0000" cx="67.8125" cz="53.71527777777778" r="0.9375" angle="270" />
-  <Incarnator y="35" fill="#ffff00" frame="#aa0000" cx="110.03472222222223" cz="53.09027777777778" r="0.9375" angle="450" />
+  <Incarnator y="35" fill="#ffff00" frame="#aa0000" cx="110.03472222222223" cz="53.09027777777778" r="0.9375" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="88.68055555555556" cz="75.20833333333334" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="88.68055555555556" cz="75.20833333333334" r="1.25" angle="225" />

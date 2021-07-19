@@ -30,7 +30,7 @@ theme--really I promise, no more Squares." />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="90.59027777777777" cz="61.111111111111114" r="1.3541666666666643" angle="225" />
   <Timer in="mTaken" out="mShow" wait="100" fill="#ffffff" frame="#000000" cx="90.59027777777777" cz="61.111111111111114" r="1.3541666666666643" angle="225" />
   <Goody shape="bspGrenade" y="5" speed="2" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="90.59027777777777" cz="61.111111111111114" r="1.3541666666666643" angle="225" />
-  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="109.8263888888889" cz="41.5625" r="0.9375" angle="450" />
+  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="109.8263888888889" cz="41.5625" r="0.9375" angle="90" />
   <Teleporter group="-1" y="60" activeRange="35 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" fill="#ffff00" frame="#000000" cx="91.52777777777779" cz="60" r="2.5" angle="225" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ffff00" frame="#000000" cx="91.52777777777779" cz="60" r="2.5" angle="225" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffff00" frame="#000000" cx="91.52777777777779" cz="60" r="2.5" angle="225" />
@@ -85,12 +85,12 @@ theme--really I promise, no more Squares." />
   <Teleporter y="3" shape="bspGroundStar" fill="#ffffff" frame="#000000" cx="122.3263888888889" cz="28.645833333333336" r="1.5625" angle="135" />
   <Teleporter y="3" shape="bspGroundStar" fill="#ffffff" frame="#000000" cx="57.32638888888889" cz="93.64583333333334" r="1.5625" angle="135" />
   <Teleporter y="3" shape="bspGroundStar" fill="#ffffff" frame="#000000" cx="57.32638888888889" cz="28.645833333333336" r="1.5625" angle="135" />
-  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="109.8263888888889" cz="81.5625" r="0.9375" angle="450" />
+  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="109.8263888888889" cz="81.5625" r="0.9375" angle="90" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="110.1388888888889" cz="81.31944444444444" r="1.25" angle="225" />
   <Timer in="gTaken" out="gShow" wait="100" fill="#ffffff" frame="#000000" cx="110.1388888888889" cz="81.31944444444444" r="1.25" angle="225" />
   <Goody shape="bspMissile" speed="2" yon="20" y="5" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="110.1388888888889" cz="81.31944444444444" r="1.25" angle="225" />
   <Teleporter y="3" shape="bspGroundStar" fill="#ffffff" frame="#000000" cx="121.38888888888889" cz="92.8125" r="1.5972222222222214" angle="135" />
   <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="78.85416666666667" cz="61.5625" r="0.9375" angle="270" />
-  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="99.8263888888889" cz="61.5625" r="0.9375" angle="450" />
+  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="99.8263888888889" cz="61.5625" r="0.9375" angle="90" />
 </map>

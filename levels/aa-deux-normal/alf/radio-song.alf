@@ -114,10 +114,10 @@ When I got to the house, I could tell that she had been crying." light.0.i="0.8"
   <Timer in="mTaken" out="mShow" wait="400" fill="#ffffff" frame="#000000" cx="86.80555555555556" cz="77.08333333333334" r="1.25" angle="225" />
   <Goody shape="bspAvaraA" y="14.75" speed="2" missiles="1" grenades="2" start="mShow" out="mTaken" yon="10" fill="#ffffff" frame="#000000" cx="86.80555555555556" cz="77.08333333333334" r="1.25" angle="225" />
   <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="76.77083333333334" cz="124.61805555555556" r="0.9375" angle="180" />
-  <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="114.54861111111111" cz="87.1875" r="0.9375" angle="450" />
+  <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="114.54861111111111" cz="87.1875" r="0.9375" angle="90" />
   <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="38.923611111111114" cz="87.32638888888889" r="0.9375" angle="270" />
   <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="87.04861111111111" cz="97.3263888888889" r="0.9375" angle="270" />
-  <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="66.77083333333334" cz="77.32638888888889" r="0.9375" angle="450" />
+  <Incarnator y="40" fill="#ffff00" frame="#aa0000" cx="66.77083333333334" cz="77.32638888888889" r="0.9375" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="76.80555555555556" cz="87.22222222222223" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="400" fill="#ffffff" frame="#000000" cx="76.80555555555556" cz="87.22222222222223" r="1.25" angle="225" />

@@ -1,6 +1,6 @@
 <map>
   <set defaultLives="3" />
-  <Incarnator fill="#3366ff" frame="#000000" cx="67.29166666666667" cz="32.77777777777778" r="2.638888888888891" angle="450" />
+  <Incarnator fill="#3366ff" frame="#000000" cx="67.29166666666667" cz="32.77777777777778" r="2.638888888888891" angle="90" />
   <SkyColor fill="#000000" frame="#000000" />
   <GroundColor fill="#000000" frame="#8a8a8a" />
   <Timer in="@start" out="@winTeam" wait="2100" restart="false" fill="#f41dff" frame="#000000" cx="5.625" cz="29.79166666666667" r="2.5694444444444446" angle="45" />

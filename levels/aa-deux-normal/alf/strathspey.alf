@@ -72,8 +72,8 @@ O imigh uaim ‘s nach pill go brách orm!" ambient.i="0.3" light.0.i="0.8" ligh
   <Goody shape="bspGrenade" y="6.75" speed="2" grenades="6" start="mShow" out="mTaken" yon="30" fill="#ffffff" frame="#000000" cx="50.208333333333336" cz="103.8888888888889" r="1.25" angle="225" />
   <Timer in="mTaken" out="sShow" wait="200" fill="#ffffff" frame="#000000" cx="50.208333333333336" cz="103.8888888888889" r="1.25" angle="225" />
   <Goody shape="bspMissile" y="6.75" speed="2" missiles="3" start="sShow" out="sTaken" yon="30" fill="#ffffff" frame="#000000" cx="50.208333333333336" cz="103.8888888888889" r="1.25" angle="225" />
-  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="95.79861111111111" cz="63.54166666666667" r="0.9375" angle="450" />
-  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="104.2013888888889" cz="94.09722222222223" r="0.9375" angle="450" />
+  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="95.79861111111111" cz="63.54166666666667" r="0.9375" angle="90" />
+  <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="104.2013888888889" cz="94.09722222222223" r="0.9375" angle="90" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="26.21527777777778" cz="72.98611111111111" r="0.9375" angle="270" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="63.402777777777786" cz="130.3125" r="0.9375" angle="180" />
   <Incarnator y="30" fill="#ffff00" frame="#aa0000" cx="67.84722222222223" cz="38.71527777777778" r="0.9375" angle="0" />

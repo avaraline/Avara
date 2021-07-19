@@ -146,14 +146,14 @@ Reviled by nature, claustrophic wasteland stretching as far as the eye can see."
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="111.45833333333334" cz="91.45833333333334" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="450" fill="#ffffff" frame="#000000" cx="111.45833333333334" cz="91.45833333333334" r="1.25" angle="225" />
   <Goody yon="20" shape="bspAvaraA" scale=".75" y="1.75" speed="2" missiles="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="111.45833333333334" cz="91.45833333333334" r="1.25" angle="225" />
-  <Incarnator y="30" fill="#ffff00" frame="#576663" cx="131.21527777777777" cz="51.84027777777778" r="0.9375" angle="405" />
+  <Incarnator y="30" fill="#ffff00" frame="#576663" cx="131.21527777777777" cz="51.84027777777778" r="0.9375" angle="45" />
   <Incarnator y="30" fill="#ffff00" frame="#576663" cx="151.84027777777777" cz="111.84027777777779" r="0.9375" angle="135" />
   <Incarnator y="30" fill="#ffff00" frame="#576663" cx="71.21527777777779" cz="71.21527777777779" r="0.9375" angle="315" />
   <set wallHeight="6" />
   <Wall fill="#576663" frame="#000000" x="91.45833333333334" z="51.458333333333336" w="10" d="10" h="0" />
   <Incarnator y="30" fill="#ffff00" frame="#576663" cx="91.21527777777779" cz="51.84027777777778" r="0.9375" angle="315" />
   <Wall fill="#576663" frame="#000000" x="151.45833333333334" z="71.45833333333334" w="10" d="10" h="0" />
-  <Incarnator y="30" fill="#ffff00" frame="#576663" cx="151.84027777777777" cz="71.21527777777779" r="0.9375" angle="405" />
+  <Incarnator y="30" fill="#ffff00" frame="#576663" cx="151.84027777777777" cz="71.21527777777779" r="0.9375" angle="45" />
   <Wall fill="#576663" frame="#000000" x="131.45833333333334" z="131.45833333333334" w="10" d="10" h="0" />
   <Incarnator y="30" fill="#ffff00" frame="#576663" cx="131.84027777777777" cz="131.21527777777777" r="0.9375" angle="135" />
   <Wall fill="#576663" frame="#000000" x="71.45833333333334" z="111.45833333333334" w="10" d="10" h="0" />

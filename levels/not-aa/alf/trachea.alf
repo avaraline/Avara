@@ -70,11 +70,11 @@ Layout similar to Choke by Christopher Tate." wallHeight="8" />
   <And in="@start" out="rShow" fill="#bbbbbb" frame="#0b13e3" cx="16.84027777777778" cz="27.395833333333336" r="0.9375" angle="315" />
   <Timer in="rTaken" out="rShow" wait="1" fill="#bbbbbb" frame="#0b13e3" cx="16.84027777777778" cz="27.395833333333336" r="0.9375" angle="315" />
   <Goody shape="bspAvaraA" speed="5" y="9" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#bbbbbb" frame="#0b13e3" cx="16.84027777777778" cz="27.395833333333336" r="0.9375" angle="315" />
-  <Incarnator y="10" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="27.32638888888889" r="0.9375" angle="405" />
+  <Incarnator y="10" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="27.32638888888889" r="0.9375" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="27.32638888888889" r="0.9375" angle="405" />
-  <Timer in="rTaken" out="rShow" wait="1" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="27.32638888888889" r="0.9375" angle="405" />
-  <Goody shape="bspAvaraA" speed="5" y="9" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="27.32638888888889" r="0.9375" angle="405" />
+  <And in="@start" out="rShow" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="27.32638888888889" r="0.9375" angle="45" />
+  <Timer in="rTaken" out="rShow" wait="1" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="27.32638888888889" r="0.9375" angle="45" />
+  <Goody shape="bspAvaraA" speed="5" y="9" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="27.32638888888889" r="0.9375" angle="45" />
   <set wallHeight="2" />
   <Wall fill="#2d2f57" frame="#000000" x="30.173611111111114" z="55.798611111111114" w="4.375" d="35.625" h="0" />
   <set wallHeight="2" />
@@ -84,11 +84,11 @@ Layout similar to Choke by Christopher Tate." wallHeight="8" />
   <And in="@start" out="rShow" fill="#bbbbbb" frame="#0b13e3" cx="16.84027777777778" cz="55.520833333333336" r="0.9375" angle="270" />
   <Timer in="rTaken" out="rShow" wait="1" fill="#bbbbbb" frame="#0b13e3" cx="16.84027777777778" cz="55.520833333333336" r="0.9375" angle="270" />
   <Goody shape="bspAvaraA" speed="5" y="9" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#bbbbbb" frame="#0b13e3" cx="16.84027777777778" cz="55.520833333333336" r="0.9375" angle="270" />
-  <Incarnator y="10" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="55.45138888888889" r="0.9375" angle="450" />
+  <Incarnator y="10" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="55.45138888888889" r="0.9375" angle="90" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="55.45138888888889" r="0.9375" angle="450" />
-  <Timer in="rTaken" out="rShow" wait="1" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="55.45138888888889" r="0.9375" angle="450" />
-  <Goody shape="bspAvaraA" speed="5" y="9" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="55.45138888888889" r="0.9375" angle="450" />
+  <And in="@start" out="rShow" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="55.45138888888889" r="0.9375" angle="90" />
+  <Timer in="rTaken" out="rShow" wait="1" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="55.45138888888889" r="0.9375" angle="90" />
+  <Goody shape="bspAvaraA" speed="5" y="9" power="1000" shield="1000" volume="0" yon=".001" start="rShow" out="rTaken" fill="#bbbbbb" frame="#0b13e3" cx="107.88194444444444" cz="55.45138888888889" r="0.9375" angle="90" />
   <Incarnator y="10" fill="#bbbbbb" frame="#0b13e3" cx="16.84027777777778" cz="84.27083333333334" r="0.9375" angle="225" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" fill="#bbbbbb" frame="#0b13e3" cx="16.84027777777778" cz="84.27083333333334" r="0.9375" angle="225" />

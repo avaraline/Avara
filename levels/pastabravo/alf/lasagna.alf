@@ -71,11 +71,11 @@
   <Teleporter start="@winTeam" activeRange="10000" y="-20" shape="0" win="1000" fill="#dd0000" frame="#000000" cx="46.94444444444445" cz="59.93055555555556" r="1.25" angle="225" />
   <Incarnator y="30" fill="#ffffff" frame="#000000" cx="84.375" cz="42.361111111111114" r="1.25" angle="90" />
   <unique vars="mTeleporterOn mTeleporterOff" />
-  <And in="@start" out="mTeleporterOn" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="400" />
-  <Delay in="mTeleporterOff" wait="20" out="mTeleporterOn" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="400" />
-  <Goody shape="bspW1x1" yon="0.01" y="40" out="mTeleporterOff" start="mTeleporterOn" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="400" />
-  <Incarnator y="40" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="400" />
-  <Teleporter y="20" group="@secret" spin="30" shape="0" start="mTeleporterOn" stop="mTeleporterOff" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="400" />
+  <And in="@start" out="mTeleporterOn" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="40" />
+  <Delay in="mTeleporterOff" wait="20" out="mTeleporterOn" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="40" />
+  <Goody shape="bspW1x1" yon="0.01" y="40" out="mTeleporterOff" start="mTeleporterOn" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="40" />
+  <Incarnator y="40" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="40" />
+  <Teleporter y="20" group="@secret" spin="30" shape="0" start="mTeleporterOn" stop="mTeleporterOff" fill="#ffffff" frame="#000000" cx="61.94444444444445" cz="49.93055555555556" r="1.25" angle="40" />
   <unique vars="mTeleporterOn mTeleporterOff" />
   <And in="@start" out="mTeleporterOn" fill="#ffffff" frame="#000000" cx="31.944444444444443" cz="69.93055555555556" r="1.25" angle="230" />
   <Delay in="mTeleporterOff" wait="20" out="mTeleporterOn" fill="#ffffff" frame="#000000" cx="31.944444444444443" cz="69.93055555555556" r="1.25" angle="230" />

@@ -69,7 +69,7 @@ But I was gonna go into Tashe station and pick up some new power converters!" mi
   <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="170.20833333333334" cz="292.70833333333337" r="1.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="170.20833333333334" cz="292.70833333333337" r="1.25" angle="225" />
   <Goody shape="bspGrenade" y="9.25" yon="50" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="170.20833333333334" cz="292.70833333333337" r="1.25" angle="225" />
-  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="307.1875" cz="259.96527777777777" r="0.9375" angle="450" />
+  <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="307.1875" cz="259.96527777777777" r="0.9375" angle="90" />
   <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="273.71527777777777" cz="193.7152777777778" r="0.9375" angle="0" />
   <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="187.4652777777778" cz="314.6875" r="0.9375" angle="180" />
   <Incarnator y="50" fill="#ffff00" frame="#aa0000" cx="269.96527777777777" cz="318.4375" r="0.9375" angle="180" />

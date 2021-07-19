@@ -345,10 +345,10 @@ this town, and must now fight for your life." />
   <And in="@start" out="mShow" fill="#ccffff" frame="#000000" cx="84.82638888888889" cz="140.83333333333334" r="4.0625" angle="0" />
   <Timer in="mTaken" out="mShow" wait="500" fill="#ccffff" frame="#000000" cx="84.82638888888889" cz="140.83333333333334" r="4.0625" angle="0" />
   <Goody shape="bspGrenade" y="2" yon="100" speed="5" grenades="6" start="mShow" out="mTaken" fill="#ccffff" frame="#000000" cx="84.82638888888889" cz="140.83333333333334" r="4.0625" angle="0" />
-  <Incarnator y="15" fill="#000000" frame="#000000" cx="114.58333333333334" cz="62.08333333333334" r="3.75" angle="450" />
+  <Incarnator y="15" fill="#000000" frame="#000000" cx="114.58333333333334" cz="62.08333333333334" r="3.75" angle="90" />
   <Incarnator y="10" fill="#000000" frame="#000000" cx="122.0138888888889" cz="127.70833333333334" r="3.75" angle="135" />
   <Incarnator y="6.5" fill="#000000" frame="#000000" cx="23.88888888888889" cz="80.20833333333334" r="3.75" angle="270" />
-  <Incarnator y="15" fill="#000000" frame="#000000" cx="114.44444444444444" cz="97.70833333333334" r="3.75" angle="450" />
+  <Incarnator y="15" fill="#000000" frame="#000000" cx="114.44444444444444" cz="97.70833333333334" r="3.75" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" fill="#ccffff" frame="#000000" cx="24.20138888888889" cz="62.70833333333334" r="4.0625" angle="0" />
   <Timer in="mTaken" out="mShow" wait="500" fill="#ccffff" frame="#000000" cx="24.20138888888889" cz="62.70833333333334" r="4.0625" angle="0" />

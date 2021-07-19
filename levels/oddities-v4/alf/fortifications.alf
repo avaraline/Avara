@@ -20,15 +20,15 @@ See the read me file for explanations of the switches." />
   <Wall fill="#006600" frame="#000000" x="129.65277777777777" z="75" w="2.5" d="0" h="0" />
   <WallDoor deltaY="0" deltaZ="-2 / 8 * 5" shotPower="10" open="mKill" close="mReset" guardDelay="0" openSpeed="10" volume="0" fill="#006600" frame="#000000" r="2.1875" cx="2.1875" cz="7.569444444444445" angle="180" x="129.65277777777777" z="74.6875" w="2.5" d="0.625" h="0" />
   <Field deltaY="0" enter="mKill" exit="mReset" fill="#008800" frame="#000000" r="2.1875" cx="2.1875" cz="7.569444444444445" angle="180" x="129.65277777777777" z="73.125" w="2.5" d="2.5" h="0" />
-  <Teleporter group="@death" y="100" start="0" fill="#008800" frame="#000000" cx="129.65277777777777" cz="73.125" r="2.5" angle="405" />
-  <Teleporter destGroup="@death" shape="0" activeRange="5000" deadRange="50 * 5" fill="#008800" frame="#000000" cx="129.65277777777777" cz="73.125" r="2.5" angle="405" />
+  <Teleporter group="@death" y="100" start="0" fill="#008800" frame="#000000" cx="129.65277777777777" cz="73.125" r="2.5" angle="45" />
+  <Teleporter destGroup="@death" shape="0" activeRange="5000" deadRange="50 * 5" fill="#008800" frame="#000000" cx="129.65277777777777" cz="73.125" r="2.5" angle="45" />
   <set wallHeight="110" wallYon="0.01" />
   <Wall fill="#008800" frame="#000000" x="129.65277777777777" z="71.5625" w="3.75" d="0.625" h="0" />
   <Wall fill="#008800" frame="#000000" x="128.09027777777777" z="73.125" w="0.625" d="2.5" h="0" />
   <Wall fill="#008800" frame="#000000" x="129.65277777777777" z="74.6875" w="3.75" d="0.625" h="0" />
   <Wall fill="#008800" frame="#000000" x="131.21527777777777" z="73.125" w="0.625" d="2.5" h="0" />
   <set wallYon="0" />
-  <Field deltaY="10" watch="scoutMask" fill="#008800" frame="#000000" r="2.5" cx="129.65277777777777" cz="73.125" angle="405" x="129.65277777777777" z="73.125" w="2.5" d="2.5" h="0" />
+  <Field deltaY="10" watch="scoutMask" fill="#008800" frame="#000000" r="2.5" cx="129.65277777777777" cz="73.125" angle="45" x="129.65277777777777" z="73.125" w="2.5" d="2.5" h="0" />
   <set baseHeight="0" />
   <Incarnator mask="allTeams -T2 -T6" fill="#008800" frame="#000000" cx="125.90277777777779" cz="215.625" r="1.25" angle="180" />
   <Incarnator mask="allTeams -T2 -T6" fill="#008800" frame="#000000" cx="128.40277777777777" cz="215.625" r="1.25" angle="180" />
