@@ -5,9 +5,9 @@ Without light to guide them, they can not find their way
 to the afterlife, and thus lie in dark torment." ambient.i="0.12" light.0.i="0.15" light.0.a="45" light.0.b="25" light.1.i="0.0" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <SkyColor fill="#000000" frame="#440000" />
   <GroundColor fill="#000000" frame="#440000" />
-  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="128.71527777777777" cz="25.243055555555557" r="0.9375" angle="135" extent="270" />
+  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="128.71527777777777" cz="25.243055555555557" r="0.9375" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="2" fill="#bbbbbb" frame="#aa0000" cx="57.5" cz="80.34722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="2" fill="#bbbbbb" frame="#aa0000" cx="57.5" cz="80.34722222222223" r="2.5" angle="270" />
   <set wallHeight="50" />
   <Wall fill="#555555" frame="#000000" x="83.05555555555556" z="32.91666666666667" w="6.25" d="6.25" h="0" />
   <Wall fill="#555555" frame="#000000" x="111.80555555555556" z="52.91666666666667" w="6.25" d="6.25" h="0" />
@@ -70,57 +70,57 @@ to the afterlife, and thus lie in dark torment." ambient.i="0.12" light.0.i="0.1
   <Wall fill="#555555" frame="#000000" x="130.55555555555557" z="132.91666666666669" w="3.75" d="3.75" h="0" />
   <Wall fill="#555555" frame="#000000" x="124.30555555555556" z="71.66666666666667" w="3.75" d="3.75" h="0" />
   <Wall fill="#555555" frame="#000000" x="90.55555555555556" z="110.41666666666667" w="6.25" d="6.25" h="0" />
-  <Teleporter group="-1" y="-30" activeRange="40 * 5" deadRange="30 * 5" destGroup="@recenter" shape="0" fill="#555555" frame="#000000" cx="138.68055555555557" cz="130.34722222222223" r="2.5" angle="180" extent="90" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#555555" frame="#000000" cx="138.68055555555557" cz="130.34722222222223" r="2.5" angle="180" extent="90" />
-  <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" fill="#555555" frame="#000000" cx="127.43055555555557" cz="131.73611111111111" r="2.5" angle="180" extent="90" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#555555" frame="#000000" cx="127.43055555555557" cz="131.73611111111111" r="2.5" angle="180" extent="90" />
+  <Teleporter group="-1" y="-30" activeRange="40 * 5" deadRange="30 * 5" destGroup="@recenter" shape="0" fill="#555555" frame="#000000" cx="138.68055555555557" cz="130.34722222222223" r="2.5" angle="225" />
+  <Teleporter y="30" shape="0" group="@recenter" fill="#555555" frame="#000000" cx="138.68055555555557" cz="130.34722222222223" r="2.5" angle="225" />
+  <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" fill="#555555" frame="#000000" cx="127.43055555555557" cz="131.73611111111111" r="2.5" angle="225" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#555555" frame="#000000" cx="127.43055555555557" cz="131.73611111111111" r="2.5" angle="225" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="2" fill="#bbbbbb" frame="#aa0000" cx="210" cz="177.84722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="2" fill="#bbbbbb" frame="#aa0000" cx="210" cz="177.84722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="2" fill="#bbbbbb" frame="#aa0000" cx="108.75" cz="66.59722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="2" fill="#bbbbbb" frame="#aa0000" cx="108.75" cz="66.59722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="1" fill="#bbbbbb" frame="#aa0000" cx="158.75" cz="76.59722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="1" fill="#bbbbbb" frame="#aa0000" cx="158.75" cz="76.59722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="3" fill="#bbbbbb" frame="#aa0000" cx="92.5" cz="224.09722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="3" fill="#bbbbbb" frame="#aa0000" cx="92.5" cz="224.09722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="3" fill="#bbbbbb" frame="#aa0000" cx="178.75" cz="212.84722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="3" fill="#bbbbbb" frame="#aa0000" cx="178.75" cz="212.84722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="4" fill="#bbbbbb" frame="#aa0000" cx="47.5" cz="189.09722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="4" fill="#bbbbbb" frame="#aa0000" cx="47.5" cz="189.09722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="4" fill="#bbbbbb" frame="#aa0000" cx="112.5" cz="132.84722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="4" fill="#bbbbbb" frame="#aa0000" cx="112.5" cz="132.84722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspMushroom" scale="3" fill="#bbbbbb" frame="#aa0000" cx="213.75" cz="131.59722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspMushroom" scale="3" fill="#bbbbbb" frame="#aa0000" cx="213.75" cz="131.59722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspDeadTree" scale="5" fill="#bbbbbb" frame="#aa0000" cx="152.5" cz="94.09722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspDeadTree" scale="5" fill="#bbbbbb" frame="#aa0000" cx="152.5" cz="94.09722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspDeadTree" scale="7" fill="#bbbbbb" frame="#aa0000" cx="26.25" cz="144.09722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspDeadTree" scale="7" fill="#bbbbbb" frame="#aa0000" cx="26.25" cz="144.09722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspDeadTree" scale="10" fill="#bbbbbb" frame="#aa0000" cx="62.5" cz="230.34722222222223" r="2.5" angle="180" extent="180" />
+  <Solid y="0" shape="bspDeadTree" scale="10" fill="#bbbbbb" frame="#aa0000" cx="62.5" cz="230.34722222222223" r="2.5" angle="270" />
   <set baseheight="0" />
-  <Solid y="0" shape="bspDeadTree" scale="7" fill="#bbbbbb" frame="#aa0000" cx="160" cz="160.34722222222223" r="2.5" angle="180" extent="180" />
-  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="62.46527777777778" cz="148.99305555555557" r="0.9375" angle="135" extent="270" />
-  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="129.96527777777777" cz="270.24305555555554" r="0.9375" angle="135" extent="270" />
-  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="219.9652777777778" cz="157.74305555555557" r="0.9375" angle="135" extent="270" />
-  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="107.46527777777779" cz="146.49305555555557" r="0.9375" angle="135" extent="270" />
+  <Solid y="0" shape="bspDeadTree" scale="7" fill="#bbbbbb" frame="#aa0000" cx="160" cz="160.34722222222223" r="2.5" angle="270" />
+  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="62.46527777777778" cz="148.99305555555557" r="0.9375" angle="270" />
+  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="129.96527777777777" cz="270.24305555555554" r="0.9375" angle="270" />
+  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="219.9652777777778" cz="157.74305555555557" r="0.9375" angle="270" />
+  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="107.46527777777779" cz="146.49305555555557" r="0.9375" angle="270" />
   <set baseHeight=".5" />
   <unique vars="g3Show g3Taken" />
-  <And in="@start" out="g3Show" fill="#ffffff" frame="#000000" cx="35.97222222222222" cz="142.91666666666669" r="1.25" angle="180" extent="90" />
-  <Timer in="g3Taken" out="g3Show" wait="300" fill="#ffffff" frame="#000000" cx="35.97222222222222" cz="142.91666666666669" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspGrenade" yon="30" y="1.5" grenades="6" start="g3Show" out="g3Taken" fill="#ffffff" frame="#000000" cx="35.97222222222222" cz="142.91666666666669" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="g3Show" fill="#ffffff" frame="#000000" cx="35.97222222222222" cz="142.91666666666669" r="1.25" angle="225" />
+  <Timer in="g3Taken" out="g3Show" wait="300" fill="#ffffff" frame="#000000" cx="35.97222222222222" cz="142.91666666666669" r="1.25" angle="225" />
+  <Goody shape="bspGrenade" yon="30" y="1.5" grenades="6" start="g3Show" out="g3Taken" fill="#ffffff" frame="#000000" cx="35.97222222222222" cz="142.91666666666669" r="1.25" angle="225" />
   <set baseHeight=".5" />
   <unique vars="g1Show g1Taken" />
-  <And in="@start" out="g1Show" fill="#ffffff" frame="#000000" cx="151.73611111111111" cz="100.97222222222223" r="1.25" angle="180" extent="90" />
-  <Timer in="g1Taken" out="g1Show" wait="300" fill="#ffffff" frame="#000000" cx="151.73611111111111" cz="100.97222222222223" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspGrenade" yon="30" y="1.5" grenades="6" start="g1Show" out="g1Taken" fill="#ffffff" frame="#000000" cx="151.73611111111111" cz="100.97222222222223" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="g1Show" fill="#ffffff" frame="#000000" cx="151.73611111111111" cz="100.97222222222223" r="1.25" angle="225" />
+  <Timer in="g1Taken" out="g1Show" wait="300" fill="#ffffff" frame="#000000" cx="151.73611111111111" cz="100.97222222222223" r="1.25" angle="225" />
+  <Goody shape="bspGrenade" yon="30" y="1.5" grenades="6" start="g1Show" out="g1Taken" fill="#ffffff" frame="#000000" cx="151.73611111111111" cz="100.97222222222223" r="1.25" angle="225" />
   <set baseHeight=".5" />
   <unique vars="m2Show m2Taken" />
-  <And in="@start" out="m2Show" fill="#ffffff" frame="#000000" cx="155.76388888888889" cz="167.70833333333334" r="1.25" angle="180" extent="90" />
-  <Timer in="m2Taken" out="m2Show" wait="100" fill="#ffffff" frame="#000000" cx="155.76388888888889" cz="167.70833333333334" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspMissile" yon="30" y="1.5" missiles="2" start="m2Show" out="m2Taken" fill="#ffffff" frame="#000000" cx="155.76388888888889" cz="167.70833333333334" r="1.25" angle="180" extent="90" />
+  <And in="@start" out="m2Show" fill="#ffffff" frame="#000000" cx="155.76388888888889" cz="167.70833333333334" r="1.25" angle="225" />
+  <Timer in="m2Taken" out="m2Show" wait="100" fill="#ffffff" frame="#000000" cx="155.76388888888889" cz="167.70833333333334" r="1.25" angle="225" />
+  <Goody shape="bspMissile" yon="30" y="1.5" missiles="2" start="m2Show" out="m2Taken" fill="#ffffff" frame="#000000" cx="155.76388888888889" cz="167.70833333333334" r="1.25" angle="225" />
   <set baseHeight=".5" />
   <unique vars="m3Show m3Taken" />
-  <And in="@start" out="m3Show" fill="#ffffff" frame="#000000" cx="61.80555555555556" cz="236.94444444444446" r="1.25" angle="180" extent="90" />
-  <Timer in="m3Taken" out="m3Show" wait="100" fill="#ffffff" frame="#000000" cx="61.80555555555556" cz="236.94444444444446" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspMissile" yon="30" y="1.5" missiles="2" start="m3Show" out="m3Taken" fill="#ffffff" frame="#000000" cx="61.80555555555556" cz="236.94444444444446" r="1.25" angle="180" extent="90" />
-  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="143.71527777777777" cz="52.74305555555556" r="0.9375" angle="135" extent="270" />
+  <And in="@start" out="m3Show" fill="#ffffff" frame="#000000" cx="61.80555555555556" cz="236.94444444444446" r="1.25" angle="225" />
+  <Timer in="m3Taken" out="m3Show" wait="100" fill="#ffffff" frame="#000000" cx="61.80555555555556" cz="236.94444444444446" r="1.25" angle="225" />
+  <Goody shape="bspMissile" yon="30" y="1.5" missiles="2" start="m3Show" out="m3Taken" fill="#ffffff" frame="#000000" cx="61.80555555555556" cz="236.94444444444446" r="1.25" angle="225" />
+  <Incarnator y="80" fill="#ffff00" frame="#aa0000" cx="143.71527777777777" cz="52.74305555555556" r="0.9375" angle="270" />
 </map>

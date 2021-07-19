@@ -5,57 +5,57 @@ remade by Yo-Yo, with music, less polygons etc. fun!
 load up on ammo, then go hide in the disco balls! :)" wallHeight="0" baseHeight="100" goodyHeight="1.8" goodySpin=".33 * 15" goodyScale="3" goodyDelay="2 * 15" numGrenades="500" numMissiles="500" outDist="10" ambient.i="0" light.0.i="2" light.0.a="10" light.0.b="0" light.1.i="1" light.1.a="10" light.1.b="180" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <Wall fill="#222222" frame="#000000" x="56.31944444444444" z="59.20138888888889" w="55" d="55.06944444444444" h="0" y="0" />
   <unique vars="gTaken gReplace" />
-  <Goody y="goodyHeight" speed="goodySpin" shape="bspGrenade" out="gTaken" start="gReplace" grenades="numGrenades" yon="20" scale="goodyScale" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="180" extent="270" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="180" extent="270" />
-  <And in="@start" out="gReplace" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="180" extent="270" />
+  <Goody y="goodyHeight" speed="goodySpin" shape="bspGrenade" out="gTaken" start="gReplace" grenades="numGrenades" yon="20" scale="goodyScale" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="315" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="315" />
+  <And in="@start" out="gReplace" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="315" />
   <unique vars="gTaken gReplace" />
-  <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="270" extent="270" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="270" extent="270" />
-  <And in="@start" out="gReplace" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="270" extent="270" />
+  <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="405" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="405" />
+  <And in="@start" out="gReplace" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="405" />
   <unique vars="gTaken gReplace" />
-  <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="90" extent="270" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="90" extent="270" />
-  <And in="@start" out="gReplace" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="90" extent="270" />
+  <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="225" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="225" />
+  <And in="@start" out="gReplace" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="225" />
   <unique vars="gTaken gReplace" />
-  <Goody y="goodyHeight" speed="goodySpin" shape="bspGrenade" out="gTaken" start="gReplace" grenades="numGrenades" yon="20" scale="goodyScale" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="0" extent="270" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="0" extent="270" />
-  <And in="@start" out="gReplace" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="0" extent="270" />
+  <Goody y="goodyHeight" speed="goodySpin" shape="bspGrenade" out="gTaken" start="gReplace" grenades="numGrenades" yon="20" scale="goodyScale" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="135" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="135" />
+  <And in="@start" out="gReplace" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="135" />
   <Wall fill="#0000cc" frame="#000000" x="55.69444444444445" z="59.20138888888889" w="15" d="15.069444444444443" h="1" y="28" />
   <Wall fill="#000099" frame="#000000" x="55.69444444444445" z="59.20138888888889" w="10" d="10.069444444444443" h="2" y="26" />
   <Wall fill="#000066" frame="#000000" x="55.69444444444445" z="59.20138888888889" w="5" d="5.069444444444443" h="26" y="0" />
-  <Teleporter y="100" activeRange="1000" deadRange="110" shape="0" speed="0" destGroup="@backUp" group="-1" fill="#ff0000" frame="#000000" cx="55.69444444444445" cz="59.16666666666667" r="2.5" angle="0" extent="90" />
-  <Teleporter y="50" activeRange="0" deadRange="0" shape="0" speed="0" group="@backUp" fill="#ff0000" frame="#000000" cx="55.69444444444445" cz="59.16666666666667" r="2.5" angle="0" extent="90" />
-  <Teleporter y="20" activeRange="1000" deadRange="0" shape="0" speed="0" win="0" start="@winTeam" group="@win" fill="#ff0000" frame="#000000" cx="55.69444444444445" cz="59.16666666666667" r="2.5" angle="0" extent="90" />
-  <Sound sound="snDoor" y="15" loopCount="-1" fill="#ff0000" frame="#000000" cx="55.69444444444445" cz="59.16666666666667" r="2.5" angle="0" extent="90" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="55.55555555555556" cz="39.02777777777778" r="2.5" angle="202" extent="270" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="55.55555555555556" cz="79.09722222222223" r="2.5" angle="22" extent="270" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="35.55555555555556" cz="59.02777777777778" r="2.5" angle="112" extent="270" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="75.55555555555556" cz="59.02777777777778" r="2.5" angle="292" extent="270" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="84.02777777777779" r="2.5" angle="112" extent="270" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="80.55555555555556" cz="84.09722222222223" r="2.5" angle="22" extent="270" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="80.55555555555556" cz="34.02777777777778" r="2.5" angle="292" extent="270" />
-  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="34.02777777777778" r="2.5" angle="202" extent="270" />
-  <Sound sound="snFreefall" start="@music" stop="outaSwitch" isPlaced="false" isAmbient="false" isMusic="true" volume="30" loopCount="-1" restart="false" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="34.02777777777778" r="2.5" angle="202" extent="270" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ffff33" frame="#00ff00" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ee0000" frame="#00ff00" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#ffff00" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="96.875" cz="58.47222222222222" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ffff33" frame="#00ff00" cx="96.875" cz="58.47222222222222" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ee0000" frame="#00ff00" cx="96.875" cz="58.47222222222222" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#ffff00" cx="96.875" cz="58.47222222222222" r="1.875" angle="175" extent="90" />
+  <Teleporter y="100" activeRange="1000" deadRange="110" shape="0" speed="0" destGroup="@backUp" group="-1" fill="#ff0000" frame="#000000" cx="55.69444444444445" cz="59.16666666666667" r="2.5" angle="45" />
+  <Teleporter y="50" activeRange="0" deadRange="0" shape="0" speed="0" group="@backUp" fill="#ff0000" frame="#000000" cx="55.69444444444445" cz="59.16666666666667" r="2.5" angle="45" />
+  <Teleporter y="20" activeRange="1000" deadRange="0" shape="0" speed="0" win="0" start="@winTeam" group="@win" fill="#ff0000" frame="#000000" cx="55.69444444444445" cz="59.16666666666667" r="2.5" angle="45" />
+  <Sound sound="snDoor" y="15" loopCount="-1" fill="#ff0000" frame="#000000" cx="55.69444444444445" cz="59.16666666666667" r="2.5" angle="45" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="55.55555555555556" cz="39.02777777777778" r="2.5" angle="337" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="55.55555555555556" cz="79.09722222222223" r="2.5" angle="157" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="35.55555555555556" cz="59.02777777777778" r="2.5" angle="247" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="75.55555555555556" cz="59.02777777777778" r="2.5" angle="427" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="84.02777777777779" r="2.5" angle="247" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="80.55555555555556" cz="84.09722222222223" r="2.5" angle="157" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="80.55555555555556" cz="34.02777777777778" r="2.5" angle="427" />
+  <Incarnator y="40" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="34.02777777777778" r="2.5" angle="337" />
+  <Sound sound="snFreefall" start="@music" stop="outaSwitch" isPlaced="false" isAmbient="false" isMusic="true" volume="30" loopCount="-1" restart="false" fill="#ffff00" frame="#ff0000" cx="30.555555555555557" cz="34.02777777777778" r="2.5" angle="337" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ffff33" frame="#00ff00" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ee0000" frame="#00ff00" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#ffff00" cx="19.65277777777778" cz="56.80555555555556" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="96.875" cz="58.47222222222222" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ffff33" frame="#00ff00" cx="96.875" cz="58.47222222222222" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ee0000" frame="#00ff00" cx="96.875" cz="58.47222222222222" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#ffff00" cx="96.875" cz="58.47222222222222" r="1.875" angle="220" />
   <Wall fill="#0000ff" frame="#000000" x="55.69444444444444" z="59.20138888888889" w="20" d="20.069444444444443" h="1" y="29" />
-  <Switch shape="bspSwitchOff" out.1="@music" y="32" fill="#ffffff" frame="#000000" cx="49.02777777777778" cz="51.458333333333336" r="1.25" angle="0" extent="90" />
-  <Teleporter shape="bspAvara" start="@music" speed="30" y="3" fill="#ffffff" frame="#000000" cx="30" cz="58.333333333333336" r="1.25" angle="0" extent="90" />
-  <Teleporter shape="bspAvara" start="@music" speed="30" y="3" fill="#ffffff" frame="#000000" cx="82.22222222222223" cz="60.27777777777778" r="1.25" angle="0" extent="90" />
-  <Teleporter shape="bspAvaraA" start="@music" speed="30" y="3" fill="#ffffff" frame="#000000" cx="55.55555555555556" cz="33.611111111111114" r="1.25" angle="0" extent="90" />
-  <Teleporter shape="bspAvaraA" start="@music" speed="30" y="3" fill="#ffffff" frame="#000000" cx="56.18055555555556" cz="86.11111111111111" r="1.25" angle="0" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="57.01388888888889" cz="22.98611111111111" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ffff33" frame="#00ff00" cx="57.01388888888889" cz="22.98611111111111" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ee0000" frame="#00ff00" cx="57.01388888888889" cz="22.98611111111111" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#ffff00" cx="57.01388888888889" cz="22.98611111111111" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="57.361111111111114" cz="95.06944444444444" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ffff33" frame="#00ff00" cx="57.361111111111114" cz="95.06944444444444" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ee0000" frame="#00ff00" cx="57.361111111111114" cz="95.06944444444444" r="1.875" angle="175" extent="90" />
-  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#ffff00" cx="57.361111111111114" cz="95.06944444444444" r="1.875" angle="175" extent="90" />
+  <Switch shape="bspSwitchOff" out.1="@music" y="32" fill="#ffffff" frame="#000000" cx="49.02777777777778" cz="51.458333333333336" r="1.25" angle="45" />
+  <Teleporter shape="bspAvara" start="@music" speed="30" y="3" fill="#ffffff" frame="#000000" cx="30" cz="58.333333333333336" r="1.25" angle="45" />
+  <Teleporter shape="bspAvara" start="@music" speed="30" y="3" fill="#ffffff" frame="#000000" cx="82.22222222222223" cz="60.27777777777778" r="1.25" angle="45" />
+  <Teleporter shape="bspAvaraA" start="@music" speed="30" y="3" fill="#ffffff" frame="#000000" cx="55.55555555555556" cz="33.611111111111114" r="1.25" angle="45" />
+  <Teleporter shape="bspAvaraA" start="@music" speed="30" y="3" fill="#ffffff" frame="#000000" cx="56.18055555555556" cz="86.11111111111111" r="1.25" angle="45" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="57.01388888888889" cz="22.98611111111111" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ffff33" frame="#00ff00" cx="57.01388888888889" cz="22.98611111111111" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ee0000" frame="#00ff00" cx="57.01388888888889" cz="22.98611111111111" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#ffff00" cx="57.01388888888889" cz="22.98611111111111" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#0033ff" cx="57.361111111111114" cz="95.06944444444444" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ffff33" frame="#00ff00" cx="57.361111111111114" cz="95.06944444444444" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ee0000" frame="#00ff00" cx="57.361111111111114" cz="95.06944444444444" r="1.875" angle="220" />
+  <Teleporter shape="bspStandardBall" y="9" destGroup="@noDest" status="false" start="@music" scale="10" sound="0" speed="69" fill="#ff6600" frame="#ffff00" cx="57.361111111111114" cz="95.06944444444444" r="1.875" angle="220" />
 </map>

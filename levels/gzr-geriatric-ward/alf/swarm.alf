@@ -3,85 +3,85 @@
 Use your missiles wisely." missilePower="2.0" missileAcceleration="0.15" maxStartMissiles="2" incarnateY="0" />
   <set goodyDelay1="200" numGren1="3" />
   <set goodyDelay2="300" numGren2="5" numMiss2="1" />
-  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="70" frame="#000000" cx="31.875" cz="1.25" r="2.5" angle="180" extent="90" />
+  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="70" frame="#000000" cx="31.875" cz="1.25" r="2.5" angle="225" />
   <SkyColor fill="#ffff33" frame="#cc9900" />
   <GroundColor fill="#000000" frame="#444444" />
   <Wall fill="#ffffff" frame="#000000" x="31.180555555555557" z="10.416666666666668" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="39.236111111111114" z="15" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="39.236111111111114" z="15" w="10" d="1.25" h="12" />
   <Wall fill="#ffffff" frame="#000000" x="31.180555555555557" z="28.819444444444446" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="39.236111111111114" z="24.23611111111111" w="10" d="1.25" h="0.75" />
-  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="23.125" z="15" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="39.236111111111114" z="24.23611111111111" w="10" d="1.25" h="0.75" />
+  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="23.125" z="15" w="10" d="1.25" h="12" />
   <Wall fill="#ffffff" frame="#000000" x="15" z="19.583333333333336" w="10" d="1.25" h="12" />
   <Wall fill="#ffffff" frame="#000000" x="15" z="37.986111111111114" w="10" d="1.25" h="0.75" />
-  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="23.055555555555557" z="33.40277777777778" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="6.944444444444445" z="24.166666666666668" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="300" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="6.944444444444445" z="33.40277777777778" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="23.055555555555557" z="33.40277777777778" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="6.944444444444445" z="24.166666666666668" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="300" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="6.944444444444445" z="33.40277777777778" w="10" d="1.25" h="12" />
   <Wall fill="#ffffff" frame="#000000" x="47.29166666666667" z="19.72222222222222" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="55.34722222222222" z="24.305555555555557" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="55.34722222222222" z="24.305555555555557" w="10" d="1.25" h="12" />
   <Wall fill="#ffffff" frame="#000000" x="47.29166666666667" z="38.125" w="10" d="1.25" h="0.75" />
-  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="55.34722222222222" z="33.54166666666667" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="300" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="39.236111111111114" z="33.54166666666667" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="55.34722222222222" z="42.708333333333336" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="55.34722222222222" z="33.54166666666667" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="300" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="39.236111111111114" z="33.54166666666667" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="55.34722222222222" z="42.708333333333336" w="10" d="1.25" h="12" />
   <Wall fill="#ffffff" frame="#000000" x="47.29166666666667" z="56.52777777777778" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="55.34722222222222" z="51.94444444444445" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="39.236111111111114" z="42.708333333333336" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="23.055555555555557" z="42.56944444444444" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="55.34722222222222" z="51.94444444444445" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="39.236111111111114" z="42.708333333333336" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="23.055555555555557" z="42.56944444444444" w="10" d="1.25" h="12" />
   <Wall fill="#ffffff" frame="#000000" x="15" z="56.38888888888889" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="6.944444444444445" z="42.56944444444444" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="300" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="6.944444444444445" z="51.80555555555556" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="6.944444444444445" z="42.56944444444444" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="300" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="6.944444444444445" z="51.80555555555556" w="10" d="1.25" h="12" />
   <Wall fill="#ffffff" frame="#000000" x="31.111111111111114" z="47.29166666666667" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="39.16666666666667" z="51.875" w="10" d="1.25" h="0.75" />
+  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="39.16666666666667" z="51.875" w="10" d="1.25" h="0.75" />
   <Wall fill="#ffffff" frame="#000000" x="31.111111111111114" z="65.69444444444444" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="39.16666666666667" z="61.111111111111114" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="300" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="23.055555555555557" z="61.111111111111114" w="10" d="1.25" h="12" />
-  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="23.125" z="24.166666666666668" w="10" d="1.25" h="0.75" />
-  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="90" extent="180" x="23.055555555555557" z="51.80555555555556" w="10" d="1.25" h="0.75" />
+  <WallDoor midYaw="60" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="39.16666666666667" z="61.111111111111114" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="300" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="23.055555555555557" z="61.111111111111114" w="10" d="1.25" h="12" />
+  <WallDoor midYaw="120" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="23.125" z="24.166666666666668" w="10" d="1.25" h="0.75" />
+  <WallDoor midYaw="240" fill="#ffffff" frame="#000000" r="3.75" cx="4.166666666666667" cz="1.5277777777777777" angle="180" x="23.055555555555557" z="51.80555555555556" w="10" d="1.25" h="0.75" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="31.319444444444443" cz="61.31944444444445" r="1.25" angle="30" extent="300" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay2" fill="#cc9900" frame="#000000" cx="31.319444444444443" cz="61.31944444444445" r="1.25" angle="30" extent="300" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren2" missiles="numMiss2" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="31.319444444444443" cz="61.31944444444445" r="1.25" angle="30" extent="300" />
+  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="31.319444444444443" cz="61.31944444444445" r="1.25" angle="180" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay2" fill="#cc9900" frame="#000000" cx="31.319444444444443" cz="61.31944444444445" r="1.25" angle="180" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren2" missiles="numMiss2" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="31.319444444444443" cz="61.31944444444445" r="1.25" angle="180" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="14.86111111111111" cz="47.708333333333336" r="1.25" angle="90" extent="300" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay1" fill="#cc9900" frame="#000000" cx="14.86111111111111" cz="47.708333333333336" r="1.25" angle="90" extent="300" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren1" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="14.86111111111111" cz="47.708333333333336" r="1.25" angle="90" extent="300" />
+  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="14.86111111111111" cz="47.708333333333336" r="1.25" angle="240" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay1" fill="#cc9900" frame="#000000" cx="14.86111111111111" cz="47.708333333333336" r="1.25" angle="240" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren1" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="14.86111111111111" cz="47.708333333333336" r="1.25" angle="240" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="47.43055555555556" cz="47.56944444444445" r="1.25" angle="330" extent="300" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay1" fill="#cc9900" frame="#000000" cx="47.43055555555556" cz="47.56944444444445" r="1.25" angle="330" extent="300" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren1" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="47.43055555555556" cz="47.56944444444445" r="1.25" angle="330" extent="300" />
+  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="47.43055555555556" cz="47.56944444444445" r="1.25" angle="480" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay1" fill="#cc9900" frame="#000000" cx="47.43055555555556" cz="47.56944444444445" r="1.25" angle="480" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren1" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="47.43055555555556" cz="47.56944444444445" r="1.25" angle="480" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="51.52777777777778" cz="26.319444444444446" r="1.25" angle="270" extent="300" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay2" fill="#cc9900" frame="#000000" cx="51.52777777777778" cz="26.319444444444446" r="1.25" angle="270" extent="300" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren2" missiles="numMiss2" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="51.52777777777778" cz="26.319444444444446" r="1.25" angle="270" extent="300" />
+  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="51.52777777777778" cz="26.319444444444446" r="1.25" angle="420" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay2" fill="#cc9900" frame="#000000" cx="51.52777777777778" cz="26.319444444444446" r="1.25" angle="420" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren2" missiles="numMiss2" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="51.52777777777778" cz="26.319444444444446" r="1.25" angle="420" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="31.388888888888893" cz="19.791666666666668" r="1.25" angle="210" extent="300" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay1" fill="#cc9900" frame="#000000" cx="31.388888888888893" cz="19.791666666666668" r="1.25" angle="210" extent="300" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren1" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="31.388888888888893" cz="19.791666666666668" r="1.25" angle="210" extent="300" />
+  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="31.388888888888893" cz="19.791666666666668" r="1.25" angle="0" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay1" fill="#cc9900" frame="#000000" cx="31.388888888888893" cz="19.791666666666668" r="1.25" angle="0" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren1" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="31.388888888888893" cz="19.791666666666668" r="1.25" angle="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="11.041666666666668" cz="26.25" r="1.25" angle="150" extent="300" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay2" fill="#cc9900" frame="#000000" cx="11.041666666666668" cz="26.25" r="1.25" angle="150" extent="300" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren2" missiles="numMiss2" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="11.041666666666668" cz="26.25" r="1.25" angle="150" extent="300" />
+  <And in="@start" out="mShow" fill="#cc9900" frame="#000000" cx="11.041666666666668" cz="26.25" r="1.25" angle="300" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay2" fill="#cc9900" frame="#000000" cx="11.041666666666668" cz="26.25" r="1.25" angle="300" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren2" missiles="numMiss2" start="mShow" out="mTaken" fill="#cc9900" frame="#000000" cx="11.041666666666668" cz="26.25" r="1.25" angle="300" />
   <set wallHeight="0.2" baseHeight="5" />
   <Wall fill="#000000" frame="#000000" x="31.319444444444443" z="12.98611111111111" w="3.75" d="3.75" h="0" />
-  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="31.25" cz="12.916666666666668" r="1.388888888888891" angle="225" extent="270" />
-  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="31.25" cz="12.916666666666668" r="1.388888888888891" angle="225" extent="270" />
-  <WallDoor midYaw="300" fill="#000000" frame="#000000" r="1.388888888888891" cx="31.25" cz="12.916666666666668" angle="225" extent="270" x="9.23611111111111" z="50.76388888888889" w="3.75" d="3.75" h="0" />
-  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="9.51388888888889" cz="50.55555555555556" r="1.3888888888888893" angle="105" extent="270" />
-  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="9.51388888888889" cz="50.55555555555556" r="1.3888888888888893" angle="105" extent="270" />
-  <WallDoor midYaw="60" fill="#000000" frame="#000000" r="1.3888888888888893" cx="9.51388888888889" cz="50.55555555555556" angle="105" extent="270" x="53.26388888888889" z="50.625" w="3.75" d="3.75" h="0" />
-  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="53.05555555555556" cz="50.55555555555556" r="1.3888888888888893" angle="345" extent="270" />
-  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="53.05555555555556" cz="50.55555555555556" r="1.3888888888888893" angle="345" extent="270" />
-  <WallDoor midYaw="240" fill="#cc9900" frame="#000000" r="1.3888888888888893" cx="53.05555555555556" cz="50.55555555555556" angle="345" extent="270" x="9.097222222222223" z="25.347222222222225" w="3.75" d="3.75" h="0" />
-  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="9.305555555555555" cz="25.486111111111114" r="1.3888888888888888" angle="165" extent="270" />
-  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="9.305555555555555" cz="25.486111111111114" r="1.3888888888888888" angle="165" extent="270" />
+  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="31.25" cz="12.916666666666668" r="1.388888888888891" angle="0" />
+  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="31.25" cz="12.916666666666668" r="1.388888888888891" angle="0" />
+  <WallDoor midYaw="300" fill="#000000" frame="#000000" r="1.388888888888891" cx="31.25" cz="12.916666666666668" angle="0" x="9.23611111111111" z="50.76388888888889" w="3.75" d="3.75" h="0" />
+  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="9.51388888888889" cz="50.55555555555556" r="1.3888888888888893" angle="240" />
+  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="9.51388888888889" cz="50.55555555555556" r="1.3888888888888893" angle="240" />
+  <WallDoor midYaw="60" fill="#000000" frame="#000000" r="1.3888888888888893" cx="9.51388888888889" cz="50.55555555555556" angle="240" x="53.26388888888889" z="50.625" w="3.75" d="3.75" h="0" />
+  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="53.05555555555556" cz="50.55555555555556" r="1.3888888888888893" angle="480" />
+  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="53.05555555555556" cz="50.55555555555556" r="1.3888888888888893" angle="480" />
+  <WallDoor midYaw="240" fill="#cc9900" frame="#000000" r="1.3888888888888893" cx="53.05555555555556" cz="50.55555555555556" angle="480" x="9.097222222222223" z="25.347222222222225" w="3.75" d="3.75" h="0" />
+  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="9.305555555555555" cz="25.486111111111114" r="1.3888888888888888" angle="300" />
+  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="9.305555555555555" cz="25.486111111111114" r="1.3888888888888888" angle="300" />
   <Wall fill="#cc9900" frame="#000000" x="31.319444444444443" z="63.125" w="3.75" d="3.75" h="0" />
-  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="31.319444444444446" cz="62.777777777777786" r="1.3888888888888893" angle="45" extent="270" />
-  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="31.319444444444446" cz="62.777777777777786" r="1.3888888888888893" angle="45" extent="270" />
-  <WallDoor midYaw="120" fill="#cc9900" frame="#000000" r="1.3888888888888893" cx="31.319444444444446" cz="62.777777777777786" angle="45" extent="270" x="53.40277777777778" z="25.48611111111111" w="3.75" d="3.75" h="0" />
-  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="53.05555555555556" cz="25.416666666666668" r="1.3888888888888893" angle="285" extent="270" />
-  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="53.05555555555556" cz="25.416666666666668" r="1.3888888888888893" angle="285" extent="270" />
-  <Teleporter shape="0" y="200" win="1200" start="@winTeam" activeRange="2000" fill="#006600" frame="#000000" cx="62.777777777777786" cz="16.041666666666668" r="2.5" angle="180" extent="90" />
+  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="31.319444444444446" cz="62.777777777777786" r="1.3888888888888893" angle="180" />
+  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="31.319444444444446" cz="62.777777777777786" r="1.3888888888888893" angle="180" />
+  <WallDoor midYaw="120" fill="#cc9900" frame="#000000" r="1.3888888888888893" cx="31.319444444444446" cz="62.777777777777786" angle="180" x="53.40277777777778" z="25.48611111111111" w="3.75" d="3.75" h="0" />
+  <Incarnator y="incarnateY" fill="#006600" frame="#006600" cx="53.05555555555556" cz="25.416666666666668" r="1.3888888888888893" angle="420" />
+  <Teleporter group="@platform" y="6" shape="0" fill="#006600" frame="#006600" cx="53.05555555555556" cz="25.416666666666668" r="1.3888888888888893" angle="420" />
+  <Teleporter shape="0" y="200" win="1200" start="@winTeam" activeRange="2000" fill="#006600" frame="#000000" cx="62.777777777777786" cz="16.041666666666668" r="2.5" angle="225" />
   <set baseHeight="0" />
-  <Teleporter group="@center" y="-10" activeRange="2000" deadRange="32" destGroup="@recenter" shape="0" fill="#cc9900" frame="#000000" cx="31.21527777777778" cz="38.05555555555556" r="1.5277777777777786" angle="240" extent="240" />
-  <Teleporter y="10" shape="0" group="@recenter" fill="#cc9900" frame="#000000" cx="31.21527777777778" cz="38.05555555555556" r="1.5277777777777786" angle="240" extent="240" />
-  <Teleporter group="@platform" speed="0" shape="bspGroundStar" activeRange="9" fill="#cc9900" frame="#000000" cx="31.21527777777778" cz="38.05555555555556" r="1.5277777777777786" angle="240" extent="240" />
+  <Teleporter group="@center" y="-10" activeRange="2000" deadRange="32" destGroup="@recenter" shape="0" fill="#cc9900" frame="#000000" cx="31.21527777777778" cz="38.05555555555556" r="1.5277777777777786" angle="0" />
+  <Teleporter y="10" shape="0" group="@recenter" fill="#cc9900" frame="#000000" cx="31.21527777777778" cz="38.05555555555556" r="1.5277777777777786" angle="0" />
+  <Teleporter group="@platform" speed="0" shape="bspGroundStar" activeRange="9" fill="#cc9900" frame="#000000" cx="31.21527777777778" cz="38.05555555555556" r="1.5277777777777786" angle="0" />
 </map>

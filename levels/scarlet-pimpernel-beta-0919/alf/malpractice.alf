@@ -14,7 +14,7 @@ information = &quot;Since Avara Pharmaceutical Services purchased St. Hector Reg
   <Wall fill="#bbbbbb" frame="#000000" x="57.5" z="82.5" w="63.75" d="15" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#bbbbbb" frame="#000000" x="57.5" z="57.5" w="63.75" d="15" h="0" />
-  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="41.63194444444445" z="62.5" w="33.125" d="5" h="0" r="2.5" angle="135" extent="90" />
+  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="41.63194444444445" z="62.5" w="33.125" d="5" h="0" r="2.5" angle="180" />
   <Wall fill="#eeeeee" frame="#000000" x="27.5" z="32.5" w="25" d="25" h="13.5" />
   <Wall fill="#eeeeee" frame="#000000" x="20" z="62.5" w="10" d="35" h="13.5" />
   <set wallHeight="13.5" />
@@ -32,16 +32,16 @@ information = &quot;Since Avara Pharmaceutical Services purchased St. Hector Reg
   <Wall fill="#eeeeee" frame="#000000" x="87.5" z="107.5" w="25" d="25" h="13.5" />
   <set wallHeight="13.5" />
   <Wall fill="#336666" frame="#000000" x="87.5" z="107.5" w="5" d="5" h="0" y="13.5" />
-  <Incarnator y="6.75" fill="#ff33cc" frame="#000000" cx="95" cz="33.75" r="2.5" angle="315" extent="90" />
+  <Incarnator y="6.75" fill="#ff33cc" frame="#000000" cx="95" cz="33.75" r="2.5" angle="0" />
   <Wall fill="#eeeeee" frame="#000000" x="95" z="77.5" w="10" d="35" h="13.5" />
   <set wallHeight="13.5" />
   <Wall fill="#bbbbbb" frame="#000000" x="89.6875" z="70" w="0.625" d="50" h="0" />
   <set wallHeight="1.40625" />
   <Wall fill="#ff6600" frame="#000000" x="89.6875" z="70" w="0.625" d="50" h="0" y="13.5" />
   <Wall fill="#dddddd" frame="#000000" x="20" z="92.5" w="10" d="5" h="6.75" />
-  <Ramp thickness="0" y="6.75" deltaY="6.75" fill="#dddddd" frame="#000000" x="20.069444444444446" z="87.56944444444444" w="10" d="15" h="0" r="2.5" angle="315" extent="90" />
+  <Ramp thickness="0" y="6.75" deltaY="6.75" fill="#dddddd" frame="#000000" x="20.069444444444446" z="87.56944444444444" w="10" d="15" h="0" r="2.5" angle="0" />
   <Wall fill="#dddddd" frame="#000000" x="95" z="47.5" w="10" d="5" h="6.75" />
-  <Ramp thickness="0" y="6.75" deltaY="6.75" fill="#dddddd" frame="#000000" x="95.06944444444444" z="52.56944444444445" w="10" d="15" h="0" r="2.5" angle="135" extent="90" />
+  <Ramp thickness="0" y="6.75" deltaY="6.75" fill="#dddddd" frame="#000000" x="95.06944444444444" z="52.56944444444445" w="10" d="15" h="0" r="2.5" angle="180" />
   <set wallHeight="20.25" />
   <Wall fill="#336666" frame="#000000" x="52.5" z="32.5" w="5" d="5" h="0" y="6.75" />
   <set wallHeight="20.25" />
@@ -62,14 +62,14 @@ information = &quot;Since Avara Pharmaceutical Services purchased St. Hector Reg
   <Wall fill="#336666" frame="#000000" x="62.5" z="107.5" w="5" d="5" h="0" y="6.75" />
   <set wallHeight="20.25" />
   <Wall fill="#336666" frame="#000000" x="27.5" z="107.5" w="5" d="5" h="0" y="6.75" />
-  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="41.63194444444445" z="52.5" w="33.125" d="5" h="0" r="2.5" angle="315" extent="90" />
-  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="41.63194444444444" z="77.5" w="32.43055555555556" d="5" h="0" r="2.5" angle="315" extent="90" />
-  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="41.63194444444444" z="87.5" w="32.43055555555556" d="5" h="0" r="2.5" angle="135" extent="90" />
-  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="73.50694444444444" z="62.5" w="31.875" d="5" h="0" r="2.5" angle="135" extent="90" />
-  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="73.50694444444444" z="52.5" w="31.875" d="5" h="0" r="2.5" angle="315" extent="90" />
-  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="73.54166666666667" z="77.5" w="32.5" d="5" h="0" r="2.5" angle="315" extent="90" />
-  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="73.54166666666667" z="87.5" w="32.5" d="5" h="0" r="2.5" angle="135" extent="90" />
-  <Ramp thickness=".1" y="13.5" deltaY="3.375" fill="#eeeeee" frame="#000000" x="72.56944444444444" z="97.56944444444444" w="5" d="5" h="0" r="2.5" angle="225" extent="90" />
+  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="41.63194444444445" z="52.5" w="33.125" d="5" h="0" r="2.5" angle="0" />
+  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="41.63194444444444" z="77.5" w="32.43055555555556" d="5" h="0" r="2.5" angle="0" />
+  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="41.63194444444444" z="87.5" w="32.43055555555556" d="5" h="0" r="2.5" angle="180" />
+  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="73.50694444444444" z="62.5" w="31.875" d="5" h="0" r="2.5" angle="180" />
+  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="73.50694444444444" z="52.5" w="31.875" d="5" h="0" r="2.5" angle="0" />
+  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="73.54166666666667" z="77.5" w="32.5" d="5" h="0" r="2.5" angle="0" />
+  <Ramp thickness="0" y="3.5" deltaY="3.25" fill="#bbbbbb" frame="#000000" x="73.54166666666667" z="87.5" w="32.5" d="5" h="0" r="2.5" angle="180" />
+  <Ramp thickness=".1" y="13.5" deltaY="3.375" fill="#eeeeee" frame="#000000" x="72.56944444444444" z="97.56944444444444" w="5" d="5" h="0" r="2.5" angle="270" />
   <set wallHeight=".1" />
   <Wall fill="#eeeeee" frame="#000000" x="67.5" z="105" w="5" d="20" h="0" y="16.875" />
   <set wallHeight=".1" />
@@ -80,7 +80,7 @@ information = &quot;Since Avara Pharmaceutical Services purchased St. Hector Reg
   <Wall fill="#eeeeee" frame="#000000" x="57.5" z="70" w="15" d="5" h="0" y="16.875" />
   <set wallHeight=".1" />
   <Wall fill="#eeeeee" frame="#000000" x="67.5" z="51.25" w="5" d="42.5" h="0" y="16.875" />
-  <Ramp thickness=".05" y="13.5" deltaY="3.375" fill="#eeeeee" frame="#000000" x="42.56944444444444" z="42.56944444444444" w="5" d="5" h="0" r="2.5" angle="45" extent="90" />
+  <Ramp thickness=".05" y="13.5" deltaY="3.375" fill="#eeeeee" frame="#000000" x="42.56944444444444" z="42.56944444444444" w="5" d="5" h="0" r="2.5" angle="90" />
   <set wallHeight=".05" />
   <Wall fill="#eeeeee" frame="#000000" x="47.5" z="35" w="5" d="20" h="0" y="16.875" />
   <set wallHeight=".1" />
@@ -121,16 +121,16 @@ information = &quot;Since Avara Pharmaceutical Services purchased St. Hector Reg
   <Wall fill="#bbbbbb" frame="#000000" x="100.3125" z="26.25" w="0.625" d="2.5" h="0" />
   <set wallHeight="27" />
   <Wall fill="#bbbbbb" frame="#000000" x="100.3125" z="20.9375" w="0.625" d="3.125" h="0" />
-  <Incarnator y="13.5" fill="#ff33cc" frame="#000000" cx="93.19444444444444" cz="108.33333333333334" r="2.5" angle="90" extent="90" />
-  <Incarnator y="6.75" fill="#ff33cc" frame="#000000" cx="20.069444444444446" cz="106.45833333333334" r="2.5" angle="135" extent="90" />
-  <Incarnator y="6.75" fill="#ff33cc" frame="#000000" cx="72.56944444444444" cz="106.3888888888889" r="2.5" angle="135" extent="90" />
-  <Incarnator y="13.5" fill="#ff33cc" frame="#000000" cx="21.944444444444446" cz="31.458333333333336" r="2.5" angle="270" extent="90" />
-  <Incarnator y="6.75" fill="#ff33cc" frame="#000000" cx="42.5" cz="33.68055555555556" r="2.5" angle="315" extent="90" />
+  <Incarnator y="13.5" fill="#ff33cc" frame="#000000" cx="93.19444444444444" cz="108.33333333333334" r="2.5" angle="135" />
+  <Incarnator y="6.75" fill="#ff33cc" frame="#000000" cx="20.069444444444446" cz="106.45833333333334" r="2.5" angle="180" />
+  <Incarnator y="6.75" fill="#ff33cc" frame="#000000" cx="72.56944444444444" cz="106.3888888888889" r="2.5" angle="180" />
+  <Incarnator y="13.5" fill="#ff33cc" frame="#000000" cx="21.944444444444446" cz="31.458333333333336" r="2.5" angle="315" />
+  <Incarnator y="6.75" fill="#ff33cc" frame="#000000" cx="42.5" cz="33.68055555555556" r="2.5" angle="0" />
   <set wallHeight="27" wallYon="0.01" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#336666" frame="#ff6600" cx="57.5" cz="70" r="2.5" angle="90" extent="90" />
-  <Timer in="mTaken" out="mShow" wait="500" fill="#336666" frame="#ff6600" cx="57.5" cz="70" r="2.5" angle="90" extent="90" />
-  <Goody y="18" speed="2" missiles="6" grenades="12" boosters="1" start="mShow" out="mTaken" fill="#336666" frame="#ff6600" cx="57.5" cz="70" r="2.5" angle="90" extent="90" />
+  <And in="@start" out="mShow" fill="#336666" frame="#ff6600" cx="57.5" cz="70" r="2.5" angle="135" />
+  <Timer in="mTaken" out="mShow" wait="500" fill="#336666" frame="#ff6600" cx="57.5" cz="70" r="2.5" angle="135" />
+  <Goody y="18" speed="2" missiles="6" grenades="12" boosters="1" start="mShow" out="mTaken" fill="#336666" frame="#ff6600" cx="57.5" cz="70" r="2.5" angle="135" />
   <Wall fill="#ffffff" frame="#000000" x="76.25" z="19.6875" w="2.5" d="0.625" h="0" />
   <set wallHeight="27" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="81.25" z="19.6875" w="2.5" d="0.625" h="0" />
@@ -151,29 +151,29 @@ information = &quot;Since Avara Pharmaceutical Services purchased St. Hector Reg
   <set wallHeight="27" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="100.3125" z="23.75" w="0.625" d="2.5" h="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0033ff" frame="#ff6600" cx="20" cz="115" r="2.5" angle="180" extent="90" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#0033ff" frame="#ff6600" cx="20" cz="115" r="2.5" angle="180" extent="90" />
-  <Goody shape="bspMissile" y="8.5" speed="2" missiles="2" start="mShow" out="mTaken" fill="#0033ff" frame="#ff6600" cx="20" cz="115" r="2.5" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#0033ff" frame="#ff6600" cx="20" cz="115" r="2.5" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="200" fill="#0033ff" frame="#ff6600" cx="20" cz="115" r="2.5" angle="225" />
+  <Goody shape="bspMissile" y="8.5" speed="2" missiles="2" start="mShow" out="mTaken" fill="#0033ff" frame="#ff6600" cx="20" cz="115" r="2.5" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0033ff" frame="#ff6600" cx="95" cz="24.791666666666668" r="2.5" angle="180" extent="90" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#0033ff" frame="#ff6600" cx="95" cz="24.791666666666668" r="2.5" angle="180" extent="90" />
-  <Goody shape="bspMissile" y="8.5" speed="2" missiles="2" start="mShow" out="mTaken" fill="#0033ff" frame="#ff6600" cx="95" cz="24.791666666666668" r="2.5" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#0033ff" frame="#ff6600" cx="95" cz="24.791666666666668" r="2.5" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="200" fill="#0033ff" frame="#ff6600" cx="95" cz="24.791666666666668" r="2.5" angle="225" />
+  <Goody shape="bspMissile" y="8.5" speed="2" missiles="2" start="mShow" out="mTaken" fill="#0033ff" frame="#ff6600" cx="95" cz="24.791666666666668" r="2.5" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0033ff" frame="#ff6600" cx="41.875" cz="70" r="2.5" angle="180" extent="90" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#0033ff" frame="#ff6600" cx="41.875" cz="70" r="2.5" angle="180" extent="90" />
-  <Goody shape="bspMissile" y="8.5" speed="2" missiles="2" start="mShow" out="mTaken" fill="#0033ff" frame="#ff6600" cx="41.875" cz="70" r="2.5" angle="180" extent="90" />
+  <And in="@start" out="mShow" fill="#0033ff" frame="#ff6600" cx="41.875" cz="70" r="2.5" angle="225" />
+  <Timer in="mTaken" out="mShow" wait="200" fill="#0033ff" frame="#ff6600" cx="41.875" cz="70" r="2.5" angle="225" />
+  <Goody shape="bspMissile" y="8.5" speed="2" missiles="2" start="mShow" out="mTaken" fill="#0033ff" frame="#ff6600" cx="41.875" cz="70" r="2.5" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff33" frame="#000000" cx="73.125" cz="70" r="2.5" angle="0" extent="90" />
-  <Timer in="mTaken" out="mShow" wait="150" fill="#ffff33" frame="#000000" cx="73.125" cz="70" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspGrenade" y="8.5" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="73.125" cz="70" r="2.5" angle="0" extent="90" />
+  <And in="@start" out="mShow" fill="#ffff33" frame="#000000" cx="73.125" cz="70" r="2.5" angle="45" />
+  <Timer in="mTaken" out="mShow" wait="150" fill="#ffff33" frame="#000000" cx="73.125" cz="70" r="2.5" angle="45" />
+  <Goody shape="bspGrenade" y="8.5" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="73.125" cz="70" r="2.5" angle="45" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff33" frame="#000000" cx="95" cz="115" r="2.5" angle="0" extent="90" />
-  <Timer in="mTaken" out="mShow" wait="150" fill="#ffff33" frame="#000000" cx="95" cz="115" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspGrenade" y="15.25" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="95" cz="115" r="2.5" angle="0" extent="90" />
+  <And in="@start" out="mShow" fill="#ffff33" frame="#000000" cx="95" cz="115" r="2.5" angle="45" />
+  <Timer in="mTaken" out="mShow" wait="150" fill="#ffff33" frame="#000000" cx="95" cz="115" r="2.5" angle="45" />
+  <Goody shape="bspGrenade" y="15.25" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="95" cz="115" r="2.5" angle="45" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff33" frame="#000000" cx="20" cz="25" r="2.5" angle="0" extent="90" />
-  <Timer in="mTaken" out="mShow" wait="150" fill="#ffff33" frame="#000000" cx="20" cz="25" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspGrenade" y="15.25" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="20" cz="25" r="2.5" angle="0" extent="90" />
+  <And in="@start" out="mShow" fill="#ffff33" frame="#000000" cx="20" cz="25" r="2.5" angle="45" />
+  <Timer in="mTaken" out="mShow" wait="150" fill="#ffff33" frame="#000000" cx="20" cz="25" r="2.5" angle="45" />
+  <Goody shape="bspGrenade" y="15.25" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="20" cz="25" r="2.5" angle="45" />
   <unique vars="mWinTeleporter" />
-  <Teleporter start="@winTeam" win="1000" group="mWinTeleporter" shape="0" activeRange="2000" fill="#ff6600" frame="#000000" cx="63.125" cz="70" r="2.5" angle="270" extent="90" />
+  <Teleporter start="@winTeam" win="1000" group="mWinTeleporter" shape="0" activeRange="2000" fill="#ff6600" frame="#000000" cx="63.125" cz="70" r="2.5" angle="315" />
 </map>

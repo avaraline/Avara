@@ -25,35 +25,35 @@
   <Wall fill="#9966ff" frame="#000000" x="72.56944444444444" z="53.81944444444444" w="5" d="20" h="0.25" y="5" />
   <Wall fill="#9966ff" frame="#000000" x="52.56944444444444" z="73.81944444444444" w="20" d="5" h="0.25" y="5" />
   <Wall fill="#9966ff" frame="#000000" x="52.56944444444444" z="33.81944444444444" w="20" d="5" h="0.25" y="5" />
-  <Incarnator y="50" fill="#ffffff" frame="#000000" cx="12.63888888888889" cz="93.2638888888889" r="2.5" angle="180" extent="90" />
-  <Incarnator y="50" fill="#ffffff" frame="#000000" cx="12.63888888888889" cz="13.88888888888889" r="2.5" angle="270" extent="90" />
-  <Incarnator y="50" fill="#ffffff" frame="#000000" cx="92.6388888888889" cz="13.88888888888889" r="2.5" angle="0" extent="90" />
-  <Incarnator y="50" fill="#ffffff" frame="#000000" cx="92.0138888888889" cz="93.2638888888889" r="2.5" angle="90" extent="90" />
+  <Incarnator y="50" fill="#ffffff" frame="#000000" cx="12.63888888888889" cz="93.2638888888889" r="2.5" angle="225" />
+  <Incarnator y="50" fill="#ffffff" frame="#000000" cx="12.63888888888889" cz="13.88888888888889" r="2.5" angle="315" />
+  <Incarnator y="50" fill="#ffffff" frame="#000000" cx="92.6388888888889" cz="13.88888888888889" r="2.5" angle="45" />
+  <Incarnator y="50" fill="#ffffff" frame="#000000" cx="92.0138888888889" cz="93.2638888888889" r="2.5" angle="135" />
   <Wall fill="#9966ff" frame="#000000" x="52.56944444444445" z="53.81944444444445" w="5" d="5" h="0.25" y="5" />
   <Wall fill="#9966ff" frame="#000000" x="42.56944444444444" z="53.81944444444445" w="11.25" d="5" h="0.25" y="5" />
   <Wall fill="#9966ff" frame="#000000" x="62.56944444444444" z="53.81944444444445" w="11.25" d="5" h="0.25" y="5" />
   <Wall fill="#9966ff" frame="#000000" x="52.56944444444445" z="43.81944444444444" w="5" d="11.25" h="0.25" y="5" />
   <Wall fill="#9966ff" frame="#000000" x="52.56944444444445" z="63.81944444444444" w="5" d="11.25" h="0.25" y="5" />
-  <Timer in="@get" wait="300" out="@re" fill="#ffffff" frame="#000000" cx="106.3888888888889" cz="7.638888888888889" r="2.5" angle="0" extent="90" />
-  <Teleporter group="1" shape="0" y="30" fill="#ffffff" frame="#000000" cx="12.63888888888889" cz="95.7638888888889" r="2.5" angle="270" extent="90" />
-  <Teleporter group="1" shape="0" y="30" fill="#ffffff" frame="#000000" cx="12.63888888888889" cz="13.88888888888889" r="2.5" angle="270" extent="90" />
-  <Teleporter group="1" shape="0" y="30" fill="#ffffff" frame="#000000" cx="94.5138888888889" cz="95.7638888888889" r="2.5" angle="270" extent="90" />
-  <Teleporter group="1" shape="0" y="30" fill="#ffffff" frame="#000000" cx="95.1388888888889" cz="13.88888888888889" r="2.5" angle="270" extent="90" />
-  <Teleporter group="2" destGroup="1" y="0" fill="#ff0099" frame="#000000" cx="12.63888888888889" cz="95.7638888888889" r="2.5" angle="270" extent="90" />
-  <Teleporter group="2" destGroup="1" y="0" fill="#ff0099" frame="#000000" cx="12.63888888888889" cz="13.88888888888889" r="2.5" angle="270" extent="90" />
-  <Teleporter group="2" destGroup="1" y="0" fill="#ff0099" frame="#000000" cx="94.5138888888889" cz="95.7638888888889" r="2.5" angle="270" extent="90" />
-  <Teleporter group="2" destGroup="1" y="0" fill="#ff0099" frame="#000000" cx="95.1388888888889" cz="13.88888888888889" r="2.5" angle="270" extent="90" />
-  <Timer in="@start" wait="300" out="@re" fill="#ffffff" frame="#000000" cx="105.7638888888889" cz="16.38888888888889" r="2.5" angle="0" extent="90" />
-  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="1" fill="#ffff00" frame="#000000" cx="32.63888888888889" cz="73.88888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="1" fill="#ffff00" frame="#000000" cx="33.26388888888889" cz="33.88888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="1" fill="#ffff00" frame="#000000" cx="72.63888888888889" cz="73.88888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="1" fill="#ffff00" frame="#000000" cx="73.26388888888889" cz="33.88888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="4" fill="#ffff00" frame="#000000" cx="52.63888888888889" cz="53.88888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="1" fill="#ffff00" frame="#000000" cx="52.63888888888889" cz="93.8888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="1" fill="#ffff00" frame="#000000" cx="52.63888888888889" cz="13.88888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="1" fill="#ffff00" frame="#000000" cx="92.6388888888889" cz="53.88888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="1" fill="#ffff00" frame="#000000" cx="12.63888888888889" cz="53.88888888888889" r="2.5" angle="270" extent="90" />
-  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="4" fill="#ffff00" frame="#000000" cx="52.63888888888889" cz="53.88888888888889" r="2.5" angle="270" extent="90" />
+  <Timer in="@get" wait="300" out="@re" fill="#ffffff" frame="#000000" cx="106.3888888888889" cz="7.638888888888889" r="2.5" angle="45" />
+  <Teleporter group="1" shape="0" y="30" fill="#ffffff" frame="#000000" cx="12.63888888888889" cz="95.7638888888889" r="2.5" angle="315" />
+  <Teleporter group="1" shape="0" y="30" fill="#ffffff" frame="#000000" cx="12.63888888888889" cz="13.88888888888889" r="2.5" angle="315" />
+  <Teleporter group="1" shape="0" y="30" fill="#ffffff" frame="#000000" cx="94.5138888888889" cz="95.7638888888889" r="2.5" angle="315" />
+  <Teleporter group="1" shape="0" y="30" fill="#ffffff" frame="#000000" cx="95.1388888888889" cz="13.88888888888889" r="2.5" angle="315" />
+  <Teleporter group="2" destGroup="1" y="0" fill="#ff0099" frame="#000000" cx="12.63888888888889" cz="95.7638888888889" r="2.5" angle="315" />
+  <Teleporter group="2" destGroup="1" y="0" fill="#ff0099" frame="#000000" cx="12.63888888888889" cz="13.88888888888889" r="2.5" angle="315" />
+  <Teleporter group="2" destGroup="1" y="0" fill="#ff0099" frame="#000000" cx="94.5138888888889" cz="95.7638888888889" r="2.5" angle="315" />
+  <Teleporter group="2" destGroup="1" y="0" fill="#ff0099" frame="#000000" cx="95.1388888888889" cz="13.88888888888889" r="2.5" angle="315" />
+  <Timer in="@start" wait="300" out="@re" fill="#ffffff" frame="#000000" cx="105.7638888888889" cz="16.38888888888889" r="2.5" angle="45" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="1" fill="#ffff00" frame="#000000" cx="32.63888888888889" cz="73.88888888888889" r="2.5" angle="315" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="1" fill="#ffff00" frame="#000000" cx="33.26388888888889" cz="33.88888888888889" r="2.5" angle="315" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="1" fill="#ffff00" frame="#000000" cx="72.63888888888889" cz="73.88888888888889" r="2.5" angle="315" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="1" fill="#ffff00" frame="#000000" cx="73.26388888888889" cz="33.88888888888889" r="2.5" angle="315" />
+  <Goody shape="bspGrenade" start="@re" out="@get" y="7" grenades="4" fill="#ffff00" frame="#000000" cx="52.63888888888889" cz="53.88888888888889" r="2.5" angle="315" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="1" fill="#ffff00" frame="#000000" cx="52.63888888888889" cz="93.8888888888889" r="2.5" angle="315" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="1" fill="#ffff00" frame="#000000" cx="52.63888888888889" cz="13.88888888888889" r="2.5" angle="315" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="1" fill="#ffff00" frame="#000000" cx="92.6388888888889" cz="53.88888888888889" r="2.5" angle="315" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="1" fill="#ffff00" frame="#000000" cx="12.63888888888889" cz="53.88888888888889" r="2.5" angle="315" />
+  <Goody shape="bspMissile" start="@re" out="@get" y="12" missiles="4" fill="#ffff00" frame="#000000" cx="52.63888888888889" cz="53.88888888888889" r="2.5" angle="315" />
   <set designer="Lord Anon III" information="A lost ruin hidden in the 
 jungles at the foot of the mountain. Its 
 structures are in reasonably good shape, 

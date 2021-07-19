@@ -141,6 +141,10 @@ struct ALFWalker: pugi::xml_tree_walker {
         else if (name.compare("unique") == 0) handle_unique(node);
         else if (name.compare("set") == 0) handle_set(node);
         else if (name.compare("script") == 0) handle_script(node);
+        else if (name.compare("Dome") == 0) {
+            handle_dome(node);
+            handle_object(node, name);
+        }
         else if (name.compare("WallDoor") == 0 || name.compare("WallSolid") == 0) {
             // WallDoors and WallSolids always use the last Wall.
             handle_wall(node);
@@ -169,8 +173,7 @@ struct ALFWalker: pugi::xml_tree_walker {
                cx = node.attribute("cx").value(),
                cz = node.attribute("cz").value(),
                r = node.attribute("r").value(),
-               angle = node.attribute("angle").value(),
-               extent = node.attribute("extent").value();
+               angle = node.attribute("angle").value();
 
         gLastBoxRounding = h.empty() ? 0 : ToFixed(std::stod(h));
 
@@ -223,19 +226,29 @@ struct ALFWalker: pugi::xml_tree_walker {
             lastOvalRadius = radius;
         }
 
-        if (!angle.empty() && !extent.empty()) {
-            int arcStart = std::stoi(angle),
-                arcExtent = std::stoi(extent);
+        if (!angle.empty()) {
+            int arcAngle = std::stoi(angle);
 
-            lastArcAngle = (720 - (arcStart + arcExtent / 2)) % 360;
-            lastDomeAngle = 360 - arcStart;
-            lastDomeSpan = arcExtent;
+            lastArcAngle = (720 - arcAngle) % 360;
+            lastDomeAngle = 360 - arcAngle;
         }
 
         return true;
     }
 
     void handle_map(pugi::xml_node& node) {
+    }
+
+    void handle_dome(pugi::xml_node& node) {
+        std::string quarters = node.attribute("quarters").value();
+        if (!quarters.empty()) {
+            int extent = std::stoi(quarters) * 90;
+            lastDomeSpan = (extent >= 90 && extent <= 360)
+                ? extent
+                : 360;
+        } else {
+            lastDomeSpan = 360;
+        }
     }
 
     void handle_enum(pugi::xml_node& node) {
@@ -295,8 +308,7 @@ struct ALFWalker: pugi::xml_tree_walker {
                 attr.compare("cx") == 0 ||
                 attr.compare("cz") == 0 ||
                 attr.compare("r") == 0 ||
-                attr.compare("angle") == 0 ||
-                attr.compare("extent") == 0
+                attr.compare("angle") == 0
             ) continue;
             script << attr << " = " << value << "\n";
         }

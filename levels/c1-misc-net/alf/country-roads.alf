@@ -1,56 +1,56 @@
 <map>
-  <Incarnator mask="T6" y="8" fill="#0099ff" frame="#006600" cx="62.43055555555556" cz="31.736111111111114" r="1.25" angle="45" extent="90" />
-  <Incarnator mask="T2" y="8" fill="#ffff00" frame="#006600" cx="38.88888888888889" cz="31.66666666666667" r="1.25" angle="225" extent="90" />
-  <Incarnator mask="T6" y="8" fill="#0099ff" frame="#006600" cx="67.43055555555556" cz="26.458333333333336" r="1.25" angle="45" extent="90" />
-  <Incarnator mask="T2" y="8" fill="#ffff00" frame="#006600" cx="33.68055555555556" cz="26.180555555555557" r="1.25" angle="225" extent="90" />
-  <Incarnator mask="T6" y="8" fill="#0099ff" frame="#006600" cx="67.43055555555556" cz="36.94444444444444" r="1.25" angle="45" extent="90" />
-  <Incarnator mask="T2" y="8" fill="#ffff00" frame="#006600" cx="33.68055555555556" cz="36.66666666666667" r="1.25" angle="225" extent="90" />
+  <Incarnator mask="T6" y="8" fill="#0099ff" frame="#006600" cx="62.43055555555556" cz="31.736111111111114" r="1.25" angle="90" />
+  <Incarnator mask="T2" y="8" fill="#ffff00" frame="#006600" cx="38.88888888888889" cz="31.66666666666667" r="1.25" angle="270" />
+  <Incarnator mask="T6" y="8" fill="#0099ff" frame="#006600" cx="67.43055555555556" cz="26.458333333333336" r="1.25" angle="90" />
+  <Incarnator mask="T2" y="8" fill="#ffff00" frame="#006600" cx="33.68055555555556" cz="26.180555555555557" r="1.25" angle="270" />
+  <Incarnator mask="T6" y="8" fill="#0099ff" frame="#006600" cx="67.43055555555556" cz="36.94444444444444" r="1.25" angle="90" />
+  <Incarnator mask="T2" y="8" fill="#ffff00" frame="#006600" cx="33.68055555555556" cz="36.66666666666667" r="1.25" angle="270" />
   <Wall fill="#008800" frame="#000000" x="85.625" z="14.444444444444446" w="10" d="10" h="0.25" y="14" />
   <SkyColor verticalRangeMin="20" verticalRangeMax="2000" n="16" fill="#0099ff" frame="#000055" />
   <GroundColor fill="#004400" frame="#000055" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="33.19444444444444" cz="16.875" r="2.5" angle="180" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="18.194444444444446" cz="16.875" r="2.5" angle="180" extent="180" />
-  <Door shape="bspHill" fill="#008800" frame="#000000" cx="33.19444444444444" cz="31.875" r="2.5" angle="180" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="48.19444444444445" cz="16.875" r="2.5" angle="270" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="13.125" cz="16.875" r="2.5" angle="270" extent="180" />
-  <Hologram shape="bspTurn" fill="#444444" frame="#000000" cx="18.194444444444446" cz="16.875" r="2.5" angle="270" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="13.125" cz="31.875" r="2.5" angle="270" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="48.125" cz="31.875" r="2.5" angle="270" extent="180" />
-  <Hologram shape="bspTurn" fill="#444444" frame="#000000" cx="18.194444444444446" cz="46.875" r="2.5" angle="180" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="33.125" cz="51.875" r="2.5" angle="180" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="18.125" cz="51.875" r="2.5" angle="180" extent="180" />
-  <Door y="3.5" shape="bspTree" fill="#004400" frame="#000000" cx="72.67361111111111" cz="34.895833333333336" r="1.4930555555555571" angle="0" extent="90" />
-  <Door y="3.5" shape="bspTree" fill="#004400" frame="#000000" cx="28.645833333333336" cz="28.923611111111114" r="1.4930555555555554" angle="180" extent="90" />
-  <Door shape="bspTree" fill="#004400" frame="#000000" cx="25.90277777777778" cz="43.923611111111114" r="1.5277777777777786" angle="180" extent="90" />
-  <Door shape="bspTree" fill="#004400" frame="#000000" cx="71.14583333333334" cz="19.65277777777778" r="1.5277777777777786" angle="180" extent="90" />
-  <Hologram y="3.5" shape="bspFlower" fill="#ff0099" frame="#000000" cx="64.6875" cz="27.881944444444443" r="1.4930555555555554" angle="180" extent="90" />
-  <Hologram shape="bspFlower" fill="#dd0000" frame="#000000" cx="57.395833333333336" cz="36.145833333333336" r="1.4930555555555571" angle="0" extent="90" />
-  <Hologram shape="bspFlower" fill="#ffff99" frame="#000000" cx="44.40972222222223" cz="20.90277777777778" r="1.5277777777777786" angle="90" extent="90" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="53.125" cz="51.875" r="2.5" angle="180" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="68.125" cz="51.875" r="2.5" angle="180" extent="180" />
-  <Door shape="bspHill" fill="#008800" frame="#000000" cx="68.19444444444444" cz="31.875" r="2.5" angle="180" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="83.125" cz="16.875" r="2.5" angle="270" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="83.125" cz="31.875" r="2.5" angle="270" extent="180" />
-  <Hologram shape="bspTurn" fill="#444444" frame="#000000" cx="83.19444444444444" cz="16.875" r="2.5" angle="0" extent="180" />
-  <Hologram shape="bspTurn" fill="#444444" frame="#000000" cx="83.19444444444444" cz="46.875" r="2.5" angle="90" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="68.125" cz="16.875" r="2.5" angle="180" extent="180" />
-  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="53.125" cz="16.875" r="2.5" angle="180" extent="180" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="33.19444444444444" cz="16.875" r="2.5" angle="270" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="18.194444444444446" cz="16.875" r="2.5" angle="270" />
+  <Door shape="bspHill" fill="#008800" frame="#000000" cx="33.19444444444444" cz="31.875" r="2.5" angle="270" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="48.19444444444445" cz="16.875" r="2.5" angle="0" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="13.125" cz="16.875" r="2.5" angle="0" />
+  <Hologram shape="bspTurn" fill="#444444" frame="#000000" cx="18.194444444444446" cz="16.875" r="2.5" angle="0" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="13.125" cz="31.875" r="2.5" angle="0" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="48.125" cz="31.875" r="2.5" angle="0" />
+  <Hologram shape="bspTurn" fill="#444444" frame="#000000" cx="18.194444444444446" cz="46.875" r="2.5" angle="270" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="33.125" cz="51.875" r="2.5" angle="270" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="18.125" cz="51.875" r="2.5" angle="270" />
+  <Door y="3.5" shape="bspTree" fill="#004400" frame="#000000" cx="72.67361111111111" cz="34.895833333333336" r="1.4930555555555571" angle="45" />
+  <Door y="3.5" shape="bspTree" fill="#004400" frame="#000000" cx="28.645833333333336" cz="28.923611111111114" r="1.4930555555555554" angle="225" />
+  <Door shape="bspTree" fill="#004400" frame="#000000" cx="25.90277777777778" cz="43.923611111111114" r="1.5277777777777786" angle="225" />
+  <Door shape="bspTree" fill="#004400" frame="#000000" cx="71.14583333333334" cz="19.65277777777778" r="1.5277777777777786" angle="225" />
+  <Hologram y="3.5" shape="bspFlower" fill="#ff0099" frame="#000000" cx="64.6875" cz="27.881944444444443" r="1.4930555555555554" angle="225" />
+  <Hologram shape="bspFlower" fill="#dd0000" frame="#000000" cx="57.395833333333336" cz="36.145833333333336" r="1.4930555555555571" angle="45" />
+  <Hologram shape="bspFlower" fill="#ffff99" frame="#000000" cx="44.40972222222223" cz="20.90277777777778" r="1.5277777777777786" angle="135" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="53.125" cz="51.875" r="2.5" angle="270" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="68.125" cz="51.875" r="2.5" angle="270" />
+  <Door shape="bspHill" fill="#008800" frame="#000000" cx="68.19444444444444" cz="31.875" r="2.5" angle="270" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="83.125" cz="16.875" r="2.5" angle="0" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="83.125" cz="31.875" r="2.5" angle="0" />
+  <Hologram shape="bspTurn" fill="#444444" frame="#000000" cx="83.19444444444444" cz="16.875" r="2.5" angle="90" />
+  <Hologram shape="bspTurn" fill="#444444" frame="#000000" cx="83.19444444444444" cz="46.875" r="2.5" angle="180" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="68.125" cz="16.875" r="2.5" angle="270" />
+  <Hologram shape="bspStreet" isAmbient="true" fill="#444444" frame="#000000" cx="53.125" cz="16.875" r="2.5" angle="270" />
   <Wall fill="#444444" frame="#000000" x="50.69444444444445" z="14.375" w="5" d="5" h="0.25" />
   <Wall fill="#444444" frame="#000000" x="50.625" z="49.375" w="5" d="5" h="0.25" />
   <Wall fill="#770000" frame="#000000" x="30.625" z="14.409722222222223" w="35" d="2.9861111111111107" h="0.5" y="10" />
   <Wall fill="#770000" frame="#000000" x="70.625" z="49.40972222222223" w="35" d="2.986111111111107" h="0.5" y="10" />
-  <Timer in="@oSouth" out="@cSouth" wait="60" fill="#770000" frame="#000000" cx="53.125" cz="16.875" r="2.5" angle="180" extent="180" />
-  <WallDoor open="@oSouth" close="@cSouth" stepOnMsg="@oSouth" middle="closed" midY=".25" deltaY="10.25" yaw="360 * 4" closeDelay="80" fill="#770000" frame="#000000" r="2.5" cx="53.125" cz="16.875" angle="180" extent="180" x="50.625" z="49.375" w="5" d="5" h="0.25" />
-  <Timer in="@oNorth" out="@cNorth" delay="80" fill="#770000" frame="#000000" cx="53.125" cz="16.875" r="2.5" angle="180" extent="180" />
-  <WallDoor open="@oNorth" close="@cNorth" stepOnMsg="@oNorth" middle="closed" midY=".25" deltaY="10.25" yaw="360 * 4" closeDelay="80" fill="#770000" frame="#000000" r="2.5" cx="53.125" cz="16.875" angle="180" extent="180" x="50.625" z="14.375" w="5" d="5" h="0.25" />
+  <Timer in="@oSouth" out="@cSouth" wait="60" fill="#770000" frame="#000000" cx="53.125" cz="16.875" r="2.5" angle="270" />
+  <WallDoor open="@oSouth" close="@cSouth" stepOnMsg="@oSouth" middle="closed" midY=".25" deltaY="10.25" yaw="360 * 4" closeDelay="80" fill="#770000" frame="#000000" r="2.5" cx="53.125" cz="16.875" angle="270" x="50.625" z="49.375" w="5" d="5" h="0.25" />
+  <Timer in="@oNorth" out="@cNorth" delay="80" fill="#770000" frame="#000000" cx="53.125" cz="16.875" r="2.5" angle="270" />
+  <WallDoor open="@oNorth" close="@cNorth" stepOnMsg="@oNorth" middle="closed" midY=".25" deltaY="10.25" yaw="360 * 4" closeDelay="80" fill="#770000" frame="#000000" r="2.5" cx="53.125" cz="16.875" angle="270" x="50.625" z="14.375" w="5" d="5" h="0.25" />
   <Wall fill="#770000" frame="#000000" x="50.625" z="31.875" w="25" d="5" h="0.25" y="3.45" />
-  <Timer in="@oBlue" out="@cBlue" delay="0" fill="#ffff00" frame="#9900cc" cx="33.22916666666667" cz="31.73611111111111" r="3.020833333333332" angle="0" extent="90" />
-  <Door2 shape="bspLock" hitMsg="@oBlue" killMsg="@oBwin" open="@oBlue" close="@cBlue" Speed="20" middle="closed" midY="3.7" canGlow="true" shield="10" deltaY="12" yaw="360 * 4" isTarget="true" fill="#ffff00" frame="#9900cc" cx="33.22916666666667" cz="31.73611111111111" r="3.020833333333332" angle="0" extent="90" />
-  <Timer in="@oYellow" out="@cYellow" delay="0" fill="#0099ff" frame="#9900cc" cx="68.22916666666667" cz="31.73611111111111" r="3.0208333333333286" angle="0" extent="90" />
-  <Door2 shape="bspLock" hitMsg="@oYellow" killMsg="@oYwin" open="@oYellow" close="@cYellow" Speed="20" middle="closed" midY="3.7" canGlow="true" isTarget="true" shield="10" deltaY="12" yaw="360 * 4" fill="#0099ff" frame="#9900cc" cx="68.22916666666667" cz="31.73611111111111" r="3.0208333333333286" angle="0" extent="90" />
-  <Teleporter win="1000" y="14.5" mask="T6" fill="#0099ff" frame="#000000" cx="85.65972222222223" cz="14.409722222222223" r="1.7708333333333357" angle="180" extent="90" />
-  <WallDoor open="@oBwin" middle="closed" midY="20" deltaY="12" fill="#008800" frame="#000000" r="1.7708333333333357" cx="85.65972222222223" cz="14.409722222222223" angle="180" extent="90" x="85.69444444444444" z="31.944444444444443" w="5" d="25" h="0.25" />
+  <Timer in="@oBlue" out="@cBlue" delay="0" fill="#ffff00" frame="#9900cc" cx="33.22916666666667" cz="31.73611111111111" r="3.020833333333332" angle="45" />
+  <Door2 shape="bspLock" hitMsg="@oBlue" killMsg="@oBwin" open="@oBlue" close="@cBlue" Speed="20" middle="closed" midY="3.7" canGlow="true" shield="10" deltaY="12" yaw="360 * 4" isTarget="true" fill="#ffff00" frame="#9900cc" cx="33.22916666666667" cz="31.73611111111111" r="3.020833333333332" angle="45" />
+  <Timer in="@oYellow" out="@cYellow" delay="0" fill="#0099ff" frame="#9900cc" cx="68.22916666666667" cz="31.73611111111111" r="3.0208333333333286" angle="45" />
+  <Door2 shape="bspLock" hitMsg="@oYellow" killMsg="@oYwin" open="@oYellow" close="@cYellow" Speed="20" middle="closed" midY="3.7" canGlow="true" isTarget="true" shield="10" deltaY="12" yaw="360 * 4" fill="#0099ff" frame="#9900cc" cx="68.22916666666667" cz="31.73611111111111" r="3.0208333333333286" angle="45" />
+  <Teleporter win="1000" y="14.5" mask="T6" fill="#0099ff" frame="#000000" cx="85.65972222222223" cz="14.409722222222223" r="1.7708333333333357" angle="225" />
+  <WallDoor open="@oBwin" middle="closed" midY="20" deltaY="12" fill="#008800" frame="#000000" r="1.7708333333333357" cx="85.65972222222223" cz="14.409722222222223" angle="225" x="85.69444444444444" z="31.944444444444443" w="5" d="25" h="0.25" />
   <Wall fill="#008800" frame="#000000" x="15.625" z="49.44444444444444" w="10" d="10" h="0.25" y="14" />
-  <WallDoor open="@oYwin" middle="closed" midY="20" deltaY="12" fill="#008800" frame="#000000" r="1.7708333333333357" cx="85.65972222222223" cz="14.409722222222223" angle="180" extent="90" x="15.659722222222223" z="31.875" w="5.069444444444446" d="25" h="0.25" />
-  <Teleporter win="1000" y="14.5" mask="T2" fill="#ffff00" frame="#000000" cx="15.416666666666668" cz="49.40972222222223" r="1.7708333333333321" angle="180" extent="90" />
+  <WallDoor open="@oYwin" middle="closed" midY="20" deltaY="12" fill="#008800" frame="#000000" r="1.7708333333333357" cx="85.65972222222223" cz="14.409722222222223" angle="225" x="15.659722222222223" z="31.875" w="5.069444444444446" d="25" h="0.25" />
+  <Teleporter win="1000" y="14.5" mask="T2" fill="#ffff00" frame="#000000" cx="15.416666666666668" cz="49.40972222222223" r="1.7708333333333321" angle="225" />
 </map>
