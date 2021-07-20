@@ -371,6 +371,7 @@ void CAvaraGame::FlagMessage(MsgType messageNum) {
     MessageRecord *msgP;
 
     if (messageNum) {
+
         msgP = messageBoard[messageNum & (MESSAGEHASH - 1)];
 
         while (msgP) {
@@ -459,44 +460,46 @@ void CAvaraGame::Score(short team, short player, long points, Fixed energy, shor
 
 void CAvaraGame::RunFrameActions() {
     // SDL_Log("CAvaraGame::RunFrameActions\n");
-    CAbstractActor *theActor;
     CAbstractPlayer *thePlayer;
 
     itsDepot->FrameAction();
 
     postMortemList = NULL;
-    theActor = actorList;
 
-    while (theActor) {
-        nextActor = theActor->nextActor;
-        if (theActor->isActive || --(theActor->sleepTimer) <= 0) {
-            if (theActor->HandlesFastFPS() || IsClassicFrame()) {
-              theActor->FrameAction();
-            }
-            // itsNet->ProcessQueue();
-            /*
-            if(canPreSend && SDL_GetTicks() - nextScheduledFrame >= 0)
-            {	canPreSend = false;
-                itsNet->FrameAction();
-            }
-            */
-        }
-
-        theActor = nextActor;
-    }
+    RunActorFrameActions();
 
     itsNet->ProcessQueue();
-    if (!latencyTolerance && IsClassicFrame()) {
+    if (!latencyTolerance) {
         while (frameNumber > topSentFrame) {
             itsNet->FrameAction();
         }
     }
 
     thePlayer = playerList;
-    while (thePlayer && IsClassicFrame()) { // itsNet->ProcessQueue();
+    while (thePlayer) { // itsNet->ProcessQueue();
         nextPlayer = thePlayer->nextPlayer;
         thePlayer->PlayerAction();
         thePlayer = nextPlayer;
+    }
+}
+
+void CAvaraGame::RunActorFrameActions() {
+    for (CAbstractActor *theActor = actorList;
+         theActor != NULL;
+         theActor = nextActor)
+    {
+        // some actors (e.g. weapons) can remove themselves from the list, so save the nextActor before running FrameAction()
+        nextActor = theActor->nextActor;
+        if (theActor->HandlesFastFPS() || isClassicFrame) {
+            // only decrement sleepTimer on classic frames
+            if (isClassicFrame) {
+                --theActor->sleepTimer;
+            }
+
+            if (theActor->isActive || theActor->sleepTimer <= 0) {
+              theActor->FrameAction();
+            }
+        }
     }
 }
 
@@ -533,7 +536,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
     itsNet->LevelReset();
 
     incarnatorList = NULL;
-    frameNumber = 0;
+    SetFrameNumber(0);
     topSentFrame = -1 / fpsScale;
 
     // ResetView();
@@ -836,8 +839,10 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
 bool CAvaraGame::GameTick() {
     int32_t startTime = SDL_GetTicks();
 
-    if (!IsClassicFrame()) {
-        frameNumber++;
+    if (!isClassicFrame) {
+        // let the fast actors do their thing on non-classic frames as well
+        RunActorFrameActions();
+        SetFrameNumber(frameNumber+1);
         return true;
     }
 
@@ -884,7 +889,7 @@ bool CAvaraGame::GameTick() {
         FlagMessage(iWinTeam + firstVariable);
     }
 
-    frameNumber++;
+    SetFrameNumber(frameNumber+1);
 
     timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
 
@@ -1140,8 +1145,9 @@ void CAvaraGame::SetFrameTime(long ft) {
     this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
 }
 
-bool CAvaraGame::IsClassicFrame() {
-    return (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
+void CAvaraGame::SetFrameNumber(long fn) {
+    frameNumber = fn;
+    isClassicFrame = (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
 }
 
 long CAvaraGame::FramesFromNow(long classicFrameCount) {

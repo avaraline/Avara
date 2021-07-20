@@ -76,6 +76,7 @@ public:
     long loadedTimeLimit;
     long timeInSeconds;
     long frameNumber;
+    bool isClassicFrame;
     int32_t frameAdjust;
 
     long topSentFrame;
@@ -204,6 +205,7 @@ public:
     virtual void ResumeActors();
     virtual void PauseActors();
     virtual void RunFrameActions();
+    virtual void RunActorFrameActions();
 
     virtual void Score(short team, short player, long points, Fixed energy, short hitTeam, short hitPlayer);
 
@@ -221,7 +223,7 @@ public:
     virtual bool GameTick();
     virtual void GameStop();
     virtual void Dispose();
-    
+
     virtual void SpectateNext();
     virtual void SpectatePrevious();
     virtual bool canBeSpectated(CAbstractPlayer *player);
@@ -252,7 +254,7 @@ public:
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(long ft);
-    virtual bool IsClassicFrame();
+    virtual void SetFrameNumber(long fn);
     virtual long FramesFromNow(long classicFrames);
 };
 
