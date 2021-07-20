@@ -917,7 +917,6 @@ void CAbstractPlayer::PlayerAction() {
 
             fireGun = false;
 
-if (itsGame->IsClassicFrame()) {
             if (!netDestruct)
                 KeyboardControl(itsManager->GetFunctions());
 
@@ -945,7 +944,6 @@ if (itsGame->IsClassicFrame()) {
                 energy -= regenRate;
             }
 
-
             GunActions();
 
             if (itsGame->timeInSeconds < itsGame->loadedTimeLimit)
@@ -960,7 +958,6 @@ if (itsGame->IsClassicFrame()) {
             else if (energy < 0)
                 energy = 0;
         }
-}
     }
 
     if (teleportSoundLink->refCount == 1) {
