@@ -33,7 +33,7 @@
 #include <string.h>
 
 #define AUTOLATENCYPERIOD 3840  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
-#define AUTOLATENCYDELAY  480   // msec
+#define AUTOLATENCYDELAY  448   // msec (needs to be divisible by 64)
 #define LOWERLATENCYCOUNT 3
 #define HIGHERLATENCYCOUNT 8
 

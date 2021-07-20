@@ -888,12 +888,13 @@ bool CAvaraGame::GameTick() {
     if (teamsStanding == 1 && oldTeamsStanding > 1) {
         FlagMessage(iWinTeam + firstVariable);
     }
+    
+    // do latency adjustement before frameNumber increments
+    itsNet->AutoLatencyControl(frameNumber, longWait);
 
     SetFrameNumber(frameNumber+1);
 
     timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
-
-    itsNet->AutoLatencyControl(frameNumber, longWait);
 
     if (latencyTolerance)
         while (FramesFromNow(latencyTolerance) > topSentFrame)
@@ -1058,8 +1059,8 @@ double CAvaraGame::LatencyFrameTimeScale() {
 
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     // half of the roundTripTime in units of frameTime, rounded
-    SDL_Log("CAvaraGame::RoundTripToFrameLatency roundTrip=%ld, LT(unrounded)=%.2lf\n", roundTrip, (roundTrip) / (2.0*frameTime));
-    return (roundTrip + frameTime) / (2*frameTime);
+    SDL_Log("CAvaraGame::RoundTripToFrameLatency roundTrip=%ld, LT(unrounded)=%.2lf\n", roundTrip, (roundTrip) / (2.0*CLASSICFRAMETIME));
+    return (roundTrip + frameTime) / (2*CLASSICFRAMETIME);
 }
 
 void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange, const char* slowPlayer) {
