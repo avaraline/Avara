@@ -134,9 +134,9 @@ E-mail: cc96@cornell.edu" />
   <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="1.8" fill="#9900cc" frame="#000000" cx="42.63888888888889" cz="17.01388888888889" r="2.5" angle="45" />
   <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="1.8" fill="#9900cc" frame="#000000" cx="12.63888888888889" cz="57.01388888888889" r="2.5" angle="45" />
   <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="1.8" fill="#9900cc" frame="#000000" cx="52.63888888888889" cz="87.01388888888889" r="2.5" angle="45" />
-  <Timer in="@got" out="@re" wait="200" fill="#9900cc" frame="#000000" cx="100.7638888888889" cz="8.26388888888889" r="2.5" angle="315" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="8.26388888888889" cz="92.95138888888889" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="88.88888888888889" cz="92.95138888888889" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="8.88888888888889" cz="12.95138888888889" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="88.26388888888889" cz="12.32638888888889" r="4.0625" angle="180" />
+  <Timer in="@got" out="@re" wait="200" />
+  <Area enter="@re" cx="8.26388888888889" cz="92.95138888888889" r="4.0625" />
+  <Area enter="@re" cx="88.88888888888889" cz="92.95138888888889" r="4.0625" />
+  <Area enter="@re" cx="8.88888888888889" cz="12.95138888888889" r="4.0625" />
+  <Area enter="@re" cx="88.26388888888889" cz="12.32638888888889" r="4.0625" />
 </map>

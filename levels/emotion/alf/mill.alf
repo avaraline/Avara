@@ -5,14 +5,14 @@
   <Wall fill="#3f4866" frame="#000000" x="29.583333333333336" z="48.958333333333336" w="10" d="1.25" h="0" />
   <set wallHeight="5" />
   <Wall fill="#3f4866" frame="#000000" x="48.958333333333336" z="29.583333333333336" w="1.25" d="10" h="0" />
-  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="27.083333333333336" z="38.958333333333336" w="5" d="18.75" h="0" r="1.875" angle="90" />
-  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="38.958333333333336" z="27.083333333333336" w="18.75" d="5" h="0" r="1.875" angle="180" />
+  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="27.083333333333336" z="38.958333333333336" w="5" d="18.75" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="38.958333333333336" z="27.083333333333336" w="18.75" d="5" h="0" angle="180" />
   <set wallHeight="6" />
   <Wall fill="#3f4866" frame="#000000" x="32.083333333333336" z="32.083333333333336" w="5" d="5" h="0" />
-  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="32.083333333333336" z="41.458333333333336" w="5" d="13.75" h="0" r="1.875" angle="90" />
-  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="41.458333333333336" z="32.083333333333336" w="13.75" d="5" h="0" r="1.875" angle="180" />
-  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="29.583333333333336" z="57.08333333333334" w="10" d="15" h="0" r="1.875" angle="90" />
-  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="57.08333333333334" z="29.583333333333336" w="15" d="10" h="0" r="1.875" angle="180" />
+  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="32.083333333333336" z="41.458333333333336" w="5" d="13.75" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="41.458333333333336" z="32.083333333333336" w="13.75" d="5" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="29.583333333333336" z="57.08333333333334" w="10" d="15" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="57.08333333333334" z="29.583333333333336" w="15" d="10" h="0" angle="180" />
   <set wallHeight="5.5" />
   <Wall fill="#000028" frame="#000000" x="47.083333333333336" z="47.083333333333336" w="5" d="5" h="0" />
   <set wallHeight="2" />
@@ -35,8 +35,8 @@
   <Wall fill="#5f6c85" frame="#000000" x="65.20833333333334" z="37.083333333333336" w="1.25" d="25" h="0" />
   <set wallHeight="3" />
   <Wall fill="#5f6c85" frame="#000000" x="37.083333333333336" z="78.95833333333334" w="25" d="1.25" h="0" />
-  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="29.583333333333336" z="87.08333333333334" w="10" d="15" h="0" r="1.875" angle="90" />
-  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="57.08333333333334" z="114.58333333333334" w="15" d="10" h="0" r="1.875" angle="0" />
+  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="29.583333333333336" z="87.08333333333334" w="10" d="15" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="57.08333333333334" z="114.58333333333334" w="15" d="10" h="0" angle="0" />
   <set wallHeight="5.5" />
   <Wall fill="#000028" frame="#000000" x="47.083333333333336" z="97.08333333333334" w="5" d="5" h="0" />
   <set wallHeight="6" />
@@ -51,14 +51,14 @@
   <Wall fill="#5f6c85" frame="#000000" x="27.083333333333336" z="117.08333333333334" w="5" d="5" h="0" />
   <set wallHeight="6" />
   <Wall fill="#3f4866" frame="#000000" x="32.083333333333336" z="112.08333333333334" w="5" d="5" h="0" />
-  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="27.083333333333336" z="105.20833333333334" w="5" d="18.75" h="0" r="1.875" angle="90" />
-  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="32.083333333333336" z="102.70833333333334" w="5" d="13.75" h="0" r="1.875" angle="90" />
+  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="27.083333333333336" z="105.20833333333334" w="5" d="18.75" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="32.083333333333336" z="102.70833333333334" w="5" d="13.75" h="0" angle="90" />
   <set wallHeight="5" />
   <Wall fill="#3f4866" frame="#000000" x="29.583333333333336" z="95.20833333333334" w="10" d="1.25" h="0" />
   <set wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="29.583333333333336" z="94.58333333333334" w="10" d="2.5" h="0" y="5" />
-  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="38.958333333333336" z="117.08333333333334" w="18.75" d="5" h="0" r="1.875" angle="0" />
-  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="41.458333333333336" z="112.08333333333334" w="13.75" d="5" h="0" r="1.875" angle="0" />
+  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="38.958333333333336" z="117.08333333333334" w="18.75" d="5" h="0" angle="0" />
+  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="41.458333333333336" z="112.08333333333334" w="13.75" d="5" h="0" angle="0" />
   <set wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="29.583333333333336" z="49.583333333333336" w="10" d="2.5" h="0" y="5" />
   <set wallHeight="5" />
@@ -83,22 +83,22 @@
   <Wall fill="#5f6c85" frame="#000000" x="78.95833333333334" z="107.08333333333334" w="1.25" d="25" h="0" />
   <set wallHeight="2" />
   <Wall fill="#9eb5c3" frame="#000000" x="87.08333333333334" z="102.08333333333334" w="15" d="15" h="0" />
-  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="87.08333333333334" z="114.58333333333334" w="15" d="10" h="0" r="1.875" angle="0" />
+  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="87.08333333333334" z="114.58333333333334" w="15" d="10" h="0" angle="0" />
   <set wallHeight="5" />
   <Wall fill="#3f4866" frame="#000000" x="95.20833333333334" z="114.58333333333334" w="1.25" d="10" h="0" />
   <set wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="94.58333333333334" z="114.58333333333334" w="2.5" d="10" h="0" y="5" />
-  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="102.70833333333334" z="112.08333333333334" w="13.75" d="5" h="0" r="1.875" angle="0" />
-  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="105.20833333333334" z="117.08333333333334" w="18.75" d="5" h="0" r="1.875" angle="0" />
+  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="102.70833333333334" z="112.08333333333334" w="13.75" d="5" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="105.20833333333334" z="117.08333333333334" w="18.75" d="5" h="0" angle="0" />
   <set wallHeight="2" />
   <Wall fill="#5f6c85" frame="#000000" x="117.08333333333334" z="117.08333333333334" w="5" d="5" h="0" />
   <set wallHeight="6" />
   <Wall fill="#3f4866" frame="#000000" x="112.08333333333334" z="112.08333333333334" w="5" d="5" h="0" />
-  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="117.08333333333334" z="105.20833333333334" w="5" d="18.75" h="0" r="1.875" angle="270" />
-  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="112.08333333333334" z="102.70833333333334" w="5" d="13.75" h="0" r="1.875" angle="270" />
+  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="117.08333333333334" z="105.20833333333334" w="5" d="18.75" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="112.08333333333334" z="102.70833333333334" w="5" d="13.75" h="0" angle="270" />
   <set wallHeight="5" />
   <Wall fill="#3f4866" frame="#000000" x="114.58333333333334" z="95.20833333333334" w="10" d="1.25" h="0" />
-  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="114.58333333333334" z="87.08333333333334" w="10" d="15" h="0" r="1.875" angle="270" />
+  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="114.58333333333334" z="87.08333333333334" w="10" d="15" h="0" angle="270" />
   <set wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="114.58333333333334" z="94.58333333333334" w="10" d="2.5" h="0" y="5" />
   <set wallHeight="2" />
@@ -121,26 +121,26 @@
   <Wall fill="#5f6c85" frame="#000000" x="107.08333333333334" z="65.20833333333334" w="25" d="1.25" h="0" />
   <set wallHeight="3" />
   <Wall fill="#5f6c85" frame="#000000" x="107.08333333333334" z="78.95833333333334" w="25" d="1.25" h="0" />
-  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="114.58333333333334" z="57.08333333333334" w="10" d="15" h="0" r="1.875" angle="270" />
+  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="114.58333333333334" z="57.08333333333334" w="10" d="15" h="0" angle="270" />
   <set wallHeight="2" />
   <Wall fill="#9eb5c3" frame="#000000" x="102.08333333333334" z="57.08333333333334" w="15" d="15" h="0" />
   <set wallHeight="5" />
   <Wall fill="#3f4866" frame="#000000" x="114.58333333333334" z="48.958333333333336" w="10" d="1.25" h="0" />
   <set wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="114.58333333333334" z="49.583333333333336" w="10" d="2.5" h="0" y="5" />
-  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="117.08333333333334" z="38.958333333333336" w="5" d="18.75" h="0" r="1.875" angle="270" />
-  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="112.08333333333334" z="41.458333333333336" w="5" d="13.75" h="0" r="1.875" angle="270" />
+  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="117.08333333333334" z="38.958333333333336" w="5" d="18.75" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="112.08333333333334" z="41.458333333333336" w="5" d="13.75" h="0" angle="270" />
   <set wallHeight="2" />
   <Wall fill="#5f6c85" frame="#000000" x="117.08333333333334" z="27.083333333333336" w="5" d="5" h="0" />
   <set wallHeight="6" />
   <Wall fill="#3f4866" frame="#000000" x="112.08333333333334" z="32.083333333333336" w="5" d="5" h="0" />
-  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="105.20833333333334" z="27.083333333333336" w="18.75" d="5" h="0" r="1.875" angle="180" />
-  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="102.70833333333334" z="32.083333333333336" w="13.75" d="5" h="0" r="1.875" angle="180" />
+  <Ramp y="0" deltaY="2" fill="#f6dcc4" frame="#000000" x="105.20833333333334" z="27.083333333333336" w="18.75" d="5" h="0" angle="180" />
+  <Ramp y="2" deltaY="2" fill="#f6dcc4" frame="#000000" x="102.70833333333334" z="32.083333333333336" w="13.75" d="5" h="0" angle="180" />
   <set wallHeight="5" />
   <Wall fill="#3f4866" frame="#000000" x="95.20833333333334" z="29.583333333333336" w="1.25" d="10" h="0" />
   <set wallHeight="2" />
   <Wall fill="#9eb5c3" frame="#000000" x="87.08333333333334" z="42.083333333333336" w="15" d="15" h="0" />
-  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="87.08333333333334" z="29.583333333333336" w="15" d="10" h="0" r="1.875" angle="180" />
+  <Ramp y="0" deltaY="2" fill="#dcfbff" frame="#000000" x="87.08333333333334" z="29.583333333333336" w="15" d="10" h="0" angle="180" />
   <set wallHeight="1" />
   <Wall fill="#ffffff" frame="#000000" x="94.58333333333334" z="29.583333333333336" w="2.5" d="10" h="0" y="5" />
   <set wallHeight="1" />
@@ -169,20 +169,20 @@
   <Wall fill="#3f4866" frame="#000000" x="57.08333333333334" z="87.08333333333334" w="15" d="15" h="0" />
   <set wallHeight="1" />
   <Wall fill="#3f4866" frame="#000000" x="57.08333333333334" z="57.08333333333334" w="15" d="15" h="0" />
-  <Ramp y="0" deltaY="1" fill="#fff1de" frame="#000000" x="57.08333333333334" z="72.08333333333334" w="15" d="15" h="0" r="1.875" angle="90" />
-  <Ramp y="0" deltaY="1" fill="#fff1de" frame="#000000" x="87.08333333333334" z="72.08333333333334" w="15" d="15" h="0" r="1.875" angle="270" />
-  <Ramp y="0" deltaY="1" fill="#fff1de" frame="#000000" x="72.08333333333334" z="57.08333333333334" w="15" d="15" h="0" r="1.875" angle="180" />
-  <Ramp y="0" deltaY="1" fill="#fff1de" frame="#000000" x="72.08333333333334" z="87.08333333333334" w="15" d="15" h="0" r="1.875" angle="0" />
+  <Ramp y="0" deltaY="1" fill="#fff1de" frame="#000000" x="57.08333333333334" z="72.08333333333334" w="15" d="15" h="0" angle="90" />
+  <Ramp y="0" deltaY="1" fill="#fff1de" frame="#000000" x="87.08333333333334" z="72.08333333333334" w="15" d="15" h="0" angle="270" />
+  <Ramp y="0" deltaY="1" fill="#fff1de" frame="#000000" x="72.08333333333334" z="57.08333333333334" w="15" d="15" h="0" angle="180" />
+  <Ramp y="0" deltaY="1" fill="#fff1de" frame="#000000" x="72.08333333333334" z="87.08333333333334" w="15" d="15" h="0" angle="0" />
   <set wallHeight="1" />
   <Wall fill="#3f4866" frame="#000000" x="72.08333333333334" z="72.08333333333334" w="15" d="15" h="0" />
   <set wallHeight=".5" />
-  <WallDoor shield="10" canGlow="true" fill="#3f4866" frame="#000000" x="101.45833333333334" z="101.45833333333334" w="13.75" d="13.75" h="0" r="1.875" cx="72.15277777777779" cz="92.70833333333334" angle="0" y="5.5" />
+  <WallDoor shield="10" canGlow="true" fill="#3f4866" frame="#000000" x="101.45833333333334" z="101.45833333333334" w="13.75" d="13.75" h="0" y="5.5" />
   <set wallHeight=".5" />
-  <WallDoor shield="10" canGlow="true" fill="#3f4866" frame="#000000" x="101.45833333333334" z="42.708333333333336" w="13.75" d="13.75" h="0" r="1.875" cx="72.15277777777779" cz="92.70833333333334" angle="0" y="5.5" />
+  <WallDoor shield="10" canGlow="true" fill="#3f4866" frame="#000000" x="101.45833333333334" z="42.708333333333336" w="13.75" d="13.75" h="0" y="5.5" />
   <set wallHeight=".5" />
-  <WallDoor shield="10" canGlow="true" fill="#3f4866" frame="#000000" x="42.708333333333336" z="42.708333333333336" w="13.75" d="13.75" h="0" r="1.875" cx="72.15277777777779" cz="92.70833333333334" angle="0" y="5.5" />
+  <WallDoor shield="10" canGlow="true" fill="#3f4866" frame="#000000" x="42.708333333333336" z="42.708333333333336" w="13.75" d="13.75" h="0" y="5.5" />
   <set wallHeight=".5" />
-  <WallDoor shield="10" canGlow="true" fill="#3f4866" frame="#000000" x="42.708333333333336" z="101.45833333333334" w="13.75" d="13.75" h="0" r="1.875" cx="72.15277777777779" cz="92.70833333333334" angle="0" y="5.5" />
+  <WallDoor shield="10" canGlow="true" fill="#3f4866" frame="#000000" x="42.708333333333336" z="101.45833333333334" w="13.75" d="13.75" h="0" y="5.5" />
   <set wallHeight=".3" />
   <Wall fill="#f6dcc4" frame="#000000" x="72.08333333333334" z="72.08333333333334" w="12.5" d="12.5" h="0" y="8" />
   <set wallHeight=".3" />
@@ -218,100 +218,100 @@
   <Field visible="false" watch="playerMask" mask="T1" start="@secondtimer" stop="@greenstop" enter="@greenenter" fill="#008011" frame="#000000" x="72.08333333333334" z="72.08333333333334" w="15" d="15" h="0" r="1.875" cx="47.083333333333336" cz="47.083333333333336" angle="135" y="8" />
   <Field visible="false" watch="playerMask" mask="T2" start="@secondtimer" stop="@yellowstop" enter="@yellowenter" fill="#fcf305" frame="#000000" x="72.08333333333334" z="72.08333333333334" w="15" d="15" h="0" r="1.875" cx="47.083333333333336" cz="47.083333333333336" angle="135" y="8" />
   <Field visible="false" watch="playerMask" mask="T3" start="@secondtimer" stop="@redstop" enter="@redenter" fill="#dd0806" frame="#000000" x="72.08333333333334" z="72.08333333333334" w="15" d="15" h="0" r="1.875" cx="47.083333333333336" cz="47.083333333333336" angle="135" y="8" />
-  <Text in="@yellow10" text="Yellow has 10 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellow20" text="Yellow has 20 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellow30" text="Yellow has 30 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellow40" text="Yellow has 40 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellow50" text="Yellow is halfway!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellow60" text="Yellow has 60 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellow70" text="Yellow has 70 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellow80" text="Yellow has 80 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellow90" text="Yellow needs 10 more seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@yellowwin" text="Yellow Wins!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue10" text="Blue has 10 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue20" text="Blue has 20 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue30" text="Blue has 30 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue40" text="Blue has 40 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue50" text="Blue is halfway!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue60" text="Blue has 60 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue70" text="Blue has 70 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue80" text="Blue has 80 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@blue90" text="Blue needs 10 more seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@bluewin" text="Blue Wins!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red10" text="Red has 10 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red20" text="Red has 20 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red30" text="Red has 30 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red40" text="Red has 40 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red50" text="Red is halfway!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red60" text="Red has 60 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red70" text="Red has 70 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red80" text="Red has 80 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@red90" text="Red needs 10 more seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@redwin" text="Red Wins!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green10" text="Green has 10 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green20" text="Green has 20 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green30" text="Green has 30 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green40" text="Green has 40 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green50" text="Green is halfway!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green60" text="Green has 60 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green70" text="Green has 70 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green80" text="Green has 80 seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@green90" text="Green needs 10 more seconds!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Text in="@greenwin" text="Green Wins!" showEveryone="true" fill="#dd0806" frame="#000000" cx="47.083333333333336" cz="47.083333333333336" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="10" out="@blue10" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="20" out="@blue20" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="30" out="@blue30" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="40" out="@blue40" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="50" out="@blue50" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="60" out="@blue60" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="70" out="@blue70" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="80" out="@blue80" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="90" out="@blue90" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@blueadd" n="100" out="@bluewin" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="10" out="@yellow10" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="20" out="@yellow20" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="30" out="@yellow30" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="40" out="@yellow40" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="50" out="@yellow50" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="60" out="@yellow60" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="70" out="@yellow70" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="80" out="@yellow80" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="90" out="@yellow90" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@yellowadd" n="100" out="@yellowwin" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="2.7083333333333335" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="10" out="@green10" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="20" out="@green20" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="30" out="@green30" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="40" out="@green40" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="50" out="@green50" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="60" out="@green60" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="70" out="@green70" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="80" out="@green80" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="90" out="@green90" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@greenadd" n="100" out="@greenwin" restart="false" fill="#ffffff" frame="#000000" cx="486.45833333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="10" out="@red10" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="20" out="@red20" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="30" out="@red30" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="40" out="@red40" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="50" out="@red50" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="60" out="@red60" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="70" out="@red70" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="80" out="@red80" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="90" out="@red90" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <Counter in="@redadd" n="100" out="@redwin" restart="false" fill="#ffffff" frame="#000000" cx="477.08333333333337" cz="55.833333333333336" r="1.875" angle="135" />
-  <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@yellowenter" close="@yellowclose" didOpen="@yellowadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#fcf305" frame="#000000" x="473.95833333333337" z="547.7083333333334" w="5" d="5" h="1" r="1.875" cx="477.08333333333337" cz="55.833333333333336" angle="135" />
-  <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@blueenter" close="@blueclose" didOpen="@blueadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#637189" frame="#000000" x="483.95833333333337" z="547.7083333333334" w="5" d="5" h="1" r="1.875" cx="477.08333333333337" cz="55.833333333333336" angle="135" />
-  <Timer in.0="@start" in.1="@secondtimer" wait="15" out.0="@secondtimer" fill="#ffffff" frame="#000000" cx="452.08333333333337" cz="494.58333333333337" r="1.875" angle="135" />
-  <Timer in="@secondtimer" wait="1" out="@fieldstop" fill="#ffffff" frame="#000000" cx="452.08333333333337" cz="494.58333333333337" r="1.875" angle="135" />
-  <Timer in="@secondtimer" wait="12" out.0="@blueclose" out.1="@yellowclose" out.2="@redclose" out.3="@greenclose" fill="#ffffff" frame="#000000" cx="452.08333333333337" cz="494.58333333333337" r="1.875" angle="135" />
-  <Timer in="@blueenter" wait="2" out.0="@yellowclose" out.1="@redclose" out.2="@greenclose" fill="#ffffff" frame="#000000" cx="452.08333333333337" cz="494.58333333333337" r="1.875" angle="135" />
-  <Timer in="@yellowenter" wait="2" out.0="@blueclose" out.1="@redclose" out.2="@greenclose" fill="#ffffff" frame="#000000" cx="452.08333333333337" cz="494.58333333333337" r="1.875" angle="135" />
-  <Timer in="@redenter" wait="2" out.0="@blueclose" out.1="@yellowclose" out.2="@greenclose" fill="#ffffff" frame="#000000" cx="452.08333333333337" cz="494.58333333333337" r="1.875" angle="135" />
-  <Timer in="@greenenter" wait="2" out.0="@blueclose" out.1="@yellowclose" out.2="@redclose" fill="#ffffff" frame="#000000" cx="452.08333333333337" cz="494.58333333333337" r="1.875" angle="135" />
-  <Timer in.0="@bluewin" in.1="@yellowwin" in.2="@redwin" in.3="@greenwin" wait="15" out.0="@bluewin2" out.1="@yellowwin2" out.2="@redwin2" out.3="@greenwin2" fill="#ffffff" frame="#000000" cx="452.08333333333337" cz="494.58333333333337" r="1.875" angle="135" />
-  <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@redenter" close="@redclose" didOpen="@redadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#dd0806" frame="#000000" x="473.95833333333337" z="564.5833333333334" w="5" d="5" h="1" r="1.875" cx="452.08333333333337" cz="494.58333333333337" angle="135" />
-  <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@greenenter" close="@greenclose" didOpen="@greenadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#008011" frame="#000000" x="483.95833333333337" z="564.5833333333334" w="5" d="5" h="1" r="1.875" cx="452.08333333333337" cz="494.58333333333337" angle="135" />
-  <Base in="@badHectors" out="@teleportTheRest" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="315" />
-  <Text in="@badHectors" showEveryone="true" text="HECTORs must be red, yellow, green, or blue." sound="0" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="315" />
+  <Text in="@yellow10" text="Yellow has 10 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellow20" text="Yellow has 20 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellow30" text="Yellow has 30 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellow40" text="Yellow has 40 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellow50" text="Yellow is halfway!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellow60" text="Yellow has 60 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellow70" text="Yellow has 70 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellow80" text="Yellow has 80 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellow90" text="Yellow needs 10 more seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@yellowwin" text="Yellow Wins!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue10" text="Blue has 10 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue20" text="Blue has 20 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue30" text="Blue has 30 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue40" text="Blue has 40 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue50" text="Blue is halfway!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue60" text="Blue has 60 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue70" text="Blue has 70 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue80" text="Blue has 80 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@blue90" text="Blue needs 10 more seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@bluewin" text="Blue Wins!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red10" text="Red has 10 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red20" text="Red has 20 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red30" text="Red has 30 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red40" text="Red has 40 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red50" text="Red is halfway!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red60" text="Red has 60 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red70" text="Red has 70 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red80" text="Red has 80 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@red90" text="Red needs 10 more seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@redwin" text="Red Wins!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green10" text="Green has 10 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green20" text="Green has 20 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green30" text="Green has 30 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green40" text="Green has 40 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green50" text="Green is halfway!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green60" text="Green has 60 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green70" text="Green has 70 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green80" text="Green has 80 seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@green90" text="Green needs 10 more seconds!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Text in="@greenwin" text="Green Wins!" showEveryone="true" cx="47.083333333333336" cz="47.083333333333336" r="1.875" />
+  <Counter in="@blueadd" n="10" out="@blue10" restart="false" />
+  <Counter in="@blueadd" n="20" out="@blue20" restart="false" />
+  <Counter in="@blueadd" n="30" out="@blue30" restart="false" />
+  <Counter in="@blueadd" n="40" out="@blue40" restart="false" />
+  <Counter in="@blueadd" n="50" out="@blue50" restart="false" />
+  <Counter in="@blueadd" n="60" out="@blue60" restart="false" />
+  <Counter in="@blueadd" n="70" out="@blue70" restart="false" />
+  <Counter in="@blueadd" n="80" out="@blue80" restart="false" />
+  <Counter in="@blueadd" n="90" out="@blue90" restart="false" />
+  <Counter in="@blueadd" n="100" out="@bluewin" restart="false" />
+  <Counter in="@yellowadd" n="10" out="@yellow10" restart="false" />
+  <Counter in="@yellowadd" n="20" out="@yellow20" restart="false" />
+  <Counter in="@yellowadd" n="30" out="@yellow30" restart="false" />
+  <Counter in="@yellowadd" n="40" out="@yellow40" restart="false" />
+  <Counter in="@yellowadd" n="50" out="@yellow50" restart="false" />
+  <Counter in="@yellowadd" n="60" out="@yellow60" restart="false" />
+  <Counter in="@yellowadd" n="70" out="@yellow70" restart="false" />
+  <Counter in="@yellowadd" n="80" out="@yellow80" restart="false" />
+  <Counter in="@yellowadd" n="90" out="@yellow90" restart="false" />
+  <Counter in="@yellowadd" n="100" out="@yellowwin" restart="false" />
+  <Counter in="@greenadd" n="10" out="@green10" restart="false" />
+  <Counter in="@greenadd" n="20" out="@green20" restart="false" />
+  <Counter in="@greenadd" n="30" out="@green30" restart="false" />
+  <Counter in="@greenadd" n="40" out="@green40" restart="false" />
+  <Counter in="@greenadd" n="50" out="@green50" restart="false" />
+  <Counter in="@greenadd" n="60" out="@green60" restart="false" />
+  <Counter in="@greenadd" n="70" out="@green70" restart="false" />
+  <Counter in="@greenadd" n="80" out="@green80" restart="false" />
+  <Counter in="@greenadd" n="90" out="@green90" restart="false" />
+  <Counter in="@greenadd" n="100" out="@greenwin" restart="false" />
+  <Counter in="@redadd" n="10" out="@red10" restart="false" />
+  <Counter in="@redadd" n="20" out="@red20" restart="false" />
+  <Counter in="@redadd" n="30" out="@red30" restart="false" />
+  <Counter in="@redadd" n="40" out="@red40" restart="false" />
+  <Counter in="@redadd" n="50" out="@red50" restart="false" />
+  <Counter in="@redadd" n="60" out="@red60" restart="false" />
+  <Counter in="@redadd" n="70" out="@red70" restart="false" />
+  <Counter in="@redadd" n="80" out="@red80" restart="false" />
+  <Counter in="@redadd" n="90" out="@red90" restart="false" />
+  <Counter in="@redadd" n="100" out="@redwin" restart="false" />
+  <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@yellowenter" close="@yellowclose" didOpen="@yellowadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#fcf305" frame="#000000" x="473.95833333333337" z="547.7083333333334" w="5" d="5" h="1" />
+  <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@blueenter" close="@blueclose" didOpen="@blueadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#637189" frame="#000000" x="483.95833333333337" z="547.7083333333334" w="5" d="5" h="1" />
+  <Timer in.0="@start" in.1="@secondtimer" wait="15" out.0="@secondtimer" />
+  <Timer in="@secondtimer" wait="1" out="@fieldstop" />
+  <Timer in="@secondtimer" wait="12" out.0="@blueclose" out.1="@yellowclose" out.2="@redclose" out.3="@greenclose" />
+  <Timer in="@blueenter" wait="2" out.0="@yellowclose" out.1="@redclose" out.2="@greenclose" />
+  <Timer in="@yellowenter" wait="2" out.0="@blueclose" out.1="@redclose" out.2="@greenclose" />
+  <Timer in="@redenter" wait="2" out.0="@blueclose" out.1="@yellowclose" out.2="@greenclose" />
+  <Timer in="@greenenter" wait="2" out.0="@blueclose" out.1="@yellowclose" out.2="@redclose" />
+  <Timer in.0="@bluewin" in.1="@yellowwin" in.2="@redwin" in.3="@greenwin" wait="15" out.0="@bluewin2" out.1="@yellowwin2" out.2="@redwin2" out.3="@greenwin2" />
+  <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@redenter" close="@redclose" didOpen="@redadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#dd0806" frame="#000000" x="473.95833333333337" z="564.5833333333334" w="5" d="5" h="1" />
+  <WallDoor yon=".01" deltaY="4" openSpeed="12.5" closeSpeed="100" open="@greenenter" close="@greenclose" didOpen="@greenadd" status="0" openSound="0" closeSound="0" stopSound="0" volume="0" fill="#008011" frame="#000000" x="483.95833333333337" z="564.5833333333334" w="5" d="5" h="1" />
+  <Base in="@badHectors" out="@teleportTheRest" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="315" />
+  <Text in="@badHectors" showEveryone="true" text="HECTORs must be red, yellow, green, or blue." sound="0" cx="6.458333333333334" cz="523.3333333333334" r="1.875" />
   <Goody out="@badHectors" shape="bspW3x3" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="315" />
   <Walker team="4" defaultLives="0" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="315" />
   <Walker team="4" defaultLives="0" fill="#ffffff" frame="#000000" cx="6.458333333333334" cz="523.3333333333334" r="1.875" angle="315" />
@@ -352,10 +352,10 @@
   <Walker y="20" defaultLives="99" team="2" fill="#dcfbff" frame="#000000" cx="129.58333333333334" cz="14.583333333333336" r="1.875" angle="45" />
   <Walker y="20" defaultLives="99" team="2" fill="#dcfbff" frame="#000000" cx="124.58333333333334" cz="9.583333333333334" r="1.875" angle="45" />
   <Walker y="20" defaultLives="99" team="2" fill="#dcfbff" frame="#000000" cx="134.58333333333334" cz="19.583333333333336" r="1.875" angle="45" />
-  <And in="@bluewin" out="@bluewin2" fill="#dcfbff" frame="#000000" cx="454.58333333333337" cz="54.583333333333336" r="1.875" angle="135" />
-  <And in="@yellowwin" out="@yellowwin2" fill="#dcfbff" frame="#000000" cx="454.58333333333337" cz="54.583333333333336" r="1.875" angle="135" />
-  <And in="@redwin" out="@redwin2" fill="#dcfbff" frame="#000000" cx="454.58333333333337" cz="54.583333333333336" r="1.875" angle="135" />
-  <And in="@greenwin" out="@greenwin2" fill="#dcfbff" frame="#000000" cx="454.58333333333337" cz="54.583333333333336" r="1.875" angle="135" />
+  <And in="@bluewin" out="@bluewin2" />
+  <And in="@yellowwin" out="@yellowwin2" />
+  <And in="@redwin" out="@redwin2" />
+  <And in="@greenwin" out="@greenwin2" />
   <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" spin="false" fill="#ffffff" frame="#000000" cx="72.08333333333334" cz="72.08333333333334" r="2.5" angle="225" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="72.08333333333334" cz="72.08333333333334" r="2.5" angle="225" />
   <Teleporter y="20" shape="0" group="@hill" spin="false" fill="#fff1de" frame="#000000" cx="72.08333333333334" cz="72.08333333333334" r="1.875" angle="135" />
@@ -364,57 +364,57 @@
   <Teleporter y="20" shape="0" group="@recenter" spin="false" fill="#fff1de" frame="#000000" cx="109.58333333333334" cz="72.15277777777779" r="1.875" angle="90" />
   <Teleporter y="20" shape="0" group="@recenter" spin="false" fill="#fff1de" frame="#000000" cx="34.583333333333336" cz="72.15277777777779" r="1.875" angle="270" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="72.08333333333334" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="300" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="72.08333333333334" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="300" />
   <Goody y="3" shape="bspAvaraA" speed="5" sound="snYes" grenades="6" missiles="3" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="72.08333333333334" r="1.875" angle="45" />
   <Teleporter y="1" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@hill" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="72.08333333333334" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="112.08333333333334" cz="112.08333333333334" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="100" fill="#fff1de" frame="#7e90a4" cx="112.08333333333334" cz="112.08333333333334" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="100" />
   <Goody y="8" shape="bspMissile" speed="5" sound="snYes" missiles="3" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="112.08333333333334" cz="112.08333333333334" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="112.08333333333334" cz="32.083333333333336" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="100" fill="#fff1de" frame="#7e90a4" cx="112.08333333333334" cz="32.083333333333336" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="100" />
   <Goody y="8" shape="bspMissile" speed="5" sound="snYes" missiles="3" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="112.08333333333334" cz="32.083333333333336" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="32.083333333333336" cz="32.083333333333336" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="100" fill="#fff1de" frame="#7e90a4" cx="32.083333333333336" cz="32.083333333333336" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="100" />
   <Goody y="8" shape="bspMissile" speed="5" sound="snYes" missiles="3" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="32.083333333333336" cz="32.083333333333336" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="32.083333333333336" cz="112.08333333333334" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="100" fill="#fff1de" frame="#7e90a4" cx="32.083333333333336" cz="112.08333333333334" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="100" />
   <Goody y="8" shape="bspMissile" speed="5" sound="snYes" missiles="3" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="32.083333333333336" cz="112.08333333333334" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="103.95833333333334" cz="103.95833333333334" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="200" fill="#fff1de" frame="#7e90a4" cx="103.95833333333334" cz="103.95833333333334" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="200" />
   <Goody y="4" shape="bspGrenade" speed="5" sound="snYes" grenades="6" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="103.95833333333334" cz="103.95833333333334" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="103.95833333333334" cz="40.208333333333336" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="200" fill="#fff1de" frame="#7e90a4" cx="103.95833333333334" cz="40.208333333333336" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="200" />
   <Goody y="4" shape="bspGrenade" speed="5" sound="snYes" grenades="6" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="103.95833333333334" cz="40.208333333333336" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="40.208333333333336" cz="40.208333333333336" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="200" fill="#fff1de" frame="#7e90a4" cx="40.208333333333336" cz="40.208333333333336" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="200" />
   <Goody y="4" shape="bspGrenade" speed="5" sound="snYes" grenades="6" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="40.208333333333336" cz="40.208333333333336" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="40.208333333333336" cz="103.95833333333334" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="200" fill="#fff1de" frame="#7e90a4" cx="40.208333333333336" cz="103.95833333333334" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="200" />
   <Goody y="4" shape="bspGrenade" speed="5" sound="snYes" grenades="6" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="40.208333333333336" cz="103.95833333333334" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="104.58333333333334" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="150" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="104.58333333333334" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="150" />
   <Goody y="2" shape="bspGrenade" speed="5" sound="snYes" grenades="4" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="104.58333333333334" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="104.58333333333334" cz="72.08333333333334" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="150" fill="#fff1de" frame="#7e90a4" cx="104.58333333333334" cz="72.08333333333334" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="150" />
   <Goody y="2" shape="bspGrenade" speed="5" sound="snYes" grenades="4" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="104.58333333333334" cz="72.08333333333334" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="39.583333333333336" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="150" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="39.583333333333336" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="150" />
   <Goody y="2" shape="bspGrenade" speed="5" sound="snYes" grenades="4" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="72.08333333333334" cz="39.583333333333336" r="1.875" angle="45" />
   <unique vars="rShow rTaken" />
-  <And in="@start" out="rShow" fill="#fff1de" frame="#7e90a4" cx="39.583333333333336" cz="72.08333333333334" r="1.875" angle="45" />
-  <Timer in="rTaken" out="rShow" wait="150" fill="#fff1de" frame="#7e90a4" cx="39.583333333333336" cz="72.08333333333334" r="1.875" angle="45" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="150" />
   <Goody y="2" shape="bspGrenade" speed="5" sound="snYes" grenades="4" start="rShow" out="rTaken" fill="#fff1de" frame="#7e90a4" cx="39.583333333333336" cz="72.08333333333334" r="1.875" angle="45" />
   <set information="$rMill" />
 </map>

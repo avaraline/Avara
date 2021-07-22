@@ -37,12 +37,12 @@
   <set wallYon="0" wallHeight="0" baseHeight="totHeight -secHeight" />
   <Wall fill="#25dd00" frame="#000000" x="24.930555555555557" z="29.583333333333336" w="10" d="20" h="0" />
   <set wallHeight="0" baseHeight="secHeight * 0" />
-  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="180" />
+  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" angle="180" />
   <set wa="stepY * 1" />
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="34.583333333333336" w="10" d="10" h="0" />
-  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" r="5" angle="90" />
-  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="0" />
-  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" r="5" angle="270" />
+  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" angle="90" />
+  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" angle="0" />
+  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" angle="270" />
   <set wa="stepY * 2" />
   <Wall fill="#199600" frame="#000000" x="44.93055555555556" z="34.583333333333336" w="10" d="10" h="0" />
   <set wa="stepY * 3" />
@@ -51,31 +51,31 @@
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="14.583333333333336" w="10" d="10" h="0" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 4" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 1" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 2" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 3" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <Teleporter start="0" group="@inside" y="stepY * 1" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="37.083333333333336" r="2.5" angle="225" />
   <Teleporter start="0" group="@inside" y="stepY * 3" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="12.083333333333334" r="2.5" angle="45" />
   <Teleporter start="0" group="@inside" y="stepY * 2" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="37.083333333333336" r="2.5" angle="135" />
   <Teleporter start="0" group="@inside" y="stepY * 4" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="12.083333333333334" r="2.5" angle="315" />
   <set wallHeight="0" baseHeight="secHeight * 1" />
-  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="180" />
+  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" angle="180" />
   <set wa="stepY * 1" />
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="34.583333333333336" w="10" d="10" h="0" />
-  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" r="5" angle="90" />
-  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="0" />
-  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" r="5" angle="270" />
+  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" angle="90" />
+  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" angle="0" />
+  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" angle="270" />
   <set wa="stepY * 2" />
   <Wall fill="#199600" frame="#000000" x="44.93055555555556" z="34.583333333333336" w="10" d="10" h="0" />
   <set wa="stepY * 3" />
@@ -84,31 +84,31 @@
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="14.583333333333336" w="10" d="10" h="0" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 4" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 1" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 2" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 3" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <Teleporter start="0" group="@inside" y="stepY * 1" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="37.083333333333336" r="2.5" angle="225" />
   <Teleporter start="0" group="@inside" y="stepY * 3" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="12.083333333333334" r="2.5" angle="45" />
   <Teleporter start="0" group="@inside" y="stepY * 2" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="37.083333333333336" r="2.5" angle="135" />
   <Teleporter start="0" group="@inside" y="stepY * 4" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="12.083333333333334" r="2.5" angle="315" />
   <set wallHeight="0" baseHeight="secHeight * 2" />
-  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="180" />
+  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" angle="180" />
   <set wa="stepY * 1" />
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="34.583333333333336" w="10" d="10" h="0" />
-  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" r="5" angle="90" />
-  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="0" />
-  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" r="5" angle="270" />
+  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" angle="90" />
+  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" angle="0" />
+  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" angle="270" />
   <set wa="stepY * 2" />
   <Wall fill="#199600" frame="#000000" x="44.93055555555556" z="34.583333333333336" w="10" d="10" h="0" />
   <set wa="stepY * 3" />
@@ -117,31 +117,31 @@
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="14.583333333333336" w="10" d="10" h="0" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 4" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 1" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 2" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 3" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <Teleporter start="0" group="@inside" y="stepY * 1" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="37.083333333333336" r="2.5" angle="225" />
   <Teleporter start="0" group="@inside" y="stepY * 3" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="12.083333333333334" r="2.5" angle="45" />
   <Teleporter start="0" group="@inside" y="stepY * 2" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="37.083333333333336" r="2.5" angle="135" />
   <Teleporter start="0" group="@inside" y="stepY * 4" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="12.083333333333334" r="2.5" angle="315" />
   <set wallHeight="0" baseHeight="secHeight * 3" />
-  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="180" />
+  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" angle="180" />
   <set wa="stepY * 1" />
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="34.583333333333336" w="10" d="10" h="0" />
-  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" r="5" angle="90" />
-  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="0" />
-  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" r="5" angle="270" />
+  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" angle="90" />
+  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" angle="0" />
+  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" angle="270" />
   <set wa="stepY * 2" />
   <Wall fill="#199600" frame="#000000" x="44.93055555555556" z="34.583333333333336" w="10" d="10" h="0" />
   <set wa="stepY * 3" />
@@ -150,31 +150,31 @@
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="14.583333333333336" w="10" d="10" h="0" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 4" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 1" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 2" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 3" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <Teleporter start="0" group="@inside" y="stepY * 1" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="37.083333333333336" r="2.5" angle="225" />
   <Teleporter start="0" group="@inside" y="stepY * 3" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="12.083333333333334" r="2.5" angle="45" />
   <Teleporter start="0" group="@inside" y="stepY * 2" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="37.083333333333336" r="2.5" angle="135" />
   <Teleporter start="0" group="@inside" y="stepY * 4" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="12.083333333333334" r="2.5" angle="315" />
   <set wallHeight="0" baseHeight="secHeight * 4" />
-  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="180" />
+  <Ramp y="stepY * 0" deltaY="stepY" fill="#36dd00" frame="#000000" x="24.930555555555557" z="24.583333333333336" w="10" d="10" h="0" angle="180" />
   <set wa="stepY * 1" />
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="34.583333333333336" w="10" d="10" h="0" />
-  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" r="5" angle="90" />
-  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" r="5" angle="0" />
-  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" r="5" angle="270" />
+  <Ramp y="stepY * 1" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="10" d="10" h="0" angle="90" />
+  <Ramp y="stepY * 2" deltaY="stepY" fill="#36dd00" frame="#000000" x="44.93055555555556" z="24.583333333333336" w="10" d="10" h="0" angle="0" />
+  <Ramp y="stepY * 3" deltaY="stepY" fill="#36dd00" frame="#000000" x="34.93055555555556" z="14.583333333333336" w="10" d="10" h="0" angle="270" />
   <set wa="stepY * 2" />
   <Wall fill="#199600" frame="#000000" x="44.93055555555556" z="34.583333333333336" w="10" d="10" h="0" />
   <set wa="stepY * 3" />
@@ -183,20 +183,20 @@
   <Wall fill="#199600" frame="#000000" x="24.930555555555557" z="14.583333333333336" w="10" d="10" h="0" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 4" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 1" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 2" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY + stepY * 3" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <Teleporter start="0" group="@inside" y="stepY * 1" fill="#36dd00" frame="#000000" cx="22.430555555555557" cz="37.083333333333336" r="2.5" angle="225" />
   <Teleporter start="0" group="@inside" y="stepY * 3" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="12.083333333333334" r="2.5" angle="45" />
   <Teleporter start="0" group="@inside" y="stepY * 2" fill="#36dd00" frame="#000000" cx="47.43055555555556" cz="37.083333333333336" r="2.5" angle="135" />
@@ -232,23 +232,23 @@ Includes custom team colors for ScoreKeeper." />
   <Incarnator y="incHeight" fill="#00dd01" frame="#000000" cx="47.43055555555556" cz="62.08333333333334" r="2.5" angle="180" />
   <Teleporter destGroup="@inside" shape="0" activeRange="3" fill="#00dd01" frame="#000000" cx="47.43055555555556" cz="62.08333333333334" r="2.5" angle="180" />
   <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="45" />
-  <Timer in="@FieldsOn" wait="FieldsTime" out="@FieldsOff" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="45" />
-  <Timer in="@FieldsOff" wait="FieldsTime" out="@FieldsOn" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="45" />
-  <Text in="@FieldsOff" showEveryone="1" text="Downward." fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="45" />
-  <Text in="@FieldsOn" showEveryone="1" text="Upward." fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="45" />
-  <And in="@start" out="@FieldsOff" fill="#25ff27" frame="#000000" cx="10.555555555555555" cz="29.583333333333336" r="1.875" angle="45" />
+  <Timer in="@FieldsOn" wait="FieldsTime" out="@FieldsOff" />
+  <Timer in="@FieldsOff" wait="FieldsTime" out="@FieldsOn" />
+  <Text in="@FieldsOff" showEveryone="1" text="Downward." cx="10.555555555555555" cz="29.583333333333336" r="1.875" />
+  <Text in="@FieldsOn" showEveryone="1" text="Upward." cx="10.555555555555555" cz="29.583333333333336" r="1.875" />
+  <And in="@start" out="@FieldsOff" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="22.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="37.15277777777778" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <unique vars="mTaken mReset" />
   <Goody shape="goodyShape" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyY" speed="goodySpeed" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <Timer in="mTaken" out="mReset" wait="goodyTime" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
-  <And in="@start" out="mReset" fill="#00ae11" frame="#5bff25" cx="47.5" cz="12.152777777777779" r="1.875" angle="135" />
+  <Timer in="mTaken" out="mReset" wait="goodyTime" />
+  <And in="@start" out="mReset" />
   <set wallHeight="0" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="24.930555555555557" z="29.583333333333336" w="10" d="20" h="0" />
   <set wallYon="0" />

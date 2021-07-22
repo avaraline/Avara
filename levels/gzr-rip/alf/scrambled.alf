@@ -3,17 +3,17 @@
   <set teleN1="int ( 21 + ( random * 2.999 ) )" teleN2="int ( 21 + ( random * 2.999 ) )" teleN3="int ( 21 + ( random * 2.999 ) )" teleN4="int ( 21 + ( random * 2.999 ) )" teleN5="int ( 21 + ( random * 2.999 ) )" teleN6="int ( 21 + ( random * 2.999 ) )" />
   <set goodie1="int ( 1 + ( random * 8 ) )" goodie2="int ( 1 + ( random * 8 ) )" goodie3="int ( 1 + ( random * 8 ) )" goodie4="int ( 1 + ( random * 8 ) )" goodie5="int ( 1 + ( random * 8 ) )" goodie6="int ( 1 + ( random * 8 ) )" goodie7="int ( 1 + ( random * 8 ) )" goodie8="int ( 1 + ( random * 8 ) )" goodie9="int ( 1 + ( random * 8 ) )" goodie10="int ( 1 + ( random * 8 ) )" />
   <set event1="int ( 31 + ( random * 2 ) )" event2="int ( 33 + ( random * 2 ) )" event3="int ( 35 + ( random * 2 ) )" event4="int ( 37 + ( random * 2 ) )" event5="int ( 39 + ( random * 2 ) )" event6="int ( 41 + ( random * 2 ) )" event7="int ( 43 + ( random * 2 ) )" event8="int ( 45 + ( random * 2 ) )" event9="int ( 47 + ( random * 2 ) )" event10="int ( 49 + ( random * 2 ) )" event11="int ( 31 + ( random * 2 ) )" event12="int ( 33 + ( random * 2 ) )" event13="int ( 35 + ( random * 2 ) )" event14="int ( 37 + ( random * 2 ) )" event15="int ( 39 + ( random * 2 ) )" event16="int ( 41 + ( random * 2 ) )" event17="int ( 43 + ( random * 2 ) )" event18="int ( 45 + ( random * 2 ) )" event19="int ( 47 + ( random * 2 ) )" event20="int ( 49 + ( random * 2 ) )" event21="int ( 31 + ( random * 2 ) )" event22="int ( 33 + ( random * 2 ) )" event23="int ( 35 + ( random * 2 ) )" event24="int ( 37 + ( random * 2 ) )" event25="int ( 39 + ( random * 2 ) )" event26="int ( 41 + ( random * 2 ) )" event27="int ( 43 + ( random * 2 ) )" event28="int ( 45 + ( random * 2 ) )" event29="int ( 47 + ( random * 2 ) )" event30="int ( 49 + ( random * 2 ) )" event31="int ( 31 + ( random * 2 ) )" event32="int ( 33 + ( random * 2 ) )" event33="int ( 35 + ( random * 2 ) )" event34="int ( 37 + ( random * 2 ) )" event35="int ( 39 + ( random * 2 ) )" event36="int ( 41 + ( random * 2 ) )" event37="int ( 43 + ( random * 2 ) )" event38="int ( 45 + ( random * 2 ) )" event39="int ( 47 + ( random * 2 ) )" event40="int ( 49 + ( random * 2 ) )" event41="int ( 31 + ( random * 2 ) )" event42="int ( 33 + ( random * 2 ) )" event43="int ( 35 + ( random * 2 ) )" event44="int ( 37 + ( random * 2 ) )" event45="int ( 39 + ( random * 2 ) )" event46="int ( 41 + ( random * 2 ) )" event47="int ( 43 + ( random * 2 ) )" event48="int ( 45 + ( random * 2 ) )" event49="int ( 47 + ( random * 2 ) )" event50="int ( 49 + ( random * 2 ) )" />
-  <Base in="@start" out="@begin" fill="#0099ff" frame="#000000" cx="268.5416666666667" cz="113.8888888888889" r="5" angle="90" />
-  <Timer in="@begin" out="@reset" wait="937" fill="#0099ff" frame="#000000" cx="268.5416666666667" cz="113.8888888888889" r="5" angle="90" />
-  <Timer in="@begin" out="@offTele" wait="936" fill="#0099ff" frame="#000000" cx="268.5416666666667" cz="113.8888888888889" r="5" angle="90" />
-  <Timer in="@begin" out="@offInsideTele" wait="938" fill="#0099ff" frame="#000000" cx="268.5416666666667" cz="113.8888888888889" r="5" angle="90" />
-  <Distributor in="@reset" out.0="@change1" out.1="@change2" out.2="@change3" out.3="@change4" fill="#0099ff" frame="#000000" cx="268.5416666666667" cz="113.8888888888889" r="5" angle="90" />
-  <Counter in.0="@change1" in.1="@change2" in.2="@change3" in.3="@change4" out="@begin" fill="#0099ff" frame="#000000" cx="268.5416666666667" cz="113.8888888888889" r="5" angle="90" />
-  <Base in="@start" out.0="event1" out.1="event2" out.2="event3" out.3="event4" out.4="event5" out.5="event6" out.6="event7" out.7="event8" out.8="event9" out.9="event10" fill="#0099ff" frame="#000000" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
-  <Base in="@change1" out.0="event11" out.1="event12" out.2="event13" out.3="event14" out.4="event15" out.5="event16" out.6="event17" out.7="event18" out.8="event19" out.9="event20" fill="#0099ff" frame="#000000" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
-  <Base in="@change2" out.0="event21" out.1="event22" out.2="event23" out.3="event24" out.4="event25" out.5="event26" out.6="event27" out.7="event28" out.8="event29" out.9="event30" fill="#0099ff" frame="#000000" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
-  <Base in="@change3" out.0="event31" out.1="event32" out.2="event33" out.3="event34" out.4="event35" out.5="event36" out.6="event37" out.7="event38" out.8="event39" out.9="event40" fill="#0099ff" frame="#000000" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
-  <Base in="@change4" out.0="event41" out.1="event42" out.2="event43" out.3="event44" out.4="event45" out.5="event46" out.6="event47" out.7="event48" out.8="event49" out.9="event50" fill="#0099ff" frame="#000000" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
+  <Base in="@start" out="@begin" cx="268.5416666666667" cz="113.8888888888889" r="5" angle="90" />
+  <Timer in="@begin" out="@reset" wait="937" />
+  <Timer in="@begin" out="@offTele" wait="936" />
+  <Timer in="@begin" out="@offInsideTele" wait="938" />
+  <Distributor in="@reset" out.0="@change1" out.1="@change2" out.2="@change3" out.3="@change4" />
+  <Counter in.0="@change1" in.1="@change2" in.2="@change3" in.3="@change4" out="@begin" />
+  <Base in="@start" out.0="event1" out.1="event2" out.2="event3" out.3="event4" out.4="event5" out.5="event6" out.6="event7" out.7="event8" out.8="event9" out.9="event10" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
+  <Base in="@change1" out.0="event11" out.1="event12" out.2="event13" out.3="event14" out.4="event15" out.5="event16" out.6="event17" out.7="event18" out.8="event19" out.9="event20" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
+  <Base in="@change2" out.0="event21" out.1="event22" out.2="event23" out.3="event24" out.4="event25" out.5="event26" out.6="event27" out.7="event28" out.8="event29" out.9="event30" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
+  <Base in="@change3" out.0="event31" out.1="event32" out.2="event33" out.3="event34" out.4="event35" out.5="event36" out.6="event37" out.7="event38" out.8="event39" out.9="event40" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
+  <Base in="@change4" out.0="event41" out.1="event42" out.2="event43" out.3="event44" out.4="event45" out.5="event46" out.6="event47" out.7="event48" out.8="event49" out.9="event50" cx="286.0416666666667" cz="112.6388888888889" r="5" angle="90" />
   <Incarnator incarnateSound="0" y="skyStart" fill="#663399" frame="#ffff00" cx="319.1666666666667" cz="111.3888888888889" r="2.5" angle="0" />
   <Teleporter y="skyStart + 15" group="@resetTele" spin="true" shape="0" sound="0" fill="#663399" frame="#ffff00" cx="319.1666666666667" cz="111.3888888888889" r="2.5" angle="0" />
   <Incarnator incarnateSound="0" y="skyStart" fill="#663399" frame="#ffff00" cx="307.2916666666667" cz="105.69444444444444" r="2.5" angle="72" />
@@ -33,163 +33,163 @@
   <Teleporter status="false" sound="0" group="-204" destGroup="teleN5" y="skyStart" activeRange="50" deadRange="1" shape="0" stop="@offTele" start="@change4" fragment="false" fill="#0099ff" frame="#000000" cx="319.09722222222223" cz="98.99305555555556" r="1.4930555555555571" angle="90" />
   <Teleporter status="true" sound="0" group="-2" destGroup="@resetTele" y="5" activeRange="25" deadRange="1" shape="0" fragment="false" fill="#0099ff" frame="#000000" cx="319.09722222222223" cz="98.99305555555556" r="1.4930555555555571" angle="90" />
   <set wallHeight=".25" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="74.16666666666667" z="68.88888888888889" w="10" d="20" h="0" y="3.75" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="74.16666666666667" z="68.88888888888889" w="10" d="20" h="0" y="3.75" />
   <set wallHeight="4" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="67.91666666666667" z="76.38888888888889" w="2.5" d="5" h="0" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="80.41666666666667" z="76.38888888888889" w="2.5" d="5" h="0" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="80.41666666666667" z="61.38888888888889" w="2.5" d="5" h="0" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="67.91666666666667" z="61.38888888888889" w="2.5" d="5" h="0" />
-  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="81.66666666666667" z="68.88888888888889" w="5" d="10" h="0" />
-  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="66.66666666666667" z="68.88888888888889" w="5" d="10" h="0" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="67.91666666666667" z="76.38888888888889" w="2.5" d="5" h="0" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="80.41666666666667" z="76.38888888888889" w="2.5" d="5" h="0" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="80.41666666666667" z="61.38888888888889" w="2.5" d="5" h="0" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="67.91666666666667" z="61.38888888888889" w="2.5" d="5" h="0" />
+  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="81.66666666666667" z="68.88888888888889" w="5" d="10" h="0" />
+  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="66.66666666666667" z="68.88888888888889" w="5" d="10" h="0" />
   <set wallHeight="3" />
-  <WallDoor open="37" close="38" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="56.66666666666667" z="58.888888888888886" w="5" d="15" h="0" />
-  <WallDoor open="41" close="42" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="99.16666666666667" z="58.88888888888889" w="10" d="5" h="0" />
-  <WallDoor open="45" close="46" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="66.66666666666667" z="41.38888888888889" w="10" d="5" h="0" />
-  <WallDoor open="33" close="34" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="74.16666666666667" z="46.38888888888889" w="5" d="15" h="0" />
-  <WallDoor open="37" close="38" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="56.66666666666667" z="78.88888888888889" w="5" d="15" h="0" />
-  <WallDoor open="37" close="38" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="91.66666666666667" z="58.888888888888886" w="5" d="15" h="0" />
-  <WallDoor open="37" close="38" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="91.66666666666667" z="78.88888888888889" w="5" d="15" h="0" />
-  <WallDoor open="41" close="42" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="99.16666666666667" z="78.88888888888889" w="10" d="5" h="0" />
-  <WallDoor open="33" close="34" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="74.16666666666667" z="91.38888888888889" w="5" d="15" h="0" />
-  <WallDoor open="41" close="42" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="49.16666666666667" z="58.88888888888889" w="10" d="5" h="0" />
-  <WallDoor open="41" close="42" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="49.16666666666667" z="78.88888888888889" w="10" d="5" h="0" />
-  <WallDoor open="45" close="46" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="81.66666666666667" z="41.38888888888889" w="10" d="5" h="0" />
-  <WallDoor open="45" close="46" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="81.66666666666667" z="96.3888888888889" w="10" d="5" h="0" />
-  <WallDoor open="45" close="46" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="66.66666666666667" z="96.3888888888889" w="10" d="5" h="0" />
-  <WallDoor open="35" close="36" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="101.66666666666667" z="101.3888888888889" w="5" d="15" h="0" />
-  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="94.16666666666667" z="106.3888888888889" w="10" d="5" h="0" />
-  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="109.16666666666667" z="106.3888888888889" w="10" d="5" h="0" />
-  <WallDoor open="35" close="36" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="46.66666666666667" z="101.3888888888889" w="5" d="15" h="0" />
-  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="39.16666666666667" z="106.3888888888889" w="10" d="5" h="0" />
-  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="54.16666666666667" z="106.3888888888889" w="10" d="5" h="0" />
-  <WallDoor open="35" close="36" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="101.66666666666667" z="36.38888888888889" w="5" d="15" h="0" />
-  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="94.16666666666667" z="31.388888888888893" w="10" d="5" h="0" />
-  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="109.16666666666667" z="31.388888888888893" w="10" d="5" h="0" />
-  <WallDoor open="35" close="36" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="46.66666666666667" z="36.38888888888889" w="5" d="15" h="0" />
-  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="39.16666666666667" z="31.388888888888893" w="10" d="5" h="0" />
-  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="54.16666666666667" z="31.388888888888893" w="10" d="5" h="0" />
-  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="26.666666666666668" z="68.88888888888889" w="5" d="15" h="0" />
-  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="19.166666666666668" z="68.88888888888889" w="10" d="5" h="0" />
-  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="121.66666666666667" z="68.88888888888889" w="5" d="15" h="0" />
-  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="129.16666666666669" z="68.88888888888889" w="10" d="5" h="0" />
-  <WallDoor open="33" close="34" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="74.16666666666667" z="116.3888888888889" w="5" d="15" h="0" />
-  <WallDoor open="33" close="34" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="74.16666666666667" z="21.38888888888889" w="5" d="15" h="0" />
+  <WallDoor open="37" close="38" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="56.66666666666667" z="58.888888888888886" w="5" d="15" h="0" />
+  <WallDoor open="41" close="42" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="99.16666666666667" z="58.88888888888889" w="10" d="5" h="0" />
+  <WallDoor open="45" close="46" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="66.66666666666667" z="41.38888888888889" w="10" d="5" h="0" />
+  <WallDoor open="33" close="34" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="74.16666666666667" z="46.38888888888889" w="5" d="15" h="0" />
+  <WallDoor open="37" close="38" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="56.66666666666667" z="78.88888888888889" w="5" d="15" h="0" />
+  <WallDoor open="37" close="38" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="91.66666666666667" z="58.888888888888886" w="5" d="15" h="0" />
+  <WallDoor open="37" close="38" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="91.66666666666667" z="78.88888888888889" w="5" d="15" h="0" />
+  <WallDoor open="41" close="42" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="99.16666666666667" z="78.88888888888889" w="10" d="5" h="0" />
+  <WallDoor open="33" close="34" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="74.16666666666667" z="91.38888888888889" w="5" d="15" h="0" />
+  <WallDoor open="41" close="42" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="49.16666666666667" z="58.88888888888889" w="10" d="5" h="0" />
+  <WallDoor open="41" close="42" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="49.16666666666667" z="78.88888888888889" w="10" d="5" h="0" />
+  <WallDoor open="45" close="46" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="81.66666666666667" z="41.38888888888889" w="10" d="5" h="0" />
+  <WallDoor open="45" close="46" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="81.66666666666667" z="96.3888888888889" w="10" d="5" h="0" />
+  <WallDoor open="45" close="46" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="66.66666666666667" z="96.3888888888889" w="10" d="5" h="0" />
+  <WallDoor open="35" close="36" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="101.66666666666667" z="101.3888888888889" w="5" d="15" h="0" />
+  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="94.16666666666667" z="106.3888888888889" w="10" d="5" h="0" />
+  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="109.16666666666667" z="106.3888888888889" w="10" d="5" h="0" />
+  <WallDoor open="35" close="36" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="46.66666666666667" z="101.3888888888889" w="5" d="15" h="0" />
+  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="39.16666666666667" z="106.3888888888889" w="10" d="5" h="0" />
+  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="54.16666666666667" z="106.3888888888889" w="10" d="5" h="0" />
+  <WallDoor open="35" close="36" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="101.66666666666667" z="36.38888888888889" w="5" d="15" h="0" />
+  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="94.16666666666667" z="31.388888888888893" w="10" d="5" h="0" />
+  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="109.16666666666667" z="31.388888888888893" w="10" d="5" h="0" />
+  <WallDoor open="35" close="36" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="46.66666666666667" z="36.38888888888889" w="5" d="15" h="0" />
+  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="39.16666666666667" z="31.388888888888893" w="10" d="5" h="0" />
+  <WallDoor open="43" close="44" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="54.16666666666667" z="31.388888888888893" w="10" d="5" h="0" />
+  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="26.666666666666668" z="68.88888888888889" w="5" d="15" h="0" />
+  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="19.166666666666668" z="68.88888888888889" w="10" d="5" h="0" />
+  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="121.66666666666667" z="68.88888888888889" w="5" d="15" h="0" />
+  <WallDoor open="47" close="48" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="129.16666666666669" z="68.88888888888889" w="10" d="5" h="0" />
+  <WallDoor open="33" close="34" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="74.16666666666667" z="116.3888888888889" w="5" d="15" h="0" />
+  <WallDoor open="33" close="34" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#ff0000" frame="#000000" x="74.16666666666667" z="21.38888888888889" w="5" d="15" h="0" />
   <set wallHeight="2" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="65.41666666666667" z="76.38888888888889" w="2.5" d="5" h="0" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="82.91666666666667" z="76.38888888888889" w="2.5" d="5" h="0" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="82.91666666666667" z="61.38888888888889" w="2.5" d="5" h="0" />
-  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="65.41666666666667" z="61.38888888888889" w="2.5" d="5" h="0" />
-  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="41.66666666666667" z="68.88888888888889" w="15" d="5" h="0" />
-  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="82.91666666666667" z="51.38888888888889" w="5" d="5" h="0" />
-  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="65.41666666666667" z="51.38888888888889" w="5" d="5" h="0" />
-  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="65.34722222222223" z="86.38888888888889" w="5" d="5" h="0" />
-  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="82.91666666666667" z="86.38888888888889" w="5" d="5" h="0" />
-  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="106.66666666666667" z="68.88888888888889" w="15" d="5" h="0" />
-  <WallDoor open="31" close="32" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="121.66666666666669" z="91.38888888888889" w="15" d="5" h="0" />
-  <WallDoor open="31" close="32" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="121.66666666666669" z="46.38888888888889" w="15" d="5" h="0" />
-  <WallDoor open="31" close="32" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="26.66666666666667" z="46.38888888888889" w="15" d="5" h="0" />
-  <WallDoor open="31" close="32" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" r="1.4930555555555571" cx="319.09722222222223" cz="98.99305555555556" angle="90" x="26.66666666666667" z="91.38888888888889" w="15" d="5" h="0" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="65.41666666666667" z="76.38888888888889" w="2.5" d="5" h="0" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="82.91666666666667" z="76.38888888888889" w="2.5" d="5" h="0" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="82.91666666666667" z="61.38888888888889" w="2.5" d="5" h="0" />
+  <WallDoor open="49" close="50" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#dddddd" frame="#000000" x="65.41666666666667" z="61.38888888888889" w="2.5" d="5" h="0" />
+  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="41.66666666666667" z="68.88888888888889" w="15" d="5" h="0" />
+  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="82.91666666666667" z="51.38888888888889" w="5" d="5" h="0" />
+  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="65.41666666666667" z="51.38888888888889" w="5" d="5" h="0" />
+  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="65.34722222222223" z="86.38888888888889" w="5" d="5" h="0" />
+  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="82.91666666666667" z="86.38888888888889" w="5" d="5" h="0" />
+  <WallDoor open="39" close="40" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="106.66666666666667" z="68.88888888888889" w="15" d="5" h="0" />
+  <WallDoor open="31" close="32" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="121.66666666666669" z="91.38888888888889" w="15" d="5" h="0" />
+  <WallDoor open="31" close="32" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="121.66666666666669" z="46.38888888888889" w="15" d="5" h="0" />
+  <WallDoor open="31" close="32" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="26.66666666666667" z="46.38888888888889" w="15" d="5" h="0" />
+  <WallDoor open="31" close="32" deltaY="blockHeight" deltaZ="0" deltaX="0" yaw="0" openSpeed="opSpd" closeSpeed="clSpd" guardDelay="5" volume="0" status="isClosed" shotPower="0" fill="#008800" frame="#000000" x="26.66666666666667" z="91.38888888888889" w="15" d="5" h="0" />
   <GroundColor fill="#000055" frame="#000000" />
   <SkyColor fill="#444444" frame="#0099ff" />
   <Teleporter y="startY + 7" group="23" spin="true" stop="@teleStop" shape="0" sound="411" fill="#0099ff" frame="#000000" cx="84.13194444444444" cz="96.49305555555556" r="2.256944444444443" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0099ff" frame="#000000" cx="84.13194444444444" cz="96.49305555555556" r="2.256944444444443" angle="90" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#0099ff" frame="#000000" cx="84.13194444444444" cz="96.49305555555556" r="2.256944444444443" angle="90" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="84.13194444444444" cz="96.49305555555556" r="2.256944444444443" angle="90" />
   <Teleporter y="startY + 7" group="23" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="39.16666666666667" cz="113.8888888888889" r="2.5" angle="216" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="39.16666666666667" cz="113.8888888888889" r="2.5" angle="216" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="39.16666666666667" cz="113.8888888888889" r="2.5" angle="216" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="39.16666666666667" cz="113.8888888888889" r="2.5" angle="216" />
   <Teleporter y="startY + 7" group="22" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="134.16666666666669" cz="48.81944444444445" r="2.5" angle="72" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="134.16666666666669" cz="48.81944444444445" r="2.5" angle="72" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="134.16666666666669" cz="48.81944444444445" r="2.5" angle="72" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="134.16666666666669" cz="48.81944444444445" r="2.5" angle="72" />
   <Teleporter y="startY + 7" group="23" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="74.16666666666667" cz="8.88888888888889" r="2.5" angle="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="74.16666666666667" cz="8.88888888888889" r="2.5" angle="0" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="74.16666666666667" cz="8.88888888888889" r="2.5" angle="0" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="74.16666666666667" cz="8.88888888888889" r="2.5" angle="0" />
   <Teleporter y="startY + 7" group="23" spin="true" stop="@teleStop" shape="0" sound="411" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="58.99305555555556" r="2.2569444444444464" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="58.99305555555556" r="2.2569444444444464" angle="90" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="58.99305555555556" r="2.2569444444444464" angle="90" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="58.99305555555556" r="2.2569444444444464" angle="90" />
   <Teleporter speed="0" shape="0" group="@center" y="startY" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="58.99305555555556" r="2.2569444444444464" angle="90" />
   <Teleporter y="startY + 7" group="22" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="34.16666666666667" cz="23.819444444444446" r="2.5" angle="324" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="34.16666666666667" cz="23.819444444444446" r="2.5" angle="324" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="34.16666666666667" cz="23.819444444444446" r="2.5" angle="324" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="34.16666666666667" cz="23.819444444444446" r="2.5" angle="324" />
   <Teleporter y="startY + 7" group="23" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="134.16666666666669" cz="88.75" r="2.5" angle="108" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="134.16666666666669" cz="88.75" r="2.5" angle="108" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="134.16666666666669" cz="88.75" r="2.5" angle="108" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="134.16666666666669" cz="88.75" r="2.5" angle="108" />
   <Teleporter y="startY + 7" group="22" spin="true" stop="@teleStop" shape="0" sound="411" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="78.99305555555556" r="2.25694444444445" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="78.99305555555556" r="2.25694444444445" angle="90" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="78.99305555555556" r="2.25694444444445" angle="90" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="78.99305555555556" r="2.25694444444445" angle="90" />
   <Teleporter speed="0" shape="0" group="@center" y="startY" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="78.99305555555556" r="2.25694444444445" angle="90" />
   <Teleporter y="startY + 7" group="22" spin="true" stop="@teleStop" shape="0" sound="411" fill="#0099ff" frame="#000000" cx="84.13194444444444" cz="41.49305555555556" r="2.256944444444443" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0099ff" frame="#000000" cx="84.13194444444444" cz="41.49305555555556" r="2.256944444444443" angle="90" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#0099ff" frame="#000000" cx="84.13194444444444" cz="41.49305555555556" r="2.256944444444443" angle="90" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="84.13194444444444" cz="41.49305555555556" r="2.256944444444443" angle="90" />
   <Teleporter y="startY + 7" group="23" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="14.166666666666668" cz="88.75" r="2.5" angle="252" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="14.166666666666668" cz="88.75" r="2.5" angle="252" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="14.166666666666668" cz="88.75" r="2.5" angle="252" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="14.166666666666668" cz="88.75" r="2.5" angle="252" />
   <Teleporter y="startY + 7" group="21" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="14.166666666666668" cz="43.81944444444444" r="2.5" angle="288" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="14.166666666666668" cz="43.81944444444444" r="2.5" angle="288" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="14.166666666666668" cz="43.81944444444444" r="2.5" angle="288" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="14.166666666666668" cz="43.81944444444444" r="2.5" angle="288" />
   <Teleporter y="startY + 7" group="21" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="109.16666666666667" cz="113.8888888888889" r="2.5" angle="144" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="109.16666666666667" cz="113.8888888888889" r="2.5" angle="144" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="109.16666666666667" cz="113.8888888888889" r="2.5" angle="144" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="109.16666666666667" cz="113.8888888888889" r="2.5" angle="144" />
   <Teleporter y="startY + 7" group="21" spin="true" stop="@teleStop" shape="0" sound="411" fill="#0099ff" frame="#000000" cx="64.13194444444444" cz="41.49305555555556" r="2.256944444444443" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0099ff" frame="#000000" cx="64.13194444444444" cz="41.49305555555556" r="2.256944444444443" angle="90" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#0099ff" frame="#000000" cx="64.13194444444444" cz="41.49305555555556" r="2.256944444444443" angle="90" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="64.13194444444444" cz="41.49305555555556" r="2.256944444444443" angle="90" />
   <Teleporter y="startY + 7" group="21" spin="true" stop="@teleStop" shape="0" sound="411" fill="#0099ff" frame="#000000" cx="64.13194444444444" cz="96.49305555555556" r="2.256944444444443" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0099ff" frame="#000000" cx="64.13194444444444" cz="96.49305555555556" r="2.256944444444443" angle="90" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#0099ff" frame="#000000" cx="64.13194444444444" cz="96.49305555555556" r="2.256944444444443" angle="90" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="64.13194444444444" cz="96.49305555555556" r="2.256944444444443" angle="90" />
   <Teleporter y="startY + 7" group="22" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="74.16666666666667" cz="128.88888888888889" r="2.5" angle="180" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="74.16666666666667" cz="128.88888888888889" r="2.5" angle="180" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="74.16666666666667" cz="128.88888888888889" r="2.5" angle="180" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="74.16666666666667" cz="128.88888888888889" r="2.5" angle="180" />
   <Teleporter y="startY + 7" group="21" spin="true" stop="@teleStop" shape="0" sound="411" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="58.99305555555556" r="2.25694444444445" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="58.99305555555556" r="2.25694444444445" angle="90" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="58.99305555555556" r="2.25694444444445" angle="90" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="58.99305555555556" r="2.25694444444445" angle="90" />
   <Teleporter speed="0" shape="0" group="@center" y="startY" fill="#0099ff" frame="#000000" cx="101.63194444444446" cz="58.99305555555556" r="2.25694444444445" angle="90" />
   <Teleporter y="startY + 7" group="22" spin="true" stop="@teleStop" shape="0" sound="411" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="78.99305555555556" r="2.2569444444444464" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="78.99305555555556" r="2.2569444444444464" angle="90" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="78.99305555555556" r="2.2569444444444464" angle="90" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="78.99305555555556" r="2.2569444444444464" angle="90" />
   <Teleporter speed="0" shape="0" group="@center" y="startY" fill="#0099ff" frame="#000000" cx="46.63194444444444" cz="78.99305555555556" r="2.2569444444444464" angle="90" />
   <Teleporter y="startY + 7" group="21" spin="true" stop="@teleStop" shape="0" sound="411" fill="#663399" frame="#ffff00" cx="109.16666666666667" cz="23.819444444444446" r="2.5" angle="36" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#663399" frame="#ffff00" cx="109.16666666666667" cz="23.819444444444446" r="2.5" angle="36" />
-  <Timer in="mTaken" out="mShow" wait="7" fill="#663399" frame="#ffff00" cx="109.16666666666667" cz="23.819444444444446" r="2.5" angle="36" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
   <Goody hitScore="1" y="startY + 6" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="109.16666666666667" cz="23.819444444444446" r="2.5" angle="36" />
   <Hologram shape="bspGroundStar" y="0" scale="1.25" fill="#770000" frame="#000000" cx="74.16666666666667" cz="68.88888888888889" r="1.25" angle="225" />
   <Hologram shape="bspGroundStar" y="startY + 5" fill="#770000" frame="#000000" cx="74.16666666666667" cz="68.88888888888889" r="1.25" angle="225" />
   <Teleporter shape="0" speed="0" destGroup="@center" group="-1" y="3 * startY" activeRange="110" deadRange="90" fill="#770000" frame="#000000" cx="74.16666666666667" cz="68.88888888888889" r="1.25" angle="225" />
   <Teleporter status="false" sound="0" group="-205" destGroup="@resetTele" y="2 * startY" activeRange="150" deadRange="1" shape="0" stop="@offInsideTele" start="@reset" fragment="false" fill="#770000" frame="#000000" cx="74.16666666666667" cz="68.88888888888889" r="1.25" angle="225" />
-  <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#ff0000" frame="#000000" cx="292.0138888888889" cz="4.444444444444445" r="3.125" angle="90" />
+  <Timer in="@start" out="@gameEnds" wait="gameLength" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ff0000" frame="#000000" cx="292.0138888888889" cz="4.444444444444445" r="3.125" angle="90" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ff0000" frame="#000000" cx="292.0138888888889" cz="4.444444444444445" r="3.125" angle="90" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ff0000" frame="#000000" cx="292.0138888888889" cz="4.444444444444445" r="3.125" angle="90" />
@@ -197,66 +197,66 @@
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ff0000" frame="#000000" cx="292.0138888888889" cz="4.444444444444445" r="3.125" angle="90" />
   <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#ff0000" frame="#000000" cx="292.0138888888889" cz="4.444444444444445" r="3.125" angle="90" />
   <unique vars="tDone aTaken" />
-  <And in="49" out="tDone" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="68.95833333333334" r="2.5" angle="90" />
-  <Timer stop="50" in="aTaken" out="tDone" wait="200" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="68.95833333333334" r="2.5" angle="90" />
+  <And in="49" out="tDone" />
+  <Timer stop="50" in="aTaken" out="tDone" wait="200" />
   <Goody speed="2" shape="bspGoody" y="3.25" missiles="8" grenades="12" start="tDone" stop="50" out="aTaken" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="68.95833333333334" r="2.5" angle="90" />
   <unique vars="tDone aTaken" />
-  <And in="50" out="tDone" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="68.95833333333334" r="2.5" angle="90" />
-  <Timer stop="49" in="aTaken" out="tDone" wait="200" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="68.95833333333334" r="2.5" angle="90" />
+  <And in="50" out="tDone" />
+  <Timer stop="49" in="aTaken" out="tDone" wait="200" />
   <Goody speed="2" shape="bspGoody" y="7" missiles="8" grenades="12" start="tDone" stop="49" out="aTaken" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="68.95833333333334" r="2.5" angle="90" />
   <unique vars="tDone aTaken" />
-  <And in="40" out="tDone" fill="#0033ff" frame="#ff0000" cx="106.73611111111111" cz="68.95833333333334" r="2.5" angle="90" />
-  <Timer stop="39" in="aTaken" out="tDone" wait="150" fill="#0033ff" frame="#ff0000" cx="106.73611111111111" cz="68.95833333333334" r="2.5" angle="90" />
+  <And in="40" out="tDone" />
+  <Timer stop="39" in="aTaken" out="tDone" wait="150" />
   <Goody shape="bspGrenade" y="4" grenades="goodie1" start="tDone" stop="39" out="aTaken" fill="#0033ff" frame="#ff0000" cx="106.73611111111111" cz="68.95833333333334" r="2.5" angle="90" />
   <unique vars="tDone aTaken" />
-  <And in="34" out="tDone" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="103.95833333333334" r="2.5" angle="90" />
-  <Timer stop="33" in="aTaken" out="tDone" wait="150" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="103.95833333333334" r="2.5" angle="90" />
+  <And in="34" out="tDone" />
+  <Timer stop="33" in="aTaken" out="tDone" wait="150" />
   <Goody shape="bspGrenade" y="2" grenades="goodie1" start="tDone" stop="33" out="aTaken" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="103.95833333333334" r="2.5" angle="90" />
   <unique vars="tDone aTaken" />
-  <And in="34" out="tDone" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="33.958333333333336" r="2.5" angle="90" />
-  <Timer stop="33" in="aTaken" out="tDone" wait="150" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="33.958333333333336" r="2.5" angle="90" />
+  <And in="34" out="tDone" />
+  <Timer stop="33" in="aTaken" out="tDone" wait="150" />
   <Goody shape="bspMissile" y="2" missiles="goodie2" start="tDone" stop="33" out="aTaken" fill="#0033ff" frame="#ff0000" cx="74.23611111111111" cz="33.958333333333336" r="2.5" angle="90" />
   <unique vars="tDone aTaken" />
-  <And in="40" out="tDone" fill="#0033ff" frame="#ff0000" cx="41.736111111111114" cz="68.95833333333334" r="2.5" angle="90" />
-  <Timer stop="39" in="aTaken" out="tDone" wait="150" fill="#0033ff" frame="#ff0000" cx="41.736111111111114" cz="68.95833333333334" r="2.5" angle="90" />
+  <And in="40" out="tDone" />
+  <Timer stop="39" in="aTaken" out="tDone" wait="150" />
   <Goody shape="bspMissile" y="4" missiles="goodie2" start="tDone" stop="39" out="aTaken" fill="#0033ff" frame="#ff0000" cx="41.736111111111114" cz="68.95833333333334" r="2.5" angle="90" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#00ccff" frame="#000000" cx="39.270833333333336" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
-  <Timer in="mTaken1" out="mShow1" wait="150" fill="#00ccff" frame="#000000" cx="39.270833333333336" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="goodie3" start="mShow1" out="mSwitch" fill="#00ccff" frame="#000000" cx="39.270833333333336" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
-  <Timer in="mSwitch" out="mShow2" wait="150" fill="#00ccff" frame="#000000" cx="39.270833333333336" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="goodie4" start="mShow2" out="mTaken1" fill="#00ccff" frame="#000000" cx="39.270833333333336" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#ff6600" frame="#000000" cx="39.270833333333336" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
-  <Timer in="mTaken1" out="mShow1" wait="150" fill="#ff6600" frame="#000000" cx="39.270833333333336" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="goodie5" start="mShow1" out="mSwitch" fill="#ff6600" frame="#000000" cx="39.270833333333336" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
-  <Timer in="mSwitch" out="mShow2" wait="150" fill="#ff6600" frame="#000000" cx="39.270833333333336" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="goodie6" start="mShow2" out="mTaken1" fill="#ff6600" frame="#000000" cx="39.270833333333336" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#00ccff" frame="#000000" cx="109.27083333333334" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
-  <Timer in="mTaken1" out="mShow1" wait="150" fill="#00ccff" frame="#000000" cx="109.27083333333334" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="goodie3" start="mShow1" out="mSwitch" fill="#00ccff" frame="#000000" cx="109.27083333333334" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
-  <Timer in="mSwitch" out="mShow2" wait="150" fill="#00ccff" frame="#000000" cx="109.27083333333334" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="goodie4" start="mShow2" out="mTaken1" fill="#00ccff" frame="#000000" cx="109.27083333333334" cz="38.85416666666667" r="1.3541666666666643" angle="225" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#ff6600" frame="#000000" cx="109.27083333333334" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
-  <Timer in="mTaken1" out="mShow1" wait="150" fill="#ff6600" frame="#000000" cx="109.27083333333334" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="goodie5" start="mShow1" out="mSwitch" fill="#ff6600" frame="#000000" cx="109.27083333333334" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
-  <Timer in="mSwitch" out="mShow2" wait="150" fill="#ff6600" frame="#000000" cx="109.27083333333334" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="goodie6" start="mShow2" out="mTaken1" fill="#ff6600" frame="#000000" cx="109.27083333333334" cz="98.85416666666667" r="1.3541666666666643" angle="225" />
-  <Base in="@start" out="@warning" fill="#0099ff" frame="#000000" cx="254.79166666666669" cz="22.01388888888889" r="5" angle="90" />
-  <Timer in="@warning" out="@msg1" wait="781" fill="#0099ff" frame="#000000" cx="254.79166666666669" cz="22.01388888888889" r="5" angle="90" />
-  <Timer in="@reset" out="@sendMsg" wait="781" fill="#0099ff" frame="#000000" cx="254.79166666666669" cz="22.01388888888889" r="5" angle="90" />
-  <Distributor in="@sendMsg" out.0="@msg2" out.1="@msg3" out.2="@msg4" out.3="@msg5" fill="#0099ff" frame="#000000" cx="254.79166666666669" cz="22.01388888888889" r="5" angle="90" />
-  <Text in="@msg1" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" fill="#00ccff" frame="#000000" cx="272.22222222222223" cz="23.125" r="3.75" angle="90" />
-  <Text in="@msg2" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" fill="#00ccff" frame="#000000" cx="272.22222222222223" cz="23.125" r="3.75" angle="90" />
-  <Text in="@msg3" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" fill="#00ccff" frame="#000000" cx="272.22222222222223" cz="23.125" r="3.75" angle="90" />
-  <Text in="@msg4" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" fill="#00ccff" frame="#000000" cx="272.22222222222223" cz="23.125" r="3.75" angle="90" />
-  <Text in="@msg5" sound="snTextBlip" volume="5" showEveryone="true" text="10 Seconds Left!" fill="#00ccff" frame="#000000" cx="272.22222222222223" cz="23.125" r="3.75" angle="90" />
-  <Timer in="@start" wait="1" out="@playSound" fill="#0099ff" frame="#000000" cx="252.56944444444446" cz="5" r="5" angle="90" />
+  <Base in="@start" out="@warning" cx="254.79166666666669" cz="22.01388888888889" r="5" angle="90" />
+  <Timer in="@warning" out="@msg1" wait="781" />
+  <Timer in="@reset" out="@sendMsg" wait="781" />
+  <Distributor in="@sendMsg" out.0="@msg2" out.1="@msg3" out.2="@msg4" out.3="@msg5" />
+  <Text in="@msg1" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="272.22222222222223" cz="23.125" r="3.75" />
+  <Text in="@msg2" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="272.22222222222223" cz="23.125" r="3.75" />
+  <Text in="@msg3" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="272.22222222222223" cz="23.125" r="3.75" />
+  <Text in="@msg4" sound="snTextBlip" volume="5" showEveryone="true" text="Scramble Imminent!" cx="272.22222222222223" cz="23.125" r="3.75" />
+  <Text in="@msg5" sound="snTextBlip" volume="5" showEveryone="true" text="10 Seconds Left!" cx="272.22222222222223" cz="23.125" r="3.75" />
+  <Timer in="@start" wait="1" out="@playSound" />
   <Sound y="50" start="@playSound" restart="false" isPlaced="false" sound="411" volume="1" fill="#0099ff" frame="#000000" cx="252.56944444444446" cz="5" r="5" angle="90" />
   <set isPlaced="true" />
   <unique vars="mShow" />
-  <Base in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="74.23611111111111" cz="68.88888888888889" r="3.125" angle="90" />
+  <Base in="@start" out="mShow" cx="74.23611111111111" cz="68.88888888888889" r="3.125" angle="90" />
   <Goody shape="5560" scale="3.5" yon="50" sound="0" y=".001" speed="-2" grenades="0" start="mShow" out="mShow" fill="#ffffff" frame="#000000" cx="74.23611111111111" cz="68.88888888888889" r="3.125" angle="90" />
 </map>

@@ -14,7 +14,7 @@
   <Wall fill="#336666" frame="#000000" x="130.20833333333334" z="117.70833333333334" w="5" d="15" h="1" y="7.5" />
   <Wall fill="#006666" frame="#000000" x="130.20833333333334" z="105.20833333333334" w="10" d="10" h="1" y="7.5" />
   <Wall fill="#006666" frame="#000000" x="130.20833333333334" z="132.70833333333334" w="10" d="15" h="1" y="7.5" />
-  <Ramp deltaY="4.5" fill="#336666" frame="#000000" x="140.27777777777777" z="101.52777777777779" w="10" d="2.5" h="0" r="1.25" angle="270" />
+  <Ramp deltaY="4.5" fill="#336666" frame="#000000" x="140.27777777777777" z="101.52777777777779" w="10" d="2.5" h="0" angle="270" />
   <Wall fill="#009999" frame="#000000" x="117.70833333333334" z="137.70833333333334" w="15" d="5" h="10" />
   <Wall fill="#009999" frame="#000000" x="142.70833333333334" z="137.70833333333334" w="15" d="5" h="10" />
   <Wall fill="#009999" frame="#000000" x="132.70833333333334" z="97.70833333333334" w="35" d="5" h="10" />
@@ -39,8 +39,8 @@
   <Door shape="bspHingeDoor" open="@oBgate" close="@cBgate" yaw="-90" deltaY="0" fill="#0000dd" frame="#3366ff" cx="131.38888888888889" cz="58.88888888888889" r="1.25" angle="0" />
   <Switch out.1="@oBgate" out.0="@cBgate" fill="#dd0000" frame="#008800" cx="132.77777777777777" cz="60.27777777777778" r="1.25" angle="180" />
   <Wall fill="#009999" frame="#000000" x="130.20833333333334" z="57.708333333333336" w="2.5" d="5" h="7.5" y="2.5" />
-  <Ramp y="4.5" deltaY="5" isTarget="false" hitSound="210" fill="#008800" frame="#000000" x="130.27777777777777" z="68.09027777777779" w="28.75" d="14.375" h="0" r="1.875" angle="0" />
-  <Ramp y="4.5" deltaY="5" isTarget="false" hitSound="210" fill="#008800" frame="#000000" x="130.27777777777777" z="87.46527777777779" w="28.75" d="14.375" h="0" r="1.875" angle="180" />
+  <Ramp y="4.5" deltaY="5" isTarget="false" hitSound="210" fill="#008800" frame="#000000" x="130.27777777777777" z="68.09027777777779" w="28.75" d="14.375" h="0" angle="0" />
+  <Ramp y="4.5" deltaY="5" isTarget="false" hitSound="210" fill="#008800" frame="#000000" x="130.27777777777777" z="87.46527777777779" w="28.75" d="14.375" h="0" angle="180" />
   <Wall fill="#008800" frame="#000000" x="138.64583333333334" z="77.70833333333334" w="11.875" d="5" h="0" y="4.5" />
   <Wall fill="#008800" frame="#000000" x="121.77083333333334" z="77.70833333333334" w="11.875" d="5" h="0" y="4.5" />
   <Wall fill="#006600" frame="#000000" x="130.20833333333334" z="69.58333333333334" w="28.75" d="1.25" h="3" y="1.875" />
@@ -61,7 +61,7 @@
   <Wall fill="#008800" frame="#000000" x="37.708333333333336" z="167.39583333333334" w="5" d="4.375" h="7.5" />
   <Wall fill="#008800" frame="#000000" x="38.020833333333336" z="185.20833333333334" w="4.375" d="5" h="7.5" />
   <Wall fill="#006666" frame="#000000" x="37.708333333333336" z="178.33333333333334" w="15" d="28.75" h="0.5" y="7.5" />
-  <Ramp y="5" deltaY="3" fill="#008800" frame="#000000" x="25.27777777777778" z="190.2777777777778" w="10" d="5" h="0" r="1.875" angle="90" />
+  <Ramp y="5" deltaY="3" fill="#008800" frame="#000000" x="25.27777777777778" z="190.2777777777778" w="10" d="5" h="0" angle="90" />
   <Switch out.1="@oYgate" out.0="@cYgate" fill="#dd0000" frame="#008800" cx="50.27777777777778" cz="187.7777777777778" r="1.25" angle="270" />
   <Guard shield="1" fill="#ffff00" frame="#000000" cx="37.083333333333336" cz="203.33333333333334" r="1.875" angle="225" />
   <Guard shield="1" fill="#ffff00" frame="#000000" cx="48.333333333333336" cz="177.08333333333334" r="1.875" angle="45" />
@@ -83,7 +83,7 @@
   <Hologram shape="bspGroundStar" fill="#ffffff" frame="#000000" cx="27.708333333333336" cz="117.70833333333334" r="1.875" angle="315" />
   <Ufo killMsg="@Wkill" verticalRangeMax="4" shield="2" fill="#ffffff" frame="#000000" cx="15.208333333333336" cz="125.20833333333334" r="1.875" angle="135" />
   <Ufo killMsg="@Wkill" verticalRangeMax="4" shield="2" fill="#ffffff" frame="#000000" cx="40.208333333333336" cz="110.20833333333334" r="1.875" angle="135" />
-  <Counter in="@Wkill" n="2" out="@Ywin" fill="#ffffff" frame="#000000" cx="40.208333333333336" cz="110.20833333333334" r="1.875" angle="135" />
+  <Counter in="@Wkill" n="2" out="@Ywin" />
   <Hologram shape="bspGroundArrow" fill="#0000dd" frame="#000000" cx="65.20833333333334" cz="190.20833333333334" r="1.875" angle="225" />
   <Wall fill="#009999" frame="#000000" x="17.708333333333336" z="188.95833333333334" w="5" d="2.5" h="5" />
   <Wall fill="#009999" frame="#000000" x="80.20833333333334" z="137.70833333333334" w="50" d="5" h="1.25" />
@@ -94,7 +94,7 @@
   <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="A bomb was dropped slightly off target 
 leaving one structure untouched.  Destroy anything that 
 that moves and get out of there as quickly as possible." ambient.i=".2" hull.0="mediumHull" hull.2="mediumHull" />
-  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." fill="#ff3300" frame="#000000" cx="57.708333333333336" cz="132.70833333333334" r="1.875" angle="135" />
+  <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this mission." cx="57.708333333333336" cz="132.70833333333334" r="1.875" />
   <Hologram shape="bspMushroom" isAmbient="1" fill="#ffffff" frame="#dd0000" cx="123.2638888888889" cz="152.08333333333334" r="1.875" angle="138" />
   <Hologram shape="bspMushroom" isAmbient="1" fill="#ffffff" frame="#dd0000" cx="122.0138888888889" cz="150.20833333333334" r="1.875" angle="45" />
   <Hologram shape="bspMushroom" isAmbient="1" fill="#ffffff" frame="#dd0000" cx="146.38888888888889" cz="108.33333333333334" r="1.875" angle="45" />

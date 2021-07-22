@@ -39,11 +39,11 @@ E-mail: cc96@cornell.edu" />
   <Incarnator fill="#777777" frame="#000000" cx="63.19444444444444" cz="67.56944444444444" r="3.125" angle="315" />
   <Incarnator fill="#777777" frame="#000000" cx="6.944444444444445" cz="67.56944444444444" r="3.125" angle="45" />
   <Incarnator fill="#777777" frame="#000000" cx="6.944444444444445" cz="11.319444444444445" r="3.125" angle="135" />
-  <Timer in="@got" out="@re" wait="200" fill="#9900cc" frame="#000000" cx="99.58333333333334" cz="98.61111111111111" r="2.5" angle="315" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="7.152777777777779" cz="12.256944444444446" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="63.81944444444444" cz="11.5625" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="63.81944444444444" cz="67.8125" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="8.194444444444445" cz="67.8125" r="4.0625" angle="180" />
+  <Timer in="@got" out="@re" wait="200" />
+  <Area enter="@re" cx="7.152777777777779" cz="12.256944444444446" r="4.0625" />
+  <Area enter="@re" cx="63.81944444444444" cz="11.5625" r="4.0625" />
+  <Area enter="@re" cx="63.81944444444444" cz="67.8125" r="4.0625" />
+  <Area enter="@re" cx="8.194444444444445" cz="67.8125" r="4.0625" />
   <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="23.819444444444446" cz="60.55555555555556" r="2.5" angle="45" />
   <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="52.56944444444445" cz="49.93055555555556" r="2.5" angle="45" />
   <Goody shape="bspGrenade" grenades="4" start="@re" out="@got" y="8" fill="#9900cc" frame="#000000" cx="43.19444444444444" cz="19.305555555555557" r="2.5" angle="45" />

@@ -43,11 +43,11 @@
   <Wall fill="#9900cc" frame="#000000" x="17.5" z="45.625" w="2.5" d="2.5" h="1.5" />
   <Wall fill="#9900cc" frame="#000000" x="11.25" z="45.625" w="2.5" d="2.5" h="1.5" />
   <Wall fill="#777777" frame="#000000" x="32.5" z="36.25" w="2.5" d="2.5" h="0.25" y="4" />
-  <Timer in="@got" out="@re" wait="200" fill="#9900cc" frame="#000000" cx="63.263888888888886" cz="59.44444444444445" r="2.5" angle="315" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="60.34722222222223" cz="37.25694444444444" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="32.22222222222222" cz="63.50694444444444" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="4.722222222222223" cz="36.63194444444444" r="4.0625" angle="180" />
-  <Area enter="@re" fill="#ffffff" frame="#000000" cx="32.22222222222222" cz="9.756944444444445" r="4.0625" angle="180" />
+  <Timer in="@got" out="@re" wait="200" />
+  <Area enter="@re" cx="60.34722222222223" cz="37.25694444444444" r="4.0625" />
+  <Area enter="@re" cx="32.22222222222222" cz="63.50694444444444" r="4.0625" />
+  <Area enter="@re" cx="4.722222222222223" cz="36.63194444444444" r="4.0625" />
+  <Area enter="@re" cx="32.22222222222222" cz="9.756944444444445" r="4.0625" />
   <Goody shape="bspGrenade" grenades="2" start="@re" out="@got" y="3" fill="#9900cc" frame="#000000" cx="52.63888888888889" cz="17.083333333333336" r="2.5" angle="45" />
   <Goody shape="bspGrenade" grenades="2" start="@re" out="@got" y="3" fill="#9900cc" frame="#000000" cx="11.38888888888889" cz="57.708333333333336" r="2.5" angle="45" />
   <Goody shape="bspMissile" missiles="2" start="@re" out="@got" y="3" fill="#9900cc" frame="#000000" cx="12.63888888888889" cz="17.430555555555557" r="2.5" angle="45" />

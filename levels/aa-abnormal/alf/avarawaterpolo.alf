@@ -19,28 +19,28 @@
   <Walker team="2" fill="#ffff00" frame="#000000" cx="78.88888888888889" cz="87.43055555555556" r="3.75" angle="0" />
   <Walker team="1" fill="#008800" frame="#000000" cx="78.40277777777779" cz="132.43055555555557" r="3.125" angle="180" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="68.75" cz="122.43055555555556" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="100" fill="#ffffff" frame="#000000" cx="68.75" cz="122.43055555555556" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="100" />
   <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="68.75" cz="122.43055555555556" r="1.25" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="68.75" cz="97.43055555555556" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="100" fill="#ffffff" frame="#000000" cx="68.75" cz="97.43055555555556" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="100" />
   <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="68.75" cz="97.43055555555556" r="1.25" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="89.375" cz="122.43055555555556" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="100" fill="#ffffff" frame="#000000" cx="89.375" cz="122.43055555555556" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="100" />
   <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="89.375" cz="122.43055555555556" r="1.25" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="88.75" cz="97.43055555555556" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="100" fill="#ffffff" frame="#000000" cx="88.75" cz="97.43055555555556" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="100" />
   <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="88.75" cz="97.43055555555556" r="1.25" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="63.75" cz="109.93055555555556" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="100" fill="#ffffff" frame="#000000" cx="63.75" cz="109.93055555555556" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="100" />
   <Goody shape="bspMissile" speed="2" yon="50" y="2" missiles="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="63.75" cz="109.93055555555556" r="1.25" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="94.375" cz="109.93055555555556" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="100" fill="#ffffff" frame="#000000" cx="94.375" cz="109.93055555555556" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="100" />
   <Goody shape="bspMissile" speed="2" yon="50" y="2" missiles="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="94.375" cz="109.93055555555556" r="1.25" angle="225" />
   <Field deltaY=".2" deltaX="-.2" deltaZ=".8" fill="#ffffff" frame="#000000" r="1.25" cx="94.375" cz="109.93055555555556" angle="225" x="64.0625" z="54.93055555555556" w="21.875" d="15" h="4.5" />
   <Field deltaY=".2" deltaX=".5" deltaZ=".8" fill="#ffffff" frame="#000000" r="1.25" cx="94.375" cz="109.93055555555556" angle="225" x="78.75" z="54.30555555555556" w="7.5" d="13.75" h="4.5" />
@@ -146,7 +146,7 @@
   <Incarnator y="80" fill="#0000dd" frame="#000000" cx="121.25" cz="172.43055555555557" r="1.875" angle="135" />
   <Incarnator y="80" fill="#0000aa" frame="#000000" cx="121.25" cz="47.43055555555556" r="1.875" angle="45" />
   <set gameLength="6563" />
-  <Timer in="@start" out="@gameEnds" wait="gameLength" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" r="1.25" angle="45" />
+  <Timer in="@start" out="@gameEnds" wait="gameLength" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" r="1.25" angle="45" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" r="1.25" angle="45" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" r="1.25" angle="45" />
@@ -156,8 +156,8 @@
   <set designer="Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;" information="A simulation of Water Polo in avaraland.  
 Two teams, one of yellow, one of green, attempt to score in the goal of the other team's color.
 Each player has 200 lives and the game lasts 7 min." />
-  <Text showEveryone="true" text="Yellow Scores!!" in="@yellowscore" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" r="1.25" angle="45" />
-  <Text showEveryone="true" text="Green Scores!!" in="@greenscore" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" r="1.25" angle="45" />
+  <Text showEveryone="true" text="Yellow Scores!!" in="@yellowscore" cx="58.75" cz="68.68055555555556" r="1.25" />
+  <Text showEveryone="true" text="Green Scores!!" in="@greenscore" cx="58.75" cz="68.68055555555556" r="1.25" />
   <Field deltaY=".03" fill="#ffffff" frame="#000000" r="1.25" cx="58.75" cz="68.68055555555556" angle="45" x="66.25" z="73.68055555555556" w="25" d="22.5" h="1.5" />
   <Field deltaY=".03" fill="#ffffff" frame="#000000" r="1.25" cx="58.75" cz="68.68055555555556" angle="45" x="91.25" z="74.93055555555556" w="25" d="25" h="1.5" />
   <Field deltaY=".03" fill="#ffffff" frame="#000000" r="1.25" cx="58.75" cz="68.68055555555556" angle="45" x="91.25" z="99.30555555555556" w="25" d="23.75" h="1.5" />

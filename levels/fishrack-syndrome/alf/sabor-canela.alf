@@ -29,8 +29,8 @@
   <Incarnator fill="#ff9999" frame="#cc3300" cx="95.625" cz="58.125" r="1.875" angle="315" />
   <unique vars="mHi mDie" />
   <Goody shape="bspCompass" scale="3" missiles="3" grenades="6" start="mHi" out="mDie" speed="10" y="15" fill="#66ff33" frame="#000000" cx="88.95833333333334" cz="79.93055555555556" r="1.875" angle="315" />
-  <Timer in="mDie" wait="60" out="mHi" fill="#66ff33" frame="#000000" cx="88.95833333333334" cz="79.93055555555556" r="1.875" angle="315" />
-  <And in="@start" out="mHi" fill="#66ff33" frame="#000000" cx="88.95833333333334" cz="79.93055555555556" r="1.875" angle="315" />
+  <Timer in="mDie" wait="60" out="mHi" />
+  <And in="@start" out="mHi" />
   <set baseHeight="10" wallHeight="0" />
   <Wall fill="#66ff33" frame="#000000" x="74.6875" z="41.25" w="70.625" d="13.75" h="0" />
   <Wall fill="#66ff33" frame="#000000" x="118.4375" z="78.125" w="16.875" d="87.5" h="0" />

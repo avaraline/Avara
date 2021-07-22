@@ -33,7 +33,7 @@
   <Goody shape="bspGoody" y="gConeY" scale=".5" speed="gConeSpd" missiles="1" volume="0" start="mMShow" out="mGShow" fill="#006666" frame="#440000" cx="20.868055555555557" cz="17.118055555555557" r="0.9375" angle="315" />
   <Goody shape="bspGoody" y="gConeY" scale=".5" speed="gConeSpd" grenades="1" volume="0" start="mGShow" out="mBShow" fill="#006666" frame="#440000" cx="20.868055555555557" cz="17.118055555555557" r="0.9375" angle="315" />
   <Goody shape="bspGoody" y="gConeY" scale=".5" speed="gConeSpd" boosters="1" volume="0" start="mBShow" out="mMShow" fill="#006666" frame="#440000" cx="20.868055555555557" cz="17.118055555555557" r="0.9375" angle="315" />
-  <And in="@start" out="mMShow" fill="#006666" frame="#440000" cx="20.868055555555557" cz="17.118055555555557" r="0.9375" angle="315" />
+  <And in="@start" out="mMShow" />
   <Field shape="bspGoody" y="gConeY" scale=".5" speed="gConeSpd" enter="mSound" watch="playerMask" fill="#006666" frame="#440000" r="0.9375" cx="20.868055555555557" cz="17.118055555555557" angle="315" />
   <Sound start="mSound" sound="snGoody" y="gCone" fill="#006666" frame="#440000" cx="20.868055555555557" cz="17.118055555555557" r="0.9375" angle="315" />
 </map>

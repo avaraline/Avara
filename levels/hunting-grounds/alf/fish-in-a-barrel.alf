@@ -48,11 +48,11 @@ or two HECTORs." />
   <Wall fill="#bbbbbb" frame="#000000" x="94.23611111111111" z="55.55555555555556" w="6.25" d="6.25" h="3" />
   <Wall fill="#bbbbbb" frame="#000000" x="59.236111111111114" z="55.55555555555556" w="6.25" d="6.25" h="3" />
   <Wall fill="#bbbbbb" frame="#000000" x="59.236111111111114" z="95.55555555555556" w="6.25" d="6.25" h="3" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="94.23611111111111" z="67.11805555555556" w="6.25" d="16.875" h="0" r="2.5" angle="270.5" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="76.73611111111111" z="55.55555555555556" w="28.75" d="6.25" h="0" r="1.875" angle="180" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="94.23611111111111" z="67.11805555555556" w="6.25" d="16.875" h="0" angle="270.5" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="76.73611111111111" z="55.55555555555556" w="28.75" d="6.25" h="0" angle="180" />
   <Wall fill="#bbbbbb" frame="#000000" x="94.23611111111111" z="95.55555555555556" w="6.25" d="6.25" h="3" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="76.73611111111111" z="95.55555555555556" w="28.75" d="6.25" h="0" r="2.3958333333333357" angle="0.5" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="59.236111111111114" z="67.11805555555556" w="6.25" d="16.875" h="0" r="2.5" angle="90" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="76.73611111111111" z="95.55555555555556" w="28.75" d="6.25" h="0" angle="0.5" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="59.236111111111114" z="67.11805555555556" w="6.25" d="16.875" h="0" angle="90" />
   <Wall fill="#1c3838" frame="#000000" x="61.423611111111114" z="122.74305555555556" w="15.625" d="0.625" h="6.25" />
   <Wall fill="#1c3838" frame="#000000" x="92.04861111111111" z="122.74305555555556" w="15.625" d="0.625" h="6.25" />
   <Wall fill="#1c3838" frame="#000000" x="126.42361111111111" z="65.24305555555556" w="0.625" d="10.625" h="6.25" />
@@ -88,9 +88,9 @@ or two HECTORs." />
   <Field mask="T2" deltaX="2" deltaY="0" deltaZ="0" fill="#ffff00" frame="#000000" x="26.666666666666668" z="97.15277777777777" w="1.1111111111111143" d="11.944444444444443" h="6" r="2.5" cx="59.236111111111114" cz="61.18055555555556" angle="90" />
   <Field mask="T2" deltaX="0" deltaY="0" deltaZ="-2" fill="#ffff00" frame="#000000" x="76.84027777777777" z="123.15972222222223" w="16.45833333333333" d="1.4583333333333428" h="6" r="2.5" cx="59.236111111111114" cz="61.18055555555556" angle="90" />
   <Field mask="T2" deltaX="0" deltaY="0" deltaZ="2" fill="#ffff00" frame="#000000" x="46.215277777777786" z="28.57638888888889" w="16.458333333333336" d="1.3194444444444429" h="6" r="2.5" cx="59.236111111111114" cz="61.18055555555556" angle="90" />
-  <Text showEveryone="true" text="Nice job, Yellow." in="@yellowwin" fill="#ffff00" frame="#000000" cx="59.236111111111114" cz="61.18055555555556" r="2.5" angle="90" />
+  <Text showEveryone="true" text="Nice job, Yellow." in="@yellowwin" cx="59.236111111111114" cz="61.18055555555556" r="2.5" />
   <set gameLength="2813" />
-  <Timer wait="gameLength" in="@start" out="@yellowwin" fill="#ffffff" frame="#000000" cx="3.854166666666667" cz="154.09722222222223" r="3.854166666666667" angle="315" />
+  <Timer wait="gameLength" in="@start" out="@yellowwin" />
   <Teleporter mask="T2" y="30" activeRange="10000" yon="0.01" start="@yellowwin" win="10001" fill="#ffffff" frame="#000000" cx="3.854166666666667" cz="154.09722222222223" r="3.854166666666667" angle="315" />
   <Teleporter mask="T1" y="30" activeRange="10000" yon="0.01" start="@yellowwin" win="1" fill="#ffffff" frame="#000000" cx="3.854166666666667" cz="154.09722222222223" r="3.854166666666667" angle="315" />
   <Incarnator mask="T1" y="10" start="@incarn" fill="#ffff00" frame="#000000" cx="75" cz="133.05555555555554" r="5.069444444444443" angle="181" />
@@ -105,42 +105,42 @@ or two HECTORs." />
   <Guard isTarget="false" y="10" yon="1" shotPower="99" freq="10" watch="scoutMask" shield="-1" fill="#7f0000" frame="#000000" cx="75.48611111111111" cz="74.93055555555556" r="1.875" angle="135" />
   <Incarnator mask="T2" y="300" start="@incarn" fill="#ffff00" frame="#000000" cx="94.375" cz="54.93055555555556" r="5" angle="181" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="94.375" cz="54.93055555555556" r="5" angle="181" />
-  <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="94.375" cz="54.93055555555556" r="5" angle="181" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="50" />
   <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="94.375" cz="54.93055555555556" r="5" angle="181" />
   <Incarnator mask="T2" y="300" start="@incarn" fill="#ffff00" frame="#000000" cx="94.44444444444444" cz="96.25" r="5" angle="4" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="94.44444444444444" cz="96.25" r="5" angle="4" />
-  <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="94.44444444444444" cz="96.25" r="5" angle="4" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="50" />
   <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="94.44444444444444" cz="96.25" r="5" angle="4" />
   <Incarnator mask="T2" start="@incarn" y="300" fill="#ffff00" frame="#000000" cx="59.375" cz="54.93055555555556" r="5" angle="181" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="59.375" cz="54.93055555555556" r="5" angle="181" />
-  <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="59.375" cz="54.93055555555556" r="5" angle="181" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="50" />
   <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="59.375" cz="54.93055555555556" r="5" angle="181" />
   <Incarnator mask="T2" y="300" start="@incarn" fill="#ffff00" frame="#000000" cx="59.44444444444444" cz="96.25" r="5" angle="4" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffff00" frame="#000000" cx="59.44444444444444" cz="96.25" r="5" angle="4" />
-  <Timer in="mTaken" out="mShow" wait="50" fill="#ffff00" frame="#000000" cx="59.44444444444444" cz="96.25" r="5" angle="4" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="50" />
   <Goody y="5" speed="0" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffff00" frame="#000000" cx="59.44444444444444" cz="96.25" r="5" angle="4" />
   <Teleporter y="30" activeRange="10000" mask="T2" yon="0.01" start="@greenWin" win="1" fill="#ffffff" frame="#000000" cx="24.96527777777778" cz="168.2638888888889" r="3.854166666666668" angle="315" />
-  <Text showEveryone="true" text="Blew him to hell, Green." in="@greenWin" fill="#ffffff" frame="#000000" cx="24.96527777777778" cz="168.2638888888889" r="3.854166666666668" angle="315" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="59.236111111111114" z="83.99305555555556" w="6.25" d="16.875" h="0" r="2.5" angle="90" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="94.23611111111111" z="83.99305555555556" w="6.25" d="16.875" h="0" r="2.5" angle="270.5" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="86.73611111111111" z="75.55555555555556" w="6.25" d="21.25" h="0" r="3.125" angle="90" />
-  <Ramp deltaY="3" fill="#888888" frame="#000000" x="66.73611111111111" z="75.55555555555556" w="6.25" d="21.25" h="0" r="3.125" angle="270.5" />
+  <Text showEveryone="true" text="Blew him to hell, Green." in="@greenWin" cx="24.96527777777778" cz="168.2638888888889" r="3.854166666666668" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="59.236111111111114" z="83.99305555555556" w="6.25" d="16.875" h="0" angle="90" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="94.23611111111111" z="83.99305555555556" w="6.25" d="16.875" h="0" angle="270.5" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="86.73611111111111" z="75.55555555555556" w="6.25" d="21.25" h="0" angle="90" />
+  <Ramp deltaY="3" fill="#888888" frame="#000000" x="66.73611111111111" z="75.55555555555556" w="6.25" d="21.25" h="0" angle="270.5" />
   <Incarnator mask="T2" y="300" fill="#ffff00" frame="#000000" cx="76.25" cz="88.05555555555556" r="5.069444444444443" angle="181" />
-  <WallSolid shape="bspHullLarge" y=".5" roll="-90" pitch="180" shield="50" team="2" canGlow="true" isTarget="true" killMsg="@greenWin" hitScore="50" killScore="6000" fill="#ffff00" frame="#000000" x="46.111111111111114" z="122.74305555555556" w="15" d="0.625" h="0.25" r="3.125" cx="75.48611111111111" cz="75.55555555555556" angle="45" />
-  <WallSolid shape="bspHECTORLegLow" y="0" shield="10" roll="-90" team="2" canGlow="true" isTarget="true" hitScore="20" killScore="200" fill="#ffff00" frame="#000000" x="76.73611111111111" z="122.74305555555556" w="15" d="0.625" h="0.25" r="3.6458333333333357" cx="74.82638888888889" cz="74.375" angle="83" />
-  <WallSolid shape="bspHECTORLegHigh" y="0" roll="-90" shield="55" team="2" canGlow="true" isTarget="true" hitScore="20" killScore="200" fill="#ffff00" frame="#000000" x="107.36111111111111" z="122.74305555555556" w="15" d="0.625" h="0.25" r="3.6458333333333357" cx="75.45138888888889" cz="74.93055555555556" angle="45" />
+  <WallSolid shape="bspHullLarge" y=".5" roll="-90" pitch="180" shield="50" team="2" canGlow="true" isTarget="true" killMsg="@greenWin" hitScore="50" killScore="6000" fill="#ffff00" frame="#000000" x="46.111111111111114" z="122.74305555555556" w="15" d="0.625" h="0.25" />
+  <WallSolid shape="bspHECTORLegLow" y="0" shield="10" roll="-90" team="2" canGlow="true" isTarget="true" hitScore="20" killScore="200" fill="#ffff00" frame="#000000" x="76.73611111111111" z="122.74305555555556" w="15" d="0.625" h="0.25" />
+  <WallSolid shape="bspHECTORLegHigh" y="0" roll="-90" shield="55" team="2" canGlow="true" isTarget="true" hitScore="20" killScore="200" fill="#ffff00" frame="#000000" x="107.36111111111111" z="122.74305555555556" w="15" d="0.625" h="0.25" />
   <Wall fill="#bbbbbb" frame="#000000" x="90.48611111111111" z="75.55555555555556" w="1.25" d="21.25" h="3" />
   <Wall fill="#bbbbbb" frame="#000000" x="62.986111111111114" z="75.55555555555556" w="1.25" d="21.25" h="3" />
   <Incarnator mask="T1" y="10" start="@incarn" fill="#ffff00" frame="#000000" cx="19.375" cz="34.30555555555556" r="5.069444444444445" angle="270" />
   <Incarnator mask="T1" y="10" start="@incarn" fill="#ffff00" frame="#000000" cx="120" cz="14.930555555555555" r="5.069444444444445" angle="0" />
   <Incarnator mask="T1" y="10" start="@incarn" fill="#ffff00" frame="#000000" cx="93.125" cz="133.68055555555554" r="5.069444444444443" angle="181" />
   <Incarnator mask="T1" y="10" start="@incarn" fill="#ffff00" frame="#000000" cx="137.46527777777777" cz="51.736111111111114" r="5.069444444444443" angle="90.5" />
-  <Timer wait="15" in="@start" out="@incarn" fill="#ffffff" frame="#000000" cx="14.479166666666668" cz="154.09722222222223" r="3.854166666666668" angle="315" />
-  <Text in="@start" wait="30" showEveryone="true" text="Yellow team. Defend the wounded HECTOR.  You have three minutes until Med-E-Vac™ arrives." fill="#ffffff" frame="#000000" cx="14.479166666666668" cz="154.09722222222223" r="3.854166666666668" angle="315" />
+  <Timer wait="15" in="@start" out="@incarn" />
+  <Text in="@start" wait="30" showEveryone="true" text="Yellow team. Defend the wounded HECTOR.  You have three minutes until Med-E-Vac™ arrives." cx="14.479166666666668" cz="154.09722222222223" r="3.854166666666668" />
   <Teleporter shape="0" y="200" win="10000" start="@winTeam" activeRange="20000" fill="#ffff00" frame="#000000" cx="47.5" cz="66.73611111111111" r="2.5" angle="225" />
   <Walker team="1" y="10" fill="#ffff33" frame="#000000" cx="12.98611111111111" cz="137.43055555555557" r="2.5" angle="270" />
   <Incarnator mask="T1" y="10" start="@incarn" fill="#ffff00" frame="#000000" cx="135.59027777777777" cz="97.98611111111111" r="5.069444444444443" angle="90.5" />

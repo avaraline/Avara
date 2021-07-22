@@ -22,7 +22,7 @@
   <Sound y="5" sound="1005" isAmbient="false" loopCount="0" volume="180000" start="@birdSound3" fill="#ffc7dc" frame="#000000" cx="38.333333333333336" cz="7.708333333333334" r="1.875" angle="315" />
   <Sound y="5" sound="1005" isAmbient="false" loopCount="0" volume="150000" start="@birdSound2" fill="#ffc7dc" frame="#000000" cx="38.333333333333336" cz="7.708333333333334" r="1.875" angle="315" />
   <Sound y="5" sound="1005" isAmbient="false" loopCount="0" volume="150000" start="@birdSound1" fill="#ffc7dc" frame="#000000" cx="38.333333333333336" cz="7.708333333333334" r="1.875" angle="315" />
-  <Timer in.1="@start" in.2="@resetTimer" wait="200" out.1="@birdSound1" out.2="@birdSound1" fill="#ffc7dc" frame="#000000" cx="38.333333333333336" cz="7.708333333333334" r="1.875" angle="315" />
-  <Timer in.1="@birdSound2" in.2="@birdSound2" wait="400" out.1="@birdSound3" out.2="@resetTimer" fill="#ffc7dc" frame="#000000" cx="38.333333333333336" cz="7.708333333333334" r="1.875" angle="315" />
-  <Timer in="@birdSound1" wait="400" out="@birdSound2" fill="#ffc7dc" frame="#000000" cx="38.333333333333336" cz="7.708333333333334" r="1.875" angle="315" />
+  <Timer in.1="@start" in.2="@resetTimer" wait="200" out.1="@birdSound1" out.2="@birdSound1" />
+  <Timer in.1="@birdSound2" in.2="@birdSound2" wait="400" out.1="@birdSound3" out.2="@resetTimer" />
+  <Timer in="@birdSound1" wait="400" out="@birdSound2" />
 </map>

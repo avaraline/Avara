@@ -488,7 +488,7 @@
   <Ufo verticalRangeMax="3.75" y="1" shield="-1" scale="0.6" shape="803" homeSick="900" activeRange="0" motionRange="10" hitMsg="@move" homeBase="@base" fill="#0066ff" frame="#000000" cx="158.68055555555557" cz="36.458333333333336" r="3.819444444444443" angle="90" />
   <Ufo verticalRangeMax="3.75" y="1.25" shield="-1" scale="0.4" shape="803" homeSick="900" activeRange="0" motionRange="10" hitMsg="@move" homeBase="@base" fill="#0066ff" frame="#000000" cx="158.68055555555557" cz="36.458333333333336" r="3.819444444444443" angle="90" />
   <Ufo verticalRangeMax="3.75" y="1.75" shield="-1" scale="0.7" shape="803" homeSick="900" activeRange="0" motionRange="10" hitMsg="@move" homeBase="@base" fill="#0066ff" frame="#000000" cx="158.68055555555557" cz="36.458333333333336" r="3.819444444444443" angle="90" />
-  <Base y="3" in="@move" out="@base" fill="#0000ee" frame="#000000" cx="89.30555555555556" cz="79.93055555555556" r="2.5" angle="225" />
+  <Base y="3" in="@move" out="@base" cx="89.30555555555556" cz="79.93055555555556" r="2.5" angle="225" />
   <Ufo watch="playerMask + scoutMask + targ1" attack="10" shield="-1" motionRange="25" y="200" verticalRangeMax="3.75" verticalRangeMin="2" hitMsg="@help" scale="2" shape="803" activeRange="20" start="@base" homeBase="@base" homeSick="900" burstLength="5" burstSpeed="2" burstCharge="2" shotPower="1" fill="#0033ff" frame="#000000" cx="71.18055555555556" cz="81.80555555555556" r="5" angle="225" />
   <Ufo watch="playerMask + scoutMask + targ1" attack="10" shield="-1" motionRange="25" y="200" verticalRangeMax="3.75" verticalRangeMin="2" scale="2" shape="803" activeRange="20" start="@help" homeBase="@base" homeSick="900" burstLength="5" burstSpeed="2" burstCharge="2" shotPower="1" fill="#000099" frame="#000000" cx="55.55555555555556" cz="85.55555555555556" r="5" angle="225" />
   <Ufo verticalRangeMax="3.75" y="0.25" shield="-1" scale="0.4" shape="803" homeSick="900" activeRange="0" motionRange="10" hitMsg="@move" homeBase="@base" fill="#0066ff" frame="#000000" cx="163.68055555555557" cz="36.458333333333336" r="3.819444444444443" angle="90" />
@@ -497,24 +497,24 @@
   <Ball shield="-1" canGlow="true" targetGroup="targ1" shape="310" y="0" mass="50" fill="#999966" frame="#cc9933" cx="121.25" cz="51.875" r="1.25" angle="225" />
   <Ball shield="-1" canGlow="true" targetGroup="targ1" shape="215" y="8.25" mass="50" fill="#82b080" frame="#000000" cx="146.80555555555557" cz="43.68055555555556" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#009933" frame="#000000" cx="117.43055555555556" cz="59.30555555555556" r="2.5" angle="45" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#009933" frame="#000000" cx="117.43055555555556" cz="59.30555555555556" r="2.5" angle="45" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="300" scale="0.2" y="6" speed="6" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#009933" frame="#000000" cx="117.43055555555556" cz="59.30555555555556" r="2.5" angle="45" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#009933" frame="#000000" cx="151.18055555555557" cz="50.55555555555556" r="2.5" angle="45" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#009933" frame="#000000" cx="151.18055555555557" cz="50.55555555555556" r="2.5" angle="45" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="300" scale="0.2" y="6" speed="6" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#009933" frame="#000000" cx="151.18055555555557" cz="50.55555555555556" r="2.5" angle="45" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#009933" frame="#cc00ff" cx="139.375" cz="40" r="2.5" angle="45" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#009933" frame="#cc00ff" cx="139.375" cz="40" r="2.5" angle="45" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="300" scale="0.2" y="10" speed="6" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#009933" frame="#cc00ff" cx="139.375" cz="40" r="2.5" angle="45" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#009933" frame="#cc00ff" cx="125.625" cz="66.25" r="2.5" angle="45" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#009933" frame="#cc00ff" cx="125.625" cz="66.25" r="2.5" angle="45" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="300" scale="0.2" y="10" speed="6" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#009933" frame="#cc00ff" cx="125.625" cz="66.25" r="2.5" angle="45" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#009933" frame="#999900" cx="143.125" cz="39.375" r="2.5" angle="45" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#009933" frame="#999900" cx="143.125" cz="39.375" r="2.5" angle="45" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="300" scale="0.2" y="14" speed="6" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#009933" frame="#999900" cx="143.125" cz="39.375" r="2.5" angle="45" />
   <Teleporter y="100" shape="0" win="10000" start="@winTeam" activeRange="5000" fill="#ffffff" frame="#000000" cx="4.930555555555555" cz="233.68055555555557" r="4.375" angle="45" />
   <set hull.0="128" hull.1="128" hull.2="128" hull.3="128" hull.4="128" hull.5="128" hull.6="128" hull.7="128" />

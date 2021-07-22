@@ -37,15 +37,15 @@ Riding on the truck" />
   <Wall fill="#770000" frame="#000000" x="68.68055555555556" z="39.16666666666667" w="5" d="6.25" h="0.5" y="1.75" />
   <Wall fill="#770000" frame="#000000" x="68.68055555555556" z="36.80555555555556" w="3.75" d="0.27777777777777146" h="1.75" />
   <Wall fill="#770000" frame="#000000" x="68.68055555555556" z="41.49305555555556" w="3.75" d="0.34722222222222854" h="1.75" />
-  <Ramp deltaY="8.5" fill="#0033ff" frame="#000000" x="51.80555555555556" z="38.85416666666667" w="3.75" d="14.375" h="0" r="1.875" angle="180" />
+  <Ramp deltaY="8.5" fill="#0033ff" frame="#000000" x="51.80555555555556" z="38.85416666666667" w="3.75" d="14.375" h="0" angle="180" />
   <FreeSolid canGlow="false" shape="bspChair" mass="20" accel="0.75" fill="#ff0000" frame="#000000" x="51.80555555555556" z="38.85416666666667" w="3.75" d="14.375" h="0" r="1.875" cx="68.68055555555556" cz="44.16666666666667" angle="90" />
   <FreeSolid canGlow="false" shape="bspChair" mass="20" accel="0.75" fill="#008800" frame="#000000" x="51.80555555555556" z="38.85416666666667" w="3.75" d="14.375" h="0" r="1.875" cx="68.68055555555556" cz="32.91666666666667" angle="270" />
-  <Ramp deltaY="8.5" fill="#0033ff" frame="#000000" x="81.80555555555556" z="37.60416666666667" w="3.75" d="16.875" h="0" r="1.875" angle="180" />
+  <Ramp deltaY="8.5" fill="#0033ff" frame="#000000" x="81.80555555555556" z="37.60416666666667" w="3.75" d="16.875" h="0" angle="180" />
   <Wall fill="#bbbbbb" frame="#000000" x="79.30555555555556" z="39.47916666666667" w="1.25" d="23.125" h="7.5" />
   <Wall fill="#440000" frame="#000000" x="76.80555555555556" z="48.85416666666667" w="3.75" d="4.375" h="1.5" />
   <Solid isTarget="true" canGlow="true" shape="bspTV" scale="1.8" y="1.5" shield="1.5" power="2" blastSound="snBlast1" fill="#555555" frame="#000000" cx="76.80555555555556" cz="48.81944444444445" r="2.5" angle="90" />
   <Door2 shape="bspDoor" scale="0.8" open="@Door1Open" close="@Door1Close" midY="2" midRoll="90" midPitch="0" deltaY="2" roll="90" pitch="-90" openSpeed="6" closeSpeed="2" fill="#0033ff" frame="#000000" cx="61.111111111111114" cz="51.736111111111114" r="1.25" angle="0" />
-  <Area enter="@Door1Open" exit="@Door1Close" fill="#0033ff" frame="#000000" cx="58.36805555555556" cz="51.70138888888889" r="4.0625" angle="180" />
+  <Area enter="@Door1Open" exit="@Door1Close" cx="58.36805555555556" cz="51.70138888888889" r="4.0625" />
   <Door2 shape="bspDoor" scale="0.8" open="@Door1Open" close="@Door1Close" midY="2" midRoll="90" midPitch="180" deltaY="2" roll="90" pitch="270" openSpeed="6" closeSpeed="2" fill="#0033ff" frame="#000000" cx="56.25" cz="51.80555555555556" r="1.25" angle="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="56.18055555555556" z="27.291666666666668" w="12.5" d="1.25" h="7.5" />
   <Wall fill="#bbbbbb" frame="#000000" x="73.68055555555556" z="27.291666666666668" w="12.5" d="1.25" h="7.5" />
@@ -72,17 +72,17 @@ Riding on the truck" />
   <FreeSolid canGlow="false" shape="bspChair" mass="20" accel="0.75" fill="#aa0000" frame="#000000" x="81.80555555555556" z="37.60416666666667" w="3.75" d="16.875" h="0" r="1.875" cx="84.51388888888889" cz="18.26388888888889" angle="90" />
   <FreeSolid canGlow="false" shape="bspChair" mass="20" accel="0.75" fill="#aa0000" frame="#000000" x="81.80555555555556" z="37.60416666666667" w="3.75" d="16.875" h="0" r="1.875" cx="87.91666666666667" cz="14.86111111111111" angle="0" />
   <FreeSolid canGlow="false" shape="bspChair" mass="20" accel="0.75" fill="#aa0000" frame="#000000" x="81.80555555555556" z="37.60416666666667" w="3.75" d="16.875" h="0" r="1.875" cx="78.54166666666667" cz="14.86111111111111" angle="180" />
-  <Area enter="@Door2Open" exit="@Door2Close" fill="#aa0000" frame="#000000" cx="100.24305555555556" cz="39.82638888888889" r="4.0625" angle="180" />
+  <Area enter="@Door2Open" exit="@Door2Close" cx="100.24305555555556" cz="39.82638888888889" r="4.0625" />
   <Door2 shape="bspDoor" scale="0.8" open="@Door2Open" close="@Door2Close" midY="2" midRoll="90" midPitch="0" deltaY="2" roll="90" pitch="-90" openSpeed="6" closeSpeed="2" fill="#0033ff" frame="#000000" cx="100.48611111111111" cz="37.43055555555556" r="1.25" angle="270" />
   <Door2 shape="bspDoor" scale="0.8" open="@Door2Open" close="@Door2Close" midY="2" midRoll="90" midPitch="180" deltaY="2" roll="90" pitch="270" openSpeed="6" closeSpeed="2" fill="#0033ff" frame="#000000" cx="100.48611111111111" cz="42.361111111111114" r="1.25" angle="270" />
   <Wall fill="#bbbbbb" frame="#000000" x="94.93055555555556" z="27.291666666666668" w="10" d="1.25" h="7.5" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="88.29861111111111" cz="47.708333333333336" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="88.29861111111111" cz="47.708333333333336" r="2.5" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="88.29861111111111" cz="47.708333333333336" r="2.5" angle="315" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="68.64583333333334" cz="10.625" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="68.64583333333334" cz="10.625" r="2.5" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="68.64583333333334" cz="10.625" r="2.5" angle="315" />
   <Incarnator fill="#ffffff" frame="#000000" cx="75.48611111111111" cz="24.02777777777778" r="3.125" angle="180" />
   <set baseHeight="8" />
@@ -115,12 +115,12 @@ Riding on the truck" />
   <Wall fill="#ff99ff" frame="#000000" x="94.93055555555556" z="14.54861111111111" w="6.25" d="11.875" h="1.5" />
   <Wall fill="#ff0099" frame="#000000" x="94.93055555555556" z="9.86111111111111" w="3.75" d="1.25" h="0.5" y="1.5" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="97.39583333333334" cz="29.166666666666668" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="97.39583333333334" cz="29.166666666666668" r="2.5" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="97.39583333333334" cz="29.166666666666668" r="2.5" angle="315" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="68.02083333333334" cz="45.41666666666667" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="68.02083333333334" cz="45.41666666666667" r="2.5" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="68.02083333333334" cz="45.41666666666667" r="2.5" angle="315" />
   <Incarnator fill="#ffffff" frame="#000000" cx="89.93055555555556" cz="47.361111111111114" r="3.75" angle="180" />
   <Incarnator fill="#ffffff" frame="#000000" cx="65.55555555555556" cz="12.36111111111111" r="3.75" angle="0" />
@@ -130,10 +130,10 @@ Riding on the truck" />
   <set baseHeight="0" />
   <Solid shape="bspStreet" isAmbient="true" yon="80" scale="2" fill="#00ee00" frame="#000000" cx="4.375" cz="74.86111111111111" r="2.8472222222222285" angle="270" />
   <Ufo shape="bspTruck" scale="1.8" y="0.1" mask="0" watch="0" acceleration="0.02" attack="0" activeRange="0" motionRange="40" verticalRangeMax="0.1" verticalRangeMin="1" homeSick="20" homeRange="0.3" homeBase="@Truck1Base" status="true" shield="7" blast="3" fill="#eeeeee" frame="#000000" cx="12.01388888888889" cz="72.98611111111111" r="2.8472222222222285" angle="0" />
-  <Base in="@Truck1Base1" out="@Truck1Base" fill="#002200" frame="#000000" cx="142.43055555555557" cz="74.86111111111111" r="1.875" angle="315" />
-  <Area watch="robotMask" enter="@Truck1Base2" fill="#002200" frame="#000000" cx="142.36111111111111" cz="74.65277777777779" r="3.125" angle="180" />
-  <Base in="@Truck1Base2" out="@Truck1Base" fill="#002200" frame="#000000" cx="4.305555555555556" cz="74.86111111111111" r="1.875" angle="315" />
-  <Area watch="robotMask" enter="@Truck1Base1" fill="#002200" frame="#000000" cx="4.236111111111112" cz="74.65277777777779" r="3.125" angle="180" />
+  <Base in="@Truck1Base1" out="@Truck1Base" cx="142.43055555555557" cz="74.86111111111111" r="1.875" angle="315" />
+  <Area watch="robotMask" enter="@Truck1Base2" cx="142.36111111111111" cz="74.65277777777779" r="3.125" />
+  <Base in="@Truck1Base2" out="@Truck1Base" cx="4.305555555555556" cz="74.86111111111111" r="1.875" angle="315" />
+  <Area watch="robotMask" enter="@Truck1Base1" cx="4.236111111111112" cz="74.65277777777779" r="3.125" />
   <Solid shape="bspStreet" isAmbient="true" yon="80" scale="2" fill="#00ee00" frame="#000000" cx="34.375" cz="74.86111111111111" r="2.8472222222222285" angle="270" />
   <Solid shape="bspStreet" isAmbient="true" yon="80" scale="2" fill="#00ee00" frame="#000000" cx="64.375" cz="74.86111111111111" r="2.8472222222222285" angle="270" />
   <Solid shape="bspStreet" isAmbient="true" yon="50" scale="2" fill="#00ee00" frame="#000000" cx="124.375" cz="74.86111111111111" r="2.8472222222222285" angle="270" />

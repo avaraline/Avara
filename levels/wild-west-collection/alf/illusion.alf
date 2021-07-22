@@ -17,10 +17,10 @@
   <Wall fill="#aa0000" frame="#0000dd" x="79.23611111111111" z="91.52777777777779" w="80" d="4.7222222222222285" h="12" />
   <Wall fill="#000055" frame="#0000dd" x="79.23611111111111" z="26.70138888888889" w="80" d="4.652777777777779" h="12" />
   <Wall fill="#000055" frame="#0000dd" x="36.84027777777778" z="59.13194444444444" w="4.791666666666671" d="60.34722222222222" h="12" />
-  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#ff0000" x="86.59722222222223" z="59.09722222222223" w="4.7222222222222285" d="10" h="0" r="11.354166666666671" angle="270" />
-  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#000000" x="79.23611111111111" z="51.80555555555556" w="10" d="4.722222222222221" h="0" r="11.076388888888893" angle="180" />
-  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#000000" x="79.23611111111111" z="66.52777777777777" w="10" d="4.722222222222214" h="0" r="11.076388888888893" angle="0" />
-  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#ff0000" x="71.84027777777777" z="59.16666666666667" w="4.791666666666671" d="10" h="0" r="11.11111111111111" angle="90" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#ff0000" x="86.59722222222223" z="59.09722222222223" w="4.7222222222222285" d="10" h="0" angle="270" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#000000" x="79.23611111111111" z="51.80555555555556" w="10" d="4.722222222222221" h="0" angle="180" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#000000" x="79.23611111111111" z="66.52777777777777" w="10" d="4.722222222222214" h="0" angle="0" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#000055" frame="#ff0000" x="71.84027777777777" z="59.16666666666667" w="4.791666666666671" d="10" h="0" angle="90" />
   <set grenadePower="1" missilePower="2" missileTurnRate="1" missileAcceleration="1" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#eeeeee" x="85.03472222222223" z="53.263888888888886" w="1.4583333333333286" d="1.5277777777777786" h="7" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#eeeeee" x="73.40277777777777" z="65" w="1.5277777777777857" d="1.5277777777777715" h="7" r="11.11111111111111" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
@@ -55,12 +55,12 @@
   <Incarnator y="0" fill="#003399" frame="#000000" cx="79.375" cz="31.25" r="3.194444444444443" angle="0" />
   <Teleporter y="3.5" shape="0" group="@safety" fill="#003399" frame="#000000" cx="79.375" cz="31.25" r="3.194444444444443" angle="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspGoody" y="2" boosters="5" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="75" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="75" />
   <Goody shape="bspStandardPill" y="6" speed="16" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" r="1.25" angle="225" />
   <Teleporter y="0" shape="0" group="@safety" fill="#ff0000" frame="#ff0000" cx="99.16666666666667" cz="59.16666666666667" r="1.875" angle="90" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#aa0000" frame="#000000" x="79.23611111111111" z="77.29166666666667" w="30" d="1.25" h="3.5" r="1.875" cx="99.16666666666667" cz="59.16666666666667" angle="90" />

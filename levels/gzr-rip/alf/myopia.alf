@@ -1,6 +1,6 @@
 <map>
   <unique vars="mShow" />
-  <Base in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="74.16666666666667" cz="73.88888888888889" r="3.125" angle="90" />
+  <Base in="@start" out="mShow" cx="74.16666666666667" cz="73.88888888888889" r="3.125" angle="90" />
   <Goody shape="5560" scale="5" yon="50" sound="0" y=".001" speed="-2" grenades="0" start="mShow" out="mShow" fill="#ffffff" frame="#000000" cx="74.16666666666667" cz="73.88888888888889" r="3.125" angle="90" />
   <set designer="Cowboy" information="Idea by Taz! Hectors must be close to see each other. New unique type of random incarnators. No teams. 'Yo!' sound by Andrew Welch from Ambrosia's game: Maelstrom." missilePower="1.4" missileAcceleration="0.3" startY="9" />
   <set grenDelay="125" numGren="8" />
@@ -15,26 +15,26 @@
   <Hologram shape="bspGroundStar" scale="2" fill="#770000" frame="#000000" cx="74.23611111111111" cz="73.88888888888889" r="1.25" angle="225" />
   <Teleporter shape="bspGroundStar" speed="0" group="@center" y="2 * startY" activeRange="2000" deadRange="65" destGroup="@recenter" fill="#770000" frame="#000000" cx="74.23611111111111" cz="73.88888888888889" r="1.25" angle="225" />
   <Teleporter shape="0" group="@recenter" y="startY" fill="#770000" frame="#000000" cx="74.23611111111111" cz="73.88888888888889" r="1.25" angle="225" />
-  <Base in="@start" out="@gShow" fill="#770000" frame="#000000" cx="74.23611111111111" cz="73.88888888888889" r="1.25" angle="225" />
-  <Timer in="@gTaken" out="@gShow" wait="150" fill="#770000" frame="#000000" cx="74.23611111111111" cz="73.88888888888889" r="1.25" angle="225" />
+  <Base in="@start" out="@gShow" cx="74.23611111111111" cz="73.88888888888889" r="1.25" angle="225" />
+  <Timer in="@gTaken" out="@gShow" wait="150" />
   <Goody shape="bspGoody" sound="0" y="3.5" speed="2" missiles="8" grenades="12" boosters="1" start="@gShow" out="@gTaken" fill="#770000" frame="#000000" cx="74.23611111111111" cz="73.88888888888889" r="1.25" angle="225" />
   <Teleporter shape="0" y="200" win="0" start="@winTeam" activeRange="2000" fill="#770000" frame="#000000" cx="74.23611111111111" cz="73.88888888888889" r="1.25" angle="225" />
   <GroundColor fill="#bbbbbb" frame="#bbbbbb" />
   <set tele1="int ( 1 + ( random * 8 ) )" tele2="int ( 1 + ( random * 8 ) )" tele3="int ( 1 + ( random * 8 ) )" tele4="int ( 1 + ( random * 8 ) )" tele5="int ( 1 + ( random * 8 ) )" tele6="int ( 1 + ( random * 8 ) )" tele7="int ( 1 + ( random * 8 ) )" tele8="int ( 1 + ( random * 8 ) )" one="1" two="2" three="3" four="4" five="5" six="6" seven="7" eight="8" />
-  <Base in="@start" out="@beginRand" fill="#ff0000" frame="#000000" cx="168.26388888888889" cz="8.194444444444445" r="3.125" angle="90" />
-  <Timer in="@beginRand" out="@nextRand" wait="1" fill="#ff0000" frame="#000000" cx="168.26388888888889" cz="8.194444444444445" r="3.125" angle="90" />
-  <Distributor in="@nextRand" out.0="tele1" out.1="tele2" out.2="tele3" out.3="tele4" out.4="tele5" out.5="tele6" out.6="tele7" out.7="tele8" fill="#ff0000" frame="#000000" cx="168.26388888888889" cz="8.194444444444445" r="3.125" angle="90" />
-  <Counter in.0="one" in.1="two" in.2="three" in.3="four" in.4="five" in.5="six" in.6="seven" in.7="eight" out="@beginRand" fill="#ff0000" frame="#000000" cx="168.26388888888889" cz="8.194444444444445" r="3.125" angle="90" />
+  <Base in="@start" out="@beginRand" cx="168.26388888888889" cz="8.194444444444445" r="3.125" angle="90" />
+  <Timer in="@beginRand" out="@nextRand" wait="1" />
+  <Distributor in="@nextRand" out.0="tele1" out.1="tele2" out.2="tele3" out.3="tele4" out.4="tele5" out.5="tele6" out.6="tele7" out.7="tele8" />
+  <Counter in.0="one" in.1="two" in.2="three" in.3="four" in.4="five" in.5="six" in.6="seven" in.7="eight" out="@beginRand" />
   <set wallHeight="0" />
   <SkyColor fill="#ffff00" frame="#0099ff" />
-  <WallDoor midYaw="120" fill="#000055" frame="#000000" r="3.75" cx="4.027777777777779" cz="1.5277777777777777" angle="0" x="82.53472222222223" z="44.65277777777778" w="30.069444444444443" d="1.25" h="0" />
-  <WallDoor midYaw="150" fill="#000055" frame="#000000" r="3.75" cx="4.027777777777779" cz="1.5277777777777777" angle="0" x="103.4375" z="65.625" w="30.625" d="1.25" h="0" />
-  <WallDoor midYaw="30" fill="#000055" frame="#000000" r="3.75" cx="4.027777777777779" cz="1.5277777777777777" angle="0" x="103.40277777777777" z="82.08333333333334" w="30.694444444444443" d="1.25" h="0" />
-  <WallDoor midYaw="60" fill="#000055" frame="#000000" r="3.75" cx="4.027777777777779" cz="1.5277777777777777" angle="0" x="82.29166666666667" z="103.09027777777777" w="30.138888888888886" d="1.1805555555555571" h="0" />
-  <WallDoor midYaw="120" fill="#000055" frame="#000000" r="3.75" cx="4.027777777777779" cz="1.5277777777777777" angle="0" x="66.18055555555556" z="103.09027777777777" w="30.138888888888886" d="1.1805555555555571" h="0" />
-  <WallDoor midYaw="60" fill="#000055" frame="#000000" r="3.75" cx="4.027777777777779" cz="1.5277777777777777" angle="0" x="66.25" z="44.72222222222222" w="30" d="1.25" h="0" />
-  <WallDoor midYaw="150" fill="#000055" frame="#000000" r="3.75" cx="4.027777777777779" cz="1.5277777777777777" angle="0" x="45.06944444444445" z="82.08333333333334" w="30.694444444444446" d="1.25" h="0" />
-  <WallDoor midYaw="30" fill="#000055" frame="#000000" r="3.75" cx="4.027777777777779" cz="1.5277777777777777" angle="0" x="45.06944444444445" z="65.59027777777777" w="30.694444444444446" d="1.3194444444444429" h="0" />
+  <WallDoor midYaw="120" fill="#000055" frame="#000000" x="82.53472222222223" z="44.65277777777778" w="30.069444444444443" d="1.25" h="0" />
+  <WallDoor midYaw="150" fill="#000055" frame="#000000" x="103.4375" z="65.625" w="30.625" d="1.25" h="0" />
+  <WallDoor midYaw="30" fill="#000055" frame="#000000" x="103.40277777777777" z="82.08333333333334" w="30.694444444444443" d="1.25" h="0" />
+  <WallDoor midYaw="60" fill="#000055" frame="#000000" x="82.29166666666667" z="103.09027777777777" w="30.138888888888886" d="1.1805555555555571" h="0" />
+  <WallDoor midYaw="120" fill="#000055" frame="#000000" x="66.18055555555556" z="103.09027777777777" w="30.138888888888886" d="1.1805555555555571" h="0" />
+  <WallDoor midYaw="60" fill="#000055" frame="#000000" x="66.25" z="44.72222222222222" w="30" d="1.25" h="0" />
+  <WallDoor midYaw="150" fill="#000055" frame="#000000" x="45.06944444444445" z="82.08333333333334" w="30.694444444444446" d="1.25" h="0" />
+  <WallDoor midYaw="30" fill="#000055" frame="#000000" x="45.06944444444445" z="65.59027777777777" w="30.694444444444446" d="1.3194444444444429" h="0" />
   <Hologram shape="bspGroundStar" fill="#770000" frame="#000000" cx="27.63888888888889" cz="73.75" r="1.25" angle="225" />
   <Teleporter y="0" fragment="false" shape="0" group="@oppCorner4" fill="#770000" frame="#000000" cx="27.63888888888889" cz="73.75" r="1.25" angle="225" />
   <Hologram shape="bspGroundStar" fill="#770000" frame="#000000" cx="73.88888888888889" cz="26.944444444444446" r="1.25" angle="225" />
@@ -44,28 +44,28 @@
   <Hologram shape="bspGroundStar" fill="#770000" frame="#000000" cx="120.97222222222223" cz="73.75" r="1.25" angle="225" />
   <Teleporter y="0" fragment="false" shape="0" group="@oppCorner2" fill="#770000" frame="#000000" cx="120.97222222222223" cz="73.75" r="1.25" angle="225" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="51.5625" r="1.3541666666666643" angle="225" />
-  <Timer in="mTaken1" out="mShow1" wait="150" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="51.5625" r="1.3541666666666643" angle="225" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow1" out="mSwitch" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="51.5625" r="1.3541666666666643" angle="225" />
-  <Timer in="mSwitch" out="mShow2" wait="150" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="51.5625" r="1.3541666666666643" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow2" out="mTaken1" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="51.5625" r="1.3541666666666643" angle="225" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#00ccff" frame="#000000" cx="96.14583333333334" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
-  <Timer in="mTaken1" out="mShow1" wait="150" fill="#00ccff" frame="#000000" cx="96.14583333333334" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#00ccff" frame="#000000" cx="96.14583333333334" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
-  <Timer in="mSwitch" out="mShow2" wait="150" fill="#00ccff" frame="#000000" cx="96.14583333333334" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#00ccff" frame="#000000" cx="96.14583333333334" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="95.9375" r="1.3541666666666643" angle="225" />
-  <Timer in="mTaken1" out="mShow1" wait="150" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="95.9375" r="1.3541666666666643" angle="225" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow1" out="mSwitch" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="95.9375" r="1.3541666666666643" angle="225" />
-  <Timer in="mSwitch" out="mShow2" wait="150" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="95.9375" r="1.3541666666666643" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow2" out="mTaken1" fill="#ff6600" frame="#000000" cx="74.27083333333334" cz="95.9375" r="1.3541666666666643" angle="225" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
-  <And in="@start" out="mShow2" fill="#00ccff" frame="#000000" cx="52.395833333333336" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
-  <Timer in="mTaken1" out="mShow1" wait="150" fill="#00ccff" frame="#000000" cx="52.395833333333336" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#00ccff" frame="#000000" cx="52.395833333333336" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
-  <Timer in="mSwitch" out="mShow2" wait="150" fill="#00ccff" frame="#000000" cx="52.395833333333336" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#00ccff" frame="#000000" cx="52.395833333333336" cz="73.85416666666666" r="1.3541666666666643" angle="225" />
   <Wall fill="#000055" frame="#000000" x="59.375" z="73.92361111111111" w="1.25" d="31.59722222222223" h="0" />
   <Wall fill="#000055" frame="#000000" x="89.16666666666667" z="73.92361111111111" w="1.25" d="31.59722222222223" h="0" />
@@ -103,12 +103,12 @@
   <Teleporter shape="0" sound="0" spin="0" y="3 * startY" group="@oppCorner2" fill="#770000" frame="#000000" cx="55.41666666666667" cz="93.33333333333334" r="1.25" angle="225" />
   <Incarnator y="startY" status="false" start="one" stop="@beginRand" fill="#008800" frame="#000000" cx="102.43055555555557" cz="45.763888888888886" r="4.722222222222221" angle="45" />
   <Incarnator y="startY" status="false" start="five" stop="@beginRand" fill="#008800" frame="#000000" cx="45.69444444444444" cz="102.15277777777779" r="4.722222222222225" angle="225" />
-  <Timer wait="1" in="@gTaken" out="@fieldOff" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="22.430555555555557" r="3.75" angle="90" />
-  <Text in="@greenCenter" showEveryone="true" text="Green Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="22.430555555555557" r="3.75" angle="90" />
-  <Text in="@yellowCenter" showEveryone="true" text="Yellow Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="22.430555555555557" r="3.75" angle="90" />
-  <Text in="@redCenter" showEveryone="true" text="Red Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="22.430555555555557" r="3.75" angle="90" />
-  <Text in="@pinkCenter" showEveryone="true" text="Pink Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="22.430555555555557" r="3.75" angle="90" />
-  <Text in="@purpleCenter" showEveryone="true" text="Purple Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="22.430555555555557" r="3.75" angle="90" />
-  <Text in="@blueCenter" showEveryone="true" text="Blue Hector in Center!" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="22.430555555555557" r="3.75" angle="90" />
-  <Text in="@gTaken" sound="1504" volume=".3" showEveryone="true" text="" fill="#00ccff" frame="#000000" cx="5.416666666666667" cz="22.430555555555557" r="3.75" angle="90" />
+  <Timer wait="1" in="@gTaken" out="@fieldOff" />
+  <Text in="@greenCenter" showEveryone="true" text="Green Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
+  <Text in="@yellowCenter" showEveryone="true" text="Yellow Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
+  <Text in="@redCenter" showEveryone="true" text="Red Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
+  <Text in="@pinkCenter" showEveryone="true" text="Pink Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
+  <Text in="@purpleCenter" showEveryone="true" text="Purple Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
+  <Text in="@blueCenter" showEveryone="true" text="Blue Hector in Center!" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
+  <Text in="@gTaken" sound="1504" volume=".3" showEveryone="true" text="" cx="5.416666666666667" cz="22.430555555555557" r="3.75" />
 </map>

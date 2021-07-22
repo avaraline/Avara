@@ -74,24 +74,24 @@ Light hull only...hehehehe..." hull.0="1004" hull.1="hull[0]" hull.2="hull[0]" F
   <Teleporter y="40 * FMM" activeRange="5000" deadRange="highness * .6" destGroup="2" group="3" shape="false" out="@kill" fill="#aaaaaa" frame="#000000" cx="78.75" cz="75" r="1.875" angle="315" />
   <unique vars="mHi mDie" />
   <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" fill="#ffff66" frame="#cc3333" cx="61.875" cz="52.5" r="1.875" angle="45" />
-  <And in="@start" out="mHi" fill="#ffff66" frame="#cc3333" cx="61.875" cz="52.5" r="1.875" angle="45" />
-  <Timer in="mDie" wait="25" out="mHi" fill="#ffff66" frame="#cc3333" cx="61.875" cz="52.5" r="1.875" angle="45" />
+  <And in="@start" out="mHi" />
+  <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" fill="#ff66cc" frame="#6600cc" cx="55.625" cz="58.75" r="1.875" angle="225" />
-  <And in="@start" out="mHi" fill="#ff66cc" frame="#6600cc" cx="55.625" cz="58.75" r="1.875" angle="225" />
-  <Timer in="mDie" wait="25" out="mHi" fill="#ff66cc" frame="#6600cc" cx="55.625" cz="58.75" r="1.875" angle="225" />
+  <And in="@start" out="mHi" />
+  <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" fill="#ffff66" frame="#cc3333" cx="81.875" cz="88.75" r="1.875" angle="135" />
-  <And in="@start" out="mHi" fill="#ffff66" frame="#cc3333" cx="81.875" cz="88.75" r="1.875" angle="135" />
-  <Timer in="mDie" wait="25" out="mHi" fill="#ffff66" frame="#cc3333" cx="81.875" cz="88.75" r="1.875" angle="135" />
+  <And in="@start" out="mHi" />
+  <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" fill="#ff66cc" frame="#6600cc" cx="75.625" cz="82.5" r="1.875" angle="315" />
-  <And in="@start" out="mHi" fill="#ff66cc" frame="#6600cc" cx="75.625" cz="82.5" r="1.875" angle="315" />
-  <Timer in="mDie" wait="25" out="mHi" fill="#ff66cc" frame="#6600cc" cx="75.625" cz="82.5" r="1.875" angle="315" />
+  <And in="@start" out="mHi" />
+  <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody shape="1001" scale=".5" y="lvl5height + 2" start="mHi" out="mDie" missiles="3" grenades="6" boosters="3" power="5000" boostTime="85" shield="5000" speed="14" fill="#000000" frame="#996699" cx="88.75" cz="75.625" r="1.875" angle="135" />
-  <And in="@start" out="mHi" fill="#000000" frame="#996699" cx="88.75" cz="75.625" r="1.875" angle="135" />
-  <Timer in="mDie" wait="250" out="mHi" fill="#000000" frame="#996699" cx="88.75" cz="75.625" r="1.875" angle="135" />
+  <And in="@start" out="mHi" />
+  <Timer in="mDie" wait="250" out="mHi" />
   <Incarnator y="10 * FMM" fill="#cccccc" frame="#000000" cx="75.625" cz="58.75" r="1.875" angle="225" />
   <Incarnator y="10 * FMM" fill="#cccccc" frame="#000000" cx="81.875" cz="92.5" r="1.875" angle="45" />
   <set baseHeight="highness + lvl1height" />

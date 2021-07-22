@@ -27,7 +27,7 @@
   <Wall fill="#dddddd" frame="#000000" x="34.30555555555556" z="61.18055555555556" w="30" d="5" h="1.5" />
   <Wall fill="#dddddd" frame="#000000" x="16.805555555555557" z="46.18055555555556" w="5" d="35" h="1.5" />
   <set baseHeight="0" />
-  <Ramp deltaY="7.5" fill="#dddddd" frame="#000000" x="31.875" z="31.25" w="25" d="5" h="0" r="2.5" angle="270" />
+  <Ramp deltaY="7.5" fill="#dddddd" frame="#000000" x="31.875" z="31.25" w="25" d="5" h="0" angle="270" />
   <Wall fill="#777777" frame="#000000" x="29.305555555555557" z="48.68055555555556" w="5" d="5" h="10" />
   <Wall fill="#777777" frame="#000000" x="29.305555555555557" z="48.68055555555556" w="10" d="10" h="1.5" y="10" />
   <Wall fill="#3366ff" frame="#000000" x="64.30555555555556" z="61.18055555555556" w="40" d="2.5" h="4.5" />
@@ -42,7 +42,7 @@
   <Ufo y="110" start="@Guard1" fill="#ccccff" frame="#000000" cx="64.30555555555556" cz="38.68055555555556" r="1.875" angle="225" />
   <Ufo y="115" start="@Guard2" fill="#ccccff" frame="#000000" cx="64.30555555555556" cz="38.68055555555556" r="1.875" angle="225" />
   <Guard y="5" killMsg="@Guard1" shield="6" fill="#ccccff" frame="#000000" cx="64.375" cz="60.55555555555556" r="1.875" angle="180" />
-  <Timer in="start" wait="80" out="@attack" fill="#ccccff" frame="#000000" cx="64.375" cz="60.55555555555556" r="1.875" angle="180" />
+  <Timer in="start" wait="80" out="@attack" />
   <Door shape="bspBigIce" yon="100" fill="#ffffff" frame="#000000" cx="116.80555555555556" cz="66.18055555555556" r="1.875" angle="225" />
   <Door shape="bspBigIce" yon="100" fill="#ffffff" frame="#000000" cx="128.05555555555557" cz="48.68055555555556" r="1.875" angle="90" />
   <Door shape="bspIce" yon="100" fill="#ffffff" frame="#000000" cx="142.43055555555557" cz="43.68055555555556" r="1.875" angle="157" />
@@ -51,22 +51,22 @@
   <Door shape="bspBigIce" yon="100" fill="#ffffff" frame="#000000" cx="143.05555555555557" cz="82.43055555555556" r="1.875" angle="90" />
   <Wall fill="#dddddd" frame="#000000" x="144.30555555555557" z="76.18055555555556" w="10" d="5" h="8" />
   <Wall fill="#dddddd" frame="#000000" x="144.30555555555557" z="56.18055555555556" w="10" d="5" h="8" />
-  <Ramp deltaY="7.5" fill="#777777" frame="#000000" x="144.375" z="66.25" w="10" d="15" h="0" r="1.875" angle="90" />
+  <Ramp deltaY="7.5" fill="#777777" frame="#000000" x="144.375" z="66.25" w="10" d="15" h="0" angle="90" />
   <Ufo y="100" start="@attack5" fill="#ccccff" frame="#000000" cx="156.875" cz="53.68055555555556" r="1.875" angle="0" />
   <Wall fill="#dddddd" frame="#000000" x="169.30555555555557" z="76.18055555555556" w="10" d="5" h="8" />
   <Wall fill="#dddddd" frame="#000000" x="169.30555555555557" z="56.18055555555556" w="10" d="5" h="8" />
-  <Ramp deltaY="7.5" fill="#777777" frame="#000000" x="169.375" z="66.25" w="10" d="15" h="0" r="1.875" angle="270" />
+  <Ramp deltaY="7.5" fill="#777777" frame="#000000" x="169.375" z="66.25" w="10" d="15" h="0" angle="270" />
   <Wall fill="#777777" frame="#000000" x="156.80555555555557" z="66.18055555555556" w="15" d="15" h="0" y="7.5" />
   <Ufo y="100" start="@attack5" fill="#ccccff" frame="#000000" cx="156.875" cz="78.68055555555556" r="1.875" angle="180" />
   <Door shape="bspIce" yon="100" fill="#ffffff" frame="#000000" cx="73.68055555555556" cz="47.43055555555556" r="1.875" angle="225" />
   <Door shape="bspIce" yon="100" fill="#ffffff" frame="#000000" cx="79.93055555555556" cz="44.93055555555556" r="1.875" angle="90" />
   <Wall fill="#dddddd" frame="#000000" x="111.80555555555556" z="143.68055555555557" w="5" d="10" h="8" />
   <Wall fill="#dddddd" frame="#000000" x="91.80555555555556" z="143.68055555555557" w="5" d="10" h="8" />
-  <Ramp deltaY="7.5" fill="#777777" frame="#000000" x="101.875" z="143.75" w="15" d="10" h="0" r="1.875" angle="0" />
+  <Ramp deltaY="7.5" fill="#777777" frame="#000000" x="101.875" z="143.75" w="15" d="10" h="0" angle="0" />
   <Ufo y="100" start="@attack4" fill="#ccccff" frame="#000000" cx="89.30555555555556" cz="131.25" r="1.875" angle="270" />
   <Wall fill="#dddddd" frame="#000000" x="111.80555555555556" z="118.68055555555556" w="5" d="10" h="8" />
   <Wall fill="#dddddd" frame="#000000" x="91.80555555555556" z="118.68055555555556" w="5" d="10" h="8" />
-  <Ramp deltaY="7.5" fill="#777777" frame="#000000" x="101.875" z="118.75" w="15" d="10" h="0" r="1.875" angle="180" />
+  <Ramp deltaY="7.5" fill="#777777" frame="#000000" x="101.875" z="118.75" w="15" d="10" h="0" angle="180" />
   <Wall fill="#777777" frame="#000000" x="101.80555555555556" z="131.18055555555557" w="15" d="15" h="0" y="7.5" />
   <Ufo y="100" start="@attack4" fill="#ccccff" frame="#000000" cx="114.30555555555556" cz="131.25" r="1.875" angle="90" />
   <Wall fill="#dddddd" frame="#000000" x="124.30555555555557" z="56.18055555555556" w="30" d="5" h="0.5" y="7.5" />
@@ -75,10 +75,10 @@
   <Door shape="bspBigIce" yon="100" fill="#ffffff" frame="#000000" cx="120.55555555555556" cz="107.43055555555556" r="1.875" angle="90" />
   <Door shape="bspBigIce" yon="100" fill="#ffffff" frame="#000000" cx="83.68055555555556" cz="125.55555555555556" r="1.875" angle="157" />
   <Door shape="bspIce" yon="100" fill="#ffffff" frame="#000000" cx="86.52777777777779" cz="110.55555555555556" r="1.875" angle="337" />
-  <WallDoor middle="closed" midYaw="45" fill="#dddddd" frame="#000000" x="161.80555555555557" z="138.68055555555557" w="15" d="10" h="4.5" r="1.875" cx="86.52777777777779" cz="110.55555555555556" angle="337" />
+  <WallDoor middle="closed" midYaw="45" fill="#dddddd" frame="#000000" x="161.80555555555557" z="138.68055555555557" w="15" d="10" h="4.5" />
   <Door shape="bspIce" yon="100" fill="#ffffff" frame="#000000" cx="172.43055555555557" cz="147.43055555555557" r="1.875" angle="90" />
   <Door shape="bspIce" yon="100" fill="#ffffff" frame="#000000" cx="164.93055555555557" cz="129.30555555555557" r="1.875" angle="90" />
-  <WallDoor middle="closed" midYaw="45" fill="#bbbbbb" frame="#000000" x="161.80555555555557" z="138.68055555555557" w="25" d="10" h="1" r="1.875" cx="164.93055555555557" cz="129.30555555555557" angle="90" y="4.5" />
+  <WallDoor middle="closed" midYaw="45" fill="#bbbbbb" frame="#000000" x="161.80555555555557" z="138.68055555555557" w="25" d="10" h="1" y="4.5" />
   <Wall fill="#dddddd" frame="#000000" x="161.80555555555557" z="138.68055555555557" w="5" d="5" h="4.5" y="5.5" />
   <Guard y="11" shield="6" fill="#ccccff" frame="#000000" cx="161.80555555555557" cz="138.68055555555557" r="1.875" angle="135" />
   <Ufo y="100" fill="#ccccff" frame="#000000" cx="161.80555555555557" cz="138.68055555555557" r="1.875" angle="135" />
@@ -87,15 +87,15 @@
   <Wall fill="#bbbbbb" frame="#000000" x="96.80555555555556" z="82.43055555555556" w="25" d="2.5" h="8" />
   <Wall fill="#bbbbbb" frame="#000000" x="108.05555555555556" z="64.93055555555556" w="2.5" d="32.5" h="8" />
   <Wall fill="#bbbbbb" frame="#000000" x="85.55555555555556" z="64.93055555555556" w="2.5" d="32.5" h="8" />
-  <WallDoor middle="closed" open="@oGate" close="@cGate" midY="1.875" midZ="-.1" midPitch="90" deltaY=".1" fill="#bbbbbb" frame="#000000" x="96.80555555555556" z="49.30555555555556" w="5" d="3.75" h="0" r="1.875" cx="154.30555555555557" cz="122.43055555555556" angle="90" />
+  <WallDoor middle="closed" open="@oGate" close="@cGate" midY="1.875" midZ="-.1" midPitch="90" deltaY=".1" fill="#bbbbbb" frame="#000000" x="96.80555555555556" z="49.30555555555556" w="5" d="3.75" h="0" />
   <Wall fill="#bbbbbb" frame="#000000" x="96.80555555555556" z="64.93055555555556" w="20" d="32.5" h="0" y="8" />
   <Wall fill="#3366ff" frame="#000000" x="96.80555555555556" z="51.18055555555556" w="15" d="15" h="2.5" y="8" />
   <Guard y="11.5" killMsg="@Guard2" shield="6" fill="#ccccff" frame="#000000" cx="90.27777777777779" cz="56.458333333333336" r="1.875" angle="90" />
   <Dome y="8" fill="#3366ff" frame="#000000" cx="96.80555555555556" cz="70.55555555555556" r="7.5" angle="0" quarters="4" />
-  <WallDoor middle="closed" open="@oGate" close="@cGate" midY="1.875" midPitch="90" deltaY="0" fill="#777777" frame="#000000" x="96.80555555555556" z="49.30555555555556" w="20" d="3.75" h="0" r="7.5" cx="96.80555555555556" cz="70.55555555555556" angle="180" />
+  <WallDoor middle="closed" open="@oGate" close="@cGate" midY="1.875" midPitch="90" deltaY="0" fill="#777777" frame="#000000" x="96.80555555555556" z="49.30555555555556" w="20" d="3.75" h="0" />
   <Ufo start="@attack5" hitMsg="@attack5" killMsg="@gate" fill="#ccccff" frame="#ff3300" cx="156.80555555555557" cz="66.25" r="1.875" angle="90" />
   <Ufo hitMsg="@attack4" start="attack4" killMsg="@gate" fill="#ccccff" frame="#ff3300" cx="101.875" cz="131.18055555555557" r="1.875" angle="180" />
-  <Counter in="@gate" n="2" out="@oGate" fill="#ccccff" frame="#ff3300" cx="101.875" cz="131.18055555555557" r="1.875" angle="180" />
+  <Counter in="@gate" n="2" out="@oGate" />
   <Ufo y="100" start="@hangar" fill="#444444" frame="#dd0000" cx="96.875" cz="28.680555555555557" r="1.875" angle="0" />
   <Ufo y="125" start="@hangar" fill="#444444" frame="#dd0000" cx="96.875" cz="28.680555555555557" r="1.875" angle="0" />
   <Ufo y="150" start="@hangar" fill="#444444" frame="#dd0000" cx="96.875" cz="28.680555555555557" r="1.875" angle="0" />
@@ -105,7 +105,7 @@
   <Door scale="2" y="100" yon="30" shape="bspShell" canGlow="1" isTarget="1" shield="4" openSpeed="50" openSound="0" closeSound="0" startSound="0" stopSound="0" deltaY="-97" pitch="90" open="@oGate" hitMsg="@hangar" killMsg="@goal" fill="#555555" frame="#ff3300" cx="106.80555555555556" cz="66.25" r="1.875" angle="90" />
   <Door scale="2" y="100" yon="30" shape="bspShell" canGlow="1" isTarget="1" shield="4" openSpeed="50" openSound="0" closeSound="0" startSound="0" stopSound="0" deltaY="-97" pitch="90" open="@oGate" hitMsg="@hangar" killMsg="@goal" fill="#555555" frame="#ff3300" cx="86.80555555555556" cz="66.25" r="1.875" angle="270" />
   <Door scale="2" y="100" yon="30" shape="bspShell" canGlow="1" isTarget="1" shield="4" openSpeed="50" openSound="0" closeSound="0" startSound="0" stopSound="0" deltaY="-97" pitch="90" open="@oGate" hitMsg="@hangar" killMsg="@goal" fill="#555555" frame="#ff3300" cx="86.80555555555556" cz="75.625" r="1.875" angle="270" />
-  <Counter in="@goal" n="5" out="@win" fill="#555555" frame="#ff3300" cx="86.80555555555556" cz="75.625" r="1.875" angle="270" />
+  <Counter in="@goal" n="5" out="@win" />
   <Teleporter y="-10" activeRange="155" deadRange="150" shape="0" fill="#ff3300" frame="#000000" cx="96.80555555555556" cz="83.68055555555556" r="5" angle="135" />
   <Teleporter start="@win" activeRange="155" deadRange="0" win="3500" fill="#ff3300" frame="#000000" cx="96.80555555555556" cz="83.68055555555556" r="5" angle="135" />
   <Teleporter y="15" shape="0" fill="#bbbbbb" frame="#000000" cx="29.305555555555557" cz="48.68055555555556" r="1.875" angle="315" />

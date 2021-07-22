@@ -17,26 +17,26 @@ Goodies are only visible within 6 meters." funnelAHeight="7.5" funnelBHeight="7.
   <Incarnator y="incHeight" fill="#99ccff" frame="#000000" cx="52.083333333333336" cz="57.01388888888889" r="2.5" angle="135" />
   <unique vars="mTaken mReset" />
   <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyHeight" speed="10" yon="goodyYon" fill="#0000dd" frame="#ff0099" cx="34.583333333333336" cz="37.01388888888889" r="2.5" angle="135" />
-  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" fill="#0000dd" frame="#ff0099" cx="34.583333333333336" cz="37.01388888888889" r="2.5" angle="135" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
   <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyHeight" speed="10" yon="goodyYon" fill="#0000dd" frame="#ff0099" cx="49.583333333333336" cz="37.01388888888889" r="2.5" angle="135" />
-  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" fill="#0000dd" frame="#ff0099" cx="49.583333333333336" cz="37.01388888888889" r="2.5" angle="135" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <set wallHeight="pitHeight" />
   <Wall fill="#ff0000" frame="#000000" x="42.083333333333336" z="34.51388888888889" w="5" d="0" h="0" />
   <Wall fill="#ff0000" frame="#000000" x="42.083333333333336" z="39.51388888888889" w="5" d="0" h="0" />
   <unique vars="mA" />
   <Door2 shape="bspStandardFloor" scale="2" midY="0" deltaY="1" open="mA" close="mA" didOpen="mA" didClose="mA" openSpeed="100" closeSpeed="40" shotPower="10" openSound="0" closeSound="0" stopSound="0" yon="0.1" fill="#ff0000" frame="#000000" cx="42.083333333333336" cz="37.01388888888889" r="2.5" angle="90" />
-  <And in="@start" out="mA" fill="#ff0000" frame="#000000" cx="42.083333333333336" cz="37.01388888888889" r="2.5" angle="90" />
+  <And in="@start" out="mA" />
   <Goal motionRange="5" activeRange="5" sound="0" y="pitHeight / 2" yon="0.1" goalScore="0" fill="#ff0000" frame="#000000" cx="42.083333333333336" cz="37.01388888888889" r="2.5" angle="90" />
   <set wallHeight="pitHeight" />
   <Wall fill="#ff0000" frame="#000000" x="39.583333333333336" z="37.01388888888889" w="0" d="5" h="0" />
   <Wall fill="#ff0000" frame="#000000" x="44.583333333333336" z="37.01388888888889" w="0" d="5" h="0" />
-  <Ramp deltaY="funnelAHeight" thickness="0" y="pitHeight + funnelBHeight" fill="#770000" frame="#000000" x="34.61805555555556" z="37.01388888888889" w="9.930555555555557" d="25" h="0" r="1.875" angle="270" />
-  <Ramp deltaY="funnelAHeight" thickness="0" y="pitHeight + funnelBHeight" fill="#770000" frame="#000000" x="49.583333333333336" z="37.01388888888889" w="10" d="25" h="0" r="1.909722222222225" angle="90" />
-  <Ramp deltaY="funnelBHeight" thickness="0" y="pitHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="29.513888888888893" w="5" d="10" h="0" r="1.875" angle="0" />
-  <Ramp deltaY="funnelBHeight" thickness="0" y="pitHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="44.51388888888889" w="5" d="10" h="0" r="1.9097222222222214" angle="180" />
-  <Ramp deltaY="funnelSHeight" thickness="0" y="pitHeight + funnelBHeight + funnelAHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="54.51388888888889" w="25" d="10" h="0" r="1.909722222222225" angle="180" />
-  <Ramp deltaY="funnelSHeight" thickness="0" y="pitHeight + funnelBHeight + funnelAHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="19.51388888888889" w="25" d="10" h="0" r="1.9097222222222232" angle="0" />
+  <Ramp deltaY="funnelAHeight" thickness="0" y="pitHeight + funnelBHeight" fill="#770000" frame="#000000" x="34.61805555555556" z="37.01388888888889" w="9.930555555555557" d="25" h="0" angle="270" />
+  <Ramp deltaY="funnelAHeight" thickness="0" y="pitHeight + funnelBHeight" fill="#770000" frame="#000000" x="49.583333333333336" z="37.01388888888889" w="10" d="25" h="0" angle="90" />
+  <Ramp deltaY="funnelBHeight" thickness="0" y="pitHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="29.513888888888893" w="5" d="10" h="0" angle="0" />
+  <Ramp deltaY="funnelBHeight" thickness="0" y="pitHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="44.51388888888889" w="5" d="10" h="0" angle="180" />
+  <Ramp deltaY="funnelSHeight" thickness="0" y="pitHeight + funnelBHeight + funnelAHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="54.51388888888889" w="25" d="10" h="0" angle="180" />
+  <Ramp deltaY="funnelSHeight" thickness="0" y="pitHeight + funnelBHeight + funnelAHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="19.51388888888889" w="25" d="10" h="0" angle="0" />
   <set baseHeight="pitHeight" wallHeight="funnelBHeight" />
   <Wall fill="#ff0000" frame="#000000" x="39.583333333333336" z="37.01388888888889" w="0" d="25" h="0" />
   <Wall fill="#ff0000" frame="#000000" x="44.583333333333336" z="37.01388888888889" w="0" d="25" h="0" />
@@ -48,10 +48,10 @@ Goodies are only visible within 6 meters." funnelAHeight="7.5" funnelBHeight="7.
   <Incarnator y="incHeight" fill="#99ccff" frame="#000000" cx="42.083333333333336" cz="17.63888888888889" r="2.5" angle="0" />
   <unique vars="mTaken mReset" />
   <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goody2Height" speed="10" yon="goodyYon" fill="#0000dd" frame="#ff0099" cx="42.083333333333336" cz="17.01388888888889" r="2.5" angle="135" />
-  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" fill="#0000dd" frame="#ff0099" cx="42.083333333333336" cz="17.01388888888889" r="2.5" angle="135" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
   <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goody2Height" speed="10" yon="goodyYon" fill="#0000dd" frame="#ff0099" cx="42.083333333333336" cz="57.01388888888889" r="2.5" angle="135" />
-  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" fill="#0000dd" frame="#ff0099" cx="42.083333333333336" cz="57.01388888888889" r="2.5" angle="135" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <YonBox yon="8" deltaY="pitHeight" fill="#0000dd" frame="#ff0099" x="42.083333333333336" z="37.01388888888889" w="5" d="5" h="0" r="2.5" angle="135" />
   <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="30.833333333333336" cz="15.76388888888889" r="1.25" angle="135" />
   <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="38.333333333333336" cz="15.76388888888889" r="1.25" angle="135" />

@@ -5,19 +5,19 @@
   <GroundColor fill="#000000" frame="#000000" />
   <Incarnator stop="@oLift" fill="#0099ff" frame="#000000" cx="77.70833333333334" cz="80.20833333333334" r="1.875" angle="0" />
   <Wall fill="#003399" frame="#000000" x="77.70833333333334" z="75.20833333333334" w="5" d="5" h="3" />
-  <Ramp y="3" deltaY="5" isTarget="false" shield="-1" fill="#0033ff" frame="#000000" x="77.77777777777779" z="87.77777777777779" w="5" d="20" h="0" r="1.875" angle="180" />
+  <Ramp y="3" deltaY="5" isTarget="false" shield="-1" fill="#0033ff" frame="#000000" x="77.77777777777779" z="87.77777777777779" w="5" d="20" h="0" angle="180" />
   <Wall fill="#003399" frame="#000000" x="77.70833333333334" z="100.20833333333334" w="25" d="5" h="8" />
   <Wall fill="#000077" frame="#000000" x="67.70833333333334" z="95.20833333333334" w="5" d="5" h="11" />
   <Wall fill="#000077" frame="#000000" x="87.70833333333334" z="95.20833333333334" w="5" d="5" h="16" />
   <Wall fill="#0033ff" frame="#000000" x="77.70833333333334" z="117.70833333333334" w="5" d="30" h="0.5" y="7.5" />
   <Wall fill="#003399" frame="#000000" x="77.70833333333334" z="140.20833333333334" w="15" d="15" h="8" />
-  <Ramp y="8" deltaY="3" isTarget="false" shield="-1" fill="#660099" frame="#000000" x="95.27777777777779" z="140.27777777777777" w="20" d="5" h="0" r="1.875" angle="90" />
+  <Ramp y="8" deltaY="3" isTarget="false" shield="-1" fill="#660099" frame="#000000" x="95.27777777777779" z="140.27777777777777" w="20" d="5" h="0" angle="90" />
   <Wall fill="#330066" frame="#000000" x="112.70833333333334" z="140.20833333333334" w="15" d="15" h="0.5" y="10.5" />
   <Wall fill="#003399" frame="#000000" x="77.70833333333334" z="140.20833333333334" w="15" d="15" h="0.5" y="12.5" />
-  <WallDoor middle="closed" midY="10.5" open="@oLift" close="@cLift" didOpen="@cLift" didClose="@oLift" deltaY="12.5" deltaZ="35" closeDelay="30" openDelay="30" closeSound="0" openSound="0" openSpeed="1" closeSpeed="1" fill="#0033ff" frame="#000000" x="67.70833333333334" z="100.20833333333334" w="5" d="5" h="0.5" r="1.875" cx="90.13888888888889" cz="140.27777777777777" angle="90" />
-  <Ramp y="11" deltaY="3" isTarget="false" shield="-1" fill="#660099" frame="#000000" x="112.77777777777779" z="122.77777777777777" w="5" d="20" h="0" r="1.875" angle="0" />
+  <WallDoor middle="closed" midY="10.5" open="@oLift" close="@cLift" didOpen="@cLift" didClose="@oLift" deltaY="12.5" deltaZ="35" closeDelay="30" openDelay="30" closeSound="0" openSound="0" openSpeed="1" closeSpeed="1" fill="#0033ff" frame="#000000" x="67.70833333333334" z="100.20833333333334" w="5" d="5" h="0.5" />
+  <Ramp y="11" deltaY="3" isTarget="false" shield="-1" fill="#660099" frame="#000000" x="112.77777777777779" z="122.77777777777777" w="5" d="20" h="0" angle="0" />
   <Wall fill="#330066" frame="#000000" x="112.70833333333334" z="105.20833333333334" w="15" d="15" h="0.5" y="13.5" />
-  <WallDoor middle="closed" midY="13" stepOnMsg="@oLift2" open="@oLift2" close="@cLift2" didOpen="@cLift2" closeDelay="30" deltaY="20" openSpeed="2" fill="#0033ff" frame="#000000" x="77.70833333333334" z="140.20833333333334" w="5" d="5" h="0.5" r="1.875" cx="112.15277777777779" cz="121.45833333333334" angle="0" />
+  <WallDoor middle="closed" midY="13" stepOnMsg="@oLift2" open="@oLift2" close="@cLift2" didOpen="@cLift2" closeDelay="30" deltaY="20" openSpeed="2" fill="#0033ff" frame="#000000" x="77.70833333333334" z="140.20833333333334" w="5" d="5" h="0.5" />
   <set baseHeight="20" />
   <Wall fill="#330066" frame="#000000" x="82.70833333333334" z="140.20833333333334" w="5" d="15" h="0.5" />
   <Wall fill="#330066" frame="#000000" x="77.70833333333334" z="145.20833333333334" w="5" d="5" h="0.5" />
@@ -68,13 +68,13 @@
   <Wall fill="#330066" frame="#000000" x="123.95833333333334" z="278.95833333333337" w="2.5" d="2.5" h="7.5" />
   <Switch y="9.5" shield="1" out.1="@oBackD" fill="#dd0000" frame="#008800" cx="69.02777777777779" cz="229.6527777777778" r="1.25" angle="0" />
   <Wall fill="#330066" frame="#000000" x="121.45833333333334" z="223.95833333333334" w="2.5" d="2.5" h="7.5" />
-  <Ramp shield="-1" y="4" isTarget="false" canGlow="false" deltaY="4.5" fill="#990066" frame="#000000" x="112.77777777777779" z="219.0277777777778" w="15" d="2.5" h="0" r="1.875" angle="90" />
+  <Ramp shield="-1" y="4" isTarget="false" canGlow="false" deltaY="4.5" fill="#990066" frame="#000000" x="112.77777777777779" z="219.0277777777778" w="15" d="2.5" h="0" angle="90" />
   <Wall fill="#990066" frame="#000000" x="68.95833333333334" z="229.89583333333334" w="2.5" d="0.625" h="3" y="8" />
   <Wall fill="#990066" frame="#000000" x="70.52083333333334" z="228.95833333333334" w="0.625" d="2.5" h="3" y="8" />
   <Wall fill="#660066" frame="#000000" x="102.70833333333334" z="220.20833333333334" w="5" d="5" h="4" />
   <Hologram shape="bspGroundArrow" fill="#ff0099" frame="#000000" cx="102.77777777777779" cz="207.70833333333334" r="1.875" angle="0" />
-  <WallDoor open="@oPdoor" close="@cPdoor" deltaY="0" deltaZ="15" fill="#990066" frame="#000000" x="102.70833333333334" z="200.20833333333334" w="5" d="5" h="1.5" r="1.875" cx="102.77777777777779" cz="207.70833333333334" angle="0" />
-  <WallDoor open="@oBackD" close="@cBackD" middle="closed" midY="8.5" deltaY="11.5" fill="#990066" frame="#000000" x="123.95833333333334" z="278.95833333333337" w="1.25" d="2.5" h="4" r="1.875" cx="102.77777777777779" cz="207.70833333333334" angle="0" />
+  <WallDoor open="@oPdoor" close="@cPdoor" deltaY="0" deltaZ="15" fill="#990066" frame="#000000" x="102.70833333333334" z="200.20833333333334" w="5" d="5" h="1.5" />
+  <WallDoor open="@oBackD" close="@cBackD" middle="closed" midY="8.5" deltaY="11.5" fill="#990066" frame="#000000" x="123.95833333333334" z="278.95833333333337" w="1.25" d="2.5" h="4" />
   <Hologram shape="bspGroundArrow" fill="#ff0099" frame="#000000" cx="102.77777777777779" cz="192.70833333333334" r="1.875" angle="0" />
   <Hologram shape="bspGroundArrow" fill="#ff0099" frame="#000000" cx="102.77777777777779" cz="177.70833333333334" r="1.875" angle="0" />
   <Wall fill="#660066" frame="#000000" x="129.58333333333334" z="268.33333333333337" w="8.75" d="1.25" h="4" />
@@ -83,9 +83,9 @@
   <Wall fill="#660066" frame="#000000" x="65.83333333333334" z="292.08333333333337" w="1.25" d="18.75" h="4.5" />
   <Teleporter y="4" win="500" fill="#0099ff" frame="#000000" cx="100.06944444444444" cz="292.70833333333337" r="2.5" angle="0" />
   <Hologram y="4" shape="bspGroundStar" fill="#0099ff" frame="#000000" cx="100.06944444444444" cz="292.70833333333337" r="2.5" angle="0" />
-  <Area y="8.5" enter="@oSlider" fill="#ffffff" frame="#000000" cx="123.95833333333334" cz="278.95833333333337" r="1.25" angle="180" />
-  <Ramp y="0" deltaY="8" isTarget="false" shield="-1" fill="#0033ff" frame="#000000" x="72.77777777777779" z="157.77777777777777" w="5" d="20" h="0" r="1.875" angle="0" />
-  <WallDoor open="@oSlider" close="@cSlider" shotPower="1" deltaY="0" deltaX="35" openSound="0" closeSound="0" openSpeed="1.5" closeSpeed="1.5" didClose="@oSlider" didOpen="@cSlider" fill="#660099" frame="#000000" x="82.70833333333334" z="286.45833333333337" w="5" d="7.5" h="1.5" r="1.875" cx="72.77777777777779" cz="152.70833333333334" angle="0" />
+  <Area y="8.5" enter="@oSlider" cx="123.95833333333334" cz="278.95833333333337" r="1.25" />
+  <Ramp y="0" deltaY="8" isTarget="false" shield="-1" fill="#0033ff" frame="#000000" x="72.77777777777779" z="157.77777777777777" w="5" d="20" h="0" angle="0" />
+  <WallDoor open="@oSlider" close="@cSlider" shotPower="1" deltaY="0" deltaX="35" openSound="0" closeSound="0" openSpeed="1.5" closeSpeed="1.5" didClose="@oSlider" didOpen="@cSlider" fill="#660099" frame="#000000" x="82.70833333333334" z="286.45833333333337" w="5" d="7.5" h="1.5" />
   <Guard y="5" shield="-1" speed="10" freq="15" hitSound="211" isTarget="false" canGlow="false" fill="#dd0000" frame="#000000" cx="100.27777777777779" cz="302.08333333333337" r="1.875" angle="180" />
   <Wall fill="#222222" frame="#000000" x="100.20833333333334" z="286.45833333333337" w="40" d="2.5" h="0" />
   <Incarnator y="18" status="false" start="@oLift" stop="@oPdoor" fill="#0099ff" frame="#000000" cx="87.70833333333334" cz="95.41666666666667" r="1.875" angle="82" />
@@ -93,7 +93,7 @@
   <Incarnator y="20" status="false" start="@oBackD" stop="@oSlider" fill="#0099ff" frame="#000000" cx="95.27777777777779" cz="252.70833333333334" r="1.875" angle="0" />
   <Incarnator status="false" start="@oSlider" fill="#0099ff" frame="#000000" cx="129.65277777777777" cz="271.45833333333337" r="1.875" angle="0" />
   <Guard y="25" shield="-1" track="false" start="@notGonnaHappen" fireMsg="@fire" shotPower="10" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="0" />
-  <Timer in.0="@fire" in.1="start" out="@fire" wait="100" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="0" />
+  <Timer in.0="@fire" in.1="start" out="@fire" wait="100" />
   <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="Find the transporter and exit." />
   <Incarnator stop="@start" y="0" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="0" />
   <Incarnator stop="@start" y="3" fill="#000077" frame="#008800" cx="77.77777777777779" cz="52.708333333333336" r="1.875" angle="0" />

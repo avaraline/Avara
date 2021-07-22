@@ -52,8 +52,8 @@ Frag it out with grenades - there aren't any missiles here. Ideal for smaller ga
   <Teleporter y="90" group="@recenter" shape="0" fill="#fcfc00" frame="#fcfc00" cx="58.05555555555556" cz="46.80555555555556" r="2.5" angle="45" />
   <Wall fill="#fcfc00" frame="#000000" x="18.055555555555557" z="31.805555555555557" w="3.75" d="3.75" h="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#fc0000" frame="#fc0000" cx="58.05555555555556" cz="46.80555555555556" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#fc0000" frame="#fc0000" cx="58.05555555555556" cz="46.80555555555556" r="2.5" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" sound="1609" speed="2" y="1.8" grenades="6" start="mShow" out="mTaken" fill="#fc0000" frame="#fc0000" cx="58.05555555555556" cz="46.80555555555556" r="2.5" angle="315" />
   <Incarnator y="2" fill="#00fc00" frame="#00fc00" cx="30.555555555555557" cz="31.180555555555557" r="1.875" angle="315" />
   <Incarnator y="2" fill="#00fc00" frame="#00fc00" cx="90.55555555555556" cz="62.43055555555556" r="1.875" angle="135" />
@@ -63,18 +63,18 @@ Frag it out with grenades - there aren't any missiles here. Ideal for smaller ga
   <Incarnator y="2" fill="#00fc00" frame="#00fc00" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="270" />
   <Wall fill="#fcfc00" frame="#000000" x="18.055555555555557" z="61.80555555555556" w="3.75" d="3.75" h="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" sound="1609" speed="2" y="1.8" grenades="6" start="mShow" out="mTaken" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
   <Wall fill="#fcfc00" frame="#000000" x="103.05555555555556" z="31.805555555555557" w="3.75" d="3.75" h="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" sound="1609" speed="2" y="1.8" grenades="6" start="mShow" out="mTaken" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
   <Wall fill="#fcfc00" frame="#000000" x="103.05555555555556" z="61.80555555555556" w="3.75" d="3.75" h="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" sound="1609" speed="2" y="1.8" grenades="6" start="mShow" out="mTaken" fill="#fc0000" frame="#fc0000" cx="15.555555555555557" cz="46.80555555555556" r="1.875" angle="315" />
   <set wallYon="0.0001" />
   <Wall fill="#ffffff" frame="#000000" x="60.55555555555556" z="46.80555555555556" w="0" d="45" h="10" y="10" />

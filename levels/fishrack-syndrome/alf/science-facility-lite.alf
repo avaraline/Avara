@@ -40,7 +40,7 @@ Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="
   <Wall fill="#cccc99" frame="#000000" x="53.4375" z="61.5625" w="0.625" d="6.875" h="0" />
   <set wallHeight=".8" />
   <Wall fill="#666633" frame="#000000" x="57.1875" z="43.125" w="6.875" d="45" h="0" />
-  <Ramp deltaY=".8" fill="#666633" frame="#000000" x="53.4375" z="43.125" w="0.625" d="5" h="0" r="8.75" angle="90" />
+  <Ramp deltaY=".8" fill="#666633" frame="#000000" x="53.4375" z="43.125" w="0.625" d="5" h="0" angle="90" />
   <set wallHeight="2.1" />
   <Wall fill="#cccc99" frame="#000000" x="53.4375" z="30.625" w="0.625" d="5" h="0" />
   <Wall fill="#cccc99" frame="#000000" x="53.4375" z="55.625" w="0.625" d="5" h="0" />
@@ -66,7 +66,7 @@ Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="
   <Hologram shape="5499" y="2" scale=".4" fill="#ffff00" frame="#000000" cx="53.75" cz="39.375" r="8.75" angle="270" />
   <Hologram shape="5498" y="2.8" scale=".4" fill="#ffff00" frame="#000000" cx="53.75" cz="39.375" r="8.75" angle="270" />
   <set baseHeight=".8" wallHeight="4.2" />
-  <WallDoor hitMsg="@openNuke" open="@openNuke" close="@closeNuke" openSound="false" closeSound="false" deltaY="0" deltaX="0" deltaZ="5" didOpen="@closeNuke" closeDelay="100" guardDelay="0" isTarget="true" fill="#cc6666" frame="#000000" x="54.0625" z="43.125" w="0.625" d="5" h="0" r="8.75" cx="53.75" cz="39.375" angle="270" />
+  <WallDoor hitMsg="@openNuke" open="@openNuke" close="@closeNuke" openSound="false" closeSound="false" deltaY="0" deltaX="0" deltaZ="5" didOpen="@closeNuke" closeDelay="100" guardDelay="0" isTarget="true" fill="#cc6666" frame="#000000" x="54.0625" z="43.125" w="0.625" d="5" h="0" />
   <set baseHeight="5" wallHeight="highWall -5" />
   <Wall fill="#cc9999" frame="#000000" x="53.75" z="43.125" w="1.25" d="5" h="0" />
   <set baseHeight="0" wallHeight="1.5" />
@@ -85,7 +85,7 @@ Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="
   <Wall fill="#cccc99" frame="#000000" x="80.9375" z="89.375" w="0.625" d="47.5" h="0" />
   <Wall fill="#cccc99" frame="#000000" x="75.625" z="65.3125" w="30" d="0.625" h="0" />
   <Wall fill="#cccc99" frame="#000000" x="56.875" z="113.4375" w="48.75" d="0.625" h="0" />
-  <Ramp deltaY="-1.7" y="2.5" fill="#666633" frame="#000000" x="57.1875" z="61.875" w="6.875" d="7.5" h="0" r="8.75" angle="0" />
+  <Ramp deltaY="-1.7" y="2.5" fill="#666633" frame="#000000" x="57.1875" z="61.875" w="6.875" d="7.5" h="0" angle="0" />
   <Hologram y="8" shape="5496" scale=".7" fill="#66cc00" frame="#000000" cx="52.63888888888889" cz="112.91666666666667" r="8.75" angle="180" />
   <set baseHeight="0" />
   <Solid y="8" shape="5494" shield="-1" canGlow="false" isTarget="true" hitSound="2858" fill="#999999" frame="#000000" cx="25.694444444444446" cz="48.125" r="8.75" angle="270" />
@@ -107,14 +107,14 @@ Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="
   <Wall fill="#cccc99" frame="#000000" x="57.1875" z="30.625" w="6.875" d="20" h="0" />
   <Wall fill="#cccc99" frame="#000000" x="57.1875" z="57.8125" w="6.875" d="24.375" h="0" />
   <Wall fill="#cccc99" frame="#000000" x="57.1875" z="43.125" w="5.625" d="5" h="0" />
-  <Ramp deltaY="-lowWall + 2.5" fill="#cccc99" frame="#000000" x="68.4375" z="67.8125" w="15.625" d="4.375" h="0" r="8.75" angle="90" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="53.75" z="72.5" w="6.25" d="6.25" h="0" r="8.75" cx="63.68055555555556" cz="67.08333333333334" angle="90" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="50.625" z="75.625" w="6.25" d="6.25" h="0" r="8.75" cx="63.68055555555556" cz="67.08333333333334" angle="90" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="47.5" z="78.75" w="6.25" d="6.25" h="0" r="8.75" cx="63.68055555555556" cz="67.08333333333334" angle="90" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="44.375" z="81.875" w="6.25" d="6.25" h="0" r="8.75" cx="63.68055555555556" cz="67.08333333333334" angle="90" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="41.25" z="85" w="6.25" d="6.25" h="0" r="8.75" cx="63.68055555555556" cz="67.08333333333334" angle="90" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="38.125" z="88.125" w="6.25" d="6.25" h="0" r="8.75" cx="63.68055555555556" cz="67.08333333333334" angle="90" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="56.25" z="70" w="6.25" d="6.25" h="0" r="8.75" cx="63.68055555555556" cz="67.08333333333334" angle="90" />
+  <Ramp deltaY="-lowWall + 2.5" fill="#cccc99" frame="#000000" x="68.4375" z="67.8125" w="15.625" d="4.375" h="0" angle="90" />
+  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="53.75" z="72.5" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="50.625" z="75.625" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="47.5" z="78.75" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="44.375" z="81.875" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="41.25" z="85" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="38.125" z="88.125" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="56.25" z="70" w="6.25" d="6.25" h="0" />
   <Wall fill="#cccc99" frame="#000000" x="36.25" z="89.0625" w="6.25" d="26.875" h="0" />
   <unique vars="break" />
   <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="34.72222222222222" cz="99.58333333333334" r="1.875" angle="315" />
@@ -138,7 +138,7 @@ Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="
   <set wallHeight="2" />
   <Wall fill="#cccc99" frame="#000000" x="77.1875" z="89.6875" w="6.875" d="15.625" h="0" />
   <Wall fill="#cccc99" frame="#000000" x="71.5625" z="84.0625" w="4.375" d="4.375" h="0" />
-  <Ramp deltaY="2" fill="#cccc99" frame="#000000" x="71.5625" z="91.875" w="4.375" d="11.25" h="0" r="8.75" angle="0" />
+  <Ramp deltaY="2" fill="#cccc99" frame="#000000" x="71.5625" z="91.875" w="4.375" d="11.25" h="0" angle="0" />
   <set wallHeight="6" />
   <Wall fill="#444444" frame="#000000" x="69.0625" z="81.5625" w="0.625" d="0.625" h="0" />
   <Wall fill="#444444" frame="#000000" x="69.0625" z="86.5625" w="0.625" d="0.625" h="0" />
@@ -156,20 +156,20 @@ Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="
   <unique vars="mAct mFri mRe mDie" />
   <Goody y="1.2" start="mRe" speed="5" grenades="2" missiles="2" boosters="2" out="mDie" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" r="1.875" angle="315" />
   <Teleporter mask="false" start="mAct" stop="mFri" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" r="1.875" angle="315" />
-  <And in="@start" out="mAct" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" r="1.875" angle="315" />
-  <Timer in="mAct" wait="10" out="mRe" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" r="1.875" angle="315" />
-  <Timer in="mAct" wait="20" out="mFri" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" r="1.875" angle="315" />
-  <Timer in="mDie" wait="240" out="mAct" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" r="1.875" angle="315" />
+  <And in="@start" out="mAct" />
+  <Timer in="mAct" wait="10" out="mRe" />
+  <Timer in="mAct" wait="20" out="mFri" />
+  <Timer in="mDie" wait="240" out="mAct" />
   <Sound isPlaced="true" sound="1354" y="2" start="mAct" volume="2" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" r="1.875" angle="315" />
   <Teleporter start="@winTeam" win="1000" shape="false" activeRange="2000" fill="#ee0000" frame="#ffff00" cx="6.25" cz="25.625" r="2.5" angle="315" />
   <Teleporter start="@over" win="0" shape="false" activeRange="2000" fill="#ee0000" frame="#ffff00" cx="6.25" cz="25.625" r="2.5" angle="315" />
-  <Timer in="@start" wait="1875 * 3" out="@over" fill="#ee0000" frame="#ffff00" cx="6.25" cz="25.625" r="2.5" angle="315" />
+  <Timer in="@start" wait="1875 * 3" out="@over" />
   <set baseHeight="1.7" />
   <Hologram y="3" shape="1110" yon="50" fill="#ffffff" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" r="8.611111111111107" angle="180" />
   <Hologram y="3" shape="1111" yon="50" fill="#ffff33" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" r="8.611111111111107" angle="180" />
   <Hologram y="3" shape="1112" yon="50" fill="#ff0000" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" r="8.611111111111107" angle="180" />
   <set baseHeight=".8" wallHeight="4.2" />
-  <WallDoor hitMsg="@openNukeB" open="@openNukeB" close="@closeNukeB" openSound="false" closeSound="false" deltaY="0" deltaX="0" deltaZ="5" didOpen="@closeNukeB" closeDelay="100" guardDelay="0" isTarget="true" fill="#cc6666" frame="#000000" x="60.3125" z="43.125" w="0.625" d="5" h="0" r="8.611111111111107" cx="73.95833333333334" cz="113.05555555555556" angle="180" />
+  <WallDoor hitMsg="@openNukeB" open="@openNukeB" close="@closeNukeB" openSound="false" closeSound="false" deltaY="0" deltaX="0" deltaZ="5" didOpen="@closeNukeB" closeDelay="100" guardDelay="0" isTarget="true" fill="#cc6666" frame="#000000" x="60.3125" z="43.125" w="0.625" d="5" h="0" />
   <set baseHeight="5" wallHeight="3" />
   <Wall fill="#cc9999" frame="#000000" x="60.625" z="43.125" w="1.25" d="5" h="0" />
   <set baseHeight="0" wallHeight=".8" />
@@ -183,7 +183,7 @@ Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="
   <set wallHeight="2.5" />
   <Wall fill="#888888" frame="#000000" x="69.6875" z="22.5" w="0.625" d="3.75" h="0" />
   <Wall fill="#888888" frame="#000000" x="73.4375" z="22.5" w="0.625" d="3.75" h="0" />
-  <WallSolid shield="3" canGlow="true" power="0" isTarget="true" fill="#888888" frame="#000000" x="71.5625" z="24.0625" w="3.125" d="0.625" h="0" r="8.75" cx="71.25" cz="20.625" angle="0" />
+  <WallSolid shield="3" canGlow="true" power="0" isTarget="true" fill="#888888" frame="#000000" x="71.5625" z="24.0625" w="3.125" d="0.625" h="0" />
   <set wallHeight=".4" />
   <Wall fill="#888888" frame="#000000" x="71.5625" z="22.5" w="4.375" d="3.75" h="0" y="2.5" />
   <Pill y="1" grabShield="1000" changeOwnerTime="20" fill="#dddddd" frame="#111111" cx="71.875" cz="23.125" r="1.875" angle="315" />
@@ -198,7 +198,7 @@ Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="
   <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="82.08333333333334" cz="26.180555555555557" r="1.875" angle="315" />
   <set baseHeight="lowWall" wallHeight="0" />
   <Wall fill="#cccc99" frame="#000000" x="84.6875" z="42.8125" w="10.625" d="44.375" h="0" />
-  <Ramp deltaY="-lowWall + .8" fill="#cccc99" frame="#000000" x="72.1875" z="62.8125" w="14.375" d="4.375" h="0" r="8.75" angle="270" />
+  <Ramp deltaY="-lowWall + .8" fill="#cccc99" frame="#000000" x="72.1875" z="62.8125" w="14.375" d="4.375" h="0" angle="270" />
   <unique vars="break" />
   <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="82.84722222222223" cz="23.958333333333336" r="1.875" angle="315" />
   <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="82.84722222222223" cz="23.958333333333336" r="1.875" angle="315" />

@@ -51,52 +51,52 @@ You are a fish!  (or a chicken)  {6 minute KillFest}" gravity="1" grenadePower="
   <Wall fill="#ff9999" frame="#000000" x="149.23611111111111" z="132.29166666666666" w="0.6944444444444571" d="53.19444444444444" h="0" />
   <Wall fill="#ff9999" frame="#000000" x="84.23611111111111" z="132.29166666666666" w="0.6944444444444571" d="53.19444444444444" h="0" />
   <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
-  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
+  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
   <set baseHeight="0" wallHeight="80" />
-  <WallDoor midPitch="90" midYaw="45" midY="-36.5" fill="#ff9999" frame="#000000" r="1.8055555555555571" cx="87.15277777777779" cz="32.638888888888886" angle="225" x="115.79861111111111" z="131.35416666666669" w="5.069444444444443" d="0.06944444444442865" h="0" />
+  <WallDoor midPitch="90" midYaw="45" midY="-36.5" fill="#ff9999" frame="#000000" x="115.79861111111111" z="131.35416666666669" w="5.069444444444443" d="0.06944444444442865" h="0" />
   <set wallHeight="10" />
   <Wall fill="#ff9999" frame="#000000" x="136.73611111111111" z="112.29166666666667" w="4.444444444444457" d="4.444444444444457" h="0" />
   <Wall fill="#ff9999" frame="#000000" x="96.73611111111111" z="152.29166666666669" w="4.444444444444443" d="4.444444444444429" h="0" />
-  <Ramp deltaY="4" fill="#ff9999" frame="#000000" x="101.0763888888889" z="156.00694444444446" w="4.375" d="11.875" h="0" r="8.888888888888893" angle="0" />
-  <Ramp deltaY="4" fill="#ff9999" frame="#000000" x="92.95138888888889" z="147.88194444444446" w="11.875" d="4.375" h="0" r="8.888888888888886" angle="90" />
-  <Ramp deltaY="4" fill="#ff9999" frame="#000000" x="132.32638888888889" z="108.50694444444444" w="4.375" d="11.875" h="0" r="8.888888888888893" angle="180" />
-  <Ramp deltaY="4" fill="#ff9999" frame="#000000" x="140.45138888888889" z="116.63194444444444" w="11.875" d="4.375" h="0" r="8.888888888888893" angle="270" />
+  <Ramp deltaY="4" fill="#ff9999" frame="#000000" x="101.0763888888889" z="156.00694444444446" w="4.375" d="11.875" h="0" angle="0" />
+  <Ramp deltaY="4" fill="#ff9999" frame="#000000" x="92.95138888888889" z="147.88194444444446" w="11.875" d="4.375" h="0" angle="90" />
+  <Ramp deltaY="4" fill="#ff9999" frame="#000000" x="132.32638888888889" z="108.50694444444444" w="4.375" d="11.875" h="0" angle="180" />
+  <Ramp deltaY="4" fill="#ff9999" frame="#000000" x="140.45138888888889" z="116.63194444444444" w="11.875" d="4.375" h="0" angle="270" />
   <set baseHeight="4" wallHeight="0" />
   <Wall fill="#ff9999" frame="#000000" x="101.11111111111111" z="147.91666666666669" w="4.444444444444443" d="4.444444444444429" h="0" />
   <Wall fill="#ff9999" frame="#000000" x="132.36111111111111" z="116.66666666666667" w="4.444444444444457" d="4.444444444444457" h="0" />
   <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
-  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
+  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
   <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
-  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
+  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
   <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
-  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
+  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
   <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
-  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
+  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
   <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
-  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" fill="#cc0066" frame="#cc0066" cx="87.15277777777779" cz="32.638888888888886" r="1.8055555555555571" angle="225" />
+  <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" grenades="12" shape="1008" y="1.5" speed="5" fill="#a08300" frame="#000000" cx="146.45833333333331" cz="162.0138888888889" r="2.569444444444443" angle="135" />
-  <Timer in="mDie" wait="100" out="mHi" fill="#a08300" frame="#000000" cx="146.45833333333331" cz="162.0138888888889" r="2.569444444444443" angle="135" />
-  <And in="@start" out="mHi" fill="#a08300" frame="#000000" cx="146.45833333333331" cz="162.0138888888889" r="2.569444444444443" angle="135" />
+  <Timer in="mDie" wait="100" out="mHi" />
+  <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" missiles="8" shape="1008" y="2" speed="5" fill="#660099" frame="#000000" cx="101.45833333333334" cz="147.6388888888889" r="2.569444444444443" angle="225" />
-  <Timer in="mDie" wait="100" out="mHi" fill="#660099" frame="#000000" cx="101.45833333333334" cz="147.6388888888889" r="2.569444444444443" angle="225" />
-  <And in="@start" out="mHi" fill="#660099" frame="#000000" cx="101.45833333333334" cz="147.6388888888889" r="2.569444444444443" angle="225" />
+  <Timer in="mDie" wait="100" out="mHi" />
+  <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" grenades="12" shape="1008" y="1.5" speed="5" fill="#a08300" frame="#000000" cx="87.08333333333334" cz="102.63888888888889" r="2.56944444444445" angle="315" />
-  <Timer in="mDie" wait="100" out="mHi" fill="#a08300" frame="#000000" cx="87.08333333333334" cz="102.63888888888889" r="2.56944444444445" angle="315" />
-  <And in="@start" out="mHi" fill="#a08300" frame="#000000" cx="87.08333333333334" cz="102.63888888888889" r="2.56944444444445" angle="315" />
+  <Timer in="mDie" wait="100" out="mHi" />
+  <And in="@start" out="mHi" />
   <set baseHeight="3.5" wallHeight="1" />
   <Field deltaY=".5" deltaZ="0" deltaX="0" watch="playerMask" start="@biggy" stop="@DieBiggy" fill="#a08300" frame="#000000" x="115.7638888888889" z="131.31944444444446" w="5" d="5" h="0" r="2.56944444444445" cx="87.08333333333334" cz="102.63888888888889" angle="315" />
   <unique vars="mHi mDie" />
   <Goody start="@biggy" out="@DieBiggy" missiles="4" grenades="8" boosters="3" shape="1009" y="2.5" speed="5" fill="#00aa00" frame="#000000" cx="115.83333333333334" cz="131.3888888888889" r="2.569444444444443" angle="45" />
-  <Timer in="@DieBiggy" wait="200" out="@biggy" fill="#00aa00" frame="#000000" cx="115.83333333333334" cz="131.3888888888889" r="2.569444444444443" angle="45" />
-  <And in="@start" out="@biggy" fill="#00aa00" frame="#000000" cx="115.83333333333334" cz="131.3888888888889" r="2.569444444444443" angle="45" />
+  <Timer in="@DieBiggy" wait="200" out="@biggy" />
+  <And in="@start" out="@biggy" />
   <set baseHeight="4" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" missiles="8" shape="1008" y="2" speed="5" fill="#660099" frame="#000000" cx="132.08333333333331" cz="117.01388888888889" r="2.56944444444445" angle="45" />
-  <Timer in="mDie" wait="100" out="mHi" fill="#660099" frame="#000000" cx="132.08333333333331" cz="117.01388888888889" r="2.56944444444445" angle="45" />
-  <And in="@start" out="mHi" fill="#660099" frame="#000000" cx="132.08333333333331" cz="117.01388888888889" r="2.56944444444445" angle="45" />
+  <Timer in="mDie" wait="100" out="mHi" />
+  <And in="@start" out="mHi" />
   <set baseHeight="20" />
   <Incarnator fill="#00aa00" frame="#000000" cx="95.83333333333334" cz="111.38888888888889" r="1.94444444444445" angle="315" />
   <Incarnator fill="#00aa00" frame="#000000" cx="80.20833333333334" cz="111.38888888888889" r="1.94444444444445" angle="315" />

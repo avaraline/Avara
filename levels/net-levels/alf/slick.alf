@@ -11,34 +11,34 @@
   <Wall fill="#ffffff" frame="#000000" x="170.55555555555557" z="248.54166666666669" w="10" d="10" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="195.55555555555557" z="248.54166666666669" w="10" d="10" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="220.55555555555557" z="248.54166666666669" w="10" d="10" h="0" />
-  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="130.55555555555557" z="207.91666666666669" w="5" d="18.75" h="0" r="2.5" angle="270" />
-  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="130.55555555555557" z="239.16666666666669" w="5" d="18.75" h="0" r="2.5" angle="270" />
-  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="211.18055555555557" z="158.54166666666669" w="18.75" d="5" h="0" r="2.5" angle="0" />
-  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="179.93055555555557" z="158.54166666666669" w="18.75" d="5" h="0" r="2.5" angle="0" />
-  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="260.55555555555554" z="207.91666666666669" w="5" d="18.75" h="0" r="2.5" angle="90" />
-  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="260.55555555555554" z="239.16666666666669" w="5" d="18.75" h="0" r="2.5" angle="90" />
-  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="211.18055555555557" z="288.5416666666667" w="18.75" d="5" h="0" r="2.5" angle="180" />
-  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="179.93055555555557" z="288.5416666666667" w="18.75" d="5" h="0" r="2.5" angle="180" />
-  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="130.55555555555557" z="187.29166666666669" w="5" d="20" h="0" r="2.5" angle="0" />
-  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="130.55555555555557" z="259.7916666666667" w="5" d="20" h="0" r="2.5" angle="180" />
-  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="260.55555555555554" z="187.29166666666669" w="5" d="20" h="0" r="2.5" angle="0" />
-  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="260.55555555555554" z="259.7916666666667" w="5" d="20" h="0" r="2.5" angle="180" />
-  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="231.80555555555557" z="158.54166666666669" w="20" d="5" h="0" r="2.5" angle="90" />
-  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="159.30555555555557" z="158.54166666666669" w="20" d="5" h="0" r="2.5" angle="270" />
-  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="231.80555555555557" z="288.5416666666667" w="20" d="5" h="0" r="2.5" angle="90" />
-  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="159.30555555555557" z="288.5416666666667" w="20" d="5" h="0" r="2.5" angle="270" />
-  <WallDoor yon="rampYon" status="isOpen" deltaY="hLev4" pitch="lev4pitch" roll="lev4roll" fill="#ffffff" frame="#000000" x="253.05555555555554" z="166.04166666666669" w="20" d="20" h="0.25" r="2.5" cx="160" cz="288.61111111111114" angle="270" />
-  <WallDoor yon="rampYon" status="isOpen" deltaY="hLev4" pitch="lev4pitch" roll="-lev4roll" fill="#ffffff" frame="#000000" x="138.05555555555557" z="166.04166666666669" w="20" d="20" h="0.25" r="2.5" cx="160" cz="288.61111111111114" angle="270" />
-  <WallDoor yon="rampYon" status="isOpen" deltaY="hLev4" pitch="-lev4pitch" roll="-lev4roll" fill="#ffffff" frame="#000000" x="138.05555555555557" z="281.0416666666667" w="20" d="20" h="0.25" r="2.5" cx="160" cz="288.61111111111114" angle="270" />
-  <WallDoor yon="rampYon" status="isOpen" deltaY="hLev4" pitch="-lev4pitch" roll="lev4roll" fill="#ffffff" frame="#000000" x="253.05555555555554" z="281.0416666666667" w="20" d="20" h="0.25" r="2.5" cx="160" cz="288.61111111111114" angle="270" />
+  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="130.55555555555557" z="207.91666666666669" w="5" d="18.75" h="0" angle="270" />
+  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="130.55555555555557" z="239.16666666666669" w="5" d="18.75" h="0" angle="270" />
+  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="211.18055555555557" z="158.54166666666669" w="18.75" d="5" h="0" angle="0" />
+  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="179.93055555555557" z="158.54166666666669" w="18.75" d="5" h="0" angle="0" />
+  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="260.55555555555554" z="207.91666666666669" w="5" d="18.75" h="0" angle="90" />
+  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="260.55555555555554" z="239.16666666666669" w="5" d="18.75" h="0" angle="90" />
+  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="211.18055555555557" z="288.5416666666667" w="18.75" d="5" h="0" angle="180" />
+  <Ramp yon="rampYon" y="hLev2" deltaY="lev2Delta" thickness="lev2Thickness" fill="#ffffff" frame="#cc0099" x="179.93055555555557" z="288.5416666666667" w="18.75" d="5" h="0" angle="180" />
+  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="130.55555555555557" z="187.29166666666669" w="5" d="20" h="0" angle="0" />
+  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="130.55555555555557" z="259.7916666666667" w="5" d="20" h="0" angle="180" />
+  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="260.55555555555554" z="187.29166666666669" w="5" d="20" h="0" angle="0" />
+  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="260.55555555555554" z="259.7916666666667" w="5" d="20" h="0" angle="180" />
+  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="231.80555555555557" z="158.54166666666669" w="20" d="5" h="0" angle="90" />
+  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="159.30555555555557" z="158.54166666666669" w="20" d="5" h="0" angle="270" />
+  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="231.80555555555557" z="288.5416666666667" w="20" d="5" h="0" angle="90" />
+  <Ramp yon="rampYon" y="hLev3" deltaY="lev3Delta" thickness="lev3Thickness" fill="#ffffff" frame="#cc0099" x="159.30555555555557" z="288.5416666666667" w="20" d="5" h="0" angle="270" />
+  <WallDoor yon="rampYon" status="isOpen" deltaY="hLev4" pitch="lev4pitch" roll="lev4roll" fill="#ffffff" frame="#000000" x="253.05555555555554" z="166.04166666666669" w="20" d="20" h="0.25" />
+  <WallDoor yon="rampYon" status="isOpen" deltaY="hLev4" pitch="lev4pitch" roll="-lev4roll" fill="#ffffff" frame="#000000" x="138.05555555555557" z="166.04166666666669" w="20" d="20" h="0.25" />
+  <WallDoor yon="rampYon" status="isOpen" deltaY="hLev4" pitch="-lev4pitch" roll="-lev4roll" fill="#ffffff" frame="#000000" x="138.05555555555557" z="281.0416666666667" w="20" d="20" h="0.25" />
+  <WallDoor yon="rampYon" status="isOpen" deltaY="hLev4" pitch="-lev4pitch" roll="lev4roll" fill="#ffffff" frame="#000000" x="253.05555555555554" z="281.0416666666667" w="20" d="20" h="0.25" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="260.55555555555554" cz="223.54166666666669" r="2.5" angle="90" />
-  <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="260.55555555555554" z="223.54166666666669" w="10" d="10" h="0" r="2.5" angle="90" />
+  <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="260.55555555555554" z="223.54166666666669" w="10" d="10" h="0" angle="90" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="130.55555555555557" cz="223.54166666666669" r="2.5" angle="270" />
-  <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="130.55555555555557" z="223.54166666666669" w="10" d="10" h="0" r="2.5" angle="270" />
+  <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="130.55555555555557" z="223.54166666666669" w="10" d="10" h="0" angle="270" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="195.55555555555557" cz="288.5416666666667" r="2.5" angle="180" />
-  <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="195.55555555555557" z="288.5416666666667" w="10" d="10" h="0" r="2.5" angle="180" />
+  <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="195.55555555555557" z="288.5416666666667" w="10" d="10" h="0" angle="180" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="195.55555555555557" cz="158.54166666666669" r="2.5" angle="0" />
-  <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="195.55555555555557" z="158.54166666666669" w="10" d="10" h="0" r="2.5" angle="0" />
+  <Ramp yon="rampYon" deltaY="grDelta" y="grHeight" thickness="grThick" fill="#ffffff" frame="#000000" x="195.55555555555557" z="158.54166666666669" w="10" d="10" h="0" angle="0" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="170.55555555555557" cz="248.54166666666669" r="2.5" angle="225" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="220.55555555555557" cz="248.54166666666669" r="2.5" angle="135" />
   <Incarnator y="20" fill="#ffffff" frame="#000000" cx="220.55555555555557" cz="198.54166666666669" r="2.5" angle="45" />
@@ -54,15 +54,15 @@
   <unique vars="mRevolve" />
   <set mySpeed="0.2" baseHeight="0" />
   <Door shape="bspDoubleCube" scale="8" y="5" targetGroup="targ1" canGlow="true" yon="3000" stopSound="0" openSound="0" closeSound="0" openSpeed="mySpeed" closeSpeed="100 -mySpeed" closeDelay="100 / openSpeed -1" deltaY="0" yaw="360" didClose="mRevolve" open="mRevolve" close="mRevolve" shotPower="20" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
-  <And in="@start" out="mRevolve" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
+  <And in="@start" out="mRevolve" />
   <Guard hitScore="0" yon="0.01" mask="-1" watch="targ1" pitch="-90" shield="-1" y="hLev5 + 80.1" freq="160" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
   <unique vars="mg1 mg2 mg3 mWait mNext" />
   <set goodyY="11" />
   <Goody freq="1" shape="bspGrenade" speed="10" y="goodyY" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
   <Goody freq="1" shape="bspMissile" speed="10" y="goodyY" start="mg2" stop="mg3" out="mWait" missiles="2" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
   <Goody scale="0.5" freq="1" speed="10" y="goodyY" start="mg3" stop="mg1" out="mWait" boosters="1" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="320" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
-  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="320" />
+  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" />
   <Teleporter shape="0" y="-100" win="100" start="@winTeam" activeRange="3000" fill="#770000" frame="#bb0000" cx="195.625" cz="223.61111111111111" r="3.125" angle="225" />
   <set baseHeight="hLev5" wallHeight="0" wallYon="0.01" />
   <Wall fill="#000033" frame="#000000" x="121.18055555555556" z="124.79166666666669" w="5" d="17.5" h="0" />

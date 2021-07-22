@@ -7,10 +7,10 @@
   <GroundColor fill="#220000" frame="#220000" />
   <SkyColor fill="#602500" frame="#000044" />
   <unique vars="mDoGrenades mGotGrenades mDoMissiles mGotMissiles mDoBoosters mGotBoosters" />
-  <Timer in="mGotGrenades" out="mDoGrenades" wait="500" fill="#602500" frame="#000044" cx="53.75" cz="7.5" r="1.25" angle="315" />
-  <Timer in="mGotMissiles" out="mDoMissiles" wait="300" fill="#602500" frame="#000044" cx="53.75" cz="7.5" r="1.25" angle="315" />
-  <Timer in="mGotBoosters" out="mDoBoosters" wait="1000" fill="#602500" frame="#000044" cx="53.75" cz="7.5" r="1.25" angle="315" />
-  <And in="@start" out.0="mDoGrenades" out.1="mDoMissiles" out.2="mDoBoosters" fill="#602500" frame="#000044" cx="53.75" cz="7.5" r="1.25" angle="315" />
+  <Timer in="mGotGrenades" out="mDoGrenades" wait="500" />
+  <Timer in="mGotMissiles" out="mDoMissiles" wait="300" />
+  <Timer in="mGotBoosters" out="mDoBoosters" wait="1000" />
+  <And in="@start" out.0="mDoGrenades" out.1="mDoMissiles" out.2="mDoBoosters" />
   <set wallHeight="17" />
   <Wall fill="#cc9900" frame="#000000" x="1.875" z="1.875" w="1.25" d="1.25" h="0" />
   <set wallHeight="17" />

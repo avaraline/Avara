@@ -8,9 +8,17 @@ from dumb_round import dumb_round
 
 
 DEAD_ATTRS = {
-    'WallDoor': ['angle', 'cx', 'cz', 'extent', 'r'],
-    'WallSolid': ['angle', 'cx', 'cz', 'extent', 'r'],
-    'Ramp': ['cx', 'cz', 'h', 'r'],
+    'WallDoor': ['angle', 'cx', 'cz', 'r'],
+    'WallSolid': ['angle', 'cx', 'cz', 'r'],
+    'Ramp': ['cx', 'cz', 'r'],
+    'Area': ['fill', 'frame', 'angle'],
+    'Text': ['fill', 'frame', 'angle'],
+    'And': ['fill', 'frame', 'angle', 'cx', 'cz', 'r'],
+    'Base': ['fill', 'frame'],
+    'Counter': ['fill', 'frame', 'angle', 'cx', 'cz', 'r'],
+    'Delay': ['fill', 'frame', 'angle', 'cx', 'cz', 'r'],
+    'Distributor': ['fill', 'frame', 'angle', 'cx', 'cz', 'r'],
+    'Timer': ['fill', 'frame', 'angle', 'cx', 'cz', 'r'],
 }
 
 

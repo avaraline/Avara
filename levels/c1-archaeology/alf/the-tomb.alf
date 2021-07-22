@@ -50,25 +50,25 @@
   <Wall fill="#ff9933" frame="#000000" x="8.819444444444445" z="144.44444444444446" w="2.5" d="142.5" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="81.31944444444446" z="74.44444444444444" w="142.5" d="2.5" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="78.81944444444446" z="216.94444444444446" w="142.5" d="2.5" h="8" />
-  <Ramp y="0" thickness=".5" deltaY="6" fill="#ff9933" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" r="11.041666666666671" angle="0" />
-  <WallSolid canGlow="1" isTarget="1" shield="2" killMsg="@oEast" fill="#cc9933" frame="#000000" x="80.06944444444444" z="76.875" w="3.75" d="2.5" h="2" r="11.041666666666671" cx="81.04166666666667" cz="83.50694444444446" angle="0" y="8" />
+  <Ramp y="0" thickness=".5" deltaY="6" fill="#ff9933" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" angle="0" />
+  <WallSolid canGlow="1" isTarget="1" shield="2" killMsg="@oEast" fill="#cc9933" frame="#000000" x="80.06944444444444" z="76.875" w="3.75" d="2.5" h="2" y="8" />
   <Wall fill="#ff9933" frame="#000000" x="80.06944444444446" z="146.94444444444446" w="140" d="137.5" h="2" y="8" />
   <Wall fill="#ff9933" frame="#000000" x="83.19444444444444" z="92.56944444444444" w="2.5" d="33.75" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="76.94444444444444" z="90.69444444444444" w="2.5" d="30" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="63.50694444444444" z="110.69444444444444" w="41.875" d="2.5" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="22.569444444444443" z="110.69444444444444" w="25" d="2.5" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="41.31944444444444" z="110.69444444444446" w="2.5" d="40" h="8" />
-  <Counter n="24" in="@dead" out="@winAll" fill="#ff9933" frame="#000000" cx="81.04166666666667" cz="83.50694444444446" r="11.041666666666671" angle="0" />
+  <Counter n="24" in="@dead" out="@winAll" />
   <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="4" fill="#996600" frame="#ffff33" cx="64.02777777777779" cz="82.43055555555556" r="1.875" angle="45" />
   <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="7" fill="#996600" frame="#ffff33" cx="63.402777777777786" cz="94.30555555555556" r="1.875" angle="45" />
   <Wall fill="#ff9933" frame="#000000" x="26.631944444444446" z="93.81944444444444" w="8.125" d="8.75" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="53.81944444444445" z="78.81944444444444" w="6.25" d="6.25" h="3" />
-  <WallSolid canGlow="1" isTarget="1" shield="2" killMsg="@oEast" fill="#cc9900" frame="#000000" x="37.56944444444444" z="110.625" w="5" d="2.5" h="8" r="1.875" cx="63.402777777777786" cz="94.30555555555556" angle="45" />
+  <WallSolid canGlow="1" isTarget="1" shield="2" killMsg="@oEast" fill="#cc9900" frame="#000000" x="37.56944444444444" z="110.625" w="5" d="2.5" h="8" />
   <Guard shield="5" y="7" killMsg="@dead" fill="#ffff00" frame="#000000" cx="145.13888888888889" cz="112.98611111111111" r="1.25" angle="135" />
   <Wall fill="#ff9933" frame="#000000" x="26.631944444444446" z="127.56944444444446" w="8.125" d="8.75" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="46.00694444444444" z="146.94444444444446" w="71.875" d="2.5" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="83.19444444444444" z="133.50694444444446" w="2.5" d="29.375" h="8" />
-  <WallSolid canGlow="1" isTarget="1" shield="2" killMsg="@oEast" fill="#cc9900" frame="#000000" x="83.19444444444444" z="115.38194444444444" w="2.5" d="6.875" h="8" r="1.25" cx="145.13888888888889" cz="112.98611111111111" angle="135" />
+  <WallSolid canGlow="1" isTarget="1" shield="2" killMsg="@oEast" fill="#cc9900" frame="#000000" x="83.19444444444444" z="115.38194444444444" w="2.5" d="6.875" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="108.50694444444446" z="146.94444444444446" w="48.125" d="2.5" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="89.44444444444444" z="119.75694444444446" w="2.5" d="44.375" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="90.69444444444444" z="92.56944444444444" w="12.5" d="2.5" h="8" />
@@ -106,7 +106,7 @@
   <Guard shield="5" y="4" killMsg="@dead" fill="#ffff00" frame="#000000" cx="80.13888888888889" cz="106.73611111111111" r="1.25" angle="135" />
   <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#cc9900" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" r="2.5" cx="120.69444444444444" cz="160.69444444444446" angle="0" />
   <Wall fill="#ff9933" frame="#000000" x="131.31944444444446" z="203.19444444444446" w="2.5" d="25" h="8" />
-  <WallSolid canGlow="1" isTarget="1" shield="4" killMsg="@oEast" fill="#cc9900" frame="#000000" x="131.31944444444446" z="181.94444444444446" w="2.5" d="17.5" h="8" r="2.5" cx="120.69444444444444" cz="160.69444444444446" angle="0" />
+  <WallSolid canGlow="1" isTarget="1" shield="4" killMsg="@oEast" fill="#cc9900" frame="#000000" x="131.31944444444446" z="181.94444444444446" w="2.5" d="17.5" h="8" />
   <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#cc9900" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" r="2.5" cx="120.06944444444444" cz="170.06944444444446" angle="0" />
   <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#cc9900" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" r="2.5" cx="110.06944444444444" cz="182.56944444444446" angle="0" />
   <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#cc9900" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" r="2.5" cx="116.94444444444444" cz="192.56944444444446" angle="0" />
@@ -119,7 +119,7 @@
   <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#cc9900" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" r="2.5" cx="89.44444444444444" cz="203.81944444444446" angle="0" />
   <Wall fill="#ff9933" frame="#000000" x="75.06944444444444" z="160.69444444444446" w="2.5" d="25" h="8" />
   <Wall fill="#ff9933" frame="#000000" x="75.06944444444444" z="203.19444444444446" w="2.5" d="25" h="8" />
-  <WallSolid canGlow="1" isTarget="1" shield="4" killMsg="@oEast" fill="#cc9900" frame="#000000" x="75.06944444444444" z="181.94444444444446" w="2.5" d="17.5" h="8" r="2.5" cx="89.44444444444444" cz="203.81944444444446" angle="0" />
+  <WallSolid canGlow="1" isTarget="1" shield="4" killMsg="@oEast" fill="#cc9900" frame="#000000" x="75.06944444444444" z="181.94444444444446" w="2.5" d="17.5" h="8" />
   <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#996600" frame="#ffff33" cx="87.08333333333334" cz="195.55555555555557" r="1.875" angle="45" />
   <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#996600" frame="#ffff33" cx="87.70833333333334" cz="168.05555555555557" r="1.875" angle="45" />
   <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="2" fill="#996600" frame="#ffff33" cx="100.83333333333334" cz="179.93055555555557" r="1.875" angle="45" />
@@ -139,8 +139,8 @@
   <YonBox yon="30" fill="#ffff00" frame="#000000" x="92.56944444444444" z="110.86805555555556" w="18.75" d="72.56944444444443" h="8" r="1.25" angle="135" />
   <YonBox yon="55" fill="#ffff00" frame="#000000" x="126.94444444444446" z="110.86805555555556" w="50" d="72.56944444444443" h="8" r="1.25" angle="135" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="214.51388888888889" cz="25.555555555555557" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="1000" fill="#ffffff" frame="#000000" cx="214.51388888888889" cz="25.555555555555557" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1000" />
   <Goody shape="bspGrenade" y="8" speed="2" yon="20" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="214.51388888888889" cz="25.555555555555557" r="1.25" angle="225" />
   <Teleporter win="1000" start="@winAll" activeRange="2000" fill="#ffff33" frame="#000000" cx="100.97222222222223" cz="42.29166666666667" r="5" angle="225" />
   <Wall fill="#ff9933" frame="#000000" x="53.81944444444445" z="92.56944444444444" w="6.25" d="6.25" h="3" />

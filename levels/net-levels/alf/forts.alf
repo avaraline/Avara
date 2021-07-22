@@ -3,9 +3,9 @@
   <Wall fill="#ffff00" frame="#000000" x="105.48611111111111" z="235.2777777777778" w="2.5" d="2.5" h="6" />
   <Wall fill="#ffff00" frame="#000000" x="105.48611111111111" z="188.4027777777778" w="2.5" d="2.5" h="6" />
   <Wall fill="#ffff00" frame="#000000" x="152.36111111111111" z="188.4027777777778" w="2.5" d="2.5" h="6" />
-  <WallDoor middle="0.2" midZ="15 / 8" deltaZ="15 / 8" deltaY="0" deltaX="-5" open="@oGreenSouth" close="@oGreenSouth" closeDelay="100" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#008800" frame="#000000" r="4.375" cx="71.11111111111111" cz="48.125" angle="180" x="71.11111111111111" z="48.125" w="7.5" d="1.25" h="2.5" />
-  <Area mask="T1" enter="@oGreenSouth" fill="#008800" frame="#000000" cx="71.11111111111111" cz="48.125" r="4.375" angle="180" />
-  <Text text="The password is ’rugrat’." fill="#008800" frame="#000000" cx="71.11111111111111" cz="48.125" r="4.375" angle="180" />
+  <WallDoor middle="0.2" midZ="15 / 8" deltaZ="15 / 8" deltaY="0" deltaX="-5" open="@oGreenSouth" close="@oGreenSouth" closeDelay="100" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#008800" frame="#000000" x="71.11111111111111" z="48.125" w="7.5" d="1.25" h="2.5" />
+  <Area mask="T1" enter="@oGreenSouth" cx="71.11111111111111" cz="48.125" r="4.375" />
+  <Text text="The password is ’rugrat’." cx="71.11111111111111" cz="48.125" r="4.375" />
   <Incarnator mask="T1" fill="#006600" frame="#006600" cx="57.361111111111114" cz="41.25" r="1.25" angle="315" />
   <Incarnator mask="T1" fill="#006600" frame="#006600" cx="86.11111111111111" cz="31.25" r="1.25" angle="315" />
   <Incarnator mask="T1" fill="#006600" frame="#006600" cx="69.86111111111111" cz="14.375" r="1.25" angle="315" />
@@ -32,12 +32,12 @@
   <Wall fill="#00ee00" frame="#000000" x="77.98611111111111" z="48.125" w="6.25" d="2.5" h="0" />
   <Wall fill="#00ee00" frame="#000000" x="71.11111111111111" z="48.125" w="7.5" d="2.5" h="0.5" y="2.5" />
   <Teleporter start="@yellowWin" mask="T2" win="1000" fill="#ffff00" frame="#ffff00" cx="71.73611111111111" cz="26.875" r="1.25" angle="315" />
-  <WallDoor deltaY="0" deltaX="2" open="@yellowWin" fill="#00ee00" frame="#000000" r="1.25" cx="71.73611111111111" cz="26.875" angle="315" x="74.23611111111111" z="20.3125" w="15" d="1.875" h="1.75" />
-  <WallDoor deltaY="0" deltaX="-2" open="@yellowWin" fill="#00ee00" frame="#000000" r="1.25" cx="71.73611111111111" cz="26.875" angle="315" x="69.23611111111111" z="33.4375" w="15" d="1.875" h="1.75" />
-  <WallDoor deltaY="0" deltaZ="2" open="@yellowWin" fill="#00ee00" frame="#000000" r="1.25" cx="71.73611111111111" cz="26.875" angle="315" x="78.29861111111111" z="29.375" w="1.875" d="15" h="1.75" />
-  <WallDoor deltaY="0" deltaZ="-2" open="@yellowWin" fill="#00ee00" frame="#000000" r="1.25" cx="71.73611111111111" cz="26.875" angle="315" x="65.17361111111111" z="24.375" w="1.875" d="15" h="1.75" />
-  <WallDoor middle="0.2" midZ="-15 / 8" deltaZ="-15 / 8" deltaY="0" deltaX="-5" open="@oYellowNorth" close="@cYellowNorth" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#ffcc00" frame="#000000" r="4.375" cx="129.23611111111111" cz="188.4027777777778" angle="180" x="129.23611111111111" z="188.4027777777778" w="7.5" d="1.25" h="2.5" />
-  <Area mask="T2" enter="@oYellowNorth" exit="@cYellowNorth" fill="#ffcc00" frame="#000000" cx="129.23611111111111" cz="188.4027777777778" r="4.375" angle="180" />
+  <WallDoor deltaY="0" deltaX="2" open="@yellowWin" fill="#00ee00" frame="#000000" x="74.23611111111111" z="20.3125" w="15" d="1.875" h="1.75" />
+  <WallDoor deltaY="0" deltaX="-2" open="@yellowWin" fill="#00ee00" frame="#000000" x="69.23611111111111" z="33.4375" w="15" d="1.875" h="1.75" />
+  <WallDoor deltaY="0" deltaZ="2" open="@yellowWin" fill="#00ee00" frame="#000000" x="78.29861111111111" z="29.375" w="1.875" d="15" h="1.75" />
+  <WallDoor deltaY="0" deltaZ="-2" open="@yellowWin" fill="#00ee00" frame="#000000" x="65.17361111111111" z="24.375" w="1.875" d="15" h="1.75" />
+  <WallDoor middle="0.2" midZ="-15 / 8" deltaZ="-15 / 8" deltaY="0" deltaX="-5" open="@oYellowNorth" close="@cYellowNorth" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#ffcc00" frame="#000000" x="129.23611111111111" z="188.4027777777778" w="7.5" d="1.25" h="2.5" />
+  <Area mask="T2" enter="@oYellowNorth" exit="@cYellowNorth" cx="129.23611111111111" cz="188.4027777777778" r="4.375" />
   <Incarnator mask="T2" fill="#ffff00" frame="#006600" cx="141.73611111111111" cz="196.5277777777778" r="1.25" angle="315" />
   <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#ffff00" frame="#006600" cx="152.29166666666669" cz="235.2777777777778" r="1.25" angle="134.5" />
   <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#ffff00" frame="#006600" cx="105.45138888888889" cz="235.2777777777778" r="1.25" angle="134.5" />
@@ -59,10 +59,10 @@
   <Wall fill="#ffff00" frame="#000000" x="129.23611111111111" z="188.4027777777778" w="7.5" d="2.5" h="0.5" y="2.5" />
   <Incarnator mask="T2" fill="#ffff00" frame="#006600" cx="112.98611111111111" cz="196.5277777777778" r="1.25" angle="315" />
   <Incarnator mask="T2" fill="#ffff00" frame="#006600" cx="129.23611111111111" cz="225.9027777777778" r="1.25" angle="315" />
-  <WallDoor deltaY="0" deltaX="-2" open="@greenWin" fill="#ffff00" frame="#000000" r="1.25" cx="129.23611111111111" cz="225.9027777777778" angle="315" x="126.11111111111111" z="216.2152777777778" w="15" d="1.875" h="1.75" />
-  <WallDoor deltaY="0" deltaX="2" open="@greenWin" fill="#ffff00" frame="#000000" r="1.25" cx="129.23611111111111" cz="225.9027777777778" angle="315" x="131.11111111111111" z="203.0902777777778" w="15" d="1.875" h="1.75" />
-  <WallDoor deltaY="0" deltaZ="2" open="@greenWin" fill="#ffff00" frame="#000000" r="1.25" cx="129.23611111111111" cz="225.9027777777778" angle="315" x="135.17361111111111" z="212.1527777777778" w="1.875" d="15" h="1.75" />
-  <WallDoor deltaY="0" deltaZ="-2" open="@greenWin" fill="#ffff00" frame="#000000" r="1.25" cx="129.23611111111111" cz="225.9027777777778" angle="315" x="122.04861111111111" z="207.1527777777778" w="1.875" d="15" h="1.75" />
+  <WallDoor deltaY="0" deltaX="-2" open="@greenWin" fill="#ffff00" frame="#000000" x="126.11111111111111" z="216.2152777777778" w="15" d="1.875" h="1.75" />
+  <WallDoor deltaY="0" deltaX="2" open="@greenWin" fill="#ffff00" frame="#000000" x="131.11111111111111" z="203.0902777777778" w="15" d="1.875" h="1.75" />
+  <WallDoor deltaY="0" deltaZ="2" open="@greenWin" fill="#ffff00" frame="#000000" x="135.17361111111111" z="212.1527777777778" w="1.875" d="15" h="1.75" />
+  <WallDoor deltaY="0" deltaZ="-2" open="@greenWin" fill="#ffff00" frame="#000000" x="122.04861111111111" z="207.1527777777778" w="1.875" d="15" h="1.75" />
   <Teleporter start="@greenWin" mask="T1" win="1000" fill="#008800" frame="#008800" cx="128.61111111111111" cz="209.6527777777778" r="1.25" angle="315" />
   <Wall fill="#0099ff" frame="#000000" x="39.236111111111114" z="120.625" w="10" d="10" h="1.5" />
   <Wall fill="#0099ff" frame="#000000" x="101.73611111111111" z="78.125" w="5" d="5" h="1.25" />
@@ -89,23 +89,23 @@ be opened by hitting one of the walls.
   <Wall fill="#00ee00" frame="#000000" x="71.73611111111111" z="6.25" w="5" d="2.5" h="0.5" />
   <SkyColor fill="#880000" frame="#440000" />
   <GroundColor fill="#444444" frame="#440000" />
-  <Counter n="4" in="@greenKill" out="@yellowWin" fill="#444444" frame="#440000" cx="119.27083333333334" cz="45.451388888888886" r="1.5625" angle="180" />
-  <Counter n="4" in="@yellowKill" out="@greenWin" fill="#444444" frame="#440000" cx="119.27083333333334" cz="45.451388888888886" r="1.5625" angle="180" />
+  <Counter n="4" in="@greenKill" out="@yellowWin" />
+  <Counter n="4" in="@yellowKill" out="@greenWin" />
   <Sound y="60" sound="snJungle" isAmbient="true" loopCount="-1" volume="500" fill="#0066ff" frame="#000000" cx="66.38888888888889" cz="92.15277777777779" r="9.375" angle="225" />
   <Dome fill="#0066ff" frame="#000000" cx="2.5" cz="105.83333333333334" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="2.5" cz="105.83333333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="2.5" cz="105.83333333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" y="4" speed="2" grenades="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="2.5" cz="105.83333333333334" r="1.25" angle="225" />
   <Dome fill="#ffffff" frame="#000000" cx="154.375" cz="110.20833333333334" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="154.375" cz="110.20833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="154.375" cz="110.20833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" y="4" speed="2" grenades="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="154.375" cz="110.20833333333334" r="1.25" angle="225" />
   <Dome fill="#ffffff" frame="#000000" cx="102.5" cz="102.08333333333334" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="102.5" cz="102.08333333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="102.5" cz="102.08333333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspMissile" y="4" speed="2" missiles="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="102.5" cz="102.08333333333334" r="1.25" angle="225" />
   <Wall fill="#ffff00" frame="#000000" x="107.98611111111111" z="211.875" w="2.5" d="5" h="1" />
   <Wall fill="#ffff00" frame="#000000" x="110.48611111111111" z="211.875" w="2.5" d="5" h="0.5" />

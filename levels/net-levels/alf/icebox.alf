@@ -23,20 +23,20 @@ derek@leapnet.com" information="icebox" />
   <Wall fill="#3366ff" frame="#3366ff" x="105.69444444444444" z="105.625" w="7.5" d="7.5" h="25" />
   <Wall fill="#3366ff" frame="#3366ff" x="13.194444444444446" z="105.625" w="7.5" d="7.5" h="25" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="20.90277777777778" cz="19.791666666666668" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="20.90277777777778" cz="19.791666666666668" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="20.90277777777778" cz="19.791666666666668" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="98.95833333333334" cz="20.208333333333336" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="98.95833333333334" cz="20.208333333333336" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="98.95833333333334" cz="20.208333333333336" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="99.02777777777779" cz="97.91666666666667" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="99.02777777777779" cz="97.91666666666667" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="99.02777777777779" cz="97.91666666666667" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="20.833333333333336" cz="97.70833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#ffffff" frame="#000000" cx="20.833333333333336" cz="97.70833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="20.833333333333336" cz="97.70833333333334" r="1.25" angle="225" />
   <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" r="1.875" cx="29.444444444444446" cz="29.375" angle="0" />
   <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" fill="#99ccff" frame="#000000" r="1.875" cx="29.444444444444446" cz="39.375" angle="0" />

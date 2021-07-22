@@ -16,9 +16,9 @@ Tip: crouch if you want to move slower." />
   <Incarnator fill="#99ccff" frame="#000000" cx="239.6527777777778" cz="114.44444444444444" r="2.5" angle="90" />
   <unique vars="mGStart mGTaken mMStart mMTaken" />
   <Goody shape="bspGrenade" grenades="100" start="mGStart" out="mGTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="158.33333333333334" cz="160.83333333333334" r="1.875" angle="45" />
-  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" fill="#eeeeee" frame="#770000" cx="158.33333333333334" cz="160.83333333333334" r="1.875" angle="45" />
+  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" />
   <Goody shape="bspMissile" missiles="100" start="mMStart" out="mMTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="158.33333333333334" cz="160.83333333333334" r="1.875" angle="45" />
-  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" fill="#eeeeee" frame="#770000" cx="158.33333333333334" cz="160.83333333333334" r="1.875" angle="45" />
+  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" />
   <Hologram fill="#eeeeee" frame="#770000" cx="158.33333333333334" cz="160.83333333333334" r="1.875" angle="45" />
   <Teleporter win="5000" start="@winTeam" scale="3" activeRange="5" fill="#eeeeee" frame="#770000" cx="158.33333333333334" cz="160.83333333333334" r="1.875" angle="45" />
   <set maxStartGrenades="3" maxStartMissiles="4" maxStartBoosts="0" defaultLives="6" hull.0="hullSpeed" hull.1="hullSpeed" hull.2="hullSpeed" />
@@ -54,30 +54,30 @@ Tip: crouch if you want to move slower." />
   <Incarnator fill="#99ccff" frame="#000000" cx="109.65277777777779" cz="157.70833333333334" r="2.5" angle="225" />
   <unique vars="mGStart mGTaken mMStart mMTaken" />
   <Goody shape="bspGrenade" grenades="100" start="mGStart" out="mGTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="273.95833333333337" cz="56.458333333333336" r="1.875" angle="45" />
-  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" fill="#eeeeee" frame="#770000" cx="273.95833333333337" cz="56.458333333333336" r="1.875" angle="45" />
+  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" />
   <Goody shape="bspMissile" missiles="100" start="mMStart" out="mMTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="273.95833333333337" cz="56.458333333333336" r="1.875" angle="45" />
-  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" fill="#eeeeee" frame="#770000" cx="273.95833333333337" cz="56.458333333333336" r="1.875" angle="45" />
+  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" />
   <Hologram fill="#eeeeee" frame="#770000" cx="273.95833333333337" cz="56.458333333333336" r="1.875" angle="45" />
   <Teleporter win="5000" start="@winTeam" scale="3" activeRange="5" fill="#eeeeee" frame="#770000" cx="273.95833333333337" cz="56.458333333333336" r="1.875" angle="45" />
   <unique vars="mGStart mGTaken mMStart mMTaken" />
   <Goody shape="bspGrenade" grenades="100" start="mGStart" out="mGTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="32.708333333333336" cz="51.458333333333336" r="1.875" angle="45" />
-  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" fill="#eeeeee" frame="#770000" cx="32.708333333333336" cz="51.458333333333336" r="1.875" angle="45" />
+  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" />
   <Goody shape="bspMissile" missiles="100" start="mMStart" out="mMTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="32.708333333333336" cz="51.458333333333336" r="1.875" angle="45" />
-  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" fill="#eeeeee" frame="#770000" cx="32.708333333333336" cz="51.458333333333336" r="1.875" angle="45" />
+  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" />
   <Hologram fill="#eeeeee" frame="#770000" cx="32.708333333333336" cz="51.458333333333336" r="1.875" angle="45" />
   <Teleporter win="5000" start="@winTeam" scale="3" activeRange="5" fill="#eeeeee" frame="#770000" cx="32.708333333333336" cz="51.458333333333336" r="1.875" angle="45" />
   <unique vars="mGStart mGTaken mMStart mMTaken" />
   <Goody shape="bspGrenade" grenades="100" start="mGStart" out="mGTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="288.33333333333337" cz="265.83333333333337" r="1.875" angle="45" />
-  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" fill="#eeeeee" frame="#770000" cx="288.33333333333337" cz="265.83333333333337" r="1.875" angle="45" />
+  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" />
   <Goody shape="bspMissile" missiles="100" start="mMStart" out="mMTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="288.33333333333337" cz="265.83333333333337" r="1.875" angle="45" />
-  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" fill="#eeeeee" frame="#770000" cx="288.33333333333337" cz="265.83333333333337" r="1.875" angle="45" />
+  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" />
   <Hologram fill="#eeeeee" frame="#770000" cx="288.33333333333337" cz="265.83333333333337" r="1.875" angle="45" />
   <Teleporter win="5000" start="@winTeam" scale="3" activeRange="5" fill="#eeeeee" frame="#770000" cx="288.33333333333337" cz="265.83333333333337" r="1.875" angle="45" />
   <unique vars="mGStart mGTaken mMStart mMTaken" />
   <Goody shape="bspGrenade" grenades="100" start="mGStart" out="mGTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="49.583333333333336" cz="254.58333333333337" r="1.875" angle="45" />
-  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" fill="#eeeeee" frame="#770000" cx="49.583333333333336" cz="254.58333333333337" r="1.875" angle="45" />
+  <Timer in.0="@start" in.1="mGTaken" wait="15 * 3" out="mMStart" />
   <Goody shape="bspMissile" missiles="100" start="mMStart" out="mMTaken" stop="@winTeam" y="3" scale="15" speed="10" fill="#eeeeee" frame="#770000" cx="49.583333333333336" cz="254.58333333333337" r="1.875" angle="45" />
-  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" fill="#eeeeee" frame="#770000" cx="49.583333333333336" cz="254.58333333333337" r="1.875" angle="45" />
+  <Timer in.1="mMTaken" wait="15 * 3" out="mGStart" />
   <Hologram fill="#eeeeee" frame="#770000" cx="49.583333333333336" cz="254.58333333333337" r="1.875" angle="45" />
   <Teleporter win="5000" start="@winTeam" scale="3" activeRange="5" fill="#eeeeee" frame="#770000" cx="49.583333333333336" cz="254.58333333333337" r="1.875" angle="45" />
   <Txeleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="152.08333333333334" cz="153.75" r="1.875" angle="45" />
@@ -88,5 +88,5 @@ Tip: crouch if you want to move slower." />
   <unique vars="mOpen" />
   <set mySpeed="100 / 8 / 30" />
   <Door shape="bspSpeedCap" scale="10" y="22" yon="3000" volume="0" openSpeed="mySpeed" closeSpeed="100 -mySpeed" closeDelay="100 / openSpeed -1" deltaY="0" yaw="360 * 30" roll="360" didClose="mOpen" open="mOpen" close="mOpen" fill="#ffccff" frame="#000000" cx="155.90277777777777" cz="159.16666666666669" r="1.875" angle="45" />
-  <And in="@start" out="mOpen" fill="#ffccff" frame="#000000" cx="155.90277777777777" cz="159.16666666666669" r="1.875" angle="45" />
+  <And in="@start" out="mOpen" />
 </map>

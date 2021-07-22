@@ -62,23 +62,23 @@
   <unique vars="mg1 mg2 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="8" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#ffffff" frame="#000000" cx="74.51388888888889" cz="74.375" r="1.25" angle="225" />
   <Goody shape="bspMissile" speed="10" y="8" start="mg2" stop="mg1" out="mWait" missiles="3" fill="#ffffff" frame="#000000" cx="74.51388888888889" cz="74.375" r="1.25" angle="225" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" fill="#ffffff" frame="#000000" cx="74.51388888888889" cz="74.375" r="1.25" angle="225" />
-  <Distributor in="mNext" out.0="mg2" out.1="mg1" fill="#ffffff" frame="#000000" cx="74.51388888888889" cz="74.375" r="1.25" angle="225" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg2" out.1="mg1" />
   <unique vars="mg1 mg2 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="8" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#ffffff" frame="#000000" cx="24.51388888888889" cz="74.375" r="1.25" angle="225" />
   <Goody shape="bspMissile" speed="10" y="8" start="mg2" stop="mg1" out="mWait" missiles="3" fill="#ffffff" frame="#000000" cx="24.51388888888889" cz="74.375" r="1.25" angle="225" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" fill="#ffffff" frame="#000000" cx="24.51388888888889" cz="74.375" r="1.25" angle="225" />
-  <Distributor in="mNext" out.0="mg1" out.1="mg2" fill="#ffffff" frame="#000000" cx="24.51388888888889" cz="74.375" r="1.25" angle="225" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg1" out.1="mg2" />
   <unique vars="mg1 mg2 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="8" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#ffffff" frame="#000000" cx="24.51388888888889" cz="24.375" r="1.25" angle="225" />
   <Goody shape="bspMissile" speed="10" y="8" start="mg2" stop="mg1" out="mWait" missiles="3" fill="#ffffff" frame="#000000" cx="24.51388888888889" cz="24.375" r="1.25" angle="225" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" fill="#ffffff" frame="#000000" cx="24.51388888888889" cz="24.375" r="1.25" angle="225" />
-  <Distributor in="mNext" out.0="mg2" out.1="mg1" fill="#ffffff" frame="#000000" cx="24.51388888888889" cz="24.375" r="1.25" angle="225" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg2" out.1="mg1" />
   <unique vars="mg1 mg2 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="8" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#ffffff" frame="#000000" cx="74.51388888888889" cz="24.375" r="1.25" angle="225" />
   <Goody shape="bspMissile" speed="10" y="8" start="mg2" stop="mg1" out="mWait" missiles="3" fill="#ffffff" frame="#000000" cx="74.51388888888889" cz="24.375" r="1.25" angle="225" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" fill="#ffffff" frame="#000000" cx="74.51388888888889" cz="24.375" r="1.25" angle="225" />
-  <Distributor in="mNext" out.0="mg1" out.1="mg2" fill="#ffffff" frame="#000000" cx="74.51388888888889" cz="24.375" r="1.25" angle="225" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg1" out.1="mg2" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="34.44444444444445" cz="34.375" r="4.722222222222223" angle="315" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="34.44444444444445" cz="64.30555555555556" r="4.722222222222223" angle="225" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="64.44444444444444" cz="34.375" r="4.722222222222225" angle="45" />
@@ -87,6 +87,6 @@
   <unique vars="mg1 mg2 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="11" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#ffffff" frame="#000000" cx="49.51388888888889" cz="49.375" r="1.25" angle="225" />
   <Goody shape="bspMissile" speed="10" y="11" start="mg2" stop="mg1" out="mWait" missiles="3" fill="#ffffff" frame="#000000" cx="49.51388888888889" cz="49.375" r="1.25" angle="225" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" fill="#ffffff" frame="#000000" cx="49.51388888888889" cz="49.375" r="1.25" angle="225" />
-  <Distributor in="mNext" out.0="mg1" out.1="mg2" fill="#ffffff" frame="#000000" cx="49.51388888888889" cz="49.375" r="1.25" angle="225" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg1" out.1="mg2" />
 </map>

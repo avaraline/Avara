@@ -3,42 +3,42 @@
 The first team that captures five of the nine zones wins.  Four of the zones are surrounded by forcefields controlled by the box-switches.  Retaking captured zones is not possible." defaultLives="9" hitScore="0" killScore="0" grenadePower="40" missilePower="1.75" missileTurnRate="0.3" missileAcceleration="0.3" ambient.i=".5" light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <SkyColor fill="#3c448c" frame="#8f2e42" />
   <GroundColor fill="#0b002a" frame="#000055" />
-  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="5" out="@purpleWins" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="5" out="@blueWins" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="5" out="@greenWins" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="1" out="@greenSquare" restart="true" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="1" out="@purpleSquare" restart="true" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="1" out="@blueSquare" restart="true" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Counter in.0="@blueSquare" in.1="@greenSquare" in.2="@purpleSquare" n="9" out="@noWins" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Text in="@greenWins" showEveryone="true" text="Green team wins!" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Text in="@blueWins" showEveryone="true" text="Blue team wins!" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Text in="@purpleWins" showEveryone="true" text="Purple team wins!" fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
-  <Text in="@noWins" showEveryone="true" text="All Zones have been captured." fill="#ffffff" frame="#000000" cx="13.958333333333334" cz="113.33333333333334" r="1.25" angle="315" />
+  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="5" out="@purpleWins" />
+  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="5" out="@blueWins" />
+  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="5" out="@greenWins" />
+  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="1" out="@greenSquare" restart="true" />
+  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="1" out="@purpleSquare" restart="true" />
+  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="1" out="@blueSquare" restart="true" />
+  <Counter in.0="@blueSquare" in.1="@greenSquare" in.2="@purpleSquare" n="9" out="@noWins" />
+  <Text in="@greenWins" showEveryone="true" text="Green team wins!" cx="13.958333333333334" cz="113.33333333333334" r="1.25" />
+  <Text in="@blueWins" showEveryone="true" text="Blue team wins!" cx="13.958333333333334" cz="113.33333333333334" r="1.25" />
+  <Text in="@purpleWins" showEveryone="true" text="Purple team wins!" cx="13.958333333333334" cz="113.33333333333334" r="1.25" />
+  <Text in="@noWins" showEveryone="true" text="All Zones have been captured." cx="13.958333333333334" cz="113.33333333333334" r="1.25" />
   <Teleporter sound="0" status="false" start="@purpleOut" mask="T5" y="20" yon="0.01" shape="0" activeRange="32000" win="1000" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
   <Teleporter sound="0" status="false" start="@blueOut" mask="T6" y="20" yon="0.01" shape="0" activeRange="32000" win="1000" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
   <Teleporter sound="0" status="false" start="@greenOut" mask="T1" y="20" yon="0.01" shape="0" activeRange="32000" win="1000" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
   <Teleporter sound="0" status="false" start="@noWins" y="20" yon="0.01" shape="0" activeRange="32000" win="0" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
   <Teleporter sound="0" status="false" start="@teleportRest" y="20" yon="0.01" shape="0" activeRange="32000" win="0" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Timer in="@purpleWins" wait="6" out="@purpleOut" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Timer in="@blueWins" wait="6" out="@blueOut" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Timer in="@greenWins" wait="6" out="@greenOut" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Timer in="@purpleWins" wait="12" out="@teleportRest" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Timer in="@blueWins" wait="12" out="@teleportRest" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Timer in="@greenWins" wait="12" out="@teleportRest" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Timer in="@noWins" wait="12" out="@noWinsOut" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="4" out="@purpleWithFour" restart="false" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Text in="@purpleWithFour" showEveryone="true" text="Purple has four zones." fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="4" out="@blueWithFour" restart="false" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Text in="@blueWithFour" showEveryone="true" text="Blue has four zones." fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="4" out="@greenWithFour" restart="false" fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
-  <Text in="@greenWithFour" showEveryone="true" text="Green has four zones." fill="#ffffff" frame="#000000" cx="29.583333333333336" cz="118.68055555555556" r="1.25" angle="315" />
+  <Timer in="@purpleWins" wait="6" out="@purpleOut" />
+  <Timer in="@blueWins" wait="6" out="@blueOut" />
+  <Timer in="@greenWins" wait="6" out="@greenOut" />
+  <Timer in="@purpleWins" wait="12" out="@teleportRest" />
+  <Timer in="@blueWins" wait="12" out="@teleportRest" />
+  <Timer in="@greenWins" wait="12" out="@teleportRest" />
+  <Timer in="@noWins" wait="12" out="@noWinsOut" />
+  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="4" out="@purpleWithFour" restart="false" />
+  <Text in="@purpleWithFour" showEveryone="true" text="Purple has four zones." cx="29.583333333333336" cz="118.68055555555556" r="1.25" />
+  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="4" out="@blueWithFour" restart="false" />
+  <Text in="@blueWithFour" showEveryone="true" text="Blue has four zones." cx="29.583333333333336" cz="118.68055555555556" r="1.25" />
+  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="4" out="@greenWithFour" restart="false" />
+  <Text in="@greenWithFour" showEveryone="true" text="Green has four zones." cx="29.583333333333336" cz="118.68055555555556" r="1.25" />
   <Field watch="playerMask" enter="@greenCaptureD" mask="T1" deltaY="0" start="@start" stop="@DOff" fill="#006633" frame="#000000" r="1.25" cx="29.583333333333336" cz="118.68055555555556" angle="315" x="228.92361111111111" z="118.95833333333334" w="9.930555555555543" d="10" h="0" />
   <Field watch="playerMask" enter="@purpleCaptureD" mask="T5" deltaY="0" start="@start" stop="@DOff" fill="#9900ff" frame="#000000" r="1.25" cx="29.583333333333336" cz="118.68055555555556" angle="315" x="228.92361111111111" z="118.95833333333334" w="9.930555555555543" d="10" h="0" />
   <Field watch="playerMask" enter="@blueCaptureD" mask="T6" deltaY="0" start="@start" stop="@DOff" fill="#0099cc" frame="#000000" r="1.25" cx="29.583333333333336" cz="118.68055555555556" angle="315" x="228.95833333333334" z="118.95833333333334" w="10" d="10" h="0" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@DOff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureD" out="@DOff" fill="#ffffff" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="180" />
-  <And in.0="@blueCaptureD" out="@DOff" fill="#ffffff" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="180" />
-  <And in.0="@greenCaptureD" out="@DOff" fill="#ffffff" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureD" out="@DOff" />
+  <And in.0="@blueCaptureD" out="@DOff" />
+  <And in.0="@greenCaptureD" out="@DOff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureD" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureD" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="0" />
@@ -47,9 +47,9 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Field watch="playerMask" enter="@purpleCaptureG" mask="T5" deltaY="0" start="@start" stop="@GOff" fill="#9900ff" frame="#000000" r="1.25" cx="228.95833333333334" cz="118.95833333333334" angle="90" x="131.42361111111111" z="166.45833333333334" w="9.930555555555543" d="10" h="0" />
   <Field watch="playerMask" enter="@blueCaptureG" mask="T6" deltaY="0" start="@start" stop="@GOff" fill="#0099cc" frame="#000000" r="1.25" cx="228.95833333333334" cz="118.95833333333334" angle="90" x="131.45833333333334" z="166.45833333333334" w="10" d="10" h="0" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@GOff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="166.45833333333334" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureG" out="@GOff" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="166.45833333333334" r="1.25" angle="180" />
-  <And in.0="@blueCaptureG" out="@GOff" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="166.45833333333334" r="1.25" angle="180" />
-  <And in.0="@greenCaptureG" out="@GOff" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="166.45833333333334" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureG" out="@GOff" />
+  <And in.0="@blueCaptureG" out="@GOff" />
+  <And in.0="@greenCaptureG" out="@GOff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="166.45833333333334" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureG" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="131.45833333333334" cz="166.45833333333334" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureG" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="131.45833333333334" cz="166.45833333333334" r="1.25" angle="0" />
@@ -58,9 +58,9 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Field watch="playerMask" enter="@purpleCaptureH" mask="T5" deltaY="0" start="@start" stop="@HOff" fill="#9900ff" frame="#000000" r="1.25" cx="131.45833333333334" cz="166.45833333333334" angle="90" x="131.42361111111111" z="41.458333333333336" w="9.930555555555543" d="10" h="0" />
   <Field watch="playerMask" enter="@blueCaptureH" mask="T6" deltaY="0" start="@start" stop="@HOff" fill="#0099cc" frame="#000000" r="1.25" cx="131.45833333333334" cz="166.45833333333334" angle="90" x="131.45833333333334" z="41.458333333333336" w="10" d="10" h="0" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@HOff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="41.458333333333336" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureH" out="@HOff" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="41.458333333333336" r="1.25" angle="180" />
-  <And in.0="@blueCaptureH" out="@HOff" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="41.458333333333336" r="1.25" angle="180" />
-  <And in.0="@greenCaptureH" out="@HOff" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="41.458333333333336" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureH" out="@HOff" />
+  <And in.0="@blueCaptureH" out="@HOff" />
+  <And in.0="@greenCaptureH" out="@HOff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="131.45833333333334" cz="41.458333333333336" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureH" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="131.45833333333334" cz="41.458333333333336" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureH" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="131.45833333333334" cz="41.458333333333336" r="1.25" angle="0" />
@@ -69,9 +69,9 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Field watch="playerMask" enter="@purpleCaptureI" mask="T5" deltaY="0" start="@start" stop="@IOff" fill="#9900ff" frame="#000000" r="1.25" cx="131.45833333333334" cz="41.458333333333336" angle="90" x="193.92361111111111" z="183.95833333333334" w="9.930555555555543" d="10" h="0" />
   <Field watch="playerMask" enter="@blueCaptureI" mask="T6" deltaY="0" start="@start" stop="@IOff" fill="#0099cc" frame="#000000" r="1.25" cx="131.45833333333334" cz="41.458333333333336" angle="90" x="193.95833333333334" z="183.95833333333334" w="10" d="10" h="0" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@IOff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureI" out="@IOff" fill="#ffffff" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="180" />
-  <And in.0="@blueCaptureI" out="@IOff" fill="#ffffff" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="180" />
-  <And in.0="@greenCaptureI" out="@IOff" fill="#ffffff" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureI" out="@IOff" />
+  <And in.0="@blueCaptureI" out="@IOff" />
+  <And in.0="@greenCaptureI" out="@IOff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureI" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureI" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="0" />
@@ -96,9 +96,9 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Field watch="playerMask" enter="@purpleCaptureE" mask="T5" deltaY="0" start="@start" stop="@EOff" fill="#9900ff" frame="#000000" r="1.25" cx="193.95833333333334" cz="183.95833333333334" angle="90" x="28.958333333333336" z="89.02777777777779" w="10" d="10" h="0" />
   <Field watch="playerMask" enter="@blueCaptureE" mask="T6" deltaY="0" start="@start" stop="@EOff" fill="#0099cc" frame="#000000" r="1.25" cx="193.95833333333334" cz="183.95833333333334" angle="90" x="28.958333333333336" z="89.02777777777779" w="10" d="10" h="0" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@EOff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="28.958333333333336" cz="89.02777777777779" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureE" out="@EOff" fill="#ffffff" frame="#000000" cx="28.958333333333336" cz="89.02777777777779" r="1.25" angle="180" />
-  <And in.0="@blueCaptureE" out="@EOff" fill="#ffffff" frame="#000000" cx="28.958333333333336" cz="89.02777777777779" r="1.25" angle="180" />
-  <And in.0="@greenCaptureE" out="@EOff" fill="#ffffff" frame="#000000" cx="28.958333333333336" cz="89.02777777777779" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureE" out="@EOff" />
+  <And in.0="@blueCaptureE" out="@EOff" />
+  <And in.0="@greenCaptureE" out="@EOff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="28.958333333333336" cz="89.02777777777779" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureE" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="28.958333333333336" cz="89.02777777777779" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureE" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="28.958333333333336" cz="89.02777777777779" r="1.25" angle="0" />
@@ -108,7 +108,7 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="2" yon="15" start="@FieldOneOn" stop="@FieldOneOff" mask="0" speed="2" fill="#bedfee" frame="#000000" cx="28.958333333333336" cz="88.95833333333334" r="1.25" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="2.66" yon="10" start="@FieldOneOn" stop="@FieldOneOff" mask="0" speed="-2" fill="#bedfee" frame="#000000" cx="28.958333333333336" cz="88.95833333333334" r="1.25" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="3.33" yon="5" start="@FieldOneOn" stop="@FieldOneOff" mask="0" speed="2" fill="#bedfee" frame="#000000" cx="28.958333333333336" cz="88.95833333333334" r="1.25" angle="90" />
-  <And in="@start" out="@FieldOneOn" fill="#bedfee" frame="#000000" cx="28.958333333333336" cz="88.95833333333334" r="1.25" angle="90" />
+  <And in="@start" out="@FieldOneOn" />
   <Field start="@FieldOneOn" stop="@FieldOneOff" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="28.958333333333336" cz="88.95833333333334" angle="90" x="29.895833333333336" z="96.77083333333334" w="15.625" d="1.875" h="0" />
   <Field start="@FieldOneOn" stop="@FieldOneOff" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="28.958333333333336" cz="88.95833333333334" angle="90" x="36.770833333333336" z="88.02083333333334" w="1.875" d="15.625" h="0" />
   <Field start="@FieldOneOn" stop="@FieldOneOff" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="28.958333333333336" cz="88.95833333333334" angle="90" x="28.020833333333336" z="81.14583333333334" w="15.625" d="1.875" h="0" />
@@ -122,14 +122,14 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="2" yon="15" start="@FieldTwoOn" stop="@FieldTwoOff" mask="0" speed="2" fill="#bedfee" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="2.66" yon="10" start="@FieldTwoOn" stop="@FieldTwoOff" mask="0" speed="-2" fill="#bedfee" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="3.33" yon="5" start="@FieldTwoOn" stop="@FieldTwoOff" mask="0" speed="2" fill="#bedfee" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="90" />
-  <And in="@start" out="@FieldTwoOn" fill="#bedfee" frame="#000000" cx="228.95833333333334" cz="118.95833333333334" r="1.25" angle="90" />
+  <And in="@start" out="@FieldTwoOn" />
   <Field watch="playerMask" enter="@greenCaptureA" mask="T1" deltaY="0" start="@start" stop="@AOff" fill="#006633" frame="#000000" r="1.25" cx="228.95833333333334" cz="118.95833333333334" angle="90" x="63.923611111111114" z="23.958333333333336" w="9.93055555555555" d="10" h="0" />
   <Field watch="playerMask" enter="@purpleCaptureA" mask="T5" deltaY="0" start="@start" stop="@AOff" fill="#9900ff" frame="#000000" r="1.25" cx="228.95833333333334" cz="118.95833333333334" angle="90" x="63.923611111111114" z="23.958333333333336" w="9.93055555555555" d="10" h="0" />
   <Field watch="playerMask" enter="@blueCaptureA" mask="T6" deltaY="0" start="@start" stop="@AOff" fill="#0099cc" frame="#000000" r="1.25" cx="228.95833333333334" cz="118.95833333333334" angle="90" x="63.95833333333334" z="23.958333333333336" w="10" d="10" h="0" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@AOff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureA" out="@AOff" fill="#ffffff" frame="#000000" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="180" />
-  <And in.0="@blueCaptureA" out="@AOff" fill="#ffffff" frame="#000000" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="180" />
-  <And in.0="@greenCaptureA" out="@AOff" fill="#ffffff" frame="#000000" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureA" out="@AOff" />
+  <And in.0="@blueCaptureA" out="@AOff" />
+  <And in.0="@greenCaptureA" out="@AOff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureA" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureA" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="0" />
@@ -143,7 +143,7 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="2" yon="15" start="@FieldThreeOn" stop="@FieldThreeOff" mask="0" speed="2" fill="#bedfee" frame="#bedfee" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="2.66" yon="10" start="@FieldThreeOn" stop="@FieldThreeOff" mask="0" speed="-2" fill="#bedfee" frame="#bedfee" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="3.33" yon="5" start="@FieldThreeOn" stop="@FieldThreeOff" mask="0" speed="2" fill="#bedfee" frame="#bedfee" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="90" />
-  <And in="@start" out="@FieldThreeOn" fill="#bedfee" frame="#bedfee" cx="63.95833333333334" cz="23.958333333333336" r="1.25" angle="90" />
+  <And in="@start" out="@FieldThreeOn" />
   <Field start="@FieldFourOn" stop="@FieldFourOff" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="63.95833333333334" cz="23.958333333333336" angle="90" x="194.89583333333334" z="192.04861111111111" w="15.625" d="1.875" h="0" />
   <Field start="@FieldFourOn" stop="@FieldFourOff" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="63.95833333333334" cz="23.958333333333336" angle="90" x="201.77083333333334" z="183.29861111111111" w="1.875" d="15.625" h="0" />
   <Field start="@FieldFourOn" stop="@FieldFourOff" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="63.95833333333334" cz="23.958333333333336" angle="90" x="193.02083333333334" z="176.42361111111111" w="15.625" d="1.875" h="0" />
@@ -153,52 +153,52 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="2" yon="15" start="@FieldFourOn" stop="@FieldFourOff" mask="0" speed="2" fill="#bedfee" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="2.66" yon="10" start="@FieldFourOn" stop="@FieldFourOff" mask="0" speed="-2" fill="#bedfee" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1.5" y="3.33" yon="5" start="@FieldFourOn" stop="@FieldFourOff" mask="0" speed="2" fill="#bedfee" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="90" />
-  <And in="@start" out="@FieldFourOn" fill="#bedfee" frame="#000000" cx="193.95833333333334" cz="183.95833333333334" r="1.25" angle="90" />
+  <And in="@start" out="@FieldFourOn" />
   <Wall fill="#cf093b" frame="#0b002a" x="183.95833333333334" z="73.95833333333334" w="10" d="10" h="6.25" />
   <Wall fill="#cf093b" frame="#0b002a" x="173.95833333333334" z="63.95833333333334" w="10" d="10" h="12.5" />
-  <Ramp y="6.25" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="183.95833333333334" z="73.95833333333334" w="10" d="10" h="0" r="11.076388888888886" angle="0" />
-  <Ramp y="12.5" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="173.95833333333334" z="63.95833333333334" w="10" d="10" h="0" r="11.07638888888889" angle="90" />
+  <Ramp y="6.25" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="183.95833333333334" z="73.95833333333334" w="10" d="10" h="0" angle="0" />
+  <Ramp y="12.5" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="173.95833333333334" z="63.95833333333334" w="10" d="10" h="0" angle="90" />
   <Switch shape="720" altshape="721" y="1.5" scale="1" out.1="@SwitchOneOn" out.0="@SwitchOneOff" yon="55" fill="#bedfee" frame="#5198bb" cx="174.02777777777777" cz="74.02777777777779" r="1.25" angle="135" />
-  <And in="@SwitchOneOn" out.0="@FieldOneOff" out.1="@FieldTwoOff" out.2="@FieldThreeOn" out.3="@FieldFourOn" fill="#bedfee" frame="#5198bb" cx="174.02777777777777" cz="74.02777777777779" r="1.25" angle="135" />
-  <And in="@SwitchOneOff" out.0="@FieldOneOn" out.1="@FieldTwoOn" out.2="@FieldThreeOff" out.3="@FieldFourOff" fill="#bedfee" frame="#5198bb" cx="174.02777777777777" cz="74.02777777777779" r="1.25" angle="135" />
-  <And in="@SwitchTwoOn" out.0="@FieldOneOn" out.1="@FieldTwoOff" out.2="@FieldThreeOff" out.3="@FieldFourOn" fill="#bedfee" frame="#5198bb" cx="174.02777777777777" cz="74.02777777777779" r="1.25" angle="135" />
-  <And in="@SwitchTwoOff" out.0="@FieldOneOff" out.1="@FieldTwoOn" out.2="@FieldThreeOn" out.3="@FieldFourOff" fill="#bedfee" frame="#5198bb" cx="174.02777777777777" cz="74.02777777777779" r="1.25" angle="135" />
+  <And in="@SwitchOneOn" out.0="@FieldOneOff" out.1="@FieldTwoOff" out.2="@FieldThreeOn" out.3="@FieldFourOn" />
+  <And in="@SwitchOneOff" out.0="@FieldOneOn" out.1="@FieldTwoOn" out.2="@FieldThreeOff" out.3="@FieldFourOff" />
+  <And in="@SwitchTwoOn" out.0="@FieldOneOn" out.1="@FieldTwoOff" out.2="@FieldThreeOff" out.3="@FieldFourOn" />
+  <And in="@SwitchTwoOff" out.0="@FieldOneOff" out.1="@FieldTwoOn" out.2="@FieldThreeOn" out.3="@FieldFourOff" />
   <Wall fill="#cf093b" frame="#0b002a" x="73.95833333333334" z="133.95833333333334" w="10" d="10" h="6.25" />
   <Wall fill="#cf093b" frame="#0b002a" x="83.95833333333334" z="143.95833333333334" w="10" d="10" h="12.5" />
-  <Ramp y="6.25" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="73.92361111111111" z="133.95833333333334" w="9.930555555555543" d="10" h="0" r="11.041666666666668" angle="180" />
-  <Ramp y="12.5" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="83.92361111111111" z="143.95833333333334" w="9.930555555555543" d="10" h="0" r="11.0763888888889" angle="270" />
+  <Ramp y="6.25" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="73.92361111111111" z="133.95833333333334" w="9.930555555555543" d="10" h="0" angle="180" />
+  <Ramp y="12.5" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="83.92361111111111" z="143.95833333333334" w="9.930555555555543" d="10" h="0" angle="270" />
   <Switch scale="1" shape="720" altshape="721" y="2" yon="55" out.1="@SwitchTwoOn" out.0="@SwitchTwoOff" fill="#bedfee" frame="#5198bb" cx="84.02777777777779" cz="134.02777777777777" r="1.25" angle="135" />
   <Wall fill="#cf093b" frame="#0b002a" x="193.95833333333334" z="83.95833333333334" w="10" d="30" h="12.5" />
   <Wall fill="#cf093b" frame="#0b002a" x="188.95833333333334" z="63.95833333333334" w="20" d="10" h="18.75" />
   <Wall fill="#cf093b" frame="#0b002a" x="203.95833333333334" z="98.95833333333334" w="10" d="20" h="12.5" />
-  <Ramp y="12.5" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="193.95833333333334" z="78.92361111111111" w="10" d="19.930555555555543" h="0" r="11.041666666666671" angle="0" />
+  <Ramp y="12.5" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="193.95833333333334" z="78.92361111111111" w="10" d="19.930555555555543" h="0" angle="0" />
   <Wall fill="#cf093b" frame="#0b002a" x="198.95833333333334" z="133.95833333333334" w="20" d="10" h="6.25" />
-  <Ramp y="6.25" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="203.95833333333334" z="118.95833333333334" w="10" d="20" h="0" r="11.041666666666671" angle="0" />
-  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="178.92361111111111" z="134.58333333333334" w="19.930555555555543" d="8.75" h="0" r="11.111111111111107" angle="90" />
+  <Ramp y="6.25" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="203.95833333333334" z="118.95833333333334" w="10" d="20" h="0" angle="0" />
+  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="178.92361111111111" z="134.58333333333334" w="19.930555555555543" d="8.75" h="0" angle="90" />
   <Wall fill="#cf093b" frame="#0b002a" x="63.95833333333334" z="123.95833333333334" w="10" d="30" h="12.5" />
   <Wall fill="#cf093b" frame="#0b002a" x="68.95833333333334" z="143.95833333333334" w="20" d="10" h="18.75" />
   <Wall fill="#cf093b" frame="#0b002a" x="53.958333333333336" z="108.95833333333334" w="10" d="20" h="12.5" />
-  <Ramp y="12.5" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="63.95833333333334" z="128.92361111111111" w="10" d="19.930555555555543" h="0" r="11.041666666666668" angle="180" />
+  <Ramp y="12.5" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="63.95833333333334" z="128.92361111111111" w="10" d="19.930555555555543" h="0" angle="180" />
   <Wall fill="#cf093b" frame="#0b002a" x="58.95833333333334" z="73.95833333333334" w="20" d="10" h="6.25" />
-  <Ramp y="6.25" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="53.958333333333336" z="88.92361111111111" w="10" d="19.930555555555557" h="0" r="11.041666666666668" angle="180" />
-  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="78.92361111111111" z="73.33333333333334" w="19.930555555555543" d="8.75" h="0" r="11.07638888888889" angle="270" />
+  <Ramp y="6.25" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="53.958333333333336" z="88.92361111111111" w="10" d="19.930555555555557" h="0" angle="180" />
+  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="78.92361111111111" z="73.33333333333334" w="19.930555555555543" d="8.75" h="0" angle="270" />
   <Wall fill="#7b739f" frame="#0b002a" x="108.95833333333334" z="113.95833333333334" w="10" d="10" h="6.25" />
-  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="123.92361111111111" z="123.95833333333334" w="19.930555555555543" d="10" h="0" r="11.076388888888893" angle="90" />
+  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="123.92361111111111" z="123.95833333333334" w="19.930555555555543" d="10" h="0" angle="90" />
   <Wall fill="#7b739f" frame="#0b002a" x="138.95833333333334" z="123.95833333333334" w="10" d="10" h="6.25" />
   <Wall fill="#7b739f" frame="#0b002a" x="148.95833333333334" z="93.95833333333334" w="10" d="10" h="6.25" />
-  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="148.95833333333334" z="108.92361111111111" w="10" d="19.930555555555557" h="0" r="11.041666666666671" angle="0" />
+  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="148.95833333333334" z="108.92361111111111" w="10" d="19.930555555555557" h="0" angle="0" />
   <Wall fill="#7b739f" frame="#0b002a" x="118.95833333333334" z="83.95833333333334" w="10" d="10" h="6.25" />
-  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="133.92361111111111" z="83.95833333333334" w="19.930555555555543" d="10" h="0" r="11.076388888888893" angle="270" />
+  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="133.92361111111111" z="83.95833333333334" w="19.930555555555543" d="10" h="0" angle="270" />
   <Wall fill="#cf093b" frame="#0b002a" x="128.95833333333334" z="103.95833333333334" w="30" d="30" h="6.25" />
-  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="108.95833333333334" z="98.92361111111111" w="10" d="19.930555555555557" h="0" r="11.041666666666664" angle="180" />
+  <Ramp y="0" thickness="0" deltaY="6.25" fill="#7b739f" frame="#000000" x="108.95833333333334" z="98.92361111111111" w="10" d="19.930555555555557" h="0" angle="180" />
   <set baseHeight="18.75" />
   <Field watch="playerMask" enter="@greenCaptureC" mask="T1" deltaY="0" start="@start" stop="@COff" fill="#006633" frame="#000000" x="183.92361111111111" z="63.95833333333334" w="9.930555555555543" d="10" h="0" r="11.041666666666664" cx="110.55555555555557" cz="100.20833333333334" angle="180" />
   <Field watch="playerMask" enter="@purpleCaptureC" mask="T5" deltaY="0" start="@start" stop="@COff" fill="#9900ff" frame="#000000" x="183.92361111111111" z="63.95833333333334" w="9.930555555555543" d="10" h="0" r="11.041666666666664" cx="110.55555555555557" cz="100.20833333333334" angle="180" />
   <Field watch="playerMask" enter="@blueCaptureC" mask="T6" deltaY="0" start="@start" stop="@COff" fill="#0099cc" frame="#000000" x="183.95833333333334" z="63.95833333333334" w="10" d="10" h="0" r="11.041666666666664" cx="110.55555555555557" cz="100.20833333333334" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@COff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="183.95833333333334" cz="63.95833333333334" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureC" out="@COff" fill="#ffffff" frame="#000000" cx="183.95833333333334" cz="63.95833333333334" r="1.25" angle="180" />
-  <And in.0="@blueCaptureC" out="@COff" fill="#ffffff" frame="#000000" cx="183.95833333333334" cz="63.95833333333334" r="1.25" angle="180" />
-  <And in.0="@greenCaptureC" out="@COff" fill="#ffffff" frame="#000000" cx="183.95833333333334" cz="63.95833333333334" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureC" out="@COff" />
+  <And in.0="@blueCaptureC" out="@COff" />
+  <And in.0="@greenCaptureC" out="@COff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="183.95833333333334" cz="63.95833333333334" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureC" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="183.95833333333334" cz="63.95833333333334" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureC" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="183.95833333333334" cz="63.95833333333334" r="1.25" angle="0" />
@@ -207,9 +207,9 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Field watch="playerMask" enter="@purpleCaptureF" mask="T5" deltaY="0" start="@start" stop="@FOff" fill="#9900ff" frame="#000000" x="73.92361111111111" z="143.95833333333334" w="9.930555555555543" d="10" h="0" r="1.25" cx="183.95833333333334" cz="63.95833333333334" angle="90" />
   <Field watch="playerMask" enter="@blueCaptureF" mask="T6" deltaY="0" start="@start" stop="@FOff" fill="#0099cc" frame="#000000" x="73.95833333333334" z="143.95833333333334" w="10" d="10" h="0" r="1.25" cx="183.95833333333334" cz="63.95833333333334" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@FOff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="73.95833333333334" cz="143.95833333333334" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureF" out="@FOff" fill="#ffffff" frame="#000000" cx="73.95833333333334" cz="143.95833333333334" r="1.25" angle="180" />
-  <And in.0="@blueCaptureF" out="@FOff" fill="#ffffff" frame="#000000" cx="73.95833333333334" cz="143.95833333333334" r="1.25" angle="180" />
-  <And in.0="@greenCaptureF" out="@FOff" fill="#ffffff" frame="#000000" cx="73.95833333333334" cz="143.95833333333334" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureF" out="@FOff" />
+  <And in.0="@blueCaptureF" out="@FOff" />
+  <And in.0="@greenCaptureF" out="@FOff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="73.95833333333334" cz="143.95833333333334" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureF" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="73.95833333333334" cz="143.95833333333334" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureF" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="73.95833333333334" cz="143.95833333333334" r="1.25" angle="0" />
@@ -219,9 +219,9 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Field watch="playerMask" enter="@purpleCaptureB" mask="T5" deltaY="0" start="@start" stop="@BOff" fill="#9900ff" frame="#000000" x="128.92361111111111" z="103.95833333333334" w="9.930555555555543" d="10" h="0" r="1.25" cx="73.95833333333334" cz="143.95833333333334" angle="90" />
   <Field watch="playerMask" enter="@blueCaptureB" mask="T6" deltaY="0" start="@start" stop="@BOff" fill="#0099cc" frame="#000000" x="128.95833333333334" z="103.95833333333334" w="10" d="10" h="0" r="1.25" cx="73.95833333333334" cz="143.95833333333334" angle="90" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@start" stop="@BOff" mask="0" speed="0" fill="#ffffff" frame="#000000" cx="128.95833333333334" cz="103.95833333333334" r="1.25" angle="180" />
-  <And in.0="@purpleCaptureB" out="@BOff" fill="#ffffff" frame="#000000" cx="128.95833333333334" cz="103.95833333333334" r="1.25" angle="180" />
-  <And in.0="@blueCaptureB" out="@BOff" fill="#ffffff" frame="#000000" cx="128.95833333333334" cz="103.95833333333334" r="1.25" angle="180" />
-  <And in.0="@greenCaptureB" out="@BOff" fill="#ffffff" frame="#000000" cx="128.95833333333334" cz="103.95833333333334" r="1.25" angle="180" />
+  <And in.0="@purpleCaptureB" out="@BOff" />
+  <And in.0="@blueCaptureB" out="@BOff" />
+  <And in.0="@greenCaptureB" out="@BOff" />
   <Goody sound="0" shape="bspW1x1" yon="0.01" scale="2" speed="0" start="@start" hitScore="1000" boosters="1" missiles="2" grenades="4" fill="#ffffff" frame="#000000" cx="128.95833333333334" cz="103.95833333333334" r="1.25" angle="180" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@purpleCaptureB" mask="0" speed="0" fill="#9900cc" frame="#000000" cx="128.95833333333334" cz="103.95833333333334" r="1.25" angle="270" />
   <Teleporter sound="0" shape="bspFloorFrame" scale="1" start="@blueCaptureB" mask="0" speed="0" fill="#3399cc" frame="#000000" cx="128.95833333333334" cz="103.95833333333334" r="1.25" angle="0" />
@@ -235,59 +235,59 @@ The first team that captures five of the nine zones wins.  Four of the zones are
   <Teleporter y="-6" sound="0" shape="bspGroundArrow" scale="2" start="@FieldOneOff" stop="@FieldOneOn" mask="0" speed="0" fill="#7b739f" frame="#000000" cx="55.833333333333336" cz="89.02777777777779" r="1.25" angle="90" />
   <Teleporter y="-6" sound="0" shape="bspGroundArrowLeft" scale="2" start="@FieldOneOff" stop="@FieldOneOn" mask="0" speed="0" fill="#7b739f" frame="#000000" cx="88.40277777777779" cz="89.51388888888889" r="1.4583333333333357" angle="180" />
   <Teleporter y="-6" sound="0" shape="bspGroundArrow" scale="1" start="@arrowblink" stop="@arrowdeblink" mask="0" speed="0" fill="#6376a8" frame="#000000" cx="168.95833333333334" cz="78.95833333333334" r="1.25" angle="225" />
-  <Timer in="@start" wait="10" out="@arrowblink" fill="#6376a8" frame="#000000" cx="168.95833333333334" cz="78.95833333333334" r="1.25" angle="225" />
-  <Timer in="@arrowblink" wait="25" out="@arrowdeblink" fill="#6376a8" frame="#000000" cx="168.95833333333334" cz="78.95833333333334" r="1.25" angle="225" />
-  <Timer in="@arrowdeblink" wait="10" out="@arrowblink" fill="#6376a8" frame="#000000" cx="168.95833333333334" cz="78.95833333333334" r="1.25" angle="225" />
+  <Timer in="@start" wait="10" out="@arrowblink" />
+  <Timer in="@arrowblink" wait="25" out="@arrowdeblink" />
+  <Timer in="@arrowdeblink" wait="10" out="@arrowblink" />
   <Teleporter y="-6" sound="0" shape="bspGroundArrow" scale="1" start="@arrowblink" stop="@arrowdeblink" mask="0" speed="0" fill="#6376a8" frame="#000000" cx="88.95833333333334" cz="129.30555555555557" r="1.25" angle="45" />
   <set baseHeight="0" />
   <Switch y="1.5" scale="1.5" out.1="@mineOneStart" restart="false" fill="#6376a8" frame="#000000" cx="196.04166666666669" cz="128.95833333333334" r="1.25" angle="0" />
   <Text in="@mineOneStart" showEveryone="true" text="Minefield One 
-Enabled!" sound="snParasiteAttach" fill="#6376a8" frame="#000000" cx="196.04166666666669" cz="128.95833333333334" r="1.25" angle="0" />
+Enabled!" sound="snParasiteAttach" cx="196.04166666666669" cz="128.95833333333334" r="1.25" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="4" yaw="45" shield="200" y="12.5" activateEnergy="0.2" activeRange="8" freq="2" power="100" activateVolume=".50" activeTimer="8" hitScore="0" start="@mineOneStart" activate="@mineOneActivate" fill="#cf093b" frame="#1f0009" cx="200.13888888888889" cz="94.93055555555556" r="1.25" angle="90" />
   <Switch y="1.5" scale="1.5" out.1="@mineTwoStart" restart="false" fill="#6376a8" frame="#000000" cx="64.16666666666667" cz="78.95833333333334" r="1.25" angle="180" />
   <Text in="@mineTwoStart" showEveryone="true" text="Minefield Two 
-Enabled!" sound="420" fill="#6376a8" frame="#000000" cx="64.16666666666667" cz="78.95833333333334" r="1.25" angle="180" />
+Enabled!" sound="420" cx="64.16666666666667" cz="78.95833333333334" r="1.25" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="4" yaw="45" shield="200" y="12.5" activateEnergy="0.2" activeRange="8" freq="2" power="100" activateVolume=".50" activeTimer="8" hitScore="0" start="@mineTwoStart" activate="@mineTwoActivate" fill="#cf093b" frame="#1f0009" cx="56.94444444444445" cz="113.68055555555556" r="1.25" angle="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="4" yaw="45" shield="200" y="6.25" activateEnergy="0.2" activeRange="8" freq="2" power="100" activateVolume=".50" activeTimer="8" hitScore="0" start="@mineTwoStart" activate="@mineTwoActivate" fill="#cf093b" frame="#1f0009" cx="59.44444444444445" cz="73.68055555555556" r="1.25" angle="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="4" yaw="45" shield="200" y="18.75" activateEnergy="0.2" activeRange="8" freq="2" power="100" activateVolume=".50" activeTimer="8" hitScore="0" start="@mineOneStart" activate="@mineOneActivate" fill="#cf093b" frame="#1f0009" cx="194.16666666666669" cz="63.611111111111114" r="1.25" angle="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="4" yaw="45" shield="200" y="18.75" activateEnergy="0.2" activeRange="8" freq="2" power="100" activateVolume=".50" activeTimer="8" hitScore="0" start="@mineTwoStart" activate="@mineTwoActivate" fill="#cf093b" frame="#1f0009" cx="63.33333333333334" cz="143.61111111111111" r="1.25" angle="90" />
   <Mine shape="bspStandardFloor" altShape="bspStandardFloor" isTarget="false" scale="4" yaw="45" shield="200" y="6.25" activateEnergy="0.2" activeRange="8" freq="2" power="100" activateVolume=".50" activeTimer="8" hitScore="0" start="@mineOneStart" activate="@mineOneActivate" fill="#cf093b" frame="#1f0009" cx="197.56944444444446" cz="133.68055555555557" r="1.25" angle="90" />
-  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="1" out="@purpleWithOne" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@purpleWithOne" showEveryone="true" text="Purple has one zone." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="1" out="@blueWithOne" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@blueWithOne" showEveryone="true" text="Blue has one zone." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="1" out="@greenWithOne" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@greenWithOne" showEveryone="true" text="Green has one zone." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="2" out="@purpleWithTwo" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@purpleWithTwo" showEveryone="true" text="Purple has two zones." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="2" out="@blueWithTwo" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@blueWithTwo" showEveryone="true" text="Blue has two zones." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="2" out="@greenWithTwo" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@greenWithTwo" showEveryone="true" text="Green has two zones." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="3" out="@purpleWithThree" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@purpleWithThree" showEveryone="true" text="Purple has three zones." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="3" out="@blueWithThree" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@blueWithThree" showEveryone="true" text="Blue has three zones." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="3" out="@greenWithThree" restart="false" fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <Text in="@greenWithThree" showEveryone="true" text="Green has three zones." fill="#ffffff" frame="#000000" cx="38.958333333333336" cz="122.6388888888889" r="1.25" angle="315" />
-  <And in="@start" out.0="@H1Open" fill="#1e1f13" frame="#000000" cx="101.80555555555557" cz="31.736111111111114" r="0.9722222222222232" angle="135" />
-  <And in="@start" out.0="@H2Open" fill="#1e1f13" frame="#000000" cx="101.80555555555557" cz="31.736111111111114" r="0.9722222222222232" angle="135" />
-  <And in="@start" out.0="@H3Open" fill="#1e1f13" frame="#000000" cx="101.80555555555557" cz="31.736111111111114" r="0.9722222222222232" angle="135" />
-  <And in="@start" out.0="@H4Open" fill="#1e1f13" frame="#000000" cx="101.80555555555557" cz="31.736111111111114" r="0.9722222222222232" angle="135" />
-  <And in="@start" out.0="@G1Open" fill="#1e1f13" frame="#000000" cx="101.80555555555557" cz="31.736111111111114" r="0.9722222222222232" angle="135" />
-  <And in="@start" out.0="@G2Open" fill="#1e1f13" frame="#000000" cx="101.80555555555557" cz="31.736111111111114" r="0.9722222222222232" angle="135" />
-  <And in="@start" out.0="@G3Open" fill="#1e1f13" frame="#000000" cx="101.80555555555557" cz="31.736111111111114" r="0.9722222222222232" angle="135" />
-  <And in="@start" out.0="@G4Open" fill="#1e1f13" frame="#000000" cx="101.80555555555557" cz="31.736111111111114" r="0.9722222222222232" angle="135" />
-  <WallDoor guardDelay="0" deltaY="0" deltaX="30" open="@G1Open" didOpen="@G1Close" close="@G1Close" didClose="@G1Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="116.45833333333334" z="173.95833333333334" w="5" d="5" h="3" r="0.9722222222222232" cx="101.80555555555557" cz="31.736111111111114" angle="135" />
-  <WallDoor guardDelay="0" deltaY="0" deltaX="-30" open="@G2Open" didOpen="@G2Close" close="@G2Close" didClose="@G2Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="146.45833333333334" z="158.95833333333334" w="5" d="5" h="3" r="0.9722222222222232" cx="101.80555555555557" cz="31.736111111111114" angle="135" />
-  <WallDoor guardDelay="0" deltaY="0" deltaZ="30" open="@G3Open" didOpen="@G3Close" close="@G3Close" didClose="@G3Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="123.95833333333334" z="151.45833333333334" w="5" d="5" h="3" r="0.9722222222222232" cx="101.80555555555557" cz="31.736111111111114" angle="135" />
-  <WallDoor guardDelay="0" deltaY="0" deltaZ="-30" open="@G4Open" didOpen="@G4Close" close="@G4Close" didClose="@G4Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="138.95833333333334" z="181.45833333333334" w="5" d="5" h="3" r="0.9722222222222232" cx="101.80555555555557" cz="31.736111111111114" angle="135" />
+  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="1" out="@purpleWithOne" restart="false" />
+  <Text in="@purpleWithOne" showEveryone="true" text="Purple has one zone." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="1" out="@blueWithOne" restart="false" />
+  <Text in="@blueWithOne" showEveryone="true" text="Blue has one zone." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="1" out="@greenWithOne" restart="false" />
+  <Text in="@greenWithOne" showEveryone="true" text="Green has one zone." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="2" out="@purpleWithTwo" restart="false" />
+  <Text in="@purpleWithTwo" showEveryone="true" text="Purple has two zones." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="2" out="@blueWithTwo" restart="false" />
+  <Text in="@blueWithTwo" showEveryone="true" text="Blue has two zones." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="2" out="@greenWithTwo" restart="false" />
+  <Text in="@greenWithTwo" showEveryone="true" text="Green has two zones." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <Counter in.0="@purpleCaptureA" in.1="@purpleCaptureB" in.2="@purpleCaptureC" in.3="@purpleCaptureD" in.4="@purpleCaptureE" in.5="@purpleCaptureF" in.6="@purpleCaptureG" in.7="@purpleCaptureH" in.8="@purpleCaptureI" n="3" out="@purpleWithThree" restart="false" />
+  <Text in="@purpleWithThree" showEveryone="true" text="Purple has three zones." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <Counter in.0="@blueCaptureA" in.1="@blueCaptureB" in.2="@blueCaptureC" in.3="@blueCaptureD" in.4="@blueCaptureE" in.5="@blueCaptureF" in.6="@blueCaptureG" in.7="@blueCaptureH" in.8="@blueCaptureI" n="3" out="@blueWithThree" restart="false" />
+  <Text in="@blueWithThree" showEveryone="true" text="Blue has three zones." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <Counter in.0="@greenCaptureA" in.1="@greenCaptureB" in.2="@greenCaptureC" in.3="@greenCaptureD" in.4="@greenCaptureE" in.5="@greenCaptureF" in.6="@greenCaptureG" in.7="@greenCaptureH" in.8="@greenCaptureI" n="3" out="@greenWithThree" restart="false" />
+  <Text in="@greenWithThree" showEveryone="true" text="Green has three zones." cx="38.958333333333336" cz="122.6388888888889" r="1.25" />
+  <And in="@start" out.0="@H1Open" />
+  <And in="@start" out.0="@H2Open" />
+  <And in="@start" out.0="@H3Open" />
+  <And in="@start" out.0="@H4Open" />
+  <And in="@start" out.0="@G1Open" />
+  <And in="@start" out.0="@G2Open" />
+  <And in="@start" out.0="@G3Open" />
+  <And in="@start" out.0="@G4Open" />
+  <WallDoor guardDelay="0" deltaY="0" deltaX="30" open="@G1Open" didOpen="@G1Close" close="@G1Close" didClose="@G1Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="116.45833333333334" z="173.95833333333334" w="5" d="5" h="3" />
+  <WallDoor guardDelay="0" deltaY="0" deltaX="-30" open="@G2Open" didOpen="@G2Close" close="@G2Close" didClose="@G2Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="146.45833333333334" z="158.95833333333334" w="5" d="5" h="3" />
+  <WallDoor guardDelay="0" deltaY="0" deltaZ="30" open="@G3Open" didOpen="@G3Close" close="@G3Close" didClose="@G3Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="123.95833333333334" z="151.45833333333334" w="5" d="5" h="3" />
+  <WallDoor guardDelay="0" deltaY="0" deltaZ="-30" open="@G4Open" didOpen="@G4Close" close="@G4Close" didClose="@G4Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="138.95833333333334" z="181.45833333333334" w="5" d="5" h="3" />
   <Wall fill="#cf093b" frame="#0b002a" x="178.95833333333334" z="129.58333333333334" w="20" d="1.25" h="6.25" />
   <Wall fill="#cf093b" frame="#0b002a" x="78.95833333333334" z="78.33333333333334" w="20" d="1.25" h="6.25" />
-  <WallDoor guardDelay="0" deltaY="0" deltaX="30" open="@H1Open" didOpen="@H1Close" close="@H1Close" didClose="@H1Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="116.45833333333334" z="48.958333333333336" w="5" d="5" h="3" r="0.9722222222222232" cx="101.80555555555557" cz="31.736111111111114" angle="135" />
-  <WallDoor guardDelay="0" deltaY="0" deltaX="-30" open="@H2Open" didOpen="@H2Close" close="@H2Close" didClose="@H2Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="146.45833333333334" z="33.958333333333336" w="5" d="5" h="3" r="0.9722222222222232" cx="101.80555555555557" cz="31.736111111111114" angle="135" />
-  <WallDoor guardDelay="0" deltaY="0" deltaZ="30" open="@H3Open" didOpen="@H3Close" close="@H3Close" didClose="@H3Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="123.95833333333334" z="26.458333333333336" w="5" d="5" h="3" r="0.9722222222222232" cx="101.80555555555557" cz="31.736111111111114" angle="135" />
-  <WallDoor guardDelay="0" deltaY="0" deltaZ="-30" open="@H4Open" didOpen="@H4Close" close="@H4Close" didClose="@H4Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="138.95833333333334" z="56.458333333333336" w="5" d="5" h="3" r="0.9722222222222232" cx="101.80555555555557" cz="31.736111111111114" angle="135" />
+  <WallDoor guardDelay="0" deltaY="0" deltaX="30" open="@H1Open" didOpen="@H1Close" close="@H1Close" didClose="@H1Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="116.45833333333334" z="48.958333333333336" w="5" d="5" h="3" />
+  <WallDoor guardDelay="0" deltaY="0" deltaX="-30" open="@H2Open" didOpen="@H2Close" close="@H2Close" didClose="@H2Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="146.45833333333334" z="33.958333333333336" w="5" d="5" h="3" />
+  <WallDoor guardDelay="0" deltaY="0" deltaZ="30" open="@H3Open" didOpen="@H3Close" close="@H3Close" didClose="@H3Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="123.95833333333334" z="26.458333333333336" w="5" d="5" h="3" />
+  <WallDoor guardDelay="0" deltaY="0" deltaZ="-30" open="@H4Open" didOpen="@H4Close" close="@H4Close" didClose="@H4Open" openSound="0" closeSound="0" stopSound="0" shotPower="100" openSpeed="5" closeSpeed="5" fill="#7b739f" frame="#000000" x="138.95833333333334" z="56.458333333333336" w="5" d="5" h="3" />
   <Incarnator y="60" fill="#ffcc00" frame="#660099" cx="128.75" cz="134.375" r="0.9722222222222285" angle="0" />
   <Incarnator y="60" fill="#ffcc00" frame="#660099" cx="128.68055555555554" cz="71.52777777777777" r="0.9722222222222214" angle="180" />
   <Incarnator y="60" fill="#ffcc00" frame="#660099" cx="101.90972222222223" cz="82.60416666666667" r="0.8680555555555571" angle="135" />

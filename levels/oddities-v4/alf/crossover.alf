@@ -37,7 +37,7 @@ Oh, and the switch sometimes gets flipped automatically." />
   <set baseHeight="StripBH" />
   <Wall fill="#eeeeee" frame="#000000" x="42.5" z="39.583333333333336" w="5" d="60" h="0" />
   <Field deltaY="0" deltaZ="1" fill="#eeeeee" frame="#000000" r="1.875" cx="63.125" cz="47.083333333333336" angle="135" x="27.5" z="7.083333333333334" w="5" d="5" h="4.5" />
-  <WallDoor open="@die" close="@reset" didOpen="@reset" deltaY="-StripSep + StripThick" shotPower="10" openDelay="5" openSpeed="15" closeSpeed="30" guardDelay="0" openSound="0" closeSound="0" stopSound="0" fill="#66ccff" frame="#000000" r="1.875" cx="63.125" cz="47.083333333333336" angle="135" x="75.06944444444444" z="76.73611111111111" w="5" d="60" h="0" />
+  <WallDoor open="@die" close="@reset" didOpen="@reset" deltaY="-StripSep + StripThick" shotPower="10" openDelay="5" openSpeed="15" closeSpeed="30" guardDelay="0" openSound="0" closeSound="0" stopSound="0" fill="#66ccff" frame="#000000" x="75.06944444444444" z="76.73611111111111" w="5" d="60" h="0" />
   <Wall fill="#eeeeee" frame="#000000" x="27.5" z="39.583333333333336" w="5" d="60" h="0" />
   <Incarnator fill="#99ccff" frame="#000000" cx="27.569444444444446" cz="62.08333333333334" r="2.6388888888888893" angle="180" />
   <Teleporter shape="0" start="0" fill="#99ccff" frame="#000000" cx="27.569444444444446" cz="62.08333333333334" r="2.6388888888888893" angle="180" />
@@ -69,6 +69,6 @@ Oh, and the switch sometimes gets flipped automatically." />
   <Guard watch="targ1" y="StripBH + 50" shotPower="3" freq="20 * 15" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="45" />
   <Teleporter group="@killer" start="0" y="StripAH" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="45" />
   <Teleporter group="@killer" start="0" y="StripBH" fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="45" />
-  <Text showEveryone="true" in="@deadlyON" text="Falls are now deadly." fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="45" />
-  <Text showEveryone="true" in="@deadlyOFF" text="Falls are now safe." fill="#00ee00" frame="#000000" cx="35" cz="39.583333333333336" r="1.875" angle="45" />
+  <Text showEveryone="true" in="@deadlyON" text="Falls are now deadly." cx="35" cz="39.583333333333336" r="1.875" />
+  <Text showEveryone="true" in="@deadlyOFF" text="Falls are now safe." cx="35" cz="39.583333333333336" r="1.875" />
 </map>

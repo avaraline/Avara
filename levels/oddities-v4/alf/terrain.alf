@@ -168,100 +168,100 @@
   <TriPyramid fill="#444444" frame="#000000" cx="108.64583333333334" cz="37.673611111111114" r="4.0625" angle="357.5" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="80.06944444444444" cz="85.27777777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="80.06944444444444" cz="85.27777777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="80.06944444444444" cz="85.27777777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="12.569444444444445" cz="147.15277777777777" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="12.569444444444445" cz="147.15277777777777" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="12.569444444444445" cz="147.15277777777777" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="13.819444444444445" cz="86.52777777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="13.819444444444445" cz="86.52777777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="13.819444444444445" cz="86.52777777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="83.19444444444444" cz="29.65277777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="83.19444444444444" cz="29.65277777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="83.19444444444444" cz="29.65277777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="21.944444444444446" cz="22.15277777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="21.944444444444446" cz="22.15277777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="21.944444444444446" cz="22.15277777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="21.319444444444446" cz="106.52777777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="21.319444444444446" cz="106.52777777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="21.319444444444446" cz="106.52777777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="18.819444444444446" cz="171.52777777777777" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="18.819444444444446" cz="171.52777777777777" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="18.819444444444446" cz="171.52777777777777" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="86.94444444444444" cz="178.40277777777777" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="86.94444444444444" cz="178.40277777777777" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="86.94444444444444" cz="178.40277777777777" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="81.94444444444444" cz="111.52777777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="81.94444444444444" cz="111.52777777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="81.94444444444444" cz="111.52777777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="139.44444444444446" cz="32.77777777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="139.44444444444446" cz="32.77777777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="139.44444444444446" cz="32.77777777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="194.44444444444446" cz="48.40277777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="194.44444444444446" cz="48.40277777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="194.44444444444446" cz="48.40277777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="189.44444444444446" cz="84.65277777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="189.44444444444446" cz="84.65277777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="189.44444444444446" cz="84.65277777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="128.81944444444446" cz="79.65277777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="128.81944444444446" cz="79.65277777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="128.81944444444446" cz="79.65277777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="52.56944444444445" cz="164.02777777777777" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="52.56944444444445" cz="164.02777777777777" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="52.56944444444445" cz="164.02777777777777" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="56.31944444444445" cz="125.90277777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="56.31944444444445" cz="125.90277777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="56.31944444444445" cz="125.90277777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="36.94444444444444" cz="109.02777777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="36.94444444444444" cz="109.02777777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="36.94444444444444" cz="109.02777777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="15.069444444444446" cz="52.15277777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="15.069444444444446" cz="52.15277777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="15.069444444444446" cz="52.15277777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="102.56944444444444" cz="59.02777777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="102.56944444444444" cz="59.02777777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="102.56944444444444" cz="59.02777777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="48.81944444444445" cz="54.02777777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="48.81944444444445" cz="54.02777777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="48.81944444444445" cz="54.02777777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="48.81944444444445" cz="22.77777777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="48.81944444444445" cz="22.77777777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="48.81944444444445" cz="22.77777777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="160.06944444444446" cz="42.77777777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="160.06944444444446" cz="42.77777777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="160.06944444444446" cz="42.77777777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="195.69444444444446" cz="24.65277777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="195.69444444444446" cz="24.65277777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="195.69444444444446" cz="24.65277777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="129.44444444444446" cz="53.40277777777778" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="129.44444444444446" cz="53.40277777777778" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="129.44444444444446" cz="53.40277777777778" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="158.81944444444446" cz="92.77777777777779" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="158.81944444444446" cz="92.77777777777779" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="158.81944444444446" cz="92.77777777777779" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Ufo shotPower="1 / burstLength" burstLength="20" burstSpeed="2" burstCharge="250" shield="-1" canGlow="false" isTarget="false" scale="2.8" hitScore="0" hitSound="snStepMetal" verticalRangeMax="20" verticalRangeMin="10" fill="#ff0099" frame="#008800" cx="103.125" cz="94.65277777777779" r="3.75" angle="45" />
   <Dome fill="#555555" frame="#000000" cx="66.18055555555556" cz="41.458333333333336" r="1.25" angle="0" quarters="4" />
   <Dome fill="#555555" frame="#000000" cx="37.43055555555556" cz="78.95833333333334" r="1.25" angle="0" quarters="4" />
@@ -295,245 +295,245 @@
   <Sound sound="snUnderwater" loopCount="-1" fill="#ff6666" frame="#000000" cx="185.55555555555557" cz="75.83333333333334" r="1.875" angle="45" />
   <Sound sound="snUnderwater" loopCount="-1" fill="#ff6666" frame="#000000" cx="139.30555555555557" cz="32.708333333333336" r="1.875" angle="45" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="112.43055555555556" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="122.43055555555556" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="112.43055555555556" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="122.43055555555556" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="132.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="142.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="132.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="142.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="152.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="162.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="152.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="162.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="172.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="182.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="172.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="182.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="192.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="202.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="192.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="202.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="212.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="222.43055555555557" z="114.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="212.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="222.43055555555557" z="124.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="112.43055555555556" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="122.43055555555556" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="112.43055555555556" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="122.43055555555556" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="132.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="142.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="132.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="142.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="152.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="162.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="152.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="162.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="172.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="182.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="172.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="182.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="192.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="202.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="192.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="202.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="212.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="222.43055555555557" z="134.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="212.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="222.43055555555557" z="144.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="112.43055555555556" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="122.43055555555556" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="112.43055555555556" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="122.43055555555556" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="132.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="142.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="132.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="142.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="152.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="162.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="152.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="162.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="172.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="182.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="172.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="182.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="192.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="202.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="192.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="202.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="212.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="222.43055555555557" z="154.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="212.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="222.43055555555557" z="164.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="112.43055555555556" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="122.43055555555556" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="112.43055555555556" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="122.43055555555556" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="132.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="142.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="132.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="142.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="152.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="162.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="152.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="162.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="172.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="182.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="172.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="182.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="192.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="202.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="192.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="202.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="212.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="222.43055555555557" z="174.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="212.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="222.43055555555557" z="184.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="112.43055555555556" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="122.43055555555556" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="112.43055555555556" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="112.43055555555556" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="122.43055555555556" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="122.43055555555556" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="132.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="142.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="132.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="132.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="142.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="142.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="152.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="162.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="152.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="152.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="162.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="162.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="172.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="182.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="172.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="172.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="182.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="182.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="192.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="202.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="192.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="192.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="202.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="202.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ff0000" frame="#000000" x="212.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#ffff00" frame="#000000" x="222.43055555555557" z="194.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="212.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#00ee00" frame="#000000" x="212.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <unique vars="mStep mReset" />
-  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" r="1.875" cx="139.30555555555557" cz="32.708333333333336" angle="45" x="222.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
+  <WallDoor stepOnMsg="mStep" hitMsg="mStep" deltaX="LiftXShift" deltaY="LiftHeight" deltaZ="LiftZShift" open="mStep" didOpen="mReset" close="mReset" closeDelay="LiftResetTime" closeSpeed="LiftCloseSpeed" openSpeed="LiftOpenSpeed" fill="#0000dd" frame="#000000" x="222.43055555555557" z="204.58333333333334" w="10" d="10" h="0.25" />
   <Solid shape="bspTree" scale="1.3" fill="#008800" frame="#000000" cx="8.055555555555555" cz="181.45833333333334" r="2.5" angle="45" />
   <Solid shape="bspTree" scale="1.3" fill="#008800" frame="#000000" cx="14.305555555555557" cz="191.45833333333334" r="2.5" angle="45" />
   <Solid shape="bspTree" scale="1.6" fill="#008800" frame="#000000" cx="44.93055555555556" cz="194.58333333333334" r="4.375" angle="45" />
@@ -543,7 +543,7 @@
   <unique vars="mOpen mStart mEnd" />
   <Door shape="bsp2Sphere" scale="3" isTarget="true" hitMsg="mOpen" open="mOpen" didOpen="mStart" close="mEnd" deltaY="3" openSpeed="10" closeSpeed="10" openSound="0" closeSound="0" shotPower="1" guardDelay="2" fill="#555555" frame="#000000" cx="58.05555555555556" cz="53.958333333333336" r="2.5" angle="270" />
   <Teleporter start="mStart" out="mEnd" stop="mEnd" fill="#555555" frame="#000000" cx="58.05555555555556" cz="53.958333333333336" r="2.5" angle="270" />
-  <Timer in="mOpen" wait="8 * 15" out="mEnd" fill="#555555" frame="#000000" cx="58.05555555555556" cz="53.958333333333336" r="2.5" angle="270" />
+  <Timer in="mOpen" wait="8 * 15" out="mEnd" />
   <Teleporter y="DropTelY" start="0" fill="#00ee00" frame="#000000" cx="45.55555555555556" cz="65.83333333333334" r="1.25" angle="135" />
   <Teleporter y="DropTelY" start="0" fill="#00ee00" frame="#000000" cx="164.30555555555557" cz="58.333333333333336" r="1.25" angle="135" />
   <Teleporter y="DropTelY" start="0" fill="#00ee00" frame="#000000" cx="52.43055555555556" cz="153.33333333333334" r="1.25" angle="135" />
@@ -556,36 +556,36 @@
   <GroundColor fill="#004400" frame="#99ccff" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="135.20833333333334" cz="109.58333333333334" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="135.20833333333334" cz="109.58333333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="135.20833333333334" cz="109.58333333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="122.70833333333334" cz="136.45833333333334" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="122.70833333333334" cz="136.45833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="122.70833333333334" cz="136.45833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="179.58333333333334" cz="124.58333333333334" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="179.58333333333334" cz="124.58333333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="179.58333333333334" cz="124.58333333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="157.08333333333334" cz="162.70833333333334" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="157.08333333333334" cz="162.70833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="157.08333333333334" cz="162.70833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="222.70833333333334" cz="136.45833333333334" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="222.70833333333334" cz="136.45833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="222.70833333333334" cz="136.45833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#aa0000" frame="#000000" cx="205.20833333333334" cz="200.20833333333334" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="205.20833333333334" cz="200.20833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#aa0000" frame="#000000" cx="205.20833333333334" cz="200.20833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="123.33333333333334" cz="188.95833333333334" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="123.33333333333334" cz="188.95833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="123.33333333333334" cz="188.95833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#008800" frame="#000000" cx="193.33333333333334" cz="145.20833333333334" r="1.25" angle="225" />
-  <And in="@start" out="mShow" fill="#008800" frame="#000000" cx="193.33333333333334" cz="145.20833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#008800" frame="#000000" cx="193.33333333333334" cz="145.20833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Teleporter activeRange="10000" deadRange="5 * 40" destGroup="@bubble" group="-1" y="-20" shape="0" fill="#000000" frame="#000000" cx="107.08333333333334" cz="104.375" r="0.625" angle="135" />
   <Teleporter start="0" group="@bubble" y="100" spin="false" sound="0" fill="#000000" frame="#000000" cx="107.08333333333334" cz="104.375" r="0.625" angle="135" />
   <unique vars="mStep mR" />

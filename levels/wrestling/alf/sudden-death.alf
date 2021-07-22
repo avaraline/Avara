@@ -19,16 +19,16 @@
   <Wall fill="#aa0000" frame="#000000" x="70" z="28.993055555555557" w="20" d="0.625" h="0.25" />
   <Wall fill="#aa0000" frame="#000000" x="70" z="33.36805555555556" w="20" d="0.625" h="0.25" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#004400" frame="#000000" cx="8.125" cz="23.055555555555557" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="32" fill="#004400" frame="#000000" cx="8.125" cz="23.055555555555557" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="32" />
   <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" fill="#004400" frame="#000000" cx="8.125" cz="23.055555555555557" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#000000" cx="88.125" cz="18.055555555555557" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="32" fill="#aa0000" frame="#000000" cx="88.125" cz="18.055555555555557" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="32" />
   <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" fill="#aa0000" frame="#000000" cx="88.125" cz="18.055555555555557" r="1.25" angle="225" />
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" fragment="false" spin="false" fill="#ffffff" frame="#000000" cx="46.875" cz="21.805555555555557" r="1.25" angle="45" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="46.875" cz="21.805555555555557" r="1.25" angle="45" />
-  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#ffffff" frame="#000000" r="1.25" cx="46.875" cz="21.805555555555557" angle="45" x="47.5" z="21.180555555555557" w="5" d="5" h="0.25" y="99" />
+  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#ffffff" frame="#000000" x="47.5" z="21.180555555555557" w="5" d="5" h="0.25" y="99" />
   <set ambient.i="0.2" light.0.i="1" light.0.a="90" light.1.i="0.5" light.1.b="45" />
   <Wall fill="#004400" frame="#000000" x="41.25" z="21.180555555555557" w="11.25" d="23.75" h="0.25" />
   <Wall fill="#aa0000" frame="#000000" x="53.75" z="21.180555555555557" w="11.25" d="23.75" h="0.25" />

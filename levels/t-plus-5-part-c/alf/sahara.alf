@@ -38,13 +38,13 @@
   <Wall fill="#664833" frame="#000000" x="107.77777777777779" z="172.77777777777777" w="15" d="5" h="0" y="5.25" />
   <set wallHeight="0" />
   <Wall fill="#7f5a40" frame="#000000" x="82.77777777777779" z="177.77777777777777" w="5" d="5" h="0" y="6" />
-  <Ramp deltaY="6" fill="#7f5a40" frame="#000000" x="92.77777777777779" z="177.77777777777777" w="15" d="5" h="0" r="6.111111111111114" angle="270" />
+  <Ramp deltaY="6" fill="#7f5a40" frame="#000000" x="92.77777777777779" z="177.77777777777777" w="15" d="5" h="0" angle="270" />
   <Wall fill="#7f5a40" frame="#000000" x="142.77777777777777" z="167.77777777777777" w="5" d="5" h="0" y="6" />
-  <Ramp deltaY="6" fill="#7f5a40" frame="#000000" x="142.77777777777777" z="157.77777777777777" w="5" d="15" h="0" r="6.736111111111114" angle="180" />
+  <Ramp deltaY="6" fill="#7f5a40" frame="#000000" x="142.77777777777777" z="157.77777777777777" w="5" d="15" h="0" angle="180" />
   <Wall fill="#7f5a40" frame="#000000" x="132.77777777777777" z="107.77777777777779" w="5" d="5" h="0" y="6" />
-  <Ramp deltaY="6" fill="#7f5a40" frame="#000000" x="122.77777777777777" z="107.77777777777779" w="15" d="5" h="0" r="6.111111111111114" angle="90" />
+  <Ramp deltaY="6" fill="#7f5a40" frame="#000000" x="122.77777777777777" z="107.77777777777779" w="15" d="5" h="0" angle="90" />
   <Wall fill="#7f5a40" frame="#000000" x="72.77777777777779" z="117.77777777777779" w="5" d="5" h="0" y="6" />
-  <Ramp deltaY="6" fill="#7f5a40" frame="#000000" x="72.77777777777779" z="127.77777777777777" w="5" d="15" h="0" r="6.111111111111114" angle="0" />
+  <Ramp deltaY="6" fill="#7f5a40" frame="#000000" x="72.77777777777779" z="127.77777777777777" w="5" d="15" h="0" angle="0" />
   <set wallHeight="2" />
   <Wall fill="#996c4c" frame="#000000" x="100.90277777777779" z="142.77777777777777" w="1.25" d="15" h="0" />
   <Wall fill="#996c4c" frame="#000000" x="114.65277777777779" z="142.77777777777777" w="1.25" d="15" h="0" />
@@ -79,72 +79,72 @@
   <Wall fill="#59351a" frame="#000000" x="72.77777777777779" z="125.27777777777777" w="5" d="20" h="0" />
   <unique vars="gShow gTaken" />
   <Goody y="3.5" shape="bspAvaraA" speed="2" grenades="8" missiles="4" start="gShow" out="gTaken" fill="#ffbf80" frame="#000000" cx="107.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="390" out="gShow" fill="#ffbf80" frame="#000000" cx="107.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#ffbf80" frame="#000000" cx="107.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="390" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="3.75" shape="bspGrenade" speed="2" grenades="6" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="127.77777777777777" cz="122.77777777777779" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="127.77777777777777" cz="122.77777777777779" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="127.77777777777777" cz="122.77777777777779" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="3.75" shape="bspGrenade" speed="2" grenades="6" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="87.77777777777779" cz="122.77777777777779" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="87.77777777777779" cz="122.77777777777779" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="87.77777777777779" cz="122.77777777777779" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="3.75" shape="bspGrenade" speed="2" grenades="6" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="87.77777777777779" cz="162.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="87.77777777777779" cz="162.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="87.77777777777779" cz="162.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="3.75" shape="bspGrenade" speed="2" grenades="6" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="127.77777777777777" cz="162.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="127.77777777777777" cz="162.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="127.77777777777777" cz="162.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="9.75" shape="bspGrenade" speed="2" grenades="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="142.77777777777777" cz="172.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="142.77777777777777" cz="172.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="142.77777777777777" cz="172.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="9.75" shape="bspGrenade" speed="2" grenades="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="137.77777777777777" cz="107.77777777777779" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="137.77777777777777" cz="107.77777777777779" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="137.77777777777777" cz="107.77777777777779" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="9.75" shape="bspGrenade" speed="2" grenades="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="72.77777777777779" cz="112.77777777777779" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="72.77777777777779" cz="112.77777777777779" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="72.77777777777779" cz="112.77777777777779" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="9.75" shape="bspGrenade" speed="2" grenades="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="77.77777777777779" cz="177.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="77.77777777777779" cz="177.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="77.77777777777779" cz="177.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="11.75" shape="bspMissile" speed="2" missiles="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="77.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="77.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="77.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="11.75" shape="bspMissile" speed="2" missiles="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="112.77777777777779" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="112.77777777777779" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="112.77777777777779" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="11.75" shape="bspMissile" speed="2" missiles="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="137.77777777777777" cz="142.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="137.77777777777777" cz="142.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="137.77777777777777" cz="142.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="11.75" shape="bspMissile" speed="2" missiles="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="172.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="172.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="172.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="7.75" shape="bspMissile" speed="2" missiles="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="167.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="167.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="167.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="7.75" shape="bspMissile" speed="2" missiles="4" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="117.77777777777779" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="117.77777777777779" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="107.77777777777779" cz="117.77777777777779" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="7.75" shape="bspGrenade" speed="2" grenades="6" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="82.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="82.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="82.77777777777779" cz="142.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <unique vars="gShow gTaken" />
   <Goody y="7.75" shape="bspGrenade" speed="2" grenades="6" start="gShow" out="gTaken" fill="#cc9166" frame="#000000" cx="132.77777777777777" cz="142.77777777777777" r="1.25" angle="135" />
-  <Timer in="gTaken" wait="234" out="gShow" fill="#cc9166" frame="#000000" cx="132.77777777777777" cz="142.77777777777777" r="1.25" angle="135" />
-  <And in="@start" out="gShow" fill="#cc9166" frame="#000000" cx="132.77777777777777" cz="142.77777777777777" r="1.25" angle="135" />
+  <Timer in="gTaken" wait="234" out="gShow" />
+  <And in="@start" out="gShow" />
   <set wallHeight="0" baseHeight="2" />
   <Wall fill="#b37e59" frame="#000000" x="127.77777777777777" z="162.77777777777777" w="1.25" d="1.25" h="0" />
   <Wall fill="#b37e59" frame="#000000" x="87.77777777777779" z="162.77777777777777" w="1.25" d="1.25" h="0" />

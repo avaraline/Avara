@@ -145,20 +145,20 @@ A level that is designed for, but not limited to, 2 players." gravity=".2" grena
   <Incarnator y="13" fill="#66cc00" frame="#000000" cx="7.5" cz="34.375" r="1.875" angle="225" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" grenades="12" start="@g1act" out="mTaken" speed="-10" fill="#ffff00" frame="#000000" cx="44.375" cz="23.125" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@g2act" fill="#ffff00" frame="#000000" cx="44.375" cz="23.125" r="1.875" angle="315" />
-  <And in="@start" out="@g1act" fill="#ffff00" frame="#000000" cx="44.375" cz="23.125" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@g2act" />
+  <And in="@start" out="@g1act" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" missiles="8" start="@m1act" out="mTaken" speed="10" fill="#ff0099" frame="#000000" cx="36.875" cz="26.875" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@m2act" fill="#ff0099" frame="#000000" cx="36.875" cz="26.875" r="1.875" angle="315" />
-  <And in="@start" out="@m1act" fill="#ff0099" frame="#000000" cx="36.875" cz="26.875" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@m2act" />
+  <And in="@start" out="@m1act" />
   <unique vars="mActive mTaken" />
   <Goody shape="bspCompass" y="12.4" grenades="12" start="mActive" out="mTaken" speed="-10" fill="#ffff00" frame="#000000" cx="27.5" cz="24.375" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="mActive" fill="#ffff00" frame="#000000" cx="27.5" cz="24.375" r="1.875" angle="315" />
-  <And in="@start" out="mActive" fill="#ffff00" frame="#000000" cx="27.5" cz="24.375" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="mActive" />
+  <And in="@start" out="mActive" />
   <unique vars="mActive mTaken" />
   <Goody shape="bspCompass" y="13" missiles="8" start="mActive" out="mTaken" speed="10" fill="#ff0099" frame="#000000" cx="12.5" cz="26.875" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="mActive" fill="#ff0099" frame="#000000" cx="12.5" cz="26.875" r="1.875" angle="315" />
-  <And in="@start" out="mActive" fill="#ff0099" frame="#000000" cx="12.5" cz="26.875" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="mActive" />
+  <And in="@start" out="mActive" />
   <set baseHeight="20" wallHeight="1.5" />
   <Wall fill="#888888" frame="#000000" x="35" z="25.9375" w="62.5" d="24.375" h="0" />
   <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" fill="#cc0066" frame="#cc0066" cx="73.125" cz="6.25" r="1.25" angle="225" />
@@ -175,23 +175,23 @@ A level that is designed for, but not limited to, 2 players." gravity=".2" grena
   <Hologram y="2" shape="1112" fill="#ff0000" frame="#000000" cx="5.625" cz="25.76388888888889" r="8.61111111111111" angle="270" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" missiles="8" start="@m2act" out="mTaken" speed="10" fill="#ff0099" frame="#000000" cx="40.625" cz="23.125" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@m3act" fill="#ff0099" frame="#000000" cx="40.625" cz="23.125" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@m3act" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" missiles="8" start="@m3act" out="mTaken" speed="10" fill="#ff0099" frame="#000000" cx="44.375" cz="26.875" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@m4act" fill="#ff0099" frame="#000000" cx="44.375" cz="26.875" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@m4act" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" missiles="8" start="@m4act" out="mTaken" speed="10" fill="#ff0099" frame="#000000" cx="36.875" cz="19.375" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@m5act" fill="#ff0099" frame="#000000" cx="36.875" cz="19.375" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@m5act" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" missiles="8" start="@m5act" out="mTaken" speed="10" fill="#ff0099" frame="#000000" cx="44.375" cz="19.375" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@m1act" fill="#ff0099" frame="#000000" cx="44.375" cz="19.375" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@m1act" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" grenades="12" start="@g2act" out="mTaken" speed="-10" fill="#ffff00" frame="#000000" cx="40.625" cz="26.875" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@g3act" fill="#ffff00" frame="#000000" cx="40.625" cz="26.875" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@g3act" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" grenades="12" start="@g3act" out="mTaken" speed="-10" fill="#ffff00" frame="#000000" cx="36.875" cz="23.125" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@g4act" fill="#ffff00" frame="#000000" cx="36.875" cz="23.125" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@g4act" />
   <unique vars="mTaken" />
   <Goody shape="bspCompass" y="2" grenades="12" start="@g4act" out="mTaken" speed="-10" fill="#ffff00" frame="#000000" cx="40.625" cz="19.375" r="1.875" angle="315" />
-  <Timer in.0="mTaken" wait="60" out.0="@g1act" fill="#ffff00" frame="#000000" cx="40.625" cz="19.375" r="1.875" angle="315" />
+  <Timer in.0="mTaken" wait="60" out.0="@g1act" />
 </map>

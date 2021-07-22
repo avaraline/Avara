@@ -4,9 +4,9 @@
 You can only have one booster to start with.
 Collect yellow pills for energy, shields and points.
 A barrel of laughs and suspense for net play." normalWallHeight="1.5" wallHeight="normalWallHeight" homeBaseHeight="2.2" ambient.i="0.6" gH="0.8" gobbleYon="40" goodyY="1.6" wallFriction="0" wallTraction="0" />
-  <And in="@start" out="@gStart" fill="#ffff00" frame="#ff9966" cx="2.291666666666667" cz="2.291666666666667" r="1.875" angle="315" />
-  <Counter n="140" in="@gob" out="@gRestart" fill="#ffff00" frame="#ff9966" cx="2.291666666666667" cz="2.291666666666667" r="1.875" angle="315" />
-  <Timer wait="32" in="@gRestart" out="@gStart" fill="#ffff00" frame="#ff9966" cx="2.291666666666667" cz="2.291666666666667" r="1.875" angle="315" />
+  <And in="@start" out="@gStart" />
+  <Counter n="140" in="@gob" out="@gRestart" />
+  <Timer wait="32" in="@gRestart" out="@gStart" />
   <Teleporter yon="0.01" y="-20" win="500" start="@winTeam" activeRange="2000" fill="#ffff00" frame="#ff9966" cx="2.291666666666667" cz="2.291666666666667" r="1.875" angle="315" />
   <set gp="10" gs="0.2" ge="1.5" timeLimit="0" />
   <Incarnator stop="@start" y="10" fill="#ffff00" frame="#aa0000" cx="69.16666666666667" cz="156.66666666666669" r="1.875" angle="270" />
@@ -231,24 +231,24 @@ A barrel of laughs and suspense for net play." normalWallHeight="1.5" wallHeight
   <Goody shape="bspGrenade" speed="10" y="goodyY" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#dd0000" frame="#ff6600" cx="41.94444444444444" cz="44.51388888888889" r="2.5" angle="315" />
   <Goody shape="bspMissile" speed="10" y="goodyY" start="mg2" stop="mg3" out="mWait" missiles="3" fill="#dd0000" frame="#ff6600" cx="41.94444444444444" cz="44.51388888888889" r="2.5" angle="315" />
   <Goody scale="0.5" speed="10" y="goodyY" start="mg3" stop="mg1" out="mWait" boosters="1" fill="#dd0000" frame="#ff6600" cx="41.94444444444444" cz="44.51388888888889" r="2.5" angle="315" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="160" fill="#dd0000" frame="#ff6600" cx="41.94444444444444" cz="44.51388888888889" r="2.5" angle="315" />
-  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" fill="#dd0000" frame="#ff6600" cx="41.94444444444444" cz="44.51388888888889" r="2.5" angle="315" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" />
   <unique vars="mg1 mg2 mg3 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="goodyY" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#dd0000" frame="#ff6600" cx="41.31944444444444" cz="131.38888888888889" r="2.5" angle="315" />
   <Goody shape="bspMissile" speed="10" y="goodyY" start="mg2" stop="mg3" out="mWait" missiles="3" fill="#dd0000" frame="#ff6600" cx="41.31944444444444" cz="131.38888888888889" r="2.5" angle="315" />
   <Goody scale="0.5" speed="10" y="goodyY" start="mg3" stop="mg1" out="mWait" boosters="1" fill="#dd0000" frame="#ff6600" cx="41.31944444444444" cz="131.38888888888889" r="2.5" angle="315" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="160" fill="#dd0000" frame="#ff6600" cx="41.31944444444444" cz="131.38888888888889" r="2.5" angle="315" />
-  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" fill="#dd0000" frame="#ff6600" cx="41.31944444444444" cz="131.38888888888889" r="2.5" angle="315" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" />
   <unique vars="mg1 mg2 mg3 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="goodyY" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#dd0000" frame="#ff6600" cx="134.44444444444446" cz="131.38888888888889" r="2.5" angle="315" />
   <Goody shape="bspMissile" speed="10" y="goodyY" start="mg2" stop="mg3" out="mWait" missiles="3" fill="#dd0000" frame="#ff6600" cx="134.44444444444446" cz="131.38888888888889" r="2.5" angle="315" />
   <Goody scale="0.5" speed="10" y="goodyY" start="mg3" stop="mg1" out="mWait" boosters="1" fill="#dd0000" frame="#ff6600" cx="134.44444444444446" cz="131.38888888888889" r="2.5" angle="315" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="160" fill="#dd0000" frame="#ff6600" cx="134.44444444444446" cz="131.38888888888889" r="2.5" angle="315" />
-  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" fill="#dd0000" frame="#ff6600" cx="134.44444444444446" cz="131.38888888888889" r="2.5" angle="315" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" />
   <unique vars="mg1 mg2 mg3 mWait mNext" />
   <Goody shape="bspGrenade" speed="10" y="goodyY" start="mg1" stop="mg2" out="mWait" grenades="4" fill="#dd0000" frame="#ff6600" cx="133.19444444444446" cz="45.76388888888889" r="2.5" angle="315" />
   <Goody shape="bspMissile" speed="10" y="goodyY" start="mg2" stop="mg3" out="mWait" missiles="3" fill="#dd0000" frame="#ff6600" cx="133.19444444444446" cz="45.76388888888889" r="2.5" angle="315" />
   <Goody scale="0.5" speed="10" y="goodyY" start="mg3" stop="mg1" out="mWait" boosters="1" fill="#dd0000" frame="#ff6600" cx="133.19444444444446" cz="45.76388888888889" r="2.5" angle="315" />
-  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="160" fill="#dd0000" frame="#ff6600" cx="133.19444444444446" cz="45.76388888888889" r="2.5" angle="315" />
-  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" fill="#dd0000" frame="#ff6600" cx="133.19444444444446" cz="45.76388888888889" r="2.5" angle="315" />
+  <Timer in.0="@start" in.1="mWait" in.2="mg1" in.3="mg2" in.4="mg3" out="mNext" wait="160" />
+  <Distributor in="mNext" out.0="mg1" out.1="mg2" out.2="mg3" />
 </map>

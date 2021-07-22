@@ -106,13 +106,13 @@
   <Wall fill="#ffff00" frame="#000000" x="103.75" z="99.93055555555557" w="4.444444444444443" d="3.194444444444443" h="0" />
   <Goody shape="bspGrenade" y="1.5" grenades="4" speed="15" fill="#ffff00" frame="#000000" cx="78.19444444444444" cz="90.625" r="1.9444444444444429" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="60.625" cz="66.18055555555556" r="1.9444444444444464" angle="45" />
-  <Timer in="gTaken" out="gShow" wait="300" fill="#ffffff" frame="#000000" cx="60.625" cz="66.18055555555556" r="1.9444444444444464" angle="45" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
   <Goody shape="bspMissile" speed="2" yon="20" y="7" missiles="2" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="60.625" cz="66.18055555555556" r="1.9444444444444464" angle="45" />
   <Ufo shape="bspUfo" motionRange="20" homesick=".5" homeRange="5" status="true" fill="#663399" frame="#000000" cx="80.06944444444444" cz="85.625" r="1.9444444444444429" angle="135" />
   <Dome domeHeight="20" fill="#660099" frame="#000000" cx="95.83333333333334" cz="80.83333333333334" r="5.972222222222221" angle="0" quarters="4" />
-  <Ramp deltaY="5" fill="#dd0000" frame="#000000" x="83.64583333333334" z="80.83333333333334" w="16.45833333333333" d="7.083333333333329" h="0" r="11.041666666666671" angle="90" />
-  <Ramp deltaY="5" fill="#004400" frame="#000000" x="108.33333333333334" z="80.83333333333334" w="18.33333333333333" d="7.083333333333329" h="0" r="11.041666666666671" angle="270" />
+  <Ramp deltaY="5" fill="#dd0000" frame="#000000" x="83.64583333333334" z="80.83333333333334" w="16.45833333333333" d="7.083333333333329" h="0" angle="90" />
+  <Ramp deltaY="5" fill="#004400" frame="#000000" x="108.33333333333334" z="80.83333333333334" w="18.33333333333333" d="7.083333333333329" h="0" angle="270" />
   <set wallHeight=".5" />
   <Wall fill="#ffff00" frame="#000000" x="96.04166666666667" z="74.89583333333334" w="12.777777777777771" d="5.069444444444443" h="0" y="7" />
   <set wallHeight=".5" />
@@ -129,12 +129,12 @@
   <Wall fill="#0033ff" frame="#000000" x="114.86111111111111" z="98.92361111111111" w="5.694444444444443" d="6.319444444444443" h="0" y="16" />
   <Wall fill="#0033ff" frame="#000000" x="109.86111111111111" z="107.67361111111111" w="5.694444444444443" d="6.319444444444443" h="0" y="16" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="94.93055555555556" cz="109.30555555555556" r="1.9444444444444429" angle="45" />
-  <Timer in="gTaken" out="gShow" wait="300" fill="#ffffff" frame="#000000" cx="94.93055555555556" cz="109.30555555555556" r="1.9444444444444429" angle="45" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
   <Goody shape="bspGrenade" speed="2" yon="50" y="19" grenades="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="94.93055555555556" cz="109.30555555555556" r="1.9444444444444429" angle="45" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="60.34722222222223" cz="80.625" r="1.9444444444444464" angle="45" />
-  <Timer in="gTaken" out="gShow" wait="300" fill="#ffffff" frame="#000000" cx="60.34722222222223" cz="80.625" r="1.9444444444444464" angle="45" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
   <Goody shape="bspGrenade" speed="2" yon="50" y="19" grenades="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="60.34722222222223" cz="80.625" r="1.9444444444444464" angle="45" />
   <set wallHeight="6" />
   <Wall fill="#777777" frame="#000000" x="112.08333333333334" z="35.208333333333336" w="5.694444444444443" d="5.694444444444443" h="0" />
@@ -158,12 +158,12 @@
   <Dome fill="#008800" frame="#000000" cx="46.145833333333336" cz="126.77083333333334" r="5.6597222222222285" angle="0" quarters="4" />
   <Dome fill="#0033ff" frame="#000000" cx="34.270833333333336" cz="142.70833333333334" r="5.659722222222223" angle="0" quarters="4" />
   <unique vars="pUfoDead raiseUfo" />
-  <And in="@start" out="raiseUfo" fill="#ff0099" frame="#008800" cx="35.76388888888889" cz="124.93055555555556" r="4.027777777777779" angle="225" />
-  <Timer in="pUfoDead" out="raiseUfo" wait="300" fill="#ff0099" frame="#008800" cx="35.76388888888889" cz="124.93055555555556" r="4.027777777777779" angle="225" />
+  <And in="@start" out="raiseUfo" />
+  <Timer in="pUfoDead" out="raiseUfo" wait="300" />
   <Ufo y="4" start="raiseUfo" status="raiseUfo" killMsg="pUfoDead" fill="#ff0099" frame="#008800" cx="35.76388888888889" cz="124.93055555555556" r="4.027777777777779" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="33.19444444444444" cz="131.875" r="1.9444444444444464" angle="45" />
-  <Timer in="gTaken" out="gShow" wait="3000" fill="#ffffff" frame="#000000" cx="33.19444444444444" cz="131.875" r="1.9444444444444464" angle="45" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="3000" />
   <Goody shape="bspGoody" speed="2" yon="50" y="1.5" boosters="1" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="33.19444444444444" cz="131.875" r="1.9444444444444464" angle="45" />
   <Wall fill="#0033ff" frame="#000000" x="75.83333333333334" z="54.895833333333336" w="5.694444444444443" d="6.319444444444443" h="0" y="16" />
   <Ufo y="4" fill="#008800" frame="#ff3300" cx="118.05555555555556" cz="54.93055555555556" r="3.819444444444443" angle="45" />

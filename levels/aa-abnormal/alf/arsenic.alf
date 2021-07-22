@@ -5,41 +5,41 @@ Your children will die of cancer.
 This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds in the area outlined in purple in the center." ambient.i=".1" light.0.i=".5" light.0.a="20" light.0.b="0" light.1.i=".3" light.1.a="45" light.1.b="180" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
   <SkyColor fill="#990033" frame="#440c23" />
   <GroundColor fill="#371525" frame="#371525" />
-  <Ramp y="0" deltaY="6" fill="#59153a" frame="#000000" x="113.95833333333334" z="129.58333333333334" w="20" d="30" h="0" r="8.368055555555557" angle="180" />
-  <Ramp y="0" deltaY="6" fill="#59153a" frame="#000000" x="88.95833333333334" z="104.58333333333334" w="30" d="20" h="0" r="8.368055555555557" angle="270" />
-  <Ramp y="0" deltaY="6" fill="#59153a" frame="#000000" x="113.95833333333334" z="79.58333333333334" w="20" d="30" h="0" r="8.368055555555557" angle="0" />
-  <Ramp y="0" deltaY="6" fill="#59153a" frame="#000000" x="138.95833333333334" z="104.58333333333334" w="30" d="20" h="0" r="8.368055555555557" angle="90" />
+  <Ramp y="0" deltaY="6" fill="#59153a" frame="#000000" x="113.95833333333334" z="129.58333333333334" w="20" d="30" h="0" angle="180" />
+  <Ramp y="0" deltaY="6" fill="#59153a" frame="#000000" x="88.95833333333334" z="104.58333333333334" w="30" d="20" h="0" angle="270" />
+  <Ramp y="0" deltaY="6" fill="#59153a" frame="#000000" x="113.95833333333334" z="79.58333333333334" w="20" d="30" h="0" angle="0" />
+  <Ramp y="0" deltaY="6" fill="#59153a" frame="#000000" x="138.95833333333334" z="104.58333333333334" w="30" d="20" h="0" angle="90" />
   <Wall fill="#421a46" frame="#000000" x="88.95833333333334" z="129.58333333333334" w="30" d="30" h="12" />
   <Wall fill="#421a46" frame="#000000" x="63.95833333333334" z="104.58333333333334" w="20" d="20" h="6" />
   <Wall fill="#421a46" frame="#000000" x="63.95833333333334" z="154.58333333333334" w="20" d="20" h="12" />
-  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="63.95833333333334" z="129.58333333333334" w="20" d="30" h="0" r="4.166666666666668" angle="180" />
-  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="88.95833333333334" z="154.58333333333334" w="30" d="20" h="0" r="4.166666666666671" angle="270" />
+  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="63.95833333333334" z="129.58333333333334" w="20" d="30" h="0" angle="180" />
+  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="88.95833333333334" z="154.58333333333334" w="30" d="20" h="0" angle="270" />
   <Wall fill="#421a46" frame="#000000" x="113.95833333333334" z="154.58333333333334" w="20" d="20" h="6" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="61.527777777777786" cz="157.08333333333334" r="4.0277777777777715" angle="225" />
-  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="88.95833333333334" z="54.58333333333334" w="30" d="20" h="0" r="4.166666666666664" angle="270" />
+  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="88.95833333333334" z="54.58333333333334" w="30" d="20" h="0" angle="270" />
   <Wall fill="#421a46" frame="#000000" x="88.95833333333334" z="79.58333333333334" w="30" d="30" h="12" />
   <Wall fill="#421a46" frame="#000000" x="63.95833333333334" z="54.58333333333334" w="20" d="20" h="12" />
-  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="63.95833333333334" z="79.58333333333334" w="20" d="30" h="0" r="4.166666666666668" angle="0" />
+  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="63.95833333333334" z="79.58333333333334" w="20" d="30" h="0" angle="0" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="62.84722222222223" cz="53.611111111111114" r="4.027777777777779" angle="315" />
   <Wall fill="#421a46" frame="#000000" x="138.95833333333334" z="79.58333333333334" w="30" d="30" h="12" />
   <Wall fill="#421a46" frame="#000000" x="163.95833333333334" z="54.58333333333334" w="20" d="20" h="12" />
-  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="163.95833333333334" z="79.58333333333334" w="20" d="30" h="0" r="4.166666666666671" angle="0" />
-  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="138.95833333333334" z="54.58333333333334" w="30" d="20" h="0" r="4.166666666666664" angle="90" />
+  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="163.95833333333334" z="79.58333333333334" w="20" d="30" h="0" angle="0" />
+  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="138.95833333333334" z="54.58333333333334" w="30" d="20" h="0" angle="90" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="168.33333333333334" cz="49.65277777777778" r="4.0277777777777715" angle="45" />
   <Wall fill="#421a46" frame="#000000" x="138.95833333333334" z="129.58333333333334" w="30" d="30" h="12" />
   <Wall fill="#421a46" frame="#000000" x="163.95833333333334" z="154.58333333333334" w="20" d="20" h="12" />
-  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="138.95833333333334" z="154.58333333333334" w="30" d="20" h="0" r="4.166666666666671" angle="90" />
-  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="163.95833333333334" z="129.58333333333334" w="20" d="30" h="0" r="4.166666666666671" angle="180" />
+  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="138.95833333333334" z="154.58333333333334" w="30" d="20" h="0" angle="90" />
+  <Ramp y="6" deltaY="6" fill="#59153a" frame="#000000" x="163.95833333333334" z="129.58333333333334" w="20" d="30" h="0" angle="180" />
   <Incarnator y="30" fill="#008800" frame="#000000" cx="167.08333333333331" cz="157.08333333333334" r="4.0277777777777715" angle="135" />
   <Wall fill="#421a46" frame="#000000" x="163.95833333333334" z="104.58333333333334" w="20" d="20" h="6" />
   <Wall fill="#421a46" frame="#000000" x="113.95833333333334" z="54.58333333333334" w="20" d="20" h="6" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="112.08333333333334" cz="102.08333333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="50" fill="#ffffff" frame="#000000" cx="112.08333333333334" cz="102.08333333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="50" />
   <Goody shape="bspGrenade" y="1.75" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="112.08333333333334" cz="102.08333333333334" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="116.45833333333334" cz="106.18055555555556" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="50" fill="#ffffff" frame="#000000" cx="116.45833333333334" cz="106.18055555555556" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="50" />
   <Goody shape="bspMissile" y="1.75" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="116.45833333333334" cz="106.18055555555556" r="1.25" angle="225" />
   <Wall fill="#9966ff" frame="#000000" x="113.95833333333334" z="99.89583333333334" w="10" d="0.625" h="0.25" />
   <Wall fill="#9966ff" frame="#000000" x="113.95833333333334" z="109.27083333333334" w="10" d="0.625" h="0.25" />
@@ -50,20 +50,20 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Teleporter y="30" shape="0" group="@recenter" fill="#9966ff" frame="#000000" cx="145.83333333333334" cz="72.70833333333334" r="2.5" angle="45" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#9966ff" frame="#000000" cx="82.08333333333334" cz="72.70833333333334" r="2.5" angle="315" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="162.70833333333334" cz="104.58333333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="162.70833333333334" cz="104.58333333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspGrenade" y="7.75" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="162.70833333333334" cz="104.58333333333334" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="65.83333333333334" cz="104.58333333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="65.83333333333334" cz="104.58333333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspGrenade" y="7.75" speed="2" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="65.83333333333334" cz="104.58333333333334" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="113.95833333333334" cz="54.30555555555556" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="113.95833333333334" cz="54.30555555555556" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspMissile" y="7.75" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="113.95833333333334" cz="54.30555555555556" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="113.95833333333334" cz="153.68055555555557" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ffffff" frame="#000000" cx="113.95833333333334" cz="153.68055555555557" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspMissile" y="7.75" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="113.95833333333334" cz="153.68055555555557" r="1.25" angle="225" />
   <Walker lives="kDefaultLives" team="3" y="30" fill="#ffffff" frame="#000000" cx="118.54166666666667" cz="156.80555555555557" r="1.25" angle="180" />
   <Walker lives="kDefaultLives" team="3" y="30" fill="#ffffff" frame="#000000" cx="108.54166666666667" cz="156.80555555555557" r="1.25" angle="180" />
@@ -74,8 +74,8 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Walker lives="kDefaultLives" team="1" y="30" fill="#ffffff" frame="#000000" cx="109.09722222222223" cz="49.79166666666667" r="1.25" angle="0" />
   <Walker lives="kDefaultLives" team="1" y="30" fill="#ffffff" frame="#000000" cx="114.09722222222223" cz="49.79166666666667" r="1.25" angle="0" />
   <Walker lives="kDefaultLives" team="1" y="30" fill="#ffffff" frame="#000000" cx="119.09722222222223" cz="49.79166666666667" r="1.25" angle="0" />
-  <Base in="@badHectors" out="@teleportTheRest" fill="#ffffff" frame="#000000" cx="12.708333333333334" cz="412.08333333333337" r="1.25" angle="45" />
-  <Text in="@badHectors" showEveryone="true" text="HECTORS must be red, green or yellow." sound="0" fill="#ffffff" frame="#000000" cx="12.708333333333334" cz="412.08333333333337" r="1.25" angle="45" />
+  <Base in="@badHectors" out="@teleportTheRest" cx="12.708333333333334" cz="412.08333333333337" r="1.25" angle="45" />
+  <Text in="@badHectors" showEveryone="true" text="HECTORS must be red, green or yellow." sound="0" cx="12.708333333333334" cz="412.08333333333337" r="1.25" />
   <Goody out="@badHectors" shape="bspW3x3" fill="#ffffff" frame="#000000" cx="12.708333333333334" cz="412.08333333333337" r="1.25" angle="45" />
   <Walker team="4" defaultLives="0" fill="#ffffff" frame="#000000" cx="12.708333333333334" cz="412.08333333333337" r="1.25" angle="45" />
   <Walker team="4" defaultLives="0" fill="#ffffff" frame="#000000" cx="12.708333333333334" cz="412.08333333333337" r="1.25" angle="45" />
@@ -89,38 +89,38 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#ffff33" frame="#000000" x="113.95833333333334" z="104.58333333333334" w="10" d="10" h="4.5" r="1.25" cx="12.708333333333334" cz="412.08333333333337" angle="45" y="0" />
   <Field deltaY="0" mask="T1" stop="@sixteen" start="@fifteen" enter="@team1" fill="#00ee00" frame="#000000" x="113.95833333333334" z="104.58333333333334" w="10" d="10" h="4.5" r="1.25" cx="12.708333333333334" cz="412.08333333333337" angle="45" y="0" />
   <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff6666" frame="#000000" x="113.95833333333334" z="104.58333333333334" w="10" d="10" h="4.5" r="1.25" cx="12.708333333333334" cz="412.08333333333337" angle="45" y="0" />
-  <WallDoor deltaY="3" openSpeed="34" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" x="462.08333333333337" z="426.45833333333337" w="2.5" d="1.25" h="2" r="1.25" cx="12.708333333333334" cz="412.08333333333337" angle="45" />
-  <WallDoor deltaY="3" openSpeed="34" closeSpeed="100" open="@team1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ee00" frame="#000000" x="439.58333333333337" z="426.45833333333337" w="2.5" d="1.25" h="2" r="1.25" cx="12.708333333333334" cz="412.08333333333337" angle="45" />
-  <WallDoor deltaY="3" openSpeed="34" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff00" frame="#000000" x="450.83333333333337" z="426.45833333333337" w="2.5" d="1.25" h="2" r="1.25" cx="12.708333333333334" cz="412.08333333333337" angle="45" />
-  <Timer in.0="@start" in.1="@fifteen" wait="15" out.0="@fifteen" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Timer in="@fifteen" wait="1" out="@sixteen" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Timer in="@fifteen" wait="5" out="@twenty" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Timer in="@team1" wait="1" out.0="@yellowClose" out.1="@redClose" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Timer in="@team2" wait="1" out.0="@greenClose" out.1="@redClose" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Timer in="@team3" wait="1" out.0="@greenClose" out.1="@yellowClose" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="kTeamScore1" out="@greenWins" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Yellow" n="kTeamScore1" out="@yellowWins" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="kTeamScore1" out="@redWins" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Base in="@twenty" out.0="@greenClose" out.1="@yellowClose" out.2="@redClose" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="10" out="@greenAt10" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="20" out="@greenAt20" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="30" out="@greenAt30" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="40" out="@greenAt40" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="50" out="@greenAt50" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="60" out="@greenAt60" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="70" out="@greenAt70" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="80" out="@greenAt80" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Counter in="@add1Green" n="90" out="@greenAt90" restart="false" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt10" showEveryone="true" mask="T1" text="Green team has 10 seconds!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt20" showEveryone="true" mask="T1" text="Green team has 20 seconds!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt30" showEveryone="true" mask="T1" text="Green team has 30 seconds!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt40" showEveryone="true" mask="T1" text="Green team has 40 seconds!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt50" showEveryone="true" text="Green team has 50 seconds!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt60" showEveryone="true" mask="T1" text="Green team has 60 seconds!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt70" showEveryone="true" mask="T1" text="Green team has 70 seconds!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt80" showEveryone="true" mask="T1" text="Green team has 80 seconds!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenAt90" showEveryone="true" text="Green team has only 10 seconds to go!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@greenWins" showEveryone="true" text="Green team wins!" fill="#ffcccc" frame="#000000" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
+  <WallDoor deltaY="3" openSpeed="34" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff6666" frame="#000000" x="462.08333333333337" z="426.45833333333337" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="34" closeSpeed="100" open="@team1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ee00" frame="#000000" x="439.58333333333337" z="426.45833333333337" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="34" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ffff00" frame="#000000" x="450.83333333333337" z="426.45833333333337" w="2.5" d="1.25" h="2" />
+  <Timer in.0="@start" in.1="@fifteen" wait="15" out.0="@fifteen" />
+  <Timer in="@fifteen" wait="1" out="@sixteen" />
+  <Timer in="@fifteen" wait="5" out="@twenty" />
+  <Timer in="@team1" wait="1" out.0="@yellowClose" out.1="@redClose" />
+  <Timer in="@team2" wait="1" out.0="@greenClose" out.1="@redClose" />
+  <Timer in="@team3" wait="1" out.0="@greenClose" out.1="@yellowClose" />
+  <Counter in="@add1Green" n="kTeamScore1" out="@greenWins" />
+  <Counter in="@add1Yellow" n="kTeamScore1" out="@yellowWins" />
+  <Counter in="@add1Red" n="kTeamScore1" out="@redWins" />
+  <Base in="@twenty" out.0="@greenClose" out.1="@yellowClose" out.2="@redClose" cx="534.2361111111111" cz="17.22222222222222" r="1.25" angle="45" />
+  <Counter in="@add1Green" n="10" out="@greenAt10" restart="false" />
+  <Counter in="@add1Green" n="20" out="@greenAt20" restart="false" />
+  <Counter in="@add1Green" n="30" out="@greenAt30" restart="false" />
+  <Counter in="@add1Green" n="40" out="@greenAt40" restart="false" />
+  <Counter in="@add1Green" n="50" out="@greenAt50" restart="false" />
+  <Counter in="@add1Green" n="60" out="@greenAt60" restart="false" />
+  <Counter in="@add1Green" n="70" out="@greenAt70" restart="false" />
+  <Counter in="@add1Green" n="80" out="@greenAt80" restart="false" />
+  <Counter in="@add1Green" n="90" out="@greenAt90" restart="false" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt10" showEveryone="true" mask="T1" text="Green team has 10 seconds!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt20" showEveryone="true" mask="T1" text="Green team has 20 seconds!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt30" showEveryone="true" mask="T1" text="Green team has 30 seconds!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt40" showEveryone="true" mask="T1" text="Green team has 40 seconds!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt50" showEveryone="true" text="Green team has 50 seconds!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt60" showEveryone="true" mask="T1" text="Green team has 60 seconds!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt70" showEveryone="true" mask="T1" text="Green team has 70 seconds!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt80" showEveryone="true" mask="T1" text="Green team has 80 seconds!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenAt90" showEveryone="true" text="Green team has only 10 seconds to go!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@greenWins" showEveryone="true" text="Green team wins!" cx="534.2361111111111" cz="17.22222222222222" r="1.25" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" start="@timesUp" win="0" activeRange="kInfinity" y="20" out="@gameEnds" fill="#ffffff" frame="#000000" cx="517.9861111111111" cz="84.30555555555556" r="2.5" angle="45" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="517.9861111111111" cz="84.30555555555556" r="2.5" angle="45" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="517.9861111111111" cz="84.30555555555556" r="2.5" angle="45" />
@@ -128,43 +128,43 @@ This level supports only teams of Red, Green and Yellow.  The object of the game
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="517.9861111111111" cz="84.30555555555556" r="2.5" angle="45" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="517.9861111111111" cz="84.30555555555556" r="2.5" angle="45" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="517.9861111111111" cz="84.30555555555556" r="2.5" angle="45" />
-  <Timer in.0="@greenWins" in.1="@yellowWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" fill="#ffffff" frame="#000000" cx="517.9861111111111" cz="84.30555555555556" r="2.5" angle="45" />
-  <Counter in="@add1Yellow" n="10" out="@yellowAt10" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Yellow" n="20" out="@yellowAt20" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Yellow" n="30" out="@yellowAt30" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Yellow" n="40" out="@yellowAt40" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Yellow" n="50" out="@yellowAt50" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Yellow" n="60" out="@yellowAt60" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Yellow" n="70" out="@yellowAt70" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Yellow" n="80" out="@yellowAt80" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Yellow" n="90" out="@yellowAt90" restart="false" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt10" showEveryone="true" mask="T2" text="Yellow team has 10 seconds!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt20" showEveryone="true" mask="T2" text="Yellow team has 20 seconds!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt30" showEveryone="true" text="Yellow team has 30 seconds!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt40" showEveryone="true" text="Yellow team has 40 seconds!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt50" showEveryone="true" text="Yellow team has 50 seconds!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt60" showEveryone="true" text="Yellow team has 60 seconds!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt70" showEveryone="true" mask="T2" text="Yellow team has 70 seconds!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt80" showEveryone="true" mask="T2" text="Yellow team has 80 seconds!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt90" showEveryone="true" text="Yellow team has only 10 seconds to go!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Text sound="kSnText" volume="kTextVolume" in="@yellowWins" showEveryone="true" text="Yellow team wins!" fill="#ffcccc" frame="#000000" cx="505.48611111111114" cz="16.180555555555557" r="1.25" angle="135" />
-  <Counter in="@add1Red" n="10" out="@redAt10" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="20" out="@redAt20" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="30" out="@redAt30" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="40" out="@redAt40" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="50" out="@redAt50" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="60" out="@redAt60" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="70" out="@redAt70" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="80" out="@redAt80" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Counter in="@add1Red" n="90" out="@redAt90" restart="false" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt10" showEveryone="true" mask="T3" text="Red team has 10 seconds!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt20" showEveryone="true" mask="T3" text="Red team has 20 seconds!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt30" showEveryone="true" mask="T3" text="Red team has 30 seconds!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt40" showEveryone="true" mask="T3" text="Red team has 40 seconds!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt50" showEveryone="true" text="Red team has 50 seconds!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt60" showEveryone="true" mask="T3" text="Red team has 60 seconds!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt70" showEveryone="true" mask="T3" text="Red team has 70 seconds!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt80" showEveryone="true" mask="T3" text="Red team has 80 seconds!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redAt90" showEveryone="true" text="Red team has only 10 seconds to go!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
-  <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" fill="#ffcccc" frame="#000000" cx="485.48611111111114" cz="17.430555555555557" r="1.25" angle="45" />
+  <Timer in.0="@greenWins" in.1="@yellowWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" />
+  <Counter in="@add1Yellow" n="10" out="@yellowAt10" restart="false" />
+  <Counter in="@add1Yellow" n="20" out="@yellowAt20" restart="false" />
+  <Counter in="@add1Yellow" n="30" out="@yellowAt30" restart="false" />
+  <Counter in="@add1Yellow" n="40" out="@yellowAt40" restart="false" />
+  <Counter in="@add1Yellow" n="50" out="@yellowAt50" restart="false" />
+  <Counter in="@add1Yellow" n="60" out="@yellowAt60" restart="false" />
+  <Counter in="@add1Yellow" n="70" out="@yellowAt70" restart="false" />
+  <Counter in="@add1Yellow" n="80" out="@yellowAt80" restart="false" />
+  <Counter in="@add1Yellow" n="90" out="@yellowAt90" restart="false" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt10" showEveryone="true" mask="T2" text="Yellow team has 10 seconds!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt20" showEveryone="true" mask="T2" text="Yellow team has 20 seconds!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt30" showEveryone="true" text="Yellow team has 30 seconds!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt40" showEveryone="true" text="Yellow team has 40 seconds!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt50" showEveryone="true" text="Yellow team has 50 seconds!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt60" showEveryone="true" text="Yellow team has 60 seconds!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt70" showEveryone="true" mask="T2" text="Yellow team has 70 seconds!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt80" showEveryone="true" mask="T2" text="Yellow team has 80 seconds!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt90" showEveryone="true" text="Yellow team has only 10 seconds to go!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowWins" showEveryone="true" text="Yellow team wins!" cx="505.48611111111114" cz="16.180555555555557" r="1.25" />
+  <Counter in="@add1Red" n="10" out="@redAt10" restart="false" />
+  <Counter in="@add1Red" n="20" out="@redAt20" restart="false" />
+  <Counter in="@add1Red" n="30" out="@redAt30" restart="false" />
+  <Counter in="@add1Red" n="40" out="@redAt40" restart="false" />
+  <Counter in="@add1Red" n="50" out="@redAt50" restart="false" />
+  <Counter in="@add1Red" n="60" out="@redAt60" restart="false" />
+  <Counter in="@add1Red" n="70" out="@redAt70" restart="false" />
+  <Counter in="@add1Red" n="80" out="@redAt80" restart="false" />
+  <Counter in="@add1Red" n="90" out="@redAt90" restart="false" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt10" showEveryone="true" mask="T3" text="Red team has 10 seconds!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt20" showEveryone="true" mask="T3" text="Red team has 20 seconds!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt30" showEveryone="true" mask="T3" text="Red team has 30 seconds!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt40" showEveryone="true" mask="T3" text="Red team has 40 seconds!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt50" showEveryone="true" text="Red team has 50 seconds!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt60" showEveryone="true" mask="T3" text="Red team has 60 seconds!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt70" showEveryone="true" mask="T3" text="Red team has 70 seconds!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt80" showEveryone="true" mask="T3" text="Red team has 80 seconds!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt90" showEveryone="true" text="Red team has only 10 seconds to go!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" cx="485.48611111111114" cz="17.430555555555557" r="1.25" />
 </map>

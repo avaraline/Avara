@@ -28,21 +28,21 @@
   <SkyColor verticalRangeMin="100" verticalRangeMax="3000" n="6" fill="#885981" frame="#5f59bc" />
   <GroundColor verticalRangeMin="0" verticalRangeMax="50" n="6" fill="#450006" frame="#aaafe4" />
   <set wallYon=".001" />
-  <WallDoor open="@Stepsquare1" close="@Stepsquare1c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare1c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare1" fill="#450006" frame="#000000" r="3.75" cx="11.597222222222223" cz="62.986111111111114" angle="180" x="50" z="17.5" w="10" d="25" h="0.25" />
-  <WallDoor open="@Stepsquare2" close="@Stepsquare2c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare2c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare2" fill="#450006" frame="#000000" r="3.75" cx="11.597222222222223" cz="62.986111111111114" angle="180" x="50" z="42.5" w="10" d="25" h="0.25" />
-  <WallDoor open="@Stepsquare3" close="@Stepsquare3c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare3c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare3" fill="#450006" frame="#000000" r="3.75" cx="11.597222222222223" cz="62.986111111111114" angle="180" x="10" z="42.5" w="10" d="25" h="0.25" />
-  <WallDoor open="@Stepsquare4" close="@Stepsquare4c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare4c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare4" fill="#450006" frame="#000000" r="3.75" cx="11.597222222222223" cz="62.986111111111114" angle="180" x="10" z="17.5" w="10" d="25" h="0.25" />
-  <WallDoor open="@Stepsquare5" close="@Stepsquare5c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare5c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare5" fill="#450006" frame="#000000" r="3.75" cx="11.597222222222223" cz="62.986111111111114" angle="180" x="30" z="10" w="30" d="10" h="0.25" />
-  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#450006" frame="#000000" r="3.75" cx="11.597222222222223" cz="62.986111111111114" angle="180" x="30" z="50" w="30" d="10" h="0.25" />
+  <WallDoor open="@Stepsquare1" close="@Stepsquare1c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare1c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare1" fill="#450006" frame="#000000" x="50" z="17.5" w="10" d="25" h="0.25" />
+  <WallDoor open="@Stepsquare2" close="@Stepsquare2c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare2c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare2" fill="#450006" frame="#000000" x="50" z="42.5" w="10" d="25" h="0.25" />
+  <WallDoor open="@Stepsquare3" close="@Stepsquare3c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare3c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare3" fill="#450006" frame="#000000" x="10" z="42.5" w="10" d="25" h="0.25" />
+  <WallDoor open="@Stepsquare4" close="@Stepsquare4c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare4c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare4" fill="#450006" frame="#000000" x="10" z="17.5" w="10" d="25" h="0.25" />
+  <WallDoor open="@Stepsquare5" close="@Stepsquare5c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare5c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare5" fill="#450006" frame="#000000" x="30" z="10" w="30" d="10" h="0.25" />
+  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="4" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#450006" frame="#000000" x="30" z="50" w="30" d="10" h="0.25" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#a8b864" frame="#000000" cx="30" cz="30" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="32" fill="#a8b864" frame="#000000" cx="30" cz="30" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="32" />
   <Goody shape="bspAvaraA" y="50" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="40" fill="#a8b864" frame="#000000" cx="30" cz="30" r="1.25" angle="225" />
   <set grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" />
-  <And in="@start" out="@time" fill="#5d6c5e" frame="#000000" cx="59.93055555555556" cz="7.777777777777779" r="3.125" angle="45" />
-  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" out="@time" fill="#5d6c5e" frame="#000000" cx="59.93055555555556" cz="7.777777777777779" r="3.125" angle="45" />
-  <Timer in="@time" out="@whoop" wait="1" fill="#5d6c5e" frame="#000000" cx="59.93055555555556" cz="7.777777777777779" r="3.125" angle="45" />
-  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" out.6="@six" out.7="@seven" fill="#5d6c5e" frame="#000000" cx="59.93055555555556" cz="7.777777777777779" r="3.125" angle="45" />
+  <And in="@start" out="@time" />
+  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" out="@time" />
+  <Timer in="@time" out="@whoop" wait="1" />
+  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" out.6="@six" out.7="@seven" />
   <set baseHeight="45.5" wallHeight="0" wallYon="100" />
   <Wall fill="#f65ace" frame="#000000" x="14.6875" z="30" w="0.625" d="30" h="0" />
   <Wall fill="#f65ace" frame="#000000" x="29.6875" z="45.3125" w="30.625" d="0.625" h="0" />

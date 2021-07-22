@@ -106,8 +106,8 @@ there after lunch" ambient.i="0.5" light.0.i="0.5" light.0.a="0" light.0.b="75" 
   <Wall fill="#ffffff" frame="#000000" x="62.56944444444444" z="19.548611111111114" w="2.0833333333333357" d="1.0416666666666679" h="0.5" y="5.5" />
   <unique vars="mUp mDown" />
   <Field start="mUp" stop="mDown" deltaY="0.19" deltaX="0.001" deltaZ="0.001" fill="#ffffff" frame="#000000" x="41.49305555555556" z="78.29861111111111" w="17.84722222222223" d="17.84722222222223" h="3.25" r="1.3888888888888893" cx="58.81944444444444" cz="26.52777777777778" angle="90" />
-  <Timer in.0="start" in.1="mDown" out="mUp" wait="10" fill="#ffffff" frame="#000000" cx="58.81944444444444" cz="26.52777777777778" r="1.3888888888888893" angle="90" />
-  <Timer in="mUp" out="mDown" wait="10" fill="#ffffff" frame="#000000" cx="58.81944444444444" cz="26.52777777777778" r="1.3888888888888893" angle="90" />
+  <Timer in.0="start" in.1="mDown" out="mUp" wait="10" />
+  <Timer in="mUp" out="mDown" wait="10" />
   <Incarnator y="40" fill="#777777" frame="#000000" cx="7.048611111111111" cz="9.652777777777779" r="1.25" angle="315" />
   <Incarnator y="3.5" fill="#777777" frame="#000000" cx="38.36805555555556" cz="76.45833333333334" r="1.25" angle="315" />
   <Incarnator y="40" fill="#777777" frame="#000000" cx="8.645833333333334" cz="96.59722222222223" r="1.25" angle="225" />
@@ -123,65 +123,65 @@ there after lunch" ambient.i="0.5" light.0.i="0.5" light.0.a="0" light.0.b="75" 
   <Hologram shape="bspTree" isAmbient="true" y="5" fill="#ffcc00" frame="#000000" cx="72.25694444444446" cz="80.13888888888889" r="1.25" angle="315" />
   <Hologram shape="bspTree" isAmbient="true" y="5" fill="#ffcc00" frame="#000000" cx="76.42361111111111" cz="17.15277777777778" r="1.25" angle="315" />
   <Incarnator y="2.5" fill="#777777" frame="#000000" cx="56.5625" cz="43.68055555555556" r="1.25" angle="315" />
-  <Area enter="@mBirdStart" freq="25" fill="#777777" frame="#000000" cx="18.40277777777778" cz="23.958333333333332" r="10.13888888888889" angle="180" />
+  <Area enter="@mBirdStart" freq="25" cx="18.40277777777778" cz="23.958333333333332" r="10.13888888888889" />
   <unique vars="mUp mDown" />
   <Field start="mUp" stop="mDown" deltaY="0.18" deltaX="0.001" deltaZ="0.001" enter="@mEnterPool1" fill="#777777" frame="#000000" x="58.88888888888889" z="43.99305555555556" w="13.055555555555557" d="20.20833333333333" h="3.25" r="10.13888888888889" cx="18.40277777777778" cz="23.958333333333332" angle="180" />
-  <Timer in.0="start" in.1="mDown" out="mUp" wait="2" fill="#777777" frame="#000000" cx="18.40277777777778" cz="23.958333333333332" r="10.13888888888889" angle="180" />
-  <Timer in="mUp" out="mDown" wait="19" fill="#777777" frame="#000000" cx="18.40277777777778" cz="23.958333333333332" r="10.13888888888889" angle="180" />
+  <Timer in.0="start" in.1="mDown" out="mUp" wait="2" />
+  <Timer in="mUp" out="mDown" wait="19" />
   <unique vars="mUp mDown" />
   <Field start="mUp" stop="mDown" deltaY="0.18" deltaX="0.001" deltaZ="0.001" enter="@mEnterPool1" fill="#777777" frame="#000000" x="58.68055555555556" z="26.805555555555557" w="13.611111111111114" d="13.75" h="3.25" r="10.13888888888889" cx="18.40277777777778" cz="23.958333333333332" angle="180" />
-  <Timer in.0="start" in.1="mDown" out="mUp" wait="2" fill="#777777" frame="#000000" cx="18.40277777777778" cz="23.958333333333332" r="10.13888888888889" angle="180" />
-  <Timer in="mUp" out="mDown" wait="18" fill="#777777" frame="#000000" cx="18.40277777777778" cz="23.958333333333332" r="10.13888888888889" angle="180" />
+  <Timer in.0="start" in.1="mDown" out="mUp" wait="2" />
+  <Timer in="mUp" out="mDown" wait="18" />
   <Wall fill="#003399" frame="#000000" x="48.40277777777778" z="26.52777777777778" w="6.944444444444443" d="13.888888888888886" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="43.54166666666667" z="22.743055555555557" w="1.3888888888888928" d="2.0138888888888893" h="0.5" y="5" />
   <Wall fill="#ffffff" frame="#000000" x="44.236111111111114" z="22.708333333333336" w="1.3888888888888857" d="2.083333333333332" h="0.5" y="5.5" />
   <unique vars="mUp mDown" />
-  <WallDoor stepOnMsg="mDown" open="mDown" close="mUp" didOpen="mUp" didClose="mDown" deltaY="0.2" midY="-0.2" roll="4.0" midRoll="-4.0" openSound="0" closeSound="0" stopSound="0" openSpeed="10" closeSpeed="10" fill="#bbbbbb" frame="#000000" x="46.840277777777786" z="22.708333333333336" w="5.208333333333336" d="2.083333333333332" h="0" r="10.13888888888889" cx="18.40277777777778" cz="23.958333333333332" angle="180" y="6.0" />
+  <WallDoor stepOnMsg="mDown" open="mDown" close="mUp" didOpen="mUp" didClose="mDown" deltaY="0.2" midY="-0.2" roll="4.0" midRoll="-4.0" openSound="0" closeSound="0" stopSound="0" openSpeed="10" closeSpeed="10" fill="#bbbbbb" frame="#000000" x="46.840277777777786" z="22.708333333333336" w="5.208333333333336" d="2.083333333333332" h="0" y="6.0" />
   <Hologram shape="bspDeadTree" isAmbient="true" y="5" scale="2.5" fill="#ffcc00" frame="#000000" cx="74.40972222222223" cz="63.125" r="1.25" angle="315" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="300" fill="#ffcc00" frame="#ff3300" cx="73.99305555555556" cz="64.02777777777779" r="1.25" angle="180" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" grenades="4" start="mShow" out="mTaken" yon="10" y="8.5" fill="#ffcc00" frame="#ff3300" cx="73.99305555555556" cz="64.02777777777779" r="1.25" angle="180" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" fill="#ffcc00" frame="#ff3300" cx="73.92361111111111" cz="62.15277777777778" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" />
   <Goody shape="bspGrenade" grenades="4" start="mShow" out="mTaken" yon="10" y="7.5" fill="#ffcc00" frame="#ff3300" cx="73.92361111111111" cz="62.15277777777778" r="1.25" angle="0" />
   <Hologram shape="bspDeadTree" isAmbient="true" y="5" scale="2.5" fill="#ffcc00" frame="#000000" cx="63.75" cz="83.85416666666667" r="1.25" angle="45" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="295" fill="#ffcc00" frame="#ff3300" cx="63.125" cz="83.4375" r="1.25" angle="270" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="295" />
   <Goody shape="bspGrenade" grenades="4" start="mShow" out="mTaken" yon="10" y="8.5" fill="#ffcc00" frame="#ff3300" cx="63.125" cz="83.4375" r="1.25" angle="270" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="287" fill="#ffcc00" frame="#ff3300" cx="65.34722222222223" cz="83.57638888888889" r="1.25" angle="90" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="287" />
   <Goody shape="bspGrenade" grenades="4" start="mShow" out="mTaken" yon="10" y="7.5" fill="#ffcc00" frame="#ff3300" cx="65.34722222222223" cz="83.57638888888889" r="1.25" angle="90" />
   <Hologram shape="bspDeadTree" isAmbient="true" y="5" scale="2.5" fill="#ffcc00" frame="#000000" cx="37.1875" cz="50.34722222222222" r="1.25" angle="315" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="300" fill="#ffcc00" frame="#ff3300" cx="36.770833333333336" cz="51.25" r="1.25" angle="180" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" grenades="4" start="mShow" out="mTaken" yon="10" y="8.5" fill="#ffcc00" frame="#ff3300" cx="36.770833333333336" cz="51.25" r="1.25" angle="180" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" fill="#ffcc00" frame="#ff3300" cx="36.701388888888886" cz="49.375" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" />
   <Goody shape="bspGrenade" grenades="4" start="mShow" out="mTaken" yon="10" y="7.5" fill="#ffcc00" frame="#ff3300" cx="36.701388888888886" cz="49.375" r="1.25" angle="0" />
   <Hologram shape="bspDeadTree" isAmbient="true" y="5" scale="2.5" fill="#ffcc00" frame="#000000" cx="42.083333333333336" cz="9.131944444444445" r="1.25" angle="45" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="295" fill="#ffcc00" frame="#ff3300" cx="41.458333333333336" cz="8.715277777777779" r="1.25" angle="270" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="295" />
   <Goody shape="bspGrenade" grenades="4" start="mShow" out="mTaken" yon="10" y="8.5" fill="#ffcc00" frame="#ff3300" cx="41.458333333333336" cz="8.715277777777779" r="1.25" angle="270" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="287" fill="#ffcc00" frame="#ff3300" cx="43.68055555555556" cz="8.854166666666668" r="1.25" angle="90" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="287" />
   <Goody shape="bspGrenade" grenades="4" start="mShow" out="mTaken" yon="10" y="7.5" fill="#ffcc00" frame="#ff3300" cx="43.68055555555556" cz="8.854166666666668" r="1.25" angle="90" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" fill="#0000aa" frame="#ff3300" cx="104.61805555555557" cz="53.81944444444445" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" />
   <Goody shape="bspMissile" missiles="4" start="mShow" out="mTaken" yon="10" y="5.5" fill="#0000aa" frame="#ff3300" cx="104.61805555555557" cz="53.81944444444445" r="1.25" angle="0" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" fill="#0000aa" frame="#ff3300" cx="55.03472222222223" cz="24.02777777777778" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" />
   <Goody shape="bspMissile" missiles="4" start="mShow" out="mTaken" yon="14" y="5.5" fill="#0000aa" frame="#ff3300" cx="55.03472222222223" cz="24.02777777777778" r="1.25" angle="0" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" fill="#0000aa" frame="#ff3300" cx="57.11805555555556" cz="51.04166666666667" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" />
   <Goody shape="bspMissile" missiles="4" start="mShow" out="mTaken" yon="14" y="5.5" fill="#0000aa" frame="#ff3300" cx="57.11805555555556" cz="51.04166666666667" r="1.25" angle="0" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" fill="#0000aa" frame="#ff3300" cx="45.10416666666667" cz="85.20833333333334" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" />
   <Goody shape="bspMissile" missiles="4" start="mShow" out="mTaken" yon="14" y="5.5" fill="#0000aa" frame="#ff3300" cx="45.10416666666667" cz="85.20833333333334" r="1.25" angle="0" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" fill="#0000aa" frame="#ff3300" cx="40.86805555555556" cz="71.73611111111111" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" />
   <Goody shape="bspMissile" missiles="4" start="mShow" out="mTaken" yon="14" y="5.5" fill="#0000aa" frame="#ff3300" cx="40.86805555555556" cz="71.73611111111111" r="1.25" angle="0" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" fill="#0000aa" frame="#ff3300" cx="12.465277777777779" cz="51.25" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="280" />
   <Goody shape="bspMissile" missiles="4" start="mShow" out="mTaken" yon="14" y="5.5" fill="#0000aa" frame="#ff3300" cx="12.465277777777779" cz="51.25" r="1.25" angle="0" />
   <Incarnator y="39" fill="#777777" frame="#000000" cx="75.52083333333334" cz="7.777777777777779" r="1.25" angle="45" />
   <Wall fill="#ffffff" frame="#000000" x="41.38888888888889" z="29.236111111111114" w="6.944444444444443" d="6.944444444444446" h="0.25" y="13" />
@@ -190,16 +190,16 @@ there after lunch" ambient.i="0.5" light.0.i="0.5" light.0.a="0" light.0.b="75" 
   <Wall fill="#ffffff" frame="#000000" x="38.611111111111114" z="31.94444444444445" w="0.6944444444444429" d="0.6944444444444464" h="8" y="5" />
   <Wall fill="#ffffff" frame="#000000" x="44.16666666666667" z="31.94444444444445" w="0.69444444444445" d="0.6944444444444464" h="8" y="5" />
   <unique vars="mUp mDown" />
-  <WallDoor midY="5.25" deltaY="12.75" openDelay="5" closeDelay="10" stepOnMsg="mUp" open="mUp" close="mDown" didOpen="mDown" fill="#ffffff" frame="#000000" x="36.18055555555556" z="29.236111111111114" w="3.4722222222222285" d="3.472222222222225" h="0.25" r="1.25" cx="75.52083333333334" cz="7.777777777777779" angle="45" />
+  <WallDoor midY="5.25" deltaY="12.75" openDelay="5" closeDelay="10" stepOnMsg="mUp" open="mUp" close="mDown" didOpen="mDown" fill="#ffffff" frame="#000000" x="36.18055555555556" z="29.236111111111114" w="3.4722222222222285" d="3.472222222222225" h="0.25" />
   <unique vars="mUp mDown" />
-  <WallDoor stepOnMsg="mDown" open="mDown" close="mUp" didOpen="mUp" didClose="mDown" deltaY="-0.2" midY="0.2" roll="-4.0" midRoll="4.0" openSound="0" closeSound="0" stopSound="0" openSpeed="10" closeSpeed="10" fill="#bbbbbb" frame="#000000" x="47.465277777777786" z="29.166666666666668" w="5.208333333333336" d="2.0833333333333357" h="0" r="1.25" cx="75.52083333333334" cz="7.777777777777779" angle="45" y="13.25" />
+  <WallDoor stepOnMsg="mDown" open="mDown" close="mUp" didOpen="mUp" didClose="mDown" deltaY="-0.2" midY="0.2" roll="-4.0" midRoll="4.0" openSound="0" closeSound="0" stopSound="0" openSpeed="10" closeSpeed="10" fill="#bbbbbb" frame="#000000" x="47.465277777777786" z="29.166666666666668" w="5.208333333333336" d="2.0833333333333357" h="0" y="13.25" />
   <unique vars="mShow mTaken" />
-  <Timer in.0="start" in.1="mTaken" out="mShow" wait="444" fill="#ffffff" frame="#ff3300" cx="55.3125" cz="29.166666666666668" r="1.25" angle="0" />
+  <Timer in.0="start" in.1="mTaken" out="mShow" wait="444" />
   <Goody lives="1" start="mShow" out="mTaken" yon="10" y="13" speed="1" fill="#ffffff" frame="#ff3300" cx="55.3125" cz="29.166666666666668" r="1.25" angle="0" />
   <unique vars="mWindOn" />
-  <Area enter="mWindOn" freq="25" y="12" fill="#ffffff" frame="#000000" cx="46.875" cz="29.236111111111114" r="2.3611111111111125" angle="180" />
+  <Area enter="mWindOn" freq="25" y="12" cx="46.875" cz="29.236111111111114" r="2.3611111111111125" />
   <Sound start="mWindOn" isAmbient="true" sound="sWindy" volume="8" y="14" fill="#ffffff" frame="#000000" cx="46.875" cz="29.236111111111114" r="2.3611111111111125" angle="180" />
-  <Area y="5" enter="@mRadioStart" freq="25" fill="#ffffff" frame="#000000" cx="16.666666666666668" cz="88.88888888888889" r="10.138888888888893" angle="180" />
+  <Area y="5" enter="@mRadioStart" freq="25" cx="16.666666666666668" cz="88.88888888888889" r="10.138888888888893" />
   <Sound y="4" isAmbient="true" sound="sWater1" loopCount="99999" volume="5" fill="#ffcc00" frame="#dddddd" cx="40.9375" cz="79.02777777777779" r="1.25" angle="315" />
   <Sound y="4" isAmbient="true" sound="sWater1" loopCount="99999" rate="0.8" volume="5" fill="#ffcc00" frame="#dddddd" cx="60.451388888888886" cz="35.27777777777778" r="1.25" angle="315" />
   <Sound y="5" isAmbient="true" sound="sWater1" loopCount="99999" rate="1.2" volume="5" fill="#ffcc00" frame="#dddddd" cx="13.92361111111111" cz="51.736111111111114" r="1.25" angle="315" />
@@ -208,7 +208,7 @@ there after lunch" ambient.i="0.5" light.0.i="0.5" light.0.a="0" light.0.b="75" 
   <Wall fill="#ff6666" frame="#000000" x="78.09027777777777" z="57.84722222222223" w="4.652777777777786" d="2.361111111111107" h="0" y="5" />
   <unique vars="mUp mDown" />
   <Field start="mUp" stop="mDown" deltaY="0.18" deltaX="-0.001" deltaZ="0.001" enter="@mEnterPool1" fill="#ff6666" frame="#000000" x="48.47222222222223" z="26.42361111111111" w="6.527777777777779" d="13.402777777777779" h="3.25" r="1.25" cx="13.92361111111111" cz="51.736111111111114" angle="315" />
-  <Timer in.0="start" in.1="mDown" out="mUp" wait="3" fill="#ff6666" frame="#000000" cx="13.92361111111111" cz="51.736111111111114" r="1.25" angle="315" />
-  <Timer in="mUp" out="mDown" wait="18" fill="#ff6666" frame="#000000" cx="13.92361111111111" cz="51.736111111111114" r="1.25" angle="315" />
+  <Timer in.0="start" in.1="mDown" out="mUp" wait="3" />
+  <Timer in="mUp" out="mDown" wait="18" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#444444" frame="#ff6600" cx="56.80555555555556" cz="58.88888888888889" r="2.1527777777777786" angle="180" />
 </map>

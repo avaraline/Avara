@@ -4,52 +4,52 @@
   <GroundColor fill="#000000" frame="#000000" />
   <Teleporter shape="false" start="@winTeam" win="1000" activeRange="2000" fill="#339966" frame="#000000" cx="3.75" cz="9.375" r="1.875" angle="315" />
   <set wallHeight="0" baseHeight="50" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@adie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff6666" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="59.0625" z="57.8125" w="8.125" d="8.125" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="56.875" z="51.5625" w="12.5" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="52.8125" z="60" w="4.375" d="12.5" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="65.3125" z="55.625" w="4.375" d="12.5" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="61.25" z="64.0625" w="12.5" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="56.875" z="47.1875" w="21.25" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="61.25" z="68.4375" w="21.25" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="48.4375" z="60" w="4.375" d="21.25" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="69.6875" z="55.625" w="4.375" d="21.25" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" yon=".001" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="44.0625" z="60" w="4.375" d="30" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="56.875" z="42.8125" w="30" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="61.25" z="72.8125" w="30" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" r="1.875" cx="3.75" cz="9.375" angle="315" x="74.0625" z="55.625" w="4.375" d="30" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@adie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff6666" frame="#000000" x="59.0625" z="57.8125" w="8.125" d="8.125" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" x="56.875" z="51.5625" w="12.5" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" x="52.8125" z="60" w="4.375" d="12.5" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" x="65.3125" z="55.625" w="4.375" d="12.5" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" x="61.25" z="64.0625" w="12.5" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" x="56.875" z="47.1875" w="21.25" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" x="61.25" z="68.4375" w="21.25" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" x="48.4375" z="60" w="4.375" d="21.25" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" x="69.6875" z="55.625" w="4.375" d="21.25" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" yon=".001" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" x="44.0625" z="60" w="4.375" d="30" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" x="56.875" z="42.8125" w="30" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" x="61.25" z="72.8125" w="30" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" x="74.0625" z="55.625" w="4.375" d="30" h="0" />
   <Incarnator y="10" mask="T3" fill="#ee0000" frame="#000000" cx="59.375" cz="55.625" r="1.875" angle="315" />
   <Incarnator y="10" mask="T3" fill="#ee0000" frame="#000000" cx="59.375" cz="60" r="1.875" angle="225" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@acdie" openSound="false" close="@health" closeSpeed="100" fill="#66ccff" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="124.6875" z="57.8125" w="8.125" d="8.125" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="122.5" z="51.5625" w="12.5" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="118.4375" z="60" w="4.375" d="12.5" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="130.9375" z="55.625" w="4.375" d="12.5" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="126.875" z="64.0625" w="12.5" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="122.5" z="47.1875" w="21.25" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="126.875" z="68.4375" w="21.25" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="114.0625" z="60" w="4.375" d="21.25" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="135.3125" z="55.625" w="4.375" d="21.25" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="109.6875" z="60" w="4.375" d="30" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="122.5" z="42.8125" w="30" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="126.875" z="72.8125" w="30" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" r="1.875" cx="59.375" cz="60" angle="225" x="139.6875" z="55.625" w="4.375" d="30" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@acdie" openSound="false" close="@health" closeSpeed="100" fill="#66ccff" frame="#000000" x="124.6875" z="57.8125" w="8.125" d="8.125" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" x="122.5" z="51.5625" w="12.5" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" x="118.4375" z="60" w="4.375" d="12.5" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" x="130.9375" z="55.625" w="4.375" d="12.5" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" x="126.875" z="64.0625" w="12.5" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" x="122.5" z="47.1875" w="21.25" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" x="126.875" z="68.4375" w="21.25" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" x="114.0625" z="60" w="4.375" d="21.25" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" x="135.3125" z="55.625" w="4.375" d="21.25" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" x="109.6875" z="60" w="4.375" d="30" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" x="122.5" z="42.8125" w="30" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" x="126.875" z="72.8125" w="30" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" x="139.6875" z="55.625" w="4.375" d="30" h="0" />
   <Incarnator y="10" mask="T6" fill="#3366ff" frame="#000000" cx="124.375" cz="55.625" r="1.875" angle="45" />
   <Incarnator y="10" mask="T6" fill="#3366ff" frame="#000000" cx="124.375" cz="60" r="1.875" angle="135" />
   <Ball y="20" group="1" targetGroup="targ1" changeOwnerTime="5" yon="1000" ejectPower="2.5" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" r="1.875" angle="315" />
   <Sound isMusic="true" isPlaced="false" sound="1729" loopCount="-1" start="@music" volume="3" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" r="1.875" angle="315" />
   <Sound isPlaced="false" sound="1730" start="@score" volume="6" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" r="1.875" angle="315" />
-  <And in="@start" out="@music" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" r="1.875" angle="315" />
-  <Timer in="@music" wait="1875 / 4 + 36" out="@music" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" r="1.875" angle="315" />
-  <Timer in.0="@adie" in.1="@bdie" in.2="@cdie" in.3="@ddie" in.4="@acdie" in.5="@bcdie" in.6="@ccdie" in.7="@dcdie" wait="1" out="@score" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" r="1.875" angle="315" />
+  <And in="@start" out="@music" />
+  <Timer in="@music" wait="1875 / 4 + 36" out="@music" />
+  <Timer in.0="@adie" in.1="@bdie" in.2="@cdie" in.3="@ddie" in.4="@acdie" in.5="@bcdie" in.6="@ccdie" in.7="@dcdie" wait="1" out="@score" />
   <Teleporter sound="false" shape="false" y="1500" group="2" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" r="1.875" angle="315" />
   <Door shape="bspFloorFrame" y="1497" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5" yon=".001" didOpen="@reset" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" r="1.875" angle="315" />
   <Field y="4.8" shape="bspGroundArrow" watch="targ1" mask="allTeams" start="@redServe" stop="@blueServe" deltaX="-.5" deltaY=".4" deltaZ="0" visible="false" fill="#ee0000" frame="#000000" r="8.75" cx="91.25" cz="57.5" angle="90" />
-  <And in="@start" out="@redServe" fill="#ee0000" frame="#000000" cx="91.25" cz="57.5" r="8.75" angle="90" />
-  <Timer in="@redServe" wait="24" out="@blueServe" fill="#ee0000" frame="#000000" cx="91.25" cz="57.5" r="8.75" angle="90" />
-  <Timer in="@blueServe" wait="24" out="@redServe" fill="#ee0000" frame="#000000" cx="91.25" cz="57.5" r="8.75" angle="90" />
+  <And in="@start" out="@redServe" />
+  <Timer in="@redServe" wait="24" out="@blueServe" />
+  <Timer in="@blueServe" wait="24" out="@redServe" />
   <Field y="4.8" shape="bspGroundArrow" watch="targ1" mask="allTeams" start="@blueServe" stop="@redServe" deltaX=".5" deltaY=".4" deltaZ="0" visible="false" fill="#3399cc" frame="#000000" r="8.75" cx="92.5" cz="57.5" angle="270" />
   <set wallHeight=".3" />
   <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3399cc" frame="#000000" r="8.75" cx="92.5" cz="57.5" angle="270" x="139.6875" z="55.625" w="4.375" d="30" h="0" />
-  <And in="@start" out.1="@health" out.2="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" r="8.75" angle="270" />
+  <And in="@start" out.1="@health" out.2="@rhealth" />
   <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3399cc" frame="#000000" r="8.75" cx="92.5" cz="57.5" angle="270" x="109.6875" z="60" w="4.375" d="30" h="0" />
   <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3399cc" frame="#000000" r="8.75" cx="92.5" cz="57.5" angle="270" x="126.875" z="72.8125" w="30" d="4.375" h="0" />
   <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3399cc" frame="#000000" r="8.75" cx="92.5" cz="57.5" angle="270" x="122.5" z="42.8125" w="30" d="4.375" h="0" />
@@ -123,7 +123,7 @@
   <Teleporter y="44" activeRange="1000" deadRange="39" destGroup="2" group="3" shape="false" out="@kill" mask="T3" fill="#bbbbbb" frame="#666666" cx="58.75" cz="57.5" r="1.875" angle="315" />
   <Goody y="55" shape="2843" speed="5" start="@start" out="@rhealth" fill="#bbbbbb" frame="#666666" cx="58.75" cz="57.5" r="1.875" angle="315" />
   <Sound isPlaced="false" volume="6" start="@rhealth" stop="@startb" sound="1731" fill="#bbbbbb" frame="#666666" cx="58.75" cz="57.5" r="1.875" angle="315" />
-  <Timer in="@start" wait="1" out="@startb" fill="#bbbbbb" frame="#666666" cx="58.75" cz="57.5" r="1.875" angle="315" />
+  <Timer in="@start" wait="1" out="@startb" />
   <Teleporter y="44" activeRange="1000" deadRange="39" destGroup="2" group="3" shape="false" out="@kill" mask="T6" fill="#bbbbbb" frame="#666666" cx="125" cz="57.5" r="1.875" angle="315" />
   <Goody y="55" shape="2843" speed="5" start="@start" out="@health" fill="#bbbbbb" frame="#666666" cx="125" cz="57.5" r="1.875" angle="315" />
   <Sound isPlaced="false" volume="6" start="@health" stop="@startb" sound="1731" fill="#bbbbbb" frame="#666666" cx="125" cz="57.5" r="1.875" angle="315" />

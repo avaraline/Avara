@@ -49,8 +49,8 @@
   <Ufo y="220" start="@wave2" killMsg="@wave2kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" r="1.875" angle="45" />
   <Ufo y="225" start="@wave2" killMsg="@wave2kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" r="1.875" angle="45" />
   <Ufo y="230" start="@wave2" killMsg="@wave2kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" r="1.875" angle="45" />
-  <Counter n="3" in="@wave1kill" out="@wave2" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" r="1.875" angle="45" />
-  <Counter n="3" in="@wave2kill" out="@winAll" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" r="1.875" angle="45" />
+  <Counter n="3" in="@wave1kill" out="@wave2" />
+  <Counter n="3" in="@wave2kill" out="@winAll" />
   <set designer="Juri Munkki" information="There have been several raids on this small outpost. 
 Your task is to make sure they stop." />
   <SkyColor verticalRangeMin="20" verticalRangeMax="300" n="5" fill="#ffcc66" frame="#9966ff" />
@@ -58,7 +58,7 @@ Your task is to make sure they stop." />
   <Solid shape="804" scale="4" fill="#bbbbbb" frame="#000000" cx="45" cz="95" r="3.75" angle="45" />
   <Dome fill="#bbbbbb" frame="#000000" cx="82.5" cz="107.5" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="82.5" cz="107.5" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="82.5" cz="107.5" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" y="4" speed="2" grenades="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="82.5" cz="107.5" r="1.25" angle="225" />
 </map>

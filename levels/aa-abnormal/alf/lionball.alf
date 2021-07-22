@@ -44,40 +44,40 @@
   <Incarnator y="30" team="2" fill="#ffff00" frame="#008800" cx="151.11111111111111" cz="107.56944444444444" r="5.2777777777777715" angle="315" />
   <Incarnator y="30" team="2" fill="#ffff00" frame="#008800" cx="74.30555555555557" cz="165.06944444444446" r="5.277777777777779" angle="315" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="165.41666666666669" cz="198.61111111111111" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="165.41666666666669" cz="198.61111111111111" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="165.41666666666669" cz="198.61111111111111" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="173.40277777777777" cz="174.51388888888889" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="173.40277777777777" cz="174.51388888888889" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="173.40277777777777" cz="174.51388888888889" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="135.97222222222223" cz="177.43055555555557" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="135.97222222222223" cz="177.43055555555557" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="135.97222222222223" cz="177.43055555555557" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="155.97222222222223" cz="177.63888888888889" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="155.97222222222223" cz="177.63888888888889" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="155.97222222222223" cz="177.63888888888889" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="115.55555555555556" cz="143.05555555555557" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="115.55555555555556" cz="143.05555555555557" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="115.55555555555556" cz="143.05555555555557" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="112.6388888888889" cz="165.48611111111111" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="112.6388888888889" cz="165.48611111111111" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="112.6388888888889" cz="165.48611111111111" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="151.18055555555557" cz="158.19444444444446" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="151.18055555555557" cz="158.19444444444446" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="151.18055555555557" cz="158.19444444444446" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="165.06944444444446" cz="153.95833333333334" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="165.06944444444446" cz="153.95833333333334" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="165.06944444444446" cz="153.95833333333334" r="1.25" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc3300" frame="#000000" cx="115" cz="190" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="350" fill="#cc3300" frame="#000000" cx="115" cz="190" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="350" />
   <Goody shape="bspGrenade" y="2" speed="2" grenades="6" start="mShow" out="mTaken" fill="#cc3300" frame="#000000" cx="115" cz="190" r="1.25" angle="225" />
   <Incarnator y="30" team="2" fill="#cc3300" frame="#000000" cx="115" cz="190" r="1.25" angle="225" />
   <Incarnator y="30" team="2" fill="#008800" frame="#000000" cx="156.31944444444446" cz="237.98611111111114" r="3.9583333333333286" angle="135" />
@@ -89,7 +89,7 @@
 Yellow shoots for Green team's goal.
  Green Shoots for Yellow team's goal. 
  Simple yes?" wallHeight="2" platHeight="3" plat2="1" level2="wallHeight + platHeight" level3="level2 + plat2" rampThickness="0.25" defaultLives="200" goodyY="7 -baseHeight" upVector="0.15" inVector="0.3" gameLength="9375" />
-  <Timer wait="gameLength" in="@start" out="@gameEnds" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="315" />
+  <Timer wait="gameLength" in="@start" out="@gameEnds" />
   <Teleporter y="-20" activeRange="1000" yon="0.01" start="@gameEnds" win="10" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="315" />
   <Teleporter y="-20" activeRange="1000" yon="0.01" start="@gameEnds" win="10" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="315" />
   <Teleporter y="-20" activeRange="1000" yon="0.01" start="@gameEnds" win="10" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="315" />
@@ -194,8 +194,8 @@ Yellow shoots for Green team's goal.
   <Field head="180" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" r="3.75" cx="9.444444444444445" cz="380.06944444444446" angle="315" x="240.4513888888889" z="72.88194444444446" w="29.513888888888886" d="20.069444444444443" h="0" />
   <Field head="180" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" r="3.75" cx="9.444444444444445" cz="380.06944444444446" angle="315" x="240.4513888888889" z="52.74305555555556" w="29.513888888888886" d="20.069444444444443" h="0" />
   <Field head="180" deltaX="inVector * cos head" deltaZ="inVector * sin head" deltaY="upVector" fill="#ffff99" frame="#000000" r="3.75" cx="9.444444444444445" cz="380.06944444444446" angle="315" x="240.4513888888889" z="32.395833333333336" w="29.513888888888886" d="20.069444444444446" h="0" />
-  <Distributor in="@greenscore" out.0="@g1" out.1="@g2" out.2="@g3" out.3="@g4" out.4="@g5" out.5="@g6" out.6="@g7" out.7="@g8" out.8="@g9" out.9="@g10" fill="#ffff99" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="315" />
-  <Distributor in="@yellowscore" out.0="@y1" out.1="@y2" out.2="@y3" out.3="@y4" out.4="@y5" out.5="@y6" out.6="@y7" out.7="@y8" out.8="@y9" out.9="@y10" fill="#ffff99" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" r="3.75" angle="315" />
+  <Distributor in="@greenscore" out.0="@g1" out.1="@g2" out.2="@g3" out.3="@g4" out.4="@g5" out.5="@g6" out.6="@g7" out.7="@g8" out.8="@g9" out.9="@g10" />
+  <Distributor in="@yellowscore" out.0="@y1" out.1="@y2" out.2="@y3" out.3="@y4" out.4="@y5" out.5="@y6" out.6="@y7" out.7="@y8" out.8="@y9" out.9="@y10" />
   <Door open="@g1" pitch="0" yaw="0" roll="0" deltaY="20" y="0" fill="#006600" frame="#000000" cx="45" cz="206.7013888888889" r="3.6111111111111107" angle="90" />
   <Door open="@g2" pitch="0" yaw="0" roll="0" deltaY="20" y="0" fill="#006600" frame="#000000" cx="45" cz="198.5763888888889" r="3.6111111111111107" angle="90" />
   <Door open="@g3" pitch="0" yaw="0" roll="0" deltaY="20" y="0" fill="#006600" frame="#000000" cx="45" cz="190.38194444444446" r="3.6111111111111107" angle="90" />
@@ -229,13 +229,13 @@ Yellow shoots for Green team's goal.
   <Sound y="5" isPlaced="false" isAmbient="false" isMusic="true" sound="1502" loopCount="900" volume.0="1" volume.1="1" start="@start" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
   <Sound y="5" isPlaced="false" isAmbient="false" sound="1503" volume.0="1" volume.1="1" start="@yellowscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
   <Sound y="5" isPlaced="false" isAmbient="false" sound="1503" volume.0="1" volume.1="1" start="@greenscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Text showEveryone="true" text="Green Team Scores!" in="@greenscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Text showEveryone="true" text="Yellow Team Scores!" in="@yellowscore" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Text showEveryone="true" text="Green Team Wins" in="@greenwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Text showEveryone="true" text="Yellow Team Wins" in="@yellowwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Timer in="@yellowwin" out="@gameOver" wait="50" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Distributor in.0="@g10" out.0="@greenwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Distributor in.0="@y10" out.0="@yellowwin" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Timer in="@greenwin" out="@gameOver" wait="50" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
-  <Distributor in="@gameOver" out="@gameEnds" fill="#ffff00" frame="#000000" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" angle="270" />
+  <Text showEveryone="true" text="Green Team Scores!" in="@greenscore" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" />
+  <Text showEveryone="true" text="Yellow Team Scores!" in="@yellowscore" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" />
+  <Text showEveryone="true" text="Green Team Wins" in="@greenwin" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" />
+  <Text showEveryone="true" text="Yellow Team Wins" in="@yellowwin" cx="232.36111111111111" cz="135.3125" r="3.6111111111111143" />
+  <Timer in="@yellowwin" out="@gameOver" wait="50" />
+  <Distributor in.0="@g10" out.0="@greenwin" />
+  <Distributor in.0="@y10" out.0="@yellowwin" />
+  <Timer in="@greenwin" out="@gameOver" wait="50" />
+  <Distributor in="@gameOver" out="@gameEnds" />
 </map>

@@ -69,8 +69,8 @@ Ni, NI, NI!!!" />
   <Wall fill="#ffffff" frame="#000000" x="6.979166666666667" z="43.05555555555556" w="1.875" d="63.75" h="0" />
   <set wallYon="defaultYon" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="10.416666666666668" cz="43.05555555555556" r="3.75" angle="270" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="10.416666666666668" cz="43.05555555555556" r="3.75" angle="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspMissile" y="3" yon="100" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="10.416666666666668" cz="43.05555555555556" r="3.75" angle="270" />
   <set wallHeight="50" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="66.35416666666667" z="43.05555555555556" w="1.875" d="63.75" h="0" />
@@ -80,30 +80,30 @@ Ni, NI, NI!!!" />
   <Wall fill="#ffffff" frame="#000000" x="36.66666666666667" z="73.99305555555556" w="57.5" d="1.875" h="0" />
   <set wallYon="defaultYon" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="62.91666666666667" cz="43.05555555555556" r="3.75" angle="270" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="62.91666666666667" cz="43.05555555555556" r="3.75" angle="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspMissile" y="3" yon="100" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="62.91666666666667" cz="43.05555555555556" r="3.75" angle="270" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="70.55555555555556" r="2.5" angle="0" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="70.55555555555556" r="2.5" angle="0" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" y="3" yon="100" speed="5" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="70.55555555555556" r="2.5" angle="0" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="15.555555555555557" r="2.5" angle="0" />
-  <Timer in="mTaken" out="mShow" wait="300" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="15.555555555555557" r="2.5" angle="0" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspGrenade" y="3" yon="100" speed="5" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="15.555555555555557" r="2.5" angle="0" />
   <Incarnator start="@t2" stop="@f2" y="10" fill="#ffffff" frame="#000000" cx="61.66666666666667" cz="69.30555555555556" r="3.75" angle="135" />
   <Incarnator start="@t4" stop="@f4" y="10" fill="#ffffff" frame="#000000" cx="61.66666666666667" cz="16.805555555555557" r="3.75" angle="45" />
   <Incarnator start="@t1" stop="@f1" y="10" fill="#ffffff" frame="#000000" cx="11.666666666666668" cz="16.805555555555557" r="3.75" angle="315" />
   <Incarnator start="@t6" stop="@f6" y="10" fill="#ffffff" frame="#000000" cx="11.666666666666668" cz="16.805555555555557" r="3.75" angle="315" />
   <Incarnator start="@t5" stop="@f5" y="10" fill="#ffffff" frame="#000000" cx="62.91666666666667" cz="57.74305555555556" r="2.8125" angle="90" />
-  <And in="@start" out="@t1" fill="#ffffff" frame="#000000" cx="12.916666666666668" cz="28.368055555555557" r="2.8125" angle="270" />
-  <And in="@t1" out.0="@f1" out.1="@t2" fill="#ffffff" frame="#000000" cx="12.916666666666668" cz="28.368055555555557" r="2.8125" angle="270" />
-  <And in="@t2" out.0="@f2" out.1="@t3" fill="#ffffff" frame="#000000" cx="12.916666666666668" cz="28.368055555555557" r="2.8125" angle="270" />
-  <And in="@t3" out.0="@f3" out.1="@t4" fill="#ffffff" frame="#000000" cx="12.916666666666668" cz="28.368055555555557" r="2.8125" angle="270" />
-  <And in="@t4" out.0="@f4" out.1="@t1" fill="#ffffff" frame="#000000" cx="12.916666666666668" cz="28.368055555555557" r="2.8125" angle="270" />
+  <And in="@start" out="@t1" />
+  <And in="@t1" out.0="@f1" out.1="@t2" />
+  <And in="@t2" out.0="@f2" out.1="@t3" />
+  <And in="@t3" out.0="@f3" out.1="@t4" />
+  <And in="@t4" out.0="@f4" out.1="@t1" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#00cccc" frame="#000000" cx="36.59722222222223" cz="42.43055555555556" r="3.6805555555555536" angle="270" />
-  <Timer in="mTaken" out="mShow" wait="390" fill="#00cccc" frame="#000000" cx="36.59722222222223" cz="42.43055555555556" r="3.6805555555555536" angle="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="390" />
   <Goody shape="bspAvaraA" y="2.5" missiles="3" grenades="6" speed="3" start="mShow" out="mTaken" fill="#00cccc" frame="#000000" cx="36.59722222222223" cz="42.43055555555556" r="3.6805555555555536" angle="270" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="1000" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="42.43055555555556" r="1.875" angle="225" />
   <Sound y="50" sound="snBirds2" isPlaced="false" isAmbient="true" volume="8" loopCount="-1" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="42.43055555555556" r="1.875" angle="225" />

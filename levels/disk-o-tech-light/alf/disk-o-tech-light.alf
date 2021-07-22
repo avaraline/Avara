@@ -6,20 +6,20 @@ load up on ammo, then go hide in the disco balls! :)" wallHeight="0" baseHeight=
   <Wall fill="#222222" frame="#000000" x="56.31944444444444" z="59.20138888888889" w="55" d="55.06944444444444" h="0" y="0" />
   <unique vars="gTaken gReplace" />
   <Goody y="goodyHeight" speed="goodySpin" shape="bspGrenade" out="gTaken" start="gReplace" grenades="numGrenades" yon="20" scale="goodyScale" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="315" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="315" />
-  <And in="@start" out="gReplace" fill="#ffff00" frame="#ff0000" cx="40.55555555555556" cz="44.02777777777778" r="2.5" angle="315" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" />
+  <And in="@start" out="gReplace" />
   <unique vars="gTaken gReplace" />
   <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="45" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="45" />
-  <And in="@start" out="gReplace" fill="#cc0066" frame="#ff0066" cx="70.55555555555556" cz="44.02777777777778" r="2.5" angle="45" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" />
+  <And in="@start" out="gReplace" />
   <unique vars="gTaken gReplace" />
   <Goody y="goodyHeight" speed="goodySpin" shape="bspMissile" out="gTaken" start="gReplace" missiles="numMissiles" yon="20" scale="goodyScale" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="225" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="225" />
-  <And in="@start" out="gReplace" fill="#cc0066" frame="#ff0066" cx="40.55555555555556" cz="74.02777777777779" r="2.5" angle="225" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" />
+  <And in="@start" out="gReplace" />
   <unique vars="gTaken gReplace" />
   <Goody y="goodyHeight" speed="goodySpin" shape="bspGrenade" out="gTaken" start="gReplace" grenades="numGrenades" yon="20" scale="goodyScale" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="135" />
-  <Timer in="gTaken" out="gReplace" wait="goodyDelay" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="135" />
-  <And in="@start" out="gReplace" fill="#ffff00" frame="#ff0000" cx="70.55555555555556" cz="74.02777777777779" r="2.5" angle="135" />
+  <Timer in="gTaken" out="gReplace" wait="goodyDelay" />
+  <And in="@start" out="gReplace" />
   <Wall fill="#0000cc" frame="#000000" x="55.69444444444445" z="59.20138888888889" w="15" d="15.069444444444443" h="1" y="28" />
   <Wall fill="#000099" frame="#000000" x="55.69444444444445" z="59.20138888888889" w="10" d="10.069444444444443" h="2" y="26" />
   <Wall fill="#000066" frame="#000000" x="55.69444444444445" z="59.20138888888889" w="5" d="5.069444444444443" h="26" y="0" />

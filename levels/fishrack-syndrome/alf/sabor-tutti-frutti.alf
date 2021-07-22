@@ -20,8 +20,8 @@
   <Teleporter y="-10" shape="false" deadRange="60" activeRange="2000" destGroup="3" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="315" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="12" missiles="8" y="2" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="315" />
-  <Timer in="mDie" wait="60" out="mHi" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="315" />
-  <And in="@start" out="mHi" fill="#888888" frame="#000000" cx="60" cz="48.125" r="1.875" angle="315" />
+  <Timer in="mDie" wait="60" out="mHi" />
+  <And in="@start" out="mHi" />
   <Dome hasFloor="true" pitch="180" fill="#888888" frame="#000000" cx="60" cz="48.125" r="6.25" angle="0" quarters="4" />
   <Dome hasFloor="true" y="7.7" fill="#888888" frame="#000000" cx="60" cz="48.125" r="6.25" angle="0" quarters="4" />
   <Dome hasFloor="true" fill="#003333" frame="#000000" cx="55.625" cz="43.75" r="3.125" angle="270" quarters="1" />
@@ -56,20 +56,20 @@
   <Dome hasFloor="true" y="-13" fill="#003333" frame="#000000" cx="74.375" cz="70" r="7.5" angle="90" quarters="1" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="5" missiles="5" y="-11" fill="#3300ff" frame="#333366" cx="40.625" cz="28.75" r="2.5" angle="315" />
-  <Timer in="mDie" wait="60" out="mHi" fill="#3300ff" frame="#333366" cx="40.625" cz="28.75" r="2.5" angle="315" />
-  <And in="@start" out="mHi" fill="#3300ff" frame="#333366" cx="40.625" cz="28.75" r="2.5" angle="315" />
+  <Timer in="mDie" wait="60" out="mHi" />
+  <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="5" missiles="5" y="-11" fill="#3300ff" frame="#333366" cx="79.375" cz="28.75" r="2.5" angle="45" />
-  <Timer in="mDie" wait="60" out="mHi" fill="#3300ff" frame="#333366" cx="79.375" cz="28.75" r="2.5" angle="45" />
-  <And in="@start" out="mHi" fill="#3300ff" frame="#333366" cx="79.375" cz="28.75" r="2.5" angle="45" />
+  <Timer in="mDie" wait="60" out="mHi" />
+  <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="5" missiles="5" y="-11" fill="#3300ff" frame="#333366" cx="79.375" cz="67.5" r="2.5" angle="135" />
-  <Timer in="mDie" wait="60" out="mHi" fill="#3300ff" frame="#333366" cx="79.375" cz="67.5" r="2.5" angle="135" />
-  <And in="@start" out="mHi" fill="#3300ff" frame="#333366" cx="79.375" cz="67.5" r="2.5" angle="135" />
+  <Timer in="mDie" wait="60" out="mHi" />
+  <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
   <Goody start="mHi" out="mDie" speed="5" shape="bspGoody" grenades="5" missiles="5" y="-11" fill="#3300ff" frame="#333366" cx="40.625" cz="67.5" r="2.5" angle="225" />
-  <Timer in="mDie" wait="60" out="mHi" fill="#3300ff" frame="#333366" cx="40.625" cz="67.5" r="2.5" angle="225" />
-  <And in="@start" out="mHi" fill="#3300ff" frame="#333366" cx="40.625" cz="67.5" r="2.5" angle="225" />
+  <Timer in="mDie" wait="60" out="mHi" />
+  <And in="@start" out="mHi" />
   <Teleporter shape="false" win="1000" start="@winTeam" activeRange="2000" fill="#ee0000" frame="#000000" cx="61.59722222222223" cz="1.875" r="2.0138888888888893" angle="315" />
   <Incarnator y="5" fill="#ee0000" frame="#000000" cx="74.375" cz="62.5" r="1.875" angle="135" />
   <Incarnator y="5" fill="#ee0000" frame="#000000" cx="45.625" cz="62.5" r="1.875" angle="225" />

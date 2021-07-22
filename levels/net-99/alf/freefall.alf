@@ -9,8 +9,8 @@
   <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="38.78472222222223" r="2.0486111111111107" angle="270" />
   <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="28.15972222222222" r="2.0486111111111125" angle="270" />
   <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" r="2.0486111111111125" angle="270" />
-  <And in="@start" out.1="@missileRemake" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" r="2.0486111111111125" angle="270" />
-  <Timer in="@missileTake" out="@missileRemake" wait="0" restart="true" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" r="2.0486111111111125" angle="270" />
+  <And in="@start" out.1="@missileRemake" />
+  <Timer in="@missileTake" out="@missileRemake" wait="0" restart="true" />
   <Goody y="100" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" r="2.0486111111111125" angle="270" />
   <Goody y="1000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />
   <Goody y="2000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />

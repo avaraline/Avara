@@ -34,13 +34,13 @@ name here&gt; weighing in at 210 kg , its going to be a nasty fight ! *DING* *DI
   <Incarnator start="@three" stop="@four" fill="#2e1fa2" frame="#000000" cx="36.80555555555556" cz="38.05555555555556" r="1.25" angle="315" />
   <Teleporter y="60" activeRange="2000" deadRange="69" shape="0" sound="0" fragment="false" spin="false" fill="#2e1fa2" frame="#000000" cx="31.66666666666667" cz="38.05555555555556" r="1.25" angle="45" />
   <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#2e1fa2" frame="#000000" cx="31.66666666666667" cz="38.05555555555556" r="1.25" angle="45" />
-  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#000000" frame="#000000" r="1.25" cx="31.66666666666667" cz="38.05555555555556" angle="45" x="32.29166666666667" z="37.43055555555556" w="5" d="5" h="0" y="59" />
+  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#000000" frame="#000000" x="32.29166666666667" z="37.43055555555556" w="5" d="5" h="0" y="59" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#2e1fa2" frame="#000000" cx="32.29166666666667" cz="37.43055555555556" r="1.25" angle="45" />
-  <Timer in="mTaken" out="mShow" wait="32" fill="#2e1fa2" frame="#000000" cx="32.29166666666667" cz="37.43055555555556" r="1.25" angle="45" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="32" />
   <Goody shape="bspAvaraA" y="4" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="40" fill="#2e1fa2" frame="#000000" cx="32.29166666666667" cz="37.43055555555556" r="1.25" angle="45" />
-  <And in="@start" out="@time" fill="#5d6c5e" frame="#000000" cx="56.94444444444445" cz="24.09722222222222" r="3.125" angle="45" />
-  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" out="@time" fill="#5d6c5e" frame="#000000" cx="56.94444444444445" cz="24.09722222222222" r="3.125" angle="45" />
-  <Timer in="@time" out="@whoop" wait="1" fill="#5d6c5e" frame="#000000" cx="56.94444444444445" cz="24.09722222222222" r="3.125" angle="45" />
-  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" out.6="@six" out.7="@seven" fill="#5d6c5e" frame="#000000" cx="56.94444444444445" cz="24.09722222222222" r="3.125" angle="45" />
+  <And in="@start" out="@time" />
+  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" out="@time" />
+  <Timer in="@time" out="@whoop" wait="1" />
+  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" out.6="@six" out.7="@seven" />
 </map>
