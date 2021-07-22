@@ -37,8 +37,8 @@ def postprocess(element: Element) -> Element:
             del element.attrs["extent"]
     # Strip out any irrelevant attributes that may be present.
     if element.tag in DEAD_ATTRS.keys():
-            dead = DEAD_ATTRS[element.tag]
-            element.attrs = {k: v for k, v in element.attrs.items() if k not in dead}
+        dead = DEAD_ATTRS[element.tag]
+        element.attrs = {k: v for k, v in element.attrs.items() if k not in dead}
     return element
 
 
