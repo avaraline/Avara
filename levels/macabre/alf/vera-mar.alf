@@ -1,12 +1,12 @@
 <map>
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" r="1.25" cx="85" cz="90.625" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" r="1.25" cx="85" cz="90.55555555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" r="1.25" cx="85" cz="90.625" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" r="1.25" cx="85" cz="90.625" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" r="1.25" cx="85" cz="90.625" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" r="1.25" cx="85" cz="90.625" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" r="1.25" cx="85" cz="90.625" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" r="1.25" cx="85" cz="90.625" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" cx="85" cz="90.625" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" cx="85" cz="90.55555555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" cx="85" cz="90.625" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" cx="85" cz="90.625" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" cx="85" cz="90.625" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" cx="85" cz="90.625" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" cx="85" cz="90.625" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" cx="85" cz="90.625" angle="90" />
   <set wallHeight=".3" />
   <Wall fill="#7f7155" frame="#000000" x="47.5" z="129.375" w="13.75" d="13.75" h="0" y="9.5" />
   <set wallHeight=".5" />
@@ -26,7 +26,7 @@
   <set designer="S. Carmel" information="Vera Mar:
 Melting moods of lamentation decussate within, they suspire in perpetuity.
 Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light.0.b="-45" light.1.i="0.2" light.1.a="-60" light.1.b="45" />
-  <Incarnator y="50" fill="#ffc799" frame="#000000" cx="37.5" cz="34.375" r="1.875" angle="315" />
+  <Incarnator y="50" cx="37.5" cz="34.375" angle="315" />
   <set incarnateSound="2001" incarnateVolume="3000" groundStepSound="2002" wallHeight="9" />
   <Wall fill="#332d1e" frame="#000000" x="57.5" z="54.375" w="10" d="10" h="0" />
   <set wallHeight="2" />
@@ -37,9 +37,9 @@ Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light
   <Wall fill="#4c442f" frame="#000000" x="47.5" z="74.375" w="10" d="10" h="0" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="37.5" z="74.375" w="10" d="30" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="77.5" z="44.375" w="10" d="10" h="0" r="1.875" angle="270" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="57.5" z="64.375" w="10" d="10" h="0" r="1.875" angle="270" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="47.5" z="84.375" w="10" d="10" h="0" r="1.875" angle="270" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="77.5" z="44.375" w="10" d="10" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="57.5" z="64.375" w="10" d="10" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="47.5" z="84.375" w="10" d="10" h="0" angle="270" />
   <set wallHeight="4" />
   <Wall fill="#332d1e" frame="#000000" x="95" z="81.875" w="15" d="15" h="0" />
   <set wallHeight="2" />
@@ -54,13 +54,13 @@ Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light
   <Wall fill="#4c442f" frame="#000000" x="142.5" z="89.375" w="10" d="10" h="0" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="152.5" z="89.375" w="10" d="30" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="142.5" z="79.375" w="10" d="10" h="0" r="1.875" angle="90" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="142.5" z="79.375" w="10" d="10" h="0" angle="90" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="142.5" z="109.375" w="10" d="30" h="0" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="127.5" z="119.375" w="20" d="10" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="132.5" z="99.375" w="10" d="10" h="0" r="1.875" angle="90" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="112.5" z="119.375" w="10" d="10" h="0" r="1.875" angle="90" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="132.5" z="99.375" w="10" d="10" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="112.5" z="119.375" w="10" d="10" h="0" angle="90" />
   <set wallHeight="1" />
   <Wall fill="#7f7155" frame="#000000" x="105" z="66.875" w="15" d="5" h="0" />
   <set wallHeight="1" />
@@ -79,18 +79,18 @@ Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light
   <Wall fill="#61573f" frame="#000000" x="142.5" z="49.375" w="10" d="20" h="0" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="152.5" z="34.375" w="10" d="30" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="152.5" z="54.375" w="10" d="10" h="0" r="1.875" angle="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="142.5" z="24.375" w="10" d="10" h="0" r="1.875" angle="90" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="152.5" z="54.375" w="10" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="142.5" z="24.375" w="10" d="10" h="0" angle="90" />
   <set wallHeight="4" />
   <Wall fill="#4c442f" frame="#000000" x="162.5" z="39.375" w="10" d="20" h="0" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="47.5" z="114.375" w="10" d="20" h="0" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="37.5" z="129.375" w="10" d="30" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="37.5" z="109.375" w="10" d="10" h="0" r="1.875" angle="180" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="37.5" z="109.375" w="10" d="10" h="0" angle="180" />
   <set wallHeight="4" />
   <Wall fill="#4c442f" frame="#000000" x="27.5" z="124.375" w="10" d="20" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="47.5" z="139.375" w="10" d="10" h="0" r="1.875" angle="270" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="47.5" z="139.375" w="10" d="10" h="0" angle="270" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="82.5" z="129.375" w="30" d="10" h="0" />
   <set wallHeight="2" />
@@ -99,8 +99,8 @@ Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light
   <Wall fill="#4c442f" frame="#000000" x="92.5" z="139.375" w="10" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#4c442f" frame="#000000" x="72.5" z="119.375" w="10" d="10" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="72.5" z="139.375" w="10" d="10" h="0" r="1.875" angle="90" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="82.5" z="119.375" w="10" d="10" h="0" r="1.875" angle="180" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="72.5" z="139.375" w="10" d="10" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="82.5" z="119.375" w="10" d="10" h="0" angle="180" />
   <set wallHeight="2" />
   <Wall fill="#61573f" frame="#000000" x="107.5" z="34.375" w="30" d="10" h="0" />
   <set wallHeight="2" />
@@ -109,233 +109,233 @@ Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light
   <Wall fill="#4c442f" frame="#000000" x="117.5" z="44.375" w="10" d="10" h="0" />
   <set wallHeight="4" />
   <Wall fill="#4c442f" frame="#000000" x="97.5" z="24.375" w="10" d="10" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="117.5" z="24.375" w="10" d="10" h="0" r="1.875" angle="270" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="107.5" z="44.375" w="10" d="10" h="0" r="1.875" angle="0" />
-  <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" fill="#bf9f88" frame="#000000" cx="95" cz="81.875" r="1.875" angle="45" />
-  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="57.5" cz="54.375" r="1.875" angle="135" />
-  <Teleporter sound="990" group="-1" y="-30" activeRange="33 * 5" deadRange="29 * 5" destGroup="@recenter" shape="0" spin="false" fill="#ffc799" frame="#000000" cx="95" cz="81.875" r="1.875" angle="315" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="117.5" z="24.375" w="10" d="10" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#7f7155" frame="#000000" x="107.5" z="44.375" w="10" d="10" h="0" angle="0" />
+  <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="95" cz="81.875" angle="45" />
+  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="57.5" cz="54.375" angle="135" />
+  <Teleporter sound="990" group="-1" y="-30" activeRange="33 * 5" deadRange="29 * 5" destGroup="@recenter" shape="0" spin="false" fill="#ffc799" frame="#000000" cx="95" cz="81.875" angle="315" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#181914" frame="#494949" cx="57.5" cz="54.375" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="15" fill="#181914" frame="#494949" cx="57.5" cz="54.375" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" y="46" yon="0.01" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#181914" frame="#494949" cx="57.5" cz="54.375" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="15" />
+  <Goody shape="bspGrenade" y="46" yon="0.01" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#181914" frame="#494949" cx="57.5" cz="54.375" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#181914" frame="#494949" cx="142.5" cz="34.375" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="15" fill="#181914" frame="#494949" cx="142.5" cz="34.375" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" y="46" yon="0.01" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#181914" frame="#494949" cx="142.5" cz="34.375" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="15" />
+  <Goody shape="bspGrenade" y="46" yon="0.01" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#181914" frame="#494949" cx="142.5" cz="34.375" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#181914" frame="#494949" cx="132.5" cz="109.375" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="15" fill="#181914" frame="#494949" cx="132.5" cz="109.375" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" y="46" yon="0.01" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#181914" frame="#494949" cx="132.5" cz="109.375" r="1.25" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="15" />
+  <Goody shape="bspGrenade" y="46" yon="0.01" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#181914" frame="#494949" cx="132.5" cz="109.375" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#181914" frame="#494949" cx="47.5" cz="129.375" r="1.25" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="15" fill="#181914" frame="#494949" cx="47.5" cz="129.375" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" y="46" yon="0.01" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#181914" frame="#494949" cx="47.5" cz="129.375" r="1.25" angle="225" />
-  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="132.5" cz="109.375" r="1.875" angle="135" />
-  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="47.5" cz="129.375" r="1.875" angle="135" />
-  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="142.5" cz="34.375" r="1.875" angle="135" />
-  <Incarnator y="50" fill="#ffc799" frame="#000000" cx="152.5" cz="129.375" r="1.875" angle="135" />
-  <Incarnator y="50" fill="#ffc799" frame="#000000" cx="27.5" cz="149.375" r="1.875" angle="225" />
-  <Incarnator y="50" fill="#ffc799" frame="#000000" cx="162.5" cz="14.375" r="1.875" angle="45" />
-  <Incarnator y="50" fill="#ffc799" frame="#000000" cx="27.5" cz="96.875" r="1.875" angle="270" />
-  <Incarnator y="50" fill="#ffc799" frame="#000000" cx="162.5" cz="66.875" r="1.875" angle="90" />
-  <Incarnator y="50" fill="#ffc799" frame="#000000" cx="107.5" cz="9.375" r="1.875" angle="0" />
-  <Incarnator y="50" fill="#ffc799" frame="#000000" cx="82.5" cz="154.375" r="1.875" angle="180" />
-  <Goody shape="1000" y="2" speed="6" start="@taken1" stop="@show1" fill="#4c442f" frame="#000000" cx="47.465277777777786" cz="44.340277777777786" r="2.0486111111111107" angle="135" />
-  <And in="@start" out="@show1" fill="#7f7155" frame="#000000" cx="47.5" cz="44.375" r="1.25" angle="135" />
-  <Timer in="@taken1" out="@show1" wait="225" fill="#7f7155" frame="#000000" cx="47.5" cz="44.375" r="1.25" angle="135" />
-  <Goody shape="bspGrenade" y="4" speed="6" grenades="6" start="@show1" out="@taken1" fill="#7f7155" frame="#000000" cx="47.5" cz="44.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@show1" stop="@taken1" fill="#7f7155" frame="#000000" cx="47.5" cz="44.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@taken6" stop="@show6" fill="#4c442f" frame="#000000" cx="142.46527777777777" cz="119.34027777777777" r="2.0486111111111" angle="135" />
-  <And in="@start" out="@show6" fill="#7f7155" frame="#000000" cx="142.5" cz="119.375" r="1.25" angle="135" />
-  <Timer in="@taken6" out="@show6" wait="225" fill="#7f7155" frame="#000000" cx="142.5" cz="119.375" r="1.25" angle="135" />
-  <Goody shape="bspGrenade" y="4" speed="6" grenades="6" start="@show6" out="@taken6" fill="#7f7155" frame="#000000" cx="142.5" cz="119.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@show6" stop="@taken6" fill="#7f7155" frame="#000000" cx="142.5" cz="119.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@taken4" stop="@show4" fill="#4c442f" frame="#000000" cx="37.465277777777786" cz="119.34027777777777" r="2.0486111111111107" angle="135" />
-  <And in="@start" out="@show4" fill="#7f7155" frame="#000000" cx="37.5" cz="119.375" r="1.25" angle="135" />
-  <Timer in="@taken4" out="@show4" wait="225" fill="#7f7155" frame="#000000" cx="37.5" cz="119.375" r="1.25" angle="135" />
-  <Goody shape="bspGrenade" y="4" speed="6" grenades="6" start="@show4" out="@taken4" fill="#7f7155" frame="#000000" cx="37.5" cz="119.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@show4" stop="@taken4" fill="#7f7155" frame="#000000" cx="37.5" cz="119.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@taken5" stop="@show5" fill="#4c442f" frame="#000000" cx="152.46527777777777" cz="44.340277777777786" r="2.0486111111111" angle="135" />
-  <And in="@start" out="@show5" fill="#7f7155" frame="#000000" cx="152.5" cz="44.375" r="1.25" angle="135" />
-  <Timer in="@taken5" out="@show5" wait="225" fill="#7f7155" frame="#000000" cx="152.5" cz="44.375" r="1.25" angle="135" />
-  <Goody shape="bspGrenade" y="4" speed="6" grenades="6" start="@show5" out="@taken5" fill="#7f7155" frame="#000000" cx="152.5" cz="44.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@show5" stop="@taken5" fill="#7f7155" frame="#000000" cx="152.5" cz="44.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@taken3" stop="@show3" fill="#4c442f" frame="#000000" cx="107.46527777777779" cz="34.34027777777778" r="2.0486111111111143" angle="135" />
-  <And in="@start" out="@show3" fill="#7f7155" frame="#ffc799" cx="107.5" cz="34.375" r="1.25" angle="135" />
-  <Timer in="@taken3" out="@show3" wait="225" fill="#7f7155" frame="#ffc799" cx="107.5" cz="34.375" r="1.25" angle="135" />
-  <Goody shape="bspMissile" y="4" speed="6" missiles="3" start="@show3" out="@taken3" fill="#7f7155" frame="#ffc799" cx="107.5" cz="34.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@show3" stop="@taken3" fill="#7f7155" frame="#ffc799" cx="107.5" cz="34.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@taken2" stop="@show2" fill="#4c442f" frame="#000000" cx="82.46527777777777" cz="129.34027777777777" r="2.048611111111107" angle="135" />
-  <And in="@start" out="@show2" fill="#7f7155" frame="#ffc799" cx="82.5" cz="129.375" r="1.25" angle="135" />
-  <Timer in="@taken2" out="@show2" wait="225" fill="#7f7155" frame="#ffc799" cx="82.5" cz="129.375" r="1.25" angle="135" />
-  <Goody shape="bspMissile" y="4" speed="6" missiles="3" start="@show2" out="@taken2" fill="#7f7155" frame="#ffc799" cx="82.5" cz="129.375" r="1.25" angle="135" />
-  <Goody shape="1000" y="2" speed="6" start="@show2" stop="@taken2" fill="#7f7155" frame="#ffc799" cx="82.5" cz="129.375" r="1.25" angle="135" />
-  <Goody shape="1001" y="4" speed="6" start="@taken7" stop="@show7" fill="#1e1b13" frame="#000000" cx="94.96527777777779" cz="81.84027777777777" r="2.0486111111111143" angle="135" />
-  <And in="@start" out="@show7" fill="#4c442f" frame="#ffc799" cx="95" cz="81.875" r="1.25" angle="135" />
-  <Timer in="@taken7" out="@show7" wait="300" fill="#4c442f" frame="#ffc799" cx="95" cz="81.875" r="1.25" angle="135" />
-  <Goody shape="1003" scale=".5" y="6" speed="6" missiles="3" grenades="6" start="@show7" out="@taken7" fill="#4c442f" frame="#ffc799" cx="95" cz="81.875" r="1.25" angle="135" />
-  <Goody shape="1001" y="4" speed="6" start="@show7" stop="@taken7" fill="#4c442f" frame="#ffc799" cx="95" cz="81.875" r="1.25" angle="135" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#4c442f" frame="#ffc799" cx="95" cz="81.875" r="1.25" angle="135" />
-  <GroundColor fill="#1e1b13" frame="#191614" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="15" />
+  <Goody shape="bspGrenade" y="46" yon="0.01" speed="6" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#181914" frame="#494949" cx="47.5" cz="129.375" angle="225" />
+  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="132.5" cz="109.375" angle="135" />
+  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="47.5" cz="129.375" angle="135" />
+  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="142.5" cz="34.375" angle="135" />
+  <Incarnator y="50" cx="152.5" cz="129.375" angle="135" />
+  <Incarnator y="50" cx="27.5" cz="149.375" angle="225" />
+  <Incarnator y="50" cx="162.5" cz="14.375" angle="45" />
+  <Incarnator y="50" cx="27.5" cz="96.875" angle="270" />
+  <Incarnator y="50" cx="162.5" cz="66.875" angle="90" />
+  <Incarnator y="50" cx="107.5" cz="9.375" angle="0" />
+  <Incarnator y="50" cx="82.5" cz="154.375" angle="180" />
+  <Goody shape="1000" y="2" speed="6" start="@taken1" stop="@show1" fill="#4c442f" frame="#000000" cx="47.465277777777786" cz="44.340277777777786" angle="135" />
+  <And in="@start" out="@show1" />
+  <Timer in="@taken1" out="@show1" wait="225" />
+  <Goody shape="bspGrenade" y="4" speed="6" grenades="6" start="@show1" out="@taken1" fill="#7f7155" frame="#000000" cx="47.5" cz="44.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@show1" stop="@taken1" fill="#7f7155" frame="#000000" cx="47.5" cz="44.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@taken6" stop="@show6" fill="#4c442f" frame="#000000" cx="142.46527777777777" cz="119.34027777777777" angle="135" />
+  <And in="@start" out="@show6" />
+  <Timer in="@taken6" out="@show6" wait="225" />
+  <Goody shape="bspGrenade" y="4" speed="6" grenades="6" start="@show6" out="@taken6" fill="#7f7155" frame="#000000" cx="142.5" cz="119.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@show6" stop="@taken6" fill="#7f7155" frame="#000000" cx="142.5" cz="119.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@taken4" stop="@show4" fill="#4c442f" frame="#000000" cx="37.465277777777786" cz="119.34027777777777" angle="135" />
+  <And in="@start" out="@show4" />
+  <Timer in="@taken4" out="@show4" wait="225" />
+  <Goody shape="bspGrenade" y="4" speed="6" grenades="6" start="@show4" out="@taken4" fill="#7f7155" frame="#000000" cx="37.5" cz="119.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@show4" stop="@taken4" fill="#7f7155" frame="#000000" cx="37.5" cz="119.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@taken5" stop="@show5" fill="#4c442f" frame="#000000" cx="152.46527777777777" cz="44.340277777777786" angle="135" />
+  <And in="@start" out="@show5" />
+  <Timer in="@taken5" out="@show5" wait="225" />
+  <Goody shape="bspGrenade" y="4" speed="6" grenades="6" start="@show5" out="@taken5" fill="#7f7155" frame="#000000" cx="152.5" cz="44.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@show5" stop="@taken5" fill="#7f7155" frame="#000000" cx="152.5" cz="44.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@taken3" stop="@show3" fill="#4c442f" frame="#000000" cx="107.46527777777779" cz="34.34027777777778" angle="135" />
+  <And in="@start" out="@show3" />
+  <Timer in="@taken3" out="@show3" wait="225" />
+  <Goody shape="bspMissile" y="4" speed="6" missiles="3" start="@show3" out="@taken3" fill="#7f7155" frame="#ffc799" cx="107.5" cz="34.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@show3" stop="@taken3" fill="#7f7155" frame="#ffc799" cx="107.5" cz="34.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@taken2" stop="@show2" fill="#4c442f" frame="#000000" cx="82.46527777777777" cz="129.34027777777777" angle="135" />
+  <And in="@start" out="@show2" />
+  <Timer in="@taken2" out="@show2" wait="225" />
+  <Goody shape="bspMissile" y="4" speed="6" missiles="3" start="@show2" out="@taken2" fill="#7f7155" frame="#ffc799" cx="82.5" cz="129.375" angle="135" />
+  <Goody shape="1000" y="2" speed="6" start="@show2" stop="@taken2" fill="#7f7155" frame="#ffc799" cx="82.5" cz="129.375" angle="135" />
+  <Goody shape="1001" y="4" speed="6" start="@taken7" stop="@show7" fill="#1e1b13" frame="#000000" cx="94.96527777777779" cz="81.84027777777777" angle="135" />
+  <And in="@start" out="@show7" />
+  <Timer in="@taken7" out="@show7" wait="300" />
+  <Goody shape="1003" scale=".5" y="6" speed="6" missiles="3" grenades="6" start="@show7" out="@taken7" fill="#4c442f" frame="#ffc799" cx="95" cz="81.875" angle="135" />
+  <Goody shape="1001" y="4" speed="6" start="@show7" stop="@taken7" fill="#4c442f" frame="#ffc799" cx="95" cz="81.875" angle="135" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#4c442f" frame="#ffc799" cx="95" cz="81.875" angle="135" />
+  <GroundColor fill="#1e1b13" />
   <SkyColor n="15" fill="#ffc799" frame="#bf9f88" />
-  <Ball scale="50" customGravity="0" yon="10000" hitVolume="0" y="200" canGlow="true" shape="3001" fill="#bf9f88" frame="#000000" cx="53.26388888888889" cz="1029.513888888889" r="1.25" angle="180" />
+  <Ball scale="50" customGravity="0" yon="10000" hitVolume="0" y="200" canGlow="true" shape="3001" fill="#bf9f88" frame="#000000" cx="53.26388888888889" cz="1029.513888888889" angle="180" />
   <set wallYon=".01" />
-  <WallDoor guardDelay="0" open="@start" deltaY="0" deltaZ="-5" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="53.71527777777778" z="1030.3472222222222" w="5.625" d="1.25" h="2" r="1.25" cx="53.26388888888889" cz="1029.513888888889" angle="180" y="205" />
+  <WallDoor guardDelay="0" open="@start" deltaY="0" deltaZ="-5" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="53.71527777777778" z="1030.3472222222222" w="5.625" d="1.25" h="2" y="205" />
   <set wallYon="defaultYon" />
-  <Ramp yon=".1" y="200" thickness="1.5" deltaY="0" fill="#7f7f7f" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" angle="90" />
-  <Hologram shape="2001" scale="25" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="96.66666666666667" cz="1030.8333333333335" r="1.875" angle="270" />
-  <Hologram ambient.i="false" y="0" shape="bspTractorTower" yon="5" scale=".10" fill="#332d1e" frame="#000000" cx="101.875" cz="73.125" r="1.875" angle="315" />
-  <Hologram shape="2002" scale="25" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="1153.6805555555557" cz="198.125" r="1.875" angle="0" />
-  <Hologram shape="2001" scale="25" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="1156.9444444444446" cz="120" r="1.875" angle="0" />
-  <Hologram shape="2001" scale="20" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="1156.3194444444446" cz="280" r="1.875" angle="0" />
-  <Hologram scale="45" yon="10000" y="150" shape="3001" fill="#bf9f88" frame="#000000" cx="1162.361111111111" cz="9.166666666666668" r="1.25" angle="270" />
-  <Hologram shape="2001" scale="15" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="896.3194444444445" cz="34.375" r="1.875" angle="180" />
-  <Hologram shape="2001" scale="12" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="901.9444444444445" cz="1.875" r="1.875" angle="180" />
-  <Hologram scale="40" yon="10000" y="130" shape="3001" fill="#bf9f88" frame="#000000" cx="896.25" cz="194.93055555555557" r="1.25" angle="90" />
-  <Hologram scale="20" yon="10000" y="170" shape="3001" fill="#bf9f88" frame="#000000" cx="898.125" cz="153.05555555555557" r="1.25" angle="90" />
-  <Hologram shape="2003" scale="2" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="458.6805555555556" cz="1795" r="1.875" angle="0" />
-  <Hologram shape="2004" scale="1" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="205.2777777777778" cz="1793.9583333333335" r="1.875" angle="0" />
-  <Hologram shape="2001" scale="12" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="910.6944444444445" cz="68.125" r="1.875" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="136.875" cz="11.875" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="136.875" cz="11.805555555555555" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="136.875" cz="11.875" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="136.875" cz="11.875" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="136.875" cz="11.875" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="136.875" cz="11.875" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="136.875" cz="11.875" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="136.875" cz="11.875" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="128.125" cz="8.125" angle="315" />
-  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="128.125" cz="8.055555555555555" angle="270" />
-  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="128.125" cz="8.125" angle="225" />
-  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="128.125" cz="8.125" angle="45" />
-  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="128.125" cz="8.125" angle="0" />
-  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="128.125" cz="8.125" angle="180" />
-  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="128.125" cz="8.125" angle="135" />
-  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="128.125" cz="8.125" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="179.375" cz="106.875" angle="315" />
-  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="179.375" cz="106.80555555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="179.375" cz="106.875" angle="225" />
-  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="179.375" cz="106.875" angle="45" />
-  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="179.375" cz="106.875" angle="0" />
-  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="179.375" cz="106.875" angle="180" />
-  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="179.375" cz="106.875" angle="135" />
-  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="179.375" cz="106.875" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="186.875" cz="113.125" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="186.875" cz="113.05555555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="186.875" cz="113.125" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="186.875" cz="113.125" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="186.875" cz="113.125" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="186.875" cz="113.125" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="186.875" cz="113.125" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="186.875" cz="113.125" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="189.375" cz="103.75" angle="315" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="189.375" cz="103.68055555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="189.375" cz="103.75" angle="225" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="189.375" cz="103.75" angle="45" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="189.375" cz="103.75" angle="0" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="189.375" cz="103.75" angle="180" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="189.375" cz="103.75" angle="135" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="189.375" cz="103.75" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="76.25" cz="29.375" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="76.25" cz="29.305555555555557" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="76.25" cz="29.375" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="76.25" cz="29.375" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="76.25" cz="29.375" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="76.25" cz="29.375" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="76.25" cz="29.375" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="76.25" cz="29.375" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="17.5" cz="86.25" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="17.5" cz="86.18055555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="17.5" cz="86.25" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="17.5" cz="86.25" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="17.5" cz="86.25" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="17.5" cz="86.25" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="17.5" cz="86.25" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="17.5" cz="86.25" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="9.375" cz="82.5" angle="315" />
-  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="9.375" cz="82.43055555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="9.375" cz="82.5" angle="225" />
-  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="9.375" cz="82.5" angle="45" />
-  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="9.375" cz="82.5" angle="0" />
-  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="9.375" cz="82.5" angle="180" />
-  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="9.375" cz="82.5" angle="135" />
-  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="9.375" cz="82.5" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="16.25" cz="75.625" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="16.25" cz="75.55555555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="16.25" cz="75.625" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="16.25" cz="75.625" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="16.25" cz="75.625" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="16.25" cz="75.625" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="16.25" cz="75.625" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="16.25" cz="75.625" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="11.875" cz="91.875" angle="315" />
-  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="11.875" cz="91.80555555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="11.875" cz="91.875" angle="225" />
-  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="11.875" cz="91.875" angle="45" />
-  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="11.875" cz="91.875" angle="0" />
-  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="11.875" cz="91.875" angle="180" />
-  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="11.875" cz="91.875" angle="135" />
-  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="11.875" cz="91.875" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="108.125" cz="140" angle="315" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="108.125" cz="139.93055555555557" angle="270" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="108.125" cz="140" angle="225" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="108.125" cz="140" angle="45" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="108.125" cz="140" angle="0" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="108.125" cz="140" angle="180" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="108.125" cz="140" angle="135" />
-  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="108.125" cz="140" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="113.125" cz="153.75" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="113.125" cz="153.68055555555557" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="113.125" cz="153.75" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="113.125" cz="153.75" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="113.125" cz="153.75" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="113.125" cz="153.75" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="113.125" cz="153.75" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="113.125" cz="153.75" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="28.75" cz="20.625" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="28.75" cz="20.555555555555557" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="28.75" cz="20.625" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="28.75" cz="20.625" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="28.75" cz="20.625" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="28.75" cz="20.625" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="28.75" cz="20.625" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="28.75" cz="20.625" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="220.625" cz="36.25" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="220.625" cz="36.18055555555556" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="220.625" cz="36.25" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="220.625" cz="36.25" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="220.625" cz="36.25" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="220.625" cz="36.25" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="220.625" cz="36.25" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="220.625" cz="36.25" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="26.25" cz="175" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="26.25" cz="174.93055555555557" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="26.25" cz="175" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="26.25" cz="175" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="26.25" cz="175" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="26.25" cz="175" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="26.25" cz="175" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="26.25" cz="175" angle="90" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.125" angle="315" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.05555555555557" angle="270" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.125" angle="225" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.125" angle="45" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.125" angle="0" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.125" angle="180" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.125" angle="135" />
-  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.125" angle="90" />
-  <Sound y="5" sound="1004" isAmbient="false" loopCount="0" volume="180000" start="@birdSound3" fill="#7f7155" frame="#000000" cx="30.625" cz="183.125" r="1.25" angle="90" />
-  <Sound y="5" sound="1003" isAmbient="false" loopCount="0" volume="150000" start="@birdSound2" fill="#7f7155" frame="#000000" cx="30.625" cz="183.125" r="1.25" angle="90" />
-  <Sound y="5" sound="1001" isAmbient="false" loopCount="0" volume="150000" start="@birdSound1" fill="#7f7155" frame="#000000" cx="30.625" cz="183.125" r="1.25" angle="90" />
-  <Timer in.1="@start" in.2="@resetTimer" wait="772" out.1="@birdSound1" out.2="@birdSound1" fill="#7f7155" frame="#000000" cx="30.625" cz="183.125" r="1.25" angle="90" />
-  <Timer in.1="@birdSound2" in.2="@birdSound2" wait="820" out.1="@birdSound3" out.2="@resetTimer" fill="#7f7155" frame="#000000" cx="30.625" cz="183.125" r="1.25" angle="90" />
-  <Timer in="@birdSound1" wait="740" out="@birdSound2" fill="#7f7155" frame="#000000" cx="30.625" cz="183.125" r="1.25" angle="90" />
-  <Field watch="playerMask" shape="bspSphere" scale="1000" start="@gravity2" stop="@gravity3" deltaY="0.050" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.25" cx="30.625" cz="183.125" angle="90" />
-  <Field watch="playerMask" shape="bspSphere" scale="1000" start="@gravity3" stop="@resetTimer" deltaY="-0.020" fill="#ffffff" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.875" cx="3.75" cz="38.125" angle="45" />
-  <Field watch="playerMask" shape="bspSphere" scale="1000" start="@gravity1" stop="@gravity2" deltaY="0.032" fill="#ffffff" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" r="1.875" cx="3.125" cz="48.125" angle="45" />
-  <Timer in.1="@gravity2" in.2="@gravity2" wait="820" out.1="@gravity3" out.2="@resetTimer" fill="#ffffff" frame="#000000" cx="4.375" cz="28.75" r="1.875" angle="45" />
-  <Timer in="@gravity1" wait="740" out="@gravity2" fill="#ffffff" frame="#000000" cx="4.375" cz="28.75" r="1.875" angle="45" />
-  <Timer in.1="@start" in.2="@resetTimer" wait="772" out.1="@gravity1" out.2="@gravity1" fill="#ffffff" frame="#000000" cx="4.375" cz="28.75" r="1.875" angle="45" />
+  <Ramp yon=".1" y="200" thickness="1.5" deltaY="0" fill="#7f7f7f" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" angle="90" />
+  <Hologram shape="2001" scale="25" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="96.66666666666667" cz="1030.8333333333335" angle="270" />
+  <Hologram ambient.i="false" y="0" shape="bspTractorTower" yon="5" scale=".10" fill="#332d1e" frame="#000000" cx="101.875" cz="73.125" angle="315" />
+  <Hologram shape="2002" scale="25" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="1153.6805555555557" cz="198.125" angle="0" />
+  <Hologram shape="2001" scale="25" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="1156.9444444444446" cz="120" angle="0" />
+  <Hologram shape="2001" scale="20" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="1156.3194444444446" cz="280" angle="0" />
+  <Hologram scale="45" yon="10000" y="150" shape="3001" fill="#bf9f88" frame="#000000" cx="1162.361111111111" cz="9.166666666666668" angle="270" />
+  <Hologram shape="2001" scale="15" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="896.3194444444445" cz="34.375" angle="180" />
+  <Hologram shape="2001" scale="12" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="901.9444444444445" cz="1.875" angle="180" />
+  <Hologram scale="40" yon="10000" y="130" shape="3001" fill="#bf9f88" frame="#000000" cx="896.25" cz="194.93055555555557" angle="90" />
+  <Hologram scale="20" yon="10000" y="170" shape="3001" fill="#bf9f88" frame="#000000" cx="898.125" cz="153.05555555555557" angle="90" />
+  <Hologram shape="2003" scale="2" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="458.6805555555556" cz="1795" angle="0" />
+  <Hologram shape="2004" scale="1" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="205.2777777777778" cz="1793.9583333333335" angle="0" />
+  <Hologram shape="2001" scale="12" isAmbient="false" yon="5000" fill="#332d1e" frame="#332d1e" cx="910.6944444444445" cz="68.125" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="136.875" cz="11.875" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="136.875" cz="11.805555555555555" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="136.875" cz="11.875" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="136.875" cz="11.875" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="136.875" cz="11.875" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="136.875" cz="11.875" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="136.875" cz="11.875" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="136.875" cz="11.875" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="128.125" cz="8.125" angle="315" />
+  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="128.125" cz="8.055555555555555" angle="270" />
+  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="128.125" cz="8.125" angle="225" />
+  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="128.125" cz="8.125" angle="45" />
+  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="128.125" cz="8.125" angle="0" />
+  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="128.125" cz="8.125" angle="180" />
+  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="128.125" cz="8.125" angle="135" />
+  <FreeSolid shape="4001" scale="1" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="128.125" cz="8.125" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="179.375" cz="106.875" angle="315" />
+  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="179.375" cz="106.80555555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="179.375" cz="106.875" angle="225" />
+  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="179.375" cz="106.875" angle="45" />
+  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="179.375" cz="106.875" angle="0" />
+  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="179.375" cz="106.875" angle="180" />
+  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="179.375" cz="106.875" angle="135" />
+  <FreeSolid shape="4001" scale=".75" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="179.375" cz="106.875" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="186.875" cz="113.125" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="186.875" cz="113.05555555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="186.875" cz="113.125" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="186.875" cz="113.125" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="186.875" cz="113.125" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="186.875" cz="113.125" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="186.875" cz="113.125" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="186.875" cz="113.125" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="189.375" cz="103.75" angle="315" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="189.375" cz="103.68055555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="189.375" cz="103.75" angle="225" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="189.375" cz="103.75" angle="45" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="189.375" cz="103.75" angle="0" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="189.375" cz="103.75" angle="180" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="189.375" cz="103.75" angle="135" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="189.375" cz="103.75" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="76.25" cz="29.375" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="76.25" cz="29.305555555555557" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="76.25" cz="29.375" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="76.25" cz="29.375" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="76.25" cz="29.375" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="76.25" cz="29.375" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="76.25" cz="29.375" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="76.25" cz="29.375" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="17.5" cz="86.25" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="17.5" cz="86.18055555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="17.5" cz="86.25" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="17.5" cz="86.25" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="17.5" cz="86.25" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="17.5" cz="86.25" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="17.5" cz="86.25" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="17.5" cz="86.25" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="9.375" cz="82.5" angle="315" />
+  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="9.375" cz="82.43055555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="9.375" cz="82.5" angle="225" />
+  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="9.375" cz="82.5" angle="45" />
+  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="9.375" cz="82.5" angle="0" />
+  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="9.375" cz="82.5" angle="180" />
+  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="9.375" cz="82.5" angle="135" />
+  <FreeSolid shape="4001" scale=".8" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="9.375" cz="82.5" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="16.25" cz="75.625" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="16.25" cz="75.55555555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="16.25" cz="75.625" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="16.25" cz="75.625" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="16.25" cz="75.625" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="16.25" cz="75.625" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="16.25" cz="75.625" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="16.25" cz="75.625" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="11.875" cz="91.875" angle="315" />
+  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="11.875" cz="91.80555555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="11.875" cz="91.875" angle="225" />
+  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="11.875" cz="91.875" angle="45" />
+  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="11.875" cz="91.875" angle="0" />
+  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="11.875" cz="91.875" angle="180" />
+  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="11.875" cz="91.875" angle="135" />
+  <FreeSolid shape="4001" scale=".48" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="11.875" cz="91.875" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="108.125" cz="140" angle="315" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="108.125" cz="139.93055555555557" angle="270" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="108.125" cz="140" angle="225" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="108.125" cz="140" angle="45" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="108.125" cz="140" angle="0" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="108.125" cz="140" angle="180" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="108.125" cz="140" angle="135" />
+  <FreeSolid shape="4001" scale=".4" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="108.125" cz="140" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="113.125" cz="153.75" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="113.125" cz="153.68055555555557" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="113.125" cz="153.75" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="113.125" cz="153.75" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="113.125" cz="153.75" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="113.125" cz="153.75" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="113.125" cz="153.75" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="113.125" cz="153.75" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="28.75" cz="20.625" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="28.75" cz="20.555555555555557" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="28.75" cz="20.625" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="28.75" cz="20.625" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="28.75" cz="20.625" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="28.75" cz="20.625" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="28.75" cz="20.625" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="28.75" cz="20.625" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="220.625" cz="36.25" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="220.625" cz="36.18055555555556" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="220.625" cz="36.25" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="220.625" cz="36.25" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="220.625" cz="36.25" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="220.625" cz="36.25" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="220.625" cz="36.25" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="220.625" cz="36.25" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="26.25" cz="175" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="26.25" cz="174.93055555555557" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="26.25" cz="175" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="26.25" cz="175" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="26.25" cz="175" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="26.25" cz="175" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="26.25" cz="175" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="26.25" cz="175" angle="90" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.125" angle="315" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.05555555555557" angle="270" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.125" angle="225" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.125" angle="45" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.125" angle="0" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.125" angle="180" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.125" angle="135" />
+  <FreeSolid shape="4001" scale=".6" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.125" angle="90" />
+  <Sound y="5" sound="1004" isAmbient="false" loopCount="0" volume="180000" start="@birdSound3" cx="30.625" cz="183.125" angle="90" />
+  <Sound y="5" sound="1003" isAmbient="false" loopCount="0" volume="150000" start="@birdSound2" cx="30.625" cz="183.125" angle="90" />
+  <Sound y="5" sound="1001" isAmbient="false" loopCount="0" volume="150000" start="@birdSound1" cx="30.625" cz="183.125" angle="90" />
+  <Timer in.1="@start" in.2="@resetTimer" wait="772" out.1="@birdSound1" out.2="@birdSound1" />
+  <Timer in.1="@birdSound2" in.2="@birdSound2" wait="820" out.1="@birdSound3" out.2="@resetTimer" />
+  <Timer in="@birdSound1" wait="740" out="@birdSound2" />
+  <Field watch="playerMask" shape="bspSphere" scale="1000" start="@gravity2" stop="@gravity3" deltaY="0.050" fill="#7f7155" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="30.625" cz="183.125" angle="90" />
+  <Field watch="playerMask" shape="bspSphere" scale="1000" start="@gravity3" stop="@resetTimer" deltaY="-0.020" fill="#ffffff" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="3.75" cz="38.125" angle="45" />
+  <Field watch="playerMask" shape="bspSphere" scale="1000" start="@gravity1" stop="@gravity2" deltaY="0.032" fill="#ffffff" frame="#000000" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" cx="3.125" cz="48.125" angle="45" />
+  <Timer in.1="@gravity2" in.2="@gravity2" wait="820" out.1="@gravity3" out.2="@resetTimer" />
+  <Timer in="@gravity1" wait="740" out="@gravity2" />
+  <Timer in.1="@start" in.2="@resetTimer" wait="772" out.1="@gravity1" out.2="@gravity1" />
   <script>
 object Teleporter
 group = -10
@@ -346,5 +346,5 @@ destGroup = @;)
 shape = 0
 spin = false
 end</script>
-  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="221.25" cz="15" r="1.875" angle="135" />
+  <Teleporter y="45" shape="0" group="@recenter" spin="false" fill="#ffc799" frame="#000000" cx="221.25" cz="15" angle="135" />
 </map>

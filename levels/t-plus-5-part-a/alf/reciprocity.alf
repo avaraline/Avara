@@ -45,8 +45,8 @@
   <Wall fill="#f3f3f3" frame="#000000" x="71.11111111111111" z="41.111111111111114" w="5" d="25" h="0" y="4.75" />
   <set wallHeight=".25" />
   <Wall fill="#f3f3f3" frame="#000000" x="46.111111111111114" z="66.11111111111111" w="25" d="5" h="0" y="4.75" />
-  <GroundColor fill="#000000" frame="#000000" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#000000" frame="#000000" cx="4.305555555555555" cz="1.8055555555555558" r="3.75" angle="180" />
+  <GroundColor fill="#000000" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#000000" frame="#000000" cx="4.305555555555555" cz="1.8055555555555558" angle="180" />
   <SkyColor n="15" fill="#000e28" frame="#bdbdbd" />
   <set ambient.i="0.4" light.0.i="0.6" light.0.a="45" light.0.b="20" light.1.i="0.4" light.1.a="20" light.1.b="200" light.2.i="0.1" light.2.a="0" light.2.b="0" designer="S. Carmel" information="reciprocity:
 brain chemisty fluxuations reduce my doctored brain to hopeless mush on a lab table." wallHeight=".25" />
@@ -99,7 +99,7 @@ brain chemisty fluxuations reduce my doctored brain to hopeless mush on a lab ta
   <Wall fill="#001133" frame="#000000" x="121.11111111111111" z="116.11111111111111" w="2.5" d="2.5" h="0" />
   <set wallHeight="0" />
   <Wall fill="#d7d7d7" frame="#000000" x="121.11111111111111" z="116.11111111111111" w="2.5" d="2.5" h="0" y="5" />
-  <Incarnator y="30" fill="#ffffff" frame="#000000" cx="41.736111111111114" cz="36.736111111111114" r="1.875" angle="315" />
+  <Incarnator y="30" cx="41.736111111111114" cz="36.736111111111114" angle="315" />
   <set wallHeight=".25" />
   <Wall fill="#ffffff" frame="#000000" x="53.611111111111114" z="28.61111111111111" w="40" d="0" h="0" y=".75" />
   <set wallHeight=".25" />
@@ -149,49 +149,49 @@ brain chemisty fluxuations reduce my doctored brain to hopeless mush on a lab ta
   <set wallHeight=".25" />
   <Wall fill="#ffffff" frame="#000000" x="111.11111111111111" z="78.61111111111111" w="25" d="0" h="0" y=".75" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="121.11111111111111" cz="116.11111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="300" fill="#001133" frame="#000000" cx="121.11111111111111" cz="116.11111111111111" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="8" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="121.11111111111111" cz="116.11111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="8" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="121.11111111111111" cz="116.11111111111111" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="36.111111111111114" cz="31.111111111111114" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="300" fill="#001133" frame="#000000" cx="36.111111111111114" cz="31.111111111111114" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="8" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="36.111111111111114" cz="31.111111111111114" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="8" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="36.111111111111114" cz="31.111111111111114" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="61.111111111111114" cz="66.11111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="61.111111111111114" cz="66.11111111111111" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="61.111111111111114" cz="66.11111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="61.111111111111114" cz="66.11111111111111" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#ffffff" cx="78.61111111111111" cz="73.61111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="200" fill="#ffffff" frame="#ffffff" cx="78.61111111111111" cz="73.61111111111111" r="1.25" angle="225" />
-  <Goody shape="1002" speed="6" yon="300" y="2" grenades="12" start="gShow" out="gTaken" fill="#ffffff" frame="#ffffff" cx="78.61111111111111" cz="73.61111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="200" />
+  <Goody shape="1002" speed="6" yon="300" y="2" grenades="12" start="gShow" out="gTaken" fill="#ffffff" frame="#ffffff" cx="78.61111111111111" cz="73.61111111111111" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="71.11111111111111" cz="56.111111111111114" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="71.11111111111111" cz="56.111111111111114" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="71.11111111111111" cz="56.111111111111114" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="71.11111111111111" cz="56.111111111111114" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="96.11111111111111" cz="81.11111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="96.11111111111111" cz="81.11111111111111" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="96.11111111111111" cz="81.11111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="96.11111111111111" cz="81.11111111111111" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="86.11111111111111" cz="91.11111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="86.11111111111111" cz="91.11111111111111" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="86.11111111111111" cz="91.11111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="4" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="86.11111111111111" cz="91.11111111111111" angle="225" />
   <set maxStartGrenades="12" maxStartMissiles="0" wallHeight="1.5" />
-  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" r="1.25" cx="86.11111111111111" cz="91.11111111111111" angle="225" x="103.61111111111111" z="98.61111111111111" w="20" d="5" h="0" />
+  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" x="103.61111111111111" z="98.61111111111111" w="20" d="5" h="0" />
   <set wallHeight="1.5" />
-  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" r="1.25" cx="86.11111111111111" cz="91.11111111111111" angle="225" x="53.611111111111114" z="48.611111111111114" w="20" d="5" h="0" />
+  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" x="53.611111111111114" z="48.611111111111114" w="20" d="5" h="0" />
   <set wallHeight="1.5" />
-  <WallDoor midYaw="135" fill="#f3f3f3" frame="#000000" r="1.25" cx="86.11111111111111" cz="91.11111111111111" angle="225" x="71.73611111111111" z="81.11111111111111" w="10" d="5" h="0" />
+  <WallDoor midYaw="135" fill="#f3f3f3" frame="#000000" x="71.73611111111111" z="81.11111111111111" w="10" d="5" h="0" />
   <set wallHeight="1.5" />
-  <WallDoor midYaw="135" fill="#f3f3f3" frame="#000000" r="1.25" cx="86.11111111111111" cz="91.11111111111111" angle="225" x="85.48611111111111" z="66.11111111111111" w="10" d="5" h="0" />
-  <Incarnator y="30" fill="#ffffff" frame="#000000" cx="115.48611111111111" cz="110.48611111111111" r="1.875" angle="135" />
-  <Incarnator y="30" fill="#ffffff" frame="#000000" cx="41.736111111111114" cz="60.486111111111114" r="1.875" angle="225" />
-  <Incarnator y="30" fill="#ffffff" frame="#000000" cx="115.48611111111111" cz="86.73611111111111" r="1.875" angle="45" />
-  <Incarnator y="30" fill="#ffffff" frame="#000000" cx="65.48611111111111" cz="36.736111111111114" r="1.875" angle="45" />
-  <Incarnator y="30" fill="#ffffff" frame="#000000" cx="91.73611111111111" cz="110.48611111111111" r="1.875" angle="225" />
-  <Incarnator y="30" fill="#ffffff" frame="#000000" cx="96.11111111111111" cz="56.111111111111114" r="1.875" angle="45" />
-  <Incarnator y="30" fill="#ffffff" frame="#000000" cx="61.111111111111114" cz="91.11111111111111" r="1.875" angle="225" />
-  <Field watch="playerMask" shape="bspSphere" scale="1000" start="@start" deltaY="0.035" fill="#ffffff" frame="#000000" r="1.875" cx="61.111111111111114" cz="91.11111111111111" angle="225" />
+  <WallDoor midYaw="135" fill="#f3f3f3" frame="#000000" x="85.48611111111111" z="66.11111111111111" w="10" d="5" h="0" />
+  <Incarnator y="30" cx="115.48611111111111" cz="110.48611111111111" angle="135" />
+  <Incarnator y="30" cx="41.736111111111114" cz="60.486111111111114" angle="225" />
+  <Incarnator y="30" cx="115.48611111111111" cz="86.73611111111111" angle="45" />
+  <Incarnator y="30" cx="65.48611111111111" cz="36.736111111111114" angle="45" />
+  <Incarnator y="30" cx="91.73611111111111" cz="110.48611111111111" angle="225" />
+  <Incarnator y="30" cx="96.11111111111111" cz="56.111111111111114" angle="45" />
+  <Incarnator y="30" cx="61.111111111111114" cz="91.11111111111111" angle="225" />
+  <Field watch="playerMask" shape="bspSphere" scale="1000" start="@start" deltaY="0.035" fill="#ffffff" frame="#000000" cx="61.111111111111114" cz="91.11111111111111" angle="225" />
   <set wallHeight="20" wallYon=".01" />
   <Wall fill="#ffffff" frame="#000000" x="53.611111111111114" z="27.36111111111111" w="40" d="2.5" h="0" />
   <set wallHeight="20" wallYon=".01" />
@@ -216,68 +216,68 @@ brain chemisty fluxuations reduce my doctored brain to hopeless mush on a lab ta
   <Wall fill="#ffffff" frame="#000000" x="86.11111111111111" z="52.673611111111114" w="25" d="1.875" h="0" />
   <set wallHeight="20" wallYon=".01" />
   <Wall fill="#ffffff" frame="#000000" x="74.54861111111111" z="38.923611111111114" w="1.875" d="25.625" h="0" />
-  <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" fill="#d7d7d7" frame="#000000" cx="78.61111111111111" cz="73.61111111111111" r="1.25" angle="45" />
-  <Teleporter y="25" shape="0" group="@recenter" spin="false" fill="#e6e6e6" frame="#000000" cx="78.61111111111111" cz="73.61111111111111" r="1.875" angle="135" />
-  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="21 * 5" destGroup="@recenter" shape="0" spin="false" fill="#000e28" frame="#000000" cx="78.61111111111111" cz="73.61111111111111" r="1.875" angle="315" />
+  <Sound y="80" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="78.61111111111111" cz="73.61111111111111" angle="45" />
+  <Teleporter y="25" shape="0" group="@recenter" spin="false" fill="#e6e6e6" frame="#000000" cx="78.61111111111111" cz="73.61111111111111" angle="135" />
+  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="21 * 5" destGroup="@recenter" shape="0" spin="false" fill="#000e28" frame="#000000" cx="78.61111111111111" cz="73.61111111111111" angle="315" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="61.111111111111114" cz="91.11111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="61.111111111111114" cz="91.11111111111111" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="2" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="61.111111111111114" cz="91.11111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="2" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="61.111111111111114" cz="91.11111111111111" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="96.11111111111111" cz="56.111111111111114" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="96.11111111111111" cz="56.111111111111114" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="2" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="96.11111111111111" cz="56.111111111111114" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="2" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="96.11111111111111" cz="56.111111111111114" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="71.11111111111111" cz="31.111111111111114" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="71.11111111111111" cz="31.111111111111114" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="6" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="71.11111111111111" cz="31.111111111111114" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="6" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="71.11111111111111" cz="31.111111111111114" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="36.111111111111114" cz="66.11111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="36.111111111111114" cz="66.11111111111111" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="6" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="36.111111111111114" cz="66.11111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="6" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="36.111111111111114" cz="66.11111111111111" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="121.11111111111111" cz="81.11111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="121.11111111111111" cz="81.11111111111111" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="6" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="121.11111111111111" cz="81.11111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="6" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="121.11111111111111" cz="81.11111111111111" angle="225" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#001133" frame="#000000" cx="86.11111111111111" cz="116.11111111111111" r="1.25" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="250" fill="#001133" frame="#000000" cx="86.11111111111111" cz="116.11111111111111" r="1.25" angle="225" />
-  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="6" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="86.11111111111111" cz="116.11111111111111" r="1.25" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="250" />
+  <Goody shape="bspGrenade" speed="6" yon="300" y="7" grenades="6" start="gShow" out="gTaken" fill="#001133" frame="#000000" cx="86.11111111111111" cz="116.11111111111111" angle="225" />
   <set wallHeight="0" wallYon="10" />
   <Wall fill="#191919" frame="#000000" x="88.61111111111111" z="38.611111111111114" w="2.5" d="2.5" h="0" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="88.61111111111111" cz="38.611111111111114" r="1.875" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="450" fill="#ffffff" frame="#000000" cx="88.61111111111111" cz="38.611111111111114" r="1.875" angle="225" />
-  <Goody shape="1002" speed="6" yon="10" y="2" grenades="12" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="88.61111111111111" cz="38.611111111111114" r="1.875" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="450" />
+  <Goody shape="1002" speed="6" yon="10" y="2" grenades="12" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="88.61111111111111" cz="38.611111111111114" angle="225" />
   <set wallHeight="0" wallYon="10" />
   <Wall fill="#191919" frame="#000000" x="113.61111111111111" z="63.611111111111114" w="2.5" d="2.5" h="0" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="113.61111111111111" cz="63.611111111111114" r="1.875" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="450" fill="#ffffff" frame="#000000" cx="113.61111111111111" cz="63.611111111111114" r="1.875" angle="225" />
-  <Goody shape="1002" speed="6" yon="10" y="2" grenades="12" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="113.61111111111111" cz="63.611111111111114" r="1.875" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="450" />
+  <Goody shape="1002" speed="6" yon="10" y="2" grenades="12" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="113.61111111111111" cz="63.611111111111114" angle="225" />
   <set wallHeight="0" wallYon="10" />
   <Wall fill="#191919" frame="#000000" x="38.611111111111114" z="83.61111111111111" w="2.5" d="2.5" h="0" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="38.611111111111114" cz="83.61111111111111" r="1.875" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="450" fill="#ffffff" frame="#000000" cx="38.611111111111114" cz="83.61111111111111" r="1.875" angle="225" />
-  <Goody shape="1002" speed="6" yon="10" y="2" grenades="12" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="38.611111111111114" cz="83.61111111111111" r="1.875" angle="225" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="450" />
+  <Goody shape="1002" speed="6" yon="10" y="2" grenades="12" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="38.611111111111114" cz="83.61111111111111" angle="225" />
   <set wallHeight="0" wallYon="10" />
   <Wall fill="#191919" frame="#000000" x="68.61111111111111" z="108.61111111111111" w="2.5" d="2.5" h="0" />
   <unique vars="gShow gTaken" />
-  <And in="@start" out="gShow" fill="#ffffff" frame="#000000" cx="68.61111111111111" cz="108.61111111111111" r="1.875" angle="225" />
-  <Timer in="gTaken" out="gShow" wait="450" fill="#ffffff" frame="#000000" cx="68.61111111111111" cz="108.61111111111111" r="1.875" angle="225" />
-  <Goody shape="1002" speed="6" yon="10" y="2" grenades="12" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="68.61111111111111" cz="108.61111111111111" r="1.875" angle="225" />
-  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" spin="false" fill="#bdbdbd" frame="#000000" cx="88.61111111111111" cz="38.611111111111114" r="1.875" angle="90" />
-  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" visible="false" spin="false" fill="#bdbdbd" frame="#000000" cx="88.61111111111111" cz="38.611111111111114" r="1.875" angle="90" />
-  <Teleporter y="30" shape="0" group="@xxx" fill="#131f4a" frame="#000000" cx="78.61111111111111" cz="73.61111111111111" r="1.875" angle="90" />
-  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" spin="false" fill="#bdbdbd" frame="#000000" cx="113.61111111111111" cz="63.611111111111114" r="1.875" angle="90" />
-  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" visible="false" spin="false" fill="#bdbdbd" frame="#000000" cx="113.61111111111111" cz="63.611111111111114" r="1.875" angle="90" />
-  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" spin="false" fill="#bdbdbd" frame="#000000" cx="68.61111111111111" cz="108.61111111111111" r="1.875" angle="90" />
-  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" visible="false" spin="false" fill="#bdbdbd" frame="#000000" cx="68.61111111111111" cz="108.61111111111111" r="1.875" angle="90" />
-  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" spin="false" fill="#bdbdbd" frame="#000000" cx="38.611111111111114" cz="83.61111111111111" r="1.875" angle="90" />
-  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" visible="false" spin="false" fill="#bdbdbd" frame="#000000" cx="38.611111111111114" cz="83.61111111111111" r="1.875" angle="90" />
-  <Hologram shape="1003" y="12.5" scale="4" isAmbient="true" fill="#001133" frame="#000000" cx="33.611111111111114" cz="48.611111111111114" r="1.875" angle="270" />
-  <Hologram shape="1003" y="12.5" scale="4" isAmbient="true" fill="#001133" frame="#000000" cx="53.68055555555556" cz="28.61111111111111" r="1.875" angle="0" />
-  <Hologram shape="1003" y="12.5" scale="4" isAmbient="true" fill="#001133" frame="#000000" cx="123.61111111111111" cz="98.61111111111111" r="1.875" angle="90" />
-  <Hologram shape="1003" y="12.5" scale="4" isAmbient="true" fill="#001133" frame="#000000" cx="103.68055555555556" cz="118.61111111111111" r="1.875" angle="180" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="450" />
+  <Goody shape="1002" speed="6" yon="10" y="2" grenades="12" missiles="8" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="68.61111111111111" cz="108.61111111111111" angle="225" />
+  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" spin="false" fill="#bdbdbd" frame="#000000" cx="88.61111111111111" cz="38.611111111111114" angle="90" />
+  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" visible="false" spin="false" fill="#bdbdbd" frame="#000000" cx="88.61111111111111" cz="38.611111111111114" angle="90" />
+  <Teleporter y="30" shape="0" group="@xxx" fill="#131f4a" frame="#000000" cx="78.61111111111111" cz="73.61111111111111" angle="90" />
+  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" spin="false" fill="#bdbdbd" frame="#000000" cx="113.61111111111111" cz="63.611111111111114" angle="90" />
+  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" visible="false" spin="false" fill="#bdbdbd" frame="#000000" cx="113.61111111111111" cz="63.611111111111114" angle="90" />
+  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" spin="false" fill="#bdbdbd" frame="#000000" cx="68.61111111111111" cz="108.61111111111111" angle="90" />
+  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" visible="false" spin="false" fill="#bdbdbd" frame="#000000" cx="68.61111111111111" cz="108.61111111111111" angle="90" />
+  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" spin="false" fill="#bdbdbd" frame="#000000" cx="38.611111111111114" cz="83.61111111111111" angle="90" />
+  <Teleporter group="@side3" destGroup="@xxx" shape="0" scale=".3" visible="false" spin="false" fill="#bdbdbd" frame="#000000" cx="38.611111111111114" cz="83.61111111111111" angle="90" />
+  <Hologram shape="1003" y="12.5" scale="4" isAmbient="true" fill="#001133" frame="#000000" cx="33.611111111111114" cz="48.611111111111114" angle="270" />
+  <Hologram shape="1003" y="12.5" scale="4" isAmbient="true" fill="#001133" frame="#000000" cx="53.68055555555556" cz="28.61111111111111" angle="0" />
+  <Hologram shape="1003" y="12.5" scale="4" isAmbient="true" fill="#001133" frame="#000000" cx="123.61111111111111" cz="98.61111111111111" angle="90" />
+  <Hologram shape="1003" y="12.5" scale="4" isAmbient="true" fill="#001133" frame="#000000" cx="103.68055555555556" cz="118.61111111111111" angle="180" />
 </map>

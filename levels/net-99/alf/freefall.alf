@@ -1,22 +1,22 @@
 <map>
   <SkyColor fill="#00ccff" frame="#00ccff" />
-  <GroundColor fill="#00ccff" frame="#00ccff" />
+  <GroundColor fill="#00ccff" />
   <set designer="Yo-Yo" information="Freefall
    Concept by Memrex, Design by Yo-Yo." maxStartGrenades="1000" maxStartBoosts="1000" maxStartMissiles="1000" missilePower="0.7" grenadePower="0.8" defaultLives="1" hull.0="2000" hull.1="2000" hull.2="2000" />
-  <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="24.23611111111111" cz="28.15972222222222" r="2.0486111111111125" angle="90" />
-  <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="24.23611111111111" cz="18.15972222222222" r="2.0486111111111125" angle="90" />
-  <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="24.23611111111111" cz="38.78472222222223" r="2.0486111111111107" angle="90" />
-  <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="38.78472222222223" r="2.0486111111111107" angle="270" />
-  <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="28.15972222222222" r="2.0486111111111125" angle="270" />
-  <Incarnator y="7000" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" r="2.0486111111111125" angle="270" />
-  <And in="@start" out.1="@missileRemake" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" r="2.0486111111111125" angle="270" />
-  <Timer in="@missileTake" out="@missileRemake" wait="0" restart="true" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" r="2.0486111111111125" angle="270" />
-  <Goody y="100" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" r="2.0486111111111125" angle="270" />
-  <Goody y="1000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />
-  <Goody y="2000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />
-  <Goody y="3000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />
-  <Goody y="4000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />
-  <Goody y="5000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />
-  <Goody y="6000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />
-  <Goody y="7000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="200" grenades="200" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" r="1.25" angle="315" />
+  <Incarnator y="7000" cx="24.23611111111111" cz="28.15972222222222" angle="90" />
+  <Incarnator y="7000" cx="24.23611111111111" cz="18.15972222222222" angle="90" />
+  <Incarnator y="7000" cx="24.23611111111111" cz="38.78472222222223" angle="90" />
+  <Incarnator y="7000" cx="7.986111111111111" cz="38.78472222222223" angle="270" />
+  <Incarnator y="7000" cx="7.986111111111111" cz="28.15972222222222" angle="270" />
+  <Incarnator y="7000" cx="7.986111111111111" cz="18.15972222222222" angle="270" />
+  <And in="@start" out.1="@missileRemake" />
+  <Timer in="@missileTake" out="@missileRemake" wait="0" restart="true" />
+  <Goody y="100" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#9900ff" frame="#000000" cx="7.986111111111111" cz="18.15972222222222" angle="270" />
+  <Goody y="1000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" angle="315" />
+  <Goody y="2000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" angle="315" />
+  <Goody y="3000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" angle="315" />
+  <Goody y="4000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" angle="315" />
+  <Goody y="5000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" angle="315" />
+  <Goody y="6000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="50" grenades="50" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" angle="315" />
+  <Goody y="7000" yon="0.01" scale="400" shape="bspGrenade" volume="0" speed="0" missiles="200" grenades="200" start="@missileRemake" out="@missileTake" stop="@missileTake" fill="#ffcccc" frame="#ff99ff" cx="17.77777777777778" cz="28.75" angle="315" />
 </map>

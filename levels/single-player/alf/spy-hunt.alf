@@ -1,6 +1,6 @@
 <map>
   <SkyColor n="6" fill="#3366ff" frame="#006666" />
-  <GroundColor fill="#333333" frame="#666633" />
+  <GroundColor fill="#333333" />
   <set designer="Juri Munkki" information="A group of 3 enemy spies have already invaded our 
 base and are now waiting for their long range 
 transport to arrive on orbit so that they can escape 
@@ -53,17 +53,17 @@ Destroy all of them before they make their escape." standardWall="3" highWall="5
   <Wall fill="#996666" frame="#000000" x="230" z="249.09722222222223" w="20" d="20" h="0" />
   <Wall fill="#996666" frame="#000000" x="200" z="249.09722222222223" w="20" d="20" h="0" />
   <set wallHeight="standardWall" />
-  <Ramp thickness="1" y="standardWall" deltaY="5" fill="#777777" frame="#000000" x="115" z="172.91666666666669" w="10" d="5" h="0" r="1.25" angle="73" />
-  <Ramp thickness="1" y="standardWall" deltaY="5" fill="#777777" frame="#000000" x="125" z="172.91666666666669" w="10" d="5" h="0" r="1.25" angle="285.5" />
-  <Ramp thickness="1" y="standardWall" deltaY="4" fill="#777777" frame="#000000" x="115" z="177.91666666666669" w="10" d="5" h="0" r="1.25" angle="73" />
-  <Ramp thickness="1" y="standardWall" deltaY="4" fill="#777777" frame="#000000" x="125" z="177.91666666666669" w="10" d="5" h="0" r="1.25" angle="285.5" />
-  <Ramp thickness="1" y="standardWall" deltaY="3" fill="#777777" frame="#000000" x="115" z="182.91666666666669" w="10" d="5" h="0" r="1.25" angle="73" />
-  <Ramp thickness="1" y="standardWall" deltaY="3" fill="#777777" frame="#000000" x="125" z="182.91666666666669" w="10" d="5" h="0" r="1.25" angle="285.5" />
+  <Ramp thickness="1" y="standardWall" deltaY="5" fill="#777777" frame="#000000" x="115" z="172.91666666666669" w="10" d="5" h="0" angle="73" />
+  <Ramp thickness="1" y="standardWall" deltaY="5" fill="#777777" frame="#000000" x="125" z="172.91666666666669" w="10" d="5" h="0" angle="285.5" />
+  <Ramp thickness="1" y="standardWall" deltaY="4" fill="#777777" frame="#000000" x="115" z="177.91666666666669" w="10" d="5" h="0" angle="73" />
+  <Ramp thickness="1" y="standardWall" deltaY="4" fill="#777777" frame="#000000" x="125" z="177.91666666666669" w="10" d="5" h="0" angle="285.5" />
+  <Ramp thickness="1" y="standardWall" deltaY="3" fill="#777777" frame="#000000" x="115" z="182.91666666666669" w="10" d="5" h="0" angle="73" />
+  <Ramp thickness="1" y="standardWall" deltaY="3" fill="#777777" frame="#000000" x="125" z="182.91666666666669" w="10" d="5" h="0" angle="285.5" />
   <Wall fill="#777777" frame="#000000" x="110.3125" z="177.91666666666669" w="4.375" d="25" h="0" />
   <Wall fill="#777777" frame="#000000" x="129.6875" z="177.91666666666669" w="4.375" d="25" h="0" />
   <set baseHeight="0" wallHeight="highWall" />
-  <Ramp y="standardWall" deltaY="highWall -standardWall" fill="#996666" frame="#000000" x="105" z="151.59722222222223" w="10" d="5" h="0" r="1.25" angle="73" />
-  <Ramp y="standardWall" deltaY="highWall -standardWall" fill="#996666" frame="#000000" x="135" z="151.59722222222223" w="10" d="5" h="0" r="1.25" angle="285.5" />
+  <Ramp y="standardWall" deltaY="highWall -standardWall" fill="#996666" frame="#000000" x="105" z="151.59722222222223" w="10" d="5" h="0" angle="73" />
+  <Ramp y="standardWall" deltaY="highWall -standardWall" fill="#996666" frame="#000000" x="135" z="151.59722222222223" w="10" d="5" h="0" angle="285.5" />
   <Wall fill="#996666" frame="#000000" x="120" z="151.59722222222223" w="20" d="5" h="0" />
   <Dome fill="#996666" frame="#000000" cx="120" cz="154.09722222222223" r="5" angle="90" quarters="2" />
   <set wallHeight="2" />
@@ -73,43 +73,43 @@ Destroy all of them before they make their escape." standardWall="3" highWall="5
   <set wa="towerHeight" wallHeight="0.8" wallYon="2000" />
   <Wall fill="#996666" frame="#000000" x="60" z="79.09722222222223" w="15" d="15" h="0" />
   <set wallYon="0" />
-  <Ramp thickness="3" deltaY="5" fill="#996666" frame="#000000" x="100" z="259.09722222222223" w="20" d="10" h="0" r="1.25" angle="174.5" />
-  <Ramp thickness="3" deltaY="5" fill="#996666" frame="#000000" x="118.125" z="269.09722222222223" w="20" d="10" h="0" r="1.25" angle="0" />
-  <Ramp thickness="3" deltaY="5" fill="#996666" frame="#000000" x="136.25" z="259.09722222222223" w="20" d="10" h="0" r="1.25" angle="174.5" />
-  <Incarnator y="1" fill="#ee0000" frame="#000000" cx="120.03472222222223" cz="113.8888888888889" r="2.5" angle="0" />
+  <Ramp thickness="3" deltaY="5" fill="#996666" frame="#000000" x="100" z="259.09722222222223" w="20" d="10" h="0" angle="174.5" />
+  <Ramp thickness="3" deltaY="5" fill="#996666" frame="#000000" x="118.125" z="269.09722222222223" w="20" d="10" h="0" angle="0" />
+  <Ramp thickness="3" deltaY="5" fill="#996666" frame="#000000" x="136.25" z="259.09722222222223" w="20" d="10" h="0" angle="174.5" />
+  <Incarnator y="1" cx="120.03472222222223" cz="113.8888888888889" angle="0" />
   <set baseHeight="0" />
   <Text in="@start" showEveryone="true" text="Guided missiles often work best
-against evasive flying enemies." fill="#ee0000" frame="#000000" cx="120.03472222222223" cz="113.8888888888889" r="2.5" angle="0" />
-  <Incarnator stop="@start" y="1" fill="#ee0000" frame="#000000" cx="120.06944444444444" cz="124.09722222222223" r="2.5" angle="180" />
-  <Incarnator stop="@start" y="1" fill="#ee0000" frame="#000000" cx="125" cz="117.15277777777779" r="2.5" angle="90" />
-  <Incarnator stop="@start" y="1" fill="#ee0000" frame="#000000" cx="114.96527777777777" cz="117.15277777777779" r="2.5" angle="270" />
-  <Incarnator stop="@start" y="1" fill="#ee0000" frame="#000000" cx="114.96527777777777" cz="120.83333333333334" r="2.5" angle="270" />
-  <Incarnator stop="@start" y="1" fill="#ee0000" frame="#000000" cx="124.96527777777777" cz="120.83333333333334" r="2.5" angle="90" />
-  <Hologram shape="bspAvara" isAmbient="true" y="1.5" yon="40" fill="#000000" frame="#000000" cx="120" cz="128.99305555555557" r="5" angle="180" />
-  <Hologram scale="2.8" shape="bspVines" isAmbient="true" yon="80" fill="#336600" frame="#00ee00" cx="149.93055555555557" cz="124.72222222222223" r="1.1805555555555571" angle="90.5" />
-  <Ufo shotPower="0.3" attack="0" accel="spyAccel" verticalRangeMax="10" motionRange="40" checkPeriod="12" homeBase="@ufoHome" killMsg="@ufoKill" homeRange="50" shield="spyShield" fill="#330066" frame="#ee0000" cx="181.21527777777777" cz="203.95833333333334" r="2.5" angle="315" />
-  <Ufo shotPower="0.3" attack="0" accel="spyAccel" verticalRangeMax="10" motionRange="40" checkPeriod="12" homeBase="@ufoHome" killMsg="@ufoKill" homeRange="50" shield="spyShield" fill="#330066" frame="#ee0000" cx="182.67361111111111" cz="127.08333333333334" r="2.5" angle="315" />
-  <Base in="@timeToGoHome" out="@ufoHome" verticalRangeMax="500" y="500" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="144.16666666666669" r="2.5" angle="315" />
-  <Timer stop="@missionComplete" in="@start" out="@timeToGoHome" wait="escapeTime" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="144.16666666666669" r="2.5" angle="315" />
-  <Text in="@timeToGoHome" showEveryone="true" text="Spy transport detected on planetary orbit." fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="144.16666666666669" r="2.5" angle="315" />
-  <Area y="800" activeRange="500" watch="robotMask" enter="@gameLost" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="144.16666666666669" r="2.5" angle="315" />
-  <Text in="@gameLost" showEveryone="true" text="A spy has escaped. Mission failed." restart="10000" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="144.16666666666669" r="2.5" angle="315" />
+against evasive flying enemies." cx="120.03472222222223" cz="113.8888888888889" r="2.5" />
+  <Incarnator stop="@start" y="1" cx="120.06944444444444" cz="124.09722222222223" angle="180" />
+  <Incarnator stop="@start" y="1" cx="125" cz="117.15277777777779" angle="90" />
+  <Incarnator stop="@start" y="1" cx="114.96527777777777" cz="117.15277777777779" angle="270" />
+  <Incarnator stop="@start" y="1" cx="114.96527777777777" cz="120.83333333333334" angle="270" />
+  <Incarnator stop="@start" y="1" cx="124.96527777777777" cz="120.83333333333334" angle="90" />
+  <Hologram shape="bspAvara" isAmbient="true" y="1.5" yon="40" fill="#000000" frame="#000000" cx="120" cz="128.99305555555557" angle="180" />
+  <Hologram scale="2.8" shape="bspVines" isAmbient="true" yon="80" fill="#336600" frame="#00ee00" cx="149.93055555555557" cz="124.72222222222223" angle="90.5" />
+  <Ufo shotPower="0.3" attack="0" accel="spyAccel" verticalRangeMax="10" motionRange="40" checkPeriod="12" homeBase="@ufoHome" killMsg="@ufoKill" homeRange="50" shield="spyShield" fill="#330066" frame="#ee0000" cx="181.21527777777777" cz="203.95833333333334" angle="315" />
+  <Ufo shotPower="0.3" attack="0" accel="spyAccel" verticalRangeMax="10" motionRange="40" checkPeriod="12" homeBase="@ufoHome" killMsg="@ufoKill" homeRange="50" shield="spyShield" fill="#330066" frame="#ee0000" cx="182.67361111111111" cz="127.08333333333334" angle="315" />
+  <Base in="@timeToGoHome" out="@ufoHome" verticalRangeMax="500" y="500" cx="119.96527777777777" cz="144.16666666666669" />
+  <Timer stop="@missionComplete" in="@start" out="@timeToGoHome" wait="escapeTime" />
+  <Text in="@timeToGoHome" showEveryone="true" text="Spy transport detected on planetary orbit." cx="119.96527777777777" cz="144.16666666666669" r="2.5" />
+  <Area y="800" activeRange="500" watch="robotMask" enter="@gameLost" cx="119.96527777777777" cz="144.16666666666669" r="2.5" />
+  <Text in="@gameLost" showEveryone="true" text="A spy has escaped. Mission failed." restart="10000" cx="119.96527777777777" cz="144.16666666666669" r="2.5" />
   <unique vars="kill1 kill2 showMissionComplete" />
-  <Distributor in="@ufoKill" out.0="kill1" out.1="kill2" out.2="@missionComplete" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" r="2.5" angle="315" />
-  <Text in="kill1" showEveryone="true" text="One down, two to go." fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" r="2.5" angle="315" />
-  <Text in="kill2" showEveryone="true" text="One more kill before we are safe." fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" r="2.5" angle="315" />
+  <Distributor in="@ufoKill" out.0="kill1" out.1="kill2" out.2="@missionComplete" />
+  <Text in="kill1" showEveryone="true" text="One down, two to go." cx="119.96527777777777" cz="119.16666666666667" r="2.5" />
+  <Text in="kill2" showEveryone="true" text="One more kill before we are safe." cx="119.96527777777777" cz="119.16666666666667" r="2.5" />
   <Text in="@missionComplete" showEveryone="true" text="Objectives reached.
-Return to base to complete mission." fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" r="2.5" angle="315" />
-  <Teleporter win="1000" group="-1" start="@missionComplete" stop="showMissionComplete" out="showMissionComplete" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" r="2.5" angle="315" />
-  <Goody shape="bspMissionComplete" scale="3" speed="4.5" start="showMissionComplete" status="false" out="@missionComplete" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" r="2.5" angle="315" />
-  <Sound sound="snBubbles" y="80" rate="0.5" volume="250" start="@start" loopCount="-1" isAmbient="true" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" r="2.5" angle="315" />
-  <Ufo shotPower="0.3" attack="0" accel="spyAccel" verticalRangeMax="10" motionRange="40" checkPeriod="12" homeBase="@ufoHome" killMsg="@ufoKill" homeRange="50" shield="spyShield" fill="#330066" frame="#ee0000" cx="101.84027777777777" cz="187.29166666666669" r="2.5" angle="315" />
+Return to base to complete mission." cx="119.96527777777777" cz="119.16666666666667" r="2.5" />
+  <Teleporter win="1000" group="-1" start="@missionComplete" stop="showMissionComplete" out="showMissionComplete" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" angle="315" />
+  <Goody shape="bspMissionComplete" scale="3" speed="4.5" start="showMissionComplete" status="false" out="@missionComplete" fill="#ee0000" frame="#000000" cx="119.96527777777777" cz="119.16666666666667" angle="315" />
+  <Sound sound="snBubbles" y="80" rate="0.5" volume="250" start="@start" loopCount="-1" isAmbient="true" cx="119.96527777777777" cz="119.16666666666667" angle="315" />
+  <Ufo shotPower="0.3" attack="0" accel="spyAccel" verticalRangeMax="10" motionRange="40" checkPeriod="12" homeBase="@ufoHome" killMsg="@ufoKill" homeRange="50" shield="spyShield" fill="#330066" frame="#ee0000" cx="101.84027777777777" cz="187.29166666666669" angle="315" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="124.34027777777777" cz="178.95833333333334" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="124.34027777777777" cz="178.95833333333334" r="2.5" angle="315" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="124.34027777777777" cz="178.95833333333334" r="2.5" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="124.34027777777777" cz="178.95833333333334" angle="315" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="116.21527777777777" cz="178.95833333333334" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="116.21527777777777" cz="178.95833333333334" r="2.5" angle="315" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="4" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="116.21527777777777" cz="178.95833333333334" r="2.5" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="4" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="116.21527777777777" cz="178.95833333333334" angle="315" />
 </map>

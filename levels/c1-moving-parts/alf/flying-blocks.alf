@@ -1,81 +1,81 @@
 <map>
   <set designer="Gareth White   e-mail: integral@iinet.net.au" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="35" cz="13.75" r="3.125" angle="270" />
+  <Incarnator cx="35" cz="13.75" angle="270" />
   <set wallHeight="0" />
   <set ambient.i="0.6" light.0.i="0.4" light.0.a="45" light.0.b="20" light.1.i="0.3" light.1.a="20" light.1.b="200" information="Beware of low-flying blocks." />
   <SkyColor n="10" fill="#3366ff" frame="#00ccff" />
-  <GroundColor fill="#555555" frame="#666633" />
+  <GroundColor fill="#555555" />
   <Wall fill="#ccffff" frame="#000000" x="59.652777777777786" z="35" w="57.5" d="60" h="1" y="16" />
-  <Field deltaY="0.1" deltaX="-0.1" deltaZ="0.2" start="@F1Start" stop="@F1Stop" watch="targ1" fill="#ffffff" frame="#000000" r="2.5" cx="3.4027777777777777" cz="8.75" angle="225" x="45.27777777777778" z="20" w="28.75" d="30" h="5" />
-  <Timer wait="59" in="@F2Start" out.0="@F1Start" out.1="@F2Stop" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <And in="@start" out="@F1Start" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <Field deltaY="0" deltaX="0.2" start="@F2Start" stop="@F2Stop" watch="targ1" fill="#ffffff" frame="#000000" r="2.5" cx="3.4027777777777777" cz="8.75" angle="225" x="45.27777777777778" z="20" w="28.75" d="30" h="5" />
-  <Timer wait="27" in="@F1Start" out.0="@F2Start" out.1="@F1Stop" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
+  <Field deltaY="0.1" deltaX="-0.1" deltaZ="0.2" start="@F1Start" stop="@F1Stop" watch="targ1" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" angle="225" x="45.27777777777778" z="20" w="28.75" d="30" h="5" />
+  <Timer wait="59" in="@F2Start" out.0="@F1Start" out.1="@F2Stop" />
+  <And in="@start" out="@F1Start" />
+  <Field deltaY="0" deltaX="0.2" start="@F2Start" stop="@F2Stop" watch="targ1" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" angle="225" x="45.27777777777778" z="20" w="28.75" d="30" h="5" />
+  <Timer wait="27" in="@F1Start" out.0="@F2Start" out.1="@F1Stop" />
   <Wall fill="#ffffff" frame="#000000" x="59.652777777777786" z="3.75" w="57.5" d="2.5" h="17" />
   <Wall fill="#ffffff" frame="#000000" x="29.65277777777778" z="35" w="2.5" d="65" h="17" />
   <Wall fill="#ffffff" frame="#000000" x="59.652777777777786" z="66.25" w="57.5" d="2.5" h="17" />
   <Wall fill="#ffffff" frame="#000000" x="89.65277777777779" z="35" w="2.5" d="65" h="17" />
-  <Field deltaY="0.2" deltaZ="-0.1" deltaX="-0.2" start="@F5Start" stop="@F5Stop" watch="targ1" fill="#ffffff" frame="#000000" r="2.5" cx="3.4027777777777777" cz="8.75" angle="225" x="74.02777777777779" z="20" w="28.75" d="30" h="5" />
-  <Timer wait="19" in="@F6Start" out.0="@F5Start" out.1="@F6Stop" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <And in="@start" out="@F5Start" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <Field deltaY="0" deltaX="0" deltaZ="0.3" start="@F6Start" stop="@F6Stop" watch="targ1" fill="#ffffff" frame="#000000" r="2.5" cx="3.4027777777777777" cz="8.75" angle="225" x="74.02777777777779" z="20" w="28.75" d="30" h="5" />
-  <Timer wait="28" in="@F5Start" out.0="@F6Start" out.1="@F5Stop" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <Field deltaY="-0.1" deltaX="-0.1" start="@F3Start" stop="@F3Stop" watch="targ1" fill="#ffffff" frame="#000000" r="2.5" cx="3.4027777777777777" cz="8.75" angle="225" x="45.27777777777778" z="50" w="28.75" d="30" h="5" />
-  <Timer wait="52" in="@F4Start" out.0="@F3Start" out.1="@F4Stop" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <And in="@start" out="@F3Start" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <Field deltaY="0.2" deltaZ="-0.1" deltaX="0.2" start="@F4Start" stop="@F4Stop" watch="targ1" fill="#ffffff" frame="#000000" r="2.5" cx="3.4027777777777777" cz="8.75" angle="225" x="45.27777777777778" z="50" w="28.75" d="30" h="5" />
-  <Timer wait="37" in="@F3Start" out.0="@F4Start" out.1="@F3Stop" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <Field deltaY="0.2" deltaX="-0.1" start="@F7Start" stop="@F7Stop" watch="targ1" fill="#ffffff" frame="#000000" r="2.5" cx="3.4027777777777777" cz="8.75" angle="225" x="74.02777777777779" z="50" w="28.75" d="30" h="5" />
-  <Timer wait="31" in="@F8Start" out.0="@F7Start" out.1="@F8Stop" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <And in="@start" out="@F7Start" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <Field deltaY="0" deltaZ="-0.1" start="@F8Start" stop="@F8Stop" watch="targ1" fill="#ffffff" frame="#000000" r="2.5" cx="3.4027777777777777" cz="8.75" angle="225" x="74.02777777777779" z="50" w="28.75" d="30" h="5" />
-  <Timer wait="45" in="@F7Start" out.0="@F8Start" out.1="@F7Stop" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" r="2.5" angle="225" />
-  <FreeSolid shape="bspStandardWall" scale="1.5" customGravity="0.1" shotPower="0.3" mass="16" targetGroup="targ1" fill="#ff9999" frame="#000000" r="2.8125" cx="37.11805555555556" cz="23.229166666666668" angle="90" />
-  <FreeSolid shape="bspStandardWall" scale="1.5" customGravity="0.1" shotPower="0.3" mass="12" targetGroup="targ1" fill="#99ff99" frame="#000000" r="2.8125" cx="73.99305555555556" cz="23.854166666666668" angle="90" />
-  <FreeSolid shape="bspStandardWall" scale="1.5" customGravity="0.1" shotPower="0.3" mass="17" targetGroup="targ1" fill="#ffff99" frame="#000000" r="2.8125" cx="54.61805555555556" cz="21.979166666666668" angle="90" />
-  <FreeSolid shape="bspStandardWall" scale="1.5" customGravity="0.1" shotPower="0.3" mass="18" targetGroup="targ1" fill="#ff9966" frame="#000000" r="2.8125" cx="71.49305555555556" cz="48.22916666666667" angle="90" />
-  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="16" targetGroup="targ1" fill="#ff0000" frame="#000000" r="2.8125" cx="41.84027777777778" cz="13.854166666666668" angle="90" />
-  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="15" targetGroup="targ1" fill="#3399ff" frame="#000000" r="2.8125" cx="49.34027777777778" cz="49.47916666666667" angle="90" />
-  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="12" targetGroup="targ1" fill="#008800" frame="#000000" r="2.8125" cx="73.71527777777779" cz="14.479166666666668" angle="90" />
-  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="17" targetGroup="targ1" fill="#ffcc00" frame="#000000" r="2.8125" cx="54.34027777777778" cz="12.604166666666668" angle="90" />
-  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="18" targetGroup="targ1" fill="#ff3300" frame="#000000" r="2.8125" cx="71.21527777777779" cz="38.85416666666667" angle="90" />
-  <FreeSolid scale="4" shape="bspStandardWall" customGravity="0.05" shotPower="1.5" mass="20" targetGroup="targ1" fill="#0000dd" frame="#000000" r="2.8125" cx="40.59027777777778" cz="43.85416666666667" angle="90" />
+  <Field deltaY="0.2" deltaZ="-0.1" deltaX="-0.2" start="@F5Start" stop="@F5Stop" watch="targ1" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" angle="225" x="74.02777777777779" z="20" w="28.75" d="30" h="5" />
+  <Timer wait="19" in="@F6Start" out.0="@F5Start" out.1="@F6Stop" />
+  <And in="@start" out="@F5Start" />
+  <Field deltaY="0" deltaX="0" deltaZ="0.3" start="@F6Start" stop="@F6Stop" watch="targ1" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" angle="225" x="74.02777777777779" z="20" w="28.75" d="30" h="5" />
+  <Timer wait="28" in="@F5Start" out.0="@F6Start" out.1="@F5Stop" />
+  <Field deltaY="-0.1" deltaX="-0.1" start="@F3Start" stop="@F3Stop" watch="targ1" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" angle="225" x="45.27777777777778" z="50" w="28.75" d="30" h="5" />
+  <Timer wait="52" in="@F4Start" out.0="@F3Start" out.1="@F4Stop" />
+  <And in="@start" out="@F3Start" />
+  <Field deltaY="0.2" deltaZ="-0.1" deltaX="0.2" start="@F4Start" stop="@F4Stop" watch="targ1" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" angle="225" x="45.27777777777778" z="50" w="28.75" d="30" h="5" />
+  <Timer wait="37" in="@F3Start" out.0="@F4Start" out.1="@F3Stop" />
+  <Field deltaY="0.2" deltaX="-0.1" start="@F7Start" stop="@F7Stop" watch="targ1" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" angle="225" x="74.02777777777779" z="50" w="28.75" d="30" h="5" />
+  <Timer wait="31" in="@F8Start" out.0="@F7Start" out.1="@F8Stop" />
+  <And in="@start" out="@F7Start" />
+  <Field deltaY="0" deltaZ="-0.1" start="@F8Start" stop="@F8Stop" watch="targ1" fill="#ffffff" frame="#000000" cx="3.4027777777777777" cz="8.75" angle="225" x="74.02777777777779" z="50" w="28.75" d="30" h="5" />
+  <Timer wait="45" in="@F7Start" out.0="@F8Start" out.1="@F7Stop" />
+  <FreeSolid shape="bspStandardWall" scale="1.5" customGravity="0.1" shotPower="0.3" mass="16" targetGroup="targ1" fill="#ff9999" frame="#000000" cx="37.11805555555556" cz="23.229166666666668" angle="90" />
+  <FreeSolid shape="bspStandardWall" scale="1.5" customGravity="0.1" shotPower="0.3" mass="12" targetGroup="targ1" fill="#99ff99" frame="#000000" cx="73.99305555555556" cz="23.854166666666668" angle="90" />
+  <FreeSolid shape="bspStandardWall" scale="1.5" customGravity="0.1" shotPower="0.3" mass="17" targetGroup="targ1" fill="#ffff99" frame="#000000" cx="54.61805555555556" cz="21.979166666666668" angle="90" />
+  <FreeSolid shape="bspStandardWall" scale="1.5" customGravity="0.1" shotPower="0.3" mass="18" targetGroup="targ1" fill="#ff9966" frame="#000000" cx="71.49305555555556" cz="48.22916666666667" angle="90" />
+  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="16" targetGroup="targ1" fill="#ff0000" frame="#000000" cx="41.84027777777778" cz="13.854166666666668" angle="90" />
+  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="15" targetGroup="targ1" fill="#3399ff" frame="#000000" cx="49.34027777777778" cz="49.47916666666667" angle="90" />
+  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="12" targetGroup="targ1" fill="#008800" frame="#000000" cx="73.71527777777779" cz="14.479166666666668" angle="90" />
+  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="17" targetGroup="targ1" fill="#ffcc00" frame="#000000" cx="54.34027777777778" cz="12.604166666666668" angle="90" />
+  <FreeSolid shape="bspStandardWall" customGravity="0.1" shotPower="0.3" mass="18" targetGroup="targ1" fill="#ff3300" frame="#000000" cx="71.21527777777779" cz="38.85416666666667" angle="90" />
+  <FreeSolid scale="4" shape="bspStandardWall" customGravity="0.05" shotPower="1.5" mass="20" targetGroup="targ1" fill="#0000dd" frame="#000000" cx="40.59027777777778" cz="43.85416666666667" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="85.79861111111111" cz="7.569444444444445" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="85.79861111111111" cz="7.569444444444445" r="2.5" angle="315" />
-  <Goody shape="bspGrenade" y="14.5" speed="2" grenades="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="85.79861111111111" cz="7.569444444444445" r="2.5" angle="315" />
-  <Field deltaY="0.2" watch="playerMask" fill="#ffffff" frame="#000000" r="2.5" cx="85.79861111111111" cz="7.569444444444445" angle="315" x="86.52777777777779" z="6.875" w="3.75" d="3.75" h="13" />
-  <Field deltaY="0" deltaX="-0.1" deltaZ="0.1" watch="playerMask" fill="#ffffff" frame="#000000" r="2.5" cx="85.79861111111111" cz="7.569444444444445" angle="315" x="86.52777777777779" z="6.875" w="3.75" d="3.75" h="3" y="13" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="14.5" speed="2" grenades="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="85.79861111111111" cz="7.569444444444445" angle="315" />
+  <Field deltaY="0.2" watch="playerMask" fill="#ffffff" frame="#000000" cx="85.79861111111111" cz="7.569444444444445" angle="315" x="86.52777777777779" z="6.875" w="3.75" d="3.75" h="13" />
+  <Field deltaY="0" deltaX="-0.1" deltaZ="0.1" watch="playerMask" fill="#ffffff" frame="#000000" cx="85.79861111111111" cz="7.569444444444445" angle="315" x="86.52777777777779" z="6.875" w="3.75" d="3.75" h="3" y="13" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="33.36805555555556" cz="7.5" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="33.36805555555556" cz="7.5" r="2.5" angle="315" />
-  <Goody shape="bspMissile" y="14.5" speed="2" missiles="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="33.36805555555556" cz="7.5" r="2.5" angle="315" />
-  <Field deltaY="0.2" watch="playerMask" fill="#ffffff" frame="#000000" r="2.5" cx="33.36805555555556" cz="7.5" angle="315" x="32.77777777777778" z="6.875" w="3.75" d="3.75" h="13" />
-  <Field deltaY="0" deltaX="0.1" deltaZ="0.1" watch="playerMask" fill="#ffffff" frame="#000000" r="2.5" cx="33.36805555555556" cz="7.5" angle="315" x="32.77777777777778" z="6.875" w="3.75" d="3.75" h="3" y="13" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspMissile" y="14.5" speed="2" missiles="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="33.36805555555556" cz="7.5" angle="315" />
+  <Field deltaY="0.2" watch="playerMask" fill="#ffffff" frame="#000000" cx="33.36805555555556" cz="7.5" angle="315" x="32.77777777777778" z="6.875" w="3.75" d="3.75" h="13" />
+  <Field deltaY="0" deltaX="0.1" deltaZ="0.1" watch="playerMask" fill="#ffffff" frame="#000000" cx="33.36805555555556" cz="7.5" angle="315" x="32.77777777777778" z="6.875" w="3.75" d="3.75" h="3" y="13" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="33.36805555555556" cz="62.5" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="33.36805555555556" cz="62.5" r="2.5" angle="315" />
-  <Goody shape="bspGrenade" y="14.5" speed="2" grenades="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="33.36805555555556" cz="62.5" r="2.5" angle="315" />
-  <Field deltaY="0.2" watch="playerMask" fill="#ffffff" frame="#000000" r="2.5" cx="33.36805555555556" cz="62.5" angle="315" x="32.77777777777778" z="63.125" w="3.75" d="3.75" h="13" />
-  <Field deltaY="0" deltaX="0.1" deltaZ="-0.1" watch="playerMask" fill="#ffffff" frame="#000000" r="2.5" cx="33.36805555555556" cz="62.5" angle="315" x="32.77777777777778" z="63.125" w="3.75" d="3.75" h="3" y="13" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="14.5" speed="2" grenades="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="33.36805555555556" cz="62.5" angle="315" />
+  <Field deltaY="0.2" watch="playerMask" fill="#ffffff" frame="#000000" cx="33.36805555555556" cz="62.5" angle="315" x="32.77777777777778" z="63.125" w="3.75" d="3.75" h="13" />
+  <Field deltaY="0" deltaX="0.1" deltaZ="-0.1" watch="playerMask" fill="#ffffff" frame="#000000" cx="33.36805555555556" cz="62.5" angle="315" x="32.77777777777778" z="63.125" w="3.75" d="3.75" h="3" y="13" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#ee0000" frame="#000000" cx="85.86805555555557" cz="62.5" r="2.5" angle="315" />
-  <Timer in="mTaken" out="mShow" wait="200" fill="#ee0000" frame="#000000" cx="85.86805555555557" cz="62.5" r="2.5" angle="315" />
-  <Goody shape="bspMissile" y="14.5" speed="2" missiles="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="85.86805555555557" cz="62.5" r="2.5" angle="315" />
-  <Field deltaY="0.2" watch="playerMask" fill="#ffffff" frame="#000000" r="2.5" cx="85.86805555555557" cz="62.5" angle="315" x="86.52777777777779" z="63.125" w="3.75" d="3.75" h="13" />
-  <Field deltaY="0" deltaX="-0.1" deltaZ="-0.1" watch="playerMask" fill="#ffffff" frame="#000000" r="2.5" cx="85.86805555555557" cz="62.5" angle="315" x="86.52777777777779" z="63.125" w="3.75" d="3.75" h="3" y="13" />
-  <WallDoor open="@SwivelOpen" close="@SwivelClose" didOpen="@SwivelClose" didClose="@SwivelOpen" openDelay="20" closeDelay="20" yaw="180" deltaY="0" openSpeed="1" closeSpeed="1" fill="#777777" frame="#000000" r="2.5" cx="85.86805555555557" cz="62.5" angle="315" x="59.652777777777786" z="35" w="30" d="1.25" h="4" />
-  <And in="@start" out="@SwivelOpen" fill="#777777" frame="#000000" cx="85.86805555555557" cz="62.5" r="2.5" angle="315" />
-  <FreeSolid shape="bspW1x1" customGravity="0.1" shotPower="0.3" mass="30" accel="0.98" targetGroup="targ2" fill="#ff33cc" frame="#000000" r="2.8125" cx="34.895833333333336" cz="34.96527777777778" angle="90" />
-  <FreeSolid shape="bspW1x1" customGravity="0.1" shotPower="0.3" mass="30" accel="0.98" targetGroup="targ2" fill="#ff33cc" frame="#000000" r="2.8125" cx="59.47916666666667" cz="59.75694444444445" angle="90" />
-  <FreeSolid shape="bspW1x1" customGravity="0.1" shotPower="0.3" mass="30" accel="0.98" targetGroup="targ2" fill="#ff33cc" frame="#000000" r="2.8125" cx="83.99305555555556" cz="34.96527777777778" angle="90" />
-  <FreeSolid shape="bspW1x1" customGravity="0.1" shotPower="0.3" mass="30" accel="0.98" targetGroup="targ2" fill="#ff33cc" frame="#000000" r="2.8125" cx="59.548611111111114" cz="9.548611111111112" angle="90" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="34.375" cz="48.75" r="3.125" angle="270" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="85.55555555555556" cz="49.861111111111114" r="3.125" angle="90" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="85.55555555555556" cz="21.73611111111111" r="3.125" angle="90" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="59.44444444444445" cz="61.45833333333334" r="3.125" angle="180" />
-  <Incarnator fill="#ffffff" frame="#000000" cx="59.44444444444445" cz="8.333333333333334" r="3.125" angle="0" />
-  <Teleporter group="-1" y="-30" activeRange="22 * 5" deadRange="15 * 5" destGroup="@recenter" shape="0" fill="#ffffff" frame="#000000" cx="60.90277777777778" cz="38.75" r="2.5" angle="315" />
-  <Teleporter y="2" shape="0" group="@recenter" fill="#ffffff" frame="#000000" cx="60.90277777777778" cz="38.75" r="2.5" angle="315" />
-  <Teleporter shape="0" y="200" win="1000" start="@win" group="-1" activeRange="2000" fill="#ffffff" frame="#000000" cx="60.90277777777778" cz="38.75" r="2.5" angle="315" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspMissile" y="14.5" speed="2" missiles="2" start="mShow" out="mTaken" status="true" fill="#ee0000" frame="#000000" cx="85.86805555555557" cz="62.5" angle="315" />
+  <Field deltaY="0.2" watch="playerMask" fill="#ffffff" frame="#000000" cx="85.86805555555557" cz="62.5" angle="315" x="86.52777777777779" z="63.125" w="3.75" d="3.75" h="13" />
+  <Field deltaY="0" deltaX="-0.1" deltaZ="-0.1" watch="playerMask" fill="#ffffff" frame="#000000" cx="85.86805555555557" cz="62.5" angle="315" x="86.52777777777779" z="63.125" w="3.75" d="3.75" h="3" y="13" />
+  <WallDoor open="@SwivelOpen" close="@SwivelClose" didOpen="@SwivelClose" didClose="@SwivelOpen" openDelay="20" closeDelay="20" yaw="180" deltaY="0" openSpeed="1" closeSpeed="1" fill="#777777" frame="#000000" x="59.652777777777786" z="35" w="30" d="1.25" h="4" />
+  <And in="@start" out="@SwivelOpen" />
+  <FreeSolid shape="bspW1x1" customGravity="0.1" shotPower="0.3" mass="30" accel="0.98" targetGroup="targ2" fill="#ff33cc" frame="#000000" cx="34.895833333333336" cz="34.96527777777778" angle="90" />
+  <FreeSolid shape="bspW1x1" customGravity="0.1" shotPower="0.3" mass="30" accel="0.98" targetGroup="targ2" fill="#ff33cc" frame="#000000" cx="59.47916666666667" cz="59.75694444444445" angle="90" />
+  <FreeSolid shape="bspW1x1" customGravity="0.1" shotPower="0.3" mass="30" accel="0.98" targetGroup="targ2" fill="#ff33cc" frame="#000000" cx="83.99305555555556" cz="34.96527777777778" angle="90" />
+  <FreeSolid shape="bspW1x1" customGravity="0.1" shotPower="0.3" mass="30" accel="0.98" targetGroup="targ2" fill="#ff33cc" frame="#000000" cx="59.548611111111114" cz="9.548611111111112" angle="90" />
+  <Incarnator cx="34.375" cz="48.75" angle="270" />
+  <Incarnator cx="85.55555555555556" cz="49.861111111111114" angle="90" />
+  <Incarnator cx="85.55555555555556" cz="21.73611111111111" angle="90" />
+  <Incarnator cx="59.44444444444445" cz="61.45833333333334" angle="180" />
+  <Incarnator cx="59.44444444444445" cz="8.333333333333334" angle="0" />
+  <Teleporter group="-1" y="-30" activeRange="22 * 5" deadRange="15 * 5" destGroup="@recenter" shape="0" fill="#ffffff" frame="#000000" cx="60.90277777777778" cz="38.75" angle="315" />
+  <Teleporter y="2" shape="0" group="@recenter" fill="#ffffff" frame="#000000" cx="60.90277777777778" cz="38.75" angle="315" />
+  <Teleporter shape="0" y="200" win="1000" start="@win" group="-1" activeRange="2000" fill="#ffffff" frame="#000000" cx="60.90277777777778" cz="38.75" angle="315" />
 </map>

@@ -15,28 +15,28 @@
   <Wall fill="#336666" frame="#000000" x="90.9375" z="18.75" w="0.625" d="30" h="10" />
   <Wall fill="#336666" frame="#000000" x="45.625" z="34.0625" w="91.25" d="0.625" h="10" />
   <Wall fill="#336666" frame="#000000" x="45.625" z="3.4375" w="91.25" d="0.625" h="10" />
-  <Incarnator start="@zero" stop="@one" fill="#ffffff" frame="#000000" cx="1.875" cz="5" r="1.25" angle="315" />
-  <Incarnator start="@one" stop="@two" fill="#ffffff" frame="#000000" cx="1.875" cz="32.5" r="1.25" angle="225" />
-  <Incarnator start="@five" stop="@six" fill="#ffffff" frame="#000000" cx="89.375" cz="32.5" r="1.25" angle="135" />
-  <Incarnator start="@three" stop="@four" fill="#ffffff" frame="#000000" cx="89.375" cz="5" r="1.25" angle="45" />
-  <Incarnator start="@four" stop="@five" fill="#ffffff" frame="#000000" cx="89.375" cz="19.375" r="1.25" angle="45" />
-  <Incarnator start="@two" stop="@three" fill="#ffffff" frame="#000000" cx="1.875" cz="18.125" r="1.25" angle="225" />
+  <Incarnator start="@zero" stop="@one" cx="1.875" cz="5" angle="315" />
+  <Incarnator start="@one" stop="@two" cx="1.875" cz="32.5" angle="225" />
+  <Incarnator start="@five" stop="@six" cx="89.375" cz="32.5" angle="135" />
+  <Incarnator start="@three" stop="@four" cx="89.375" cz="5" angle="45" />
+  <Incarnator start="@four" stop="@five" cx="89.375" cz="19.375" angle="45" />
+  <Incarnator start="@two" stop="@three" cx="1.875" cz="18.125" angle="225" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#99ccff" frame="#000000" cx="45.625" cz="18.125" r="1.875" angle="225" />
-  <Timer in="mTaken" out="mShow" wait="16" fill="#99ccff" frame="#000000" cx="45.625" cz="18.125" r="1.875" angle="225" />
-  <Goody shape="bspAvaraA" y="2.25" grenades="12" missiles="8" speed="-3" start="mShow" out="mTaken" fill="#99ccff" frame="#000000" cx="45.625" cz="18.125" r="1.875" angle="225" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="16" />
+  <Goody shape="bspAvaraA" y="2.25" grenades="12" missiles="8" speed="-3" start="mShow" out="mTaken" fill="#99ccff" frame="#000000" cx="45.625" cz="18.125" angle="225" />
   <set designer="Red Cap" information="Aquaman loves water..." />
   <SkyColor fill="#000055" frame="#0033ff" />
-  <GroundColor fill="#330066" frame="#222222" />
+  <GroundColor fill="#330066" />
   <set ambient.i="0.4" light.0.i="0.6" light.0.a="45" light.0.b="90" grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" />
-  <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" spin="false" fill="#ffffff" frame="#000000" cx="43.75" cz="20" r="1.875" angle="45" />
-  <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="43.75" cz="20" r="1.875" angle="45" />
-  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#336666" frame="#000000" r="1.875" cx="43.75" cz="20" angle="45" x="45.625" z="18.75" w="10" d="10" h="0.25" y="100" />
-  <Timer in="@start" out="@start11" fill="#336666" frame="#000000" cx="57.5" cz="1.25" r="1.25" angle="45" />
-  <WallDoor open="@start11" close="@done11" didOpen="@done11" didClose="@start11" deltaY="0" deltaX="25" guardDelay="4" openSound="0" closeSound="0" openSpeed="1" closeSpeed="1" openDelay="32" closeDelay="32" shotPower="100" fill="#336666" frame="#000000" r="1.25" cx="57.5" cz="1.25" angle="45" x="53.125" z="18.75" w="5" d="10" h="0.25" />
-  <WallDoor open="@start11" close="@done11" didOpen="@done11" didClose="@start11" deltaY="0" deltaX="-25" guardDelay="4" openSound="0" closeSound="0" openSpeed="1" closeSpeed="1" openDelay="32" closeDelay="32" shotPower="100" fill="#336666" frame="#000000" r="1.25" cx="57.5" cz="1.25" angle="45" x="38.125" z="18.75" w="5" d="10" h="0.25" />
-  <And in="@start11" out="@time" fill="#330066" frame="#000000" cx="95.55555555555556" cz="12.98611111111111" r="3.125" angle="45" />
-  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" out="@time" fill="#330066" frame="#000000" cx="95.55555555555556" cz="12.98611111111111" r="3.125" angle="45" />
-  <Timer in="@time" out="@whoop" wait="1" fill="#330066" frame="#000000" cx="95.55555555555556" cz="12.98611111111111" r="3.125" angle="45" />
-  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" out.6="@six" fill="#330066" frame="#000000" cx="95.55555555555556" cz="12.98611111111111" r="3.125" angle="45" />
+  <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" spin="false" fill="#ffffff" frame="#000000" cx="43.75" cz="20" angle="45" />
+  <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="43.75" cz="20" angle="45" />
+  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#336666" frame="#000000" x="45.625" z="18.75" w="10" d="10" h="0.25" y="100" />
+  <Timer in="@start" out="@start11" />
+  <WallDoor open="@start11" close="@done11" didOpen="@done11" didClose="@start11" deltaY="0" deltaX="25" guardDelay="4" openSound="0" closeSound="0" openSpeed="1" closeSpeed="1" openDelay="32" closeDelay="32" shotPower="100" fill="#336666" frame="#000000" x="53.125" z="18.75" w="5" d="10" h="0.25" />
+  <WallDoor open="@start11" close="@done11" didOpen="@done11" didClose="@start11" deltaY="0" deltaX="-25" guardDelay="4" openSound="0" closeSound="0" openSpeed="1" closeSpeed="1" openDelay="32" closeDelay="32" shotPower="100" fill="#336666" frame="#000000" x="38.125" z="18.75" w="5" d="10" h="0.25" />
+  <And in="@start11" out="@time" />
+  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" out="@time" />
+  <Timer in="@time" out="@whoop" wait="1" />
+  <Distributor in="@whoop" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" out.5="@five" out.6="@six" />
 </map>
