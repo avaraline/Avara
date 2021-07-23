@@ -1,69 +1,69 @@
 <map>
   <SkyColor n="1024" verticalRangeMax="59999" fill="#ffff33" frame="#440000" />
-  <GroundColor fill="#ffff33" frame="#ffff33" />
+  <GroundColor fill="#ffff33" />
   <set designer="Plastic Chicken" information="you snap like a match, burn like a match, and kill like a match.  200 nades and missiles are allowed" hull.0="1005" hull.1="hull[0]" hull.2="hull[0]" missileAcceleration="5" missileTurnRate="5" grenadePower=".3" missilePower=".3" maxStartMissiles="200" maxStartGrenades="200" maxStartBoosts="0" gravity=".2" defaultLives="9" />
-  <Ufo targetGroup="targ1" y="3" watch="false" pitchRange="80" shield="-1" verticalRangeMax="1.9" verticalRangeMin="1.5" hitScore="0" yon=".001" isTarget="false" scale=".1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" r="1.875" angle="315" />
+  <Ufo targetGroup="targ1" y="3" watch="false" pitchRange="80" shield="-1" verticalRangeMax="1.9" verticalRangeMin="1.5" hitScore="0" yon=".001" isTarget="false" scale=".1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="179.375" z="11.875" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@aaStrt" exit="@aaStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@aaStrt" exit="@aaStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="188.125" z="11.875" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@baStrt" exit="@baStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@baStrt" exit="@baStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="188.125" z="20.625" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@bbStrt" exit="@bbStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@bbStrt" exit="@bbStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="179.375" z="20.625" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@abStrt" exit="@abStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@abStrt" exit="@abStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="196.875" z="11.875" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@caStrt" exit="@caStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@caStrt" exit="@caStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="179.375" z="29.375" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@acStrt" exit="@acStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@acStrt" exit="@acStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="196.875" z="20.625" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@cbStrt" exit="@cbStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@cbStrt" exit="@cbStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="196.875" z="29.375" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@ccStrt" exit="@ccStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@ccStrt" exit="@ccStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <Wall fill="#ffcc66" frame="#000000" x="188.125" z="29.375" w="8.75" d="8.75" h="0" />
-  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@bcStrt" exit="@bcStp" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" />
+  <Field shape="0" deltaX="0" deltaY="0" deltaZ="0" enter="@bcStrt" exit="@bcStp" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" />
   <set wallHeight="10" />
-  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="178.4375" z="34.6875" w="10.625" d="1.875" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="188.125" z="34.6875" w="8.75" d="1.875" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="197.8125" z="34.6875" w="10.625" d="1.875" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="178.4375" z="6.5625" w="10.625" d="1.875" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="188.125" z="6.5625" w="8.75" d="1.875" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="197.8125" z="6.5625" w="10.625" d="1.875" h="0" />
-  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="202.1875" z="10.9375" w="1.875" d="10.625" h="0" />
-  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="202.1875" z="20.625" w="1.875" d="8.75" h="0" />
-  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="202.1875" z="30.3125" w="1.875" d="10.625" h="0" />
-  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="174.0625" z="10.9375" w="1.875" d="10.625" h="0" />
-  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="174.0625" z="20.625" w="1.875" d="8.75" h="0" />
-  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" r="1.875" cx="187.5" cz="20" angle="315" x="174.0625" z="30.3125" w="1.875" d="10.625" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="178.4375" z="34.6875" w="10.625" d="1.875" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="188.125" z="34.6875" w="8.75" d="1.875" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="197.8125" z="34.6875" w="10.625" d="1.875" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="178.4375" z="6.5625" w="10.625" d="1.875" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="188.125" z="6.5625" w="8.75" d="1.875" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="197.8125" z="6.5625" w="10.625" d="1.875" h="0" />
+  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="202.1875" z="10.9375" w="1.875" d="10.625" h="0" />
+  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="202.1875" z="20.625" w="1.875" d="8.75" h="0" />
+  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="202.1875" z="30.3125" w="1.875" d="10.625" h="0" />
+  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="174.0625" z="10.9375" w="1.875" d="10.625" h="0" />
+  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="174.0625" z="20.625" w="1.875" d="8.75" h="0" />
+  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#ffcc66" frame="#000000" cx="187.5" cz="20" angle="315" x="174.0625" z="30.3125" w="1.875" d="10.625" h="0" />
   <set baseHeight="0" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@aaStrt" stop="@aaStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="43.125" cz="152.5" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="43.125" cz="152.5" r="1.875" angle="315" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@abStrt" stop="@abStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="43.125" cz="160" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="43.125" cz="160" r="1.875" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@aaStrt" stop="@aaStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="43.125" cz="152.5" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="43.125" cz="152.5" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@abStrt" stop="@abStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="43.125" cz="160" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="43.125" cz="160" angle="315" />
   <set baseHeight="0" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@acStrt" stop="@acStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="43.125" cz="167.5" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="43.125" cz="167.5" r="1.875" angle="315" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@baStrt" stop="@baStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="50.625" cz="152.5" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="50.625" cz="152.5" r="1.875" angle="315" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@bbStrt" stop="@bbStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="50.625" cz="160" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="50.625" cz="160" r="1.875" angle="315" />
-  <Teleporter deadRange="120" activeRange="2000" y="50" destGroup="2" shape="false" fill="#888888" frame="#000000" cx="50.625" cz="160" r="1.875" angle="315" />
-  <Teleporter group="2" y="35" activeRange="0" shape="false" fill="#888888" frame="#000000" cx="50.625" cz="160" r="1.875" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@acStrt" stop="@acStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="43.125" cz="167.5" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="43.125" cz="167.5" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@baStrt" stop="@baStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="50.625" cz="152.5" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="50.625" cz="152.5" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@bbStrt" stop="@bbStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="50.625" cz="160" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="50.625" cz="160" angle="315" />
+  <Teleporter deadRange="120" activeRange="2000" y="50" destGroup="2" shape="false" fill="#888888" frame="#000000" cx="50.625" cz="160" angle="315" />
+  <Teleporter group="2" y="35" activeRange="0" shape="false" fill="#888888" frame="#000000" cx="50.625" cz="160" angle="315" />
   <set baseHeight="0" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@bcStrt" stop="@bcStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="50.625" cz="167.5" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="50.625" cz="167.5" r="1.875" angle="315" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@caStrt" stop="@caStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="58.125" cz="152.5" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="58.125" cz="152.5" r="1.875" angle="315" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@cbStrt" stop="@cbStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="58.125" cz="160" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="58.125" cz="160" r="1.875" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@bcStrt" stop="@bcStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="50.625" cz="167.5" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="50.625" cz="167.5" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@caStrt" stop="@caStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="58.125" cz="152.5" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="58.125" cz="152.5" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@cbStrt" stop="@cbStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="58.125" cz="160" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="58.125" cz="160" angle="315" />
   <set baseHeight="0" />
-  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@ccStrt" stop="@ccStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="58.125" cz="167.5" r="1.875" angle="315" />
-  <Hologram fill="#888888" frame="#000000" cx="58.125" cz="167.5" r="1.875" angle="315" />
-  <Incarnator y="20" fill="#888888" frame="#000000" cx="35.625" cz="175" r="1.875" angle="225" />
-  <Incarnator y="20" fill="#888888" frame="#000000" cx="63.125" cz="147.5" r="1.875" angle="45" />
-  <Incarnator y="20" fill="#888888" frame="#000000" cx="35.625" cz="145" r="1.875" angle="315" />
-  <Incarnator y="20" fill="#888888" frame="#000000" cx="65.625" cz="175" r="1.875" angle="135" />
-  <Incarnator y="20" fill="#888888" frame="#000000" cx="43.125" cz="160" r="1.875" angle="225" />
-  <Incarnator y="20" fill="#888888" frame="#000000" cx="58.125" cz="160" r="1.875" angle="45" />
-  <Ufo targetGroup="targ1" y="3" watch="false" pitchRange="80" shield="-1" verticalRangeMax="1.9" verticalRangeMin="1.5" hitScore="0" yon=".001" isTarget="false" scale=".1" fill="#ffcc66" frame="#000000" cx="190.625" cz="18.125" r="1.875" angle="225" />
-  <Teleporter start="@winTeam" shape="false" activeRange="2000" win="1000" fill="#ffcc66" frame="#000000" cx="184.6527777777778" cz="2.5" r="1.875" angle="315" />
+  <Goody shape="2368" scale=".5" speed="12" yon="35" start="@ccStrt" stop="@ccStp" grenades="5" missiles="5" shield="5" power="10" y="2" sound="1354" fill="#888888" frame="#000000" cx="58.125" cz="167.5" angle="315" />
+  <Hologram fill="#888888" frame="#000000" cx="58.125" cz="167.5" angle="315" />
+  <Incarnator y="20" cx="35.625" cz="175" angle="225" />
+  <Incarnator y="20" cx="63.125" cz="147.5" angle="45" />
+  <Incarnator y="20" cx="35.625" cz="145" angle="315" />
+  <Incarnator y="20" cx="65.625" cz="175" angle="135" />
+  <Incarnator y="20" cx="43.125" cz="160" angle="225" />
+  <Incarnator y="20" cx="58.125" cz="160" angle="45" />
+  <Ufo targetGroup="targ1" y="3" watch="false" pitchRange="80" shield="-1" verticalRangeMax="1.9" verticalRangeMin="1.5" hitScore="0" yon=".001" isTarget="false" scale=".1" fill="#ffcc66" frame="#000000" cx="190.625" cz="18.125" angle="225" />
+  <Teleporter start="@winTeam" shape="false" activeRange="2000" win="1000" fill="#ffcc66" frame="#000000" cx="184.6527777777778" cz="2.5" angle="315" />
 </map>

@@ -1,6 +1,6 @@
 <map>
   <SkyColor fill="#ffffe6" frame="#7b877a" />
-  <GroundColor fill="#111111" frame="#000000" />
+  <GroundColor fill="#111111" />
   <set designer="Mondo" information="Use sound options to turn the music on or off." ambient.i=".2" light.0.i="1" light.0.a="30" light.0.b="0" defaultLives="3" wallTraction="1" wallFriction="1" lightHull="787" mediumHull="788" heavyHull="789" wallHeight="8" />
   <Wall fill="#7b877a" frame="#000000" x="45.97222222222222" z="53.05555555555556" w="10" d="15" h="0" />
   <set wallHeight="16" />
@@ -280,48 +280,48 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody sound="3002" volume="24" speed="2" shape="836" y="6" grenades="30" missiles="15" start="mShow" out="mTaken" fill="#ffffe6" frame="#000000" cx="75.97222222222223" cz="83.05555555555556" r="1.25" angle="315" />
+  <Goody sound="3002" volume="24" speed="2" shape="836" y="6" grenades="30" missiles="15" start="mShow" out="mTaken" fill="#ffffe6" frame="#000000" cx="75.97222222222223" cz="83.05555555555556" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="3" grenades="30" start="mShow" out="mTaken" fill="#7b877a" frame="#000000" cx="37.84722222222222" cz="42.43055555555556" r="1.25" angle="315" />
+  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="3" grenades="30" start="mShow" out="mTaken" fill="#7b877a" frame="#000000" cx="37.84722222222222" cz="42.43055555555556" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="3" grenades="30" start="mShow" out="mTaken" fill="#494c48" frame="#000000" cx="115.34722222222223" cz="124.30555555555556" r="1.25" angle="315" />
+  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="3" grenades="30" start="mShow" out="mTaken" fill="#494c48" frame="#000000" cx="115.34722222222223" cz="124.30555555555556" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="6" grenades="30" start="mShow" out="mTaken" fill="#494c48" frame="#000000" cx="30.97222222222222" cz="130.55555555555557" r="1.25" angle="315" />
+  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="6" grenades="30" start="mShow" out="mTaken" fill="#494c48" frame="#000000" cx="30.97222222222222" cz="130.55555555555557" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="6" grenades="30" start="mShow" out="mTaken" fill="#494c48" frame="#000000" cx="120.97222222222223" cz="35.55555555555556" r="1.25" angle="315" />
+  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="6" grenades="30" start="mShow" out="mTaken" fill="#494c48" frame="#000000" cx="120.97222222222223" cz="35.55555555555556" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="2" missiles="15" start="mShow" out="mTaken" fill="#423b41" frame="#000000" cx="70.97222222222223" cz="25.555555555555557" r="1.25" angle="315" />
+  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="2" missiles="15" start="mShow" out="mTaken" fill="#423b41" frame="#000000" cx="70.97222222222223" cz="25.555555555555557" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="2" missiles="15" start="mShow" out="mTaken" fill="#423b41" frame="#000000" cx="80.97222222222223" cz="140.55555555555557" r="1.25" angle="315" />
+  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="2" missiles="15" start="mShow" out="mTaken" fill="#423b41" frame="#000000" cx="80.97222222222223" cz="140.55555555555557" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="2" missiles="15" start="mShow" out="mTaken" fill="#423b41" frame="#000000" cx="130.97222222222223" cz="85.55555555555556" r="1.25" angle="315" />
+  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="2" missiles="15" start="mShow" out="mTaken" fill="#423b41" frame="#000000" cx="130.97222222222223" cz="85.55555555555556" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="2" missiles="15" start="mShow" out="mTaken" fill="#423b41" frame="#000000" cx="20.97222222222222" cz="80.55555555555556" r="1.25" angle="315" />
-  <Sound y="100" isPlaced="true" isMusic="true" volume="20000" sound="3710" start="@start" fill="#282628" frame="#000000" cx="75.97222222222223" cz="83.05555555555556" r="1.25" angle="135" />
+  <Goody sound="3002" volume="12" yon="50" speed="2" shape="836" y="2" missiles="15" start="mShow" out="mTaken" fill="#423b41" frame="#000000" cx="20.97222222222222" cz="80.55555555555556" angle="315" />
+  <Sound y="100" isPlaced="true" isMusic="true" volume="20000" sound="3710" start="@start" cx="75.97222222222223" cz="83.05555555555556" angle="135" />
   <Timer wait="115" in="@start" out="@songs" />
-  <Sound y="100" loopCount="1000" isPlaced="true" isMusic="true" volume="30000" sound="3711" start="@songs" fill="#282628" frame="#000000" cx="75.97222222222223" cz="83.05555555555556" r="1.25" angle="135" />
-  <Teleporter shape="0" y="200" win="200" start="@winTeam" activeRange="2000" fill="#7b877a" frame="#000000" cx="75.97222222222223" cz="83.05555555555556" r="1.25" angle="45" />
-  <Incarnator fill="#7b877a" frame="#000000" cx="63.47222222222223" cz="43.05555555555556" r="1.25" angle="315" />
-  <Incarnator fill="#7b877a" frame="#000000" cx="83.47222222222223" cz="123.05555555555556" r="1.25" angle="135" />
-  <Incarnator fill="#7b877a" frame="#000000" cx="38.47222222222222" cz="78.05555555555556" r="1.25" angle="315" />
-  <Incarnator fill="#7b877a" frame="#000000" cx="118.47222222222223" cz="88.05555555555556" r="1.25" angle="135" />
-  <Incarnator fill="#7b877a" frame="#000000" cx="108.47222222222223" cz="58.05555555555556" r="1.25" angle="45" />
+  <Sound y="100" loopCount="1000" isPlaced="true" isMusic="true" volume="30000" sound="3711" start="@songs" cx="75.97222222222223" cz="83.05555555555556" angle="135" />
+  <Teleporter shape="0" y="200" win="200" start="@winTeam" activeRange="2000" fill="#7b877a" frame="#000000" cx="75.97222222222223" cz="83.05555555555556" angle="45" />
+  <Incarnator cx="63.47222222222223" cz="43.05555555555556" angle="315" />
+  <Incarnator cx="83.47222222222223" cz="123.05555555555556" angle="135" />
+  <Incarnator cx="38.47222222222222" cz="78.05555555555556" angle="315" />
+  <Incarnator cx="118.47222222222223" cz="88.05555555555556" angle="135" />
+  <Incarnator cx="108.47222222222223" cz="58.05555555555556" angle="45" />
   <script>
 object Incarnator
 end

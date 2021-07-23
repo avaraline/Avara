@@ -1,6 +1,6 @@
 <map>
   <SkyColor fill="#ff0000" frame="#660066" />
-  <GroundColor fill="#003333" frame="#000000" />
+  <GroundColor fill="#003333" />
   <set designer="Densak &lt;Densak@i.am&gt;" information="Zinbotz — This Avara battleground 
 is the site where Berserkir and Achilles fought 
 their first battle, and where Berserkir was 
@@ -14,8 +14,8 @@ defeated.  Let not the same fate fall upon you." bubble="75" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody speed="12" shape="bspGrenade" y="2" grenades="6" missiles="0" start="mShow" out="mTaken" fill="#33ff00" frame="#000000" cx="32.22222222222222" cz="43.75" r="1.875" angle="225" />
-  <Incarnator y="17" fill="#9900ff" frame="#000000" cx="2.2222222222222223" cz="43.923611111111114" r="2.0486111111111107" angle="270" />
+  <Goody speed="12" shape="bspGrenade" y="2" grenades="6" missiles="0" start="mShow" out="mTaken" fill="#33ff00" frame="#000000" cx="32.22222222222222" cz="43.75" angle="225" />
+  <Incarnator y="17" cx="2.2222222222222223" cz="43.923611111111114" angle="270" />
   <Ramp deltaY="3" fill="#dd0000" frame="#000000" x="23.47222222222222" z="43.75" w="7.5" d="10" h="0" angle="270" />
   <Ramp deltaY="3" fill="#dd0000" frame="#000000" x="57.22222222222223" z="61.25" w="10" d="25" h="0" angle="270" />
   <Wall fill="#770000" frame="#000000" x="62.22222222222223" z="43.75" w="20" d="10" h="0" />
@@ -45,17 +45,17 @@ defeated.  Let not the same fate fall upon you." bubble="75" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody speed="48" shape="bspGoody" y="3.5" grenades="8" missiles="6" boosters="1" yon="20" start="mShow" out="mTaken" fill="#003333" frame="#000000" cx="69.72222222222223" cz="71.25" r="1.875" angle="315" />
-  <Incarnator y="17" fill="#9900ff" frame="#000000" cx="67.39583333333334" cz="13.75" r="2.048611111111107" angle="0" />
-  <Incarnator y="17" fill="#9900ff" frame="#000000" cx="112.22222222222223" cz="46.423611111111114" r="2.0486111111111107" angle="90" />
-  <Incarnator y="17" fill="#9900ff" frame="#000000" cx="46.111111111111114" cz="98.75" r="2.0833333333333357" angle="180" />
+  <Goody speed="48" shape="bspGoody" y="3.5" grenades="8" missiles="6" boosters="1" yon="20" start="mShow" out="mTaken" fill="#003333" frame="#000000" cx="69.72222222222223" cz="71.25" angle="315" />
+  <Incarnator y="17" cx="67.39583333333334" cz="13.75" angle="0" />
+  <Incarnator y="17" cx="112.22222222222223" cz="46.423611111111114" angle="90" />
+  <Incarnator y="17" cx="46.111111111111114" cz="98.75" angle="180" />
   <set wallHeight="3" />
   <Wall fill="#770000" frame="#000000" x="27.222222222222225" z="75.625" w="5" d="5" h="0" y="3" />
   <Ramp deltaY="3" y="3" fill="#dd0000" frame="#000000" x="27.222222222222225" z="81.875" w="5" d="7.5" h="0" angle="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody speed="12" shape="bspMissile" y="8" grenades="0" missiles="3" start="mShow" out="mTaken" fill="#003399" frame="#000000" cx="27.222222222222225" cz="75.625" r="1.875" angle="225" />
+  <Goody speed="12" shape="bspMissile" y="8" grenades="0" missiles="3" start="mShow" out="mTaken" fill="#003399" frame="#000000" cx="27.222222222222225" cz="75.625" angle="225" />
   <Ramp deltaY="3" y="3" fill="#dd0000" frame="#000000" x="27.222222222222225" z="70" w="5" d="6.25" h="0" angle="180" />
   <Ramp deltaY="3" y="3" fill="#dd0000" frame="#000000" x="32.84722222222222" z="75.625" w="6.25" d="5" h="0" angle="270" />
   <Ramp deltaY="3" y="3" fill="#dd0000" frame="#000000" x="21.59722222222222" z="75.625" w="6.25" d="5" h="0" angle="90" />
@@ -68,16 +68,16 @@ defeated.  Let not the same fate fall upon you." bubble="75" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody speed="12" shape="bspMissile" y="8" grenades="0" missiles="3" start="mShow" out="mTaken" fill="#003399" frame="#000000" cx="87.22222222222223" cz="60.625" r="1.875" angle="45" />
+  <Goody speed="12" shape="bspMissile" y="8" grenades="0" missiles="3" start="mShow" out="mTaken" fill="#003399" frame="#000000" cx="87.22222222222223" cz="60.625" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody speed="12" shape="bspGrenade" y="5" grenades="6" missiles="0" start="mShow" out="mTaken" fill="#33ff00" frame="#000000" cx="79.72222222222223" cz="42.5" r="1.875" angle="225" />
-  <Incarnator y="17" fill="#9900ff" frame="#000000" cx="17.361111111111114" cz="98.75" r="2.083333333333334" angle="225" />
+  <Goody speed="12" shape="bspGrenade" y="5" grenades="6" missiles="0" start="mShow" out="mTaken" fill="#33ff00" frame="#000000" cx="79.72222222222223" cz="42.5" angle="225" />
+  <Incarnator y="17" cx="17.361111111111114" cz="98.75" angle="225" />
   <Ramp deltaY="3" fill="#dd0000" frame="#000000" x="74.72222222222223" z="83.75" w="5" d="10" h="0" angle="0" />
-  <Incarnator y="17" fill="#9900ff" frame="#000000" cx="74.89583333333334" cz="98.75" r="2.048611111111107" angle="180" />
-  <Incarnator y="17" fill="#9900ff" frame="#000000" cx="67.43055555555556" cz="58.75" r="2.0833333333333286" angle="180" />
-  <Teleporter spin="0" y="-10" activeRange="2000" deadRange="bubble" sound="0" shape="0" destGroup="@recenter" group="-1" fill="#00cc99" frame="#000000" cx="67.5" cz="53.333333333333336" r="1.875" angle="0" />
-  <Teleporter shape="0" spin="0" y="50" group="@recenter" destGroup="-1" fill="#00cc99" frame="#000000" cx="67.5" cz="53.333333333333336" r="1.875" angle="0" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#00cc99" frame="#000000" cx="67.5" cz="53.333333333333336" r="1.875" angle="0" />
+  <Incarnator y="17" cx="74.89583333333334" cz="98.75" angle="180" />
+  <Incarnator y="17" cx="67.43055555555556" cz="58.75" angle="180" />
+  <Teleporter spin="0" y="-10" activeRange="2000" deadRange="bubble" sound="0" shape="0" destGroup="@recenter" group="-1" fill="#00cc99" frame="#000000" cx="67.5" cz="53.333333333333336" angle="0" />
+  <Teleporter shape="0" spin="0" y="50" group="@recenter" destGroup="-1" fill="#00cc99" frame="#000000" cx="67.5" cz="53.333333333333336" angle="0" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#00cc99" frame="#000000" cx="67.5" cz="53.333333333333336" angle="0" />
 </map>

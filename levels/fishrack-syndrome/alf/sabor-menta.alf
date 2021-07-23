@@ -4,7 +4,7 @@
 Light hull only...hehehehe..." hull.0="1004" hull.1="hull[0]" hull.2="hull[0]" FMM="2.1" />
   <set missilePower="1 * FMM" grenadePower="2.5 * FMM" gravity="1 / FMM / 1.8" defaultTraction=".40 * FMM" defaultFriction=".15 * FMM" lvl1height="2.5 * FMM" lvl2height="5 * FMM" lvl3height="9 * FMM" lvl4height="14 * FMM" lvl5height="19 * FMM" highness="1200 / FMM" baseHeight="highness" defaultLives="5" />
   <SkyColor verticalRangeMax="7500" fill="#bbbbbb" frame="#000000" />
-  <GroundColor fill="#777777" frame="#777777" />
+  <GroundColor fill="#777777" />
   <set wallHeight="lvl1height" />
   <Wall fill="#ffffff" frame="#000000" x="48.75" z="45.625" w="10" d="10" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="58.75" z="45.625" w="10" d="10" h="0" />
@@ -59,47 +59,47 @@ Light hull only...hehehehe..." hull.0="1004" hull.1="hull[0]" hull.2="hull[0]" F
   <Wall fill="#ffffff" frame="#000000" x="88.75" z="85.625" w="10" d="10" h="0" />
   <set wallHeight="lvl5height" />
   <Wall fill="#ffffff" frame="#000000" x="88.75" z="75.625" w="10" d="10" h="0" />
-  <Incarnator y="10 * FMM" fill="#cccccc" frame="#000000" cx="45.625" cz="42.5" r="1.875" angle="315" />
-  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#cccccc" frame="#000000" cx="45.625" cz="42.5" r="1.875" angle="315" />
-  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#cccccc" frame="#000000" cx="45.625" cz="42.5" r="1.875" angle="315" />
-  <Incarnator y="10 * FMM" fill="#cccccc" frame="#000000" cx="111.875" cz="42.5" r="1.875" angle="45" />
-  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#cccccc" frame="#000000" cx="111.875" cz="42.5" r="1.875" angle="45" />
-  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#cccccc" frame="#000000" cx="111.875" cz="42.5" r="1.875" angle="45" />
-  <Incarnator y="10 * FMM" fill="#cccccc" frame="#000000" cx="111.875" cz="108.75" r="1.875" angle="135" />
-  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#cccccc" frame="#000000" cx="111.875" cz="108.75" r="1.875" angle="135" />
-  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#cccccc" frame="#000000" cx="111.875" cz="108.75" r="1.875" angle="135" />
-  <Incarnator y="10 * FMM" fill="#cccccc" frame="#000000" cx="45.625" cz="108.75" r="1.875" angle="225" />
-  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#cccccc" frame="#000000" cx="45.625" cz="108.75" r="1.875" angle="225" />
-  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#cccccc" frame="#000000" cx="45.625" cz="108.75" r="1.875" angle="225" />
-  <Teleporter y="40 * FMM" activeRange="5000" deadRange="highness * .6" destGroup="2" group="3" shape="false" out="@kill" fill="#aaaaaa" frame="#000000" cx="78.75" cz="75" r="1.875" angle="315" />
+  <Incarnator y="10 * FMM" cx="45.625" cz="42.5" angle="315" />
+  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#cccccc" frame="#000000" cx="45.625" cz="42.5" angle="315" />
+  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#cccccc" frame="#000000" cx="45.625" cz="42.5" angle="315" />
+  <Incarnator y="10 * FMM" cx="111.875" cz="42.5" angle="45" />
+  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#cccccc" frame="#000000" cx="111.875" cz="42.5" angle="45" />
+  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#cccccc" frame="#000000" cx="111.875" cz="42.5" angle="45" />
+  <Incarnator y="10 * FMM" cx="111.875" cz="108.75" angle="135" />
+  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#cccccc" frame="#000000" cx="111.875" cz="108.75" angle="135" />
+  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#cccccc" frame="#000000" cx="111.875" cz="108.75" angle="135" />
+  <Incarnator y="10 * FMM" cx="45.625" cz="108.75" angle="225" />
+  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#cccccc" frame="#000000" cx="45.625" cz="108.75" angle="225" />
+  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#cccccc" frame="#000000" cx="45.625" cz="108.75" angle="225" />
+  <Teleporter y="40 * FMM" activeRange="5000" deadRange="highness * .6" destGroup="2" group="3" shape="false" out="@kill" fill="#aaaaaa" frame="#000000" cx="78.75" cz="75" angle="315" />
   <unique vars="mHi mDie" />
-  <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" fill="#ffff66" frame="#cc3333" cx="61.875" cz="52.5" r="1.875" angle="45" />
+  <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" fill="#ffff66" frame="#cc3333" cx="61.875" cz="52.5" angle="45" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" fill="#ff66cc" frame="#6600cc" cx="55.625" cz="58.75" r="1.875" angle="225" />
+  <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" fill="#ff66cc" frame="#6600cc" cx="55.625" cz="58.75" angle="225" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" fill="#ffff66" frame="#cc3333" cx="81.875" cz="88.75" r="1.875" angle="135" />
+  <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" fill="#ffff66" frame="#cc3333" cx="81.875" cz="88.75" angle="135" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" fill="#ff66cc" frame="#6600cc" cx="75.625" cz="82.5" r="1.875" angle="315" />
+  <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" fill="#ff66cc" frame="#6600cc" cx="75.625" cz="82.5" angle="315" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody shape="1001" scale=".5" y="lvl5height + 2" start="mHi" out="mDie" missiles="3" grenades="6" boosters="3" power="5000" boostTime="85" shield="5000" speed="14" fill="#000000" frame="#996699" cx="88.75" cz="75.625" r="1.875" angle="135" />
+  <Goody shape="1001" scale=".5" y="lvl5height + 2" start="mHi" out="mDie" missiles="3" grenades="6" boosters="3" power="5000" boostTime="85" shield="5000" speed="14" fill="#000000" frame="#996699" cx="88.75" cz="75.625" angle="135" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="250" out="mHi" />
-  <Incarnator y="10 * FMM" fill="#cccccc" frame="#000000" cx="75.625" cz="58.75" r="1.875" angle="225" />
-  <Incarnator y="10 * FMM" fill="#cccccc" frame="#000000" cx="81.875" cz="92.5" r="1.875" angle="45" />
+  <Incarnator y="10 * FMM" cx="75.625" cz="58.75" angle="225" />
+  <Incarnator y="10 * FMM" cx="81.875" cz="92.5" angle="45" />
   <set baseHeight="highness + lvl1height" />
-  <Hologram y="2" shape="1110" fill="#000000" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" r="8.611111111111114" angle="270" />
-  <Hologram y="2" shape="1111" fill="#ffff33" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" r="8.611111111111114" angle="270" />
-  <Hologram y="2" shape="1112" fill="#ff0000" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" r="8.611111111111114" angle="270" />
-  <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" fill="#cc0066" frame="#cc0066" cx="37.22222222222222" cz="6.25" r="1.25" angle="225" />
-  <Teleporter win="2500" start="@win" activeRange="2000" shape="false" fill="#cc0066" frame="#cc0066" cx="37.22222222222222" cz="6.25" r="1.25" angle="225" />
+  <Hologram y="2" shape="1110" fill="#000000" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="270" />
+  <Hologram y="2" shape="1111" fill="#ffff33" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="270" />
+  <Hologram y="2" shape="1112" fill="#ff0000" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="270" />
+  <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" fill="#cc0066" frame="#cc0066" cx="37.22222222222222" cz="6.25" angle="225" />
+  <Teleporter win="2500" start="@win" activeRange="2000" shape="false" fill="#cc0066" frame="#cc0066" cx="37.22222222222222" cz="6.25" angle="225" />
   <TeamColor mask="T1" fill="#770000" frame="#770000" cx="56.04166666666667" cz="7.847222222222223" r="1.9444444444444464" angle="315" />
   <TeamColor mask="T2" fill="#004400" frame="#004400" cx="56.04166666666667" cz="10.972222222222223" r="1.9444444444444464" angle="315" />
   <TeamColor mask="T3" fill="#cc9900" frame="#cc9900" cx="56.04166666666667" cz="14.097222222222223" r="1.9444444444444464" angle="315" />

@@ -1,6 +1,6 @@
 <map>
   <SkyColor fill="#66cccc" frame="#009999" />
-  <GroundColor fill="#336666" frame="#009999" />
+  <GroundColor fill="#336666" />
   <set designer="SomeGuy &lt;someguy@avara.net&gt;" information="HECTORs in this area have been installed with a 
 prototype device that allows them to see through 
 small, basic structures. The enemy HECTORs have also 
@@ -485,28 +485,28 @@ wallHeight = 0.6" />
   <Wall fill="#006666" frame="#000000" x="86.5625" z="76.45833333333334" w="0.625" d="7.5" h="0" y="6.6" />
   <set wallHeight="0.6" />
   <Wall fill="#006666" frame="#000000" x="94.6875" z="76.45833333333334" w="0.625" d="7.5" h="0" y="6.6" />
-  <Incarnator y="15" fill="#006666" frame="#000000" cx="21.875" cz="116.45833333333334" r="3.125" angle="225" />
-  <Incarnator y="15" fill="#006666" frame="#000000" cx="83.75" cz="38.333333333333336" r="3.75" angle="45" />
-  <Incarnator y="15" fill="#006666" frame="#000000" cx="22.5" cz="33.958333333333336" r="3.75" angle="315" />
-  <Incarnator y="15" fill="#006666" frame="#000000" cx="97.5" cz="111.45833333333334" r="3.125" angle="135" />
-  <Incarnator y="15" fill="#000000" frame="#000000" cx="59.340277777777786" cz="17.604166666666668" r="3.7152777777777786" angle="0" />
-  <Incarnator y="15" fill="#000000" frame="#000000" cx="68.09027777777777" cz="133.75" r="3.9583333333333286" angle="180" />
+  <Incarnator y="15" cx="21.875" cz="116.45833333333334" angle="225" />
+  <Incarnator y="15" cx="83.75" cz="38.333333333333336" angle="45" />
+  <Incarnator y="15" cx="22.5" cz="33.958333333333336" angle="315" />
+  <Incarnator y="15" cx="97.5" cz="111.45833333333334" angle="135" />
+  <Incarnator y="15" cx="59.340277777777786" cz="17.604166666666668" angle="0" />
+  <Incarnator y="15" cx="68.09027777777777" cz="133.75" angle="180" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspMissile" y="2" yon="100" speed="10" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="52.5" cz="51.18055555555556" r="1.875" angle="315" />
+  <Goody shape="bspMissile" y="2" yon="100" speed="10" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="52.5" cz="51.18055555555556" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspMissile" y="2" yon="100" speed="10" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="71.875" cz="102.0138888888889" r="1.875" angle="315" />
+  <Goody shape="bspMissile" y="2" yon="100" speed="10" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="71.875" cz="102.0138888888889" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspGrenade" y="2" yon="300" speed="10" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="32.29166666666667" cz="92.77777777777779" r="1.875" angle="45" />
+  <Goody shape="bspGrenade" y="2" yon="300" speed="10" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="32.29166666666667" cz="92.77777777777779" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspGrenade" y="2" yon="300" speed="10" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="80" cz="64.86111111111111" r="1.875" angle="45" />
+  <Goody shape="bspGrenade" y="2" yon="300" speed="10" grenades="6" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="80" cz="64.86111111111111" angle="45" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="83.125" z="97.08333333333334" w="7.5" d="7.5" h="0" y="6.6" />
   <set wallYon="0.5" />
@@ -534,13 +534,13 @@ wallHeight = 0.6" />
   <set wallYon="0.5" />
   <Wall fill="#006666" frame="#000000" x="90.625" z="55.208333333333336" w="7.5" d="7.5" h="0" y="6.6" />
   <set wallYon="defaultYon" />
-  <Teleporter group="-1" y="-30" activeRange="85" deadRange="80" destGroup="@side" shape="0" fill="#777777" frame="#000000" cx="56.66666666666667" cz="78.26388888888889" r="1.3888888888888928" angle="270" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="1000" fill="#777777" frame="#000000" cx="56.66666666666667" cz="78.26388888888889" r="1.3888888888888928" angle="270" />
-  <Sound y="2" sound="snBubbles" isAmbient="true" loopCount="-1" volume="12" fill="#777777" frame="#000000" cx="56.66666666666667" cz="78.26388888888889" r="1.3888888888888928" angle="270" />
-  <Teleporter y="15" shape="0" group="@side" fill="#006666" frame="#000000" cx="4.479166666666667" cz="95.20833333333334" r="3.854166666666667" angle="270" />
-  <Teleporter y="15" shape="0" group="@side" fill="#006666" frame="#000000" cx="107.04861111111111" cz="67.70833333333334" r="3.8541666666666714" angle="90" />
+  <Teleporter group="-1" y="-30" activeRange="85" deadRange="80" destGroup="@side" shape="0" fill="#777777" frame="#000000" cx="56.66666666666667" cz="78.26388888888889" angle="270" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="1000" fill="#777777" frame="#000000" cx="56.66666666666667" cz="78.26388888888889" angle="270" />
+  <Sound y="2" sound="snBubbles" isAmbient="true" loopCount="-1" volume="12" cx="56.66666666666667" cz="78.26388888888889" angle="270" />
+  <Teleporter y="15" shape="0" group="@side" fill="#006666" frame="#000000" cx="4.479166666666667" cz="95.20833333333334" angle="270" />
+  <Teleporter y="15" shape="0" group="@side" fill="#006666" frame="#000000" cx="107.04861111111111" cz="67.70833333333334" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="600" />
-  <Goody shape="bspAvaraA" y="2" missiles="3" grenades="6" speed="5" start="mShow" out="mTaken" fill="#66cccc" frame="#009999" cx="56.388888888888886" cz="78.33333333333334" r="3.8888888888888893" angle="270" />
+  <Goody shape="bspAvaraA" y="2" missiles="3" grenades="6" speed="5" start="mShow" out="mTaken" fill="#66cccc" frame="#009999" cx="56.388888888888886" cz="78.33333333333334" angle="270" />
 </map>

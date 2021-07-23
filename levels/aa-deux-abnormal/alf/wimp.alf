@@ -3,16 +3,16 @@
 The object is to capture the ten &quot;&quot;A&quot;&quot;s on your half of the track.  I recommend staying on your block, as it’s tough to jump and get them, and it’s hard to get your blocks started once you’ve screwed them up.  You can’t interfere with your opponent.  Sorry.
   Concentrate on yourself." grenadePower="0" missilePower="0" ambient.i=".5" light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <SkyColor fill="#770c6a" frame="#eebee9" />
-  <GroundColor fill="#ffffff" frame="#000000" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken1" yon="90" fill="#3399ff" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" r="1.25" angle="225" />
+  <GroundColor fill="#ffffff" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken1" yon="90" fill="#3399ff" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" />
   <Wall fill="#55004b" frame="#000000" x="19.930555555555557" z="137.70833333333334" w="1.25" d="176.25" h="0.25" />
   <Wall fill="#55004b" frame="#000000" x="88.68055555555556" z="137.70833333333334" w="1.25" d="176.25" h="0.25" />
-  <Field head="90" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="63.36805555555556" z="52.083333333333336" w="16.875" d="5" h="0" />
-  <Field head="90" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="79.93055555555556" z="52.083333333333336" w="16.25" d="5" h="0" />
-  <Field head="90" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="28.680555555555557" z="52.083333333333336" w="16.25" d="5" h="0" />
-  <Field head="90" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="45.24305555555556" z="52.083333333333336" w="16.875" d="5" h="0" />
-  <FreeSolid accel="1" mass="100" shotPower="100" fill="#882d7d" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="44.93055555555556" z="65.83333333333334" w="16.25" d="27.5" h="2.5" />
-  <FreeSolid accel="1" mass="100" shotPower="100" fill="#882d7d" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="28.993055555555557" z="65.83333333333334" w="15.625" d="27.5" h="2.5" />
+  <Field head="90" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="63.36805555555556" z="52.083333333333336" w="16.875" d="5" h="0" />
+  <Field head="90" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="79.93055555555556" z="52.083333333333336" w="16.25" d="5" h="0" />
+  <Field head="90" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="28.680555555555557" z="52.083333333333336" w="16.25" d="5" h="0" />
+  <Field head="90" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="45.24305555555556" z="52.083333333333336" w="16.875" d="5" h="0" />
+  <FreeSolid accel="1" mass="100" shotPower="100" fill="#882d7d" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="44.93055555555556" z="65.83333333333334" w="16.25" d="27.5" h="2.5" />
+  <FreeSolid accel="1" mass="100" shotPower="100" fill="#882d7d" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="28.993055555555557" z="65.83333333333334" w="15.625" d="27.5" h="2.5" />
   <Wall fill="#55004b" frame="#000000" x="54.30555555555556" z="62.70833333333334" w="1.25" d="23.75" h="0.25" />
   <Wall fill="#55004b" frame="#000000" x="54.30555555555556" z="87.70833333333334" w="1.25" d="23.75" h="0.25" />
   <Wall fill="#dd83d3" frame="#000000" x="54.30555555555556" z="75.20833333333334" w="1.25" d="1.25" h="7.5" />
@@ -43,35 +43,35 @@ The object is to capture the ten &quot;&quot;A&quot;&quot;s on your half of the 
   <Wall fill="#aa3d9d" frame="#000000" x="54.30555555555556" z="400.20833333333337" w="67.5" d="1.25" h="7.5" />
   <Wall fill="#55004b" frame="#000000" x="19.930555555555557" z="313.33333333333337" w="1.25" d="175" h="0.25" />
   <Wall fill="#55004b" frame="#000000" x="88.68055555555556" z="313.33333333333337" w="1.25" d="175" h="0.25" />
-  <Field head="270" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="63.36805555555556" z="398.33333333333337" w="16.875" d="5" h="0" />
-  <Field head="270" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="79.93055555555556" z="398.33333333333337" w="16.25" d="5" h="0" />
-  <Field head="270" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="28.680555555555557" z="398.33333333333337" w="16.25" d="5" h="0" />
-  <Field head="270" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="45.24305555555556" z="398.33333333333337" w="16.875" d="5" h="0" />
-  <FreeSolid accel="1" mass="100" shotPower="100" fill="#882d7d" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="63.68055555555556" z="65.83333333333334" w="16.25" d="27.5" h="2.5" />
-  <FreeSolid accel="1" mass="100" shotPower="100" fill="#882d7d" frame="#000000" r="1.25" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="79.61805555555556" z="65.83333333333334" w="15.625" d="27.5" h="2.5" />
-  <Incarnator y="3" fill="#ffff00" frame="#aa0000" cx="71.90972222222223" cz="71.84027777777779" r="0.9375" angle="90" />
+  <Field head="270" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="63.36805555555556" z="398.33333333333337" w="16.875" d="5" h="0" />
+  <Field head="270" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="79.93055555555556" z="398.33333333333337" w="16.25" d="5" h="0" />
+  <Field head="270" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="28.680555555555557" z="398.33333333333337" w="16.25" d="5" h="0" />
+  <Field head="270" deltaX="2 * cos head" deltaZ="2 * sin head" deltaY="0" fill="#ffff99" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="45.24305555555556" z="398.33333333333337" w="16.875" d="5" h="0" />
+  <FreeSolid accel="1" mass="100" shotPower="100" fill="#882d7d" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="63.68055555555556" z="65.83333333333334" w="16.25" d="27.5" h="2.5" />
+  <FreeSolid accel="1" mass="100" shotPower="100" fill="#882d7d" frame="#000000" cx="70.55555555555556" cz="185.20833333333334" angle="225" x="79.61805555555556" z="65.83333333333334" w="15.625" d="27.5" h="2.5" />
+  <Incarnator y="3" cx="71.90972222222223" cz="71.84027777777779" angle="90" />
   <Wall fill="#aa3d9d" frame="#000000" x="54.30555555555556" z="50.208333333333336" w="67.5" d="1.25" h="7.5" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken3" yon="90" fill="#3399ff" frame="#000000" cx="79.93055555555556" cz="221.45833333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken2" yon="90" fill="#3399ff" frame="#000000" cx="64.30555555555556" cz="108.33333333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken4" yon="90" fill="#3399ff" frame="#000000" cx="61.80555555555556" cz="221.45833333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken5" yon="90" fill="#3399ff" frame="#000000" cx="77.43055555555556" cz="300.20833333333337" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken6" yon="90" fill="#3399ff" frame="#000000" cx="76.18055555555556" cz="353.33333333333337" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken7" yon="90" fill="#3399ff" frame="#000000" cx="61.18055555555556" cz="341.45833333333337" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken8" yon="90" fill="#3399ff" frame="#000000" cx="71.18055555555556" cz="260.20833333333337" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken9" yon="90" fill="#3399ff" frame="#000000" cx="61.18055555555556" cz="158.95833333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken0" yon="90" fill="#3399ff" frame="#000000" cx="79.30555555555556" cz="121.45833333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken1" yon="90" fill="#ff0000" frame="#000000" cx="34.30555555555556" cz="183.95833333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken3" yon="90" fill="#ff0000" frame="#000000" cx="43.68055555555556" cz="220.20833333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken2" yon="90" fill="#ff0000" frame="#000000" cx="28.055555555555557" cz="107.08333333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken4" yon="90" fill="#ff0000" frame="#000000" cx="26.180555555555557" cz="220.20833333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken5" yon="90" fill="#ff0000" frame="#000000" cx="41.80555555555556" cz="298.95833333333337" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken6" yon="90" fill="#ff0000" frame="#000000" cx="40.55555555555556" cz="352.08333333333337" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken7" yon="90" fill="#ff0000" frame="#000000" cx="25.555555555555557" cz="340.20833333333337" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken8" yon="90" fill="#ff0000" frame="#000000" cx="35.55555555555556" cz="258.95833333333337" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken9" yon="90" fill="#ff0000" frame="#000000" cx="25.555555555555557" cz="157.70833333333334" r="1.25" angle="225" />
-  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken0" yon="90" fill="#ff0000" frame="#000000" cx="43.68055555555556" cz="120.20833333333334" r="1.25" angle="225" />
-  <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" fill="#ff0000" frame="#000000" cx="54.93055555555556" cz="48.923611111111114" r="3.0208333333333357" angle="225" />
-  <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" fill="#ff0000" frame="#000000" cx="54.30555555555556" cz="397.6736111111111" r="3.020833333333343" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken3" yon="90" fill="#3399ff" frame="#000000" cx="79.93055555555556" cz="221.45833333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken2" yon="90" fill="#3399ff" frame="#000000" cx="64.30555555555556" cz="108.33333333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken4" yon="90" fill="#3399ff" frame="#000000" cx="61.80555555555556" cz="221.45833333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken5" yon="90" fill="#3399ff" frame="#000000" cx="77.43055555555556" cz="300.20833333333337" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken6" yon="90" fill="#3399ff" frame="#000000" cx="76.18055555555556" cz="353.33333333333337" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken7" yon="90" fill="#3399ff" frame="#000000" cx="61.18055555555556" cz="341.45833333333337" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken8" yon="90" fill="#3399ff" frame="#000000" cx="71.18055555555556" cz="260.20833333333337" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken9" yon="90" fill="#3399ff" frame="#000000" cx="61.18055555555556" cz="158.95833333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@BlueTaken0" yon="90" fill="#3399ff" frame="#000000" cx="79.30555555555556" cz="121.45833333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken1" yon="90" fill="#ff0000" frame="#000000" cx="34.30555555555556" cz="183.95833333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken3" yon="90" fill="#ff0000" frame="#000000" cx="43.68055555555556" cz="220.20833333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken2" yon="90" fill="#ff0000" frame="#000000" cx="28.055555555555557" cz="107.08333333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken4" yon="90" fill="#ff0000" frame="#000000" cx="26.180555555555557" cz="220.20833333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken5" yon="90" fill="#ff0000" frame="#000000" cx="41.80555555555556" cz="298.95833333333337" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken6" yon="90" fill="#ff0000" frame="#000000" cx="40.55555555555556" cz="352.08333333333337" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken7" yon="90" fill="#ff0000" frame="#000000" cx="25.555555555555557" cz="340.20833333333337" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken8" yon="90" fill="#ff0000" frame="#000000" cx="35.55555555555556" cz="258.95833333333337" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken9" yon="90" fill="#ff0000" frame="#000000" cx="25.555555555555557" cz="157.70833333333334" angle="225" />
+  <Goody hitScore="1000" shape="bspAvaraA" y="4.5" speed="2" start="@start" out="@RedTaken0" yon="90" fill="#ff0000" frame="#000000" cx="43.68055555555556" cz="120.20833333333334" angle="225" />
+  <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="54.93055555555556" cz="48.923611111111114" angle="225" />
+  <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="54.30555555555556" cz="397.6736111111111" angle="225" />
   <Counter in.0="@BlueTaken0" in.1="@BlueTaken1" in.2="@BlueTaken2" in.3="@BlueTaken3" in.4="@BlueTaken4" in.5="@BlueTaken5" in.6="@BlueTaken6" in.7="@BlueTaken7" in.8="@BlueTaken8" in.9="@BlueTaken9" n="5" out="@BlueHalfway" restart="false" />
   <Text in="@BlueHalfway" showEveryone="true" text="Blue Team is halfway!" cx="108.05555555555556" cz="74.58333333333334" r="1.25" />
   <Counter in.0="@BlueTaken0" in.1="@BlueTaken1" in.2="@BlueTaken2" in.3="@BlueTaken3" in.4="@BlueTaken4" in.5="@BlueTaken5" in.6="@BlueTaken6" in.7="@BlueTaken7" in.8="@BlueTaken8" in.9="@BlueTaken9" n="8" out="@BlueTwoMore" />
@@ -80,7 +80,7 @@ The object is to capture the ten &quot;&quot;A&quot;&quot;s on your half of the 
   <Text in="@BlueOneMore" showEveryone="true" text="Blue Team has one more!" cx="108.05555555555556" cz="74.58333333333334" r="1.25" />
   <Counter in.0="@BlueTaken0" in.1="@BlueTaken1" in.2="@BlueTaken2" in.3="@BlueTaken3" in.4="@BlueTaken4" in.5="@BlueTaken5" in.6="@BlueTaken6" in.7="@BlueTaken7" in.8="@BlueTaken8" in.9="@BlueTaken9" n="10" out="@BlueGotEm" />
   <Text in="@BlueGotEm" showEveryone="true" text="Blue Team wins!" cx="108.05555555555556" cz="74.58333333333334" r="1.25" />
-  <Teleporter sound="0" status="false" start="@BlueGotEm" y="20" yon="0.01" shape="0" activeRange="32000" win="0" fill="#3399ff" frame="#000000" cx="108.05555555555556" cz="74.58333333333334" r="1.25" angle="225" />
+  <Teleporter sound="0" status="false" start="@BlueGotEm" y="20" yon="0.01" shape="0" activeRange="32000" win="0" fill="#3399ff" frame="#000000" cx="108.05555555555556" cz="74.58333333333334" angle="225" />
   <Counter in.0="@RedTaken0" in.1="@RedTaken1" in.2="@RedTaken2" in.3="@RedTaken3" in.4="@RedTaken4" in.5="@RedTaken5" in.6="@RedTaken6" in.7="@RedTaken7" in.8="@RedTaken8" in.9="@RedTaken9" n="5" out="@RedHalfway" restart="false" />
   <Text in="@RedHalfway" showEveryone="true" text="Red Team is halfway!" cx="93.68055555555556" cz="75.20833333333334" r="1.25" />
   <Counter in.0="@RedTaken0" in.1="@RedTaken1" in.2="@RedTaken2" in.3="@RedTaken3" in.4="@RedTaken4" in.5="@RedTaken5" in.6="@RedTaken6" in.7="@RedTaken7" in.8="@RedTaken8" in.9="@RedTaken9" n="8" out="@RedTwoMore" />
@@ -89,12 +89,12 @@ The object is to capture the ten &quot;&quot;A&quot;&quot;s on your half of the 
   <Text in="@RedOneMore" showEveryone="true" text="Red Team has one more!" cx="93.68055555555556" cz="75.20833333333334" r="1.25" />
   <Counter in.0="@RedTaken0" in.1="@RedTaken1" in.2="@RedTaken2" in.3="@RedTaken3" in.4="@RedTaken4" in.5="@RedTaken5" in.6="@RedTaken6" in.7="@RedTaken7" in.8="@RedTaken8" in.9="@RedTaken9" n="10" out="@RedGotEm" />
   <Text in="@RedGotEm" showEveryone="true" text="Red Team wins!" cx="93.68055555555556" cz="75.20833333333334" r="1.25" />
-  <Teleporter sound="0" status="false" start="@RedGotEm" y="20" yon="0.01" shape="0" activeRange="32000" win="0" fill="#3399ff" frame="#000000" cx="93.68055555555556" cz="75.20833333333334" r="1.25" angle="225" />
-  <Incarnator y="3" fill="#ffff00" frame="#aa0000" cx="37.1875" cz="71.84027777777779" r="0.9375" angle="270" />
-  <Incarnator y="3" fill="#ffff00" frame="#aa0000" cx="80.03472222222223" cz="71.84027777777779" r="0.9375" angle="90" />
-  <Incarnator y="3" fill="#ffff00" frame="#aa0000" cx="45.3125" cz="71.84027777777779" r="0.9375" angle="270" />
-  <Incarnator y="3" fill="#ffff00" frame="#aa0000" cx="62.53472222222223" cz="71.84027777777779" r="0.9375" angle="90" />
-  <Incarnator y="3" fill="#ffff00" frame="#aa0000" cx="27.8125" cz="71.84027777777779" r="0.9375" angle="270" />
+  <Teleporter sound="0" status="false" start="@RedGotEm" y="20" yon="0.01" shape="0" activeRange="32000" win="0" fill="#3399ff" frame="#000000" cx="93.68055555555556" cz="75.20833333333334" angle="225" />
+  <Incarnator y="3" cx="37.1875" cz="71.84027777777779" angle="270" />
+  <Incarnator y="3" cx="80.03472222222223" cz="71.84027777777779" angle="90" />
+  <Incarnator y="3" cx="45.3125" cz="71.84027777777779" angle="270" />
+  <Incarnator y="3" cx="62.53472222222223" cz="71.84027777777779" angle="90" />
+  <Incarnator y="3" cx="27.8125" cz="71.84027777777779" angle="270" />
   <set wallYon="0.01" />
   <Wall fill="#cc0000" frame="#000000" x="54.30555555555556" z="137.70833333333334" w="1.25" d="176.25" h="12.5" />
   <Wall fill="#cc0000" frame="#000000" x="54.30555555555556" z="313.33333333333337" w="1.25" d="175" h="12.5" />

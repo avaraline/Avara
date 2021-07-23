@@ -38,11 +38,11 @@ hull[2]=mortarHeavy
 
 grenadePower=4.5</script>
   <SkyColor n="1024" verticalRangeMax="1500" fill="#000033" frame="#3399cc" />
-  <GroundColor fill="#006600" frame="#006600" />
-  <Teleporter win="5000" shape="false" start="@rWin" mask="T3" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" r="1.25" angle="315" />
-  <Teleporter win="0" shape="false" start="@rWin" mask="T6" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" r="1.25" angle="315" />
-  <Teleporter win="0" shape="false" start="@bWin" mask="T3" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" r="1.25" angle="315" />
-  <Teleporter win="5000" shape="false" start="@bWin" mask="T6" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" r="1.25" angle="315" />
+  <GroundColor fill="#006600" />
+  <Teleporter win="5000" shape="false" start="@rWin" mask="T3" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" angle="315" />
+  <Teleporter win="0" shape="false" start="@rWin" mask="T6" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" angle="315" />
+  <Teleporter win="0" shape="false" start="@bWin" mask="T3" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" angle="315" />
+  <Teleporter win="5000" shape="false" start="@bWin" mask="T6" activeRange="2000" fill="#996633" frame="#996633" cx="26.666666666666668" cz="2.0833333333333335" angle="315" />
   <TeamColor mask="T1" fill="#000000" frame="#00dd00" cx="195.7638888888889" cz="3.75" r="1.9444444444444446" angle="315" />
   <TeamColor mask="T2" fill="#000000" frame="#ffff00" cx="195.7638888888889" cz="6.875" r="1.9444444444444446" angle="315" />
   <TeamColor mask="T4" fill="#000000" frame="#999933" cx="195.7638888888889" cz="13.125" r="1.9444444444444446" angle="315" />
@@ -153,43 +153,43 @@ grenadePower=4.5</script>
   <Wall fill="#666666" frame="#000000" x="175.3125" z="21.5625" w="9.375" d="0.625" h="0" />
   <Wall fill="#666666" frame="#000000" x="176.875" z="30.9375" w="6.25" d="0.625" h="0" />
   <Wall fill="#666666" frame="#000000" x="175.3125" z="26.25" w="10.625" d="10" h="0" y="5" />
-  <Teleporter destGroup="3" fill="#ee0000" frame="#000011" cx="177.5" cz="24.375" r="2.5" angle="45" />
-  <Teleporter group="3" y="20" shape="false" fill="#ee0000" frame="#000011" cx="177.5" cz="24.375" r="2.5" angle="45" />
-  <Teleporter group="3" shape="false" y="30" fill="#ee0000" frame="#000011" cx="151.875" cz="81.875" r="2.5" angle="135" />
-  <Hologram shape="bspDeadTree" y="16" scale="2.2" fill="#996666" frame="#000011" cx="166.25" cz="91.875" r="2.5" angle="135" />
-  <Hologram shape="bspDeadTree" y="16" scale="2.7" fill="#996666" frame="#000011" cx="168.125" cz="121.875" r="1.875" angle="225" />
-  <Hologram shape="bspDeadTree" y="16" scale="3" fill="#996666" frame="#000011" cx="200.625" cz="119.375" r="1.875" angle="315" />
-  <Hologram shape="bspDeadTree" y="16" scale="2.5" fill="#996666" frame="#000011" cx="181.875" cz="169.375" r="1.875" angle="45" />
-  <Hologram shape="bspDeadTree" y="16" scale="3.3" fill="#996666" frame="#000011" cx="198.125" cz="81.875" r="1.875" angle="45" />
-  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="155" cz="56.25" r="1.875" angle="225" />
-  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="173.75" cz="49.375" r="1.875" angle="135" />
-  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="159.375" cz="30" r="1.875" angle="45" />
-  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="195" cz="10" r="1.875" angle="315" />
-  <Solid shape="bspTree" fill="#996666" frame="#000011" cx="183.125" cz="28.75" r="1.875" angle="315" />
+  <Teleporter destGroup="3" fill="#ee0000" frame="#000011" cx="177.5" cz="24.375" angle="45" />
+  <Teleporter group="3" y="20" shape="false" fill="#ee0000" frame="#000011" cx="177.5" cz="24.375" angle="45" />
+  <Teleporter group="3" shape="false" y="30" fill="#ee0000" frame="#000011" cx="151.875" cz="81.875" angle="135" />
+  <Hologram shape="bspDeadTree" y="16" scale="2.2" fill="#996666" frame="#000011" cx="166.25" cz="91.875" angle="135" />
+  <Hologram shape="bspDeadTree" y="16" scale="2.7" fill="#996666" frame="#000011" cx="168.125" cz="121.875" angle="225" />
+  <Hologram shape="bspDeadTree" y="16" scale="3" fill="#996666" frame="#000011" cx="200.625" cz="119.375" angle="315" />
+  <Hologram shape="bspDeadTree" y="16" scale="2.5" fill="#996666" frame="#000011" cx="181.875" cz="169.375" angle="45" />
+  <Hologram shape="bspDeadTree" y="16" scale="3.3" fill="#996666" frame="#000011" cx="198.125" cz="81.875" angle="45" />
+  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="155" cz="56.25" angle="225" />
+  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="173.75" cz="49.375" angle="135" />
+  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="159.375" cz="30" angle="45" />
+  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="195" cz="10" angle="315" />
+  <Solid shape="bspTree" fill="#996666" frame="#000011" cx="183.125" cz="28.75" angle="315" />
   <set baseHeight="0" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="114.375" cz="19.375" r="1.875" angle="45" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="115.625" cz="20" r="1.875" angle="135" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120" cz="13.75" r="1.875" angle="315" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="125" cz="16.25" r="1.875" angle="225" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="119.375" cz="16.25" r="1.875" angle="315" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="117.5" cz="16.25" r="1.875" angle="225" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="121.25" cz="20" r="1.875" angle="45" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120" cz="16.875" r="1.875" angle="135" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="114.375" cz="19.375" angle="45" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="115.625" cz="20" angle="135" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120" cz="13.75" angle="315" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="125" cz="16.25" angle="225" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="119.375" cz="16.25" angle="315" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="117.5" cz="16.25" angle="225" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="121.25" cz="20" angle="45" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120" cz="16.875" angle="135" />
   <script>
 object Hologram
 shape=10238
 scale=2
 endd</script>
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="116.25" cz="20.625" r="1.875" angle="135" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120.625" cz="14.375" r="1.875" angle="315" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="125.625" cz="16.875" r="1.875" angle="225" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120" cz="16.875" r="1.875" angle="315" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="118.125" cz="16.875" r="1.875" angle="225" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="121.875" cz="20.625" r="1.875" angle="45" />
-  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120.625" cz="17.5" r="1.875" angle="135" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="116.25" cz="20.625" angle="135" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120.625" cz="14.375" angle="315" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="125.625" cz="16.875" angle="225" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120" cz="16.875" angle="315" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="118.125" cz="16.875" angle="225" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="121.875" cz="20.625" angle="45" />
+  <Hologram shape="10238" scale="2" fill="#336600" frame="#996666" cx="120.625" cz="17.5" angle="135" />
   <set wallHeight="0" />
   <Wall fill="#336633" frame="#000000" x="120.625" z="17.1875" w="13.75" d="16.875" h="0" />
-  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="125.625" cz="44.375" r="1.875" angle="45" />
+  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="125.625" cz="44.375" angle="45" />
   <set baseHeight="5.5" wallHeight="2.5" />
   <Wall fill="#00aa00" frame="#000000" x="70.625" z="12.8125" w="8.75" d="25.625" h="0" />
   <Wall fill="#00aa00" frame="#000000" x="69.375" z="40.9375" w="6.25" d="30.625" h="0" />
@@ -229,9 +229,9 @@ endd</script>
   <And in="@start" out="mnact" />
   <Distributor in="mnact" out.0="maact" out.1="mbact" out.2="mcact" restart="true" />
   <Timer in.0="mdie" in.1="mnact" wait="40" out="mnact" />
-  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="53.333333333333336" cz="108.75" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="53.333333333333336" cz="108.75" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="53.333333333333336" cz="108.75" r="1.875" angle="45" />
+  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="53.333333333333336" cz="108.75" angle="45" />
+  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="53.333333333333336" cz="108.75" angle="45" />
+  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="53.333333333333336" cz="108.75" angle="45" />
   <set baseHeight="17" wallHeight="0" />
   <Wall fill="#007700" frame="#000000" x="20.9375" z="105" w="41.875" d="210" h="0" />
   <set wallHeight="800" baseHeight="0" wallYon=".001" />
@@ -239,59 +239,59 @@ endd</script>
   <Wall fill="#00aa00" frame="#000000" x="105" z="0" w="210" d="0" h="0" />
   <Wall fill="#00aa00" frame="#000000" x="0" z="105" w="0" d="210" h="0" />
   <Wall fill="#00aa00" frame="#000000" x="210" z="105" w="0" d="210" h="0" />
-  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="125.625" cz="93.125" r="1.875" angle="45" />
-  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="125" cz="122.5" r="1.875" angle="135" />
-  <Solid shape="10237" scale="2.5" y="5.5" fill="#996666" frame="#000011" cx="81.875" cz="16.25" r="1.875" angle="135" />
-  <Solid shape="10237" scale="2.5" y="6" fill="#996666" frame="#000011" cx="79.375" cz="65" r="1.875" angle="225" />
-  <Solid shape="10237" scale="2.5" y="6.5" fill="#996666" frame="#000011" cx="80" cz="95.625" r="1.875" angle="315" />
-  <Solid shape="10237" scale="2.5" y="7" fill="#996666" frame="#000011" cx="76.875" cz="146.875" r="1.875" angle="45" />
+  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="125.625" cz="93.125" angle="45" />
+  <Solid shape="10237" scale="2.5" fill="#996666" frame="#000011" cx="125" cz="122.5" angle="135" />
+  <Solid shape="10237" scale="2.5" y="5.5" fill="#996666" frame="#000011" cx="81.875" cz="16.25" angle="135" />
+  <Solid shape="10237" scale="2.5" y="6" fill="#996666" frame="#000011" cx="79.375" cz="65" angle="225" />
+  <Solid shape="10237" scale="2.5" y="6.5" fill="#996666" frame="#000011" cx="80" cz="95.625" angle="315" />
+  <Solid shape="10237" scale="2.5" y="7" fill="#996666" frame="#000011" cx="76.875" cz="146.875" angle="45" />
   <unique vars="maact mbact mcact mdie mnact" />
   <And in="@start" out="mnact" />
   <Distributor in="mnact" out.0="maact" out.1="mbact" out.2="mcact" restart="true" />
   <Timer in.0="mdie" in.1="mnact" wait="40" out="mnact" />
-  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="125.20833333333334" cz="101.875" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="125.20833333333334" cz="101.875" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="125.20833333333334" cz="101.875" r="1.875" angle="45" />
+  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="125.20833333333334" cz="101.875" angle="45" />
+  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="125.20833333333334" cz="101.875" angle="45" />
+  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="125.20833333333334" cz="101.875" angle="45" />
   <unique vars="maact mbact mcact mdie mnact" />
   <set baseHeight="3" />
   <And in="@start" out="mnact" />
   <Distributor in="mnact" out.0="maact" out.1="mbact" out.2="mcact" restart="true" />
   <Timer in.0="mdie" in.1="mnact" wait="40" out="mnact" />
-  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="159.58333333333334" cz="45.625" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="159.58333333333334" cz="45.625" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="159.58333333333334" cz="45.625" r="1.875" angle="45" />
+  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="159.58333333333334" cz="45.625" angle="45" />
+  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="159.58333333333334" cz="45.625" angle="45" />
+  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="159.58333333333334" cz="45.625" angle="45" />
   <unique vars="maact mbact mcact mdie mnact" />
   <set baseHeight="7" />
   <And in="@start" out="mnact" />
   <Distributor in="mnact" out.0="maact" out.1="mbact" out.2="mcact" restart="true" />
   <Timer in.0="mdie" in.1="mnact" wait="40" out="mnact" />
-  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="98.33333333333334" cz="73.125" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="98.33333333333334" cz="73.125" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="98.33333333333334" cz="73.125" r="1.875" angle="45" />
+  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="98.33333333333334" cz="73.125" angle="45" />
+  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="98.33333333333334" cz="73.125" angle="45" />
+  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="98.33333333333334" cz="73.125" angle="45" />
   <unique vars="maact mbact mcact mdie mnact" />
   <set baseHeight="19" />
   <And in="@start" out="mnact" />
   <Distributor in="mnact" out.0="maact" out.1="mbact" out.2="mcact" restart="true" />
   <Timer in.0="mdie" in.1="mnact" wait="40" out="mnact" />
-  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="153.33333333333334" cz="100" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="153.33333333333334" cz="100" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="153.33333333333334" cz="100" r="1.875" angle="45" />
+  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="153.33333333333334" cz="100" angle="45" />
+  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="153.33333333333334" cz="100" angle="45" />
+  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="153.33333333333334" cz="100" angle="45" />
   <unique vars="maact mbact mcact mdie mnact" />
   <set baseHeight="17" />
   <And in="@start" out="mnact" />
   <Distributor in="mnact" out.0="maact" out.1="mbact" out.2="mcact" restart="true" />
   <Timer in.0="mdie" in.1="mnact" wait="40" out="mnact" />
-  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="30.833333333333336" cz="19.375" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="30.833333333333336" cz="19.375" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="30.833333333333336" cz="19.375" r="1.875" angle="45" />
+  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="30.833333333333336" cz="19.375" angle="45" />
+  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="30.833333333333336" cz="19.375" angle="45" />
+  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="30.833333333333336" cz="19.375" angle="45" />
   <unique vars="maact mbact mcact mdie mnact" />
   <set baseHeight="0" />
   <And in="@start" out="mnact" />
   <Distributor in="mnact" out.0="maact" out.1="mbact" out.2="mcact" restart="true" />
   <Timer in.0="mdie" in.1="mnact" wait="40" out="mnact" />
-  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="120.20833333333334" cz="16.875" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="120.20833333333334" cz="16.875" r="1.875" angle="45" />
-  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="120.20833333333334" cz="16.875" r="1.875" angle="45" />
+  <Goody yon="50" y="2" start="maact" stop="mbact" out="mdie" shape="bspGrenade" grenades="13" missiles="0" boosters="0" power="0" shield="0" speed="7" fill="#777777" frame="#00ffff" cx="120.20833333333334" cz="16.875" angle="45" />
+  <Goody yon="50" y="2" start="mbact" stop="mcact" out="mdie" shape="7875" boostTime="20" power="50" speed="7" fill="#777777" frame="#00ffff" cx="120.20833333333334" cz="16.875" angle="45" />
+  <Goody yon="50" y="2" start="mcact" stop="maact" out="mdie" shape="bspMissile" missiles="8" speed="7" fill="#777777" frame="#00ffff" cx="120.20833333333334" cz="16.875" angle="45" />
   <set wallHeight="0" baseHeight="50" wallYon="0" />
   <Wall fill="#dddddd" frame="#000000" x="115.3125" z="14.0625" w="13.125" d="21.875" h="0" />
   <Wall fill="#dddddd" frame="#000000" x="135.3125" z="46.875" w="23.125" d="10" h="0" />
@@ -319,12 +319,12 @@ endd</script>
   <Wall fill="#666666" frame="#000000" x="54.0625" z="109.0625" w="8.125" d="8.125" h="0" y="2" />
   <set wallHeight="0" baseHeight="19" wallYon="0" />
   <Wall fill="#996633" frame="#000000" x="207.5" z="158.125" w="5" d="103.75" h="0" />
-  <Incarnator y="50" mask="T3" fill="#ee0000" frame="#000011" cx="26.875" cz="116.875" r="1.875" angle="225" />
-  <Incarnator y="50" mask="T3" fill="#ee0000" frame="#000011" cx="29.375" cz="119.375" r="1.875" angle="225" />
-  <Incarnator y="50" mask="T3" fill="#ee0000" frame="#000011" cx="24.375" cz="114.375" r="1.875" angle="225" />
-  <Incarnator y="50" mask="T6" fill="#0033ff" frame="#000011" cx="185" cz="115" r="1.875" angle="135" />
-  <Incarnator y="50" mask="T6" fill="#0033ff" frame="#000011" cx="182.5" cz="117.5" r="1.875" angle="135" />
-  <Incarnator y="50" mask="T6" fill="#0033ff" frame="#000011" cx="180" cz="120" r="1.875" angle="135" />
+  <Incarnator y="50" mask="T3" cx="26.875" cz="116.875" angle="225" />
+  <Incarnator y="50" mask="T3" cx="29.375" cz="119.375" angle="225" />
+  <Incarnator y="50" mask="T3" cx="24.375" cz="114.375" angle="225" />
+  <Incarnator y="50" mask="T6" cx="185" cz="115" angle="135" />
+  <Incarnator y="50" mask="T6" cx="182.5" cz="117.5" angle="135" />
+  <Incarnator y="50" mask="T6" cx="180" cz="120" angle="135" />
   <set baseHeight="19" wallHeight="1.2" />
   <Wall fill="#666666" frame="#000000" x="154.0625" z="95.3125" w="8.125" d="0.625" h="0" />
   <Wall fill="#666666" frame="#000000" x="150.3125" z="99.0625" w="0.625" d="6.875" h="0" />
@@ -340,9 +340,9 @@ endd</script>
   <Wall fill="#666666" frame="#000000" x="53.75" z="112.8125" w="7.5" d="0.625" h="0" />
   <Wall fill="#666666" frame="#000000" x="50.3125" z="110.625" w="0.625" d="3.75" h="0" />
   <set baseHeight="17.5" />
-  <Solid shape="bspCubeFrame" y=".5" shield="15" killMsg="@bWin" isTarget="true" canGlow="true" fill="#ee0000" frame="#ee0000" cx="55.625" cz="110.625" r="1.875" angle="135" />
+  <Solid shape="bspCubeFrame" y=".5" shield="15" killMsg="@bWin" isTarget="true" canGlow="true" fill="#ee0000" frame="#ee0000" cx="55.625" cz="110.625" angle="135" />
   <set baseHeight="19" />
-  <Solid shape="bspCubeFrame" y=".5" shield="15" killMsg="@rWin" isTarget="true" canGlow="true" fill="#0033ff" frame="#0033ff" cx="152.5" cz="100.625" r="1.875" angle="225" />
+  <Solid shape="bspCubeFrame" y=".5" shield="15" killMsg="@rWin" isTarget="true" canGlow="true" fill="#0033ff" frame="#0033ff" cx="152.5" cz="100.625" angle="225" />
   <Text text="Red Wins!" in="@rWin" showEveryone="true" cx="152.5" cz="100.625" r="1.875" />
   <Text text="Blue Wins!" in="@bWin" showEveryone="true" cx="152.5" cz="100.625" r="1.875" />
 </map>

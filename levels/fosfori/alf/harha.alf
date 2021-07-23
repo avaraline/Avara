@@ -1,5 +1,5 @@
 <map>
-  <GroundColor fill="#280000" frame="#000000" />
+  <GroundColor fill="#280000" />
   <SkyColor n="1000" verticalRangeMax="2000" fill="#b79191" frame="#280000" />
   <Ramp y="0" deltaY="6" fill="#b89292" frame="#000000" x="108.40277777777779" z="94.65277777777779" w="20" d="10" h="0" angle="270" />
   <Ramp y="0" deltaY="6" fill="#b89292" frame="#000000" x="173.40277777777777" z="99.65277777777779" w="10" d="20" h="0" angle="0" />
@@ -125,48 +125,48 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody y="2.3" shape="bspAvaraA" sound="snYes" speed="5" missiles="3" grenades="6" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="1.875" angle="45" />
+  <Goody y="2.3" shape="bspAvaraA" sound="snYes" speed="5" missiles="3" grenades="6" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody y="2" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffdbdb" frame="#ffffff" cx="105.90277777777779" cz="129.65277777777777" r="1.875" angle="45" />
+  <Goody y="2" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffdbdb" frame="#ffffff" cx="105.90277777777779" cz="129.65277777777777" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody y="2" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffdbdb" frame="#ffffff" cx="171.52777777777777" cz="129.65277777777777" r="1.875" angle="45" />
+  <Goody y="2" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffdbdb" frame="#ffffff" cx="171.52777777777777" cz="129.65277777777777" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody y="2" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="97.15277777777779" r="1.875" angle="45" />
+  <Goody y="2" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="97.15277777777779" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody y="2" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="162.77777777777777" r="1.875" angle="45" />
+  <Goody y="2" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="162.77777777777777" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody y="14.25" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="104.02777777777779" cz="84.65277777777779" r="1.875" angle="45" />
+  <Goody y="14.25" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="104.02777777777779" cz="84.65277777777779" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody y="14.25" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="173.40277777777777" cz="174.65277777777777" r="1.875" angle="45" />
+  <Goody y="14.25" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="mShow" out="mTaken" fill="#ffdbdb" frame="#000000" cx="173.40277777777777" cz="174.65277777777777" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody y="14.25" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffdbdb" frame="#ffffff" cx="183.4027777777778" cz="94.65277777777779" r="1.875" angle="45" />
+  <Goody y="14.25" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffdbdb" frame="#ffffff" cx="183.4027777777778" cz="94.65277777777779" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody y="14.25" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffdbdb" frame="#ffffff" cx="93.40277777777779" cz="164.65277777777777" r="1.875" angle="45" />
-  <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="17 * 5" destGroup="@recenter" shape="0" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="2.5" angle="225" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="2.5" angle="225" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="2.5" angle="225" />
-  <Incarnator y="15" fill="#ffdbdb" frame="#000000" cx="100.90277777777779" cz="82.15277777777779" r="1.875" angle="315" />
-  <Incarnator y="15" fill="#ffdbdb" frame="#000000" cx="175.90277777777777" cz="177.15277777777777" r="1.875" angle="135" />
-  <Incarnator y="15" fill="#ffdbdb" frame="#000000" cx="90.90277777777779" cz="167.15277777777777" r="1.875" angle="225" />
-  <Incarnator y="15" fill="#ffdbdb" frame="#000000" cx="185.9027777777778" cz="92.15277777777779" r="1.875" angle="45" />
-  <Incarnator y="8.75" fill="#ffdbdb" frame="#000000" cx="187.1527777777778" cz="129.82638888888889" r="2.048611111111107" angle="90" />
-  <Incarnator y="8.75" fill="#ffdbdb" frame="#000000" cx="89.65277777777779" cz="129.82638888888889" r="2.048611111111107" angle="270" />
+  <Goody y="14.25" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="mShow" out="mTaken" fill="#ffdbdb" frame="#ffffff" cx="93.40277777777779" cz="164.65277777777777" angle="45" />
+  <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="17 * 5" destGroup="@recenter" shape="0" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" angle="225" />
+  <Teleporter y="30" shape="0" group="@recenter" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" angle="225" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" angle="225" />
+  <Incarnator y="15" cx="100.90277777777779" cz="82.15277777777779" angle="315" />
+  <Incarnator y="15" cx="175.90277777777777" cz="177.15277777777777" angle="135" />
+  <Incarnator y="15" cx="90.90277777777779" cz="167.15277777777777" angle="225" />
+  <Incarnator y="15" cx="185.9027777777778" cz="92.15277777777779" angle="45" />
+  <Incarnator y="8.75" cx="187.1527777777778" cz="129.82638888888889" angle="90" />
+  <Incarnator y="8.75" cx="89.65277777777779" cz="129.82638888888889" angle="270" />
   <And in="@start" out="@startVoices" />
   <And in="@startVoices" out.0="@bennettTimer" out.1="@davidTimer" out.2="@jordanTimer" out.3="@rettTimer" out.4="@ryanTimer" out.5="@stevenTimer" />
   <Timer in="@bennettON" out="@bennettTimer" wait="70" />
@@ -181,12 +181,12 @@
   <Timer in="@rettTimer" out="@rettON" wait="50" />
   <Timer in="@ryanTimer" out="@ryanON" wait="80" />
   <Timer in="@stevenTimer" out="@stevenON" wait="40" />
-  <Sound y="10" start="@bennettON" sound="snBennett" isPlaced="false" isAmbient="true" volume.0=".6" volume.1=".6" restart="true" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="1.875" angle="315" />
-  <Sound y="10" start="@davidON" sound="snDavid" isPlaced="false" isAmbient="true" volume.0=".5" volume.1=".5" restart="true" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="1.875" angle="315" />
-  <Sound y="10" start="@jordanON" sound="snJordan" isPlaced="false" isAmbient="true" volume.0=".7" volume.1=".7" restart="true" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="1.875" angle="315" />
-  <Sound y="10" start="@rettON" sound="snRett" isPlaced="false" isAmbient="true" volume.0=".6" volume.1=".6" restart="true" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="1.875" angle="315" />
-  <Sound y="10" start="@ryanON" sound="snRyan" isPlaced="false" isAmbient="true" volume.0=".6" volume.1=".6" restart="true" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="1.875" angle="315" />
-  <Sound y="10" start="@stevenON" sound="snSteven" isPlaced="false" isAmbient="true" volume.0=".6" volume.1=".6" restart="true" fill="#ffdbdb" frame="#000000" cx="138.40277777777777" cz="129.65277777777777" r="1.875" angle="315" />
+  <Sound y="10" start="@bennettON" sound="snBennett" isPlaced="false" isAmbient="true" volume.0=".6" volume.1=".6" restart="true" cx="138.40277777777777" cz="129.65277777777777" angle="315" />
+  <Sound y="10" start="@davidON" sound="snDavid" isPlaced="false" isAmbient="true" volume.0=".5" volume.1=".5" restart="true" cx="138.40277777777777" cz="129.65277777777777" angle="315" />
+  <Sound y="10" start="@jordanON" sound="snJordan" isPlaced="false" isAmbient="true" volume.0=".7" volume.1=".7" restart="true" cx="138.40277777777777" cz="129.65277777777777" angle="315" />
+  <Sound y="10" start="@rettON" sound="snRett" isPlaced="false" isAmbient="true" volume.0=".6" volume.1=".6" restart="true" cx="138.40277777777777" cz="129.65277777777777" angle="315" />
+  <Sound y="10" start="@ryanON" sound="snRyan" isPlaced="false" isAmbient="true" volume.0=".6" volume.1=".6" restart="true" cx="138.40277777777777" cz="129.65277777777777" angle="315" />
+  <Sound y="10" start="@stevenON" sound="snSteven" isPlaced="false" isAmbient="true" volume.0=".6" volume.1=".6" restart="true" cx="138.40277777777777" cz="129.65277777777777" angle="315" />
   <set wallHeight="20" />
   <Wall fill="#370e0e" frame="#000000" x="138.4027777777778" z="75.59027777777779" w="103.75" d="4.375" h="0" />
   <set wallHeight="20" />
@@ -205,12 +205,12 @@
   <Wall fill="#532c2c" frame="#000000" x="87.46527777777779" z="164.65277777777777" w="1.875" d="10" h="0" />
   <set ambient.i=".3" light.0.i=".06" light.0.a="90" light.0.b="90" />
   <set baseheight="0" />
-  <Hologram y="0" shape="bspVines" scale="2.5" fill="#9b7575" frame="#d4afaf" cx="108.40277777777779" cz="84.65277777777779" r="2.5" angle="270" />
+  <Hologram y="0" shape="bspVines" scale="2.5" fill="#9b7575" frame="#d4afaf" cx="108.40277777777779" cz="84.65277777777779" angle="270" />
   <set baseheight="0" />
-  <Hologram y="0" shape="bspVines" scale="2.5" fill="#9b7575" frame="#d4afaf" cx="183.4027777777778" cz="99.65277777777779" r="2.5" angle="0" />
+  <Hologram y="0" shape="bspVines" scale="2.5" fill="#9b7575" frame="#d4afaf" cx="183.4027777777778" cz="99.65277777777779" angle="0" />
   <set baseheight="0" />
-  <Hologram y="0" shape="bspVines" scale="2.5" fill="#9b7575" frame="#d4afaf" cx="168.40277777777777" cz="174.65277777777777" r="2.5" angle="90" />
+  <Hologram y="0" shape="bspVines" scale="2.5" fill="#9b7575" frame="#d4afaf" cx="168.40277777777777" cz="174.65277777777777" angle="90" />
   <set baseheight="0" />
-  <Hologram y="0" shape="bspVines" scale="2.5" fill="#9b7575" frame="#d4afaf" cx="93.40277777777779" cz="159.65277777777777" r="2.5" angle="180" />
+  <Hologram y="0" shape="bspVines" scale="2.5" fill="#9b7575" frame="#d4afaf" cx="93.40277777777779" cz="159.65277777777777" angle="180" />
   <set wallHeight="1" wallYon=".001" information="$rHarha" />
 </map>

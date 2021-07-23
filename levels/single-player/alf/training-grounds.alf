@@ -1,6 +1,6 @@
 <map>
   <SkyColor n="7" fill="#ff6699" frame="#006699" />
-  <GroundColor fill="#004400" frame="#663300" />
+  <GroundColor fill="#004400" />
   <set designer="Juri Munkki" information="This training mission introduces you to the HECTOR.
 Collect at least 5 ‘A’ markers along the course and enter the exit teleporter to complete the mission. You will be offered more missions after you complete this one." ambient.i="0.4" light.0.i="0.4" light.0.a="20" light.0.b="240" light.1.i="0.4" light.1.a="40" light.1.b="320" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <set wallHeight="3" baseHeight="0" />
@@ -40,9 +40,9 @@ Collect at least 5 ‘A’ markers along the course and enter the exit teleporte
   <set wallHeight="towerHeight" />
   <Wall fill="#aaaaaa" frame="#000000" x="77.70833333333334" z="174.16666666666669" w="2.5" d="2.6388888888888857" h="0" />
   <set baseHeight="0" wallHeight="towerHeight -2" />
-  <Field y="-baseHeight" deltaY="0.05" fill="#aaaaaa" frame="#000000" x="95.20833333333334" z="216.59722222222223" w="3.75" d="3.75" h="0" r="3.7152777777777715" cx="109.47916666666667" cz="150.83333333333334" angle="359" />
+  <Field y="-baseHeight" deltaY="0.05" fill="#aaaaaa" frame="#000000" x="95.20833333333334" z="216.59722222222223" w="3.75" d="3.75" h="0" cx="109.47916666666667" cz="150.83333333333334" angle="359" />
   <Text text="Force field detected." cx="95.20833333333334" cz="216.59722222222223" r="7.5" />
-  <Solid shape="bspAvaraA" scale="12" y="10" yon="2000" fill="#aaaaaa" frame="#000000" cx="42.083333333333336" cz="264.09722222222223" r="10" angle="0" />
+  <Solid shape="bspAvaraA" scale="12" y="10" yon="2000" fill="#aaaaaa" frame="#000000" cx="42.083333333333336" cz="264.09722222222223" angle="0" />
   <set baseHeight="0" wallHeight="5.12" />
   <Wall fill="#aaaaaa" frame="#000000" x="34.583333333333336" z="264.09722222222223" w="2.5" d="2.5" h="0" />
   <Wall fill="#aaaaaa" frame="#000000" x="49.583333333333336" z="264.09722222222223" w="2.5" d="2.5" h="0" />
@@ -62,36 +62,36 @@ Collect at least 5 ‘A’ markers along the course and enter the exit teleporte
   <set baseHeight="0" />
   <unique vars="kWinGroup enoughGoodies showMissionComplete" />
   <Counter in="@pathGoody" out="enoughGoodies" n="5" />
-  <Teleporter group="kWinGroup" start="enoughGoodies" stop="showMissionComplete" win="100" out="showMissionComplete" fill="#0000ee" frame="#000000" cx="42.083333333333336" cz="272.22222222222223" r="5" angle="315" />
+  <Teleporter group="kWinGroup" start="enoughGoodies" stop="showMissionComplete" win="100" out="showMissionComplete" fill="#0000ee" frame="#000000" cx="42.083333333333336" cz="272.22222222222223" angle="315" />
   <set baseHeight="0" />
-  <Hologram shape="bspAvara" isAmbient="true" y="1.5" fill="#cc3366" frame="#000000" cx="85.83333333333334" cz="69.09722222222223" r="5" angle="180" />
-  <Incarnator y="2" fill="#cc0033" frame="#000000" cx="75.3125" cz="47.91666666666667" r="1.2847222222222214" angle="0" />
-  <Incarnator y="5" stop="@start" fill="#cc0033" frame="#000000" cx="75.3125" cz="47.91666666666667" r="1.2847222222222214" angle="0" />
-  <Incarnator y="8" stop="@start" fill="#cc0033" frame="#000000" cx="75.3125" cz="47.91666666666667" r="1.2847222222222214" angle="0" />
-  <Goody hitScore="100" shape="bspAvaraA" y="4.5" out="@pathGoody" fill="#cc3366" frame="#000000" cx="74.58333333333334" cz="82.22222222222223" r="1.875" angle="180" />
+  <Hologram shape="bspAvara" isAmbient="true" y="1.5" fill="#cc3366" frame="#000000" cx="85.83333333333334" cz="69.09722222222223" angle="180" />
+  <Incarnator y="2" cx="75.3125" cz="47.91666666666667" angle="0" />
+  <Incarnator y="5" stop="@start" cx="75.3125" cz="47.91666666666667" angle="0" />
+  <Incarnator y="8" stop="@start" cx="75.3125" cz="47.91666666666667" angle="0" />
+  <Goody hitScore="100" shape="bspAvaraA" y="4.5" out="@pathGoody" fill="#cc3366" frame="#000000" cx="74.58333333333334" cz="82.22222222222223" angle="180" />
   <Text in="@start" showEveryone="true" text="Use your scout to get an outside
 view of your actions." cx="74.58333333333334" cz="82.22222222222223" r="1.875" />
   <unique vars="mTopTaken" />
-  <Goody hitScore="100" shape="bspAvaraA" y="4" out="mTopTaken" fill="#cc3366" frame="#000000" cx="67.70833333333334" cz="95.34722222222223" r="1.875" angle="180" />
+  <Goody hitScore="100" shape="bspAvaraA" y="4" out="mTopTaken" fill="#cc3366" frame="#000000" cx="67.70833333333334" cz="95.34722222222223" angle="180" />
   <And in="mTopTaken" out="@pathGoody" />
-  <Goody start="mTopTaken" hitScore="200" shape="bspAvaraA" y="1" out="@pathGoody" fill="#cc3366" frame="#000000" cx="67.70833333333334" cz="95.34722222222223" r="1.875" angle="180" />
+  <Goody start="mTopTaken" hitScore="200" shape="bspAvaraA" y="1" out="@pathGoody" fill="#cc3366" frame="#000000" cx="67.70833333333334" cz="95.34722222222223" angle="180" />
   <unique vars="mTopTaken" />
-  <Goody hitScore="100" shape="bspAvaraA" y="4" out="mTopTaken" fill="#cc3366" frame="#000000" cx="82.70833333333334" cz="95.34722222222223" r="1.875" angle="180" />
+  <Goody hitScore="100" shape="bspAvaraA" y="4" out="mTopTaken" fill="#cc3366" frame="#000000" cx="82.70833333333334" cz="95.34722222222223" angle="180" />
   <And in="mTopTaken" out="@pathGoody" />
-  <Goody start="mTopTaken" hitScore="200" shape="bspAvaraA" y="1" out="@pathGoody" fill="#cc3366" frame="#000000" cx="82.70833333333334" cz="95.34722222222223" r="1.875" angle="180" />
-  <Goody hitScore="100" shape="bspAvaraA" y="towerHeight + 2" out="@pathGoody" fill="#cc3366" frame="#000000" cx="102.70833333333334" cz="149.09722222222223" r="1.875" angle="180" />
+  <Goody start="mTopTaken" hitScore="200" shape="bspAvaraA" y="1" out="@pathGoody" fill="#cc3366" frame="#000000" cx="82.70833333333334" cz="95.34722222222223" angle="180" />
+  <Goody hitScore="100" shape="bspAvaraA" y="towerHeight + 2" out="@pathGoody" fill="#cc3366" frame="#000000" cx="102.70833333333334" cz="149.09722222222223" angle="180" />
   <unique vars="birdyCall" />
   <Timer in.0="@start" in.1="birdyCall" out="birdyCall" wait="150" />
-  <Sound start="birdyCall" y="50" sound="snBirds" isAmbient="true" volume="20" fill="#cc3366" frame="#000000" cx="102.70833333333334" cz="149.09722222222223" r="1.875" angle="180" />
-  <Goody hitScore="100" shape="bspAvaraA" y="towerHeight + 2" out="@pathGoody" fill="#cc3366" frame="#000000" cx="47.708333333333336" cz="149.09722222222223" r="1.875" angle="180" />
+  <Sound start="birdyCall" y="50" sound="snBirds" isAmbient="true" volume="20" cx="102.70833333333334" cz="149.09722222222223" angle="180" />
+  <Goody hitScore="100" shape="bspAvaraA" y="towerHeight + 2" out="@pathGoody" fill="#cc3366" frame="#000000" cx="47.708333333333336" cz="149.09722222222223" angle="180" />
   <unique vars="teleGroup" />
-  <Teleporter y="0" group="teleGroup" fill="#cc0066" frame="#aa0000" cx="72.70833333333334" cz="179.09722222222223" r="1.875" angle="45" />
-  <Teleporter y="0.5 + towerHeight" group="teleGroup" fill="#cc0066" frame="#aa0000" cx="72.70833333333334" cz="179.09722222222223" r="1.875" angle="45" />
-  <Goody hitScore="100" shape="bspAvaraA" y="towerHeight + 2" out="@pathGoody" fill="#cc3366" frame="#000000" cx="77.70833333333334" cz="174.09722222222223" r="1.875" angle="180" />
-  <Goody hitScore="100" shape="bspAvaraA" y="towerHeight + 2" out="@pathGoody" fill="#cc3366" frame="#000000" cx="95.20833333333334" cz="216.59722222222223" r="1.875" angle="180" />
-  <Hologram y="-baseHeight" fill="#cc3366" frame="#000000" cx="95.20833333333334" cz="216.59722222222223" r="1.875" angle="180" />
-  <Goody shape="bspMissionComplete" scale="4" speed="4.5" start="showMissionComplete" status="false" fill="#cc0000" frame="#000000" cx="42.083333333333336" cz="272.22222222222223" r="3.125" angle="315" />
-  <Incarnator y="2" stop="@start" fill="#cc0033" frame="#000000" cx="75.3125" cz="36.04166666666667" r="1.2847222222222214" angle="0" />
-  <Incarnator y="5" stop="@start" fill="#cc0033" frame="#000000" cx="75.3125" cz="36.04166666666667" r="1.2847222222222214" angle="0" />
-  <Incarnator y="8" stop="@start" fill="#cc0033" frame="#000000" cx="75.3125" cz="36.04166666666667" r="1.2847222222222214" angle="0" />
+  <Teleporter y="0" group="teleGroup" fill="#cc0066" frame="#aa0000" cx="72.70833333333334" cz="179.09722222222223" angle="45" />
+  <Teleporter y="0.5 + towerHeight" group="teleGroup" fill="#cc0066" frame="#aa0000" cx="72.70833333333334" cz="179.09722222222223" angle="45" />
+  <Goody hitScore="100" shape="bspAvaraA" y="towerHeight + 2" out="@pathGoody" fill="#cc3366" frame="#000000" cx="77.70833333333334" cz="174.09722222222223" angle="180" />
+  <Goody hitScore="100" shape="bspAvaraA" y="towerHeight + 2" out="@pathGoody" fill="#cc3366" frame="#000000" cx="95.20833333333334" cz="216.59722222222223" angle="180" />
+  <Hologram y="-baseHeight" fill="#cc3366" frame="#000000" cx="95.20833333333334" cz="216.59722222222223" angle="180" />
+  <Goody shape="bspMissionComplete" scale="4" speed="4.5" start="showMissionComplete" status="false" fill="#cc0000" frame="#000000" cx="42.083333333333336" cz="272.22222222222223" angle="315" />
+  <Incarnator y="2" stop="@start" cx="75.3125" cz="36.04166666666667" angle="0" />
+  <Incarnator y="5" stop="@start" cx="75.3125" cz="36.04166666666667" angle="0" />
+  <Incarnator y="8" stop="@start" cx="75.3125" cz="36.04166666666667" angle="0" />
 </map>

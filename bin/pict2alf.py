@@ -10,7 +10,7 @@ import re
 import struct
 import sys
 
-from alf_condense import DEAD_ATTRS
+from alf_condense import VESTIGIAL_ATTRS
 from avarascript import Element, ScriptParseError, object_context, parse_script
 from dumb_round import dumb_round
 
@@ -36,9 +36,9 @@ def postprocess(element: Element) -> Element:
             element.attrs["angle"] = dumb_round(angle)
             del element.attrs["extent"]
     # Strip out any irrelevant attributes that may be present.
-    if element.tag in DEAD_ATTRS.keys():
-        dead = DEAD_ATTRS[element.tag]
-        element.attrs = {k: v for k, v in element.attrs.items() if k not in dead}
+    if element.tag in VESTIGIAL_ATTRS.keys():
+        element.attrs = {k: v for k, v in element.attrs.items()
+                         if k not in VESTIGIAL_ATTRS[element.tag]}
     return element
 
 

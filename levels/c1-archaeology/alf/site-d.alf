@@ -1,56 +1,56 @@
 <map>
   <set designer="Carlos Castillo-Garsow    cc96@cornell.edu" />
-  <GroundColor fill="#008800" frame="#000000" />
+  <GroundColor fill="#008800" />
   <set designer="Lord Anon III" information="an isolated area that is only of interest
 because it apears to be untouched by the war. there 
 is a dome of unknown origin in the center of the area." />
   <Dome fill="#777777" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" r="5" angle="0" quarters="4" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="10.694444444444445" cz="30.069444444444443" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="13.194444444444445" cz="25.069444444444446" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="16.944444444444446" cz="21.319444444444446" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="20.694444444444446" cz="16.319444444444446" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="26.944444444444446" cz="13.194444444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="35.69444444444444" cz="11.319444444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="44.44444444444444" cz="10.694444444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="12.569444444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="61.31944444444445" cz="15.694444444444446" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="67.56944444444444" cz="23.194444444444446" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="71.31944444444444" cz="30.694444444444443" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="72.56944444444444" cz="40.06944444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="8.194444444444445" cz="36.94444444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="8.194444444444445" cz="45.06944444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="11.944444444444445" cz="55.06944444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="15.694444444444446" cz="65.06944444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="28.194444444444446" cz="73.81944444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="37.56944444444444" cz="73.81944444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="46.94444444444444" cz="74.44444444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="71.31944444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="59.44444444444445" cz="68.19444444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="65.69444444444444" cz="65.06944444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="70.69444444444444" cz="60.06944444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="73.19444444444444" cz="53.81944444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="21.944444444444446" cz="70.69444444444444" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="13.819444444444446" cz="60.06944444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="8.819444444444445" cz="50.69444444444445" r="2.5" angle="225" />
-  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="73.19444444444444" cz="46.94444444444444" r="2.5" angle="225" />
-  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="50.69444444444445" cz="31.319444444444443" r="2.5" angle="225" />
-  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="58.81944444444445" cz="43.81944444444444" r="2.5" angle="225" />
-  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="31.319444444444443" cz="49.44444444444445" r="2.5" angle="225" />
-  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="31.944444444444443" cz="66.31944444444444" r="2.5" angle="225" />
-  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="20.069444444444446" cz="36.31944444444444" r="2.5" angle="225" />
-  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="53.19444444444445" cz="59.44444444444445" r="2.5" angle="225" />
-  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="32.56944444444444" cz="22.569444444444446" r="2.5" angle="225" />
-  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="32.56944444444444" cz="33.81944444444444" r="2.5" angle="225" />
-  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="48.19444444444445" cz="23.819444444444446" r="2.5" angle="225" />
-  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="43.19444444444444" cz="63.19444444444444" r="2.5" angle="225" />
-  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="21.944444444444446" cz="53.19444444444445" r="2.5" angle="225" />
-  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="61.31944444444445" cz="36.94444444444444" r="2.5" angle="225" />
-  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="23.194444444444446" cz="24.444444444444446" r="2.5" angle="225" />
-  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="65.06944444444444" cz="53.81944444444445" r="2.5" angle="225" />
-  <Incarnator fill="#dddddd" frame="#000000" cx="5.694444444444445" cz="79.44444444444444" r="2.5" angle="225" />
-  <Incarnator fill="#dddddd" frame="#000000" cx="4.444444444444445" cz="10.069444444444445" r="2.5" angle="315" />
-  <Incarnator fill="#dddddd" frame="#000000" cx="70.69444444444444" cz="7.569444444444445" r="2.5" angle="45" />
-  <Incarnator fill="#dddddd" frame="#000000" cx="69.44444444444444" cz="80.69444444444444" r="2.5" angle="135" />
-  <Goody start="@m" stop="@g" shape="bspMissile" missiles="1" y="7" fill="#ffff00" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" r="2.5" angle="225" />
-  <Goody start="@g" stop="@m" shape="bspGrenade" grenades="1" y="7" fill="#ffff00" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" r="2.5" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="10.694444444444445" cz="30.069444444444443" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="13.194444444444445" cz="25.069444444444446" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="16.944444444444446" cz="21.319444444444446" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="20.694444444444446" cz="16.319444444444446" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="26.944444444444446" cz="13.194444444444445" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="35.69444444444444" cz="11.319444444444445" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="44.44444444444444" cz="10.694444444444445" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="12.569444444444445" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="61.31944444444445" cz="15.694444444444446" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="67.56944444444444" cz="23.194444444444446" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="71.31944444444444" cz="30.694444444444443" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="72.56944444444444" cz="40.06944444444444" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="8.194444444444445" cz="36.94444444444444" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="8.194444444444445" cz="45.06944444444444" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="11.944444444444445" cz="55.06944444444445" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="15.694444444444446" cz="65.06944444444444" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="28.194444444444446" cz="73.81944444444444" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="37.56944444444444" cz="73.81944444444444" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="46.94444444444444" cz="74.44444444444444" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="53.19444444444445" cz="71.31944444444444" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="59.44444444444445" cz="68.19444444444444" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="65.69444444444444" cz="65.06944444444444" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="70.69444444444444" cz="60.06944444444445" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="73.19444444444444" cz="53.81944444444445" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="21.944444444444446" cz="70.69444444444444" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="13.819444444444446" cz="60.06944444444445" angle="225" />
+  <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="8.819444444444445" cz="50.69444444444445" angle="225" />
+  <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff6600" frame="#000000" cx="73.19444444444444" cz="46.94444444444444" angle="225" />
+  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="50.69444444444445" cz="31.319444444444443" angle="225" />
+  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="58.81944444444445" cz="43.81944444444444" angle="225" />
+  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="31.319444444444443" cz="49.44444444444445" angle="225" />
+  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="31.944444444444443" cz="66.31944444444444" angle="225" />
+  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="20.069444444444446" cz="36.31944444444444" angle="225" />
+  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="53.19444444444445" cz="59.44444444444445" angle="225" />
+  <Ball group="1" shotPower=".1" fill="#bbbbbb" frame="#000000" cx="32.56944444444444" cz="22.569444444444446" angle="225" />
+  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="32.56944444444444" cz="33.81944444444444" angle="225" />
+  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="48.19444444444445" cz="23.819444444444446" angle="225" />
+  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="43.19444444444444" cz="63.19444444444444" angle="225" />
+  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="21.944444444444446" cz="53.19444444444445" angle="225" />
+  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="61.31944444444445" cz="36.94444444444444" angle="225" />
+  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="23.194444444444446" cz="24.444444444444446" angle="225" />
+  <Ball group="1" shape="bspFlower" fill="#ff99ff" frame="#000000" cx="65.06944444444444" cz="53.81944444444445" angle="225" />
+  <Incarnator cx="5.694444444444445" cz="79.44444444444444" angle="225" />
+  <Incarnator cx="4.444444444444445" cz="10.069444444444445" angle="315" />
+  <Incarnator cx="70.69444444444444" cz="7.569444444444445" angle="45" />
+  <Incarnator cx="69.44444444444444" cz="80.69444444444444" angle="135" />
+  <Goody start="@m" stop="@g" shape="bspMissile" missiles="1" y="7" fill="#ffff00" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" angle="225" />
+  <Goody start="@g" stop="@m" shape="bspGrenade" grenades="1" y="7" fill="#ffff00" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" angle="225" />
 </map>

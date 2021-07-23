@@ -3,7 +3,7 @@
     Low gravity and enhanced explosives.
     15 minute time limit." TheWall="10" wallHeight="TheWall" gravity="0.5" grenadePower="3" missilePower="2" missileTurnRate="1" missileAcceleration=".5" CPlatThick=".6" eyeHeight="1.23" lower="0" muddle="3" upper="6" ceiling="9" timeLimit="15 * 60" wa="ceiling" />
   <Wall fill="#ff9999" frame="#000000" x="35" z="44.93055555555556" w="50" d="50" h="0" />
-  <Incarnator y="upper" fill="#ffffff" frame="#000000" cx="34.861111111111114" cz="16.180555555555557" r="2.5" angle="0" />
+  <Incarnator y="upper" cx="34.861111111111114" cz="16.180555555555557" angle="0" />
   <Wall fill="#444444" frame="#000000" x="49.375" z="18.993055555555557" w="21.25" d="1.875" h="0" />
   <Wall fill="#444444" frame="#000000" x="30.3125" z="13.993055555555557" w="1.875" d="8.125" h="0" />
   <Wall fill="#444444" frame="#000000" x="39.6875" z="13.993055555555557" w="1.875" d="8.125" h="0" />
@@ -24,37 +24,37 @@
   <Wall fill="#444444" frame="#000000" x="4.0625" z="40.24305555555556" w="8.125" d="1.875" h="0" />
   <Wall fill="#444444" frame="#000000" x="0.9375" z="44.93055555555556" w="1.875" d="7.5" h="0" />
   <Wall fill="#444444" frame="#000000" x="9.0625" z="60.24305555555556" w="1.875" d="23.125" h="0" />
-  <Incarnator y="upper" fill="#ffffff" frame="#000000" cx="64.02777777777779" cz="45.41666666666667" r="2.5" angle="90" />
-  <Incarnator y="upper" fill="#ffffff" frame="#000000" cx="34.861111111111114" cz="73.68055555555556" r="2.5" angle="180" />
-  <Incarnator y="upper" fill="#ffffff" frame="#000000" cx="7.777777777777779" cz="45.41666666666667" r="2.5" angle="270" />
-  <Incarnator y="6" fill="#ffffff" frame="#000000" cx="27.77777777777778" cz="32.29166666666667" r="2.5" angle="270" />
-  <Incarnator y="6" fill="#ffffff" frame="#000000" cx="48.40277777777778" cz="32.91666666666667" r="2.5" angle="270" />
-  <Incarnator y="3" fill="#ffffff" frame="#000000" cx="27.98611111111111" cz="48.05555555555556" r="2.5" angle="0" />
-  <Incarnator y="6" fill="#ffffff" frame="#000000" cx="19.65277777777778" cz="27.916666666666668" r="2.5" angle="270" />
-  <Incarnator y="6" fill="#ffffff" frame="#000000" cx="53.40277777777778" cz="22.291666666666668" r="2.5" angle="270" />
+  <Incarnator y="upper" cx="64.02777777777779" cz="45.41666666666667" angle="90" />
+  <Incarnator y="upper" cx="34.861111111111114" cz="73.68055555555556" angle="180" />
+  <Incarnator y="upper" cx="7.777777777777779" cz="45.41666666666667" angle="270" />
+  <Incarnator y="6" cx="27.77777777777778" cz="32.29166666666667" angle="270" />
+  <Incarnator y="6" cx="48.40277777777778" cz="32.91666666666667" angle="270" />
+  <Incarnator y="3" cx="27.98611111111111" cz="48.05555555555556" angle="0" />
+  <Incarnator y="6" cx="19.65277777777778" cz="27.916666666666668" angle="270" />
+  <Incarnator y="6" cx="53.40277777777778" cz="22.291666666666668" angle="270" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="22.5" cz="32.43055555555556" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="22.5" cz="32.43055555555556" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="57.5" cz="67.43055555555556" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="57.5" cz="67.43055555555556" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="47.5" cz="57.43055555555556" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="47.5" cz="57.43055555555556" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="22.5" cz="57.43055555555556" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="22.5" cz="57.43055555555556" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="47.5" cz="32.43055555555556" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="47.5" cz="32.43055555555556" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="12.5" cz="67.43055555555556" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="12.5" cz="67.43055555555556" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="57.5" cz="22.430555555555557" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="57.5" cz="22.430555555555557" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" shield="20" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="12.5" cz="22.430555555555557" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" shield="20" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="12.5" cz="22.430555555555557" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <set wa="ceiling" />
   <Wall fill="#ffcccc" frame="#000000" x="5.9375" z="44.93055555555556" w="8.125" d="7.5" h="0" />
@@ -75,28 +75,28 @@
   <unique vars="mReset mGo mStart" />
   <WallDoor deltaY="upper + CPlatThick" open="mGo" close="mReset" didOpen="mReset" openSpeed="3" closeSpeed="100" fill="#ff6600" frame="#000000" x="35" z="44.93055555555556" w="5" d="5" h="0" />
   <Timer in.0="@start" in.1="mGo" wait="700" out="mStart" />
-  <Sound sound="snMineBleep" volume="10" loopCount="16" start="mStart" isAmbient="false" fill="#ff6600" frame="#000000" cx="35" cz="44.93055555555556" r="3.125" angle="45" />
+  <Sound sound="snMineBleep" volume="10" loopCount="16" start="mStart" isAmbient="false" cx="35" cz="44.93055555555556" angle="45" />
   <Timer in="mStart" wait="60" out="mGo" />
-  <Incarnator y="3" fill="#ffffff" frame="#000000" cx="37.986111111111114" cz="43.05555555555556" r="2.5" angle="0" />
+  <Incarnator y="3" cx="37.986111111111114" cz="43.05555555555556" angle="0" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 40" power="20" shield="20" start="mReset" out="mTaken" y="eyeHeight + upper" fill="#ff0000" frame="#000000" cx="35" cz="44.93055555555556" r="1.875" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 40" power="20" shield="20" start="mReset" out="mTaken" y="eyeHeight + upper" fill="#ff0000" frame="#000000" cx="35" cz="44.93055555555556" angle="45" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="240" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="25.625" cz="14.930555555555557" r="1.875" angle="45" />
-  <GroundColor fill="#000055" frame="#000000" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="25.625" cz="14.930555555555557" angle="45" />
+  <GroundColor fill="#000055" />
   <SkyColor n="0" fill="#000055" frame="#000000" />
   <set hull.0="hullInternalLight" hull.1="hullInternalLight" hull.2="hullInternalHeavy" />
-  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" r="2.5" angle="45" />
-  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" r="2.5" angle="45" />
-  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" r="2.5" angle="45" />
-  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" r="2.5" angle="45" />
-  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" r="2.5" angle="45" />
-  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" r="2.5" angle="45" />
-  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" r="2.5" angle="45" />
-  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" r="2.5" angle="45" />
-  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" r="2.5" angle="45" />
-  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" r="2.5" angle="45" />
-  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" r="2.5" angle="45" />
-  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" r="2.5" angle="45" />
+  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="45" />
+  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="45" />
+  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="45" />
+  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="45" />
+  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="45" />
+  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="45" />
+  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="45" />
+  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="45" />
+  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="45" />
+  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="45" />
+  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="45" />
+  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="45" />
   <Timer in="@start" wait="15 * timeLimit" out="@DEATH" />
   <set wa="muddle" />
   <Wall fill="#ccffff" frame="#000000" x="17.5" z="29.930555555555557" w="15" d="10" h="1.5" />

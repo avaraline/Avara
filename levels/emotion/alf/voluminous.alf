@@ -12,7 +12,7 @@
   <set wallHeight="11.7" />
   <Wall fill="#291e32" frame="#000000" x="82.15277777777779" z="114.65277777777779" w="5" d="10" h="0" />
   <SkyColor n="1000" verticalRangeMax="2000" fill="#e9d4f1" frame="#090012" />
-  <GroundColor fill="#090012" frame="#000000" />
+  <GroundColor fill="#090012" />
   <set information="$rDeep" />
   <Ramp y="0" deltaY="8" fill="#a997b1" frame="#000000" x="119.65277777777777" z="106.21527777777779" w="20" d="6.875" h="0" angle="90" />
   <Ramp y="0" deltaY="8" fill="#a997b1" frame="#000000" x="89.65277777777779" z="68.09027777777779" w="20" d="6.875" h="0" angle="270" />
@@ -154,79 +154,79 @@
   <WallDoor volume="0" hitMsg="@opendoor1" deltaY="3" openSpeed="20" closeSpeed="20" open="@opendoor1" close="@close1" didOpen="@close1" closeDelay="30" status="isClosed" fill="#493c52" frame="#000000" x="36.84027777777778" z="58.40277777777778" w="5.625" d="0" h="0" y="0" />
   <set wallHeight="3" />
   <WallDoor volume="0" hitMsg="@opendoor2" deltaY="3" openSpeed="20" closeSpeed="20" open="@opendoor2" close="@close2" didOpen="@close2" closeDelay="30" status="isClosed" fill="#493c52" frame="#000000" x="172.46527777777777" z="115.90277777777779" w="5.625" d="0" h="0" y="0" />
-  <Teleporter y="5" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@pillar" fill="#f8e2ff" frame="#000000" cx="87.15277777777779" cz="117.15277777777779" r="1.875" angle="225" />
-  <Teleporter y="5" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@pillar" fill="#f8e2ff" frame="#000000" cx="122.15277777777779" cz="57.15277777777778" r="1.875" angle="225" />
-  <Teleporter y="0" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@pillar" fill="#f8e2ff" frame="#000000" cx="62.152777777777786" cz="65.27777777777779" r="1.875" angle="225" />
-  <Teleporter y="0" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@pillar" fill="#f8e2ff" frame="#000000" cx="147.15277777777777" cz="109.02777777777779" r="1.875" angle="225" />
-  <Teleporter y="20" shape="0" spin="false" group="@pillar" fill="#f8e2ff" frame="#000000" cx="172.77777777777777" cz="111.52777777777779" r="1.875" angle="225" />
-  <Teleporter y="20" shape="0" spin="false" group="@pillar" fill="#f8e2ff" frame="#000000" cx="37.15277777777778" cz="62.152777777777786" r="1.875" angle="225" />
-  <Teleporter y="20" shape="0" spin="false" group="@pillar" fill="#f8e2ff" frame="#000000" cx="127.15277777777777" cz="59.65277777777778" r="1.875" angle="225" />
-  <Teleporter y="20" shape="0" spin="false" group="@pillar" fill="#f8e2ff" frame="#000000" cx="82.15277777777779" cz="114.65277777777779" r="1.875" angle="225" />
+  <Teleporter y="5" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@pillar" fill="#f8e2ff" frame="#000000" cx="87.15277777777779" cz="117.15277777777779" angle="225" />
+  <Teleporter y="5" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@pillar" fill="#f8e2ff" frame="#000000" cx="122.15277777777779" cz="57.15277777777778" angle="225" />
+  <Teleporter y="0" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@pillar" fill="#f8e2ff" frame="#000000" cx="62.152777777777786" cz="65.27777777777779" angle="225" />
+  <Teleporter y="0" shape="bspFloorFrame" scale=".3" spin="false" group="@floor" destGroup="@pillar" fill="#f8e2ff" frame="#000000" cx="147.15277777777777" cz="109.02777777777779" angle="225" />
+  <Teleporter y="20" shape="0" spin="false" group="@pillar" fill="#f8e2ff" frame="#000000" cx="172.77777777777777" cz="111.52777777777779" angle="225" />
+  <Teleporter y="20" shape="0" spin="false" group="@pillar" fill="#f8e2ff" frame="#000000" cx="37.15277777777778" cz="62.152777777777786" angle="225" />
+  <Teleporter y="20" shape="0" spin="false" group="@pillar" fill="#f8e2ff" frame="#000000" cx="127.15277777777777" cz="59.65277777777778" angle="225" />
+  <Teleporter y="20" shape="0" spin="false" group="@pillar" fill="#f8e2ff" frame="#000000" cx="82.15277777777779" cz="114.65277777777779" angle="225" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="350" />
-  <Goody y="4" shape="bspAvaraA" sound="snYes" speed="5" grenades="4" missiles="2" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="94.65277777777779" cz="87.15277777777779" r="1.875" angle="45" />
+  <Goody y="4" shape="bspAvaraA" sound="snYes" speed="5" grenades="4" missiles="2" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="94.65277777777779" cz="87.15277777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="350" />
-  <Goody y="4" shape="bspAvaraA" sound="snYes" speed="5" grenades="4" missiles="2" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="114.65277777777779" cz="87.15277777777779" r="1.875" angle="45" />
+  <Goody y="4" shape="bspAvaraA" sound="snYes" speed="5" grenades="4" missiles="2" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="114.65277777777779" cz="87.15277777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="150" />
-  <Goody y="2" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="62.152777777777786" cz="77.77777777777779" r="1.875" angle="45" />
+  <Goody y="2" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="62.152777777777786" cz="77.77777777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="150" />
-  <Goody y="2" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="147.15277777777777" cz="97.15277777777779" r="1.875" angle="45" />
+  <Goody y="2" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="147.15277777777777" cz="97.15277777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="150" />
-  <Goody y="14" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="172.77777777777777" cz="111.52777777777779" r="1.875" angle="45" />
+  <Goody y="14" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="172.77777777777777" cz="111.52777777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="150" />
-  <Goody y="14" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="127.15277777777777" cz="59.65277777777778" r="1.875" angle="45" />
+  <Goody y="14" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="127.15277777777777" cz="59.65277777777778" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="150" />
-  <Goody y="14" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="37.15277777777778" cz="62.152777777777786" r="1.875" angle="45" />
+  <Goody y="14" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="37.15277777777778" cz="62.152777777777786" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="150" />
-  <Goody y="14" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="82.15277777777779" cz="114.65277777777779" r="1.875" angle="45" />
+  <Goody y="14" shape="bspMissile" sound="snYes" speed="5" missiles="3" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="82.15277777777779" cz="114.65277777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="200" />
-  <Goody y="2" shape="bspGrenade" sound="snYes" speed="5" grenades="6" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="84.65277777777779" cz="59.65277777777778" r="1.875" angle="45" />
+  <Goody y="2" shape="bspGrenade" sound="snYes" speed="5" grenades="6" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="84.65277777777779" cz="59.65277777777778" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="200" />
-  <Goody y="2" shape="bspGrenade" sound="snYes" speed="5" grenades="6" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="124.65277777777779" cz="114.65277777777779" r="1.875" angle="45" />
+  <Goody y="2" shape="bspGrenade" sound="snYes" speed="5" grenades="6" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="124.65277777777779" cz="114.65277777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="200" />
-  <Goody y="6" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="154.65277777777777" cz="97.15277777777779" r="1.875" angle="45" />
+  <Goody y="6" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="154.65277777777777" cz="97.15277777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="200" />
-  <Goody y="6" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="54.65277777777778" cz="77.77777777777779" r="1.875" angle="45" />
+  <Goody y="6" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="54.65277777777778" cz="77.77777777777779" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="200" />
-  <Goody y="10" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="74.65277777777779" cz="59.65277777777778" r="1.875" angle="45" />
+  <Goody y="10" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="74.65277777777779" cz="59.65277777777778" angle="45" />
   <unique vars="rShow rTaken" />
   <And in="@start" out="rShow" />
   <Timer in="rTaken" out="rShow" wait="200" />
-  <Goody y="10" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="134.65277777777777" cz="114.65277777777779" r="1.875" angle="45" />
-  <Incarnator y="20" fill="#f8e2ff" frame="#000000" cx="49.65277777777778" cz="89.09722222222223" r="1.875" angle="270" />
-  <Incarnator y="20" fill="#f8e2ff" frame="#000000" cx="159.65277777777777" cz="84.72222222222223" r="1.875" angle="90" />
-  <Incarnator y="20" fill="#f8e2ff" frame="#000000" cx="89.65277777777779" cz="129.65277777777777" r="1.875" angle="225" />
-  <Field deltaY="0" enter="@opendoor1" fill="#f8e2ff" frame="#000000" x="36.84027777777778" z="58.40277777777778" w="5.625" d="10" h="0" r="1.875" cx="89.65277777777779" cz="129.65277777777777" angle="225" />
-  <Field deltaY="0" enter="@opendoor2" fill="#f8e2ff" frame="#000000" x="172.46527777777777" z="115.90277777777779" w="5.625" d="10" h="0" r="1.875" cx="89.65277777777779" cz="129.65277777777777" angle="225" />
-  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="23 * 5" destGroup="@center" shape="0" fill="#ffffff" frame="#000000" cx="104.65277777777779" cz="87.15277777777779" r="2.5" angle="315" />
-  <Teleporter y="30" shape="0" group="@center" fill="#ffffff" frame="#000000" cx="104.65277777777779" cz="87.15277777777779" r="2.5" angle="315" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="104.65277777777779" cz="87.15277777777779" r="2.5" angle="315" />
-  <Incarnator y="20" fill="#f8e2ff" frame="#000000" cx="119.65277777777779" cz="44.65277777777778" r="1.875" angle="45" />
-  <Incarnator y="20" fill="#f8e2ff" frame="#000000" cx="134.72222222222223" cz="123.40277777777779" r="1.875" angle="180" />
-  <Incarnator y="20" fill="#f8e2ff" frame="#000000" cx="74.72222222222223" cz="50.90277777777778" r="1.875" angle="0" />
+  <Goody y="10" shape="bspGrenade" sound="snYes" speed="5" grenades="4" start="rShow" out="rTaken" fill="#f8e2ff" frame="#ffffff" cx="134.65277777777777" cz="114.65277777777779" angle="45" />
+  <Incarnator y="20" cx="49.65277777777778" cz="89.09722222222223" angle="270" />
+  <Incarnator y="20" cx="159.65277777777777" cz="84.72222222222223" angle="90" />
+  <Incarnator y="20" cx="89.65277777777779" cz="129.65277777777777" angle="225" />
+  <Field deltaY="0" enter="@opendoor1" fill="#f8e2ff" frame="#000000" x="36.84027777777778" z="58.40277777777778" w="5.625" d="10" h="0" cx="89.65277777777779" cz="129.65277777777777" angle="225" />
+  <Field deltaY="0" enter="@opendoor2" fill="#f8e2ff" frame="#000000" x="172.46527777777777" z="115.90277777777779" w="5.625" d="10" h="0" cx="89.65277777777779" cz="129.65277777777777" angle="225" />
+  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="23 * 5" destGroup="@center" shape="0" fill="#ffffff" frame="#000000" cx="104.65277777777779" cz="87.15277777777779" angle="315" />
+  <Teleporter y="30" shape="0" group="@center" fill="#ffffff" frame="#000000" cx="104.65277777777779" cz="87.15277777777779" angle="315" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="104.65277777777779" cz="87.15277777777779" angle="315" />
+  <Incarnator y="20" cx="119.65277777777779" cz="44.65277777777778" angle="45" />
+  <Incarnator y="20" cx="134.72222222222223" cz="123.40277777777779" angle="180" />
+  <Incarnator y="20" cx="74.72222222222223" cz="50.90277777777778" angle="0" />
 </map>

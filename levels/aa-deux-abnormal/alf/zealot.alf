@@ -3,34 +3,34 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="67.43055555555556" cz="78.95833333333334" r="1.25" angle="90" />
-  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#0099ff" frame="#000000" cx="67.43055555555556" cz="78.95833333333334" r="1.25" angle="90" />
-  <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" fill="#0099ff" frame="#000000" cx="97.43055555555556" cz="101.42361111111111" r="3.0208333333333286" angle="225" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#0099ff" frame="#000000" cx="97.43055555555556" cz="101.42361111111111" r="3.0208333333333286" angle="225" />
+  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="67.43055555555556" cz="78.95833333333334" angle="90" />
+  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#0099ff" frame="#000000" cx="67.43055555555556" cz="78.95833333333334" angle="90" />
+  <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="97.43055555555556" cz="101.42361111111111" angle="225" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#0099ff" frame="#000000" cx="97.43055555555556" cz="101.42361111111111" angle="225" />
   <set designer="Malkavian - moneta@avara.com" information="Zealot:
 Passing out the flu for the fluless.
 Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <SkyColor fill="#cc6699" frame="#993366" />
-  <GroundColor fill="#220011" frame="#000000" />
-  <Teleporter group="-1" y="-30" activeRange="34 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" fill="#220011" frame="#000000" cx="95.55555555555556" cz="100.83333333333334" r="2.5" angle="225" />
+  <GroundColor fill="#220011" />
+  <Teleporter group="-1" y="-30" activeRange="34 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" fill="#220011" frame="#000000" cx="95.55555555555556" cz="100.83333333333334" angle="225" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff33" frame="#000000" x="138.68055555555557" z="108.33333333333334" w="10" d="1.25" h="0" angle="270" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#ffff33" frame="#000000" cx="99.93055555555556" cz="102.08333333333334" r="2.5" angle="225" />
-  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="118.36805555555556" z="86.77083333333334" w="15.625" d="1.875" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="125.24305555555556" z="78.02083333333334" w="1.875" d="15.625" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="116.49305555555556" z="71.14583333333334" w="15.625" d="1.875" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="109.61805555555556" z="79.89583333333334" w="1.875" d="15.625" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="147.11805555555557" z="131.77083333333334" w="15.625" d="1.875" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="153.99305555555557" z="123.02083333333334" w="1.875" d="15.625" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="145.24305555555557" z="116.14583333333334" w="15.625" d="1.875" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="138.36805555555557" z="124.89583333333334" w="1.875" d="15.625" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="68.36805555555556" z="86.77083333333334" w="15.625" d="1.875" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="75.24305555555556" z="78.02083333333334" w="1.875" d="15.625" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="66.49305555555556" z="71.14583333333334" w="15.625" d="1.875" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="59.61805555555556" z="79.89583333333334" w="1.875" d="15.625" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="98.36805555555556" z="131.77083333333334" w="15.625" d="1.875" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="105.24305555555556" z="123.02083333333334" w="1.875" d="15.625" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="96.49305555555556" z="116.14583333333334" w="15.625" d="1.875" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="89.61805555555556" z="124.89583333333334" w="1.875" d="15.625" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Teleporter y="30" shape="0" group="@recenter" fill="#ffff33" frame="#000000" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="118.36805555555556" z="86.77083333333334" w="15.625" d="1.875" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="125.24305555555556" z="78.02083333333334" w="1.875" d="15.625" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="116.49305555555556" z="71.14583333333334" w="15.625" d="1.875" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="109.61805555555556" z="79.89583333333334" w="1.875" d="15.625" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="147.11805555555557" z="131.77083333333334" w="15.625" d="1.875" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="153.99305555555557" z="123.02083333333334" w="1.875" d="15.625" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="145.24305555555557" z="116.14583333333334" w="15.625" d="1.875" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="138.36805555555557" z="124.89583333333334" w="1.875" d="15.625" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="68.36805555555556" z="86.77083333333334" w="15.625" d="1.875" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="75.24305555555556" z="78.02083333333334" w="1.875" d="15.625" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="66.49305555555556" z="71.14583333333334" w="15.625" d="1.875" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="59.61805555555556" z="79.89583333333334" w="1.875" d="15.625" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="98.36805555555556" z="131.77083333333334" w="15.625" d="1.875" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="105.24305555555556" z="123.02083333333334" w="1.875" d="15.625" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="96.49305555555556" z="116.14583333333334" w="15.625" d="1.875" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="89.61805555555556" z="124.89583333333334" w="1.875" d="15.625" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
   <Wall fill="#99ccff" frame="#000000" x="98.05555555555556" z="81.45833333333334" w="1.25" d="15" h="2" />
   <Wall fill="#99ccff" frame="#000000" x="58.05555555555556" z="94.58333333333334" w="18.75" d="1.25" h="3" />
   <Wall fill="#99ccff" frame="#000000" x="89.93055555555556" z="94.58333333333334" w="15" d="1.25" h="4.5" />
@@ -45,19 +45,19 @@ Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" li
   <Wall fill="#ffff99" frame="#000000" x="115.55555555555556" z="110.83333333333334" w="1.25" d="6.25" h="1" />
   <Wall fill="#99ccff" frame="#000000" x="49.30555555555556" z="86.45833333333334" w="1.25" d="15" h="2" />
   <Wall fill="#ffff99" frame="#000000" x="165.55555555555557" z="116.45833333333334" w="1.25" d="15" h="2" />
-  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="74.93055555555556" z="95.20833333333334" w="10" d="1.25" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="74.93055555555556" z="93.95833333333334" w="10" d="1.25" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="138.68055555555557" z="108.95833333333334" w="10" d="1.25" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
-  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="138.68055555555557" z="107.70833333333334" w="10" d="1.25" h="0" r="2.5" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="74.93055555555556" z="95.20833333333334" w="10" d="1.25" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="74.93055555555556" z="93.95833333333334" w="10" d="1.25" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="138.68055555555557" z="108.95833333333334" w="10" d="1.25" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
+  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="138.68055555555557" z="107.70833333333334" w="10" d="1.25" h="0" cx="99.93055555555556" cz="102.08333333333334" angle="225" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#0099ff" frame="#000000" x="74.93055555555556" z="94.58333333333334" w="10" d="1.25" h="0" angle="270" />
-  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="123.36805555555557" z="161.77083333333334" w="15.625" d="1.875" h="0" r="6.354166666666664" cx="75.41666666666667" cz="94.6875" angle="270" />
-  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="130.24305555555557" z="153.02083333333334" w="1.875" d="15.625" h="0" r="6.354166666666664" cx="75.41666666666667" cz="94.6875" angle="270" />
-  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="121.49305555555557" z="146.14583333333334" w="15.625" d="1.875" h="0" r="6.354166666666664" cx="75.41666666666667" cz="94.6875" angle="270" />
-  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="114.61805555555556" z="154.89583333333334" w="1.875" d="15.625" h="0" r="6.354166666666664" cx="75.41666666666667" cz="94.6875" angle="270" />
-  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="92.74305555555556" z="56.770833333333336" w="15.625" d="1.875" h="0" r="6.354166666666664" cx="75.41666666666667" cz="94.6875" angle="270" />
-  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="99.61805555555556" z="48.020833333333336" w="1.875" d="15.625" h="0" r="6.354166666666664" cx="75.41666666666667" cz="94.6875" angle="270" />
-  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="90.86805555555556" z="41.145833333333336" w="15.625" d="1.875" h="0" r="6.354166666666664" cx="75.41666666666667" cz="94.6875" angle="270" />
-  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="83.99305555555556" z="49.895833333333336" w="1.875" d="15.625" h="0" r="6.354166666666664" cx="75.41666666666667" cz="94.6875" angle="270" />
+  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="123.36805555555557" z="161.77083333333334" w="15.625" d="1.875" h="0" cx="75.41666666666667" cz="94.6875" angle="270" />
+  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="130.24305555555557" z="153.02083333333334" w="1.875" d="15.625" h="0" cx="75.41666666666667" cz="94.6875" angle="270" />
+  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="121.49305555555557" z="146.14583333333334" w="15.625" d="1.875" h="0" cx="75.41666666666667" cz="94.6875" angle="270" />
+  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="114.61805555555556" z="154.89583333333334" w="1.875" d="15.625" h="0" cx="75.41666666666667" cz="94.6875" angle="270" />
+  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="92.74305555555556" z="56.770833333333336" w="15.625" d="1.875" h="0" cx="75.41666666666667" cz="94.6875" angle="270" />
+  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="99.61805555555556" z="48.020833333333336" w="1.875" d="15.625" h="0" cx="75.41666666666667" cz="94.6875" angle="270" />
+  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="90.86805555555556" z="41.145833333333336" w="15.625" d="1.875" h="0" cx="75.41666666666667" cz="94.6875" angle="270" />
+  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="83.99305555555556" z="49.895833333333336" w="1.875" d="15.625" h="0" cx="75.41666666666667" cz="94.6875" angle="270" />
   <Wall fill="#99ccff" frame="#000000" x="108.05555555555556" z="146.45833333333334" w="1.25" d="15" h="2" />
   <Wall fill="#99ccff" frame="#000000" x="108.05555555555556" z="157.08333333333334" w="1.25" d="6.25" h="3" />
   <Wall fill="#99ccff" frame="#000000" x="122.43055555555557" z="139.58333333333334" w="15" d="1.25" h="3" />
@@ -76,29 +76,29 @@ Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" li
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspAvaraA" y="4" speed="2" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="107.43055555555556" cz="101.45833333333334" r="1.25" angle="225" />
+  <Goody shape="bspAvaraA" y="4" speed="2" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="107.43055555555556" cz="101.45833333333334" angle="225" />
   <Dome fill="#99ccff" frame="#000000" cx="117.43055555555556" cz="78.95833333333334" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="117.43055555555556" cz="78.95833333333334" r="1.25" angle="90" />
-  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#0099ff" frame="#000000" cx="117.43055555555556" cz="78.95833333333334" r="1.25" angle="90" />
+  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="117.43055555555556" cz="78.95833333333334" angle="90" />
+  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#0099ff" frame="#000000" cx="117.43055555555556" cz="78.95833333333334" angle="90" />
   <Dome fill="#ffff99" frame="#000000" cx="146.18055555555557" cz="123.95833333333334" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="146.18055555555557" cz="123.95833333333334" r="1.25" angle="90" />
-  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#ffff33" frame="#000000" cx="146.18055555555557" cz="123.95833333333334" r="1.25" angle="90" />
+  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="146.18055555555557" cz="123.95833333333334" angle="90" />
+  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#ffff33" frame="#000000" cx="146.18055555555557" cz="123.95833333333334" angle="90" />
   <Dome fill="#ffff99" frame="#000000" cx="97.43055555555556" cz="123.95833333333334" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="97.43055555555556" cz="123.95833333333334" r="1.25" angle="90" />
-  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#ffff33" frame="#000000" cx="97.43055555555556" cz="123.95833333333334" r="1.25" angle="90" />
+  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="97.43055555555556" cz="123.95833333333334" angle="90" />
+  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#ffff33" frame="#000000" cx="97.43055555555556" cz="123.95833333333334" angle="90" />
   <Dome fill="#99ccff" frame="#000000" cx="122.43055555555556" cz="153.95833333333334" r="2.5" angle="0" quarters="4" />
   <Dome fill="#ffff99" frame="#000000" cx="91.80555555555556" cz="48.958333333333336" r="2.5" angle="0" quarters="4" />
-  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="56.18055555555556" z="110.20833333333334" w="10" d="1.25" h="0" r="2.5" cx="91.80555555555556" cz="48.958333333333336" angle="180" />
-  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="56.18055555555556" z="108.95833333333334" w="10" d="1.25" h="0" r="2.5" cx="91.80555555555556" cz="48.958333333333336" angle="180" />
+  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="56.18055555555556" z="110.20833333333334" w="10" d="1.25" h="0" cx="91.80555555555556" cz="48.958333333333336" angle="180" />
+  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="56.18055555555556" z="108.95833333333334" w="10" d="1.25" h="0" cx="91.80555555555556" cz="48.958333333333336" angle="180" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#0099ff" frame="#000000" x="56.18055555555556" z="109.58333333333334" w="10" d="1.25" h="0" angle="270" />
   <Wall fill="#99ccff" frame="#000000" x="62.43055555555556" z="109.58333333333334" w="2.5" d="1.25" h="9" />
   <Wall fill="#99ccff" frame="#000000" x="56.18055555555556" z="109.58333333333334" w="10" d="1.25" h="1" y="8" />
@@ -109,8 +109,8 @@ Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" li
   <Wall fill="#99ccff" frame="#000000" x="73.68055555555556" z="143.95833333333334" w="10" d="10" h="5" />
   <Wall fill="#99ccff" frame="#000000" x="61.80555555555556" z="139.58333333333334" w="13.75" d="1.25" h="5" />
   <Wall fill="#99ccff" frame="#000000" x="49.30555555555556" z="117.08333333333334" w="1.25" d="13.75" h="5" />
-  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="47.43055555555556" z="140.20833333333334" w="10" d="1.25" h="0" r="6.319444444444443" cx="67.43055555555556" cz="133.2638888888889" angle="90" />
-  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="47.43055555555556" z="138.95833333333334" w="10" d="1.25" h="0" r="6.319444444444443" cx="67.43055555555556" cz="133.2638888888889" angle="90" />
+  <Field start="@start" mask="T2" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="47.43055555555556" z="140.20833333333334" w="10" d="1.25" h="0" cx="67.43055555555556" cz="133.2638888888889" angle="90" />
+  <Field start="@start" mask="T2" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="47.43055555555556" z="138.95833333333334" w="10" d="1.25" h="0" cx="67.43055555555556" cz="133.2638888888889" angle="90" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#0099ff" frame="#000000" x="47.43055555555556" z="139.58333333333334" w="10" d="1.25" h="0" angle="270" />
   <Wall fill="#99ccff" frame="#000000" x="53.68055555555556" z="139.58333333333334" w="2.5" d="1.25" h="9" />
   <Wall fill="#99ccff" frame="#000000" x="47.43055555555556" z="139.58333333333334" w="10" d="1.25" h="1" y="8" />
@@ -129,8 +129,8 @@ Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" li
   <Ramp y="0" thickness="0" deltaY="0" fill="#99ccff" frame="#000000" x="49.30555555555556" z="65.83333333333334" w="1.25" d="26.25" h="0" angle="180" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#99ccff" frame="#000000" x="63.05555555555556" z="53.333333333333336" w="26.25" d="1.25" h="0" angle="90" />
   <Wall fill="#ffff99" frame="#000000" x="136.80555555555557" z="71.45833333333334" w="1.25" d="15" h="5" />
-  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="158.68055555555557" z="92.70833333333334" w="10" d="1.25" h="0" r="6.354166666666664" cx="64.61805555555556" cz="53.298611111111114" angle="90" />
-  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="158.68055555555557" z="93.95833333333334" w="10" d="1.25" h="0" r="6.354166666666664" cx="64.61805555555556" cz="53.298611111111114" angle="90" />
+  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="158.68055555555557" z="92.70833333333334" w="10" d="1.25" h="0" cx="64.61805555555556" cz="53.298611111111114" angle="90" />
+  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="158.68055555555557" z="93.95833333333334" w="10" d="1.25" h="0" cx="64.61805555555556" cz="53.298611111111114" angle="90" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff33" frame="#000000" x="158.68055555555557" z="93.33333333333334" w="10" d="1.25" h="0" angle="90" />
   <Wall fill="#ffff99" frame="#000000" x="152.43055555555557" z="93.33333333333334" w="2.5" d="1.25" h="9" />
   <Wall fill="#ffff99" frame="#000000" x="158.68055555555557" z="93.33333333333334" w="10" d="1.25" h="1" y="8" />
@@ -141,8 +141,8 @@ Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" li
   <Wall fill="#ffff99" frame="#000000" x="141.18055555555557" z="58.958333333333336" w="10" d="10" h="5" />
   <Wall fill="#ffff99" frame="#000000" x="153.05555555555557" z="63.333333333333336" w="13.75" d="1.25" h="5" />
   <Wall fill="#ffff99" frame="#000000" x="165.55555555555557" z="85.83333333333334" w="1.25" d="13.75" h="5" />
-  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="167.43055555555557" z="62.708333333333336" w="10" d="1.25" h="0" r="6.319444444444446" cx="147.43055555555554" cz="70.1388888888889" angle="270" />
-  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="167.43055555555557" z="63.95833333333334" w="10" d="1.25" h="0" r="6.319444444444446" cx="147.43055555555554" cz="70.1388888888889" angle="270" />
+  <Field start="@start" mask="T6" head="270" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="167.43055555555557" z="62.708333333333336" w="10" d="1.25" h="0" cx="147.43055555555554" cz="70.1388888888889" angle="270" />
+  <Field start="@start" mask="T6" head="90" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="167.43055555555557" z="63.95833333333334" w="10" d="1.25" h="0" cx="147.43055555555554" cz="70.1388888888889" angle="270" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff33" frame="#000000" x="167.43055555555557" z="63.333333333333336" w="10" d="1.25" h="0" angle="90" />
   <Wall fill="#ffff99" frame="#000000" x="161.18055555555557" z="63.333333333333336" w="2.5" d="1.25" h="9" />
   <Wall fill="#ffff99" frame="#000000" x="167.43055555555557" z="63.333333333333336" w="10" d="1.25" h="1" y="8" />
@@ -153,7 +153,7 @@ Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" li
   <Wall fill="#99ccff" frame="#000000" x="136.80555555555557" z="92.08333333333334" w="1.25" d="1.25" h="5" />
   <Wall fill="#99ccff" frame="#000000" x="136.80555555555557" z="79.58333333333334" w="1.25" d="1.25" h="5" />
   <Wall fill="#99ccff" frame="#000000" x="136.80555555555557" z="85.83333333333334" w="1.25" d="11.25" h="0.75" />
-  <Walker y="20" team="6" fill="#ffff00" frame="#aa0000" cx="55.3125" cz="132.46527777777777" r="0.9375" angle="270" />
+  <Walker y="20" team="6" cx="55.3125" cz="132.46527777777777" angle="270" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff99" frame="#000000" x="160.55555555555557" z="33.333333333333336" w="31.25" d="1.25" h="0" angle="90" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff99" frame="#000000" x="129.30555555555557" z="33.333333333333336" w="31.25" d="1.25" h="0" angle="90" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff99" frame="#000000" x="111.18055555555556" z="33.333333333333336" w="5" d="1.25" h="0" angle="90" />
@@ -161,18 +161,18 @@ Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" li
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff99" frame="#000000" x="165.55555555555557" z="100.83333333333334" w="1.25" d="13.75" h="0" angle="180" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff99" frame="#000000" x="165.55555555555557" z="137.08333333333334" w="1.25" d="26.25" h="0" angle="180" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff99" frame="#000000" x="151.80555555555557" z="149.58333333333334" w="26.25" d="1.25" h="0" angle="90" />
-  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="116.18055555555556" z="133.95833333333334" w="1.25" d="10" h="0" r="6.354166666666657" cx="153.09027777777777" cz="149.54861111111111" angle="90" />
-  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="114.93055555555556" z="133.95833333333334" w="1.25" d="10" h="0" r="6.354166666666657" cx="153.09027777777777" cz="149.54861111111111" angle="90" />
+  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="116.18055555555556" z="133.95833333333334" w="1.25" d="10" h="0" cx="153.09027777777777" cz="149.54861111111111" angle="90" />
+  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="114.93055555555556" z="133.95833333333334" w="1.25" d="10" h="0" cx="153.09027777777777" cz="149.54861111111111" angle="90" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff33" frame="#000000" x="115.55555555555556" z="133.95833333333334" w="1.25" d="10" h="0" angle="180" />
-  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="98.68055555555556" z="68.95833333333334" w="1.25" d="10" h="0" r="2.8125" cx="115.83333333333334" cz="128.99305555555557" angle="180" />
-  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="97.43055555555556" z="68.95833333333334" w="1.25" d="10" h="0" r="2.8125" cx="115.83333333333334" cz="128.99305555555557" angle="180" />
+  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="98.68055555555556" z="68.95833333333334" w="1.25" d="10" h="0" cx="115.83333333333334" cz="128.99305555555557" angle="180" />
+  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="97.43055555555556" z="68.95833333333334" w="1.25" d="10" h="0" cx="115.83333333333334" cz="128.99305555555557" angle="180" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#0099ff" frame="#000000" x="98.05555555555556" z="68.95833333333334" w="1.25" d="10" h="0" angle="180" />
-  <Walker y="20" team="2" fill="#ffff00" frame="#aa0000" cx="157.46527777777777" cz="85.10416666666667" r="0.9375" angle="90" />
-  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="108.68055555555556" z="38.333333333333336" w="1.25" d="8.75" h="0" r="0.9375" cx="157.46527777777777" cz="85.10416666666667" angle="90" />
-  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="107.43055555555556" z="38.333333333333336" w="1.25" d="8.75" h="0" r="0.9375" cx="157.46527777777777" cz="85.10416666666667" angle="90" />
+  <Walker y="20" team="2" cx="157.46527777777777" cz="85.10416666666667" angle="90" />
+  <Field start="@start" mask="T6" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="108.68055555555556" z="38.333333333333336" w="1.25" d="8.75" h="0" cx="157.46527777777777" cz="85.10416666666667" angle="90" />
+  <Field start="@start" mask="T6" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="107.43055555555556" z="38.333333333333336" w="1.25" d="8.75" h="0" cx="157.46527777777777" cz="85.10416666666667" angle="90" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#ffff33" frame="#000000" x="108.05555555555556" z="38.333333333333336" w="1.25" d="8.75" h="0" angle="180" />
-  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="108.68055555555556" z="164.58333333333334" w="1.25" d="8.75" h="0" r="2.8125" cx="108.33333333333334" cz="33.99305555555556" angle="180" />
-  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="107.43055555555556" z="164.58333333333334" w="1.25" d="8.75" h="0" r="2.8125" cx="108.33333333333334" cz="33.99305555555556" angle="180" />
+  <Field start="@start" mask="T2" head="0" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="108.68055555555556" z="164.58333333333334" w="1.25" d="8.75" h="0" cx="108.33333333333334" cz="33.99305555555556" angle="180" />
+  <Field start="@start" mask="T2" head="180" deltaX="1 * cos head" deltaZ="1 * sin head" deltaY="0" fill="#ffff99" frame="#000000" x="107.43055555555556" z="164.58333333333334" w="1.25" d="8.75" h="0" cx="108.33333333333334" cz="33.99305555555556" angle="180" />
   <Ramp y="0" thickness="0" deltaY="0" fill="#0099ff" frame="#000000" x="108.05555555555556" z="164.58333333333334" w="1.25" d="8.75" h="0" angle="180" />
   <Wall fill="#99ccff" frame="#000000" x="122.43055555555557" z="169.58333333333334" w="30" d="1.25" h="2" />
   <set wallYon="0.01" />
@@ -184,30 +184,30 @@ Teams of Yellow and Blue.  Kill or be killed." light.0.i="0.8" light.0.a="20" li
   <Wall fill="#dada71" frame="#000000" x="62.43055555555556" z="38.333333333333336" w="27.5" d="28.75" h="15" />
   <Wall fill="#dada71" frame="#000000" x="43.68055555555556" z="73.64583333333334" w="10" d="100.625" h="15" />
   <Wall fill="#dada71" frame="#000000" x="180.55555555555557" z="56.45833333333334" w="8.75" d="65" h="15" />
-  <Walker y="20" team="6" fill="#ffff00" frame="#aa0000" cx="56.49305555555556" cz="116.35416666666667" r="0.9375" angle="270" />
-  <Walker y="20" team="6" fill="#ffff00" frame="#aa0000" cx="55.24305555555556" cz="125.10416666666667" r="0.9375" angle="270" />
-  <Walker y="20" team="2" fill="#ffff00" frame="#aa0000" cx="157.46527777777777" cz="70.72916666666667" r="0.9375" angle="90" />
-  <Walker y="20" team="2" fill="#ffff00" frame="#aa0000" cx="157.46527777777777" cz="78.85416666666667" r="0.9375" angle="90" />
+  <Walker y="20" team="6" cx="56.49305555555556" cz="116.35416666666667" angle="270" />
+  <Walker y="20" team="6" cx="55.24305555555556" cz="125.10416666666667" angle="270" />
+  <Walker y="20" team="2" cx="157.46527777777777" cz="70.72916666666667" angle="90" />
+  <Walker y="20" team="2" cx="157.46527777777777" cz="78.85416666666667" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspAvaraA" y="6.75" speed="2" grenades="2" missiles="3" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="73.81944444444444" cz="143.75" r="1.25" angle="225" />
+  <Goody shape="bspAvaraA" y="6.75" speed="2" grenades="2" missiles="3" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="73.81944444444444" cz="143.75" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspAvaraA" y="6.75" speed="2" grenades="2" missiles="3" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="141.31944444444446" cz="58.75" r="1.25" angle="225" />
+  <Goody shape="bspAvaraA" y="6.75" speed="2" grenades="2" missiles="3" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="141.31944444444446" cz="58.75" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="122.43055555555556" cz="153.95833333333334" r="1.25" angle="90" />
-  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#0099ff" frame="#000000" cx="122.43055555555556" cz="153.95833333333334" r="1.25" angle="90" />
+  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#0099ff" frame="#000000" cx="122.43055555555556" cz="153.95833333333334" angle="90" />
+  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#0099ff" frame="#000000" cx="122.43055555555556" cz="153.95833333333334" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="91.80555555555556" cz="48.958333333333336" r="1.25" angle="90" />
-  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#ffff33" frame="#000000" cx="91.80555555555556" cz="48.958333333333336" r="1.25" angle="90" />
-  <Incarnator y="20" mask="T6" fill="#ffff00" frame="#aa0000" cx="64.61805555555556" cz="118.22916666666667" r="0.9375" angle="270" />
-  <Incarnator y="20" mask="T6" fill="#ffff00" frame="#aa0000" cx="47.74305555555556" cz="129.47916666666669" r="0.9375" angle="270" />
-  <Incarnator y="20" mask="T2" fill="#ffff00" frame="#aa0000" cx="149.96527777777777" cz="83.22916666666667" r="0.9375" angle="90" />
-  <Incarnator y="20" mask="T2" fill="#ffff00" frame="#aa0000" cx="166.21527777777777" cz="72.60416666666667" r="0.9375" angle="90" />
+  <Goody shape="bspAvaraA" y="4" speed="2" grenades="4" missiles="2" start="mShow" out="mTaken" fill="#ffff33" frame="#000000" cx="91.80555555555556" cz="48.958333333333336" angle="90" />
+  <Teleporter sound="0" shape="bspFloorFrame" scale="2" start="@start" stop="@Off" mask="0" speed="0" fill="#ffff33" frame="#000000" cx="91.80555555555556" cz="48.958333333333336" angle="90" />
+  <Incarnator y="20" mask="T6" cx="64.61805555555556" cz="118.22916666666667" angle="270" />
+  <Incarnator y="20" mask="T6" cx="47.74305555555556" cz="129.47916666666669" angle="270" />
+  <Incarnator y="20" mask="T2" cx="149.96527777777777" cz="83.22916666666667" angle="90" />
+  <Incarnator y="20" mask="T2" cx="166.21527777777777" cz="72.60416666666667" angle="90" />
 </map>
