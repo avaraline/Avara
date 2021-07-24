@@ -69,6 +69,7 @@ void MTranslate(Fixed xt, Fixed yt, Fixed zt, Matrix *theMatrix);
 static inline Fixed FMul(Fixed a, Fixed b) { return ((int64_t)a * (int64_t)b) / (1 << 16); }
 static inline Fixed FDiv(Fixed a, Fixed b) { return ((int64_t)a * (1 << 16)) / b; }
 static inline Fixed FMulDiv(Fixed a, Fixed b, Fixed c) { return (long)(((double)a) * b / c); }
+static inline Fixed FPow(Fixed fval, double power) { return FIX(pow(fval/65536.0, power)); }
 
 #define FDivNZ FDiv
 #define FMulDivNZ FMulDiv

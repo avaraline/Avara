@@ -16,6 +16,7 @@ class CDepot;
 class CGrenade : public CWeapon {
 public:
     Fixed gravity;
+    Fixed friction;
 
     virtual void IWeapon(CDepot *theDepot);
     virtual void PlaceParts();
@@ -25,4 +26,5 @@ public:
     virtual void FrameAction();
     virtual void ShowTarget(); //	Show HUD graphics for targeting
     virtual void PreLoadSounds();
+    virtual bool HandlesFastFPS() { return true; }
 };
