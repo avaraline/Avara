@@ -48,7 +48,9 @@ void CGrenade::PlaceParts() {
 }
 
 long CGrenade::Arm(CSmartPart *aPart) {
-    gravity = FMul(kGravity, itsGame->gravityRatio);
+    gravity = FMul(kGravity, itsGame->gravityRatio * itsGame->fpsScale);
+    // kGrenadeFriction is typically around 0.01 so friction would be 0.99 after (1/fpsScale) frames
+    friction = FIX(pow(1-ToFloat(kGrenadeFriction), itsGame->fpsScale));
 
     blastPower = itsDepot->grenadePower;
     shields = FIX3(100);
@@ -85,6 +87,10 @@ void CGrenade::Locate() {
     speed[1] += (fullTransform[1][1] + 2 * fullTransform[2][1]);
     speed[2] += (fullTransform[1][2] + 2 * fullTransform[2][2]);
 
+    // correct for high-FPS bias of grenades flying a little high by doing half of a
+    // classic frame's worth of gravity adjustments up front
+    speed[1] -= int(0.5 / itsGame->fpsScale) * gravity;
+
     yaw = -FOneArcTan2(fullTransform[2][2], fullTransform[0][2]);
     MRotateY(FOneSin(-yaw), FOneCos(yaw), &fullTransform);
     pitch = -FOneArcTan2(fullTransform[1][1], fullTransform[2][1]);
@@ -116,11 +122,10 @@ void CGrenade::FrameAction() {
     if (flyCount) {
         RayHitRecord rayHit;
         Fixed realSpeed;
-        Fixed scaling = kGrenadeFriction;
 
-        speed[0] -= FMul(speed[0], scaling);
-        speed[1] -= gravity + FMul(speed[1], scaling);
-        speed[2] -= FMul(speed[2], scaling);
+        speed[0] = FMul(speed[0], friction);
+        speed[1] = FMul(speed[1], friction) - gravity;
+        speed[2] = FMul(speed[2], friction);
 
         VECTORCOPY(rayHit.direction, speed);
         VECTORCOPY(rayHit.origin, location);
@@ -130,24 +135,26 @@ void CGrenade::FrameAction() {
 
         RayTestWithGround(&rayHit, kSolidBit);
 
-        if (realSpeed > rayHit.distance) {
-            realSpeed = rayHit.distance;
+        // if the location adjustment will put us below ground
+        if (realSpeed * itsGame->fpsScale > rayHit.distance) {
+            realSpeed = rayHit.distance / itsGame->fpsScale;
             speed[0] = FMul(rayHit.direction[0], realSpeed);
             speed[1] = FMul(rayHit.direction[1], realSpeed);
             speed[2] = FMul(rayHit.direction[2], realSpeed);
             doExplode = true;
         }
 
-        location[0] += speed[0];
-        location[1] += speed[1];
-        location[2] += speed[2];
+        // speeds are calculated in CLASSICFRAMETIME units so scale back before applying
+        location[0] += speed[0] * itsGame->fpsScale;
+        location[1] += speed[1] * itsGame->fpsScale;
+        location[2] += speed[2] * itsGame->fpsScale;
 
         UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount > 5) {
+            if (flyCount * itsGame->fpsScale > 5) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
@@ -159,16 +166,16 @@ void CGrenade::FrameAction() {
             }
         }
 
-        if (flyCount > 100) {
+        if (flyCount * itsGame->fpsScale > 100) {
             doExplode = true;
         }
 
         BuildPartProximityList(location, partList[0]->bigRadius, kSolidBit);
 
         if (location[1] <= 0 || DoCollisionTest(&proximityList.p)) {
-            location[0] -= speed[0];
-            location[1] -= speed[1];
-            location[2] -= speed[2];
+            location[0] -= speed[0] * itsGame->fpsScale;
+            location[1] -= speed[1] * itsGame->fpsScale;
+            location[2] -= speed[2] * itsGame->fpsScale;
             doExplode = true;
         }
 
