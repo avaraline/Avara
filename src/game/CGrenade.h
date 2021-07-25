@@ -15,8 +15,8 @@ class CDepot;
 
 class CGrenade : public CWeapon {
 public:
-    Fixed gravity;
-    Fixed friction;
+    Fixed gravity, classicGravity;
+    Fixed friction, classicFriction;
 
     virtual void IWeapon(CDepot *theDepot);
     virtual void PlaceParts();
