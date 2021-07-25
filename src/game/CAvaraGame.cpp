@@ -536,7 +536,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
     itsNet->LevelReset();
 
     incarnatorList = NULL;
-    SetFrameNumber(0);
+    IncrementFrame(true);
     topSentFrame = -1 / fpsScale;
 
     // ResetView();
@@ -839,13 +839,6 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
 bool CAvaraGame::GameTick() {
     int32_t startTime = SDL_GetTicks();
 
-    if (!isClassicFrame) {
-        // let the fast actors do their thing on non-classic frames as well
-        RunActorFrameActions();
-        SetFrameNumber(frameNumber+1);
-        return true;
-    }
-
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
 
@@ -859,6 +852,13 @@ bool CAvaraGame::GameTick() {
 
     // SDL_Log("CAvaraGame::GameTick frame=%d dt=%d start=%d end=%d\n", frameNumber, SDL_GetTicks() - lastFrameTime,
     // startTime, endTime); lastFrameTime = SDL_GetTicks();
+
+    if (!isClassicFrame) {
+        // let the fast actors do their thing on non-classic frames as well
+        RunActorFrameActions();
+        IncrementFrame();
+        return true;
+    }
 
     oldPlayersStanding = playersStanding;
     oldTeamsStanding = teamsStanding;
@@ -888,11 +888,12 @@ bool CAvaraGame::GameTick() {
     if (teamsStanding == 1 && oldTeamsStanding > 1) {
         FlagMessage(iWinTeam + firstVariable);
     }
-    
+
     // do latency adjustement before frameNumber increments
     itsNet->AutoLatencyControl(frameNumber, longWait);
 
-    SetFrameNumber(frameNumber+1);
+    // increment frameNumber, set nextScheduledFrame time
+    IncrementFrame();
 
     timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
 
@@ -901,8 +902,6 @@ bool CAvaraGame::GameTick() {
             itsNet->FrameAction();
 
     canPreSend = true;
-
-    nextScheduledFrame += latencyFrameTime;
 
     // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode)
     if (nextScheduledFrame < startTime) {
@@ -1146,8 +1145,14 @@ void CAvaraGame::SetFrameTime(long ft) {
     this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
 }
 
-void CAvaraGame::SetFrameNumber(long fn) {
-    frameNumber = fn;
+void CAvaraGame::IncrementFrame(bool firstFrame) {
+    if (firstFrame) {
+        frameNumber = 0;
+        nextScheduledFrame = SDL_GetTicks(); // Run next frame immediately
+    } else {
+        frameNumber++;
+        nextScheduledFrame += latencyFrameTime;
+    }
     isClassicFrame = (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
 }
 
