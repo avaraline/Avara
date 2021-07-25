@@ -48,9 +48,13 @@ void CGrenade::PlaceParts() {
 }
 
 long CGrenade::Arm(CSmartPart *aPart) {
-    gravity = FMul(kGravity, itsGame->gravityRatio * itsGame->fpsScale);
+    // using classic numbers in the targeting calculation to keep it fast
+    classicGravity = FMul(kGravity, itsGame->gravityRatio);
+    classicFriction = FIX1 - kGrenadeFriction;
+
+    gravity = classicGravity * itsGame->fpsScale;
     // kGrenadeFriction is typically around 0.01 so friction would be 0.99 after (1/fpsScale) frames
-    friction = FIX(pow(1-ToFloat(kGrenadeFriction), itsGame->fpsScale));
+    friction = FPow(classicFriction, itsGame->fpsScale);
 
     blastPower = itsDepot->grenadePower;
     shields = FIX3(100);
@@ -219,16 +223,18 @@ void CGrenade::ShowTarget() {
             rayHit.origin[1] = tLoc[1];
             rayHit.origin[2] = tLoc[2];
 
+            // advance hypothetical location 5*64msec worth of classic frames
             for (i = 0; i < 5; i++) {
-                tSpeed[0] -= FMul(tSpeed[0], kGrenadeFriction);
-                tSpeed[1] -= gravity + FMul(tSpeed[1], kGrenadeFriction);
-                tSpeed[2] -= FMul(tSpeed[2], kGrenadeFriction);
+                tSpeed[0] = FMul(tSpeed[0], classicFriction);
+                tSpeed[1] = FMul(tSpeed[1], classicFriction) - classicGravity;
+                tSpeed[2] = FMul(tSpeed[2], classicFriction);
 
                 tLoc[0] += tSpeed[0];
                 tLoc[1] += tSpeed[1];
                 tLoc[2] += tSpeed[2];
             }
 
+            // draw directional vector over last 5 frames then test if it hits the ground
             rayHit.direction[0] = tLoc[0] - rayHit.origin[0];
             rayHit.direction[1] = tLoc[1] - rayHit.origin[1];
             rayHit.direction[2] = tLoc[2] - rayHit.origin[2];
