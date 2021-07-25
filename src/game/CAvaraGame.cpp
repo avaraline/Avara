@@ -895,6 +895,11 @@ bool CAvaraGame::GameTick() {
     // increment frameNumber, set nextScheduledFrame time
     IncrementFrame();
 
+    // if the game hasn't kept up with the frame schedule, reset the next frame (prevents chipmunk mode)
+    if (nextScheduledFrame < startTime) {
+        nextScheduledFrame = startTime + latencyFrameTime;
+    }
+
     timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
 
     if (latencyTolerance)
