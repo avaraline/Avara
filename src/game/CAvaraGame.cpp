@@ -891,6 +891,11 @@ bool CAvaraGame::GameTick() {
 
     nextScheduledFrame += latencyFrameTime;
 
+    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode)
+    if (nextScheduledFrame < startTime) {
+        nextScheduledFrame = startTime + latencyFrameTime;
+    }
+
     itsDepot->RunSliverActions();
     itsApp->StartFrame(frameNumber);
     ViewControl();
