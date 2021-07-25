@@ -88,7 +88,8 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    mainloop(GAMETICKINTERVAL);
+    // the mainloop should be sufficiently fast so that frames occur near their scheduled time
+    mainloop(app->GetGame()->frameTime / 4);
 
     app->Done();
 

@@ -254,7 +254,7 @@ public:
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(long ft);
-    virtual void SetFrameNumber(long fn);
+    virtual void IncrementFrame(bool firstFrame = false);
     virtual long FramesFromNow(long classicFrames);
 };
 
