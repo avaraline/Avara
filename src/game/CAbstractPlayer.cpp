@@ -820,6 +820,8 @@ void CAbstractPlayer::MotionControl() {
     Fixed slideLen;
     Fixed supportFriction = this->supportFriction;
 
+    if (itsGame->isClassicFrame) {
+
     distance = (motors[0] + motors[1]) >> 1;
     headChange = FMul(motors[1] - motors[0], turningEffect);
 
@@ -850,13 +852,18 @@ void CAbstractPlayer::MotionControl() {
     speed[2] -= FMul(slowDown, speed[2]);
 
     heading += headChange;
-    location[0] += speed[0];
-    location[1] += speed[1] + groundSlide[1];
-    location[2] += speed[2];
+    // location[0] += speed[0];
+    // location[1] += speed[1] + groundSlide[1];
+    // location[2] += speed[2];
 
-    groundSlide[0] = 0;
-    groundSlide[1] = 0;
-    groundSlide[2] = 0;
+    // groundSlide[0] = 0;
+    // groundSlide[1] = 0;
+    // groundSlide[2] = 0;
+    }
+
+    location[0] += itsGame->fpsScale * speed[0];
+    location[1] += itsGame->fpsScale * (speed[1] + groundSlide[1]);
+    location[2] += itsGame->fpsScale * speed[2];
 }
 
 void CAbstractPlayer::FrameAction() {
