@@ -853,13 +853,6 @@ bool CAvaraGame::GameTick() {
     // SDL_Log("CAvaraGame::GameTick frame=%d dt=%d start=%d end=%d\n", frameNumber, SDL_GetTicks() - lastFrameTime,
     // startTime, endTime); lastFrameTime = SDL_GetTicks();
 
-    if (!isClassicFrame) {
-        // let the fast actors do their thing on non-classic frames as well
-        RunActorFrameActions();
-        IncrementFrame();
-        return true;
-    }
-
     oldPlayersStanding = playersStanding;
     oldTeamsStanding = teamsStanding;
 
