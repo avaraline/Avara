@@ -329,9 +329,11 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 
 void CPlayerManagerImpl::SendFrame() {
     // Sends the next game frame.
-    itsGame->topSentFrame += (1 / itsGame->fpsScale);
+    // itsGame->topSentFrame += (1 / itsGame->fpsScale);
+    itsGame->topSentFrame += 1;
 
-    uint32_t ffi = itsGame->topSentFrame * itsGame->fpsScale;
+    // uint32_t ffi = itsGame->topSentFrame * itsGame->fpsScale;
+    uint32_t ffi = itsGame->topSentFrame;
     FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
 
     ff->validFrame = itsGame->topSentFrame;
@@ -405,7 +407,8 @@ void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short com
 
     theComm = theNetManager->itsCommManager;
 
-    short ffi = theFrame * itsGame->fpsScale;
+    // short ffi = theFrame * itsGame->fpsScale;
+    short ffi = theFrame;
     ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     // ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
 
@@ -462,7 +465,8 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
     frameNumber = thePacket->p3;
 
     pd = (uint32_t *)thePacket->dataBuffer;
-    uint32_t ffi = frameNumber * itsGame->fpsScale;
+    // uint32_t ffi = frameNumber * itsGame->fpsScale;
+    uint32_t ffi = frameNumber;
     ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     ff->validFrame = frameNumber;
 
@@ -497,7 +501,7 @@ void CPlayerManagerImpl::SendResendRequest(short askCount) {
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
     // SDL_Log("CPlayerManagerImpl::GetFunctions\n");
-    uint32_t ffi = (itsGame->frameNumber * itsGame->fpsScale);
+    uint32_t ffi = (itsGame->frameNumber);
     short i = (FUNCTIONBUFFERS - 1) & ffi;
 
     if (frameFuncs[i].validFrame != itsGame->frameNumber) {
@@ -520,7 +524,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 theNetManager->HandleEvent(event);
             }
 
-            if (itsGame->canPreSend && (long)(SDL_GetTicks() - itsGame->nextScheduledFrame) >= 0) {
+            if (itsGame->isClassicFrame && itsGame->canPreSend && (long)(SDL_GetTicks() - itsGame->nextScheduledFrame) >= 0) {
                 itsGame->canPreSend = false;
                 theNetManager->FrameAction();
             }

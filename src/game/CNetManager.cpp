@@ -892,7 +892,7 @@ short CNetManager::PlayerCount() {
             playerCount++;
         }
     }
-    
+
     return playerCount;
 }
 
