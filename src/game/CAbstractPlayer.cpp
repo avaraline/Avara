@@ -573,6 +573,10 @@ void CAbstractPlayer::ArmGrenade() {
 }
 
 void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
+if (!itsGame->isClassicFrame) {
+    return;
+}
+
     if (ft) {
         Fixed modAccel;
         short motionFlags;
@@ -806,8 +810,10 @@ void CAbstractPlayer::Slide(Fixed *direction) {
 }
 
 void CAbstractPlayer::TractionControl() {
-    motors[0] = FMul(motors[0], motorFriction);
-    motors[1] = FMul(motors[1], motorFriction);
+    if (itsGame->isClassicFrame) {
+        motors[0] = FMul(motors[0], motorFriction);
+        motors[1] = FMul(motors[1], motorFriction);
+    }
 }
 
 void CAbstractPlayer::MotionControl() {
@@ -822,45 +828,46 @@ void CAbstractPlayer::MotionControl() {
 
     if (itsGame->isClassicFrame) {
 
-    distance = (motors[0] + motors[1]) >> 1;
-    headChange = FMul(motors[1] - motors[0], turningEffect);
+        distance = (motors[0] + motors[1]) >> 1;
+        headChange = FMul(motors[1] - motors[0], turningEffect);
 
-    if (headChange < 5 && headChange > -5)
-        headChange = 0;
+        if (headChange < 5 && headChange > -5)
+            headChange = 0;
 
-    avrgHeading = heading + (headChange >> 1);
+        avrgHeading = heading + (headChange >> 1);
 
-    motorDir[0] = FMul(FOneSin(avrgHeading), distance);
-    motorDir[1] = FMul(FOneCos(avrgHeading), distance);
+        motorDir[0] = FMul(FOneSin(avrgHeading), distance);
+        motorDir[1] = FMul(FOneCos(avrgHeading), distance);
 
-    slide[0] = motorDir[0] - speed[0] + groundSlide[0];
-    slide[1] = motorDir[1] - speed[2] + groundSlide[2];
-    slideLen = VectorLength(2, slide);
+        slide[0] = motorDir[0] - speed[0] + groundSlide[0];
+        slide[1] = motorDir[1] - speed[2] + groundSlide[2];
+        slideLen = VectorLength(2, slide);
 
-    if (slideLen < supportTraction) {
-        double speedPortion = 0.25;
-        speed[0] += slide[0] - (slide[0] * speedPortion);
-        speed[2] += slide[1] - (slide[1] * speedPortion);
-    } else {
-        speed[0] += FMul(slide[0], supportFriction);
-        speed[2] += FMul(slide[1], supportFriction);
+        if (slideLen < supportTraction) {
+            double speedPortion = 0.25;
+            speed[0] += slide[0] - (slide[0] * speedPortion);
+            speed[2] += slide[1] - (slide[1] * speedPortion);
+        } else {
+            speed[0] += FMul(slide[0], supportFriction);
+            speed[2] += FMul(slide[1], supportFriction);
+        }
+
+        slowDown = FMul(fric, VectorLength(3, speed));
+        speed[0] -= FMul(slowDown, speed[0]);
+        speed[1] -= FMul(slowDown, speed[1]);
+        speed[2] -= FMul(slowDown, speed[2]);
+
+        // heading += headChange;
+        // location[0] += speed[0];
+        // location[1] += speed[1] + groundSlide[1];
+        // location[2] += speed[2];
+
+        // groundSlide[0] = 0;
+        // groundSlide[1] = 0;
+        // groundSlide[2] = 0;
     }
 
-    slowDown = FMul(fric, VectorLength(3, speed));
-    speed[0] -= FMul(slowDown, speed[0]);
-    speed[1] -= FMul(slowDown, speed[1]);
-    speed[2] -= FMul(slowDown, speed[2]);
-
-    heading += headChange;
-    // location[0] += speed[0];
-    // location[1] += speed[1] + groundSlide[1];
-    // location[2] += speed[2];
-
-    // groundSlide[0] = 0;
-    // groundSlide[1] = 0;
-    // groundSlide[2] = 0;
-    }
-
+    heading += headChange * itsGame->fpsScale;
     location[0] += itsGame->fpsScale * speed[0];
     location[1] += itsGame->fpsScale * (speed[1] + groundSlide[1]);
     location[2] += itsGame->fpsScale * speed[2];
