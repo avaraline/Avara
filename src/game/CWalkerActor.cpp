@@ -470,7 +470,7 @@ void CWalkerActor::MoveLegs() {
     absAvgSpeed += (legSpeeds[1] > 0) ? legSpeeds[1] : -legSpeeds[1];
 
     phaseChange = FMulDiv(FSqrt(absAvgSpeed), fConstant, elevation);
-    legPhase += phaseChange / 10;
+    legPhase += itsGame->fpsScale * phaseChange / 10;
 
     for (i = 0; i < 2; i++) {
         Fixed moveRadius;
@@ -583,13 +583,15 @@ void CWalkerActor::TractionControl() {
 
     DoStandingTouches();
 
-    motorFriction = elevation - BESTSPEEDHEIGHT;
-    if (motorFriction < 0)
-        motorFriction = -motorFriction;
-    motorFriction = baseFriction - (motorFriction >> 2);
+    if (itsGame->isClassicFrame) {
+        motorFriction = elevation - BESTSPEEDHEIGHT;
+        if (motorFriction < 0)
+            motorFriction = -motorFriction;
+        motorFriction = baseFriction - (motorFriction >> 2);
 
-    adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
-    speed[1] -= adjustedGravity;
+        adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
+        speed[1] -= adjustedGravity;
+    }
 
     bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
 
@@ -599,7 +601,7 @@ void CWalkerActor::TractionControl() {
 
     extraHeight = bounceTarget + adjustedGravity * 2; // FIX3(120)*2;
 
-    if (!jumpFlag && location[1] < extraHeight) {
+    if (!jumpFlag && location[1] < extraHeight && itsGame->isClassicFrame) {
         speed[1] = ((bounceTarget - location[1]) >> 1) + (speed[1] >> 1);
     }
 

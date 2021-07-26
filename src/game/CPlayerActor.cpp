@@ -63,12 +63,13 @@ void CPlayerActor::AvoidBumping() {
     objHit = DoCollisionTest(&proximityList.p); // TODO: check that we want to use proximityList here
 
     if (objHit) {
-        location[0] -= speed[0];
-        location[2] -= speed[2];
+        location[0] -= speed[0] * itsGame->fpsScale;
+        location[2] -= speed[2] * itsGame->fpsScale;
 
-        motors[0] = FMul(motors[0], friction);
-        motors[1] = FMul(motors[1], friction);
-
+        if (itsGame->isClassicFrame) {
+            motors[0] = FMul(motors[0], friction);
+            motors[1] = FMul(motors[1], friction);
+        }
         undoStep = 0;
 
         do {
@@ -79,7 +80,7 @@ void CPlayerActor::AvoidBumping() {
                     break;
 
                 case undoTurn:
-                    heading -= headChange;
+                    heading -= headChange * itsGame->fpsScale;
                     break;
             }
 
