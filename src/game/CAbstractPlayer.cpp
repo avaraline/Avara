@@ -133,7 +133,7 @@ void CAbstractPlayer::StartSystems() {
 
     fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
     activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
+    chargeGunPerFrame = FIX3(35*itsGame->fpsScale); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;
@@ -780,7 +780,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             AvaraGLSetFOV(ToFloat(fieldOfView));
 
         if (fireGun)
-            mouseShootTime = MOUSESHOOTDELAY;
+            mouseShootTime = MOUSESHOOTDELAY / itsGame->fpsScale;
 
         if (TESTFUNC(kfuTypeText, ft->down)) {
             chatMode = !chatMode;
