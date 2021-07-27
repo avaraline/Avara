@@ -573,10 +573,6 @@ void CAbstractPlayer::ArmGrenade() {
 }
 
 void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
-if (!itsGame->isClassicFrame) {
-    return;
-}
-
     if (ft) {
         Fixed modAccel;
         short motionFlags;
@@ -594,8 +590,9 @@ if (!itsGame->isClassicFrame) {
             viewPitch = maxPitch;
 
         if (TESTFUNC(kfuAimForward, ft->held)) {
-            viewPitch >>= 1;
-            viewYaw >>= 1;
+            Fixed scale = FPow(FIX(0.5), itsGame->fpsScale);
+            viewPitch = FMul(viewPitch, scale);
+            viewYaw = FMul(viewYaw, scale);
         }
 
         fireGun = false;
