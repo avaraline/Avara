@@ -354,10 +354,12 @@ TEST(GRENADE, Trajectory) {
     vector<VectorStruct> at16ms = FireGrenade(20, 50, 4, 16);
     ASSERT_EQ(at64ms.back().theVec[1], 59320) << "64ms simulation is wrong";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
-        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.4) << "not close enough after " << i << " ticks.";
+        // std::cout << "delY32[" << i << "] = " << ToFloat(at32ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.3) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
-        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.2) << "not close enough after " << i << " ticks.";
+        std::cout << "delY16[" << i << "] = " << ToFloat(at16ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.3) << "not close enough after " << i << " ticks.";
     }
 }
 
