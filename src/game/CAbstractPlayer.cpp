@@ -120,10 +120,13 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250);
-#define CLASSICACCELERATION FIX3(250)
-    motorFriction = FIX3(750);
 #define CLASSICMOTORFRICTION FIX3(750)
+    motorFriction = CLASSICMOTORFRICTION;
+    // motorFriction = FPow(CLASSICMOTORFRICTION, itsGame->fpsScale);
+#define CLASSICACCELERATION FIX3(250)
+    maxAcceleration = FIX3(250);
+    modAccelScale = FDivNZ(FMul(CLASSICMOTORFRICTION, (FIX1 - motorFriction)),
+                           FMul(motorFriction, (FIX1 - CLASSICMOTORFRICTION)));
     didBump = true;
 
     groundSlide[0] = 0;
@@ -601,26 +604,36 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             modAccel = FDivNZ(baseMass, GetTotalMass());
             modAccel = FMul(modAccel, modAccel);
             modAccel = FMul(CLASSICACCELERATION, modAccel);
+            // modAccel = FMul(modAccel, modAccelScale);
+
+            if (itsGame->isClassicFrame) {
+                std::cout << "----------------------------------------------------" << std::endl;
+                std::cout << "baseMass = " << baseMass << ", totalmass = " << GetTotalMass() << ", modAccelScale = " << modAccelScale << std::endl;
+            }
+            std::cout << "frameNumber = " << itsGame->frameNumber << std::endl;
+            std::cout << "modAccel = " << modAccel << ", motors = " << FormatVector(motors, 2) << std::endl;
 
             motionFlags = 0;
 
             if (TESTFUNC(kfuForward, ft->held))
-                motionFlags |= 1 + 2;
+                motionFlags |= 1 + 2; // +left, +right
             if (TESTFUNC(kfuReverse, ft->held))
-                motionFlags |= 4 + 8;
+                motionFlags |= 4 + 8; // -left, -right
             if (TESTFUNC(kfuLeft, ft->held))
-                motionFlags |= 2 + 4;
+                motionFlags |= 2 + 4; // +right, -left
             if (TESTFUNC(kfuRight, ft->held))
-                motionFlags |= 1 + 8;
+                motionFlags |= 1 + 8; // +left, -right
 
             if (motionFlags & 1)
-                motors[0] += modAccel;
+                motors[0] += modAccel; // left leg forward
             if (motionFlags & 2)
-                motors[1] += modAccel;
+                motors[1] += modAccel; // right leg forward
             if (motionFlags & 4)
-                motors[0] -= modAccel;
+                motors[0] -= modAccel; // left leg backward
             if (motionFlags & 8)
-                motors[1] -= modAccel;
+                motors[1] -= modAccel; // right leg backward
+
+            std::cout << "   motors +/- modAccel = " << FormatVector(motors, 2) << std::endl;
 
             if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame < itsGame->frameNumber)) {
                 CBasicSound *theSound;
@@ -807,10 +820,9 @@ void CAbstractPlayer::Slide(Fixed *direction) {
 }
 
 void CAbstractPlayer::TractionControl() {
-    if (itsGame->isClassicFrame) {
-        motors[0] = FMul(motors[0], motorFriction);
-        motors[1] = FMul(motors[1], motorFriction);
-    }
+    motors[0] = FMul(motors[0], motorFriction);
+    motors[1] = FMul(motors[1], motorFriction);
+    std::cout << "   TC motors = " << FormatVector(motors, 2) << std::endl;
 }
 
 void CAbstractPlayer::MotionControl() {
@@ -823,51 +835,79 @@ void CAbstractPlayer::MotionControl() {
     Fixed slideLen;
     Fixed supportFriction = this->supportFriction;
 
-    if (itsGame->isClassicFrame) {
+    // motors already adjusted by fpsScale
+    distance = (motors[0] + motors[1]) >> 1;
+    // headChange = FMul(motors[1] - motors[0], turningEffect*itsGame->fpsScale);
+    headChange = FMul(motors[1] - motors[0], turningEffect);
 
-        distance = (motors[0] + motors[1]) >> 1;
-        headChange = FMul(motors[1] - motors[0], turningEffect);
+    // probably to ignore rounding errors...
+    if (headChange < 5 && headChange > -5)
+        headChange = 0;
 
-        if (headChange < 5 && headChange > -5)
-            headChange = 0;
+    avrgHeading = heading + (headChange >> 1);
 
-        avrgHeading = heading + (headChange >> 1);
+    // in XZ plane
+    motorDir[0] = FMul(FOneSin(avrgHeading), distance);
+    motorDir[1] = FMul(FOneCos(avrgHeading), distance);
 
-        motorDir[0] = FMul(FOneSin(avrgHeading), distance);
-        motorDir[1] = FMul(FOneCos(avrgHeading), distance);
+    slide[0] = motorDir[0] - speed[0] + groundSlide[0];
+    slide[1] = motorDir[1] - speed[2] + groundSlide[2];
+    slideLen = VectorLength(2, slide);
 
-        slide[0] = motorDir[0] - speed[0] + groundSlide[0];
-        slide[1] = motorDir[1] - speed[2] + groundSlide[2];
-        slideLen = VectorLength(2, slide);
+    std::cout << "   motorDir = " << FormatVector(motorDir, 2) << std::endl;
+    std::cout << "   slide = " << FormatVector(slide, 2) << std::endl;
 
-        if (slideLen < supportTraction) {
-            double speedPortion = 0.25;
-            speed[0] += slide[0] - (slide[0] * speedPortion);
-            speed[2] += slide[1] - (slide[1] * speedPortion);
-        } else {
-            speed[0] += FMul(slide[0], supportFriction);
-            speed[2] += FMul(slide[1], supportFriction);
-        }
+    if (slideLen < supportTraction) {
+        double speedPortion = 0.25;
 
-        slowDown = FMul(fric, VectorLength(3, speed));
-        speed[0] -= FMul(slowDown, speed[0]);
-        speed[1] -= FMul(slowDown, speed[1]);
-        speed[2] -= FMul(slowDown, speed[2]);
-
-        // heading += headChange;
-        // location[0] += speed[0];
-        // location[1] += speed[1] + groundSlide[1];
-        // location[2] += speed[2];
-
-        // groundSlide[0] = 0;
-        // groundSlide[1] = 0;
-        // groundSlide[2] = 0;
+        double scale1 = pow(speedPortion, itsGame->fpsScale);
+        double scale2 = (1-scale1)/(1-speedPortion);
+        // speed[0] = speed[0] + slide[0] * (1- speedPortion);
+        //          = speed[0] + (motorDir[0] - speed[0] + groundSlide[0]) * (1 - speedPortion);
+        //          = speed[0]*speedPortion + (motorDir[0] + groundSlide[0]) * (1 - speedPortion);
+        speed[0] = speed[0] * scale1 + (motorDir[0] + groundSlide[0]) * (1-speedPortion) * scale2;
+        speed[2] = speed[2] * scale1 + (motorDir[1] + groundSlide[2]) * (1-speedPortion) * scale2;
+        // speed[0] += (slide[0] - (slide[0] * speedPortion)) * itsGame->fpsScale;
+        // speed[2] += (slide[1] - (slide[1] * speedPortion)) * itsGame->fpsScale;
+    } else {
+        // // speed[0] = speed[0] + (motorDir[0] - speed[0] + groundSlide[0]) * supportFriction;
+        // //          = speed[0]*(1-supportFriction) + (motorDir[0] + groundSlide[0]) * supportFriction;
+        Fixed scale1 = FPow(FIX1 - supportFriction, itsGame->fpsScale);
+        double scale2 = FIX1 - scale1;
+        speed[0] = FMul(speed[0], scale1) + FMul(motorDir[0] + groundSlide[0], scale2);
+        speed[2] = FMul(speed[2], scale1) + FMul(motorDir[1] + groundSlide[2], scale2);
+        // speed[0] += FMul(slide[0], supportFriction);
+        // speed[2] += FMul(slide[1], supportFriction);
     }
+
+    std::cout << "   headChange = " << headChange << ", supportTraction = " << supportTraction << ", supportFriction = " << supportFriction << std::endl;
+    std::cout << "   slideLen = " << slideLen  << ", speed = " << FormatVector(speed, 3) << std::endl;
+
+    slowDown = FMul(fric, VectorLength(3, speed));
+    Fixed slowScale = FPow(FIX1 - slowDown, itsGame->fpsScale);
+    speed[0] = FMul(speed[0], slowScale);
+    speed[1] = FMul(speed[1], slowScale);
+    speed[2] = FMul(speed[2], slowScale);
+    // speed[0] -= FMul(slowDown, speed[0]);
+    // speed[1] -= FMul(slowDown, speed[1]);
+    // speed[2] -= FMul(slowDown, speed[2]);
+
+    // heading += headChange;
+    // location[0] += speed[0];
+    // location[1] += speed[1] + groundSlide[1];
+    // location[2] += speed[2];
+
+    // groundSlide[0] = 0;
+    // groundSlide[1] = 0;
+    // groundSlide[2] = 0;
 
     heading += headChange * itsGame->fpsScale;
     location[0] += itsGame->fpsScale * speed[0];
     location[1] += itsGame->fpsScale * (speed[1] + groundSlide[1]);
     location[2] += itsGame->fpsScale * speed[2];
+    std::cout << "   slowDown = " << slowDown << ", speed = " << FormatVector(speed, 3) << std::endl;
+    std::cout << "   heading = " << heading << ", FOneArcTan2 = " << FOneArcTan2(speed[2], speed[0]) << std::endl;
+    std::cout << "   location = " << FormatVector(location, 3) << std::endl;
 }
 
 void CAbstractPlayer::FrameAction() {
