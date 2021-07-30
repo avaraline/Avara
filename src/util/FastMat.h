@@ -49,7 +49,7 @@ typedef struct {
 /*	FIX3 results in the n/1000 as a fixed point number								*/
 #define FIX3(n) ((long)((n)*8192L / 125L))
 /*	FIX results in the integer number as a fixed point number						*/
-#define FIX(n) ((long)(n * 65536L))
+#define FIX(n) ((long)((n) * 65536L))
 
 /*	Prototypes for internal routines:												*/
 void VectorMatrixProduct(long n, Vector *vs, Vector *vd, Matrix *m);
