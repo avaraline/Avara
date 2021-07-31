@@ -177,9 +177,9 @@ void CWalkerActor::AvoidBumping() {
             switch (undoStep) {
                 case undoMotion:
                     if (speed[0] || speed[1] || speed[2]) {
-                        location[0] -= speed[0];
-                        location[2] -= speed[2];
-                        location[1] -= speed[1];
+                        location[0] -= FpsCoefficient2(speed[0]);
+                        location[1] -= FpsCoefficient2(speed[1]);
+                        location[2] -= FpsCoefficient2(speed[2]);
                         goto redoLegs;
                         break;
                     }
@@ -294,6 +294,11 @@ void CWalkerActor::DoStandingTouches() {
         if (touchActor) {
             touchActor->StandingOn(this, legs[0].where, true);
             touchActor->GetFrictionTraction(&fricAcc, &tracAcc);
+            if (!touchActor->HandlesFastFPS()) {
+                // if touchActor still runs slow, increase the traction on that object so that Walker doesn't slide off
+                // delete this code after all actors are FPS
+                tracAcc = tracAcc / itsGame->fpsScale;
+            }
             tractCount = 1;
         }
     } else if (legs[0].where[1] < FIX3(50)) {
@@ -587,29 +592,43 @@ void CWalkerActor::TractionControl() {
     Fixed bounceTarget;
     Fixed adjustedGravity;
 
+    std::cout << "TractionControl, speed[1] = " << speed[1] << std::endl;
+
     DoStandingTouches();
 
-    if (itsGame->isClassicFrame) {
-        motorFriction = elevation - BESTSPEEDHEIGHT;
-        if (motorFriction < 0)
-            motorFriction = -motorFriction;
-        motorFriction = baseFriction - (motorFriction >> 2);
+    motorFriction = elevation - BESTSPEEDHEIGHT;
+    if (motorFriction < 0)
+        motorFriction = -motorFriction;
+    motorFriction = baseFriction - (motorFriction >> 2);
 
-        adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
-        speed[1] -= adjustedGravity;
-    }
+    adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
+    std::cout << "   adjustedGravity = " << adjustedGravity;
 
     bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
 
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
     bounceTarget += targetHeight;
+    std::cout << ", bounceTarget = " << bounceTarget;
 
-    extraHeight = bounceTarget + adjustedGravity * 2; // FIX3(120)*2;
+    // is this adjustedGravity*2 because we already added adjustedGravity to downward speed?
+    extraHeight = (bounceTarget + adjustedGravity * 2); // FIX3(120)*2;
+    std::cout << ", extraHeight = " << extraHeight;
 
-    if (!jumpFlag && location[1] < extraHeight && itsGame->isClassicFrame) {
-        speed[1] = ((bounceTarget - location[1]) >> 1) + (speed[1] >> 1);
+    if (!jumpFlag && location[1] < extraHeight) {
+        // bouncing logic
+        std::cout << ", bounce location[1] = " << location[1] << ", speed[1] = " << speed[1];
+        Fixed scale1, scale2;
+        FpsCoefficients(FIX(0.5), FIX(0.5), &scale1, &scale2);
+        speed[1] = FMul(speed[1], scale1) + FMul((bounceTarget - location[1] - adjustedGravity), scale2);
+        // speed[1] = ((bounceTarget - location[1]) >> 1) + ((speed[1] - adjustedGravity) >> 1);
+    } else {
+        std::cout << ", not bouncing, speed[1] = " << speed[1];
+        speed[1] = speed[1] - FpsCoefficient2(adjustedGravity);
+        // speed[1] = speed[1] - adjustedGravity;
     }
+
+    std::cout << "... TC speed[1] = " << speed[1] << std::endl;
 
     if (speed[1] < 0)
         jumpFlag = false;
@@ -649,17 +668,33 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
 
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
             speed[1] >>= 1;
+            // it's an impulse power up so don't scale the jump
             speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
+            // but do a small gravity correction for high fps so that it's not always on the high side of the curve
+            speed[1] -= int(0.5 / itsGame->fpsScale) * FMul(FIX3(120 * itsGame->fpsScale), itsGame->gravityRatio) * 0.5;
+            std::cout << "*** kfuJump UP!!, jumpBasePower = " << jumpBasePower << ", baseMass = " << baseMass << ", totalMass = " << GetTotalMass() << ", speed = " << speed[1] << std::endl;
             jumpFlag = true;
         }
 
-        if (TESTFUNC(kfuJump, ft->down)) {
-            crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
-        } else if (TESTFUNC(kfuJump, ft->held)) {
-            crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
+        if (TESTFUNC(kfuJump, ft->held)) {
+            // often when holding the jump key both 'held' and 'down' test true so check 'held' first
+            Fixed scale1, scale2;
+            FpsCoefficients(FIX1 - (FIX1 >> 2), FIX1 >> 2, &scale1, &scale2);
+            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
+            // crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
+            std::cout << "*** kfuJump HELD";
+        } else if (TESTFUNC(kfuJump, ft->down)) {
+            Fixed scale1, scale2;
+            FpsCoefficients(FIX1 - (FIX1 >> 3), FIX1 >> 3, &scale1, &scale2);
+            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
+            // crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
+            std::cout << "*** kfuJump DOWN";
         } else {
-            crouch >>= 1;
+            crouch = FMul(crouch, FpsCoefficient1(FIX1 >> 1));
+            // crouch >>= 1;
+            std::cout << "*** kfuJump off";
         }
+        std::cout << ", crouch = " << crouch << std::endl;
     }
 }
 

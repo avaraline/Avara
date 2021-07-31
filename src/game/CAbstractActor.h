@@ -214,7 +214,10 @@ public:
         Fixed *snapDest,
         Fixed *delta,
         CSmartPart **hostPart);
-        
+
     // subclasses override if they can handle all the frames when running faster than CLASSICFRAMETIME
     virtual bool HandlesFastFPS() { return false; }
+    virtual void FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2, Fixed* fpsCoeff1, Fixed* fpsCoeff2);
+    virtual Fixed FpsCoefficient1(Fixed classicMultiplier1);
+    virtual Fixed FpsCoefficient2(Fixed classicMultiplier2);
 };

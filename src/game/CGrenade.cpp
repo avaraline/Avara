@@ -52,9 +52,7 @@ long CGrenade::Arm(CSmartPart *aPart) {
     classicGravity = FMul(kGravity, itsGame->gravityRatio);
     classicFriction = FIX1 - kGrenadeFriction;
 
-    // kGrenadeFriction is typically around 0.01 so friction would be 0.99 after (1/fpsScale) frames
-    friction = FPow(classicFriction, itsGame->fpsScale);
-    gravity = FMul(classicGravity, FDiv(FIX1 - friction, FIX1 - classicFriction));
+    FpsCoefficients(classicFriction, classicGravity, &friction, &gravity);
 
     blastPower = itsDepot->grenadePower;
     shields = FIX3(100);
