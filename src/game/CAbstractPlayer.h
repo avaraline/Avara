@@ -69,8 +69,10 @@ public:
     Fixed baseMass;
     Fixed motors[2]; //	Left/right speed
     Fixed maxAcceleration;
-    Fixed modAccelScale;
+    Fixed classicMotorFriction;
     Fixed motorFriction;
+    Fixed classicMotorAcceleration;
+    Fixed motorAcceleration;
     Fixed turningEffect; //	How far apart are the legs or wheels?
     Fixed movementCost; //	Cost of acceleration
     Fixed proximityRadius;

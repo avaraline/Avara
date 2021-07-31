@@ -25,11 +25,9 @@ void CRealMovers::IAbstractActor() {
 }
 
 void CRealMovers::GetSpeedEstimate(Fixed *theSpeed) {
-    // callers of this method assume return value in CLASSICFRAMETIME time units so scale back to that if running at higher fps
-    int scale = this->HandlesFastFPS() ? (1/itsGame->fpsScale) : 1;
-    theSpeed[0] = speed[0] * scale;
-    theSpeed[1] = speed[1] * scale;
-    theSpeed[2] = speed[2] * scale;
+    theSpeed[0] = speed[0];
+    theSpeed[1] = speed[1];
+    theSpeed[2] = speed[2];
 }
 
 void CRealMovers::Push(Fixed *direction) {
@@ -51,6 +49,7 @@ void CRealMovers::Accelerate(Fixed *direction) {
     }
 }
 
+#include <iostream>
 void CRealMovers::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     Vector impulseMotion;
     Fixed impulsePower;

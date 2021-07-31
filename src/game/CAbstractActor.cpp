@@ -1167,3 +1167,34 @@ short CAbstractActor::GetBallSnapPoint(long theGroup,
     CSmartPart **hostPart) {
     return kSnapNot;
 }
+
+// Computes the coefficients used for high-FPS computations.
+// The arguments are commonly used to represent "friction" and "gravity" in many of the
+// speed calculations. For example, the grenade calculation for vertical speed (speed[1])
+// looks like this:
+//    speed[Y] = speed[Y] * friction - gravity
+// But there are many cases that are a general linear equation where some variable
+// is updated from one frame to the next like this:
+//    x[i+1] = x[i] * coefficient1 + something * coefficient2
+// This method converts the coefficients from "classic" to "fps" equivalents so that
+// the computation after multiple FPS frames is the same as have would been
+// after a single "classic" frame.
+void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2, Fixed* fpsCoeff1, Fixed* fpsCoeff2) {
+    *fpsCoeff1 = FpsCoefficient1(classicCoeff1);
+    if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
+        *fpsCoeff2 = FMul(classicCoeff2, FIX((1.0-ToFloat(*fpsCoeff1)) / (1.0-ToFloat(classicCoeff1))));
+    } else { // 0.999-1.001
+        // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsCoeff
+        *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
+    }
+}
+// convenience function for equations of the form (returns fps-scaled version of a),
+//   x = x*a
+Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
+    return FPow(classicCoeff1, itsGame->fpsScale);
+}
+// convenience function for equations of the form (returns fps-scaled version of b),
+//   x = x + b
+Fixed CAbstractActor::FpsCoefficient2(Fixed classicCoeff2) {
+    return classicCoeff2 * itsGame->fpsScale;
+}
