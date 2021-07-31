@@ -388,7 +388,13 @@ void CWalkerActor::DoLegTouches() {
                 soundId[i] = itsGame->groundStepSound;
             }
 
-            power[i] <<= 1;
+            power[i] *= (2 / itsGame->fpsScale);
+
+            // if falling at a high speed
+            if (speed[1] < -FIX1 && power[i] < FIX3(500)) {
+                // force the sound to play
+                power[i] = FIX3(500);
+            }
         }
 
         if (soundId[0] == soundId[1]) {
@@ -404,7 +410,7 @@ void CWalkerActor::DoLegTouches() {
             }
         } else {
             for (i = 0; i < 2; i++) {
-                if (power[i] > FIX3(10) && soundId[i]) {
+                if (power[i] / itsGame->fpsScale > FIX3(10) && soundId[i]) {
                     DoSound(soundId[i], legs[i].where, power[i], FIX(1));
                 }
             }
@@ -514,8 +520,8 @@ void CWalkerActor::MoveLegs() {
         legSensor.closestHit = NULL;
         RayTest(&legSensor, kSolidBit);
 
-        if (legSensor.distance < -speedLimit) {
-            speedLimit = -legSensor.distance;
+        if (legSensor.distance / itsGame->fpsScale < -speedLimit) {
+            speedLimit = -legSensor.distance / itsGame->fpsScale;
         }
 
         tempZ = legSensor.origin[1] - legSensor.distance;
