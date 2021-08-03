@@ -16,6 +16,9 @@
 #include "RayHit.h"
 #include "Resource.h"
 
+#define DEBUGFPS 0
+#define FPS_DEBUG(stuff) if (DEBUGFPS) std::cout << stuff;
+
 #define kMarkerColor 0x00fefefe
 #define kOtherMarkerColor 0x00fe0000
 
