@@ -592,7 +592,7 @@ void CWalkerActor::TractionControl() {
     Fixed bounceTarget;
     Fixed adjustedGravity;
 
-    std::cout << "TractionControl, speed[1] = " << speed[1] << std::endl;
+    FPS_DEBUG("TractionControl, speed[1] = " << speed[1] << std::endl)
 
     DoStandingTouches();
 
@@ -602,33 +602,33 @@ void CWalkerActor::TractionControl() {
     motorFriction = baseFriction - (motorFriction >> 2);
 
     adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
-    std::cout << "   adjustedGravity = " << adjustedGravity;
+    FPS_DEBUG("   adjustedGravity = " << adjustedGravity)
 
     bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
 
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
     bounceTarget += targetHeight;
-    std::cout << ", bounceTarget = " << bounceTarget;
+    FPS_DEBUG(", bounceTarget = " << bounceTarget)
 
     // is this adjustedGravity*2 because we already added adjustedGravity to downward speed?
     extraHeight = (bounceTarget + adjustedGravity * 2); // FIX3(120)*2;
-    std::cout << ", extraHeight = " << extraHeight;
+    FPS_DEBUG(", extraHeight = " << extraHeight)
 
     if (!jumpFlag && location[1] < extraHeight) {
         // bouncing logic
-        std::cout << ", bounce location[1] = " << location[1] << ", speed[1] = " << speed[1];
+        FPS_DEBUG(", bounce location[1] = " << location[1] << ", speed[1] = " << speed[1])
         Fixed scale1, scale2;
         FpsCoefficients(FIX(0.5), FIX(0.5), &scale1, &scale2);
         speed[1] = FMul(speed[1], scale1) + FMul((bounceTarget - location[1] - adjustedGravity), scale2);
         // speed[1] = ((bounceTarget - location[1]) >> 1) + ((speed[1] - adjustedGravity) >> 1);
     } else {
-        std::cout << ", not bouncing, speed[1] = " << speed[1];
+        FPS_DEBUG(", not bouncing, speed[1] = " << speed[1])
         speed[1] = speed[1] - FpsCoefficient2(adjustedGravity);
         // speed[1] = speed[1] - adjustedGravity;
     }
 
-    std::cout << "... TC speed[1] = " << speed[1] << std::endl;
+    FPS_DEBUG("... TC speed[1] = " << speed[1] << std::endl)
 
     if (speed[1] < 0)
         jumpFlag = false;
@@ -672,7 +672,7 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
             // but do a small gravity correction for high fps so that it's not always on the high side of the curve
             speed[1] -= int(0.5 / itsGame->fpsScale) * FMul(FIX3(120 * itsGame->fpsScale), itsGame->gravityRatio) * 0.5;
-            std::cout << "*** kfuJump UP!!, jumpBasePower = " << jumpBasePower << ", baseMass = " << baseMass << ", totalMass = " << GetTotalMass() << ", speed = " << speed[1] << std::endl;
+            FPS_DEBUG("*** kfuJump UP!!, jumpBasePower = " << jumpBasePower << ", baseMass = " << baseMass << ", totalMass = " << GetTotalMass() << ", speed = " << speed[1] << std::endl)
             jumpFlag = true;
         }
 
@@ -682,19 +682,19 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             FpsCoefficients(FIX1 - (FIX1 >> 2), FIX1 >> 2, &scale1, &scale2);
             crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
             // crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
-            std::cout << "*** kfuJump HELD";
+            FPS_DEBUG("*** kfuJump HELD")
         } else if (TESTFUNC(kfuJump, ft->down)) {
             Fixed scale1, scale2;
             FpsCoefficients(FIX1 - (FIX1 >> 3), FIX1 >> 3, &scale1, &scale2);
             crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
             // crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
-            std::cout << "*** kfuJump DOWN";
+            FPS_DEBUG("*** kfuJump DOWN")
         } else {
             crouch = FMul(crouch, FpsCoefficient1(FIX1 >> 1));
             // crouch >>= 1;
-            std::cout << "*** kfuJump off";
+            FPS_DEBUG("*** kfuJump off")
         }
-        std::cout << ", crouch = " << crouch << std::endl;
+        FPS_DEBUG(", crouch = " << crouch << std::endl)
     }
 }
 
