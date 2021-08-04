@@ -1180,26 +1180,39 @@ short CAbstractActor::GetBallSnapPoint(long theGroup,
 // the computation after multiple FPS frames is the nearly same as it would have would been
 // over the span of a single "classic" frame.
 void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2, Fixed* fpsCoeff1, Fixed* fpsCoeff2) {
-    double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
-    *fpsCoeff1 = FIXRND(fps1);
-    if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
-        *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
-    } else { // 0.999-1.001
-        // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsCoeff
-        *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
+    if (HandlesFastFPS()) {
+        double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
+        *fpsCoeff1 = FIXRND(fps1);
+        if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
+            *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
+        } else { // 0.999-1.001
+            // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsCoeff
+            *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
+        }
+    } else {
+        *fpsCoeff1 = classicCoeff1;
+        *fpsCoeff2 = classicCoeff2;
     }
 }
 
 // convenience function for equations of the form (returns fps-scaled version of a),
 //   x[i+1] = x[i] * a
 Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
-    return FIXRND(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
+    if (HandlesFastFPS()) {
+        return FIXRND(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
+    } else {
+        return classicCoeff1;
+    }
 }
 // convenience function for equations of the form (returns fps-scaled version of b),
 //   x[i+1] = x[i] + b
 Fixed CAbstractActor::FpsCoefficient2(Fixed classicCoeff2) {
-    // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
-    return std::lround(classicCoeff2 * itsGame->fpsScale);
+    if (HandlesFastFPS()) {
+        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+        return std::lround(classicCoeff2 * itsGame->fpsScale);
+    } else {
+        return classicCoeff2;
+    }
 }
 
 // the most accurate version of coefficient1 is computed using doubles

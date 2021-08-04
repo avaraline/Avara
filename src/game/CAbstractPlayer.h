@@ -221,4 +221,6 @@ public:
         Fixed *delta,
         CSmartPart **hostPart);
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
+
+    virtual bool HandlesFastFPS() { return true; }
 };
