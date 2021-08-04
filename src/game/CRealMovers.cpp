@@ -68,7 +68,7 @@ void CRealMovers::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 
 void CRealMovers::FindBestMovement(CSmartPart *objHit) {
     Vector newSpeed;
-    Vector deltaSpeed;
+    Vector deltaSpeed, deltaLoc;
     Fixed yDir;
     Fixed dotProd;
     Fixed absDot;
@@ -98,11 +98,16 @@ void CRealMovers::FindBestMovement(CSmartPart *objHit) {
 
             if (newSpeed[0] > MINSPEED || newSpeed[0] < -MINSPEED || newSpeed[1] > MINSPEED ||
                 newSpeed[1] < -MINSPEED || newSpeed[2] > MINSPEED || newSpeed[2] < -MINSPEED) {
+
                 deltaSpeed[0] = newSpeed[0] - deltaSpeed[0];
                 deltaSpeed[1] = newSpeed[1] - deltaSpeed[1];
                 deltaSpeed[2] = newSpeed[2] - deltaSpeed[2];
 
-                OffsetParts(deltaSpeed);
+                deltaLoc[0] = FpsCoefficient2(deltaSpeed[0]);
+                deltaLoc[1] = FpsCoefficient2(deltaSpeed[1]);
+                deltaLoc[2] = FpsCoefficient2(deltaSpeed[2]);
+
+                OffsetParts(deltaLoc);
 
                 deltaSpeed[0] = newSpeed[0];
                 deltaSpeed[1] = newSpeed[1];
@@ -120,14 +125,18 @@ void CRealMovers::FindBestMovement(CSmartPart *objHit) {
     deltaSpeed[0] = bestSpeed[0] - deltaSpeed[0];
     deltaSpeed[1] = bestSpeed[1] - deltaSpeed[1];
     deltaSpeed[2] = bestSpeed[2] - deltaSpeed[2];
-    location[0] += bestSpeed[0];
-    location[1] += bestSpeed[1];
-    location[2] += bestSpeed[2];
+
+    location[0] += FpsCoefficient2(bestSpeed[0]);
+    location[1] += FpsCoefficient2(bestSpeed[1]);
+    location[2] += FpsCoefficient2(bestSpeed[2]);
+    deltaLoc[0] = FpsCoefficient2(deltaSpeed[0]);
+    deltaLoc[1] = FpsCoefficient2(deltaSpeed[1]);
+    deltaLoc[2] = FpsCoefficient2(deltaSpeed[2]);
 
     speed[0] = bestSpeed[0];
     speed[1] = bestSpeed[1];
     speed[2] = bestSpeed[2];
-    OffsetParts(deltaSpeed);
+    OffsetParts(deltaLoc);
 }
 
 void CRealMovers::StandingOn(CAbstractActor *who, //	Who is touching me?

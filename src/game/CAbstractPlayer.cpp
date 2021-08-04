@@ -33,6 +33,8 @@
 #include "Parser.h"
 #include "Preferences.h"
 
+// #define DEBUGFPS 1
+
 #define MOUSESHOOTDELAY 8
 // replaced by kFOV preference
 //#define MAXFOV FIX(60)
