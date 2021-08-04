@@ -14,6 +14,8 @@
 //#include "CInfoPanel.h"
 #include "CAvaraApp.h"
 
+// #define DEBUGFPS 1  // will override def in CAbstractActor.h but gives compiler warnings
+
 #define kGravity FIX3(120)
 #define kGrenadeFriction FIX3(10)
 
@@ -93,6 +95,9 @@ void CGrenade::Locate() {
     // classic frame's worth of gravity adjustments up front
     speed[1] -= int(0.5 / itsGame->fpsScale) * gravity * 0.5;
 
+    FPS_DEBUG("GRENADE initial location = " << FormatVector(location, 3) << "\n")
+    FPS_DEBUG("GRENADE initial speed = " << FormatVector(speed, 3) << "\n")
+
     yaw = -FOneArcTan2(fullTransform[2][2], fullTransform[0][2]);
     MRotateY(FOneSin(-yaw), FOneCos(yaw), &fullTransform);
     pitch = -FOneArcTan2(fullTransform[1][1], fullTransform[2][1]);
@@ -129,6 +134,9 @@ void CGrenade::FrameAction() {
         speed[1] = FMul(speed[1], friction) - gravity;
         speed[2] = FMul(speed[2], friction);
 
+        // FPS_DEBUG("\nframeNumber = " << itsGame->frameNumber << "\n")
+        FPS_DEBUG("GRENADE speed = " << FormatVector(speed, 3) << "\n")
+
         VECTORCOPY(rayHit.direction, speed);
         VECTORCOPY(rayHit.origin, location);
         rayHit.closestHit = NULL;
@@ -138,18 +146,19 @@ void CGrenade::FrameAction() {
         RayTestWithGround(&rayHit, kSolidBit);
 
         // if the location adjustment will put us below ground
-        if (realSpeed * itsGame->fpsScale > rayHit.distance) {
-            realSpeed = rayHit.distance / itsGame->fpsScale;
+        if (FpsCoefficient2(realSpeed) > rayHit.distance) {
+            realSpeed = FpsCoefficient2(rayHit.distance);
             speed[0] = FMul(rayHit.direction[0], realSpeed);
             speed[1] = FMul(rayHit.direction[1], realSpeed);
             speed[2] = FMul(rayHit.direction[2], realSpeed);
             doExplode = true;
+            FPS_DEBUG("GRENADE explode speed = " << FormatVector(speed, 3) << "\n")
         }
 
-        // speeds are calculated in CLASSICFRAMETIME units so scale back before applying
-        location[0] += speed[0] * itsGame->fpsScale;
-        location[1] += speed[1] * itsGame->fpsScale;
-        location[2] += speed[2] * itsGame->fpsScale;
+        location[0] += FpsCoefficient2(speed[0]);
+        location[1] += FpsCoefficient2(speed[1]);
+        location[2] += FpsCoefficient2(speed[2]);
+        FPS_DEBUG("GRENADE location = " << FormatVector(location, 3) << "\n")
 
         UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
@@ -179,6 +188,7 @@ void CGrenade::FrameAction() {
             location[1] -= speed[1] * itsGame->fpsScale;
             location[2] -= speed[2] * itsGame->fpsScale;
             doExplode = true;
+            FPS_DEBUG("GRENADE collision location = " << FormatVector(location, 3) << "\n")
         }
 
         flyCount++;

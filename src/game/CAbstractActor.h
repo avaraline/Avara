@@ -16,7 +16,7 @@
 #include "RayHit.h"
 #include "Resource.h"
 
-#define DEBUGFPS 0
+#define DEBUGFPS 0  // this can also be overridden in subclasses if you just want partial output
 #define FPS_DEBUG(stuff) if (DEBUGFPS) std::cout << stuff;
 
 #define kMarkerColor 0x00fefefe
