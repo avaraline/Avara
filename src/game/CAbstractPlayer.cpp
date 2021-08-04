@@ -836,9 +836,6 @@ void CAbstractPlayer::TractionControl() {
 void CAbstractPlayer::MotionControl() {
     Fixed avrgHeading;
     Fixed motorDir[2];
-    Fixed fric = FIX3(10); // FIX3(30);
-    Fixed slowDown;
-    Fixed absVert;
     Fixed slide[2];
     Fixed slideLen;
     Fixed supportFriction = this->supportFriction;
@@ -866,29 +863,27 @@ void CAbstractPlayer::MotionControl() {
     FPS_DEBUG("   groundSlide = " << FormatVector(groundSlide, 3) << std::endl)
     FPS_DEBUG("   slide = " << FormatVector(slide, 2) << std::endl)
 
+    Fixed scale1, scale2;
     if (slideLen < supportTraction) {
         Fixed speedPortion = FIX(0.25);
         //   speed[] += (slide[] - (slide[] * speedPortion));
         // can be re-written as a function of speed[],
         //   speed[] = speed[] * speedPortion + (motorDir[] + groundSlide[]) * (1 - speedPortion);
-        Fixed scale1, scale2;
         FpsCoefficients(speedPortion, FIX1-speedPortion, &scale1, &scale2);
-        speed[0] = FMul(speed[0], scale1) + FMul(motorDir[0] + groundSlide[0], scale2);
-        speed[2] = FMul(speed[2], scale1) + FMul(motorDir[1] + groundSlide[2], scale2);
     } else {
         //   speed[] += slide[] * supportFriction;
         // can be re-written as a function of speed[],
         //   speed[] = speed[] * (1-supportFriction) + (motorDir[] + groundSlide[]) * supportFriction;
-        Fixed scale1, scale2;
         FpsCoefficients(FIX1 - supportFriction, supportFriction, &scale1, &scale2);
-        speed[0] = FMul(speed[0], scale1) + FMul(motorDir[0] + groundSlide[0], scale2);
-        speed[2] = FMul(speed[2], scale1) + FMul(motorDir[1] + groundSlide[2], scale2);
     }
+    speed[0] = FMul(speed[0], scale1) + FMul(motorDir[0] + groundSlide[0], scale2);
+    speed[2] = FMul(speed[2], scale1) + FMul(motorDir[1] + groundSlide[2], scale2);
 
     FPS_DEBUG("   headChange = " << headChange << ", supportTraction = " << supportTraction << "   slideLen = " << slideLen << std::endl)
     FPS_DEBUG("after slide speed = " << FormatVector(speed, 3) << std::endl)
 
-    slowDown = FMul(fric, VectorLength(3, speed));
+    Fixed fric = FIX3(10); // FIX3(30);
+    Fixed slowDown = FMul(fric, VectorLength(3, speed));
     slowDown = FIX1 - FpsCoefficient1(FIX1 - slowDown);
     speed[0] -= FMul(slowDown, speed[0]);
     speed[1] -= FMul(slowDown, speed[1]);
