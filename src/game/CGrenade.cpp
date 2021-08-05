@@ -91,9 +91,9 @@ void CGrenade::Locate() {
     speed[1] += (fullTransform[1][1] + 2 * fullTransform[2][1]);
     speed[2] += (fullTransform[1][2] + 2 * fullTransform[2][2]);
 
-    // correct for high-FPS bias of grenades flying a little high by doing 1/4 of a
+    // correct for high-FPS bias of grenades flying a little high by doing 3/4 of a
     // classic frame's worth of gravity adjustments up front
-    speed[1] -= int(0.5 / itsGame->fpsScale) * gravity * 0.5;
+    speed[1] -= int(0.75 / itsGame->fpsScale) * gravity * 0.5;
 
     FPS_DEBUG("GRENADE initial location = " << FormatVector(location, 3) << "\n")
     FPS_DEBUG("GRENADE initial speed = " << FormatVector(speed, 3) << "\n")

@@ -223,4 +223,6 @@ public:
     virtual void FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2, Fixed* fpsCoeff1, Fixed* fpsCoeff2);
     virtual Fixed FpsCoefficient1(Fixed classicMultiplier1);
     virtual Fixed FpsCoefficient2(Fixed classicMultiplier2);
+private:
+    virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);
 };

@@ -1175,26 +1175,34 @@ short CAbstractActor::GetBallSnapPoint(long theGroup,
 //    speed[Y] = speed[Y] * friction - gravity
 // But there are many cases that are a general linear equation where some variable
 // is updated from one frame to the next like this:
-//    x[i+1] = x[i] * coefficient1 + something * coefficient2
-// This method converts the coefficients from "classic" to "fps" equivalents so that
-// the computation after multiple FPS frames is the same as have would been
-// after a single "classic" frame.
+//    x[i+1] = x[i] * a + b
+// This method converts the coefficients (a, b) from "classic" to "fps" equivalents so that
+// the computation after multiple FPS frames is the nearly same as it would have would been
+// over the span of a single "classic" frame.
 void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2, Fixed* fpsCoeff1, Fixed* fpsCoeff2) {
-    *fpsCoeff1 = FpsCoefficient1(classicCoeff1);
+    double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
+    *fpsCoeff1 = FIXRND(fps1);
     if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
-        *fpsCoeff2 = FMul(classicCoeff2, FIX((1.0-ToFloat(*fpsCoeff1)) / (1.0-ToFloat(classicCoeff1))));
+        *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
     } else { // 0.999-1.001
         // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsCoeff
         *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
     }
 }
+
 // convenience function for equations of the form (returns fps-scaled version of a),
-//   x = x*a
+//   x[i+1] = x[i] * a
 Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
-    return FPow(classicCoeff1, itsGame->fpsScale);
+    return FIXRND(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
 }
 // convenience function for equations of the form (returns fps-scaled version of b),
-//   x = x + b
+//   x[i+1] = x[i] + b
 Fixed CAbstractActor::FpsCoefficient2(Fixed classicCoeff2) {
-    return classicCoeff2 * itsGame->fpsScale;
+    // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+    return std::lround(classicCoeff2 * itsGame->fpsScale);
+}
+
+// the most accurate version of coefficient1 is computed using doubles
+double CAbstractActor::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
+    return pow(fpsCoeff1, fpsScale);
 }

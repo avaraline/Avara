@@ -306,8 +306,8 @@ TEST(HECTOR, Gravity) {
         double f64 = ToFloat(at64ms[i]);
         double f32 = ToFloat(at32ms[i]);
         double f16 = ToFloat(at32ms[i]);
-        ASSERT_LT(abs(f64-f32)/f64, 0.18) << "not close enough after " << i << " ticks.";
-        ASSERT_LT(abs(f64-f16)/f64, 0.18) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(abs(f64-f32)/f64, 0.003) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(abs(f64-f16)/f64, 0.003) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -360,11 +360,15 @@ TEST(GRENADE, Trajectory) {
     ASSERT_NEAR(at64ms.back().theVec[1], 59384, 3*MILLIMETER) << "64ms simulation is wrong";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
         // std::cout << "delY32[" << i << "] = " << ToFloat(at32ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
-        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.3) << "not close enough after " << i << " ticks.";
+        // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.2) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
         // std::cout << "delY16[" << i << "] = " << ToFloat(at16ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
-        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.3) << "not close enough after " << i << " ticks.";
+        // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
+        // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
+        // std::cout << "loc16[" << i << "] = " << FormatVector(at16ms[i].theVec, 3) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.2) << "not close enough after " << i << " ticks.";
     }
 }
 
