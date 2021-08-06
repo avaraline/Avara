@@ -7,6 +7,8 @@
     Modified: Thursday, September 26, 1996, 00:06
 */
 
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
+
 #include "CAbstractPlayer.h"
 
 #include "AvaraDefines.h"
@@ -612,17 +614,17 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                            &motorFriction, &motorAcceleration);
 
             if (itsGame->isClassicFrame) {
-                FPS_DEBUG("----------------------------------------------------" << std::endl)
-                FPS_DEBUG("baseMass = " << baseMass << ", totalmass = " << GetTotalMass() << ", classicFriction = " << classicMotorFriction << ", friction = " << motorFriction << ", classicAcceleration = " << classicMotorAcceleration << ", acceleration = " << motorAcceleration << std::endl)
+                FPS_DEBUG("----------------------------------------------------" << std::endl);
+                FPS_DEBUG("baseMass = " << baseMass << ", totalmass = " << GetTotalMass() << ", classicFriction = " << classicMotorFriction << ", friction = " << motorFriction << ", classicAcceleration = " << classicMotorAcceleration << ", acceleration = " << motorAcceleration << std::endl);
             }
-            FPS_DEBUG("frameNumber = " << itsGame->frameNumber << std::endl)
-            FPS_DEBUG("initial location = " << FormatVector(location, 3) << ", heading = " << ToFloat(heading)*360 << ", speed = " << FormatVector(speed, 3) << std::endl)
+            FPS_DEBUG("frameNumber = " << itsGame->frameNumber << std::endl);
+            FPS_DEBUG("initial location = " << FormatVector(location, 3) << ", heading = " << ToFloat(heading)*360 << ", speed = " << FormatVector(speed, 3) << std::endl);
 
-            FPS_DEBUG("   motors before = " << FormatVector(motors, 2) << std::endl)
+            FPS_DEBUG("   motors before = " << FormatVector(motors, 2) << std::endl);
 
             motors[0] = FMul(motors[0], motorFriction);
             motors[1] = FMul(motors[1], motorFriction);
-            FPS_DEBUG("   motors after fric = " << FormatVector(motors, 2) << std::endl)
+            FPS_DEBUG("   motors after fric = " << FormatVector(motors, 2) << std::endl);
 
             motionFlags = 0;
 
@@ -644,7 +646,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             if (motionFlags & 8)
                 motors[1] -= motorAcceleration; // right leg backward
 
-            FPS_DEBUG("   motors after keyb  = " << FormatVector(motors, 2) << std::endl)
+            FPS_DEBUG("   motors after keyb  = " << FormatVector(motors, 2) << std::endl);
 
             if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame < itsGame->frameNumber)) {
                 CBasicSound *theSound;
@@ -858,10 +860,10 @@ void CAbstractPlayer::MotionControl() {
     slide[1] = motorDir[1] - speed[2] + groundSlide[2];
     slideLen = VectorLength(2, slide);
 
-    FPS_DEBUG("   motorDir = " << FormatVector(motorDir, 2) << std::endl)
-    FPS_DEBUG("   speed = " << FormatVector(speed, 3) << std::endl)
-    FPS_DEBUG("   groundSlide = " << FormatVector(groundSlide, 3) << std::endl)
-    FPS_DEBUG("   slide = " << FormatVector(slide, 2) << std::endl)
+    FPS_DEBUG("   motorDir = " << FormatVector(motorDir, 2) << std::endl);
+    FPS_DEBUG("   speed = " << FormatVector(speed, 3) << std::endl);
+    FPS_DEBUG("   groundSlide = " << FormatVector(groundSlide, 3) << std::endl);
+    FPS_DEBUG("   slide = " << FormatVector(slide, 2) << std::endl);
 
     Fixed scale1, scale2;
     if (slideLen < supportTraction) {
@@ -879,8 +881,8 @@ void CAbstractPlayer::MotionControl() {
     speed[0] = FMul(speed[0], scale1) + FMul(motorDir[0] + groundSlide[0], scale2);
     speed[2] = FMul(speed[2], scale1) + FMul(motorDir[1] + groundSlide[2], scale2);
 
-    FPS_DEBUG("   headChange = " << headChange << ", supportTraction = " << supportTraction << "   slideLen = " << slideLen << std::endl)
-    FPS_DEBUG("after slide speed = " << FormatVector(speed, 3) << std::endl)
+    FPS_DEBUG("   headChange = " << headChange << ", supportTraction = " << supportTraction << "   slideLen = " << slideLen << std::endl);
+    FPS_DEBUG("after slide speed = " << FormatVector(speed, 3) << std::endl);
 
     Fixed fric = FIX3(10); // FIX3(30);
     Fixed slowDown = FMul(fric, VectorLength(3, speed));
@@ -894,7 +896,7 @@ void CAbstractPlayer::MotionControl() {
     location[1] += FpsCoefficient2((speed[1] + groundSlide[1]));
     location[2] += FpsCoefficient2(speed[2]);
 
-    FPS_DEBUG("final location = " << FormatVector(location, 3) << ", heading = " << ToFloat(heading)*360 << ", speed = " << FormatVector(speed, 3) << std::endl)
+    FPS_DEBUG("final location = " << FormatVector(location, 3) << ", heading = " << ToFloat(heading)*360 << ", speed = " << FormatVector(speed, 3) << std::endl);
 
     groundSlide[0] = 0;
     groundSlide[1] = 0;
