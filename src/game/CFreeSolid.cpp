@@ -7,13 +7,13 @@
     Modified: Monday, March 10, 1997, 16:26
 */
 
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
+
 #include "CFreeSolid.h"
 
 #include "CBSPWorld.h"
 #include "CSmartPart.h"
 #include "CWallActor.h"
-
-#define DEBUGFPS 1  // will override def in CAbstractActor.h but gives compiler warnings
 
 extern CWallActor *lastWallActor;
 
@@ -149,13 +149,13 @@ void CFreeSolid::FrameAction() {
 
     if (status) //	If we are active, move.
     {
-        FPS_DEBUG("\nframeNum = " << itsGame->frameNumber << "\n")
-        FPS_DEBUG("acceleration = " << acceleration << ", customGravity = " << customGravity << "\n")
-        FPS_DEBUG("CFreeSolid before location = " << FormatVector(location, 3) << ", speed = " << FormatVector(speed, 3) << "\n")
+        FPS_DEBUG("\nframeNum = " << itsGame->frameNumber);
+        FPS_DEBUG(", acceleration = " << acceleration << ", customGravity = " << customGravity << "\n");
+        FPS_DEBUG("CFreeSolid initial location = " << FormatVector(location, 3) << ", speed = " << FormatVector(speed, 3) << "\n");
 
         //	Handle gravity
         if (location[1] > partList[0]->minBounds.y) {
-            std::cout << "customGravity = " << customGravity << ", gravityRatio = " << itsGame->gravityRatio << std::endl;
+            FPS_DEBUG("customGravity = " << customGravity << ", gravityRatio = " << itsGame->gravityRatio << "\n");
             speed[1] -= FMul(customGravity, itsGame->gravityRatio);
         }
 
@@ -164,13 +164,13 @@ void CFreeSolid::FrameAction() {
         speed[1] = FMul(speed[1], acceleration);
         speed[2] = FMul(speed[2], acceleration);
 
-        FPS_DEBUG("CFreeSolid speed = " << FormatVector(speed, 3) << "\n")
+        FPS_DEBUG("CFreeSolid speed = " << FormatVector(speed, 3) << "\n");
 
         //	Check for ground level (not done by regular collision checks
         if ( // speed[1] < 0 &&
             location[1] + speed[1] * itsGame->fpsScale < -partList[0]->minBounds.y) { //	Bounce up on ground hit.
             speed[1] = (-partList[0]->minBounds.y - location[1]) / itsGame->fpsScale;
-            FPS_DEBUG("  ground level speed = " << FormatVector(speed, 3) << "\n")
+            FPS_DEBUG("  ground level speed = " << FormatVector(speed, 3) << "\n");
         }
 
         //	If we are moving fast enough, translate in 3D.
@@ -185,19 +185,18 @@ void CFreeSolid::FrameAction() {
             location[0] += locOffset[0];
             location[1] += locOffset[1];
             location[2] += locOffset[2];
-            FPS_DEBUG("  location = " << FormatVector(location, 3) << "\n")
-
             OffsetParts(locOffset);
+            FPS_DEBUG("  location before collision = " << FormatVector(location, 3) << "\n");
+
             BuildPartProximityList(
                 location, partList[0]->bigRadius + FDistanceOverEstimate(locOffset[0], locOffset[1], locOffset[2]), kSolidBit);
 
             hitPart = DoCollisionTest(&proximityList.p);
             if (hitPart) { //	If we hit something, cause damage to it.
+                FPS_DEBUG("---- collision with object of type " << typeid(*hitPart->theOwner).name() << " -----\n");
 
                 CAbstractActor *anActor, *next;
                 CSmartPart *thePart;
-
-FPS_DEBUG("---- collision detected -----\n")
 
                 if (hitPower) {
                     BlastHitRecord theBlast;
@@ -241,6 +240,6 @@ FPS_DEBUG("---- collision detected -----\n")
             //	Collision detection maintenance:
             LinkSphere(location, partList[0]->bigRadius);
         }
-        FPS_DEBUG("CFreeSolid after location = " << FormatVector(location, 3) << ", speed = " << FormatVector(speed, 3) << "\n")
+        FPS_DEBUG("CFreeSolid final location = " << FormatVector(location, 3) << ", speed = " << FormatVector(speed, 3) << "\n");
     }
 }
