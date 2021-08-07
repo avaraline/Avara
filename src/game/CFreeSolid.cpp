@@ -47,6 +47,7 @@ void CFreeSolid::BeginScript() {
 CAbstractActor *CFreeSolid::EndScript() {
     if (CRealMovers::EndScript()) {
         short shapeId;
+        Fixed fpsSpeedOffset;
 
         RegisterReceiver(&startMsg, ReadLongVar(iStartMsg)); //	Interested in start messages
         RegisterReceiver(&stopMsg, ReadLongVar(iStopMsg)); //	Interested in stop messages
@@ -56,7 +57,7 @@ CAbstractActor *CFreeSolid::EndScript() {
         customGravity = ReadFixedVar(iCustomGravity);
         acceleration = ReadFixedVar(iAccelerate);
 
-        FpsCoefficients(acceleration, customGravity, &acceleration, &customGravity);
+        FpsCoefficients(acceleration, customGravity, &acceleration, &customGravity, &fpsSpeedOffset);
 
         shapeId = ReadLongVar(iShape); //	Read our shape resource ID
         if (shapeId) {
@@ -86,9 +87,8 @@ CAbstractActor *CFreeSolid::EndScript() {
             return NULL;
         }
 
-        // high-FPS initially falls a little slower so compensate by adding about half a
-        // classic frame's worth of gravity adjustments up front
-        speed[1] -= int(0.75 / itsGame->fpsScale) * customGravity * 0.5;
+        // high-FPS initially falls a little slower so compensate by adding an offset
+        speed[1] -= fpsSpeedOffset;
         location[1] += FpsCoefficient2(speed[1]);
 
         PlaceParts(); //	Locate shape

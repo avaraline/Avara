@@ -611,11 +611,11 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             //    motor = f*motor + a
             // But we have to adjust how we calculate multipliers
             FpsCoefficients(classicMotorFriction, FMul(classicMotorFriction, classicMotorAcceleration),
-                           &motorFriction, &motorAcceleration);
+                           &motorFriction, &motorAcceleration, &fpsMotorOffset);
 
             if (itsGame->isClassicFrame) {
                 FPS_DEBUG("----------------------------------------------------" << std::endl);
-                FPS_DEBUG("baseMass = " << baseMass << ", totalmass = " << GetTotalMass() << ", classicFriction = " << classicMotorFriction << ", friction = " << motorFriction << ", classicAcceleration = " << classicMotorAcceleration << ", acceleration = " << motorAcceleration << std::endl);
+                FPS_DEBUG("baseMass = " << baseMass << ", totalmass = " << GetTotalMass() << ", classicFriction = " << classicMotorFriction << ", friction = " << motorFriction << ", classicAcceleration = " << classicMotorAcceleration << ", acceleration = " << motorAcceleration << ", fpsMotorOffset = " << fpsMotorOffset << std::endl);
             }
             FPS_DEBUG("frameNumber = " << itsGame->frameNumber << std::endl);
             FPS_DEBUG("initial location = " << FormatVector(location, 3) << ", heading = " << ToFloat(heading)*360 << ", speed = " << FormatVector(speed, 3) << std::endl);
@@ -628,23 +628,47 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
             motionFlags = 0;
 
-            if (TESTFUNC(kfuForward, ft->held))
+            if (TESTFUNC(kfuForward, ft->held)) {
                 motionFlags |= 1 + 2; // +left, +right
-            if (TESTFUNC(kfuReverse, ft->held))
+                FPS_DEBUG("  ** kfuForward **");
+            }
+            if (TESTFUNC(kfuReverse, ft->held)) {
                 motionFlags |= 4 + 8; // -left, -right
-            if (TESTFUNC(kfuLeft, ft->held))
+                FPS_DEBUG("  ** kfuReverse **");
+            }
+            if (TESTFUNC(kfuLeft, ft->held)) {
                 motionFlags |= 2 + 4; // +right, -left
-            if (TESTFUNC(kfuRight, ft->held))
+                FPS_DEBUG("  ** kfuLeft **");
+            }
+            if (TESTFUNC(kfuRight, ft->held)) {
                 motionFlags |= 1 + 8; // +left, -right
+                FPS_DEBUG("  ** kfuRight **");
+            }
 
-            if (motionFlags & 1)
+            if (motionFlags & 1) {
+                if (motors[0] <= 0) { // switching direction or starting to move
+                    motors[0] += fpsMotorOffset;
+                }
                 motors[0] += motorAcceleration; // left leg forward
-            if (motionFlags & 2)
+            }
+            if (motionFlags & 2) {
+                if (motors[1] <= 0) {
+                    motors[1] += fpsMotorOffset;
+                }
                 motors[1] += motorAcceleration; // right leg forward
-            if (motionFlags & 4)
+            }
+            if (motionFlags & 4) {
+                if (motors[0] >= 0) {
+                    motors[0] -= fpsMotorOffset;
+                }
                 motors[0] -= motorAcceleration; // left leg backward
-            if (motionFlags & 8)
+            }
+            if (motionFlags & 8) {
+                if (motors[1] >= 0) {
+                    motors[1] -= fpsMotorOffset;
+                }
                 motors[1] -= motorAcceleration; // right leg backward
+            }
 
             FPS_DEBUG("   motors after keyb  = " << FormatVector(motors, 2) << std::endl);
 

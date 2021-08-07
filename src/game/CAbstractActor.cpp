@@ -1179,15 +1179,21 @@ short CAbstractActor::GetBallSnapPoint(long theGroup,
 // This method converts the coefficients (a, b) from "classic" to "fps" equivalents so that
 // the computation after multiple FPS frames is the nearly same as it would have would been
 // over the span of a single "classic" frame.
-void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2, Fixed* fpsCoeff1, Fixed* fpsCoeff2) {
+void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
+                                     Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed *fpsOffset) {
     if (HandlesFastFPS()) {
         double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
         *fpsCoeff1 = FIXRND(fps1);
         if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
             *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
         } else { // 0.999-1.001
-            // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsCoeff
+            // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsScale
             *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
+        }
+        if (fpsOffset != NULL) {
+            // Dividing by classicCoeff1(A) seems to improve cases like this:
+            //   s=As+B
+            *fpsOffset = FDiv(FpsOffset(classicCoeff2), classicCoeff1);
         }
     } else {
         *fpsCoeff1 = classicCoeff1;
@@ -1213,6 +1219,21 @@ Fixed CAbstractActor::FpsCoefficient2(Fixed classicCoeff2) {
     } else {
         return classicCoeff2;
     }
+}
+
+// convenience function for offset assuming equations of the form
+//   x[i+1] = x[i] + b
+Fixed CAbstractActor::FpsOffset(Fixed classicCoeff2) {
+    // Here's an oversimplication... if you are calculating speed every
+    // classic frame (64ms) like this,
+    //   s=s+8     (classicCoeff1=1, classicCoeff2=8)
+    // then the high FPS (16ms) case might do this for 4 frames.
+    //   s=s+2     (fpsCoeff1=1, fpsCoeff2=2)
+    // but the FPS case will only add a total of (2+4+6+8)*0.25=5 to the location
+    // whereas the classic case adds 8.  To compensate, add an initial offset of
+    // 1.5*2=3 to the speed in the first frame so that the location is incremented
+    // by (5+7+9+11)*0.25=8, same as the classic case.
+    return 0.5 * (1/itsGame->fpsScale - 1) * FpsCoefficient2(classicCoeff2);
 }
 
 // the most accurate version of coefficient1 is computed using doubles
