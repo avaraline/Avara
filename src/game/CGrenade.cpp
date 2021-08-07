@@ -54,7 +54,7 @@ long CGrenade::Arm(CSmartPart *aPart) {
     classicGravity = FMul(kGravity, itsGame->gravityRatio);
     classicFriction = FIX1 - kGrenadeFriction;
 
-    FpsCoefficients(classicFriction, classicGravity, &friction, &gravity);
+    FpsCoefficients(classicFriction, classicGravity, &friction, &gravity, &speedOffset);
 
     blastPower = itsDepot->grenadePower;
     shields = FIX3(100);
@@ -91,9 +91,8 @@ void CGrenade::Locate() {
     speed[1] += (fullTransform[1][1] + 2 * fullTransform[2][1]);
     speed[2] += (fullTransform[1][2] + 2 * fullTransform[2][2]);
 
-    // correct for high-FPS bias of grenades flying a little high by doing about half of a
-    // classic frame's worth of gravity adjustments up front
-    speed[1] -= int(0.75 / itsGame->fpsScale) * gravity * 0.5;
+    // correct for high-FPS bias of grenades flying a little high initially (zero for classic FPS)
+    speed[1] -= speedOffset;
 
     FPS_DEBUG("GRENADE initial location = " << FormatVector(location, 3) << "\n");
     FPS_DEBUG("GRENADE initial speed = " << FormatVector(speed, 3) << "\n");

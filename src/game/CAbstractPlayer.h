@@ -73,6 +73,7 @@ public:
     Fixed motorFriction;
     Fixed classicMotorAcceleration;
     Fixed motorAcceleration;
+    Fixed fpsMotorOffset;
     Fixed turningEffect; //	How far apart are the legs or wheels?
     Fixed movementCost; //	Cost of acceleration
     Fixed proximityRadius;

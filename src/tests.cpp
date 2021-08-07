@@ -331,10 +331,10 @@ TEST(HECTOR, TurnSpeed) {
 
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "TurnHector didn't do ticks right";
     for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 220) << "not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 100) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 342) << "not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 120) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -346,10 +346,12 @@ TEST(HECTOR, WalkForwardSpeed) {
     ASSERT_NEAR(at64ms.back().theVec[2], 1584235, 3*MILLIMETER) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
-        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.5) << "not close enough after " << i << " ticks.";
+        // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.3) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
-        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.75) << "not close enough after " << i << " ticks.";
+        // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.5) << "not close enough after " << i << " ticks.";
     }
 }
 

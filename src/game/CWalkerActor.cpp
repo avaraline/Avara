@@ -7,6 +7,8 @@
     Modified: Monday, September 16, 1996, 19:28
 */
 
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
+
 #include "CWalkerActor.h"
 
 #include "AvaraDefines.h"
@@ -592,7 +594,8 @@ void CWalkerActor::TractionControl() {
     Fixed bounceTarget;
     Fixed adjustedGravity;
 
-    FPS_DEBUG("TractionControl, speed[1] = " << speed[1] << std::endl);
+    FPS_DEBUG("\nCWalkerActor: frameNumber = " << itsGame->frameNumber << "\n");
+    FPS_DEBUG("TractionControl, speed[1] = " << speed[1] << "\n");
 
     DoStandingTouches();
 
@@ -671,7 +674,7 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             // it's an impulse power up so don't scale the jump
             speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
             // but do a small gravity correction for high fps so that it's not always on the high side of the curve
-            speed[1] -= int(0.5 / itsGame->fpsScale) * FMul(FIX3(120 * itsGame->fpsScale), itsGame->gravityRatio) * 0.5;
+            speed[1] -= FpsOffset(FMul(FIX3(120), itsGame->gravityRatio));
             FPS_DEBUG("*** kfuJump UP!!, jumpBasePower = " << jumpBasePower << ", baseMass = " << baseMass << ", totalMass = " << GetTotalMass() << ", speed = " << speed[1] << std::endl);
             jumpFlag = true;
         }
