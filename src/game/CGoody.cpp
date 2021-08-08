@@ -81,7 +81,7 @@ CAbstractActor *CGoody::EndScript() {
             partList[1]->MoveDone();
         }
 
-        rotationSpeed = FDegToOne(ReadFixedVar(iSpeed));
+        rotationSpeed = FpsCoefficient2(FDegToOne(ReadFixedVar(iSpeed)));
         grenades = ReadLongVar(iGrenades);
         missiles = ReadLongVar(iMissiles);
         boosters = ReadLongVar(iBoosters);
@@ -95,7 +95,7 @@ CAbstractActor *CGoody::EndScript() {
         else {
             soundId = ReadLongVar(iSound);
         }
-        
+
         openSoundId = ReadLongVar(iOpenSound);
         closeSoundId = ReadLongVar(iCloseSound);
         volume = ReadFixedVar(iVolume);
