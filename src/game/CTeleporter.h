@@ -46,4 +46,5 @@ public:
     virtual void FrameAction();
     virtual void TeleportPlayer(CAbstractPlayer *thePlayer);
     virtual Boolean ReceivePlayer(CAbstractPlayer *thePlayer);
+    virtual bool HandlesFastFPS() { return true; }
 };

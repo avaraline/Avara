@@ -491,12 +491,7 @@ void CAvaraGame::RunActorFrameActions() {
         // some actors (e.g. weapons) can remove themselves from the list, so save the nextActor before running FrameAction()
         nextActor = theActor->nextActor;
         if (theActor->HandlesFastFPS() || isClassicFrame) {
-            // only decrement sleepTimer on classic frames
-            if (isClassicFrame) {
-                --theActor->sleepTimer;
-            }
-
-            if (theActor->isActive || theActor->sleepTimer <= 0) {
+            if (theActor->isActive || --(theActor->sleepTimer) <= 0) {
               theActor->FrameAction();
             }
         }
