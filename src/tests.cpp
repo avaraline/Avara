@@ -11,6 +11,8 @@
 #include "Parser.h"
 #include "CSoundHub.h"
 #include "CGrenade.h"
+#include "CSmart.h"
+#include "CScout.h"
 #include "AvaraGL.h"
 
 #include "CUDPConnection.h"
@@ -317,6 +319,91 @@ vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, i
     return trajectory;
 }
 
+vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int steps, int frameTime) {
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
+    vector<VectorStruct> trajectory;
+
+    int ticksPerStep = CLASSICFRAMETIME / frameTime;
+    for (int i = 0; i < hectorSettle*ticksPerStep; i++) {
+        scenario.game->GameTick();
+    }
+
+    // scout up
+    scenario.hector->itsManager->GetFunctions()->held = (1 << kfuScoutControl);
+    scenario.hector->itsManager->GetFunctions()->down = (1 << kfuAimForward);
+    scenario.hector->itsManager->GetFunctions()->up = (1 << kfuScoutControl) | (1 << kfuAimForward);
+    scenario.game->GameTick();
+    scenario.hector->itsManager->GetFunctions()->held = 0;
+    scenario.hector->itsManager->GetFunctions()->down = 0;
+    scenario.hector->itsManager->GetFunctions()->up = 0;
+
+    // load missile
+    scenario.hector->itsManager->GetFunctions()->down = (1 << kfuLoadMissile);
+    scenario.game->GameTick();
+    scenario.hector->itsManager->GetFunctions()->down = 0;
+
+    // raise head: 20 degrees (negative delta.v is up)
+    scenario.hector->itsManager->GetFunctions()->mouseDelta.v = -20 / 0.03125;
+    scenario.game->GameTick();
+    scenario.hector->itsManager->GetFunctions()->mouseDelta.v = 0;
+
+    // scout forward (will be targeted on the way forward)
+    scenario.hector->itsManager->GetFunctions()->held = (1 << kfuScoutControl);
+    scenario.hector->itsManager->GetFunctions()->down = (1 << kfuForward);
+    scenario.hector->itsManager->GetFunctions()->up = (1 << kfuScoutControl);
+    scenario.game->GameTick();
+    scenario.hector->itsManager->GetFunctions()->held = 0;
+    scenario.hector->itsManager->GetFunctions()->down = 0;
+    scenario.hector->itsManager->GetFunctions()->up = 0;
+
+    // wait for scout to be in place
+    for (int i = 0; i < scoutSettle*ticksPerStep; i++) {
+        scenario.game->GameTick();
+    }
+
+    // Find the Missile in the actor list
+    CSmart *missile = NULL;
+    CScout *scout = NULL;
+    for (CAbstractActor *aa = scenario.game->actorList; aa; aa = aa->nextActor) {
+        if (typeid(*aa) == typeid(CSmart)) {
+            missile = (CSmart*)aa;
+        } else if (typeid(*aa) == typeid(CScout)) {
+            scout = (CScout*)aa;
+            // std::cout << "scout location = " << FormatVector(scout->location, 3) << std::endl;
+        }
+    }
+
+    // aim left: 90 degrees (so it curves towards the target)
+    scenario.hector->itsManager->GetFunctions()->mouseDelta.h = 90/.0625;
+    scenario.game->GameTick();
+    scenario.hector->itsManager->GetFunctions()->mouseDelta.h = 0;
+
+    // fire missile
+    scenario.hector->itsManager->GetFunctions()->down = (1 << kfuFireWeapon);
+    scenario.game->GameTick();
+    scenario.hector->itsManager->GetFunctions()->down = 0;
+
+    // see where the missile goes!
+    for (int i = 0; i < steps && missile != NULL; i++) {
+        trajectory.push_back(*(VectorStruct*)missile->location);
+        // std::cout << "missile location[" << i << "] = " << FormatVector(missile->location, 3)
+        //           << ", speed[" << i << "] = " << FormatVector(missile->speed, 3) << std::endl;
+        for (int k = 0; k < ticksPerStep; k++) {
+          scenario.game->GameTick();
+        }
+
+        // figure out whether the missile has exploded.
+        missile = NULL;
+        for (CAbstractActor *aa = scenario.game->actorList; aa; aa = aa->nextActor) {
+            if (typeid(*aa) == typeid(CSmart)) {
+                missile = (CSmart*)aa;
+            }
+        }
+    }
+
+    return trajectory;
+}
+
 vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<Fixed> headings;
@@ -424,6 +511,32 @@ TEST(GRENADE, Trajectory) {
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
         // std::cout << "loc16[" << i << "] = " << FormatVector(at16ms[i].theVec, 3) << std::endl;
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.2) << "not close enough after " << i << " ticks.";
+    }
+}
+
+TEST(MISSILE, Trajectory) {
+    vector<VectorStruct> at64ms = FireMissile(20, 60, 50, 64);
+    vector<VectorStruct> at32ms = FireMissile(20, 60, 50, 32);
+    vector<VectorStruct> at16ms = FireMissile(20, 60, 50, 16);
+
+    // index 15 is the furthest left the missile goes, and index 26 is the furthest forward
+    ASSERT_NEAR(at64ms[15].theVec[0], -591030, 3*MILLIMETER) << "64ms simulation is wrong on min X";
+    ASSERT_NEAR(at64ms[26].theVec[2], 1306106, 3*MILLIMETER) << "64ms simulation is wrong on max Z";
+    ASSERT_EQ(at64ms.size(), 37) << "64ms simulation blows up in the wrong frame";
+    ASSERT_NEAR(at64ms.size(), at32ms.size(), 1) << "32ms simulation should blows up in wrong frame";
+    ASSERT_NEAR(at64ms.size(), at16ms.size(), 1) << "16ms simulation should blows up at wrong frame";
+
+    for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
+        // std::cout << "loc32[" << i << "] = " << FormatVector(at32ms[i].theVec, 3) << std::endl;
+        // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
+        // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 1.0) << "not close enough after " << i << " ticks.";
+    }
+    for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
+        // std::cout << "loc16[" << i << "] = " << FormatVector(at16ms[i].theVec, 3) << std::endl;
+        // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
+        // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 1.0) << "not close enough after " << i << " ticks.";
     }
 }
 
