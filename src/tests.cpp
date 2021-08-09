@@ -198,14 +198,11 @@ vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int fram
     HectorTestScenario scenario(frameTime, 0, fromHeight, 0);
     vector<Fixed> altitudes;
     for (int i = 0; i < steps; i++) {
-        scenario.game->nextScheduledFrame = 0;
-        scenario.game->itsNet->activePlayersDistribution = 1;
-        altitudes.push_back(scenario.hector->location[1]);
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
         }
+        altitudes.push_back(scenario.hector->location[1]);
     }
-    altitudes.push_back(scenario.hector->location[1]);
     return altitudes;
 }
 
@@ -219,21 +216,14 @@ vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, in
             scenario.game->GameTick();
         }
     }
-    scenario.game->nextScheduledFrame = 0;
-    scenario.game->itsNet->activePlayersDistribution = 1;
-    scenario.hector->itsManager->GetFunctions()->held = (1 << kfuForward);
-    scenario.game->GameTick();
 
-    for (int i = 0; i < steps; i++) {
-        scenario.game->nextScheduledFrame = 0;
-        scenario.game->itsNet->activePlayersDistribution = 1;
-        location.push_back(*(VectorStruct*)scenario.hector->location);
+    for (int i = 0; i < steps + 1; i++) {
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.hector->itsManager->GetFunctions()->held = (1 << kfuForward);
             scenario.game->GameTick();
         }
+        location.push_back(*(VectorStruct*)scenario.hector->location);
     }
-    location.push_back(*(VectorStruct*)scenario.hector->location);
 
     return location;
 }
@@ -258,18 +248,16 @@ vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, i
 
     scenario.hector->itsManager->GetFunctions()->held = 0;
     scenario.hector->itsManager->GetFunctions()->up = (1 << kfuJump);
-    scenario.game->GameTick();
-    scenario.hector->itsManager->GetFunctions()->up = 0;
 
     for (int i = 0; i < steps; i++) {
+        for (int k = 0; k < ticksPerStep; k++) {
+            scenario.game->GameTick();
+            scenario.hector->itsManager->GetFunctions()->up = 0;
+        }
         location.push_back(*(VectorStruct*)scenario.hector->location);
         // std::cout << "jump location[" << i << "] = " << FormatVector(scenario.hector->location, 3)
         //           << ", speed[" << i << "] = " << FormatVector(scenario.hector->speed, 3) << std::endl;
-        for (int k = 0; k < ticksPerStep; k++) {
-            scenario.game->GameTick();
-        }
     }
-    location.push_back(*(VectorStruct*)scenario.hector->location);
 
     return location;
 }
@@ -471,27 +459,28 @@ TEST(HECTOR, WalkForwardSpeed) {
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
-        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.3) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.04) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
-        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.5) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.08) << "not close enough after " << i << " ticks.";
     }
 }
 
 TEST(HECTOR, Jump) {
-    vector<VectorStruct> at64ms = JumpHector(20, 20, 40, 64);
-    vector<VectorStruct> at32ms = JumpHector(20, 20, 40, 32);
-    vector<VectorStruct> at16ms = JumpHector(20, 20, 40, 16);
+    int jumpSteps = 40;
+    vector<VectorStruct> at64ms = JumpHector(20, 20, jumpSteps, 64);
+    vector<VectorStruct> at32ms = JumpHector(20, 20, jumpSteps, 32);
+    vector<VectorStruct> at16ms = JumpHector(20, 20, jumpSteps, 16);
     // peak of jump is near frame 6
     ASSERT_NEAR(at64ms[6].theVec[1], 181697, 3*MILLIMETER) << "64ms simulation peaked with wrong amount";
     ASSERT_NEAR(at32ms[6].theVec[1], 181697, 10*MILLIMETER) << "32ms simulation peaked with wrong amount";
     ASSERT_NEAR(at16ms[6].theVec[1], 181697, 30*MILLIMETER) << "16ms simulation peaked with wrong amount";
-    for (int i = 0; i < at64ms.size(); i++) {
+    for (int i = 0; i < jumpSteps; i++) {
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << "\n";
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << "\n\n";
-        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.4) << "not close enough after " << i << " ticks.";
-        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.6) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.1) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
 }
 
