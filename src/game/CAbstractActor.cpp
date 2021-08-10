@@ -1183,7 +1183,7 @@ void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
                                      Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed *fpsOffset) {
     if (HandlesFastFPS()) {
         double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
-        *fpsCoeff1 = FIXRND(fps1);
+        *fpsCoeff1 = FRound(fps1);
         if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
             *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
         } else { // 0.999-1.001
@@ -1205,7 +1205,7 @@ void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
 //   x[i+1] = x[i] * a
 Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
     if (HandlesFastFPS()) {
-        return FIXRND(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
+        return FRound(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
     } else {
         return classicCoeff1;
     }

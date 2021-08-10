@@ -50,7 +50,7 @@ typedef struct {
 #define FIX3(n) ((long)((n)*8192L / 125L))
 /*	FIX results in the integer number as a fixed point number						*/
 #define FIX(n) ((long)((n) * 65536L))
-#define FIXRND(n) (std::lround((n) * 65536L))
+#define FRound(n) (std::lround((n) * 65536L))
 
 /*	Prototypes for internal routines:												*/
 void VectorMatrixProduct(long n, Vector *vs, Vector *vd, Matrix *m);
