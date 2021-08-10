@@ -24,6 +24,7 @@ public:
     Fixed thrust;
     Fixed angleStep;
     short inSight;
+    long fireFrame;
 
     virtual void IWeapon(CDepot *theDepot);
     virtual void ResetWeapon();
@@ -40,4 +41,5 @@ public:
     virtual void TurnTowardsTarget();
     virtual void FrameAction();
     virtual void PreLoadSounds();
+    virtual bool HandlesFastFPS() { return true; }
 };
