@@ -377,7 +377,7 @@ vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int steps, i
         // std::cout << "missile location[" << i << "] = " << FormatVector(missile->location, 3)
         //           << ", speed[" << i << "] = " << FormatVector(missile->speed, 3) << std::endl;
         for (int k = 0; k < ticksPerStep; k++) {
-          scenario.game->GameTick();
+            scenario.game->GameTick();
         }
 
         // figure out whether the missile has exploded.
@@ -519,13 +519,13 @@ TEST(MISSILE, Trajectory) {
         // std::cout << "loc32[" << i << "] = " << FormatVector(at32ms[i].theVec, 3) << std::endl;
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
-        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 1.0) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
     for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
         // std::cout << "loc16[" << i << "] = " << FormatVector(at16ms[i].theVec, 3) << std::endl;
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
-        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 1.0) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
 }
 

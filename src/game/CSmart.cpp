@@ -208,6 +208,7 @@ void CSmart::Fire() {
     theSound->SetLoopCount(-1);
     theSound->Start();
 
+    fireFrame = itsGame->frameNumber+1;
     flyCount = 1;
 }
 
@@ -269,22 +270,23 @@ void CSmart::TurnTowardsTarget() {
     if (delta > 0x6000 || delta < -0x6000)
         thrust >>= 3;
 #endif
+    if ((itsGame->frameNumber-fireFrame) % int(1/itsGame->fpsScale) == 0) {
+        if (delta < -angleStep)
+            yaw -= angleStep;
+        else if (delta > angleStep)
+            yaw += angleStep;
+        else
+            yaw = goodYaw;
+        yaw = (short)yaw;
 
-    if (delta < -angleStep)
-        yaw -= angleStep;
-    else if (delta > angleStep)
-        yaw += angleStep;
-    else
-        yaw = goodYaw;
-    yaw = (short)yaw;
-
-    delta = goodPitch - pitch;
-    if (delta < -angleStep)
-        pitch -= angleStep;
-    else if (delta > angleStep)
-        pitch += angleStep;
-    else
-        pitch = goodPitch;
+        delta = goodPitch - pitch;
+        if (delta < -angleStep)
+            pitch -= angleStep;
+        else if (delta > angleStep)
+            pitch += angleStep;
+        else
+            pitch = goodPitch;
+    }
 }
 
 void CSmart::FrameAction() {
@@ -336,30 +338,33 @@ void CSmart::FrameAction() {
             }
         }
 
-        if (realSpeed > 100) {
-            speedDotAccel = FDivNZ(speedDotAccel, realSpeed);
-            if (speedDotAccel < 0)
-                speedDotAccel = -speedDotAccel;
-        } else {
-            speedDotAccel = FIX(1);
+        // only updating speed at classic frame rate, effectively interpolating classic calculation
+        if ((itsGame->frameNumber-fireFrame) % int(1/itsGame->fpsScale) == 0) {
+            if (realSpeed > 100) {
+                speedDotAccel = FDivNZ(speedDotAccel, realSpeed);
+                if (speedDotAccel < 0)
+                    speedDotAccel = -speedDotAccel;
+            } else {
+                speedDotAccel = FIX(1);
+            }
+
+            friction = kSmartFriction + ((FIX(1) - speedDotAccel) >> 3);
+
+            speed[0] += FMul(thrust, accel[0]) - FMul(speed[0], friction);
+            speed[1] += FMul(thrust, accel[1]) - FMul(speed[1], friction);
+            speed[2] += FMul(thrust, accel[2]) - FMul(speed[2], friction);
         }
 
-        friction = kSmartFriction + ((FIX(1) - speedDotAccel) >> 3);
-
-        speed[0] += FMul(thrust, accel[0]) - FMul(speed[0], friction);
-        speed[1] += FMul(thrust, accel[1]) - FMul(speed[1], friction);
-        speed[2] += FMul(thrust, accel[2]) - FMul(speed[2], friction);
-
-        location[0] += speed[0];
-        location[1] += speed[1];
-        location[2] += speed[2];
+        location[0] += FpsCoefficient2(speed[0]);
+        location[1] += FpsCoefficient2(speed[1]);
+        location[2] += FpsCoefficient2(speed[2]);
 
         UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount > 5) {
+            if (FpsCoefficient2(flyCount) > 5) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
@@ -371,16 +376,16 @@ void CSmart::FrameAction() {
             }
         }
 
-        if (flyCount > 100) {
+        if (FpsCoefficient2(flyCount) > 100) {
             doExplode = true;
         }
 
         BuildPartProximityList(location, partList[0]->bigRadius, kSolidBit);
 
         if (location[1] <= 0 || DoCollisionTest(&proximityList.p)) {
-            location[0] -= speed[0];
-            location[1] -= speed[1];
-            location[2] -= speed[2];
+            location[0] -= FpsCoefficient2(speed[0]);
+            location[1] -= FpsCoefficient2(speed[1]);
+            location[2] -= FpsCoefficient2(speed[2]);
             doExplode = true;
         }
 
