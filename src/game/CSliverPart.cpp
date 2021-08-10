@@ -97,7 +97,7 @@ void CSliverPart::Activate(Fixed *origin,
 }
 
 Boolean CSliverPart::SliverAction() {
-    if (--lifeCount) {
+    if (gCurrentGame->isClassicFrame && --lifeCount) {
         OffsetPart(speed);
 
         if (itsTransform[3][1] < 0) {
