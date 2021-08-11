@@ -6,6 +6,7 @@
     Created: Sunday, November 20, 1994, 19:17
     Modified: Monday, September 16, 1996, 18:50
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CAbstractActor.h"
 #include "CColorManager.h"
@@ -708,6 +709,7 @@ void CAbstractActor::PostMortemBlast(short scoreTeam, short scoreId, Boolean doD
         blastRecord.blastPower = blastPower;
         blastRecord.team = scoreTeam;
         blastRecord.playerId = scoreId;
+        FPS_DEBUG("CAbstractActor::PostMortemBlast: blastPower = " << blastPower << "\n");
         RadiateDamage(&blastRecord);
     }
 
@@ -963,8 +965,11 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
         blastRay.direction[0] = thePart->sphereGlobCenter[0] - theHit->blastPoint[0];
         blastRay.direction[1] = thePart->sphereGlobCenter[1] - theHit->blastPoint[1];
         blastRay.direction[2] = thePart->sphereGlobCenter[2] - theHit->blastPoint[2];
+        FPS_DEBUG("CAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber <<
+                  " BLASTPOINT = " << FormatVector(theHit->blastPoint, 3) << ", blastDirection = " << FormatVector(blastRay.direction, 3) << "\n");
 
         distance = NormalizeVector(3, blastRay.direction) - thePart->enclosureRadius;
+        FPS_DEBUG("CAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber << " blastRay.direction = " << distance + thePart->enclosureRadius << ", enclosureRadius = " << thePart->enclosureRadius << "\n");
         if (distance < FIX(1)) {
             distance = FIX(1);
             blastRay.origin[0] = theHit->blastPoint[0];
@@ -977,6 +982,7 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
         }
 
         energy = FDiv(theHit->blastPower, FMul(distance, distance));
+        FPS_DEBUG("CAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber << " thePart = " << typeid(*thePart->theOwner).name() << ", power = " << theHit->blastPower << ", distance = " << distance << ", energy = " << energy << "\n");
         if (energy > (65536 >> 6)) {
             blastRay.distance = distance;
             blastRay.team = theHit->team;

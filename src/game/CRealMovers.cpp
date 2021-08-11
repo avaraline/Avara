@@ -6,6 +6,7 @@
     Created: Friday, March 1, 1996, 17:20
     Modified: Sunday, August 25, 1996, 08:54
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CRealMovers.h"
 
@@ -46,6 +47,7 @@ void CRealMovers::Accelerate(Fixed *direction) {
         speed[0] += FMulDivNZ(direction[0], baseMass, theMass);
         speed[1] += FMulDivNZ(direction[1], baseMass, theMass);
         speed[2] += FMulDivNZ(direction[2], baseMass, theMass);
+        FPS_DEBUG("CRealMovers::Accelerate: speed = " << FDistanceEstimate(speed[0], speed[1], speed[2]) << "\n");
     }
 }
 

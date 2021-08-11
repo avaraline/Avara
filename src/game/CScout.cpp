@@ -6,6 +6,7 @@
     Created: Wednesday, March 15, 1995, 07:48
     Modified: Monday, September 16, 1996, 19:31
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CScout.h"
 
@@ -73,6 +74,9 @@ Fixed CScout::MoveToTarget() {
     short alpha;
     Fixed dist;
 
+    FPS_DEBUG("CScout::MoveToTarget frameNumber = " << itsGame->frameNumber <<
+              ", speed = " << FDistanceEstimate(speed[0], speed[1], speed[2]) << "\n");
+
     delta[0] = targetPosition[0] - location[0];
     delta[1] = targetPosition[1] - location[1];
     delta[2] = targetPosition[2] - location[2];
@@ -107,6 +111,9 @@ Fixed CScout::MoveToTarget() {
     location[0] += speed[0];
     location[1] += speed[1];
     location[2] += speed[2];
+
+    FPS_DEBUG("CScout::MoveToTarget location = " << FormatVector(location, 3) <<
+                                    ", speed = " << FormatVector(speed, 3) << "\n");
 
     return dist;
 }
