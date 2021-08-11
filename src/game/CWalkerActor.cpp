@@ -235,39 +235,36 @@ void CWalkerActor::AvoidBumping() {
                         // Total offset speed is (sin^2+cos^2)/8 = FIX(1/8) = 8192
                         // which represents how much to change speed on collision.
                         // The speed change is perpendicular to the heading.  So it tries
-                        // both ways (left & right) to see if it can slide out.
-                        offsetSpeed[0] = FpsCoefficient2(FOneCos(heading) >> 4); // 1/16
+                        // both ways (left then right) to see if it can slide out.
+                        offsetSpeed[0] = FpsCoefficient2(FOneCos(heading) >> 3); // 1/8
                         offsetSpeed[1] = 0;
-                        offsetSpeed[2] = FpsCoefficient2(FOneSin(heading) >> 4);
-                        offsetLocation[0] = FpsCoefficient2(offsetSpeed[0]); // 1/16
-                        offsetLocation[1] = 0;
-                        offsetLocation[2] = FpsCoefficient2(offsetSpeed[2]);
-                        OffsetParts(offsetLocation); // offset 1/16
-                        FPS_DEBUG("AvoidBumping: undoTurn... offsetSpeed(1) = " << FormatVector(offsetSpeed, 3) << "\n");
+                        offsetSpeed[2] = FpsCoefficient2(FOneSin(heading) >> 3);
+                        FPS_DEBUG("AvoidBumping: undoTurn... offsetSpeed = " << FormatVector(offsetSpeed, 3) << "\n");
 
-                        push[0] = speed[0] - (offsetSpeed[0] << 1); // speed - 1/8
-                        push[1] = speed[1];
-                        push[2] = speed[2] - (offsetSpeed[2] << 1);
-                        FPS_DEBUG("AvoidBumping: undoTurn... push = " << FormatVector(push, 3) << "\n");
+                        offsetLocation[0] = FpsCoefficient2(offsetSpeed[0] >> 1); // 1/16
+                        offsetLocation[1] = 0;
+                        offsetLocation[2] = FpsCoefficient2(offsetSpeed[2] >> 1);
+                        OffsetParts(offsetLocation); // offset 1/16 to the left
 
                         if (DoCollisionTest(&proximityList.p)) {
-                            FPS_DEBUG("AvoidBumping: first collision test passed\n");
+                            FPS_DEBUG("AvoidBumping: collision on the left, going right\n");
+                            // still colliding on the left so set speed in the opposite direction
+                            push[0] = speed[0] - offsetSpeed[0]; // speed - 1/8
+                            push[1] = speed[1];
+                            push[2] = speed[2] - offsetSpeed[2];
                             Push(push);
                         }
 
                         // swing 180 degrees the other way and try that
-                        offsetSpeed[0] = -2 * offsetSpeed[0]; // -1/8
-                        offsetSpeed[2] = -2 * offsetSpeed[2];
-                        offsetLocation[0] = FpsCoefficient2(offsetSpeed[0]); // -1/8
-                        offsetLocation[2] = FpsCoefficient2(offsetSpeed[2]);
-                        OffsetParts(offsetLocation); // offset 1/16-1/8 = -1/16 in the opposite direction
-                        FPS_DEBUG("AvoidBumping: undoTurn... offsetSpeed(2) = " << FormatVector(offsetSpeed, 3) << "\n");
+                        offsetLocation[0] = FpsCoefficient2(-offsetSpeed[0]); // -1/8 = -2/16
+                        offsetLocation[2] = FpsCoefficient2(-offsetSpeed[2]);
+                        OffsetParts(offsetLocation); // offset 1/16-1/8 = -1/16 to the right
 
                         if (DoCollisionTest(&proximityList.p)) {
-                            FPS_DEBUG("AvoidBumping: second collision test passed\n");
-                            push[0] = speed[0] - offsetSpeed[0]; // speed + 1/8
+                            FPS_DEBUG("AvoidBumping: collision on the right, going left\n");
+                            push[0] = speed[0] + offsetSpeed[0]; // speed + 1/8
                             push[1] = speed[1];
-                            push[2] = speed[2] - offsetSpeed[2];
+                            push[2] = speed[2] + offsetSpeed[2];
                             Push(push);
                         }
                         break;
