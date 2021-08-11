@@ -178,6 +178,7 @@ void CWalkerActor::AvoidBumping() {
         do {
             switch (undoStep) {
                 case undoMotion:
+                    FPS_DEBUG("AvoidBumping: undoMotion\n");
                     if (speed[0] || speed[1] || speed[2]) {
                         location[0] -= FpsCoefficient2(speed[0]);
                         location[1] -= FpsCoefficient2(speed[1]);
@@ -188,6 +189,7 @@ void CWalkerActor::AvoidBumping() {
                     undoStep++; //	No speed and we still collide?
 
                 case undoElevation:
+                    FPS_DEBUG("AvoidBumping: undoElevation\n");
                     if (crouchUndo != crouch || stanceUndo != stance) {
                         stance = stanceUndo;
                         crouch = crouchUndo;
@@ -196,6 +198,7 @@ void CWalkerActor::AvoidBumping() {
                     undoStep++; //	Fall through
 
                 case undoHeadTurn:
+                    FPS_DEBUG("AvoidBumping: undoHeadTurn\n");
                     if (oldYaw != viewYaw || viewPitch != oldPitch) {
                         viewYaw = oldYaw;
                         viewPitch = oldPitch;
@@ -206,6 +209,7 @@ void CWalkerActor::AvoidBumping() {
 #define DIFFERENTLEGS(a, b) ((a.highAngle != b.highAngle) || (a.lowAngle != b.lowAngle))
 
                 case undoLegs:
+                    FPS_DEBUG("AvoidBumping: undoLegs\n");
 #ifdef TESTIT
                     if (DIFFERENTLEGS(legs[0], legUndo[0]) || DIFFERENTLEGS(legs[1], legUndo[1]) ||
                         legPhase != phaseUndo)
@@ -219,35 +223,51 @@ void CWalkerActor::AvoidBumping() {
                     undoStep++;
 
                 case undoTurn:
-                    if (heading != headChange) {
-                        Vector offset;
+                    FPS_DEBUG("AvoidBumping: undoTurn\n");
+                    if (heading != headChange) {  // seems like it should check (headChange != 0)
+                        Vector offsetSpeed, offsetLocation;
                         Vector push;
 
                         heading -= headChange;
 
                         PlaceParts();
 
-                        offset[0] = FOneCos(heading) >> 4;
-                        offset[1] = 0;
-                        offset[2] = FOneSin(heading) >> 4;
-                        OffsetParts(offset);
+                        // Total offset speed is (sin^2+cos^2)/8 = FIX(1/8) = 8192
+                        // which represents how much to change speed on collision.
+                        // The speed change is perpendicular to the heading.  So it tries
+                        // both ways (left & right) to see if it can slide out.
+                        offsetSpeed[0] = FpsCoefficient2(FOneCos(heading) >> 4); // 1/16
+                        offsetSpeed[1] = 0;
+                        offsetSpeed[2] = FpsCoefficient2(FOneSin(heading) >> 4);
+                        offsetLocation[0] = FpsCoefficient2(offsetSpeed[0]); // 1/16
+                        offsetLocation[1] = 0;
+                        offsetLocation[2] = FpsCoefficient2(offsetSpeed[2]);
+                        OffsetParts(offsetLocation); // offset 1/16
+                        FPS_DEBUG("AvoidBumping: undoTurn... offsetSpeed(1) = " << FormatVector(offsetSpeed, 3) << "\n");
 
-                        push[0] = speed[0] - (offset[0] << 1);
+                        push[0] = speed[0] - (offsetSpeed[0] << 1); // speed - 1/8
                         push[1] = speed[1];
-                        push[2] = speed[2] - (offset[2] << 1);
+                        push[2] = speed[2] - (offsetSpeed[2] << 1);
+                        FPS_DEBUG("AvoidBumping: undoTurn... push = " << FormatVector(push, 3) << "\n");
 
                         if (DoCollisionTest(&proximityList.p)) {
+                            FPS_DEBUG("AvoidBumping: first collision test passed\n");
                             Push(push);
                         }
 
-                        offset[0] = -2 * offset[0];
-                        offset[2] = -2 * offset[2];
-                        OffsetParts(offset);
+                        // swing 180 degrees the other way and try that
+                        offsetSpeed[0] = -2 * offsetSpeed[0]; // -1/8
+                        offsetSpeed[2] = -2 * offsetSpeed[2];
+                        offsetLocation[0] = FpsCoefficient2(offsetSpeed[0]); // -1/8
+                        offsetLocation[2] = FpsCoefficient2(offsetSpeed[2]);
+                        OffsetParts(offsetLocation); // offset 1/16-1/8 = -1/16 in the opposite direction
+                        FPS_DEBUG("AvoidBumping: undoTurn... offsetSpeed(2) = " << FormatVector(offsetSpeed, 3) << "\n");
 
                         if (DoCollisionTest(&proximityList.p)) {
-                            push[0] = speed[0] - offset[0];
+                            FPS_DEBUG("AvoidBumping: second collision test passed\n");
+                            push[0] = speed[0] - offsetSpeed[0]; // speed + 1/8
                             push[1] = speed[1];
-                            push[2] = speed[2] - offset[2];
+                            push[2] = speed[2] - offsetSpeed[2];
                             Push(push);
                         }
                         break;
