@@ -42,4 +42,5 @@ public:
     virtual void FrameAction();
     virtual void PreLoadSounds();
     virtual bool HandlesFastFPS() { return true; }
+    virtual bool IsClassicInterval();
 };
