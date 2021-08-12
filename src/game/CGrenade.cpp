@@ -144,7 +144,7 @@ void CGrenade::FrameAction() {
 
         RayTestWithGround(&rayHit, kSolidBit);
 
-        // if the location adjustment will put us below ground
+        // if the location adjustment will collide with something
         if (FpsCoefficient2(realSpeed) > rayHit.distance) {
             realSpeed = FpsCoefficient2(rayHit.distance);
             speed[0] = FMul(rayHit.direction[0], realSpeed);
