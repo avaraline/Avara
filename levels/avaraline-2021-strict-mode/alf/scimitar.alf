@@ -5,44 +5,74 @@
 
   <!-- CENTER -->
   <Wall d="15" fill="#262522" frame="#000000" h="3" w="15" x="0" z="0" />
-  <!--<Wall d="10" fill="#ffffff" frame="#000000" h="10" w="10" x="12.5" z="-12.5" />-->
-  <Wall d="10" fill="#ffffff" frame="#000000" h="10" w="10" x="-12.5" z="12.5" />
-  <Wall d="10" fill="#ffffff" frame="#000000" h="3" w="10" x="-12.5" z="-12.5" />
-  <Wall d="10" fill="#ffffff" frame="#000000" h="3" w="10" x="12.5" z="12.5" />
+  <!--<Wall d="10" fill="#262522" frame="#000000" h="10" w="10" x="12.5" z="-12.5" />
+  <Wall d="10" fill="#262522" frame="#000000" h="10" w="10" x="-12.5" z="12.5" />-->
+  <Wall d="10" fill="#262522" frame="#000000" h="3" w="10" x="-12.5" z="-12.5" />
+  <Wall d="10" fill="#262522" frame="#000000" h="3" w="10" x="12.5" z="12.5" />
   <Ramp angle="0" d="10" deltaY="3" fill="#82d9cb" frame="#000000" h="0" w="15" x="0" y="0" z="12.5" />
   <Ramp angle="180" d="10" deltaY="3" fill="#82d9cb" frame="#000000" h="0" w="15" x="0" y="0" z="-12.5" />
   <Ramp angle="90" d="15" deltaY="3" fill="#82d9cb" frame="#000000" h="0" w="10" x="-12.5" y="0" z="0" />
   <Ramp angle="270" d="15" deltaY="3" fill="#82d9cb" frame="#000000" h="0" w="10" x="12.5" y="0" z="0" />
 
-  <!-- BASALT PILLAR 1-->
-  <Wall d="1" fill="#ffffff" frame="#000000" h="8.5" w="1" x="8" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="10" w="1" x="9" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="9.5" w="1" x="10" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="9" w="1" x="11" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="7" w="1" x="12" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="6" w="1" x="13" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="4.75" w="1" x="14" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="5" w="1" x="15" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="3" w="1" x="16" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="2" w="1" x="17" z="-8" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="9.75" w="1" x="8" z="-9" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="9.5" w="1" x="8" z="-10" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="8.5" w="1" x="8" z="-11" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="7.25" w="1" x="8" z="-12" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="5.75" w="1" x="8" z="-13" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="6" w="1" x="8" z="-14" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="5" w="1" x="8" z="-15" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="3.25" w="1" x="8" z="-16" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="2.5" w="1" x="8" z="-17" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="9.8" w="1" x="9" z="-9" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="9.6" w="1" x="10" z="-9" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="8.75" w="1" x="11" z="-9" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="9.5" w="1" x="9" z="-10" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="9" w="1" x="9" z="-11" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="8.75" w="1" x="10" z="-10" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="7.75" w="1" x="11" z="-10" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="7" w="1" x="10" z="-11" />
-  <Wall d="1" fill="#ffffff" frame="#000000" h="7.25" w="1" x="11" z="-11" />
+  <!-- BASALT PILLAR 1 -->
+  <Wall d="1" fill="#262522" frame="#000000" h="8.5" w="1" x="8" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="10" w="1" x="9" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.5" w="1" x="10" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9" w="1" x="11" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="12" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6" w="1" x="13" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="4.75" w="1" x="14" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="5" w="1" x="15" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="3" w="1" x="16" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="2" w="1" x="17" z="-8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.75" w="1" x="8" z="-9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.5" w="1" x="8" z="-10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="8.5" w="1" x="8" z="-11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7.25" w="1" x="8" z="-12" />
+  <Wall d="1" fill="#262522" frame="#000000" h="5.75" w="1" x="8" z="-13" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6" w="1" x="8" z="-14" />
+  <Wall d="1" fill="#262522" frame="#000000" h="5" w="1" x="8" z="-15" />
+  <Wall d="1" fill="#262522" frame="#000000" h="3.25" w="1" x="8" z="-16" />
+  <Wall d="1" fill="#262522" frame="#000000" h="2.5" w="1" x="8" z="-17" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.8" w="1" x="9" z="-9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.6" w="1" x="10" z="-9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="8.75" w="1" x="11" z="-9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.5" w="1" x="9" z="-10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9" w="1" x="9" z="-11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="8.75" w="1" x="10" z="-10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7.75" w="1" x="11" z="-10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="10" z="-11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7.25" w="1" x="11" z="-11" />
+
+  <!-- BASALT PILLAR 2 -->
+  <Wall d="1" fill="#262522" frame="#000000" h="8.5" w="1" x="-8" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="10" w="1" x="-9" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.5" w="1" x="-10" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9" w="1" x="-11" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="-12" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6" w="1" x="-13" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="4.75" w="1" x="-14" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="5" w="1" x="-15" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="3" w="1" x="-16" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="2" w="1" x="-17" z="8" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.75" w="1" x="-8" z="9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.5" w="1" x="-8" z="10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="8.5" w="1" x="-8" z="11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7.25" w="1" x="-8" z="12" />
+  <Wall d="1" fill="#262522" frame="#000000" h="5.75" w="1" x="-8" z="13" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6" w="1" x="-8" z="14" />
+  <Wall d="1" fill="#262522" frame="#000000" h="5" w="1" x="-8" z="15" />
+  <Wall d="1" fill="#262522" frame="#000000" h="3.25" w="1" x="-8" z="16" />
+  <Wall d="1" fill="#262522" frame="#000000" h="2.5" w="1" x="-8" z="17" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.8" w="1" x="-9" z="9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.6" w="1" x="-10" z="9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="8.75" w="1" x="-11" z="9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9.5" w="1" x="-9" z="10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="9" w="1" x="-9" z="11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="8.75" w="1" x="-10" z="10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7.75" w="1" x="-11" z="10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="-10" z="11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7.25" w="1" x="-11" z="11" />
 
   <!-- OUTSKIRTS 1 -->
   <Wall d="20" fill="#403b36" frame="#000000" h="2" w="10" x="-37.5" z="-32.5" />
