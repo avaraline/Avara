@@ -360,9 +360,17 @@ if (IsClassicInterval()) { // indented like this because hope to remove it in th
         FPS_DEBUG("Missile speed = " << FormatVector(speed, 3) << "\n");
 } // IsClassicInterval()
 
-        location[0] += FpsCoefficient2(speed[0]);
-        location[1] += FpsCoefficient2(speed[1]);
-        location[2] += FpsCoefficient2(speed[2]);
+        if (doExplode) {
+            // because explosions currently detected on classic interval, move location forward the full
+            // classic frame on explosions so it's in the right spot for the explosion calculations
+            location[0] += speed[0];
+            location[1] += speed[1];
+            location[2] += speed[2];
+        } else {
+            location[0] += FpsCoefficient2(speed[0]);
+            location[1] += FpsCoefficient2(speed[1]);
+            location[2] += FpsCoefficient2(speed[2]);
+        }
         FPS_DEBUG("Missile location = " << FormatVector(location, 3) << "\n");
 
         UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);

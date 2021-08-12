@@ -733,6 +733,8 @@ void CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
     }
 }
 
+// perhaps we should rename this RayTestPlusGround because it does a RayTest on all actors and on the ground...
+// the name makes it sounds like it only tests the ground
 void CAbstractActor::RayTestWithGround(RayHitRecord *hitRec, MaskType testMask) {
     Fixed negOrigin1;
 
@@ -962,14 +964,15 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
 
     thePart = blastRay.closestHit;
     if (thePart) {
+        FPS_DEBUG("\nCAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber << " thePart = " << typeid(*thePart->theOwner).name() << "\n");
+
         blastRay.direction[0] = thePart->sphereGlobCenter[0] - theHit->blastPoint[0];
         blastRay.direction[1] = thePart->sphereGlobCenter[1] - theHit->blastPoint[1];
         blastRay.direction[2] = thePart->sphereGlobCenter[2] - theHit->blastPoint[2];
-        FPS_DEBUG("CAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber <<
-                  " BLASTPOINT = " << FormatVector(theHit->blastPoint, 3) << ", blastDirection = " << FormatVector(blastRay.direction, 3) << "\n");
+        FPS_DEBUG("CAbstractActor::BlastHit: sphereGlobCenter = " << FormatVector(thePart->sphereGlobCenter, 3) << ", blastPoint = " << FormatVector(theHit->blastPoint, 3) << ", blastDirection = " << FormatVector(blastRay.direction, 3) << "\n");
 
         distance = NormalizeVector(3, blastRay.direction) - thePart->enclosureRadius;
-        FPS_DEBUG("CAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber << " blastRay.direction = " << distance + thePart->enclosureRadius << ", enclosureRadius = " << thePart->enclosureRadius << "\n");
+        FPS_DEBUG("CAbstractActor::BlastHit: len(blastRay.direction) = " << distance + thePart->enclosureRadius << ", enclosureRadius = " << thePart->enclosureRadius << ", distance = " << distance << "\n");
         if (distance < FIX(1)) {
             distance = FIX(1);
             blastRay.origin[0] = theHit->blastPoint[0];
@@ -982,7 +985,7 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
         }
 
         energy = FDiv(theHit->blastPower, FMul(distance, distance));
-        FPS_DEBUG("CAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber << " thePart = " << typeid(*thePart->theOwner).name() << ", power = " << theHit->blastPower << ", distance = " << distance << ", energy = " << energy << "\n");
+        FPS_DEBUG("CAbstractActor::BlastHit: power = " << theHit->blastPower << ", distance = " << distance << ", energy = " << energy << "\n");
         if (energy > (65536 >> 6)) {
             blastRay.distance = distance;
             blastRay.team = theHit->team;
