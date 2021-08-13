@@ -19,7 +19,8 @@ public:
     short lifeCount;
     ColorRecord borrowedColors;
     ColorRecord *fakeMaster;
-    Fixed gravity;
+    Fixed friction, gravity;
+    Fixed fpsScale, fpsFriction, fpsGravity;
 
     virtual void ISliverPart(short partNum);
     virtual void Activate(Fixed *origin,
