@@ -480,6 +480,8 @@ void CWalkerActor::MoveLegs() {
     RayHitRecord legSensor;
     Fixed tempSin, tempCos;
 
+    FPS_DEBUG("\nCWalkerActor::MoveLegs frameNumber = " << itsGame->frameNumber << "\n");
+
     speedLimit = speed[1];
 
     tractionFlag = false;
@@ -492,15 +494,19 @@ void CWalkerActor::MoveLegs() {
     headHeight = elevation + FMul(viewPitch, FIX3(10));
     scoutBaseHeight = elevation + SCOUTPLATFORM;
 
-    temp = FMul(-LEGSPACE * 18, headChange);
+    temp = FMul(-LEGSPACE * 18, headChange / itsGame->fpsScale);
     legSpeeds[0] = distance - temp;
     legSpeeds[1] = distance + temp;
+    FPS_DEBUG("distance = " << distance << ", temp = " << temp << ", headChange = " << headChange << "\n");
+    FPS_DEBUG("  legSpeeds = " << FormatVector(legSpeeds,2) << "\n");
 
     absAvgSpeed = (legSpeeds[0] > 0) ? legSpeeds[0] : -legSpeeds[0];
     absAvgSpeed += (legSpeeds[1] > 0) ? legSpeeds[1] : -legSpeeds[1];
+    FPS_DEBUG("absAvgSpeed = " << absAvgSpeed << "\n");
 
     phaseChange = FMulDiv(FSqrt(absAvgSpeed), fConstant, elevation);
-    legPhase += itsGame->fpsScale * phaseChange / 10;
+    legPhase += FpsCoefficient2(phaseChange / 10);
+    FPS_DEBUG("phaseChange = " << phaseChange << ", legPhase = " << legPhase << ", legPhase%FIX1 = " << legPhase%FIX1 << "\n");
 
     for (i = 0; i < 2; i++) {
         Fixed moveRadius;
