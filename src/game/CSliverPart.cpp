@@ -101,7 +101,7 @@ void CSliverPart::Activate(Fixed *origin,
     // from CAbstractActor.  With that said...
     // Use the first player (which should be running at High FPS) as a proxy to get at the Fps methods.
     fpsScale = gCurrentGame->playerList->FpsCoefficient2(FIX1);
-    gCurrentGame->playerList->FpsCoefficients(FIX3(980), gravity, &fpsFriction, &fpsGravity);
+    gCurrentGame->playerList->FpsCoefficients(friction, gravity, &fpsFriction, &fpsGravity);
     lifeCount = age / ToFloat(fpsScale);
 }
 
