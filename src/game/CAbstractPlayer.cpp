@@ -830,7 +830,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             AvaraGLSetFOV(ToFloat(fieldOfView));
 
         if (fireGun)
-            mouseShootTime = MOUSESHOOTDELAY / itsGame->fpsScale;
+            mouseShootTime = FpsFramesPerClassic(MOUSESHOOTDELAY);
 
         if (TESTFUNC(kfuTypeText, ft->down)) {
             chatMode = !chatMode;
@@ -1168,7 +1168,7 @@ void CAbstractPlayer::GoLimbo(long limboDelay) {
         gHub->ReleaseLinkAndKillSounds(boostControlLink);
         boostControlLink = NULL;
     }
-    limboCount = limboDelay;
+    limboCount = FpsFramesPerClassic(limboDelay);
     isInLimbo = true;
     maskBits &= ~kSolidBit;
 
@@ -1354,7 +1354,7 @@ void CAbstractPlayer::ResumeLevel() {
 
 extern Fixed sliverGravity;
 
-#define INTERPTIME (20 / itsGame->fpsScale)
+#define INTERPTIME FpsFramesPerClassic(20)
 
 void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     short count = 16;
