@@ -19,7 +19,7 @@ CAbstractActor *CLogicTimer::EndScript() {
         theDelay = ReadLongVar(iTimer);
         if (theDelay < 0) {
             theDelay = -theDelay;
-            sleepTimer = (theDelay + 1) / itsGame->fpsScale;
+            sleepTimer = FpsFramesPerClassic(theDelay + 1);
         }
 
         if (theDelay)
