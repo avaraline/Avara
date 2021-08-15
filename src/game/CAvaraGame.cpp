@@ -1077,7 +1077,7 @@ void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange, const char*
         if (slowPlayer != nullptr) {
             std::ostringstream oss;
             std::time_t t = std::time(nullptr);
-            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") <<
+            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << std::fixed <<
                    std::setprecision(int(1/(2*fpsScale))) << latencyTolerance*fpsScale << " (" << slowPlayer << ")";
             itsApp->AddMessageLine(oss.str());
         }
