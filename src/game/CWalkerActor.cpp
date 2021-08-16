@@ -76,7 +76,7 @@ void CWalkerActor::StartSystems() {
     oldTractionFlag = true;
     jumpFlag = false;
 
-    baseFriction = motorFriction;
+    baseFriction = classicMotorFriction;  // initialized in CAbstractPlayer::StartSystems()
     minPitch = FIX(-30);
     maxPitch = FIX(30);
 
@@ -626,10 +626,8 @@ void CWalkerActor::TractionControl() {
 
     DoStandingTouches();
 
-    motorFriction = elevation - BESTSPEEDHEIGHT;
-    if (motorFriction < 0)
-        motorFriction = -motorFriction;
-    motorFriction = baseFriction - (motorFriction >> 2);
+    // the bigger the crouch, the more the friction, which slows down walking
+    classicMotorFriction = baseFriction - (abs(elevation - BESTSPEEDHEIGHT) / 4);
 
     adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
     FPS_DEBUG("   adjustedGravity = " << adjustedGravity);
