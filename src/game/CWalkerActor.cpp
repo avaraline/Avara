@@ -183,6 +183,7 @@ void CWalkerActor::AvoidBumping() {
                         location[0] -= FpsCoefficient2(speed[0]);
                         location[1] -= FpsCoefficient2(speed[1]);
                         location[2] -= FpsCoefficient2(speed[2]);
+                        FPS_DEBUG("undoMotion: location = " << FormatVector(location, 3) << "\n");
                         goto redoLegs;
                         break;
                     }
@@ -480,7 +481,7 @@ void CWalkerActor::MoveLegs() {
     RayHitRecord legSensor;
     Fixed tempSin, tempCos;
 
-    FPS_DEBUG("\nCWalkerActor::MoveLegs frameNumber = " << itsGame->frameNumber << "\n");
+    FPS_DEBUG("CWalkerActor::MoveLegs frameNumber = " << itsGame->frameNumber << "\n");
 
     speedLimit = speed[1];
 
@@ -550,14 +551,17 @@ void CWalkerActor::MoveLegs() {
         legSensor.closestHit = NULL;
         RayTest(&legSensor, kSolidBit);
 
-        if (legSensor.distance / itsGame->fpsScale < -speedLimit) {
-            speedLimit = -legSensor.distance / itsGame->fpsScale;
+        if (legSensor.distance < -speedLimit) {
+            // don't fpsScale the comparison... this helps with bounce but doesn't hurt gravity
+            speedLimit = -legSensor.distance * itsGame->fpsScale;
         }
 
         tempZ = legSensor.origin[1] - legSensor.distance;
 
         if (tempZ > targetHeight)
             targetHeight = tempZ;
+
+        FPS_DEBUG("ls.origin[1] = " << legSensor.origin[1] << ", ls.distance = " << legSensor.distance << ", targetHeight = " << targetHeight << "\n");
 
         if (tempZ + FIX3(100) >= location[1]) {
             tractionFlag = true;
@@ -618,7 +622,7 @@ void CWalkerActor::TractionControl() {
     Fixed adjustedGravity;
 
     FPS_DEBUG("\nCWalkerActor: frameNumber = " << itsGame->frameNumber << "\n");
-    FPS_DEBUG("TractionControl, speed[1] = " << speed[1] << "\n");
+    FPS_DEBUG("TractionControl, location = " << FormatVector(location, 3) << ", speed = " << FormatVector(speed, 3) << "\n");
 
     DoStandingTouches();
 
@@ -631,30 +635,29 @@ void CWalkerActor::TractionControl() {
     FPS_DEBUG("   adjustedGravity = " << adjustedGravity);
 
     bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
+    FPS_DEBUG(", bounceTarget1 = " << bounceTarget << ", targetHeight = " << targetHeight << "\n");
 
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
     bounceTarget += targetHeight;
-    FPS_DEBUG(", bounceTarget = " << bounceTarget);
+    FPS_DEBUG(", bounceTarget2 = " << bounceTarget);
 
     // is this adjustedGravity*2 because we already added adjustedGravity to downward speed?
-    extraHeight = (bounceTarget + adjustedGravity * 2); // FIX3(120)*2;
-    FPS_DEBUG(", extraHeight = " << extraHeight);
+    extraHeight = (bounceTarget + (adjustedGravity * 2)); // FIX3(120)*2;
+    FPS_DEBUG(", extraHeight = " << extraHeight << "\n");
 
     if (!jumpFlag && location[1] < extraHeight) {
         // bouncing logic
-        FPS_DEBUG(", bounce location[1] = " << location[1] << ", speed[1] = " << speed[1]);
         Fixed scale1, scale2;
         FpsCoefficients(FIX(0.5), FIX(0.5), &scale1, &scale2);
         speed[1] = FMul(speed[1], scale1) + FMul((bounceTarget - location[1] - adjustedGravity), scale2);
+        FPS_DEBUG("  bounce speed[1] = " << speed[1] << "\n");
         // speed[1] = ((bounceTarget - location[1]) >> 1) + ((speed[1] - adjustedGravity) >> 1);
     } else {
-        FPS_DEBUG(", not bouncing, speed[1] = " << speed[1]);
         speed[1] = speed[1] - FpsCoefficient2(adjustedGravity);
+        FPS_DEBUG("  NOT bouncing, speed[1] = " << speed[1] << "\n");
         // speed[1] = speed[1] - adjustedGravity;
     }
-
-    FPS_DEBUG("... TC speed[1] = " << speed[1] << std::endl);
 
     if (speed[1] < 0)
         jumpFlag = false;
