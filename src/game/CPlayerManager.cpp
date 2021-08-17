@@ -329,7 +329,6 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 
 void CPlayerManagerImpl::SendFrame() {
     // Sends the next game frame.
-    // itsGame->topSentFrame += (1 / itsGame->fpsScale);
     itsGame->topSentFrame += 1;
 
     // uint32_t ffi = itsGame->topSentFrame * itsGame->fpsScale;

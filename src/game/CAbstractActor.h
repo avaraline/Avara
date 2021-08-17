@@ -230,7 +230,8 @@ public:
     Fixed FpsCoefficient1(Fixed classicMultiplier1);
     Fixed FpsCoefficient2(Fixed classicMultiplier2);
     Fixed FpsOffset(Fixed classicCoeff2);
-    long FpsFramesPerClassic(long classicFrames = 1) { return long(classicFrames / itsGame->fpsScale); }
+    long FpsFramesPerClassic(long classicFrames = 1);
+    Fixed ClassicCoefficient2(Fixed fpsValue);
 private:
     virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);
 };

@@ -1249,3 +1249,22 @@ Fixed CAbstractActor::FpsOffset(Fixed classicCoeff2) {
 double CAbstractActor::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
     return pow(fpsCoeff1, fpsScale);
 }
+
+long CAbstractActor::FpsFramesPerClassic(long classicFrames)
+{
+    if (HandlesFastFPS()) {
+        return long(classicFrames / itsGame->fpsScale);
+    } else {
+        return 1;
+    }
+}
+
+// basically the inverse of FpsCoefficient2... convert FPS values to Classic units
+Fixed CAbstractActor::ClassicCoefficient2(Fixed fpsValue) {
+    if (HandlesFastFPS()) {
+        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+        return std::lround(fpsValue / itsGame->fpsScale);
+    } else {
+        return fpsValue;
+    }
+}
