@@ -66,4 +66,6 @@ public:
     virtual void ReadDoorVariables();
 
     virtual void StandingOn(CAbstractActor *who, Fixed *where, Boolean firstLeg);
+
+    virtual bool HandlesFastFPS() { return true; }
 };
