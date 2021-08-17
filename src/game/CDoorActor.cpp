@@ -6,6 +6,7 @@
     Created: Sunday, December 4, 1994, 10:01
     Modified: Saturday, September 14, 1996, 00:21
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CDoorActor.h"
 
@@ -167,9 +168,11 @@ CAbstractActor *CDoorActor::EndScript() {
         gHub->PreLoadSample(closeSoundId);
         gHub->PreLoadSample(stopSoundId);
 
-        openDelay = ReadLongVar(iOpenDelay);
-        closeDelay = ReadLongVar(iCloseDelay);
-        collisionGuardTime = ReadLongVar(iGuardDelay);
+        openDelay = FpsFramesPerClassic(ReadLongVar(iOpenDelay));
+        closeDelay = FpsFramesPerClassic(ReadLongVar(iCloseDelay));
+        collisionGuardTime = FpsFramesPerClassic(ReadLongVar(iGuardDelay));
+
+        FPS_DEBUG("openDelay = " << openDelay << ", closeDelay = " << closeDelay << ", collisionGuardTime = " << collisionGuardTime << "\n");
 
         openCounter = 0;
         closeCounter = 0;
@@ -181,6 +184,10 @@ CAbstractActor *CDoorActor::EndScript() {
         closeSpeed = ReadFixedVar(iCloseSpeed) / 100;
         if (closeSpeed <= 0 || closeSpeed > kDoorOpen)
             closeSpeed = kDoorSpeed;
+
+        openSpeed = FpsCoefficient2(openSpeed);
+        closeSpeed = FpsCoefficient2(closeSpeed);
+        FPS_DEBUG("openSpeed = " << openSpeed << ", closeSpeed = " << closeSpeed << "\n");
 
         doorStatus = ReadFixedVar(iStatus);
 
@@ -283,11 +290,14 @@ void CDoorActor::FrameAction() {
     }
 
     if (action != kDoorStopped) {
+        FPS_DEBUG("\n frameNumber = " << itsGame->frameNumber << "\n");
         Vector oldOrigin;
 
         oldOrigin[0] = partList[0]->itsTransform[3][0];
         oldOrigin[1] = partList[0]->itsTransform[3][1];
         oldOrigin[2] = partList[0]->itsTransform[3][2];
+
+        FPS_DEBUG("oldOrigin = " << FormatVector(oldOrigin, 3) << "\n");
 
         oldDoorStatus = doorStatus;
 
@@ -330,9 +340,12 @@ void CDoorActor::FrameAction() {
             //	isActive &= ~kIsActive;
         }
 
-        lastMovement[0] = partList[0]->itsTransform[3][0] - oldOrigin[0];
-        lastMovement[1] = partList[0]->itsTransform[3][1] - oldOrigin[1];
-        lastMovement[2] = partList[0]->itsTransform[3][2] - oldOrigin[2];
+        // lastMovement is for external interfaces (sound, slide), so it belongs in classic units
+        lastMovement[0] = ClassicCoefficient2(partList[0]->itsTransform[3][0] - oldOrigin[0]);
+        lastMovement[1] = ClassicCoefficient2(partList[0]->itsTransform[3][1] - oldOrigin[1]);
+        lastMovement[2] = ClassicCoefficient2(partList[0]->itsTransform[3][2] - oldOrigin[2]);
+
+        FPS_DEBUG("lastMovement = " << FormatVector(lastMovement, 3) << "\n");
 
         if (itsSoundLink) {
             UpdateSoundLink(itsSoundLink, partList[0]->itsTransform[3], lastMovement, itsGame->soundTime);
