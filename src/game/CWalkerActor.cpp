@@ -435,7 +435,7 @@ void CWalkerActor::DoLegTouches() {
             }
         } else {
             for (i = 0; i < 2; i++) {
-                if (power[i] / itsGame->fpsScale > FIX3(10) && soundId[i]) {
+                if (power[i] > FpsCoefficient2(FIX3(10)) && soundId[i]) {
                     DoSound(soundId[i], legs[i].where, power[i], FIX(1));
                 }
             }
@@ -495,7 +495,7 @@ void CWalkerActor::MoveLegs() {
     headHeight = elevation + FMul(viewPitch, FIX3(10));
     scoutBaseHeight = elevation + SCOUTPLATFORM;
 
-    temp = FMul(-LEGSPACE * 18, headChange / itsGame->fpsScale);
+    temp = FMul(-LEGSPACE * 18, FpsCoefficient2(headChange));
     legSpeeds[0] = distance - temp;
     legSpeeds[1] = distance + temp;
     FPS_DEBUG("distance = " << distance << ", temp = " << temp << ", headChange = " << headChange << "\n");

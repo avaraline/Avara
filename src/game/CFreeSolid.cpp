@@ -167,10 +167,11 @@ void CFreeSolid::FrameAction() {
         FPS_DEBUG("CFreeSolid speed = " << FormatVector(speed, 3) << "\n");
 
         //	Check for ground level (not done by regular collision checks
+        Fixed fallSpeed = ClassicCoefficient2(-partList[0]->minBounds.y - location[1]);
         if ( // speed[1] < 0 &&
-            location[1] + speed[1] * itsGame->fpsScale < -partList[0]->minBounds.y) { //	Bounce up on ground hit.
-            speed[1] = (-partList[0]->minBounds.y - location[1]) / itsGame->fpsScale;
-            FPS_DEBUG("  ground level speed = " << FormatVector(speed, 3) << "\n");
+            speed[1] < fallSpeed) { //	Bounce up on ground hit.
+            speed[1] = fallSpeed;
+            FPS_DEBUG("  using fallSpeed = " << fallSpeed << "\n");
         }
 
         //	If we are moving fast enough, translate in 3D.
