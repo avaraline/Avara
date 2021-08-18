@@ -47,8 +47,17 @@ void TrackerPinger(CAvaraAppImpl *app) {
                 // Probably not thread-safe.
                std::string address = app->String(kTrackerRegisterAddress);
                 SDL_Log("Pinging %s", address.c_str());
-                httplib::Client client(address.c_str(), 80);
-                client.Post("/api/v1/games/", payload, "application/json");
+                size_t sepIndex = address.find(":");
+                if (sepIndex != std::string::npos) {
+                    std::string host = address.substr(0, sepIndex);
+                    int port = std::stoi(address.substr(sepIndex + 1));
+                    httplib::Client client(host.c_str(), port);
+                    client.Post("/api/v1/games/", payload, "application/json");
+                }
+                else {
+                    httplib::Client client(address.c_str(), 80);
+                    client.Post("/api/v1/games/", payload, "application/json");
+                }
             }
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
