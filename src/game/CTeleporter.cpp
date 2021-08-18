@@ -210,7 +210,7 @@ Boolean CTeleporter::ReceivePlayer(CAbstractPlayer *thePlayer) {
 
     didMove = thePlayer->TryTransport(location, soundId, volume, options);
     if (didMove) {
-        goTimer = RETRANSMITFRAMES;
+        goTimer = FpsFramesPerClassic(RETRANSMITFRAMES);
         itsGame->FlagMessage(didReceiveMsg);
     }
     useCount++;
