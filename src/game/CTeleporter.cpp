@@ -147,13 +147,14 @@ void CTeleporter::FrameAction() {
                             thePlayer->Win(winScore, this);
                         }
                     } else if (noPullTimer == 0 && distance < TELEPORTAREA) {
-                        delta[0] = FMul(delta[0], -FIELDSTRENGTH);
-                        delta[1] = FMul(delta[1], -FIELDSTRENGTH);
-                        delta[2] = FMul(delta[2], -FIELDSTRENGTH);
+                        Fixed attraction = -FpsCoefficient2(FIELDSTRENGTH);
+                        delta[0] = FMul(delta[0], attraction);
+                        delta[1] = FMul(delta[1], attraction);
+                        delta[2] = FMul(delta[2], attraction);
                         thePlayer->Accelerate(delta);
                         pullCounter++;
-                        if (pullCounter >= 32) {
-                            noPullTimer = 16;
+                        if (pullCounter >= FpsFramesPerClassic(32)) {
+                            noPullTimer = FpsFramesPerClassic(16);
                             pullCounter = 0;
                         }
                     }
