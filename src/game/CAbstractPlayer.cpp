@@ -39,7 +39,7 @@
 // replaced by kFOV preference
 //#define MAXFOV FIX(60)
 #define MINFOV FIX(5)
-#define FOVSTEP FIX3(1500)
+#define FOVSTEP FpsCoefficient2(FIX3(1500))
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
 #define BOOSTLENGTH (16 * 5)
 #define MINIBOOSTTIME 32
@@ -799,7 +799,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (TESTFUNC(kfuZoomOut, ft->held))
             fieldOfView += FOVSTEP;
 
-#define LOOKSTEP 0x1000L
+#define LOOKSTEP FpsCoefficient2(0x1000L)
 #define MAXSIDELOOK 0x8000L
 
         if (TESTFUNC(kfuLookLeft, ft->held)) {
