@@ -41,6 +41,8 @@ public:
     MessageRecord stopMsg;
     Boolean enabled;
 
+    Vector attraction;
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void FrameAction();

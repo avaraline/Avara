@@ -6,6 +6,7 @@
     Created: Monday, July 3, 1995, 01:19
     Modified: Sunday, September 1, 1996, 20:00
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CTeleporter.h"
 
@@ -18,6 +19,8 @@
 #define FIELDSTRENGTH FIX3(100)
 #define TELEPORTERMIDDLE FIX3(1500)
 #define RETRANSMITFRAMES 60
+#define SPEEDLIMIT 2.25    // ratio of speed/activeRange ... a little more than the diameter of the teleport area
+
 
 void CTeleporter::BeginScript() {
     ProgramLongVar(iGroup, 0);
@@ -131,15 +134,20 @@ void CTeleporter::FrameAction() {
                 if ((thePlayer->teamMask & watchTeams) && (thePlayer->searchCount != searchCount) &&
                     !thePlayer->isInLimbo && thePlayer->itsGame->scores[thePlayer->itsManager->Slot()] >= hitScore) {
                     Vector delta;
-                    Fixed distance;
+                    Fixed distance, speed;
 
                     delta[0] = thePlayer->location[0] - location[0];
                     delta[1] = thePlayer->location[1] - location[1];
                     delta[2] = thePlayer->location[2] - location[2];
 
-                    distance = FDistanceEstimate(delta[0], delta[1], delta[2]);
+                    distance = FDistanceEstimate(delta);
+                    speed = FDistanceEstimate(thePlayer->speed);
+                    if (distance < TELEPORTAREA) {
+                        FPS_DEBUG("\nframeNumber = " << itsGame->frameNumber << "\n");
+                        FPS_DEBUG("distance = " << distance << ", activeRange = " << activeRange << ", deadRange = " << deadRange << ", delta = " << FormatVector(delta, 3) << ", speed = " << speed << ", speed / activeRange = " << speed / double(activeRange) << "\n");
+                    }
 
-                    if (distance < activeRange && distance >= deadRange) {
+                    if (distance < activeRange && distance >= deadRange && speed < SPEEDLIMIT*activeRange) {
                         if (winScore < 0) {
                             TeleportPlayer(thePlayer);
                         } else {
@@ -148,15 +156,23 @@ void CTeleporter::FrameAction() {
                         }
                     } else if (noPullTimer == 0 && distance < TELEPORTAREA) {
                         Fixed attraction = -FpsCoefficient2(FIELDSTRENGTH);
+                        if (pullCounter == 0) {
+                            FPS_DEBUG("attraction = " << attraction);
+                            attraction -= FpsOffset(FIELDSTRENGTH);
+                            FPS_DEBUG(", attraction with initial offset = " << attraction << "\n");
+                        }
                         delta[0] = FMul(delta[0], attraction);
                         delta[1] = FMul(delta[1], attraction);
                         delta[2] = FMul(delta[2], attraction);
                         thePlayer->Accelerate(delta);
+                        FPS_DEBUG("pullCounter = " << pullCounter << ", attraction = " << FormatVector(delta, 3) << ", new player speed = " << FormatVector(thePlayer->speed, 3) << "\n");
                         pullCounter++;
                         if (pullCounter >= FpsFramesPerClassic(32)) {
                             noPullTimer = FpsFramesPerClassic(16);
                             pullCounter = 0;
                         }
+                    } else if (distance > TELEPORTAREA) {
+                        pullCounter = noPullTimer = 0;
                     }
                 }
 

@@ -120,6 +120,7 @@ Fixed NormalizeVector(long n, Fixed *v); //	Returns length
 
 Fixed FRandom();
 Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz);
+static inline Fixed FDistanceEstimate(Fixed* v) { return FDistanceEstimate(v[0], v[1], v[2]); };
 Fixed FDistanceOverEstimate(Fixed dx, Fixed dy, Fixed dz);
 void InverseTransform(Matrix *trans, Matrix *inv);
 
