@@ -1327,7 +1327,14 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
         theSound->Start();
 
         if (options & kSpinOption) {
-            motors[0] = maxAcceleration << 7;
+            // approximation for how much to scale the motors to acheive the same spin with High-FPS...
+            // comes from taking the ratio of both geometric series limits of total spin for FPS and classic:
+            //    scale = (F/(1-F)) / ((f/N)/(1-f))
+            // F = classicMotorAcceleration, f = fpsMotorFriction, N = fps-frames per classic frame
+            Fixed spinScale = FDiv(FMul(classicMotorFriction, FIX1 - motorFriction),
+                                   FMul(FpsCoefficient2(motorFriction), FIX1 - classicMotorFriction));
+            FPS_DEBUG("•••spinScale = " << ToFloat(spinScale) << "\n");
+            motors[0] = FMul(maxAcceleration << 7, spinScale);
             motors[1] = -motors[0];
         } else {
             motors[0] = motors[1] = 0;
