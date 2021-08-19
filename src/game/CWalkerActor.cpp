@@ -495,7 +495,7 @@ void CWalkerActor::MoveLegs() {
     headHeight = elevation + FMul(viewPitch, FIX3(10));
     scoutBaseHeight = elevation + SCOUTPLATFORM;
 
-    temp = FMul(-LEGSPACE * 18, FpsCoefficient2(headChange));
+    temp = FMul(-LEGSPACE * 18, ClassicCoefficient2(headChange));
     legSpeeds[0] = distance - temp;
     legSpeeds[1] = distance + temp;
     FPS_DEBUG("distance = " << distance << ", temp = " << temp << ", headChange = " << headChange << "\n");
