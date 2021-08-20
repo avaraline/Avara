@@ -1134,7 +1134,7 @@ long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
 
 void CAvaraGame::SetFrameTime(long ft) {
     if (ft != 2 && ft != 4 && ft != 8 && ft != 16 && ft != 32 && ft != 64) {
-      SDL_Log("ERROR! frameTime MUST be 16, 32 or 64 msec");
+      SDL_Log("ERROR! frameTime MUST be 2, 4, 8, 16, 32 or 64 msec");
       exit(1); // is exit too dramatic?
     }
     SDL_Log("CAvaraGame::SetFrameTime(frameTime = %ld)\n", ft);
