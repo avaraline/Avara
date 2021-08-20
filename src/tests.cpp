@@ -408,15 +408,18 @@ vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
     return headings;
 }
 
-vector<Fixed> HectorShieldRegen(int steps, int ticksPerStep, int frameTime) {
+vector<Fixed> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<Fixed> shieldValues;
     int ticksPerStep = CLASSICFRAMETIME / frameTime;
 
-    scenario.hector.shields = FMul(scenario.hector.maxShields, FIX(0.5));
+    scenario.hector->shields = scenario.hector->maxShields * 0.5;
+    if (useBoost) {
+        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+    }
 
     for (int i = 0; i < steps; i++) {
-        shieldValues.push_back(scenario.hector.shields);
+        shieldValues.push_back(scenario.hector->shields);
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
         }
@@ -498,6 +501,54 @@ TEST(HECTOR, Jump) {
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << "\n\n";
         ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.1) << "not close enough after " << i << " ticks.";
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
+    }
+}
+
+TEST(HECTOR, ShieldRegen) {
+    int regenSteps = 404;
+    vector<Fixed> at64ms = HectorShieldRegen(regenSteps, false, 64);
+    vector<Fixed> at32ms = HectorShieldRegen(regenSteps, false, 32);
+    vector<Fixed> at16ms = HectorShieldRegen(regenSteps, false, 16);
+
+    ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at64ms[0], 98304) << "starting shield value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0], 98304) << "starting shield value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0], 98304) << "starting shield value incorrect at 16ms";
+    ASSERT_LT(at64ms[regenSteps - 3], 196608) << "shields recharge too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 2], 196608) << "shields recharge too slowly at 64ms";
+    ASSERT_EQ(at32ms[regenSteps - 1], 196608) << "shields recharge too slowly at 32ms";
+    ASSERT_EQ(at16ms[regenSteps - 1], 196608) << "shields recharge too slowly at 16ms";
+
+    for (int i = 0; i < regenSteps; i++) {
+        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << endl;
+        ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.003) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.003) << "16ms not close enough after " << i << " ticks.";
+    }
+}
+
+TEST(HECTOR, BoostedShieldRegen) {
+    int regenSteps = 47;
+    vector<Fixed> at64ms = HectorShieldRegen(regenSteps, true, 64);
+    vector<Fixed> at32ms = HectorShieldRegen(regenSteps, true, 32);
+    vector<Fixed> at16ms = HectorShieldRegen(regenSteps, true, 16);
+
+    ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at64ms[0], 98304) << "starting shield value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0], 98304) << "starting shield value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0], 98304) << "starting shield value incorrect at 16ms";
+    ASSERT_LT(at64ms[regenSteps - 2], 196608) << "shields recharge too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 1], 196608) << "shields recharge too slowly at 64ms";
+    ASSERT_EQ(at32ms[regenSteps - 1], 196608) << "shields recharge too slowly at 32ms";
+    ASSERT_EQ(at16ms[regenSteps - 1], 196608) << "shields recharge too slowly at 16ms";
+
+    for (int i = 0; i < regenSteps; i++) {
+        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << endl;
+        ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.015) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.015) << "16ms not close enough after " << i << " ticks.";
     }
 }
 
