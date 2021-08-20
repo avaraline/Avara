@@ -523,7 +523,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 theNetManager->HandleEvent(event);
             }
 
-            if (itsGame->isClassicFrame && itsGame->canPreSend && (long)(SDL_GetTicks() - itsGame->nextScheduledFrame) >= 0) {
+            if (itsGame->canPreSend && (long)(SDL_GetTicks() - itsGame->nextScheduledFrame) >= 0) {
                 itsGame->canPreSend = false;
                 theNetManager->FrameAction();
             }
