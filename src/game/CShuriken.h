@@ -18,4 +18,5 @@ public:
 
     virtual void IAbstractMissile(CDepot *theDepot);
     virtual void MoveForward();
+    virtual bool HandlesFastFPS() { return true; }
 };
