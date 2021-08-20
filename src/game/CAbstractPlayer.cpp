@@ -105,7 +105,7 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FIX3(30); //  Use 0.030 per frame to repair shields
+    shieldRegen = FpsCoefficient2(FIX3(30)); //  Use 0.030 per frame to repair shields
     maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
