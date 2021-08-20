@@ -408,6 +408,23 @@ vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
     return headings;
 }
 
+vector<Fixed> HectorShieldRegen(int steps, int ticksPerStep, int frameTime) {
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
+    vector<Fixed> shieldValues;
+    int ticksPerStep = CLASSICFRAMETIME / frameTime;
+
+    scenario.hector.shields = FMul(scenario.hector.maxShields, FIX(0.5));
+
+    for (int i = 0; i < steps; i++) {
+        shieldValues.push_back(scenario.hector.shields);
+        for (int k = 0; k < ticksPerStep; k++) {
+            scenario.game->GameTick();
+        }
+    }
+
+    return shieldValues;
+}
+
 TEST(HECTOR, Gravity) {
     vector<Fixed> at64ms = DropHector(50, 1, FIX(200), 64);
     vector<Fixed> at32ms = DropHector(50, 2, FIX(200), 32);
