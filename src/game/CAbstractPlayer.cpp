@@ -89,7 +89,7 @@ void CAbstractPlayer::LoadHUDParts() {
 void CAbstractPlayer::StartSystems() {
     //  Get systems running:
     reEnergize = false;
-    generatorPower = FIX3(30);
+    generatorPower = FpsCoefficient2(FIX3(30));
     maxEnergy = FIX(5);
     energy = maxEnergy;
     boostsRemaining = 3;
