@@ -1085,9 +1085,11 @@ Boolean CUDPComm::AsyncWrite() {
 }
 
 long CUDPComm::GetClock() {
-    // Apparently this clock is about 240/second?
-    // return SDL_GetTicks() >> 2;
-    return (long)((double)SDL_GetTicks() / 4.16666666667);
+    // Apparently this clock is about 240/second... which is 4x faster than TickCount().
+    // Looking at the original code, it shifted a microsec time >> 12, effectively dividing by 4096.
+    // So technically this was a 244.140625 msec clock.  We now have a much faster 16.667 msec clock which
+    // is good because higher frame rates need higher clock rates.
+    return (long)((double)SDL_GetTicks() / MSEC_PER_GET_CLOCK);
 }
 
 /*
@@ -1307,7 +1309,7 @@ void ForwardPorts(port_num port) {
         "urn:schemas-upnp-org:device:InternetGatewayDevice:1",
         0
     };
-    
+
     devlist = upnpDiscoverDevices(deviceList,
                                   5000, multicastif, minissdpdpath,
                                   0/*localport*/, ipv6, ttl, &error, 1);
@@ -1328,7 +1330,7 @@ void ForwardPorts(port_num port) {
             int status = UPNP_GetValidIGD(dev, &upnp_urls, &upnp_data, aLanAddr,
                                           sizeof(aLanAddr));
             //printf("status=%d, lan_addr=%s\n", status, aLanAddr);
-            
+
             if (status == 1) {
                 SDL_Log("UPNP: UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
                 error = UPNP_AddPortMapping(upnp_urls.controlURL,
@@ -1951,7 +1953,8 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
         }
     }
 
-    maxTrip = maxTrip*1000/240;
+    // convert from GetClock() ticks to msec
+    maxTrip = maxTrip*MSEC_PER_GET_CLOCK;
 
     return maxTrip;
 }
