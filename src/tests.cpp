@@ -454,17 +454,26 @@ vector<Fixed> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
 }
 
 TEST(HECTOR, Gravity) {
-    vector<Fixed> at64ms = DropHector(50, FIX(200), 64);
-    vector<Fixed> at32ms = DropHector(50, FIX(200), 32);
-    vector<Fixed> at16ms = DropHector(50, FIX(200), 16);
+    int dropSteps = 50;
+    vector<Fixed> at64ms = DropHector(dropSteps, FIX(200), 64);
+    vector<Fixed> at32ms = DropHector(dropSteps, FIX(200), 32);
+    vector<Fixed> at16ms = DropHector(dropSteps, FIX(200), 16);
+    vector<Fixed> at8ms = DropHector(dropSteps, FIX(200), 8);
+
+    ASSERT_EQ(at64ms.size(), dropSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), dropSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), dropSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), dropSteps) << "not enough steps recorded at 8ms";
     ASSERT_EQ(at64ms.back(), 6125961) << "64ms simulation fell wrong amount";
-    ASSERT_EQ(at64ms.size(), at32ms.size()) << "DropHector didn't do ticks right";
-    for (int i = 0; i < at64ms.size(); i++) {
+
+    for (int i = 0; i < dropSteps; i++) {
         double f64 = ToFloat(at64ms[i]);
         double f32 = ToFloat(at32ms[i]);
-        double f16 = ToFloat(at32ms[i]);
+        double f16 = ToFloat(at16ms[i]);
+        double f8 = ToFloat(at8ms[i]);
         ASSERT_LT(abs(f64-f32)/f64, 0.003) << "not close enough after " << i << " ticks.";
-        ASSERT_LT(abs(f64-f16)/f64, 0.003) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(abs(f64-f16)/f64, 0.004) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(abs(f64-f8)/f64, 0.005) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -480,35 +489,53 @@ double VecStructDist(const VectorStruct &one, const VectorStruct &two) {
 }
 
 TEST(HECTOR, TurnSpeed) {
-    vector<Fixed> at64ms = TurnHector(50, 64);
-    vector<Fixed> at32ms = TurnHector(50, 32);
-    vector<Fixed> at16ms = TurnHector(50, 16);
+    int turnSteps = 50;
+    vector<Fixed> at64ms = TurnHector(turnSteps, 64);
+    vector<Fixed> at32ms = TurnHector(turnSteps, 32);
+    vector<Fixed> at16ms = TurnHector(turnSteps, 16);
+    vector<Fixed> at8ms = TurnHector(turnSteps, 8);
+
+    // TurnHector adds an additional step!
+    turnSteps += 1;
+
+    ASSERT_EQ(at64ms.size(), turnSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), turnSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), turnSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), turnSteps) << "not enough steps recorded at 8ms";
     // within 0.01 degrees
     ASSERT_NEAR(at64ms.back(), -30542, FDegToOne(FIX(0.01))) << "64ms simulation turned wrong amount";
 
-    ASSERT_EQ(at64ms.size(), at32ms.size()) << "TurnHector didn't do ticks right";
-    for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 100) << "not close enough after " << i << " ticks.";
-    }
-    for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 120) << "not close enough after " << i << " ticks.";
+    for (int i = 0; i < turnSteps; i++) {
+        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 100) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 120) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_LE(at64ms[i] > at8ms[i] ? at64ms[i] - at8ms[i] : at8ms[i] - at64ms[i], 120) << "8ms not close enough after " << i << " ticks.";
     }
 }
 
 TEST(HECTOR, WalkForwardSpeed) {
-    vector<VectorStruct> at64ms = WalkHector(20, 50, 64);
-    vector<VectorStruct> at32ms = WalkHector(20, 50, 32);
-    vector<VectorStruct> at16ms = WalkHector(20, 50, 16);
+    int walkSteps = 50;
+    vector<VectorStruct> at64ms = WalkHector(20, walkSteps, 64);
+    vector<VectorStruct> at32ms = WalkHector(20, walkSteps, 32);
+    vector<VectorStruct> at16ms = WalkHector(20, walkSteps, 16);
+    vector<VectorStruct> at8ms = WalkHector(20, walkSteps, 8);
+
+    // WalkHector adds an additional step!
+    walkSteps += 1;
+
+    ASSERT_EQ(at64ms.size(), walkSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), walkSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), walkSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), walkSteps) << "not enough steps recorded at 8ms";
     ASSERT_EQ(at64ms.back().theVec[0], 0) << "64ms simulation walked wrong amount";
     ASSERT_NEAR(at64ms.back().theVec[2], 1584235, 3*MILLIMETER) << "64ms simulation walked wrong amount";
-    ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
-    for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
+
+    for (int i = 0; i < walkSteps; i++) {
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
-        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.04) << "not close enough after " << i << " ticks.";
-    }
-    for (int i = 0; i < min(at16ms.size(), at64ms.size()); i++) {
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
+        // std::cout << "dist8[" << i << "] = " << VecStructDist(at64ms[i], at8ms[i]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.04) << "not close enough after " << i << " ticks.";
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.08) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at8ms[i]), 0.12) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -517,15 +544,25 @@ TEST(HECTOR, Jump) {
     vector<VectorStruct> at64ms = JumpHector(20, 20, jumpSteps, 64);
     vector<VectorStruct> at32ms = JumpHector(20, 20, jumpSteps, 32);
     vector<VectorStruct> at16ms = JumpHector(20, 20, jumpSteps, 16);
+    vector<VectorStruct> at8ms = JumpHector(20, 20, jumpSteps, 8);
+
     // peak of jump is near frame 6
+    ASSERT_EQ(at64ms.size(), jumpSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), jumpSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), jumpSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), jumpSteps) << "not enough steps recorded at 8ms";
     ASSERT_NEAR(at64ms[6].theVec[1], 181697, 3*MILLIMETER) << "64ms simulation peaked with wrong amount";
     ASSERT_NEAR(at32ms[6].theVec[1], 181697, 10*MILLIMETER) << "32ms simulation peaked with wrong amount";
     ASSERT_NEAR(at16ms[6].theVec[1], 181697, 30*MILLIMETER) << "16ms simulation peaked with wrong amount";
+    ASSERT_NEAR(at8ms[6].theVec[1], 181697, 30*MILLIMETER) << "8ms simulation peaked with wrong amount";
+
     for (int i = 0; i < jumpSteps; i++) {
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << "\n";
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << "\n\n";
+        // std::cout << "dist8[" << i << "] = " << VecStructDist(at64ms[i], at8ms[i]) << "\n\n";
         ASSERT_LT(VecStructDist(at64ms[i], at32ms[i]), 0.1) << "not close enough after " << i << " ticks.";
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
+        ASSERT_LT(VecStructDist(at64ms[i], at8ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
 }
 
@@ -534,22 +571,27 @@ TEST(HECTOR, EnergyRegen) {
     vector<Fixed> at64ms = HectorEnergyRegen(regenSteps, false, 64);
     vector<Fixed> at32ms = HectorEnergyRegen(regenSteps, false, 32);
     vector<Fixed> at16ms = HectorEnergyRegen(regenSteps, false, 16);
+    vector<Fixed> at8ms = HectorEnergyRegen(regenSteps, false, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
     ASSERT_EQ(at64ms[0], 163840) << "starting energy value incorrect at 64ms";
     ASSERT_EQ(at32ms[0], 163840) << "starting energy value incorrect at 32ms";
     ASSERT_EQ(at16ms[0], 163840) << "starting energy value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0], 163840) << "starting energy value incorrect at 8ms";
     ASSERT_LT(at64ms[regenSteps - 2], 327680) << "energy recharges too quickly at 64ms";
     ASSERT_EQ(at64ms[regenSteps - 1], 327680) << "energy recharges too slowly at 64ms";
     ASSERT_EQ(at32ms[regenSteps - 1], 327680) << "energy recharges too slowly at 32ms";
     ASSERT_EQ(at16ms[regenSteps - 1], 327680) << "energy recharges too slowly at 16ms";
+    ASSERT_EQ(at8ms[regenSteps - 1], 327680) << "energy recharges too slowly at 8ms";
 
     for (int i = 0; i < regenSteps; i++) {
-        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << endl;
+        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << "\t" << at8ms[i] << endl;
         ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.001) << "32ms not close enough after " << i << " ticks.";
         ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.001) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.001) << "8ms not close enough after " << i << " ticks.";
     }
 }
 
@@ -558,46 +600,60 @@ TEST(HECTOR, BoostedEnergyRegen) {
     vector<Fixed> at64ms = HectorEnergyRegen(regenSteps, true, 64);
     vector<Fixed> at32ms = HectorEnergyRegen(regenSteps, true, 32);
     vector<Fixed> at16ms = HectorEnergyRegen(regenSteps, true, 16);
+    vector<Fixed> at8ms = HectorEnergyRegen(regenSteps, true, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
     ASSERT_EQ(at64ms[0], 163840) << "starting energy value incorrect at 64ms";
     ASSERT_EQ(at32ms[0], 163840) << "starting energy value incorrect at 32ms";
     ASSERT_EQ(at16ms[0], 163840) << "starting energy value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0], 163840) << "starting energy value incorrect at 8ms";
     ASSERT_LT(at64ms[regenSteps - 2], 327680) << "energy recharges too quickly at 64ms";
     ASSERT_EQ(at64ms[regenSteps - 1], 327680) << "energy recharges too slowly at 64ms";
     ASSERT_EQ(at32ms[regenSteps - 1], 327680) << "energy recharges too slowly at 32ms";
     ASSERT_EQ(at16ms[regenSteps - 1], 327680) << "energy recharges too slowly at 16ms";
+    ASSERT_EQ(at8ms[regenSteps - 1], 327680) << "energy recharges too slowly at 8ms";
 
     for (int i = 0; i < regenSteps; i++) {
-        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << endl;
-        ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.04) << "32ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.04) << "16ms not close enough after " << i << " ticks.";
+        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << "\t" << at8ms[i] << endl;
+        ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.045) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.045) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.045) << "8ms not close enough after " << i << " ticks.";
     }
 }
 
 TEST(HECTOR, ShieldRegen) {
-    int regenSteps = 404;
+    int regenSteps = 411;
     vector<Fixed> at64ms = HectorShieldRegen(regenSteps, false, 64);
     vector<Fixed> at32ms = HectorShieldRegen(regenSteps, false, 32);
     vector<Fixed> at16ms = HectorShieldRegen(regenSteps, false, 16);
+    vector<Fixed> at8ms = HectorShieldRegen(regenSteps, false, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
     ASSERT_EQ(at64ms[0], 98304) << "starting shield value incorrect at 64ms";
     ASSERT_EQ(at32ms[0], 98304) << "starting shield value incorrect at 32ms";
     ASSERT_EQ(at16ms[0], 98304) << "starting shield value incorrect at 16ms";
-    ASSERT_LT(at64ms[regenSteps - 3], 196608) << "shields recharge too quickly at 64ms";
-    ASSERT_EQ(at64ms[regenSteps - 2], 196608) << "shields recharge too slowly at 64ms";
-    ASSERT_EQ(at32ms[regenSteps - 1], 196608) << "shields recharge too slowly at 32ms";
-    ASSERT_EQ(at16ms[regenSteps - 1], 196608) << "shields recharge too slowly at 16ms";
+    ASSERT_EQ(at8ms[0], 98304) << "starting shield value incorrect at 8ms";
+
+    // At 8ms, shields take a surprising amount of extra steps in comparison to other
+    // frame times. That said, it still amounts to something like an extra half second
+    // out of roughly 26 seconds to recharge from half shields.
+    ASSERT_LT(at64ms[regenSteps - 10], 196608) << "shields recharge too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 9], 196608) << "shields recharge too slowly at 64ms";
+    ASSERT_EQ(at32ms[regenSteps - 8], 196608) << "shields recharge too slowly at 32ms";
+    ASSERT_EQ(at16ms[regenSteps - 8], 196608) << "shields recharge too slowly at 16ms";
+    ASSERT_EQ(at8ms[regenSteps - 1], 196608) << "shields recharge too slowly at 8ms";
 
     for (int i = 0; i < regenSteps; i++) {
-        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << endl;
+        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << "\t" << at8ms[i] << endl;
         ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.003) << "32ms not close enough after " << i << " ticks.";
         ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.003) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.011) << "8ms not close enough after " << i << " ticks.";
     }
 }
 
@@ -606,22 +662,27 @@ TEST(HECTOR, BoostedShieldRegen) {
     vector<Fixed> at64ms = HectorShieldRegen(regenSteps, true, 64);
     vector<Fixed> at32ms = HectorShieldRegen(regenSteps, true, 32);
     vector<Fixed> at16ms = HectorShieldRegen(regenSteps, true, 16);
+    vector<Fixed> at8ms = HectorShieldRegen(regenSteps, true, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
     ASSERT_EQ(at64ms[0], 98304) << "starting shield value incorrect at 64ms";
     ASSERT_EQ(at32ms[0], 98304) << "starting shield value incorrect at 32ms";
     ASSERT_EQ(at16ms[0], 98304) << "starting shield value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0], 98304) << "starting shield value incorrect at 8ms";
     ASSERT_LT(at64ms[regenSteps - 2], 196608) << "shields recharge too quickly at 64ms";
     ASSERT_EQ(at64ms[regenSteps - 1], 196608) << "shields recharge too slowly at 64ms";
     ASSERT_EQ(at32ms[regenSteps - 1], 196608) << "shields recharge too slowly at 32ms";
     ASSERT_EQ(at16ms[regenSteps - 1], 196608) << "shields recharge too slowly at 16ms";
+    ASSERT_EQ(at8ms[regenSteps - 1], 196608) << "shields recharge too slowly at 8ms";
 
     for (int i = 0; i < regenSteps; i++) {
-        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << endl;
+        // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << "\t" << at8ms[i] << endl;
         ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.015) << "32ms not close enough after " << i << " ticks.";
         ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.015) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.0175) << "8ms not close enough after " << i << " ticks.";
     }
 }
 
@@ -629,7 +690,10 @@ TEST(GRENADE, Trajectory) {
     vector<VectorStruct> at64ms = FireGrenade(20, 50, 64);
     vector<VectorStruct> at32ms = FireGrenade(20, 50, 32);
     vector<VectorStruct> at16ms = FireGrenade(20, 50, 16);
+    vector<VectorStruct> at8ms = FireGrenade(20, 50, 8);
+
     ASSERT_NEAR(at64ms.back().theVec[1], 59384, 3*MILLIMETER) << "64ms simulation is wrong";
+
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
         // std::cout << "delY32[" << i << "] = " << ToFloat(at32ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << std::endl;
@@ -642,12 +706,20 @@ TEST(GRENADE, Trajectory) {
         // std::cout << "loc16[" << i << "] = " << FormatVector(at16ms[i].theVec, 3) << std::endl;
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.2) << "not close enough after " << i << " ticks.";
     }
+    for (int i = 0; i < min(at8ms.size(), at64ms.size()); i++) {
+        // std::cout << "delY8[" << i << "] = " << ToFloat(at8ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
+        // std::cout << "dist8[" << i << "] = " << VecStructDist(at64ms[i], at8ms[i]) << std::endl;
+        // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
+        // std::cout << "loc8[" << i << "] = " << FormatVector(at8ms[i].theVec, 3) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at8ms[i]), 0.2) << "not close enough after " << i << " ticks.";
+    }
 }
 
 TEST(MISSILE, Trajectory) {
     vector<VectorStruct> at64ms = FireMissile(20, 60, 50, 64);
     vector<VectorStruct> at32ms = FireMissile(20, 60, 50, 32);
     vector<VectorStruct> at16ms = FireMissile(20, 60, 50, 16);
+    vector<VectorStruct> at8ms = FireMissile(20, 60, 50, 8);
 
     // index 15 is the furthest left the missile goes, and index 26 is the furthest forward
     ASSERT_NEAR(at64ms[15].theVec[0], -591030, 3*MILLIMETER) << "64ms simulation is wrong on min X";
@@ -655,6 +727,7 @@ TEST(MISSILE, Trajectory) {
     ASSERT_EQ(at64ms.size(), 37) << "64ms simulation blows up in the wrong frame";
     ASSERT_NEAR(at64ms.size(), at32ms.size(), 1) << "32ms simulation should blows up in wrong frame";
     ASSERT_NEAR(at64ms.size(), at16ms.size(), 1) << "16ms simulation should blows up at wrong frame";
+    ASSERT_NEAR(at64ms.size(), at8ms.size(), 1) << "8ms simulation should blows up at wrong frame";
 
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
         // std::cout << "loc32[" << i << "] = " << FormatVector(at32ms[i].theVec, 3) << std::endl;
@@ -667,6 +740,12 @@ TEST(MISSILE, Trajectory) {
         // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
         // std::cout << "dist16[" << i << "] = " << VecStructDist(at64ms[i], at16ms[i]) << std::endl;
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
+    }
+    for (int i = 0; i < min(at8ms.size(), at64ms.size()); i++) {
+        // std::cout << "loc8[" << i << "] = " << FormatVector(at8ms[i].theVec, 3) << std::endl;
+        // std::cout << "loc64[" << i << "] = " << FormatVector(at64ms[i].theVec, 3) << std::endl;
+        // std::cout << "dist8[" << i << "] = " << VecStructDist(at64ms[i], at8ms[i]) << std::endl;
+        ASSERT_LT(VecStructDist(at64ms[i], at8ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
 }
 
