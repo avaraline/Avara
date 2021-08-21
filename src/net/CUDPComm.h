@@ -23,6 +23,9 @@
 #define CRAMPACKSIZE 64
 #define kClientConnectTimeoutTicks 600 //(60*30)
 
+// (240 ticks/sec = 4.16667 msec) GetClock() is 4x faster than TickCount()
+#define MSEC_PER_GET_CLOCK (MSEC_PER_TICK_COUNT / 4)
+
 enum { udpCramInfo }; //	Selectors for kpPacketProtocolControl packer p1 params.
 
 class CUDPComm : public CCommManager {
