@@ -194,9 +194,15 @@ public:
     }
 };
 
-vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
+inline int GetTicksPerStep(int frameTime) {
+    return CLASSICFRAMETIME / frameTime;
+}
+
+vector<Fixed> DropHector(int steps, Fixed fromHeight, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, fromHeight, 0);
     vector<Fixed> altitudes;
+    int ticksPerStep = GetTicksPerStep(frameTime);
+
     for (int i = 0; i < steps; i++) {
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
@@ -206,12 +212,12 @@ vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int fram
     return altitudes;
 }
 
-vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+vector<VectorStruct> WalkHector(int settleSteps, int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<VectorStruct> location;
+    int ticksPerStep = GetTicksPerStep(frameTime);
+
     for (int i = 0; i < settleSteps; i++) {
-        scenario.game->nextScheduledFrame = 0;
-        scenario.game->itsNet->activePlayersDistribution = 1;
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
         }
@@ -231,8 +237,8 @@ vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, in
 vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<VectorStruct> location;
+    int ticksPerStep = GetTicksPerStep(frameTime);
 
-    int ticksPerStep = CLASSICFRAMETIME/frameTime;
     for (int i = 0; i < settleSteps * ticksPerStep; i++) {
         scenario.game->GameTick();
     }
@@ -262,21 +268,21 @@ vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, i
     return location;
 }
 
-vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, int frameTime) {
+vector<VectorStruct> FireGrenade(int settleSteps, int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<VectorStruct> trajectory;
+    int ticksPerStep = GetTicksPerStep(frameTime);
+
     for (int i = 0; i < settleSteps; i++) {
-        scenario.game->nextScheduledFrame = 0;
-        scenario.game->itsNet->activePlayersDistribution = 1;
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
         }
     }
-    scenario.game->nextScheduledFrame = 0;
-    scenario.game->itsNet->activePlayersDistribution = 1;
+
     scenario.hector->itsManager->GetFunctions()->down = (1 << kfuLoadGrenade) | (1 << kfuFireWeapon);
     scenario.game->GameTick();
     scenario.hector->itsManager->GetFunctions()->down = 0;
+
     CGrenade *grenade = 0;
     // hopefully there are two objects now. a hector and a grenade.
     CAbstractActor *aa = scenario.game->actorList;
@@ -288,12 +294,11 @@ vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, i
     }
 
     for (int i = 0; i < steps && count == 2; i++) {
-        scenario.game->nextScheduledFrame = 0;
-        scenario.game->itsNet->activePlayersDistribution = 1;
         trajectory.push_back(*(VectorStruct*)grenade->location);
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
         }
+
         // this intends to figure out whether the grenade has exploded.
         grenade = 0;
         aa = scenario.game->actorList;
@@ -310,8 +315,8 @@ vector<VectorStruct> FireGrenade(int settleSteps, int steps, int ticksPerStep, i
 vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<VectorStruct> trajectory;
+    int ticksPerStep = GetTicksPerStep(frameTime);
 
-    int ticksPerStep = CLASSICFRAMETIME / frameTime;
     for (int i = 0; i < hectorSettle*ticksPerStep; i++) {
         scenario.game->GameTick();
     }
@@ -392,12 +397,12 @@ vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int steps, i
     return trajectory;
 }
 
-vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
+vector<Fixed> TurnHector(int steps, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<Fixed> headings;
+    int ticksPerStep = GetTicksPerStep(frameTime);
+
     for (int i = 0; i < steps; i++) {
-        scenario.game->nextScheduledFrame = 0;
-        scenario.game->itsNet->activePlayersDistribution = 1;
         headings.push_back(scenario.hector->heading);
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.hector->itsManager->GetFunctions()->held = (1 << kfuRight);
@@ -411,7 +416,7 @@ vector<Fixed> TurnHector(int steps, int ticksPerStep, int frameTime) {
 vector<Fixed> HectorEnergyRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<Fixed> energyValues;
-    int ticksPerStep = CLASSICFRAMETIME / frameTime;
+    int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->energy = scenario.hector->maxEnergy * 0.5;
     if (useBoost) {
@@ -431,7 +436,7 @@ vector<Fixed> HectorEnergyRegen(int steps, bool useBoost, int frameTime) {
 vector<Fixed> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<Fixed> shieldValues;
-    int ticksPerStep = CLASSICFRAMETIME / frameTime;
+    int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->shields = scenario.hector->maxShields * 0.5;
     if (useBoost) {
@@ -449,9 +454,9 @@ vector<Fixed> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
 }
 
 TEST(HECTOR, Gravity) {
-    vector<Fixed> at64ms = DropHector(50, 1, FIX(200), 64);
-    vector<Fixed> at32ms = DropHector(50, 2, FIX(200), 32);
-    vector<Fixed> at16ms = DropHector(50, 4, FIX(200), 16);
+    vector<Fixed> at64ms = DropHector(50, FIX(200), 64);
+    vector<Fixed> at32ms = DropHector(50, FIX(200), 32);
+    vector<Fixed> at16ms = DropHector(50, FIX(200), 16);
     ASSERT_EQ(at64ms.back(), 6125961) << "64ms simulation fell wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "DropHector didn't do ticks right";
     for (int i = 0; i < at64ms.size(); i++) {
@@ -475,9 +480,9 @@ double VecStructDist(const VectorStruct &one, const VectorStruct &two) {
 }
 
 TEST(HECTOR, TurnSpeed) {
-    vector<Fixed> at64ms = TurnHector(50, 1, 64);
-    vector<Fixed> at32ms = TurnHector(50, 2, 32);
-    vector<Fixed> at16ms = TurnHector(50, 4, 16);
+    vector<Fixed> at64ms = TurnHector(50, 64);
+    vector<Fixed> at32ms = TurnHector(50, 32);
+    vector<Fixed> at16ms = TurnHector(50, 16);
     // within 0.01 degrees
     ASSERT_NEAR(at64ms.back(), -30542, FDegToOne(FIX(0.01))) << "64ms simulation turned wrong amount";
 
@@ -491,9 +496,9 @@ TEST(HECTOR, TurnSpeed) {
 }
 
 TEST(HECTOR, WalkForwardSpeed) {
-    vector<VectorStruct> at64ms = WalkHector(20, 50, 1, 64);
-    vector<VectorStruct> at32ms = WalkHector(20, 50, 2, 32);
-    vector<VectorStruct> at16ms = WalkHector(20, 50, 4, 16);
+    vector<VectorStruct> at64ms = WalkHector(20, 50, 64);
+    vector<VectorStruct> at32ms = WalkHector(20, 50, 32);
+    vector<VectorStruct> at16ms = WalkHector(20, 50, 16);
     ASSERT_EQ(at64ms.back().theVec[0], 0) << "64ms simulation walked wrong amount";
     ASSERT_NEAR(at64ms.back().theVec[2], 1584235, 3*MILLIMETER) << "64ms simulation walked wrong amount";
     ASSERT_EQ(at64ms.size(), at32ms.size()) << "WalkHector didn't do ticks right";
@@ -621,9 +626,9 @@ TEST(HECTOR, BoostedShieldRegen) {
 }
 
 TEST(GRENADE, Trajectory) {
-    vector<VectorStruct> at64ms = FireGrenade(20, 50, 1, 64);
-    vector<VectorStruct> at32ms = FireGrenade(20, 50, 2, 32);
-    vector<VectorStruct> at16ms = FireGrenade(20, 50, 4, 16);
+    vector<VectorStruct> at64ms = FireGrenade(20, 50, 64);
+    vector<VectorStruct> at32ms = FireGrenade(20, 50, 32);
+    vector<VectorStruct> at16ms = FireGrenade(20, 50, 16);
     ASSERT_NEAR(at64ms.back().theVec[1], 59384, 3*MILLIMETER) << "64ms simulation is wrong";
     for (int i = 0; i < min(at32ms.size(), at64ms.size()); i++) {
         // std::cout << "delY32[" << i << "] = " << ToFloat(at32ms[i].theVec[1] - at64ms[i].theVec[1]) << std::endl;
