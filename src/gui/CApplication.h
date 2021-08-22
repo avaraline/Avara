@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CWindow.h"
+#include "Preferences.h"
 
 #include <SDL2/SDL.h>
 #include <json.hpp>
@@ -38,16 +39,30 @@ public:
     // Screen overrides.
     virtual bool handleSDLEvent(SDL_Event &event);
 
-    std::string String(const std::string name);
-    long Number(const std::string name);
+    // templated version works for new types too (float, double, short, etc.)
+    template <class T> T Get(const std::string name) { return prefs[name]; }
+    // these getters are here for backwards compatibility and/or readability
+    std::string String(const std::string name)       { return Get<std::string>(name); };
+    long Number(const std::string name)              { return Get<long>(name); };
     long Number(const std::string name, const long defaultValue);
-    bool Boolean(const std::string name);
-    json Get(const std::string name);
-    void Set(const std::string name, const std::string value);
-    void Set(const std::string name, long value);
-    void Set(const std::string name, json value);
+    bool Boolean(const std::string name)             { return Get<bool>(name); }
+    json Get(const std::string name)                 { return Get<json>(name); }
+
+    template <class T> void Set(const std::string name, const T value) {
+        prefs[name] = value;
+        PrefChanged(name);
+    }
+
+    // set and return set value while rounding value up to a least common denominator
+    template <class T> T SetLcd(const std::string name, const T value, const T leastCommonDenominator) {
+        prefs[name] = std::ceil(value / leastCommonDenominator) * leastCommonDenominator;
+        PrefChanged(name);
+        return prefs[name];
+    }
+
 
 protected:
+    static inline json prefs = ReadPrefs();
     std::vector<CWindow *> windowList;
 };
 

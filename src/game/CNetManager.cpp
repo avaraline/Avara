@@ -571,7 +571,7 @@ void CNetManager::ResumeGame() {
     Boolean allOk = false;
 
     SDL_Log("CNetManager::ResumeGame\n");
-    config.latencyTolerance = gApplication->Number(kLatencyToleranceTag);
+    config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
     config.hullType = gApplication->Number(kHullTypeTag);
     config.numGrenades = 6;
     config.numMissiles = 3;
@@ -613,7 +613,7 @@ void CNetManager::ResumeGame() {
         copy.numMissiles = ntohs(config.numMissiles);
         copy.numBoosters = ntohs(config.numBoosters);
         copy.hullType = ntohs(config.hullType);
-        copy.latencyTolerance = ntohs(config.latencyTolerance);
+        copy.frameLatency = ntohs(config.frameLatency);
 
         itsCommManager->SendUrgentPacket(
             kdEveryone, kpStartSynch, 0, kLActive, FRandSeed, sizeof(PlayerConfigRecord), (Ptr)&copy);
@@ -719,7 +719,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                             frameNumber, itsGame->latencyFrameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
                 #endif
 
-                itsGame->SetLatencyTolerance(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
+                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
                 itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
             }
 
@@ -966,7 +966,7 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->numMissiles = ntohs(config->numMissiles);
     config->numBoosters = ntohs(config->numBoosters);
     config->hullType = ntohs(config->hullType);
-    config->latencyTolerance = ntohs(config->latencyTolerance);
+    config->frameLatency = ntohs(config->frameLatency);
     playerTable[senderSlot]->TheConfiguration() = *config;
 }
 
@@ -978,12 +978,14 @@ void CNetManager::DoConfig(short senderSlot) {
     }
 
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
-        if (itsGame->latencyTolerance < theConfig->latencyTolerance)
-            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
+        // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
+        if (itsGame->latencyTolerance < theConfig->frameLatency*itsGame->fpsScale) {
+            itsGame->SetFrameLatency(theConfig->frameLatency, -1);
             itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
+        }
     } else {
         if (senderSlot == 0) {
-            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
+            itsGame->SetFrameLatency(theConfig->frameLatency, -1);
             itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         }
     }

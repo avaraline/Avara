@@ -161,7 +161,7 @@ public:
     short moJoOptions; //	Mouse and Joystick options.
     short sensitivity;
 
-    long latencyTolerance;
+    double latencyTolerance;
 
     ScoreInterfaceReasons scoreReason;
     ScoreInterfaceReasons lastReason;
@@ -249,7 +249,7 @@ public:
     virtual double LatencyFrameTimeScale();
 
     virtual long RoundTripToFrameLatency(long rtt);
-    virtual void SetLatencyTolerance(long newLatency, int maxChange = 2, const char *slowPlayer = nullptr);
+    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, const char *slowPlayer = nullptr);
     virtual void AdjustFrameTime();
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);

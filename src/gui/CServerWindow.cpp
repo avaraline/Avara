@@ -4,6 +4,7 @@
 #include "CNetManager.h"
 #include "Preferences.h"
 #include "CommandList.h"
+#include "CAvaraGame.h"  // gCurrentGame
 
 CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
@@ -44,7 +45,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     });
     bool shouldRegister = app->Number(kTrackerRegister) != 0;
     registerBox->setChecked(shouldRegister);
-    
+
     trackerBox = new nanogui::TextBox(this);
     trackerBox->setValue(app->String(kTrackerRegisterAddress));
     trackerBox->setEditable(true);
@@ -54,27 +55,23 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     });
 
     latencyBox = new nanogui::TextBox(this);
-    latencyBox->setValue(std::to_string(app->Number(kLatencyToleranceTag)));
+    latencyBox->setValue(std::to_string(app->Get<float>(kLatencyToleranceTag)).substr(0, 5));
     latencyBox->setEditable(false);
     latencyBox->setEnabled(false);
-    latencyBox->setCallback([app](std::string value) -> bool {
-        char * pointer;
-        long newLT = strtol(value.c_str(), &pointer, 10);
+    latencyBox->setCallback([this, app](std::string value) -> bool {
+        double newLT = std::stod(value);
 
         // determining the min/max LT values from CAvaraGame::AdjustFrameTime()
-        long maxLT = 8;
-
-        // make sure the provided value is an integer
-        if (*pointer != 0)
-            return false;
-
+        long maxLT = 4;  // anything above 4 is bad, don't let people set it higher
         if (newLT > maxLT)
             newLT = maxLT;
 
         if (newLT < 0)
             newLT = 0;
 
-        app->Set(kLatencyToleranceTag, newLT);
+        newLT = app->SetLcd(kLatencyToleranceTag, newLT, gCurrentGame->fpsScale);
+        // it might be modified on a bad input so get back the saved value
+        latencyBox->setValue(std::to_string(newLT).substr(0, 5));
         return true;
     });
 
@@ -123,12 +120,13 @@ bool CServerWindow::DoCommand(int theCommand) {
 }
 
 void CServerWindow::PrefChanged(std::string name) {
-    latencyBox->setValue(std::to_string(mApplication->Number(kLatencyToleranceTag)));
+    latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 5));
 }
 
 void CServerWindow::EnableLatencyOptions(bool enable) {
-    this->latencyBox->setEditable(enable);
-    this->latencyBox->setEnabled(enable);
-    this->autoLatencyBox->setEnabled(enable);
+    latencyBox->setEditable(enable);
+    latencyBox->setEnabled(enable);
+    // force a callback which could change the LT depending on frame rate
+    latencyBox->callback()(latencyBox->value());
+    autoLatencyBox->setEnabled(enable);
 }
-
