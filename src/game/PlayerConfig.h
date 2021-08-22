@@ -13,7 +13,7 @@ typedef struct {
     short numMissiles;
     short numBoosters;
     short hullType;
-    short latencyTolerance;
+    short frameLatency;
 } PlayerConfigRecord;
 
 typedef struct {

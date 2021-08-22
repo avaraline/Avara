@@ -61,7 +61,7 @@ static json defaultPrefs = {
     // {kJoystickModeTag, false},
     {kInvertYAxisTag, false},
     {kMouseSensitivityTag, 0},
-    {kLatencyToleranceTag, 1},
+    {kLatencyToleranceTag, 1.0},
     {kHullTypeTag, 0}, // 0 = light, 1 = medium, 2 = heavy
     {kServerOptionsTag, 129}, // 1 = allow load, 128 = auto latency
     {kDefaultUDPPort, 19567},

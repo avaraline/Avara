@@ -694,7 +694,7 @@ void CAvaraGame::ReadGamePrefs() {
         moJoOptions += kFlipAxis;
     }
     sensitivity = itsApp->Number(kMouseSensitivityTag);
-    latencyTolerance = gApplication->Number(kLatencyToleranceTag);
+    latencyTolerance = gApplication->Get<double>(kLatencyToleranceTag);
     AdjustFrameTime();
 }
 
@@ -756,7 +756,6 @@ bool CAvaraGame::IsPlaying() {
 // Run when the game is started or resumed
 void CAvaraGame::GameStart() {
     SDL_Log("CAvaraGame::GameStart\n");
-    // consecutiveSkips = 0;
     latencyTolerance = 0;
     didWait = false;
     longWait = false;
@@ -1048,7 +1047,8 @@ double CAvaraGame::LatencyFrameTimeScale() {
     return double(latencyFrameTime)/frameTime;
 }
 
-
+// FrameLatency is slightly different than LatencyTolerance.  It is in terms of integer frames
+// at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     SDL_Log("CAvaraGame::RoundTripToFrameLatency RTT=%ld, Classic LT=%.2lf, Actual LT=%.2lf, Rounded LT=%2ld\n",
             roundTrip,
@@ -1059,26 +1059,34 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     return (roundTrip + frameTime) / (2*frameTime);
 }
 
-void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange, const char* slowPlayer) {
+// "frameLatency" is the integer number of frames to delay;
+// latencyTolerance is the number of classic (64ms) frames (= frameLatency * fpsScale).
+void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const char* slowPlayer) {
+    double newLatency = newFrameLatency * fpsScale;
     if (latencyTolerance != newLatency) {
-        #define MAX_LATENCY ((long)8)   // in classic units
+        #define MAX_LATENCY (8)   // in classic units
         if (maxChange < 0) {
             // allow latency to jump to any value
-            maxChange = MAX_LATENCY / fpsScale;
+            maxChange = MAX_LATENCY;
         }
         if (newLatency < latencyTolerance) {
-            latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, (long)0));
+            latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
         } else {
-            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, long(MAX_LATENCY / fpsScale)));
+            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY / fpsScale)));
         }
-        gApplication->Set(kLatencyToleranceTag, long(latencyTolerance));
-        SDL_Log("*** LT set to %ld (classic=%.2lf)\n", latencyTolerance, latencyTolerance*fpsScale);
+
+        // make prettier version of the LT string (C++ sucks with strings)
+        std::ostringstream ltOss;
+        ltOss << std::fixed << std::setprecision(int(1/(2*fpsScale))) << latencyTolerance;
+
+        gApplication->SetLcd(kLatencyToleranceTag, latencyTolerance, fpsScale);
+        SDL_Log("*** LT set to %s\n", ltOss.str().c_str());
 
         if (slowPlayer != nullptr) {
             std::ostringstream oss;
             std::time_t t = std::time(nullptr);
-            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << std::fixed <<
-                   std::setprecision(int(1/(2*fpsScale))) << latencyTolerance*fpsScale << " (" << slowPlayer << ")";
+            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ")
+                << ltOss.str() << " (" << slowPlayer << ")";
             itsApp->AddMessageLine(oss.str());
         }
 
@@ -1113,7 +1121,7 @@ void CAvaraGame::AdjustFrameTime() {
         3.75,  //  8  240           1920         4    <-- trying to recover!  If it were a horse, I'd shoot it.
     };
 
-    latencyFrameTime = long(frameTime * frameTimeMultiplier[int(latencyTolerance*fpsScale)]);
+    latencyFrameTime = long(frameTime * frameTimeMultiplier[int(latencyTolerance)]);
     SDL_Log("*** setting latencyFrameTime = %ld\n", latencyFrameTime);
 }
 
