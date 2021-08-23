@@ -95,6 +95,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     frameTimeBox = new nanogui::ComboBox(this, frameTimeOptions, frameTimeOptionsShort);
     frameTimeBox->setCallback([this, app](int selectedIdx) {
         gCurrentGame->SetFrameTime(pow(2, 6-selectedIdx));
+        latencyBox->callback()(latencyBox->value()); // forces LT to be re-evaluated
     });
     frameTimeBox->setSelectedIndex(6-log(gCurrentGame->frameTime)/log(2));
     frameTimeBox->popup()->setSize(nanogui::Vector2i(200, 160));

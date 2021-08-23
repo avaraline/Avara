@@ -983,14 +983,14 @@ void CNetManager::DoConfig(short senderSlot) {
     if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
         if (itsGame->latencyTolerance < theConfig->frameLatency*itsGame->fpsScale) {
-            itsGame->SetFrameLatency(theConfig->frameLatency, -1);
             itsGame->SetFrameTime(theConfig->frameTime);
+            itsGame->SetFrameLatency(theConfig->frameLatency, -1);
             itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         }
     } else {
         if (senderSlot == 0) {
-            itsGame->SetFrameLatency(theConfig->frameLatency, -1);
             itsGame->SetFrameTime(theConfig->frameTime);
+            itsGame->SetFrameLatency(theConfig->frameLatency, -1);
             itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         }
     }
