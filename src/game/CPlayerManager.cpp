@@ -328,6 +328,12 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 }
 
 void CPlayerManagerImpl::SendFrame() {
+    // guard against overwriting frames that aren't done yet
+    if (itsGame->topSentFrame - itsGame->frameNumber >= FUNCTIONBUFFERS - 1) {
+        SDL_Log("frameFuncs BUFFER IS FULL, not sending new frames until we catch up! <-- tell Head you saw this.");
+        return;
+    }
+
     // Sends the next game frame.
     itsGame->topSentFrame += 1;
 
