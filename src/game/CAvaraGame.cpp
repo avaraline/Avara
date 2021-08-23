@@ -1079,8 +1079,9 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const c
         std::ostringstream ltOss;
         ltOss << std::fixed << std::setprecision(int(1/(2*fpsScale))) << latencyTolerance;
 
-        gApplication->SetLcd(kLatencyToleranceTag, latencyTolerance, fpsScale);
-        SDL_Log("*** LT set to %s\n", ltOss.str().c_str());
+        // save as application preference (which also makes it show up on the UI)
+        gApplication->Set(kLatencyToleranceTag, latencyTolerance);
+        SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
 
         if (slowPlayer != nullptr) {
             std::ostringstream oss;
