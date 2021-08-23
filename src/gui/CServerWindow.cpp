@@ -87,6 +87,17 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     bool autoLatency = app->Number(kServerOptionsTag) & (1 << kUseAutoLatencyBit);
     autoLatencyBox->setChecked(autoLatency);
     autoLatencyBox->setEnabled(false);
+
+    std::vector<std::string> frameTimeOptions = {
+        "64 ms (15.625 fps)", "32 ms (31.25 fps)", "16 ms (62.5 fps)", "8 ms (125 fps)"
+    };
+    std::vector<std::string> frameTimeOptionsShort = { "64 ms", "32 ms", "16 ms", "8 ms" };
+    frameTimeBox = new nanogui::ComboBox(this, frameTimeOptions, frameTimeOptionsShort);
+    frameTimeBox->setCallback([this, app](int selectedIdx) {
+        gCurrentGame->SetFrameTime(pow(2, 6-selectedIdx));
+    });
+    frameTimeBox->setSelectedIndex(6-log(gCurrentGame->frameTime)/log(2));
+    frameTimeBox->popup()->setSize(nanogui::Vector2i(200, 160));
 }
 
 CServerWindow::~CServerWindow() {}
@@ -102,11 +113,13 @@ bool CServerWindow::DoCommand(int theCommand) {
             switch(app->GetNet()->netStatus) {
                 case kNullNet:
                     startBtn->setEnabled(true);
+                    frameTimeBox->setEnabled(true);
                     startBtn->setCaption("Start Hosting");
                     this->EnableLatencyOptions(false);
                     break;
                 case kClientNet:
                     startBtn->setEnabled(false);
+                    frameTimeBox->setEnabled(false);
                     this->EnableLatencyOptions(false);
                     break;
                 case kServerNet:
@@ -120,6 +133,7 @@ bool CServerWindow::DoCommand(int theCommand) {
 }
 
 void CServerWindow::PrefChanged(std::string name) {
+    frameTimeBox->setSelectedIndex(6-log(gCurrentGame->frameTime)/log(2));
     latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 5));
 }
 
@@ -127,6 +141,6 @@ void CServerWindow::EnableLatencyOptions(bool enable) {
     latencyBox->setEditable(enable);
     latencyBox->setEnabled(enable);
     // force a callback which could change the LT depending on frame rate
-    latencyBox->callback()(latencyBox->value());
+    if (enable) latencyBox->callback()(latencyBox->value());
     autoLatencyBox->setEnabled(enable);
 }

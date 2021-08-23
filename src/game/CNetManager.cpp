@@ -572,6 +572,7 @@ void CNetManager::ResumeGame() {
 
     SDL_Log("CNetManager::ResumeGame\n");
     config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
+    config.frameTime = itsGame->frameTime;
     config.hullType = gApplication->Number(kHullTypeTag);
     config.numGrenades = 6;
     config.numMissiles = 3;
@@ -614,6 +615,7 @@ void CNetManager::ResumeGame() {
         copy.numBoosters = ntohs(config.numBoosters);
         copy.hullType = ntohs(config.hullType);
         copy.frameLatency = ntohs(config.frameLatency);
+        copy.frameTime = ntohs(config.frameTime);
 
         itsCommManager->SendUrgentPacket(
             kdEveryone, kpStartSynch, 0, kLActive, FRandSeed, sizeof(PlayerConfigRecord), (Ptr)&copy);
@@ -967,6 +969,7 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->numBoosters = ntohs(config->numBoosters);
     config->hullType = ntohs(config->hullType);
     config->frameLatency = ntohs(config->frameLatency);
+    config->frameTime = ntohs(config->frameTime);
     playerTable[senderSlot]->TheConfiguration() = *config;
 }
 
@@ -981,11 +984,13 @@ void CNetManager::DoConfig(short senderSlot) {
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
         if (itsGame->latencyTolerance < theConfig->frameLatency*itsGame->fpsScale) {
             itsGame->SetFrameLatency(theConfig->frameLatency, -1);
+            itsGame->SetFrameTime(theConfig->frameTime);
             itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         }
     } else {
         if (senderSlot == 0) {
             itsGame->SetFrameLatency(theConfig->frameLatency, -1);
+            itsGame->SetFrameTime(theConfig->frameTime);
             itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         }
     }
