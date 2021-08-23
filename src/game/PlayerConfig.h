@@ -14,6 +14,7 @@ typedef struct {
     short numBoosters;
     short hullType;
     short frameLatency;
+    short frameTime;
 } PlayerConfigRecord;
 
 typedef struct {
