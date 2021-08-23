@@ -53,14 +53,6 @@ public:
         PrefChanged(name);
     }
 
-    // set and return set value while rounding value up to a least common denominator
-    template <class T> T SetLcd(const std::string name, const T value, const T leastCommonDenominator) {
-        prefs[name] = std::ceil(value / leastCommonDenominator) * leastCommonDenominator;
-        PrefChanged(name);
-        return prefs[name];
-    }
-
-
 protected:
     static inline json prefs = ReadPrefs();
     std::vector<CWindow *> windowList;

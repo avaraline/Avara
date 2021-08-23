@@ -60,18 +60,11 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     latencyBox->setEnabled(false);
     latencyBox->setCallback([this, app](std::string value) -> bool {
         double newLT = std::stod(value);
+        // let SetFrameLatency() enforce limits on latencyTolerance AND set the pref
+        gCurrentGame->SetFrameLatency(std::ceil(newLT/gCurrentGame->fpsScale), -1);
 
-        // determining the min/max LT values from CAvaraGame::AdjustFrameTime()
-        long maxLT = 4;  // anything above 4 is bad, don't let people set it higher
-        if (newLT > maxLT)
-            newLT = maxLT;
-
-        if (newLT < 0)
-            newLT = 0;
-
-        newLT = app->SetLcd(kLatencyToleranceTag, newLT, gCurrentGame->fpsScale);
-        // it might be modified on a bad input so get back the saved value
-        latencyBox->setValue(std::to_string(newLT).substr(0, 5));
+        // it might be modified on a bad input so retrieve the computed value
+        latencyBox->setValue(std::to_string(gCurrentGame->latencyTolerance).substr(0, 5));
         return true;
     });
 
@@ -97,7 +90,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
         gCurrentGame->SetFrameTime(pow(2, 6-selectedIdx));
         latencyBox->callback()(latencyBox->value()); // forces LT to be re-evaluated
     });
-    frameTimeBox->setSelectedIndex(6-log(gCurrentGame->frameTime)/log(2));
+    frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
     frameTimeBox->popup()->setSize(nanogui::Vector2i(200, 160));
 }
 
@@ -134,7 +127,7 @@ bool CServerWindow::DoCommand(int theCommand) {
 }
 
 void CServerWindow::PrefChanged(std::string name) {
-    frameTimeBox->setSelectedIndex(6-log(gCurrentGame->frameTime)/log(2));
+    frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
     latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 5));
 }
 
