@@ -1050,7 +1050,7 @@ double CAvaraGame::LatencyFrameTimeScale() {
 // FrameLatency is slightly different than LatencyTolerance.  It is in terms of integer frames
 // at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
-    SDL_Log("CAvaraGame::RoundTripToFrameLatency RTT=%ld, Classic LT=%.2lf, Actual LT=%.2lf, Rounded LT=%2ld\n",
+    SDL_Log("CAvaraGame::RoundTripToFrameLatency RTT=%ld, Classic LT=%.2lf, FL=%.2lf, Rounded FL=%ld\n",
             roundTrip,
             (roundTrip) / (2.0*CLASSICFRAMETIME),
             (roundTrip) / (2.0*frameTime),
