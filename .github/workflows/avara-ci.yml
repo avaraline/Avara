@@ -37,7 +37,6 @@ jobs:
         run: |
           make set-version
           make -j winapp
-          make tests
       - name: deploy nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
