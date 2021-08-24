@@ -1451,7 +1451,7 @@ void CUDPComm::Connect(std::string address) {
 }
 
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
-    SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
+    SDL_Log("Connect address = %s pw length=%llu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
     std::thread forwardPorts(ForwardPorts, localPort);
     forwardPorts.detach();

@@ -11,7 +11,7 @@ ifneq ($(GIT_BRANCH),)
 else
     BUILD_DIR ?= build
 endif
-SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor/miniupnpc vendor
+SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
@@ -26,6 +26,8 @@ LDFLAGS := ${LDFLAGS}
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
+	SRCS += $(shell find vendor/miniupnpc -maxdepth 1 -name '*.c')
+	INCFLAGS += -Ivendor/miniupnpc
 ifneq ("$(wildcard $(HOME)/Library/Frameworks/SDL2.framework)", "")
 	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
 else
@@ -36,7 +38,8 @@ endif
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
-	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lglu32 -lopengl32 -lws2_32 -lcomdlg32 -lminiupnpc
+	CFLAGS +=  -DMINIUPNP_EXPORTS -D_WIN32_WINNT=0x501
 	POST_PROCESS ?= ls -lh
 else
 	# Linux
@@ -48,6 +51,8 @@ else
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I sdl2)
 	CPPFLAGS += -fPIC
 	POST_PROCESS ?= ls -lh
+	SRCS += $(shell find vendor/miniupnpc -maxdepth 1 -name '*.c')
+	INCFLAGS += -Ivendor/miniupnpc
 endif
 
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
