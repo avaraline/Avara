@@ -10,6 +10,7 @@
 #include "CPlayerManager.h"
 
 #include "CAbstractPlayer.h"
+#include "CColorManager.h"
 #include "CCommManager.h"
 #include "CIncarnator.h"
 #include "CNetManager.h"
@@ -292,7 +293,7 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                 buttonStatus |= kbuWentDown;
                 buttonStatus |= kbuIsDown;
             }
-            
+
             break;
         case SDL_MOUSEBUTTONUP:
             if(event.button.button == SDL_BUTTON_RIGHT) {
@@ -1202,10 +1203,10 @@ void CPlayerManagerImpl::SpecialColorControl() {
 
         switch (spaceCount) {
             case 2:
-                repColor = kSpecialBlackColor;
+                repColor = CColorManager::getSpecialBlackColor();
                 break;
             case 3:
-                repColor = kSpecialWhiteColor;
+                repColor = CColorManager::getSpecialWhiteColor();
                 break;
         }
 

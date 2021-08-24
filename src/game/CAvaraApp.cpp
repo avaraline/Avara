@@ -16,7 +16,6 @@
 #include "AvaraTCP.h"
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
-#include "CCompactTagBase.h"
 #include "CharWordLongPointer.h"
 #include "CNetManager.h"
 #include "CRC.h"
@@ -48,8 +47,17 @@ void TrackerPinger(CAvaraAppImpl *app) {
                 // Probably not thread-safe.
                std::string address = app->String(kTrackerRegisterAddress);
                 SDL_Log("Pinging %s", address.c_str());
-                httplib::Client client(address.c_str(), 80);
-                client.Post("/api/v1/games/", payload, "application/json");
+                size_t sepIndex = address.find(":");
+                if (sepIndex != std::string::npos) {
+                    std::string host = address.substr(0, sepIndex);
+                    int port = std::stoi(address.substr(sepIndex + 1));
+                    httplib::Client client(host.c_str(), port);
+                    client.Post("/api/v1/games/", payload, "application/json");
+                }
+                else {
+                    httplib::Client client(address.c_str(), 80);
+                    client.Post("/api/v1/games/", payload, "application/json");
+                }
             }
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -66,6 +74,10 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     AvaraGLSetFOV(Number(kFOV));
 
     gameNet->ChangeNet(kNullNet, "");
+
+    previewAngle = 0;
+    previewRadius = 0;
+    animatePreview = false;
 
     setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
 
@@ -124,6 +136,15 @@ void CAvaraAppImpl::idle() {
 }
 
 void CAvaraAppImpl::drawContents() {
+    if(animatePreview) {
+        Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
+        Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX(1));
+        Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
+        itsGame->itsView->LookFrom(x, y, z);
+        itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);
+        itsGame->itsView->PointCamera();
+        previewAngle += FIX3(1);
+    }
     itsGame->Render(mNVGContext);
 }
 
@@ -160,6 +181,8 @@ void CAvaraAppImpl::drawAll() {
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
+    animatePreview = false;
+    itsGame->itsView->showTransparent = false;
     MessageLine(kmStarted, centerAlign);
     levelWindow->AddRecent(set, level);
 }
@@ -245,13 +268,14 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
             msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
         AddMessageLine(msgPrefix + " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".");
         levelWindow->SelectLevel(set, itsGame->loadedLevel);
-        Fixed pt[3];
-        itsGame->itsWorld->OverheadPoint(pt);
-        SDL_Log("overhead %f, %f, %f\n", ToFloat(pt[0]), ToFloat(pt[1]), ToFloat(pt[2]));
+
+        itsGame->itsWorld->OverheadPoint(overhead, extent);
         itsGame->itsView->yonBound = FIX(10000);
-        itsGame->itsView->LookFrom(pt[0] + FIX(100), pt[1] + FIX(200), pt[2] + FIX(150));
-        itsGame->itsView->LookAt(pt[0], pt[1], pt[2]);
-        itsGame->itsView->PointCamera();
+        itsGame->itsView->showTransparent = true;
+
+        previewAngle = 0;
+        previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);
+        animatePreview = true;
     }
 
     return result;

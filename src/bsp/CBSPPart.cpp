@@ -14,6 +14,7 @@
 #include "Memory.h"
 #include "Resource.h"
 #include "AvaraDefines.h"
+#include "RGBAColor.h"
 
 #include <fstream>
 #include <iostream>
@@ -92,8 +93,6 @@ void CBSPPart::IBSPPart(short resId) {
     maxBounds.z = ToFixed(doc["bounds"]["max"][2]);
     maxBounds.w = FIX1;
 
-    isDecal = false;
-
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
     polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
 
@@ -136,14 +135,6 @@ void CBSPPart::IBSPPart(short resId) {
 void CBSPPart::PostRender() {}
 
 void CBSPPart::UpdateOpenGLData() {
-    float sigma = .001f;
-
-    isDecal = (
-        std::abs(maxBounds.x - minBounds.x) < sigma ||
-        std::abs(maxBounds.y - minBounds.y) < sigma ||
-        std::abs(maxBounds.z - minBounds.z) < sigma
-    );
-
     if (!AvaraGLIsRendering()) return;
     glDataSize = totalPoints * sizeof(GLData);
     glData = (GLData *)NewPtr(glDataSize);
@@ -161,9 +152,7 @@ void CBSPPart::UpdateOpenGLData() {
             glData[p].x = ToFloat((*pt)[0]);
             glData[p].y = ToFloat((*pt)[1]);
             glData[p].z = ToFloat((*pt)[2]);
-            glData[p].r = ((poly->color >> 16) & 0xFF) / 255.0;
-            glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
-            glData[p].b = (poly->color & 0xFF) / 255.0;
+            LongToRGBA(poly->color, &glData[p].r, 3);
 
             glData[p].nx = poly->normal[0];
             glData[p].ny = poly->normal[1];
@@ -274,7 +263,7 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 **  in preparation to shading.
 */
 Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
-    Boolean inPyramid = !isTransparent;
+    Boolean inPyramid = vp->showTransparent || !isTransparent;
 
     if (inPyramid) {
         currentView = vp;
@@ -306,7 +295,7 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
             TransformLights();
 
             // transform all the points before rendering
-            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);      
+            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
         }
     }
 

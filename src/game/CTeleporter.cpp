@@ -58,7 +58,8 @@ CAbstractActor *CTeleporter::EndScript() {
         partCount = 1;
         LoadPartWithColors(0, shapeRes);
         partList[0]->Reset();
-        partList[0]->userFlags = ReadLongVar(iIsAmbient);
+        if (ReadLongVar(iIsAmbient) > 0)
+            partList[0]->userFlags |= CBSPUserFlags::kIsAmbient;
         InitialRotatePartY(partList[0], heading);
         TranslatePart(partList[0], location[0], location[1], location[2]);
         partList[0]->MoveDone();

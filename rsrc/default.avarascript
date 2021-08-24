@@ -122,7 +122,7 @@
   deltaX = 0
   deltaY = 0
   deltaZ = 0
-  
+
   middle = 0
   midPitch = 0
   midYaw = 0
@@ -155,7 +155,7 @@
   verticalRangeMax = 0
   burstLength = 0
   burstSpeed = 0
-  burstCharge = 0  
+  burstCharge = 0
 
   homeSick = 0
   homeRange = 0
@@ -212,20 +212,20 @@
   ejectPower = 0
   ejectSound = 0
   ejectVolume = 0
-  
+
   shieldChargeRate = 0
   maxShield = 0
   shootShield = 0
   grabShield = 0
-  
+
   carryScore = 0
   dropEnergy = 0
   changeHolderEnergy = 0
   changeOwnerTime = 0
-  
+
   changeOwnerSound = 0
   changeOwnerVolume = 0
-  
+
   snapSound = 0
   snapVolume = 0
 
@@ -245,28 +245,28 @@
   in = in[0]
   in[0] = 0    in[1] = 0    in[2] = 0    in[3] = 0    in[4] = 0
   in[5] = 0    in[6] = 0    in[7] = 0    in[8] = 0    in[9] = 0
-  
+
   out = out[0]
   out[0] = 0     out[1] = 0     out[2] = 0     out[3] = 0     out[4] = 0
   out[5] = 0     out[6] = 0     out[7] = 0     out[8] = 0     out[9] = 0
-  
+
   restart = 0
   n = 0
   wait = 0
 
   // Lights (default light settings are stored here)
-  ambient = 0.4
-  light[0].i = 0.4  light[0].a =  45  light[0].b = 20
-  light[1].i = 0.3  light[1].a =  20  light[1].b = 200
-  light[2].i = 0.0  light[2].a =  45  light[2].b = 90
-  light[3].i = 0.0  light[3].a =  45  light[3].b = 180
+  ambient.i  = 0.4  ambient.c  =  0
+  light[0].i = 0.4  light[0].a =  45  light[0].b = 20   light[0].c = 0
+  light[1].i = 0.3  light[1].a =  20  light[1].b = 200  light[1].c = 0
+  light[2].i = 0.0  light[2].a =  45  light[2].b = 90   light[2].c = 0
+  light[3].i = 0.0  light[3].a =  45  light[3].b = 180  light[3].c = 0
 
   // Advanced weapon powers:
   grenadePower = 2.25
   missilePower = 1.0
   missileTurnRate = 0.025
   missileAcceleration = 0.2
-  
+
   maxStartGrenades = 20
   maxStartMissiles = 10
   maxStartBoosts = 5
@@ -315,6 +315,8 @@
   T4 = 16
   T5 = 32
   T6 = 64
+  T7 = 128
+  T8 = 256
 
 // Doors:
   isClosed = 0
@@ -473,7 +475,7 @@ bspLargeDome = 806
   snWin = 412
   snLose = 413
   snParasiteAttach = 420
-  
+
   snBallBuzz = 430
   snBallSnap = 431
   snBallEject = 432
@@ -500,5 +502,12 @@ designer = "unknown"
 information = "
 
 No additional information on this level is available."
+
+// Light colors
+ambient.c = "#ffffff"
+light[0].c = "#ffffff"
+light[1].c = "#ffffff"
+light[2].c = "#ffffff"
+light[3].c = "#ffffff"
 
 unique 32000 end

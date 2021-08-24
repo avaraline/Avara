@@ -1,98 +1,98 @@
 <map>
-  <set designer="&quot;Head &lt;tra@idcomm.com&gt;&quot;" information="&quot;Teleport along a straight line, East-West, North-South, 
+  <set designer="Head &lt;tra@idcomm.com&gt;" information="Teleport along a straight line, East-West, North-South, 
 or diagonally (learn the moos for added advantage).
 Thanks to Taz for the sound editing, Cowboy for advice,
-and to all other geezers and friends who helped test.&quot;" defaultLives="3" missilePower="1.9" missileAcceleration="0.3" missileTurnRate="0.03" startY="25" starScale="0.4" teleRange="1" />
+and to all other geezers and friends who helped test." defaultLives="3" missilePower="1.9" missileAcceleration="0.3" missileTurnRate="0.03" startY="25" starScale="0.4" teleRange="1" />
   <set goodyDelay="150" numGren="8" numMiss="4" range="100" wallYon="150" wallHeight="0" wallHeight2="9" />
   <set SEsound="1001" NEsound="1001" NSsound="1002" EWsound="1003" />
   <SkyColor fill="#ccccff" frame="#9966ff" />
-  <GroundColor fill="#336666" frame="#444444" />
-  <Wall fill="#000000" frame="#000000" x="24.444444444444446" z="39.44444444444444" w="95" d="2.5" h="0" />
-  <Incarnator y="startY" fill="#006600" frame="#006600" cx="29.375" cz="14.51388888888889" r="1.3888888888888893" angle="180" extent="270" />
-  <Incarnator y="startY" fill="#006600" frame="#006600" cx="29.583333333333336" cz="99.58333333333334" r="1.3888888888888928" angle="90" extent="270" />
-  <Incarnator y="startY" fill="#006600" frame="#006600" cx="114.58333333333334" cz="57.152777777777786" r="1.3888888888888928" angle="315" extent="270" />
-  <Incarnator y="startY" fill="#006600" frame="#006600" cx="29.583333333333336" cz="57.083333333333336" r="1.3888888888888893" angle="135" extent="270" />
-  <Incarnator y="startY" fill="#006600" frame="#006600" cx="114.58333333333334" cz="99.58333333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Incarnator y="startY" fill="#006600" frame="#006600" cx="114.58333333333334" cz="14.583333333333334" r="1.3888888888888928" angle="270" extent="270" />
-  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" fill="#006600" frame="#000000" cx="126.80555555555557" cz="5.486111111111112" r="2.5" angle="180" extent="90" />
-  <Teleporter shape="0" y="200" win="1200" start="@winTeam" activeRange="2000" fill="#006600" frame="#000000" cx="126.31944444444446" cz="13.125" r="2.5" angle="180" extent="90" />
-  <Wall fill="#000000" frame="#000000" x="54.44444444444445" z="9.444444444444445" w="2.5" d="95" h="0" />
-  <Wall fill="#000000" frame="#000000" x="86.94444444444444" z="9.444444444444445" w="2.5" d="95" h="0" />
-  <Wall fill="#000000" frame="#000000" x="24.444444444444446" z="71.94444444444444" w="95" d="2.5" h="0" />
+  <GroundColor fill="#336666" />
+  <Wall fill="#000000" frame="#000000" x="71.94444444444444" z="40.69444444444444" w="95" d="2.5" h="0" />
+  <Incarnator y="startY" cx="29.375" cz="14.51388888888889" angle="315" />
+  <Incarnator y="startY" cx="29.583333333333336" cz="99.58333333333334" angle="225" />
+  <Incarnator y="startY" cx="114.58333333333334" cz="57.152777777777786" angle="90" />
+  <Incarnator y="startY" cx="29.583333333333336" cz="57.083333333333336" angle="270" />
+  <Incarnator y="startY" cx="114.58333333333334" cz="99.58333333333334" angle="135" />
+  <Incarnator y="startY" cx="114.58333333333334" cz="14.583333333333334" angle="45" />
+  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="126.80555555555557" cz="5.486111111111112" angle="225" />
+  <Teleporter shape="0" y="200" win="1200" start="@winTeam" activeRange="2000" fill="#006600" frame="#000000" cx="126.31944444444446" cz="13.125" angle="225" />
+  <Wall fill="#000000" frame="#000000" x="55.69444444444445" z="56.94444444444444" w="2.5" d="95" h="0" />
+  <Wall fill="#000000" frame="#000000" x="88.19444444444444" z="56.94444444444444" w="2.5" d="95" h="0" />
+  <Wall fill="#000000" frame="#000000" x="71.94444444444444" z="73.19444444444444" w="95" d="2.5" h="0" />
   <set wallHeight="wallHeight2" />
-  <Wall fill="#996633" frame="#000000" x="21.944444444444446" z="9.444444444444445" w="2.5" d="97.43055555555556" h="0" />
-  <Wall fill="#996633" frame="#000000" x="24.444444444444446" z="104.44444444444444" w="97.43055555555556" d="2.5" h="0" />
-  <Wall fill="#996633" frame="#000000" x="21.944444444444446" z="6.944444444444445" w="97.43055555555556" d="2.5" h="0" />
-  <Wall fill="#996633" frame="#000000" x="119.44444444444444" z="6.944444444444445" w="2.5" d="97.43055555555556" h="0" />
+  <Wall fill="#996633" frame="#000000" x="23.194444444444446" z="58.15972222222222" w="2.5" d="97.43055555555556" h="0" />
+  <Wall fill="#996633" frame="#000000" x="73.15972222222223" z="105.69444444444444" w="97.43055555555556" d="2.5" h="0" />
+  <Wall fill="#996633" frame="#000000" x="70.65972222222223" z="8.194444444444445" w="97.43055555555556" d="2.5" h="0" />
+  <Wall fill="#996633" frame="#000000" x="120.69444444444444" z="55.65972222222222" w="2.5" d="97.43055555555556" h="0" />
   <set wallYon=".001" />
-  <Wall fill="#ffffff" frame="#000000" x="54.44444444444445" z="9.444444444444445" w="2.5" d="95" h="0" />
-  <Teleporter group="@NE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NEsound" fill="#0000aa" frame="#006600" cx="52.638888888888886" cz="76.45833333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Wall fill="#ffffff" frame="#000000" x="86.94444444444444" z="9.444444444444445" w="2.5" d="95" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="24.444444444444446" z="39.44444444444444" w="95" d="2.5" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="24.444444444444446" z="71.94444444444444" w="95" d="2.5" h="0" />
-  <Teleporter group="@EW1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="24.583333333333336" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@EW1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="91.66666666666667" cz="24.583333333333336" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@EW1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="52.22222222222223" cz="24.583333333333336" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@EW1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="24.583333333333336" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@EW2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="57.083333333333336" r="1.3888888888888857" angle="315" extent="270" />
+  <Wall fill="#ffffff" frame="#000000" x="55.69444444444445" z="56.94444444444444" w="2.5" d="95" h="0" />
+  <Teleporter group="@NE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NEsound" fill="#0000aa" frame="#006600" cx="52.638888888888886" cz="76.45833333333334" angle="135" />
+  <Wall fill="#ffffff" frame="#000000" x="88.19444444444444" z="56.94444444444444" w="2.5" d="95" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="71.94444444444444" z="40.69444444444444" w="95" d="2.5" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="71.94444444444444" z="73.19444444444444" w="95" d="2.5" h="0" />
+  <Teleporter group="@EW1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="24.583333333333336" angle="90" />
+  <Teleporter group="@EW1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="91.66666666666667" cz="24.583333333333336" angle="90" />
+  <Teleporter group="@EW1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="52.22222222222223" cz="24.583333333333336" angle="90" />
+  <Teleporter group="@EW1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="24.583333333333336" angle="90" />
+  <Teleporter group="@EW2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="57.083333333333336" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="57.083333333333336" r="1.3888888888888857" angle="315" extent="270" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="57.083333333333336" r="1.3888888888888857" angle="315" extent="270" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="57.083333333333336" r="1.3888888888888857" angle="315" extent="270" />
-  <Teleporter group="@EW2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="91.66666666666667" cz="57.083333333333336" r="1.3888888888888857" angle="315" extent="270" />
-  <Teleporter group="@EW2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="52.22222222222223" cz="57.083333333333336" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@EW2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="57.083333333333336" r="1.3888888888888893" angle="315" extent="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="57.083333333333336" angle="90" />
+  <Teleporter group="@EW2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="91.66666666666667" cz="57.083333333333336" angle="90" />
+  <Teleporter group="@EW2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="52.22222222222223" cz="57.083333333333336" angle="90" />
+  <Teleporter group="@EW2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="57.083333333333336" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="57.083333333333336" r="1.3888888888888893" angle="315" extent="270" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="57.083333333333336" r="1.3888888888888893" angle="315" extent="270" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="57.083333333333336" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@EW3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="89.58333333333334" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@EW3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="91.66666666666667" cz="89.58333333333334" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@EW3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="52.22222222222223" cz="89.58333333333334" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@EW3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="89.58333333333334" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@NS1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="39.09722222222223" cz="43.95833333333333" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@NS1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="39.09722222222223" cz="37.08333333333333" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@NS1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="39.72222222222223" cz="76.45833333333334" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@NS1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="39.72222222222223" cz="70.13888888888889" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@NS2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="71.59722222222223" cz="43.95833333333333" r="1.3888888888888893" angle="315" extent="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="57.083333333333336" angle="90" />
+  <Teleporter group="@EW3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="84.72222222222223" cz="89.58333333333334" angle="90" />
+  <Teleporter group="@EW3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="91.66666666666667" cz="89.58333333333334" angle="90" />
+  <Teleporter group="@EW3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="52.22222222222223" cz="89.58333333333334" angle="90" />
+  <Teleporter group="@EW3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="EWsound" fill="#aa0000" frame="#006600" cx="59.16666666666667" cz="89.58333333333334" angle="90" />
+  <Teleporter group="@NS1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="39.09722222222223" cz="43.95833333333333" angle="90" />
+  <Teleporter group="@NS1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="39.09722222222223" cz="37.08333333333333" angle="90" />
+  <Teleporter group="@NS1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="39.72222222222223" cz="76.45833333333334" angle="90" />
+  <Teleporter group="@NS1" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="39.72222222222223" cz="70.13888888888889" angle="90" />
+  <Teleporter group="@NS2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="71.59722222222223" cz="43.95833333333333" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc9900" frame="#006600" cx="71.59722222222223" cz="43.95833333333333" r="1.3888888888888893" angle="315" extent="270" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#cc9900" frame="#006600" cx="71.59722222222223" cz="43.95833333333333" r="1.3888888888888893" angle="315" extent="270" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#cc9900" frame="#006600" cx="71.59722222222223" cz="43.95833333333333" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@NS2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="71.59722222222223" cz="37.70833333333333" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@NS2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="70.76388888888889" cz="76.11111111111111" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@NS2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="70.97222222222223" cz="70.13888888888889" r="1.3888888888888928" angle="315" extent="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#cc9900" frame="#006600" cx="71.59722222222223" cz="43.95833333333333" angle="90" />
+  <Teleporter group="@NS2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="71.59722222222223" cz="37.70833333333333" angle="90" />
+  <Teleporter group="@NS2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="70.76388888888889" cz="76.11111111111111" angle="90" />
+  <Teleporter group="@NS2" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="70.97222222222223" cz="70.13888888888889" angle="90" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#cc9900" frame="#006600" cx="70.97222222222223" cz="70.13888888888889" r="1.3888888888888928" angle="315" extent="270" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#cc9900" frame="#006600" cx="70.97222222222223" cz="70.13888888888889" r="1.3888888888888928" angle="315" extent="270" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#cc9900" frame="#006600" cx="70.97222222222223" cz="70.13888888888889" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@NS3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="104.09722222222223" cz="43.95833333333333" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@NS3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="104.09722222222223" cz="37.638888888888886" r="1.3888888888888893" angle="315" extent="270" />
-  <Teleporter group="@NS3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="104.09722222222223" cz="76.38888888888889" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@NS3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="104.09722222222223" cz="70.13888888888889" r="1.3888888888888928" angle="315" extent="270" />
-  <Teleporter group="@NE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NEsound" fill="#0000aa" frame="#006600" cx="58.958333333333336" cz="70.20833333333334" r="1.3888888888888928" angle="0" extent="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#cc9900" frame="#006600" cx="70.97222222222223" cz="70.13888888888889" angle="90" />
+  <Teleporter group="@NS3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="104.09722222222223" cz="43.95833333333333" angle="90" />
+  <Teleporter group="@NS3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="104.09722222222223" cz="37.638888888888886" angle="90" />
+  <Teleporter group="@NS3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="104.09722222222223" cz="76.38888888888889" angle="90" />
+  <Teleporter group="@NS3" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NSsound" fill="#cc9900" frame="#006600" cx="104.09722222222223" cz="70.13888888888889" angle="90" />
+  <Teleporter group="@NE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NEsound" fill="#0000aa" frame="#006600" cx="58.958333333333336" cz="70.20833333333334" angle="135" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0000aa" frame="#006600" cx="58.958333333333336" cz="70.20833333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#0000aa" frame="#006600" cx="58.958333333333336" cz="70.20833333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0000aa" frame="#006600" cx="58.958333333333336" cz="70.20833333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Teleporter group="@SE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="SEsound" fill="#006600" frame="#006600" cx="85.13888888888889" cz="70.20833333333334" r="1.3888888888888928" angle="0" extent="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0000aa" frame="#006600" cx="58.958333333333336" cz="70.20833333333334" angle="135" />
+  <Teleporter group="@SE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="SEsound" fill="#006600" frame="#006600" cx="85.13888888888889" cz="70.20833333333334" angle="135" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#006600" frame="#006600" cx="85.13888888888889" cz="70.20833333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#006600" frame="#006600" cx="85.13888888888889" cz="70.20833333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#006600" frame="#006600" cx="85.13888888888889" cz="70.20833333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Teleporter group="@SE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="SEsound" fill="#006600" frame="#006600" cx="91.38888888888889" cz="76.45833333333334" r="1.3888888888888928" angle="0" extent="270" />
-  <Teleporter group="@SE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="SEsound" fill="#006600" frame="#006600" cx="58.888888888888886" cz="43.95833333333333" r="1.3888888888888893" angle="0" extent="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#006600" frame="#006600" cx="85.13888888888889" cz="70.20833333333334" angle="135" />
+  <Teleporter group="@SE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="SEsound" fill="#006600" frame="#006600" cx="91.38888888888889" cz="76.45833333333334" angle="135" />
+  <Teleporter group="@SE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="SEsound" fill="#006600" frame="#006600" cx="58.888888888888886" cz="43.95833333333333" angle="135" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#006600" frame="#006600" cx="58.888888888888886" cz="43.95833333333333" r="1.3888888888888893" angle="0" extent="270" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#006600" frame="#006600" cx="58.888888888888886" cz="43.95833333333333" r="1.3888888888888893" angle="0" extent="270" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#006600" frame="#006600" cx="58.888888888888886" cz="43.95833333333333" r="1.3888888888888893" angle="0" extent="270" />
-  <Teleporter group="@SE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="SEsound" fill="#006600" frame="#006600" cx="52.11805555555556" cz="37.70833333333333" r="1.4930555555555571" angle="0" extent="270" />
-  <Teleporter group="@NE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NEsound" fill="#0000aa" frame="#006600" cx="85.13888888888889" cz="43.95833333333333" r="1.3888888888888928" angle="0" extent="270" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#006600" frame="#006600" cx="58.888888888888886" cz="43.95833333333333" angle="135" />
+  <Teleporter group="@SE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="SEsound" fill="#006600" frame="#006600" cx="52.11805555555556" cz="37.70833333333333" angle="135" />
+  <Teleporter group="@NE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NEsound" fill="#0000aa" frame="#006600" cx="85.13888888888889" cz="43.95833333333333" angle="135" />
   <unique vars="mShow mTaken" />
-  <And in="@start" out="mShow" fill="#0000aa" frame="#006600" cx="85.13888888888889" cz="43.95833333333333" r="1.3888888888888928" angle="0" extent="270" />
-  <Timer in="mTaken" out="mShow" wait="goodyDelay" fill="#0000aa" frame="#006600" cx="85.13888888888889" cz="43.95833333333333" r="1.3888888888888928" angle="0" extent="270" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0000aa" frame="#006600" cx="85.13888888888889" cz="43.95833333333333" r="1.3888888888888928" angle="0" extent="270" />
-  <Teleporter group="@NE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NEsound" fill="#0000aa" frame="#006600" cx="91.38888888888889" cz="37.70833333333333" r="1.3888888888888928" angle="0" extent="270" />
-  <Teleporter group="@center" y="2 * startY" activeRange="2000" deadRange="80" destGroup="@recenter" shape="0" fill="#000000" frame="#000000" cx="71.38888888888889" cz="57.1875" r="1.4930555555555536" angle="240" extent="240" />
-  <Teleporter y="startY" shape="0" group="@recenter" speed="0" fill="#000000" frame="#000000" cx="71.38888888888889" cz="57.1875" r="1.4930555555555536" angle="240" extent="240" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="goodyDelay" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0000aa" frame="#006600" cx="85.13888888888889" cz="43.95833333333333" angle="135" />
+  <Teleporter group="@NE" shape="bspGroundStar" scale="starScale" activeRange="teleRange" speed="0" spin="false" sound="NEsound" fill="#0000aa" frame="#006600" cx="91.38888888888889" cz="37.70833333333333" angle="135" />
+  <Teleporter group="@center" y="2 * startY" activeRange="2000" deadRange="80" destGroup="@recenter" shape="0" fill="#000000" frame="#000000" cx="71.38888888888889" cz="57.1875" angle="0" />
+  <Teleporter y="startY" shape="0" group="@recenter" speed="0" fill="#000000" frame="#000000" cx="71.38888888888889" cz="57.1875" angle="0" />
 </map>

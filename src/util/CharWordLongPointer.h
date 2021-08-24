@@ -23,5 +23,3 @@ typedef union {
     StringPtr str;
 
 } charWordLongP;
-
-void CopyEvenPascalString(charWordLongP *uniP, StringPtr dest, short maxChars);

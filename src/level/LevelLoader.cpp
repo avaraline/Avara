@@ -14,17 +14,17 @@
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
-#include "PICTParser.h"
 #include "Parser.h"
 #include "Resource.h"
 #include "pugixml.hpp"
-#include "csscolorparser.hpp"
+#include "RGBAColor.h"
 
 #include <SDL2/SDL.h>
 
 #include <algorithm>
 #include <sstream>
 #include <fstream>
+#include <optional>
 #include <streambuf>
 #include <regex>
 
@@ -50,7 +50,7 @@ static short lastDomeAngle;
 static short lastDomeSpan;
 static Fixed lastDomeRadius;
 
-static RGBColor fillColor, frameColor;
+static uint32_t fillColor, frameColor;
 
 
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
@@ -63,12 +63,12 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     return lastDomeRadius;
 }
 
-int GetPixelColor() {
-    return ((((int)fillColor.red) << 8) & 0xFF0000) | (fillColor.green & 0xFF00) | (fillColor.blue >> 8);
+uint32_t GetPixelColor() {
+    return fillColor;
 }
 
-int GetOtherPixelColor() {
-    return ((((int)frameColor.red) << 8) & 0xFF0000) | (frameColor.green & 0xFF00) | (frameColor.blue >> 8);
+uint32_t GetOtherPixelColor() {
+    return frameColor;
 }
 
 void GetLastArcLocation(Fixed *theLoc) {
@@ -115,6 +115,23 @@ struct ALFWalker: pugi::xml_tree_walker {
         return std::regex_replace(attr, subscript, "[$1]");
     }
 
+    std::string quote_attr(std::string attr, std::string value) {
+        if (
+            attr.compare("text") == 0 ||
+            attr.compare("designer") == 0 ||
+            attr.compare("information") == 0 ||
+            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
+        ) {
+            if (value[0] == '$') {
+                return value.substr(1);
+            }
+            else {
+                return std::string("\"") + value + std::string("\"");
+            }
+        }
+        return value;
+    }
+
     void handle_element(pugi::xml_node& node, std::string& name) {
         // Read any global state we can from the element.
         read_context(node);
@@ -124,6 +141,10 @@ struct ALFWalker: pugi::xml_tree_walker {
         else if (name.compare("unique") == 0) handle_unique(node);
         else if (name.compare("set") == 0) handle_set(node);
         else if (name.compare("script") == 0) handle_script(node);
+        else if (name.compare("Dome") == 0) {
+            handle_dome(node);
+            handle_object(node, name);
+        }
         else if (name.compare("WallDoor") == 0 || name.compare("WallSolid") == 0) {
             // WallDoors and WallSolids always use the last Wall.
             handle_wall(node);
@@ -152,34 +173,37 @@ struct ALFWalker: pugi::xml_tree_walker {
                cx = node.attribute("cx").value(),
                cz = node.attribute("cz").value(),
                r = node.attribute("r").value(),
-               angle = node.attribute("angle").value(),
-               extent = node.attribute("extent").value();
+               angle = node.attribute("angle").value();
 
         gLastBoxRounding = h.empty() ? 0 : ToFixed(std::stod(h));
 
         if (!fill.empty()) {
-            const auto color = CSSColorParser::parse(fill);
+            const std::optional<uint32_t> color = ParseColor(fill);
             if (color) {
-                fillColor.red = color->r * 257;
-                fillColor.green = color->g * 257;
-                fillColor.blue = color->b * 257;
+                fillColor = color.value();
             }
         }
 
         if (!frame.empty()) {
-            const auto color = CSSColorParser::parse(frame);
+            const std::optional<uint32_t> color = ParseColor(frame);
             if (color) {
-                frameColor.red = color->r * 257;
-                frameColor.green = color->g * 257;
-                frameColor.blue = color->b * 257;
+                frameColor = color.value();
             }
         }
 
         if (!x.empty() && !z.empty() && !w.empty() && !d.empty()) {
-            gLastBoxRect.top = std::lround(std::stod(z) * UNITPOINTS);
-            gLastBoxRect.left = std::lround(std::stod(x) * UNITPOINTS);
-            gLastBoxRect.bottom = gLastBoxRect.top + std::lround(std::stod(d) * UNITPOINTS);
-            gLastBoxRect.right = gLastBoxRect.left + std::lround(std::stod(w) * UNITPOINTS);
+            double boxCenterX = std::stod(x) * UNITPOINTS,
+                   boxCenterZ = std::stod(z) * UNITPOINTS,
+                   boxWidth = std::stod(w) * UNITPOINTS,
+                   boxDepth = std::stod(d) * UNITPOINTS,
+                   boxLeft = boxCenterX - (boxWidth / 2.0),
+                   boxRight = boxLeft + boxWidth,
+                   boxTop = boxCenterZ - (boxDepth / 2.0),
+                   boxBottom = boxTop + boxDepth;
+            gLastBoxRect.top = std::lround(boxTop);
+            gLastBoxRect.left = std::lround(boxLeft);
+            gLastBoxRect.bottom = std::lround(boxBottom);
+            gLastBoxRect.right = std::lround(boxRight);
         }
 
         if (!cx.empty() && !cz.empty()) {
@@ -202,19 +226,29 @@ struct ALFWalker: pugi::xml_tree_walker {
             lastOvalRadius = radius;
         }
 
-        if (!angle.empty() && !extent.empty()) {
-            int arcStart = std::stoi(angle),
-                arcExtent = std::stoi(extent);
+        if (!angle.empty()) {
+            int arcAngle = std::stoi(angle);
 
-            lastArcAngle = (720 - (arcStart + arcExtent / 2)) % 360;
-            lastDomeAngle = 360 - arcStart;
-            lastDomeSpan = arcExtent;
+            lastArcAngle = (720 - arcAngle) % 360;
+            lastDomeAngle = 360 - arcAngle;
         }
 
         return true;
     }
 
     void handle_map(pugi::xml_node& node) {
+    }
+
+    void handle_dome(pugi::xml_node& node) {
+        std::string quarters = node.attribute("quarters").value();
+        if (!quarters.empty()) {
+            int extent = std::stoi(quarters) * 90;
+            lastDomeSpan = (extent >= 90 && extent <= 360)
+                ? extent
+                : 360;
+        } else {
+            lastDomeSpan = 360;
+        }
     }
 
     void handle_enum(pugi::xml_node& node) {
@@ -233,7 +267,8 @@ struct ALFWalker: pugi::xml_tree_walker {
         std::stringstream script;
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             std::string attr = fix_attr(ait->name());
-            script << attr << " = " << ait->value() << "\r";
+            std::string value = quote_attr(attr, ait->value());
+            script << attr << " = " << value << "\r";
         }
         RunThis((StringPtr)script.str().c_str());
     }
@@ -245,7 +280,9 @@ struct ALFWalker: pugi::xml_tree_walker {
     void handle_wall(pugi::xml_node& node) {
         std::string y = node.attribute("y").value();
         if (!y.empty()) {
-            ProgramVariable(iWallAltitude, std::stod(y));
+            std::stringstream script;
+            script << "wa = " << y << "\n";
+            RunThis((StringPtr)script.str().c_str());
         }
         CWallActor *theWall = new CWallActor;
         theWall->IAbstractActor();
@@ -257,6 +294,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         script << "object " << name << "\n";
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             std::string attr = fix_attr(ait->name());
+            std::string value = quote_attr(attr, ait->value());
             // Ignore all the standard context attributes when parsing objects.
             if (
                 attr.compare("fill") == 0 ||
@@ -270,10 +308,9 @@ struct ALFWalker: pugi::xml_tree_walker {
                 attr.compare("cx") == 0 ||
                 attr.compare("cz") == 0 ||
                 attr.compare("r") == 0 ||
-                attr.compare("angle") == 0 ||
-                attr.compare("extent") == 0
+                attr.compare("angle") == 0
             ) continue;
-            script << attr << " = " << ait->value() << "\n";
+            script << attr << " = " << value << "\n";
         }
         script << "end";
         RunThis((StringPtr)script.str().c_str());
@@ -281,10 +318,8 @@ struct ALFWalker: pugi::xml_tree_walker {
 };
 
 bool LoadALF(std::string levelName) {
-    InitParser();
     AvaraGLLightDefaults();
-
-    RunThis((StringPtr)GetDefaultScript().c_str());
+    InitParser();
 
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(levelName.c_str());

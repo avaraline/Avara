@@ -2,7 +2,6 @@
 
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
-#include "CLevelDescriptor.h"
 #include "CNetManager.h"
 #include "Preferences.h"
 #include "Resource.h"

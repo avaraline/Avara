@@ -151,7 +151,7 @@ void CBSPWorldImpl::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
     }
 }
 
-void CBSPWorldImpl::OverheadPoint(Fixed *c) {
+void CBSPWorldImpl::OverheadPoint(Fixed *c, Fixed *e) {
     Fixed minX = FIX(9999),
           maxX = FIX(-9999),
           minZ = FIX(9999),
@@ -168,6 +168,12 @@ void CBSPWorldImpl::OverheadPoint(Fixed *c) {
     c[0] = FDiv(minX + maxX, FIX(2));
     c[1] = maxY;
     c[2] = FDiv(minZ + maxZ, FIX(2));
+    e[0] = minX;
+    e[1] = maxX;
+    e[2] = 0;
+    e[3] = maxY;
+    e[4] = minZ;
+    e[5] = maxZ;
 }
 
 /*

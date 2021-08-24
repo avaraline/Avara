@@ -3,20 +3,20 @@
 #include "AvaraDefines.h"
 #include "CAbstractPlayer.h"
 #include "CAvaraApp.h"
+#include "CColorManager.h"
 #include "CNetManager.h"
 #include "CPlayerManager.h"
 #include "CScoreKeeper.h"
 #include "Preferences.h"
+#include "RGBAColor.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
 #include <numeric>
 #include <sstream>
+#include <stdint.h>
 #include <nanogui/tabwidget.h>
 using namespace nanogui;
-
-std::vector<long> player_colors =
-    {kGreenTeamColor, kYellowTeamColor, kRedTeamColor, kPinkTeamColor, kPurpleTeamColor, kBlueTeamColor, kOrangeTeamColor, kLimeTeamColor};
 
 std::vector<Text *> statuses;
 std::vector<Text *> chats;
@@ -47,7 +47,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     setFixedWidth(470);
 
     tabWidget = add<TabWidget>();
-    
+
     //players tab
     Widget *playersLayer = tabWidget->createTab("Players");
 
@@ -59,6 +59,17 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     auto panel = playersLayer->add<Widget>();
     panel->setLayout(layout);
     theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
+    std::vector<long> player_colors = {
+        (long) CColorManager::getTeamColor(1).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(2).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(3).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(4).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(5).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(6).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(7).value_or(CColorManager::getDefaultTeamColor()),
+        (long) CColorManager::getTeamColor(8).value_or(CColorManager::getDefaultTeamColor())
+    };
+
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
@@ -107,20 +118,20 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     //chat tab
     Widget *chatTab = tabWidget->createTab("Chat");
     chatTab->setLayout(new GridLayout(Orientation::Horizontal, 1, Alignment::Minimum, 0, 0));
-    
+
     VScrollPanel *scrollPanel = new VScrollPanel(chatTab);
     scrollPanel->setFixedWidth(ROSTER_WINDOW_WIDTH);
     scrollPanel->setFixedHeight(500);
-    
+
     chatPanel = new Widget(scrollPanel);
     AdvancedGridLayout *chatLayout = new AdvancedGridLayout();
     chatPanel->setLayout(chatLayout);
-    
+
     //placeholder lines for now
     for (int i = 0; i < 20; i++) {
         chatLayout->appendRow(1, 0.1);
         chatLayout->appendCol(1, 1);
-        
+
         auto chatLine = chatPanel->add<Label>("");
         chatLine->setFontSize(ROSTER_FONT_SIZE + 2);
         chatLine->setFont("mono");
@@ -137,7 +148,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     chatInput->setFont("mono");
     chatInput->setFixedWidth(ROSTER_WINDOW_WIDTH - 20);
     chatInput->setFixedHeight(70);
-    
+
     //scores tab
     Widget *scoreLayer = tabWidget->createTab("Scores");
     scoreLayer->setLayout(new GridLayout(Orientation::Horizontal, 6, Alignment::Minimum, 0, 0));
@@ -172,7 +183,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedTag;
 
     UpdateRoster();
-    
+
     requestFocus();
 }
 
@@ -196,6 +207,12 @@ void CRosterWindow::UpdateRoster() {
             statuses[i]->setValue(theStatus.c_str());
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
+            colors[i]->setTextColor(nanogui::Color(
+                LongToR(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
+                LongToG(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
+                LongToB(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
+                LongToA(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value())
+            ));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
         }
@@ -299,11 +316,11 @@ void CRosterWindow::ChatLineDelete() {
 void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
     std::string name = std::string((char *)playerName + 1, playerName[0]);
     std::string chatLine = name + ": " +  message;
- 
+
     AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
     gridLayout->appendRow(1, 0.1);
     gridLayout->appendCol(1, 1);
-    
+
     auto chatLabel = chatPanel->add<Label>(chatLine);
     chatLabel->setFontSize(ROSTER_FONT_SIZE + 2);
     chatLabel->setFont("mono");
@@ -316,7 +333,7 @@ void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
     NVGcontext* context = screen->nvgContext();
     chatLabel->parent()->performLayout(context);
     chatInput->setCaption(theName + ": ");
-    
+
     VScrollPanel *scroll = (VScrollPanel*)chatPanel->parent();
     scroll->setScroll(1);
 }
@@ -332,13 +349,13 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         return true;
     } else if (event.type == SDL_KEYDOWN) {
         //SDL_Log("CRosterWindow::handleSDLEvent SDL_KEYDOWN");
-        
+
         switch (event.key.keysym.sym) {
             case SDLK_BACKSPACE:
                 SendRosterMessage(1, backspace);
                 ChatLineDelete();
                 //SDL_Log("CRosterWindow::handleSDLEvent BACK");
-                
+
                 return true;
             case SDLK_RETURN:
                 SendRosterMessage(1, endline);
@@ -347,7 +364,7 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
             case SDLK_DELETE:
                 SendRosterMessage(1, clearline);
                 //SDL_Log("CRosterWindow::handleSDLEvent CLEAR");
-                
+
                 return true;
             case SDLK_g:
                 if (SDL_GetModState() & KMOD_CTRL) {

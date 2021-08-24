@@ -1,96 +1,96 @@
 <map>
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="30" z="21.25" w="23.75" d="23.75" h="0" />
-  <set designer="&quot;Plastic Chicken&quot;" information="&quot;Red vs. Green -- Two players only, wait your turn.&quot;" maxStartMissiles="0" maxStartGrenades="0" maxStartBoosts="0" gravity=".9" defaultLives="99" />
+  <Wall fill="#ffffff" frame="#000000" x="41.875" z="33.125" w="23.75" d="23.75" h="0" />
+  <set designer="Plastic Chicken" information="Red vs. Green -- Two players only, wait your turn." maxStartMissiles="0" maxStartGrenades="0" maxStartBoosts="0" gravity=".9" defaultLives="99" />
   <SkyColor fill="#000000" frame="#000000" />
-  <GroundColor fill="#000000" frame="#000000" />
+  <GroundColor fill="#000000" />
   <set wallHeight=".2" />
-  <Wall fill="#cccc00" frame="#000000" x="30" z="28.75" w="7.5" d="0.625" h="0" />
-  <Wall fill="#cccc00" frame="#000000" x="38.125" z="28.75" w="7.5" d="0.625" h="0" />
-  <Wall fill="#cccc00" frame="#000000" x="46.25" z="28.75" w="7.5" d="0.625" h="0" />
-  <Wall fill="#cccc00" frame="#000000" x="30" z="36.875" w="7.5" d="0.625" h="0" />
-  <Wall fill="#cccc00" frame="#000000" x="38.125" z="36.875" w="7.5" d="0.625" h="0" />
-  <Wall fill="#cccc00" frame="#000000" x="46.25" z="36.875" w="7.5" d="0.625" h="0" />
-  <Wall fill="#cccc00" frame="#000000" x="37.5" z="21.25" w="0.625" d="23.75" h="0" />
-  <Wall fill="#cccc00" frame="#000000" x="45.625" z="21.25" w="0.625" d="23.75" h="0" />
-  <Incarnator y="10000" mask="T1" fill="#000000" frame="#000000" cx="8.541666666666666" cz="12.916666666666668" r="1.9444444444444446" angle="270" extent="90" />
-  <Teleporter y="10100" group="2" mask="T1" fill="#000000" frame="#000000" cx="8.541666666666666" cz="12.916666666666668" r="1.9444444444444446" angle="270" extent="90" />
-  <Incarnator y="10000" mask="T3" fill="#000000" frame="#000000" cx="7.916666666666666" cz="21.666666666666664" r="1.9444444444444446" angle="270" extent="90" />
-  <Teleporter y="10100" group="2" mask="T3" fill="#000000" frame="#000000" cx="7.916666666666666" cz="21.666666666666664" r="1.9444444444444446" angle="270" extent="90" />
-  <Teleporter shape="false" mask="T1" y="2000" activeRange="15000" destGroup="1" start="@gTurn" stop="@gTurned" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" r="1.9444444444444442" angle="270" extent="90" />
-  <Timer in="@gTurn" wait="1" out="@gTurned" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" r="1.9444444444444442" angle="270" extent="90" />
-  <Timer in="@start" wait="1" out="@gTurn" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" r="1.9444444444444442" angle="270" extent="90" />
-  <Teleporter shape="false" mask="T3" y="2000" activeRange="15000" destGroup="1" start="@rTurn" stop="@rTurned" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" r="1.9444444444444442" angle="270" extent="90" />
-  <Timer in="@rTurn" wait="1" out="@rTurned" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" r="1.9444444444444442" angle="270" extent="90" />
-  <Teleporter y="15" group="1" shape="false" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" r="1.9444444444444442" angle="270" extent="90" />
-  <Teleporter y="20" deadRange="65" activeRange="100" destGroup="1" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" r="1.9444444444444442" angle="270" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gAA" stop="@sAA" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="25" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rAA" stop="@sAA" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="25" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rAA" in.1="@gAA" wait="1" out="@sAA" fill="#888888" frame="#000000" cx="33.75" cz="25" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rAA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="33.75" cz="25" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gAA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <Timer in.0="@gAA" in.1="@gAB" in.2="@gAC" in.3="@gBA" in.4="@gBB" in.5="@gBC" in.6="@gCA" in.7="@gCB" in.8="@gCC" wait="1" out="@rTurn" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <Timer in.0="@rAA" in.1="@rAB" in.2="@rAC" in.3="@rBA" in.4="@rBB" in.5="@rBC" in.6="@rCA" in.7="@rCB" in.8="@rCC" wait="1" out="@gTurn" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@gAA" in.1="@gAB" in.2="@gAC" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@gBA" in.1="@gBB" in.2="@gBC" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@gCA" in.1="@gCB" in.2="@gCC" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@gAA" in.1="@gBA" in.2="@gCA" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@gAB" in.1="@gBB" in.2="@gCB" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@gAC" in.1="@gBC" in.2="@gCC" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@gAA" in.1="@gBB" in.2="@gCC" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@gAC" in.1="@gBB" in.2="@gCA" out="@gWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <Text text="&quot;Green Wins!&quot;" in="@gWin" showEveryone="true" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@rAA" in.1="@rAB" in.2="@rAC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@rBA" in.1="@rBB" in.2="@rBC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@rCA" in.1="@rCB" in.2="@rCC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@rAA" in.1="@rBA" in.2="@rCA" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@rAB" in.1="@rBB" in.2="@rCB" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@rAC" in.1="@rBC" in.2="@rCC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@rAA" in.1="@rBB" in.2="@rCC" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <And in.0="@rAC" in.1="@rBB" in.2="@rCA" out="@rWin" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <Text text="&quot;Red Wins!&quot;" in="@rWin" showEveryone="true" fill="#33ff00" frame="#000000" cx="33.75" cz="25" r="1.875" angle="0" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gBA" stop="@sBA" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="25" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rBA" stop="@sBA" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="25" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rBA" in.1="@gBA" wait="1" out="@sBA" fill="#888888" frame="#000000" cx="41.875" cz="25" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rBA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="41.875" cz="25" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gBA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="41.875" cz="25" r="1.875" angle="0" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gCA" stop="@sCA" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="25" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rCA" stop="@sCA" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="25" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rCA" in.1="@gCA" wait="1" out="@sCA" fill="#888888" frame="#000000" cx="50" cz="25" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rCA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="50" cz="25" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gCA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="50" cz="25" r="1.875" angle="0" extent="90" />
-  <Teleporter win="5000" shape="false" start="@rWin" mask="T3" activeRange="15000" fill="#996633" frame="#996633" cx="93.8888888888889" cz="4.305555555555555" r="1.25" angle="270" extent="90" />
-  <Teleporter win="0" shape="false" start="@rWin" mask="T1" activeRange="15000" fill="#996633" frame="#996633" cx="93.8888888888889" cz="4.305555555555555" r="1.25" angle="270" extent="90" />
-  <Teleporter win="0" shape="false" start="@gWin" mask="T3" activeRange="15000" fill="#996633" frame="#996633" cx="93.8888888888889" cz="4.305555555555555" r="1.25" angle="270" extent="90" />
-  <Teleporter win="5000" shape="false" start="@gWin" mask="T1" activeRange="15000" fill="#996633" frame="#996633" cx="93.8888888888889" cz="4.305555555555555" r="1.25" angle="270" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gAB" stop="@sAB" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rAB" stop="@sAB" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rAB" in.1="@gAB" wait="1" out="@sAB" fill="#888888" frame="#000000" cx="33.75" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rAB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="33.75" cz="33.125" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gAB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="33.75" cz="33.125" r="1.875" angle="0" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gBB" stop="@sBB" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rBB" stop="@sBB" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rBB" in.1="@gBB" wait="1" out="@sBB" fill="#888888" frame="#000000" cx="41.875" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rBB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="41.875" cz="33.125" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gBB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="41.875" cz="33.125" r="1.875" angle="0" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gCB" stop="@sCB" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rCB" stop="@sCB" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rCB" in.1="@gCB" wait="1" out="@sCB" fill="#888888" frame="#000000" cx="50" cz="33.125" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rCB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="50" cz="33.125" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gCB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="50" cz="33.125" r="1.875" angle="0" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gAC" stop="@sAC" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rAC" stop="@sAC" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rAC" in.1="@gAC" wait="1" out="@sAC" fill="#888888" frame="#000000" cx="33.75" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rAC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="33.75" cz="41.25" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gAC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="33.75" cz="41.25" r="1.875" angle="0" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gBC" stop="@sBC" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rBC" stop="@sBC" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rBC" in.1="@gBC" wait="1" out="@sBC" fill="#888888" frame="#000000" cx="41.875" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rBC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="41.875" cz="41.25" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gBC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="41.875" cz="41.25" r="1.875" angle="0" extent="90" />
-  <Teleporter mask="T1" start="@start" out="@gCC" stop="@sCC" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Teleporter mask="T3" start="@start" out="@rCC" stop="@sCC" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Timer in.0="@rCC" in.1="@gCC" wait="1" out="@sCC" fill="#888888" frame="#000000" cx="50" cz="41.25" r="1.875" angle="270" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@rCC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="50" cz="41.25" r="1.875" angle="90" extent="90" />
-  <Door y="-2000" deltaY="2000" open="@gCC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="50" cz="41.25" r="1.875" angle="0" extent="90" />
+  <Wall fill="#cccc00" frame="#000000" x="33.75" z="29.0625" w="7.5" d="0.625" h="0" />
+  <Wall fill="#cccc00" frame="#000000" x="41.875" z="29.0625" w="7.5" d="0.625" h="0" />
+  <Wall fill="#cccc00" frame="#000000" x="50" z="29.0625" w="7.5" d="0.625" h="0" />
+  <Wall fill="#cccc00" frame="#000000" x="33.75" z="37.1875" w="7.5" d="0.625" h="0" />
+  <Wall fill="#cccc00" frame="#000000" x="41.875" z="37.1875" w="7.5" d="0.625" h="0" />
+  <Wall fill="#cccc00" frame="#000000" x="50" z="37.1875" w="7.5" d="0.625" h="0" />
+  <Wall fill="#cccc00" frame="#000000" x="37.8125" z="33.125" w="0.625" d="23.75" h="0" />
+  <Wall fill="#cccc00" frame="#000000" x="45.9375" z="33.125" w="0.625" d="23.75" h="0" />
+  <Incarnator y="10000" mask="T1" cx="8.541666666666666" cz="12.916666666666668" angle="315" />
+  <Teleporter y="10100" group="2" mask="T1" fill="#000000" frame="#000000" cx="8.541666666666666" cz="12.916666666666668" angle="315" />
+  <Incarnator y="10000" mask="T3" cx="7.916666666666666" cz="21.666666666666664" angle="315" />
+  <Teleporter y="10100" group="2" mask="T3" fill="#000000" frame="#000000" cx="7.916666666666666" cz="21.666666666666664" angle="315" />
+  <Teleporter shape="false" mask="T1" y="2000" activeRange="15000" destGroup="1" start="@gTurn" stop="@gTurned" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" angle="315" />
+  <Timer in="@gTurn" wait="1" out="@gTurned" />
+  <Timer in="@start" wait="1" out="@gTurn" />
+  <Teleporter shape="false" mask="T3" y="2000" activeRange="15000" destGroup="1" start="@rTurn" stop="@rTurned" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" angle="315" />
+  <Timer in="@rTurn" wait="1" out="@rTurned" />
+  <Teleporter y="15" group="1" shape="false" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" angle="315" />
+  <Teleporter y="20" deadRange="65" activeRange="100" destGroup="1" fill="#000000" frame="#000000" cx="7.291666666666666" cz="27.291666666666668" angle="315" />
+  <Teleporter mask="T1" start="@start" out="@gAA" stop="@sAA" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="25" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rAA" stop="@sAA" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="25" angle="315" />
+  <Timer in.0="@rAA" in.1="@gAA" wait="1" out="@sAA" />
+  <Door y="-2000" deltaY="2000" open="@rAA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="33.75" cz="25" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gAA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="33.75" cz="25" angle="45" />
+  <Timer in.0="@gAA" in.1="@gAB" in.2="@gAC" in.3="@gBA" in.4="@gBB" in.5="@gBC" in.6="@gCA" in.7="@gCB" in.8="@gCC" wait="1" out="@rTurn" />
+  <Timer in.0="@rAA" in.1="@rAB" in.2="@rAC" in.3="@rBA" in.4="@rBB" in.5="@rBC" in.6="@rCA" in.7="@rCB" in.8="@rCC" wait="1" out="@gTurn" />
+  <And in.0="@gAA" in.1="@gAB" in.2="@gAC" out="@gWin" />
+  <And in.0="@gBA" in.1="@gBB" in.2="@gBC" out="@gWin" />
+  <And in.0="@gCA" in.1="@gCB" in.2="@gCC" out="@gWin" />
+  <And in.0="@gAA" in.1="@gBA" in.2="@gCA" out="@gWin" />
+  <And in.0="@gAB" in.1="@gBB" in.2="@gCB" out="@gWin" />
+  <And in.0="@gAC" in.1="@gBC" in.2="@gCC" out="@gWin" />
+  <And in.0="@gAA" in.1="@gBB" in.2="@gCC" out="@gWin" />
+  <And in.0="@gAC" in.1="@gBB" in.2="@gCA" out="@gWin" />
+  <Text text="Green Wins!" in="@gWin" showEveryone="true" cx="33.75" cz="25" r="1.875" />
+  <And in.0="@rAA" in.1="@rAB" in.2="@rAC" out="@rWin" />
+  <And in.0="@rBA" in.1="@rBB" in.2="@rBC" out="@rWin" />
+  <And in.0="@rCA" in.1="@rCB" in.2="@rCC" out="@rWin" />
+  <And in.0="@rAA" in.1="@rBA" in.2="@rCA" out="@rWin" />
+  <And in.0="@rAB" in.1="@rBB" in.2="@rCB" out="@rWin" />
+  <And in.0="@rAC" in.1="@rBC" in.2="@rCC" out="@rWin" />
+  <And in.0="@rAA" in.1="@rBB" in.2="@rCC" out="@rWin" />
+  <And in.0="@rAC" in.1="@rBB" in.2="@rCA" out="@rWin" />
+  <Text text="Red Wins!" in="@rWin" showEveryone="true" cx="33.75" cz="25" r="1.875" />
+  <Teleporter mask="T1" start="@start" out="@gBA" stop="@sBA" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="25" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rBA" stop="@sBA" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="25" angle="315" />
+  <Timer in.0="@rBA" in.1="@gBA" wait="1" out="@sBA" />
+  <Door y="-2000" deltaY="2000" open="@rBA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="41.875" cz="25" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gBA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="41.875" cz="25" angle="45" />
+  <Teleporter mask="T1" start="@start" out="@gCA" stop="@sCA" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="25" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rCA" stop="@sCA" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="25" angle="315" />
+  <Timer in.0="@rCA" in.1="@gCA" wait="1" out="@sCA" />
+  <Door y="-2000" deltaY="2000" open="@rCA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="50" cz="25" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gCA" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="50" cz="25" angle="45" />
+  <Teleporter win="5000" shape="false" start="@rWin" mask="T3" activeRange="15000" fill="#996633" frame="#996633" cx="93.8888888888889" cz="4.305555555555555" angle="315" />
+  <Teleporter win="0" shape="false" start="@rWin" mask="T1" activeRange="15000" fill="#996633" frame="#996633" cx="93.8888888888889" cz="4.305555555555555" angle="315" />
+  <Teleporter win="0" shape="false" start="@gWin" mask="T3" activeRange="15000" fill="#996633" frame="#996633" cx="93.8888888888889" cz="4.305555555555555" angle="315" />
+  <Teleporter win="5000" shape="false" start="@gWin" mask="T1" activeRange="15000" fill="#996633" frame="#996633" cx="93.8888888888889" cz="4.305555555555555" angle="315" />
+  <Teleporter mask="T1" start="@start" out="@gAB" stop="@sAB" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="33.125" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rAB" stop="@sAB" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="33.125" angle="315" />
+  <Timer in.0="@rAB" in.1="@gAB" wait="1" out="@sAB" />
+  <Door y="-2000" deltaY="2000" open="@rAB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="33.75" cz="33.125" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gAB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="33.75" cz="33.125" angle="45" />
+  <Teleporter mask="T1" start="@start" out="@gBB" stop="@sBB" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="33.125" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rBB" stop="@sBB" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="33.125" angle="315" />
+  <Timer in.0="@rBB" in.1="@gBB" wait="1" out="@sBB" />
+  <Door y="-2000" deltaY="2000" open="@rBB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="41.875" cz="33.125" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gBB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="41.875" cz="33.125" angle="45" />
+  <Teleporter mask="T1" start="@start" out="@gCB" stop="@sCB" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="33.125" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rCB" stop="@sCB" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="33.125" angle="315" />
+  <Timer in.0="@rCB" in.1="@gCB" wait="1" out="@sCB" />
+  <Door y="-2000" deltaY="2000" open="@rCB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="50" cz="33.125" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gCB" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="50" cz="33.125" angle="45" />
+  <Teleporter mask="T1" start="@start" out="@gAC" stop="@sAC" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="41.25" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rAC" stop="@sAC" destGroup="2" fill="#888888" frame="#000000" cx="33.75" cz="41.25" angle="315" />
+  <Timer in.0="@rAC" in.1="@gAC" wait="1" out="@sAC" />
+  <Door y="-2000" deltaY="2000" open="@rAC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="33.75" cz="41.25" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gAC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="33.75" cz="41.25" angle="45" />
+  <Teleporter mask="T1" start="@start" out="@gBC" stop="@sBC" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="41.25" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rBC" stop="@sBC" destGroup="2" fill="#888888" frame="#000000" cx="41.875" cz="41.25" angle="315" />
+  <Timer in.0="@rBC" in.1="@gBC" wait="1" out="@sBC" />
+  <Door y="-2000" deltaY="2000" open="@rBC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="41.875" cz="41.25" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gBC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="41.875" cz="41.25" angle="45" />
+  <Teleporter mask="T1" start="@start" out="@gCC" stop="@sCC" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="41.25" angle="315" />
+  <Teleporter mask="T3" start="@start" out="@rCC" stop="@sCC" destGroup="2" fill="#888888" frame="#000000" cx="50" cz="41.25" angle="315" />
+  <Timer in.0="@rCC" in.1="@gCC" wait="1" out="@sCC" />
+  <Door y="-2000" deltaY="2000" open="@rCC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#ff0000" frame="#000000" cx="50" cz="41.25" angle="135" />
+  <Door y="-2000" deltaY="2000" open="@gCC" shape="bspFloorFrame" scale=".4" openSpeed="100" fill="#33ff00" frame="#000000" cx="50" cz="41.25" angle="45" />
 </map>

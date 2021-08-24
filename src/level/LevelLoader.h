@@ -9,6 +9,7 @@
 
 #pragma once
 #include "Types.h"
+#include <stdint.h>
 #include <string>
 #include <vector>
 
@@ -258,8 +259,9 @@ enum {
 
     //	Lights
     iAmbient,
+    iAmbientColor,
     iLightsTable,
-    iLightsTableEnd = iLightsTable + 11, //	a 3 x 4 table
+    iLightsTableEnd = iLightsTable + 15, //	a 3 x 4 table
 
     // Advanced weapons
     iGrenadePower,
@@ -317,6 +319,6 @@ bool LoadALF(std::string levelName);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
-int GetPixelColor();
-int GetOtherPixelColor();
+uint32_t GetPixelColor();
+uint32_t GetOtherPixelColor();
 Fixed GetLastOval(Fixed *theLoc);

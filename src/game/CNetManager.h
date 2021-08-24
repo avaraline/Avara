@@ -152,6 +152,8 @@ public:
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
     virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);
+    
+    virtual short PlayerCount();
 
     //	Game loop methods:
 

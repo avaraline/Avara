@@ -39,14 +39,14 @@ jobs:
           make -j winapp
           make tests
       - name: deploy nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'master')
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build-master/WinAvara.zip
+          asset_path: ./build-main/WinAvara.zip
           asset_name: Avara-Windows-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1

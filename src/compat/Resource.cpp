@@ -142,7 +142,7 @@ Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string na
 Handle _GetResource(OSType theType, short theID, std::string theName) {
     /*
     // TODO: handle TEXT, BSPT (bsp templates)
-    // everything else is just checking if it's there and not using the data 
+    // everything else is just checking if it's there and not using the data
     std::string typeString = OSTypeString(theType);
     std::string idString = std::to_string(theID);
 
@@ -172,7 +172,7 @@ Handle _GetResource(OSType theType, short theID, std::string theName) {
     }
 
     return data;
-    
+
 }
 
 Handle GetResource(OSType theType, short theID) {
@@ -364,7 +364,7 @@ std::string GetDefaultScript() {
     buffa << DEFAULTSCRIPT;
     auto path = std::string(BundlePath(buffa));
     std::ifstream t(path);
-    if(t.good()) {
+    if (t.good()) {
         std::string defaultscript;
         t.seekg(0, std::ios::end);
         defaultscript.reserve(t.tellg());
@@ -374,17 +374,27 @@ std::string GetDefaultScript() {
                               std::istreambuf_iterator<char>());
         return defaultscript;
     }
-    else return "";
+
+    return "";
 }
 
 std::string GetBaseScript() {
     std::stringstream buffa;
-    buffa << "rsrc" << DEFAULTSCRIPT;
-    std::ifstream t(std::string(BundlePath(buffa)));
-    std::string scr;
-    scr.assign((std::istreambuf_iterator<char>(t)),
-                   std::istreambuf_iterator<char>());
-    return scr;
+    buffa << "rsrc" << PATHSEP << DEFAULTSCRIPT;
+    auto path = std::string(BundlePath(buffa));
+    std::ifstream t(path);
+    if (t.good()) {
+        std::string defaultscript;
+        t.seekg(0, std::ios::end);
+        defaultscript.reserve(t.tellg());
+        t.seekg(0, std::ios::beg);
+
+        defaultscript.assign((std::istreambuf_iterator<char>(t)),
+                              std::istreambuf_iterator<char>());
+        return defaultscript;
+    }
+
+    return "";
 }
 
 nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id) {
@@ -398,7 +408,7 @@ nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string 
         if (manifest.find(rsrc) != manifest.end() &&
             manifest[rsrc].find(key) != manifest[rsrc].end())
             return manifest[rsrc][key];
-        else if (manifest.find(rsrc) != manifest.end() && 
+        else if (manifest.find(rsrc) != manifest.end() &&
             manifest[rsrc].find(default_id) != manifest[rsrc].end())
             return manifest[rsrc][default_id];
         else
@@ -475,9 +485,9 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     nlohmann::json hsndJson = GetKeyFromSetJSON("HSND", key, "129");
     int version = hsndJson["Version"];
     std::map<short, std::vector<uint8_t>> cash;
-    
+
     int found = 0;
-    
+
     if (level_sound_cash.count(resId) > 0) {
         cash = level_sound_cash;
         found++;
@@ -487,15 +497,15 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
         found++;
     }
 
+    if (!found) return NULL;
+
     Fixed arate = FIX(1);
     if (version > 1)
-    arate = ToFixed((float)hsndJson["Base Rate"]);
+        arate = ToFixed((float)hsndJson["Base Rate"]);
 
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
-    int len = 0;
-    if (found > 0)
-    len = cash[resId].size();
+    int len = cash[resId].size();
 
     aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + len);
 
@@ -509,8 +519,6 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     sampP->loopCount = hsndJson["Loop Count"];
     sampP->nextSample = sampleList;
     sampP->len = len;
-
-    if (found == 0) return aSample;
 
     unsigned char *p;
     HLock((Handle)aSample);

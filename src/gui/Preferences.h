@@ -35,6 +35,10 @@ using json = nlohmann::json;
 #define kFullScreenTag "fullscreen"
 #define kFOV "fov"
 
+// Other graphics settings
+#define kColorBlindMode "colorBlindMode"
+#define kWeaponSightAlpha "weaponSightAlpha"
+
 // Network & Tracker
 #define kLastAddress "lastAddress"
 #define kServerDescription "serverDescription"
@@ -48,6 +52,7 @@ using json = nlohmann::json;
 // Levels
 #define kRecentSets "recentSets"
 #define kRecentLevels "recentLevels"
+#define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -94,6 +99,8 @@ static json defaultPrefs = {
     {kWindowHeight, 768},
     {kFullScreenTag, false},
     {kFOV, 50.0},
+    {kColorBlindMode, 0},
+    {kWeaponSightAlpha, 1.0},
     {kLastAddress, ""},
     {kServerDescription, ""},
     {kServerPassword, ""},
@@ -103,7 +110,8 @@ static json defaultPrefs = {
     {kTrackerRegisterAddress, "avara.io"},
     {kTrackerRegisterFrequency, 5},
     {kRecentSets, {}},
-    {kRecentLevels, {}}
+    {kRecentLevels, {}},
+    {kIgnoreCustomGoodySound, false}
 };
 
 

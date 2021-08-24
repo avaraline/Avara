@@ -12,6 +12,7 @@
 #include "CAbstractMissile.h"
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
+#include "CColorManager.h"
 #include "CGrenade.h"
 #include "CMissile.h"
 #include "CPlayerMissile.h"
@@ -26,21 +27,26 @@ void CDepot::IDepot(CAvaraGame *theGame) {
 
     smartSight = new CBSPPart;
     smartSight->IBSPPart(208);
+    smartSight->ReplaceColor(0x00ffff00, CColorManager::getMissileSightPrimaryColor());
+    smartSight->ReplaceColor(0x00ff0000, CColorManager::getMissileSightSecondaryColor());
     smartSight->ignoreDirectionalLights = true;
     smartSight->privateAmbient = FIX(1);
 
     smartHairs = new CBSPPart;
     smartHairs->IBSPPart(207);
+    smartHairs->ReplaceColor(0x00ff0000, CColorManager::getMissileLockColor());
     smartHairs->ignoreDirectionalLights = true;
     smartHairs->privateAmbient = FIX(1);
 
     grenadeSight = new CBSPPart;
     grenadeSight->IBSPPart(200);
+    grenadeSight->ReplaceColor(0x00ffff00, CColorManager::getGrenadeSightPrimaryColor());
     grenadeSight->ignoreDirectionalLights = true;
     grenadeSight->privateAmbient = FIX(1);
 
     grenadeTop = new CBSPPart;
     grenadeTop->IBSPPart(201);
+    grenadeTop->ReplaceColor(0x00ff0000, CColorManager::getGrenadeSightSecondaryColor());
     grenadeTop->ignoreDirectionalLights = true;
     grenadeTop->privateAmbient = FIX(1);
 

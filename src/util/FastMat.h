@@ -10,20 +10,15 @@
 #pragma once
 
 #include "Types.h"
+#include <math.h>
 
 #define PI 3.141592653589793238463
 
 static const Fixed FIX1 = 0x00010000;
-static inline float ToFloat(Fixed a) {
-    return (float)a / FIX1;
-}
-static inline Fixed ToFixed(float a) {
-    float temp = a * FIX1;
-    return (Fixed)temp;
-}
-static inline float Deg2Rad(float deg) {
-    return deg * PI / 180.0;
-}
+
+static inline float ToFloat(Fixed a) { return (float)a / FIX1; }
+static inline Fixed ToFixed(float a) { float temp = a * FIX1; return (Fixed)temp; }
+static inline float Deg2Rad(float deg) { return deg * PI / 180.0; }
 
 void InitMatrix();
 void CloseMatrix();
@@ -71,9 +66,9 @@ void MRotateY(Fixed s, Fixed c, Matrix *theMatrix);
 void MRotateZ(Fixed s, Fixed c, Matrix *theMatrix);
 void MTranslate(Fixed xt, Fixed yt, Fixed zt, Matrix *theMatrix);
 
-Fixed FMul(Fixed a, Fixed b);
-Fixed FDiv(Fixed a, Fixed b);
-Fixed FMulDiv(Fixed a, Fixed b, Fixed c);
+static inline Fixed FMul(Fixed a, Fixed b) { return ((int64_t)a * (int64_t)b) / (1 << 16); }
+static inline Fixed FDiv(Fixed a, Fixed b) { return ((int64_t)a * (1 << 16)) / b; }
+static inline Fixed FMulDiv(Fixed a, Fixed b, Fixed c) { return (long)(((double)a) * b / c); }
 
 #define FDivNZ FDiv
 #define FMulDivNZ FMulDiv
@@ -84,12 +79,21 @@ Fixed FMulDiv(Fixed a, Fixed b, Fixed c);
 #define FONEPI 205887
 #define FTWOPI 411775
 
-Fixed FDegSin(Fixed a); //	Full circle is 360.0 (fixed point)
-Fixed FDegCos(Fixed a);
-Fixed FRadSin(Fixed a); //	Full circle is 2 Pi (fixed point, of course)
-Fixed FRadCos(Fixed a);
-Fixed FOneSin(Fixed a); //	Full circle is 1.0 (fixed point)
-Fixed FOneCos(Fixed a);
+//	Full circle is 2 Pi (fixed point, of course)
+static inline Fixed FRadSin(Fixed a) { return (long)(65536L * sin(a / 65536.0)); }
+static inline Fixed FRadCos(Fixed a) { return (long)(65536L * cos(a / 65536.0)); }
+static inline Fixed FRadTan(Fixed a) { return (long)(65536L * tan(a / 65536.0)); }
+
+//	Full circle is 360.0 (fixed point)
+static inline Fixed FDegSin(Fixed a) { return (long)(65536.0 * sin(a / 3754936.206169363)); }
+static inline Fixed FDegCos(Fixed a) { return (long)(65536.0 * cos(a / 3754936.206169363)); }
+static inline Fixed FDegTan(Fixed a) { return (long)(65536.0 * tan(a / 3754936.206169363)); }
+
+//	Full circle is 1.0 (fixed point)
+static inline Fixed FOneSin(Fixed a) { return (long)(65536.0 * sin(a / 10430.3783505)); }
+static inline Fixed FOneCos(Fixed a) { return (long)(65536.0 * cos(a / 10430.3783505)); }
+static inline Fixed FOneTan(Fixed a) { return (long)(65536.0 * tan(a / 10430.3783505)); }
+
 Fixed FRadArcCos(Fixed n); //	Instead of FRadArcSin and FRadArcCos use FRadArcTan2
 Fixed FRadArcSin(Fixed n); //	when you can! ArcSin and ArcCos are for small values only.
 Fixed FRadArcTan2(Fixed x, Fixed y);
@@ -99,7 +103,7 @@ void FindSpaceAngleAndNormalize(Fixed *delta, Fixed *heading, Fixed *pitch);
 
 #define FRadToDeg(angle) FMul(angle, 3754936)
 #define FDegToRad(angle) FMul(angle, 1144)
-#define FOneToDeg(angle) ((angle)*360)
+#define FOneToDeg(angle) ((angle) * 360)
 #define FDegToOne(angle) ((angle) / 360)
 #define FOneToRad(angle) FMul(angle, 41175)
 #define FRadToOne(angle) FMul(angle, 10430)

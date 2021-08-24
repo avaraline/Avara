@@ -34,7 +34,6 @@
 #include "InfoMessages.h"
 //#include "CCapMaster.h"
 #include "AvaraDefines.h"
-#include "CCompactTagBase.h"
 #include "CSoundHub.h"
 #include "CSoundMixer.h"
 #include "CommandList.h"
@@ -49,6 +48,7 @@
 #include "CHUD.h"
 #include "Preferences.h"
 #include "Resource.h"
+#include "RGBAColor.h"
 
 #define kHighShadeCount 12
 
@@ -579,6 +579,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
 void CAvaraGame::EndScript() {
     short i;
+    uint32_t lightColor;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -587,29 +588,33 @@ void CAvaraGame::EndScript() {
     worldShader->Apply();
 
     itsView->ambientLight = ReadFixedVar(iAmbient);
-    AvaraGLSetAmbient(ToFloat(ReadFixedVar(iAmbient)));
+    itsView->ambientLightColor = ParseColor(ReadStringVar(iAmbientColor))
+        .value_or(DEFAULT_LIGHT_COLOR);
+    AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
 
     for (i = 0; i < 4; i++) {
-        intensity = ReadFixedVar(iLightsTable + 3 * i);
+        intensity = ReadFixedVar(iLightsTable + 4 * i);
 
         if (intensity >= 2048) {
-            angle1 = ReadFixedVar(iLightsTable + 1 + 3 * i);
-            angle2 = ReadFixedVar(iLightsTable + 2 + 3 * i);
+            angle1 = ReadFixedVar(iLightsTable + 1 + 4 * i);
+            angle2 = ReadFixedVar(iLightsTable + 2 + 4 * i);
 
             x = FMul(FDegCos(angle1), intensity);
             y = FMul(FDegSin(-angle1), intensity);
             z = FMul(FDegCos(angle2), x);
             x = FMul(FDegSin(-angle2), x);
+            lightColor = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
+                .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
-            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f",
-                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2));
+            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
+                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), lightColor);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
-            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2));
+            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), lightColor);
         } else {
             itsView->SetLightValues(i, 0, 0, 0, kLightOff);
-            AvaraGLSetLight(i, 0, 0, 0);
+            AvaraGLSetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR);
         }
     }
 
@@ -886,6 +891,11 @@ bool CAvaraGame::GameTick() {
 
     nextScheduledFrame += latencyFrameTime;
 
+    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode)
+    if (nextScheduledFrame < startTime) {
+        nextScheduledFrame = startTime + latencyFrameTime;
+    }
+
     itsDepot->RunSliverActions();
     itsApp->StartFrame(frameNumber);
     ViewControl();
@@ -1008,9 +1018,10 @@ void CAvaraGame::Render(NVGcontext *ctx) {
         gameStatus == kLoseStatus) {
         ViewControl();
         itsWorld->Render(itsView);
-
+        AvaraGLSetAmbient(.7, LONG_MAX);
         AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
+        AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
         hud->Render(itsView, ctx);
         AvaraGLSetDepthTest(true);
     }

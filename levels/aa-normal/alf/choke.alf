@@ -1,73 +1,73 @@
 <map>
   <set wallHeight="0.2" baseHeight="5" />
-  <Wall fill="#eeeeee" frame="#000000" x="2.291666666666667" z="15.069444444444445" w="5" d="5" h="0" />
-  <Wall fill="#eeeeee" frame="#000000" x="2.291666666666667" z="33.81944444444444" w="5" d="5" h="0" />
-  <Wall fill="#eeeeee" frame="#000000" x="2.291666666666667" z="52.56944444444445" w="5" d="5" h="0" />
-  <Wall fill="#eeeeee" frame="#000000" x="93.54166666666667" z="52.56944444444445" w="5" d="5" h="0" />
-  <Wall fill="#eeeeee" frame="#000000" x="93.54166666666667" z="33.81944444444444" w="5" d="5" h="0" />
-  <Wall fill="#eeeeee" frame="#000000" x="93.54166666666667" z="15.069444444444445" w="5" d="5" h="0" />
+  <Wall fill="#eeeeee" frame="#000000" x="4.791666666666667" z="17.569444444444446" w="5" d="5" h="0" />
+  <Wall fill="#eeeeee" frame="#000000" x="4.791666666666667" z="36.31944444444444" w="5" d="5" h="0" />
+  <Wall fill="#eeeeee" frame="#000000" x="4.791666666666667" z="55.06944444444445" w="5" d="5" h="0" />
+  <Wall fill="#eeeeee" frame="#000000" x="96.04166666666667" z="55.06944444444445" w="5" d="5" h="0" />
+  <Wall fill="#eeeeee" frame="#000000" x="96.04166666666667" z="36.31944444444444" w="5" d="5" h="0" />
+  <Wall fill="#eeeeee" frame="#000000" x="96.04166666666667" z="17.569444444444446" w="5" d="5" h="0" />
   <set baseHeight="0" />
-  <set information="&quot;Don't you just hate bottlenecks?  Down-and-dirty tactics is the key to this level.  Select a HECTOR wisely....&quot;" maxStartMissiles="0" />
-  <set ambient="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
+  <set information="Don't you just hate bottlenecks?  Down-and-dirty tactics is the key to this level.  Select a HECTOR wisely...." maxStartMissiles="0" />
+  <set ambient.i="0.2" light.0.i="0.7" light.0.a="15" light.0.b="25" light.1.i="0.4" light.1.a="70" light.1.b="150" />
   <unique vars="firstWave secondWaveNET secondWaveNE secondWaveNWT secondWaveNW secondWaveSET secondWaveSE secondWaveSWT secondWaveSW thirdWaveNET thirdWaveNE thirdWaveNWT thirdWaveNW thirdWaveSET thirdWaveSE thirdWaveSWT thirdWaveSW" />
-  <Timer in="@start" out="firstWave" wait="150" fill="#eeeeee" frame="#000000" />
+  <Timer in="@start" out="firstWave" wait="150" />
   <set wallHeight="10" />
-  <WallDoor midYaw="45" fill="#888888" frame="#000000" x="44.16666666666667" z="30.069444444444446" w="12.5" d="12.5" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="59.51388888888889" z="13.819444444444445" w="40.27777777777778" d="1.25" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="98.54166666666667" z="15.069444444444445" w="1.25" d="42.5" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="59.51388888888889" z="57.56944444444445" w="40.27777777777778" d="1.25" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="1.0416666666666667" z="57.56944444444445" w="40.34722222222223" d="1.25" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="1.0416666666666667" z="15.069444444444445" w="1.25" d="42.5" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="1.0416666666666667" z="13.819444444444445" w="40.34722222222223" d="1.25" h="0" />
-  <WallDoor midYaw="45" fill="#888888" frame="#000000" x="44.16666666666667" z="52.56944444444445" w="12.5" d="12.5" h="0" />
-  <WallDoor midYaw="45" fill="#888888" frame="#000000" x="44.16666666666667" z="7.569444444444445" w="12.5" d="12.5" h="0" />
-  <Incarnator y="5" fill="#cc9900" frame="#000000" cx="4.791666666666667" cz="17.569444444444446" r="1.25" angle="270" extent="90" />
-  <Incarnator y="5" fill="#cc9900" frame="#000000" cx="96.04166666666667" cz="55.06944444444445" r="1.25" angle="90" extent="90" />
-  <Incarnator y="5" fill="#cc9900" frame="#000000" cx="4.791666666666667" cz="55.06944444444445" r="1.25" angle="180" extent="90" />
-  <Incarnator y="5" fill="#cc9900" frame="#000000" cx="96.04166666666667" cz="17.569444444444446" r="1.25" angle="0" extent="90" />
-  <Incarnator y="5" fill="#cc9900" frame="#000000" cx="4.791666666666667" cz="36.31944444444444" r="1.25" angle="225" extent="90" />
-  <Incarnator y="5" fill="#cc9900" frame="#000000" cx="96.04166666666667" cz="36.31944444444444" r="1.25" angle="45" extent="90" />
-  <GroundColor fill="#330000" frame="#330000" />
+  <WallDoor midYaw="45" fill="#888888" frame="#000000" x="50.41666666666667" z="36.31944444444444" w="12.5" d="12.5" h="0" />
+  <Wall fill="#aaaaaa" frame="#000000" x="79.65277777777779" z="14.444444444444445" w="40.27777777777778" d="1.25" h="0" />
+  <Wall fill="#aaaaaa" frame="#000000" x="99.16666666666667" z="36.31944444444445" w="1.25" d="42.5" h="0" />
+  <Wall fill="#aaaaaa" frame="#000000" x="79.65277777777779" z="58.19444444444445" w="40.27777777777778" d="1.25" h="0" />
+  <Wall fill="#aaaaaa" frame="#000000" x="21.21527777777778" z="58.19444444444445" w="40.34722222222223" d="1.25" h="0" />
+  <Wall fill="#aaaaaa" frame="#000000" x="1.666666666666667" z="36.31944444444445" w="1.25" d="42.5" h="0" />
+  <Wall fill="#aaaaaa" frame="#000000" x="21.21527777777778" z="14.444444444444445" w="40.34722222222223" d="1.25" h="0" />
+  <WallDoor midYaw="45" fill="#888888" frame="#000000" x="50.41666666666667" z="58.81944444444444" w="12.5" d="12.5" h="0" />
+  <WallDoor midYaw="45" fill="#888888" frame="#000000" x="50.41666666666667" z="13.819444444444446" w="12.5" d="12.5" h="0" />
+  <Incarnator y="5" cx="4.791666666666667" cz="17.569444444444446" angle="315" />
+  <Incarnator y="5" cx="96.04166666666667" cz="55.06944444444445" angle="135" />
+  <Incarnator y="5" cx="4.791666666666667" cz="55.06944444444445" angle="225" />
+  <Incarnator y="5" cx="96.04166666666667" cz="17.569444444444446" angle="45" />
+  <Incarnator y="5" cx="4.791666666666667" cz="36.31944444444444" angle="270" />
+  <Incarnator y="5" cx="96.04166666666667" cz="36.31944444444444" angle="90" />
+  <GroundColor fill="#330000" />
   <SkyColor fill="#993300" frame="#330099" />
-  <Teleporter shape="0" status="false" win="0" start="@winTeam" activeRange="2000" fill="#ffcccc" frame="#000000" cx="50.41666666666667" cz="36.31944444444444" r="1.25" angle="270" extent="180" />
+  <Teleporter shape="0" status="false" win="0" start="@winTeam" activeRange="2000" fill="#ffcccc" frame="#000000" cx="50.41666666666667" cz="36.31944444444444" angle="0" />
   <set wallHeight="2.7" />
-  <Wall fill="#000099" frame="#000000" x="83.54166666666667" z="26.319444444444446" w="2.5" d="20" h="0" />
-  <Wall fill="#000099" frame="#000000" x="14.791666666666668" z="26.319444444444446" w="2.5" d="20" h="0" />
-  <Goody shape="bspGrenade" status="false" start="firstWave" out="secondWaveNWT" grenades="8" speed="-1" y="2" fill="#cc0000" frame="#000000" cx="11.041666666666668" cz="20.069444444444446" r="1.25" angle="90" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="firstWave" out="secondWaveSWT" grenades="8" speed="1" y="2" fill="#cc0000" frame="#000000" cx="11.041666666666668" cz="52.56944444444445" r="1.25" angle="0" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="firstWave" out="secondWaveNET" grenades="8" speed="1" y="2" fill="#cc0000" frame="#000000" cx="89.79166666666667" cz="20.069444444444446" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="firstWave" out="secondWaveSET" grenades="8" speed="-1" y="2" fill="#cc0000" frame="#000000" cx="89.79166666666667" cz="52.56944444444445" r="1.25" angle="270" extent="90" />
-  <Timer in="secondWaveNWT" out="secondWaveNW" wait="260" fill="#cc0000" frame="#000000" cx="89.79166666666667" cz="52.56944444444445" r="1.25" angle="270" extent="90" />
-  <Timer in="secondWaveNET" out="secondWaveNE" wait="260" fill="#cc0000" frame="#000000" cx="89.79166666666667" cz="52.56944444444445" r="1.25" angle="270" extent="90" />
-  <Timer in="secondWaveSWT" out="secondWaveSW" wait="260" fill="#cc0000" frame="#000000" cx="89.79166666666667" cz="52.56944444444445" r="1.25" angle="270" extent="90" />
-  <Timer in="secondWaveSET" out="secondWaveSE" wait="260" fill="#cc0000" frame="#000000" cx="89.79166666666667" cz="52.56944444444445" r="1.25" angle="270" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="secondWaveNW" out="thirdWaveNWT" grenades="8" speed="-1" y="2" fill="#660000" frame="#000000" cx="24.791666666666668" cz="26.319444444444446" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="secondWaveSW" out="thirdWaveSWT" grenades="8" speed="1" y="2" fill="#660000" frame="#000000" cx="24.791666666666668" cz="46.31944444444445" r="1.25" angle="270" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="secondWaveNE" out="thirdWaveNET" grenades="8" speed="1" y="2" fill="#660000" frame="#000000" cx="74.79166666666667" cz="26.319444444444446" r="1.25" angle="90" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="secondWaveSE" out="thirdWaveSET" grenades="8" speed="-1" y="2" fill="#660000" frame="#000000" cx="74.79166666666667" cz="46.31944444444445" r="1.25" angle="0" extent="90" />
-  <Timer in="thirdWaveNWT" out="thirdWaveNW" wait="320" fill="#660000" frame="#000000" cx="74.79166666666667" cz="46.31944444444445" r="1.25" angle="0" extent="90" />
-  <Timer in="thirdWaveNET" out="thirdWaveNE" wait="320" fill="#660000" frame="#000000" cx="74.79166666666667" cz="46.31944444444445" r="1.25" angle="0" extent="90" />
-  <Timer in="thirdWaveSWT" out="thirdWaveSW" wait="320" fill="#660000" frame="#000000" cx="74.79166666666667" cz="46.31944444444445" r="1.25" angle="0" extent="90" />
-  <Timer in="thirdWaveSET" out="thirdWaveSE" wait="320" fill="#660000" frame="#000000" cx="74.79166666666667" cz="46.31944444444445" r="1.25" angle="0" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="thirdWaveNW" out="thirdWaveNWT" grenades="8" speed="-1" y="2" fill="#006600" frame="#000000" cx="39.79166666666667" cz="31.319444444444443" r="1.25" angle="270" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="thirdWaveSW" out="thirdWaveSWT" grenades="8" speed="1" y="2" fill="#006600" frame="#000000" cx="39.79166666666667" cz="41.31944444444444" r="1.25" angle="180" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="thirdWaveNE" out="thirdWaveNET" grenades="8" speed="1" y="2" fill="#006600" frame="#000000" cx="61.04166666666667" cz="31.319444444444443" r="1.25" angle="0" extent="90" />
-  <Goody shape="bspGrenade" status="false" start="thirdWaveSE" out="thirdWaveSET" grenades="8" speed="-1" y="2" fill="#006600" frame="#000000" cx="61.04166666666667" cz="41.31944444444444" r="1.25" angle="90" extent="90" />
+  <Wall fill="#000099" frame="#000000" x="84.79166666666667" z="36.31944444444445" w="2.5" d="20" h="0" />
+  <Wall fill="#000099" frame="#000000" x="16.041666666666668" z="36.31944444444445" w="2.5" d="20" h="0" />
+  <Goody shape="bspGrenade" status="false" start="firstWave" out="secondWaveNWT" grenades="8" speed="-1" y="2" fill="#cc0000" frame="#000000" cx="11.041666666666668" cz="20.069444444444446" angle="135" />
+  <Goody shape="bspGrenade" status="false" start="firstWave" out="secondWaveSWT" grenades="8" speed="1" y="2" fill="#cc0000" frame="#000000" cx="11.041666666666668" cz="52.56944444444445" angle="45" />
+  <Goody shape="bspGrenade" status="false" start="firstWave" out="secondWaveNET" grenades="8" speed="1" y="2" fill="#cc0000" frame="#000000" cx="89.79166666666667" cz="20.069444444444446" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="firstWave" out="secondWaveSET" grenades="8" speed="-1" y="2" fill="#cc0000" frame="#000000" cx="89.79166666666667" cz="52.56944444444445" angle="315" />
+  <Timer in="secondWaveNWT" out="secondWaveNW" wait="260" />
+  <Timer in="secondWaveNET" out="secondWaveNE" wait="260" />
+  <Timer in="secondWaveSWT" out="secondWaveSW" wait="260" />
+  <Timer in="secondWaveSET" out="secondWaveSE" wait="260" />
+  <Goody shape="bspGrenade" status="false" start="secondWaveNW" out="thirdWaveNWT" grenades="8" speed="-1" y="2" fill="#660000" frame="#000000" cx="24.791666666666668" cz="26.319444444444446" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="secondWaveSW" out="thirdWaveSWT" grenades="8" speed="1" y="2" fill="#660000" frame="#000000" cx="24.791666666666668" cz="46.31944444444445" angle="315" />
+  <Goody shape="bspGrenade" status="false" start="secondWaveNE" out="thirdWaveNET" grenades="8" speed="1" y="2" fill="#660000" frame="#000000" cx="74.79166666666667" cz="26.319444444444446" angle="135" />
+  <Goody shape="bspGrenade" status="false" start="secondWaveSE" out="thirdWaveSET" grenades="8" speed="-1" y="2" fill="#660000" frame="#000000" cx="74.79166666666667" cz="46.31944444444445" angle="45" />
+  <Timer in="thirdWaveNWT" out="thirdWaveNW" wait="320" />
+  <Timer in="thirdWaveNET" out="thirdWaveNE" wait="320" />
+  <Timer in="thirdWaveSWT" out="thirdWaveSW" wait="320" />
+  <Timer in="thirdWaveSET" out="thirdWaveSE" wait="320" />
+  <Goody shape="bspGrenade" status="false" start="thirdWaveNW" out="thirdWaveNWT" grenades="8" speed="-1" y="2" fill="#006600" frame="#000000" cx="39.79166666666667" cz="31.319444444444443" angle="315" />
+  <Goody shape="bspGrenade" status="false" start="thirdWaveSW" out="thirdWaveSWT" grenades="8" speed="1" y="2" fill="#006600" frame="#000000" cx="39.79166666666667" cz="41.31944444444444" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="thirdWaveNE" out="thirdWaveNET" grenades="8" speed="1" y="2" fill="#006600" frame="#000000" cx="61.04166666666667" cz="31.319444444444443" angle="45" />
+  <Goody shape="bspGrenade" status="false" start="thirdWaveSE" out="thirdWaveSET" grenades="8" speed="-1" y="2" fill="#006600" frame="#000000" cx="61.04166666666667" cz="41.31944444444444" angle="135" />
   <set wallHeight="0.01" />
-  <Wall fill="#6f9d62" frame="#000000" x="9.166666666666668" z="18.194444444444446" w="3.75" d="3.75" h="0" />
-  <Wall fill="#669966" frame="#000000" x="9.166666666666668" z="50.69444444444445" w="3.75" d="3.75" h="0" />
-  <Wall fill="#7ea97e" frame="#000000" x="87.91666666666667" z="50.69444444444445" w="3.75" d="3.75" h="0" />
-  <Wall fill="#669966" frame="#000000" x="87.91666666666667" z="18.194444444444446" w="3.75" d="3.75" h="0" />
-  <WallDoor midYaw="45" fill="#7ea97e" frame="#000000" r="1.25" cx="61.04166666666667" cz="41.31944444444444" angle="90" extent="90" x="37.91666666666667" z="29.444444444444446" w="3.75" d="3.75" h="0" />
-  <WallDoor midYaw="-45" fill="#578357" frame="#000000" r="1.25" cx="61.04166666666667" cz="41.31944444444444" angle="90" extent="90" x="37.91666666666667" z="39.44444444444444" w="3.75" d="3.75" h="0" />
-  <WallDoor midYaw="-22.5" fill="#81ab81" frame="#000000" r="1.25" cx="61.04166666666667" cz="41.31944444444444" angle="90" extent="90" x="22.916666666666668" z="44.44444444444444" w="3.75" d="3.75" h="0" />
-  <WallDoor midYaw="22.5" fill="#5da55a" frame="#000000" r="1.25" cx="61.04166666666667" cz="41.31944444444444" angle="90" extent="90" x="22.916666666666668" z="24.444444444444446" w="3.75" d="3.75" h="0" />
-  <WallDoor midYaw="45" fill="#75a375" frame="#000000" r="1.25" cx="61.04166666666667" cz="41.31944444444444" angle="90" extent="90" x="59.16666666666667" z="39.44444444444444" w="3.75" d="3.75" h="0" />
-  <WallDoor midYaw="-45" fill="#658960" frame="#000000" r="1.25" cx="61.04166666666667" cz="41.31944444444444" angle="90" extent="90" x="59.16666666666667" z="29.444444444444446" w="3.75" d="3.75" h="0" />
-  <WallDoor midYaw="-22.5" fill="#81ad77" frame="#000000" r="1.25" cx="61.04166666666667" cz="41.31944444444444" angle="90" extent="90" x="72.91666666666667" z="24.444444444444446" w="3.75" d="3.75" h="0" />
-  <WallDoor midYaw="22.5" fill="#336633" frame="#000000" r="1.25" cx="61.04166666666667" cz="41.31944444444444" angle="90" extent="90" x="72.91666666666667" z="44.44444444444444" w="3.75" d="3.75" h="0" />
+  <Wall fill="#6f9d62" frame="#000000" x="11.041666666666668" z="20.069444444444446" w="3.75" d="3.75" h="0" />
+  <Wall fill="#669966" frame="#000000" x="11.041666666666668" z="52.56944444444445" w="3.75" d="3.75" h="0" />
+  <Wall fill="#7ea97e" frame="#000000" x="89.79166666666667" z="52.56944444444445" w="3.75" d="3.75" h="0" />
+  <Wall fill="#669966" frame="#000000" x="89.79166666666667" z="20.069444444444446" w="3.75" d="3.75" h="0" />
+  <WallDoor midYaw="45" fill="#7ea97e" frame="#000000" x="39.79166666666667" z="31.319444444444443" w="3.75" d="3.75" h="0" />
+  <WallDoor midYaw="-45" fill="#578357" frame="#000000" x="39.79166666666667" z="41.31944444444444" w="3.75" d="3.75" h="0" />
+  <WallDoor midYaw="-22.5" fill="#81ab81" frame="#000000" x="24.791666666666668" z="46.31944444444444" w="3.75" d="3.75" h="0" />
+  <WallDoor midYaw="22.5" fill="#5da55a" frame="#000000" x="24.791666666666668" z="26.319444444444446" w="3.75" d="3.75" h="0" />
+  <WallDoor midYaw="45" fill="#75a375" frame="#000000" x="61.04166666666667" z="41.31944444444444" w="3.75" d="3.75" h="0" />
+  <WallDoor midYaw="-45" fill="#658960" frame="#000000" x="61.04166666666667" z="31.319444444444443" w="3.75" d="3.75" h="0" />
+  <WallDoor midYaw="-22.5" fill="#81ad77" frame="#000000" x="74.79166666666667" z="26.319444444444446" w="3.75" d="3.75" h="0" />
+  <WallDoor midYaw="22.5" fill="#336633" frame="#000000" x="74.79166666666667" z="46.31944444444444" w="3.75" d="3.75" h="0" />
   <unique vars="mBubble" />
-  <Teleporter shape="0" status="true" activeRange="2000" deadRange="15 * 5" group="mBubble" y="30" fill="#ffcc00" frame="#000000" cx="50.41666666666667" cz="36.31944444444444" r="1.25" angle="90" extent="180" />
-  <Teleporter shape="0" y="21" group="mBubble" fill="#cc6666" frame="#000000" cx="50.41666666666667" cz="36.31944444444444" r="1.25" angle="270" extent="180" />
-  <set designer="&quot;Christopher Tate &lt;ctate@world.std.com&gt;&quot;" />
+  <Teleporter shape="0" status="true" activeRange="2000" deadRange="15 * 5" group="mBubble" y="30" fill="#ffcc00" frame="#000000" cx="50.41666666666667" cz="36.31944444444444" angle="180" />
+  <Teleporter shape="0" y="21" group="mBubble" fill="#cc6666" frame="#000000" cx="50.41666666666667" cz="36.31944444444444" angle="0" />
+  <set designer="Christopher Tate &lt;ctate@world.std.com&gt;" />
 </map>

@@ -638,18 +638,18 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
                 stance = MINHEADHEIGHT;
         }
 
+        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
+            speed[1] >>= 1;
+            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
+            jumpFlag = true;
+        }
+
         if (TESTFUNC(kfuJump, ft->down)) {
             crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
         } else if (TESTFUNC(kfuJump, ft->held)) {
             crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
         } else {
             crouch >>= 1;
-        }
-
-        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
-            speed[1] >>= 1;
-            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
-            jumpFlag = true;
         }
     }
 }
@@ -699,10 +699,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
-        viewPortPart->usesPrivateHither = true;
-        // set magic value to turn on backface culling
-        // for this part (so we can see through it with the camera)
-        viewPortPart->hither = FIX3(101);
+        viewPortPart->userFlags |= CBSPUserFlags::kCullBackfaces;
         viewPortPart->ReplaceColor(kMarkerColor, longTeamColor);
 
         proximityRadius = viewPortPart->enclosureRadius << 2;

@@ -22,7 +22,7 @@ public:
     virtual void Render(CViewParameters *theView) {};
     virtual void Dispose() {};
     virtual void DisposeParts() {};
-    virtual void OverheadPoint(Fixed *pt) {};
+    virtual void OverheadPoint(Fixed *pt, Fixed *extent) {};
 };
 
 class CBSPWorldImpl : public CBSPWorld {
@@ -53,5 +53,5 @@ public:
     virtual CBSPPart *GetIndPart(short ind);
     virtual short GetPartCount();
 
-    virtual void OverheadPoint(Fixed *pt);
+    virtual void OverheadPoint(Fixed *pt, Fixed *extent);
 };

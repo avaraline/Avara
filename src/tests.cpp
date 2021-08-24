@@ -152,6 +152,11 @@ public:
     TestGame(int frameTime) : CAvaraGame(frameTime) {}
     virtual CNetManager* CreateNetManager() { return new TestNetManager(); }
     virtual CSoundHub* CreateSoundHub() { TestSoundHub *t = new TestSoundHub(); t->ISoundHub(64,64); return t;}
+    bool GameTick() {
+        // force tick to happen by resetting nextScheduledFrame
+        nextScheduledFrame = 0;
+        return CAvaraGame::GameTick();
+    }
 };
 
 class HectorTestScenario {

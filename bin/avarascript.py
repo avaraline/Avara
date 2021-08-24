@@ -187,7 +187,7 @@ class String(ScriptObject):
         self.text = tokens[0].strip()
 
     def __str__(self):
-        return '"{}"'.format(self.text.replace('"', '""'))
+        return self.text.replace('"', '""')
 
 
 class Number(ScriptObject):
@@ -209,10 +209,18 @@ class Reference(ScriptObject):
 class Declaration(ScriptObject):
     def __init__(self, tokens):
         self.name = str(tokens[0]).replace("[", ".").replace("]", "")
+        if self.name == "ambient":
+            self.name = "ambient.i"
         self.expr = tokens[1:]
 
     @property
     def value(self):
+        if (
+            self.name in ("designer", "information", "text")
+            and len(self.expr) == 1
+            and not isinstance(self.expr[0], String)
+        ):
+            return "$" + str(self.expr[0])
         parts = []
         for t in self.expr:
             parts.append(str(t))
@@ -291,7 +299,8 @@ class DeclarationGroup(ScriptObject):
     def element(self, context):
         # Only include declaration attributes which would have been processed.
         fake_context = {}
-        attrs = {d.name: d.value for d in self.declarations if d.process(fake_context)}
+        attrs = {d.name if d.name != "ambient" else "ambient.i": d.value
+                 for d in self.declarations if d.process(fake_context)}
         return Element("set", **attrs)
 
     def process(self, context):
