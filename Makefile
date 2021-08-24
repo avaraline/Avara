@@ -26,7 +26,7 @@ LDFLAGS := ${LDFLAGS}
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
-	SRCS += $(shell find src/vendor/miniupnpc -maxdepth 1 -name '*.c')
+	SRCS += $(shell find vendor/miniupnpc -maxdepth 1 -name '*.c')
 	INCFLAGS += -Ivendor/miniupnpc
 ifneq ("$(wildcard $(HOME)/Library/Frameworks/SDL2.framework)", "")
 	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
@@ -51,7 +51,7 @@ else
 	CPPFLAGS += $(shell ${PKG_CONFIG} --cflags-only-I sdl2)
 	CPPFLAGS += -fPIC
 	POST_PROCESS ?= ls -lh
-	SRCS += $(shell find src/vendor/miniupnpc -maxdepth 1 -name '*.c')
+	SRCS += $(shell find vendor/miniupnpc -maxdepth 1 -name '*.c')
 	INCFLAGS += -Ivendor/miniupnpc
 endif
 
