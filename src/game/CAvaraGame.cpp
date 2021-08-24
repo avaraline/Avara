@@ -1150,7 +1150,7 @@ void CAvaraGame::SetFrameTime(long ft) {
     this->frameTime = ft;
     this->latencyFrameTime = ft;
     this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
-    gApplication->Set(kFrameTimeTag, frameTime);
+    if (gApplication) gApplication->Set(kFrameTimeTag, frameTime);
 }
 
 void CAvaraGame::IncrementFrame(bool firstFrame) {

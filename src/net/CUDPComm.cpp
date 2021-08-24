@@ -1944,10 +1944,10 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            // add in 1.3*stdev (~90% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // add in 2*stdev (~99% prob) but max it at CLASSICFRAMETIME (don't add more than 1 to LT)
             // note: is this really a poisson distribution?  if so, what's the proper equation?
-            float stdev = 1.3*sqrt(conn->varRoundTripTime);
-            float rtt = conn->meanRoundTripTime + std::min(stdev, float(CLASSICFRAMETIME / MSEC_PER_GET_CLOCK));
+            float stdev = 2.0*sqrt(conn->varRoundTripTime);
+            float rtt = conn->meanRoundTripTime + std::min(stdev, float(2*CLASSICFRAMETIME / MSEC_PER_GET_CLOCK));
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
