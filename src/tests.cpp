@@ -648,7 +648,7 @@ TEST(HECTOR, BoostedEnergyRegen) {
 }
 
 TEST(HECTOR, PlasmaRegen) {
-    int chargeSteps = 29;
+    int chargeSteps = 30;
     tuple<vector<Fixed>, vector<Fixed>> at64ms = HectorPlasmaRegen(chargeSteps, false, 64);
     tuple<vector<Fixed>, vector<Fixed>> at32ms = HectorPlasmaRegen(chargeSteps, false, 32);
     tuple<vector<Fixed>, vector<Fixed>> at16ms = HectorPlasmaRegen(chargeSteps, false, 16);
@@ -670,13 +670,21 @@ TEST(HECTOR, PlasmaRegen) {
     ASSERT_EQ(get<1>(at16ms)[0], 0) << "starting plasma energy value 2 incorrect at 16ms";
     ASSERT_EQ(get<0>(at8ms)[0], 0) << "starting plasma energy value 1 incorrect at 8ms";
     ASSERT_EQ(get<1>(at8ms)[0], 0) << "starting plasma energy value 2 incorrect at 8ms";
-    ASSERT_LT(get<0>(at64ms)[chargeSteps - 2], 52428) << "plasma 1 recharges too quickly at 64ms";
-    ASSERT_LT(get<1>(at64ms)[chargeSteps - 2], 52428) << "plasma 2 recharges too quickly at 64ms";
-    ASSERT_EQ(get<0>(at64ms)[chargeSteps - 1], 52428) << "plasma 1 recharges too slowly at 64ms";
-    ASSERT_EQ(get<1>(at64ms)[chargeSteps - 1], 52428) << "plasma 2 recharges too slowly at 64ms";
+    ASSERT_LT(get<0>(at64ms)[chargeSteps - 3], 52428) << "plasma 1 recharges too quickly at 64ms";
+    ASSERT_LT(get<1>(at64ms)[chargeSteps - 3], 52428) << "plasma 2 recharges too quickly at 64ms";
+    ASSERT_EQ(get<0>(at64ms)[chargeSteps - 2], 52428) << "plasma 1 recharges too slowly at 64ms";
+    ASSERT_EQ(get<1>(at64ms)[chargeSteps - 2], 52428) << "plasma 2 recharges too slowly at 64ms";
+    ASSERT_EQ(get<0>(at32ms)[chargeSteps - 2], 52428) << "plasma 1 recharges too slowly at 32ms";
+    ASSERT_EQ(get<1>(at32ms)[chargeSteps - 2], 52428) << "plasma 2 recharges too slowly at 32ms";
+    ASSERT_EQ(get<0>(at16ms)[chargeSteps - 1], 52428) << "plasma 1 recharges too slowly at 16ms";
+    ASSERT_EQ(get<1>(at16ms)[chargeSteps - 1], 52428) << "plasma 2 recharges too slowly at 16ms";
+    ASSERT_EQ(get<0>(at8ms)[chargeSteps - 1], 52428) << "plasma 1 recharges too slowly at 8ms";
+    ASSERT_EQ(get<1>(at8ms)[chargeSteps - 1], 52428) << "plasma 2 recharges too slowly at 8ms";
 
     for (int i = 0; i < chargeSteps; i++) {
         // cout << get<0>(at64ms)[i] << "\t" << get<1>(at64ms)[i] << endl;
+        // cout << get<0>(at64ms)[i] << "\t" << get<0>(at32ms)[i] << "\t"
+        //      << get<0>(at16ms)[i] << "\t" << get<0>(at8ms)[i] << endl;
         ASSERT_EQ(get<0>(at64ms)[i], get<1>(at64ms)[i]) << "plasma energy values not equal at 64ms";
         ASSERT_EQ(get<0>(at32ms)[i], get<1>(at32ms)[i]) << "plasma energy values not equal at 32ms";
         ASSERT_EQ(get<0>(at16ms)[i], get<1>(at16ms)[i]) << "plasma energy values not equal at 16ms";
