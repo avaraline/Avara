@@ -1122,7 +1122,8 @@ void CAvaraGame::AdjustFrameTime() {
         3.75,  //  8  240           1920         4    <-- trying to recover!  If it were a horse, I'd shoot it.
     };
 
-    latencyFrameTime = long(frameTime * frameTimeMultiplier[int(latencyTolerance)]);
+    // latencyFrameTime = long(frameTime * frameTimeMultiplier[int(latencyTolerance)]);
+    latencyFrameTime = frameTime;
     SDL_Log("*** setting latencyFrameTime = %ld\n", latencyFrameTime);
 }
 
