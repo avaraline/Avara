@@ -23,7 +23,7 @@
 #define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
 
 #define RTTSMOOTHFACTOR_UP 80
-#define RTTSMOOTHFACTOR_DOWN 160
+#define RTTSMOOTHFACTOR_DOWN 200
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 4
 
@@ -365,11 +365,6 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             float difference = roundTrip - meanRoundTripTime;
             // quicker to move up on latency spikes, slower to move down
             float alpha = itsOwner->frameTimeScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
-
-            if (thePacket->sendCount > 1) {
-                // Don't ignore resent packets but de-weight them pretty heavily.
-                alpha /= (thePacket->sendCount*thePacket->sendCount);
-            }
 
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
