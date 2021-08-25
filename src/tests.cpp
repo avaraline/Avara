@@ -17,6 +17,7 @@
 
 #include "CUDPConnection.h"
 
+#include <tuple>
 #include <iostream>
 using namespace std;
 
@@ -453,6 +454,28 @@ vector<Fixed> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
     return shieldValues;
 }
 
+tuple<vector<Fixed>, vector<Fixed>> HectorPlasmaRegen(int steps, bool useBoost, int frameTime) {
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
+    vector<Fixed> chargeValues, chargeValues2;
+    int ticksPerStep = GetTicksPerStep(frameTime);
+
+    scenario.hector->gunEnergy[0] = 0;
+    scenario.hector->gunEnergy[1] = 0;
+    if (useBoost) {
+        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+    }
+
+    for (int i = 0; i < steps; i++) {
+        chargeValues.push_back(scenario.hector->gunEnergy[0]);
+        chargeValues2.push_back(scenario.hector->gunEnergy[1]);
+        for (int k = 0; k < ticksPerStep; k++) {
+            scenario.game->GameTick();
+        }
+    }
+
+    return std::tuple<vector<Fixed>, vector<Fixed>>{chargeValues, chargeValues2};
+}
+
 TEST(HECTOR, Gravity) {
     int dropSteps = 50;
     vector<Fixed> at64ms = DropHector(dropSteps, FIX(200), 64);
@@ -621,6 +644,47 @@ TEST(HECTOR, BoostedEnergyRegen) {
         ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.045) << "32ms not close enough after " << i << " ticks.";
         ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.045) << "16ms not close enough after " << i << " ticks.";
         ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.045) << "8ms not close enough after " << i << " ticks.";
+    }
+}
+
+TEST(HECTOR, PlasmaRegen) {
+    int chargeSteps = 29;
+    tuple<vector<Fixed>, vector<Fixed>> at64ms = HectorPlasmaRegen(chargeSteps, false, 64);
+    tuple<vector<Fixed>, vector<Fixed>> at32ms = HectorPlasmaRegen(chargeSteps, false, 32);
+    tuple<vector<Fixed>, vector<Fixed>> at16ms = HectorPlasmaRegen(chargeSteps, false, 16);
+    tuple<vector<Fixed>, vector<Fixed>> at8ms = HectorPlasmaRegen(chargeSteps, false, 8);
+
+    ASSERT_EQ(get<0>(at64ms).size(), chargeSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(get<1>(at64ms).size(), chargeSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(get<0>(at32ms).size(), chargeSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(get<1>(at32ms).size(), chargeSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(get<0>(at16ms).size(), chargeSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(get<1>(at16ms).size(), chargeSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(get<0>(at8ms).size(), chargeSteps) << "not enough steps recorded at 8ms";
+    ASSERT_EQ(get<1>(at8ms).size(), chargeSteps) << "not enough steps recorded at 8ms";
+    ASSERT_EQ(get<0>(at64ms)[0], 0) << "starting plasma energy value 1 incorrect at 64ms";
+    ASSERT_EQ(get<1>(at64ms)[0], 0) << "starting plasma energy value 2 incorrect at 64ms";
+    ASSERT_EQ(get<0>(at32ms)[0], 0) << "starting plasma energy value 1 incorrect at 32ms";
+    ASSERT_EQ(get<1>(at32ms)[0], 0) << "starting plasma energy value 2 incorrect at 32ms";
+    ASSERT_EQ(get<0>(at16ms)[0], 0) << "starting plasma energy value 1 incorrect at 16ms";
+    ASSERT_EQ(get<1>(at16ms)[0], 0) << "starting plasma energy value 2 incorrect at 16ms";
+    ASSERT_EQ(get<0>(at8ms)[0], 0) << "starting plasma energy value 1 incorrect at 8ms";
+    ASSERT_EQ(get<1>(at8ms)[0], 0) << "starting plasma energy value 2 incorrect at 8ms";
+    ASSERT_LT(get<0>(at64ms)[chargeSteps - 2], 52428) << "plasma 1 recharges too quickly at 64ms";
+    ASSERT_LT(get<1>(at64ms)[chargeSteps - 2], 52428) << "plasma 2 recharges too quickly at 64ms";
+    ASSERT_EQ(get<0>(at64ms)[chargeSteps - 1], 52428) << "plasma 1 recharges too slowly at 64ms";
+    ASSERT_EQ(get<1>(at64ms)[chargeSteps - 1], 52428) << "plasma 2 recharges too slowly at 64ms";
+
+    for (int i = 0; i < chargeSteps; i++) {
+        // cout << get<0>(at64ms)[i] << "\t" << get<1>(at64ms)[i] << endl;
+        ASSERT_EQ(get<0>(at64ms)[i], get<1>(at64ms)[i]) << "plasma energy values not equal at 64ms";
+        ASSERT_EQ(get<0>(at32ms)[i], get<1>(at32ms)[i]) << "plasma energy values not equal at 32ms";
+        ASSERT_EQ(get<0>(at16ms)[i], get<1>(at16ms)[i]) << "plasma energy values not equal at 16ms";
+        ASSERT_EQ(get<0>(at8ms)[i], get<1>(at8ms)[i]) << "plasma energy values not equal at 8ms";
+
+        ASSERT_NEAR(get<0>(at32ms)[i], get<0>(at64ms)[i], get<0>(at64ms)[i] * 0.02) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(get<0>(at16ms)[i], get<0>(at64ms)[i], get<0>(at64ms)[i] * 0.02) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(get<0>(at8ms)[i], get<0>(at64ms)[i], get<0>(at64ms)[i] * 0.02) << "8ms not close enough after " << i << " ticks.";
     }
 }
 
