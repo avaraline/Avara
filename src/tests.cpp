@@ -17,7 +17,6 @@
 
 #include "CUDPConnection.h"
 
-#include <tuple>
 #include <iostream>
 using namespace std;
 
@@ -192,6 +191,21 @@ public:
         hector->location[3] = FIX1;
         game->AddActor(hector);
         game->GameStart();
+    }
+};
+
+class HectorEnergyReadings {
+public:
+    Fixed energy;
+    Fixed shields;
+    Fixed gunEnergy1;
+    Fixed gunEnergy2;
+
+    HectorEnergyReadings(CWalkerActor *hector) {
+        energy = hector->energy;
+        shields = hector->shields;
+        gunEnergy1 = hector->gunEnergy[0];
+        gunEnergy2 = hector->gunEnergy[1];
     }
 };
 
@@ -414,9 +428,9 @@ vector<Fixed> TurnHector(int steps, int frameTime) {
     return headings;
 }
 
-vector<Fixed> HectorEnergyRegen(int steps, bool useBoost, int frameTime) {
+vector<HectorEnergyReadings> HectorEnergyRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    vector<Fixed> energyValues;
+    vector<HectorEnergyReadings> energyValues;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->energy = scenario.hector->maxEnergy * 0.5;
@@ -425,7 +439,8 @@ vector<Fixed> HectorEnergyRegen(int steps, bool useBoost, int frameTime) {
     }
 
     for (int i = 0; i < steps; i++) {
-        energyValues.push_back(scenario.hector->energy);
+        HectorEnergyReadings current(scenario.hector);
+        energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
         }
@@ -434,29 +449,9 @@ vector<Fixed> HectorEnergyRegen(int steps, bool useBoost, int frameTime) {
     return energyValues;
 }
 
-vector<Fixed> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
+vector<HectorEnergyReadings> HectorPlasmaRegen(int steps, bool useBoost, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
-    vector<Fixed> shieldValues;
-    int ticksPerStep = GetTicksPerStep(frameTime);
-
-    scenario.hector->shields = scenario.hector->maxShields * 0.5;
-    if (useBoost) {
-        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
-    }
-
-    for (int i = 0; i < steps; i++) {
-        shieldValues.push_back(scenario.hector->shields);
-        for (int k = 0; k < ticksPerStep; k++) {
-            scenario.game->GameTick();
-        }
-    }
-
-    return shieldValues;
-}
-
-tuple<vector<Fixed>, vector<Fixed>> HectorPlasmaRegen(int steps, bool useBoost, int frameTime) {
-    HectorTestScenario scenario(frameTime, 0, 0, 0);
-    vector<Fixed> chargeValues, chargeValues2;
+    vector<HectorEnergyReadings> energyValues;
     int ticksPerStep = GetTicksPerStep(frameTime);
 
     scenario.hector->gunEnergy[0] = 0;
@@ -466,14 +461,59 @@ tuple<vector<Fixed>, vector<Fixed>> HectorPlasmaRegen(int steps, bool useBoost, 
     }
 
     for (int i = 0; i < steps; i++) {
-        chargeValues.push_back(scenario.hector->gunEnergy[0]);
-        chargeValues2.push_back(scenario.hector->gunEnergy[1]);
+        HectorEnergyReadings current(scenario.hector);
+        energyValues.push_back(current);
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
         }
     }
 
-    return std::tuple<vector<Fixed>, vector<Fixed>>{chargeValues, chargeValues2};
+    return energyValues;
+}
+
+vector<HectorEnergyReadings> HectorShieldRegen(int steps, bool useBoost, int frameTime) {
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
+    vector<HectorEnergyReadings> energyValues;
+    int ticksPerStep = GetTicksPerStep(frameTime);
+
+    scenario.hector->shields = scenario.hector->maxShields * 0.5;
+    if (useBoost) {
+        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+    }
+
+    for (int i = 0; i < steps; i++) {
+        HectorEnergyReadings current(scenario.hector);
+        energyValues.push_back(current);
+        for (int k = 0; k < ticksPerStep; k++) {
+            scenario.game->GameTick();
+        }
+    }
+
+    return energyValues;
+}
+
+vector<HectorEnergyReadings> HectorComplexRegen(int steps, bool useBoost, int frameTime) {
+    HectorTestScenario scenario(frameTime, 0, 0, 0);
+    vector<HectorEnergyReadings> energyValues;
+    int ticksPerStep = GetTicksPerStep(frameTime);
+
+    scenario.hector->energy = scenario.hector->maxEnergy * 0.5;
+    scenario.hector->shields = scenario.hector->maxShields * 0.2;
+    scenario.hector->gunEnergy[0] = scenario.hector->gunEnergy[0] * 0.3;
+    scenario.hector->gunEnergy[1] = scenario.hector->gunEnergy[1] * 0.1;
+    if (useBoost) {
+        scenario.hector->itsManager->GetFunctions()->down = (1 << kfuBoostEnergy);
+    }
+
+    for (int i = 0; i < steps; i++) {
+        HectorEnergyReadings current(scenario.hector);
+        energyValues.push_back(current);
+        for (int k = 0; k < ticksPerStep; k++) {
+            scenario.game->GameTick();
+        }
+    }
+
+    return energyValues;
 }
 
 TEST(HECTOR, Gravity) {
@@ -591,170 +631,408 @@ TEST(HECTOR, Jump) {
 
 TEST(HECTOR, EnergyRegen) {
     int regenSteps = 85;
-    vector<Fixed> at64ms = HectorEnergyRegen(regenSteps, false, 64);
-    vector<Fixed> at32ms = HectorEnergyRegen(regenSteps, false, 32);
-    vector<Fixed> at16ms = HectorEnergyRegen(regenSteps, false, 16);
-    vector<Fixed> at8ms = HectorEnergyRegen(regenSteps, false, 8);
+    vector<HectorEnergyReadings> at64ms = HectorEnergyRegen(regenSteps, false, 64);
+    vector<HectorEnergyReadings> at32ms = HectorEnergyRegen(regenSteps, false, 32);
+    vector<HectorEnergyReadings> at16ms = HectorEnergyRegen(regenSteps, false, 16);
+    vector<HectorEnergyReadings> at8ms = HectorEnergyRegen(regenSteps, false, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
     ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
-    ASSERT_EQ(at64ms[0], 163840) << "starting energy value incorrect at 64ms";
-    ASSERT_EQ(at32ms[0], 163840) << "starting energy value incorrect at 32ms";
-    ASSERT_EQ(at16ms[0], 163840) << "starting energy value incorrect at 16ms";
-    ASSERT_EQ(at8ms[0], 163840) << "starting energy value incorrect at 8ms";
-    ASSERT_LT(at64ms[regenSteps - 2], 327680) << "energy recharges too quickly at 64ms";
-    ASSERT_EQ(at64ms[regenSteps - 1], 327680) << "energy recharges too slowly at 64ms";
-    ASSERT_EQ(at32ms[regenSteps - 1], 327680) << "energy recharges too slowly at 32ms";
-    ASSERT_EQ(at16ms[regenSteps - 1], 327680) << "energy recharges too slowly at 16ms";
-    ASSERT_EQ(at8ms[regenSteps - 1], 327680) << "energy recharges too slowly at 8ms";
+    ASSERT_EQ(at64ms[0].energy, 163840) << "starting energy value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].energy, 163840) << "starting energy value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].energy, 163840) << "starting energy value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].energy, 163840) << "starting energy value incorrect at 8ms";
+    ASSERT_LT(at64ms[regenSteps - 2].energy, 327680) << "energy recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 64ms";
+    ASSERT_EQ(at32ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 32ms";
+    ASSERT_EQ(at16ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 16ms";
+    ASSERT_EQ(at8ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 8ms";
 
     for (int i = 0; i < regenSteps; i++) {
         // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << "\t" << at8ms[i] << endl;
-        ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.001) << "32ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.001) << "16ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.001) << "8ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at32ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.001) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.001) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.001) << "8ms not close enough after " << i << " ticks.";
+
+        ASSERT_EQ(at64ms[i].shields, 196608) << "64ms shields didn't remain full";
+        ASSERT_EQ(at32ms[i].shields, 196608) << "32ms shields didn't remain full";
+        ASSERT_EQ(at16ms[i].shields, 196608) << "16ms shields didn't remain full";
+        ASSERT_EQ(at8ms[i].shields, 196608) << "8ms shields didn't remain full";
+
+        ASSERT_EQ(at64ms[i].gunEnergy1, 52428) << "64ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at32ms[i].gunEnergy1, 52428) << "32ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at16ms[i].gunEnergy1, 52428) << "16ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at8ms[i].gunEnergy1, 52428) << "8ms plasma energy 1 didn't remain full";
+
+        ASSERT_EQ(at64ms[i].gunEnergy2, 52428) << "64ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at32ms[i].gunEnergy2, 52428) << "32ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at16ms[i].gunEnergy2, 52428) << "16ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at8ms[i].gunEnergy2, 52428) << "8ms plasma energy 2 didn't remain full";
     }
 }
 
 TEST(HECTOR, BoostedEnergyRegen) {
     int regenSteps = 19;
-    vector<Fixed> at64ms = HectorEnergyRegen(regenSteps, true, 64);
-    vector<Fixed> at32ms = HectorEnergyRegen(regenSteps, true, 32);
-    vector<Fixed> at16ms = HectorEnergyRegen(regenSteps, true, 16);
-    vector<Fixed> at8ms = HectorEnergyRegen(regenSteps, true, 8);
+    vector<HectorEnergyReadings> at64ms = HectorEnergyRegen(regenSteps, true, 64);
+    vector<HectorEnergyReadings> at32ms = HectorEnergyRegen(regenSteps, true, 32);
+    vector<HectorEnergyReadings> at16ms = HectorEnergyRegen(regenSteps, true, 16);
+    vector<HectorEnergyReadings> at8ms = HectorEnergyRegen(regenSteps, true, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
     ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
-    ASSERT_EQ(at64ms[0], 163840) << "starting energy value incorrect at 64ms";
-    ASSERT_EQ(at32ms[0], 163840) << "starting energy value incorrect at 32ms";
-    ASSERT_EQ(at16ms[0], 163840) << "starting energy value incorrect at 16ms";
-    ASSERT_EQ(at8ms[0], 163840) << "starting energy value incorrect at 8ms";
-    ASSERT_LT(at64ms[regenSteps - 2], 327680) << "energy recharges too quickly at 64ms";
-    ASSERT_EQ(at64ms[regenSteps - 1], 327680) << "energy recharges too slowly at 64ms";
-    ASSERT_EQ(at32ms[regenSteps - 1], 327680) << "energy recharges too slowly at 32ms";
-    ASSERT_EQ(at16ms[regenSteps - 1], 327680) << "energy recharges too slowly at 16ms";
-    ASSERT_EQ(at8ms[regenSteps - 1], 327680) << "energy recharges too slowly at 8ms";
+    ASSERT_EQ(at64ms[0].energy, 163840) << "starting energy value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].energy, 163840) << "starting energy value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].energy, 163840) << "starting energy value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].energy, 163840) << "starting energy value incorrect at 8ms";
+    ASSERT_LT(at64ms[regenSteps - 2].energy, 327680) << "energy recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 64ms";
+    ASSERT_EQ(at32ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 32ms";
+    ASSERT_EQ(at16ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 16ms";
+    ASSERT_EQ(at8ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 8ms";
 
     for (int i = 0; i < regenSteps; i++) {
         // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << "\t" << at8ms[i] << endl;
-        ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.045) << "32ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.045) << "16ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.045) << "8ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at32ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.045) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.045) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.045) << "8ms not close enough after " << i << " ticks.";
+
+        ASSERT_EQ(at64ms[i].shields, 196608) << "64ms shields didn't remain full";
+        ASSERT_EQ(at32ms[i].shields, 196608) << "32ms shields didn't remain full";
+        ASSERT_EQ(at16ms[i].shields, 196608) << "16ms shields didn't remain full";
+        ASSERT_EQ(at8ms[i].shields, 196608) << "8ms shields didn't remain full";
+
+        ASSERT_EQ(at64ms[i].gunEnergy1, 52428) << "64ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at32ms[i].gunEnergy1, 52428) << "32ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at16ms[i].gunEnergy1, 52428) << "16ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at8ms[i].gunEnergy1, 52428) << "8ms plasma energy 1 didn't remain full";
+
+        ASSERT_EQ(at64ms[i].gunEnergy2, 52428) << "64ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at32ms[i].gunEnergy2, 52428) << "32ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at16ms[i].gunEnergy2, 52428) << "16ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at8ms[i].gunEnergy2, 52428) << "8ms plasma energy 2 didn't remain full";
     }
 }
 
 TEST(HECTOR, PlasmaRegen) {
     int chargeSteps = 30;
-    tuple<vector<Fixed>, vector<Fixed>> at64ms = HectorPlasmaRegen(chargeSteps, false, 64);
-    tuple<vector<Fixed>, vector<Fixed>> at32ms = HectorPlasmaRegen(chargeSteps, false, 32);
-    tuple<vector<Fixed>, vector<Fixed>> at16ms = HectorPlasmaRegen(chargeSteps, false, 16);
-    tuple<vector<Fixed>, vector<Fixed>> at8ms = HectorPlasmaRegen(chargeSteps, false, 8);
+    vector<HectorEnergyReadings> at64ms = HectorPlasmaRegen(chargeSteps, false, 64);
+    vector<HectorEnergyReadings> at32ms = HectorPlasmaRegen(chargeSteps, false, 32);
+    vector<HectorEnergyReadings> at16ms = HectorPlasmaRegen(chargeSteps, false, 16);
+    vector<HectorEnergyReadings> at8ms = HectorPlasmaRegen(chargeSteps, false, 8);
 
-    ASSERT_EQ(get<0>(at64ms).size(), chargeSteps) << "not enough steps recorded at 64ms";
-    ASSERT_EQ(get<1>(at64ms).size(), chargeSteps) << "not enough steps recorded at 64ms";
-    ASSERT_EQ(get<0>(at32ms).size(), chargeSteps) << "not enough steps recorded at 32ms";
-    ASSERT_EQ(get<1>(at32ms).size(), chargeSteps) << "not enough steps recorded at 32ms";
-    ASSERT_EQ(get<0>(at16ms).size(), chargeSteps) << "not enough steps recorded at 16ms";
-    ASSERT_EQ(get<1>(at16ms).size(), chargeSteps) << "not enough steps recorded at 16ms";
-    ASSERT_EQ(get<0>(at8ms).size(), chargeSteps) << "not enough steps recorded at 8ms";
-    ASSERT_EQ(get<1>(at8ms).size(), chargeSteps) << "not enough steps recorded at 8ms";
-    ASSERT_EQ(get<0>(at64ms)[0], 0) << "starting plasma energy value 1 incorrect at 64ms";
-    ASSERT_EQ(get<1>(at64ms)[0], 0) << "starting plasma energy value 2 incorrect at 64ms";
-    ASSERT_EQ(get<0>(at32ms)[0], 0) << "starting plasma energy value 1 incorrect at 32ms";
-    ASSERT_EQ(get<1>(at32ms)[0], 0) << "starting plasma energy value 2 incorrect at 32ms";
-    ASSERT_EQ(get<0>(at16ms)[0], 0) << "starting plasma energy value 1 incorrect at 16ms";
-    ASSERT_EQ(get<1>(at16ms)[0], 0) << "starting plasma energy value 2 incorrect at 16ms";
-    ASSERT_EQ(get<0>(at8ms)[0], 0) << "starting plasma energy value 1 incorrect at 8ms";
-    ASSERT_EQ(get<1>(at8ms)[0], 0) << "starting plasma energy value 2 incorrect at 8ms";
-    ASSERT_LT(get<0>(at64ms)[chargeSteps - 3], 52428) << "plasma 1 recharges too quickly at 64ms";
-    ASSERT_LT(get<1>(at64ms)[chargeSteps - 3], 52428) << "plasma 2 recharges too quickly at 64ms";
-    ASSERT_EQ(get<0>(at64ms)[chargeSteps - 2], 52428) << "plasma 1 recharges too slowly at 64ms";
-    ASSERT_EQ(get<1>(at64ms)[chargeSteps - 2], 52428) << "plasma 2 recharges too slowly at 64ms";
-    ASSERT_EQ(get<0>(at32ms)[chargeSteps - 2], 52428) << "plasma 1 recharges too slowly at 32ms";
-    ASSERT_EQ(get<1>(at32ms)[chargeSteps - 2], 52428) << "plasma 2 recharges too slowly at 32ms";
-    ASSERT_EQ(get<0>(at16ms)[chargeSteps - 1], 52428) << "plasma 1 recharges too slowly at 16ms";
-    ASSERT_EQ(get<1>(at16ms)[chargeSteps - 1], 52428) << "plasma 2 recharges too slowly at 16ms";
-    ASSERT_EQ(get<0>(at8ms)[chargeSteps - 1], 52428) << "plasma 1 recharges too slowly at 8ms";
-    ASSERT_EQ(get<1>(at8ms)[chargeSteps - 1], 52428) << "plasma 2 recharges too slowly at 8ms";
+    ASSERT_EQ(at64ms.size(), chargeSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), chargeSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), chargeSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), chargeSteps) << "not enough steps recorded at 8ms";
+
+    ASSERT_EQ(at64ms[0].gunEnergy1, 0) << "starting plasma energy value 1 incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].gunEnergy1, 0) << "starting plasma energy value 1 incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].gunEnergy1, 0) << "starting plasma energy value 1 incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].gunEnergy1, 0) << "starting plasma energy value 1 incorrect at 8ms";
+
+    ASSERT_EQ(at64ms[0].gunEnergy2, 0) << "starting plasma energy value 2 incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].gunEnergy2, 0) << "starting plasma energy value 2 incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].gunEnergy2, 0) << "starting plasma energy value 2 incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].gunEnergy2, 0) << "starting plasma energy value 2 incorrect at 8ms";
+
+    ASSERT_LT(at64ms[chargeSteps - 3].gunEnergy1, 52428) << "plasma 1 recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[chargeSteps - 2].gunEnergy1, 52428) << "plasma 1 recharges too slowly at 64ms";
+    ASSERT_EQ(at32ms[chargeSteps - 2].gunEnergy1, 52428) << "plasma 1 recharges too slowly at 32ms";
+    ASSERT_EQ(at16ms[chargeSteps - 1].gunEnergy1, 52428) << "plasma 1 recharges too slowly at 16ms";
+    ASSERT_EQ(at8ms[chargeSteps - 1].gunEnergy1, 52428) << "plasma 1 recharges too slowly at 8ms";
+
+    ASSERT_LT(at64ms[chargeSteps - 3].gunEnergy2, 52428) << "plasma 2 recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[chargeSteps - 2].gunEnergy2, 52428) << "plasma 2 recharges too slowly at 64ms";
+    ASSERT_EQ(at32ms[chargeSteps - 2].gunEnergy2, 52428) << "plasma 2 recharges too slowly at 32ms";
+    ASSERT_EQ(at16ms[chargeSteps - 1].gunEnergy2, 52428) << "plasma 2 recharges too slowly at 16ms";
+    ASSERT_EQ(at8ms[chargeSteps - 1].gunEnergy2, 52428) << "plasma 2 recharges too slowly at 8ms";
+
+    ASSERT_EQ(at64ms[0].energy, 327680) << "starting energy value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].energy, 327680) << "starting energy value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].energy, 327680) << "starting energy value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].energy, 327680) << "starting energy value incorrect at 8ms";
+    ASSERT_EQ(at64ms[chargeSteps - 1].energy, 267990) << "ending energy value incorrect at 64ms";
 
     for (int i = 0; i < chargeSteps; i++) {
-        // cout << get<0>(at64ms)[i] << "\t" << get<1>(at64ms)[i] << endl;
-        // cout << get<0>(at64ms)[i] << "\t" << get<0>(at32ms)[i] << "\t"
-        //      << get<0>(at16ms)[i] << "\t" << get<0>(at8ms)[i] << endl;
-        ASSERT_EQ(get<0>(at64ms)[i], get<1>(at64ms)[i]) << "plasma energy values not equal at 64ms";
-        ASSERT_EQ(get<0>(at32ms)[i], get<1>(at32ms)[i]) << "plasma energy values not equal at 32ms";
-        ASSERT_EQ(get<0>(at16ms)[i], get<1>(at16ms)[i]) << "plasma energy values not equal at 16ms";
-        ASSERT_EQ(get<0>(at8ms)[i], get<1>(at8ms)[i]) << "plasma energy values not equal at 8ms";
+        // cout << at64ms[i].gunEnergy1 << "\t" << at64ms[i].gunEnergy2 << endl;
+        // cout << at64ms[i].gunEnergy1 << "\t" << at32ms[i].gunEnergy1 << "\t"
+        //      << at16ms[i].gunEnergy1 << "\t" << at8ms[i].gunEnergy1 << endl;
+        ASSERT_EQ(at64ms[i].gunEnergy1, at64ms[i].gunEnergy2) << "plasma energy values not equal at 64ms";
+        ASSERT_EQ(at32ms[i].gunEnergy1, at32ms[i].gunEnergy2) << "plasma energy values not equal at 32ms";
+        ASSERT_EQ(at16ms[i].gunEnergy1, at16ms[i].gunEnergy2) << "plasma energy values not equal at 16ms";
+        ASSERT_EQ(at8ms[i].gunEnergy1, at8ms[i].gunEnergy2) << "plasma energy values not equal at 8ms";
 
-        ASSERT_NEAR(get<0>(at32ms)[i], get<0>(at64ms)[i], get<0>(at64ms)[i] * 0.02) << "32ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(get<0>(at16ms)[i], get<0>(at64ms)[i], get<0>(at64ms)[i] * 0.02) << "16ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(get<0>(at8ms)[i], get<0>(at64ms)[i], get<0>(at64ms)[i] * 0.02) << "8ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at32ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.02) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.02) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.02) << "8ms not close enough after " << i << " ticks.";
+
+        ASSERT_EQ(at64ms[i].shields, 196608) << "64ms shields didn't remain full";
+        ASSERT_EQ(at32ms[i].shields, 196608) << "32ms shields didn't remain full";
+        ASSERT_EQ(at16ms[i].shields, 196608) << "16ms shields didn't remain full";
+        ASSERT_EQ(at8ms[i].shields, 196608) << "8ms shields didn't remain full";
+
+        ASSERT_NEAR(at32ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.004) << "32ms energy not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.004) << "16ms energy not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.004) << "8ms energy not close enough after " << i << " ticks.";
+    }
+}
+
+TEST(HECTOR, BoostedPlasmaRegen) {
+    int chargeSteps = 27;
+    vector<HectorEnergyReadings> at64ms = HectorPlasmaRegen(chargeSteps, true, 64);
+    vector<HectorEnergyReadings> at32ms = HectorPlasmaRegen(chargeSteps, true, 32);
+    vector<HectorEnergyReadings> at16ms = HectorPlasmaRegen(chargeSteps, true, 16);
+    vector<HectorEnergyReadings> at8ms = HectorPlasmaRegen(chargeSteps, true, 8);
+
+    ASSERT_EQ(at64ms.size(), chargeSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), chargeSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), chargeSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), chargeSteps) << "not enough steps recorded at 8ms";
+
+    ASSERT_EQ(at64ms[0].gunEnergy1, 0) << "starting plasma energy value 1 incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].gunEnergy1, 0) << "starting plasma energy value 1 incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].gunEnergy1, 0) << "starting plasma energy value 1 incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].gunEnergy1, 0) << "starting plasma energy value 1 incorrect at 8ms";
+
+    ASSERT_EQ(at64ms[0].gunEnergy2, 0) << "starting plasma energy value 2 incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].gunEnergy2, 0) << "starting plasma energy value 2 incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].gunEnergy2, 0) << "starting plasma energy value 2 incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].gunEnergy2, 0) << "starting plasma energy value 2 incorrect at 8ms";
+
+    ASSERT_LT(at64ms[chargeSteps - 2].gunEnergy1, 52428) << "plasma 1 recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[chargeSteps - 1].gunEnergy1, 52428) << "plasma 1 recharges too slowly at 64ms";
+    ASSERT_EQ(at32ms[chargeSteps - 1].gunEnergy1, 52428) << "plasma 1 recharges too slowly at 32ms";
+    ASSERT_EQ(at16ms[chargeSteps - 1].gunEnergy1, 52428) << "plasma 1 recharges too slowly at 16ms";
+    ASSERT_EQ(at8ms[chargeSteps - 1].gunEnergy1, 52428) << "plasma 1 recharges too slowly at 8ms";
+
+    ASSERT_LT(at64ms[chargeSteps - 2].gunEnergy2, 52428) << "plasma 2 recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[chargeSteps - 1].gunEnergy2, 52428) << "plasma 2 recharges too slowly at 64ms";
+    ASSERT_EQ(at32ms[chargeSteps - 1].gunEnergy2, 52428) << "plasma 2 recharges too slowly at 32ms";
+    ASSERT_EQ(at16ms[chargeSteps - 1].gunEnergy2, 52428) << "plasma 2 recharges too slowly at 16ms";
+    ASSERT_EQ(at8ms[chargeSteps - 1].gunEnergy2, 52428) << "plasma 2 recharges too slowly at 8ms";
+
+    ASSERT_EQ(at64ms[0].energy, 327680) << "starting energy value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].energy, 327680) << "starting energy value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].energy, 327680) << "starting energy value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].energy, 327680) << "starting energy value incorrect at 8ms";
+
+    for (int i = 0; i < chargeSteps; i++) {
+        // cout << at64ms[i].gunEnergy1 << "\t" << at64ms[i].gunEnergy2 << endl;
+        // cout << at64ms[i].gunEnergy1 << "\t" << at32ms[i].gunEnergy1 << "\t"
+        //      << at16ms[i].gunEnergy1 << "\t" << at8ms[i].gunEnergy1 << endl;
+        ASSERT_EQ(at64ms[i].gunEnergy1, at64ms[i].gunEnergy2) << "plasma energy values not equal at 64ms";
+        ASSERT_EQ(at32ms[i].gunEnergy1, at32ms[i].gunEnergy2) << "plasma energy values not equal at 32ms";
+        ASSERT_EQ(at16ms[i].gunEnergy1, at16ms[i].gunEnergy2) << "plasma energy values not equal at 16ms";
+        ASSERT_EQ(at8ms[i].gunEnergy1, at8ms[i].gunEnergy2) << "plasma energy values not equal at 8ms";
+
+        ASSERT_NEAR(at32ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.02) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.02) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.02) << "8ms not close enough after " << i << " ticks.";
+
+        ASSERT_EQ(at64ms[i].shields, 196608) << "64ms shields didn't remain full";
+        ASSERT_EQ(at32ms[i].shields, 196608) << "32ms shields didn't remain full";
+        ASSERT_EQ(at16ms[i].shields, 196608) << "16ms shields didn't remain full";
+        ASSERT_EQ(at8ms[i].shields, 196608) << "8ms shields didn't remain full";
+
+        if (i == 1) {
+            ASSERT_LT(at64ms[i].energy, 327680) << "64ms second energy value shouldn't be full";
+        } else {
+            ASSERT_EQ(at64ms[i].energy, 327680) << "64ms energy value should be full at " << i << " ticks";
+            ASSERT_EQ(at32ms[i].energy, 327680) << "32ms energy value should be full at " << i << " ticks";
+            ASSERT_EQ(at16ms[i].energy, 327680) << "16ms energy value should be full at " << i << " ticks";
+            ASSERT_EQ(at8ms[i].energy, 327680) << "8ms energy value should be full at " << i << " ticks";
+        }
     }
 }
 
 TEST(HECTOR, ShieldRegen) {
     int regenSteps = 411;
-    vector<Fixed> at64ms = HectorShieldRegen(regenSteps, false, 64);
-    vector<Fixed> at32ms = HectorShieldRegen(regenSteps, false, 32);
-    vector<Fixed> at16ms = HectorShieldRegen(regenSteps, false, 16);
-    vector<Fixed> at8ms = HectorShieldRegen(regenSteps, false, 8);
+    vector<HectorEnergyReadings> at64ms = HectorShieldRegen(regenSteps, false, 64);
+    vector<HectorEnergyReadings> at32ms = HectorShieldRegen(regenSteps, false, 32);
+    vector<HectorEnergyReadings> at16ms = HectorShieldRegen(regenSteps, false, 16);
+    vector<HectorEnergyReadings> at8ms = HectorShieldRegen(regenSteps, false, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
     ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
-    ASSERT_EQ(at64ms[0], 98304) << "starting shield value incorrect at 64ms";
-    ASSERT_EQ(at32ms[0], 98304) << "starting shield value incorrect at 32ms";
-    ASSERT_EQ(at16ms[0], 98304) << "starting shield value incorrect at 16ms";
-    ASSERT_EQ(at8ms[0], 98304) << "starting shield value incorrect at 8ms";
+    ASSERT_EQ(at64ms[0].shields, 98304) << "starting shield value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].shields, 98304) << "starting shield value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].shields, 98304) << "starting shield value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].shields, 98304) << "starting shield value incorrect at 8ms";
 
     // At 8ms, shields take a surprising amount of extra steps in comparison to other
     // frame times. That said, it still amounts to something like an extra half second
     // out of roughly 26 seconds to recharge from half shields.
-    ASSERT_LT(at64ms[regenSteps - 10], 196608) << "shields recharge too quickly at 64ms";
-    ASSERT_EQ(at64ms[regenSteps - 9], 196608) << "shields recharge too slowly at 64ms";
-    ASSERT_EQ(at32ms[regenSteps - 8], 196608) << "shields recharge too slowly at 32ms";
-    ASSERT_EQ(at16ms[regenSteps - 8], 196608) << "shields recharge too slowly at 16ms";
-    ASSERT_EQ(at8ms[regenSteps - 1], 196608) << "shields recharge too slowly at 8ms";
+    ASSERT_LT(at64ms[regenSteps - 10].shields, 196608) << "shields recharge too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 9].shields, 196608) << "shields recharge too slowly at 64ms";
+    ASSERT_EQ(at32ms[regenSteps - 8].shields, 196608) << "shields recharge too slowly at 32ms";
+    ASSERT_EQ(at16ms[regenSteps - 8].shields, 196608) << "shields recharge too slowly at 16ms";
+    ASSERT_EQ(at8ms[regenSteps - 1].shields, 196608) << "shields recharge too slowly at 8ms";
 
     for (int i = 0; i < regenSteps; i++) {
         // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << "\t" << at8ms[i] << endl;
-        ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.003) << "32ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.003) << "16ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.011) << "8ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at32ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.003) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.003) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.011) << "8ms not close enough after " << i << " ticks.";
+
+        ASSERT_EQ(at64ms[0].energy, 327680) << "64ms energy didn't remain full";
+        ASSERT_EQ(at32ms[0].energy, 327680) << "32ms energy didn't remain full";
+        ASSERT_EQ(at16ms[0].energy, 327680) << "16ms energy didn't remain full";
+        ASSERT_EQ(at8ms[0].energy, 327680) << "8ms energy didn't remain full";
+
+        ASSERT_EQ(at64ms[i].gunEnergy1, 52428) << "64ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at32ms[i].gunEnergy1, 52428) << "32ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at16ms[i].gunEnergy1, 52428) << "16ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at8ms[i].gunEnergy1, 52428) << "8ms plasma energy 1 didn't remain full";
+
+        ASSERT_EQ(at64ms[i].gunEnergy2, 52428) << "64ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at32ms[i].gunEnergy2, 52428) << "32ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at16ms[i].gunEnergy2, 52428) << "16ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at8ms[i].gunEnergy2, 52428) << "8ms plasma energy 2 didn't remain full";
     }
 }
 
 TEST(HECTOR, BoostedShieldRegen) {
     int regenSteps = 47;
-    vector<Fixed> at64ms = HectorShieldRegen(regenSteps, true, 64);
-    vector<Fixed> at32ms = HectorShieldRegen(regenSteps, true, 32);
-    vector<Fixed> at16ms = HectorShieldRegen(regenSteps, true, 16);
-    vector<Fixed> at8ms = HectorShieldRegen(regenSteps, true, 8);
+    vector<HectorEnergyReadings> at64ms = HectorShieldRegen(regenSteps, true, 64);
+    vector<HectorEnergyReadings> at32ms = HectorShieldRegen(regenSteps, true, 32);
+    vector<HectorEnergyReadings> at16ms = HectorShieldRegen(regenSteps, true, 16);
+    vector<HectorEnergyReadings> at8ms = HectorShieldRegen(regenSteps, true, 8);
 
     ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
     ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
-    ASSERT_EQ(at64ms[0], 98304) << "starting shield value incorrect at 64ms";
-    ASSERT_EQ(at32ms[0], 98304) << "starting shield value incorrect at 32ms";
-    ASSERT_EQ(at16ms[0], 98304) << "starting shield value incorrect at 16ms";
-    ASSERT_EQ(at8ms[0], 98304) << "starting shield value incorrect at 8ms";
-    ASSERT_LT(at64ms[regenSteps - 2], 196608) << "shields recharge too quickly at 64ms";
-    ASSERT_EQ(at64ms[regenSteps - 1], 196608) << "shields recharge too slowly at 64ms";
-    ASSERT_EQ(at32ms[regenSteps - 1], 196608) << "shields recharge too slowly at 32ms";
-    ASSERT_EQ(at16ms[regenSteps - 1], 196608) << "shields recharge too slowly at 16ms";
-    ASSERT_EQ(at8ms[regenSteps - 1], 196608) << "shields recharge too slowly at 8ms";
+    ASSERT_EQ(at64ms[0].shields, 98304) << "starting shield value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].shields, 98304) << "starting shield value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].shields, 98304) << "starting shield value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].shields, 98304) << "starting shield value incorrect at 8ms";
+    ASSERT_LT(at64ms[regenSteps - 2].shields, 196608) << "shields recharge too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 1].shields, 196608) << "shields recharge too slowly at 64ms";
+    ASSERT_EQ(at32ms[regenSteps - 1].shields, 196608) << "shields recharge too slowly at 32ms";
+    ASSERT_EQ(at16ms[regenSteps - 1].shields, 196608) << "shields recharge too slowly at 16ms";
+    ASSERT_EQ(at8ms[regenSteps - 1].shields, 196608) << "shields recharge too slowly at 8ms";
 
     for (int i = 0; i < regenSteps; i++) {
         // cout << at64ms[i] << "\t" << at32ms[i] << "\t" << at16ms[i] << "\t" << at8ms[i] << endl;
-        ASSERT_NEAR(at32ms[i], at64ms[i], at64ms[i] * 0.015) << "32ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at16ms[i], at64ms[i], at64ms[i] * 0.015) << "16ms not close enough after " << i << " ticks.";
-        ASSERT_NEAR(at8ms[i], at64ms[i], at64ms[i] * 0.0175) << "8ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at32ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.015) << "32ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.015) << "16ms not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.0175) << "8ms not close enough after " << i << " ticks.";
+
+        ASSERT_EQ(at64ms[0].energy, 327680) << "64ms energy didn't remain full";
+        ASSERT_EQ(at32ms[0].energy, 327680) << "32ms energy didn't remain full";
+        ASSERT_EQ(at16ms[0].energy, 327680) << "16ms energy didn't remain full";
+        ASSERT_EQ(at8ms[0].energy, 327680) << "8ms energy didn't remain full";
+
+        ASSERT_EQ(at64ms[i].gunEnergy1, 52428) << "64ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at32ms[i].gunEnergy1, 52428) << "32ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at16ms[i].gunEnergy1, 52428) << "16ms plasma energy 1 didn't remain full";
+        ASSERT_EQ(at8ms[i].gunEnergy1, 52428) << "8ms plasma energy 1 didn't remain full";
+
+        ASSERT_EQ(at64ms[i].gunEnergy2, 52428) << "64ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at32ms[i].gunEnergy2, 52428) << "32ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at16ms[i].gunEnergy2, 52428) << "16ms plasma energy 2 didn't remain full";
+        ASSERT_EQ(at8ms[i].gunEnergy2, 52428) << "8ms plasma energy 2 didn't remain full";
+    }
+}
+
+TEST(HECTOR, ComplexRegen) {
+    int regenSteps = 784;
+    vector<HectorEnergyReadings> at64ms = HectorComplexRegen(regenSteps, false, 64);
+    vector<HectorEnergyReadings> at32ms = HectorComplexRegen(regenSteps, false, 32);
+    vector<HectorEnergyReadings> at16ms = HectorComplexRegen(regenSteps, false, 16);
+    vector<HectorEnergyReadings> at8ms = HectorComplexRegen(regenSteps, false, 8);
+
+    ASSERT_EQ(at64ms.size(), regenSteps) << "not enough steps recorded at 64ms";
+    ASSERT_EQ(at32ms.size(), regenSteps) << "not enough steps recorded at 32ms";
+    ASSERT_EQ(at16ms.size(), regenSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), regenSteps) << "not enough steps recorded at 8ms";
+
+    ASSERT_EQ(at64ms[0].shields, 39321) << "starting shield value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].shields, 39321) << "starting shield value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].shields, 39321) << "starting shield value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].shields, 39321) << "starting shield value incorrect at 8ms";
+
+    ASSERT_EQ(at64ms[0].energy, 163840) << "starting energy value incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].energy, 163840) << "starting energy value incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].energy, 163840) << "starting energy value incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].energy, 163840) << "starting energy value incorrect at 8ms";
+
+    ASSERT_EQ(at64ms[0].gunEnergy1, 15728) << "starting plasma energy value 1 incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].gunEnergy1, 15728) << "starting plasma energy value 1 incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].gunEnergy1, 15728) << "starting plasma energy value 1 incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].gunEnergy1, 15728) << "starting plasma energy value 1 incorrect at 8ms";
+
+    ASSERT_EQ(at64ms[0].gunEnergy2, 5242) << "starting plasma energy value 1 incorrect at 64ms";
+    ASSERT_EQ(at32ms[0].gunEnergy2, 5242) << "starting plasma energy value 1 incorrect at 32ms";
+    ASSERT_EQ(at16ms[0].gunEnergy2, 5242) << "starting plasma energy value 1 incorrect at 16ms";
+    ASSERT_EQ(at8ms[0].gunEnergy2, 5242) << "starting plasma energy value 1 incorrect at 8ms";
+
+    ASSERT_LT(at64ms[regenSteps - 12].shields, 196608) << "shields recharge too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 11].shields, 196608) << "shields recharge too slowly at 64ms";
+    ASSERT_LT(at32ms[regenSteps - 11].shields, 196608) << "shields recharge too quickly at 32ms";
+    ASSERT_EQ(at32ms[regenSteps - 10].shields, 196608) << "shields recharge too slowly at 32ms";
+    ASSERT_LT(at16ms[regenSteps - 8].shields, 196608) << "shields recharge too quickly at 16ms";
+    ASSERT_EQ(at16ms[regenSteps - 7].shields, 196608) << "shields recharge too slowly at 16ms";
+    ASSERT_LT(at8ms[regenSteps - 3].shields, 196608) << "shields recharge too quickly at 8ms";
+    ASSERT_EQ(at8ms[regenSteps - 2].shields, 196608) << "shields recharge too slowly at 8ms";
+
+    ASSERT_LT(at64ms[regenSteps - 10].energy, 327680) << "energy recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[regenSteps - 9].energy, 327680) << "energy recharges too slowly at 64ms";
+    ASSERT_LT(at32ms[regenSteps - 9].energy, 327680) << "energy recharges too quickly at 32ms";
+    ASSERT_EQ(at32ms[regenSteps - 8].energy, 327680) << "energy recharges too slowly at 32ms";
+    ASSERT_LT(at16ms[regenSteps - 7].energy, 327680) << "energy recharges too quickly at 16ms";
+    ASSERT_EQ(at16ms[regenSteps - 6].energy, 327680) << "energy recharges too slowly at 16ms";
+    ASSERT_LT(at8ms[regenSteps - 2].energy, 327680) << "energy recharges too quickly at 8ms";
+    ASSERT_EQ(at8ms[regenSteps - 1].energy, 327680) << "energy recharges too slowly at 8ms";
+
+    ASSERT_LT(at64ms[42].gunEnergy1, 52428) << "plasma energy 1 recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[43].gunEnergy1, 52428) << "plasma energy 1 recharges too slowly at 64ms";
+    ASSERT_LT(at32ms[42].gunEnergy1, 52428) << "plasma energy 1 recharges too quickly at 32ms";
+    ASSERT_EQ(at32ms[43].gunEnergy1, 52428) << "plasma energy 1 recharges too slowly at 32ms";
+    ASSERT_LT(at16ms[43].gunEnergy1, 52428) << "plasma energy 1 recharges too quickly at 16ms";
+    ASSERT_EQ(at16ms[44].gunEnergy1, 52428) << "plasma energy 1 recharges too slowly at 16ms";
+    ASSERT_LT(at8ms[43].gunEnergy1, 52428) << "plasma energy 1 recharges too quickly at 8ms";
+    ASSERT_EQ(at8ms[44].gunEnergy1, 52428) << "plasma energy 1 recharges too slowly at 8ms";
+
+    ASSERT_LT(at64ms[53].gunEnergy2, 52428) << "plasma energy 2 recharges too quickly at 64ms";
+    ASSERT_EQ(at64ms[54].gunEnergy2, 52428) << "plasma energy 2 recharges too slowly at 64ms";
+    ASSERT_LT(at32ms[54].gunEnergy2, 52428) << "plasma energy 2 recharges too quickly at 32ms";
+    ASSERT_EQ(at32ms[55].gunEnergy2, 52428) << "plasma energy 2 recharges too slowly at 32ms";
+    ASSERT_LT(at16ms[54].gunEnergy2, 52428) << "plasma energy 2 recharges too quickly at 16ms";
+    ASSERT_EQ(at16ms[55].gunEnergy2, 52428) << "plasma energy 2 recharges too slowly at 16ms";
+    ASSERT_LT(at8ms[54].gunEnergy2, 52428) << "plasma energy 2 recharges too quickly at 8ms";
+    ASSERT_EQ(at8ms[55].gunEnergy2, 52428) << "plasma energy 2 recharges too slowly at 8ms";
+
+    for (int i = 0; i < regenSteps; i++) {
+        // cout << at64ms[i].shields << "\t" << at64ms[i].energy << "\t"
+        //      << at64ms[i].gunEnergy1 << "\t" << at64ms[i].gunEnergy2 << endl;
+        // cout << at32ms[i].shields << "\t" << at32ms[i].energy << "\t"
+        //      << at32ms[i].gunEnergy1 << "\t" << at32ms[i].gunEnergy2 << endl;
+        // cout << at16ms[i].shields << "\t" << at16ms[i].energy << "\t"
+        //      << at16ms[i].gunEnergy1 << "\t" << at16ms[i].gunEnergy2 << endl;
+        // cout << at8ms[i].shields << "\t" << at8ms[i].energy << "\t"
+        //      << at8ms[i].gunEnergy1 << "\t" << at8ms[i].gunEnergy2 << endl;
+        ASSERT_NEAR(at32ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.006) << "32ms shields not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.006) << "16ms shields not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].shields, at64ms[i].shields, at64ms[i].shields * 0.018) << "8ms shields not close enough after " << i << " ticks.";
+
+        ASSERT_NEAR(at32ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.0075) << "32ms energy not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.0075) << "16ms energy not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].energy, at64ms[i].energy, at64ms[i].energy * 0.01) << "8ms energy not close enough after " << i << " ticks.";
+
+        ASSERT_NEAR(at32ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.008) << "32ms plasma energy 1 not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.008) << "16ms plasma energy 1 not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].gunEnergy1, at64ms[i].gunEnergy1, at64ms[i].gunEnergy1 * 0.018) << "8ms plasma energy 1 not close enough after " << i << " ticks.";
+
+        ASSERT_NEAR(at32ms[i].gunEnergy2, at64ms[i].gunEnergy2, at64ms[i].gunEnergy2 * 0.01) << "32ms plasma energy 2 not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at16ms[i].gunEnergy2, at64ms[i].gunEnergy2, at64ms[i].gunEnergy2 * 0.01) << "16ms plasma energy 2 not close enough after " << i << " ticks.";
+        ASSERT_NEAR(at8ms[i].gunEnergy2, at64ms[i].gunEnergy2, at64ms[i].gunEnergy2 * 0.018) << "8ms plasma energy 2 not close enough after " << i << " ticks.";
     }
 }
 
