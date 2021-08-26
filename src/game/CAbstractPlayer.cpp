@@ -89,7 +89,7 @@ void CAbstractPlayer::LoadHUDParts() {
 void CAbstractPlayer::StartSystems() {
     //  Get systems running:
     reEnergize = false;
-    generatorPower = FpsCoefficient2(FIX3(30));
+    generatorPower = FIX3(30);
     maxEnergy = FIX(5);
     energy = maxEnergy;
     boostsRemaining = 3;
@@ -105,7 +105,7 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FpsCoefficient2(FIX3(30)); //  Use 0.030 per frame to repair shields
+    shieldRegen = FIX3(30); //  Use 0.030 per frame to repair shields
     maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
@@ -135,7 +135,7 @@ void CAbstractPlayer::StartSystems() {
 
     fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
     activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FpsCoefficient2(FIX3(35)); //    Charge gun at 0.035 units per frame
+    chargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;
@@ -1002,10 +1002,10 @@ void CAbstractPlayer::PlayerAction() {
             if (shields < maxShields) {
                 Fixed regenRate;
 
-                regenRate = FMulDivNZ(shieldRegen, energy, maxEnergy);
+                regenRate = FMulDivNZ(FpsCoefficient2(shieldRegen), energy, maxEnergy);
 
                 if (boostEndFrame > itsGame->frameNumber)
-                    shields += shieldRegen;
+                    shields += FpsCoefficient2(shieldRegen);
 
                 shields += regenRate >> 3;
                 if (shields > maxShields)
@@ -1016,10 +1016,10 @@ void CAbstractPlayer::PlayerAction() {
             GunActions();
 
             if (itsGame->timeInSeconds < itsGame->loadedTimeLimit)
-                energy += generatorPower;
+                energy += FpsCoefficient2(generatorPower);
 
             if (boostEndFrame > itsGame->frameNumber) {
-                energy += 4 * generatorPower;
+                energy += 4 * FpsCoefficient2(generatorPower);
             }
 
             if (energy > maxEnergy)
@@ -1103,7 +1103,11 @@ void CAbstractPlayer::GunActions() {
         }
     }
 
-    charge = FMulDivNZ(energy + generatorPower, chargeGunPerFrame, maxEnergy);
+    charge = FMulDivNZ(
+        energy + FpsCoefficient2(generatorPower),
+        FpsCoefficient2(chargeGunPerFrame),
+        maxEnergy
+    );
 
     for (i = 0; i < 2; i++) {
         if (gunEnergy[i] < fullGunEnergy) {
