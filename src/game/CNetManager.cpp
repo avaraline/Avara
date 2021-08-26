@@ -533,7 +533,9 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     itsCommManager->SendUrgentPacket(activePlayersDistribution, kpReadySynch, 0, 0, 0, 0, 0);
     lastTime = TickCount();
     do {
-        SDL_Log("CNetManager::GatherPlayers loop\n");
+        if (TickCount() % 1000 == 0) {
+            SDL_Log("CNetManager::GatherPlayers loop\n");
+        }
         ProcessQueue();
         goAhead = (TickCount() - lastTime < 1800);
         // TODO: waiting dialog with cancel
@@ -980,19 +982,13 @@ void CNetManager::DoConfig(short senderSlot) {
         playerTable[senderSlot]->GetPlayer()->ReceiveConfig(theConfig);
     }
 
-    if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
+    // any reason for these conditionals?  seems like we should always set frameTime etc.
+    if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly) || senderSlot == 0) {
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
-        if (itsGame->latencyTolerance < theConfig->frameLatency*itsGame->fpsScale) {
-            itsGame->SetFrameTime(theConfig->frameTime);
-            itsGame->SetFrameLatency(theConfig->frameLatency, -1);
-            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
-        }
-    } else {
-        if (senderSlot == 0) {
-            itsGame->SetFrameTime(theConfig->frameTime);
-            itsGame->SetFrameLatency(theConfig->frameLatency, -1);
-            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
-        }
+        itsGame->SetFrameTime(theConfig->frameTime);
+        itsGame->SetFrameLatency(theConfig->frameLatency, -1);
+        itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
+        latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
 }
 
