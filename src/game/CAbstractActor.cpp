@@ -901,6 +901,7 @@ void CAbstractActor::WasDestroyed() {
 }
 
 void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
+    // SDL_Log("WasHit: player = %d, shields = %d, hitEnergy = %d\n", theHit->playerId, shields, hitEnergy);
     if (shields < 0 || shields > hitEnergy) {
         itsGame->Score(
             theHit->team, theHit->playerId, FMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
