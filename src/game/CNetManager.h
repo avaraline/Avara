@@ -94,7 +94,7 @@ public:
 
     // TaggedGameResult	gameResult;
 
-    long fragmentCheck;
+    int32_t fragmentCheck;
     Boolean fragmentDetected;
 
     Boolean autoLatencyEnabled;
@@ -104,6 +104,7 @@ public:
     long latencyVoteFrame;
     short maxRoundTripLatency;
     short addOneLatency;
+    CPlayerManager *maxPlayer;
 
     long lastLoginRefusal;
 
@@ -152,7 +153,7 @@ public:
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
     virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);
-    
+
     virtual short PlayerCount();
 
     //	Game loop methods:
@@ -164,6 +165,8 @@ public:
     virtual void FrameAction();
     virtual void HandleEvent(SDL_Event &event);
     virtual void AutoLatencyControl(long frameNumber, Boolean didWait);
+    virtual bool IsFragmentCheckWindowOpen();
+    virtual void ResetLatencyVote();
     virtual void ViewControl();
     virtual void AttachPlayers(CAbstractPlayer *thePlayer);
 

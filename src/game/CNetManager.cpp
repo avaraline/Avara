@@ -597,13 +597,9 @@ void CNetManager::ResumeGame() {
     // This is what pulled the counts from CLevelListWind
     itsGame->itsApp->BroadcastCommand(kConfigurePlayerCmd);
 
-    fragmentDetected = false;
-
-    maxRoundTripLatency = 0;
+    ResetLatencyVote();
     addOneLatency = 0;
     localLatencyVote = 0;
-    autoLatencyVote = 0;
-    autoLatencyVoteCount = 0;
     latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
     thePlayerManager = playerTable[itsCommManager->myId];
@@ -683,7 +679,6 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
         localLatencyVote++;
     }
 
-    static CPlayerManager *maxPlayer = nullptr;
     if (frameNumber >= latencyVoteFrame) {
         long autoLatencyPeriod = itsGame->TimeToFrameCount(AUTOLATENCYPERIOD);
         if ((frameNumber % autoLatencyPeriod) == 0) {
@@ -697,8 +692,8 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             itsCommManager->SendUrgentPacket(
                 activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
             #if LATENCY_DEBUG
-                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld\n",
-                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency);
+                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld FRandSeed=%d\n",
+                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency, FRandSeed);
             #endif
             localLatencyVote = 0;
         } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
@@ -727,13 +722,28 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                 itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
             }
 
-            autoLatencyVote = 0;
-            autoLatencyVoteCount = 0;
-            maxRoundTripLatency = 0;
-            maxPlayer = nullptr;
+            ResetLatencyVote();
             latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD, latencyVoteFrame);
+            // SDL_Log("*** next latencyVoteFrame = %ld\n", latencyVoteFrame);
         }
     }
+}
+
+bool CNetManager::IsFragmentCheckWindowOpen() {
+    // Start considering fragmentation checks a little before the next latencyVoteFrame (because other clients might
+    // send votes early, like mail-in votes). This check is used to prevent a possible fragmentation false-positive
+    // when a vote arrives AFTER the previous vote count has been processed and could be misinterpretted as a frag.
+    return (itsGame->frameNumber > latencyVoteFrame - itsGame->TimeToFrameCount(AUTOLATENCYDELAY));
+}
+
+// reset all the variables that keep track of the latency vote and fragment check
+void CNetManager::ResetLatencyVote() {
+    fragmentCheck = 0;
+    fragmentDetected = false;
+    autoLatencyVote = 0;
+    autoLatencyVoteCount = 0;
+    maxRoundTripLatency = 0;
+    maxPlayer = nullptr;
 }
 
 void CNetManager::ViewControl() {
