@@ -450,6 +450,12 @@ CAbstractActor *CAbstractActor::EndScript() {
     return this;
 }
 
+void CAbstractActor::ResumeScript() {
+    // This method is generally overridden by Subclass to do any computations that could
+    // change after a game is started OR resumed.  For example, any constant affected by
+    // frame-rate should be set in the Subclass equivalent of this method.
+}
+
 void CAbstractActor::AddToGame() {
     itsGame = gCurrentGame;
     itsGame->AddActor(this);
@@ -1016,7 +1022,10 @@ void CAbstractActor::GetSpeedEstimate(Fixed *theSpeed) {
 }
 
 void CAbstractActor::ResumeLevel() {
-    //	Subclass responsibility.
+    // ResumeLevel() is generally meant for actions that need to occur on resuming a game.
+    // If you just want to change an Actor's settings on a resume then use ResumeScript instead.
+    // This just calls ResumeScript() for the subclass by default, but may be overridden to do more (or less).
+    this->ResumeScript();
 }
 
 void CAbstractActor::PauseLevel() {
