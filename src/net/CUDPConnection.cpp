@@ -364,7 +364,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
             // quicker to move up on latency spikes, slower to move down
-            float alpha = itsOwner->frameTimeScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
+            float alpha = 1.0 / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
