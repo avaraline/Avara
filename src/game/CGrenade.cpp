@@ -49,7 +49,7 @@ void CGrenade::PlaceParts() {
     CWeapon::PlaceParts();
 }
 
-void CGrenade::ResumeScript() {
+void CGrenade::AdaptableSettings() {
     // set variables that can change after a game pause
     classicGravity = FMul(kGravity, itsGame->gravityRatio);
     classicFriction = FIX1 - kGrenadeFriction;
@@ -57,7 +57,7 @@ void CGrenade::ResumeScript() {
 }
 
 long CGrenade::Arm(CSmartPart *aPart) {
-    ResumeScript();
+    AdaptableSettings();
 
     blastPower = itsDepot->grenadePower;
     shields = FIX3(100);

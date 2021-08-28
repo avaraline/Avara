@@ -21,7 +21,7 @@ public:
 
     virtual void IWeapon(CDepot *theDepot);
     virtual void PlaceParts();
-    virtual void ResumeScript();
+    virtual void AdaptableSettings();
     virtual long Arm(CSmartPart *aPart);
     virtual void Locate();
     virtual void Fire();
