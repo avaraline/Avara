@@ -12,9 +12,9 @@
 #include "Memory.h"
 
 #define TALKERSTRINGS 1000
-#define PACKETDATABUFFERSIZE 128
-#define MINIMUMBUFFERRESERVE 64
-#define FRESHALLOCSIZE 64
+#define PACKETDATABUFFERSIZE 128*8
+#define MINIMUMBUFFERRESERVE 64*8
+#define FRESHALLOCSIZE 64*8
 
 #pragma pack(1)
 typedef struct PacketInfo {
