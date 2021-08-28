@@ -276,7 +276,7 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     return NULL;
 }
 
-void CAbstractPlayer::ResumeScript() {
+void CAbstractPlayer::AdaptableSettings() {
     // any settings that are affected by frame rate should go here
     generatorPower = FpsCoefficient2(FIX3(30));
     shieldRegen = FpsCoefficient2(FIX3(30));       //  Use 0.030 per frame to repair shields
@@ -1356,7 +1356,7 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
 }
 
 void CAbstractPlayer::ResumeLevel() {
-    CRealMovers::ResumeLevel();  // will ultimately call ResumeScript above
+    CRealMovers::ResumeLevel();  // will ultimately call AdaptableSettings above
 
     nextPlayer = itsGame->playerList;
     itsGame->playerList = this;

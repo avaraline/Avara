@@ -148,7 +148,7 @@ public:
     virtual void IAbstractActor();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
-    virtual void ResumeScript();
+    virtual void AdaptableSettings();
     virtual void AddToGame();
     virtual void FrameAction();
 
