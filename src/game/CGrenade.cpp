@@ -49,12 +49,15 @@ void CGrenade::PlaceParts() {
     CWeapon::PlaceParts();
 }
 
-long CGrenade::Arm(CSmartPart *aPart) {
-    // using classic numbers in the targeting calculation to keep it fast
+void CGrenade::ResumeScript() {
+    // set variables that can change after a game pause
     classicGravity = FMul(kGravity, itsGame->gravityRatio);
     classicFriction = FIX1 - kGrenadeFriction;
-
     FpsCoefficients(classicFriction, classicGravity, &friction, &gravity, &speedOffset);
+}
+
+long CGrenade::Arm(CSmartPart *aPart) {
+    ResumeScript();
 
     blastPower = itsDepot->grenadePower;
     shields = FIX3(100);
@@ -164,7 +167,7 @@ void CGrenade::FrameAction() {
         PlaceParts();
 
         if (hostIdent) {
-            if (flyCount * itsGame->fpsScale > 5) {
+            if (flyCount > FpsFramesPerClassic(5)) {
                 ReleaseAttachment();
             } else {
                 CAbstractActor *oldHost;
@@ -176,16 +179,16 @@ void CGrenade::FrameAction() {
             }
         }
 
-        if (flyCount * itsGame->fpsScale > 100) {
+        if (flyCount > FpsFramesPerClassic(100)) {
             doExplode = true;
         }
 
         BuildPartProximityList(location, partList[0]->bigRadius, kSolidBit);
 
         if (location[1] <= 0 || DoCollisionTest(&proximityList.p)) {
-            location[0] -= speed[0] * itsGame->fpsScale;
-            location[1] -= speed[1] * itsGame->fpsScale;
-            location[2] -= speed[2] * itsGame->fpsScale;
+            location[0] -= FpsCoefficient2(speed[0]);
+            location[1] -= FpsCoefficient2(speed[1]);
+            location[2] -= FpsCoefficient2(speed[2]);
             doExplode = true;
             FPS_DEBUG("GRENADE collision location = " << FormatVector(location, 3) << "\n");
         }
@@ -232,6 +235,7 @@ void CGrenade::ShowTarget() {
 
             // advance hypothetical location 5*64msec worth of classic frames
             for (i = 0; i < 5; i++) {
+                // using classic timing & coefficients in the targeting calculation to keep it fast
                 tSpeed[0] = FMul(tSpeed[0], classicFriction);
                 tSpeed[1] = FMul(tSpeed[1], classicFriction) - classicGravity;
                 tSpeed[2] = FMul(tSpeed[2], classicFriction);
