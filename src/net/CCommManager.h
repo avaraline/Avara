@@ -63,8 +63,6 @@ public:
 
     short genericInfoTextRes;
 
-    double frameTimeScale = 1.0;     // when time is slowed down, this number is > 1
-
     //	For method documentation, see .c-file:
 
     virtual void ICommManager(short packetSpace);

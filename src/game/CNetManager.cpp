@@ -32,8 +32,8 @@
 
 #include <string.h>
 
-#define AUTOLATENCYPERIOD 3840  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
-#define AUTOLATENCYDELAY  448   // msec (needs to be divisible by 64)
+#define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
+#define AUTOLATENCYDELAY  448   // msec (divisible by 64)
 #define LOWERLATENCYCOUNT 3
 #define HIGHERLATENCYCOUNT 8
 
@@ -714,12 +714,11 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                 maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
                 #if LATENCY_DEBUG
-                    SDL_Log("*** fn=%ld latencyFrameTime=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
-                            frameNumber, itsGame->latencyFrameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
+                    SDL_Log("*** fn=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
+                            frameNumber, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
                 #endif
 
                 itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
-                itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
             }
 
             ResetLatencyVote();
@@ -997,7 +996,6 @@ void CNetManager::DoConfig(short senderSlot) {
         // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
         itsGame->SetFrameTime(theConfig->frameTime);
         itsGame->SetFrameLatency(theConfig->frameLatency, -1);
-        itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
         latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
 }
