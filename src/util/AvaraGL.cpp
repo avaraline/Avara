@@ -298,15 +298,9 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
-    // we want to render only the
-    // front faces of these so we can see thru
-    // the back of the faces with the camera
-    bool cull_back_faces = (part->userFlags & CBSPUserFlags::kCullBackfaces) > 0;
-    if (cull_back_faces) {
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-        glFrontFace(GL_CCW);
-    }
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CW);
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
     glCheckErrors();
@@ -326,12 +320,6 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     if (part->ignoreDirectionalLights) {
         ActivateLights(1);
         glCheckErrors();
-    }
-
-    // turn backface culling back off for
-    // all other geometry
-    if (cull_back_faces) {
-        glDisable(GL_CULL_FACE);
     }
 
     glBindVertexArray(NULL);
@@ -368,6 +356,8 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     LongToRGBA(theShader->highSkyColor, highSkyColorRGB, 3);
 
     glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
+
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
     glEnableVertexAttribArray(0);
     glUseProgram(skyProgram);
