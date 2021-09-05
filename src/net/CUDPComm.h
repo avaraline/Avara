@@ -23,8 +23,8 @@
 #define CRAMPACKSIZE 64
 #define kClientConnectTimeoutTicks 600 //(60*30)
 
-// (480 ticks/sec = 2.08333 msec) GetClock() is 8x faster than TickCount(). Should be at most half of the lowest frameTime
-#define MSEC_PER_GET_CLOCK (MSEC_PER_TICK_COUNT / 8)
+// Should be at most half of the lowest frameTime.  In classic game this was 4.096 ms.
+#define MSEC_PER_GET_CLOCK (1)
 
 enum { udpCramInfo }; //	Selectors for kpPacketProtocolControl packer p1 params.
 
