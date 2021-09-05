@@ -11,19 +11,20 @@
 
 #include "CUDPComm.h"
 #include "System.h"
+#include "CAvaraGame.h"  // gCurrentGame->fpsScale
 
 #include <SDL2/SDL.h>
 
-#define kInitialRetransmitTime 480 //	2	seconds
-#define kInitialRoundTripTime 240 //	<1 second
-#define kMaxAllowedRetransmitTime 960 //	4 seconds
-#define kAckRetransmitBase 10
-#define kULPTimeOut (7324 * 4) //	30*4 seconds
-#define kMaxTransmitQueueLength 128 //	128 packets going out...
-#define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
+#define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
+#define kInitialRoundTripTime     (1000 / MSEC_PER_GET_CLOCK)  // 1 second
+#define kMaxAllowedRetransmitTime (4000 / MSEC_PER_GET_CLOCK)  // 4 seconds
+#define kAckRetransmitBase (41 / MSEC_PER_GET_CLOCK)
+#define kULPTimeOut (120000 / MSEC_PER_GET_CLOCK) //	120 seconds
+#define kMaxTransmitQueueLength 128*8 //	128 packets going out... (times 8 for high FPS)
+#define kMaxReceiveQueueLength 32*8 //	32 packets...arbitrary guess
 
-#define RTTSMOOTHFACTOR_UP 80
-#define RTTSMOOTHFACTOR_DOWN 200
+#define RTTSMOOTHFACTOR_UP 60
+#define RTTSMOOTHFACTOR_DOWN 160
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 4
 
@@ -364,7 +365,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
             // quicker to move up on latency spikes, slower to move down
-            float alpha = 1.0 / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
+            float alpha = gCurrentGame->fpsScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
