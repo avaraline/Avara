@@ -36,6 +36,7 @@ public:
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
+    virtual void AdaptableSettings();
     virtual void FrameAction();
     virtual bool HandlesFastFPS() { return true; }
 };

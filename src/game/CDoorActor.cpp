@@ -168,26 +168,8 @@ CAbstractActor *CDoorActor::EndScript() {
         gHub->PreLoadSample(closeSoundId);
         gHub->PreLoadSample(stopSoundId);
 
-        openDelay = FpsFramesPerClassic(ReadLongVar(iOpenDelay));
-        closeDelay = FpsFramesPerClassic(ReadLongVar(iCloseDelay));
-        collisionGuardTime = FpsFramesPerClassic(ReadLongVar(iGuardDelay));
-
-        FPS_DEBUG("openDelay = " << openDelay << ", closeDelay = " << closeDelay << ", collisionGuardTime = " << collisionGuardTime << "\n");
-
         openCounter = 0;
         closeCounter = 0;
-
-        openSpeed = ReadFixedVar(iOpenSpeed) / 100;
-        if (openSpeed <= 0 || openSpeed > kDoorOpen)
-            openSpeed = kDoorSpeed;
-
-        closeSpeed = ReadFixedVar(iCloseSpeed) / 100;
-        if (closeSpeed <= 0 || closeSpeed > kDoorOpen)
-            closeSpeed = kDoorSpeed;
-
-        openSpeed = FpsCoefficient2(openSpeed);
-        closeSpeed = FpsCoefficient2(closeSpeed);
-        FPS_DEBUG("openSpeed = " << openSpeed << ", closeSpeed = " << closeSpeed << "\n");
 
         doorStatus = ReadFixedVar(iStatus);
 
@@ -213,6 +195,26 @@ CAbstractActor *CDoorActor::EndScript() {
     }
 
     return this;
+}
+
+void CDoorActor::AdaptableSettings() {
+    openDelay = FpsFramesPerClassic(ReadLongVar(iOpenDelay));
+    closeDelay = FpsFramesPerClassic(ReadLongVar(iCloseDelay));
+    collisionGuardTime = FpsFramesPerClassic(ReadLongVar(iGuardDelay));
+
+    FPS_DEBUG("openDelay = " << openDelay << ", closeDelay = " << closeDelay << ", collisionGuardTime = " << collisionGuardTime << "\n");
+
+    openSpeed = ReadFixedVar(iOpenSpeed) / 100;
+    if (openSpeed <= 0 || openSpeed > kDoorOpen)
+        openSpeed = kDoorSpeed;
+
+    closeSpeed = ReadFixedVar(iCloseSpeed) / 100;
+    if (closeSpeed <= 0 || closeSpeed > kDoorOpen)
+        closeSpeed = kDoorSpeed;
+
+    openSpeed = FpsCoefficient2(openSpeed);
+    closeSpeed = FpsCoefficient2(closeSpeed);
+    FPS_DEBUG("openSpeed = " << openSpeed << ", closeSpeed = " << closeSpeed << "\n");
 }
 
 void CDoorActor::Dispose() {

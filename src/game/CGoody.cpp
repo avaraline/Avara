@@ -81,7 +81,6 @@ CAbstractActor *CGoody::EndScript() {
             partList[1]->MoveDone();
         }
 
-        rotationSpeed = FpsCoefficient2(FDegToOne(ReadFixedVar(iSpeed)));
         grenades = ReadLongVar(iGrenades);
         missiles = ReadLongVar(iMissiles);
         boosters = ReadLongVar(iBoosters);
@@ -116,6 +115,10 @@ CAbstractActor *CGoody::EndScript() {
     } else {
         return NULL;
     }
+}
+
+void CGoody::AdaptableSettings() {
+    rotationSpeed = FpsCoefficient2(FDegToOne(ReadFixedVar(iSpeed)));
 }
 
 void CGoody::FrameAction() {

@@ -47,17 +47,12 @@ void CFreeSolid::BeginScript() {
 CAbstractActor *CFreeSolid::EndScript() {
     if (CRealMovers::EndScript()) {
         short shapeId;
-        Fixed fpsSpeedOffset;
 
         RegisterReceiver(&startMsg, ReadLongVar(iStartMsg)); //	Interested in start messages
         RegisterReceiver(&stopMsg, ReadLongVar(iStopMsg)); //	Interested in stop messages
         status = ReadLongVar(iStatus); //	What's our status? go/stop?
 
         hitPower = ReadFixedVar(iShotPower); //	Collision damage to other party
-        customGravity = ReadFixedVar(iCustomGravity);
-        acceleration = ReadFixedVar(iAccelerate);
-
-        FpsCoefficients(acceleration, customGravity, &acceleration, &customGravity, &fpsSpeedOffset);
 
         shapeId = ReadLongVar(iShape); //	Read our shape resource ID
         if (shapeId) {
@@ -87,10 +82,6 @@ CAbstractActor *CFreeSolid::EndScript() {
             return NULL;
         }
 
-        // high-FPS initially falls a little slower so compensate by adding an offset
-        speed[1] -= fpsSpeedOffset;
-        location[1] += FpsCoefficient2(speed[1]);
-
         PlaceParts(); //	Locate shape
         LinkSphere(location, partList[0]->bigRadius); //	Collision detection maintenance
 
@@ -103,6 +94,17 @@ CAbstractActor *CFreeSolid::EndScript() {
 
     } else {
         return NULL;
+    }
+}
+
+void CFreeSolid::AdaptableSettings() {
+    Fixed fpsSpeedOffset;
+    FpsCoefficients(ReadFixedVar(iAccelerate), ReadFixedVar(iCustomGravity), &acceleration, &customGravity, &fpsSpeedOffset);
+
+    if (itsGame->frameNumber == 0) {
+        // high-FPS initially falls a little slower so compensate by adding an offset
+        speed[1] -= fpsSpeedOffset;
+        location[1] += FpsCoefficient2(speed[1]);
     }
 }
 
