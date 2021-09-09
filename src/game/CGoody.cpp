@@ -20,6 +20,7 @@
 
 
 extern CWallActor *lastWallActor;
+extern Fixed FRandSeed;
 
 void CGoody::BeginScript() {
     hitScore = 0;
@@ -194,4 +195,9 @@ void CGoody::FrameAction() {
 
     if (enabled)
         sleepTimer = frequency;
+
+    // the goody heading can make a difference in determing a collision with a Hector
+    FRandSeed += heading;
+    // SDL_Log("fn = %ld, goody=%ld: heading = %8d, FRandSeed = %10d\n",
+    //         itsGame->frameNumber, ident, heading, (Fixed)FRandSeed);
 }
