@@ -165,6 +165,7 @@ public:
     virtual void FrameAction();
     virtual void HandleEvent(SDL_Event &event);
     virtual void AutoLatencyControl(long frameNumber, Boolean didWait);
+    virtual bool IsAutoLatencyEnabled();
     virtual bool IsFragmentCheckWindowOpen();
     virtual void ResetLatencyVote();
     virtual void ViewControl();

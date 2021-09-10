@@ -192,12 +192,15 @@ CRosterWindow::~CRosterWindow() {}
 void CRosterWindow::UpdateRoster() {
     CAvaraGame *theGame = ((CAvaraAppImpl *)gApplication)->GetGame();
     if (tabWidget->activeTab() == 0) {
+        long maxRtt = 0;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i];
 
             std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             if (i != theNet->itsCommManager->myId && theName.length() > 0) {
-                theName += std::string(" (") + std::to_string(theNet->itsCommManager->GetMaxRoundTrip(1 << i)) + " ms)";
+                long rtt = theNet->itsCommManager->GetMaxRoundTrip(1 << i);
+                theName += std::string(" (") + std::to_string(rtt) + " ms)";
+                maxRtt = std::max(maxRtt, rtt);
             }
             short status = thisPlayer->LoadingStatus();
             std::string theStatus = GetStringStatus(status, thisPlayer->WinFrame());
@@ -215,6 +218,11 @@ void CRosterWindow::UpdateRoster() {
             ));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
+        }
+
+        if (maxRtt > 0 && theNet->IsAutoLatencyEnabled() && !theGame->IsPlaying()) {
+            // set initial frame latency from client ping/RTT times
+            theGame->SetFrameLatency(theGame->RoundTripToFrameLatency(maxRtt), -1);
         }
 
         if (theGame->loadedTag.compare(currentLevel) != 0) {
