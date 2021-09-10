@@ -702,8 +702,8 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                 fragmentDetected = false;
             }
 
-            if ((serverOptions & (1 << kUseAutoLatencyBit)) && autoLatencyVoteCount) {
-                long maxFrameLatency;
+            if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
+                short maxFrameLatency;
 
                 autoLatencyVote /= autoLatencyVoteCount;
 
@@ -713,10 +713,9 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
                 maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                #if LATENCY_DEBUG
-                    SDL_Log("*** fn=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
-                            frameNumber, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
-                #endif
+                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, FL=%d\n",
+                        frameNumber, maxRoundTripLatency,
+                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), maxFrameLatency);
 
                 itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
             }
@@ -726,6 +725,10 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             // SDL_Log("*** next latencyVoteFrame = %ld\n", latencyVoteFrame);
         }
     }
+}
+
+bool CNetManager::IsAutoLatencyEnabled() {
+    return (serverOptions & (1 << kUseAutoLatencyBit));
 }
 
 bool CNetManager::IsFragmentCheckWindowOpen() {

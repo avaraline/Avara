@@ -1045,11 +1045,6 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 // FrameLatency is slightly different than LatencyTolerance.  It is in terms of integer frames
 // at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
-    SDL_Log("CAvaraGame::RoundTripToFrameLatency RTT=%ld, Classic LT=%.2lf, FL=%.2lf, Rounded FL=%ld\n",
-            roundTrip,
-            (roundTrip) / (2.0*CLASSICFRAMETIME),
-            (roundTrip) / (2.0*frameTime),
-            (roundTrip + frameTime) / (2*frameTime));
     // half of the roundTripTime in units of frameTime, rounded
     return (roundTrip + frameTime) / (2*frameTime);
 }
@@ -1064,10 +1059,12 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const c
             // allow latency to jump to any value
             maxChange = MAX_LATENCY;
         }
+
+        double oldLatency = latencyTolerance;
         if (newLatency < latencyTolerance) {
             latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
         } else {
-            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY / fpsScale)));
+            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
         }
 
         // make prettier version of the LT string (C++ sucks with strings)
@@ -1076,14 +1073,18 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const c
 
         // save as application preference (which also makes it show up on the UI)
         gApplication->Set(kLatencyToleranceTag, latencyTolerance);
-        SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
 
-        if (slowPlayer != nullptr) {
-            std::ostringstream oss;
-            std::time_t t = std::time(nullptr);
-            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ")
-                << ltOss.str() << " (" << slowPlayer << ")";
-            itsApp->AddMessageLine(oss.str());
+        // if it changed
+        if (latencyTolerance != oldLatency) {
+            SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
+
+            if (slowPlayer != nullptr) {
+                std::ostringstream oss;
+                std::time_t t = std::time(nullptr);
+                oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ")
+                    << ltOss.str() << " (" << slowPlayer << ")";
+                itsApp->AddMessageLine(oss.str());
+            }
         }
     }
 }
