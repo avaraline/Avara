@@ -348,12 +348,6 @@ float CommandMultiplierForStats(long command) {
            // ping times are an important influence on RTT (not affected by frame rate)
            multiplier = (RTTSMOOTHFACTOR_UP) * 0.1;
            break;
-       case kpRosterMessage:
-           if (!gCurrentGame->IsPlaying()) {
-               // messages get a big influence outside of the game, mostly to help adjust the initial LT value
-               multiplier = (RTTSMOOTHFACTOR_UP) * 0.2;
-           }
-           break;
     }
     return multiplier;
 }
