@@ -335,15 +335,27 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
     return thePacket;
 }
 
-bool UseCommandForStats(long command) {
+float CommandMultiplierForStats(long command) {
+    float multiplier = 0;
     // only use faster commands for stats
+    // keep multiplier value below RTTSMOOTHFACTOR_UP.
     switch(command) {
+        case kpKeyAndMouse:
+            // normal game play commands (multiply by fpsScale to make influence consistent across frame rates)
+            multiplier = gCurrentGame->fpsScale;
+            break;
        case kpPing:
+           // ping times are an important influence on RTT (not affected by frame rate)
+           multiplier = (RTTSMOOTHFACTOR_UP) * 0.1;
+           break;
        case kpRosterMessage:
-       case kpKeyAndMouse:
-           return true;
+           if (!gCurrentGame->IsPlaying()) {
+               // messages get a big influence outside of the game, mostly to help adjust the initial LT value
+               multiplier = (RTTSMOOTHFACTOR_UP) * 0.2;
+           }
+           break;
     }
-    return false;
+    return multiplier;
 }
 
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
@@ -354,18 +366,19 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
         long roundTrip;
 
         roundTrip = when - thePacket->birthDate;
+        float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
 
         if (maxValid == 4) {
             if (roundTrip < meanRoundTripTime) {
                 meanRoundTripTime = roundTrip;
                 varRoundTripTime = roundTrip * roundTrip;  // err on the high side initially
             }
-        } else if (UseCommandForStats(thePacket->packet.command)) {
+        } else if (commandMultiplier > 0) {
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
             // quicker to move up on latency spikes, slower to move down
-            float alpha = gCurrentGame->fpsScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
+            float alpha = commandMultiplier / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
