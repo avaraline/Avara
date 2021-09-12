@@ -222,6 +222,7 @@ void CRosterWindow::UpdateRoster() {
 
         if (maxRtt > 0 && theNet->IsAutoLatencyEnabled() && !theGame->IsPlaying()) {
             // set initial frame latency from client ping/RTT times
+            maxRtt = std::min(maxRtt, long(CLASSICFRAMETIME*2*4));  // max of 4 LT on the UI
             theGame->SetFrameLatency(theGame->RoundTripToFrameLatency(maxRtt), -1);
         }
 

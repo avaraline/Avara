@@ -752,6 +752,11 @@ void CNetManager::ViewControl() {
     playerTable[itsCommManager->myId]->ViewControl();
 }
 
+void CNetManager::SendPingCommand(int totalTrips) {
+    itsCommManager->SendPacket(kdEveryone - (1 << itsCommManager->myId),
+                               kpPing, 0, 0, totalTrips, 0, NULL);
+}
+
 void CNetManager::SendStartCommand() {
     short i;
 

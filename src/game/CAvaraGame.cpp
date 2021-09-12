@@ -167,6 +167,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     statusRequest = -1; // who decided to make "playing" 0??
 
+    nextPingTime = 0;
+
     // CalcGameRect();
 
     // vg = AvaraVGContext();
@@ -834,6 +836,13 @@ bool CAvaraGame::GameTick() {
 
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
+
+    if (startTime > nextPingTime) {
+        // send pings periodically to maintain connection & improve estimate for LT
+        itsNet->SendPingCommand();
+        static long PING_INTERVAL_MSEC = 1000;
+        nextPingTime = startTime + PING_INTERVAL_MSEC;
+    }
 
     // Not playing? Nothing to do!
     if (statusRequest != kPlayingStatus)

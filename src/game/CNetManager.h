@@ -145,6 +145,7 @@ public:
     virtual void ReceiveLoadLevel(short senderSlot, char *setAndTag, Fixed seed);
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag);
 
+    virtual void SendPingCommand(int totalTrips = 0);
     virtual void SendStartCommand();
     virtual void SendResumeCommand();
     virtual Boolean ResumeEnabled();

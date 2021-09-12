@@ -166,6 +166,7 @@ public:
     ScoreInterfaceReasons lastReason;
 
     uint32_t nextScheduledFrame;
+    uint32_t nextPingTime;
     long lastFrameTime;
     Boolean canPreSend;
 
