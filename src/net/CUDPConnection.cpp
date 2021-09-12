@@ -371,6 +371,16 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
+
+            // if ping packet RTT is more than 3x standard deviation above the mean, it's an outlier, don't add it to stats
+            if (thePacket->packet.command == kpPing && (difference*difference) > 9.0*varRoundTripTime) {
+                #if PACKET_DEBUG || LATENCY_DEBUG
+                    SDL_Log("                               cn=%d cmd=%d roundTrip=%ld OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
+                            myId, thePacket->packet.command, roundTrip, difference / sqrt(varRoundTripTime));
+                #endif
+                return;
+            }
+
             // quicker to move up on latency spikes, slower to move down
             float alpha = commandMultiplier / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
