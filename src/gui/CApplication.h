@@ -1,7 +1,6 @@
 #pragma once
 
 #include "CWindow.h"
-#include "Preferences.h"
 
 #include <SDL2/SDL.h>
 #include <json.hpp>
@@ -40,7 +39,7 @@ public:
     virtual bool handleSDLEvent(SDL_Event &event);
 
     // templated version works for new types too (float, double, short, etc.)
-    template <class T> T Get(const std::string name) { return prefs[name]; }
+    template <class T> T Get(const std::string name) { return _prefs[name]; }
     // these getters are here for backwards compatibility and/or readability
     std::string String(const std::string name)       { return Get<std::string>(name); };
     long Number(const std::string name)              { return Get<long>(name); };
@@ -49,12 +48,12 @@ public:
     json Get(const std::string name)                 { return Get<json>(name); }
 
     template <class T> void Set(const std::string name, const T value) {
-        prefs[name] = value;
+        _prefs[name] = value;
         PrefChanged(name);
     }
 
 protected:
-    static inline json prefs = ReadPrefs();
+    static json _prefs;
     std::vector<CWindow *> windowList;
 };
 

@@ -3,6 +3,7 @@
 
 #include "AvaraGL.h"
 #include "CColorManager.h"
+#include "Preferences.h"
 
 #include <SDL2/SDL.h>
 #include <fstream>
@@ -10,9 +11,10 @@
 #include <string>
 #include <vector>
 
+json CApplication::_prefs = ReadPrefs();
 
 CApplication::CApplication(std::string title) :
-nanogui::Screen(nanogui::Vector2i(prefs[kWindowWidth], prefs[kWindowHeight]), title, true, prefs[kFullScreenTag], 8, 8, 24, 8, prefs[kMultiSamplesTag]) {
+nanogui::Screen(nanogui::Vector2i(_prefs[kWindowWidth], _prefs[kWindowHeight]), title, true, _prefs[kFullScreenTag], 8, 8, 24, 8, _prefs[kMultiSamplesTag]) {
     gApplication = this;
     AvaraGLInitContext();
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
@@ -34,10 +36,10 @@ void CApplication::Done() {
         win->saveState();
     }
 
-    prefs[kWindowWidth] = mSize[0];
-    prefs[kWindowHeight] = mSize[1];
-    prefs.erase(kDefaultClientUDPPort);  // don't save client port
-    WritePrefs(prefs);
+    _prefs[kWindowWidth] = mSize[0];
+    _prefs[kWindowHeight] = mSize[1];
+    _prefs.erase(kDefaultClientUDPPort);  // don't save client port
+    WritePrefs(_prefs);
 }
 
 void CApplication::BroadcastCommand(int theCommand) {
@@ -65,8 +67,8 @@ bool CApplication::handleSDLEvent(SDL_Event &event) {
 }
 
 long CApplication::Number(const std::string name, const long defaultValue) {
-    if (prefs[name].is_number()) {
-        return prefs[name];
+    if (_prefs[name].is_number()) {
+        return _prefs[name];
     }
     return defaultValue;
 }
