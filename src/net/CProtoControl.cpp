@@ -154,7 +154,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
 
         case kpLatencyVote: {
-            long p3 = thePacket->p3;
+            int32_t p3 = thePacket->p3;
 
             theNet->autoLatencyVoteCount++;
             theNet->autoLatencyVote += thePacket->p1;
@@ -164,14 +164,25 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
 
             theNet->playerTable[thePacket->sender]->RandomKey(p3);
 
-            if (theNet->autoLatencyVoteCount == 1) {
-                theNet->fragmentDetected = false;
-                theNet->fragmentCheck = p3;
-            } else {
-                if (theNet->fragmentCheck != p3) {
-                    SDL_Log("FRAGMENTATION %ld != %ld", theNet->fragmentCheck, p3);
-                    theNet->fragmentDetected = true;
+            // to be considered for fragmentation, packet must be received in the voting time window
+            if (theNet->IsFragmentCheckWindowOpen()) {
+                if (theNet->fragmentCheck == 0) {
+                    // the first vote received dictates what the fragmentCheck value is, not necessarily the current player
+                    theNet->fragmentDetected = false;
+                    theNet->fragmentCheck = p3;
+                    // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %ld", theNet->fragmentCheck, theGame->frameNumber);
+                } else {
+                    // any votes after the first must have a matching p3 value
+                    if (theNet->fragmentCheck != p3) {
+                        SDL_Log("FRAGMENTATION %d != %d in frameNumber %ld", theNet->fragmentCheck, p3, theGame->frameNumber);
+                        theNet->fragmentDetected = true;
+                    // } else {
+                    //     SDL_Log("No frags detected so far %d == %d in frameNumber %ld", theNet->fragmentCheck, p3, theGame->frameNumber);
+                    }
                 }
+            } else {
+                SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%ld",
+                        p3, theGame->frameNumber);
             }
         } break;
 

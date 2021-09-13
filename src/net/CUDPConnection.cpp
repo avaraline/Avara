@@ -11,18 +11,19 @@
 
 #include "CUDPComm.h"
 #include "System.h"
+#include "CAvaraGame.h"  // gCurrentGame->fpsScale
 
 #include <SDL2/SDL.h>
 
-#define kInitialRetransmitTime 480 //	2	seconds
-#define kInitialRoundTripTime 240 //	<1 second
-#define kMaxAllowedRetransmitTime 960 //	4 seconds
-#define kAckRetransmitBase 10
-#define kULPTimeOut (7324 * 4) //	30*4 seconds
-#define kMaxTransmitQueueLength 128 //	128 packets going out...
-#define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
+#define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
+#define kInitialRoundTripTime     (1000 / MSEC_PER_GET_CLOCK)  // 1 second
+#define kMaxAllowedRetransmitTime (4000 / MSEC_PER_GET_CLOCK)  // 4 seconds
+#define kAckRetransmitBase (41 / MSEC_PER_GET_CLOCK)
+#define kULPTimeOut (120000 / MSEC_PER_GET_CLOCK) //	120 seconds
+#define kMaxTransmitQueueLength 128*8 //	128 packets going out... (times 8 for high FPS)
+#define kMaxReceiveQueueLength 32*8 //	32 packets...arbitrary guess
 
-#define RTTSMOOTHFACTOR_UP 80
+#define RTTSMOOTHFACTOR_UP 100
 #define RTTSMOOTHFACTOR_DOWN 160
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 4
@@ -334,15 +335,21 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
     return thePacket;
 }
 
-bool UseCommandForStats(long command) {
+float CommandMultiplierForStats(long command) {
+    float multiplier = 0;
     // only use faster commands for stats
+    // keep multiplier value below RTTSMOOTHFACTOR_UP.
     switch(command) {
+        case kpKeyAndMouse:
+            // normal game play commands (multiply by fpsScale to make influence consistent across frame rates)
+            multiplier = gCurrentGame->fpsScale;
+            break;
        case kpPing:
-       case kpRosterMessage:
-       case kpKeyAndMouse:
-           return true;
+           // ping times are an important influence on RTT (not affected by frame rate)
+           multiplier = (RTTSMOOTHFACTOR_UP) * 0.1;
+           break;
     }
-    return false;
+    return multiplier;
 }
 
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
@@ -353,23 +360,29 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
         long roundTrip;
 
         roundTrip = when - thePacket->birthDate;
+        float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
 
         if (maxValid == 4) {
             if (roundTrip < meanRoundTripTime) {
                 meanRoundTripTime = roundTrip;
                 varRoundTripTime = roundTrip * roundTrip;  // err on the high side initially
             }
-        } else if (UseCommandForStats(thePacket->packet.command)) {
+        } else if (commandMultiplier > 0) {
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
-            // quicker to move up on latency spikes, slower to move down
-            float alpha = itsOwner->frameTimeScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
-            if (thePacket->sendCount > 1) {
-                // Don't ignore resent packets but de-weight them pretty heavily.
-                alpha /= (thePacket->sendCount*thePacket->sendCount);
+            // if ping packet RTT is more than 3x standard deviation above the mean, it's an outlier, don't add it to stats
+            if (thePacket->packet.command == kpPing && (difference*difference) > 9.0*varRoundTripTime) {
+                #if PACKET_DEBUG || LATENCY_DEBUG
+                    SDL_Log("                               cn=%d cmd=%d roundTrip=%ld OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
+                            myId, thePacket->packet.command, roundTrip, difference / sqrt(varRoundTripTime));
+                #endif
+                return;
             }
+
+            // quicker to move up on latency spikes, slower to move down
+            float alpha = commandMultiplier / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;

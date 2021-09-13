@@ -450,6 +450,12 @@ CAbstractActor *CAbstractActor::EndScript() {
     return this;
 }
 
+void CAbstractActor::AdaptableSettings() {
+    // This method is generally overridden by Subclass to do any computations that could
+    // change after a game is started OR resumed.  For example, any constant affected by
+    // frame-rate should be set in the Subclass equivalent of this method.
+}
+
 void CAbstractActor::AddToGame() {
     itsGame = gCurrentGame;
     itsGame->AddActor(this);
@@ -901,6 +907,7 @@ void CAbstractActor::WasDestroyed() {
 }
 
 void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
+    // SDL_Log("WasHit: player = %d, shields = %d, hitEnergy = %d\n", theHit->playerId, shields, hitEnergy);
     if (shields < 0 || shields > hitEnergy) {
         itsGame->Score(
             theHit->team, theHit->playerId, FMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
@@ -1015,7 +1022,10 @@ void CAbstractActor::GetSpeedEstimate(Fixed *theSpeed) {
 }
 
 void CAbstractActor::ResumeLevel() {
-    //	Subclass responsibility.
+    // ResumeLevel() is generally meant for actions that need to occur on resuming a game.
+    // If you just want to change an Actor's settings on a resume then use AdaptableSettings instead.
+    // This just calls AdaptableSettings() for the subclass by default, but may be overridden to do more (or less).
+    this->AdaptableSettings();
 }
 
 void CAbstractActor::PauseLevel() {

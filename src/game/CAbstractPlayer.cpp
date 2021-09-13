@@ -89,7 +89,6 @@ void CAbstractPlayer::LoadHUDParts() {
 void CAbstractPlayer::StartSystems() {
     //  Get systems running:
     reEnergize = false;
-    generatorPower = FpsCoefficient2(FIX3(30));
     maxEnergy = FIX(5);
     energy = maxEnergy;
     boostsRemaining = 3;
@@ -105,7 +104,6 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FpsCoefficient2(FIX3(30)); //  Use 0.030 per frame to repair shields
     maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
@@ -135,7 +133,6 @@ void CAbstractPlayer::StartSystems() {
 
     fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
     activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FpsCoefficient2(FIX3(35)); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;
@@ -277,6 +274,13 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     boosterLimit = boostsRemaining = ReadLongVar(iMaxStartBoosts);
 
     return NULL;
+}
+
+void CAbstractPlayer::AdaptableSettings() {
+    // any settings that are affected by frame rate should go here
+    generatorPower = FpsCoefficient2(FIX3(30));
+    shieldRegen = FpsCoefficient2(FIX3(30));       //  Use 0.030 per frame to repair shields
+    chargeGunPerFrame = FpsCoefficient2(FIX3(35)); //    Charge gun at 0.035 units per frame
 }
 
 void CAbstractPlayer::Dispose() {
@@ -1103,7 +1107,8 @@ void CAbstractPlayer::GunActions() {
         }
     }
 
-    charge = FMulDivNZ(energy + generatorPower, chargeGunPerFrame, maxEnergy);
+    charge = FMulDivNZ(energy + generatorPower, chargeGunPerFrame,
+                       maxEnergy);
 
     for (i = 0; i < 2; i++) {
         if (gunEnergy[i] < fullGunEnergy) {
@@ -1351,7 +1356,7 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
 }
 
 void CAbstractPlayer::ResumeLevel() {
-    CRealMovers::ResumeLevel();
+    CRealMovers::ResumeLevel();  // will ultimately call AdaptableSettings above
 
     nextPlayer = itsGame->playerList;
     itsGame->playerList = this;

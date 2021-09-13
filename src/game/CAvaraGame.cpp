@@ -167,6 +167,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     statusRequest = -1; // who decided to make "playing" 0??
 
+    nextPingTime = 0;
+
     // CalcGameRect();
 
     // vg = AvaraVGContext();
@@ -695,7 +697,6 @@ void CAvaraGame::ReadGamePrefs() {
     }
     sensitivity = itsApp->Number(kMouseSensitivityTag);
     latencyTolerance = gApplication->Get<double>(kLatencyToleranceTag);
-    AdjustFrameTime();
 }
 
 void CAvaraGame::ResumeGame() {
@@ -836,6 +837,13 @@ bool CAvaraGame::GameTick() {
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
 
+    if (startTime > nextPingTime) {
+        // send pings periodically to maintain connection & improve estimate for LT
+        itsNet->SendPingCommand(8);
+        static long PING_INTERVAL_MSEC = 2000;
+        nextPingTime = startTime + PING_INTERVAL_MSEC;
+    }
+
     // Not playing? Nothing to do!
     if (statusRequest != kPlayingStatus)
         return false;
@@ -884,7 +892,7 @@ bool CAvaraGame::GameTick() {
 
     // if the game hasn't kept up with the frame schedule, reset the next frame (prevents chipmunk mode)
     if (nextScheduledFrame < startTime) {
-        nextScheduledFrame = startTime + latencyFrameTime;
+        nextScheduledFrame = startTime + frameTime;
     }
 
     timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
@@ -897,7 +905,7 @@ bool CAvaraGame::GameTick() {
 
     // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode)
     if (nextScheduledFrame < startTime) {
-        nextScheduledFrame = startTime + latencyFrameTime;
+        nextScheduledFrame = startTime + frameTime;
     }
 
     itsDepot->RunSliverActions();
@@ -1043,18 +1051,9 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
     return theManager;
 }
 
-double CAvaraGame::LatencyFrameTimeScale() {
-    return double(latencyFrameTime)/frameTime;
-}
-
 // FrameLatency is slightly different than LatencyTolerance.  It is in terms of integer frames
 // at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
-    SDL_Log("CAvaraGame::RoundTripToFrameLatency RTT=%ld, Classic LT=%.2lf, FL=%.2lf, Rounded FL=%ld\n",
-            roundTrip,
-            (roundTrip) / (2.0*CLASSICFRAMETIME),
-            (roundTrip) / (2.0*frameTime),
-            (roundTrip + frameTime) / (2*frameTime));
     // half of the roundTripTime in units of frameTime, rounded
     return (roundTrip + frameTime) / (2*frameTime);
 }
@@ -1069,10 +1068,12 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const c
             // allow latency to jump to any value
             maxChange = MAX_LATENCY;
         }
+
+        double oldLatency = latencyTolerance;
         if (newLatency < latencyTolerance) {
             latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
         } else {
-            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY / fpsScale)));
+            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
         }
 
         // make prettier version of the LT string (C++ sucks with strings)
@@ -1081,55 +1082,25 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const c
 
         // save as application preference (which also makes it show up on the UI)
         gApplication->Set(kLatencyToleranceTag, latencyTolerance);
-        SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
 
-        if (slowPlayer != nullptr) {
-            std::ostringstream oss;
-            std::time_t t = std::time(nullptr);
-            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ")
-                << ltOss.str() << " (" << slowPlayer << ")";
-            itsApp->AddMessageLine(oss.str());
+        // if it changed
+        if (latencyTolerance != oldLatency) {
+            SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
+
+            if (slowPlayer != nullptr) {
+                std::ostringstream oss;
+                std::time_t t = std::time(nullptr);
+                oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ")
+                    << ltOss.str() << " (" << slowPlayer << ")";
+                itsApp->AddMessageLine(oss.str());
+            }
         }
-
-        AdjustFrameTime();
     }
 }
 
-void CAvaraGame::AdjustFrameTime() {
-    // Why this adjustment?  We want it to be a somewhat parabolic function because of the
-    // N^2 nature of the number of messages sent for the game... (players*(players-1)).
-    // So, theoretically, the game will tend to slow down as a square of the number of players.
-    // In choosing the adjustment you have to consider playability (low latency) vs
-    // recoverability (reduced message sending).
-    // If it errs too much on the side of playability then it may not recover from big latency spikes.
-    // If it errs too much on the side of recoverability, then it may not be playable for moderate latencies.
-
-    // The frameTimeMultipliers below were chosen to keep LT=5 at a barely playable level.
-    // The numbers at the higher levels are not intended to be very playable but to keep the game chugging
-    // along at a lower message rate to give it a chance to catch up and, hopefully, come back down below LT=5.
-
-    // Here is how the different latencies affect playability and recoverability:
-    static float frameTimeMultiplier[MAX_LATENCY+1] = {
-               //  LT frameTime(ms) latency(ms)  messages/sec (approx)
-        1.00,  //  0  64            0            16   <-- most playable (LAN)
-        1.00,  //  1  64            64           16   <-- good internet
-        1.00,  //  2  64            128          16
-        1.00,  //  3  64            192          16
-        1.00,  //  4  64            256          16   <-- somewhat playable, laggy
-        1.25,  //  5  80            400          13   <-- barely playable / begin recovering
-        1.50,  //  6  96            576          10   <-- hope to never see LT > 5
-        2.50,  //  7  160           1120         6
-        3.75,  //  8  240           1920         4    <-- trying to recover!  If it were a horse, I'd shoot it.
-    };
-
-    latencyFrameTime = long(frameTime * frameTimeMultiplier[int(latencyTolerance)]);
-    SDL_Log("*** setting latencyFrameTime = %ld\n", latencyFrameTime);
-}
-
-
 long CAvaraGame::TimeToFrameCount(long timeInMsec) {
     // how many frames occur in timeInMsec?
-    return timeInMsec / latencyFrameTime;
+    return timeInMsec / frameTime;
 }
 
 long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
@@ -1148,9 +1119,8 @@ void CAvaraGame::SetFrameTime(long ft) {
     }
     SDL_Log("CAvaraGame::SetFrameTime(frameTime = %ld)\n", ft);
     this->frameTime = ft;
-    this->latencyFrameTime = ft;
     this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
-    gApplication->Set(kFrameTimeTag, frameTime);
+    if (gApplication) gApplication->Set(kFrameTimeTag, frameTime);
 }
 
 void CAvaraGame::IncrementFrame(bool firstFrame) {
@@ -1159,7 +1129,7 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
         nextScheduledFrame = SDL_GetTicks(); // Run next frame immediately
     } else {
         frameNumber++;
-        nextScheduledFrame += latencyFrameTime;
+        nextScheduledFrame += frameTime;
     }
     isClassicFrame = (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
 }

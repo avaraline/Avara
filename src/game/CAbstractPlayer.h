@@ -162,6 +162,7 @@ public:
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
+    virtual void AdaptableSettings();
     virtual void LoadHUDParts();
     virtual void ReplacePartColors();
     virtual void SetSpecialColor(long specialColor);

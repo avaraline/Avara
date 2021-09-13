@@ -12,9 +12,9 @@
 #include "Memory.h"
 
 #define TALKERSTRINGS 1000
-#define PACKETDATABUFFERSIZE 128
-#define MINIMUMBUFFERRESERVE 64
-#define FRESHALLOCSIZE 64
+#define PACKETDATABUFFERSIZE 128*8
+#define MINIMUMBUFFERRESERVE 64*8
+#define FRESHALLOCSIZE 64*8
 
 #pragma pack(1)
 typedef struct PacketInfo {
@@ -62,8 +62,6 @@ public:
     ReceiverRecord *firstReceivers[2]; //	Receiver queues
 
     short genericInfoTextRes;
-
-    double frameTimeScale = 1.0;     // when time is slowed down, this number is > 1
 
     //	For method documentation, see .c-file:
 

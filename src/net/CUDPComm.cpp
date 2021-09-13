@@ -1085,11 +1085,14 @@ Boolean CUDPComm::AsyncWrite() {
 }
 
 long CUDPComm::GetClock() {
-    // Apparently this clock is about 240/second... which is 4x faster than TickCount().
-    // Looking at the original code, it shifted a microsec time >> 12, effectively dividing by 4096.
-    // So technically this was a 244.140625 msec clock.  We now have a much faster 16.667 msec clock which
-    // is good because higher frame rates need higher clock rates.
-    return (long)((double)SDL_GetTicks() / MSEC_PER_GET_CLOCK);
+    // Apparently this clock is about 240/second?
+    // Upon further investigation, the original code,
+    // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);
+    // shifted a usec time >> 12, effectively dividing by 4096.
+    // So technically this was a 4.096 msec (4096 usec) clock tick (~244/sec).
+    // To accomodate higher frame rates this will be adjusted down to 1 msec so that
+    // the ratio of frameRate/clock is still approximately 16 with the 16 msec frameTime.
+    return SDL_GetTicks() / MSEC_PER_GET_CLOCK;
 }
 
 /*
@@ -1107,8 +1110,12 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, lon
     softwareVersion = version;
 
     //	Convert time from milliseconds to 2*in our time units.
-    urgentResendTime = (urgentTimePeriod * 125) >> 8;
-    latencyConvert = urgentTimePeriod * 2;
+    // urgentResendTime = (urgentTimePeriod * 125) >> 8;
+    //                  = (2 * urgentTimePeriod * 1000) >> 12;  // convert to usec then 2X GetClock interval
+    // urgentResendTime represents 2 frames of time since urgentTimePeriod is passed as frameTime
+    urgentResendTime = (urgentTimePeriod * 2 / MSEC_PER_GET_CLOCK);
+
+    // latencyConvert = urgentTimePeriod * 2;  // no longer being used
 
     /*
     prefs = new CTagBase;
@@ -1451,7 +1458,7 @@ void CUDPComm::Connect(std::string address) {
 }
 
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
-    SDL_Log("Connect address = %s pw length=%llu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
+    SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
     std::thread forwardPorts(ForwardPorts, localPort);
     forwardPorts.detach();
@@ -1944,15 +1951,15 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            // add in 1.3*stdev (~90% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // add in 2*stdev (~98% prob) but max it at CLASSICFRAMETIME (don't add more than 2 to LT)
             // note: is this really a poisson distribution?  if so, what's the proper equation?
-            float stdev = 1.3*sqrt(conn->varRoundTripTime);
-            float rtt = conn->meanRoundTripTime + std::min(stdev, float(CLASSICFRAMETIME / MSEC_PER_GET_CLOCK));
+            float stdev = sqrt(conn->varRoundTripTime);
+            float rtt = conn->meanRoundTripTime + std::min(2.0*stdev, (4.0*CLASSICFRAMETIME / MSEC_PER_GET_CLOCK));
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
-                    SDL_Log("meanRTT[%d] = %.1f, 1.3*stdevRTT = %.1f, maxRtt=%.1f\n",
+                    SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
                             conn->myId,
                             conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
                             stdev*MSEC_PER_GET_CLOCK,

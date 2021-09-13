@@ -81,7 +81,6 @@ public:
 
     long topSentFrame;
 
-    long latencyFrameTime; //	In milliseconds.
     long frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
@@ -167,6 +166,7 @@ public:
     ScoreInterfaceReasons lastReason;
 
     uint32_t nextScheduledFrame;
+    uint32_t nextPingTime;
     long lastFrameTime;
     Boolean canPreSend;
 
@@ -246,11 +246,8 @@ public:
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
-    virtual double LatencyFrameTimeScale();
-
     virtual long RoundTripToFrameLatency(long rtt);
     virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, const char *slowPlayer = nullptr);
-    virtual void AdjustFrameTime();
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(long ft);
