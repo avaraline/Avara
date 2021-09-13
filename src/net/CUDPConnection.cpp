@@ -372,13 +372,19 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
 
-            // if ping packet RTT is more than 3x standard deviation above the mean, it's an outlier, don't add it to stats
-            if (thePacket->packet.command == kpPing && (difference*difference) > 9.0*varRoundTripTime) {
+            // if kpPing packet RTT is off by more than a full classic frame, OR
+            // it's more than 5x standard deviation above the mean,
+            // then it's an outlier...de-weight it heavily, but don't remove it
+            // completely in case ALL packets are suddenly worse
+            if (thePacket->packet.command == kpPing && difference > 0 &&
+                (difference*MSEC_PER_GET_CLOCK > CLASSICFRAMETIME ||
+                 (difference*difference) > 25*varRoundTripTime)) {
                 #if PACKET_DEBUG || LATENCY_DEBUG
-                    SDL_Log("                               cn=%d cmd=%d roundTrip=%ld OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
-                            myId, thePacket->packet.command, roundTrip, difference / sqrt(varRoundTripTime));
+                    SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
+                            myId, thePacket->packet.command, roundTrip, meanRoundTripTime, difference / sqrt(varRoundTripTime));
                 #endif
-                return;
+                // de-weight this packet
+                commandMultiplier *= (varRoundTripTime / (difference*difference));
             }
 
             // quicker to move up on latency spikes, slower to move down
