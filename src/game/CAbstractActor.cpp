@@ -431,7 +431,7 @@ CAbstractActor *CAbstractActor::EndScript() {
 
     mass = ReadFixedVar(iMass);
 
-    teamColor = ReadLongVar(iTeam) % kMaxTeamColors;
+    teamColor = ReadLongVar(iTeam) % (kMaxTeamColors + 1);
     teamMask = 1 << teamColor;
 
     gHub->PreLoadSample(blastSound);
