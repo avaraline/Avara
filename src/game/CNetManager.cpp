@@ -753,8 +753,10 @@ void CNetManager::ViewControl() {
 }
 
 void CNetManager::SendPingCommand(int totalTrips) {
-    itsCommManager->SendPacket(kdEveryone - (1 << itsCommManager->myId),
-                               kpPing, 0, 0, totalTrips, 0, NULL);
+    if (totalTrips > 0) {
+        itsCommManager->SendPacket(kdEveryone - (1 << itsCommManager->myId),
+                                   kpPing, 0, 0, totalTrips-1, 0, NULL);
+   }
 }
 
 void CNetManager::SendStartCommand() {
