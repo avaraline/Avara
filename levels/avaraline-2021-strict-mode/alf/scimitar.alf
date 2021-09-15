@@ -43,6 +43,13 @@
   <Wall d="1" fill="#262522" frame="#000000" h="7.75" w="1" x="11" z="-10" />
   <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="10" z="-11" />
   <Wall d="1" fill="#262522" frame="#000000" h="7.25" w="1" x="11" z="-11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6.75" w="1" x="12" z="-9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="12" z="-10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6.25" w="1" x="12" z="-11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6.75" w="1" x="12" z="-12" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7.25" w="1" x="11" z="-12" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6.5" w="1" x="10" z="-12" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="9" z="-12" />
 
   <!-- BASALT PILLAR 2 -->
   <Wall d="1" fill="#262522" frame="#000000" h="8.5" w="1" x="-8" z="8" />
@@ -73,6 +80,13 @@
   <Wall d="1" fill="#262522" frame="#000000" h="7.75" w="1" x="-11" z="10" />
   <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="-10" z="11" />
   <Wall d="1" fill="#262522" frame="#000000" h="7.25" w="1" x="-11" z="11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6.75" w="1" x="-12" z="9" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="-12" z="10" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6.25" w="1" x="-12" z="11" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6.75" w="1" x="-12" z="12" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7.25" w="1" x="-11" z="12" />
+  <Wall d="1" fill="#262522" frame="#000000" h="6.5" w="1" x="-10" z="12" />
+  <Wall d="1" fill="#262522" frame="#000000" h="7" w="1" x="-9" z="12" />
 
   <!-- OUTSKIRTS 1 -->
   <Wall d="20" fill="#403b36" frame="#000000" h="2" w="10" x="-37.5" z="-32.5" />
@@ -213,7 +227,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody angle="45" cx="0" cz="0" fill="#ffffff" frame="#000000" grenades="mLgGrenade" missiles="mLgMissile" out="mTaken" shape="bspAvaraA" speed="2" start="mShow" y="3 + mGoodyOffset" />
+  <Goody angle="45" cx="0" cz="0" fill="#ffe9a6" frame="#000000" grenades="mLgGrenade" missiles="mLgMissile" out="mTaken" shape="bspAvaraA" speed="2" start="mShow" y="3 + mGoodyOffset" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
@@ -261,9 +275,11 @@
   <Incarnator angle="225" cx="-37.5" cz="67.5" y="20" />
   <Incarnator angle="270" cx="-57.5" cz="7.5" y="20" />
   <Incarnator angle="90" cx="57.5" cz="-7.5" y="20" />
+  <Incarnator angle="0" cx="-20" cz="-62.5" y="20" />
+  <Incarnator angle="180" cx="20" cz="62.5" y="20" />
 
   <Teleporter activeRange="150" deadRange="105" cx="0" cz="0" destGroup="@recenter" group="-1" shape="0" spin="true" y="-30" />
   <Teleporter activeRange="2000" cx="0" cz="0" shape="0" start="@winTeam" win="1000" y="200" />
-  <Teleporter cx="12.5" cz="-12.5" group="@recenter" shape="0" spin="true" y="20" />
-  <Teleporter cx="-12.5" cz="12.5" group="@recenter" shape="0" spin="true" y="20" />
+  <Teleporter cx="10" cz="-10" group="@recenter" shape="0" spin="true" y="20" />
+  <Teleporter cx="-10" cz="10" group="@recenter" shape="0" spin="true" y="20" />
 </map>
