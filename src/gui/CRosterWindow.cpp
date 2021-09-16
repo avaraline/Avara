@@ -211,10 +211,10 @@ void CRosterWindow::UpdateRoster() {
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
             colors[i]->setTextColor(nanogui::Color(
-                LongToR(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
-                LongToG(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
-                LongToB(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value()),
-                LongToA(CColorManager::getTeamTextColor(theNet->teamColors[i] + 1).value())
+                LongToR(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToG(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToB(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToA(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1))
             ));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
