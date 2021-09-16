@@ -28,6 +28,8 @@ ifeq ($(UNAME), Darwin)
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	SRCS += $(shell find vendor/miniupnpc -maxdepth 1 -name '*.c')
 	INCFLAGS += -Ivendor/miniupnpc
+	CXXFLAGS += -mmacosx-version-min=10.14
+	CFLAGS += -mmacosx-version-min=10.14
 ifneq ("$(wildcard $(HOME)/Library/Frameworks/SDL2.framework)", "")
 	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
 else
