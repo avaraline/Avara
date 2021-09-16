@@ -27,7 +27,16 @@
 
 #include <string>
 #include <cmath>
-#include <optional>
+
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
 
 namespace CSSColorParser {
 
