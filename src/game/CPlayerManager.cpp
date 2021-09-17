@@ -13,6 +13,7 @@
 #include "CColorManager.h"
 #include "CCommManager.h"
 #include "CIncarnator.h"
+#include "CRandomIncarnator.h"
 #include "CNetManager.h"
 #include "CWalkerActor.h"
 #include "CommDefs.h"
@@ -1020,6 +1021,11 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
                 }
             }
             spotAvailable = spotAvailable->nextIncarnator;
+        }
+
+        for (int tries = 3; itsPlayer->isInLimbo && tries > 0; tries--) {
+            // try a psuedo-random incarnation
+            itsPlayer->Reincarnate(new CRandomIncarnator(itsGame->incarnatorList));
         }
 
         if (itsPlayer->isInLimbo) {
