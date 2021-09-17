@@ -1025,7 +1025,8 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
 
         for (int tries = 3; itsPlayer->isInLimbo && tries > 0; tries--) {
             // try a psuedo-random incarnation
-            itsPlayer->Reincarnate(new CRandomIncarnator(itsGame->incarnatorList));
+            CRandomIncarnator waldo(itsGame->incarnatorList);
+            itsPlayer->Reincarnate(&waldo);
         }
 
         if (itsPlayer->isInLimbo) {
