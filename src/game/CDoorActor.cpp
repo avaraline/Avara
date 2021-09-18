@@ -192,23 +192,29 @@ CAbstractActor *CDoorActor::EndScript() {
         partCount = 1;
         action = kDoorStopped;
         isActive = kIsActive;
+
+        classicOpenDelay = ReadLongVar(iOpenDelay);
+        classicCloseDelay = ReadLongVar(iCloseDelay);
+        classicGuardDelay = ReadLongVar(iGuardDelay);
+        classicOpenSpeed = ReadFixedVar(iOpenSpeed);
+        classicCloseSpeed = ReadFixedVar(iCloseSpeed);
     }
 
     return this;
 }
 
 void CDoorActor::AdaptableSettings() {
-    openDelay = FpsFramesPerClassic(ReadLongVar(iOpenDelay));
-    closeDelay = FpsFramesPerClassic(ReadLongVar(iCloseDelay));
-    collisionGuardTime = FpsFramesPerClassic(ReadLongVar(iGuardDelay));
+    openDelay = FpsFramesPerClassic(classicOpenDelay);
+    closeDelay = FpsFramesPerClassic(classicCloseDelay);
+    collisionGuardTime = FpsFramesPerClassic(classicGuardDelay);
 
     FPS_DEBUG("openDelay = " << openDelay << ", closeDelay = " << closeDelay << ", collisionGuardTime = " << collisionGuardTime << "\n");
 
-    openSpeed = ReadFixedVar(iOpenSpeed) / 100;
+    openSpeed =  classicOpenSpeed / 100;
     if (openSpeed <= 0 || openSpeed > kDoorOpen)
         openSpeed = kDoorSpeed;
 
-    closeSpeed = ReadFixedVar(iCloseSpeed) / 100;
+    closeSpeed = classicCloseSpeed / 100;
     if (closeSpeed <= 0 || closeSpeed > kDoorOpen)
         closeSpeed = kDoorSpeed;
 

@@ -89,6 +89,8 @@ CAbstractActor *CGoody::EndScript() {
         boostTime = ReadLongVar(iBoostTime);
         outMsg = ReadLongVar(iOutVar);
 
+        classicRotation = FDegToOne(ReadFixedVar(iSpeed));
+
         if(itsGame->itsApp->Boolean(kIgnoreCustomGoodySound)) {
             soundId = kGoodySound;
         }
@@ -119,7 +121,7 @@ CAbstractActor *CGoody::EndScript() {
 }
 
 void CGoody::AdaptableSettings() {
-    rotationSpeed = FpsCoefficient2(FDegToOne(ReadFixedVar(iSpeed)));
+    rotationSpeed = FpsCoefficient2(classicRotation);
 }
 
 void CGoody::FrameAction() {
