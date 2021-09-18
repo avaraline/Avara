@@ -53,6 +53,9 @@ CAbstractActor *CFreeSolid::EndScript() {
         status = ReadLongVar(iStatus); //	What's our status? go/stop?
 
         hitPower = ReadFixedVar(iShotPower); //	Collision damage to other party
+    
+        classicAcceleration = ReadFixedVar(iAccelerate);
+        classicGravity = ReadFixedVar(iCustomGravity);
 
         shapeId = ReadLongVar(iShape); //	Read our shape resource ID
         if (shapeId) {
@@ -99,7 +102,7 @@ CAbstractActor *CFreeSolid::EndScript() {
 
 void CFreeSolid::AdaptableSettings() {
     Fixed fpsSpeedOffset;
-    FpsCoefficients(ReadFixedVar(iAccelerate), ReadFixedVar(iCustomGravity), &acceleration, &customGravity, &fpsSpeedOffset);
+    FpsCoefficients(classicAcceleration, classicGravity, &acceleration, &customGravity, &fpsSpeedOffset);
 
     if (itsGame->frameNumber == 0) {
         // high-FPS initially falls a little slower so compensate by adding an offset

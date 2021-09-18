@@ -21,8 +21,8 @@ enum { kDoorStopped, kDoorOpening, kDoorClosing };
 class CDoorActor : public CGlowActors {
 public:
     Fixed doorStatus;
-    Fixed openSpeed;
-    Fixed closeSpeed;
+    Fixed classicOpenSpeed, openSpeed;
+    Fixed classicCloseSpeed, closeSpeed;
 
     Fixed deltas[3];
     Fixed twists[3];
@@ -36,9 +36,9 @@ public:
     long closeCounter;
     long openCounter;
 
-    long openDelay;
-    long closeDelay;
-    long collisionGuardTime;
+    long classicOpenDelay, openDelay;
+    long classicCloseDelay, closeDelay;
+    long classicGuardDelay, collisionGuardTime;
 
     short action;
 

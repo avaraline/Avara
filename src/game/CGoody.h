@@ -16,7 +16,7 @@ public:
     MessageRecord stopMsg;
     MsgType outMsg;
 
-    Fixed rotationSpeed;
+    Fixed classicRotation, rotationSpeed;
     Fixed partRoll;
 
     short grenades;
