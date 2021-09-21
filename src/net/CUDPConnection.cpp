@@ -378,23 +378,20 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
 
-            // if kpPing packet RTT is off by more than a full classic frame, OR
-            // it's more than 5x standard deviation above the mean,
+            // if kpPing packet RTT is above the mean by more than a full classic frame,
             // then it's an outlier...de-weight it heavily, but don't remove it
             // completely in case ALL packets are suddenly worse
-            if (thePacket->packet.command == kpPing && difference > 0) {
-                double ratio = difference*difference / varRoundTripTime;
-                if (difference*MSEC_PER_GET_CLOCK > CLASSICFRAMETIME || ratio > 25) {
-                    #if PACKET_DEBUG || LATENCY_DEBUG
-                        SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
-                                myId, thePacket->packet.command, roundTrip, meanRoundTripTime, difference / sqrt(varRoundTripTime));
-                    #endif
+            if (thePacket->packet.command == kpPing && difference*MSEC_PER_GET_CLOCK > CLASSICFRAMETIME) {
+                double reduction = difference*difference / varRoundTripTime;
+                #if PACKET_DEBUG || LATENCY_DEBUG
+                    SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
+                            myId, thePacket->packet.command, roundTrip, meanRoundTripTime, sqrt(reduction));
+                #endif
 
-                    // ratio can be less than 1 if variance is high and diff > CLASSICFRAMETIME, guard to ensure alpha < 1.0
-                    ratio = std::max(4.0, ratio);
-                    // de-weight this packet
-                    commandMultiplier /= ratio;
-                }
+                // ratio can be less than 1 if variance is high, guard to ensure alpha < 1.0
+                reduction = std::max(4.0, reduction);
+                // de-weight this packet
+                commandMultiplier /= reduction;
             }
 
             // quicker to move up on latency spikes, slower to move down
