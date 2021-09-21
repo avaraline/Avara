@@ -1951,10 +1951,10 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            // add in 1.5*stdev (~93% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // add in 1.9*stdev (~97% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
             // note: is this really a erlang distribution?  if so, what's the proper equation?
             float stdev = sqrt(conn->varRoundTripTime);
-            float rtt = conn->meanRoundTripTime + std::min(1.5*stdev, (1.0*CLASSICFRAMETIME / MSEC_PER_GET_CLOCK));
+            float rtt = conn->meanRoundTripTime + std::min(1.9*stdev, (1.0*CLASSICFRAMETIME / MSEC_PER_GET_CLOCK));
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
