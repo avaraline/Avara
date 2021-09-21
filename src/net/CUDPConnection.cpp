@@ -16,7 +16,8 @@
 #include <SDL2/SDL.h>
 
 #define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
-#define kInitialRoundTripTime     (1000 / MSEC_PER_GET_CLOCK)  // 1 second
+#define kInitialRoundTripTime     (500 / MSEC_PER_GET_CLOCK)   // 0.5 second
+#define kInitialRoundTripVar      long(CLASSICFRAMETIME*CLASSICFRAMETIME / (MSEC_PER_GET_CLOCK*MSEC_PER_GET_CLOCK))
 #define kMaxAllowedRetransmitTime (4000 / MSEC_PER_GET_CLOCK)  // 4 seconds
 #define kAckRetransmitBase (41 / MSEC_PER_GET_CLOCK)
 #define kULPTimeOut (120000 / MSEC_PER_GET_CLOCK) //	120 seconds
@@ -70,7 +71,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
-    varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
+    varRoundTripTime = kInitialRoundTripVar;
     haveToSendAck = false;
     nextAckTime = 0;
 
@@ -362,11 +363,16 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
         roundTrip = when - thePacket->birthDate;
         float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
 
-        if (maxValid == 4) {
+        if (uint16_t(maxValid) <= 10) {
+            // use best RTT of early message(s) to prime initial values of RTT mean/var
             if (roundTrip < meanRoundTripTime) {
                 meanRoundTripTime = roundTrip;
-                varRoundTripTime = roundTrip * roundTrip;  // err on the high side initially
+                varRoundTripTime = std::min(roundTrip*roundTrip, kInitialRoundTripVar);
             }
+            #if PACKET_DEBUG || LATENCY_DEBUG
+                SDL_Log("INITIALIZING RTT...            cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f, maxValid=%hd\n",
+                        myId, thePacket->packet.command, roundTrip, meanRoundTripTime, sqrt(varRoundTripTime), uint16_t(maxValid));
+            #endif
         } else if (commandMultiplier > 0) {
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
@@ -376,15 +382,19 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // it's more than 5x standard deviation above the mean,
             // then it's an outlier...de-weight it heavily, but don't remove it
             // completely in case ALL packets are suddenly worse
-            if (thePacket->packet.command == kpPing && difference > 0 &&
-                (difference*MSEC_PER_GET_CLOCK > CLASSICFRAMETIME ||
-                 (difference*difference) > 25*varRoundTripTime)) {
-                #if PACKET_DEBUG || LATENCY_DEBUG
-                    SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
-                            myId, thePacket->packet.command, roundTrip, meanRoundTripTime, difference / sqrt(varRoundTripTime));
-                #endif
-                // de-weight this packet
-                commandMultiplier *= (varRoundTripTime / (difference*difference));
+            if (thePacket->packet.command == kpPing && difference > 0) {
+                double ratio = difference*difference / varRoundTripTime;
+                if (difference*MSEC_PER_GET_CLOCK > CLASSICFRAMETIME || ratio > 25) {
+                    #if PACKET_DEBUG || LATENCY_DEBUG
+                        SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
+                                myId, thePacket->packet.command, roundTrip, meanRoundTripTime, difference / sqrt(varRoundTripTime));
+                    #endif
+
+                    // ratio can be less than 1 if variance is high and diff > CLASSICFRAMETIME, guard to ensure alpha < 1.0
+                    ratio = std::max(4.0, ratio);
+                    // de-weight this packet
+                    commandMultiplier /= ratio;
+                }
             }
 
             // quicker to move up on latency spikes, slower to move down
@@ -700,7 +710,7 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = itsOwner->urgentResendTime;
     meanRoundTripTime = kInitialRoundTripTime;
-    varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
+    varRoundTripTime = kInitialRoundTripVar;
     // pessimistTime = roundTripTime;
     // optimistTime = roundTripTime;
     // realRoundTrip = roundTripTime;
