@@ -409,12 +409,14 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
             retransmitTime = std::min(retransmitTime, (long)kMaxAllowedRetransmitTime);
 
-            // If we want the game to stay smooth, resend urgent/game packets near the overall LT (max(RTT)/2) so that
-            // lost packets can be retransmitted and have a chance of getting there in time to be only 1 frame late.
+            // If we want the game to stay smooth, resend urgent/game packets at difference between actual LT and an estimate of
+            // LT that doesn't add in the standard deviations.  In theory this could give the 1st resend packet a 50% chance
+            // of being received on time (within LT*2) on the SLOWEST connection (higher probability for all other connections).
             // This may result in extra re-sends but should help the game flow, especially if a connection is dropping packets.
             // This latency estimate goes across all active connections so that faster connections won't be penalized and
             // have to re-send to each other as often.
-            urgentRetransmitTime = std::min(LatencyEstimate(), itsOwner->urgentResendTime);
+            urgentRetransmitTime = 2*(gCurrentGame->latencyTolerance * CLASSICFRAMETIME * MSEC_PER_GET_CLOCK - LatencyEstimate());
+            urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
             urgentRetransmitTime = std::min(urgentRetransmitTime, (long)retransmitTime);
 
             #if PACKET_DEBUG || LATENCY_DEBUG
