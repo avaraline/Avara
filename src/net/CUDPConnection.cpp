@@ -95,6 +95,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     totalSent = 0;
     totalResent = 0;
     numResendsWithoutReceive = 0;
+    recentResendRate = 0;
 }
 
 void CUDPConnection::FlushQueues() {
@@ -319,12 +320,16 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
             #endif
         } else {
             totalSent++;
+            static double RECENT_RESEND_SMOOTH = (gCurrentGame->fpsScale/80.0);
+            recentResendRate *= (1.0-RECENT_RESEND_SMOOTH);
             if (thePacket->birthDate != thePacket->nextSendTime) {
                 totalResent++;
                 numResendsWithoutReceive++;
+                recentResendRate += RECENT_RESEND_SMOOTH;
                 #if PACKET_DEBUG | LATENCY_DEBUG
-                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d, age=%ld, percentResends = %.1f, numResendsWithoutReceive = %ld\n",
-                            myId, (uint16_t)thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent, numResendsWithoutReceive);
+                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d age=%ld resend:count=%ld total=%.1f%% recent=%.1f%%\n",
+                            myId, (uint16_t)thePacket->serialNumber, curTime - thePacket->birthDate,
+                            numResendsWithoutReceive, 100.0*totalResent/totalSent, 100.0*recentResendRate);
                 #endif
             }
             #if PACKET_DEBUG
