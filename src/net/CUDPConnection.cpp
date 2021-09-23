@@ -414,13 +414,18 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
             retransmitTime = std::min(retransmitTime, (long)kMaxAllowedRetransmitTime);
 
-            // If we want the game to stay smooth, resend urgent/game packets at difference between actual LT and an estimate of
-            // LT that doesn't add in the standard deviations.  In theory this could give the 1st resend packet a 50% chance
+            // If we want the game to stay smooth, resend urgent/game packets with the goal that both the orignal packet and
+            // the 1st resend packet could arrive before they need to be acted on.
+            // ...at difference between actual LT and mean roundTripTime
+            // for this connection (minus a small buffer) to ensure that the 1st re-sent packet has better than a 50% chance
             // of being received on time (within LT*2) on the SLOWEST connection (higher probability for all other connections).
             // This may result in extra re-sends but should help the game flow, especially if a connection is dropping packets.
             // This latency estimate goes across all active connections so that faster connections won't be penalized and
             // have to re-send to each other as often.
-            urgentRetransmitTime = 2*(gCurrentGame->latencyTolerance * CLASSICFRAMETIME * MSEC_PER_GET_CLOCK - LatencyEstimate());
+            static float RESEND_PACKET_BUFFER = 16.0 / MSEC_PER_GET_CLOCK;  // want resent packet to arrive roughly this many msec before 2*LT
+            urgentRetransmitTime =
+                2*gCurrentGame->latencyTolerance * CLASSICFRAMETIME / MSEC_PER_GET_CLOCK - meanRoundTripTime - RESEND_PACKET_BUFFER;
+            // make sure it doesn't go below urgentResendTime or above retransmitTime
             urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
             urgentRetransmitTime = std::min(urgentRetransmitTime, (long)retransmitTime);
 
