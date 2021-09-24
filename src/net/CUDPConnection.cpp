@@ -17,7 +17,7 @@
 
 #define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
 #define kInitialRoundTripTime     (500 / MSEC_PER_GET_CLOCK)   // 0.5 second
-#define kInitialRoundTripVar      long(CLASSICFRAMETIME*CLASSICFRAMETIME / (MSEC_PER_GET_CLOCK*MSEC_PER_GET_CLOCK))
+#define kInitialRoundTripVar      long(CLASSICFRAMECLOCK*CLASSICFRAMECLOCK)
 #define kMaxAllowedRetransmitTime (4000 / MSEC_PER_GET_CLOCK)  // 4 seconds
 #define kAckRetransmitBase (41 / MSEC_PER_GET_CLOCK)
 #define kULPTimeOut (120000 / MSEC_PER_GET_CLOCK) //	120 seconds
@@ -424,7 +424,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // have to re-send to each other as often.
             static float RESEND_PACKET_BUFFER = 16.0 / MSEC_PER_GET_CLOCK;  // want resent packet to arrive roughly this many msec before 2*LT
             urgentRetransmitTime =
-                2*gCurrentGame->latencyTolerance * CLASSICFRAMETIME / MSEC_PER_GET_CLOCK - meanRoundTripTime - RESEND_PACKET_BUFFER;
+                2*gCurrentGame->latencyTolerance * CLASSICFRAMECLOCK - meanRoundTripTime - RESEND_PACKET_BUFFER;
             // make sure it doesn't go below urgentResendTime or above retransmitTime
             urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
             urgentRetransmitTime = std::min(urgentRetransmitTime, (long)retransmitTime);
