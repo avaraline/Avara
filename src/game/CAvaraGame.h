@@ -158,7 +158,7 @@ public:
     Handle mapRes; //	Keyboard mapping resource handle.
 
     short moJoOptions; //	Mouse and Joystick options.
-    short sensitivity;
+    double sensitivity;
 
     double latencyTolerance;
 

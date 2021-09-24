@@ -695,7 +695,8 @@ void CAvaraGame::ReadGamePrefs() {
     if (itsApp->Boolean(kInvertYAxisTag)) {
         moJoOptions += kFlipAxis;
     }
-    sensitivity = itsApp->Number(kMouseSensitivityTag);
+    sensitivity = pow(2.0, gApplication->Get<double>(kMouseSensitivityTag));
+    SDL_Log("mouse sensitivity multiplier = %.2lf\n", sensitivity);
     latencyTolerance = gApplication->Get<double>(kLatencyToleranceTag);
 }
 
