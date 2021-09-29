@@ -12,8 +12,6 @@
 
 #include "CSmartPart.h"
 
-#define MINSPEED FIX3(10)
-
 void CRealMovers::IAbstractActor() {
     CGlowActors::IAbstractActor();
 
@@ -98,6 +96,7 @@ void CRealMovers::FindBestMovement(CSmartPart *objHit) {
             newSpeed[1] = speed[1] - FMul(norm[1], dotProd);
             newSpeed[2] = speed[2] - FMul(norm[2], dotProd);
 
+            Fixed MINSPEED = FpsCoefficient2(FIX3(10));
             if (newSpeed[0] > MINSPEED || newSpeed[0] < -MINSPEED || newSpeed[1] > MINSPEED ||
                 newSpeed[1] < -MINSPEED || newSpeed[2] > MINSPEED || newSpeed[2] < -MINSPEED) {
 
