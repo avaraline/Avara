@@ -53,7 +53,10 @@ using json = nlohmann::json;
 // Levels
 #define kRecentSets "recentSets"
 #define kRecentLevels "recentLevels"
+
+// Sound
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
+#define kSoundVolume "soundVolume"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -113,6 +116,7 @@ static json defaultPrefs = {
     {kTrackerRegisterFrequency, 5},
     {kRecentSets, {}},
     {kRecentLevels, {}},
+    {kSoundVolume, 100},
     {kIgnoreCustomGoodySound, false}
 };
 
