@@ -793,14 +793,14 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
             grenadeLimit = hull.maxGrenades;
 
         maxShields = FMul(maxShields, hull.shieldsRatio);
-        shieldRegen = FMul(shieldRegen, hull.shieldsChargeRatio);
+        classicShieldRegen = FMul(classicShieldRegen, hull.shieldsChargeRatio);
         shields = maxShields;
 
         maxEnergy = FMul(maxEnergy, hull.energyRatio);
         energy = maxEnergy;
-        generatorPower = FMul(generatorPower, hull.energyChargeRatio);
+        classicGeneratorPower = FMul(classicGeneratorPower, hull.energyChargeRatio);
 
-        chargeGunPerFrame = FMul(chargeGunPerFrame, hull.shotChargeRatio);
+        classicChargeGunPerFrame = FMul(classicChargeGunPerFrame, hull.shotChargeRatio);
         activeGunEnergy = FMul(activeGunEnergy, hull.minShotRatio);
         fullGunEnergy = FMul(fullGunEnergy, hull.maxShotRatio);
 

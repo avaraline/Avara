@@ -49,12 +49,12 @@ public:
     //	Shields & energy:
     Fixed energy;
     Fixed maxEnergy; //	Maximum stored energy level
-    Fixed generatorPower; //	Energy gain/frame
+    Fixed classicGeneratorPower, generatorPower; //	Energy gain/frame
     long boostEndFrame;
     long boostsRemaining;
 
     Fixed maxShields; //	Maximum shield energy
-    Fixed shieldRegen; //	Shield regeneration rate
+    Fixed classicShieldRegen, shieldRegen; //	Shield regeneration rate
 
     short missileCount;
     short grenadeCount;
@@ -88,7 +88,7 @@ public:
     Fixed gunEnergy[2]; //	Left/right guns
     Fixed fullGunEnergy;
     Fixed activeGunEnergy;
-    Fixed chargeGunPerFrame;
+    Fixed classicChargeGunPerFrame, chargeGunPerFrame;
     long mouseShootTime; //	To pace mouse button autofire.
     Vector gunOffset;
     Boolean fireGun;

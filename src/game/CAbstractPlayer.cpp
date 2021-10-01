@@ -167,6 +167,11 @@ void CAbstractPlayer::StartSystems() {
 
     nextGrenadeLoad = 0;
     nextMissileLoad = 0;
+
+    // variables in AdaptableSettings need to have "classic" counterparts in case they are changed in CWalkerActor::ReceiveConfig()
+    classicGeneratorPower = FIX3(30);
+    classicShieldRegen = FIX3(30);       //  Use 0.030 per frame to repair shields
+    classicChargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
 }
 
 void CAbstractPlayer::LoadScout() {
@@ -277,10 +282,10 @@ CAbstractActor *CAbstractPlayer::EndScript() {
 }
 
 void CAbstractPlayer::AdaptableSettings() {
-    // any settings that are affected by frame rate should go here
-    generatorPower = FpsCoefficient2(FIX3(30));
-    shieldRegen = FpsCoefficient2(FIX3(30));       //  Use 0.030 per frame to repair shields
-    chargeGunPerFrame = FpsCoefficient2(FIX3(35)); //    Charge gun at 0.035 units per frame
+    // any settings that are affected by frame rate should go here, also double-check CWalkerActor::ReceiveConfig
+    generatorPower = FpsCoefficient2(classicGeneratorPower);
+    shieldRegen = FpsCoefficient2(classicShieldRegen);
+    chargeGunPerFrame = FpsCoefficient2(classicChargeGunPerFrame); //    Charge gun at 0.035 units per frame
 }
 
 void CAbstractPlayer::Dispose() {
