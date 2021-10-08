@@ -8,6 +8,7 @@
 */
 
 #include "CAbstractActor.h"
+#include "CColorManager.h"
 
 #include "CDepot.h"
 #include "CScaledBSP.h"
@@ -430,7 +431,7 @@ CAbstractActor *CAbstractActor::EndScript() {
 
     mass = ReadFixedVar(iMass);
 
-    teamColor = ReadLongVar(iTeam);
+    teamColor = ReadLongVar(iTeam) % (kMaxTeamColors + 1);
     teamMask = 1 << teamColor;
 
     gHub->PreLoadSample(blastSound);
@@ -1155,38 +1156,8 @@ short CAbstractActor::GetPlayerPosition() {
     return -1; //	Not a player, as far as we know, so return -1 (invalid position)
 }
 
-long CAbstractActor::GetLongTeamColorOr(long defaultColor) {
-    long longTeamColor;
-    switch (teamColor) {
-        case kGreenTeam:
-            longTeamColor = kGreenTeamColor;
-            break;
-        case kYellowTeam:
-            longTeamColor = kYellowTeamColor;
-            break;
-        case kRedTeam:
-            longTeamColor = kRedTeamColor;
-            break;
-        case kPinkTeam:
-            longTeamColor = kPinkTeamColor;
-            break;
-        case kPurpleTeam:
-            longTeamColor = kPurpleTeamColor;
-            break;
-        case kBlueTeam:
-            longTeamColor = kBlueTeamColor;
-            break;
-        case kOrangeTeam:
-            longTeamColor = kOrangeTeamColor;
-            break;
-        case kLimeTeam:
-            longTeamColor = kLimeTeamColor;
-            break;
-        default:
-            longTeamColor = defaultColor;
-            break;
-    }
-    return longTeamColor;
+uint32_t CAbstractActor::GetTeamColorOr(uint32_t defaultColor) {
+    return CColorManager::getTeamColor(teamColor).value_or(defaultColor);
 }
 
 short CAbstractActor::GetBallSnapPoint(long theGroup,

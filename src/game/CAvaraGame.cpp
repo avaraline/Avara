@@ -34,7 +34,6 @@
 #include "InfoMessages.h"
 //#include "CCapMaster.h"
 #include "AvaraDefines.h"
-#include "CCompactTagBase.h"
 #include "CSoundHub.h"
 #include "CSoundMixer.h"
 #include "CommandList.h"
@@ -49,6 +48,7 @@
 #include "CHUD.h"
 #include "Preferences.h"
 #include "Resource.h"
+#include "RGBAColor.h"
 
 #define kHighShadeCount 12
 
@@ -158,11 +158,10 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     allowBackgroundProcessing = false;
 
-    loadedTag = 0;
-    loadedDirectory = 0;
-    loadedLevel[0] = 0;
-    loadedDesigner[0] = 0;
-    loadedInfo[0] = 0;
+    loadedTag = "";
+    loadedLevel = "";
+    loadedDesigner = "";
+    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
     simpleExplosions = false;
@@ -278,18 +277,14 @@ CAbstractPlayer *CAvaraGame::GetSpectatePlayer() {
 }
 
 CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
-    CAbstractPlayer *thePlayer;
-
-    thePlayer = playerList;
-    while (thePlayer) {
-        if (thePlayer->itsManager && thePlayer->itsManager->IsLocalPlayer()) {
-            break;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *mgr = itsNet->playerTable[i];
+        if (mgr && mgr->IsLocalPlayer()) {
+            return mgr->GetPlayer();
         }
-
-        thePlayer = thePlayer->nextPlayer;
     }
 
-    return thePlayer;
+    return NULL;
 }
 
 void CAvaraGame::AddActor(CAbstractActor *theActor) {
@@ -516,11 +511,9 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
     gHub->FlagOldSamples();
 
-    loadedTag = 0;
-    loadedDirectory = 0;
-    loadedLevel[0] = 0;
-    loadedDesigner[0] = 0;
-    loadedInfo[0] = 0;
+    loadedLevel = "";
+    loadedDesigner = "";
+    loadedInfo = "";
     loadedTimeLimit = 600;
     timeInSeconds = 0;
 
@@ -586,6 +579,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
 void CAvaraGame::EndScript() {
     short i;
+    uint32_t lightColor;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -594,36 +588,40 @@ void CAvaraGame::EndScript() {
     worldShader->Apply();
 
     itsView->ambientLight = ReadFixedVar(iAmbient);
-    AvaraGLSetAmbient(ToFloat(ReadFixedVar(iAmbient)));
+    itsView->ambientLightColor = ParseColor(ReadStringVar(iAmbientColor))
+        .value_or(DEFAULT_LIGHT_COLOR);
+    AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
 
     for (i = 0; i < 4; i++) {
-        intensity = ReadFixedVar(iLightsTable + 3 * i);
+        intensity = ReadFixedVar(iLightsTable + 4 * i);
 
         if (intensity >= 2048) {
-            angle1 = ReadFixedVar(iLightsTable + 1 + 3 * i);
-            angle2 = ReadFixedVar(iLightsTable + 2 + 3 * i);
+            angle1 = ReadFixedVar(iLightsTable + 1 + 4 * i);
+            angle2 = ReadFixedVar(iLightsTable + 2 + 4 * i);
 
             x = FMul(FDegCos(angle1), intensity);
             y = FMul(FDegSin(-angle1), intensity);
             z = FMul(FDegCos(angle2), x);
             x = FMul(FDegSin(-angle2), x);
+            lightColor = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
+                .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
-            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f",
-                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2));
+            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
+                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), lightColor);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
-            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2));
+            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), lightColor);
         } else {
             itsView->SetLightValues(i, 0, 0, 0, kLightOff);
-            AvaraGLSetLight(i, 0, 0, 0);
+            AvaraGLSetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR);
         }
     }
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
 
-    ReadStringVar(iDesignerName, loadedDesigner);
-    ReadStringVar(iLevelInformation, loadedInfo);
+    loadedDesigner = ReadStringVar(iDesignerName);
+    loadedInfo = ReadStringVar(iLevelInformation);
     loadedTimeLimit = ReadLongVar(iTimeLimit);
 
     groundTraction = ReadFixedVar(iDefaultTraction);
@@ -673,7 +671,10 @@ void CAvaraGame::SendStartCommand() {
     if (gameStatus == kReadyStatus) {
         itsNet->SendStartCommand();
     } else if (gameStatus == kPauseStatus) {
-        itsNet->SendResumeCommand();
+        CAbstractPlayer *player = GetLocalPlayer();
+        if(player != NULL && player->lives > 0) {
+            itsNet->SendResumeCommand();
+        }
     }
 }
 
@@ -682,6 +683,15 @@ void CAvaraGame::SendStartCommand() {
 static Boolean takeShot = false;
 
 void CAvaraGame::ReadGamePrefs() {
+    moJoOptions = 0;
+    /*
+    if (itsApp->Boolean(kJoystickModeTag)) {
+        moJoOptions += kJoystickMode;
+    }
+    */
+    if (itsApp->Boolean(kInvertYAxisTag)) {
+        moJoOptions += kFlipAxis;
+    }
     sensitivity = itsApp->Number(kMouseSensitivityTag);
     latencyTolerance = gApplication->Number(kLatencyToleranceTag);
     AdjustFrameTime();
@@ -706,8 +716,8 @@ void CAvaraGame::ResumeGame() {
         short oldEventMask;
 
         if (freshMission) {
-            itsApp->GameStarted(std::string((char *)loadedSet),
-                                std::string((char *)loadedLevel + 1, loadedLevel[0]));
+            itsApp->GameStarted(loadedSet,
+                                loadedLevel);
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
             freshPlayerList = NULL;
             InitMixer(false);
@@ -881,6 +891,11 @@ bool CAvaraGame::GameTick() {
 
     nextScheduledFrame += latencyFrameTime;
 
+    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode)
+    if (nextScheduledFrame < startTime) {
+        nextScheduledFrame = startTime + latencyFrameTime;
+    }
+
     itsDepot->RunSliverActions();
     itsApp->StartFrame(frameNumber);
     ViewControl();
@@ -907,22 +922,22 @@ void CAvaraGame::ViewControl() {
 bool CAvaraGame::canBeSpectated(CAbstractPlayer *player) {
     if(player == NULL)
         return false;
-    
+
     if(player->isInLimbo == false) {
         return true;
     }
-    
+
     if(player == GetLocalPlayer() && player->scoutView == true && player->lives == 0) {
         return true;
     }
-    
+
     return false;
 }
 
 void CAvaraGame::SpectateNext() {
     if(spectatePlayer == NULL)
         spectatePlayer = GetLocalPlayer();
-    
+
     CAbstractPlayer *nextPlayer = NULL;
     CAbstractPlayer *firstPlayer = NULL;
     CAbstractPlayer *currentPlayer = NULL;
@@ -941,7 +956,7 @@ void CAvaraGame::SpectateNext() {
             }
         }
     }
-    
+
     spectatePlayer = nextPlayer;
     if(spectatePlayer == NULL)
         spectatePlayer = firstPlayer;
@@ -968,7 +983,7 @@ void CAvaraGame::SpectatePrevious() {
             }
         }
     }
-    
+
     if(!found && previousPlayer != NULL)
         spectatePlayer = previousPlayer;
 }
@@ -977,7 +992,7 @@ CPlayerManager *CAvaraGame::FindPlayerManager(CAbstractPlayer *thePlayer) {
     for (int i = 0; i < kMaxAvaraPlayers; i++)
         if(itsNet->playerTable[i] != NULL && itsNet->playerTable[i]->GetPlayer() == thePlayer)
             return itsNet->playerTable[i];
-    
+
     return NULL;
 }
 
@@ -1003,11 +1018,12 @@ void CAvaraGame::Render(NVGcontext *ctx) {
         gameStatus == kLoseStatus) {
         ViewControl();
         itsWorld->Render(itsView);
-
+        AvaraGLSetAmbient(.7, LONG_MAX);
         AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
+        AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
         hud->Render(itsView, ctx);
-        AvaraGLSetDepthTest(true);        
+        AvaraGLSetDepthTest(true);
     }
 }
 
@@ -1052,7 +1068,7 @@ void CAvaraGame::SetLatencyTolerance(long newLatency, int maxChange, const char*
         }
         gApplication->Set(kLatencyToleranceTag, latencyTolerance);
         SDL_Log("*** LT set to %ld\n", latencyTolerance);
-        
+
         if (slowPlayer != nullptr) {
             std::ostringstream oss;
             std::time_t t = std::time(nullptr);
@@ -1083,7 +1099,7 @@ void CAvaraGame::AdjustFrameTime() {
         1.00,  //  0  64            0            16   <-- most playable (LAN)
         1.00,  //  1  64            64           16   <-- good internet
         1.00,  //  2  64            128          16
-        1.00,  //  3  64            192          16 
+        1.00,  //  3  64            192          16
         1.00,  //  4  64            256          16   <-- somewhat playable, laggy
         1.25,  //  5  80            400          13   <-- barely playable / begin recovering
         1.50,  //  6  96            576          10   <-- hope to never see LT > 5
@@ -1104,7 +1120,7 @@ long CAvaraGame::TimeToFrameCount(long timeInMsec) {
 long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     // Jump forward to the next full period.
     // For example, if we are changing latencies such that we start with 48 frames/period
-    // and we're moving to 60 frames/period, and we're on frame 48, we want to 
+    // and we're moving to 60 frames/period, and we're on frame 48, we want to
     // move forward to frame 120 and NOT frame 60.
     long periodFrames = TimeToFrameCount(period);
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);

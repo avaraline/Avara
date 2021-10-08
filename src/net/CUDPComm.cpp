@@ -32,7 +32,6 @@ int numToDrop = 0;
 
 #include "AvaraTCP.h"
 #include "CApplication.h"
-#include "CCompactTagBase.h"
 #include "CRC.h"
 #include "CUDPConnection.h"
 #include "CharWordLongPointer.h"
@@ -40,6 +39,13 @@ int numToDrop = 0;
 #include "CommandList.h"
 #include "Preferences.h"
 #include "System.h"
+
+#include <miniupnpc/miniupnpc.h>
+#include <miniupnpc/upnpcommands.h>
+#include <miniupnpc/upnperrors.h>
+
+#include <thread>
+
 
 // get rid of this
 #include "CAvaraApp.h"
@@ -96,22 +102,11 @@ enum {
     kServerTrackerInviteItem
 };
 
-// A utility function to byte-swap the host & port and create a human-readable format
 static std::string FormatAddr(IPaddress addr) {
-    std::ostringstream os;
-    ip_addr ipaddr = SDL_SwapBE32(addr.host);
-    os << (ipaddr >> 24) << "."
-       << ((ipaddr >> 16) & 0xff) << "."
-       << ((ipaddr >> 8) & 0xff) << "."
-       << (ipaddr & 0xff) <<  ":"
-       << SDL_SwapBE16(addr.port);
-    return os.str();
+    return FormatHostPort(addr.host, addr.port);
 }
 static std::string FormatAddr(CUDPConnection *conn) {
-    IPaddress ip;
-    ip.host = conn->ipAddr;
-    ip.port = conn->port;
-    return FormatAddr(ip);
+    return FormatHostPort(conn->ipAddr, conn->port);
 }
 
 
@@ -147,7 +142,7 @@ void CUDPComm::WriteAndSignPacket(PacketInfo *thePacket) {
     short dummyStackVar;
 
     thePacket->sender = myId; //	Sign it.
-    
+
     // SDL_Log("CUDPComm::WriteAndSignPacket   cmd=%d p1=%d p2=%d p3=%d sndr=%d dist=0x%02hx\n",
     //         thePacket->command, thePacket->p1, thePacket->p2, thePacket->p3,
     //         thePacket->sender, thePacket->distribution);
@@ -249,7 +244,7 @@ CUDPConnection * CUDPComm::ConnectionForPacket(UDPpacket *udp) {
         flags_offset = (rsn & 1) ? 10 : 6; // skip past ackBitmap if received sn is odd
         flags = *(int8_t *)(udp->data + flags_offset);
 
-        senderId = 0;  // default to server if senderId not in packet 
+        senderId = 0;  // default to server if senderId not in packet
         if (flags & 128) {
             // jump past the other fields to extract sender
             int sender_offset = flags_offset +
@@ -514,7 +509,7 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
             std::string passwordStr =  gApplication->String(kServerPassword);
             password[0] = passwordStr.length();
             BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
-            
+
             for (i = 0; i <= password[0]; i++) {
                 if (password[i] != thePacket->dataBuffer[i]) {
                     loginErr = afpPwdExpiredErr;
@@ -898,8 +893,7 @@ Boolean CUDPComm::AsyncWrite() {
         }
         origCramCount = cramCount--;
 
-        UDPpacket *udp = SDLNet_AllocPacket(UDPSENDBUFFERSIZE);
-        udp->channel = -1;
+        UDPpacket *udp = CreatePacket(UDPSENDBUFFERSIZE);
 
         outData.c = (char *)udp->data;
         versionCheck = outData.uw++;
@@ -1065,7 +1059,7 @@ Boolean CUDPComm::AsyncWrite() {
                 SDL_Log("   WRITING UDP packet to %s using stream %p\n",
                         FormatAddr(udp->address).c_str(), stream);
             #endif
-            
+
             #if RANDOMLY_DROP_PACKETS
                 if (rand() < RAND_MAX/256 || numToDrop > 0) {          // drop frequency = (1/N)
                     numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
@@ -1081,6 +1075,8 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
             result = true;
         }
+
+        FreePacket(udp);
     } else {
         nextWriteTime = curTime + (urgentResendTime >> 2) + 1;
     }
@@ -1292,11 +1288,79 @@ void CUDPComm::Dispose() {
     CCommManager::Dispose();
 }
 
+/**
+    Set up port forwarding using upnp.
+ */
+void ForwardPorts(port_num port) {
+    struct UPNPDev * devlist = 0;
+    struct UPNPDev * dev;
+    int error = 0;
+    const char * multicastif = 0;
+    const char * minissdpdpath = 0;
+    int ipv6 = 0;
+    unsigned char ttl = 2;
+    int i;
+
+    static const char * const deviceList[] = {
+        //"urn:schemas-upnp-org:device:InternetGatewayDevice:2",
+        //"urn:schemas-upnp-org:service:WANIPConnection:2",
+        "urn:schemas-upnp-org:device:InternetGatewayDevice:1",
+        0
+    };
+    
+    devlist = upnpDiscoverDevices(deviceList,
+                                  5000, multicastif, minissdpdpath,
+                                  0/*localport*/, ipv6, ttl, &error, 1);
+
+    if(devlist) {
+        for(dev = devlist, i = 1; dev != NULL; dev = dev->pNext, i++) {
+            //printf("%3d: %-48s\n", i, dev->st);
+            //printf("     %s\n", dev->descURL);
+            //printf("     %s\n", dev->usn);
+
+            struct UPNPUrls upnp_urls;
+            struct IGDdatas upnp_data;
+            char aLanAddr[64];
+            std::string portString = std::to_string(port);
+            const char *pPort = portString.c_str();
+
+            // Retrieve a valid Internet Gateway Device
+            int status = UPNP_GetValidIGD(dev, &upnp_urls, &upnp_data, aLanAddr,
+                                          sizeof(aLanAddr));
+            //printf("status=%d, lan_addr=%s\n", status, aLanAddr);
+            
+            if (status == 1) {
+                SDL_Log("UPNP: UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
+                error = UPNP_AddPortMapping(upnp_urls.controlURL,
+                                        upnp_data.first.servicetype,
+                                        pPort, // external port
+                                        pPort, // internal port
+                                        aLanAddr, "Avara", "UDP",
+                                        0,  // remote host
+                                        "0" // lease duration, recommended 0 as some NAT
+                                            // implementations may not support another value
+                    );
+
+                if (error) {
+                    SDL_Log("UPNP: failed to map port\n");
+                    SDL_Log("UPNP: error: %s\n", strupnperror(error));
+                } else {
+                    SDL_Log("UPNP: successfully mapped port\n");
+                }
+            }
+        }
+    } else {
+        SDL_Log("UPNP: upnpDiscoverDevices found no devices.\n");
+    }
+}
+
 void CUDPComm::CreateServer() {
     OSErr theErr;
 
     localPort = gApplication->Number(kDefaultUDPPort);
 
+    std::thread forwardPorts(ForwardPorts, localPort);
+    forwardPorts.detach();
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
@@ -1314,8 +1378,6 @@ void CUDPComm::CreateServer() {
     {	tracker->StartTracking();
     }
     */
-
-    //	And that's all there is to it!
 }
 
 OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
@@ -1387,8 +1449,10 @@ void CUDPComm::Connect(std::string address) {
 }
 
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
-    SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
+    SDL_Log("Connect address = %s pw length=%llu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
+    std::thread forwardPorts(ForwardPorts, localPort);
+    forwardPorts.detach();
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
@@ -1397,11 +1461,11 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
 
     IPaddress addr;
     CAvaraApp *app = (CAvaraAppImpl *)gApplication;
-    SDLNet_ResolveHost(&addr, address.c_str(), serverPort);
+    ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();
     BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
-    
+
     ContactServer(addr.host, addr.port);
     /*
     DialogPtr		clientDialog;
@@ -1732,7 +1796,7 @@ OSErr CUDPComm::CreateStream(port_num streamPort) {
 
     // This is almost certainly useless - should make it a preference
     IPaddress addr;
-    SDLNet_ResolveHost(&addr, NULL, localPort);
+    ResolveHost(&addr, NULL, localPort);
     localIP = addr.host;
 
     return noErr;

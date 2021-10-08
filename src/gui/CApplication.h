@@ -1,7 +1,6 @@
 #pragma once
 
 #include "CWindow.h"
-#include "Types.h"
 
 #include <SDL.h>
 #include <json.hpp>
@@ -42,6 +41,7 @@ public:
     std::string String(const std::string name);
     long Number(const std::string name);
     long Number(const std::string name, const long defaultValue);
+    bool Boolean(const std::string name);
     json Get(const std::string name);
     void Set(const std::string name, const std::string value);
     void Set(const std::string name, long value);

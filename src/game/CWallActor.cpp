@@ -20,7 +20,7 @@ CWallActor *lastWallActor = 0;
 #define kEastWall 4
 #define kWestWall 8
 
-void CWallActor::MakeWallFromRect(Rect *theRect, short height, short decimateWalls, Boolean isOrigWall) {
+void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWalls, Boolean isOrigWall) {
     Boolean tooBig;
     Boolean rotated;
     Fixed centerX, centerZ;
@@ -76,7 +76,8 @@ void CWallActor::MakeWallFromRect(Rect *theRect, short height, short decimateWal
     dim[0] = dim[0] * 5 / 2;
     dim[2] = dim[2] * 5 / 2;
     if (height) {
-        dim[1] = (1 + height * ReadFixedVar(iPixelToThickness)) >> 1;
+        dim[1] = (1 + height) >> 1;
+        //dim[1] = (1 + height * ReadFixedVar(iPixelToThickness)) >> 1;
     } else {
         dim[1] = ReadFixedVar(iWallHeight) >> 1;
     }

@@ -144,11 +144,10 @@ public:
         itsView->CalculateViewPyramidCorners();
 
         if (cull_back_faces) {
-            itsPart->usesPrivateHither = true;
-            itsPart->hither = FIX3(101);
+            itsPart->userFlags |= CBSPUserFlags::kCullBackfaces;
         }
         else {
-            itsPart->usesPrivateHither = false;
+            itsPart->userFlags &= ~CBSPUserFlags::kCullBackfaces;
         }
 
         itsPart->Reset();

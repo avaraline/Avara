@@ -1,14 +1,13 @@
-#include "SoundSystemDefines.h"
-#include "FastMat.h"
-#include "CSoundHub.h"
-#include "AudioFile.h"
-#include "CSoundMixer.h"
-#include "Resource.h"
+#define USE_LEGACY_HSND
+#import "AudioFile.h"
+#import "CSoundHub.h"
+#import "CSoundMixer.h"
+#import "FastMat.h"
+#import "Resource.h"
 #include "SDL.h"
+#import "SoundSystemDefines.h"
 
-//#include <nanogui/nanogui.h>
 #include <cstdio>
-
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -17,46 +16,37 @@ int main(int argc, char *argv[]) {
     }
 
     if (argc > 3) {
+        SDL_Log("UseResFile: %s", argv[3]);
         UseResFile(argv[3]);
     }
 
-    //nanogui::init();
+    char *file_name = argv[2];
+
     InitMatrix();
 
     CSoundHubImpl *soundHub = new CSoundHubImpl;
     soundHub->ISoundHub(32, 32);
 
     int resId = std::stoi(argv[1]);
-    SampleHeaderHandle sample = soundHub->LoadSample(resId);
+    SampleHeaderHandle header = soundHub->LoadSampleLegacy(resId);
 
-    if (sample) {
-        SampleHeaderPtr sp = *sample;
-        // use loop length if it exists
-        bool loops = true;
-        int len = sp->loopEnd - sp->loopStart;
-        // else use the total sample length
-        if (len < 1) {
-            loops = false;
-            len = sp->len;
-        }
+    if (header) {
+        SampleHeaderPtr sp = *header;
+        int len = sp->len;
         unsigned char *p = sizeof(SampleHeader) + (unsigned char *)sp;
 
-        AudioFile<float> audioFile; // defaults to 16-bit, 44100hz
-        audioFile.setBitDepth(16);
+        AudioFile<uint8_t> audioFile;
         audioFile.setSampleRate(ToFloat(sp->baseRate) * 22254.54545);
         audioFile.setAudioBufferSize(1, len); // 1 channel, num samples
         for (int i = 0; i < len; i++) {
-            //audioFile.samples[0][i] = (p[i+sp->loopStart] * 32767) / (0xFF >> (8-BITSPERSAMPLE));
-            if (loops)
-                audioFile.samples[0][i] = p[i+sp->loopStart] / 255.0;
-            else
-                audioFile.samples[0][i] = p[i] / 255.0;        
+            // Avara samples were 7-bit (0-127), introduce some range for The Tools.
+            audioFile.samples[0][i] = p[i] * 2;
         }
-        audioFile.save(argv[2]);
-    }
-    else {
+        SDL_Log("Saving %s", file_name);
+        audioFile.printSummary();
+        audioFile.save(file_name);
+    } else {
         SDL_Log("HSND resource not found");
     }
-
     return 0;
 }

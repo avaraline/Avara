@@ -1,0 +1,95 @@
+{
+  "LEDI": [
+    {
+      "Alf": "we-be-ground-pounders.alf",
+      "Name": "We Be Ground Pounders",
+      "Message": "You cannot outrun it, you cannot outhide it, all you can do is fear it"
+    }
+  ],
+  "HULL": {
+    "6666": {
+      "Hull Res ID": 215,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 0,
+      "Mass": 117.11181811245899,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.9655451285572596,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.9655451285572596,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 0.72480354009308,
+      "Jump Power": 1.0
+    },
+    "6667": {
+      "Hull Res ID": 215,
+      "Max Missiles": 2,
+      "Max Grenades": 4,
+      "Max boosters": 0,
+      "Mass": 117.11181811245899,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.9655451285572596,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.9655451285572596,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 0.762951094834821,
+      "Jump Power": 1.0
+    }
+  },
+  "HSND": {
+    "8501": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "8501.ogg",
+      "Wav": "8501.wav"
+    },
+    "8502": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "8502.ogg",
+      "Wav": "8502.wav"
+    },
+    "8503": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "8503.ogg",
+      "Wav": "8503.wav"
+    }
+  },
+  "BSPT": {
+    "1286": "levels/we-be-ground-pounders/bsps/1286.json",
+    "5000": "levels/we-be-ground-pounders/bsps/5000.json",
+    "5001": "levels/we-be-ground-pounders/bsps/5001.json",
+    "5002": "levels/we-be-ground-pounders/bsps/5002.json",
+    "5003": "levels/we-be-ground-pounders/bsps/5003.json",
+    "5004": "levels/we-be-ground-pounders/bsps/5004.json",
+    "5005": "levels/we-be-ground-pounders/bsps/5005.json",
+    "5006": "levels/we-be-ground-pounders/bsps/5006.json",
+    "5007": "levels/we-be-ground-pounders/bsps/5007.json",
+    "5008": "levels/we-be-ground-pounders/bsps/5008.json",
+    "5009": "levels/we-be-ground-pounders/bsps/5009.json",
+    "5010": "levels/we-be-ground-pounders/bsps/5010.json",
+    "6001": "levels/we-be-ground-pounders/bsps/6001.json"
+  }
+}

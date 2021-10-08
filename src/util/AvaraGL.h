@@ -14,13 +14,15 @@ class CBSPPart;
 class CWorldShader;
 #include "CWorldShader.h"
 
+#define DEFAULT_LIGHT_COLOR 0xffffffff
+
 #define GLAD_DEBUG
 
 
 GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path);
-void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth);
+void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth, long color);
 void AvaraGLSetDepthTest(bool doTest);
-void AvaraGLSetAmbient(float ambient);
+void AvaraGLSetAmbient(float ambient, long color);
 void AvaraGLSetView(glm::mat4 view);
 void AvaraGLSetFOV(float fov);
 void AvaraGLUpdateProjectionMatrix();

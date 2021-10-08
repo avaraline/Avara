@@ -21,6 +21,10 @@ void	CSliverPart::GenerateColorLookupTable()
 }
 #endif
 
+Fixed FSysRandom() {
+    return rand() & 0x0000FFFF;
+}
+
 void CSliverPart::ISliverPart(short partNum) {
     ISmartPart(partNum, NULL, 0);
     ignoreDirectionalLights = true;
@@ -35,7 +39,7 @@ void CSliverPart::Activate(Fixed *origin,
     short age,
     CBSPPart *fromObject) {
     PolyRecord *borrowPoly;
-    int offset = rand() % (fromObject->polyCount);
+    int offset = FSysRandom() % (fromObject->polyCount);
     borrowPoly = &fromObject->polyTable[offset];
 
     ColorRecord c = borrowPoly->color;
@@ -66,9 +70,9 @@ void CSliverPart::Activate(Fixed *origin,
     lifeCount = age;
 
     Reset();
-    TranslatePartZ(this, FMul(scale, FIX3(250) + (FRandomBeta() >> 1)));
-    RotateX(spread * FRandomBeta());
-    RotateZ(360 * FRandomBeta());
+    TranslatePartZ(this, FMul(scale, FIX3(250) + (FSysRandom() >> 1)));
+    RotateX(spread * FSysRandom());
+    RotateZ(360 * FSysRandom());
 
     smallVector[0] = direction[0];
     smallVector[1] = direction[2];

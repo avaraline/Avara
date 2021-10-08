@@ -6,7 +6,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(VERBOSE True)
 set(OpenGL_GL_PREFERENCE GLVND)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-DNANOGUI_GLAD")
+set(CMAKE_CXX_FLAGS "-MMD -MP -g -Wno-multichar -DNANOGUI_GLAD")
 if (POLICY CMP0074)
   cmake_policy(SET CMP0074 NEW)
 endif()
@@ -73,6 +73,8 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "vendor/nanovg/nanovg.c"
     "vendor/pugixml/pugixml.cpp"
     "vendor/csscolorparser.cpp"
+    "vendor/miniupnpc/*.c",
+    "vendor/stb_vorbis.c"
 )
 
 if(APPLE)
@@ -80,6 +82,7 @@ if(APPLE)
 	set(MACOSX_BUNDLE_GUI_IDENTIFIER com.avaraline.avara)
 	set(MACOSX_BUNDLE_BUNDLE_NAME Avara)
 	set(MACOSX_BUNDLE_INFO_PLIST "platform/macos/Info.plist")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mmacosx-version-min=10.9")
 endif()
 
 add_library(AvaraCore OBJECT ${CORE_SOURCE})
@@ -113,6 +116,7 @@ set(CORE_INCLUDES
     vendor/nanovg
     vendor/utf8
     vendor/pugixml
+    vendor/miniupnpc
 )
 
 if (NOT APPLE AND NOT MSVC AND NOT WIN32)

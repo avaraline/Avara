@@ -16,8 +16,7 @@
 #include "AvaraTCP.h"
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
-#include "CCompactTagBase.h"
-#include "CLevelDescriptor.h"
+#include "CharWordLongPointer.h"
 #include "CNetManager.h"
 #include "CRC.h"
 #include "CSoundMixer.h"
@@ -33,6 +32,7 @@
 #include "Beeper.h"
 #include "httplib.h"
 #include <chrono>
+#include <json.hpp>
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -47,8 +47,17 @@ void TrackerPinger(CAvaraAppImpl *app) {
                 // Probably not thread-safe.
                std::string address = app->String(kTrackerRegisterAddress);
                 SDL_Log("Pinging %s", address.c_str());
-                httplib::Client client(address.c_str(), 80);
-                client.Post("/api/v1/games/", payload, "application/json");
+                size_t sepIndex = address.find(":");
+                if (sepIndex != std::string::npos) {
+                    std::string host = address.substr(0, sepIndex);
+                    int port = std::stoi(address.substr(sepIndex + 1));
+                    httplib::Client client(host.c_str(), port);
+                    client.Post("/api/v1/games/", payload, "application/json");
+                }
+                else {
+                    httplib::Client client(address.c_str(), 80);
+                    client.Post("/api/v1/games/", payload, "application/json");
+                }
             }
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -66,6 +75,10 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     gameNet->ChangeNet(kNullNet, "");
 
+    previewAngle = 0;
+    previewRadius = 0;
+    animatePreview = false;
+
     setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
 
     playerWindow = new CPlayerWindow(this);
@@ -79,14 +92,14 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     serverWindow = new CServerWindow(this);
     serverWindow->setFixedWidth(200);
-    
+
     trackerWindow = new CTrackerWindow(this);
     trackerWindow->setFixedWidth(325);
 
     rosterWindow = new CRosterWindow(this);
 
     performLayout();
-    
+
     for (auto win : windowList) {
         win->restoreState();
     }
@@ -95,6 +108,9 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerUpdatePending = false;
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
+
+
+    LoadDefaultOggFiles();
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -120,6 +136,15 @@ void CAvaraAppImpl::idle() {
 }
 
 void CAvaraAppImpl::drawContents() {
+    if(animatePreview) {
+        Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
+        Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX(1));
+        Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
+        itsGame->itsView->LookFrom(x, y, z);
+        itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);
+        itsGame->itsView->PointCamera();
+        previewAngle += FIX3(1);
+    }
     itsGame->Render(mNVGContext);
 }
 
@@ -140,7 +165,7 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
                 return true;
             }
         }
-        
+
         if (rosterWindow->handleSDLEvent(event))
             return true;
 
@@ -156,6 +181,8 @@ void CAvaraAppImpl::drawAll() {
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
+    animatePreview = false;
+    itsGame->itsView->showTransparent = false;
     MessageLine(kmStarted, centerAlign);
     levelWindow->AddRecent(set, level);
 }
@@ -212,72 +239,46 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 }
 
 
-OSErr CAvaraAppImpl::LoadSVGLevel(std::string set, OSType theLevel) {
-    SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
+OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) {
+    SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
     itsGame->LevelReset(false);
-    itsGame->loadedTag = theLevel;
     gCurrentGame = itsGame;
+    itsGame->loadedSet = set;
+    UseLevelFolder(set);
 
-    char byte1 =  theLevel & 0x000000ff;
-    char byte2 = (theLevel & 0x0000ff00) >> 8;
-    char byte3 = (theLevel & 0x00ff0000) >> 16;
-    char byte4 = (theLevel & 0xff000000) >> 24;
+    OSErr result = fnfErr;
+    json setManifest = GetManifestJSON(set);
+    if(setManifest == -1) return result;
+    if(setManifest.find("LEDI") == setManifest.end()) return result;
 
-    std::string test = std::string({byte4, byte3, byte2, byte1});
-    SDL_Log("%s", test.c_str());
-
-    std::string svgdir = std::string("levels/") + set + "_svg/";
-    SDL_Log("%s", svgdir.c_str());
-    SVGConvertToLevelMap();
-    return noErr;
-}
-
-
-OSErr CAvaraAppImpl::LoadLevel(std::string set, OSType theLevel) {
-    SDL_Log("LOADING LEVEL %d FROM %s\n", theLevel, set.c_str());
-    itsGame->LevelReset(false);
-    itsGame->loadedTag = theLevel;
-    gCurrentGame = itsGame;
-
-    std::string rsrcFile = std::string("levels/") + set + ".r";
-    UseResFile(rsrcFile);
-
-    OSType setTag;
-    CLevelDescriptor *levels = LoadLevelListFromResource(&setTag);
-    CLevelDescriptor *curLevel = levels;
-    std::string levelName;
-    bool wasLoaded = false;
-    while (curLevel) {
-        if (curLevel->tag == theLevel) {
-            std::string rsrcName((char *)curLevel->access + 1, curLevel->access[0]);
-            levelName = std::string((char *)curLevel->name + 1, curLevel->name[0]);
-            BlockMoveData(set.c_str(), itsGame->loadedSet, set.size() + 1);
-            BlockMoveData(curLevel->name, itsGame->loadedLevel, curLevel->name[0] + 1);
-            Handle levelData = GetNamedResource('PICT', rsrcName);
-            if (levelData) {
-                ConvertToLevelMap(levelData);
-                ReleaseResource(levelData);
-                wasLoaded = true;
-            }
-            break;
-        }
-        curLevel = curLevel->nextLevel;
+    json ledi = NULL;
+    for (auto &ld : setManifest["LEDI"].items()) {
+        if (ld.value()["Alf"] == levelTag)
+            ledi = ld.value();
     }
-    levels->Dispose();
+    if(ledi == NULL) return result;
 
-    if (wasLoaded) {
-        AddMessageLine("Loaded \"" + levelName + "\" from \"" + set + "\".");
-        levelWindow->SelectLevel(set, levelName);
-        Fixed pt[3];
-        itsGame->itsWorld->OverheadPoint(pt);
-        SDL_Log("overhead %f, %f, %f\n", ToFloat(pt[0]), ToFloat(pt[1]), ToFloat(pt[2]));
+    if(LoadALF(GetALFPath(levelTag))) result = noErr;
+
+    if (result == noErr) {
+        itsGame->loadedLevel = ledi["Name"];
+        itsGame->loadedTag  = levelTag;
+        std::string msgPrefix = "Loaded";
+        if(sendingPlayer != NULL)
+            msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
+        AddMessageLine(msgPrefix + " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".");
+        levelWindow->SelectLevel(set, itsGame->loadedLevel);
+
+        itsGame->itsWorld->OverheadPoint(overhead, extent);
         itsGame->itsView->yonBound = FIX(10000);
-        itsGame->itsView->LookFrom(pt[0] + FIX(100), pt[1] + FIX(200), pt[2] + FIX(150));
-        itsGame->itsView->LookAt(pt[0], pt[1], pt[2]);
-        itsGame->itsView->PointCamera();
+        itsGame->itsView->showTransparent = true;
+
+        previewAngle = 0;
+        previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);
+        animatePreview = true;
     }
 
-    return noErr;
+    return result;
 }
 
 
@@ -375,8 +376,8 @@ void CAvaraAppImpl::ParamLine(short index, short align, StringPtr param1, String
 }
 void CAvaraAppImpl::StartFrame(long frameNum) {}
 
-void CAvaraAppImpl::StringLine(StringPtr theString, short align) {
-    AddMessageLine(std::string((char* ) theString + 1, theString[0]).c_str());
+void CAvaraAppImpl::StringLine(std::string theString, short align) {
+    AddMessageLine(theString.c_str());
 }
 
 void CAvaraAppImpl::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {

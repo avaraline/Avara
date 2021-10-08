@@ -541,7 +541,10 @@ void CWalkerActor::MoveLegs() {
             } else {
                 theLeg->touchIdent = 0;
             }
-            theLeg->x = (targetX - theSpeed + theLeg->x) >> 1;
+            // This originally subtracted theSpeed. Changed because it would cause
+            // repeated UndoLegs when crouch-walking backwards on ramps.
+            Fixed absSpeed = theSpeed > 0 ? theSpeed : -theSpeed;
+            theLeg->x = (targetX - absSpeed + theLeg->x) >> 1;
             theLeg->y = tempZ;
         }
 
@@ -634,7 +637,13 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             else if (stance < MINHEADHEIGHT)
                 stance = MINHEADHEIGHT;
         }
-        //double scaling = itsGame->FrameTimeScale();
+
+        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
+            speed[1] >>= 1;
+            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
+            jumpFlag = true;
+        }
+
         if (TESTFUNC(kfuJump, ft->down)) {
             crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
             //crouch += FMul((stance - crouch - MINHEADHEIGHT) >> 2, ToFixed(scaling));
@@ -644,12 +653,6 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
         } else {
             crouch >>= 1;
             //crouch = FDiv(crouch, ToFixed(2 * scaling));
-        }
-
-        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
-            speed[1] >>= 1;
-            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
-            jumpFlag = true;
         }
     }
 }
@@ -684,7 +687,6 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
     if (itsGame->frameNumber == 0) {
         short hullRes;
         HullConfigRecord hull;
-        Handle hullHandle;
 
         hullRes = config->hullType;
         if (hullRes < 0 || hullRes > 2)
@@ -692,27 +694,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = ReadLongVar(iFirstHull + hullRes);
 
-        hullHandle = GetResource('HULL', hullRes);
-        if (hullHandle == NULL)
-            hullHandle = GetResource('HULL', 129);
-
-        // TODO: good candidate for JSON
-        hull = **(HullConfigRecord **)hullHandle;
-        hull.hullBSP = ntohs(hull.hullBSP);
-        hull.maxMissiles = ntohs(hull.maxMissiles);
-        hull.maxGrenades = ntohs(hull.maxGrenades);
-        hull.maxBoosters = ntohs(hull.maxBoosters);
-        hull.mass = ntohl(hull.mass);
-        hull.energyRatio = ntohl(hull.energyRatio);
-        hull.energyChargeRatio = ntohl(hull.energyChargeRatio);
-        hull.shieldsRatio = ntohl(hull.shieldsRatio);
-        hull.shieldsChargeRatio = ntohl(hull.shieldsChargeRatio);
-        hull.minShotRatio = ntohl(hull.minShotRatio);
-        hull.maxShotRatio = ntohl(hull.maxShotRatio);
-        hull.shotChargeRatio = ntohl(hull.shotChargeRatio);
-        hull.rideHeight = ntohl(hull.rideHeight);
-        hull.accelerationRatio = ntohl(hull.accelerationRatio);
-        hull.jumpPowerRatio = ntohl(hull.jumpPowerRatio);
+        LoadHullFromSetJSON(&hull, hullRes);
 
         hullRes = hull.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);
@@ -720,10 +702,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
-        viewPortPart->usesPrivateHither = true;
-        // set magic value to turn on backface culling
-        // for this part (so we can see through it with the camera)
-        viewPortPart->hither = FIX3(101);
+        viewPortPart->userFlags |= CBSPUserFlags::kCullBackfaces;
         viewPortPart->ReplaceColor(kMarkerColor, longTeamColor);
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
@@ -759,9 +738,6 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         maxAcceleration = FMul(maxAcceleration, hull.accelerationRatio);
         jumpBasePower = FMul(jumpBasePower, hull.jumpPowerRatio);
-        if (hullHandle) {
-            ReleaseResource(hullHandle);
-        }
 
         gunEnergy[0] = fullGunEnergy;
         gunEnergy[1] = fullGunEnergy;

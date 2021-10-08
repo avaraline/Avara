@@ -1,0 +1,80 @@
+<map>
+  <Wall fill="#3366ff" frame="#110000" x="139.93055555555554" z="101.45833333333334" w="10.138888888888886" d="16.388888888888886" h="18.375" />
+  <Wall fill="#0099ff" frame="#110000" x="139.93055555555554" z="116.77083333333334" w="10.138888888888886" d="14.513888888888886" h="13.75" />
+  <Wall fill="#0099ff" frame="#110000" x="139.93055555555554" z="131.45833333333334" w="10.138888888888886" d="15.138888888888872" h="9.125" />
+  <Wall fill="#0099ff" frame="#110000" x="139.93055555555554" z="71.45833333333334" w="10.138888888888886" d="15.138888888888893" h="9.125" />
+  <Wall fill="#0099ff" frame="#110000" x="139.93055555555554" z="86.14583333333334" w="10.138888888888886" d="14.5138888888889" h="13.75" />
+  <Wall fill="#3366ff" frame="#3366ff" x="114.30555555555556" z="81.94444444444444" w="7.638888888888886" d="7.638888888888886" h="3.375" />
+  <Wall fill="#3366ff" frame="#3366ff" x="74.30555555555556" z="81.94444444444444" w="7.638888888888886" d="7.638888888888886" h="3.375" />
+  <Wall fill="#3366ff" frame="#3366ff" x="74.30555555555556" z="121.94444444444446" w="7.638888888888886" d="7.6388888888889" h="3.375" />
+  <Wall fill="#3366ff" frame="#3366ff" x="114.30555555555556" z="121.94444444444446" w="7.638888888888886" d="7.6388888888889" h="3.375" />
+  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#3366ff" frame="#000000" cx="93.54166666666667" cz="103.125" angle="225" />
+  <Teleporter y="30" shape="0" group="@recenter" fill="#3366ff" frame="#000000" cx="93.54166666666667" cz="103.125" angle="225" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#3366ff" frame="#000000" cx="93.54166666666667" cz="103.125" angle="225" />
+  <SkyColor fill="#6666cc" frame="#ccccff" />
+  <GroundColor fill="#555555" />
+  <set information="baa@traderpub.com
+You figure out which colour to use!
+Pick up your balls and throw them at 
+each other... Sounds painful..." designer="Brent 'Shakespeare' Altomare" />
+  <Incarnator mask="T1" y="30" cx="113.75" cz="82.5" angle="45" />
+  <Incarnator mask="T2" y="30" cx="75.76388888888889" cz="120.76388888888889" angle="225" />
+  <Incarnator mask="T3" y="30" cx="114.23611111111111" cz="121.31944444444446" angle="135" />
+  <Incarnator mask="T4" y="30" cx="74.30555555555556" cz="82.08333333333334" angle="315" />
+  <Wall fill="#0099ff" frame="#000000" x="110.59027777777777" z="143.99305555555554" w="16.319444444444443" d="10.069444444444429" h="13.625" />
+  <Wall fill="#3366ff" frame="#000000" x="93.40277777777777" z="143.99305555555554" w="18.194444444444443" d="10.069444444444429" h="18.25" />
+  <Wall fill="#0099ff" frame="#000000" x="59.96527777777778" z="143.99305555555554" w="16.319444444444443" d="10.069444444444429" h="9.125" />
+  <Wall fill="#0099ff" frame="#000000" x="126.84027777777777" z="143.99305555555554" w="16.319444444444443" d="10.069444444444429" h="9.125" />
+  <Wall fill="#0099ff" frame="#000000" x="76.21527777777777" z="143.99305555555554" w="16.319444444444443" d="10.069444444444429" h="13.625" />
+  <Wall fill="#3366ff" frame="#110000" x="47.43055555555556" z="101.45833333333334" w="10.138888888888886" d="16.388888888888886" h="18.375" />
+  <Wall fill="#0099ff" frame="#110000" x="47.43055555555556" z="116.77083333333334" w="10.138888888888886" d="14.513888888888886" h="13.75" />
+  <Wall fill="#0099ff" frame="#110000" x="47.43055555555556" z="131.45833333333334" w="10.138888888888886" d="15.138888888888872" h="9.125" />
+  <Wall fill="#0099ff" frame="#110000" x="47.43055555555556" z="71.45833333333334" w="10.138888888888886" d="15.138888888888893" h="9.125" />
+  <Wall fill="#0099ff" frame="#110000" x="47.43055555555556" z="86.14583333333334" w="10.138888888888886" d="14.5138888888889" h="13.75" />
+  <Wall fill="#0099ff" frame="#000000" x="110.59027777777777" z="58.99305555555556" w="16.319444444444443" d="10.06944444444445" h="13.625" />
+  <Wall fill="#3366ff" frame="#000000" x="93.40277777777777" z="58.99305555555556" w="18.194444444444443" d="10.06944444444445" h="18.25" />
+  <Wall fill="#0099ff" frame="#000000" x="59.96527777777778" z="58.99305555555556" w="16.319444444444443" d="10.06944444444445" h="9.125" />
+  <Wall fill="#0099ff" frame="#000000" x="126.84027777777777" z="58.99305555555556" w="16.319444444444443" d="10.06944444444445" h="9.125" />
+  <Wall fill="#0099ff" frame="#000000" x="76.21527777777777" z="58.99305555555556" w="16.319444444444443" d="10.06944444444445" h="13.625" />
+  <set wallHeight="100" wallYon=".1" />
+  <Wall fill="#ffffcc" frame="#110000" x="53.75" z="75" w="2.5" d="22.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="53.75" z="96.5625" w="2.5" d="21.875" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="53.75" z="117.8125" w="2.5" d="21.875" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="53.75" z="133.4375" w="2.5" d="10.625" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="133.75" z="75" w="2.5" d="22.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="133.75" z="96.5625" w="2.5" d="21.875" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="133.75" z="117.8125" w="2.5" d="21.875" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="133.75" z="133.4375" w="2.5" d="10.625" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="61.94444444444444" z="137.5" w="18.888888888888886" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="80.83333333333334" z="137.5" w="18.8888888888889" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="99.72222222222223" z="137.5" w="18.888888888888886" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="118.61111111111111" z="137.5" w="18.8888888888889" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="131.52777777777777" z="137.5" w="6.944444444444429" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="61.94444444444444" z="65" w="18.888888888888886" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="80.83333333333334" z="65" w="18.8888888888889" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="99.72222222222223" z="65" w="18.888888888888886" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="118.61111111111111" z="65" w="18.8888888888889" d="2.5" h="0" />
+  <Wall fill="#ffffcc" frame="#110000" x="131.52777777777777" z="65" w="6.944444444444429" d="2.5" h="0" />
+  <set maxStartGrenades="0" maxStartMissiles="0" blastSoundDefault="2100" blastVolume="30" defaultLives="5" />
+  <Incarnator mask="T5" y="30" cx="118.26388888888889" cz="98.88888888888889" angle="225" />
+  <Incarnator mask="T6" y="30" cx="73.05555555555556" cz="102.70833333333334" angle="315" />
+  <Sound sound="2000" volume="200" y="50" isPlaced="true" isMusic="true" isAmbient="false" loopCount="-1" restart="true" cx="95.83333333333334" cz="102.08333333333334" angle="315" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="3" mask="T2 + T6 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#cc0000" frame="#110000" cx="110.69444444444444" cz="130.76388888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="6" mask="T2 + T3 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#0099cc" frame="#110000" cx="64.93055555555556" cz="111.31944444444446" angle="45" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="2" mask="T3 + T6 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#cccc00" frame="#110000" cx="78.19444444444444" cz="130.76388888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="5" mask="T3 + T6 + T4 + T2 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#663399" frame="#110000" cx="125.69444444444446" cz="109.5138888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="4" mask="T2 + T3 + T6 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#ff33ff" frame="#110000" cx="78.05555555555556" cz="71.94444444444444" angle="45" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="1" mask="T2 + T3 + T6 + T5 + T4" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#007700" frame="#110000" cx="122.08333333333334" cz="75" angle="45" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="1" mask="T2 + T3 + T6 + T5 + T4" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#007700" frame="#110000" cx="110.83333333333334" cz="72.5" angle="45" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="1" mask="T2 + T3 + T6 + T5 + T4" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#007700" frame="#110000" cx="127.08333333333334" cz="86.25" angle="45" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="5" mask="T3 + T6 + T4 + T2 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#663399" frame="#110000" cx="125.06944444444446" cz="92.0138888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="5" mask="T3 + T6 + T4 + T2 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#663399" frame="#110000" cx="125.06944444444446" cz="99.5138888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="3" mask="T2 + T6 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#cc0000" frame="#110000" cx="121.31944444444444" cz="128.88888888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="3" mask="T2 + T6 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#cc0000" frame="#110000" cx="127.56944444444446" cz="118.2638888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="2" mask="T3 + T6 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#cccc00" frame="#110000" cx="62.56944444444444" cz="118.2638888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="2" mask="T3 + T6 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#cccc00" frame="#110000" cx="66.94444444444444" cz="128.88888888888889" angle="225" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="6" mask="T2 + T3 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#0099cc" frame="#110000" cx="64.30555555555556" cz="102.56944444444446" angle="45" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="6" mask="T2 + T3 + T4 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#0099cc" frame="#110000" cx="64.30555555555556" cz="94.44444444444446" angle="45" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="4" mask="T2 + T3 + T6 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#ff33ff" frame="#110000" cx="61.18055555555556" cz="86.31944444444444" angle="45" />
+  <Pill shape="2012" scale="1" mass="20" shootShield="-1" team="4" mask="T2 + T3 + T6 + T5 + T1" watch="playerMask" ejectPitch="15" ejectPower="5" maxShield="-1" burstCharge="5" burstSpeed="1" shotPower="3" dropEnergy="2" activeRange="3" burstLength="50" changeOwnerTime="0" accel="0.97" fill="#ff33ff" frame="#110000" cx="64.93055555555556" cz="74.44444444444444" angle="45" />
+</map>

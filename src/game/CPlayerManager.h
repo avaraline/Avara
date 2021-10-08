@@ -74,11 +74,11 @@ public:
     virtual void RosterMessageText(short len, char *c) = 0;
     virtual short LevelCRC() = 0;
     virtual OSErr LevelErr() = 0;
-    virtual OSType LevelTag() = 0;
+    virtual std::string LevelTag() = 0;
     virtual void LevelCRC(short) = 0;
     virtual void LevelErr(OSErr) = 0;
-    virtual void LevelTag(OSType) = 0;
-    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) = 0;
+    virtual void LevelTag(std::string) = 0;
+    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) = 0;
     virtual void ResumeGame() = 0;
     virtual uint32_t DoMouseControl(Point *deltaMouse, Boolean doCenter) = 0;
     virtual void HandleEvent(SDL_Event &event) = 0;
@@ -168,7 +168,7 @@ private:
 
     short levelCRC;
     OSErr levelErr;
-    OSType levelTag;
+    std::string levelTag;
 
     PlayerConfigRecord theConfiguration;
 
@@ -210,7 +210,7 @@ public:
 
     virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
 
-    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag);
+    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
 
     virtual CAbstractPlayer *ChooseActor(CAbstractPlayer *actorList, short myTeamColor);
     virtual CAbstractPlayer *TakeAnyActor(CAbstractPlayer *actorList);
@@ -243,10 +243,10 @@ public:
     virtual short LoadingStatus();
     virtual short LevelCRC();
     virtual OSErr LevelErr();
-    virtual OSType LevelTag();
+    virtual std::string LevelTag();
     virtual void LevelCRC(short);
     virtual void LevelErr(OSErr);
-    virtual void LevelTag(OSType);
+    virtual void LevelTag(std::string);
     virtual Fixed RandomKey();
     virtual void RandomKey(Fixed);
     virtual PlayerConfigRecord& TheConfiguration();

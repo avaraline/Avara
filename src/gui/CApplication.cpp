@@ -2,8 +2,8 @@
 #include "CApplication.h"
 
 #include "AvaraGL.h"
+#include "CColorManager.h"
 #include "Preferences.h"
-#include "Types.h"
 
 #include <SDL.h>
 #include <fstream>
@@ -20,6 +20,9 @@ nanogui::Screen(nanogui::Vector2i(prefs[kWindowWidth], prefs[kWindowHeight]), ti
     gApplication = this;
     AvaraGLInitContext();
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
+
+    CColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
+    CColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
 }
 
 CApplication::~CApplication() {}
@@ -78,6 +81,10 @@ long CApplication::Number(const std::string name, const long defaultValue) {
         return prefs[name];
     }
     return defaultValue;
+}
+
+bool CApplication::Boolean(const std::string name) {
+    return prefs[name];
 }
 
 json CApplication::Get(const std::string name) {

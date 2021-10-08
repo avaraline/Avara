@@ -1,0 +1,107 @@
+{
+  "LEDI": [
+    {
+      "Alf": "ballgame.alf",
+      "Name": "Ballgame",
+      "Message": "Let's play ball."
+    },
+    {
+      "Alf": "country-roads.alf",
+      "Name": "Country Roads",
+      "Message": "Team play with up to 3 Blue VS 3 Yellow players.\rDestroy the shape of opposing team's color and exit via teleporter."
+    },
+    {
+      "Alf": "uncle-marcs-playground.alf",
+      "Name": "Uncle Marc's Playground",
+      "Message": "Come on in; watch out for the bully UFOs and climb around a lot."
+    },
+    {
+      "Alf": "take-your-pills.alf",
+      "Name": "Take Your Pills...",
+      "Message": "Adds pillboxes to the fight...they're kinda fun!"
+    },
+    {
+      "Alf": "arena.alf",
+      "Name": "Arena",
+      "Message": "A large, open battlefield for net games"
+    },
+    {
+      "Alf": "arena-ii.alf",
+      "Name": "Arena II",
+      "Message": "Areana revisted - now with walls, ramps, pills, blocks and extra goodies"
+    },
+    {
+      "Alf": "dance-floor.alf",
+      "Name": "Dance Floor",
+      "Message": "Colourful net level"
+    },
+    {
+      "Alf": "platforms.alf",
+      "Name": "Platforms",
+      "Message": "A first try"
+    },
+    {
+      "Alf": "platforms-ii.alf",
+      "Name": "Platforms II",
+      "Message": "A six level vertical battlefield"
+    },
+    {
+      "Alf": "rooms.alf",
+      "Name": "Rooms",
+      "Message": "Fun with teleporters"
+    }
+  ],
+  "HULL": {
+    "1128": {
+      "Hull Res ID": 215,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 2.1000076295109484,
+      "Max Shields": 20.0,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.2,
+      "Jump Power": 1.0
+    },
+    "1129": {
+      "Hull Res ID": 216,
+      "Max Missiles": 4,
+      "Max Grenades": 8,
+      "Max boosters": 4,
+      "Mass": 155.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 2.050003814755474,
+      "Max Shields": 20.0,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.0,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.3000076295109484,
+      "Jump Power": 1.0
+    },
+    "1130": {
+      "Hull Res ID": 217,
+      "Max Missiles": 8,
+      "Max Grenades": 12,
+      "Max boosters": 5,
+      "Mass": 170.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 2.1000076295109484,
+      "Max Shields": 20.0,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.1000076295109484,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.2,
+      "Jump Power": 1.1000076295109484
+    }
+  }
+}

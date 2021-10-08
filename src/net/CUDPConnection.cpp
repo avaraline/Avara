@@ -13,6 +13,8 @@
 #include "System.h"
 #include <algorithm>
 
+#include <SDL2/SDL.h>
+
 #define kInitialRetransmitTime 480 //	2	seconds
 #define kInitialRoundTripTime 240 //	<1 second
 #define kMaxAllowedRetransmitTime 960 //	4 seconds
@@ -88,7 +90,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     quota = 0;
 
     routingMask = 0;
-    
+
     totalSent = 0;
     totalResent = 0;
     numResendsWithoutReceive = 0;
@@ -184,7 +186,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
 
     bestPacket = (UDPPacketInfo *)queues[kTransmitQ].qHead;
     oldestBirth = curTime;
-    
+
     while (bestPacket != NULL) {
         // make sure the we are actually beyond packet's nextSendTime, avoids extra resends
         if (curTime >= bestPacket->nextSendTime &&
@@ -369,7 +371,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
                 // Don't ignore resent packets but de-weight them pretty heavily.
                 alpha /= (thePacket->sendCount*thePacket->sendCount);
             }
-            
+
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
             varRoundTripTime = (1 - alpha) * (varRoundTripTime + difference * increment);
@@ -381,11 +383,11 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             // don't let the retransmit times fall below urgentResendTime (LT =~ 2) or go above kMaxAllowedRetransmitTime
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
             retransmitTime = std::min(retransmitTime, (long)kMaxAllowedRetransmitTime);
-            
+
             // If we want the game to stay smooth, resend urgent/game packets near the overall LT (max(RTT)/2) so that
             // lost packets can be retransmitted and have a chance of getting there in time to be only 1 frame late.
             // This may result in extra re-sends but should help the game flow, especially if a connection is dropping packets.
-            // This latency estimate goes across all active connections so that faster connections won't be penalized and 
+            // This latency estimate goes across all active connections so that faster connections won't be penalized and
             // have to re-send to each other as often.
             urgentRetransmitTime = std::min(LatencyEstimate(), itsOwner->urgentResendTime);
             urgentRetransmitTime = std::min(urgentRetransmitTime, (long)retransmitTime);
@@ -495,7 +497,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
     if (thePacket->serialNumber < receiveSerial) { //	We already got this one, so just release it.
         // if the sender re-sent a packet we already have, that indicates they didn't get the ACK before
         // they sent the message
-        
+
         itsOwner->ReleasePacket((PacketInfo *)thePacket);
     } else {
         if (thePacket->serialNumber ==
@@ -668,8 +670,9 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
         next->OpenNewConnections(origTable);
 }
 
+
 void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16_t firstReceiveSerial) {
-    SDL_Log("CUDPConnection::FreshClient(%u, %hu)\n", remoteHost, remotePort);
+    SDL_Log("CUDPConnection::FreshClient connecting from %s\n", FormatHostPort(remoteHost, remotePort).c_str());
     FlushQueues();
     serialNumber = INITIAL_SERIAL_NUMBER;
     receiveSerial = serialNumber + firstReceiveSerial;

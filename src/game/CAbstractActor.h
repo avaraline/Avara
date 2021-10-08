@@ -8,7 +8,6 @@
 */
 
 #pragma once
-#include "AvaraDefines.h"
 #include "CAvaraGame.h"
 #include "CDirectObject.h"
 #include "CSoundHub.h"
@@ -208,7 +207,7 @@ public:
     virtual void RayTestWithGround(RayHitRecord *hitRec, MaskType testMask);
     virtual short GetPlayerPosition();
 
-    long GetLongTeamColorOr(long defaultColor);
+    uint32_t GetTeamColorOr(uint32_t defaultColor);
 
     virtual short GetBallSnapPoint(long theGroup,
         Fixed *ballLocation,

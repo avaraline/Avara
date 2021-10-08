@@ -2,9 +2,9 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ cmake, master ]
+    branches: [ cmake, main, fps-hybrid ]
   pull_request:
-    branches: [ cmake, master ]
+    branches: [ main ]
 
 jobs:
   Ubuntu:
@@ -15,7 +15,7 @@ jobs:
       run: |
         sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
         sudo apt-get update -y -qq
-        sudo apt-get install cmake libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libsdl2-net-dev libdirectfb-dev
+        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev
     - uses: actions/checkout@v2
     - name: build
       run: |
@@ -25,7 +25,7 @@ jobs:
     - name: Run headless test
       uses: GabrielBB/xvfb-action@v1.2
       with:
-        run: ./tests
+        run: make tests
   Windows:
     name: Windows
     runs-on: windows-latest
@@ -33,24 +33,35 @@ jobs:
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
         with:
-          install: rsync git cmake zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-SDL2_net mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make
+          install: rsync git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make mingw-w64-x86_64-miniupnpc
       - uses: actions/checkout@v2
       - name: build
         shell: msys2 {0}
         run: |
-          mkdir build && cd build
-          cmake ..
-          make -j
-      - name: deploy nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'master')
+          make set-version
+          make -j winapp
+      - name: deploy main nightly
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build-master/WinAvara.zip
+          asset_path: ./build-main/WinAvara.zip
           asset_name: Avara-Windows-Nightly-$$.zip
+          asset_content_type: application/zip
+          max_releases: 1
+      - name: deploy fps-hybrid nightly
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'fps-hybrid')
+        uses: WebFreak001/deploy-nightly@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/49395858/assets{?name,label}
+          release_id: 49395858
+          asset_path: ./build-main/WinAvara.zip
+          asset_name: Avara-FPS-Windows-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1
 
@@ -60,9 +71,6 @@ jobs:
     steps:
       - name: install dependencies
         run: |
-          wget -q "https://www.libsdl.org/projects/SDL_net/release/SDL2_net-2.0.1.dmg"
-          hdiutil attach SDL2_net-2.0.1.dmg
-          sudo cp -R /Volumes/SDL2_net/SDL2_net.framework /Library/Frameworks/
           wget -q "https://www.libsdl.org/release/SDL2-2.0.14.dmg"
           hdiutil attach SDL2-2.0.14.dmg
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
@@ -76,8 +84,8 @@ jobs:
         run: ./tests
       - name: print env variables
         run: echo $GITHUB_REPOSITORY && echo $GITHUB_REF
-      - name: deploy nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'master')
+      - name: deploy main nightly
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -86,5 +94,17 @@ jobs:
           release_id: 28954246
           asset_path: ./build/MacAvara.zip
           asset_name: Avara-macOS-Nightly-$$.zip
+          asset_content_type: application/zip
+          max_releases: 1
+      - name: deploy fps-hybrid nightly
+        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'fps-hybrid')
+        uses: WebFreak001/deploy-nightly@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/49395858/assets{?name,label}
+          release_id: 49395858
+          asset_path: ./build/MacAvara.zip
+          asset_name: Avara-FPS-macOS-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1

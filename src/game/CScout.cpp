@@ -26,7 +26,7 @@
 
 #define FOLLOWRADIUS 10
 
-void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, long longTeamColor) {
+void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, uint32_t longTeamColor) {
     IAbstractActor();
 
     mass = FIX(20);
@@ -45,10 +45,7 @@ void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, long longTeamColo
     partCount = 1;
     LoadPart(0, kScoutBSP);
     partList[0]->ReplaceColor(kMarkerColor, longTeamColor);
-    // set magic value to turn on backface culling
-    // for this part (so we can see through it with the camera)
-    partList[0]->usesPrivateHither = true;
-    partList[0]->hither = FIX3(101);
+    partList[0]->userFlags |= CBSPUserFlags::kCullBackfaces;
 
     hitSoundId = 220;
     gHub->PreLoadSample(hitSoundId);

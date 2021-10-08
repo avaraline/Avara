@@ -1,0 +1,137 @@
+<map>
+  <SkyColor fill="#575e6b" frame="#b8bcc4" />
+  <GroundColor fill="#071021" />
+  <set designer="$mSilverfox" information="Embrace the ridiculous. Embrace existence." light.0.a="30" light.0.b="10" light.0.i="0.8" mTierHeight="2.5" />
+
+  <set wallHeight="mTierHeight" />
+  <Wall d="5" fill="#272f3f" frame="#000000" h="0" w="20" x="-22.5" z="-5" />
+  <Wall d="7.5" fill="#272f3f" frame="#000000" h="0" w="5" x="-15" z="-11.25" />
+  <Wall d="5" fill="#272f3f" frame="#000000" h="0" w="20" x="22.5" z="5" />
+  <Wall d="7.5" fill="#272f3f" frame="#000000" h="0" w="5" x="15" z="11.25" />
+  <Wall d="20" fill="#272f3f" frame="#000000" h="0" w="5" x="-5" z="22.5" />
+  <Wall d="5" fill="#272f3f" frame="#000000" h="0" w="7.5" x="-11.25" z="15" />
+  <Wall d="20" fill="#272f3f" frame="#000000" h="0" w="5" x="5" z="-22.5" />
+  <Wall d="5" fill="#272f3f" frame="#000000" h="0" w="7.5" x="11.25" z="-15" />
+  <Wall d="10" fill="#272f3f" frame="#000000" h="0" w="10" x="-37.5" z="7.5" />
+  <Wall d="10" fill="#272f3f" frame="#000000" h="0" w="10" x="37.5" z="-7.5" />
+  <Wall d="10" fill="#272f3f" frame="#000000" h="0" w="10" x="7.5" z="37.5" />
+  <Wall d="10" fill="#272f3f" frame="#000000" h="0" w="10" x="-7.5" z="-37.5" />
+
+  <set wallHeight="mTierHeight * 2" />
+  <Wall d="25" fill="#e8ebf0" frame="#000000" h="0" w="10" x="-12.5" z="30" />
+  <Wall d="25" fill="#e8ebf0" frame="#000000" h="0" w="10" x="12.5" z="-30" />
+  <Wall d="10" fill="#e8ebf0" frame="#000000" h="0" w="25" x="30" z="12.5" />
+  <Wall d="10" fill="#e8ebf0" frame="#000000" h="0" w="25" x="-30" z="-12.5" />
+  <Wall d="0.625" fill="#e8ebf0" frame="#000000" h="0" w="10" x="2.5" z="-32.8125" />
+  <Wall d="10" fill="#e8ebf0" frame="#000000" h="0" w="0.625" x="-32.8125" z="-2.5" />
+  <Wall d="10" fill="#e8ebf0" frame="#000000" h="0" w="0.625" x="32.8125" z="2.5" />
+  <Wall d="0.625" fill="#e8ebf0" frame="#000000" h="0" w="10" x="-2.5" z="32.8125" />
+
+  <Wall d="5" fill="#e8ebf0" frame="#000000" h="0.625" w="30" x="7.5" y="(mTierHeight * 2) - 0.625" z="20" />
+  <Wall d="5" fill="#e8ebf0" frame="#000000" h="0.625" w="30" x="-7.5" y="(mTierHeight * 2) - 0.625" z="-20" />
+  <Wall d="30" fill="#e8ebf0" frame="#000000" h="0.625" w="5" x="-20" y="(mTierHeight * 2) - 0.625" z="7.5" />
+  <Wall d="30" fill="#e8ebf0" frame="#000000" h="0.625" w="5" x="20" y="(mTierHeight * 2) - 0.625" z="-7.5" />
+
+  <Ramp angle="270" d="9.375" deltaY="mTierHeight" fill="#e8ebf0" frame="#000000" h="0" w="10" x="-2.5" y="mTierHeight" z="37.8125" />
+  <Ramp angle="90" d="9.375" deltaY="mTierHeight" fill="#e8ebf0" frame="#000000" h="0" w="10" x="2.5" y="mTierHeight" z="-37.8125" />
+  <Ramp angle="180" d="10" deltaY="mTierHeight" fill="#e8ebf0" frame="#000000" h="0" w="9.375" x="37.8125" y="mTierHeight" z="2.5" />
+  <Ramp angle="0" d="10" deltaY="mTierHeight" fill="#e8ebf0" frame="#000000" h="0" w="9.375" x="-37.8125" y="mTierHeight" z="-2.5" />
+
+  <Dome angle="180" quarters="4" cx="30" cz="35" fill="#c8cbd2" frame="#000000" r="2.5" />
+  <Dome angle="180" quarters="4" cx="-35" cz="30" fill="#c8cbd2" frame="#000000" r="2.5" />
+  <Dome angle="180" quarters="4" cx="-30" cz="-35" fill="#c8cbd2" frame="#000000" r="2.5" />
+  <Dome angle="180" quarters="4" cx="35" cz="-30" fill="#c8cbd2" frame="#000000" r="2.5" />
+
+  <Incarnator angle="135" cx="37.5" cz="42.5" y="20" />
+  <Incarnator angle="315" cx="-37.5" cz="-42.5" y="20" />
+  <Incarnator angle="225" cx="-42.5" cz="37.5" y="20" />
+  <Incarnator angle="45" cx="42.5" cz="-37.5" y="20" />
+  <Incarnator angle="180" cx="-5" cz="27.5" y="20 + mTierHeight" />
+  <Incarnator angle="0" cx="5" cz="-27.5" y="20 + mTierHeight" />
+  <Incarnator angle="270" cx="-27.5" cz="-5" y="20 + mTierHeight" />
+  <Incarnator angle="90" cx="27.5" cz="5" y="20 + mTierHeight" />
+  <Incarnator angle="270" cx="-7.5" cz="47.5" y="20" />
+  <Incarnator angle="90" cx="7.5" cz="-47.5" y="20" />
+  <Incarnator angle="0" cx="-47.5" cz="-7.5" y="20" />
+  <Incarnator angle="180" cx="47.5" cz="7.5" y="20" />
+
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="20" cz="-7.5" fill="#dd0806" frame="#000000" grenades="mSmGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="(mTierHeight * 2) + mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="-7.5" cz="-20" fill="#dd0806" frame="#000000" grenades="mSmGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="(mTierHeight * 2) + mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="-20" cz="7.5" fill="#dd0806" frame="#000000" grenades="mSmGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="(mTierHeight * 2) + mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="7.5" cz="20" fill="#dd0806" frame="#000000" grenades="mSmGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="(mTierHeight * 2) + mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="30" cz="35" fill="#dd0806" frame="#000000" grenades="mSmGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="4" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="35" cz="-30" fill="#dd0806" frame="#000000" grenades="mSmGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="4" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="-30" cz="-35" fill="#dd0806" frame="#000000" grenades="mSmGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="4" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="-35" cz="30" fill="#dd0806" frame="#000000" grenades="mSmGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="4" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="-12.5" cz="30" fill="#f20884" frame="#000000" missiles="mLgMissile" out="mTaken" shape="bspMissile" speed="2" start="mShow" y="(mTierHeight * 2) + mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="12.5" cz="-30" fill="#f20884" frame="#000000" missiles="mLgMissile" out="mTaken" shape="bspMissile" speed="2" start="mShow" y="(mTierHeight * 2) + mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="-30" cz="-12.5" fill="#f20884" frame="#000000" missiles="mLgMissile" out="mTaken" shape="bspMissile" speed="2" start="mShow" y="(mTierHeight * 2) + mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody angle="135" cx="30" cz="12.5" fill="#f20884" frame="#000000" missiles="mLgMissile" out="mTaken" shape="bspMissile" speed="2" start="mShow" y="(mTierHeight * 2) + mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="400" />
+  <Goody angle="135" cx="-2.5" cz="37.5" fill="#dd0806" frame="#000000" grenades="mLgGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="400" />
+  <Goody angle="135" cx="2.5" cz="-37.5" fill="#dd0806" frame="#000000" grenades="mLgGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="400" />
+  <Goody angle="135" cx="-37.5" cz="-2.5" fill="#dd0806" frame="#000000" grenades="mLgGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="400" />
+  <Goody angle="135" cx="37.5" cz="2.5" fill="#dd0806" frame="#000000" grenades="mLgGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="mGoodyOffset" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="400" />
+  <Goody angle="135" cx="0" cz="0" fill="#e8ebf0" frame="#000000" grenades="mLgGrenade" missiles="mLgMissile" out="mTaken" shape="bspAvaraA" speed="2" start="mShow" y="mGoodyOffset" />
+
+  <set wallHeight="0" />
+  <Field deltaY="0" visible="true" d="15" fill="#c8cbd2" frame="#000000" h="0" w="5" x="-5" z="5" />
+  <Field deltaY="0" visible="true" d="5" fill="#c8cbd2" frame="#000000" h="0" w="15" x="5" z="5" />
+  <Field deltaY="0" visible="true" d="15" fill="#c8cbd2" frame="#000000" h="0" w="5" x="5" z="-5" />
+  <Field deltaY="0" visible="true" d="5" fill="#c8cbd2" frame="#000000" h="0" w="15" x="-5" z="-5" />
+  <Hologram angle="315" cx="0" cz="0" fill="#c8cbd2" frame="#000000" scale="1.5" shape="bspGroundStar" />
+
+  <Teleporter activeRange="40 * 5" angle="225" cx="0" cz="0" deadRange="20 * 5" destGroup="@recenter" fill="#f7f9fe" frame="#000000" group="-1" shape="0" spin="true" y="-30" />
+  <Teleporter angle="225" cx="0" cz="0" fill="#f7f9fe" frame="#000000" group="@recenter" mask="0" shape="0" spin="true" y="20" />
+  <Teleporter activeRange="2000" angle="225" cx="0" cz="0" fill="#f7f9fe" frame="#000000" shape="0" start="@winTeam" win="1000" y="200" />
+</map>

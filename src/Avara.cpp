@@ -50,12 +50,6 @@ int main(int argc, char *argv[]) {
     // Init SDL and nanogui.
     init();
 
-    // Init SDL_net
-    if (SDLNet_Init() != 0) {
-        SDL_Log("Unable to initialize SDL_net: %s", SDLNet_GetError());
-        return 1;
-    }
-
     // SDL_LogSetOutputFunction(&NullLogger, NULL);
 
     // Init Avara stuff.
@@ -84,7 +78,7 @@ int main(int argc, char *argv[]) {
             exit(1);
         }
     }
-    
+
     if(host == true) {
         app->GetNet()->ChangeNet(kServerNet, "");
     } else if(connectAddress.size() > 0) {

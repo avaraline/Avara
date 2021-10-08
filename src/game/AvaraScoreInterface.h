@@ -117,11 +117,10 @@ typedef struct {
     **	The following parameters are valid for all calls and usually change
     **	only at ksiLevelLoaded calls.
     */
-    StringPtr levelName; //	Always pointer to current level name.
-    StringPtr levelCreator;
-    StringPtr levelDescription;
-    OSType directoryTag; //	4-letter mission collection identifier
-    OSType levelTag; //	4-letter mission identifier (within collection)
+    std::string levelName; //	Always pointer to current level name.
+    std::string levelCreator;
+    std::string levelDescription;
+    std::string directory; //   mission collection identifier
 
     /*
     **	The following are valid only for ksiPlayerIntro, ksiPlayerNameChange
