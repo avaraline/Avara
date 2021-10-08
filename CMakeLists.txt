@@ -32,13 +32,11 @@ include(TargetCopyFiles)
 
 if(WIN32 OR MSVC)
     set(SDL2_PATH "${CMAKE_SOURCE_DIR}/platform/windows/SDL2-2.0.12")
-    set(SDL2_NET_PATH "${CMAKE_SOURCE_DIR}/platform/windows/SDL2_net-2.0.1")
     # standard exception handling on windows
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
 endif()
 
 find_package(SDL2 REQUIRED COMPONENTS MAIN)
-find_package(SDL2_NET REQUIRED)
 
 if(NOT WIN32)
    find_package(OpenGL REQUIRED)
@@ -90,7 +88,6 @@ add_library(AvaraCore OBJECT ${CORE_SOURCE})
 set(CORE_INCLUDES
     "${SDL2_INCLUDE_DIR}"
     ${SDL2main_INCLUDE_DIRS} 
-    ${SDL2_NET_INCLUDE_DIR}
     ${OPENGL_INCLUDE_DIR} 
     ${CMAKE_BINARY_DIR}
     src
@@ -156,7 +153,7 @@ target_include_directories(tests PUBLIC
 )
 target_include_directories(hsnd2wav PUBLIC ${CORE_INCLUDES})
 
-set(AVARA_LIBS ${SDL2_LIBRARIES} ${SDL2_NET_LIBRARIES} ${OPENGL_LIBRARIES} dl pthread)
+set(AVARA_LIBS ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} dl pthread)
 
 if(WIN32)
 set(AVARA_LIBS SDL2::Main SDL2::Net ${OPENGL_LIBRARIES})
@@ -169,8 +166,6 @@ target_link_libraries(hsnd2wav ${AVARA_LIBS} ${EXTRA_LIBS})
 
 if(WIN32)
     target_link_libraries(Avara wsock32 ws2_32)
-    add_custom_command(TARGET Avara POST_BUILD COMMAND
-        ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/platform/windows/SDL2_net-2.0.1/lib/x64/SDL2_net.dll ${CMAKE_CURRENT_BINARY_DIR})
     add_custom_command(TARGET Avara POST_BUILD COMMAND
         ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/platform/windows/SDL2-2.0.12/lib/x64/SDL2.dll ${CMAKE_CURRENT_BINARY_DIR})
 endif()
@@ -186,7 +181,6 @@ install(DIRECTORY bsps/ DESTINATION bin/bsps/)
 install(DIRECTORY levels/ DESTINATION bin/levels/)
 
 if(WIN32)
-    install(FILES platform/windows/SDL2_net-2.0.1/lib/x64/SDL2_net.dll DESTINATION bin/)
     install(FILES platform/windows/SDL2-2.0.12/lib/x64/SDL2.dll DESTINATION bin/)
 endif()
 

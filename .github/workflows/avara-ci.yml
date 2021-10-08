@@ -33,13 +33,14 @@ jobs:
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
         with:
-          install: rsync git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make mingw-w64-x86_64-miniupnpc
+          install: rsync cmake git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make mingw-w64-x86_64-miniupnpc
       - uses: actions/checkout@v2
       - name: build
         shell: msys2 {0}
         run: |
-          make set-version
-          make -j winapp
+          mkdir build && cd build
+          cmake ..
+          make -j 
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
