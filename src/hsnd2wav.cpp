@@ -1,11 +1,11 @@
 #define USE_LEGACY_HSND
-#import "AudioFile.h"
-#import "CSoundHub.h"
-#import "CSoundMixer.h"
-#import "FastMat.h"
-#import "Resource.h"
+#include "AudioFile.h"
+#include "CSoundHub.h"
+#include "CSoundMixer.h"
+#include "FastMat.h"
+#include "Resource.h"
 #include "SDL.h"
-#import "SoundSystemDefines.h"
+#include "SoundSystemDefines.h"
 
 #include <cstdio>
 

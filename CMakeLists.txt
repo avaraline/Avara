@@ -51,7 +51,6 @@ endif()
 add_custom_target(datafiles ALL)
 add_copy_directory(datafiles shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/shaders)
 add_copy_directory(datafiles rsrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/rsrc)
-add_copy_directory(datafiles bsps DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bsps)
 add_copy_directory(datafiles levels DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/levels)
 
 
@@ -156,7 +155,7 @@ target_include_directories(hsnd2wav PUBLIC ${CORE_INCLUDES})
 set(AVARA_LIBS ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} dl pthread)
 
 if(WIN32)
-set(AVARA_LIBS SDL2::Main SDL2::Net ${OPENGL_LIBRARIES})
+set(AVARA_LIBS SDL2::Main ${OPENGL_LIBRARIES})
 endif()
 
 target_link_libraries(Avara ${AVARA_LIBS})
