@@ -13,6 +13,7 @@
 #include "CColorManager.h"
 #include "CCommManager.h"
 #include "CIncarnator.h"
+#include "CRandomIncarnator.h"
 #include "CNetManager.h"
 #include "CWalkerActor.h"
 #include "CommDefs.h"
@@ -132,13 +133,8 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
     uint32_t state = SDL_GetMouseState(&x, &y);
     deltaMouse->h = x - mouseCenterPosition.h;
     deltaMouse->v = y - mouseCenterPosition.v;
-    if (itsGame->sensitivity > 0) {
-        deltaMouse->h <<= itsGame->sensitivity;
-        deltaMouse->v <<= itsGame->sensitivity;
-    } else if (itsGame->sensitivity < 0) {
-        deltaMouse->h >>= -itsGame->sensitivity;
-        deltaMouse->v >>= -itsGame->sensitivity;
-    }
+    deltaMouse->h *= itsGame->sensitivity;
+    deltaMouse->v *= itsGame->sensitivity;
     if (itsGame->moJoOptions & kFlipAxis) {
         deltaMouse->v = -deltaMouse->v;
 	}
@@ -311,13 +307,8 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             break;
         case SDL_MOUSEMOTION:
             int xrel = event.motion.xrel, yrel = event.motion.yrel;
-            if (itsGame->sensitivity > 0) {
-                xrel <<= itsGame->sensitivity;
-                yrel <<= itsGame->sensitivity;
-            } else if (itsGame->sensitivity < 0) {
-                xrel >>= -itsGame->sensitivity;
-                yrel >>= -itsGame->sensitivity;
-            }
+            xrel *= itsGame->sensitivity;
+            yrel *= itsGame->sensitivity;
             if (itsGame->moJoOptions & kFlipAxis) {
                 yrel = -yrel;
             }
@@ -328,10 +319,18 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 }
 
 void CPlayerManagerImpl::SendFrame() {
-    // Sends the next game frame.
-    itsGame->topSentFrame++;
+    // guard against overwriting frames that aren't done yet
+    if (itsGame->topSentFrame - itsGame->frameNumber >= FUNCTIONBUFFERS - 1) {
+        SDL_Log("frameFuncs BUFFER IS FULL, not sending new frames until we catch up! <-- tell Head you saw this.");
+        return;
+    }
 
-    FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & itsGame->topSentFrame];
+    // Sends the next game frame.
+    itsGame->topSentFrame += 1;
+
+    // uint32_t ffi = itsGame->topSentFrame * itsGame->fpsScale;
+    uint32_t ffi = itsGame->topSentFrame;
+    FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
 
     ff->validFrame = itsGame->topSentFrame;
 
@@ -404,7 +403,10 @@ void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short com
 
     theComm = theNetManager->itsCommManager;
 
-    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
+    // short ffi = theFrame * itsGame->fpsScale;
+    short ffi = theFrame;
+    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
+    // ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
 
     if (ff->validFrame == theFrame) {
         outPacket = theComm->GetPacket();
@@ -459,7 +461,9 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
     frameNumber = thePacket->p3;
 
     pd = (uint32_t *)thePacket->dataBuffer;
-    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & frameNumber];
+    // uint32_t ffi = frameNumber * itsGame->fpsScale;
+    uint32_t ffi = frameNumber;
+    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     ff->validFrame = frameNumber;
 
     ff->ft.down = (p1 & kNoDownData) ? 0 : ntohl(*pd++);
@@ -493,7 +497,8 @@ void CPlayerManagerImpl::SendResendRequest(short askCount) {
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
     // SDL_Log("CPlayerManagerImpl::GetFunctions\n");
-    short i = (FUNCTIONBUFFERS - 1) & itsGame->frameNumber;
+    uint32_t ffi = (itsGame->frameNumber);
+    short i = (FUNCTIONBUFFERS - 1) & ffi;
 
     if (frameFuncs[i].validFrame != itsGame->frameNumber) {
         long quickTick;
@@ -1006,6 +1011,12 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
                 }
             }
             spotAvailable = spotAvailable->nextIncarnator;
+        }
+
+        for (int tries = 3; itsPlayer->isInLimbo && tries > 0; tries--) {
+            // try a psuedo-random incarnation
+            CRandomIncarnator waldo(itsGame->incarnatorList);
+            itsPlayer->Reincarnate(&waldo);
         }
 
         if (itsPlayer->isInLimbo) {

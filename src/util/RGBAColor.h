@@ -4,7 +4,7 @@
 #include "csscolorparser.hpp"
 
 #include <regex>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <stdint.h>
 
 #ifdef __has_include

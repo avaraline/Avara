@@ -35,8 +35,7 @@ enum {
     kStringWest
 };
 
-#define FUNCTIONBUFFERS 32
-#define MAXFRAMEDIFFERENCE 2
+#define FUNCTIONBUFFERS 32*8  // 8x to accommodate extra frames with high-FPS
 
 class CAbstractPlayer;
 class CAvaraGame;
@@ -160,7 +159,7 @@ private:
     short loadingStatus;
     short slot;
     short playerColor;
-    
+
     bool showScoreboard = false;
 
     Point mouseCenterPosition;
@@ -234,7 +233,7 @@ public:
     virtual short Position();
     virtual Str255& PlayerName();
     virtual std::string GetPlayerName();
-    
+
     virtual std::deque<char>& LineBuffer();
     virtual CAbstractPlayer* GetPlayer();
     virtual short IsRegistered();

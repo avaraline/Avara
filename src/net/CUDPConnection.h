@@ -94,10 +94,11 @@ public:
     short dp;
     OSType d[kDebugBufferSize];
 #endif
-    
+
     long totalSent;
     long totalResent;
     long numResendsWithoutReceive;
+    double recentResendRate;
 
     volatile short *offsetBufferBusy;
     int32_t ackBitmap;
@@ -138,7 +139,7 @@ public:
     virtual void ReceiveControlPacket(PacketInfo *thePacket);
 
     virtual void GetConnectionStatus(short slot, UDPConnectionStatus *parms);
-    
+
 private:
     long LatencyEstimate();
 };

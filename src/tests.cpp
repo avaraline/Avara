@@ -16,6 +16,7 @@
 #include "CUDPConnection.h"
 
 #include <iostream>
+using namespace std;
 
 class TestSoundHub : public CSoundHubImpl {
 public:
@@ -185,28 +186,6 @@ public:
         game->AddActor(hector);
         game->GameStart();
     }
-
-    void Settle(int steps, int ticksPerStep) {
-        for (int i = 0; i < steps; i++) {
-            game->nextScheduledFrame = 0;
-            game->itsNet->activePlayersDistribution = 1;
-            for (int k = 0; k < ticksPerStep; k++) {
-                game->GameTick();
-            }
-        }
-    }
-
-    void KeyDown(int key) {
-        hector->itsManager->GetFunctions()->down = (1 << key);
-    }
-
-    void KeyHeld(int key) {
-        hector->itsManager->GetFunctions()->held = (1 << key);
-    }
-
-    void KeyUp(int key) {
-        hector->itsManager->GetFunctions()->up = (1 << key);
-    }
 };
 
 std::vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int frameTime) {
@@ -224,39 +203,19 @@ std::vector<Fixed> DropHector(int steps, int ticksPerStep, Fixed fromHeight, int
     return altitudes;
 }
 
-std::vector<Fixed> CrouchHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
-    HectorTestScenario scenario(frameTime, 0, 0, 0);
-    std::vector<Fixed> crouches;
-    scenario.Settle(settleSteps, ticksPerStep);
-    
-    crouches.push_back(scenario.hector->crouch);
-    scenario.game->nextScheduledFrame = 0;
-    scenario.game->itsNet->activePlayersDistribution = 1;
-    scenario.KeyDown(kfuJump);
-    scenario.game->GameTick();
-    scenario.KeyHeld(kfuJump);
-
-    for (int i = 0; i < steps; i++) {
-        scenario.game->nextScheduledFrame = 0;
-        scenario.game->itsNet->activePlayersDistribution = 1;
-        crouches.push_back(scenario.hector->crouch);
-        for (int k = 0; k < ticksPerStep; k++) {
-            scenario.KeyHeld(kfuJump);
-            scenario.game->GameTick();
-        }
-    }
-    crouches.push_back(scenario.hector->crouch);
-
-    return crouches;
-}
-
 std::vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerStep, int frameTime) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     std::vector<VectorStruct> location;
-    scenario.Settle(settleSteps, ticksPerStep);
+    for (int i = 0; i < settleSteps; i++) {
+        scenario.game->nextScheduledFrame = 0;
+        scenario.game->itsNet->activePlayersDistribution = 1;
+        for (int k = 0; k < ticksPerStep; k++) {
+            scenario.game->GameTick();
+        }
+    }
     scenario.game->nextScheduledFrame = 0;
     scenario.game->itsNet->activePlayersDistribution = 1;
-    scenario.KeyHeld(kfuForward);
+    scenario.hector->itsManager->GetFunctions()->held = (1 << kfuForward);
     scenario.game->GameTick();
 
     for (int i = 0; i < steps; i++) {
@@ -264,7 +223,7 @@ std::vector<VectorStruct> WalkHector(int settleSteps, int steps, int ticksPerSte
         scenario.game->itsNet->activePlayersDistribution = 1;
         location.push_back(*(VectorStruct*)scenario.hector->location);
         for (int k = 0; k < ticksPerStep; k++) {
-            scenario.KeyHeld(kfuForward);
+            scenario.hector->itsManager->GetFunctions()->held = (1 << kfuForward);
             scenario.game->GameTick();
         }
     }
@@ -389,25 +348,6 @@ TEST(HECTOR, WalkForwardSpeed) {
     }
 }
 
-/* TODO: Fix 
-TEST(HECTOR, CrouchSpeed) {
-    std::vector<Fixed> at64ms = CrouchHector(20, 80, 1, 64);
-    std::vector<Fixed> at32ms = CrouchHector(20, 80, 2, 32);
-    std::vector<Fixed> at16ms = CrouchHector(20, 80, 4, 16);
-
-    ASSERT_EQ(at64ms.back(), 52422) << "64ms simulation crouched wrong amount";
-    ASSERT_EQ(at64ms.size(), at32ms.size()) << "CrouchHector didn't do ticks right";
-    for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at32ms[i] ? at64ms[i] - at32ms[i] : at32ms[i] - at64ms[i], 170)
-            << "not close enough after " << i << " ticks.";
-    }
-    for (int i = 0; i < at64ms.size(); i++) {
-        ASSERT_LE(at64ms[i] > at16ms[i] ? at64ms[i] - at16ms[i] : at16ms[i] - at64ms[i], 210)
-            << "not close enough after " << i << " ticks.";
-    }
-}
-*/
-
 TEST(GRENADE, Trajectory) {
     std::vector<VectorStruct> at64ms = FireGrenade(20, 50, 1, 64);
     std::vector<VectorStruct> at32ms = FireGrenade(20, 50, 2, 32);
@@ -422,7 +362,7 @@ TEST(GRENADE, Trajectory) {
 }
 
 template<typename T, typename TMember>
-void test_rollover(std::string counterName, T x, T y, TMember counter) {
+void test_rollover(string counterName, T x, T y, TMember counter) {
     // quick test using signed int16_t max value in case somebody changes the type...
     x.*counter = std::numeric_limits<int16_t>::max();
     y.*counter = x.*counter + 2;

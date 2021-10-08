@@ -242,7 +242,7 @@ void CSoundMixer::PrepareScaleLookup() {
     }
 }
 
-void CSoundMixer::PrepareVolumeLookup() {
+void CSoundMixer::PrepareVolumeLookup(uint8_t mixerVolume /* 0-100 */) {
     WordSample *dest;
     short vol, samp;
 
@@ -251,17 +251,22 @@ void CSoundMixer::PrepareVolumeLookup() {
     if (sample16flag) {
         for (vol = 1; vol <= VOLUMERANGE; vol++) {
             for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
-                *dest++ = (samp * vol) << (16 - BITSPERSAMPLE - VOLUMEBITS);
+                *dest++ = (samp * vol * mixerVolume / 100) << (16 - BITSPERSAMPLE - VOLUMEBITS);
             }
         }
     } else {
         for (vol = 1; vol <= VOLUMERANGE; vol++) {
             for (samp = -SAMPLERANGE / 2; samp < SAMPLERANGE / 2; samp++) {
-                *dest++ = samp * vol;
+                *dest++ = (samp * vol * mixerVolume / 100);
             }
         }
     }
 }
+
+void CSoundMixer::SetVolume(uint8_t volume) {
+    PrepareVolumeLookup(std::min(volume, uint8_t(100)));
+}
+
 void CSoundMixer::SilenceBuffers() {
     for (int j = 0; j < 2; j++) {
         size_t numChannels = 2;

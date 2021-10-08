@@ -20,6 +20,7 @@
 
 
 extern CWallActor *lastWallActor;
+extern Fixed FRandSeed;
 
 void CGoody::BeginScript() {
     hitScore = 0;
@@ -81,7 +82,6 @@ CAbstractActor *CGoody::EndScript() {
             partList[1]->MoveDone();
         }
 
-        rotationSpeed = FDegToOne(ReadFixedVar(iSpeed));
         grenades = ReadLongVar(iGrenades);
         missiles = ReadLongVar(iMissiles);
         boosters = ReadLongVar(iBoosters);
@@ -89,13 +89,15 @@ CAbstractActor *CGoody::EndScript() {
         boostTime = ReadLongVar(iBoostTime);
         outMsg = ReadLongVar(iOutVar);
 
+        classicRotation = FDegToOne(ReadFixedVar(iSpeed));
+
         if(itsGame->itsApp->Boolean(kIgnoreCustomGoodySound)) {
             soundId = kGoodySound;
         }
         else {
             soundId = ReadLongVar(iSound);
         }
-        
+
         openSoundId = ReadLongVar(iOpenSound);
         closeSoundId = ReadLongVar(iCloseSound);
         volume = ReadFixedVar(iVolume);
@@ -116,6 +118,10 @@ CAbstractActor *CGoody::EndScript() {
     } else {
         return NULL;
     }
+}
+
+void CGoody::AdaptableSettings() {
+    rotationSpeed = FpsCoefficient2(classicRotation);
 }
 
 void CGoody::FrameAction() {
@@ -191,4 +197,9 @@ void CGoody::FrameAction() {
 
     if (enabled)
         sleepTimer = frequency;
+
+    // the goody heading can make a difference in determing a collision with a Hector
+    FRandSeed += heading;
+    // SDL_Log("fn = %ld, goody=%ld: heading = %8d, FRandSeed = %10d\n",
+    //         itsGame->frameNumber, ident, heading, (Fixed)FRandSeed);
 }

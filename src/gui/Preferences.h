@@ -13,6 +13,7 @@ using json = nlohmann::json;
 #define kInvertYAxisTag "invertYAxis"
 #define kLatencyToleranceTag "latencyTolerance"
 #define kHullTypeTag "hull"
+#define kFrameTimeTag "frameTime"
 
 // TODO: split this into separate prefs
 #define kServerOptionsTag "_serverOptions"
@@ -52,7 +53,10 @@ using json = nlohmann::json;
 // Levels
 #define kRecentSets "recentSets"
 #define kRecentLevels "recentLevels"
+
+// Sound
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
+#define kSoundVolume "soundVolume"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -60,7 +64,7 @@ static json defaultPrefs = {
     // {kJoystickModeTag, false},
     {kInvertYAxisTag, false},
     {kMouseSensitivityTag, 0},
-    {kLatencyToleranceTag, 1},
+    {kLatencyToleranceTag, 1.0},
     {kHullTypeTag, 0}, // 0 = light, 1 = medium, 2 = heavy
     {kServerOptionsTag, 129}, // 1 = allow load, 128 = auto latency
     {kDefaultUDPPort, 19567},
@@ -101,6 +105,7 @@ static json defaultPrefs = {
     {kFOV, 50.0},
     {kColorBlindMode, 0},
     {kWeaponSightAlpha, 1.0},
+    {kFrameTimeTag, 16},
     {kLastAddress, ""},
     {kServerDescription, ""},
     {kServerPassword, ""},
@@ -111,6 +116,7 @@ static json defaultPrefs = {
     {kTrackerRegisterFrequency, 5},
     {kRecentSets, {}},
     {kRecentLevels, {}},
+    {kSoundVolume, 100},
     {kIgnoreCustomGoodySound, false}
 };
 

@@ -6,6 +6,7 @@
     Created: Sunday, November 20, 1994, 19:17
     Modified: Monday, September 16, 1996, 18:50
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CAbstractActor.h"
 #include "CColorManager.h"
@@ -449,6 +450,12 @@ CAbstractActor *CAbstractActor::EndScript() {
     return this;
 }
 
+void CAbstractActor::AdaptableSettings() {
+    // This method is generally overridden by Subclass to do any computations that could
+    // change after a game is started OR resumed.  For example, any constant affected by
+    // frame-rate should be set in the Subclass equivalent of this method.
+}
+
 void CAbstractActor::AddToGame() {
     itsGame = gCurrentGame;
     itsGame->AddActor(this);
@@ -708,6 +715,7 @@ void CAbstractActor::PostMortemBlast(short scoreTeam, short scoreId, Boolean doD
         blastRecord.blastPower = blastPower;
         blastRecord.team = scoreTeam;
         blastRecord.playerId = scoreId;
+        FPS_DEBUG("CAbstractActor::PostMortemBlast: blastPower = " << blastPower << "\n");
         RadiateDamage(&blastRecord);
     }
 
@@ -731,6 +739,8 @@ void CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
     }
 }
 
+// perhaps we should rename this RayTestPlusGround because it does a RayTest on all actors and on the ground...
+// the name makes it sounds like it only tests the ground
 void CAbstractActor::RayTestWithGround(RayHitRecord *hitRec, MaskType testMask) {
     Fixed negOrigin1;
 
@@ -897,6 +907,7 @@ void CAbstractActor::WasDestroyed() {
 }
 
 void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
+    // SDL_Log("WasHit: player = %d, shields = %d, hitEnergy = %d\n", theHit->playerId, shields, hitEnergy);
     if (shields < 0 || shields > hitEnergy) {
         itsGame->Score(
             theHit->team, theHit->playerId, FMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
@@ -960,11 +971,15 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
 
     thePart = blastRay.closestHit;
     if (thePart) {
+        FPS_DEBUG("\nCAbstractActor::BlastHit: frameNumber = " << itsGame->frameNumber << " thePart = " << typeid(*thePart->theOwner).name() << "\n");
+
         blastRay.direction[0] = thePart->sphereGlobCenter[0] - theHit->blastPoint[0];
         blastRay.direction[1] = thePart->sphereGlobCenter[1] - theHit->blastPoint[1];
         blastRay.direction[2] = thePart->sphereGlobCenter[2] - theHit->blastPoint[2];
+        FPS_DEBUG("CAbstractActor::BlastHit: sphereGlobCenter = " << FormatVector(thePart->sphereGlobCenter, 3) << ", blastPoint = " << FormatVector(theHit->blastPoint, 3) << ", blastDirection = " << FormatVector(blastRay.direction, 3) << "\n");
 
         distance = NormalizeVector(3, blastRay.direction) - thePart->enclosureRadius;
+        FPS_DEBUG("CAbstractActor::BlastHit: len(blastRay.direction) = " << distance + thePart->enclosureRadius << ", enclosureRadius = " << thePart->enclosureRadius << ", distance = " << distance << "\n");
         if (distance < FIX(1)) {
             distance = FIX(1);
             blastRay.origin[0] = theHit->blastPoint[0];
@@ -977,6 +992,7 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
         }
 
         energy = FDiv(theHit->blastPower, FMul(distance, distance));
+        FPS_DEBUG("CAbstractActor::BlastHit: power = " << theHit->blastPower << ", distance = " << distance << ", energy = " << energy << "\n");
         if (energy > (65536 >> 6)) {
             blastRay.distance = distance;
             blastRay.team = theHit->team;
@@ -1006,7 +1022,10 @@ void CAbstractActor::GetSpeedEstimate(Fixed *theSpeed) {
 }
 
 void CAbstractActor::ResumeLevel() {
-    //	Subclass responsibility.
+    // ResumeLevel() is generally meant for actions that need to occur on resuming a game.
+    // If you just want to change an Actor's settings on a resume then use AdaptableSettings instead.
+    // This just calls AdaptableSettings() for the subclass by default, but may be overridden to do more (or less).
+    this->AdaptableSettings();
 }
 
 void CAbstractActor::PauseLevel() {
@@ -1166,4 +1185,96 @@ short CAbstractActor::GetBallSnapPoint(long theGroup,
     Fixed *delta,
     CSmartPart **hostPart) {
     return kSnapNot;
+}
+
+// Computes the coefficients used for high-FPS computations.
+// The arguments are commonly used to represent "friction" and "gravity" in many of the
+// speed calculations. For example, the grenade calculation for vertical speed (speed[1])
+// looks like this:
+//    speed[Y] = speed[Y] * friction - gravity
+// But there are many cases that are a general linear equation where some variable
+// is updated from one frame to the next like this:
+//    x[i+1] = x[i] * a + b
+// This method converts the coefficients (a, b) from "classic" to "fps" equivalents so that
+// the computation after multiple FPS frames is the nearly same as it would have would been
+// over the span of a single "classic" frame.
+void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
+                                     Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed *fpsOffset) {
+    if (HandlesFastFPS()) {
+        double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
+        *fpsCoeff1 = FRound(fps1);
+        if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
+            *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
+        } else { // 0.999-1.001
+            // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsScale
+            *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
+        }
+        if (fpsOffset != NULL) {
+            // Dividing by classicCoeff1(A) seems to improve cases like this:
+            //   s=As+B
+            *fpsOffset = FDiv(FpsOffset(classicCoeff2), classicCoeff1);
+        }
+    } else {
+        *fpsCoeff1 = classicCoeff1;
+        *fpsCoeff2 = classicCoeff2;
+    }
+}
+
+// convenience function for equations of the form (returns fps-scaled version of a),
+//   x[i+1] = x[i] * a
+Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
+    if (HandlesFastFPS()) {
+        return FRound(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
+    } else {
+        return classicCoeff1;
+    }
+}
+// convenience function for equations of the form (returns fps-scaled version of b),
+//   x[i+1] = x[i] + b
+Fixed CAbstractActor::FpsCoefficient2(Fixed classicCoeff2) {
+    if (HandlesFastFPS()) {
+        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+        return std::lround(classicCoeff2 * itsGame->fpsScale);
+    } else {
+        return classicCoeff2;
+    }
+}
+
+// convenience function for offset assuming equations of the form
+//   x[i+1] = x[i] + b
+Fixed CAbstractActor::FpsOffset(Fixed classicCoeff2) {
+    // Here's an oversimplication... if you are calculating speed every
+    // classic frame (64ms) like this,
+    //   s=s+8     (classicCoeff1=1, classicCoeff2=8)
+    // then the high FPS (16ms) case might do this for 4 frames.
+    //   s=s+2     (fpsCoeff1=1, fpsCoeff2=2)
+    // but the FPS case will only add a total of (2+4+6+8)*0.25=5 to the location
+    // whereas the classic case adds 8.  To compensate, add an initial offset of
+    // 1.5*2=3 to the speed in the first frame so that the location is incremented
+    // by (5+7+9+11)*0.25=8, same as the classic case.
+    return 0.5 * (1/itsGame->fpsScale - 1) * FpsCoefficient2(classicCoeff2);
+}
+
+// the most accurate version of coefficient1 is computed using doubles
+double CAbstractActor::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
+    return pow(fpsCoeff1, fpsScale);
+}
+
+long CAbstractActor::FpsFramesPerClassic(long classicFrames)
+{
+    if (HandlesFastFPS()) {
+        return long(classicFrames / itsGame->fpsScale);
+    } else {
+        return 1;
+    }
+}
+
+// basically the inverse of FpsCoefficient2... convert FPS values to Classic units
+Fixed CAbstractActor::ClassicCoefficient2(Fixed fpsValue) {
+    if (HandlesFastFPS()) {
+        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+        return std::lround(fpsValue / itsGame->fpsScale);
+    } else {
+        return fpsValue;
+    }
 }

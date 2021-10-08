@@ -6,6 +6,7 @@
     Created: Wednesday, March 15, 1995, 07:48
     Modified: Monday, September 16, 1996, 19:31
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CScout.h"
 
@@ -73,13 +74,16 @@ Fixed CScout::MoveToTarget() {
     short alpha;
     Fixed dist;
 
+    FPS_DEBUG("CScout::MoveToTarget frameNumber = " << itsGame->frameNumber <<
+              ", speed = " << FDistanceEstimate(speed[0], speed[1], speed[2]) << "\n");
+
     delta[0] = targetPosition[0] - location[0];
     delta[1] = targetPosition[1] - location[1];
     delta[2] = targetPosition[2] - location[2];
 
     dist = FDistanceEstimate(delta[0], delta[1], delta[2]);
 
-    if (dist < FIX3(100)) {
+    if (dist < FpsCoefficient2(FIX3(100))) {
         course[0] = -speed[0] >> 1;
         course[1] = -speed[1] >> 1;
         course[2] = -speed[2] >> 1;
@@ -100,13 +104,19 @@ Fixed CScout::MoveToTarget() {
         course[2] = FMul(delta[2], kScoutAcceleration);
     }
 
-    speed[0] = FMul(speed[0] + course[0], kScoutFriction);
-    speed[1] = FMul(speed[1] + course[1], kScoutFriction);
-    speed[2] = FMul(speed[2] + course[2], kScoutFriction);
+    Fixed fpsFriction, fpsCoeff2;
+    // both terms are multiplied by kScoutFriction
+    FpsCoefficients(kScoutFriction, kScoutFriction, &fpsFriction, &fpsCoeff2);
+    speed[0] = FMul(speed[0], fpsFriction) + FMul(course[0], fpsCoeff2);
+    speed[1] = FMul(speed[1], fpsFriction) + FMul(course[1], fpsCoeff2);
+    speed[2] = FMul(speed[2], fpsFriction) + FMul(course[2], fpsCoeff2);
 
-    location[0] += speed[0];
-    location[1] += speed[1];
-    location[2] += speed[2];
+    location[0] += FpsCoefficient2(speed[0]);
+    location[1] += FpsCoefficient2(speed[1]);
+    location[2] += FpsCoefficient2(speed[2]);
+
+    FPS_DEBUG("CScout::MoveToTarget location = " << FormatVector(location, 3) <<
+                                    ", speed = " << FormatVector(speed, 3) << "\n");
 
     return dist;
 }
@@ -124,7 +134,8 @@ void CScout::FrameAction() {
     VECTORCOPY(oldLocation, location);
 
     if (nextRotateFlag)
-        heading += TURNSPEED;
+        heading += FpsCoefficient2(TURNSPEED);
+    FPS_DEBUG("CScout::FrameAction heading = " << heading << "\n");
 
     switch (action) {
         case kScoutFollow:

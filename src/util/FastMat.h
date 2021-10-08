@@ -49,7 +49,8 @@ typedef struct {
 /*	FIX3 results in the n/1000 as a fixed point number								*/
 #define FIX3(n) ((long)((n)*8192L / 125L))
 /*	FIX results in the integer number as a fixed point number						*/
-#define FIX(n) ((long)(n * 65536L))
+#define FIX(n) ((long)((n) * 65536L))
+#define FRound(n) (std::lround((n) * 65536L))
 
 /*	Prototypes for internal routines:												*/
 void VectorMatrixProduct(long n, Vector *vs, Vector *vd, Matrix *m);
@@ -119,7 +120,9 @@ Fixed NormalizeVector(long n, Fixed *v); //	Returns length
 
 Fixed FRandom();
 Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz);
+static inline Fixed FDistanceEstimate(Fixed* v) { return FDistanceEstimate(v[0], v[1], v[2]); };
 Fixed FDistanceOverEstimate(Fixed dx, Fixed dy, Fixed dz);
 void InverseTransform(Matrix *trans, Matrix *inv);
 
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2);
+std::string FormatVector(Fixed *v, int size);

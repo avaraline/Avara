@@ -142,7 +142,7 @@ void CTextActor::FrameAction() {
             areaFlag = newFlag;
             if (newFlag) {
                 isActive |= kIsActive;
-                showTime = itsGame->frameNumber + textTimer;
+                showTime = itsGame->FramesFromNow(textTimer);
             }
         }
     }

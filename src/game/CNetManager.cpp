@@ -32,15 +32,15 @@
 
 #include <string.h>
 
-#define AUTOLATENCYPERIOD 3840  // msec - this number is evenly divisible by every frameTime in CAvaraGame::AdjustFrameTime
-#define AUTOLATENCYDELAY  480   // msec
+#define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
+#define AUTOLATENCYDELAY  448   // msec (divisible by 64)
 #define LOWERLATENCYCOUNT 3
 #define HIGHERLATENCYCOUNT 8
 
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
 #else
-    #define kAvaraNetVersion 9
+    #define kAvaraNetVersion 10
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -533,7 +533,9 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     itsCommManager->SendUrgentPacket(activePlayersDistribution, kpReadySynch, 0, 0, 0, 0, 0);
     lastTime = TickCount();
     do {
-        SDL_Log("CNetManager::GatherPlayers loop\n");
+        if (TickCount() % 1000 == 0) {
+            SDL_Log("CNetManager::GatherPlayers loop\n");
+        }
         ProcessQueue();
         goAhead = (TickCount() - lastTime < 1800);
         // TODO: waiting dialog with cancel
@@ -571,7 +573,8 @@ void CNetManager::ResumeGame() {
     Boolean allOk = false;
 
     SDL_Log("CNetManager::ResumeGame\n");
-    config.latencyTolerance = gApplication->Number(kLatencyToleranceTag);
+    config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
+    config.frameTime = itsGame->frameTime;
     config.hullType = gApplication->Number(kHullTypeTag);
     config.numGrenades = 6;
     config.numMissiles = 3;
@@ -594,13 +597,9 @@ void CNetManager::ResumeGame() {
     // This is what pulled the counts from CLevelListWind
     itsGame->itsApp->BroadcastCommand(kConfigurePlayerCmd);
 
-    fragmentDetected = false;
-
-    maxRoundTripLatency = 0;
+    ResetLatencyVote();
     addOneLatency = 0;
     localLatencyVote = 0;
-    autoLatencyVote = 0;
-    autoLatencyVoteCount = 0;
     latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
     thePlayerManager = playerTable[itsCommManager->myId];
@@ -613,7 +612,8 @@ void CNetManager::ResumeGame() {
         copy.numMissiles = ntohs(config.numMissiles);
         copy.numBoosters = ntohs(config.numBoosters);
         copy.hullType = ntohs(config.hullType);
-        copy.latencyTolerance = ntohs(config.latencyTolerance);
+        copy.frameLatency = ntohs(config.frameLatency);
+        copy.frameTime = ntohs(config.frameTime);
 
         itsCommManager->SendUrgentPacket(
             kdEveryone, kpStartSynch, 0, kLActive, FRandSeed, sizeof(PlayerConfigRecord), (Ptr)&copy);
@@ -679,7 +679,6 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
         localLatencyVote++;
     }
 
-    static CPlayerManager *maxPlayer = nullptr;
     if (frameNumber >= latencyVoteFrame) {
         long autoLatencyPeriod = itsGame->TimeToFrameCount(AUTOLATENCYPERIOD);
         if ((frameNumber % autoLatencyPeriod) == 0) {
@@ -693,8 +692,8 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             itsCommManager->SendUrgentPacket(
                 activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
             #if LATENCY_DEBUG
-                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld\n",
-                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency);
+                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld FRandSeed=%d\n",
+                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency, FRandSeed);
             #endif
             localLatencyVote = 0;
         } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
@@ -703,8 +702,8 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                 fragmentDetected = false;
             }
 
-            if ((serverOptions & (1 << kUseAutoLatencyBit)) && autoLatencyVoteCount) {
-                long maxFrameLatency;
+            if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
+                short maxFrameLatency;
 
                 autoLatencyVote /= autoLatencyVoteCount;
 
@@ -714,26 +713,50 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
                 maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                #if LATENCY_DEBUG
-                    SDL_Log("*** fn=%ld latencyFrameTime=%ld maxFrameLatency=%ld autoLatencyVote=%ld addOneLatency=%d maxRoundLatency=%d\n",
-                            frameNumber, itsGame->latencyFrameTime, maxFrameLatency, autoLatencyVote, addOneLatency, maxRoundTripLatency);
-                #endif
+                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, FL=%d\n",
+                        frameNumber, maxRoundTripLatency,
+                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), maxFrameLatency);
 
-                itsGame->SetLatencyTolerance(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
-                itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
+                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
             }
 
-            autoLatencyVote = 0;
-            autoLatencyVoteCount = 0;
-            maxRoundTripLatency = 0;
-            maxPlayer = nullptr;
+            ResetLatencyVote();
             latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD, latencyVoteFrame);
+            // SDL_Log("*** next latencyVoteFrame = %ld\n", latencyVoteFrame);
         }
     }
 }
 
+bool CNetManager::IsAutoLatencyEnabled() {
+    return (serverOptions & (1 << kUseAutoLatencyBit));
+}
+
+bool CNetManager::IsFragmentCheckWindowOpen() {
+    // Start considering fragmentation checks a little before the next latencyVoteFrame (because other clients might
+    // send votes early, like mail-in votes). This check is used to prevent a possible fragmentation false-positive
+    // when a vote arrives AFTER the previous vote count has been processed and could be misinterpretted as a frag.
+    return (itsGame->frameNumber > latencyVoteFrame - itsGame->TimeToFrameCount(AUTOLATENCYDELAY));
+}
+
+// reset all the variables that keep track of the latency vote and fragment check
+void CNetManager::ResetLatencyVote() {
+    fragmentCheck = 0;
+    fragmentDetected = false;
+    autoLatencyVote = 0;
+    autoLatencyVoteCount = 0;
+    maxRoundTripLatency = 0;
+    maxPlayer = nullptr;
+}
+
 void CNetManager::ViewControl() {
     playerTable[itsCommManager->myId]->ViewControl();
+}
+
+void CNetManager::SendPingCommand(int totalTrips) {
+    if (totalTrips > 0) {
+        itsCommManager->SendPacket(kdEveryone - (1 << itsCommManager->myId),
+                                   kpPing, 0, 0, totalTrips-1, 0, NULL);
+   }
 }
 
 void CNetManager::SendStartCommand() {
@@ -892,7 +915,7 @@ short CNetManager::PlayerCount() {
             playerCount++;
         }
     }
-    
+
     return playerCount;
 }
 
@@ -966,7 +989,8 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->numMissiles = ntohs(config->numMissiles);
     config->numBoosters = ntohs(config->numBoosters);
     config->hullType = ntohs(config->hullType);
-    config->latencyTolerance = ntohs(config->latencyTolerance);
+    config->frameLatency = ntohs(config->frameLatency);
+    config->frameTime = ntohs(config->frameTime);
     playerTable[senderSlot]->TheConfiguration() = *config;
 }
 
@@ -977,15 +1001,12 @@ void CNetManager::DoConfig(short senderSlot) {
         playerTable[senderSlot]->GetPlayer()->ReceiveConfig(theConfig);
     }
 
-    if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly)) {
-        if (itsGame->latencyTolerance < theConfig->latencyTolerance)
-            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
-            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
-    } else {
-        if (senderSlot == 0) {
-            itsGame->SetLatencyTolerance(theConfig->latencyTolerance, -1);
-            itsCommManager->frameTimeScale = itsGame->LatencyFrameTimeScale();
-        }
+    // any reason for these conditionals?  seems like we should always set frameTime etc.
+    if (PermissionQuery(kAllowLatencyBit, 0) || !(activePlayersDistribution & kdServerOnly) || senderSlot == 0) {
+        // transmitting latencyTolerance in terms of frameLatency to keep it as a short value on transmission
+        itsGame->SetFrameTime(theConfig->frameTime);
+        itsGame->SetFrameLatency(theConfig->frameLatency, -1);
+        latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
 }
 
