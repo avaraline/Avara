@@ -1,4 +1,4 @@
- n# Taken from https://spin.atomicobject.com/2016/08/26/makefile-c-projects/
+ # Taken from https://spin.atomicobject.com/2016/08/26/makefile-c-projects/
 
 CC = clang
 CXX = clang++
