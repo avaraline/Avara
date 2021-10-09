@@ -70,7 +70,7 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "vendor/nanovg/nanovg.c"
     "vendor/pugixml/pugixml.cpp"
     "vendor/csscolorparser.cpp"
-    "vendor/miniupnpc/*.c",
+    "vendor/miniupnpc/*.c"
     "vendor/stb_vorbis.c"
 )
 
