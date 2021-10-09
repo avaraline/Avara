@@ -76,6 +76,7 @@ jobs:
           ls -la
           tar -xf MacOSX10.9.sdk.tar
           ls -la
+          echo "`pwd`/MacOSX10.9.sdk/"
           export SDKROOT="`pwd`/MacOSX10.9.sdk/"
       - uses: actions/checkout@v2
       - name: make

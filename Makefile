@@ -1,7 +1,11 @@
-# Taken from https://spin.atomicobject.com/2016/08/26/makefile-c-projects/
+ n# Taken from https://spin.atomicobject.com/2016/08/26/makefile-c-projects/
 
 CC = clang
 CXX = clang++
+
+ifndef SDKROOT
+SDKROOT = "`xcrun --show-sdk-path`"
+endif
 
 GIT_HASH := $(shell git describe --always --dirty)
 GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
@@ -28,9 +32,9 @@ ifeq ($(UNAME), Darwin)
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	SRCS += $(shell find vendor/miniupnpc -maxdepth 1 -name '*.c')
 	INCFLAGS += -Ivendor/miniupnpc
-	CXXFLAGS += -mmacosx-version-min=10.9
-	CPPFLAGS += -mmacosx-version-min=10.9
-	CFLAGS += -mmacosx-version-min=10.9
+	CXXFLAGS += -mmacosx-version-min=10.9 -isysroot ${SDKROOT}
+	CPPFLAGS += -mmacosx-version-min=10.9 -isysroot ${SDKROOT}
+	CFLAGS += -mmacosx-version-min=10.9 -isysroot ${SDKROOT}
 ifneq ("$(wildcard $(HOME)/Library/Frameworks/SDL2.framework)", "")
 	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
 else
