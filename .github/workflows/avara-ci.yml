@@ -80,7 +80,7 @@ jobs:
           export SDKROOT="`pwd`/MacOSX10.9.sdk/"
       - uses: actions/checkout@v2
       - name: make
-        run: make -j macapp SIGNING_ID=NONE
+        run: SDKROOT="`pwd`/MacOSX10.9.sdk/" make -j macapp SIGNING_ID=NONE
       - name: make tests
         run: make tests
       - name: print env variables
