@@ -1,4 +1,4 @@
-build*
+build*/
 .DS_Store
 *.patch
 *.diff
@@ -14,3 +14,5 @@ __pycache__
 src/util/GitVersion.h
 /*.alf
 levels/*/log.txt
+zig-*/
+

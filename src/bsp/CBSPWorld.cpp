@@ -117,6 +117,8 @@ void CBSPWorldImpl::SortByZ() {
 /*
 **	This is the old version. It doesn't work correctly in all cases.
 */
+
+/*
 void CBSPWorldImpl::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
     CBSPPart *compPart;
     CBSPPart **endPart, **jPart, **iPart;
@@ -150,7 +152,7 @@ void CBSPWorldImpl::ScoreAndSort(CBSPPart **firstPart, short overlapCount) {
             }
     }
 }
-
+*/
 void CBSPWorldImpl::OverheadPoint(Fixed *c, Fixed *e) {
     Fixed minX = FIX(9999),
           maxX = FIX(-9999),
@@ -232,7 +234,7 @@ void CBSPWorldImpl::SortVisibleParts() {
     Fixed minZ, maxZ;
     short overlapCount = 0;
 
-    SortByZ();
+    //SortByZ();
 
     endPart = visibleP + visibleCount;
     thisPart = visibleP;

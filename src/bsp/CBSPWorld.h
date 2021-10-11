@@ -47,7 +47,7 @@ public:
 
     virtual void SortVisibleParts();
     virtual void SortByZ();
-    virtual void ScoreAndSort(CBSPPart **firstPart, short overlapCount);
+    //virtual void ScoreAndSort(CBSPPart **firstPart, short overlapCount);
     virtual void VisibilitySort(CBSPPart **firstPart, short overlapCount);
 
     virtual CBSPPart *GetIndPart(short ind);
