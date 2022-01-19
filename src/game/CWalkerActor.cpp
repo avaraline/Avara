@@ -693,7 +693,33 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
                 stance = MINHEADHEIGHT;
         }
 
+        if (TESTFUNC(kfuJump, ft->down)) {
+            Fixed scale1, scale2;
+            FpsCoefficients(FIX1 - (FIX1 >> 3), FIX1 >> 3, &scale1, &scale2);
+            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
+            // crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
+            FPS_DEBUG("*** kfuJump DOWN");
+        } else if (TESTFUNC(kfuJump, ft->held)) {
+            // often when holding the jump key both 'held' and 'down' test true so check 'held' first
+            Fixed scale1, scale2;
+            FpsCoefficients(FIX1 - (FIX1 >> 2), FIX1 >> 2, &scale1, &scale2);
+            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
+            // crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
+            FPS_DEBUG("*** kfuJump HELD");
+        } else {
+            if (TESTFUNC(kfuJump, ft->up)) {
+                // with impending regular jump, drop value in half regardless of frame rate
+                crouch >>= 1;
+            } else {
+                crouch = FMul(crouch, FpsCoefficient1(FIX1 >> 1));
+            }
+            // crouch >>= 1;
+            FPS_DEBUG("*** kfuJump off");
+        }
+        FPS_DEBUG(", crouch = " << crouch << std::endl);
+
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
+            FPS_DEBUG("*** kfuJump UP!!, initial speed = " << speed[1] << std::endl);
             speed[1] >>= 1;
             // it's an impulse power up so don't scale the jump
             speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
@@ -702,26 +728,6 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             FPS_DEBUG("*** kfuJump UP!!, jumpBasePower = " << jumpBasePower << ", baseMass = " << baseMass << ", totalMass = " << GetTotalMass() << ", speed = " << speed[1] << std::endl);
             jumpFlag = true;
         }
-
-        if (TESTFUNC(kfuJump, ft->held)) {
-            // often when holding the jump key both 'held' and 'down' test true so check 'held' first
-            Fixed scale1, scale2;
-            FpsCoefficients(FIX1 - (FIX1 >> 2), FIX1 >> 2, &scale1, &scale2);
-            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
-            // crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
-            FPS_DEBUG("*** kfuJump HELD");
-        } else if (TESTFUNC(kfuJump, ft->down)) {
-            Fixed scale1, scale2;
-            FpsCoefficients(FIX1 - (FIX1 >> 3), FIX1 >> 3, &scale1, &scale2);
-            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
-            // crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
-            FPS_DEBUG("*** kfuJump DOWN");
-        } else {
-            crouch = FMul(crouch, FpsCoefficient1(FIX1 >> 1));
-            // crouch >>= 1;
-            FPS_DEBUG("*** kfuJump off");
-        }
-        FPS_DEBUG(", crouch = " << crouch << std::endl);
     }
 }
 
