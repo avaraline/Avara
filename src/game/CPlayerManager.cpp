@@ -318,22 +318,24 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 }
 
 void CPlayerManagerImpl::HandleKeyDown(uint32_t keyFunc) {
-    keysDown |= keyFunc;
     numHeld[keyFunc]++;
+    FPS_DEBUG("*** HandleKeyDown fn=" << itsGame->frameNumber << ", numHeld[" << keyFunc << "] = " << numHeld[keyFunc] << "\n");
+    keysDown |= keyFunc;
     keysHeld |= keyFunc;
-    FPS_DEBUG("*** HandleKeyDown: numHeld[" << keyFunc << "] = " << numHeld[keyFunc] << "\n");
 }
 
 void CPlayerManagerImpl::HandleKeyUp(uint32_t keyFunc) {
-    keysUp |= keyFunc;
     numHeld[keyFunc]--;
-    if (numHeld[keyFunc] <= 0) {
-        // if key(s) held before start/resume, this could become negative so reset to 0
-        numHeld[keyFunc] = 0;
-        // if no more keys of this type are being held, remove from the Held list
+    FPS_DEBUG("*** HandleKeyUp   fn=" << itsGame->frameNumber << ", numHeld[" << keyFunc << "] = " << numHeld[keyFunc] << "\n");
+    if (numHeld[keyFunc] >= 0) {
+        keysUp |= keyFunc;
+    }
+    if (numHeld[keyFunc] <= 0) { // 1 or less held when entering function
+        // remove from the keysHeld list
         keysHeld &= ~keyFunc;
     }
-    FPS_DEBUG("*** HandleKeyUp  : numHeld[" << keyFunc << "] = " << numHeld[keyFunc] << "\n");
+    // on the NEXT call, remove it from keysHeld regardless of how many actually held.
+    numHeld[keyFunc] = 0;
 }
 
 void CPlayerManagerImpl::SendFrame() {
