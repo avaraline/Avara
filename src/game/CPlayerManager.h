@@ -129,7 +129,7 @@ private:
     long askAgainTime;
 
     // Track current frame events here
-    uint32_t keysDown, keysUp, keysHeld;
+    uint32_t keysDown, keysUp, keysHeld, dupKeysHeld;
     short mouseX, mouseY;
     uint8_t buttonStatus;
 
@@ -172,7 +172,6 @@ private:
     PlayerConfigRecord theConfiguration;
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
-    std::unordered_map<uint32_t, int> numHeld;         // # of keyboard keys held per keyFunc
 
 public:
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);

@@ -318,24 +318,30 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 }
 
 void CPlayerManagerImpl::HandleKeyDown(uint32_t keyFunc) {
-    numHeld[keyFunc]++;
-    FPS_DEBUG("*** HandleKeyDown fn=" << itsGame->frameNumber << ", numHeld[" << keyFunc << "] = " << numHeld[keyFunc] << "\n");
     keysDown |= keyFunc;
+    // only set the keyFunc bit in dupKeysHeld if the same bit in keysHeld is already set
+    dupKeysHeld |= (keysHeld & keyFunc);
     keysHeld |= keyFunc;
+    FPS_DEBUG("*** HandleKeyDown fn=" << itsGame->frameNumber <<
+              std::hex <<
+              ", keyDown = 0x" << std::setw(8) << keyFunc <<
+              ", keysHeld = 0x" << std::setw(8) << keysHeld <<
+              ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
 }
 
 void CPlayerManagerImpl::HandleKeyUp(uint32_t keyFunc) {
-    numHeld[keyFunc]--;
-    FPS_DEBUG("*** HandleKeyUp   fn=" << itsGame->frameNumber << ", numHeld[" << keyFunc << "] = " << numHeld[keyFunc] << "\n");
-    if (numHeld[keyFunc] >= 0) {
-        keysUp |= keyFunc;
-    }
-    if (numHeld[keyFunc] <= 0) { // 1 or less held when entering function
-        // remove from the keysHeld list
-        keysHeld &= ~keyFunc;
-    }
-    // on the NEXT call, remove it from keysHeld regardless of how many actually held.
-    numHeld[keyFunc] = 0;
+    keysUp |= (keyFunc & keysHeld);
+    // if dupKeysHeld bit is already set, then keysHeld bit remains set until another key is released
+    // note: this logic was added to support a more repeatable "superjump" capability isn't necessarily limited to jumping
+    keysHeld &= ~(keyFunc & ~dupKeysHeld);
+    // regardless of how many keys might be held, mark all duplicate keys as unheld
+    // to avoid a bunch of KeyUp commands from causing strange behaviors (e.g. superDUPERjump)
+    dupKeysHeld &= ~keyFunc;
+    FPS_DEBUG("*** HandleKeyUp   fn=" << itsGame->frameNumber <<
+              std::hex << std::setfill('0') <<
+              ", keyUp   = 0x" << std::setw(8) << keyFunc <<
+              ", keysHeld = 0x" << std::setw(8) << keysHeld <<
+              ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
 }
 
 void CPlayerManagerImpl::SendFrame() {
@@ -465,8 +471,7 @@ void CPlayerManagerImpl::ResumeGame() {
     oldButton = 0;
     isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
 
-    keysDown = keysUp = keysHeld = 0;
-    numHeld.clear();
+    keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
     buttonStatus = 0;
 }

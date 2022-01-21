@@ -698,14 +698,14 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             FpsCoefficients(FIX1 - (FIX1 >> 3), FIX1 >> 3, &scale1, &scale2);
             crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
             // crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
-            FPS_DEBUG("*** kfuJump DOWN");
+            FPS_DEBUG("*** kfuJump DOWN, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
         } else if (TESTFUNC(kfuJump, ft->held)) {
             // often when holding the jump key both 'held' and 'down' test true so check 'held' first
             Fixed scale1, scale2;
             FpsCoefficients(FIX1 - (FIX1 >> 2), FIX1 >> 2, &scale1, &scale2);
             crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
             // crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
-            FPS_DEBUG("*** kfuJump HELD");
+            FPS_DEBUG("*** kfuJump HELD, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
         } else {
             if (TESTFUNC(kfuJump, ft->up)) {
                 // with impending regular jump, drop value in half regardless of frame rate
@@ -713,13 +713,13 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             } else {
                 crouch = FMul(crouch, FpsCoefficient1(FIX1 >> 1));
             }
-            // crouch >>= 1;
-            FPS_DEBUG("*** kfuJump off ");
+            if (crouch > 1000) {
+                FPS_DEBUG("*** kfuJump OFF, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
+            }
         }
-        FPS_DEBUG(", fn=" << itsGame->frameNumber << ", crouch = " << crouch << std::endl);
 
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
-            FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", initial speed = " << speed[1] << std::endl);
+            FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", crouch = " << crouch << ", initial speed = " << speed[1] << std::endl);
             speed[1] >>= 1;
             // it's an impulse power up so don't scale the jump
             speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
