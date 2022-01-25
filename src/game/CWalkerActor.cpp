@@ -7,7 +7,7 @@
     Modified: Monday, September 16, 1996, 19:28
 */
 
-#define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CWalkerActor.h"
 

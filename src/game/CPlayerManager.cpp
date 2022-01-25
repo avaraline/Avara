@@ -6,7 +6,7 @@
     Created: Saturday, March 11, 1995, 05:50
     Modified: Sunday, September 15, 1996, 20:51
 */
-#define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CPlayerManager.h"
 
@@ -323,7 +323,7 @@ void CPlayerManagerImpl::HandleKeyDown(uint32_t keyFunc) {
     dupKeysHeld |= (keysHeld & keyFunc);
     keysHeld |= keyFunc;
     FPS_DEBUG("*** HandleKeyDown fn=" << itsGame->frameNumber <<
-              std::hex <<
+              std::hex << std::setfill('0') <<
               ", keyDown = 0x" << std::setw(8) << keyFunc <<
               ", keysHeld = 0x" << std::setw(8) << keysHeld <<
               ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
