@@ -13,7 +13,7 @@
 #include "PlayerConfig.h"
 
 #include <SDL2/SDL.h>
-#include <map>
+#include <unordered_map>
 #include <deque>
 #include <string>
 
@@ -129,7 +129,7 @@ private:
     long askAgainTime;
 
     // Track current frame events here
-    uint32_t keysDown, keysUp, keysHeld;
+    uint32_t keysDown, keysUp, keysHeld, dupKeysHeld;
     short mouseX, mouseY;
     uint8_t buttonStatus;
 
@@ -171,7 +171,7 @@ private:
 
     PlayerConfigRecord theConfiguration;
 
-    std::map<SDL_Scancode, uint32_t> keyMap;
+    std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 
 public:
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
@@ -181,6 +181,8 @@ public:
     virtual uint32_t GetKeyBits();
     virtual uint32_t DoMouseControl(Point *deltaMouse, Boolean doCenter);
     virtual void HandleEvent(SDL_Event &event);
+    virtual void HandleKeyDown(uint32_t keyFunc);
+    virtual void HandleKeyUp(uint32_t keyFunc);
     virtual void SendFrame();
     virtual void ResumeGame();
 

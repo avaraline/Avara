@@ -249,7 +249,7 @@ vector<VectorStruct> WalkHector(int settleSteps, int steps, int frameTime) {
     return location;
 }
 
-vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, int frameTime) {
+vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, int frameTime, bool hold2ndKey) {
     HectorTestScenario scenario(frameTime, 0, 0, 0);
     vector<VectorStruct> location;
     int ticksPerStep = GetTicksPerStep(frameTime);
@@ -267,12 +267,13 @@ vector<VectorStruct> JumpHector(int settleSteps, int jumpHoldSteps, int steps, i
         scenario.game->GameTick();
     }
 
-    scenario.hector->itsManager->GetFunctions()->held = 0;
+    scenario.hector->itsManager->GetFunctions()->held = hold2ndKey ? (1 << kfuJump) : 0;
     scenario.hector->itsManager->GetFunctions()->up = (1 << kfuJump);
 
     for (int i = 0; i < steps; i++) {
         for (int k = 0; k < ticksPerStep; k++) {
             scenario.game->GameTick();
+            scenario.hector->itsManager->GetFunctions()->held = 0;
             scenario.hector->itsManager->GetFunctions()->up = 0;
         }
         location.push_back(*(VectorStruct*)scenario.hector->location);
@@ -602,22 +603,22 @@ TEST(HECTOR, WalkForwardSpeed) {
     }
 }
 
-TEST(HECTOR, Jump) {
+void test_jump(bool hold2ndKey, int peakStep, int peakHeight) {
     int jumpSteps = 40;
-    vector<VectorStruct> at64ms = JumpHector(20, 20, jumpSteps, 64);
-    vector<VectorStruct> at32ms = JumpHector(20, 20, jumpSteps, 32);
-    vector<VectorStruct> at16ms = JumpHector(20, 20, jumpSteps, 16);
-    vector<VectorStruct> at8ms = JumpHector(20, 20, jumpSteps, 8);
+    vector<VectorStruct> at64ms = JumpHector(20, 20, jumpSteps, 64, hold2ndKey);
+    vector<VectorStruct> at32ms = JumpHector(20, 20, jumpSteps, 32, hold2ndKey);
+    vector<VectorStruct> at16ms = JumpHector(20, 20, jumpSteps, 16, hold2ndKey);
+    vector<VectorStruct> at8ms = JumpHector(20, 20, jumpSteps, 8, hold2ndKey);
 
     // peak of jump is near frame 6
     ASSERT_EQ(at64ms.size(), jumpSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), jumpSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), jumpSteps) << "not enough steps recorded at 16ms";
     ASSERT_EQ(at8ms.size(), jumpSteps) << "not enough steps recorded at 8ms";
-    ASSERT_NEAR(at64ms[6].theVec[1], 181697, 3*MILLIMETER) << "64ms simulation peaked with wrong amount";
-    ASSERT_NEAR(at32ms[6].theVec[1], 181697, 10*MILLIMETER) << "32ms simulation peaked with wrong amount";
-    ASSERT_NEAR(at16ms[6].theVec[1], 181697, 30*MILLIMETER) << "16ms simulation peaked with wrong amount";
-    ASSERT_NEAR(at8ms[6].theVec[1], 181697, 30*MILLIMETER) << "8ms simulation peaked with wrong amount";
+    ASSERT_NEAR(at64ms[peakStep].theVec[1], peakHeight, 3*MILLIMETER) << "64ms simulation peaked with wrong amount";
+    ASSERT_NEAR(at32ms[peakStep].theVec[1], peakHeight, 3*MILLIMETER) << "32ms simulation peaked with wrong amount";
+    ASSERT_NEAR(at16ms[peakStep].theVec[1], peakHeight, 5*MILLIMETER) << "16ms simulation peaked with wrong amount";
+    ASSERT_NEAR(at8ms[peakStep].theVec[1], peakHeight, 10*MILLIMETER) << "8ms simulation peaked with wrong amount";
 
     for (int i = 0; i < jumpSteps; i++) {
         // std::cout << "dist32[" << i << "] = " << VecStructDist(at64ms[i], at32ms[i]) << "\n";
@@ -627,6 +628,14 @@ TEST(HECTOR, Jump) {
         ASSERT_LT(VecStructDist(at64ms[i], at16ms[i]), 0.1) << "not close enough after " << i << " ticks.";
         ASSERT_LT(VecStructDist(at64ms[i], at8ms[i]), 0.1) << "not close enough after " << i << " ticks.";
     }
+}
+
+TEST(HECTOR, JumpRegular) {
+    test_jump(false, 5, 116100);
+}
+
+TEST(HECTOR, JumpSuper) {
+    test_jump(true, 6, 181800);
 }
 
 TEST(HECTOR, EnergyRegen) {
