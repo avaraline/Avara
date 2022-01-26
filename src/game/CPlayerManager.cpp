@@ -6,6 +6,7 @@
     Created: Saturday, March 11, 1995, 05:50
     Modified: Sunday, September 15, 1996, 20:51
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CPlayerManager.h"
 
@@ -239,8 +240,10 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 
     switch (event.type) {
         case SDL_KEYDOWN:
-            keysDown |= keyMap[event.key.keysym.scancode];
-            keysHeld |= keyMap[event.key.keysym.scancode];
+            // only add to keysDown if it's NOT from a keyboard repeat
+            if (event.key.repeat == 0) {
+                HandleKeyDown(keyMap[event.key.keysym.scancode]);
+            }
 
             if (TESTFUNC(kfuTypeText, keysDown)) {
                 keyboardActive = !keyboardActive;
@@ -272,18 +275,16 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                     inputBuffer.push_back(*a_char);
                 }
             }
+            break;
         case SDL_KEYUP:
-            keysUp |= keyMap[event.key.keysym.scancode];
-            keysHeld &= ~keyMap[event.key.keysym.scancode];
+            HandleKeyUp(keyMap[event.key.keysym.scancode]);
             break;
         case SDL_MOUSEBUTTONDOWN:
             if(event.button.button == SDL_BUTTON_RIGHT) {
-                keysDown |= keyMap[SDL_SCANCODE_APP1];
-                keysHeld |= keyMap[SDL_SCANCODE_APP1];
+                HandleKeyDown(keyMap[SDL_SCANCODE_APP1]);
             }
             else if(event.button.button == SDL_BUTTON_MIDDLE) {
-                keysDown |= keyMap[SDL_SCANCODE_APP2];
-                keysHeld |= keyMap[SDL_SCANCODE_APP2];
+                HandleKeyDown(keyMap[SDL_SCANCODE_APP2]);
             }
             else {
                 buttonStatus |= kbuWentDown;
@@ -293,12 +294,10 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             break;
         case SDL_MOUSEBUTTONUP:
             if(event.button.button == SDL_BUTTON_RIGHT) {
-                keysUp |= keyMap[SDL_SCANCODE_APP1];
-                keysHeld &= ~keyMap[SDL_SCANCODE_APP1];
+                HandleKeyUp(keyMap[SDL_SCANCODE_APP1]);
             }
             else if(event.button.button == SDL_BUTTON_MIDDLE) {
-                keysUp |= keyMap[SDL_SCANCODE_APP2];
-                keysHeld &= ~keyMap[SDL_SCANCODE_APP2];
+                HandleKeyUp(keyMap[SDL_SCANCODE_APP2]);
             }
             else {
                 buttonStatus |= kbuWentUp;
@@ -316,6 +315,33 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
             mouseY += yrel;
             break;
     }
+}
+
+void CPlayerManagerImpl::HandleKeyDown(uint32_t keyFunc) {
+    keysDown |= keyFunc;
+    // only set the keyFunc bit in dupKeysHeld if the same bit in keysHeld is already set
+    dupKeysHeld |= (keysHeld & keyFunc);
+    keysHeld |= keyFunc;
+    FPS_DEBUG("*** HandleKeyDown fn=" << itsGame->frameNumber <<
+              std::hex << std::setfill('0') <<
+              ", keyDown = 0x" << std::setw(8) << keyFunc <<
+              ", keysHeld = 0x" << std::setw(8) << keysHeld <<
+              ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
+}
+
+void CPlayerManagerImpl::HandleKeyUp(uint32_t keyFunc) {
+    keysUp |= (keyFunc & keysHeld);
+    // if dupKeysHeld bit is already set, then keysHeld bit remains set until another key is released
+    // note: this logic was added to support a more repeatable "superjump" capability isn't necessarily limited to jumping
+    keysHeld &= ~(keyFunc & ~dupKeysHeld);
+    // regardless of how many keys might be held, mark all duplicate keys as unheld
+    // to avoid a bunch of KeyUp commands from causing strange behaviors (e.g. superDUPERjump)
+    dupKeysHeld &= ~keyFunc;
+    FPS_DEBUG("*** HandleKeyUp   fn=" << itsGame->frameNumber <<
+              std::hex << std::setfill('0') <<
+              ", keyUp   = 0x" << std::setw(8) << keyFunc <<
+              ", keysHeld = 0x" << std::setw(8) << keysHeld <<
+              ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
 }
 
 void CPlayerManagerImpl::SendFrame() {
@@ -445,7 +471,7 @@ void CPlayerManagerImpl::ResumeGame() {
     oldButton = 0;
     isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
 
-    keysDown = keysUp = keysHeld = 0;
+    keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
     buttonStatus = 0;
 }

@@ -178,19 +178,19 @@ void CWalkerActor::AvoidBumping() {
         do {
             switch (undoStep) {
                 case undoMotion:
-                    FPS_DEBUG("AvoidBumping: undoMotion\n");
+                    // FPS_DEBUG("AvoidBumping: undoMotion\n");
                     if (speed[0] || speed[1] || speed[2]) {
                         location[0] -= FpsCoefficient2(speed[0]);
                         location[1] -= FpsCoefficient2(speed[1]);
                         location[2] -= FpsCoefficient2(speed[2]);
-                        FPS_DEBUG("undoMotion: location = " << FormatVector(location, 3) << "\n");
+                        // FPS_DEBUG("undoMotion: location = " << FormatVector(location, 3) << "\n");
                         goto redoLegs;
                         break;
                     }
                     undoStep++; //	No speed and we still collide?
 
                 case undoElevation:
-                    FPS_DEBUG("AvoidBumping: undoElevation\n");
+                    // FPS_DEBUG("AvoidBumping: undoElevation\n");
                     if (crouchUndo != crouch || stanceUndo != stance) {
                         stance = stanceUndo;
                         crouch = crouchUndo;
@@ -199,7 +199,7 @@ void CWalkerActor::AvoidBumping() {
                     undoStep++; //	Fall through
 
                 case undoHeadTurn:
-                    FPS_DEBUG("AvoidBumping: undoHeadTurn\n");
+                    // FPS_DEBUG("AvoidBumping: undoHeadTurn\n");
                     if (oldYaw != viewYaw || viewPitch != oldPitch) {
                         viewYaw = oldYaw;
                         viewPitch = oldPitch;
@@ -210,7 +210,7 @@ void CWalkerActor::AvoidBumping() {
 #define DIFFERENTLEGS(a, b) ((a.highAngle != b.highAngle) || (a.lowAngle != b.lowAngle))
 
                 case undoLegs:
-                    FPS_DEBUG("AvoidBumping: undoLegs\n");
+                    // FPS_DEBUG("AvoidBumping: undoLegs\n");
 #ifdef TESTIT
                     if (DIFFERENTLEGS(legs[0], legUndo[0]) || DIFFERENTLEGS(legs[1], legUndo[1]) ||
                         legPhase != phaseUndo)
@@ -224,7 +224,7 @@ void CWalkerActor::AvoidBumping() {
                     undoStep++;
 
                 case undoTurn:
-                    FPS_DEBUG("AvoidBumping: undoTurn\n");
+                    // FPS_DEBUG("AvoidBumping: undoTurn\n");
                     if (heading != headChange) {  // seems like it should check (headChange != 0)
                         Vector offsetSpeed, offsetLocation;
                         Vector push;
@@ -240,7 +240,7 @@ void CWalkerActor::AvoidBumping() {
                         offsetSpeed[0] = FpsCoefficient2(FOneCos(heading) >> 3); // 1/8
                         offsetSpeed[1] = 0;
                         offsetSpeed[2] = FpsCoefficient2(FOneSin(heading) >> 3);
-                        FPS_DEBUG("AvoidBumping: undoTurn... offsetSpeed = " << FormatVector(offsetSpeed, 3) << "\n");
+                        // FPS_DEBUG("AvoidBumping: undoTurn... offsetSpeed = " << FormatVector(offsetSpeed, 3) << "\n");
 
                         offsetLocation[0] = FpsCoefficient2(offsetSpeed[0] >> 1); // 1/16
                         offsetLocation[1] = 0;
@@ -248,7 +248,7 @@ void CWalkerActor::AvoidBumping() {
                         OffsetParts(offsetLocation); // offset 1/16 to the left
 
                         if (DoCollisionTest(&proximityList.p)) {
-                            FPS_DEBUG("AvoidBumping: collision on the left, going right\n");
+                            // FPS_DEBUG("AvoidBumping: collision on the left, going right\n");
                             // still colliding on the left so set speed in the opposite direction
                             push[0] = speed[0] - offsetSpeed[0]; // speed - 1/8
                             push[1] = speed[1];
@@ -262,7 +262,7 @@ void CWalkerActor::AvoidBumping() {
                         OffsetParts(offsetLocation); // offset 1/16-1/8 = -1/16 to the right
 
                         if (DoCollisionTest(&proximityList.p)) {
-                            FPS_DEBUG("AvoidBumping: collision on the right, going left\n");
+                            // FPS_DEBUG("AvoidBumping: collision on the right, going left\n");
                             push[0] = speed[0] + offsetSpeed[0]; // speed + 1/8
                             push[1] = speed[1];
                             push[2] = speed[2] + offsetSpeed[2];
@@ -481,7 +481,7 @@ void CWalkerActor::MoveLegs() {
     RayHitRecord legSensor;
     Fixed tempSin, tempCos;
 
-    FPS_DEBUG("CWalkerActor::MoveLegs frameNumber = " << itsGame->frameNumber << "\n");
+    // FPS_DEBUG("CWalkerActor::MoveLegs frameNumber = " << itsGame->frameNumber << "\n");
 
     speedLimit = speed[1];
 
@@ -498,16 +498,16 @@ void CWalkerActor::MoveLegs() {
     temp = FMul(-LEGSPACE * 18, ClassicCoefficient2(headChange));
     legSpeeds[0] = distance - temp;
     legSpeeds[1] = distance + temp;
-    FPS_DEBUG("distance = " << distance << ", temp = " << temp << ", headChange = " << headChange << "\n");
-    FPS_DEBUG("  legSpeeds = " << FormatVector(legSpeeds,2) << "\n");
+    // FPS_DEBUG("distance = " << distance << ", temp = " << temp << ", headChange = " << headChange << "\n");
+    // FPS_DEBUG("  legSpeeds = " << FormatVector(legSpeeds,2) << "\n");
 
     absAvgSpeed = (legSpeeds[0] > 0) ? legSpeeds[0] : -legSpeeds[0];
     absAvgSpeed += (legSpeeds[1] > 0) ? legSpeeds[1] : -legSpeeds[1];
-    FPS_DEBUG("absAvgSpeed = " << absAvgSpeed << "\n");
+    // FPS_DEBUG("absAvgSpeed = " << absAvgSpeed << "\n");
 
     phaseChange = FMulDiv(FSqrt(absAvgSpeed), fConstant, elevation);
     legPhase += FpsCoefficient2(phaseChange / 10);
-    FPS_DEBUG("phaseChange = " << phaseChange << ", legPhase = " << legPhase << ", legPhase%FIX1 = " << legPhase%FIX1 << "\n");
+    // FPS_DEBUG("phaseChange = " << phaseChange << ", legPhase = " << legPhase << ", legPhase%FIX1 = " << legPhase%FIX1 << "\n");
 
     for (i = 0; i < 2; i++) {
         Fixed moveRadius;
@@ -561,7 +561,7 @@ void CWalkerActor::MoveLegs() {
         if (tempZ > targetHeight)
             targetHeight = tempZ;
 
-        FPS_DEBUG("ls.origin[1] = " << legSensor.origin[1] << ", ls.distance = " << legSensor.distance << ", targetHeight = " << targetHeight << "\n");
+        // FPS_DEBUG("ls.origin[1] = " << legSensor.origin[1] << ", ls.distance = " << legSensor.distance << ", targetHeight = " << targetHeight << "\n");
 
         if (tempZ + FIX3(100) >= location[1]) {
             tractionFlag = true;
@@ -621,8 +621,8 @@ void CWalkerActor::TractionControl() {
     Fixed bounceTarget;
     Fixed adjustedGravity;
 
-    FPS_DEBUG("\nCWalkerActor: frameNumber = " << itsGame->frameNumber << "\n");
-    FPS_DEBUG("TractionControl, location = " << FormatVector(location, 3) << ", speed = " << FormatVector(speed, 3) << "\n");
+    // FPS_DEBUG("\nCWalkerActor: frameNumber = " << itsGame->frameNumber << "\n");
+    // FPS_DEBUG("TractionControl, location = " << FormatVector(location, 3) << ", speed = " << FormatVector(speed, 3) << "\n");
 
     DoStandingTouches();
 
@@ -630,30 +630,30 @@ void CWalkerActor::TractionControl() {
     classicMotorFriction = baseFriction - (abs(elevation - BESTSPEEDHEIGHT) / 4);
 
     adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
-    FPS_DEBUG("   adjustedGravity = " << adjustedGravity);
+    // FPS_DEBUG("   adjustedGravity = " << adjustedGravity);
 
     bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
-    FPS_DEBUG(", bounceTarget1 = " << bounceTarget << ", targetHeight = " << targetHeight << "\n");
+    // FPS_DEBUG(", bounceTarget1 = " << bounceTarget << ", targetHeight = " << targetHeight << "\n");
 
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
     bounceTarget += targetHeight;
-    FPS_DEBUG(", bounceTarget2 = " << bounceTarget);
+    // FPS_DEBUG(", bounceTarget2 = " << bounceTarget);
 
     // is this adjustedGravity*2 because we already added adjustedGravity to downward speed?
     extraHeight = (bounceTarget + (adjustedGravity * 2)); // FIX3(120)*2;
-    FPS_DEBUG(", extraHeight = " << extraHeight << "\n");
+    // FPS_DEBUG(", extraHeight = " << extraHeight << "\n");
 
     if (!jumpFlag && location[1] < extraHeight) {
         // bouncing logic
         Fixed scale1, scale2;
         FpsCoefficients(FIX(0.5), FIX(0.5), &scale1, &scale2);
         speed[1] = FMul(speed[1], scale1) + FMul((bounceTarget - location[1] - adjustedGravity), scale2);
-        FPS_DEBUG("  bounce speed[1] = " << speed[1] << "\n");
+        // FPS_DEBUG("  bounce speed[1] = " << speed[1] << "\n");
         // speed[1] = ((bounceTarget - location[1]) >> 1) + ((speed[1] - adjustedGravity) >> 1);
     } else {
         speed[1] = speed[1] - FpsCoefficient2(adjustedGravity);
-        FPS_DEBUG("  NOT bouncing, speed[1] = " << speed[1] << "\n");
+        // FPS_DEBUG("  NOT bouncing, speed[1] = " << speed[1] << "\n");
         // speed[1] = speed[1] - adjustedGravity;
     }
 
@@ -693,35 +693,41 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
                 stance = MINHEADHEIGHT;
         }
 
-        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
-            speed[1] >>= 1;
-            // it's an impulse power up so don't scale the jump
-            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
-            // but do a small gravity correction for high fps so that it's not always on the high side of the curve
-            speed[1] -= FpsOffset(FMul(FIX3(120), itsGame->gravityRatio));
-            FPS_DEBUG("*** kfuJump UP!!, jumpBasePower = " << jumpBasePower << ", baseMass = " << baseMass << ", totalMass = " << GetTotalMass() << ", speed = " << speed[1] << std::endl);
-            jumpFlag = true;
-        }
-
-        if (TESTFUNC(kfuJump, ft->held)) {
+        if (TESTFUNC(kfuJump, ft->down)) {
+            Fixed scale1, scale2;
+            FpsCoefficients(FIX1 - (FIX1 >> 3), FIX1 >> 3, &scale1, &scale2);
+            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
+            // crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
+            FPS_DEBUG("*** kfuJump DOWN, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
+        } else if (TESTFUNC(kfuJump, ft->held)) {
             // often when holding the jump key both 'held' and 'down' test true so check 'held' first
             Fixed scale1, scale2;
             FpsCoefficients(FIX1 - (FIX1 >> 2), FIX1 >> 2, &scale1, &scale2);
             crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
             // crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
-            FPS_DEBUG("*** kfuJump HELD");
-        } else if (TESTFUNC(kfuJump, ft->down)) {
-            Fixed scale1, scale2;
-            FpsCoefficients(FIX1 - (FIX1 >> 3), FIX1 >> 3, &scale1, &scale2);
-            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
-            // crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
-            FPS_DEBUG("*** kfuJump DOWN");
+            FPS_DEBUG("*** kfuJump HELD, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
         } else {
-            crouch = FMul(crouch, FpsCoefficient1(FIX1 >> 1));
-            // crouch >>= 1;
-            FPS_DEBUG("*** kfuJump off");
+            if (TESTFUNC(kfuJump, ft->up)) {
+                // with impending regular jump, drop value in half regardless of frame rate
+                crouch >>= 1;
+            } else {
+                crouch = FMul(crouch, FpsCoefficient1(FIX1 >> 1));
+            }
+            if (crouch > 1000) {
+                FPS_DEBUG("*** kfuJump OFF, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
+            }
         }
-        FPS_DEBUG(", crouch = " << crouch << std::endl);
+
+        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
+            FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", crouch = " << crouch << ", initial speed = " << speed[1] << std::endl);
+            speed[1] >>= 1;
+            // it's an impulse power up so don't scale the jump
+            speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
+            // but do a small gravity correction for high fps so that it's not always on the high side of the curve
+            speed[1] -= FpsOffset(FMul(FIX3(120), itsGame->gravityRatio));
+            FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", jumpBasePower = " << jumpBasePower << ", baseMass = " << baseMass << ", totalMass = " << GetTotalMass() << ", jump speed = " << speed[1] << std::endl);
+            jumpFlag = true;
+        }
     }
 }
 
