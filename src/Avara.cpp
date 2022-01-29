@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
     app->Done();
 
     // Shut it down!!
-    SDL_Quit();
+    //SDL_Quit();
 
     return 0;
 }

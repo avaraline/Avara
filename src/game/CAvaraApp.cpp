@@ -66,8 +66,10 @@ void TrackerPinger(CAvaraAppImpl *app) {
 
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
+
     AvaraGLInitContext();
     itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
+    itsGUI = new CGUI(this);
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(win_size_x, win_size_y, pixel_ratio);
@@ -142,6 +144,7 @@ void CAvaraAppImpl::drawContents() {
         previewAngle += FIX3(1);
     }
     itsGame->Render(nvg_context);
+    itsGUI->Render(nvg_context);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
@@ -161,9 +164,6 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
                 return true;
             }
         }
-        
-        //if (rosterWindow->handleSDLEvent(event))
-        //    return true;
 
         return CApplication::handleSDLEvent(event);
     }
