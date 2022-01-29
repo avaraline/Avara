@@ -1,8 +1,10 @@
 #define APPLICATIONMAIN
 #include "CApplication.h"
 
+
+#include "AvaraGL.h"
+#include "CColorManager.h"
 #include "Preferences.h"
-#include "Types.h"
 
 #include <SDL2/SDL.h>
 #include <fstream>
@@ -11,9 +13,6 @@
 
 #define NANOVG_GL3_IMPLEMENTATION
 #include "nanovg_gl.h"
-
-#include "AvaraGL.h"
-
 
 
 static float get_pixel_ratio(SDL_Window *window) {
@@ -92,8 +91,7 @@ static float get_pixel_ratio(SDL_Window *window) {
 }
 
 
-json prefs = ReadPrefs();
-
+json CApplication::_prefs = ReadPrefs();
 
 CApplication::CApplication(std::string the_title) {
     window_title = the_title;
@@ -115,19 +113,19 @@ CApplication::CApplication(std::string the_title) {
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     SDL_GL_SetAttribute(SDL_GL_SHARE_WITH_CURRENT_CONTEXT, 1);
-    if (prefs[kMultiSamplesTag] > 0) {
+    if (_prefs[kMultiSamplesTag] > 0) {
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, prefs[kMultiSamplesTag]);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, _prefs[kMultiSamplesTag]);
     }
     auto flags = SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE;
-    if (prefs[kFullScreenTag]) {
+    if (_prefs[kFullScreenTag]) {
         flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
     window = SDL_CreateWindow(title().c_str(), 
         SDL_WINDOWPOS_CENTERED, 
         SDL_WINDOWPOS_CENTERED, 
-        prefs[kWindowWidth], 
-        prefs[kWindowHeight], 
+        _prefs[kWindowWidth], 
+        _prefs[kWindowHeight], 
         flags);
     window_id = SDL_GetWindowID(window);
     gl_context = SDL_GL_CreateContext(window);
@@ -192,6 +190,8 @@ CApplication::CApplication(std::string the_title) {
 #endif
     setResizeCallback([this](int new_x, int new_y) { this->WindowResized(new_x, new_y); return true; });
 
+    CColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
+    CColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
 }
 
 CApplication::~CApplication() {
@@ -212,10 +212,10 @@ void CApplication::Done() {
         win->saveState();
     }
 
-    prefs[kWindowWidth] = win_size_x;
-    prefs[kWindowHeight] = win_size_y;
-    prefs.erase(kDefaultClientUDPPort);  // don't save client port
-    WritePrefs(prefs);
+    _prefs[kWindowWidth] = win_size_x;
+    _prefs[kWindowHeight] = win_size_y;
+    _prefs.erase(kDefaultClientUDPPort);  // don't save client port
+    WritePrefs(_prefs);
 }
 
 void CApplication::BroadcastCommand(int theCommand) {
@@ -276,40 +276,9 @@ bool CApplication::handleSDLEvent(SDL_Event &event) {
     return handled;
 }
 
-std::string CApplication::String(const std::string name) {
-    return prefs[name];
-}
-
-long CApplication::Number(const std::string name) {
-    return prefs[name];
-}
-
 long CApplication::Number(const std::string name, const long defaultValue) {
-    if (prefs[name].is_number()) {
-        return prefs[name];
+    if (_prefs[name].is_number()) {
+        return _prefs[name];
     }
     return defaultValue;
-}
-
-bool CApplication::Boolean(const std::string name) {
-    return prefs[name];
-}
-
-json CApplication::Get(const std::string name) {
-    return prefs[name];
-}
-
-void CApplication::Set(const std::string name, const std::string value) {
-    prefs[name] = value;
-    PrefChanged(name);
-}
-
-void CApplication::Set(const std::string name, long value) {
-    prefs[name] = value;
-    PrefChanged(name);
-}
-
-void CApplication::Set(const std::string name, json value) {
-    prefs[name] = value;
-    PrefChanged(name);
 }

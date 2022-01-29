@@ -210,7 +210,7 @@ void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
     teamMask = 1 << teamColor;
     ownerScoringId = ownerId;
 
-    long longTeamColor = GetLongTeamColorOr(origLongColor);
+    uint32_t longTeamColor = GetTeamColorOr(origLongColor);
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
@@ -455,14 +455,14 @@ void CBall::FrameAction() {
             didShoot = Shoot();
             if (didShoot) {
                 if (burstCount == burstLength) {
-                    burstStartFrame = itsGame->frameNumber + burstCharge;
+                    burstStartFrame = itsGame->FramesFromNow(burstCharge);
                 }
 
                 if (--burstCount == 0) {
                     burstCount = burstLength;
                     nextShotFrame = burstStartFrame;
                 } else {
-                    nextShotFrame = itsGame->frameNumber + burstSpeed;
+                    nextShotFrame = itsGame->FramesFromNow(burstSpeed);
                 }
             }
         }
@@ -475,7 +475,7 @@ void CBall::FrameAction() {
                 SecondaryDamage(teamColor, -1);
                 return; //	*** return after dispose! ***
             case kDoRelease:
-                looseFrame = itsGame->frameNumber + 100;
+                looseFrame = itsGame->FramesFromNow(100);
                 oldHost = hostIdent;
             case kDoReset: {
                 CSmartPart *savedHost;
@@ -512,7 +512,7 @@ long CBall::ReceiveSignal(long theSignal, void *miscData) {
         case kBallReleaseSignal: {
             CSmartPart *theBall = partList[0];
 
-            looseFrame = itsGame->frameNumber + 32;
+            looseFrame = itsGame->FramesFromNow(32);
             oldHost = hostIdent;
             ReleaseAttachment();
             speed[0] += FMul(pitchZ, theBall->itsTransform[2][0]) + FMul(pitchY, theBall->itsTransform[1][0]);
@@ -543,7 +543,7 @@ void CBall::ReleaseDamage(Fixed hitEnergy) {
     if (hostPart && playerAttach) {
         releaseHoldAccumulator += hitEnergy;
         if (releaseHoldAccumulator > dropDamage) {
-            looseFrame = itsGame->frameNumber + 10;
+            looseFrame = itsGame->FramesFromNow(10);
             oldHost = hostIdent;
             ReleaseAttachment();
         }

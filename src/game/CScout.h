@@ -33,11 +33,12 @@ public:
     short action;
     Boolean nextRotateFlag;
 
-    virtual void IScout(CAbstractPlayer *thePlayer, short theTeam, long longTeamColor);
+    virtual void IScout(CAbstractPlayer *thePlayer, short theTeam, uint32_t longTeamColor);
     virtual void PlaceParts();
     virtual void FrameAction();
     virtual void ControlViewPoint();
     virtual void ToggleState(short command);
 
     virtual Fixed MoveToTarget();
+    virtual bool HandlesFastFPS() { return true; }
 };

@@ -1,0 +1,569 @@
+Drag and drop functions from the right to the keyboard above.
+
+Click on a function to see a brief description here.
+
+Each key may have up to 8 functions assigned.
+
+Drag a function away to remove it from a key.
+//	Avara variables and constants
+
+// Do not make changes to this resource. To use the
+// Variables described here, redefine them in your
+// level files. Making changes here will probably
+// cause severe compatibility problems. Treat this
+// resource as a read-only guide to the variables and
+// constants that are available for designing levels.
+//
+// This resource has to end with a space or return.
+
+  designer = 0
+  information = 0
+  timeLimit = 2400 // Default time limit is 30 minutes.
+
+  gravity = 1
+  customGravity = 0.12
+
+  shape = 0     // Primary BSP shape resource id
+  altShape = 0  // Possible alternate shape
+  scale = 1
+  yon = 0
+  wallYon = 0
+  hasFloor = 0
+
+  wallTemplate = 400
+  floorTemplate = 401
+
+  y = 0           // Height from ground level.
+  mask = -1       // Bitmask for object type
+  team = 1        // Team id
+  wallHeight = 3
+  wa = 0
+  baseHeight = 0
+  pixelToThickness = 1 / 8
+  mass = 0
+  visible = 0
+  thickness = 0
+
+  winTeam = 0
+
+  targetGroup = 0
+
+  // Sound stuff:
+  hitSound = 0
+  hitVolume = 0
+  hitSoundDefault = 210
+  shieldHitSoundDefault = 211
+  playerHitSoundDefault = 211
+  blastSound = 0
+  blastVolume = 0
+  blastSoundDefault = 230
+
+  stepSound = 161
+  groundStepSound = 160
+
+  isTarget = 0
+
+  sound = 0
+  openSound = 400
+  closeSound = 400
+  stopSound = 401
+
+  volume = 15
+
+  // Player related:
+
+  defaultLives = 3
+  lives = defaultLives
+
+  incarnateSound = 0
+  incarnateVolume = 12
+
+  winSound = 0
+  winVolume = 12
+
+  loseSound = 0
+  loseVolume = 6
+
+  // Scoring:
+  killScore = 0
+  hitScore = 0
+  friendlyHitMultiplier = -1
+
+  // Damage and explosions
+  smallSliverCount = 0
+  mediumSliverCount = 0
+  largeSliverCount = 0
+  smallSliverLife = 0
+  mediumSliverLife = 0
+  largeSliverLife = 0
+  canGlow = 1
+
+  // Messages sent when hit/destroyed
+  killMsg = 0
+  hitMsg = 0
+
+  // Other messages
+  stepOnMsg = 0
+
+  // Motion
+  accel = 0
+
+  // Toggle switches
+  togglePower = 0
+  blastToggle = 1000
+
+  // Doors:
+  open = 0
+  close = 0
+  didOpen = 0
+  didClose = 0
+  openDelay = 0
+  closeDelay = 0
+  guardDelay = 0
+  status = 0
+  openSpeed = 0
+  closeSpeed = 0
+  pitch = 0
+  yaw = 0
+  roll = 0
+  deltaX = 0
+  deltaY = 0
+  deltaZ = 0
+  
+  middle = 0
+  midPitch = 0
+  midYaw = 0
+  midRoll = 0
+  midX = 0
+  midY = 0
+  midZ = 0
+
+  // Misc:
+  power = 0
+  maxPower = 0
+  drain = 0
+
+  // Guards:
+  fireMsg = 0
+  trackMsg = 0
+  stopTrackMsg = 0
+  speed = 0
+  shotPower = 0
+
+  // Ufos:
+  checkPeriod = 0
+  attack = 0
+  defense = 0
+  visionScore = 0
+  hideScore = 0
+  motionRange = 0
+  pitchRange = 0
+  verticalRangeMin = 0
+  verticalRangeMax = 0
+  burstLength = 0
+  burstSpeed = 0
+  burstCharge = 0  
+
+  homeSick = 0
+  homeRange = 0
+  homeBase = 0
+
+  // Mines:
+  shield = 0
+  activateEnergy = 0
+  activeRange = 0
+  phase = 0
+  activeTimer = 0
+  boom = 0 // start mine timer message
+
+  idleShapeTimer = 20
+  idleAltShapeTimer = 0
+  activeShapeTimer = 4
+  activeAltShapeTimer = 4
+
+  activateSound = 0
+  activateVolume = 0
+
+  // Teleporters:
+  group = 0
+  destGroup = 0
+  spin = 1
+  fragment = 1
+  win = 0
+  deadRange = 0
+  showAlways = 1
+
+  // Activators: (areas, etc.)
+  watch = 0
+  freq = 0
+  enter = 0
+  exit = 0
+
+  // Text
+  text = 0
+  showEveryone = 0
+  align = 0
+
+  // Goody
+  grenades = 0
+  missiles = 0
+  boosters = 0
+  boostTime = 0
+
+  // Ball & goal
+  goalMsg = 0
+  goalAction = 0
+  goalScore = 0
+
+  ejectPitch = 0
+  ejectPower = 0
+  ejectSound = 0
+  ejectVolume = 0
+  
+  shieldChargeRate = 0
+  maxShield = 0
+  shootShield = 0
+  grabShield = 0
+  
+  carryScore = 0
+  dropEnergy = 0
+  changeHolderEnergy = 0
+  changeOwnerTime = 0
+  
+  changeOwnerSound = 0
+  changeOwnerVolume = 0
+  
+  snapSound = 0
+  snapVolume = 0
+
+  // Sounds:
+  isMusic = 0
+  isAmbient = 1
+  isPlaced = 1
+  rate = 1
+  loopCount = 0
+  volume[0] = volume
+  volume[1] = volume
+  start = @start
+  stop = 0
+  kill = 0
+
+  // Logic:
+  in = in[0]
+  in[0] = 0    in[1] = 0    in[2] = 0    in[3] = 0    in[4] = 0
+  in[5] = 0    in[6] = 0    in[7] = 0    in[8] = 0    in[9] = 0
+  
+  out = out[0]
+  out[0] = 0     out[1] = 0     out[2] = 0     out[3] = 0     out[4] = 0
+  out[5] = 0     out[6] = 0     out[7] = 0     out[8] = 0     out[9] = 0
+  
+  restart = 0
+  n = 0
+  wait = 0
+
+  // Lights (default light settings are stored here)
+  ambient.i= 0.4
+  light[0].i = 0.4  light[0].a =  45  light[0].b = 20
+  light[1].i = 0.3  light[1].a =  20  light[1].b = 200
+  light[2].i = 0.0  light[2].a =  45  light[2].b = 90
+  light[3].i = 0.0  light[3].a =  45  light[3].b = 180
+
+  // Advanced weapon powers:
+  grenadePower = 2.25
+  missilePower = 1.0
+  missileTurnRate = 0.025
+  missileAcceleration = 0.2
+  
+  maxStartGrenades = 20
+  maxStartMissiles = 10
+  maxStartBoosts = 5
+
+  // Hull types
+  hull[0] = 0
+  hull[1] = 0
+  hull[2] = 0
+
+  defaultTraction = 0.4
+  defaultFriction = 0.15
+
+  wallTraction = defaultTraction
+  wallFriction = defaultFriction
+
+  traction = defaultTraction
+  friction = defaultFriction
+
+  wallShield = -1
+  wallBlast = 4
+
+ 	dummyVar = 0
+
+//   some defines
+  true = 1
+  false = 0
+
+  playerMask = 1
+  scoutMask = 2
+  robotMask = 4
+  collisionDamageMask = 128
+
+  targ1 = 256
+  targ2 = 512
+  targ3 = 1024
+  targ4 = 2048
+  targ5 = 4096
+  targ6 = 8192
+
+  canPushMask = 32768
+
+  allTeams = -1
+  T1 = 2
+  T2 = 4
+  T3 = 8
+  T4 = 16
+  T5 = 32
+  T6 = 64
+
+// Doors:
+  isClosed = 0
+  isOpen = 1
+
+// Text alignment
+  rightAlign = -1
+  centerAlign = 1
+  leftAlign = 0
+
+//	bsp resources...doesn't mean you should use them all:
+  bspAvara = 100
+  bspMissionComplete = 101
+  bspAvaraA = 102
+
+  bspGrenadeSight = 200
+  bspGrenadeSightTop = 201
+  bspMarker = 202
+  bspShot = 203
+  bspDirInd = 204
+  bspTargetOff = 205
+  bspTargetOn = 206
+  bspSmartMissileHairs = 207
+  bspSmartMissileSight = 208
+
+  bspHECTORBoundBox = 210
+  bspHECTORLegHigh = 211
+  bspHECTORLegLow = 212
+  bspHullLight = 215
+  bspHullMedium = 216
+  bspHullLarge = 217
+  bspScout = 220
+
+  bspTeleporter = 230
+  bspGoody = 240
+
+  bspStandardBall = 250
+  bspGoal = 251
+  bspStandardPill = 252
+
+  bspSphere = 300
+
+  bspMine = 310
+  bspMineActive = 311
+
+  bspStandardWall = 400
+  bspStandardFloor = 401
+
+  bspW1x1 = 411
+  bspW2x1 = 421
+  bspW2x2 = 422
+  bspW3x1 = 431
+  bspW3x2 = 432
+  bspW3x3 = 433
+  bspW4x1 = 441
+  bspW5x1 = 451
+
+  // Sphere segments
+  bsp16SphereNF = 460
+  bsp16Sphere = 461
+  bsp4SphereNF = 462
+  bsp4Sphere = 463
+  bsp2SphereNF = 464
+  bsp2Sphere = 465
+  bsppSphere = 466
+
+  bspSliver0 = 500
+  bspSliver1 = 501
+  bspSliver2 = 502
+  bspSliver3 = 503
+
+  bspDoor = 550
+
+  bspSwitchOff = 560
+  bspSwitchOn = 561
+  bspWallSwitchOff = 562
+  bspWallSwitchOn = 563
+
+  bspGroundStar = 600
+  bspGroundArrow = 601
+  bspGroundArrowLeft = 602
+
+  bspVines = 610
+  bspCrack = 611
+  sbpTree = 1002
+
+  bspTriPyramid = 650
+  bspOnSwitch = 701
+  bspOffSwitch = 702
+  bspTower = 703
+  bspGrid10 = 704
+  bspMushroom = 705
+  bspHingeDoor = 706
+  bspFlower = 707
+  bspTree = 708
+  bspGrid7.5 = 709
+  bspHill = 710
+  bspStreet = 711
+  bspTurn = 712
+  bspLock = 713
+  bspDeadTree = 714
+  bspBigIce = 715
+  bspIce = 716
+  bspShell = 717
+
+  bspCubeFrame = 720
+  bspDoubleCube = 721
+  bspFloorFrame = 722
+  bspGobbleRect = 723
+  bspGobbleTriangle = 724
+
+  bspGuard = 800
+  bspBolt = 801
+  bspMissile = 802
+
+bspLargeDome = 806
+  bspParasite = 807
+  bspUfo = 808
+  bspShuriken = 809
+  bspPlatform = 812
+  bspGrenade = 820
+
+  bspStarFighter = 830
+  bspTractorTower = 831
+  bspShooter = 832
+
+// HSND (sound) resources:
+  snUnderwater = 129
+  snJungle = 130
+  snArcticWind = 131
+  snBubbles = 132
+  snBirds = 133
+
+  snTextBlip = 150
+  snMessageSend = 151
+  snMessageReceive = 152
+  snStep = 160
+  snShot = 200
+  snDoorClang = 210
+  snHit0 = 210
+  snHit1 = 211
+  snShieldHit = 220
+  snShieldHit1 = 221
+  snShieldHit2 = 222
+  snBlast = 230
+  snBlast1 = 231
+  snSwitch = 240
+  snGoody = 250
+  snMineBleep = 300
+  snMineBlow = 301
+  snParasiteBlow = 310
+  snDoor = 400
+  snDoorStop = 401
+  snTeleport = 410
+  snIncarnate = 411
+  snWin = 412
+  snLose = 413
+  snParasiteAttach = 420
+  
+  snBallBuzz = 430
+  snBallSnap = 431
+  snBallEject = 432
+  snBallReprogram = 433
+
+  snGobble = 440
+
+  lightHull = 128
+  mediumHull = 129
+  heavyHull = 130
+
+// Misc adjustments
+  hitSoundDefault = snHit0
+  blastSoundDefault = snBlast
+  shieldHitSoundDefault = snShieldHit
+  playerHitSoundDefault = snShieldHit2
+  incarnateSound = snIncarnate
+
+  hull[0] = lightHull
+  hull[1] = mediumHull
+  hull[2] = heavyHull
+
+designer = "unknown"
+information = "
+
+No additional information on this level is available."
+
+unique 32000 end
+
+Internet Connection
+IP:
+BW:
+RT:Single Player ModeAppleTalk Connection
+This page is used by customized scorekeeping plug-ins.
+
+If you have one, you can open it by double-clicking on it in the Finder or you can select "Open…" from the File menu.
+
+Avara remembers the last used plug-in re-opens it at startup. If there is a problem and the plug-in is suspected, throw the plug-in file file away and empty the trash.
+•i
+•c
+•o ms optimistic (LT •1)
+•e ms estimated (LT •4)
+•r ms smoothed (LT •2)
+•p ms pessimistic (LT •3)
+
+  trackMsg = start
+  stopTrackMsg = stop
+
+∏A
+
+Version:
+IP:
+Distance:
+
+Status:
+Set:
+Mission:
+
+Status
+∏1
+∏2
+∏3
+∏4
+∏5
+∏6
+
+∏i
+
+∏V
+∏A
+∏d km
+
+∏s
+∏c
+∏m
+
+Player
+∏1
+∏2
+∏3
+∏4
+∏5
+∏6
+Internet Avara games are registered at Tracker.Avara.com
+
+Make sure that the tracker location is correct and click on “Search”.

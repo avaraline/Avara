@@ -1,0 +1,144 @@
+<map>
+  <set wallYon="0.01" wallHeight="1" />
+  <Wall fill="#000000" frame="#000000" x="57.152777777777786" z="37.083333333333336" w="56.25" d="26.25" h="0" y="-1" />
+  <set hull.1="hull[0]" hull.2="hull[0]" defaultLives="100" TA="T1" TeamA="1" TB="T6" TeamB="6" TeamX="3" yonOuter="1000" yonWall="0" />
+  <set yonDoor="yonWall" yonRamp="0" yonTel="0" />
+  <set yonBall="13" bgTime="3 * 15" bgMiss="10" bgBoost="1" bgNade="5" bgY="1.4" bgSpeed="6" bgScale=".77" bgWrongScale="1.1" bgWrongRate="2" TallWall="10" wallHeight="TallWall" wallYon="yonOuter" RampY="3.1" FlagY="5" Goals="4" DoorDelta="50" DoorSpeed="10" DeathPower="10" />
+  <set DeathFreq="3" DeathScale=".01" DeathSpeed="100" targBall="targ1" timeLimit="15 * 60" />
+  <SkyColor fill="#00ee00" frame="#00ee00" />
+  <GroundColor fill="#99ccff" />
+  <unique vars="m1 m2 m3 m4" />
+  <Distributor in="@ScoreA" out.0="m1" out.1="m2" out.2="m3" out.3="m4" />
+  <And in="m4" out="@WinA" />
+  <Text in="m1" showEveryone="true" text="Green team has 1 goal!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <Text in="m2" showEveryone="true" text="Green team has 2 goals!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <Text in="m3" showEveryone="true" text="Green team has 3 goals!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <Text in="m4" showEveryone="true" text="Green team has 4 goals!
+Green team wins!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <unique vars="m1 m2 m3 m4" />
+  <Distributor in="@ScoreB" out.0="m1" out.1="m2" out.2="m3" out.3="m4" />
+  <And in="m4" out="@WinB" />
+  <Text in="m1" showEveryone="true" text="Blue team has 1 goal!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <Text in="m2" showEveryone="true" text="Blue team has 2 goals!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <Text in="m3" showEveryone="true" text="Blue team has 3 goals!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <Text in="m4" showEveryone="true" text="Blue team has 4 goals!
+Blue team wins!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <Text in="@DEATH" showEveryone="true" text="DEATH TO THE REMAINING PLAYERS!!!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
+  <set information="The weirdest ballgame ever! Blue vs. green.
+  The player holding the ball cannot enter teleporters or jump.
+  All players will die in 15 minutes.
+  The ball is only visible within 13 meters.
+  Enemy ammo doesn't work for you." />
+  <Teleporter yon="0.01" y="200" win="0" activeRange="2000" mask="TA" start="@WinA" fill="#00ee00" frame="#000000" cx="38.4375" cz="15.833333333333336" angle="45" />
+  <Incarnator mask="TB" cx="32.77777777777778" cz="43.88888888888889" angle="270" />
+  <Incarnator mask="TA" cx="81.52777777777779" cz="30.138888888888893" angle="90" />
+  <Incarnator mask="TB" cx="32.77777777777778" cz="30.138888888888893" angle="270" />
+  <Incarnator mask="TA" cx="81.52777777777779" cz="43.88888888888889" angle="90" />
+  <Wall fill="#555555" frame="#000000" x="57.465277777777786" z="24.270833333333336" w="55.625" d="0.625" h="0" />
+  <Wall fill="#555555" frame="#000000" x="29.34027777777778" z="36.770833333333336" w="0.625" d="25.625" h="0" />
+  <Wall fill="#555555" frame="#000000" x="56.840277777777786" z="49.895833333333336" w="55.625" d="0.625" h="0" />
+  <Wall fill="#555555" frame="#000000" x="84.96527777777779" z="37.395833333333336" w="0.625" d="25.625" h="0" />
+  <set wallYon="yonWall" />
+  <Wall fill="#0099ff" frame="#000000" x="42.46527777777778" z="25.833333333333336" w="5.625" d="2.5" h="0" />
+  <Wall fill="#0099ff" frame="#000000" x="42.46527777777778" z="37.083333333333336" w="5.625" d="10" h="0" />
+  <Wall fill="#0099ff" frame="#000000" x="42.46527777777778" z="48.333333333333336" w="5.625" d="2.5" h="0" />
+  <Wall fill="#008800" frame="#000000" x="71.84027777777779" z="25.833333333333336" w="5.625" d="2.5" h="0" />
+  <Wall fill="#008800" frame="#000000" x="71.84027777777779" z="37.083333333333336" w="5.625" d="10" h="0" />
+  <Wall fill="#008800" frame="#000000" x="71.84027777777779" z="48.333333333333336" w="5.625" d="2.5" h="0" />
+  <Ramp thickness="0" deltaY="RampY" yon="yonRamp" fill="#0099ff" frame="#000000" x="42.15277777777778" z="29.583333333333336" w="5" d="5" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="RampY" yon="yonRamp" fill="#008800" frame="#000000" x="72.15277777777779" z="29.583333333333336" w="5" d="5" h="0" angle="270" />
+  <Ramp thickness="0" deltaY="RampY" yon="yonRamp" fill="#0099ff" frame="#000000" x="42.15277777777778" z="44.583333333333336" w="5" d="5" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="RampY" yon="yonRamp" fill="#008800" frame="#000000" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" angle="270" />
+  <set wallHeight="RampY" />
+  <Wall fill="#0099ff" frame="#000000" x="44.96527777777778" z="29.583333333333336" w="0.625" d="5" h="0" />
+  <Wall fill="#008800" frame="#000000" x="69.34027777777779" z="29.583333333333336" w="0.625" d="5" h="0" />
+  <Wall fill="#0099ff" frame="#000000" x="44.96527777777778" z="44.583333333333336" w="0.625" d="5" h="0" />
+  <Wall fill="#008800" frame="#000000" x="69.34027777777779" z="44.583333333333336" w="0.625" d="5" h="0" />
+  <Goal team="TeamA" goalMsg="@ScoreB" fill="#008800" frame="#ffffff" cx="82.15277777777779" cz="37.083333333333336" angle="90" />
+  <Guard y="0" shield="-1" shotPower="DeathPower" start="@DEATH" freq="DeathFreq" scale="DeathScale" speed="DeathSpeed" hitScore="0" hitSound="snHit1" fill="#008800" frame="#ffffff" cx="82.15277777777779" cz="37.083333333333336" angle="90" />
+  <Teleporter yon="0.01" y="200" win="0" activeRange="2000" mask="TB" start="@WinB" fill="#00ee00" frame="#000000" cx="50.9375" cz="15.833333333333336" angle="45" />
+  <Timer in.0="@WinA" in.1="@WinB" wait="2" out="@DEATH" />
+  <Timer in="@start" wait="timeLimit * 15" out="@DEATH" />
+  <Teleporter group="TB" yon="yonTel" stop="@WinB" fill="#aa0000" frame="#000000" cx="47.77777777777778" cz="37.083333333333336" angle="135" />
+  <Goal goalScore="-10" activeRange="5" yon=".1" sound="snTeleport" fill="#aa0000" frame="#000000" cx="47.77777777777778" cz="37.083333333333336" angle="135" />
+  <Teleporter group="TB" start="0" fill="#aa0000" frame="#000000" cx="32.15277777777778" cz="27.083333333333336" angle="135" />
+  <Teleporter group="TA" yon="yonTel" fill="#aa0000" frame="#000000" cx="66.52777777777779" cz="37.083333333333336" angle="135" />
+  <Goal goalScore="-10" activeRange="5" yon=".1" sound="snTeleport" fill="#aa0000" frame="#000000" cx="66.52777777777779" cz="37.083333333333336" angle="135" />
+  <Teleporter group="TB" start="0" fill="#aa0000" frame="#000000" cx="32.15277777777778" cz="47.083333333333336" angle="135" />
+  <Teleporter start="0" group="TA" fill="#aa0000" frame="#000000" cx="82.15277777777779" cz="47.083333333333336" angle="135" />
+  <Teleporter start="0" group="TA" fill="#aa0000" frame="#000000" cx="82.15277777777779" cz="27.083333333333336" angle="135" />
+  <Timer in.0="@start" in.1="@swap" wait="6 * 15" out="in[1]" />
+  <set wallHeight="TallWall -RampY" wallYon="yonDoor" />
+  <WallDoor midY="RampY" deltaY="DoorDelta" open="@swap" close="@swap" openSpeed="DoorSpeed" closeSpeed="DoorSpeed" guardDelay="0" fill="#0099ff" frame="#000000" x="44.96527777777778" z="29.583333333333336" w="0.625" d="5" h="0" />
+  <WallDoor midY="RampY" deltaY="DoorDelta" open="@swap" close="@swap" openSpeed="DoorSpeed" closeSpeed="DoorSpeed" guardDelay="0" fill="#008800" frame="#000000" x="69.34027777777779" z="44.583333333333336" w="0.625" d="5" h="0" />
+  <WallDoor midY="RampY" deltaY="DoorDelta" open="@swap" close="@swap" status="isOpen" openSpeed="DoorSpeed" closeSpeed="DoorSpeed" guardDelay="0" fill="#0099ff" frame="#000000" x="44.96527777777778" z="44.583333333333336" w="0.625" d="5" h="0" />
+  <WallDoor midY="RampY" deltaY="DoorDelta" open="@swap" close="@swap" status="isOpen" openSpeed="DoorSpeed" closeSpeed="DoorSpeed" guardDelay="0" fill="#008800" frame="#000000" x="69.34027777777779" z="29.583333333333336" w="0.625" d="5" h="0" />
+  <Teleporter destGroup="TA" start="@ResetA" stop="@StopAT" activeRange="10" shape="0" mask="TA" fill="#aa0000" frame="#000000" cx="34.65277777777778" cz="31.458333333333336" angle="135" />
+  <Teleporter destGroup="TA" start="@ResetA" stop="@StopAT" activeRange="10" shape="0" mask="TA" fill="#aa0000" frame="#000000" cx="34.65277777777778" cz="42.708333333333336" angle="135" />
+  <Teleporter destGroup="TB" start="@ResetB" stop="@StopBT" activeRange="10" shape="0" mask="TB" fill="#aa0000" frame="#000000" cx="79.65277777777779" cz="31.458333333333336" angle="135" />
+  <Goal team="TeamB" goalMsg="@ScoreA" fill="#0099ff" frame="#ffffff" cx="32.15277777777778" cz="37.083333333333336" angle="270" />
+  <Guard y="0" shield="-1" shotPower="DeathPower" start="@DEATH" freq="DeathFreq" scale="DeathScale" speed="DeathSpeed" hitScore="0" hitSound="snHit1" fill="#0099ff" frame="#ffffff" cx="32.15277777777778" cz="37.083333333333336" angle="270" />
+  <Teleporter destGroup="TB" start="@ResetB" stop="@StopBT" activeRange="10" shape="0" mask="TB" fill="#aa0000" frame="#000000" cx="79.65277777777779" cz="42.708333333333336" angle="135" />
+  <Timer in="@ScoreB" wait="8" out="@ResetB" />
+  <Timer in="@ResetB" wait="4" out="@StopBT" />
+  <Timer in="@ScoreA" wait="8" out="@ResetA" />
+  <Timer in="@ResetA" wait="4" out="@StopAT" />
+  <Incarnator mask="TB" cx="32.15277777777778" cz="27.083333333333336" angle="315" />
+  <Incarnator mask="TB" cx="32.15277777777778" cz="47.083333333333336" angle="225" />
+  <Incarnator mask="TA" cx="82.15277777777779" cz="27.083333333333336" angle="45" />
+  <Incarnator mask="TA" cx="82.15277777777779" cz="47.083333333333336" angle="135" />
+  <unique vars="mTaken mReset mWrong" />
+  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="25.833333333333336" angle="45" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" />
+  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TB" enter="mWrong" exit="mReset" fill="#0099ff" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" cx="34.65277777777778" cz="25.833333333333336" angle="45" />
+  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" cx="34.65277777777778" cz="25.833333333333336" angle="45" />
+  <unique vars="mTaken mReset mWrong" />
+  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#0099ff" frame="#777777" cx="34.65277777777778" cz="48.333333333333336" angle="45" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" />
+  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TB" enter="mWrong" exit="mReset" fill="#0099ff" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" cx="34.65277777777778" cz="48.333333333333336" angle="45" />
+  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" cx="34.65277777777778" cz="48.333333333333336" angle="45" />
+  <unique vars="mTaken mReset mWrong" />
+  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#008800" frame="#777777" cx="79.65277777777779" cz="48.333333333333336" angle="45" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" />
+  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TA" enter="mWrong" exit="mReset" fill="#008800" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" cx="79.65277777777779" cz="48.333333333333336" angle="45" />
+  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" cx="79.65277777777779" cz="48.333333333333336" angle="45" />
+  <unique vars="mTaken mReset mWrong" />
+  <Goody shape="bspGoody" y="bgY" scale="bgScale" grenades="bgNade" missiles="bgMiss" boosters="bgBoost" start="mReset" stop="mWrong" out="mTaken" speed="bgSpeed" fill="#008800" frame="#777777" cx="79.65277777777779" cz="25.833333333333336" angle="45" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="bgTime" />
+  <Field shape="bspGoody" y="bgY" watch="playerMask" deltaY="0" scale="bgWrongScale" mask="allTeams -TA" enter="mWrong" exit="mReset" fill="#008800" frame="#777777" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" cx="79.65277777777779" cz="25.833333333333336" angle="45" />
+  <Sound sound="snGoody" start="mWrong" rate="bgWrongRate" cx="79.65277777777779" cz="25.833333333333336" angle="45" />
+  <unique vars="mTaken mReset" />
+  <Goody shape="bspGoody" grenades="10" missiles="20" boosters="10" start="mReset" out="mTaken" y="3" speed="15" fill="#555555" frame="#eeeeee" cx="57.22222222222222" cz="37.15277777777778" angle="135" />
+  <Timer in.0="@start" in.1="mTaken" out="mReset" wait="15 * 2" />
+  <Ball mass="-140 * 2 -20" y="26" yon="yonBall" targetGroup="targBall" hitMsg="@bDisturb" fill="#555555" frame="#eeeeee" cx="57.22222222222222" cz="37.15277777777778" angle="135" />
+  <Guard y="30" shield="-1" shotPower="DeathPower" start="@DEATH" freq="DeathFreq" scale="DeathScale" speed="DeathSpeed" hitScore="0" hitSound="0" fill="#555555" frame="#eeeeee" cx="57.22222222222222" cz="37.15277777777778" angle="135" />
+  <Goody shape="bspW3x3" scale="10" start="@lsub" lives="-16" out="@lsub" sound="0" yon="0.01" fill="#555555" frame="#eeeeee" cx="57.22222222222222" cz="37.15277777777778" angle="135" />
+  <And in="@DEATH" out="@lsub" />
+  <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" openSound="0" closeSound="0" stopSound="0" open="@bDisturb" close="@bReset" fill="#555555" frame="#eeeeee" x="57.22222222222223" z="37.15277777777778" w="0.55555555555555" d="0.5555555555555571" h="1" />
+  <Field shape="bspStandardBall" watch="targBall" deltaY="0" scale=".5" y="1.2" exit="@bDisturb" fill="#555555" frame="#eeeeee" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" cx="57.22222222222222" cz="37.15277777777778" angle="135" />
+  <Field shape="bspStandardBall" watch="targBall" deltaY="0" y="20" enter="@bReset" fill="#555555" frame="#eeeeee" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" cx="57.22222222222222" cz="37.15277777777778" angle="135" />
+  <unique vars="mA" />
+  <Door2 shape="bspStandardFloor" y="1000" deltaY="FlagY -1000" pitch="90" yaw="0" openSpeed="100" volume="0" open="mA" fill="#0099ff" frame="#000000" cx="64.65277777777779" cz="24.583333333333336" angle="180" />
+  <Counter n="4" in="@ScoreB" out="mA" />
+  <unique vars="mA" />
+  <Door2 shape="bspStandardFloor" y="1000" deltaY="FlagY -1000" pitch="90" yaw="0" openSpeed="100" volume="0" open="mA" fill="#0099ff" frame="#000000" cx="59.65277777777778" cz="24.583333333333336" angle="180" />
+  <Counter n="3" in="@ScoreB" out="mA" />
+  <unique vars="mA" />
+  <Door2 shape="bspStandardFloor" y="1000" deltaY="FlagY -1000" pitch="90" yaw="0" openSpeed="100" volume="0" open="mA" fill="#0099ff" frame="#000000" cx="54.65277777777778" cz="24.583333333333336" angle="180" />
+  <Counter n="2" in="@ScoreB" out="mA" />
+  <unique vars="mA" />
+  <Door2 shape="bspStandardFloor" y="1000" deltaY="FlagY -1000" pitch="90" yaw="0" openSpeed="100" volume="0" open="mA" fill="#0099ff" frame="#000000" cx="49.65277777777778" cz="24.583333333333336" angle="180" />
+  <Counter n="1" in="@ScoreB" out="mA" />
+  <unique vars="mA" />
+  <Door2 shape="bspStandardFloor" y="1000" deltaY="FlagY -1000" pitch="90" yaw="0" openSpeed="100" volume="0" open="mA" fill="#008800" frame="#000000" cx="64.65277777777779" cz="49.583333333333336" angle="180" />
+  <Counter n="1" in="@ScoreA" out="mA" />
+  <unique vars="mA" />
+  <Door2 shape="bspStandardFloor" y="1000" deltaY="FlagY -1000" pitch="90" yaw="0" openSpeed="100" volume="0" open="mA" fill="#008800" frame="#000000" cx="59.65277777777778" cz="49.583333333333336" angle="180" />
+  <Counter n="2" in="@ScoreA" out="mA" />
+  <unique vars="mA" />
+  <Door2 shape="bspStandardFloor" y="1000" deltaY="FlagY -1000" pitch="90" yaw="0" openSpeed="100" volume="0" open="mA" fill="#008800" frame="#000000" cx="54.65277777777778" cz="49.583333333333336" angle="180" />
+  <Counter n="3" in="@ScoreA" out="mA" />
+  <unique vars="mA" />
+  <Door2 shape="bspStandardFloor" y="1000" deltaY="FlagY -1000" pitch="90" yaw="0" openSpeed="100" volume="0" open="mA" fill="#008800" frame="#000000" cx="49.65277777777778" cz="49.583333333333336" angle="180" />
+  <Counter n="4" in="@ScoreA" out="mA" />
+</map>

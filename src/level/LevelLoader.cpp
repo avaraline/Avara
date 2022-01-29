@@ -8,425 +8,335 @@
 */
 
 #include "LevelLoader.h"
+
 #include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
-#include "PICTParser.h"
-#include "SVGParser.h"
 #include "Parser.h"
 #include "Resource.h"
+#include "pugixml.hpp"
+#include "RGBAColor.h"
 
 #include <SDL2/SDL.h>
 
-#define textBufferSize 4096
+#include <algorithm>
+#include <sstream>
+#include <fstream>
+#include <streambuf>
+#include <regex>
+
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
 
 #define POINTTOUNIT(pt) (pt * 20480 / 9)
+#define UNITPOINTS (double)14.4 // 72 / 5
 
 typedef struct {
-    long v;
-    long h;
-} LongPoint;
+    Fixed v;
+    Fixed h;
+} FixedPoint2D;
 
-static Ptr textBuffer;
-static long textInBuffer;
-static LongPoint lastArcPoint;
+static FixedPoint2D lastArcPoint;
 static short lastArcAngle;
 
-static LongPoint lastOvalPoint;
-static long lastOvalRadius;
+static FixedPoint2D lastOvalPoint;
+static Fixed lastOvalRadius;
 
 Rect gLastBoxRect;
-short gLastBoxRounding;
+Fixed gLastBoxRounding;
 
-static Rect onePixelRect = {0, 0, 1, 1};
-static Rect otherPixelRect = {0, 1, 1, 2};
-static Rect bothPixelRect = {0, 0, 1, 2};
-
-static LongPoint lastDomeCenter;
+static FixedPoint2D lastDomeCenter;
 static short lastDomeAngle;
 static short lastDomeSpan;
-static long lastDomeRadius;
+static Fixed lastDomeRadius;
 
-static RGBColor fillColor, frameColor;
+static uint32_t fillColor, frameColor;
 
-static void TextBreak() {
-    if (textInBuffer) {
-        textBuffer[textInBuffer] = 0; //	null-terminate.
-        RunThis((StringPtr)textBuffer);
-        textInBuffer = 0;
-    }
-}
 
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
-    theLoc[0] = POINTTOUNIT(lastDomeCenter.h);
-    theLoc[2] = POINTTOUNIT(lastDomeCenter.v);
+    theLoc[0] = lastDomeCenter.h;
+    theLoc[2] = lastDomeCenter.v;
     theLoc[3] = 0;
     *startAngle = FDegToOne(((long)lastDomeAngle) << 16);
     *spanAngle = FDegToOne(((long)lastDomeSpan) << 16);
 
-    return POINTTOUNIT(lastDomeRadius);
+    return lastDomeRadius;
 }
 
-int GetPixelColor() {
-    return ((((int)fillColor.red) << 8) & 0xFF0000) | (fillColor.green & 0xFF00) | (fillColor.blue >> 8);
+uint32_t GetPixelColor() {
+    return fillColor;
 }
 
-int GetOtherPixelColor() {
-    return ((((int)frameColor.red) << 8) & 0xFF0000) | (frameColor.green & 0xFF00) | (frameColor.blue >> 8);
+uint32_t GetOtherPixelColor() {
+    return frameColor;
 }
 
 void GetLastArcLocation(Fixed *theLoc) {
-    theLoc[0] = POINTTOUNIT(lastArcPoint.h);
+    theLoc[0] = lastArcPoint.h;
     theLoc[1] = 0;
-    theLoc[2] = POINTTOUNIT(lastArcPoint.v);
+    theLoc[2] = lastArcPoint.v;
     theLoc[3] = 0;
 }
 
 Fixed GetLastOval(Fixed *theLoc) {
-    theLoc[0] = POINTTOUNIT(lastOvalPoint.h);
+    theLoc[0] = lastOvalPoint.h;
     theLoc[1] = 0;
-    theLoc[2] = POINTTOUNIT(lastOvalPoint.v);
+    theLoc[2] = lastOvalPoint.v;
     theLoc[3] = 0;
 
-    return POINTTOUNIT(lastOvalRadius);
+    // Instead of doubling the radius when parsing ovals, which we don't really do
+    // anymore, double it here.
+    return FMul(lastOvalRadius, FIX(2));
 }
 
 Fixed GetLastArcDirection() {
     return FDegToOne(((long)lastArcAngle) << 16);
 }
 
-static void SvgColor(unsigned short r, unsigned short g, unsigned short b, bool fg) {
-    if (fg) {
-        fillColor.red = r;
-        fillColor.green = g;
-        fillColor.blue = b;
-    }
-    else {
-        frameColor.red = r;
-        frameColor.green = g;
-        frameColor.blue = b;
-    }
-}
+struct ALFWalker: pugi::xml_tree_walker {
+    virtual bool for_each(pugi::xml_node& node) {
+        std::string tag = node.name();
 
-static void SvgArc(float x, float y, short start, short angle, long largest_radius) {
-    lastArcPoint.h = (long)roundf(x * 2);
-    lastArcPoint.v = (long)roundf(y * 2);
-    lastArcAngle = (630 - (start + angle / 2)) % 360;
-    lastDomeCenter.h = (long)roundf(x * 2);
-    lastDomeCenter.v = (long)roundf(y * 2);
-    lastDomeAngle = 360 - start;
-    lastDomeSpan = angle;
-    lastDomeRadius = largest_radius;
-}
-
-static void SvgEllipse(float x, float y, long r) {
-    lastOvalPoint.h = (long)roundf(x * 2);
-    lastOvalPoint.v = (long)roundf(y * 2);
-    lastOvalRadius = r * 2;
-
-    lastDomeCenter.h = (long)roundf(x * 2);
-    lastDomeCenter.v = (long)roundf(x * 2);
-
-    lastDomeAngle = 0;
-    lastDomeSpan = 360;
-    lastDomeRadius = r * 2;
-}
-
-static void SvgRect(Rect *r, int radius, unsigned short thickness) {
-    //SDL_Log("fillColor at time of rect: %d %d %d", fillColor.red, fillColor.blue, fillColor.green);
-    //SDL_Log("frameColor at time of rect: %d %d %d", frameColor.red, frameColor.blue, frameColor.green);
-
-    r->left += thickness >> 1;
-    r->top += thickness >> 1;
-    r->right -= (thickness + 1) >> 1;
-    r->bottom -= (thickness + 1) >> 1;
-
-    if(thickness == 1) {
-        CWallActor *theWall;
-        theWall = new CWallActor;
-        theWall->IAbstractActor();
-        theWall->MakeWallFromRect(r, (short)radius, 0, true);
-    }
-    else {
-        gLastBoxRect = *r;
-        gLastBoxRounding = radius;
-    }
-}
-
-static void SvgText(unsigned char *script) {
-    RunThis(script);
-}
-
-static void PeepStdRRect(PICTContext *context, GrafVerb verb, Rect *r, short ovalWidth, short ovalHeight) {
-    CWallActor *theWall;
-
-    TextBreak();
-
-    if (verb == kQDGrafVerbFrame) {
-        short thickness;
-
-        BlockMoveData(&context->fgColor, &frameColor, sizeof(RGBColor));
-        // ClipRect(&bothPixelRect);
-        // StdRect(paint, &otherPixelRect);
-
-        r->left += (context->pnSize.h) >> 1;
-        r->top += (context->pnSize.v) >> 1;
-        r->right -= (context->pnSize.h + 1) >> 1;
-        ;
-        r->bottom -= (context->pnSize.v + 1) >> 1;
-
-        thickness = context->pnSize.h;
-        if (thickness < context->pnSize.v)
-            thickness = context->pnSize.v;
-
-        ovalHeight = context->ovSize.v;
-        ovalWidth = context->ovSize.h;
-        if (ovalHeight > ovalWidth)
-            ovalHeight = ovalWidth;
-
-        if (thickness == 1) {
-            theWall = new CWallActor;
-            theWall->IAbstractActor();
-            theWall->MakeWallFromRect(r, ovalHeight, 0, true);
-        } else {
-            gLastBoxRect = *r;
-            gLastBoxRounding = ovalHeight;
-        }
-    } else { // ClipRect(&bothPixelRect);
-        // StdRect(verb, &onePixelRect);
-        BlockMoveData(&context->fgColor, &fillColor, sizeof(RGBColor));
-    }
-}
-
-static void PeepStdArc(PICTContext *context, GrafVerb verb, Rect *r, short startAngle, short arcAngle) {
-    long r1, r2;
-
-    TextBreak();
-
-    // ClipRect(&bothPixelRect);
-    // StdRect(verb, (verb == frame) ? &otherPixelRect : &onePixelRect);
-    RGBColor *to = verb == kQDGrafVerbFrame ? &frameColor : &fillColor;
-    BlockMoveData(&context->fgColor, to, sizeof(RGBColor));
-
-    {
-        r->left += (context->pnSize.h) >> 1;
-        r->top += (context->pnSize.v) >> 1;
-        r->right -= (context->pnSize.h + 1) >> 1;
-        ;
-        r->bottom -= (context->pnSize.v + 1) >> 1;
-
-        r1 = r->right - r->left;
-        r2 = r->bottom - r->top;
-        if (r2 > r1)
-            r1 = r2;
-
-        lastArcPoint.h = r->left + r->right;
-        lastArcPoint.v = r->top + r->bottom;
-        lastArcAngle = (720 - (startAngle + arcAngle / 2)) % 360;
-
-        lastDomeCenter.h = r->left + r->right;
-        lastDomeCenter.v = r->top + r->bottom;
-        lastDomeAngle = 360 - startAngle;
-        lastDomeSpan = arcAngle;
-        lastDomeRadius = r1;
-    }
-}
-
-static void PeepStdOval(PICTContext *context, GrafVerb verb, Rect *r) {
-    long r1, r2;
-
-    TextBreak();
-
-    // ClipRect(&bothPixelRect);
-    // StdRect(verb, (verb == frame) ? &otherPixelRect : &onePixelRect);
-    RGBColor *to = verb == kQDGrafVerbFrame ? &frameColor : &fillColor;
-    BlockMoveData(&context->fgColor, to, sizeof(RGBColor));
-
-    if (verb == kQDGrafVerbFrame) {
-        r->right--;
-        r->bottom--;
-        r1 = r->right - r->left;
-        r2 = r->bottom - r->top;
-
-        if (r2 > r1)
-            r1 = r2;
-
-        lastOvalPoint.h = r->left + r->right;
-        lastOvalPoint.v = r->top + r->bottom;
-        lastOvalRadius = r1 + r1;
-
-        lastDomeCenter.h = r->left + r->right;
-        lastDomeCenter.v = r->top + r->bottom;
-
-        lastDomeAngle = 0;
-        lastDomeSpan = 360;
-        lastDomeRadius = r1;
-    }
-}
-
-static void PeepStdText(PICTContext *context, short byteCount, Ptr theText, Boolean prependNewline) {
-    short i;
-    char *p;
-    static Point oldPoint;
-    Point newPoint;
-
-    // SDL_Log("PeepStdText(%d)\n", byteCount);
-
-    if (byteCount + textInBuffer + 2 < textBufferSize) {
-        p = textBuffer + textInBuffer;
-
-        if (textInBuffer && p[-1] != 13 && prependNewline) {
-            *p++ = 13;
-            textInBuffer++;
+        switch (node.type()){
+            case pugi::node_element:
+                handle_element(node, tag);
+                RunThis((StringPtr)node.child_value());
+                break;
+            default:
+                break;
         }
 
-        /*
-        TODO: not really sure why the position info matters here?
-        GetPen(&newPoint);
+        return true;
+    }
 
-        if(textInBuffer && p[-1] != 13)
-        {	while(newPoint.v > oldPoint.v)
-            {	FontInfo	fInfo;
+    std::string fix_attr(std::string attr) {
+        // XML attributes can't have brackets, so we turn light.0.i into light[0].i
+        std::regex subscript("\\.(\\d+)");
+        return std::regex_replace(attr, subscript, "[$1]");
+    }
 
-                GetFontInfo(&fInfo);
-
-                oldPoint.v += fInfo.ascent + fInfo.descent + fInfo.leading;
-                *p++ = 13;
-                textInBuffer++;
+    std::string quote_attr(std::string attr, std::string value) {
+        if (
+            attr.compare("text") == 0 ||
+            attr.compare("designer") == 0 ||
+            attr.compare("information") == 0 ||
+            (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
+        ) {
+            if (value[0] == '$') {
+                return value.substr(1);
+            }
+            else {
+                return std::string("\"") + value + std::string("\"");
             }
         }
-        oldPoint = newPoint;
-        */
-        textInBuffer += byteCount;
+        return value;
+    }
 
-        i = byteCount;
-        while (i--) {
-            *p++ = *theText++;
+    void handle_element(pugi::xml_node& node, std::string& name) {
+        // Read any global state we can from the element.
+        read_context(node);
+
+        if (name.compare("map") == 0) handle_map(node);
+        else if (name.compare("enum") == 0) handle_enum(node);
+        else if (name.compare("unique") == 0) handle_unique(node);
+        else if (name.compare("set") == 0) handle_set(node);
+        else if (name.compare("script") == 0) handle_script(node);
+        else if (name.compare("Dome") == 0) {
+            handle_dome(node);
+            handle_object(node, name);
         }
+        else if (name.compare("WallDoor") == 0 || name.compare("WallSolid") == 0) {
+            // WallDoors and WallSolids always use the last Wall.
+            handle_wall(node);
+            handle_object(node, name);
+        }
+        else if (name.compare("FreeSolid") == 0 || name.compare("Field") == 0) {
+            // FreeSolids and Fields with no custom shape expect/use the last Wall.
+            if (node.attribute("shape").empty()) {
+                handle_wall(node);
+            }
+            handle_object(node, name);
+        }
+        else if (name.compare("Wall") == 0) handle_wall(node);
+        else handle_object(node, name);
     }
-}
 
-static void PeepStdComment(PICTContext *context, short kind, short dataSize, Handle dataHandle) {
-    // SDL_Log("PeepStdComment(%d,%d)\n", kind, dataSize);
-    switch (kind) {
-        case TextBegin:
-            //		case StringBegin:
-            textInBuffer = 0;
-            break;
+    bool read_context(pugi::xml_node& node) {
+        std::string fill = node.attribute("fill").value(),
+               frame = node.attribute("frame").value(),
+               x = node.attribute("x").value(),
+               // y = node.attribute("y").value(),
+               z = node.attribute("z").value(),
+               w = node.attribute("w").value(),
+               h = node.attribute("h").value(),
+               d = node.attribute("d").value(),
+               cx = node.attribute("cx").value(),
+               cz = node.attribute("cz").value(),
+               r = node.attribute("r").value(),
+               angle = node.attribute("angle").value();
 
-        case TextEnd:
-            //		case StringEnd:
-            textBuffer[textInBuffer] = 0; //	null-terminate.
-            RunThis((StringPtr)textBuffer);
-            textInBuffer = 0;
-            break;
+        gLastBoxRounding = h.empty() ? 0 : ToFixed(std::stod(h));
+
+        if (!fill.empty()) {
+            const std::optional<uint32_t> color = ParseColor(fill);
+            if (color) {
+                fillColor = *color;
+            }
+        }
+
+        if (!frame.empty()) {
+            const std::optional<uint32_t> color = ParseColor(frame);
+            if (color) {
+                frameColor = *color;
+            }
+        }
+
+        if (!x.empty() && !z.empty() && !w.empty() && !d.empty()) {
+            double boxCenterX = std::stod(x) * UNITPOINTS,
+                   boxCenterZ = std::stod(z) * UNITPOINTS,
+                   boxWidth = std::stod(w) * UNITPOINTS,
+                   boxDepth = std::stod(d) * UNITPOINTS,
+                   boxLeft = boxCenterX - (boxWidth / 2.0),
+                   boxRight = boxLeft + boxWidth,
+                   boxTop = boxCenterZ - (boxDepth / 2.0),
+                   boxBottom = boxTop + boxDepth;
+            gLastBoxRect.top = std::lround(boxTop);
+            gLastBoxRect.left = std::lround(boxLeft);
+            gLastBoxRect.bottom = std::lround(boxBottom);
+            gLastBoxRect.right = std::lround(boxRight);
+        }
+
+        if (!cx.empty() && !cz.empty()) {
+            Fixed centerX = ToFixed(std::stod(cx)),
+                  centerZ = ToFixed(std::stod(cz));
+
+            lastArcPoint.h = centerX;
+            lastArcPoint.v = centerZ;
+
+            lastDomeCenter.h = centerX;
+            lastDomeCenter.v = centerZ;
+
+            lastOvalPoint.h = centerX;
+            lastOvalPoint.v = centerZ;
+        }
+
+        if (!r.empty()) {
+            Fixed radius = ToFixed(std::stod(r));
+            lastDomeRadius = radius;
+            lastOvalRadius = radius;
+        }
+
+        if (!angle.empty()) {
+            int arcAngle = std::stoi(angle);
+
+            lastArcAngle = (720 - arcAngle) % 360;
+            lastDomeAngle = 360 - arcAngle;
+        }
+
+        return true;
     }
-}
 
-static void PeepStdRect(PICTContext *context, GrafVerb verb, Rect *r) {
-    CWallActor *theWall;
+    void handle_map(pugi::xml_node& node) {
+    }
 
-    TextBreak();
-
-    if (verb == kQDGrafVerbFrame) {
-        short thickness;
-
-        // ClipRect(&bothPixelRect);
-        // StdRect(paint, &otherPixelRect);
-        BlockMoveData(&context->fgColor, &frameColor, sizeof(RGBColor));
-
-        r->left += (context->pnSize.h) >> 1;
-        r->top += (context->pnSize.v) >> 1;
-        r->right -= (context->pnSize.h + 1) >> 1;
-        ;
-        r->bottom -= (context->pnSize.v + 1) >> 1;
-
-        thickness = context->pnSize.h;
-        if (thickness < context->pnSize.v)
-            thickness = context->pnSize.v;
-
-        if (thickness == 1) {
-            theWall = new CWallActor;
-            theWall->IAbstractActor();
-            theWall->MakeWallFromRect(r, 0, 0, true);
+    void handle_dome(pugi::xml_node& node) {
+        std::string quarters = node.attribute("quarters").value();
+        if (!quarters.empty()) {
+            int extent = std::stoi(quarters) * 90;
+            lastDomeSpan = (extent >= 90 && extent <= 360)
+                ? extent
+                : 360;
         } else {
-            gLastBoxRect = *r;
-            gLastBoxRounding = 0;
+            lastDomeSpan = 360;
         }
-    } else { // ClipRect(&bothPixelRect);
-        // StdRect(verb, &onePixelRect);
-        BlockMoveData(&context->fgColor, &fillColor, sizeof(RGBColor));
     }
-}
 
-void SVGConvertToLevelMap() {
-    InitParser();
-    SVGParser *parser = new SVGParser();
-    parser->callbacks.rectProc = &SvgRect;
-    parser->callbacks.colorProc = &SvgColor;
-    parser->callbacks.textProc = &SvgText;
-    parser->callbacks.arcProc = &SvgArc;
-    parser->callbacks.ellipseProc = &SvgEllipse;
+    void handle_enum(pugi::xml_node& node) {
+        std::stringstream script;
+        script << "enum " << node.attribute("start").value() << " " << node.attribute("vars").value() << " end";
+        RunThis((StringPtr)script.str().c_str());
+    }
 
-    parser->Parse();
-    delete parser;
-    TextBreak();
-    FreshCalc();
-    gCurrentGame->EndScript();
-}
+    void handle_unique(pugi::xml_node& node) {
+        std::stringstream script;
+        script << "unique " << node.attribute("vars").value() << " end";
+        RunThis((StringPtr)script.str().c_str());
+    }
 
-void ConvertToLevelMap(Handle levelData) {
-    InitParser();
-    // TODO: Not a good place for this
+    void handle_set(pugi::xml_node& node) {
+        std::stringstream script;
+        for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
+            std::string attr = fix_attr(ait->name());
+            std::string value = quote_attr(attr, ait->value());
+            script << attr << " = " << value << "\r";
+        }
+        RunThis((StringPtr)script.str().c_str());
+    }
+
+    void handle_script(pugi::xml_node& node) {
+        RunThis((StringPtr)node.child_value());
+    }
+
+    void handle_wall(pugi::xml_node& node) {
+        std::string y = node.attribute("y").value();
+        if (!y.empty()) {
+            std::stringstream script;
+            script << "wa = " << y << "\n";
+            RunThis((StringPtr)script.str().c_str());
+        }
+        CWallActor *theWall = new CWallActor;
+        theWall->IAbstractActor();
+        theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
+    }
+
+    void handle_object(pugi::xml_node& node, std::string& name) {
+        std::stringstream script;
+        script << "object " << name << "\n";
+        for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
+            std::string attr = fix_attr(ait->name());
+            std::string value = quote_attr(attr, ait->value());
+            // Ignore all the standard context attributes when parsing objects.
+            if (
+                attr.compare("fill") == 0 ||
+                attr.compare("frame") == 0 ||
+                attr.compare("x") == 0 ||
+                //attr.compare("y") == 0 ||
+                attr.compare("z") == 0 ||
+                attr.compare("w") == 0 ||
+                attr.compare("h") == 0 ||
+                attr.compare("d") == 0 ||
+                attr.compare("cx") == 0 ||
+                attr.compare("cz") == 0 ||
+                attr.compare("r") == 0 ||
+                attr.compare("angle") == 0
+            ) continue;
+            script << attr << " = " << value << "\n";
+        }
+        script << "end";
+        RunThis((StringPtr)script.str().c_str());
+    }
+};
+
+bool LoadALF(std::string levelName) {
     AvaraGLLightDefaults();
+    InitParser();
 
-    textBuffer = NewPtr(textBufferSize);
-    
-    PICTParser *parser = new PICTParser();
-    parser->callbacks.arcProc = &PeepStdArc;
-    parser->callbacks.rRectProc = &PeepStdRRect;
-    // parser->callbacks.polyProc = &PeepStdPoly;
-    parser->callbacks.textProc = &PeepStdText;
-    parser->callbacks.rectProc = &PeepStdRect;
-    parser->callbacks.ovalProc = &PeepStdOval;
-    parser->callbacks.commentProc = &PeepStdComment;
-    // parser->callbacks.getPicProc = &PeekGetPic;
-    parser->Parse(levelData);
-    delete parser;
-    
-    /*
-    TODO: replace this with a basic PICT parser with drawing function callbacks
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_file(levelName.c_str());
 
-    GetGWorld(&savedGrafPtr, &savedGD);
-    NewGWorld(&utilGWorld, 32, &twoPixelRect, NULL, NULL, keepLocal);
-    LockPixels(GetGWorldPixMap(utilGWorld));
-    SetGWorld(utilGWorld, NULL);
+    ALFWalker walker;
+    doc.traverse(walker);
 
-    GetPort((GrafPtr *)&context);
-    SetStdCProcs(&myQDProcs);
-    ClipRect(&twoPixelRect);
-
-    myQDProcs.arcProc = (void *)PeepStdArc;
-    myQDProcs.rRectProc = (void *)PeepStdRRect;
-    myQDProcs.polyProc = (void *)PeepStdPoly;
-    myQDProcs.textProc = (void *)PeepStdText;
-    myQDProcs.rectProc = (void *)PeepStdRect;
-    myQDProcs.ovalProc = (void *)PeepStdOval;
-    myQDProcs.commentProc = (void *)PeepStdComment;
-    myQDProcs.getPicProc = (void *)PeekGetPic;
-    context->grafProcs = (void *)&myQDProcs;
-
-    state = HGetState((Handle) thePicture);
-    HLock((Handle) thePicture);
-
-    sPicDataPtr = (Ptr) (1+&((*thePicture)->picFrame));
-    sPicCount = 0;
-
-    DrawPicture(thePicture,&((*thePicture)->picFrame));
-    */
-    TextBreak();
     FreshCalc();
     gCurrentGame->EndScript();
+    return (bool)result;
 }

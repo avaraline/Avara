@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Types.h"
-
 #include <SDL2/SDL.h>
 #include <string>
 #include <vector>
@@ -19,7 +17,7 @@ public:
 
     // Called when an applcation preference value changes.
     virtual void PrefChanged(std::string name) {}
-    
+
     virtual bool editing() { return false; }
 
     virtual void restoreState();

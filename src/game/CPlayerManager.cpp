@@ -6,12 +6,15 @@
     Created: Saturday, March 11, 1995, 05:50
     Modified: Sunday, September 15, 1996, 20:51
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CPlayerManager.h"
 
 #include "CAbstractPlayer.h"
+#include "CColorManager.h"
 #include "CCommManager.h"
 #include "CIncarnator.h"
+#include "CRandomIncarnator.h"
 #include "CNetManager.h"
 #include "CWalkerActor.h"
 #include "CommDefs.h"
@@ -79,16 +82,25 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
             continue;
         newMap[it.key()] = it.value();
         uint32_t cmd = commandBits[it.key()];
-        if (it.value().is_array()) {
-            for (json::iterator kit = it.value().begin(); kit != it.value().end(); ++kit) {
-                SDL_Keycode key = SDL_GetKeyFromName((*kit).get<std::string>().c_str());
+        json commandKeys = it.value();
+        if (it.value().is_array() == false) {
+            commandKeys = json::array({it.value()});
+        }
+        for (json::iterator kit = commandKeys.begin(); kit != commandKeys.end(); ++kit) {
+            std::string name = (*kit).get<std::string>();
+            SDL_Keycode key = SDL_GetKeyFromName(name.c_str());
+            if(key == SDLK_UNKNOWN) {
+                if(name == "Right Mouse") {
+                    keyMap[SDL_SCANCODE_APP1] |= cmd;
+                }
+                else if(name == "Middle Mouse") {
+                    keyMap[SDL_SCANCODE_APP2] |= cmd;
+                }
+            }
+            else {
                 SDL_Scancode scan = SDL_GetScancodeFromKey(key);
                 keyMap[scan] |= cmd;
             }
-        } else {
-            SDL_Keycode key = SDL_GetKeyFromName(it.value().get<std::string>().c_str());
-            SDL_Scancode scan = SDL_GetScancodeFromKey(key);
-            keyMap[scan] |= cmd;
         }
     }
     itsGame->itsApp->Set(kKeyboardMappingTag, newMap);
@@ -100,7 +112,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     // theRoster = aRoster;
     theNetManager = aNetManager;
     levelCRC = 0;
-    levelTag = 0;
+    levelTag = "";
     position = id;
     itsPlayer = NULL;
 
@@ -122,13 +134,8 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
     uint32_t state = SDL_GetMouseState(&x, &y);
     deltaMouse->h = x - mouseCenterPosition.h;
     deltaMouse->v = y - mouseCenterPosition.v;
-    if (itsGame->sensitivity > 0) {
-        deltaMouse->h <<= itsGame->sensitivity;
-        deltaMouse->v <<= itsGame->sensitivity;
-    } else if (itsGame->sensitivity < 0) {
-        deltaMouse->h >>= -itsGame->sensitivity;
-        deltaMouse->v >>= -itsGame->sensitivity;
-    }
+    deltaMouse->h *= itsGame->sensitivity;
+    deltaMouse->v *= itsGame->sensitivity;
     if (itsGame->moJoOptions & kFlipAxis) {
         deltaMouse->v = -deltaMouse->v;
 	}
@@ -233,8 +240,10 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
 
     switch (event.type) {
         case SDL_KEYDOWN:
-            keysDown |= keyMap[event.key.keysym.scancode];
-            keysHeld |= keyMap[event.key.keysym.scancode];
+            // only add to keysDown if it's NOT from a keyboard repeat
+            if (event.key.repeat == 0) {
+                HandleKeyDown(keyMap[event.key.keysym.scancode]);
+            }
 
             if (TESTFUNC(kfuTypeText, keysDown)) {
                 keyboardActive = !keyboardActive;
@@ -266,27 +275,39 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
                     inputBuffer.push_back(*a_char);
                 }
             }
+            break;
         case SDL_KEYUP:
-            keysUp |= keyMap[event.key.keysym.scancode];
-            keysHeld &= ~keyMap[event.key.keysym.scancode];
+            HandleKeyUp(keyMap[event.key.keysym.scancode]);
             break;
         case SDL_MOUSEBUTTONDOWN:
-            buttonStatus |= kbuWentDown;
-            buttonStatus |= kbuIsDown;
+            if(event.button.button == SDL_BUTTON_RIGHT) {
+                HandleKeyDown(keyMap[SDL_SCANCODE_APP1]);
+            }
+            else if(event.button.button == SDL_BUTTON_MIDDLE) {
+                HandleKeyDown(keyMap[SDL_SCANCODE_APP2]);
+            }
+            else {
+                buttonStatus |= kbuWentDown;
+                buttonStatus |= kbuIsDown;
+            }
+
             break;
         case SDL_MOUSEBUTTONUP:
-            buttonStatus |= kbuWentUp;
-            buttonStatus &= ~kbuIsDown;
+            if(event.button.button == SDL_BUTTON_RIGHT) {
+                HandleKeyUp(keyMap[SDL_SCANCODE_APP1]);
+            }
+            else if(event.button.button == SDL_BUTTON_MIDDLE) {
+                HandleKeyUp(keyMap[SDL_SCANCODE_APP2]);
+            }
+            else {
+                buttonStatus |= kbuWentUp;
+                buttonStatus &= ~kbuIsDown;
+            }
             break;
         case SDL_MOUSEMOTION:
             int xrel = event.motion.xrel, yrel = event.motion.yrel;
-            if (itsGame->sensitivity > 0) {
-                xrel <<= itsGame->sensitivity;
-                yrel <<= itsGame->sensitivity;
-            } else if (itsGame->sensitivity < 0) {
-                xrel >>= -itsGame->sensitivity;
-                yrel >>= -itsGame->sensitivity;
-            }
+            xrel *= itsGame->sensitivity;
+            yrel *= itsGame->sensitivity;
             if (itsGame->moJoOptions & kFlipAxis) {
                 yrel = -yrel;
             }
@@ -296,11 +317,46 @@ void CPlayerManagerImpl::HandleEvent(SDL_Event &event) {
     }
 }
 
-void CPlayerManagerImpl::SendFrame() {
-    // Sends the next game frame.
-    itsGame->topSentFrame++;
+void CPlayerManagerImpl::HandleKeyDown(uint32_t keyFunc) {
+    keysDown |= keyFunc;
+    // only set the keyFunc bit in dupKeysHeld if the same bit in keysHeld is already set
+    dupKeysHeld |= (keysHeld & keyFunc);
+    keysHeld |= keyFunc;
+    FPS_DEBUG("*** HandleKeyDown fn=" << itsGame->frameNumber <<
+              std::hex << std::setfill('0') <<
+              ", keyDown = 0x" << std::setw(8) << keyFunc <<
+              ", keysHeld = 0x" << std::setw(8) << keysHeld <<
+              ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
+}
 
-    FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & itsGame->topSentFrame];
+void CPlayerManagerImpl::HandleKeyUp(uint32_t keyFunc) {
+    keysUp |= (keyFunc & keysHeld);
+    // if dupKeysHeld bit is already set, then keysHeld bit remains set until another key is released
+    // note: this logic was added to support a more repeatable "superjump" capability isn't necessarily limited to jumping
+    keysHeld &= ~(keyFunc & ~dupKeysHeld);
+    // regardless of how many keys might be held, mark all duplicate keys as unheld
+    // to avoid a bunch of KeyUp commands from causing strange behaviors (e.g. superDUPERjump)
+    dupKeysHeld &= ~keyFunc;
+    FPS_DEBUG("*** HandleKeyUp   fn=" << itsGame->frameNumber <<
+              std::hex << std::setfill('0') <<
+              ", keyUp   = 0x" << std::setw(8) << keyFunc <<
+              ", keysHeld = 0x" << std::setw(8) << keysHeld <<
+              ", dupKeysHeld = 0x" << std::setw(8) << dupKeysHeld << "\n" << std::dec);
+}
+
+void CPlayerManagerImpl::SendFrame() {
+    // guard against overwriting frames that aren't done yet
+    if (itsGame->topSentFrame - itsGame->frameNumber >= FUNCTIONBUFFERS - 1) {
+        SDL_Log("frameFuncs BUFFER IS FULL, not sending new frames until we catch up! <-- tell Head you saw this.");
+        return;
+    }
+
+    // Sends the next game frame.
+    itsGame->topSentFrame += 1;
+
+    // uint32_t ffi = itsGame->topSentFrame * itsGame->fpsScale;
+    uint32_t ffi = itsGame->topSentFrame;
+    FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
 
     ff->validFrame = itsGame->topSentFrame;
 
@@ -373,7 +429,10 @@ void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short com
 
     theComm = theNetManager->itsCommManager;
 
-    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
+    // short ffi = theFrame * itsGame->fpsScale;
+    short ffi = theFrame;
+    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
+    // ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
 
     if (ff->validFrame == theFrame) {
         outPacket = theComm->GetPacket();
@@ -412,7 +471,7 @@ void CPlayerManagerImpl::ResumeGame() {
     oldButton = 0;
     isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
 
-    keysDown = keysUp = keysHeld = 0;
+    keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
     buttonStatus = 0;
 }
@@ -428,7 +487,9 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
     frameNumber = thePacket->p3;
 
     pd = (uint32_t *)thePacket->dataBuffer;
-    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & frameNumber];
+    // uint32_t ffi = frameNumber * itsGame->fpsScale;
+    uint32_t ffi = frameNumber;
+    ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     ff->validFrame = frameNumber;
 
     ff->ft.down = (p1 & kNoDownData) ? 0 : ntohl(*pd++);
@@ -462,7 +523,8 @@ void CPlayerManagerImpl::SendResendRequest(short askCount) {
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
     // SDL_Log("CPlayerManagerImpl::GetFunctions\n");
-    short i = (FUNCTIONBUFFERS - 1) & itsGame->frameNumber;
+    uint32_t ffi = (itsGame->frameNumber);
+    short i = (FUNCTIONBUFFERS - 1) & ffi;
 
     if (frameFuncs[i].validFrame != itsGame->frameNumber) {
         long quickTick;
@@ -472,7 +534,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         itsGame->didWait = true;
 
         if (frameFuncs[(FUNCTIONBUFFERS - 1) & (i + 1)].validFrame < itsGame->frameNumber) {
-            askAgainTime += 5 + (FRandom() & 3);
+            askAgainTime += 5 + (rand() & 3);
         }
 
         do {
@@ -878,7 +940,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
     // theRoster->InvalidateArea(kOnePlayerBox, pos);
 }
 
-void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) {
+void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
     if (loadingStatus != kLNotConnected && loadingStatus != kLActive) {
@@ -892,7 +954,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSTy
             else
                 loadingStatus = kLNotFound;
         } else {
-            if (serverCRC == levelCRC && serverTag == levelTag) {
+            if (serverCRC == levelCRC && serverTag.compare(levelTag) == 0) {
                 short i;
 
                 SDL_Log("Setting loadingStatus = kLLoaded\n");
@@ -905,7 +967,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, OSTy
                 }
 #endif
             } else {
-                if (serverTag == levelTag) {
+                if (serverTag.compare(levelTag) == 0) {
                     loadingStatus = kLMismatch;
                 }
             }
@@ -977,6 +1039,12 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
                 }
             }
             spotAvailable = spotAvailable->nextIncarnator;
+        }
+
+        for (int tries = 3; itsPlayer->isInLimbo && tries > 0; tries--) {
+            // try a psuedo-random incarnation
+            CRandomIncarnator waldo(itsGame->incarnatorList);
+            itsPlayer->Reincarnate(&waldo);
         }
 
         if (itsPlayer->isInLimbo) {
@@ -1174,10 +1242,10 @@ void CPlayerManagerImpl::SpecialColorControl() {
 
         switch (spaceCount) {
             case 2:
-                repColor = kSpecialBlackColor;
+                repColor = CColorManager::getSpecialBlackColor();
                 break;
             case 3:
-                repColor = kSpecialWhiteColor;
+                repColor = CColorManager::getSpecialWhiteColor();
                 break;
         }
 
@@ -1226,7 +1294,7 @@ short CPlayerManagerImpl::LevelCRC() {
 OSErr CPlayerManagerImpl::LevelErr() {
     return levelErr;
 }
-OSType CPlayerManagerImpl::LevelTag() {
+std::string CPlayerManagerImpl::LevelTag() {
     return levelTag;
 }
 void CPlayerManagerImpl::LevelCRC(short crc) {
@@ -1235,7 +1303,7 @@ void CPlayerManagerImpl::LevelCRC(short crc) {
 void CPlayerManagerImpl::LevelErr(OSErr err) {
     levelErr = err;
 }
-void CPlayerManagerImpl::LevelTag(OSType t) {
+void CPlayerManagerImpl::LevelTag(std::string t) {
     levelTag = t;
 }
 Fixed CPlayerManagerImpl::RandomKey() {

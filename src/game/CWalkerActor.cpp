@@ -7,6 +7,8 @@
     Modified: Monday, September 16, 1996, 19:28
 */
 
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
+
 #include "CWalkerActor.h"
 
 #include "AvaraDefines.h"
@@ -74,7 +76,7 @@ void CWalkerActor::StartSystems() {
     oldTractionFlag = true;
     jumpFlag = false;
 
-    baseFriction = motorFriction;
+    baseFriction = classicMotorFriction;  // initialized in CAbstractPlayer::StartSystems()
     minPitch = FIX(-30);
     maxPitch = FIX(30);
 
@@ -176,16 +178,19 @@ void CWalkerActor::AvoidBumping() {
         do {
             switch (undoStep) {
                 case undoMotion:
+                    // FPS_DEBUG("AvoidBumping: undoMotion\n");
                     if (speed[0] || speed[1] || speed[2]) {
-                        location[0] -= speed[0];
-                        location[2] -= speed[2];
-                        location[1] -= speed[1];
+                        location[0] -= FpsCoefficient2(speed[0]);
+                        location[1] -= FpsCoefficient2(speed[1]);
+                        location[2] -= FpsCoefficient2(speed[2]);
+                        // FPS_DEBUG("undoMotion: location = " << FormatVector(location, 3) << "\n");
                         goto redoLegs;
                         break;
                     }
                     undoStep++; //	No speed and we still collide?
 
                 case undoElevation:
+                    // FPS_DEBUG("AvoidBumping: undoElevation\n");
                     if (crouchUndo != crouch || stanceUndo != stance) {
                         stance = stanceUndo;
                         crouch = crouchUndo;
@@ -194,6 +199,7 @@ void CWalkerActor::AvoidBumping() {
                     undoStep++; //	Fall through
 
                 case undoHeadTurn:
+                    // FPS_DEBUG("AvoidBumping: undoHeadTurn\n");
                     if (oldYaw != viewYaw || viewPitch != oldPitch) {
                         viewYaw = oldYaw;
                         viewPitch = oldPitch;
@@ -204,6 +210,7 @@ void CWalkerActor::AvoidBumping() {
 #define DIFFERENTLEGS(a, b) ((a.highAngle != b.highAngle) || (a.lowAngle != b.lowAngle))
 
                 case undoLegs:
+                    // FPS_DEBUG("AvoidBumping: undoLegs\n");
 #ifdef TESTIT
                     if (DIFFERENTLEGS(legs[0], legUndo[0]) || DIFFERENTLEGS(legs[1], legUndo[1]) ||
                         legPhase != phaseUndo)
@@ -217,35 +224,48 @@ void CWalkerActor::AvoidBumping() {
                     undoStep++;
 
                 case undoTurn:
-                    if (heading != headChange) {
-                        Vector offset;
+                    // FPS_DEBUG("AvoidBumping: undoTurn\n");
+                    if (heading != headChange) {  // seems like it should check (headChange != 0)
+                        Vector offsetSpeed, offsetLocation;
                         Vector push;
 
                         heading -= headChange;
 
                         PlaceParts();
 
-                        offset[0] = FOneCos(heading) >> 4;
-                        offset[1] = 0;
-                        offset[2] = FOneSin(heading) >> 4;
-                        OffsetParts(offset);
+                        // Total offset speed is (sin^2+cos^2)/8 = FIX(1/8) = 8192
+                        // which represents how much to change speed on collision.
+                        // The speed change is perpendicular to the heading.  So it tries
+                        // both ways (left then right) to see if it can slide out.
+                        offsetSpeed[0] = FpsCoefficient2(FOneCos(heading) >> 3); // 1/8
+                        offsetSpeed[1] = 0;
+                        offsetSpeed[2] = FpsCoefficient2(FOneSin(heading) >> 3);
+                        // FPS_DEBUG("AvoidBumping: undoTurn... offsetSpeed = " << FormatVector(offsetSpeed, 3) << "\n");
 
-                        push[0] = speed[0] - (offset[0] << 1);
-                        push[1] = speed[1];
-                        push[2] = speed[2] - (offset[2] << 1);
+                        offsetLocation[0] = FpsCoefficient2(offsetSpeed[0] >> 1); // 1/16
+                        offsetLocation[1] = 0;
+                        offsetLocation[2] = FpsCoefficient2(offsetSpeed[2] >> 1);
+                        OffsetParts(offsetLocation); // offset 1/16 to the left
 
                         if (DoCollisionTest(&proximityList.p)) {
+                            // FPS_DEBUG("AvoidBumping: collision on the left, going right\n");
+                            // still colliding on the left so set speed in the opposite direction
+                            push[0] = speed[0] - offsetSpeed[0]; // speed - 1/8
+                            push[1] = speed[1];
+                            push[2] = speed[2] - offsetSpeed[2];
                             Push(push);
                         }
 
-                        offset[0] = -2 * offset[0];
-                        offset[2] = -2 * offset[2];
-                        OffsetParts(offset);
+                        // swing 180 degrees the other way and try that
+                        offsetLocation[0] = FpsCoefficient2(-offsetSpeed[0]); // -1/8 = -2/16
+                        offsetLocation[2] = FpsCoefficient2(-offsetSpeed[2]);
+                        OffsetParts(offsetLocation); // offset 1/16-1/8 = -1/16 to the right
 
                         if (DoCollisionTest(&proximityList.p)) {
-                            push[0] = speed[0] - offset[0];
+                            // FPS_DEBUG("AvoidBumping: collision on the right, going left\n");
+                            push[0] = speed[0] + offsetSpeed[0]; // speed + 1/8
                             push[1] = speed[1];
-                            push[2] = speed[2] - offset[2];
+                            push[2] = speed[2] + offsetSpeed[2];
                             Push(push);
                         }
                         break;
@@ -294,6 +314,11 @@ void CWalkerActor::DoStandingTouches() {
         if (touchActor) {
             touchActor->StandingOn(this, legs[0].where, true);
             touchActor->GetFrictionTraction(&fricAcc, &tracAcc);
+            if (!touchActor->HandlesFastFPS()) {
+                // if touchActor still runs slow, increase the traction on that object so that Walker doesn't slide off
+                // delete this code after all actors are FPS
+                tracAcc = tracAcc / itsGame->fpsScale;
+            }
             tractCount = 1;
         }
     } else if (legs[0].where[1] < FIX3(50)) {
@@ -388,7 +413,13 @@ void CWalkerActor::DoLegTouches() {
                 soundId[i] = itsGame->groundStepSound;
             }
 
-            power[i] <<= 1;
+            power[i] *= (2 / itsGame->fpsScale);
+
+            // if falling at a high speed
+            if (speed[1] < -FIX1 && power[i] < FIX3(500)) {
+                // force the sound to play
+                power[i] = FIX3(500);
+            }
         }
 
         if (soundId[0] == soundId[1]) {
@@ -404,7 +435,7 @@ void CWalkerActor::DoLegTouches() {
             }
         } else {
             for (i = 0; i < 2; i++) {
-                if (power[i] > FIX3(10) && soundId[i]) {
+                if (power[i] > FpsCoefficient2(FIX3(10)) && soundId[i]) {
                     DoSound(soundId[i], legs[i].where, power[i], FIX(1));
                 }
             }
@@ -450,6 +481,8 @@ void CWalkerActor::MoveLegs() {
     RayHitRecord legSensor;
     Fixed tempSin, tempCos;
 
+    // FPS_DEBUG("CWalkerActor::MoveLegs frameNumber = " << itsGame->frameNumber << "\n");
+
     speedLimit = speed[1];
 
     tractionFlag = false;
@@ -462,15 +495,19 @@ void CWalkerActor::MoveLegs() {
     headHeight = elevation + FMul(viewPitch, FIX3(10));
     scoutBaseHeight = elevation + SCOUTPLATFORM;
 
-    temp = FMul(-LEGSPACE * 18, headChange);
+    temp = FMul(-LEGSPACE * 18, ClassicCoefficient2(headChange));
     legSpeeds[0] = distance - temp;
     legSpeeds[1] = distance + temp;
+    // FPS_DEBUG("distance = " << distance << ", temp = " << temp << ", headChange = " << headChange << "\n");
+    // FPS_DEBUG("  legSpeeds = " << FormatVector(legSpeeds,2) << "\n");
 
     absAvgSpeed = (legSpeeds[0] > 0) ? legSpeeds[0] : -legSpeeds[0];
     absAvgSpeed += (legSpeeds[1] > 0) ? legSpeeds[1] : -legSpeeds[1];
+    // FPS_DEBUG("absAvgSpeed = " << absAvgSpeed << "\n");
 
     phaseChange = FMulDiv(FSqrt(absAvgSpeed), fConstant, elevation);
-    legPhase += phaseChange / 10;
+    legPhase += FpsCoefficient2(phaseChange / 10);
+    // FPS_DEBUG("phaseChange = " << phaseChange << ", legPhase = " << legPhase << ", legPhase%FIX1 = " << legPhase%FIX1 << "\n");
 
     for (i = 0; i < 2; i++) {
         Fixed moveRadius;
@@ -515,13 +552,16 @@ void CWalkerActor::MoveLegs() {
         RayTest(&legSensor, kSolidBit);
 
         if (legSensor.distance < -speedLimit) {
-            speedLimit = -legSensor.distance;
+            // don't fpsScale the comparison... this helps with bounce but doesn't hurt gravity
+            speedLimit = -legSensor.distance * itsGame->fpsScale;
         }
 
         tempZ = legSensor.origin[1] - legSensor.distance;
 
         if (tempZ > targetHeight)
             targetHeight = tempZ;
+
+        // FPS_DEBUG("ls.origin[1] = " << legSensor.origin[1] << ", ls.distance = " << legSensor.distance << ", targetHeight = " << targetHeight << "\n");
 
         if (tempZ + FIX3(100) >= location[1]) {
             tractionFlag = true;
@@ -581,25 +621,40 @@ void CWalkerActor::TractionControl() {
     Fixed bounceTarget;
     Fixed adjustedGravity;
 
+    // FPS_DEBUG("\nCWalkerActor: frameNumber = " << itsGame->frameNumber << "\n");
+    // FPS_DEBUG("TractionControl, location = " << FormatVector(location, 3) << ", speed = " << FormatVector(speed, 3) << "\n");
+
     DoStandingTouches();
 
-    motorFriction = elevation - BESTSPEEDHEIGHT;
-    if (motorFriction < 0)
-        motorFriction = -motorFriction;
-    motorFriction = baseFriction - (motorFriction >> 2);
+    // the bigger the crouch, the more the friction, which slows down walking
+    classicMotorFriction = baseFriction - (abs(elevation - BESTSPEEDHEIGHT) / 4);
 
     adjustedGravity = FMul(FIX3(120), itsGame->gravityRatio);
-    speed[1] -= adjustedGravity;
+    // FPS_DEBUG("   adjustedGravity = " << adjustedGravity);
 
     bounceTarget = FMul(absAvgSpeed, (0x4000 - (legPhase & 0x7FFF)) >> 2);
+    // FPS_DEBUG(", bounceTarget1 = " << bounceTarget << ", targetHeight = " << targetHeight << "\n");
+
     if (bounceTarget > 0)
         bounceTarget = -bounceTarget;
     bounceTarget += targetHeight;
+    // FPS_DEBUG(", bounceTarget2 = " << bounceTarget);
 
-    extraHeight = bounceTarget + adjustedGravity * 2; // FIX3(120)*2;
+    // is this adjustedGravity*2 because we already added adjustedGravity to downward speed?
+    extraHeight = (bounceTarget + (adjustedGravity * 2)); // FIX3(120)*2;
+    // FPS_DEBUG(", extraHeight = " << extraHeight << "\n");
 
     if (!jumpFlag && location[1] < extraHeight) {
-        speed[1] = ((bounceTarget - location[1]) >> 1) + (speed[1] >> 1);
+        // bouncing logic
+        Fixed scale1, scale2;
+        FpsCoefficients(FIX(0.5), FIX(0.5), &scale1, &scale2);
+        speed[1] = FMul(speed[1], scale1) + FMul((bounceTarget - location[1] - adjustedGravity), scale2);
+        // FPS_DEBUG("  bounce speed[1] = " << speed[1] << "\n");
+        // speed[1] = ((bounceTarget - location[1]) >> 1) + ((speed[1] - adjustedGravity) >> 1);
+    } else {
+        speed[1] = speed[1] - FpsCoefficient2(adjustedGravity);
+        // FPS_DEBUG("  NOT bouncing, speed[1] = " << speed[1] << "\n");
+        // speed[1] = speed[1] - adjustedGravity;
     }
 
     if (speed[1] < 0)
@@ -639,16 +694,38 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
         }
 
         if (TESTFUNC(kfuJump, ft->down)) {
-            crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
+            Fixed scale1, scale2;
+            FpsCoefficients(FIX1 - (FIX1 >> 3), FIX1 >> 3, &scale1, &scale2);
+            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
+            // crouch += (stance - crouch - MINHEADHEIGHT) >> 3;
+            FPS_DEBUG("*** kfuJump DOWN, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
         } else if (TESTFUNC(kfuJump, ft->held)) {
-            crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
+            // often when holding the jump key both 'held' and 'down' test true so check 'held' first
+            Fixed scale1, scale2;
+            FpsCoefficients(FIX1 - (FIX1 >> 2), FIX1 >> 2, &scale1, &scale2);
+            crouch = FMul(crouch, scale1) + FMul(stance - MINHEADHEIGHT, scale2);
+            // crouch += (stance - crouch - MINHEADHEIGHT) >> 2;
+            FPS_DEBUG("*** kfuJump HELD, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
         } else {
-            crouch >>= 1;
+            if (TESTFUNC(kfuJump, ft->up)) {
+                // with impending regular jump, drop value in half regardless of frame rate
+                crouch >>= 1;
+            } else {
+                crouch = FMul(crouch, FpsCoefficient1(FIX1 >> 1));
+            }
+            if (crouch > 1000) {
+                FPS_DEBUG("*** kfuJump OFF, fn=" << itsGame->frameNumber << ", crouch = " << crouch << "\n");
+            }
         }
 
         if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
+            FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", crouch = " << crouch << ", initial speed = " << speed[1] << std::endl);
             speed[1] >>= 1;
+            // it's an impulse power up so don't scale the jump
             speed[1] += FMulDivNZ((crouch >> 1) + jumpBasePower, baseMass, GetTotalMass());
+            // but do a small gravity correction for high fps so that it's not always on the high side of the curve
+            speed[1] -= FpsOffset(FMul(FIX3(120), itsGame->gravityRatio));
+            FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", jumpBasePower = " << jumpBasePower << ", baseMass = " << baseMass << ", totalMass = " << GetTotalMass() << ", jump speed = " << speed[1] << std::endl);
             jumpFlag = true;
         }
     }
@@ -684,7 +761,6 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
     if (itsGame->frameNumber == 0) {
         short hullRes;
         HullConfigRecord hull;
-        Handle hullHandle;
 
         hullRes = config->hullType;
         if (hullRes < 0 || hullRes > 2)
@@ -692,27 +768,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = ReadLongVar(iFirstHull + hullRes);
 
-        hullHandle = GetResource('HULL', hullRes);
-        if (hullHandle == NULL)
-            hullHandle = GetResource('HULL', 129);
-
-        // TODO: good candidate for JSON
-        hull = **(HullConfigRecord **)hullHandle;
-        hull.hullBSP = ntohs(hull.hullBSP);
-        hull.maxMissiles = ntohs(hull.maxMissiles);
-        hull.maxGrenades = ntohs(hull.maxGrenades);
-        hull.maxBoosters = ntohs(hull.maxBoosters);
-        hull.mass = ntohl(hull.mass);
-        hull.energyRatio = ntohl(hull.energyRatio);
-        hull.energyChargeRatio = ntohl(hull.energyChargeRatio);
-        hull.shieldsRatio = ntohl(hull.shieldsRatio);
-        hull.shieldsChargeRatio = ntohl(hull.shieldsChargeRatio);
-        hull.minShotRatio = ntohl(hull.minShotRatio);
-        hull.maxShotRatio = ntohl(hull.maxShotRatio);
-        hull.shotChargeRatio = ntohl(hull.shotChargeRatio);
-        hull.rideHeight = ntohl(hull.rideHeight);
-        hull.accelerationRatio = ntohl(hull.accelerationRatio);
-        hull.jumpPowerRatio = ntohl(hull.jumpPowerRatio);
+        LoadHullFromSetJSON(&hull, hullRes);
 
         hullRes = hull.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);
@@ -720,10 +776,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
-        viewPortPart->usesPrivateHither = true;
-        // set magic value to turn on backface culling
-        // for this part (so we can see through it with the camera)
-        viewPortPart->hither = FIX3(101);
+        viewPortPart->userFlags |= CBSPUserFlags::kCullBackfaces;
         viewPortPart->ReplaceColor(kMarkerColor, longTeamColor);
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
@@ -746,22 +799,19 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
             grenadeLimit = hull.maxGrenades;
 
         maxShields = FMul(maxShields, hull.shieldsRatio);
-        shieldRegen = FMul(shieldRegen, hull.shieldsChargeRatio);
+        classicShieldRegen = FMul(classicShieldRegen, hull.shieldsChargeRatio);
         shields = maxShields;
 
         maxEnergy = FMul(maxEnergy, hull.energyRatio);
         energy = maxEnergy;
-        generatorPower = FMul(generatorPower, hull.energyChargeRatio);
+        classicGeneratorPower = FMul(classicGeneratorPower, hull.energyChargeRatio);
 
-        chargeGunPerFrame = FMul(chargeGunPerFrame, hull.shotChargeRatio);
+        classicChargeGunPerFrame = FMul(classicChargeGunPerFrame, hull.shotChargeRatio);
         activeGunEnergy = FMul(activeGunEnergy, hull.minShotRatio);
         fullGunEnergy = FMul(fullGunEnergy, hull.maxShotRatio);
 
         maxAcceleration = FMul(maxAcceleration, hull.accelerationRatio);
         jumpBasePower = FMul(jumpBasePower, hull.jumpPowerRatio);
-        if (hullHandle) {
-            ReleaseResource(hullHandle);
-        }
 
         gunEnergy[0] = fullGunEnergy;
         gunEnergy[1] = fullGunEnergy;

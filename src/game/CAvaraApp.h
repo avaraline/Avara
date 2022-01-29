@@ -40,8 +40,7 @@ public:
     virtual void LevelReset() = 0;
     virtual long Number(const std::string name) = 0;
     virtual bool Boolean(const std::string name) = 0;
-    virtual OSErr LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) = 0;
-    virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) = 0;
+    virtual OSErr LoadLevel(std::string set, std::string leveltag, CPlayerManager *sendingPlayer) = 0;
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) = 0;
     virtual void NotifyUser() = 0;
     virtual json Get(const std::string name) = 0;
@@ -51,7 +50,7 @@ public:
     virtual CNetManager* GetNet() = 0;
     virtual void SetNet(CNetManager*) = 0;
     virtual SDL_Window* sdlWindow() = 0;
-    virtual void StringLine(StringPtr theString, short align) = 0;
+    virtual void StringLine(std::string theString, short align) = 0;
     virtual CAvaraGame* GetGame() = 0;
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
@@ -64,6 +63,10 @@ private:
 public:
 
     std::deque<std::string> messageLines;
+
+    Fixed overhead[3], extent[6];
+    Fixed previewAngle, previewRadius;
+    bool animatePreview;
 
     CAvaraAppImpl();
     ~CAvaraAppImpl();
@@ -83,9 +86,7 @@ public:
     virtual void Done() override;
 
     virtual bool handleSDLEvent(SDL_Event &event) override;
-    virtual void drawAll();
-    OSErr LoadSVGLevel(std::string set, OSType theLevel) override;
-    OSErr LoadLevel(std::string set, OSType theLevel, CPlayerManager *sendingPlayer) override;
+    OSErr LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) override;
     void NotifyUser() override;
     virtual void AddMessageLine(std::string line) override;
     virtual void GameStarted(std::string set, std::string level) override;
@@ -99,7 +100,7 @@ public:
     virtual void LevelReset() override;
     virtual void ParamLine(short index, short align, StringPtr param1, StringPtr param2) override;
     virtual void StartFrame(long frameNum) override;
-    virtual void StringLine(StringPtr theString, short align) override;
+    virtual void StringLine(std::string theString, short align) override;
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) override;
     virtual void SetNet(CNetManager*) override;
     virtual CNetManager* GetNet() override;

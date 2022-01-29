@@ -1,0 +1,111 @@
+<map>
+  <set designer="Rickton &lt;GameTaylor@aol.com&gt;" information="A very fun slew of objects. Try it, you'll like it. Oh yeah, stay out of the way of the battling heads. ''Shrub'' and ''iMac'' shapes by Plastic Chicken. Sounds: ''Buzz'' is from the Windows Klik & Play demo (I think!) ''Boing'' is from ''Besirkir fury.''" />
+  <Wall fill="#0000ee" frame="#000000" x="38.4375" z="33.75" w="9.375" d="5" h="3.375" />
+  <Wall fill="#aa0000" frame="#000000" x="46.5625" z="40.9375" w="5.625" d="5.625" h="3.75" />
+  <SkyColor fill="#110000" frame="#ee0000" />
+  <GroundColor fill="#110000" />
+  <Incarnator y="10" cx="45" cz="16.25" angle="45" />
+  <set wallHeight="10" />
+  <Wall fill="#9900ff" frame="#110000" x="30.625" z="28.125" w="3.75" d="3.75" h="0" />
+  <Hologram shape="bspW1x1" y="0" roll="0" fill="#009900" frame="#110000" cx="44.375" cz="22.5" angle="45" />
+  <Ramp y="0" deltaY="5" thickness="0" fill="#ffffff" frame="#110000" x="50.3125" z="30.625" w="6.875" d="3.75" h="0" angle="45" />
+  <Ramp y="5" deltaY="0" thickness="0" fill="#ffffff" frame="#110000" x="50.3125" z="26.875" w="6.875" d="3.75" h="0" angle="45" />
+  <Ramp y="10" deltaY="0" thickness="0" fill="#ffffff" frame="#000000" x="31.25" z="28.125" w="6.25" d="6.25" h="0" angle="45" />
+  <Mine fill="#66cc00" frame="#000000" cx="36.25" cz="43.125" angle="45" />
+  <Wall fill="#ffff00" frame="#000000" x="59.0625" z="35.625" w="4.375" d="5" h="3" />
+  <Mine fill="#dd0000" frame="#000000" cx="33.75" cz="37.5" angle="45" />
+  <Mine y="3.3" fill="#0000bb" frame="#000000" cx="58.75" cz="36.875" angle="45" />
+  <Mine fill="#ff9900" frame="#000000" cx="44.375" cz="21.875" angle="45" />
+  <Solid shape="bspMushroom" fill="#0000bb" frame="#ee0000" cx="55.625" cz="33.125" angle="45" />
+  <Solid shape="bspTree" fill="#0000bb" frame="#ee0000" cx="55.625" cz="33.125" angle="45" />
+  <Solid y="3.3" shape="bspMushroom" fill="#990066" frame="#3366cc" cx="34.375" cz="34.375" angle="45" />
+  <Mine fill="#0033cc" frame="#110000" cx="40.625" cz="39.375" angle="45" />
+  <Solid y="10" shape="bspMushroom" fill="#00ff00" frame="#9933ff" cx="28.125" cz="31.25" angle="45" />
+  <unique vars="mS mT" />
+  <And in="@start" out="mS" />
+  <Timer in="mT" out="mS" wait="150" />
+  <Goody shape="bspMissile" y="4" speed="3" missiles="2" start="mS" out="mT" fill="#000000" frame="#000000" cx="60" cz="35" angle="225" />
+  <unique vars="gS gT" />
+  <And in="@start" out="gS" />
+  <Timer in="gT" out="gS" wait="150" />
+  <Goody shape="bspGrenade" y="6" speed="3" grenades="2" start="gS" out="gT" fill="#000000" frame="#000000" cx="50" cz="26.25" angle="225" />
+  <Teleporter group="-1" y="-30" activeRange="25 * 5" deadRange="18 * 5" destGroup="@center" shape="0" fill="#000000" frame="#000000" cx="46.25" cz="35" angle="225" />
+  <Teleporter y="30" shape="0" group="@center" fill="#000000" frame="#000000" cx="45" cz="36.25" angle="45" />
+  <Teleporter group="g1" destGroup="g1" y="15" fill="#007700" frame="#000000" cx="30" cz="29.375" angle="45" />
+  <Teleporter group="g1" destGroup="g1" fill="#007700" frame="#000000" cx="36.875" cz="29.375" angle="45" />
+  <Goal y="5" deltaY="0" fill="#444444" frame="#000000" cx="45.625" cz="42.5" angle="45" />
+  <Ball y="100" fill="#444444" frame="#000000" cx="38.125" cz="34.375" angle="45" />
+  <set gravity="0.5" />
+  <Incarnator y="30" cx="31.25" cz="28.75" angle="45" />
+  <Incarnator y="10" cx="64.375" cz="48.125" angle="45" />
+  <Solid shape="200" fill="#00dd00" frame="#660000" cx="34.375" cz="40.625" angle="45" />
+  <Solid shape="200" fill="#66cc99" frame="#333399" cx="56.25" cz="43.125" angle="225" />
+  <Mine y="5" fill="#66cc99" frame="#333399" cx="50.625" cz="27.5" angle="45" />
+  <set wallHeight="0" />
+  <Wall fill="#0000ff" frame="#000000" x="65.3125" z="47.1875" w="4.375" d="4.375" h="0" />
+  <Field start="@Boing" stop="@Shut" deltaY="0.5" fill="#ffffff" frame="#000000" x="59.0625" z="35.625" w="4.375" d="5" h="3" cx="50.625" cz="27.5" angle="45" />
+  <Area enter="@Boing" exit="@Shut" cx="65.3125" cz="47.1875" r="1.5625" />
+  <Dome fill="#555555" frame="#000000" cx="43.75" cz="46.25" r="1.875" angle="0" quarters="4" />
+  <Sound sound="1002" start="@Boing" isAmbient="false" isPlaced="true" restart="true" volume="100" cx="15.625" cz="23.75" angle="45" />
+  <Dome fill="#555555" frame="#000000" cx="15" cz="23.125" r="1.875" angle="0" quarters="4" />
+  <Guard shape="bspHullMedium" watch="robotMask" y="2.2" freq="5" shield="-1" hitScore="0" speed="100" hitSound="-1" fill="#ffff00" frame="#000000" cx="15.625" cz="23.75" angle="315" />
+  <Guard shape="bspHullMedium" watch="robotMask" y="2.2" freq="5" shield="-1" hitScore="0" speed="100" hitSound="-1" fill="#ee0000" frame="#000000" cx="43.125" cz="45.625" angle="135" />
+  <Solid shape="bspHullMedium" roll="180" fill="#777777" frame="#000000" cx="20.625" cz="28.125" angle="135" />
+  <Solid shape="bspHullLight" roll="130" fill="#777777" frame="#000000" cx="28.75" cz="38.125" angle="135" />
+  <Mine fill="#66ccff" frame="#000000" cx="37.5" cz="28.75" angle="225" />
+  <Ball shape="128" canGlow="true" hitSound="300" ejectSound="300" y="100" fill="#888888" frame="#000000" cx="67.5" cz="38.125" angle="45" />
+  <Ramp deltaY="5" fill="#6699cc" frame="#000000" x="93.75" z="35.625" w="11.25" d="3.75" h="0" angle="225" />
+  <Ramp deltaY="5" y="5" fill="#6699cc" frame="#000000" x="93.75" z="39.375" w="11.25" d="3.75" h="0" angle="225" />
+  <Ramp deltaY="5" fill="#6699cc" frame="#000000" x="93.75" z="53.75" w="11.25" d="3.75" h="0" angle="45" />
+  <Ramp deltaY="5" y="5" fill="#6699cc" frame="#000000" x="93.75" z="50" w="11.25" d="3.75" h="0" angle="45" />
+  <set wallHeight="0.3" />
+  <Wall fill="#6699cc" frame="#000000" x="93.75" z="44.6875" w="11.25" d="6.875" h="0" y="10" />
+  <set wallHeight="10" />
+  <Wall fill="#6699cc" frame="#000000" x="87.8125" z="44.6875" w="0.625" d="21.875" h="0" y="0" />
+  <Wall fill="#6699cc" frame="#000000" x="99.6875" z="44.6875" w="0.625" d="21.875" h="0" />
+  <Mine y="10.3" fill="#00cc66" frame="#000000" cx="88.125" cz="45" angle="45" />
+  <Mine y="10.3" fill="#330033" frame="#000000" cx="97.5" cz="44.375" angle="45" />
+  <Mine y="10.3" fill="#330033" frame="#000000" cx="97.5" cz="44.375" angle="45" />
+  <Mine y="10.3" fill="#330033" frame="#000000" cx="97.5" cz="44.375" angle="45" />
+  <unique vars="aS aT" />
+  <And in="@start" out="aS" />
+  <Goody shape="bspAvaraA" missiles="2" grenades="2" boostTime="125" y="11.5" speed="25" start="aS" out="aT" fill="#0033ff" frame="#000000" cx="93.125" cz="45.625" angle="45" />
+  <Timer in="aT" out="aS" wait="300" />
+  <Hologram shape="bspCrack" scale="3" isAmbient="true" fill="#ffff00" frame="#000000" cx="78.125" cz="40" angle="135" />
+  <set wallHeight="0" />
+  <Door2 shape="bspHullMedium" yaw="100" scale="5" open="@up" close="@down" deltaY="15" speed="50" fill="#cc33cc" frame="#000000" cx="88.75" cz="26.25" angle="45" />
+  <Switch shape="bspSwitchOff" altShape="shape + 1" in.0="@down" in.1="@up" out.0="@down" out.1="@up" fill="#009999" frame="#000000" cx="99.375" cz="30.625" angle="45" />
+  <set wallHeight="0" />
+  <Wall fill="#33cc66" frame="#000000" x="89.6875" z="16.5625" w="4.375" d="14.375" h="0" y="15" />
+  <Wall fill="#33cc66" frame="#000000" x="84.6875" z="15" w="5.625" d="3.75" h="0" y="15" />
+  <Wall fill="#33cc66" frame="#000000" x="94.6875" z="15" w="5.625" d="3.75" h="0" y="15" />
+  <unique vars="gs2 gt2" />
+  <And in="@start" out="gs2" />
+  <Goody shape="bspGrenade" grenades="3" missiles="0" start="gs2" out="gt2" y="17" speed="20" fill="#3333ff" frame="#000000" cx="106.25" cz="7.5" angle="45" />
+  <Timer in="gt2" out="gs2" wait="157" />
+  <Wall fill="#33cc66" frame="#000000" x="90" z="6.5625" w="16.25" d="5.625" h="0" y="15" />
+  <Wall fill="#33cc66" frame="#000000" x="80.3125" z="12.1875" w="3.125" d="9.375" h="0" y="15" />
+  <Switch y="17" shape="bspSwitchOff" altShape="shape + 1" in.0="@down" in.1="@up" out.0="@down" out.1="@up" fill="#00cccc" frame="#000000" cx="91.875" cz="18.75" angle="45" />
+  <Wall fill="#33cc66" frame="#000000" x="98.4375" z="11.25" w="13.125" d="3.75" h="0" y="15" />
+  <Ramp deltaY="3" y="15" fill="#33cc66" frame="#000000" x="107.1875" z="11.25" w="4.375" d="3.75" h="0" angle="135" />
+  <set wallHeight="3" />
+  <Wall fill="#33cc66" frame="#000000" x="111.5625" z="11.25" w="4.375" d="3.75" h="0" y="15" />
+  <Teleporter group="g1" destGroup="g1" y="23" fill="#007700" frame="#000000" cx="110.625" cz="12.5" angle="45" />
+  <Mine y="15.2" fill="#66ff99" frame="#3366ff" cx="92.5" cz="8.75" angle="45" />
+  <set wallHeight="0" />
+  <Wall fill="#33cc66" frame="#000000" x="103.125" z="6.875" w="2.5" d="5" h="0" y="15" />
+  <Wall fill="#33cc66" frame="#000000" x="102.8125" z="19.6875" w="3.125" d="13.125" h="0" y="15" />
+  <Wall fill="#33cc66" frame="#000000" x="98.4375" z="22.8125" w="5.625" d="5.625" h="0" y="15" />
+  <unique vars="ms2 mt2" />
+  <And in="@start" out="ms2" />
+  <Goody shape="bspMissile" grenades="0" missiles="3" start="ms2" out="mt2" y="17" speed="17" fill="#3399cc" frame="#000000" cx="97.5" cz="23.75" angle="45" />
+  <Wall fill="#33cc66" frame="#000000" x="103.4375" z="1.875" w="24.375" d="3.75" h="0" y="15" />
+  <Timer in="mt2" out="ms2" wait="132" />
+  <Mine y="18.1" fill="#33cc66" frame="#000000" cx="112.5" cz="10.625" angle="225" />
+  <Mine y="15.3" fill="#66ff00" frame="#000000" cx="98.75" cz="21.25" angle="135" />
+  <set wallHeight="5" />
+  <Wall fill="#33cc66" frame="#000000" x="84.6875" z="11.25" w="5.625" d="3.75" h="0" y="15" />
+  <set wallHeight="0" />
+  <Wall fill="#33cc66" frame="#000000" x="112.1875" z="7.1875" w="15.625" d="3.125" h="0" y="15" />
+  <Incarnator y="50" cx="100" cz="1.875" angle="45" />
+</map>

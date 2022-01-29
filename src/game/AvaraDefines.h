@@ -12,18 +12,6 @@
 #define kMaxAvaraPlayers 8
 #define kMaxTeamColors 8
 
-#define kNeutralTeamColor 0x00ffffff
-#define kGreenTeamColor 0x00006600
-#define kYellowTeamColor 0x00cccc00
-#define kRedTeamColor 0x00cc0000
-#define kPinkTeamColor 0x00cc0099
-#define kPurpleTeamColor 0x009900cc
-#define kBlueTeamColor 0x000099cc
-#define kOrangeTeamColor 0x00FFA500
-#define kLimeTeamColor 0x0089C4C7
-#define kSpecialBlackColor 0x00303030
-#define kSpecialWhiteColor 0x00e0e0e0
-
 #define STANDARDMISSILERANGE FIX(100)
 #define LONGYON FIX(180)
 
@@ -34,6 +22,7 @@ enum { kSmallSliver, kMediumSliver, kLargeSliver };
 #define kDefaultFriction FIX3(100)
 
 #define CLASSICFRAMETIME 64
+#define GAMETICKINTERVAL 16 
 
 // From CInfoPanel
 enum { rightAlign = -1, leftAlign, centerAlign };

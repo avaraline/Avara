@@ -1,0 +1,456 @@
+<map>
+  <set wallHeight="0" />
+  <Wall fill="#000000" frame="#000000" x="122.43055555555557" z="151.80555555555557" w="120" d="5" h="0" />
+  <set timeLimit="300" missilePower="2" grenadePower="2" missileAcceleration="0.2" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="25" kSnText="snTextBlip" kTextVolume="0.3" gameLength="4685" />
+  <Timer in="@start" out="@gameEnds" wait="gameLength" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" />
+  <set wallHeight="0" />
+  <Wall fill="#000000" frame="#000000" x="184.93055555555557" z="89.30555555555557" w="5" d="130" h="0" />
+  <set wallHeight="0" />
+  <Wall fill="#000000" frame="#000000" x="122.43055555555557" z="26.805555555555557" w="120" d="5" h="0" />
+  <set wallHeight="0" />
+  <Wall fill="#000000" frame="#000000" x="59.93055555555556" z="89.30555555555557" w="5" d="130" h="0" />
+  <Incarnator y="10" cx="172.43055555555557" cz="105.55555555555556" angle="120" />
+  <Teleporter y="15" group="@blue3" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="172.43055555555557" cz="105.55555555555556" angle="120" />
+  <Teleporter y="15" group="@red3" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="172.43055555555557" cz="105.55555555555556" angle="120" />
+  <Teleporter y="15" group="@yellow3" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="172.43055555555557" cz="105.55555555555556" angle="120" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="172.43055555555557" cz="105.55555555555556" angle="120" />
+  <Incarnator y="10" cx="166.80555555555557" cz="117.43055555555556" angle="120" />
+  <Teleporter y="15" group="@blue2" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="166.80555555555557" cz="117.43055555555556" angle="120" />
+  <Teleporter y="15" group="@red2" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="166.80555555555557" cz="117.43055555555556" angle="120" />
+  <Teleporter y="15" group="@yellow2" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="166.80555555555557" cz="117.43055555555556" angle="120" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="166.80555555555557" cz="117.43055555555556" angle="120" />
+  <Incarnator y="10" cx="107.98611111111111" cz="38.68055555555556" angle="330" />
+  <Teleporter y="15" group="@blue2" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="107.98611111111111" cz="38.68055555555556" angle="330" />
+  <Teleporter y="15" group="@red2" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="107.98611111111111" cz="38.68055555555556" angle="330" />
+  <Teleporter y="15" group="@yellow2" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="107.98611111111111" cz="38.68055555555556" angle="330" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="107.98611111111111" cz="38.68055555555556" angle="330" />
+  <And in="@start" out="@time" />
+  <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" out="@time" />
+  <Timer in="@time" out="@show" wait="150" />
+  <Distributor in="@show" out.0="@zero" out.1="@one" out.2="@two" out.3="@three" out.4="@four" />
+  <Teleporter y="15" group="@blue4" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="173.68055555555557" cz="78.68055555555556" angle="90" />
+  <Teleporter y="15" group="@red4" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="173.68055555555557" cz="78.68055555555556" angle="90" />
+  <Teleporter y="15" group="@yellow4" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="173.68055555555557" cz="78.68055555555556" angle="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="173.68055555555557" cz="78.68055555555556" angle="90" />
+  <Incarnator y="10" cx="164.93055555555557" cz="58.611111111111114" angle="35" />
+  <Teleporter y="15" group="@blue2" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="164.93055555555557" cz="58.611111111111114" angle="35" />
+  <Teleporter y="15" group="@red2" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="164.93055555555557" cz="58.611111111111114" angle="35" />
+  <Teleporter y="15" group="@yellow2" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="164.93055555555557" cz="58.611111111111114" angle="35" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="164.93055555555557" cz="58.611111111111114" angle="35" />
+  <Incarnator y="10" cx="171.18055555555557" cz="69.23611111111111" angle="35" />
+  <Teleporter y="15" group="@blue1" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="171.18055555555557" cz="69.23611111111111" angle="35" />
+  <Teleporter y="15" group="@red1" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="171.18055555555557" cz="69.23611111111111" angle="35" />
+  <Teleporter y="15" group="@yellow1" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="171.18055555555557" cz="69.23611111111111" angle="35" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="171.18055555555557" cz="69.23611111111111" angle="35" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="8" cx="82.43055555555556" cz="129.23611111111111" angle="225" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="8" cx="87.43055555555556" cz="134.23611111111111" angle="225" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="8" cx="77.43055555555556" cz="124.23611111111111" angle="225" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="122.46527777777779" cz="36.736111111111114" angle="0" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="129.96527777777777" cz="36.736111111111114" angle="0" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="114.96527777777777" cz="36.736111111111114" angle="0" />
+  <unique vars="mShow1 mTaken1 mSwitch mShow2" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow1" out="mSwitch" fill="#ff6600" frame="#000000" cx="122.25694444444446" cz="69.27083333333334" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow2" out="mTaken1" fill="#ff6600" frame="#000000" cx="122.25694444444446" cz="69.27083333333334" angle="225" />
+  <unique vars="mShow1 mTaken1 mSwitch mShow2" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow1" out="mSwitch" fill="#ff6600" frame="#000000" cx="122.25694444444446" cz="109.27083333333334" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow2" out="mTaken1" fill="#ff6600" frame="#000000" cx="122.25694444444446" cz="109.27083333333334" angle="225" />
+  <Counter in="@add1Red" n="1" out="@redAt1" restart="false" />
+  <Counter in="@add1Red" n="2" out="@redAt2" restart="false" />
+  <Counter in="@add1Red" n="3" out="@redAt3" restart="false" />
+  <Counter in="@add1Red" n="4" out="@redAt4" restart="false" />
+  <Counter in="@add1Red" n="5" out="@redAt5" restart="false" />
+  <Counter in="@add1Red" n="6" out="@redAt6" restart="false" />
+  <Counter in="@add1Red" n="7" out="@redAt7" restart="false" />
+  <Counter in="@add1Red" n="8" out="@redAt8" restart="false" />
+  <Counter in="@add1Red" n="9" out="@redAt9" restart="false" />
+  <Counter in="@add1Red" n="10" out="@redAt10" restart="false" />
+  <Counter in="@add1Red" n="11" out="@redAt11" restart="false" />
+  <Counter in="@add1Red" n="12" out="@redAt12" restart="false" />
+  <Counter in="@add1Red" n="13" out="@redAt13" restart="false" />
+  <Counter in="@add1Red" n="14" out="@redAt14" restart="false" />
+  <Counter in="@add1Red" n="15" out="@redAt15" restart="false" />
+  <Counter in="@add1Red" n="16" out="@redAt16" restart="false" />
+  <Counter in="@add1Red" n="17" out="@redAt17" restart="false" />
+  <Counter in="@add1Red" n="18" out="@redAt18" restart="false" />
+  <Counter in="@add1Red" n="19" out="@redAt19" restart="false" />
+  <Counter in="@add1Red" n="20" out="@redAt20" restart="false" />
+  <Counter in="@add1Red" n="21" out="@redAt21" restart="false" />
+  <Counter in="@add1Red" n="22" out="@redAt22" restart="false" />
+  <Counter in="@add1Red" n="23" out="@redAt23" restart="false" />
+  <Counter in="@add1Red" n="24" out="@redAt24" restart="false" />
+  <Counter in="@add1Red" n="kTeamScore1" out="@redWins" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt1" showEveryone="true" mask="T3" text="Red team has 1 point!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt2" showEveryone="true" mask="T3" text="Red team has 2 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt3" showEveryone="true" mask="T3" text="Red team has 3 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt4" showEveryone="true" mask="T3" text="Red team has 4 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt5" showEveryone="true" mask="T3" text="Red team has 5 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt6" showEveryone="true" mask="T3" text="Red team has 6 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt7" showEveryone="true" mask="T3" text="Red team has 7 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt8" showEveryone="true" mask="T3" text="Red team has 8 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt9" showEveryone="true" mask="T3" text="Red team has 9 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt10" showEveryone="true" mask="T3" text="Red team has 10 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt11" showEveryone="true" mask="T3" text="Red team has 11 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt12" showEveryone="true" mask="T3" text="Red team has 12 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt13" showEveryone="true" mask="T3" text="Red team has 13 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt14" showEveryone="true" mask="T3" text="Red team has 14 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt15" showEveryone="true" mask="T3" text="Red team has 15 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt16" showEveryone="true" mask="T3" text="Red team has 16 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt17" showEveryone="true" mask="T3" text="Red team has 17 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt18" showEveryone="true" mask="T3" text="Red team has 18 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt19" showEveryone="true" mask="T3" text="Red team has 19 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt20" showEveryone="true" mask="T3" text="Red team has 20 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt21" showEveryone="true" mask="T3" text="Red team has 21 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt22" showEveryone="true" mask="T3" text="Red team has 22 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt23" showEveryone="true" mask="T3" text="Red team has 23 points!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redAt24" showEveryone="true" text="Red team has only 1 point to go!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Base in="@badHectors" out="@teleportTheRest" cx="121.45833333333334" cz="580.2777777777778" />
+  <Text in="@badHectors" showEveryone="true" text="HECTORS must be red, yellow or blue." sound="0" cx="121.45833333333334" cz="580.2777777777778" r="2.569444444444457" />
+  <Goody out="@badHectors" shape="bspW3x3" fill="#ff0000" frame="#000000" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="5" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="5" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="5" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="1" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="1" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <Walker team="1" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="225" />
+  <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Special thanks to Taz! and my Geezer friends. Teams are red, yellow or blue.  Up to three people on a team.  Enter the star teleporter as many times as possible.  One point per entry - no points for kills.  5 minutes or 25 points." />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff0000" frame="#000000" cx="143.40277777777777" cz="535.9722222222223" angle="225" />
+  <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" />
+  <Counter in="@add1Yellow" n="1" out="@yellowAt1" restart="false" />
+  <Counter in="@add1Yellow" n="2" out="@yellowAt2" restart="false" />
+  <Counter in="@add1Yellow" n="3" out="@yellowAt3" restart="false" />
+  <Counter in="@add1Yellow" n="4" out="@yellowAt4" restart="false" />
+  <Counter in="@add1Yellow" n="5" out="@yellowAt5" restart="false" />
+  <Counter in="@add1Yellow" n="6" out="@yellowAt6" restart="false" />
+  <Counter in="@add1Yellow" n="7" out="@yellowAt7" restart="false" />
+  <Counter in="@add1Yellow" n="8" out="@yellowAt8" restart="false" />
+  <Counter in="@add1Yellow" n="9" out="@yellowAt9" restart="false" />
+  <Counter in="@add1Yellow" n="10" out="@yellowAt10" restart="false" />
+  <Counter in="@add1Yellow" n="11" out="@yellowAt11" restart="false" />
+  <Counter in="@add1Yellow" n="12" out="@yellowAt12" restart="false" />
+  <Counter in="@add1Yellow" n="13" out="@yellowAt13" restart="false" />
+  <Counter in="@add1Yellow" n="14" out="@yellowAt14" restart="false" />
+  <Counter in="@add1Yellow" n="15" out="@yellowAt15" restart="false" />
+  <Counter in="@add1Yellow" n="16" out="@yellowAt16" restart="false" />
+  <Counter in="@add1Yellow" n="17" out="@yellowAt17" restart="false" />
+  <Counter in="@add1Yellow" n="18" out="@yellowAt18" restart="false" />
+  <Counter in="@add1Yellow" n="19" out="@yellowAt19" restart="false" />
+  <Counter in="@add1Yellow" n="20" out="@yellowAt20" restart="false" />
+  <Counter in="@add1Yellow" n="21" out="@yellowAt21" restart="false" />
+  <Counter in="@add1Yellow" n="22" out="@yellowAt22" restart="false" />
+  <Counter in="@add1Yellow" n="23" out="@yellowAt23" restart="false" />
+  <Counter in="@add1Yellow" n="24" out="@yellowAt24" restart="false" />
+  <Counter in="@add1Yellow" n="kTeamScore1" out="@yellowWins" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt1" showEveryone="true" mask="T2" text="Yellow team has 1 point!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt2" showEveryone="true" mask="T2" text="Yellow team has 2 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt3" showEveryone="true" mask="T2" text="Yellow team has 3 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt4" showEveryone="true" mask="T2" text="Yellow team has 4 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt5" showEveryone="true" mask="T2" text="Yellow team has 5 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt6" showEveryone="true" mask="T2" text="Yellow team has 6 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt7" showEveryone="true" mask="T2" text="Yellow team has 7 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt8" showEveryone="true" mask="T2" text="Yellow team has 8 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt9" showEveryone="true" mask="T2" text="Yellow team has 9 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt10" showEveryone="true" mask="T2" text="Yellow team has 10 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt11" showEveryone="true" mask="T2" text="Yellow team has 11 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt12" showEveryone="true" mask="T2" text="Yellow team has 12 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt13" showEveryone="true" mask="T2" text="Yellow team has 13 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt14" showEveryone="true" mask="T2" text="Yellow team has 14 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt15" showEveryone="true" mask="T2" text="Yellow team has 15 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt16" showEveryone="true" mask="T2" text="Yellow team has 16 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt17" showEveryone="true" mask="T2" text="Yellow team has 17 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt18" showEveryone="true" mask="T2" text="Yellow team has 18 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt19" showEveryone="true" mask="T2" text="Yellow team has 19 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt20" showEveryone="true" mask="T2" text="Yellow team has 20 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt21" showEveryone="true" mask="T2" text="Yellow team has 21 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt22" showEveryone="true" mask="T2" text="Yellow team has 22 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt23" showEveryone="true" mask="T2" text="Yellow team has 23 points!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowAt24" showEveryone="true" text="Yellow team has only 1 point to go!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@yellowWins" showEveryone="true" text="Yellow team wins!" cx="235.1388888888889" cz="478.8888888888889" r="2.569444444444457" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="6" y="8" cx="162.46527777777777" cz="129.23611111111111" angle="145" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="6" y="8" cx="157.46527777777777" cz="134.23611111111111" angle="145" />
+  <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="6" y="8" cx="167.46527777777777" cz="124.23611111111111" angle="145" />
+  <Counter in="@add1Blue" n="1" out="@blueAt1" restart="false" />
+  <Counter in="@add1Blue" n="2" out="@blueAt2" restart="false" />
+  <Counter in="@add1Blue" n="3" out="@blueAt3" restart="false" />
+  <Counter in="@add1Blue" n="4" out="@blueAt4" restart="false" />
+  <Counter in="@add1Blue" n="5" out="@blueAt5" restart="false" />
+  <Counter in="@add1Blue" n="6" out="@blueAt6" restart="false" />
+  <Counter in="@add1Blue" n="7" out="@blueAt7" restart="false" />
+  <Counter in="@add1Blue" n="8" out="@blueAt8" restart="false" />
+  <Counter in="@add1Blue" n="9" out="@blueAt9" restart="false" />
+  <Counter in="@add1Blue" n="10" out="@blueAt10" restart="false" />
+  <Counter in="@add1Blue" n="11" out="@blueAt11" restart="false" />
+  <Counter in="@add1Blue" n="12" out="@blueAt12" restart="false" />
+  <Counter in="@add1Blue" n="13" out="@blueAt13" restart="false" />
+  <Counter in="@add1Blue" n="14" out="@blueAt14" restart="false" />
+  <Counter in="@add1Blue" n="15" out="@blueAt15" restart="false" />
+  <Counter in="@add1Blue" n="16" out="@blueAt16" restart="false" />
+  <Counter in="@add1Blue" n="17" out="@blueAt17" restart="false" />
+  <Counter in="@add1Blue" n="18" out="@blueAt18" restart="false" />
+  <Counter in="@add1Blue" n="19" out="@blueAt19" restart="false" />
+  <Counter in="@add1Blue" n="20" out="@blueAt20" restart="false" />
+  <Counter in="@add1Blue" n="21" out="@blueAt21" restart="false" />
+  <Counter in="@add1Blue" n="22" out="@blueAt22" restart="false" />
+  <Counter in="@add1Blue" n="23" out="@blueAt23" restart="false" />
+  <Counter in="@add1Blue" n="24" out="@blueAt24" restart="false" />
+  <Counter in="@add1Blue" n="kTeamScore1" out="@blueWins" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt1" showEveryone="true" mask="T6" text="Blue team has 1 point!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt2" showEveryone="true" mask="T6" text="Blue team has 2 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt3" showEveryone="true" mask="T6" text="Blue team has 3 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt4" showEveryone="true" mask="T6" text="Blue team has 4 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt5" showEveryone="true" mask="T6" text="Blue team has 5 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt6" showEveryone="true" mask="T6" text="Blue team has 6 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt7" showEveryone="true" mask="T6" text="Blue team has 7 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt8" showEveryone="true" mask="T6" text="Blue team has 8 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt9" showEveryone="true" mask="T6" text="Blue team has 9 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt10" showEveryone="true" mask="T6" text="Blue team has 10 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt11" showEveryone="true" mask="T6" text="Blue team has 11 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt12" showEveryone="true" mask="T6" text="Blue team has 12 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt13" showEveryone="true" mask="T6" text="Blue team has 13 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt14" showEveryone="true" mask="T6" text="Blue team has 14 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt15" showEveryone="true" mask="T6" text="Blue team has 15 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt16" showEveryone="true" mask="T6" text="Blue team has 16 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt17" showEveryone="true" mask="T6" text="Blue team has 17 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt18" showEveryone="true" mask="T6" text="Blue team has 18 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt19" showEveryone="true" mask="T6" text="Blue team has 19 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt20" showEveryone="true" mask="T6" text="Blue team has 20 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt21" showEveryone="true" mask="T6" text="Blue team has 21 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt22" showEveryone="true" mask="T6" text="Blue team has 22 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt23" showEveryone="true" mask="T6" text="Blue team has 23 points!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueAt24" showEveryone="true" text="Blue team has only 1 point to go!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Text sound="kSnText" volume="kTextVolume" in="@blueWins" showEveryone="true" text="Blue team wins!" cx="266.3888888888889" cz="479.5138888888889" r="2.569444444444457" />
+  <Teleporter group="-1" y="-30" activeRange="200" deadRange="175" destGroup="@recenter" shape="0" fill="#0066ff" frame="#000000" cx="122.5" cz="89.375" angle="225" />
+  <Teleporter y="30" shape="0" group="@recenter" fill="#0066ff" frame="#000000" cx="122.5" cz="89.375" angle="225" />
+  <unique vars="mShow1 mTaken1 mSwitch mShow2" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#00ccff" frame="#000000" cx="102.46527777777777" cz="89.27083333333334" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#00ccff" frame="#000000" cx="102.46527777777777" cz="89.27083333333334" angle="225" />
+  <Incarnator y="10" cx="98.68055555555556" cz="136.18055555555557" angle="220" />
+  <Teleporter y="15" group="@blue1" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="98.68055555555556" cz="136.18055555555557" angle="220" />
+  <Teleporter y="15" group="@red1" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="98.68055555555556" cz="136.18055555555557" angle="220" />
+  <Teleporter y="15" group="@yellow1" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="98.68055555555556" cz="136.18055555555557" angle="220" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="98.68055555555556" cz="136.18055555555557" angle="220" />
+  <unique vars="mShow1 mTaken1 mSwitch mShow2" />
+  <And in="@start" out="mShow2" />
+  <Timer in="mTaken1" out="mShow1" wait="150" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#00ccff" frame="#000000" cx="142.46527777777777" cz="89.34027777777777" angle="225" />
+  <Timer in="mSwitch" out="mShow2" wait="150" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#00ccff" frame="#000000" cx="142.46527777777777" cz="89.34027777777777" angle="225" />
+  <Incarnator y="10" cx="137.43055555555557" cz="139.30555555555557" angle="180" />
+  <Teleporter y="15" group="@blue5" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="137.43055555555557" cz="139.30555555555557" angle="180" />
+  <Teleporter y="15" group="@red5" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="137.43055555555557" cz="139.30555555555557" angle="180" />
+  <Teleporter y="15" group="@yellow5" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="137.43055555555557" cz="139.30555555555557" angle="180" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="137.43055555555557" cz="139.30555555555557" angle="180" />
+  <Incarnator y="10" cx="82.43055555555556" cz="54.93055555555556" angle="330" />
+  <Teleporter y="15" group="@blue5" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="82.43055555555556" cz="54.93055555555556" angle="330" />
+  <Teleporter y="15" group="@red5" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="82.43055555555556" cz="54.93055555555556" angle="330" />
+  <Teleporter y="15" group="@yellow5" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="82.43055555555556" cz="54.93055555555556" angle="330" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="82.43055555555556" cz="54.93055555555556" angle="330" />
+  <Incarnator y="10" cx="95.48611111111111" cz="44.30555555555556" angle="330" />
+  <Teleporter y="15" group="@blue3" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="95.48611111111111" cz="44.30555555555556" angle="330" />
+  <Teleporter y="15" group="@red3" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="95.48611111111111" cz="44.30555555555556" angle="330" />
+  <Teleporter y="15" group="@yellow3" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="95.48611111111111" cz="44.30555555555556" angle="330" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="95.48611111111111" cz="44.30555555555556" angle="330" />
+  <Incarnator y="10" cx="147.43055555555557" cz="42.986111111111114" angle="35" />
+  <Teleporter y="15" group="@blue5" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="147.43055555555557" cz="42.986111111111114" angle="35" />
+  <Teleporter y="15" group="@red5" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="147.43055555555557" cz="42.986111111111114" angle="35" />
+  <Teleporter y="15" group="@yellow5" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="147.43055555555557" cz="42.986111111111114" angle="35" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="147.43055555555557" cz="42.986111111111114" angle="35" />
+  <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
+  <Wall fill="#000000" frame="#000000" x="102.43055555555556" z="109.375" w="8.75" d="8.75" h="0" y=".1" />
+  <Incarnator y="10" cx="124.93055555555556" cz="141.80555555555557" angle="180" />
+  <Teleporter y="15" group="@blue3" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="124.93055555555556" cz="141.80555555555557" angle="180" />
+  <Teleporter y="15" group="@red3" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="124.93055555555556" cz="141.80555555555557" angle="180" />
+  <Teleporter y="15" group="@yellow3" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="124.93055555555556" cz="141.80555555555557" angle="180" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="124.93055555555556" cz="141.80555555555557" angle="180" />
+  <Incarnator y="10" cx="87.98611111111111" cz="128.61111111111111" angle="220" />
+  <Teleporter y="15" group="@blue4" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="87.98611111111111" cz="128.61111111111111" angle="220" />
+  <Teleporter y="15" group="@red4" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="87.98611111111111" cz="128.61111111111111" angle="220" />
+  <Teleporter y="15" group="@yellow4" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="87.98611111111111" cz="128.61111111111111" angle="220" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="87.98611111111111" cz="128.61111111111111" angle="220" />
+  <Incarnator y="10" cx="136.18055555555557" cz="38.611111111111114" angle="35" />
+  <Teleporter y="15" group="@blue4" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="136.18055555555557" cz="38.611111111111114" angle="35" />
+  <Teleporter y="15" group="@red4" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="136.18055555555557" cz="38.611111111111114" angle="35" />
+  <Teleporter y="15" group="@yellow4" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="136.18055555555557" cz="38.611111111111114" angle="35" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="136.18055555555557" cz="38.611111111111114" angle="35" />
+  <Incarnator y="10" cx="112.43055555555556" cz="140.55555555555557" angle="180" />
+  <Teleporter y="15" group="@blue2" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="112.43055555555556" cz="140.55555555555557" angle="180" />
+  <Teleporter y="15" group="@red2" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="112.43055555555556" cz="140.55555555555557" angle="180" />
+  <Teleporter y="15" group="@yellow2" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="112.43055555555556" cz="140.55555555555557" angle="180" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="112.43055555555556" cz="140.55555555555557" angle="180" />
+  <Incarnator y="10" cx="74.30555555555556" cz="68.68055555555556" angle="330" />
+  <Teleporter y="15" group="@blue4" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="74.30555555555556" cz="68.68055555555556" angle="330" />
+  <Teleporter y="15" group="@red4" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="74.30555555555556" cz="68.68055555555556" angle="330" />
+  <Teleporter y="15" group="@yellow4" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="74.30555555555556" cz="68.68055555555556" angle="330" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="74.30555555555556" cz="68.68055555555556" angle="330" />
+  <Incarnator y="10" cx="79.23611111111111" cz="119.23611111111111" angle="220" />
+  <Teleporter y="15" group="@blue5" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="79.23611111111111" cz="119.23611111111111" angle="220" />
+  <Teleporter y="15" group="@red5" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="79.23611111111111" cz="119.23611111111111" angle="220" />
+  <Teleporter y="15" group="@yellow5" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="79.23611111111111" cz="119.23611111111111" angle="220" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="79.23611111111111" cz="119.23611111111111" angle="220" />
+  <Incarnator y="10" cx="159.30555555555557" cz="126.80555555555557" angle="120" />
+  <Teleporter y="15" group="@blue1" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="159.30555555555557" cz="126.80555555555557" angle="120" />
+  <Teleporter y="15" group="@red1" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="159.30555555555557" cz="126.80555555555557" angle="120" />
+  <Teleporter y="15" group="@yellow1" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="159.30555555555557" cz="126.80555555555557" angle="120" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="159.30555555555557" cz="126.80555555555557" angle="120" />
+  <Incarnator y="10" cx="156.18055555555557" cz="49.236111111111114" angle="35" />
+  <Teleporter y="15" group="@blue3" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="156.18055555555557" cz="49.236111111111114" angle="35" />
+  <Teleporter y="15" group="@red3" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="156.18055555555557" cz="49.236111111111114" angle="35" />
+  <Teleporter y="15" group="@yellow3" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="156.18055555555557" cz="49.236111111111114" angle="35" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="156.18055555555557" cz="49.236111111111114" angle="35" />
+  <Incarnator y="10" cx="73.61111111111111" cz="107.98611111111111" angle="220" />
+  <Teleporter y="15" group="@blue3" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="73.61111111111111" cz="107.98611111111111" angle="220" />
+  <Teleporter y="15" group="@red3" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="73.61111111111111" cz="107.98611111111111" angle="220" />
+  <Teleporter y="15" group="@yellow3" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="73.61111111111111" cz="107.98611111111111" angle="220" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="73.61111111111111" cz="107.98611111111111" angle="220" />
+  <Incarnator y="10" cx="122.43055555555556" cz="36.80555555555556" angle="0" />
+  <Teleporter y="15" group="@blue1" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="122.43055555555556" cz="36.80555555555556" angle="0" />
+  <Teleporter y="15" group="@red1" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="122.43055555555556" cz="36.80555555555556" angle="0" />
+  <Teleporter y="15" group="@yellow1" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="122.43055555555556" cz="36.80555555555556" angle="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="122.43055555555556" cz="36.80555555555556" angle="0" />
+  <Incarnator y="10" cx="69.93055555555556" cz="82.43055555555556" angle="270" />
+  <Teleporter y="15" group="@blue1" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="69.93055555555556" cz="82.43055555555556" angle="270" />
+  <Teleporter y="15" group="@red1" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="69.93055555555556" cz="82.43055555555556" angle="270" />
+  <Teleporter y="15" group="@yellow1" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="69.93055555555556" cz="82.43055555555556" angle="270" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="69.93055555555556" cz="82.43055555555556" angle="270" />
+  <Incarnator y="10" cx="69.93055555555556" cz="96.73611111111111" angle="240" />
+  <Teleporter y="15" group="@blue2" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="69.93055555555556" cz="96.73611111111111" angle="240" />
+  <Teleporter y="15" group="@red2" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="69.93055555555556" cz="96.73611111111111" angle="240" />
+  <Teleporter y="15" group="@yellow2" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="69.93055555555556" cz="96.73611111111111" angle="240" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="69.93055555555556" cz="96.73611111111111" angle="240" />
+  <Incarnator y="10" cx="174.93055555555557" cz="90.55555555555556" angle="90" />
+  <Teleporter y="15" group="@blue5" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="174.93055555555557" cz="90.55555555555556" angle="90" />
+  <Teleporter y="15" group="@red5" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="174.93055555555557" cz="90.55555555555556" angle="90" />
+  <Teleporter y="15" group="@yellow5" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="174.93055555555557" cz="90.55555555555556" angle="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="174.93055555555557" cz="90.55555555555556" angle="90" />
+  <Incarnator y="10" cx="150.55555555555557" cz="134.30555555555557" angle="160" />
+  <Teleporter y="15" group="@blue4" mask="T6" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="150.55555555555557" cz="134.30555555555557" angle="160" />
+  <Teleporter y="15" group="@red4" mask="T3" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="150.55555555555557" cz="134.30555555555557" angle="160" />
+  <Teleporter y="15" group="@yellow4" mask="T2" shape="0" spin="0" fill="#663399" frame="#ffff00" cx="150.55555555555557" cz="134.30555555555557" angle="160" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="7" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#663399" frame="#ffff00" cx="150.55555555555557" cz="134.30555555555557" angle="160" />
+  <Teleporter shape="bspGroundStar" scale="1.25" activeRange="4" mask="T2" y=".1" speed="2" group="@yellow3" start="@two" stop="@three" out="@add1Yellow" fill="#000077" frame="#000000" cx="102.36111111111111" cz="109.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T3" y=".1" speed="2" group="@red3" start="@two" stop="@three" out="@add1Red" fill="#000077" frame="#000000" cx="102.36111111111111" cz="109.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T6" y=".1" speed="2" group="@blue3" start="@two" stop="@three" out="@add1Blue" fill="#000077" frame="#000000" cx="102.36111111111111" cz="109.30555555555556" angle="225" />
+  <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
+  <Wall fill="#000000" frame="#000000" x="102.43055555555556" z="69.30555555555556" w="8.75" d="8.75" h="0" y=".1" />
+  <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
+  <Wall fill="#000000" frame="#000000" x="142.43055555555557" z="109.375" w="8.75" d="8.75" h="0" y=".1" />
+  <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
+  <Wall fill="#000000" frame="#000000" x="142.43055555555557" z="69.375" w="8.75" d="8.75" h="0" y=".1" />
+  <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
+  <Wall fill="#000000" frame="#000000" x="122.43055555555556" z="89.375" w="8.75" d="8.75" h="0" y=".1" />
+  <Teleporter shape="bspGroundStar" scale="1.25" activeRange="4" mask="T2" y=".1" speed="2" group="@yellow1" start="@zero" stop="@one" out="@add1Yellow" fill="#000077" frame="#000000" cx="122.36111111111111" cz="89.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T3" y=".1" speed="2" group="@red1" start="@zero" stop="@one" out="@add1Red" fill="#000077" frame="#000000" cx="122.36111111111111" cz="89.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T6" y=".1" speed="2" group="@blue1" start="@zero" stop="@one" out="@add1Blue" fill="#000077" frame="#000000" cx="122.36111111111111" cz="89.30555555555556" angle="225" />
+  <Teleporter shape="bspGroundStar" scale="1.25" activeRange="4" mask="T2" y=".1" speed="2" group="@yellow5" start="@four" stop="@zero" out="@add1Yellow" fill="#000077" frame="#440000" cx="102.36111111111111" cz="69.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T3" y=".1" speed="2" group="@red5" start="@four" stop="@zero" out="@add1Red" fill="#000077" frame="#440000" cx="102.36111111111111" cz="69.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T6" y=".1" speed="2" group="@blue5" start="@four" stop="@zero" out="@add1Blue" fill="#000077" frame="#440000" cx="102.36111111111111" cz="69.30555555555556" angle="225" />
+  <Teleporter shape="bspGroundStar" scale="1.25" activeRange="4" mask="T2" y=".1" speed="2" group="@yellow2" start="@one" stop="@two" out="@add1Yellow" fill="#000077" frame="#000000" cx="142.36111111111111" cz="69.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T3" y=".1" speed="2" group="@red2" start="@one" stop="@two" out="@add1Red" fill="#000077" frame="#000000" cx="142.36111111111111" cz="69.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T6" y=".1" speed="2" group="@blue2" start="@one" stop="@two" out="@add1Blue" fill="#000077" frame="#000000" cx="142.36111111111111" cz="69.30555555555556" angle="225" />
+  <Teleporter shape="bspGroundStar" scale="1.25" activeRange="4" mask="T2" y=".1" speed="2" group="@yellow4" start="@three" stop="@four" out="@add1Yellow" fill="#000077" frame="#000000" cx="142.36111111111111" cz="109.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T3" y=".1" speed="2" group="@red4" start="@three" stop="@four" out="@add1Red" fill="#000077" frame="#000000" cx="142.36111111111111" cz="109.30555555555556" angle="225" />
+  <Teleporter shape="0" activeRange="4" mask="T6" y=".1" speed="2" group="@blue4" start="@three" stop="@four" out="@add1Blue" fill="#000077" frame="#000000" cx="142.36111111111111" cz="109.30555555555556" angle="225" />
+  <SkyColor fill="#444444" frame="#770000" />
+  <GroundColor fill="#663300" />
+</map>

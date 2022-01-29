@@ -1,0 +1,102 @@
+<map>
+  <Field deltaY=".06" visible="false" fill="#0099ff" frame="#000000" x="36.80555555555556" z="56.736111111111114" w="20" d="20" h="0" y="2.4" />
+  <Field deltaY=".06" visible="false" fill="#0099ff" frame="#000000" x="36.80555555555556" z="121.80555555555557" w="20" d="20" h="0" y="2.4" />
+  <Field deltaY=".06" visible="false" fill="#0099ff" frame="#000000" x="101.80555555555556" z="121.80555555555557" w="20" d="20" h="0" y="2.4" />
+  <Field deltaY=".06" visible="false" fill="#0099ff" frame="#000000" x="101.80555555555556" z="56.80555555555556" w="20" d="20" h="0" y="2.4" />
+  <set wallHeight="0" />
+  <Field visible="false" deltaY="30" deltaZ="0" fill="#0099ff" frame="#000000" x="69.09722222222223" z="88.95833333333334" w="6.5277777777777715" d="6.805555555555557" h="0.25" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="175" />
+  <Goody shape="bspGrenade" y="12" speed="2" grenades="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="52.77777777777778" cz="72.77777777777779" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="20" />
+  <Goody shape="bspStandardPill" y="2" speed="16" boosters="1" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="69.16666666666667" cz="88.88888888888889" angle="225" />
+  <Teleporter group="-1" y="-15" activeRange="175" deadRange="80" destGroup="@corner" shape="0" fill="#0066ff" frame="#000000" cx="69.23611111111111" cz="88.88888888888889" angle="225" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#0066ff" frame="#000000" cx="69.23611111111111" cz="88.88888888888889" angle="225" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" cx="69.23611111111111" cz="88.88888888888889" angle="225" x="36.63194444444444" z="56.70138888888889" w="8.402777777777779" d="8.263888888888886" h="3" />
+  <Wall fill="#eeeeee" frame="#000000" x="36.63194444444444" z="56.70138888888889" w="8.402777777777779" d="8.263888888888886" h="1" y="3" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" cx="69.23611111111111" cz="88.88888888888889" angle="225" x="36.63194444444444" z="121.70138888888889" w="8.402777777777779" d="8.2638888888889" h="3" />
+  <Wall fill="#eeeeee" frame="#000000" x="36.63194444444444" z="121.70138888888889" w="8.402777777777779" d="8.2638888888889" h="1" y="3" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" cx="69.23611111111111" cz="88.88888888888889" angle="225" x="102.25694444444446" z="121.70138888888889" w="8.402777777777786" d="8.2638888888889" h="3" />
+  <Wall fill="#eeeeee" frame="#000000" x="102.25694444444446" z="121.70138888888889" w="8.402777777777786" d="8.2638888888889" h="1" y="3" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#eeeeee" frame="#000000" cx="69.23611111111111" cz="88.88888888888889" angle="225" x="102.25694444444446" z="56.70138888888889" w="8.402777777777786" d="8.263888888888886" h="3" />
+  <Wall fill="#eeeeee" frame="#000000" x="102.25694444444446" z="56.70138888888889" w="8.402777777777786" d="8.263888888888886" h="1" y="3" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="175" />
+  <Goody shape="bspMissile" y="6" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="121.52777777777779" angle="225" />
+  <Wall fill="#dddddd" frame="#000000" x="52.673611111111114" z="72.63888888888889" w="7.430555555555557" d="7.3611111111111" h="10" />
+  <Wall fill="#dddddd" frame="#000000" x="85.52083333333334" z="72.63888888888889" w="7.430555555555557" d="7.3611111111111" h="10" />
+  <Teleporter y="0" shape="0" group="@Platform4" fill="#ff0000" frame="#ff0000" cx="102.15277777777779" cz="121.59722222222223" angle="90" />
+  <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Chute Lite - The hidden teleporters take you to the closest corner.  To get the goody in the chute you must jump on it..." />
+  <SkyColor fill="#000000" frame="#003399" />
+  <GroundColor fill="#770000" />
+  <set defaultLives="3" grenadePower="1.5" missilePower="2" />
+  <Wall fill="#dddddd" frame="#000000" x="85.52083333333334" z="105.27777777777779" w="7.430555555555557" d="7.361111111111114" h="10" />
+  <Wall fill="#dddddd" frame="#000000" x="52.673611111111114" z="105.27777777777779" w="7.430555555555557" d="7.361111111111114" h="10" />
+  <Teleporter y="0" shape="0" group="@Platform3" fill="#ff0000" frame="#ff0000" cx="36.66666666666667" cz="121.66666666666667" angle="90" />
+  <Teleporter y="0" shape="0" group="@Platform2" fill="#ff0000" frame="#ff0000" cx="102.29166666666667" cz="56.736111111111114" angle="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="175" />
+  <Goody shape="bspGrenade" y="6" speed="2" grenades="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="102.36111111111111" cz="56.66666666666667" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="175" />
+  <Goody shape="bspGrenade" y="6" speed="2" grenades="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="36.736111111111114" cz="121.73611111111111" angle="225" />
+  <Teleporter y="0" shape="0" group="@Platform1" fill="#ff0000" frame="#ff0000" cx="36.59722222222222" cz="56.66666666666667" angle="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="175" />
+  <Goody shape="bspMissile" y="12" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="85.625" cz="72.56944444444444" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="175" />
+  <Goody shape="bspMissile" y="12" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="52.77777777777778" cz="105.20833333333334" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="175" />
+  <Goody shape="bspGrenade" y="12" speed="2" grenades="12" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="85.69444444444444" cz="105.20833333333334" angle="225" />
+  <Wall fill="#eeeeee" frame="#000000" x="65.03472222222223" z="84.79166666666667" w="1.4583333333333286" d="1.3888888888888857" h="40" />
+  <Wall fill="#eeeeee" frame="#000000" x="73.15972222222223" z="93.125" w="1.4583333333333286" d="1.3888888888888857" h="40" />
+  <Wall fill="#eeeeee" frame="#000000" x="65.03472222222223" z="93.125" w="1.4583333333333286" d="1.3888888888888857" h="40" />
+  <Wall fill="#eeeeee" frame="#000000" x="73.15972222222223" z="84.79166666666667" w="1.4583333333333286" d="1.3888888888888857" h="40" />
+  <Incarnator y="30" cx="36.80555555555556" cz="121.5625" angle="225" />
+  <Teleporter y="20" shape="0" group="@corner" fill="#003399" frame="#000000" cx="36.80555555555556" cz="121.5625" angle="225" />
+  <Incarnator y="30" cx="102.15277777777779" cz="56.80555555555556" angle="45" />
+  <Teleporter y="20" shape="0" group="@corner" fill="#003399" frame="#000000" cx="102.15277777777779" cz="56.80555555555556" angle="45" />
+  <Incarnator y="30" cx="102.08333333333334" cz="121.49305555555557" angle="135" />
+  <Teleporter y="20" shape="0" group="@corner" fill="#003399" frame="#000000" cx="102.08333333333334" cz="121.49305555555557" angle="135" />
+  <set wallYon="100" />
+  <Wall fill="#eeeeee" frame="#000000" x="69.09722222222223" z="69.58333333333334" w="40.27777777777778" d="1.25" h="0.5" y="10.1" />
+  <set wallYon="100" />
+  <Wall fill="#eeeeee" frame="#000000" x="49.583333333333336" z="88.95833333333334" w="1.25" d="37.5" h="0.5" y="10.1" />
+  <set wallYon="100" />
+  <Wall fill="#eeeeee" frame="#000000" x="88.61111111111111" z="88.95833333333334" w="1.25" d="37.5" h="0.5" y="10.1" />
+  <Incarnator y="30" cx="36.80555555555556" cz="56.80555555555556" angle="315" />
+  <Teleporter y="20" shape="0" group="@corner" fill="#003399" frame="#000000" cx="36.80555555555556" cz="56.80555555555556" angle="315" />
+  <Incarnator y="30" cx="69.65277777777779" cz="56.076388888888886" angle="0" />
+  <Incarnator y="30" cx="69.86111111111111" cz="122.0138888888889" angle="180" />
+  <Incarnator y="30" cx="36.25" cz="88.92361111111111" angle="270" />
+  <Incarnator y="30" cx="102.5" cz="88.92361111111111" angle="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="175" />
+  <Goody shape="bspMissile" y="6" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="36.736111111111114" cz="56.59722222222222" angle="225" />
+  <Teleporter y="25" shape="0" group="@Platform1" fill="#ff0000" frame="#000000" cx="52.77777777777778" cz="72.63888888888889" angle="270" />
+  <Teleporter y="25" shape="0" group="@Platform2" fill="#ff0000" frame="#000000" cx="85.69444444444444" cz="72.70833333333334" angle="270" />
+  <Teleporter y="25" shape="0" group="@Platform4" fill="#ff0000" frame="#000000" cx="85.76388888888889" cz="105.34722222222223" angle="270" />
+  <Teleporter y="25" shape="0" group="@Platform3" fill="#ff0000" frame="#000000" cx="52.91666666666667" cz="105.27777777777779" angle="270" />
+  <set wallYon="100" />
+  <Wall fill="#eeeeee" frame="#000000" x="69.09722222222223" z="108.33333333333334" w="40.27777777777778" d="1.25" h="0.5" y="10.1" />
+  <set wallYon=".001" wallHeight="0" />
+  <Wall fill="#0066ff" frame="#000000" x="69.02777777777779" z="101.45833333333334" w="9.861111111111114" d="15" h="0.25" y="10" />
+  <set wallYon=".001" wallHeight="0" />
+  <Wall fill="#0066ff" frame="#000000" x="81.63194444444446" z="88.95833333333334" w="15.208333333333329" d="40" h="0.25" y="10" />
+  <set wallYon=".001" wallHeight="0" />
+  <Wall fill="#0066ff" frame="#000000" x="69.02777777777779" z="76.45833333333334" w="9.861111111111114" d="15" h="0.25" y="10" />
+  <set wallYon=".001" wallHeight="0" />
+  <Wall fill="#0066ff" frame="#000000" x="56.5625" z="88.95833333333334" w="15.208333333333336" d="40" h="0.25" y="10" />
+</map>

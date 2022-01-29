@@ -13,6 +13,8 @@
 #include "CViewParameters.h"
 #include "Memory.h"
 #include "Resource.h"
+#include "AvaraDefines.h"
+#include "RGBAColor.h"
 
 #include <fstream>
 #include <iostream>
@@ -36,27 +38,9 @@ ColorRecord ***bspColorLookupTable = 0;
 
 using json = nlohmann::json;
 
-void CBSPPart::IBSPPart(short resId, char* levelsetName) {
-    char relPath[256];
-    char *bspName = NULL;
-
-    // first check for the resource in the levelset directory
-    if (levelsetName != NULL) {
-        snprintf(relPath, 256, "levels/%s/bsps/%d.json", levelsetName, resId);
-        bspName = BundlePath(relPath);
-        std::ifstream testFile(bspName);
-        if (testFile.fail()) {
-            bspName = NULL;
-        } else {
-            SDL_Log("Using BSP file in %s\n", bspName);
-        }
-    }
-    // haven't found the BSP file yet, try the top-level bsps directory
-    if (bspName == NULL) {
-        snprintf(relPath, 256, "bsps/%d.json", resId);
-        bspName = BundlePath(relPath);
-    }
-    // SDL_Log("Loading BSP: %s\n", bspName);
+void CBSPPart::IBSPPart(short resId) {
+    char *bspName = GetBSPPath(resId);
+    //SDL_Log("Loading BSP: %s\n", bspName);
     lightSeed = 0;
     nextTemp = NULL;
     // colorReplacements = NULL;    //  Use default colors.
@@ -109,8 +93,6 @@ void CBSPPart::IBSPPart(short resId, char* levelsetName) {
     maxBounds.z = ToFixed(doc["bounds"]["max"][2]);
     maxBounds.w = FIX1;
 
-    isDecal = false;
-
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
     polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
 
@@ -153,14 +135,6 @@ void CBSPPart::IBSPPart(short resId, char* levelsetName) {
 void CBSPPart::PostRender() {}
 
 void CBSPPart::UpdateOpenGLData() {
-    float sigma = .001f;
-
-    isDecal = (
-        std::abs(maxBounds.x - minBounds.x) < sigma ||
-        std::abs(maxBounds.y - minBounds.y) < sigma ||
-        std::abs(maxBounds.z - minBounds.z) < sigma
-    );
-
     if (!AvaraGLIsRendering()) return;
     glDataSize = totalPoints * sizeof(GLData);
     glData = (GLData *)NewPtr(glDataSize);
@@ -178,9 +152,7 @@ void CBSPPart::UpdateOpenGLData() {
             glData[p].x = ToFloat((*pt)[0]);
             glData[p].y = ToFloat((*pt)[1]);
             glData[p].z = ToFloat((*pt)[2]);
-            glData[p].r = ((poly->color >> 16) & 0xFF) / 255.0;
-            glData[p].g = ((poly->color >> 8) & 0xFF) / 255.0;
-            glData[p].b = (poly->color & 0xFF) / 255.0;
+            LongToRGBA(poly->color, &glData[p].r, 3);
 
             glData[p].nx = poly->normal[0];
             glData[p].ny = poly->normal[1];
@@ -291,7 +263,7 @@ void CBSPPart::PrintMatrix(Matrix *m) {
 **  in preparation to shading.
 */
 Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
-    Boolean inPyramid = !isTransparent;
+    Boolean inPyramid = vp->showTransparent || !isTransparent;
 
     if (inPyramid) {
         currentView = vp;
@@ -323,7 +295,7 @@ Boolean CBSPPart::PrepareForRender(CViewParameters *vp) {
             TransformLights();
 
             // transform all the points before rendering
-            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);      
+            //VectorMatrixProduct(pointCount, pointTable, transformedPoints, &fullTransform);
         }
     }
 

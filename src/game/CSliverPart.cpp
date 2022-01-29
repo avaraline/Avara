@@ -10,6 +10,7 @@
 #include "CSliverPart.h"
 
 #include "CAvaraGame.h"
+#include "CAbstractPlayer.h"
 
 extern ColorRecord ***bspColorLookupTable;
 Fixed sliverGravity = -FIX3(20);
@@ -20,6 +21,10 @@ void	CSliverPart::GenerateColorLookupTable()
     **bspColorLookupTable = &borrowedColors;
 }
 #endif
+
+Fixed FSysRandom() {
+    return rand() & 0x0000FFFF;
+}
 
 void CSliverPart::ISliverPart(short partNum) {
     ISmartPart(partNum, NULL, 0);
@@ -35,7 +40,7 @@ void CSliverPart::Activate(Fixed *origin,
     short age,
     CBSPPart *fromObject) {
     PolyRecord *borrowPoly;
-    int offset = rand() % (fromObject->polyCount);
+    int offset = FSysRandom() % (fromObject->polyCount);
     borrowPoly = &fromObject->polyTable[offset];
 
     ColorRecord c = borrowPoly->color;
@@ -66,9 +71,9 @@ void CSliverPart::Activate(Fixed *origin,
     lifeCount = age;
 
     Reset();
-    TranslatePartZ(this, FMul(scale, FIX3(250) + (FRandomBeta() >> 1)));
-    RotateX(spread * FRandomBeta());
-    RotateZ(360 * FRandomBeta());
+    TranslatePartZ(this, FMul(scale, FIX3(250) + (FSysRandom() >> 1)));
+    RotateX(spread * FSysRandom());
+    RotateZ(360 * FSysRandom());
 
     smallVector[0] = direction[0];
     smallVector[1] = direction[2];
@@ -89,23 +94,36 @@ void CSliverPart::Activate(Fixed *origin,
     MoveDone();
     extraAmbient = 0;
 
+    friction = FIX3(980);
     gravity = FMul(sliverGravity, gCurrentGame->gravityRatio);
+
+    // This is a bit of a hack because of the fact that CSliverPart is the only "Actor" that doesn't inherit
+    // from CAbstractActor.  With that said...
+    // Use the first player (which should be running at High FPS) as a proxy to get at the Fps methods.
+    fpsScale = gCurrentGame->playerList->FpsCoefficient2(FIX1);
+    gCurrentGame->playerList->FpsCoefficients(friction, gravity, &fpsFriction, &fpsGravity);
+    lifeCount = age / ToFloat(fpsScale);
 }
 
 Boolean CSliverPart::SliverAction() {
+    // if (gCurrentGame->isClassicFrame && --lifeCount) {
     if (--lifeCount) {
-        OffsetPart(speed);
+        Vector locOffset;
+        locOffset[0] = FMul(speed[0], fpsScale);
+        locOffset[1] = FMul(speed[1], fpsScale);
+        locOffset[2] = FMul(speed[2], fpsScale);
+        OffsetPart(locOffset);
 
         if (itsTransform[3][1] < 0) {
             itsTransform[3][1] = -itsTransform[3][1];
             speed[1] = FMul(speed[1], FIX3(-600));
         }
-        speed[1] += gravity;
-        speed[0] = FMul(speed[0], FIX3(980));
-        speed[1] = FMul(speed[1], FIX3(980));
-        speed[2] = FMul(speed[2], FIX3(980));
 
-        extraAmbient = FIX3(500) - (FIX3(2000) >> lifeCount);
+        speed[0] = FMul(speed[0], fpsFriction);
+        speed[1] = FMul(speed[1], fpsFriction) + fpsGravity;
+        speed[2] = FMul(speed[2], fpsFriction);
+
+        extraAmbient = FIX3(500) - (FIX3(2000) >> int(lifeCount*ToFloat(fpsScale)));
     }
 
     return lifeCount == 0;

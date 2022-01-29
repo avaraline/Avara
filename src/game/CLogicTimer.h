@@ -17,5 +17,6 @@ public:
 
     virtual void FrameAction();
     virtual void BeginScript();
+    virtual void AdaptableSettings();
     virtual CAbstractActor *EndScript();
 };

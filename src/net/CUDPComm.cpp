@@ -32,7 +32,6 @@ int numToDrop = 0;
 
 #include "AvaraTCP.h"
 #include "CApplication.h"
-#include "CCompactTagBase.h"
 #include "CRC.h"
 #include "CUDPConnection.h"
 #include "CharWordLongPointer.h"
@@ -40,6 +39,13 @@ int numToDrop = 0;
 #include "CommandList.h"
 #include "Preferences.h"
 #include "System.h"
+
+#include <miniupnpc/miniupnpc.h>
+#include <miniupnpc/upnpcommands.h>
+#include <miniupnpc/upnperrors.h>
+
+#include <thread>
+
 
 // get rid of this
 #include "CAvaraApp.h"
@@ -96,22 +102,11 @@ enum {
     kServerTrackerInviteItem
 };
 
-// A utility function to byte-swap the host & port and create a human-readable format
 static std::string FormatAddr(IPaddress addr) {
-    std::ostringstream os;
-    ip_addr ipaddr = SDL_SwapBE32(addr.host);
-    os << (ipaddr >> 24) << "."
-       << ((ipaddr >> 16) & 0xff) << "."
-       << ((ipaddr >> 8) & 0xff) << "."
-       << (ipaddr & 0xff) <<  ":"
-       << SDL_SwapBE16(addr.port);
-    return os.str();
+    return FormatHostPort(addr.host, addr.port);
 }
 static std::string FormatAddr(CUDPConnection *conn) {
-    IPaddress ip;
-    ip.host = conn->ipAddr;
-    ip.port = conn->port;
-    return FormatAddr(ip);
+    return FormatHostPort(conn->ipAddr, conn->port);
 }
 
 
@@ -1091,8 +1086,13 @@ Boolean CUDPComm::AsyncWrite() {
 
 long CUDPComm::GetClock() {
     // Apparently this clock is about 240/second?
-    // return SDL_GetTicks() >> 2;
-    return (long)((double)SDL_GetTicks() / 4.16666666667);
+    // Upon further investigation, the original code,
+    // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);
+    // shifted a usec time >> 12, effectively dividing by 4096.
+    // So technically this was a 4.096 msec (4096 usec) clock tick (~244/sec).
+    // To accomodate higher frame rates this will be adjusted down to 1 msec so that
+    // the ratio of frameRate/clock is still approximately 16 with the 16 msec frameTime.
+    return SDL_GetTicks() / MSEC_PER_GET_CLOCK;
 }
 
 /*
@@ -1110,8 +1110,12 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, lon
     softwareVersion = version;
 
     //	Convert time from milliseconds to 2*in our time units.
-    urgentResendTime = (urgentTimePeriod * 125) >> 8;
-    latencyConvert = urgentTimePeriod * 2;
+    // urgentResendTime = (urgentTimePeriod * 125) >> 8;
+    //                  = (2 * urgentTimePeriod * 1000) >> 12;  // convert to usec then 2X GetClock interval
+    // urgentResendTime represents 2 frames of time since urgentTimePeriod is passed as frameTime
+    urgentResendTime = (urgentTimePeriod * 2 / MSEC_PER_GET_CLOCK);
+
+    // latencyConvert = urgentTimePeriod * 2;  // no longer being used
 
     /*
     prefs = new CTagBase;
@@ -1293,11 +1297,79 @@ void CUDPComm::Dispose() {
     CCommManager::Dispose();
 }
 
+/**
+    Set up port forwarding using upnp.
+ */
+void ForwardPorts(port_num port) {
+    struct UPNPDev * devlist = 0;
+    struct UPNPDev * dev;
+    int error = 0;
+    const char * multicastif = 0;
+    const char * minissdpdpath = 0;
+    int ipv6 = 0;
+    unsigned char ttl = 2;
+    int i;
+
+    static const char * const deviceList[] = {
+        //"urn:schemas-upnp-org:device:InternetGatewayDevice:2",
+        //"urn:schemas-upnp-org:service:WANIPConnection:2",
+        "urn:schemas-upnp-org:device:InternetGatewayDevice:1",
+        0
+    };
+
+    devlist = upnpDiscoverDevices(deviceList,
+                                  5000, multicastif, minissdpdpath,
+                                  0/*localport*/, ipv6, ttl, &error, 1);
+
+    if(devlist) {
+        for(dev = devlist, i = 1; dev != NULL; dev = dev->pNext, i++) {
+            //printf("%3d: %-48s\n", i, dev->st);
+            //printf("     %s\n", dev->descURL);
+            //printf("     %s\n", dev->usn);
+
+            struct UPNPUrls upnp_urls;
+            struct IGDdatas upnp_data;
+            char aLanAddr[64];
+            std::string portString = std::to_string(port);
+            const char *pPort = portString.c_str();
+
+            // Retrieve a valid Internet Gateway Device
+            int status = UPNP_GetValidIGD(dev, &upnp_urls, &upnp_data, aLanAddr,
+                                          sizeof(aLanAddr));
+            //printf("status=%d, lan_addr=%s\n", status, aLanAddr);
+
+            if (status == 1) {
+                SDL_Log("UPNP: UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
+                error = UPNP_AddPortMapping(upnp_urls.controlURL,
+                                        upnp_data.first.servicetype,
+                                        pPort, // external port
+                                        pPort, // internal port
+                                        aLanAddr, "Avara", "UDP",
+                                        0,  // remote host
+                                        "0" // lease duration, recommended 0 as some NAT
+                                            // implementations may not support another value
+                    );
+
+                if (error) {
+                    SDL_Log("UPNP: failed to map port\n");
+                    SDL_Log("UPNP: error: %s\n", strupnperror(error));
+                } else {
+                    SDL_Log("UPNP: successfully mapped port\n");
+                }
+            }
+        }
+    } else {
+        SDL_Log("UPNP: upnpDiscoverDevices found no devices.\n");
+    }
+}
+
 void CUDPComm::CreateServer() {
     OSErr theErr;
 
     localPort = gApplication->Number(kDefaultUDPPort);
 
+    std::thread forwardPorts(ForwardPorts, localPort);
+    forwardPorts.detach();
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
@@ -1315,8 +1387,6 @@ void CUDPComm::CreateServer() {
     {	tracker->StartTracking();
     }
     */
-
-    //	And that's all there is to it!
 }
 
 OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
@@ -1390,6 +1460,8 @@ void CUDPComm::Connect(std::string address) {
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
     SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
+    std::thread forwardPorts(ForwardPorts, localPort);
+    forwardPorts.detach();
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
@@ -1879,16 +1951,26 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            if (conn->meanRoundTripTime > maxTrip) {
-                maxTrip = conn->meanRoundTripTime;
+            // add in 1.9*stdev (~97% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // note: is this really a erlang distribution?  if so, what's the proper equation?
+            float stdev = sqrt(conn->varRoundTripTime);
+            float rtt = conn->meanRoundTripTime + std::min(1.9*stdev, (1.0*CLASSICFRAMECLOCK));
+            if (rtt > maxTrip) {
+                maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
+                    SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
+                            conn->myId,
+                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
+                            stdev*MSEC_PER_GET_CLOCK,
+                            rtt*MSEC_PER_GET_CLOCK);
                 }
             }
         }
     }
 
-    maxTrip = maxTrip*1000/240;
+    // convert from GetClock() ticks to msec
+    maxTrip = maxTrip*MSEC_PER_GET_CLOCK;
 
     return maxTrip;
 }

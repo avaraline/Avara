@@ -13,7 +13,6 @@
 #include "CApplication.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
-#include "CCompactTagBase.h"
 #include "CPlayerManager.h"
 //#include "CRosterWindow.h"
 //#include "Aliases.h"
@@ -61,7 +60,7 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.frameTime = itsGame->frameTime;
     iface.frameNumber = -1;
 
-    iface.resultsHandle = GetResource('TEXT', 300);
+    iface.resultsHandle = NULL; //GetResource('TEXT', 300);
     // DetachResource(iface.resultsHandle);
 
     iface.resultsChanged = false;
@@ -71,8 +70,7 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.levelName = itsGame->loadedLevel;
     iface.levelName = itsGame->loadedDesigner;
     iface.levelName = itsGame->loadedInfo;
-    iface.directoryTag = 0;
-    iface.levelTag = 0;
+    iface.directory = itsGame->loadedTag;
     iface.playerID = 0;
     iface.playerTeam = 0;
     iface.playerLives = 0;
@@ -90,7 +88,7 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
 
     entryPoint = NULL;
 
-    ZeroScores();
+    ResetScores();
 
     netScores = localScores;
 }
@@ -105,17 +103,32 @@ void CScoreKeeper::Dispose() {
 void CScoreKeeper::EndScript() {
     iface.command = ksiLevelLoaded;
     iface.levelName = itsGame->loadedLevel;
-    iface.directoryTag = itsGame->loadedTag;
-    iface.levelTag = itsGame->loadedDirectory;
+    iface.directory = itsGame->loadedSet;
 }
 
 void CScoreKeeper::StartResume(Boolean didStart) {
     if (didStart) {
         iface.command = ksiLevelStarted;
-        ZeroScores();
+        ResetScores();
     } else {
         iface.command = ksiLevelRestarted;
     }
+}
+
+void CScoreKeeper::ResetWins() {
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        localScores.player[i].serverWins = 0;
+    }
+}
+
+void CScoreKeeper::PlayerLeft() {
+    if(itsGame->itsNet->PlayerCount() == 1) {
+        ResetWins();
+    }
+}
+
+void CScoreKeeper::PlayerJoined() {
+    NetResultsUpdate();
 }
 
 void CScoreKeeper::PlayerIntros() {
@@ -161,12 +174,14 @@ void CScoreKeeper::NetResultsUpdate() {
             scorePayload[offset + 2] = htonl(localScores.player[i].exitRank);
             scorePayload[offset + 3] = htonl(localScores.player[i].lives);
             scorePayload[offset + 4] = htonl(localScores.player[i].kills);
+            scorePayload[offset + 5] = htonl(localScores.player[i].serverWins);
         } else {
             scorePayload[offset] = 0;
             scorePayload[offset + 1] = 0;
             scorePayload[offset + 2] = 0;
             scorePayload[offset + 3] = htonl(-1);
             scorePayload[offset + 4] = 0;
+            scorePayload[offset + 5] = 0;
         }
     }
 
@@ -222,6 +237,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
         localScores.player[player].points += points;
         if (reason == ksiExitBonus) {
             localScores.player[player].exitRank = ExitPointsTable[exitCount];
+            localScores.player[player].serverWins++;
             exitCount++;
         }
     }
@@ -231,7 +247,8 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     }
 }
 
-void CScoreKeeper::ZeroScores() {
+void CScoreKeeper::ResetScores() {
+    CPlayerManager *thePlayer;
     short i;
 
     exitCount = 0;
@@ -241,6 +258,16 @@ void CScoreKeeper::ZeroScores() {
         localScores.player[i].lives = -1;
         localScores.player[i].exitRank = 0;
         localScores.player[i].kills = 0;
+
+        thePlayer = itsGame->itsNet->playerTable[i];
+        if (thePlayer->GetPlayer() == NULL) {
+            localScores.player[i].serverWins = 0;
+        }
+    }
+
+    //clear server wins if server is empty
+    if(itsGame->itsNet->PlayerCount() == 1) {
+        localScores.player[0].serverWins = 0;
     }
 
     for (i = 0; i <= kMaxTeamColors; i++) {
@@ -258,6 +285,10 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
         netScores.player[i].exitRank = (char) ntohl(newResults[offset + 2]);
         netScores.player[i].lives = (int16_t) ntohl(newResults[offset + 3]);
         netScores.player[i].kills = (int16_t) ntohl(newResults[offset + 4]);
+        netScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
+
+        //copy serverWins to localScores
+        localScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
     }
 
     offset = PLAYER_SCORE_FIELD_COUNT * kMaxAvaraPlayers;

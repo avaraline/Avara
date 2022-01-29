@@ -73,7 +73,7 @@ void CLogicDelay::FrameAction() {
         while (theCount--) {
             for (i = 0; i < DELAY_PIPELINE; i++) {
                 if (scheduledFrame[i] == 0) {
-                    scheduledFrame[i] = itsGame->frameNumber + theDelay;
+                    scheduledFrame[i] = itsGame->FramesFromNow(theDelay);
                     break;
                 }
             }

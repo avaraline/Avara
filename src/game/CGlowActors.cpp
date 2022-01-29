@@ -11,6 +11,8 @@
 
 #include "CSmartPart.h"
 
+extern Fixed FRandSeed;
+
 void CGlowActors::IAbstractActor() {
     CPlacedActors::IAbstractActor();
     canGlow = true;
@@ -64,5 +66,9 @@ void CGlowActors::FrameAction() {
         }
     }
 
-    FRandSeed += location[0] + location[1] + location[2];
+    // both the server and client update the FRandSeed here, if they get out of sync
+    // then this number will be different and will be noticed in CNetManager::AutoLatencyControl
+    Fixed locsum = location[0] + location[1] + location[2];
+    FRandSeed += locsum;
+    // SDL_Log("frameNumber = %ld, FRandSeed = %10d, locsum = %8d, Actor = %s", gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
 }

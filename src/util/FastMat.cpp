@@ -12,7 +12,6 @@
 #include "Memory.h"
 #include "System.h"
 
-#include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <utility>
@@ -24,17 +23,12 @@
 static unsigned short *arcTanTable = 0;
 static unsigned short *arcTanOneTable = 0;
 
+Fixed FRandSeed = 1;
+
 /* FixMath */
 
-Fixed FixMul(Fixed a, Fixed b) {
-    return ((int64_t)a * (int64_t)b) / (1 << 16);
-}
-
-Fixed FixDiv(Fixed a, Fixed b) {
-    return ((int64_t)a * (1 << 16)) / b;
-}
-
 Fixed FixATan2(Fixed x, Fixed y) {
+    // TODO: check out https://github.com/liballeg/allegro5/blob/master/src/math.c#L252
     return ToFixed(atan2(ToFloat(y), ToFloat(x)));
 }
 
@@ -124,11 +118,6 @@ Fixed FSqroot(int *ab) {
     return root;
 }
 
-Fixed FRandomBeta() {
-    // I don't think this is right but it works
-    return ToFixed((float)(rand() % 1000) / 1000.0);
-}
-
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2) {
     Fixed a = x1 > y1 ? x1 - y1 : y1 - x1;
     Fixed b = x2 > y2 ? x2 - y2 : y2 - x2;
@@ -154,7 +143,7 @@ Fixed FDistanceEstimate(Fixed dx, Fixed dy, Fixed dz) {
     move.l  dx,D0
     bpl.s   @noXNeg
     neg.l   D0
-*/  
+*/
     if (r0 < 0) r0 = -r0;
 /*
 @noXNeg:
@@ -291,44 +280,6 @@ Fixed FDistanceOverEstimate(Fixed dx, Fixed dy, Fixed dz) {
     return r0;
 }
 
-Fixed FMul(Fixed a, Fixed b) {
-    return FixMul(a, b);
-}
-
-Fixed FDiv(Fixed a, Fixed b) {
-    return FixDiv(a, b);
-}
-
-Fixed FMulDiv(Fixed a, Fixed b, Fixed c) {
-    // return FDiv(FMul(a, b), c);
-    return (long)(((double)a) * b / c);
-}
-
-Fixed FRadSin(Fixed a) {
-    return (long)(65536L * sin(a / 65536.0));
-}
-
-Fixed FRadCos(Fixed a) {
-    return (long)(65536L * cos(a / 65536.0));
-}
-
-Fixed FDegSin(Fixed a) {
-    return (long)(65536.0 * sin(a / 3754936.206169363));
-}
-
-Fixed FDegCos(Fixed a) {
-    return (long)(65536.0 * cos(a / 3754936.206169363));
-}
-
-Fixed FOneSin(Fixed a) {
-    // Looks like sin(2pi * a)?
-    return (long)(65536.0 * sin(a / 10430.3783505));
-}
-
-Fixed FOneCos(Fixed a) {
-    return (long)(65536.0 * cos(a / 10430.3783505));
-}
-
 void Transpose(Matrix *a) {
     int i, j;
     Fixed temp;
@@ -362,8 +313,8 @@ Fixed FSqrt(Fixed n) {
 }
 
 #define RANDCONST ((uint32_t)(0x41A7))
-#define HIGH(x) ((uint16_t)(x >> 16))
-#define LOW(x) ((uint16_t)x)
+#define HIGH(x) ((x >> 16) & 0x0000FFFF)
+#define LOW(x) (x & 0x0000FFFF)
 
 Fixed FRandom() {
     uint32_t temp;
@@ -757,7 +708,7 @@ void VectorMatrixProduct(long n, Vector *vs, Vector *vd, Matrix *m) {
         for (j = 0; j < 4; j++) {
             (*vd)[j] = 0;
             for (k = 0; k < 4; k++) {
-                (*vd)[j] += FixMul((*vs)[k], (*m)[k][j]);
+                (*vd)[j] += FMul((*vs)[k], (*m)[k][j]);
             }
         }
         vd++;
@@ -770,3 +721,17 @@ void CombineTransforms(Matrix *vs, Matrix *vd, Matrix *m) {
     VectorMatrixProduct(4, vs[0], vd[0], m);
 }
 
+// useful for debugging
+#include <sstream>
+std::string FormatVector(Fixed *v, int size) {
+    std::ostringstream oss;
+    oss << "[";
+    for (int i = 0; i < size; i++) {
+        oss << v[i];
+        if (i < size-1) {
+            oss << ", ";
+        }
+    }
+    oss << "]";
+    return oss.str();
+}

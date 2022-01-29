@@ -24,7 +24,7 @@ void CWallSolid::LoadPart(short ind, short resId) {
 
         partList[ind] = thePart;
 
-        TranslatePartY(thePart, ReadLongVar(iHeight));
+        //TranslatePartY(thePart, ReadLongVar(iHeight));
         VECTORCOPY(location, thePart->itsTransform[3]);
         itsGame->itsWorld->RemovePart(thePart);
 

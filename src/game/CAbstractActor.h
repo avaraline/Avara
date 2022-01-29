@@ -8,7 +8,6 @@
 */
 
 #pragma once
-#include "AvaraDefines.h"
 #include "CAvaraGame.h"
 #include "CDirectObject.h"
 #include "CSoundHub.h"
@@ -16,6 +15,14 @@
 #include "LevelLoader.h"
 #include "RayHit.h"
 #include "Resource.h"
+
+// define ENABLE_FPS_DEBUG in files where you want FPS_DEBUG output, BEFORE including this header
+#ifdef ENABLE_FPS_DEBUG
+#include <iostream>
+#define FPS_DEBUG(stuff) std::cout << stuff
+#else
+#define FPS_DEBUG(stuff) // noop
+#endif
 
 #define kMarkerColor 0x00fefefe
 #define kOtherMarkerColor 0x00fe0000
@@ -141,6 +148,7 @@ public:
     virtual void IAbstractActor();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
+    virtual void AdaptableSettings();
     virtual void AddToGame();
     virtual void FrameAction();
 
@@ -208,11 +216,23 @@ public:
     virtual void RayTestWithGround(RayHitRecord *hitRec, MaskType testMask);
     virtual short GetPlayerPosition();
 
-    long GetLongTeamColorOr(long defaultColor);
+    uint32_t GetTeamColorOr(uint32_t defaultColor);
 
     virtual short GetBallSnapPoint(long theGroup,
         Fixed *ballLocation,
         Fixed *snapDest,
         Fixed *delta,
         CSmartPart **hostPart);
+
+    // subclasses override if they can handle all the frames when running faster than CLASSICFRAMETIME
+    virtual bool HandlesFastFPS() { return false; }
+    void FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
+                         Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed* fpsOffset = NULL);
+    Fixed FpsCoefficient1(Fixed classicMultiplier1);
+    Fixed FpsCoefficient2(Fixed classicMultiplier2);
+    Fixed FpsOffset(Fixed classicCoeff2);
+    long FpsFramesPerClassic(long classicFrames = 1);
+    Fixed ClassicCoefficient2(Fixed fpsValue);
+private:
+    virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);
 };

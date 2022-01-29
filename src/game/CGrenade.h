@@ -15,14 +15,18 @@ class CDepot;
 
 class CGrenade : public CWeapon {
 public:
-    Fixed gravity;
+    Fixed gravity, classicGravity;
+    Fixed friction, classicFriction;
+    Fixed speedOffset;
 
     virtual void IWeapon(CDepot *theDepot);
     virtual void PlaceParts();
+    virtual void AdaptableSettings();
     virtual long Arm(CSmartPart *aPart);
     virtual void Locate();
     virtual void Fire();
     virtual void FrameAction();
     virtual void ShowTarget(); //	Show HUD graphics for targeting
     virtual void PreLoadSounds();
+    virtual bool HandlesFastFPS() { return true; }
 };

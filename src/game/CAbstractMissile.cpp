@@ -22,7 +22,7 @@ void CAbstractMissile::IAbstractMissile(CDepot *theDepot) {
     itsGame = itsDepot->itsGame;
 
     speed = FIX3(2000);
-    maxFrameCount = 50;
+    maxFrameCount = FpsFramesPerClassic(50);
     energy = 0;
 
     nextMissile = NULL;
@@ -91,8 +91,8 @@ void CAbstractMissile::FrameAction() {
             Deactivate();
         }
 
-        if (frameCount < 2)
-            energy -= energy >> 3;
+        if (frameCount < FpsCoefficient2(2))
+            energy -= FpsCoefficient2(energy >> 3);
     }
 }
 
@@ -101,9 +101,9 @@ void CAbstractMissile::MoveForward() {
     partList[0]->extraAmbient = energy;
     partList[0]->Reset();
     partList[0]->ApplyMatrix(&itsMatrix);
-    itsMatrix[3][0] += deltaMove[0];
-    itsMatrix[3][1] += deltaMove[1];
-    itsMatrix[3][2] += deltaMove[2];
+    itsMatrix[3][0] += FpsCoefficient2(deltaMove[0]);
+    itsMatrix[3][1] += FpsCoefficient2(deltaMove[1]);
+    itsMatrix[3][2] += FpsCoefficient2(deltaMove[2]);
     partList[0]->MoveDone();
 }
 void CAbstractMissile::FireSlivers() {

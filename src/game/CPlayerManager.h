@@ -13,7 +13,7 @@
 #include "PlayerConfig.h"
 
 #include <SDL2/SDL.h>
-#include <map>
+#include <unordered_map>
 #include <deque>
 #include <string>
 
@@ -35,8 +35,7 @@ enum {
     kStringWest
 };
 
-#define FUNCTIONBUFFERS 32
-#define MAXFRAMEDIFFERENCE 2
+#define FUNCTIONBUFFERS 32*8  // 8x to accommodate extra frames with high-FPS
 
 class CAbstractPlayer;
 class CAvaraGame;
@@ -74,11 +73,11 @@ public:
     virtual void RosterMessageText(short len, char *c) = 0;
     virtual short LevelCRC() = 0;
     virtual OSErr LevelErr() = 0;
-    virtual OSType LevelTag() = 0;
+    virtual std::string LevelTag() = 0;
     virtual void LevelCRC(short) = 0;
     virtual void LevelErr(OSErr) = 0;
-    virtual void LevelTag(OSType) = 0;
-    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag) = 0;
+    virtual void LevelTag(std::string) = 0;
+    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) = 0;
     virtual void ResumeGame() = 0;
     virtual uint32_t DoMouseControl(Point *deltaMouse, Boolean doCenter) = 0;
     virtual void HandleEvent(SDL_Event &event) = 0;
@@ -130,7 +129,7 @@ private:
     long askAgainTime;
 
     // Track current frame events here
-    uint32_t keysDown, keysUp, keysHeld;
+    uint32_t keysDown, keysUp, keysHeld, dupKeysHeld;
     short mouseX, mouseY;
     uint8_t buttonStatus;
 
@@ -160,7 +159,7 @@ private:
     short loadingStatus;
     short slot;
     short playerColor;
-    
+
     bool showScoreboard = false;
 
     Point mouseCenterPosition;
@@ -168,11 +167,11 @@ private:
 
     short levelCRC;
     OSErr levelErr;
-    OSType levelTag;
+    std::string levelTag;
 
     PlayerConfigRecord theConfiguration;
 
-    std::map<SDL_Scancode, uint32_t> keyMap;
+    std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 
 public:
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
@@ -182,6 +181,8 @@ public:
     virtual uint32_t GetKeyBits();
     virtual uint32_t DoMouseControl(Point *deltaMouse, Boolean doCenter);
     virtual void HandleEvent(SDL_Event &event);
+    virtual void HandleKeyDown(uint32_t keyFunc);
+    virtual void HandleKeyUp(uint32_t keyFunc);
     virtual void SendFrame();
     virtual void ResumeGame();
 
@@ -210,7 +211,7 @@ public:
 
     virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
 
-    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, OSType serverTag);
+    virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
 
     virtual CAbstractPlayer *ChooseActor(CAbstractPlayer *actorList, short myTeamColor);
     virtual CAbstractPlayer *TakeAnyActor(CAbstractPlayer *actorList);
@@ -234,7 +235,7 @@ public:
     virtual short Position();
     virtual Str255& PlayerName();
     virtual std::string GetPlayerName();
-    
+
     virtual std::deque<char>& LineBuffer();
     virtual CAbstractPlayer* GetPlayer();
     virtual short IsRegistered();
@@ -243,10 +244,10 @@ public:
     virtual short LoadingStatus();
     virtual short LevelCRC();
     virtual OSErr LevelErr();
-    virtual OSType LevelTag();
+    virtual std::string LevelTag();
     virtual void LevelCRC(short);
     virtual void LevelErr(OSErr);
-    virtual void LevelTag(OSType);
+    virtual void LevelTag(std::string);
     virtual Fixed RandomKey();
     virtual void RandomKey(Fixed);
     virtual PlayerConfigRecord& TheConfiguration();

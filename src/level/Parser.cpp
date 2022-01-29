@@ -50,7 +50,7 @@ typedef struct {
     short calcLevel;
 } variableValue;
 
-Handle theScript = 0;
+Ptr stackMem = NULL;
 double *stackP = 0;
 CStringDictionary *symTable = 0;
 CTagBase *variableBase = 0;
@@ -364,7 +364,7 @@ void SkipComment() {
 void SkipOneLineComment() {
     parserVar.input += 2;
     if (parserVar.input[0] != 0) {
-        while ((parserVar.input[0] != 0) && !(parserVar.input[0] == 13)) {
+        while ((parserVar.input[0] != 0) && (parserVar.input[0] != 13) && (parserVar.input[0] != 10)) {
             parserVar.input++;
         }
 
@@ -988,28 +988,6 @@ double EvalVariable(long token, Boolean forceCalc) {
     return theVar->value;
 }
 
-void LoadProgram() {
-    OSErr err;
-    short ref;
-    long len;
-    Handle mainScript;
-    Handle privateScript;
-
-    theScript = GetResource('TEXT', 2128);
-    DetachResource(theScript);
-    privateScript = GetResource('TEXT', 1000);
-    if (privateScript) {
-        HandAndHand(privateScript, theScript);
-        ReleaseResource(privateScript);
-    }
-
-    len = GetHandleSize(theScript);
-    HUnlock(theScript);
-    SetHandleSize(theScript, len + 1);
-    HLock(theScript);
-    (*theScript)[len] = 0; //	Append a NULL to terminate the script.
-}
-
 static unsigned long oldTicks = 0;
 
 char *fixedString(unsigned char *s) {
@@ -1085,18 +1063,17 @@ void RunThis(unsigned char *script) {
 void AllocParser() {
     currentLevel = 0;
     InitSymbols();
-    stackP = (double *)NewPtr(sizeof(double) * 256);
+    stackMem = NewPtr(sizeof(double) * 256);
+    stackP = (double *)stackMem;
 
     currentActor = NULL;
-    LoadProgram();
-    RunThis((unsigned char *)*theScript);
+    RunThis((StringPtr)GetBaseScript().c_str());
+    RunThis((StringPtr)GetDefaultScript().c_str());
 }
 
 void DeallocParser() {
-    if (theScript)
-        DisposeHandle(theScript);
-    if (stackP)
-        DisposePtr((Ptr)stackP);
+    if (stackMem)
+        DisposePtr(stackMem);
 
     if (symTable)
         symTable->Dispose();
@@ -1105,7 +1082,7 @@ void DeallocParser() {
     if (programBase)
         programBase->Dispose();
 
-    theScript = NULL;
+    stackMem = NULL;
     stackP = NULL;
     symTable = NULL;
     variableBase = NULL;
@@ -1137,15 +1114,15 @@ long ReadColorVar(short index) {
     return (((theColor / 1000000) << 16) | (((theColor / 1000) % 1000) << 8) | (theColor % 1000));
 }
 
-void ReadStringVar(short index, StringPtr dest) {
+std::string ReadStringVar(short index) {
     short len;
     Handle result;
 
     index = EvalVariable(index + firstVariable, false);
     if (index) {
-        symTable->GetIndEntry(index, dest);
+        return symTable->GetIndEntry(index);
     } else {
-        dest[0] = 0;
+        return "";
     }
 }
 

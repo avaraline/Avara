@@ -1,7 +1,6 @@
 #pragma once
 
 #include "CWindow.h"
-#include "Types.h"
 
 #include <SDL2/SDL.h>
 #include <json.hpp>
@@ -49,14 +48,6 @@ public:
     SDL_Window *sdlWindow() { return window; }
     NVGcontext *NVGContext() { return nvg_context; }
 
-    std::string String(const std::string name);
-    long Number(const std::string name);
-    long Number(const std::string name, const long defaultValue);
-    bool Boolean(const std::string name);
-    json Get(const std::string name);
-    void Set(const std::string name, const std::string value);
-    void Set(const std::string name, long value);
-    void Set(const std::string name, json value);
     SDL_Window *window;
     SDL_GLContext gl_context;
     NVGcontext *nvg_context;
@@ -66,7 +57,22 @@ public:
     int win_size_x;
     int win_size_y;
     
+    // templated version works for new types too (float, double, short, etc.)
+    template <class T> T Get(const std::string name) { return _prefs[name]; }
+    // these getters are here for backwards compatibility and/or readability
+    std::string String(const std::string name)       { return Get<std::string>(name); };
+    long Number(const std::string name)              { return Get<long>(name); };
+    long Number(const std::string name, const long defaultValue);
+    bool Boolean(const std::string name)             { return Get<bool>(name); }
+    json Get(const std::string name)                 { return Get<json>(name); }
+
+    template <class T> void Set(const std::string name, const T value) {
+        _prefs[name] = value;
+        PrefChanged(name);
+    }
+
 protected:
+    static json _prefs;
     std::vector<CWindow *> windowList;
     std::function<bool(int, int)> resize_callback;
     uint32_t window_id;
