@@ -34,8 +34,12 @@ public:
 
     Vector location, orientation;
     int current_id;
+    bool update = true;
 
     BSPViewer(int id) : CApplication("BSP Viewer") {
+        AvaraGLInitContext();
+
+        AvaraGLSetFOV(50);
         current_id = id;
         itsWorld = new CBSPWorldImpl;
         itsWorld->IBSPWorld(1);
@@ -65,71 +69,104 @@ public:
         orientation[2] = FIX(0);
     }
 
-    void newPart(int id) {
-        if (itsWorld->GetPartCount() > 0) {
-            itsWorld->RemovePart(itsPart);
+    bool newPart(int id) {
+        try {
+            if (itsWorld->GetPartCount() > 0) {
+                itsWorld->RemovePart(itsPart);
+            }
+            itsPart = new CBSPPart;
+            itsPart->IBSPPart(id);
+            if (itsPart->polyCount > 1) {
+                itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
+                itsPart->ReplaceColor(kOtherMarkerColor, 13421568); // yellow
+                itsPart->UpdateOpenGLData();
+                itsWorld->AddPart(itsPart);
+                SDL_Log("Loaded BSP %d", id);
+                return true;
+            }
+            else return false;
+        } catch (...) {
+            return false;
         }
-        itsPart = new CBSPPart;
-        itsPart->IBSPPart(current_id);
-        itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
-        itsPart->ReplaceColor(kOtherMarkerColor, 13421568); // yellow
-        itsPart->UpdateOpenGLData();
-        itsWorld->AddPart(itsPart);
     }
 
-    bool HandleEvent(SDL_Event &event) {
+    bool event(SDL_Event &event) {
         switch (event.type) {
             case SDL_MOUSEMOTION:
                 if (event.motion.state & SDL_BUTTON(SDL_BUTTON_LEFT)) {
                     location[2] += FIX((float)event.motion.yrel / 5.0);
-                    return true;
+                    update = true;
                 }
                 if (event.motion.state & SDL_BUTTON(SDL_BUTTON_RIGHT)) {
                     orientation[0] += FIX((float)event.motion.yrel / 5.0);
                     orientation[1] += FIX((float)event.motion.xrel / 5.0);
-                    return true;
+                    update = true;
                 }
                 break;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.sym) {
                     case SDLK_LEFT:
                         orientation[1] -= FIX(5);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_RIGHT:
                         orientation[1] += FIX(5);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_DOWN:
                         orientation[0] -= FIX(5);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_UP:
                         orientation[0] += FIX(5);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_w:
                         orientation[0] = FIX(90);
                         orientation[1] = FIX(0);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_s:
                         orientation[0] = FIX(-90);
                         orientation[1] = FIX(0);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_d:
                         orientation[0] = FIX(0);
                         orientation[1] = FIX(90);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_a:
                         orientation[0] = FIX(0);
                         orientation[1] = FIX(-90);
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_b:
                         cull_back_faces = !cull_back_faces;
-                        return true;
+                        update = true;
+                        break;
                     case SDLK_r:
-                        newPart(current_id);
-                        return true;
+                        do {
+                            current_id++;
+                            if (current_id > 1500) {
+                                current_id = 1;
+                            }
+                        } while (newPart(current_id) != true);
+                        update = true;
+                        break;
+                    case SDLK_t:
+                        do{ 
+                            current_id--;
+                            if (current_id < 1) {
+                                current_id = 1500;
+                            }
+                        } while(newPart(current_id) != true);
+                        update = true;
+                        break;
                 }
                 break;
         }
-        return false;
+        return update;
     }
 
     void drawContents() {
@@ -137,59 +174,74 @@ public:
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glBlendFunc(GL_ONE, GL_ZERO);
+        if (update) {
+            AvaraGLViewport(fb_size_x, fb_size_y);
+            itsView->SetViewRect(fb_size_x, fb_size_y, fb_size_x / 2, fb_size_y / 2);
+            itsView->viewPixelRatio = FIX(4.0/3.0);
+            itsView->CalculateViewPyramidCorners();
+        
+            if (cull_back_faces) {
+                itsPart->userFlags |= CBSPUserFlags::kCullBackfaces;
+            }
+            else {
+                itsPart->userFlags &= ~CBSPUserFlags::kCullBackfaces;
+            }
 
-        AvaraGLViewport(mFBSize.x, mFBSize.y);
-        itsView->SetViewRect(mFBSize.x, mFBSize.y, mFBSize.x / 2, mFBSize.y / 2);
-        itsView->viewPixelRatio = FIX(4.0/3.0);
-        itsView->CalculateViewPyramidCorners();
-
-        if (cull_back_faces) {
-            itsPart->userFlags |= CBSPUserFlags::kCullBackfaces;
+            itsPart->Reset();
+            itsPart->RotateZ(orientation[2]);
+            itsPart->RotateY(orientation[1]);
+            itsPart->RotateX(orientation[0]);
+            TranslatePart(itsPart, location[0], location[1], location[2]);
+            SDL_Log("X: %f Y: %f Z: %f o[0]: %f o[1]: %f o[2]: %f",
+                ToFloat(location[0]),
+                ToFloat(location[1]),
+                ToFloat(location[2]),
+                ToFloat(orientation[0]),
+                ToFloat(orientation[1]),
+                ToFloat(orientation[2])
+            );
+            itsPart->MoveDone();
+            update = false;
         }
-        else {
-            itsPart->userFlags &= ~CBSPUserFlags::kCullBackfaces;
-        }
-
-        itsPart->Reset();
-        itsPart->RotateZ(orientation[2]);
-        itsPart->RotateY(orientation[1]);
-        itsPart->RotateX(orientation[0]);
-        TranslatePart(itsPart, location[0], location[1], location[2]);
-        itsPart->MoveDone();
-
         worldShader->ShadeWorld(itsView);
 
         itsWorld->Render(itsView);
     }
 
-    void idle() {
-        glClearColor(0, 0, 0, 1);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        drawContents();
-        SDL_GL_SwapWindow(mSDLWindow);
-    }
 };
 
 int main(int argc, char *argv[]) {
 
 
-    // Init SDL and nanogui.
-    nanogui::init();
-
     // Init Avara stuff.
     InitMatrix();
 
     // The BSPViewer application itself.
-    if (argc > 1)
-        BSPViewer *app = new BSPViewer(atoi(argv[1]));
-    else
-        BSPViewer *app = new BSPViewer(215);
+    BSPViewer *app = new BSPViewer(argc > 1 ? atoi(argv[1]) : 215);
 
-    // Wait at most 10ms for any event.
-    nanogui::mainloop(10);
 
-    // Shut it down!!
-    nanogui::shutdown();
+    bool main_loop_active = true;
+    SDL_Event event;
+
+    while (main_loop_active) {
+
+        //if (!app->visible()) {
+        //    continue;
+        //}
+        if (SDL_WaitEventTimeout(&event, 500)) {
+            if (event.type == SDL_QUIT) {
+                main_loop_active = false;
+            }
+            app->event(event);
+        }
+
+        glClearColor(.3, .5, .3, 1);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        // Update everything and draw
+        app->drawContents();
+        SDL_GL_SwapWindow(app->window);
+    }
+    app->Done();
 
     return 0;
 }

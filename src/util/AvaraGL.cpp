@@ -134,7 +134,7 @@ void AvaraGLSetFOV(float fov) {
 }
 
 void AvaraGLUpdateProjectionMatrix() {
-    SDL_Log("Window: %d x %d Near: %f Far: %f FOV: %f", window_width, window_height, near_dist, far_dist, current_fov);
+    //SDL_Log("Window: %d x %d Near: %f Far: %f FOV: %f", window_width, window_height, near_dist, far_dist, current_fov);
     proj = glm::scale(glm::perspective(
                         glm::radians(current_fov),
                         (float)window_width / (float)window_height,
@@ -144,6 +144,12 @@ void AvaraGLUpdateProjectionMatrix() {
     glUseProgram(gProgram);
     glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
     glCheckErrors();
+}
+
+glm::vec3 AvaraGLScreenSpaceToWorldSpace(CViewParameters *theView, glm::vec4 *ss_vec) {
+    glm::mat4 v = ToFloatMat(&theView->viewMatrix);
+    glm::mat4 pv = glm::inverse(proj * v);
+    return glm::vec3(pv * (*ss_vec));
 }
 
 void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, long color) {

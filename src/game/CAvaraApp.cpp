@@ -67,7 +67,6 @@ void TrackerPinger(CAvaraAppImpl *app) {
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
-    AvaraGLInitContext();
     itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
     itsGUI = new CGUI(this);
     gCurrentGame = itsGame;
@@ -131,6 +130,7 @@ void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
     drawContents();
+    itsGUI->Update();
 }
 
 void CAvaraAppImpl::drawContents() {
@@ -164,6 +164,9 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
                 return true;
             }
         }
+
+        if (itsGUI->handleSDLEvent(event))
+            return true;
 
         return CApplication::handleSDLEvent(event);
     }

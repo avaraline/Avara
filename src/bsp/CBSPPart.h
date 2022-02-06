@@ -52,6 +52,12 @@ namespace CBSPUserFlags {
 /*
 **	Special macros for rotations and translations for speed (unfortunately):
 */
+
+#define PlacePart(part, x, y, z) \
+    part->itsTransform[3][0] = x; \
+    part->itsTransform[3][1] = y; \
+    part->itsTransform[3][2] = z
+
 #define TranslatePart(part, dx, dy, dz) \
     part->itsTransform[3][0] += dx; \
     part->itsTransform[3][1] += dy; \

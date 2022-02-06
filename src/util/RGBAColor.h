@@ -2,6 +2,7 @@
 
 #include "CColorManager.h"
 #include "csscolorparser.hpp"
+#include "nanovg.h"
 
 #include <regex>
 #include <SDL2/SDL.h>
@@ -23,6 +24,15 @@ static uint32_t RGBAToLong(CSSColorParser::Color rgba) {
         (rgba.r << 16) +
         (rgba.g << 8) +
         rgba.b
+    );
+}
+
+static uint32_t RGBAToLong(NVGcolor c) {
+    return (
+        (static_cast<int>(c.a + 0.5) << 24) +
+        (static_cast<int>(c.r) << 16) +
+        (static_cast<int>(c.g) << 8) +
+        static_cast<int>(c.b)
     );
 }
 

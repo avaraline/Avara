@@ -265,8 +265,6 @@ bool CApplication::resizeCallbackEvent(int, int) {
 
 
 bool CApplication::handleSDLEvent(SDL_Event &event) {
-    // By default, give nanogui first crack at events.
-    // bool handled = nanogui::Screen::handleSDLEvent(event);
     bool handled = false;
     switch(event.type) {
         case SDL_WINDOWEVENT:

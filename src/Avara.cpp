@@ -95,10 +95,13 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
+
+    AvaraGLInitContext();
+
     bool main_loop_active = true;
     int refresh = app->GetGame()->frameTime / 4;
     SDL_Event event;
-
+    
     while (main_loop_active) {
 
         //if (!app->visible()) {
@@ -113,6 +116,7 @@ int main(int argc, char *argv[]) {
 
         glClearColor(.3, .5, .3, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        // Update everything and draw
         app->idle();
         SDL_GL_SwapWindow(app->window);
     }

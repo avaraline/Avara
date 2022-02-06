@@ -60,6 +60,8 @@ void CBSPPart::IBSPPart(short resId) {
     std::ifstream infile(bspName);
     if (infile.fail()) {
         SDL_Log("*** Failed to load BSP %d\n", resId);
+        polyCount = 0;
+        pointCount = 0;
         return;
     }
 
