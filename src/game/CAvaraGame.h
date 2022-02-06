@@ -175,6 +175,8 @@ public:
     Boolean veryLongWait;
     Boolean allowBackgroundProcessing;
     Boolean simpleExplosions;
+    Boolean keysFromStdin;
+    Boolean keysToStdout;
 
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
@@ -253,6 +255,9 @@ public:
     virtual void SetFrameTime(long ft);
     virtual void IncrementFrame(bool firstFrame = false);
     virtual long FramesFromNow(long classicFrames);
+
+    void SetKeysFromStdin() { keysFromStdin = true; };
+    void SetKeysToStdout() { keysToStdout = true; };
 };
 
 #ifndef MAINAVARAGAME

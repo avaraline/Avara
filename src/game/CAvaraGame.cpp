@@ -165,6 +165,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     loadedTimeLimit = 600;
     timeInSeconds = 0;
     simpleExplosions = false;
+    keysFromStdin = false;
+    keysToStdout = false;
 
     statusRequest = -1; // who decided to make "playing" 0??
 

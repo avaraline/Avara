@@ -110,7 +110,6 @@ public:
     virtual void SetShowScoreboard(bool b) = 0;
     virtual bool GetShowScoreboard() = 0;
 
-
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
@@ -263,4 +262,5 @@ public:
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
 
+    void PlaybackAndRecord(FunctionTable &ft);
 };

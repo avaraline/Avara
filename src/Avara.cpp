@@ -76,6 +76,10 @@ int main(int argc, char *argv[]) {
         } else if (arg == "-f" || arg == "--frametime") {
             long frameTime = atol(argv[++i]);  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
+        } else if (arg == "-i" || arg == "--keys-from-stdin") {
+            app->GetGame()->SetKeysFromStdin();
+        } else if (arg == "-o" || arg == "--keys-to-stdout") {
+            app->GetGame()->SetKeysToStdout();
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
