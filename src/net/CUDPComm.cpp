@@ -530,6 +530,15 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
     return newConn;
 }
 
+void LogConnectionsTable(const char* prefix, CompleteAddress* table) {
+    // zero index reserved for server
+    for (int i = 1; i < kMaxAvaraPlayers; i++) {
+        // IPaddress and CompleteAddress are basically the same structure, should consolidate
+        SDL_Log("%s%d\t%s\n", prefix, i, FormatAddr(*(IPaddress*)table).c_str());
+        table++;
+    }
+}
+
 void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     // SDL_Log("CUDPComm::ReadFromTOC\n");
     CompleteAddress *table;
@@ -540,6 +549,7 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     table = (CompleteAddress *)thePacket->dataBuffer;
     table[myId - 1].host = 0; // don't want to connect to myself
     table[myId - 1].port = 0;
+    LogConnectionsTable("ReadFromTOC: ", table);
 
     connections->MarkOpenConnections(table);
     connections->OpenNewConnections(table);
@@ -548,10 +558,9 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
 
-    // SDL_Log("CUDPComm::PacketHandler command=%d p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->p1,
-    // thePacket->p2, thePacket->p3);
-    // SDL_Log("   CUDPComm::PacketHandler    <<<<  cmd=%d sender=%d  p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->sender,
-    //         thePacket->p1, thePacket->p2, thePacket->p3);
+    // SDL_Log("CUDPComm::PacketHandler <<<<   cmd=%d p1=%d p2=%d p3=%d sndr=%d dist=0x%02hx\n",
+    //         thePacket->command, thePacket->p1, thePacket->p2, thePacket->p3,
+    //         thePacket->sender, thePacket->distribution);
 
     switch (thePacket->command) {
         case kpPacketProtocolReject:
@@ -2002,4 +2011,11 @@ void CUDPComm::BuildServerTags() {
         theConn = theConn->next;
     }
     */
+}
+
+ip_addr CUDPComm::ServerHost() {
+    if (connections->myId == 0) {
+        return connections->ipAddr;
+    }
+    return 0;
 }

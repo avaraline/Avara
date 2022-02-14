@@ -46,3 +46,5 @@ void UDPRead(int sock, ReadCompleteProc callback, void *userData);
 void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *userData);
 
 std::string FormatHostPort(uint32_t host, uint16_t port);
+
+bool IsLocal(uint32_t host);

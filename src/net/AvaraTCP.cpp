@@ -202,3 +202,9 @@ std::string FormatHostPort(uint32_t host, uint16_t port) {
        << SDL_SwapBE16(port);
     return os.str();
 }
+
+bool IsLocal(uint32_t host) {
+    static uint32_t localhost = SDL_SwapBE32(0x7f000001);    // 127.0.0.1
+    // static uint32_t localrouter = SDL_SwapBE32(0xc0a80101);  // 192.168.1.1
+    return host == localhost /* || host == localrouter */;
+}

@@ -150,4 +150,6 @@ public:
     virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
 
     virtual void BuildServerTags();
+
+    virtual ip_addr ServerHost();
 };
