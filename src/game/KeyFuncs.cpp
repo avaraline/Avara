@@ -2,14 +2,14 @@
 #include "KeyFuncs.h"
 
 #include <iomanip>
-using namespace std;
+#include <limits>
 
 template <typename T>
 T add_with_limit(T a, T b) {
-    if (a > 0 && b > 0 && (a > numeric_limits<T>::max() - b)) {
-        return numeric_limits<T>::max();
-    } else if (a < 0 && b < 0 && (a < numeric_limits<T>::min() - b)) {
-        return numeric_limits<T>::min();
+    if (a > 0 && b > 0 && (a > std::numeric_limits<T>::max() - b)) {
+        return std::numeric_limits<T>::max();
+    } else if (a < 0 && b < 0 && (a < std::numeric_limits<T>::min() - b)) {
+        return std::numeric_limits<T>::min();
     }
     return a + b;
 }
@@ -25,30 +25,30 @@ void FunctionTable::merge(const FunctionTable &ft) {
 }
 
 // serialize a FunctionTable instance to an ostream
-ostream& operator<< (ostream& os, const FunctionTable& ft) {
-    os << hex << setfill('0')
-       << setw(8) << ft.down << " "
-       << setw(8) << ft.up << " "
-       << setw(8) << ft.held << " "
-       << setw(4) << ft.mouseDelta.v << " "
-       << setw(4) << ft.mouseDelta.h << " "
-       << setw(1) << int(ft.buttonStatus) << endl
-       << dec;
+std::ostream& operator<< (std::ostream& os, const FunctionTable& ft) {
+    os << std::hex << std::setfill('0')
+       << std::setw(8) << ft.down << " "
+       << std::setw(8) << ft.up << " "
+       << std::setw(8) << ft.held << " "
+       << std::setw(4) << ft.mouseDelta.v << " "
+       << std::setw(4) << ft.mouseDelta.h << " "
+       << std::setw(1) << int(ft.buttonStatus) << std::endl
+       << std::dec;
     return os;
 }
 
 // de-serialize an istream into a FunctionTable instance
-istream& operator>> (istream& is, FunctionTable& ft) {
+std::istream& operator>> (std::istream& is, FunctionTable& ft) {
     // lines beginning with # are treated as comments
     while (is.peek() == '#') {
-        is.ignore(numeric_limits<streamsize>::max(), '\n');
+        is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     // clear all values first
     ft = {};
     if (!is.eof()) {
         uint16_t uv, uh;
         int buttonStatus; // load it into an int, otherwise it assumes it's an actual char
-        is >> hex >> skipws
+        is >> std::hex >> std::skipws
            >> ft.down
            >> ft.up
            >> ft.held
@@ -59,7 +59,7 @@ istream& operator>> (istream& is, FunctionTable& ft) {
         ft.mouseDelta.v = short(uv);
         ft.mouseDelta.h = short(uh);
         ft.buttonStatus = buttonStatus;
-        is.ignore(numeric_limits<streamsize>::max(), '\n');
+        is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     return is;
 }
