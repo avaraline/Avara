@@ -283,7 +283,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glUseProgram(gProgram);
     glBindVertexArray(part->vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, part->vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STATIC_DRAW);
     glCheckErrors();
 
     for (int i = 0; i < 3; i++) {

@@ -178,6 +178,8 @@ CApplication::CApplication(std::string the_title) {
 
     nvg_context = nvgCreateGL2(nvgflags);
 
+    /* Font loading here */
+
     nvgCreateFontMem(nvg_context, "sans", roboto_regular_ttf, roboto_regular_ttf_size, 0);
     nvgCreateFontMem(nvg_context, "sans-bold", roboto_bold_ttf, roboto_bold_ttf_size, 0);
     nvgCreateFontMem(nvg_context, "icons", entypo_ttf, entypo_ttf_size, 0);
@@ -251,11 +253,10 @@ bool CApplication::resizeCallbackEvent(int, int) {
     win_tmp_size_x = win_tmp_size_x / pixel_ratio;
     win_tmp_size_y = win_tmp_size_y / pixel_ratio;
 #endif
-
-    if (win_tmp_size_x == win_tmp_size_y == 0 ||
-        fb_size_x == fb_size_y == 0) 
+    if ((win_tmp_size_x == 0 && win_tmp_size_y == 0) ||
+        (fb_tmp_size_x == 0 && fb_tmp_size_y == 0)) {
         return false;
-
+    }
     fb_size_x = fb_tmp_size_x;
     fb_size_y = fb_tmp_size_y;
     win_size_x = win_tmp_size_x;
