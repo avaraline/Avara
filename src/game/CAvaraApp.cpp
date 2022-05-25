@@ -33,6 +33,8 @@
 #include "httplib.h"
 #include <chrono>
 #include <json.hpp>
+#include <random>
+
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -306,6 +308,81 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
         messageLines.pop_front();
     }
 }
+
+void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
+    if(player->IsLocalPlayer()) {
+        if(chatText == "/r" || chatText == "/random") {
+            //load random level
+            std::vector<std::string> levelSets = LevelDirNameListing();
+            
+            std::random_device rd; // obtain a random number from hardware
+            std::mt19937 gen(rd()); // seed the generator
+            std::uniform_int_distribution<> distr(0, levelSets.size()); // define the range
+            
+            std::string set = levelSets[distr(gen)];
+            levelWindow->SelectSet(set);
+            
+            nlohmann::json levels = LoadLevelListFromJSON(set);
+
+            std::random_device rdLevel;
+            std::mt19937 genLevel(rdLevel());
+            std::uniform_int_distribution<> distrLevel(0, levelSets.size());
+
+            std::string level = levelSets[distrLevel(genLevel)];
+            
+            levelWindow->SelectLevel(set, level);
+            levelWindow->SendLoad();
+            //LoadLevel(set, level, player);
+        }
+        else if(chatText == "/active" || chatText == "/a") {
+            if(player->LoadingStatus() == kLNotPlaying) {
+                player->SetPlayerStatus(kLConnected, -1);
+            }
+            else {
+                player->SetPlayerStatus(kLNotPlaying, -1);
+            }
+        }
+        else if(chatText.rfind("/pref ", 0) == 0 || chatText.rfind("/p ", 0) == 0) {
+            std::string pref;
+            std::string value;
+            std::stringstream chatSS(chatText);
+            getline(chatSS, pref, ' '); //skip "/p "
+            getline(chatSS, pref, ' ');
+            getline(chatSS, value, ' ');
+
+            if(value.length() == 0) {
+                //read prefs
+                AddMessageLine(pref + " = " + this->Get(pref).dump());
+            }
+            else {
+                //write prefs
+                nlohmann::json currentValue = this->Get(pref); //get current type
+                if(currentValue.is_string()) {
+                    SDL_Log("STRING");
+                    this->Set(pref, value);
+                }
+                else if (currentValue.is_number_float() || value.find('.') != std::string::npos ) {
+                    SDL_Log("FLOAT  %s %f", value.c_str(), stof(value));
+                    nlohmann::json jsonFloat = nlohmann::json(stof(value));
+                    this->Set(pref, jsonFloat);
+                }
+                else if (currentValue.is_number_integer()) {
+                    SDL_Log("INT");
+                    this->Set(pref, stoi(value));
+                }
+                else if (currentValue.is_boolean()) {
+                    SDL_Log("BOOL");
+                    nlohmann::json bvalue = nlohmann::json(value == "true" ? true : false);
+                    this->Set(pref, bvalue);
+                }
+
+                AddMessageLine(pref + " set to = " + value);
+                CApplication::PrefChanged(pref);
+            }
+        }
+    }
+}
+
 void CAvaraAppImpl::MessageLine(short index, short align) {
     SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
     switch(index) {

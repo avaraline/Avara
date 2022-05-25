@@ -102,6 +102,7 @@ public:
     void NotifyUser() override;
     virtual void AddMessageLine(std::string line) override;
     virtual void GameStarted(std::string set, std::string level) override;
+    virtual void ChatCommand(std::string chatText, CPlayerManager* player);
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);

@@ -305,6 +305,8 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
         strStatus = "paused";
     } else if (status == kLActive) {
         strStatus = "active";
+    } else if (status == kLNotPlaying) {
+        strStatus = "not playing";
     } else if (status == kLNoVehicle) {
         strStatus = "HECTOR not available";
     } else {

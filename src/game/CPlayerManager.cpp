@@ -800,6 +800,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
             case 13:
                 // ¬
                 ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
+                ((CAvaraAppImpl*)itsGame->itsApp)->ChatCommand(GetChatLine(), this);
 
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
                 // FlushMessageText(true);
@@ -941,7 +942,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive) {
+    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && loadingStatus != kLNotPlaying) {
         oldStatus = loadingStatus;
 
         if (serverErr || levelErr) {

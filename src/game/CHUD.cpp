@@ -295,6 +295,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     float pY;
     uint32_t longTeamColor;
     float teamColorRGB[3];
+    float colorBoxAlpha = 1.0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = net->playerTable[i];
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
@@ -303,9 +304,15 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         longTeamColor = *CColorManager::getTeamColor(net->teamColors[i] + 1);
         LongToRGBA(longTeamColor, teamColorRGB, 3);
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
+        NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
+        
+        //check for not playing
+        if(thisPlayer->LoadingStatus() == kLNotPlaying) {
+            textColor = nvgRGBA(255, 255, 255, 150);
+            colorBoxAlpha = 0.5;
+        }
 
         //player color box
-        NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
         float colorBoxWidth = 10.0;
         nvgBeginPath(ctx);
 
@@ -321,7 +328,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         }
 
         nvgRect(ctx, bufferWidth - 160, pY, colorBoxWidth, 10.0);
-        nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
+        nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], colorBoxAlpha));
         nvgFill(ctx);
 
         //player name
