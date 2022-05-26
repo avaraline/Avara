@@ -258,6 +258,12 @@ void CNetManager::NameChange(StringPtr newName) {
     itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, theStatus, 0, newName[0] + 1, (Ptr)newName);
 }
 
+void CNetManager::StatusChange() {
+    short theStatus = playerTable[itsCommManager->myId]->LoadingStatus();
+
+    itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange, 0, theStatus, 0, 0, NULL);
+}
+
 void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, short status, Point location) {
     if (theId >= 0 && theId < kMaxAvaraPlayers) {
         totalDistribution |= 1 << theId;

@@ -311,6 +311,8 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
 
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     if(player->CalculateIsLocalPlayer()) {
+        SDL_Log("status=%hi", player->LoadingStatus());
+
         if(chatText == "/r" || chatText == "/random") {
             //load random level
             std::vector<std::string> levelSets = LevelDirNameListing();
@@ -334,12 +336,23 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             levelWindow->SendLoad();
         }
         else if(chatText == "/active" || chatText == "/a") {
+            short status = kLNotPlaying;
+
             if(player->LoadingStatus() == kLNotPlaying) {
-                player->SetPlayerStatus(kLConnected, -1);
+                if(itsGame->loadedLevel.length() > 0) {
+                    status = kLLoaded;
+                    SDL_Log("STATUS=Loaded");
+                }
+                else {
+                    status = kLConnected;
+                    SDL_Log("STATUS=Connected");
+                }
             }
             else {
-                player->SetPlayerStatus(kLNotPlaying, -1);
+                SDL_Log("STATUS=Not Playing");
             }
+            player->SetPlayerStatus(status, -1);
+            gameNet->StatusChange();
         }
         else if(chatText.rfind("/pref ", 0) == 0 || chatText.rfind("/p ", 0) == 0) {
             std::string pref;
@@ -379,7 +392,9 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                 CApplication::PrefChanged(pref);
             }
         }
-    }
+        SDL_Log("new status=%hi", player->LoadingStatus());
+
+    }    
 }
 
 void CAvaraAppImpl::MessageLine(short index, short align) {

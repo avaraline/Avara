@@ -127,6 +127,7 @@ public:
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
     virtual void RecordNameAndLocation(short slotId, StringPtr theName, short status, Point location);
+    virtual void StatusChange();
 
     virtual void SwapPositions(short ind1, short ind2);
     virtual void PositionsChanged(char *p);
