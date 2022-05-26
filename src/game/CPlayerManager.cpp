@@ -869,6 +869,10 @@ std::string CPlayerManagerImpl::GetChatString(int maxChars) {
     return std::string(i, theChat.end());
 }
 
+bool CPlayerManagerImpl::CalculateIsLocalPlayer() {
+    return theNetManager->itsCommManager->myId == slot;
+}
+
 void CPlayerManagerImpl::GameKeyPress(char theChar) {
     theNetManager->ReceiveRosterMessage(slot, 1, &theChar);
 }

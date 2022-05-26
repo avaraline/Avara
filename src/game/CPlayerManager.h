@@ -54,6 +54,8 @@ public:
     virtual short Slot() = 0;
     virtual void AbortRequest() = 0;
     virtual Boolean IsLocalPlayer() = 0;
+    virtual bool CalculateIsLocalPlayer() = 0;
+    
     virtual void GameKeyPress(char c) = 0;
     virtual FunctionTable *GetFunctions() = 0;
     virtual void DeadOrDone() = 0;
@@ -179,6 +181,7 @@ public:
 
     virtual void SetPlayer(CAbstractPlayer *thePlayer);
 
+    virtual bool CalculateIsLocalPlayer();
     virtual uint32_t GetKeyBits();
     virtual uint32_t DoMouseControl(Point *deltaMouse, Boolean doCenter);
     virtual void HandleEvent(SDL_Event &event);

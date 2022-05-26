@@ -311,6 +311,10 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             textColor = nvgRGBA(255, 255, 255, 150);
             colorBoxAlpha = 0.5;
         }
+        else {
+            textColor = nvgRGBA(255, 255, 255, 255);
+            colorBoxAlpha = 1.0;
+        }
 
         //player color box
         float colorBoxWidth = 10.0;

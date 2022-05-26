@@ -310,14 +310,14 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
 }
 
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
-    if(player->IsLocalPlayer()) {
+    if(player->CalculateIsLocalPlayer()) {
         if(chatText == "/r" || chatText == "/random") {
             //load random level
             std::vector<std::string> levelSets = LevelDirNameListing();
             
             std::random_device rd; // obtain a random number from hardware
             std::mt19937 gen(rd()); // seed the generator
-            std::uniform_int_distribution<> distr(0, levelSets.size()); // define the range
+            std::uniform_int_distribution<> distr(0, levelSets.size() - 1); // define the range
             
             std::string set = levelSets[distr(gen)];
             levelWindow->SelectSet(set);
@@ -326,13 +326,12 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
 
             std::random_device rdLevel;
             std::mt19937 genLevel(rdLevel());
-            std::uniform_int_distribution<> distrLevel(0, levelSets.size());
+            std::uniform_int_distribution<> distrLevel(0, levelSets.size() - 1);
 
             std::string level = levelSets[distrLevel(genLevel)];
             
             levelWindow->SelectLevel(set, level);
             levelWindow->SendLoad();
-            //LoadLevel(set, level, player);
         }
         else if(chatText == "/active" || chatText == "/a") {
             if(player->LoadingStatus() == kLNotPlaying) {
