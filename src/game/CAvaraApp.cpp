@@ -326,11 +326,15 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             
             nlohmann::json levels = LoadLevelListFromJSON(set);
 
+            if(levels.is_array())
+                SDL_Log("ARRAY");
+            
             std::random_device rdLevel;
             std::mt19937 genLevel(rdLevel());
-            std::uniform_int_distribution<> distrLevel(0, levelSets.size() - 1);
+            std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
 
-            std::string level = levelSets[distrLevel(genLevel)];
+            nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
+            std::string level = jsonLevel.at("Name");
             
             levelWindow->SelectLevel(set, level);
             levelWindow->SendLoad();
