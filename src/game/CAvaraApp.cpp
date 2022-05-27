@@ -396,6 +396,31 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                 CApplication::PrefChanged(pref);
             }
         }
+        else if(chatText.rfind("/load ", 0) == 0 || chatText.rfind("/l ", 0) == 0) {
+            std::vector<std::string> levelSets = LevelDirNameListing();
+            std::string levelPrefix;
+            std::stringstream chatSS(chatText);
+            getline(chatSS, levelPrefix, ' '); //skip "/load "
+            getline(chatSS, levelPrefix, ' ');
+            std::transform(levelPrefix.begin(), levelPrefix.end(),levelPrefix.begin(), ::toupper);
+
+            for(std::string set : levelSets) {
+                nlohmann::json ledis = LoadLevelListFromJSON(set);
+                for (auto &ld : ledis.items()) {
+                    std::string levelCaseSensitive = ld.value()["Name"].get<std::string>();
+                    std::string level = ld.value()["Name"].get<std::string>();
+                    std::transform(level.begin(), level.end(),level.begin(), ::toupper);
+
+                    if(level.rfind(levelPrefix, 0) == 0) {
+                        levelWindow->SelectLevel(set, levelCaseSensitive);
+                        levelWindow->SendLoad();
+                        
+                        return;
+                    }
+                }
+            }
+        }
+
         SDL_Log("new status=%hi", player->LoadingStatus());
 
     }    
