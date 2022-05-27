@@ -401,7 +401,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             std::string levelPrefix;
             std::stringstream chatSS(chatText);
             getline(chatSS, levelPrefix, ' '); //skip "/load "
-            getline(chatSS, levelPrefix, ' ');
+            getline(chatSS, levelPrefix);
             std::transform(levelPrefix.begin(), levelPrefix.end(),levelPrefix.begin(), ::toupper);
 
             for(std::string set : levelSets) {
