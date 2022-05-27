@@ -325,9 +325,6 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             levelWindow->SelectSet(set);
             
             nlohmann::json levels = LoadLevelListFromJSON(set);
-
-            if(levels.is_array())
-                SDL_Log("ARRAY");
             
             std::random_device rdLevel;
             std::mt19937 genLevel(rdLevel());
