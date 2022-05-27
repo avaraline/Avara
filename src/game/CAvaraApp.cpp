@@ -407,12 +407,12 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             for(std::string set : levelSets) {
                 nlohmann::json ledis = LoadLevelListFromJSON(set);
                 for (auto &ld : ledis.items()) {
-                    std::string levelCaseSensitive = ld.value()["Name"].get<std::string>();
                     std::string level = ld.value()["Name"].get<std::string>();
-                    std::transform(level.begin(), level.end(),level.begin(), ::toupper);
+                    std::string levelUpper = ld.value()["Name"].get<std::string>();
+                    std::transform(levelUpper.begin(), levelUpper.end(),levelUpper.begin(), ::toupper);
 
-                    if(level.rfind(levelPrefix, 0) == 0) {
-                        levelWindow->SelectLevel(set, levelCaseSensitive);
+                    if(levelUpper.rfind(levelPrefix, 0) == 0) {
+                        levelWindow->SelectLevel(set, level);
                         levelWindow->SendLoad();
                         
                         return;
