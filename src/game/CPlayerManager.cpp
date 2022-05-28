@@ -768,6 +768,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
         const char checkMark_utf8[3] = {'\xE2', '\x88', '\x9A'}; // ✓
         const char triangle_utf8[3] = {'\xCE', '\x94'}; // Δ
         theChar = *c++;
+        std::string chatText = GetChatLine();
 
         switch (theChar) {
             case 6:
@@ -800,10 +801,10 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
             case 13:
                 // ¬
                 ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
-                ((CAvaraAppImpl*)itsGame->itsApp)->ChatCommand(GetChatLine(), this);
-
+                
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
                 // FlushMessageText(true);
+                ((CAvaraAppImpl*)itsGame->itsApp)->ChatCommand(chatText, this);
                 break;
             case 27:
                 lineBuffer.clear();

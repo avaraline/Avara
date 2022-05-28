@@ -329,12 +329,21 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
     /l
         Load levels by name. Full level name is not required. Case insensitive.
  
+    /pref
+    /p
+        Display and set preference values. usage: /p prefName prefValue
+ 
  */
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     if(player->CalculateIsLocalPlayer()) {
-        SDL_Log("status=%hi", player->LoadingStatus());
 
-        if(chatText == "/r" || chatText == "/random") {
+        if(chatText == "/b" || chatText == "/beep") {
+            NotifyUser();
+        }
+        else if(chatText == "/c" || chatText == "/clear") {
+            player->LineBuffer().clear();
+        }
+        else if(chatText == "/r" || chatText == "/random") {
             //load random level
             std::vector<std::string> levelSets = LevelDirNameListing();
             
@@ -363,54 +372,52 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             if(player->LoadingStatus() == kLNotPlaying) {
                 if(itsGame->loadedLevel.length() > 0) {
                     status = kLLoaded;
-                    SDL_Log("STATUS=Loaded");
                 }
                 else {
                     status = kLConnected;
-                    SDL_Log("STATUS=Connected");
                 }
             }
-            else {
-                SDL_Log("STATUS=Not Playing");
-            }
+
             player->SetPlayerStatus(status, -1);
             gameNet->StatusChange();
         }
         else if(chatText.rfind("/pref ", 0) == 0 || chatText.rfind("/p ", 0) == 0) {
             std::string pref;
             std::string value;
+            std::string currentValue;
             std::stringstream chatSS(chatText);
             getline(chatSS, pref, ' '); //skip "/p "
             getline(chatSS, pref, ' ');
             getline(chatSS, value, ' ');
 
+            currentValue = this->Get(pref).dump();
+            
+//            if(currentValue.length() == 0 || currentValue == "null") {
+//                AddMessageLine(pref + " has no value.");
+//            }
             if(value.length() == 0) {
                 //read prefs
-                AddMessageLine(pref + " = " + this->Get(pref).dump());
+                AddMessageLine(pref + " = " + currentValue);
             }
             else {
                 //write prefs
-                nlohmann::json currentValue = this->Get(pref); //get current type
-                if(currentValue.is_string()) {
-                    SDL_Log("STRING");
+                nlohmann::json currentValueJSON = this->Get(pref); //get current type
+                if(currentValueJSON.is_string()) {
                     this->Set(pref, value);
                 }
-                else if (currentValue.is_number_float() || value.find('.') != std::string::npos ) {
-                    SDL_Log("FLOAT  %s %f", value.c_str(), stof(value));
+                else if (currentValueJSON.is_number_float() || value.find('.') != std::string::npos ) {
                     nlohmann::json jsonFloat = nlohmann::json(stof(value));
                     this->Set(pref, jsonFloat);
                 }
-                else if (currentValue.is_number_integer()) {
-                    SDL_Log("INT");
+                else if (currentValueJSON.is_number_integer()) {
                     this->Set(pref, stoi(value));
                 }
-                else if (currentValue.is_boolean()) {
-                    SDL_Log("BOOL");
+                else if (currentValueJSON.is_boolean()) {
                     nlohmann::json bvalue = nlohmann::json(value == "true" ? true : false);
                     this->Set(pref, bvalue);
                 }
 
-                AddMessageLine(pref + " set to = " + value);
+                AddMessageLine(pref + " changed from " + currentValue + " to " + value);
                 CApplication::PrefChanged(pref);
             }
         }
@@ -438,9 +445,6 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                 }
             }
         }
-
-        SDL_Log("new status=%hi", player->LoadingStatus());
-
     }    
 }
 
