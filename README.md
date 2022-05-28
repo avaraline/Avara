@@ -1,9 +1,9 @@
 
 # Avara
 
-![avara_gif](https://vastan.net/dump/avara.gif)
+![avara](https://vastan.net/dump/avara.gif)
 
-[Avara Discord](https://discord.gg/yw5qnBtJd5) | [Avara IRC](irc://avaraline.net:6667/avaraline)
+[Avara Discord](https://discord.gg/yw5qnBtJd5) | IRC: avaraline.net:6667 #avaraline
 
 A port of the [1996 game by Juri Munkki](https://en.wikipedia.org/wiki/Avara), published by Ambrosia Software, [released under MIT license](https://github.com/jmunkki/Avara).
 
