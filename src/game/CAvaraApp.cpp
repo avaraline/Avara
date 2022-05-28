@@ -309,6 +309,27 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
     }
 }
 
+/*
+ 
+ Chat commands
+ 
+ Commands are executed by typing the command in chat and pressing return.
+ 
+ Available commands:
+
+    /random
+    /r
+        Load a random level.
+ 
+    /active
+    /a
+        Toggle active state. A player will not be loaded into a game if they are inactive.
+ 
+    /load
+    /l
+        Load levels by name. Full level name is not required. Case insensitive.
+ 
+ */
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     if(player->CalculateIsLocalPlayer()) {
         SDL_Log("status=%hi", player->LoadingStatus());
