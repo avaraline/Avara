@@ -34,6 +34,8 @@
 #include <chrono>
 #include <json.hpp>
 #include <random>
+#include "CommDefs.h"
+
 
 
 // included while we fake things out
@@ -333,11 +335,35 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
     /p
         Display and set preference values. usage: /p prefName prefValue
  
+    /beep
+    /b
+        Make notification sound.
+ 
+    /clear
+    /c
+        Clear chat text.
+ 
+    /kick <player slot number>
+    /k
+        Kick player in given slot. Slots start at 1.
+ 
  */
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     if(player->CalculateIsLocalPlayer()) {
 
-        if(chatText == "/b" || chatText == "/beep") {
+        if(chatText.rfind("/kill ", 0) == 0 || chatText.rfind("/k ", 0) == 0) {
+            std::string slotString;
+            std::stringstream chatSS(chatText);
+            int slot;
+            getline(chatSS, slotString, ' '); //skip "/kick"
+            getline(chatSS, slotString, ' ');
+            slot = std::stoi(slotString) - 1;
+
+            AddMessageLine("Kicking player in slot " + slotString);
+
+            gameNet->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
+        }
+        else if(chatText == "/b" || chatText == "/beep") {
             NotifyUser();
         }
         else if(chatText == "/c" || chatText == "/clear") {
