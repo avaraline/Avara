@@ -115,6 +115,10 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
 
     LoadDefaultOggFiles();
+    
+    AddMessageLine("Welcome to Avara.");
+    AddMessageLine("Type /help and press return for a list of chat commands.");
+
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -319,6 +323,10 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
  
  Available commands:
 
+    /help
+    /h
+        Display a list of commands
+ 
     /random
     /r
         Load a random level.
@@ -351,7 +359,14 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     if(player->CalculateIsLocalPlayer()) {
 
-        if(chatText.rfind("/kill ", 0) == 0 || chatText.rfind("/k ", 0) == 0) {
+        if(chatText == "/help" || chatText == "/h") {
+            AddMessageLine("Available commands:");
+            AddMessageLine("    /random (load random level), /load (load level by name, full name not required)");
+            AddMessageLine("    /kick <player slot number>, /beep, /clear (clear chat text)");
+            AddMessageLine("    /pref (read and write preferences), /active (toggle active)");
+            AddMessageLine("Each command can be called using just the first letter of the command.");
+        }
+        else if(chatText.rfind("/kick ", 0) == 0 || chatText.rfind("/k ", 0) == 0) {
             std::string slotString;
             std::stringstream chatSS(chatText);
             int slot;
