@@ -360,7 +360,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     if(player->CalculateIsLocalPlayer()) {
 
         if(chatText == "/help" || chatText == "/h") {
-            AddMessageLine("Available commands:");
+            AddMessageLine("Execute commands from chat. Type the command and press return. Available commands:");
             AddMessageLine("    /random (load random level), /load (load level by name, full name not required)");
             AddMessageLine("    /kick <player slot number>, /beep, /clear (clear chat text)");
             AddMessageLine("    /pref (read and write preferences), /active (toggle active)");
