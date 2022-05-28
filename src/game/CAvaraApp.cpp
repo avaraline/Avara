@@ -115,7 +115,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
 
     LoadDefaultOggFiles();
-    
+
     AddMessageLine("Welcome to Avara.");
     AddMessageLine("Type /help and press return for a list of chat commands.");
 
@@ -316,45 +316,45 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
 }
 
 /*
- 
+
  Chat commands
- 
+
  Commands are executed by typing the command in chat and pressing return.
- 
+
  Available commands:
 
     /help
     /h
         Display a list of commands
- 
+
     /random
     /r
         Load a random level.
- 
+
     /active
     /a
         Toggle active state. A player will not be loaded into a game if they are inactive.
- 
+
     /load
     /l
         Load levels by name. Full level name is not required. Case insensitive.
- 
+
     /pref
     /p
         Display and set preference values. usage: /p prefName prefValue
- 
+
     /beep
     /b
         Make notification sound.
- 
+
     /clear
     /c
         Clear chat text.
- 
+
     /kick <player slot number>
     /k
         Kick player in given slot. Slots start at 1.
- 
+
  */
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     if(player->CalculateIsLocalPlayer()) {
@@ -387,23 +387,23 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
         else if(chatText == "/r" || chatText == "/random") {
             //load random level
             std::vector<std::string> levelSets = LevelDirNameListing();
-            
+
             std::random_device rd; // obtain a random number from hardware
             std::mt19937 gen(rd()); // seed the generator
             std::uniform_int_distribution<> distr(0, levelSets.size() - 1); // define the range
-            
+
             std::string set = levelSets[distr(gen)];
             levelWindow->SelectSet(set);
-            
+
             nlohmann::json levels = LoadLevelListFromJSON(set);
-            
+
             std::random_device rdLevel;
             std::mt19937 genLevel(rdLevel());
             std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
 
             nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
             std::string level = jsonLevel.at("Name");
-            
+
             levelWindow->SelectLevel(set, level);
             levelWindow->SendLoad();
         }
@@ -432,10 +432,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             getline(chatSS, value, ' ');
 
             currentValue = this->Get(pref).dump();
-            
-//            if(currentValue.length() == 0 || currentValue == "null") {
-//                AddMessageLine(pref + " has no value.");
-//            }
+
             if(value.length() == 0) {
                 //read prefs
                 AddMessageLine(pref + " = " + currentValue);
@@ -480,13 +477,13 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                     if(levelUpper.rfind(levelPrefix, 0) == 0) {
                         levelWindow->SelectLevel(set, level);
                         levelWindow->SendLoad();
-                        
+
                         return;
                     }
                 }
             }
         }
-    }    
+    }
 }
 
 void CAvaraAppImpl::MessageLine(short index, short align) {
