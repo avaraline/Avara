@@ -361,10 +361,10 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
 
         if(chatText == "/help" || chatText == "/h") {
             AddMessageLine("Execute commands from chat. Type the command and press return. Available commands:");
-            AddMessageLine("    /random (load random level), /load (load level by name, full name not required)");
+            AddMessageLine("    /random (load random level from matching set names or all sets)");
+            AddMessageLine("    /load (load level by name, full name not required)");
             AddMessageLine("    /kick <player slot number>, /beep, /clear (clear chat text)");
             AddMessageLine("    /pref (read and write preferences), /active (toggle active)");
-            AddMessageLine("Each command can be called using just the first letter of the command.");
         }
         else if(chatText.rfind("/kick ", 0) == 0 || chatText.rfind("/k ", 0) == 0) {
             std::string slotString;
@@ -384,28 +384,42 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
         else if(chatText == "/c" || chatText == "/clear") {
             player->LineBuffer().clear();
         }
-        else if(chatText == "/r" || chatText == "/random") {
+        else if(chatText.find("/r", 0) == 0 || chatText.find("/random", 0) == 0) {
             //load random level
             std::vector<std::string> levelSets = LevelDirNameListing();
 
-            std::random_device rd; // obtain a random number from hardware
-            std::mt19937 gen(rd()); // seed the generator
-            std::uniform_int_distribution<> distr(0, levelSets.size() - 1); // define the range
+            size_t matchIndex = std::min(chatText.find(" ", 0), chatText.length() - 1);
+            // matchStr will be "" for "/r", and "xyz" for "/r xyz"
+            std::string matchStr = chatText.substr(matchIndex+1);
+            std::vector<std::string> matchingSets;
+            for (auto setName : levelSets) {
+                if (setName.find(matchStr, 0) != std::string::npos) {
+                    matchingSets.push_back(setName);
+                }
+            }
 
-            std::string set = levelSets[distr(gen)];
-            levelWindow->SelectSet(set);
+            AddMessageLine((std::ostringstream() << "Choosing random level from " << matchingSets.size() << " sets").str());
 
-            nlohmann::json levels = LoadLevelListFromJSON(set);
+            if (matchingSets.size() > 0) {
+                std::random_device rd; // obtain a random number from hardware
+                std::mt19937 gen(rd()); // seed the generator
+                std::uniform_int_distribution<> distr(0, matchingSets.size() - 1); // define the range
 
-            std::random_device rdLevel;
-            std::mt19937 genLevel(rdLevel());
-            std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
+                std::string set = matchingSets[distr(gen)];
+                levelWindow->SelectSet(set);
 
-            nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
-            std::string level = jsonLevel.at("Name");
+                nlohmann::json levels = LoadLevelListFromJSON(set);
 
-            levelWindow->SelectLevel(set, level);
-            levelWindow->SendLoad();
+                std::random_device rdLevel;
+                std::mt19937 genLevel(rdLevel());
+                std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
+
+                nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
+                std::string level = jsonLevel.at("Name");
+
+                levelWindow->SelectLevel(set, level);
+                levelWindow->SendLoad();
+            }
         }
         else if(chatText == "/active" || chatText == "/a") {
             short status = kLNotPlaying;
