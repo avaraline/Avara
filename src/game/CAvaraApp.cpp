@@ -357,6 +357,13 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
 
  */
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
+    if(chatText == "/b" || chatText == "/beep") {
+        NotifyUser();
+    }
+    else if(chatText == "/c" || chatText == "/clear") {
+        player->LineBuffer().clear();
+    }
+    
     if(player->CalculateIsLocalPlayer()) {
 
         if(chatText == "/help" || chatText == "/h") {
@@ -372,17 +379,24 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             int slot;
             getline(chatSS, slotString, ' '); //skip "/kick"
             getline(chatSS, slotString, ' ');
-            slot = std::stoi(slotString) - 1;
+            
+            if(player->Slot() != 0) {
+                AddMessageLine("Only the host can issue kick commands.");
+            }
+            else if(!slotString.empty() && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
+                slot = std::stoi(slotString) - 1;
 
-            AddMessageLine("Kicking player in slot " + slotString);
-
-            gameNet->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
-        }
-        else if(chatText == "/b" || chatText == "/beep") {
-            NotifyUser();
-        }
-        else if(chatText == "/c" || chatText == "/clear") {
-            player->LineBuffer().clear();
+                if(slot == 0) {
+                    AddMessageLine("Host cannot be kicked.");
+                }
+                else {
+                    AddMessageLine("Kicking player in slot " + slotString);
+                    gameNet->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
+                }
+            }
+            else {
+                AddMessageLine("Invalid Kick command.");
+            }
         }
         else if(chatText.find("/r", 0) == 0 || chatText.find("/random", 0) == 0) {
             //load random level
@@ -421,20 +435,42 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                 levelWindow->SendLoad();
             }
         }
-        else if(chatText == "/active" || chatText == "/a") {
+        else if(chatText.rfind("/active", 0) == 0 || chatText.rfind("/a", 0) == 0) {
             short status = kLNotPlaying;
+            std::string slotString = "";
+            std::string command;
+            std::stringstream chatSS(chatText);
+            int slot;
+            getline(chatSS, command, ' '); //skip "/active"
+            getline(chatSS, slotString, ' ');
 
-            if(player->LoadingStatus() == kLNotPlaying) {
-                if(itsGame->loadedLevel.length() > 0) {
-                    status = kLLoaded;
-                }
-                else {
-                    status = kLConnected;
+            if(slotString.length() == 0 || std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
+                if(slotString.length() > 0)
+                    slot = std::stoi(slotString) - 1;
+                else
+                    slot = player->Slot();
+                
+                CPlayerManager* playerToChange = gameNet->playerTable[slot];
+                std::string playerName((char *)playerToChange->PlayerName() + 1, playerToChange->PlayerName()[0]);
+
+                if (playerName.length() > 0) {
+                    if(playerToChange->LoadingStatus() == kLNotPlaying) {
+                        if(itsGame->loadedLevel.length() > 0) {
+                            status = kLLoaded;
+                        }
+                        else {
+                            status = kLConnected;
+                            // bug . play a game, pause. go inactive then active and status is connected isntead of paused
+                        }
+                    }
+
+                    playerToChange->SetPlayerStatus(status, -1);
+                    gameNet->StatusChange();
                 }
             }
-
-            player->SetPlayerStatus(status, -1);
-            gameNet->StatusChange();
+            else {
+                AddMessageLine("Invalid active command.");
+            }
         }
         else if(chatText.rfind("/pref ", 0) == 0 || chatText.rfind("/p ", 0) == 0) {
             std::string pref;
@@ -454,7 +490,13 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             else {
                 //write prefs
                 nlohmann::json currentValueJSON = this->Get(pref); //get current type
-                if(currentValueJSON.is_string()) {
+                
+                if(currentValueJSON.is_null()) {
+                    AddMessageLine(pref + " is null. No changes were made.");
+
+                    return;
+                }
+                else if(currentValueJSON.is_string()) {
                     this->Set(pref, value);
                 }
                 else if (currentValueJSON.is_number_float() || value.find('.') != std::string::npos ) {
