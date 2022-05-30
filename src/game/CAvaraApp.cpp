@@ -371,7 +371,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             ChatCommandHistory(chatText);
         }
     }
-    
+
     if(player->CalculateIsLocalPlayer()) {
 
         if(chatText == "/help" || chatText == "/h") {
@@ -390,7 +390,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             int slot;
             getline(chatSS, slotString, ' '); //skip "/kick"
             getline(chatSS, slotString, ' ');
-            
+
             if(player->Slot() != 0) {
                 AddMessageLine("Only the host can issue kick commands.");
             }
@@ -462,7 +462,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                     slot = std::stoi(slotString) - 1;
                 else
                     slot = player->Slot();
-                
+
                 CPlayerManager* playerToChange = gameNet->playerTable[slot];
                 std::string playerName((char *)playerToChange->PlayerName() + 1, playerToChange->PlayerName()[0]);
 
@@ -495,7 +495,12 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             getline(chatSS, pref, ' ');
             getline(chatSS, value, ' ');
 
-            currentValue = this->Get(pref).dump();
+            try {
+                currentValue = this->Get(pref).dump();
+            } catch (json::out_of_range &e) {
+                AddMessageLine(pref + " is not a valid preference");
+                return;
+            }
 
             if(value.length() == 0) {
                 //read prefs
@@ -504,13 +509,8 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             else {
                 //write prefs
                 nlohmann::json currentValueJSON = this->Get(pref); //get current type
-                
-                if(currentValueJSON.is_null()) {
-                    AddMessageLine(pref + " is null. No changes were made.");
 
-                    return;
-                }
-                else if(currentValueJSON.is_string()) {
+                if (currentValueJSON.is_string()) {
                     this->Set(pref, value);
                 }
                 else if (currentValueJSON.is_number_float() || value.find('.') != std::string::npos ) {
