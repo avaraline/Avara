@@ -24,6 +24,7 @@
 #include <json.hpp>
 #include <thread>
 #include <mutex>
+#include <iterator>
 
 using json = nlohmann::json;
 
@@ -74,7 +75,10 @@ public:
     CTrackerWindow *trackerWindow;
 
     std::deque<std::string> messageLines;
-
+    std::deque<std::string> chatCommandHistory;
+    std::deque<std::string>::iterator chatCommandHistoryIterator;
+    bool historyUp;
+    
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
@@ -103,6 +107,9 @@ public:
     virtual void AddMessageLine(std::string line) override;
     virtual void GameStarted(std::string set, std::string level) override;
     virtual void ChatCommand(std::string chatText, CPlayerManager* player);
+    virtual void ChatCommandHistory(std::string chatText);
+    virtual void ChatCommandHistoryUp();
+    virtual void ChatCommandHistoryDown();
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);

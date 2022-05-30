@@ -261,10 +261,15 @@ void CNetManager::NameChange(StringPtr newName) {
 void CNetManager::StatusChange() {
     short theStatus = playerTable[itsCommManager->myId]->LoadingStatus();
     long winFrame = -1;
-    //char a[] = "-1";
-    Str255 realName = "-1";
 
-    itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange, 0, theStatus, 0, sizeof(long), (Ptr)&winFrame);
+    itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange, itsCommManager->myId, theStatus, 0, sizeof(long), (Ptr)&winFrame);
+}
+
+void CNetManager::StatusChange(short slot) {
+    short theStatus = playerTable[slot]->LoadingStatus();
+    long winFrame = -1;
+
+    itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange, slot, theStatus, 0, sizeof(long), (Ptr)&winFrame);
 }
 
 void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, short status, Point location) {

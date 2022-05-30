@@ -362,6 +362,14 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         //SDL_Log("CRosterWindow::handleSDLEvent SDL_KEYDOWN");
 
         switch (event.key.keysym.sym) {
+            case SDLK_UP:
+                ((CAvaraAppImpl *)gApplication)->ChatCommandHistoryUp();
+                
+                return true;
+            case SDLK_DOWN:
+                ((CAvaraAppImpl *)gApplication)->ChatCommandHistoryDown();
+
+                return true;
             case SDLK_BACKSPACE:
                 SendRosterMessage(1, backspace);
                 ChatLineDelete();

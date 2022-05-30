@@ -36,6 +36,7 @@
 #include <random>
 #include "CommDefs.h"
 
+char clearChatLine[1] = {'\x1B'};
 
 
 // included while we fake things out
@@ -113,9 +114,8 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
 
-
     LoadDefaultOggFiles();
-
+    
     AddMessageLine("Welcome to Avara.");
     AddMessageLine("Type /help and press return for a list of chat commands.");
 
@@ -359,14 +359,24 @@ void CAvaraAppImpl::AddMessageLine(std::string line) {
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     if(chatText == "/b" || chatText == "/beep") {
         NotifyUser();
+        
+        if(player->CalculateIsLocalPlayer()) {
+            ChatCommandHistory(chatText);
+        }
     }
     else if(chatText == "/c" || chatText == "/clear") {
         player->LineBuffer().clear();
+        
+        if(player->CalculateIsLocalPlayer()) {
+            ChatCommandHistory(chatText);
+        }
     }
     
     if(player->CalculateIsLocalPlayer()) {
 
         if(chatText == "/help" || chatText == "/h") {
+            ChatCommandHistory(chatText);
+
             AddMessageLine("Execute commands from chat. Type the command and press return. Available commands:");
             AddMessageLine("    /random (load random level from matching set names or all sets)");
             AddMessageLine("    /load (load level by name, full name not required)");
@@ -374,6 +384,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             AddMessageLine("    /pref (read and write preferences), /active (toggle active)");
         }
         else if(chatText.rfind("/kick ", 0) == 0 || chatText.rfind("/k ", 0) == 0) {
+            ChatCommandHistory(chatText);
             std::string slotString;
             std::stringstream chatSS(chatText);
             int slot;
@@ -400,6 +411,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
         }
         else if(chatText.find("/r", 0) == 0 || chatText.find("/random", 0) == 0) {
             //load random level
+            ChatCommandHistory(chatText);
             std::vector<std::string> levelSets = LevelDirNameListing();
 
             size_t matchIndex = std::min(chatText.find(" ", 0), chatText.length() - 1);
@@ -436,6 +448,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             }
         }
         else if(chatText.rfind("/active", 0) == 0 || chatText.rfind("/a", 0) == 0) {
+            ChatCommandHistory(chatText);
             short status = kLNotPlaying;
             std::string slotString = "";
             std::string command;
@@ -465,7 +478,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                     }
 
                     playerToChange->SetPlayerStatus(status, -1);
-                    gameNet->StatusChange();
+                    gameNet->StatusChange(slot);
                 }
             }
             else {
@@ -473,6 +486,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             }
         }
         else if(chatText.rfind("/pref ", 0) == 0 || chatText.rfind("/p ", 0) == 0) {
+            ChatCommandHistory(chatText);
             std::string pref;
             std::string value;
             std::string currentValue;
@@ -516,6 +530,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
             }
         }
         else if(chatText.rfind("/load ", 0) == 0 || chatText.rfind("/l ", 0) == 0) {
+            ChatCommandHistory(chatText);
             std::vector<std::string> levelSets = LevelDirNameListing();
             std::string levelPrefix;
             std::stringstream chatSS(chatText);
@@ -539,6 +554,37 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                 }
             }
         }
+    }
+}
+
+void CAvaraAppImpl::ChatCommandHistory(std::string chatText) {
+    chatCommandHistory.push_back(chatText);
+    chatCommandHistoryIterator = chatCommandHistory.begin();
+    historyUp = true;
+}
+
+void CAvaraAppImpl::ChatCommandHistoryDown() {
+    if(chatCommandHistoryIterator != chatCommandHistory.begin()) {
+        if(historyUp) {
+            chatCommandHistoryIterator--;
+            historyUp = false;
+        }
+        chatCommandHistoryIterator--;
+        std::string command = *chatCommandHistoryIterator;
+
+        rosterWindow->SendRosterMessage(1, clearChatLine);
+        rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
+    }
+}
+
+void CAvaraAppImpl::ChatCommandHistoryUp() {
+    if(chatCommandHistoryIterator != chatCommandHistory.end()) {
+        historyUp = true;
+        std::string command = *chatCommandHistoryIterator;
+        
+        rosterWindow->SendRosterMessage(1, clearChatLine);
+        rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
+        chatCommandHistoryIterator++;
     }
 }
 
