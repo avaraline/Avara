@@ -44,6 +44,7 @@ public:
     virtual short Slot() { return 0; }
     virtual void AbortRequest() {}
     virtual Boolean IsLocalPlayer() { return true; }
+    virtual Boolean CalculateIsLocalPlayer() { return true; }
     virtual void GameKeyPress(char c) {}
     virtual FunctionTable *GetFunctions() { return ft; }
     virtual void DeadOrDone() {}
