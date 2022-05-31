@@ -558,7 +558,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
 }
 
 void CAvaraAppImpl::ChatCommandHistory(std::string chatText) {
-    chatCommandHistory.push_back(chatText);
+    chatCommandHistory.push_front(chatText);
     chatCommandHistoryIterator = chatCommandHistory.begin();
     historyUp = true;
 }
@@ -579,6 +579,9 @@ void CAvaraAppImpl::ChatCommandHistoryDown() {
 
 void CAvaraAppImpl::ChatCommandHistoryUp() {
     if(chatCommandHistoryIterator != chatCommandHistory.end()) {
+        if(!historyUp) {
+            chatCommandHistoryIterator++;
+        }
         historyUp = true;
         std::string command = *chatCommandHistoryIterator;
         
