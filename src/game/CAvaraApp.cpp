@@ -570,7 +570,10 @@ void CAvaraAppImpl::ChatCommandHistoryDown() {
             chatCommandHistoryIterator--;
         }
         historyUp = false;
-        chatCommandHistoryIterator--;
+        
+        if(chatCommandHistoryIterator != chatCommandHistory.begin()) {
+            chatCommandHistoryIterator--;
+        }
         std::string command = *chatCommandHistoryIterator;
 
         rosterWindow->SendRosterMessage(1, clearChatLine);
@@ -588,7 +591,10 @@ void CAvaraAppImpl::ChatCommandHistoryUp() {
         
         rosterWindow->SendRosterMessage(1, clearChatLine);
         rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
-        chatCommandHistoryIterator++;
+       
+        if(chatCommandHistoryIterator != chatCommandHistory.end()) {
+            chatCommandHistoryIterator++;
+        }
     }
 }
 
