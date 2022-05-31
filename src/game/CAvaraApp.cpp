@@ -449,7 +449,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
         }
         else if(chatText.rfind("/active", 0) == 0 || chatText.rfind("/a", 0) == 0) {
             ChatCommandHistory(chatText);
-            short status = kLNotPlaying;
+            short status;
             std::string slotString = "";
             std::string command;
             std::stringstream chatSS(chatText);
@@ -468,13 +468,11 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
 
                 if (playerName.length() > 0) {
                     if(playerToChange->LoadingStatus() == kLNotPlaying) {
-                        if(itsGame->loadedLevel.length() > 0) {
-                            status = kLLoaded;
-                        }
-                        else {
-                            status = kLConnected;
-                            // bug . play a game, pause. go inactive then active and status is connected isntead of paused
-                        }
+                        status = playerToChange->PreviousStatus();
+                    }
+                    else {
+                        playerToChange->SetPreviousStatus(playerToChange->LoadingStatus());
+                        status = kLNotPlaying;
                     }
 
                     playerToChange->SetPlayerStatus(status, -1);
@@ -567,8 +565,8 @@ void CAvaraAppImpl::ChatCommandHistoryDown() {
     if(chatCommandHistoryIterator != chatCommandHistory.begin()) {
         if(historyUp) {
             chatCommandHistoryIterator--;
-            historyUp = false;
         }
+        historyUp = false;
         chatCommandHistoryIterator--;
         std::string command = *chatCommandHistoryIterator;
 

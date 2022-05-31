@@ -1126,6 +1126,18 @@ void CPlayerManagerImpl::SetPlayerStatus(short newStatus, long theWin) {
     }
 }
 
+void CPlayerManagerImpl::SetActive(bool b) {
+    active = b;
+}
+
+bool CPlayerManagerImpl::Active() {
+    return active;
+}
+
+void CPlayerManagerImpl::SetPreviousStatus(short status) {
+    previousStatus = status;
+}
+
 void CPlayerManagerImpl::AbortRequest() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
     if (isLocalPlayer) {
@@ -1291,6 +1303,9 @@ Str255& CPlayerManagerImpl::PlayerRegName() {
 }
 short CPlayerManagerImpl::LoadingStatus() {
     return loadingStatus;
+}
+short CPlayerManagerImpl::PreviousStatus() {
+    return previousStatus;
 }
 short CPlayerManagerImpl::LevelCRC() {
     return levelCRC;

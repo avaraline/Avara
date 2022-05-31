@@ -69,7 +69,10 @@ public:
     virtual void IsRegistered(short) = 0;
     virtual Str255& PlayerRegName() = 0;
     virtual short LoadingStatus() = 0;
+    virtual short PreviousStatus() = 0;
     virtual void SetPlayerStatus(short newStatus, long theWin) = 0;
+    virtual void SetPreviousStatus(short status) = 0;
+
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
     virtual void SetPosition(short pos) = 0;
     virtual void RosterKeyPress(unsigned char c) = 0;
@@ -112,7 +115,8 @@ public:
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
     virtual bool GetShowScoreboard() = 0;
-
+    virtual void SetActive(bool b) = 0;
+    virtual bool Active() = 0;
 
 };
 
@@ -160,6 +164,7 @@ private:
 
     long winFrame;
     short loadingStatus;
+    short previousStatus;
     short slot;
     short playerColor;
 
@@ -175,6 +180,8 @@ private:
     PlayerConfigRecord theConfiguration;
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
+    
+    bool active = true;
 
 public:
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
@@ -212,7 +219,7 @@ public:
     virtual void ChangeNameAndLocation(StringPtr theName, Point location);
     virtual void SetPosition(short pos);
     virtual void SetPlayerStatus(short newStatus, long theWin);
-
+    virtual void SetPreviousStatus(short status);
     virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
 
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
@@ -246,6 +253,7 @@ public:
     virtual void IsRegistered(short);
     virtual Str255& PlayerRegName();
     virtual short LoadingStatus();
+    virtual short PreviousStatus();
     virtual short LevelCRC();
     virtual OSErr LevelErr();
     virtual std::string LevelTag();
@@ -266,5 +274,6 @@ public:
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
-
+    virtual void SetActive(bool b);
+    virtual bool Active();
 };
