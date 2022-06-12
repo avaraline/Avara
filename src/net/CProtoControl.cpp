@@ -126,7 +126,10 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceivePlayerStatus(
                 thePacket->p1, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
             break;
-
+        case kpJSON:
+            theNet->ReceiveJSON(
+                thePacket->p1, thePacket->p2, thePacket->p3, std::string(thePacket->dataBuffer));
+            break;
         case kpKeyAndMouseRequest: {
             theGame->itsNet->playerTable[itsManager->myId]->ResendFrame(
                 thePacket->p3, thePacket->sender, kpKeyAndMouse);

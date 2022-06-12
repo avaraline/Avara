@@ -470,16 +470,8 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                     AddMessageLine("Active command can not be used on players in a game.");
                 }
                 else if (playerName.length() > 0) {
-                    if(playerToChange->LoadingStatus() == kLNotPlaying) {
-                        status = playerToChange->PreviousStatus();
-                    }
-                    else {
-                        playerToChange->SetPreviousStatus(playerToChange->LoadingStatus());
-                        status = kLNotPlaying;
-                    }
-
-                    playerToChange->SetPlayerStatus(status, -1);
-                    gameNet->StatusChange(slot);
+                    playerToChange->SetActive(!playerToChange->Active());
+                    gameNet->ValueChange(slot, "active", playerToChange->Active());
                 }
             }
             else {

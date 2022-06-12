@@ -129,6 +129,7 @@ public:
     virtual void RecordNameAndLocation(short slotId, StringPtr theName, short status, Point location);
     virtual void StatusChange();
     virtual void StatusChange(short slot);
+    virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
     virtual void PositionsChanged(char *p);
@@ -156,6 +157,7 @@ public:
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
     virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);
+    virtual void ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json);
 
     virtual short PlayerCount();
 

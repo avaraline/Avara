@@ -307,7 +307,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
         
         //check for not playing
-        if(thisPlayer->LoadingStatus() == kLNotPlaying) {
+        if(thisPlayer->Active() == false) {
             textColor = nvgRGBA(255, 255, 255, 150);
             colorBoxAlpha = 0.5;
         }

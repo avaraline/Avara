@@ -28,7 +28,6 @@ enum {
     kLNotFound,
     kLPaused,
     kLNoVehicle,
-    kLNotPlaying,
 
     kStringNorth,
     kStringSouth,

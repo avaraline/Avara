@@ -947,7 +947,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && loadingStatus != kLNotPlaying) {
+    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && Active() == true) {
         oldStatus = loadingStatus;
 
         if (serverErr || levelErr) {

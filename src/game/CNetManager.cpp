@@ -272,6 +272,13 @@ void CNetManager::StatusChange(short slot) {
     itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange, slot, theStatus, 0, sizeof(long), (Ptr)&winFrame);
 }
 
+void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
+    std::string json = "{\"" + attributeName + "\":" + (value == true ? "true" : "false") + "}";
+    char* c = const_cast<char*>(json.c_str());
+    
+    itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, json.length(), c);
+}
+
 void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, short status, Point location) {
     if (theId >= 0 && theId < kMaxAvaraPlayers) {
         totalDistribution |= 1 << theId;
@@ -914,6 +921,22 @@ void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed rando
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         playerTable[slotId]->RandomKey(randomKey);
         playerTable[slotId]->SetPlayerStatus(newStatus, winFrame);
+    }
+}
+
+void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json){
+    if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
+        nlohmann::json message = nlohmann::json::parse(json);
+        playerTable[slotId]->RandomKey(randomKey);
+        
+        if(message.type() == nlohmann::json::value_t::object) {
+            auto it = message.begin();
+
+            if(it.key() == "active") {
+                bool active = it.value();
+                playerTable[slotId]->SetActive(active);
+            }
+        }
     }
 }
 

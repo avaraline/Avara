@@ -15,7 +15,7 @@ public:
     // Handles a command broadcasted by CApplication::BroadcastCommand. Returns true if it was actually handled.
     virtual bool DoCommand(int theCommand) override;
     void UpdateRoster();
-    std::string GetStringStatus(short status, Fixed winFrame);
+    std::string GetStringStatus(CPlayerManager *player);
     bool handleSDLEvent(SDL_Event &event);
     void SendRosterMessage(int length, char *message);
     void NewChatLine(Str255 playerName, std::string message);

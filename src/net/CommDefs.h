@@ -71,7 +71,8 @@ enum {
     kpPing, // 31
     kpRealName, // 32
 
-    kpLastCommandNumber
+    kpLastCommandNumber,
+    kpJSON
 };
 
 /*
