@@ -258,20 +258,6 @@ void CNetManager::NameChange(StringPtr newName) {
     itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, theStatus, 0, newName[0] + 1, (Ptr)newName);
 }
 
-void CNetManager::StatusChange() {
-    short theStatus = playerTable[itsCommManager->myId]->LoadingStatus();
-    long winFrame = -1;
-
-    itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange, itsCommManager->myId, theStatus, 0, sizeof(long), (Ptr)&winFrame);
-}
-
-void CNetManager::StatusChange(short slot) {
-    short theStatus = playerTable[slot]->LoadingStatus();
-    long winFrame = -1;
-
-    itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange, slot, theStatus, 0, sizeof(long), (Ptr)&winFrame);
-}
-
 void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
     std::string json = "{\"" + attributeName + "\":" + (value == true ? "true" : "false") + "}";
     char* c = const_cast<char*>(json.c_str());
@@ -532,6 +518,8 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
     if (senderSlot == loaderSlot) {
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             playerTable[i]->LoadStatusChange(crc, err, theTag);
+            SDL_Log("CNetManager::LevelLoadStatus loop\n");
+
         }
     } else {
         thePlayer->LoadStatusChange(

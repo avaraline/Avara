@@ -127,8 +127,6 @@ public:
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
     virtual void RecordNameAndLocation(short slotId, StringPtr theName, short status, Point location);
-    virtual void StatusChange();
-    virtual void StatusChange(short slot);
     virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
