@@ -78,6 +78,7 @@ public:
     std::deque<std::string> chatCommandHistory;
     std::deque<std::string>::iterator chatCommandHistoryIterator;
     bool historyUp;
+    bool historyCleared;
     
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;

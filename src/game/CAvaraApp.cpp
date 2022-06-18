@@ -557,33 +557,43 @@ void CAvaraAppImpl::ChatCommandHistory(std::string chatText) {
 }
 
 void CAvaraAppImpl::ChatCommandHistoryDown() {
-    if(chatCommandHistoryIterator != chatCommandHistory.begin()) {
-        if(historyUp) {
-            chatCommandHistoryIterator--;
+    if(historyCleared == false) {
+        if(chatCommandHistoryIterator == chatCommandHistory.begin()) {
+            rosterWindow->SendRosterMessage(1, clearChatLine);
+            if(historyCleared == false)
+                chatCommandHistoryIterator--;
+            
+            historyCleared = true;
         }
-        historyUp = false;
-        
-        if(chatCommandHistoryIterator != chatCommandHistory.begin()) {
-            chatCommandHistoryIterator--;
-        }
-        std::string command = *chatCommandHistoryIterator;
+        else {
+            if(historyUp == true) {
+                chatCommandHistoryIterator--;
+            }
+            historyUp = false;
 
-        rosterWindow->SendRosterMessage(1, clearChatLine);
-        rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
+            if(chatCommandHistoryIterator != chatCommandHistory.begin()) {
+                chatCommandHistoryIterator--;
+            }
+            std::string command = *chatCommandHistoryIterator;
+
+            rosterWindow->SendRosterMessage(1, clearChatLine);
+            rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
+        }
     }
 }
 
 void CAvaraAppImpl::ChatCommandHistoryUp() {
     if(chatCommandHistoryIterator != chatCommandHistory.end()) {
-        if(!historyUp) {
+        if(historyUp == false || historyCleared == true) {
             chatCommandHistoryIterator++;
         }
         historyUp = true;
+        historyCleared = false;
         std::string command = *chatCommandHistoryIterator;
         
         rosterWindow->SendRosterMessage(1, clearChatLine);
         rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
-       
+
         if(chatCommandHistoryIterator != chatCommandHistory.end()) {
             chatCommandHistoryIterator++;
         }
