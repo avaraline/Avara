@@ -409,7 +409,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                 AddMessageLine("Invalid Kick command.");
             }
         }
-        else if(chatText.find("/r", 0) == 0 || chatText.find("/random", 0) == 0) {
+        else if(chatText.find("/r ", 0) == 0 || chatText.find("/random ", 0) == 0 || chatText == "/r" || chatText == "/random") {
             //load random level
             ChatCommandHistory(chatText);
             std::vector<std::string> levelSets = LevelDirNameListing();
@@ -447,7 +447,7 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
                 levelWindow->SendLoad();
             }
         }
-        else if(chatText.rfind("/active", 0) == 0 || chatText.rfind("/a", 0) == 0) {
+        else if(chatText.rfind("/active ", 0) == 0 || chatText.rfind("/a ", 0) == 0 || chatText == "/a" || chatText == "/active") {
             ChatCommandHistory(chatText);
             short status;
             std::string slotString = "";
