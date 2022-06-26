@@ -262,7 +262,7 @@ void CNetManager::ValueChange(short slot, std::string attributeName, bool value)
     std::string json = "{\"" + attributeName + "\":" + (value == true ? "true" : "false") + "}";
     char* c = const_cast<char*>(json.c_str());
     
-    itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, json.length(), c);
+    itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
 }
 
 void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, short status, Point location) {
