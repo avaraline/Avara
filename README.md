@@ -1,7 +1,7 @@
 
 # Avara
 
-![avara](https://vastan.net/dump/avara.gif)
+![avara](https://vastan.net/dump/avara2.gif)
 
 [Avara Discord](https://discord.gg/yw5qnBtJd5) | IRC: avaraline.net:6667 #avaraline
 
