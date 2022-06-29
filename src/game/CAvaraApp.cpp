@@ -118,7 +118,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     
     AddMessageLine("Welcome to Avara.");
     AddMessageLine("Type /help and press return for a list of chat commands.");
-
+    LoadRandomLevel("aa-");
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -412,40 +412,10 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
         else if(chatText.find("/r ", 0) == 0 || chatText.find("/random ", 0) == 0 || chatText == "/r" || chatText == "/random") {
             //load random level
             ChatCommandHistory(chatText);
-            std::vector<std::string> levelSets = LevelDirNameListing();
 
             size_t matchIndex = std::min(chatText.find(" ", 0), chatText.length() - 1);
-            // matchStr will be "" for "/r", and "xyz" for "/r xyz"
             std::string matchStr = chatText.substr(matchIndex+1);
-            std::vector<std::string> matchingSets;
-            for (auto setName : levelSets) {
-                if (setName.find(matchStr, 0) != std::string::npos) {
-                    matchingSets.push_back(setName);
-                }
-            }
-
-            AddMessageLine((std::ostringstream() << "Choosing random level from " << matchingSets.size() << " sets").str());
-
-            if (matchingSets.size() > 0) {
-                std::random_device rd; // obtain a random number from hardware
-                std::mt19937 gen(rd()); // seed the generator
-                std::uniform_int_distribution<> distr(0, matchingSets.size() - 1); // define the range
-
-                std::string set = matchingSets[distr(gen)];
-                levelWindow->SelectSet(set);
-
-                nlohmann::json levels = LoadLevelListFromJSON(set);
-
-                std::random_device rdLevel;
-                std::mt19937 genLevel(rdLevel());
-                std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
-
-                nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
-                std::string level = jsonLevel.at("Name");
-
-                levelWindow->SelectLevel(set, level);
-                levelWindow->SendLoad();
-            }
+            LoadRandomLevel(matchStr);
         }
         else if(chatText.rfind("/active ", 0) == 0 || chatText.rfind("/a ", 0) == 0 || chatText == "/a" || chatText == "/active") {
             ChatCommandHistory(chatText);
@@ -554,6 +524,41 @@ void CAvaraAppImpl::ChatCommandHistory(std::string chatText) {
     chatCommandHistory.push_front(chatText);
     chatCommandHistoryIterator = chatCommandHistory.begin();
     historyUp = true;
+}
+
+void CAvaraAppImpl::LoadRandomLevel(std::string matchStr) {
+    // matchStr will be "" for "/r", and "xyz" for "/r xyz"
+    
+    std::vector<std::string> levelSets = LevelDirNameListing();
+    std::vector<std::string> matchingSets;
+    for (auto setName : levelSets) {
+        if (setName.find(matchStr, 0) != std::string::npos) {
+            matchingSets.push_back(setName);
+        }
+    }
+
+    AddMessageLine((std::ostringstream() << "Choosing random level from " << matchingSets.size() << " sets").str());
+
+    if (matchingSets.size() > 0) {
+        std::random_device rd; // obtain a random number from hardware
+        std::mt19937 gen(rd()); // seed the generator
+        std::uniform_int_distribution<> distr(0, matchingSets.size() - 1); // define the range
+
+        std::string set = matchingSets[distr(gen)];
+        levelWindow->SelectSet(set);
+
+        nlohmann::json levels = LoadLevelListFromJSON(set);
+
+        std::random_device rdLevel;
+        std::mt19937 genLevel(rdLevel());
+        std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
+
+        nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
+        std::string level = jsonLevel.at("Name");
+
+        levelWindow->SelectLevel(set, level);
+        levelWindow->SendLoad();
+    }
 }
 
 void CAvaraAppImpl::ChatCommandHistoryDown() {

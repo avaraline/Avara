@@ -261,7 +261,7 @@ void CNetManager::NameChange(StringPtr newName) {
 void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
     std::string json = "{\"" + attributeName + "\":" + (value == true ? "true" : "false") + "}";
     char* c = const_cast<char*>(json.c_str());
-    
+    SDL_Log("sending json %s", c);
     itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
 }
 

@@ -111,6 +111,7 @@ public:
     virtual void ChatCommandHistory(std::string chatText);
     virtual void ChatCommandHistoryUp();
     virtual void ChatCommandHistoryDown();
+    virtual void LoadRandomLevel(std::string matchStr);
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
