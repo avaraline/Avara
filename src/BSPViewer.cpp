@@ -36,6 +36,8 @@ public:
     int current_id;
     bool update = true;
 
+    bool drawsky = true;
+
     BSPViewer(int id) : CApplication("BSP Viewer") {
         AvaraGLInitContext();
 
@@ -163,6 +165,9 @@ public:
                         } while(newPart(current_id) != true);
                         update = true;
                         break;
+                    case SDLK_5:
+                        drawsky = !drawsky;
+                        break;
                 }
                 break;
         }
@@ -203,6 +208,7 @@ public:
             itsPart->MoveDone();
             update = false;
         }
+        if (drawsky)
         worldShader->ShadeWorld(itsView);
 
         itsWorld->Render(itsView);
