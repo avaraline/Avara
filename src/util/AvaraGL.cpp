@@ -273,6 +273,7 @@ void AvaraGLInitContext() {
 void AvaraGLViewport(short width, short height) {
     window_width = width;
     window_height = height;
+    glViewport(0, 0, width, height);
     AvaraGLUpdateProjectionMatrix();
 }
 

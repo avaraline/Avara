@@ -203,21 +203,29 @@ void CHUD::DrawLevelName(CViewParameters *view, NVGcontext *ctx) {
     if(itsGame->gameStatus != kPlayingStatus && level.length() > 0) {
         int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
+
         float x = 0.0;
         float y = bufferHeight - 130.0;
-        float bounds[4];
 
+        float padding = 5.0;
+
+        float bounds[4];
+        
         nvgBeginPath(ctx);
         nvgFontFace(ctx, "mono");
-        nvgFontSize(ctx, 24.0);
-        nvgTextBounds(ctx, x,y, level.c_str(), NULL, bounds);
-        x = (bufferWidth / 2) - (bounds[2]-bounds[0]) / 2;
-        nvgFillColor(ctx, BACKGROUND_COLOR);
-        nvgRect(ctx, x-5,y, (int)(bounds[2]-bounds[0])+10, (int)(bounds[3]-bounds[1])+4);
-        nvgFill(ctx);
+        nvgFontSize(ctx, 45.0);
+        nvgTextBounds(ctx, x, y, level.c_str(), NULL, bounds);
 
+        float textw = (bounds[2] - bounds[0]);
+        float texth = (bounds[3] - bounds[1]);
+
+        x = (bufferWidth / 2) - (textw / 2);
+        nvgFillColor(ctx, BACKGROUND_COLOR);
+        nvgRect(ctx, x - padding, y - padding, textw + (padding * 2), texth);
+        nvgFill(ctx);
         nvgFillColor(ctx, nvgRGBA(255,255,255,220));
-        nvgText(ctx, x,y+(bounds[3]-bounds[1])-3, level.c_str(), NULL);
+        nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+        nvgText(ctx, x, y - padding, level.c_str(), NULL);
     }
 }
 

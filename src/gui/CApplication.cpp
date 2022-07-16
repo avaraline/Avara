@@ -184,6 +184,8 @@ CApplication::CApplication(std::string the_title) {
     nvgCreateFontMem(nvg_context, "sans-bold", roboto_bold_ttf, roboto_bold_ttf_size, 0);
     nvgCreateFontMem(nvg_context, "icons", entypo_ttf, entypo_ttf_size, 0);
     nvgCreateFontMem(nvg_context, "mono", roboto_mono_ttf, roboto_mono_ttf_size, 0);
+    
+    nvgCreateFont(nvg_context, "archivo", "rsrc/ArchivoNarrow-BoldItalic.ttf");
 
     if (nvg_context == nullptr) {
         SDL_Log("Could not initialize NanoVG!");
@@ -200,7 +202,7 @@ CApplication::CApplication(std::string the_title) {
     SDL_Event dummyEvent;
     SDL_PollEvent(&dummyEvent);
 #endif
-    setResizeCallback([this](int new_x, int new_y) { this->WindowResized(new_x, new_y); return true; });
+    setResizeCallback([this](int new_x, int new_y) { this->WindowResized(new_x, new_y); return false; });
 
     CColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
     CColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));

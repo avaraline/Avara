@@ -17,6 +17,7 @@ protected:
     NVGcolor _color;
     char *_str;
     int _action;
+    bool _down;
     float rot = 0;
     CSmartBox *_part;
 };

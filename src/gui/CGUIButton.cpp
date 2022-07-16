@@ -14,6 +14,7 @@ CGUIButton::CGUIButton(NVGcolor color,
         _str = str;
         _action = action;
         _rect = r;
+        _down = false;
         Point mid = midpoint(r);
         _nvgactions = text(_str, font, color, mid);
 };
@@ -54,13 +55,19 @@ void CGUIButton::update(CGUI *gui) {
         && _rect.top < gui->cursor_y 
         && gui->cursor_y < _rect.bottom) {
             rot += ((float)gui->dt / 1000.0) / 2.0f;
-            if (gui->cursor_buttons & SDL_BUTTON_LMASK) {
+            if ((gui->cursor_buttons & SDL_BUTTON_LMASK) && !_down) {
                 _nvgactions = quick_text("CLICKED!", midpoint(_rect));
                 gui->itsGame->itsApp->GetNet()->SendLoadLevel("single-player", "training-grounds.alf");
+                gui->PlaySound(411);
+                _down = true;
+            }
+            else {
+                if (_down) _down = false;
             }
         }
         else {
             rot = 0;
+            if (_down) _down = false;
         }
 
         

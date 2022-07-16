@@ -149,7 +149,7 @@ void CAvaraAppImpl::drawContents() {
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
-    SDL_Log("Resize event: %i %i", width, height);
+    //SDL_Log("Resize event: %i %i", width, height);
     itsGame->UpdateViewRect(width, height, pixel_ratio);
     //performLayout();
 }
