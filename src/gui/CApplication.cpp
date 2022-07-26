@@ -165,9 +165,12 @@ CApplication::CApplication(std::string the_title) {
     SDL_GL_SwapWindow(window);
 
     GLint nStencilBits = 0, nSamples = 0;
-    glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,
-        GL_STENCIL, GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE, &nStencilBits);
-    glGetIntegerv(GL_SAMPLES, &nSamples);
+    try {
+        glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,
+            GL_STENCIL, GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE, &nStencilBits);
+        
+        glGetIntegerv(GL_SAMPLES, &nSamples);
+    } catch (const std::exception e) { }
     int nvgflags = 0;
     if (nStencilBits >= 8)
        nvgflags |= NVG_STENCIL_STROKES;
@@ -263,7 +266,7 @@ bool CApplication::resizeCallbackEvent(int, int) {
     fb_size_y = fb_tmp_size_y;
     win_size_x = win_tmp_size_x;
     win_size_y = win_tmp_size_y;
-    return resize_callback(win_size_x, win_size_y);
+    return resize_callback(fb_size_x, fb_size_y);
 }
 
 

@@ -294,7 +294,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     // custom per-object lighting
     float extra_amb = ToFloat(part->extraAmbient);
-    float current_amb = ToFloat(part->currentView->ambientLight);
+    float current_amb = ToFloat(part->currentView->ambientLight) || 1.0;
 
     if (part->privateAmbient != -1) {
         AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
@@ -342,13 +342,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     if (cull_back_faces) {
         glDisable(GL_CULL_FACE);
     }
-
-    glBindVertexArray(NULL);
     glCheckErrors();
-
-    glBindBuffer(GL_ARRAY_BUFFER, NULL);
-    glCheckErrors();
-
 }
 
 

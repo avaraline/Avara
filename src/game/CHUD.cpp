@@ -259,6 +259,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     CNetManager *net = itsGame->itsApp->GetNet();
 
     DrawLevelName(view, ctx);
+    if (itsGame->gameStatus != kPlayingStatus) return;
     DrawPaused(view, ctx);
 
     int playerCount = 0;

@@ -1,4 +1,4 @@
-#include "CGUIButton.h"
+/*#include "CGUIButton.h"
 #include "CGUI.h"
 
 #include "CAvaraGame.h"
@@ -75,4 +75,4 @@ void CGUIButton::update(CGUI *gui) {
         InitialRotatePartY(_part, FIX(rot));
         TranslatePart(_part, _partLoc[0], _partLoc[1], _partLoc[2]);
         _part->MoveDone();
-    }
+    }*/

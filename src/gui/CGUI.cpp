@@ -7,7 +7,6 @@
 #include "LevelLoader.h"
 #include "CApplication.h"
 #include "Preferences.h"
-#include "CGUIScreen.h"
 #include "CSoundHub.h"
 extern "C" {
 #include "microui.h"
@@ -20,32 +19,8 @@ const glm::vec3 CGUI::screenToWorld(Point *p) {
     glm::vec4 v = glm::vec4(normalized_x, normalized_y, 1.0, -1);
     return AvaraGLScreenSpaceToWorldSpace(itsView, &v);
 }
-/*
-static auto text_width(mu_Font f, const char *text, int len) {
-    if (len == -1) { len = strlen(text); }
-    return [f, text, len](NVGcontext *ctx) { return nvgTextBounds(ctx, 0, 0, text, nullptr, nullptr); };
-}
 
-static auto text_width(NVGcontext *ctx) {
-    return [ctx](mu_Font f, const char *text, int len) {
-        return (int)nvgTextBounds(ctx, 0, 0, text, nullptr, nullptr);
-    };
-}
-
-static auto text_height(NVGcontext* ctx) {
-    return [ctx](mu_Font f) {
-        float lineh;
-        nvgTextMetrics(ctx, nullptr, nullptr, &lineh);
-        return (int)lineh;
-    };
-}
-
-static int text_height(NVGcontext* ctx, mu_Font f) {
-    float asc, desc, lineh;
-    nvgTextMetrics(ctx, &asc, &desc, &lineh);
-    return lineh;
-}
-*/
+// MUI Callbacks
 
 static int text_width(mu_Font f, const char *text, int len) {
     return (int)round(nvgTextBounds(gApplication->nvg_context, 0, 0, text, nullptr, nullptr));
@@ -54,6 +29,17 @@ static int text_height(mu_Font f) {
     float lineh;
     nvgTextMetrics(gApplication->nvg_context, nullptr, nullptr, &lineh);
     return (int)round(lineh);
+}
+
+static void draw_frame(mu_Context *ctx, mu_Rect rect, int colorid) {
+    mu_draw_rect(ctx, rect, ctx->style->colors[colorid]);
+    if (colorid == MU_COLOR_SCROLLBASE  ||
+        colorid == MU_COLOR_SCROLLTHUMB ||
+        colorid == MU_COLOR_TITLEBG) { return; }
+    /* draw border */
+    if (ctx->style->colors[MU_COLOR_BORDER].a) {
+        //mu_draw_rect(ctx, rect, ctx->style->colors[MU_COLOR_BORDER]);
+    }
 }
 
 CGUI::CGUI(CAvaraGame *game) {
@@ -73,7 +59,7 @@ CGUI::CGUI(CAvaraGame *game) {
 
     itsCursor = new CScaledBSP;
     itsCursor->IScaledBSP(FIX3(100), kCursorBSP, 0, 0);
-    itsCursor->privateAmbient = FIX3(800);
+    //itsCursor->privateAmbient = FIX3(800);
     itsCursor->UpdateOpenGLData();
     cursorWorld = new CBSPWorldImpl;
     cursorWorld->IBSPWorld(1);
@@ -95,6 +81,8 @@ void CGUI::Update() {
     last_t = t;
     t = SDL_GetTicks64();
     dt = t - last_t;
+    int fb_size_x = gApplication->fb_size_x;
+    int fb_size_y = gApplication->fb_size_y;
     itsGame->GameTick();
     //screen->Update();
     mui_ctx->style->padding = 10;
@@ -102,11 +90,16 @@ void CGUI::Update() {
     int muiflags = MU_OPT_NOFRAME | MU_OPT_NOTITLE | MU_OPT_NOCLOSE | MU_OPT_NOINTERACT | MU_OPT_NORESIZE | MU_OPT_AUTOSIZE;
     if(mu_begin_window_ex(mui_ctx, 
                           "Main", 
-                          mu_rect(0, 0, gApplication->fb_size_x, gApplication->fb_size_y), 
+                          mu_rect(0, 0, fb_size_x, fb_size_y), 
                           muiflags)) {
 
-        mu_layout_row(mui_ctx, 1, (int[]) { gApplication->fb_size_x / 5 }, gApplication->fb_size_y / 9);
-
+        mu_layout_row(mui_ctx, 
+                      1, 
+                      (int[]) { (int)std::floor(fb_size_x / 5.0) }, 
+                      (int)std::floor(fb_size_y / 9.0));
+        std::stringstream fps;
+        fps << "frame in: " << dt << "ms";
+        mu_label(mui_ctx, fps.str().c_str());
         if (mu_button(mui_ctx, "PLAY")) {
             PlaySound(411);
         }
@@ -210,7 +203,7 @@ StateFunction CGUI::_transitonScreen() {
     return STAY;
 }
 
-const NVGcolor toNVGcolor(mu_Color other) {
+static const NVGcolor toNVGcolor(mu_Color other) {
     NVGcolor c;
     c.r = other.r / 255.0;
     c.g = other.g / 255.0;
@@ -218,6 +211,15 @@ const NVGcolor toNVGcolor(mu_Color other) {
     c.a = other.a / 255.0;
     return c;
 }
+
+static const long RGBAToLong(mu_Color c) {
+    return (
+        (static_cast<int>(c.a + 0.5) << 24) +
+        (static_cast<int>(c.r) << 16) +
+        (static_cast<int>(c.g) << 8) +
+        static_cast<int>(c.b)
+    );
+};
 
 void CGUI::Render(NVGcontext *ctx) {
 
@@ -227,12 +229,14 @@ void CGUI::Render(NVGcontext *ctx) {
 
 
     LookAtGUI();
-    itsWorld->Render(itsView);
+    //itsWorld->Render(itsView);
     //screen->Render(ctx);
 
     mu_Command *cmd = NULL;
     while (mu_next_command(mui_ctx, &cmd)) {
         if (cmd->type == MU_COMMAND_RECT) {
+            mu_Rect rect = cmd->rect.rect;
+            
             NVGcolor c = toNVGcolor(cmd->rect.color);
             nvgBeginPath(ctx);
             nvgRect(ctx, cmd->rect.rect.x, cmd->rect.rect.y, cmd->rect.rect.w, cmd->rect.rect.h);
@@ -241,15 +245,14 @@ void CGUI::Render(NVGcontext *ctx) {
             nvgStroke(ctx);
             nvgFill(ctx);
             nvgClosePath(ctx);
+            
         }
         if (cmd->type == MU_COMMAND_TEXT) {
-            //nvgScale(ctx, .7, 1.0);
             nvgFontFace(ctx, "archivo");
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
             nvgFillColor(ctx, toNVGcolor(cmd->text.color));
             nvgFontSize(ctx, 65);
             nvgText(ctx, cmd->text.pos.x, cmd->text.pos.y, cmd->text.str, NULL);
-            //nvgRestore(ctx);
         }
     }
     nvgEndFrame(ctx);

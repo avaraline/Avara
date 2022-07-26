@@ -4,6 +4,7 @@
 #include "nanovg.h"
 #include "CBSPWorld.h"
 #include "CBSPPart.h"
+#include "CSmartBox.h"
 #include "CScaledBSP.h"
 #include "CStateFunction.hpp"
 #include <SDL2/SDL.h>
@@ -15,6 +16,7 @@
 #define kCursorBSP 801 
 #define kAvaraLogo 100
 #define kBlockBSP 400
+#define kOutlineBSP 722
 
 class CGUIScreen;
 class CAvaraGame;
