@@ -66,9 +66,8 @@ void TrackerPinger(CAvaraAppImpl *app) {
 
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-
+    AvaraGLInitContext();
     itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
-    itsGUI = new CGUI(this);
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(win_size_x, win_size_y, pixel_ratio);
@@ -112,7 +111,9 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerThread->detach();
 
 
+    itsGUI = new CGUI(itsGame);
     LoadDefaultOggFiles();
+    //LoadLevel("single-player", "training-grounds.alf", NULL);
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -141,13 +142,14 @@ void CAvaraAppImpl::drawContents() {
         itsGame->itsView->LookFrom(x, y, z);
         itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);
         itsGame->itsView->PointCamera();
-        previewAngle += FIX3(1);
+        previewAngle += FIX3(itsGame->fpsScale);
     }
     itsGame->Render(nvg_context);
     itsGUI->Render(nvg_context);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
+    //SDL_Log("Resize event: %i %i", width, height);
     itsGame->UpdateViewRect(width, height, pixel_ratio);
     //performLayout();
 }

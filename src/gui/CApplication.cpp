@@ -103,16 +103,20 @@ CApplication::CApplication(std::string the_title) {
     auto glMajor = 2;
     auto glMinor = 1;
 
+    auto colorBits = 8;
+    auto depthBits = 24;
+    auto stencilBits = 8;
+
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, glMajor);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, glMinor);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, colorBits);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, colorBits);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, colorBits);
+    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, colorBits);
 
-    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, stencilBits);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     SDL_GL_SetAttribute(SDL_GL_SHARE_WITH_CURRENT_CONTEXT, 1);
@@ -164,12 +168,15 @@ CApplication::CApplication(std::string the_title) {
     SDL_GL_SetSwapInterval(0);
     SDL_GL_SwapWindow(window);
 
-    GLint nStencilBits = 0, nSamples = 0;
-    glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,
-        GL_STENCIL, GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE, &nStencilBits);
-    glGetIntegerv(GL_SAMPLES, &nSamples);
+    GLint nSamples = 0;
+    try {
+        /*glGetFramebufferAttachmentParameteriv(GL_DRAW_FRAMEBUFFER,
+            GL_STENCIL, GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE, &stencilBits);
+        */
+        glGetIntegerv(GL_SAMPLES, &nSamples);
+    } catch (const std::exception e) { }
     int nvgflags = 0;
-    if (nStencilBits >= 8)
+    if (stencilBits >= 8)
        nvgflags |= NVG_STENCIL_STROKES;
     if (nSamples <= 1)
        nvgflags |= NVG_ANTIALIAS;
@@ -178,10 +185,14 @@ CApplication::CApplication(std::string the_title) {
 
     nvg_context = nvgCreateGL2(nvgflags);
 
+    /* Font loading here */
+
     nvgCreateFontMem(nvg_context, "sans", roboto_regular_ttf, roboto_regular_ttf_size, 0);
     nvgCreateFontMem(nvg_context, "sans-bold", roboto_bold_ttf, roboto_bold_ttf_size, 0);
     nvgCreateFontMem(nvg_context, "icons", entypo_ttf, entypo_ttf_size, 0);
     nvgCreateFontMem(nvg_context, "mono", roboto_mono_ttf, roboto_mono_ttf_size, 0);
+    
+    nvgCreateFont(nvg_context, "archivo", "rsrc/ArchivoNarrow-BoldItalic.ttf");
 
     if (nvg_context == nullptr) {
         SDL_Log("Could not initialize NanoVG!");
@@ -198,7 +209,7 @@ CApplication::CApplication(std::string the_title) {
     SDL_Event dummyEvent;
     SDL_PollEvent(&dummyEvent);
 #endif
-    setResizeCallback([this](int new_x, int new_y) { this->WindowResized(new_x, new_y); return true; });
+    setResizeCallback([this](int new_x, int new_y) { this->WindowResized(new_x, new_y); return false; });
 
     CColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
     CColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
@@ -251,16 +262,15 @@ bool CApplication::resizeCallbackEvent(int, int) {
     win_tmp_size_x = win_tmp_size_x / pixel_ratio;
     win_tmp_size_y = win_tmp_size_y / pixel_ratio;
 #endif
-
-    if (win_tmp_size_x == win_tmp_size_y == 0 ||
-        fb_size_x == fb_size_y == 0) 
+    if ((win_tmp_size_x == 0 && win_tmp_size_y == 0) ||
+        (fb_tmp_size_x == 0 && fb_tmp_size_y == 0)) {
         return false;
-
+    }
     fb_size_x = fb_tmp_size_x;
     fb_size_y = fb_tmp_size_y;
     win_size_x = win_tmp_size_x;
     win_size_y = win_tmp_size_y;
-    return resize_callback(win_size_x, win_size_y);
+    return resize_callback(fb_size_x, fb_size_y);
 }
 
 

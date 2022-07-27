@@ -98,7 +98,7 @@ static json defaultPrefs = {
         {"debug2", "6"}}
     },
     {kPlayerNameTag, "Unnamed Player"},
-    {kMultiSamplesTag, 0},
+    {kMultiSamplesTag, 8},
     {kWindowWidth, 1024},
     {kWindowHeight, 768},
     {kFullScreenTag, false},

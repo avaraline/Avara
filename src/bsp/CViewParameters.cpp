@@ -93,6 +93,7 @@ void CViewParameters::SetViewRect(short width, short height, short centerX, shor
 
         AvaraGLViewport(width, height);
         Recalculate();
+        //SDL_Log("SetViewRect %i %i %i %i", width, height, centerX, centerY);
     }
 }
 

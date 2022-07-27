@@ -95,9 +95,6 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-
-    AvaraGLInitContext();
-
     bool main_loop_active = true;
     int refresh = app->GetGame()->frameTime / 4;
     SDL_Event event;

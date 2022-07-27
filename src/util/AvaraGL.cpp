@@ -273,6 +273,7 @@ void AvaraGLInitContext() {
 void AvaraGLViewport(short width, short height) {
     window_width = width;
     window_height = height;
+    glViewport(0, 0, width, height);
     AvaraGLUpdateProjectionMatrix();
 }
 
@@ -283,7 +284,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glUseProgram(gProgram);
     glBindVertexArray(part->vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, part->vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STATIC_DRAW);
     glCheckErrors();
 
     for (int i = 0; i < 3; i++) {
@@ -293,7 +294,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     // custom per-object lighting
     float extra_amb = ToFloat(part->extraAmbient);
-    float current_amb = ToFloat(part->currentView->ambientLight);
+    float current_amb = ToFloat(part->currentView->ambientLight) || 1.0;
 
     if (part->privateAmbient != -1) {
         AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
@@ -341,13 +342,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     if (cull_back_faces) {
         glDisable(GL_CULL_FACE);
     }
-
-    glBindVertexArray(NULL);
     glCheckErrors();
-
-    glBindBuffer(GL_ARRAY_BUFFER, NULL);
-    glCheckErrors();
-
 }
 
 
