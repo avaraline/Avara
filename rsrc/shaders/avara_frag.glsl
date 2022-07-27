@@ -1,4 +1,4 @@
-#version 140
+#version 120
 #extension GL_ARB_explicit_attrib_location : require
 
 in vec3 fragmentColor;
@@ -19,7 +19,7 @@ uniform float lights_active = 1.0;
 out vec4 color;
 
 vec3 diffuse_light(vec3 light, vec3 lightColor) {
-    vec3 dir = fragmentNormal * mix(-1.0, 1.0, gl_FrontFacing);
+    vec3 dir = fragmentNormal * mix(-1.0, 1.0, float(gl_FrontFacing));
     return max(dot(dir, light), 0.0) * lightColor;
 }
 
@@ -35,7 +35,7 @@ vec3 light_color() {
     return mix(
         ambient * ambientColor * fragmentColor,
         ((ambient * ambientColor) + diffuse()) * fragmentColor,
-        lights_active
+        float(lights_active)
     );
 }
 
