@@ -65,7 +65,7 @@ CGUI::CGUI(CAvaraGame *game) {
     cursorWorld->IBSPWorld(1);
     cursorWorld->AddPart(itsCursor);
     
-    started = SDL_GetTicks64();
+    started = SDL_GetTicks();
 
     //screen = new CGUIScreen(MainMenu, itsWorld, this);
 }
@@ -79,7 +79,7 @@ void CGUI::LookAtGUI() {
 void CGUI::Update() {
     state = state();
     last_t = t;
-    t = SDL_GetTicks64();
+    t = SDL_GetTicks();
     dt = t - last_t;
     int fb_size_x = gApplication->fb_size_x;
     int fb_size_y = gApplication->fb_size_y;
@@ -157,13 +157,13 @@ bool CGUI::handleSDLEvent(SDL_Event &event) {
         case SDL_MOUSEMOTION:
             mouse();
             mu_input_mousemove(mui_ctx, event.motion.x, event.motion.y);
-            break;
+            return true;
         case SDL_MOUSEWHEEL:
             mu_input_scroll(mui_ctx, 0, event.wheel.y * -30);
-            break;
+            return true;
         case SDL_TEXTINPUT:
             mu_input_text(mui_ctx, event.text.text);
-            break;
+            return true;
 
         case SDL_KEYDOWN:
 
@@ -182,7 +182,7 @@ bool CGUI::handleSDLEvent(SDL_Event &event) {
             {
                 mu_input_mouseup(mui_ctx, event.button.x, event.button.y, b);
             }
-            break;
+            return true;
         }
     }
     return false;
@@ -223,7 +223,7 @@ static const long RGBAToLong(mu_Color c) {
 
 void CGUI::Render(NVGcontext *ctx) {
 
-    nvgSave(ctx);
+    //nvgSave(ctx);
     nvgBeginFrame(ctx, gApplication->win_size_x, gApplication->win_size_y, gApplication->pixel_ratio);
     nvgBeginPath(ctx);
 
@@ -256,7 +256,7 @@ void CGUI::Render(NVGcontext *ctx) {
         }
     }
     nvgEndFrame(ctx);
-    nvgRestore(ctx);
+    //nvgRestore(ctx);
     cursorWorld->Render(itsView);
 }
 
