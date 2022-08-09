@@ -36,6 +36,8 @@
 #include <random>
 #include "CommDefs.h"
 
+#include "TextCommand.h"
+
 char clearChatLine[1] = {'\x1B'};
 
 
@@ -68,7 +70,6 @@ void TrackerPinger(CAvaraAppImpl *app) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
-
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
@@ -115,10 +116,15 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerThread->detach();
 
     LoadDefaultOggFiles();
-    
+
+    // specify which slash-commands will be handled
+    RegisterCommands();
+
     AddMessageLine("Welcome to Avara.");
     AddMessageLine("Type /help and press return for a list of chat commands.");
-    LoadRandomLevel("aa-");
+
+    // load up a random decent starting level
+    ChatCommand("/rand -normal -tre -strict emo", CPlayerManagerImpl::LocalPlayer());
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -307,216 +313,30 @@ void CAvaraAppImpl::SetNet(CNetManager *theNet) {
     gameNet = theNet;
 }
 
-void CAvaraAppImpl::AddMessageLine(std::string line) {
-    SDL_Log("Message: %s", line.c_str());
-    messageLines.push_back(line);
-    if (messageLines.size() > 5) {
-        messageLines.pop_front();
+void CAvaraAppImpl::AddMessageLine(std::string lines) {
+    std::istringstream iss(lines);
+    std::string line;
+    // split string on newlines
+    while(std::getline(iss, line)) {
+        SDL_Log("Message: %s", line.c_str());
+        messageLines.push_back(line);
+        if (messageLines.size() > 5) {
+            messageLines.pop_front();
+        }
     }
 }
 
-/*
-
- Chat commands
-
- Commands are executed by typing the command in chat and pressing return.
-
- Available commands:
-
-    /help
-    /h
-        Display a list of commands
-
-    /random
-    /r
-        Load a random level.
-
-    /active
-    /a
-        Toggle active state. A player will not be loaded into a game if they are inactive.
-
-    /load
-    /l
-        Load levels by name. Full level name is not required. Case insensitive.
-
-    /pref
-    /p
-        Display and set preference values. usage: /p prefName prefValue
-
-    /beep
-    /b
-        Make notification sound.
-
-    /clear
-    /c
-        Clear chat text.
-
-    /kick <player slot number>
-    /k
-        Kick player in given slot. Slots start at 1.
-
- */
+//
+//  Chat commands
+//
+//  Commands are executed by typing the command in chat and pressing return.
+//  See RegisterCommands() for a list of which commands are supported.
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
-    if(chatText == "/b" || chatText == "/beep") {
-        NotifyUser();
-        
-        if(player->CalculateIsLocalPlayer()) {
-            ChatCommandHistory(chatText);
-        }
-    }
-    else if(chatText == "/c" || chatText == "/clear") {
-        player->LineBuffer().clear();
-        
-        if(player->CalculateIsLocalPlayer()) {
-            ChatCommandHistory(chatText);
-        }
-    }
-
-    if(player->CalculateIsLocalPlayer()) {
-
-        if(chatText == "/help" || chatText == "/h") {
-            ChatCommandHistory(chatText);
-
-            AddMessageLine("Execute commands from chat. Type the command and press return. Available commands:");
-            AddMessageLine("    /random (load random level from matching set names or all sets)");
-            AddMessageLine("    /load (load level by name, full name not required)");
-            AddMessageLine("    /kick <player slot number>, /beep, /clear (clear chat text)");
-            AddMessageLine("    /pref (read and write preferences), /active (toggle active)");
-        }
-        else if(chatText.rfind("/kick ", 0) == 0 || chatText.rfind("/k ", 0) == 0) {
-            ChatCommandHistory(chatText);
-            std::string slotString;
-            std::stringstream chatSS(chatText);
-            int slot;
-            getline(chatSS, slotString, ' '); //skip "/kick"
-            getline(chatSS, slotString, ' ');
-
-            if(player->Slot() != 0) {
-                AddMessageLine("Only the host can issue kick commands.");
-            }
-            else if(!slotString.empty() && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
-                slot = std::stoi(slotString) - 1;
-
-                if(slot == 0) {
-                    AddMessageLine("Host cannot be kicked.");
-                }
-                else {
-                    AddMessageLine("Kicking player in slot " + slotString);
-                    gameNet->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
-                }
-            }
-            else {
-                AddMessageLine("Invalid Kick command.");
-            }
-        }
-        else if(chatText.find("/r ", 0) == 0 || chatText.find("/random ", 0) == 0 || chatText == "/r" || chatText == "/random") {
-            //load random level
-            ChatCommandHistory(chatText);
-
-            size_t matchIndex = std::min(chatText.find(" ", 0), chatText.length() - 1);
-            std::string matchStr = chatText.substr(matchIndex+1);
-            LoadRandomLevel(matchStr);
-        }
-        else if(chatText.rfind("/active ", 0) == 0 || chatText.rfind("/a ", 0) == 0 || chatText == "/a" || chatText == "/active") {
-            ChatCommandHistory(chatText);
-            short status;
-            std::string slotString = "";
-            std::string command;
-            std::stringstream chatSS(chatText);
-            int slot;
-            getline(chatSS, command, ' '); //skip "/active"
-            getline(chatSS, slotString, ' ');
-
-            if(slotString.length() == 0 || std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
-                if(slotString.length() > 0)
-                    slot = std::stoi(slotString) - 1;
-                else
-                    slot = player->Slot();
-
-                CPlayerManager* playerToChange = gameNet->playerTable[slot];
-                std::string playerName((char *)playerToChange->PlayerName() + 1, playerToChange->PlayerName()[0]);
-
-                if(playerToChange->LoadingStatus() == kLActive || playerToChange->LoadingStatus() == kLPaused) {
-                    AddMessageLine("Active command can not be used on players in a game.");
-                }
-                else if (playerName.length() > 0) {
-                    playerToChange->SetActive(!playerToChange->Active());
-                    gameNet->ValueChange(slot, "active", playerToChange->Active());
-                }
-            }
-            else {
-                AddMessageLine("Invalid active command.");
-            }
-        }
-        else if(chatText.rfind("/pref ", 0) == 0 || chatText.rfind("/p ", 0) == 0) {
-            ChatCommandHistory(chatText);
-            std::string pref;
-            std::string value;
-            std::string currentValue;
-            std::stringstream chatSS(chatText);
-            getline(chatSS, pref, ' '); //skip "/p "
-            getline(chatSS, pref, ' ');
-            getline(chatSS, value, ' ');
-
-            try {
-                currentValue = this->Get(pref).dump();
-            } catch (json::out_of_range &e) {
-                AddMessageLine(pref + " is not a valid preference");
-                return;
-            }
-
-            if(value.length() == 0) {
-                //read prefs
-                AddMessageLine(pref + " = " + currentValue);
-            }
-            else {
-                //write prefs
-                nlohmann::json currentValueJSON = this->Get(pref); //get current type
-
-                if (currentValueJSON.is_string()) {
-                    this->Set(pref, value);
-                }
-                else if (currentValueJSON.is_number_float() || value.find('.') != std::string::npos ) {
-                    nlohmann::json jsonFloat = nlohmann::json(stof(value));
-                    this->Set(pref, jsonFloat);
-                }
-                else if (currentValueJSON.is_number_integer()) {
-                    this->Set(pref, stoi(value));
-                }
-                else if (currentValueJSON.is_boolean()) {
-                    nlohmann::json bvalue = nlohmann::json(value == "true" ? true : false);
-                    this->Set(pref, bvalue);
-                }
-
-                AddMessageLine(pref + " changed from " + currentValue + " to " + value);
-                CApplication::PrefChanged(pref);
-            }
-        }
-        else if(chatText.rfind("/load ", 0) == 0 || chatText.rfind("/l ", 0) == 0) {
-            ChatCommandHistory(chatText);
-            std::vector<std::string> levelSets = LevelDirNameListing();
-            std::string levelPrefix;
-            std::stringstream chatSS(chatText);
-            getline(chatSS, levelPrefix, ' '); //skip "/load "
-            getline(chatSS, levelPrefix);
-            std::transform(levelPrefix.begin(), levelPrefix.end(),levelPrefix.begin(), ::toupper);
-
-            for(std::string set : levelSets) {
-                nlohmann::json ledis = LoadLevelListFromJSON(set);
-                for (auto &ld : ledis.items()) {
-                    std::string level = ld.value()["Name"].get<std::string>();
-                    std::string levelUpper = ld.value()["Name"].get<std::string>();
-                    std::transform(levelUpper.begin(), levelUpper.end(),levelUpper.begin(), ::toupper);
-
-                    if(levelUpper.rfind(levelPrefix, 0) == 0) {
-                        levelWindow->SelectLevel(set, level);
-                        levelWindow->SendLoad();
-
-                        return;
-                    }
-                }
-            }
-        }
+    // only execute commands for the "local" player (me)
+    if (player->IsLocalPlayer() && TextCommand::ExecuteMatchingCallbacks(chatText)) {
+        // remember this command in case we want to use the keys to do it again
+        ChatCommandHistory(chatText);
+        return;
     }
 }
 
@@ -526,48 +346,13 @@ void CAvaraAppImpl::ChatCommandHistory(std::string chatText) {
     historyUp = true;
 }
 
-void CAvaraAppImpl::LoadRandomLevel(std::string matchStr) {
-    // matchStr will be "" for "/r", and "xyz" for "/r xyz"
-    
-    std::vector<std::string> levelSets = LevelDirNameListing();
-    std::vector<std::string> matchingSets;
-    for (auto setName : levelSets) {
-        if (setName.find(matchStr, 0) != std::string::npos) {
-            matchingSets.push_back(setName);
-        }
-    }
-
-    AddMessageLine((std::ostringstream() << "Choosing random level from " << matchingSets.size() << " sets").str());
-
-    if (matchingSets.size() > 0) {
-        std::random_device rd; // obtain a random number from hardware
-        std::mt19937 gen(rd()); // seed the generator
-        std::uniform_int_distribution<> distr(0, matchingSets.size() - 1); // define the range
-
-        std::string set = matchingSets[distr(gen)];
-        levelWindow->SelectSet(set);
-
-        nlohmann::json levels = LoadLevelListFromJSON(set);
-
-        std::random_device rdLevel;
-        std::mt19937 genLevel(rdLevel());
-        std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
-
-        nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
-        std::string level = jsonLevel.at("Name");
-
-        levelWindow->SelectLevel(set, level);
-        levelWindow->SendLoad();
-    }
-}
-
 void CAvaraAppImpl::ChatCommandHistoryDown() {
     if(historyCleared == false) {
         if(chatCommandHistoryIterator == chatCommandHistory.begin()) {
             rosterWindow->SendRosterMessage(1, clearChatLine);
             if(historyCleared == false)
                 chatCommandHistoryIterator--;
-            
+
             historyCleared = true;
         }
         else {
@@ -595,7 +380,7 @@ void CAvaraAppImpl::ChatCommandHistoryUp() {
         historyUp = true;
         historyCleared = false;
         std::string command = *chatCommandHistoryIterator;
-        
+
         rosterWindow->SendRosterMessage(1, clearChatLine);
         rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
 
@@ -723,3 +508,231 @@ void CAvaraAppImpl::SetIndicatorDisplay(short i, short v) {}
 void CAvaraAppImpl::NumberLine(long theNum, short align) {}
 void CAvaraAppImpl::DrawUserInfoPart(short i, short partList) {}
 void CAvaraAppImpl::BrightBox(long frameNum, short position) {}
+
+//
+// Slash-command callbacks
+//
+
+bool CAvaraAppImpl::CommandHelp(VectorOfArgs vargs) {
+    if (vargs.size() == 0) {
+        AddMessageLine("Type '/help /xyz' to get further info about the command matching '/xyz'");
+        AddMessageLine("Available commands:  " + TextCommand::ListOfCommands());
+    } else {
+        TextCommand::FindMatchingCommands(vargs[0],
+                                          [&](TextCommand* command, VectorOfArgs vargs) -> bool {
+            AddMessageLine(command->GetUsage());
+            return true;
+        });
+    }
+    return true;
+}
+
+bool CAvaraAppImpl::GoodGame(VectorOfArgs vargs) {
+    std::string gg("Well played sir/madam!  gg!");
+    rosterWindow->SendRosterMessage(gg);
+    return true;
+}
+
+bool CAvaraAppImpl::KickPlayer(VectorOfArgs vargs) {
+    std::string slotString;
+    std::stringstream chatSS(vargs[0]);
+    int slot;
+    getline(chatSS, slotString, ' '); //skip "/kick"
+    getline(chatSS, slotString, ' ');
+
+    if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
+        AddMessageLine("Only the host can issue kick commands.");
+    }
+    else if(!slotString.empty() && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
+        slot = std::stoi(slotString) - 1;
+
+        if(slot == 0) {
+            AddMessageLine("Host cannot be kicked.");
+        }
+        else {
+            AddMessageLine("Kicking player in slot " + slotString);
+            gameNet->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
+        }
+    }
+    else {
+        AddMessageLine("Invalid Kick command.");
+    }
+    return true;
+}
+
+bool CAvaraAppImpl::ToggleActiveState(VectorOfArgs vargs) {
+    short status;
+    std::string slotString = vargs[0];
+    std::string command;
+    int slot;
+    if(slotString.length() == 0 || std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
+        if(slotString.length() > 0)
+            slot = std::stoi(slotString) - 1;
+        else
+            slot = CPlayerManagerImpl::LocalPlayer()->Slot();
+        CPlayerManager* playerToChange = gameNet->playerTable[slot];
+        std::string playerName((char *)playerToChange->PlayerName() + 1, playerToChange->PlayerName()[0]);
+        if(playerToChange->LoadingStatus() == kLActive || playerToChange->LoadingStatus() == kLPaused) {
+            AddMessageLine("Active command can not be used on players in a game.");
+        }
+        else if (playerName.length() > 0) {
+            playerToChange->SetActive(!playerToChange->Active());
+            gameNet->ValueChange(slot, "active", playerToChange->Active());
+        }
+    }
+    else {
+        AddMessageLine("Invalid active command.");
+    }
+    return true;
+}
+
+bool CAvaraAppImpl::LoadNamedLevel(VectorOfArgs vargs) {
+    std::vector<std::string> levelSets = LevelDirNameListing();
+    std::string levelPrefix = vargs[0];
+    std::transform(levelPrefix.begin(), levelPrefix.end(),levelPrefix.begin(), ::toupper);
+
+    for(std::string set : levelSets) {
+        nlohmann::json ledis = LoadLevelListFromJSON(set);
+        for (auto &ld : ledis.items()) {
+            std::string level = ld.value()["Name"].get<std::string>();
+            std::string levelUpper = ld.value()["Name"].get<std::string>();
+            std::transform(levelUpper.begin(), levelUpper.end(),levelUpper.begin(), ::toupper);
+
+            if(levelUpper.rfind(levelPrefix, 0) == 0) {
+                levelWindow->SelectLevel(set, level);
+                levelWindow->SendLoad();
+
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool CAvaraAppImpl::LoadRandomLevel(VectorOfArgs matchArgs) {
+    if (matchArgs.size() == 0) {
+        matchArgs.push_back(""); // to match all sets
+    }
+    // std::cout << "LoadRandomLevel matchArgs[0] = " << matchArgs[0] << std::endl;
+
+    std::vector<std::string> levelSets = LevelDirNameListing();
+    std::vector<std::string> matchingSets;
+    for (auto matchStr : matchArgs) {
+        for (auto setName : levelSets) {
+            if (setName.find(matchStr, 0) != std::string::npos) {
+                matchingSets.push_back(setName);
+            }
+        }
+    }
+
+    AddMessageLine((std::ostringstream() << "Choosing random level from " << matchingSets.size() << " sets").str());
+
+    if (matchingSets.size() > 0) {
+        std::random_device rd; // obtain a random number from hardware
+        std::mt19937 gen(rd()); // seed the generator
+        std::uniform_int_distribution<> distr(0, matchingSets.size() - 1); // define the range
+
+        std::string set = matchingSets[distr(gen)];
+        levelWindow->SelectSet(set);
+
+        nlohmann::json levels = LoadLevelListFromJSON(set);
+
+        std::random_device rdLevel;
+        std::mt19937 genLevel(rdLevel());
+        std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
+
+        nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
+        std::string level = jsonLevel.at("Name");
+
+        levelWindow->SelectLevel(set, level);
+        levelWindow->SendLoad();
+        return true;
+    }
+    return false;
+}
+
+bool CAvaraAppImpl::GetSetPreference(VectorOfArgs vargs) {
+    std::string pref(vargs.size() > 0 ? vargs[0] : "");
+    std::string value(vargs.size() > 1 ? vargs[1] : "");
+    std::string currentValue;
+    try {
+        currentValue = this->Get(pref).dump();
+    } catch (json::out_of_range &e) {
+        AddMessageLine(pref + " is not a valid preference");
+        return false;
+    }
+    if(value.length() == 0) {
+        //read prefs
+        AddMessageLine(pref + " = " + currentValue);
+    }
+    else {
+        //write prefs
+        nlohmann::json currentValueJSON = this->Get(pref); //get current type
+        if (currentValueJSON.is_string()) {
+            this->Set(pref, value);
+        }
+        else if (currentValueJSON.is_number_float() || value.find('.') != std::string::npos ) {
+            nlohmann::json jsonFloat = nlohmann::json(stof(value));
+            this->Set(pref, jsonFloat);
+        }
+        else if (currentValueJSON.is_number_integer()) {
+            this->Set(pref, stoi(value));
+        }
+        else if (currentValueJSON.is_boolean()) {
+            nlohmann::json bvalue = nlohmann::json(value == "true" ? true : false);
+            this->Set(pref, bvalue);
+        }
+        AddMessageLine(pref + " changed from " + currentValue + " to " + value);
+        CApplication::PrefChanged(pref);
+    }
+    return true;
+}
+
+void CAvaraAppImpl::RegisterCommands() {
+    TextCommand* cmd;
+    cmd = new TextCommand("/help            <- show list of all commands\n"
+                          "/help /xyz       <- show help for command /xyz",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::CommandHelp));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/beep            <- ring the bell",
+                          [this](VectorOfArgs vargs) -> bool {
+        NotifyUser();
+        return true;
+    });
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/clear           <- clear chat text",
+                          [this](VectorOfArgs vargs) -> bool {
+        CPlayerManagerImpl::LocalPlayer()->LineBuffer().clear();
+        return true;
+    });
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/pref name       <- display value of named preference\n"
+                          "/pref name value <- set value of named preference",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::GetSetPreference));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/gg              <- good game!",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::GoodGame));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/kick slot       <- kick player in given slot. slots start at 1",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::KickPlayer));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/active           <- toggle my active/playing state\n"
+                          "/active slot      <- toggle active state for given player. slots start at 1",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::ToggleActiveState));
+    // TextCommand::Register(cmd); // needs more debugging
+
+    cmd = new TextCommand("/load chok        <- load level with name containing the letters 'chok'",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::LoadNamedLevel));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/random       <- load random level from all available levels\n"
+                          "/random aa ex <- load random level from any set name containing either 'aa' or 'ex'",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::LoadRandomLevel));
+    TextCommand::Register(cmd);
+}

@@ -17,6 +17,7 @@
 #include "CPlayerWindow.h"
 #include "CRosterWindow.h"
 #include "CTrackerWindow.h"
+#include "TextCommand.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -79,7 +80,6 @@ public:
     std::deque<std::string>::iterator chatCommandHistoryIterator;
     bool historyUp;
     bool historyCleared;
-    
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
@@ -104,14 +104,14 @@ public:
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll() override;
     OSErr LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) override;
-    void NotifyUser() override;
+    virtual void NotifyUser() override;
+
     virtual void AddMessageLine(std::string line) override;
     virtual void GameStarted(std::string set, std::string level) override;
     virtual void ChatCommand(std::string chatText, CPlayerManager* player);
     virtual void ChatCommandHistory(std::string chatText);
     virtual void ChatCommandHistoryUp();
     virtual void ChatCommandHistoryDown();
-    virtual void LoadRandomLevel(std::string matchStr);
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
@@ -138,4 +138,14 @@ public:
 
     void TrackerUpdate();
     std::string TrackerPayload();
+
+    // TextCommand callbacks
+    bool CommandHelp(VectorOfArgs);
+    bool GetSetPreference(VectorOfArgs);
+    bool GoodGame(VectorOfArgs);
+    bool KickPlayer(VectorOfArgs);
+    bool ToggleActiveState(VectorOfArgs);
+    bool LoadNamedLevel(VectorOfArgs);
+    bool LoadRandomLevel(VectorOfArgs);
+    void RegisterCommands();
 };

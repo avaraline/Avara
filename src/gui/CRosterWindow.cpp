@@ -315,6 +315,10 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
     return strStatus;
 }
 
+void CRosterWindow::SendRosterMessage(std::string& message) {
+    SendRosterMessage(message.length(), (char*)message.c_str());
+}
+
 void CRosterWindow::SendRosterMessage(int len, char *message) {
     ((CAvaraAppImpl *)gApplication)->GetNet()->SendRosterMessage(len, message);
     chatInput->setCaption(chatInput->caption() + message);
@@ -364,7 +368,7 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         switch (event.key.keysym.sym) {
             case SDLK_UP:
                 ((CAvaraAppImpl *)gApplication)->ChatCommandHistoryUp();
-                
+
                 return true;
             case SDLK_DOWN:
                 ((CAvaraAppImpl *)gApplication)->ChatCommandHistoryDown();

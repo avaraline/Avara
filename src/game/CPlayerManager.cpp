@@ -32,6 +32,8 @@
 #include <SDL2/SDL.h>
 #include <utf8.h>
 
+CPlayerManager* CPlayerManager::theLocalPlayer;
+
 void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
     // Rect	*mainScreenRect;
 
@@ -121,7 +123,8 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     mugState = 0;
 
     NetDisconnect();
-    isLocalPlayer = false;
+    SetLocal();
+
     prevKeyboardActive = keyboardActive;
 }
 
@@ -469,7 +472,7 @@ void CPlayerManagerImpl::ResumeGame() {
     oldHeld = 0;
     oldModifiers = 0;
     oldButton = 0;
-    isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
+    SetLocal();
 
     keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
@@ -801,7 +804,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
             case 13:
                 // ¬
                 ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
-                
+
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
                 // FlushMessageText(true);
                 ((CAvaraAppImpl*)itsGame->itsApp)->ChatCommand(chatText, this);
@@ -1273,6 +1276,12 @@ void CPlayerManagerImpl::SpecialColorControl() {
 
 short CPlayerManagerImpl::Slot() {
     return slot;
+}
+void CPlayerManagerImpl::SetLocal() {
+    isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
+    if (isLocalPlayer) {
+        CPlayerManagerImpl::theLocalPlayer = this;
+    }
 }
 Boolean CPlayerManagerImpl::IsLocalPlayer() {
     return isLocalPlayer;

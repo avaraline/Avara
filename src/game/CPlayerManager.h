@@ -45,7 +45,11 @@ class CNetManager;
 
 
 class CPlayerManager {
+protected:
+    static CPlayerManager* theLocalPlayer;
 public:
+    static CPlayerManager* LocalPlayer() { return theLocalPlayer; };  // the current/local player
+
     virtual std::string GetChatString(int maxChars) = 0;
     virtual std::string GetChatLine() = 0;
     virtual CAbstractPlayer* GetPlayer() = 0;
@@ -54,7 +58,7 @@ public:
     virtual void AbortRequest() = 0;
     virtual Boolean IsLocalPlayer() = 0;
     virtual bool CalculateIsLocalPlayer() = 0;
-    
+
     virtual void GameKeyPress(char c) = 0;
     virtual FunctionTable *GetFunctions() = 0;
     virtual void DeadOrDone() = 0;
@@ -116,11 +120,11 @@ public:
     virtual bool GetShowScoreboard() = 0;
     virtual void SetActive(bool b) = 0;
     virtual bool Active() = 0;
-
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
 private:
+
     CAbstractPlayer *itsPlayer;
     CAvaraGame *itsGame;
     // CRosterWindow	*theRoster;
@@ -179,10 +183,11 @@ private:
     PlayerConfigRecord theConfiguration;
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
-    
+
     bool active = true;
 
 public:
+
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
 
     virtual void SetPlayer(CAbstractPlayer *thePlayer);
@@ -241,6 +246,7 @@ public:
 
     virtual void SpecialColorControl();
     virtual short Slot();
+    virtual void SetLocal();
     virtual Boolean IsLocalPlayer();
     virtual short Position();
     virtual Str255& PlayerName();
