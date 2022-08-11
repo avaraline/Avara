@@ -4,9 +4,15 @@
 #include <string>       // std::string
 #include <vector>       // std::vector
 #include <functional>   // std::function
+#include <numeric>      // std::accumulate
 
 typedef std::vector<std::string> VectorOfArgs;
 typedef std::function<bool(VectorOfArgs)> TextCommandCallback;
+
+// why doesn't C++ have stuff like this?
+#define join_with(vargs, sep) \
+    std::accumulate(vargs.begin() + 1, vargs.end(), vargs[0], \
+        [](std::string s0, std::string const& s1) { return s0 += sep + s1; })
 
 // This crazy macro allows you to use an instance method as a lambda/callback
 // For example: METHOD_TO_LAMBDA(MyClass::SomeMethod) allows SomeMethod to be used as a callback

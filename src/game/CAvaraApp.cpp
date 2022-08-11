@@ -531,8 +531,13 @@ bool CAvaraAppImpl::CommandHelp(VectorOfArgs vargs) {
 }
 
 bool CAvaraAppImpl::GoodGame(VectorOfArgs vargs) {
-    std::string gg("Well played sir/madam!  gg!");
-    rosterWindow->SendRosterMessage(gg);
+    static std::string gg("Well played sir or madam! gg!\r");
+    if (vargs.size() > 0) {
+        gg = join_with(vargs, " ") + "\r";
+        AddMessageLine("/gg text changed to: " + gg);
+    } else {
+        rosterWindow->SendRosterMessage(gg);
+    }
     return true;
 }
 
@@ -717,7 +722,8 @@ void CAvaraAppImpl::RegisterCommands() {
                           METHOD_TO_LAMBDA(CAvaraAppImpl::GetSetPreference));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/gg              <- good game!",
+    cmd = new TextCommand("/gg              <- good game!\n"
+                          "/gg new phrase   <- change the /gg phrase",
                           METHOD_TO_LAMBDA(CAvaraAppImpl::GoodGame));
     TextCommand::Register(cmd);
 

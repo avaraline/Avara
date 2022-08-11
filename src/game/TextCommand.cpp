@@ -60,13 +60,10 @@ const bool TextCommand::ExecuteMatchingCallbacks(std::string& fullCommand) {
 }
 
 const std::string TextCommand::ListOfCommands(std::string delimeter) {
-    std::string cmdList;
-    std::string delim;
-    for (auto cmd : registeredCommands) {
-        cmdList += delim + cmd->commandStr;
-        delim = delimeter;
-    }
-    return cmdList;
+    return std::accumulate(registeredCommands.begin() + 1,
+                           registeredCommands.end(),
+                           registeredCommands[0]->commandStr,
+        [&](std::string s0, TextCommand* const& tc) { return s0 += delimeter + tc->commandStr; });
 }
 
 std::string TextCommand::UsageForCommand(std::string& fullCommand) {
