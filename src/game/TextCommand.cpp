@@ -1,5 +1,13 @@
-
+#include <sstream>      // std::istringstream
 #include "TextCommand.h"
+
+TextCommand::TextCommand(const char* usage, TextCommandCallback cback) {
+    usageStr = usage;
+    // it is assumed that /command is the first word in usage
+    std::istringstream iss(usage);
+    iss >> commandStr;
+    callback = cback;
+}
 
 std::vector<TextCommand*> TextCommand::registeredCommands;
 
@@ -8,8 +16,13 @@ void TextCommand::Register(TextCommand* command) {
 }
 
 bool TextCommand::FindMatchingCommands(std::string& fullCommand,
-                                 std::function<bool(TextCommand *, VectorOfArgs)> matchCb) {
+                                       std::function<bool(TextCommand *, VectorOfArgs)> matchCb) {
     bool success = false;
+
+    // must match at least 2 chars (eg. /xyz must have at least /x)
+    if (fullCommand.length() < 2) {
+        return false;
+    }
 
     std::istringstream iss(fullCommand);
     std::string cmd;

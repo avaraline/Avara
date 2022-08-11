@@ -1,11 +1,9 @@
 
 #pragma once
 
-// move most/all? includes into TextCommand.cpp
-#include <string>
-#include <vector>
+#include <string>       // std::string
+#include <vector>       // std::vector
 #include <functional>   // std::function
-#include <sstream>      // std::istringstream
 
 typedef std::vector<std::string> VectorOfArgs;
 typedef std::function<bool(VectorOfArgs)> TextCommandCallback;
@@ -46,13 +44,6 @@ public:
     //   TextCommand("/something  <- description of command",
     //               METHOD_TO_LAMBDA(MyClass::DoSomething));
     //
-    TextCommand(const char* usage, TextCommandCallback cback) {
-        usageStr = usage;
-        // it is assumed that /command is the first word in usage
-        std::istringstream iss(usage);
-        iss >> commandStr;
-        callback = cback;
-    }
-
+    TextCommand(const char* usage, TextCommandCallback cback);
     const std::string& GetUsage() { return usageStr; }
 };
