@@ -341,7 +341,10 @@ void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
 }
 
 void CAvaraAppImpl::ChatCommandHistory(std::string chatText) {
-    chatCommandHistory.push_front(chatText);
+    // only add it if it's different than the front
+    if (chatCommandHistory.empty() || chatCommandHistory.front().compare(chatText) != 0) {
+        chatCommandHistory.push_front(chatText);
+    }
     chatCommandHistoryIterator = chatCommandHistory.begin();
     historyUp = true;
 }
