@@ -55,6 +55,7 @@ public:
     virtual CAbstractPlayer* GetPlayer() = 0;
     virtual void SetPlayer(CAbstractPlayer*) = 0;
     virtual short Slot() = 0;
+    virtual void SetLocal() = 0;
     virtual void AbortRequest() = 0;
     virtual Boolean IsLocalPlayer() = 0;
     virtual bool CalculateIsLocalPlayer() = 0;
