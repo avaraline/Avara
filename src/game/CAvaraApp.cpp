@@ -637,25 +637,39 @@ bool CAvaraAppImpl::LoadRandomLevel(VectorOfArgs matchArgs) {
     AddMessageLine((std::ostringstream() << "Choosing random level from " << matchingSets.size() << " sets").str());
 
     if (matchingSets.size() > 0) {
+        //count levels
+        int levelCount = 0;
+        for (auto setName : matchingSets) {
+            nlohmann::json levels = LoadLevelListFromJSON(setName);
+            levelCount += levels.size();
+        }
+
         std::random_device rd; // obtain a random number from hardware
         std::mt19937 gen(rd()); // seed the generator
-        std::uniform_int_distribution<> distr(0, matchingSets.size() - 1); // define the range
+        std::uniform_int_distribution<> distr(0, levelCount - 1); // define the range
+        int randomlevelIndex = distr(gen);
 
-        std::string set = matchingSets[distr(gen)];
-        levelWindow->SelectSet(set);
+        //load level
+        int currentCount = 0;
+        int previousCount = 0;
+        for (auto setName : matchingSets) {
+            nlohmann::json levels = LoadLevelListFromJSON(setName);
+            currentCount += levels.size();
+            
+            if(randomlevelIndex >= previousCount && randomlevelIndex < currentCount) {
+                levelWindow->SelectSet(setName);
+                nlohmann::json randomLevel = levels[randomlevelIndex - previousCount];
+                //AddMessageLine((std::ostringstream() << "LoadRandomLevel i=" << randomlevelIndex << " cur=" << currentCount
+                //                << " prev=" << previousCount << " index=" << randomlevelIndex - previousCount).str());
 
-        nlohmann::json levels = LoadLevelListFromJSON(set);
-
-        std::random_device rdLevel;
-        std::mt19937 genLevel(rdLevel());
-        std::uniform_int_distribution<> distrLevel(0, levels.size() - 1);
-
-        nlohmann::json jsonLevel = levels[distrLevel(genLevel)];
-        std::string level = jsonLevel.at("Name");
-
-        levelWindow->SelectLevel(set, level);
-        levelWindow->SendLoad();
-        return true;
+                std::string levelName = randomLevel.at("Name");
+                levelWindow->SelectLevel(setName, levelName);
+                levelWindow->SendLoad();
+                return true;
+            }
+            
+            previousCount = currentCount;
+        }
     }
     return false;
 }
