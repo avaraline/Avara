@@ -108,10 +108,6 @@ public:
 
     virtual void AddMessageLine(std::string line) override;
     virtual void GameStarted(std::string set, std::string level) override;
-    virtual void ChatCommand(std::string chatText, CPlayerManager* player);
-    virtual void ChatCommandHistory(std::string chatText);
-    virtual void ChatCommandHistoryUp();
-    virtual void ChatCommandHistoryDown();
 
     // From CInfoPanel
     virtual void SetIndicatorDisplay(short i, short v);
@@ -138,6 +134,12 @@ public:
 
     void TrackerUpdate();
     std::string TrackerPayload();
+
+    // ChatCommand and history
+    virtual void ChatCommand(std::string chatText, CPlayerManager* player);
+    virtual void ChatCommandHistory(std::string chatText);
+    virtual void ChatCommandHistoryUp();
+    virtual void ChatCommandHistoryDown();
 
     // TextCommand callbacks
     bool CommandHelp(VectorOfArgs);
