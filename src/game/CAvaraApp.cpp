@@ -543,23 +543,20 @@ bool CAvaraAppImpl::GoodGame(VectorOfArgs vargs) {
 }
 
 bool CAvaraAppImpl::KickPlayer(VectorOfArgs vargs) {
-    std::string slotString;
-    std::stringstream chatSS(vargs[0]);
-    int slot;
-    getline(chatSS, slotString, ' '); //skip "/kick"
-    getline(chatSS, slotString, ' ');
+    std::string slotString(vargs[0]);
 
     if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
         AddMessageLine("Only the host can issue kick commands.");
     }
     else if(!slotString.empty() && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
-        slot = std::stoi(slotString) - 1;
+        int slot = std::stoi(slotString) - 1;
 
         if(slot == 0) {
             AddMessageLine("Host cannot be kicked.");
         }
         else {
             AddMessageLine("Kicking player in slot " + slotString);
+            // Tell everyone to kill their connection to the kicked player.
             gameNet->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
         }
     }
