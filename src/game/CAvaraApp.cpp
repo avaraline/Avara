@@ -720,7 +720,8 @@ void CAvaraAppImpl::RegisterCommands() {
 
     cmd = new TextCommand("/beep            <- ring the bell",
                           [this](VectorOfArgs vargs) -> bool {
-        NotifyUser();
+        char ringBell[] = "\a\b";    // \a = bell, \b = backspace
+        rosterWindow->SendRosterMessage(sizeof(ringBell), ringBell);
         return true;
     });
     TextCommand::Register(cmd);
