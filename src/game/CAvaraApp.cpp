@@ -655,7 +655,7 @@ bool CAvaraAppImpl::LoadRandomLevel(VectorOfArgs matchArgs) {
         for (auto setName : matchingSets) {
             nlohmann::json levels = LoadLevelListFromJSON(setName);
             currentCount += levels.size();
-            
+
             if(randomlevelIndex >= previousCount && randomlevelIndex < currentCount) {
                 levelWindow->SelectSet(setName);
                 nlohmann::json randomLevel = levels[randomlevelIndex - previousCount];
@@ -667,7 +667,7 @@ bool CAvaraAppImpl::LoadRandomLevel(VectorOfArgs matchArgs) {
                 levelWindow->SendLoad();
                 return true;
             }
-            
+
             previousCount = currentCount;
         }
     }
@@ -727,7 +727,7 @@ void CAvaraAppImpl::RegisterCommands() {
 
     cmd = new TextCommand("/clear           <- clear chat text",
                           [this](VectorOfArgs vargs) -> bool {
-        CPlayerManagerImpl::LocalPlayer()->LineBuffer().clear();
+        rosterWindow->SendRosterMessage(1, clearChatLine);
         return true;
     });
     TextCommand::Register(cmd);
