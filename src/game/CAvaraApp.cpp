@@ -568,18 +568,24 @@ bool CAvaraAppImpl::KickPlayer(VectorOfArgs vargs) {
 
 bool CAvaraAppImpl::ToggleActiveState(VectorOfArgs vargs) {
     short status;
-    std::string slotString = vargs[0];
-    std::string command;
+    std::string slotString(vargs.size() > 0 ? vargs[0] : "");
     int slot;
     if(slotString.length() == 0 || std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
-        if(slotString.length() > 0)
+        if(slotString.length() > 0) {
+            if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
+                AddMessageLine("Only the host can issue active commands for other players.");
+                return false;
+            }
             slot = std::stoi(slotString) - 1;
-        else
+        } else {
             slot = CPlayerManagerImpl::LocalPlayer()->Slot();
+        }
+
         CPlayerManager* playerToChange = gameNet->playerTable[slot];
         std::string playerName((char *)playerToChange->PlayerName() + 1, playerToChange->PlayerName()[0]);
         if(playerToChange->LoadingStatus() == kLActive || playerToChange->LoadingStatus() == kLPaused) {
             AddMessageLine("Active command can not be used on players in a game.");
+            return false;
         }
         else if (playerName.length() > 0) {
             playerToChange->SetActive(!playerToChange->Active());
@@ -588,6 +594,7 @@ bool CAvaraAppImpl::ToggleActiveState(VectorOfArgs vargs) {
     }
     else {
         AddMessageLine("Invalid active command.");
+        return false;
     }
     return true;
 }
