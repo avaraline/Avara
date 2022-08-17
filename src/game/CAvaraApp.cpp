@@ -566,37 +566,14 @@ bool CAvaraAppImpl::KickPlayer(VectorOfArgs vargs) {
     return true;
 }
 
-bool CAvaraAppImpl::ToggleActiveState(VectorOfArgs vargs) {
-    short status;
-    std::string slotString(vargs.size() > 0 ? vargs[0] : "");
-    int slot;
-    if(slotString.length() == 0 || std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
-        if(slotString.length() > 0) {
-            if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
-                AddMessageLine("Only the host can issue active commands for other players.");
-                return false;
-            }
-            slot = std::stoi(slotString) - 1;
-        } else {
-            slot = CPlayerManagerImpl::LocalPlayer()->Slot();
-        }
-
-        CPlayerManager* playerToChange = gameNet->playerTable[slot];
-        std::string playerName((char *)playerToChange->PlayerName() + 1, playerToChange->PlayerName()[0]);
-        if(playerToChange->LoadingStatus() == kLActive || playerToChange->LoadingStatus() == kLPaused) {
-            AddMessageLine("Active command can not be used on players in a game.");
-            return false;
-        }
-        else if (playerName.length() > 0) {
-            playerToChange->SetActive(!playerToChange->Active());
-            gameNet->ValueChange(slot, "active", playerToChange->Active());
-        }
+bool CAvaraAppImpl::ToggleAvailableState(VectorOfArgs vargs) {
+    if (vargs.size() == 0) {
+        // for now, just handle the current user's state
+        gameNet->ToggleAvailable();
+        AddMessageLine("Availability turned " + std::string(gameNet->isAvailable ? "on" : "off"));
+    } else {
+        AddMessageLine("Changing state of other players not supported.");
     }
-    else {
-        AddMessageLine("Invalid active command.");
-        return false;
-    }
-    return true;
 }
 
 bool CAvaraAppImpl::LoadNamedLevel(VectorOfArgs vargs) {
@@ -751,10 +728,9 @@ void CAvaraAppImpl::RegisterCommands() {
                           METHOD_TO_LAMBDA(CAvaraAppImpl::KickPlayer));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/active           <- toggle my active/playing state\n"
-                          "/active slot      <- toggle active state for given player. slots start at 1",
-                          METHOD_TO_LAMBDA(CAvaraAppImpl::ToggleActiveState));
-    // TextCommand::Register(cmd); // needs more debugging
+    cmd = new TextCommand("/available        <- toggle my available state",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::ToggleAvailableState));
+    TextCommand::Register(cmd); // needs more debugging
 
     cmd = new TextCommand("/load chok        <- load level with name containing the letters 'chok'",
                           METHOD_TO_LAMBDA(CAvaraAppImpl::LoadNamedLevel));

@@ -86,6 +86,7 @@ public:
     short deadOrDonePlayers;
     Boolean isConnected;
     Boolean isPlaying;
+    Boolean isAvailable;
 
     short serverOptions;
     short loaderSlot;
@@ -150,6 +151,8 @@ public:
     virtual void SendStartCommand();
     virtual void SendResumeCommand();
     virtual Boolean ResumeEnabled();
+    virtual bool IsAvailable();
+    virtual void ToggleAvailable();
     virtual void ReceiveStartCommand(short activeDistribution, short fromSlot);
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey);
     virtual void ReceivedUnavailable(short slot, short fromSlot);
