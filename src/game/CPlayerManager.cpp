@@ -950,7 +950,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && Active() == true) {
+    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && loadingStatus != kLAway) {
         oldStatus = loadingStatus;
 
         if (serverErr || levelErr) {
@@ -1129,12 +1129,8 @@ void CPlayerManagerImpl::SetPlayerStatus(short newStatus, long theWin) {
     }
 }
 
-void CPlayerManagerImpl::SetActive(bool b) {
-    active = b;
-}
-
-bool CPlayerManagerImpl::Active() {
-    return active;
+bool CPlayerManagerImpl::IsAway() {
+    return (loadingStatus == kLAway);
 }
 
 void CPlayerManagerImpl::SetPreviousStatus(short status) {

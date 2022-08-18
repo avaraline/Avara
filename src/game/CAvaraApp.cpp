@@ -566,14 +566,37 @@ bool CAvaraAppImpl::KickPlayer(VectorOfArgs vargs) {
     return true;
 }
 
-bool CAvaraAppImpl::ToggleAvailableState(VectorOfArgs vargs) {
-    if (vargs.size() == 0) {
-        // for now, just handle the current user's state
-        gameNet->ToggleAvailable();
-        AddMessageLine("Availability turned " + std::string(gameNet->isAvailable ? "on" : "off"));
-    } else {
-        AddMessageLine("Changing state of other players not supported.");
+bool CAvaraAppImpl::ToggleAwayState(VectorOfArgs vargs) {
+    short slot = gameNet->itsCommManager->myId;
+
+    if (vargs.size() > 0) {
+        std::string slotString(vargs[0]);
+        if(slotString.length() > 0 && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
+            if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
+                AddMessageLine("Only the host can issue active commands for other players.");
+                return false;
+            }
+            slot = std::stoi(slotString) - 1;
+        } else {
+            AddMessageLine("No player found with slot = " + slotString);
+            return false;
+        }
     }
+
+    CPlayerManager* playerToChange = gameNet->playerTable[slot];
+    if(playerToChange->LoadingStatus() == kLActive || playerToChange->LoadingStatus() == kLPaused) {
+        AddMessageLine("State can not be changed on players in a game.");
+        return false;
+    }
+
+    short newStatus = (playerToChange->LoadingStatus() == kLAway) ? kLConnected : kLAway;
+    long noWinFrame = -1;
+    std::cout << "toggle away slot = " << playerToChange->Slot() << std::endl;
+    gameNet->itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange,
+                                        playerToChange->Slot(), newStatus, 0, sizeof(long), (Ptr)&noWinFrame);
+    AddMessageLine("Status of " + playerToChange->GetPlayerName() +
+                   " changed to " + std::string(newStatus == kLConnected ? "available" : "away"));
+    return true;
 }
 
 bool CAvaraAppImpl::LoadNamedLevel(VectorOfArgs vargs) {
@@ -728,16 +751,25 @@ void CAvaraAppImpl::RegisterCommands() {
                           METHOD_TO_LAMBDA(CAvaraAppImpl::KickPlayer));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/available        <- toggle my available state",
-                          METHOD_TO_LAMBDA(CAvaraAppImpl::ToggleAvailableState));
-    TextCommand::Register(cmd); // needs more debugging
+    cmd = new TextCommand("/away            <- toggle my presence\n"
+                          "/away slot       <- toggle presence of given slot, starting from 1",
+                          METHOD_TO_LAMBDA(CAvaraAppImpl::ToggleAwayState));
+    TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/load chok        <- load level with name containing the letters 'chok'",
+    cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'",
                           METHOD_TO_LAMBDA(CAvaraAppImpl::LoadNamedLevel));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/random       <- load random level from all available levels\n"
                           "/random aa ex <- load random level from any set name containing either 'aa' or 'ex'",
                           METHOD_TO_LAMBDA(CAvaraAppImpl::LoadRandomLevel));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/vv           <- clear line then output ready checkmarks √",
+                          [this](VectorOfArgs vargs) -> bool {
+        char ready[] = "\x1B√√";
+        rosterWindow->SendRosterMessage(sizeof(ready), ready);
+        return true;
+    });
     TextCommand::Register(cmd);
 }

@@ -305,9 +305,9 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         LongToRGBA(longTeamColor, teamColorRGB, 3);
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
         NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
-        
+
         //check for not playing
-        if(thisPlayer->Active() == false) {
+        if(thisPlayer->IsAway()) {
             textColor = nvgRGBA(255, 255, 255, 150);
             colorBoxAlpha = 0.5;
         }

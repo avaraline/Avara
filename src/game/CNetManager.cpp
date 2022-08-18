@@ -76,7 +76,6 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     playerCount = 0;
     isConnected = false;
     isPlaying = false;
-    isAvailable = true;
 
     netOwner = NULL;
     loaderSlot = 0;
@@ -787,17 +786,13 @@ void CNetManager::SendStartCommand() {
     itsCommManager->SendPacket(activePlayersDistribution, kpStartLevel, 0, activePlayersDistribution, 0, 0, 0);
 }
 
-bool CNetManager::IsAvailable() {
-    return (!isPlaying && isAvailable);
-}
-
-void CNetManager::ToggleAvailable() {
-    isAvailable = !isAvailable;
+bool CNetManager::CanPlay() {
+   return (!isPlaying && !playerTable[itsCommManager->myId]->IsAway());
 }
 
 void CNetManager::ReceiveStartCommand(short activeDistribution, short fromSlot) {
     SDL_Log("CNetManager::ReceiveStartCommand\n");
-    if (/*gApplication->modelessLevel == 0 && */ IsAvailable()) {
+    if (/*gApplication->modelessLevel == 0 && */ CanPlay()) {
         deadOrDonePlayers = 0;
         activePlayersDistribution = activeDistribution;
         startPlayersDistribution = activeDistribution;
@@ -814,7 +809,7 @@ void CNetManager::ReceiveResumeCommand(short activeDistribution, short fromSlot,
     activePlayersDistribution = activeDistribution;
 
     if (/*gApplication->modelessLevel == 0 &&*/
-        IsAvailable() && randomKey == FRandSeed) { // itsGame->itsApp->DoUpdate();
+        CanPlay() && randomKey == FRandSeed) { // itsGame->itsApp->DoUpdate();
 
         itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
 
@@ -909,14 +904,16 @@ void CNetManager::StopGame(short newStatus) {
     }
 
     itsCommManager->SendPacket(
-        kdEveryone, kpPlayerStatusChange, 0, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
+        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
 
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
 void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
-        playerTable[slotId]->RandomKey(randomKey);
+        if (randomKey != 0) {
+            playerTable[slotId]->RandomKey(randomKey);
+        }
         playerTable[slotId]->SetPlayerStatus(newStatus, winFrame);
     }
 }
@@ -931,7 +928,6 @@ void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std:
 
             if(it.key() == "active") {
                 bool active = it.value();
-                playerTable[slotId]->SetActive(active);
             }
         }
     }
@@ -993,7 +989,7 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
                     long noWin = -1;
 
                     itsCommManager->SendPacket(
-                        kdEveryone, kpPlayerStatusChange, 0, kLNoVehicle, 0, sizeof(long), (Ptr)&noWin);
+                        kdEveryone, kpPlayerStatusChange, slot, kLNoVehicle, 0, sizeof(long), (Ptr)&noWin);
                 }
             }
         }

@@ -58,6 +58,7 @@ void CProtoControl::Attach(CCommManager *aManager) {
 Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
     CNetManager *theNet = theGame->itsNet;
     Boolean didHandle = true;
+    short slot;
 
     switch (thePacket->command) {
         case kpKillConnection:
@@ -123,8 +124,15 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceivePlayerStatus(thePacket->sender, thePacket->p2, thePacket->p3, -1);
             break;
         case kpPlayerStatusChange:
+            // slot = thePacket->p1;
+            // // if p1 is set, then use that as the slot instead of sender
+            // if (thePacket->p1 >= 0) {
+            //     slot = thePacket->p1;
+            //     std::cout << "changing status for slot = " << slot << std::endl;
+            // }
+            std::cout << "changing status for slot = " << thePacket->p1 << std::endl;
             theNet->ReceivePlayerStatus(
-                thePacket->sender, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
+                thePacket->p1, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
             break;
         case kpJSON:
             theNet->ReceiveJSON(

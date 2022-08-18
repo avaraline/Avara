@@ -146,7 +146,7 @@ public:
     bool GetSetPreference(VectorOfArgs);
     bool GoodGame(VectorOfArgs);
     bool KickPlayer(VectorOfArgs);
-    bool ToggleAvailableState(VectorOfArgs);
+    bool ToggleAwayState(VectorOfArgs);
     bool LoadNamedLevel(VectorOfArgs);
     bool LoadRandomLevel(VectorOfArgs);
     void RegisterCommands();

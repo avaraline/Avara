@@ -28,6 +28,7 @@ enum {
     kLNotFound,
     kLPaused,
     kLNoVehicle,
+    kLAway,
 
     kStringNorth,
     kStringSouth,
@@ -76,6 +77,7 @@ public:
     virtual short PreviousStatus() = 0;
     virtual void SetPlayerStatus(short newStatus, long theWin) = 0;
     virtual void SetPreviousStatus(short status) = 0;
+    virtual bool IsAway() = 0;
 
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
     virtual void SetPosition(short pos) = 0;
@@ -119,8 +121,6 @@ public:
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
     virtual bool GetShowScoreboard() = 0;
-    virtual void SetActive(bool b) = 0;
-    virtual bool Active() = 0;
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
@@ -185,8 +185,6 @@ private:
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 
-    bool active = true;
-
 public:
 
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
@@ -225,6 +223,7 @@ public:
     virtual void SetPosition(short pos);
     virtual void SetPlayerStatus(short newStatus, long theWin);
     virtual void SetPreviousStatus(short status);
+    virtual bool IsAway();
     virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
 
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
@@ -280,6 +279,4 @@ public:
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
-    virtual void SetActive(bool b);
-    virtual bool Active();
 };

@@ -289,7 +289,7 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
         return strStatus;
     }
 
-    if(player->Active() == false) {
+    if(status == kLAway) {
         strStatus = "not playing";
     } else if (status == kLConnected) {
         strStatus = "connected";
