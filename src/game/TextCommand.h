@@ -7,7 +7,8 @@
 #include <numeric>      // std::accumulate
 
 typedef std::vector<std::string> VectorOfArgs;
-typedef std::function<bool(VectorOfArgs)> TextCommandCallback;
+typedef std::function<bool(VectorOfArgs)> TextCommandCallbackArgs;
+typedef std::function<bool(std::string)>  TextCommandCallbackCmd;
 
 // why doesn't C++ have stuff like this?
 #define join_with(vargs, sep) \
@@ -25,7 +26,8 @@ private:
 
     std::string commandStr;
     std::string usageStr;
-    TextCommandCallback callback;
+    TextCommandCallbackArgs callbackArgs;
+    TextCommandCallbackCmd callbackCmd;
 
 public:
     //
@@ -34,7 +36,7 @@ public:
     //
     static void Register(TextCommand* command);
     static bool FindMatchingCommands(std::string& fullCommand,
-                                     std::function<bool(TextCommand *, VectorOfArgs)> matchCb);
+                                     std::function<bool(TextCommand *, std::string& cmd, VectorOfArgs)> matchCb);
     static const bool ExecuteMatchingCallbacks(std::string& fullCommand);
     static const std::string ListOfCommands(std::string delimeter = ", ");
     static std::string UsageForCommand(std::string& fullCommand);
@@ -50,6 +52,7 @@ public:
     //   TextCommand("/something  <- description of command",
     //               METHOD_TO_LAMBDA(MyClass::DoSomething));
     //
-    TextCommand(const char* usage, TextCommandCallback cback);
+    TextCommand(const char* usage, TextCommandCallbackArgs cback);
+    TextCommand(const char* usage, TextCommandCallbackCmd cback);
     const std::string& GetUsage() { return usageStr; }
 };

@@ -38,7 +38,7 @@
 
 #include "TextCommand.h"
 
-char clearChatLine[1] = {'\x1B'};
+std::string clearChatLine("\x1B");
 
 
 // included while we fake things out
@@ -472,7 +472,7 @@ void CAvaraAppImpl::ChatCommandHistory(std::string chatText) {
 void CAvaraAppImpl::ChatCommandHistoryDown() {
     if(historyCleared == false) {
         if(chatCommandHistoryIterator == chatCommandHistory.begin()) {
-            rosterWindow->SendRosterMessage(1, clearChatLine);
+            rosterWindow->SendRosterMessage(clearChatLine);
             if(historyCleared == false)
                 chatCommandHistoryIterator--;
 
@@ -489,8 +489,8 @@ void CAvaraAppImpl::ChatCommandHistoryDown() {
             }
             std::string command = *chatCommandHistoryIterator;
 
-            rosterWindow->SendRosterMessage(1, clearChatLine);
-            rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
+            rosterWindow->SendRosterMessage(clearChatLine);
+            rosterWindow->SendRosterMessage(command);
         }
     }
 }
@@ -504,8 +504,8 @@ void CAvaraAppImpl::ChatCommandHistoryUp() {
         historyCleared = false;
         std::string command = *chatCommandHistoryIterator;
 
-        rosterWindow->SendRosterMessage(1, clearChatLine);
-        rosterWindow->SendRosterMessage(command.length(), const_cast<char*>(command.c_str()));
+        rosterWindow->SendRosterMessage(clearChatLine);
+        rosterWindow->SendRosterMessage(command);
 
         if(chatCommandHistoryIterator != chatCommandHistory.end()) {
             chatCommandHistoryIterator++;
@@ -523,7 +523,7 @@ bool CAvaraAppImpl::CommandHelp(VectorOfArgs vargs) {
         AddMessageLine("Available commands:  " + TextCommand::ListOfCommands());
     } else {
         TextCommand::FindMatchingCommands(vargs[0],
-                                          [&](TextCommand* command, VectorOfArgs vargs) -> bool {
+                                          [&](TextCommand* command, std::string cmd, VectorOfArgs vargs) -> bool {
             AddMessageLine(command->GetUsage());
             return true;
         });
@@ -591,7 +591,6 @@ bool CAvaraAppImpl::ToggleAwayState(VectorOfArgs vargs) {
 
     short newStatus = (playerToChange->LoadingStatus() == kLAway) ? kLConnected : kLAway;
     long noWinFrame = -1;
-    std::cout << "toggle away slot = " << playerToChange->Slot() << std::endl;
     gameNet->itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange,
                                         playerToChange->Slot(), newStatus, 0, sizeof(long), (Ptr)&noWinFrame);
     AddMessageLine("Status of " + playerToChange->GetPlayerName() +
@@ -724,15 +723,15 @@ void CAvaraAppImpl::RegisterCommands() {
 
     cmd = new TextCommand("/beep            <- ring the bell",
                           [this](VectorOfArgs vargs) -> bool {
-        char ringBell[] = "\a\b";    // \a = bell, \b = backspace
-        rosterWindow->SendRosterMessage(sizeof(ringBell), ringBell);
+        std::string ringBell("\a\b");    // \a = bell, \b = backspace
+        rosterWindow->SendRosterMessage(ringBell);
         return true;
     });
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/clear           <- clear chat text",
                           [this](VectorOfArgs vargs) -> bool {
-        rosterWindow->SendRosterMessage(1, clearChatLine);
+        rosterWindow->SendRosterMessage(clearChatLine);
         return true;
     });
     TextCommand::Register(cmd);
@@ -765,10 +764,13 @@ void CAvaraAppImpl::RegisterCommands() {
                           METHOD_TO_LAMBDA(CAvaraAppImpl::LoadRandomLevel));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/vv           <- clear line then output ready checkmarks √",
-                          [this](VectorOfArgs vargs) -> bool {
-        char ready[] = "\x1B√√";
-        rosterWindow->SendRosterMessage(sizeof(ready), ready);
+    cmd = new TextCommand("/vvvvv        <- clear line then output ready checkmarks √",
+                          [this](std::string cmd) -> bool {
+        std::string ready("\x1B");
+        for (int i = 1; i < cmd.length(); i++) {
+            ready += "√";  // one checkmark for each v
+        }
+        rosterWindow->SendRosterMessage(ready);
         return true;
     });
     TextCommand::Register(cmd);

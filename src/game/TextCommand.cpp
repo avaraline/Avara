@@ -1,12 +1,22 @@
 #include <sstream>      // std::istringstream
 #include "TextCommand.h"
 
-TextCommand::TextCommand(const char* usage, TextCommandCallback cback) {
+TextCommand::TextCommand(const char* usage, TextCommandCallbackArgs cback) {
     usageStr = usage;
     // it is assumed that /command is the first word in usage
     std::istringstream iss(usage);
     iss >> commandStr;
-    callback = cback;
+    callbackArgs = cback;
+    callbackCmd = NULL;
+}
+
+TextCommand::TextCommand(const char* usage, TextCommandCallbackCmd cback) {
+    usageStr = usage;
+    // it is assumed that /command is the first word in usage
+    std::istringstream iss(usage);
+    iss >> commandStr;
+    callbackArgs = NULL;
+    callbackCmd = cback;
 }
 
 std::vector<TextCommand*> TextCommand::registeredCommands;
@@ -16,7 +26,7 @@ void TextCommand::Register(TextCommand* command) {
 }
 
 bool TextCommand::FindMatchingCommands(std::string& fullCommand,
-                                       std::function<bool(TextCommand *, VectorOfArgs)> matchCb) {
+                                       std::function<bool(TextCommand *, std::string&, VectorOfArgs)> matchCb) {
     bool success = false;
 
     // must match at least 2 chars (eg. /xyz must have at least /x)
@@ -41,7 +51,7 @@ bool TextCommand::FindMatchingCommands(std::string& fullCommand,
         // if the typed command is a substring of this registered command string...
         // Example: "/lo" will match to commands "/load" or "/lol" so the first match would be returned
         if (command->commandStr.rfind(cmd, 0) == 0) {
-            success = matchCb(command, vargs);
+            success = matchCb(command, cmd, vargs);
             if (success) {
                 break;
             }
@@ -54,8 +64,13 @@ bool TextCommand::FindMatchingCommands(std::string& fullCommand,
 const bool TextCommand::ExecuteMatchingCallbacks(std::string& fullCommand) {
 
     return FindMatchingCommands(fullCommand,
-                                [](TextCommand* command, VectorOfArgs vargs) -> bool {
-        return command->callback(vargs);
+                                [](TextCommand* command, std::string& cmd, VectorOfArgs vargs) -> bool {
+        if (command->callbackArgs) {
+            return command->callbackArgs(vargs);
+        } else if (command->callbackCmd) {
+            return command->callbackCmd(cmd);
+        }
+        return false;
     });
 }
 
@@ -70,7 +85,7 @@ std::string TextCommand::UsageForCommand(std::string& fullCommand) {
     std::string usage;
 
     FindMatchingCommands(fullCommand,
-                         [&](TextCommand* command, VectorOfArgs vargs) -> bool {
+                         [&](TextCommand* command, std::string cmd, VectorOfArgs vargs) -> bool {
         usage = command->GetUsage();
         return true;
     });
