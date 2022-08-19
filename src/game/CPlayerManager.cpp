@@ -1133,10 +1133,6 @@ bool CPlayerManagerImpl::IsAway() {
     return (loadingStatus == kLAway);
 }
 
-void CPlayerManagerImpl::SetPreviousStatus(short status) {
-    previousStatus = status;
-}
-
 void CPlayerManagerImpl::AbortRequest() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
     if (isLocalPlayer) {
@@ -1308,9 +1304,6 @@ Str255& CPlayerManagerImpl::PlayerRegName() {
 }
 short CPlayerManagerImpl::LoadingStatus() {
     return loadingStatus;
-}
-short CPlayerManagerImpl::PreviousStatus() {
-    return previousStatus;
 }
 short CPlayerManagerImpl::LevelCRC() {
     return levelCRC;

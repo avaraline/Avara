@@ -42,6 +42,7 @@ public:
     virtual CAbstractPlayer* GetPlayer() { return playa; }
     virtual void SetPlayer(CAbstractPlayer* p) { playa = p; }
     virtual short Slot() { return 0; }
+    virtual void SetLocal() {};
     virtual void AbortRequest() {}
     virtual Boolean IsLocalPlayer() { return true; }
     virtual Boolean CalculateIsLocalPlayer() { return true; }
@@ -60,8 +61,10 @@ public:
     virtual short LoadingStatus() { return 0; }
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
     virtual void SetPlayerStatus(short newStatus, long theWin) {}
+    virtual bool IsAway() { return false; };
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) {}
     virtual void SetPosition(short pos) {}
+
     virtual void RosterKeyPress(unsigned char c) {}
     virtual void RosterMessageText(short len, char *c) {}
     virtual short LevelCRC() { return 0; }

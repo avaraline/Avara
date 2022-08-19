@@ -926,8 +926,8 @@ void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std:
         if(message.type() == nlohmann::json::value_t::object) {
             auto it = message.begin();
 
-            if(it.key() == "active") {
-                bool active = it.value();
+            if(it.key() == "xyz") {
+                bool xyz = it.value();
             }
         }
     }

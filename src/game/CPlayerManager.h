@@ -74,9 +74,7 @@ public:
     virtual void IsRegistered(short) = 0;
     virtual Str255& PlayerRegName() = 0;
     virtual short LoadingStatus() = 0;
-    virtual short PreviousStatus() = 0;
     virtual void SetPlayerStatus(short newStatus, long theWin) = 0;
-    virtual void SetPreviousStatus(short status) = 0;
     virtual bool IsAway() = 0;
 
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
@@ -168,7 +166,6 @@ private:
 
     long winFrame;
     short loadingStatus;
-    short previousStatus;
     short slot;
     short playerColor;
 
@@ -222,7 +219,6 @@ public:
     virtual void ChangeNameAndLocation(StringPtr theName, Point location);
     virtual void SetPosition(short pos);
     virtual void SetPlayerStatus(short newStatus, long theWin);
-    virtual void SetPreviousStatus(short status);
     virtual bool IsAway();
     virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
 
@@ -258,7 +254,6 @@ public:
     virtual void IsRegistered(short);
     virtual Str255& PlayerRegName();
     virtual short LoadingStatus();
-    virtual short PreviousStatus();
     virtual short LevelCRC();
     virtual OSErr LevelErr();
     virtual std::string LevelTag();
