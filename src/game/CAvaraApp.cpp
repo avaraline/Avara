@@ -600,8 +600,8 @@ bool CAvaraAppImpl::ToggleAwayState(VectorOfArgs vargs) {
 
 bool CAvaraAppImpl::LoadNamedLevel(VectorOfArgs vargs) {
     std::vector<std::string> levelSets = LevelDirNameListing();
-    std::string levelPrefix = vargs[0];
-    std::transform(levelPrefix.begin(), levelPrefix.end(),levelPrefix.begin(), ::toupper);
+    std::string levelSubstr = join_with(vargs, " ");
+    std::transform(levelSubstr.begin(), levelSubstr.end(),levelSubstr.begin(), ::toupper);
 
     for(std::string set : levelSets) {
         nlohmann::json ledis = LoadLevelListFromJSON(set);
@@ -610,7 +610,8 @@ bool CAvaraAppImpl::LoadNamedLevel(VectorOfArgs vargs) {
             std::string levelUpper = ld.value()["Name"].get<std::string>();
             std::transform(levelUpper.begin(), levelUpper.end(),levelUpper.begin(), ::toupper);
 
-            if(levelUpper.rfind(levelPrefix, 0) == 0) {
+            // find levelSubstr anywhere within the level name
+            if(levelUpper.find(levelSubstr) != std::string::npos) {
                 levelWindow->SelectLevel(set, level);
                 levelWindow->SendLoad();
 
