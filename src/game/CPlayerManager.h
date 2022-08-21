@@ -44,6 +44,11 @@ class CNetManager;
 
 #define kMaxMessageChars 127
 
+static const char* lThing_utf8    = "\xC2\xAC ";     // ¬
+static const char* checkMark_utf8 = "\xE2\x88\x9A";  // ✓
+static const char* triangle_utf8  = "\xCE\x94";      // Δ
+static const char* clearChat_utf8 = "\x1B";          // Fn-Del on Mac
+
 
 class CPlayerManager {
 protected:

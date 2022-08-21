@@ -319,6 +319,11 @@ void CRosterWindow::SendRosterMessage(std::string& message) {
     SendRosterMessage(message.length(), (char*)message.c_str());
 }
 
+void CRosterWindow::SendRosterMessage(const char* message) {
+    // message assumed to be NULL terminated
+    SendRosterMessage(strlen(message), (char*)message);
+}
+
 void CRosterWindow::SendRosterMessage(int len, char *message) {
     ((CAvaraAppImpl *)gApplication)->GetNet()->SendRosterMessage(len, message);
     chatInput->setCaption(chatInput->caption() + message);

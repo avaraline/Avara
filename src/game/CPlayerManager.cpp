@@ -767,25 +767,18 @@ void	CPlayerManagerImpl::FlushMessageText(
 void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
     while (len--) {
         unsigned char theChar;
-        const char lThing_utf8[3] = {'\xC2', '\xAC', ' '}; // ¬
-        const char checkMark_utf8[3] = {'\xE2', '\x88', '\x9A'}; // ✓
-        const char triangle_utf8[3] = {'\xCE', '\x94'}; // Δ
+
         theChar = *c++;
         std::string chatText = GetChatLine();
 
         switch (theChar) {
             case 6:
                 // ✓
-                //lineBuffer.push_back('\xE2');
-                //lineBuffer.push_back('\x88');
-                //lineBuffer.push_back('\x9A');
-                lineBuffer.insert(lineBuffer.end(), checkMark_utf8, checkMark_utf8 + 3);
+                lineBuffer.insert(lineBuffer.end(), checkMark_utf8, checkMark_utf8 + strlen(checkMark_utf8));
                 break;
             case 7:
                 // Δ
-                //lineBuffer.push_back('\xCE');
-                //lineBuffer.push_back('\x94');
-                lineBuffer.insert(lineBuffer.end(), triangle_utf8, triangle_utf8 + 2);
+                lineBuffer.insert(lineBuffer.end(), triangle_utf8, triangle_utf8 + strlen(triangle_utf8));
                 itsGame->itsApp->NotifyUser();
                 break;
             case 8:
@@ -805,11 +798,11 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                 // ¬
                 ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
 
-                lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
+                lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + strlen(lThing_utf8));
                 // FlushMessageText(true);
                 ((CAvaraAppImpl*)itsGame->itsApp)->ChatCommand(chatText, this);
                 break;
-            case 27:
+            case 27:  // clearChat_utf8
                 lineBuffer.clear();
                 break;
             default:

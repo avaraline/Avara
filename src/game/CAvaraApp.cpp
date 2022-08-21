@@ -38,9 +38,6 @@
 
 #include "TextCommand.h"
 
-std::string clearChatLine("\x1B");
-
-
 // included while we fake things out
 #include "CPlayerManager.h"
 
@@ -480,7 +477,7 @@ void CAvaraAppImpl::ChatCommandHistoryNewer() {
     }
 
     chatCommandHistoryIterator++;
-    rosterWindow->SendRosterMessage(clearChatLine);
+    rosterWindow->SendRosterMessage(clearChat_utf8);
     if (chatCommandHistoryIterator != chatCommandHistory.end()) {
         std::string command = *chatCommandHistoryIterator;
         rosterWindow->SendRosterMessage(command);
@@ -495,7 +492,7 @@ void CAvaraAppImpl::ChatCommandHistoryOlder() {
 
     chatCommandHistoryIterator--;
     std::string command = *chatCommandHistoryIterator;
-    rosterWindow->SendRosterMessage(clearChatLine);
+    rosterWindow->SendRosterMessage(clearChat_utf8);
     rosterWindow->SendRosterMessage(command);
 }
 
@@ -718,7 +715,7 @@ void CAvaraAppImpl::RegisterCommands() {
 
     cmd = new TextCommand("/clear           <- clear chat text",
                           [this](VectorOfArgs vargs) -> bool {
-        rosterWindow->SendRosterMessage(clearChatLine);
+        rosterWindow->SendRosterMessage(clearChat_utf8);
         return true;
     });
     TextCommand::Register(cmd);
@@ -751,13 +748,13 @@ void CAvaraAppImpl::RegisterCommands() {
                           METHOD_TO_LAMBDA(CAvaraAppImpl::LoadRandomLevel));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/vvvvv        <- clear line then output ready checkmarks √",
+    cmd = new TextCommand("/vvvvv        <- clear line then output ready checkmarks \xE2\x88\x9A",
                           [this](std::string cmd) -> bool {
-        std::string ready("\x1B");
+        std::string readyStr(clearChat_utf8);
         for (int i = 1; i < cmd.length(); i++) {
-            ready += "√";  // one checkmark for each v
+            readyStr += checkMark_utf8;  // one checkmark for each v
         }
-        rosterWindow->SendRosterMessage(ready);
+        rosterWindow->SendRosterMessage(readyStr);
         return true;
     });
     TextCommand::Register(cmd);
