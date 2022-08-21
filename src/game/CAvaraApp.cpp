@@ -454,63 +454,49 @@ void CAvaraAppImpl::BrightBox(long frameNum, short position) {}
 void CAvaraAppImpl::ChatCommand(std::string chatText, CPlayerManager* player) {
     // only execute commands for the "local" player (me)
     if (player->IsLocalPlayer() && TextCommand::ExecuteMatchingCallbacks(chatText)) {
-        // remember this command in case we want to use the keys to do it again
+        // remember this command in case we want to use the arrow keys to run it again
         ChatCommandHistory(chatText);
         return;
     }
 }
 
 void CAvaraAppImpl::ChatCommandHistory(std::string chatText) {
-    // only add it if it's different than the front
-    if (chatCommandHistory.empty() || chatCommandHistory.front().compare(chatText) != 0) {
-        chatCommandHistory.push_front(chatText);
-    }
-    chatCommandHistoryIterator = chatCommandHistory.begin();
-    historyUp = true;
-}
-
-void CAvaraAppImpl::ChatCommandHistoryDown() {
-    if(historyCleared == false) {
-        if(chatCommandHistoryIterator == chatCommandHistory.begin()) {
-            rosterWindow->SendRosterMessage(clearChatLine);
-            if(historyCleared == false)
-                chatCommandHistoryIterator--;
-
-            historyCleared = true;
-        }
-        else {
-            if(historyUp == true) {
-                chatCommandHistoryIterator--;
-            }
-            historyUp = false;
-
-            if(chatCommandHistoryIterator != chatCommandHistory.begin()) {
-                chatCommandHistoryIterator--;
-            }
-            std::string command = *chatCommandHistoryIterator;
-
-            rosterWindow->SendRosterMessage(clearChatLine);
-            rosterWindow->SendRosterMessage(command);
+    // only add it if it's different than the newest history element
+    if (chatCommandHistory.empty() || chatCommandHistory.back().compare(chatText) != 0) {
+        chatCommandHistory.push_back(chatText);
+        if (chatCommandHistory.size() > 20) { // 20 is plenty?
+            // remove oldest history element
+            chatCommandHistory.pop_front();
         }
     }
+    // reset the history iterator after any command is executed
+    chatCommandHistoryIterator = chatCommandHistory.end();
 }
 
-void CAvaraAppImpl::ChatCommandHistoryUp() {
-    if(chatCommandHistoryIterator != chatCommandHistory.end()) {
-        if(historyUp == false || historyCleared == true) {
-            chatCommandHistoryIterator++;
-        }
-        historyUp = true;
-        historyCleared = false;
+void CAvaraAppImpl::ChatCommandHistoryNewer() {
+    // end() indicates we aren't displaying history so there's no "newer"
+    if (chatCommandHistoryIterator == chatCommandHistory.end()) {
+        return;
+    }
+
+    chatCommandHistoryIterator++;
+    rosterWindow->SendRosterMessage(clearChatLine);
+    if (chatCommandHistoryIterator != chatCommandHistory.end()) {
         std::string command = *chatCommandHistoryIterator;
-
-        rosterWindow->SendRosterMessage(clearChatLine);
         rosterWindow->SendRosterMessage(command);
-
-        if(chatCommandHistoryIterator != chatCommandHistory.end()) {
-            chatCommandHistoryIterator++;
-        }
     }
+}
+
+void CAvaraAppImpl::ChatCommandHistoryOlder() {
+    // if already on the oldest element
+    if (chatCommandHistoryIterator == chatCommandHistory.begin()) {
+        return;
+    }
+
+    chatCommandHistoryIterator--;
+    std::string command = *chatCommandHistoryIterator;
+    rosterWindow->SendRosterMessage(clearChatLine);
+    rosterWindow->SendRosterMessage(command);
 }
 
 //

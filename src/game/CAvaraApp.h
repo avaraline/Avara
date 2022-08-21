@@ -78,8 +78,6 @@ public:
     std::deque<std::string> messageLines;
     std::deque<std::string> chatCommandHistory;
     std::deque<std::string>::iterator chatCommandHistoryIterator;
-    bool historyUp;
-    bool historyCleared;
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
@@ -138,8 +136,8 @@ public:
     // ChatCommand and history
     virtual void ChatCommand(std::string chatText, CPlayerManager* player);
     virtual void ChatCommandHistory(std::string chatText);
-    virtual void ChatCommandHistoryUp();
-    virtual void ChatCommandHistoryDown();
+    virtual void ChatCommandHistoryOlder();
+    virtual void ChatCommandHistoryNewer();
 
     // TextCommand callbacks
     bool CommandHelp(VectorOfArgs);

@@ -367,11 +367,11 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
 
         switch (event.key.keysym.sym) {
             case SDLK_UP:
-                ((CAvaraAppImpl *)gApplication)->ChatCommandHistoryUp();
+                ((CAvaraAppImpl *)gApplication)->ChatCommandHistoryOlder();
 
                 return true;
             case SDLK_DOWN:
-                ((CAvaraAppImpl *)gApplication)->ChatCommandHistoryDown();
+                ((CAvaraAppImpl *)gApplication)->ChatCommandHistoryNewer();
 
                 return true;
             case SDLK_BACKSPACE:
