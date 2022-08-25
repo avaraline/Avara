@@ -621,7 +621,7 @@ bool CAvaraAppImpl::LoadRandomLevel(VectorOfArgs matchArgs) {
         }
     }
 
-    AddMessageLine((std::ostringstream() << "Choosing random level from " << matchingSets.size() << " sets").str());
+    AddMessageLine("Choosing random level from " + std::to_string(matchingSets.size()) + " sets");
 
     if (matchingSets.size() > 0) {
         //count levels
