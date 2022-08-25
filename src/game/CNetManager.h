@@ -142,8 +142,8 @@ public:
     virtual void DisconnectSome(short mask);
     virtual void HandleDisconnect(short slotId, short why);
 
-    virtual void SendLoadLevel(std::string theSet, std::string theTag);
-    virtual void ReceiveLoadLevel(short senderSlot, char *setAndTag, Fixed seed);
+    virtual void SendLoadLevel(std::string theSet, std::string theTag, int16_t originalSender = 0);
+    virtual void ReceiveLoadLevel(short senderSlot, int16_t distribution, char *setAndTag, Fixed seed);
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag);
 
     virtual void SendPingCommand(int totalTrips = 0);

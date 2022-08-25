@@ -93,7 +93,8 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceiveColorChange(thePacket->dataBuffer);
             break;
         case kpLoadLevel:
-            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->dataBuffer, thePacket->p3);
+            // p2 is proxy for which slot originally sent the kpLoadLevel command
+            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->p2, thePacket->dataBuffer, thePacket->p3);
             break;
         case kpLevelLoaded:
             theNet->LevelLoadStatus(thePacket->sender, thePacket->p2, 0, std::string(thePacket->dataBuffer));

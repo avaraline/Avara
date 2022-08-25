@@ -409,7 +409,7 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
     }
 }
 
-void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
+void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_t originalSender /* default = 0 */) {
     CAvaraApp *theApp;
     PacketInfo *aPacket;
 
@@ -419,15 +419,23 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
 
     theApp = itsGame->itsApp;
 
+    SDL_Log("SendLoadLevel(%s, %s, %d)\n", theSet.c_str(), levelTag.c_str(), originalSender);
+
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
-    aPacket->p2 = 0;
+    aPacket->p2 = originalSender;
     aPacket->p3 = FRandSeed;
-    aPacket->distribution = kdEveryone;
+    if (itsCommManager->myId == 0) {
+        // to avoid multiple simultaneous loads, only the server sends the kpLoadLevel requests to everyone
+        SDL_Log("  server sending to everyone\n");
+        aPacket->distribution = kdEveryone;
+    } else {
+        // clients ask the server to forward the kpLoadLevel request to everyone
+        SDL_Log("  client sending to server only\n");
+        aPacket->distribution = kdServerOnly;
+    }
 
-    std::stringstream buffa;
-    buffa << theSet << "/" << levelTag;
-    std::string setAndLevel = buffa.str();
+    std::string setAndLevel = theSet + "/" + levelTag;
 
     aPacket->dataLen = setAndLevel.length() + 1;
     BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, setAndLevel.length() + 1);
@@ -446,18 +454,29 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
     itsCommManager->WriteAndSignPacket(aPacket);
 }
 
-void CNetManager::ReceiveLoadLevel(short senderSlot, char *theSetAndTag, Fixed seed) {
+void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, char *theSetAndTag, Fixed seed) {
     CAvaraApp *theApp;
     OSErr iErr;
     short crc = 0;
 
-    if (!isPlaying) {
-        CPlayerManager *sendingPlayer = playerTable[senderSlot];
+    SDL_Log("ReceiveLoadLevel(%d, %d, %s, %d)\n", senderSlot, originalSender, theSetAndTag, seed);
 
-        std::string setAndTag(theSetAndTag);
-        int pos = setAndTag.find("/");
-        std::string set = setAndTag.substr(0, pos);
-        std::string tag = setAndTag.substr(pos + 1, std::string::npos);
+    std::string setAndTag(theSetAndTag);
+    int pos = setAndTag.find("/");
+    std::string set = setAndTag.substr(0, pos);
+    std::string tag = setAndTag.substr(pos + 1, std::string::npos);
+
+    if (senderSlot != 0) {
+        // The server will forward clients' kpLoadLevel message to kdEveryone.
+        // Everyone else waits until they get the message from the server.
+        // This ensures that all kpLoadLevel requests are processed in the same order for everyone.
+        if (itsCommManager->myId == 0) {
+            SDL_Log("  server sending level load of %s on behalf of %s\n",
+                    theSetAndTag, playerTable[senderSlot]->GetPlayerName().c_str());
+            SendLoadLevel(set, tag, senderSlot);
+        }
+    } else if (!isPlaying) {
+        CPlayerManager *sendingPlayer = playerTable[originalSender];
 
         theApp = itsGame->itsApp;
         FRandSeed = seed;
