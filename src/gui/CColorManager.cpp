@@ -49,6 +49,18 @@ uint32_t CColorManager::teamTextColors[kMaxTeamColors + 1] = {
     0xff333333
 };
 
+std::string CColorManager::teamColorNames[kMaxTeamColors + 1] = {
+    "Neutral",
+    "Green",
+    "Yellow",
+    "Red",
+    "Pink",
+    "Purple",
+    "Blue",
+    "Orange",
+    "Teal"
+};
+
 void CColorManager::setColorBlind(ColorBlindMode mode) {
     switch (mode) {
         case Off:
