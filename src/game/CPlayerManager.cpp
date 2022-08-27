@@ -32,6 +32,8 @@
 #include <SDL2/SDL.h>
 #include <utf8.h>
 
+CPlayerManager* CPlayerManager::theLocalPlayer;
+
 void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager) {
     // Rect	*mainScreenRect;
 
@@ -121,7 +123,8 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     mugState = 0;
 
     NetDisconnect();
-    isLocalPlayer = false;
+    SetLocal();
+
     prevKeyboardActive = keyboardActive;
 }
 
@@ -469,7 +472,7 @@ void CPlayerManagerImpl::ResumeGame() {
     oldHeld = 0;
     oldModifiers = 0;
     oldButton = 0;
-    isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
+    SetLocal();
 
     keysDown = keysUp = keysHeld = dupKeysHeld = 0;
     mouseX = mouseY = 0;
@@ -764,31 +767,25 @@ void	CPlayerManagerImpl::FlushMessageText(
 void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
     while (len--) {
         unsigned char theChar;
-        const char lThing_utf8[3] = {'\xC2', '\xAC', ' '}; // ¬
-        const char checkMark_utf8[3] = {'\xE2', '\x88', '\x9A'}; // ✓
-        const char triangle_utf8[3] = {'\xCE', '\x94'}; // Δ
+
         theChar = *c++;
+        std::string chatText = GetChatLine();
 
         switch (theChar) {
             case 6:
                 // ✓
-                //lineBuffer.push_back('\xE2');
-                //lineBuffer.push_back('\x88');
-                //lineBuffer.push_back('\x9A');
-                lineBuffer.insert(lineBuffer.end(), checkMark_utf8, checkMark_utf8 + 3);
+                lineBuffer.insert(lineBuffer.end(), checkMark_utf8, checkMark_utf8 + strlen(checkMark_utf8));
                 break;
             case 7:
                 // Δ
-                //lineBuffer.push_back('\xCE');
-                //lineBuffer.push_back('\x94');
-                lineBuffer.insert(lineBuffer.end(), triangle_utf8, triangle_utf8 + 2);
+                lineBuffer.insert(lineBuffer.end(), triangle_utf8, triangle_utf8 + strlen(triangle_utf8));
                 itsGame->itsApp->NotifyUser();
                 break;
             case 8:
                 if (lineBuffer.size()) {
                     auto i = lineBuffer.end();
                     try {
-                        utf8::previous(i, lineBuffer.begin());
+                        utf8::prior(i, lineBuffer.begin());
                     }
                     catch (const utf8::exception& utfcpp_ex) {
                         std::cerr << utfcpp_ex.what() << "\n";
@@ -801,10 +798,11 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                 // ¬
                 ((CAvaraAppImpl*)itsGame->itsApp)->rosterWindow->NewChatLine(playerName, GetChatLine());
 
-                lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + 3);
+                lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + strlen(lThing_utf8));
                 // FlushMessageText(true);
+                ((CAvaraAppImpl*)itsGame->itsApp)->GetTui()->ExecuteMatchingCommand(chatText, this);
                 break;
-            case 27:
+            case 27:  // clearChat_utf8
                 lineBuffer.clear();
                 break;
             default:
@@ -866,6 +864,10 @@ std::string CPlayerManagerImpl::GetChatString(int maxChars) {
         }
     }
     return std::string(i, theChat.end());
+}
+
+bool CPlayerManagerImpl::CalculateIsLocalPlayer() {
+    return theNetManager->itsCommManager->myId == slot;
 }
 
 void CPlayerManagerImpl::GameKeyPress(char theChar) {
@@ -941,7 +943,7 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive) {
+    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && loadingStatus != kLAway) {
         oldStatus = loadingStatus;
 
         if (serverErr || levelErr) {
@@ -1120,6 +1122,10 @@ void CPlayerManagerImpl::SetPlayerStatus(short newStatus, long theWin) {
     }
 }
 
+bool CPlayerManagerImpl::IsAway() {
+    return (loadingStatus == kLAway);
+}
+
 void CPlayerManagerImpl::AbortRequest() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);
     if (isLocalPlayer) {
@@ -1255,6 +1261,12 @@ void CPlayerManagerImpl::SpecialColorControl() {
 
 short CPlayerManagerImpl::Slot() {
     return slot;
+}
+void CPlayerManagerImpl::SetLocal() {
+    isLocalPlayer = (theNetManager->itsCommManager->myId == slot);
+    if (isLocalPlayer) {
+        CPlayerManagerImpl::theLocalPlayer = this;
+    }
 }
 Boolean CPlayerManagerImpl::IsLocalPlayer() {
     return isLocalPlayer;

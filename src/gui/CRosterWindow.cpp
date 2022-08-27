@@ -202,8 +202,7 @@ void CRosterWindow::UpdateRoster() {
                 theName += std::string(" (") + std::to_string(rtt) + " ms)";
                 maxRtt = std::max(maxRtt, rtt);
             }
-            short status = thisPlayer->LoadingStatus();
-            std::string theStatus = GetStringStatus(status, thisPlayer->WinFrame());
+            std::string theStatus = GetStringStatus(thisPlayer);
 
             std::string theChat = thisPlayer->GetChatString(CHAT_CHARS);
 
@@ -269,10 +268,11 @@ bool CRosterWindow::DoCommand(int theCommand) {
     return false;
 }
 
-std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
+std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
+    short status = player->LoadingStatus();
     std::string strStatus;
-    if (winFrame >= 0) {
-        long timeTemp = FMulDiv(winFrame, ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
+    if (player->WinFrame() >= 0) {
+        long timeTemp = FMulDiv(player->WinFrame(), ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
         auto hundreds1 = timeTemp % 10;
         timeTemp /= 10;
         auto hundreds2 = timeTemp % 10;
@@ -289,7 +289,9 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
         return strStatus;
     }
 
-    if (status == kLConnected) {
+    if(status == kLAway) {
+        strStatus = "not playing";
+    } else if (status == kLConnected) {
         strStatus = "connected";
     } else if (status == kLLoaded) {
         strStatus = "ready";
@@ -311,6 +313,15 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
         strStatus = "";
     }
     return strStatus;
+}
+
+void CRosterWindow::SendRosterMessage(std::string& message) {
+    SendRosterMessage(message.length(), (char*)message.c_str());
+}
+
+void CRosterWindow::SendRosterMessage(const char* message) {
+    // message assumed to be NULL terminated
+    SendRosterMessage(strlen(message), (char*)message);
 }
 
 void CRosterWindow::SendRosterMessage(int len, char *message) {
@@ -360,6 +371,14 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         //SDL_Log("CRosterWindow::handleSDLEvent SDL_KEYDOWN");
 
         switch (event.key.keysym.sym) {
+            case SDLK_UP:
+                ((CAvaraAppImpl *)gApplication)->GetTui()->HistoryOlder();
+
+                return true;
+            case SDLK_DOWN:
+                ((CAvaraAppImpl *)gApplication)->GetTui()->HistoryNewer();
+
+                return true;
             case SDLK_BACKSPACE:
                 SendRosterMessage(1, backspace);
                 ChatLineDelete();

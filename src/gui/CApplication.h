@@ -39,7 +39,10 @@ public:
     virtual bool handleSDLEvent(SDL_Event &event);
 
     // templated version works for new types too (float, double, short, etc.)
-    template <class T> T Get(const std::string name) { return _prefs[name]; }
+    template <class T> T Get(const std::string name) {
+        // throws json::out_of_range exception if 'name' not a known key
+        return _prefs.at(name);
+    }
     // these getters are here for backwards compatibility and/or readability
     std::string String(const std::string name)       { return Get<std::string>(name); };
     long Number(const std::string name)              { return Get<long>(name); };

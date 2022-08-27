@@ -127,6 +127,7 @@ public:
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
     virtual void RecordNameAndLocation(short slotId, StringPtr theName, short status, Point location);
+    virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
     virtual void PositionsChanged(char *p);
@@ -141,19 +142,21 @@ public:
     virtual void DisconnectSome(short mask);
     virtual void HandleDisconnect(short slotId, short why);
 
-    virtual void SendLoadLevel(std::string theSet, std::string theTag);
-    virtual void ReceiveLoadLevel(short senderSlot, char *setAndTag, Fixed seed);
+    virtual void SendLoadLevel(std::string theSet, std::string theTag, int16_t originalSender = 0);
+    virtual void ReceiveLoadLevel(short senderSlot, int16_t distribution, char *setAndTag, Fixed seed);
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag);
 
     virtual void SendPingCommand(int totalTrips = 0);
     virtual void SendStartCommand();
     virtual void SendResumeCommand();
     virtual Boolean ResumeEnabled();
+    virtual bool CanPlay();
     virtual void ReceiveStartCommand(short activeDistribution, short fromSlot);
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey);
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
     virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);
+    virtual void ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json);
 
     virtual short PlayerCount();
 

@@ -793,6 +793,8 @@ void CAvaraGame::GameStart() {
         itsNet->FrameAction();
     }
 
+    loadedLevel = "";
+
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);
     SDL_SetRelativeMouseMode(SDL_TRUE);
