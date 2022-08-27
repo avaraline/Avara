@@ -151,6 +151,7 @@ public:
     virtual void BroadcastCommand(int) {}
     virtual void GameStarted(std::string set, std::string level) {};
     virtual std::deque<std::string>& MessageLines() { return msgLines; }
+    virtual CommandManager* GetTui() { return 0; }
 private:
     CNetManager *itsNet;
     std::deque<std::string> msgLines;

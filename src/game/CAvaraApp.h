@@ -17,7 +17,7 @@
 #include "CPlayerWindow.h"
 #include "CRosterWindow.h"
 #include "CTrackerWindow.h"
-#include "TextCommand.h"
+#include "CommandManager.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -61,11 +61,13 @@ public:
     virtual CAvaraGame* GetGame() = 0;
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
+    virtual CommandManager* GetTui() = 0;
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     CAvaraGame *itsGame;
     CNetManager *gameNet;
+    CommandManager *itsTui;
 
 public:
     CPlayerWindow *playerWindow;
@@ -76,8 +78,8 @@ public:
     CTrackerWindow *trackerWindow;
 
     std::deque<std::string> messageLines;
-    std::deque<std::string> chatCommandHistory;
-    std::deque<std::string>::iterator chatCommandHistoryIterator;
+    // std::deque<std::string> chatCommandHistory;
+    // std::deque<std::string>::iterator chatCommandHistoryIterator;
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
@@ -121,6 +123,8 @@ public:
     virtual void SetNet(CNetManager*) override;
     virtual CNetManager* GetNet() override;
     virtual CAvaraGame* GetGame() override;
+    virtual CommandManager* GetTui() override;
+
     virtual void BroadcastCommand(int theCommand) override { CApplication::BroadcastCommand(theCommand); }
     virtual json Get(const std::string name) override { return CApplication::Get(name); }
     virtual void Set(const std::string name, const std::string value) override { CApplication::Set(name, value); }
@@ -132,20 +136,4 @@ public:
 
     void TrackerUpdate();
     std::string TrackerPayload();
-
-    // ChatCommand and history
-    virtual void ChatCommand(std::string chatText, CPlayerManager* player);
-    virtual void ChatCommandHistory(std::string chatText);
-    virtual void ChatCommandHistoryOlder();
-    virtual void ChatCommandHistoryNewer();
-
-    // TextCommand callbacks
-    bool CommandHelp(VectorOfArgs);
-    bool GetSetPreference(VectorOfArgs);
-    bool GoodGame(VectorOfArgs);
-    bool KickPlayer(VectorOfArgs);
-    bool ToggleAwayState(VectorOfArgs);
-    bool LoadNamedLevel(VectorOfArgs);
-    bool LoadRandomLevel(VectorOfArgs);
-    void RegisterCommands();
 };

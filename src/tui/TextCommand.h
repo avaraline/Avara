@@ -48,6 +48,9 @@ public:
     // construct a TextCommand like this:
     //   TextCommand("/something  <- description of command",
     //               [](VectorOfArgs vargs) -> bool { /* define what '/something' does here */ });
+    // or this,
+    //   TextCommand("/something  <- description of command",
+    //               [](std::string cmdStr) -> bool { /* define what '/something' does here */ });
     // OR like this:
     //   TextCommand("/something  <- description of command",
     //               METHOD_TO_LAMBDA(MyClass::DoSomething));

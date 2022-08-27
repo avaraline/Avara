@@ -800,7 +800,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
 
                 lineBuffer.insert(lineBuffer.end(), lThing_utf8, lThing_utf8 + strlen(lThing_utf8));
                 // FlushMessageText(true);
-                ((CAvaraAppImpl*)itsGame->itsApp)->ChatCommand(chatText, this);
+                ((CAvaraAppImpl*)itsGame->itsApp)->GetTui()->ExecuteMatchingCommand(chatText, this);
                 break;
             case 27:  // clearChat_utf8
                 lineBuffer.clear();
