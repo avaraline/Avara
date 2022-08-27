@@ -785,7 +785,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                 if (lineBuffer.size()) {
                     auto i = lineBuffer.end();
                     try {
-                        utf8::previous(i, lineBuffer.begin());
+                        utf8::prior(i, lineBuffer.begin());
                     }
                     catch (const utf8::exception& utfcpp_ex) {
                         std::cerr << utfcpp_ex.what() << "\n";
