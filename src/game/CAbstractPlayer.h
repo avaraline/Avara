@@ -49,12 +49,12 @@ public:
     //	Shields & energy:
     Fixed energy;
     Fixed maxEnergy; //	Maximum stored energy level
-    Fixed generatorPower; //	Energy gain/frame
+    Fixed classicGeneratorPower, generatorPower; //	Energy gain/frame
     long boostEndFrame;
     long boostsRemaining;
 
     Fixed maxShields; //	Maximum shield energy
-    Fixed shieldRegen; //	Shield regeneration rate
+    Fixed classicShieldRegen, shieldRegen; //	Shield regeneration rate
 
     short missileCount;
     short grenadeCount;
@@ -69,7 +69,11 @@ public:
     Fixed baseMass;
     Fixed motors[2]; //	Left/right speed
     Fixed maxAcceleration;
+    Fixed classicMotorFriction;
     Fixed motorFriction;
+    Fixed classicMotorAcceleration;
+    Fixed motorAcceleration;
+    Fixed fpsMotorOffset;
     Fixed turningEffect; //	How far apart are the legs or wheels?
     Fixed movementCost; //	Cost of acceleration
     Fixed proximityRadius;
@@ -84,7 +88,7 @@ public:
     Fixed gunEnergy[2]; //	Left/right guns
     Fixed fullGunEnergy;
     Fixed activeGunEnergy;
-    Fixed chargeGunPerFrame;
+    Fixed classicChargeGunPerFrame, chargeGunPerFrame;
     long mouseShootTime; //	To pace mouse button autofire.
     Vector gunOffset;
     Boolean fireGun;
@@ -158,6 +162,7 @@ public:
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
+    virtual void AdaptableSettings();
     virtual void LoadHUDParts();
     virtual void ReplacePartColors();
     virtual void SetSpecialColor(long specialColor);
@@ -180,8 +185,6 @@ public:
     virtual void TractionControl();
     virtual void MotionControl();
     virtual void GunActions();
-
-    virtual void GetSpeedEstimate(Fixed *theSpeed);
 
 #if 0
     virtual	void			FindBestMovement(CSmartPart *bump);
@@ -220,4 +223,6 @@ public:
         Fixed *delta,
         CSmartPart **hostPart);
     virtual void WasHit(RayHitRecord *theHit, Fixed hitEnergy);
+
+    virtual bool HandlesFastFPS() { return true; }
 };

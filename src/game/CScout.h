@@ -40,4 +40,5 @@ public:
     virtual void ToggleState(short command);
 
     virtual Fixed MoveToTarget();
+    virtual bool HandlesFastFPS() { return true; }
 };

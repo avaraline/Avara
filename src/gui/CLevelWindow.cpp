@@ -76,7 +76,7 @@ void CLevelWindow::AddRecent(std::string set, std::string levelName) {
         recentSets.insert(recentSets.begin(), set);
         recentLevels.insert(recentLevels.begin(), levelName);
 
-        if (recentSets.size() > 10) {
+        if (recentSets.size() > 64) {
             recentSets.pop_back();
             recentLevels.pop_back();
         }

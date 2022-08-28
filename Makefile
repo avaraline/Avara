@@ -8,8 +8,11 @@ GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
 ifneq ($(GIT_BRANCH),)
     BUILD_DIR ?= build-$(GIT_BRANCH)
+		# quiet zip on dev branches
+		ZIPFLAGS := -rq
 else
     BUILD_DIR ?= build
+		ZIPFLAGS := -r
 endif
 SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
@@ -28,6 +31,9 @@ ifeq ($(UNAME), Darwin)
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
 	SRCS += $(shell find vendor/miniupnpc -maxdepth 1 -name '*.c')
 	INCFLAGS += -Ivendor/miniupnpc
+	CXXFLAGS += -mmacosx-version-min=10.9
+	CPPFLAGS += -mmacosx-version-min=10.9
+	CFLAGS += -mmacosx-version-min=10.9
 ifneq ("$(wildcard $(HOME)/Library/Frameworks/SDL2.framework)", "")
 	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
 else
@@ -87,7 +93,7 @@ macapp: avara
 	cp -a $(FRAMEWORK_PATH)/SDL2.framework $(BUILD_DIR)/Avara.app/Contents/Frameworks
 	install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
 	if [ $(SIGNING_ID) = "NONE" ]; then echo "Not signing app bundle."; else codesign -vvv --no-strict --deep --force -s $(SIGNING_ID) $(BUILD_DIR)/Avara.app; fi
-	cd $(BUILD_DIR) && zip -r MacAvara.zip Avara.app && cd ..
+	cd $(BUILD_DIR) && zip $(ZIPFLAGS) MacAvara.zip Avara.app && cd ..
 
 winapp: avara
 	rm -rf $(BUILD_DIR)/WinAvara
@@ -95,8 +101,8 @@ winapp: avara
 	if [ -f $(BUILD_DIR)/Avara ]; then mv $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe; fi
 	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc,vendor,src} $(BUILD_DIR)/WinAvara
 	# cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
-	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2}.dll $(BUILD_DIR)/WinAvara
-	cd $(BUILD_DIR) && zip -r WinAvara.zip WinAvara && cd ..
+	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2,libminiupnpc}.dll $(BUILD_DIR)/WinAvara
+	cd $(BUILD_DIR) && zip $(ZIPFLAGS) WinAvara.zip WinAvara && cd ..
 
 # Avara
 $(BUILD_DIR)/Avara: $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o

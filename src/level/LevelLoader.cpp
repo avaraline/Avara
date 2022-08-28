@@ -24,9 +24,18 @@
 #include <algorithm>
 #include <sstream>
 #include <fstream>
-#include <optional>
 #include <streambuf>
 #include <regex>
+
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
 
 #define POINTTOUNIT(pt) (pt * 20480 / 9)
 #define UNITPOINTS (double)14.4 // 72 / 5
@@ -180,14 +189,14 @@ struct ALFWalker: pugi::xml_tree_walker {
         if (!fill.empty()) {
             const std::optional<uint32_t> color = ParseColor(fill);
             if (color) {
-                fillColor = color.value();
+                fillColor = *color;
             }
         }
 
         if (!frame.empty()) {
             const std::optional<uint32_t> color = ParseColor(frame);
             if (color) {
-                frameColor = color.value();
+                frameColor = *color;
             }
         }
 

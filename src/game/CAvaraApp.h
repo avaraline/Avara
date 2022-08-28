@@ -17,6 +17,7 @@
 #include "CPlayerWindow.h"
 #include "CRosterWindow.h"
 #include "CTrackerWindow.h"
+#include "CommandManager.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -24,6 +25,7 @@
 #include <json.hpp>
 #include <thread>
 #include <mutex>
+#include <iterator>
 
 using json = nlohmann::json;
 
@@ -59,11 +61,13 @@ public:
     virtual CAvaraGame* GetGame() = 0;
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
+    virtual CommandManager* GetTui() = 0;
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     CAvaraGame *itsGame;
     CNetManager *gameNet;
+    CommandManager *itsTui;
 
 public:
     CPlayerWindow *playerWindow;
@@ -74,7 +78,8 @@ public:
     CTrackerWindow *trackerWindow;
 
     std::deque<std::string> messageLines;
-
+    // std::deque<std::string> chatCommandHistory;
+    // std::deque<std::string>::iterator chatCommandHistoryIterator;
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
@@ -99,7 +104,8 @@ public:
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll() override;
     OSErr LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) override;
-    void NotifyUser() override;
+    virtual void NotifyUser() override;
+
     virtual void AddMessageLine(std::string line) override;
     virtual void GameStarted(std::string set, std::string level) override;
 
@@ -117,6 +123,8 @@ public:
     virtual void SetNet(CNetManager*) override;
     virtual CNetManager* GetNet() override;
     virtual CAvaraGame* GetGame() override;
+    virtual CommandManager* GetTui() override;
+
     virtual void BroadcastCommand(int theCommand) override { CApplication::BroadcastCommand(theCommand); }
     virtual json Get(const std::string name) override { return CApplication::Get(name); }
     virtual void Set(const std::string name, const std::string value) override { CApplication::Set(name, value); }

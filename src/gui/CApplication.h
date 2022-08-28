@@ -38,16 +38,25 @@ public:
     // Screen overrides.
     virtual bool handleSDLEvent(SDL_Event &event);
 
-    std::string String(const std::string name);
-    long Number(const std::string name);
+    // templated version works for new types too (float, double, short, etc.)
+    template <class T> T Get(const std::string name) {
+        // throws json::out_of_range exception if 'name' not a known key
+        return _prefs.at(name);
+    }
+    // these getters are here for backwards compatibility and/or readability
+    std::string String(const std::string name)       { return Get<std::string>(name); };
+    long Number(const std::string name)              { return Get<long>(name); };
     long Number(const std::string name, const long defaultValue);
-    bool Boolean(const std::string name);
-    json Get(const std::string name);
-    void Set(const std::string name, const std::string value);
-    void Set(const std::string name, long value);
-    void Set(const std::string name, json value);
+    bool Boolean(const std::string name)             { return Get<bool>(name); }
+    json Get(const std::string name)                 { return Get<json>(name); }
+
+    template <class T> void Set(const std::string name, const T value) {
+        _prefs[name] = value;
+        PrefChanged(name);
+    }
 
 protected:
+    static json _prefs;
     std::vector<CWindow *> windowList;
 };
 

@@ -64,9 +64,8 @@ void TrackerPinger(CAvaraAppImpl *app) {
     }
 }
 
-
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-    itsGame = new CAvaraGame(64);
+    itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
@@ -109,8 +108,16 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
 
-
     LoadDefaultOggFiles();
+
+    // register and handle text commands
+    itsTui = new CommandManager(this);
+
+    AddMessageLine("Welcome to Avara.");
+    AddMessageLine("Type /help and press return for a list of chat commands.");
+
+    // load up a random decent starting level
+    itsTui->ExecuteMatchingCommand("/rand -normal -tre -strict emo", CPlayerManagerImpl::LocalPlayer());
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -295,17 +302,28 @@ CAvaraGame* CAvaraAppImpl::GetGame() {
 CNetManager* CAvaraAppImpl::GetNet() {
     return gameNet;
 }
+
+CommandManager* CAvaraAppImpl::GetTui() {
+    return itsTui;
+}
+
 void CAvaraAppImpl::SetNet(CNetManager *theNet) {
     gameNet = theNet;
 }
 
-void CAvaraAppImpl::AddMessageLine(std::string line) {
-    SDL_Log("Message: %s", line.c_str());
-    messageLines.push_back(line);
-    if (messageLines.size() > 5) {
-        messageLines.pop_front();
+void CAvaraAppImpl::AddMessageLine(std::string lines) {
+    std::istringstream iss(lines);
+    std::string line;
+    // split string on newlines
+    while(std::getline(iss, line)) {
+        SDL_Log("Message: %s", line.c_str());
+        messageLines.push_back(line);
+        if (messageLines.size() > 5) {
+            messageLines.pop_front();
+        }
     }
 }
+
 void CAvaraAppImpl::MessageLine(short index, short align) {
     SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
     switch(index) {

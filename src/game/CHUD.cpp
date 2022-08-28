@@ -112,7 +112,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
             CPlayerManager *thisPlayer = net->playerTable[playerTableIndex];
             const std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             std::string ping = "--";
-            longTeamColor = CColorManager::getTeamColor(net->teamColors[playerTableIndex] + 1).value();
+            longTeamColor = *CColorManager::getTeamColor(net->teamColors[playerTableIndex] + 1);
             LongToRGBA(longTeamColor, teamColorRGB, 3);
             NVGcolor textColor = aliveColor;
 
@@ -295,33 +295,44 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     float pY;
     uint32_t longTeamColor;
     float teamColorRGB[3];
+    float colorBoxAlpha = 1.0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = net->playerTable[i];
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
         if (playerName.length() < 1) continue;
         pY = (bufferHeight - chudHeight + 8) + (11 * i);
-        longTeamColor = CColorManager::getTeamColor(net->teamColors[i] + 1).value();
+        longTeamColor = *CColorManager::getTeamColor(net->teamColors[i] + 1);
         LongToRGBA(longTeamColor, teamColorRGB, 3);
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
+        NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
+
+        //check for not playing
+        if(thisPlayer->IsAway()) {
+            textColor = nvgRGBA(255, 255, 255, 150);
+            colorBoxAlpha = 0.5;
+        }
+        else {
+            textColor = nvgRGBA(255, 255, 255, 255);
+            colorBoxAlpha = 1.0;
+        }
 
         //player color box
-        NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
         float colorBoxWidth = 10.0;
         nvgBeginPath(ctx);
 
         //highlight player if spectating
         if (spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
             textColor = nvgRGBA(
-                LongToR(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
-                LongToG(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
-                LongToB(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value()),
-                LongToA(CColorManager::getTeamTextColor(net->teamColors[i] + 1).value())
+                LongToR(*CColorManager::getTeamTextColor(net->teamColors[i] + 1)),
+                LongToG(*CColorManager::getTeamTextColor(net->teamColors[i] + 1)),
+                LongToB(*CColorManager::getTeamTextColor(net->teamColors[i] + 1)),
+                LongToA(*CColorManager::getTeamTextColor(net->teamColors[i] + 1))
             );
             colorBoxWidth = 150.0;
         }
 
         nvgRect(ctx, bufferWidth - 160, pY, colorBoxWidth, 10.0);
-        nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
+        nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], colorBoxAlpha));
         nvgFill(ctx);
 
         //player name
