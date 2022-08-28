@@ -2,124 +2,124 @@
   <set information="A variation on Internal.
 Don't fall." EdgeWall="BlockHeight * 8 + 4" Alt="100" IncHeight="EdgeWall + 1" gravity="0.5" defaultLives="5" WallSound="0" />
   <set targBlock="targ1" BlockHeight="3" BlockPower=".3" BlockShield="8" />
-  <SkyColor verticalRangeMin="Alt + IncHeight" n="9" fill="#66ffff" frame="#00ccff" />
-  <GroundColor fill="#cc0099" />
+  <SkyColor verticalRangeMin="Alt + IncHeight" n="9" fill="#84fcfd" frame="#24d5fc" />
+  <GroundColor fill="#dc00a8" />
   <set wallYon="0.001" wa="Alt -6" />
   <set wallYon="0" />
   <unique vars="mA" />
-  <WallDoor deltaY="3" open="mA" close="mA" didOpen="mA" didClose="mA" openSpeed="100" closeSpeed="20" shotPower="1000" openSound="0" closeSound="0" stopSound="0" fill="#ff33cc" frame="#000000" x="29.583333333333336" z="33.333333333333336" w="30" d="30" h="1.25" />
+  <WallDoor deltaY="3" open="mA" close="mA" didOpen="mA" didClose="mA" openSpeed="100" closeSpeed="20" shotPower="1000" openSound="0" closeSound="0" stopSound="0" fill="#ff00d4" frame="#000000" x="29.583333333333336" z="33.333333333333336" w="30" d="30" h="1.25" />
   <And in="@start" out="mA" />
-  <Teleporter shape="0" group="-1" destGroup="@death" sound="0" y="Alt" deadRange="EdgeWall + 10" activeRange="2000" fill="#ff6600" frame="#000000" cx="30.208333333333336" cz="33.333333333333336" angle="225" />
-  <Teleporter shape="0" group="@death" destGroup="-1" spin="false" y="Alt -9" sound="0" fill="#ff6600" frame="#000000" cx="30.208333333333336" cz="33.333333333333336" angle="225" />
+  <Teleporter shape="0" group="-1" destGroup="@death" sound="0" y="Alt" deadRange="EdgeWall + 10" activeRange="2000" fill="#ff5b1d" frame="#000000" cx="30.208333333333336" cz="33.333333333333336" angle="225" />
+  <Teleporter shape="0" group="@death" destGroup="-1" spin="false" y="Alt -9" sound="0" fill="#ff5b1d" frame="#000000" cx="30.208333333333336" cz="33.333333333333336" angle="225" />
   <unique vars="mA" />
-  <Door shape="bspFloorFrame" y="Alt -12" yon="0.01" deltaY="3" open="mA" close="mA" didOpen="mA" didClose="mA" openSpeed="100" closeSpeed="20" shotPower="1000" openSound="0" closeSound="0" stopSound="0" fill="#ff6600" frame="#000000" cx="30.208333333333336" cz="33.333333333333336" angle="225" />
+  <Door shape="bspFloorFrame" y="Alt -12" yon="0.01" deltaY="3" open="mA" close="mA" didOpen="mA" didClose="mA" openSpeed="100" closeSpeed="20" shotPower="1000" openSound="0" closeSound="0" stopSound="0" fill="#ff5b1d" frame="#000000" cx="30.208333333333336" cz="33.333333333333336" angle="225" />
   <And in="@start" out="mA" />
   <set baseHeight="Alt" wallYon="0.001" wallHeight="EdgeWall" />
-  <WallSolid hitSound="WallSound" fill="#444444" frame="#000000" x="30.833333333333336" z="21.770833333333336" w="22.5" d="1.875" h="0" />
-  <WallSolid hitSound="WallSound" fill="#444444" frame="#000000" x="28.958333333333336" z="44.270833333333336" w="22.5" d="1.875" h="0" />
-  <WallSolid hitSound="WallSound" fill="#444444" frame="#000000" x="18.645833333333336" z="32.083333333333336" w="1.875" d="22.5" h="0" />
-  <WallSolid hitSound="WallSound" fill="#444444" frame="#000000" x="41.145833333333336" z="33.958333333333336" w="1.875" d="22.5" h="0" />
+  <WallSolid hitSound="WallSound" fill="#595255" frame="#000000" x="30.833333333333336" z="21.770833333333336" w="22.5" d="1.875" h="0" />
+  <WallSolid hitSound="WallSound" fill="#595255" frame="#000000" x="28.958333333333336" z="44.270833333333336" w="22.5" d="1.875" h="0" />
+  <WallSolid hitSound="WallSound" fill="#595255" frame="#000000" x="18.645833333333336" z="32.083333333333336" w="1.875" d="22.5" h="0" />
+  <WallSolid hitSound="WallSound" fill="#595255" frame="#000000" x="41.145833333333336" z="33.958333333333336" w="1.875" d="22.5" h="0" />
   <set wallYon="0" baseHeight="Alt + EdgeWall" wallHeight="0" />
-  <Wall fill="#444444" frame="#000000" x="30.833333333333336" z="21.770833333333336" w="22.5" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="28.958333333333336" z="44.270833333333336" w="22.5" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="18.645833333333336" z="32.083333333333336" w="1.875" d="22.5" h="0" />
-  <Wall fill="#444444" frame="#000000" x="41.145833333333336" z="33.958333333333336" w="1.875" d="22.5" h="0" />
+  <Wall fill="#595255" frame="#000000" x="30.833333333333336" z="21.770833333333336" w="22.5" d="1.875" h="0" />
+  <Wall fill="#595255" frame="#000000" x="28.958333333333336" z="44.270833333333336" w="22.5" d="1.875" h="0" />
+  <Wall fill="#595255" frame="#000000" x="18.645833333333336" z="32.083333333333336" w="1.875" d="22.5" h="0" />
+  <Wall fill="#595255" frame="#000000" x="41.145833333333336" z="33.958333333333336" w="1.875" d="22.5" h="0" />
   <set wallHeight="BlockHeight" baseHeight="Alt + BlockHeight * 0" />
   <unique vars="mGoody" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#ffff00" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#fff12c" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
   <set baseHeight="Alt + BlockHeight * 1" />
   <unique vars="mGoody" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#ffff00" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#fff12c" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
   <set baseHeight="Alt + BlockHeight * 2" />
   <unique vars="mGoody" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#ffff00" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#fff12c" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
   <set baseHeight="Alt + BlockHeight * 3" />
   <unique vars="mGoody" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#ffff00" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#fff12c" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
   <set baseHeight="Alt + BlockHeight * 4" />
   <unique vars="mGoody" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#ffff00" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#fff12c" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
   <set baseHeight="Alt + BlockHeight * 5" />
   <unique vars="mGoody" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#ffff00" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#fff12c" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
   <set baseHeight="Alt + BlockHeight * 6" />
   <unique vars="mGoody" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#ffff00" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#fff12c" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
   <set baseHeight="Alt + BlockHeight * 7" />
   <unique vars="mGoody" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#ccffff" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#ffff00" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="26.145833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" killMsg="mGoody" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="33.020833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="23.020833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="29.895833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <WallSolid canGlow="true" power="BlockPower" shield="BlockShield" targetGroup="targBlock" fill="#dff7fd" frame="#000000" x="36.770833333333336" z="39.895833333333336" w="6.875" d="6.875" h="0" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" start="mGoody" y="1.5" fill="#fff12c" frame="#000000" cx="55.20833333333334" cz="29.583333333333336" angle="135" />
   <set baseHeight="Alt" />
   <Incarnator y="IncHeight" cx="40.208333333333336" cz="32.60416666666667" angle="90" />
   <Incarnator y="IncHeight" cx="19.583333333333336" cz="33.22916666666667" angle="270" />
@@ -129,5 +129,5 @@ Don't fall." EdgeWall="BlockHeight * 8 + 4" Alt="100" IncHeight="EdgeWall + 1" g
   <Incarnator y="IncHeight" cx="40.27777777777778" cz="43.333333333333336" angle="135" />
   <Incarnator y="IncHeight" cx="19.65277777777778" cz="43.333333333333336" angle="225" />
   <Incarnator y="IncHeight" cx="19.65277777777778" cz="22.708333333333336" angle="315" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="5.208333333333334" cz="33.333333333333336" angle="45" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#28ed1f" frame="#000000" cx="5.208333333333334" cz="33.333333333333336" angle="45" />
 </map>

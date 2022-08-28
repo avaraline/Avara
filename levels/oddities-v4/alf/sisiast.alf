@@ -1,28 +1,28 @@
 <map>
-  <SkyColor fill="#dddddd" frame="#6600ff" />
-  <GroundColor fill="#004400" />
+  <SkyColor fill="#ecdae3" frame="#7d20fb" />
+  <GroundColor fill="#075404" />
   <set information="A semi-normal level.
 To get to the upper areas, touch the center pillar.
 There’s more ammo up than down." stripHeight="7" buildingHeight="5" />
-  <Wall fill="#0099ff" frame="#000000" x="74.47916666666667" z="125" w="100.06944444444446" d="5" h="0.5" />
-  <Wall fill="#0099ff" frame="#000000" x="224.5138888888889" z="125" w="100" d="5" h="0.5" />
-  <Wall fill="#0099ff" frame="#000000" x="149.51388888888889" z="200" w="5" d="100" h="0.5" />
-  <Wall fill="#0099ff" frame="#000000" x="149.51388888888889" z="50" w="5" d="100" h="0.5" />
-  <Wall fill="#666699" frame="#000000" x="149.51388888888889" z="125" w="50" d="50" h="0.5" />
+  <Wall fill="#1bacfc" frame="#000000" x="74.47916666666667" z="125" w="100.06944444444446" d="5" h="0.5" />
+  <Wall fill="#1bacfc" frame="#000000" x="224.5138888888889" z="125" w="100" d="5" h="0.5" />
+  <Wall fill="#1bacfc" frame="#000000" x="149.51388888888889" z="200" w="5" d="100" h="0.5" />
+  <Wall fill="#1bacfc" frame="#000000" x="149.51388888888889" z="50" w="5" d="100" h="0.5" />
+  <Wall fill="#7e76a7" frame="#000000" x="149.51388888888889" z="125" w="50" d="50" h="0.5" />
   <set baseHeight=".5" wallHeight="stripHeight" wa="stripHeight" />
-  <Wall fill="#6e6ebd" frame="#000000" x="169.51388888888889" z="126.25" w="2.5" d="40" h="0.5" />
+  <Wall fill="#867ec6" frame="#000000" x="169.51388888888889" z="126.25" w="2.5" d="40" h="0.5" />
   <set wa="stripHeight" />
-  <Wall fill="#6e6ebd" frame="#000000" x="129.51388888888889" z="123.75" w="2.5" d="40" h="0.5" />
+  <Wall fill="#867ec6" frame="#000000" x="129.51388888888889" z="123.75" w="2.5" d="40" h="0.5" />
   <set wa="stripHeight" />
-  <Wall fill="#6e6ebd" frame="#000000" x="150.76388888888889" z="105" w="40" d="2.5" h="0.5" />
+  <Wall fill="#867ec6" frame="#000000" x="150.76388888888889" z="105" w="40" d="2.5" h="0.5" />
   <set wa="stripHeight" />
-  <Wall fill="#6e6ebd" frame="#000000" x="148.26388888888889" z="145" w="40" d="2.5" h="0.5" />
-  <Wall fill="#0000dd" frame="#000000" x="129.51388888888889" z="105" w="1.25" d="1.25" h="0" />
-  <Wall fill="#0000dd" frame="#000000" x="169.51388888888889" z="105" w="1.25" d="1.25" h="0" />
-  <Wall fill="#0000dd" frame="#000000" x="169.51388888888889" z="145" w="1.25" d="1.25" h="0" />
-  <Wall fill="#0000dd" frame="#000000" x="129.51388888888889" z="145" w="1.25" d="1.25" h="0" />
-  <Teleporter group="@West" destGroup="@East" activeRange="3" sound="0" spin="false" shape="bspMarker" fill="#999933" frame="#000000" cx="74.51388888888889" cz="125" angle="315" />
-  <Teleporter group="@East" destGroup="@West" activeRange="3" sound="0" spin="false" shape="bspMarker" fill="#999933" frame="#000000" cx="224.51388888888889" cz="125" angle="315" />
+  <Wall fill="#867ec6" frame="#000000" x="148.26388888888889" z="145" w="40" d="2.5" h="0.5" />
+  <Wall fill="#0429e0" frame="#000000" x="129.51388888888889" z="105" w="1.25" d="1.25" h="0" />
+  <Wall fill="#0429e0" frame="#000000" x="169.51388888888889" z="105" w="1.25" d="1.25" h="0" />
+  <Wall fill="#0429e0" frame="#000000" x="169.51388888888889" z="145" w="1.25" d="1.25" h="0" />
+  <Wall fill="#0429e0" frame="#000000" x="129.51388888888889" z="145" w="1.25" d="1.25" h="0" />
+  <Teleporter group="@West" destGroup="@East" activeRange="3" sound="0" spin="false" shape="bspMarker" fill="#b0a047" frame="#000000" cx="74.51388888888889" cz="125" angle="315" />
+  <Teleporter group="@East" destGroup="@West" activeRange="3" sound="0" spin="false" shape="bspMarker" fill="#b0a047" frame="#000000" cx="224.51388888888889" cz="125" angle="315" />
   <Incarnator cx="167.01388888888889" cz="110.625" angle="45" />
   <Incarnator cx="132.01388888888889" cz="139.375" angle="225" />
   <Incarnator cx="135.13888888888889" cz="107.5" angle="315" />
@@ -32,58 +32,58 @@ There’s more ammo up than down." stripHeight="7" buildingHeight="5" />
   <Incarnator cx="149.51388888888889" cz="80" angle="0" />
   <Incarnator cx="149.51388888888889" cz="170" angle="180" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ee0000" frame="#ff9933" cx="127.70833333333334" cz="103.19444444444444" angle="315" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#f80017" frame="#ff964a" cx="127.70833333333334" cz="103.19444444444444" angle="315" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#770000" frame="#0000ee" cx="171.45833333333334" cz="103.19444444444444" angle="315" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#8e0008" frame="#052dee" cx="171.45833333333334" cz="103.19444444444444" angle="315" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ee0000" frame="#ff9933" cx="171.45833333333334" cz="146.94444444444446" angle="315" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#f80017" frame="#ff964a" cx="171.45833333333334" cz="146.94444444444446" angle="315" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#770000" frame="#0000ee" cx="127.70833333333334" cz="146.94444444444446" angle="315" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#8e0008" frame="#052dee" cx="127.70833333333334" cz="146.94444444444446" angle="315" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="stripHeight + 2.5" speed="2" missiles="6" start="mShow" out="mTaken" fill="#770000" frame="#0000ee" cx="129.58333333333334" cz="105.06944444444444" angle="315" />
+  <Goody shape="bspMissile" y="stripHeight + 2.5" speed="2" missiles="6" start="mShow" out="mTaken" fill="#8e0008" frame="#052dee" cx="129.58333333333334" cz="105.06944444444444" angle="315" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="stripHeight + 2.5" speed="2" missiles="6" start="mShow" out="mTaken" fill="#770000" frame="#0000ee" cx="169.58333333333334" cz="145" angle="315" />
+  <Goody shape="bspMissile" y="stripHeight + 2.5" speed="2" missiles="6" start="mShow" out="mTaken" fill="#8e0008" frame="#052dee" cx="169.58333333333334" cz="145" angle="315" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="stripHeight + 2.5" speed="2" grenades="8" start="mShow" out="mTaken" fill="#ee0000" frame="#ff9933" cx="129.58333333333334" cz="145.06944444444446" angle="315" />
+  <Goody shape="bspGrenade" y="stripHeight + 2.5" speed="2" grenades="8" start="mShow" out="mTaken" fill="#f80017" frame="#ff964a" cx="129.58333333333334" cz="145.06944444444446" angle="315" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="stripHeight + 2.5" speed="2" grenades="8" start="mShow" out="mTaken" fill="#ee0000" frame="#ff9933" cx="169.58333333333334" cz="105.06944444444444" angle="315" />
+  <Goody shape="bspGrenade" y="stripHeight + 2.5" speed="2" grenades="8" start="mShow" out="mTaken" fill="#f80017" frame="#ff964a" cx="169.58333333333334" cz="105.06944444444444" angle="315" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Teleporter group="@South" destGroup="@North" activeRange="3" sound="0" spin="false" shape="bspMarker" fill="#999933" frame="#000000" cx="149.51388888888889" cz="200" angle="315" />
-  <Teleporter group="@North" destGroup="@South" activeRange="3" sound="0" spin="false" shape="bspMarker" fill="#999933" frame="#000000" cx="149.51388888888889" cz="50" angle="315" />
+  <Teleporter group="@South" destGroup="@North" activeRange="3" sound="0" spin="false" shape="bspMarker" fill="#b0a047" frame="#000000" cx="149.51388888888889" cz="200" angle="315" />
+  <Teleporter group="@North" destGroup="@South" activeRange="3" sound="0" spin="false" shape="bspMarker" fill="#b0a047" frame="#000000" cx="149.51388888888889" cz="50" angle="315" />
   <set baseHeight=".5 + buildingHeight" wallHeight="buildingHeight" />
-  <Wall fill="#6666cc" frame="#000000" x="143.57638888888889" z="115.9375" w="18.125" d="11.875" h="0.5" />
-  <Wall fill="#6666cc" frame="#000000" x="155.45138888888889" z="134.0625" w="18.125" d="11.875" h="0.5" />
-  <Wall fill="#6666cc" frame="#000000" x="158.57638888888889" z="119.0625" w="11.875" d="18.125" h="0.5" />
-  <Wall fill="#6666cc" frame="#000000" x="140.45138888888889" z="130.9375" w="11.875" d="18.125" h="0.5" />
+  <Wall fill="#7e78d3" frame="#000000" x="143.57638888888889" z="115.9375" w="18.125" d="11.875" h="0.5" />
+  <Wall fill="#7e78d3" frame="#000000" x="155.45138888888889" z="134.0625" w="18.125" d="11.875" h="0.5" />
+  <Wall fill="#7e78d3" frame="#000000" x="158.57638888888889" z="119.0625" w="11.875" d="18.125" h="0.5" />
+  <Wall fill="#7e78d3" frame="#000000" x="140.45138888888889" z="130.9375" w="11.875" d="18.125" h="0.5" />
   <set baseHeight=".5" />
-  <Wall fill="#6666ff" frame="#000000" x="152.63888888888889" z="110.9375" w="22.5" d="0.625" h="0" />
-  <Wall fill="#6666ff" frame="#000000" x="146.38888888888889" z="139.0625" w="22.5" d="0.625" h="0" />
-  <Wall fill="#6666ff" frame="#000000" x="135.45138888888889" z="121.875" w="0.625" d="22.5" h="0" />
-  <Wall fill="#6666ff" frame="#000000" x="163.57638888888889" z="128.125" w="0.625" d="22.5" h="0" />
+  <Wall fill="#7e7bfc" frame="#000000" x="152.63888888888889" z="110.9375" w="22.5" d="0.625" h="0" />
+  <Wall fill="#7e7bfc" frame="#000000" x="146.38888888888889" z="139.0625" w="22.5" d="0.625" h="0" />
+  <Wall fill="#7e7bfc" frame="#000000" x="135.45138888888889" z="121.875" w="0.625" d="22.5" h="0" />
+  <Wall fill="#7e7bfc" frame="#000000" x="163.57638888888889" z="128.125" w="0.625" d="22.5" h="0" />
   <set wa="buildingHeight" />
-  <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" open="@rplat" close="@aplat" openSound="0" closeSound="0" stopSound="0" fill="#6666cc" frame="#000000" x="149.51388888888889" z="125" w="6.25" d="6.25" h="0.5" />
-  <Field deltaY="0.2" enter="@rplat" exit="@aplat" watch="playerMask + robotMask + scoutMask" fill="#009999" frame="#000000" cx="149.51388888888889" cz="50" angle="315" x="149.51388888888889" z="125" w="3.75" d="3.75" h="0" />
-  <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" open="@rplat" close="@aplat" openSound="0" closeSound="0" stopSound="0" fill="#0000dd" frame="#000000" x="149.51388888888889" z="125" w="2.5" d="2.5" h="0" />
-  <Ramp deltaY="stripHeight -buildingHeight" y="buildingHeight + .5" thickness=".1" fill="#0000ee" frame="#000000" x="133.26388888888889" z="125" w="5" d="2.5" h="0" angle="270" />
-  <Ramp deltaY="stripHeight -buildingHeight" y="buildingHeight + .5" thickness=".1" fill="#0000ee" frame="#000000" x="165.76388888888889" z="125" w="5" d="2.5" h="0" angle="90" />
-  <Ramp deltaY="stripHeight -buildingHeight" y="buildingHeight + .5" thickness=".1" fill="#0000ee" frame="#000000" x="149.51388888888889" z="108.75" w="2.5" d="5" h="0" angle="0" />
-  <Ramp deltaY="stripHeight -buildingHeight" y="buildingHeight + .5" thickness=".1" fill="#0000ee" frame="#000000" x="149.51388888888889" z="141.25" w="2.5" d="5" h="0" angle="180" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="5.763888888888889" cz="15.625" angle="45" />
+  <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" open="@rplat" close="@aplat" openSound="0" closeSound="0" stopSound="0" fill="#7e78d3" frame="#000000" x="149.51388888888889" z="125" w="6.25" d="6.25" h="0.5" />
+  <Field deltaY="0.2" enter="@rplat" exit="@aplat" watch="playerMask + robotMask + scoutMask" fill="#19a8a8" frame="#000000" cx="149.51388888888889" cz="50" angle="315" x="149.51388888888889" z="125" w="3.75" d="3.75" h="0" />
+  <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" open="@rplat" close="@aplat" openSound="0" closeSound="0" stopSound="0" fill="#0429e0" frame="#000000" x="149.51388888888889" z="125" w="2.5" d="2.5" h="0" />
+  <Ramp deltaY="stripHeight -buildingHeight" y="buildingHeight + .5" thickness=".1" fill="#052dee" frame="#000000" x="133.26388888888889" z="125" w="5" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="stripHeight -buildingHeight" y="buildingHeight + .5" thickness=".1" fill="#052dee" frame="#000000" x="165.76388888888889" z="125" w="5" d="2.5" h="0" angle="90" />
+  <Ramp deltaY="stripHeight -buildingHeight" y="buildingHeight + .5" thickness=".1" fill="#052dee" frame="#000000" x="149.51388888888889" z="108.75" w="2.5" d="5" h="0" angle="0" />
+  <Ramp deltaY="stripHeight -buildingHeight" y="buildingHeight + .5" thickness=".1" fill="#052dee" frame="#000000" x="149.51388888888889" z="141.25" w="2.5" d="5" h="0" angle="180" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#28ed1f" frame="#000000" cx="5.763888888888889" cz="15.625" angle="45" />
   <Teleporter activeRange="10000" deadRange="5 * 24" destGroup="@bubble" group="-1" y="-20" shape="0" fill="#000000" frame="#000000" cx="149.51388888888889" cz="125" angle="135" />
   <Teleporter start="0" group="@bubble" y="100" spin="false" sound="0" fill="#000000" frame="#000000" cx="149.51388888888889" cz="125" angle="135" />
   <unique vars="mStep mR" />

@@ -5,6 +5,8 @@ import struct
 from itertools import zip_longest
 import json
 
+from applergb import applergb_to_srgb
+
 try:
     import triangle
     import triangle.plot
@@ -203,13 +205,21 @@ class ColorRecord():
     def __init__(self, raw_data):
         assert(len(raw_data) == ColorRecordLength)
         self.color_long = bytes_to_long(raw_data[0:4])
-        # convert to RGBA float color format
+        
         self.color = [
-            ((self.color_long >> 8) & 0xff) / 254.0,
-            ((self.color_long >> 16) & 0xff) / 254.0,
-            ((self.color_long >> 24) & 0xff) / 254.0,
-            (self.color_long & 0xff) / 254.0
+            ((self.color_long >> 8) & 0xff),
+            ((self.color_long >> 16) & 0xff),
+            ((self.color_long >> 24) & 0xff),
+            (self.color_long & 0xff)
         ]
+        # leave marker colors alone
+        if self.color[:2] == [254, 254, 254] or self.color[:3] == [254, 0, 0]:
+            self.color = [x / 254.0 for x in self.color]
+        # but convert others to sRGBA float color format from AppleRGB
+        else:
+            self.color = applergb_to_srgb([x / 254.0 for x in self.color[:3]])
+            self.color.append(self.color_long & 0xff)
+        
         # colorCache[32] (COLORCACHESIZE)
         # this is not useful to most people because
         # it was used to store intermediate shades
