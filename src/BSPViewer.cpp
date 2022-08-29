@@ -23,8 +23,6 @@
 #define kMarkerColor 0x00fefefe
 #define kOtherMarkerColor 0x00fe0000
 
-bool cull_back_faces = false;
-
 class BSPViewer : public CApplication {
 public:
     CBSPPart *itsPart;
@@ -120,9 +118,6 @@ public:
                         orientation[0] = FIX(0);
                         orientation[1] = FIX(-90);
                         return true;
-                    case SDLK_b:
-                        cull_back_faces = !cull_back_faces;
-                        return true;
                     case SDLK_r:
                         newPart(current_id);
                         return true;
@@ -142,13 +137,7 @@ public:
         itsView->SetViewRect(mFBSize.x, mFBSize.y, mFBSize.x / 2, mFBSize.y / 2);
         itsView->viewPixelRatio = FIX(4.0/3.0);
         itsView->CalculateViewPyramidCorners();
-
-        if (cull_back_faces) {
-            itsPart->userFlags |= CBSPUserFlags::kCullBackfaces;
-        }
-        else {
-            itsPart->userFlags &= ~CBSPUserFlags::kCullBackfaces;
-        }
+        itsView->PointCamera();
 
         itsPart->Reset();
         itsPart->RotateZ(orientation[2]);

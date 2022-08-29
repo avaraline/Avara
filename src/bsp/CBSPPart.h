@@ -46,7 +46,6 @@ typedef uint32_t ColorRecord;
 
 namespace CBSPUserFlags {
     constexpr short kIsAmbient = 1;
-    constexpr short kCullBackfaces = 2;
 }
 
 /*
@@ -109,6 +108,7 @@ public:
     Fixed enclosureRadius;
     FixedPoint minBounds; //  Bounding box minimums for x, y, z
     FixedPoint maxBounds; //  Bounding box maximums for x, y, z
+    enum { frontVisible = 1, backVisible, bothVisible };
 
     CViewParameters *currentView;
 

@@ -501,7 +501,7 @@ class BSP(object):
                 result["triangles"] = np.delete(result["triangles"], triangles_to_remove, axis=0)
 
             # below used for debug
-
+            # print(poly)
             new_tris = result["triangles"].tolist()
             
             if vert_diff > 0:
@@ -538,19 +538,19 @@ class BSP(object):
                 color = d['colors'][color_idx]
                 tris = d['triangles_poly'][idx]
                 tri_points = d['triangles_verts_poly'][idx]
-                if wind_backwards:
-                    
-                    out['polys'].append({
-                        'normal': [-x for x in normal],
-                        'color': color,
-                        'tris': [[tri_points[i] for i in t][::-1] for t in tris],
-                    })
-                else:
-                    out['polys'].append({
-                        'normal': normal,
-                        'color': color,
-                        'tris': [[tri_points[i] for i in t] for t in tris],
-                    })
+
+                the_poly = {
+                    'normal': [-x for x in normal],
+                    'color': color,
+                    'fbv': [fp, bp, pvis],
+                    'tris': []
+                }
+                if pvis == 1 or pvis == 0 or pvis == 3:
+                    the_poly['tris'].extend([[tri_points[i] for i in t][::-1] for t in tris])
+                if pvis == 2 or pvis == 3:
+                    the_poly['tris'].extend([[tri_points[i] for i in t] for t in tris])
+                
+                out['polys'].append(the_poly)
 
         except IndexError:
             print("Invalid shape data")    
