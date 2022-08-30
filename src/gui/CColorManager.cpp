@@ -4,37 +4,37 @@
 
 ColorBlindMode CColorManager::colorBlindMode = Off;
 float CColorManager::hudAlpha = 1.f;
-uint32_t CColorManager::energyGaugeColor = 0xff008f00;
-uint32_t CColorManager::grenadeSightPrimaryColor = 0xffffff00;
-uint32_t CColorManager::grenadeSightSecondaryColor = 0xffff0000;
+uint32_t CColorManager::energyGaugeColor = 0xff009c00;
+uint32_t CColorManager::grenadeSightPrimaryColor = 0xfffefb00;
+uint32_t CColorManager::grenadeSightSecondaryColor = 0xffff2600;
 uint32_t CColorManager::lookForwardColor = 0xff000000;
-uint32_t CColorManager::missileLockColor = 0xffff0000;
-uint32_t CColorManager::missileSightPrimaryColor = 0xffffff00;
-uint32_t CColorManager::missileSightSecondaryColor = 0xffff0000;
-uint32_t CColorManager::netDelay1Color = 0xffffc000;
-uint32_t CColorManager::netDelay2Color = 0xffffff00;
-uint32_t CColorManager::pinwheel1Color = 0xff1e1e66;
-uint32_t CColorManager::pinwheel2Color = 0xff1e1e99;
-uint32_t CColorManager::pinwheel3Color = 0xff1e1ecc;
-uint32_t CColorManager::pinwheel4Color = 0xff1e1eff;
-uint32_t CColorManager::plasmaGauge1Color = 0xffa33600;
-uint32_t CColorManager::plasmaGauge2Color = 0xffff3600;
-uint32_t CColorManager::plasmaSightsOffColor = 0xff008000;
-uint32_t CColorManager::plasmaSightsOnColor = 0xffff0000;
-uint32_t CColorManager::shieldGaugeColor = 0xff003da5;
-uint32_t CColorManager::specialBlackColor = 0xff303030;
-uint32_t CColorManager::specialWhiteColor = 0xffe0e0e0;
+uint32_t CColorManager::missileLockColor = 0xffff2600;
+uint32_t CColorManager::missileSightPrimaryColor = 0xfffefb00;
+uint32_t CColorManager::missileSightSecondaryColor = 0xffff2600;
+uint32_t CColorManager::netDelay1Color = 0xffffc900;
+uint32_t CColorManager::netDelay2Color = 0xfffefb00;
+uint32_t CColorManager::pinwheel1Color = 0xff282d79;
+uint32_t CColorManager::pinwheel2Color = 0xff2833a9;
+uint32_t CColorManager::pinwheel3Color = 0xff283ad5;
+uint32_t CColorManager::pinwheel4Color = 0xff2941ff;
+uint32_t CColorManager::plasmaGauge1Color = 0xffb44900;
+uint32_t CColorManager::plasmaGauge2Color = 0xffff4e00;
+uint32_t CColorManager::plasmaSightsOffColor = 0xff008e00;
+uint32_t CColorManager::plasmaSightsOnColor = 0xffff2600;
+uint32_t CColorManager::shieldGaugeColor = 0xff0053b4;
+uint32_t CColorManager::specialBlackColor = 0xff3e3e3e;
+uint32_t CColorManager::specialWhiteColor = 0xffe6e6e6;
 
 uint32_t CColorManager::teamColors[kMaxTeamColors + 1] = {
-    0xffffffff,
-    0xff006600,
-    0xffcccc00,
-    0xffcc0000,
-    0xffcc0099,
-    0xff9900cc,
-    0xff0099cc,
-    0xffffa500,
-    0xff89c4c7
+    0xfffeffff,
+    0xff007600,
+    0xffd5d200,
+    0xffd71e00,
+    0xffd72ca9,
+    0xffab2fd5,
+    0xff00a9d5,
+    0xffffb300,
+    0xff99ced1
 };
 
 uint32_t CColorManager::teamTextColors[kMaxTeamColors + 1] = {
@@ -64,35 +64,35 @@ std::string CColorManager::teamColorNames[kMaxTeamColors + 1] = {
 void CColorManager::setColorBlind(ColorBlindMode mode) {
     switch (mode) {
         case Off:
-            CColorManager::energyGaugeColor = 0xff008f00;
-            CColorManager::grenadeSightPrimaryColor = 0xffffff00;
-            CColorManager::grenadeSightSecondaryColor = 0xffff0000;
+            CColorManager::energyGaugeColor = 0xff009c00;
+            CColorManager::grenadeSightPrimaryColor = 0xfffefb00;
+            CColorManager::grenadeSightSecondaryColor = 0xffff2600;
             CColorManager::lookForwardColor = 0xff000000;
-            CColorManager::missileLockColor = 0xffff0000;
-            CColorManager::missileSightPrimaryColor = 0xffffff00;
-            CColorManager::missileSightSecondaryColor = 0xffff0000;
-            CColorManager::netDelay1Color = 0xffffc000;
-            CColorManager::netDelay2Color = 0xffffff00;
-            CColorManager::pinwheel1Color = 0xff1e1e66;
-            CColorManager::pinwheel2Color = 0xff1e1e99;
-            CColorManager::pinwheel3Color = 0xff1e1ecc;
-            CColorManager::pinwheel4Color = 0xff1e1eff;
-            CColorManager::plasmaGauge1Color = 0xffa33600;
-            CColorManager::plasmaGauge2Color = 0xffff3600;
-            CColorManager::plasmaSightsOffColor = 0xff008000;
-            CColorManager::plasmaSightsOnColor = 0xffff0000;
-            CColorManager::shieldGaugeColor = 0xff003da5;
-            CColorManager::specialBlackColor = 0xff303030;
-            CColorManager::specialWhiteColor = 0xffe0e0e0;
-            CColorManager::teamColors[0] = 0xffffffff;
-            CColorManager::teamColors[1] = 0xff006600;
-            CColorManager::teamColors[2] = 0xffcccc00;
-            CColorManager::teamColors[3] = 0xffcc0000;
-            CColorManager::teamColors[4] = 0xffcc0099;
-            CColorManager::teamColors[5] = 0xff9900cc;
-            CColorManager::teamColors[6] = 0xff0099cc;
-            CColorManager::teamColors[7] = 0xffffa500;
-            CColorManager::teamColors[8] = 0xff89c4c7;
+            CColorManager::missileLockColor = 0xffff2600;
+            CColorManager::missileSightPrimaryColor = 0xfffefb00;
+            CColorManager::missileSightSecondaryColor = 0xffff2600;
+            CColorManager::netDelay1Color = 0xffffc900;
+            CColorManager::netDelay2Color = 0xfffefb00;
+            CColorManager::pinwheel1Color = 0xff282d79;
+            CColorManager::pinwheel2Color = 0xff2833a9;
+            CColorManager::pinwheel3Color = 0xff283ad5;
+            CColorManager::pinwheel4Color = 0xff2941ff;
+            CColorManager::plasmaGauge1Color = 0xffb44900;
+            CColorManager::plasmaGauge2Color = 0xffff4e00;
+            CColorManager::plasmaSightsOffColor = 0xff008e00;
+            CColorManager::plasmaSightsOnColor = 0xffff2600;
+            CColorManager::shieldGaugeColor = 0xff0053b4;
+            CColorManager::specialBlackColor = 0xff3e3e3e;
+            CColorManager::specialWhiteColor = 0xffe6e6e6;
+            CColorManager::teamColors[0] = 0xfffeffff;
+            CColorManager::teamColors[1] = 0xff007600;
+            CColorManager::teamColors[2] = 0xffd5d200;
+            CColorManager::teamColors[3] = 0xffd71e00;
+            CColorManager::teamColors[4] = 0xffd72ca9;
+            CColorManager::teamColors[5] = 0xffab2fd5;
+            CColorManager::teamColors[6] = 0xff00a9d5;
+            CColorManager::teamColors[7] = 0xffffb300;
+            CColorManager::teamColors[8] = 0xff99ced1;
             CColorManager::teamTextColors[0] = 0xff333333;
             CColorManager::teamTextColors[1] = 0xffffffff;
             CColorManager::teamTextColors[2] = 0xff333333;
@@ -104,35 +104,35 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::teamTextColors[8] = 0xff333333;
             break;
         case Deuteranopia:
-            CColorManager::energyGaugeColor = 0xff008f8f;
-            CColorManager::grenadeSightPrimaryColor = 0xffffff00;
-            CColorManager::grenadeSightSecondaryColor = 0xffffaa00;
+            CColorManager::energyGaugeColor = 0xff009ea0;
+            CColorManager::grenadeSightPrimaryColor = 0xfffefb00;
+            CColorManager::grenadeSightSecondaryColor = 0xffffb700;
             CColorManager::lookForwardColor = 0xff000000;
-            CColorManager::missileLockColor = 0xffffaa00;
-            CColorManager::missileSightPrimaryColor = 0xffffff00;
-            CColorManager::missileSightSecondaryColor = 0xffffaa00;
-            CColorManager::netDelay1Color = 0xffffe080;
-            CColorManager::netDelay2Color = 0xffffff00;
-            CColorManager::pinwheel1Color = 0xff1e1e66;
-            CColorManager::pinwheel2Color = 0xff1e1e99;
-            CColorManager::pinwheel3Color = 0xff1e1ecc;
-            CColorManager::pinwheel4Color = 0xff1e1eff;
-            CColorManager::plasmaGauge1Color = 0xffa33600;
-            CColorManager::plasmaGauge2Color = 0xffff3600;
-            CColorManager::plasmaSightsOffColor = 0xff008055;
-            CColorManager::plasmaSightsOnColor = 0xffff5500;
-            CColorManager::shieldGaugeColor = 0xff0000a5;
-            CColorManager::specialBlackColor = 0xff303030;
-            CColorManager::specialWhiteColor = 0xffe0e0e0;
-            CColorManager::teamColors[0] = 0xffffffff;
-            CColorManager::teamColors[1] = 0xff006655;
-            CColorManager::teamColors[2] = 0xffcccc00;
-            CColorManager::teamColors[3] = 0xffcc5500;
-            CColorManager::teamColors[4] = 0xffcc0099;
-            CColorManager::teamColors[5] = 0xff9900cc;
-            CColorManager::teamColors[6] = 0xff0099cc;
-            CColorManager::teamColors[7] = 0xfff5daa3;
-            CColorManager::teamColors[8] = 0xff89c4c7;
+            CColorManager::missileLockColor = 0xffffb700;
+            CColorManager::missileSightPrimaryColor = 0xfffefb00;
+            CColorManager::missileSightSecondaryColor = 0xffffb700;
+            CColorManager::netDelay1Color = 0xffffe491;
+            CColorManager::netDelay2Color = 0xfffefb00;
+            CColorManager::pinwheel1Color = 0xff282d79;
+            CColorManager::pinwheel2Color = 0xff2833a9;
+            CColorManager::pinwheel3Color = 0xff283ad5;
+            CColorManager::pinwheel4Color = 0xff2941ff;
+            CColorManager::plasmaGauge1Color = 0xffb44900;
+            CColorManager::plasmaGauge2Color = 0xffff4e00;
+            CColorManager::plasmaSightsOffColor = 0xff008f68;
+            CColorManager::plasmaSightsOnColor = 0xffff6c00;
+            CColorManager::shieldGaugeColor = 0xff0020b4;
+            CColorManager::specialBlackColor = 0xff3e3e3e;
+            CColorManager::specialWhiteColor = 0xffe6e6e6;
+            CColorManager::teamColors[0] = 0xfffeffff;
+            CColorManager::teamColors[1] = 0xff007768;
+            CColorManager::teamColors[2] = 0xffd5d200;
+            CColorManager::teamColors[3] = 0xffd76a00;
+            CColorManager::teamColors[4] = 0xffd72ca9;
+            CColorManager::teamColors[5] = 0xffab2fd5;
+            CColorManager::teamColors[6] = 0xff00a9d5;
+            CColorManager::teamColors[7] = 0xfff7e0b2;
+            CColorManager::teamColors[8] = 0xff99ced1;
             CColorManager::teamTextColors[0] = 0xff333333;
             CColorManager::teamTextColors[1] = 0xffffffff;
             CColorManager::teamTextColors[2] = 0xff333333;
@@ -144,35 +144,35 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::teamTextColors[8] = 0xff333333;
             break;
         case Protanopia:
-            CColorManager::energyGaugeColor = 0xff008f8f;
-            CColorManager::grenadeSightPrimaryColor = 0xffffff00;
-            CColorManager::grenadeSightSecondaryColor = 0xffffaa00;
+            CColorManager::energyGaugeColor = 0xff009ea0;
+            CColorManager::grenadeSightPrimaryColor = 0xfffefb00;
+            CColorManager::grenadeSightSecondaryColor = 0xffffb700;
             CColorManager::lookForwardColor = 0xff000000;
-            CColorManager::missileLockColor = 0xffffaa00;
-            CColorManager::missileSightPrimaryColor = 0xffffff00;
-            CColorManager::missileSightSecondaryColor = 0xffffaa00;
-            CColorManager::netDelay1Color = 0xffffe080;
-            CColorManager::netDelay2Color = 0xffffff00;
-            CColorManager::pinwheel1Color = 0xff1e1e66;
-            CColorManager::pinwheel2Color = 0xff1e1e99;
-            CColorManager::pinwheel3Color = 0xff1e1ecc;
-            CColorManager::pinwheel4Color = 0xff1e1eff;
-            CColorManager::plasmaGauge1Color = 0xffa33600;
-            CColorManager::plasmaGauge2Color = 0xffff3600;
-            CColorManager::plasmaSightsOffColor = 0xff008055;
-            CColorManager::plasmaSightsOnColor = 0xffff5500;
-            CColorManager::shieldGaugeColor = 0xff0000a5;
-            CColorManager::specialBlackColor = 0xff303030;
-            CColorManager::specialWhiteColor = 0xffe0e0e0;
-            CColorManager::teamColors[0] = 0xffffffff;
-            CColorManager::teamColors[1] = 0xff006655;
-            CColorManager::teamColors[2] = 0xffcccc00;
-            CColorManager::teamColors[3] = 0xffcc5500;
-            CColorManager::teamColors[4] = 0xffcc0099;
-            CColorManager::teamColors[5] = 0xff9900cc;
-            CColorManager::teamColors[6] = 0xff0099cc;
-            CColorManager::teamColors[7] = 0xfff5daa3;
-            CColorManager::teamColors[8] = 0xff89c4c7;
+            CColorManager::missileLockColor = 0xffffb700;
+            CColorManager::missileSightPrimaryColor = 0xfffefb00;
+            CColorManager::missileSightSecondaryColor = 0xffffb700;
+            CColorManager::netDelay1Color = 0xffffe491;
+            CColorManager::netDelay2Color = 0xfffefb00;
+            CColorManager::pinwheel1Color = 0xff282d79;
+            CColorManager::pinwheel2Color = 0xff2833a9;
+            CColorManager::pinwheel3Color = 0xff283ad5;
+            CColorManager::pinwheel4Color = 0xff2941ff;
+            CColorManager::plasmaGauge1Color = 0xffb44900;
+            CColorManager::plasmaGauge2Color = 0xffff4e00;
+            CColorManager::plasmaSightsOffColor = 0xff008f68;
+            CColorManager::plasmaSightsOnColor = 0xffff6c00;
+            CColorManager::shieldGaugeColor = 0xff0020b4;
+            CColorManager::specialBlackColor = 0xff3e3e3e;
+            CColorManager::specialWhiteColor = 0xffe6e6e6;
+            CColorManager::teamColors[0] = 0xfffeffff;
+            CColorManager::teamColors[1] = 0xff007768;
+            CColorManager::teamColors[2] = 0xffd5d200;
+            CColorManager::teamColors[3] = 0xffd76a00;
+            CColorManager::teamColors[4] = 0xffd72ca9;
+            CColorManager::teamColors[5] = 0xffab2fd5;
+            CColorManager::teamColors[6] = 0xff00a9d5;
+            CColorManager::teamColors[7] = 0xfff7e0b2;
+            CColorManager::teamColors[8] = 0xff99ced1;
             CColorManager::teamTextColors[0] = 0xff333333;
             CColorManager::teamTextColors[1] = 0xffffffff;
             CColorManager::teamTextColors[2] = 0xff333333;
@@ -184,35 +184,35 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::teamTextColors[8] = 0xff333333;
             break;
         case Tritanopia:
-            CColorManager::energyGaugeColor = 0xff008f00;
-            CColorManager::grenadeSightPrimaryColor = 0xffffff00;
-            CColorManager::grenadeSightSecondaryColor = 0xffff0000;
+            CColorManager::energyGaugeColor = 0xff009c00;
+            CColorManager::grenadeSightPrimaryColor = 0xfffefb00;
+            CColorManager::grenadeSightSecondaryColor = 0xffff2600;
             CColorManager::lookForwardColor = 0xff000000;
-            CColorManager::missileLockColor = 0xffff0000;
-            CColorManager::missileSightPrimaryColor = 0xffffff00;
-            CColorManager::missileSightSecondaryColor = 0xffff0000;
-            CColorManager::netDelay1Color = 0xffffc000;
-            CColorManager::netDelay2Color = 0xffffff00;
-            CColorManager::pinwheel1Color = 0xff1e1e66;
-            CColorManager::pinwheel2Color = 0xff1e1e99;
-            CColorManager::pinwheel3Color = 0xff1e1ecc;
-            CColorManager::pinwheel4Color = 0xff1e1eff;
-            CColorManager::plasmaGauge1Color = 0xffa33600;
-            CColorManager::plasmaGauge2Color = 0xffff3600;
-            CColorManager::plasmaSightsOffColor = 0xff008000;
-            CColorManager::plasmaSightsOnColor = 0xffff0000;
-            CColorManager::shieldGaugeColor = 0xff003da5;
-            CColorManager::specialBlackColor = 0xff303030;
-            CColorManager::specialWhiteColor = 0xffe0e0e0;
-            CColorManager::teamColors[0] = 0xffffffff;
-            CColorManager::teamColors[1] = 0xff006600;
-            CColorManager::teamColors[2] = 0xffcccc00;
-            CColorManager::teamColors[3] = 0xffcc0000;
-            CColorManager::teamColors[4] = 0xffcc0099;
-            CColorManager::teamColors[5] = 0xff9900cc;
-            CColorManager::teamColors[6] = 0xff0099cc;
-            CColorManager::teamColors[7] = 0xffffa500;
-            CColorManager::teamColors[8] = 0xff89c4c7;
+            CColorManager::missileLockColor = 0xffff2600;
+            CColorManager::missileSightPrimaryColor = 0xfffefb00;
+            CColorManager::missileSightSecondaryColor = 0xffff2600;
+            CColorManager::netDelay1Color = 0xffffc900;
+            CColorManager::netDelay2Color = 0xfffefb00;
+            CColorManager::pinwheel1Color = 0xff282d79;
+            CColorManager::pinwheel2Color = 0xff2833a9;
+            CColorManager::pinwheel3Color = 0xff283ad5;
+            CColorManager::pinwheel4Color = 0xff2941ff;
+            CColorManager::plasmaGauge1Color = 0xffb44900;
+            CColorManager::plasmaGauge2Color = 0xffff4e00;
+            CColorManager::plasmaSightsOffColor = 0xff008e00;
+            CColorManager::plasmaSightsOnColor = 0xffff2600;
+            CColorManager::shieldGaugeColor = 0xff0053b4;
+            CColorManager::specialBlackColor = 0xff3e3e3e;
+            CColorManager::specialWhiteColor = 0xffe6e6e6;
+            CColorManager::teamColors[0] = 0xfffeffff;
+            CColorManager::teamColors[1] = 0xff007600;
+            CColorManager::teamColors[2] = 0xffd5d200;
+            CColorManager::teamColors[3] = 0xffd71e00;
+            CColorManager::teamColors[4] = 0xffd72ca9;
+            CColorManager::teamColors[5] = 0xffab2fd5;
+            CColorManager::teamColors[6] = 0xff00a9d5;
+            CColorManager::teamColors[7] = 0xffffb300;
+            CColorManager::teamColors[8] = 0xff99ced1;
             CColorManager::teamTextColors[0] = 0xff333333;
             CColorManager::teamTextColors[1] = 0xffffffff;
             CColorManager::teamTextColors[2] = 0xff333333;

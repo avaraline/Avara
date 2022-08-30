@@ -18,8 +18,7 @@ def applergb_to_srgb(v):
 
 
 def applergb_to_srgb_u8(v):
-    f = [x / 255.0 for x in v]
-    return applergb_to_srgb(f)
+    return applergb_to_srgb([x / 255.0 for x in v])
 
 
 def color(hex_string):
