@@ -26,7 +26,7 @@ uint32_t CColorManager::specialBlackColor = 0xff3e3e3e;
 uint32_t CColorManager::specialWhiteColor = 0xffe6e6e6;
 
 uint32_t CColorManager::teamColors[kMaxTeamColors + 1] = {
-    0xfffeffff,
+    0xffffffff,
     0xff007600,
     0xffd5d200,
     0xffd71e00,
@@ -84,7 +84,7 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::shieldGaugeColor = 0xff0053b4;
             CColorManager::specialBlackColor = 0xff3e3e3e;
             CColorManager::specialWhiteColor = 0xffe6e6e6;
-            CColorManager::teamColors[0] = 0xfffeffff;
+            CColorManager::teamColors[0] = 0xffffffff;
             CColorManager::teamColors[1] = 0xff007600;
             CColorManager::teamColors[2] = 0xffd5d200;
             CColorManager::teamColors[3] = 0xffd71e00;
@@ -124,7 +124,7 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::shieldGaugeColor = 0xff0020b4;
             CColorManager::specialBlackColor = 0xff3e3e3e;
             CColorManager::specialWhiteColor = 0xffe6e6e6;
-            CColorManager::teamColors[0] = 0xfffeffff;
+            CColorManager::teamColors[0] = 0xffffffff;
             CColorManager::teamColors[1] = 0xff007768;
             CColorManager::teamColors[2] = 0xffd5d200;
             CColorManager::teamColors[3] = 0xffd76a00;
@@ -164,7 +164,7 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::shieldGaugeColor = 0xff0020b4;
             CColorManager::specialBlackColor = 0xff3e3e3e;
             CColorManager::specialWhiteColor = 0xffe6e6e6;
-            CColorManager::teamColors[0] = 0xfffeffff;
+            CColorManager::teamColors[0] = 0xffffffff;
             CColorManager::teamColors[1] = 0xff007768;
             CColorManager::teamColors[2] = 0xffd5d200;
             CColorManager::teamColors[3] = 0xffd76a00;
@@ -204,7 +204,7 @@ void CColorManager::setColorBlind(ColorBlindMode mode) {
             CColorManager::shieldGaugeColor = 0xff0053b4;
             CColorManager::specialBlackColor = 0xff3e3e3e;
             CColorManager::specialWhiteColor = 0xffe6e6e6;
-            CColorManager::teamColors[0] = 0xfffeffff;
+            CColorManager::teamColors[0] = 0xffffffff;
             CColorManager::teamColors[1] = 0xff007600;
             CColorManager::teamColors[2] = 0xffd5d200;
             CColorManager::teamColors[3] = 0xffd71e00;
