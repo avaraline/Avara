@@ -10,7 +10,6 @@ def applergb_to_srgb(v):
                         [0.0194008, 0.948009, 0.0325904],
                         [-0.00176213, -0.0014345, 1.0032]])
     linear = np.maximum(convmat.dot(c ** 1.8), np.zeros_like(np.arange(3)))
-    # linear_section = np.minimum(12.92 * linear, np.array([0.040449936, 0.040449936, 0.040449936]))
     linear_section = np.minimum(12.92 * linear, np.array([0.0031308, 0.0031308, 0.0031308]))
     exp_section = ((1.13712 * linear) ** (1.0 / 2.4)) - 0.055
     res = (255.0 * np.minimum(np.ones_like(np.arange(3)), np.maximum(linear_section, exp_section))).tolist()
