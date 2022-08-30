@@ -106,13 +106,14 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theGame->itsApp->BroadcastCommand(kNetChangedCmd);
             break;
         case kpStartLevel:
-            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender);
+            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender, thePacket->p1);
             break;
         case kpResumeLevel:
-            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3);
+            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3, thePacket->p1);
             break;
         case kpReadySynch:
             theNet->readyPlayers |= 1 << thePacket->sender;
+            SDL_Log("--- readyPlayers = 0x%02x\n", theNet->readyPlayers);
             break;
         case kpUnavailableSynch:
             theNet->ReceivedUnavailable(thePacket->sender, thePacket->p1);
