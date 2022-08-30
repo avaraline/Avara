@@ -1,24 +1,24 @@
 <map>
   <set baseHeight="50" />
-  <Wall fill="#0f7878" frame="#000000" x="11.180555555555557" z="32.5" w="10" d="65" h="27" />
-  <Wall fill="#0f7878" frame="#000000" x="41.18055555555556" z="5" w="50" d="10" h="27" />
-  <Wall fill="#0f7878" frame="#000000" x="41.18055555555556" z="60" w="50" d="10" h="27" />
-  <Wall fill="#0f7878" frame="#000000" x="71.18055555555556" z="32.5" w="10" d="65" h="27" />
-  <Wall fill="#ecdae3" frame="#000000" x="41.18055555555556" z="32.5" w="30" d="25" h="1" />
-  <Wall fill="#022c01" frame="#000000" x="23.680555555555557" z="17.5" w="5" d="5" h="18" />
-  <Wall fill="#022c01" frame="#000000" x="58.68055555555556" z="17.5" w="5" d="5" h="18" />
-  <Wall fill="#022c01" frame="#000000" x="58.68055555555556" z="47.5" w="5" d="5" h="18" />
-  <Wall fill="#022c01" frame="#000000" x="23.680555555555557" z="47.5" w="5" d="5" h="18" />
-  <Ramp deltaY="1" traction="-1" friction="-1" fill="#022c01" frame="#000000" x="23.680555555555557" z="32.5" w="5" d="25" h="0" angle="90" />
-  <Ramp deltaY="1" traction="-1" friction="-1" fill="#022c01" frame="#000000" x="58.68055555555556" z="32.5" w="5" d="25" h="0" angle="270" />
-  <Ramp deltaY="1" traction="-1" friction="-1" fill="#022c01" frame="#000000" x="41.18055555555556" z="17.5" w="30" d="5" h="0" angle="180" />
-  <Ramp deltaY="1" traction="-1" friction="-1" fill="#022c01" frame="#000000" x="41.18055555555556" z="47.5" w="30" d="5" h="0" angle="0" />
+  <Wall fill="#007879" frame="#000000" x="11.180555555555557" z="32.5" w="10" d="65" h="27" />
+  <Wall fill="#007879" frame="#000000" x="41.18055555555556" z="5" w="50" d="10" h="27" />
+  <Wall fill="#007879" frame="#000000" x="41.18055555555556" z="60" w="50" d="10" h="27" />
+  <Wall fill="#007879" frame="#000000" x="71.18055555555556" z="32.5" w="10" d="65" h="27" />
+  <Wall fill="#e3e3e3" frame="#000000" x="41.18055555555556" z="32.5" w="30" d="25" h="1" />
+  <Wall fill="#002c00" frame="#000000" x="23.680555555555557" z="17.5" w="5" d="5" h="18" />
+  <Wall fill="#002c00" frame="#000000" x="58.68055555555556" z="17.5" w="5" d="5" h="18" />
+  <Wall fill="#002c00" frame="#000000" x="58.68055555555556" z="47.5" w="5" d="5" h="18" />
+  <Wall fill="#002c00" frame="#000000" x="23.680555555555557" z="47.5" w="5" d="5" h="18" />
+  <Ramp deltaY="1" traction="-1" friction="-1" fill="#002c00" frame="#000000" x="23.680555555555557" z="32.5" w="5" d="25" h="0" angle="90" />
+  <Ramp deltaY="1" traction="-1" friction="-1" fill="#002c00" frame="#000000" x="58.68055555555556" z="32.5" w="5" d="25" h="0" angle="270" />
+  <Ramp deltaY="1" traction="-1" friction="-1" fill="#002c00" frame="#000000" x="41.18055555555556" z="17.5" w="30" d="5" h="0" angle="180" />
+  <Ramp deltaY="1" traction="-1" friction="-1" fill="#002c00" frame="#000000" x="41.18055555555556" z="47.5" w="30" d="5" h="0" angle="0" />
   <Incarnator y="20" cx="28.055555555555557" cz="21.875" angle="315" />
   <Incarnator y="20" cx="54.30555555555556" cz="21.875" angle="45" />
   <Incarnator y="20" cx="54.30555555555556" cz="43.125" angle="135" />
   <Incarnator y="20" cx="28.055555555555557" cz="43.125" angle="225" />
   <set designer="Red Cap" information="From Wrestling 1.0 , aka Arena 4." />
-  <SkyColor n="19" fill="#021fb5" frame="#ff00d4" />
+  <SkyColor n="19" fill="#0021b8" frame="#ff56d5" />
   <GroundColor n="19" fill="#000000" />
   <set ambient.i="0.2" light.0.i="0.2" light.0.a="45" light.0.b="73" light.1.i="0.3" light.1.a="20" light.1.b="70" light.2.i="0.1" light.2.a="83" light.2.b="45" light.3.i="0.2" light.3.a="66" light.3.b="-90" />
   <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" fill="#000000" frame="#000000" cx="41.18055555555556" cz="32.5" angle="45" />

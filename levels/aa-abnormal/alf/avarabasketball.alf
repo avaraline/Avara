@@ -1,40 +1,40 @@
 <map>
   <set defaultLives="200" />
-  <GroundColor fill="#dd9b1d" />
-  <SkyColor fill="#ff67fc" frame="#440477" />
-  <Goal team="2" y="10" motionRange="2" activeRange=".5" goalScore="20000" goalMsg="@greenscore" fill="#fff12c" frame="#000000" cx="78.15972222222223" cz="57.708333333333336" angle="315" />
-  <Ball y="8" fill="#ff5b1d" frame="#ff001a" cx="78.36805555555556" cz="100.52083333333334" angle="225" />
-  <Goal team="1" y="10" motionRange="2" activeRange=".5" goalScore="20000" goalMsg="@yellowscore" fill="#15970f" frame="#000000" cx="78.09027777777777" cz="143.64583333333334" angle="135" />
+  <GroundColor fill="#d6a700" />
+  <SkyColor fill="#ff84ff" frame="#431479" />
+  <Goal team="2" y="10" motionRange="2" activeRange=".5" goalScore="20000" goalMsg="@greenscore" fill="#fefb00" frame="#000000" cx="78.15972222222223" cz="57.708333333333336" angle="315" />
+  <Ball y="8" fill="#ff7c00" frame="#ff4b00" cx="78.36805555555556" cz="100.52083333333334" angle="225" />
+  <Goal team="1" y="10" motionRange="2" activeRange=".5" goalScore="20000" goalMsg="@yellowscore" fill="#009600" frame="#000000" cx="78.09027777777777" cz="143.64583333333334" angle="135" />
   <Walker team="2" cx="64.23611111111111" cz="88.4375" angle="315" />
   <Walker team="1" cx="91.84027777777777" cz="112.39583333333334" angle="135" />
-  <Wall fill="#fff12c" frame="#000000" x="78.40277777777777" z="54.93055555555556" w="10.555555555555557" d="0" h="6" y="10" />
-  <Wall fill="#15970f" frame="#000000" x="78.40277777777777" z="146.18055555555557" w="10.555555555555557" d="0" h="6" y="10" />
+  <Wall fill="#fefb00" frame="#000000" x="78.40277777777777" z="54.93055555555556" w="10.555555555555557" d="0" h="6" y="10" />
+  <Wall fill="#009600" frame="#000000" x="78.40277777777777" z="146.18055555555557" w="10.555555555555557" d="0" h="6" y="10" />
   <set gravity="0.4" />
-  <Wall fill="#cfbfc6" frame="#000000" x="78.125" z="54.61805555555556" w="1.25" d="0.625" h="13" />
-  <Wall fill="#cfbfc6" frame="#000000" x="78.125" z="146.49305555555557" w="1.25" d="0.625" h="13" />
-  <Wall fill="#15970f" frame="#000000" x="103.4375" z="148.36805555555557" w="0.625" d="0.625" h="23" />
-  <Wall fill="#15970f" frame="#000000" x="52.8125" z="148.36805555555557" w="0.625" d="0.625" h="23" />
-  <Wall fill="#fff12c" frame="#000000" x="52.8125" z="52.74305555555556" w="0.625" d="0.625" h="23" />
-  <Wall fill="#fff12c" frame="#000000" x="103.4375" z="52.74305555555556" w="0.625" d="0.625" h="23" />
+  <Wall fill="#c7c7c7" frame="#000000" x="78.125" z="54.61805555555556" w="1.25" d="0.625" h="13" />
+  <Wall fill="#c7c7c7" frame="#000000" x="78.125" z="146.49305555555557" w="1.25" d="0.625" h="13" />
+  <Wall fill="#009600" frame="#000000" x="103.4375" z="148.36805555555557" w="0.625" d="0.625" h="23" />
+  <Wall fill="#009600" frame="#000000" x="52.8125" z="148.36805555555557" w="0.625" d="0.625" h="23" />
+  <Wall fill="#fefb00" frame="#000000" x="52.8125" z="52.74305555555556" w="0.625" d="0.625" h="23" />
+  <Wall fill="#fefb00" frame="#000000" x="103.4375" z="52.74305555555556" w="0.625" d="0.625" h="23" />
   <set wallHeight="0" />
-  <Wall fill="#fff4fe" frame="#000000" x="78.125" z="52.74305555555556" w="50" d="0.625" h="0" />
-  <Wall fill="#fff4fe" frame="#000000" x="103.4375" z="100.55555555555557" w="0.625" d="95" h="0" />
-  <Wall fill="#fff4fe" frame="#000000" x="78.125" z="148.36805555555557" w="50" d="0.625" h="0" />
-  <Wall fill="#fff4fe" frame="#000000" x="52.8125" z="100.55555555555557" w="0.625" d="95" h="0" />
-  <Wall fill="#ea0015" frame="#000000" x="71.5625" z="64.30555555555556" w="0.625" d="22.5" h="0" />
-  <Wall fill="#ea0015" frame="#000000" x="85.3125" z="64.30555555555556" w="0.625" d="22.5" h="0" />
-  <Wall fill="#ea0015" frame="#000000" x="78.4375" z="75.24305555555556" w="13.125" d="0.625" h="0" />
-  <Wall fill="#021fb5" frame="#000000" x="78.4375" z="63.99305555555556" w="13.125" d="21.875" h="0" />
-  <Wall fill="#ea0015" frame="#000000" x="71.5625" z="136.80555555555557" w="0.625" d="22.5" h="0" />
-  <Wall fill="#ea0015" frame="#000000" x="85.3125" z="136.80555555555557" w="0.625" d="22.5" h="0" />
-  <Wall fill="#ea0015" frame="#000000" x="78.4375" z="125.86805555555556" w="13.125" d="0.625" h="0" />
-  <Wall fill="#021fb5" frame="#000000" x="78.4375" z="137.11805555555557" w="13.125" d="21.875" h="0" />
-  <Wall fill="#7d3609" frame="#000000" x="62.1875" z="64.30555555555556" w="18.125" d="22.5" h="0" />
-  <Wall fill="#7d3609" frame="#000000" x="94.375" z="64.30555555555556" w="17.5" d="22.5" h="0" />
-  <Wall fill="#7d3609" frame="#000000" x="78.125" z="87.74305555555556" w="50" d="24.375" h="0" />
-  <Wall fill="#7d3609" frame="#000000" x="78.125" z="113.36805555555556" w="50" d="24.375" h="0" />
-  <Wall fill="#7d3609" frame="#000000" x="62.1875" z="136.80555555555557" w="18.125" d="22.5" h="0" />
-  <Wall fill="#7d3609" frame="#000000" x="94.375" z="136.80555555555557" w="17.5" d="22.5" h="0" />
+  <Wall fill="#feffff" frame="#000000" x="78.125" z="52.74305555555556" w="50" d="0.625" h="0" />
+  <Wall fill="#feffff" frame="#000000" x="103.4375" z="100.55555555555557" w="0.625" d="95" h="0" />
+  <Wall fill="#feffff" frame="#000000" x="78.125" z="148.36805555555557" w="50" d="0.625" h="0" />
+  <Wall fill="#feffff" frame="#000000" x="52.8125" z="100.55555555555557" w="0.625" d="95" h="0" />
+  <Wall fill="#e62000" frame="#000000" x="71.5625" z="64.30555555555556" w="0.625" d="22.5" h="0" />
+  <Wall fill="#e62000" frame="#000000" x="85.3125" z="64.30555555555556" w="0.625" d="22.5" h="0" />
+  <Wall fill="#e62000" frame="#000000" x="78.4375" z="75.24305555555556" w="13.125" d="0.625" h="0" />
+  <Wall fill="#0021b8" frame="#000000" x="78.4375" z="63.99305555555556" w="13.125" d="21.875" h="0" />
+  <Wall fill="#e62000" frame="#000000" x="71.5625" z="136.80555555555557" w="0.625" d="22.5" h="0" />
+  <Wall fill="#e62000" frame="#000000" x="85.3125" z="136.80555555555557" w="0.625" d="22.5" h="0" />
+  <Wall fill="#e62000" frame="#000000" x="78.4375" z="125.86805555555556" w="13.125" d="0.625" h="0" />
+  <Wall fill="#0021b8" frame="#000000" x="78.4375" z="137.11805555555557" w="13.125" d="21.875" h="0" />
+  <Wall fill="#7a4200" frame="#000000" x="62.1875" z="64.30555555555556" w="18.125" d="22.5" h="0" />
+  <Wall fill="#7a4200" frame="#000000" x="94.375" z="64.30555555555556" w="17.5" d="22.5" h="0" />
+  <Wall fill="#7a4200" frame="#000000" x="78.125" z="87.74305555555556" w="50" d="24.375" h="0" />
+  <Wall fill="#7a4200" frame="#000000" x="78.125" z="113.36805555555556" w="50" d="24.375" h="0" />
+  <Wall fill="#7a4200" frame="#000000" x="62.1875" z="136.80555555555557" w="18.125" d="22.5" h="0" />
+  <Wall fill="#7a4200" frame="#000000" x="94.375" z="136.80555555555557" w="17.5" d="22.5" h="0" />
   <Wall fill="#000000" frame="#000000" x="78.125" z="100.55555555555556" w="50" d="1.25" h="0" />
   <Walker team="2" cx="91.25" cz="88.68055555555556" angle="45" />
   <Walker team="1" cx="64.375" cz="112.43055555555556" angle="225" />
@@ -43,140 +43,140 @@
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#fff4fe" frame="#000000" cx="68.125" cz="113.05555555555556" angle="225" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#feffff" frame="#000000" cx="68.125" cz="113.05555555555556" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#fff4fe" frame="#000000" cx="68.125" cz="88.05555555555556" angle="225" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#feffff" frame="#000000" cx="68.125" cz="88.05555555555556" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#fff4fe" frame="#000000" cx="88.75" cz="113.05555555555556" angle="225" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#feffff" frame="#000000" cx="88.75" cz="113.05555555555556" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#fff4fe" frame="#000000" cx="88.125" cz="88.05555555555556" angle="225" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="2" grenades="6" start="gShow" out="gTaken" fill="#feffff" frame="#000000" cx="88.125" cz="88.05555555555556" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspMissile" speed="2" yon="50" y="2" missiles="4" start="gShow" out="gTaken" fill="#fff4fe" frame="#000000" cx="63.125" cz="100.55555555555556" angle="225" />
+  <Goody shape="bspMissile" speed="2" yon="50" y="2" missiles="4" start="gShow" out="gTaken" fill="#feffff" frame="#000000" cx="63.125" cz="100.55555555555556" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="100" />
-  <Goody shape="bspMissile" speed="2" yon="50" y="2" missiles="4" start="gShow" out="gTaken" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" />
-  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="45.24305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="30.868055555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="16.493055555555557" w="17.5" d="14.375" h="4.5" />
+  <Goody shape="bspMissile" speed="2" yon="50" y="2" missiles="4" start="gShow" out="gTaken" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" />
+  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="45.24305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="30.868055555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="16.493055555555557" w="17.5" d="14.375" h="4.5" />
   <set wallHeight="0" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="184.61805555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="170.24305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="155.86805555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaX="-.2" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="149.93055555555557" w="3.75" d="2.5" h="4.5" />
-  <Field deltaX=".2" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="51.18055555555556" w="3.75" d="2.5" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="184.61805555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="170.24305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="60.9375" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="95.3125" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="0" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="155.86805555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaX="-.2" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="149.93055555555557" w="3.75" d="2.5" h="4.5" />
+  <Field deltaX=".2" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="78.125" z="51.18055555555556" w="3.75" d="2.5" h="4.5" />
   <set wallHeight="0" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="45.24305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="30.868055555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="16.493055555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="45.24305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="30.868055555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="16.493055555555557" w="17.5" d="14.375" h="4.5" />
   <set wallHeight="0" />
-  <Field deltaY=".2" deltaX=".8" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="45.24305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ=".8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="30.868055555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="16.493055555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="155.86805555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="170.24305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="184.61805555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="155.86805555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="-.8" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="170.24305555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="-1" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="184.61805555555557" w="17.5" d="14.375" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="143.68055555555557" w="17.5" d="10" h="4.5" />
-  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="143.68055555555557" w="17.5" d="10" h="4.5" />
-  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="143.68055555555557" w="17.5" d="10" h="4.5" />
-  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="143.68055555555557" w="17.5" d="10" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="143.68055555555557" w="17.5" d="10" h="4.5" />
-  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#fff4fe" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="143.68055555555557" w="17.5" d="10" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="45.24305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="45.24305555555556" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="30.868055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ=".8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="30.868055555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="16.493055555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="16.493055555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="59.61805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="73.99305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="88.36805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="102.74305555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="117.11805555555556" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="131.49305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="155.86805555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="170.24305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="9.6875" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="44.0625" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.875" z="184.61805555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="155.86805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="155.86805555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="170.24305555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="-.8" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="170.24305555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.1875" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="146.5625" z="184.61805555555557" w="16.875" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="-1" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="129.375" z="184.61805555555557" w="17.5" d="14.375" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="43.75" z="143.68055555555557" w="17.5" d="10" h="4.5" />
+  <Field deltaY=".2" deltaX=".4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="26.25" z="143.68055555555557" w="17.5" d="10" h="4.5" />
+  <Field deltaY=".2" deltaX=".8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="8.75" z="143.68055555555557" w="17.5" d="10" h="4.5" />
+  <Field deltaY=".2" deltaX="-.8" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="147.5" z="143.68055555555557" w="17.5" d="10" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="130" z="143.68055555555557" w="17.5" d="10" h="4.5" />
+  <Field deltaY=".2" deltaX="-.4" deltaZ="0" fill="#feffff" frame="#000000" cx="93.75" cz="100.55555555555556" angle="225" x="112.5" z="143.68055555555557" w="17.5" d="10" h="4.5" />
   <Incarnator y="80" cx="35.625" cz="38.05555555555556" angle="315" />
   <Incarnator y="80" cx="35.625" cz="163.05555555555557" angle="225" />
   <Incarnator y="80" cx="120.625" cz="163.05555555555557" angle="135" />
   <Incarnator y="80" cx="120.625" cz="38.05555555555556" angle="45" />
   <set gameLength="6563" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#fff4fe" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#fff4fe" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#fff4fe" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#fff4fe" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#fff4fe" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#fff4fe" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#feffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#feffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#feffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#feffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#feffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#feffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="45" />
   <set designer="Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;" information="A simulation of Basketball in avaraland.  
 Two teams, one of yellow, one of green, attempt to score in the basket of the other team's color.
 Each player has 200 lives and the game lasts 7 min." />
@@ -184,5 +184,5 @@ Each player has 200 lives and the game lasts 7 min." />
   <Text showEveryone="true" text="Green Scores!!" in="@greenscore" cx="58.125" cz="59.30555555555556" r="1.25" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@greenscore" cx="88.125" cz="1.8055555555555558" angle="225" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@yellowscore" cx="102.5" cz="1.1805555555555556" angle="225" />
-  <Guard y="50" speed="10" shotPower="100" freq="50" watch="scoutMask" shield="100" fill="#440477" frame="#000000" cx="83.88888888888889" cz="100.41666666666667" angle="315" />
+  <Guard y="50" speed="10" shotPower="100" freq="50" watch="scoutMask" shield="100" fill="#431479" frame="#000000" cx="83.88888888888889" cz="100.41666666666667" angle="315" />
 </map>

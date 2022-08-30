@@ -1,18 +1,18 @@
 <map>
   <set baseHeight="50" />
-  <Wall fill="#cfbfc6" frame="#000000" x="23.47222222222222" z="22.638888888888893" w="25" d="25" h="0.25" />
+  <Wall fill="#c7c7c7" frame="#000000" x="23.47222222222222" z="22.638888888888893" w="25" d="25" h="0.25" />
   <Incarnator y=".25" cx="14.131944444444445" cz="22.32638888888889" angle="270" />
   <Incarnator y=".25" cx="33.19444444444444" cz="22.430555555555557" angle="90" />
   <set designer="Red Cap" information="Simple 4 player level ..." />
-  <SkyColor fill="#b1d1fd" frame="#000000" />
-  <GroundColor fill="#000d66" />
+  <SkyColor fill="#a8d6ff" frame="#000000" />
+  <GroundColor fill="#000e68" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="32" />
-  <Goody shape="bspAvaraA" y="2" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" fill="#fff4fe" frame="#000000" cx="23.47222222222222" cz="22.63888888888889" angle="225" />
-  <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" fragment="false" spin="false" fill="#fff4fe" frame="#000000" cx="23.47222222222222" cz="22.63888888888889" angle="45" />
-  <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#fff4fe" frame="#000000" cx="23.47222222222222" cz="22.63888888888889" angle="45" />
-  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#fff4fe" frame="#000000" x="23.47222222222222" z="22.63888888888889" w="5" d="5" h="0.25" y="99" />
+  <Goody shape="bspAvaraA" y="2" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" fill="#feffff" frame="#000000" cx="23.47222222222222" cz="22.63888888888889" angle="225" />
+  <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" fragment="false" spin="false" fill="#feffff" frame="#000000" cx="23.47222222222222" cz="22.63888888888889" angle="45" />
+  <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#feffff" frame="#000000" cx="23.47222222222222" cz="22.63888888888889" angle="45" />
+  <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#feffff" frame="#000000" x="23.47222222222222" z="22.63888888888889" w="5" d="5" h="0.25" y="99" />
   <set ambient.i="0.0" light.0.i="1" light.0.a="45" light.1.i="1" light.1.b="45" />
   <Incarnator y=".25" cx="23.472222222222225" cz="32.25694444444444" angle="180" />
   <Incarnator y=".25" cx="24.097222222222225" cz="13.611111111111112" angle="0" />
