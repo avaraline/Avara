@@ -5,31 +5,31 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspGrenade" y="502" yon="100" speed="0" grenades="8" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="101.875" cz="101.25" angle="225" />
+  <Goody shape="bspGrenade" y="502" yon="100" speed="0" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="101.875" cz="101.25" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspGrenade" y="514" yon="100" speed="0" grenades="8" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="101.875" cz="101.25" angle="225" />
+  <Goody shape="bspGrenade" y="514" yon="100" speed="0" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="101.875" cz="101.25" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="10" />
-  <Goody shape="bspGoody" y="532" yon="1" speed="0" boosters="1" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="101.875" cz="101.25" angle="225" />
+  <Goody shape="bspGoody" y="532" yon="1" speed="0" boosters="1" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="101.875" cz="101.25" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="101.73611111111111" cz="151.04166666666669" angle="225" />
+  <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="101.73611111111111" cz="151.04166666666669" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="51.736111111111114" cz="101.11111111111111" angle="225" />
+  <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="51.736111111111114" cz="101.11111111111111" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="151.73611111111111" cz="101.11111111111111" angle="225" />
+  <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="151.73611111111111" cz="101.11111111111111" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="101.80555555555556" cz="51.111111111111114" angle="225" />
+  <Goody shape="bspMissile" y="508" yon="100" speed="2" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="101.80555555555556" cz="51.111111111111114" angle="225" />
   <set defaultLives="3" grenadePower="3.5" missilePower="2.5" missileTurnRate="1" missileAcceleration=".5" maxStartGrenades="12" maxStartMissiles="8" maxStartBoosts="8" designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="SpaceWalk" />
   <SkyColor fill="#000000" frame="#000000" />
   <Incarnator y="520" cx="172.0138888888889" cz="101.11111111111111" angle="90" />
@@ -49,7 +49,7 @@
   <set floorTemplate="bspFloorFrame" baseHeight="506" wallHeight="0" wallYon="100" />
   <Wall fill="#ff2600" frame="#000000" x="151.73611111111111" z="101.11111111111111" w="50" d="50" h="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="512" wallHeight="0" wallYon="100" />
-  <Wall fill="#feffff" frame="#000000" x="101.73611111111111" z="101.11111111111111" w="50" d="50" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="101.73611111111111" z="101.11111111111111" w="50" d="50" h="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="500" wallHeight="0" wallYon="100" />
-  <Wall fill="#feffff" frame="#000000" x="101.73611111111111" z="101.11111111111111" w="50" d="50" h="0" />
+  <Wall fill="#ffffff" frame="#000000" x="101.73611111111111" z="101.11111111111111" w="50" d="50" h="0" />
 </map>

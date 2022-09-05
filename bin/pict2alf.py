@@ -111,8 +111,8 @@ class Color:
         assert(self.bpp == 16)
         c = [self.r, self.g, self.b]
         colorvec = [x / 65535.0 for x in c]
-        srgb = applergb_to_srgb(colorvec)
-        thehex = "#%02x%02x%02x" % tuple(srgb)
+        srgb_8 = [int(round(255.0 * x)) for x in applergb_to_srgb(colorvec)]
+        thehex = "#%02x%02x%02x" % tuple(srgb_8)
         assert(len(thehex) == 7)
         return thehex
 

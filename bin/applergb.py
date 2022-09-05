@@ -12,12 +12,8 @@ def applergb_to_srgb(v):
     linear = np.maximum(convmat.dot(c ** 1.8), np.zeros_like(np.arange(3)))
     linear_section = np.minimum(12.92 * linear, np.array([0.0031308, 0.0031308, 0.0031308]))
     exp_section = ((1.13712 * linear) ** (1.0 / 2.4)) - 0.055
-    res = (255.0 * np.minimum(np.ones_like(np.arange(3)), np.maximum(linear_section, exp_section))).tolist()
-    return [int(x) for x in res]
-
-
-def applergb_to_srgb_u8(v):
-    return applergb_to_srgb([x / 255.0 for x in v])
+    res = (np.minimum(np.ones_like(np.arange(3)), np.maximum(linear_section, exp_section))).tolist()
+    return res
 
 
 def color(hex_string):
@@ -33,7 +29,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    srgb_color = tuple(applergb_to_srgb_u8(args.color))
+    srgb_color = tuple(applergb_to_srgb(args.color))
     print("AppleRGB -> sRGB")
     input_hex = hex((args.color[0] << 16) | (args.color[1] << 8) | args.color[2])
     output_hex = hex((srgb_color[0] << 16) | (srgb_color[1] << 8) | srgb_color[2])

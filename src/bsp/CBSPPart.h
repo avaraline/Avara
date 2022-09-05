@@ -40,6 +40,8 @@ typedef struct {
     float normal[3];
     uint16_t triCount;
     uint16_t *triPoints;
+    uint16_t front;
+    uint16_t back;
 } PolyRecord;
 
 typedef uint32_t ColorRecord;
@@ -176,7 +178,6 @@ public:
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();
-    virtual void UpdateOpenGLData();
 
     virtual void PreRender();
     void PostRender();

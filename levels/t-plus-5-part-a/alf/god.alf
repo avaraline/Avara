@@ -1,5 +1,5 @@
 <map>
-  <SkyColor verticalRangeMax="12000" verticalRangeMin="0" n="24" fill="#c0c492" frame="#d6d1cd" />
+  <SkyColor verticalRangeMax="12000" verticalRangeMin="0" n="24" fill="#c0c592" frame="#d6d1cd" />
   <GroundColor fill="#8f936d" />
   <set designer="Gus (Mondo) Wiseman - guswise@jps.net" information="Row, row row your boat, gently down the stream!
 Merrily, merrily, merrily, merrily!
@@ -368,22 +368,22 @@ Life is but a dream!
   <Wall fill="#d6d1cd" frame="#000000" x="47.395833333333336" z="67.43055555555556" w="4.375" d="5" h="0" />
   <Incarnator cx="25.208333333333336" cz="84.93055555555556" angle="225" />
   <set wallHeight="12" baseHeight="0" wallShield="-1" wallYon="1000" />
-  <Wall fill="#9cc423" frame="#000000" x="37.708333333333336" z="59.93055555555556" w="5" d="1.25" h="0" />
-  <Wall fill="#9cc423" frame="#000000" x="62.70833333333334" z="59.93055555555556" w="5" d="1.25" h="0" />
-  <Wall fill="#9cc423" frame="#000000" x="50.208333333333336" z="72.43055555555556" w="1.25" d="5" h="0" />
-  <Wall fill="#9cc423" frame="#000000" x="50.208333333333336" z="47.43055555555556" w="1.25" d="5" h="0" />
+  <Wall fill="#9cc424" frame="#000000" x="37.708333333333336" z="59.93055555555556" w="5" d="1.25" h="0" />
+  <Wall fill="#9cc424" frame="#000000" x="62.70833333333334" z="59.93055555555556" w="5" d="1.25" h="0" />
+  <Wall fill="#9cc424" frame="#000000" x="50.208333333333336" z="72.43055555555556" w="1.25" d="5" h="0" />
+  <Wall fill="#9cc424" frame="#000000" x="50.208333333333336" z="47.43055555555556" w="1.25" d="5" h="0" />
   <set wallHeight="3" baseHeight="9" />
-  <Wall fill="#9cc423" frame="#000000" x="50.208333333333336" z="59.93055555555556" w="1.25" d="20" h="0" />
-  <Wall fill="#9cc423" frame="#000000" x="44.895833333333336" z="59.93055555555556" w="9.375" d="1.25" h="0" />
-  <Wall fill="#9cc423" frame="#000000" x="55.520833333333336" z="59.93055555555556" w="9.375" d="1.25" h="0" />
+  <Wall fill="#9cc424" frame="#000000" x="50.208333333333336" z="59.93055555555556" w="1.25" d="20" h="0" />
+  <Wall fill="#9cc424" frame="#000000" x="44.895833333333336" z="59.93055555555556" w="9.375" d="1.25" h="0" />
+  <Wall fill="#9cc424" frame="#000000" x="55.520833333333336" z="59.93055555555556" w="9.375" d="1.25" h="0" />
   <set baseHeight="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Goody speed="12" shape="bspAvaraA" y="2" grenades="12" missiles="6" power="1000" shield="1000" start="mShow" out="mTaken" fill="#9cc423" frame="#000000" cx="50.208333333333336" cz="59.93055555555556" angle="135" />
-  <Teleporter spin="0" y="-10" activeRange="100" deadRange="55" sound="0" shape="0" destGroup="@recenter" group="-1" fill="#9cc423" frame="#000000" cx="50.208333333333336" cz="59.93055555555556" angle="135" />
-  <Teleporter shape="0" spin="0" y="50" group="@recenter" destGroup="-1" fill="#9cc423" frame="#000000" cx="50.208333333333336" cz="59.93055555555556" angle="135" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#9cc423" frame="#000000" cx="50.208333333333336" cz="59.93055555555556" angle="135" />
+  <Goody speed="12" shape="bspAvaraA" y="2" grenades="12" missiles="6" power="1000" shield="1000" start="mShow" out="mTaken" fill="#9cc424" frame="#000000" cx="50.208333333333336" cz="59.93055555555556" angle="135" />
+  <Teleporter spin="0" y="-10" activeRange="100" deadRange="55" sound="0" shape="0" destGroup="@recenter" group="-1" fill="#9cc424" frame="#000000" cx="50.208333333333336" cz="59.93055555555556" angle="135" />
+  <Teleporter shape="0" spin="0" y="50" group="@recenter" destGroup="-1" fill="#9cc424" frame="#000000" cx="50.208333333333336" cz="59.93055555555556" angle="135" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#9cc424" frame="#000000" cx="50.208333333333336" cz="59.93055555555556" angle="135" />
   <set baseHeight="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />

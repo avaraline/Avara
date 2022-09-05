@@ -20,26 +20,26 @@
   <set wallYon=".001" wallHeight="wh" />
   <WallDoor wallYon=".001" open="@one" close="@two" deltaY="20" shotPower="9999" guardDelay=".1" openSound="0" closeSound="0" stopSound="0" didOpen="@two" openSpeed="75" closeSpeed="75" stepOnMsg="@one" fill="#000000" frame="#000000" x="19.930555555555557" z="386.875" w="6.25" d="6.25" h="0" y="0" />
   <Teleporter y="5" shape="0" group="@death" spin="false" sound="0" fill="#00d5ff" frame="#000000" cx="19.86111111111111" cz="386.8055555555556" angle="90" />
-  <Wall fill="#fefb00" frame="#000000" x="229.93055555555557" z="123.125" w="5" d="2.5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="204.93055555555557" z="106.875" w="5" d="35" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="219.93055555555557" z="90.625" w="5" d="2.5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="229.93055555555557" z="90.625" w="5" d="2.5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="224.93055555555557" z="86.875" w="45" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="244.93055555555557" z="106.875" w="5" d="35" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="224.93055555555557" z="126.875" w="45" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="212.43055555555557" z="91.875" w="10" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="209.93055555555557" z="96.875" w="5" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="208.68055555555557" z="101.875" w="2.5" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="219.93055555555557" z="123.125" w="5" d="2.5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="241.18055555555557" z="111.875" w="2.5" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="208.68055555555557" z="111.875" w="2.5" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="241.18055555555557" z="101.875" w="2.5" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="239.93055555555557" z="96.875" w="5" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="239.93055555555557" z="116.875" w="5" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="209.93055555555557" z="116.875" w="5" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="237.43055555555557" z="91.875" w="10" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="237.43055555555557" z="121.875" w="10" d="5" h="0" />
-  <Wall fill="#fefb00" frame="#000000" x="212.43055555555557" z="121.875" w="10" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="229.93055555555557" z="123.125" w="5" d="2.5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="204.93055555555557" z="106.875" w="5" d="35" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="219.93055555555557" z="90.625" w="5" d="2.5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="229.93055555555557" z="90.625" w="5" d="2.5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="224.93055555555557" z="86.875" w="45" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="244.93055555555557" z="106.875" w="5" d="35" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="224.93055555555557" z="126.875" w="45" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="212.43055555555557" z="91.875" w="10" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="209.93055555555557" z="96.875" w="5" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="208.68055555555557" z="101.875" w="2.5" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="219.93055555555557" z="123.125" w="5" d="2.5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="241.18055555555557" z="111.875" w="2.5" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="208.68055555555557" z="111.875" w="2.5" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="241.18055555555557" z="101.875" w="2.5" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="239.93055555555557" z="96.875" w="5" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="239.93055555555557" z="116.875" w="5" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="209.93055555555557" z="116.875" w="5" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="237.43055555555557" z="91.875" w="10" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="237.43055555555557" z="121.875" w="10" d="5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="212.43055555555557" z="121.875" w="10" d="5" h="0" />
   <set wallYon="100" wallHeight="wh" />
   <And in="@start" out="@time" />
   <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" out="@time" />
@@ -51,7 +51,7 @@
   <Distributor in="@whoop" out.0="@zero" out.1="@one" />
   <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Intro 'Yahoo' sound by Andrew Welch from Ambrosia's game: Maelstrom. Teleporter idea by Usher. Teams are red and yellow. Up to three people on a team. Get tossed out of the ring or get killed and your opponent earns a point. 5 minutes or 15 points." />
   <GroundColor fill="#000000" />
-  <SkyColor fill="#ab1842" frame="#430942" />
+  <SkyColor fill="#ab1942" frame="#430942" />
   <Counter in="@add1Red" n="1" out="@redAt1" restart="false" />
   <Counter in="@add1Red" n="2" out="@redAt2" restart="false" />
   <Counter in="@add1Red" n="3" out="@redAt3" restart="false" />
@@ -134,48 +134,48 @@
   <Text sound="kSnText" volume="kTextVolume" in="@yellowAt13" showEveryone="true" mask="T2" text="Yellow team has 13 points!" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@yellowAt14" showEveryone="true" text="Yellow team has only 1 point to go!" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@yellowWins" showEveryone="true" text="Yellow team wins!" cx="553.8194444444445" cz="474.30555555555554" r="2.569444444444457" />
-  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="224.93055555555557" z="91.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="234.93055555555557" z="96.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="237.43055555555557" z="101.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="239.93055555555557" z="106.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="237.43055555555557" z="111.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="234.93055555555557" z="116.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="219.93055555555557" z="119.375" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="214.93055555555557" z="96.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="209.93055555555557" z="106.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="212.43055555555557" z="111.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="212.43055555555557" z="101.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="214.93055555555557" z="116.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="224.93055555555557" z="121.875" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="229.93055555555557" z="119.375" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="229.93055555555557" z="94.375" w="5" d="5" h="0" />
-  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="219.93055555555557" z="94.375" w="5" d="5" h="0" />
-  <Wall fill="#000e68" frame="#000000" x="224.93055555555557" z="106.875" w="5" d="25" h="0" />
-  <Wall fill="#0021b8" frame="#000000" x="229.93055555555557" z="106.875" w="5" d="20" h="0" />
-  <Wall fill="#407fff" frame="#000000" x="233.68055555555557" z="106.875" w="2.5" d="15" h="0" />
-  <Wall fill="#75d5ff" frame="#000000" x="236.18055555555557" z="106.875" w="2.5" d="5" h="0" />
-  <Wall fill="#75d5ff" frame="#000000" x="213.68055555555557" z="106.875" w="2.5" d="5" h="0" />
-  <Wall fill="#0021b8" frame="#000000" x="219.93055555555557" z="106.875" w="5" d="20" h="0" />
-  <Wall fill="#407fff" frame="#000000" x="216.18055555555557" z="106.875" w="2.5" d="15" h="0" />
+  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="224.93055555555557" z="91.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="234.93055555555557" z="96.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="237.43055555555557" z="101.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="239.93055555555557" z="106.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="237.43055555555557" z="111.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="234.93055555555557" z="116.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="219.93055555555557" z="119.375" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="214.93055555555557" z="96.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="209.93055555555557" z="106.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="212.43055555555557" z="111.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaX="fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="212.43055555555557" z="101.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" deltaX="fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="214.93055555555557" z="116.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="224.93055555555557" z="121.875" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" visible="true" deltaZ="-1 * fieldZ" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="229.93055555555557" z="119.375" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="229.93055555555557" z="94.375" w="5" d="5" h="0" />
+  <Field deltaY="fieldY" deltaZ="fieldZ" visible="true" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="219.93055555555557" z="94.375" w="5" d="5" h="0" />
+  <Wall fill="#010e68" frame="#000000" x="224.93055555555557" z="106.875" w="5" d="25" h="0" />
+  <Wall fill="#0122b9" frame="#000000" x="229.93055555555557" z="106.875" w="5" d="20" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="233.68055555555557" z="106.875" w="2.5" d="15" h="0" />
+  <Wall fill="#76d6ff" frame="#000000" x="236.18055555555557" z="106.875" w="2.5" d="5" h="0" />
+  <Wall fill="#76d6ff" frame="#000000" x="213.68055555555557" z="106.875" w="2.5" d="5" h="0" />
+  <Wall fill="#0122b9" frame="#000000" x="219.93055555555557" z="106.875" w="5" d="20" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="216.18055555555557" z="106.875" w="2.5" d="15" h="0" />
   <set wallHeight="2" />
-  <Field mask="T2" deltaY="fieldY" visible="false" start="@start" enter="@add1Red" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="234.93055555555557" z="116.875" w="5" d="5" h="0" y="0" />
+  <Field mask="T2" deltaY="fieldY" visible="false" start="@start" enter="@add1Red" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="234.93055555555557" z="116.875" w="5" d="5" h="0" y="0" />
   <set wallHeight="2" />
-  <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="234.93055555555557" z="116.875" w="5" d="5" h="0" y="0" />
+  <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="553.8194444444445" cz="474.30555555555554" angle="225" x="234.93055555555557" z="116.875" w="5" d="5" h="0" y="0" />
   <Incarnator y="0" start="@one" stop="@two" cx="234.09722222222223" cz="115.97222222222223" angle="150" />
   <set wallHeight="2" />
-  <Field mask="T2" deltaY="fieldY" visible="false" start="@start" enter="@add1Red" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="234.09722222222223" cz="115.97222222222223" angle="150" x="214.93055555555557" z="116.875" w="5" d="5" h="0" y="0" />
+  <Field mask="T2" deltaY="fieldY" visible="false" start="@start" enter="@add1Red" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="234.09722222222223" cz="115.97222222222223" angle="150" x="214.93055555555557" z="116.875" w="5" d="5" h="0" y="0" />
   <set wallHeight="2" />
-  <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="234.09722222222223" cz="115.97222222222223" angle="150" x="214.93055555555557" z="116.875" w="5" d="5" h="0" y="0" />
+  <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="234.09722222222223" cz="115.97222222222223" angle="150" x="214.93055555555557" z="116.875" w="5" d="5" h="0" y="0" />
   <Incarnator y="0" start="@two" stop="@three" cx="215.83333333333334" cz="115.97222222222223" angle="210" />
   <set wallHeight="2" />
-  <Field mask="T2" deltaY="fieldY" visible="false" start="@start" enter="@add1Red" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="215.83333333333334" cz="115.97222222222223" angle="210" x="234.93055555555557" z="96.875" w="5" d="5" h="0" y="0" />
+  <Field mask="T2" deltaY="fieldY" visible="false" start="@start" enter="@add1Red" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="215.83333333333334" cz="115.97222222222223" angle="210" x="234.93055555555557" z="96.875" w="5" d="5" h="0" y="0" />
   <set wallHeight="2" />
-  <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="215.83333333333334" cz="115.97222222222223" angle="210" x="234.93055555555557" z="96.875" w="5" d="5" h="0" y="0" />
+  <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="215.83333333333334" cz="115.97222222222223" angle="210" x="234.93055555555557" z="96.875" w="5" d="5" h="0" y="0" />
   <Incarnator y="0" start="@zero" stop="@one" cx="234.09722222222223" cz="97.84722222222223" angle="30" />
   <set wallHeight="2" />
-  <Field mask="T2" deltaY="fieldY" visible="false" start="@start" enter="@add1Red" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="234.09722222222223" cz="97.84722222222223" angle="30" x="214.93055555555557" z="96.875" w="5" d="5" h="0" y="0" />
+  <Field mask="T2" deltaY="fieldY" visible="false" start="@start" enter="@add1Red" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="234.09722222222223" cz="97.84722222222223" angle="30" x="214.93055555555557" z="96.875" w="5" d="5" h="0" y="0" />
   <set wallHeight="2" />
-  <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#feffff" frame="#000000" cx="234.09722222222223" cz="97.84722222222223" angle="30" x="214.93055555555557" z="96.875" w="5" d="5" h="0" y="0" />
+  <Field mask="T3" deltaY="fieldY" visible="false" start="@start" enter="@add1Yellow" deltaX="-1 * fieldX" fill="#ffffff" frame="#000000" cx="234.09722222222223" cz="97.84722222222223" angle="30" x="214.93055555555557" z="96.875" w="5" d="5" h="0" y="0" />
   <Incarnator y="0" start="@three" stop="@four" cx="215.90277777777777" cz="97.84722222222223" angle="330" />
   <Teleporter group="@redBegin" mask="T3" y="0" shape="0" spin="false" fill="#ff2600" frame="#000000" cx="225.06944444444446" cz="120.83333333333334" angle="180" />
   <Teleporter group="@redBegin" mask="T3" y="0" shape="0" spin="false" fill="#ff2600" frame="#000000" cx="230.06944444444446" cz="118.33333333333334" angle="180" />
@@ -183,15 +183,15 @@
   <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" cx="219.89583333333334" cz="173.68055555555557" angle="180" />
   <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" cx="224.89583333333334" cz="174.30555555555557" angle="180" />
   <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="3" y="60" cx="229.89583333333334" cz="173.68055555555557" angle="180" />
-  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#fefb40" frame="#000000" cx="224.86111111111111" cz="92.98611111111111" angle="0" />
-  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#fefb40" frame="#000000" cx="219.86111111111111" cz="95.48611111111111" angle="0" />
-  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#fefb40" frame="#000000" cx="229.86111111111111" cz="95.48611111111111" angle="0" />
+  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#fffc41" frame="#000000" cx="224.86111111111111" cz="92.98611111111111" angle="0" />
+  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#fffc41" frame="#000000" cx="219.86111111111111" cz="95.48611111111111" angle="0" />
+  <Teleporter group="@yellowBegin" mask="T2" y="0" shape="0" spin="false" fill="#fffc41" frame="#000000" cx="229.86111111111111" cz="95.48611111111111" angle="0" />
   <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" cx="220.17361111111114" cz="40.41666666666667" angle="0" />
   <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" cx="225.17361111111114" cz="39.30555555555556" angle="0" />
   <Walker isTarget="false" lives="kDefaultLives" hitScore="0" killScore="1" team="2" y="60" cx="230.17361111111114" cz="40.41666666666667" angle="0" />
-  <Teleporter group="-1" y="15" activeRange="35" deadRange="20.5" destGroup="@death" shape="0" fill="#007fff" frame="#000000" cx="224.93055555555557" cz="106.875" angle="225" />
-  <Teleporter stop="@start" start="@inGame" group="-2" mask="T3" y="20" activeRange="150" deadRange="60" destGroup="@redBegin" shape="0" fill="#007fff" frame="#000000" cx="224.93055555555557" cz="106.875" angle="225" />
-  <Teleporter stop="@start" start="@inGame" group="-3" mask="T2" y="20" activeRange="150" deadRange="60" destGroup="@yellowBegin" shape="0" fill="#007fff" frame="#000000" cx="224.93055555555557" cz="106.875" angle="225" />
+  <Teleporter group="-1" y="15" activeRange="35" deadRange="20.5" destGroup="@death" shape="0" fill="#0080ff" frame="#000000" cx="224.93055555555557" cz="106.875" angle="225" />
+  <Teleporter stop="@start" start="@inGame" group="-2" mask="T3" y="20" activeRange="150" deadRange="60" destGroup="@redBegin" shape="0" fill="#0080ff" frame="#000000" cx="224.93055555555557" cz="106.875" angle="225" />
+  <Teleporter stop="@start" start="@inGame" group="-3" mask="T2" y="20" activeRange="150" deadRange="60" destGroup="@yellowBegin" shape="0" fill="#0080ff" frame="#000000" cx="224.93055555555557" cz="106.875" angle="225" />
   <Base in="@start" out="@wait" cx="492.5" cz="477.0138888888889" />
   <Timer in="@wait" wait="32" out="@inGame" />
   <Timer in="@start" wait="25" out="@inArena" />

@@ -13,24 +13,24 @@
   <Sound y="25" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="50" cx="75.69444444444444" cz="110.7638888888889" angle="225" />
   <Teleporter group="-1" y="-30" activeRange="27 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" fill="#8b0f00" frame="#000000" cx="78.54166666666667" cz="106.11111111111111" angle="225" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#8b0f00" frame="#000000" cx="78.54166666666667" cz="106.11111111111111" angle="225" />
-  <Wall fill="#ba1800" frame="#000000" x="44.895833333333336" z="111.80555555555556" w="2.7083333333333286" d="45.69444444444443" h="10" />
-  <Wall fill="#ba1800" frame="#000000" x="107.46527777777777" z="111.00694444444444" w="2.7083333333333286" d="45.763888888888886" h="10" />
+  <Wall fill="#bb1800" frame="#000000" x="44.895833333333336" z="111.80555555555556" w="2.7083333333333286" d="45.69444444444443" h="10" />
+  <Wall fill="#bb1800" frame="#000000" x="107.46527777777777" z="111.00694444444444" w="2.7083333333333286" d="45.763888888888886" h="10" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
   <Goody shape="bspMissile" y="2.5" speed="4" missiles="2" start="mShow" out="mTaken" fill="#002c00" frame="#000000" cx="91.77083333333334" cz="111.42361111111111" angle="225" />
   <set designer="Ryan S. &lt;Seven&gt; sommersl@destiny.esd105.wednet.edu" information="Thpppt!" />
-  <SkyColor fill="#7a1979" frame="#ffd7ff" />
-  <GroundColor fill="#004142" />
+  <SkyColor fill="#7b1979" frame="#ffd8ff" />
+  <GroundColor fill="#004242" />
   <set gravity=".25" maxStartGrenades="0" maxStartMissiles="1" defaultLives="5" missilePower="24" missileAcceleration="0.5" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
   <Goody shape="bspMissile" y="2.5" speed="4" missiles="2" start="mShow" out="mTaken" fill="#002c00" frame="#000000" cx="58.50694444444444" cz="111.14583333333334" angle="225" />
   <set wallYon=".001" />
-  <Wall fill="#005300" frame="#007fff" x="111.28472222222223" z="111.07638888888889" w="9.236111111111114" d="47.0138888888889" h="22.5" />
+  <Wall fill="#005400" frame="#0080ff" x="111.28472222222223" z="111.07638888888889" w="9.236111111111114" d="47.0138888888889" h="22.5" />
   <set wallYon=".001" />
-  <Wall fill="#005300" frame="#007fff" x="41.28472222222223" z="111.28472222222223" w="9.236111111111107" d="47.0138888888889" h="22.5" />
+  <Wall fill="#005400" frame="#0080ff" x="41.28472222222223" z="111.28472222222223" w="9.236111111111107" d="47.0138888888889" h="22.5" />
   <Incarnator y="11" cx="53.26388888888889" cz="103.95833333333334" angle="180" />
   <Incarnator y="11" cx="96.59722222222223" cz="118.40277777777777" angle="0" />
   <Incarnator y="11" cx="96.18055555555556" cz="104.02777777777777" angle="180" />

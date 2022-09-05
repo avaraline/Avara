@@ -8,46 +8,46 @@
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fefb00" cx="78.68055555555556" cz="72.70833333333334" angle="180" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fffb00" cx="78.68055555555556" cz="72.70833333333334" angle="180" />
   <Timer in="mSwitch" out="mShow2" wait="missDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fefb00" cx="78.68055555555556" cz="72.70833333333334" angle="180" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fffb00" cx="78.68055555555556" cz="72.70833333333334" angle="180" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#e62000" frame="#fefb00" cx="90.55555555555556" cz="65.97222222222223" angle="120" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#e62100" frame="#fffb00" cx="90.55555555555556" cz="65.97222222222223" angle="120" />
   <Timer in="mSwitch" out="mShow2" wait="missDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#e62000" frame="#fefb00" cx="90.55555555555556" cz="65.97222222222223" angle="120" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#e62100" frame="#fffb00" cx="90.55555555555556" cz="65.97222222222223" angle="120" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fefb00" cx="66.18055555555556" cz="65.55555555555556" angle="240" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fffb00" cx="66.18055555555556" cz="65.55555555555556" angle="240" />
   <Timer in="mSwitch" out="mShow2" wait="missDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fefb00" cx="66.18055555555556" cz="65.55555555555556" angle="240" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fffb00" cx="66.18055555555556" cz="65.55555555555556" angle="240" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fefb00" cx="66.11111111111111" cz="51.875" angle="300" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fffb00" cx="66.11111111111111" cz="51.875" angle="300" />
   <Timer in="mSwitch" out="mShow2" wait="missDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fefb00" cx="66.11111111111111" cz="51.875" angle="300" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fffb00" cx="66.11111111111111" cz="51.875" angle="300" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fefb40" cx="90.55555555555556" cz="51.31944444444445" angle="60" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fffc41" cx="90.55555555555556" cz="51.31944444444445" angle="60" />
   <Timer in="mSwitch" out="mShow2" wait="missDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fefb40" cx="90.55555555555556" cz="51.31944444444445" angle="60" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fffc41" cx="90.55555555555556" cz="51.31944444444445" angle="60" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="grenDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fefb40" cx="78.68055555555556" cz="44.583333333333336" angle="0" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow1" out="mSwitch" fill="#ff2600" frame="#fffc41" cx="78.68055555555556" cz="44.583333333333336" angle="0" />
   <Timer in="mSwitch" out="mShow2" wait="missDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fefb40" cx="78.68055555555556" cz="44.583333333333336" angle="0" />
-  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#fefb00" frame="#000000" cx="78.68055555555556" cz="44.583333333333336" angle="0" x="78.61111111111111" z="58.54166666666667" w="11.25" d="11.25" h="0" />
-  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff7d78" frame="#000000" cx="78.68055555555556" cz="44.583333333333336" angle="0" x="78.61111111111111" z="58.54166666666667" w="11.25" d="11.25" h="0" y="0" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow2" out="mTaken1" fill="#ff2600" frame="#fffc41" cx="78.68055555555556" cz="44.583333333333336" angle="0" />
+  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#fffb00" frame="#000000" cx="78.68055555555556" cz="44.583333333333336" angle="0" x="78.61111111111111" z="58.54166666666667" w="11.25" d="11.25" h="0" />
+  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff7e79" frame="#000000" cx="78.68055555555556" cz="44.583333333333336" angle="0" x="78.61111111111111" z="58.54166666666667" w="11.25" d="11.25" h="0" y="0" />
   <Field deltaY="0" mask="T6" stop="@sixteen" start="@fifteen" enter="@team6" fill="#00d5ff" frame="#000000" cx="78.68055555555556" cz="44.583333333333336" angle="0" x="78.61111111111111" z="58.54166666666667" w="11.25" d="11.25" h="0" y="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="0" wallHeight="0" wallYon="40" />
   <Wall fill="#000000" frame="#000000" x="78.61111111111111" z="58.54166666666667" w="11.25" d="11.25" h="0" />
-  <SkyColor fill="#ba1800" frame="#ffd300" />
-  <GroundColor fill="#aa7941" />
+  <SkyColor fill="#bb1800" frame="#ffd300" />
+  <GroundColor fill="#aa7942" />
   <Incarnator y="startY" cx="59.513888888888886" cz="27.708333333333336" angle="330" />
   <Incarnator y="startY" cx="59.79166666666667" cz="90.625" angle="210" />
   <Incarnator y="startY" cx="115.625" cz="58.54166666666667" angle="90" />
@@ -150,8 +150,8 @@ go!" cx="12.5" cz="397.36111111111114" r="2.569444444444457" />
   <Walker team="1" defaultLives="0" cx="61.80555555555556" cz="396.31944444444446" angle="225" />
   <Walker team="1" defaultLives="0" cx="61.80555555555556" cz="396.31944444444446" angle="225" />
   <Walker team="1" defaultLives="0" cx="61.80555555555556" cz="396.31944444444446" angle="225" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff7d78" frame="#000000" x="127.7777777777778" z="515.2083333333334" w="2.7777777777777857" d="1.5277777777778283" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#fefb40" frame="#000000" x="102.36111111111111" z="515.4861111111111" w="2.7777777777777715" d="1.5277777777777146" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff7e79" frame="#000000" x="127.7777777777778" z="515.2083333333334" w="2.7777777777777857" d="1.5277777777778283" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#fffc41" frame="#000000" x="102.36111111111111" z="515.4861111111111" w="2.7777777777777715" d="1.5277777777777146" h="2" />
   <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00d5ff" frame="#000000" x="115.27777777777779" z="515.4166666666667" w="2.7777777777777715" d="1.5277777777777146" h="2" />
   <Walker lives="kDefaultLives" team="6" y="startY" cx="111.35416666666667" cz="67.46527777777777" angle="125" />
   <Walker lives="kDefaultLives" team="6" y="startY" cx="99.47916666666667" cz="82.95138888888889" angle="135" />

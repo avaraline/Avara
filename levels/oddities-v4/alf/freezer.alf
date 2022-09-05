@@ -11,14 +11,14 @@
   <Incarnator cx="10.555555555555555" cz="34.51388888888889" angle="270" />
   <set information="Entering the freezer temporarily excludes you from the game.
 There are two separate areas in the level." />
-  <SkyColor fill="#898989" frame="#73fdff" />
+  <SkyColor fill="#8a8a8a" frame="#73fdff" />
   <GroundColor fill="#a8d6ff" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00eb00" frame="#000000" cx="34.93055555555556" cz="67.70833333333334" angle="45" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="34.93055555555556" cz="67.70833333333334" angle="45" />
   <Sound sound="snArcticWind" loopCount="-1" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
-  <Teleporter group="@recenterA" y="10" start="0" fill="#ab2fd5" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
-  <Teleporter destGroup="@recenterB" y="25" activeRange="38" deadRange="35" yon="0.01" fill="#ab2fd5" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
+  <Teleporter group="@recenterA" y="10" start="0" fill="#ab30d6" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
+  <Teleporter destGroup="@recenterB" y="25" activeRange="38" deadRange="35" yon="0.01" fill="#ab30d6" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
   <unique vars="mStop" />
-  <Teleporter shape="0" y="freezerHeight" activeRange="2" start="@melt" stop="mStop" destGroup="@recenterA" fill="#ab2fd5" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
+  <Teleporter shape="0" y="freezerHeight" activeRange="2" start="@melt" stop="mStop" destGroup="@recenterA" fill="#ab30d6" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
   <Timer in="@melt" wait="3" out="mStop" />
   <WallDoor stepOnMsg="@freeze" open="@freeze" didOpen="@frozen" close="@melt" deltaY="freezerHeight" guardDelay="1" fill="#a8d6ff" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="3.75" d="3.75" h="0.5" />
   <set baseHeight="freezerHeight" />

@@ -3,9 +3,9 @@
 The switch controls whether falls are deadly.
 Missiles are faster & more powerful.
 Oh, and the switch sometimes gets flipped automatically." />
-  <SkyColor verticalRangeMax="2000" n="15" fill="#004142" frame="#007879" />
-  <GroundColor fill="#00a7a9" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#00eb00" frame="#000000" cx="7.5" cz="25.833333333333336" angle="45" />
+  <SkyColor verticalRangeMax="2000" n="15" fill="#004242" frame="#007879" />
+  <GroundColor fill="#00a8aa" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#00ec00" frame="#000000" cx="7.5" cz="25.833333333333336" angle="45" />
   <set baseHeight="StripAH" />
   <Wall fill="#c7c7c7" frame="#000000" x="35" z="32.083333333333336" w="60" d="5" h="0" />
   <Wall fill="#a8d6ff" frame="#000000" x="35" z="39.583333333333336" w="5" d="5" h="0" />
@@ -37,7 +37,7 @@ Oh, and the switch sometimes gets flipped automatically." />
   <set baseHeight="StripBH" />
   <Wall fill="#f1f1f1" frame="#000000" x="42.5" z="39.583333333333336" w="5" d="60" h="0" />
   <Field deltaY="0" deltaZ="1" fill="#f1f1f1" frame="#000000" cx="63.125" cz="47.083333333333336" angle="135" x="27.5" z="7.083333333333334" w="5" d="5" h="4.5" />
-  <WallDoor open="@die" close="@reset" didOpen="@reset" deltaY="-StripSep + StripThick" shotPower="10" openDelay="5" openSpeed="15" closeSpeed="30" guardDelay="0" openSound="0" closeSound="0" stopSound="0" fill="#75d5ff" frame="#000000" x="75.06944444444444" z="76.73611111111111" w="5" d="60" h="0" />
+  <WallDoor open="@die" close="@reset" didOpen="@reset" deltaY="-StripSep + StripThick" shotPower="10" openDelay="5" openSpeed="15" closeSpeed="30" guardDelay="0" openSound="0" closeSound="0" stopSound="0" fill="#76d6ff" frame="#000000" x="75.06944444444444" z="76.73611111111111" w="5" d="60" h="0" />
   <Wall fill="#f1f1f1" frame="#000000" x="27.5" z="39.583333333333336" w="5" d="60" h="0" />
   <Incarnator cx="27.569444444444446" cz="62.08333333333334" angle="180" />
   <Teleporter shape="0" start="0" fill="#a8d6ff" frame="#000000" cx="27.569444444444446" cz="62.08333333333334" angle="180" />
@@ -63,12 +63,12 @@ Oh, and the switch sometimes gets flipped automatically." />
   <Goody shape="bspGoody" y="1.5" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mG" sound="0" fill="#c7c7c7" frame="#000000" cx="27.5" cz="67.70833333333334" angle="135" />
   <Field deltaY="0" deltaZ="-1" fill="#f1f1f1" frame="#000000" cx="27.5" cz="67.70833333333334" angle="135" x="27.5" z="72.08333333333334" w="5" d="5" h="4.5" />
   <set baseHeight="0" />
-  <Teleporter yon="0.01" y="StripBH + 10" activeRange="1000" deadRange="45" shape="0" start="@deadlyON" stop="@deadlyOFF" out="@die" status="true" destGroup="@killer" group="-1" fill="#00eb00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
-  <Teleporter yon="0.01" y="StripBH + 10" activeRange="1000" deadRange="45" shape="0" start="@deadlyOFF" stop="@deadlyON" destGroup="@killer" group="-1" fill="#00eb00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
-  <Switch shape="bspSwitchOff" out.0="@deadlyON" out.1="@deadlyOFF" y="StripBH + StripSep" blastToggle="2" targetGroup="targ1" fill="#00eb00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
-  <Guard watch="targ1" y="StripBH + 50" shotPower="3" freq="20 * 15" fill="#00eb00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
-  <Teleporter group="@killer" start="0" y="StripAH" fill="#00eb00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
-  <Teleporter group="@killer" start="0" y="StripBH" fill="#00eb00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
+  <Teleporter yon="0.01" y="StripBH + 10" activeRange="1000" deadRange="45" shape="0" start="@deadlyON" stop="@deadlyOFF" out="@die" status="true" destGroup="@killer" group="-1" fill="#00ec00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
+  <Teleporter yon="0.01" y="StripBH + 10" activeRange="1000" deadRange="45" shape="0" start="@deadlyOFF" stop="@deadlyON" destGroup="@killer" group="-1" fill="#00ec00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
+  <Switch shape="bspSwitchOff" out.0="@deadlyON" out.1="@deadlyOFF" y="StripBH + StripSep" blastToggle="2" targetGroup="targ1" fill="#00ec00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
+  <Guard watch="targ1" y="StripBH + 50" shotPower="3" freq="20 * 15" fill="#00ec00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
+  <Teleporter group="@killer" start="0" y="StripAH" fill="#00ec00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
+  <Teleporter group="@killer" start="0" y="StripBH" fill="#00ec00" frame="#000000" cx="35" cz="39.583333333333336" angle="45" />
   <Text showEveryone="true" in="@deadlyON" text="Falls are now deadly." cx="35" cz="39.583333333333336" r="1.875" />
   <Text showEveryone="true" in="@deadlyOFF" text="Falls are now safe." cx="35" cz="39.583333333333336" r="1.875" />
 </map>

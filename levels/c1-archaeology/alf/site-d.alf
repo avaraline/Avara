@@ -4,7 +4,7 @@
   <set designer="Lord Anon III" information="an isolated area that is only of interest
 because it apears to be untouched by the war. there 
 is a dome of unknown origin in the center of the area." />
-  <Dome fill="#898989" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" r="5" angle="0" quarters="4" />
+  <Dome fill="#8a8a8a" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" r="5" angle="0" quarters="4" />
   <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff7c00" frame="#000000" cx="10.694444444444445" cz="30.069444444444443" angle="225" />
   <Goal goalMsg="@m" shape="bspMushroom" group="1" fill="#ff7c00" frame="#000000" cx="13.194444444444445" cz="25.069444444444446" angle="225" />
   <Goal goalMsg="@g" shape="bspMushroom" group="1" fill="#ff7c00" frame="#000000" cx="16.944444444444446" cz="21.319444444444446" angle="225" />
@@ -51,6 +51,6 @@ is a dome of unknown origin in the center of the area." />
   <Incarnator cx="4.444444444444445" cz="10.069444444444445" angle="315" />
   <Incarnator cx="70.69444444444444" cz="7.569444444444445" angle="45" />
   <Incarnator cx="69.44444444444444" cz="80.69444444444444" angle="135" />
-  <Goody start="@m" stop="@g" shape="bspMissile" missiles="1" y="7" fill="#fefb00" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" angle="225" />
-  <Goody start="@g" stop="@m" shape="bspGrenade" grenades="1" y="7" fill="#fefb00" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" angle="225" />
+  <Goody start="@m" stop="@g" shape="bspMissile" missiles="1" y="7" fill="#fffb00" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" angle="225" />
+  <Goody start="@g" stop="@m" shape="bspGrenade" grenades="1" y="7" fill="#fffb00" frame="#000000" cx="40.06944444444444" cz="46.31944444444444" angle="225" />
 </map>

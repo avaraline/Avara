@@ -3,8 +3,8 @@
 level.  Select a HECTOR wisely...." defaultLives="3" maxStartGrenades="0" maxStartMissiles="9" startY="9" />
   <set grenDelay="250" numGren="0" />
   <set missDelay="250" numMiss="4" />
-  <SkyColor fill="#73fdff" frame="#407879" />
-  <GroundColor fill="#000e68" />
+  <SkyColor fill="#73fdff" frame="#407979" />
+  <GroundColor fill="#010e68" />
   <Incarnator y="startY" cx="43.75" cz="21.041666666666668" angle="0" />
   <Teleporter shape="0" y="200" win="1200" start="@winTeam" activeRange="2000" fill="#007600" frame="#000000" cx="72.8125" cz="14.756944444444446" angle="225" />
   <Teleporter group="@center" y="2 * startY" activeRange="2000" deadRange="48" destGroup="@recenter" shape="0" fill="#000000" frame="#000000" cx="43.611111111111114" cz="47.8125" angle="0" />
@@ -34,7 +34,7 @@ level.  Select a HECTOR wisely...." defaultLives="3" maxStartGrenades="0" maxSta
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce3" frame="#000000" cx="79.51388888888889" cz="26.38888888888889" angle="60" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce4" frame="#000000" cx="79.51388888888889" cz="26.38888888888889" angle="60" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
@@ -42,7 +42,7 @@ level.  Select a HECTOR wisely...." defaultLives="3" maxStartGrenades="0" maxSta
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce3" frame="#000000" cx="53.54166666666667" cz="42.01388888888889" angle="60" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce4" frame="#000000" cx="53.54166666666667" cz="42.01388888888889" angle="60" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
@@ -60,10 +60,10 @@ level.  Select a HECTOR wisely...." defaultLives="3" maxStartGrenades="0" maxSta
   <Timer in="mTaken" out="mShow" wait="missDelay" />
   <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="34.375" cz="42.29166666666667" angle="300" />
   <TeamColor mask="T1" fill="#009600" frame="#009600" cx="86.94444444444444" cz="2.8472222222222223" r="1.9444444444444446" angle="315" />
-  <TeamColor mask="T2" fill="#fefb00" frame="#fefb00" cx="86.94444444444444" cz="5.972222222222222" r="1.9444444444444446" angle="315" />
-  <TeamColor mask="T3" fill="#e62000" frame="#e62000" cx="86.94444444444444" cz="9.097222222222223" r="1.944444444444445" angle="315" />
-  <TeamColor mask="T4" fill="#00abff" frame="#00abff" cx="86.94444444444444" cz="12.222222222222223" r="1.9444444444444446" angle="315" />
-  <TeamColor mask="T5" fill="#ab2fd5" frame="#ab2fd5" cx="86.94444444444444" cz="15.347222222222223" r="1.9444444444444446" angle="315" />
+  <TeamColor mask="T2" fill="#fffb00" frame="#fffb00" cx="86.94444444444444" cz="5.972222222222222" r="1.9444444444444446" angle="315" />
+  <TeamColor mask="T3" fill="#e62100" frame="#e62100" cx="86.94444444444444" cz="9.097222222222223" r="1.944444444444445" angle="315" />
+  <TeamColor mask="T4" fill="#00acff" frame="#00acff" cx="86.94444444444444" cz="12.222222222222223" r="1.9444444444444446" angle="315" />
+  <TeamColor mask="T5" fill="#ab30d6" frame="#ab30d6" cx="86.94444444444444" cz="15.347222222222223" r="1.9444444444444446" angle="315" />
   <TeamColor mask="T6" fill="#ff32a9" frame="#ff32a9" cx="87.01388888888889" cz="18.47222222222222" r="1.94444444444445" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />

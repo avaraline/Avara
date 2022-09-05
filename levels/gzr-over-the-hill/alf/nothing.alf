@@ -1,8 +1,8 @@
 <map>
   <set designer="Cowboy &lt;jmcald@destiny.esd105.wednet.edu&gt;" information="Scripting by Hybrid. Minimum requirements for a game - renders very fast. Teams must be red, blue or yellow.  Up to 3 people on one team. First team to reach 100 seconds in the center square wins." missilePower="1.8" missileAcceleration="0.3" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" snYeeha="0" kADelay="2" kDefaultLives="300" kSnText="snTextBlip" kTextVolume="0.3" />
   <Field deltaY="0" mask="T6" stop="@sixteen" start="@fifteen" enter="@team6" fill="#00d5ff" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" y="0" />
-  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#fefb00" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" />
-  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff7d78" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" y="0" />
+  <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#fffb00" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" />
+  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff7e79" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" y="0" />
   <Walker lives="kDefaultLives" team="3" y="30" cx="38.22916666666667" cz="89.13194444444446" angle="225" />
   <Walker lives="kDefaultLives" team="3" y="30" cx="45.798611111111114" cz="96.35416666666667" angle="225" />
   <Walker lives="kDefaultLives" team="3" y="30" cx="53.090277777777786" cz="104.20138888888889" angle="225" />
@@ -16,9 +16,9 @@
   <Wall fill="#000000" frame="#000000" x="76.04166666666667" z="66.04166666666667" w="13.75" d="13.75" h="0" y="0" />
   <Timer in="@switchammo1" out="@makeammo2" wait="75" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="@makeammo2" out="@switchagain1" fill="#ff7c00" frame="#000000" cx="71.66666666666667" cz="61.66666666666667" angle="225" />
-  <Teleporter group="@center" y="18" activeRange="230" deadRange="75" destGroup="@recenter" shape="0" fill="#fefb40" frame="#fefb40" cx="76.04166666666667" cz="66.07638888888889" angle="90" />
-  <Teleporter y="9" group="@recenter" shape="0" speed="0" fill="#fefb40" frame="#fefb40" cx="76.04166666666667" cz="66.07638888888889" angle="90" />
-  <SkyColor fill="#fefb00" frame="#00d5ff" />
+  <Teleporter group="@center" y="18" activeRange="230" deadRange="75" destGroup="@recenter" shape="0" fill="#fffc41" frame="#fffc41" cx="76.04166666666667" cz="66.07638888888889" angle="90" />
+  <Teleporter y="9" group="@recenter" shape="0" speed="0" fill="#fffc41" frame="#fffc41" cx="76.04166666666667" cz="66.07638888888889" angle="90" />
+  <SkyColor fill="#fffb00" frame="#00d5ff" />
   <GroundColor fill="#c7c7c7" />
   <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" cx="62.60416666666667" cz="37.95138888888889" angle="225" />
   <Timer in.0="@start" in.1="@fifteen" wait="15" out.0="@fifteen" />
@@ -114,9 +114,9 @@ go!" cx="10.347222222222223" cz="378.61111111111114" r="2.569444444444457" />
   <Walker team="1" defaultLives="0" cx="59.652777777777786" cz="377.56944444444446" angle="225" />
   <Walker team="1" defaultLives="0" cx="59.652777777777786" cz="377.56944444444446" angle="225" />
   <Walker team="1" defaultLives="0" cx="59.652777777777786" cz="377.56944444444446" angle="225" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff7d78" frame="#000000" x="125.55555555555557" z="496.3888888888889" w="2.7777777777777857" d="1.5277777777777715" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff7e79" frame="#000000" x="125.55555555555557" z="496.3888888888889" w="2.7777777777777857" d="1.5277777777777715" h="2" />
   <Incarnator y="9" cx="33.54166666666667" cz="66.25" angle="270" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#fefb40" frame="#000000" x="100.13888888888889" z="496.6666666666667" w="2.7777777777777857" d="1.5277777777778283" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#fffc41" frame="#000000" x="100.13888888888889" z="496.6666666666667" w="2.7777777777777857" d="1.5277777777778283" h="2" />
   <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team6" didOpen="@add1Blue" close="@blueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00d5ff" frame="#000000" x="113.05555555555556" z="496.5972222222223" w="2.7777777777777715" d="1.5277777777777715" h="2" />
   <Incarnator y="9" cx="76.31944444444446" cz="108.33333333333334" angle="180" />
   <Incarnator y="9" cx="118.68055555555556" cz="66.04166666666667" angle="90" />

@@ -1,8 +1,8 @@
 <map>
   <set designer="mantis  -  
 derek@leapnet.com" information="icebox" />
-  <SkyColor fill="#007fff" frame="#0048a9" />
-  <GroundColor fill="#000e68" />
+  <SkyColor fill="#0080ff" frame="#0048aa" />
+  <GroundColor fill="#010e68" />
   <Incarnator y="30" cx="79.23611111111111" cz="79.23611111111111" angle="135" />
   <Incarnator y="30" cx="39.583333333333336" cz="79.23611111111111" angle="225" />
   <Incarnator y="30" cx="39.44444444444444" cz="39.30555555555556" angle="325" />
@@ -10,18 +10,18 @@ derek@leapnet.com" information="icebox" />
   <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#009600" frame="#000000" cx="60.486111111111114" cz="59.236111111111114" angle="225" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#009600" frame="#000000" cx="60.486111111111114" cz="59.236111111111114" angle="225" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#009600" frame="#000000" cx="60.486111111111114" cz="59.236111111111114" angle="225" />
-  <Wall fill="#407fff" frame="#407fff" x="20.48611111111111" z="20.48611111111111" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3dabff" frame="#407fff" x="59.236111111111114" z="105.48611111111111" w="85" d="7.5" h="12" />
-  <Wall fill="#3dabff" frame="#407fff" x="59.236111111111114" z="12.98611111111111" w="85" d="7.5" h="12" />
-  <Wall fill="#3dabff" frame="#407fff" x="105.48611111111111" z="59.236111111111114" w="7.5" d="85" h="12" />
-  <Wall fill="#3dabff" frame="#407fff" x="12.98611111111111" z="59.236111111111114" w="7.5" d="85" h="12" />
-  <Wall fill="#407fff" frame="#407fff" x="97.98611111111111" z="20.48611111111111" w="7.5" d="7.5" h="3" />
-  <Wall fill="#407fff" frame="#407fff" x="97.98611111111111" z="97.98611111111111" w="7.5" d="7.5" h="3" />
-  <Wall fill="#407fff" frame="#407fff" x="20.48611111111111" z="97.98611111111111" w="7.5" d="7.5" h="3" />
-  <Wall fill="#407fff" frame="#407fff" x="12.98611111111111" z="12.98611111111111" w="7.5" d="7.5" h="25" />
-  <Wall fill="#407fff" frame="#407fff" x="105.48611111111111" z="12.98611111111111" w="7.5" d="7.5" h="25" />
-  <Wall fill="#407fff" frame="#407fff" x="105.48611111111111" z="105.48611111111111" w="7.5" d="7.5" h="25" />
-  <Wall fill="#407fff" frame="#407fff" x="12.98611111111111" z="105.48611111111111" w="7.5" d="7.5" h="25" />
+  <Wall fill="#4180ff" frame="#4180ff" x="20.48611111111111" z="20.48611111111111" w="7.5" d="7.5" h="3" />
+  <Wall fill="#3dacff" frame="#4180ff" x="59.236111111111114" z="105.48611111111111" w="85" d="7.5" h="12" />
+  <Wall fill="#3dacff" frame="#4180ff" x="59.236111111111114" z="12.98611111111111" w="85" d="7.5" h="12" />
+  <Wall fill="#3dacff" frame="#4180ff" x="105.48611111111111" z="59.236111111111114" w="7.5" d="85" h="12" />
+  <Wall fill="#3dacff" frame="#4180ff" x="12.98611111111111" z="59.236111111111114" w="7.5" d="85" h="12" />
+  <Wall fill="#4180ff" frame="#4180ff" x="97.98611111111111" z="20.48611111111111" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#4180ff" x="97.98611111111111" z="97.98611111111111" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#4180ff" x="20.48611111111111" z="97.98611111111111" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#4180ff" x="12.98611111111111" z="12.98611111111111" w="7.5" d="7.5" h="25" />
+  <Wall fill="#4180ff" frame="#4180ff" x="105.48611111111111" z="12.98611111111111" w="7.5" d="7.5" h="25" />
+  <Wall fill="#4180ff" frame="#4180ff" x="105.48611111111111" z="105.48611111111111" w="7.5" d="7.5" h="25" />
+  <Wall fill="#4180ff" frame="#4180ff" x="12.98611111111111" z="105.48611111111111" w="7.5" d="7.5" h="25" />
   <FreeSolid shape="bspW1x1" shotPower="10" mass="20" fill="#a8d6ff" frame="#000000" cx="29.236111111111114" cz="29.236111111111114" angle="0" />
   <FreeSolid shape="bspW1x1" shotPower="10" mass="20" fill="#a8d6ff" frame="#000000" cx="29.236111111111114" cz="39.236111111111114" angle="0" />
   <FreeSolid shape="bspW1x1" shotPower="10" mass="20" fill="#a8d6ff" frame="#000000" cx="29.236111111111114" cz="49.236111111111114" angle="0" />
@@ -59,17 +59,17 @@ derek@leapnet.com" information="icebox" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="20.48611111111111" cz="96.73611111111111" angle="225" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="20.48611111111111" cz="96.73611111111111" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="97.98611111111111" cz="19.86111111111111" angle="225" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="97.98611111111111" cz="19.86111111111111" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="97.98611111111111" cz="97.36111111111111" angle="225" />
+  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="97.98611111111111" cz="97.36111111111111" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="20.48611111111111" cz="20.48611111111111" angle="225" />
+  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="20.48611111111111" cz="20.48611111111111" angle="225" />
 </map>

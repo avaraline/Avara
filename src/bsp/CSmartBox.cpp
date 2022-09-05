@@ -11,6 +11,7 @@
 
 #include "Memory.h"
 #include "Resource.h"
+#include "AvaraGL.h"
 
 #define DIMEPSILON 16
 
@@ -167,7 +168,7 @@ void CSmartBox::ISmartBox(short resId,
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    UpdateOpenGLData();
+    AvaraGLUpdateData(this);
 }
 
 void CSmartBox::Dispose() {

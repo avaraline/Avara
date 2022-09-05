@@ -1,26 +1,26 @@
 <map>
   <Teleporter y="0" shape="0" group="@safety" fill="#ff2600" frame="#ff2600" cx="59.30555555555556" cz="59.236111111111114" angle="270" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#ba1800" frame="#000000" cx="59.30555555555556" cz="59.236111111111114" angle="270" x="99.20138888888889" z="59.236111111111114" w="4.652777777777786" d="24.72222222222223" h="3" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#bb1800" frame="#000000" cx="59.30555555555556" cz="59.236111111111114" angle="270" x="99.20138888888889" z="59.236111111111114" w="4.652777777777786" d="24.72222222222223" h="3" />
   <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="28 * 5" destGroup="@recenter" shape="0" fill="#ff32a9" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ff32a9" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ff32a9" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#000e68" frame="#ffd300" cx="79.86111111111111" cz="58.54166666666667" angle="225" x="79.23611111111111" z="59.16666666666667" w="10" d="10" h="3.5" />
-  <Wall fill="#000e68" frame="#00d5ff" x="79.23611111111111" z="59.16666666666667" w="10" d="10" h="0.5" y="3.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#000e68" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" x="59.236111111111114" z="59.16666666666667" w="4.722222222222221" d="24.72222222222223" h="3" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#ba1800" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" x="108.57638888888889" z="41.52777777777778" w="1.1805555555555571" d="25" h="3.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#ba1800" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" x="108.57638888888889" z="76.66666666666667" w="1.1805555555555571" d="25" h="3.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#010e68" frame="#ffd300" cx="79.86111111111111" cz="58.54166666666667" angle="225" x="79.23611111111111" z="59.16666666666667" w="10" d="10" h="3.5" />
+  <Wall fill="#010e68" frame="#00d5ff" x="79.23611111111111" z="59.16666666666667" w="10" d="10" h="0.5" y="3.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#010e68" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" x="59.236111111111114" z="59.16666666666667" w="4.722222222222221" d="24.72222222222223" h="3" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#bb1800" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" x="108.57638888888889" z="41.52777777777778" w="1.1805555555555571" d="25" h="3.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#bb1800" frame="#000000" cx="79.86111111111111" cz="58.54166666666667" angle="225" x="108.57638888888889" z="76.66666666666667" w="1.1805555555555571" d="25" h="3.5" />
   <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Illusion..." />
-  <SkyColor fill="#fefb00" frame="#00d5ff" />
-  <GroundColor fill="#007fff" />
+  <SkyColor fill="#fffb00" frame="#00d5ff" />
+  <GroundColor fill="#0080ff" />
   <set gravity="0.9" />
-  <Wall fill="#ba1800" frame="#012ce3" x="121.70138888888889" z="59.27083333333334" w="4.930555555555557" d="60.625" h="12" />
-  <Wall fill="#ba1800" frame="#012ce3" x="79.23611111111111" z="91.52777777777779" w="80" d="4.7222222222222285" h="12" />
-  <Wall fill="#000e68" frame="#012ce3" x="79.23611111111111" z="26.70138888888889" w="80" d="4.652777777777779" h="12" />
-  <Wall fill="#000e68" frame="#012ce3" x="36.84027777777778" z="59.13194444444444" w="4.791666666666671" d="60.34722222222222" h="12" />
-  <Ramp y="0" thickness="0" deltaY="4" fill="#000e68" frame="#ff2600" x="86.59722222222223" z="59.09722222222223" w="4.7222222222222285" d="10" h="0" angle="270" />
-  <Ramp y="0" thickness="0" deltaY="4" fill="#000e68" frame="#000000" x="79.23611111111111" z="51.80555555555556" w="10" d="4.722222222222221" h="0" angle="180" />
-  <Ramp y="0" thickness="0" deltaY="4" fill="#000e68" frame="#000000" x="79.23611111111111" z="66.52777777777777" w="10" d="4.722222222222214" h="0" angle="0" />
-  <Ramp y="0" thickness="0" deltaY="4" fill="#000e68" frame="#ff2600" x="71.84027777777777" z="59.16666666666667" w="4.791666666666671" d="10" h="0" angle="90" />
+  <Wall fill="#bb1800" frame="#012ce4" x="121.70138888888889" z="59.27083333333334" w="4.930555555555557" d="60.625" h="12" />
+  <Wall fill="#bb1800" frame="#012ce4" x="79.23611111111111" z="91.52777777777779" w="80" d="4.7222222222222285" h="12" />
+  <Wall fill="#010e68" frame="#012ce4" x="79.23611111111111" z="26.70138888888889" w="80" d="4.652777777777779" h="12" />
+  <Wall fill="#010e68" frame="#012ce4" x="36.84027777777778" z="59.13194444444444" w="4.791666666666671" d="60.34722222222222" h="12" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#010e68" frame="#ff2600" x="86.59722222222223" z="59.09722222222223" w="4.7222222222222285" d="10" h="0" angle="270" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#010e68" frame="#000000" x="79.23611111111111" z="51.80555555555556" w="10" d="4.722222222222221" h="0" angle="180" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#010e68" frame="#000000" x="79.23611111111111" z="66.52777777777777" w="10" d="4.722222222222214" h="0" angle="0" />
+  <Ramp y="0" thickness="0" deltaY="4" fill="#010e68" frame="#ff2600" x="71.84027777777777" z="59.16666666666667" w="4.791666666666671" d="10" h="0" angle="90" />
   <set grenadePower="1" missilePower="2" missileTurnRate="1" missileAcceleration="1" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#f1f1f1" frame="#f1f1f1" x="85.03472222222223" z="53.263888888888886" w="1.4583333333333286" d="1.5277777777777786" h="7" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#f1f1f1" frame="#f1f1f1" x="73.40277777777777" z="65" w="1.5277777777777857" d="1.5277777777777715" h="7" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
@@ -36,33 +36,33 @@
   <Wall fill="#002c00" frame="#000000" x="76.42361111111111" z="86.04166666666667" w="0.625" d="6.25" h="12" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#f1f1f1" frame="#f1f1f1" x="73.4375" z="53.333333333333336" w="1.4583333333333286" d="1.5277777777777715" h="7" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#f1f1f1" frame="#f1f1f1" x="85.03472222222223" z="65" w="1.4583333333333286" d="1.5277777777777715" h="7" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#000e68" frame="#000000" x="49.93055555555556" z="41.52777777777778" w="1.25" d="25" h="3.5" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#000e68" frame="#000000" x="49.93055555555556" z="76.66666666666667" w="1.25" d="25" h="3.5" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#010e68" frame="#000000" x="49.93055555555556" z="41.52777777777778" w="1.25" d="25" h="3.5" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#010e68" frame="#000000" x="49.93055555555556" z="76.66666666666667" w="1.25" d="25" h="3.5" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#f1f1f1" frame="#000000" x="116.73611111111111" z="34.895833333333336" w="5" d="0.625" h="12" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
   <Wall fill="#002c00" frame="#000000" x="113.92361111111111" z="32.083333333333336" w="0.625" d="6.25" h="12" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#f1f1f1" frame="#000000" x="116.73611111111111" z="83.36805555555556" w="5" d="0.625" h="12" cx="69.82638888888889" cz="59.58333333333333" angle="90" />
   <Wall fill="#002c00" frame="#000000" x="113.92361111111111" z="86.18055555555556" w="0.625" d="6.25" h="12" />
   <Incarnator y="0" cx="41.388888888888886" cz="86.90972222222223" angle="180" />
-  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048a9" frame="#000000" cx="41.388888888888886" cz="86.90972222222223" angle="180" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048aa" frame="#000000" cx="41.388888888888886" cz="86.90972222222223" angle="180" />
   <Incarnator y="0" cx="116.73611111111111" cz="31.25" angle="0" />
-  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048a9" frame="#000000" cx="116.73611111111111" cz="31.25" angle="0" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048aa" frame="#000000" cx="116.73611111111111" cz="31.25" angle="0" />
   <Incarnator y="0" cx="41.52777777777778" cz="31.180555555555557" angle="0" />
-  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048a9" frame="#000000" cx="41.52777777777778" cz="31.180555555555557" angle="0" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048aa" frame="#000000" cx="41.52777777777778" cz="31.180555555555557" angle="0" />
   <Incarnator y="0" cx="116.73611111111111" cz="86.90972222222223" angle="180" />
-  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048a9" frame="#000000" cx="116.73611111111111" cz="86.90972222222223" angle="180" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048aa" frame="#000000" cx="116.73611111111111" cz="86.90972222222223" angle="180" />
   <Incarnator y="0" cx="79.09722222222223" cz="86.90972222222223" angle="180" />
-  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048a9" frame="#000000" cx="79.09722222222223" cz="86.90972222222223" angle="180" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048aa" frame="#000000" cx="79.09722222222223" cz="86.90972222222223" angle="180" />
   <Incarnator y="0" cx="79.375" cz="31.25" angle="0" />
-  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048a9" frame="#000000" cx="79.375" cz="31.25" angle="0" />
+  <Teleporter y="3.5" shape="0" group="@safety" fill="#0048aa" frame="#000000" cx="79.375" cz="31.25" angle="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspGoody" y="2" boosters="5" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" angle="225" />
+  <Goody shape="bspGoody" y="2" boosters="5" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="75" />
-  <Goody shape="bspStandardPill" y="6" speed="16" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#feffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" angle="225" />
+  <Goody shape="bspStandardPill" y="6" speed="16" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="78.88888888888889" cz="58.47222222222222" angle="225" />
   <Teleporter y="0" shape="0" group="@safety" fill="#ff2600" frame="#ff2600" cx="99.16666666666667" cz="59.16666666666667" angle="90" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#ba1800" frame="#000000" x="79.23611111111111" z="77.29166666666667" w="30" d="1.25" h="3.5" cx="99.16666666666667" cz="59.16666666666667" angle="90" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#000e68" frame="#000000" x="79.23611111111111" z="41.04166666666667" w="30" d="1.25" h="3.5" cx="99.16666666666667" cz="59.16666666666667" angle="90" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#bb1800" frame="#000000" x="79.23611111111111" z="77.29166666666667" w="30" d="1.25" h="3.5" cx="99.16666666666667" cz="59.16666666666667" angle="90" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#010e68" frame="#000000" x="79.23611111111111" z="41.04166666666667" w="30" d="1.25" h="3.5" cx="99.16666666666667" cz="59.16666666666667" angle="90" />
 </map>

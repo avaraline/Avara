@@ -2,32 +2,32 @@
   <set designer="The Head" information="A fast rendering, fast playing level. Now with random incarnators and more lives." defaultLives="5" missilePower="1.8" missileAcceleration="0.3" startY="9" />
   <set grenDelay="250" numGren="6" />
   <set missDelay="250" numMiss="4" />
-  <SkyColor fill="#fefb40" frame="#ff7c00" />
-  <GroundColor fill="#d6a700" />
+  <SkyColor fill="#fffc41" frame="#ff7c00" />
+  <GroundColor fill="#d6a800" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fefb00" cx="47.986111111111114" cz="55.486111111111114" angle="180" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fffb00" cx="47.986111111111114" cz="55.486111111111114" angle="180" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fefb00" cx="37.986111111111114" cz="49.861111111111114" angle="240" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fffb00" cx="37.986111111111114" cz="49.861111111111114" angle="240" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#e62000" frame="#fefb00" cx="57.708333333333336" cz="50.06944444444445" angle="120" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#e62100" frame="#fffb00" cx="57.708333333333336" cz="50.06944444444445" angle="120" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce3" frame="#000000" cx="84.02777777777779" cz="23.333333333333336" angle="60" />
+  <Goody shape="bspMissile" y="2" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce4" frame="#000000" cx="84.02777777777779" cz="23.333333333333336" angle="60" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fefb40" cx="47.91666666666667" cz="32.91666666666667" angle="0" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fffc41" cx="47.91666666666667" cz="32.91666666666667" angle="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fefb00" cx="38.05555555555556" cz="38.54166666666667" angle="300" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fffb00" cx="38.05555555555556" cz="38.54166666666667" angle="300" />
   <Incarnator y="startY" start="@four" stop="@five" cx="48.19444444444444" cz="17.98611111111111" angle="0" />
   <Incarnator y="startY" start="@zero" stop="@one" cx="25.34722222222222" cz="57.638888888888886" angle="240" />
   <Incarnator y="startY" start="@two" stop="@three" cx="70.97222222222223" cz="57.986111111111114" angle="120" />
@@ -62,7 +62,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fefb40" cx="57.708333333333336" cz="38.333333333333336" angle="60" />
+  <Goody shape="bspGrenade" y="2" grenades="numGren" start="mShow" out="mTaken" fill="#ff2600" frame="#fffc41" cx="57.708333333333336" cz="38.333333333333336" angle="60" />
   <And in="@start" out="@time" />
   <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" out="@time" />
   <Timer in="@time" out="@whoop" wait="1" />
@@ -73,5 +73,5 @@
   <Distributor in="@whoop" out.0="@zero" out.1="@one" />
   <unique vars="mShow" />
   <Base in="@start" out="mShow" cx="47.91666666666667" cz="44.375" />
-  <Goody shape="5560" scale="3" yon="50" sound="0" y=".001" speed="2" grenades="0" start="mShow" out="mShow" fill="#feffff" frame="#000000" cx="47.91666666666667" cz="44.375" angle="90" />
+  <Goody shape="5560" scale="3" yon="50" sound="0" y=".001" speed="2" grenades="0" start="mShow" out="mShow" fill="#ffffff" frame="#000000" cx="47.91666666666667" cz="44.375" angle="90" />
 </map>

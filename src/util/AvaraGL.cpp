@@ -3,6 +3,7 @@
 #include "Resource.h"
 #include "CViewParameters.h"
 #include "RGBAColor.h"
+#include "CBSPPart.h"
 
 #include <fstream>
 #include <iostream>
@@ -23,7 +24,7 @@ bool actuallyRender = true;
 bool ready = false;
 
 glm::mat4 proj;
-const float near_dist = .1f;
+const float near_dist = .099f;
 const float far_dist = 1000.0f;
 
 float current_fov = 60.0f;
@@ -300,7 +301,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
-    glFrontFace(GL_CW);
+    glFrontFace(GL_CCW);
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
     glCheckErrors();
@@ -328,6 +329,34 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glBindBuffer(GL_ARRAY_BUFFER, NULL);
     glCheckErrors();
 
+}
+
+void AvaraGLUpdateData(CBSPPart *part) {
+    if (!AvaraGLIsRendering()) return;
+    part->glDataSize = part->totalPoints * sizeof(GLData);
+    part->glData = (GLData *)NewPtr(part->glDataSize);
+
+    glGenVertexArrays(1, &part->vertexArray);
+    glGenBuffers(1, &part->vertexBuffer);
+
+    PolyRecord *poly;
+    float scale = 1.0; // ToFloat(currentView->screenScale);
+    int p = 0;
+    for (int i = 0; i < part->polyCount; i++) {
+        poly = &part->polyTable[i];
+        for (int v = 0; v < poly->triCount * 3; v++) {
+            Vector *pt = &part->pointTable[poly->triPoints[v]];
+            part->glData[p].x = ToFloat((*pt)[0]);
+            part->glData[p].y = ToFloat((*pt)[1]);
+            part->glData[p].z = ToFloat((*pt)[2]);
+            LongToRGBA(poly->color, &part->glData[p].r, 3);
+
+            part->glData[p].nx = poly->normal[0];
+            part->glData[p].ny = poly->normal[1];
+            part->glData[p].nz = poly->normal[2];
+            p++;
+        }
+    }
 }
 
 

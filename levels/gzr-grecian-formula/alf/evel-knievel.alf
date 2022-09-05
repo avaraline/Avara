@@ -1,16 +1,16 @@
 <map>
-  <Ramp y="0" thickness="0.1" deltaY="1.1" fill="#898989" frame="#000000" x="38.50694444444444" z="42.986111111111114" w="9.375" d="5" h="0" angle="90" />
-  <Ramp y="3" thickness="0.1" deltaY="5" fill="#898989" frame="#000000" x="53.19444444444445" z="42.986111111111114" w="6.25" d="5" h="0" angle="90" />
-  <Ramp y="0" thickness="0.1" deltaY="1.1" fill="#898989" frame="#000000" x="70.41666666666667" z="11.145833333333334" w="5" d="9.375" h="0" angle="180" />
-  <Ramp y="3" thickness="0.1" deltaY="5" fill="#898989" frame="#000000" x="70.41666666666667" z="25.833333333333336" w="5" d="6.25" h="0" angle="180" />
-  <Ramp y="1" thickness="0.1" deltaY="2.1" fill="#898989" frame="#000000" x="46.63194444444444" z="42.986111111111114" w="6.875" d="5" h="0" angle="90" />
-  <Ramp y="0" thickness="0.1" deltaY="1.1" fill="#898989" frame="#000000" x="103.33333333333334" z="42.986111111111114" w="6.25" d="5" h="0" angle="270" />
-  <Ramp y="1" thickness="0.1" deltaY="2.1" fill="#898989" frame="#000000" x="96.77083333333334" z="42.986111111111114" w="6.875" d="5" h="0" angle="270" />
-  <Ramp y="3" thickness="0.1" deltaY="5" fill="#898989" frame="#000000" x="88.64583333333334" z="42.986111111111114" w="9.375" d="5" h="0" angle="270" />
-  <Ramp y="1" thickness="0.1" deltaY="2.1" fill="#898989" frame="#000000" x="70.41666666666667" z="19.270833333333336" w="5" d="6.875" h="0" angle="180" />
-  <Ramp y="3" thickness="0.1" deltaY="5" fill="#898989" frame="#000000" x="70.41666666666667" z="61.28472222222223" w="5" d="9.375" h="0" angle="0" />
-  <Ramp y="1" thickness="0.1" deltaY="2.1" fill="#898989" frame="#000000" x="70.41666666666667" z="69.40972222222223" w="5" d="6.875" h="0" angle="0" />
-  <Ramp y="0" thickness="0.1" deltaY="1.1" fill="#898989" frame="#000000" x="70.41666666666667" z="75.97222222222223" w="5" d="6.25" h="0" angle="0" />
+  <Ramp y="0" thickness="0.1" deltaY="1.1" fill="#8a8a8a" frame="#000000" x="38.50694444444444" z="42.986111111111114" w="9.375" d="5" h="0" angle="90" />
+  <Ramp y="3" thickness="0.1" deltaY="5" fill="#8a8a8a" frame="#000000" x="53.19444444444445" z="42.986111111111114" w="6.25" d="5" h="0" angle="90" />
+  <Ramp y="0" thickness="0.1" deltaY="1.1" fill="#8a8a8a" frame="#000000" x="70.41666666666667" z="11.145833333333334" w="5" d="9.375" h="0" angle="180" />
+  <Ramp y="3" thickness="0.1" deltaY="5" fill="#8a8a8a" frame="#000000" x="70.41666666666667" z="25.833333333333336" w="5" d="6.25" h="0" angle="180" />
+  <Ramp y="1" thickness="0.1" deltaY="2.1" fill="#8a8a8a" frame="#000000" x="46.63194444444444" z="42.986111111111114" w="6.875" d="5" h="0" angle="90" />
+  <Ramp y="0" thickness="0.1" deltaY="1.1" fill="#8a8a8a" frame="#000000" x="103.33333333333334" z="42.986111111111114" w="6.25" d="5" h="0" angle="270" />
+  <Ramp y="1" thickness="0.1" deltaY="2.1" fill="#8a8a8a" frame="#000000" x="96.77083333333334" z="42.986111111111114" w="6.875" d="5" h="0" angle="270" />
+  <Ramp y="3" thickness="0.1" deltaY="5" fill="#8a8a8a" frame="#000000" x="88.64583333333334" z="42.986111111111114" w="9.375" d="5" h="0" angle="270" />
+  <Ramp y="1" thickness="0.1" deltaY="2.1" fill="#8a8a8a" frame="#000000" x="70.41666666666667" z="19.270833333333336" w="5" d="6.875" h="0" angle="180" />
+  <Ramp y="3" thickness="0.1" deltaY="5" fill="#8a8a8a" frame="#000000" x="70.41666666666667" z="61.28472222222223" w="5" d="9.375" h="0" angle="0" />
+  <Ramp y="1" thickness="0.1" deltaY="2.1" fill="#8a8a8a" frame="#000000" x="70.41666666666667" z="69.40972222222223" w="5" d="6.875" h="0" angle="0" />
+  <Ramp y="0" thickness="0.1" deltaY="1.1" fill="#8a8a8a" frame="#000000" x="70.41666666666667" z="75.97222222222223" w="5" d="6.25" h="0" angle="0" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="100" />
@@ -36,8 +36,8 @@
   <Timer in="mSwitch" out="mShow2" wait="100" />
   <Goody shape="bspMissile" y="2" speed="2" missiles="2" start="mShow2" out="mTaken1" fill="#ff7c00" frame="#000000" cx="105.24305555555557" cz="7.951388888888889" angle="225" />
   <set designer="Head &lt;tra@idcomm.com&gt;" information="Ride baby, ride!" defaultLives="3" missilePower="1.8" missileAcceleration="0.3" startY="9" range="96" goodyDelay="20" grenDelay="125" numGren="12" numMiss="8" fieldY="0.2" fieldVis="false" />
-  <SkyColor fill="#fefb40" frame="#ff7c00" />
-  <GroundColor fill="#ba1800" />
+  <SkyColor fill="#fffc41" frame="#ff7c00" />
+  <GroundColor fill="#bb1800" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="goodyDelay" />

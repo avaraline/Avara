@@ -72,7 +72,7 @@
   <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
   <Wall fill="#000000" frame="#000000" x="187.43055555555557" z="59.30555555555556" w="10" d="10" h="0" y="0" />
   <set wallHeight=".1" />
-  <Wall fill="#fefb00" frame="#000000" x="187.43055555555557" z="59.30555555555556" w="8.75" d="8.75" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="187.43055555555557" z="59.30555555555556" w="8.75" d="8.75" h="0" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="8" cx="88.125" cz="65.48611111111111" angle="270" />
   <Incarnator y="10" mask="T3" cx="88.125" cz="65.48611111111111" angle="270" />
   <Teleporter y="15" group="@red" shape="0" spin="0" fill="#ff2600" frame="#000000" cx="88.125" cz="65.48611111111111" angle="270" />
@@ -119,35 +119,35 @@
   <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="88.125" cz="52.986111111111114" angle="270" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="201.80555555555557" cz="65.48611111111111" angle="90" />
   <Incarnator y="10" mask="T2" cx="201.80555555555557" cz="65.48611111111111" angle="90" />
-  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fefb40" frame="#000000" cx="201.80555555555557" cz="65.48611111111111" angle="90" />
+  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="201.80555555555557" cz="65.48611111111111" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fefb40" frame="#000000" cx="201.80555555555557" cz="65.48611111111111" angle="90" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="201.80555555555557" cz="65.48611111111111" angle="90" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="201.80555555555557" cz="59.30555555555556" angle="90" />
   <Incarnator y="10" mask="T2" cx="201.80555555555557" cz="59.30555555555556" angle="90" />
-  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fefb40" frame="#000000" cx="201.80555555555557" cz="59.30555555555556" angle="90" />
+  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="201.80555555555557" cz="59.30555555555556" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fefb40" frame="#000000" cx="201.80555555555557" cz="59.30555555555556" angle="90" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="201.80555555555557" cz="59.30555555555556" angle="90" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="201.94444444444446" cz="52.986111111111114" angle="90" />
   <Incarnator y="10" mask="T2" cx="201.94444444444446" cz="52.986111111111114" angle="90" />
-  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fefb40" frame="#000000" cx="201.94444444444446" cz="52.986111111111114" angle="90" />
+  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="201.94444444444446" cz="52.986111111111114" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fefb40" frame="#000000" cx="201.94444444444446" cz="52.986111111111114" angle="90" />
-  <SkyColor fill="#fefb40" frame="#ff7c00" />
-  <GroundColor fill="#d6a700" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="201.94444444444446" cz="52.986111111111114" angle="90" />
+  <SkyColor fill="#fffc41" frame="#ff7c00" />
+  <GroundColor fill="#d6a800" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="50" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#d6a700" frame="#000000" cx="187.39583333333334" cz="59.270833333333336" angle="225" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#d6a800" frame="#000000" cx="187.39583333333334" cz="59.270833333333336" angle="225" />
   <Timer in="mSwitch" out="mShow2" wait="50" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#d6a700" frame="#000000" cx="187.39583333333334" cz="59.270833333333336" angle="225" />
-  <Teleporter group="-1" y="-30" activeRange="130" deadRange="100" destGroup="@recenter" shape="0" fill="#007fff" frame="#000000" cx="145" cz="59.375" angle="225" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#007fff" frame="#000000" cx="145" cz="59.375" angle="225" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#d6a800" frame="#000000" cx="187.39583333333334" cz="59.270833333333336" angle="225" />
+  <Teleporter group="-1" y="-30" activeRange="130" deadRange="100" destGroup="@recenter" shape="0" fill="#0080ff" frame="#000000" cx="145" cz="59.375" angle="225" />
+  <Teleporter y="30" shape="0" group="@recenter" fill="#0080ff" frame="#000000" cx="145" cz="59.375" angle="225" />
   <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T3" group="@red" destgroup="@red" out="@add1Red" fill="#000000" frame="#000000" cx="187.43055555555557" cz="59.30555555555556" angle="180.5" />
   <Hologram y="9" fill="#000000" frame="#000000" cx="187.43055555555557" cz="59.30555555555556" angle="180.5" />
   <Counter in="@add1Yellow" n="1" out="@yellowAt1" restart="false" />
