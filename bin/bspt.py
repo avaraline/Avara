@@ -213,7 +213,7 @@ class ColorRecord():
             (self.color_long & 0xff)
         ]
         # leave marker colors alone
-        if self.color[:2] == [254, 254, 254] or self.color[:2] == [254, 0, 0]:
+        if self.color[:3] == [254, 254, 254] or self.color[:3] == [254, 0, 0]:
             self.color = [x / 254.0 for x in self.color]
         # but convert others to sRGBA float color format from AppleRGB
         else:
