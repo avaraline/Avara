@@ -9,6 +9,7 @@
 
 #include "CSmartPart.h"
 #include "CAbstractActor.h"
+#include "AvaraGL.h"
 
 #include "FastMat.h"
 
@@ -23,7 +24,7 @@ void CSmartPart::ISmartPart(short resId, CAbstractActor *anActor, short aPartCod
     FSquareAccumulate(enclosureRadius, rSquare);
 
     MoveDone();
-    UpdateOpenGLData();
+    AvaraGLUpdateData(this);
 }
 
 Boolean CSmartPart::HitTestBoxes(CSmartPart *other) {

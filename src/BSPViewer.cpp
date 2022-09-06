@@ -23,8 +23,6 @@
 #define kMarkerColor 0x00fefefe
 #define kOtherMarkerColor 0x00fe0000
 
-bool cull_back_faces = false;
-
 class BSPViewer : public CApplication {
 public:
     CBSPPart *itsPart;
@@ -34,6 +32,7 @@ public:
 
     Vector location, orientation;
     int current_id;
+    bool update = true;
 
     BSPViewer(int id) : CApplication("BSP Viewer") {
         current_id = id;
@@ -65,17 +64,25 @@ public:
         orientation[2] = FIX(0);
     }
 
-    void newPart(int id) {
-        if (itsWorld->GetPartCount() > 0) {
-            itsWorld->RemovePart(itsPart);
-        }
-        itsPart = new CBSPPart;
-        itsPart->IBSPPart(current_id);
-        itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
-        itsPart->ReplaceColor(kOtherMarkerColor, 13421568); // yellow
-        itsPart->UpdateOpenGLData();
-        itsWorld->AddPart(itsPart);
+    
+    bool newPart(int id) {
+            if (itsWorld->GetPartCount() > 0) {
+                itsWorld->RemovePart(itsPart);
+            }
+            itsPart = new CBSPPart;
+            itsPart->IBSPPart(id);
+            if (itsPart->polyCount > 0) {
+                itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
+                itsPart->ReplaceColor(kOtherMarkerColor, 16646144); // red
+                AvaraGLUpdateData(itsPart);
+                itsWorld->AddPart(itsPart);
+                SDL_Log("Loaded BSP %d", id);
+                return true;
+            }
+            else return false;
+        
     }
+
 
     bool HandleEvent(SDL_Event &event) {
         switch (event.type) {
@@ -120,10 +127,23 @@ public:
                         orientation[0] = FIX(0);
                         orientation[1] = FIX(-90);
                         return true;
-                    case SDLK_b:
-                        cull_back_faces = !cull_back_faces;
-                        return true;
                     case SDLK_r:
+                        do {
+                            current_id++;
+                            if (current_id > 1500) {
+                                current_id = 1;
+                            }
+                        } while (newPart(current_id) != true);
+                        return true;
+                    case SDLK_t:
+                        do{ 
+                            current_id--;
+                            if (current_id < 1) {
+                                current_id = 1500;
+                            }
+                        } while(newPart(current_id) != true);
+                        return true;
+                    case SDLK_y:
                         newPart(current_id);
                         return true;
                 }
@@ -142,13 +162,7 @@ public:
         itsView->SetViewRect(mFBSize.x, mFBSize.y, mFBSize.x / 2, mFBSize.y / 2);
         itsView->viewPixelRatio = FIX(4.0/3.0);
         itsView->CalculateViewPyramidCorners();
-
-        if (cull_back_faces) {
-            itsPart->userFlags |= CBSPUserFlags::kCullBackfaces;
-        }
-        else {
-            itsPart->userFlags &= ~CBSPUserFlags::kCullBackfaces;
-        }
+        itsView->PointCamera();
 
         itsPart->Reset();
         itsPart->RotateZ(orientation[2]);

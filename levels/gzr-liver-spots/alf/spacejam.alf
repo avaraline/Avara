@@ -1,12 +1,12 @@
 <map>
-  <Solid shape="bspSphere" scale=".25" y="540" fill="#ffff00" frame="#000000" cx="115.625" cz="149.79166666666669" angle="225" />
-  <Solid shape="bspSphere" scale=".25" y="520" fill="#ff0000" frame="#000000" cx="131.25" cz="106.66666666666667" angle="225" />
-  <Solid shape="bspSphere" scale=".25" y="550" fill="#ffff00" frame="#000000" cx="149.375" cz="124.79166666666667" angle="225" />
-  <Solid shape="bspSphere" scale=".25" y="515" fill="#ffff00" frame="#000000" cx="117.5" cz="118.54166666666667" angle="225" />
-  <Solid shape="bspSphere" scale=".25" y="540" fill="#0066ff" frame="#000000" cx="150" cz="107.91666666666667" angle="225" />
+  <Solid shape="bspSphere" scale=".25" y="540" fill="#fffb00" frame="#000000" cx="115.625" cz="149.79166666666669" angle="225" />
+  <Solid shape="bspSphere" scale=".25" y="520" fill="#ff2600" frame="#000000" cx="131.25" cz="106.66666666666667" angle="225" />
+  <Solid shape="bspSphere" scale=".25" y="550" fill="#fffb00" frame="#000000" cx="149.375" cz="124.79166666666667" angle="225" />
+  <Solid shape="bspSphere" scale=".25" y="515" fill="#fffb00" frame="#000000" cx="117.5" cz="118.54166666666667" angle="225" />
+  <Solid shape="bspSphere" scale=".25" y="540" fill="#0080ff" frame="#000000" cx="150" cz="107.91666666666667" angle="225" />
   <Solid shape="bspSphere" scale=".25" y="520" fill="#ffffff" frame="#000000" cx="119.375" cz="138.54166666666669" angle="225" />
-  <Dome y="530" fill="#eeeeee" frame="#000000" cx="133.7152777777778" cz="131.18055555555557" r="6.701388888888893" angle="0" quarters="4" />
-  <Dome y="530" roll="180" fill="#eeeeee" frame="#000000" cx="133.7152777777778" cz="131.18055555555557" r="6.701388888888893" angle="0" quarters="4" />
+  <Dome y="530" fill="#f1f1f1" frame="#000000" cx="133.7152777777778" cz="131.18055555555557" r="6.701388888888893" angle="0" quarters="4" />
+  <Dome y="530" roll="180" fill="#f1f1f1" frame="#000000" cx="133.7152777777778" cz="131.18055555555557" r="6.701388888888893" angle="0" quarters="4" />
   <Incarnator y="501" cx="37.083333333333336" cz="96.04166666666667" angle="225" />
   <Incarnator y="501" cx="96.18055555555557" cz="36.25" angle="45" />
   <Incarnator y="501" cx="37.29166666666667" cz="35.76388888888889" angle="315" />
@@ -29,20 +29,20 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="50" />
   <Goody shape="bspGrenade" y="502" speed="0" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="66.73611111111111" cz="66.18055555555556" angle="225" />
-  <Teleporter y="495" group="-1" activeRange="2000" deadRange="70" destGroup="@recenter" shape="0" fill="#ff0099" frame="#000000" cx="66.73611111111111" cz="66.11111111111111" angle="225" />
-  <Teleporter y="530" shape="0" group="@recenter" fill="#ff0099" frame="#000000" cx="66.73611111111111" cz="66.11111111111111" angle="225" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ff0099" frame="#000000" cx="66.73611111111111" cz="66.11111111111111" angle="225" />
+  <Teleporter y="495" group="-1" activeRange="2000" deadRange="70" destGroup="@recenter" shape="0" fill="#ff32a9" frame="#000000" cx="66.73611111111111" cz="66.11111111111111" angle="225" />
+  <Teleporter y="530" shape="0" group="@recenter" fill="#ff32a9" frame="#000000" cx="66.73611111111111" cz="66.11111111111111" angle="225" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ff32a9" frame="#000000" cx="66.73611111111111" cz="66.11111111111111" angle="225" />
   <set defaultLives="4" grenadePower="3" missilePower="2" missileTurnRate="1" missileAcceleration=".5" maxStartGrenades="12" maxStartMissiles="8" maxStartBoosts="8" designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="SpaceJam - A little disorientating, but simple and 
 small." />
   <SkyColor fill="#000000" frame="#000000" />
   <GroundColor fill="#000000" />
   <set gravity="0.25" floorTemplate="bspFloorFrame" baseHeight="500" wallHeight="0" wallYon="100" />
-  <Wall fill="#ff0000" frame="#000000" x="66.73611111111111" z="66.04166666666667" w="70" d="70" h="0" />
+  <Wall fill="#ff2600" frame="#000000" x="66.73611111111111" z="66.04166666666667" w="70" d="70" h="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="506" wallHeight="0" wallYon="100" />
   <Wall fill="#ffffff" frame="#000000" x="66.73611111111111" z="66.04166666666667" w="50" d="50" h="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="512" wallHeight="0" wallYon="100" />
-  <Wall fill="#0066ff" frame="#000000" x="66.66666666666667" z="66.11111111111111" w="30" d="30" h="0" />
+  <Wall fill="#0080ff" frame="#000000" x="66.66666666666667" z="66.11111111111111" w="30" d="30" h="0" />
   <set floorTemplate="bspFloorFrame" baseHeight="518" wallHeight="0" wallYon="100" />
-  <Wall fill="#008800" frame="#000000" x="66.66666666666667" z="66.04166666666667" w="10" d="10" h="0" />
-  <Solid shape="bspSphere" scale=".25" y="540" fill="#0066ff" frame="#000000" cx="115.625" cz="130.41666666666669" angle="225" />
+  <Wall fill="#009600" frame="#000000" x="66.66666666666667" z="66.04166666666667" w="10" d="10" h="0" />
+  <Solid shape="bspSphere" scale=".25" y="540" fill="#0080ff" frame="#000000" cx="115.625" cz="130.41666666666669" angle="225" />
 </map>

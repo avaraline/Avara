@@ -1,98 +1,98 @@
 <map>
-  <Wall fill="#ffff00" frame="#000000" x="152.36111111111111" z="235.2777777777778" w="2.5" d="2.5" h="6" />
-  <Wall fill="#ffff00" frame="#000000" x="105.48611111111111" z="235.2777777777778" w="2.5" d="2.5" h="6" />
-  <Wall fill="#ffff00" frame="#000000" x="105.48611111111111" z="188.4027777777778" w="2.5" d="2.5" h="6" />
-  <Wall fill="#ffff00" frame="#000000" x="152.36111111111111" z="188.4027777777778" w="2.5" d="2.5" h="6" />
-  <WallDoor middle="0.2" midZ="15 / 8" deltaZ="15 / 8" deltaY="0" deltaX="-5" open="@oGreenSouth" close="@oGreenSouth" closeDelay="100" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#008800" frame="#000000" x="71.11111111111111" z="48.125" w="7.5" d="1.25" h="2.5" />
+  <Wall fill="#fffb00" frame="#000000" x="152.36111111111111" z="235.2777777777778" w="2.5" d="2.5" h="6" />
+  <Wall fill="#fffb00" frame="#000000" x="105.48611111111111" z="235.2777777777778" w="2.5" d="2.5" h="6" />
+  <Wall fill="#fffb00" frame="#000000" x="105.48611111111111" z="188.4027777777778" w="2.5" d="2.5" h="6" />
+  <Wall fill="#fffb00" frame="#000000" x="152.36111111111111" z="188.4027777777778" w="2.5" d="2.5" h="6" />
+  <WallDoor middle="0.2" midZ="15 / 8" deltaZ="15 / 8" deltaY="0" deltaX="-5" open="@oGreenSouth" close="@oGreenSouth" closeDelay="100" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#009600" frame="#000000" x="71.11111111111111" z="48.125" w="7.5" d="1.25" h="2.5" />
   <Area mask="T1" enter="@oGreenSouth" cx="71.11111111111111" cz="48.125" r="4.375" />
   <Text text="The password is ’rugrat’." cx="71.11111111111111" cz="48.125" r="4.375" />
   <Incarnator mask="T1" cx="57.361111111111114" cz="41.25" angle="315" />
   <Incarnator mask="T1" cx="86.11111111111111" cz="31.25" angle="315" />
   <Incarnator mask="T1" cx="69.86111111111111" cz="14.375" angle="315" />
-  <Guard killMsg="@greenKill" mask="T2" watch="playerMask + scoutMask" y="7" fill="#006600" frame="#006600" cx="47.95138888888889" cz="1.25" angle="314.5" />
-  <Guard killMsg="@greenKill" mask="T2" watch="playerMask + scoutMask" y="7" fill="#006600" frame="#006600" cx="94.82638888888889" cz="1.25" angle="314.5" />
-  <Guard killMsg="@greenKill" mask="T2" watch="playerMask + scoutMask" y="7" fill="#006600" frame="#006600" cx="94.82638888888889" cz="48.125" angle="314.5" />
-  <Guard killMsg="@greenKill" mask="T2" watch="playerMask + scoutMask" y="7" fill="#006600" frame="#006600" cx="47.95138888888889" cz="48.125" angle="314.5" />
-  <Wall fill="#00ee00" frame="#000000" x="47.986111111111114" z="1.25" w="2.5" d="2.5" h="6" />
-  <Wall fill="#00ee00" frame="#000000" x="94.86111111111111" z="1.25" w="2.5" d="2.5" h="6" />
-  <Wall fill="#00ee00" frame="#000000" x="94.86111111111111" z="48.125" w="2.5" d="2.5" h="6" />
-  <Wall fill="#00ee00" frame="#000000" x="47.986111111111114" z="48.125" w="2.5" d="2.5" h="6" />
-  <Wall fill="#00ee00" frame="#000000" x="47.986111111111114" z="24.375" w="2.5" d="20" h="1.5" />
-  <Wall fill="#00ee00" frame="#000000" x="47.986111111111114" z="40.625" w="2.5" d="12.5" h="4.5" />
-  <Wall fill="#00ee00" frame="#000000" x="55.173611111111114" z="48.125" w="11.875" d="2.5" h="4.5" />
-  <Wall fill="#00ee00" frame="#000000" x="87.36111111111111" z="48.125" w="12.5" d="2.5" h="4.5" />
-  <Wall fill="#00ee00" frame="#000000" x="94.86111111111111" z="40.9375" w="2.5" d="11.875" h="4.5" />
-  <Wall fill="#00ee00" frame="#000000" x="94.86111111111111" z="25" w="2.5" d="20" h="1.5" />
-  <Wall fill="#00ee00" frame="#000000" x="94.86111111111111" z="8.75" w="2.5" d="12.5" h="4.5" />
-  <Wall fill="#00ee00" frame="#000000" x="87.67361111111111" z="1.25" w="11.875" d="2.5" h="4.5" />
-  <Wall fill="#00ee00" frame="#000000" x="71.73611111111111" z="1.25" w="20" d="2.5" h="1.5" />
-  <Wall fill="#00ee00" frame="#000000" x="55.486111111111114" z="1.25" w="12.5" d="2.5" h="4.5" />
-  <Wall fill="#00ee00" frame="#000000" x="47.986111111111114" z="8.4375" w="2.5" d="11.875" h="4.5" />
-  <Wall fill="#00ee00" frame="#000000" x="64.23611111111111" z="48.125" w="6.25" d="2.5" h="0" />
-  <Wall fill="#00ee00" frame="#000000" x="77.98611111111111" z="48.125" w="6.25" d="2.5" h="0" />
-  <Wall fill="#00ee00" frame="#000000" x="71.11111111111111" z="48.125" w="7.5" d="2.5" h="0.5" y="2.5" />
-  <Teleporter start="@yellowWin" mask="T2" win="1000" fill="#ffff00" frame="#ffff00" cx="71.73611111111111" cz="26.875" angle="315" />
-  <WallDoor deltaY="0" deltaX="2" open="@yellowWin" fill="#00ee00" frame="#000000" x="74.23611111111111" z="20.3125" w="15" d="1.875" h="1.75" />
-  <WallDoor deltaY="0" deltaX="-2" open="@yellowWin" fill="#00ee00" frame="#000000" x="69.23611111111111" z="33.4375" w="15" d="1.875" h="1.75" />
-  <WallDoor deltaY="0" deltaZ="2" open="@yellowWin" fill="#00ee00" frame="#000000" x="78.29861111111111" z="29.375" w="1.875" d="15" h="1.75" />
-  <WallDoor deltaY="0" deltaZ="-2" open="@yellowWin" fill="#00ee00" frame="#000000" x="65.17361111111111" z="24.375" w="1.875" d="15" h="1.75" />
-  <WallDoor middle="0.2" midZ="-15 / 8" deltaZ="-15 / 8" deltaY="0" deltaX="-5" open="@oYellowNorth" close="@cYellowNorth" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#ffcc00" frame="#000000" x="129.23611111111111" z="188.4027777777778" w="7.5" d="1.25" h="2.5" />
+  <Guard killMsg="@greenKill" mask="T2" watch="playerMask + scoutMask" y="7" fill="#007600" frame="#007600" cx="47.95138888888889" cz="1.25" angle="314.5" />
+  <Guard killMsg="@greenKill" mask="T2" watch="playerMask + scoutMask" y="7" fill="#007600" frame="#007600" cx="94.82638888888889" cz="1.25" angle="314.5" />
+  <Guard killMsg="@greenKill" mask="T2" watch="playerMask + scoutMask" y="7" fill="#007600" frame="#007600" cx="94.82638888888889" cz="48.125" angle="314.5" />
+  <Guard killMsg="@greenKill" mask="T2" watch="playerMask + scoutMask" y="7" fill="#007600" frame="#007600" cx="47.95138888888889" cz="48.125" angle="314.5" />
+  <Wall fill="#00ec00" frame="#000000" x="47.986111111111114" z="1.25" w="2.5" d="2.5" h="6" />
+  <Wall fill="#00ec00" frame="#000000" x="94.86111111111111" z="1.25" w="2.5" d="2.5" h="6" />
+  <Wall fill="#00ec00" frame="#000000" x="94.86111111111111" z="48.125" w="2.5" d="2.5" h="6" />
+  <Wall fill="#00ec00" frame="#000000" x="47.986111111111114" z="48.125" w="2.5" d="2.5" h="6" />
+  <Wall fill="#00ec00" frame="#000000" x="47.986111111111114" z="24.375" w="2.5" d="20" h="1.5" />
+  <Wall fill="#00ec00" frame="#000000" x="47.986111111111114" z="40.625" w="2.5" d="12.5" h="4.5" />
+  <Wall fill="#00ec00" frame="#000000" x="55.173611111111114" z="48.125" w="11.875" d="2.5" h="4.5" />
+  <Wall fill="#00ec00" frame="#000000" x="87.36111111111111" z="48.125" w="12.5" d="2.5" h="4.5" />
+  <Wall fill="#00ec00" frame="#000000" x="94.86111111111111" z="40.9375" w="2.5" d="11.875" h="4.5" />
+  <Wall fill="#00ec00" frame="#000000" x="94.86111111111111" z="25" w="2.5" d="20" h="1.5" />
+  <Wall fill="#00ec00" frame="#000000" x="94.86111111111111" z="8.75" w="2.5" d="12.5" h="4.5" />
+  <Wall fill="#00ec00" frame="#000000" x="87.67361111111111" z="1.25" w="11.875" d="2.5" h="4.5" />
+  <Wall fill="#00ec00" frame="#000000" x="71.73611111111111" z="1.25" w="20" d="2.5" h="1.5" />
+  <Wall fill="#00ec00" frame="#000000" x="55.486111111111114" z="1.25" w="12.5" d="2.5" h="4.5" />
+  <Wall fill="#00ec00" frame="#000000" x="47.986111111111114" z="8.4375" w="2.5" d="11.875" h="4.5" />
+  <Wall fill="#00ec00" frame="#000000" x="64.23611111111111" z="48.125" w="6.25" d="2.5" h="0" />
+  <Wall fill="#00ec00" frame="#000000" x="77.98611111111111" z="48.125" w="6.25" d="2.5" h="0" />
+  <Wall fill="#00ec00" frame="#000000" x="71.11111111111111" z="48.125" w="7.5" d="2.5" h="0.5" y="2.5" />
+  <Teleporter start="@yellowWin" mask="T2" win="1000" fill="#fffb00" frame="#fffb00" cx="71.73611111111111" cz="26.875" angle="315" />
+  <WallDoor deltaY="0" deltaX="2" open="@yellowWin" fill="#00ec00" frame="#000000" x="74.23611111111111" z="20.3125" w="15" d="1.875" h="1.75" />
+  <WallDoor deltaY="0" deltaX="-2" open="@yellowWin" fill="#00ec00" frame="#000000" x="69.23611111111111" z="33.4375" w="15" d="1.875" h="1.75" />
+  <WallDoor deltaY="0" deltaZ="2" open="@yellowWin" fill="#00ec00" frame="#000000" x="78.29861111111111" z="29.375" w="1.875" d="15" h="1.75" />
+  <WallDoor deltaY="0" deltaZ="-2" open="@yellowWin" fill="#00ec00" frame="#000000" x="65.17361111111111" z="24.375" w="1.875" d="15" h="1.75" />
+  <WallDoor middle="0.2" midZ="-15 / 8" deltaZ="-15 / 8" deltaY="0" deltaX="-5" open="@oYellowNorth" close="@cYellowNorth" shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#ffd300" frame="#000000" x="129.23611111111111" z="188.4027777777778" w="7.5" d="1.25" h="2.5" />
   <Area mask="T2" enter="@oYellowNorth" exit="@cYellowNorth" cx="129.23611111111111" cz="188.4027777777778" r="4.375" />
   <Incarnator mask="T2" cx="141.73611111111111" cz="196.5277777777778" angle="315" />
-  <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#ffff00" frame="#006600" cx="152.29166666666669" cz="235.2777777777778" angle="134.5" />
-  <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#ffff00" frame="#006600" cx="105.45138888888889" cz="235.2777777777778" angle="134.5" />
-  <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#ffff00" frame="#006600" cx="105.45138888888889" cz="188.4027777777778" angle="134.5" />
-  <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#ffff00" frame="#ffff00" cx="152.29166666666669" cz="188.4027777777778" angle="134.5" />
-  <Wall fill="#ffff00" frame="#000000" x="152.36111111111111" z="212.1527777777778" w="2.5" d="20" h="1.5" />
-  <Wall fill="#ffff00" frame="#000000" x="152.36111111111111" z="195.9027777777778" w="2.5" d="12.5" h="4.5" />
-  <Wall fill="#ffff00" frame="#000000" x="145.17361111111111" z="188.4027777777778" w="11.875" d="2.5" h="4.5" />
-  <Wall fill="#ffff00" frame="#000000" x="112.98611111111111" z="188.4027777777778" w="12.5" d="2.5" h="4.5" />
-  <Wall fill="#ffff00" frame="#000000" x="105.48611111111111" z="195.5902777777778" w="2.5" d="11.875" h="4.5" />
-  <Wall fill="#ffff00" frame="#000000" x="105.48611111111111" z="211.5277777777778" w="2.5" d="20" h="1.5" />
-  <Wall fill="#ffff00" frame="#000000" x="105.48611111111111" z="227.7777777777778" w="2.5" d="12.5" h="4.5" />
-  <Wall fill="#ffff00" frame="#000000" x="112.67361111111111" z="235.2777777777778" w="11.875" d="2.5" h="4.5" />
-  <Wall fill="#ffff00" frame="#000000" x="128.61111111111111" z="235.2777777777778" w="20" d="2.5" h="1.5" />
-  <Wall fill="#ffff00" frame="#000000" x="144.86111111111111" z="235.2777777777778" w="12.5" d="2.5" h="4.5" />
-  <Wall fill="#ffff00" frame="#000000" x="152.36111111111111" z="228.0902777777778" w="2.5" d="11.875" h="4.5" />
-  <Wall fill="#ffff00" frame="#000000" x="136.11111111111111" z="188.4027777777778" w="6.25" d="2.5" h="0" />
-  <Wall fill="#ffff00" frame="#000000" x="122.36111111111111" z="188.4027777777778" w="6.25" d="2.5" h="0" />
-  <Wall fill="#ffff00" frame="#000000" x="129.23611111111111" z="188.4027777777778" w="7.5" d="2.5" h="0.5" y="2.5" />
+  <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#fffb00" frame="#007600" cx="152.29166666666669" cz="235.2777777777778" angle="134.5" />
+  <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#fffb00" frame="#007600" cx="105.45138888888889" cz="235.2777777777778" angle="134.5" />
+  <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#fffb00" frame="#007600" cx="105.45138888888889" cz="188.4027777777778" angle="134.5" />
+  <Guard killMsg="@yellowKill" mask="T1" watch="playerMask + scoutMask" y="7" fill="#fffb00" frame="#fffb00" cx="152.29166666666669" cz="188.4027777777778" angle="134.5" />
+  <Wall fill="#fffb00" frame="#000000" x="152.36111111111111" z="212.1527777777778" w="2.5" d="20" h="1.5" />
+  <Wall fill="#fffb00" frame="#000000" x="152.36111111111111" z="195.9027777777778" w="2.5" d="12.5" h="4.5" />
+  <Wall fill="#fffb00" frame="#000000" x="145.17361111111111" z="188.4027777777778" w="11.875" d="2.5" h="4.5" />
+  <Wall fill="#fffb00" frame="#000000" x="112.98611111111111" z="188.4027777777778" w="12.5" d="2.5" h="4.5" />
+  <Wall fill="#fffb00" frame="#000000" x="105.48611111111111" z="195.5902777777778" w="2.5" d="11.875" h="4.5" />
+  <Wall fill="#fffb00" frame="#000000" x="105.48611111111111" z="211.5277777777778" w="2.5" d="20" h="1.5" />
+  <Wall fill="#fffb00" frame="#000000" x="105.48611111111111" z="227.7777777777778" w="2.5" d="12.5" h="4.5" />
+  <Wall fill="#fffb00" frame="#000000" x="112.67361111111111" z="235.2777777777778" w="11.875" d="2.5" h="4.5" />
+  <Wall fill="#fffb00" frame="#000000" x="128.61111111111111" z="235.2777777777778" w="20" d="2.5" h="1.5" />
+  <Wall fill="#fffb00" frame="#000000" x="144.86111111111111" z="235.2777777777778" w="12.5" d="2.5" h="4.5" />
+  <Wall fill="#fffb00" frame="#000000" x="152.36111111111111" z="228.0902777777778" w="2.5" d="11.875" h="4.5" />
+  <Wall fill="#fffb00" frame="#000000" x="136.11111111111111" z="188.4027777777778" w="6.25" d="2.5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="122.36111111111111" z="188.4027777777778" w="6.25" d="2.5" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="129.23611111111111" z="188.4027777777778" w="7.5" d="2.5" h="0.5" y="2.5" />
   <Incarnator mask="T2" cx="112.98611111111111" cz="196.5277777777778" angle="315" />
   <Incarnator mask="T2" cx="129.23611111111111" cz="225.9027777777778" angle="315" />
-  <WallDoor deltaY="0" deltaX="-2" open="@greenWin" fill="#ffff00" frame="#000000" x="126.11111111111111" z="216.2152777777778" w="15" d="1.875" h="1.75" />
-  <WallDoor deltaY="0" deltaX="2" open="@greenWin" fill="#ffff00" frame="#000000" x="131.11111111111111" z="203.0902777777778" w="15" d="1.875" h="1.75" />
-  <WallDoor deltaY="0" deltaZ="2" open="@greenWin" fill="#ffff00" frame="#000000" x="135.17361111111111" z="212.1527777777778" w="1.875" d="15" h="1.75" />
-  <WallDoor deltaY="0" deltaZ="-2" open="@greenWin" fill="#ffff00" frame="#000000" x="122.04861111111111" z="207.1527777777778" w="1.875" d="15" h="1.75" />
-  <Teleporter start="@greenWin" mask="T1" win="1000" fill="#008800" frame="#008800" cx="128.61111111111111" cz="209.6527777777778" angle="315" />
-  <Wall fill="#0099ff" frame="#000000" x="39.236111111111114" z="120.625" w="10" d="10" h="1.5" />
-  <Wall fill="#0099ff" frame="#000000" x="101.73611111111111" z="78.125" w="5" d="5" h="1.25" />
-  <Wall fill="#00ee00" frame="#000000" x="89.23611111111111" z="117.1875" w="10" d="3.125" h="0" />
-  <Wall fill="#0099ff" frame="#000000" x="102.67361111111111" z="130.625" w="3.125" d="10" h="0" />
-  <Wall fill="#ffff00" frame="#000000" x="89.23611111111111" z="144.0625" w="10" d="3.125" h="0" />
-  <Wall fill="#0099ff" frame="#000000" x="75.79861111111111" z="130.625" w="3.125" d="10" h="0" />
-  <Wall fill="#0099ff" frame="#000000" x="143.92361111111111" z="156.25" w="13.125" d="7.5" h="3.75" />
-  <Wall fill="#0099ff" frame="#000000" x="31.423611111111114" z="90.625" w="9.375" d="3.75" h="2" />
-  <Wall fill="#0099ff" frame="#000000" x="40.798611111111114" z="90.625" w="9.375" d="3.75" h="1.75" />
-  <Wall fill="#0099ff" frame="#000000" x="134.86111111111111" z="99.6875" w="12.5" d="11.875" h="0" />
-  <Wall fill="#0099ff" frame="#000000" x="52.048611111111114" z="137.1875" w="18.125" d="3.125" h="2" />
-  <Wall fill="#0099ff" frame="#000000" x="59.236111111111114" z="145.625" w="3.75" d="13.75" h="1.5" />
+  <WallDoor deltaY="0" deltaX="-2" open="@greenWin" fill="#fffb00" frame="#000000" x="126.11111111111111" z="216.2152777777778" w="15" d="1.875" h="1.75" />
+  <WallDoor deltaY="0" deltaX="2" open="@greenWin" fill="#fffb00" frame="#000000" x="131.11111111111111" z="203.0902777777778" w="15" d="1.875" h="1.75" />
+  <WallDoor deltaY="0" deltaZ="2" open="@greenWin" fill="#fffb00" frame="#000000" x="135.17361111111111" z="212.1527777777778" w="1.875" d="15" h="1.75" />
+  <WallDoor deltaY="0" deltaZ="-2" open="@greenWin" fill="#fffb00" frame="#000000" x="122.04861111111111" z="207.1527777777778" w="1.875" d="15" h="1.75" />
+  <Teleporter start="@greenWin" mask="T1" win="1000" fill="#009600" frame="#009600" cx="128.61111111111111" cz="209.6527777777778" angle="315" />
+  <Wall fill="#00acff" frame="#000000" x="39.236111111111114" z="120.625" w="10" d="10" h="1.5" />
+  <Wall fill="#00acff" frame="#000000" x="101.73611111111111" z="78.125" w="5" d="5" h="1.25" />
+  <Wall fill="#00ec00" frame="#000000" x="89.23611111111111" z="117.1875" w="10" d="3.125" h="0" />
+  <Wall fill="#00acff" frame="#000000" x="102.67361111111111" z="130.625" w="3.125" d="10" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="89.23611111111111" z="144.0625" w="10" d="3.125" h="0" />
+  <Wall fill="#00acff" frame="#000000" x="75.79861111111111" z="130.625" w="3.125" d="10" h="0" />
+  <Wall fill="#00acff" frame="#000000" x="143.92361111111111" z="156.25" w="13.125" d="7.5" h="3.75" />
+  <Wall fill="#00acff" frame="#000000" x="31.423611111111114" z="90.625" w="9.375" d="3.75" h="2" />
+  <Wall fill="#00acff" frame="#000000" x="40.798611111111114" z="90.625" w="9.375" d="3.75" h="1.75" />
+  <Wall fill="#00acff" frame="#000000" x="134.86111111111111" z="99.6875" w="12.5" d="11.875" h="0" />
+  <Wall fill="#00acff" frame="#000000" x="52.048611111111114" z="137.1875" w="18.125" d="3.125" h="2" />
+  <Wall fill="#00acff" frame="#000000" x="59.236111111111114" z="145.625" w="3.75" d="13.75" h="1.5" />
   <set designer="Juri Munkki" information="Enter the transporter at the enemy 
 fortress. Walls around the transporter can 
 be opened by hitting one of the walls. 
 (Plot needs more work, obviously.)
 6 players: green (3) and yellow (3) teams" />
-  <Wall fill="#00ee00" frame="#000000" x="92.36111111111111" z="23.75" w="2.5" d="5" h="1" />
-  <Wall fill="#00ee00" frame="#000000" x="89.86111111111111" z="23.75" w="2.5" d="5" h="0.5" />
-  <Wall fill="#00ee00" frame="#000000" x="50.486111111111114" z="24.375" w="2.5" d="5" h="1" />
-  <Wall fill="#00ee00" frame="#000000" x="52.986111111111114" z="24.375" w="2.5" d="5" h="0.5" />
-  <Wall fill="#00ee00" frame="#000000" x="71.73611111111111" z="3.75" w="5" d="2.5" h="1" />
-  <Wall fill="#00ee00" frame="#000000" x="71.73611111111111" z="6.25" w="5" d="2.5" h="0.5" />
-  <SkyColor fill="#880000" frame="#440000" />
-  <GroundColor fill="#444444" />
+  <Wall fill="#00ec00" frame="#000000" x="92.36111111111111" z="23.75" w="2.5" d="5" h="1" />
+  <Wall fill="#00ec00" frame="#000000" x="89.86111111111111" z="23.75" w="2.5" d="5" h="0.5" />
+  <Wall fill="#00ec00" frame="#000000" x="50.486111111111114" z="24.375" w="2.5" d="5" h="1" />
+  <Wall fill="#00ec00" frame="#000000" x="52.986111111111114" z="24.375" w="2.5" d="5" h="0.5" />
+  <Wall fill="#00ec00" frame="#000000" x="71.73611111111111" z="3.75" w="5" d="2.5" h="1" />
+  <Wall fill="#00ec00" frame="#000000" x="71.73611111111111" z="6.25" w="5" d="2.5" h="0.5" />
+  <SkyColor fill="#9c1200" frame="#570500" />
+  <GroundColor fill="#565656" />
   <Counter n="4" in="@greenKill" out="@yellowWin" />
   <Counter n="4" in="@yellowKill" out="@greenWin" />
   <Sound y="60" sound="snJungle" isAmbient="true" loopCount="-1" volume="500" cx="66.38888888888889" cz="92.15277777777779" angle="225" />
-  <Dome fill="#0066ff" frame="#000000" cx="2.5" cz="105.83333333333334" r="2.5" angle="0" quarters="4" />
+  <Dome fill="#0080ff" frame="#000000" cx="2.5" cz="105.83333333333334" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
@@ -107,10 +107,10 @@ be opened by hitting one of the walls.
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspMissile" y="4" speed="2" missiles="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="102.5" cz="102.08333333333334" angle="225" />
-  <Wall fill="#ffff00" frame="#000000" x="107.98611111111111" z="211.875" w="2.5" d="5" h="1" />
-  <Wall fill="#ffff00" frame="#000000" x="110.48611111111111" z="211.875" w="2.5" d="5" h="0.5" />
-  <Wall fill="#ffff00" frame="#000000" x="149.86111111111111" z="211.875" w="2.5" d="5" h="1" />
-  <Wall fill="#ffff00" frame="#000000" x="147.36111111111111" z="211.875" w="2.5" d="5" h="0.5" />
-  <Wall fill="#ffff00" frame="#000000" x="128.61111111111111" z="232.7777777777778" w="5" d="2.5" h="1" />
-  <Wall fill="#ffff00" frame="#000000" x="128.61111111111111" z="230.2777777777778" w="5" d="2.5" h="0.5" />
+  <Wall fill="#fffb00" frame="#000000" x="107.98611111111111" z="211.875" w="2.5" d="5" h="1" />
+  <Wall fill="#fffb00" frame="#000000" x="110.48611111111111" z="211.875" w="2.5" d="5" h="0.5" />
+  <Wall fill="#fffb00" frame="#000000" x="149.86111111111111" z="211.875" w="2.5" d="5" h="1" />
+  <Wall fill="#fffb00" frame="#000000" x="147.36111111111111" z="211.875" w="2.5" d="5" h="0.5" />
+  <Wall fill="#fffb00" frame="#000000" x="128.61111111111111" z="232.7777777777778" w="5" d="2.5" h="1" />
+  <Wall fill="#fffb00" frame="#000000" x="128.61111111111111" z="230.2777777777778" w="5" d="2.5" h="0.5" />
 </map>

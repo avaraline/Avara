@@ -46,7 +46,6 @@ void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, uint32_t longTeam
     partCount = 1;
     LoadPart(0, kScoutBSP);
     partList[0]->ReplaceColor(kMarkerColor, longTeamColor);
-    partList[0]->userFlags |= CBSPUserFlags::kCullBackfaces;
 
     hitSoundId = 220;
     gHub->PreLoadSample(hitSoundId);

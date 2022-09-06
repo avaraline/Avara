@@ -1,13 +1,13 @@
 <map>
   <set information="Falling into the funnel is deadly.
 Goodies are only visible within 6 meters." funnelAHeight="7.5" funnelBHeight="7.5" funnelSHeight="7.5" pitHeight="20" incHeight="funnelAHeight + funnelSHeight + funnelBHeight + pitHeight + 4" wallHeight="funnelAHeight + funnelSHeight + funnelBHeight + pitHeight + 5" goodyGrenades="100" goodyMissiles="100" goodyBoosters="100" goodyHeight="funnelBHeight + pitHeight + funnelAHeight / 2 + 2.5" goody2Height="funnelBHeight + pitHeight + funnelAHeight + funnelSHeight * .7 + 2" goodyYon="6" ballShape="bspSphere" ballScale="0.2" ballHeight="incHeight + 10" defaultLives="5" wallYon="0.1" />
-  <SkyColor fill="#000000" frame="#dd0000" />
+  <SkyColor fill="#000000" frame="#e62100" />
   <GroundColor fill="#000000" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="6.458333333333334" cz="27.083333333333336" angle="45" />
-  <Wall fill="#ff3300" frame="#000000" x="41.770833333333336" z="14.20138888888889" w="25.625" d="0.625" h="0" />
-  <Wall fill="#ff3300" frame="#000000" x="42.395833333333336" z="59.82638888888889" w="25.625" d="0.625" h="0" />
-  <Wall fill="#ff3300" frame="#000000" x="54.895833333333336" z="36.70138888888889" w="0.625" d="45.625" h="0" />
-  <Wall fill="#ff3300" frame="#000000" x="29.270833333333336" z="37.32638888888889" w="0.625" d="45.625" h="0" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="6.458333333333334" cz="27.083333333333336" angle="45" />
+  <Wall fill="#ff4c00" frame="#000000" x="41.770833333333336" z="14.20138888888889" w="25.625" d="0.625" h="0" />
+  <Wall fill="#ff4c00" frame="#000000" x="42.395833333333336" z="59.82638888888889" w="25.625" d="0.625" h="0" />
+  <Wall fill="#ff4c00" frame="#000000" x="54.895833333333336" z="36.70138888888889" w="0.625" d="45.625" h="0" />
+  <Wall fill="#ff4c00" frame="#000000" x="29.270833333333336" z="37.32638888888889" w="0.625" d="45.625" h="0" />
   <set wallYon="0" />
   <Incarnator y="incHeight" cx="32.083333333333336" cz="57.01388888888889" angle="225" />
   <Incarnator y="incHeight" cx="32.083333333333336" cz="36.875" angle="270" />
@@ -16,69 +16,69 @@ Goodies are only visible within 6 meters." funnelAHeight="7.5" funnelBHeight="7.
   <Incarnator y="incHeight" cx="52.083333333333336" cz="36.875" angle="90" />
   <Incarnator y="incHeight" cx="52.083333333333336" cz="57.01388888888889" angle="135" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyHeight" speed="10" yon="goodyYon" fill="#0000dd" frame="#ff0099" cx="34.583333333333336" cz="37.01388888888889" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyHeight" speed="10" yon="goodyYon" fill="#012ce4" frame="#ff32a9" cx="34.583333333333336" cz="37.01388888888889" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyHeight" speed="10" yon="goodyYon" fill="#0000dd" frame="#ff0099" cx="49.583333333333336" cz="37.01388888888889" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goodyHeight" speed="10" yon="goodyYon" fill="#012ce4" frame="#ff32a9" cx="49.583333333333336" cz="37.01388888888889" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <set wallHeight="pitHeight" />
-  <Wall fill="#ff0000" frame="#000000" x="42.083333333333336" z="34.51388888888889" w="5" d="0" h="0" />
-  <Wall fill="#ff0000" frame="#000000" x="42.083333333333336" z="39.51388888888889" w="5" d="0" h="0" />
+  <Wall fill="#ff2600" frame="#000000" x="42.083333333333336" z="34.51388888888889" w="5" d="0" h="0" />
+  <Wall fill="#ff2600" frame="#000000" x="42.083333333333336" z="39.51388888888889" w="5" d="0" h="0" />
   <unique vars="mA" />
-  <Door2 shape="bspStandardFloor" scale="2" midY="0" deltaY="1" open="mA" close="mA" didOpen="mA" didClose="mA" openSpeed="100" closeSpeed="40" shotPower="10" openSound="0" closeSound="0" stopSound="0" yon="0.1" fill="#ff0000" frame="#000000" cx="42.083333333333336" cz="37.01388888888889" angle="90" />
+  <Door2 shape="bspStandardFloor" scale="2" midY="0" deltaY="1" open="mA" close="mA" didOpen="mA" didClose="mA" openSpeed="100" closeSpeed="40" shotPower="10" openSound="0" closeSound="0" stopSound="0" yon="0.1" fill="#ff2600" frame="#000000" cx="42.083333333333336" cz="37.01388888888889" angle="90" />
   <And in="@start" out="mA" />
-  <Goal motionRange="5" activeRange="5" sound="0" y="pitHeight / 2" yon="0.1" goalScore="0" fill="#ff0000" frame="#000000" cx="42.083333333333336" cz="37.01388888888889" angle="90" />
+  <Goal motionRange="5" activeRange="5" sound="0" y="pitHeight / 2" yon="0.1" goalScore="0" fill="#ff2600" frame="#000000" cx="42.083333333333336" cz="37.01388888888889" angle="90" />
   <set wallHeight="pitHeight" />
-  <Wall fill="#ff0000" frame="#000000" x="39.583333333333336" z="37.01388888888889" w="0" d="5" h="0" />
-  <Wall fill="#ff0000" frame="#000000" x="44.583333333333336" z="37.01388888888889" w="0" d="5" h="0" />
-  <Ramp deltaY="funnelAHeight" thickness="0" y="pitHeight + funnelBHeight" fill="#770000" frame="#000000" x="34.61805555555556" z="37.01388888888889" w="9.930555555555557" d="25" h="0" angle="270" />
-  <Ramp deltaY="funnelAHeight" thickness="0" y="pitHeight + funnelBHeight" fill="#770000" frame="#000000" x="49.583333333333336" z="37.01388888888889" w="10" d="25" h="0" angle="90" />
-  <Ramp deltaY="funnelBHeight" thickness="0" y="pitHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="29.513888888888893" w="5" d="10" h="0" angle="0" />
-  <Ramp deltaY="funnelBHeight" thickness="0" y="pitHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="44.51388888888889" w="5" d="10" h="0" angle="180" />
-  <Ramp deltaY="funnelSHeight" thickness="0" y="pitHeight + funnelBHeight + funnelAHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="54.51388888888889" w="25" d="10" h="0" angle="180" />
-  <Ramp deltaY="funnelSHeight" thickness="0" y="pitHeight + funnelBHeight + funnelAHeight" fill="#770000" frame="#000000" x="42.083333333333336" z="19.51388888888889" w="25" d="10" h="0" angle="0" />
+  <Wall fill="#ff2600" frame="#000000" x="39.583333333333336" z="37.01388888888889" w="0" d="5" h="0" />
+  <Wall fill="#ff2600" frame="#000000" x="44.583333333333336" z="37.01388888888889" w="0" d="5" h="0" />
+  <Ramp deltaY="funnelAHeight" thickness="0" y="pitHeight + funnelBHeight" fill="#8b0f00" frame="#000000" x="34.61805555555556" z="37.01388888888889" w="9.930555555555557" d="25" h="0" angle="270" />
+  <Ramp deltaY="funnelAHeight" thickness="0" y="pitHeight + funnelBHeight" fill="#8b0f00" frame="#000000" x="49.583333333333336" z="37.01388888888889" w="10" d="25" h="0" angle="90" />
+  <Ramp deltaY="funnelBHeight" thickness="0" y="pitHeight" fill="#8b0f00" frame="#000000" x="42.083333333333336" z="29.513888888888893" w="5" d="10" h="0" angle="0" />
+  <Ramp deltaY="funnelBHeight" thickness="0" y="pitHeight" fill="#8b0f00" frame="#000000" x="42.083333333333336" z="44.51388888888889" w="5" d="10" h="0" angle="180" />
+  <Ramp deltaY="funnelSHeight" thickness="0" y="pitHeight + funnelBHeight + funnelAHeight" fill="#8b0f00" frame="#000000" x="42.083333333333336" z="54.51388888888889" w="25" d="10" h="0" angle="180" />
+  <Ramp deltaY="funnelSHeight" thickness="0" y="pitHeight + funnelBHeight + funnelAHeight" fill="#8b0f00" frame="#000000" x="42.083333333333336" z="19.51388888888889" w="25" d="10" h="0" angle="0" />
   <set baseHeight="pitHeight" wallHeight="funnelBHeight" />
-  <Wall fill="#ff0000" frame="#000000" x="39.583333333333336" z="37.01388888888889" w="0" d="25" h="0" />
-  <Wall fill="#ff0000" frame="#000000" x="44.583333333333336" z="37.01388888888889" w="0" d="25" h="0" />
+  <Wall fill="#ff2600" frame="#000000" x="39.583333333333336" z="37.01388888888889" w="0" d="25" h="0" />
+  <Wall fill="#ff2600" frame="#000000" x="44.583333333333336" z="37.01388888888889" w="0" d="25" h="0" />
   <set baseHeight="pitHeight + funnelBHeight" wallHeight="funnelAHeight" />
-  <Wall fill="#ff0000" frame="#000000" x="42.083333333333336" z="24.51388888888889" w="25" d="0" h="0" />
-  <Wall fill="#ff0000" frame="#000000" x="42.083333333333336" z="49.51388888888889" w="25" d="0" h="0" />
+  <Wall fill="#ff2600" frame="#000000" x="42.083333333333336" z="24.51388888888889" w="25" d="0" h="0" />
+  <Wall fill="#ff2600" frame="#000000" x="42.083333333333336" z="49.51388888888889" w="25" d="0" h="0" />
   <set baseHeight="0" />
   <Incarnator y="incHeight" cx="42.083333333333336" cz="55.76388888888889" angle="180" />
   <Incarnator y="incHeight" cx="42.083333333333336" cz="17.63888888888889" angle="0" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goody2Height" speed="10" yon="goodyYon" fill="#0000dd" frame="#ff0099" cx="42.083333333333336" cz="17.01388888888889" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goody2Height" speed="10" yon="goodyYon" fill="#012ce4" frame="#ff32a9" cx="42.083333333333336" cz="17.01388888888889" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goody2Height" speed="10" yon="goodyYon" fill="#0000dd" frame="#ff0099" cx="42.083333333333336" cz="57.01388888888889" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="goody2Height" speed="10" yon="goodyYon" fill="#012ce4" frame="#ff32a9" cx="42.083333333333336" cz="57.01388888888889" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <YonBox yon="8" deltaY="pitHeight" x="42.083333333333336" z="37.01388888888889" w="5" d="5" h="0" r="2.5" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="30.833333333333336" cz="15.76388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="38.333333333333336" cz="15.76388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="53.333333333333336" cz="15.76388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="45.833333333333336" cz="15.76388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="30.833333333333336" cz="23.26388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="38.333333333333336" cz="23.26388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="53.333333333333336" cz="23.26388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="45.833333333333336" cz="23.26388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="30.833333333333336" cz="29.51388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="38.333333333333336" cz="29.51388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="53.333333333333336" cz="29.51388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="45.833333333333336" cz="29.51388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="30.833333333333336" cz="37.01388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="38.333333333333336" cz="37.01388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="53.333333333333336" cz="37.01388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="45.833333333333336" cz="37.01388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="30.833333333333336" cz="44.51388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="38.333333333333336" cz="44.51388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="53.333333333333336" cz="44.51388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="45.833333333333336" cz="44.51388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="30.833333333333336" cz="50.76388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="38.333333333333336" cz="50.76388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="53.333333333333336" cz="50.76388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="45.833333333333336" cz="50.76388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="30.833333333333336" cz="58.26388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="38.333333333333336" cz="58.26388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="53.333333333333336" cz="58.26388888888889" angle="135" />
-  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#ffff33" frame="#777777" cx="45.833333333333336" cz="58.26388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="30.833333333333336" cz="15.76388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="38.333333333333336" cz="15.76388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="53.333333333333336" cz="15.76388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="45.833333333333336" cz="15.76388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="30.833333333333336" cz="23.26388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="38.333333333333336" cz="23.26388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="53.333333333333336" cz="23.26388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="45.833333333333336" cz="23.26388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="30.833333333333336" cz="29.51388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="38.333333333333336" cz="29.51388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="53.333333333333336" cz="29.51388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="45.833333333333336" cz="29.51388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="30.833333333333336" cz="37.01388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="38.333333333333336" cz="37.01388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="53.333333333333336" cz="37.01388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="45.833333333333336" cz="37.01388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="30.833333333333336" cz="44.51388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="38.333333333333336" cz="44.51388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="53.333333333333336" cz="44.51388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="45.833333333333336" cz="44.51388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="30.833333333333336" cz="50.76388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="38.333333333333336" cz="50.76388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="53.333333333333336" cz="50.76388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="45.833333333333336" cz="50.76388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="30.833333333333336" cz="58.26388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="38.333333333333336" cz="58.26388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="53.333333333333336" cz="58.26388888888889" angle="135" />
+  <Ball shape="ballShape" scale="ballScale" y="ballHeight" changeOwnerTime="1000000" grabShield="-1" fill="#fffc41" frame="#8a8a8a" cx="45.833333333333336" cz="58.26388888888889" angle="135" />
 </map>

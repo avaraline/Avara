@@ -3,9 +3,9 @@
   <Timer in.0="@start" in.1="birdyCall" out="birdyCall" wait="265" />
   <Sound start="birdyCall" y="35" sound="snBirds" isAmbient="true" volume="20" />
   <set wallHeight="0.5" />
-  <Wall fill="#cc9900" frame="#000000" x="36.70138888888889" z="42.43055555555556" w="7.430555555555557" d="6.25" h="0" />
-  <SkyColor fill="#009999" frame="#66cccc" />
-  <GroundColor fill="#cc9900" />
+  <Wall fill="#d6a800" frame="#000000" x="36.70138888888889" z="42.43055555555556" w="7.430555555555557" d="6.25" h="0" />
+  <SkyColor fill="#00a8aa" frame="#76d4d6" />
+  <GroundColor fill="#d6a800" />
   <set designer="SomeGuy &lt;someguy@avara.net&gt;" information="We are the knights that say...NI!
 NI!
 NI, NI!!
@@ -25,45 +25,45 @@ Ni, NI, NI!!!" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#ffffff" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="52.91666666666667" z="25.555555555555557" w="5" d="5" h="1" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#ffffff" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="25.416666666666668" z="28.055555555555557" w="5" d="10" h="1" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#ffffff" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="20.416666666666668" z="25.555555555555557" w="5" d="5" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="30.41666666666667" z="50.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="47.91666666666667" z="55.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="47.91666666666667" z="50.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="47.91666666666667" z="25.555555555555557" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="30.41666666666667" z="50.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="47.91666666666667" z="55.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="47.91666666666667" z="50.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="47.91666666666667" z="25.555555555555557" w="5" d="5" h="2.5" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#ffffff" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="36.66666666666667" z="30.555555555555557" w="7.5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="47.91666666666667" z="40.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="47.91666666666667" z="40.55555555555556" w="5" d="5" h="2.5" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#ffffff" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="52.91666666666667" z="48.05555555555556" w="5" d="30" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="30.41666666666667" z="25.555555555555557" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="30.41666666666667" z="25.555555555555557" w="5" d="5" h="2.5" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#ffffff" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="42.91666666666667" z="35.55555555555556" w="5" d="25" h="1" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="25.416666666666668" z="60.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="25.416666666666668" z="60.55555555555556" w="5" d="5" h="2.5" />
   <set wallHeight="15" />
-  <Wall fill="#996633" frame="#000000" x="20.416666666666668" z="30.555555555555557" w="5" d="5" h="0" />
+  <Wall fill="#aa7942" frame="#000000" x="20.416666666666668" z="30.555555555555557" w="5" d="5" h="0" />
   <set wallHeight="15" />
-  <Wall fill="#996633" frame="#000000" x="25.416666666666668" z="55.55555555555556" w="5" d="5" h="0" />
+  <Wall fill="#aa7942" frame="#000000" x="25.416666666666668" z="55.55555555555556" w="5" d="5" h="0" />
   <set wallHeight="15" />
-  <Wall fill="#996633" frame="#000000" x="47.91666666666667" z="35.55555555555556" w="5" d="5" h="0" />
+  <Wall fill="#aa7942" frame="#000000" x="47.91666666666667" z="35.55555555555556" w="5" d="5" h="0" />
   <set wallHeight="15" />
-  <Wall fill="#996633" frame="#000000" x="42.91666666666667" z="50.55555555555556" w="5" d="5" h="0" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="42.91666666666667" z="55.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="25.416666666666668" z="35.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="20.416666666666668" z="45.55555555555556" w="5" d="5" h="2.5" />
-  <Field visible="true" deltaY="0" deltaZ="0" fill="#dddddd" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="52.91666666666667" z="30.555555555555557" w="5" d="5" h="2.5" />
+  <Wall fill="#aa7942" frame="#000000" x="42.91666666666667" z="50.55555555555556" w="5" d="5" h="0" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="42.91666666666667" z="55.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="25.416666666666668" z="35.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="20.416666666666668" z="45.55555555555556" w="5" d="5" h="2.5" />
+  <Field visible="true" deltaY="0" deltaZ="0" fill="#e4e4e4" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="52.91666666666667" z="30.555555555555557" w="5" d="5" h="2.5" />
   <Field visible="true" deltaY="0" deltaZ="0" fill="#ffffff" frame="#000000" cx="11.73611111111111" cz="2.5" angle="180" x="25.416666666666668" z="45.55555555555556" w="5" d="15" h="1" />
   <set wallHeight="0.5" />
-  <Wall fill="#cc9900" frame="#000000" x="15.416666666666668" z="43.05555555555556" w="5" d="40" h="0" />
+  <Wall fill="#d6a800" frame="#000000" x="15.416666666666668" z="43.05555555555556" w="5" d="40" h="0" />
   <set wallHeight="1" />
-  <Wall fill="#cc9900" frame="#000000" x="10.416666666666668" z="43.05555555555556" w="5" d="50" h="0" />
+  <Wall fill="#d6a800" frame="#000000" x="10.416666666666668" z="43.05555555555556" w="5" d="50" h="0" />
   <set wallHeight="0.5" />
-  <Wall fill="#cc9900" frame="#000000" x="36.66666666666667" z="65.55555555555556" w="47.5" d="5" h="0" />
+  <Wall fill="#d6a800" frame="#000000" x="36.66666666666667" z="65.55555555555556" w="47.5" d="5" h="0" />
   <set wallHeight="1" />
-  <Wall fill="#cc9900" frame="#000000" x="36.66666666666667" z="70.55555555555556" w="57.5" d="5" h="0" />
+  <Wall fill="#d6a800" frame="#000000" x="36.66666666666667" z="70.55555555555556" w="57.5" d="5" h="0" />
   <set wallHeight="0.5" />
-  <Wall fill="#cc9900" frame="#000000" x="57.91666666666667" z="43.05555555555556" w="5" d="40" h="0" />
+  <Wall fill="#d6a800" frame="#000000" x="57.91666666666667" z="43.05555555555556" w="5" d="40" h="0" />
   <set wallHeight="1" />
-  <Wall fill="#cc9900" frame="#000000" x="62.91666666666667" z="43.05555555555556" w="5" d="50" h="0" />
+  <Wall fill="#d6a800" frame="#000000" x="62.91666666666667" z="43.05555555555556" w="5" d="50" h="0" />
   <set wallHeight="0.5" />
-  <Wall fill="#cc9900" frame="#000000" x="36.66666666666667" z="20.555555555555557" w="47.5" d="5" h="0" />
+  <Wall fill="#d6a800" frame="#000000" x="36.66666666666667" z="20.555555555555557" w="47.5" d="5" h="0" />
   <set wallHeight="1" />
-  <Wall fill="#cc9900" frame="#000000" x="36.66666666666667" z="15.555555555555557" w="57.5" d="5" h="0" />
+  <Wall fill="#d6a800" frame="#000000" x="36.66666666666667" z="15.555555555555557" w="57.5" d="5" h="0" />
   <Incarnator start="@t3" stop="@f3" y="10" cx="11.666666666666668" cz="69.30555555555556" angle="225" />
   <set wallHeight="50" wallYon="0.5" />
   <Wall fill="#ffffff" frame="#000000" x="6.979166666666667" z="43.05555555555556" w="1.875" d="63.75" h="0" />
@@ -104,7 +104,7 @@ Ni, NI, NI!!!" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="390" />
-  <Goody shape="bspAvaraA" y="2.5" missiles="3" grenades="6" speed="3" start="mShow" out="mTaken" fill="#00cccc" frame="#000000" cx="36.59722222222223" cz="42.43055555555556" angle="270" />
+  <Goody shape="bspAvaraA" y="2.5" missiles="3" grenades="6" speed="3" start="mShow" out="mTaken" fill="#00d4d6" frame="#000000" cx="36.59722222222223" cz="42.43055555555556" angle="270" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="1000" fill="#ffffff" frame="#000000" cx="36.66666666666667" cz="42.43055555555556" angle="225" />
   <Sound y="50" sound="snBirds2" isPlaced="false" isAmbient="true" volume="8" loopCount="-1" cx="36.66666666666667" cz="42.43055555555556" angle="225" />
 </map>

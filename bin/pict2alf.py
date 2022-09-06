@@ -5,14 +5,17 @@ Converts Avara level PICT resources to ALF (Avara Level Format)
 """
 
 import enum
+from math import sqrt
 import os
 import re
 import struct
 import sys
+import numpy as np
 
 from alf_condense import VESTIGIAL_ATTRS
 from avarascript import Element, ScriptParseError, object_context, parse_script
 from dumb_round import dumb_round
+from applergb import applergb_to_srgb
 
 DEBUG_PARSER = False
 METERS_PER_POINT = 5 / 72
@@ -105,10 +108,13 @@ class Color:
         self.bpp = bpp
 
     def hex(self):
-        r = self.r >> (self.bpp - 8)
-        g = self.g >> (self.bpp - 8)
-        b = self.b >> (self.bpp - 8)
-        return "#%02x%02x%02x" % (r, g, b)
+        assert(self.bpp == 16)
+        c = [self.r, self.g, self.b]
+        colorvec = [x / 65535.0 for x in c]
+        srgb_8 = [int(round(255.0 * x)) for x in applergb_to_srgb(colorvec)]
+        thehex = "#%02x%02x%02x" % tuple(srgb_8)
+        assert(len(thehex) == 7)
+        return thehex
 
     def __str__(self):
         return self.hex()
