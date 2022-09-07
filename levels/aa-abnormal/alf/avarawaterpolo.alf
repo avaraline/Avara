@@ -1,14 +1,14 @@
 <map>
   <set defaultLives="200" />
-  <GroundColor fill="#555555" />
-  <SkyColor fill="#9999ff" frame="#ff66ff" />
-  <Ball y="8" grabShield="0" mass="15" ejectPitch="5" ejectPower=".75" fill="#ff6600" frame="#ff6600" cx="78.99305555555556" cz="109.89583333333334" angle="225" />
+  <GroundColor fill="#686868" />
+  <SkyColor fill="#aaadff" frame="#ff85ff" />
+  <Ball y="8" grabShield="0" mass="15" ejectPitch="5" ejectPower=".75" fill="#ff7c00" frame="#ff7c00" cx="78.99305555555556" cz="109.89583333333334" angle="225" />
   <Walker team="2" cx="64.86111111111111" cz="97.8125" angle="315" />
   <Walker team="1" cx="92.46527777777777" cz="121.77083333333334" angle="135" />
-  <Wall fill="#008800" frame="#000000" x="103.4375" z="157.11805555555557" w="0.625" d="0.625" h="23" />
-  <Wall fill="#008800" frame="#000000" x="54.0625" z="157.11805555555557" w="0.625" d="0.625" h="23" />
-  <Wall fill="#ffff00" frame="#000000" x="54.0625" z="62.74305555555556" w="0.625" d="0.625" h="23" />
-  <Wall fill="#ffff00" frame="#000000" x="103.4375" z="62.74305555555556" w="0.625" d="0.625" h="23" />
+  <Wall fill="#009600" frame="#000000" x="103.4375" z="157.11805555555557" w="0.625" d="0.625" h="23" />
+  <Wall fill="#009600" frame="#000000" x="54.0625" z="157.11805555555557" w="0.625" d="0.625" h="23" />
+  <Wall fill="#fffb00" frame="#000000" x="54.0625" z="62.74305555555556" w="0.625" d="0.625" h="23" />
+  <Wall fill="#fffb00" frame="#000000" x="103.4375" z="62.74305555555556" w="0.625" d="0.625" h="23" />
   <set wallHeight="0" />
   <Wall fill="#ffffff" frame="#000000" x="78.75" z="62.74305555555556" w="48.75" d="0.625" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="103.4375" z="109.93055555555557" w="0.625" d="93.75" h="0" />
@@ -166,40 +166,40 @@ Each player has 200 lives and the game lasts 7 min." />
   <Field deltaY=".03" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" angle="45" x="91.25" z="123.05555555555557" w="25" d="23.75" h="1.5" />
   <Field deltaY=".03" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" angle="45" x="91.25" z="146.18055555555557" w="25" d="22.5" h="1.5" />
   <Field deltaY=".03" fill="#ffffff" frame="#000000" cx="58.75" cz="68.68055555555556" angle="45" x="66.25" z="144.93055555555557" w="25" d="25" h="1.5" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="86.25" cz="57.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="56.25" cz="57.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="71.25" cz="57.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="101.25" cz="57.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="86.25" cz="72.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="56.25" cz="72.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="71.25" cz="72.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="101.25" cz="72.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="86.25" cz="87.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="56.25" cz="87.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="71.25" cz="87.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="101.25" cz="87.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="86.25" cz="102.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="56.25" cz="102.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="71.25" cz="102.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="101.25" cz="102.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="86.25" cz="117.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="56.25" cz="117.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="71.25" cz="117.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="101.25" cz="117.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="86.25" cz="132.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="56.25" cz="132.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="71.25" cz="132.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="101.25" cz="132.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="86.25" cz="147.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="56.25" cz="147.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="71.25" cz="147.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="101.25" cz="147.5" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="86.18055555555556" cz="162.43055555555557" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="56.18055555555556" cz="162.43055555555557" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="71.18055555555556" cz="162.43055555555557" angle="90" />
-  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0066ff" frame="#0066ff" cx="101.18055555555556" cz="162.43055555555557" angle="90" />
-  <Goal team="1" pitch="90" y="2" motionRange="2" activeRange=".5" goalScore="100000" goalMsg="@yellowscore" fill="#008800" frame="#000000" cx="78.75" cz="158.68055555555557" angle="180" />
-  <Goal team="2" pitch="90" y="2" motionRange="2" activeRange=".5" goalScore="100000" goalMsg="@greenscore" fill="#ffff00" frame="#000000" cx="78.75" cz="61.18055555555556" angle="0" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="86.25" cz="57.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="56.25" cz="57.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="71.25" cz="57.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="101.25" cz="57.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="86.25" cz="72.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="56.25" cz="72.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="71.25" cz="72.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="101.25" cz="72.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="86.25" cz="87.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="56.25" cz="87.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="71.25" cz="87.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="101.25" cz="87.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="86.25" cz="102.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="56.25" cz="102.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="71.25" cz="102.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="101.25" cz="102.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="86.25" cz="117.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="56.25" cz="117.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="71.25" cz="117.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="101.25" cz="117.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="86.25" cz="132.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="56.25" cz="132.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="71.25" cz="132.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="101.25" cz="132.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="86.25" cz="147.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="56.25" cz="147.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="71.25" cz="147.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="101.25" cz="147.5" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="86.18055555555556" cz="162.43055555555557" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="56.18055555555556" cz="162.43055555555557" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="71.18055555555556" cz="162.43055555555557" angle="90" />
+  <Hologram shape="bspBiggerPlane" y="1.6" fill="#0080ff" frame="#0080ff" cx="101.18055555555556" cz="162.43055555555557" angle="90" />
+  <Goal team="1" pitch="90" y="2" motionRange="2" activeRange=".5" goalScore="100000" goalMsg="@yellowscore" fill="#009600" frame="#000000" cx="78.75" cz="158.68055555555557" angle="180" />
+  <Goal team="2" pitch="90" y="2" motionRange="2" activeRange=".5" goalScore="100000" goalMsg="@greenscore" fill="#fffb00" frame="#000000" cx="78.75" cz="61.18055555555556" angle="0" />
   <Field deltaY=".03" fill="#ffffff" frame="#000000" cx="78.75" cz="61.18055555555556" angle="0" x="78.75" z="158.05555555555557" w="7.5" d="1.25" h="1.5" />
   <Wall fill="#ffffff" frame="#000000" x="54.0625" z="109.93055555555557" w="0.625" d="93.75" h="0" y="1.6" />
   <Wall fill="#ffffff" frame="#000000" x="64.6875" z="157.11805555555557" w="20.625" d="0.625" h="0" y="1.6" />
@@ -219,5 +219,5 @@ Each player has 200 lives and the game lasts 7 min." />
   <Wall fill="#ffffff" frame="#000000" x="156.25" z="109.93055555555557" w="1.25" d="182.5" h="25" y="25" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@greenscore" cx="47.63888888888889" cz="1.9444444444444446" angle="225" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@yellowscore" cx="62.01388888888889" cz="1.3194444444444446" angle="225" />
-  <Guard y="50" speed="10" shotPower="100" freq="50" watch="scoutMask" shield="100" fill="#ff66ff" frame="#000000" cx="78.75" cz="109.93055555555556" angle="315" />
+  <Guard y="50" speed="10" shotPower="100" freq="50" watch="scoutMask" shield="100" fill="#ff85ff" frame="#000000" cx="78.75" cz="109.93055555555556" angle="315" />
 </map>

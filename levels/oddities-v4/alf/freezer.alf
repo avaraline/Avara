@@ -11,94 +11,94 @@
   <Incarnator cx="10.555555555555555" cz="34.51388888888889" angle="270" />
   <set information="Entering the freezer temporarily excludes you from the game.
 There are two separate areas in the level." />
-  <SkyColor fill="#777777" frame="#66ffff" />
-  <GroundColor fill="#99ccff" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="34.93055555555556" cz="67.70833333333334" angle="45" />
+  <SkyColor fill="#8a8a8a" frame="#73fdff" />
+  <GroundColor fill="#a8d6ff" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="34.93055555555556" cz="67.70833333333334" angle="45" />
   <Sound sound="snArcticWind" loopCount="-1" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
-  <Teleporter group="@recenterA" y="10" start="0" fill="#9900cc" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
-  <Teleporter destGroup="@recenterB" y="25" activeRange="38" deadRange="35" yon="0.01" fill="#9900cc" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
+  <Teleporter group="@recenterA" y="10" start="0" fill="#ab30d6" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
+  <Teleporter destGroup="@recenterB" y="25" activeRange="38" deadRange="35" yon="0.01" fill="#ab30d6" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
   <unique vars="mStop" />
-  <Teleporter shape="0" y="freezerHeight" activeRange="2" start="@melt" stop="mStop" destGroup="@recenterA" fill="#9900cc" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
+  <Teleporter shape="0" y="freezerHeight" activeRange="2" start="@melt" stop="mStop" destGroup="@recenterA" fill="#ab30d6" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" />
   <Timer in="@melt" wait="3" out="mStop" />
-  <WallDoor stepOnMsg="@freeze" open="@freeze" didOpen="@frozen" close="@melt" deltaY="freezerHeight" guardDelay="1" fill="#99ccff" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="3.75" d="3.75" h="0.5" />
+  <WallDoor stepOnMsg="@freeze" open="@freeze" didOpen="@frozen" close="@melt" deltaY="freezerHeight" guardDelay="1" fill="#a8d6ff" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="3.75" d="3.75" h="0.5" />
   <set baseHeight="freezerHeight" />
-  <Field watch="collisionDamageMask" deltaX="-fieldForce" fill="#99ccff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="31.493055555555557" z="34.583333333333336" w="1.875" d="8.75" h="0" />
-  <Field watch="collisionDamageMask" deltaX="fieldForce" fill="#99ccff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="38.36805555555556" z="34.583333333333336" w="1.875" d="8.75" h="0" />
-  <Field watch="collisionDamageMask" deltaZ="fieldForce" fill="#99ccff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="34.93055555555556" z="38.020833333333336" w="8.75" d="1.875" h="0" />
-  <Field watch="collisionDamageMask" deltaZ="-fieldForce" fill="#99ccff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="34.93055555555556" z="31.145833333333336" w="8.75" d="1.875" h="0" />
-  <Wall fill="#99ccff" frame="#000000" x="37.11805555555556" z="34.583333333333336" w="0.625" d="3.75" h="0" />
-  <Wall fill="#99ccff" frame="#000000" x="32.74305555555556" z="34.583333333333336" w="0.625" d="3.75" h="0" />
-  <Wall fill="#99ccff" frame="#000000" x="34.93055555555556" z="32.395833333333336" w="3.75" d="0.625" h="0" />
-  <Wall fill="#99ccff" frame="#000000" x="34.93055555555556" z="36.770833333333336" w="3.75" d="0.625" h="0" />
+  <Field watch="collisionDamageMask" deltaX="-fieldForce" fill="#a8d6ff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="31.493055555555557" z="34.583333333333336" w="1.875" d="8.75" h="0" />
+  <Field watch="collisionDamageMask" deltaX="fieldForce" fill="#a8d6ff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="38.36805555555556" z="34.583333333333336" w="1.875" d="8.75" h="0" />
+  <Field watch="collisionDamageMask" deltaZ="fieldForce" fill="#a8d6ff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="34.93055555555556" z="38.020833333333336" w="8.75" d="1.875" h="0" />
+  <Field watch="collisionDamageMask" deltaZ="-fieldForce" fill="#a8d6ff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="34.93055555555556" z="31.145833333333336" w="8.75" d="1.875" h="0" />
+  <Wall fill="#a8d6ff" frame="#000000" x="37.11805555555556" z="34.583333333333336" w="0.625" d="3.75" h="0" />
+  <Wall fill="#a8d6ff" frame="#000000" x="32.74305555555556" z="34.583333333333336" w="0.625" d="3.75" h="0" />
+  <Wall fill="#a8d6ff" frame="#000000" x="34.93055555555556" z="32.395833333333336" w="3.75" d="0.625" h="0" />
+  <Wall fill="#a8d6ff" frame="#000000" x="34.93055555555556" z="36.770833333333336" w="3.75" d="0.625" h="0" />
   <set baseHeight="0" wa="freezerHeight + wallHeight" />
-  <Wall fill="#99ccff" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="5" d="5" h="0.5" />
+  <Wall fill="#a8d6ff" frame="#000000" x="34.93055555555556" z="34.583333333333336" w="5" d="5" h="0.5" />
   <set wa="freezerHeight + wallHeight" />
-  <Field watch="collisionDamageMask" deltaY="fieldForce" deltaX=".5" fill="#99ccff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="34.93055555555556" z="34.583333333333336" w="6.25" d="6.25" h="1.5" />
+  <Field watch="collisionDamageMask" deltaY="fieldForce" deltaX=".5" fill="#a8d6ff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="34.93055555555556" z="34.583333333333336" w="6.25" d="6.25" h="1.5" />
   <set wa="freezerHeight -2" />
-  <Field watch="collisionDamageMask" deltaY="-fieldForce" start="@frozen" stop="@melt" fill="#99ccff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="34.93055555555556" z="34.583333333333336" w="6.25" d="6.25" h="2" />
+  <Field watch="collisionDamageMask" deltaY="-fieldForce" start="@frozen" stop="@melt" fill="#a8d6ff" frame="#000000" cx="34.93055555555556" cz="34.583333333333336" angle="0" x="34.93055555555556" z="34.583333333333336" w="6.25" d="6.25" h="2" />
   <set wallHeight="freezerHeight" />
-  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" x="32.74305555555556" z="32.395833333333336" w="0.625" d="0.625" h="0" />
-  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" x="32.74305555555556" z="36.770833333333336" w="0.625" d="0.625" h="0" />
-  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" x="37.11805555555556" z="36.770833333333336" w="0.625" d="0.625" h="0" />
-  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00ccff" frame="#000000" x="37.11805555555556" z="32.395833333333336" w="0.625" d="0.625" h="0" />
+  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00d5ff" frame="#000000" x="32.74305555555556" z="32.395833333333336" w="0.625" d="0.625" h="0" />
+  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00d5ff" frame="#000000" x="32.74305555555556" z="36.770833333333336" w="0.625" d="0.625" h="0" />
+  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00d5ff" frame="#000000" x="37.11805555555556" z="36.770833333333336" w="0.625" d="0.625" h="0" />
+  <WallDoor open="@freeze" close="@melt" deltaY="freezerHeight" fill="#00d5ff" frame="#000000" x="37.11805555555556" z="32.395833333333336" w="0.625" d="0.625" h="0" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="50" cz="49.65277777777778" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="50" cz="49.65277777777778" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="56.25" cz="34.65277777777778" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="56.25" cz="34.65277777777778" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="50" cz="19.65277777777778" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="50" cz="19.65277777777778" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="20" cz="19.65277777777778" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="20" cz="19.65277777777778" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="20" cz="49.65277777777778" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="20" cz="49.65277777777778" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="35" cz="55.90277777777778" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="35" cz="55.90277777777778" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="13.75" cz="34.65277777777778" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="13.75" cz="34.65277777777778" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="35" cz="13.402777777777779" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="35" cz="13.402777777777779" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
-  <Hologram isAmbient="true" fill="#66ffff" frame="#000000" cx="49.30555555555556" cz="34.583333333333336" angle="225" />
-  <Wall fill="#99ccff" frame="#000000" x="84.93055555555556" z="84.58333333333334" w="3.75" d="3.75" h="0.5" />
+  <Hologram isAmbient="true" fill="#73fdff" frame="#000000" cx="49.30555555555556" cz="34.583333333333336" angle="225" />
+  <Wall fill="#a8d6ff" frame="#000000" x="84.93055555555556" z="84.58333333333334" w="3.75" d="3.75" h="0.5" />
   <set baseHeight="freezerHeight" />
-  <Wall fill="#99ccff" frame="#000000" x="84.93055555555556" z="84.58333333333334" w="5" d="5" h="0.5" />
+  <Wall fill="#a8d6ff" frame="#000000" x="84.93055555555556" z="84.58333333333334" w="5" d="5" h="0.5" />
   <set baseHeight="0" wallHeight="freezerHeight" />
-  <Wall fill="#00ccff" frame="#000000" x="82.74305555555556" z="82.39583333333334" w="0.625" d="0.625" h="0" />
-  <Wall fill="#00ccff" frame="#000000" x="82.74305555555556" z="86.77083333333334" w="0.625" d="0.625" h="0" />
-  <Wall fill="#00ccff" frame="#000000" x="87.11805555555556" z="86.77083333333334" w="0.625" d="0.625" h="0" />
-  <Wall fill="#00ccff" frame="#000000" x="87.11805555555556" z="82.39583333333334" w="0.625" d="0.625" h="0" />
+  <Wall fill="#00d5ff" frame="#000000" x="82.74305555555556" z="82.39583333333334" w="0.625" d="0.625" h="0" />
+  <Wall fill="#00d5ff" frame="#000000" x="82.74305555555556" z="86.77083333333334" w="0.625" d="0.625" h="0" />
+  <Wall fill="#00d5ff" frame="#000000" x="87.11805555555556" z="86.77083333333334" w="0.625" d="0.625" h="0" />
+  <Wall fill="#00d5ff" frame="#000000" x="87.11805555555556" z="82.39583333333334" w="0.625" d="0.625" h="0" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="85.625" cz="97.77777777777779" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="85.625" cz="97.77777777777779" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="85" cz="71.52777777777779" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="85" cz="71.52777777777779" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="96.875" cz="92.77777777777779" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="96.875" cz="92.77777777777779" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="96.875" cz="77.15277777777779" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="96.875" cz="77.15277777777779" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="73.125" cz="77.15277777777779" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="73.125" cz="77.15277777777779" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#99ccff" frame="#66ffff" cx="73.125" cz="92.15277777777779" angle="135" />
+  <Goody shape="bspGoody" grenades="goodyGrenades" missiles="goodyMissiles" boosters="goodyBoosters" start="mReset" out="mTaken" y="1.5" scale="goodyScale" speed="goodySpeed" fill="#a8d6ff" frame="#73fdff" cx="73.125" cz="92.15277777777779" angle="135" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="goodyTime" />
-  <Hologram y="freezerHeight + .5" isAmbient="true" yon="10" fill="#66ffff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
-  <Teleporter y=".5" scale=".55" destGroup="@recenterA" activeRange="2" shape="bspGroundStar" start="@TelOn" stop="@TelOff" yon="18" fill="#66ffff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
-  <Field shape="bspTeleporter" scale="1.3" watch="playerMask" exit="@TelSwitch" fill="#66ffff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
+  <Hologram y="freezerHeight + .5" isAmbient="true" yon="10" fill="#73fdff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
+  <Teleporter y=".5" scale=".55" destGroup="@recenterA" activeRange="2" shape="bspGroundStar" start="@TelOn" stop="@TelOff" yon="18" fill="#73fdff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
+  <Field shape="bspTeleporter" scale="1.3" watch="playerMask" exit="@TelSwitch" fill="#73fdff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
   <Sound sound="snArcticWind" loopCount="-1" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
-  <Teleporter group="@recenterB" y="freezerHeight + 4" start="0" fill="#66ffff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
-  <Teleporter destGroup="@recenterB" y="-3" activeRange="20" deadRange="17" yon="0.01" fill="#66ffff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
-  <WallDoor midYaw="45" fill="#99ccff" frame="#000000" x="62.395833333333336" z="62.395833333333336" w="29.930555555555557" d="0.625" h="0.25" />
+  <Teleporter group="@recenterB" y="freezerHeight + 4" start="0" fill="#73fdff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
+  <Teleporter destGroup="@recenterB" y="-3" activeRange="20" deadRange="17" yon="0.01" fill="#73fdff" frame="#000000" cx="84.93055555555556" cz="84.58333333333334" angle="135" />
+  <WallDoor midYaw="45" fill="#a8d6ff" frame="#000000" x="62.395833333333336" z="62.395833333333336" w="29.930555555555557" d="0.625" h="0.25" />
   <Distributor in="@TelSwitch" out.0="@TelOn" out.1="@TelOff" />
   <YonBox y="5" deltaY="5" x="35" z="34.65277777777778" w="5" d="5" h="0" r="1.875" angle="135" />
 </map>

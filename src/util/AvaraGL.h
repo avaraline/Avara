@@ -33,6 +33,7 @@ void AvaraGLDrawPolygons(CBSPPart* part);
 void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView);
 void AvaraGLToggleRendering(int active);
 bool AvaraGLIsRendering();
+void AvaraGLUpdateData(CBSPPart* part);
 
 static inline glm::mat4 ToFloatMat(Matrix *m) {
     glm::mat4 mat(1.0);

@@ -18,8 +18,7 @@ uniform float lights_active = 1.0;
 out vec4 color;
 
 vec3 diffuse_light(vec3 light, vec3 lightColor) {
-    vec3 dir = fragmentNormal * mix(-1.0, 1.0, gl_FrontFacing);
-    return max(dot(dir, light), 0.0) * lightColor;
+    return max(dot(fragmentNormal, light), 0.0) * lightColor;
 }
 
 vec3 diffuse() {
