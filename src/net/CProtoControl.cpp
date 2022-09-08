@@ -58,6 +58,7 @@ void CProtoControl::Attach(CCommManager *aManager) {
 Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
     CNetManager *theNet = theGame->itsNet;
     Boolean didHandle = true;
+    short slot;
 
     switch (thePacket->command) {
         case kpKillConnection:
@@ -92,7 +93,8 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceiveColorChange(thePacket->dataBuffer);
             break;
         case kpLoadLevel:
-            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->dataBuffer, thePacket->p3);
+            // p2 is proxy for which slot originally sent the kpLoadLevel command
+            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->p2, thePacket->dataBuffer, thePacket->p3);
             break;
         case kpLevelLoaded:
             theNet->LevelLoadStatus(thePacket->sender, thePacket->p2, 0, std::string(thePacket->dataBuffer));
@@ -124,9 +126,12 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
         case kpPlayerStatusChange:
             theNet->ReceivePlayerStatus(
-                thePacket->sender, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
+                thePacket->p1, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
             break;
-
+        case kpJSON:
+            theNet->ReceiveJSON(
+                thePacket->p1, thePacket->p2, thePacket->p3, std::string(thePacket->dataBuffer));
+            break;
         case kpKeyAndMouseRequest: {
             theGame->itsNet->playerTable[itsManager->myId]->ResendFrame(
                 thePacket->p3, thePacket->sender, kpKeyAndMouse);
@@ -222,6 +227,10 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
         case kpLoginAck:
             itsManager->myId = thePacket->p1;
             itsManager->SendPacket(kdEveryone - (1 << thePacket->p1), kpPing, 0, 0, 32, 0, NULL);
+            // kpLoginAck is called when anyone joins/exits, so good place to check where the "local" player is
+            for (int i = 0; i < kMaxAvaraPlayers; i++) {
+                theNet->playerTable[i]->SetLocal(); // reset which player is "local"
+            }
             break;
         case kpKeyAndMouseRequest:
 

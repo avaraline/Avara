@@ -60,7 +60,7 @@ CGUI::CGUI(CAvaraGame *game) {
     itsCursor = new CScaledBSP;
     itsCursor->IScaledBSP(FIX3(100), kCursorBSP, 0, 0);
     //itsCursor->privateAmbient = FIX3(800);
-    itsCursor->UpdateOpenGLData();
+    AvaraGLUpdateData(itsCursor);
     cursorWorld = new CBSPWorldImpl;
     cursorWorld->IBSPWorld(1);
     cursorWorld->AddPart(itsCursor);

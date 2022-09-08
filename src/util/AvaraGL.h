@@ -34,6 +34,7 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView);
 void AvaraGLToggleRendering(int active);
 bool AvaraGLIsRendering();
 glm::vec3 AvaraGLScreenSpaceToWorldSpace(CViewParameters *theView, glm::vec4 *mouse);
+void AvaraGLUpdateData(CBSPPart* part);
 
 static inline glm::mat4 ToFloatMat(Matrix *m) {
     glm::mat4 mat(1.0);

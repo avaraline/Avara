@@ -23,8 +23,6 @@
 #define kMarkerColor 0x00fefefe
 #define kOtherMarkerColor 0x00fe0000
 
-bool cull_back_faces = false;
-
 class BSPViewer : public CApplication {
 public:
     CBSPPart *itsPart;
@@ -35,8 +33,6 @@ public:
     Vector location, orientation;
     int current_id;
     bool update = true;
-
-    bool drawsky = true;
 
     BSPViewer(int id) : CApplication("BSP Viewer") {
         AvaraGLInitContext();
@@ -71,28 +67,27 @@ public:
         orientation[2] = FIX(0);
     }
 
+    
     bool newPart(int id) {
-        try {
             if (itsWorld->GetPartCount() > 0) {
                 itsWorld->RemovePart(itsPart);
             }
             itsPart = new CBSPPart;
             itsPart->IBSPPart(id);
-            if (itsPart->polyCount > 1) {
+            if (itsPart->polyCount > 0) {
                 itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
-                itsPart->ReplaceColor(kOtherMarkerColor, 13421568); // yellow
-                itsPart->UpdateOpenGLData();
-                itsWorld->AddPart(itsPart);
+                itsPart->ReplaceColor(kOtherMarkerColor, 16646144); // red
+                AvaraGLUpdateData(itsPart);
+s                itsWorld->AddPart(itsPart);
                 SDL_Log("Loaded BSP %d", id);
                 return true;
             }
             else return false;
-        } catch (...) {
-            return false;
-        }
+        
     }
 
-    bool event(SDL_Event &event) {
+
+    bool HandleEvent(SDL_Event &event) {
         switch (event.type) {
             case SDL_MOUSEMOTION:
                 if (event.motion.state & SDL_BUTTON(SDL_BUTTON_LEFT)) {
@@ -141,12 +136,7 @@ public:
                     case SDLK_a:
                         orientation[0] = FIX(0);
                         orientation[1] = FIX(-90);
-                        update = true;
-                        break;
-                    case SDLK_b:
-                        cull_back_faces = !cull_back_faces;
-                        update = true;
-                        break;
+                        return true;
                     case SDLK_r:
                         do {
                             current_id++;
@@ -154,8 +144,7 @@ public:
                                 current_id = 1;
                             }
                         } while (newPart(current_id) != true);
-                        update = true;
-                        break;
+                        return true;
                     case SDLK_t:
                         do{ 
                             current_id--;
@@ -163,11 +152,10 @@ public:
                                 current_id = 1500;
                             }
                         } while(newPart(current_id) != true);
-                        update = true;
-                        break;
-                    case SDLK_5:
-                        drawsky = !drawsky;
-                        break;
+                        return true;
+                    case SDLK_y:
+                        newPart(current_id);
+                        return true;
                 }
                 break;
         }
@@ -192,23 +180,19 @@ public:
                 itsPart->userFlags &= ~CBSPUserFlags::kCullBackfaces;
             }
 
-            itsPart->Reset();
-            itsPart->RotateZ(orientation[2]);
-            itsPart->RotateY(orientation[1]);
-            itsPart->RotateX(orientation[0]);
-            TranslatePart(itsPart, location[0], location[1], location[2]);
-            SDL_Log("X: %f Y: %f Z: %f o[0]: %f o[1]: %f o[2]: %f",
-                ToFloat(location[0]),
-                ToFloat(location[1]),
-                ToFloat(location[2]),
-                ToFloat(orientation[0]),
-                ToFloat(orientation[1]),
-                ToFloat(orientation[2])
-            );
-            itsPart->MoveDone();
-            update = false;
-        }
-        if (drawsky)
+        AvaraGLViewport(mFBSize.x, mFBSize.y);
+        itsView->SetViewRect(mFBSize.x, mFBSize.y, mFBSize.x / 2, mFBSize.y / 2);
+        itsView->viewPixelRatio = FIX(4.0/3.0);
+        itsView->CalculateViewPyramidCorners();
+        itsView->PointCamera();
+
+        itsPart->Reset();
+        itsPart->RotateZ(orientation[2]);
+        itsPart->RotateY(orientation[1]);
+        itsPart->RotateX(orientation[0]);
+        TranslatePart(itsPart, location[0], location[1], location[2]);
+        itsPart->MoveDone();
+
         worldShader->ShadeWorld(itsView);
 
         itsWorld->Render(itsView);

@@ -1,49 +1,49 @@
 <map>
   <set designer="Juri Munkki" information="How fast can you complete this mission?" kFloor.0="4" kFloor.1="11" wallHeight="0.2" />
-  <SkyColor fill="#66ffff" frame="#003399" />
-  <GroundColor fill="#330066" />
+  <SkyColor fill="#73fdff" frame="#0048aa" />
+  <GroundColor fill="#431579" />
   <set baseHeight="0" />
   <Incarnator cx="14.23611111111111" cz="17.36111111111111" angle="270" />
   <WallDoor open="@enterLift1" close="@enterLift1" deltaY="kFloor[0]" openDelay="5" closeDelay="100" openSpeed="4" fill="#000000" frame="#000000" x="24.23611111111111" z="17.36111111111111" w="5" d="5" h="0" />
   <Area enter="@enterLift1" cx="14.23611111111111" cz="17.36111111111111" r="2.5" />
-  <Wall fill="#663399" frame="#000000" x="14.236111111111112" z="17.36111111111111" w="2.5" d="12.5" h="1" y="6" />
-  <Wall fill="#663399" frame="#000000" x="14.236111111111112" z="22.36111111111111" w="2.5" d="2.5" h="6" />
-  <Wall fill="#663399" frame="#000000" x="14.236111111111112" z="12.36111111111111" w="2.5" d="2.5" h="6" />
+  <Wall fill="#7a4aaa" frame="#000000" x="14.236111111111112" z="17.36111111111111" w="2.5" d="12.5" h="1" y="6" />
+  <Wall fill="#7a4aaa" frame="#000000" x="14.236111111111112" z="22.36111111111111" w="2.5" d="2.5" h="6" />
+  <Wall fill="#7a4aaa" frame="#000000" x="14.236111111111112" z="12.36111111111111" w="2.5" d="2.5" h="6" />
   <set baseHeight="kFloor[0]" />
-  <Wall fill="#9966ff" frame="#000000" x="34.236111111111114" z="17.36111111111111" w="15" d="5" h="0" />
-  <Wall fill="#9966ff" frame="#000000" x="49.236111111111114" z="17.36111111111111" w="15" d="15" h="0" />
+  <Wall fill="#ab82ff" frame="#000000" x="34.236111111111114" z="17.36111111111111" w="15" d="5" h="0" />
+  <Wall fill="#ab82ff" frame="#000000" x="49.236111111111114" z="17.36111111111111" w="15" d="15" h="0" />
   <Timer wait="100" in.0="@start" in.1="@openSwing" out="@openSwing" restart="true" />
-  <WallDoor deltaY="0" deltaZ="10" open="@openSwing" close="@openSwing" closeDelay="50" shotPower="1" openSound="0" closeSound="0" stopSound="0" fill="#9966ff" frame="#000000" x="64.23611111111111" z="12.36111111111111" w="15" d="5" h="0" />
-  <Wall fill="#9966ff" frame="#000000" x="74.23611111111111" z="17.36111111111111" w="5" d="15" h="0" y="0.7" />
-  <Wall fill="#9966ff" frame="#000000" x="79.23611111111111" z="22.36111111111111" w="5" d="15" h="0" y="1.40" />
+  <WallDoor deltaY="0" deltaZ="10" open="@openSwing" close="@openSwing" closeDelay="50" shotPower="1" openSound="0" closeSound="0" stopSound="0" fill="#ab82ff" frame="#000000" x="64.23611111111111" z="12.36111111111111" w="15" d="5" h="0" />
+  <Wall fill="#ab82ff" frame="#000000" x="74.23611111111111" z="17.36111111111111" w="5" d="15" h="0" y="0.7" />
+  <Wall fill="#ab82ff" frame="#000000" x="79.23611111111111" z="22.36111111111111" w="5" d="15" h="0" y="1.40" />
   <set baseHeight="kFloor[0] + 2.1" />
-  <Wall fill="#9966ff" frame="#000000" x="84.23611111111111" z="27.361111111111114" w="5" d="15" h="0" />
-  <WallDoor stepOnMsg="@dropFloor" open="@dropFloor" close="@dropFloor" closeSpeed="4" closeDelay="100" middle="0.5" midY="-kFloor[0]" deltaY="-kFloor[0]" midRoll="-180" roll="-360 * 2" openSpeed="4" shotPower="1" fill="#9966ff" frame="#000000" x="88.61111111111111" z="27.36111111111111" w="3.75" d="5" h="0" />
-  <Door y="0.5" yaw="360" shape="bspPlatform" open="@operateRoundLift" close="@operateRoundLift" closeDelay="70" openSound="0" closeSound="0" stopSound="0" deltaY="4" fill="#cc0099" frame="#000000" cx="104.23611111111111" cz="27.36111111111111" angle="225" />
+  <Wall fill="#ab82ff" frame="#000000" x="84.23611111111111" z="27.361111111111114" w="5" d="15" h="0" />
+  <WallDoor stepOnMsg="@dropFloor" open="@dropFloor" close="@dropFloor" closeSpeed="4" closeDelay="100" middle="0.5" midY="-kFloor[0]" deltaY="-kFloor[0]" midRoll="-180" roll="-360 * 2" openSpeed="4" shotPower="1" fill="#ab82ff" frame="#000000" x="88.61111111111111" z="27.36111111111111" w="3.75" d="5" h="0" />
+  <Door y="0.5" yaw="360" shape="bspPlatform" open="@operateRoundLift" close="@operateRoundLift" closeDelay="70" openSound="0" closeSound="0" stopSound="0" deltaY="4" fill="#d82da9" frame="#000000" cx="104.23611111111111" cz="27.36111111111111" angle="225" />
   <Timer in.0="@operateRoundLift" out.0="@operateRoundLift" wait="120" />
-  <Teleporter y="4.5" win="1000" start="@operateRoundLift" fill="#cc0099" frame="#000000" cx="104.23611111111111" cz="27.36111111111111" angle="225" />
-  <Wall fill="#9966ff" frame="#000000" x="96.11111111111111" z="27.36111111111111" w="11.25" d="5" h="0" />
-  <Wall fill="#9966ff" frame="#000000" x="84.23611111111111" z="39.861111111111114" w="5" d="10" h="0" y="1" />
-  <Wall fill="#cc0099" frame="#000000" x="80.48611111111111" z="49.861111111111114" w="17.5" d="10" h="0" y="1.6" />
-  <WallDoor stepOnMsg="@lift2Step" open="@lift2Step" close="@lowerLift2" fill="#cc0099" frame="#000000" x="72.67361111111111" z="51.736111111111114" w="3.125" d="7.5" h="0" y="1.8" />
+  <Teleporter y="4.5" win="1000" start="@operateRoundLift" fill="#d82da9" frame="#000000" cx="104.23611111111111" cz="27.36111111111111" angle="225" />
+  <Wall fill="#ab82ff" frame="#000000" x="96.11111111111111" z="27.36111111111111" w="11.25" d="5" h="0" />
+  <Wall fill="#ab82ff" frame="#000000" x="84.23611111111111" z="39.861111111111114" w="5" d="10" h="0" y="1" />
+  <Wall fill="#d82da9" frame="#000000" x="80.48611111111111" z="49.861111111111114" w="17.5" d="10" h="0" y="1.6" />
+  <WallDoor stepOnMsg="@lift2Step" open="@lift2Step" close="@lowerLift2" fill="#d82da9" frame="#000000" x="72.67361111111111" z="51.736111111111114" w="3.125" d="7.5" h="0" y="1.8" />
   <Timer in="@lift2step" out="@lowerLift2" />
   <And in="@lowerPlatform" out="@lowerLift2" />
   <set baseHeight="kFloor[1]" />
-  <Wall fill="#cc0099" frame="#000000" x="66.42361111111111" z="50.173611111111114" w="9.375" d="10.625" h="0" />
-  <Wall fill="#cc0099" frame="#000000" x="58.298611111111114" z="45.798611111111114" w="5.625" d="11.875" h="0" />
-  <Wall fill="#cc0099" frame="#000000" x="52.673611111111114" z="39.861111111111114" w="4.375" d="7.5" h="0" />
-  <Wall fill="#cc0099" frame="#000000" x="45.486111111111114" z="36.736111111111114" w="8.75" d="5" h="0" />
-  <Wall fill="#cc0099" frame="#000000" x="40.798611111111114" z="29.861111111111114" w="4.375" d="7.5" h="0" />
-  <Wall fill="#cc0099" frame="#000000" x="45.798611111111114" z="24.54861111111111" w="4.375" d="9.375" h="0" />
-  <Door close="@lowerPlatform" open="@timeOut" openSpeed="1" closeSpeed="1" status="isOpen" deltaY="5" shape="bspPlatform" stepOnMsg="@sayYeah" stopSound="0" fill="#cc0099" frame="#000000" cx="47.986111111111114" cz="16.73611111111111" angle="225" />
+  <Wall fill="#d82da9" frame="#000000" x="66.42361111111111" z="50.173611111111114" w="9.375" d="10.625" h="0" />
+  <Wall fill="#d82da9" frame="#000000" x="58.298611111111114" z="45.798611111111114" w="5.625" d="11.875" h="0" />
+  <Wall fill="#d82da9" frame="#000000" x="52.673611111111114" z="39.861111111111114" w="4.375" d="7.5" h="0" />
+  <Wall fill="#d82da9" frame="#000000" x="45.486111111111114" z="36.736111111111114" w="8.75" d="5" h="0" />
+  <Wall fill="#d82da9" frame="#000000" x="40.798611111111114" z="29.861111111111114" w="4.375" d="7.5" h="0" />
+  <Wall fill="#d82da9" frame="#000000" x="45.798611111111114" z="24.54861111111111" w="4.375" d="9.375" h="0" />
+  <Door close="@lowerPlatform" open="@timeOut" openSpeed="1" closeSpeed="1" status="isOpen" deltaY="5" shape="bspPlatform" stepOnMsg="@sayYeah" stopSound="0" fill="#d82da9" frame="#000000" cx="47.986111111111114" cz="16.73611111111111" angle="225" />
   <Timer in="@lowerPlatform" out="@timeOut" wait="500" />
   <And in="@sayYeah" out="@operateRoundLift" />
   <Sound start="@sayYeah" sound="snYeah" isAmbient="false" cx="47.986111111111114" cz="16.73611111111111" angle="225" />
-  <Solid shape="bspAvara" fill="#cc0099" frame="#000000" cx="116.73611111111111" cz="27.361111111111114" angle="90" />
+  <Solid shape="bspAvara" fill="#d82da9" frame="#000000" cx="116.73611111111111" cz="27.361111111111114" angle="90" />
   <set baseHeight="0" />
-  <Wall fill="#990066" frame="#000000" x="33.923611111111114" z="17.36111111111111" w="0.625" d="1.25" h="2.5" />
-  <Hologram shape="bspGroundArrow" fill="#990066" frame="#000000" cx="29.861111111111114" cz="17.291666666666668" angle="270" />
-  <Switch y="1.8" status="1" out.0="@lowerPlatform" out.1="@timeOut" in.1="@timeOut" fill="#cc0099" frame="#000000" cx="33.611111111111114" cz="17.36111111111111" angle="270" />
-  <Field deltaY="0" deltaX="-0.1" fill="#cc0099" frame="#000000" cx="33.611111111111114" cz="17.36111111111111" angle="270" x="27.67361111111111" z="17.36111111111111" w="4.375" d="1.25" h="2.5" />
+  <Wall fill="#ab1f79" frame="#000000" x="33.923611111111114" z="17.36111111111111" w="0.625" d="1.25" h="2.5" />
+  <Hologram shape="bspGroundArrow" fill="#ab1f79" frame="#000000" cx="29.861111111111114" cz="17.291666666666668" angle="270" />
+  <Switch y="1.8" status="1" out.0="@lowerPlatform" out.1="@timeOut" in.1="@timeOut" fill="#d82da9" frame="#000000" cx="33.611111111111114" cz="17.36111111111111" angle="270" />
+  <Field deltaY="0" deltaX="-0.1" fill="#d82da9" frame="#000000" cx="33.611111111111114" cz="17.36111111111111" angle="270" x="27.67361111111111" z="17.36111111111111" w="4.375" d="1.25" h="2.5" />
   <Sound y="150" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="700" cx="120.76388888888889" cz="191.38888888888889" angle="225" />
 </map>

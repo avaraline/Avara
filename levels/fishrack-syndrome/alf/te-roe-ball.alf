@@ -2,130 +2,130 @@
   <set wallHeight="0" baseHeight="75" designer="Plastic Chicken" information="Based on a scene from the movie &quot;&quot;TRON.&quot;&quot;  Use the ball to knock out the opponent's squares.  Catch the ball before it lands to prevent your squares from falling.  Red and Cyan.  Up to four players." hull.0="1006" hull.1="hull[0]" hull.2="hull[0]" ambient.i=".8" defaultLives="1" gravity=".6" />
   <SkyColor fill="#000000" frame="#000000" />
   <GroundColor fill="#000000" />
-  <Teleporter shape="false" start="@winTeam" win="1000" activeRange="2000" fill="#339966" frame="#000000" cx="3.75" cz="9.375" angle="315" />
+  <Teleporter shape="false" start="@winTeam" win="1000" activeRange="2000" fill="#3da779" frame="#000000" cx="3.75" cz="9.375" angle="315" />
   <set wallHeight="0" baseHeight="50" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@adie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff6666" frame="#000000" x="59.0625" z="57.8125" w="8.125" d="8.125" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" x="56.875" z="51.5625" w="12.5" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" x="52.8125" z="60" w="4.375" d="12.5" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" x="65.3125" z="55.625" w="4.375" d="12.5" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff0000" frame="#000000" x="61.25" z="64.0625" w="12.5" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" x="56.875" z="47.1875" w="21.25" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" x="61.25" z="68.4375" w="21.25" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" x="48.4375" z="60" w="4.375" d="21.25" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#dd0000" frame="#000000" x="69.6875" z="55.625" w="4.375" d="21.25" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" yon=".001" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" x="44.0625" z="60" w="4.375" d="30" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" x="56.875" z="42.8125" w="30" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" x="61.25" z="72.8125" w="30" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#660000" frame="#000000" x="74.0625" z="55.625" w="4.375" d="30" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@adie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff7e79" frame="#000000" x="59.0625" z="57.8125" w="8.125" d="8.125" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff2600" frame="#000000" x="56.875" z="51.5625" w="12.5" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff2600" frame="#000000" x="52.8125" z="60" w="4.375" d="12.5" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff2600" frame="#000000" x="65.3125" z="55.625" w="4.375" d="12.5" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#ff2600" frame="#000000" x="61.25" z="64.0625" w="12.5" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#e62100" frame="#000000" x="56.875" z="47.1875" w="21.25" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#e62100" frame="#000000" x="61.25" z="68.4375" w="21.25" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#e62100" frame="#000000" x="48.4375" z="60" w="4.375" d="21.25" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@cdie" openSound="false" close="@rhealth" closeSpeed="100" fill="#e62100" frame="#000000" x="69.6875" z="55.625" w="4.375" d="21.25" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" yon=".001" close="@rhealth" closeSpeed="100" fill="#7b0c00" frame="#000000" x="44.0625" z="60" w="4.375" d="30" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#7b0c00" frame="#000000" x="56.875" z="42.8125" w="30" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#7b0c00" frame="#000000" x="61.25" z="72.8125" w="30" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ddie" openSound="false" close="@rhealth" closeSpeed="100" fill="#7b0c00" frame="#000000" x="74.0625" z="55.625" w="4.375" d="30" h="0" />
   <Incarnator y="10" mask="T3" cx="59.375" cz="55.625" angle="315" />
   <Incarnator y="10" mask="T3" cx="59.375" cz="60" angle="225" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@acdie" openSound="false" close="@health" closeSpeed="100" fill="#66ccff" frame="#000000" x="124.6875" z="57.8125" w="8.125" d="8.125" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" x="122.5" z="51.5625" w="12.5" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" x="118.4375" z="60" w="4.375" d="12.5" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" x="130.9375" z="55.625" w="4.375" d="12.5" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#0099cc" frame="#000000" x="126.875" z="64.0625" w="12.5" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" x="122.5" z="47.1875" w="21.25" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" x="126.875" z="68.4375" w="21.25" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" x="114.0625" z="60" w="4.375" d="21.25" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0000ff" frame="#000000" x="135.3125" z="55.625" w="4.375" d="21.25" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" x="109.6875" z="60" w="4.375" d="30" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" x="122.5" z="42.8125" w="30" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" x="126.875" z="72.8125" w="30" d="4.375" h="0" />
-  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#000088" frame="#000000" x="139.6875" z="55.625" w="4.375" d="30" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@acdie" openSound="false" close="@health" closeSpeed="100" fill="#76d6ff" frame="#000000" x="124.6875" z="57.8125" w="8.125" d="8.125" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#00aad6" frame="#000000" x="122.5" z="51.5625" w="12.5" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#00aad6" frame="#000000" x="118.4375" z="60" w="4.375" d="12.5" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" close="@health" closeSpeed="100" fill="#00aad6" frame="#000000" x="130.9375" z="55.625" w="4.375" d="12.5" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@bcdie" openSound="false" close="@health" closeSpeed="100" fill="#00aad6" frame="#000000" x="126.875" z="64.0625" w="12.5" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0333ff" frame="#000000" x="122.5" z="47.1875" w="21.25" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0333ff" frame="#000000" x="126.875" z="68.4375" w="21.25" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0333ff" frame="#000000" x="114.0625" z="60" w="4.375" d="21.25" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@ccdie" openSound="false" close="@health" closeSpeed="100" fill="#0333ff" frame="#000000" x="135.3125" z="55.625" w="4.375" d="21.25" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#011a9a" frame="#000000" x="109.6875" z="60" w="4.375" d="30" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#011a9a" frame="#000000" x="122.5" z="42.8125" w="30" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#011a9a" frame="#000000" x="126.875" z="72.8125" w="30" d="4.375" h="0" />
+  <WallDoor deltaX="1500" openSpeed="100" open="@dcdie" openSound="false" close="@health" closeSpeed="100" fill="#011a9a" frame="#000000" x="139.6875" z="55.625" w="4.375" d="30" h="0" />
   <Incarnator y="10" mask="T6" cx="124.375" cz="55.625" angle="45" />
   <Incarnator y="10" mask="T6" cx="124.375" cz="60" angle="135" />
-  <Ball y="20" group="1" targetGroup="targ1" changeOwnerTime="5" yon="1000" ejectPower="2.5" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" angle="315" />
+  <Ball y="20" group="1" targetGroup="targ1" changeOwnerTime="5" yon="1000" ejectPower="2.5" fill="#c7c7c7" frame="#797979" cx="91.875" cz="57.5" angle="315" />
   <Sound isMusic="true" isPlaced="false" sound="1729" loopCount="-1" start="@music" volume="3" cx="91.875" cz="57.5" angle="315" />
   <Sound isPlaced="false" sound="1730" start="@score" volume="6" cx="91.875" cz="57.5" angle="315" />
   <And in="@start" out="@music" />
   <Timer in="@music" wait="1875 / 4 + 36" out="@music" />
   <Timer in.0="@adie" in.1="@bdie" in.2="@cdie" in.3="@ddie" in.4="@acdie" in.5="@bcdie" in.6="@ccdie" in.7="@dcdie" wait="1" out="@score" />
-  <Teleporter sound="false" shape="false" y="1500" group="2" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" angle="315" />
-  <Door shape="bspFloorFrame" y="1497" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5" yon=".001" didOpen="@reset" fill="#bbbbbb" frame="#666666" cx="91.875" cz="57.5" angle="315" />
-  <Field y="4.8" shape="bspGroundArrow" watch="targ1" mask="allTeams" start="@redServe" stop="@blueServe" deltaX="-.5" deltaY=".4" deltaZ="0" visible="false" fill="#ee0000" frame="#000000" cx="91.25" cz="57.5" angle="90" />
+  <Teleporter sound="false" shape="false" y="1500" group="2" fill="#c7c7c7" frame="#797979" cx="91.875" cz="57.5" angle="315" />
+  <Door shape="bspFloorFrame" y="1497" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5" yon=".001" didOpen="@reset" fill="#c7c7c7" frame="#797979" cx="91.875" cz="57.5" angle="315" />
+  <Field y="4.8" shape="bspGroundArrow" watch="targ1" mask="allTeams" start="@redServe" stop="@blueServe" deltaX="-.5" deltaY=".4" deltaZ="0" visible="false" fill="#f42300" frame="#000000" cx="91.25" cz="57.5" angle="90" />
   <And in="@start" out="@redServe" />
   <Timer in="@redServe" wait="24" out="@blueServe" />
   <Timer in="@blueServe" wait="24" out="@redServe" />
-  <Field y="4.8" shape="bspGroundArrow" watch="targ1" mask="allTeams" start="@blueServe" stop="@redServe" deltaX=".5" deltaY=".4" deltaZ="0" visible="false" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" />
+  <Field y="4.8" shape="bspGroundArrow" watch="targ1" mask="allTeams" start="@blueServe" stop="@redServe" deltaX=".5" deltaY=".4" deltaZ="0" visible="false" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" />
   <set wallHeight=".3" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="139.6875" z="55.625" w="4.375" d="30" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="139.6875" z="55.625" w="4.375" d="30" h="0" />
   <And in="@start" out.1="@health" out.2="@rhealth" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="109.6875" z="60" w="4.375" d="30" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="126.875" z="72.8125" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="122.5" z="42.8125" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ccdie" stop="@ccdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="122.5" z="47.1875" w="21.25" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ccdie" stop="@ccdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="126.875" z="68.4375" w="21.25" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ccdie" stop="@ccdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="114.0625" z="60" w="4.375" d="21.25" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ccdie" stop="@ccdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="135.3125" z="55.625" w="4.375" d="21.25" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bcdie" stop="@bcdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="118.4375" z="60" w="4.375" d="12.5" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bcdie" stop="@bcdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="130.9375" z="55.625" w="4.375" d="12.5" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bcdie" stop="@bcdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="126.875" z="64.0625" w="12.5" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bcdie" stop="@bcdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="122.5" z="51.5625" w="12.5" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@acdie" stop="@acdie" start="@health" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="124.6875" z="57.8125" w="8.125" d="8.125" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ddie" stop="@ddie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="74.0625" z="55.625" w="4.375" d="30" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ddie" stop="@ddie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="61.25" z="72.8125" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@cdie" stop="@cdie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="61.25" z="68.4375" w="21.25" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@adie" stop="@adie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="59.0625" z="57.8125" w="8.125" d="8.125" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ddie" stop="@ddie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="56.875" z="42.8125" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ddie" stop="@ddie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="44.0625" z="60" w="4.375" d="30" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@cdie" stop="@cdie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="56.875" z="47.1875" w="21.25" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@cdie" stop="@cdie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="48.4375" z="60" w="4.375" d="21.25" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@cdie" stop="@cdie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="69.6875" z="55.625" w="4.375" d="21.25" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bdie" stop="@bdie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="61.25" z="64.0625" w="12.5" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bdie" stop="@bdie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="56.875" z="51.5625" w="12.5" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bdie" stop="@bdie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="65.3125" z="55.625" w="4.375" d="12.5" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bdie" stop="@bdie" start="@rhealth" fill="#3399cc" frame="#000000" cx="92.5" cz="57.5" angle="270" x="52.8125" z="60" w="4.375" d="12.5" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="109.6875" z="60" w="4.375" d="30" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="126.875" z="72.8125" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@dcdie" stop="@dcdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="122.5" z="42.8125" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ccdie" stop="@ccdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="122.5" z="47.1875" w="21.25" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ccdie" stop="@ccdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="126.875" z="68.4375" w="21.25" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ccdie" stop="@ccdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="114.0625" z="60" w="4.375" d="21.25" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ccdie" stop="@ccdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="135.3125" z="55.625" w="4.375" d="21.25" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bcdie" stop="@bcdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="118.4375" z="60" w="4.375" d="12.5" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bcdie" stop="@bcdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="130.9375" z="55.625" w="4.375" d="12.5" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bcdie" stop="@bcdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="126.875" z="64.0625" w="12.5" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bcdie" stop="@bcdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="122.5" z="51.5625" w="12.5" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@acdie" stop="@acdie" start="@health" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="124.6875" z="57.8125" w="8.125" d="8.125" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ddie" stop="@ddie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="74.0625" z="55.625" w="4.375" d="30" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ddie" stop="@ddie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="61.25" z="72.8125" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@cdie" stop="@cdie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="61.25" z="68.4375" w="21.25" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@adie" stop="@adie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="59.0625" z="57.8125" w="8.125" d="8.125" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ddie" stop="@ddie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="56.875" z="42.8125" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@ddie" stop="@ddie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="44.0625" z="60" w="4.375" d="30" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@cdie" stop="@cdie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="56.875" z="47.1875" w="21.25" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@cdie" stop="@cdie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="48.4375" z="60" w="4.375" d="21.25" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@cdie" stop="@cdie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="69.6875" z="55.625" w="4.375" d="21.25" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bdie" stop="@bdie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="61.25" z="64.0625" w="12.5" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bdie" stop="@bdie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="56.875" z="51.5625" w="12.5" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bdie" stop="@bdie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="65.3125" z="55.625" w="4.375" d="12.5" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="0" watch="targ1" enter="@bdie" stop="@bdie" start="@rhealth" fill="#3daad6" frame="#000000" cx="92.5" cz="57.5" angle="270" x="52.8125" z="60" w="4.375" d="12.5" h="0" />
   <set baseHeight="0" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="41.25" cz="58.75" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="143.75" cz="58.125" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="78.125" cz="57.5" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="107.5" cz="55" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="125.625" cz="40.625" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="125" cz="77.5" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="59.375" cz="77.5" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="59.375" cz="40.625" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="125" cz="58.75" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="58.75" cz="58.125" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="92.5" cz="56.25" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="93.125" cz="38.75" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="93.75" cz="22.5" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="91.875" cz="76.875" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="91.875" cz="97.5" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="60" cz="97.5" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="127.5" cz="97.5" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="153.75" cz="86.875" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="160" cz="70" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="36.875" cz="91.875" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="25.625" cz="76.25" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="147.5" cz="36.875" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="123.125" cz="22.5" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="30.625" cz="39.375" angle="315" />
-  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#bbbbbb" frame="#666666" cx="59.375" cz="24.375" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="41.25" cz="58.75" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="143.75" cz="58.125" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="78.125" cz="57.5" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="107.5" cz="55" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="125.625" cz="40.625" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="125" cz="77.5" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="59.375" cz="77.5" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="59.375" cz="40.625" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="125" cz="58.75" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="58.75" cz="58.125" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="92.5" cz="56.25" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="93.125" cz="38.75" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="93.75" cz="22.5" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="91.875" cz="76.875" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="91.875" cz="97.5" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="60" cz="97.5" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="127.5" cz="97.5" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="153.75" cz="86.875" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="160" cz="70" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="36.875" cz="91.875" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="25.625" cz="76.25" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="147.5" cz="36.875" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="123.125" cz="22.5" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="30.625" cz="39.375" angle="315" />
+  <Goal group="1" motionRange="40" activeRange="20" goalScore="0" yon=".001" fill="#c7c7c7" frame="#797979" cx="59.375" cz="24.375" angle="315" />
   <set wallHeight="100" />
-  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="35" z="10.9375" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="65" z="10.9375" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="95" z="10.9375" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="125" z="10.9375" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="151.875" z="10.9375" w="23.75" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="35" z="104.6875" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="65" z="104.6875" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="95" z="104.6875" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="125" z="104.6875" w="30" d="4.375" h="0" />
-  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="151.875" z="104.6875" w="23.75" d="4.375" h="0" />
-  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="22.1875" z="23.75" w="4.375" d="30" h="0" />
-  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="22.1875" z="53.75" w="4.375" d="30" h="0" />
-  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="22.1875" z="83.75" w="4.375" d="30" h="0" />
-  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="22.1875" z="102.8125" w="4.375" d="8.125" h="0" />
-  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="161.5625" z="23.75" w="4.375" d="30" h="0" />
-  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="161.5625" z="53.75" w="4.375" d="30" h="0" />
-  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="161.5625" z="83.75" w="4.375" d="30" h="0" />
-  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#bbbbbb" frame="#000000" cx="59.375" cz="24.375" angle="315" x="161.5625" z="102.8125" w="4.375" d="8.125" h="0" />
-  <Teleporter y="44" activeRange="1000" deadRange="39" destGroup="2" group="3" shape="false" out="@kill" mask="T3" fill="#bbbbbb" frame="#666666" cx="58.75" cz="57.5" angle="315" />
-  <Goody y="55" shape="2843" speed="5" start="@start" out="@rhealth" fill="#bbbbbb" frame="#666666" cx="58.75" cz="57.5" angle="315" />
+  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="35" z="10.9375" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="65" z="10.9375" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="95" z="10.9375" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="125" z="10.9375" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="151.875" z="10.9375" w="23.75" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="35" z="104.6875" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="65" z="104.6875" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="95" z="104.6875" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="125" z="104.6875" w="30" d="4.375" h="0" />
+  <Field deltaX="0" deltaY="0" deltaZ="-1" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="151.875" z="104.6875" w="23.75" d="4.375" h="0" />
+  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="22.1875" z="23.75" w="4.375" d="30" h="0" />
+  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="22.1875" z="53.75" w="4.375" d="30" h="0" />
+  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="22.1875" z="83.75" w="4.375" d="30" h="0" />
+  <Field deltaX="1" deltaY="0" deltaZ="0" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="22.1875" z="102.8125" w="4.375" d="8.125" h="0" />
+  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="161.5625" z="23.75" w="4.375" d="30" h="0" />
+  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="161.5625" z="53.75" w="4.375" d="30" h="0" />
+  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="161.5625" z="83.75" w="4.375" d="30" h="0" />
+  <Field deltaX="-1" deltaY="0" deltaZ="0" watch="targ1" fill="#c7c7c7" frame="#000000" cx="59.375" cz="24.375" angle="315" x="161.5625" z="102.8125" w="4.375" d="8.125" h="0" />
+  <Teleporter y="44" activeRange="1000" deadRange="39" destGroup="2" group="3" shape="false" out="@kill" mask="T3" fill="#c7c7c7" frame="#797979" cx="58.75" cz="57.5" angle="315" />
+  <Goody y="55" shape="2843" speed="5" start="@start" out="@rhealth" fill="#c7c7c7" frame="#797979" cx="58.75" cz="57.5" angle="315" />
   <Sound isPlaced="false" volume="6" start="@rhealth" stop="@startb" sound="1731" cx="58.75" cz="57.5" angle="315" />
   <Timer in="@start" wait="1" out="@startb" />
-  <Teleporter y="44" activeRange="1000" deadRange="39" destGroup="2" group="3" shape="false" out="@kill" mask="T6" fill="#bbbbbb" frame="#666666" cx="125" cz="57.5" angle="315" />
-  <Goody y="55" shape="2843" speed="5" start="@start" out="@health" fill="#bbbbbb" frame="#666666" cx="125" cz="57.5" angle="315" />
+  <Teleporter y="44" activeRange="1000" deadRange="39" destGroup="2" group="3" shape="false" out="@kill" mask="T6" fill="#c7c7c7" frame="#797979" cx="125" cz="57.5" angle="315" />
+  <Goody y="55" shape="2843" speed="5" start="@start" out="@health" fill="#c7c7c7" frame="#797979" cx="125" cz="57.5" angle="315" />
   <Sound isPlaced="false" volume="6" start="@health" stop="@startb" sound="1731" cx="125" cz="57.5" angle="315" />
-  <Teleporter shape="false" start="@winTeam" win="1000" activeRange="2000" fill="#339966" frame="#000000" cx="3.75" cz="9.375" angle="315" />
+  <Teleporter shape="false" start="@winTeam" win="1000" activeRange="2000" fill="#3da779" frame="#000000" cx="3.75" cz="9.375" angle="315" />
 </map>

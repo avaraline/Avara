@@ -1,46 +1,46 @@
 <map>
   <set wallHeight="0.5" />
-  <Wall fill="#ae710f" frame="#000000" x="26.5625" z="24.6875" w="20.625" d="38.125" h="0" y="0" />
+  <Wall fill="#bd8310" frame="#000000" x="26.5625" z="24.6875" w="20.625" d="38.125" h="0" y="0" />
   <set wallHeight="0.5" />
-  <Wall fill="#ae710f" frame="#000000" x="48.125" z="24.6875" w="21.25" d="38.125" h="0" y="0" />
+  <Wall fill="#bd8310" frame="#000000" x="48.125" z="24.6875" w="21.25" d="38.125" h="0" y="0" />
   <set wallHeight="20" />
-  <Wall fill="#ae710f" frame="#000000" x="15.9375" z="25" w="0.625" d="38.75" h="0" y="0" />
+  <Wall fill="#bd8310" frame="#000000" x="15.9375" z="25" w="0.625" d="38.75" h="0" y="0" />
   <set wallHeight="20" />
-  <Wall fill="#ae710f" frame="#000000" x="37.5" z="5.3125" w="43.75" d="0.625" h="0" y="0" />
+  <Wall fill="#bd8310" frame="#000000" x="37.5" z="5.3125" w="43.75" d="0.625" h="0" y="0" />
   <set wallHeight="20" />
-  <Wall fill="#ae710f" frame="#000000" x="59.0625" z="25" w="0.625" d="38.75" h="0" y="0" />
+  <Wall fill="#bd8310" frame="#000000" x="59.0625" z="25" w="0.625" d="38.75" h="0" y="0" />
   <set wallHeight="20" />
-  <Wall fill="#ae710f" frame="#000000" x="37.5" z="44.0625" w="42.5" d="0.625" h="0" y="0" />
+  <Wall fill="#bd8310" frame="#000000" x="37.5" z="44.0625" w="42.5" d="0.625" h="0" y="0" />
   <set wallHeight="0" />
-  <Wall fill="#663300" frame="#000000" x="37.1875" z="24.6875" w="0.625" d="38.125" h="0" y="0" />
+  <Wall fill="#7a4300" frame="#000000" x="37.1875" z="24.6875" w="0.625" d="38.125" h="0" y="0" />
   <set wallHeight="1" />
-  <Wall fill="#ae710f" frame="#000000" x="26.5625" z="24.6875" w="20.625" d="38.125" h="0" y="19" />
+  <Wall fill="#bd8310" frame="#000000" x="26.5625" z="24.6875" w="20.625" d="38.125" h="0" y="19" />
   <set wallHeight="1" />
-  <Wall fill="#ae710f" frame="#000000" x="48.125" z="24.6875" w="21.25" d="38.125" h="0" y="19" />
+  <Wall fill="#bd8310" frame="#000000" x="48.125" z="24.6875" w="21.25" d="38.125" h="0" y="19" />
   <set wallHeight="0" />
-  <Wall fill="#663300" frame="#000000" x="37.1875" z="24.6875" w="0.625" d="38.125" h="0" y="20" />
+  <Wall fill="#7a4300" frame="#000000" x="37.1875" z="24.6875" w="0.625" d="38.125" h="0" y="20" />
   <Incarnator y="3" cx="20" cz="13.125" angle="45" />
   <Incarnator y="3" cx="20.27777777777778" cz="25.97222222222222" angle="45" />
   <Incarnator y="3" cx="19.65277777777778" cz="39.09722222222222" angle="45" />
   <Incarnator y="3" cx="44.30555555555556" cz="12.847222222222221" angle="45" />
   <Incarnator y="3" cx="43.68055555555556" cz="24.72222222222222" angle="45" />
   <Incarnator y="3" cx="44.30555555555556" cz="38.47222222222222" angle="45" />
-  <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#0e36fd" frame="#000000" cx="3.2638888888888893" cz="6.180555555555556" angle="180" />
+  <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#1155fd" frame="#000000" cx="3.2638888888888893" cz="6.180555555555556" angle="180" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody speed="5" shape="bspMissile" y="3" grenades="0" missiles="4" start="mShow" out="mTaken" fill="#fdfd15" frame="#010c0a" cx="55.833333333333336" cz="41.111111111111114" angle="0" />
+  <Goody speed="5" shape="bspMissile" y="3" grenades="0" missiles="4" start="mShow" out="mTaken" fill="#fdf917" frame="#000d0a" cx="55.833333333333336" cz="41.111111111111114" angle="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody speed="5" shape="bspMissile" y="3" grenades="0" missiles="4" start="mShow" out="mTaken" fill="#fdfd15" frame="#010c0a" cx="19.583333333333336" cz="9.23611111111111" angle="0" />
+  <Goody speed="5" shape="bspMissile" y="3" grenades="0" missiles="4" start="mShow" out="mTaken" fill="#fdf917" frame="#000d0a" cx="19.583333333333336" cz="9.23611111111111" angle="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody speed="5" shape="bspGrenade" y="3" grenades="6" missiles="0" start="mShow" out="mTaken" fill="#fdfd15" frame="#010c0a" cx="20.208333333333336" cz="42.361111111111114" angle="0" />
+  <Goody speed="5" shape="bspGrenade" y="3" grenades="6" missiles="0" start="mShow" out="mTaken" fill="#fdf917" frame="#000d0a" cx="20.208333333333336" cz="42.361111111111114" angle="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody speed="5" shape="bspGrenade" y="3" grenades="6" missiles="0" start="mShow" out="mTaken" fill="#fdfd15" frame="#010c0a" cx="54.93055555555556" cz="9.23611111111111" angle="0" />
+  <Goody speed="5" shape="bspGrenade" y="3" grenades="6" missiles="0" start="mShow" out="mTaken" fill="#fdf917" frame="#000d0a" cx="54.93055555555556" cz="9.23611111111111" angle="0" />
   <set designer="Edgar Hons" information="I was born in a cardboard box, I'm just paying homage to it. Sometimes I wonder if there's a random cardboard box lying around with an umbilical cord in it" />
 </map>

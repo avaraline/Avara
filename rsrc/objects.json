@@ -354,7 +354,7 @@
             "description": "A bit like a `WallSolid`, but movable by external impulses from shots and explosions."
         },
         "Dome": {
-            "type": "placed",
+            "type": "glow",
             "attrs": {
                 "hasFloor": {
                     "default": false,

@@ -4,8 +4,8 @@ crushing fell of Thor’s mighty hammer Mjollnir.  It
 serves as an arena where haughty mortals use their 
 craft and skill to battle to the death for his 
 amusement." />
-  <SkyColor n="1" fill="#66ffff" frame="#003399" />
-  <GroundColor fill="#330066" />
+  <SkyColor n="1" fill="#73fdff" frame="#0048aa" />
+  <GroundColor fill="#431579" />
   <Incarnator y="80" cx="57.74305555555556" cz="39.270833333333336" angle="270" />
   <set wallHeight="20" />
   <Wall fill="#ffffff" frame="#000000" x="4.131944444444445" z="81.38888888888889" w="3.8194444444444446" d="137.77777777777777" h="0" />
@@ -18,13 +18,13 @@ amusement." />
   <Wall fill="#ffffff" frame="#000000" x="131.28472222222223" z="91.97916666666666" w="17.430555555555557" d="116.59722222222221" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="64.30555555555556" z="141.59722222222223" w="116.52777777777777" d="17.361111111111086" h="0" />
   <set wallHeight="3" />
-  <Ramp y="0" deltaY="7.4" fill="#000055" frame="#000000" x="117.1875" z="46.701388888888886" w="10.763888888888886" d="26.041666666666664" h="0.5" angle="0" />
+  <Ramp y="0" deltaY="7.4" fill="#010e68" frame="#000000" x="117.1875" z="46.701388888888886" w="10.763888888888886" d="26.041666666666664" h="0.5" angle="0" />
   <Wall fill="#ffffff" frame="#000000" x="111.07638888888889" z="46.701388888888886" w="1.4583333333333286" d="26.041666666666664" h="7.5" />
-  <Ramp y="0" deltaY="7.4" fill="#000055" frame="#000000" x="109.54861111111111" z="127.5" w="26.041666666666657" d="10.833333333333343" h="0.5" angle="90" />
+  <Ramp y="0" deltaY="7.4" fill="#010e68" frame="#000000" x="109.54861111111111" z="127.5" w="26.041666666666657" d="10.833333333333343" h="0.5" angle="90" />
   <Wall fill="#ffffff" frame="#000000" x="109.54861111111111" z="121.35416666666667" w="26.041666666666657" d="1.4583333333333428" h="7.5" />
-  <Ramp y="0" deltaY="7.4" fill="#000055" frame="#000000" x="36.423611111111114" z="39.0625" w="26.04166666666667" d="10.763888888888886" h="0.5" angle="270" />
+  <Ramp y="0" deltaY="7.4" fill="#010e68" frame="#000000" x="36.423611111111114" z="39.0625" w="26.04166666666667" d="10.763888888888886" h="0.5" angle="270" />
   <Wall fill="#ffffff" frame="#000000" x="36.423611111111114" z="45.24305555555556" w="26.04166666666667" d="1.4583333333333286" h="7.5" />
-  <Ramp y="0" deltaY="7.4" fill="#000055" frame="#000000" x="28.784722222222225" z="119.89583333333334" w="10.763888888888893" d="26.041666666666686" h="0.5" angle="180" />
+  <Ramp y="0" deltaY="7.4" fill="#010e68" frame="#000000" x="28.784722222222225" z="119.89583333333334" w="10.763888888888893" d="26.041666666666686" h="0.5" angle="180" />
   <Wall fill="#ffffff" frame="#000000" x="34.895833333333336" z="119.89583333333334" w="1.4583333333333286" d="26.041666666666686" h="7.5" />
   <WallSolid shield="3" canGlow="true" smallSlivers="20" mediumSlivers="10" fill="#ffffff" frame="#000000" x="103.50694444444446" z="171.59722222222223" w="10.4861111111111" d="9.722222222222229" h="5" />
   <Incarnator y="80" cx="114.40972222222223" cz="64.82638888888889" angle="270" />
@@ -59,21 +59,21 @@ amusement." />
   <Incarnator y="80" cx="68.02083333333334" cz="58.4375" angle="270" />
   <set wallHeight="1" baseHeight="0" />
   <set baseheight="0" />
-  <Hologram y="0" shape="bspLargeDome" scale="5" fill="#000055" frame="#000000" cx="72.91666666666667" cz="81.875" angle="270" />
+  <Hologram y="0" shape="bspLargeDome" scale="5" fill="#010e68" frame="#000000" cx="72.91666666666667" cz="81.875" angle="270" />
   <set baseHeight=".5" />
   <unique vars="g1Show g1Taken" />
   <And in="@start" out="g1Show" />
   <Timer in="g1Taken" out="g1Show" wait="300" />
   <Goody shape="bspGrenade" yon="10" y="1.5" grenades="6" start="g1Show" out="g1Taken" fill="#ffffff" frame="#000000" cx="111.3888888888889" cz="114.44444444444444" angle="225" />
-  <Teleporter y="20" fill="#ff6600" frame="#000000" cx="72.84722222222223" cz="80.55555555555556" angle="135" />
+  <Teleporter y="20" fill="#ff7c00" frame="#000000" cx="72.84722222222223" cz="80.55555555555556" angle="135" />
   <set wallHeight="2" baseHeight="5.5" />
   <Wall fill="#ffffff" frame="#000000" x="34.16666666666667" z="90.38194444444446" w="21.52777777777778" d="3.2638888888889" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="67.56944444444446" z="44.09722222222223" w="3.194444444444443" d="20.833333333333336" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="111.80555555555556" z="75.52083333333334" w="21.52777777777777" d="3.2638888888889" h="0" />
   <Wall fill="#ffffff" frame="#000000" x="78.71527777777779" z="121.90972222222223" w="3.2638888888888857" d="22.0138888888889" h="0" />
   <set wallHeight="1" baseHeight="0" />
-  <Teleporter y="0" fill="#ff6600" frame="#000000" cx="106.25" cz="37.083333333333336" angle="135" />
-  <Teleporter y="0" fill="#ff6600" frame="#000000" cx="39.02777777777778" cz="129.375" angle="135" />
+  <Teleporter y="0" fill="#ff7c00" frame="#000000" cx="106.25" cz="37.083333333333336" angle="135" />
+  <Teleporter y="0" fill="#ff7c00" frame="#000000" cx="39.02777777777778" cz="129.375" angle="135" />
   <set baseHeight="7.5" />
   <unique vars="m1Show m1Taken" />
   <And in="@start" out="m1Show" />

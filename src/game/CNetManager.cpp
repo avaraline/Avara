@@ -258,6 +258,13 @@ void CNetManager::NameChange(StringPtr newName) {
     itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, theStatus, 0, newName[0] + 1, (Ptr)newName);
 }
 
+void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
+    std::string json = "{\"" + attributeName + "\":" + (value == true ? "true" : "false") + "}";
+    char* c = const_cast<char*>(json.c_str());
+    SDL_Log("sending json %s", c);
+    itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
+}
+
 void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, short status, Point location) {
     if (theId >= 0 && theId < kMaxAvaraPlayers) {
         totalDistribution |= 1 << theId;
@@ -402,7 +409,7 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
     }
 }
 
-void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
+void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_t originalSender /* default = 0 */) {
     CAvaraApp *theApp;
     PacketInfo *aPacket;
 
@@ -412,15 +419,23 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
 
     theApp = itsGame->itsApp;
 
+    SDL_Log("SendLoadLevel(%s, %s, %d)\n", theSet.c_str(), levelTag.c_str(), originalSender);
+
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
-    aPacket->p2 = 0;
+    aPacket->p2 = originalSender;
     aPacket->p3 = FRandSeed;
-    aPacket->distribution = kdEveryone;
+    if (itsCommManager->myId == 0) {
+        // to avoid multiple simultaneous loads, only the server sends the kpLoadLevel requests to everyone
+        SDL_Log("  server sending to everyone\n");
+        aPacket->distribution = kdEveryone;
+    } else {
+        // clients ask the server to forward the kpLoadLevel request to everyone
+        SDL_Log("  client sending to server only\n");
+        aPacket->distribution = kdServerOnly;
+    }
 
-    std::stringstream buffa;
-    buffa << theSet << "/" << levelTag;
-    std::string setAndLevel = buffa.str();
+    std::string setAndLevel = theSet + "/" + levelTag;
 
     aPacket->dataLen = setAndLevel.length() + 1;
     BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, setAndLevel.length() + 1);
@@ -439,18 +454,29 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
     itsCommManager->WriteAndSignPacket(aPacket);
 }
 
-void CNetManager::ReceiveLoadLevel(short senderSlot, char *theSetAndTag, Fixed seed) {
+void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, char *theSetAndTag, Fixed seed) {
     CAvaraApp *theApp;
     OSErr iErr;
     short crc = 0;
 
-    if (!isPlaying) {
-        CPlayerManager *sendingPlayer = playerTable[senderSlot];
+    SDL_Log("ReceiveLoadLevel(%d, %d, %s, %d)\n", senderSlot, originalSender, theSetAndTag, seed);
 
-        std::string setAndTag(theSetAndTag);
-        int pos = setAndTag.find("/");
-        std::string set = setAndTag.substr(0, pos);
-        std::string tag = setAndTag.substr(pos + 1, std::string::npos);
+    std::string setAndTag(theSetAndTag);
+    int pos = setAndTag.find("/");
+    std::string set = setAndTag.substr(0, pos);
+    std::string tag = setAndTag.substr(pos + 1, std::string::npos);
+
+    if (senderSlot != 0) {
+        // The server will forward clients' kpLoadLevel message to kdEveryone.
+        // Everyone else waits until they get the message from the server.
+        // This ensures that all kpLoadLevel requests are processed in the same order for everyone.
+        if (itsCommManager->myId == 0) {
+            SDL_Log("  server sending level load of %s on behalf of %s\n",
+                    theSetAndTag, playerTable[senderSlot]->GetPlayerName().c_str());
+            SendLoadLevel(set, tag, senderSlot);
+        }
+    } else if (!isPlaying) {
+        CPlayerManager *sendingPlayer = playerTable[originalSender];
 
         theApp = itsGame->itsApp;
         FRandSeed = seed;
@@ -511,6 +537,8 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
     if (senderSlot == loaderSlot) {
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             playerTable[i]->LoadStatusChange(crc, err, theTag);
+            SDL_Log("CNetManager::LevelLoadStatus loop\n");
+
         }
     } else {
         thePlayer->LoadStatusChange(
@@ -777,9 +805,13 @@ void CNetManager::SendStartCommand() {
     itsCommManager->SendPacket(activePlayersDistribution, kpStartLevel, 0, activePlayersDistribution, 0, 0, 0);
 }
 
+bool CNetManager::CanPlay() {
+   return (!isPlaying && !playerTable[itsCommManager->myId]->IsAway());
+}
+
 void CNetManager::ReceiveStartCommand(short activeDistribution, short fromSlot) {
     SDL_Log("CNetManager::ReceiveStartCommand\n");
-    if (/*gApplication->modelessLevel == 0 && */ !isPlaying) {
+    if (/*gApplication->modelessLevel == 0 && */ CanPlay()) {
         deadOrDonePlayers = 0;
         activePlayersDistribution = activeDistribution;
         startPlayersDistribution = activeDistribution;
@@ -796,7 +828,7 @@ void CNetManager::ReceiveResumeCommand(short activeDistribution, short fromSlot,
     activePlayersDistribution = activeDistribution;
 
     if (/*gApplication->modelessLevel == 0 &&*/
-        !isPlaying && randomKey == FRandSeed) { // itsGame->itsApp->DoUpdate();
+        CanPlay() && randomKey == FRandSeed) { // itsGame->itsApp->DoUpdate();
 
         itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
 
@@ -891,15 +923,32 @@ void CNetManager::StopGame(short newStatus) {
     }
 
     itsCommManager->SendPacket(
-        kdEveryone, kpPlayerStatusChange, 0, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
+        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
 
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
 void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
-        playerTable[slotId]->RandomKey(randomKey);
+        if (randomKey != 0) {
+            playerTable[slotId]->RandomKey(randomKey);
+        }
         playerTable[slotId]->SetPlayerStatus(newStatus, winFrame);
+    }
+}
+
+void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json){
+    if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
+        nlohmann::json message = nlohmann::json::parse(json);
+        playerTable[slotId]->RandomKey(randomKey);
+
+        if(message.type() == nlohmann::json::value_t::object) {
+            auto it = message.begin();
+
+            if(it.key() == "xyz") {
+                bool xyz = it.value();
+            }
+        }
     }
 }
 
@@ -959,7 +1008,7 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
                     long noWin = -1;
 
                     itsCommManager->SendPacket(
-                        kdEveryone, kpPlayerStatusChange, 0, kLNoVehicle, 0, sizeof(long), (Ptr)&noWin);
+                        kdEveryone, kpPlayerStatusChange, slot, kLNoVehicle, 0, sizeof(long), (Ptr)&noWin);
                 }
             }
         }

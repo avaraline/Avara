@@ -3,6 +3,7 @@
 #include "AvaraDefines.h"
 
 #include <stdint.h>
+#include <string>
 
 #ifdef __has_include
 #  if __has_include(<optional>)                // Check for a standard library
@@ -114,6 +115,12 @@ public:
             : std::optional<uint32_t>{};
     }
 
+    static inline std::optional<std::string> getTeamColorName(uint8_t num) {
+        return (num <= kMaxTeamColors)
+            ? teamColorNames[num]
+            : std::optional<std::string>{};
+    }
+
     static void setColorBlind(ColorBlindMode mode);
     static void setHudAlpha(float alpha);
 private:
@@ -144,4 +151,5 @@ private:
     static uint32_t specialWhiteColor;
     static uint32_t teamColors[kMaxTeamColors + 1];
     static uint32_t teamTextColors[kMaxTeamColors + 1];
+    static std::string teamColorNames[kMaxTeamColors + 1];
 };

@@ -127,45 +127,23 @@ void CBSPPart::IBSPPart(short resId) {
                 totalPoints += 1;
             }
         }
+        if (poly.contains("front")) {
+            polyTable[i].front = poly["front"];
+        }
+        else polyTable[i].front = -1;
+
+        if (poly.contains("back")) {
+            polyTable[i].back = poly["back"];
+        }
+        else polyTable[i].back = -1;
     }
 
     BuildBoundingVolumes();
     Reset();
-    UpdateOpenGLData();
+    AvaraGLUpdateData(this);
 }
 
 void CBSPPart::PostRender() {}
-
-void CBSPPart::UpdateOpenGLData() {
-    if (!AvaraGLIsRendering()) return;
-    glDataSize = totalPoints * sizeof(GLData);
-    glData = (GLData *)NewPtr(glDataSize);
-
-    glGenVertexArrays(1, &vertexArray);
-    glGenBuffers(1, &vertexBuffer);
-
-    PolyRecord *poly;
-    float scale = 1.0; // ToFloat(currentView->screenScale);
-    int p = 0;
-    for (int i = 0; i < polyCount; i++) {
-        poly = &polyTable[i];
-        for (int v = 0; v < poly->triCount * 3; v++) {
-            Vector *pt = &pointTable[poly->triPoints[v]];
-            glData[p].x = ToFloat((*pt)[0]);
-            glData[p].y = ToFloat((*pt)[1]);
-            glData[p].z = ToFloat((*pt)[2]);
-            LongToRGBA(poly->color, &glData[p].r, 3);
-
-            glData[p].nx = poly->normal[0];
-            glData[p].ny = poly->normal[1];
-            glData[p].nz = poly->normal[2];
-
-            // SDL_Log("v(%f,%f,%f) c(%f,%f,%f) n(%f,%f,%f)\n", glData[p].x, glData[p].y, glData[p].z, glData[p].r,
-            // glData[p].g, glData[p].b, glData[p].nx, glData[p].ny, glData[p].nz);
-            p++;
-        }
-    }
-}
 
 void CBSPPart::TransformLights() {
     CViewParameters *vp;
@@ -424,7 +402,7 @@ void CBSPPart::ReplaceColor(int origColor, int newColor) {
             polyTable[i].color = newColor;
         }
     }
-    UpdateOpenGLData();
+    AvaraGLUpdateData(this);
 }
 
 void CBSPPart::BuildBoundingVolumes() {
@@ -446,6 +424,10 @@ void CBSPPart::BuildBoundingVolumes() {
 }
 
 void CBSPPart::Dispose() {
+    if(polyCount < 1) {
+        CDirectObject::Dispose();
+        return;
+    }
     for (int i = 0; i < polyCount; i++) {
         DisposePtr((Ptr)polyTable[i].triPoints);
     }
