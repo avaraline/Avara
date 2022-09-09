@@ -75,8 +75,8 @@
   <Incarnator y="30" cx="-10" cz="-55" angle="315" />
   <Incarnator y="30" cx="42.5" cz="22.5" angle="135" />
   <Incarnator y="30" cx="-42.5" cz="-22.5" angle="315" />
-  <Incarnator y="30" cx="57" cz="-7.5" angle="90" />
-  <Incarnator y="30" cx="-57" cz="7.5" angle="270" />
+  <Incarnator y="30" cx="57" cz="-7.5" angle="90" stop="@start" />
+  <Incarnator y="30" cx="-57" cz="7.5" angle="270" stop="@start" />
   <Incarnator y="30" cx="0" cz="-15" angle="180" stop="@start" />
   <Incarnator y="30" cx="0" cz="15" angle="0" stop="@start" />
   <Incarnator y="30" cx="-15" cz="0" angle="90" stop="@start" />
