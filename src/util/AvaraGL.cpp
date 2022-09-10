@@ -238,6 +238,7 @@ void AvaraGLInitContext() {
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
     glCheckErrors();
 
+    glEnable(GL_BLEND);
 
     light0Loc = glGetUniformLocation(gProgram, "light0");
     light0ColorLoc = glGetUniformLocation(gProgram, "light0Color");
@@ -279,10 +280,16 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STREAM_DRAW);
     glCheckErrors();
 
-    for (int i = 0; i < 3; i++) {
-        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-        glEnableVertexAttribArray(i);
-    }
+    // for (int i = 0; i < 3; i++) {
+    //     glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
+    //     glEnableVertexAttribArray(i);
+    // }
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer (2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *) (7 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     // custom per-object lighting
     float extra_amb = ToFloat(part->extraAmbient);
@@ -349,7 +356,7 @@ void AvaraGLUpdateData(CBSPPart *part) {
             part->glData[p].x = ToFloat((*pt)[0]);
             part->glData[p].y = ToFloat((*pt)[1]);
             part->glData[p].z = ToFloat((*pt)[2]);
-            LongToRGBA(poly->color, &part->glData[p].r, 3);
+            LongToRGBA(poly->color, &part->glData[p].r, 4);
 
             part->glData[p].nx = poly->normal[0];
             part->glData[p].ny = poly->normal[1];
