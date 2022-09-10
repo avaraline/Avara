@@ -1036,10 +1036,12 @@ void CAvaraGame::Render(NVGcontext *ctx) {
         itsWorld->Render(itsView);
         AvaraGLSetAmbient(.7, LONG_MAX);
         AvaraGLSetDepthTest(false);
+        AvaraGLSetBlendMode(true);
         hudWorld->Render(itsView);
         AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
         hud->Render(itsView, ctx);
         AvaraGLSetDepthTest(true);
+        AvaraGLSetBlendMode(false);
     }
 }
 

@@ -222,6 +222,11 @@ void AvaraGLSetDepthTest(bool doTest) {
     else glDepthFunc(GL_ALWAYS);
 }
 
+void AvaraGLSetBlendMode(bool doBlend) {
+    if (doBlend) glEnable(GL_BLEND);
+    else glDisable(GL_BLEND);
+}
+
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
@@ -237,8 +242,6 @@ void AvaraGLInitContext() {
     ambColorLoc = glGetUniformLocation(gProgram, "ambientColor");
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
     glCheckErrors();
-
-    glEnable(GL_BLEND);
 
     light0Loc = glGetUniformLocation(gProgram, "light0");
     light0ColorLoc = glGetUniformLocation(gProgram, "light0Color");
