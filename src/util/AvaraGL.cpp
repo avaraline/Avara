@@ -223,8 +223,12 @@ void AvaraGLSetDepthTest(bool doTest) {
 }
 
 void AvaraGLSetBlendMode(bool doBlend) {
-    if (doBlend) glEnable(GL_BLEND);
-    else glDisable(GL_BLEND);
+    if (doBlend) {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    } else {
+        glDisable(GL_BLEND);
+    }
 }
 
 void AvaraGLInitContext() {
