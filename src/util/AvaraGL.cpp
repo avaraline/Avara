@@ -222,15 +222,6 @@ void AvaraGLSetDepthTest(bool doTest) {
     else glDepthFunc(GL_ALWAYS);
 }
 
-void AvaraGLSetBlendMode(bool doBlend) {
-    if (doBlend) {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    } else {
-        glDisable(GL_BLEND);
-    }
-}
-
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
@@ -268,6 +259,10 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
+
+    glEnable(GL_BLEND);
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE, GL_ONE);
+
     ready = true;
 }
 
