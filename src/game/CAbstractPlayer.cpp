@@ -57,7 +57,7 @@ void CAbstractPlayer::LoadHUDParts() {
     for (i = 0; i < 2; i++) {
         targetOns[i] = new CBSPPart;
         targetOns[i]->IBSPPart(kTargetOk);
-        targetOns[i]->ReplaceColor(0x00ff0000, CColorManager::getPlasmaSightsOnColor());
+        targetOns[i]->ReplaceColor(0xffff2600, CColorManager::getPlasmaSightsOnColor());
         targetOns[i]->privateAmbient = SIGHTSAMBIENT;
         targetOns[i]->yon = LONGYON * 2;
         targetOns[i]->usesPrivateYon = true;
@@ -67,7 +67,7 @@ void CAbstractPlayer::LoadHUDParts() {
 
         targetOffs[i] = new CBSPPart;
         targetOffs[i]->IBSPPart(kTargetOff);
-        targetOffs[i]->ReplaceColor(0x00008000, CColorManager::getPlasmaSightsOffColor());
+        targetOffs[i]->ReplaceColor(0xff008f00, CColorManager::getPlasmaSightsOffColor());
         targetOffs[i]->privateAmbient = SIGHTSAMBIENT;
         targetOffs[i]->yon = LONGYON * 2;
         targetOffs[i]->usesPrivateYon = true;
@@ -79,7 +79,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrowHeight = FIX3(750);
     dirArrow = new CBSPPart;
     dirArrow->IBSPPart(kDirIndBSP);
-    dirArrow->ReplaceColor(0x00000000, CColorManager::getLookForwardColor());
+    dirArrow->ReplaceColor(0xff000000, CColorManager::getLookForwardColor());
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX(1);
     dirArrow->isTransparent = true;

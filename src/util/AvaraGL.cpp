@@ -283,10 +283,6 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STREAM_DRAW);
     glCheckErrors();
 
-    // for (int i = 0; i < 3; i++) {
-    //     glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-    //     glEnableVertexAttribArray(i);
-    // }
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));

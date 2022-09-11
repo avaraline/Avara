@@ -121,6 +121,10 @@ public:
             : std::optional<std::string>{};
     }
 
+    static inline float getHudAlpha() {
+        return hudAlpha;
+    }
+
     static void setColorBlind(ColorBlindMode mode);
     static void setHudAlpha(float alpha);
 private:
