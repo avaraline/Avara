@@ -2,7 +2,7 @@
 #include "CApplication.h"
 
 #include "AvaraGL.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "Preferences.h"
 
 #include <SDL2/SDL.h>
@@ -19,8 +19,8 @@ nanogui::Screen(nanogui::Vector2i(_prefs[kWindowWidth], _prefs[kWindowHeight]), 
     AvaraGLInitContext();
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
 
-    CColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
-    CColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
+    ColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
+    ColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
 }
 
 CApplication::~CApplication() {}

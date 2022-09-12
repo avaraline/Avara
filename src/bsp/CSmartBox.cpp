@@ -116,9 +116,6 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
     FindEnclosure();
 }
 
-#define kMarkerColor 0x00fefefe
-#define kOtherMarkerColor 0x00fe0000
-
 void CSmartBox::ISmartBox(short resId,
     Fixed *dimensions,
     long color,

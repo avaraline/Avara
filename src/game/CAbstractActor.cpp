@@ -9,7 +9,7 @@
 // #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CAbstractActor.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 
 #include "CDepot.h"
 #include "CScaledBSP.h"
@@ -35,8 +35,8 @@ void CAbstractActor::LoadPart(short ind, short resId) {
 
 void CAbstractActor::LoadPartWithColors(short ind, short resId) {
     LoadPart(ind, resId);
-    partList[ind]->ReplaceColor(kMarkerColor, GetPixelColor());
-    partList[ind]->ReplaceColor(kOtherMarkerColor, GetOtherPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
 }
 
 void CAbstractActor::InitLocationLinks() {
@@ -1176,7 +1176,7 @@ short CAbstractActor::GetPlayerPosition() {
 }
 
 uint32_t CAbstractActor::GetTeamColorOr(uint32_t defaultColor) {
-    return CColorManager::getTeamColor(teamColor).value_or(defaultColor);
+    return ColorManager::getTeamColor(teamColor).value_or(defaultColor);
 }
 
 short CAbstractActor::GetBallSnapPoint(long theGroup,

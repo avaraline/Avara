@@ -776,7 +776,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
-        viewPortPart->ReplaceColor(kMarkerColor, longTeamColor);
+        viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 

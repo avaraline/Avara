@@ -3,7 +3,7 @@
 #include "AvaraDefines.h"
 #include "CAbstractPlayer.h"
 #include "CAvaraApp.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CNetManager.h"
 #include "CPlayerManager.h"
 #include "CScoreKeeper.h"
@@ -60,14 +60,14 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     panel->setLayout(layout);
     theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
     std::vector<long> player_colors = {
-        (long) CColorManager::getTeamColor(1).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(2).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(3).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(4).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(5).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(6).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(7).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(8).value_or(CColorManager::getDefaultTeamColor())
+        (long) ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(4).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(5).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(6).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(7).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(8).value_or(ColorManager::getDefaultTeamColor())
     };
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
@@ -210,10 +210,10 @@ void CRosterWindow::UpdateRoster() {
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
             colors[i]->setTextColor(nanogui::Color(
-                LongToR(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToG(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToB(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToA(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1))
+                LongToR(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToG(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToB(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToA(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1))
             ));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));

@@ -11,7 +11,7 @@
 #include "CPlayerManager.h"
 
 #include "CAbstractPlayer.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CCommManager.h"
 #include "CIncarnator.h"
 #include "CRandomIncarnator.h"
@@ -1246,10 +1246,10 @@ void CPlayerManagerImpl::SpecialColorControl() {
 
         switch (spaceCount) {
             case 2:
-                repColor = CColorManager::getSpecialBlackColor();
+                repColor = ColorManager::getSpecialBlackColor();
                 break;
             case 3:
-                repColor = CColorManager::getSpecialWhiteColor();
+                repColor = ColorManager::getSpecialWhiteColor();
                 break;
         }
 
