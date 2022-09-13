@@ -86,6 +86,7 @@ public:
     short deadOrDonePlayers;
     Boolean isConnected;
     Boolean isPlaying;
+    Boolean startingGame;
 
     short serverOptions;
     short loaderSlot;
@@ -147,12 +148,13 @@ public:
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag);
 
     virtual void SendPingCommand(int totalTrips = 0);
-    virtual void SendStartCommand();
-    virtual void SendResumeCommand();
     virtual Boolean ResumeEnabled();
     virtual bool CanPlay();
-    virtual void ReceiveStartCommand(short activeDistribution, short fromSlot);
-    virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey);
+    virtual void SendStartCommand(int16_t originalSender = 0);
+    virtual void ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender);
+
+    virtual void SendResumeCommand(int16_t originalSender = 0);
+    virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
     virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);

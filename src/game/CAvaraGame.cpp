@@ -673,10 +673,13 @@ void CAvaraGame::PauseActors() {
 
 void CAvaraGame::SendStartCommand() {
     if (gameStatus == kReadyStatus) {
+        SDL_Log("CAvaraGame::SendStartCommand(), gameStatus = kReadyStatus\n");
         itsNet->SendStartCommand();
     } else if (gameStatus == kPauseStatus) {
+        SDL_Log("CAvaraGame::SendStartCommand(), gameStatus = kPauseStatus\n");
         CAbstractPlayer *player = GetLocalPlayer();
         if(player != NULL && player->lives > 0) {
+            SDL_Log("  calling SendResumeCommand()\n");
             itsNet->SendResumeCommand();
         }
     }
