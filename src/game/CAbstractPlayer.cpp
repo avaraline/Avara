@@ -14,7 +14,7 @@
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
@@ -57,7 +57,7 @@ void CAbstractPlayer::LoadHUDParts() {
     for (i = 0; i < 2; i++) {
         targetOns[i] = new CBSPPart;
         targetOns[i]->IBSPPart(kTargetOk);
-        targetOns[i]->ReplaceColor(0x00ff0000, CColorManager::getPlasmaSightsOnColor());
+        targetOns[i]->ReplaceColor(0xffff2600, ColorManager::getPlasmaSightsOnColor());
         targetOns[i]->privateAmbient = SIGHTSAMBIENT;
         targetOns[i]->yon = LONGYON * 2;
         targetOns[i]->usesPrivateYon = true;
@@ -67,7 +67,7 @@ void CAbstractPlayer::LoadHUDParts() {
 
         targetOffs[i] = new CBSPPart;
         targetOffs[i]->IBSPPart(kTargetOff);
-        targetOffs[i]->ReplaceColor(0x00008000, CColorManager::getPlasmaSightsOffColor());
+        targetOffs[i]->ReplaceColor(0xff008f00, ColorManager::getPlasmaSightsOffColor());
         targetOffs[i]->privateAmbient = SIGHTSAMBIENT;
         targetOffs[i]->yon = LONGYON * 2;
         targetOffs[i]->usesPrivateYon = true;
@@ -79,7 +79,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrowHeight = FIX3(750);
     dirArrow = new CBSPPart;
     dirArrow->IBSPPart(kDirIndBSP);
-    dirArrow->ReplaceColor(0x00000000, CColorManager::getLookForwardColor());
+    dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX(1);
     dirArrow->isTransparent = true;
@@ -178,7 +178,7 @@ void CAbstractPlayer::LoadScout() {
     scoutCommand = kScoutNullCommand;
 
     itsScout = new CScout;
-    itsScout->IScout(this, teamColor, GetTeamColorOr(CColorManager::getDefaultTeamColor()));
+    itsScout->IScout(this, teamColor, GetTeamColorOr(ColorManager::getDefaultTeamColor()));
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
@@ -186,21 +186,21 @@ void CAbstractPlayer::LoadScout() {
 
 void CAbstractPlayer::ReplacePartColors() {
     teamMask = 1 << teamColor;
-    longTeamColor = GetTeamColorOr(CColorManager::getDefaultTeamColor());
+    longTeamColor = GetTeamColorOr(ColorManager::getDefaultTeamColor());
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
+        (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
     }
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
     longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(kMarkerColor, specialColor);
+        (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
     }
 
     if (itsScout) {
-        itsScout->partList[0]->ReplaceColor(kMarkerColor, specialColor);
+        itsScout->partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
     }
 }
 

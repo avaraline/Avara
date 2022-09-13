@@ -205,21 +205,19 @@ class ColorRecord():
     def __init__(self, raw_data):
         assert(len(raw_data) == ColorRecordLength)
         self.color_long = bytes_to_long(raw_data[0:4])
-        
+
         self.color = [
-            ((self.color_long >> 8) & 0xff),
             ((self.color_long >> 16) & 0xff),
+            ((self.color_long >> 8) & 0xff),
+            (self.color_long & 0xff),
             ((self.color_long >> 24) & 0xff),
-            (self.color_long & 0xff)
         ]
-        # leave marker colors alone
-        if self.color[:3] == [254, 254, 254] or self.color[:3] == [254, 0, 0]:
-            self.color = [x / 254.0 for x in self.color]
-        # but convert others to sRGBA float color format from AppleRGB
-        else:
+        # leave marker colors alone but convert others to sRGB from AppleRGB
+        if self.color != [254, 254, 254, 0] and self.color != [254, 0, 0, 0]:
             self.color = [int(round(255.0 * y)) for y in applergb_to_srgb([x / 255.0 for x in self.color[:3]])]
-            self.color.append(self.color_long & 0xff)
-        
+            self.color.append(0xff) # use full alpha
+        self.color_long = (self.color[3] << 24) | (self.color[0] << 16) | (self.color[1] << 8) | self.color[2]
+
         # colorCache[32] (COLORCACHESIZE)
         # this is not useful to most people because
         # it was used to store intermediate shades
@@ -377,7 +375,7 @@ class BSP(object):
             normal_rec = self.normals[poly.normal_index]
             normal_idx = normal_rec.normal_index
             normal = np.array(self.vectors[normal_idx].as_list_3())
-            # get a unique list of vertices and a list of 
+            # get a unique list of vertices and a list of
             # edges which store indices into that list of vertices
             verts = []
             edges = []
@@ -431,7 +429,7 @@ class BSP(object):
                 the_dict = dict(vertices=face_points, segments=edges)
                 # do triangulation in planar straignt line graph mode
                 result = triangle.triangulate(the_dict, 'p')
-                
+
                 if "triangles" not in result:
                     # the triangulator didn't work for some reason
                     # this is usually because there was just terrible
@@ -441,7 +439,7 @@ class BSP(object):
                 vert_diff = len(result["vertices"]) - len(the_dict["vertices"])
                 if vert_diff > 0:
                     # we need to add more vertices to this shape, this can
-                    # happen with self-intersecting polygons, which were 
+                    # happen with self-intersecting polygons, which were
                     # A-OK in avara
 
                     for vert in result["vertices"]:
@@ -455,10 +453,10 @@ class BSP(object):
                         d["points"].append(new_vert_3)
                         # add index to this face
                         verts.append(len(d["points"]) - 1)
-                
+
                 # we'll use this to count how many shape edges we hit casting a
                 # ray in an arbitrary direction from the center point of each triangle.
-                # this allows us to remove triangles that are part of a "hole" in the 
+                # this allows us to remove triangles that are part of a "hole" in the
                 # geometry
                 def line_ray_intersection_point(rayOrigin, rayDirection, point1, point2):
                     v1 = rayOrigin - point1
@@ -481,9 +479,9 @@ class BSP(object):
                     total_intersects = 0
                     for edge in edges:
                         # check ray from center of all points
-                        # out to an arbitrary +xy for each edge. 
+                        # out to an arbitrary +xy for each edge.
                         # this is in hopes we don't accidentally
-                        # hit any points straight on, otherwise this 
+                        # hit any points straight on, otherwise this
                         # won't work right.
                         intersects = line_ray_intersection_point(
                             tavg,
@@ -500,7 +498,7 @@ class BSP(object):
                     if total_intersects % 2 == 0:
                         # print("removing triangle inside hole: %d" % tidx)
                         triangles_to_remove.append(tidx)
-                
+
                 # remove hole triangles
                 if len(triangles_to_remove) > 0:
                     result["triangles"] = np.delete(result["triangles"], triangles_to_remove, axis=0)
@@ -537,7 +535,7 @@ class BSP(object):
         try:
             for idx, (fe, ec, normal_idx, fp, bp, pvis, rs) in enumerate(d['polys']):
                 # basepoint is not used, we are sending triangles instead of polygons.
-                # nvis is the normal record visibility flag, which i can't determine 
+                # nvis is the normal record visibility flag, which i can't determine
                 # any use of
                 vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
 
@@ -551,11 +549,11 @@ class BSP(object):
 
                 # in avara, each poly has a flag to determine if the front,
                 # back, or both sides should be drawn. in OpenGL, we use
-                # back face culling with CCW winding. 
-                # 
+                # back face culling with CCW winding.
+                #
                 # This means we both need to wind in the correct direction
-                # to respect the front/back flag, but also duplicate faces 
-                # that need to be seen from both sides. The back face has 
+                # to respect the front/back flag, but also duplicate faces
+                # that need to be seen from both sides. The back face has
                 # both its normal and triangles reversed.
                 #
                 # this first poly is the
@@ -563,8 +561,8 @@ class BSP(object):
                 the_poly = {
                     'normal': [x for x in normal],
                     'color': color,
-                    'front': fp, # index of the poly in front of this one 
-                    'back': bp, # index of the poly in back of this one 
+                    'front': fp, # index of the poly in front of this one
+                    'back': bp, # index of the poly in back of this one
                     'tris': [[tri_points[i] for i in t] for t in tris]
                 }
                 # check the poly visibility flags
@@ -579,7 +577,7 @@ class BSP(object):
                     reverse['normal'] = [-x for x in normal]
                     reverse['tris'] = [[tri_points[i] for i in t][::-1] for t in tris]
                     out['polys'].append(reverse)
-                
+
 
         except IndexError:
             raise
@@ -601,5 +599,3 @@ if __name__ == '__main__':
     else:
         with open(sys.argv[1], "rb") as input_file:
             print(BSP(input_file.read()).avara_format())
-
-

@@ -1,6 +1,6 @@
 #version 330 core
 
-in vec3 fragmentColor;
+in vec4 fragmentColor;
 in vec3 fragmentNormal;
 
 uniform vec3 light0 = vec3(0, 0, 0);
@@ -11,7 +11,7 @@ uniform vec3 light2 = vec3(0, 0, 0);
 uniform vec3 light2Color = vec3(1, 1, 1);
 uniform vec3 light3 = vec3(0, 0, 0);
 uniform vec3 light3Color = vec3(1, 1, 1);
-uniform float ambient = 0;
+uniform float ambient = 0.0;
 uniform vec3 ambientColor = vec3(1, 1, 1);
 uniform float lights_active = 1.0;
 
@@ -29,14 +29,14 @@ vec3 diffuse() {
 
 }
 
-vec3 light_color() {
+vec4 light_color() {
     return mix(
-        ambient * ambientColor * fragmentColor,
-        ((ambient * ambientColor) + diffuse()) * fragmentColor,
+        ambient * vec4(ambientColor, 1.0) * fragmentColor,
+        vec4((ambient * ambientColor) + diffuse(), 1.0) * fragmentColor,
         lights_active
     );
 }
 
 void main() {
-    color = vec4(light_color(), 1.0);
+    color = light_color();
 }

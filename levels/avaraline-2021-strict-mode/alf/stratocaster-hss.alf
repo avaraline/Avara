@@ -305,7 +305,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody cx="0" cz="0" y="4 + mGoodyOffset" start="mShow" out="mTaken" speed="-2" shape="bspAvaraA" grenades="mXLgGrenade" missiles="mXLgMissile" fill="#ffcc33" frame="#003366" r="0" />
+  <Goody cx="0" cz="0" y="4 + mGoodyOffset" start="mShow" out="mTaken" speed="-2" shape="bspAvaraA" grenades="mXLgGrenade" missiles="mXLgMissile" fill="#ffcc33" frame="#000000" r="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />

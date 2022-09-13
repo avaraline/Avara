@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "csscolorparser.hpp"
 
 #include <regex>
@@ -72,12 +72,24 @@ static std::optional<uint32_t> ParseColor(const std::string& str) {
     // Convert to lowercase.
     std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
 
-    std::regex search("^team\\((\\d+)\\)$");
-    std::smatch match;
-    if (std::regex_search(tmp, match, search)) {
-        return CColorManager::getTeamColor(
-            strtoll(match[1].str().c_str(), nullptr, 10)
-        );
+    {
+        std::regex search("^marker\\((\\d+)\\)$");
+        std::smatch match;
+        if (std::regex_search(tmp, match, search)) {
+            return ColorManager::getMarkerColor(
+                strtoll(match[1].str().c_str(), nullptr, 10)
+            );
+        }
+    }
+
+    {
+        std::regex search("^team\\((\\d+)\\)$");
+        std::smatch match;
+        if (std::regex_search(tmp, match, search)) {
+            return ColorManager::getTeamColor(
+                strtoll(match[1].str().c_str(), nullptr, 10)
+            );
+        }
     }
 
     return {};

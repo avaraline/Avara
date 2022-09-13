@@ -17,7 +17,7 @@
 
 enum ColorBlindMode { Off, Deuteranopia, Protanopia, Tritanopia };
 
-class CColorManager {
+class ColorManager {
 public:
     static inline uint32_t getDefaultTeamColor() {
         return teamColors[0];
@@ -103,6 +103,17 @@ public:
         return specialWhiteColor;
     }
 
+    static inline std::optional<uint32_t> getMarkerColor(uint8_t num) {
+        switch (num) {
+            case 0:
+                return 0x00fefefe;
+            case 1:
+                return 0x00fe0000;
+            default:
+                return std::optional<uint32_t>{};
+        }
+    }
+
     static inline std::optional<uint32_t> getTeamColor(uint8_t num) {
         return (num <= kMaxTeamColors)
             ? teamColors[num]
@@ -121,10 +132,14 @@ public:
             : std::optional<std::string>{};
     }
 
+    static inline float getHudAlpha() {
+        return hudAlpha;
+    }
+
     static void setColorBlind(ColorBlindMode mode);
     static void setHudAlpha(float alpha);
 private:
-    CColorManager() {}
+    ColorManager() {}
 
     static ColorBlindMode colorBlindMode;
     static float hudAlpha;

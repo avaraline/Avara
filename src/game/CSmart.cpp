@@ -61,7 +61,7 @@ long CSmart::Arm(CSmartPart *aPart) {
     blastPower = itsDepot->missilePower;
     shields = FIX3(100);
 
-    partList[0]->ReplaceColor(kOtherMarkerColor, 0x400000);
+    partList[0]->ReplaceColor(*ColorManager::getMarkerColor(1), 0xff400000);
     targetIdent = 0;
     targetPart = NULL;
 
@@ -192,7 +192,7 @@ void CSmart::Locate() {
     goodYaw = yaw;
     goodPitch = pitch;
 
-    partList[0]->ReplaceColor(kOtherMarkerColor, kOtherMarkerColor);
+    partList[0]->ReplaceColor(*ColorManager::getMarkerColor(1), 0xfffe0000);
 }
 void CSmart::Fire() {
     CBasicSound *theSound;
