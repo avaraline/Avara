@@ -76,6 +76,7 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     playerCount = 0;
     isConnected = false;
     isPlaying = false;
+    startingGame = false;
 
     netOwner = NULL;
     loaderSlot = 0;
@@ -412,14 +413,13 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
 void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_t originalSender /* default = 0 */) {
     CAvaraApp *theApp;
     PacketInfo *aPacket;
+    SDL_Log("SendLoadLevel(%s, %s, %d)\n", theSet.c_str(), levelTag.c_str(), originalSender);
 
     ProcessQueue();
 
     aPacket = itsCommManager->GetPacket();
 
     theApp = itsGame->itsApp;
-
-    SDL_Log("SendLoadLevel(%s, %s, %d)\n", theSet.c_str(), levelTag.c_str(), originalSender);
 
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
@@ -476,6 +476,8 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
             SendLoadLevel(set, tag, senderSlot);
         }
     } else if (!isPlaying) {
+        // save off the player that originally loaded this level to help loading side games
+        loaderSlot = originalSender;
         CPlayerManager *sendingPlayer = playerTable[originalSender];
 
         theApp = itsGame->itsApp;
@@ -549,7 +551,7 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
 Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     short i;
     Boolean goAhead;
-    long lastTime;
+    long lastTime, debugTime;
 
     totalDistribution = 0;
     for (i = 0; i < kMaxAvaraPlayers; i++) {
@@ -557,12 +559,13 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     }
 
     // itsCommManager->SendUrgentPacket(kdEveryone, kpFastTrack, 0, 0, fastTrack.addr.value, 0,0);
-
+    SDL_Log("CNetManager::GatherPlayers activePlayersDistribution = 0x%02x\n", activePlayersDistribution);
     itsCommManager->SendUrgentPacket(activePlayersDistribution, kpReadySynch, 0, 0, 0, 0, 0);
-    lastTime = TickCount();
+    lastTime = debugTime = TickCount();
     do {
-        if (TickCount() % 1000 == 0) {
+        if (TickCount() > debugTime) {
             SDL_Log("CNetManager::GatherPlayers loop\n");
+            debugTime = TickCount() + 1000 / MSEC_PER_TICK_COUNT;
         }
         ProcessQueue();
         goAhead = (TickCount() - lastTime < 1800);
@@ -584,6 +587,7 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
 
     readyPlayers = 0;
     unavailablePlayers = 0;
+    startingGame = false;
 
     return goAhead;
 }
@@ -787,55 +791,119 @@ void CNetManager::SendPingCommand(int totalTrips) {
    }
 }
 
-void CNetManager::SendStartCommand() {
-    short i;
-
-    activePlayersDistribution = 0;
-    startPlayersDistribution = 0;
-    readyPlayers = 0;
-    unavailablePlayers = 0;
-
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->LoadingStatus() == kLLoaded) {
-            activePlayersDistribution |= 1 << i;
-        }
-    }
-
-    SDL_Log("SENDING START PACKET\n");
-    itsCommManager->SendPacket(activePlayersDistribution, kpStartLevel, 0, activePlayersDistribution, 0, 0, 0);
-}
-
 bool CNetManager::CanPlay() {
    return (!isPlaying && !playerTable[itsCommManager->myId]->IsAway());
 }
 
-void CNetManager::ReceiveStartCommand(short activeDistribution, short fromSlot) {
-    SDL_Log("CNetManager::ReceiveStartCommand\n");
-    if (/*gApplication->modelessLevel == 0 && */ CanPlay()) {
-        deadOrDonePlayers = 0;
-        activePlayersDistribution = activeDistribution;
-        startPlayersDistribution = activeDistribution;
-        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
-        isPlaying = true;
-        itsGame->ResumeGame();
+void CNetManager::SendStartCommand(int16_t originalSender) {
+    SDL_Log("CNetManager::SendStartCommand(%d)\n", originalSender);
+
+    activePlayersDistribution = 0;
+    startPlayersDistribution = 0;
+    // set readyPlayers partly as an indicator that a start command is being processed
+    readyPlayers = 0;
+    unavailablePlayers = 0;
+
+    if (itsCommManager->myId == 0) {
+        // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
+            if (playerTable[i]->LoadingStatus() == kLLoaded) {
+                activePlayersDistribution |= 1 << i;
+            }
+        }
+        SDL_Log("  server sending kpStartLevel to everyone = 0x%02x\n", activePlayersDistribution);
+        startingGame = true;
     } else {
-        itsCommManager->SendPacket(activeDistribution, kpUnavailableSynch, fromSlot, 0, 0, 0, NULL);
+        // clients ask the server to forward the kpStartLevel request to everyone
+        SDL_Log("  client sending kpStartLevel to server only = 0x01\n");
+        activePlayersDistribution = kdServerOnly;
+        startingGame = false;
+    }
+
+    itsCommManager->SendPacket(activePlayersDistribution, kpStartLevel, originalSender, activePlayersDistribution, 0, 0, 0);
+}
+
+void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender) {
+    SDL_Log("CNetManager::ReceiveStartCommand(0x%02x, %d, %d)\n", activeDistribution, senderSlot, originalSender);
+
+    if (senderSlot != 0) {
+        // The server will forward clients' kpStartLevel message to kdEveryone,
+        // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
+        if (itsCommManager->myId == 0 && !startingGame) {
+            if (!startingGame) {
+                SDL_Log("  server sending kpStartLevel on behalf of %s\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str());
+                SendStartCommand(senderSlot);
+            } else {
+                SDL_Log("  server NOT sending kpStartLevel on behalf of %s because it's already trying to start a game\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str());
+            }
+        }
+    } else {
+        if (CanPlay()) {
+            deadOrDonePlayers = 0;
+            activePlayersDistribution = activeDistribution;
+            startPlayersDistribution = activeDistribution;
+            itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
+            isPlaying = true;
+            itsGame->ResumeGame();
+        } else {
+            SDL_Log("  sending kpUnavailableSync\n");
+            itsCommManager->SendPacket(activeDistribution, kpUnavailableSynch, originalSender, 0, 0, 0, NULL);
+        }
     }
 }
 
-void CNetManager::ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey) {
-    short i;
-    activePlayersDistribution = activeDistribution;
+void CNetManager::SendResumeCommand(int16_t originalSender) {
+    SDL_Log("CNetManager::SendResumeCommand(%d)\n", originalSender);
 
-    if (/*gApplication->modelessLevel == 0 &&*/
-        CanPlay() && randomKey == FRandSeed) { // itsGame->itsApp->DoUpdate();
+    activePlayersDistribution = 0;
 
-        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
-
-        isPlaying = true;
-        itsGame->ResumeGame();
+    if (itsCommManager->myId == 0) {
+        // to avoid multiple simultaneous starts, only the server sends the kpResumeLevel requests to everyone
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->isOut) {
+                activePlayersDistribution |= 1 << i;
+            }
+        }
+        startingGame = true;
+        SDL_Log("  server sending kpResumeLevel to everyone = 0x%02x\n", activePlayersDistribution);
     } else {
-        itsCommManager->SendPacket(activeDistribution, kpUnavailableSynch, fromSlot, 0, 0, 0, NULL);
+        // clients ask the server to forward the kpStartLevel request to everyone
+        activePlayersDistribution = kdServerOnly;
+        startingGame = false;
+        SDL_Log("  client sending kpResumeLevel to server only = 0x01\n");
+    }
+
+    itsCommManager->SendPacket(activePlayersDistribution, kpResumeLevel, originalSender, activePlayersDistribution, FRandSeed, 0, 0);
+}
+
+void CNetManager::ReceiveResumeCommand(short activeDistribution, short senderSlot, Fixed randomKey, int16_t originalSender) {
+    SDL_Log("CNetManager::ReceiveResumeCommand(0x%02x, %d, 0x%08x, %d)\n", activeDistribution, senderSlot, randomKey, originalSender);
+
+    if (senderSlot != 0) {
+        // The server will forward clients' kpStartLevel message to kdEveryone,
+        // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
+        if (itsCommManager->myId == 0) {
+            if (!startingGame) {
+                SDL_Log("  server sending kpResumeLevel on behalf of %s\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str());
+                SendResumeCommand(senderSlot);
+            } else {
+                SDL_Log("  server NOT sending kpResumeLevel on behalf of %s because it's already trying to resume a game\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str());
+            }
+        }
+    } else {
+        activePlayersDistribution = activeDistribution;
+        if (CanPlay() && randomKey == FRandSeed) {
+            itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
+            isPlaying = true;
+            itsGame->ResumeGame();
+        } else {
+            itsCommManager->SendPacket(activePlayersDistribution, kpUnavailableSynch, originalSender, 0, 0, 0, NULL);
+        }
     }
 }
 
@@ -847,21 +915,6 @@ void CNetManager::ReceivedUnavailable(short slot, short fromSlot) {
     } else {
         itsGame->itsApp->ParamLine(kmUnavailableNote, centerAlign, playerTable[slot]->PlayerName(), NULL);
     }
-}
-
-void CNetManager::SendResumeCommand() {
-    short i;
-    Fixed myKey;
-
-    activePlayersDistribution = 0;
-
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->isOut) {
-            activePlayersDistribution |= 1 << i;
-        }
-    }
-
-    itsCommManager->SendPacket(activePlayersDistribution, kpResumeLevel, 0, activePlayersDistribution, FRandSeed, 0, 0);
 }
 
 Boolean CNetManager::ResumeEnabled() {

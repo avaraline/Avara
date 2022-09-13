@@ -957,7 +957,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std:
             if (serverCRC == levelCRC && serverTag.compare(levelTag) == 0) {
                 short i;
 
-                SDL_Log("Setting loadingStatus = kLLoaded\n");
+                SDL_Log("Setting loadingStatus = kLLoaded for slot = %d\n", slot);
                 loadingStatus = kLLoaded;
 #if 0
                 oldHeld[0] = oldHeld[1] = 0;
