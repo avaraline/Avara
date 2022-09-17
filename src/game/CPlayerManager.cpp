@@ -1030,22 +1030,25 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->limboCount = 0;
         itsPlayer->itsManager = this;
 
-        spotAvailable = itsGame->incarnatorList;
-        while (spotAvailable) {
-            if (spotAvailable->enabled && spotAvailable->colorMask & myTeamMask) {
-                itsPlayer->Reincarnate(spotAvailable);
-                if (!itsPlayer->isInLimbo) {
-                    break;
-                }
-            }
-            spotAvailable = spotAvailable->nextIncarnator;
-        }
+        itsPlayer->teamMask = myTeamMask;
+        itsPlayer->Reincarnate(NULL);
 
-        for (int tries = 3; itsPlayer->isInLimbo && tries > 0; tries--) {
-            // try a psuedo-random incarnation
-            CRandomIncarnator waldo(itsGame->incarnatorList);
-            itsPlayer->Reincarnate(&waldo);
-        }
+        // spotAvailable = itsGame->incarnatorList;
+        // while (spotAvailable) {
+        //     if (spotAvailable->enabled && spotAvailable->colorMask & myTeamMask) {
+        //         itsPlayer->Reincarnate(spotAvailable);
+        //         if (!itsPlayer->isInLimbo) {
+        //             break;
+        //         }
+        //     }
+        //     spotAvailable = spotAvailable->nextIncarnator;
+        // }
+
+        // for (int tries = 3; itsPlayer->isInLimbo && tries > 0; tries--) {
+        //     // try a psuedo-random incarnation
+        //     CRandomIncarnator waldo(itsGame->actorList);
+        //     itsPlayer->Reincarnate(&waldo);
+        // }
 
         if (itsPlayer->isInLimbo) {
             itsPlayer->Dispose();
@@ -1073,16 +1076,18 @@ Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
         itsPlayer->limboCount = 0;
         itsPlayer->itsManager = this;
 
-        spotAvailable = itsGame->incarnatorList;
-        while (spotAvailable) {
-            if (spotAvailable->enabled && spotAvailable->colorMask & (1 << i)) {
-                itsPlayer->Reincarnate(spotAvailable);
-                if (!itsPlayer->isInLimbo) {
-                    break;
-                }
-            }
-            spotAvailable = spotAvailable->nextIncarnator;
-        }
+        itsPlayer->teamMask = 1 << i;  // set in case Incarnators discriminate on color
+        itsPlayer->Reincarnate(NULL);
+        // spotAvailable = itsGame->incarnatorList;
+        // while (spotAvailable) {
+        //     if (spotAvailable->enabled && spotAvailable->colorMask & (1 << i)) {
+        //         itsPlayer->Reincarnate(spotAvailable);
+        //         if (!itsPlayer->isInLimbo) {
+        //             break;
+        //         }
+        //     }
+        //     spotAvailable = spotAvailable->nextIncarnator;
+        // }
 
         if (itsPlayer->isInLimbo) {
             itsPlayer->Dispose();

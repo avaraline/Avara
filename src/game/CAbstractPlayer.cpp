@@ -25,6 +25,7 @@
 //#include "Palettes.h"
 #include "CApplication.h"
 #include "CIncarnator.h"
+#include "CRandomIncarnator.h"
 #include "KeyFuncs.h"
 //#include "LevelScoreRecord.h"
 #include "CAbstractYon.h"
@@ -1219,6 +1220,17 @@ void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
             }
 
             placeList = placeList->nextIncarnator;
+        }
+
+        // couldn't find an available incarnator, create a random one
+        if (newSpot == NULL) {
+            for (int tries = 3; isInLimbo && tries > 0; tries--) {
+                // try a psuedo-random incarnation
+                CRandomIncarnator waldo(itsGame->actorList);
+                // call self so that collision checks below are executed
+                Reincarnate(&waldo);
+            }
+            return;
         }
     }
 
