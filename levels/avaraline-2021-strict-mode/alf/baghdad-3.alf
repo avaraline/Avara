@@ -15,7 +15,7 @@
   <!-- Small rotating stars -->
   <unique vars="mShow = @start" />
   <Base in="@start" out="mShow" />
-  <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="0" speed="1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="0" />
+  <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="0.001" speed="1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="0" />
   <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="startY" speed="-1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="45" />
 
   <!-- <Base in="@start" out="mShow" cx="0" cz="0" /> -->
@@ -27,12 +27,12 @@
   <Dome hasFloor="true" fill="rgba(0, 0, 0, 0.013)" cx="0" cz="0" y="-0.02" r="50" roll="180" yon="10" angle="15" />
   <Dome hasFloor="true" fill="rgba(0, 0, 0, 0.013)" cx="0" cz="0" y="-0.03" r="50" roll="180" yon="10" angle="30" /> -->
 
-  <Dome hasFloor="false" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.001" r="50" roll="180" yon="10" angle="0" />
-  <Dome hasFloor="false" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.003" r="50" roll="180" yon="10" angle="7.5" />
-  <Dome hasFloor="false" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.005" r="50" roll="180" yon="10" angle="15" />
-  <Dome hasFloor="false" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.006" r="50" roll="180" yon="10" angle="22.5" />
-  <Dome hasFloor="false" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.004" r="50" roll="180" yon="10" angle="30" />
-  <Dome hasFloor="false" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.002" r="50" roll="180" yon="10" angle="37.5" />
+  <Dome hasFloor="true" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.001" r="50" roll="180" yon="10" angle="0" />
+  <Dome hasFloor="true" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.003" r="50" roll="180" yon="10" angle="7.5" />
+  <Dome hasFloor="true" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.005" r="50" roll="180" yon="10" angle="15" />
+  <Dome hasFloor="true" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.006" r="50" roll="180" yon="10" angle="22.5" />
+  <Dome hasFloor="true" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.004" r="50" roll="180" yon="10" angle="30" />
+  <Dome hasFloor="true" fill="rgba(255, 202, 0, 0.94)" cx="0" cz="0" y="-0.002" r="50" roll="180" yon="10" angle="37.5" />
 
   <!-- <Dome hasFloor="true" fill="rgba(170, 134, 0, 0.65)" cx="0" cz="0" y="-0.01" r="50" roll="180" yon="10" angle="0" />
   <Dome hasFloor="true" fill="rgba(170, 134, 0, 0.65)" cx="0" cz="0" y="-0.02" r="50" roll="180" yon="10" angle="15" />
