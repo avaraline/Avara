@@ -266,6 +266,8 @@
   missilePower = 1.0
   missileTurnRate = 0.025
   missileAcceleration = 0.2
+  missileArmed.c = 0
+  missileLaunched.c = 0
 
   maxStartGrenades = 20
   maxStartMissiles = 10
@@ -509,5 +511,9 @@ light[0].c = "#ffffff"
 light[1].c = "#ffffff"
 light[2].c = "#ffffff"
 light[3].c = "#ffffff"
+
+// Other colors
+missileArmed.c = "#400000"
+missileLaunched.c = "#fe0000"
 
 unique 32000 end
