@@ -8,6 +8,7 @@
 */
 
 #pragma once
+#include "ColorManager.h"
 #include "CSmartPart.h"
 
 class CSliverPart;

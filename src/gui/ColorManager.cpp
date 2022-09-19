@@ -11,6 +11,8 @@ uint32_t ColorManager::lookForwardColor = 0xff000000;
 uint32_t ColorManager::missileLockColor = 0xffff2600;
 uint32_t ColorManager::missileSightPrimaryColor = 0xfffefb00;
 uint32_t ColorManager::missileSightSecondaryColor = 0xffff2600;
+uint32_t ColorManager::missileArmedColor = 0xff400000;
+uint32_t ColorManager::missileLaunchedColor = 0xfffe0000;
 uint32_t ColorManager::netDelay1Color = 0xffffc900;
 uint32_t ColorManager::netDelay2Color = 0xfffefb00;
 uint32_t ColorManager::pinwheel1Color = 0xff282d79;
@@ -244,4 +246,12 @@ void ColorManager::setHudAlpha(float alpha) {
     ColorManager::plasmaSightsOnColor = (ColorManager::plasmaSightsOnColor & 0x00ffffff) | alphaSet;
 
     ColorManager::hudAlpha = alpha;
+}
+
+void ColorManager::setMissileArmedColor(uint32_t color) {
+    ColorManager::missileArmedColor = color;
+}
+
+void ColorManager::setMissileLaunchedColor(uint32_t color) {
+    ColorManager::missileLaunchedColor = color;
 }

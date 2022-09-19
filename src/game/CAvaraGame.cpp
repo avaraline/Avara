@@ -583,7 +583,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
 void CAvaraGame::EndScript() {
     short i;
-    uint32_t lightColor;
+    uint32_t color;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -607,20 +607,25 @@ void CAvaraGame::EndScript() {
             y = FMul(FDegSin(-angle1), intensity);
             z = FMul(FDegCos(angle2), x);
             x = FMul(FDegSin(-angle2), x);
-            lightColor = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
+            color = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
                 .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
             SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
-                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), lightColor);
+                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
-            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), lightColor);
+            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
         } else {
             itsView->SetLightValues(i, 0, 0, 0, kLightOff);
             AvaraGLSetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR);
         }
     }
+
+    color = *ParseColor(ReadStringVar(iMissileArmedColor));
+    ColorManager::setMissileArmedColor(color);
+    color = *ParseColor(ReadStringVar(iMissileLaunchedColor));
+    ColorManager::setMissileLaunchedColor(color);
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
 
