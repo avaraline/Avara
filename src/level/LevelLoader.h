@@ -268,6 +268,8 @@ enum {
     iMissilePower,
     iMissileTurnRate,
     iMissileAcceleration,
+    iMissileArmedColor,
+    iMissileLaunchedColor,
 
     iMaxStartGrenades,
     iMaxStartMissiles,

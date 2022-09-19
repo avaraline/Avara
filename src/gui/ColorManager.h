@@ -51,6 +51,14 @@ public:
         return missileSightSecondaryColor;
     }
 
+    static inline uint32_t getMissileArmedColor() {
+        return missileArmedColor;
+    }
+
+    static inline uint32_t getMissileLaunchedColor() {
+        return missileLaunchedColor;
+    }
+
     static inline uint32_t getNetDelay1Color() {
         return netDelay1Color;
     }
@@ -138,6 +146,8 @@ public:
 
     static void setColorBlind(ColorBlindMode mode);
     static void setHudAlpha(float alpha);
+    static void setMissileArmedColor(uint32_t color);
+    static void setMissileLaunchedColor(uint32_t color);
 private:
     ColorManager() {}
 
@@ -151,6 +161,8 @@ private:
     static uint32_t missileLockColor;
     static uint32_t missileSightPrimaryColor;
     static uint32_t missileSightSecondaryColor;
+    static uint32_t missileArmedColor;
+    static uint32_t missileLaunchedColor;
     static uint32_t netDelay1Color;
     static uint32_t netDelay2Color;
     static uint32_t pinwheel1Color;

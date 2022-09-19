@@ -45,7 +45,7 @@ void CSliverPart::Activate(Fixed *origin,
 
     ColorRecord c = borrowPoly->color;
 
-    ReplaceColor(0x00fefefe, c); // marker color
+    ReplaceColor(*ColorManager::getMarkerColor(0), c);
 
     Matrix tm;
     Fixed vLen;
