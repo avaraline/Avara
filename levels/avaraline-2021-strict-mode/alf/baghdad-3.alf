@@ -18,10 +18,6 @@
   <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="0.001" speed="1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="0" />
   <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="startY" speed="-1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="45" />
 
-  <!-- <Base in="@start" out="mShow" cx="0" cz="0" /> -->
-  <!-- <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y=".001" speed="1" grenades="0" start="@start" out="mShow" fill="#c02020" frame="#000000" cx="0" cz="0" angle="45" /> -->
-  <!-- <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="startY-0.001" speed="-1" grenades="0" start="@start" out="mShow" fill="#c02020" frame="#000000" cx="0" cz="0" angle="45" /> -->
-
   <!-- Upside down domes provides a floor that shows the extent of the level -->
   <!-- <Dome hasFloor="true" fill="rgba(0, 0, 0, 0.013)" cx="0" cz="0" y="-0.01" r="50" roll="180" yon="10" angle="0" />
   <Dome hasFloor="true" fill="rgba(0, 0, 0, 0.013)" cx="0" cz="0" y="-0.02" r="50" roll="180" yon="10" angle="15" />
