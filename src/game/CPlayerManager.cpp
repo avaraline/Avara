@@ -1033,23 +1033,6 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->teamMask = myTeamMask;
         itsPlayer->Reincarnate(NULL);
 
-        // spotAvailable = itsGame->incarnatorList;
-        // while (spotAvailable) {
-        //     if (spotAvailable->enabled && spotAvailable->colorMask & myTeamMask) {
-        //         itsPlayer->Reincarnate(spotAvailable);
-        //         if (!itsPlayer->isInLimbo) {
-        //             break;
-        //         }
-        //     }
-        //     spotAvailable = spotAvailable->nextIncarnator;
-        // }
-
-        // for (int tries = 3; itsPlayer->isInLimbo && tries > 0; tries--) {
-        //     // try a psuedo-random incarnation
-        //     CRandomIncarnator waldo(itsGame->actorList);
-        //     itsPlayer->Reincarnate(&waldo);
-        // }
-
         if (itsPlayer->isInLimbo) {
             itsPlayer->Dispose();
             itsPlayer = NULL;

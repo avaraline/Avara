@@ -13,7 +13,7 @@ CRandomIncarnator::CRandomIncarnator(CAbstractActor* actorList) {
     for (CAbstractActor* actor = actorList;
          actor != nullptr;
          actor = actor->nextActor) {
-        // check all CPlacedActors which includes things like incarnators, goodies, teleporters, etc
+        // check CPlacedActors that set UseForRandomIncarnator() which includes incarnators, goodies, ramps
         CPlacedActors* placedActor = dynamic_cast<CPlacedActors*>(actor);
         if (placedActor != nullptr && placedActor->UseForRandomIncarnator()) {
             locMin[0] = std::min(locMin[0], placedActor->location[0]);
@@ -27,14 +27,14 @@ CRandomIncarnator::CRandomIncarnator(CAbstractActor* actorList) {
     }
 
     if (!foundLocation) {
-        locMin[0] = locMin[1] = locMin[2] = -9;
-        locMax[0] = locMax[1] = locMax[2] = +9;
+        locMin[0] = locMin[1] = locMin[2] = FIX(-9);
+        locMax[0] = locMax[1] = locMax[2] = FIX(+9);
     }
 
     // place incarnator on circle defined by the extent box, facing in at a random point on the circle
     heading = FRandom();
     Fixed radius = std::max((locMax[0] - locMin[0]), (locMax[2] - locMin[2])) / 2;
-    radius = std::max(radius, (Fixed)FIX(3));  // radius could be zero if only 1 incarnator so guard that
+    radius = std::max(radius, (Fixed)FIX(3));  // radius could be zero if only 1 CPlacedActors so guard that
     location[0] = (locMin[0] + locMax[0]) / 2 - FMul(radius, FOneSin(heading));
     location[2] = (locMin[2] + locMax[2]) / 2 - FMul(radius, FOneCos(heading));
     location[1] = locMax[1];
