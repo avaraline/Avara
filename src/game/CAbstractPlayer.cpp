@@ -287,7 +287,8 @@ void CAbstractPlayer::AdaptableSettings() {
     generatorPower = FpsCoefficient2(classicGeneratorPower);
     shieldRegen = FpsCoefficient2(classicShieldRegen);
     chargeGunPerFrame = FpsCoefficient2(classicChargeGunPerFrame); //    Charge gun at 0.035 units per frame
-    motorFriction = FpsCoefficient2(classicMotorFriction);
+    FpsCoefficients(classicMotorFriction, FMul(classicMotorFriction, classicMotorAcceleration),
+                    &motorFriction, &motorAcceleration);
 }
 
 void CAbstractPlayer::Dispose() {
