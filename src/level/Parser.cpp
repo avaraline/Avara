@@ -25,6 +25,7 @@
 #include "FastMat.h"
 #include "Resource.h"
 #include "Types.h"
+#include "RGBAColor.h"
 
 //#define DEBUGPARSER 1
 #ifdef DEBUGPARSER
@@ -517,7 +518,7 @@ void LexRead(LexSymbol *theSymbol) {
             break;
 
         default:
-            matchCount = MatchVariable(parserVar.input);
+            matchCount = MatchVariable(parserVar.input);  // matchCount == string length of matched thing
             if (matchCount > 0) {
                 theSymbol->value.token = symTable->FindEntry(parserVar.input - 1, matchCount);
                 if (theSymbol->value.token > lastVariable) {
@@ -1094,24 +1095,46 @@ void DeallocParser() {
     }
 }
 
+
+short IndexForEntry(const char* entry) {
+    return symTable->SearchForEntry(pstr(entry), -1) - firstVariable;
+}
+
 double ReadVariable(short index) {
     return EvalVariable(index + firstVariable, false);
+}
+double ReadVariable(const char *s) {
+    return ReadDoubleVar(s);
+}
+double ReadDoubleVar(const char *s) {
+    return ReadVariable(IndexForEntry(s));
 }
 
 Fixed ReadFixedVar(short index) {
     return 65536 * EvalVariable(index + firstVariable, false);
 }
+Fixed ReadFixedVar(const char *s) {
+    return ReadFixedVar(IndexForEntry(s));
+}
 
 long ReadLongVar(short index) {
     return EvalVariable(index + firstVariable, false);
 }
+long ReadLongVar(const char *s) {
+    return ReadLongVar(IndexForEntry(s));
+}
 
-long ReadColorVar(short index) {
-    long theColor;
-
-    theColor = ReadVariable(index);
-
-    return (((theColor / 1000000) << 16) | (((theColor / 1000) % 1000) << 8) | (theColor % 1000));
+const std::optional<uint32_t> ReadColorVar(short index) {
+    // first just try parsing the color string (e.g. fill="#ffcc44" or fill="rgba(255,204,68)")
+    std::optional<uint32_t> color = ParseColor(ReadStringVar(index));
+    if (!color) {
+        // try dereferencing color to a variable (e.g. myFill='"#ffcc44"' --> fill="myFill")
+           color = ParseColor(ReadStringVar(ReadStringVar(index).c_str()));
+    }
+    return color;
+}
+const std::optional<uint32_t> ReadColorVar(const char *s) {
+    return ReadColorVar(IndexForEntry(s));
 }
 
 std::string ReadStringVar(short index) {
@@ -1124,6 +1147,9 @@ std::string ReadStringVar(short index) {
     } else {
         return "";
     }
+}
+std::string ReadStringVar(const char *s) {
+    return ReadStringVar(IndexForEntry(s));
 }
 
 void ProgramVariable(short index, double value) {

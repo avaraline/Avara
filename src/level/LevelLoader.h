@@ -13,6 +13,8 @@
 #include <string>
 #include <vector>
 
+#include "Parser.h"
+
 enum {
     iDesignerName,
     iLevelInformation,
@@ -31,7 +33,7 @@ enum {
     iWallTemplateResource,
     iFloorTemplateResource,
 
-    iHeight,
+    iHeight, // 13
     iMask,
     iTeam,
     iWallHeight,
@@ -295,20 +297,6 @@ enum {
 
     iVarInternalVariableCount
 };
-
-double ReadVariable(short index);
-Fixed ReadFixedVar(short index);
-long ReadLongVar(short index);
-long ReadColorVar(short index);
-std::string ReadStringVar(short index);
-
-void ProgramVariable(short index, double value);
-void ProgramFixedVar(short index, Fixed value);
-void ProgramLongVar(short index, long value);
-void ProgramReference(short index, short ref);
-void ProgramOffsetAdd(short index, short ref, long addValue);
-void ProgramOffsetMultiply(short index, short ref, long addValue);
-void ProgramMessage(short index, long value);
 
 enum {
     TextBegin = 150, //	6	TTxtPicRec	Begin text function
