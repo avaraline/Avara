@@ -122,9 +122,8 @@ void CAbstractPlayer::StartSystems() {
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
 #define CLASSICMOTORFRICTION FIX3(750)
-    classicMotorFriction = CLASSICMOTORFRICTION;
 #define CLASSICACCELERATION FIX3(250)
-    maxAcceleration = FIX3(250);
+    maxAcceleration = CLASSICACCELERATION;
     didBump = true;
 
     groundSlide[0] = 0;
@@ -173,6 +172,7 @@ void CAbstractPlayer::StartSystems() {
     classicGeneratorPower = FIX3(30);
     classicShieldRegen = FIX3(30);       //  Use 0.030 per frame to repair shields
     classicChargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
+    classicMotorFriction = CLASSICMOTORFRICTION;
 }
 
 void CAbstractPlayer::LoadScout() {
@@ -287,6 +287,7 @@ void CAbstractPlayer::AdaptableSettings() {
     generatorPower = FpsCoefficient2(classicGeneratorPower);
     shieldRegen = FpsCoefficient2(classicShieldRegen);
     chargeGunPerFrame = FpsCoefficient2(classicChargeGunPerFrame); //    Charge gun at 0.035 units per frame
+    motorFriction = FpsCoefficient2(classicMotorFriction);
 }
 
 void CAbstractPlayer::Dispose() {
@@ -1353,8 +1354,10 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
             // comes from taking the ratio of both geometric series limits of total spin for FPS and classic:
             //    scale = (F/(1-F)) / ((f/N)/(1-f))
             // F = classicMotorAcceleration, f = fpsMotorFriction, N = fps-frames per classic frame
-            Fixed spinScale = FDiv(FMul(classicMotorFriction, FIX1 - motorFriction),
-                                   FMul(FpsCoefficient2(motorFriction), FIX1 - classicMotorFriction));
+            Fixed spinScale = (motorFriction == 0)
+                ? FIX1
+                : FDiv(FMul(classicMotorFriction, FIX1 - motorFriction),
+                       FMul(FpsCoefficient2(motorFriction), FIX1 - classicMotorFriction));
             FPS_DEBUG("•••spinScale = " << ToFloat(spinScale) << "\n");
             motors[0] = FMul(maxAcceleration << 7, spinScale);
             motors[1] = -motors[0];
