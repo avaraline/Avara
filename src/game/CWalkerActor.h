@@ -27,9 +27,9 @@ typedef struct {
 class CWalkerActor : public CAbstractPlayer {
 public:
     CBSPPart *markerCube;
-    LegInfo legs[2];
-    LegInfo legUndo[2];
-    Fixed legSpeeds[2];
+    LegInfo legs[2] = {};   // init all zeroes
+    LegInfo legUndo[2] = {};
+    Fixed legSpeeds[2] = {};
 
     Fixed viewPortHeight;
 
