@@ -1,22 +1,36 @@
 <map>
-  <set designer="Head" information="Updated from the original.  Now with random incarnators at the boundary, boundary visualization, no-spin teleporter, normal missiles, 6 lives." defaultLives="6" startY="8" />
-  <set grenDelay="250" numGren="6" />
-  <set missDelay="250" numMiss="4" />
+  <set
+    designer="Head"
+    information="Updated from the original.  Now with random incarnators at the boundary, boundary visualization, no-spin teleporter, normal missiles, 6 lives."
+    defaultLives="6"
+  />
+  <!-- Local variables -->
+  <set
+    startY="8"
+    grenDelay="250"
+    numGren="6"
+    missDelay="250"
+    numMiss="4"
+  />
   <SkyColor fill="#fffc41" frame="#ff7c00" />
   <!-- <GroundColor fill="#d6a800" />  214 168 0 original color, floor attempts to match this -->
   <GroundColor fill="#cca000" />  <!-- 204 160 0 -->
   <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" cx="30" cz="30" angle="225" />
 
-  <Teleporter shape="0" y="200" win="1200" start="@winTeam" activeRange="2000" fill="#007600" frame="#000000" cx="0" cz="-32.708333" angle="225" />
-  <Teleporter group="@center" y="-1 * startY" activeRange="500" deadRange="48" destGroup="@recenter" shape="0" fill="#000000" frame="#000000" cx="0" cz="0" angle="0" />
-  <Teleporter y="startY" group="@recenter" shape="bspGroundStar" speed="0" fill="#000000" frame="#000000" cx="0" cz="0" angle="0" spin="false" activeRange="0" />
-  <Hologram fill="#000000" frame="#000000" cx="0" cz="0" angle="0" />
+  <Teleporter shape="0" win="1200" start="@winTeam"
+     cx="0" cz="0" y="200" activeRange="500" />
+  <Teleporter shape="0" group="@center" destGroup="@recenter"
+     cx="0" cz="0" y="-startY" activeRange="500" deadRange="48" />
+  <Teleporter shape="bspGroundStar" fill="#000000" speed="0" mask="0" group="@recenter"
+     cx="0" cz="0" y="startY" angle="0" activeRange="0" spin="0" />
+  <Hologram shape="bspGroundStar" fill="#000000"
+     cx="0" cz="0" angle="0" />
 
   <!-- Small rotating stars -->
   <unique vars="mShow = @start" />
   <Base in="@start" out="mShow" />
   <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="0.001" speed="1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="0" />
-  <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="startY" speed="-1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="45" />
+  <Goody shape="bspGroundStar" scale="0.618" yon="500" sound="0" y="startY+0.001" speed="-1.2" grenades="0" start="mShow" out="mShow" fill="#000000" frame="#000000" cx="0" cz="0" angle="45" />
 
   <!-- Upside down domes provides a floor that shows the extent of the level -->
   <!-- <Dome hasFloor="true" fill="rgba(0, 0, 0, 0.013)" cx="0" cz="0" y="-0.01" r="50" roll="180" yon="10" angle="0" />
