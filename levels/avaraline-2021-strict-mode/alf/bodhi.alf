@@ -1,7 +1,14 @@
 <map>
   <SkyColor fill="#cca3bf" frame="#cee6f2" />
   <GroundColor fill="#3d6658" />
-  <set designer="$mSilverfox" information="Within three lifetimes, you could escape the cycle of rebirth." light.0.i="0.8" light.0.a="30" light.0.b="10" wallHeight="0" />
+  <set
+    designer="$mSilverfox"
+    information="Within three lifetimes, you could escape the cycle of rebirth."
+    light.0.i="0.8"
+    light.0.a="30"
+    light.0.b="10"
+    wallHeight="0"
+  />
 
   <Wall fill="#3d6658" frame="#000000" x="0" z="0" w="15" d="25" h="4" />
   <Ramp y="0" deltaY="4" fill="#ffc68c" frame="#000000" x="0" z="17.5" w="15" d="10" h="0" angle="0" />

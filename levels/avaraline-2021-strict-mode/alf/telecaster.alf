@@ -1,7 +1,14 @@
 <map>
   <SkyColor fill="#f2edf1" frame="#240018" />
   <GroundColor fill="#240018" frame="#000000" />
-  <set designer="$mSilvermalk" information="Billy laid down some pretty hopeless sounding guitar riffs. The crowd at Applebee's was definitely getting into it, but Ishmael clutched his gut and fell over. The dark energies of the music fused with electricity were like kryptonite to him." ambient.i="0.4" light.0.i="0.8" light.0.a="30" light.0.b="10" wallHeight="0" />
+  <set
+    designer="$mSilvermalk"
+    information="Billy laid down some pretty hopeless sounding guitar riffs. The crowd at Applebee's was definitely getting into it, but Ishmael clutched his gut and fell over. The dark energies of the music fused with electricity were like kryptonite to him."
+    light.0.i="0.8"
+    light.0.a="30"
+    light.0.b="10"
+    wallHeight="0"
+  />
 
   <Incarnator cx="-20" cz="-20" y="20" angle="315" />
   <Incarnator cx="20" cz="20" y="20" angle="135" />

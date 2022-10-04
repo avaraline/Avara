@@ -1,7 +1,14 @@
 <map>
   <SkyColor fill="#edf1f2" frame="#001824" />
   <GroundColor fill="#001824" frame="#000000" />
-  <set designer="$mSilverfox" information="Billy hissed and whipped out the one musical instrument that all Amish people are defenseless against: the electric guitar, and of course, an amp, and all the necessary pedals and cabling. 'Hold on, just one minute. Does anyone see an outlet?'" ambient.i="0.4" light.0.i="0.8" light.0.a="30" light.0.b="10" wallHeight="0" />
+  <set
+    designer="$mSilverfox"
+    information="Billy hissed and whipped out the one musical instrument that all Amish people are defenseless against: the electric guitar, and of course, an amp, and all the necessary pedals and cabling. 'Hold on, just one minute. Does anyone see an outlet?'"
+    light.0.i="0.8"
+    light.0.a="30"
+    light.0.b="10"
+    wallHeight="0"
+  />
 
   <Incarnator cx="-20" cz="-20" y="20" angle="315" />
   <Incarnator cx="20" cz="20" y="20" angle="135" />

@@ -1,7 +1,16 @@
 <map>
   <SkyColor fill="hsl(280, 100%, 70%)" frame="hsl(220, 10%, 10%)" />
   <GroundColor fill="hsl(220, 10%, 10%)" />
-  <set designer="$mSilverfox" information="The structure was static and immutable, the particulars of its configuration written long before its manifestation. Clanless, its identity was composed purely of its own utility and function. It was beautiful." ambient.c="hsl(280, 100%, 80%)" light.0.i="0.9" light.0.a="30" light.0.b="10" light.1.i="0.7" wallHeight="0" />
+  <set
+    designer="$mSilverfox"
+    information="The structure was static and immutable, the particulars of its configuration written long before its manifestation. Clanless, its identity was composed purely of its own utility and function. It was beautiful."
+    ambient.c="hsl(280, 100%, 80%)"
+    light.0.i="0.9"
+    light.0.a="30"
+    light.0.b="10"
+    light.1.i="0.7"
+    wallHeight="0"
+  />
 
   <!-- VFX TIMING -->
   <And in="@start" out="@tik" />
