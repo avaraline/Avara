@@ -735,3 +735,17 @@ std::string FormatVector(Fixed *v, int size) {
     oss << "]";
     return oss.str();
 }
+
+std::string FormatVectorFloat(Fixed *v, int size) {
+    std::ostringstream oss;
+    oss.precision(6);
+    oss << "[";
+    for (int i = 0; i < size; i++) {
+        oss << ToFloat(v[i]);
+        if (i < size-1) {
+            oss << ", ";
+        }
+    }
+    oss << "]";
+    return oss.str();
+}

@@ -97,7 +97,7 @@ void CViewParameters::SetViewRect(short width, short height, short centerX, shor
 }
 
 void CViewParameters::Recalculate() {
-    screenScale = FMulDivNZ(((long)viewPixelDimensions.h) << 16, viewDistance, viewWidth);
+    screenScale = FMulDivNZ(((long)viewPixelDimensions.h) << 16, viewDistance, std::max(1, viewWidth));
 
     xOffset = ((long)viewPixelCenter.h) << 16;
     yOffset = ((long)viewPixelCenter.v) << 16;

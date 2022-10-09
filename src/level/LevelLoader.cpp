@@ -17,7 +17,6 @@
 #include "Parser.h"
 #include "Resource.h"
 #include "pugixml.hpp"
-#include "RGBAColor.h"
 
 #include <SDL2/SDL.h>
 

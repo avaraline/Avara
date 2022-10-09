@@ -13,14 +13,13 @@
 #include "CStringDictionary.h"
 #include "CTagBase.h"
 #include "InternalVars.h"
-#include "LevelLoader.h"
 #include "LinkLoose.h"
 #include "RamFiles.h"
 
 #include <cstring>
 #include <math.h>
 #include <stdio.h>
-//#include "CommandList.h"
+
 #include "CApplication.h"
 #include "FastMat.h"
 #include "Resource.h"

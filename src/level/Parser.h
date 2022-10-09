@@ -39,16 +39,16 @@ enum {
     kLexOpenParen,
     kLexCloseParen,
     kLexRowOffset,
-    kLexConstant, // 18
+    kLexConstant,
     kUnaryMinus,
-    kLexVariable, // 20
+    kLexVariable,
     kLexFun0,
     kLexFun1,
     kLexEnum,
     kLexUnique,
     kLexEnd,
     kLexAdjust,
-    kLexObject, // 27
+    kLexObject,
     kAssignment,
     kParseError,
     kLexEof

@@ -68,13 +68,29 @@ void MRotateZ(Fixed s, Fixed c, Matrix *theMatrix);
 void MTranslate(Fixed xt, Fixed yt, Fixed zt, Matrix *theMatrix);
 
 static inline Fixed FMul(Fixed a, Fixed b) { return ((int64_t)a * (int64_t)b) / (1 << 16); }
-static inline Fixed FDiv(Fixed a, Fixed b) { return ((int64_t)a * (1 << 16)) / b; }
-static inline Fixed FMulDiv(Fixed a, Fixed b, Fixed c) { return (long)(((double)a) * b / c); }
+static inline Fixed _FDiv(Fixed a, Fixed b) { return ((int64_t)a * (1 << 16)) / b; }
+static inline Fixed _FMulDiv(Fixed a, Fixed b, Fixed c) { return (long)(((double)a) * b / c); }
 
-#define FDivNZ FDiv
-#define FMulDivNZ FMulDiv
-#define FMulDivV FMulDiv
-#define FMulDivVNZ FMulDiv
+// #define FM_CHECK_DIV_BY_ZERO
+#ifdef FM_CHECK_DIV_BY_ZERO
+    #include <sstream>
+    static inline bool FThrowDivideZero(const char* errFile, int errLine) {
+        std::ostringstream oss;
+        oss << "FastMat Error: " << errFile << ":" << errLine << " Divide by zero\n";
+        throw std::invalid_argument(oss.str());
+    }
+
+    #define FDivNZ(a, b)        (b == 0 ? FThrowDivideZero(__FILE__, __LINE__) : _FDiv(a, b))
+    #define FMulDivNZ(a, b, c)  (c == 0 ? FThrowDivideZero(__FILE__, __LINE__) : _FMulDiv(a, b, c))
+#else
+    #define FDivNZ(a, b)        _FDiv(a, b)
+    #define FMulDivNZ(a, b, c)  _FMulDiv(a, b, c)
+#endif
+
+#define FDiv                FDivNZ
+#define FMulDiv             FMulDivNZ
+#define FMulDivV            FMulDiv
+#define FMulDivVNZ          FMulDivNZ
 
 #define FHALFPI 102944
 #define FONEPI 205887
@@ -126,3 +142,4 @@ void InverseTransform(Matrix *trans, Matrix *inv);
 
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2);
 std::string FormatVector(Fixed *v, int size);
+std::string FormatVectorFloat(Fixed *v, int size);

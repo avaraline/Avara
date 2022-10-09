@@ -1,7 +1,15 @@
 <map>
   <SkyColor fill="#fffff0" frame="#d9f2ff" />
   <GroundColor fill="#fff9d9" />
-  <set designer="$mSilverfox" information="Between the sun, sand, and glint of metal, it was nearly impossible to trust my eyes, but I swear the place was not as I left it." ambient.c="#fffff0" light.0.i="0.9" light.0.a="30" light.0.b="10" wallHeight="0" />
+  <set
+    designer="$mSilverfox"
+    information="Between the sun, sand, and glint of metal, it was nearly impossible to trust my eyes, but I swear the place was not as I left it."
+    ambient.c="#fffff0"
+    light.0.i="0.9"
+    light.0.a="30"
+    light.0.b="10"
+    wallHeight="0"
+  />
 
   <!-- CENTER -->
   <Wall d="15" fill="#262522" frame="#000000" h="3" w="15" x="0" z="0" />

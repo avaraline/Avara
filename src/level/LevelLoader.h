@@ -33,7 +33,7 @@ enum {
     iWallTemplateResource,
     iFloorTemplateResource,
 
-    iHeight, // 13
+    iHeight,
     iMask,
     iTeam,
     iWallHeight,

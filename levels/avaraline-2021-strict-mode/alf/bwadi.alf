@@ -1,7 +1,16 @@
 <map>
   <SkyColor fill="#99fdff" frame="#c3cde6" />
   <GroundColor fill="#3a404d" frame="#000000" />
-  <set designer="$mMalkfox" information="Does anyone else think about what it would be like to watch your children grow up?" ambient.c="#f0ffff" light.0.i="0.8" light.0.a="30" light.0.b="10" light.1.i="0.5" wallHeight="0" />
+  <set
+    designer="$mMalkfox"
+    information="Does anyone else think about what it would be like to watch your children grow up?"
+    ambient.c="#f0ffff"
+    light.0.i="0.8"
+    light.0.a="30"
+    light.0.b="10"
+    light.1.i="0.5"
+    wallHeight="0"
+  />
 
   <Teleporter group="-1" y="-30" activeRange="27 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" fill="#009600" frame="#000000" cx="0" cz="0" angle="225" />
   <Teleporter y="30" shape="0" group="@recenter" mask="0" fill="#009600" frame="#000000" cx="0" cz="0" angle="225" />
