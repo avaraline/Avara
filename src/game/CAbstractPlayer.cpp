@@ -980,7 +980,7 @@ void CAbstractPlayer::PlayerAction() {
                         viewYaw = 0;
                         viewPitch = 0;
                         fieldOfView = maxFOV;
-                        Reincarnate(NULL);
+                        Reincarnate();
                     } else {
                         itsManager->DeadOrDone();
                     }
@@ -1207,55 +1207,59 @@ void CAbstractPlayer::IncarnateSound() {
     gHub->ReleaseLink(aLink);
 }
 
-void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
-    CSmartPart **thePart;
+void CAbstractPlayer::Reincarnate() {
     CIncarnator *placeList;
-    long bestCount = 0x7fffFFFF;
+    long bestCount = LONG_MAX;
 
-    if (newSpot == NULL) {
-        placeList = itsGame->incarnatorList;
-
-        while (placeList) {
-            if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount < bestCount)) {
-                bestCount = placeList->useCount;
-                newSpot = placeList;
-            }
-
-            placeList = placeList->nextIncarnator;
-        }
-
-        // couldn't find an available incarnator, create a random one
-        if (newSpot == NULL) {
-            for (int tries = 3; isInLimbo && tries > 0; tries--) {
-                // try a psuedo-random incarnation
-                CRandomIncarnator waldo(itsGame->actorList);
-                // call self so that collision checks below are executed
-                Reincarnate(&waldo);
-            }
-            return;
+    // first, determine the count for the least-visited Incarnator
+    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
+        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount < bestCount)) {
+            bestCount = placeList->useCount;
         }
     }
 
-    for (thePart = partList; *thePart; thePart++) {
+    // try the least-visited Incarnators until one works
+    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
+        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
+            if (ReincarnateComplete(placeList)) {
+                break;
+            }
+        }
+    }
+
+    // if couldn't find an available Incarnator above, try creating a random one
+    if (placeList == nullptr) {
+        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working, 
+        // then 3 tries will get that down to 0.1%.  In most levels, the not-working chance is probably
+        // closer to 1% so 3 tries = 0.0001%
+        for (int tries = 3; isInLimbo && tries > 0; tries--) {
+            CRandomIncarnator waldo(itsGame->actorList);
+            if (ReincarnateComplete(&waldo)) {
+                break;
+            }
+        }
+    }
+}
+
+bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
+    // increment useCount regardless of success, so the next player doesn't try to use this spot
+    newSpot->useCount++;
+
+    // make sure somebody or something isn't in this spot already, prepare for collision test
+    location[0] = newSpot->location[0];
+    location[1] = newSpot->location[1];
+    location[2] = newSpot->location[2];
+    speed[1] = 0;
+    heading = newSpot->heading;
+
+    // make player visible before the collision test
+    for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->isTransparent = false;
     }
-
-    if (newSpot) {
-        newSpot->useCount++;
-        location[0] = newSpot->location[0];
-        location[1] = newSpot->location[1];
-        location[2] = newSpot->location[2];
-        speed[1] = 0;
-        heading = newSpot->heading;
-
-        PlayerWasMoved();
-        BuildPartProximityList(location, proximityRadius, kSolidBit);
-        if (DoCollisionTest(&proximityList.p)) {
-            newSpot = NULL;
-        }
-    }
-
-    if (newSpot) {
+    PlayerWasMoved();
+    BuildPartProximityList(location, proximityRadius, kSolidBit);
+    if (!DoCollisionTest(&proximityList.p)) {
+        // looks like we're good to go
         isInLimbo = false;
         maskBits |= kSolidBit;
 
@@ -1280,10 +1284,14 @@ void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
         didSelfDestruct = false;
 
     } else {
-        for (thePart = partList; *thePart; thePart++) {
+        // make player invisible again since it failed the collision test
+        for (CSmartPart **thePart = partList; *thePart; thePart++) {
             (*thePart)->isTransparent = true;
         }
+        return false;
     }
+
+    return true;
 }
 
 Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume, short options) {
