@@ -544,7 +544,8 @@ void LexRead(LexSymbol *theSymbol) {
                     parserVar.input[-1] = matchCount;
                     theSymbol->kind = kLexConstant;
                     // theSymbol->value.floating = StringToLongDouble(parserVar.input-1);
-                    theSymbol->value.floating = atof(tempString);
+                    theSymbol->value.floating = std::stod(tempString);
+
                     // SDL_Log("\natof(%s) --> %f\n", tempString, theSymbol->value.floating);
                     parserVar.input[-1] = temp;
                     parserVar.input += matchCount;
@@ -1110,7 +1111,7 @@ double ReadDoubleVar(const char *s) {
 }
 
 Fixed ReadFixedVar(short index) {
-    return 65536 * EvalVariable(index + firstVariable, false);
+    return ToFixed(EvalVariable(index + firstVariable, false));
 }
 Fixed ReadFixedVar(const char *s) {
     return ReadFixedVar(IndexForEntry(s));
