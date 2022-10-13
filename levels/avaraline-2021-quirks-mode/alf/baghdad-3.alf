@@ -1,28 +1,39 @@
 <map>
-  <set
-    designer="Head"
-    information="Updated from the original.  Now with random incarnators, random goody radii, boundary visualization (66% of the time), no-spin teleporter, normal missiles, 6 lives."
-    defaultLives="6"
-  />
-  <!-- Local variables -->
-  <set
-    startY    = "8"
-    sin60     = "sin(60)"
-    cos60     = "cos(60)"
-    grenDelay = "250"
-    numGren   = "7"
-    missDelay = "250"
-    numMiss   = "4"
-    domeColor = '"rgba(255, 202, 0, 0.94)"'
-  />
+  <script>
+    designer     = "Head"
+    information  = "Updated from the original.  Now with random incarnators, random goody radii, boundary visualization (66% of the time), no-spin teleporter, larger goodies = greater power and fewer, smaller missiles = faster , 6 lives."
+    defaultLives = 6
 
-  <!-- Using enum makes sure all Goodies will be at the same radius (not eval'ed every time) -->
+    scaleFactor = 2.0   // 2.0 = either twice as big, half as small or somewhere in between
+
+    // missileScale defined as enum below so that it doesn't change
+    // bigger missiles turn and accelerate slower
+    missileTurnRate     = 0.025 / missileScale
+    missileAcceleration = 0.2 / missileScale
+    missilePower        = 1.0 * missileScale
+    missDelay           = 250
+    numMiss             = 4 / missileScale
+
+    // grenades are smaller when missiles are bigger and vice-versa
+    grenadeScale  = 1 / missileScale
+    grenadePower  = 2.25 * grenadeScale
+    grenDelay     = 250
+    numGren       = 6 / grenadeScale
+
+    startY    = 8
+    sin60     = sin(60)
+    cos60     = cos(60)
+    domeColor = "rgba(255, 202, 0, 0.94)"
+  </script>
+
+  <!-- enum variables are eval'ed just once (the random value stays the same after initialization) -->
+  <enum start="(1.0 + random * (scaleFactor^2 - 1)) / scaleFactor" vars="missileScale" />
   <enum start="4+24*random" vars="grenRadius" />
-  <enum start="20+28*random" vars="missRadius" />
-  <enum start="0.1+200*round(0.16+random)" vars="domeYon" />  <!-- border visible about 66% of the time (for Seven) -->
+  <enum start="20+27*random" vars="missRadius" />
+  <enum start="0.1+200*round(0.16+random)" vars="domeYon" />  <!-- border invisible about 33% of the time (for Seven) -->
 
   <SkyColor fill="#fffc41" frame="#ff7c00" />
-  <!-- <GroundColor fill="#d6a800" />  214 168 0 original color, floor attempts to match this -->
+  <!-- <GroundColor fill="#d6a800" />  214 168 0 original color, Dome floor below attempts to match this -->
   <GroundColor fill="#cca000" />  <!-- 204 160 0 -->
   <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" cx="30" cz="30" angle="225" />
 
@@ -53,59 +64,59 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="0" cz="grenRadius" angle="180" />
+  <Goody shape="bspGrenade" scale="grenadeScale" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="0" cz="grenRadius" angle="180" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="sin60*grenRadius" cz="cos60*grenRadius" angle="120" />
+  <Goody shape="bspGrenade" scale="grenadeScale" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="sin60*grenRadius" cz="cos60*grenRadius" angle="120" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="-sin60*grenRadius" cz="cos60*grenRadius" angle="240" />
+  <Goody shape="bspGrenade" scale="grenadeScale" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="-sin60*grenRadius" cz="cos60*grenRadius" angle="240" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="0" cz="-grenRadius" angle="0" />
+  <Goody shape="bspGrenade" scale="grenadeScale" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="0" cz="-grenRadius" angle="0" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="-sin60*grenRadius" cz="-cos60*grenRadius" angle="300" />
+  <Goody shape="bspGrenade" scale="grenadeScale" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="-sin60*grenRadius" cz="-cos60*grenRadius" angle="300" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="grenDelay" />
-  <Goody shape="bspGrenade" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="sin60*grenRadius" cz="-cos60*grenRadius" angle="60" />
+  <Goody shape="bspGrenade" scale="grenadeScale" y="mGoodyOffset" grenades="numGren" start="mShow" out="mTaken" cx="sin60*grenRadius" cz="-cos60*grenRadius" angle="60" />
 
 
   <!-- Missiles -->
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="missRadius" cz="0" angle="90" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="missRadius" cz="0" angle="90" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="cos60*missRadius" cz="sin60*missRadius" angle="150" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="cos60*missRadius" cz="sin60*missRadius" angle="150" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce4" frame="#000000" cx="-cos60*missRadius" cz="sin60*missRadius" angle="210" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#012ce4" frame="#000000" cx="-cos60*missRadius" cz="sin60*missRadius" angle="210" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="-missRadius" cz="0" angle="270" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="-missRadius" cz="0" angle="270" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="-cos60*missRadius" cz="-sin60*missRadius" angle="330" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="-cos60*missRadius" cz="-sin60*missRadius" angle="330" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />

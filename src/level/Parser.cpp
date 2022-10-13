@@ -1129,7 +1129,7 @@ const std::optional<uint32_t> ReadColorVar(short index) {
     std::optional<uint32_t> color = ParseColor(ReadStringVar(index));
     if (!color) {
         // try dereferencing color to a variable (e.g. myFill='"#ffcc44"' --> fill="myFill")
-           color = ParseColor(ReadStringVar(ReadStringVar(index).c_str()));
+        color = ParseColor(ReadStringVar(ReadStringVar(index).c_str()));
     }
     return color;
 }
