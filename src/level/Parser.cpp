@@ -961,7 +961,7 @@ double EvalVariable(long token, Boolean forceCalc) {
                             stackP[0] = -stackP[0];
                         break;
                     case kLexFun0:
-                        *(++stackP) = FRandom() / 65536.0;
+                        *(++stackP) = ToFloat(FRandom());
                         break;
                     case kLexFun1:
                         switch (theProgram->value.token) {
@@ -1208,7 +1208,7 @@ void ProgramOffsetMultiply(short index, short ref, long multValue) {
 }
 
 void ProgramFixedVar(short index, Fixed value) {
-    ProgramVariable(index, value / 65536.0);
+    ProgramVariable(index, ToFloat(value));
 }
 
 void ProgramLongVar(short index, long value) {
