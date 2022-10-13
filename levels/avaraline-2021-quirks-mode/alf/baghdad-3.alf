@@ -3,8 +3,9 @@
     designer     = "Head"
     information  = "Updated from the original.  Now with random incarnators, random goody radii, boundary visualization (66% of the time), no-spin teleporter, larger goodies = greater power and fewer, smaller missiles = faster , 6 lives."
     defaultLives = 6
+    mGoodyOffset = 2.1
 
-    scaleFactor = 2.0   // 2.0 = either twice as big, half as small or somewhere in between
+    scaleFactor = 3.0   // goodies between 3x or 1/3 scale
 
     // missileScale defined as enum below so that it doesn't change
     // bigger missiles turn and accelerate slower
@@ -121,6 +122,6 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="missDelay" />
-  <Goody shape="bspMissile" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="cos60*missRadius" cz="-sin60*missRadius" angle="30" />
+  <Goody shape="bspMissile" scale="missilePower" y="mGoodyOffset" missiles="numMiss" start="mShow" out="mTaken" fill="#0052ff" frame="#000000" cx="cos60*missRadius" cz="-sin60*missRadius" angle="30" />
 
 </map>
