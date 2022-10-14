@@ -1,9 +1,9 @@
 <map>
   <script>
     designer     = "Head"
-    information  = "Updated from the original.  Now with random incarnators, random goody radii, boundary visualization (66% of the time), no-spin teleporter, larger goodies = greater power and fewer, smaller missiles = faster , 6 lives."
+    information  = "Updated from the original.  Now with random incarnators, random goody radii, boundary visualization (66% of the time), no-spin teleporter, goodies of 1x, 2x, or 3x power, bigger goodies = greater power but fewer, smaller missiles = faster, 6 lives."
     defaultLives = 6
-    mGoodyOffset = 2.1
+    mGoodyOffset = 1.9
 
     scaleFactor = 3.0   // goodies between 3x or 1/3 scale
 
@@ -13,12 +13,12 @@
     missileAcceleration = 0.2 / missileScale
     missilePower        = 1.0 * missileScale
     missDelay           = 250
-    numMiss             = 4 / missileScale
+    numMiss             = 6 / missileScale
 
     // grenades are smaller when missiles are bigger and vice-versa
     grenadeScale  = 1 / missileScale
     grenadePower  = 2.25 * grenadeScale
-    grenDelay     = 250
+    grenDelay     = 200
     numGren       = 6 / grenadeScale
 
     startY    = 8
@@ -28,7 +28,8 @@
   </script>
 
   <!-- enum variables are eval'ed just once (the random value stays the same after initialization) -->
-  <enum start="(1.0 + random * (scaleFactor^2 - 1)) / scaleFactor" vars="missileScale" />
+  <!-- this equation makes the missileScale either 3(7%),2(18%),1(50%),1/2(18%) or 1/3(7%) -->
+  <enum start="round((scaleFactor-1)*(1-random)^2 + 1)^(2*round(random)-1)" vars="missileScale" />
   <enum start="4+24*random" vars="grenRadius" />
   <enum start="20+27*random" vars="missRadius" />
   <enum start="0.1+200*round(0.16+random)" vars="domeYon" />  <!-- border invisible about 33% of the time (for Seven) -->
