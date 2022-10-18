@@ -50,7 +50,7 @@
   <enum start="round((scaleFactor-1)*(1-random)^2 + 1)^(2*round(random)-1)" vars="missileScale" />
   <!-- <enum start="3^(2*round(random)-1)" vars="missileScale" /> -->
   <enum start="4+24*random" vars="grenRadius" />
-  <enum start="20+27*random" vars="missRadius" />
+  <enum start="20+25.5*random" vars="missRadius" />
   <enum start="0.1+200*round(0.16+random)" vars="domeYon" />  <!-- border invisible about 33% of the time (for Seven) -->
 
   <SkyColor fill="#fffc41" frame="#ff7c00" />
@@ -66,6 +66,10 @@
      cx="0" cz="0" y="startY" angle="0" activeRange="0" spin="0" />
   <Hologram shape="bspGroundStar" fill="#000000"
      cx="0" cz="0" y="0.01" angle="0" />
+
+   <!-- Disabled incarnators are used to define the minimum radius of the randomly generated incarnators  -->
+   <Incarnator y="0" cx="-40" cz="0" stop="@start" mask="0" />
+   <Incarnator y="0" cx="40" cz="0" stop="@start" mask="0" />
 
   <!-- Small rotating stars -->
   <unique vars="mShow = @start" />
