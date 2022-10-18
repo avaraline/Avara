@@ -199,7 +199,8 @@ public:
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
 
     virtual void GoLimbo(long limboDelay);
-    virtual void Reincarnate(CIncarnator *newSpot);
+    virtual void Reincarnate();
+    virtual bool ReincarnateComplete(CIncarnator *newSpot);
     virtual void IncarnateSound();
 
     virtual Boolean TryTransport(Fixed *where, short soundId, Fixed volume, short options);

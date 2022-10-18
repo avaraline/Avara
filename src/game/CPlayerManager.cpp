@@ -1031,7 +1031,7 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->itsManager = this;
 
         itsPlayer->teamMask = myTeamMask;
-        itsPlayer->Reincarnate(NULL);
+        itsPlayer->Reincarnate();
 
         if (itsPlayer->isInLimbo) {
             itsPlayer->Dispose();
@@ -1060,17 +1060,7 @@ Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
         itsPlayer->itsManager = this;
 
         itsPlayer->teamMask = 1 << i;  // set in case Incarnators discriminate on color
-        itsPlayer->Reincarnate(NULL);
-        // spotAvailable = itsGame->incarnatorList;
-        // while (spotAvailable) {
-        //     if (spotAvailable->enabled && spotAvailable->colorMask & (1 << i)) {
-        //         itsPlayer->Reincarnate(spotAvailable);
-        //         if (!itsPlayer->isInLimbo) {
-        //             break;
-        //         }
-        //     }
-        //     spotAvailable = spotAvailable->nextIncarnator;
-        // }
+        itsPlayer->Reincarnate();
 
         if (itsPlayer->isInLimbo) {
             itsPlayer->Dispose();
