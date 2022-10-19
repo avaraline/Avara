@@ -544,7 +544,7 @@ void LexRead(LexSymbol *theSymbol) {
                     parserVar.input[-1] = matchCount;
                     theSymbol->kind = kLexConstant;
                     // theSymbol->value.floating = StringToLongDouble(parserVar.input-1);
-                    theSymbol->value.floating = std::stod(tempString);
+                    theSymbol->value.floating = atof(tempString);
 
                     // SDL_Log("\natof(%s) --> %f\n", tempString, theSymbol->value.floating);
                     parserVar.input[-1] = temp;
