@@ -1,16 +1,16 @@
 <map>
   <set defaultLives="3" />
-  <Incarnator cx="67.29166666666667" cz="32.77777777777778" angle="90" />
+  <Incarnator cx="67.29166666666667" cz="32.77777777777778" angle="270" />
   <SkyColor fill="#000000" frame="#000000" />
   <GroundColor fill="#000000" />
   <Timer in="@start" out="@winTeam" wait="2100" restart="false" />
-  <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#ff7498" frame="#000000" cx="32.5" cz="2.430555555555556" angle="180" />
-  <Sound y="1" isPlaced="false" isMusic="true" isAmbient="true" rate="1" loopCount="0" sound="1112" volume="0.5" start="@start" restart="true" cx="31.111111111111114" cz="43.68055555555556" angle="90" />
+  <Teleporter shape="0" status="false" win="1000" start="@winTeam" activeRange="2000" fill="#ff7498" frame="#000000" cx="32.5" cz="2.430555555555556" angle="0" />
+  <Sound y="1" isPlaced="false" isMusic="true" isAmbient="true" rate="1" loopCount="0" sound="1112" volume="0.5" start="@start" restart="true" cx="31.111111111111114" cz="43.68055555555556" angle="270" />
   <set lightHull="1111" mediumHull="1111" HeavyHull="1111" />
   <Text in="@start" wait="250" text="I just wanted to say 
 thanks to all of you who
 participated in Net '99!" showEveryone="true" align="centerAlign" restart="false" cx="31.111111111111114" cz="43.68055555555556" r="1.666666666666666" />
-  <Door2 status="isOpen" stopSound="3301" shape="2000" y="0.5" deltaY="0" deltaZ="-500" deltaX="0" close="@start" openSpeed="0.8" volume="100" closeDelay="0" pitch="00" yaw="2000" roll="0" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" angle="270" />
+  <Door2 status="isOpen" stopSound="3301" shape="2000" y="0.5" deltaY="0" deltaZ="-500" deltaX="0" close="@start" openSpeed="0.8" volume="100" closeDelay="0" pitch="00" yaw="2000" roll="0" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" angle="90" />
   <set designer="Rup-1" information="Please read the information in 
 your instruments window.  Once the text is 
 finished you will be able to play all the levels.  
@@ -55,5 +55,5 @@ Avara.org" showEveryone="true" align="centerAlign" restart="false" cx="48.472222
   <Text sound="3301" in="@start" wait="2050" text="Enjoy the levels!!
 
 -- Avara Level Design --" showEveryone="true" align="centerAlign" restart="false" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" />
-  <Door2 status="isOpen" stopSound="3301" shape="2001" y="-2.5" deltaY="0" deltaZ="-500" deltaX="0" close="@start" openSpeed="0.8" volume="100" closeDelay="80" pitch="00" yaw="2000" roll="0" fill="#fbffff" frame="#090909" cx="48.402777777777786" cz="32.361111111111114" angle="270" />
+  <Door2 status="isOpen" stopSound="3301" shape="2001" y="-2.5" deltaY="0" deltaZ="-500" deltaX="0" close="@start" openSpeed="0.8" volume="100" closeDelay="80" pitch="00" yaw="2000" roll="0" fill="#fbffff" frame="#090909" cx="48.402777777777786" cz="32.361111111111114" angle="90" />
 </map>

@@ -219,7 +219,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         if (!node.attribute("angle").empty()) {
             int arcAngle = ReadLongVar("angle");
 
-            lastArcAngle = (720 - arcAngle) % 360;
+            lastArcAngle = (900 - arcAngle) % 360;
             lastDomeAngle = 360 - arcAngle;
         }
 

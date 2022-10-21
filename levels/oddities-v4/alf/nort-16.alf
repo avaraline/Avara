@@ -5,7 +5,7 @@ Use your trail to box in the other HECTORs.
 This is the 16x16 version." wallHeight="5" baseHeight="100" incHeight="wallHeight * 2" gridYon="32" hull.0="hullNort" hull.1="hull[0]" hull.2="hull[0]" defaultLives="1" wallYon="gridYon" OpDel="7" OpSpd="50" StartDelay="60" />
   <SkyColor fill="#012ce4" frame="#2d2d2d" />
   <GroundColor fill="#012ce4" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="5.277777777777778" cz="25.833333333333336" angle="45" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="5.277777777777778" cz="25.833333333333336" angle="225" />
   <unique vars="mStep" />
   <WallDoor stepOnMsg="mStep" open="mStep" openDelay="OpDel" shotPower="100" deltaY="wallHeight" openSpeed="OpSpd" fill="#010e68" frame="#000000" x="53.09027777777778" z="32.395833333333336" w="4.375" d="4.375" h="0" />
   <Wall fill="#00ec00" frame="#000000" x="55.59027777777778" z="32.395833333333336" w="0.625" d="4.375" h="0" />
@@ -829,54 +829,54 @@ This is the 16x16 version." wallHeight="5" baseHeight="100" incHeight="wallHeigh
   <unique vars="mA mB" />
   <WallDoor stepOnMsg="mA" open="mA" didOpen="mB" close="mB" openSpeed="100" closeSpeed="100" shotPower="1000" stopSound="0" openSound="0" closeSound="0" fill="#7a4300" frame="#000000" x="45.59027777777778" z="35.208333333333336" w="9.375" d="30" h="0.25" />
   <set wallYon="gridYon" />
-  <Teleporter yon="0.01" group="-1" destGroup="@death" deadRange="70" activeRange="deadRange + 5" y="incHeight" fill="#7a4300" frame="#000000" cx="90.27777777777779" cz="69.58333333333334" angle="315" />
+  <Teleporter yon="0.01" group="-1" destGroup="@death" deadRange="70" activeRange="deadRange + 5" y="incHeight" fill="#7a4300" frame="#000000" cx="90.27777777777779" cz="69.58333333333334" angle="135" />
   <set wa="wallHeight" wallYon="0.01" />
   <unique vars="mA mB" />
   <WallDoor stepOnMsg="mA" open="mA" didOpen="mB" close="mB" openSpeed="100" closeSpeed="100" shotPower="1000" stopSound="0" openSound="0" closeSound="0" fill="#7a4300" frame="#000000" x="91.84027777777779" z="180.83333333333334" w="9.375" d="30" h="0.25" />
   <set wallYon="gridYon" />
-  <Teleporter y="incHeight * 2" yon="0.01" group="@death" start="0" sound="0" fill="#a8d6ff" frame="#000000" cx="92.15277777777779" cz="176.45833333333334" angle="315" />
+  <Teleporter y="incHeight * 2" yon="0.01" group="@death" start="0" sound="0" fill="#a8d6ff" frame="#000000" cx="92.15277777777779" cz="176.45833333333334" angle="135" />
   <set wallYon="2000" wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="31.458333333333336" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="33.958333333333336" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="37.77777777777778" cz="32.56944444444444" angle="270" />
+  <Incarnator y="incHeight" cx="37.77777777777778" cz="32.56944444444444" angle="90" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="138.40277777777777" z="31.458333333333336" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="138.40277777777777" z="33.958333333333336" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="143.40277777777777" cz="32.56944444444444" angle="90" />
+  <Incarnator y="incHeight" cx="143.40277777777777" cz="32.56944444444444" angle="270" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="68.33333333333334" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="70.83333333333334" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="37.77777777777778" cz="69.44444444444444" angle="270" />
+  <Incarnator y="incHeight" cx="37.77777777777778" cz="69.44444444444444" angle="90" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="138.40277777777777" z="68.95833333333334" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="138.40277777777777" z="71.45833333333334" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="143.40277777777777" cz="70.06944444444444" angle="90" />
+  <Incarnator y="incHeight" cx="143.40277777777777" cz="70.06944444444444" angle="270" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="105.83333333333334" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="108.33333333333334" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="37.77777777777778" cz="106.94444444444444" angle="270" />
+  <Incarnator y="incHeight" cx="37.77777777777778" cz="106.94444444444444" angle="90" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="138.40277777777777" z="105.83333333333334" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="138.40277777777777" z="108.33333333333334" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="143.40277777777777" cz="106.94444444444444" angle="90" />
+  <Incarnator y="incHeight" cx="143.40277777777777" cz="106.94444444444444" angle="270" />
   <Wall fill="#ff32a9" frame="#000000" x="90.59027777777777" z="29.270833333333336" w="81.875" d="0.625" h="0" />
   <Wall fill="#ff32a9" frame="#000000" x="131.21527777777777" z="70.20833333333334" w="0.625" d="81.25" h="0" />
   <Wall fill="#ff32a9" frame="#000000" x="90.27777777777777" z="110.52083333333334" w="81.25" d="0.625" h="0" />

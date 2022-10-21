@@ -11,16 +11,16 @@ Missile ammo is present but hidden." />
   <Wall fill="#8a8a8a" frame="#000000" x="66.80555555555556" z="67.08333333333334" w="35" d="15" h="0" />
   <Wall fill="#8a8a8a" frame="#000000" x="51.80555555555556" z="57.083333333333336" w="5" d="5" h="0" />
   <Wall fill="#8a8a8a" frame="#000000" x="71.80555555555556" z="57.083333333333336" w="25" d="5" h="0" />
-  <Incarnator cx="51.80555555555556" cz="72.08333333333334" angle="225" />
-  <Incarnator cx="51.80555555555556" cz="42.083333333333336" angle="315" />
-  <Incarnator cx="81.80555555555556" cz="42.083333333333336" angle="45" />
-  <Incarnator cx="81.80555555555556" cz="72.08333333333334" angle="135" />
+  <Incarnator cx="51.80555555555556" cz="72.08333333333334" angle="45" />
+  <Incarnator cx="51.80555555555556" cz="42.083333333333336" angle="135" />
+  <Incarnator cx="81.80555555555556" cz="42.083333333333336" angle="225" />
+  <Incarnator cx="81.80555555555556" cz="72.08333333333334" angle="315" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspShot" power="gEnergy" shield=".05" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="50.55555555555556" cz="40.833333333333336" angle="315" />
+  <Goody shape="bspShot" power="gEnergy" shield=".05" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="50.55555555555556" cz="40.833333333333336" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#fffc41" frame="#ff2600" cx="83.05555555555556" cz="73.33333333333334" angle="315" />
+  <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#fffc41" frame="#ff2600" cx="83.05555555555556" cz="73.33333333333334" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <Wall fill="#8a8a8a" frame="#000000" x="41.80555555555556" z="54.58333333333334" w="5" d="50" h="0" />
@@ -40,11 +40,11 @@ Missile ammo is present but hidden." />
   <Wall fill="#8a8a8a" frame="#000000" x="61.80555555555556" z="54.583333333333336" w="15" d="0" h="0" />
   <Wall fill="#8a8a8a" frame="#000000" x="61.80555555555556" z="59.583333333333336" w="15" d="0" h="0" />
   <Wall fill="#8a8a8a" frame="#000000" x="69.30555555555556" z="57.083333333333336" w="0" d="5" h="0" />
-  <Ramp thickness="0" deltaY="floor1Y" fill="#8a8a8a" frame="#000000" x="59.30555555555556" z="57.083333333333336" w="10" d="5" h="0" angle="270" />
-  <Ramp thickness="0" deltaY="floor1Y -pitCeilingY" y="pitCeilingY" fill="#8a8a8a" frame="#000000" x="64.30555555555556" z="57.083333333333336" w="10" d="5" h="0" angle="270" />
-  <Switch in.0="@PitPanelClose" in.1="@PitPanelOpen" out.0="in[0]" out.1="in[1]" fill="#00ec00" frame="#ff2600" cx="69.30555555555556" cz="57.15277777777778" angle="270" />
+  <Ramp thickness="0" deltaY="floor1Y" fill="#8a8a8a" frame="#000000" x="59.30555555555556" z="57.083333333333336" w="10" d="5" h="0" angle="90" />
+  <Ramp thickness="0" deltaY="floor1Y -pitCeilingY" y="pitCeilingY" fill="#8a8a8a" frame="#000000" x="64.30555555555556" z="57.083333333333336" w="10" d="5" h="0" angle="90" />
+  <Switch in.0="@PitPanelClose" in.1="@PitPanelOpen" out.0="in[0]" out.1="in[1]" fill="#00ec00" frame="#ff2600" cx="69.30555555555556" cz="57.15277777777778" angle="90" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" missiles="gMissiles" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#012ce4" frame="#570500" cx="66.80555555555556" cz="57.083333333333336" angle="315" />
+  <Goody shape="bspMissile" missiles="gMissiles" y="gAmmoY" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#012ce4" frame="#570500" cx="66.80555555555556" cz="57.083333333333336" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <Timer in.0="@start" in.1="@PanelTimerB" in.2="@PitPanelStep" wait="2 * 15" out="@PanelTimerB" />
@@ -85,47 +85,47 @@ Missile ammo is present but hidden." />
   <Wall fill="#c7c7c7" frame="#000000" x="93.05555555555556" z="33.333333333333336" w="2.5" d="2.5" h="0" />
   <Wall fill="#c7c7c7" frame="#000000" x="40.55555555555556" z="80.83333333333334" w="2.5" d="2.5" h="0" />
   <Wall fill="#c7c7c7" frame="#000000" x="90.55555555555556" z="83.33333333333334" w="2.5" d="2.5" h="0" />
-  <Incarnator y="wallHeight" cx="51.80555555555556" cz="72.08333333333334" angle="225" />
-  <Incarnator y="wallHeight" cx="51.80555555555556" cz="42.083333333333336" angle="315" />
-  <Incarnator y="wallHeight" cx="81.80555555555556" cz="42.083333333333336" angle="45" />
-  <Incarnator y="wallHeight" cx="81.80555555555556" cz="72.08333333333334" angle="135" />
+  <Incarnator y="wallHeight" cx="51.80555555555556" cz="72.08333333333334" angle="45" />
+  <Incarnator y="wallHeight" cx="51.80555555555556" cz="42.083333333333336" angle="135" />
+  <Incarnator y="wallHeight" cx="81.80555555555556" cz="42.083333333333336" angle="225" />
+  <Incarnator y="wallHeight" cx="81.80555555555556" cz="72.08333333333334" angle="315" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMushroom" scale=".7" shield="5" y="gAmmoY + wallHeight -MM" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#012ce4" frame="#e62100" cx="66.80555555555556" cz="57.083333333333336" angle="315" />
+  <Goody shape="bspMushroom" scale=".7" shield="5" y="gAmmoY + wallHeight -MM" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#012ce4" frame="#e62100" cx="66.80555555555556" cz="57.083333333333336" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeShort" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspShot" power="gEnergy" shield=".05" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="50.55555555555556" cz="73.33333333333334" angle="315" />
+  <Goody shape="bspShot" power="gEnergy" shield=".05" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="50.55555555555556" cz="73.33333333333334" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#fffc41" frame="#ff2600" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Goody shape="bspGrenade" grenades="gGrenades" y="gAmmoY + wallHeight" speed="gAmmoSpd" start="mShow" out="mTaken" fill="#fffc41" frame="#ff2600" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="gTimeLong" />
   <set baseHeight="floor1Y + .1" wallHeight=".25" wallYon="yonPlat" PlatUpSpd="2" PlatDownSpd="3" PlatDelta="floor2Y -baseHeight -wallHeight" field2wa="-baseHeight + floor2Y" stepSound="snStepMetal" />
   <unique vars="mOpen mClose mStep" />
   <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#570500" frame="#000000" x="39.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
   <And in="mStep" out.0="mOpen" out.1="mClose" />
-  <Field enter="mClose" deltaY="0" fill="#570500" frame="#000000" x="40.55555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mClose" deltaY="0" fill="#570500" frame="#000000" x="40.55555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set wa="field2wa" />
-  <Field enter="mOpen" deltaY="0" fill="#570500" frame="#000000" x="40.55555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mOpen" deltaY="0" fill="#570500" frame="#000000" x="40.55555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <unique vars="mOpen mClose mStep" />
   <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#570500" frame="#000000" x="94.30555555555556" z="29.583333333333336" w="5" d="5" h="0" />
   <And in="mStep" out.0="mOpen" out.1="mClose" />
-  <Field enter="mClose" deltaY="0" fill="#570500" frame="#000000" x="93.05555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mClose" deltaY="0" fill="#570500" frame="#000000" x="93.05555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set wa="field2wa" />
-  <Field enter="mOpen" deltaY="0" fill="#570500" frame="#000000" x="93.05555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mOpen" deltaY="0" fill="#570500" frame="#000000" x="93.05555555555556" z="30.833333333333336" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <unique vars="mOpen mClose mStep" />
   <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#570500" frame="#000000" x="39.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
   <And in="mStep" out.0="mOpen" out.1="mClose" />
-  <Field enter="mClose" deltaY="0" fill="#570500" frame="#000000" x="40.55555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mClose" deltaY="0" fill="#570500" frame="#000000" x="40.55555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set wa="field2wa" />
-  <Field enter="mOpen" deltaY="0" fill="#570500" frame="#000000" x="40.55555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mOpen" deltaY="0" fill="#570500" frame="#000000" x="40.55555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <unique vars="mOpen mClose mStep" />
   <WallDoor open="mOpen" close="mClose" deltaY="PlatDelta" openSpeed="PlatUpSpd" closeSpeed="PlatDownSpd" stepOnMsg="mStep" fill="#570500" frame="#000000" x="94.30555555555556" z="84.58333333333334" w="5" d="5" h="0" />
   <And in="mStep" out.0="mOpen" out.1="mClose" />
-  <Field enter="mClose" deltaY="0" fill="#570500" frame="#000000" x="93.05555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mClose" deltaY="0" fill="#570500" frame="#000000" x="93.05555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set wa="field2wa" />
-  <Field enter="mOpen" deltaY="0" fill="#570500" frame="#000000" x="93.05555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="315" />
+  <Field enter="mOpen" deltaY="0" fill="#570500" frame="#000000" x="93.05555555555556" z="83.33333333333334" w="7.5" d="7.5" h="2.25" cx="83.05555555555556" cz="40.833333333333336" angle="135" />
   <set fThick="floor2Y -floor1CeilingY" wallHeight=".25" wallYon="yonDecor" baseHeight="floor1CeilingY + ( fThick -wallHeight ) / 2" />
   <Wall fill="#4180ff" frame="#000000" x="36.80555555555556" z="29.583333333333336" w="0" d="5" h="0" />
   <Wall fill="#4180ff" frame="#000000" x="39.30555555555556" z="27.083333333333336" w="5" d="0" h="0" />
@@ -143,6 +143,6 @@ Missile ammo is present but hidden." />
   <Wall fill="#4180ff" frame="#000000" x="39.30555555555556" z="82.08333333333334" w="5" d="0" h="0" />
   <Wall fill="#4180ff" frame="#000000" x="39.30555555555556" z="87.08333333333334" w="5" d="0" h="0" />
   <Wall fill="#4180ff" frame="#000000" x="41.80555555555556" z="84.58333333333334" w="0" d="5" h="0" />
-  <Teleporter yon="0.01" y="-6" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#00ec00" frame="#000000" cx="39.861111111111114" cz="8.402777777777779" angle="45" />
+  <Teleporter yon="0.01" y="-6" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#00ec00" frame="#000000" cx="39.861111111111114" cz="8.402777777777779" angle="225" />
   <set stepSound="snStepObject" />
 </map>

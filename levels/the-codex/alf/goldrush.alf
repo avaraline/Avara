@@ -13,9 +13,9 @@
   <Wall fill="#ff9d1d" frame="#000000" x="80.625" z="84.58333333333334" w="10" d="10" h="0" />
   <set wallHeight="2" />
   <Wall fill="#ffac32" frame="#000000" x="70.625" z="74.58333333333334" w="10" d="10" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#fffc91" frame="#e6b8de" x="70.625" z="84.58333333333334" w="10" d="10" h="0" angle="90" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#fffc91" frame="#e6b8de" x="80.625" z="74.58333333333334" w="10" d="10" h="0" angle="180" />
-  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="83.125" z="53.333333333333336" w="15" d="12.5" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#fffc91" frame="#e6b8de" x="70.625" z="84.58333333333334" w="10" d="10" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#fffc91" frame="#e6b8de" x="80.625" z="74.58333333333334" w="10" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="83.125" z="53.333333333333336" w="15" d="12.5" h="0" angle="180" />
   <set wallHeight="7" />
   <Wall fill="#ffb945" frame="#000000" x="91.875" z="53.333333333333336" w="2.5" d="12.5" h="0" />
   <set wallHeight="5" />
@@ -24,7 +24,7 @@
   <Wall fill="#ffc855" frame="#000000" x="49.375" z="60.83333333333334" w="12.5" d="27.5" h="0" />
   <set wallHeight="7" />
   <Wall fill="#ffb945" frame="#000000" x="39.375" z="68.33333333333334" w="2.5" d="12.5" h="0" />
-  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="30.625" z="68.33333333333334" w="15" d="12.5" h="0" angle="0" />
+  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="30.625" z="68.33333333333334" w="15" d="12.5" h="0" angle="180" />
   <set wallHeight="7" />
   <Wall fill="#ffb945" frame="#000000" x="16.875" z="68.33333333333334" w="12.5" d="12.5" h="0" />
   <set wallHeight="7" />
@@ -39,10 +39,10 @@
   <Wall fill="#ffb945" frame="#000000" x="28.75" z="30.208333333333336" w="3.75" d="11.25" h="0" y="5" />
   <set wallHeight="5" />
   <Wall fill="#ffc855" frame="#000000" x="68.125" z="38.333333333333336" w="50" d="17.5" h="0" />
-  <Ramp y="7" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="39.6875" z="22.083333333333336" w="18.125" d="5" h="0" angle="90" />
+  <Ramp y="7" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="39.6875" z="22.083333333333336" w="18.125" d="5" h="0" angle="270" />
   <set wallHeight="2" />
   <Wall fill="#ffb945" frame="#000000" x="74.375" z="18.333333333333336" w="2.5" d="5" h="0" />
-  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="63.125" z="22.708333333333336" w="20" d="13.75" h="0" angle="180" />
+  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="63.125" z="22.708333333333336" w="20" d="13.75" h="0" angle="0" />
   <set wallHeight="1" />
   <Wall fill="#ffac32" frame="#000000" x="63.125" z="22.083333333333336" w="28.75" d="10" h="0" y="11" />
   <set wallHeight="11" />
@@ -57,8 +57,8 @@
   <Wall fill="#ffc855" frame="#000000" x="41.875" z="68.33333333333334" w="2.5" d="12.5" h="0" />
   <set wallHeight="11" />
   <Wall fill="#ffb945" frame="#000000" x="51.875" z="22.083333333333336" w="2.5" d="2.5" h="0" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#fffc91" frame="#e6b8de" x="90.625" z="84.58333333333334" w="10" d="10" h="0" angle="270" />
-  <Ramp y="0" deltaY="2" thickness="0" fill="#fffc91" frame="#e6b8de" x="80.625" z="94.58333333333334" w="10" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#fffc91" frame="#e6b8de" x="90.625" z="84.58333333333334" w="10" d="10" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" thickness="0" fill="#fffc91" frame="#e6b8de" x="80.625" z="94.58333333333334" w="10" d="10" h="0" angle="180" />
   <set wallHeight="2" />
   <Wall fill="#ffac32" frame="#000000" x="90.625" z="74.58333333333334" w="10" d="10" h="0" />
   <set wallHeight="2" />
@@ -75,7 +75,7 @@
   <Wall fill="#ffb945" frame="#000000" x="86.875" z="150.83333333333334" w="2.5" d="5" h="0" />
   <set wallHeight="5" />
   <Wall fill="#ffc855" frame="#000000" x="114.375" z="143.95833333333334" w="7.5" d="8.75" h="0" />
-  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="78.125" z="115.83333333333334" w="15" d="12.5" h="0" angle="180" />
+  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="78.125" z="115.83333333333334" w="15" d="12.5" h="0" angle="0" />
   <set wallHeight="7" />
   <Wall fill="#ffb945" frame="#000000" x="86.875" z="115.83333333333334" w="2.5" d="12.5" h="0" />
   <set wallHeight="5" />
@@ -84,7 +84,7 @@
   <Wall fill="#ffc855" frame="#000000" x="111.875" z="108.33333333333334" w="12.5" d="27.5" h="0" />
   <set wallHeight="7" />
   <Wall fill="#ffb945" frame="#000000" x="121.875" z="100.83333333333334" w="2.5" d="12.5" h="0" />
-  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="130.625" z="100.83333333333334" w="15" d="12.5" h="0" angle="180" />
+  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="130.625" z="100.83333333333334" w="15" d="12.5" h="0" angle="0" />
   <set wallHeight="7" />
   <Wall fill="#ffb945" frame="#000000" x="144.375" z="100.83333333333334" w="12.5" d="12.5" h="0" />
   <set wallHeight="7" />
@@ -99,10 +99,10 @@
   <Wall fill="#ffb945" frame="#000000" x="132.5" z="138.95833333333334" w="3.75" d="11.25" h="0" y="5" />
   <set wallHeight="5" />
   <Wall fill="#ffc855" frame="#000000" x="93.125" z="130.83333333333334" w="50" d="17.5" h="0" />
-  <Ramp y="7" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="121.5625" z="147.08333333333334" w="18.125" d="5" h="0" angle="270" />
+  <Ramp y="7" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="121.5625" z="147.08333333333334" w="18.125" d="5" h="0" angle="90" />
   <set wallHeight="2" />
   <Wall fill="#ffb945" frame="#000000" x="109.375" z="150.83333333333334" w="2.5" d="5" h="0" />
-  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="98.125" z="146.45833333333334" w="20" d="13.75" h="0" angle="0" />
+  <Ramp y="0" deltaY="5" thickness="0" fill="#fffc91" frame="#e6b8de" x="98.125" z="146.45833333333334" w="20" d="13.75" h="0" angle="180" />
   <set wallHeight="1" />
   <Wall fill="#ffac32" frame="#000000" x="98.125" z="147.08333333333334" w="28.75" d="10" h="0" y="11" />
   <set wallHeight="11" />
@@ -139,52 +139,52 @@
   <Wall fill="#ffb945" frame="#000000" x="136.875" z="65.20833333333334" w="3.75" d="13.75" h="0" />
   <set wallHeight="3" />
   <Wall fill="#ffb945" frame="#000000" x="130" z="60.208333333333336" w="10" d="3.75" h="0" />
-  <Incarnator y="30" cx="83.68055555555556" cz="38.333333333333336" angle="0" />
-  <Incarnator y="30" cx="83.68055555555556" cz="130.83333333333334" angle="180" />
-  <Incarnator y="30" cx="132.5" cz="131.45833333333334" angle="135" />
-  <Incarnator y="30" cx="28.819444444444443" cz="37.708333333333336" angle="315" />
-  <Incarnator y="30" cx="8.680555555555555" cz="84.65277777777779" angle="270" />
-  <Incarnator y="30" cx="153.125" cz="84.65277777777779" angle="90" />
-  <Incarnator y="30" cx="90.69444444444444" cz="147.08333333333331" angle="180" />
-  <Incarnator y="30" cx="70.69444444444444" cz="22.013888888888893" angle="0" />
+  <Incarnator y="30" cx="83.68055555555556" cz="38.333333333333336" angle="180" />
+  <Incarnator y="30" cx="83.68055555555556" cz="130.83333333333334" angle="0" />
+  <Incarnator y="30" cx="132.5" cz="131.45833333333334" angle="315" />
+  <Incarnator y="30" cx="28.819444444444443" cz="37.708333333333336" angle="135" />
+  <Incarnator y="30" cx="8.680555555555555" cz="84.65277777777779" angle="90" />
+  <Incarnator y="30" cx="153.125" cz="84.65277777777779" angle="270" />
+  <Incarnator y="30" cx="90.69444444444444" cz="147.08333333333331" angle="0" />
+  <Incarnator y="30" cx="70.69444444444444" cz="22.013888888888893" angle="180" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="500" />
-  <Goody shape="bspAvaraA" y="5" speed="4" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#512100" frame="#512100" cx="80.69444444444444" cz="84.65277777777779" angle="315" />
+  <Goody shape="bspAvaraA" y="5" speed="4" grenades="6" missiles="3" start="mShow" out="mTaken" fill="#512100" frame="#512100" cx="80.69444444444444" cz="84.65277777777779" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody shape="bspGrenade" y="3" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="31.944444444444443" cz="103.40277777777779" angle="315" />
+  <Goody shape="bspGrenade" y="3" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="31.944444444444443" cz="103.40277777777779" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody shape="bspGrenade" y="3" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="130.06944444444446" cz="67.15277777777779" angle="315" />
+  <Goody shape="bspGrenade" y="3" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="130.06944444444446" cz="67.15277777777779" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody shape="bspGrenade" y="7" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="21.319444444444446" cz="30.27777777777778" angle="315" />
+  <Goody shape="bspGrenade" y="7" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="21.319444444444446" cz="30.27777777777778" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="63.19444444444444" cz="9.652777777777779" angle="315" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="63.19444444444444" cz="9.652777777777779" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="98.19444444444444" cz="159.65277777777777" angle="315" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="98.19444444444444" cz="159.65277777777777" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Goody shape="bspGrenade" y="7" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="140.06944444444446" cz="139.02777777777777" angle="315" />
+  <Goody shape="bspGrenade" y="7" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffe274" frame="#ff5090" cx="140.06944444444446" cz="139.02777777777777" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="145" />
-  <Goody shape="bspMissile" y="14" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffdf91" frame="#ffdf91" cx="98.19444444444444" cz="147.15277777777777" angle="315" />
+  <Goody shape="bspMissile" y="14" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffdf91" frame="#ffdf91" cx="98.19444444444444" cz="147.15277777777777" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="145" />
-  <Goody shape="bspMissile" y="14" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffdf91" frame="#ffdf91" cx="63.19444444444444" cz="22.15277777777778" angle="315" />
-  <Teleporter group="-1" y="-30" activeRange="120" deadRange="110" destGroup="@recenter" shape="0" fill="#ffef83" frame="#000000" cx="80.625" cz="84.58333333333334" angle="315" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#ffef83" frame="#000000" cx="80.625" cz="84.58333333333334" angle="315" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffef83" frame="#000000" cx="80.625" cz="84.58333333333334" angle="315" />
+  <Goody shape="bspMissile" y="14" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffdf91" frame="#ffdf91" cx="63.19444444444444" cz="22.15277777777778" angle="135" />
+  <Teleporter group="-1" y="-30" activeRange="120" deadRange="110" destGroup="@recenter" shape="0" fill="#ffef83" frame="#000000" cx="80.625" cz="84.58333333333334" angle="135" />
+  <Teleporter y="30" shape="0" group="@recenter" fill="#ffef83" frame="#000000" cx="80.625" cz="84.58333333333334" angle="135" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffef83" frame="#000000" cx="80.625" cz="84.58333333333334" angle="135" />
   <set ambient.i="0.3" light.0.i="0.3" />
 </map>

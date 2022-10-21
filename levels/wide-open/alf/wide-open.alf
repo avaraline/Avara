@@ -2,40 +2,40 @@
   <SkyColor fill="#000000" frame="#000000" />
   <GroundColor fill="#000000" />
   <set ambient.i="1" light.0.i="1" light.0.a="1" light.0.b="225" light.1.i="1" light.1.a="1" light.1.b="45" />
-  <Teleporter group="-1" y="-5" activeRange="15 * 5" deadRange="7 * 5" destGroup="@recenter" shape="0" fill="#fffb00" frame="#000000" cx="47.5" cz="53.611111111111114" angle="225" />
-  <Teleporter y="-5" shape="0" group="@recenter" fill="#fffb00" frame="#000000" cx="47.5" cz="53.611111111111114" angle="225" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#fffb00" frame="#000000" cx="47.5" cz="53.611111111111114" angle="225" />
-  <Incarnator y="2" cx="35.625" cz="43.75" angle="315" />
-  <Incarnator y="2" cx="35.625" cz="43.75" angle="315" />
-  <Incarnator y="2" cx="58.125" cz="43.125" angle="45" />
-  <Incarnator y="2" cx="31.875" cz="54.30555555555556" angle="270" />
-  <Incarnator y="2" cx="63.125" cz="54.30555555555556" angle="90" />
-  <Incarnator y="2" cx="37.5" cz="65" angle="225" />
+  <Teleporter group="-1" y="-5" activeRange="15 * 5" deadRange="7 * 5" destGroup="@recenter" shape="0" fill="#fffb00" frame="#000000" cx="47.5" cz="53.611111111111114" angle="45" />
+  <Teleporter y="-5" shape="0" group="@recenter" fill="#fffb00" frame="#000000" cx="47.5" cz="53.611111111111114" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#fffb00" frame="#000000" cx="47.5" cz="53.611111111111114" angle="45" />
+  <Incarnator y="2" cx="35.625" cz="43.75" angle="135" />
+  <Incarnator y="2" cx="35.625" cz="43.75" angle="135" />
+  <Incarnator y="2" cx="58.125" cz="43.125" angle="225" />
+  <Incarnator y="2" cx="31.875" cz="54.30555555555556" angle="90" />
+  <Incarnator y="2" cx="63.125" cz="54.30555555555556" angle="270" />
+  <Incarnator y="2" cx="37.5" cz="65" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Goody shape="bspAvaraA" y="2" speed="20" hitScore="1" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="47.77777777777778" cz="53.611111111111114" angle="45" />
+  <Goody shape="bspAvaraA" y="2" speed="20" hitScore="1" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="47.77777777777778" cz="53.611111111111114" angle="225" />
   <set designer="Matt Zimney &lt;mzimney@hotmail.com&gt;" information="A very, very simple level
 Optimized for the ScoreKeeper plugin" />
   <Wall fill="#2d2d2d" frame="#000000" x="47.5" z="14.0625" w="3.75" d="0.625" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="47.5" z="99.0625" w="3.75" d="0.625" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="1.5625" z="52.8125" w="0.625" d="3.125" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="94.6875" z="54.0625" w="0.625" d="3.125" h="0.25" />
-  <TeamColor mask="T1" fill="#ffffff" frame="#000000" cx="22.98611111111111" cz="12.01388888888889" r="1.25" angle="315" />
-  <TeamColor mask="T2" fill="#565656" frame="#ffffff" cx="22.98611111111111" cz="14.51388888888889" r="1.25" angle="315" />
-  <TeamColor mask="T3" fill="#e62100" frame="#009600" cx="22.98611111111111" cz="16.875" r="1.25" angle="315" />
-  <TeamColor mask="T4" fill="#00acff" frame="#fffb00" cx="23.055555555555557" cz="19.375" r="1.25" angle="315" />
-  <TeamColor mask="T5" fill="#ff32a9" frame="#007600" cx="23.125" cz="21.944444444444446" r="1.25" angle="315" />
-  <TeamColor mask="T6" fill="#ffd300" frame="#004242" cx="23.125" cz="24.375" r="1.25" angle="315" />
+  <TeamColor mask="T1" fill="#ffffff" frame="#000000" cx="22.98611111111111" cz="12.01388888888889" r="1.25" angle="135" />
+  <TeamColor mask="T2" fill="#565656" frame="#ffffff" cx="22.98611111111111" cz="14.51388888888889" r="1.25" angle="135" />
+  <TeamColor mask="T3" fill="#e62100" frame="#009600" cx="22.98611111111111" cz="16.875" r="1.25" angle="135" />
+  <TeamColor mask="T4" fill="#00acff" frame="#fffb00" cx="23.055555555555557" cz="19.375" r="1.25" angle="135" />
+  <TeamColor mask="T5" fill="#ff32a9" frame="#007600" cx="23.125" cz="21.944444444444446" r="1.25" angle="135" />
+  <TeamColor mask="T6" fill="#ffd300" frame="#004242" cx="23.125" cz="24.375" r="1.25" angle="135" />
   <set defaultLives="15" missilePower="2" missileTurnRate="1" missileAcceleration=".5" timeLimit="300" incarnateSound="0" />
   <set gameLength="4687" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="45" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="225" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="225" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="225" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="225" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="225" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="107.56944444444444" cz="3.6805555555555554" angle="225" />
   <Wall fill="#2d2d2d" frame="#000000" x="79.6875" z="87.1875" w="0.625" d="0.625" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="12.1875" z="84.0625" w="0.625" d="0.625" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="77.1875" z="24.0625" w="0.625" d="0.625" h="0.25" />

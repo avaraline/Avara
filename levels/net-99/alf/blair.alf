@@ -6,9 +6,9 @@
   <set maxStartMissiles="0" grenadePower="2.3" />
   <set designer="Robin Hood -&gt; http://avara.org" information="Fast playing grenade touting death match with weird features....
 Hint: This level consists of three rooms. You can not see from one room into another. Walk into one of the slightly different colored patches to enter another room." />
-  <Field visible="true" deltaY="0" fill="#516493" frame="#516493" cx="10" cz="6.875" angle="135" x="32.43055555555556" z="36.80555555555556" w="25" d="25" h="8" />
-  <Field visible="true" deltaY="0" fill="#516493" frame="#516493" cx="10" cz="6.875" angle="135" x="47.43055555555556" z="61.80555555555556" w="25" d="25" h="8" />
-  <Field visible="true" deltaY="0" fill="#516493" frame="#516493" cx="10" cz="6.875" angle="135" x="62.43055555555556" z="86.80555555555556" w="25" d="25" h="8" />
+  <Field visible="true" deltaY="0" fill="#516493" frame="#516493" cx="10" cz="6.875" angle="315" x="32.43055555555556" z="36.80555555555556" w="25" d="25" h="8" />
+  <Field visible="true" deltaY="0" fill="#516493" frame="#516493" cx="10" cz="6.875" angle="315" x="47.43055555555556" z="61.80555555555556" w="25" d="25" h="8" />
+  <Field visible="true" deltaY="0" fill="#516493" frame="#516493" cx="10" cz="6.875" angle="315" x="62.43055555555556" z="86.80555555555556" w="25" d="25" h="8" />
   <Wall fill="#6275a5" frame="#6275a5" x="41.18055555555556" z="75.55555555555556" w="12.5" d="2.5" h="8" />
   <Wall fill="#6275a5" frame="#6275a5" x="48.68055555555556" z="88.05555555555556" w="2.5" d="27.5" h="8" />
   <Wall fill="#6275a5" frame="#6275a5" x="76.18055555555556" z="86.80555555555556" w="2.5" d="30" h="8" />
@@ -27,20 +27,20 @@ Hint: This level consists of three rooms. You can not see from one room into ano
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" y="1.9" grenades="6" start="mShow" out="mTaken" fill="#e24a18" frame="#e24a18" cx="32.43055555555556" cz="36.80555555555556" angle="315" />
+  <Goody shape="bspGrenade" speed="2" y="1.9" grenades="6" start="mShow" out="mTaken" fill="#e24a18" frame="#e24a18" cx="32.43055555555556" cz="36.80555555555556" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" y="1.9" grenades="6" start="mShow" out="mTaken" fill="#e24a18" frame="#e24a18" cx="47.43055555555556" cz="61.80555555555556" angle="315" />
+  <Goody shape="bspGrenade" speed="2" y="1.9" grenades="6" start="mShow" out="mTaken" fill="#e24a18" frame="#e24a18" cx="47.43055555555556" cz="61.80555555555556" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGrenade" speed="2" y="1.9" grenades="6" start="mShow" out="mTaken" fill="#e24a18" frame="#e24a18" cx="62.43055555555556" cz="86.80555555555556" angle="315" />
-  <Incarnator y="5" cx="22.430555555555557" cz="46.80555555555556" angle="225" />
-  <Incarnator y="5" cx="72.43055555555556" cz="76.80555555555556" angle="45" />
-  <Incarnator y="5" cx="37.43055555555556" cz="71.80555555555556" angle="225" />
-  <Incarnator y="5" cx="42.43055555555556" cz="26.805555555555557" angle="45" />
-  <Incarnator y="5" cx="52.43055555555556" cz="96.80555555555556" angle="225" />
-  <Incarnator y="5" cx="57.43055555555556" cz="51.80555555555556" angle="45" />
-  <Teleporter shape="0" y="100" win="3000" start="@winTeam" activeRange="1000" fill="#fde31c" frame="#fde31c" cx="12.430555555555555" cz="21.805555555555557" angle="315" />
+  <Goody shape="bspGrenade" speed="2" y="1.9" grenades="6" start="mShow" out="mTaken" fill="#e24a18" frame="#e24a18" cx="62.43055555555556" cz="86.80555555555556" angle="135" />
+  <Incarnator y="5" cx="22.430555555555557" cz="46.80555555555556" angle="45" />
+  <Incarnator y="5" cx="72.43055555555556" cz="76.80555555555556" angle="225" />
+  <Incarnator y="5" cx="37.43055555555556" cz="71.80555555555556" angle="45" />
+  <Incarnator y="5" cx="42.43055555555556" cz="26.805555555555557" angle="225" />
+  <Incarnator y="5" cx="52.43055555555556" cz="96.80555555555556" angle="45" />
+  <Incarnator y="5" cx="57.43055555555556" cz="51.80555555555556" angle="225" />
+  <Teleporter shape="0" y="100" win="3000" start="@winTeam" activeRange="1000" fill="#fde31c" frame="#fde31c" cx="12.430555555555555" cz="21.805555555555557" angle="135" />
 </map>

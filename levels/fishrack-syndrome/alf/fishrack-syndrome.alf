@@ -50,70 +50,70 @@ You are a fish!  (or a chicken)  {6 minute KillFest}" gravity="1" grenadePower="
   <Wall fill="#ffaca9" frame="#000000" x="89.86111111111111" z="132.60416666666666" w="0.6944444444444429" d="53.81944444444444" h="0" />
   <Wall fill="#ffaca9" frame="#000000" x="149.23611111111111" z="132.29166666666666" w="0.6944444444444571" d="53.19444444444444" h="0" />
   <Wall fill="#ffaca9" frame="#000000" x="84.23611111111111" z="132.29166666666666" w="0.6944444444444571" d="53.19444444444444" h="0" />
-  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="225" />
+  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="45" />
   <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
   <set baseHeight="0" wallHeight="80" />
   <WallDoor midPitch="90" midYaw="45" midY="-36.5" fill="#ffaca9" frame="#000000" x="115.79861111111111" z="131.35416666666669" w="5.069444444444443" d="0.06944444444442865" h="0" />
   <set wallHeight="10" />
   <Wall fill="#ffaca9" frame="#000000" x="136.73611111111111" z="112.29166666666667" w="4.444444444444457" d="4.444444444444457" h="0" />
   <Wall fill="#ffaca9" frame="#000000" x="96.73611111111111" z="152.29166666666669" w="4.444444444444443" d="4.444444444444429" h="0" />
-  <Ramp deltaY="4" fill="#ffaca9" frame="#000000" x="101.0763888888889" z="156.00694444444446" w="4.375" d="11.875" h="0" angle="0" />
-  <Ramp deltaY="4" fill="#ffaca9" frame="#000000" x="92.95138888888889" z="147.88194444444446" w="11.875" d="4.375" h="0" angle="90" />
-  <Ramp deltaY="4" fill="#ffaca9" frame="#000000" x="132.32638888888889" z="108.50694444444444" w="4.375" d="11.875" h="0" angle="180" />
-  <Ramp deltaY="4" fill="#ffaca9" frame="#000000" x="140.45138888888889" z="116.63194444444444" w="11.875" d="4.375" h="0" angle="270" />
+  <Ramp deltaY="4" fill="#ffaca9" frame="#000000" x="101.0763888888889" z="156.00694444444446" w="4.375" d="11.875" h="0" angle="180" />
+  <Ramp deltaY="4" fill="#ffaca9" frame="#000000" x="92.95138888888889" z="147.88194444444446" w="11.875" d="4.375" h="0" angle="270" />
+  <Ramp deltaY="4" fill="#ffaca9" frame="#000000" x="132.32638888888889" z="108.50694444444444" w="4.375" d="11.875" h="0" angle="0" />
+  <Ramp deltaY="4" fill="#ffaca9" frame="#000000" x="140.45138888888889" z="116.63194444444444" w="11.875" d="4.375" h="0" angle="90" />
   <set baseHeight="4" wallHeight="0" />
   <Wall fill="#ffaca9" frame="#000000" x="101.11111111111111" z="147.91666666666669" w="4.444444444444443" d="4.444444444444429" h="0" />
   <Wall fill="#ffaca9" frame="#000000" x="132.36111111111111" z="116.66666666666667" w="4.444444444444457" d="4.444444444444457" h="0" />
-  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="225" />
+  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="45" />
   <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
-  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="225" />
+  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="45" />
   <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
-  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="225" />
+  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="45" />
   <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
-  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="225" />
+  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="45" />
   <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
-  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="225" />
+  <Teleporter shape="false" start="@over" win="0" activeRange="2000" fill="#d82679" frame="#d82679" cx="87.15277777777779" cz="32.638888888888886" angle="45" />
   <Timer in.0="@start" restart="true" wait="1875 * 3" out.0="@over" />
   <unique vars="mHi mDie" />
-  <Goody start="mHi" out="mDie" grenades="12" shape="1008" y="1.5" speed="5" fill="#b09300" frame="#000000" cx="146.45833333333331" cz="162.0138888888889" angle="135" />
+  <Goody start="mHi" out="mDie" grenades="12" shape="1008" y="1.5" speed="5" fill="#b09300" frame="#000000" cx="146.45833333333331" cz="162.0138888888889" angle="315" />
   <Timer in="mDie" wait="100" out="mHi" />
   <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody start="mHi" out="mDie" missiles="8" shape="1008" y="2" speed="5" fill="#7b23aa" frame="#000000" cx="101.45833333333334" cz="147.6388888888889" angle="225" />
+  <Goody start="mHi" out="mDie" missiles="8" shape="1008" y="2" speed="5" fill="#7b23aa" frame="#000000" cx="101.45833333333334" cz="147.6388888888889" angle="45" />
   <Timer in="mDie" wait="100" out="mHi" />
   <And in="@start" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody start="mHi" out="mDie" grenades="12" shape="1008" y="1.5" speed="5" fill="#b09300" frame="#000000" cx="87.08333333333334" cz="102.63888888888889" angle="315" />
+  <Goody start="mHi" out="mDie" grenades="12" shape="1008" y="1.5" speed="5" fill="#b09300" frame="#000000" cx="87.08333333333334" cz="102.63888888888889" angle="135" />
   <Timer in="mDie" wait="100" out="mHi" />
   <And in="@start" out="mHi" />
   <set baseHeight="3.5" wallHeight="1" />
-  <Field deltaY=".5" deltaZ="0" deltaX="0" watch="playerMask" start="@biggy" stop="@DieBiggy" fill="#b09300" frame="#000000" x="115.7638888888889" z="131.31944444444446" w="5" d="5" h="0" cx="87.08333333333334" cz="102.63888888888889" angle="315" />
+  <Field deltaY=".5" deltaZ="0" deltaX="0" watch="playerMask" start="@biggy" stop="@DieBiggy" fill="#b09300" frame="#000000" x="115.7638888888889" z="131.31944444444446" w="5" d="5" h="0" cx="87.08333333333334" cz="102.63888888888889" angle="135" />
   <unique vars="mHi mDie" />
-  <Goody start="@biggy" out="@DieBiggy" missiles="4" grenades="8" boosters="3" shape="1009" y="2.5" speed="5" fill="#00b400" frame="#000000" cx="115.83333333333334" cz="131.3888888888889" angle="45" />
+  <Goody start="@biggy" out="@DieBiggy" missiles="4" grenades="8" boosters="3" shape="1009" y="2.5" speed="5" fill="#00b400" frame="#000000" cx="115.83333333333334" cz="131.3888888888889" angle="225" />
   <Timer in="@DieBiggy" wait="200" out="@biggy" />
   <And in="@start" out="@biggy" />
   <set baseHeight="4" />
   <unique vars="mHi mDie" />
-  <Goody start="mHi" out="mDie" missiles="8" shape="1008" y="2" speed="5" fill="#7b23aa" frame="#000000" cx="132.08333333333331" cz="117.01388888888889" angle="45" />
+  <Goody start="mHi" out="mDie" missiles="8" shape="1008" y="2" speed="5" fill="#7b23aa" frame="#000000" cx="132.08333333333331" cz="117.01388888888889" angle="225" />
   <Timer in="mDie" wait="100" out="mHi" />
   <And in="@start" out="mHi" />
   <set baseHeight="20" />
-  <Incarnator cx="95.83333333333334" cz="111.38888888888889" angle="315" />
-  <Incarnator cx="80.20833333333334" cz="111.38888888888889" angle="315" />
-  <Incarnator cx="95.83333333333334" cz="95.76388888888889" angle="315" />
-  <Incarnator cx="137.70833333333331" cz="95.76388888888889" angle="45" />
-  <Incarnator cx="153.33333333333331" cz="111.38888888888889" angle="45" />
-  <Incarnator cx="153.33333333333331" cz="153.2638888888889" angle="135" />
-  <Incarnator cx="137.70833333333331" cz="168.8888888888889" angle="135" />
-  <Incarnator cx="137.70833333333331" cz="153.2638888888889" angle="135" />
-  <Incarnator cx="95.83333333333334" cz="168.8888888888889" angle="225" />
-  <Incarnator cx="80.20833333333334" cz="153.2638888888889" angle="225" />
-  <TeamColor mask="T1" fill="#004dd6" frame="#004dd6" cx="100.48611111111111" cz="29.444444444444443" r="1.9444444444444446" angle="315" />
-  <TeamColor mask="T2" fill="#d5d200" frame="#d5d200" cx="100.48611111111111" cz="32.56944444444444" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T3" fill="#37d100" frame="#37d100" cx="100.48611111111111" cz="35.69444444444444" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T4" fill="#ff2600" frame="#ff2600" cx="100.48611111111111" cz="38.81944444444444" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T5" fill="#ff39d6" frame="#ff39d6" cx="100.48611111111111" cz="41.94444444444444" r="1.9444444444444464" angle="315" />
-  <TeamColor mask="T6" fill="#565656" frame="#565656" cx="100.48611111111111" cz="45.06944444444444" r="1.9444444444444464" angle="315" />
-  <Teleporter activeRange="2000" deadRange="130" y="70" shape="false" destGroup="2" fill="#ffd479" frame="#000000" cx="109.30555555555556" cz="132.15277777777777" angle="315" />
-  <Teleporter activeRange="0" deadRange="1" y="60" shape="false" group="2" fill="#ffd479" frame="#000000" cx="109.30555555555556" cz="132.15277777777777" angle="315" />
+  <Incarnator cx="95.83333333333334" cz="111.38888888888889" angle="135" />
+  <Incarnator cx="80.20833333333334" cz="111.38888888888889" angle="135" />
+  <Incarnator cx="95.83333333333334" cz="95.76388888888889" angle="135" />
+  <Incarnator cx="137.70833333333331" cz="95.76388888888889" angle="225" />
+  <Incarnator cx="153.33333333333331" cz="111.38888888888889" angle="225" />
+  <Incarnator cx="153.33333333333331" cz="153.2638888888889" angle="315" />
+  <Incarnator cx="137.70833333333331" cz="168.8888888888889" angle="315" />
+  <Incarnator cx="137.70833333333331" cz="153.2638888888889" angle="315" />
+  <Incarnator cx="95.83333333333334" cz="168.8888888888889" angle="45" />
+  <Incarnator cx="80.20833333333334" cz="153.2638888888889" angle="45" />
+  <TeamColor mask="T1" fill="#004dd6" frame="#004dd6" cx="100.48611111111111" cz="29.444444444444443" r="1.9444444444444446" angle="135" />
+  <TeamColor mask="T2" fill="#d5d200" frame="#d5d200" cx="100.48611111111111" cz="32.56944444444444" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T3" fill="#37d100" frame="#37d100" cx="100.48611111111111" cz="35.69444444444444" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T4" fill="#ff2600" frame="#ff2600" cx="100.48611111111111" cz="38.81944444444444" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T5" fill="#ff39d6" frame="#ff39d6" cx="100.48611111111111" cz="41.94444444444444" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T6" fill="#565656" frame="#565656" cx="100.48611111111111" cz="45.06944444444444" r="1.9444444444444464" angle="135" />
+  <Teleporter activeRange="2000" deadRange="130" y="70" shape="false" destGroup="2" fill="#ffd479" frame="#000000" cx="109.30555555555556" cz="132.15277777777777" angle="135" />
+  <Teleporter activeRange="0" deadRange="1" y="60" shape="false" group="2" fill="#ffd479" frame="#000000" cx="109.30555555555556" cz="132.15277777777777" angle="135" />
 </map>

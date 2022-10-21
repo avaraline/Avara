@@ -5,15 +5,15 @@
 The light hull is not available." />
   <SkyColor fill="#4180ff" frame="#ffd6d5" />
   <GroundColor fill="#7a4aaa" />
-  <Incarnator y="0" mask="T1" cx="6.805555555555555" cz="37.083333333333336" angle="270" />
-  <Incarnator y="3" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="270" />
-  <Incarnator y="6" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="270" />
-  <Incarnator y="9" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="270" />
-  <Incarnator y="12" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="270" />
-  <Incarnator y="15" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="270" />
-  <Field deltaY="0" shape="bspGroundStar" speed="-7" visible="true" isAmbient="true" scale=".8" fill="#a8d6ff" frame="#000000" cx="6.805555555555555" cz="37.083333333333336" angle="270" />
-  <Goal scale=".9" goalMsg="@won" goalAction="0" motionRange="3" fill="#00ec00" frame="#000000" cx="6.805555555555555" cz="32.083333333333336" angle="270" />
-  <Teleporter win="4500" start="@won" group="-1" speed="-14" mask="T1" fill="#00ec00" frame="#000000" cx="6.805555555555555" cz="37.083333333333336" angle="45" />
+  <Incarnator y="0" mask="T1" cx="6.805555555555555" cz="37.083333333333336" angle="90" />
+  <Incarnator y="3" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="90" />
+  <Incarnator y="6" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="90" />
+  <Incarnator y="9" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="90" />
+  <Incarnator y="12" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="90" />
+  <Incarnator y="15" mask="T1" stop="@start" cx="6.805555555555555" cz="37.083333333333336" angle="90" />
+  <Field deltaY="0" shape="bspGroundStar" speed="-7" visible="true" isAmbient="true" scale=".8" fill="#a8d6ff" frame="#000000" cx="6.805555555555555" cz="37.083333333333336" angle="90" />
+  <Goal scale=".9" goalMsg="@won" goalAction="0" motionRange="3" fill="#00ec00" frame="#000000" cx="6.805555555555555" cz="32.083333333333336" angle="90" />
+  <Teleporter win="4500" start="@won" group="-1" speed="-14" mask="T1" fill="#00ec00" frame="#000000" cx="6.805555555555555" cz="37.083333333333336" angle="225" />
   <set wallHeight="MainWall" />
   <Wall fill="#0048aa" frame="#000000" x="87.43055555555556" z="19.583333333333336" w="2.5" d="10" h="0" />
   <Wall fill="#0048aa" frame="#000000" x="87.43055555555556" z="49.583333333333336" w="2.5" d="10" h="0" />
@@ -27,7 +27,7 @@ The light hull is not available." />
   <Wall fill="#0048aa" frame="#000000" x="64.93055555555556" z="57.083333333333336" w="40" d="2.5" h="0" />
   <Wall fill="#0048aa" frame="#000000" x="42.43055555555556" z="19.583333333333336" w="2.5" d="10" h="0" />
   <Wall fill="#0048aa" frame="#000000" x="42.43055555555556" z="49.583333333333336" w="2.5" d="10" h="0" />
-  <Field deltaY="0" deltaX=".5" mask="T3" fill="#0048aa" frame="#000000" cx="6.805555555555555" cz="37.083333333333336" angle="45" x="42.43055555555556" z="34.583333333333336" w="2.5" d="10" h="0" />
+  <Field deltaY="0" deltaX=".5" mask="T3" fill="#0048aa" frame="#000000" cx="6.805555555555555" cz="37.083333333333336" angle="225" x="42.43055555555556" z="34.583333333333336" w="2.5" d="10" h="0" />
   <set wallHeight="MainWall -3" />
   <Wall fill="#0048aa" frame="#000000" x="42.43055555555556" z="34.583333333333336" w="2.5" d="10" h="0" y="3" />
   <set wallHeight="CornerWall" />
@@ -41,10 +41,10 @@ The light hull is not available." />
   <Wall fill="#8a8a8a" frame="#000000" x="42.43055555555556" z="42.083333333333336" w="5" d="5" h="0" />
   <Wall fill="#8a8a8a" frame="#000000" x="132.43055555555557" z="12.083333333333334" w="5" d="5" h="0" />
   <Wall fill="#8a8a8a" frame="#000000" x="132.43055555555557" z="57.083333333333336" w="5" d="5" h="0" />
-  <Door shape="bspHingeDoor" open="@gateOpen" close="@gateClose" openSpeed="GtOpSpd" closeSpeed="GtClSpd" deltaY="0" yaw="-90" isTarget="true" hitMsg="@gateHit" shotPower="GtPower" guardDelay="GtDelay" fill="#00acff" frame="#000000" cx="42.43055555555556" cz="29.583333333333336" angle="270" />
-  <Door shape="bspHingeDoor" open="@gateOpen" close="@gateClose" openSpeed="GtOpSpd" closeSpeed="GtClSpd" deltaY="0" yaw="-90" isTarget="true" hitMsg="@gateHit" shotPower="GtPower" guardDelay="GtDelay" deltaX="2.25" fill="#00acff" frame="#000000" cx="42.43055555555556" cz="32.083333333333336" angle="270" />
-  <Door shape="bspHingeDoor" open="@gateOpen" close="@gateClose" openSpeed="GtOpSpd" closeSpeed="GtClSpd" deltaY="0" yaw="-90" isTarget="true" hitMsg="@gateHit" shotPower="GtPower" guardDelay="GtDelay" deltaX="4.5" fill="#00acff" frame="#000000" cx="42.43055555555556" cz="34.583333333333336" angle="270" />
-  <Door shape="bspHingeDoor" open="@gateOpen" close="@gateClose" openSpeed="GtOpSpd" closeSpeed="GtClSpd" deltaY="0" yaw="-90" isTarget="true" hitMsg="@gateHit" shotPower="GtPower" guardDelay="GtDelay" deltaX="6.75" fill="#00acff" frame="#000000" cx="42.43055555555556" cz="37.083333333333336" angle="270" />
+  <Door shape="bspHingeDoor" open="@gateOpen" close="@gateClose" openSpeed="GtOpSpd" closeSpeed="GtClSpd" deltaY="0" yaw="-90" isTarget="true" hitMsg="@gateHit" shotPower="GtPower" guardDelay="GtDelay" fill="#00acff" frame="#000000" cx="42.43055555555556" cz="29.583333333333336" angle="90" />
+  <Door shape="bspHingeDoor" open="@gateOpen" close="@gateClose" openSpeed="GtOpSpd" closeSpeed="GtClSpd" deltaY="0" yaw="-90" isTarget="true" hitMsg="@gateHit" shotPower="GtPower" guardDelay="GtDelay" deltaX="2.25" fill="#00acff" frame="#000000" cx="42.43055555555556" cz="32.083333333333336" angle="90" />
+  <Door shape="bspHingeDoor" open="@gateOpen" close="@gateClose" openSpeed="GtOpSpd" closeSpeed="GtClSpd" deltaY="0" yaw="-90" isTarget="true" hitMsg="@gateHit" shotPower="GtPower" guardDelay="GtDelay" deltaX="4.5" fill="#00acff" frame="#000000" cx="42.43055555555556" cz="34.583333333333336" angle="90" />
+  <Door shape="bspHingeDoor" open="@gateOpen" close="@gateClose" openSpeed="GtOpSpd" closeSpeed="GtClSpd" deltaY="0" yaw="-90" isTarget="true" hitMsg="@gateHit" shotPower="GtPower" guardDelay="GtDelay" deltaX="6.75" fill="#00acff" frame="#000000" cx="42.43055555555556" cz="37.083333333333336" angle="90" />
   <Distributor in.0="@gateHit" out.0="@gateOpen" out.1="@gateClose" />
   <unique vars="mO mC" />
   <set wa="beamY[0]" />
@@ -57,13 +57,13 @@ The light hull is not available." />
   <Wall fill="#8b0f00" frame="#000000" x="123.99305555555557" z="26.770833333333336" w="10.625" d="0.625" h="0" />
   <Wall fill="#8b0f00" frame="#000000" x="128.99305555555557" z="34.583333333333336" w="0.625" d="15" h="0" />
   <Wall fill="#8b0f00" frame="#000000" x="123.99305555555557" z="42.395833333333336" w="10.625" d="0.625" h="0" />
-  <Sound sound="snMineBleep" volume="500" start="@INTRUDER" stop="@INT_RESET" loopCount="-1" isAmbient="false" cx="64.93055555555556" cz="34.583333333333336" angle="135" />
-  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="42.60416666666667" cz="57.15277777777778" angle="315" />
-  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="87.60416666666667" cz="57.15277777777778" angle="315" />
-  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="87.60416666666667" cz="12.152777777777779" angle="315" />
-  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="42.60416666666667" cz="12.152777777777779" angle="315" />
+  <Sound sound="snMineBleep" volume="500" start="@INTRUDER" stop="@INT_RESET" loopCount="-1" isAmbient="false" cx="64.93055555555556" cz="34.583333333333336" angle="315" />
+  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="42.60416666666667" cz="57.15277777777778" angle="135" />
+  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="87.60416666666667" cz="57.15277777777778" angle="135" />
+  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="87.60416666666667" cz="12.152777777777779" angle="135" />
+  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="42.60416666666667" cz="12.152777777777779" angle="135" />
   <Timer in="@platLift" wait="130" out="@platReset" />
-  <Ramp deltaY="4" fill="#8a8a8a" frame="#000000" x="128.36805555555557" z="33.645833333333336" w="0.625" d="13.125" h="0" angle="0" />
+  <Ramp deltaY="4" fill="#8a8a8a" frame="#000000" x="128.36805555555557" z="33.645833333333336" w="0.625" d="13.125" h="0" angle="180" />
   <Wall fill="#009600" frame="#000000" x="98.99305555555556" z="18.645833333333336" w="0.625" d="0.625" h="0.25" y=".5" />
   <Wall fill="#ff2600" frame="#000000" x="98.99305555555556" z="18.645833333333336" w="0.625" d="0.625" h="0.25" y="6" />
   <unique vars="mClose" />
@@ -115,20 +115,20 @@ The light hull is not available." />
   <WallDoor open="@OpenStack" close="@CloseStack" deltaY="-wdInc" openSound="0" closeSound="0" stopSound="0" fill="#e4e4e4" frame="#000000" x="53.05555555555556" z="29.583333333333336" w="5" d="5" h="0.25" />
   <set wa="wdBase" />
   <WallDoor status="isOpen" open="@CloseStack" close="@OpenStack" deltaY="-wdInc" openSound="0" closeSound="0" stopSound="0" fill="#e4e4e4" frame="#000000" x="58.05555555555556" z="30.208333333333336" w="5" d="5" h="0.25" />
-  <Guard watch="0" scale="0" fireMsg="@INTRUDER" freq="0" fill="#009600" frame="#000000" cx="40.55555555555556" cz="29.65277777777778" angle="0" />
-  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="132.60416666666669" cz="57.15277777777778" angle="315" />
-  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="132.60416666666669" cz="12.152777777777779" angle="315" />
-  <Sound sound="snMineBleep" volume="500" start="@INTRUDER" stop="@INT_RESET" loopCount="-1" isAmbient="false" cx="109.93055555555556" cz="34.583333333333336" angle="90" />
-  <Field shape="bspW3x3" visible="false" watch="targ2" deltaY="2" scale="5" y="-13.3" fill="#8b0f00" frame="#000000" x="128.36805555555557" z="33.645833333333336" w="0.625" d="13.125" h="0" cx="109.93055555555556" cz="34.583333333333336" angle="90" />
+  <Guard watch="0" scale="0" fireMsg="@INTRUDER" freq="0" fill="#009600" frame="#000000" cx="40.55555555555556" cz="29.65277777777778" angle="180" />
+  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="132.60416666666669" cz="57.15277777777778" angle="135" />
+  <Guard y="guardHeight" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="132.60416666666669" cz="12.152777777777779" angle="135" />
+  <Sound sound="snMineBleep" volume="500" start="@INTRUDER" stop="@INT_RESET" loopCount="-1" isAmbient="false" cx="109.93055555555556" cz="34.583333333333336" angle="270" />
+  <Field shape="bspW3x3" visible="false" watch="targ2" deltaY="2" scale="5" y="-13.3" fill="#8b0f00" frame="#000000" x="128.36805555555557" z="33.645833333333336" w="0.625" d="13.125" h="0" cx="109.93055555555556" cz="34.583333333333336" angle="270" />
   <unique vars="mTel" />
-  <Teleporter group="-1" destGroup="@ToRoom" activeRange="2000" mask="T3" start="@INT_RESET" stop="mTel" out="mTel" yon="0.01" fill="#8b0f00" frame="#000000" cx="109.93055555555556" cz="34.583333333333336" angle="90" />
-  <FreeSolid shape="bspSphere" isTarget="true" targetGroup="targ2" y="3" shotPower="1" accel=".98" fill="#009600" frame="#000000" x="128.36805555555557" z="33.645833333333336" w="0.625" d="13.125" h="0" cx="97.43055555555556" cz="47.083333333333336" angle="270" />
-  <Hologram shape="bspGroundStar" isAmbient="true" fill="#009600" frame="#000000" cx="97.43055555555556" cz="47.083333333333336" angle="270" />
+  <Teleporter group="-1" destGroup="@ToRoom" activeRange="2000" mask="T3" start="@INT_RESET" stop="mTel" out="mTel" yon="0.01" fill="#8b0f00" frame="#000000" cx="109.93055555555556" cz="34.583333333333336" angle="270" />
+  <FreeSolid shape="bspSphere" isTarget="true" targetGroup="targ2" y="3" shotPower="1" accel=".98" fill="#009600" frame="#000000" x="128.36805555555557" z="33.645833333333336" w="0.625" d="13.125" h="0" cx="97.43055555555556" cz="47.083333333333336" angle="90" />
+  <Hologram shape="bspGroundStar" isAmbient="true" fill="#009600" frame="#000000" cx="97.43055555555556" cz="47.083333333333336" angle="90" />
   <set wallHeight="6.5" />
   <Wall fill="#c7c7c7" frame="#000000" x="98.36805555555556" z="18.333333333333336" w="0.625" d="1.25" h="0" />
   <Wall fill="#c7c7c7" frame="#000000" x="98.99305555555556" z="18.020833333333336" w="0.625" d="0.625" h="0" />
   <Wall fill="#c7c7c7" frame="#000000" x="99.61805555555556" z="18.333333333333336" w="0.625" d="1.25" h="0" />
-  <Goody y="wdBase" shape="bspGoody" speed="5" grenades="12" missiles="8" boosters="5" fill="#ff2600" frame="#00ec00" cx="58.75" cz="30.27777777777778" angle="315" />
+  <Goody y="wdBase" shape="bspGoody" speed="5" grenades="12" missiles="8" boosters="5" fill="#ff2600" frame="#00ec00" cx="58.75" cz="30.27777777777778" angle="135" />
   <unique vars="mO mC" />
   <set wa="beamY[2]" />
   <WallDoor deltaX="1000" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="100" closeSpeed="100" open="mO" close="mC" didOpen="mC" didClose="mO" fill="#ff2600" frame="#000000" x="120.69444444444446" z="34.583333333333336" w="0.2777777777777857" d="15" h="0.25" />
@@ -157,10 +157,10 @@ end
 wallHeight 
 
 wallHeight = 0</script>
-  <Ramp deltaY="3" y="0" fill="#a8d6ff" frame="#000000" x="76.18055555555556" z="27.708333333333336" w="6.25" d="2.5" h="0" angle="90" />
+  <Ramp deltaY="3" y="0" fill="#a8d6ff" frame="#000000" x="76.18055555555556" z="27.708333333333336" w="6.25" d="2.5" h="0" angle="270" />
   <Wall fill="#a8d6ff" frame="#000000" x="80.55555555555556" z="27.708333333333336" w="2.5" d="2.5" h="0" y="3" />
-  <Ramp deltaY="3" y="3" fill="#a8d6ff" frame="#000000" x="80.55555555555556" z="23.333333333333336" w="2.5" d="6.25" h="0" angle="0" />
-  <Ramp deltaY="3" y="6" fill="#a8d6ff" frame="#000000" x="76.18055555555556" z="18.958333333333336" w="6.25" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="3" y="3" fill="#a8d6ff" frame="#000000" x="80.55555555555556" z="23.333333333333336" w="2.5" d="6.25" h="0" angle="180" />
+  <Ramp deltaY="3" y="6" fill="#a8d6ff" frame="#000000" x="76.18055555555556" z="18.958333333333336" w="6.25" d="2.5" h="0" angle="90" />
   <Wall fill="#a8d6ff" frame="#000000" x="80.55555555555556" z="18.958333333333336" w="2.5" d="2.5" h="0" y="6" />
   <set wallHeight="9" />
   <WallSolid stepOnMsg="@blockDrop" fill="#4180ff" frame="#000000" x="75.55555555555556" z="23.333333333333336" w="6.25" d="5" h="1" y="8" />
@@ -173,25 +173,25 @@ wallHeight = 0</script>
   <set wallHeight="6" />
   <Wall fill="#4180ff" frame="#000000" x="72.74305555555556" z="27.708333333333336" w="0.625" d="2.5" h="0" y="3" />
   <WallDoor stepOnMsg="@platLift" open="@platLift" close="@platReset" deltaY="5.25" fill="#009600" frame="#000000" x="75.55555555555556" z="23.333333333333336" w="6.25" d="5" h="0.25" />
-  <Door2 shape="bspGroundArrow" scale=".8" midPitch="90" pitch="90" roll="180" open="@platLift" close="@platReset" midY="y" y="2" openSound="0" closeSound="0" stopSound="0" openSpeed="25" closeSpeed="25" fill="#000000" frame="#000000" cx="78.68055555555556" cz="23.333333333333336" angle="270" />
+  <Door2 shape="bspGroundArrow" scale=".8" midPitch="90" pitch="90" roll="180" open="@platLift" close="@platReset" midY="y" y="2" openSound="0" closeSound="0" stopSound="0" openSpeed="25" closeSpeed="25" fill="#000000" frame="#000000" cx="78.68055555555556" cz="23.333333333333336" angle="90" />
   <Wall fill="#4180ff" frame="#000000" x="80.55555555555556" z="23.333333333333336" w="2.5" d="11.25" h="0.25" y="8.75" />
   <Wall fill="#4180ff" frame="#000000" x="76.18055555555556" z="27.708333333333336" w="6.25" d="2.5" h="0.25" y="8.75" />
   <set wallYon="130" />
   <set wallYon="0" />
-  <FreeSolid isTarget="true" targetGroup="targ1" start="@blockDrop" fill="#00acff" frame="#000000" x="77.43055555555556" z="23.333333333333336" w="2.5" d="2.5" h="1.75" cx="78.68055555555556" cz="23.333333333333336" angle="270" y="120" />
-  <Guard y="8" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="80.72916666666667" cz="27.77777777777778" angle="315" />
-  <Goody grenades="5" missiles="3" hitScore="500" shape="bspGoody" scale=".8" y="1.5" speed="1" fill="#ff2600" frame="#000000" cx="80.72916666666667" cz="27.77777777777778" angle="315" />
+  <FreeSolid isTarget="true" targetGroup="targ1" start="@blockDrop" fill="#00acff" frame="#000000" x="77.43055555555556" z="23.333333333333336" w="2.5" d="2.5" h="1.75" cx="78.68055555555556" cz="23.333333333333336" angle="90" y="120" />
+  <Guard y="8" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="80.72916666666667" cz="27.77777777777778" angle="135" />
+  <Goody grenades="5" missiles="3" hitScore="500" shape="bspGoody" scale=".8" y="1.5" speed="1" fill="#ff2600" frame="#000000" cx="80.72916666666667" cz="27.77777777777778" angle="135" />
   <set wallHeight="3" />
-  <FreeSolid isTarget="false" canGlow="true" shield="22" targetGroup="targ3" fill="#4180ff" frame="#000000" x="72.74305555555556" z="27.708333333333336" w="0.625" d="2.5" h="0" cx="80.72916666666667" cz="27.77777777777778" angle="315" />
+  <FreeSolid isTarget="false" canGlow="true" shield="22" targetGroup="targ3" fill="#4180ff" frame="#000000" x="72.74305555555556" z="27.708333333333336" w="0.625" d="2.5" h="0" cx="80.72916666666667" cz="27.77777777777778" angle="135" />
   <set wallHeight="6" />
   <Wall fill="#4180ff" frame="#000000" x="72.74305555555556" z="18.958333333333336" w="0.625" d="2.5" h="0" y="3" />
   <set wallHeight="3" />
-  <FreeSolid isTarget="false" canGlow="true" shield="22" targetGroup="targ3" fill="#4180ff" frame="#000000" x="72.74305555555556" z="18.958333333333336" w="0.625" d="2.5" h="0" cx="80.72916666666667" cz="27.77777777777778" angle="315" />
+  <FreeSolid isTarget="false" canGlow="true" shield="22" targetGroup="targ3" fill="#4180ff" frame="#000000" x="72.74305555555556" z="18.958333333333336" w="0.625" d="2.5" h="0" cx="80.72916666666667" cz="27.77777777777778" angle="135" />
   <Wall fill="#4180ff" frame="#000000" x="73.36805555555556" z="18.958333333333336" w="0.625" d="2.5" h="0.25" />
-  <Guard y="5" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="80.72916666666667" cz="19.02777777777778" angle="315" />
-  <Sound sound="snTextBlip" start="@blockDrop" restart="false" cx="76.80555555555556" cz="22.708333333333336" angle="225" />
-  <YonBox deltaY="9" x="77.46527777777779" z="19.02777777777778" w="9.375" d="2.5" h="0" r="1.875" angle="225" />
-  <YonBox deltaY="9" x="77.46527777777779" z="27.77777777777778" w="9.375" d="2.5" h="0" r="1.875" angle="225" />
+  <Guard y="5" shield="-1" start="@INTRUDER" stop="@INT_RESET" freq="guardFreq" isTarget="0" canGlow="0" speed="guardSpeed" mask="allTeams -T3" hitScore="0" fill="#ff2600" frame="#000000" cx="80.72916666666667" cz="19.02777777777778" angle="135" />
+  <Sound sound="snTextBlip" start="@blockDrop" restart="false" cx="76.80555555555556" cz="22.708333333333336" angle="45" />
+  <YonBox deltaY="9" x="77.46527777777779" z="19.02777777777778" w="9.375" d="2.5" h="0" r="1.875" angle="45" />
+  <YonBox deltaY="9" x="77.46527777777779" z="27.77777777777778" w="9.375" d="2.5" h="0" r="1.875" angle="45" />
   <script>
 objec
 t 
@@ -201,7 +201,7 @@ x
 delta
 Y = 9
 end</script>
-  <Field start="@INTRUDER" stop="@INT_RESET" deltaX=".5" fill="#ffd6d5" frame="#000000" x="44.30555555555556" z="34.583333333333336" w="1.25" d="10" h="0" cx="76.80555555555556" cz="22.708333333333336" angle="225" />
+  <Field start="@INTRUDER" stop="@INT_RESET" deltaX=".5" fill="#ffd6d5" frame="#000000" x="44.30555555555556" z="34.583333333333336" w="1.25" d="10" h="0" cx="76.80555555555556" cz="22.708333333333336" angle="45" />
   <set wallHeight="3" bShield=".8" pShield=".5" />
   <Wall fill="#ffd8ff" frame="#000000" x="58.36805555555556" z="47.395833333333336" w="18.125" d="5.625" h="0.25" y="3" />
   <Wall fill="#ffd8ff" frame="#000000" x="49.61805555555556" z="47.083333333333336" w="0.625" d="5" h="0" />
@@ -214,18 +214,18 @@ end</script>
   <WallSolid shield="bShield" canGlow="true" fill="#ff85ff" frame="#000000" x="56.18055555555556" z="44.895833333333336" w="3.75" d="0.625" h="0" />
   <WallSolid shield="bShield" canGlow="true" fill="#ff85ff" frame="#000000" x="60.55555555555556" z="44.895833333333336" w="3.75" d="0.625" h="0" />
   <WallSolid shield="bShield" canGlow="true" fill="#ff85ff" frame="#000000" x="64.93055555555556" z="44.895833333333336" w="3.75" d="0.625" h="0" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="50.55555555555556" cz="45.833333333333336" angle="180" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="50.55555555555556" cz="47.083333333333336" angle="180" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="50.55555555555556" cz="48.333333333333336" angle="180" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="51.80555555555556" cz="45.833333333333336" angle="180" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="51.80555555555556" cz="47.083333333333336" angle="180" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="51.80555555555556" cz="48.333333333333336" angle="180" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="53.05555555555556" cz="45.833333333333336" angle="180" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="53.05555555555556" cz="47.083333333333336" angle="180" />
-  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="53.05555555555556" cz="48.333333333333336" angle="180" />
-  <Goody y="gConeY" shape="bspGoody" scale=".5" grenades="gQtLrgG" missiles="gQtLrgM" boosters="gQtLrgB" fill="#7b1979" frame="#570500" cx="56.25" cz="47.77777777777778" angle="315" />
-  <Mine y="gConeY" shape="bspGoody" altShape="shape" isTarget="false" scale=".5" activeRange="2" activeTimer="5" shield="-1" canGlow="false" hitSound="hitSoundDefault" hitScore="0" fill="#7b1979" frame="#570500" cx="60.625" cz="47.77777777777778" angle="315" />
-  <Pill group="0" watch="targ3" team="1" mask="1" burstCharge="10 * 15" burstFreq="0" burstLength="1" shotPower=".1" shootShield="0" grabShield="-1" fill="#009600" frame="#000000" cx="64.93055555555556" cz="47.708333333333336" angle="315" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="50.55555555555556" cz="45.833333333333336" angle="0" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="50.55555555555556" cz="47.083333333333336" angle="0" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="50.55555555555556" cz="48.333333333333336" angle="0" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="51.80555555555556" cz="45.833333333333336" angle="0" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="51.80555555555556" cz="47.083333333333336" angle="0" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="51.80555555555556" cz="48.333333333333336" angle="0" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="53.05555555555556" cz="45.833333333333336" angle="0" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="53.05555555555556" cz="47.083333333333336" angle="0" />
+  <Parasite shield="pShield" fill="#00ec00" frame="#000000" cx="53.05555555555556" cz="48.333333333333336" angle="0" />
+  <Goody y="gConeY" shape="bspGoody" scale=".5" grenades="gQtLrgG" missiles="gQtLrgM" boosters="gQtLrgB" fill="#7b1979" frame="#570500" cx="56.25" cz="47.77777777777778" angle="135" />
+  <Mine y="gConeY" shape="bspGoody" altShape="shape" isTarget="false" scale=".5" activeRange="2" activeTimer="5" shield="-1" canGlow="false" hitSound="hitSoundDefault" hitScore="0" fill="#7b1979" frame="#570500" cx="60.625" cz="47.77777777777778" angle="135" />
+  <Pill group="0" watch="targ3" team="1" mask="1" burstCharge="10 * 15" burstFreq="0" burstLength="1" shotPower=".1" shootShield="0" grabShield="-1" fill="#009600" frame="#000000" cx="64.93055555555556" cz="47.708333333333336" angle="135" />
   <unique vars="mO mC" />
   <set wa="beamY[1]" />
   <WallDoor deltaX="1000" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="100" closeSpeed="100" open="mO" close="mC" didOpen="mC" didClose="mO" fill="#ff2600" frame="#000000" x="120.69444444444446" z="34.583333333333336" w="0.2777777777777857" d="15" h="0.25" />
@@ -233,37 +233,37 @@ end</script>
   <Timer in="mO" wait="2" out="@INTRUDER" />
   <set wa="beamY[1]" />
   <WallDoor deltaX="1000" openDelay="0" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="100" closeSpeed="100" open="mO" close="mC" fill="#fffc41" frame="#000000" x="120.69444444444446" z="34.583333333333336" w="0.2777777777777857" d="15" h="0.25" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="15.833333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="19.583333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="23.333333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="27.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="30.833333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="34.583333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="38.333333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="42.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="45.833333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="49.583333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="53.333333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="128.68055555555557" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="124.93055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="121.18055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="117.43055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="113.68055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="109.93055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="106.18055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="102.43055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="98.68055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="94.93055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="91.18055555555556" cz="12.083333333333334" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="128.68055555555557" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="124.93055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="121.18055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="117.43055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="113.68055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="109.93055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="106.18055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="102.43055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="98.68055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="94.93055555555556" cz="57.083333333333336" angle="135" />
-  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="91.18055555555556" cz="57.083333333333336" angle="135" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="15.833333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="19.583333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="23.333333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="27.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="30.833333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="34.583333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="38.333333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="42.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="45.833333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="49.583333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="132.43055555555557" cz="53.333333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="128.68055555555557" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="124.93055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="121.18055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="117.43055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="113.68055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="109.93055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="106.18055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="102.43055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="98.68055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="94.93055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="91.18055555555556" cz="12.083333333333334" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="128.68055555555557" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="124.93055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="121.18055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="117.43055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="113.68055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="109.93055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="106.18055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="102.43055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="98.68055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="94.93055555555556" cz="57.083333333333336" angle="315" />
+  <Mine y="MainWall" blastPower="10" activeTimer="5" shield="-1" fill="#76d6ff" frame="#000000" cx="91.18055555555556" cz="57.083333333333336" angle="315" />
 </map>

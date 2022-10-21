@@ -7,13 +7,13 @@ Getting ammo is tricky." baseHeight="0.01" defaultLives="6" hull.1="hull[0]" hul
   <set fsMass="100" fsHeight="fsHeight + 170" fsShield="5" fsShape="bspW1x1" fsScale=".6" bbeltDX="0.04" />
   <set bbeltDY="0" />
   <set beltSpeed=".5" beltDist="6 * 10" beltOffset="17 / beltSpeed" targBlock="targ1" targBlockX="targ2" />
-  <Field deltaY="bbeltDY" deltaX="bbeltDX" start="@beltOn" watch="targBlock + targBlockX" visible="false" fill="#d4fdd5" frame="#000000" cx="4.236111111111112" cz="1.5277777777777777" angle="180" x="52.951388888888886" z="17.083333333333336" w="30.625" d="15" h="1" />
+  <Field deltaY="bbeltDY" deltaX="bbeltDX" start="@beltOn" watch="targBlock + targBlockX" visible="false" fill="#d4fdd5" frame="#000000" cx="4.236111111111112" cz="1.5277777777777777" angle="0" x="52.951388888888886" z="17.083333333333336" w="30.625" d="15" h="1" />
   <Wall fill="#9c1200" frame="#000000" x="56.388888888888886" z="9.270833333333334" w="38.75" d="0.625" h="0" />
   <set wa="ceilingHeight" />
   <Wall fill="#9c1200" frame="#000000" x="54.826388888888886" z="17.083333333333336" w="24.375" d="15" h="0.5" />
   <Wall fill="#9c1200" frame="#000000" x="56.701388888888886" z="24.895833333333336" w="38.125" d="0.625" h="0" />
   <Wall fill="#9c1200" frame="#000000" x="37.32638888888889" z="17.395833333333336" w="0.625" d="15.625" h="0" />
-  <Field deltaY="0" deltaX="-2" watch="targBlockX" fill="#d4fdd5" frame="#000000" cx="4.236111111111112" cz="1.5277777777777777" angle="180" x="72.01388888888889" z="17.083333333333336" w="7.5" d="15" h="1" />
+  <Field deltaY="0" deltaX="-2" watch="targBlockX" fill="#d4fdd5" frame="#000000" cx="4.236111111111112" cz="1.5277777777777777" angle="0" x="72.01388888888889" z="17.083333333333336" w="7.5" d="15" h="1" />
   <unique vars="mMove" />
   <WallDoor deltaY="grinderAHeight" open="mMove" close="mMove" didOpen="mMove" didClose="mMove" shotPower="grinderPower" openSpeed="grinderASpeed" closeSpeed="grinderASpeed + 4" openSound="0" closeSound="0" stopSound="0" fill="#9c1200" frame="#000000" x="70.13888888888889" z="17.083333333333336" w="3.75" d="3.75" h="0" />
   <And in.1="@beltOn" out="mMove" />
@@ -24,76 +24,76 @@ Getting ammo is tricky." baseHeight="0.01" defaultLives="6" hull.1="hull[0]" hul
   <WallDoor deltaY="grinderAHeight" open="mMove" close="mMove" didOpen="mMove" didClose="mMove" shotPower="grinderPower" openSpeed="grinderASpeed" closeSpeed="grinderASpeed" openSound="0" closeSound="0" stopSound="0" fill="#9c1200" frame="#000000" x="70.13888888888889" z="11.458333333333334" w="3.75" d="3.75" h="0" />
   <And in.1="@beltOn" out="mMove" />
   <unique vars="mMove" />
-  <Door2 shape="bspShuriken" roll="90" midRoll="90" yaw="0" midYaw="360" deltaY="grinderBHeight" midY="grinderBHeight" scale="grinderBScale" open="mMove" close="mMove" didOpen="mMove" didClose="mMove" shotPower="grinderPower" openSpeed="grinderBSpeed" closeSpeed="100" openSound="0" closeSound="0" stopSound="0" fill="#d4fdd5" frame="#000000" cx="70.20833333333334" cz="19.895833333333336" angle="270" />
+  <Door2 shape="bspShuriken" roll="90" midRoll="90" yaw="0" midYaw="360" deltaY="grinderBHeight" midY="grinderBHeight" scale="grinderBScale" open="mMove" close="mMove" didOpen="mMove" didClose="mMove" shotPower="grinderPower" openSpeed="grinderBSpeed" closeSpeed="100" openSound="0" closeSound="0" stopSound="0" fill="#d4fdd5" frame="#000000" cx="70.20833333333334" cz="19.895833333333336" angle="90" />
   <And in.1="@beltOn" out="mMove" />
   <unique vars="mMove" />
-  <Door2 shape="bspShuriken" roll="90" midRoll="90" yaw="360" midYaw="0" deltaY="grinderBHeight" midY="grinderBHeight" scale="grinderBScale" open="mMove" close="mMove" didOpen="mMove" didClose="mMove" shotPower="grinderPower" openSpeed="grinderBSpeed" closeSpeed="100" openSound="0" closeSound="0" stopSound="0" fill="#d4fdd5" frame="#000000" cx="70.20833333333334" cz="14.270833333333334" angle="270" />
+  <Door2 shape="bspShuriken" roll="90" midRoll="90" yaw="360" midYaw="0" deltaY="grinderBHeight" midY="grinderBHeight" scale="grinderBScale" open="mMove" close="mMove" didOpen="mMove" didClose="mMove" shotPower="grinderPower" openSpeed="grinderBSpeed" closeSpeed="100" openSound="0" closeSound="0" stopSound="0" fill="#d4fdd5" frame="#000000" cx="70.20833333333334" cz="14.270833333333334" angle="90" />
   <And in.1="@beltOn" out="mMove" />
   <Wall fill="#9c1200" frame="#000000" x="76.07638888888889" z="17.083333333333336" w="0.625" d="16.25" h="0" />
-  <Sound sound="snDoor" start="@beltOn" loopCount="-1" volume="4" rate="1.5" cx="54.51388888888889" cz="16.458333333333336" angle="225" />
-  <Incarnator y="incY" cx="40.76388888888889" cz="12.01388888888889" angle="270" />
-  <Incarnator y="incY" cx="40.76388888888889" cz="17.01388888888889" angle="270" />
-  <Incarnator y="incY" cx="40.76388888888889" cz="22.01388888888889" angle="270" />
-  <Incarnator cx="50.76388888888889" cz="12.083333333333334" angle="0" />
-  <Incarnator cx="45.76388888888889" cz="12.083333333333334" angle="315" />
-  <Incarnator cx="45.76388888888889" cz="22.083333333333336" angle="225" />
-  <Incarnator cx="50.76388888888889" cz="22.083333333333336" angle="180" />
-  <Incarnator cx="55.76388888888889" cz="22.083333333333336" angle="135" />
-  <Incarnator cx="55.76388888888889" cz="12.083333333333334" angle="45" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="46.94444444444445" cz="30.625" angle="45" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="-1" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlockX" hitVolume="0" fill="#f42300" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="270" />
-  <FreeSolid shape="fsShape" shield="-1" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlockX" hitVolume="0" fill="#f42300" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="270" />
-  <FreeSolid shape="fsShape" shield="-1" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlockX" hitVolume="0" fill="#f42300" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="270" />
+  <Sound sound="snDoor" start="@beltOn" loopCount="-1" volume="4" rate="1.5" cx="54.51388888888889" cz="16.458333333333336" angle="45" />
+  <Incarnator y="incY" cx="40.76388888888889" cz="12.01388888888889" angle="90" />
+  <Incarnator y="incY" cx="40.76388888888889" cz="17.01388888888889" angle="90" />
+  <Incarnator y="incY" cx="40.76388888888889" cz="22.01388888888889" angle="90" />
+  <Incarnator cx="50.76388888888889" cz="12.083333333333334" angle="180" />
+  <Incarnator cx="45.76388888888889" cz="12.083333333333334" angle="135" />
+  <Incarnator cx="45.76388888888889" cz="22.083333333333336" angle="45" />
+  <Incarnator cx="50.76388888888889" cz="22.083333333333336" angle="0" />
+  <Incarnator cx="55.76388888888889" cz="22.083333333333336" angle="315" />
+  <Incarnator cx="55.76388888888889" cz="12.083333333333334" angle="225" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="46.94444444444445" cz="30.625" angle="225" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="fsShield" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlock" fill="#73fdff" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="-1" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlockX" hitVolume="0" fill="#f42300" frame="#000000" cx="40.13888888888889" cz="12.083333333333334" angle="90" />
+  <FreeSolid shape="fsShape" shield="-1" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlockX" hitVolume="0" fill="#f42300" frame="#000000" cx="40.13888888888889" cz="17.083333333333336" angle="90" />
+  <FreeSolid shape="fsShape" shield="-1" canGlow="true" y="fsHeight" mass="fsMass" scale="fsScale" targetGroup="targBlockX" hitVolume="0" fill="#f42300" frame="#000000" cx="40.13888888888889" cz="22.083333333333336" angle="90" />
   <unique vars="mMove mClose" />
-  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="270" />
+  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="90" />
   <Timer in="@beltOn" wait="beltOffset * 1" out="mMove" />
   <unique vars="mMove mClose" />
-  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="270" />
+  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="90" />
   <Timer in="@beltOn" wait="beltOffset * 2" out="mMove" />
   <unique vars="mMove mClose" />
-  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="270" />
+  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="90" />
   <Timer in="@beltOn" wait="beltOffset * 3" out="mMove" />
   <unique vars="mMove mClose" />
-  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="270" />
+  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="90" />
   <Timer in="@beltOn" wait="beltOffset * 4" out="mMove" />
   <unique vars="mMove mClose" />
-  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="270" />
+  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="90" />
   <Timer in="@beltOn" wait="beltOffset * 5" out="mMove" />
   <unique vars="mMove mClose" />
-  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="270" />
+  <Door shape="bspFloorFrame" deltaZ="beltDist" deltaY="0" open="mMove" didOpen="mClose" closeSpeed="100" openSpeed="beltSpeed" close="mClose" didClose="mMove" openSound="0" closeSound="0" stopSound="0" fill="#022ff2" frame="#000000" cx="32.63888888888889" cz="17.083333333333336" angle="90" />
   <Timer in="@beltOn" wait="beltOffset * 6" out="mMove" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" scale=".5" grenades="100" missiles="100" boosters="1" start="mReset" out="mTaken" y="2" speed="10" fill="#012ce4" frame="#ff32a9" cx="63.263888888888886" cz="16.875" angle="135" />
+  <Goody shape="bspGoody" scale=".5" grenades="100" missiles="100" boosters="1" start="mReset" out="mTaken" y="2" speed="10" fill="#012ce4" frame="#ff32a9" cx="63.263888888888886" cz="16.875" angle="315" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="150" />
   <set wa="ceilingHeight" />
   <Wall fill="#9c1200" frame="#000000" x="37.95138888888889" z="17.083333333333336" w="0.625" d="15" h="0.5" />

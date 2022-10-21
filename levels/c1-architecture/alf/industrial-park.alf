@@ -6,7 +6,7 @@
   <set designer="Marc A. Richter" information="Scamper around the industrial park. The windows do break...
 Copyrigth ©1996, Marc A. Richter
 http://www.vitinc.com/~marc" />
-  <Incarnator y="15" cx="22.15277777777778" cz="64.93055555555556" angle="45" />
+  <Incarnator y="15" cx="22.15277777777778" cz="64.93055555555556" angle="225" />
   <Area enter="@inArea1" exit="@outArea1" cx="35.65972222222223" cz="47.25694444444444" r="3.645833333333332" />
   <set wallHeight="1.5" />
   <Wall fill="#009600" frame="#000000" x="45.34722222222222" z="39.09722222222222" w="2.5" d="17.5" h="0" />
@@ -170,15 +170,15 @@ http://www.vitinc.com/~marc" />
   <set wallHeight="13.5" />
   <Wall fill="#8b0f00" frame="#000000" x="95.27777777777779" z="32.708333333333336" w="2.3611111111111143" d="2.5" h="0" />
   <set wallHeight="3.5" />
-  <FreeSolid fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="45" x="57.083333333333336" z="30.451388888888893" w="3.194444444444443" d="3.125" h="0" />
+  <FreeSolid fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="225" x="57.083333333333336" z="30.451388888888893" w="3.194444444444443" d="3.125" h="0" />
   <set wallHeight="2.5" />
-  <FreeSolid fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="45" x="57.15277777777778" z="35.03472222222222" w="3.194444444444443" d="3.125" h="0" />
+  <FreeSolid fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="225" x="57.15277777777778" z="35.03472222222222" w="3.194444444444443" d="3.125" h="0" />
   <set wallHeight="2.5" />
-  <FreeSolid fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="45" x="52.77777777777778" z="30.381944444444446" w="3.194444444444443" d="3.125" h="0" />
+  <FreeSolid fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="225" x="52.77777777777778" z="30.381944444444446" w="3.194444444444443" d="3.125" h="0" />
   <set wallHeight="2.5" />
-  <FreeSolid y="30" fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="45" x="93.26388888888889" z="27.32638888888889" w="3.194444444444443" d="3.125" h="0" />
+  <FreeSolid y="30" fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="225" x="93.26388888888889" z="27.32638888888889" w="3.194444444444443" d="3.125" h="0" />
   <set wallHeight="2.5" />
-  <FreeSolid y="30" fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="45" x="89.58333333333334" z="27.395833333333336" w="3.194444444444443" d="3.125" h="0" />
+  <FreeSolid y="30" fill="#7a4300" frame="#000000" cx="0" cz="2.361111111111111" angle="225" x="89.58333333333334" z="27.395833333333336" w="3.194444444444443" d="3.125" h="0" />
   <set wallHeight="4" />
   <Wall fill="#686868" frame="#000000" x="39.09722222222223" z="30.381944444444446" w="9.861111111111107" d="0.9027777777777786" h="0" />
   <Dome fill="#7b23aa" frame="#431579" cx="74.30555555555556" cz="23.40277777777778" r="2.6388888888888857" angle="180" quarters="1" />
@@ -189,29 +189,29 @@ http://www.vitinc.com/~marc" />
   <set wallHeight="3.5" />
   <Wall fill="#aa7942" frame="#431579" x="66.5625" z="26.076388888888893" w="6.458333333333336" d="1.4583333333333321" h="0" />
   <set wallHeight="2.5" />
-  <FreeSolid fill="#7a4300" frame="#000000" cx="74.375" cz="29.305555555555557" angle="225" x="107.29166666666667" z="20.79861111111111" w="3.194444444444457" d="3.125" h="0" />
+  <FreeSolid fill="#7a4300" frame="#000000" cx="74.375" cz="29.305555555555557" angle="45" x="107.29166666666667" z="20.79861111111111" w="3.194444444444457" d="3.125" h="0" />
   <set wallHeight="2.5" />
-  <FreeSolid fill="#7a4300" frame="#000000" cx="74.375" cz="29.305555555555557" angle="225" x="107.36111111111111" z="26.70138888888889" w="3.194444444444443" d="3.125" h="0" />
+  <FreeSolid fill="#7a4300" frame="#000000" cx="74.375" cz="29.305555555555557" angle="45" x="107.36111111111111" z="26.70138888888889" w="3.194444444444443" d="3.125" h="0" />
   <set wallHeight="2.5" />
-  <FreeSolid fill="#7a4300" frame="#000000" cx="74.375" cz="29.305555555555557" angle="225" x="111.59722222222223" z="20.729166666666668" w="3.194444444444443" d="3.125" h="0" />
+  <FreeSolid fill="#7a4300" frame="#000000" cx="74.375" cz="29.305555555555557" angle="45" x="111.59722222222223" z="20.729166666666668" w="3.194444444444443" d="3.125" h="0" />
   <set wallHeight="2.5" />
-  <FreeSolid fill="#7a4300" frame="#000000" cx="74.375" cz="29.305555555555557" angle="225" x="115.90277777777777" z="20.868055555555557" w="3.194444444444443" d="3.125" h="0" />
+  <FreeSolid fill="#7a4300" frame="#000000" cx="74.375" cz="29.305555555555557" angle="45" x="115.90277777777777" z="20.868055555555557" w="3.194444444444443" d="3.125" h="0" />
   <set wallHeight="1.5" />
   <Wall fill="#8a8a8a" frame="#431579" x="115.48611111111111" z="15.659722222222225" w="8.611111111111114" d="5.347222222222223" h="0" />
-  <Incarnator cx="123.68055555555557" cz="58.40277777777778" angle="45" />
-  <Incarnator cx="72.22222222222223" cz="5.277777777777778" angle="45" />
+  <Incarnator cx="123.68055555555557" cz="58.40277777777778" angle="225" />
+  <Incarnator cx="72.22222222222223" cz="5.277777777777778" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="1.5" grenades="4" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="64.44444444444444" cz="15.694444444444446" angle="45" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="1.5" grenades="4" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="64.44444444444444" cz="15.694444444444446" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="1.5" grenades="2" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="36.736111111111114" cz="23.47222222222222" angle="45" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="1.5" grenades="2" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="36.736111111111114" cz="23.47222222222222" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspMissile" speed="2" yon="50" y="16" missiles="2" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="91.04166666666667" cz="32.5" angle="45" />
+  <Goody shape="bspMissile" speed="2" yon="50" y="16" missiles="2" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="91.04166666666667" cz="32.5" angle="225" />
   <script>
 object Teleporter
 shape=0
@@ -222,7 +222,7 @@ activeRange=20
 00
 y=100
 end</script>
-  <Teleporter group="2" y="35" activeRange="300" deadRange="200" fill="#000000" frame="#000000" cx="72.08333333333334" cz="36.458333333333336" angle="225" />
-  <Teleporter group="2" y="35" activeRange="300" deadRange="150" fill="#000000" frame="#000000" cx="110.41666666666667" cz="34.79166666666667" angle="225" />
-  <Teleporter group="2" y="35" activeRange="300" deadRange="150" fill="#000000" frame="#000000" cx="31.180555555555557" cz="31.52777777777778" angle="225" />
+  <Teleporter group="2" y="35" activeRange="300" deadRange="200" fill="#000000" frame="#000000" cx="72.08333333333334" cz="36.458333333333336" angle="45" />
+  <Teleporter group="2" y="35" activeRange="300" deadRange="150" fill="#000000" frame="#000000" cx="110.41666666666667" cz="34.79166666666667" angle="45" />
+  <Teleporter group="2" y="35" activeRange="300" deadRange="150" fill="#000000" frame="#000000" cx="31.180555555555557" cz="31.52777777777778" angle="45" />
 </map>

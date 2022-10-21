@@ -22,13 +22,13 @@ http://www.vitinc.com/~marc" />
   <Wall fill="#7a4300" frame="#000000" x="44.61805555555556" z="146.80555555555557" w="1.875" d="67.5" h="0" />
   <set wallHeight="6" />
   <Wall fill="#7a4300" frame="#000000" x="133.36805555555557" z="146.80555555555557" w="1.875" d="67.5" h="0" />
-  <Ramp deltaY="9" fill="#bb1800" frame="#000000" x="81.21527777777777" z="128.125" w="6.180555555555557" d="26.25" h="0" angle="0" />
+  <Ramp deltaY="9" fill="#bb1800" frame="#000000" x="81.21527777777777" z="128.125" w="6.180555555555557" d="26.25" h="0" angle="180" />
   <set wallHeight=".5" />
   <Wall fill="#0052ff" frame="#000000" x="81.18055555555556" z="101.80555555555556" w="6.25" d="26.25" h="0" y="8.5" />
-  <Ramp deltaY="9" fill="#d82da9" frame="#000000" x="81.25" z="76.25" w="6.25" d="25" h="0" angle="180" />
-  <Incarnator y="15" cx="19.375" cz="30" angle="135" />
-  <Incarnator y="15" cx="118.2638888888889" cz="171.11111111111111" angle="135" />
-  <Ramp y="9" deltaY="10" fill="#010e68" frame="#000000" x="66.5625" z="101.25" w="24.375" d="6.25" h="0" angle="270" />
+  <Ramp deltaY="9" fill="#d82da9" frame="#000000" x="81.25" z="76.25" w="6.25" d="25" h="0" angle="0" />
+  <Incarnator y="15" cx="19.375" cz="30" angle="315" />
+  <Incarnator y="15" cx="118.2638888888889" cz="171.11111111111111" angle="315" />
+  <Ramp y="9" deltaY="10" fill="#010e68" frame="#000000" x="66.5625" z="101.25" w="24.375" d="6.25" h="0" angle="90" />
   <set wallHeight=".25" />
   <Wall fill="#8b0f00" frame="#000000" x="41.18055555555556" z="101.80555555555556" w="26.25" d="26.25" h="0" y="19" />
   <set wallHeight=".25" />
@@ -79,19 +79,19 @@ http://www.vitinc.com/~marc" />
   <Wall fill="#0052ff" frame="#000000" x="74.86111111111111" z="164.86111111111111" w="7.5" d="16.25" h="0" />
   <set wallHeight="4" />
   <Wall fill="#0052ff" frame="#000000" x="103.05555555555556" z="123.36805555555557" w="3.75" d="10.625" h="0" />
-  <Pill y="20" fill="#000000" frame="#000000" cx="83.05555555555556" cz="99.93055555555556" angle="225" />
-  <Pill y="20" fill="#000000" frame="#000000" cx="56.80555555555556" cz="111.80555555555556" angle="225" />
-  <Pill y="20" fill="#000000" frame="#000000" cx="56.18055555555556" cz="89.58333333333334" angle="225" />
-  <Pill fill="#000000" frame="#000000" cx="80.48611111111111" cz="152.08333333333334" angle="225" />
-  <Pill fill="#000000" frame="#000000" cx="68.61111111111111" cz="57.84722222222222" angle="225" />
+  <Pill y="20" fill="#000000" frame="#000000" cx="83.05555555555556" cz="99.93055555555556" angle="45" />
+  <Pill y="20" fill="#000000" frame="#000000" cx="56.80555555555556" cz="111.80555555555556" angle="45" />
+  <Pill y="20" fill="#000000" frame="#000000" cx="56.18055555555556" cz="89.58333333333334" angle="45" />
+  <Pill fill="#000000" frame="#000000" cx="80.48611111111111" cz="152.08333333333334" angle="45" />
+  <Pill fill="#000000" frame="#000000" cx="68.61111111111111" cz="57.84722222222222" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="22" grenades="4" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="121.18055555555556" cz="92.43055555555556" angle="45" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="22" grenades="4" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="121.18055555555556" cz="92.43055555555556" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspMissile" speed="2" yon="50" y="21.5" missles="2" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="31.59722222222222" cz="102.91666666666667" angle="45" />
+  <Goody shape="bspMissile" speed="2" yon="50" y="21.5" missles="2" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="31.59722222222222" cz="102.91666666666667" angle="225" />
   <script>
 object Teleporter
 shape=0
@@ -102,6 +102,6 @@ activeRange=20
 00
 y=100
 end</script>
-  <Teleporter group="2" y="35" activeRange="300" deadRange="100" fill="#000000" frame="#000000" cx="104.30555555555556" cz="99.30555555555556" angle="225" />
-  <Teleporter group="2" y="35" activeRange="300" deadRange="100" fill="#000000" frame="#000000" cx="90.55555555555556" cz="99.30555555555556" angle="225" />
+  <Teleporter group="2" y="35" activeRange="300" deadRange="100" fill="#000000" frame="#000000" cx="104.30555555555556" cz="99.30555555555556" angle="45" />
+  <Teleporter group="2" y="35" activeRange="300" deadRange="100" fill="#000000" frame="#000000" cx="90.55555555555556" cz="99.30555555555556" angle="45" />
 </map>
