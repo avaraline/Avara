@@ -1,8 +1,5 @@
 <map>
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Shivering with latent power, she 
-was as tender as she was strong. Girded with 
-steel and untouched by wear, she was ne'er to 
-fall. 15, oh mighty 15." />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Shivering with latent power, she &#10;was as tender as she was strong. Girded with &#10;steel and untouched by wear, she was ne'er to &#10;fall. 15, oh mighty 15." />
   <SkyColor fill="#fffed5" frame="#007742" />
   <GroundColor fill="#d5d379" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="25.798611111111114" cz="0.27777777777777773" angle="45" />
@@ -155,7 +152,7 @@ fall. 15, oh mighty 15." />
   <And in="@start" out="mShow" />
   <Goody speed="12" shape="bspAvaraA" missiles="8" grenades="12" y="7" start="mShow" out="mTaken" fill="#008700" frame="#fffed5" cx="62.5" cz="63.95833333333333" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <script>
+  <script pixelToThickness="0.125" designer="Apollo &lt;apollo@avara.org&gt;" information="Shivering with latent power, she &#10;was as tender as she was strong. Girded with &#10;steel and untouched by wear, she was ne'er to &#10;fall. 15, oh mighty 15." fill="#e4e4e4" cx="62.986111111111114" cz="64.44444444444444" r="1.3194444444444429" angle="315" frame="#f42300" x="60.3125" z="101.31944444444444" w="0.625" d="10" h="0" wallHeight="1.85">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

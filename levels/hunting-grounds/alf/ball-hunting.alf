@@ -6,9 +6,7 @@
   <Area y="50" mask="T2" freq="1" enter="@startguard1" cx="40.486111111111114" cz="76.21527777777777" r="2.430555555555557" />
   <Area y="50" mask="T2" freq="1" enter="@startguard2" cx="101.11111111111111" cz="86.84027777777777" r="2.430555555555557" />
   <Area y="50" mask="T2" freq="1" enter="@startguard3" cx="101.11111111111111" cz="64.34027777777777" r="2.430555555555557" />
-  <set designer="Shakespeare - bahome@san.rr.com" information="One Green (hunted) tries to score against Yellow 
-(hunter).  6 scores is a win for Green, 6 minutes is a 
-win for Yellow." />
+  <set designer="Shakespeare - bahome@san.rr.com" information="One Green (hunted) tries to score against Yellow &#10;(hunter).  6 scores is a win for Green, 6 minutes is a &#10;win for Yellow." />
   <SkyColor fill="#0125c7" frame="#000543" />
   <GroundColor fill="#002c00" />
   <Teleporter y="30" activeRange="10000" yon="0.01" start="@gameEnds" win="1" fill="#ffffff" frame="#000000" cx="51.97916666666667" cz="153.2638888888889" angle="135" />

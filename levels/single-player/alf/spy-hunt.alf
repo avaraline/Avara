@@ -1,12 +1,7 @@
 <map>
   <SkyColor n="6" fill="#4180ff" frame="#007879" />
   <GroundColor fill="#424242" />
-  <set designer="Juri Munkki" information="A group of 3 enemy spies have already invaded our 
-base and are now waiting for their long range 
-transport to arrive on orbit so that they can escape 
-with stolen AI ROMs.
-
-Destroy all of them before they make their escape." standardWall="3" highWall="5" towerHeight="14" spyShield="4" spyAccel="0.125" escapeTime="16 * 60 * 5" ambient.i="0.3" light.0.i="0.3" light.0.a="10" light.0.b="240" light.1.i="0.0" light.1.a="25" light.1.b="60" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set designer="Juri Munkki" information="A group of 3 enemy spies have already invaded our &#10;base and are now waiting for their long range &#10;transport to arrive on orbit so that they can escape &#10;with stolen AI ROMs.&#10;&#10;&#10;&#10;Destroy all of them before they make their escape." standardWall="3" highWall="5" towerHeight="14" spyShield="4" spyAccel="0.125" escapeTime="16 * 60 * 5" ambient.i="0.3" light.0.i="0.3" light.0.a="10" light.0.b="240" light.1.i="0.0" light.1.a="25" light.1.b="60" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <set wallHeight="0.2" baseHeight="0" />
   <set wallHeight="standardWall" />
   <Wall fill="#aa7a79" frame="#000000" x="105" z="119.09722222222223" w="10" d="20" h="0" />

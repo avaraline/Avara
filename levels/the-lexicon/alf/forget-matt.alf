@@ -55,7 +55,7 @@
   <And in="@start" out="mShow" />
   <Goody speed="20" shape="bspAvaraA" grenades="8" boosters="1" missiles="6" y="2" start="mShow" out="mTaken" fill="#686868" frame="#686868" cx="46.80555555555556" cz="31.736111111111114" angle="225" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <script>
+  <script pixelToThickness="0.125" fill="#e4e4e4" cx="47.29166666666667" cz="31.875" r="1.3194444444444464" angle="315" frame="#f42300" wallHeight="0" x="55.55555555555556" z="35.520833333333336" w="7.5" d="0.625" h="0" designer="Apollo &lt;apollo@avara.org&gt;" information="I am the stealer of dreams.">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

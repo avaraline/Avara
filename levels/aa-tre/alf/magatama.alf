@@ -15,7 +15,7 @@
   <Wall fill="#234748" frame="#000000" x="126.18055555555556" z="111.77083333333334" w="1.25" d="11.875" h="0" />
   <set wallHeight="3.5" />
   <Wall fill="#234748" frame="#000000" x="130.55555555555557" z="124.27083333333334" w="10" d="13.125" h="0" />
-  <script>
+  <script pixelToThickness="0.125" fill="#d6d1a4" cx="138.75" cz="118.95833333333334" r="7.5" angle="90" frame="#000000" wallHeight="3.5" x="141.49305555555557" z="122.08333333333334" w="11.875" d="8.75" h="0">
 object Ramp
 y = 0
 deltaY = 3.5
@@ -108,7 +108,7 @@ wallHeight =</script>
   <Ramp y="0" deltaY="4" thickness="0" fill="#d6d1a4" frame="#000000" x="125.55555555555557" z="73.95833333333334" w="12.5" d="7.5" h="0" angle="90" />
   <set wallHeight="4" />
   <Wall fill="#697969" frame="#000000" x="113.36805555555556" z="74.89583333333334" w="11.875" d="11.875" h="0" />
-  <script>
+  <script pixelToThickness="0.125" fill="#697969" cx="121.875" cz="71.45833333333334" r="7.5" angle="90" frame="#000000" wallHeight="4" x="112.43055555555556" z="87.08333333333334" w="7.5" d="12.5" h="0" light.0.i="0.5" light.0.a="43" light.0.b="18" light.1.i="0.3" light.1.a="18" light.1.b="190" light.2.i="0.0" light.2.a="0" light.2.b="0">
 wallHeight =</script>
   <Wall fill="#697969" frame="#000000" x="108.05555555555556" z="87.08333333333334" w="1.25" d="12.5" h="0" />
   <set wallHeight="4" />
@@ -131,7 +131,7 @@ wallHeight =</script>
   <Ramp y="0" deltaY="4" thickness="0" fill="#d6d1a4" frame="#000000" x="204.93055555555557" z="183.95833333333334" w="12.5" d="7.5" h="0" angle="270" />
   <set wallHeight="4" />
   <Wall fill="#697969" frame="#000000" x="217.11805555555557" z="183.02083333333334" w="11.875" d="11.875" h="0" />
-  <script>
+  <script pixelToThickness="0.125" fill="#697969" cx="206.77083333333334" cz="181.45833333333334" r="7.5" angle="270" frame="#000000" wallHeight="4" x="218.05555555555557" z="170.83333333333334" w="7.5" d="12.5" h="0" light.0.i="0.5" light.0.a="43" light.0.b="18" light.1.i="0.3" light.1.a="18" light.1.b="190" light.2.i="0.0" light.2.a="0" light.2.b="0">
 wallHeight =</script>
   <Wall fill="#697969" frame="#000000" x="213.68055555555557" z="170.83333333333334" w="1.25" d="12.5" h="0" />
   <set wallHeight="4" />
@@ -142,8 +142,7 @@ wallHeight =</script>
   <Wall fill="#697969" frame="#000000" x="156.18055555555557" z="178.33333333333334" w="12.5" d="1.25" h="0" />
   <set wallHeight="4" />
   <Wall fill="#697969" frame="#000000" x="156.18055555555557" z="187.08333333333334" w="12.5" d="1.25" h="0" />
-  <set designer="M. Matthews  [uno]" information="Magatama:
-The eye of the tiger has a cataract." wallHeight=".001" />
+  <set designer="M. Matthews  [uno]" information="Magatama:&#10;The eye of the tiger has a cataract." wallHeight=".001" />
   <WallDoor midYaw="45" fill="#7c8873" frame="#000000" x="163.75" z="131.59722222222223" w="5" d="5" h="0" />
   <Teleporter group="-1" y="-30" activeRange="32 * 5" deadRange="22 * 5" destGroup="@center" shape="0" fill="#ffffff" frame="#000000" cx="163.68055555555557" cz="131.45833333333334" angle="135" />
   <Teleporter y="30" shape="0" group="@center" fill="#ffffff" frame="#000000" cx="163.68055555555557" cz="131.45833333333334" angle="135" />

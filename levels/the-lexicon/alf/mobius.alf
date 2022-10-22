@@ -1,7 +1,5 @@
 <map>
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="All you need is a pair of scissors, 
-some tape, and a piece of paper for this simple 
-experiment." />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="All you need is a pair of scissors, &#10;some tape, and a piece of paper for this simple &#10;experiment." />
   <SkyColor fill="#fffed5" frame="#0048aa" />
   <GroundColor fill="#0048aa" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="24.618055555555557" cz="1.1111111111111112" angle="45" />
@@ -127,7 +125,7 @@ experiment." />
   <Incarnator y="8" cx="94.86111111111111" cz="32.63888888888889" angle="270" />
   <set wallHeight="5" wallYon="0.001" />
   <Wall fill="#ffffff" frame="#000000" x="86.11111111111111" z="26.388888888888893" w="130" d="30" h="0" y="20" />
-  <script>
+  <script pixelToThickness="0.125" designer="Apollo &lt;apollo@avara.org&gt;" information="All you need is a pair of scissors, &#10;some tape, and a piece of paper for this simple &#10;experiment." fill="#e4e4e4" cx="42.91666666666667" cz="36.388888888888886" r="1.3194444444444464" angle="315" frame="#f42300" wallHeight="5" x="141.11111111111111" z="24.20138888888889" w="5" d="0.625" h="0" wallYon="0.001">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

@@ -738,8 +738,7 @@
   <Wall fill="#ffffff" frame="#000000" x="289.93055555555554" z="313.68055555555554" w="2.5" d="2.5" h="0.25" y="1" />
   <set wallYon="deffaultYon" />
   <Teleporter y="100" shape="0" win="10000" start="@winTeam" activeRange="2000" fill="#ab4ca9" frame="#ab4642" cx="306.875" cz="268.125" angle="270" />
-  <set designer="Hazel - hazel@avara.org" information="this  is  a  level  for  1 x 1,  2 x 2  and  1 x 2  games!
-teams are GREEN and YELLOW" />
+  <set designer="Hazel - hazel@avara.org" information="this  is  a  level  for  1 x 1,  2 x 2  and  1 x 2  games!&#10;teams are GREEN and YELLOW" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="50" />

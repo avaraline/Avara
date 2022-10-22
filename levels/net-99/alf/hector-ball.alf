@@ -1,11 +1,7 @@
 <map>
   <SkyColor fill="#f1f1f1" frame="#f1f1f1" />
   <GroundColor fill="#f1f1f1" />
-  <set designer="Plastic Chicken" information="To:  You
-From:  Me
-Contents:  One HECTOR Model Timed Grenade
-
-Red vs. Green —— 6 minutes" defaultLives="99" baseHeight="100" wallHeight=".2" />
+  <set designer="Plastic Chicken" information="To:  You&#10;&#10;From:  Me&#10;&#10;Contents:  One HECTOR Model Timed Grenade&#10;&#10;&#10;&#10;Red vs. Green —— 6 minutes" defaultLives="99" baseHeight="100" wallHeight=".2" />
   <Distributor in="@openClose" out.0="@dda" out.1="@ddb" out.2="@ddc" out.3="@ddd" out.4="@dde" restart="true" />
   <Timer in.0="@start" in.1="@openClose" wait="3" out="@openClose" />
   <Wall fill="#000000" frame="#000000" x="46.25" z="24.0625" w="21.25" d="23.125" h="0" />

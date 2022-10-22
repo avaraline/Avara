@@ -38,6 +38,11 @@ def postprocess(element: Element) -> Element:
             angle = angle if angle < 360 else angle - 360
             element.attrs["angle"] = dumb_round(angle)
             del element.attrs["extent"]
+    # Convert line breaks to XML entities in the `information` attribute.
+    if "information" in element.attrs:
+        element.attrs["information"] = element.attrs["information"] \
+            .replace("\n", "&#10;") \
+            .replace("\r", "&#10;")
     # Strip out any irrelevant attributes that may be present.
     if element.tag in VESTIGIAL_ATTRS.keys():
         element.attrs = {k: v for k, v in element.attrs.items()
@@ -239,7 +244,7 @@ class TextOp(AvaraOperation):
             # Strip the "end" we added if there's still an error.
             text = fixed_script[:-3].strip()
             text = re.sub(r"ambient(\s*)=", "ambient.i\1=", text)
-            yield postprocess(Element("script", text))
+            yield postprocess(Element("script", text, **context))
 
 
 class GroupStart(AvaraOperation):

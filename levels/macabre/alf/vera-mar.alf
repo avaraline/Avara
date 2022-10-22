@@ -23,9 +23,7 @@
   <Wall fill="#928468" frame="#000000" x="57.5" z="54.375" w="13.75" d="13.75" h="0" y="9.5" />
   <set wallHeight=".5" />
   <Wall fill="#cbaf9a" frame="#000000" x="57.5" z="54.375" w="12.5" d="12.5" h="0" y="9" />
-  <set designer="S. Carmel" information="Vera Mar:
-Melting moods of lamentation decussate within, they suspire in perpetuity.
-Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light.0.b="-45" light.1.i="0.2" light.1.a="-60" light.1.b="45" />
+  <set designer="S. Carmel" information="Vera Mar:&#10;Melting moods of lamentation decussate within, they suspire in perpetuity.&#10;Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light.0.b="-45" light.1.i="0.2" light.1.a="-60" light.1.b="45" />
   <Incarnator y="50" cx="37.5" cz="34.375" angle="135" />
   <set incarnateSound="2001" incarnateVolume="3000" groundStepSound="2002" wallHeight="9" />
   <Wall fill="#433b28" frame="#000000" x="57.5" z="54.375" w="10" d="10" h="0" />
@@ -336,7 +334,7 @@ Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light
   <Timer in.1="@gravity2" in.2="@gravity2" wait="820" out.1="@gravity3" out.2="@resetTimer" />
   <Timer in="@gravity1" wait="740" out="@gravity2" />
   <Timer in.1="@start" in.2="@resetTimer" wait="772" out.1="@gravity1" out.2="@gravity1" />
-  <script>
+  <script pixelToThickness="0.125" fill="#ffebda" cx="220.625" cz="4.375" r="1.875" angle="135" frame="#000000" wallHeight="4" designer="S. Carmel" information="Vera Mar:&#10;Melting moods of lamentation decussate within, they suspire in perpetuity.&#10;Scream and they will hear..." ambient.i="0" light.0.i="0.6" light.0.a="80" light.0.b="-45" light.1.i="0.2" light.1.a="-60" light.1.b="45" incarnateSound="2001" incarnateVolume="3000" groundStepSound="2002" x="53.611111111111114" z="1029.548611111111" w="5.277777777777779" d="0.9027777777778283" h="0" wallYon="defaultYon">
 object Teleporter
 group = -10
 y = 0

@@ -210,9 +210,7 @@
   <Field deltaY="0.22" start="@FieldsOn" stop="@FieldsOff" fill="#41fbb0" frame="#000000" x="34.93055555555556" z="24.583333333333336" w="8.75" d="8.75" h="0" cx="22.430555555555557" cz="12.083333333333334" angle="135" />
   <set wallHeight="secHeight" baseHeight="totHeight -secHeight" />
   <Field deltaX="-0.2" start="@FieldsOn" stop="@FieldsOff" fill="#41fbb0" frame="#000000" x="34.93055555555556" z="24.583333333333336" w="8.75" d="8.75" h="0" cx="22.430555555555557" cz="12.083333333333334" angle="135" />
-  <set information="Battle on a spiral.
-The flowers are ammo.
-Includes custom team colors for ScoreKeeper." />
+  <set information="Battle on a spiral.&#10;The flowers are ammo.&#10;Includes custom team colors for ScoreKeeper." />
   <set baseHeight="0" />
   <Incarnator y="incHeight" cx="22.430555555555557" cz="62.08333333333334" angle="0" />
   <Teleporter destGroup="@inside" shape="0" activeRange="3" fill="#00de00" frame="#000000" cx="22.430555555555557" cz="62.08333333333334" angle="0" />

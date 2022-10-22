@@ -11,10 +11,7 @@
 thanks to all of you who
 participated in Net '99!" showEveryone="true" align="centerAlign" restart="false" cx="31.111111111111114" cz="43.68055555555556" r="1.666666666666666" />
   <Door2 status="isOpen" stopSound="3301" shape="2000" y="0.5" deltaY="0" deltaZ="-500" deltaX="0" close="@start" openSpeed="0.8" volume="100" closeDelay="0" pitch="00" yaw="2000" roll="0" fill="#fbffff" frame="#090909" cx="48.47222222222223" cz="31.875" angle="90" />
-  <set designer="Rup-1" information="Please read the information in 
-your instruments window.  Once the text is 
-finished you will be able to play all the levels.  
-Thanks to all of you who participated !!" />
+  <set designer="Rup-1" information="Please read the information in &#10;your instruments window.  Once the text is &#10;finished you will be able to play all the levels.  &#10;Thanks to all of you who participated !!" />
   <Text in="@start" wait="1300" text="Designers / Credits" showEveryone="true" align="centerAlign" restart="false" cx="48.47222222222223" cz="31.875" r="1.6666666666666679" />
   <Text in="@start" wait="400" text="We were able to put over
 50 Levels In Net '99 from

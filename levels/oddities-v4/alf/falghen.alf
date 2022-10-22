@@ -1,8 +1,7 @@
 <map>
   <set beamY.0="1" beamY.1="2.2" beamY.2="3.4" defaultLives="3" friendlyHitMultiplier="-10" MainWall="7" CornerWall="MainWall + 1" RoofH=".625" guardHeight="CornerWall + 3" guardFreq="7" guardSpeed="5" GtClSpd="8" GtOpSpd="1" GtPower="2" GtDelay="1" hull.0="hull[1]" />
   <Text in="@INTRUDER" text="Intruder Detected!" showEveryone="true" />
-  <set information="Remove the cube and place it in the goal without setting off the security system.
-The light hull is not available." />
+  <set information="Remove the cube and place it in the goal without setting off the security system.&#10;The light hull is not available." />
   <SkyColor fill="#4180ff" frame="#ffd6d5" />
   <GroundColor fill="#7a4aaa" />
   <Incarnator y="0" mask="T1" cx="6.805555555555555" cz="37.083333333333336" angle="90" />
@@ -142,7 +141,7 @@ The light hull is not available." />
   <Wall fill="#8b0f00" frame="#000000" x="124.30555555555557" z="42.708333333333336" w="11.25" d="1.25" h="0" />
   <Wall fill="#8b0f00" frame="#000000" x="129.30555555555557" z="34.583333333333336" w="1.25" d="15" h="0" />
   <set baseHeight="0" />
-  <script>
+  <script pixelToThickness="0.125" beamY.0="1" beamY.1="2.2" beamY.2="3.4" defaultLives="3" friendlyHitMultiplier="-10" MainWall="7" CornerWall="MainWall + 1" RoofH=".625" guardHeight="CornerWall + 3" guardFreq="7" guardSpeed="5" GtClSpd="8" GtOpSpd="1" GtPower="2" GtDelay="1" hull.0="hull[1]" information="Remove the cube and place it in the goal without setting off the security system.&#10;The light hull is not available." fill="#bb1800" cx="124.375" cz="34.65277777777778" r="1.875" angle="45" frame="#00d5ff" wallHeight=".5" x="128.36805555555557" z="33.645833333333336" w="0.625" d="13.125" h="0" wdInc="3" wdBase="wdBase + wdInc" baseHeight="0">
 object Ball
   shape = bspDoubleCube
   scale = .7
@@ -192,7 +191,7 @@ wallHeight = 0</script>
   <Sound sound="snTextBlip" start="@blockDrop" restart="false" cx="76.80555555555556" cz="22.708333333333336" angle="45" />
   <YonBox deltaY="9" x="77.46527777777779" z="19.02777777777778" w="9.375" d="2.5" h="0" r="1.875" angle="45" />
   <YonBox deltaY="9" x="77.46527777777779" z="27.77777777777778" w="9.375" d="2.5" h="0" r="1.875" angle="45" />
-  <script>
+  <script pixelToThickness="0.125" beamY.0="1" beamY.1="2.2" beamY.2="3.4" defaultLives="3" friendlyHitMultiplier="-10" MainWall="7" CornerWall="MainWall + 1" RoofH=".625" guardHeight="CornerWall + 3" guardFreq="7" guardSpeed="5" GtClSpd="8" GtOpSpd="1" GtPower="2" GtDelay="1" hull.0="hull[1]" information="Remove the cube and place it in the goal without setting off the security system.&#10;The light hull is not available." fill="#ffd6d5" cx="76.80555555555556" cz="22.708333333333336" r="1.875" angle="45" frame="#ff32a9" wallHeight="3" x="80.90277777777779" z="23.40277777777778" w="2.5" d="11.25" h="0" wdInc="3" wdBase="wdBase + wdInc" baseHeight="0" wallYon="0">
 objec
 t 
 YonBo

@@ -2,7 +2,7 @@
   <GroundColor fill="#151515" />
   <SkyColor fill="#ffffff" frame="#a9a700" />
   <Incarnator y="20" cx="34.93055555555556" cz="22.083333333333336" angle="90" />
-  <script>
+  <script pixelToThickness="0.125" fill="#e4e4e4" cx="55.208333333333336" cz="42.15277777777778" r="1.3194444444444429" angle="315" frame="#f42300">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000
@@ -12,8 +12,7 @@ y = 30
 shape = 0
 end</script>
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="3.6458333333333335" cz="7.291666666666668" angle="45" />
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="His promises were true but the truth 
-was hollow. It was a bitter end for Faust." wallHeight="8" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="His promises were true but the truth &#10;was hollow. It was a bitter end for Faust." wallHeight="8" />
   <Wall fill="#a9a700" frame="#000000" x="44.93055555555556" z="32.083333333333336" w="10" d="10" h="0" />
   <set wallHeight="6" />
   <Wall fill="#a9a700" frame="#000000" x="64.93055555555556" z="52.083333333333336" w="10" d="10" h="0" />

@@ -15,8 +15,7 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
   <Goody shape="bspAvaraA" y="2" speed="20" hitScore="1" missiles="3" grenades="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="47.77777777777778" cz="53.611111111111114" angle="225" />
-  <set designer="Matt Zimney &lt;mzimney@hotmail.com&gt;" information="A very, very simple level
-Optimized for the ScoreKeeper plugin" />
+  <set designer="Matt Zimney &lt;mzimney@hotmail.com&gt;" information="A very, very simple level&#10;Optimized for the ScoreKeeper plugin" />
   <Wall fill="#2d2d2d" frame="#000000" x="47.5" z="14.0625" w="3.75" d="0.625" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="47.5" z="99.0625" w="3.75" d="0.625" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="1.5625" z="52.8125" w="0.625" d="3.125" h="0.25" />
@@ -40,7 +39,7 @@ Optimized for the ScoreKeeper plugin" />
   <Wall fill="#2d2d2d" frame="#000000" x="12.1875" z="84.0625" w="0.625" d="0.625" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="77.1875" z="24.0625" w="0.625" d="0.625" h="0.25" />
   <Wall fill="#2d2d2d" frame="#000000" x="17.1875" z="24.0625" w="0.625" d="0.625" h="0.25" />
-  <script>
+  <script pixelToThickness="0.125" fill="#2d2d2d" cx="107.56944444444444" cz="3.6805555555555554" r="1.25" angle="225" frame="#000000" ambient.i="1" light.0.i="1" light.0.a="1" light.0.b="225" light.1.i="1" light.1.a="1" light.1.b="45" designer="Matt Zimney &lt;mzimney@hotmail.com&gt;" information="A very, very simple level&#10;Optimized for the ScoreKeeper plugin" defaultLives="15" missilePower="2" missileTurnRate="1" missileAcceleration=".5" timeLimit="300" incarnateSound="0" gameLength="4687">
 object And
 in = @start
 out = @time

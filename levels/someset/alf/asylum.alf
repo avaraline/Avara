@@ -181,9 +181,5 @@
   <And in="@t2" out.0="@f2" out.1="@t3" />
   <And in="@t3" out.0="@f3" out.1="@t4" />
   <And in="@t4" out.0="@f4" out.1="@t1" />
-  <set designer="SomeGuy &lt;someguy@avara.net&gt;" information="GET
-                            ...
-                            ME
-                            ...
-                    OUT OF HERE!" />
+  <set designer="SomeGuy &lt;someguy@avara.net&gt;" information="GET&#10;                            ...&#10;                            ME&#10;                            ...&#10;                    OUT OF HERE!" />
 </map>

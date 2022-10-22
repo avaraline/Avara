@@ -87,9 +87,7 @@
   <Text in="@FieldsOff" text="Force fields are now off." showEveryone="true" cx="129.79166666666669" cz="90.06944444444444" r="2.5" />
   <Text in="@FieldsOn" text="Force fields are now on." showEveryone="true" cx="129.79166666666669" cz="90.06944444444444" r="2.5" />
   <Text in="@start" text="Welcome to Height! Force fields are currently off." showEveryone="true" cx="129.79166666666669" cz="90.06944444444444" r="2.5" />
-  <set information="Battle from four platforms.
-Heavy hulls recommended. Don’t step off the platforms unless the force fields are on. Get ammo by stepping on your own platform.
-Green, yellow, red, and pink; max 2 per team." />
+  <set information="Battle from four platforms.&#10;Heavy hulls recommended. Don’t step off the platforms unless the force fields are on. Get ammo by stepping on your own platform.&#10;Green, yellow, red, and pink; max 2 per team." />
   <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="145.34722222222223" cz="115" angle="270" />
   <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="145.34722222222223" cz="65" angle="270" />
   <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="154.72222222222223" cz="105.625" angle="0" />

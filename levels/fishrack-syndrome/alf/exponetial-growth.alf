@@ -1,5 +1,5 @@
 <map>
-  <script>
+  <script pixelToThickness="0.125">
 wallHeight=0
 
 //
@@ -173,7 +173,7 @@ grenadePower=4.5</script>
   <Hologram shape="10238" scale="2" fill="#407700" frame="#aa7a79" cx="117.5" cz="16.25" angle="45" />
   <Hologram shape="10238" scale="2" fill="#407700" frame="#aa7a79" cx="121.25" cz="20" angle="225" />
   <Hologram shape="10238" scale="2" fill="#407700" frame="#aa7a79" cx="120" cz="16.875" angle="315" />
-  <script>
+  <script pixelToThickness="0.125" fill="#407700" cx="115" cz="20" r="1.875" angle="225" frame="#aa7a79" x="89.375" z="73.4375" w="2.5" d="6.875" h="0" baseHeight="0" wallYon="0" wallHeight="5">
 object Hologram
 shape=10238
 scale=2

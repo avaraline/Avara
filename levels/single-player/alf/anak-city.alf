@@ -91,7 +91,5 @@
   <Ufo y="150" start="@wave2" speed="5" watch="playerMask + targ1" killMsg="@kill2" fill="#c91b00" frame="#000000" cx="109.93055555555556" cz="55.55555555555556" angle="315" />
   <Counter in="@kill2" n="4" out="@win" />
   <Teleporter start="@win" win="2500" group="@gGroup" fill="#00ec00" frame="#000000" cx="89.30555555555556" cz="98.05555555555556" angle="45" />
-  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="Anak city has been infested with enemy 
-intelligence.  Kill everything and enter the green 
-teleporter to exit." />
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="Anak city has been infested with enemy &#10;intelligence.  Kill everything and enter the green &#10;teleporter to exit." />
 </map>

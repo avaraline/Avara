@@ -58,7 +58,7 @@
   <Goody speed="20" shape="bspAvaraA" missiles="8" grenades="12" y="2" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="68.05555555555556" cz="59.02777777777778" angle="225" />
   <Timer in="mTaken" out="mShow" wait="250" />
   <set wallHeight="1" />
-  <script>
+  <script pixelToThickness="0.125" fill="#e4e4e4" cx="77.70833333333334" cz="67.70833333333334" r="1.31944444444445" angle="315" frame="#f42300" designer="Apollo &lt;apollo@avara.org&gt;" information="Pop pop." wallHeight="1">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

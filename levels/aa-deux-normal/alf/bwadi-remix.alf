@@ -54,8 +54,7 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
   <Goody shape="bspMissile" y="6.25" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="86.45833333333334" cz="29.861111111111114" angle="45" />
-  <set designer="Malkavian - moneta@avara.com" information="Bwadi Remix One:
-Do you grow up watching anyone else, thinking about I?" />
+  <set designer="Malkavian - moneta@avara.com" information="Bwadi Remix One:&#10;Do you grow up watching anyone else, thinking about I?" />
   <SkyColor fill="#407979" frame="#00a8aa" />
   <GroundColor fill="#004242" />
   <Wall fill="#686868" frame="#000000" x="70.20833333333334" z="78.95833333333334" w="10" d="10" h="2" y="2" />

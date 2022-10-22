@@ -1,10 +1,5 @@
 <map>
-  <set designer="Kevin Reid (Tetra)    &lt;kpreid@ibm.net&gt;" information="Concept by TRS &lt;therisingsun@mailcity.com&gt;
-A gigantic maze!
-The switches shoot at you until you flip them.
-Don't injure the UFOs.
-The ammo is in the sky; get to the center to get it.
-Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWall="5" DomeSlope="7" wallHeight="TallWall" SkyBase="TallWall + 30" SkyIncr="5" SkyThick=".25" GuardRange="40" DoorTime="10 * 15" DoorShot="2" DoorSpeed="10" DoorVol="0" defaultLives="2" missileTurnRate="100" wgHeight="MazeWall -1" wgScale="0" wgYon=".01" wgReset="11 * 15" wgSwScale="1" wgFreq="2.5 * 15" wgPower=".5" wgSpeed="100" />
+  <set designer="Kevin Reid (Tetra)    &lt;kpreid@ibm.net&gt;" information="Concept by TRS &lt;therisingsun@mailcity.com&gt;&#10;A gigantic maze!&#10;The switches shoot at you until you flip them.&#10;Don't injure the UFOs.&#10;The ammo is in the sky; get to the center to get it.&#10;Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWall="5" DomeSlope="7" wallHeight="TallWall" SkyBase="TallWall + 30" SkyIncr="5" SkyThick=".25" GuardRange="40" DoorTime="10 * 15" DoorShot="2" DoorSpeed="10" DoorVol="0" defaultLives="2" missileTurnRate="100" wgHeight="MazeWall -1" wgScale="0" wgYon=".01" wgReset="11 * 15" wgSwScale="1" wgFreq="2.5 * 15" wgPower=".5" wgSpeed="100" />
   <SkyColor fill="#7b1979" frame="#7a4aaa" />
   <GroundColor fill="#a6feff" />
   <set wallYon="10000" />
@@ -268,7 +263,7 @@ Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWa
   <And in="@start" out="mA" />
   <WallDoor deltaX="5 -5 / 8" deltaY="0" shotPower="DoorShot" open="mA" close="mB" didOpen="mB" didClose="mA" openDelay="random * DoorTime" volume="DoorVol" closeDelay="random * DoorTime" openSpeed="DoorSpeed" closeSpeed="DoorSpeed" fill="#007879" frame="#000000" x="140.55555555555557" z="144.89583333333334" w="10" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="60.24305555555556" z="87.70833333333334" w="0.625" d="35" h="0" />
-  <script>
+  <script pixelToThickness="0.125" designer="Kevin Reid (Tetra)    &lt;kpreid@ibm.net&gt;" information="Concept by TRS &lt;therisingsun@mailcity.com&gt;&#10;A gigantic maze!&#10;The switches shoot at you until you flip them.&#10;Don't injure the UFOs.&#10;The ammo is in the sky; get to the center to get it.&#10;Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWall="5" DomeSlope="7" wallHeight="MazeWall" SkyBase="TallWall + 30" SkyIncr="5" SkyThick=".25" GuardRange="40" DoorTime="10 * 15" DoorShot="2" DoorSpeed="10" DoorVol="0" defaultLives="2" missileTurnRate="100" wgHeight="MazeWall -1" wgScale="0" wgYon=".01" wgReset="11 * 15" wgSwScale="1" wgFreq="2.5 * 15" wgPower=".5" wgSpeed="100" fill="#007879" cx="149.86111111111111" cz="132.70833333333334" r="1.25" angle="90" frame="#000000" wallYon="0" hull.0="hullExtraLight" hull.1="hullExtraMedium" hull.2="hullExtraHeavy" ambient.i="0.4" light.0.i="0.6" light.0.a="45" light.0.b="20" light.1.i="0.3" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180">
 wallHeight = DomeWall
 RD = (DomeSlope + 1) 
 / 4</script>

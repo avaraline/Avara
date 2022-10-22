@@ -1,8 +1,6 @@
 <map>
   <SkyColor n="64" verticalRangeMax="8000" fill="#000000" frame="#ff2c79" />
-  <set designer="inio (Ian Rickard) inio@imjraf.com." information="drop out the bottom, drop in the top.
-remade by Yo-Yo, with music, less polygons etc. fun!
-load up on ammo, then go hide in the disco balls! :)" wallHeight="0" baseHeight="100" goodyHeight="1.8" goodySpin=".33 * 15" goodyScale="3" goodyDelay="2 * 15" numGrenades="500" numMissiles="500" outDist="10" ambient.i="0" light.0.i="2" light.0.a="10" light.0.b="0" light.1.i="1" light.1.a="10" light.1.b="180" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
+  <set designer="inio (Ian Rickard) inio@imjraf.com." information="drop out the bottom, drop in the top.&#10;remade by Yo-Yo, with music, less polygons etc. fun!&#10;load up on ammo, then go hide in the disco balls! :)" wallHeight="0" baseHeight="100" goodyHeight="1.8" goodySpin=".33 * 15" goodyScale="3" goodyDelay="2 * 15" numGrenades="500" numMissiles="500" outDist="10" ambient.i="0" light.0.i="2" light.0.a="10" light.0.b="0" light.1.i="1" light.1.a="10" light.1.b="180" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <Wall fill="#2d2d2d" frame="#000000" x="56.31944444444444" z="59.20138888888889" w="55" d="55.06944444444444" h="0" y="0" />
   <unique vars="gTaken gReplace" />
   <Goody y="goodyHeight" speed="goodySpin" shape="bspGrenade" out="gTaken" start="gReplace" grenades="numGrenades" yon="20" scale="goodyScale" fill="#fffb00" frame="#ff2600" cx="40.55555555555556" cz="44.02777777777778" angle="135" />

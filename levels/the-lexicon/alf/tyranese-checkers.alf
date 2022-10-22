@@ -141,7 +141,7 @@
   <set wallHeight="2" wallYon="0.001" />
   <Field enter="@crush" deltaY="0" deltaX="0" deltaZ="0" visible="false" fill="#ffffff" frame="#000000" cx="49.583333333333336" cz="43.05555555555556" angle="225" x="12.083333333333334" z="50.486111111111114" w="5" d="5" h="0" y="50" />
   <WallDoor openSpeed="50" closeSpeed="50" deltaY="5" shotPower="500" didOpen="@reset" open="@crush" close="@reset" closeDelay="5" openSound="0" closeSound="0" volume="0" fill="#ff82d6" frame="#000000" x="12.083333333333334" z="50.486111111111114" w="5" d="5" h="0" y="48" />
-  <script>
+  <script pixelToThickness="0.125" designer="Apollo &lt;apollo@avara.org&gt;" information="Slo mo fo says trick or treat." defaultLives="5" fill="#e4e4e4" cx="12.63888888888889" cz="50.486111111111114" r="1.3194444444444446" angle="315" frame="#f42300" wallHeight="2" wallYon="0.001">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

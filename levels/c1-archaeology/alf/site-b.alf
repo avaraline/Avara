@@ -58,9 +58,6 @@
   <WallDoor shield="5" fill="#ab30d6" frame="#000000" x="50.13888888888889" z="11.38888888888889" w="5" d="5" h="10" />
   <WallDoor shield="5" fill="#ab30d6" frame="#000000" x="8.88888888888889" z="49.51388888888889" w="5" d="5" h="10" />
   <Timer in="@get" wait="300" out="@transform" />
-  <set designer="Lord Anon III" information="a ruined temple to an unknown 
-diety. There apears to be a lock-and-key 
-mechanism on top of the center altar, but the 
-key apears to be lost." />
+  <set designer="Lord Anon III" information="a ruined temple to an unknown &#10;diety. There apears to be a lock-and-key &#10;mechanism on top of the center altar, but the &#10;key apears to be lost." />
   <WallDoor deltaY="6" open="@transform" fill="#009600" frame="#000000" x="37.63888888888889" z="44.51388888888889" w="5" d="15" h="0.25" />
 </map>

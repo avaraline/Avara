@@ -3,10 +3,7 @@
   <set targDoor="targ1" targGoal="targ2" ammoSnipeTime="15 * 6" ammoSnipeQuant="3" ammoMainTime="15 * 15" ammoMainQuant="6" cheaterWatch="scoutMask" cheaterBase="fortWallY -1" cheaterHeight="6" cheaterForce="3" clampSpeed="100 / 15" embShield="26" embY="120" />
   <SkyColor fill="#4180ff" frame="#a8d6ff" />
   <GroundColor fill="#7a4300" />
-  <set information="Yellow and blue teams.
-Enter the other team's fort, destroy their generator, and return to your fort to win.
-Oh, and defend your fort too.
-See the read me file for explanations of the switches." />
+  <set information="Yellow and blue teams.&#10;Enter the other team's fort, destroy their generator, and return to your fort to win.&#10;Oh, and defend your fort too.&#10;See the read me file for explanations of the switches." />
   <Text in="@BlueKilled" showEveryone="true" text="Blue generator destroyed." cx="2.1875" cz="7.569444444444445" r="2.1875" />
   <Text in="@YellowKilled" showEveryone="true" text="Yellow generator destroyed." cx="2.1875" cz="7.569444444444445" r="2.1875" />
   <Text in="@YellowWin" showEveryone="true" wait="3" text="Yellow team: return to base." cx="2.1875" cz="7.569444444444445" r="2.1875" />
@@ -582,7 +579,7 @@ See the read me file for explanations of the switches." />
   <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="219.6527777777778" cz="90.625" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoMainTime" />
   <Teleporter win="5000" mask="T2" start="@YellowWin" stop="@YellowKilled" fill="#fffb00" frame="#000000" cx="212.1527777777778" cz="73.125" angle="135" />
-  <script>
+  <script pixelToThickness="0.125" missilePower="2" defaultLives="10" fortWallY="12" fortDoorTopY="4" fortWindowLargeBotY="4" fortWindowLargeTopY="8.3" fortWindowSmallBotY="7.5" fortWindowSmallTopY="9.5" fortInnerWallTopY="2.5" fortBarrierTopY="5" fortShieldDoor="32" fortShieldBarrier="20" fortShieldObject="10" fortDoorSpeed="5" fortDoorScoreHit="10" fortDoorScoreKill="100" fortBarrierScoreHit="10" fortBarrierScoreKill="100" fortObjectShape="bspDoubleCube" fortObjectScale="2" fortObjectY="2" fortObjectScoreHit="10" fortObjectScoreKill="100" guardAtckY="fortWindowSmallBotY + 1" guardAtckShield="22" guardAtckPower="2" guardAtckFreq="28" guardAtckSpeed="6" guardAtckWatch="playerMask + robotMask" guardDefY="2" guardDefShield="30" guardDefPower=".25" guardDefFreq="15" guardDefSpeed="10" guardDefWatch="playerMask + robotMask" ufoYStart="5" ufoYMin="3" ufoYMax="fortWallY -2" ufoShield="18" ufoAccel="0.04" ufoHSick="1" ufoHRange="6 * 5" ufoPower=".8" ufoBLength="4" ufoBSpeed="2" ufoBCharge="10 * 15" ufoWatch="playerMask" targDoor="targ1" targGoal="targ2" ammoSnipeTime="15 * 6" ammoSnipeQuant="3" ammoMainTime="15 * 15" ammoMainQuant="6" cheaterWatch="scoutMask" cheaterBase="fortWallY -1" cheaterHeight="6" cheaterForce="3" clampSpeed="100 / 15" embShield="26" embY="120" fill="#009600" cx="212.1527777777778" cz="73.125" r="1.875" angle="45" frame="#000000" information="Yellow and blue teams.&#10;Enter the other team's fort, destroy their generator, and return to your fort to win.&#10;Oh, and defend your fort too.&#10;See the read me file for explanations of the switches." wallHeight="fortBarrierTopY" wallYon="0" baseHeight="0" mStopAll="@YellowKilled" x="198.4027777777778" z="88.125" w="22.5" d="5" h="0">
 object Teleporter
   destGroup = @death
   mask = allTeams - T2

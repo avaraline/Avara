@@ -51,8 +51,7 @@
   <Ufo y="230" start="@wave2" killMsg="@wave2kill" fill="#fffc79" frame="#ff56d6" cx="61.25" cz="64.375" angle="225" />
   <Counter n="3" in="@wave1kill" out="@wave2" />
   <Counter n="3" in="@wave2kill" out="@winAll" />
-  <set designer="Juri Munkki" information="There have been several raids on this small outpost. 
-Your task is to make sure they stop." />
+  <set designer="Juri Munkki" information="There have been several raids on this small outpost. &#10;Your task is to make sure they stop." />
   <SkyColor verticalRangeMin="20" verticalRangeMax="300" n="5" fill="#ffd479" frame="#ab82ff" />
   <GroundColor fill="#2d2d2d" />
   <Solid shape="804" scale="4" fill="#c7c7c7" frame="#000000" cx="45" cz="95" angle="225" />

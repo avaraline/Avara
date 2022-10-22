@@ -1,8 +1,7 @@
 <map>
   <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="72.43055555555556" cz="72.67361111111111" angle="45" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" frame="#000000" cx="72.43055555555556" cz="72.67361111111111" angle="45" />
-  <set designer="Malkavian - moneta@avara.com" information="Movement:
-Ain’t nobody gonna hold me back, ain’t nobody gonna hold me down.  Strike a pose, there’s nothing do it.  Vogue, vogue, vogue." />
+  <set designer="Malkavian - moneta@avara.com" information="Movement:&#10;Ain’t nobody gonna hold me back, ain’t nobody gonna hold me down.  Strike a pose, there’s nothing do it.  Vogue, vogue, vogue." />
   <SkyColor fill="#008881" frame="#c9f1ee" />
   <GroundColor fill="#010115" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#010115" frame="#000000" cx="74.30555555555556" cz="72.70833333333334" angle="45" />

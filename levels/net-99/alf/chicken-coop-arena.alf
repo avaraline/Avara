@@ -1,9 +1,5 @@
 <map>
-  <set designer="Plastic Chicken" information="&quot;&quot;...you run around like a chicken with it's head cut off&quot;&quot; 
--Mousse (or bungl)
-
-&quot;&quot;i know!¬  :D!¬&quot;&quot;
--My response" />
+  <set designer="Plastic Chicken" information="&quot;&quot;...you run around like a chicken with it's head cut off&quot;&quot; &#10;&#10;-Mousse (or bungl)&#10;&#10;&#10;&#10;&quot;&quot;i know!¬  :D!¬&quot;&quot;&#10;&#10;-My response" />
   <GroundColor fill="#000000" />
   <SkyColor fill="#00012d" frame="#000000" />
   <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" fill="#d82679" frame="#d82679" cx="93.125" cz="6.25" angle="45" />
@@ -97,7 +93,7 @@
   <set baseHeight="10" />
   <Teleporter group="6" yon="50" shape="bspSwirlTele" scale="2" destGroup="6" speed="3" fill="#00d5ff" frame="#000000" cx="36.25" cz="128.75" angle="45" />
   <Teleporter group="6" yon="50" shape="bspSwirlTele" scale="2" destGroup="6" speed="3" fill="#00d5ff" frame="#000000" cx="138.125" cz="51.875" angle="225" />
-  <script>
+  <script pixelToThickness="0.125" designer="Plastic Chicken" information="&quot;&quot;...you run around like a chicken with it's head cut off&quot;&quot; &#10;&#10;-Mousse (or bungl)&#10;&#10;&#10;&#10;&quot;&quot;i know!¬  :D!¬&quot;&quot;&#10;&#10;-My response" fill="#00d142" cx="42.5" cz="127.5" r="1.875" angle="45" frame="#000000" x="50.9375" z="53.75" w="10.625" d="5" h="0" wallHeight="2.6" baseHeight="10" wallYon="0">
 baseHeight=0
 
 object Incarnator

@@ -243,8 +243,7 @@
   <Timer in="mTaken" out="mShow" wait="300" />
   <Goody shape="bspMissile" y="7" speed="6" missiles="2" start="mShow" out="mTaken" fill="#ffffff" frame="#431579" cx="132.29166666666669" cz="137.29166666666669" angle="45" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#431579" cx="132.29166666666669" cz="137.29166666666669" angle="45" />
-  <set designer="S. Carmel" information="macabre:
-eyes half-shut, clothes torn up, wondering why my tired eyes can no longer cry." />
+  <set designer="S. Carmel" information="macabre:&#10;eyes half-shut, clothes torn up, wondering why my tired eyes can no longer cry." />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="350" />

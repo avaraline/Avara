@@ -1,8 +1,5 @@
 <map>
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Pulled up beside me in a blue cadillac.
-Said 'What kind of imagination do you possess?'
-Open a goody nook by shooting it and subsequently close 
-the one on the opposite side. Also, watch out for missiles." missilePower="1.65" missileAcceleration="0.15" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Pulled up beside me in a blue cadillac.&#10;Said 'What kind of imagination do you possess?'&#10;Open a goody nook by shooting it and subsequently close &#10;the one on the opposite side. Also, watch out for missiles." missilePower="1.65" missileAcceleration="0.15" />
   <Timer in="@start" wait="1" out="@goN" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="27.326388888888893" cz="0.8333333333333335" angle="45" />
   <GroundColor fill="#000000" />
@@ -147,7 +144,7 @@ the one on the opposite side. Also, watch out for missiles." missilePower="1.65"
   <WallDoor openSound="0" closeSound="0" volume="0" deltaZ="-3.5" deltaY="0" open="@goS" close="@offS" didClose="@goN" didOpen="@offN" hitMsg="@goS" shotPower="5" openSpeed="20" closeSpeed="20" fill="#d6d0ab" frame="#000000" x="66.49305555555556" z="78.81944444444444" w="3.125" d="3.75" h="0" />
   <Incarnator y="5" cx="45.55555555555556" cz="24.722222222222225" angle="270" />
   <Sound y="40" volume="20" loopCount="-1" sound="snArcticWind" cx="53.68055555555556" cz="32.56944444444444" angle="45" />
-  <script>
+  <script pixelToThickness="0.125" designer="Apollo &lt;apollo@avara.org&gt;" information="Pulled up beside me in a blue cadillac.&#10;Said 'What kind of imagination do you possess?'&#10;Open a goody nook by shooting it and subsequently close &#10;the one on the opposite side. Also, watch out for missiles." missilePower="1.65" missileAcceleration="0.15" fill="#e4e4e4" cx="52.986111111111114" cz="47.56944444444444" r="1.3194444444444464" angle="315" frame="#f42300" x="82.11805555555556" z="52.56944444444444" w="1.875" d="20" h="0" wallHeight="1.95">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

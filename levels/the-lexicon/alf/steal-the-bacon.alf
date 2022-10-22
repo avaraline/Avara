@@ -2,9 +2,7 @@
   <GroundColor fill="#ffffff" />
   <SkyColor fill="#011279" frame="#ffffff" />
   <Teleporter y="200" shape="0" win="0" start="@endGame" activeRange="2000" fill="#565656" frame="#d6a800" cx="126.14583333333334" cz="26.041666666666668" angle="45" />
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Play for points. 3 minutes. Snag the 
-center A for 1000 points and run for your life.
-Taking the A arms everyone else." wallHeight="2" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Play for points. 3 minutes. Snag the &#10;center A for 1000 points and run for your life.&#10;Taking the A arms everyone else." wallHeight="2" />
   <Wall fill="#ffd479" frame="#000000" x="59.93055555555556" z="61.45833333333334" w="5" d="20" h="0" />
   <Wall fill="#ffd479" frame="#000000" x="74.93055555555556" z="63.95833333333334" w="5" d="15" h="0" />
   <Wall fill="#ffd479" frame="#000000" x="69.93055555555556" z="53.958333333333336" w="15" d="5" h="0" />
@@ -30,7 +28,7 @@ Taking the A arms everyone else." wallHeight="2" />
   <Timer in="@start" wait="1" out="@centerOn" />
   <Timer in="@centerTaken" wait="1" out="@onRefill" />
   <Timer in="@onRefill" wait="1" out="@offRefill" />
-  <script>
+  <script pixelToThickness="0.125" fill="#e4e4e4" cx="69.58333333333334" cz="34.02777777777778" r="1.31944444444445" angle="315" frame="#f42300" designer="Apollo &lt;apollo@avara.org&gt;" information="Play for points. 3 minutes. Snag the &#10;center A for 1000 points and run for your life.&#10;Taking the A arms everyone else." wallHeight="8">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

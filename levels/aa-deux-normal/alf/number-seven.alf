@@ -5,8 +5,7 @@
   <Goody shape="bspMissile" y="1.75" speed="2" missiles="2" start="mShow" out="mTaken" yon="60" fill="#ffffff" frame="#000000" cx="63.68055555555556" cz="128.95833333333334" angle="45" />
   <Sound y="100" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="98.68055555555556" cz="128.29861111111111" angle="45" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="98.68055555555556" cz="128.29861111111111" angle="45" />
-  <set designer="Malkavian - moneta@avara.com" information="Number Seven:
-Have I begun repeating myself yet?" light.0.i="0.8" light.0.a="20" light.0.b="10" />
+  <set designer="Malkavian - moneta@avara.com" information="Number Seven:&#10;Have I begun repeating myself yet?" light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <SkyColor fill="#8b1935" frame="#f2d5c6" />
   <GroundColor fill="#2e0108" />
   <Teleporter group="-1" y="-30" activeRange="34 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" fill="#2e0108" frame="#000000" cx="100.55555555555556" cz="128.33333333333334" angle="45" />

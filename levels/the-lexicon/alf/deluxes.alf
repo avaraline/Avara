@@ -100,7 +100,7 @@
   <And in="@start" out="mShow" />
   <Goody speed="25" shape="bspAvaraA" grenades="8" missiles="3" y="103.62" start="mShow" out="mTaken" fill="#005ea3" frame="#fffed5" cx="83.125" cz="47.63888888888889" angle="225" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <script>
+  <script pixelToThickness="0.125" fill="#e4e4e4" cx="72.70833333333334" cz="58.958333333333336" r="1.31944444444445" angle="315" frame="#f42300" designer="Apollo &lt;apollo@avara.org&gt;" information="Ha ha! &quot;&quot;Deluxes&quot;&quot; for 87 points! I win!" wallHeight="0" wallYon="0" x="101.80555555555556" z="96.38888888888889" w="1.25" d="15" h="0">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

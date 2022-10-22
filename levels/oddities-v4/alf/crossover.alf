@@ -1,8 +1,5 @@
 <map>
-  <set StripSep="3" StripAH="100" StripBH="StripAH + StripSep" StripThick=".1" wallHeight="StripThick" floorTemplate="bspFloorFrame" goodyGrenades="3" goodyMissiles="7" goodyBoosters="1" defaultLives="6" gravity="0.78" missileTurnRate="100" missileAcceleration=".5" missilePower="grenadePower" information="Walk off the end of a strip to get ammo. 
-The switch controls whether falls are deadly.
-Missiles are faster & more powerful.
-Oh, and the switch sometimes gets flipped automatically." />
+  <set StripSep="3" StripAH="100" StripBH="StripAH + StripSep" StripThick=".1" wallHeight="StripThick" floorTemplate="bspFloorFrame" goodyGrenades="3" goodyMissiles="7" goodyBoosters="1" defaultLives="6" gravity="0.78" missileTurnRate="100" missileAcceleration=".5" missilePower="grenadePower" information="Walk off the end of a strip to get ammo. &#10;The switch controls whether falls are deadly.&#10;Missiles are faster & more powerful.&#10;Oh, and the switch sometimes gets flipped automatically." />
   <SkyColor verticalRangeMax="2000" n="15" fill="#004242" frame="#007879" />
   <GroundColor fill="#00a8aa" />
   <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" group="-1" fill="#00ec00" frame="#000000" cx="7.5" cz="25.833333333333336" angle="225" />

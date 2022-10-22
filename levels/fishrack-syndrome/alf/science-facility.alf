@@ -1,11 +1,7 @@
 <map>
   <SkyColor n="1024" fill="#ffffff" frame="#ff7c00" />
   <GroundColor fill="#c7c7c7" />
-  <set designer="Plastic Chicken" information="Biohazard...radioactivity...humm...I wonder what is in this barrel?  Maybe I'll shoot it...
-
-Limited to 6 minutes of game play.
-
-Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="7" hull.0="1007" hull.1="hull[0]" hull.2="hull[0]" />
+  <set designer="Plastic Chicken" information="Biohazard...radioactivity...humm...I wonder what is in this barrel?  Maybe I'll shoot it...&#10;&#10;&#10;&#10;Limited to 6 minutes of game play.&#10;&#10;&#10;&#10;Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="7" hull.0="1007" hull.1="hull[0]" hull.2="hull[0]" />
   <Incarnator y="10" cx="29.375" cz="29.375" angle="135" />
   <unique vars="nuke" />
   <Solid shape="5497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="30.625" cz="33.75" angle="135" />

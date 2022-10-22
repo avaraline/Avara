@@ -177,9 +177,7 @@
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="225" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="225" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="58.125" cz="59.30555555555556" angle="225" />
-  <set designer="Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;" information="A simulation of Basketball in avaraland.  
-Two teams, one of yellow, one of green, attempt to score in the basket of the other team's color.
-Each player has 200 lives and the game lasts 7 min." />
+  <set designer="Dave &quot;&quot;Trotsky&quot;&quot; McGee &lt;mcgeed@gladstone.uoregon.edu&gt;" information="A simulation of Basketball in avaraland.  &#10;Two teams, one of yellow, one of green, attempt to score in the basket of the other team's color.&#10;Each player has 200 lives and the game lasts 7 min." />
   <Text showEveryone="true" text="Yellow Scores!!" in="@yellowscore" cx="58.125" cz="59.30555555555556" r="1.25" />
   <Text showEveryone="true" text="Green Scores!!" in="@greenscore" cx="58.125" cz="59.30555555555556" r="1.25" />
   <Sound isPlaced="false" isAmbient="false" sound="1771" volume="1" start="@greenscore" cx="88.125" cz="1.8055555555555558" angle="45" />

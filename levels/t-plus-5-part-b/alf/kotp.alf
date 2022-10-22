@@ -1,6 +1,5 @@
 <map>
-  <set designer="Kyle 'Vader' Blessing - vader@avara.org" information="This is like a KOTH, but isn't revolved around teams. Stay on the green protion of the pole for 60 seconds to win.  Good luck!
-Special thank's to Kiff!" />
+  <set designer="Kyle 'Vader' Blessing - vader@avara.org" information="This is like a KOTH, but isn't revolved around teams. Stay on the green protion of the pole for 60 seconds to win.  Good luck!&#10;Special thank's to Kiff!" />
   <SkyColor n="15" fill="#8a8a8a" frame="#bb1800" />
   <GroundColor fill="#d4fdd5" />
   <Timer in.0="@start" in.1="@now1" wait="3" out="in[1]" />

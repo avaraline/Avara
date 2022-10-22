@@ -8,8 +8,7 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspGrenade" y="10.75" speed="2" grenades="4" start="mShow" out="mTaken" yon="30" fill="#ffffff" frame="#000000" cx="95.55555555555556" cz="82.70833333333334" angle="45" />
-  <set designer="Malkavian - moneta@avara.com" information="Dave:
-Psycho-killer gonna get ‘cha." light.0.i="0.8" light.0.a="20" light.0.b="10" />
+  <set designer="Malkavian - moneta@avara.com" information="Dave:&#10;Psycho-killer gonna get ‘cha." light.0.i="0.8" light.0.a="20" light.0.b="10" />
   <SkyColor fill="#094c8a" frame="#f2e9cb" />
   <GroundColor fill="#150f00" />
   <unique vars="mShow mTaken" />

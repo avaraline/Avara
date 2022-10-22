@@ -38,9 +38,7 @@
   <Wall fill="#aa7942" frame="#000000" x="31.5625" z="49.09722222222222" w="18.125" d="2.5" h="0" />
   <SkyColor fill="#73fdff" frame="#00d5ff" />
   <GroundColor fill="#ffd300" />
-  <set designer="SomeGuy &lt;someguy@avara.net&gt;" information="Welcome to Avara Station. It is preferred you 
-purchase all items at the counter before you leave. 
-Thankyou and come again!" />
+  <set designer="SomeGuy &lt;someguy@avara.net&gt;" information="Welcome to Avara Station. It is preferred you &#10;purchase all items at the counter before you leave. &#10;Thankyou and come again!" />
   <Teleporter group="-1" y="-30" activeRange="130" deadRange="80" destGroup="@recenter" shape="0" fill="#000000" frame="#000000" cx="36.875" cz="57.84722222222222" angle="225" />
   <set wallHeight="0" />
   <Wall fill="#d4feff" frame="#000000" x="36.5625" z="57.53472222222222" w="5.625" d="0.625" h="0" />

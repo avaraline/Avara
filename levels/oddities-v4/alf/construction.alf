@@ -1,9 +1,7 @@
 <map>
   <SkyColor fill="#8a8a8a" frame="#01168a" />
   <GroundColor fill="#aa7942" />
-  <set information="Step on the lighter-colored platforms to raise the towers; use the switches in the white box to dissasemble them.
-Step on the gray bars to teleport between towers.
-Don’t stay on the ground too long." TowerHeight="12" GuardFreq="20 / 3" GuardPower="0.7 / 3" GuardSpeed="6" GuardSecBase=".5" GuardBlock="7" defaultLives="5" />
+  <set information="Step on the lighter-colored platforms to raise the towers; use the switches in the white box to dissasemble them.&#10;Step on the gray bars to teleport between towers.&#10;Don’t stay on the ground too long." TowerHeight="12" GuardFreq="20 / 3" GuardPower="0.7 / 3" GuardSpeed="6" GuardSecBase=".5" GuardBlock="7" defaultLives="5" />
   <Incarnator cx="80.90277777777779" cz="97.77777777777779" angle="175.5" />
   <Teleporter yon="0.01" y="-20" win="5000" start="@winTeam" activeRange="10000" fill="#00ec00" frame="#000000" cx="5.833333333333334" cz="21.458333333333336" angle="225" />
   <set wallHeight="TowerHeight" />

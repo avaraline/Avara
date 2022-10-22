@@ -1,8 +1,7 @@
 <map>
   <SkyColor fill="#fbf4ca" frame="#998654" />
   <GroundColor fill="#2c2518" />
-  <set designer="Mondo" information="Many blocks near the center are destroyable.
-Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" maxStartMissiles="0" wallHeight="2" />
+  <set designer="Mondo" information="Many blocks near the center are destroyable.&#10;Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" maxStartMissiles="0" wallHeight="2" />
   <Wall fill="#cdbe90" frame="#000000" x="22.708333333333336" z="109.30555555555556" w="15" d="15" h="0" />
   <set wallHeight="4" />
   <Wall fill="#998654" frame="#000000" x="30.208333333333336" z="84.93055555555556" w="8.75" d="25" h="0" />
@@ -200,7 +199,7 @@ Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultL
   <Incarnator y="30" cx="107.70833333333334" cz="109.30555555555556" angle="315" />
   <Incarnator y="30" cx="61.458333333333336" cz="63.05555555555556" angle="315" />
   <Incarnator y="30" cx="68.95833333333334" cz="70.55555555555556" angle="135" />
-  <script>
+  <script pixelToThickness="0.125" fill="#fbf4ca" cx="65.20833333333334" cz="66.80555555555556" r="1.25" angle="225" frame="#000000" designer="Mondo" information="Many blocks near the center are destroyable.&#10;Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" maxStartMissiles="0" wallHeight="9" x="75.20833333333334" z="76.80555555555556" w="10" d="10" h="0" baseHeight="0">
 object Teleporter
 spin = 0
 y = -10

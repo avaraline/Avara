@@ -3,9 +3,7 @@
   <Wall fill="#8a8a8a" frame="#000000" x="110.79861111111111" z="29.40972222222222" w="18.125" d="32.986111111111114" h="0" y="5" />
   <set wallHeight=".5" />
   <Wall fill="#8a8a8a" frame="#000000" x="35.03472222222222" z="29.40972222222222" w="18.125" d="32.986111111111114" h="0" y="5" />
-  <set designer="Marc A. Richter" information="Scamper around the industrial park. The windows do break...
-Copyrigth ©1996, Marc A. Richter
-http://www.vitinc.com/~marc" />
+  <set designer="Marc A. Richter" information="Scamper around the industrial park. The windows do break...&#10;Copyrigth ©1996, Marc A. Richter&#10;http://www.vitinc.com/~marc" />
   <Incarnator y="15" cx="22.15277777777778" cz="64.93055555555556" angle="225" />
   <Area enter="@inArea1" exit="@outArea1" cx="35.65972222222223" cz="47.25694444444444" r="3.645833333333332" />
   <set wallHeight="1.5" />
@@ -212,7 +210,7 @@ http://www.vitinc.com/~marc" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
   <Goody shape="bspMissile" speed="2" yon="50" y="16" missiles="2" start="gShow" out="gTaken" fill="#000000" frame="#000000" cx="91.04166666666667" cz="32.5" angle="225" />
-  <script>
+  <script pixelToThickness="0.125" wallHeight="1.5" fill="#009600" frame="#000000" designer="Marc A. Richter" information="Scamper around the industrial park. The windows do break...&#10;Copyrigth ©1996, Marc A. Richter&#10;http://www.vitinc.com/~marc" cx="66.59722222222223" cz="33.68055555555556" r="2.5" angle="45">
 object Teleporter
 shape=0
 group=1

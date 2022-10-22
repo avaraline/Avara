@@ -24,11 +24,7 @@ Green team wins!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
   <Text in="m4" showEveryone="true" text="Blue team has 4 goals!
 Blue team wins!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
   <Text in="@DEATH" showEveryone="true" text="DEATH TO THE REMAINING PLAYERS!!!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
-  <set information="The weirdest ballgame ever! Blue vs. green.
-  The player holding the ball cannot enter teleporters or jump.
-  All players will die in 15 minutes.
-  The ball is only visible within 13 meters.
-  Enemy ammo doesn't work for you." />
+  <set information="The weirdest ballgame ever! Blue vs. green.&#10;  The player holding the ball cannot enter teleporters or jump.&#10;  All players will die in 15 minutes.&#10;  The ball is only visible within 13 meters.&#10;  Enemy ammo doesn't work for you." />
   <Teleporter yon="0.01" y="200" win="0" activeRange="2000" mask="TA" start="@WinA" fill="#00ec00" frame="#000000" cx="38.4375" cz="15.833333333333336" angle="225" />
   <Incarnator mask="TB" cx="32.77777777777778" cz="43.88888888888889" angle="90" />
   <Incarnator mask="TA" cx="81.52777777777779" cz="30.138888888888893" angle="270" />

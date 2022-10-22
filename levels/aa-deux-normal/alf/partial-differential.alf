@@ -5,8 +5,7 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspMissile" y="1.75" speed="2" missiles="3" start="mShow" out="mTaken" yon="60" fill="#ffffff" frame="#000000" cx="141.18055555555557" cz="178.95833333333334" angle="45" />
-  <set designer="Malkavian - moneta@avara.com" information="Partial Differential:
-The sum is greater than the difference between the part that you have and the part that you just blew out of the freakin’ sky." />
+  <set designer="Malkavian - moneta@avara.com" information="Partial Differential:&#10;The sum is greater than the difference between the part that you have and the part that you just blew out of the freakin’ sky." />
   <SkyColor fill="#8b230c" frame="#f2cfca" />
   <GroundColor fill="#010115" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#010115" frame="#000000" cx="118.68055555555556" cz="178.95833333333334" angle="45" />

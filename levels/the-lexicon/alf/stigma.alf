@@ -49,7 +49,7 @@
   <Goody speed="5" shape="bspMissile" missiles="4" y="4" start="mShow" out="mTaken" fill="#aa7900" frame="#fffed5" cx="18.055555555555557" cz="41.25" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
   <Hologram shape="bspStandardFloor" y="2" scale="0.3" fill="#aa7900" frame="#fffed5" cx="18.055555555555557" cz="41.25" angle="225" />
-  <script>
+  <script pixelToThickness="0.125" fill="#e4e4e4" cx="65.90277777777779" cz="40.833333333333336" r="1.3194444444444429" angle="315" frame="#f42300" wallHeight="2" x="72.43055555555556" z="32.43055555555556" w="7.5" d="7.5" h="0">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000
@@ -100,9 +100,7 @@ end</script>
   <Incarnator y="10" cx="5.555555555555555" cz="41.80555555555556" angle="90" />
   <Incarnator y="10" cx="98.68055555555556" cz="21.805555555555557" angle="270" />
   <Incarnator y="10" cx="27.430555555555557" cz="61.80555555555556" angle="90" />
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Jack bore his burden well, but he 
-deserved the disfigurement after making fun of so 
-many others who had it." wallHeight="0" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Jack bore his burden well, but he &#10;deserved the disfigurement after making fun of so &#10;many others who had it." wallHeight="0" />
   <set wallHeight="0.25" />
   <Wall fill="#fffed5" frame="#000000" x="76.18055555555556" z="41.18055555555556" w="15" d="10" h="0" y="5.75" />
   <Wall fill="#fffed5" frame="#000000" x="54.93055555555556" z="41.18055555555556" w="15" d="10" h="0" y="5.75" />

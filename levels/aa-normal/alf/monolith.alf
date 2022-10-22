@@ -1,8 +1,5 @@
 <map>
-  <set designer="Jim Doolittle 'Gimli'  &lt;gimli@avara.com&gt;" information="The structure stood amongst the gases of the 
-Avara.  Strangely attracted to the building, the survivors of 
-the gases used it to stage mock combats to alleviate the 
-boredom and despair of their new existence." />
+  <set designer="Jim Doolittle 'Gimli'  &lt;gimli@avara.com&gt;" information="The structure stood amongst the gases of the &#10;Avara.  Strangely attracted to the building, the survivors of &#10;the gases used it to stage mock combats to alleviate the &#10;boredom and despair of their new existence." />
   <Wall fill="#8a8a8a" frame="#000000" x="148.33333333333334" z="92.70833333333334" w="5" d="5" h="5" />
   <Wall fill="#8a8a8a" frame="#000000" x="148.33333333333334" z="107.70833333333334" w="5" d="5" h="5" />
   <Wall fill="#8a8a8a" frame="#000000" x="168.33333333333334" z="107.70833333333334" w="5" d="5" h="5" />
@@ -32,7 +29,7 @@ boredom and despair of their new existence." />
   <Timer in="gTaken" out="gShow" wait="300" />
   <Goody shape="bspMissile" speed="2" yon="20" y="11.7" missiles="3" start="gShow" out="gTaken" fill="#ffd300" frame="#000000" cx="190.2777777777778" cz="97.84722222222223" angle="45" />
   <Wall fill="#0048aa" frame="#000000" x="158.33333333333334" z="100.20833333333334" w="25" d="20" h="0.25" y="5" />
-  <script>
+  <script pixelToThickness="0.125" fill="#d6a800" frame="#000000" x="149.93055555555554" z="117.53472222222223" w="8.194444444444429" d="14.652777777777771" h="0" designer="Jim Doolittle 'Gimli'  &lt;gimli@avara.com&gt;" information="The structure stood amongst the gases of the &#10;Avara.  Strangely attracted to the building, the survivors of &#10;the gases used it to stage mock combats to alleviate the &#10;boredom and despair of their new existence." cx="151.11111111111111" cz="46.875" r="2.5" angle="182.5">
 object 
 Incarnator
 y=

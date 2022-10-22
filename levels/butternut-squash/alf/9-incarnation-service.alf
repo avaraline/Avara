@@ -266,7 +266,7 @@
   <WallDoor y="400" deltaY="1" deltaX="-40" open="@incarn6" close="@incarn6Close" openSpeed="4" fill="#ffffff" frame="#76d6ff" x="114.0625" z="78.4375" w="0.625" d="4.375" h="0" />
   <Incarnator y="205" cx="106.59722222222223" cz="41.25" angle="270" />
   <Incarnator y="205" cx="40.486111111111114" cz="41.80555555555556" angle="90" />
-  <script>
+  <script pixelToThickness="0.125" wallHeight="10" fill="#fffb00" frame="#bb1800" cx="106.31944444444446" cz="78.61111111111111" r="2.0833333333333357" angle="270" x="87.5" z="59.6875" w="10" d="18.125" h="0" wallYon="0.1">
 object Incarnato-r
 y=205
 end</script>

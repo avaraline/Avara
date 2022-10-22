@@ -1,7 +1,5 @@
 <map>
-  <set designer="Malkavian - Oesian@jhu.edu" information="Internet Explorer:
-While not proven to be toxic, it’s definitely flawed.
-This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds in the area encircled in red on top of the pillar in the center." missilePower=".6" missileTurnRate="0.020" missileAcceleration="0.15" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
+  <set designer="Malkavian - Oesian@jhu.edu" information="Internet Explorer:&#10;While not proven to be toxic, it’s definitely flawed.&#10;This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds in the area encircled in red on top of the pillar in the center." missilePower=".6" missileTurnRate="0.020" missileAcceleration="0.15" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
   <SkyColor fill="#b8b8b8" frame="#686868" />
   <GroundColor fill="#000000" />
   <Timer in="@start" wait="65" out="@open" />

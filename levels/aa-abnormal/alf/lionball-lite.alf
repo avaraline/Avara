@@ -25,10 +25,7 @@
   <Incarnator y="30" team="2" cx="78.26388888888889" cz="140.69444444444446" angle="135" />
   <Incarnator y="30" team="2" cx="156.31944444444446" cz="237.98611111111114" angle="315" />
   <Incarnator y="30" team="2" cx="200" cz="191.52777777777777" angle="315" />
-  <set designer="Phy (jay9560@uidaho.edu)" information="5 minutes, 200 lives. Or, score 5 points, and
- you're automatically the winner!
-This is the LITE version; a specially optimized 
-version for faster gameplay." wallHeight="2" platHeight="3" plat2="1" level2="wallHeight + platHeight" level3="level2 + plat2" rampThickness="0.25" defaultLives="200" goodyY="7 -baseHeight" upVector="0.15" inVector="0.3" gameLength="4687" />
+  <set designer="Phy (jay9560@uidaho.edu)" information="5 minutes, 200 lives. Or, score 5 points, and&#10; you're automatically the winner!&#10;This is the LITE version; a specially optimized &#10;version for faster gameplay." wallHeight="2" platHeight="3" plat2="1" level2="wallHeight + platHeight" level3="level2 + plat2" rampThickness="0.25" defaultLives="200" goodyY="7 -baseHeight" upVector="0.15" inVector="0.3" gameLength="4687" />
   <Timer wait="gameLength" in="@start" out="@gameEnds" />
   <Teleporter y="-20" activeRange="1000" yon="0.01" start="@gameEnds" win="10" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" angle="135" />
   <Teleporter y="-20" activeRange="1000" yon="0.01" start="@gameEnds" win="10" fill="#ffffff" frame="#000000" cx="9.444444444444445" cz="380.06944444444446" angle="135" />

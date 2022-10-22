@@ -3,10 +3,7 @@
   <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#007600" frame="#000000" x="64.0625" z="44.93055555555556" w="8.125" d="7.5" h="3" />
   <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#007600" frame="#000000" x="35" z="15.868055555555557" w="7.5" d="8.125" h="3" />
   <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#007600" frame="#000000" x="35" z="73.99305555555556" w="7.5" d="8.125" h="3" />
-  <set information="Shoot the blocks to clear them out of your way.
-    Light & medium hulls have 4x shot power, but have no missiles or grenades; the heavy hull behaves like a standard medium.
-    15 minute time limit.
-    WARNING: Complex level. Expect lag." TheWall="10" wallHeight="TheWall" gravity="0.75" CPlatThick=".6" eyeHeight="1.23" lower="0" muddle="3" upper="6" ceiling="9" timeLimit="15 * 60" wa="ceiling" />
+  <set information="Shoot the blocks to clear them out of your way.&#10;    Light & medium hulls have 4x shot power, but have no missiles or grenades; the heavy hull behaves like a standard medium.&#10;    15 minute time limit.&#10;    WARNING: Complex level. Expect lag." TheWall="10" wallHeight="TheWall" gravity="0.75" CPlatThick=".6" eyeHeight="1.23" lower="0" muddle="3" upper="6" ceiling="9" timeLimit="15 * 60" wa="ceiling" />
   <Wall fill="#ffaca9" frame="#000000" x="35" z="44.93055555555556" w="50" d="50" h="0" />
   <Incarnator y="upper" cx="34.93055555555556" cz="16.180555555555557" angle="180" />
   <Wall fill="#565656" frame="#000000" x="49.375" z="18.993055555555557" w="21.25" d="1.875" h="0" />

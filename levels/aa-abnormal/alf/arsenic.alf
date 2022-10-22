@@ -1,8 +1,6 @@
 <map>
   <Teleporter group="-1" y="-30" activeRange="27 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" frame="#000000" cx="113.95833333333334" cz="104.58333333333334" angle="45" />
-  <set designer="KOTH Scripting by Hybrid, Layout by Malkavian" information="Arsenic:
-Your children will die of cancer.
-This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds in the area outlined in purple in the center." ambient.i=".1" light.0.i=".5" light.0.a="20" light.0.b="0" light.1.i=".3" light.1.a="45" light.1.b="180" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
+  <set designer="KOTH Scripting by Hybrid, Layout by Malkavian" information="Arsenic:&#10;Your children will die of cancer.&#10;This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds in the area outlined in purple in the center." ambient.i=".1" light.0.i=".5" light.0.a="20" light.0.b="0" light.1.i=".3" light.1.a="45" light.1.b="180" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
   <SkyColor fill="#ab1942" frame="#57132f" />
   <GroundColor fill="#481e31" />
   <Ramp y="0" deltaY="6" fill="#6d224b" frame="#000000" x="113.95833333333334" z="129.58333333333334" w="20" d="30" h="0" angle="0" />

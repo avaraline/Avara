@@ -1,8 +1,5 @@
 <map>
-  <set information="Enter building.
-Destroy reactor shields.
-Get out.
-One player only." hull.2="mediumHull" Floor1Height="5" Floor2Height="10" wallHeight="Floor1Height" Floor2Base="Floor1Height + 1" defaultLives="1" BlastShield="30" WallMass="100" WallGrav="0.12" WallAccel="0.95" WallShot="1" WallStart="@ReactorBlow" blastBeforeTimer="15" blastBeforeRange="5" blastAfterTimer="60" blastAfterRange="7" minePower="17" />
+  <set information="Enter building.&#10;Destroy reactor shields.&#10;Get out.&#10;One player only." hull.2="mediumHull" Floor1Height="5" Floor2Height="10" wallHeight="Floor1Height" Floor2Base="Floor1Height + 1" defaultLives="1" BlastShield="30" WallMass="100" WallGrav="0.12" WallAccel="0.95" WallShot="1" WallStart="@ReactorBlow" blastBeforeTimer="15" blastBeforeRange="5" blastAfterTimer="60" blastAfterRange="7" minePower="17" />
   <Counter in="@ShieldOff" n="2" restart="false" out.0="@CoreWarning" out.1="@CountdownTick" />
   <Timer in="@CountdownTick" wait="58" out="@CountdownTick" />
   <Distributor in="@CountdownTick" restart="false" out.0="@CText9" out.1="@CText8" out.2="@CText7" out.3="@CText6" out.4="@CText5" out.5="@CText4" out.6="@CText3" out.7="@CText2" out.8="@CText1" />

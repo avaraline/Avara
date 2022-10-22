@@ -197,7 +197,5 @@
   <Timer in="mTaken" out="mShow" wait="550" />
   <And in="@ClearDisp" out="@CloseDisp" />
   <And in="@DoneClear" out="@OpenDisp" />
-  <set information="Watch out for moving ice!
-The sphere is also quite deadly.
-WARNING: This level has been known to cause Avara to freeze (seriously)." />
+  <set information="Watch out for moving ice!&#10;The sphere is also quite deadly.&#10;WARNING: This level has been known to cause Avara to freeze (seriously)." />
 </map>

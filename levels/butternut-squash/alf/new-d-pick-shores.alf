@@ -7,7 +7,7 @@
   <set wallHeight="4" />
   <WallDoor open="@crush" close="@uncrush" didOpen="@uncrush" didClose="@crush" openSpeed="20" closeSpeed="100" deltaY="0" deltaX="10" volume="0" shotPower="5000" guardDelay="0" fill="#ffffff" frame="#000000" x="82.43055555555556" z="60.86805555555556" w="0.9722222222222285" d="5.347222222222221" h="0" y="-120" />
   <And in="@start" out="@crush" />
-  <script>
+  <script pixelToThickness="0.125" grenadePower="4.5" missilePower="3" missileTurnRate="0.1" missileAcceleration="0.8" defaultLives="5" baseHeight="120" fill="#ffffff" cx="86.38888888888889" cz="56.38888888888889" r="1.94444444444445" angle="135" frame="#a8bf94" wallYon="0.01" wallHeight="4">
 wallYon = 180
 
 object 

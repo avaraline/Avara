@@ -8,9 +8,7 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspGrenade" y="10.75" speed="2" grenades="4" start="mShow" out="mTaken" yon="30" fill="#ffffff" frame="#000000" cx="95.55555555555556" cz="82.70833333333334" angle="45" />
-  <set designer="KOTH Scripting by Hybrid, Layout by Malkavian" information="Dave:
-Psycho-killer gonna get ‘cha.
-This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds in the flat, dark blue area in the center of the structure." light.0.i="0.8" light.0.a="20" light.0.b="10" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
+  <set designer="KOTH Scripting by Hybrid, Layout by Malkavian" information="Dave:&#10;Psycho-killer gonna get ‘cha.&#10;This level supports only teams of Red, Green and Yellow.  The object of the game is to persevere for 100 seconds in the flat, dark blue area in the center of the structure." light.0.i="0.8" light.0.a="20" light.0.b="10" kTeamScore1="100" kInfinity="10000" kTeleportTheRestDelay="20" kADelay="2" kDefaultLives="100" />
   <SkyColor fill="#094c8a" frame="#f2e9cb" />
   <GroundColor fill="#150f00" />
   <unique vars="mShow mTaken" />

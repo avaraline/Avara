@@ -13,7 +13,7 @@
   <Goody shape="bspMissile" speed="4" yon="20" y="8" missiles="3" start="gShow" out="gTaken" fill="#0048aa" frame="#000000" cx="87.56944444444444" cz="71.45833333333334" angle="45" />
   <Wall fill="#8b0f00" frame="#000000" x="27.15277777777778" z="43.47222222222222" w="5" d="3.75" h="6" />
   <GroundColor fill="#570500" />
-  <script>
+  <script pixelToThickness="0.125" fill="#ff2600" frame="#8b0f00" cx="1.840277777777778" cz="1.9791666666666667" r="1.5625" angle="180">
 adjust SkyColor end
 
 object Sound
@@ -153,9 +153,7 @@ light[1] . i = 0.1light [1] . a  =  45light [1] . b = 180</script>
   <Wall fill="#8b0f00" frame="#000000" x="91.84027777777779" z="22.53472222222222" w="4.375" d="3.125" h="4" />
   <set timeLimit="300" defaultLives="10" grenadePower="2.25" missilePower="1.75" missileTurnRate="0.07" missileAcceleration="0.2" maxStartGrenades="12" maxStartMissiles="4" />
   <Incarnator y="15" cx="78.40277777777779" cz="3.0555555555555554" angle="180" />
-  <set designer="blassty &lt;r-reyes@neiu.edu&gt;" information="dark, red and bloody
-martian missiles are deadly.
-you have 10 lives and 5 minutes" />
+  <set designer="blassty &lt;r-reyes@neiu.edu&gt;" information="dark, red and bloody&#10;martian missiles are deadly.&#10;you have 10 lives and 5 minutes" />
   <Teleporter y="30" shape="0" group="@recenter" fill="#ff32a9" frame="#01168a" cx="39.375" cz="69.02777777777777" angle="135" />
   <Wall fill="#8b0f00" frame="#000000" x="45.9375" z="4.131944444444445" w="3.125" d="4.375" h="4" />
   <Wall fill="#8b0f00" frame="#000000" x="45.45138888888889" z="55.86805555555556" w="4.375" d="3.125" h="4" />

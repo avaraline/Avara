@@ -70,7 +70,7 @@
   <Ramp y="0" deltaY="4.5" fill="#8a8a8a" frame="#000000" x="160.27777777777777" z="54.02777777777778" w="22.5" d="17.5" h="0" angle="0" />
   <set baseHeight="5" />
   <Wall fill="#0048aa" frame="#000000" x="133.02083333333334" z="50.208333333333336" w="8.125" d="1.25" h="4" />
-  <script>
+  <script pixelToThickness="0.125" wallHeight="0" fill="#0048aa" cx="155.48611111111111" cz="54.236111111111114" r="1.875" angle="0" frame="#000000" x="160.27777777777777" z="54.02777777777778" w="22.5" d="17.5" h="0" baseHeight="5">
 object WallDoor
 open = @oGdoor
 close = @cGdoor

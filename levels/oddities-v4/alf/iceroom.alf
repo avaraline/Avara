@@ -1,7 +1,5 @@
 <map>
-  <set IceVSpace="6" IceShot="10" IceGrav="0" FFScale=".3" gravity="0.2" hull.2="hull[1]" targIce="targ1" RoomHeight="IceVSpace * 8" wallHeight="RoomHeight / 4" wallYon="200" AmbY="IceVSpace * 4 -baseHeight" AmbSound="snArcticWind" AmbVol="20" designer="Kevin Reid &lt;kpreid@ibm.net&gt;" information="Icebox cubed!
-The guard tends to attack stationary scouts.
-The red goody is worth getting." />
+  <set IceVSpace="6" IceShot="10" IceGrav="0" FFScale=".3" gravity="0.2" hull.2="hull[1]" targIce="targ1" RoomHeight="IceVSpace * 8" wallHeight="RoomHeight / 4" wallYon="200" AmbY="IceVSpace * 4 -baseHeight" AmbSound="snArcticWind" AmbVol="20" designer="Kevin Reid &lt;kpreid@ibm.net&gt;" information="Icebox cubed!&#10;The guard tends to attack stationary scouts.&#10;The red goody is worth getting." />
   <SkyColor fill="#0080ff" frame="#0048aa" />
   <GroundColor fill="#010e68" />
   <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="68.75" cz="51.875" angle="225" />

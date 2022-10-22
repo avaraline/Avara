@@ -1,8 +1,7 @@
 <map>
   <SkyColor fill="#a9a9a9" frame="#d6d6d6" />
   <GroundColor fill="#a9abd6" />
-  <set designer="Hazel - hazel@avara.org" information="The objective is for the GREEN Hector/s to survive  the blocks operated by the YELLOW Hector/s for 1:30 minutes!
-I designed this level for clans to test patential members before letting them join, but it’s good fun too." />
+  <set designer="Hazel - hazel@avara.org" information="The objective is for the GREEN Hector/s to survive  the blocks operated by the YELLOW Hector/s for 1:30 minutes!&#10;I designed this level for clans to test patential members before letting them join, but it’s good fun too." />
   <Teleporter mask="T1" shape="0" win="90000" start="@greenWin" out="@greenMsg" activeRange="3000" fill="#00c200" frame="#000000" cx="31.25" cz="56.18055555555556" angle="225" />
   <Teleporter mask="T2" win="0" shape="0" start="@greenWin" out="@greenMsg" activeRange="3000" fill="#00c200" frame="#000000" cx="31.25" cz="56.18055555555556" angle="225" />
   <Wall fill="#aaadff" frame="#000000" x="53.125" z="3.680555555555556" w="67.5" d="5" h="22.5" />

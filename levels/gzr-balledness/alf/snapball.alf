@@ -169,7 +169,7 @@
   <Timer in="mTaken" out="mShow" wait="grenW" />
   <Goody shape="bspGrenade" y="grenH" speed="2" grenades="numGren" start="mShow" out="mTaken" fill="#f1f1f1" frame="#bb1800" cx="72.60416666666666" cz="61.35416666666667" angle="90" />
   <Ball yon="70" start="@ballDrop" y="80" holdShieldLimit="30" shieldChargeRate="100" mass="ballMass" ejectPower="ejPower" carryScore="0" dropEnergy="2" shape="5555" fill="#f1f1f1" frame="#bb1800" cx="72.60416666666666" cz="61.35416666666667" angle="90" />
-  <script>
+  <script pixelToThickness="0.125" designer="Cowboy - jmcald@usa.net" information="Beware the closing door. Door order/available basket is random. Sudden Death is random - in some games it will happen and others not (always the last minute of play). 10,000 for a basket. Game is 5 minutes. Thanks to Taz! and Kniq for help and ideas!" defaultLives="300" missilePower="1.3" missileAcceleration="0.3" startY="9" grenDelay="125" numGren="12" missDelay="200" numMiss="8" fieldVis="false" zPower=".5" xPower=".5" yPower=".05" grenH="2" grenW="50" ballMass="15" ejPower=".9" openRate="5" closeRate="5" fieldX=".3" fieldY="-.1" fieldZ=".3" rThick=".1" timeLimit="300" kSnText="1503" kTextVolume="0.7" gameLength="4685" fill="#f1f1f1" frame="#bb1800" x="93.125" z="83.81944444444444" w="10" d="7.5" h="0" cx="92.60416666666667" cz="61.35416666666667" r="2.5347222222222285" angle="90" wallHeight="2" door1="1" door2="2" door3="3" door4="4" workNum="11" randStart="int ( 1 + ( random * 4 ) )" wallYon=".001">
 unique mShow mTaken end
 object And 
 in = @warning 

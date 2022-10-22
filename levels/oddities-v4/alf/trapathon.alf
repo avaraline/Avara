@@ -1,8 +1,7 @@
 <map>
   <SkyColor n="20" verticalRangeMin="90" fill="#d9edff" frame="#000115" />
   <GroundColor fill="#a8d6ff" />
-  <set information="A race in the sky.
-Perhaps you will die; but at least you will die so close to the stars..." baseHeight="100" StripThick=".5" wallHeight="StripThick" defaultLives="8" fWatch="playerMask" starY="40 + random * 80" starScale=".1" />
+  <set information="A race in the sky.&#10;Perhaps you will die; but at least you will die so close to the stars..." baseHeight="100" StripThick=".5" wallHeight="StripThick" defaultLives="8" fWatch="playerMask" starY="40 + random * 80" starScale=".1" />
   <Wall fill="#c7c7c7" frame="#000000" x="254.30555555555554" z="287.08333333333337" w="15" d="15" h="0" />
   <Incarnator cx="250.90277777777777" cz="282.60416666666663" angle="90" />
   <Incarnator cx="250.90277777777777" cz="284.47916666666663" angle="90" />

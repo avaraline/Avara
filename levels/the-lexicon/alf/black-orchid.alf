@@ -1,9 +1,6 @@
 <map>
   <Timer in="@start" wait="1" out.0="@goGreen1" out.1="@goGreen2" out.2="@goGreen3" out.3="@goGreen4" out.4="@goGreen5" out.5="@goGreenA" out.6="@goGreen10" out.7="@goGreen11" out.8="@goGreen12" />
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="The pot was overturned, keikeis like knobby
-fingers sucking the blood from his prone body.
-Scrawled in a wavering hand, his last words:
-Watch the goody marker's color for their timing." />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="The pot was overturned, keikeis like knobby&#10;fingers sucking the blood from his prone body.&#10;Scrawled in a wavering hand, his last words:&#10;Watch the goody marker's color for their timing." />
   <SkyColor fill="#fffc79" frame="#350e5f" />
   <GroundColor fill="#2d2d2d" />
   <Incarnator y="10" cx="48.333333333333336" cz="53.75" angle="90" />
@@ -57,7 +54,7 @@ Watch the goody marker's color for their timing." />
   <Wall fill="#350e5f" frame="#000000" x="130.52083333333334" z="87.1875" w="15.625" d="15.625" h="0" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="6.215277777777779" cz="11.180555555555557" angle="45" />
   <Goody speed="5" shape="bspGrenade" grenades="6" y="2" start="@goGreen1" out="@mTaken1" fill="#d4fb00" frame="#000000" cx="71.25" cz="30.694444444444446" angle="270" />
-  <script>
+  <script pixelToThickness="0.125" designer="Apollo &lt;apollo@avara.org&gt;" information="The pot was overturned, keikeis like knobby&#10;fingers sucking the blood from his prone body.&#10;Scrawled in a wavering hand, his last words:&#10;Watch the goody marker's color for their timing." fill="#e4e4e4" cx="96.11111111111111" cz="54.30555555555556" r="1.3194444444444429" angle="315" frame="#f42300" wallHeight="8" x="96.14583333333334" z="21.875" w="10.625" d="5" h="0" wallYon="0">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000

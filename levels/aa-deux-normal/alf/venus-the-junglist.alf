@@ -25,16 +25,14 @@
   <Wall fill="#005400" frame="#000000" x="113.68055555555557" z="155.83333333333334" w="7.083333333333329" d="7.083333333333314" h="37.5" />
   <Wall fill="#002c00" frame="#000000" x="125.06944444444446" z="143.95833333333334" w="7.083333333333329" d="7.083333333333314" h="37.5" />
   <GroundColor fill="#002c00" />
-  <script>
+  <script pixelToThickness="0.125" fill="#fffed5" cx="1.7013888888888888" cz="1.5625" r="1.5625" angle="180" frame="#73fa79">
 adjust SkyColor end
 
 ambient.i=  .5
 light[0] . i = 0.4light [0] . a  =  20light [0] . b = 90 
 light[1] . i = 0.1light [1] . a  =  45light [1] . b = 180</script>
   <Incarnator y="15" cx="88.81944444444444" cz="87.91666666666667" angle="180" />
-  <set timeLimit="300" defaultLives="100" grenadePower="2.25" missilePower="1.75" missileTurnRate="0.2" missileAcceleration="0.4" maxStartGrenades="12" maxStartMissiles="4" designer="blassty &lt;r-reyes@neiu.edu&gt;" information="ruff in da jungle bizness
-venusian spears are deadly. use trees for cover.
-5 minute time limit...kill as many as you can." />
+  <set timeLimit="300" defaultLives="100" grenadePower="2.25" missilePower="1.75" missileTurnRate="0.2" missileAcceleration="0.4" maxStartGrenades="12" maxStartMissiles="4" designer="blassty &lt;r-reyes@neiu.edu&gt;" information="ruff in da jungle bizness&#10;venusian spears are deadly. use trees for cover.&#10;5 minute time limit...kill as many as you can." />
   <set gameLength="4687" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
   <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon="0.01" win="0" fill="#ffffff" frame="#000000" cx="1.7361111111111112" cz="138.19444444444446" angle="135" />

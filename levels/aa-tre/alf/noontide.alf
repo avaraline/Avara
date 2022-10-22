@@ -101,8 +101,7 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <Goody y="4" speed="2" shape="bspMissile" missiles="1" start="mShow" out="mTaken" fill="#64524c" frame="#000000" cx="69.58333333333334" cz="128.33333333333334" angle="225" />
-  <set designer="M. Matthews  [uno]" information="Noontide:
-A voice cannot carry the tongue and the lips that gave it wings.  Alone it must seek the ether." />
+  <set designer="M. Matthews  [uno]" information="Noontide:&#10;A voice cannot carry the tongue and the lips that gave it wings.  Alone it must seek the ether." />
   <Ramp y="0" deltaY="4" fill="#432625" frame="#000000" x="57.70833333333334" z="74.58333333333334" w="15" d="15" h="0" angle="90" />
   <set wallHeight="4" />
   <Wall fill="#aead9e" frame="#000000" x="57.70833333333334" z="66.77083333333334" w="15" d="0.625" h="0" />

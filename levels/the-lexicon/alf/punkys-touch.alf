@@ -2,7 +2,7 @@
   <GroundColor fill="#d5d4a9" />
   <SkyColor fill="#ffffff" frame="#d4feff" />
   <Incarnator y="30" cx="21.52777777777778" cz="1.875" angle="135" />
-  <script>
+  <script pixelToThickness="0.125" fill="#e4e4e4" cx="54.30555555555556" cz="33.81944444444444" r="1.3194444444444464" angle="315" frame="#f42300">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000
@@ -19,9 +19,7 @@ shape = 0
 speed = 0
 end</script>
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="2.743055555555556" cz="8.958333333333334" angle="45" />
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Studies have shown Punky's Touch 
-to be at least as important as food, water, and 
-shelter to the human condition." wallHeight="1" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="Studies have shown Punky's Touch &#10;to be at least as important as food, water, and &#10;shelter to the human condition." wallHeight="1" />
   <Wall fill="#78a9a9" frame="#000000" x="28.40277777777778" z="33.75" w="10" d="2.5" h="0" />
   <Wall fill="#78a9a9" frame="#000000" x="54.02777777777778" z="8.4375" w="2.5" d="9.375" h="0" />
   <Wall fill="#78a9a9" frame="#000000" x="79.02777777777779" z="33.75" w="10" d="2.5" h="0" />

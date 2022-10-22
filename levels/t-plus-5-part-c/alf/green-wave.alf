@@ -449,8 +449,7 @@
   <Incarnator y="3" cx="104.375" cz="20.208333333333336" angle="270" />
   <Incarnator y="3" cx="10.625" cz="8.958333333333334" angle="90" />
   <Incarnator y="3" cx="104.375" cz="8.958333333333334" angle="270" />
-  <set designer="Hazel - hazel@avara.org" information="who said this was green? It’s Lime!
-this needs a fast connection, guys!" />
+  <set designer="Hazel - hazel@avara.org" information="who said this was green? It’s Lime!&#10;this needs a fast connection, guys!" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="50" />

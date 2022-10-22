@@ -2,11 +2,7 @@
   <GroundColor fill="#011279" />
   <SkyColor fill="#011279" frame="#ffffff" />
   <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="1.215277777777778" cz="11.597222222222221" angle="45" />
-  <set designer="Apollo &lt;apollo@avara.org&gt;" information="The queen took advantage of 
-the distraction, using that split second of 
-inattention to adjust the device. As everyone 
-turned back to her she sniffed her fingertips 
-and reveled in her secret pleasure." wallHeight="2" />
+  <set designer="Apollo &lt;apollo@avara.org&gt;" information="The queen took advantage of &#10;the distraction, using that split second of &#10;inattention to adjust the device. As everyone &#10;turned back to her she sniffed her fingertips &#10;and reveled in her secret pleasure." wallHeight="2" />
   <Wall fill="#a8d5d6" frame="#000000" x="84.375" z="61.388888888888886" w="25" d="25" h="0" />
   <set wallHeight="9" />
   <Wall fill="#00a8aa" frame="#000000" x="89.375" z="36.38888888888889" w="5" d="25" h="0" />
@@ -74,7 +70,7 @@ and reveled in her secret pleasure." wallHeight="2" />
   <Ramp y="3" deltaY="2" thickness="0" fill="#e4e4e4" frame="#000000" x="89.375" z="93.88888888888889" w="15" d="10" h="0" angle="0" />
   <Ramp y="3" deltaY="2" thickness="0" fill="#e4e4e4" frame="#000000" x="79.375" z="28.888888888888893" w="15" d="10" h="0" angle="180" />
   <Incarnator y="30" cx="41.875" cz="67.01388888888889" angle="90" />
-  <script>
+  <script pixelToThickness="0.125" fill="#e4e4e4" cx="84.65277777777779" cz="61.458333333333336" r="1.3194444444444429" angle="315" frame="#f42300" designer="Apollo &lt;apollo@avara.org&gt;" information="The queen took advantage of &#10;the distraction, using that split second of &#10;inattention to adjust the device. As everyone &#10;turned back to her she sniffed her fingertips &#10;and reveled in her secret pleasure." wallHeight="1.75" x="79.375" z="28.888888888888893" w="15" d="10" h="0">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000
