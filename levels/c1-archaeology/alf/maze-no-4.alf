@@ -2,7 +2,7 @@
   <set designer="John Blackburne  -  johnb@hk.super.net" information="Maze No. 4: A simple solo mission" ambient.i="0.4" light.0.i="0.4" light.0.a="45" light.0.b="20" light.1.i="0.4" light.1.a="45" light.1.b="200" />
   <SkyColor fill="#00d5ff" frame="#0048aa" />
   <GroundColor fill="#565656" />
-  <Incarnator y="30" cx="17.430555555555557" cz="90.48611111111111" angle="270" />
+  <Incarnator y="30" cx="17.430555555555557" cz="90.48611111111111" angle="90" />
   <Wall fill="#ffffff" frame="#000000" x="50.486111111111114" z="77.91666666666667" w="25" d="2.5" h="15" />
   <Wall fill="#ffffff" frame="#000000" x="61.736111111111114" z="91.66666666666667" w="2.5" d="25" h="15" />
   <Wall fill="#ffffff" frame="#000000" x="47.986111111111114" z="102.91666666666667" w="25" d="2.5" h="15" />
@@ -88,5 +88,5 @@
   <Wall fill="#ffffff" frame="#000000" x="55.486111111111114" z="95.41666666666667" w="10" d="12.5" h="0.5" y="14.5" />
   <Wall fill="#ffffff" frame="#000000" x="54.236111111111114" z="84.16666666666667" w="12.5" d="10" h="0.5" y="14.5" />
   <Wall fill="#ffffff" frame="#000000" x="44.236111111111114" z="96.66666666666667" w="12.5" d="10" h="0.5" y="14.5" />
-  <Teleporter y="15" win="500" fill="#fffb00" frame="#000000" cx="37.56944444444444" cz="90.13888888888889" angle="135" />
+  <Teleporter y="15" win="500" fill="#fffb00" frame="#000000" cx="37.56944444444444" cz="90.13888888888889" angle="315" />
 </map>

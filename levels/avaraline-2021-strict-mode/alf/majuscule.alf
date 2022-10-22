@@ -24,22 +24,22 @@
   <set wallHeight="tierHeight * 2" />
 
   <Wall fill="hsl(220, 30%, 50%)" frame="#000000" x="-15" z="25" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-15" z="40" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="0" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-15" z="40" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="180" />
   <Wall fill="hsl(220, 30%, 50%)" frame="#000000" x="25" z="15" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="40" z="15" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="270" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="40" z="15" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="90" />
   <Wall fill="hsl(220, 30%, 50%)" frame="#000000" x="15" z="-25" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="15" z="-40" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="180" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="15" z="-40" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="0" />
   <Wall fill="hsl(220, 30%, 50%)" frame="#000000" x="-25" z="-15" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-40" z="-15" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="90" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-40" z="-15" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="270" />
 
   <Wall fill="hsl(220, 30%, 50%)" frame="#000000" x="35" z="35" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="20" z="35" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="90" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="20" z="35" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="270" />
   <Wall fill="hsl(220, 30%, 50%)" frame="#000000" x="35" z="-35" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="35" z="-20" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="0" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="35" z="-20" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="180" />
   <Wall fill="hsl(220, 30%, 50%)" frame="#000000" x="-35" z="-35" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-20" z="-35" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="270" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-20" z="-35" y="0" w="20" d="10" h="0" deltaY="tierHeight * 2" angle="90" />
   <Wall fill="hsl(220, 30%, 50%)" frame="#000000" x="-35" z="35" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-35" z="20" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="180" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-35" z="20" y="0" w="10" d="20" h="0" deltaY="tierHeight * 2" angle="0" />
 
   <!-- FILL IN THE "HOLES" UNDER RAMPS -->
 
@@ -63,10 +63,10 @@
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="5" z="55" y="0" w="10" d="10" h="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-5" z="65" y="0" w="10" d="10" h="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="15" z="65" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-5" z="55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="15" z="55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="5" z="45" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="5" z="65" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-5" z="55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="15" z="55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="5" z="45" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="5" z="65" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="15" z="25" y="0" w="10" d="10" h="0" />
 
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="45" z="25" y="0" w="10" d="10" h="0" />
@@ -75,10 +75,10 @@
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="55" z="-5" y="0" w="10" d="10" h="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="65" z="5" y="0" w="10" d="10" h="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="65" z="-15" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="55" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="55" z="-15" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="45" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="65" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="55" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="55" z="-15" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="45" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="65" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="25" z="-15" y="0" w="10" d="10" h="0" />
 
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="25" z="-45" y="0" w="10" d="10" h="0" />
@@ -87,10 +87,10 @@
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-5" z="-55" y="0" w="10" d="10" h="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="5" z="-65" y="0" w="10" d="10" h="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-15" z="-65" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="5" z="-55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-15" z="-55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-5" z="-45" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-5" z="-65" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="5" z="-55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-15" z="-55" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-5" z="-45" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-5" z="-65" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-15" z="-25" y="0" w="10" d="10" h="0" />
 
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-45" z="-25" y="0" w="10" d="10" h="0" />
@@ -99,91 +99,91 @@
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-55" z="5" y="0" w="10" d="10" h="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-65" z="-5" y="0" w="10" d="10" h="0" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-65" z="15" y="0" w="10" d="10" h="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-55" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-55" z="15" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-45" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
-  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-65" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-55" z="-5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="0" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-55" z="15" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="180" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-45" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="90" />
+  <Ramp fill="hsl(310, 100%, 90%)" frame="#000000" x="-65" z="5" y="0" w="10" d="10" h="0" deltaY="tierHeight" angle="270" />
   <Wall fill="hsl(210, 100%, 30%)" frame="#000000" x="-25" z="15" y="0" w="10" d="10" h="0" />
 
   <!-- GOODIES -->
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="5" cz="55" angle="135" />
+  <Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="5" cz="55" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="55" cz="-5" angle="135" />
+  <Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="55" cz="-5" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-5" cz="-55" angle="135" />
+  <Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-5" cz="-55" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-55" cz="5" angle="135" />
+  <Goody y="tierHeight + mGoodyOffset" shape="bspMissile" missiles="mMdMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-55" cz="5" angle="315" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mTaken" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="35" cz="35" angle="135" />
+  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="35" cz="35" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mTaken" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="35" cz="-35" angle="135" />
+  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="35" cz="-35" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mTaken" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-35" cz="-35" angle="135" />
+  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-35" cz="-35" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mTaken" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-35" cz="35" angle="135" />
+  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspMissile" missiles="mXLgMissile" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-35" cz="35" angle="315" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-25" cz="30" angle="135" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-25" cz="30" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="30" cz="25" angle="135" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="30" cz="25" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="25" cz="-30" angle="135" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="25" cz="-30" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-30" cz="-25" angle="135" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" grenades="mMdGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-30" cz="-25" angle="315" />
 
   <unique vars="mShow mTaken" />
   <And in="@start" out="mTaken" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-15" cz="25" angle="135" />
+  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-15" cz="25" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mTaken" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="25" cz="15" angle="135" />
+  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="25" cz="15" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mTaken" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="15" cz="-25" angle="135" />
+  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="15" cz="-25" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mTaken" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-25" cz="-15" angle="135" />
+  <Goody y="(tierHeight * 2) + mGoodyOffset" shape="bspGrenade" grenades="mXLgGrenade" start="mShow" out="mTaken" speed="2" fill="#000000" frame="#000000" cx="-25" cz="-15" angle="315" />
 
-  <Incarnator cx="25" cz="55" y="incarnHeight" angle="180" />
-  <Incarnator cx="-25" cz="-55" y="incarnHeight" angle="0" />
-  <Incarnator cx="55" cz="-25" y="incarnHeight" angle="90" />
-  <Incarnator cx="-55" cz="25" y="incarnHeight" angle="270" />
-  <Incarnator cx="55" cz="15" y="incarnHeight" angle="90" />
-  <Incarnator cx="-55" cz="-15" y="incarnHeight" angle="270" />
-  <Incarnator cx="15" cz="-55" y="incarnHeight" angle="0" />
-  <Incarnator cx="-15" cz="55" y="incarnHeight" angle="180" />
-  <Incarnator cx="5" cz="15" y="incarnHeight" angle="0" stop="@start" />
-  <Incarnator cx="-5" cz="-15" y="incarnHeight" angle="180" stop="@start" />
-  <Incarnator cx="15" cz="-5" y="incarnHeight" angle="270" stop="@start" />
-  <Incarnator cx="-15" cz="5" y="incarnHeight" angle="90" stop="@start" />
+  <Incarnator cx="25" cz="55" y="incarnHeight" angle="0" />
+  <Incarnator cx="-25" cz="-55" y="incarnHeight" angle="180" />
+  <Incarnator cx="55" cz="-25" y="incarnHeight" angle="270" />
+  <Incarnator cx="-55" cz="25" y="incarnHeight" angle="90" />
+  <Incarnator cx="55" cz="15" y="incarnHeight" angle="270" />
+  <Incarnator cx="-55" cz="-15" y="incarnHeight" angle="90" />
+  <Incarnator cx="15" cz="-55" y="incarnHeight" angle="180" />
+  <Incarnator cx="-15" cz="55" y="incarnHeight" angle="0" />
+  <Incarnator cx="5" cz="15" y="incarnHeight" angle="180" stop="@start" />
+  <Incarnator cx="-5" cz="-15" y="incarnHeight" angle="0" stop="@start" />
+  <Incarnator cx="15" cz="-5" y="incarnHeight" angle="90" stop="@start" />
+  <Incarnator cx="-15" cz="5" y="incarnHeight" angle="270" stop="@start" />
 </map>

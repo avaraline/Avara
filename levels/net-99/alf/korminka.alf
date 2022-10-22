@@ -1,22 +1,21 @@
 <map>
   <SkyColor fill="#fbf4ca" frame="#998654" />
   <GroundColor fill="#2c2518" />
-  <set designer="Mondo" information="Many blocks near the center are destroyable.
-Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" maxStartMissiles="0" wallHeight="2" />
+  <set designer="Mondo" information="Many blocks near the center are destroyable.&#10;Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" maxStartMissiles="0" wallHeight="2" />
   <Wall fill="#cdbe90" frame="#000000" x="22.708333333333336" z="109.30555555555556" w="15" d="15" h="0" />
   <set wallHeight="4" />
   <Wall fill="#998654" frame="#000000" x="30.208333333333336" z="84.93055555555556" w="8.75" d="25" h="0" />
   <Wall fill="#998654" frame="#000000" x="32.708333333333336" z="103.68055555555556" w="3.75" d="5" h="0" />
   <Wall fill="#998654" frame="#000000" x="47.083333333333336" z="101.80555555555556" w="25" d="8.75" h="0" />
-  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="20.208333333333336" z="81.80555555555556" w="10" d="20" h="0" angle="90" />
-  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="50.208333333333336" z="111.80555555555556" w="20" d="10" h="0" angle="0" />
+  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="20.208333333333336" z="81.80555555555556" w="10" d="20" h="0" angle="270" />
+  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="50.208333333333336" z="111.80555555555556" w="20" d="10" h="0" angle="180" />
   <Wall fill="#998654" frame="#000000" x="28.333333333333336" z="99.30555555555556" w="5" d="3.75" h="0" />
   <Wall fill="#998654" frame="#000000" x="32.708333333333336" z="99.30555555555556" w="3.75" d="3.75" h="0" />
   <set wallHeight="3" />
   <Wall fill="#cdbe90" frame="#000000" x="47.708333333333336" z="89.30555555555556" w="25" d="15" h="0" />
   <Wall fill="#cdbe90" frame="#000000" x="40.208333333333336" z="76.80555555555556" w="10" d="10" h="0" />
   <set wallHeight="6" />
-  <Ramp deltaY="3" y="3" thickness="0" fill="#fbf4ca" frame="#000000" x="55.208333333333336" z="76.80555555555556" w="10" d="10" h="0" angle="0" />
+  <Ramp deltaY="3" y="3" thickness="0" fill="#fbf4ca" frame="#000000" x="55.208333333333336" z="76.80555555555556" w="10" d="10" h="0" angle="180" />
   <Wall fill="#67542a" frame="#000000" x="27.708333333333336" z="66.80555555555556" w="35" d="10" h="0" />
   <Wall fill="#67542a" frame="#000000" x="65.20833333333334" z="104.30555555555556" w="10" d="35" h="0" />
   <set wallHeight="4" />
@@ -34,15 +33,15 @@ Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultL
   <Wall fill="#998654" frame="#000000" x="47.083333333333336" z="31.805555555555557" w="25" d="8.75" h="0" />
   <Wall fill="#998654" frame="#000000" x="28.333333333333336" z="34.30555555555556" w="5" d="3.75" h="0" />
   <Wall fill="#998654" frame="#000000" x="30.208333333333336" z="48.68055555555556" w="8.75" d="25" h="0" />
-  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="50.208333333333336" z="21.805555555555557" w="20" d="10" h="0" angle="180" />
-  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="20.208333333333336" z="51.80555555555556" w="10" d="20" h="0" angle="90" />
+  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="50.208333333333336" z="21.805555555555557" w="20" d="10" h="0" angle="0" />
+  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="20.208333333333336" z="51.80555555555556" w="10" d="20" h="0" angle="270" />
   <Wall fill="#998654" frame="#000000" x="32.708333333333336" z="29.930555555555557" w="3.75" d="5" h="0" />
   <Wall fill="#998654" frame="#000000" x="32.708333333333336" z="34.30555555555556" w="3.75" d="3.75" h="0" />
   <set wallHeight="3" />
   <Wall fill="#cdbe90" frame="#000000" x="42.708333333333336" z="49.30555555555556" w="15" d="25" h="0" />
   <Wall fill="#cdbe90" frame="#000000" x="55.208333333333336" z="41.80555555555556" w="10" d="10" h="0" />
   <set wallHeight="6" />
-  <Ramp deltaY="3" y="3" thickness="0" fill="#fbf4ca" frame="#000000" x="55.208333333333336" z="56.80555555555556" w="10" d="10" h="0" angle="90" />
+  <Ramp deltaY="3" y="3" thickness="0" fill="#fbf4ca" frame="#000000" x="55.208333333333336" z="56.80555555555556" w="10" d="10" h="0" angle="270" />
   <set wallHeight="4" />
   <Wall fill="#f1fee3" frame="#000000" x="25.520833333333336" z="46.80555555555556" w="0.625" d="30" h="0" />
   <Wall fill="#f1fee3" frame="#000000" x="45.208333333333336" z="27.118055555555557" w="30" d="0.625" h="0" />
@@ -58,15 +57,15 @@ Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultL
   <Wall fill="#998654" frame="#000000" x="100.20833333333334" z="48.68055555555556" w="8.75" d="25" h="0" />
   <Wall fill="#998654" frame="#000000" x="97.70833333333334" z="29.930555555555557" w="3.75" d="5" h="0" />
   <Wall fill="#998654" frame="#000000" x="83.33333333333334" z="31.805555555555557" w="25" d="8.75" h="0" />
-  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="110.20833333333334" z="51.80555555555556" w="10" d="20" h="0" angle="270" />
-  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="80.20833333333334" z="21.805555555555557" w="20" d="10" h="0" angle="180" />
+  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="110.20833333333334" z="51.80555555555556" w="10" d="20" h="0" angle="90" />
+  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="80.20833333333334" z="21.805555555555557" w="20" d="10" h="0" angle="0" />
   <Wall fill="#998654" frame="#000000" x="102.08333333333334" z="34.30555555555556" w="5" d="3.75" h="0" />
   <Wall fill="#998654" frame="#000000" x="97.70833333333334" z="34.30555555555556" w="3.75" d="3.75" h="0" />
   <set wallHeight="3" />
   <Wall fill="#cdbe90" frame="#000000" x="82.70833333333334" z="44.30555555555556" w="25" d="15" h="0" />
   <Wall fill="#cdbe90" frame="#000000" x="90.20833333333334" z="56.80555555555556" w="10" d="10" h="0" />
   <set wallHeight="6" />
-  <Ramp deltaY="3" y="3" thickness="0" fill="#fbf4ca" frame="#000000" x="75.20833333333334" z="56.80555555555556" w="10" d="10" h="0" angle="180" />
+  <Ramp deltaY="3" y="3" thickness="0" fill="#fbf4ca" frame="#000000" x="75.20833333333334" z="56.80555555555556" w="10" d="10" h="0" angle="0" />
   <Wall fill="#67542a" frame="#000000" x="102.70833333333334" z="66.80555555555556" w="35" d="10" h="0" />
   <Wall fill="#67542a" frame="#000000" x="65.20833333333334" z="29.305555555555557" w="10" d="35" h="0" />
   <set wallHeight="4" />
@@ -84,15 +83,15 @@ Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultL
   <Wall fill="#998654" frame="#000000" x="83.33333333333334" z="101.80555555555556" w="25" d="8.75" h="0" />
   <Wall fill="#998654" frame="#000000" x="102.08333333333334" z="99.30555555555556" w="5" d="3.75" h="0" />
   <Wall fill="#998654" frame="#000000" x="100.20833333333334" z="84.93055555555556" w="8.75" d="25" h="0" />
-  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="80.20833333333334" z="111.80555555555556" w="20" d="10" h="0" angle="0" />
-  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="110.20833333333334" z="81.80555555555556" w="10" d="20" h="0" angle="270" />
+  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="80.20833333333334" z="111.80555555555556" w="20" d="10" h="0" angle="180" />
+  <Ramp deltaY="4" thickness="0" fill="#fbf4ca" frame="#000000" x="110.20833333333334" z="81.80555555555556" w="10" d="20" h="0" angle="90" />
   <Wall fill="#998654" frame="#000000" x="97.70833333333334" z="103.68055555555556" w="3.75" d="5" h="0" />
   <Wall fill="#998654" frame="#000000" x="97.70833333333334" z="99.30555555555556" w="3.75" d="3.75" h="0" />
   <set wallHeight="3" />
   <Wall fill="#cdbe90" frame="#000000" x="87.70833333333334" z="84.30555555555556" w="15" d="25" h="0" />
   <Wall fill="#cdbe90" frame="#000000" x="75.20833333333334" z="91.80555555555556" w="10" d="10" h="0" />
   <set wallHeight="6" />
-  <Ramp deltaY="3" y="3" thickness="0" fill="#fbf4ca" frame="#000000" x="75.20833333333334" z="76.80555555555556" w="10" d="10" h="0" angle="270" />
+  <Ramp deltaY="3" y="3" thickness="0" fill="#fbf4ca" frame="#000000" x="75.20833333333334" z="76.80555555555556" w="10" d="10" h="0" angle="90" />
   <set wallHeight="4" />
   <Wall fill="#f1fee3" frame="#000000" x="104.89583333333334" z="86.80555555555556" w="0.625" d="30" h="0" />
   <Wall fill="#f1fee3" frame="#000000" x="85.20833333333334" z="106.49305555555556" w="30" d="0.625" h="0" />
@@ -130,8 +129,8 @@ Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultL
   <Wall fill="#998654" frame="#000000" x="95.20833333333334" z="111.80555555555556" w="10" d="10" h="0" />
   <Wall fill="#998654" frame="#000000" x="110.20833333333334" z="96.80555555555556" w="10" d="10" h="0" />
   <set wallHeight="6" />
-  <Field deltaY="0" visible="true" fill="#fffdb5" frame="#000000" x="65.20833333333334" z="66.80555555555556" w="10" d="10" h="0" cx="80.20833333333334" cz="76.80555555555556" angle="270" />
-  <Field deltaY="0" visible="true" fill="#fffdb5" frame="#000000" x="65.20833333333334" z="66.80555555555556" w="10" d="10" h="0" cx="80.20833333333334" cz="76.80555555555556" angle="270" y="6" />
+  <Field deltaY="0" visible="true" fill="#fffdb5" frame="#000000" x="65.20833333333334" z="66.80555555555556" w="10" d="10" h="0" cx="80.20833333333334" cz="76.80555555555556" angle="90" />
+  <Field deltaY="0" visible="true" fill="#fffdb5" frame="#000000" x="65.20833333333334" z="66.80555555555556" w="10" d="10" h="0" cx="80.20833333333334" cz="76.80555555555556" angle="90" y="6" />
   <set wallHeight="9" baseHeight="16" />
   <Wall fill="#998654" frame="#000000" x="27.708333333333336" z="96.80555555555556" w="25" d="10" h="0" />
   <Wall fill="#998654" frame="#000000" x="35.208333333333336" z="109.30555555555556" w="10" d="15" h="0" />
@@ -143,48 +142,48 @@ Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultL
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspGrenade" y="5" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="40.208333333333336" cz="41.80555555555556" angle="135" />
+  <Goody speed="12" shape="bspGrenade" y="5" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="40.208333333333336" cz="41.80555555555556" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspGrenade" y="5" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="90.20833333333334" cz="41.80555555555556" angle="225" />
+  <Goody speed="12" shape="bspGrenade" y="5" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="90.20833333333334" cz="41.80555555555556" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspGrenade" y="5" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="90.20833333333334" cz="91.80555555555556" angle="315" />
+  <Goody speed="12" shape="bspGrenade" y="5" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="90.20833333333334" cz="91.80555555555556" angle="135" />
   <set baseHeight="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspGrenade" y="5" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="40.208333333333336" cz="91.80555555555556" angle="45" />
+  <Goody speed="12" shape="bspGrenade" y="5" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="40.208333333333336" cz="91.80555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspAvaraA" y="2" grenades="12" missiles="1" start="mShow" out="mTaken" fill="#fbf4ca" frame="#000000" cx="65.20833333333334" cz="66.80555555555556" angle="225" />
+  <Goody speed="12" shape="bspAvaraA" y="2" grenades="12" missiles="1" start="mShow" out="mTaken" fill="#fbf4ca" frame="#000000" cx="65.20833333333334" cz="66.80555555555556" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspAvaraA" y="8" grenades="12" missiles="1" start="mShow" out="mTaken" fill="#fbf4ca" frame="#000000" cx="65.20833333333334" cz="66.80555555555556" angle="225" />
+  <Goody speed="12" shape="bspAvaraA" y="8" grenades="12" missiles="1" start="mShow" out="mTaken" fill="#fbf4ca" frame="#000000" cx="65.20833333333334" cz="66.80555555555556" angle="45" />
   <set baseHeight="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="50.208333333333336" cz="66.80555555555556" angle="90" />
+  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="50.208333333333336" cz="66.80555555555556" angle="270" />
   <set baseHeight="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="80.20833333333334" cz="66.80555555555556" angle="270" />
+  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="80.20833333333334" cz="66.80555555555556" angle="90" />
   <set baseHeight="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="65.20833333333334" cz="51.80555555555556" angle="180" />
+  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="65.20833333333334" cz="51.80555555555556" angle="0" />
   <set baseHeight="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="65.20833333333334" cz="81.80555555555556" angle="0" />
+  <Goody speed="12" shape="bspGrenade" y="2" grenades="12" missiles="0" start="mShow" out="mTaken" fill="#911000" frame="#000000" cx="65.20833333333334" cz="81.80555555555556" angle="180" />
   <set wallHeight="6" />
   <Wall fill="#cdbe90" frame="#000000" x="60.208333333333336" z="56.80555555555556" w="0" d="10" h="0" />
   <Wall fill="#cdbe90" frame="#000000" x="75.20833333333334" z="61.80555555555556" w="10" d="0" h="0" />
@@ -194,13 +193,13 @@ Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultL
   <Wall fill="#998654" frame="#000000" x="102.70833333333334" z="96.80555555555556" w="25" d="10" h="0" y="16" />
   <set wallHeight="9" />
   <Wall fill="#998654" frame="#000000" x="95.20833333333334" z="109.30555555555556" w="10" d="15" h="0" y="16" />
-  <Incarnator y="30" cx="22.708333333333336" cz="109.30555555555556" angle="225" />
-  <Incarnator y="30" cx="22.708333333333336" cz="24.305555555555557" angle="315" />
-  <Incarnator y="30" cx="107.70833333333334" cz="24.305555555555557" angle="45" />
-  <Incarnator y="30" cx="107.70833333333334" cz="109.30555555555556" angle="135" />
-  <Incarnator y="30" cx="61.458333333333336" cz="63.05555555555556" angle="135" />
-  <Incarnator y="30" cx="68.95833333333334" cz="70.55555555555556" angle="315" />
-  <script>
+  <Incarnator y="30" cx="22.708333333333336" cz="109.30555555555556" angle="45" />
+  <Incarnator y="30" cx="22.708333333333336" cz="24.305555555555557" angle="135" />
+  <Incarnator y="30" cx="107.70833333333334" cz="24.305555555555557" angle="225" />
+  <Incarnator y="30" cx="107.70833333333334" cz="109.30555555555556" angle="315" />
+  <Incarnator y="30" cx="61.458333333333336" cz="63.05555555555556" angle="315" />
+  <Incarnator y="30" cx="68.95833333333334" cz="70.55555555555556" angle="135" />
+  <script pixelToThickness="0.125" fill="#fbf4ca" cx="65.20833333333334" cz="66.80555555555556" r="1.25" angle="225" frame="#000000" designer="Mondo" information="Many blocks near the center are destroyable.&#10;Nades only." ambient.i=".1" light.0.i=".9" light.0.a="30" light.0.b="0" defaultLives="3" maxStartMissiles="0" wallHeight="9" x="75.20833333333334" z="76.80555555555556" w="10" d="10" h="0" baseHeight="0">
 object Teleporter
 spin = 0
 y = -10

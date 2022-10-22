@@ -1,31 +1,29 @@
 <map>
   <set defaultTraction="0.75" defaultFriction="0.75" wallTraction="defaultTraction" wallFriction="defaultFriction" traction="defaultTraction" friction="defaultFriction" />
-  <TriPyramid scale=".65" fill="#4b4b4b" frame="#000000" cx="226.18055555555557" cz="200.83333333333334" angle="315" />
+  <TriPyramid scale=".65" fill="#4b4b4b" frame="#000000" cx="226.18055555555557" cz="200.83333333333334" angle="135" />
   <set wallHeight="4.5" />
   <Wall fill="#ffffff" frame="#000000" x="293.68055555555554" z="278.71527777777777" w="5" d="0.625" h="0" y="4.5" />
   <set wallHeight=".35" />
   <Wall fill="#4b4b4b" frame="#000000" x="279.30555555555554" z="268.95833333333337" w="2.5" d="2.5" h="0" />
   <set wallHeight="2.65" />
   <Wall fill="#2c2c2c" frame="#000000" x="279.30555555555554" z="268.95833333333337" w="1.25" d="1.25" h="0" y=".35" />
-  <set designer="Daniel Sphinx Amor" information="Objective:
-Evade and destroy the Ra'Shari. It is suggested you exit the observer one at a time. Upon exiting, you will be 
-sensed by the Ra'Shari and attacked. Only when the 6 Ra'Shari have been destroyed, are you granted freedom." />
+  <set designer="Daniel Sphinx Amor" information="Objective:&#10;Evade and destroy the Ra'Shari. It is suggested you exit the observer one at a time. Upon exiting, you will be &#10;sensed by the Ra'Shari and attacked. Only when the 6 Ra'Shari have been destroyed, are you granted freedom." />
   <GroundColor fill="#4b4b4b" />
   <SkyColor n="15" fill="#efefef" frame="#b9b9b9" />
-  <Ball scale="50" customGravity="0" yon="10000" hitVolume="0" y="200" canGlow="true" shape="6001" fill="#cbcbcb" frame="#000000" cx="49.44444444444445" cz="1029.0972222222222" angle="180" />
+  <Ball scale="50" customGravity="0" yon="10000" hitVolume="0" y="200" canGlow="true" shape="6001" fill="#cbcbcb" frame="#000000" cx="49.44444444444445" cz="1029.0972222222222" angle="0" />
   <set wallYon=".01" />
   <WallDoor guardDelay="0" open="@start" deltaY="0" deltaZ="-5" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="49.895833333333336" z="1029.9305555555557" w="5.625" d="1.25" h="2" y="205" />
   <set wallYon="defaultYon" />
-  <Ramp yon=".1" y="200" thickness="1.5" deltaY="0" fill="#919191" frame="#000000" x="49.79166666666667" z="1029.1319444444446" w="5.277777777777779" d="0.9027777777778283" h="0" angle="90" />
-  <Hologram scale="45" yon="10000" y="150" shape="6001" fill="#cbcbcb" frame="#000000" cx="1158.5416666666667" cz="8.75" angle="270" />
-  <Hologram scale="40" yon="10000" y="130" shape="6001" fill="#cbcbcb" frame="#000000" cx="892.4305555555555" cz="194.51388888888889" angle="90" />
-  <Hologram scale="20" yon="10000" y="170" shape="6001" fill="#cbcbcb" frame="#000000" cx="894.3055555555555" cz="152.63888888888889" angle="90" />
-  <Hologram shape="5003" scale="2" isAmbient="false" yon="5000" fill="#424242" frame="#424242" cx="454.86111111111114" cz="1794.5833333333335" angle="0" />
-  <Hologram shape="5004" scale="1" isAmbient="false" yon="5000" fill="#424242" frame="#424242" cx="201.45833333333334" cz="1793.5416666666667" angle="0" />
-  <Hologram shape="5008" scale="2" isAmbient="false" yon="5000" fill="#6f6f6f" frame="#6f6f6f" cx="906.875" cz="67.70833333333334" angle="180" />
+  <Ramp yon=".1" y="200" thickness="1.5" deltaY="0" fill="#919191" frame="#000000" x="49.79166666666667" z="1029.1319444444446" w="5.277777777777779" d="0.9027777777778283" h="0" angle="270" />
+  <Hologram scale="45" yon="10000" y="150" shape="6001" fill="#cbcbcb" frame="#000000" cx="1158.5416666666667" cz="8.75" angle="90" />
+  <Hologram scale="40" yon="10000" y="130" shape="6001" fill="#cbcbcb" frame="#000000" cx="892.4305555555555" cz="194.51388888888889" angle="270" />
+  <Hologram scale="20" yon="10000" y="170" shape="6001" fill="#cbcbcb" frame="#000000" cx="894.3055555555555" cz="152.63888888888889" angle="270" />
+  <Hologram shape="5003" scale="2" isAmbient="false" yon="5000" fill="#424242" frame="#424242" cx="454.86111111111114" cz="1794.5833333333335" angle="180" />
+  <Hologram shape="5004" scale="1" isAmbient="false" yon="5000" fill="#424242" frame="#424242" cx="201.45833333333334" cz="1793.5416666666667" angle="180" />
+  <Hologram shape="5008" scale="2" isAmbient="false" yon="5000" fill="#6f6f6f" frame="#6f6f6f" cx="906.875" cz="67.70833333333334" angle="0" />
   <set ambient.i="0" light.0.i="0.4" light.0.a="30" light.0.b="10" light.1.i="0.2" light.1.a="15" light.1.b="220" light.2.i="0.5" light.2.a="90" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
-  <Door2 guardDelay="0" y="3" shape="5005" fill="#909090" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="315" />
-  <Door2 guardDelay="0" y="11" scale="10.125" midYaw="22.25" shape="465" fill="#909090" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="135" />
+  <Door2 guardDelay="0" y="3" shape="5005" fill="#909090" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="135" />
+  <Door2 guardDelay="0" y="11" scale="10.125" midYaw="22.25" shape="465" fill="#909090" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="315" />
   <set wallHeight="8" />
   <Wall fill="#d8d8d8" frame="#000000" x="293.68055555555554" z="278.2986111111111" w="7.5" d="0.20833333333331439" h="0" y="3" />
   <set wallHeight="3.5" />
@@ -38,10 +36,10 @@ sensed by the Ra'Shari and attacked. Only when the 6 Ra'Shari have been destroye
   <Wall fill="#680900" frame="#000000" x="293.99305555555554" z="277.9513888888889" w="1.875" d="0.48611111111108585" h="0" y="6" />
   <set wallHeight=".5" />
   <Wall fill="#282828" frame="#000000" x="293.68055555555554" z="268.95833333333337" w="5" d="5" h="0" y="1.5" />
-  <Ramp y="0" deltaY="2" thickness="0.5" fill="#282828" frame="#000000" x="293.68055555555554" z="274.58333333333337" w="1.25" d="6.25" h="0" angle="0" />
-  <Ramp y="0" deltaY="2" thickness="0.5" fill="#282828" frame="#000000" x="293.68055555555554" z="263.33333333333337" w="1.25" d="6.25" h="0" angle="180" />
-  <Ramp y="0" deltaY="2" thickness="0.5" fill="#282828" frame="#000000" x="288.05555555555554" z="268.95833333333337" w="6.25" d="1.25" h="0" angle="90" />
-  <Ramp y="0" deltaY="2" thickness="0.5" fill="#282828" frame="#000000" x="299.30555555555554" z="268.95833333333337" w="6.25" d="1.25" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" thickness="0.5" fill="#282828" frame="#000000" x="293.68055555555554" z="274.58333333333337" w="1.25" d="6.25" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" thickness="0.5" fill="#282828" frame="#000000" x="293.68055555555554" z="263.33333333333337" w="1.25" d="6.25" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" thickness="0.5" fill="#282828" frame="#000000" x="288.05555555555554" z="268.95833333333337" w="6.25" d="1.25" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" thickness="0.5" fill="#282828" frame="#000000" x="299.30555555555554" z="268.95833333333337" w="6.25" d="1.25" h="0" angle="90" />
   <set wallHeight="8" />
   <Wall fill="#d8d8d8" frame="#000000" x="303.02083333333337" z="271.90972222222223" w="0.20833333333331439" d="1.4583333333333712" h="0" y="3" />
   <set wallHeight="8" />
@@ -68,7 +66,7 @@ sensed by the Ra'Shari and attacked. Only when the 6 Ra'Shari have been destroye
   <Wall fill="#d8d8d8" frame="#000000" x="284.3402777777778" z="268.9236111111111" w="0.20833333333331439" d="4.513888888888857" h="0" y="3" />
   <set wallHeight=".25" />
   <Wall fill="#4b4b4b" frame="#000000" x="281.42361111111114" z="268.9236111111111" w="5.625" d="4.513888888888857" h="0" y="3" />
-  <Ramp y="0" deltaY="3.25" thickness="0.25" fill="#4b4b4b" frame="#000000" x="275.79861111111114" z="268.9236111111111" w="5.625" d="4.513888888888857" h="0" angle="90" />
+  <Ramp y="0" deltaY="3.25" thickness="0.25" fill="#4b4b4b" frame="#000000" x="275.79861111111114" z="268.9236111111111" w="5.625" d="4.513888888888857" h="0" angle="270" />
   <set wallHeight="0" />
   <Wall fill="#4b4b4b" frame="#000000" x="284.3402777777778" z="268.9236111111111" w="0.20833333333331439" d="4.513888888888857" h="0" y="3.25" />
   <set wallHeight="1.25" />
@@ -99,120 +97,120 @@ sensed by the Ra'Shari and attacked. Only when the 6 Ra'Shari have been destroye
   <WallDoor midYaw="135" fill="#d8d8d8" frame="#000000" x="287.0486111111111" z="262.39583333333337" w="0.20833333333331439" d="7.8472222222222285" h="0" y="3" />
   <set wallHeight="1.25" wallYon="0" />
   <WallDoor midYaw="135" fill="#d8d8d8" frame="#000000" x="287.0486111111111" z="262.39583333333337" w="0.20833333333331439" d="7.8472222222222285" h="0" y="9.75" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="283.68055555555554" cz="288.95833333333337" angle="315" />
-  <TriPyramid scale=".75" fill="#6f6f6f" frame="#000000" cx="315.55555555555554" cz="302.70833333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="332.43055555555554" cz="270.20833333333337" angle="315" />
-  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="309.93055555555554" cz="249.58333333333334" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="271.18055555555554" cz="256.45833333333337" angle="315" />
-  <TriPyramid scale=".9" fill="#4b4b4b" frame="#000000" cx="282.43055555555554" cz="318.95833333333337" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="299.30555555555554" cz="278.95833333333337" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="287.43055555555554" cz="236.45833333333334" angle="315" />
-  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="246.18055555555557" cz="285.20833333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="240.55555555555557" cz="262.08333333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="261.18055555555554" cz="302.08333333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="341.18055555555554" cz="300.20833333333337" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="238.68055555555557" cz="308.33333333333337" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="307.43055555555554" cz="321.45833333333337" angle="315" />
-  <TriPyramid scale=".75" fill="#6f6f6f" frame="#000000" cx="249.30555555555557" cz="232.08333333333334" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="271.80555555555554" cz="210.20833333333334" angle="315" />
-  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="311.80555555555554" cz="217.08333333333334" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="368.6805555555556" cz="212.70833333333334" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="338.05555555555554" cz="243.33333333333334" angle="315" />
-  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="381.8055555555556" cz="284.58333333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="340.55555555555554" cz="333.95833333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="206.18055555555557" cz="323.33333333333337" angle="315" />
-  <TriPyramid scale=".75" fill="#6f6f6f" frame="#000000" cx="207.43055555555557" cz="237.08333333333334" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="198.68055555555557" cz="278.33333333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="298.05555555555554" cz="360.20833333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="244.93055555555557" cz="351.45833333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="299.30555555555554" cz="174.58333333333334" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="361.1805555555556" cz="173.95833333333334" angle="315" />
-  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="440.5555555555556" cz="270.20833333333337" angle="315" />
-  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="431.1805555555556" cz="203.95833333333334" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="398.0555555555556" cz="336.45833333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="351.18055555555554" cz="389.58333333333337" angle="315" />
-  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="257.43055555555554" cz="403.33333333333337" angle="315" />
-  <TriPyramid scale=".75" fill="#6f6f6f" frame="#000000" cx="178.68055555555557" cz="372.70833333333337" angle="315" />
-  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="143.05555555555557" cz="250.20833333333334" angle="315" />
-  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="227.43055555555557" cz="146.45833333333334" angle="315" />
-  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="171.80555555555557" cz="188.95833333333334" angle="315" />
-  <Door2 guardDelay="0" shape="bspHill" yon="5000" scale="6" fill="#4b4b4b" frame="#000000" cx="92.0138888888889" cz="1030.763888888889" angle="135" />
-  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="308.68055555555554" cz="421.45833333333337" angle="315" />
-  <TriPyramid scale="1" fill="#4b4b4b" frame="#000000" cx="127.43055555555557" cz="307.70833333333337" angle="315" />
-  <TriPyramid scale="6" yon="5000" y="-8" fill="#4b4b4b" frame="#000000" cx="687.0138888888889" cz="178.33333333333334" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="76.80555555555556" cz="272.08333333333337" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="164.93055555555557" cz="125.20833333333334" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="296.80555555555554" cz="124.58333333333334" angle="315" />
-  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="465.5555555555556" cz="333.33333333333337" angle="315" />
-  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="398.0555555555556" cz="130.83333333333334" angle="315" />
-  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="413.0555555555556" cz="393.95833333333337" angle="315" />
-  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="118.05555555555556" cz="199.58333333333334" angle="315" />
-  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="111.80555555555556" cz="368.95833333333337" angle="315" />
-  <TriPyramid scale=".15" fill="#4b4b4b" frame="#000000" cx="186.80555555555557" cz="431.45833333333337" angle="315" />
-  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="278.68055555555554" cz="467.70833333333337" angle="315" />
-  <TriPyramid scale=".15" fill="#4b4b4b" frame="#000000" cx="373.6805555555556" cz="458.95833333333337" angle="315" />
-  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="29 * 5" destGroup="@recenter" shape="0" spin="false" fill="#2742ff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="45" />
-  <Teleporter group="@recenter" y="6" activeRange="001 * 5" deadRange=".001 * 5" shape="0" spin="false" fill="#12be4f" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="225" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="283.68055555555554" cz="288.95833333333337" angle="135" />
+  <TriPyramid scale=".75" fill="#6f6f6f" frame="#000000" cx="315.55555555555554" cz="302.70833333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="332.43055555555554" cz="270.20833333333337" angle="135" />
+  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="309.93055555555554" cz="249.58333333333334" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="271.18055555555554" cz="256.45833333333337" angle="135" />
+  <TriPyramid scale=".9" fill="#4b4b4b" frame="#000000" cx="282.43055555555554" cz="318.95833333333337" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="299.30555555555554" cz="278.95833333333337" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="287.43055555555554" cz="236.45833333333334" angle="135" />
+  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="246.18055555555557" cz="285.20833333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="240.55555555555557" cz="262.08333333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="261.18055555555554" cz="302.08333333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="341.18055555555554" cz="300.20833333333337" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="238.68055555555557" cz="308.33333333333337" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="307.43055555555554" cz="321.45833333333337" angle="135" />
+  <TriPyramid scale=".75" fill="#6f6f6f" frame="#000000" cx="249.30555555555557" cz="232.08333333333334" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="271.80555555555554" cz="210.20833333333334" angle="135" />
+  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="311.80555555555554" cz="217.08333333333334" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="368.6805555555556" cz="212.70833333333334" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="338.05555555555554" cz="243.33333333333334" angle="135" />
+  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="381.8055555555556" cz="284.58333333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="340.55555555555554" cz="333.95833333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="206.18055555555557" cz="323.33333333333337" angle="135" />
+  <TriPyramid scale=".75" fill="#6f6f6f" frame="#000000" cx="207.43055555555557" cz="237.08333333333334" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="198.68055555555557" cz="278.33333333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="298.05555555555554" cz="360.20833333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="244.93055555555557" cz="351.45833333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="299.30555555555554" cz="174.58333333333334" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="361.1805555555556" cz="173.95833333333334" angle="135" />
+  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="440.5555555555556" cz="270.20833333333337" angle="135" />
+  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="431.1805555555556" cz="203.95833333333334" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="398.0555555555556" cz="336.45833333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="351.18055555555554" cz="389.58333333333337" angle="135" />
+  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="257.43055555555554" cz="403.33333333333337" angle="135" />
+  <TriPyramid scale=".75" fill="#6f6f6f" frame="#000000" cx="178.68055555555557" cz="372.70833333333337" angle="135" />
+  <TriPyramid scale=".5" fill="#6f6f6f" frame="#000000" cx="143.05555555555557" cz="250.20833333333334" angle="135" />
+  <TriPyramid scale=".65" fill="#6f6f6f" frame="#000000" cx="227.43055555555557" cz="146.45833333333334" angle="135" />
+  <TriPyramid scale=".5" fill="#4b4b4b" frame="#000000" cx="171.80555555555557" cz="188.95833333333334" angle="135" />
+  <Door2 guardDelay="0" shape="bspHill" yon="5000" scale="6" fill="#4b4b4b" frame="#000000" cx="92.0138888888889" cz="1030.763888888889" angle="315" />
+  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="308.68055555555554" cz="421.45833333333337" angle="135" />
+  <TriPyramid scale="1" fill="#4b4b4b" frame="#000000" cx="127.43055555555557" cz="307.70833333333337" angle="135" />
+  <TriPyramid scale="6" yon="5000" y="-8" fill="#4b4b4b" frame="#000000" cx="687.0138888888889" cz="178.33333333333334" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="76.80555555555556" cz="272.08333333333337" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="164.93055555555557" cz="125.20833333333334" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="296.80555555555554" cz="124.58333333333334" angle="135" />
+  <TriPyramid scale=".15" fill="#6f6f6f" frame="#000000" cx="465.5555555555556" cz="333.33333333333337" angle="135" />
+  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="398.0555555555556" cz="130.83333333333334" angle="135" />
+  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="413.0555555555556" cz="393.95833333333337" angle="135" />
+  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="118.05555555555556" cz="199.58333333333334" angle="135" />
+  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="111.80555555555556" cz="368.95833333333337" angle="135" />
+  <TriPyramid scale=".15" fill="#4b4b4b" frame="#000000" cx="186.80555555555557" cz="431.45833333333337" angle="135" />
+  <TriPyramid scale=".25" fill="#6f6f6f" frame="#000000" cx="278.68055555555554" cz="467.70833333333337" angle="135" />
+  <TriPyramid scale=".15" fill="#4b4b4b" frame="#000000" cx="373.6805555555556" cz="458.95833333333337" angle="135" />
+  <Teleporter group="-1" y="-30" activeRange="33 * 5" deadRange="29 * 5" destGroup="@recenter" shape="0" spin="false" fill="#2742ff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="225" />
+  <Teleporter group="@recenter" y="6" activeRange="001 * 5" deadRange=".001 * 5" shape="0" spin="false" fill="#12be4f" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="45" />
   <set defaultLives="1" hull.0="6666" hull.1="6666" hull.2="6666" missileTurnRate="0.1" missileAcceleration="0.8" />
-  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="392.4305555555556" cz="247.70833333333334" angle="315" />
-  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="218.05555555555557" cz="294.58333333333337" angle="315" />
+  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="392.4305555555556" cz="247.70833333333334" angle="135" />
+  <TriPyramid scale="1" fill="#6f6f6f" frame="#000000" cx="218.05555555555557" cz="294.58333333333337" angle="135" />
   <set wallYon=".01" />
   <WallDoor guardDelay="0" open="@open1" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="191.35416666666669" z="256.59722222222223" w="16.875" d="15" h="2" y="170" />
   <set wallYon="defaultYon" />
-  <Parasite shape="5000" scale=".25" yon="0" y="175" shield="4" activeRange="30000" targetGroup="targ1" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="227.29166666666669" cz="229.09722222222223" angle="225" />
+  <Parasite shape="5000" scale=".25" yon="0" y="175" shield="4" activeRange="30000" targetGroup="targ1" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="227.29166666666669" cz="229.09722222222223" angle="45" />
   <Area watch="targ1" freq="1" exit="@open1" cx="300.24305555555554" cz="274.27083333333337" r="212.8125" />
   <Area watch="targ2" freq="1" exit="@open2" cx="300.24305555555554" cz="275.1041666666667" r="212.8125" />
   <Area watch="targ3" freq="1" exit="@open3" cx="299.61805555555554" cz="273.64583333333337" r="212.8125" />
   <Area watch="targ4" freq="1" exit="@open4" cx="299.61805555555554" cz="273.64583333333337" r="212.8125" />
   <Area watch="targ5" freq="1" exit="@open5" cx="299.61805555555554" cz="273.64583333333337" r="212.8125" />
   <Area watch="targ6" freq="1" exit="@fin" cx="298.9930555555556" cz="273.2291666666667" r="212.8125" />
-  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ2" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="191.18055555555557" cz="256.45833333333337" angle="225" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ2" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="191.18055555555557" cz="256.45833333333337" angle="45" />
   <set wallYon=".01" />
   <WallDoor guardDelay="0" open="@open2" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="289.61805555555554" z="207.08333333333334" w="16.875" d="15" h="2" y="170" />
   <set wallYon="defaultYon" />
-  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ3" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="289.30555555555554" cz="206.45833333333334" angle="225" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ3" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="289.30555555555554" cz="206.45833333333334" angle="45" />
   <set wallYon=".01" />
   <WallDoor guardDelay="0" open="@open3" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="257.74305555555554" z="328.95833333333337" w="16.875" d="15" h="2" y="170" />
   <set wallYon="defaultYon" />
-  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ4" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="257.43055555555554" cz="328.33333333333337" angle="225" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ4" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="257.43055555555554" cz="328.33333333333337" angle="45" />
   <set wallYon=".01" />
   <WallDoor guardDelay="0" open="@open4" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="193.99305555555557" z="307.70833333333337" w="16.875" d="15" h="2" y="170" />
   <set wallYon="defaultYon" />
-  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ5" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="193.68055555555557" cz="307.08333333333337" angle="225" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ5" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="193.68055555555557" cz="307.08333333333337" angle="45" />
   <set wallYon=".01" />
   <WallDoor guardDelay="0" open="@open5" deltaY="0" deltaZ="-75" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="1" fill="#ffffff" frame="#000000" x="214.61805555555557" z="195.20833333333334" w="16.875" d="15" h="2" y="170" />
   <set wallYon="defaultYon" />
-  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ6" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="214.30555555555557" cz="194.58333333333334" angle="225" />
+  <Parasite shape="5000" scale=".25" yon="160" y="175" shield="4" activeRange="30000" targetGroup="targ6" accel="0.6" blastSound="8501" blastVolume="5000" sound="snParasiteAttach" volume="0.5" power="75" mass="500" fill="#0d0d0d" frame="#0d0d0d" cx="214.30555555555557" cz="194.58333333333334" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="5" />
-  <Goody shape="bspGrenade" y="5.75" yon=".01" speed="6" missiles="1" grenades="1" sound="8502" start="mShow" out="mTaken" fill="#00f2ff" frame="#ff2800" cx="293.68055555555554" cz="268.95833333333337" angle="225" />
-  <Teleporter shape="5010" win="1000" scale="1.25" start="@fin" y="3.76" fill="#00f2ff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="90" />
-  <Switch shape="1286" altShape="1286" restart="true" hitSound="8503" hitVolume="50" y="7" scale="2.5" out="@on" fill="#000000" frame="#000000" cx="293.95833333333337" cz="277.70833333333337" angle="0" />
+  <Goody shape="bspGrenade" y="5.75" yon=".01" speed="6" missiles="1" grenades="1" sound="8502" start="mShow" out="mTaken" fill="#00f2ff" frame="#ff2800" cx="293.68055555555554" cz="268.95833333333337" angle="45" />
+  <Teleporter shape="5010" win="1000" scale="1.25" start="@fin" y="3.76" fill="#00f2ff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="270" />
+  <Switch shape="1286" altShape="1286" restart="true" hitSound="8503" hitVolume="50" y="7" scale="2.5" out="@on" fill="#000000" frame="#000000" cx="293.95833333333337" cz="277.70833333333337" angle="180" />
   <set wallHeight="6.5" />
   <WallDoor open="@on" close="@off" deltaX="-3" roll="90" deltaY="3.25" openSound="0" closeSound="0" volume="50" shotPower="1" openSpeed="6" closeSpeed="4" fill="#acacac" frame="#000000" x="284.0625" z="268.9236111111111" w="0.34722222222222854" d="4.513888888888857" h="0" y="3.25" />
   <Timer in.1="@on" wait="100" out.1="@off" />
-  <Switch shape="1286" altShape="1286" restart="true" hitSound="8503" hitVolume="50" y="5.5" scale="1.75" out="@on" fill="#000000" frame="#000000" cx="284.23611111111114" cz="265.97222222222223" angle="270" />
+  <Switch shape="1286" altShape="1286" restart="true" hitSound="8503" hitVolume="50" y="5.5" scale="1.75" out="@on" fill="#000000" frame="#000000" cx="284.23611111111114" cz="265.97222222222223" angle="90" />
   <set wallHeght="4" />
-  <Field watch="targ1" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="270" />
+  <Field watch="targ1" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="90" />
   <set wallHeght="4" />
-  <Field watch="targ2" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="270" />
+  <Field watch="targ2" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="90" />
   <set wallHeght="4" />
-  <Field watch="targ3" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="270" />
+  <Field watch="targ3" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="90" />
   <set wallHeght="4" />
-  <Field watch="targ4" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="270" />
+  <Field watch="targ4" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="90" />
   <set wallHeght="4" />
-  <Field watch="targ5" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="270" />
+  <Field watch="targ5" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="90" />
   <set wallHeght="4" />
-  <Field watch="targ6" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="270" />
-  <Incarnator mask="T6" y="4" cx="293.68055555555554" cz="262.70833333333337" angle="0" />
-  <Incarnator mask="T6" y="4" cx="293.68055555555554" cz="275.20833333333337" angle="180" />
-  <Incarnator mask="T6" y="4" cx="289.30555555555554" cz="264.58333333333337" angle="315" />
-  <Incarnator mask="T6" y="4" cx="298.05555555555554" cz="273.33333333333337" angle="135" />
-  <Incarnator mask="T6" y="4" cx="298.05555555555554" cz="264.58333333333337" angle="45" />
-  <Incarnator mask="T6" y="4" cx="289.30555555555554" cz="273.33333333333337" angle="225" />
-  <Solid shape="bspHill" y="11" pitch="180" scale=".2" fill="#acacac" frame="#000000" cx="293.68055555555554" cz="268.8888888888889" angle="135" />
-  <Ball shape="5009" sound="0" customGravity="0" hitVolume="0" y="10.25" scale="2" pitch="90" canGlow="true" fill="#ffffff" frame="#000000" cx="293.75" cz="268.95833333333337" angle="315" />
+  <Field watch="targ6" deltaX="-.1" fill="#d8d8d8" frame="#000000" x="278.05555555555554" z="268.95833333333337" w="12.5" d="7.5" h="0" cx="284.23611111111114" cz="265.97222222222223" angle="90" />
+  <Incarnator mask="T6" y="4" cx="293.68055555555554" cz="262.70833333333337" angle="180" />
+  <Incarnator mask="T6" y="4" cx="293.68055555555554" cz="275.20833333333337" angle="0" />
+  <Incarnator mask="T6" y="4" cx="289.30555555555554" cz="264.58333333333337" angle="135" />
+  <Incarnator mask="T6" y="4" cx="298.05555555555554" cz="273.33333333333337" angle="315" />
+  <Incarnator mask="T6" y="4" cx="298.05555555555554" cz="264.58333333333337" angle="225" />
+  <Incarnator mask="T6" y="4" cx="289.30555555555554" cz="273.33333333333337" angle="45" />
+  <Solid shape="bspHill" y="11" pitch="180" scale=".2" fill="#acacac" frame="#000000" cx="293.68055555555554" cz="268.8888888888889" angle="315" />
+  <Ball shape="5009" sound="0" customGravity="0" hitVolume="0" y="10.25" scale="2" pitch="90" canGlow="true" fill="#ffffff" frame="#000000" cx="293.75" cz="268.95833333333337" angle="135" />
   <set wallYon=".01" />
   <set wallHeight=".15" />
   <WallDoor guardDelay="0" open="@start" deltaY="-5" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="293.64583333333337" z="269.13194444444446" w="0.625" d="0.625" h="0" y="10.5" />
@@ -221,8 +219,8 @@ sensed by the Ra'Shari and attacked. Only when the 6 Ra'Shari have been destroye
   <Wall fill="#ffffff" frame="#000000" x="294.34027777777777" z="268.8541666666667" w="0.625" d="1.875" h="0" y="9.55" />
   <set wallHeight=".76" wallYon=".01" />
   <Wall fill="#ffffff" frame="#000000" x="293.02083333333337" z="269.13194444444446" w="0.625" d="1.875" h="0" y="9.55" />
-  <Door2 guardDelay="0" shape="bspHill" y="3" scale=".2" fill="#909090" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="135" />
-  <Ball shape="5009" sound="0" customGravity="0" hitVolume="0" y="3.75" scale="2" pitch="90" canGlow="true" fill="#ffffff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="315" />
+  <Door2 guardDelay="0" shape="bspHill" y="3" scale=".2" fill="#909090" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="315" />
+  <Ball shape="5009" sound="0" customGravity="0" hitVolume="0" y="3.75" scale="2" pitch="90" canGlow="true" fill="#ffffff" frame="#000000" cx="293.68055555555554" cz="268.95833333333337" angle="135" />
   <set wallYon=".01" />
   <set wallHeight=".25" />
   <WallDoor guardDelay="0" open="@start" deltaY="-5" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="293.64583333333337" z="268.99305555555554" w="0.625" d="0.625" h="0" y="4" />
@@ -239,9 +237,9 @@ sensed by the Ra'Shari and attacked. Only when the 6 Ra'Shari have been destroye
   <Wall fill="#ffffff" frame="#000000" x="293.5763888888889" z="268.19444444444446" w="1.319444444444457" d="0.5555555555555429" h="0" y="3" />
   <set wallHeight=".76" wallYon=".01" />
   <Wall fill="#ffffff" frame="#000000" x="293.64583333333337" z="269.72222222222223" w="1.3194444444444002" d="0.5555555555555429" h="0" y="3" />
-  <Ball scale="4" customGravity="0" hitVolume="0" y="11" canGlow="true" shape="5007" fill="#919191" frame="#000000" cx="294.09722222222223" cz="269.375" angle="180" />
+  <Ball scale="4" customGravity="0" hitVolume="0" y="11" canGlow="true" shape="5007" fill="#919191" frame="#000000" cx="294.09722222222223" cz="269.375" angle="0" />
   <set wallYon=".01" />
   <WallDoor guardDelay="0" open="@start" deltaY="-5" deltaZ="0" shotPower="1" openSound="0" closeSound="0" stopSound="0" volume="0" openSpeed="3" fill="#ffffff" frame="#000000" x="294.54861111111114" z="270.20833333333337" w="5.625" d="1.25" h="2" y="11.5" />
   <set wallYon="defaultYon" />
-  <Ramp yon=".1" y="10.75" thickness="1.5" deltaY="0" fill="#919191" frame="#000000" x="294.44444444444446" z="269.4097222222223" w="5.277777777777828" d="0.9027777777777715" h="0" angle="90" />
+  <Ramp yon=".1" y="10.75" thickness="1.5" deltaY="0" fill="#919191" frame="#000000" x="294.44444444444446" z="269.4097222222223" w="5.277777777777828" d="0.9027777777777715" h="0" angle="270" />
 </map>

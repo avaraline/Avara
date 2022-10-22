@@ -1,24 +1,18 @@
 <map>
   <SkyColor fill="#f4a15b" frame="#cfbd5a" />
   <GroundColor fill="#59cdd1" />
-  <set designer="Peter Koss (mcad@avara.net)" information="Man this level sucks. Hey wait 
-theres a button over there. What 
-the?...." />
+  <set designer="Peter Koss (mcad@avara.net)" information="Man this level sucks. Hey wait &#10;theres a button over there. What &#10;the?...." />
   <SkyColor fill="#f4a15b" frame="#cfbd5a" />
   <GroundColor fill="#59cdd1" />
-  <set designer="Peter Koss (mcad@avara.net)" information="Man this level sucks. Hey wait 
-theres a button over there. What 
-the?...." />
+  <set designer="Peter Koss (mcad@avara.net)" information="Man this level sucks. Hey wait &#10;theres a button over there. What &#10;the?...." />
   <SkyColor fill="#f4a15b" frame="#cfbd5a" />
   <GroundColor fill="#59cdd1" />
-  <set designer="Peter Koss (mcad@avara.net)" information="Man this level sucks. Hey wait 
-theres a button over there. What 
-the?...." />
+  <set designer="Peter Koss (mcad@avara.net)" information="Man this level sucks. Hey wait &#10;theres a button over there. What &#10;the?...." />
   <Wall fill="#de5658" frame="#000000" x="137.77777777777777" z="79.47916666666667" w="71.80555555555557" d="52.15277777777778" h="0" />
-  <Solid shape="200" y="3" scale="2" fill="#fa8c58" frame="#000000" cx="128.71527777777777" cz="87.04861111111111" angle="45" />
-  <Solid shape="200" y="3" scale="2" fill="#fa8c58" frame="#000000" cx="145.86805555555554" cz="87.04861111111111" angle="315" />
-  <Solid shape="200" y="3" scale="2" fill="#fa8c58" frame="#000000" cx="128.78472222222223" cz="70.38194444444444" angle="135" />
-  <Solid shape="200" y="3" scale="2" fill="#fa8c58" frame="#000000" cx="145.79861111111114" cz="70.38194444444444" angle="225" />
+  <Solid shape="200" y="3" scale="2" fill="#fa8c58" frame="#000000" cx="128.71527777777777" cz="87.04861111111111" angle="225" />
+  <Solid shape="200" y="3" scale="2" fill="#fa8c58" frame="#000000" cx="145.86805555555554" cz="87.04861111111111" angle="135" />
+  <Solid shape="200" y="3" scale="2" fill="#fa8c58" frame="#000000" cx="128.78472222222223" cz="70.38194444444444" angle="315" />
+  <Solid shape="200" y="3" scale="2" fill="#fa8c58" frame="#000000" cx="145.79861111111114" cz="70.38194444444444" angle="45" />
   <set wallHeight="3" />
   <Wall fill="#f88758" frame="#000000" x="166.45833333333334" z="60.52083333333333" w="14.305555555555543" d="14.236111111111107" h="0" y="3" />
   <set wallHeight="3" />
@@ -32,7 +26,7 @@ the?...." />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="50" />
-  <Goody y="4.5" shape="bspGoody" speed="5" missiles="3" grenades="3" start="mShow" out="mTaken" fill="#fde458" frame="#cb4553" cx="137.56944444444446" cz="78.95833333333334" angle="179.5" />
+  <Goody y="4.5" shape="bspGoody" speed="5" missiles="3" grenades="3" start="mShow" out="mTaken" fill="#fde458" frame="#cb4553" cx="137.56944444444446" cz="78.95833333333334" angle="359.5" />
   <set wallHeight="0" />
   <WallDoor open="@open" close="@close" deltaY="-12.5" openSound="0" closeSound="0" stopSound="0" fill="#59cdd1" frame="#000000" x="91.42361111111111" z="51.80555555555556" w="18.541666666666657" d="18.47222222222223" h="0" y="12.5" />
   <set wallHeight="0" />
@@ -81,9 +75,9 @@ the?...." />
   <WallDoor open="@open" close="@close" deltaY="-12.5" openSound="0" closeSound="0" stopSound="0" fill="#59cdd1" frame="#000000" x="184.13194444444446" z="70.27777777777777" w="18.541666666666686" d="18.472222222222214" h="0" y="12.5" />
   <set wallHeight="0" />
   <WallDoor open="@open" close="@close" deltaY="-12.5" openSound="0" closeSound="0" stopSound="0" fill="#59cdd1" frame="#000000" x="184.13194444444446" z="51.80555555555556" w="18.541666666666686" d="18.47222222222223" h="0" y="12.5" />
-  <Solid y="3" shape="bspFloorFrame" fill="#ee685b" frame="#000000" cx="137.56944444444446" cz="78.95833333333334" angle="179.5" />
-  <Solid y="3" scale="3" shape="bspFloorFrame" fill="#ee685b" frame="#000000" cx="137.56944444444446" cz="78.95833333333334" angle="179.5" />
-  <Switch y="14" out.1="@open" out.0="@close" fill="#e62300" frame="#000000" cx="137.56944444444446" cz="68.36805555555556" angle="0" />
+  <Solid y="3" shape="bspFloorFrame" fill="#ee685b" frame="#000000" cx="137.56944444444446" cz="78.95833333333334" angle="359.5" />
+  <Solid y="3" scale="3" shape="bspFloorFrame" fill="#ee685b" frame="#000000" cx="137.56944444444446" cz="78.95833333333334" angle="359.5" />
+  <Switch y="14" out.1="@open" out.0="@close" fill="#e62300" frame="#000000" cx="137.56944444444446" cz="68.36805555555556" angle="180" />
   <set wallHeight="1.5" />
   <Wall fill="#ce4754" frame="#000000" x="137.70833333333334" z="50.72916666666667" w="71.80555555555556" d="5.347222222222221" h="0" />
   <set wallHeight="1.5" />
@@ -100,7 +94,7 @@ the?...." />
   <Wall fill="#000000" frame="#000000" x="137.88194444444446" z="41.90972222222223" w="115.34722222222223" d="2.8472222222222214" h="0" />
   <set wallHeight="0" />
   <Wall fill="#000000" frame="#000000" x="137.88194444444446" z="117.32638888888889" w="115.34722222222223" d="2.8472222222222143" h="0" />
-  <Switch y="2" out.1="@open" out.0="@close" fill="#e62300" frame="#000000" cx="137.74305555555557" cz="53.4375" angle="0" />
+  <Switch y="2" out.1="@open" out.0="@close" fill="#e62300" frame="#000000" cx="137.74305555555557" cz="53.4375" angle="180" />
   <set wallHeight="2" />
   <Wall fill="#566fe8" frame="#000000" x="137.67361111111111" z="56.84027777777778" w="37.0138888888889" d="8.263888888888886" h="0" y="12.5" />
   <set wallHeight="2" />
@@ -126,23 +120,23 @@ the?...." />
   <set wallHeight="25" />
   <Wall fill="#cbcbcb" frame="#000000" x="137.88194444444446" z="41.90972222222223" w="107.70833333333333" d="2.8472222222222214" h="0" />
   <set wallYon="defaultYon" />
-  <Incarnator y="25" cx="187.74305555555557" cz="47.1875" angle="45" />
-  <Incarnator y="25" cx="187.11805555555554" cz="112.25694444444446" angle="135" />
-  <Incarnator y="25" cx="88.22916666666667" cz="111.97916666666667" angle="225" />
-  <Incarnator y="25" cx="87.88194444444446" cz="46.97916666666667" angle="315" />
-  <Incarnator y="25" cx="112.95138888888889" cz="63.4375" angle="315" />
-  <Incarnator y="25" cx="161.77083333333334" cz="95.10416666666667" angle="135" />
+  <Incarnator y="25" cx="187.74305555555557" cz="47.1875" angle="225" />
+  <Incarnator y="25" cx="187.11805555555554" cz="112.25694444444446" angle="315" />
+  <Incarnator y="25" cx="88.22916666666667" cz="111.97916666666667" angle="45" />
+  <Incarnator y="25" cx="87.88194444444446" cz="46.97916666666667" angle="135" />
+  <Incarnator y="25" cx="112.95138888888889" cz="63.4375" angle="135" />
+  <Incarnator y="25" cx="161.77083333333334" cz="95.10416666666667" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="50" />
-  <Goody y="17.5" shape="bspGrenade" speed="5" grenades="3" start="mShow" out="mTaken" fill="#e62300" frame="#000000" cx="137.53472222222223" cz="78.99305555555557" angle="45" />
+  <Goody y="17.5" shape="bspGrenade" speed="5" grenades="3" start="mShow" out="mTaken" fill="#e62300" frame="#000000" cx="137.53472222222223" cz="78.99305555555557" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="50" />
-  <Goody y="14.5" shape="bspGrenade" speed="5" grenades="3" start="mShow" out="mTaken" fill="#e62300" frame="#000000" cx="186.97916666666669" cz="79.61805555555557" angle="45" />
+  <Goody y="14.5" shape="bspGrenade" speed="5" grenades="3" start="mShow" out="mTaken" fill="#e62300" frame="#000000" cx="186.97916666666669" cz="79.61805555555557" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="50" />
-  <Goody y="14.5" shape="bspGrenade" speed="5" grenades="3" start="mShow" out="mTaken" fill="#e62300" frame="#000000" cx="88.50694444444446" cz="79.54861111111111" angle="45" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#515151" frame="#000000" cx="137.60416666666669" cz="78.64583333333334" angle="135" />
+  <Goody y="14.5" shape="bspGrenade" speed="5" grenades="3" start="mShow" out="mTaken" fill="#e62300" frame="#000000" cx="88.50694444444446" cz="79.54861111111111" angle="225" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#515151" frame="#000000" cx="137.60416666666669" cz="78.64583333333334" angle="315" />
 </map>

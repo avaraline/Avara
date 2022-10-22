@@ -1,11 +1,8 @@
 <map>
-  <set information="Your HECTOR leaves a trail behind. If you stop or slow
-down, it will catch up with you and you will die.
-Use your trail to box in the other HECTORs.
-This is the 32x32 version." wallHeight="5" baseHeight="100" incHeight="wallHeight * 2" gridYon="32" hull.0="hullNort" hull.1="hull[0]" hull.2="hull[0]" defaultLives="1" wallYon="gridYon" OpDel="7" OpSpd="50" StartDelay="60" />
+  <set information="Your HECTOR leaves a trail behind. If you stop or slow&#10;down, it will catch up with you and you will die.&#10;Use your trail to box in the other HECTORs.&#10;This is the 32x32 version." wallHeight="5" baseHeight="100" incHeight="wallHeight * 2" gridYon="32" hull.0="hullNort" hull.1="hull[0]" hull.2="hull[0]" defaultLives="1" wallYon="gridYon" OpDel="7" OpSpd="50" StartDelay="60" />
   <SkyColor fill="#012ce4" frame="#2d2d2d" />
   <GroundColor fill="#012ce4" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="5.277777777777778" cz="25.833333333333336" angle="45" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="5.277777777777778" cz="25.833333333333336" angle="225" />
   <Wall fill="#00ec00" frame="#000000" x="50.59027777777778" z="110.20833333333334" w="0.625" d="160" h="0" />
   <set wa="wallHeight" wallYon="0.01" />
   <unique vars="mA mB" />
@@ -29,7 +26,7 @@ This is the 32x32 version." wallHeight="5" baseHeight="100" incHeight="wallHeigh
   <unique vars="mA mB" />
   <WallDoor stepOnMsg="mA" open="mA" didOpen="mB" close="mB" openSpeed="100" closeSpeed="100" shotPower="1000" stopSound="0" openSound="0" closeSound="0" fill="#7a4300" frame="#000000" x="143.71527777777777" z="215.20833333333334" w="9.375" d="30" h="0.25" />
   <set wallYon="gridYon" />
-  <Teleporter y="incHeight * 2" yon="0.01" group="@death" start="0" sound="0" fill="#a8d6ff" frame="#000000" cx="144.02777777777777" cz="210.83333333333334" angle="315" />
+  <Teleporter y="incHeight * 2" yon="0.01" group="@death" start="0" sound="0" fill="#a8d6ff" frame="#000000" cx="144.02777777777777" cz="210.83333333333334" angle="135" />
   <unique vars="mStep" />
   <WallDoor stepOnMsg="mStep" open="mStep" openDelay="OpDel" shotPower="100" deltaY="wallHeight" openSpeed="OpSpd" fill="#010e68" frame="#000000" x="53.09027777777778" z="32.395833333333336" w="4.375" d="4.375" h="0" />
   <Wall fill="#00ec00" frame="#000000" x="55.59027777777778" z="32.395833333333336" w="0.625" d="4.375" h="0" />
@@ -3134,7 +3131,7 @@ This is the 32x32 version." wallHeight="5" baseHeight="100" incHeight="wallHeigh
   <unique vars="mStep" />
   <WallDoor stepOnMsg="mStep" open="mStep" openDelay="OpDel" shotPower="100" deltaY="wallHeight" openSpeed="OpSpd" fill="#010e68" frame="#000000" x="208.0902777777778" z="187.39583333333334" w="4.375" d="4.375" h="0" />
   <Wall fill="#00ec00" frame="#000000" x="210.5902777777778" z="187.39583333333334" w="0.625" d="4.375" h="0" />
-  <Teleporter yon="0.01" group="-1" destGroup="@death" deadRange="140" activeRange="deadRange + 50" y="incHeight" fill="#7a4300" frame="#000000" cx="130.27777777777777" cz="108.33333333333334" angle="315" />
+  <Teleporter yon="0.01" group="-1" destGroup="@death" deadRange="140" activeRange="deadRange + 50" y="incHeight" fill="#7a4300" frame="#000000" cx="130.27777777777777" cz="108.33333333333334" angle="135" />
   <set wa="wallHeight" wallYon="0.01" />
   <unique vars="mA mB" />
   <WallDoor stepOnMsg="mA" open="mA" didOpen="mB" close="mB" openSpeed="100" closeSpeed="100" shotPower="1000" stopSound="0" openSound="0" closeSound="0" fill="#7a4300" frame="#000000" x="45.59027777777778" z="125.20833333333334" w="9.375" d="30" h="0.25" />
@@ -3197,42 +3194,42 @@ This is the 32x32 version." wallHeight="5" baseHeight="100" incHeight="wallHeigh
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="33.958333333333336" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="37.77777777777778" cz="32.56944444444444" angle="270" />
+  <Incarnator y="incHeight" cx="37.77777777777778" cz="32.56944444444444" angle="90" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="218.4027777777778" z="31.458333333333336" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="218.4027777777778" z="33.958333333333336" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="223.4027777777778" cz="32.56944444444444" angle="90" />
+  <Incarnator y="incHeight" cx="223.4027777777778" cz="32.56944444444444" angle="270" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="107.08333333333334" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="109.58333333333334" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="37.77777777777778" cz="108.19444444444444" angle="270" />
+  <Incarnator y="incHeight" cx="37.77777777777778" cz="108.19444444444444" angle="90" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="218.4027777777778" z="107.70833333333334" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="218.4027777777778" z="110.20833333333334" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="223.4027777777778" cz="108.81944444444444" angle="90" />
+  <Incarnator y="incHeight" cx="223.4027777777778" cz="108.81944444444444" angle="270" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="185.83333333333334" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="42.77777777777778" z="188.33333333333334" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="37.77777777777778" cz="186.94444444444446" angle="270" />
+  <Incarnator y="incHeight" cx="37.77777777777778" cz="186.94444444444446" angle="90" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="90" deltaZ="-2" fill="#bb1800" frame="#000000" x="218.4027777777778" z="185.83333333333334" w="15" d="2.5" h="0.25" />
   <set wa="incHeight -1" />
   <unique vars="mA" />
   <WallDoor stepOnMsg="mA" open="mA" openSpeed="50" openDelay="StartDelay" deltaY="-2" pitch="-90" deltaZ="2" fill="#bb1800" frame="#000000" x="218.4027777777778" z="188.33333333333334" w="15" d="2.5" h="0.25" />
-  <Incarnator y="incHeight" cx="223.4027777777778" cz="186.94444444444446" angle="90" />
+  <Incarnator y="incHeight" cx="223.4027777777778" cz="186.94444444444446" angle="270" />
   <Wall fill="#ff32a9" frame="#000000" x="130.2777777777778" z="29.270833333333336" w="161.25" d="0.625" h="0" />
   <Wall fill="#ff32a9" frame="#000000" x="211.2152777777778" z="109.58333333333334" w="0.625" d="161.25" h="0" />
   <Wall fill="#ff32a9" frame="#000000" x="130.9027777777778" z="190.52083333333334" w="161.25" d="0.625" h="0" />

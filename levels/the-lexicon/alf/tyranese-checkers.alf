@@ -6,7 +6,7 @@
   <Timer in="@start" wait="1" out="@padsOn" />
   <SkyColor fill="#ffffff" frame="#ffffff" />
   <GroundColor fill="#ffffff" />
-  <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="2.8125" cz="7.708333333333334" angle="225" />
+  <Teleporter y="200" shape="0" win="1200" start="@winTeam" activeRange="2000" fill="#565656" frame="#d6a800" cx="2.8125" cz="7.708333333333334" angle="45" />
   <set wallHeight="0.25" />
   <Wall fill="#ff7c00" frame="#000000" x="29.583333333333336" z="42.986111111111114" w="10" d="10" h="0" y="100" />
   <Wall fill="#ff7c00" frame="#000000" x="29.583333333333336" z="62.986111111111114" w="10" d="10" h="0" y="100" />
@@ -34,7 +34,7 @@
   <Wall fill="#ff7c00" frame="#000000" x="42.083333333333336" z="70.48611111111111" w="5" d="5" h="0" y="100" />
   <set wallHeight="0" />
   <WallSolid shield="6" isTarget="false" canGlow="true" fill="#f1f1f1" frame="#000000" x="37.083333333333336" z="55.486111111111114" w="5" d="5" h="0" y="100" />
-  <Incarnator y="115" cx="32.083333333333336" cz="63.05555555555556" angle="270" />
+  <Incarnator y="115" cx="32.083333333333336" cz="63.05555555555556" angle="90" />
   <WallSolid shield="6" isTarget="false" canGlow="true" fill="#f1f1f1" frame="#000000" x="37.083333333333336" z="60.486111111111114" w="5" d="5" h="0" y="100" />
   <WallSolid shield="6" isTarget="false" canGlow="true" fill="#f1f1f1" frame="#000000" x="42.083333333333336" z="60.486111111111114" w="5" d="5" h="0" y="100" />
   <WallSolid shield="6" isTarget="false" canGlow="true" fill="#f1f1f1" frame="#000000" x="37.083333333333336" z="65.48611111111111" w="5" d="5" h="0" y="100" />
@@ -82,66 +82,66 @@
   <Wall fill="#ff7c00" frame="#000000" x="59.58333333333334" z="62.986111111111114" w="10" d="10" h="0" y="85" />
   <Wall fill="#ff7c00" frame="#000000" x="49.583333333333336" z="72.98611111111111" w="10" d="10" h="0" y="85" />
   <set wallHeight="3" />
-  <Field visible="false" deltaY="2.8" deltaX="-0.15" deltaZ="0" enter="@goText" start="@padsOn" stop="@padsOff" fill="#a8d200" frame="#000000" cx="32.083333333333336" cz="63.05555555555556" angle="270" x="49.583333333333336" z="52.986111111111114" w="10" d="10" h="0" y="85" />
-  <Field visible="false" deltaY="2.8" deltaX="-0.15" deltaZ="0" enter="@goText" start="@padsOn" stop="@padsOff" fill="#a8d200" frame="#000000" cx="32.083333333333336" cz="63.05555555555556" angle="270" x="39.583333333333336" z="62.986111111111114" w="10" d="10" h="0" y="85" />
-  <Field visible="false" deltaY="2.8" deltaX="-0.15" deltaZ="0" enter="@goText" start="@padsOn" stop="@padsOff" fill="#a8d200" frame="#000000" cx="32.083333333333336" cz="63.05555555555556" angle="270" x="59.58333333333334" z="62.986111111111114" w="10" d="10" h="0" y="85" />
-  <Field visible="false" deltaY="2.8" deltaX="-0.15" deltaZ="0" enter="@goText" start="@padsOn" stop="@padsOff" fill="#a8d200" frame="#000000" cx="32.083333333333336" cz="63.05555555555556" angle="270" x="49.583333333333336" z="72.98611111111111" w="10" d="10" h="0" y="85" />
-  <Incarnator y="115" cx="65.83333333333334" cz="63.05555555555556" angle="90" />
-  <Incarnator y="115" cx="49.65277777777778" cz="46.111111111111114" angle="0" />
-  <Incarnator y="115" cx="49.65277777777778" cz="79.23611111111111" angle="180" />
-  <Incarnator y="115" cx="32.708333333333336" cz="79.86111111111111" angle="225" />
-  <Incarnator y="115" cx="66.45833333333334" cz="46.111111111111114" angle="45" />
-  <Incarnator y="115" cx="66.45833333333334" cz="79.86111111111111" angle="135" />
-  <Incarnator y="115" cx="32.708333333333336" cz="46.111111111111114" angle="315" />
+  <Field visible="false" deltaY="2.8" deltaX="-0.15" deltaZ="0" enter="@goText" start="@padsOn" stop="@padsOff" fill="#a8d200" frame="#000000" cx="32.083333333333336" cz="63.05555555555556" angle="90" x="49.583333333333336" z="52.986111111111114" w="10" d="10" h="0" y="85" />
+  <Field visible="false" deltaY="2.8" deltaX="-0.15" deltaZ="0" enter="@goText" start="@padsOn" stop="@padsOff" fill="#a8d200" frame="#000000" cx="32.083333333333336" cz="63.05555555555556" angle="90" x="39.583333333333336" z="62.986111111111114" w="10" d="10" h="0" y="85" />
+  <Field visible="false" deltaY="2.8" deltaX="-0.15" deltaZ="0" enter="@goText" start="@padsOn" stop="@padsOff" fill="#a8d200" frame="#000000" cx="32.083333333333336" cz="63.05555555555556" angle="90" x="59.58333333333334" z="62.986111111111114" w="10" d="10" h="0" y="85" />
+  <Field visible="false" deltaY="2.8" deltaX="-0.15" deltaZ="0" enter="@goText" start="@padsOn" stop="@padsOff" fill="#a8d200" frame="#000000" cx="32.083333333333336" cz="63.05555555555556" angle="90" x="49.583333333333336" z="72.98611111111111" w="10" d="10" h="0" y="85" />
+  <Incarnator y="115" cx="65.83333333333334" cz="63.05555555555556" angle="270" />
+  <Incarnator y="115" cx="49.65277777777778" cz="46.111111111111114" angle="180" />
+  <Incarnator y="115" cx="49.65277777777778" cz="79.23611111111111" angle="0" />
+  <Incarnator y="115" cx="32.708333333333336" cz="79.86111111111111" angle="45" />
+  <Incarnator y="115" cx="66.45833333333334" cz="46.111111111111114" angle="225" />
+  <Incarnator y="115" cx="66.45833333333334" cz="79.86111111111111" angle="315" />
+  <Incarnator y="115" cx="32.708333333333336" cz="46.111111111111114" angle="135" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspAvaraA" grenades="8" missiles="6" y="104.5" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="63.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspAvaraA" grenades="8" missiles="6" y="104.5" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="63.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="102.5" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="63.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="102.5" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="63.05555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspGrenade" grenades="4" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="43.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspGrenade" grenades="4" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="43.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="43.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="43.05555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspGrenade" grenades="4" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="83.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspGrenade" grenades="4" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="83.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="83.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="83.05555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspGrenade" grenades="4" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="83.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspGrenade" grenades="4" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="83.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="83.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="83.05555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspGrenade" grenades="4" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="43.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspGrenade" grenades="4" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="43.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="43.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="43.05555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspMissile" missiles="2" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="63.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspMissile" missiles="2" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="63.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="63.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="69.58333333333334" cz="63.05555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspMissile" missiles="2" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="83.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspMissile" missiles="2" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="83.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="83.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="83.05555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspMissile" missiles="2" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="63.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspMissile" missiles="2" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="63.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="63.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="29.583333333333336" cz="63.05555555555556" angle="225" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
-  <Goody speed="8" shape="bspMissile" missiles="2" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="43.05555555555556" angle="45" />
+  <Goody speed="8" shape="bspMissile" missiles="2" y="102.25" start="mShow" out="mTaken" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="43.05555555555556" angle="225" />
   <Timer in="mTaken" out="mShow" wait="180" />
-  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="43.05555555555556" angle="45" />
+  <Hologram shape="bspStandardFloor" scale=".5" y="100.25" fill="#565656" frame="#fffed5" cx="49.583333333333336" cz="43.05555555555556" angle="225" />
   <set wallHeight="2" wallYon="0.001" />
-  <Field enter="@crush" deltaY="0" deltaX="0" deltaZ="0" visible="false" fill="#ffffff" frame="#000000" cx="49.583333333333336" cz="43.05555555555556" angle="45" x="12.083333333333334" z="50.486111111111114" w="5" d="5" h="0" y="50" />
+  <Field enter="@crush" deltaY="0" deltaX="0" deltaZ="0" visible="false" fill="#ffffff" frame="#000000" cx="49.583333333333336" cz="43.05555555555556" angle="225" x="12.083333333333334" z="50.486111111111114" w="5" d="5" h="0" y="50" />
   <WallDoor openSpeed="50" closeSpeed="50" deltaY="5" shotPower="500" didOpen="@reset" open="@crush" close="@reset" closeDelay="5" openSound="0" closeSound="0" volume="0" fill="#ff82d6" frame="#000000" x="12.083333333333334" z="50.486111111111114" w="5" d="5" h="0" y="48" />
-  <script>
+  <script pixelToThickness="0.125" designer="Apollo &lt;apollo@avara.org&gt;" information="Slo mo fo says trick or treat." defaultLives="5" fill="#e4e4e4" cx="12.63888888888889" cz="50.486111111111114" r="1.3194444444444446" angle="315" frame="#f42300" wallHeight="2" wallYon="0.001">
 object Teleporter
 group = @centery = 2*startY
 activeRange = 2000
