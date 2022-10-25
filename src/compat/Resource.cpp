@@ -531,3 +531,26 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     HUnlock((Handle)aSample);
     return aSample;
 }
+
+bspsResource* GetBSPScaling(short resId) {
+    std::string r = std::to_string(resId);
+    nlohmann::json s = GetKeyFromSetJSON("BSPS", r, "");
+    bspsResource* res = new bspsResource;
+    if(s != -1) {
+        const char* k = "1:1 size";
+        if(s.find(k) != s.end()){
+            res->baseSize = ToFixed(s[k]);
+        }
+        else res->baseSize = FIX1;
+        const char* k2 = "Stretch/Scale (0/1)";
+        if(s.find(k2) != s.end()) {
+            res->scaleStyle = ToFixed(s[k2]);
+        }
+        else res->scaleStyle = 0;
+    }
+    else{
+        res->baseSize = FIX1;
+        res->scaleStyle = 0;
+    }
+    return res;
+}

@@ -15,18 +15,6 @@
 
 #define DIMEPSILON 16
 
-typedef struct {
-    Fixed baseSize;
-    short scaleStyle;
-} bspsResource;
-
-/*
-{
-"400": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
-"401": {"1:1 size": 1.0,"Stretch/Scale (0/1)": 0},
-"722": {"1:1 size": 5.0,"Stretch/Scale (0/1)": 0}
-}
-*/
 
 void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     Vector *p;
@@ -128,28 +116,19 @@ void CSmartBox::ISmartBox(short resId,
     OSErr iErr;
     Vector *p;
     short i;
-    bspsResource **config;
     Fixed baseSize;
     Boolean stretchFlag;
 
-    Handle res = GetResource(BSPTEMPLATETYPE, resId);
-    if (res == NULL) {
+    char* bsp = GetBSPPath(resId);
+    if (bsp == NULL) {
         resId = dimensions[1] ? BOXTEMPLATERESOURCE : PLATETEMPLATERESOURCE;
-    } else {
-        ReleaseResource(res);
-    }
-
+    } 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
-    config = (bspsResource **)GetResource(BSPSCALETYPE, resId);
-    if (config) {
-        stretchFlag = ntohs((*config)->scaleStyle);
-        baseSize = ntohl((*config)->baseSize);
-        ReleaseResource((Handle)config);
-    } else {
-        stretchFlag = false;
-        baseSize = FIX(1);
-    }
+    bspsResource* config = GetBSPScaling(resId);
+    stretchFlag = config->scaleStyle;
+    baseSize = config->baseSize;
+    delete config;
 
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);

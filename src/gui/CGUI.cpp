@@ -3,48 +3,13 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CNetManager.h"
-#include "AvaraGL.h"
 #include "LevelLoader.h"
 #include "CApplication.h"
 #include "Preferences.h"
 #include "CSoundHub.h"
-extern "C" {
-#include "microui.h"
-}
-mu_Context *mui_ctx;
-
-const glm::vec3 CGUI::screenToWorld(Point *p) {
-    float normalized_x = (((float)p->h / (float)gApplication->fb_size_x) * 2.0) - 1.0;
-    float normalized_y = ((((float)p->v / (float)gApplication->fb_size_y) * 2.0) - 1.0) * -1.0;
-    glm::vec4 v = glm::vec4(normalized_x, normalized_y, 1.0, -1);
-    return AvaraGLScreenSpaceToWorldSpace(itsView, &v);
-}
-
-// MUI Callbacks
-
-static int text_width(mu_Font f, const char *text, int len) {
-    return (int)round(nvgTextBounds(gApplication->nvg_context, 0, 0, text, nullptr, nullptr));
-}
-static int text_height(mu_Font f) {
-    float lineh;
-    nvgTextMetrics(gApplication->nvg_context, nullptr, nullptr, &lineh);
-    return (int)round(lineh);
-}
-
-static void draw_frame(mu_Context *ctx, mu_Rect rect, int colorid) {
-    mu_draw_rect(ctx, rect, ctx->style->colors[colorid]);
-    if (colorid == MU_COLOR_SCROLLBASE  ||
-        colorid == MU_COLOR_SCROLLTHUMB ||
-        colorid == MU_COLOR_TITLEBG) { return; }
-    /* draw border */
-    if (ctx->style->colors[MU_COLOR_BORDER].a) {
-        //mu_draw_rect(ctx, rect, ctx->style->colors[MU_COLOR_BORDER]);
-    }
-}
 
 CGUI::CGUI(CAvaraGame *game) {
     itsGame = game;
-    itsGame->InitMixer(false);
     itsWorld = new CBSPWorldImpl;
     itsWorld->IBSPWorld(50);
     itsView = game->itsView;
@@ -55,7 +20,7 @@ CGUI::CGUI(CAvaraGame *game) {
     mui_ctx->text_width = text_width;
     mui_ctx->text_height = text_height;
 
-    itsGame->itsApp->LoadLevel("aa-normal", "bwadi.alf", NULL);
+    //itsGame->itsApp->LoadLevel("aa-normal", "bwadi.alf", NULL);
 
     itsCursor = new CScaledBSP;
     itsCursor->IScaledBSP(FIX3(100), kCursorBSP, 0, 0);
@@ -83,9 +48,7 @@ void CGUI::Update() {
     dt = t - last_t;
     int fb_size_x = gApplication->fb_size_x;
     int fb_size_y = gApplication->fb_size_y;
-    itsGame->GameTick();
-    //screen->Update();
-    mui_ctx->style->padding = 10;
+    mui_ctx->style->padding = 20;
     mu_begin(mui_ctx);
     int muiflags = MU_OPT_NOFRAME | MU_OPT_NOTITLE | MU_OPT_NOCLOSE | MU_OPT_NOINTERACT | MU_OPT_NORESIZE | MU_OPT_AUTOSIZE;
     if(mu_begin_window_ex(mui_ctx, 
@@ -100,16 +63,16 @@ void CGUI::Update() {
         std::stringstream fps;
         fps << "frame in: " << dt << "ms";
         mu_label(mui_ctx, fps.str().c_str());
-        if (mu_button(mui_ctx, "PLAY")) {
+        if (BSPButton("PLAY")) {
             PlaySound(411);
         }
-        if (mu_button(mui_ctx, "ABOUT")) {
+        if (BSPButton("ABOUT")) {
             PlaySound(411);
         }
-        if (mu_button(mui_ctx, "OPTIONS")) {
+        if (BSPButton("OPTIONS")) {
             PlaySound(411);
         }
-        if (mu_button(mui_ctx, "QUIT")) {
+        if (BSPButton("QUIT")) {
             SDL_Event sdlevent;
             sdlevent.type = SDL_QUIT;
             SDL_PushEvent(&sdlevent);
@@ -119,6 +82,75 @@ void CGUI::Update() {
     }
     mu_end(mui_ctx);
 }
+
+void CGUI::PlaceGUIPart(CBSPPart *_part, mu_Rect r) {
+
+}
+
+int CGUI::BSPButton(std::string s) {
+    int res = 0;
+    mu_Id mu_id = mu_get_id(mui_ctx, s.c_str(), s.length());
+    mu_Rect r = mu_layout_next(mui_ctx);
+    mu_update_control(mui_ctx, mu_id, r, 0);
+    /* handle click */
+    if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
+        res |= MU_RES_SUBMIT;
+    }
+    /* draw */
+    if (s.length() > 0) { mu_draw_control_text(mui_ctx, s.c_str(), r, MU_COLOR_TEXT, 0); }
+
+    Point mid = pt(r.x + (r.w / 2), r.y + (r.h / 2));
+    glm::vec3 worldpos = screenToWorld(&mid);
+
+    if (boxes.count(mu_id) > (std::size_t)0) {
+        CWallActor* _actor = boxes.at(mu_id);
+        CBSPPart* _part = _actor->partList[0];
+        _part->Reset();
+        if (mui_ctx->hover == mu_id) {
+            long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTONHOVER]);
+            _part->ReplaceColor(0xfefefe, color);
+            short count = 10;
+            short life = 8;
+            _actor->Shatter(kSmallSliver, 1, &count, &life, FIX3(700));
+        }
+        else {
+            long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
+            _part->ReplaceColor(0xfefefe, color);
+        }
+
+        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
+        _part->MoveDone();
+    }
+    else {
+        Point s_topleft = pt(r.x, r.y);
+        Point s_bottomright = pt(r.x + r.w, r.y + r.h);
+        glm::vec3 ws_topleft = screenToWorld(&s_topleft);
+        glm::vec3 ws_bottomright = screenToWorld(&s_bottomright);
+        Vector dims;
+        dims[0] = ToFixed((ws_bottomright.x - ws_topleft.x) / 2.0);
+        dims[1] = ToFixed((ws_bottomright.y - ws_topleft.y) / 2.0);
+        dims[2] = FIX3(1);
+        //CSmartBox* _part = new CSmartBox;
+        long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
+        CWallActor* _actor = new CWallActor;
+        _actor->IAbstractActor();
+        _actor->MakeWallFromDims(dims, color);
+        //_part->ISmartBox(kBlockBSP, dims, color, color, 0, 0);
+
+        //_part->ReplaceColor(0x00fefefe, 0x00ffffff);
+        Vector _partLoc;
+        CBSPPart* _part = _actor->partList[0];
+        AvaraGLUpdateData(_part);
+        itsWorld->AddPart(_part);
+        _part->Reset();
+        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
+        _part->MoveDone();
+        boxes.emplace(mu_id, _actor);
+    }
+
+    return res;
+}
+
 
 void CGUI::PlaySound(short theSound) {
     CBasicSound *aSound;
@@ -196,47 +228,28 @@ StateFunction CGUI::_startup() {
     //auto *AvaraPart = new CBSPPart;
     //AvaraPart->IBSPPart(kAvaraLogo);
     PlaySound(411);
-    return CHANGETO(_transitonScreen);
+    return CHANGETO(_transitionScreen);
 }
 
-StateFunction CGUI::_transitonScreen() {
+StateFunction CGUI::_transitionScreen() {
     return STAY;
 }
-
-static const NVGcolor toNVGcolor(mu_Color other) {
-    NVGcolor c;
-    c.r = other.r / 255.0;
-    c.g = other.g / 255.0;
-    c.b = other.b / 255.0;
-    c.a = other.a / 255.0;
-    return c;
-}
-
-static const long RGBAToLong(mu_Color c) {
-    return (
-        (static_cast<int>(c.a + 0.5) << 24) +
-        (static_cast<int>(c.r) << 16) +
-        (static_cast<int>(c.g) << 8) +
-        static_cast<int>(c.b)
-    );
-};
 
 void CGUI::Render(NVGcontext *ctx) {
 
     //nvgSave(ctx);
     nvgBeginFrame(ctx, gApplication->win_size_x, gApplication->win_size_y, gApplication->pixel_ratio);
     nvgBeginPath(ctx);
-
-
     LookAtGUI();
-    //itsWorld->Render(itsView);
+    itsWorld->Render(itsView);
+    
     //screen->Render(ctx);
 
     mu_Command *cmd = NULL;
     while (mu_next_command(mui_ctx, &cmd)) {
+        /*
         if (cmd->type == MU_COMMAND_RECT) {
             mu_Rect rect = cmd->rect.rect;
-            
             NVGcolor c = toNVGcolor(cmd->rect.color);
             nvgBeginPath(ctx);
             nvgRect(ctx, cmd->rect.rect.x, cmd->rect.rect.y, cmd->rect.rect.w, cmd->rect.rect.h);
@@ -247,6 +260,7 @@ void CGUI::Render(NVGcontext *ctx) {
             nvgClosePath(ctx);
             
         }
+        */
         if (cmd->type == MU_COMMAND_TEXT) {
             nvgFontFace(ctx, "archivo");
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
@@ -256,10 +270,8 @@ void CGUI::Render(NVGcontext *ctx) {
         }
     }
     nvgEndFrame(ctx);
-    //nvgRestore(ctx);
     cursorWorld->Render(itsView);
 }
-
 
 void CGUI::Dispose() {
     delete this;

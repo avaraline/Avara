@@ -78,7 +78,7 @@ public:
                 itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
                 itsPart->ReplaceColor(kOtherMarkerColor, 16646144); // red
                 AvaraGLUpdateData(itsPart);
-s                itsWorld->AddPart(itsPart);
+                itsWorld->AddPart(itsPart);
                 SDL_Log("Loaded BSP %d", id);
                 return true;
             }
@@ -167,23 +167,10 @@ s                itsWorld->AddPart(itsPart);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glBlendFunc(GL_ONE, GL_ZERO);
-        if (update) {
-            AvaraGLViewport(fb_size_x, fb_size_y);
-            itsView->SetViewRect(fb_size_x, fb_size_y, fb_size_x / 2, fb_size_y / 2);
-            itsView->viewPixelRatio = FIX(4.0/3.0);
-            itsView->CalculateViewPyramidCorners();
-        
-            if (cull_back_faces) {
-                itsPart->userFlags |= CBSPUserFlags::kCullBackfaces;
-            }
-            else {
-                itsPart->userFlags &= ~CBSPUserFlags::kCullBackfaces;
-            }
-
-        AvaraGLViewport(mFBSize.x, mFBSize.y);
-        itsView->SetViewRect(mFBSize.x, mFBSize.y, mFBSize.x / 2, mFBSize.y / 2);
+        AvaraGLViewport(fb_size_x, fb_size_y);
+        itsView->SetViewRect(fb_size_x, fb_size_y, fb_size_x / 2, fb_size_y / 2);
         itsView->viewPixelRatio = FIX(4.0/3.0);
-        itsView->CalculateViewPyramidCorners();
+            itsView->CalculateViewPyramidCorners();
         itsView->PointCamera();
 
         itsPart->Reset();
@@ -222,7 +209,7 @@ int main(int argc, char *argv[]) {
             if (event.type == SDL_QUIT) {
                 main_loop_active = false;
             }
-            app->event(event);
+            app->HandleEvent(event);
         }
 
         glClearColor(.3, .5, .3, 1);

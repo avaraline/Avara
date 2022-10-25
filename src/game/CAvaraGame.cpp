@@ -145,7 +145,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsView->yonBound = LONGYON;
     itsView->horizonBound = FIX(16000); //	16 km
 
-    mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
+    //mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
 
     // IGameTimer(frameTime/TIMING_GRAIN);
 
@@ -222,7 +222,7 @@ void CAvaraGame::Dispose() {
         itsNet->Dispose();
     if (worldShader)
         worldShader->Dispose();
-    ReleaseResource(mapRes);
+    //ReleaseResource(mapRes);
 
     // DisposePolyWorld(&itsPolyWorld);
     DisposePtr((Ptr)locatorTable);

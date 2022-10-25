@@ -13,4 +13,5 @@
 class CWallActor : public CAbstractActor {
 public:
     virtual void MakeWallFromRect(Rect *theRect, Fixed height, short decimateWalls, Boolean isOrigWall);
+    virtual CWallActor* MakeWallFromDims(Vector dims, u_int32_t color);
 };

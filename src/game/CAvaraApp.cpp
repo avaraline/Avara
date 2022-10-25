@@ -110,7 +110,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerThread->detach();
 
 
-    itsGUI = new CGUI(itsGame);
+    //itsGUI = new CGUI(itsGame);
     LoadDefaultOggFiles();
 
     // register and handle text commands
@@ -138,7 +138,8 @@ void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
     drawContents();
-    itsGUI->Update();
+    itsGame->GameTick();
+    //itsGUI->Update();
 }
 
 void CAvaraAppImpl::drawContents() {
@@ -152,7 +153,7 @@ void CAvaraAppImpl::drawContents() {
         previewAngle += FIX3(itsGame->fpsScale);
     }
     itsGame->Render(nvg_context);
-    itsGUI->Render(nvg_context);
+    //itsGUI->Render(nvg_context);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
@@ -174,8 +175,8 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
             }
         }
 
-        if (itsGUI->handleSDLEvent(event))
-            return true;
+        //if (itsGUI->handleSDLEvent(event))
+        //    return true;
 
         return CApplication::handleSDLEvent(event);
     }

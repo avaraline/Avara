@@ -56,42 +56,15 @@ static float get_pixel_ratio(SDL_Window *window) {
             return dpiX / 96.0;
     }
     return 1.f;
-#elif defined(__linux__)
-    (void) window;
-
-    float ratio = 1.0f;
-    FILE *fp;
-    /* Try to read the pixel ratio from KDEs config */
-    auto currentDesktop = std::getenv("XDG_CURRENT_DESKTOP");
-    if (currentDesktop && currentDesktop == std::string("KDE")) {
-        fp = popen("kreadconfig5 --group KScreen --key ScaleFactor", "r");
-        if (!fp)
-            return 1;
-
-        if (fscanf(fp, "%f", &ratio) != 1)
-            return 1;
-    } else {
-        /* Try to read the pixel ratio from GTK */
-        fp = popen("gsettings get org.gnome.desktop.interface scaling-factor", "r");
-        if (!fp)
-            return 1;
-
-        int ratioInt = 1;
-        if (fscanf(fp, "uint32 %i", &ratioInt) != 1)
-            return 1;
-        ratio = ratioInt;
-    }
-    if (pclose(fp) != 0)
-        return 1;
-    return ratio >= 1 ? ratio : 1;
-
 #else
-    Vector2i fbSize, size;
-    SDL_GL_GetDrawableSize(window, &fbSize[0], &fbSize[1]);
-    SDL_GetWindowSize(window, &size[0], &size[1]);
-    return (float)fbSize[0] / (float)size[0];
-#endif
+    //Vector2i fbSize, size;
+    int fbx, fby, wx, wy;
+    SDL_GL_GetDrawableSize(window, &fbx, &fby);
+    SDL_GetWindowSize(window, &wx, &wy);
+    SDL_Log("fb: %i x %i -- win: %i x %i", fbx, fby, wx, wy);
+    return (float)fbx / (float)wx;
 }
+#endif
 
 
 json CApplication::_prefs = ReadPrefs();
@@ -159,6 +132,11 @@ CApplication::CApplication(std::string the_title) {
     SDL_GetWindowSize(window, &win_size_x, &win_size_y);
     SDL_GL_GetDrawableSize(window, &fb_size_x, &fb_size_y);
     pixel_ratio = get_pixel_ratio(window);
+
+#if defined(_WIN32) || defined(__linux__)
+    win_size_x = win_size_x * pixel_ratio;
+    win_size_y = win_size_y * pixel_ratio;
+#endif
     
     SDL_Log("Window Size: %d by %d", win_size_x, win_size_y);
     SDL_Log("FB Size: %d by %d", fb_size_x, fb_size_y);

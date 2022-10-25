@@ -8,6 +8,12 @@
 #include <vector>
 #include <json.hpp>
 
+
+typedef struct {
+    Fixed baseSize;
+    short scaleStyle;
+} bspsResource;
+
 void UseResFile(std::string filename);
 void UseLevelFolder(std::string folder);
 std::string OSTypeString(OSType t);
@@ -41,3 +47,4 @@ void LoadDefaultOggFiles();
 void LoadLevelOggFiles(std::string set);
 void LoadOggFile(short resId, const char* filename);
 SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList);
+bspsResource* GetBSPScaling(short resId);

@@ -25,7 +25,7 @@ bool ready = false;
 
 glm::mat4 proj;
 const float near_dist = .099f;
-const float far_dist = 1000.0f;
+const float far_dist = 16000.0f;
 
 float current_fov = 60.0f;
 short window_height = 100;
