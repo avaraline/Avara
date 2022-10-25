@@ -96,7 +96,7 @@
   <Incarnator y="30" cx="57.5" cz="78.125" angle="1" />
   <Incarnator y="30" cx="42.708333333333336" cz="88.75" angle="1" />
   <Incarnator y="30" cx="149.86111111111111" cz="44.44444444444444" angle="179.5" />
-  <WallDoor deltaY="-10.25" openSpeed="20" closeSpeed="1" openSound="0" closeSound="0" stopSound="139" volume="100" shotPower="100" guardDelay="0" open="@openTrapDoor" close="@closeTrapDoor" fill="#fffb00" frame="#000000" x="87.77777777777779" z="44.16666666666667" w="10" d="10" h="0.25" />
+  <WallDoor deltaY="-10.25" openSpeed="20" closeSpeed="1" openSound="0" closeSound="0" stopSound="139" volume="100" shotPower="100" guardDelay="0" open="@openTrapDoor" close="@closeTrapDoor" fill="#5a5d6c" frame="#000000" x="87.77777777777779" z="44.16666666666667" w="10" d="10" h="0.25" />
   <Wall fill="#151515" frame="#000000" x="87.77777777777779" z="51.97916666666667" w="2.5" d="0.625" h="5.75" y="4.5" />
   <Switch y="9" out="@openTrapDoor" hitSound="138" hitVolume="10" fill="#c7c7c7" frame="#000000" cx="87.77777777777779" cz="51.66666666666667" angle="179.5" />
   <Timer in="@openTrapDoor" wait="100" out="@closeTrapDoor" />

@@ -249,11 +249,11 @@
   <set wallHeight="3" />
   <unique vars="stopme startme" />
   <set startme="@upwat" stopme="@dnwat" />
-  <Field start="startme" stop="stopme" deltaX="-1" deltaY="0" fill="#ffffff" frame="#000000" x="413.95833333333337" z="280.20833333333337" w="1.25" d="2.5" h="0" cx="230.83333333333334" cz="153.95833333333334" angle="315" />
+  <Field start="startme" stop="stopme" deltaX="-1" deltaY="0" fill="#b7c6cd" frame="#000000" x="413.95833333333337" z="280.20833333333337" w="1.25" d="2.5" h="0" cx="230.83333333333334" cz="153.95833333333334" angle="315" />
   <set wallHeight="3" />
   <unique vars="stopme startme" />
   <set startme="@dnwat" stopme="@upwat" />
-  <Field start="startme" stop="stopme" deltaX="1" deltaY="0" fill="#ffffff" frame="#000000" x="415.20833333333337" z="280.20833333333337" w="1.25" d="2.5" h="0" cx="230.83333333333334" cz="153.95833333333334" angle="315" />
+  <Field start="startme" stop="stopme" deltaX="1" deltaY="0" fill="#b7c6cd" frame="#000000" x="415.20833333333337" z="280.20833333333337" w="1.25" d="2.5" h="0" cx="230.83333333333334" cz="153.95833333333334" angle="315" />
   <unique vars="outMsg" />
   <set outMsg="@watdn" />
   <Goal volume="0" y="0" goalMsg="outMsg" motionRange="1" activeRange="1" fill="#ffffff" frame="#000000" cx="415.83333333333337" cz="280.20833333333337" angle="90" />
@@ -264,11 +264,11 @@
   <set wallHeight="3" />
   <unique vars="stopme startme" />
   <set startme="@lockin" stopme="@start" />
-  <Field start="startme" stop="stopme" deltaX="-1" deltaY="0" fill="#ffffff" frame="#000000" x="421.45833333333337" z="280.20833333333337" w="1.25" d="2.5" h="0" cx="414.58333333333337" cz="280.20833333333337" angle="0" />
+  <Field start="startme" stop="stopme" deltaX="-1" deltaY="0" fill="#b7c6cd" frame="#000000" x="421.45833333333337" z="280.20833333333337" w="1.25" d="2.5" h="0" cx="414.58333333333337" cz="280.20833333333337" angle="0" />
   <set wallHeight="3" />
   <unique vars="stopme startme" />
   <set startme="@start" stopme="@lockin" />
-  <Field start="startme" stop="stopme" deltaX="1" deltaY="0" fill="#ffffff" frame="#000000" x="422.70833333333337" z="280.20833333333337" w="1.25" d="2.5" h="0" cx="414.58333333333337" cz="280.20833333333337" angle="0" />
+  <Field start="startme" stop="stopme" deltaX="1" deltaY="0" fill="#b7c6cd" frame="#000000" x="422.70833333333337" z="280.20833333333337" w="1.25" d="2.5" h="0" cx="414.58333333333337" cz="280.20833333333337" angle="0" />
   <unique vars="outMsg" />
   <set outMsg="@lockoff" />
   <Goal volume="0" y="0" goalMsg="outMsg" motionRange="1" activeRange="1" fill="#ffffff" frame="#000000" cx="423.33333333333337" cz="280.20833333333337" angle="90" />
@@ -279,12 +279,12 @@
   <set wallHeight="3" />
   <unique vars="stopme startme" />
   <set startme="@watup" />
-  <Field start="startme" stop="stopme" deltaX=".5" deltaY="0" fill="#ffffff" frame="#000000" x="429.58333333333337" z="280.20833333333337" w="2.5" d="2.5" h="0" cx="422.08333333333337" cz="280.20833333333337" angle="0" />
+  <Field start="startme" stop="stopme" deltaX=".5" deltaY="0" fill="#b7c6cd" frame="#000000" x="429.58333333333337" z="280.20833333333337" w="2.5" d="2.5" h="0" cx="422.08333333333337" cz="280.20833333333337" angle="0" />
   <Timer in="startme" wait="andWait" out="stopme" />
   <set wallHeight="3" />
   <unique vars="stopme startme" />
   <set startme="@lockoff" />
-  <Field start="startme" stop="stopme" deltaX=".5" deltaY="0" fill="#ffffff" frame="#000000" x="429.58333333333337" z="280.20833333333337" w="2.5" d="2.5" h="0" cx="422.08333333333337" cz="280.20833333333337" angle="0" />
+  <Field start="startme" stop="stopme" deltaX=".5" deltaY="0" fill="#b7c6cd" frame="#000000" x="429.58333333333337" z="280.20833333333337" w="2.5" d="2.5" h="0" cx="422.08333333333337" cz="280.20833333333337" angle="0" />
   <Timer in="startme" wait="andWait" out="stopme" />
   <Ball volume="0" y="3" customGravity="1" fill="#ffffff" frame="#000000" cx="429.58333333333337" cz="280.20833333333337" angle="135" />
   <unique vars="outMsg" />
@@ -322,12 +322,12 @@
   <set wallHeight="3" />
   <unique vars="stopme startme" />
   <set startme="@watup" />
-  <Field start="startme" stop="stopme" deltaX=".5" deltaY="0" fill="#ffffff" frame="#000000" x="439.58333333333337" z="280.20833333333337" w="2.5" d="2.5" h="0" cx="230.83333333333334" cz="147.08333333333334" angle="0" />
+  <Field start="startme" stop="stopme" deltaX=".5" deltaY="0" fill="#b7c6cd" frame="#000000" x="439.58333333333337" z="280.20833333333337" w="2.5" d="2.5" h="0" cx="230.83333333333334" cz="147.08333333333334" angle="0" />
   <Timer in="startme" wait="andWait" out="stopme" />
   <set wallHeight="3" />
   <unique vars="stopme startme" />
   <set startme="@lockon" />
-  <Field start="startme" stop="stopme" deltaX=".5" deltaY="0" fill="#ffffff" frame="#000000" x="439.58333333333337" z="280.20833333333337" w="2.5" d="2.5" h="0" cx="230.83333333333334" cz="147.08333333333334" angle="0" />
+  <Field start="startme" stop="stopme" deltaX=".5" deltaY="0" fill="#b7c6cd" frame="#000000" x="439.58333333333337" z="280.20833333333337" w="2.5" d="2.5" h="0" cx="230.83333333333334" cz="147.08333333333334" angle="0" />
   <Timer in="startme" wait="andWait" out="stopme" />
   <Ball volume="0" y="3" customGravity="1" fill="#ffffff" frame="#000000" cx="439.58333333333337" cz="280.20833333333337" angle="135" />
   <unique vars="outMsg" />

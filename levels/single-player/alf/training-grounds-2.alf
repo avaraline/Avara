@@ -4,7 +4,7 @@
   <GroundColor fill="#431579" />
   <set baseHeight="0" />
   <Incarnator cx="14.23611111111111" cz="17.36111111111111" angle="90" />
-  <WallDoor open="@enterLift1" close="@enterLift1" deltaY="kFloor[0]" openDelay="5" closeDelay="100" openSpeed="4" fill="#000000" frame="#000000" x="24.23611111111111" z="17.36111111111111" w="5" d="5" h="0" />
+  <WallDoor open="@enterLift1" close="@enterLift1" deltaY="kFloor[0]" openDelay="5" closeDelay="100" openSpeed="4" fill="#ab82ff" frame="#000000" x="24.23611111111111" z="17.36111111111111" w="5" d="5" h="0" />
   <Area enter="@enterLift1" cx="14.23611111111111" cz="17.36111111111111" r="2.5" />
   <Wall fill="#7a4aaa" frame="#000000" x="14.236111111111112" z="17.36111111111111" w="2.5" d="12.5" h="1" y="6" />
   <Wall fill="#7a4aaa" frame="#000000" x="14.236111111111112" z="22.36111111111111" w="2.5" d="2.5" h="6" />

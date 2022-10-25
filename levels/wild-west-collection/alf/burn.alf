@@ -40,7 +40,7 @@
   <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow" out="mTaken" fill="#010e68" frame="#000000" cx="75.55555555555556" cz="9.097222222222223" angle="45" />
   <Ramp y="0" thickness="0" deltaY="3" fill="#007600" frame="#e4e4e4" x="125.27777777777779" z="73.85416666666667" w="6.388888888888886" d="19.236111111111114" h="0" angle="90" />
   <Ramp y="0" thickness="0" deltaY="3" fill="#007600" frame="#e4e4e4" x="75.52083333333334" z="23.263888888888893" w="19.2361111111111" d="6.388888888888889" h="0" angle="0" />
-  <WallDoor midYaw="31" fill="#007600" frame="#e4e4e4" x="135.59027777777777" z="82.22222222222223" w="30.625" d="1.25" h="12" />
+  <WallDoor midYaw="31" fill="#010e68" frame="#000000" x="135.59027777777777" z="82.22222222222223" w="30.625" d="1.25" h="12" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
