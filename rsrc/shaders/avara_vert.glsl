@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_attrib_location : require
 
 layout(location = 0) in vec3 vertexPosition_modelspace;
-layout(location = 1) in vec3 vertexColor;
+layout(location = 1) in vec4 vertexColor;
 layout(location = 2) in vec3 vertexNormal;
 
 uniform mat4 view;
@@ -10,7 +10,7 @@ uniform mat4 proj;
 uniform mat4 modelview;
 uniform mat3 normal_transform;
 
-out vec3 fragmentColor;
+out vec4 fragmentColor;
 out vec3 fragmentNormal;
 
 void main() {

@@ -10,6 +10,7 @@
 #pragma once
 #include "CAvaraGame.h"
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "CSoundHub.h"
 #include "FastMat.h"
 #include "LevelLoader.h"
@@ -23,9 +24,6 @@
 #else
 #define FPS_DEBUG(stuff) // noop
 #endif
-
-#define kMarkerColor 0x00fefefe
-#define kOtherMarkerColor 0x00fe0000
 
 #define MAXPARTS 6
 #define DEFAULTHITVOLUME 25

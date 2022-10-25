@@ -1,7 +1,7 @@
 #define APPLICATIONMAIN
 #include "CApplication.h"
 #include "AvaraGL.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "Preferences.h"
 #include "Resource.h"
 #include "Preferences.h"
@@ -189,8 +189,8 @@ CApplication::CApplication(std::string the_title) {
 #endif
     setResizeCallback([this](int new_x, int new_y) { this->WindowResized(new_x, new_y); return false; });
 
-    CColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
-    CColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
+    ColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
+    ColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
 }
 
 CApplication::~CApplication() {

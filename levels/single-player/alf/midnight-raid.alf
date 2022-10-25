@@ -30,10 +30,10 @@
   <Wall fill="#0052ff" frame="#000000" x="172.70833333333334" z="140.20833333333334" w="5" d="25" h="0.5" y="24.5" />
   <Wall fill="#0052ff" frame="#000000" x="152.70833333333334" z="160.20833333333334" w="25" d="5" h="0.5" y="24.5" />
   <Wall fill="#01168a" frame="#000000" x="138.95833333333334" z="136.45833333333334" w="2.5" d="17.5" h="25" />
-  <Ufo shield="3" y="100" start="@lower" fill="#bb1800" frame="#000000" cx="155.20833333333334" cz="142.70833333333334" angle="135" />
-  <Ufo shield="3" y="103" start="@top" fill="#bb1800" frame="#000000" cx="155.20833333333334" cz="142.70833333333334" angle="135" />
-  <Guard shield="3" y="16.5" fill="#bb1800" frame="#000000" cx="167.70833333333334" cz="125.20833333333334" angle="135" />
-  <Guard shield="4" y="26.5" fill="#bb1800" frame="#000000" cx="172.70833333333334" cz="162.70833333333334" angle="135" />
+  <Ufo shield="3" y="100" start="@lower" fill="#bb1800" frame="#000000" cx="155.20833333333334" cz="142.70833333333334" angle="315" />
+  <Ufo shield="3" y="103" start="@top" fill="#bb1800" frame="#000000" cx="155.20833333333334" cz="142.70833333333334" angle="315" />
+  <Guard shield="3" y="16.5" fill="#bb1800" frame="#000000" cx="167.70833333333334" cz="125.20833333333334" angle="315" />
+  <Guard shield="4" y="26.5" fill="#bb1800" frame="#000000" cx="172.70833333333334" cz="162.70833333333334" angle="315" />
   <Wall fill="#0052ff" frame="#000000" x="141.45833333333334" z="147.70833333333334" w="2.5" d="10" h="22" y="3" />
   <Wall fill="#0052ff" frame="#000000" x="123.95833333333334" z="147.70833333333334" w="2.5" d="10" h="25" />
   <Wall fill="#01168a" frame="#000000" x="138.95833333333334" z="158.95833333333334" w="2.5" d="17.5" h="25" />
@@ -45,28 +45,28 @@
   <WallDoor middle="closed" midY="12.5" midRoll="90" fill="#01168a" frame="#000000" x="125.20833333333334" z="160.20833333333334" w="25" d="15" h="0" />
   <WallDoor open="@bDoor" openDelay="50" deltaY="0" deltaZ="2.5" fill="#0052ff" frame="#000000" x="141.45833333333334" z="150.20833333333334" w="2.5" d="5" h="3" />
   <WallDoor open="@bDoor" openDelay="50" deltaY="0" deltaZ="-2.5" fill="#0052ff" frame="#000000" x="141.45833333333334" z="145.20833333333334" w="2.5" d="5" h="3" />
-  <Incarnator start="@bDoor" status="0" cx="185.20833333333334" cz="140.20833333333334" angle="270" />
-  <Guard shield="4" y="3" killMsg="@red" fill="#bb1800" frame="#8a8a8a" cx="131.52777777777777" cz="132.77777777777777" angle="135" />
+  <Incarnator start="@bDoor" status="0" cx="185.20833333333334" cz="140.20833333333334" angle="90" />
+  <Guard shield="4" y="3" killMsg="@red" fill="#bb1800" frame="#8a8a8a" cx="131.52777777777777" cz="132.77777777777777" angle="315" />
   <Counter in="@red" n="4" out="@bDoor" />
-  <Door shape="bspShell" killMsg="@red" scale="2" shield="2" canGlow="1" isTarget="1" fill="#bb1800" frame="#8a8a8a" cx="131.52777777777777" cz="132.77777777777777" angle="135" />
-  <Guard shield="4" y="3" killMsg="@red" fill="#e62100" frame="#8a8a8a" cx="131.52777777777777" cz="162.77777777777777" angle="135" />
-  <Door shape="bspShell" killMsg="@red" scale="2" shield="2" canGlow="1" isTarget="1" fill="#e62100" frame="#8a8a8a" cx="131.52777777777777" cz="162.77777777777777" angle="135" />
-  <Hologram yon="40" shape="bspGroundArrow" fill="#00acff" frame="#000000" cx="155.20833333333334" cz="142.70833333333334" angle="165" />
-  <Hologram yon="40" shape="bspGroundArrow" fill="#00acff" frame="#000000" cx="147.70833333333334" cz="92.70833333333334" angle="45" />
-  <Ufo shield="4" y="5" fill="#bb1800" frame="#000000" cx="155.20833333333334" cz="102.70833333333334" angle="135" />
+  <Door shape="bspShell" killMsg="@red" scale="2" shield="2" canGlow="1" isTarget="1" fill="#bb1800" frame="#8a8a8a" cx="131.52777777777777" cz="132.77777777777777" angle="315" />
+  <Guard shield="4" y="3" killMsg="@red" fill="#e62100" frame="#8a8a8a" cx="131.52777777777777" cz="162.77777777777777" angle="315" />
+  <Door shape="bspShell" killMsg="@red" scale="2" shield="2" canGlow="1" isTarget="1" fill="#e62100" frame="#8a8a8a" cx="131.52777777777777" cz="162.77777777777777" angle="315" />
+  <Hologram yon="40" shape="bspGroundArrow" fill="#00acff" frame="#000000" cx="155.20833333333334" cz="142.70833333333334" angle="345" />
+  <Hologram yon="40" shape="bspGroundArrow" fill="#00acff" frame="#000000" cx="147.70833333333334" cz="92.70833333333334" angle="225" />
+  <Ufo shield="4" y="5" fill="#bb1800" frame="#000000" cx="155.20833333333334" cz="102.70833333333334" angle="315" />
   <Wall fill="#431579" frame="#000000" x="202.70833333333334" z="111.45833333333334" w="5" d="47.5" h="12.5" />
   <Wall fill="#431579" frame="#000000" x="202.70833333333334" z="166.45833333333334" w="5" d="42.5" h="12.5" />
   <Wall fill="#431579" frame="#000000" x="155.20833333333334" z="190.20833333333334" w="100" d="5" h="12.5" />
   <Wall fill="#431579" frame="#000000" x="102.70833333333334" z="140.20833333333334" w="5" d="105" h="12.5" />
   <Wall fill="#431579" frame="#000000" x="192.70833333333337" z="85.20833333333334" w="185" d="5" h="12.5" />
-  <Incarnator stop="@top" cx="185.20833333333334" cz="140.27777777777777" angle="90" />
-  <Incarnator stop="@start" y="3" cx="185.20833333333334" cz="140.27777777777777" angle="90" />
-  <Incarnator stop="@start" y="6" cx="185.20833333333334" cz="140.27777777777777" angle="90" />
-  <Incarnator stop="@start" y="9" cx="185.20833333333334" cz="140.27777777777777" angle="90" />
-  <Incarnator stop="@start" y="12" cx="185.20833333333334" cz="140.27777777777777" angle="90" />
-  <Incarnator stop="@start" y="15" cx="185.20833333333334" cz="140.27777777777777" angle="90" />
-  <Ufo shield="4" y="5" fill="#bb1800" frame="#000000" cx="155.20833333333334" cz="172.70833333333334" angle="135" />
-  <Guard shield="4" fill="#bb1800" frame="#000000" cx="145.20833333333334" cz="147.63888888888889" angle="270" />
+  <Incarnator stop="@top" cx="185.20833333333334" cz="140.27777777777777" angle="270" />
+  <Incarnator stop="@start" y="3" cx="185.20833333333334" cz="140.27777777777777" angle="270" />
+  <Incarnator stop="@start" y="6" cx="185.20833333333334" cz="140.27777777777777" angle="270" />
+  <Incarnator stop="@start" y="9" cx="185.20833333333334" cz="140.27777777777777" angle="270" />
+  <Incarnator stop="@start" y="12" cx="185.20833333333334" cz="140.27777777777777" angle="270" />
+  <Incarnator stop="@start" y="15" cx="185.20833333333334" cz="140.27777777777777" angle="270" />
+  <Ufo shield="4" y="5" fill="#bb1800" frame="#000000" cx="155.20833333333334" cz="172.70833333333334" angle="315" />
+  <Guard shield="4" fill="#bb1800" frame="#000000" cx="145.20833333333334" cz="147.63888888888889" angle="90" />
   <Wall fill="#431579" frame="#000000" x="202.70833333333334" z="140.20833333333334" w="5" d="10" h="9.5" y="3" />
   <WallDoor open="@bDoor" openDelay="100" middle=".5" midX="1.25" deltaX="1.25" deltaY="0" deltaZ="3.75" fill="#0052ff" frame="#000000" x="204.58333333333334" z="142.70833333333334" w="1.25" d="5" h="3" />
   <WallDoor open="@bDoor" openDelay="100" middle=".5" midX="1.25" deltaX="1.25" deltaY="0" deltaZ="-3.75" fill="#0052ff" frame="#000000" x="204.58333333333334" z="137.70833333333334" w="1.25" d="5" h="3" />
@@ -81,17 +81,17 @@
   <Wall fill="#010e68" frame="#000000" x="217.70833333333334" z="110.20833333333334" w="25" d="5" h="2.5" />
   <Wall fill="#431579" frame="#000000" x="257.70833333333337" z="107.70833333333334" w="35" d="10" h="10" />
   <Wall fill="#01168a" frame="#000000" x="245.20833333333334" z="172.70833333333334" w="10" d="10" h="10" />
-  <Ufo shield="4" y="5" start="@bDoor" fill="#bb1800" frame="#000000" cx="235.20833333333334" cz="127.70833333333334" angle="135" />
-  <Ufo shield="4" start="@bDoor" y="5" fill="#bb1800" frame="#000000" cx="235.20833333333334" cz="152.70833333333334" angle="135" />
+  <Ufo shield="4" y="5" start="@bDoor" fill="#bb1800" frame="#000000" cx="235.20833333333334" cz="127.70833333333334" angle="315" />
+  <Ufo shield="4" start="@bDoor" y="5" fill="#bb1800" frame="#000000" cx="235.20833333333334" cz="152.70833333333334" angle="315" />
   <Wall fill="#431579" frame="#000000" x="227.70833333333334" z="163.95833333333334" w="5" d="17.5" h="1" y="11.5" />
   <Wall fill="#010e68" frame="#000000" x="227.70833333333334" z="170.20833333333334" w="3.75" d="3.75" h="9" y="2.5" />
-  <Ramp y="10" deltaY="2.5" fill="#7b1979" frame="#000000" x="235.2777777777778" z="170.27777777777777" w="10" d="2.5" h="0" angle="270" />
-  <Ramp y="5" deltaY="5" fill="#7b1979" frame="#000000" x="250.2777777777778" z="137.77777777777777" w="10" d="5" h="0" angle="180" />
-  <Ramp y="5" deltaY="5" fill="#7b1979" frame="#000000" x="250.2777777777778" z="142.77777777777777" w="10" d="5" h="0" angle="0" />
-  <Ramp y="5" deltaY="5" fill="#7b1979" frame="#000000" x="247.7777777777778" z="117.77777777777779" w="2.5" d="10" h="0" angle="0" />
-  <Ramp deltaY="12.5" fill="#7b1979" frame="#000000" x="217.7777777777778" z="90.27777777777779" w="25" d="5" h="0" angle="270" />
-  <Guard shield="4" start="@bDoor" y="4" fill="#bb1800" frame="#000000" cx="215.20833333333334" cz="110.20833333333334" angle="135" />
-  <Guard shield="4" start="@bDoor" y="6.5" fill="#bb1800" frame="#000000" cx="245.20833333333334" cz="151.45833333333334" angle="135" />
+  <Ramp y="10" deltaY="2.5" fill="#7b1979" frame="#000000" x="235.2777777777778" z="170.27777777777777" w="10" d="2.5" h="0" angle="90" />
+  <Ramp y="5" deltaY="5" fill="#7b1979" frame="#000000" x="250.2777777777778" z="137.77777777777777" w="10" d="5" h="0" angle="0" />
+  <Ramp y="5" deltaY="5" fill="#7b1979" frame="#000000" x="250.2777777777778" z="142.77777777777777" w="10" d="5" h="0" angle="180" />
+  <Ramp y="5" deltaY="5" fill="#7b1979" frame="#000000" x="247.7777777777778" z="117.77777777777779" w="2.5" d="10" h="0" angle="180" />
+  <Ramp deltaY="12.5" fill="#7b1979" frame="#000000" x="217.7777777777778" z="90.27777777777779" w="25" d="5" h="0" angle="90" />
+  <Guard shield="4" start="@bDoor" y="4" fill="#bb1800" frame="#000000" cx="215.20833333333334" cz="110.20833333333334" angle="315" />
+  <Guard shield="4" start="@bDoor" y="6.5" fill="#bb1800" frame="#000000" cx="245.20833333333334" cz="151.45833333333334" angle="315" />
   <Wall fill="#431579" frame="#000000" x="245.20833333333337" z="190.20833333333334" w="80" d="5" h="2.5" />
   <Wall fill="#431579" frame="#000000" x="282.70833333333337" z="137.70833333333334" w="5" d="100" h="2.5" />
   <Wall fill="#431579" frame="#000000" x="290.20833333333337" z="107.70833333333334" w="5" d="5" h="7.5" />
@@ -106,18 +106,15 @@
   <Wall fill="#010e68" frame="#000000" x="303.95833333333337" z="136.45833333333334" w="32.5" d="2.5" h="2.5" y="7.5" />
   <Wall fill="#010e68" frame="#000000" x="286.45833333333337" z="121.45833333333334" w="2.5" d="32.5" h="2.5" y="7.5" />
   <Wall fill="#010e68" frame="#000000" x="318.95833333333337" z="118.95833333333334" w="2.5" d="32.5" h="2.5" y="7.5" />
-  <Teleporter y="10" group="@winGroup" win="3000" fill="#ff2600" frame="#000000" cx="302.70833333333337" cz="120.20833333333334" angle="135" />
-  <Hologram shape="bspGroundStar" y="10" fill="#ff2600" frame="#000000" cx="302.70833333333337" cz="120.20833333333334" angle="135" />
+  <Teleporter y="10" group="@winGroup" win="3000" fill="#ff2600" frame="#000000" cx="302.70833333333337" cz="120.20833333333334" angle="315" />
+  <Hologram shape="bspGroundStar" y="10" fill="#ff2600" frame="#000000" cx="302.70833333333337" cz="120.20833333333334" angle="315" />
   <And in="@bDoor" out="@spinO" />
-  <Teleporter y="-5" shape="0" deadRange="25 * 5" activeRange="30 * 5" group="@lost" fill="#e62100" frame="#000000" cx="202.70833333333334" cz="140.20833333333334" angle="135" />
-  <Teleporter y="10" shape="0" status="0" group="@lost" fill="#e62100" frame="#000000" cx="215.20833333333334" cz="140.20833333333334" angle="135" />
-  <Incarnator start="@top" status="0" y="25" cx="177.70833333333334" cz="165.20833333333334" angle="90" />
+  <Teleporter y="-5" shape="0" deadRange="25 * 5" activeRange="30 * 5" group="@lost" fill="#e62100" frame="#000000" cx="202.70833333333334" cz="140.20833333333334" angle="315" />
+  <Teleporter y="10" shape="0" status="0" group="@lost" fill="#e62100" frame="#000000" cx="215.20833333333334" cz="140.20833333333334" angle="315" />
+  <Incarnator start="@top" status="0" y="25" cx="177.70833333333334" cz="165.20833333333334" angle="270" />
   <And in="@raise2" out="@top" />
   <And in="@raise3" out="@top" />
-  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="Drop into the largest building and 
-destroy its contents.  A teleporter on the 
-far side of the east gate will provide the 
-means of escape." />
-  <Sound sound="snUnderwater" loopCount="-1" y="10" volume="100" rate="2" cx="302.70833333333337" cz="120.20833333333334" angle="225" />
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="Drop into the largest building and &#10;destroy its contents.  A teleporter on the &#10;far side of the east gate will provide the &#10;means of escape." />
+  <Sound sound="snUnderwater" loopCount="-1" y="10" volume="100" rate="2" cx="302.70833333333337" cz="120.20833333333334" angle="45" />
   <Wall fill="#010e68" frame="#000000" x="252.70833333333334" z="165.20833333333334" w="5" d="15" h="0.5" y="4.5" />
 </map>

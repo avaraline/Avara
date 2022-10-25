@@ -5,32 +5,32 @@
   <Distributor in="@go" out.0="@goA" out.1="@goB" />
   <set thisTeam="T1" />
   <unique vars="mShow" />
-  <Incarnator y="playerHeight + 0" mask="thisTeam" cx="104.79166666666667" cz="65.06944444444444" angle="315" />
-  <Incarnator y="playerHeight + 3" mask="thisTeam" cx="104.79166666666667" cz="65.06944444444444" angle="315" />
-  <Solid shape="flyerShape" scale="flyerScale" y="flyerHeight" targetGroup="flyerGroup" shield="flyerShield" fill="#009600" frame="#000000" cx="104.79166666666667" cz="65.06944444444444" angle="315" />
-  <Goody y="goodyHeight" missiles="goodyMissiles" grenades="goodyGrenades" boosters="goodyBoosters" speed="goodySpeed" start="mShow" shape="bspGoody" scale="goodyScale" fill="#009600" frame="#000000" cx="104.79166666666667" cz="65.06944444444444" angle="315" />
-  <Field y="flyerHeight + 1" shape="flyerShape" scale="flyerScale" deltaY="0" enter="mShow" watch="playerMask" mask="thisTeam" fill="#009600" frame="#000000" cx="104.79166666666667" cz="65.06944444444444" angle="315" />
+  <Incarnator y="playerHeight + 0" mask="thisTeam" cx="104.79166666666667" cz="65.06944444444444" angle="135" />
+  <Incarnator y="playerHeight + 3" mask="thisTeam" cx="104.79166666666667" cz="65.06944444444444" angle="135" />
+  <Solid shape="flyerShape" scale="flyerScale" y="flyerHeight" targetGroup="flyerGroup" shield="flyerShield" fill="#009600" frame="#000000" cx="104.79166666666667" cz="65.06944444444444" angle="135" />
+  <Goody y="goodyHeight" missiles="goodyMissiles" grenades="goodyGrenades" boosters="goodyBoosters" speed="goodySpeed" start="mShow" shape="bspGoody" scale="goodyScale" fill="#009600" frame="#000000" cx="104.79166666666667" cz="65.06944444444444" angle="135" />
+  <Field y="flyerHeight + 1" shape="flyerShape" scale="flyerScale" deltaY="0" enter="mShow" watch="playerMask" mask="thisTeam" fill="#009600" frame="#000000" cx="104.79166666666667" cz="65.06944444444444" angle="135" />
   <set thisTeam="T2" />
   <unique vars="mShow" />
-  <Incarnator y="playerHeight + 0" mask="thisTeam" cx="154.79166666666669" cz="65.06944444444444" angle="45" />
-  <Incarnator y="playerHeight + 3" mask="thisTeam" cx="154.79166666666669" cz="65.06944444444444" angle="45" />
-  <Solid shape="flyerShape" scale="flyerScale" y="flyerHeight" targetGroup="flyerGroup" shield="flyerShield" fill="#fffb00" frame="#000000" cx="154.79166666666669" cz="65.06944444444444" angle="45" />
-  <Goody y="goodyHeight" missiles="goodyMissiles" grenades="goodyGrenades" boosters="goodyBoosters" speed="goodySpeed" start="mShow" shape="bspGoody" scale="goodyScale" fill="#fffb00" frame="#000000" cx="154.79166666666669" cz="65.06944444444444" angle="45" />
-  <Field y="flyerHeight + 1" shape="flyerShape" scale="flyerScale" deltaY="0" enter="mShow" watch="playerMask" mask="thisTeam" fill="#fffb00" frame="#000000" cx="154.79166666666669" cz="65.06944444444444" angle="45" />
+  <Incarnator y="playerHeight + 0" mask="thisTeam" cx="154.79166666666669" cz="65.06944444444444" angle="225" />
+  <Incarnator y="playerHeight + 3" mask="thisTeam" cx="154.79166666666669" cz="65.06944444444444" angle="225" />
+  <Solid shape="flyerShape" scale="flyerScale" y="flyerHeight" targetGroup="flyerGroup" shield="flyerShield" fill="#fffb00" frame="#000000" cx="154.79166666666669" cz="65.06944444444444" angle="225" />
+  <Goody y="goodyHeight" missiles="goodyMissiles" grenades="goodyGrenades" boosters="goodyBoosters" speed="goodySpeed" start="mShow" shape="bspGoody" scale="goodyScale" fill="#fffb00" frame="#000000" cx="154.79166666666669" cz="65.06944444444444" angle="225" />
+  <Field y="flyerHeight + 1" shape="flyerShape" scale="flyerScale" deltaY="0" enter="mShow" watch="playerMask" mask="thisTeam" fill="#fffb00" frame="#000000" cx="154.79166666666669" cz="65.06944444444444" angle="225" />
   <set thisTeam="T3" />
   <unique vars="mShow" />
-  <Incarnator y="playerHeight + 0" mask="thisTeam" cx="104.79166666666667" cz="115.06944444444444" angle="225" />
-  <Incarnator y="playerHeight + 3" mask="thisTeam" cx="104.79166666666667" cz="115.06944444444444" angle="225" />
-  <Solid shape="flyerShape" scale="flyerScale" y="flyerHeight" targetGroup="flyerGroup" shield="flyerShield" fill="#e62100" frame="#000000" cx="104.79166666666667" cz="115.06944444444444" angle="225" />
-  <Goody y="goodyHeight" missiles="goodyMissiles" grenades="goodyGrenades" boosters="goodyBoosters" speed="goodySpeed" start="mShow" shape="bspGoody" scale="goodyScale" fill="#e62100" frame="#000000" cx="104.79166666666667" cz="115.06944444444444" angle="225" />
-  <Field y="flyerHeight + 1" shape="flyerShape" scale="flyerScale" deltaY="0" enter="mShow" watch="playerMask" mask="thisTeam" fill="#e62100" frame="#000000" cx="104.79166666666667" cz="115.06944444444444" angle="225" />
+  <Incarnator y="playerHeight + 0" mask="thisTeam" cx="104.79166666666667" cz="115.06944444444444" angle="45" />
+  <Incarnator y="playerHeight + 3" mask="thisTeam" cx="104.79166666666667" cz="115.06944444444444" angle="45" />
+  <Solid shape="flyerShape" scale="flyerScale" y="flyerHeight" targetGroup="flyerGroup" shield="flyerShield" fill="#e62100" frame="#000000" cx="104.79166666666667" cz="115.06944444444444" angle="45" />
+  <Goody y="goodyHeight" missiles="goodyMissiles" grenades="goodyGrenades" boosters="goodyBoosters" speed="goodySpeed" start="mShow" shape="bspGoody" scale="goodyScale" fill="#e62100" frame="#000000" cx="104.79166666666667" cz="115.06944444444444" angle="45" />
+  <Field y="flyerHeight + 1" shape="flyerShape" scale="flyerScale" deltaY="0" enter="mShow" watch="playerMask" mask="thisTeam" fill="#e62100" frame="#000000" cx="104.79166666666667" cz="115.06944444444444" angle="45" />
   <set thisTeam="T4" />
   <unique vars="mShow" />
-  <Incarnator y="playerHeight + 0" mask="thisTeam" cx="154.79166666666669" cz="115.06944444444444" angle="135" />
-  <Incarnator y="playerHeight + 3" mask="thisTeam" cx="154.79166666666669" cz="115.06944444444444" angle="135" />
-  <Solid shape="flyerShape" scale="flyerScale" y="flyerHeight" targetGroup="flyerGroup" shield="flyerShield" fill="#ff32a9" frame="#000000" cx="154.79166666666669" cz="115.06944444444444" angle="135" />
-  <Goody y="goodyHeight" missiles="goodyMissiles" grenades="goodyGrenades" boosters="goodyBoosters" speed="goodySpeed" start="mShow" shape="bspGoody" scale="goodyScale" fill="#ff32a9" frame="#000000" cx="154.79166666666669" cz="115.06944444444444" angle="135" />
-  <Field y="flyerHeight + 1" shape="flyerShape" scale="flyerScale" deltaY="0" enter="mShow" watch="playerMask" mask="thisTeam" fill="#ff32a9" frame="#000000" cx="154.79166666666669" cz="115.06944444444444" angle="135" />
+  <Incarnator y="playerHeight + 0" mask="thisTeam" cx="154.79166666666669" cz="115.06944444444444" angle="315" />
+  <Incarnator y="playerHeight + 3" mask="thisTeam" cx="154.79166666666669" cz="115.06944444444444" angle="315" />
+  <Solid shape="flyerShape" scale="flyerScale" y="flyerHeight" targetGroup="flyerGroup" shield="flyerShield" fill="#ff32a9" frame="#000000" cx="154.79166666666669" cz="115.06944444444444" angle="315" />
+  <Goody y="goodyHeight" missiles="goodyMissiles" grenades="goodyGrenades" boosters="goodyBoosters" speed="goodySpeed" start="mShow" shape="bspGoody" scale="goodyScale" fill="#ff32a9" frame="#000000" cx="154.79166666666669" cz="115.06944444444444" angle="315" />
+  <Field y="flyerHeight + 1" shape="flyerShape" scale="flyerScale" deltaY="0" enter="mShow" watch="playerMask" mask="thisTeam" fill="#ff32a9" frame="#000000" cx="154.79166666666669" cz="115.06944444444444" angle="315" />
   <WallDoor deltaY="0" deltaX="moverDist" openSpeed="moverSpeed" closeSpeed="openSpeed" open="@goA" close="@goB" shotPower="moverPower" openSound="0" closeSound="0" stopSound="0" fill="#8b0f00" frame="#000000" x="27.222222222222225" z="2.5" w="5" d="5" h="0" />
   <WallDoor deltaY="0" deltaX="moverDist" openSpeed="moverSpeed" closeSpeed="openSpeed" open="@goB" close="@goA" shotPower="moverPower" openSound="0" closeSound="0" stopSound="0" fill="#8b0f00" frame="#000000" x="27.222222222222225" z="7.5" w="5" d="5" h="0" />
   <WallDoor deltaY="0" deltaX="moverDist" openSpeed="moverSpeed" closeSpeed="openSpeed" open="@goA" close="@goB" shotPower="moverPower" openSound="0" closeSound="0" stopSound="0" fill="#8b0f00" frame="#000000" x="27.222222222222225" z="12.5" w="5" d="5" h="0" />
@@ -71,31 +71,29 @@
   <WallDoor deltaY="0" deltaX="moverDist" openSpeed="moverSpeed" closeSpeed="openSpeed" open="@goB" close="@goA" shotPower="moverPower" openSound="0" closeSound="0" stopSound="0" fill="#8b0f00" frame="#000000" x="27.222222222222225" z="187.5" w="5" d="5" h="0" />
   <WallDoor deltaY="0" deltaX="moverDist" openSpeed="moverSpeed" closeSpeed="openSpeed" open="@goA" close="@goB" shotPower="moverPower" openSound="0" closeSound="0" stopSound="0" fill="#8b0f00" frame="#000000" x="27.222222222222225" z="192.5" w="5" d="5" h="0" />
   <WallDoor deltaY="0" deltaX="moverDist" openSpeed="moverSpeed" closeSpeed="openSpeed" open="@goB" close="@goA" shotPower="moverPower" openSound="0" closeSound="0" stopSound="0" fill="#8b0f00" frame="#000000" x="27.222222222222225" z="197.5" w="5" d="5" h="0" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="98.40277777777779" cz="14.791666666666668" angle="45" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="98.40277777777779" cz="14.791666666666668" angle="225" />
   <SkyColor n="15" verticalRangeMin="80" verticalRangeMax="300" fill="#8a8a8a" frame="#a8d6ff" />
   <GroundColor fill="#009600" />
-  <Field shape="bspW5x1" scale="1.7" roll="180" deltaY=".5" start="@FieldsOn" stop="@FieldsOff" y="flyerHeight" fill="#8b0f00" frame="#000000" cx="129.72222222222223" cz="65" angle="180" />
-  <Field shape="bspW5x1" scale="1.7" roll="180" deltaY=".5" start="@FieldsOn" stop="@FieldsOff" y="flyerHeight" fill="#8b0f00" frame="#000000" cx="129.72222222222223" cz="115" angle="180" />
-  <Field shape="bspW5x1" scale="1.7" roll="180" deltaY=".5" start="@FieldsOn" stop="@FieldsOff" y="flyerHeight" fill="#8b0f00" frame="#000000" cx="104.72222222222223" cz="90" angle="90" />
-  <Field shape="bspW5x1" scale="1.7" roll="180" deltaY=".5" start="@FieldsOn" stop="@FieldsOff" y="flyerHeight" fill="#8b0f00" frame="#000000" cx="154.72222222222223" cz="90" angle="90" />
-  <Switch out.0="@FieldsOff" out.1="@FieldsOn" y="flyerHeight + 10" scale="5" shape="bspSwitchOff" fill="#d6d7ff" frame="#ff2600" cx="129.79166666666669" cz="90.06944444444444" angle="315" />
-  <Door shape="bspSphere" y="flyerHeight + 10" deltaY="100" status="isOpen" openSpeed="100" closeSpeed="100" close="@FieldToggle" didClose="@SwClosed" open="@SwOpen" volume="0" hitSound="snStepMetal" hitVolume="100" hitMsg="@SwHit" fill="#d6d7ff" frame="#ff2600" cx="129.79166666666669" cz="90.06944444444444" angle="315" />
+  <Field shape="bspW5x1" scale="1.7" roll="180" deltaY=".5" start="@FieldsOn" stop="@FieldsOff" y="flyerHeight" fill="#8b0f00" frame="#000000" cx="129.72222222222223" cz="65" angle="0" />
+  <Field shape="bspW5x1" scale="1.7" roll="180" deltaY=".5" start="@FieldsOn" stop="@FieldsOff" y="flyerHeight" fill="#8b0f00" frame="#000000" cx="129.72222222222223" cz="115" angle="0" />
+  <Field shape="bspW5x1" scale="1.7" roll="180" deltaY=".5" start="@FieldsOn" stop="@FieldsOff" y="flyerHeight" fill="#8b0f00" frame="#000000" cx="104.72222222222223" cz="90" angle="270" />
+  <Field shape="bspW5x1" scale="1.7" roll="180" deltaY=".5" start="@FieldsOn" stop="@FieldsOff" y="flyerHeight" fill="#8b0f00" frame="#000000" cx="154.72222222222223" cz="90" angle="270" />
+  <Switch out.0="@FieldsOff" out.1="@FieldsOn" y="flyerHeight + 10" scale="5" shape="bspSwitchOff" fill="#d6d7ff" frame="#ff2600" cx="129.79166666666669" cz="90.06944444444444" angle="135" />
+  <Door shape="bspSphere" y="flyerHeight + 10" deltaY="100" status="isOpen" openSpeed="100" closeSpeed="100" close="@FieldToggle" didClose="@SwClosed" open="@SwOpen" volume="0" hitSound="snStepMetal" hitVolume="100" hitMsg="@SwHit" fill="#d6d7ff" frame="#ff2600" cx="129.79166666666669" cz="90.06944444444444" angle="135" />
   <Timer in.0="@SwClosed" in.1="@SwHit" wait="8 * 15" out="@SwOpen" />
   <Base in.0="@FieldsOn" in.1="@FieldsOff" out="@FieldToggle" cx="129.79166666666669" cz="90.06944444444444" />
-  <Teleporter y="flyerHeight" yon="kYonInvisible" group="@bubble" mask="0" fill="#d6d7ff" frame="#ff2600" cx="129.79166666666669" cz="90.06944444444444" angle="315" />
-  <Teleporter destGroup="@bubble" group="-1" y="flyerHeight" deadRange="100" activeRange="kInfinity" yon="kYonInvisible" fill="#d6d7ff" frame="#ff2600" cx="129.79166666666669" cz="90.06944444444444" angle="315" />
+  <Teleporter y="flyerHeight" yon="kYonInvisible" group="@bubble" mask="0" fill="#d6d7ff" frame="#ff2600" cx="129.79166666666669" cz="90.06944444444444" angle="135" />
+  <Teleporter destGroup="@bubble" group="-1" y="flyerHeight" deadRange="100" activeRange="kInfinity" yon="kYonInvisible" fill="#d6d7ff" frame="#ff2600" cx="129.79166666666669" cz="90.06944444444444" angle="135" />
   <Text in="@FieldsOff" text="Force fields are now off." showEveryone="true" cx="129.79166666666669" cz="90.06944444444444" r="2.5" />
   <Text in="@FieldsOn" text="Force fields are now on." showEveryone="true" cx="129.79166666666669" cz="90.06944444444444" r="2.5" />
   <Text in="@start" text="Welcome to Height! Force fields are currently off." showEveryone="true" cx="129.79166666666669" cz="90.06944444444444" r="2.5" />
-  <set information="Battle from four platforms.
-Heavy hulls recommended. Don’t step off the platforms unless the force fields are on. Get ammo by stepping on your own platform.
-Green, yellow, red, and pink; max 2 per team." />
-  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="145.34722222222223" cz="115" angle="90" />
-  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="145.34722222222223" cz="65" angle="90" />
-  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="154.72222222222223" cz="105.625" angle="180" />
-  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="104.72222222222223" cz="105.625" angle="180" />
-  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="114.09722222222223" cz="115" angle="270" />
-  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="114.09722222222223" cz="65" angle="270" />
-  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="104.72222222222223" cz="73.75" angle="0" />
-  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="154.72222222222223" cz="74.375" angle="0" />
+  <set information="Battle from four platforms.&#10;Heavy hulls recommended. Don’t step off the platforms unless the force fields are on. Get ammo by stepping on your own platform.&#10;Green, yellow, red, and pink; max 2 per team." />
+  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="145.34722222222223" cz="115" angle="270" />
+  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="145.34722222222223" cz="65" angle="270" />
+  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="154.72222222222223" cz="105.625" angle="0" />
+  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="104.72222222222223" cz="105.625" angle="0" />
+  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="114.09722222222223" cz="115" angle="90" />
+  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="114.09722222222223" cz="65" angle="90" />
+  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="104.72222222222223" cz="73.75" angle="180" />
+  <Teleporter start="@FieldsOn" stop="@FieldsOff" speed="0" mask="0" shape="bspGroundArrow" y="flyerHeight" scale="arrowScale" fill="#ffffff" frame="#000000" cx="154.72222222222223" cz="74.375" angle="180" />
 </map>

@@ -3,10 +3,7 @@
   <set targDoor="targ1" targGoal="targ2" ammoSnipeTime="15 * 6" ammoSnipeQuant="3" ammoMainTime="15 * 15" ammoMainQuant="6" cheaterWatch="scoutMask" cheaterBase="fortWallY -1" cheaterHeight="6" cheaterForce="3" clampSpeed="100 / 15" embShield="26" embY="120" />
   <SkyColor fill="#4180ff" frame="#a8d6ff" />
   <GroundColor fill="#7a4300" />
-  <set information="Yellow and blue teams.
-Enter the other team's fort, destroy their generator, and return to your fort to win.
-Oh, and defend your fort too.
-See the read me file for explanations of the switches." />
+  <set information="Yellow and blue teams.&#10;Enter the other team's fort, destroy their generator, and return to your fort to win.&#10;Oh, and defend your fort too.&#10;See the read me file for explanations of the switches." />
   <Text in="@BlueKilled" showEveryone="true" text="Blue generator destroyed." cx="2.1875" cz="7.569444444444445" r="2.1875" />
   <Text in="@YellowKilled" showEveryone="true" text="Yellow generator destroyed." cx="2.1875" cz="7.569444444444445" r="2.1875" />
   <Text in="@YellowWin" showEveryone="true" wait="3" text="Yellow team: return to base." cx="2.1875" cz="7.569444444444445" r="2.1875" />
@@ -19,21 +16,21 @@ See the read me file for explanations of the switches." />
   <Wall fill="#007600" frame="#000000" x="129.65277777777777" z="71.25" w="2.5" d="0" h="0" />
   <Wall fill="#007600" frame="#000000" x="129.65277777777777" z="75" w="2.5" d="0" h="0" />
   <WallDoor deltaY="0" deltaZ="-2 / 8 * 5" shotPower="10" open="mKill" close="mReset" guardDelay="0" openSpeed="10" volume="0" fill="#007600" frame="#000000" x="129.65277777777777" z="74.6875" w="2.5" d="0.625" h="0" />
-  <Field deltaY="0" enter="mKill" exit="mReset" fill="#009600" frame="#000000" cx="2.1875" cz="7.569444444444445" angle="180" x="129.65277777777777" z="73.125" w="2.5" d="2.5" h="0" />
-  <Teleporter group="@death" y="100" start="0" fill="#009600" frame="#000000" cx="129.65277777777777" cz="73.125" angle="45" />
-  <Teleporter destGroup="@death" shape="0" activeRange="5000" deadRange="50 * 5" fill="#009600" frame="#000000" cx="129.65277777777777" cz="73.125" angle="45" />
+  <Field deltaY="0" enter="mKill" exit="mReset" fill="#009600" frame="#000000" cx="2.1875" cz="7.569444444444445" angle="0" x="129.65277777777777" z="73.125" w="2.5" d="2.5" h="0" />
+  <Teleporter group="@death" y="100" start="0" fill="#009600" frame="#000000" cx="129.65277777777777" cz="73.125" angle="225" />
+  <Teleporter destGroup="@death" shape="0" activeRange="5000" deadRange="50 * 5" fill="#009600" frame="#000000" cx="129.65277777777777" cz="73.125" angle="225" />
   <set wallHeight="110" wallYon="0.01" />
   <Wall fill="#009600" frame="#000000" x="129.65277777777777" z="71.5625" w="3.75" d="0.625" h="0" />
   <Wall fill="#009600" frame="#000000" x="128.09027777777777" z="73.125" w="0.625" d="2.5" h="0" />
   <Wall fill="#009600" frame="#000000" x="129.65277777777777" z="74.6875" w="3.75" d="0.625" h="0" />
   <Wall fill="#009600" frame="#000000" x="131.21527777777777" z="73.125" w="0.625" d="2.5" h="0" />
   <set wallYon="0" />
-  <Field deltaY="10" watch="scoutMask" fill="#009600" frame="#000000" cx="129.65277777777777" cz="73.125" angle="45" x="129.65277777777777" z="73.125" w="2.5" d="2.5" h="0" />
+  <Field deltaY="10" watch="scoutMask" fill="#009600" frame="#000000" cx="129.65277777777777" cz="73.125" angle="225" x="129.65277777777777" z="73.125" w="2.5" d="2.5" h="0" />
   <set baseHeight="0" />
-  <Incarnator mask="allTeams -T2 -T6" cx="125.90277777777779" cz="215.625" angle="180" />
-  <Incarnator mask="allTeams -T2 -T6" cx="128.40277777777777" cz="215.625" angle="180" />
-  <Incarnator mask="allTeams -T2 -T6" cx="130.90277777777777" cz="215.625" angle="180" />
-  <Incarnator mask="allTeams -T2 -T6" cx="133.40277777777777" cz="215.625" angle="180" />
+  <Incarnator mask="allTeams -T2 -T6" cx="125.90277777777779" cz="215.625" angle="0" />
+  <Incarnator mask="allTeams -T2 -T6" cx="128.40277777777777" cz="215.625" angle="0" />
+  <Incarnator mask="allTeams -T2 -T6" cx="130.90277777777777" cz="215.625" angle="0" />
+  <Incarnator mask="allTeams -T2 -T6" cx="133.40277777777777" cz="215.625" angle="0" />
   <set wallHeight="random * 3" wallYon="120" />
   <Wall fill="#7a4300" frame="#000000" x="87.15277777777779" z="53.125" w="5" d="5" h="0" />
   <Wall fill="#7a4300" frame="#000000" x="92.15277777777779" z="53.125" w="5" d="5" h="0" />
@@ -382,18 +379,18 @@ See the read me file for explanations of the switches." />
   <set mStopAll="@BlueKilled" baseHeight="0" wallHeight="fortInnerWallTopY" />
   <Wall fill="#00d5ff" frame="#000000" x="54.02777777777778" z="73.125" w="1.25" d="15" h="0" />
   <set wallHeight="cheaterHeight" baseHeight="cheaterBase" />
-  <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="40.90277777777778" z="43.125" w="22.5" d="5" h="0" />
-  <Field deltaZ="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="40.90277777777778" z="103.125" w="22.5" d="5" h="0" />
-  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="27.15277777777778" z="48.75" w="5" d="16.25" h="0" />
-  <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="63.402777777777786" z="43.125" w="22.5" d="5" h="0" />
-  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="27.15277777777778" z="65" w="5" d="16.25" h="0" />
-  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="27.15277777777778" z="81.25" w="5" d="16.25" h="0" />
-  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="27.15277777777778" z="97.5" w="5" d="16.25" h="0" />
-  <Field deltaZ="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="63.402777777777786" z="103.125" w="22.5" d="5" h="0" />
-  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="77.15277777777779" z="48.75" w="5" d="16.25" h="0" />
-  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="77.15277777777779" z="65" w="5" d="16.25" h="0" />
-  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="77.15277777777779" z="81.25" w="5" d="16.25" h="0" />
-  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="180" x="77.15277777777779" z="97.5" w="5" d="16.25" h="0" />
+  <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="40.90277777777778" z="43.125" w="22.5" d="5" h="0" />
+  <Field deltaZ="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="40.90277777777778" z="103.125" w="22.5" d="5" h="0" />
+  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="27.15277777777778" z="48.75" w="5" d="16.25" h="0" />
+  <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="63.402777777777786" z="43.125" w="22.5" d="5" h="0" />
+  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="27.15277777777778" z="65" w="5" d="16.25" h="0" />
+  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="27.15277777777778" z="81.25" w="5" d="16.25" h="0" />
+  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="27.15277777777778" z="97.5" w="5" d="16.25" h="0" />
+  <Field deltaZ="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="63.402777777777786" z="103.125" w="22.5" d="5" h="0" />
+  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="77.15277777777779" z="48.75" w="5" d="16.25" h="0" />
+  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="77.15277777777779" z="65" w="5" d="16.25" h="0" />
+  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="77.15277777777779" z="81.25" w="5" d="16.25" h="0" />
+  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" cx="133.40277777777777" cz="215.625" angle="0" x="77.15277777777779" z="97.5" w="5" d="16.25" h="0" />
   <set baseHeight="0" wallHeight="fortWallY" />
   <Wall fill="#00acff" frame="#000000" x="52.152777777777786" z="48.125" w="45" d="5" h="0" />
   <Wall fill="#00acff" frame="#000000" x="32.15277777777778" z="73.125" w="5" d="45" h="0" />
@@ -406,11 +403,11 @@ See the read me file for explanations of the switches." />
   <WallDoor isTarget="true" canGlow="true" shield="fortShieldDoor" open="mOpenDoor" close="mCloseDoor" deltaY="0" deltaZ="-2" openSpeed="fortDoorSpeed" closeSpeed="fortDoorSpeed" team="6" hitScore="fortDoorScoreHit" killScore="fortDoorScoreKill" fill="#4180ff" frame="#000000" x="73.40277777777779" z="71.875" w="0" d="2.5" h="0" />
   <WallDoor isTarget="true" canGlow="true" shield="fortShieldDoor" open="mOpenDoor" close="mCloseDoor" deltaY="0" deltaZ="2" openSpeed="fortDoorSpeed" closeSpeed="fortDoorSpeed" team="6" hitScore="fortDoorScoreHit" killScore="fortDoorScoreKill" fill="#4180ff" frame="#000000" x="73.40277777777779" z="74.375" w="0" d="2.5" h="0" />
   <Area enter="mOpenDoor" exit="mCloseDoor" mask="T6" cx="73.40277777777779" cz="73.125" r="3.75" />
-  <Incarnator mask="T6" y="30" cx="47.15277777777778" cz="73.125" angle="270" />
-  <Incarnator mask="T6" y="30" cx="47.15277777777778" cz="78.125" angle="270" />
-  <Switch out.0="mCloseClamps" out.1="mOpenClamps" status="1" scale="2" fill="#00ec00" frame="#ff2600" cx="72.22222222222223" cz="63.19444444444444" angle="270" />
-  <Ramp thickness=".1" deltaY="fortWindowLargeBotY" fill="#00d5ff" frame="#000000" x="60.902777777777786" z="58.125" w="22.5" d="5" h="0" angle="90" />
-  <Ramp thickness=".1" deltaY="fortWindowLargeBotY" fill="#00d5ff" frame="#000000" x="60.902777777777786" z="88.125" w="22.5" d="5" h="0" angle="90" />
+  <Incarnator mask="T6" y="30" cx="47.15277777777778" cz="73.125" angle="90" />
+  <Incarnator mask="T6" y="30" cx="47.15277777777778" cz="78.125" angle="90" />
+  <Switch out.0="mCloseClamps" out.1="mOpenClamps" status="1" scale="2" fill="#00ec00" frame="#ff2600" cx="72.22222222222223" cz="63.19444444444444" angle="90" />
+  <Ramp thickness=".1" deltaY="fortWindowLargeBotY" fill="#00d5ff" frame="#000000" x="60.902777777777786" z="58.125" w="22.5" d="5" h="0" angle="270" />
+  <Ramp thickness=".1" deltaY="fortWindowLargeBotY" fill="#00d5ff" frame="#000000" x="60.902777777777786" z="88.125" w="22.5" d="5" h="0" angle="270" />
   <set baseHeight="fortDoorTopY" wallHeight="fortWindowLargeBotY -baseHeight" />
   <Wall fill="#00acff" frame="#000000" x="73.40277777777779" z="73.125" w="2.5" d="45" h="0" />
   <set baseHeight="fortWindowLargeBotY" wallHeight="fortWallY -baseHeight" />
@@ -425,7 +422,7 @@ See the read me file for explanations of the switches." />
   <Wall fill="#00acff" frame="#000000" x="73.40277777777779" z="73.125" w="2.5" d="2.5" h="0" />
   <set baseHeight="fortWindowSmallBotY" wallHeight="fortWindowSmallTopY -baseHeight" />
   <Wall fill="#00d5ff" frame="#000000" x="72.46527777777779" z="73.125" w="0.625" d="2.5" h="0" />
-  <Guard y="guardAtckY -baseHeight" shield="guardAtckShield" shotPower="guardAtckPower" freq="guardAtckFreq" speed="guardAtckSpeed" watch="guardAtckWatch" mask="allTeams -T6" team="6" stop="mStopAll" fill="#00acff" frame="#000000" cx="73.40277777777779" cz="73.125" angle="270" />
+  <Guard y="guardAtckY -baseHeight" shield="guardAtckShield" shotPower="guardAtckPower" freq="guardAtckFreq" speed="guardAtckSpeed" watch="guardAtckWatch" mask="allTeams -T6" team="6" stop="mStopAll" fill="#00acff" frame="#000000" cx="73.40277777777779" cz="73.125" angle="90" />
   <set baseHeight="fortWindowSmallTopY" wallHeight="fortWallY -baseHeight" />
   <Wall fill="#00acff" frame="#000000" x="73.40277777777779" z="73.125" w="2.5" d="2.5" h="0" />
   <set baseHeight="fortWindowLargeBotY" wallHeight="fortWindowLargeTopY -baseHeight" />
@@ -438,11 +435,11 @@ See the read me file for explanations of the switches." />
   <WallDoor isTarget="true" canGlow="true" shield="fortShieldDoor" open="mOpenS" close="mCloseS" deltaY="0" deltaZ="2" openSpeed="fortDoorSpeed" closeSpeed="fortDoorSpeed" team="6" hitScore="fortDoorScoreHit" killScore="fortDoorScoreKill" fill="#0080ff" frame="#000000" x="74.65277777777779" z="89.375" w="0" d="2.5" h="0" />
   <Area enter="mOpenS" exit="mCloseS" mask="T6" watch="playerMask + robotMask" y="2" cx="72.77777777777779" cz="88.05555555555556" r="1.875" />
   <set baseHeight="0" />
-  <Guard y="guardDefY" shield="guardDefShield" shotPower="guardDefPower" freq="guardDefFreq" speed="guardDefSpeed" watch="guardDefWatch" mask="allTeams -T6" team="6" stop="mStopAll" fill="#00acff" frame="#000000" cx="67.15277777777779" cz="58.125" angle="180" />
-  <Incarnator mask="T6" y="30" cx="47.15277777777778" cz="68.125" angle="270" />
-  <Guard y="guardDefY" shield="guardDefShield" shotPower="guardDefPower" freq="guardDefFreq" speed="guardDefSpeed" watch="guardDefWatch" mask="allTeams -T6" team="6" stop="mStopAll" fill="#00acff" frame="#000000" cx="67.15277777777779" cz="88.125" angle="0" />
-  <Ufo y="ufoYStart" verticalRangeMin="ufoYMin" verticalRangeMax="ufoYMax" shield="ufoShield" acceleration="ufoAccel" homeSick="ufoHSick" homeRange="ufoHRange" homeBase="@BaseBlueA" shotPower="ufoPower" burstLength="ufoBLength" burstSpeed="ufoBSpeed" burstCharge="ufoBCharge" mask="allTeams -T6" team="6" watch="ufoWatch" stop="mStopAll" fill="#00acff" frame="#000000" cx="42.15277777777778" cz="58.125" angle="315" />
-  <Ufo y="ufoYStart" verticalRangeMin="ufoYMin" verticalRangeMax="ufoYMax" shield="ufoShield" acceleration="ufoAccel" homeSick="ufoHSick" homeRange="ufoHRange" homeBase="@BaseBlueB" shotPower="ufoPower" burstLength="ufoBLength" burstSpeed="ufoBSpeed" burstCharge="ufoBCharge" mask="allTeams -T6" team="6" watch="ufoWatch" stop="mStopAll" fill="#00acff" frame="#000000" cx="42.15277777777778" cz="88.125" angle="315" />
+  <Guard y="guardDefY" shield="guardDefShield" shotPower="guardDefPower" freq="guardDefFreq" speed="guardDefSpeed" watch="guardDefWatch" mask="allTeams -T6" team="6" stop="mStopAll" fill="#00acff" frame="#000000" cx="67.15277777777779" cz="58.125" angle="0" />
+  <Incarnator mask="T6" y="30" cx="47.15277777777778" cz="68.125" angle="90" />
+  <Guard y="guardDefY" shield="guardDefShield" shotPower="guardDefPower" freq="guardDefFreq" speed="guardDefSpeed" watch="guardDefWatch" mask="allTeams -T6" team="6" stop="mStopAll" fill="#00acff" frame="#000000" cx="67.15277777777779" cz="88.125" angle="180" />
+  <Ufo y="ufoYStart" verticalRangeMin="ufoYMin" verticalRangeMax="ufoYMax" shield="ufoShield" acceleration="ufoAccel" homeSick="ufoHSick" homeRange="ufoHRange" homeBase="@BaseBlueA" shotPower="ufoPower" burstLength="ufoBLength" burstSpeed="ufoBSpeed" burstCharge="ufoBCharge" mask="allTeams -T6" team="6" watch="ufoWatch" stop="mStopAll" fill="#00acff" frame="#000000" cx="42.15277777777778" cz="58.125" angle="135" />
+  <Ufo y="ufoYStart" verticalRangeMin="ufoYMin" verticalRangeMax="ufoYMax" shield="ufoShield" acceleration="ufoAccel" homeSick="ufoHSick" homeRange="ufoHRange" homeBase="@BaseBlueB" shotPower="ufoPower" burstLength="ufoBLength" burstSpeed="ufoBSpeed" burstCharge="ufoBCharge" mask="allTeams -T6" team="6" watch="ufoWatch" stop="mStopAll" fill="#00acff" frame="#000000" cx="42.15277777777778" cz="88.125" angle="135" />
   <set wallHeight="fortBarrierTopY" />
   <WallSolid shield="fortShieldBarrier" isTarget="true" canGlow="true" team="6" targetGroup="targGoal" hitScore="fortBarrierScoreHit" killScore="fortBarrierScoreKill" fill="#0080ff" frame="#000000" x="38.40277777777778" z="68.4375" w="7.5" d="0.625" h="0" />
   <WallSolid shield="fortShieldBarrier" isTarget="true" canGlow="true" team="6" targetGroup="targGoal" hitScore="fortBarrierScoreHit" killScore="fortBarrierScoreKill" fill="#0080ff" frame="#000000" x="42.46527777777778" z="73.125" w="0.625" d="10" h="0" />
@@ -450,57 +447,57 @@ See the read me file for explanations of the switches." />
   <set wa="wallHeight" />
   <WallSolid shield="fortShieldBarrier" isTarget="true" canGlow="true" team="6" targetGroup="targGoal" hitScore="fortBarrierScoreHit" killScore="fortBarrierScoreKill" fill="#0080ff" frame="#000000" x="38.71527777777778" z="73.125" w="8.125" d="10" h="0.5" />
   <unique vars="mOpen mClose" />
-  <Door shape="fortObjectShape" scale="fortObjectScale" y="fortObjectY" team="6" targetGroup="targGoal" hitScore="fortObjectScoreHit" killScore="fortObjectScoreKill" killMsg="@BlueKilled" isTarget="true" canGlow="true" shield="fortShieldObject" open="mOpen" didOpen="mClose" close="mClose" didClose="mOpen" closeSpeed="100" volume="0" deltaY="0" yaw="90 -openSpeed" fill="#0080ff" frame="#ff2600" cx="37.77777777777778" cz="73.125" angle="270" />
+  <Door shape="fortObjectShape" scale="fortObjectScale" y="fortObjectY" team="6" targetGroup="targGoal" hitScore="fortObjectScoreHit" killScore="fortObjectScoreKill" killMsg="@BlueKilled" isTarget="true" canGlow="true" shield="fortShieldObject" open="mOpen" didOpen="mClose" close="mClose" didClose="mOpen" closeSpeed="100" volume="0" deltaY="0" yaw="90 -openSpeed" fill="#0080ff" frame="#ff2600" cx="37.77777777777778" cz="73.125" angle="90" />
   <And in="@start" out="mOpen" />
-  <Field shape="bspCubeFrame" deltaY="0" y="fortObjectY" watch="targGoal" status="false" start="@YellowKilled" enter="@BlueWin" fill="#0080ff" frame="#ff2600" x="60.902777777777786" z="88.125" w="22.5" d="5" h="0" cx="37.77777777777778" cz="73.125" angle="270" />
+  <Field shape="bspCubeFrame" deltaY="0" y="fortObjectY" watch="targGoal" status="false" start="@YellowKilled" enter="@BlueWin" fill="#0080ff" frame="#ff2600" x="60.902777777777786" z="88.125" w="22.5" d="5" h="0" cx="37.77777777777778" cz="73.125" angle="90" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspMissile" y="fortWindowLargeBotY + gAmmoY" speed="gAmmoSpd" missiles="ammoSnipeQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="73.40277777777779" cz="58.125" angle="135" />
+  <Goody shape="bspMissile" y="fortWindowLargeBotY + gAmmoY" speed="gAmmoSpd" missiles="ammoSnipeQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="73.40277777777779" cz="58.125" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoSnipeTime" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspMissile" y="fortWindowLargeBotY + gAmmoY" speed="gAmmoSpd" missiles="ammoSnipeQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="73.40277777777779" cz="88.125" angle="135" />
+  <Goody shape="bspMissile" y="fortWindowLargeBotY + gAmmoY" speed="gAmmoSpd" missiles="ammoSnipeQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="73.40277777777779" cz="88.125" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoSnipeTime" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="57.15277777777778" cz="73.125" angle="135" />
+  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="57.15277777777778" cz="73.125" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoMainTime" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="39.65277777777778" cz="55.625" angle="135" />
+  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="39.65277777777778" cz="55.625" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoMainTime" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="39.65277777777778" cz="90.625" angle="135" />
+  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="39.65277777777778" cz="90.625" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoMainTime" />
-  <Teleporter win="5000" mask="T6" start="@BlueWin" stop="@BlueKilled" fill="#00acff" frame="#000000" cx="47.15277777777778" cz="73.125" angle="135" />
-  <Teleporter destGroup="@death" mask="allTeams -T6" start="@BlueWin" stop="@BlueKilled" speed="13" fill="#009600" frame="#000000" cx="47.15277777777778" cz="73.125" angle="45" />
-  <YonBox deltaY="fortWindowLargeBotY" x="53.47222222222223" z="73.19444444444444" w="36.25" d="43.75" h="0" r="1.875" angle="45" />
+  <Teleporter win="5000" mask="T6" start="@BlueWin" stop="@BlueKilled" fill="#00acff" frame="#000000" cx="47.15277777777778" cz="73.125" angle="315" />
+  <Teleporter destGroup="@death" mask="allTeams -T6" start="@BlueWin" stop="@BlueKilled" speed="13" fill="#009600" frame="#000000" cx="47.15277777777778" cz="73.125" angle="225" />
+  <YonBox deltaY="fortWindowLargeBotY" x="53.47222222222223" z="73.19444444444444" w="36.25" d="43.75" h="0" r="1.875" angle="225" />
   <set wa="-.25 + fortWindowLargeBotY" />
   <Wall fill="#00d5ff" frame="#000000" x="74.96527777777779" z="58.125" w="0.625" d="5" h="0.25" />
   <set wa="-.25 + fortWindowLargeBotY" />
   <Wall fill="#00d5ff" frame="#000000" x="74.96527777777779" z="88.125" w="0.625" d="5" h="0.25" />
   <set baseHeight="0" wallHeight="fortDoorTopY + .05" wa="embY" />
   <unique vars="mHit" />
-  <FreeSolid start="mGetBlock1" canGlow="true" shield="embShield" fill="#0080ff" frame="#000000" x="60.451388888888886" z="64.20138888888889" w="0.34722222222222143" d="5.902777777777786" h="0" cx="47.15277777777778" cz="73.125" angle="45" />
+  <FreeSolid start="mGetBlock1" canGlow="true" shield="embShield" fill="#0080ff" frame="#000000" x="60.451388888888886" z="64.20138888888889" w="0.34722222222222143" d="5.902777777777786" h="0" cx="47.15277777777778" cz="73.125" angle="225" />
   <set wa="embY" />
   <unique vars="mHit" />
-  <FreeSolid start="mGetBlock2" canGlow="true" shield="embShield" fill="#0080ff" frame="#000000" x="60.451388888888886" z="81.70138888888889" w="0.34722222222222143" d="5.902777777777786" h="0" cx="47.15277777777778" cz="73.125" angle="45" />
-  <Switch out.0="mGetBlock2" status="1" restart="false" scale="1.1" fill="#00ec00" frame="#ff2600" cx="53.47222222222222" cz="76.94444444444444" angle="270" />
-  <Switch out.0="mGetBlock1" status="1" restart="false" scale="1.1" fill="#00ec00" frame="#ff2600" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
+  <FreeSolid start="mGetBlock2" canGlow="true" shield="embShield" fill="#0080ff" frame="#000000" x="60.451388888888886" z="81.70138888888889" w="0.34722222222222143" d="5.902777777777786" h="0" cx="47.15277777777778" cz="73.125" angle="225" />
+  <Switch out.0="mGetBlock2" status="1" restart="false" scale="1.1" fill="#00ec00" frame="#ff2600" cx="53.47222222222222" cz="76.94444444444444" angle="90" />
+  <Switch out.0="mGetBlock1" status="1" restart="false" scale="1.1" fill="#00ec00" frame="#ff2600" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
   <set baseHeight="fortDoorTopY / 2 -.25" wallHeight=".5" />
   <Wall fill="#00d5ff" frame="#000000" x="71.84027777777779" z="69.6875" w="0.625" d="0.625" h="0" />
   <WallDoor middle=".66" deltaY="0" midZ="5 / 8 * -2" deltaX="5 / 8" deltaZ="5 / 8 * -2" status="1" openSpeed="clampSpeed" closeSpeed="clampSpeed" open="mOpenClamps" close="mCloseClamps" fill="#00d5ff" frame="#000000" x="71.21527777777779" z="70" w="0.625" d="1.25" h="0" />
   <Wall fill="#00d5ff" frame="#000000" x="71.84027777777779" z="76.5625" w="0.625" d="0.625" h="0" />
   <WallDoor middle=".66" deltaY="0" midZ="5 / 8 * 2" deltaX="5 / 8" deltaZ="5 / 8 * 2" status="1" openSpeed="clampSpeed" closeSpeed="clampSpeed" open="mOpenClamps" close="mCloseClamps" fill="#00d5ff" frame="#000000" x="71.21527777777779" z="76.25" w="0.625" d="1.25" h="0" />
   <set wallHeight="cheaterHeight" baseHeight="cheaterBase" />
-  <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="195.9027777777778" z="43.125" w="22.5" d="5" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaZ="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="195.9027777777778" z="103.125" w="22.5" d="5" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="182.1527777777778" z="48.75" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="218.4027777777778" z="43.125" w="22.5" d="5" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="182.1527777777778" z="65" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="182.1527777777778" z="81.25" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="182.1527777777778" z="97.5" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaZ="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="218.4027777777778" z="103.125" w="22.5" d="5" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="232.1527777777778" z="48.75" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="232.1527777777778" z="65" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="232.1527777777778" z="81.25" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
-  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="232.1527777777778" z="97.5" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="270" />
+  <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="195.9027777777778" z="43.125" w="22.5" d="5" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaZ="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="195.9027777777778" z="103.125" w="22.5" d="5" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="182.1527777777778" z="48.75" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaZ="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="218.4027777777778" z="43.125" w="22.5" d="5" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="182.1527777777778" z="65" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="182.1527777777778" z="81.25" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaX="-cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="182.1527777777778" z="97.5" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaZ="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="218.4027777777778" z="103.125" w="22.5" d="5" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="232.1527777777778" z="48.75" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="232.1527777777778" z="65" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="232.1527777777778" z="81.25" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
+  <Field deltaX="cheaterForce" watch="cheaterWatch" fill="#009600" frame="#000000" x="232.1527777777778" z="97.5" w="5" d="16.25" h="0" cx="53.47222222222222" cz="69.44444444444444" angle="90" />
   <set baseHeight="0" wallHeight="fortWallY" />
   <Wall fill="#fffb00" frame="#000000" x="207.1527777777778" z="48.125" w="45" d="5" h="0" />
   <Wall fill="#fffb00" frame="#000000" x="227.1527777777778" z="73.125" w="5" d="45" h="0" />
@@ -514,8 +511,8 @@ See the read me file for explanations of the switches." />
   <WallDoor isTarget="true" canGlow="true" shield="fortShieldDoor" open="mOpenDoor" close="mCloseDoor" deltaY="0" deltaZ="-2" openSpeed="fortDoorSpeed" closeSpeed="fortDoorSpeed" team="2" hitScore="fortDoorScoreHit" killScore="fortDoorScoreKill" fill="#ffd300" frame="#000000" x="185.9027777777778" z="71.875" w="0" d="2.5" h="0" />
   <WallDoor isTarget="true" canGlow="true" shield="fortShieldDoor" open="mOpenDoor" close="mCloseDoor" deltaY="0" deltaZ="2" openSpeed="fortDoorSpeed" closeSpeed="fortDoorSpeed" team="2" hitScore="fortDoorScoreHit" killScore="fortDoorScoreKill" fill="#ffd300" frame="#000000" x="185.9027777777778" z="74.375" w="0" d="2.5" h="0" />
   <Area enter="mOpenDoor" exit="mCloseDoor" mask="T2" cx="185.9027777777778" cz="73.125" r="3.75" />
-  <Ramp thickness=".1" deltaY="fortWindowLargeBotY" fill="#fffc79" frame="#000000" x="198.4027777777778" z="58.125" w="22.5" d="5" h="0" angle="270" />
-  <Ramp thickness=".1" deltaY="fortWindowLargeBotY" fill="#fffc79" frame="#000000" x="198.4027777777778" z="88.125" w="22.5" d="5" h="0" angle="270" />
+  <Ramp thickness=".1" deltaY="fortWindowLargeBotY" fill="#fffc79" frame="#000000" x="198.4027777777778" z="58.125" w="22.5" d="5" h="0" angle="90" />
+  <Ramp thickness=".1" deltaY="fortWindowLargeBotY" fill="#fffc79" frame="#000000" x="198.4027777777778" z="88.125" w="22.5" d="5" h="0" angle="90" />
   <set baseHeight="fortDoorTopY" wallHeight="fortWindowLargeBotY -baseHeight" />
   <Wall fill="#fffb00" frame="#000000" x="185.9027777777778" z="73.125" w="2.5" d="45" h="0" />
   <set baseHeight="fortWindowLargeBotY" wallHeight="fortWallY -baseHeight" />
@@ -530,7 +527,7 @@ See the read me file for explanations of the switches." />
   <Wall fill="#fffb00" frame="#000000" x="185.9027777777778" z="73.125" w="2.5" d="2.5" h="0" />
   <set baseHeight="fortWindowSmallBotY" wallHeight="fortWindowSmallTopY -baseHeight" />
   <Wall fill="#fffda9" frame="#000000" x="186.8402777777778" z="73.125" w="0.625" d="2.5" h="0" />
-  <Guard y="guardAtckY -baseHeight" shield="guardAtckShield" shotPower="guardAtckPower" freq="guardAtckFreq" speed="guardAtckSpeed" watch="guardAtckWatch" mask="allTeams -T2" team="2" stop="mStopAll" fill="#fffb00" frame="#000000" cx="185.9027777777778" cz="73.125" angle="90" />
+  <Guard y="guardAtckY -baseHeight" shield="guardAtckShield" shotPower="guardAtckPower" freq="guardAtckFreq" speed="guardAtckSpeed" watch="guardAtckWatch" mask="allTeams -T2" team="2" stop="mStopAll" fill="#fffb00" frame="#000000" cx="185.9027777777778" cz="73.125" angle="270" />
   <set baseHeight="fortWindowSmallTopY" wallHeight="fortWallY -baseHeight" />
   <Wall fill="#fffb00" frame="#000000" x="185.9027777777778" z="73.125" w="2.5" d="2.5" h="0" />
   <set baseHeight="fortWindowLargeBotY" wallHeight="fortWindowLargeTopY -baseHeight" />
@@ -547,15 +544,15 @@ See the read me file for explanations of the switches." />
   <Wall fill="#fffda9" frame="#000000" x="184.3402777777778" z="88.125" w="0.625" d="5" h="0.25" />
   <set wa="-.25 + fortWindowLargeBotY" />
   <Wall fill="#fffda9" frame="#000000" x="184.3402777777778" z="58.125" w="0.625" d="5" h="0.25" />
-  <Guard y="guardDefY" shield="guardDefShield" shotPower="guardDefPower" freq="guardDefFreq" speed="guardDefSpeed" watch="guardDefWatch" mask="allTeams -T2" team="2" stop="mStopAll" fill="#fffb00" frame="#000000" cx="192.1527777777778" cz="58.125" angle="180" />
-  <Incarnator mask="T2" y="30" cx="212.1527777777778" cz="73.125" angle="90" />
-  <Incarnator mask="T2" y="30" cx="212.1527777777778" cz="78.125" angle="90" />
-  <Incarnator mask="T2" y="30" cx="212.1527777777778" cz="68.125" angle="90" />
-  <Guard y="guardDefY" shield="guardDefShield" shotPower="guardDefPower" freq="guardDefFreq" speed="guardDefSpeed" watch="guardDefWatch" mask="allTeams -T2" team="2" stop="mStopAll" fill="#fffb00" frame="#000000" cx="192.1527777777778" cz="88.125" angle="0" />
-  <Ufo y="ufoYStart" verticalRangeMin="ufoYMin" verticalRangeMax="ufoYMax" shield="ufoShield" acceleration="ufoAccel" homeSick="ufoHSick" homeRange="ufoHRange" homeBase="@BaseYellowA" shotPower="ufoPower" burstLength="ufoBLength" burstSpeed="ufoBSpeed" burstCharge="ufoBCharge" mask="allTeams -T2" team="2" watch="ufoWatch" stop="mStopAll" fill="#fffb00" frame="#000000" cx="217.1527777777778" cz="58.125" angle="315" />
+  <Guard y="guardDefY" shield="guardDefShield" shotPower="guardDefPower" freq="guardDefFreq" speed="guardDefSpeed" watch="guardDefWatch" mask="allTeams -T2" team="2" stop="mStopAll" fill="#fffb00" frame="#000000" cx="192.1527777777778" cz="58.125" angle="0" />
+  <Incarnator mask="T2" y="30" cx="212.1527777777778" cz="73.125" angle="270" />
+  <Incarnator mask="T2" y="30" cx="212.1527777777778" cz="78.125" angle="270" />
+  <Incarnator mask="T2" y="30" cx="212.1527777777778" cz="68.125" angle="270" />
+  <Guard y="guardDefY" shield="guardDefShield" shotPower="guardDefPower" freq="guardDefFreq" speed="guardDefSpeed" watch="guardDefWatch" mask="allTeams -T2" team="2" stop="mStopAll" fill="#fffb00" frame="#000000" cx="192.1527777777778" cz="88.125" angle="180" />
+  <Ufo y="ufoYStart" verticalRangeMin="ufoYMin" verticalRangeMax="ufoYMax" shield="ufoShield" acceleration="ufoAccel" homeSick="ufoHSick" homeRange="ufoHRange" homeBase="@BaseYellowA" shotPower="ufoPower" burstLength="ufoBLength" burstSpeed="ufoBSpeed" burstCharge="ufoBCharge" mask="allTeams -T2" team="2" watch="ufoWatch" stop="mStopAll" fill="#fffb00" frame="#000000" cx="217.1527777777778" cz="58.125" angle="135" />
   <set wallHeight="fortInnerWallTopY" />
   <Wall fill="#fffda9" frame="#000000" x="205.2777777777778" z="73.125" w="1.25" d="15" h="0" />
-  <Ufo y="ufoYStart" verticalRangeMin="ufoYMin" verticalRangeMax="ufoYMax" shield="ufoShield" acceleration="ufoAccel" homeSick="ufoHSick" homeRange="ufoHRange" homeBase="@BaseYellowB" shotPower="ufoPower" burstLength="ufoBLength" burstSpeed="ufoBSpeed" burstCharge="ufoBCharge" mask="allTeams -T2" team="2" watch="ufoWatch" stop="mStopAll" fill="#fffb00" frame="#000000" cx="217.1527777777778" cz="88.125" angle="315" />
+  <Ufo y="ufoYStart" verticalRangeMin="ufoYMin" verticalRangeMax="ufoYMax" shield="ufoShield" acceleration="ufoAccel" homeSick="ufoHSick" homeRange="ufoHRange" homeBase="@BaseYellowB" shotPower="ufoPower" burstLength="ufoBLength" burstSpeed="ufoBSpeed" burstCharge="ufoBCharge" mask="allTeams -T2" team="2" watch="ufoWatch" stop="mStopAll" fill="#fffb00" frame="#000000" cx="217.1527777777778" cz="88.125" angle="135" />
   <set wallHeight="fortBarrierTopY" />
   <WallSolid shield="fortShieldBarrier" isTarget="true" canGlow="true" team="2" targetGroup="targGoal" hitScore="fortBarrierScoreHit" killScore="fortBarrierScoreKill" fill="#ffd300" frame="#000000" x="220.9027777777778" z="68.4375" w="7.5" d="0.625" h="0" />
   <WallSolid shield="fortShieldBarrier" isTarget="true" canGlow="true" team="2" targetGroup="targGoal" hitScore="fortBarrierScoreHit" killScore="fortBarrierScoreKill" fill="#ffd300" frame="#000000" x="216.8402777777778" z="73.125" w="0.625" d="10" h="0" />
@@ -563,26 +560,26 @@ See the read me file for explanations of the switches." />
   <set wa="wallHeight" />
   <WallSolid shield="fortShieldBarrier" isTarget="true" canGlow="true" team="2" targetGroup="targGoal" hitScore="fortBarrierScoreHit" killScore="fortBarrierScoreKill" fill="#ffd300" frame="#000000" x="220.5902777777778" z="73.125" w="8.125" d="10" h="0.5" />
   <unique vars="mOpen mClose" />
-  <Door shape="fortObjectShape" scale="fortObjectScale" y="fortObjectY" team="2" targetGroup="targGoal" hitScore="fortObjectScoreHit" killScore="fortObjectScoreKill" killMsg="@YellowKilled" isTarget="true" canGlow="true" shield="fortShieldObject" open="mOpen" didOpen="mClose" close="mClose" didClose="mOpen" closeSpeed="100" volume="0" deltaY="0" yaw="90 -openSpeed" fill="#fffb00" frame="#ff2600" cx="221.5277777777778" cz="73.125" angle="90" />
+  <Door shape="fortObjectShape" scale="fortObjectScale" y="fortObjectY" team="2" targetGroup="targGoal" hitScore="fortObjectScoreHit" killScore="fortObjectScoreKill" killMsg="@YellowKilled" isTarget="true" canGlow="true" shield="fortShieldObject" open="mOpen" didOpen="mClose" close="mClose" didClose="mOpen" closeSpeed="100" volume="0" deltaY="0" yaw="90 -openSpeed" fill="#fffb00" frame="#ff2600" cx="221.5277777777778" cz="73.125" angle="270" />
   <And in="@start" out="mOpen" />
-  <Field shape="bspCubeFrame" deltaY="0" y="fortObjectY" watch="targGoal" status="false" start="@BlueKilled" enter="@YellowWin" fill="#fffb00" frame="#ff2600" x="198.4027777777778" z="88.125" w="22.5" d="5" h="0" cx="221.5277777777778" cz="73.125" angle="90" />
+  <Field shape="bspCubeFrame" deltaY="0" y="fortObjectY" watch="targGoal" status="false" start="@BlueKilled" enter="@YellowWin" fill="#fffb00" frame="#ff2600" x="198.4027777777778" z="88.125" w="22.5" d="5" h="0" cx="221.5277777777778" cz="73.125" angle="270" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspMissile" y="fortWindowLargeBotY + gAmmoY" speed="gAmmoSpd" missiles="ammoSnipeQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="185.9027777777778" cz="58.125" angle="135" />
+  <Goody shape="bspMissile" y="fortWindowLargeBotY + gAmmoY" speed="gAmmoSpd" missiles="ammoSnipeQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="185.9027777777778" cz="58.125" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoSnipeTime" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspMissile" y="fortWindowLargeBotY + gAmmoY" speed="gAmmoSpd" missiles="ammoSnipeQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="185.9027777777778" cz="88.125" angle="135" />
+  <Goody shape="bspMissile" y="fortWindowLargeBotY + gAmmoY" speed="gAmmoSpd" missiles="ammoSnipeQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="185.9027777777778" cz="88.125" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoSnipeTime" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="202.1527777777778" cz="73.125" angle="135" />
+  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="202.1527777777778" cz="73.125" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoMainTime" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="219.6527777777778" cz="55.625" angle="135" />
+  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="219.6527777777778" cz="55.625" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoMainTime" />
   <unique vars="mStart mTaken" />
-  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="219.6527777777778" cz="90.625" angle="135" />
+  <Goody shape="bspGrenade" y="gAmmoY" speed="gAmmoSpd" grenades="ammoMainQuant" start="mStart" out="mTaken" fill="#8a8a8a" frame="#570500" cx="219.6527777777778" cz="90.625" angle="315" />
   <Timer in.0="mTaken" in.1="@start" out="mStart" wait="ammoMainTime" />
-  <Teleporter win="5000" mask="T2" start="@YellowWin" stop="@YellowKilled" fill="#fffb00" frame="#000000" cx="212.1527777777778" cz="73.125" angle="315" />
-  <script>
+  <Teleporter win="5000" mask="T2" start="@YellowWin" stop="@YellowKilled" fill="#fffb00" frame="#000000" cx="212.1527777777778" cz="73.125" angle="135" />
+  <script pixelToThickness="0.125" missilePower="2" defaultLives="10" fortWallY="12" fortDoorTopY="4" fortWindowLargeBotY="4" fortWindowLargeTopY="8.3" fortWindowSmallBotY="7.5" fortWindowSmallTopY="9.5" fortInnerWallTopY="2.5" fortBarrierTopY="5" fortShieldDoor="32" fortShieldBarrier="20" fortShieldObject="10" fortDoorSpeed="5" fortDoorScoreHit="10" fortDoorScoreKill="100" fortBarrierScoreHit="10" fortBarrierScoreKill="100" fortObjectShape="bspDoubleCube" fortObjectScale="2" fortObjectY="2" fortObjectScoreHit="10" fortObjectScoreKill="100" guardAtckY="fortWindowSmallBotY + 1" guardAtckShield="22" guardAtckPower="2" guardAtckFreq="28" guardAtckSpeed="6" guardAtckWatch="playerMask + robotMask" guardDefY="2" guardDefShield="30" guardDefPower=".25" guardDefFreq="15" guardDefSpeed="10" guardDefWatch="playerMask + robotMask" ufoYStart="5" ufoYMin="3" ufoYMax="fortWallY -2" ufoShield="18" ufoAccel="0.04" ufoHSick="1" ufoHRange="6 * 5" ufoPower=".8" ufoBLength="4" ufoBSpeed="2" ufoBCharge="10 * 15" ufoWatch="playerMask" targDoor="targ1" targGoal="targ2" ammoSnipeTime="15 * 6" ammoSnipeQuant="3" ammoMainTime="15 * 15" ammoMainQuant="6" cheaterWatch="scoutMask" cheaterBase="fortWallY -1" cheaterHeight="6" cheaterForce="3" clampSpeed="100 / 15" embShield="26" embY="120" fill="#009600" cx="212.1527777777778" cz="73.125" r="1.875" angle="45" frame="#000000" information="Yellow and blue teams.&#10;Enter the other team's fort, destroy their generator, and return to your fort to win.&#10;Oh, and defend your fort too.&#10;See the read me file for explanations of the switches." wallHeight="fortBarrierTopY" wallYon="0" baseHeight="0" mStopAll="@YellowKilled" x="198.4027777777778" z="88.125" w="22.5" d="5" h="0">
 object Teleporter
   destGroup = @death
   mask = allTeams - T2
@@ -593,7 +590,7 @@ end
 
 baseHeight = fortWallY
 wallHwe</script>
-  <YonBox deltaY="fortWindowLargeBotY" x="205.97222222222223" z="73.19444444444444" w="36.25" d="43.75" h="0" r="1.875" angle="225" />
+  <YonBox deltaY="fortWindowLargeBotY" x="205.97222222222223" z="73.19444444444444" w="36.25" d="43.75" h="0" r="1.875" angle="45" />
   <set baseHeight="fortDoorTopY / 2 -.25" wallHeight=".5" />
   <Wall fill="#fffed5" frame="#000000" x="187.4652777777778" z="69.6875" w="0.625" d="0.625" h="0" />
   <Wall fill="#fffed5" frame="#000000" x="187.4652777777778" z="76.5625" w="0.625" d="0.625" h="0" />
@@ -601,11 +598,11 @@ wallHwe</script>
   <WallDoor middle=".66" deltaY="0" midZ="5 / 8 * 2" deltaX="-5 / 8" deltaZ="5 / 8 * 2" status="1" openSpeed="clampSpeed" closeSpeed="clampSpeed" open="mOpenClamps" close="mCloseClamps" fill="#fffed5" frame="#000000" x="188.0902777777778" z="76.25" w="0.625" d="1.25" h="0" />
   <set baseHeight="0" wallHeight="fortDoorTopY + .05" wa="embY" />
   <unique vars="mHit" />
-  <FreeSolid start="mGetBlock1" canGlow="true" shield="embShield" fill="#ffd300" frame="#000000" x="198.5763888888889" z="64.20138888888889" w="0.3472222222222001" d="5.902777777777786" h="0" cx="212.1527777777778" cz="73.125" angle="225" />
-  <Switch out.0="mGetBlock1" status="1" restart="false" scale="1.1" fill="#00ec00" frame="#ff2600" cx="205.97222222222223" cz="69.44444444444444" angle="90" />
-  <Switch out.0="mGetBlock2" status="1" restart="false" scale="1.1" fill="#00ec00" frame="#ff2600" cx="205.97222222222223" cz="76.94444444444444" angle="90" />
+  <FreeSolid start="mGetBlock1" canGlow="true" shield="embShield" fill="#ffd300" frame="#000000" x="198.5763888888889" z="64.20138888888889" w="0.3472222222222001" d="5.902777777777786" h="0" cx="212.1527777777778" cz="73.125" angle="45" />
+  <Switch out.0="mGetBlock1" status="1" restart="false" scale="1.1" fill="#00ec00" frame="#ff2600" cx="205.97222222222223" cz="69.44444444444444" angle="270" />
+  <Switch out.0="mGetBlock2" status="1" restart="false" scale="1.1" fill="#00ec00" frame="#ff2600" cx="205.97222222222223" cz="76.94444444444444" angle="270" />
   <set wa="embY" />
   <unique vars="mHit" />
-  <FreeSolid start="mGetBlock2" canGlow="true" shield="embShield" fill="#ffd300" frame="#000000" x="198.5763888888889" z="81.70138888888889" w="0.3472222222222001" d="5.902777777777786" h="0" cx="205.97222222222223" cz="76.94444444444444" angle="90" />
-  <Switch out.0="mCloseClamps" out.1="mOpenClamps" status="1" scale="2" fill="#00ec00" frame="#ff2600" cx="187.22222222222223" cz="83.19444444444444" angle="90" />
+  <FreeSolid start="mGetBlock2" canGlow="true" shield="embShield" fill="#ffd300" frame="#000000" x="198.5763888888889" z="81.70138888888889" w="0.3472222222222001" d="5.902777777777786" h="0" cx="205.97222222222223" cz="76.94444444444444" angle="270" />
+  <Switch out.0="mCloseClamps" out.1="mOpenClamps" status="1" scale="2" fill="#00ec00" frame="#ff2600" cx="187.22222222222223" cz="83.19444444444444" angle="270" />
 </map>

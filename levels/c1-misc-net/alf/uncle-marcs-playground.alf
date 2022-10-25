@@ -18,8 +18,8 @@
   <Wall fill="#aa7942" frame="#000000" x="5.625" z="70.59027777777777" w="3.1944444444444446" d="47.56944444444444" h="0" />
   <SkyColor fill="#0080ff" frame="#a6feff" />
   <GroundColor fill="#009600" />
-  <Incarnator y="15" cx="16.319444444444443" cz="71.25" angle="315" />
-  <Incarnator y="15" cx="16.319444444444443" cz="71.25" angle="315" />
+  <Incarnator y="15" cx="16.319444444444443" cz="71.25" angle="135" />
+  <Incarnator y="15" cx="16.319444444444443" cz="71.25" angle="135" />
   <set wallHeight="18" />
   <Wall fill="#e62100" frame="#000000" x="52.46527777777778" z="56.84027777777778" w="3.819444444444443" d="3.819444444444443" h="0" />
   <set wallHeight="18" />
@@ -104,15 +104,15 @@
   <Wall fill="#fffb00" frame="#000000" x="103.75" z="108.68055555555557" w="4.444444444444443" d="3.194444444444443" h="0" />
   <set wallHeight="3" />
   <Wall fill="#fffb00" frame="#000000" x="103.75" z="99.93055555555557" w="4.444444444444443" d="3.194444444444443" h="0" />
-  <Goody shape="bspGrenade" y="1.5" grenades="4" speed="15" fill="#fffb00" frame="#000000" cx="78.19444444444444" cz="90.625" angle="225" />
+  <Goody shape="bspGrenade" y="1.5" grenades="4" speed="15" fill="#fffb00" frame="#000000" cx="78.19444444444444" cz="90.625" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspMissile" speed="2" yon="20" y="7" missiles="2" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="60.625" cz="66.18055555555556" angle="45" />
-  <Ufo shape="bspUfo" motionRange="20" homesick=".5" homeRange="5" status="true" fill="#7a4aaa" frame="#000000" cx="80.06944444444444" cz="85.625" angle="135" />
+  <Goody shape="bspMissile" speed="2" yon="20" y="7" missiles="2" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="60.625" cz="66.18055555555556" angle="225" />
+  <Ufo shape="bspUfo" motionRange="20" homesick=".5" homeRange="5" status="true" fill="#7a4aaa" frame="#000000" cx="80.06944444444444" cz="85.625" angle="315" />
   <Dome domeHeight="20" fill="#7b23aa" frame="#000000" cx="95.83333333333334" cz="80.83333333333334" r="5.972222222222221" angle="0" quarters="4" />
-  <Ramp deltaY="5" fill="#e62100" frame="#000000" x="83.64583333333334" z="80.83333333333334" w="16.45833333333333" d="7.083333333333329" h="0" angle="90" />
-  <Ramp deltaY="5" fill="#005400" frame="#000000" x="108.33333333333334" z="80.83333333333334" w="18.33333333333333" d="7.083333333333329" h="0" angle="270" />
+  <Ramp deltaY="5" fill="#e62100" frame="#000000" x="83.64583333333334" z="80.83333333333334" w="16.45833333333333" d="7.083333333333329" h="0" angle="270" />
+  <Ramp deltaY="5" fill="#005400" frame="#000000" x="108.33333333333334" z="80.83333333333334" w="18.33333333333333" d="7.083333333333329" h="0" angle="90" />
   <set wallHeight=".5" />
   <Wall fill="#fffb00" frame="#000000" x="96.04166666666667" z="74.89583333333334" w="12.777777777777771" d="5.069444444444443" h="0" y="7" />
   <set wallHeight=".5" />
@@ -131,11 +131,11 @@
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="19" grenades="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="94.93055555555556" cz="109.30555555555556" angle="45" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="19" grenades="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="94.93055555555556" cz="109.30555555555556" angle="225" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspGrenade" speed="2" yon="50" y="19" grenades="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="60.34722222222223" cz="80.625" angle="45" />
+  <Goody shape="bspGrenade" speed="2" yon="50" y="19" grenades="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="60.34722222222223" cz="80.625" angle="225" />
   <set wallHeight="6" />
   <Wall fill="#8a8a8a" frame="#000000" x="112.08333333333334" z="35.208333333333336" w="5.694444444444443" d="5.694444444444443" h="0" />
   <set wallHeight="6" />
@@ -160,15 +160,15 @@
   <unique vars="pUfoDead raiseUfo" />
   <And in="@start" out="raiseUfo" />
   <Timer in="pUfoDead" out="raiseUfo" wait="300" />
-  <Ufo y="4" start="raiseUfo" status="raiseUfo" killMsg="pUfoDead" fill="#ff32a9" frame="#009600" cx="35.76388888888889" cz="124.93055555555556" angle="225" />
+  <Ufo y="4" start="raiseUfo" status="raiseUfo" killMsg="pUfoDead" fill="#ff32a9" frame="#009600" cx="35.76388888888889" cz="124.93055555555556" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="3000" />
-  <Goody shape="bspGoody" speed="2" yon="50" y="1.5" boosters="1" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="33.19444444444444" cz="131.875" angle="45" />
+  <Goody shape="bspGoody" speed="2" yon="50" y="1.5" boosters="1" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="33.19444444444444" cz="131.875" angle="225" />
   <Wall fill="#0052ff" frame="#000000" x="75.83333333333334" z="54.895833333333336" w="5.694444444444443" d="6.319444444444443" h="0" y="16" />
-  <Ufo y="4" fill="#009600" frame="#ff4c00" cx="118.05555555555556" cz="54.93055555555556" angle="45" />
-  <Incarnator y="15" cx="127.43055555555556" cz="113.05555555555556" angle="45" />
-  <script>
+  <Ufo y="4" fill="#009600" frame="#ff4c00" cx="118.05555555555556" cz="54.93055555555556" angle="225" />
+  <Incarnator y="15" cx="127.43055555555556" cz="113.05555555555556" angle="225" />
+  <script pixelToThickness="0.125" designer="Marc Richter (marc@vitinc.com)" information="Come and play. Watch out for the bully UFOs, try climbing, the castle and the sandbox" wallHeight=".25" fill="#009600" frame="#000000" cx="56.18055555555556" cz="88.68055555555556" r="2.569444444444443" angle="45" x="108.33333333333334" z="80.83333333333334" w="18.33333333333333" d="7.083333333333329" h="0">
 object Teleporter
 
 shape=0

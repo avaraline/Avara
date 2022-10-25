@@ -14,7 +14,7 @@
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
@@ -25,6 +25,7 @@
 //#include "Palettes.h"
 #include "CApplication.h"
 #include "CIncarnator.h"
+#include "CRandomIncarnator.h"
 #include "KeyFuncs.h"
 //#include "LevelScoreRecord.h"
 #include "CAbstractYon.h"
@@ -57,7 +58,7 @@ void CAbstractPlayer::LoadHUDParts() {
     for (i = 0; i < 2; i++) {
         targetOns[i] = new CBSPPart;
         targetOns[i]->IBSPPart(kTargetOk);
-        targetOns[i]->ReplaceColor(0x00ff0000, CColorManager::getPlasmaSightsOnColor());
+        targetOns[i]->ReplaceColor(0xffff2600, ColorManager::getPlasmaSightsOnColor());
         targetOns[i]->privateAmbient = SIGHTSAMBIENT;
         targetOns[i]->yon = LONGYON * 2;
         targetOns[i]->usesPrivateYon = true;
@@ -67,7 +68,7 @@ void CAbstractPlayer::LoadHUDParts() {
 
         targetOffs[i] = new CBSPPart;
         targetOffs[i]->IBSPPart(kTargetOff);
-        targetOffs[i]->ReplaceColor(0x00008000, CColorManager::getPlasmaSightsOffColor());
+        targetOffs[i]->ReplaceColor(0xff008f00, ColorManager::getPlasmaSightsOffColor());
         targetOffs[i]->privateAmbient = SIGHTSAMBIENT;
         targetOffs[i]->yon = LONGYON * 2;
         targetOffs[i]->usesPrivateYon = true;
@@ -79,7 +80,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrowHeight = FIX3(750);
     dirArrow = new CBSPPart;
     dirArrow->IBSPPart(kDirIndBSP);
-    dirArrow->ReplaceColor(0x00000000, CColorManager::getLookForwardColor());
+    dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX(1);
     dirArrow->isTransparent = true;
@@ -121,9 +122,8 @@ void CAbstractPlayer::StartSystems() {
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
 #define CLASSICMOTORFRICTION FIX3(750)
-    classicMotorFriction = CLASSICMOTORFRICTION;
 #define CLASSICACCELERATION FIX3(250)
-    maxAcceleration = FIX3(250);
+    maxAcceleration = CLASSICACCELERATION;
     didBump = true;
 
     groundSlide[0] = 0;
@@ -172,13 +172,14 @@ void CAbstractPlayer::StartSystems() {
     classicGeneratorPower = FIX3(30);
     classicShieldRegen = FIX3(30);       //  Use 0.030 per frame to repair shields
     classicChargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
+    classicMotorFriction = CLASSICMOTORFRICTION;
 }
 
 void CAbstractPlayer::LoadScout() {
     scoutCommand = kScoutNullCommand;
 
     itsScout = new CScout;
-    itsScout->IScout(this, teamColor, GetTeamColorOr(CColorManager::getDefaultTeamColor()));
+    itsScout->IScout(this, teamColor, GetTeamColorOr(ColorManager::getDefaultTeamColor()));
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
@@ -186,21 +187,21 @@ void CAbstractPlayer::LoadScout() {
 
 void CAbstractPlayer::ReplacePartColors() {
     teamMask = 1 << teamColor;
-    longTeamColor = GetTeamColorOr(CColorManager::getDefaultTeamColor());
+    longTeamColor = GetTeamColorOr(ColorManager::getDefaultTeamColor());
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
+        (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
     }
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
     longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(kMarkerColor, specialColor);
+        (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
     }
 
     if (itsScout) {
-        itsScout->partList[0]->ReplaceColor(kMarkerColor, specialColor);
+        itsScout->partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
     }
 }
 
@@ -286,6 +287,8 @@ void CAbstractPlayer::AdaptableSettings() {
     generatorPower = FpsCoefficient2(classicGeneratorPower);
     shieldRegen = FpsCoefficient2(classicShieldRegen);
     chargeGunPerFrame = FpsCoefficient2(classicChargeGunPerFrame); //    Charge gun at 0.035 units per frame
+    FpsCoefficients(classicMotorFriction, FMul(classicMotorFriction, classicMotorAcceleration),
+                    &motorFriction, &motorAcceleration);
 }
 
 void CAbstractPlayer::Dispose() {
@@ -977,7 +980,7 @@ void CAbstractPlayer::PlayerAction() {
                         viewYaw = 0;
                         viewPitch = 0;
                         fieldOfView = maxFOV;
-                        Reincarnate(NULL);
+                        Reincarnate();
                     } else {
                         itsManager->DeadOrDone();
                     }
@@ -1204,44 +1207,59 @@ void CAbstractPlayer::IncarnateSound() {
     gHub->ReleaseLink(aLink);
 }
 
-void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
-    CSmartPart **thePart;
+void CAbstractPlayer::Reincarnate() {
     CIncarnator *placeList;
-    long bestCount = 0x7fffFFFF;
+    long bestCount = LONG_MAX;
 
-    if (newSpot == NULL) {
-        placeList = itsGame->incarnatorList;
-
-        while (placeList) {
-            if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount < bestCount)) {
-                bestCount = placeList->useCount;
-                newSpot = placeList;
-            }
-
-            placeList = placeList->nextIncarnator;
+    // first, determine the count for the least-visited Incarnator
+    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
+        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount < bestCount)) {
+            bestCount = placeList->useCount;
         }
     }
 
-    for (thePart = partList; *thePart; thePart++) {
+    // try the least-visited Incarnators until one works
+    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
+        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
+            if (ReincarnateComplete(placeList)) {
+                break;
+            }
+        }
+    }
+
+    // if couldn't find an available Incarnator above, try creating a random one
+    if (placeList == nullptr) {
+        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working, 
+        // then 3 tries will get that down to 0.1%.  In most levels, the not-working chance is probably
+        // closer to 1% so 3 tries = 0.0001%
+        for (int tries = 3; isInLimbo && tries > 0; tries--) {
+            CRandomIncarnator waldo(itsGame->actorList);
+            if (ReincarnateComplete(&waldo)) {
+                break;
+            }
+        }
+    }
+}
+
+bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
+    // increment useCount regardless of success, so the next player doesn't try to use this spot
+    newSpot->useCount++;
+
+    // make sure somebody or something isn't in this spot already, prepare for collision test
+    location[0] = newSpot->location[0];
+    location[1] = newSpot->location[1];
+    location[2] = newSpot->location[2];
+    speed[1] = 0;
+    heading = newSpot->heading;
+
+    // make player visible before the collision test
+    for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->isTransparent = false;
     }
-
-    if (newSpot) {
-        newSpot->useCount++;
-        location[0] = newSpot->location[0];
-        location[1] = newSpot->location[1];
-        location[2] = newSpot->location[2];
-        speed[1] = 0;
-        heading = newSpot->heading;
-
-        PlayerWasMoved();
-        BuildPartProximityList(location, proximityRadius, kSolidBit);
-        if (DoCollisionTest(&proximityList.p)) {
-            newSpot = NULL;
-        }
-    }
-
-    if (newSpot) {
+    PlayerWasMoved();
+    BuildPartProximityList(location, proximityRadius, kSolidBit);
+    if (!DoCollisionTest(&proximityList.p)) {
+        // looks like we're good to go
         isInLimbo = false;
         maskBits |= kSolidBit;
 
@@ -1266,10 +1284,14 @@ void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
         didSelfDestruct = false;
 
     } else {
-        for (thePart = partList; *thePart; thePart++) {
+        // make player invisible again since it failed the collision test
+        for (CSmartPart **thePart = partList; *thePart; thePart++) {
             (*thePart)->isTransparent = true;
         }
+        return false;
     }
+
+    return true;
 }
 
 Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume, short options) {
@@ -1341,8 +1363,10 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
             // comes from taking the ratio of both geometric series limits of total spin for FPS and classic:
             //    scale = (F/(1-F)) / ((f/N)/(1-f))
             // F = classicMotorAcceleration, f = fpsMotorFriction, N = fps-frames per classic frame
-            Fixed spinScale = FDiv(FMul(classicMotorFriction, FIX1 - motorFriction),
-                                   FMul(FpsCoefficient2(motorFriction), FIX1 - classicMotorFriction));
+            Fixed spinScale = (motorFriction == 0)
+                ? FIX1
+                : FDiv(FMul(classicMotorFriction, FIX1 - motorFriction),
+                       FMul(FpsCoefficient2(motorFriction), FIX1 - classicMotorFriction));
             FPS_DEBUG("•••spinScale = " << ToFloat(spinScale) << "\n");
             motors[0] = FMul(maxAcceleration << 7, spinScale);
             motors[1] = -motors[0];

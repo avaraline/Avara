@@ -492,18 +492,17 @@
   <Wall fill="#686868" frame="#000000" x="61.25" z="23.125" w="2.5" d="36.25" h="18.75" />
   <Wall fill="#686868" frame="#000000" x="44.375" z="3.75" w="36.25" d="2.5" h="18.75" />
   <Wall fill="#686868" frame="#000000" x="25" z="21.875" w="2.5" d="38.75" h="18.75" />
-  <Incarnator y="40" cx="43.125" cz="35" angle="180" />
-  <Incarnator y="40" cx="56.25" cz="21.875" angle="90" />
-  <Incarnator y="40" cx="43.125" cz="8.75" angle="0" />
-  <Incarnator y="40" cx="30" cz="21.875" angle="270" />
-  <Incarnator y="40" cx="30" cz="8.75" angle="315" />
-  <Incarnator y="40" cx="56.25" cz="35" angle="135" />
+  <Incarnator y="40" cx="43.125" cz="35" angle="0" />
+  <Incarnator y="40" cx="56.25" cz="21.875" angle="270" />
+  <Incarnator y="40" cx="43.125" cz="8.75" angle="180" />
+  <Incarnator y="40" cx="30" cz="21.875" angle="90" />
+  <Incarnator y="40" cx="30" cz="8.75" angle="135" />
+  <Incarnator y="40" cx="56.25" cz="35" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Goody shape="300" y="9" speed="0" missiles="0" grenades="0" boosters="5" scale="30" start="mShow" out="mTaken" volume="0" yon="0.01" fill="#007879" frame="#000000" cx="43.125" cz="21.875" angle="225" />
-  <set maxStartGrenades="0" maxStartMissiles="0" hull.0="128" hull.1="128" hull.2="128" gravity="0.9" defaultLives="99" designer="Hazel - hazel@avara.org" information="a level just for fun!
--enjoy!" wallYon="0.01" />
+  <Goody shape="300" y="9" speed="0" missiles="0" grenades="0" boosters="5" scale="30" start="mShow" out="mTaken" volume="0" yon="0.01" fill="#007879" frame="#000000" cx="43.125" cz="21.875" angle="45" />
+  <set maxStartGrenades="0" maxStartMissiles="0" hull.0="128" hull.1="128" hull.2="128" gravity="0.9" defaultLives="99" designer="Hazel - hazel@avara.org" information="a level just for fun!&#10;-enjoy!" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="63.4375" z="23.125" w="1.875" d="41.25" h="250" />
   <Wall fill="#ffffff" frame="#000000" x="44.0625" z="1.5625" w="40.625" d="1.875" h="250" />
   <Wall fill="#ffffff" frame="#000000" x="22.5" z="20.625" w="2.5" d="41.25" h="250" />

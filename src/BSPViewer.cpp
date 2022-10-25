@@ -11,6 +11,7 @@
 #include "CApplication.h"
 #include "CBSPPart.h"
 #include "CBSPWorld.h"
+#include "ColorManager.h"
 #include "CViewParameters.h"
 #include "CWorldShader.h"
 
@@ -18,10 +19,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-
-// These are defined all over the place right now...
-#define kMarkerColor 0x00fefefe
-#define kOtherMarkerColor 0x00fe0000
 
 class BSPViewer : public CApplication {
 public:
@@ -67,7 +64,7 @@ public:
         orientation[2] = FIX(0);
     }
 
-    
+
     bool newPart(int id) {
             if (itsWorld->GetPartCount() > 0) {
                 itsWorld->RemovePart(itsPart);
@@ -75,15 +72,15 @@ public:
             itsPart = new CBSPPart;
             itsPart->IBSPPart(id);
             if (itsPart->polyCount > 0) {
-                itsPart->ReplaceColor(kMarkerColor, 13421568); // yellow
-                itsPart->ReplaceColor(kOtherMarkerColor, 16646144); // red
+                itsPart->ReplaceColor(*ColorManager::getMarkerColor(0), 0xffcccc00); // yellow
+                itsPart->ReplaceColor(*ColorManager::getMarkerColor(1), 0xfffe0000); // red
                 AvaraGLUpdateData(itsPart);
                 itsWorld->AddPart(itsPart);
                 SDL_Log("Loaded BSP %d", id);
                 return true;
             }
             else return false;
-        
+
     }
 
 
@@ -146,7 +143,7 @@ public:
                         } while (newPart(current_id) != true);
                         return true;
                     case SDLK_t:
-                        do{ 
+                        do{
                             current_id--;
                             if (current_id < 1) {
                                 current_id = 1500;

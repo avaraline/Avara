@@ -11,7 +11,7 @@
 #include "CPlayerManager.h"
 
 #include "CAbstractPlayer.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CCommManager.h"
 #include "CIncarnator.h"
 #include "CRandomIncarnator.h"
@@ -959,7 +959,7 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std:
             if (serverCRC == levelCRC && serverTag.compare(levelTag) == 0) {
                 short i;
 
-                SDL_Log("Setting loadingStatus = kLLoaded\n");
+                SDL_Log("Setting loadingStatus = kLLoaded for slot = %d\n", slot);
                 loadingStatus = kLLoaded;
 #if 0
                 oldHeld[0] = oldHeld[1] = 0;
@@ -1032,22 +1032,8 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->limboCount = 0;
         itsPlayer->itsManager = this;
 
-        spotAvailable = itsGame->incarnatorList;
-        while (spotAvailable) {
-            if (spotAvailable->enabled && spotAvailable->colorMask & myTeamMask) {
-                itsPlayer->Reincarnate(spotAvailable);
-                if (!itsPlayer->isInLimbo) {
-                    break;
-                }
-            }
-            spotAvailable = spotAvailable->nextIncarnator;
-        }
-
-        for (int tries = 3; itsPlayer->isInLimbo && tries > 0; tries--) {
-            // try a psuedo-random incarnation
-            CRandomIncarnator waldo(itsGame->incarnatorList);
-            itsPlayer->Reincarnate(&waldo);
-        }
+        itsPlayer->teamMask = myTeamMask;
+        itsPlayer->Reincarnate();
 
         if (itsPlayer->isInLimbo) {
             itsPlayer->Dispose();
@@ -1075,16 +1061,8 @@ Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
         itsPlayer->limboCount = 0;
         itsPlayer->itsManager = this;
 
-        spotAvailable = itsGame->incarnatorList;
-        while (spotAvailable) {
-            if (spotAvailable->enabled && spotAvailable->colorMask & (1 << i)) {
-                itsPlayer->Reincarnate(spotAvailable);
-                if (!itsPlayer->isInLimbo) {
-                    break;
-                }
-            }
-            spotAvailable = spotAvailable->nextIncarnator;
-        }
+        itsPlayer->teamMask = 1 << i;  // set in case Incarnators discriminate on color
+        itsPlayer->Reincarnate();
 
         if (itsPlayer->isInLimbo) {
             itsPlayer->Dispose();
@@ -1248,10 +1226,10 @@ void CPlayerManagerImpl::SpecialColorControl() {
 
         switch (spaceCount) {
             case 2:
-                repColor = CColorManager::getSpecialBlackColor();
+                repColor = ColorManager::getSpecialBlackColor();
                 break;
             case 3:
-                repColor = CColorManager::getSpecialWhiteColor();
+                repColor = ColorManager::getSpecialWhiteColor();
                 break;
         }
 

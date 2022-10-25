@@ -1,9 +1,7 @@
 <map>
   <GroundColor fill="#d77b42" />
   <SkyColor fill="#d780d6" frame="#d77c79" />
-  <set designer="Hazel  and  Judd" information="Try to reach the top by scout surfing and superjumping your way up.
-This idea came to us when we were having a good time scout surfing and fooling around. There are some graphical bugs but that aint’ my fault *blames Avara*
--enjoy!" wallYon="0.01" />
+  <set designer="Hazel  and  Judd" information="Try to reach the top by scout surfing and superjumping your way up.&#10;This idea came to us when we were having a good time scout surfing and fooling around. There are some graphical bugs but that aint’ my fault *blames Avara*&#10;-enjoy!" wallYon="0.01" />
   <Wall fill="#ffffff" frame="#000000" x="889.9305555555555" z="1472.5" w="5" d="5" h="4.5" />
   <Wall fill="#ffffff" frame="#000000" x="894.9305555555555" z="1472.5" w="5" d="5" h="4.5" />
   <Wall fill="#ffffff" frame="#000000" x="899.9305555555555" z="1472.5" w="5" d="5" h="4.5" />
@@ -651,16 +649,16 @@ This idea came to us when we were having a good time scout surfing and fooling a
   <Wall fill="#d6a979" frame="#000000" x="114.61805555555557" z="14.375" w="30.625" d="8.75" h="25" />
   <Wall fill="#d7aaa9" frame="#000000" x="92.74305555555556" z="25.625" w="20.625" d="13.75" h="12.5" />
   <Wall fill="#d6a979" frame="#000000" x="90.86805555555556" z="14.375" w="16.875" d="8.75" h="12.5" />
-  <Incarnator mask="T4" y="70" cx="219.30555555555557" cz="39.34027777777778" angle="90" />
+  <Incarnator mask="T4" y="70" cx="219.30555555555557" cz="39.34027777777778" angle="270" />
   <Wall fill="#d7aeff" frame="#000000" x="144.30555555555557" z="148.75" w="3.75" d="3.75" h="0.25" y="100" />
   <Wall fill="#d7aeff" frame="#000000" x="186.80555555555557" z="148.75" w="3.75" d="3.75" h="0.25" y="100" />
   <Wall fill="#d7aeff" frame="#000000" x="186.80555555555557" z="105" w="3.75" d="3.75" h="0.25" y="100" />
   <Wall fill="#d7aeff" frame="#000000" x="144.30555555555557" z="105" w="3.75" d="3.75" h="0.25" y="100" />
-  <Guard speed="0" fireMsg="@blowTop" y="102" shotPower="-5" freq="1" fill="#d7aaa9" frame="#000000" cx="145.55555555555557" cz="106.25" angle="135" />
-  <Switch shape="240" status="isOpen" altShape="240" y="100" restart="true" out.0="@blowTopStart" out.1="@blowTopStart" scale="2" fill="#d7aeff" frame="#d7aaa9" cx="165.625" cz="126.94444444444446" angle="45" />
-  <Guard speed="0" fireMsg="@blowTop" y="102" shotPower="-5" freq="1" fill="#d7aaa9" frame="#000000" cx="185.55555555555557" cz="106.25" angle="225" />
-  <Guard speed="0" fireMsg="@blowTop" y="102" shotPower="-5" freq="1" fill="#d7aaa9" frame="#000000" cx="185.55555555555557" cz="147.5" angle="315" />
-  <Guard speed="0" fireMsg="@blowTop" y="102" shotPower="-5" freq="1" fill="#d7aaa9" frame="#000000" cx="145.55555555555557" cz="147.5" angle="45" />
+  <Guard speed="0" fireMsg="@blowTop" y="102" shotPower="-5" freq="1" fill="#d7aaa9" frame="#000000" cx="145.55555555555557" cz="106.25" angle="315" />
+  <Switch shape="240" status="isOpen" altShape="240" y="100" restart="true" out.0="@blowTopStart" out.1="@blowTopStart" scale="2" fill="#d7aeff" frame="#d7aaa9" cx="165.625" cz="126.94444444444446" angle="225" />
+  <Guard speed="0" fireMsg="@blowTop" y="102" shotPower="-5" freq="1" fill="#d7aaa9" frame="#000000" cx="185.55555555555557" cz="106.25" angle="45" />
+  <Guard speed="0" fireMsg="@blowTop" y="102" shotPower="-5" freq="1" fill="#d7aaa9" frame="#000000" cx="185.55555555555557" cz="147.5" angle="135" />
+  <Guard speed="0" fireMsg="@blowTop" y="102" shotPower="-5" freq="1" fill="#d7aaa9" frame="#000000" cx="145.55555555555557" cz="147.5" angle="225" />
   <WallDoor openSpeed="25" closeSpeed="25" openDelay="0" open="@blowTopStart" didOpen="@blowTop" close="@blowClose" deltaY="10" fill="#ffffff" frame="#000000" x="1074.6180555555557" z="112.8125" w="5.625" d="5.625" h="4.5" />
   <WallDoor openSpeed="25" closeSpeed="25" openDelay="1" open="@blowTopStart" didOpen="@blowTop" close="@blowClose" deltaY="10" fill="#ffffff" frame="#000000" x="1074.6180555555557" z="119.6875" w="5.625" d="5.625" h="4.5" />
   <WallDoor openSpeed="25" closeSpeed="25" openDelay="32" open="@blowTopStart" didOpen="@blowClose" close="@blowClose" deltaY="10" fill="#ffffff" frame="#000000" x="1093.3680555555557" z="140.3125" w="5.625" d="5.625" h="4.5" />
@@ -694,9 +692,9 @@ This idea came to us when we were having a good time scout surfing and fooling a
   <WallDoor openSpeed="25" closeSpeed="25" openDelay="29" open="@blowTopStart" didOpen="@blowTop" close="@blowClose" deltaY="10" fill="#ffffff" frame="#000000" x="1051.4930555555557" z="219.0625" w="5.625" d="5.625" h="4.5" />
   <WallDoor openSpeed="25" closeSpeed="25" openDelay="30" open="@blowTopStart" didOpen="@blowTop" close="@blowClose" deltaY="10" fill="#ffffff" frame="#000000" x="1051.4930555555557" z="228.4375" w="5.625" d="5.625" h="4.5" />
   <WallDoor openSpeed="25" closeSpeed="25" openDelay="31" open="@blowTopStart" didOpen="@blowTop" close="@blowClose" deltaY="10" fill="#ffffff" frame="#000000" x="1051.4930555555557" z="236.5625" w="5.625" d="5.625" h="4.5" />
-  <Incarnator mask="T4" y="70" cx="207.43055555555557" cz="39.34027777777778" angle="270" />
-  <Incarnator mask="T4" y="70" cx="219.30555555555557" cz="46.84027777777778" angle="90" />
-  <Incarnator mask="T4" y="70" cx="207.43055555555557" cz="46.21527777777778" angle="270" />
-  <Incarnator mask="T4" y="70" cx="219.30555555555557" cz="53.715277777777786" angle="90" />
-  <Incarnator mask="T4" y="70" cx="207.43055555555557" cz="53.090277777777786" angle="270" />
+  <Incarnator mask="T4" y="70" cx="207.43055555555557" cz="39.34027777777778" angle="90" />
+  <Incarnator mask="T4" y="70" cx="219.30555555555557" cz="46.84027777777778" angle="270" />
+  <Incarnator mask="T4" y="70" cx="207.43055555555557" cz="46.21527777777778" angle="90" />
+  <Incarnator mask="T4" y="70" cx="219.30555555555557" cz="53.715277777777786" angle="270" />
+  <Incarnator mask="T4" y="70" cx="207.43055555555557" cz="53.090277777777786" angle="90" />
 </map>

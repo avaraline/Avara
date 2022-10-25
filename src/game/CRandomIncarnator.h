@@ -5,5 +5,5 @@
 
 class CRandomIncarnator : public CIncarnator {
 public:
-    CRandomIncarnator(CIncarnator* incarnatorList);
+    CRandomIncarnator(CAbstractActor* actorList);
 };

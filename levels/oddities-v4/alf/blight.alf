@@ -1,10 +1,5 @@
 <map>
-  <set designer="Kevin Reid (Tetra)    &lt;kpreid@ibm.net&gt;" information="Concept by TRS &lt;therisingsun@mailcity.com&gt;
-A gigantic maze!
-The switches shoot at you until you flip them.
-Don't injure the UFOs.
-The ammo is in the sky; get to the center to get it.
-Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWall="5" DomeSlope="7" wallHeight="TallWall" SkyBase="TallWall + 30" SkyIncr="5" SkyThick=".25" GuardRange="40" DoorTime="10 * 15" DoorShot="2" DoorSpeed="10" DoorVol="0" defaultLives="2" missileTurnRate="100" wgHeight="MazeWall -1" wgScale="0" wgYon=".01" wgReset="11 * 15" wgSwScale="1" wgFreq="2.5 * 15" wgPower=".5" wgSpeed="100" />
+  <set designer="Kevin Reid (Tetra)    &lt;kpreid@ibm.net&gt;" information="Concept by TRS &lt;therisingsun@mailcity.com&gt;&#10;A gigantic maze!&#10;The switches shoot at you until you flip them.&#10;Don't injure the UFOs.&#10;The ammo is in the sky; get to the center to get it.&#10;Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWall="5" DomeSlope="7" wallHeight="TallWall" SkyBase="TallWall + 30" SkyIncr="5" SkyThick=".25" GuardRange="40" DoorTime="10 * 15" DoorShot="2" DoorSpeed="10" DoorVol="0" defaultLives="2" missileTurnRate="100" wgHeight="MazeWall -1" wgScale="0" wgYon=".01" wgReset="11 * 15" wgSwScale="1" wgFreq="2.5 * 15" wgPower=".5" wgSpeed="100" />
   <SkyColor fill="#7b1979" frame="#7a4aaa" />
   <GroundColor fill="#a6feff" />
   <set wallYon="10000" />
@@ -40,8 +35,8 @@ Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWa
   <Wall fill="#007879" frame="#000000" x="37.43055555555556" z="99.89583333333334" w="15" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="30.243055555555557" z="104.89583333333334" w="9.375" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="35.24305555555556" z="102.70833333333334" w="0.625" d="5" h="0" />
-  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="32.74305555555556" cz="62.39583333333334" angle="315" />
-  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="27.743055555555557" cz="102.39583333333334" angle="315" />
+  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="32.74305555555556" cz="62.39583333333334" angle="135" />
+  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="27.743055555555557" cz="102.39583333333334" angle="135" />
   <Wall fill="#007879" frame="#000000" x="60.55555555555556" z="34.895833333333336" w="20" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="87.74305555555556" z="34.895833333333336" w="25.625" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="95.24305555555556" z="32.395833333333336" w="0.625" d="4.375" h="0" />
@@ -65,8 +60,8 @@ Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWa
   <Wall fill="#007879" frame="#000000" x="90.24305555555556" z="57.708333333333336" w="0.625" d="5" h="0" />
   <Wall fill="#007879" frame="#000000" x="60.24305555555556" z="39.895833333333336" w="10.625" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="65.24305555555556" z="42.708333333333336" w="0.625" d="5" h="0" />
-  <Incarnator cx="141.18055555555557" cz="142.25694444444446" angle="90" />
-  <Incarnator cx="28.680555555555557" cz="27.32638888888889" angle="270" />
+  <Incarnator cx="141.18055555555557" cz="142.25694444444446" angle="270" />
+  <Incarnator cx="28.680555555555557" cz="27.32638888888889" angle="90" />
   <Wall fill="#007879" frame="#000000" x="71.80555555555556" z="69.89583333333334" w="12.5" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="93.68055555555556" z="69.89583333333334" w="22.5" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="100.24305555555556" z="92.39583333333334" w="0.625" d="35.625" h="0" />
@@ -101,8 +96,8 @@ Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWa
   <Wall fill="#007879" frame="#000000" x="50.24305555555556" z="109.89583333333334" w="10.625" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="40.24305555555556" z="107.39583333333334" w="0.625" d="5.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="34.93055555555556" z="109.89583333333334" w="10" d="0.625" h="0" />
-  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="142.74305555555557" cz="82.39583333333334" angle="315" />
-  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="82.74305555555556" cz="52.395833333333336" angle="315" />
+  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="142.74305555555557" cz="82.39583333333334" angle="135" />
+  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="82.74305555555556" cz="52.395833333333336" angle="135" />
   <Wall fill="#007879" frame="#000000" x="108.05555555555556" z="94.89583333333334" w="15" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="45.24305555555556" z="114.89583333333334" w="30.625" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="30.243055555555557" z="122.70833333333334" w="0.625" d="15" h="0" />
@@ -167,35 +162,35 @@ Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWa
   <Wall fill="#007879" frame="#000000" x="123.05555555555556" z="139.89583333333334" w="5" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="135.24305555555557" z="134.89583333333334" w="0.625" d="20.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="145.24305555555557" z="134.58333333333334" w="0.625" d="20" h="0" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="97.74305555555556" cz="32.395833333333336" angle="315" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="97.74305555555556" cz="32.395833333333336" angle="135" />
   <Wall fill="#007879" frame="#000000" x="140.24305555555557" z="132.39583333333334" w="0.625" d="15.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="127.74305555555557" z="124.89583333333334" w="5.625" d="0.625" h="0" />
-  <Ufo watch="0" y="5" homeSick="0" acceleration="5" verticalRangeMin="SeeHeight + 1" verticalRangeMax="SeeHeight + 6" hitScore="-100" killScore="-1000" fill="#012ce4" frame="#ffffff" cx="48.68055555555556" cz="49.583333333333336" angle="315" />
-  <Ufo watch="0" y="5" homeSick="0" acceleration="5" verticalRangeMin="SeeHeight + 1" verticalRangeMax="SeeHeight + 6" hitScore="-100" killScore="-1000" fill="#012ce4" frame="#ffffff" cx="125.55555555555557" cz="113.33333333333334" angle="315" />
-  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="77.74305555555556" cz="127.39583333333334" angle="315" />
-  <Incarnator cx="34.30555555555556" cz="37.326388888888886" angle="270" />
-  <Incarnator cx="33.68055555555556" cz="82.32638888888889" angle="270" />
-  <Incarnator cx="36.18055555555556" cz="137.32638888888889" angle="270" />
-  <Incarnator cx="123.68055555555556" cz="47.25694444444444" angle="90" />
-  <Incarnator cx="89.30555555555556" cz="112.25694444444446" angle="90" />
-  <Incarnator cx="94.30555555555556" cz="147.25694444444446" angle="90" />
-  <Incarnator cx="123.68055555555556" cz="132.25694444444446" angle="90" />
-  <Incarnator cx="89.93055555555556" cz="117.32638888888889" angle="270" />
-  <Incarnator cx="36.18055555555556" cz="111.70138888888889" angle="270" />
-  <Incarnator cx="108.68055555555556" cz="132.32638888888889" angle="270" />
-  <Incarnator cx="54.30555555555556" cz="32.326388888888886" angle="270" />
-  <Incarnator cx="51.80555555555556" cz="147.32638888888889" angle="270" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="86.49305555555556" cz="27.395833333333336" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="72.74305555555556" cz="62.39583333333334" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="57.74305555555556" cz="97.39583333333334" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="42.74305555555556" cz="132.39583333333334" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="122.74305555555556" cz="127.39583333333334" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="117.74305555555556" cz="102.39583333333334" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="112.74305555555556" cz="77.39583333333334" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="142.74305555555557" cz="42.395833333333336" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="32.74305555555556" cz="37.395833333333336" angle="315" />
-  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="27.743055555555557" cz="87.39583333333334" angle="315" />
-  <Teleporter yon="0.01" y="200" win="10000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="46.5625" cz="5.486111111111112" angle="45" />
+  <Ufo watch="0" y="5" homeSick="0" acceleration="5" verticalRangeMin="SeeHeight + 1" verticalRangeMax="SeeHeight + 6" hitScore="-100" killScore="-1000" fill="#012ce4" frame="#ffffff" cx="48.68055555555556" cz="49.583333333333336" angle="135" />
+  <Ufo watch="0" y="5" homeSick="0" acceleration="5" verticalRangeMin="SeeHeight + 1" verticalRangeMax="SeeHeight + 6" hitScore="-100" killScore="-1000" fill="#012ce4" frame="#ffffff" cx="125.55555555555557" cz="113.33333333333334" angle="135" />
+  <Teleporter group="@ReorUR" shape="0" sound="0" activeRange="2" spin="false" fill="#007879" frame="#000000" cx="77.74305555555556" cz="127.39583333333334" angle="135" />
+  <Incarnator cx="34.30555555555556" cz="37.326388888888886" angle="90" />
+  <Incarnator cx="33.68055555555556" cz="82.32638888888889" angle="90" />
+  <Incarnator cx="36.18055555555556" cz="137.32638888888889" angle="90" />
+  <Incarnator cx="123.68055555555556" cz="47.25694444444444" angle="270" />
+  <Incarnator cx="89.30555555555556" cz="112.25694444444446" angle="270" />
+  <Incarnator cx="94.30555555555556" cz="147.25694444444446" angle="270" />
+  <Incarnator cx="123.68055555555556" cz="132.25694444444446" angle="270" />
+  <Incarnator cx="89.93055555555556" cz="117.32638888888889" angle="90" />
+  <Incarnator cx="36.18055555555556" cz="111.70138888888889" angle="90" />
+  <Incarnator cx="108.68055555555556" cz="132.32638888888889" angle="90" />
+  <Incarnator cx="54.30555555555556" cz="32.326388888888886" angle="90" />
+  <Incarnator cx="51.80555555555556" cz="147.32638888888889" angle="90" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="86.49305555555556" cz="27.395833333333336" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="72.74305555555556" cz="62.39583333333334" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="57.74305555555556" cz="97.39583333333334" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="42.74305555555556" cz="132.39583333333334" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="122.74305555555556" cz="127.39583333333334" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="117.74305555555556" cz="102.39583333333334" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="112.74305555555556" cz="77.39583333333334" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="142.74305555555557" cz="42.395833333333336" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="32.74305555555556" cz="37.395833333333336" angle="135" />
+  <Teleporter group="@Ground" start="0" fill="#00acff" frame="#000000" cx="27.743055555555557" cz="87.39583333333334" angle="135" />
+  <Teleporter yon="0.01" y="200" win="10000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="46.5625" cz="5.486111111111112" angle="225" />
   <set hull.0="hullExtraLight" hull.1="hullExtraMedium" hull.2="hullExtraHeavy" />
   <unique vars="mA mB" />
   <And in="@start" out="mA" />
@@ -220,55 +215,55 @@ Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWa
   <WallDoor deltaX="5 -5 / 8" deltaY="0" shotPower="DoorShot" open="mA" close="mB" didOpen="mB" didClose="mA" openDelay="random * DoorTime" volume="DoorVol" closeDelay="random * DoorTime" openSpeed="DoorSpeed" closeSpeed="DoorSpeed" fill="#007879" frame="#000000" x="133.05555555555557" z="119.89583333333334" w="25" d="0.625" h="0" />
   <set ambient.i="0.4" light.0.i="0.6" light.0.a="45" light.0.b="20" light.1.i="0.3" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="145.55555555555557" cz="35.208333333333336" angle="180" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="145.55555555555557" cz="35.208333333333336" angle="0" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="145.55555555555557" cz="35.27777777777778" angle="180" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="145.55555555555557" cz="35.27777777777778" angle="0" />
   <Wall fill="#007879" frame="#000000" x="140.24305555555557" z="52.083333333333336" w="0.625" d="5" h="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="133.05555555555557" cz="59.583333333333336" angle="0" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="133.05555555555557" cz="59.583333333333336" angle="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="133.05555555555557" cz="59.51388888888889" angle="0" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="133.05555555555557" cz="59.51388888888889" angle="180" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="87.22222222222223" cz="49.583333333333336" angle="0" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="87.22222222222223" cz="49.583333333333336" angle="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="87.22222222222223" cz="49.51388888888889" angle="0" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="87.22222222222223" cz="49.51388888888889" angle="180" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="45.55555555555556" cz="65.20833333333334" angle="180" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="45.55555555555556" cz="65.20833333333334" angle="0" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="45.55555555555556" cz="65.27777777777779" angle="180" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="45.55555555555556" cz="65.27777777777779" angle="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="119.93055555555556" cz="81.45833333333334" angle="270" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="119.93055555555556" cz="81.45833333333334" angle="90" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="119.86111111111111" cz="81.45833333333334" angle="270" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="119.86111111111111" cz="81.45833333333334" angle="90" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="122.43055555555556" cz="100.20833333333334" angle="180" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="122.43055555555556" cz="100.20833333333334" angle="0" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="122.43055555555556" cz="100.27777777777779" angle="180" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="122.43055555555556" cz="100.27777777777779" angle="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="141.18055555555557" cz="115.20833333333334" angle="180" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="141.18055555555557" cz="115.20833333333334" angle="0" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="141.18055555555557" cz="115.27777777777779" angle="180" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="141.18055555555557" cz="115.27777777777779" angle="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="116.80555555555556" cz="144.58333333333334" angle="0" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="116.80555555555556" cz="144.58333333333334" angle="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="116.80555555555556" cz="144.51388888888889" angle="0" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="116.80555555555556" cz="144.51388888888889" angle="180" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="83.68055555555556" cz="134.58333333333334" angle="0" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="83.68055555555556" cz="134.58333333333334" angle="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="83.68055555555556" cz="134.51388888888889" angle="0" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="83.68055555555556" cz="134.51388888888889" angle="180" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="57.43055555555556" cz="114.58333333333334" angle="0" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="57.43055555555556" cz="114.58333333333334" angle="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="57.43055555555556" cz="114.5138888888889" angle="0" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="57.43055555555556" cz="114.5138888888889" angle="180" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="149.93055555555557" cz="132.70833333333334" angle="270" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="149.93055555555557" cz="132.70833333333334" angle="90" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="149.93055555555557" cz="132.70833333333334" angle="270" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="149.93055555555557" cz="132.70833333333334" angle="90" />
   <unique vars="mA mB" />
   <And in="@start" out="mA" />
   <WallDoor deltaX="5 -5 / 8" deltaY="0" shotPower="DoorShot" open="mA" close="mB" didOpen="mB" didClose="mA" openDelay="random * DoorTime" volume="DoorVol" closeDelay="random * DoorTime" openSpeed="DoorSpeed" closeSpeed="DoorSpeed" fill="#007879" frame="#000000" x="140.55555555555557" z="144.89583333333334" w="10" d="0.625" h="0" />
   <Wall fill="#007879" frame="#000000" x="60.24305555555556" z="87.70833333333334" w="0.625" d="35" h="0" />
-  <script>
+  <script pixelToThickness="0.125" designer="Kevin Reid (Tetra)    &lt;kpreid@ibm.net&gt;" information="Concept by TRS &lt;therisingsun@mailcity.com&gt;&#10;A gigantic maze!&#10;The switches shoot at you until you flip them.&#10;Don't injure the UFOs.&#10;The ammo is in the sky; get to the center to get it.&#10;Use scout view for a better view of the maze." TallWall="10" MazeWall="4" DomeWall="5" DomeSlope="7" wallHeight="MazeWall" SkyBase="TallWall + 30" SkyIncr="5" SkyThick=".25" GuardRange="40" DoorTime="10 * 15" DoorShot="2" DoorSpeed="10" DoorVol="0" defaultLives="2" missileTurnRate="100" wgHeight="MazeWall -1" wgScale="0" wgYon=".01" wgReset="11 * 15" wgSwScale="1" wgFreq="2.5 * 15" wgPower=".5" wgSpeed="100" fill="#007879" cx="149.86111111111111" cz="132.70833333333334" r="1.25" angle="90" frame="#000000" wallYon="0" hull.0="hullExtraLight" hull.1="hullExtraMedium" hull.2="hullExtraHeavy" ambient.i="0.4" light.0.i="0.6" light.0.a="45" light.0.b="20" light.1.i="0.3" light.1.a="20" light.1.b="200" light.2.i="0.0" light.2.a="45" light.2.b="90" light.3.i="0.0" light.3.a="45" light.3.b="180">
 wallHeight = DomeWall
 RD = (DomeSlope + 1) 
 / 4</script>
@@ -282,13 +277,13 @@ RD = (DomeSlope + 1)
   <WallDoor midYaw="-45" fill="#686868" frame="#000000" x="69.93055555555556" z="99.58333333333334" w="12.5" d="1.25" h="0" />
   <WallDoor midYaw="-45" fill="#686868" frame="#000000" x="89.93055555555556" z="79.58333333333334" w="12.5" d="1.25" h="0" />
   <set wallHeight="MazeWall" />
-  <Teleporter group="@Ground" destGroup="@Sky" fill="#00acff" frame="#000000" cx="79.61805555555556" cz="89.27083333333334" angle="315" />
+  <Teleporter group="@Ground" destGroup="@Sky" fill="#00acff" frame="#000000" cx="79.61805555555556" cz="89.27083333333334" angle="135" />
   <set wa="DomeWall + DomeSlope" />
   <Wall fill="#686868" frame="#000000" x="79.93055555555556" z="89.58333333333334" w="10" d="10" h="1" />
-  <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#686868" frame="#000000" x="70" z="89.65277777777779" w="10" d="10" h="1" angle="90" />
-  <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#686868" frame="#000000" x="80" z="79.65277777777779" w="10" d="10" h="1" angle="180" />
-  <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#686868" frame="#000000" x="90" z="89.65277777777779" w="10" d="10" h="1" angle="270" />
-  <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#686868" frame="#000000" x="80" z="99.65277777777779" w="10" d="10" h="1" angle="0" />
+  <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#686868" frame="#000000" x="70" z="89.65277777777779" w="10" d="10" h="1" angle="270" />
+  <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#686868" frame="#000000" x="80" z="79.65277777777779" w="10" d="10" h="1" angle="0" />
+  <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#686868" frame="#000000" x="90" z="89.65277777777779" w="10" d="10" h="1" angle="90" />
+  <Ramp y="DomeWall" deltaY="DomeSlope + 1" fill="#686868" frame="#000000" x="80" z="99.65277777777779" w="10" d="10" h="1" angle="180" />
   <set baseHeight="DomeWall" wallHeight="RD" wa="RD * 0" />
   <WallDoor midYaw="45" fill="#686868" frame="#000000" x="70.52083333333334" z="80.20833333333334" w="11.875" d="1.25" h="0" />
   <set wa="RD * 1" />
@@ -324,61 +319,61 @@ RD = (DomeSlope + 1)
   <set baseHeight="0" wallHeight="MazeWall" />
   <Wall fill="#007879" frame="#000000" x="105.24305555555556" z="127.39583333333334" w="0.625" d="5.625" h="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="95.48611111111111" cz="128.33333333333334" angle="90" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="95.48611111111111" cz="128.33333333333334" angle="270" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="95.55555555555556" cz="128.33333333333334" angle="90" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="95.55555555555556" cz="128.33333333333334" angle="270" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="95.55555555555556" cz="128.33333333333334" angle="90" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="95.55555555555556" cz="128.33333333333334" angle="270" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="90.48611111111111" cz="137.70833333333334" angle="90" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="90.48611111111111" cz="137.70833333333334" angle="270" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="55.55555555555556" cz="133.95833333333334" angle="90" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="55.55555555555556" cz="133.95833333333334" angle="270" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="55.625" cz="133.95833333333334" angle="90" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="55.625" cz="133.95833333333334" angle="270" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="67.43055555555556" cz="144.58333333333334" angle="0" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="67.43055555555556" cz="144.58333333333334" angle="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="67.43055555555556" cz="144.51388888888889" angle="0" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="67.43055555555556" cz="144.51388888888889" angle="180" />
   <Wall fill="#007879" frame="#000000" x="75.24305555555556" z="117.70833333333334" w="0.625" d="5" h="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="73.05555555555556" cz="119.58333333333334" angle="0" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="73.05555555555556" cz="119.58333333333334" angle="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="73.05555555555556" cz="119.5138888888889" angle="0" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="73.05555555555556" cz="119.5138888888889" angle="180" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="34.93055555555556" cz="90.20833333333334" angle="180" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="34.93055555555556" cz="90.20833333333334" angle="0" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="34.93055555555556" cz="90.27777777777779" angle="180" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="34.93055555555556" cz="90.27777777777779" angle="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="54.93055555555556" cz="123.33333333333334" angle="270" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="54.93055555555556" cz="123.33333333333334" angle="90" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="54.861111111111114" cz="123.33333333333334" angle="270" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="54.861111111111114" cz="123.33333333333334" angle="90" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="34.93055555555556" cz="132.08333333333334" angle="270" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="34.93055555555556" cz="132.08333333333334" angle="90" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="34.861111111111114" cz="132.08333333333334" angle="270" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="34.861111111111114" cz="132.08333333333334" angle="90" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="109.93055555555556" cz="67.08333333333334" angle="270" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="109.93055555555556" cz="67.08333333333334" angle="90" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="109.86111111111111" cz="67.08333333333334" angle="270" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="109.86111111111111" cz="67.08333333333334" angle="90" />
   <Wall fill="#007879" frame="#000000" x="95.24305555555556" z="62.08333333333334" w="0.625" d="5" h="0" />
   <Wall fill="#007879" frame="#000000" x="100.24305555555556" z="57.708333333333336" w="0.625" d="5" h="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="94.93055555555556" cz="62.083333333333336" angle="270" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="94.93055555555556" cz="62.083333333333336" angle="90" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="94.86111111111111" cz="62.083333333333336" angle="270" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="94.86111111111111" cz="62.083333333333336" angle="90" />
   <set baseHeight="SkyBase" wallHeight="SkyThick" />
   <Wall fill="#e4e4e4" frame="#000000" x="88.19444444444444" z="85" w="5" d="5" h="0" />
-  <Teleporter group="@Sky" destGroup="@Ground" y="SkyThick" fill="#007879" frame="#000000" cx="88.19444444444444" cz="85" angle="315" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="88.26388888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="0" />
+  <Teleporter group="@Sky" destGroup="@Ground" y="SkyThick" fill="#007879" frame="#000000" cx="88.19444444444444" cz="85" angle="135" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="88.26388888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="180" />
   <set wa="SkyIncr * 1" />
   <Wall fill="#e4e4e4" frame="#000000" x="88.19444444444444" z="63.75" w="5" d="5" h="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="88.26388888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="88.26388888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="0" />
   <set wa="SkyIncr * 1" />
   <Wall fill="#e4e4e4" frame="#000000" x="88.19444444444444" z="106.25" w="5" d="5" h="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="77.63888888888889" z="63.81944444444444" w="15" d="5" h="0.5" angle="90" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="98.8888888888889" z="63.81944444444444" w="15" d="5" h="0.5" angle="270" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="77.63888888888889" z="106.31944444444444" w="15" d="5" h="0.5" angle="90" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="98.8888888888889" z="106.31944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="77.63888888888889" z="63.81944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="98.8888888888889" z="63.81944444444444" w="15" d="5" h="0.5" angle="90" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="77.63888888888889" z="106.31944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="98.8888888888889" z="106.31944444444444" w="15" d="5" h="0.5" angle="90" />
   <set wa="SkyIncr * 0" />
   <Wall fill="#e4e4e4" frame="#000000" x="66.94444444444444" z="63.75" w="5" d="5" h="0" />
   <set wa="SkyIncr * 0" />
@@ -387,40 +382,40 @@ RD = (DomeSlope + 1)
   <Wall fill="#e4e4e4" frame="#000000" x="109.44444444444444" z="106.25" w="5" d="5" h="0" />
   <set wa="SkyIncr * 0" />
   <Wall fill="#e4e4e4" frame="#000000" x="66.94444444444444" z="106.25" w="5" d="5" h="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="67.01388888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="67.01388888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="67.01388888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="67.01388888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="0" />
   <set wa="SkyIncr * 1" />
   <Wall fill="#e4e4e4" frame="#000000" x="66.94444444444444" z="85" w="5" d="5" h="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="109.5138888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="109.5138888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="109.5138888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" fill="#00acff" frame="#000000" x="109.5138888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="0" />
   <set wa="SkyIncr * 1" />
   <Wall fill="#e4e4e4" frame="#000000" x="109.44444444444444" z="85" w="5" d="5" h="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 1" fill="#00acff" frame="#000000" x="77.63888888888889" z="85.06944444444444" w="15" d="5" h="0.5" angle="90" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 1" fill="#00acff" frame="#000000" x="98.8888888888889" z="85.06944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 1" fill="#00acff" frame="#000000" x="77.63888888888889" z="85.06944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 1" fill="#00acff" frame="#000000" x="98.8888888888889" z="85.06944444444444" w="15" d="5" h="0.5" angle="90" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="SkyIncr * 1 + 2" speed="2" grenades="12" start="mShow" out="mTaken" fill="#fffb00" frame="#ff2600" cx="67.29166666666667" cz="85.06944444444444" angle="315" />
+  <Goody shape="bspGrenade" y="SkyIncr * 1 + 2" speed="2" grenades="12" start="mShow" out="mTaken" fill="#fffb00" frame="#ff2600" cx="67.29166666666667" cz="85.06944444444444" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="SkyIncr * 1 + 2" speed="2" missiles="8" start="mShow" out="mTaken" fill="#7a4300" frame="#012ce4" cx="109.79166666666667" cz="85.06944444444444" angle="315" />
+  <Goody shape="bspMissile" y="SkyIncr * 1 + 2" speed="2" missiles="8" start="mShow" out="mTaken" fill="#7a4300" frame="#012ce4" cx="109.79166666666667" cz="85.06944444444444" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <set wa="SkyIncr * 2" />
   <Wall fill="#e4e4e4" frame="#000000" x="88.19444444444444" z="85" w="5" d="5" h="0" />
-  <Guard shield="-1" shotPower=".5" freq="30" y="SkyIncr * 2 + 5" hitScore="0" activeRange="GuardRange" fill="#ff2600" frame="#000000" cx="66.94444444444444" cz="63.75" angle="135" />
-  <Guard shield="-1" shotPower=".5" freq="30" y="SkyIncr * 2 + 5" hitScore="0" activeRange="GuardRange" fill="#ff2600" frame="#000000" cx="109.44444444444444" cz="63.75" angle="135" />
-  <Guard shield="-1" shotPower=".5" freq="30" y="SkyIncr * 2 + 5" hitScore="0" activeRange="GuardRange" fill="#ff2600" frame="#000000" cx="109.44444444444444" cz="106.25" angle="135" />
-  <Guard shield="-1" shotPower=".5" freq="30" y="SkyIncr * 2 + 5" hitScore="0" activeRange="GuardRange" fill="#ff2600" frame="#000000" cx="66.94444444444444" cz="106.25" angle="135" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 2" fill="#00acff" frame="#000000" x="88.26388888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="180" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 2" fill="#00acff" frame="#000000" x="88.26388888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="0" />
+  <Guard shield="-1" shotPower=".5" freq="30" y="SkyIncr * 2 + 5" hitScore="0" activeRange="GuardRange" fill="#ff2600" frame="#000000" cx="66.94444444444444" cz="63.75" angle="315" />
+  <Guard shield="-1" shotPower=".5" freq="30" y="SkyIncr * 2 + 5" hitScore="0" activeRange="GuardRange" fill="#ff2600" frame="#000000" cx="109.44444444444444" cz="63.75" angle="315" />
+  <Guard shield="-1" shotPower=".5" freq="30" y="SkyIncr * 2 + 5" hitScore="0" activeRange="GuardRange" fill="#ff2600" frame="#000000" cx="109.44444444444444" cz="106.25" angle="315" />
+  <Guard shield="-1" shotPower=".5" freq="30" y="SkyIncr * 2 + 5" hitScore="0" activeRange="GuardRange" fill="#ff2600" frame="#000000" cx="66.94444444444444" cz="106.25" angle="315" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 2" fill="#00acff" frame="#000000" x="88.26388888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="0" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 2" fill="#00acff" frame="#000000" x="88.26388888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="180" />
   <set wa="SkyIncr * 3" />
   <Wall fill="#e4e4e4" frame="#000000" x="88.19444444444444" z="106.25" w="5" d="5" h="0" />
   <set wa="SkyIncr * 3" />
   <Wall fill="#e4e4e4" frame="#000000" x="88.19444444444444" z="63.75" w="5" d="5" h="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 3" fill="#00acff" frame="#000000" x="98.8888888888889" z="106.31944444444444" w="15" d="5" h="0.5" angle="90" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 3" fill="#00acff" frame="#000000" x="77.63888888888889" z="106.31944444444444" w="15" d="5" h="0.5" angle="270" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 3" fill="#00acff" frame="#000000" x="98.8888888888889" z="63.81944444444444" w="15" d="5" h="0.5" angle="90" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 3" fill="#00acff" frame="#000000" x="77.63888888888889" z="63.81944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 3" fill="#00acff" frame="#000000" x="98.8888888888889" z="106.31944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 3" fill="#00acff" frame="#000000" x="77.63888888888889" z="106.31944444444444" w="15" d="5" h="0.5" angle="90" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 3" fill="#00acff" frame="#000000" x="98.8888888888889" z="63.81944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 3" fill="#00acff" frame="#000000" x="77.63888888888889" z="63.81944444444444" w="15" d="5" h="0.5" angle="90" />
   <set wa="SkyIncr * 4" />
   <Wall fill="#e4e4e4" frame="#000000" x="66.94444444444444" z="63.75" w="5" d="5" h="0" />
   <set wa="SkyIncr * 4" />
@@ -429,59 +424,59 @@ RD = (DomeSlope + 1)
   <Wall fill="#e4e4e4" frame="#000000" x="66.94444444444444" z="106.25" w="5" d="5" h="0" />
   <set wa="SkyIncr * 4" />
   <Wall fill="#e4e4e4" frame="#000000" x="109.44444444444444" z="106.25" w="5" d="5" h="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="67.01388888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="67.01388888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="67.01388888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="67.01388888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="0" />
   <set wa="SkyIncr * 5" />
   <Wall fill="#e4e4e4" frame="#000000" x="66.94444444444444" z="85" w="5" d="5" h="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="109.5138888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="0" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="109.5138888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="109.5138888888889" z="95.69444444444444" w="5" d="15" h="0.5" angle="180" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="109.5138888888889" z="74.44444444444444" w="5" d="15" h="0.5" angle="0" />
   <set wa="SkyIncr * 5" />
   <Wall fill="#e4e4e4" frame="#000000" x="109.44444444444444" z="85" w="5" d="5" h="0" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="SkyIncr * 5 + 2" speed="2" missiles="8" start="mShow" out="mTaken" fill="#7a4300" frame="#012ce4" cx="109.5138888888889" cz="85.06944444444444" angle="315" />
+  <Goody shape="bspMissile" y="SkyIncr * 5 + 2" speed="2" missiles="8" start="mShow" out="mTaken" fill="#7a4300" frame="#012ce4" cx="109.5138888888889" cz="85.06944444444444" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="SkyIncr * 5 + 2" speed="2" grenades="12" start="mShow" out="mTaken" fill="#fffb00" frame="#ff2600" cx="67.01388888888889" cz="85.06944444444444" angle="315" />
+  <Goody shape="bspGrenade" y="SkyIncr * 5 + 2" speed="2" grenades="12" start="mShow" out="mTaken" fill="#fffb00" frame="#ff2600" cx="67.01388888888889" cz="85.06944444444444" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="350" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="98.8888888888889" z="85.06944444444444" w="15" d="5" h="0.5" angle="90" />
-  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="77.63888888888889" z="85.06944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="98.8888888888889" z="85.06944444444444" w="15" d="5" h="0.5" angle="270" />
+  <Ramp deltaY="SkyIncr + SkyThick" thickness="SkyThick" y="SkyIncr * 4" fill="#00acff" frame="#000000" x="77.63888888888889" z="85.06944444444444" w="15" d="5" h="0.5" angle="90" />
   <set wa="SkyIncr * 4" />
   <Wall fill="#e4e4e4" frame="#000000" x="88.19444444444444" z="85" w="5" d="5" h="0" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGoody" y="SkyIncr * 4 + 2" speed="2" boosters="1" start="mShow" out="mTaken" fill="#ff7d41" frame="#ff2600" cx="88.26388888888889" cz="85.06944444444444" angle="315" />
+  <Goody shape="bspGoody" y="SkyIncr * 4 + 2" speed="2" boosters="1" start="mShow" out="mTaken" fill="#ff7d41" frame="#ff2600" cx="88.26388888888889" cz="85.06944444444444" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="450" />
   <set baseHeight="0" wallHeight="MazeWall" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="50.55555555555556" cz="39.583333333333336" angle="90" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="50.55555555555556" cz="39.583333333333336" angle="270" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="50.625" cz="39.583333333333336" angle="90" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="50.625" cz="39.583333333333336" angle="270" />
   <Wall fill="#007879" frame="#000000" x="30.243055555555557" z="37.083333333333336" w="0.625" d="5" h="0" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="25.555555555555557" cz="43.958333333333336" angle="90" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="25.555555555555557" cz="43.958333333333336" angle="270" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="25.625" cz="43.958333333333336" angle="90" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="25.625" cz="43.958333333333336" angle="270" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="30.555555555555557" cz="51.458333333333336" angle="90" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="30.555555555555557" cz="51.458333333333336" angle="270" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="30.625" cz="51.458333333333336" angle="90" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="30.625" cz="51.458333333333336" angle="270" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="70.55555555555556" cz="49.583333333333336" angle="90" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="70.55555555555556" cz="49.583333333333336" angle="270" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="70.625" cz="49.583333333333336" angle="90" />
-  <Incarnator cx="134.30555555555557" cz="32.25694444444444" angle="90" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="70.625" cz="49.583333333333336" angle="270" />
+  <Incarnator cx="134.30555555555557" cz="32.25694444444444" angle="270" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="122.43055555555556" cz="34.583333333333336" angle="0" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="122.43055555555556" cz="34.583333333333336" angle="180" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="122.43055555555556" cz="34.51388888888889" angle="0" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="122.43055555555556" cz="34.51388888888889" angle="180" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="139.93055555555557" cz="132.70833333333334" angle="270" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="139.93055555555557" cz="132.70833333333334" angle="90" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="139.93055555555557" cz="132.70833333333334" angle="270" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="139.93055555555557" cz="132.70833333333334" angle="90" />
   <unique vars="mStart mStop mTStart" />
-  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="134.93055555555557" cz="132.70833333333334" angle="270" />
+  <Switch y="wgHeight" status="false" scale="wgSwScale" out.0="mStop" out.1="mStart" in.1="mTStart" fill="#686868" frame="#000000" cx="134.93055555555557" cz="132.70833333333334" angle="90" />
   <Timer in.0="mStop" in.1="@start" wait="wgReset" out="mTStart" />
-  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="134.93055555555557" cz="132.70833333333334" angle="270" />
+  <Guard y="wgHeight" scale="wgScale" yon="wgYon" freq="wgFreq" shotPower="wgPower" speed="wgSpeed" status="true" start="mStart" stop="mStop" shield="-1" hitScore="0" fill="#686868" frame="#000000" cx="134.93055555555557" cz="132.70833333333334" angle="90" />
 </map>

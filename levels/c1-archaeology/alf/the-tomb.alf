@@ -4,12 +4,12 @@
   <set designer="John Blackburne  -  johnb@hk.super.net" information="The Tomb. Belligerent squatters have occupied an ancient, sacred tomb. Your task is to evict them." ambient.i="0.4" light.0.i="0.7" light.0.a="45" light.0.b="45" light.1.i="0.5" light.1.a="20" light.1.b="160" />
   <SkyColor fill="#00d5ff" frame="#0048aa" />
   <GroundColor fill="#ffa900" />
-  <Incarnator y="30" cx="263.8888888888889" cz="36.875" angle="90" />
-  <Incarnator y="24" cx="263.8888888888889" cz="36.875" angle="90" />
-  <Incarnator y="18" cx="263.8888888888889" cz="36.875" angle="90" />
-  <Incarnator y="12" cx="263.8888888888889" cz="36.875" angle="90" />
-  <Incarnator y="6" cx="263.8888888888889" cz="36.875" angle="90" />
-  <Incarnator y="0" cx="263.8888888888889" cz="36.875" angle="90" />
+  <Incarnator y="30" cx="263.8888888888889" cz="36.875" angle="270" />
+  <Incarnator y="24" cx="263.8888888888889" cz="36.875" angle="270" />
+  <Incarnator y="18" cx="263.8888888888889" cz="36.875" angle="270" />
+  <Incarnator y="12" cx="263.8888888888889" cz="36.875" angle="270" />
+  <Incarnator y="6" cx="263.8888888888889" cz="36.875" angle="270" />
+  <Incarnator y="0" cx="263.8888888888889" cz="36.875" angle="270" />
   <Wall fill="#ffa941" frame="#000000" x="1.3194444444444446" z="144.44444444444446" w="2.5" d="157.5" h="2" />
   <Wall fill="#ffffff" frame="#000000" x="265.97222222222223" z="10.069444444444445" w="25" d="20" h="6" />
   <Wall fill="#ffffff" frame="#000000" x="239.72222222222223" z="13.194444444444446" w="20" d="20" h="6" />
@@ -50,7 +50,7 @@
   <Wall fill="#ffa941" frame="#000000" x="8.819444444444445" z="144.44444444444446" w="2.5" d="142.5" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="81.31944444444446" z="74.44444444444444" w="142.5" d="2.5" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="78.81944444444446" z="216.94444444444446" w="142.5" d="2.5" h="8" />
-  <Ramp y="0" thickness=".5" deltaY="6" fill="#ffa941" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" angle="0" />
+  <Ramp y="0" thickness=".5" deltaY="6" fill="#ffa941" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" angle="180" />
   <WallSolid canGlow="1" isTarget="1" shield="2" killMsg="@oEast" fill="#d6a841" frame="#000000" x="80.06944444444444" z="76.875" w="3.75" d="2.5" h="2" y="8" />
   <Wall fill="#ffa941" frame="#000000" x="80.06944444444446" z="146.94444444444446" w="140" d="137.5" h="2" y="8" />
   <Wall fill="#ffa941" frame="#000000" x="83.19444444444444" z="92.56944444444444" w="2.5" d="33.75" h="8" />
@@ -59,12 +59,12 @@
   <Wall fill="#ffa941" frame="#000000" x="22.569444444444443" z="110.69444444444444" w="25" d="2.5" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="41.31944444444444" z="110.69444444444446" w="2.5" d="40" h="8" />
   <Counter n="24" in="@dead" out="@winAll" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="4" fill="#aa7900" frame="#fffc41" cx="64.02777777777779" cz="82.43055555555556" angle="45" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="7" fill="#aa7900" frame="#fffc41" cx="63.402777777777786" cz="94.30555555555556" angle="45" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="4" fill="#aa7900" frame="#fffc41" cx="64.02777777777779" cz="82.43055555555556" angle="225" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="7" fill="#aa7900" frame="#fffc41" cx="63.402777777777786" cz="94.30555555555556" angle="225" />
   <Wall fill="#ffa941" frame="#000000" x="26.631944444444446" z="93.81944444444444" w="8.125" d="8.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="53.81944444444445" z="78.81944444444444" w="6.25" d="6.25" h="3" />
   <WallSolid canGlow="1" isTarget="1" shield="2" killMsg="@oEast" fill="#d6a800" frame="#000000" x="37.56944444444444" z="110.625" w="5" d="2.5" h="8" />
-  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="145.13888888888889" cz="112.98611111111111" angle="135" />
+  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="145.13888888888889" cz="112.98611111111111" angle="315" />
   <Wall fill="#ffa941" frame="#000000" x="26.631944444444446" z="127.56944444444446" w="8.125" d="8.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="46.00694444444444" z="146.94444444444446" w="71.875" d="2.5" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="83.19444444444444" z="133.50694444444446" w="2.5" d="29.375" h="8" />
@@ -82,9 +82,9 @@
   <Wall fill="#ffa941" frame="#000000" x="114.44444444444444" z="85.06944444444444" w="2.5" d="18.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="114.44444444444444" z="105.06944444444444" w="2.5" d="13.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="95.69444444444444" z="131.94444444444446" w="2.5" d="20" h="8" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#aa7900" frame="#fffc41" cx="65.27777777777779" cz="120.55555555555556" angle="45" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#aa7900" frame="#fffc41" cx="138.40277777777777" cz="136.80555555555557" angle="45" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" scale="0.95" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="135.06944444444446" cz="115.69444444444444" angle="0" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#aa7900" frame="#fffc41" cx="65.27777777777779" cz="120.55555555555556" angle="225" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#aa7900" frame="#fffc41" cx="138.40277777777777" cz="136.80555555555557" angle="225" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" scale="0.95" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="135.06944444444446" cz="115.69444444444444" angle="180" />
   <Wall fill="#ffa941" frame="#000000" x="143.81944444444446" z="116.94444444444444" w="12.5" d="2.5" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="135.06944444444446" z="111.31944444444444" w="1.25" d="1.25" h="0.25" />
   <Wall fill="#ffa941" frame="#000000" x="120.69444444444444" z="97.56944444444444" w="2.5" d="36.25" h="8" />
@@ -93,71 +93,71 @@
   <Wall fill="#ffa941" frame="#000000" x="101.94444444444444" z="141.31944444444446" w="2.5" d="8.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="143.50694444444446" z="80.69444444444444" w="13.125" d="2.5" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="127.56944444444446" z="80.69444444444444" w="11.25" d="2.5" h="8" />
-  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="124.5138888888889" cz="112.98611111111111" angle="135" />
+  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="124.5138888888889" cz="112.98611111111111" angle="315" />
   <Wall fill="#ffa941" frame="#000000" x="101.94444444444444" z="131.94444444444446" w="10" d="2.5" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="95.69444444444444" z="131.94444444444446" w="2.5" d="20" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="101.94444444444444" z="122.56944444444446" w="2.5" d="8.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="131.31944444444446" z="160.69444444444446" w="2.5" d="25" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="143.81944444444446" z="146.94444444444446" w="12.5" d="2.5" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="135.06944444444446" z="146.94444444444446" w="5" d="2.5" h="5" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#aa7900" frame="#fffc41" cx="67.36111111111111" cz="134.02777777777777" angle="45" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#aa7900" frame="#fffc41" cx="137.77777777777777" cz="124.93055555555556" angle="45" />
-  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="111.3888888888889" cz="131.73611111111111" angle="135" />
-  <Guard shield="5" y="4" killMsg="@dead" fill="#fffb00" frame="#000000" cx="80.13888888888889" cz="106.73611111111111" angle="135" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="120.69444444444444" cz="160.69444444444446" angle="0" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#aa7900" frame="#fffc41" cx="67.36111111111111" cz="134.02777777777777" angle="225" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#aa7900" frame="#fffc41" cx="137.77777777777777" cz="124.93055555555556" angle="225" />
+  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="111.3888888888889" cz="131.73611111111111" angle="315" />
+  <Guard shield="5" y="4" killMsg="@dead" fill="#fffb00" frame="#000000" cx="80.13888888888889" cz="106.73611111111111" angle="315" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="120.69444444444444" cz="160.69444444444446" angle="180" />
   <Wall fill="#ffa941" frame="#000000" x="131.31944444444446" z="203.19444444444446" w="2.5" d="25" h="8" />
   <WallSolid canGlow="1" isTarget="1" shield="4" killMsg="@oEast" fill="#d6a800" frame="#000000" x="131.31944444444446" z="181.94444444444446" w="2.5" d="17.5" h="8" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="120.06944444444444" cz="170.06944444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="110.06944444444444" cz="182.56944444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="116.94444444444444" cz="192.56944444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="103.81944444444444" cz="196.31944444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="92.56944444444444" cz="186.31944444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="101.94444444444444" cz="170.06944444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="108.81944444444444" cz="158.19444444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="116.94444444444444" cz="208.19444444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="89.44444444444444" cz="163.19444444444446" angle="0" />
-  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="89.44444444444444" cz="203.81944444444446" angle="0" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="120.06944444444444" cz="170.06944444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="110.06944444444444" cz="182.56944444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="116.94444444444444" cz="192.56944444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="103.81944444444444" cz="196.31944444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="92.56944444444444" cz="186.31944444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="101.94444444444444" cz="170.06944444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="108.81944444444444" cz="158.19444444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="116.94444444444444" cz="208.19444444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="89.44444444444444" cz="163.19444444444446" angle="180" />
+  <FreeSolid shape="bspW1x1" shotPower="10" customGravity="0.2" accel="0.9" fill="#d6a800" frame="#000000" x="80.06944444444444" z="90.90277777777779" w="3.75" d="30" h="0" cx="89.44444444444444" cz="203.81944444444446" angle="180" />
   <Wall fill="#ffa941" frame="#000000" x="75.06944444444444" z="160.69444444444446" w="2.5" d="25" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="75.06944444444444" z="203.19444444444446" w="2.5" d="25" h="8" />
   <WallSolid canGlow="1" isTarget="1" shield="4" killMsg="@oEast" fill="#d6a800" frame="#000000" x="75.06944444444444" z="181.94444444444446" w="2.5" d="17.5" h="8" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#aa7900" frame="#fffc41" cx="87.08333333333334" cz="195.55555555555557" angle="45" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#aa7900" frame="#fffc41" cx="87.70833333333334" cz="168.05555555555557" angle="45" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="2" fill="#aa7900" frame="#fffc41" cx="100.83333333333334" cz="179.93055555555557" angle="45" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#aa7900" frame="#fffc41" cx="87.08333333333334" cz="195.55555555555557" angle="225" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#aa7900" frame="#fffc41" cx="87.70833333333334" cz="168.05555555555557" angle="225" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="2" fill="#aa7900" frame="#fffc41" cx="100.83333333333334" cz="179.93055555555557" angle="225" />
   <Wall fill="#ffa941" frame="#000000" x="26.631944444444446" z="168.81944444444446" w="8.125" d="8.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="57.25694444444445" z="168.81944444444446" w="8.125" d="8.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="26.631944444444446" z="195.06944444444446" w="8.125" d="8.75" h="8" />
   <Wall fill="#ffa941" frame="#000000" x="57.25694444444445" z="195.06944444444446" w="8.125" d="8.75" h="8" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#aa7900" frame="#fffc41" cx="42.986111111111114" cz="202.1527777777778" angle="45" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#aa7900" frame="#fffc41" cx="41.458333333333336" cz="164.30555555555557" angle="45" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="6" fill="#aa7900" frame="#fffc41" cx="42.986111111111114" cz="202.1527777777778" angle="225" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@dead" y="5" fill="#aa7900" frame="#fffc41" cx="41.458333333333336" cz="164.30555555555557" angle="225" />
   <Wall fill="#ffa941" frame="#000000" x="108.19444444444444" z="131.94444444444446" w="2.5" d="20" h="8" />
-  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="13.333333333333334" cz="151.59722222222223" angle="135" />
-  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="13.333333333333334" cz="212.22222222222223" angle="135" />
-  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="70.20833333333334" cz="212.22222222222223" angle="135" />
-  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="70.20833333333334" cz="151.59722222222223" angle="135" />
-  <YonBox yon="65" x="46.00694444444444" z="92.11805555555557" w="74.375" d="37.56944444444444" h="8" r="1.25" angle="135" />
-  <YonBox yon="65" x="46.00694444444444" z="129.02777777777777" w="74.375" d="36.25" h="8" r="1.25" angle="135" />
-  <YonBox yon="30" x="92.56944444444444" z="110.86805555555556" w="18.75" d="72.56944444444443" h="8" r="1.25" angle="135" />
-  <YonBox yon="55" x="126.94444444444446" z="110.86805555555556" w="50" d="72.56944444444443" h="8" r="1.25" angle="135" />
+  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="13.333333333333334" cz="151.59722222222223" angle="315" />
+  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="13.333333333333334" cz="212.22222222222223" angle="315" />
+  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="70.20833333333334" cz="212.22222222222223" angle="315" />
+  <Guard shield="5" y="7" killMsg="@dead" fill="#fffb00" frame="#000000" cx="70.20833333333334" cz="151.59722222222223" angle="315" />
+  <YonBox yon="65" x="46.00694444444444" z="92.11805555555557" w="74.375" d="37.56944444444444" h="8" r="1.25" angle="315" />
+  <YonBox yon="65" x="46.00694444444444" z="129.02777777777777" w="74.375" d="36.25" h="8" r="1.25" angle="315" />
+  <YonBox yon="30" x="92.56944444444444" z="110.86805555555556" w="18.75" d="72.56944444444443" h="8" r="1.25" angle="315" />
+  <YonBox yon="55" x="126.94444444444446" z="110.86805555555556" w="50" d="72.56944444444443" h="8" r="1.25" angle="315" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1000" />
-  <Goody shape="bspGrenade" y="8" speed="2" yon="20" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="214.51388888888889" cz="25.555555555555557" angle="225" />
-  <Teleporter win="1000" start="@winAll" activeRange="2000" fill="#fffc41" frame="#000000" cx="100.97222222222223" cz="42.29166666666667" angle="225" />
+  <Goody shape="bspGrenade" y="8" speed="2" yon="20" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="214.51388888888889" cz="25.555555555555557" angle="45" />
+  <Teleporter win="1000" start="@winAll" activeRange="2000" fill="#fffc41" frame="#000000" cx="100.97222222222223" cz="42.29166666666667" angle="45" />
   <Wall fill="#ffa941" frame="#000000" x="53.81944444444445" z="92.56944444444444" w="6.25" d="6.25" h="3" />
   <Wall fill="#ffa941" frame="#000000" x="53.81944444444445" z="106.31944444444444" w="6.25" d="6.25" h="3" />
   <Wall fill="#ffa941" frame="#000000" x="53.81944444444445" z="115.06944444444444" w="6.25" d="6.25" h="3" />
   <Wall fill="#ffa941" frame="#000000" x="53.81944444444445" z="128.81944444444446" w="6.25" d="6.25" h="3" />
   <Wall fill="#ffa941" frame="#000000" x="53.81944444444445" z="142.56944444444446" w="6.25" d="6.25" h="3" />
-  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="15.277777777777779" cz="177.29166666666669" angle="0" />
-  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="17.63888888888889" cz="187.56944444444446" angle="0" />
-  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="143.88888888888889" cz="201.31944444444446" angle="0" />
-  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="136.38888888888889" cz="206.31944444444446" angle="0" />
-  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="84.02777777777779" cz="186.66666666666669" angle="0" />
-  <Mine fill="#ffa900" frame="#d84800" cx="135.13888888888889" cz="188.61111111111111" angle="0" />
-  <Mine fill="#ffa900" frame="#d84800" cx="135.13888888888889" cz="175.48611111111111" angle="0" />
-  <Mine fill="#ffa900" frame="#d84800" cx="85.13888888888889" cz="59.375" angle="0" />
-  <Mine fill="#ffa900" frame="#d84800" cx="75.13888888888889" cz="59.375" angle="0" />
-  <Mine fill="#ffa900" frame="#d84800" cx="117.84722222222223" cz="103.125" angle="0" />
-  <Mine fill="#ffa900" frame="#d84800" cx="92.22222222222223" cz="84.375" angle="0" />
-  <Mine fill="#ffa900" frame="#d84800" cx="147.84722222222223" cz="77.5" angle="0" />
+  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="15.277777777777779" cz="177.29166666666669" angle="180" />
+  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="17.63888888888889" cz="187.56944444444446" angle="180" />
+  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="143.88888888888889" cz="201.31944444444446" angle="180" />
+  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="136.38888888888889" cz="206.31944444444446" angle="180" />
+  <Parasite killMsg="@dead" fill="#ffa900" frame="#d84800" cx="84.02777777777779" cz="186.66666666666669" angle="180" />
+  <Mine fill="#ffa900" frame="#d84800" cx="135.13888888888889" cz="188.61111111111111" angle="180" />
+  <Mine fill="#ffa900" frame="#d84800" cx="135.13888888888889" cz="175.48611111111111" angle="180" />
+  <Mine fill="#ffa900" frame="#d84800" cx="85.13888888888889" cz="59.375" angle="180" />
+  <Mine fill="#ffa900" frame="#d84800" cx="75.13888888888889" cz="59.375" angle="180" />
+  <Mine fill="#ffa900" frame="#d84800" cx="117.84722222222223" cz="103.125" angle="180" />
+  <Mine fill="#ffa900" frame="#d84800" cx="92.22222222222223" cz="84.375" angle="180" />
+  <Mine fill="#ffa900" frame="#d84800" cx="147.84722222222223" cz="77.5" angle="180" />
 </map>

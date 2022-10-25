@@ -24,4 +24,5 @@ public:
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void FrameAction();
+    virtual bool UseForRandomIncarnator() { return true; }
 };

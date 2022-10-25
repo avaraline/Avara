@@ -12,25 +12,25 @@
   <Wall fill="#e4e4e4" frame="#000000" x="138.75" z="135" w="5" d="20" h="0.5" />
   <Wall fill="#e4e4e4" frame="#000000" x="131.25" z="122.5" w="20" d="5" h="0.5" />
   <set baseHeight="0" />
-  <Incarnator status="true" stop="@stopO" y="1.75" cx="128.75" cz="132.5" angle="0" />
-  <Guard y="5" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="138.75" cz="122.5" angle="225" />
-  <Guard y="5" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="118.75" cz="142.5" angle="45" />
+  <Incarnator status="true" stop="@stopO" y="1.75" cx="128.75" cz="132.5" angle="180" />
+  <Guard y="5" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="138.75" cz="122.5" angle="45" />
+  <Guard y="5" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="118.75" cz="142.5" angle="225" />
   <Wall fill="#e4e4e4" frame="#000000" x="98.75" z="150" w="5" d="20" h="4" />
   <Wall fill="#e4e4e4" frame="#000000" x="108.75" z="162.5" w="25" d="5" h="4" />
-  <Guard y="5" start="@yelON" stop="@redON" shield="1" fill="#00ec00" frame="#000000" cx="98.75" cz="162.5" angle="225" />
+  <Guard y="5" start="@yelON" stop="@redON" shield="1" fill="#00ec00" frame="#000000" cx="98.75" cz="162.5" angle="45" />
   <Wall fill="#e4e4e4" frame="#000000" x="158.75" z="150" w="5" d="20" h="4" />
   <Wall fill="#e4e4e4" frame="#000000" x="148.75" z="162.5" w="25" d="5" h="4" />
   <Wall fill="#e4e4e4" frame="#000000" x="128.75" z="162.5" w="15" d="5" h="0.5" y="3.5" />
   <SkyColor verticalRangeMin="20" verticalRangeMax="1000" n="8" fill="#00acff" frame="#0052ff" />
   <GroundColor fill="#000000" />
-  <Ufo shield="2" fill="#ff4c00" frame="#f1f1f1" cx="93.75" cz="167.5" angle="225" />
-  <Ufo shield="2" fill="#ff4c00" frame="#f1f1f1" cx="163.75" cz="167.5" angle="135" />
-  <Guard y="5" start="@yelON" stop="@redON" shield="1" fill="#00ec00" frame="#000000" cx="158.75" cz="162.5" angle="135" />
-  <Ramp y="4" shield="-1" hitSound="0" isTarget="false" deltaY="4" fill="#8a8a8a" frame="#000000" x="128.81944444444446" z="155.06944444444446" w="5" d="10" h="0" angle="0" />
+  <Ufo shield="2" fill="#ff4c00" frame="#f1f1f1" cx="93.75" cz="167.5" angle="45" />
+  <Ufo shield="2" fill="#ff4c00" frame="#f1f1f1" cx="163.75" cz="167.5" angle="315" />
+  <Guard y="5" start="@yelON" stop="@redON" shield="1" fill="#00ec00" frame="#000000" cx="158.75" cz="162.5" angle="315" />
+  <Ramp y="4" shield="-1" hitSound="0" isTarget="false" deltaY="4" fill="#8a8a8a" frame="#000000" x="128.81944444444446" z="155.06944444444446" w="5" d="10" h="0" angle="180" />
   <WallSolid stepOnMsg="@Red" fill="#570500" frame="#000000" x="128.75" z="132.5" w="5" d="25" h="0.5" y="7.5" />
-  <Teleporter y="8" group="@Ggroup" fill="#009600" frame="#000000" cx="128.81944444444446" cz="121.875" angle="0" />
-  <Ramp y="0" shield="-1" hitSound="0" isTarget="false" deltaY="4" fill="#8a8a8a" frame="#000000" x="158.81944444444446" z="135.06944444444446" w="5" d="10" h="0" angle="180" />
-  <Ramp y="0" shield="-1" hitSound="0" isTarget="false" deltaY="4" fill="#8a8a8a" frame="#000000" x="98.81944444444444" z="135.06944444444446" w="5" d="10" h="0" angle="180" />
+  <Teleporter y="8" group="@Ggroup" fill="#009600" frame="#000000" cx="128.81944444444446" cz="121.875" angle="180" />
+  <Ramp y="0" shield="-1" hitSound="0" isTarget="false" deltaY="4" fill="#8a8a8a" frame="#000000" x="158.81944444444446" z="135.06944444444446" w="5" d="10" h="0" angle="0" />
+  <Ramp y="0" shield="-1" hitSound="0" isTarget="false" deltaY="4" fill="#8a8a8a" frame="#000000" x="98.81944444444444" z="135.06944444444446" w="5" d="10" h="0" angle="0" />
   <Wall fill="#f1f1f1" frame="#000000" x="128.75" z="82.5" w="15" d="5" h="2" />
   <Wall fill="#ffffff" frame="#000000" x="143.75" z="57.5" w="10" d="15" h="5" />
   <Wall fill="#ffffff" frame="#000000" x="111.25" z="45" w="25" d="10" h="5" />
@@ -41,28 +41,28 @@
   <Wall fill="#407979" frame="#000000" x="107.5" z="51.25" w="2.5" d="2.5" h="8" />
   <Wall fill="#407979" frame="#000000" x="120" z="51.25" w="2.5" d="2.5" h="8" />
   <Wall fill="#407979" frame="#000000" x="120" z="38.75" w="2.5" d="2.5" h="8" />
-  <Teleporter y="5" group="@Ggroup" fill="#009600" frame="#000000" cx="143.81944444444446" cz="62.5" angle="180" />
-  <Teleporter y="5" status="true" start="@Orange" stop="@Blue" group="@Rgroup" fill="#ff4c00" frame="#000000" cx="113.81944444444444" cz="62.5" angle="180" />
-  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="1.8" out.1="@redON" out.0="@yelON" in.1="@Red" in.0="@Yel" fill="#686868" frame="#00ec00" cx="121.31944444444444" cz="162.56944444444446" angle="90" />
+  <Teleporter y="5" group="@Ggroup" fill="#009600" frame="#000000" cx="143.81944444444446" cz="62.5" angle="0" />
+  <Teleporter y="5" status="true" start="@Orange" stop="@Blue" group="@Rgroup" fill="#ff4c00" frame="#000000" cx="113.81944444444444" cz="62.5" angle="0" />
+  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="1.8" out.1="@redON" out.0="@yelON" in.1="@Red" in.0="@Yel" fill="#686868" frame="#00ec00" cx="121.31944444444444" cz="162.56944444444446" angle="270" />
   <Area enter="@Red" cx="128.75" cz="132.5" r="3.75" />
-  <Guard y="1" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="128.81944444444446" cz="78.125" angle="180" />
-  <Guard y="1" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="123.81944444444446" cz="78.125" angle="180" />
-  <Guard y="1" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="133.81944444444446" cz="78.125" angle="180" />
-  <Teleporter y="5" status="false" start="@Blue" stop="@Orange" group="@Bgroup" fill="#012ce4" frame="#000000" cx="101.25" cz="45.06944444444444" angle="270" />
+  <Guard y="1" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="128.81944444444446" cz="78.125" angle="0" />
+  <Guard y="1" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="123.81944444444446" cz="78.125" angle="0" />
+  <Guard y="1" shield="-1" speed="10" freq="15" hitSound="211" start="@redON" stop="@yelON" isTarget="false" canGlow="false" fill="#e62100" frame="#000000" cx="133.81944444444446" cz="78.125" angle="0" />
+  <Teleporter y="5" status="false" start="@Blue" stop="@Orange" group="@Bgroup" fill="#012ce4" frame="#000000" cx="101.25" cz="45.06944444444444" angle="90" />
   <Wall fill="#686868" frame="#000000" x="70" z="93.75" w="7.5" d="7.5" h="15" />
   <Wall fill="#686868" frame="#000000" x="70" z="63.75" w="7.5" d="7.5" h="15" />
-  <Teleporter y="15" start="@Blue" stop="@Orange" group="@Bgroup" fill="#012ce4" frame="#000000" cx="70.06944444444444" cz="66.25" angle="0" />
+  <Teleporter y="15" start="@Blue" stop="@Orange" group="@Bgroup" fill="#012ce4" frame="#000000" cx="70.06944444444444" cz="66.25" angle="180" />
   <WallDoor stepOnMsg="@Lift" middle="closed" midY="7" open="@Lift" deltaY="13" fill="#f1f1f1" frame="#000000" x="70" z="78.75" w="7.5" d="22.5" h="0.5" />
   <WallDoor stepOnMsg="@Lift" middle="closed" midY="7" open="@Lift" deltaY="13" fill="#f1f1f1" frame="#000000" x="55" z="93.75" w="22.5" d="7.5" h="0.5" />
   <Wall fill="#686868" frame="#000000" x="40" z="93.75" w="7.5" d="7.5" h="15" />
-  <Teleporter y="15" start="@Blue" win="500" fill="#fffb00" frame="#000000" cx="40" cz="93.81944444444444" angle="270" />
-  <Hologram y="15" shape="bspGroundStar" fill="#fffb00" frame="#000000" cx="40" cz="93.81944444444444" angle="270" />
-  <Ufo y="150" start="@Blue" shield="3" fill="#012ce4" frame="#000000" cx="46.25" cz="93.75" angle="315" />
-  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="1.8" out.1="@Yel" out.0="@Red" in.1="@yelON" in.0="@redON" fill="#686868" frame="#e62100" cx="136.31944444444446" cz="162.56944444444446" angle="270" />
-  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="1.8" out.1="@Orange2" out.0="@Blue2" in.1="@Orange" in.0="@Blue" fill="#686868" frame="#012ce4" cx="188.81944444444446" cz="96.31944444444444" angle="270" />
-  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="1.8" out.1="@Blue" out.0="@Orange" in.1="@Blue2" in.0="@Orange2" fill="#686868" frame="#ff4c00" cx="188.81944444444446" cz="98.81944444444444" angle="270" />
+  <Teleporter y="15" start="@Blue" win="500" fill="#fffb00" frame="#000000" cx="40" cz="93.81944444444444" angle="90" />
+  <Hologram y="15" shape="bspGroundStar" fill="#fffb00" frame="#000000" cx="40" cz="93.81944444444444" angle="90" />
+  <Ufo y="150" start="@Blue" shield="3" fill="#012ce4" frame="#000000" cx="46.25" cz="93.75" angle="135" />
+  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="1.8" out.1="@Yel" out.0="@Red" in.1="@yelON" in.0="@redON" fill="#686868" frame="#e62100" cx="136.31944444444446" cz="162.56944444444446" angle="90" />
+  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="1.8" out.1="@Orange2" out.0="@Blue2" in.1="@Orange" in.0="@Blue" fill="#686868" frame="#012ce4" cx="188.81944444444446" cz="96.31944444444444" angle="90" />
+  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="1.8" out.1="@Blue" out.0="@Orange" in.1="@Blue2" in.0="@Orange2" fill="#686868" frame="#ff4c00" cx="188.81944444444446" cz="98.81944444444444" angle="90" />
   <And in="@start" out="@Orange" />
-  <Ramp y="5" deltaY="4" fill="#c7c7c7" frame="#000000" x="166.31944444444446" z="45.06944444444444" w="15" d="10" h="0" angle="90" />
+  <Ramp y="5" deltaY="4" fill="#c7c7c7" frame="#000000" x="166.31944444444446" z="45.06944444444444" w="15" d="10" h="0" angle="270" />
   <Wall fill="#c7c7c7" frame="#000000" x="179.0625" z="65" w="10.625" d="50" h="4.5" y="4.5" />
   <Wall fill="#f1f1f1" frame="#000000" x="178.75" z="91.25" w="25" d="2.5" h="9" />
   <Wall fill="#f1f1f1" frame="#000000" x="178.75" z="103.75" w="25" d="2.5" h="9" />
@@ -70,34 +70,30 @@
   <Wall fill="#f1f1f1" frame="#000000" x="186.25" z="97.5" w="10" d="10" h="4.5" y="4.5" />
   <Wall fill="#f1f1f1" frame="#000000" x="171.25" z="97.5" w="10" d="10" h="4.5" y="4.5" />
   <WallDoor open="@Blue" didOpen="@bDone" close="@Orange" middle=".5" midX="10" deltaX="10" deltaY="4.5" fill="#012ce4" frame="#000000" x="168.75" z="97.5" w="5" d="10" h="4.5" />
-  <Door shape="bspTower" yon="300" scale="4" fill="#c7c7c7" frame="#012ce4" cx="141.31944444444446" cz="219.375" angle="180" />
-  <Door shape="bspTower" yon="300" scale="4" fill="#c7c7c7" frame="#012ce4" cx="1.3194444444444446" cz="90" angle="180" />
-  <Door shape="bspTower" yon="300" scale="4" fill="#c7c7c7" frame="#012ce4" cx="228.81944444444446" cz="100" angle="180" />
-  <Door shape="bspTower" yon="300" scale="4" fill="#c7c7c7" frame="#012ce4" cx="131.31944444444446" cz="0" angle="180" />
-  <Teleporter group="@wGroup" y="-10" shape="0" activeRange="130" deadRange="125" fill="#ffffff" frame="#000000" cx="131.25" cz="102.5" angle="135" />
-  <Teleporter group="@wGroup" start="@never" fill="#ffffff" frame="#000000" cx="138.125" cz="105" angle="315" />
-  <Field deltaY="0" deltaX=".2" start="@Blue" stop="@bDone" fill="#ffffff" frame="#000000" x="176.5625" z="97.5" w="9.375" d="10" h="1.25" cx="138.125" cz="105" angle="315" />
+  <Door shape="bspTower" yon="300" scale="4" fill="#c7c7c7" frame="#012ce4" cx="141.31944444444446" cz="219.375" angle="0" />
+  <Door shape="bspTower" yon="300" scale="4" fill="#c7c7c7" frame="#012ce4" cx="1.3194444444444446" cz="90" angle="0" />
+  <Door shape="bspTower" yon="300" scale="4" fill="#c7c7c7" frame="#012ce4" cx="228.81944444444446" cz="100" angle="0" />
+  <Door shape="bspTower" yon="300" scale="4" fill="#c7c7c7" frame="#012ce4" cx="131.31944444444446" cz="0" angle="0" />
+  <Teleporter group="@wGroup" y="-10" shape="0" activeRange="130" deadRange="125" fill="#ffffff" frame="#000000" cx="131.25" cz="102.5" angle="315" />
+  <Teleporter group="@wGroup" start="@never" fill="#ffffff" frame="#000000" cx="138.125" cz="105" angle="135" />
+  <Field deltaY="0" deltaX=".2" start="@Blue" stop="@bDone" fill="#ffffff" frame="#000000" x="176.5625" z="97.5" w="9.375" d="10" h="1.25" cx="138.125" cz="105" angle="135" />
   <Wall fill="#c7c7c7" frame="#000000" x="179.0625" z="45" w="10.625" d="10" h="4.5" />
   <Wall fill="#c7c7c7" frame="#000000" x="179.0625" z="70" w="10.625" d="10" h="4.5" />
-  <Ufo y="150" start="@Blue" shield="3" fill="#012ce4" frame="#000000" cx="70" cz="70" angle="315" />
+  <Ufo y="150" start="@Blue" shield="3" fill="#012ce4" frame="#000000" cx="70" cz="70" angle="135" />
   <Wall fill="#ffffff" frame="#000000" x="146.25" z="45" w="25" d="10" h="5" />
-  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="6.3" out.1="@Yel" out.0="@Red" in.1="@yelON" in.0="@redON" fill="#686868" frame="#e62100" cx="137.56944444444446" cz="40.06944444444444" angle="180" />
+  <Switch shape="bspOnSwitch" altshape="bspOffSwitch" y="6.3" out.1="@Yel" out.0="@Red" in.1="@yelON" in.0="@redON" fill="#686868" frame="#e62100" cx="137.56944444444446" cz="40.06944444444444" angle="0" />
   <WallDoor open="@Red" close="@Yel" deltaY="4.75" openDelay="20" openSpeed="2.5" closeSpeed="10" closeSound="0" fill="#570500" frame="#000000" x="128.75" z="45" w="10" d="10" h="0.5" />
-  <Ramp y="4" deltaY="4" fill="#570500" frame="#000000" x="121.31944444444446" z="132.56944444444446" w="10" d="5" h="0" angle="90" />
-  <Ramp y="4" deltaY="4" fill="#570500" frame="#000000" x="136.31944444444446" z="132.56944444444446" w="10" d="5" h="0" angle="270" />
+  <Ramp y="4" deltaY="4" fill="#570500" frame="#000000" x="121.31944444444446" z="132.56944444444446" w="10" d="5" h="0" angle="270" />
+  <Ramp y="4" deltaY="4" fill="#570500" frame="#000000" x="136.31944444444446" z="132.56944444444446" w="10" d="5" h="0" angle="90" />
   <Wall fill="#686868" frame="#000000" x="51.25" z="82.5" w="10" d="25" h="5" />
   <Wall fill="#686868" frame="#000000" x="63.75" z="75" w="15" d="10" h="5" />
-  <Teleporter y="5" status="true" start="@Orange" stop="@Blue" group="@Rgroup" fill="#ff4c00" frame="#000000" cx="48.81944444444445" cz="72.5" angle="180" />
-  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="You have discovered a secret military 
-testing site.  Unfortunately, your Hector 
-cannot carry any kind of weaponry powerful 
-enough to do any good here.  Leave this 
-area immediately." hull.0="mediumHull" hull.2="mediumHull" />
+  <Teleporter y="5" status="true" start="@Orange" stop="@Blue" group="@Rgroup" fill="#ff4c00" frame="#000000" cx="48.81944444444445" cz="72.5" angle="0" />
+  <set designer="Jason &quot;&quot;DuKK&quot;&quot; Fowler &lt;joebob@a.crl.com&gt;" information="You have discovered a secret military &#10;testing site.  Unfortunately, your Hector &#10;cannot carry any kind of weaponry powerful &#10;enough to do any good here.  Leave this &#10;area immediately." hull.0="mediumHull" hull.2="mediumHull" />
   <Text in="@start" showEveryone="true" text="Light and heavy hulls are not available for this 
 mission." cx="48.81944444444445" cz="72.5" r="1.875" />
-  <Incarnator stop="@start" y="0" cx="128.75" cz="112.5" angle="0" />
-  <Incarnator stop="@start" y="3" cx="128.75" cz="112.5" angle="0" />
-  <Incarnator stop="@start" y="6" cx="128.75" cz="112.5" angle="0" />
-  <Incarnator stop="@start" y="9" cx="128.75" cz="112.5" angle="0" />
-  <Incarnator stop="@start" y="12" cx="128.75" cz="112.5" angle="0" />
+  <Incarnator stop="@start" y="0" cx="128.75" cz="112.5" angle="180" />
+  <Incarnator stop="@start" y="3" cx="128.75" cz="112.5" angle="180" />
+  <Incarnator stop="@start" y="6" cx="128.75" cz="112.5" angle="180" />
+  <Incarnator stop="@start" y="9" cx="128.75" cz="112.5" angle="180" />
+  <Incarnator stop="@start" y="12" cx="128.75" cz="112.5" angle="180" />
 </map>

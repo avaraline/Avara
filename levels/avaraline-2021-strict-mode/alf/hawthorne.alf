@@ -1,13 +1,20 @@
 <map>
   <SkyColor fill="#e33900" frame="#0066ff" />
   <GroundColor fill="#1973bd" />
-  <set designer="$mMalkfox" information="Do not play this level with fewer than one person." light.0.i="0.9" light.0.a="60" light.0.b="15" wallHeight="0" />
+  <set
+    designer="$mMalkfox"
+    information="Do not play this level with fewer than one person."
+    light.0.i="0.9"
+    light.0.a="60"
+    light.0.b="15"
+    wallHeight="0"
+  />
 
-  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" cx="0" cz="0" angle="225" />
+  <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" cx="0" cz="0" angle="45" />
 
-  <Teleporter group="-1" y="-30" activeRange="40 * 5" deadRange="30 * 5" destGroup="@recenter" shape="0" fill="#002200" frame="#000000" cx="0" cz="0" angle="225" />
-  <Teleporter y="30" shape="0" group="@recenter" mask="0" fill="#002200" frame="#000000" cx="0" cz="0" angle="225" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#002200" frame="#000000" cx="0" cz="0" angle="225" />
+  <Teleporter group="-1" y="-30" activeRange="40 * 5" deadRange="30 * 5" destGroup="@recenter" shape="0" fill="#002200" frame="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter y="30" shape="0" group="@recenter" mask="0" fill="#002200" frame="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#002200" frame="#000000" cx="0" cz="0" angle="45" />
 
   <Wall fill="#afdaf0" frame="#ff7700" x="-52.5" z="15" w="20" d="5" h="16.5" />
   <Wall fill="#afdaf0" frame="#ff7700" x="-45" z="32.5" w="5" d="30" h="16.5" />
@@ -114,10 +121,10 @@
   <Wall d="0.625" fill="#ff9233" frame="#283a4d" h="0" w="10.625" x="-7.1875" y="7" z="52.8125" />
   <Wall d="25.0" fill="#ff9233" frame="#283a4d" h="0" w="0.625" x="-2.1875" y="7" z="40" />
 
-  <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="7.5" z="-40.3125" w="10" d="24.375" h="0.25" angle="5" />
-  <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="-7.5" z="40.3125" w="10" d="24.375" h="0.25" angle="185" />
-  <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="40.3125" z="7.5" w="24.375" d="10" h="0.25" angle="95" />
-  <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="-40.3125" z="-7.5" w="24.375" d="10" h="0.25" angle="275" />
+  <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="7.5" z="-40.3125" w="10" d="24.375" h="0.25" angle="180" />
+  <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="-7.5" z="40.3125" w="10" d="24.375" h="0.25" angle="0" />
+  <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="40.3125" z="7.5" w="24.375" d="10" h="0.25" angle="270" />
+  <Ramp y="0" deltaY="7" thickness="0" fill="#283a4d" frame="#000000" x="-40.3125" z="-7.5" w="24.375" d="10" h="0.25" angle="90" />
 
   <Dome fill="#283a4d" frame="#000000" cx="0" cz="0" r="2.5" angle="180" quarters="4" />
   <Dome y="7" fill="#283a4d" frame="#000000" cx="35" cz="35" r="2.5" angle="180" quarters="4" />
@@ -161,16 +168,16 @@
   <Timer in="mTaken" out="mShow" wait="200" />
   <Goody shape="bspMissile" y="11" speed="2" missiles="mXLgMissile" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="-35" cz="35" angle="225" />
 
-  <Incarnator y="16" cx="-7.5" cz="47.5" angle="180" />
-  <Incarnator y="16" cx="-47.5" cz="-7.5" angle="270" />
-  <Incarnator y="16" cx="7.5" cz="-47.5" angle="0" />
-  <Incarnator y="16" cx="47.5" cz="7.5" angle="90" />
-  <Incarnator y="16" cx="26.875" cz="37.5" angle="135" />
-  <Incarnator y="16" cx="-26.875" cz="-37.5" angle="315" />
-  <Incarnator y="16" cx="-37.5" cz="26.875" angle="225" />
-  <Incarnator y="16" cx="37.5" cz="-26.875" angle="45" />
-  <Incarnator y="16.5" cx="-15" cz="30" angle="180" stop="@start" />
-  <Incarnator y="16.5" cx="-30" cz="-15" angle="270" stop="@start" />
-  <Incarnator y="16.5" cx="15" cz="-30" angle="0" stop="@start" />
-  <Incarnator y="16.5" cx="30" cz="15" angle="90" stop="@start" />
+  <Incarnator y="16" cx="-7.5" cz="47.5" angle="0" />
+  <Incarnator y="16" cx="-47.5" cz="-7.5" angle="90" />
+  <Incarnator y="16" cx="7.5" cz="-47.5" angle="180" />
+  <Incarnator y="16" cx="47.5" cz="7.5" angle="270" />
+  <Incarnator y="16" cx="26.875" cz="37.5" angle="315" />
+  <Incarnator y="16" cx="-26.875" cz="-37.5" angle="135" />
+  <Incarnator y="16" cx="-37.5" cz="26.875" angle="45" />
+  <Incarnator y="16" cx="37.5" cz="-26.875" angle="225" />
+  <Incarnator y="16.5" cx="-15" cz="30" angle="0" stop="@start" />
+  <Incarnator y="16.5" cx="-30" cz="-15" angle="90" stop="@start" />
+  <Incarnator y="16.5" cx="15" cz="-30" angle="180" stop="@start" />
+  <Incarnator y="16.5" cx="30" cz="15" angle="270" stop="@start" />
 </map>

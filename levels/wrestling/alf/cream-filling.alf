@@ -13,17 +13,17 @@
   <Wall fill="#5954bd" frame="#000000" x="30.3125" z="25.3125" w="9.375" d="0.625" h="0.25" />
   <Wall fill="#5954bd" frame="#000000" x="34.6875" z="30.3125" w="0.625" d="9.375" h="0.25" />
   <Wall fill="#5954bd" frame="#000000" x="30" z="34.6875" w="8.75" d="0.625" h="0.25" />
-  <Incarnator y="10" start="@four" stop="@five" cx="52.465277777777786" cz="29.6875" angle="90" />
-  <Incarnator y="10" start="@five" stop="@six" cx="30" cz="52.465277777777786" angle="180" />
-  <Incarnator y="10" start="@six" stop="@seven" cx="7.569444444444445" cz="30" angle="270" />
-  <Incarnator y="10" start="@seven" stop="@eight" cx="30" cz="7.569444444444445" angle="0" />
-  <Incarnator y="10" start="@three" stop="@four" cx="40" cz="20" angle="45" />
-  <Incarnator y="10" start="@two" stop="@three" cx="40" cz="40" angle="135" />
-  <Incarnator y="10" start="@one" stop="@two" cx="20" cz="40" angle="225" />
-  <Incarnator y="10" start="@zero" stop="@one" cx="20" cz="20" angle="315" />
+  <Incarnator y="10" start="@four" stop="@five" cx="52.465277777777786" cz="29.6875" angle="270" />
+  <Incarnator y="10" start="@five" stop="@six" cx="30" cz="52.465277777777786" angle="0" />
+  <Incarnator y="10" start="@six" stop="@seven" cx="7.569444444444445" cz="30" angle="90" />
+  <Incarnator y="10" start="@seven" stop="@eight" cx="30" cz="7.569444444444445" angle="180" />
+  <Incarnator y="10" start="@three" stop="@four" cx="40" cz="20" angle="225" />
+  <Incarnator y="10" start="@two" stop="@three" cx="40" cz="40" angle="315" />
+  <Incarnator y="10" start="@one" stop="@two" cx="20" cz="40" angle="45" />
+  <Incarnator y="10" start="@zero" stop="@one" cx="20" cz="20" angle="135" />
   <set baseHeight="0" />
-  <Teleporter y="100" activeRange="2000" deadRange="110" shape="0" fill="#5954bd" frame="#000000" cx="29.65277777777778" cz="29.930555555555557" angle="135" />
-  <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#5954bd" frame="#000000" cx="29.65277777777778" cz="29.930555555555557" angle="135" />
+  <Teleporter y="100" activeRange="2000" deadRange="110" shape="0" fill="#5954bd" frame="#000000" cx="29.65277777777778" cz="29.930555555555557" angle="315" />
+  <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#5954bd" frame="#000000" cx="29.65277777777778" cz="29.930555555555557" angle="315" />
   <set ambient.i="0.4" light.0.i="0.6" light.0.a="45" light.0.b="-90" light.1.i="0.3" light.1.a="90" light.1.b="360" designer="Red Cap - redcap3000@earthlink.net" information="Cream Filling , gee, Didn’t know that was their." />
   <SkyColor verticalRangeMin="100" verticalRangeMax="3000" n="6" fill="#9b6f93" frame="#7371c8" />
   <GroundColor verticalRangeMin="0" verticalRangeMax="50" n="6" fill="#580601" />
@@ -37,7 +37,7 @@
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="32" />
-  <Goody shape="bspAvaraA" y="50" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="40" fill="#b6c277" frame="#000000" cx="30" cz="30" angle="225" />
+  <Goody shape="bspAvaraA" y="50" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="40" fill="#b6c277" frame="#000000" cx="30" cz="30" angle="45" />
   <set grenadePower="4" missilePower="5" missileTurnRate="0.125" missileAcceleration="0.5" />
   <And in="@start" out="@time" />
   <Counter in.0="@zero" in.1="@one" in.2="@two" in.3="@three" in.4="@four" in.5="@five" in.6="@six" in.7="@seven" out="@time" />

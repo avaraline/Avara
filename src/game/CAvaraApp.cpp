@@ -120,7 +120,8 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     AddMessageLine("Type /help and press return for a list of chat commands.");
 
     // load up a random decent starting level
-    itsTui->ExecuteMatchingCommand("/rand -normal -tre -strict emo", CPlayerManagerImpl::LocalPlayer());
+    itsTui->ExecuteMatchingCommand("/rand -normal -tre avaraline emo", CPlayerManagerImpl::LocalPlayer());
+    // itsTui->ExecuteMatchingCommand("/load boog", CPlayerManagerImpl::LocalPlayer());
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
