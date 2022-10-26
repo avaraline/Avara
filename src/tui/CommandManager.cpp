@@ -285,7 +285,7 @@ bool CommandManager::LoadRandomLevel(VectorOfArgs matchArgs) {
                 //itsApp->AddMessageLine((std::ostringstream() << "LoadRandomLevel i=" << randomlevelIndex << " cur=" << currentCount
                 //                << " prev=" << previousCount << " index=" << randomlevelIndex - previousCount).str());
 
-                std::string levelName = randomLevel.at("Name");
+                std::string levelName = randomLevel.at("Alf");
                 //itsApp->levelWindow->SelectLevel(setName, levelName);
                 //itsApp->levelWindow->SendLoad();
                 

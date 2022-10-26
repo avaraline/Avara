@@ -10,7 +10,6 @@
 #include <SDL2/SDL.h>
 #include <glm/glm.hpp>
 #include "CViewParameters.h"
-#include "CWallActor.h"
 #include "RGBAColor.h"
 #include "AvaraGL.h"
 extern "C" {
@@ -97,7 +96,7 @@ public:
 
 
     mu_Context *mui_ctx;
-    std::map<mu_Id, CWallActor*> boxes;
+    std::map<mu_Id, CSmartBox*> boxes;
     //std::map<mu_Id, CSmartBox*> outlines;
     int BSPButton(std::string label);
 

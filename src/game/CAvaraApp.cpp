@@ -110,7 +110,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerThread->detach();
 
 
-    //itsGUI = new CGUI(itsGame);
+    itsGUI = new CGUI(itsGame);
     LoadDefaultOggFiles();
 
     // register and handle text commands
@@ -140,7 +140,7 @@ void CAvaraAppImpl::idle() {
     TrackerUpdate();
     drawContents();
     itsGame->GameTick();
-    //itsGUI->Update();
+    itsGUI->Update();
 }
 
 void CAvaraAppImpl::drawContents() {
@@ -154,7 +154,7 @@ void CAvaraAppImpl::drawContents() {
         previewAngle += FIX3(itsGame->fpsScale);
     }
     itsGame->Render(nvg_context);
-    //itsGUI->Render(nvg_context);
+    itsGUI->Render(nvg_context);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
@@ -176,8 +176,8 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
             }
         }
 
-        //if (itsGUI->handleSDLEvent(event))
-        //    return true;
+        if (itsGUI->handleSDLEvent(event))
+            return true;
 
         return CApplication::handleSDLEvent(event);
     }
@@ -251,15 +251,24 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
     OSErr result = fnfErr;
     json setManifest = GetManifestJSON(set);
-    if(setManifest == -1) return result;
-    if(setManifest.find("LEDI") == setManifest.end()) return result;
+    if(setManifest == -1) {
+        SDL_Log("File read error");
+        return result;
+    }
+    if(setManifest.find("LEDI") == setManifest.end()){
+        SDL_Log("LEDI key not found in set.json for %s", set.c_str());
+        return result;
+    } 
 
     json ledi = NULL;
     for (auto &ld : setManifest["LEDI"].items()) {
         if (ld.value()["Alf"] == levelTag)
             ledi = ld.value();
     }
-    if(ledi == NULL) return result;
+    if(ledi == NULL) {
+        SDL_Log("LEDI for %s in %s not found.", levelTag.c_str(), set.c_str());
+        return result;
+    }
 
     if(LoadALF(GetALFPath(levelTag))) result = noErr;
 
@@ -279,6 +288,9 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
         previewAngle = 0;
         previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);
         animatePreview = true;
+    }
+    else {
+        SDL_Log("ALF load error");
     }
 
     return result;

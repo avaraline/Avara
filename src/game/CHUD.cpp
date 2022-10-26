@@ -254,6 +254,8 @@ void CHUD::DrawPaused(CViewParameters *view, NVGcontext *ctx) {
 }
 
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
+    int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
+    nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
     CNetManager *net = itsGame->itsApp->GetNet();
@@ -275,14 +277,11 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             }
         }
     }
+
     int playerSlots = std::max(6, playerCount);
-
-    int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
     int chudHeight = 13 * playerSlots;
-
     DrawScore(playingCount, chudHeight, view, ctx);
 
-    nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
     nvgBeginPath(ctx);
     nvgRect(ctx, 0, bufferHeight - chudHeight, bufferWidth, chudHeight);

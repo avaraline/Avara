@@ -150,31 +150,3 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         Dispose();
     }
 }
-
-
-
-CWallActor* CWallActor::MakeWallFromDims(Vector dims, u_int32_t color) {
-
-    maskBits |= kSolidBit + kDoorIgnoreBit;
-    FreshCalc();
-    partCount = 1;
-    CSmartBox* box = new CSmartBox;
-    box->ISmartBox(400, dims, color, color, this, 0);
-    box->Reset();
-    partList[0] = box;
-
-    LinkPartBoxes();
-
-    shields = FIX(100);
-    blastPower = FIX(100);
-
-    traction = FIX(1);
-    friction = FIX(1);
-
-    hitSoundId = FIX(411);
-    hitSoundVolume = DEFAULTHITVOLUME;
-
-    itsGame = gCurrentGame;
-    itsGame->AddActor(this);
-    return this;
-}

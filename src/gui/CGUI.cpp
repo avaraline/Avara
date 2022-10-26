@@ -20,7 +20,7 @@ CGUI::CGUI(CAvaraGame *game) {
     mui_ctx->text_width = text_width;
     mui_ctx->text_height = text_height;
 
-    //itsGame->itsApp->LoadLevel("aa-normal", "bwadi.alf", NULL);
+    itsGame->itsApp->LoadLevel("aa-normal", "bwadi.alf", NULL);
 
     itsCursor = new CScaledBSP;
     itsCursor->IScaledBSP(FIX3(100), kCursorBSP, 0, 0);
@@ -103,15 +103,11 @@ int CGUI::BSPButton(std::string s) {
     glm::vec3 worldpos = screenToWorld(&mid);
 
     if (boxes.count(mu_id) > (std::size_t)0) {
-        CWallActor* _actor = boxes.at(mu_id);
-        CBSPPart* _part = _actor->partList[0];
+        CSmartBox* _part = boxes.at(mu_id);
         _part->Reset();
         if (mui_ctx->hover == mu_id) {
             long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTONHOVER]);
             _part->ReplaceColor(0xfefefe, color);
-            short count = 10;
-            short life = 8;
-            _actor->Shatter(kSmallSliver, 1, &count, &life, FIX3(700));
         }
         else {
             long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
@@ -130,22 +126,18 @@ int CGUI::BSPButton(std::string s) {
         dims[0] = ToFixed((ws_bottomright.x - ws_topleft.x) / 2.0);
         dims[1] = ToFixed((ws_bottomright.y - ws_topleft.y) / 2.0);
         dims[2] = FIX3(1);
-        //CSmartBox* _part = new CSmartBox;
+        CSmartBox* _part = new CSmartBox;
         long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
-        CWallActor* _actor = new CWallActor;
-        _actor->IAbstractActor();
-        _actor->MakeWallFromDims(dims, color);
-        //_part->ISmartBox(kBlockBSP, dims, color, color, 0, 0);
+        _part->ISmartBox(kBlockBSP, dims, color, color, 0, 0);
 
         //_part->ReplaceColor(0x00fefefe, 0x00ffffff);
         Vector _partLoc;
-        CBSPPart* _part = _actor->partList[0];
         AvaraGLUpdateData(_part);
         itsWorld->AddPart(_part);
         _part->Reset();
         TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
         _part->MoveDone();
-        boxes.emplace(mu_id, _actor);
+        boxes.emplace(mu_id, _part);
     }
 
     return res;

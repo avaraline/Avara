@@ -97,11 +97,8 @@ void CSliverPart::Activate(Fixed *origin,
     friction = FIX3(980);
     gravity = FMul(sliverGravity, gCurrentGame->gravityRatio);
 
-    // This is a bit of a hack because of the fact that CSliverPart is the only "Actor" that doesn't inherit
-    // from CAbstractActor.  With that said...
-    // Use the first player (which should be running at High FPS) as a proxy to get at the Fps methods.
-    fpsScale = gCurrentGame->playerList->FpsCoefficient2(FIX1);
-    gCurrentGame->playerList->FpsCoefficients(friction, gravity, &fpsFriction, &fpsGravity);
+    fpsScale = gCurrentGame->FpsCoefficient2(FIX1);
+    gCurrentGame->FpsCoefficients(friction, gravity, &fpsFriction, &fpsGravity);
     lifeCount = age / ToFloat(fpsScale);
 }
 
