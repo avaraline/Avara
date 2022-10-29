@@ -36,10 +36,10 @@
   <set wallHeight="3" />
   <set wallHeight="0" />
   <WallDoor midYaw="-45" fill="#f3dd15" frame="#000000" x="79.54861111111111" z="129.23611111111111" w="25.625" d="5" h="0" y="3" />
-  <WallDoor shape="bspGroundStar" fill="#937600" frame="#000000" x="69.54861111111111" z="100.17361111111111" w="5.625" d="80.625" h="0" />
-  <WallDoor shape="bspGroundStar" midYaw="45" fill="#937600" frame="#000000" x="108.29861111111111" z="132.36111111111111" w="5.625" d="16.25" h="0" />
-  <WallDoor shape="bspGroundStar" fill="#937600" frame="#000000" x="118.92361111111111" z="121.73611111111111" w="26.875" d="5" h="0" />
-  <WallDoor shape="bspGroundStar" midYaw="45" fill="#937600" frame="#000000" x="109.23611111111111" z="101.11111111111111" w="1.25" d="2.5" h="0" />
+  <WallDoor shape="bspGroundStar" fill="#f3dd15" frame="#000000" x="69.54861111111111" z="100.17361111111111" w="5.625" d="80.625" h="0" />
+  <WallDoor shape="bspGroundStar" midYaw="45" fill="#f3dd15" frame="#000000" x="108.29861111111111" z="132.36111111111111" w="5.625" d="16.25" h="0" />
+  <WallDoor shape="bspGroundStar" fill="#f3dd15" frame="#000000" x="118.92361111111111" z="121.73611111111111" w="26.875" d="5" h="0" />
+  <WallDoor shape="bspGroundStar" midYaw="45" fill="#f3dd15" frame="#000000" x="109.23611111111111" z="101.11111111111111" w="1.25" d="2.5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
@@ -48,14 +48,14 @@
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
   <Goody speed="12" shape="bspMissile" y="2" grenades="0" missiles="3" start="mShow" out="mTaken" fill="#f3dd15" frame="#f3dd15" cx="81.11111111111111" cz="62.986111111111114" angle="45" />
-  <WallDoor shape="bspGroundStar" fill="#937600" frame="#000000" x="109.23611111111111" z="101.11111111111111" w="7.5" d="6.25" h="0" y="10" />
-  <WallDoor shape="bspGroundStar" midYaw="45" fill="#937600" frame="#000000" x="109.86111111111111" z="68.92361111111111" w="1.25" d="3.125" h="0" />
+  <WallDoor shape="bspGroundStar" fill="#f3dd15" frame="#000000" x="109.23611111111111" z="101.11111111111111" w="7.5" d="6.25" h="0" y="10" />
+  <WallDoor shape="bspGroundStar" midYaw="45" fill="#f3dd15" frame="#000000" x="109.86111111111111" z="68.92361111111111" w="1.25" d="3.125" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
   <Goody speed="12" shape="bspGrenade" y="2" grenades="4" missiles="0" start="mShow" out="mTaken" fill="#f3dd15" frame="#000000" cx="116.73611111111111" cz="82.98611111111111" angle="45" />
-  <WallDoor shape="bspGroundStar" fill="#937600" frame="#000000" x="109.86111111111111" z="68.92361111111111" w="6.25" d="8.125" h="0" y="10" />
-  <WallDoor shape="bspGroundStar" midYaw="45" fill="#937600" frame="#000000" x="79.54861111111111" z="82.36111111111111" w="1.875" d="2.5" h="0" />
+  <WallDoor shape="bspGroundStar" fill="#f3dd15" frame="#000000" x="109.86111111111111" z="68.92361111111111" w="6.25" d="8.125" h="0" y="10" />
+  <WallDoor shape="bspGroundStar" midYaw="45" fill="#f3dd15" frame="#000000" x="79.54861111111111" z="82.36111111111111" w="1.875" d="2.5" h="0" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />

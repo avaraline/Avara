@@ -59,11 +59,11 @@
   <Incarnator y="startY" cx="40.06944444444444" cz="12.430555555555557" angle="155" />
   <Field deltaY="fieldY" visible="fieldVis" fill="#ffd300" frame="#000000" x="70.41666666666667" z="55.27777777777778" w="5" d="3.75" h="1" cx="40.06944444444444" cz="12.430555555555557" angle="155" />
   <Incarnator y="startY" cx="39.93055555555556" cz="73.19444444444446" angle="30" />
-  <Field deltaY="fieldY" visible="fieldVis" fill="#007600" frame="#007600" x="70.41666666666667" z="35.27777777777778" w="2.5" d="6.25" h="2.5" cx="39.93055555555556" cz="73.19444444444446" angle="30" />
+  <Field deltaY="fieldY" visible="fieldVis" fill="#ffd300" frame="#000000" x="70.41666666666667" z="35.27777777777778" w="2.5" d="6.25" h="2.5" cx="39.93055555555556" cz="73.19444444444446" angle="30" />
   <Incarnator y="startY" cx="100.55555555555556" cz="73.40277777777777" angle="330" />
   <Incarnator y="startY" cx="100.06944444444446" cz="12.708333333333334" angle="210" />
   <Incarnator y="startY" cx="34.44444444444444" cz="32.77777777777778" angle="90" />
-  <Field deltaY="fieldY" visible="fieldVis" fill="#007600" frame="#007600" x="70.41666666666667" z="30.27777777777778" w="5" d="3.75" h="1" cx="34.44444444444444" cz="32.77777777777778" angle="90" />
+  <Field deltaY="fieldY" visible="fieldVis" fill="#ffd300" frame="#000000" x="70.41666666666667" z="30.27777777777778" w="5" d="3.75" h="1" cx="34.44444444444444" cz="32.77777777777778" angle="90" />
   <Incarnator y="startY" cx="110.83333333333334" cz="53.125" angle="270" />
   <Timer in="@start" wait="1" out="@inArena" />
   <Text sound="135" volume=".5" in="@inArena" showEveryone="true" text="" cx="3.1944444444444446" cz="34.51388888888889" r="3.75" />

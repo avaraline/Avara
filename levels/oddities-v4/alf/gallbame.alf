@@ -110,7 +110,7 @@ Blue team wins!" cx="2.1875" cz="1.5277777777777777" r="2.1875" />
   <Guard y="30" shield="-1" shotPower="DeathPower" start="@DEATH" freq="DeathFreq" scale="DeathScale" speed="DeathSpeed" hitScore="0" hitSound="0" fill="#686868" frame="#f1f1f1" cx="57.22222222222222" cz="37.15277777777778" angle="315" />
   <Goody shape="bspW3x3" scale="10" start="@lsub" lives="-16" out="@lsub" sound="0" yon="0.01" fill="#686868" frame="#f1f1f1" cx="57.22222222222222" cz="37.15277777777778" angle="315" />
   <And in="@DEATH" out="@lsub" />
-  <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" openSound="0" closeSound="0" stopSound="0" open="@bDisturb" close="@bReset" fill="#686868" frame="#f1f1f1" x="57.22222222222223" z="37.15277777777778" w="0.55555555555555" d="0.5555555555555571" h="1" />
+  <WallDoor deltaY="1000" openSpeed="100" closeSpeed="100" openSound="0" closeSound="0" stopSound="0" open="@bDisturb" close="@bReset" fill="#ff32a9" frame="#000000" x="57.22222222222223" z="37.15277777777778" w="0.55555555555555" d="0.5555555555555571" h="1" />
   <Field shape="bspStandardBall" watch="targBall" deltaY="0" scale=".5" y="1.2" exit="@bDisturb" fill="#686868" frame="#f1f1f1" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" cx="57.22222222222222" cz="37.15277777777778" angle="315" />
   <Field shape="bspStandardBall" watch="targBall" deltaY="0" y="20" enter="@bReset" fill="#686868" frame="#f1f1f1" x="72.15277777777779" z="44.583333333333336" w="5" d="5" h="0" cx="57.22222222222222" cz="37.15277777777778" angle="315" />
   <unique vars="mA" />

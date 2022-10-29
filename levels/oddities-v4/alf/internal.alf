@@ -375,7 +375,7 @@
   <set wallHeight="0" baseHeight="0" />
   <set wallHeight="10" />
   <unique vars="mReset mGo mStart" />
-  <WallDoor deltaY="upper + CPlatThick" open="mGo" close="mReset" didOpen="mReset" openSpeed="3" closeSpeed="100" fill="#ff7c00" frame="#000000" x="35" z="44.93055555555556" w="5" d="5" h="0" />
+  <WallDoor deltaY="upper + CPlatThick" open="mGo" close="mReset" didOpen="mReset" openSpeed="3" closeSpeed="100" fill="#01168a" frame="#000000" x="35" z="44.93055555555556" w="5" d="5" h="0" />
   <Timer in.0="@start" in.1="mGo" wait="700" out="mStart" />
   <Sound sound="snMineBleep" volume="10" loopCount="16" start="mStart" isAmbient="false" cx="35" cz="44.93055555555556" angle="225" />
   <Timer in="mStart" wait="60" out="mGo" />

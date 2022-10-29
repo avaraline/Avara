@@ -189,9 +189,9 @@
   <Walker team="6" defaultLives="0" cx="3.6805555555555554" cz="330.20833333333337" angle="225" />
   <Walker team="6" defaultLives="0" cx="3.6805555555555554" cz="330.20833333333337" angle="225" />
   <Walker team="6" defaultLives="0" cx="3.6805555555555554" cz="330.20833333333337" angle="225" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff7e79" frame="#000000" x="369.9305555555556" z="352.08333333333337" w="2.5" d="1.25" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ec00" frame="#000000" x="347.43055555555554" z="352.08333333333337" w="2.5" d="1.25" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#fffb00" frame="#000000" x="358.6805555555556" z="352.08333333333337" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#e62100" frame="#000000" x="369.9305555555556" z="352.08333333333337" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#009600" frame="#000000" x="347.43055555555554" z="352.08333333333337" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#fffc41" frame="#000000" x="358.6805555555556" z="352.08333333333337" w="2.5" d="1.25" h="2" />
   <Timer in.0="@start" in.1="@fifteen" wait="15" out.0="@fifteen" />
   <Timer in="@fifteen" wait="1" out="@sixteen" />
   <Timer in="@fifteen" wait="10" out.0="@greenClose" out.1="@yellowClose" out.2="@redClose" />
@@ -267,7 +267,7 @@
   <Text sound="kSnText" volume="kTextVolume" in="@redAt80" showEveryone="true" mask="T3" text="Red team has 80 seconds!" cx="309.30555555555554" cz="9.583333333333334" r="1.25" />
   <Text sound="kSnText" volume="kTextVolume" in="@redAt90" showEveryone="true" text="Red team has only 10 seconds to go!" cx="309.30555555555554" cz="9.583333333333334" r="1.25" />
   <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#fffc41" frame="#000000" x="84.30555555555556" z="93.95833333333334" w="15" d="15" h="4.5" cx="309.30555555555554" cz="9.583333333333334" angle="225" y="6" />
-  <Field deltaY="0" mask="T1" stop="@sixteen" start="@fifteen" enter="@team1" fill="#00ec00" frame="#000000" x="84.30555555555556" z="93.95833333333334" w="15" d="15" h="4.5" cx="309.30555555555554" cz="9.583333333333334" angle="225" y="6" />
+  <Field deltaY="0" mask="T1" stop="@sixteen" start="@fifteen" enter="@team1" fill="#009600" frame="#000000" x="84.30555555555556" z="93.95833333333334" w="15" d="15" h="4.5" cx="309.30555555555554" cz="9.583333333333334" angle="225" y="6" />
   <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#f42300" frame="#000000" x="84.30555555555556" z="93.95833333333334" w="15" d="15" h="4.5" cx="309.30555555555554" cz="9.583333333333334" angle="225" y="6" />
   <Walker lives="kDefaultLives" team="1" y="30" cx="83.81944444444444" cz="51.18055555555556" angle="180" />
   <Walker lives="kDefaultLives" team="1" y="30" cx="88.81944444444444" cz="51.18055555555556" angle="180" />
