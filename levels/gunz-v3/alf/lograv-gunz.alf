@@ -48,10 +48,10 @@
   <Wall fill="#8a8a8a" frame="#8a8a8a" x="-24.6875" z="0.625" w="4.375" d="43.75" h="0.25" y="15" />
 
   <Teleporter group="@down" destGroup="@up" fill="#8a8a8a" frame="#8a8a8a" cx="0" cz="0" angle="45" />
-  <Teleporter y="30" shape="0" mask="0" group="@up" destGroup="-1" fill="#ffffff" frame="#8a8a8a" cx="-23.75" cz="2.5" angle="90" />
-  <Teleporter y="30" shape="0" mask="0" group="@up" destGroup="-1" fill="#ffffff" frame="#8a8a8a" cx="23.75" cz="2.5" angle="270" />
-  <Teleporter y="30" shape="0" mask="0" group="@up" destGroup="-1" fill="#ffffff" frame="#8a8a8a" cx="-20.625" cz="-2.5" angle="270" />
-  <Teleporter y="30" shape="0" mask="0" group="@up" destGroup="-1" fill="#ffffff" frame="#8a8a8a" cx="20.625" cz="5" angle="90" />
+  <Teleporter y="30" shape="0" mask="0" group="@up" destGroup="-1" fill="#ffffff" frame="#8a8a8a" cx="0" cz="20.625" angle="90" />
+  <Teleporter y="30" shape="0" mask="0" group="@up" destGroup="-1" fill="#ffffff" frame="#8a8a8a" cx="0" cz="-19.375" angle="270" />
+  <Teleporter y="30" shape="0" mask="0" group="@up" destGroup="-1" fill="#ffffff" frame="#8a8a8a" cx="24.6875" cz="0.625" angle="270" />
+  <Teleporter y="30" shape="0" mask="0" group="@up" destGroup="-1" fill="#ffffff" frame="#8a8a8a" cx="-24.6875" cz="0.625" angle="90" />
 
   <Teleporter y="-5" group="@down" destGroup="@up" shape="0" activeRange="2000" deadRange="50" fill="#8a8a8a" frame="#8a8a8a" cx="0" cz="0" angle="45" />
   <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#8a8a8a" frame="#8a8a8a" cx="0" cz="0" angle="45" />
