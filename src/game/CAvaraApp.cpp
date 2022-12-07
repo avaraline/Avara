@@ -138,7 +138,6 @@ void CAvaraAppImpl::Done() {
 void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
-    drawContents();
     itsGame->GameTick();
     itsGUI->Update();
 }

@@ -45,6 +45,7 @@ public:
     uint32_t cursor_buttons;
     int cursor_x;
     int cursor_y;
+    bool active = true;
     uint64_t started = 0;
     uint64_t t = 0;
     uint64_t last_t = 0;
@@ -99,6 +100,7 @@ public:
     std::map<mu_Id, CSmartBox*> boxes;
     //std::map<mu_Id, CSmartBox*> outlines;
     int BSPButton(std::string label);
+    void BSPWidget(mu_Rect r, mu_Id mu_id);
 
     void ClearParts() {
         for (const auto &x: boxes) {

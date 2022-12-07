@@ -64,7 +64,8 @@ void CGUI::Update() {
         fps << "frame in: " << dt << "ms";
         mu_label(mui_ctx, fps.str().c_str());
         if (BSPButton("PLAY")) {
-            PlaySound(411);
+            itsGame->SendStartCommand();
+            active = false;
         }
         if (BSPButton("ABOUT")) {
             PlaySound(411);
@@ -83,22 +84,7 @@ void CGUI::Update() {
     mu_end(mui_ctx);
 }
 
-void CGUI::PlaceGUIPart(CBSPPart *_part, mu_Rect r) {
-
-}
-
-int CGUI::BSPButton(std::string s) {
-    int res = 0;
-    mu_Id mu_id = mu_get_id(mui_ctx, s.c_str(), s.length());
-    mu_Rect r = mu_layout_next(mui_ctx);
-    mu_update_control(mui_ctx, mu_id, r, 0);
-    /* handle click */
-    if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
-        res |= MU_RES_SUBMIT;
-    }
-    /* draw */
-    if (s.length() > 0) { mu_draw_control_text(mui_ctx, s.c_str(), r, MU_COLOR_TEXT, 0); }
-
+void CGUI::BSPWidget(mu_Rect r, mu_Id mu_id) {
     Point mid = pt(r.x + (r.w / 2), r.y + (r.h / 2));
     glm::vec3 worldpos = screenToWorld(&mid);
 
@@ -139,7 +125,20 @@ int CGUI::BSPButton(std::string s) {
         _part->MoveDone();
         boxes.emplace(mu_id, _part);
     }
+}
 
+int CGUI::BSPButton(std::string s) {
+    int res = 0;
+    mu_Id mu_id = mu_get_id(mui_ctx, s.c_str(), s.length());
+    mu_Rect r = mu_layout_next(mui_ctx);
+    mu_update_control(mui_ctx, mu_id, r, 0);
+    /* handle click */
+    if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
+        res |= MU_RES_SUBMIT;
+    }
+    /* draw */
+    if (s.length() > 0) { mu_draw_control_text(mui_ctx, s.c_str(), r, MU_COLOR_TEXT, 0); }
+    BSPWidget(r, mu_id);
     return res;
 }
 
@@ -177,6 +176,7 @@ void CGUI::mouse() {
 }
 
 bool CGUI::handleSDLEvent(SDL_Event &event) {
+    if (!active) return false;
     switch(event.type) {
         case SDL_MOUSEMOTION:
             mouse();
@@ -224,11 +224,12 @@ StateFunction CGUI::_startup() {
 }
 
 StateFunction CGUI::_transitionScreen() {
+    //itsGame->RunFrameActions();
     return STAY;
 }
 
 void CGUI::Render(NVGcontext *ctx) {
-
+    if (!active) return;
     //nvgSave(ctx);
     nvgBeginFrame(ctx, gApplication->win_size_x, gApplication->win_size_y, gApplication->pixel_ratio);
     nvgBeginPath(ctx);
