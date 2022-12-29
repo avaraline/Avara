@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AvaraDefines.h"
+#include "Messages.h"
 
 #include <stdint.h>
 #include <string>
@@ -140,6 +141,15 @@ public:
             : std::optional<std::string>{};
     }
 
+    static inline uint32_t getMessageColor(MsgCategory category) {
+        uint32_t color = 0xffffffff;
+        int idx = static_cast<int>(category);
+        if (idx < sizeof(messageColors) / sizeof(uint32_t)) {
+            color = messageColors[idx];
+        }
+        return color;
+    }
+
     static inline float getHudAlpha() {
         return hudAlpha;
     }
@@ -179,4 +189,5 @@ private:
     static uint32_t teamColors[kMaxTeamColors + 1];
     static uint32_t teamTextColors[kMaxTeamColors + 1];
     static std::string teamColorNames[kMaxTeamColors + 1];
+    static uint32_t messageColors[3];
 };

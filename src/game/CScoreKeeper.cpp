@@ -84,7 +84,7 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.scoreID = 0;
 
     iface.consoleLine = NULL;
-    iface.consoleJustify = centerAlign;
+    iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
 
     entryPoint = NULL;
 
@@ -218,7 +218,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
                 destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
 
             iface.consoleLine = destStr;
-            iface.consoleJustify = centerAlign;
+            iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
         }
     } else {
         iface.playerName = NULL;

@@ -2,6 +2,7 @@
 
 #include "ColorManager.h"
 #include "csscolorparser.hpp"
+#include "nanovg.h"
 
 #include <regex>
 #include <SDL2/SDL.h>
@@ -55,6 +56,15 @@ static void LongToRGBA(uint32_t in, float *out, int n = 4) {
     if (n == 4) {
         out[3] = LongToA(in) / 255.0;
     }
+}
+
+static inline NVGcolor LongToNVG(uint32_t in) {
+    return nvgRGBA(
+        LongToR(in),
+        LongToG(in),
+        LongToB(in),
+        LongToA(in)
+    );
 }
 
 static std::optional<uint32_t> ParseColor(const std::string& str) {

@@ -161,13 +161,21 @@ bool CommandManager::KickPlayer(VectorOfArgs vargs) {
     std::string slotString(vargs[0]);
 
     if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
-        itsApp->AddMessageLine("Only the host can issue kick commands.");
+        itsApp->AddMessageLine(
+            "Only the host can issue kick commands.",
+            MsgAlignment::Left,
+            MsgCategory::Error
+        );
     }
     else if(!slotString.empty() && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
         int slot = std::stoi(slotString) - 1;
 
         if(slot == 0) {
-            itsApp->AddMessageLine("Host cannot be kicked.");
+            itsApp->AddMessageLine(
+                "Host cannot be kicked.",
+                MsgAlignment::Left,
+                MsgCategory::Error
+            );
         }
         else {
             itsApp->AddMessageLine("Kicking player in slot " + slotString);
@@ -176,7 +184,11 @@ bool CommandManager::KickPlayer(VectorOfArgs vargs) {
         }
     }
     else {
-        itsApp->AddMessageLine("Invalid Kick command.");
+        itsApp->AddMessageLine(
+            "Invalid Kick command.",
+            MsgAlignment::Left,
+            MsgCategory::Error
+        );
     }
     return true;
 }
@@ -188,19 +200,31 @@ bool CommandManager::ToggleAwayState(VectorOfArgs vargs) {
         std::string slotString(vargs[0]);
         if(slotString.length() > 0 && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
             if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
-                itsApp->AddMessageLine("Only the host can issue active commands for other players.");
+                itsApp->AddMessageLine(
+                    "Only the host can issue active commands for other players.",
+                    MsgAlignment::Left,
+                    MsgCategory::Error
+                );
                 return false;
             }
             slot = std::stoi(slotString) - 1;
         } else {
-            itsApp->AddMessageLine("No player found with slot = " + slotString);
+            itsApp->AddMessageLine(
+                "No player found with slot = " + slotString,
+                MsgAlignment::Left,
+                MsgCategory::Error
+            );
             return false;
         }
     }
 
     CPlayerManager* playerToChange = itsApp->GetNet()->playerTable[slot];
     if(playerToChange->LoadingStatus() == kLActive || playerToChange->LoadingStatus() == kLPaused) {
-        itsApp->AddMessageLine("State can not be changed on players in a game.");
+        itsApp->AddMessageLine(
+            "State can not be changed on players in a game.",
+            MsgAlignment::Left,
+            MsgCategory::Error
+        );
         return false;
     }
 

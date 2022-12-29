@@ -23,6 +23,7 @@
 //#include "CInfoPanel.h"
 #include "CScoreKeeper.h"
 #include "InfoMessages.h"
+#include "Messages.h"
 //#include "CAsyncBeeper.h"
 //#include "Ambrosia_Reg.h"
 //#include "CTracker.h"
@@ -738,7 +739,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             localLatencyVote = 0;
         } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
             if (fragmentDetected) {
-                itsGame->itsApp->MessageLine(kmFragmentAlert, centerAlign);
+                itsGame->itsApp->MessageLine(kmFragmentAlert, MsgAlignment::Center);
                 fragmentDetected = false;
             }
 
@@ -919,9 +920,9 @@ void CNetManager::ReceivedUnavailable(short slot, short fromSlot) {
     unavailablePlayers |= 1 << slot;
 
     if (slot == itsCommManager->myId) {
-        itsGame->itsApp->ParamLine(kmStartFailure, centerAlign, playerTable[fromSlot]->PlayerName(), NULL);
+        itsGame->itsApp->ParamLine(kmStartFailure, MsgAlignment::Center, playerTable[fromSlot]->PlayerName(), NULL);
     } else {
-        itsGame->itsApp->ParamLine(kmUnavailableNote, centerAlign, playerTable[slot]->PlayerName(), NULL);
+        itsGame->itsApp->ParamLine(kmUnavailableNote, MsgAlignment::Center, playerTable[slot]->PlayerName(), NULL);
     }
 }
 
@@ -1334,6 +1335,6 @@ void CNetManager::LoginRefused() {
     if (((unsigned long)thisTime - lastLoginRefusal) > 60 * 60 * 4) {
         lastLoginRefusal = thisTime;
 
-        itsGame->itsApp->MessageLine(kmRefusedLogin, centerAlign);
+        itsGame->itsApp->MessageLine(kmRefusedLogin, MsgAlignment::Center);
     }
 }

@@ -12,6 +12,7 @@
 #include "CSmartPart.h"
 //#include "CInfoPanel.h"
 #include "CAbstractPlayer.h"
+#include "Messages.h"
 
 void CTextActor::BeginScript() {
     CAbstractActor::BeginScript();
@@ -28,7 +29,7 @@ void CTextActor::BeginScript() {
     ProgramLongVar(iFrequency, 5);
     ProgramLongVar(iTimer, 0);
 
-    ProgramLongVar(iAlignment, centerAlign);
+    ProgramLongVar(iAlignment, static_cast<short>(MsgAlignment::Center));
 
     ProgramLongVar(iSound, 150);
     ProgramFixedVar(iVolume, FIX3(250));
@@ -154,7 +155,7 @@ void CTextActor::FrameAction() {
         dullSound->SetVolume(soundVol);
         dullSound->Start();
 
-        itsGame->itsApp->StringLine(theMessage, alignment);
+        itsGame->itsApp->StringLine(theMessage, static_cast<MsgAlignment>(alignment));
         isActive &= ~kIsActive;
     }
 }

@@ -22,6 +22,7 @@
 #include "CViewParameters.h"
 //#include "CInfoPanel.h"
 #include "InfoMessages.h"
+#include "Messages.h"
 //#include "Palettes.h"
 #include "CApplication.h"
 #include "CIncarnator.h"
@@ -749,9 +750,9 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 }
             } else {
                 if (itsManager->IsLocalPlayer()) {
-                    itsGame->itsApp->MessageLine(kmSelfDestruct, centerAlign);
+                    itsGame->itsApp->MessageLine(kmSelfDestruct, MsgAlignment::Center);
                     if (lives > 1)
-                        itsGame->itsApp->MessageLine(kmSelfDestruct2, centerAlign);
+                        itsGame->itsApp->MessageLine(kmSelfDestruct2, MsgAlignment::Center);
                 }
 
                 WasDestroyed();
@@ -1168,7 +1169,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     grenadeCount = defaultConfig.numGrenades;
     GoLimbo(60);
     if (lives == 0 && itsManager->IsLocalPlayer()) {
-        itsGame->itsApp->MessageLine(kmGameOver, centerAlign);
+        itsGame->itsApp->MessageLine(kmGameOver, MsgAlignment::Center);
     }
 
     itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
@@ -1229,7 +1230,7 @@ void CAbstractPlayer::Reincarnate() {
 
     // if couldn't find an available Incarnator above, try creating a random one
     if (placeList == nullptr) {
-        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working, 
+        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working,
         // then 3 tries will get that down to 0.1%.  In most levels, the not-working chance is probably
         // closer to 1% so 3 tries = 0.0001%
         for (int tries = 3; isInLimbo && tries > 0; tries--) {
@@ -1457,7 +1458,7 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     speed[2] = 0;
 
     if (itsManager->IsLocalPlayer()) {
-        itsGame->itsApp->MessageLine(kmWin, centerAlign);
+        itsGame->itsApp->MessageLine(kmWin, MsgAlignment::Center);
     }
 
     // itsGame->itsApp->DrawUserInfoPart(itsManager->slot, kipDrawColorBox);
