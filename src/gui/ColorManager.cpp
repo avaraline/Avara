@@ -63,6 +63,12 @@ std::string ColorManager::teamColorNames[kMaxTeamColors + 1] = {
     "Teal"
 };
 
+uint32_t ColorManager::messageColors[3] = {
+    0xffffffff,
+    0xff92ebe9,
+    0xffff8185
+};
+
 void ColorManager::setColorBlind(ColorBlindMode mode) {
     switch (mode) {
         case Off:
@@ -104,6 +110,9 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamTextColors[6] = 0xff333333;
             ColorManager::teamTextColors[7] = 0xff333333;
             ColorManager::teamTextColors[8] = 0xff333333;
+            ColorManager::messageColors[0] = 0xffffffff;
+            ColorManager::messageColors[1] = 0xff92ebe9;
+            ColorManager::messageColors[2] = 0xffff8185;
             break;
         case Deuteranopia:
             ColorManager::energyGaugeColor = 0xff009ea0;
@@ -144,6 +153,9 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamTextColors[6] = 0xffffffff;
             ColorManager::teamTextColors[7] = 0xff333333;
             ColorManager::teamTextColors[8] = 0xff333333;
+            ColorManager::messageColors[0] = 0xffffffff;
+            ColorManager::messageColors[1] = 0xff8ee0ef;
+            ColorManager::messageColors[2] = 0xffffbf80;
             break;
         case Protanopia:
             ColorManager::energyGaugeColor = 0xff009ea0;
@@ -184,6 +196,9 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamTextColors[6] = 0xffffffff;
             ColorManager::teamTextColors[7] = 0xff333333;
             ColorManager::teamTextColors[8] = 0xff333333;
+            ColorManager::messageColors[0] = 0xffffffff;
+            ColorManager::messageColors[1] = 0xff8ee0ef;
+            ColorManager::messageColors[2] = 0xffffbf80;
             break;
         case Tritanopia:
             ColorManager::energyGaugeColor = 0xff009c00;
@@ -224,6 +239,9 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamTextColors[6] = 0xffffffff;
             ColorManager::teamTextColors[7] = 0xff333333;
             ColorManager::teamTextColors[8] = 0xff333333;
+            ColorManager::messageColors[0] = 0xffffffff;
+            ColorManager::messageColors[1] = 0xff92ebe9;
+            ColorManager::messageColors[2] = 0xffff8185;
             break;
     }
     if (ColorManager::hudAlpha != 1.f) {
