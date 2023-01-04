@@ -475,8 +475,10 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
                     theSetAndTag, playerTable[senderSlot]->GetPlayerName().c_str());
             SendLoadLevel(set, tag, senderSlot);
         }
-    } else if (!isPlaying) {
+    } else if (isPlaying) {
         // save off the player that originally loaded this level to help loading side games
+        loaderSlot = originalSender;
+    } else {
         loaderSlot = originalSender;
         CPlayerManager *sendingPlayer = playerTable[originalSender];
 
@@ -529,6 +531,9 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
 void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag) {
     short i;
 
+    SDL_Log("LevelLoadStatus(senderSlot=%d, crc=%d, err=%d, tag=%s)\n", senderSlot, crc, err, theTag.c_str());
+    SDL_Log("   loaderSlot = %d\n", loaderSlot);
+
     CPlayerManager *thePlayer;
 
     thePlayer = playerTable[senderSlot];
@@ -546,6 +551,9 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
         thePlayer->LoadStatusChange(
             playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());
     }
+
+    // reset startingGame flag whenever a new level is loaded
+    startingGame = false;
 }
 
 Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
@@ -830,7 +838,7 @@ void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSl
     if (senderSlot != 0) {
         // The server will forward clients' kpStartLevel message to kdEveryone,
         // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
-        if (itsCommManager->myId == 0 && !startingGame) {
+        if (itsCommManager->myId == 0) {
             if (!startingGame) {
                 SDL_Log("  server sending kpStartLevel on behalf of %s\n",
                         playerTable[senderSlot]->GetPlayerName().c_str());

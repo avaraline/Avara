@@ -85,8 +85,8 @@
   <Walker team="6" defaultLives="0" cx="177.08333333333334" cz="539.8611111111111" angle="225" />
   <Walker team="6" defaultLives="0" cx="177.08333333333334" cz="539.8611111111111" angle="225" />
   <Field deltaY="0" mask="T2" stop="@sixteen" start="@fifteen" enter="@team2" fill="#fffc41" frame="#000000" cx="177.08333333333334" cz="539.8611111111111" angle="225" x="278.95833333333337" z="232.70833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
-  <Field deltaY="0" mask="T1" stop="@sixteen" start="@fifteen" enter="@team1" fill="#00ec00" frame="#000000" cx="177.08333333333334" cz="539.8611111111111" angle="225" x="278.95833333333337" z="232.70833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
-  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#ff7e79" frame="#000000" cx="177.08333333333334" cz="539.8611111111111" angle="225" x="278.95833333333337" z="232.70833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
+  <Field deltaY="0" mask="T1" stop="@sixteen" start="@fifteen" enter="@team1" fill="#009600" frame="#000000" cx="177.08333333333334" cz="539.8611111111111" angle="225" x="278.95833333333337" z="232.70833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
+  <Field deltaY="0" mask="T3" stop="@sixteen" start="@fifteen" enter="@team3" fill="#8b0f00" frame="#000000" cx="177.08333333333334" cz="539.8611111111111" angle="225" x="278.95833333333337" z="232.70833333333334" w="22.5" d="22.5" h="4.5" y="50.25" />
   <Timer in.0="@start" in.1="@fifteen" wait="15" out.0="@fifteen" />
   <Timer in="@fifteen" wait="1" out="@sixteen" />
   <Timer in="@fifteen" wait="10" out.0="@greenClose" out.1="@yellowClose" out.2="@redClose" />
@@ -131,12 +131,12 @@
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="588.9583333333334" cz="226.73611111111111" angle="225" />
   <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ffffff" frame="#000000" cx="588.9583333333334" cz="226.73611111111111" angle="225" />
   <Timer in.0="@greenWins" in.1="@yellowWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#ff7e79" frame="#000000" x="626.4583333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#00ec00" frame="#000000" x="603.9583333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team3" didOpen="@add1Red" close="@redClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#e62100" frame="#000000" x="626.4583333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team1" didOpen="@add1Green" close="@greenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#009600" frame="#000000" x="603.9583333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
   <Walker lives="kDefaultLives" team="1" y="70" cx="338.95833333333337" cz="237.29166666666669" angle="270" />
   <Walker lives="kDefaultLives" team="1" y="70" cx="338.95833333333337" cz="227.29166666666669" angle="270" />
   <Walker lives="kDefaultLives" team="1" y="70" cx="338.95833333333337" cz="232.29166666666669" angle="270" />
-  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#fffb00" frame="#000000" x="615.2083333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
+  <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="@team2" didOpen="@add1Yellow" close="@yellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" fill="#fffc41" frame="#000000" x="615.2083333333334" z="554.2361111111111" w="2.5" d="1.25" h="2" />
   <Counter in="@add1Yellow" n="10" out="@yellowAt10" restart="false" />
   <Counter in="@add1Yellow" n="20" out="@yellowAt20" restart="false" />
   <Counter in="@add1Yellow" n="30" out="@yellowAt30" restart="false" />

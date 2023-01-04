@@ -346,7 +346,7 @@ class OvalOp(ArcOp):
 
 
 def copy_attrs(wall, obj):
-    for attr in ("x", "z", "w", "d", "h"):
+    for attr in ("x", "z", "w", "d", "h", "fill", "frame"):
         if attr in wall.attrs:
             obj.attrs[attr] = wall.attrs[attr]
     if "y" in wall.attrs:
