@@ -20,7 +20,7 @@ CGUI::CGUI(CAvaraGame *game) {
     mui_ctx->text_width = text_width;
     mui_ctx->text_height = text_height;
 
-    itsGame->itsApp->LoadLevel("aa-normal", "bwadi.alf", NULL);
+    //itsGame->itsApp->LoadLevel("aa-normal", "bwadi.alf", NULL);
 
     itsCursor = new CScaledBSP;
     itsCursor->IScaledBSP(FIX3(100), kCursorBSP, 0, 0);
@@ -190,7 +190,7 @@ bool CGUI::handleSDLEvent(SDL_Event &event) {
             return true;
 
         case SDL_KEYDOWN:
-
+            return false;
             break;
 
         case SDL_MOUSEBUTTONDOWN:

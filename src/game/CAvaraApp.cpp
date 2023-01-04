@@ -168,18 +168,10 @@ bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
         return true;
     }
     else {
-        for (int i = 0; i < windowList.size(); i++) {
-            if(windowList[i]->editing()) {
-                CApplication::handleSDLEvent(event);
-                return true;
-            }
-        }
-
         if (itsGUI->handleSDLEvent(event))
             return true;
-
-        return CApplication::handleSDLEvent(event);
     }
+    return false;
 }
 
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {

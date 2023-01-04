@@ -1200,18 +1200,44 @@ short CAbstractActor::GetBallSnapPoint(long theGroup,
 // over the span of a single "classic" frame.
 void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
                                      Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed *fpsOffset) {
-    itsGame->FpsCoefficients(classicCoeff1, classicCoeff2, fpsCoeff1, fpsCoeff2, fpsOffset);
+    if (HandlesFastFPS()) {
+        double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
+        *fpsCoeff1 = FRound(fps1);
+        if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
+            *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
+        } else { // 0.999-1.001
+            // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsScale
+            *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
+        }
+        if (fpsOffset != NULL) {
+            // Dividing by classicCoeff1(A) seems to improve cases like this:
+            //   s=As+B
+            *fpsOffset = FDiv(FpsOffset(classicCoeff2), classicCoeff1);
+        }
+    } else {
+        *fpsCoeff1 = classicCoeff1;
+        *fpsCoeff2 = classicCoeff2;
+    }
 }
 
 // convenience function for equations of the form (returns fps-scaled version of a),
 //   x[i+1] = x[i] * a
 Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
-    return itsGame->FpsCoefficient1(classicCoeff1);
+    if (HandlesFastFPS()) {
+        return FRound(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
+    } else {
+        return classicCoeff1;
+    }
 }
 // convenience function for equations of the form (returns fps-scaled version of b),
 //   x[i+1] = x[i] + b
 Fixed CAbstractActor::FpsCoefficient2(Fixed classicCoeff2) {
-    return itsGame->FpsCoefficient2(classicCoeff2);
+    if (HandlesFastFPS()) {
+        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+        return std::lround(classicCoeff2 * itsGame->fpsScale);
+    } else {
+        return classicCoeff2;
+    }
 }
 
 // convenience function for offset assuming equations of the form
@@ -1226,20 +1252,29 @@ Fixed CAbstractActor::FpsOffset(Fixed classicCoeff2) {
     // whereas the classic case adds 8.  To compensate, add an initial offset of
     // 1.5*2=3 to the speed in the first frame so that the location is incremented
     // by (5+7+9+11)*0.25=8, same as the classic case.
-    return itsGame->FpsOffset(classicCoeff2);
+    return 0.5 * (1/itsGame->fpsScale - 1) * FpsCoefficient2(classicCoeff2);
 }
 
 // the most accurate version of coefficient1 is computed using doubles
 double CAbstractActor::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
-    return itsGame->FpsCoefficient1(fpsCoeff1, fpsScale);
+    return pow(fpsCoeff1, fpsScale);
 }
 
 long CAbstractActor::FpsFramesPerClassic(long classicFrames)
 {
-    return itsGame->FpsFramesPerClassic(classicFrames);
+    if (HandlesFastFPS()) {
+        return long(classicFrames / itsGame->fpsScale);
+    } else {
+        return 1;
+    }
 }
 
 // basically the inverse of FpsCoefficient2... convert FPS values to Classic units
 Fixed CAbstractActor::ClassicCoefficient2(Fixed fpsValue) {
-    return itsGame->ClassicCoefficient2(fpsValue);
+    if (HandlesFastFPS()) {
+        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
+        return std::lround(fpsValue / itsGame->fpsScale);
+    } else {
+        return fpsValue;
+    }
 }

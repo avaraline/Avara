@@ -100,22 +100,19 @@ int main(int argc, char *argv[]) {
     SDL_Event event;
     
     while (main_loop_active) {
+        glClearColor(.3, .5, .3, 1);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+        app->idle();
+        app->drawContents();
+        SDL_GL_SwapWindow(app->window);
+        
         if (SDL_WaitEventTimeout(&event, refresh)) {
             if (event.type == SDL_QUIT) {
                 main_loop_active = false;
             }
             app->handleSDLEvent(event);
         }
-        //SDL_PollEvent(&event);
-        app->idle();
-
-        glClearColor(.3, .5, .3, 1);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        // Update everything and draw
-        
-        app->drawContents();
-        SDL_GL_SwapWindow(app->window);
-
     }
     app->Done();
 

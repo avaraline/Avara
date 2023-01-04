@@ -30,6 +30,7 @@ public:
     Vector location, orientation;
     int current_id;
     bool update = true;
+    bool skyToggle = true;
 
     BSPViewer(int id) : CApplication("BSP Viewer") {
         AvaraGLInitContext();
@@ -53,6 +54,8 @@ public:
         worldShader = new CWorldShader;
         worldShader->IWorldShader();
         worldShader->skyShadeCount = 12;
+
+        skyToggle = true;
 
 
         location[0] = FIX(0);
@@ -153,6 +156,9 @@ public:
                     case SDLK_y:
                         newPart(current_id);
                         return true;
+                    case SDLK_u:
+                        skyToggle = !skyToggle;
+                        return true;
                 }
                 break;
         }
@@ -177,6 +183,7 @@ public:
         TranslatePart(itsPart, location[0], location[1], location[2]);
         itsPart->MoveDone();
 
+        if (skyToggle)
         worldShader->ShadeWorld(itsView);
 
         itsWorld->Render(itsView);
@@ -209,7 +216,7 @@ int main(int argc, char *argv[]) {
             app->HandleEvent(event);
         }
 
-        glClearColor(.3, .5, .3, 1);
+        glClearColor(1, 0, 1, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         // Update everything and draw
         app->drawContents();
