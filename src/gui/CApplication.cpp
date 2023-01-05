@@ -248,6 +248,7 @@ bool CApplication::resizeCallbackEvent(int, int) {
     fb_size_y = fb_tmp_size_y;
     win_size_x = win_tmp_size_x;
     win_size_y = win_tmp_size_y;
+    SDL_Log("Window Resized: fb: %dx%d / win: %dx%d", fb_size_x, fb_size_y, win_size_x, win_size_y);
     return resize_callback(fb_size_x, fb_size_y);
 }
 

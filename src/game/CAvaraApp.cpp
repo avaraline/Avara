@@ -163,14 +163,15 @@ void CAvaraAppImpl::WindowResized(int width, int height) {
 }
 
 bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {
-    if(itsGame->IsPlaying()) {
+    if (CApplication::handleSDLEvent(event))
+        return true;
+    else if(itsGame->IsPlaying()) {
         itsGame->HandleEvent(event);
         return true;
     }
-    else {
-        if (itsGUI->handleSDLEvent(event))
-            return true;
-    }
+    else if (itsGUI->handleSDLEvent(event))
+        return true;
+    else 
     return false;
 }
 

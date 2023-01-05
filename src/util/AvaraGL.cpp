@@ -25,7 +25,7 @@ bool ready = false;
 
 glm::mat4 proj;
 const float near_dist = .099f;
-const float far_dist = 16000.0f;
+const float far_dist = 1000.0f;
 
 float current_fov = 60.0f;
 short window_height = 100;
@@ -268,8 +268,8 @@ void AvaraGLInitContext() {
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
 
-    //glEnable(GL_BLEND);
-    //glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE, GL_ONE);
+    glEnable(GL_BLEND);
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE, GL_ONE);
 
     ready = true;
 }
@@ -300,7 +300,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
     // custom per-object lighting
     float extra_amb = ToFloat(part->extraAmbient);
-    float current_amb = ToFloat(part->currentView->ambientLight) || 1.0;
+    float current_amb = ToFloat(part->currentView->ambientLight);
 
     if (part->privateAmbient != -1) {
         AvaraGLSetAmbient(ToFloat(part->privateAmbient), part->currentView->ambientLightColor);
