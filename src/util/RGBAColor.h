@@ -67,6 +67,15 @@ static void LongToRGBA(uint32_t in, float *out, int n = 4) {
     }
 }
 
+static inline NVGcolor LongToNVG(uint32_t in) {
+    return nvgRGBA(
+        LongToR(in),
+        LongToG(in),
+        LongToB(in),
+        LongToA(in)
+    );
+}
+
 static std::optional<uint32_t> ParseColor(const std::string& str) {
     std::optional<CSSColorParser::Color> color = CSSColorParser::parse(str);
 

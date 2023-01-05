@@ -32,6 +32,7 @@
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 #include "InfoMessages.h"
+#include "Messages.h"
 //#include "CCapMaster.h"
 #include "AvaraDefines.h"
 #include "CSoundHub.h"
@@ -734,7 +735,7 @@ void CAvaraGame::ResumeGame() {
             freshPlayerList = NULL;
             InitMixer(false);
         } else {
-            itsApp->MessageLine(kmRestarted, centerAlign);
+            itsApp->MessageLine(kmRestarted, MsgAlignment::Center);
             soundHub->MuteFlag(false);
         }
 
@@ -828,9 +829,9 @@ void CAvaraGame::GameStop() {
     itsNet->StopGame(gameStatus);
 
     if (gameStatus == kAbortStatus) {
-        itsApp->MessageLine(kmAborted, centerAlign);
+        itsApp->MessageLine(kmAborted, MsgAlignment::Center);
     } else if (gameStatus == kPauseStatus) {
-        itsApp->ParamLine(kmPaused, centerAlign, itsNet->playerTable[pausePlayer]->PlayerName(), NULL);
+        itsApp->ParamLine(kmPaused, MsgAlignment::Center, itsNet->playerTable[pausePlayer]->PlayerName(), NULL);
     }
 
     scoreKeeper->StopPause(gameStatus == kPauseStatus);

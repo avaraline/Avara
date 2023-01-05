@@ -565,7 +565,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 askAgainTime = quickTick + 300; //	Five seconds
                 SendResendRequest(askCount++);
                 if (askCount == 2) {
-                    itsGame->itsApp->ParamLine(kmWaitingForPlayer, centerAlign, playerName, NULL);
+                    itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName, NULL);
                     // TODO: waiting for player dialog
                     // InitCursor();
                     // gApplication->SetCommandParams(STATUSSTRINGSLISTID, kmWaitingPlayers, true, 0);
@@ -589,7 +589,11 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     // kick the offending player from the server so everyone else can continue
                     AbortRequest();  // clears the player from distribution so they can come back in to the server (not the game)
                     if (theNetManager->itsCommManager->myId == 0) { // the server kicks the unresponsive player
-                        itsGame->itsApp->AddMessageLine("Kicking unresponsive player: " + std::string((char*)&playerName[1], (size_t)playerName[0]));
+                        itsGame->itsApp->AddMessageLine(
+                            "Kicking unresponsive player: " + std::string((char*)&playerName[1], (size_t)playerName[0]),
+                            MsgAlignment::Center,
+                            MsgCategory::Error
+                        );
                         theNetManager->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
                     }
                     break;
