@@ -85,8 +85,8 @@ public:
     std::thread *trackerThread;
 
     virtual std::deque<MsgLine>& MessageLines() override;
-    virtual void idle() override;
-    virtual void drawContents() override;
+    virtual void idle();
+    virtual void drawContents();
 
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
