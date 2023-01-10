@@ -903,11 +903,6 @@ bool CAvaraGame::GameTick() {
     // increment frameNumber, set nextScheduledFrame time
     IncrementFrame();
 
-    // if the game hasn't kept up with the frame schedule, reset the next frame (prevents chipmunk mode)
-    if (nextScheduledFrame < startTime) {
-        nextScheduledFrame = startTime + frameTime;
-    }
-
     timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
 
     if (latencyTolerance)
@@ -916,8 +911,8 @@ bool CAvaraGame::GameTick() {
 
     canPreSend = true;
 
-    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode)
-    if (nextScheduledFrame < startTime) {
+    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode, unless player is dead)
+    if (nextScheduledFrame < startTime && itsNet->IAmAlive()) {
         nextScheduledFrame = startTime + frameTime;
     }
 

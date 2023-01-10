@@ -726,16 +726,20 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             long maxRoundLatency;
             short maxId = 0;
 
-            latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
-            maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution, &maxId);
-            maxPlayer = playerTable[maxId];
+            // only compute latency numbers to/from players still playing
+            if (IAmAlive()) {
 
-            itsCommManager->SendUrgentPacket(
-                activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
-            #if LATENCY_DEBUG
-                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld FRandSeed=%d\n",
-                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency, FRandSeed);
-            #endif
+                latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
+                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
+                maxPlayer = playerTable[maxId];
+
+                itsCommManager->SendUrgentPacket(
+                    activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
+                #if LATENCY_DEBUG
+                    SDL_Log("*** fn=%ld activePlayersDistribution=%hx, deadOrDonePlayers=%hx, aliveDistribution=%hx maxRoundLatency=%ld FRandSeed=%d\n",
+                            frameNumber, activePlayersDistribution, deadOrDonePlayers, AlivePlayersDistribution(), maxRoundLatency, FRandSeed);
+                #endif
+            }
             localLatencyVote = 0;
         } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
             if (fragmentDetected) {
@@ -1028,6 +1032,14 @@ short CNetManager::PlayerCount() {
     }
 
     return playerCount;
+}
+
+short CNetManager::AlivePlayersDistribution() {
+    return activePlayersDistribution & ~deadOrDonePlayers;
+}
+
+bool CNetManager::IAmAlive() {
+    return AlivePlayersDistribution() & (1 << itsCommManager->myId);
 }
 
 void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {

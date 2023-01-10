@@ -525,11 +525,12 @@ void CPlayerManagerImpl::SendResendRequest(short askCount) {
 }
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
-    // SDL_Log("CPlayerManagerImpl::GetFunctions\n");
+    // SDL_Log("CPlayerManagerImpl::GetFunctions, %ld, %hd\n", itsGame->frameNumber, slot);
     uint32_t ffi = (itsGame->frameNumber);
     short i = (FUNCTIONBUFFERS - 1) & ffi;
 
-    if (frameFuncs[i].validFrame != itsGame->frameNumber) {
+    // if player is finished don't wait for their frames to sync up
+    if (frameFuncs[i].validFrame != itsGame->frameNumber && itsPlayer->lives > 0) {
         long quickTick;
         long firstTime = askAgainTime = TickCount();
         short askCount = 0;
@@ -562,14 +563,22 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     break;
                 }
 
-                askAgainTime = quickTick + 300; //	Five seconds
-                SendResendRequest(askCount++);
-                if (askCount == 2) {
+                askAgainTime = quickTick + 150; //	2.5 seconds
+
+                // only ask for resend if other player and I are both alive
+                if (itsPlayer->lives > 0 && theNetManager->IAmAlive()) {
+                    SendResendRequest(askCount);
+                }
+                if (++askCount == 2) {
                     itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName, NULL);
                     // TODO: waiting for player dialog
                     // InitCursor();
                     // gApplication->SetCommandParams(STATUSSTRINGSLISTID, kmWaitingPlayers, true, 0);
                     // gApplication->BroadcastCommand(kBusyStartCmd);
+                    if (!theNetManager->IAmAlive()) {
+                        // get out of the loop and hope for the best (frames might get fragged for dead player)
+                        break;
+                    }
                 }
 
                 //				itsGame->timer.currentStep += 2;

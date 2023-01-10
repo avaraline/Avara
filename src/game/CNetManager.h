@@ -162,6 +162,9 @@ public:
 
     virtual short PlayerCount();
 
+    virtual short AlivePlayersDistribution();
+    virtual bool IAmAlive();
+
     //	Game loop methods:
 
     virtual Boolean GatherPlayers(Boolean isFreshMission);
