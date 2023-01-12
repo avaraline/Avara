@@ -576,8 +576,11 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     // gApplication->SetCommandParams(STATUSSTRINGSLISTID, kmWaitingPlayers, true, 0);
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                     if (!theNetManager->IAmAlive()) {
-                        // get out of the loop and hope for the best (frames might get fragged for dead player)
-                        break;
+                        // copy held keys from the previous frame and hope for the best (frames might get fragged for dead player)
+                        SDL_Log("##### Spectator doesn't have functions for frame #%ld, winging it!\n", itsGame->frameNumber);
+                        frameFuncs[i] = {};
+                        frameFuncs[i].ft.held = frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber-1)].ft.held;
+                        frameFuncs[i].validFrame = itsGame->frameNumber;
                     }
                 }
 

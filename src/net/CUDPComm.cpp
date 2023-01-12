@@ -1062,7 +1062,7 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
 
             #if RANDOMLY_DROP_PACKETS
-                if (((1 << myId) & RANDOM_DROP_DISTRIBUTION) && rand() < RAND_MAX/24 || numToDrop > 0) {          // drop frequency = (1/N)
+                if (((1 << myId) & RANDOM_DROP_DISTRIBUTION) && rand() < RAND_MAX/40 || numToDrop > 0) {          // drop frequency = (1/N)
                     numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
                     SDL_Log("           ---------> DROPPING PACKET <---------\n");
                 } else {

@@ -739,15 +739,19 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                     SDL_Log("*** fn=%ld activePlayersDistribution=%hx, deadOrDonePlayers=%hx, aliveDistribution=%hx maxRoundLatency=%ld FRandSeed=%d\n",
                             frameNumber, activePlayersDistribution, deadOrDonePlayers, AlivePlayersDistribution(), maxRoundLatency, FRandSeed);
                 #endif
+            } else {
+                // spectator compares it's notion of FRandSeed to what the "alive" players send
+                fragmentCheck = FRandSeed;
             }
             localLatencyVote = 0;
-        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
+        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY)) {
+
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, MsgAlignment::Center);
                 fragmentDetected = false;
             }
 
-            if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
+            if (IAmAlive() && IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 short maxFrameLatency;
 
                 autoLatencyVote /= autoLatencyVoteCount;
