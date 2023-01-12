@@ -740,18 +740,20 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                             frameNumber, activePlayersDistribution, deadOrDonePlayers, AlivePlayersDistribution(), maxRoundLatency, FRandSeed);
                 #endif
             } else {
-                // spectator compares it's notion of FRandSeed to what the "alive" players send
-                fragmentCheck = FRandSeed;
+                // spectator just sends FRandSeed to self for fragmentation check
+                itsCommManager->SendUrgentPacket(
+                    SelfDistribution(), kpLatencyVote, 0, 0, FRandSeed, 0, NULL);
             }
             localLatencyVote = 0;
-        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY)) {
+            latencyVoteOpen = true;
+        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && latencyVoteOpen) {
 
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, MsgAlignment::Center);
                 fragmentDetected = false;
             }
 
-            if (IAmAlive() && IsAutoLatencyEnabled() && autoLatencyVoteCount) {
+            if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 short maxFrameLatency;
 
                 autoLatencyVote /= autoLatencyVoteCount;
@@ -766,7 +768,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                         frameNumber, maxRoundTripLatency,
                         (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), maxFrameLatency);
 
-                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
+                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer);
             }
 
             ResetLatencyVote();
@@ -795,6 +797,7 @@ void CNetManager::ResetLatencyVote() {
     autoLatencyVoteCount = 0;
     maxRoundTripLatency = 0;
     maxPlayer = nullptr;
+    latencyVoteOpen = false;
 }
 
 void CNetManager::ViewControl() {
@@ -1038,12 +1041,16 @@ short CNetManager::PlayerCount() {
     return playerCount;
 }
 
+short CNetManager::SelfDistribution() {
+    return (1 << itsCommManager->myId);
+}
+
 short CNetManager::AlivePlayersDistribution() {
     return activePlayersDistribution & ~deadOrDonePlayers;
 }
 
 bool CNetManager::IAmAlive() {
-    return AlivePlayersDistribution() & (1 << itsCommManager->myId);
+    return AlivePlayersDistribution() & SelfDistribution();
 }
 
 void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {

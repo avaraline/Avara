@@ -106,6 +106,7 @@ public:
     short maxRoundTripLatency;
     short addOneLatency;
     CPlayerManager *maxPlayer;
+    Boolean latencyVoteOpen;
 
     long lastLoginRefusal;
 
@@ -162,6 +163,7 @@ public:
 
     virtual short PlayerCount();
 
+    virtual short SelfDistribution();
     virtual short AlivePlayersDistribution();
     virtual bool IAmAlive();
 

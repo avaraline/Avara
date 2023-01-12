@@ -1068,7 +1068,7 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
 
 // "frameLatency" is the integer number of frames to delay;
 // latencyTolerance is the number of classic (64ms) frames (= frameLatency * fpsScale).
-void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const char* slowPlayer) {
+void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayerManager* slowPlayer) {
     double newLatency = newFrameLatency * fpsScale;
     if (latencyTolerance != newLatency) {
         #define MAX_LATENCY (8)   // in classic units
@@ -1092,16 +1092,16 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const c
         gApplication->Set(kLatencyToleranceTag, latencyTolerance);
 
         // if it changed
-        if (latencyTolerance != oldLatency) {
+        if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
             SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
 
+            std::ostringstream oss;
+            std::time_t t = std::time(nullptr);
+            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
             if (slowPlayer != nullptr) {
-                std::ostringstream oss;
-                std::time_t t = std::time(nullptr);
-                oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ")
-                    << ltOss.str() << " (" << slowPlayer << ")";
-                itsApp->AddMessageLine(oss.str());
+                oss << " (" << slowPlayer->GetPlayerName() << ")";
             }
+            itsApp->AddMessageLine(oss.str());
         }
     }
 }
