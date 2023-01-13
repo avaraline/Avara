@@ -563,13 +563,14 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     break;
                 }
 
-                askAgainTime = quickTick + 150; //	2.5 seconds
+                askAgainTime = quickTick + 62; //	~1 second
 
                 // only ask for resend if other player and I are both alive
                 if (itsPlayer->lives > 0 && theNetManager->IAmAlive()) {
                     SendResendRequest(askCount);
                 }
-                if (++askCount == 2) {
+                askCount++;
+                if (askCount == 2) {
                     itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName, NULL);
                     // TODO: waiting for player dialog
                     // InitCursor();
@@ -584,32 +585,18 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     }
                 }
 
-                //				itsGame->timer.currentStep += 2;
-            }
+                if (askCount == 3) {
+                    // pause the game so the server can boot the unresponsive player
+                    itsGame->statusRequest = kPauseStatus;
+                    itsGame->pausePlayer = theNetManager->itsCommManager->myId;
 
-            if (askCount > 4) {
-                /* TODO: waiting dialog
-                gApplication->BroadcastCommand(kBusyTimeCmd);
-                if(gApplication->commandResult)
-                {	itsGame->statusRequest = kAbortStatus;
+                    itsGame->itsApp->AddMessageLine(
+                        "Pausing game because of unresponsive player: " + GetPlayerName(),
+                        MsgAlignment::Center,
+                        MsgCategory::Error
+                    );
                     break;
                 }
-                */
-
-                #define KICK_WAITING_FOR_PLAYER 1
-                #if KICK_WAITING_FOR_PLAYER
-                    // kick the offending player from the server so everyone else can continue
-                    AbortRequest();  // clears the player from distribution so they can come back in to the server (not the game)
-                    if (theNetManager->itsCommManager->myId == 0) { // the server kicks the unresponsive player
-                        itsGame->itsApp->AddMessageLine(
-                            "Kicking unresponsive player: " + std::string((char*)&playerName[1], (size_t)playerName[0]),
-                            MsgAlignment::Center,
-                            MsgCategory::Error
-                        );
-                        theNetManager->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
-                    }
-                    break;
-                #endif
             }
 
         } while (frameFuncs[i].validFrame != itsGame->frameNumber);
