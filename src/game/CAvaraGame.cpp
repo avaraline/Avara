@@ -691,6 +691,20 @@ void CAvaraGame::SendStartCommand() {
     }
 }
 
+void CAvaraGame::StartIfReady() {
+    bool allReady = true;
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *mgr = itsNet->playerTable[i];
+        if (mgr && mgr->LoadingStatus() == kLLoaded) {
+            allReady = false;
+            break;
+        }
+    }
+    if (allReady) {
+        SendStartCommand();
+    }
+}
+
 #define MAXSKIPSINAROW 2
 
 static Boolean takeShot = false;

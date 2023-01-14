@@ -767,7 +767,15 @@ void	CPlayerManagerImpl::FlushMessageText(
 }
 */
 
-void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
+bool EndsWithCheckmark(const char* c, size_t len) {
+    static size_t checkLen = strlen(checkMark_utf8);
+    return len >= checkLen &&
+        strncmp(&c[len-checkLen], checkMark_utf8, checkLen) == 0;
+}
+
+void CPlayerManagerImpl::RosterMessageText(short len, const char *c) {
+    // checkmark can come in as the utf8 3-byte string, look for it at the end of the message
+    bool endsWithCheckmark = EndsWithCheckmark(c, len);
     while (len--) {
         unsigned char theChar;
 
@@ -778,6 +786,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
             case 6:
                 // ✓
                 lineBuffer.insert(lineBuffer.end(), checkMark_utf8, checkMark_utf8 + strlen(checkMark_utf8));
+                SetPlayerReady(true);
                 break;
             case 7:
                 // Δ
@@ -795,6 +804,8 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                         lineBuffer.clear();
                     }
                     lineBuffer = std::deque<char>(lineBuffer.begin(), i);
+                    // not ready if player deletes char
+                    SetPlayerReady(false);
                 }
                 break;
             case 13:
@@ -807,6 +818,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                 break;
             case 27:  // clearChat_utf8
                 lineBuffer.clear();
+                SetPlayerReady(false);
                 break;
             default:
                 if (theChar >= 32) {
@@ -823,6 +835,7 @@ void CPlayerManagerImpl::RosterMessageText(short len, char *c) {
                         }
                         lineBuffer = std::deque<char>(i, lineBuffer.end());
                     }
+                    SetPlayerReady(endsWithCheckmark);
                 }
                 break;
         }
@@ -1100,6 +1113,16 @@ void CPlayerManagerImpl::SetPlayerStatus(short newStatus, long theWin) {
 
         loadingStatus = newStatus;
         // theRoster->InvalidateArea(kUserBoxTopLine, position);
+    }
+}
+
+void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
+    // toggle between kLLoaded and kLReady but not to/from other states
+    if (loadingStatus == kLLoaded && isReady) {
+        loadingStatus = kLReady;
+        itsGame->StartIfReady();
+    } else if (loadingStatus == kLReady && !isReady) {
+        loadingStatus = kLLoaded;
     }
 }
 

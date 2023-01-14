@@ -828,7 +828,7 @@ void CNetManager::SendStartCommand(int16_t originalSender) {
         // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if (playerTable[i]->LoadingStatus() == kLLoaded) {
+            if (playerTable[i]->LoadingStatus() == kLLoaded || playerTable[i]->LoadingStatus() == kLReady) {
                 activePlayersDistribution |= 1 << i;
             }
         }

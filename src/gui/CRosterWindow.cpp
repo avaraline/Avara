@@ -294,6 +294,8 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
     } else if (status == kLConnected) {
         strStatus = "connected";
     } else if (status == kLLoaded) {
+        strStatus = "loaded";
+    } else if (status == kLReady) {
         strStatus = "ready";
     } else if (status == kLWaiting) {
         strStatus = "waiting";

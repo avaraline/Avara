@@ -216,6 +216,7 @@ public:
     virtual void ReadGamePrefs();
 
     virtual void SendStartCommand();
+    virtual void StartIfReady();
     virtual void ResumeGame();
     virtual bool IsPlaying();
     virtual void HandleEvent(SDL_Event &event);
