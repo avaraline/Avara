@@ -692,16 +692,19 @@ void CAvaraGame::SendStartCommand() {
 }
 
 void CAvaraGame::StartIfReady() {
-    bool allReady = true;
-    for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        CPlayerManager *mgr = itsNet->playerTable[i];
-        if (mgr && mgr->LoadingStatus() == kLLoaded) {
-            allReady = false;
-            break;
+    // server sends the start command if everyone is "ready"
+    if (itsNet->itsCommManager->myId == 0) {
+        bool allReady = true;
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            CPlayerManager *mgr = itsNet->playerTable[i];
+            if (mgr && mgr->LoadingStatus() == kLLoaded) {
+                allReady = false;
+                break;
+            }
         }
-    }
-    if (allReady) {
-        SendStartCommand();
+        if (allReady) {
+            SendStartCommand();
+        }
     }
 }
 
