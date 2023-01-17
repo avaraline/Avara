@@ -572,7 +572,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 }
 
                 if (theNetManager->IAmAlive()) {
-                    askAgainTime = quickTick + 30; //	~0.5 second
+                    askAgainTime = quickTick + 62; //	~1 second
                 } else {
                     // spectators can't afford to wait as long because players might still be going and
                     // the FUNCTIONBUFFERS might overflow, so ask for resend every 3.0LT ≈ (12 ticks = 200ms)
