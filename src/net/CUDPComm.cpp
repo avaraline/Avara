@@ -10,10 +10,10 @@
 #define RANDOMLY_DROP_PACKETS 0
 #if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
-#define SIMULATE_LATENCY_LT 2
-#define SIMULATE_LATENCY_MSEC_PER_LT 58  // less than 64 because of overhead of running multiple clients
+#define SIMULATE_LATENCY_LT 0.2
+#define SIMULATE_LATENCY_MSEC_PER_LT 15  // less than 64 because of overhead of running multiple clients
 #define SIMULATE_LATENCY_MEAN   (SIMULATE_LATENCY_LT*SIMULATE_LATENCY_MSEC_PER_LT*1000)
-#define SIMULATE_LATENCY_JITTER  0
+#define SIMULATE_LATENCY_JITTER  4
 #define SIMULATE_LATENCY_DISTRIBUTION  0x02  // bitmask of who gets the latency
 
 #define SIMULATE_LATENCY_CODE(text) \
@@ -25,6 +25,7 @@ if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) { \
 
 #endif
 #if RANDOMLY_DROP_PACKETS
+#define RANDOM_DROP_DISTRIBUTION 0x02  // which clients drop packets
 int numToDrop = 0;
 #endif
 
@@ -1061,7 +1062,7 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
 
             #if RANDOMLY_DROP_PACKETS
-                if (rand() < RAND_MAX/256 || numToDrop > 0) {          // drop frequency = (1/N)
+                if (((1 << myId) & RANDOM_DROP_DISTRIBUTION) && rand() < RAND_MAX/40 || numToDrop > 0) {          // drop frequency = (1/N)
                     numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
                     SDL_Log("           ---------> DROPPING PACKET <---------\n");
                 } else {

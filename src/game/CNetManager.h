@@ -106,6 +106,7 @@ public:
     short maxRoundTripLatency;
     short addOneLatency;
     CPlayerManager *maxPlayer;
+    Boolean latencyVoteOpen;
 
     long lastLoginRefusal;
 
@@ -161,6 +162,10 @@ public:
     virtual void ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json);
 
     virtual short PlayerCount();
+
+    virtual short SelfDistribution();
+    virtual short AlivePlayersDistribution();
+    virtual bool IAmAlive();
 
     //	Game loop methods:
 

@@ -67,7 +67,7 @@ public:
     virtual void SetPosition(short pos) {}
 
     virtual void RosterKeyPress(unsigned char c) {}
-    virtual void RosterMessageText(short len, char *c) {}
+    virtual void RosterMessageText(short len, const char *c) {}
     virtual short LevelCRC() { return 0; }
     virtual OSErr LevelErr() { return noErr; }
     virtual std::string LevelTag() { return 0; }

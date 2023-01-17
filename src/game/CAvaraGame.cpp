@@ -691,6 +691,23 @@ void CAvaraGame::SendStartCommand() {
     }
 }
 
+void CAvaraGame::StartIfReady() {
+    // server sends the start command if everyone is "ready"
+    if (itsNet->itsCommManager->myId == 0) {
+        bool allReady = true;
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            CPlayerManager *mgr = itsNet->playerTable[i];
+            if (mgr && mgr->LoadingStatus() == kLLoaded) {
+                allReady = false;
+                break;
+            }
+        }
+        if (allReady) {
+            SendStartCommand();
+        }
+    }
+}
+
 #define MAXSKIPSINAROW 2
 
 static Boolean takeShot = false;
@@ -903,11 +920,6 @@ bool CAvaraGame::GameTick() {
     // increment frameNumber, set nextScheduledFrame time
     IncrementFrame();
 
-    // if the game hasn't kept up with the frame schedule, reset the next frame (prevents chipmunk mode)
-    if (nextScheduledFrame < startTime) {
-        nextScheduledFrame = startTime + frameTime;
-    }
-
     timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
 
     if (latencyTolerance)
@@ -916,8 +928,8 @@ bool CAvaraGame::GameTick() {
 
     canPreSend = true;
 
-    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode)
-    if (nextScheduledFrame < startTime) {
+    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode, unless player is dead)
+    if (nextScheduledFrame < startTime && itsNet->IAmAlive()) {
         nextScheduledFrame = startTime + frameTime;
     }
 
@@ -1073,7 +1085,7 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
 
 // "frameLatency" is the integer number of frames to delay;
 // latencyTolerance is the number of classic (64ms) frames (= frameLatency * fpsScale).
-void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const char* slowPlayer) {
+void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayerManager* slowPlayer) {
     double newLatency = newFrameLatency * fpsScale;
     if (latencyTolerance != newLatency) {
         #define MAX_LATENCY (8)   // in classic units
@@ -1097,16 +1109,16 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const c
         gApplication->Set(kLatencyToleranceTag, latencyTolerance);
 
         // if it changed
-        if (latencyTolerance != oldLatency) {
+        if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
             SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
 
+            std::ostringstream oss;
+            std::time_t t = std::time(nullptr);
+            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
             if (slowPlayer != nullptr) {
-                std::ostringstream oss;
-                std::time_t t = std::time(nullptr);
-                oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ")
-                    << ltOss.str() << " (" << slowPlayer << ")";
-                itsApp->AddMessageLine(oss.str());
+                oss << " (" << slowPlayer->GetPlayerName() << ")";
             }
+            itsApp->AddMessageLine(oss.str());
         }
     }
 }

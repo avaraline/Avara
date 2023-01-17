@@ -726,18 +726,28 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             long maxRoundLatency;
             short maxId = 0;
 
-            latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
-            maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution, &maxId);
-            maxPlayer = playerTable[maxId];
+            // only compute latency numbers to/from players still playing
+            if (IAmAlive()) {
 
-            itsCommManager->SendUrgentPacket(
-                activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
-            #if LATENCY_DEBUG
-                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld FRandSeed=%d\n",
-                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency, FRandSeed);
-            #endif
+                latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
+                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
+                maxPlayer = playerTable[maxId];
+
+                itsCommManager->SendUrgentPacket(
+                    activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
+                #if LATENCY_DEBUG
+                    SDL_Log("*** fn=%ld activePlayersDistribution=%hx, deadOrDonePlayers=%hx, aliveDistribution=%hx maxRoundLatency=%ld FRandSeed=%d\n",
+                            frameNumber, activePlayersDistribution, deadOrDonePlayers, AlivePlayersDistribution(), maxRoundLatency, FRandSeed);
+                #endif
+            } else {
+                // spectator just sends FRandSeed to self for fragmentation check
+                itsCommManager->SendUrgentPacket(
+                    SelfDistribution(), kpLatencyVote, 0, 0, FRandSeed, 0, NULL);
+            }
             localLatencyVote = 0;
-        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
+            latencyVoteOpen = true;
+        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && latencyVoteOpen) {
+
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, MsgAlignment::Center);
                 fragmentDetected = false;
@@ -758,7 +768,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                         frameNumber, maxRoundTripLatency,
                         (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), maxFrameLatency);
 
-                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
+                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer);
             }
 
             ResetLatencyVote();
@@ -787,6 +797,7 @@ void CNetManager::ResetLatencyVote() {
     autoLatencyVoteCount = 0;
     maxRoundTripLatency = 0;
     maxPlayer = nullptr;
+    latencyVoteOpen = false;
 }
 
 void CNetManager::ViewControl() {
@@ -817,7 +828,7 @@ void CNetManager::SendStartCommand(int16_t originalSender) {
         // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if (playerTable[i]->LoadingStatus() == kLLoaded) {
+            if (playerTable[i]->LoadingStatus() == kLLoaded || playerTable[i]->LoadingStatus() == kLReady) {
                 activePlayersDistribution |= 1 << i;
             }
         }
@@ -1028,6 +1039,18 @@ short CNetManager::PlayerCount() {
     }
 
     return playerCount;
+}
+
+short CNetManager::SelfDistribution() {
+    return (1 << itsCommManager->myId);
+}
+
+short CNetManager::AlivePlayersDistribution() {
+    return activePlayersDistribution & ~deadOrDonePlayers;
+}
+
+bool CNetManager::IAmAlive() {
+    return AlivePlayersDistribution() & SelfDistribution();
 }
 
 void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {

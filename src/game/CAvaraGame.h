@@ -216,6 +216,7 @@ public:
     virtual void ReadGamePrefs();
 
     virtual void SendStartCommand();
+    virtual void StartIfReady();
     virtual void ResumeGame();
     virtual bool IsPlaying();
     virtual void HandleEvent(SDL_Event &event);
@@ -247,7 +248,7 @@ public:
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
     virtual long RoundTripToFrameLatency(long rtt);
-    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, const char *slowPlayer = nullptr);
+    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, CPlayerManager *slowPlayer = nullptr);
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(long ft);
