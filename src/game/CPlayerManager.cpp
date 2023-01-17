@@ -412,6 +412,14 @@ void CPlayerManagerImpl::SendFrame() {
 
         // theNetManager->FastTrackDeliver(outPacket);
         outPacket->flags |= kpUrgentFlag;
+        #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 1000 ~= 15sec
+        #if DONT_SEND_FRAME != 0
+            if (theNetManager->itsCommManager->myId == 1) {
+                if (ffi >= DONT_SEND_FRAME & ffi < DONT_SEND_FRAME+4)
+                    outPacket->distribution &= ~1; // don't send packet from player 2 to player 1
+                SDL_Log("ffi = %u, distro = %hx\n", ffi, outPacket->distribution);
+            }
+        #endif
         theComm->WriteAndSignPacket(outPacket);
     }
 
@@ -563,38 +571,40 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     break;
                 }
 
-                askAgainTime = quickTick + 62; //	~1 second
-
-                // only ask for resend if other player and I are both alive
-                if (itsPlayer->lives > 0 && theNetManager->IAmAlive()) {
-                    SendResendRequest(askCount);
+                if (theNetManager->IAmAlive()) {
+                    askAgainTime = quickTick + 30; //	~0.5 second
+                } else {
+                    // spectators can't afford to wait as long because players might still be going and
+                    // the FUNCTIONBUFFERS might overflow, so ask for resend every LT ticks (1.0LT = 3.84 ticks)
+                    askAgainTime = quickTick + (itsGame->latencyTolerance * (CLASSICFRAMETIME / MSEC_PER_TICK_COUNT) + 0.5);
                 }
-                askCount++;
+
+                SendResendRequest(askCount++);
+
                 if (askCount == 2) {
+                    SDL_Log("Waiting for '%s' to resend frame #%ld\n", GetPlayerName().c_str(), itsGame->frameNumber);
                     itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName, NULL);
                     // TODO: waiting for player dialog
                     // InitCursor();
                     // gApplication->SetCommandParams(STATUSSTRINGSLISTID, kmWaitingPlayers, true, 0);
                     // gApplication->BroadcastCommand(kBusyStartCmd);
-                    if (!theNetManager->IAmAlive()) {
-                        // copy held keys from the previous frame and hope for the best (frames might get fragged for dead player)
-                        SDL_Log("##### Spectator doesn't have functions for frame #%ld, winging it!\n", itsGame->frameNumber);
-                        frameFuncs[i] = {};
-                        frameFuncs[i].ft.held = frameFuncs[(FUNCTIONBUFFERS - 1) & (itsGame->frameNumber-1)].ft.held;
-                        frameFuncs[i].validFrame = itsGame->frameNumber;
-                    }
                 }
-
-                if (askCount == 3) {
-                    // pause the game so the server can boot the unresponsive player
-                    itsGame->statusRequest = kPauseStatus;
-                    itsGame->pausePlayer = theNetManager->itsCommManager->myId;
-
-                    itsGame->itsApp->AddMessageLine(
-                        "Pausing game because of unresponsive player: " + GetPlayerName(),
-                        MsgAlignment::Center,
-                        MsgCategory::Error
-                    );
+                else if (askCount > 3) {
+                    if (theNetManager->IAmAlive()) {
+                        // pause the game so the server can boot the unresponsive player
+                        itsGame->statusRequest = kPauseStatus;
+                        itsGame->pausePlayer = theNetManager->itsCommManager->myId;
+                        std::string msg = "Pausing game because of unresponsive player: " + GetPlayerName();
+                        if (theNetManager->itsCommManager->myId == 0) {
+                            msg += "\nRecommend running command: /kick " + std::to_string(slot + 1);
+                        }
+                        itsGame->itsApp->AddMessageLine(msg, MsgAlignment::Center, MsgCategory::Error);
+                    } else {
+                        itsGame->statusRequest = kAbortStatus;
+                        itsGame->itsApp->AddMessageLine(
+                            "Exiting game because of unrereceived data from: " + GetPlayerName(),
+                            MsgAlignment::Center, MsgCategory::Error);
+                    }
                     break;
                 }
             }
