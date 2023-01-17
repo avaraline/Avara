@@ -575,8 +575,8 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     askAgainTime = quickTick + 30; //	~0.5 second
                 } else {
                     // spectators can't afford to wait as long because players might still be going and
-                    // the FUNCTIONBUFFERS might overflow, so ask for resend every LT ticks (1.0LT = 3.84 ticks)
-                    askAgainTime = quickTick + (itsGame->latencyTolerance * (CLASSICFRAMETIME / MSEC_PER_TICK_COUNT) + 0.5);
+                    // the FUNCTIONBUFFERS might overflow, so ask for resend every 3.0LT ≈ (12 ticks = 200ms)
+                    askAgainTime = quickTick + (3.0 * (CLASSICFRAMETIME / MSEC_PER_TICK_COUNT) + 0.5);
                 }
 
                 SendResendRequest(askCount++);
