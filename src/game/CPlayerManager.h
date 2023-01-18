@@ -211,7 +211,7 @@ public:
 
     virtual void Dispose();
 
-    virtual Boolean TestHeldKey(short funcCode);
+    virtual Boolean TestKeyPressed(short funcCode);
 
     // virtual	void			FlushMessageText(Boolean forceAll);
     virtual void RosterMessageText(short len, const char *c);
