@@ -534,13 +534,6 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             quickTick = TickCount();
 
             if (quickTick - askAgainTime >= 0) {
-                if (quickTick - firstTime > 120) {
-                    if (TestKeyPressed(kfuAbortGame)) {
-                        itsGame->statusRequest = kAbortStatus;
-                        break;
-                    }
-                }
-
                 if (theNetManager->IAmAlive() || askCount > 0) {
                     askAgainTime = quickTick + MSEC_TO_TICK_COUNT(2000); //	2 seconds = 120 ticks
                 } else {
@@ -570,6 +563,12 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                         MsgAlignment::Center, MsgCategory::Error);
                     break;
                 }
+            }
+
+            // allow immediate abort after the kmWaitingForPlayer message displays
+            if (askCount >= 2 && TestKeyPressed(kfuAbortGame)) {
+                itsGame->statusRequest = kAbortStatus;
+                break;
             }
 
         } while (frameFuncs[i].validFrame != itsGame->frameNumber);
