@@ -128,6 +128,7 @@ public:
     virtual bool DoCommand(int theCommand) {return false;}
     virtual void MessageLine(short index, MsgAlignment align) {}
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) {}
+    virtual void RenderContents() {};
     virtual void DrawUserInfoPart(short i, short partList) {}
     virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) {}
     virtual void StartFrame(long frameNum) {}
