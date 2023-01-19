@@ -554,6 +554,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 if (askCount == 2) {
                     SDL_Log("Waiting for '%s' to resend frame #%ld\n", GetPlayerName().c_str(), itsGame->frameNumber);
                     itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName, NULL);
+                    itsGame->itsApp->RenderContents();  // force render now so message shows up
                     // TODO: waiting for player dialog
                     // InitCursor();
                     // gApplication->SetCommandParams(STATUSSTRINGSLISTID, kmWaitingPlayers, true, 0);

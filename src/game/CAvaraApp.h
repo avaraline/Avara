@@ -40,6 +40,7 @@ public:
     virtual void GameStarted(std::string set, std::string level) = 0;
     virtual void MessageLine(short index, MsgAlignment align) = 0;
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) = 0;
+    virtual void RenderContents() = 0;
     virtual std::deque<MsgLine>& MessageLines() = 0;
     virtual void DrawUserInfoPart(short i, short partList) = 0;
     virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) = 0;
@@ -96,6 +97,7 @@ public:
     virtual std::deque<MsgLine>& MessageLines() override;
     virtual void idle() override;
     virtual void drawContents() override;
+    virtual void RenderContents() override;
 
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
