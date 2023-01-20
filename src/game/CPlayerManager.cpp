@@ -146,41 +146,9 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
     return state;
 }
 
-Boolean CPlayerManagerImpl::TestHeldKey(short funcCode) {
-    /*
-    long			m0, m1;
-    KeyMap			keyMap;
-    char			*keyMapP;
-    long			*mapPtr, *keyFun;
-    short			i,j;
-    Handle			mapRes;
-
-    m0 = 0x80000000L >> funcCode;
-    m1 = 0x80000000L >> (funcCode - 32);
-
-    mapRes = itsGame->mapRes;
-    mapPtr = (long *)*mapRes;
-    keyMapP = (Ptr)keyMap;
-    GetKeys(keyMap);
-
-    for(i=0;i<128;i+=8)
-    {	char	bits;
-
-        bits = *keyMapP++;
-        if(bits)
-        {	j = 8;
-            while(j-- && bits)
-            {	if(bits < 0)
-                {	keyFun = &mapPtr[2*(i+j)];
-                    if((keyFun[0] & m0) || (keyFun[1] & m1))
-                        return true;
-                }
-                bits += bits;
-            }
-        }
-    }
-    */
-    return false;
+Boolean CPlayerManagerImpl::TestKeyPressed(short funcCode) {
+    CPlayerManagerImpl* localManager = ((CPlayerManagerImpl*)itsGame->GetLocalPlayer()->itsManager);
+    return TESTFUNC(funcCode, localManager->keysDown);
 }
 
 void FrameFunctionToPacket(FrameFunction *ff, PacketInfo *outPacket, short slot);
@@ -536,6 +504,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     // SDL_Log("CPlayerManagerImpl::GetFunctions, %ld, %hd\n", itsGame->frameNumber, slot);
     uint32_t ffi = (itsGame->frameNumber);
     short i = (FUNCTIONBUFFERS - 1) & ffi;
+    static int WAITING_MESSAGE_COUNT = 2;
 
     // if player is finished don't wait for their frames to sync up
     if (frameFuncs[i].validFrame != itsGame->frameNumber && itsPlayer->lives > 0) {
@@ -566,53 +535,48 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             quickTick = TickCount();
 
             if (quickTick - askAgainTime >= 0) {
-                if (quickTick - firstTime > 120 && TestHeldKey(kfuAbortGame)) {
-                    itsGame->statusRequest = kAbortStatus;
-                    break;
-                }
-
-                if (theNetManager->IAmAlive()) {
-                    askAgainTime = quickTick + 62; //	~1 second
+                if (theNetManager->IAmAlive() || askCount > 0) {
+                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(2000); //	2 seconds = 120 ticks
                 } else {
-                    // spectators can't afford to wait as long because players might still be going and
-                    // the FUNCTIONBUFFERS might overflow, so ask for resend every 3.0LT ≈ (12 ticks = 200ms)
-                    askAgainTime = quickTick + (3.0 * (CLASSICFRAMETIME / MSEC_PER_TICK_COUNT) + 0.5);
+                    // spectators may not be able to wait as long because players could still be going and
+                    // the FUNCTIONBUFFERS might overflow, so ask for first resend within 2.0LT ≈ (8 ticks = 133ms)
+                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(2.0*CLASSICFRAMETIME) + 0.5;
                 }
 
                 SendResendRequest(askCount++);
 
-                if (askCount == 2) {
+                if (askCount == WAITING_MESSAGE_COUNT) {
                     SDL_Log("Waiting for '%s' to resend frame #%ld\n", GetPlayerName().c_str(), itsGame->frameNumber);
-                    itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName, NULL);
+                    itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName);
+                    itsGame->itsApp->RenderContents();  // force render now so message shows up
                     // TODO: waiting for player dialog
                     // InitCursor();
                     // gApplication->SetCommandParams(STATUSSTRINGSLISTID, kmWaitingPlayers, true, 0);
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                 }
-                else if (askCount > 3) {
-                    if (theNetManager->IAmAlive()) {
-                        // pause the game so the server can boot the unresponsive player
-                        itsGame->statusRequest = kPauseStatus;
-                        itsGame->pausePlayer = theNetManager->itsCommManager->myId;
-                        std::string msg = "Pausing game because of unresponsive player: " + GetPlayerName();
-                        if (theNetManager->itsCommManager->myId == 0) {
-                            msg += "\nRecommend running command: /kick " + std::to_string(slot + 1);
-                        }
-                        itsGame->itsApp->AddMessageLine(msg, MsgAlignment::Center, MsgCategory::Error);
-                    } else {
-                        itsGame->statusRequest = kAbortStatus;
-                        itsGame->itsApp->AddMessageLine(
-                            "Exiting game because of unrereceived data from: " + GetPlayerName(),
-                            MsgAlignment::Center, MsgCategory::Error);
-                    }
+
+                // spectator gives up after newer frames appear in the frameFuncs buffer
+                // which indicates the buffer has wrapped around and this frame won't be arriving
+                if (!theNetManager->IAmAlive() && frameFuncs[i].validFrame > itsGame->frameNumber) {
+                    itsGame->statusRequest = kAbortStatus;
+                    itsGame->itsApp->AddMessageLine(
+                        "Exiting game - missing data from: " + GetPlayerName(),
+                        MsgAlignment::Center, MsgCategory::Error);
                     break;
                 }
             }
 
+            // allow immediate abort after the kmWaitingForPlayer message displays
+            if (askCount >= 2 && TestKeyPressed(kfuAbortGame)) {
+                itsGame->statusRequest = kAbortStatus;
+                break;
+            }
+
         } while (frameFuncs[i].validFrame != itsGame->frameNumber);
 
-        if (askCount > 1) {
+        if (askCount >= WAITING_MESSAGE_COUNT) {
             gApplication->BroadcastCommand(kBusyEndCmd);
+            itsGame->itsApp->AddMessageLine("...resuming game", MsgAlignment::Center);
             // HideCursor();
         }
 

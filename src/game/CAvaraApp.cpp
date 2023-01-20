@@ -139,10 +139,7 @@ void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
     if(itsGame->GameTick()) {
-        glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        drawContents();
-        SDL_GL_SwapWindow(mSDLWindow);
+        RenderContents();
     }
 }
 
@@ -157,6 +154,14 @@ void CAvaraAppImpl::drawContents() {
         previewAngle += FIX3(1);
     }
     itsGame->Render(mNVGContext);
+}
+
+// display only the game screen, not the widgets
+void CAvaraAppImpl::RenderContents() {
+    glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    drawContents();
+    SDL_GL_SwapWindow(mSDLWindow);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
@@ -400,7 +405,7 @@ void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1,
             buffa << "Game paused by " << a << ".";
             break;
         case kmWaitingForPlayer:
-            buffa << "Waiting for " << a << ".";
+            buffa << "Waiting for " << a << "... (abort to exit)";
             category = MsgCategory::Error;
             break;
         case kmAKilledBPlayer:

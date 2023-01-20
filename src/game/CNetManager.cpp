@@ -574,7 +574,7 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     do {
         if (TickCount() > debugTime) {
             SDL_Log("CNetManager::GatherPlayers loop\n");
-            debugTime = TickCount() + 1000 / MSEC_PER_TICK_COUNT;
+            debugTime = TickCount() + MSEC_TO_TICK_COUNT(1000);
         }
         ProcessQueue();
         goAhead = (TickCount() - lastTime < 1800);
