@@ -405,7 +405,7 @@ void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1,
             buffa << "Game paused by " << a << ".";
             break;
         case kmWaitingForPlayer:
-            buffa << "Waiting for " << a << ".";
+            buffa << "Waiting for " << a << "... (abort to exit)";
             category = MsgCategory::Error;
             break;
         case kmAKilledBPlayer:

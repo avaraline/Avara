@@ -43,7 +43,7 @@ public:
     virtual void RenderContents() = 0;
     virtual std::deque<MsgLine>& MessageLines() = 0;
     virtual void DrawUserInfoPart(short i, short partList) = 0;
-    virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) = 0;
+    virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2 = NULL) = 0;
     virtual void StartFrame(long frameNum) = 0;
     virtual void BrightBox(long frameNum, short position) = 0;
     virtual void LevelReset() = 0;

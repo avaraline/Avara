@@ -504,6 +504,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     // SDL_Log("CPlayerManagerImpl::GetFunctions, %ld, %hd\n", itsGame->frameNumber, slot);
     uint32_t ffi = (itsGame->frameNumber);
     short i = (FUNCTIONBUFFERS - 1) & ffi;
+    static int WAITING_MESSAGE_COUNT = 2;
 
     // if player is finished don't wait for their frames to sync up
     if (frameFuncs[i].validFrame != itsGame->frameNumber && itsPlayer->lives > 0) {
@@ -544,9 +545,9 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 
                 SendResendRequest(askCount++);
 
-                if (askCount == 2) {
+                if (askCount == WAITING_MESSAGE_COUNT) {
                     SDL_Log("Waiting for '%s' to resend frame #%ld\n", GetPlayerName().c_str(), itsGame->frameNumber);
-                    itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName, NULL);
+                    itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName);
                     itsGame->itsApp->RenderContents();  // force render now so message shows up
                     // TODO: waiting for player dialog
                     // InitCursor();
@@ -573,8 +574,9 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 
         } while (frameFuncs[i].validFrame != itsGame->frameNumber);
 
-        if (askCount > 1) {
+        if (askCount >= WAITING_MESSAGE_COUNT) {
             gApplication->BroadcastCommand(kBusyEndCmd);
+            itsGame->itsApp->AddMessageLine("...resuming game", MsgAlignment::Center);
             // HideCursor();
         }
 
