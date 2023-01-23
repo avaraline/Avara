@@ -24,5 +24,6 @@ protected:
     nanogui::Button *startBtn;
     nanogui::TextBox *latencyBox;
     nanogui::CheckBox *autoLatencyBox;
+    nanogui::ComboBox *frameTimeBox;
 
 };

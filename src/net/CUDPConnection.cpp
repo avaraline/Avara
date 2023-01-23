@@ -11,22 +11,24 @@
 
 #include "CUDPComm.h"
 #include "System.h"
+#include "CAvaraGame.h"  // gCurrentGame->fpsScale
 #include <algorithm>
 
 #include <SDL.h>
 
-#define kInitialRetransmitTime 480 //	2	seconds
-#define kInitialRoundTripTime 240 //	<1 second
-#define kMaxAllowedRetransmitTime 960 //	4 seconds
-#define kAckRetransmitBase 10
-#define kULPTimeOut (7324 * 4) //	30*4 seconds
-#define kMaxTransmitQueueLength 128 //	128 packets going out...
-#define kMaxReceiveQueueLength 32 //	32 packets...arbitrary guess
+#define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
+#define kInitialRoundTripTime     (500 / MSEC_PER_GET_CLOCK)   // 0.5 second
+#define kInitialRoundTripVar      long(CLASSICFRAMECLOCK*CLASSICFRAMECLOCK)
+#define kMaxAllowedRetransmitTime (4000 / MSEC_PER_GET_CLOCK)  // 4 seconds
+#define kAckRetransmitBase (41 / MSEC_PER_GET_CLOCK)
+#define kULPTimeOut (120000 / MSEC_PER_GET_CLOCK) //	120 seconds
+#define kMaxTransmitQueueLength 128*8 //	128 packets going out... (times 8 for high FPS)
+#define kMaxReceiveQueueLength 32*8 //	32 packets...arbitrary guess
 
-#define RTTSMOOTHFACTOR_UP 80
+#define RTTSMOOTHFACTOR_UP 100
 #define RTTSMOOTHFACTOR_DOWN 160
 
-#define MAX_RESENDS_WITHOUT_RECEIVE 4
+#define MAX_RESENDS_WITHOUT_RECEIVE 3
 
 #if PACKET_DEBUG || LATENCY_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
@@ -70,7 +72,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
-    varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
+    varRoundTripTime = kInitialRoundTripVar;
     haveToSendAck = false;
     nextAckTime = 0;
 
@@ -94,6 +96,7 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     totalSent = 0;
     totalResent = 0;
     numResendsWithoutReceive = 0;
+    recentResendRate = 0;
 }
 
 void CUDPConnection::FlushQueues() {
@@ -318,12 +321,16 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
             #endif
         } else {
             totalSent++;
+            static double RECENT_RESEND_SMOOTH = (gCurrentGame->fpsScale/80.0);
+            recentResendRate *= (1.0-RECENT_RESEND_SMOOTH);
             if (thePacket->birthDate != thePacket->nextSendTime) {
                 totalResent++;
                 numResendsWithoutReceive++;
+                recentResendRate += RECENT_RESEND_SMOOTH;
                 #if PACKET_DEBUG | LATENCY_DEBUG
-                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d, age=%ld, percentResends = %.1f, numResendsWithoutReceive = %ld\n",
-                            myId, (uint16_t)thePacket->serialNumber, curTime - thePacket->birthDate, 100.0*totalResent/totalSent, numResendsWithoutReceive);
+                    SDL_Log("CUDPConnection::GetOutPacket   RESENDING cn=%d sn=%d age=%ld resend:count=%ld total=%.1f%% recent=%.1f%%\n",
+                            myId, (uint16_t)thePacket->serialNumber, curTime - thePacket->birthDate,
+                            numResendsWithoutReceive, 100.0*totalResent/totalSent, 100.0*recentResendRate);
                 #endif
             }
             #if PACKET_DEBUG
@@ -335,15 +342,21 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long ur
     return thePacket;
 }
 
-bool UseCommandForStats(long command) {
+float CommandMultiplierForStats(long command) {
+    float multiplier = 0;
     // only use faster commands for stats
+    // keep multiplier value below RTTSMOOTHFACTOR_UP.
     switch(command) {
+        case kpKeyAndMouse:
+            // normal game play commands (multiply by fpsScale to make influence consistent across frame rates)
+            multiplier = gCurrentGame->fpsScale;
+            break;
        case kpPing:
-       case kpRosterMessage:
-       case kpKeyAndMouse:
-           return true;
+           // ping times are an important influence on RTT (not affected by frame rate)
+           multiplier = (RTTSMOOTHFACTOR_UP) * 0.1;
+           break;
     }
-    return false;
+    return multiplier;
 }
 
 void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
@@ -354,23 +367,41 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
         long roundTrip;
 
         roundTrip = when - thePacket->birthDate;
+        float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
 
-        if (maxValid == 4) {
+        if (uint16_t(maxValid) <= 10) {
+            // use best RTT of early message(s) to prime initial values of RTT mean/var
             if (roundTrip < meanRoundTripTime) {
                 meanRoundTripTime = roundTrip;
-                varRoundTripTime = roundTrip * roundTrip;  // err on the high side initially
+                varRoundTripTime = std::min(roundTrip*roundTrip, kInitialRoundTripVar);
             }
-        } else if (UseCommandForStats(thePacket->packet.command)) {
+            #if PACKET_DEBUG || LATENCY_DEBUG
+                SDL_Log("INITIALIZING RTT...            cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f, maxValid=%hd\n",
+                        myId, thePacket->packet.command, roundTrip, meanRoundTripTime, sqrt(varRoundTripTime), uint16_t(maxValid));
+            #endif
+        } else if (commandMultiplier > 0) {
             // compute an exponential moving average & variance of the roundTrip time
             // see: https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
             float difference = roundTrip - meanRoundTripTime;
-            // quicker to move up on latency spikes, slower to move down
-            float alpha = itsOwner->frameTimeScale / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
-            if (thePacket->sendCount > 1) {
-                // Don't ignore resent packets but de-weight them pretty heavily.
-                alpha /= (thePacket->sendCount*thePacket->sendCount);
+            // if kpPing packet RTT is above the mean by more than a full classic frame,
+            // then it's an outlier...de-weight it heavily, but don't remove it
+            // completely in case ALL packets are suddenly worse
+            if (thePacket->packet.command == kpPing && difference*MSEC_PER_GET_CLOCK > CLASSICFRAMETIME) {
+                double reduction = difference*difference / varRoundTripTime;
+                #if PACKET_DEBUG || LATENCY_DEBUG
+                    SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f OUTLIER!! (rtt-mean) = %.1lf * stddev\n",
+                            myId, thePacket->packet.command, roundTrip, meanRoundTripTime, sqrt(reduction));
+                #endif
+
+                // ratio can be less than 1 if variance is high, guard to ensure alpha < 1.0
+                reduction = std::max(4.0, reduction);
+                // de-weight this packet
+                commandMultiplier /= reduction;
             }
+
+            // quicker to move up on latency spikes, slower to move down
+            float alpha = commandMultiplier / ((difference > 0) ? RTTSMOOTHFACTOR_UP : RTTSMOOTHFACTOR_DOWN);
 
             float increment = alpha * difference;
             meanRoundTripTime = meanRoundTripTime + increment;
@@ -384,12 +415,19 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
             retransmitTime = std::min(retransmitTime, (long)kMaxAllowedRetransmitTime);
 
-            // If we want the game to stay smooth, resend urgent/game packets near the overall LT (max(RTT)/2) so that
-            // lost packets can be retransmitted and have a chance of getting there in time to be only 1 frame late.
+            // If we want the game to stay smooth, resend urgent/game packets with the goal that both the orignal packet and
+            // the 1st resend packet could arrive before they need to be acted on.
+            // ...at difference between actual LT and mean roundTripTime
+            // for this connection (minus a small buffer) to ensure that the 1st re-sent packet has better than a 50% chance
+            // of being received on time (within LT*2) on the SLOWEST connection (higher probability for all other connections).
             // This may result in extra re-sends but should help the game flow, especially if a connection is dropping packets.
             // This latency estimate goes across all active connections so that faster connections won't be penalized and
             // have to re-send to each other as often.
-            urgentRetransmitTime = std::min(LatencyEstimate(), itsOwner->urgentResendTime);
+            static float RESEND_PACKET_BUFFER = 16.0 / MSEC_PER_GET_CLOCK;  // want resent packet to arrive roughly this many msec before 2*LT
+            urgentRetransmitTime =
+                2*gCurrentGame->latencyTolerance * CLASSICFRAMECLOCK - meanRoundTripTime - RESEND_PACKET_BUFFER;
+            // make sure it doesn't go below urgentResendTime or above retransmitTime
+            urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
             urgentRetransmitTime = std::min(urgentRetransmitTime, (long)retransmitTime);
 
             #if PACKET_DEBUG || LATENCY_DEBUG
@@ -682,7 +720,7 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     retransmitTime = kInitialRetransmitTime;
     urgentRetransmitTime = itsOwner->urgentResendTime;
     meanRoundTripTime = kInitialRoundTripTime;
-    varRoundTripTime = meanRoundTripTime*meanRoundTripTime;
+    varRoundTripTime = kInitialRoundTripVar;
     // pessimistTime = roundTripTime;
     // optimistTime = roundTripTime;
     // realRoundTrip = roundTripTime;

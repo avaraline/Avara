@@ -41,9 +41,12 @@ public:
     MessageRecord stopMsg;
     Boolean enabled;
 
+    Vector attraction;
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void FrameAction();
     virtual void TeleportPlayer(CAbstractPlayer *thePlayer);
     virtual Boolean ReceivePlayer(CAbstractPlayer *thePlayer);
+    virtual bool HandlesFastFPS() { return true; }
 };

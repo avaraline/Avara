@@ -14,4 +14,5 @@ class CRamp : public CPlacedActors {
 public:
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
+    virtual bool UseForRandomIncarnator() { return true; }
 };

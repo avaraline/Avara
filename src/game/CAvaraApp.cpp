@@ -29,6 +29,7 @@
 #include "Resource.h"
 #include "System.h"
 #include "InfoMessages.h"
+#include "Messages.h"
 #include "Beeper.h"
 #include "httplib.h"
 #include <chrono>
@@ -64,9 +65,8 @@ void TrackerPinger(CAvaraAppImpl *app) {
     }
 }
 
-
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-    itsGame = new CAvaraGame(64);
+    itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
@@ -109,8 +109,19 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
 
-
     LoadDefaultOggFiles();
+
+    // register and handle text commands
+    itsTui = new CommandManager(this);
+
+    MessageLine(kmWelcome1, MsgAlignment::Center);
+    AddMessageLine(
+        "Type /help and press return for a list of chat commands.",
+        MsgAlignment::Center
+    );
+
+    // load up a random decent starting level
+    itsTui->ExecuteMatchingCommand("/rand -normal -tre avaraline emo", CPlayerManagerImpl::LocalPlayer());
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -128,10 +139,7 @@ void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
     if(itsGame->GameTick()) {
-        glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        drawContents();
-        SDL_GL_SwapWindow(mSDLWindow);
+        RenderContents();
     }
 }
 
@@ -146,6 +154,14 @@ void CAvaraAppImpl::drawContents() {
         previewAngle += FIX3(1);
     }
     itsGame->Render(mNVGContext);
+}
+
+// display only the game screen, not the widgets
+void CAvaraAppImpl::RenderContents() {
+    glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    drawContents();
+    SDL_GL_SwapWindow(mSDLWindow);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
@@ -183,7 +199,7 @@ void CAvaraAppImpl::drawAll() {
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
     animatePreview = false;
     itsGame->itsView->showTransparent = false;
-    MessageLine(kmStarted, centerAlign);
+    MessageLine(kmStarted, MsgAlignment::Center);
     levelWindow->AddRecent(set, level);
 }
 
@@ -295,63 +311,93 @@ CAvaraGame* CAvaraAppImpl::GetGame() {
 CNetManager* CAvaraAppImpl::GetNet() {
     return gameNet;
 }
+
+CommandManager* CAvaraAppImpl::GetTui() {
+    return itsTui;
+}
+
 void CAvaraAppImpl::SetNet(CNetManager *theNet) {
     gameNet = theNet;
 }
 
-void CAvaraAppImpl::AddMessageLine(std::string line) {
-    SDL_Log("Message: %s", line.c_str());
-    messageLines.push_back(line);
-    if (messageLines.size() > 5) {
-        messageLines.pop_front();
+void CAvaraAppImpl::AddMessageLine(
+    std::string lines,
+    MsgAlignment align,
+    MsgCategory category
+    ) {
+    std::istringstream iss(lines);
+    std::string line;
+    MsgLine msg;
+
+    msg.align = align;
+    msg.category = category;
+
+    // split string on newlines
+    while(std::getline(iss, line)) {
+        SDL_Log("Message: %s", line.c_str());
+        msg.text = line;
+        messageLines.push_back(msg);
+        if (messageLines.size() > 5) {
+            messageLines.pop_front();
+        }
     }
 }
-void CAvaraAppImpl::MessageLine(short index, short align) {
+
+void CAvaraAppImpl::MessageLine(short index, MsgAlignment align) {
     SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
     switch(index) {
         case kmWelcome1:
         case kmWelcome2:
         case kmWelcome3:
         case kmWelcome4:
-            AddMessageLine("Welcome to Avara.");
+            AddMessageLine("Welcome to Avara.", align);
             break;
         case kmStarted:
-            AddMessageLine("Starting new game.");
+            AddMessageLine("Starting new game.", align);
             break;
         case kmRestarted:
-            AddMessageLine("Resuming game.");
+            AddMessageLine("Resuming game.", align);
             break;
         case kmAborted:
-            AddMessageLine("Aborted.");
+            AddMessageLine("Aborted.", align);
             break;
         case kmWin:
-            AddMessageLine("Mission complete.");
+            AddMessageLine("Mission complete.", align);
             break;
         case kmGameOver:
-            AddMessageLine("Game over.");
+            AddMessageLine("Game over.", align);
             break;
         case kmSelfDestruct:
-            AddMessageLine("Self-destruct activated.");
+            AddMessageLine("Self-destruct activated.", align);
             break;
         case kmFragmentAlert:
-            AddMessageLine("ALERT: Reality fragmentation detected!");
+            AddMessageLine(
+                "ALERT: Reality fragmentation detected!",
+                align,
+                MsgCategory::Error
+            );
             break;
         case kmRefusedLogin:
-            AddMessageLine("Login refused.");
+            AddMessageLine(
+                "Login refused.",
+                align,
+                MsgCategory::Error
+            );
             break;
     }
 
 }
 
-std::deque<std::string>& CAvaraAppImpl::MessageLines() {
+std::deque<MsgLine>& CAvaraAppImpl::MessageLines() {
     return messageLines;
 }
 void CAvaraAppImpl::LevelReset() {}
-void CAvaraAppImpl::ParamLine(short index, short align, StringPtr param1, StringPtr param2) {
+void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) {
     SDL_Log("CAvaraAppImpl::ParamLine(%d)\n", index);
     std::stringstream buffa;
     std::string a = std::string((char *)param1 + 1, param1[0]);
     std::string b;
+    MsgCategory category = MsgCategory::System;
     if (param2) b = std::string((char *)param2 + 1, param2[0]);
 
     switch(index) {
@@ -359,29 +405,32 @@ void CAvaraAppImpl::ParamLine(short index, short align, StringPtr param1, String
             buffa << "Game paused by " << a << ".";
             break;
         case kmWaitingForPlayer:
-            buffa << "Waiting for " << a << ".";
+            buffa << "Waiting for " << a << "... (abort to exit)";
+            category = MsgCategory::Error;
             break;
         case kmAKilledBPlayer:
             buffa << a << " killed " << b << ".";
             break;
         case kmUnavailableNote:
             buffa << a << " is busy.";
+            category = MsgCategory::Error;
             break;
         case kmStartFailure:
             buffa << a << " wasn't ready.";
+            category = MsgCategory::Error;
             break;
     }
 
-    AddMessageLine(buffa.str());
+    AddMessageLine(buffa.str(), align, category);
 }
 void CAvaraAppImpl::StartFrame(long frameNum) {}
 
-void CAvaraAppImpl::StringLine(std::string theString, short align) {
-    AddMessageLine(theString.c_str());
+void CAvaraAppImpl::StringLine(std::string theString, MsgAlignment align) {
+    AddMessageLine(theString.c_str(), align, MsgCategory::Level);
 }
 
 void CAvaraAppImpl::ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {
-    ParamLine(index, 0, param1, param2);
+    ParamLine(index, MsgAlignment::Left, param1, param2);
 }
 
 void CAvaraAppImpl::TrackerUpdate() {

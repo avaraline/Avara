@@ -1,0 +1,155 @@
+{
+  "LEDI": [
+    {
+      "Alf": "air-voss.alf",
+      "Name": "Air Voss",
+      "Message": "A mash-up of Baghdad, Choke, and Showdown. Low gravity and extra powerful grenades only. Five lives."
+    },
+    {
+      "Alf": "baghdad-3.alf",
+      "Name": "Baghdad 3: Electric Boogaloo",
+      "Message": "The unwanted stepchild of all Baghdad clones."
+    },
+    {
+      "Alf": "choke-daddy.alf",
+      "Name": "Choke Daddy",
+      "Message": "A mash-up of Baghdad and Choke. Normal gravity with extra powerful missiles."
+    },
+    {
+      "Alf": "choke-daddy-down.alf",
+      "Name": "Choke Daddy Down",
+      "Message": "A mash-up of Baghdad, Choke, and Showdown. Low gravity with extra powerful grenades and missiles. Five lives."
+    },
+    {
+      "Alf": "niflheim.alf",
+      "Name": "Niflheim",
+      "Message": "Seven minute Klondike killfest, with wig reveal! Patented Corpserot® missiles (a product of the Grimdark Corporation) are faster and more accurate at the expense of damage."
+    },
+    {
+      "Alf": "watery-keep.alf",
+      "Name": "Watery Keep",
+      "Message": "Ancient legend has it, water was transported here via a tube. Updated for 2022."
+    }
+  ],
+  "HSND": {
+    "3000": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "3000.ogg",
+      "Wav": "3000.wav"
+    },
+    "3001": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "3001.ogg",
+      "Wav": "3001.wav"
+    },
+    "3002": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "3002.ogg",
+      "Wav": "3002.wav"
+    },
+    "3003": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "3003.ogg",
+      "Wav": "3003.wav"
+    },
+    "3004": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "3004.ogg",
+      "Wav": "3004.wav"
+    },
+    "3005": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0092774853131914,
+      "Sound": 0,
+      "Ogg": "3005.ogg",
+      "Wav": "3005.wav"
+    }
+  },
+  "HULL": {
+    "131": {
+      "Hull Res ID": 215,
+      "Max Missiles": 5,
+      "Max Grenades": 8,
+      "Max boosters": 1,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    },
+    "132": {
+      "Hull Res ID": 216,
+      "Max Missiles": 7,
+      "Max Grenades": 11,
+      "Max boosters": 1,
+      "Mass": 155.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0249942778667887,
+      "Max Shields": 1.0,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.0,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.1000076295109484,
+      "Jump Power": 1.0
+    },
+    "133": {
+      "Hull Res ID": 217,
+      "Max Missiles": 12,
+      "Max Grenades": 16,
+      "Max boosters": 1,
+      "Mass": 170.0,
+      "Max Energy": 1.1000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 1.1000076295109484,
+      "Shield Charge": 1.0,
+      "Min Shot": 1.1000076295109484,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.0,
+      "Jump Power": 1.1000076295109484
+    }
+  }
+}

@@ -37,7 +37,6 @@ CAbstractActor *CHologramActor::EndScript() {
         thePart = (CBSPPart *)partList[0];
         if (ReadLongVar(iIsAmbient) > 0)
             thePart->userFlags |= CBSPUserFlags::kIsAmbient;
-        thePart->userFlags |= CBSPUserFlags::kCullBackfaces;
         thePart->Reset();
         thePart->RotateZ(ReadFixedVar(iRoll));
         thePart->RotateOneY(heading);

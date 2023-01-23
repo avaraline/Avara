@@ -18,24 +18,6 @@
 
 #include <stb_vorbis.h>
 
-// path separator
-#if defined(_WIN32)
-#define PATHSEP "\\"
-#else
-#define PATHSEP "/"
-#endif
-
-// files stuff
-#define RSRCDIR "rsrc"
-#define LEVELDIR "levels"
-#define SETFILE "set.json"
-#define ALFDIR "alf"
-#define BSPSDIR "bsps"
-#define BSPSEXT ".json"
-#define DEFAULTSCRIPT "default.avarascript"
-#define OGGDIR "ogg"
-#define WAVDIR "wav"
-
 static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
 
 static std::string currentResource("");

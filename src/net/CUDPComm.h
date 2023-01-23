@@ -23,6 +23,10 @@
 #define CRAMPACKSIZE 64
 #define kClientConnectTimeoutTicks 600 //(60*30)
 
+// Should be at most half of the lowest frameTime.  In classic game this was 4.096 ms.
+#define MSEC_PER_GET_CLOCK (1)
+#define CLASSICFRAMECLOCK (CLASSICFRAMETIME / MSEC_PER_GET_CLOCK)  // classic frameTime (64ms) in units of GetClock()
+
 enum { udpCramInfo }; //	Selectors for kpPacketProtocolControl packer p1 params.
 
 class CUDPComm : public CCommManager {

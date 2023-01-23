@@ -1,234 +1,230 @@
 <map>
-  <SkyColor n="1024" fill="#ffffff" frame="#ff6600" />
-  <GroundColor fill="#bbbbbb" />
-  <set designer="Plastic Chicken" information="Biohazard...radioactivity...humm...I wonder what is in this barrel?  Maybe I'll shoot it...
-
-Limited to 6 minutes of game play.
-
-Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="7" hull.0="1007" hull.1="hull[0]" hull.2="hull[0]" />
-  <Incarnator y="10" cx="29.375" cz="29.375" angle="315" />
+  <SkyColor n="1024" fill="#ffffff" frame="#ff7c00" />
+  <GroundColor fill="#c7c7c7" />
+  <set designer="Plastic Chicken" information="Biohazard...radioactivity...humm...I wonder what is in this barrel?  Maybe I'll shoot it...&#10;&#10;&#10;&#10;Limited to 6 minutes of game play.&#10;&#10;&#10;&#10;Ammo is limited and scarce...aim well." defaultLives="3" highWall="20" lowWall="7" hull.0="1007" hull.1="hull[0]" hull.2="hull[0]" />
+  <Incarnator y="10" cx="29.375" cz="29.375" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="30.625" cz="33.75" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="30.625" cz="33.75" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="30.625" cz="33.75" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="30.625" cz="33.75" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="31.25" cz="36.875" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="31.25" cz="36.875" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="31.25" cz="36.875" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="31.25" cz="36.875" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="34.375" cz="39.375" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="34.375" cz="39.375" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="34.375" cz="39.375" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="34.375" cz="39.375" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="36.25" cz="33.125" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="36.25" cz="33.125" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="36.25" cz="33.125" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="36.25" cz="33.125" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="34.375" cz="28.125" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="34.375" cz="28.125" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="34.375" cz="28.125" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="34.375" cz="28.125" angle="135" />
   <set wallHeight="2" />
-  <Wall fill="#ffff00" frame="#000000" x="40.3125" z="32.5" w="0.625" d="23.75" h="0" />
+  <Wall fill="#fffb00" frame="#000000" x="40.3125" z="32.5" w="0.625" d="23.75" h="0" />
   <set wallHeight="4" />
-  <Wall fill="#888888" frame="#000000" x="47.5" z="62.8125" w="3.75" d="4.375" h="0" />
+  <Wall fill="#9a9a9a" frame="#000000" x="47.5" z="62.8125" w="3.75" d="4.375" h="0" />
   <set baseHeight=".1" wallHeight="3.8" />
-  <Wall fill="#dddddd" frame="#000000" x="47.5" z="60.625" w="2.5" d="0" h="0" />
+  <Wall fill="#e4e4e4" frame="#000000" x="47.5" z="60.625" w="2.5" d="0" h="0" />
   <set baseHeight="1.5" wallHeight="1" />
-  <Hologram shape="5498" scale=".4" y="1.4" fill="#cc9900" frame="#000000" cx="48.125" cz="60.625" angle="180" />
+  <Hologram shape="5498" scale=".4" y="1.4" fill="#d6a800" frame="#000000" cx="48.125" cz="60.625" angle="0" />
   <set wallHeight="highWall" baseHeight="0" />
-  <Wall fill="#cccc99" frame="#000000" x="25.3125" z="42.8125" w="0.625" d="45.625" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="39.6875" z="65.3125" w="28.125" d="0.625" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="58.125" z="20.3125" w="65" d="0.625" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="53.4375" z="24.375" w="0.625" d="7.5" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="53.4375" z="36.875" w="0.625" d="7.5" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="53.4375" z="49.375" w="0.625" d="7.5" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="53.4375" z="61.5625" w="0.625" d="6.875" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="25.3125" z="42.8125" w="0.625" d="45.625" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="39.6875" z="65.3125" w="28.125" d="0.625" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="58.125" z="20.3125" w="65" d="0.625" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="53.4375" z="24.375" w="0.625" d="7.5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="53.4375" z="36.875" w="0.625" d="7.5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="53.4375" z="49.375" w="0.625" d="7.5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="53.4375" z="61.5625" w="0.625" d="6.875" h="0" />
   <set wallHeight=".8" />
-  <Wall fill="#666633" frame="#000000" x="57.1875" z="43.125" w="6.875" d="45" h="0" />
-  <Ramp deltaY=".8" fill="#666633" frame="#000000" x="53.4375" z="43.125" w="0.625" d="5" h="0" angle="90" />
+  <Wall fill="#797842" frame="#000000" x="57.1875" z="43.125" w="6.875" d="45" h="0" />
+  <Ramp deltaY=".8" fill="#797842" frame="#000000" x="53.4375" z="43.125" w="0.625" d="5" h="0" angle="270" />
   <set wallHeight="2.1" />
-  <Wall fill="#cccc99" frame="#000000" x="53.4375" z="30.625" w="0.625" d="5" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="53.4375" z="55.625" w="0.625" d="5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="53.4375" z="30.625" w="0.625" d="5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="53.4375" z="55.625" w="0.625" d="5" h="0" />
   <set wallHeight="2.5" baseHeight="2" wallYon=".001" />
-  <Wall fill="#aaaaaa" frame="#000000" x="53.4375" z="30.625" w="0.625" d="5" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="53.4375" z="55.625" w="0.625" d="5" h="0" />
+  <Wall fill="#b8b8b8" frame="#000000" x="53.4375" z="30.625" w="0.625" d="5" h="0" />
+  <Wall fill="#b8b8b8" frame="#000000" x="53.4375" z="55.625" w="0.625" d="5" h="0" />
   <set baseHeight="4.5" wallHeight="highWall -4.5" wallYon="0" />
-  <Wall fill="#cccc99" frame="#000000" x="53.4375" z="30.625" w="0.625" d="5" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="53.4375" z="55.625" w="0.625" d="5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="53.4375" z="30.625" w="0.625" d="5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="53.4375" z="55.625" w="0.625" d="5" h="0" />
   <set baseHeight="0" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="28.125" cz="23.125" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="28.125" cz="23.125" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="28.125" cz="23.125" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="28.125" cz="23.125" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="35.625" cz="23.125" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="35.625" cz="23.125" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="35.625" cz="23.125" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="35.625" cz="23.125" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="33.75" cz="25.625" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="33.75" cz="25.625" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="33.75" cz="25.625" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="33.75" cz="25.625" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="30" cz="26.25" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="30" cz="26.25" angle="315" />
-  <Hologram shape="5499" y="2" scale=".4" fill="#ffff00" frame="#000000" cx="53.75" cz="39.375" angle="270" />
-  <Hologram shape="5498" y="2.8" scale=".4" fill="#ffff00" frame="#000000" cx="53.75" cz="39.375" angle="270" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="30" cz="26.25" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="30" cz="26.25" angle="135" />
+  <Hologram shape="5499" y="2" scale=".4" fill="#fffb00" frame="#000000" cx="53.75" cz="39.375" angle="90" />
+  <Hologram shape="5498" y="2.8" scale=".4" fill="#fffb00" frame="#000000" cx="53.75" cz="39.375" angle="90" />
   <set baseHeight=".8" wallHeight="4.2" />
-  <WallDoor hitMsg="@openNuke" open="@openNuke" close="@closeNuke" openSound="false" closeSound="false" deltaY="0" deltaX="0" deltaZ="5" didOpen="@closeNuke" closeDelay="100" guardDelay="0" isTarget="true" fill="#cc6666" frame="#000000" x="54.0625" z="43.125" w="0.625" d="5" h="0" />
+  <WallDoor hitMsg="@openNuke" open="@openNuke" close="@closeNuke" openSound="false" closeSound="false" deltaY="0" deltaX="0" deltaZ="5" didOpen="@closeNuke" closeDelay="100" guardDelay="0" isTarget="true" fill="#d77c79" frame="#000000" x="54.0625" z="43.125" w="0.625" d="5" h="0" />
   <set baseHeight="5" wallHeight="highWall -5" />
-  <Wall fill="#cc9999" frame="#000000" x="53.75" z="43.125" w="1.25" d="5" h="0" />
+  <Wall fill="#d7aaa9" frame="#000000" x="53.75" z="43.125" w="1.25" d="5" h="0" />
   <set baseHeight="0" wallHeight="1.5" />
-  <Wall fill="#aaaaaa" frame="#000000" x="31.875" z="54.6875" w="6.25" d="3.125" h="0" />
+  <Wall fill="#b8b8b8" frame="#000000" x="31.875" z="54.6875" w="6.25" d="3.125" h="0" />
   <set baseHeight="1.5" wallHeight=".3" />
-  <Wall fill="#333333" frame="#000000" x="31.875" z="54.6875" w="7.5" d="4.375" h="0" />
+  <Wall fill="#424242" frame="#000000" x="31.875" z="54.6875" w="7.5" d="4.375" h="0" />
   <set baseHeight="1.8" />
-  <Wall fill="#bbbbbb" frame="#000000" x="30.3125" z="54.6875" w="0.625" d="0.625" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="31.5625" z="55.3125" w="0.625" d="0.625" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="33.4375" z="53.4375" w="0.625" d="0.625" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="31.5625" z="53.4375" w="0.625" d="0.625" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="30.3125" z="54.6875" w="0.625" d="0.625" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="31.5625" z="55.3125" w="0.625" d="0.625" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="33.4375" z="53.4375" w="0.625" d="0.625" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="31.5625" z="53.4375" w="0.625" d="0.625" h="0" />
   <set baseHeight="0" wallHeight="2.5" />
-  <Wall fill="#666633" frame="#000000" x="56.875" z="89.375" w="47.5" d="47.5" h="0" />
+  <Wall fill="#797842" frame="#000000" x="56.875" z="89.375" w="47.5" d="47.5" h="0" />
   <set wallHeight="highWall" />
-  <Wall fill="#cccc99" frame="#000000" x="32.8125" z="89.375" w="0.625" d="47.5" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="80.9375" z="89.375" w="0.625" d="47.5" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="75.625" z="65.3125" w="30" d="0.625" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="56.875" z="113.4375" w="48.75" d="0.625" h="0" />
-  <Ramp deltaY="-1.7" y="2.5" fill="#666633" frame="#000000" x="57.1875" z="61.875" w="6.875" d="7.5" h="0" angle="0" />
-  <Hologram y="8" shape="5496" scale=".7" fill="#66cc00" frame="#000000" cx="52.63888888888889" cz="112.91666666666667" angle="180" />
+  <Wall fill="#d5d4a9" frame="#000000" x="32.8125" z="89.375" w="0.625" d="47.5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="80.9375" z="89.375" w="0.625" d="47.5" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="75.625" z="65.3125" w="30" d="0.625" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="56.875" z="113.4375" w="48.75" d="0.625" h="0" />
+  <Ramp deltaY="-1.7" y="2.5" fill="#797842" frame="#000000" x="57.1875" z="61.875" w="6.875" d="7.5" h="0" angle="180" />
+  <Hologram y="8" shape="5496" scale=".7" fill="#75d100" frame="#000000" cx="52.63888888888889" cz="112.91666666666667" angle="0" />
   <set baseHeight="0" />
-  <Solid y="8" shape="5494" shield="-1" canGlow="false" isTarget="true" hitSound="2858" fill="#999999" frame="#000000" cx="25.694444444444446" cz="48.125" angle="270" />
+  <Solid y="8" shape="5494" shield="-1" canGlow="false" isTarget="true" hitSound="2858" fill="#a9a9a9" frame="#000000" cx="25.694444444444446" cz="48.125" angle="90" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="28.472222222222225" cz="62.083333333333336" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="28.472222222222225" cz="62.083333333333336" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="28.472222222222225" cz="62.083333333333336" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="28.472222222222225" cz="62.083333333333336" angle="135" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="32.708333333333336" cz="62.84722222222223" angle="270" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="32.708333333333336" cz="62.84722222222223" angle="270" />
-  <FreeSolid y="2" shape="5495" shield="2" isTarget="false" canGlow="false" power="2" hitSound="false" yon="40" fill="#996633" frame="#000000" x="57.1875" z="61.875" w="6.875" d="7.5" h="0" cx="28.055555555555557" cz="61.45833333333334" angle="270" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="32.708333333333336" cz="62.84722222222223" angle="90" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="32.708333333333336" cz="62.84722222222223" angle="90" />
+  <FreeSolid y="2" shape="5495" shield="2" isTarget="false" canGlow="false" power="2" hitSound="false" yon="40" fill="#aa7942" frame="#000000" x="57.1875" z="61.875" w="6.875" d="7.5" h="0" cx="28.055555555555557" cz="61.45833333333334" angle="90" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="31.25" cz="59.79166666666667" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="31.25" cz="59.79166666666667" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="31.25" cz="59.79166666666667" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="31.25" cz="59.79166666666667" angle="135" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="38.958333333333336" cz="63.05555555555556" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="38.958333333333336" cz="63.05555555555556" angle="315" />
-  <Solid y="10.5" shape="5494" shield="-1" canGlow="false" isTarget="true" hitSound="2858" fill="#999999" frame="#000000" cx="77.43055555555556" cz="113.05555555555556" angle="180" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="38.958333333333336" cz="63.05555555555556" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="38.958333333333336" cz="63.05555555555556" angle="135" />
+  <Solid y="10.5" shape="5494" shield="-1" canGlow="false" isTarget="true" hitSound="2858" fill="#a9a9a9" frame="#000000" cx="77.43055555555556" cz="113.05555555555556" angle="0" />
   <set baseHeight="lowWall" wallHeight="0" />
-  <Wall fill="#cccc99" frame="#000000" x="57.1875" z="30.625" w="6.875" d="20" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="57.1875" z="57.8125" w="6.875" d="24.375" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="57.1875" z="43.125" w="5.625" d="5" h="0" />
-  <Ramp deltaY="-lowWall + 2.5" fill="#cccc99" frame="#000000" x="68.4375" z="67.8125" w="15.625" d="4.375" h="0" angle="90" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="53.75" z="72.5" w="6.25" d="6.25" h="0" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="50.625" z="75.625" w="6.25" d="6.25" h="0" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="47.5" z="78.75" w="6.25" d="6.25" h="0" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="44.375" z="81.875" w="6.25" d="6.25" h="0" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="41.25" z="85" w="6.25" d="6.25" h="0" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="38.125" z="88.125" w="6.25" d="6.25" h="0" />
-  <WallDoor midYaw="45" fill="#cccc99" frame="#000000" x="56.25" z="70" w="6.25" d="6.25" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="36.25" z="89.0625" w="6.25" d="26.875" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="57.1875" z="30.625" w="6.875" d="20" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="57.1875" z="57.8125" w="6.875" d="24.375" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="57.1875" z="43.125" w="5.625" d="5" h="0" />
+  <Ramp deltaY="-lowWall + 2.5" fill="#d5d4a9" frame="#000000" x="68.4375" z="67.8125" w="15.625" d="4.375" h="0" angle="270" />
+  <WallDoor midYaw="45" fill="#d5d4a9" frame="#000000" x="53.75" z="72.5" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#d5d4a9" frame="#000000" x="50.625" z="75.625" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#d5d4a9" frame="#000000" x="47.5" z="78.75" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#d5d4a9" frame="#000000" x="44.375" z="81.875" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#d5d4a9" frame="#000000" x="41.25" z="85" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#d5d4a9" frame="#000000" x="38.125" z="88.125" w="6.25" d="6.25" h="0" />
+  <WallDoor midYaw="45" fill="#d5d4a9" frame="#000000" x="56.25" z="70" w="6.25" d="6.25" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="36.25" z="89.0625" w="6.25" d="26.875" h="0" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="34.72222222222222" cz="99.58333333333334" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="34.72222222222222" cz="99.58333333333334" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="34.72222222222222" cz="99.58333333333334" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="34.72222222222222" cz="99.58333333333334" angle="135" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="36.80555555555556" cz="96.45833333333334" angle="270" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="36.80555555555556" cz="96.45833333333334" angle="270" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="36.80555555555556" cz="96.45833333333334" angle="90" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="36.80555555555556" cz="96.45833333333334" angle="90" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="34.375" cz="77.5" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="34.375" cz="77.5" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="34.375" cz="77.5" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="34.375" cz="77.5" angle="135" />
   <unique vars="nuke" />
-  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#339900" frame="#000000" cx="37.5" cz="80.625" angle="315" />
-  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#339900" frame="#000000" cx="37.5" cz="80.625" angle="315" />
+  <Solid shape="4497" shield="4" isTarget="false" canGlow="true" power="7" hitSound="false" blastSound="snBigBoom" killMsg="nuke" yon="40" fill="#3da600" frame="#000000" cx="37.5" cz="80.625" angle="135" />
+  <Goody start="nuke" shape="bspGrenade" y="1" grenades="5" fill="#3da600" frame="#000000" cx="37.5" cz="80.625" angle="135" />
   <set wallHeight="1.5" />
-  <Wall fill="#aaaaaa" frame="#000000" x="36.25" z="102.5" w="6.25" d="0" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="39.375" z="98.4375" w="0" d="8.125" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="39.375" z="76.875" w="0" d="2.5" h="0" />
-  <Wall fill="#aaaaaa" frame="#000000" x="36.25" z="75.625" w="6.25" d="0" h="0" />
+  <Wall fill="#b8b8b8" frame="#000000" x="36.25" z="102.5" w="6.25" d="0" h="0" />
+  <Wall fill="#b8b8b8" frame="#000000" x="39.375" z="98.4375" w="0" d="8.125" h="0" />
+  <Wall fill="#b8b8b8" frame="#000000" x="39.375" z="76.875" w="0" d="2.5" h="0" />
+  <Wall fill="#b8b8b8" frame="#000000" x="36.25" z="75.625" w="6.25" d="0" h="0" />
   <set baseHeight="2.5" wallHeight="1" />
-  <Wall fill="#ee0000" frame="#000000" x="55" z="88.75" w="22.5" d="22.5" h="0" />
+  <Wall fill="#f42300" frame="#000000" x="55" z="88.75" w="22.5" d="22.5" h="0" />
   <set wallHeight="2" />
-  <Wall fill="#cccc99" frame="#000000" x="77.1875" z="89.6875" w="6.875" d="15.625" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="71.5625" z="84.0625" w="4.375" d="4.375" h="0" />
-  <Ramp deltaY="2" fill="#cccc99" frame="#000000" x="71.5625" z="91.875" w="4.375" d="11.25" h="0" angle="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="77.1875" z="89.6875" w="6.875" d="15.625" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="71.5625" z="84.0625" w="4.375" d="4.375" h="0" />
+  <Ramp deltaY="2" fill="#d5d4a9" frame="#000000" x="71.5625" z="91.875" w="4.375" d="11.25" h="0" angle="180" />
   <set wallHeight="6" />
-  <Wall fill="#444444" frame="#000000" x="69.0625" z="81.5625" w="0.625" d="0.625" h="0" />
-  <Wall fill="#444444" frame="#000000" x="69.0625" z="86.5625" w="0.625" d="0.625" h="0" />
-  <Wall fill="#444444" frame="#000000" x="73.4375" z="97.8125" w="0.625" d="0.625" h="0" />
-  <Wall fill="#444444" frame="#000000" x="80.3125" z="97.8125" w="0.625" d="0.625" h="0" />
-  <Wall fill="#444444" frame="#000000" x="80.3125" z="81.5625" w="0.625" d="0.625" h="0" />
+  <Wall fill="#565656" frame="#000000" x="69.0625" z="81.5625" w="0.625" d="0.625" h="0" />
+  <Wall fill="#565656" frame="#000000" x="69.0625" z="86.5625" w="0.625" d="0.625" h="0" />
+  <Wall fill="#565656" frame="#000000" x="73.4375" z="97.8125" w="0.625" d="0.625" h="0" />
+  <Wall fill="#565656" frame="#000000" x="80.3125" z="97.8125" w="0.625" d="0.625" h="0" />
+  <Wall fill="#565656" frame="#000000" x="80.3125" z="81.5625" w="0.625" d="0.625" h="0" />
   <set baseHeight="lowWall" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="57.22222222222222" cz="23.333333333333336" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="57.22222222222222" cz="23.333333333333336" angle="315" />
-  <FreeSolid y="2" shape="5495" shield="2" isTarget="false" canGlow="false" power="2" hitSound="false" yon="40" fill="#996633" frame="#000000" x="71.5625" z="91.875" w="4.375" d="11.25" h="0" cx="78.47222222222223" cz="88.95833333333334" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="57.22222222222222" cz="23.333333333333336" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="57.22222222222222" cz="23.333333333333336" angle="135" />
+  <FreeSolid y="2" shape="5495" shield="2" isTarget="false" canGlow="false" power="2" hitSound="false" yon="40" fill="#aa7942" frame="#000000" x="71.5625" z="91.875" w="4.375" d="11.25" h="0" cx="78.47222222222223" cz="88.95833333333334" angle="135" />
   <set baseHeight="6" wallHeight="highWall -6" />
-  <Wall fill="#ffcc66" frame="#000000" x="35.3125" z="67.8125" w="4.375" d="4.375" h="0" />
+  <Wall fill="#ffd479" frame="#000000" x="35.3125" z="67.8125" w="4.375" d="4.375" h="0" />
   <set baseHeight="2.5" />
   <unique vars="mAct mFri mRe mDie" />
-  <Goody y="1.2" start="mRe" speed="5" grenades="2" missiles="2" boosters="2" out="mDie" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" angle="315" />
-  <Teleporter mask="false" start="mAct" stop="mFri" fill="#ee0000" frame="#ffff00" cx="35.625" cz="68.125" angle="315" />
+  <Goody y="1.2" start="mRe" speed="5" grenades="2" missiles="2" boosters="2" out="mDie" fill="#f42300" frame="#fffb00" cx="35.625" cz="68.125" angle="135" />
+  <Teleporter mask="false" start="mAct" stop="mFri" fill="#f42300" frame="#fffb00" cx="35.625" cz="68.125" angle="135" />
   <And in="@start" out="mAct" />
   <Timer in="mAct" wait="10" out="mRe" />
   <Timer in="mAct" wait="20" out="mFri" />
   <Timer in="mDie" wait="240" out="mAct" />
-  <Sound isPlaced="true" sound="1354" y="2" start="mAct" volume="2" cx="35.625" cz="68.125" angle="315" />
-  <Teleporter start="@winTeam" win="1000" shape="false" activeRange="2000" fill="#ee0000" frame="#ffff00" cx="6.25" cz="25.625" angle="315" />
-  <Teleporter start="@over" win="0" shape="false" activeRange="2000" fill="#ee0000" frame="#ffff00" cx="6.25" cz="25.625" angle="315" />
+  <Sound isPlaced="true" sound="1354" y="2" start="mAct" volume="2" cx="35.625" cz="68.125" angle="135" />
+  <Teleporter start="@winTeam" win="1000" shape="false" activeRange="2000" fill="#f42300" frame="#fffb00" cx="6.25" cz="25.625" angle="135" />
+  <Teleporter start="@over" win="0" shape="false" activeRange="2000" fill="#f42300" frame="#fffb00" cx="6.25" cz="25.625" angle="135" />
   <Timer in="@start" wait="1875 * 3" out="@over" />
   <set baseHeight="1.7" />
-  <Hologram y="3" shape="1110" yon="50" fill="#ffffff" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" angle="180" />
-  <Hologram y="3" shape="1111" yon="50" fill="#ffff33" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" angle="180" />
-  <Hologram y="3" shape="1112" yon="50" fill="#ff0000" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" angle="180" />
+  <Hologram y="3" shape="1110" yon="50" fill="#ffffff" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" angle="0" />
+  <Hologram y="3" shape="1111" yon="50" fill="#fffc41" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" angle="0" />
+  <Hologram y="3" shape="1112" yon="50" fill="#ff2600" frame="#000000" cx="73.95833333333334" cz="113.05555555555556" angle="0" />
   <set baseHeight=".8" wallHeight="4.2" />
-  <WallDoor hitMsg="@openNukeB" open="@openNukeB" close="@closeNukeB" openSound="false" closeSound="false" deltaY="0" deltaX="0" deltaZ="5" didOpen="@closeNukeB" closeDelay="100" guardDelay="0" isTarget="true" fill="#cc6666" frame="#000000" x="60.3125" z="43.125" w="0.625" d="5" h="0" />
+  <WallDoor hitMsg="@openNukeB" open="@openNukeB" close="@closeNukeB" openSound="false" closeSound="false" deltaY="0" deltaX="0" deltaZ="5" didOpen="@closeNukeB" closeDelay="100" guardDelay="0" isTarget="true" fill="#d77c79" frame="#000000" x="60.3125" z="43.125" w="0.625" d="5" h="0" />
   <set baseHeight="5" wallHeight="3" />
-  <Wall fill="#cc9999" frame="#000000" x="60.625" z="43.125" w="1.25" d="5" h="0" />
+  <Wall fill="#d7aaa9" frame="#000000" x="60.625" z="43.125" w="1.25" d="5" h="0" />
   <set baseHeight="0" wallHeight=".8" />
-  <Wall fill="#444444" frame="#000000" x="75.625" z="42.8125" w="30" d="44.375" h="0" />
+  <Wall fill="#565656" frame="#000000" x="75.625" z="42.8125" w="30" d="44.375" h="0" />
   <set baseHeight=".8" wallHeight="highWall -.8" />
-  <Wall fill="#cccc99" frame="#000000" x="60.9375" z="30.625" w="0.625" d="20" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="60.9375" z="55.3125" w="0.625" d="19.375" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="90.3125" z="42.8125" w="0.625" d="44.375" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="60.9375" z="30.625" w="0.625" d="20" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="60.9375" z="55.3125" w="0.625" d="19.375" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="90.3125" z="42.8125" w="0.625" d="44.375" h="0" />
   <set baseHeight=".8" />
-  <Solid y="8" shape="5494" shield="-1" canGlow="false" isTarget="true" hitSound="2858" fill="#999999" frame="#000000" cx="71.25" cz="20.625" angle="0" />
+  <Solid y="8" shape="5494" shield="-1" canGlow="false" isTarget="true" hitSound="2858" fill="#a9a9a9" frame="#000000" cx="71.25" cz="20.625" angle="180" />
   <set wallHeight="2.5" />
-  <Wall fill="#888888" frame="#000000" x="69.6875" z="22.5" w="0.625" d="3.75" h="0" />
-  <Wall fill="#888888" frame="#000000" x="73.4375" z="22.5" w="0.625" d="3.75" h="0" />
-  <WallSolid shield="3" canGlow="true" power="0" isTarget="true" fill="#888888" frame="#000000" x="71.5625" z="24.0625" w="3.125" d="0.625" h="0" />
+  <Wall fill="#9a9a9a" frame="#000000" x="69.6875" z="22.5" w="0.625" d="3.75" h="0" />
+  <Wall fill="#9a9a9a" frame="#000000" x="73.4375" z="22.5" w="0.625" d="3.75" h="0" />
+  <WallSolid shield="3" canGlow="true" power="0" isTarget="true" fill="#9a9a9a" frame="#000000" x="71.5625" z="24.0625" w="3.125" d="0.625" h="0" />
   <set wallHeight=".4" />
-  <Wall fill="#888888" frame="#000000" x="71.5625" z="22.5" w="4.375" d="3.75" h="0" y="2.5" />
-  <Pill y="1" grabShield="1000" changeOwnerTime="20" fill="#dddddd" frame="#111111" cx="71.875" cz="23.125" angle="315" />
+  <Wall fill="#9a9a9a" frame="#000000" x="71.5625" z="22.5" w="4.375" d="3.75" h="0" y="2.5" />
+  <Pill y="1" grabShield="1000" changeOwnerTime="20" fill="#e4e4e4" frame="#151515" cx="71.875" cz="23.125" angle="135" />
   <set baseHeight="11" wallHeight="highWall -11" />
-  <Wall fill="#cc9999" frame="#000000" x="60.625" z="43.125" w="1.25" d="5" h="0" />
+  <Wall fill="#d7aaa9" frame="#000000" x="60.625" z="43.125" w="1.25" d="5" h="0" />
   <set baseHeight=".8" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="84.58333333333334" cz="28.680555555555557" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="84.58333333333334" cz="28.680555555555557" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="84.58333333333334" cz="28.680555555555557" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="84.58333333333334" cz="28.680555555555557" angle="135" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="82.08333333333334" cz="26.180555555555557" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="82.08333333333334" cz="26.180555555555557" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="82.08333333333334" cz="26.180555555555557" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="82.08333333333334" cz="26.180555555555557" angle="135" />
   <set baseHeight="lowWall" wallHeight="0" />
-  <Wall fill="#cccc99" frame="#000000" x="84.6875" z="42.8125" w="10.625" d="44.375" h="0" />
-  <Ramp deltaY="-lowWall + .8" fill="#cccc99" frame="#000000" x="72.1875" z="62.8125" w="14.375" d="4.375" h="0" angle="270" />
+  <Wall fill="#d5d4a9" frame="#000000" x="84.6875" z="42.8125" w="10.625" d="44.375" h="0" />
+  <Ramp deltaY="-lowWall + .8" fill="#d5d4a9" frame="#000000" x="72.1875" z="62.8125" w="14.375" d="4.375" h="0" angle="90" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="82.84722222222223" cz="23.958333333333336" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="82.84722222222223" cz="23.958333333333336" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="82.84722222222223" cz="23.958333333333336" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="82.84722222222223" cz="23.958333333333336" angle="135" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="84.72222222222223" cz="33.333333333333336" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="84.72222222222223" cz="33.333333333333336" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="84.72222222222223" cz="33.333333333333336" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="84.72222222222223" cz="33.333333333333336" angle="135" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="88.05555555555556" cz="28.958333333333336" angle="270" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="88.05555555555556" cz="28.958333333333336" angle="270" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="88.05555555555556" cz="28.958333333333336" angle="90" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="88.05555555555556" cz="28.958333333333336" angle="90" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="85.55555555555556" cz="28.958333333333336" angle="270" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="85.55555555555556" cz="28.958333333333336" angle="270" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="85.55555555555556" cz="28.958333333333336" angle="90" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="85.55555555555556" cz="28.958333333333336" angle="90" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="83.05555555555556" cz="28.958333333333336" angle="270" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="83.05555555555556" cz="28.958333333333336" angle="270" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="83.05555555555556" cz="28.958333333333336" angle="90" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="83.05555555555556" cz="28.958333333333336" angle="90" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="82.22222222222223" cz="40.208333333333336" angle="315" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="82.22222222222223" cz="40.208333333333336" angle="315" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="82.22222222222223" cz="40.208333333333336" angle="135" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="82.22222222222223" cz="40.208333333333336" angle="135" />
   <unique vars="break" />
-  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#996633" frame="#000000" cx="86.18055555555556" cz="37.083333333333336" angle="270" />
-  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#996633" frame="#000000" cx="86.18055555555556" cz="37.083333333333336" angle="270" />
+  <Solid shape="5495" shield="2" isTarget="false" canGlow="true" power="2" hitSound="false" killMsg="break" yon="40" fill="#aa7942" frame="#000000" cx="86.18055555555556" cz="37.083333333333336" angle="90" />
+  <Goody start="break" shape="bspMissile" y=".5" missiles="5" fill="#aa7942" frame="#000000" cx="86.18055555555556" cz="37.083333333333336" angle="90" />
   <set baseHeight="0" />
-  <Incarnator y="10" cx="36.25" cz="110" angle="225" />
-  <Incarnator y="10" cx="63.75" cz="62.5" angle="225" />
-  <Incarnator y="10" cx="56.25" cz="28.125" angle="315" />
-  <Incarnator y="10" cx="35.625" cz="88.75" angle="225" />
-  <Incarnator y="10" cx="40" cz="56.875" angle="225" />
-  <Incarnator y="10" cx="86.875" cz="23.75" angle="45" />
-  <Incarnator y="10" cx="77.5" cz="68.75" angle="45" />
+  <Incarnator y="10" cx="36.25" cz="110" angle="45" />
+  <Incarnator y="10" cx="63.75" cz="62.5" angle="45" />
+  <Incarnator y="10" cx="56.25" cz="28.125" angle="135" />
+  <Incarnator y="10" cx="35.625" cz="88.75" angle="45" />
+  <Incarnator y="10" cx="40" cz="56.875" angle="45" />
+  <Incarnator y="10" cx="86.875" cz="23.75" angle="225" />
+  <Incarnator y="10" cx="77.5" cz="68.75" angle="225" />
   <set baseHeight="highWall" wallHeight="1" />
-  <Wall fill="#cccc99" frame="#000000" x="57.8125" z="42.8125" w="65.625" d="45.625" h="0" />
-  <Wall fill="#cccc99" frame="#000000" x="56.875" z="89.6875" w="48.75" d="48.125" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="57.8125" z="42.8125" w="65.625" d="45.625" h="0" />
+  <Wall fill="#d5d4a9" frame="#000000" x="56.875" z="89.6875" w="48.75" d="48.125" h="0" />
 </map>

@@ -720,3 +720,32 @@ void CombineTransforms(Matrix *vs, Matrix *vd, Matrix *m) {
     // BlockMoveData(vs, vd, sizeof(Matrix));
     VectorMatrixProduct(4, vs[0], vd[0], m);
 }
+
+// useful for debugging
+#include <sstream>
+std::string FormatVector(Fixed *v, int size) {
+    std::ostringstream oss;
+    oss << "[";
+    for (int i = 0; i < size; i++) {
+        oss << v[i];
+        if (i < size-1) {
+            oss << ", ";
+        }
+    }
+    oss << "]";
+    return oss.str();
+}
+
+std::string FormatVectorFloat(Fixed *v, int size) {
+    std::ostringstream oss;
+    oss.precision(6);
+    oss << "[";
+    for (int i = 0; i < size; i++) {
+        oss << ToFloat(v[i]);
+        if (i < size-1) {
+            oss << ", ";
+        }
+    }
+    oss << "]";
+    return oss.str();
+}

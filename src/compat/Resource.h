@@ -8,6 +8,24 @@
 #include <vector>
 #include <json.hpp>
 
+// path separator
+#if defined(_WIN32)
+#define PATHSEP "\\"
+#else
+#define PATHSEP "/"
+#endif
+
+// files stuff
+#define RSRCDIR "rsrc"
+#define LEVELDIR "levels"
+#define SETFILE "set.json"
+#define ALFDIR "alf"
+#define BSPSDIR "bsps"
+#define BSPSEXT ".json"
+#define DEFAULTSCRIPT "default.avarascript"
+#define OGGDIR "ogg"
+#define WAVDIR "wav"
+
 void UseResFile(std::string filename);
 void UseLevelFolder(std::string folder);
 std::string OSTypeString(OSType t);
@@ -23,6 +41,7 @@ void DetachResource(Handle theResource);
 void GetIndString(Str255 theString, short strListID, short index);
 
 char *BundlePath(const char *rel);
+char *BundlePath(std::stringstream &buffa);
 
 void LevelDirListing();
 std::vector<std::string> LevelDirNameListing();

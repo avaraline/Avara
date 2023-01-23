@@ -10,6 +10,16 @@
 #pragma once
 #include "Types.h"
 
+#ifdef __has_include
+#  if __has_include(<optional>)                // Check for a standard library
+#    include <optional>
+#  elif __has_include(<experimental/optional>) // Check for an experimental version
+#    include <experimental/optional>           // Check if __has_include is present
+#  else                                        // Not found at all
+#     error "Missing <optional>"
+#  endif
+#endif
+
 enum {
     kLexPlus,
     kLexMinus,
@@ -97,3 +107,26 @@ void AllocParser();
 void DeallocParser();
 void InitParser();
 void FreshCalc();
+
+// retrieve a variable by index as defined in LevelLoader.h or with the entry string
+// Example: ReadLongVariable(iGrenades) OR ReadLongVariable("grenades")
+short IndexForEntry(const char* entry);
+double ReadVariable(short index);
+double ReadVariable(const char *);
+double ReadDoubleVar(const char *);
+Fixed ReadFixedVar(short index);
+Fixed ReadFixedVar(const char *);
+long ReadLongVar(short index);
+long ReadLongVar(const char *);
+const std::optional<uint32_t> ReadColorVar(short index);
+const std::optional<uint32_t> ReadColorVar(const char *);
+std::string ReadStringVar(short index);
+std::string ReadStringVar(const char *);
+
+void ProgramVariable(short index, double value);
+void ProgramFixedVar(short index, Fixed value);
+void ProgramLongVar(short index, long value);
+void ProgramReference(short index, short ref);
+void ProgramOffsetAdd(short index, short ref, long addValue);
+void ProgramOffsetMultiply(short index, short ref, long addValue);
+void ProgramMessage(short index, long value);

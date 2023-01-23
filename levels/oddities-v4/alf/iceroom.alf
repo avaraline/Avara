@@ -1,374 +1,372 @@
 <map>
-  <set IceVSpace="6" IceShot="10" IceGrav="0" FFScale=".3" gravity="0.2" hull.2="hull[1]" targIce="targ1" RoomHeight="IceVSpace * 8" wallHeight="RoomHeight / 4" wallYon="200" AmbY="IceVSpace * 4 -baseHeight" AmbSound="snArcticWind" AmbVol="20" designer="Kevin Reid &lt;kpreid@ibm.net&gt;" information="Icebox cubed!
-The guard tends to attack stationary scouts.
-The red goody is worth getting." />
-  <SkyColor fill="#0066ff" frame="#003399" />
-  <GroundColor fill="#000055" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="68.75" cz="51.875" angle="45" />
+  <set IceVSpace="6" IceShot="10" IceGrav="0" FFScale=".3" gravity="0.2" hull.2="hull[1]" targIce="targ1" RoomHeight="IceVSpace * 8" wallHeight="RoomHeight / 4" wallYon="200" AmbY="IceVSpace * 4 -baseHeight" AmbSound="snArcticWind" AmbVol="20" designer="Kevin Reid &lt;kpreid@ibm.net&gt;" information="Icebox cubed!&#10;The guard tends to attack stationary scouts.&#10;The red goody is worth getting." />
+  <SkyColor fill="#0080ff" frame="#0048aa" />
+  <GroundColor fill="#010e68" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="68.75" cz="51.875" angle="225" />
   <set baseHeight="RoomHeight / 4 * 0" />
-  <Wall fill="#3399ff" frame="#000000" x="56.25" z="98.125" w="92.5" d="7.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="48.75" z="5.625" w="92.5" d="7.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="98.75" z="48.125" w="7.5" d="92.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="6.25" z="55.625" w="7.5" d="92.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="56.25" z="98.125" w="92.5" d="7.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="48.75" z="5.625" w="92.5" d="7.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="98.75" z="48.125" w="7.5" d="92.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="6.25" z="55.625" w="7.5" d="92.5" h="0" />
   <set baseHeight="RoomHeight / 4 * 1" />
-  <Wall fill="#3399ff" frame="#000000" x="56.25" z="98.125" w="92.5" d="7.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="48.75" z="5.625" w="92.5" d="7.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="98.75" z="48.125" w="7.5" d="92.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="6.25" z="55.625" w="7.5" d="92.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="56.25" z="98.125" w="92.5" d="7.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="48.75" z="5.625" w="92.5" d="7.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="98.75" z="48.125" w="7.5" d="92.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="6.25" z="55.625" w="7.5" d="92.5" h="0" />
   <set baseHeight="RoomHeight / 4 * 2" />
-  <Wall fill="#3399ff" frame="#000000" x="56.25" z="98.125" w="92.5" d="7.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="48.75" z="5.625" w="92.5" d="7.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="98.75" z="48.125" w="7.5" d="92.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="6.25" z="55.625" w="7.5" d="92.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="56.25" z="98.125" w="92.5" d="7.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="48.75" z="5.625" w="92.5" d="7.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="98.75" z="48.125" w="7.5" d="92.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="6.25" z="55.625" w="7.5" d="92.5" h="0" />
   <set baseHeight="RoomHeight / 4 * 3" />
-  <Wall fill="#3399ff" frame="#000000" x="56.25" z="98.125" w="92.5" d="7.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="48.75" z="5.625" w="92.5" d="7.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="98.75" z="48.125" w="7.5" d="92.5" h="0" />
-  <Wall fill="#3399ff" frame="#000000" x="6.25" z="55.625" w="7.5" d="92.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="56.25" z="98.125" w="92.5" d="7.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="48.75" z="5.625" w="92.5" d="7.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="98.75" z="48.125" w="7.5" d="92.5" h="0" />
+  <Wall fill="#3dacff" frame="#000000" x="6.25" z="55.625" w="7.5" d="92.5" h="0" />
   <set baseHeight="RoomHeight" wallHeight="6" wa="wallHeight" />
-  <Wall fill="#3366ff" frame="#000000" x="6.25" z="5.625" w="7.5" d="7.5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="4.375" z="5.625" w="3.75" d="7.5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="8.125" z="3.75" w="3.75" d="3.75" h="0" />
-  <Field deltaY="0" visible="1" fill="#3366ff" frame="#000000" cx="68.75" cz="51.875" angle="45" x="8.125" z="7.5" w="3.75" d="3.75" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="6.25" z="5.625" w="7.5" d="7.5" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="4.375" z="5.625" w="3.75" d="7.5" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="8.125" z="3.75" w="3.75" d="3.75" h="0" />
+  <Field deltaY="0" visible="1" fill="#4180ff" frame="#000000" cx="68.75" cz="51.875" angle="225" x="8.125" z="7.5" w="3.75" d="3.75" h="0" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#3366ff" frame="#000000" cx="7.5" cz="6.875" angle="315" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#4180ff" frame="#000000" cx="7.5" cz="6.875" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" cx="7.5" cz="6.875" angle="315" />
+  <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" cx="7.5" cz="6.875" angle="135" />
   <set wa="wallHeight" />
-  <Wall fill="#3366ff" frame="#000000" x="6.25" z="98.125" w="7.5" d="7.5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="4.375" z="98.125" w="3.75" d="7.5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="8.125" z="100" w="3.75" d="3.75" h="0" />
-  <Field deltaY="0" visible="1" fill="#3366ff" frame="#000000" cx="7.5" cz="6.875" angle="315" x="8.125" z="96.25" w="3.75" d="3.75" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="6.25" z="98.125" w="7.5" d="7.5" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="4.375" z="98.125" w="3.75" d="7.5" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="8.125" z="100" w="3.75" d="3.75" h="0" />
+  <Field deltaY="0" visible="1" fill="#4180ff" frame="#000000" cx="7.5" cz="6.875" angle="135" x="8.125" z="96.25" w="3.75" d="3.75" h="0" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#3366ff" frame="#000000" cx="7.5" cz="96.875" angle="315" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#4180ff" frame="#000000" cx="7.5" cz="96.875" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" cx="7.5" cz="96.875" angle="315" />
+  <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" cx="7.5" cz="96.875" angle="135" />
   <set wa="wallHeight" />
-  <Wall fill="#3366ff" frame="#000000" x="98.75" z="98.125" w="7.5" d="7.5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="100.625" z="98.125" w="3.75" d="7.5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="96.875" z="100" w="3.75" d="3.75" h="0" />
-  <Field deltaY="0" visible="1" fill="#3366ff" frame="#000000" cx="7.5" cz="96.875" angle="315" x="96.875" z="96.25" w="3.75" d="3.75" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="98.75" z="98.125" w="7.5" d="7.5" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="100.625" z="98.125" w="3.75" d="7.5" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="96.875" z="100" w="3.75" d="3.75" h="0" />
+  <Field deltaY="0" visible="1" fill="#4180ff" frame="#000000" cx="7.5" cz="96.875" angle="135" x="96.875" z="96.25" w="3.75" d="3.75" h="0" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#3366ff" frame="#000000" cx="97.5" cz="96.875" angle="315" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#4180ff" frame="#000000" cx="97.5" cz="96.875" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" cx="97.5" cz="96.875" angle="315" />
+  <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" cx="97.5" cz="96.875" angle="135" />
   <set wa="wallHeight" />
-  <Wall fill="#3366ff" frame="#000000" x="98.75" z="5.625" w="7.5" d="7.5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="100.625" z="5.625" w="3.75" d="7.5" h="0" />
-  <Wall fill="#3366ff" frame="#000000" x="96.875" z="3.75" w="3.75" d="3.75" h="0" />
-  <Field deltaY="0" visible="1" fill="#3366ff" frame="#000000" cx="97.5" cz="96.875" angle="315" x="96.875" z="7.5" w="3.75" d="3.75" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="98.75" z="5.625" w="7.5" d="7.5" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="100.625" z="5.625" w="3.75" d="7.5" h="0" />
+  <Wall fill="#4180ff" frame="#000000" x="96.875" z="3.75" w="3.75" d="3.75" h="0" />
+  <Field deltaY="0" visible="1" fill="#4180ff" frame="#000000" cx="97.5" cz="96.875" angle="135" x="96.875" z="7.5" w="3.75" d="3.75" h="0" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#3366ff" frame="#000000" cx="97.5" cz="6.875" angle="315" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="3" start="mShow" out="mTaken" fill="#4180ff" frame="#000000" cx="97.5" cz="6.875" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="150" />
-  <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" cx="97.5" cz="6.875" angle="315" />
+  <Sound y="AmbY" isAmbient="true" sound="AmbSound" loopCount="-1" volume="AmbVol" cx="97.5" cz="6.875" angle="135" />
   <set baseHeight="0" wallYon="0" />
-  <Wall fill="#3366ff" frame="#000000" x="13.75" z="13.125" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#000000" x="91.25" z="13.125" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#000000" x="91.25" z="90.625" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#000000" x="13.75" z="90.625" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#000000" x="13.75" z="13.125" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#000000" x="91.25" z="13.125" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#000000" x="91.25" z="90.625" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#000000" x="13.75" z="90.625" w="7.5" d="7.5" h="3" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="13.125" angle="315" />
+  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="13.125" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="90.625" angle="315" />
+  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="90.625" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="90.625" angle="315" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="90.625" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="22.5" z="81.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="22.5" z="81.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="22.5" z="56.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="22.5" z="56.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="22.5" z="46.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="22.5" z="46.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="22.5" z="21.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="22.5" z="21.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="47.5" z="21.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="47.5" z="21.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="57.5" z="21.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="57.5" z="21.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="82.5" z="21.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="82.5" z="21.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="82.5" z="46.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="82.5" z="46.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="82.5" z="56.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="82.5" z="56.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="82.5" z="81.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="82.5" z="81.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="57.5" z="81.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="57.5" z="81.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="47.5" z="81.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="47.5" z="81.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="67.5" z="56.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="67.5" z="56.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="47.5" z="66.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="47.5" z="66.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="37.5" z="46.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaZ="-.02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="37.5" z="46.875" w="25" d="25" h="0" />
   <set wallHeight="RoomHeight" />
-  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" x="57.5" z="36.875" w="25" d="25" h="0" />
+  <Field start="@StirOn" stop="@StirOff" watch="targIce" deltaY="0" deltaX=".02" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" x="57.5" z="36.875" w="25" d="25" h="0" />
   <set baseHeight="RoomHeight / 2" />
-  <Wall fill="#3366ff" frame="#000000" x="13.75" z="13.125" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#000000" x="91.25" z="13.125" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#000000" x="91.25" z="90.625" w="7.5" d="7.5" h="3" />
-  <Wall fill="#3366ff" frame="#000000" x="13.75" z="90.625" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#000000" x="13.75" z="13.125" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#000000" x="91.25" z="13.125" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#000000" x="91.25" z="90.625" w="7.5" d="7.5" h="3" />
+  <Wall fill="#4180ff" frame="#000000" x="13.75" z="90.625" w="7.5" d="7.5" h="3" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="13.125" angle="315" />
+  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="13.125" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Teleporter group="@NiceSpot" y="3" start="0" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="13.125" angle="315" />
+  <Teleporter group="@NiceSpot" y="3" start="0" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="13.125" angle="135" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="90.625" angle="315" />
+  <Goody shape="bspMissile" y="5" speed="2" missiles="3" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="90.625" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Teleporter group="@NiceSpot" y="3" start="0" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="90.625" angle="315" />
+  <Teleporter group="@NiceSpot" y="3" start="0" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="90.625" angle="135" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="90.625" angle="315" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="90.625" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Teleporter group="@NiceSpot" y="3" start="0" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="90.625" angle="315" />
+  <Teleporter group="@NiceSpot" y="3" start="0" fill="#ffffff" frame="#000000" cx="13.611111111111112" cz="90.625" angle="135" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" />
+  <Goody shape="bspGrenade" y="5" speed="2" grenades="4" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Teleporter group="@NiceSpot" y="3" start="0" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="315" />
+  <Teleporter group="@NiceSpot" y="3" start="0" fill="#ffffff" frame="#000000" cx="91.11111111111111" cz="13.125" angle="135" />
   <set baseHeight="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="22.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="32.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="32.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="42.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="22.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="32.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="32.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="42.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="41.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="32.5" cz="31.875" angle="315" />
-  <Incarnator y="IceVSpace * 2 + 3" cx="22.5" cz="21.875" angle="315" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="22.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="32.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="32.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="42.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="22.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="32.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="32.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="42.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="81.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="32.5" cz="71.875" angle="225" />
-  <Incarnator y="IceVSpace * 2 + 3" cx="22.5" cz="81.875" angle="225" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="62.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="72.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="72.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="82.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="62.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="72.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="72.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="82.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="81.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="72.5" cz="71.875" angle="135" />
-  <Incarnator y="IceVSpace * 2 + 3" cx="82.5" cz="81.875" angle="135" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="62.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="72.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="72.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="82.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="62.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="72.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="72.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="82.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="41.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="72.5" cz="31.875" angle="45" />
-  <Incarnator y="IceVSpace * 2 + 3" cx="82.5" cz="21.875" angle="45" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="22.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="32.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="32.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="42.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="22.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="32.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="32.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="42.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="41.875" angle="180" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="32.5" cz="31.875" angle="135" />
+  <Incarnator y="IceVSpace * 2 + 3" cx="22.5" cz="21.875" angle="135" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="22.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="32.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="32.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="42.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="22.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="32.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="32.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="42.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="81.875" angle="180" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="32.5" cz="71.875" angle="45" />
+  <Incarnator y="IceVSpace * 2 + 3" cx="22.5" cz="81.875" angle="45" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="62.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="72.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="72.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="82.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="62.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="72.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="72.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="82.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="81.875" angle="180" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="72.5" cz="71.875" angle="315" />
+  <Incarnator y="IceVSpace * 2 + 3" cx="82.5" cz="81.875" angle="315" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="62.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="72.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="72.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="82.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="62.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="72.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="72.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="82.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="41.875" angle="180" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="72.5" cz="31.875" angle="225" />
+  <Incarnator y="IceVSpace * 2 + 3" cx="82.5" cz="21.875" angle="225" />
   <set baseHeight="IceVSpace * 4" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="22.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="32.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="32.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="42.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="22.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="32.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="32.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="42.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="41.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="32.5" cz="31.875" angle="315" />
-  <Incarnator y="IceVSpace * 2 + 3" cx="22.5" cz="21.875" angle="315" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="22.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="32.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="32.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="42.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="22.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="22.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="22.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="32.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="32.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="42.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="42.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="42.5" cz="81.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="32.5" cz="71.875" angle="225" />
-  <Incarnator y="IceVSpace * 2 + 3" cx="22.5" cz="81.875" angle="225" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="62.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="72.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="72.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="82.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="61.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="71.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="62.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="72.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="72.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="82.5" cz="81.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="81.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="72.5" cz="71.875" angle="135" />
-  <Incarnator y="IceVSpace * 2 + 3" cx="82.5" cz="81.875" angle="135" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="62.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="72.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="72.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="82.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="21.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="31.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="62.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="62.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="62.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="72.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="72.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#99ccff" frame="#000000" cx="82.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#99ccff" frame="#000000" cx="82.5" cz="41.875" angle="0" />
-  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#99ccff" frame="#000000" cx="82.5" cz="41.875" angle="0" />
-  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="72.5" cz="31.875" angle="45" />
-  <Incarnator y="IceVSpace * 2 + 3" cx="82.5" cz="21.875" angle="45" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="22.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="32.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="32.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="42.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="22.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="32.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="32.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="42.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="41.875" angle="180" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="32.5" cz="31.875" angle="135" />
+  <Incarnator y="IceVSpace * 2 + 3" cx="22.5" cz="21.875" angle="135" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="22.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="32.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="32.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="42.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="22.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="22.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="22.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="32.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="32.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="42.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="42.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="42.5" cz="81.875" angle="180" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="32.5" cz="71.875" angle="45" />
+  <Incarnator y="IceVSpace * 2 + 3" cx="22.5" cz="81.875" angle="45" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="62.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="72.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="72.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="82.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="61.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="71.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="62.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="72.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="72.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="82.5" cz="81.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="81.875" angle="180" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="72.5" cz="71.875" angle="315" />
+  <Incarnator y="IceVSpace * 2 + 3" cx="82.5" cz="81.875" angle="315" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="62.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="72.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="72.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="82.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="21.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="31.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="62.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="62.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="62.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="72.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="72.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 0" fill="#a8d6ff" frame="#000000" cx="82.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 1" fill="#a8d6ff" frame="#000000" cx="82.5" cz="41.875" angle="180" />
+  <FreeSolid shotPower="IceShot" targetGroup="targIce" shape="bspW1x1" customGravity="0" y="IceVSpace * 2" fill="#a8d6ff" frame="#000000" cx="82.5" cz="41.875" angle="180" />
+  <Incarnator y="IceVSpace * 1" status="false" start="@start" cx="72.5" cz="31.875" angle="225" />
+  <Incarnator y="IceVSpace * 2 + 3" cx="82.5" cz="21.875" angle="225" />
   <set baseHeight="0" />
-  <Txeleporter y="-6" activeRange="2000" deadRange="80" group="-1" destGroup="@Center" yon="0.01" fill="#99ffff" frame="#ff0000" cx="52.5" cz="51.875" r="2.5" angle="315" />
-  <Teleporter y="RoomHeight + 5" activeRange="2000" deadRange="75" group="-1" destGroup="@Center" yon="0.01" fill="#99ffff" frame="#ff0000" cx="52.5" cz="51.875" angle="315" />
-  <Teleporter y="IceVSpace * 2" group="@Center" destGroup="@NiceSpot" activeRange="2" fill="#99ffff" frame="#ff0000" cx="52.5" cz="51.875" angle="315" />
-  <Field shape="bspTeleporter" y="IceVSpace * 2" watch="targIce" deltaY="1000" fill="#99ffff" frame="#ff0000" cx="52.5" cz="51.875" angle="315" />
-  <Guard y="RoomHeight" watch="scoutMask" speed=".1" freq="15 * .3" shotPower=".3" isTarget="0" canGlow="0" shield="-1" hitScore="-10" hitSound="snStepMetal" fill="#99ffff" frame="#ff0000" cx="52.5" cz="51.875" angle="315" />
+  <Txeleporter y="-6" activeRange="2000" deadRange="80" group="-1" destGroup="@Center" yon="0.01" fill="#a6feff" frame="#ff2600" cx="52.5" cz="51.875" r="2.5" angle="135" />
+  <Teleporter y="RoomHeight + 5" activeRange="2000" deadRange="75" group="-1" destGroup="@Center" yon="0.01" fill="#a6feff" frame="#ff2600" cx="52.5" cz="51.875" angle="135" />
+  <Teleporter y="IceVSpace * 2" group="@Center" destGroup="@NiceSpot" activeRange="2" fill="#a6feff" frame="#ff2600" cx="52.5" cz="51.875" angle="135" />
+  <Field shape="bspTeleporter" y="IceVSpace * 2" watch="targIce" deltaY="1000" fill="#a6feff" frame="#ff2600" cx="52.5" cz="51.875" angle="135" />
+  <Guard y="RoomHeight" watch="scoutMask" speed=".1" freq="15 * .3" shotPower=".3" isTarget="0" canGlow="0" shield="-1" hitScore="-10" hitSound="snStepMetal" fill="#a6feff" frame="#ff2600" cx="52.5" cz="51.875" angle="135" />
   <unique vars="mShow mTaken" />
-  <Goody shape="bspGoody" y="IceVSpace * 5" speed="2" grenades="12" missiles="8" boosters="2" lives="1" start="mShow" out="mTaken" fill="#99ffff" frame="#ff0000" cx="52.5" cz="51.875" angle="315" />
+  <Goody shape="bspGoody" y="IceVSpace * 5" speed="2" grenades="12" missiles="8" boosters="2" lives="1" start="mShow" out="mTaken" fill="#a6feff" frame="#ff2600" cx="52.5" cz="51.875" angle="135" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="600" />
-  <Teleporter y="RoomHeight" group="@NiceSpot" destGroup="@Center" shape="bspFloorFrame" scale="FFScale" fill="#0066ff" frame="#000000" cx="6.25" cz="51.875" angle="315" />
-  <Teleporter y="RoomHeight" group="@NiceSpot" destGroup="@Center" shape="bspFloorFrame" scale="FFScale" fill="#0066ff" frame="#000000" cx="98.75" cz="51.875" angle="315" />
-  <Teleporter y="RoomHeight" group="@NiceSpot" destGroup="@Center" shape="bspFloorFrame" scale="FFScale" fill="#0066ff" frame="#000000" cx="52.5" cz="5.625" angle="315" />
-  <Teleporter y="RoomHeight" group="@NiceSpot" destGroup="@Center" shape="bspFloorFrame" scale="FFScale" fill="#0066ff" frame="#000000" cx="52.5" cz="98.125" angle="315" />
+  <Teleporter y="RoomHeight" group="@NiceSpot" destGroup="@Center" shape="bspFloorFrame" scale="FFScale" fill="#0080ff" frame="#000000" cx="6.25" cz="51.875" angle="135" />
+  <Teleporter y="RoomHeight" group="@NiceSpot" destGroup="@Center" shape="bspFloorFrame" scale="FFScale" fill="#0080ff" frame="#000000" cx="98.75" cz="51.875" angle="135" />
+  <Teleporter y="RoomHeight" group="@NiceSpot" destGroup="@Center" shape="bspFloorFrame" scale="FFScale" fill="#0080ff" frame="#000000" cx="52.5" cz="5.625" angle="135" />
+  <Teleporter y="RoomHeight" group="@NiceSpot" destGroup="@Center" shape="bspFloorFrame" scale="FFScale" fill="#0080ff" frame="#000000" cx="52.5" cz="98.125" angle="135" />
   <unique vars="mOff mOn mOpen mClose" />
-  <Switch y="RoomHeight + 2" shape="bspWallSwitchOff" altShape="bspWallSwitchOn" out.0="mOff" out.1="mOn" fill="#bbbbbb" frame="#000000" cx="6.25" cz="101.875" angle="180" />
+  <Switch y="RoomHeight + 2" shape="bspWallSwitchOff" altShape="bspWallSwitchOn" out.0="mOff" out.1="mOn" fill="#c7c7c7" frame="#000000" cx="6.25" cz="101.875" angle="0" />
   <And in="mOff" out.0="mClose" out.1="@StirOff1" />
   <And in="mOn" out.0="mClose" out.1="@StirOn1" />
   <Timer in.0="@StirOn" in.1="@StirOff" wait="1" out="mOpen" />
   <Text in="mOn" showEveryone="true" text="Switch #4 On!" cx="6.25" cz="101.875" r="1.875" />
   <Text in="mOff" showEveryone="true" text="Switch #4 Off!" cx="6.25" cz="101.875" r="1.875" />
-  <Door2 shape="bsp2Sphere" y="RoomHeight + 2" midRoll="90" midPitch="-90" deltaY="10000" volume="0" hitSound="snStepMetal" scale=".7" yon="0.01" status="isOpen" close="mClose" open="mOpen" openSpeed="100" closeSpeed="100" fill="#bbbbbb" frame="#000000" cx="6.25" cz="101.875" angle="180" />
+  <Door2 shape="bsp2Sphere" y="RoomHeight + 2" midRoll="90" midPitch="-90" deltaY="10000" volume="0" hitSound="snStepMetal" scale=".7" yon="0.01" status="isOpen" close="mClose" open="mOpen" openSpeed="100" closeSpeed="100" fill="#c7c7c7" frame="#000000" cx="6.25" cz="101.875" angle="0" />
   <Counter in="@StirOn1" n="4" out="@StirOn" />
   <Counter in="@StirOff1" n="4" out="@StirOff" />
   <Text in="@StirOn" showEveryone="true" text="Stir Mode Activated!" cx="6.25" cz="101.875" r="1.875" />
   <Text in="@StirOff" showEveryone="true" text="Stir Mode Deactivated!" cx="6.25" cz="101.875" r="1.875" />
   <unique vars="mOff mOn mOpen mClose" />
-  <Switch y="RoomHeight + 2" shape="bspWallSwitchOff" altShape="bspWallSwitchOn" out.0="mOff" out.1="mOn" fill="#bbbbbb" frame="#000000" cx="102.5" cz="98.125" angle="90" />
+  <Switch y="RoomHeight + 2" shape="bspWallSwitchOff" altShape="bspWallSwitchOn" out.0="mOff" out.1="mOn" fill="#c7c7c7" frame="#000000" cx="102.5" cz="98.125" angle="270" />
   <And in="mOff" out.0="mClose" out.1="@StirOff1" />
   <And in="mOn" out.0="mClose" out.1="@StirOn1" />
   <Timer in.0="@StirOn" in.1="@StirOff" wait="1" out="mOpen" />
   <Text in="mOn" showEveryone="true" text="Switch #3 On!" cx="102.5" cz="98.125" r="1.875" />
   <Text in="mOff" showEveryone="true" text="Switch #3 Off!" cx="102.5" cz="98.125" r="1.875" />
-  <Door2 shape="bsp2Sphere" y="RoomHeight + 2" midRoll="90" midPitch="-90" deltaY="10000" volume="0" hitSound="snStepMetal" scale=".7" yon="0.01" status="isOpen" close="mClose" open="mOpen" openSpeed="100" closeSpeed="100" fill="#bbbbbb" frame="#000000" cx="102.5" cz="98.125" angle="90" />
+  <Door2 shape="bsp2Sphere" y="RoomHeight + 2" midRoll="90" midPitch="-90" deltaY="10000" volume="0" hitSound="snStepMetal" scale=".7" yon="0.01" status="isOpen" close="mClose" open="mOpen" openSpeed="100" closeSpeed="100" fill="#c7c7c7" frame="#000000" cx="102.5" cz="98.125" angle="270" />
   <unique vars="mOff mOn mOpen mClose" />
-  <Switch y="RoomHeight + 2" shape="bspWallSwitchOff" altShape="bspWallSwitchOn" out.0="mOff" out.1="mOn" fill="#bbbbbb" frame="#000000" cx="2.5" cz="5.625" angle="270" />
+  <Switch y="RoomHeight + 2" shape="bspWallSwitchOff" altShape="bspWallSwitchOn" out.0="mOff" out.1="mOn" fill="#c7c7c7" frame="#000000" cx="2.5" cz="5.625" angle="90" />
   <And in="mOff" out.0="mClose" out.1="@StirOff1" />
   <And in="mOn" out.0="mClose" out.1="@StirOn1" />
   <Timer in.0="@StirOn" in.1="@StirOff" wait="1" out="mOpen" />
   <Text in="mOn" showEveryone="true" text="Switch #1 On!" cx="2.5" cz="5.625" r="1.875" />
   <Text in="mOff" showEveryone="true" text="Switch #1 Off!" cx="2.5" cz="5.625" r="1.875" />
-  <Door2 shape="bsp2Sphere" y="RoomHeight + 2" midRoll="90" midPitch="-90" deltaY="10000" volume="0" hitSound="snStepMetal" scale=".7" yon="0.01" status="isOpen" close="mClose" open="mOpen" openSpeed="100" closeSpeed="100" fill="#bbbbbb" frame="#000000" cx="2.5" cz="5.625" angle="270" />
+  <Door2 shape="bsp2Sphere" y="RoomHeight + 2" midRoll="90" midPitch="-90" deltaY="10000" volume="0" hitSound="snStepMetal" scale=".7" yon="0.01" status="isOpen" close="mClose" open="mOpen" openSpeed="100" closeSpeed="100" fill="#c7c7c7" frame="#000000" cx="2.5" cz="5.625" angle="90" />
   <unique vars="mOff mOn mOpen mClose" />
-  <Switch y="RoomHeight + 2" shape="bspWallSwitchOff" altShape="bspWallSwitchOn" out.0="mOff" out.1="mOn" fill="#bbbbbb" frame="#000000" cx="98.75" cz="1.875" angle="0" />
+  <Switch y="RoomHeight + 2" shape="bspWallSwitchOff" altShape="bspWallSwitchOn" out.0="mOff" out.1="mOn" fill="#c7c7c7" frame="#000000" cx="98.75" cz="1.875" angle="180" />
   <And in="mOff" out.0="mClose" out.1="@StirOff1" />
   <And in="mOn" out.0="mClose" out.1="@StirOn1" />
   <Timer in.0="@StirOn" in.1="@StirOff" wait="1" out="mOpen" />
   <Text in="mOn" showEveryone="true" text="Switch #2 On!" cx="98.75" cz="1.875" r="1.875" />
   <Text in="mOff" showEveryone="true" text="Switch #2 Off!" cx="98.75" cz="1.875" r="1.875" />
-  <Door2 shape="bsp2Sphere" y="RoomHeight + 2" midRoll="90" midPitch="-90" deltaY="10000" volume="0" hitSound="snStepMetal" scale=".7" yon="0.01" status="isOpen" close="mClose" open="mOpen" openSpeed="100" closeSpeed="100" fill="#bbbbbb" frame="#000000" cx="98.75" cz="1.875" angle="0" />
+  <Door2 shape="bsp2Sphere" y="RoomHeight + 2" midRoll="90" midPitch="-90" deltaY="10000" volume="0" hitSound="snStepMetal" scale=".7" yon="0.01" status="isOpen" close="mClose" open="mOpen" openSpeed="100" closeSpeed="100" fill="#c7c7c7" frame="#000000" cx="98.75" cz="1.875" angle="180" />
 </map>

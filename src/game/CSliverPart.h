@@ -8,6 +8,7 @@
 */
 
 #pragma once
+#include "ColorManager.h"
 #include "CSmartPart.h"
 
 class CSliverPart;
@@ -19,7 +20,8 @@ public:
     short lifeCount;
     ColorRecord borrowedColors;
     ColorRecord *fakeMaster;
-    Fixed gravity;
+    Fixed friction, gravity;
+    Fixed fpsScale, fpsFriction, fpsGravity;
 
     virtual void ISliverPart(short partNum);
     virtual void Activate(Fixed *origin,

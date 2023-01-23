@@ -6,12 +6,11 @@
     Created: Friday, March 1, 1996, 17:20
     Modified: Sunday, August 25, 1996, 08:54
 */
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CRealMovers.h"
 
 #include "CSmartPart.h"
-
-#define MINSPEED FIX3(10)
 
 void CRealMovers::IAbstractActor() {
     CGlowActors::IAbstractActor();
@@ -25,9 +24,9 @@ void CRealMovers::IAbstractActor() {
 }
 
 void CRealMovers::GetSpeedEstimate(Fixed *theSpeed) {
-    *theSpeed++ = speed[0];
-    *theSpeed++ = speed[1];
-    *theSpeed++ = speed[2];
+    theSpeed[0] = speed[0];
+    theSpeed[1] = speed[1];
+    theSpeed[2] = speed[2];
 }
 
 void CRealMovers::Push(Fixed *direction) {
@@ -46,9 +45,11 @@ void CRealMovers::Accelerate(Fixed *direction) {
         speed[0] += FMulDivNZ(direction[0], baseMass, theMass);
         speed[1] += FMulDivNZ(direction[1], baseMass, theMass);
         speed[2] += FMulDivNZ(direction[2], baseMass, theMass);
+        FPS_DEBUG("CRealMovers::Accelerate: speed = " << FormatVectorFloat(speed, 3) << "\n");
     }
 }
 
+#include <iostream>
 void CRealMovers::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     Vector impulseMotion;
     Fixed impulsePower;
@@ -67,7 +68,7 @@ void CRealMovers::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 
 void CRealMovers::FindBestMovement(CSmartPart *objHit) {
     Vector newSpeed;
-    Vector deltaSpeed;
+    Vector deltaSpeed, deltaLoc;
     Fixed yDir;
     Fixed dotProd;
     Fixed absDot;
@@ -95,13 +96,19 @@ void CRealMovers::FindBestMovement(CSmartPart *objHit) {
             newSpeed[1] = speed[1] - FMul(norm[1], dotProd);
             newSpeed[2] = speed[2] - FMul(norm[2], dotProd);
 
+            Fixed MINSPEED = FpsCoefficient2(FIX3(10));
             if (newSpeed[0] > MINSPEED || newSpeed[0] < -MINSPEED || newSpeed[1] > MINSPEED ||
                 newSpeed[1] < -MINSPEED || newSpeed[2] > MINSPEED || newSpeed[2] < -MINSPEED) {
+
                 deltaSpeed[0] = newSpeed[0] - deltaSpeed[0];
                 deltaSpeed[1] = newSpeed[1] - deltaSpeed[1];
                 deltaSpeed[2] = newSpeed[2] - deltaSpeed[2];
 
-                OffsetParts(deltaSpeed);
+                deltaLoc[0] = FpsCoefficient2(deltaSpeed[0]);
+                deltaLoc[1] = FpsCoefficient2(deltaSpeed[1]);
+                deltaLoc[2] = FpsCoefficient2(deltaSpeed[2]);
+
+                OffsetParts(deltaLoc);
 
                 deltaSpeed[0] = newSpeed[0];
                 deltaSpeed[1] = newSpeed[1];
@@ -119,14 +126,18 @@ void CRealMovers::FindBestMovement(CSmartPart *objHit) {
     deltaSpeed[0] = bestSpeed[0] - deltaSpeed[0];
     deltaSpeed[1] = bestSpeed[1] - deltaSpeed[1];
     deltaSpeed[2] = bestSpeed[2] - deltaSpeed[2];
-    location[0] += bestSpeed[0];
-    location[1] += bestSpeed[1];
-    location[2] += bestSpeed[2];
+
+    location[0] += FpsCoefficient2(bestSpeed[0]);
+    location[1] += FpsCoefficient2(bestSpeed[1]);
+    location[2] += FpsCoefficient2(bestSpeed[2]);
+    deltaLoc[0] = FpsCoefficient2(deltaSpeed[0]);
+    deltaLoc[1] = FpsCoefficient2(deltaSpeed[1]);
+    deltaLoc[2] = FpsCoefficient2(deltaSpeed[2]);
 
     speed[0] = bestSpeed[0];
     speed[1] = bestSpeed[1];
     speed[2] = bestSpeed[2];
-    OffsetParts(deltaSpeed);
+    OffsetParts(deltaLoc);
 }
 
 void CRealMovers::StandingOn(CAbstractActor *who, //	Who is touching me?

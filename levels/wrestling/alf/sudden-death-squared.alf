@@ -1,61 +1,61 @@
 <map>
   <set baseHeight="50" />
-  <Wall fill="#004400" frame="#000000" x="7.5" z="50" w="15" d="30" h="0.25" />
-  <Wall fill="#002200" frame="#000000" x="7.5" z="40" w="5" d="10" h="2.25" y=".25" />
+  <Wall fill="#005400" frame="#000000" x="7.5" z="50" w="15" d="30" h="0.25" />
+  <Wall fill="#002c00" frame="#000000" x="7.5" z="40" w="5" d="10" h="2.25" y=".25" />
   <Wall fill="#000000" frame="#000000" x="25" z="37.5" w="20" d="3.75" h="0.25" />
-  <Wall fill="#002200" frame="#000000" x="7.5" z="60" w="5" d="10" h="2.25" y=".25" />
+  <Wall fill="#002c00" frame="#000000" x="7.5" z="60" w="5" d="10" h="2.25" y=".25" />
   <Wall fill="#000000" frame="#000000" x="70" z="57.5" w="20" d="3.75" h="0.25" />
-  <Wall fill="#aa0000" frame="#000000" x="87.5" z="45" w="15" d="30" h="0.25" />
-  <Wall fill="#770000" frame="#000000" x="87.5" z="55" w="5" d="10" h="2.25" y=".25" />
-  <Wall fill="#770000" frame="#000000" x="87.5" z="35" w="5" d="10" h="2.25" y=".25" />
-  <Incarnator y=".25" mask="T1" cx="3.8194444444444446" cz="50.3125" angle="270" />
-  <Incarnator y=".25" mask="T3" cx="92.46527777777777" cz="44.6875" angle="90" />
+  <Wall fill="#bb1800" frame="#000000" x="87.5" z="45" w="15" d="30" h="0.25" />
+  <Wall fill="#8b0f00" frame="#000000" x="87.5" z="55" w="5" d="10" h="2.25" y=".25" />
+  <Wall fill="#8b0f00" frame="#000000" x="87.5" z="35" w="5" d="10" h="2.25" y=".25" />
+  <Incarnator y=".25" mask="T1" cx="3.8194444444444446" cz="50.3125" angle="90" />
+  <Incarnator y=".25" mask="T3" cx="92.46527777777777" cz="44.6875" angle="270" />
   <set designer="Red Cap" information="1 on 1 on 1 on 1 , one life , Death Match , use in case of tie or other .. Green vs Red vs Purple vs Blue." />
-  <SkyColor fill="#000055" frame="#000000" />
-  <GroundColor fill="#663300" />
+  <SkyColor fill="#010e68" frame="#000000" />
+  <GroundColor fill="#7a4300" />
   <set defaultLives="1" />
-  <Wall fill="#004400" frame="#000000" x="25" z="35.3125" w="20" d="0.625" h="0.25" />
-  <Wall fill="#004400" frame="#000000" x="25" z="39.6875" w="20" d="0.625" h="0.25" />
-  <Wall fill="#aa0000" frame="#000000" x="70" z="55.3125" w="20" d="0.625" h="0.25" />
-  <Wall fill="#aa0000" frame="#000000" x="70" z="59.6875" w="20" d="0.625" h="0.25" />
+  <Wall fill="#005400" frame="#000000" x="25" z="35.3125" w="20" d="0.625" h="0.25" />
+  <Wall fill="#005400" frame="#000000" x="25" z="39.6875" w="20" d="0.625" h="0.25" />
+  <Wall fill="#bb1800" frame="#000000" x="70" z="55.3125" w="20" d="0.625" h="0.25" />
+  <Wall fill="#bb1800" frame="#000000" x="70" z="59.6875" w="20" d="0.625" h="0.25" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="32" />
-  <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" teamMask="T1" fill="#004400" frame="#000000" cx="8.125" cz="49.375" angle="225" />
+  <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" teamMask="T1" fill="#005400" frame="#000000" cx="8.125" cz="49.375" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="32" />
-  <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" teamMask="T3" fill="#aa0000" frame="#000000" cx="88.125" cz="44.375" angle="225" />
-  <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" fragment="false" spin="false" fill="#ffffff" frame="#000000" cx="46.875" cz="48.125" angle="45" />
-  <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="46.875" cz="48.125" angle="45" />
+  <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" teamMask="T3" fill="#bb1800" frame="#000000" cx="88.125" cz="44.375" angle="45" />
+  <Teleporter y="100" activeRange="2000" deadRange="125" shape="0" sound="0" fragment="false" spin="false" fill="#ffffff" frame="#000000" cx="46.875" cz="48.125" angle="225" />
+  <Teleporter start="@winTeam" activeRange="200" y="100" shape="0" win="3500" fill="#ffffff" frame="#000000" cx="46.875" cz="48.125" angle="225" />
   <WallDoor open="@Stepsquare6" close="@Stepsquare6c" deltaY="20" shotPower="9999" guardDelay="1" openSound="0" closeSound="0" stopSound="0" didOpen="@Stepsquare6c" openSpeed="10" closeSpeed="10" stepOnMsg="@Stepsquare6" fill="#ffffff" frame="#000000" x="47.5" z="47.5" w="5" d="5" h="0.25" y="99" />
   <Wall fill="#000000" frame="#000000" x="37.5" z="70" w="3.75" d="20" h="0.25" />
-  <Wall fill="#0099ff" frame="#000000" x="35.3125" z="70" w="0.625" d="20" h="0.25" />
-  <Wall fill="#0099ff" frame="#000000" x="39.6875" z="70" w="0.625" d="20" h="0.25" />
-  <Wall fill="#0099ff" frame="#000000" x="50" z="87.5" w="30" d="15" h="0.25" />
+  <Wall fill="#00acff" frame="#000000" x="35.3125" z="70" w="0.625" d="20" h="0.25" />
+  <Wall fill="#00acff" frame="#000000" x="39.6875" z="70" w="0.625" d="20" h="0.25" />
+  <Wall fill="#00acff" frame="#000000" x="50" z="87.5" w="30" d="15" h="0.25" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="32" />
-  <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" teamMask="T6" fill="#0099ff" frame="#000000" cx="50.625" cz="86.875" angle="225" />
-  <Incarnator y=".25" mask="T6" cx="50.3125" cz="91.84027777777777" angle="180" />
-  <Wall fill="#0066ff" frame="#000000" x="60" z="87.5" w="10" d="5" h="2.25" y=".25" />
-  <Wall fill="#0066ff" frame="#000000" x="40" z="87.5" w="10" d="5" h="2.25" y=".25" />
+  <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" teamMask="T6" fill="#00acff" frame="#000000" cx="50.625" cz="86.875" angle="45" />
+  <Incarnator y=".25" mask="T6" cx="50.3125" cz="91.84027777777777" angle="0" />
+  <Wall fill="#0080ff" frame="#000000" x="60" z="87.5" w="10" d="5" h="2.25" y=".25" />
+  <Wall fill="#0080ff" frame="#000000" x="40" z="87.5" w="10" d="5" h="2.25" y=".25" />
   <Wall fill="#000000" frame="#000000" x="57.5" z="25" w="3.75" d="20" h="0.25" />
-  <Wall fill="#9933ff" frame="#000000" x="55.3125" z="25" w="0.625" d="20" h="0.25" />
-  <Wall fill="#9933ff" frame="#000000" x="59.6875" z="25" w="0.625" d="20" h="0.25" />
-  <Wall fill="#9933ff" frame="#000000" x="45" z="7.5" w="30" d="15" h="0.25" />
-  <Wall fill="#9900cc" frame="#000000" x="35" z="7.5" w="10" d="5" h="2.25" y=".25" />
-  <Wall fill="#9900cc" frame="#000000" x="55" z="7.5" w="10" d="5" h="2.25" y=".25" />
+  <Wall fill="#ab56ff" frame="#000000" x="55.3125" z="25" w="0.625" d="20" h="0.25" />
+  <Wall fill="#ab56ff" frame="#000000" x="59.6875" z="25" w="0.625" d="20" h="0.25" />
+  <Wall fill="#ab56ff" frame="#000000" x="45" z="7.5" w="30" d="15" h="0.25" />
+  <Wall fill="#ab30d6" frame="#000000" x="35" z="7.5" w="10" d="5" h="2.25" y=".25" />
+  <Wall fill="#ab30d6" frame="#000000" x="55" z="7.5" w="10" d="5" h="2.25" y=".25" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="32" />
-  <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" teamMask="T6" fill="#9933ff" frame="#000000" cx="45.625" cz="6.875" angle="225" />
-  <Incarnator y=".25" mask="T5" cx="45.3125" cz="3.1944444444444446" angle="0" />
+  <Goody shape="bspAvaraA" y="1.8" speed="1" missiles="10" grenades="20" start="mShow" out="mTaken" yon="10" teamMask="T6" fill="#ab56ff" frame="#000000" cx="45.625" cz="6.875" angle="45" />
+  <Incarnator y=".25" mask="T5" cx="45.3125" cz="3.1944444444444446" angle="180" />
   <set ambient.i="0.2" light.0.i="1" light.0.a="90" light.1.i="0.5" light.1.b="45" />
-  <Wall fill="#9933ff" frame="#000000" x="53.4375" z="41.5625" w="10.625" d="10.625" h="0.25" />
-  <Wall fill="#004400" frame="#000000" x="41.5625" z="41.5625" w="10.625" d="10.625" h="0.25" />
-  <Wall fill="#0099ff" frame="#000000" x="41.5625" z="53.4375" w="10.625" d="10.625" h="0.25" />
-  <Wall fill="#aa0000" frame="#000000" x="53.4375" z="53.4375" w="10.625" d="10.625" h="0.25" />
+  <Wall fill="#ab56ff" frame="#000000" x="53.4375" z="41.5625" w="10.625" d="10.625" h="0.25" />
+  <Wall fill="#005400" frame="#000000" x="41.5625" z="41.5625" w="10.625" d="10.625" h="0.25" />
+  <Wall fill="#00acff" frame="#000000" x="41.5625" z="53.4375" w="10.625" d="10.625" h="0.25" />
+  <Wall fill="#bb1800" frame="#000000" x="53.4375" z="53.4375" w="10.625" d="10.625" h="0.25" />
   <Wall fill="#000000" frame="#000000" x="35.625" z="48.125" w="1.25" d="23.75" h="0.25" />
   <Wall fill="#000000" frame="#000000" x="47.5" z="35.625" w="25" d="1.25" h="0.25" />
   <Wall fill="#000000" frame="#000000" x="59.375" z="48.125" w="1.25" d="23.75" h="0.25" />

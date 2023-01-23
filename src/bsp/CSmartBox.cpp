@@ -11,6 +11,7 @@
 
 #include "Memory.h"
 #include "Resource.h"
+#include "AvaraGL.h"
 
 #define DIMEPSILON 16
 
@@ -115,9 +116,6 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
     FindEnclosure();
 }
 
-#define kMarkerColor 0x00fefefe
-#define kOtherMarkerColor 0x00fe0000
-
 void CSmartBox::ISmartBox(short resId,
     Fixed *dimensions,
     long color,
@@ -167,7 +165,7 @@ void CSmartBox::ISmartBox(short resId,
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    UpdateOpenGLData();
+    AvaraGLUpdateData(this);
 }
 
 void CSmartBox::Dispose() {

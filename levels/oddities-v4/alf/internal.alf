@@ -1,407 +1,404 @@
 <map>
-  <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#006600" frame="#000000" x="5.9375" z="44.93055555555556" w="8.125" d="7.5" h="3" />
-  <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#006600" frame="#000000" x="64.0625" z="44.93055555555556" w="8.125" d="7.5" h="3" />
-  <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#006600" frame="#000000" x="35" z="15.868055555555557" w="7.5" d="8.125" h="3" />
-  <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#006600" frame="#000000" x="35" z="73.99305555555556" w="7.5" d="8.125" h="3" />
-  <set information="Shoot the blocks to clear them out of your way.
-    Light & medium hulls have 4x shot power, but have no missiles or grenades; the heavy hull behaves like a standard medium.
-    15 minute time limit.
-    WARNING: Complex level. Expect lag." TheWall="10" wallHeight="TheWall" gravity="0.75" CPlatThick=".6" eyeHeight="1.23" lower="0" muddle="3" upper="6" ceiling="9" timeLimit="15 * 60" wa="ceiling" />
-  <Wall fill="#ff9999" frame="#000000" x="35" z="44.93055555555556" w="50" d="50" h="0" />
-  <Incarnator y="upper" cx="34.93055555555556" cz="16.180555555555557" angle="0" />
-  <Wall fill="#444444" frame="#000000" x="49.375" z="18.993055555555557" w="21.25" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="30.3125" z="13.993055555555557" w="1.875" d="8.125" h="0" />
-  <Wall fill="#444444" frame="#000000" x="39.6875" z="13.993055555555557" w="1.875" d="8.125" h="0" />
-  <Wall fill="#444444" frame="#000000" x="35" z="10.868055555555555" w="7.5" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="19.6875" z="18.993055555555557" w="23.125" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="60.9375" z="59.30555555555556" w="1.875" d="21.25" h="0" />
-  <Wall fill="#444444" frame="#000000" x="65.9375" z="40.24305555555556" w="8.125" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="65.9375" z="49.61805555555556" w="8.125" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="69.0625" z="44.93055555555556" w="1.875" d="7.5" h="0" />
-  <Wall fill="#444444" frame="#000000" x="60.9375" z="29.618055555555557" w="1.875" d="23.125" h="0" />
-  <Wall fill="#444444" frame="#000000" x="20.625" z="70.86805555555556" w="21.25" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="39.6875" z="75.86805555555556" w="1.875" d="8.125" h="0" />
-  <Wall fill="#444444" frame="#000000" x="30.3125" z="75.86805555555556" w="1.875" d="8.125" h="0" />
-  <Wall fill="#444444" frame="#000000" x="35" z="78.99305555555556" w="7.5" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="50.3125" z="70.86805555555556" w="23.125" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="9.0625" z="30.555555555555557" w="1.875" d="21.25" h="0" />
-  <Wall fill="#444444" frame="#000000" x="4.0625" z="49.61805555555556" w="8.125" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="4.0625" z="40.24305555555556" w="8.125" d="1.875" h="0" />
-  <Wall fill="#444444" frame="#000000" x="0.9375" z="44.93055555555556" w="1.875" d="7.5" h="0" />
-  <Wall fill="#444444" frame="#000000" x="9.0625" z="60.24305555555556" w="1.875" d="23.125" h="0" />
-  <Incarnator y="upper" cx="64.02777777777779" cz="45.13888888888889" angle="90" />
-  <Incarnator y="upper" cx="34.93055555555556" cz="73.68055555555556" angle="180" />
-  <Incarnator y="upper" cx="7.777777777777779" cz="45.13888888888889" angle="270" />
-  <Incarnator y="6" cx="27.77777777777778" cz="32.01388888888889" angle="270" />
-  <Incarnator y="6" cx="48.40277777777778" cz="32.63888888888889" angle="270" />
-  <Incarnator y="3" cx="28.055555555555557" cz="48.05555555555556" angle="0" />
-  <Incarnator y="6" cx="19.65277777777778" cz="27.63888888888889" angle="270" />
-  <Incarnator y="6" cx="53.40277777777778" cz="22.01388888888889" angle="270" />
+  <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#007600" frame="#000000" x="5.9375" z="44.93055555555556" w="8.125" d="7.5" h="3" />
+  <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#007600" frame="#000000" x="64.0625" z="44.93055555555556" w="8.125" d="7.5" h="3" />
+  <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#007600" frame="#000000" x="35" z="15.868055555555557" w="7.5" d="8.125" h="3" />
+  <WallDoor deltaY="3" status="isOpen" close="@drop" guardDelay="2" fill="#007600" frame="#000000" x="35" z="73.99305555555556" w="7.5" d="8.125" h="3" />
+  <set information="Shoot the blocks to clear them out of your way.&#10;    Light & medium hulls have 4x shot power, but have no missiles or grenades; the heavy hull behaves like a standard medium.&#10;    15 minute time limit.&#10;    WARNING: Complex level. Expect lag." TheWall="10" wallHeight="TheWall" gravity="0.75" CPlatThick=".6" eyeHeight="1.23" lower="0" muddle="3" upper="6" ceiling="9" timeLimit="15 * 60" wa="ceiling" />
+  <Wall fill="#ffaca9" frame="#000000" x="35" z="44.93055555555556" w="50" d="50" h="0" />
+  <Incarnator y="upper" cx="34.93055555555556" cz="16.180555555555557" angle="180" />
+  <Wall fill="#565656" frame="#000000" x="49.375" z="18.993055555555557" w="21.25" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="30.3125" z="13.993055555555557" w="1.875" d="8.125" h="0" />
+  <Wall fill="#565656" frame="#000000" x="39.6875" z="13.993055555555557" w="1.875" d="8.125" h="0" />
+  <Wall fill="#565656" frame="#000000" x="35" z="10.868055555555555" w="7.5" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="19.6875" z="18.993055555555557" w="23.125" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="60.9375" z="59.30555555555556" w="1.875" d="21.25" h="0" />
+  <Wall fill="#565656" frame="#000000" x="65.9375" z="40.24305555555556" w="8.125" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="65.9375" z="49.61805555555556" w="8.125" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="69.0625" z="44.93055555555556" w="1.875" d="7.5" h="0" />
+  <Wall fill="#565656" frame="#000000" x="60.9375" z="29.618055555555557" w="1.875" d="23.125" h="0" />
+  <Wall fill="#565656" frame="#000000" x="20.625" z="70.86805555555556" w="21.25" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="39.6875" z="75.86805555555556" w="1.875" d="8.125" h="0" />
+  <Wall fill="#565656" frame="#000000" x="30.3125" z="75.86805555555556" w="1.875" d="8.125" h="0" />
+  <Wall fill="#565656" frame="#000000" x="35" z="78.99305555555556" w="7.5" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="50.3125" z="70.86805555555556" w="23.125" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="9.0625" z="30.555555555555557" w="1.875" d="21.25" h="0" />
+  <Wall fill="#565656" frame="#000000" x="4.0625" z="49.61805555555556" w="8.125" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="4.0625" z="40.24305555555556" w="8.125" d="1.875" h="0" />
+  <Wall fill="#565656" frame="#000000" x="0.9375" z="44.93055555555556" w="1.875" d="7.5" h="0" />
+  <Wall fill="#565656" frame="#000000" x="9.0625" z="60.24305555555556" w="1.875" d="23.125" h="0" />
+  <Incarnator y="upper" cx="64.02777777777779" cz="45.13888888888889" angle="270" />
+  <Incarnator y="upper" cx="34.93055555555556" cz="73.68055555555556" angle="0" />
+  <Incarnator y="upper" cx="7.777777777777779" cz="45.13888888888889" angle="90" />
+  <Incarnator y="6" cx="27.77777777777778" cz="32.01388888888889" angle="90" />
+  <Incarnator y="6" cx="48.40277777777778" cz="32.63888888888889" angle="90" />
+  <Incarnator y="3" cx="28.055555555555557" cz="48.05555555555556" angle="180" />
+  <Incarnator y="6" cx="19.65277777777778" cz="27.63888888888889" angle="90" />
+  <Incarnator y="6" cx="53.40277777777778" cz="22.01388888888889" angle="90" />
   <set baseHeight="lower" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="67.43055555555556" w="5" d="5" h="3" />
   <set baseHeight="muddle" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="67.43055555555556" w="5" d="5" h="3" />
   <set baseHeight="upper" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="22.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="27.430555555555557" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="32.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="37.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="42.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="47.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="52.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="57.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="62.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="12.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="17.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="22.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="27.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="32.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="37.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="42.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="47.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="52.5" z="67.43055555555556" w="5" d="5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="57.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="22.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="27.430555555555557" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="32.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="37.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="42.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="47.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="52.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="57.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="62.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="12.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="17.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="22.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="27.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="32.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="37.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="42.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="47.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="52.5" z="67.43055555555556" w="5" d="5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="57.5" z="67.43055555555556" w="5" d="5" h="3" />
   <set baseHeight="0" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="22.5" cz="32.43055555555556" angle="45" />
+  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ec00" frame="#000000" cx="22.5" cz="32.43055555555556" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="57.5" cz="67.43055555555556" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#fffb00" frame="#000000" cx="57.5" cz="67.43055555555556" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="47.5" cz="57.43055555555556" angle="45" />
+  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ec00" frame="#000000" cx="47.5" cz="57.43055555555556" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="22.5" cz="57.43055555555556" angle="45" />
+  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ec00" frame="#000000" cx="22.5" cz="57.43055555555556" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ee00" frame="#000000" cx="47.5" cz="32.43055555555556" angle="45" />
+  <Goody shape="bspGoody" grenades="1" missiles="1" boosters="1" boostTime="15 * 3" shield="1" start="mReset" out="mTaken" y="eyeHeight + lower" fill="#00ec00" frame="#000000" cx="47.5" cz="32.43055555555556" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="12.5" cz="67.43055555555556" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#fffb00" frame="#000000" cx="12.5" cz="67.43055555555556" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="57.5" cz="22.430555555555557" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#fffb00" frame="#000000" cx="57.5" cz="22.430555555555557" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" shield="20" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#ffff00" frame="#000000" cx="12.5" cz="22.430555555555557" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 10" shield="20" start="mReset" out="mTaken" y="eyeHeight + muddle" fill="#fffb00" frame="#000000" cx="12.5" cz="22.430555555555557" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="120" />
   <set wa="ceiling" />
-  <Wall fill="#ffcccc" frame="#000000" x="5.9375" z="44.93055555555556" w="8.125" d="7.5" h="0" />
+  <Wall fill="#ffd6d5" frame="#000000" x="5.9375" z="44.93055555555556" w="8.125" d="7.5" h="0" />
   <set wa="ceiling" />
-  <Wall fill="#ffcccc" frame="#000000" x="64.0625" z="44.93055555555556" w="8.125" d="7.5" h="0" />
+  <Wall fill="#ffd6d5" frame="#000000" x="64.0625" z="44.93055555555556" w="8.125" d="7.5" h="0" />
   <set wa="ceiling" />
-  <Wall fill="#ffcccc" frame="#000000" x="35" z="15.868055555555557" w="7.5" d="8.125" h="0" />
+  <Wall fill="#ffd6d5" frame="#000000" x="35" z="15.868055555555557" w="7.5" d="8.125" h="0" />
   <set wa="ceiling" />
-  <Wall fill="#ffcccc" frame="#000000" x="35" z="73.99305555555556" w="7.5" d="8.125" h="0" />
+  <Wall fill="#ffd6d5" frame="#000000" x="35" z="73.99305555555556" w="7.5" d="8.125" h="0" />
   <set wallHeight="CPlatThick" baseHeight="upper" />
-  <Wall fill="#000077" frame="#000000" x="35" z="44.93055555555556" w="5" d="5" h="0" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="36.25" z="41.18055555555556" w="7.5" d="2.5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="38.75" z="46.18055555555556" w="2.5" d="7.5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="31.25" z="43.68055555555556" w="2.5" d="7.5" h="3" />
-  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#ccffff" frame="#000000" x="33.75" z="48.68055555555556" w="7.5" d="2.5" h="3" />
+  <Wall fill="#01168a" frame="#000000" x="35" z="44.93055555555556" w="5" d="5" h="0" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="36.25" z="41.18055555555556" w="7.5" d="2.5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="38.75" z="46.18055555555556" w="2.5" d="7.5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="31.25" z="43.68055555555556" w="2.5" d="7.5" h="3" />
+  <WallSolid targetGroup="targ1" canGlow="true" power=".4" shield="2" fill="#d4feff" frame="#000000" x="33.75" z="48.68055555555556" w="7.5" d="2.5" h="3" />
   <set wallHeight="0" baseHeight="0" />
   <set wallHeight="10" />
   <unique vars="mReset mGo mStart" />
-  <WallDoor deltaY="upper + CPlatThick" open="mGo" close="mReset" didOpen="mReset" openSpeed="3" closeSpeed="100" fill="#ff6600" frame="#000000" x="35" z="44.93055555555556" w="5" d="5" h="0" />
+  <WallDoor deltaY="upper + CPlatThick" open="mGo" close="mReset" didOpen="mReset" openSpeed="3" closeSpeed="100" fill="#01168a" frame="#000000" x="35" z="44.93055555555556" w="5" d="5" h="0" />
   <Timer in.0="@start" in.1="mGo" wait="700" out="mStart" />
-  <Sound sound="snMineBleep" volume="10" loopCount="16" start="mStart" isAmbient="false" cx="35" cz="44.93055555555556" angle="45" />
+  <Sound sound="snMineBleep" volume="10" loopCount="16" start="mStart" isAmbient="false" cx="35" cz="44.93055555555556" angle="225" />
   <Timer in="mStart" wait="60" out="mGo" />
-  <Incarnator y="3" cx="38.05555555555556" cz="43.05555555555556" angle="0" />
+  <Incarnator y="3" cx="38.05555555555556" cz="43.05555555555556" angle="180" />
   <unique vars="mTaken mReset" />
-  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 40" power="20" shield="20" lives="2" start="mReset" out="mTaken" y="eyeHeight + upper" fill="#ff0000" frame="#000000" cx="35" cz="44.93055555555556" angle="45" />
+  <Goody shape="bspGoody" grenades="10" missiles="10" boosters="10" boostTime="15 * 40" power="20" shield="20" lives="2" start="mReset" out="mTaken" y="eyeHeight + upper" fill="#ff2600" frame="#000000" cx="35" cz="44.93055555555556" angle="225" />
   <Timer in.0="@start" in.1="mTaken" out="mReset" wait="240" />
-  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ee00" frame="#000000" cx="25.555555555555557" cz="14.722222222222221" angle="45" />
-  <GroundColor fill="#000055" />
-  <SkyColor n="0" fill="#000055" frame="#000000" />
+  <Teleporter yon="0.01" y="200" win="5000" start="@winTeam" activeRange="2000" fill="#00ec00" frame="#000000" cx="25.555555555555557" cz="14.722222222222221" angle="225" />
+  <GroundColor fill="#010e68" />
+  <SkyColor n="0" fill="#010e68" frame="#000000" />
   <set hull.0="hullInternalLight" hull.1="hullInternalLight" hull.2="hullInternalHeavy" />
-  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="45" />
-  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="45" />
-  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="45" />
-  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="45" />
-  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="45" />
-  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="45" />
-  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="45" />
-  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="45" />
-  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="45" />
-  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="45" />
-  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="45" />
-  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#ccffff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="45" />
+  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="225" />
+  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="225" />
+  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="59.375" cz="20.555555555555557" angle="225" />
+  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="225" />
+  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="225" />
+  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="58.75" cz="69.30555555555556" angle="225" />
+  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="225" />
+  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="225" />
+  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="10.625" cz="69.30555555555556" angle="225" />
+  <Guard y="ceiling -1" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="225" />
+  <Guard y="0" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="225" />
+  <Guard y="ceiling / 2" watch="targ1 + playerMask" freq="0" shotPower="5" speed="3" scale="0" start="@DEATH" fill="#d4feff" frame="#000000" cx="10.625" cz="21.180555555555557" angle="225" />
   <Timer in="@start" wait="15 * timeLimit" out="@DEATH" />
   <Timer in="@start" wait="150" out="@drop" />
 </map>

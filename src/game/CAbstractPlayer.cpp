@@ -7,12 +7,14 @@
     Modified: Thursday, September 26, 1996, 00:06
 */
 
+// #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
+
 #include "CAbstractPlayer.h"
 
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
@@ -20,9 +22,11 @@
 #include "CViewParameters.h"
 //#include "CInfoPanel.h"
 #include "InfoMessages.h"
+#include "Messages.h"
 //#include "Palettes.h"
 #include "CApplication.h"
 #include "CIncarnator.h"
+#include "CRandomIncarnator.h"
 #include "KeyFuncs.h"
 //#include "LevelScoreRecord.h"
 #include "CAbstractYon.h"
@@ -37,7 +41,7 @@
 // replaced by kFOV preference
 //#define MAXFOV FIX(60)
 #define MINFOV FIX(5)
-#define FOVSTEP FIX3(1500)
+#define FOVSTEP FpsCoefficient2(FIX3(1500))
 #define MINSPEED FIX3(10) //    15 mm/second at 15 fps
 #define BOOSTLENGTH (16 * 5)
 #define MINIBOOSTTIME 32
@@ -55,7 +59,7 @@ void CAbstractPlayer::LoadHUDParts() {
     for (i = 0; i < 2; i++) {
         targetOns[i] = new CBSPPart;
         targetOns[i]->IBSPPart(kTargetOk);
-        targetOns[i]->ReplaceColor(0x00ff0000, CColorManager::getPlasmaSightsOnColor());
+        targetOns[i]->ReplaceColor(0xffff2600, ColorManager::getPlasmaSightsOnColor());
         targetOns[i]->privateAmbient = SIGHTSAMBIENT;
         targetOns[i]->yon = LONGYON * 2;
         targetOns[i]->usesPrivateYon = true;
@@ -65,7 +69,7 @@ void CAbstractPlayer::LoadHUDParts() {
 
         targetOffs[i] = new CBSPPart;
         targetOffs[i]->IBSPPart(kTargetOff);
-        targetOffs[i]->ReplaceColor(0x00008000, CColorManager::getPlasmaSightsOffColor());
+        targetOffs[i]->ReplaceColor(0xff008f00, ColorManager::getPlasmaSightsOffColor());
         targetOffs[i]->privateAmbient = SIGHTSAMBIENT;
         targetOffs[i]->yon = LONGYON * 2;
         targetOffs[i]->usesPrivateYon = true;
@@ -77,7 +81,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrowHeight = FIX3(750);
     dirArrow = new CBSPPart;
     dirArrow->IBSPPart(kDirIndBSP);
-    dirArrow->ReplaceColor(0x00000000, CColorManager::getLookForwardColor());
+    dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
     dirArrow->ignoreDirectionalLights = true;
     dirArrow->privateAmbient = FIX(1);
     dirArrow->isTransparent = true;
@@ -87,7 +91,6 @@ void CAbstractPlayer::LoadHUDParts() {
 void CAbstractPlayer::StartSystems() {
     //  Get systems running:
     reEnergize = false;
-    generatorPower = FIX3(30);
     maxEnergy = FIX(5);
     energy = maxEnergy;
     boostsRemaining = 3;
@@ -103,7 +106,6 @@ void CAbstractPlayer::StartSystems() {
     grenadeCount = 0;
     lookDirection = 0;
 
-    shieldRegen = FIX3(30); //  Use 0.030 per frame to repair shields
     maxShields = FIX(3); // Maximum shields are 3 units
     shields = maxShields;
 
@@ -120,10 +122,9 @@ void CAbstractPlayer::StartSystems() {
     baseMass = mass;
     turningEffect = FDegToOne(FIX(3.5));
     movementCost = FIX3(10);
-    maxAcceleration = FIX3(250)*itsGame->FrameTimeScale(2);
-#define CLASSICACCELERATION FIX3(250)
-    motorFriction = FIX(pow(0.75, itsGame->FrameTimeScale()));
 #define CLASSICMOTORFRICTION FIX3(750)
+#define CLASSICACCELERATION FIX3(250)
+    maxAcceleration = CLASSICACCELERATION;
     didBump = true;
 
     groundSlide[0] = 0;
@@ -133,7 +134,6 @@ void CAbstractPlayer::StartSystems() {
 
     fullGunEnergy = FIX3(800); //   Maximum single shot power is 0.8 units
     activeGunEnergy = FIX3(250); // Minimum single shot power is 0.25 units
-    chargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
 
     mouseShootTime = 0;
     gunEnergy[0] = fullGunEnergy;
@@ -168,13 +168,19 @@ void CAbstractPlayer::StartSystems() {
 
     nextGrenadeLoad = 0;
     nextMissileLoad = 0;
+
+    // variables in AdaptableSettings need to have "classic" counterparts in case they are changed in CWalkerActor::ReceiveConfig()
+    classicGeneratorPower = FIX3(30);
+    classicShieldRegen = FIX3(30);       //  Use 0.030 per frame to repair shields
+    classicChargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
+    classicMotorFriction = CLASSICMOTORFRICTION;
 }
 
 void CAbstractPlayer::LoadScout() {
     scoutCommand = kScoutNullCommand;
 
     itsScout = new CScout;
-    itsScout->IScout(this, teamColor, GetTeamColorOr(CColorManager::getDefaultTeamColor()));
+    itsScout->IScout(this, teamColor, GetTeamColorOr(ColorManager::getDefaultTeamColor()));
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();
@@ -182,21 +188,21 @@ void CAbstractPlayer::LoadScout() {
 
 void CAbstractPlayer::ReplacePartColors() {
     teamMask = 1 << teamColor;
-    longTeamColor = GetTeamColorOr(CColorManager::getDefaultTeamColor());
+    longTeamColor = GetTeamColorOr(ColorManager::getDefaultTeamColor());
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(kMarkerColor, longTeamColor);
+        (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
     }
 }
 
 void CAbstractPlayer::SetSpecialColor(long specialColor) {
     longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
-        (*thePart)->ReplaceColor(kMarkerColor, specialColor);
+        (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
     }
 
     if (itsScout) {
-        itsScout->partList[0]->ReplaceColor(kMarkerColor, specialColor);
+        itsScout->partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
     }
 }
 
@@ -275,6 +281,15 @@ CAbstractActor *CAbstractPlayer::EndScript() {
     boosterLimit = boostsRemaining = ReadLongVar(iMaxStartBoosts);
 
     return NULL;
+}
+
+void CAbstractPlayer::AdaptableSettings() {
+    // any settings that are affected by frame rate should go here, also double-check CWalkerActor::ReceiveConfig
+    generatorPower = FpsCoefficient2(classicGeneratorPower);
+    shieldRegen = FpsCoefficient2(classicShieldRegen);
+    chargeGunPerFrame = FpsCoefficient2(classicChargeGunPerFrame); //    Charge gun at 0.035 units per frame
+    FpsCoefficients(classicMotorFriction, FMul(classicMotorFriction, classicMotorAcceleration),
+                    &motorFriction, &motorAcceleration);
 }
 
 void CAbstractPlayer::Dispose() {
@@ -530,7 +545,7 @@ void CAbstractPlayer::ArmSmartMissile() {
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 missileCount--;
-                nextMissileLoad = itsGame->frameNumber + 3;
+                nextMissileLoad = itsGame->FramesFromNow(3);
             }
         } else
             fireGun = false;
@@ -563,7 +578,7 @@ void CAbstractPlayer::ArmGrenade() {
             weaponIdent = theWeapon->Arm(viewPortPart);
             if (weaponIdent) {
                 grenadeCount--;
-                nextGrenadeLoad = itsGame->frameNumber + 2;
+                nextGrenadeLoad = itsGame->FramesFromNow(2);
             }
         } else
             fireGun = false;
@@ -574,7 +589,6 @@ void CAbstractPlayer::ArmGrenade() {
 
 void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
     if (ft) {
-        Fixed modAccel;
         short motionFlags;
 
         viewYaw -= ft->mouseDelta.h * FIX(.0625);
@@ -590,49 +604,92 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             viewPitch = maxPitch;
 
         if (TESTFUNC(kfuAimForward, ft->held)) {
-            viewPitch >>= 1;
-            viewYaw >>= 1;
+            Fixed scale = FpsCoefficient1(FIX(0.5));
+            viewPitch = FMul(viewPitch, scale);
+            viewYaw = FMul(viewYaw, scale);
         }
 
         fireGun = false;
 
         if (!isInLimbo) {
-            modAccel = FDivNZ(baseMass, GetTotalMass());
-            modAccel = FMul(modAccel, modAccel);
-            modAccel = FMul(CLASSICACCELERATION, modAccel); //  FMulDivNZ(maxAcceleration, baseMass, GetTotalMass());
-            // top speed = accel * motorFriction / (1 - motorFriction)
-            // Scale top speed: top speed * frameTime/64
-            // Use scaled top speed and scaled motor friction to figure out an adjusted acceleration
-            // THEREFORE accel = accel * frameTimeScale * classicMotorFriction * (1 - motorFriction) / ((1 - classicMotorFriction) * motorFriction)
-            if (itsGame->frameTime != 64) {
-                modAccel = FDivNZ(itsGame->FrameTimeScale() * FMul(modAccel, FMul(CLASSICMOTORFRICTION, FIX1 - motorFriction)),  FMul(motorFriction, FIX1 - CLASSICMOTORFRICTION));
+            classicMotorAcceleration = FDivNZ(baseMass, GetTotalMass());
+            classicMotorAcceleration = FMul(classicMotorAcceleration, classicMotorAcceleration);
+            classicMotorAcceleration = FMul(CLASSICACCELERATION, classicMotorAcceleration);
+
+            // This is a tricky one (maybe a minor bug from the original code?)...
+            // Because the friction (f) was applied after adding/subtracting acceleration
+            // the implied acceleration (a) is actualy f*a.  Mathematically,
+            //    motor = (motor + a)*f = f*motor + f*a
+            // We will use the more common equation,
+            //    motor = f*motor + a
+            // But we have to adjust how we calculate multipliers
+            FpsCoefficients(classicMotorFriction, FMul(classicMotorFriction, classicMotorAcceleration),
+                           &motorFriction, &motorAcceleration, &fpsMotorOffset);
+
+            if (itsGame->isClassicFrame) {
+                FPS_DEBUG("----------------------------------------------------" << std::endl);
+                FPS_DEBUG("baseMass = " << baseMass << ", totalmass = " << GetTotalMass() << ", classicFriction = " << classicMotorFriction << ", friction = " << motorFriction << ", classicAcceleration = " << classicMotorAcceleration << ", acceleration = " << motorAcceleration << ", fpsMotorOffset = " << fpsMotorOffset << std::endl);
             }
+            FPS_DEBUG("frameNumber = " << itsGame->frameNumber << std::endl);
+            FPS_DEBUG("initial location = " << FormatVector(location, 3) << ", heading = " << ToFloat(heading)*360 << ", speed = " << FormatVector(speed, 3) << std::endl);
+
+            FPS_DEBUG("   motors before = " << FormatVector(motors, 2) << std::endl);
+
+            motors[0] = FMul(motors[0], motorFriction);
+            motors[1] = FMul(motors[1], motorFriction);
+            FPS_DEBUG("   motors after fric = " << FormatVector(motors, 2) << std::endl);
 
             motionFlags = 0;
 
-            if (TESTFUNC(kfuForward, ft->held))
-                motionFlags |= 1 + 2;
-            if (TESTFUNC(kfuReverse, ft->held))
-                motionFlags |= 4 + 8;
-            if (TESTFUNC(kfuLeft, ft->held))
-                motionFlags |= 2 + 4;
-            if (TESTFUNC(kfuRight, ft->held))
-                motionFlags |= 1 + 8;
+            if (TESTFUNC(kfuForward, ft->held)) {
+                motionFlags |= 1 + 2; // +left, +right
+                FPS_DEBUG("  ** kfuForward **");
+            }
+            if (TESTFUNC(kfuReverse, ft->held)) {
+                motionFlags |= 4 + 8; // -left, -right
+                FPS_DEBUG("  ** kfuReverse **");
+            }
+            if (TESTFUNC(kfuLeft, ft->held)) {
+                motionFlags |= 2 + 4; // +right, -left
+                FPS_DEBUG("  ** kfuLeft **");
+            }
+            if (TESTFUNC(kfuRight, ft->held)) {
+                motionFlags |= 1 + 8; // +left, -right
+                FPS_DEBUG("  ** kfuRight **");
+            }
 
-            if (motionFlags & 1)
-                motors[0] += modAccel;
-            if (motionFlags & 2)
-                motors[1] += modAccel;
-            if (motionFlags & 4)
-                motors[0] -= modAccel;
-            if (motionFlags & 8)
-                motors[1] -= modAccel;
+            if (motionFlags & 1) {
+                if (motors[0] <= 0) { // switching direction or starting to move
+                    motors[0] += fpsMotorOffset;
+                }
+                motors[0] += motorAcceleration; // left leg forward
+            }
+            if (motionFlags & 2) {
+                if (motors[1] <= 0) {
+                    motors[1] += fpsMotorOffset;
+                }
+                motors[1] += motorAcceleration; // right leg forward
+            }
+            if (motionFlags & 4) {
+                if (motors[0] >= 0) {
+                    motors[0] -= fpsMotorOffset;
+                }
+                motors[0] -= motorAcceleration; // left leg backward
+            }
+            if (motionFlags & 8) {
+                if (motors[1] >= 0) {
+                    motors[1] -= fpsMotorOffset;
+                }
+                motors[1] -= motorAcceleration; // right leg backward
+            }
+
+            FPS_DEBUG("   motors after keyb  = " << FormatVector(motors, 2) << std::endl);
 
             if (TESTFUNC(kfuBoostEnergy, ft->down) && boostsRemaining && (boostEndFrame < itsGame->frameNumber)) {
                 CBasicSound *theSound;
 
                 boostsRemaining--;
-                boostEndFrame = itsGame->frameNumber + BOOSTLENGTH;
+                boostEndFrame = itsGame->FramesFromNow(BOOSTLENGTH);
 
                 if (!boostControlLink)
                     boostControlLink = gHub->GetSoundLink();
@@ -642,7 +699,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 theSound->SetVolume(FIX(2));
                 theSound->SetSoundLink(itsSoundLink);
                 theSound->SetControlLink(boostControlLink);
-                theSound->SetSoundLength((BOOSTLENGTH * itsGame->frameTime) << 6);
+                theSound->SetSoundLength((BOOSTLENGTH * CLASSICFRAMETIME) << 6);
                 theSound->Start();
             }
 
@@ -693,9 +750,9 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
                 }
             } else {
                 if (itsManager->IsLocalPlayer()) {
-                    itsGame->itsApp->MessageLine(kmSelfDestruct, centerAlign);
+                    itsGame->itsApp->MessageLine(kmSelfDestruct, MsgAlignment::Center);
                     if (lives > 1)
-                        itsGame->itsApp->MessageLine(kmSelfDestruct2, centerAlign);
+                        itsGame->itsApp->MessageLine(kmSelfDestruct2, MsgAlignment::Center);
                 }
 
                 WasDestroyed();
@@ -755,7 +812,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
         if (TESTFUNC(kfuZoomOut, ft->held))
             fieldOfView += FOVSTEP;
 
-#define LOOKSTEP 0x1000L
+#define LOOKSTEP FpsCoefficient2(0x1000L)
 #define MAXSIDELOOK 0x8000L
 
         if (TESTFUNC(kfuLookLeft, ft->held)) {
@@ -786,7 +843,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             AvaraGLSetFOV(ToFloat(fieldOfView));
 
         if (fireGun)
-            mouseShootTime = MOUSESHOOTDELAY;
+            mouseShootTime = FpsFramesPerClassic(MOUSESHOOTDELAY);
 
         if (TESTFUNC(kfuTypeText, ft->down)) {
             chatMode = !chatMode;
@@ -806,12 +863,6 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
     }
 }
 
-void CAbstractPlayer::GetSpeedEstimate(Fixed *theSpeed) {
-    theSpeed[0] = speed[0];
-    theSpeed[1] = speed[1];
-    theSpeed[2] = speed[2];
-}
-
 void CAbstractPlayer::Slide(Fixed *direction) {
     groundSlide[0] = *direction++;
     groundSlide[1] = *direction++;
@@ -819,28 +870,26 @@ void CAbstractPlayer::Slide(Fixed *direction) {
 }
 
 void CAbstractPlayer::TractionControl() {
-    motors[0] = FMul(motors[0], motorFriction);
-    motors[1] = FMul(motors[1], motorFriction);
 }
 
 void CAbstractPlayer::MotionControl() {
     Fixed avrgHeading;
     Fixed motorDir[2];
-    Fixed fric = FIX((1 - pow(1 - 0.01, itsGame->FrameTimeScale())));// FIX3(10); // FIX3(30);
-    Fixed slowDown;
-    Fixed absVert;
     Fixed slide[2];
     Fixed slideLen;
-    Fixed supportFriction = FIX((1 - pow(1 - ToFloat(this->supportFriction), itsGame->FrameTimeScale())));
+    Fixed supportFriction = this->supportFriction;
 
     distance = (motors[0] + motors[1]) >> 1;
-    headChange = FMul(motors[1] - motors[0], turningEffect);
+    // solving for heading = heading + (motors[1] - motors[0]) * turningEffect
+    headChange = FpsCoefficient2(FMul(motors[1] - motors[0], turningEffect));
 
+    // probably to ignore rounding errors...
     if (headChange < 5 && headChange > -5)
         headChange = 0;
 
     avrgHeading = heading + (headChange >> 1);
 
+    // in XZ plane, important to keep those indices straight when used with speed
     motorDir[0] = FMul(FOneSin(avrgHeading), distance);
     motorDir[1] = FMul(FOneCos(avrgHeading), distance);
 
@@ -848,24 +897,43 @@ void CAbstractPlayer::MotionControl() {
     slide[1] = motorDir[1] - speed[2] + groundSlide[2];
     slideLen = VectorLength(2, slide);
 
-    if (slideLen < supportTraction * itsGame->FrameTimeScale()) {
-        double speedPortion = pow(0.25, itsGame->FrameTimeScale());
-        speed[0] += slide[0] - (slide[0] * speedPortion);
-        speed[2] += slide[1] - (slide[1] * speedPortion);
-    } else {
-        speed[0] += FMul(slide[0], supportFriction);
-        speed[2] += FMul(slide[1], supportFriction);
-    }
+    FPS_DEBUG("   motorDir = " << FormatVector(motorDir, 2) << std::endl);
+    FPS_DEBUG("   speed = " << FormatVector(speed, 3) << std::endl);
+    FPS_DEBUG("   groundSlide = " << FormatVector(groundSlide, 3) << std::endl);
+    FPS_DEBUG("   slide = " << FormatVector(slide, 2) << std::endl);
 
-    slowDown = FMul(fric, VectorLength(3, speed));
+    Fixed scale1, scale2;
+    if (slideLen < supportTraction) {
+        Fixed speedPortion = FIX(0.25);
+        //   speed[] += (slide[] - (slide[] * speedPortion));
+        // can be re-written as a function of speed[],
+        //   speed[] = speed[] * speedPortion + (motorDir[] + groundSlide[]) * (1 - speedPortion);
+        FpsCoefficients(speedPortion, FIX1-speedPortion, &scale1, &scale2);
+    } else {
+        //   speed[] += slide[] * supportFriction;
+        // can be re-written as a function of speed[],
+        //   speed[] = speed[] * (1-supportFriction) + (motorDir[] + groundSlide[]) * supportFriction;
+        FpsCoefficients(FIX1 - supportFriction, supportFriction, &scale1, &scale2);
+    }
+    speed[0] = FMul(speed[0], scale1) + FMul(motorDir[0] + groundSlide[0], scale2);
+    speed[2] = FMul(speed[2], scale1) + FMul(motorDir[1] + groundSlide[2], scale2);
+
+    FPS_DEBUG("   headChange = " << headChange << ", supportTraction = " << supportTraction << "   slideLen = " << slideLen << std::endl);
+    FPS_DEBUG("after slide speed = " << FormatVector(speed, 3) << std::endl);
+
+    Fixed fric = FIX3(10); // FIX3(30);
+    Fixed slowDown = FMul(fric, VectorLength(3, speed));
+    slowDown = FIX1 - FpsCoefficient1(FIX1 - slowDown);
     speed[0] -= FMul(slowDown, speed[0]);
     speed[1] -= FMul(slowDown, speed[1]);
     speed[2] -= FMul(slowDown, speed[2]);
 
     heading += headChange;
-    location[0] += speed[0];
-    location[1] += speed[1] + groundSlide[1];
-    location[2] += speed[2];
+    location[0] += FpsCoefficient2(speed[0]);
+    location[1] += FpsCoefficient2((speed[1] + groundSlide[1]));
+    location[2] += FpsCoefficient2(speed[2]);
+
+    FPS_DEBUG("final location = " << FormatVector(location, 3) << ", heading = " << ToFloat(heading)*360 << ", speed = " << FormatVector(speed, 3) << std::endl);
 
     groundSlide[0] = 0;
     groundSlide[1] = 0;
@@ -913,7 +981,7 @@ void CAbstractPlayer::PlayerAction() {
                         viewYaw = 0;
                         viewPitch = 0;
                         fieldOfView = maxFOV;
-                        Reincarnate(NULL);
+                        Reincarnate();
                     } else {
                         itsManager->DeadOrDone();
                     }
@@ -940,6 +1008,7 @@ void CAbstractPlayer::PlayerAction() {
             TractionControl();
             MotionControl();
 
+            // FindBestMovement() will change speed if/when it intersects ground... need to make sure that accounts for fpsScale
             AvoidBumping();
             LinkPartSpheres();
 
@@ -1047,7 +1116,8 @@ void CAbstractPlayer::GunActions() {
         }
     }
 
-    charge = FMulDivNZ(energy + generatorPower, chargeGunPerFrame, maxEnergy);
+    charge = FMulDivNZ(energy + generatorPower, chargeGunPerFrame,
+                       maxEnergy);
 
     for (i = 0; i < 2; i++) {
         if (gunEnergy[i] < fullGunEnergy) {
@@ -1099,7 +1169,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     grenadeCount = defaultConfig.numGrenades;
     GoLimbo(60);
     if (lives == 0 && itsManager->IsLocalPlayer()) {
-        itsGame->itsApp->MessageLine(kmGameOver, centerAlign);
+        itsGame->itsApp->MessageLine(kmGameOver, MsgAlignment::Center);
     }
 
     itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
@@ -1112,7 +1182,7 @@ void CAbstractPlayer::GoLimbo(long limboDelay) {
         gHub->ReleaseLinkAndKillSounds(boostControlLink);
         boostControlLink = NULL;
     }
-    limboCount = limboDelay;
+    limboCount = FpsFramesPerClassic(limboDelay);
     isInLimbo = true;
     maskBits &= ~kSolidBit;
 
@@ -1138,51 +1208,66 @@ void CAbstractPlayer::IncarnateSound() {
     gHub->ReleaseLink(aLink);
 }
 
-void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
-    CSmartPart **thePart;
+void CAbstractPlayer::Reincarnate() {
     CIncarnator *placeList;
-    long bestCount = 0x7fffFFFF;
+    long bestCount = LONG_MAX;
 
-    if (newSpot == NULL) {
-        placeList = itsGame->incarnatorList;
-
-        while (placeList) {
-            if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount < bestCount)) {
-                bestCount = placeList->useCount;
-                newSpot = placeList;
-            }
-
-            placeList = placeList->nextIncarnator;
+    // first, determine the count for the least-visited Incarnator
+    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
+        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount < bestCount)) {
+            bestCount = placeList->useCount;
         }
     }
 
-    for (thePart = partList; *thePart; thePart++) {
+    // try the least-visited Incarnators until one works
+    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
+        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
+            if (ReincarnateComplete(placeList)) {
+                break;
+            }
+        }
+    }
+
+    // if couldn't find an available Incarnator above, try creating a random one
+    if (placeList == nullptr) {
+        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working,
+        // then 3 tries will get that down to 0.1%.  In most levels, the not-working chance is probably
+        // closer to 1% so 3 tries = 0.0001%
+        for (int tries = 3; isInLimbo && tries > 0; tries--) {
+            CRandomIncarnator waldo(itsGame->actorList);
+            if (ReincarnateComplete(&waldo)) {
+                break;
+            }
+        }
+    }
+}
+
+bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
+    // increment useCount regardless of success, so the next player doesn't try to use this spot
+    newSpot->useCount++;
+
+    // make sure somebody or something isn't in this spot already, prepare for collision test
+    location[0] = newSpot->location[0];
+    location[1] = newSpot->location[1];
+    location[2] = newSpot->location[2];
+    speed[1] = 0;
+    heading = newSpot->heading;
+
+    // make player visible before the collision test
+    for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->isTransparent = false;
     }
-
-    if (newSpot) {
-        newSpot->useCount++;
-        location[0] = newSpot->location[0];
-        location[1] = newSpot->location[1];
-        location[2] = newSpot->location[2];
-        speed[1] = 0;
-        heading = newSpot->heading;
-
-        PlayerWasMoved();
-        BuildPartProximityList(location, proximityRadius, kSolidBit);
-        if (DoCollisionTest(&proximityList.p)) {
-            newSpot = NULL;
-        }
-    }
-
-    if (newSpot) {
+    PlayerWasMoved();
+    BuildPartProximityList(location, proximityRadius, kSolidBit);
+    if (!DoCollisionTest(&proximityList.p)) {
+        // looks like we're good to go
         isInLimbo = false;
         maskBits |= kSolidBit;
 
         LinkPartSpheres();
 
         if (reEnergize) {
-            boostEndFrame = itsGame->frameNumber + MINIBOOSTTIME;
+            boostEndFrame = itsGame->FramesFromNow(MINIBOOSTTIME);
             reEnergize = false;
             if (shields < (maxShields >> 1))
                 shields = maxShields >> 1;
@@ -1200,18 +1285,15 @@ void CAbstractPlayer::Reincarnate(CIncarnator *newSpot) {
         didSelfDestruct = false;
 
     } else {
-        for (thePart = partList; *thePart; thePart++) {
+        // make player invisible again since it failed the collision test
+        for (CSmartPart **thePart = partList; *thePart; thePart++) {
             (*thePart)->isTransparent = true;
         }
+        return false;
     }
-}
 
-#ifdef SPECIAL_ACCEL
-void CAbstractPlayer::Accelerate(Fixed *direction) {
-    direction[1] >>= 2;
-    CRealMovers::Accelerate(direction);
+    return true;
 }
-#endif
 
 Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume, short options) {
     Vector oldLoc;
@@ -1278,7 +1360,16 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
         theSound->Start();
 
         if (options & kSpinOption) {
-            motors[0] = maxAcceleration << 7;
+            // approximation for how much to scale the motors to acheive the same spin with High-FPS...
+            // comes from taking the ratio of both geometric series limits of total spin for FPS and classic:
+            //    scale = (F/(1-F)) / ((f/N)/(1-f))
+            // F = classicMotorAcceleration, f = fpsMotorFriction, N = fps-frames per classic frame
+            Fixed spinScale = (motorFriction == 0)
+                ? FIX1
+                : FDiv(FMul(classicMotorFriction, FIX1 - motorFriction),
+                       FMul(FpsCoefficient2(motorFriction), FIX1 - classicMotorFriction));
+            FPS_DEBUG("•••spinScale = " << ToFloat(spinScale) << "\n");
+            motors[0] = FMul(maxAcceleration << 7, spinScale);
             motors[1] = -motors[0];
         } else {
             motors[0] = motors[1] = 0;
@@ -1295,7 +1386,7 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
 }
 
 void CAbstractPlayer::ResumeLevel() {
-    CRealMovers::ResumeLevel();
+    CRealMovers::ResumeLevel();  // will ultimately call AdaptableSettings above
 
     nextPlayer = itsGame->playerList;
     itsGame->playerList = this;
@@ -1305,7 +1396,7 @@ void CAbstractPlayer::ResumeLevel() {
 
 extern Fixed sliverGravity;
 
-#define INTERPTIME 20
+#define INTERPTIME FpsFramesPerClassic(20)
 
 void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     short count = 16;
@@ -1367,7 +1458,7 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     speed[2] = 0;
 
     if (itsManager->IsLocalPlayer()) {
-        itsGame->itsApp->MessageLine(kmWin, centerAlign);
+        itsGame->itsApp->MessageLine(kmWin, MsgAlignment::Center);
     }
 
     // itsGame->itsApp->DrawUserInfoPart(itsManager->slot, kipDrawColorBox);
@@ -1484,7 +1575,7 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
     if (gr->boostTime > 0 && (boostEndFrame < itsGame->frameNumber)) {
         CBasicSound *theSound;
 
-        boostEndFrame = itsGame->frameNumber + gr->boostTime;
+        boostEndFrame = itsGame->FramesFromNow(gr->boostTime);
 
         if (!boostControlLink)
             boostControlLink = gHub->GetSoundLink();
@@ -1494,7 +1585,7 @@ void CAbstractPlayer::TakeGoody(GoodyRecord *gr) {
         theSound->SetVolume(FIX(2));
         theSound->SetSoundLink(itsSoundLink);
         theSound->SetControlLink(boostControlLink);
-        theSound->SetSoundLength((gr->boostTime * itsGame->frameTime) << 6);
+        theSound->SetSoundLength((gr->boostTime * CLASSICFRAMETIME) << 6);
         theSound->Start();
     }
 }

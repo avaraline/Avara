@@ -76,12 +76,14 @@ public:
     long loadedTimeLimit;
     long timeInSeconds;
     long frameNumber;
+    bool isClassicFrame;
     int32_t frameAdjust;
 
     long topSentFrame;
 
-    long latencyFrameTime; //	In milliseconds.
     long frameTime; //	In milliseconds.
+    double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
+
     short gameStatus;
     short statusRequest;
     short pausePlayer;
@@ -156,14 +158,15 @@ public:
     Handle mapRes; //	Keyboard mapping resource handle.
 
     short moJoOptions; //	Mouse and Joystick options.
-    short sensitivity;
+    double sensitivity;
 
-    long latencyTolerance;
+    double latencyTolerance;
 
     ScoreInterfaceReasons scoreReason;
     ScoreInterfaceReasons lastReason;
 
     uint32_t nextScheduledFrame;
+    uint32_t nextPingTime;
     long lastFrameTime;
     Boolean canPreSend;
 
@@ -202,6 +205,7 @@ public:
     virtual void ResumeActors();
     virtual void PauseActors();
     virtual void RunFrameActions();
+    virtual void RunActorFrameActions();
 
     virtual void Score(short team, short player, long points, Fixed energy, short hitTeam, short hitPlayer);
 
@@ -212,6 +216,7 @@ public:
     virtual void ReadGamePrefs();
 
     virtual void SendStartCommand();
+    virtual void StartIfReady();
     virtual void ResumeGame();
     virtual bool IsPlaying();
     virtual void HandleEvent(SDL_Event &event);
@@ -219,7 +224,7 @@ public:
     virtual bool GameTick();
     virtual void GameStop();
     virtual void Dispose();
-    
+
     virtual void SpectateNext();
     virtual void SpectatePrevious();
     virtual bool canBeSpectated(CAbstractPlayer *player);
@@ -242,14 +247,13 @@ public:
     virtual CPlayerManager *GetPlayerManager(CAbstractPlayer *thePlayer);
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
-    virtual double FrameTimeScale(double exponent=1);
-    virtual double LatencyFrameTimeScale();
-
     virtual long RoundTripToFrameLatency(long rtt);
-    virtual void SetLatencyTolerance(long newLatency, int maxChange = 2, const char *slowPlayer = nullptr);
-    virtual void AdjustFrameTime();
+    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, CPlayerManager *slowPlayer = nullptr);
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
+    virtual void SetFrameTime(long ft);
+    virtual void IncrementFrame(bool firstFrame = false);
+    virtual long FramesFromNow(long classicFrames);
 };
 
 #ifndef MAINAVARAGAME

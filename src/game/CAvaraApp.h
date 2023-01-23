@@ -17,6 +17,8 @@
 #include "CPlayerWindow.h"
 #include "CRosterWindow.h"
 #include "CTrackerWindow.h"
+#include "CommandManager.h"
+#include "Messages.h"
 
 #include <SDL.h>
 #include <string>
@@ -24,6 +26,7 @@
 #include <json.hpp>
 #include <thread>
 #include <mutex>
+#include <iterator>
 
 using json = nlohmann::json;
 
@@ -35,11 +38,12 @@ class CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) = 0;
     virtual void GameStarted(std::string set, std::string level) = 0;
-    virtual void MessageLine(short index, short align) = 0;
-    virtual void AddMessageLine(std::string line) = 0;
-    virtual std::deque<std::string>& MessageLines() = 0;
+    virtual void MessageLine(short index, MsgAlignment align) = 0;
+    virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) = 0;
+    virtual void RenderContents() = 0;
+    virtual std::deque<MsgLine>& MessageLines() = 0;
     virtual void DrawUserInfoPart(short i, short partList) = 0;
-    virtual void ParamLine(short index, short align, StringPtr param1, StringPtr param2) = 0;
+    virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2 = NULL) = 0;
     virtual void StartFrame(long frameNum) = 0;
     virtual void BrightBox(long frameNum, short position) = 0;
     virtual void LevelReset() = 0;
@@ -55,15 +59,17 @@ public:
     virtual CNetManager* GetNet() = 0;
     virtual void SetNet(CNetManager*) = 0;
     virtual SDL_Window* sdlWindow() = 0;
-    virtual void StringLine(std::string theString, short align) = 0;
+    virtual void StringLine(std::string theString, MsgAlignment align) = 0;
     virtual CAvaraGame* GetGame() = 0;
     virtual void Done() = 0;
     virtual void BroadcastCommand(int theCommand) = 0;
+    virtual CommandManager* GetTui() = 0;
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
     CAvaraGame *itsGame;
     CNetManager *gameNet;
+    CommandManager *itsTui;
 
 public:
     CPlayerWindow *playerWindow;
@@ -73,8 +79,9 @@ public:
     CRosterWindow *rosterWindow;
     CTrackerWindow *trackerWindow;
 
-    std::deque<std::string> messageLines;
-
+    std::deque<MsgLine> messageLines;
+    // std::deque<std::string> chatCommandHistory;
+    // std::deque<std::string>::iterator chatCommandHistoryIterator;
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
@@ -87,9 +94,10 @@ public:
     bool trackerUpdatePending;
     std::thread *trackerThread;
 
-    virtual std::deque<std::string>& MessageLines() override;
+    virtual std::deque<MsgLine>& MessageLines() override;
     virtual void idle() override;
     virtual void drawContents() override;
+    virtual void RenderContents() override;
 
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;
@@ -99,8 +107,9 @@ public:
     virtual bool handleSDLEvent(SDL_Event &event) override;
     virtual void drawAll() override;
     OSErr LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) override;
-    void NotifyUser() override;
-    virtual void AddMessageLine(std::string line) override;
+    virtual void NotifyUser() override;
+
+    virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) override;
     virtual void GameStarted(std::string set, std::string level) override;
 
     // From CInfoPanel
@@ -108,15 +117,17 @@ public:
     virtual void NumberLine(long theNum, short align);
     virtual void DrawUserInfoPart(short i, short partList) override;
     virtual void BrightBox(long frameNum, short position) override;
-    virtual void MessageLine(short index, short align) override;
+    virtual void MessageLine(short index, MsgAlignment align) override;
     virtual void LevelReset() override;
-    virtual void ParamLine(short index, short align, StringPtr param1, StringPtr param2) override;
+    virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) override;
     virtual void StartFrame(long frameNum) override;
-    virtual void StringLine(std::string theString, short align) override;
+    virtual void StringLine(std::string theString, MsgAlignment align) override;
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) override;
     virtual void SetNet(CNetManager*) override;
     virtual CNetManager* GetNet() override;
     virtual CAvaraGame* GetGame() override;
+    virtual CommandManager* GetTui() override;
+
     virtual void BroadcastCommand(int theCommand) override { CApplication::BroadcastCommand(theCommand); }
     virtual json Get(const std::string name) override { return CApplication::Get(name); }
     virtual void Set(const std::string name, const std::string value) override { CApplication::Set(name, value); }

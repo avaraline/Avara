@@ -1,7 +1,8 @@
 #pragma once
 
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "csscolorparser.hpp"
+#include "nanovg.h"
 
 #include <regex>
 #include <SDL.h>
@@ -57,6 +58,15 @@ static void LongToRGBA(uint32_t in, float *out, int n = 4) {
     }
 }
 
+static inline NVGcolor LongToNVG(uint32_t in) {
+    return nvgRGBA(
+        LongToR(in),
+        LongToG(in),
+        LongToB(in),
+        LongToA(in)
+    );
+}
+
 static std::optional<uint32_t> ParseColor(const std::string& str) {
     std::optional<CSSColorParser::Color> color = CSSColorParser::parse(str);
 
@@ -72,12 +82,24 @@ static std::optional<uint32_t> ParseColor(const std::string& str) {
     // Convert to lowercase.
     std::transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
 
-    std::regex search("^team\\((\\d+)\\)$");
-    std::smatch match;
-    if (std::regex_search(tmp, match, search)) {
-        return CColorManager::getTeamColor(
-            strtoll(match[1].str().c_str(), nullptr, 10)
-        );
+    {
+        std::regex search("^marker\\((\\d+)\\)$");
+        std::smatch match;
+        if (std::regex_search(tmp, match, search)) {
+            return ColorManager::getMarkerColor(
+                strtoll(match[1].str().c_str(), nullptr, 10)
+            );
+        }
+    }
+
+    {
+        std::regex search("^team\\((\\d+)\\)$");
+        std::smatch match;
+        if (std::regex_search(tmp, match, search)) {
+            return ColorManager::getTeamColor(
+                strtoll(match[1].str().c_str(), nullptr, 10)
+            );
+        }
     }
 
     return {};

@@ -5,14 +5,17 @@ Converts Avara level PICT resources to ALF (Avara Level Format)
 """
 
 import enum
+from math import sqrt
 import os
 import re
 import struct
 import sys
+import numpy as np
 
 from alf_condense import VESTIGIAL_ATTRS
 from avarascript import Element, ScriptParseError, object_context, parse_script
 from dumb_round import dumb_round
+from applergb import applergb_to_srgb
 
 DEBUG_PARSER = False
 METERS_PER_POINT = 5 / 72
@@ -31,10 +34,15 @@ def postprocess(element: Element) -> Element:
             element.attrs["quarters"] = str(round(element.attrs["extent"] / 90))
             del element.attrs["extent"]
         else:
-            angle = element.attrs["angle"] + (element.attrs["extent"] / 2)
+            angle = element.attrs["angle"] + (element.attrs["extent"] / 2) + 180
             angle = angle if angle < 360 else angle - 360
             element.attrs["angle"] = dumb_round(angle)
             del element.attrs["extent"]
+    # Convert line breaks to XML entities in the `information` attribute.
+    if "information" in element.attrs:
+        element.attrs["information"] = element.attrs["information"] \
+            .replace("\n", "&#10;") \
+            .replace("\r", "&#10;")
     # Strip out any irrelevant attributes that may be present.
     if element.tag in VESTIGIAL_ATTRS.keys():
         element.attrs = {k: v for k, v in element.attrs.items()
@@ -105,10 +113,13 @@ class Color:
         self.bpp = bpp
 
     def hex(self):
-        r = self.r >> (self.bpp - 8)
-        g = self.g >> (self.bpp - 8)
-        b = self.b >> (self.bpp - 8)
-        return "#%02x%02x%02x" % (r, g, b)
+        assert(self.bpp == 16)
+        c = [self.r, self.g, self.b]
+        colorvec = [x / 65535.0 for x in c]
+        srgb_8 = [int(round(255.0 * x)) for x in applergb_to_srgb(colorvec)]
+        thehex = "#%02x%02x%02x" % tuple(srgb_8)
+        assert(len(thehex) == 7)
+        return thehex
 
     def __str__(self):
         return self.hex()
@@ -233,7 +244,7 @@ class TextOp(AvaraOperation):
             # Strip the "end" we added if there's still an error.
             text = fixed_script[:-3].strip()
             text = re.sub(r"ambient(\s*)=", "ambient.i\1=", text)
-            yield postprocess(Element("script", text))
+            yield postprocess(Element("script", text, **context))
 
 
 class GroupStart(AvaraOperation):
@@ -335,7 +346,7 @@ class OvalOp(ArcOp):
 
 
 def copy_attrs(wall, obj):
-    for attr in ("x", "z", "w", "d", "h"):
+    for attr in ("x", "z", "w", "d", "h", "fill", "frame"):
         if attr in wall.attrs:
             obj.attrs[attr] = wall.attrs[attr]
     if "y" in wall.attrs:

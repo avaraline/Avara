@@ -10,10 +10,10 @@
 #define RANDOMLY_DROP_PACKETS 0
 #if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
-#define SIMULATE_LATENCY_LT 2
-#define SIMULATE_LATENCY_MSEC_PER_LT 58  // less than 64 because of overhead of running multiple clients
+#define SIMULATE_LATENCY_LT 0.2
+#define SIMULATE_LATENCY_MSEC_PER_LT 15  // less than 64 because of overhead of running multiple clients
 #define SIMULATE_LATENCY_MEAN   (SIMULATE_LATENCY_LT*SIMULATE_LATENCY_MSEC_PER_LT*1000)
-#define SIMULATE_LATENCY_JITTER  0
+#define SIMULATE_LATENCY_JITTER  4
 #define SIMULATE_LATENCY_DISTRIBUTION  0x02  // bitmask of who gets the latency
 
 #define SIMULATE_LATENCY_CODE(text) \
@@ -25,6 +25,7 @@ if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) { \
 
 #endif
 #if RANDOMLY_DROP_PACKETS
+#define RANDOM_DROP_DISTRIBUTION 0x02  // which clients drop packets
 int numToDrop = 0;
 #endif
 
@@ -1061,7 +1062,7 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
 
             #if RANDOMLY_DROP_PACKETS
-                if (rand() < RAND_MAX/256 || numToDrop > 0) {          // drop frequency = (1/N)
+                if (((1 << myId) & RANDOM_DROP_DISTRIBUTION) && rand() < RAND_MAX/40 || numToDrop > 0) {          // drop frequency = (1/N)
                     numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
                     SDL_Log("           ---------> DROPPING PACKET <---------\n");
                 } else {
@@ -1086,8 +1087,13 @@ Boolean CUDPComm::AsyncWrite() {
 
 long CUDPComm::GetClock() {
     // Apparently this clock is about 240/second?
-    // return SDL_GetTicks() >> 2;
-    return (long)((double)SDL_GetTicks() / 4.16666666667);
+    // Upon further investigation, the original code,
+    // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);
+    // shifted a usec time >> 12, effectively dividing by 4096.
+    // So technically this was a 4.096 msec (4096 usec) clock tick (~244/sec).
+    // To accomodate higher frame rates this will be adjusted down to 1 msec so that
+    // the ratio of frameRate/clock is still approximately 16 with the 16 msec frameTime.
+    return SDL_GetTicks() / MSEC_PER_GET_CLOCK;
 }
 
 /*
@@ -1105,8 +1111,12 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, lon
     softwareVersion = version;
 
     //	Convert time from milliseconds to 2*in our time units.
-    urgentResendTime = (urgentTimePeriod * 125) >> 8;
-    latencyConvert = urgentTimePeriod * 2;
+    // urgentResendTime = (urgentTimePeriod * 125) >> 8;
+    //                  = (2 * urgentTimePeriod * 1000) >> 12;  // convert to usec then 2X GetClock interval
+    // urgentResendTime represents 2 frames of time since urgentTimePeriod is passed as frameTime
+    urgentResendTime = (urgentTimePeriod * 2 / MSEC_PER_GET_CLOCK);
+
+    // latencyConvert = urgentTimePeriod * 2;  // no longer being used
 
     /*
     prefs = new CTagBase;
@@ -1307,7 +1317,7 @@ void ForwardPorts(port_num port) {
         "urn:schemas-upnp-org:device:InternetGatewayDevice:1",
         0
     };
-    
+
     devlist = upnpDiscoverDevices(deviceList,
                                   5000, multicastif, minissdpdpath,
                                   0/*localport*/, ipv6, ttl, &error, 1);
@@ -1328,7 +1338,7 @@ void ForwardPorts(port_num port) {
             int status = UPNP_GetValidIGD(dev, &upnp_urls, &upnp_data, aLanAddr,
                                           sizeof(aLanAddr));
             //printf("status=%d, lan_addr=%s\n", status, aLanAddr);
-            
+
             if (status == 1) {
                 SDL_Log("UPNP: UPNP_GetValidIGD found valid IGD: %s\n", upnp_urls.controlURL);
                 error = UPNP_AddPortMapping(upnp_urls.controlURL,
@@ -1449,7 +1459,7 @@ void CUDPComm::Connect(std::string address) {
 }
 
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
-    SDL_Log("Connect address = %s pw length=%llu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
+    SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
     std::thread forwardPorts(ForwardPorts, localPort);
     forwardPorts.detach();
@@ -1942,16 +1952,26 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            if (conn->meanRoundTripTime > maxTrip) {
-                maxTrip = conn->meanRoundTripTime;
+            // add in 1.9*stdev (~97% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // note: is this really a erlang distribution?  if so, what's the proper equation?
+            float stdev = sqrt(conn->varRoundTripTime);
+            float rtt = conn->meanRoundTripTime + std::min(1.9*stdev, (1.0*CLASSICFRAMECLOCK));
+            if (rtt > maxTrip) {
+                maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
+                    SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
+                            conn->myId,
+                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
+                            stdev*MSEC_PER_GET_CLOCK,
+                            rtt*MSEC_PER_GET_CLOCK);
                 }
             }
         }
     }
 
-    maxTrip = maxTrip*1000/240;
+    // convert from GetClock() ticks to msec
+    maxTrip = maxTrip*MSEC_PER_GET_CLOCK;
 
     return maxTrip;
 }

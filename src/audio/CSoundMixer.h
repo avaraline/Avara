@@ -122,7 +122,8 @@ public:
     void UpdateRightVector(Fixed *right);
 
     void PrepareScaleLookup();
-    void PrepareVolumeLookup();
+    void PrepareVolumeLookup(uint8_t mixerVolume = 100);
+    void SetVolume(uint8_t volume);  // 0-100
     void SilenceBuffers();
     void UpdateMotion();
 
