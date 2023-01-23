@@ -281,7 +281,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
         previewAngle = 0;
         previewRadius = std::max(extent[1] - extent[0], extent[5] - extent[4]);
-        animatePreview = true;
+        //animatePreview = true;
     }
     else {
         SDL_Log("ALF load error");

@@ -150,3 +150,45 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         Dispose();
     }
 }
+
+
+void CWallActor::MakeWallFromDims(Vector dims, Fixed x, Fixed y, Fixed z) {
+    maskBits |= kSolidBit + kDoorIgnoreBit;
+
+    FreshCalc();
+
+    partCount = 1;
+    CSmartBox* box = new CSmartBox;
+    box->ISmartBox(400, dims, GetPixelColor(), GetOtherPixelColor(), this, 0);
+    box->Reset();
+    TranslatePart(box, x, y, z);
+    box->MoveDone();
+    if (partYon) {
+        box->yon = partYon;
+        box->usesPrivateYon = true;
+    }
+
+    partList[0] = box;
+
+    if (partList[0]) {
+        LinkPartBoxes();
+
+        shields = ReadFixedVar(iWallShields);
+        blastPower = ReadFixedVar(iWallPower);
+
+        traction = ReadFixedVar(iWallTraction);
+        friction = ReadFixedVar(iWallFriction);
+
+        hitSoundId = ReadLongVar(iHitSoundDefault);
+        hitSoundVolume = DEFAULTHITVOLUME;
+        itsGame = gCurrentGame;
+        itsGame->AddActor(this);
+
+        stepSound = ReadLongVar(iStepSound);
+        gHub->LoadSample(stepSound);
+
+        lastWallActor = this;
+    } else {
+        Dispose();
+    }
+}

@@ -5,6 +5,7 @@
 #include "CBSPWorld.h"
 #include "CBSPPart.h"
 #include "CSmartBox.h"
+#include "CWallActor.h"
 #include "CScaledBSP.h"
 #include "CStateFunction.hpp"
 #include <SDL2/SDL.h>
@@ -50,6 +51,7 @@ public:
     uint64_t t = 0;
     uint64_t last_t = 0;
     uint64_t dt = 0;
+    uint16_t anim_timer = 0;
 
     const glm::vec3 screenToWorld(Point *p) {
         float normalized_x = (((float)p->h / (float)gApplication->fb_size_x) * 2.0) - 1.0;
@@ -97,10 +99,12 @@ public:
 
 
     mu_Context *mui_ctx;
-    std::map<mu_Id, CSmartBox*> boxes;
+    //std::map<mu_Id, CSmartBox*> boxes;
     //std::map<mu_Id, CSmartBox*> outlines;
+    std::map<mu_Id, CWallActor*> boxes;
     int BSPButton(std::string label);
-    void BSPWidget(mu_Rect r, mu_Id mu_id);
+    int BSPWidget(mu_Rect r, int res, mu_Id mu_id);
+    int BSPTextInput(std::string s);
 
     void ClearParts() {
         for (const auto &x: boxes) {

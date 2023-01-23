@@ -2,6 +2,7 @@
 #include "CApplication.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
+#include "CDepot.h"
 #include "CNetManager.h"
 #include "LevelLoader.h"
 #include "CApplication.h"
@@ -31,6 +32,7 @@ CGUI::CGUI(CAvaraGame *game) {
     cursorWorld->AddPart(itsCursor);
     
     started = SDL_GetTicks();
+    anim_timer = 0;
 
     //screen = new CGUIScreen(MainMenu, itsWorld, this);
 }
@@ -46,11 +48,12 @@ void CGUI::Update() {
     last_t = t;
     t = SDL_GetTicks();
     dt = t - last_t;
+    anim_timer += dt;
     int fb_size_x = gApplication->fb_size_x;
     int fb_size_y = gApplication->fb_size_y;
     mui_ctx->style->padding = 20;
     mu_begin(mui_ctx);
-    int muiflags = MU_OPT_NOFRAME | MU_OPT_NOTITLE | MU_OPT_NOCLOSE | MU_OPT_NOINTERACT | MU_OPT_NORESIZE | MU_OPT_AUTOSIZE;
+    int muiflags = MU_OPT_NOFRAME | MU_OPT_NOTITLE | MU_OPT_NOCLOSE | MU_OPT_NOINTERACT | MU_OPT_NORESIZE;
     if(mu_begin_window_ex(mui_ctx, 
                           "Main", 
                           mu_rect(0, 0, fb_size_x, fb_size_y), 
@@ -82,15 +85,20 @@ void CGUI::Update() {
         mu_end_window(mui_ctx);
     }
     mu_end(mui_ctx);
+    if (anim_timer > 16) {
+        itsGame->itsDepot->RunSliverActions();
+        anim_timer = 0;
+    }
 }
 
-void CGUI::BSPWidget(mu_Rect r, mu_Id mu_id) {
+int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
     Point mid = pt(r.x + (r.w / 2), r.y + (r.h / 2));
     glm::vec3 worldpos = screenToWorld(&mid);
 
     if (boxes.count(mu_id) > (std::size_t)0) {
-        CSmartBox* _part = boxes.at(mu_id);
-        _part->Reset();
+        //CSmartBox* _part = boxes.at(mu_id);
+        CWallActor* _wall = boxes.at(mu_id);
+        CSmartPart* _part = _wall->partList[0];
         if (mui_ctx->hover == mu_id) {
             long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTONHOVER]);
             _part->ReplaceColor(0xfefefe, color);
@@ -99,32 +107,41 @@ void CGUI::BSPWidget(mu_Rect r, mu_Id mu_id) {
             long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
             _part->ReplaceColor(0xfefefe, color);
         }
-
-        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
-        _part->MoveDone();
+        _part->Reset();
+        TranslatePart(_part, ToFixed(worldpos.x + anim_timer * .002), ToFixed(worldpos.y), 0);
+        //_part->MoveDone();
+        if (res & MU_RES_SUBMIT) {
+            _wall->Blast();
+        }
     }
     else {
         Point s_topleft = pt(r.x, r.y);
         Point s_bottomright = pt(r.x + r.w, r.y + r.h);
         glm::vec3 ws_topleft = screenToWorld(&s_topleft);
         glm::vec3 ws_bottomright = screenToWorld(&s_bottomright);
+
         Vector dims;
         dims[0] = ToFixed((ws_bottomright.x - ws_topleft.x) / 2.0);
         dims[1] = ToFixed((ws_bottomright.y - ws_topleft.y) / 2.0);
         dims[2] = FIX3(1);
-        CSmartBox* _part = new CSmartBox;
-        long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
-        _part->ISmartBox(kBlockBSP, dims, color, color, 0, 0);
+        
+        //CSmartBox* _part = new CSmartBox;
 
-        //_part->ReplaceColor(0x00fefefe, 0x00ffffff);
+        CWallActor *theWall = new CWallActor;
+        theWall->IAbstractActor();
+        theWall->MakeWallFromDims(dims, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
+        long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BUTTON]);
+
+        theWall->partList[0]->ReplaceColor(0x00fefefe, 0x00ffffff);
         Vector _partLoc;
-        AvaraGLUpdateData(_part);
-        itsWorld->AddPart(_part);
-        _part->Reset();
-        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
-        _part->MoveDone();
-        boxes.emplace(mu_id, _part);
+        //AvaraGLUpdateData(_part);
+        //itsWorld->AddPart(_part);
+        //_part->Reset();
+        //TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
+        //_part->MoveDone();
+        boxes.emplace(mu_id, theWall);
     }
+    return res;
 }
 
 int CGUI::BSPButton(std::string s) {
@@ -138,7 +155,13 @@ int CGUI::BSPButton(std::string s) {
     }
     /* draw */
     if (s.length() > 0) { mu_draw_control_text(mui_ctx, s.c_str(), r, MU_COLOR_TEXT, 0); }
-    BSPWidget(r, mu_id);
+    BSPWidget(r, res, mu_id);
+    return res;
+}
+
+int CGUI::BSPTextInput(std::string s) {
+    int res = 0;
+    mu_Id mu_id = mu_get_id(mui_ctx, s.c_str(), s.length());
     return res;
 }
 
