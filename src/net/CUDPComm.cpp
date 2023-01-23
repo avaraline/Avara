@@ -40,9 +40,9 @@ int numToDrop = 0;
 #include "Preferences.h"
 #include "System.h"
 
-#include <miniupnpc/miniupnpc.h>
-#include <miniupnpc/upnpcommands.h>
-#include <miniupnpc/upnperrors.h>
+#include <miniupnpc.h>
+#include <upnpcommands.h>
+#include <upnperrors.h>
 
 #include <thread>
 

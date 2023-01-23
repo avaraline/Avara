@@ -18,20 +18,20 @@ typedef signed long long int ssize_t;
 #include <WS2tcpip.h>
 #include <iphlpapi.h>
 #include <windows.h>
+#define close closesocket
 #else
 #include <netdb.h>
 #include <sys/socket.h>
 #include <sys/select.h>
+#include <unistd.h>
+#include <sys/time.h>
 #endif
 
 #include "AvaraTCP.h"
 
 #include "Memory.h"
 
-#include <SDL2/SDL.h>
-
-#include <unistd.h>
-#include <sys/time.h>
+#include <SDL.h>
 
 typedef struct {
     ReadCompleteProc *callback;

@@ -13,7 +13,7 @@
 #include "System.h"
 #include <algorithm>
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #define kInitialRetransmitTime 480 //	2	seconds
 #define kInitialRoundTripTime 240 //	<1 second

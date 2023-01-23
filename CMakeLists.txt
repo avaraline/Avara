@@ -1,15 +1,23 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.12)
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
-project(Avara)
+project(Avara VERSION 0.7.5)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(VERBOSE True)
 set(OpenGL_GL_PREFERENCE GLVND)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 set(CMAKE_CXX_FLAGS "-MMD -MP -g -Wno-multichar -DNANOGUI_GLAD")
+
 if (POLICY CMP0074)
   cmake_policy(SET CMP0074 NEW)
 endif()
+
+find_package(SDL2 CONFIG REQUIRED)
+
+find_path(MINIUPNPC_INCLUDE_DIRS NAMES miniupnpc.h PATH_SUFFIXES miniupnpc)
+find_library(MINIUPNPC_LIBRARIES miniupnpc)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
@@ -20,31 +28,28 @@ execute_process (
     OUTPUT_VARIABLE GIT_HASH
 )
 string(STRIP ${GIT_HASH} GIT_HASH)
+
 execute_process (
     COMMAND echo "#define GIT_VERSION \"${GIT_HASH}\""
     OUTPUT_FILE ${CMAKE_SOURCE_DIR}/src/util/GitVersion.h
 )
+
+add_compile_definitions(GIT_VERSION="${GIT_HASH}")
 
 # Modules for copying file, finding OpenGL and SDL libraries
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
 
 include(TargetCopyFiles)
 
-if(WIN32 OR MSVC)
-    set(SDL2_PATH "${CMAKE_SOURCE_DIR}/platform/windows/SDL2-2.0.12")
-    # standard exception handling on windows
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
-endif()
-
-find_package(SDL2 REQUIRED COMPONENTS MAIN)
-
 if(NOT WIN32)
    find_package(OpenGL REQUIRED)
 endif()
 
-if(WIN32)
+if(WIN32 OR MSVC)
+    set(CMAKE_CXX_FLAGS "/EHsc /std:c++17 /DNANOGUI_GLAD")
     list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 opengl32 glu32 wsock32 ws2_32)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:mainCRTStartup")
+    add_compile_definitions(NOMINMAX)
 endif()
 
 
@@ -71,7 +76,6 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "vendor/nanovg/nanovg.c"
     "vendor/pugixml/pugixml.cpp"
     "vendor/csscolorparser.cpp"
-    "vendor/miniupnpc/*.c",
     "vendor/stb_vorbis.c"
 )
 
@@ -88,6 +92,7 @@ add_library(AvaraCore OBJECT ${CORE_SOURCE})
 set(CORE_INCLUDES
     "${SDL2_INCLUDE_DIR}"
     ${SDL2main_INCLUDE_DIRS} 
+    ${MINIUPNPC_INCLUDE_DIRS}
     ${OPENGL_INCLUDE_DIR} 
     ${CMAKE_BINARY_DIR}
     src
@@ -113,11 +118,10 @@ set(CORE_INCLUDES
     vendor/nanovg
     vendor/utf8
     vendor/pugixml
-    vendor/miniupnpc
 )
 
 if (NOT APPLE AND NOT MSVC AND NOT WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++ -lm -lpthread -ldl")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++ -lm -lpthread")
 endif()
 
 add_executable(Avara 
@@ -153,10 +157,10 @@ target_include_directories(tests PUBLIC
 )
 target_include_directories(hsnd2wav PUBLIC ${CORE_INCLUDES})
 
-set(AVARA_LIBS ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} dl pthread)
+set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main ${MINIUPNPC_LIBRARIES} {OPENGL_LIBRARIES} dl pthread)
 
 if(WIN32)
-set(AVARA_LIBS SDL2::Main SDL2::Net ${OPENGL_LIBRARIES})
+set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main ${MINIUPNPC_LIBRARIES} ${OPENGL_LIBRARIES})
 endif()
 
 target_link_libraries(Avara ${AVARA_LIBS})
@@ -166,8 +170,6 @@ target_link_libraries(hsnd2wav ${AVARA_LIBS} ${EXTRA_LIBS})
 
 if(WIN32)
     target_link_libraries(Avara wsock32 ws2_32)
-    add_custom_command(TARGET Avara POST_BUILD COMMAND
-        ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/platform/windows/SDL2-2.0.12/lib/x64/SDL2.dll ${CMAKE_CURRENT_BINARY_DIR})
 endif()
 
 
