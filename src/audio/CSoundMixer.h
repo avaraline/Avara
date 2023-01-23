@@ -49,62 +49,62 @@ typedef struct {
 
 class CSoundMixer : public CDirectObject {
 public:
-    int globRegister;
-    int volumeMax;
-    unsigned int frameCounter;
+    int globRegister = 0;
+    int volumeMax = 0;
+    unsigned int frameCounter = 0;
 
-    int16_t *currentBuffer;
-    int16_t *doubleBuffers[2];
+    int16_t *currentBuffer = 0;
+    int16_t *doubleBuffers[2] = {0};
 
-    SDL_AudioDeviceID outputDevice;
+    SDL_AudioDeviceID outputDevice = 0;
 
-    WordSample *mixTo[2];
-    WordSample *mixBuffers[2];
-    SampleConvert *volumeLookup;
-    Ptr scaleLookup;
-    Ptr scaleLookupZero;
+    WordSample *mixTo[2] = {0};
+    WordSample *mixBuffers[2] = {0};
+    SampleConvert *volumeLookup = 0;
+    Ptr scaleLookup = 0;
+    Ptr scaleLookupZero = 0;
 
-    MixerInfo dummyChannel;
-    MixerInfo *infoTable;
-    MixerInfo **sortSpace[2];
+    MixerInfo dummyChannel = {0};
+    MixerInfo *infoTable = 0;
+    MixerInfo **sortSpace[2] = {0};
 
-    uint64_t baseTime;
+    uint64_t baseTime = 0;
 
-    int frameTime;
-    int frameStartTime;
-    int frameEndTime;
+    int frameTime = 0;
+    int frameStartTime = 0;
+    int frameEndTime = 0;
 
-    UnsignedFixed samplingRate;
-    UnsignedFixed standardRate;
-    Fixed timeConversion;
-    Fixed soundSpeed;
-    Fixed distanceToSamples;
-    Fixed distanceAdjust;
-    Fixed distanceToLevelOne;
-    Fixed maxAdjustedVolume;
+    UnsignedFixed samplingRate = 0;
+    UnsignedFixed standardRate = 0;
+    Fixed timeConversion = 0;
+    Fixed soundSpeed = 0;
+    Fixed distanceToSamples = 0;
+    Fixed distanceAdjust = 0;
+    Fixed distanceToLevelOne = 0;
+    Fixed maxAdjustedVolume = 0;
 
-    CSoundHub *motionHub;
-    SoundMotionInfo motion;
-    SoundLink *motionLink;
-    SoundLink *altLink;
-    Boolean useAltLink;
+    CSoundHub *motionHub = 0;
+    SoundMotionInfo motion = {0};
+    SoundLink *motionLink = 0;
+    SoundLink *altLink = 0;
+    Boolean useAltLink = false;
 
-    char newRightMeta;
-    Vector newRight;
+    char newRightMeta = 0;
+    Vector newRight = {0};
 
-    Vector rightVector;
+    Vector rightVector = {0};
 
-    short minimumVolume;
-    short maxChannels;
-    short maxMix;
+    short minimumVolume = 0;
+    short maxChannels = 0;
+    short maxMix = 0;
 
-    short soundBufferSize;
-    short soundBufferBits;
+    short soundBufferSize = 0;
+    short soundBufferBits = 0;
 
-    Boolean hushFlag;
-    Boolean sample16flag;
-    Boolean stereo;
-    Boolean strongStereo;
+    Boolean hushFlag = false;
+    Boolean sample16flag = false;
+    Boolean stereo = false;
+    Boolean strongStereo = false;
 
     void ISoundMixer(Fixed sampRate,
         short maxChannelCount,

@@ -11,6 +11,7 @@
 
 #include "CAbstractActor.h"
 #include "CStringDictionary.h"
+#include "PascalStrings.h"
 #include "CTagBase.h"
 #include "InternalVars.h"
 #include "LinkLoose.h"
@@ -38,12 +39,12 @@
 
 typedef short tokentype;
 
-ParserVariables parserVar;
-long lastKeyword;
-long lastVariable;
-static short currentLevel;
+ParserVariables parserVar = {0};
+long lastKeyword = 0;
+long lastVariable = 0;
+static short currentLevel = 0;
 static CAbstractActor *currentActor = NULL;
-static short uniqueBase;
+static short uniqueBase = 0;
 
 typedef struct {
     double value;
@@ -94,31 +95,24 @@ void CreateTheAdjuster() {
     }
 }
 
-// TODO: NO! BAD!
-static unsigned char *pstr(const char *s) {
-    size_t len = std::strlen(s);
-    unsigned char *p = new unsigned char[len];
-    p[0] = len;
-    memmove(p + 1, s, len);
-    return p;
-}
+
 
 void InitSymbols() {
     symTable = new CStringDictionary;
     symTable->IStringDictionary();
 
-    symTable->AddDictEntry(pstr("min"), -1);
-    symTable->AddDictEntry(pstr("max"), -1);
-    symTable->AddDictEntry(pstr("random"), -1);
-    symTable->AddDictEntry(pstr("sin"), -1);
-    symTable->AddDictEntry(pstr("cos"), -1);
-    symTable->AddDictEntry(pstr("int"), -1);
-    symTable->AddDictEntry(pstr("round"), -1);
-    symTable->AddDictEntry(pstr("enum"), -1);
-    symTable->AddDictEntry(pstr("unique"), -1);
-    symTable->AddDictEntry(pstr("end"), -1);
-    symTable->AddDictEntry(pstr("adjust"), -1);
-    lastKeyword = symTable->AddDictEntry(pstr("object"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("min"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("max"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("random"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("sin"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("cos"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("int"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("round"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("enum"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("unique"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("end"), -1);
+    symTable->AddDictEntry(CStringtoPascalString("adjust"), -1);
+    lastKeyword = symTable->AddDictEntry(CStringtoPascalString("object"), -1);
     lastVariable = lastKeyword;
 
     variableBase = new CTagBase;
@@ -409,8 +403,8 @@ tokentype LexStringConstant() {
 }
 
 void LexRead(LexSymbol *theSymbol) {
-    unsigned char theChar;
-    short matchCount;
+    unsigned char theChar = 0;
+    short matchCount = 0;
 
     //	First, skip any whitespace like returns, tabs, spaces and control characters.
 
@@ -533,22 +527,18 @@ void LexRead(LexSymbol *theSymbol) {
                 matchCount = MatchFloat(parserVar.input);
                 if (matchCount > 0) {
                     char temp;
-                    char tempString[256];
-                    char *pstr = (char *)parserVar.input - 1;
-
-                    // From StringToLongDouble
-                    BlockMoveData(pstr + 1, tempString, pstr[0]); //<fp.h>
-                    tempString[pstr[0]] = '\0';
+                    unsigned char *pstr = (unsigned char *)parserVar.input - 1;
+                    char *tempString = PascalStringtoCString(pstr);
 
                     temp = parserVar.input[-1];
                     parserVar.input[-1] = matchCount;
                     theSymbol->kind = kLexConstant;
                     // theSymbol->value.floating = StringToLongDouble(parserVar.input-1);
                     theSymbol->value.floating = atof(tempString);
-
                     // SDL_Log("\natof(%s) --> %f\n", tempString, theSymbol->value.floating);
                     parserVar.input[-1] = temp;
                     parserVar.input += matchCount;
+                    delete tempString;
                 }
             }
 
@@ -858,7 +848,7 @@ void ParseStatement(LexSymbol *statement) {
 
 void SetupCompiler(StringPtr theInput) {
     parserVar.input = theInput;
-    parserVar.output = NewHandle(128);
+    parserVar.output = NewHandle(1024);
     parserVar.realSize = 128;
     parserVar.logicalSize = 0;
     parserVar.stackDepth = 0;
@@ -1047,7 +1037,7 @@ void RunThis(unsigned char *script) {
                 programBase->Unlock();
             }
         }
-        DisposHandle(parserVar.output);
+        DisposeHandle(parserVar.output);
         SetupCompiler(parserVar.input);
 
         // On parse error, skip ahead a line to see if we can read past the garbage
@@ -1097,7 +1087,7 @@ void DeallocParser() {
 
 
 short IndexForEntry(const char* entry) {
-    return symTable->SearchForEntry(pstr(entry), -1) - firstVariable;
+    return symTable->SearchForEntry(CStringtoPascalString(entry), -1) - firstVariable;
 }
 
 double ReadVariable(short index) {

@@ -375,6 +375,10 @@ std::string GetBaseScript() {
                               std::istreambuf_iterator<char>());
         return defaultscript;
     }
+    else {
+
+        SDL_Log("There was an error opening %s", path.c_str());
+    }
 
     return "";
 }

@@ -339,7 +339,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 void AvaraGLUpdateData(CBSPPart *part) {
     if (!AvaraGLIsRendering()) return;
     part->glDataSize = part->totalPoints * sizeof(GLData);
-    part->glData = (GLData *)NewPtr(part->glDataSize);
+    part->glData = new GLData[part->glDataSize];
 
     glGenVertexArrays(1, &part->vertexArray);
     glGenBuffers(1, &part->vertexBuffer);
