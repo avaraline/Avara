@@ -15,7 +15,7 @@ jobs:
       run: |
         sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu `lsb_release -sc` main universe restricted multiverse"
         sudo apt-get update -y -qq
-        sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev
+        sudo apt-get install libsdl2-dev libegl1-mesa-dev libgles2-mesa-dev libdirectfb-dev libminiupnpc-dev
     - uses: actions/checkout@v2
     - name: build
       run: |
@@ -28,19 +28,22 @@ jobs:
         run: make tests
   Windows:
     name: Windows
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
-        with:
-          install: rsync cmake git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make mingw-w64-x86_64-miniupnpc
-      - uses: actions/checkout@v2
-      - name: build
-        shell: msys2 {0}
+      - uses: actions/checkout@v3
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.1.3
+      - name: Vcpkg Integration
         run: |
-          mkdir build && cd build
-          cmake ..
-          make -j 
+          $vcpkg_path = (Join-Path ${env:VCPKG_INSTALLATION_ROOT} vcpkg.exe)
+          &$vcpkg_path integrate install
+        shell: pwsh
+      - name: Build
+        run: msbuild /m /p:Platform=x64 /p:Configuration=Release ./Avara.sln
+        shell: pwsh
+      - name: Archive
+        run: Compress-Archive -Path ./out/build/x64-Release -DestinationPath WinAvara.zip
+        shell: pwsh
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
@@ -49,26 +52,13 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build-main/WinAvara.zip
+          asset_path: ./WinAvara.zip
           asset_name: Avara-Windows-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1
-      - name: deploy fps-hybrid nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'fps-hybrid')
-        uses: WebFreak001/deploy-nightly@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/49395858/assets{?name,label}
-          release_id: 49395858
-          asset_path: ./build-main/WinAvara.zip
-          asset_name: Avara-FPS-Windows-Nightly-$$.zip
-          asset_content_type: application/zip
-          max_releases: 1
-
   macOS:
     name: macOS
-    runs-on: macOS-latest
+    runs-on: macos-latest
     steps:
       - name: install dependencies
         run: |
@@ -95,17 +85,5 @@ jobs:
           release_id: 28954246
           asset_path: ./build/MacAvara.zip
           asset_name: Avara-macOS-Nightly-$$.zip
-          asset_content_type: application/zip
-          max_releases: 1
-      - name: deploy fps-hybrid nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'fps-hybrid')
-        uses: WebFreak001/deploy-nightly@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/49395858/assets{?name,label}
-          release_id: 49395858
-          asset_path: ./build/MacAvara.zip
-          asset_name: Avara-FPS-macOS-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1

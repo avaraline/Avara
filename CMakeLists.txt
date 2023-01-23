@@ -70,6 +70,7 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "src/net/*.cpp"
     "src/util/*.cpp"
     "src/gui/*.cpp" 
+    "src/tui/*.cpp"
     "vendor/nanogui/*.cpp"
     "vendor/glad/glad.c"
     "vendor/glm/detail/glm.cpp"
@@ -102,6 +103,7 @@ set(CORE_INCLUDES
     src/compat
     src/game
     src/gui
+    src/tui
     src/level
     src/net
     src/util
