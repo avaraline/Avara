@@ -73,6 +73,11 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
     varRoundTripTime = kInitialRoundTripVar;
+
+    // sliding histogram of 16 seconds (1000 samples) to track latency stats
+    latencyHistogram = new SlidingHistogram<float>(16*1000/(gCurrentGame->fpsScale*CLASSICFRAMETIME),
+                                                   0.0, 4.0, gCurrentGame->fpsScale);
+
     meanSendCount = 1.0;     // average of # packets sent out including re-sends for each packet
     meanReceiveCount = 0.0;  // average # of times the first sent packet sent not received (reflects packet loss)
     haveToSendAck = false;
@@ -446,6 +451,12 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
                 SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",
                         myId, thePacket->packet.command, roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
             #endif
+
+            latencyHistogram->push(roundTrip / (2.0*CLASSICFRAMETIME));
+            if (thePacket->serialNumber % (latencyHistogram->size()*2/3) == 0) {  // 1/3 overlap each output
+                latencyHistogram->setTitle("LT histogram for connection #" + std::to_string(myId));
+                std::cerr << *latencyHistogram;
+            }
         }
 
 #if PACKET_DEBUG > 1

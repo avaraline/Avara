@@ -12,6 +12,7 @@
 #include "CDirectObject.h"
 #include "CommDefs.h"
 #include "RolloverCounter.h"
+#include "SlidingHistogram.h"
 
 #define kSerialNumberStepSize 2
 #define kNumReceivedOffsets 128
@@ -84,6 +85,8 @@ public:
     float varRoundTripTime;
     float meanSendCount;
     float meanReceiveCount;
+    SlidingHistogram<float>* latencyHistogram;
+
     long retransmitTime;
     long urgentRetransmitTime;
 

@@ -121,7 +121,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     );
 
     // load up a random decent starting level
-    itsTui->ExecuteMatchingCommand("/rand -normal -tre avaraline emo", CPlayerManagerImpl::LocalPlayer());
+    itsTui->ExecuteMatchingCommand("/rand -normal -tre avaraline emo not-aa ex", CPlayerManagerImpl::LocalPlayer());
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
