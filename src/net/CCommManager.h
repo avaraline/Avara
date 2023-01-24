@@ -95,4 +95,6 @@ public:
     virtual void Reconfigure();
 
     virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
+    virtual float GetMaxMeanSendCount(short distribution);
+    virtual float GetMaxMeanReceiveCount(short distribution);
 };

@@ -869,9 +869,12 @@ bool CAvaraGame::GameTick() {
 
     if (startTime > nextPingTime) {
         // send pings periodically to maintain connection & improve estimate for LT
-        itsNet->SendPingCommand(statusRequest != kPlayingStatus ? 8 : 2);
-        static long PING_INTERVAL_MSEC = 2000;
-        nextPingTime = startTime + PING_INTERVAL_MSEC;
+        itsNet->SendPingCommand(2);
+        long pingInterval = 500; //msec
+        if (statusRequest == kPlayingStatus) {
+            pingInterval = 2000;
+        }
+        nextPingTime = startTime + pingInterval;
     }
 
     // Not playing? Nothing to do!

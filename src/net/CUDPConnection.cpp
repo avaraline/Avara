@@ -25,13 +25,14 @@
 #define kMaxReceiveQueueLength 32*8 //	32 packets...arbitrary guess
 
 #define RTTSMOOTHFACTOR_UP 100
-#define RTTSMOOTHFACTOR_DOWN 160
+#define RTTSMOOTHFACTOR_DOWN 200
+#define COUNTSMOOTHFACTOR 1000
 
 #define MAX_RESENDS_WITHOUT_RECEIVE 3
 
 #if PACKET_DEBUG || LATENCY_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
-    SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d #=%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+    SDL_Log("CUDPConnection::DebugPacket(%c) cn=%d rsn=%d sn=%d-%d cmd=%d p1=%d p2=%d p3=%d flags=0x%02x sndr=%d dist=0x%02x\n",
         eType,
         myId,
         (uint16_t)receiveSerial,
@@ -72,6 +73,8 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     urgentRetransmitTime = kInitialRoundTripTime;
     meanRoundTripTime = kInitialRoundTripTime;
     varRoundTripTime = kInitialRoundTripVar;
+    meanSendCount = 1.0;     // average of # packets sent out including re-sends for each packet
+    meanReceiveCount = 0.0;  // average # of times the first sent packet sent not received (reflects packet loss)
     haveToSendAck = false;
     nextAckTime = 0;
 
@@ -407,6 +410,16 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
             varRoundTripTime = (1 - alpha) * (varRoundTripTime + difference * increment);
             float stdevRoundTripTime = sqrt(varRoundTripTime);
 
+            // meanSendCount is an approximate average of how many times a command is sent, including re-sends
+            // ideally this would be close to 1.0
+            commandMultiplier = gCurrentGame->fpsScale;  // all commands treated same for meanSendCount
+            alpha = commandMultiplier / COUNTSMOOTHFACTOR;
+            meanSendCount = meanSendCount + alpha * (thePacket->sendCount - meanSendCount);
+            #if LATENCY_DEBUG
+                SDL_Log("                              sn=%hd count=%hd meanSendCount=%.4f\n", thePacket->serialNumber, thePacket->sendCount, meanSendCount);
+            #endif
+
+
             // Use +2.5 sigma(probability 98.7%) for non-urgent retransmitTime
             retransmitTime = meanRoundTripTime + (long)(2.5*stdevRoundTripTime);
 
@@ -447,6 +460,21 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
     }
 }
 
+void CUDPConnection::ValidateReceivedPacket(UDPPacketInfo *thePacket) {
+    float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
+    if (commandMultiplier > 0) {
+        float alpha = commandMultiplier / COUNTSMOOTHFACTOR;
+
+        // meanReceiveCount is a measure of how often we don't receive/process the first sent packet from a client,
+        // when 1% of packets are being lost then this should trend towards ~0.01 (1%)
+        meanReceiveCount = meanReceiveCount + alpha * (thePacket->sendCount - meanReceiveCount);
+    }
+
+    // dispacth & release the packet
+    itsOwner->ReceivedGoodPacket(&thePacket->packet);
+}
+
+
 void CUDPConnection::RunValidate() {
     UDPPacketInfo *thePacket, *nextPacket;
 
@@ -465,7 +493,7 @@ void CUDPConnection::RunValidate() {
     }
 }
 
-char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) {
+char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
     SerialNumber transmittedSerial;
     short dummyStackVar;
     UDPPacketInfo *thePacket, *nextPacket;
@@ -473,11 +501,11 @@ char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) 
     // received something, reset the counter
     numResendsWithoutReceive = 0;
 
-    transmittedSerial = *(short *)validateInfo;
-    validateInfo += sizeof(short);
+    transmittedSerial = *(short *)validateInfo;  // Last received "valid" serial number by this connection
+    validateInfo += sizeof(short);               // point to the AckMap field (if there is one)
 
     #if PACKET_DEBUG
-        SDL_Log("ValidateReceivedPackets transmittedSerial=%d, maxValid = %d\n", transmittedSerial, maxValid);
+        SDL_Log("ValidatePackets transmittedSerial=%d, maxValid = %d\n", transmittedSerial, maxValid);
     #endif
 
     if (transmittedSerial & 1) {
@@ -493,7 +521,9 @@ char *CUDPConnection::ValidateReceivedPackets(char *validateInfo, long curTime) 
         for (thePacket = (UDPPacketInfo *)queues[kTransmitQ].qHead; thePacket; thePacket = nextPacket) {
             nextPacket = (UDPPacketInfo *)thePacket->packet.qLink;
 
+            // ackMap indicates, via bitmask, which other packets after transmittedSerial have been received by the client
             if (ackMap & (1 << (((thePacket->serialNumber - transmittedSerial) >> 1) - 1))) {
+                // received by the client so it can be marked as done, measured for RTT stats then released
                 ValidatePacket(thePacket, curTime);
             }
         }
@@ -545,7 +575,8 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
             DebugPacket('%', thePacket);
 #endif
             receiveSerial = thePacket->serialNumber + kSerialNumberStepSize;
-            itsOwner->ReceivedGoodPacket(&thePacket->packet);
+
+            ValidateReceivedPacket(thePacket);
 
             for (pack = (UDPPacketInfo *)queues[kReceiveQ].qHead; pack; pack = nextPack) {
                 nextPack = (UDPPacketInfo *)pack->packet.qLink;
@@ -560,7 +591,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                             DebugPacket('+', pack);
 #endif
                             receiveSerial = pack->serialNumber + kSerialNumberStepSize;
-                            itsOwner->ReceivedGoodPacket(&pack->packet);
+                            ValidateReceivedPacket(pack);
                         } else {
 #if PACKET_DEBUG
                             DebugPacket('-', pack);

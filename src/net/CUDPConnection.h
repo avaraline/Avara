@@ -28,7 +28,8 @@ typedef struct {
     // int32_t lastSendTime;
     int32_t nextSendTime;
     SerialNumber serialNumber;
-    int16_t sendCount;
+    uint8_t sendCount;
+    uint8_t _spare; // not sure if needed, just to be safe
 
 } UDPPacketInfo;
 #pragma pack()
@@ -81,6 +82,8 @@ public:
 
     float meanRoundTripTime;
     float varRoundTripTime;
+    float meanSendCount;
+    float meanReceiveCount;
     long retransmitTime;
     long urgentRetransmitTime;
 
@@ -117,7 +120,8 @@ public:
     virtual void RunValidate();
 
     virtual void ValidatePacket(UDPPacketInfo *thePacket, long when);
-    virtual char *ValidateReceivedPackets(char *validateInfo, long curTime);
+    virtual void ValidateReceivedPacket(UDPPacketInfo *thePacket);
+    virtual char *ValidatePackets(char *validateInfo, long curTime);
     virtual void ReceivedPacket(UDPPacketInfo *thePacket);
 
     virtual void FlushQueues();
