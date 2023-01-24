@@ -41,10 +41,10 @@ public:
 
     Vector corners[8] = {0}; //	Corners of truncated viewing pyramid.
 
-    Vector lightSources[MAXLIGHTS];
+    Vector lightSources[MAXLIGHTS] = {0};
 
-    short lightMode[MAXLIGHTS];
-    Vector internalLights[MAXLIGHTS]; //	Vector length == light source power.
+    short lightMode[MAXLIGHTS] = {0};
+    Vector internalLights[MAXLIGHTS] = {0}; //	Vector length == light source power.
 
     Fixed ambientLight = 0; //	Intensity of ambient (nondirectional) light
     long ambientLightColor = 0; // Color of ambient (nondirectional) light.

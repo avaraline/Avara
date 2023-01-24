@@ -39,7 +39,7 @@
 
 typedef short tokentype;
 
-ParserVariables parserVar = {0};
+ParserVariables parserVar = {0, 0, 0, 0, 0, 0, 0};
 long lastKeyword = 0;
 long lastVariable = 0;
 static short currentLevel = 0;
@@ -100,20 +100,19 @@ void CreateTheAdjuster() {
 void InitSymbols() {
     symTable = new CStringDictionary;
     symTable->IStringDictionary();
+    unsigned char * tempPString;
 
-    symTable->AddDictEntry(CStringtoPascalString("min"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("max"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("random"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("sin"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("cos"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("int"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("round"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("enum"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("unique"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("end"), -1);
-    symTable->AddDictEntry(CStringtoPascalString("adjust"), -1);
-    lastKeyword = symTable->AddDictEntry(CStringtoPascalString("object"), -1);
+    const char* symbols[] = {"min", "max", "random", "sin", "cos", "int", "round", "enum", "unique", "end", "adjust"};
+
+    for (size_t i = 0; i <= 10; i++) {
+        tempPString = CStringtoPascalString(symbols[i]);
+        symTable->AddDictEntry(tempPString, -1);
+        delete [] tempPString;
+    }
+    tempPString = CStringtoPascalString("object");
+    lastKeyword = symTable->AddDictEntry(tempPString, -1);
     lastVariable = lastKeyword;
+    delete [] tempPString;
 
     variableBase = new CTagBase;
     variableBase->ITagBase();
@@ -538,7 +537,7 @@ void LexRead(LexSymbol *theSymbol) {
                     // SDL_Log("\natof(%s) --> %f\n", tempString, theSymbol->value.floating);
                     parserVar.input[-1] = temp;
                     parserVar.input += matchCount;
-                    delete tempString;
+                    delete [] tempString;
                 }
             }
 
@@ -1087,7 +1086,9 @@ void DeallocParser() {
 
 
 short IndexForEntry(const char* entry) {
-    return symTable->SearchForEntry(CStringtoPascalString(entry), -1) - firstVariable;
+    unsigned char* tempPString = CStringtoPascalString(entry);
+    return symTable->SearchForEntry(tempPString, -1) - firstVariable;
+    delete [] tempPString;
 }
 
 double ReadVariable(short index) {

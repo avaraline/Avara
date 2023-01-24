@@ -338,6 +338,11 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
 void AvaraGLUpdateData(CBSPPart *part) {
     if (!AvaraGLIsRendering()) return;
+    if(part->glDataSize > 0) {
+        delete [] part->glData;
+    }
+
+
     part->glDataSize = part->totalPoints * sizeof(GLData);
     part->glData = new GLData[part->glDataSize];
 
