@@ -200,7 +200,7 @@ void CBSPWorldImpl::VisibilitySort(CBSPPart **parts, short overlapCount) {
     } while (--overlapCount);
 
     do {
-        Fixed maxZ;
+        Fixed maxZ = 0;
     newListStart:
         maxZ = listStart->maxZ;
         prevLink = &listStart->nextTemp;

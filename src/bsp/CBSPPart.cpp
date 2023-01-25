@@ -435,7 +435,8 @@ void CBSPPart::Dispose() {
     DisposePtr((Ptr)pointTable);
     DisposePtr((Ptr)polyTable);
     if (AvaraGLIsRendering()) {
-        DisposePtr((Ptr)glData);
+        delete [] glData;
+        glDataSize = 0;
         glDeleteVertexArrays(1, &vertexArray);
         glDeleteBuffers(1, &vertexBuffer);
     }

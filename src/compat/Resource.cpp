@@ -223,7 +223,9 @@ char* PathForLevelSet(std::string set) {
 
 void LevelDirListing() {
     cf_dir_t dir;
-    cf_dir_open(&dir, BundlePath(LEVELDIR));
+    const char* ldir = BundlePath(LEVELDIR);
+    cf_dir_open(&dir, ldir);
+    delete [] ldir;
 
     std::vector<AvaraDirListEntry> raw_dir_listing;
 
@@ -253,12 +255,15 @@ void LevelDirListing() {
 
                 std::stringstream ss;
                 ss << LEVELDIR << PATHSEP << file_str << PATHSEP << SETFILE;
-                if (cf_file_exists(BundlePath(ss))) {
+                char * manf = BundlePath(ss);
+                if (cf_file_exists(manf)) {
                     // we found a set json file so add it (as version 2)
-                    it->full_path = BundlePath(file_str.c_str());
+                    char * manft = BundlePath(file_str.c_str());
+                    it->full_path = manft;
                     level_sets.insert(std::make_pair(file_str, (*it)));
                     set_name_list.push_back(file_str);
                 }
+                delete [] manf;
             }
         }
     }
@@ -375,6 +380,10 @@ std::string GetBaseScript() {
                               std::istreambuf_iterator<char>());
         return defaultscript;
     }
+    else {
+
+        SDL_Log("There was an error opening %s", path.c_str());
+    }
 
     return "";
 }
@@ -409,19 +418,22 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     std::stringstream buffa;
     buffa << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     buffa << OGGDIR << PATHSEP << filename;
-
-    std::ifstream t(BundlePath(buffa.str().c_str()));
+    char* fullpath = BundlePath(buffa.str().c_str());
+    std::ifstream t(fullpath);
     if(!t.good()) {
         std::stringstream temp;
         buffa.swap(temp);
         buffa << RSRCDIR << PATHSEP;
         buffa << OGGDIR << PATHSEP << filename;
+        delete [] fullpath;
+        fullpath = BundlePath(buffa.str().c_str());
     }
 
-    SDL_Log("Loading %s", buffa.str().c_str());
+    SDL_Log("Loading %s", fullpath);
 
     int error;
-    stb_vorbis *v = stb_vorbis_open_filename(BundlePath(buffa.str().c_str()), &error, NULL);
+    stb_vorbis *v = stb_vorbis_open_filename(fullpath, &error, NULL);
+    
     stb_vorbis_info info = stb_vorbis_get_info(v);
     SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
 
@@ -438,6 +450,7 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     }
     cash[resId] = sound;
     stb_vorbis_close(v);
+    delete [] fullpath;
 }
 
 void LoadDefaultOggFiles() {

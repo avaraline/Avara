@@ -18,46 +18,46 @@ class CBSPPart;
 
 class CViewParameters : public CDirectObject {
 public:
-    Vector fromPoint;
-    Vector atPoint;
+    Vector fromPoint = {0, 0, 0};
+    Vector atPoint = {0, 0, 0};
 
-    Matrix viewMatrix;
-    Matrix inverseViewMatrix;
+    Matrix viewMatrix = {{0}};
+    Matrix inverseViewMatrix = {{0}};
 
-    Point viewPixelDimensions;
-    Point viewPixelCenter;
-    float viewPixelRatio;
+    Point viewPixelDimensions = {0};
+    Point viewPixelCenter = {0};
+    float viewPixelRatio = 0;
 
-    Fixed viewWidth;
-    Fixed viewDistance;
+    Fixed viewWidth = 0;
+    Fixed viewDistance = 0;
 
-    Fixed xOffset;
-    Fixed yOffset;
-    Fixed screenScale;
-    Fixed fWidth;
-    Fixed fHeight;
+    Fixed xOffset = 0;
+    Fixed yOffset = 0;
+    Fixed screenScale = 0;
+    Fixed fWidth = 0;
+    Fixed fHeight = 0;
 
-    Vector normal[4]; //	Normals for viewing pyramid bounds.
+    Vector normal[4] = {0}; //	Normals for viewing pyramid bounds.
 
-    Vector corners[8]; //	Corners of truncated viewing pyramid.
+    Vector corners[8] = {0}; //	Corners of truncated viewing pyramid.
 
-    Vector lightSources[MAXLIGHTS];
+    Vector lightSources[MAXLIGHTS] = {0};
 
-    short lightMode[MAXLIGHTS];
-    Vector internalLights[MAXLIGHTS]; //	Vector length == light source power.
+    short lightMode[MAXLIGHTS] = {0};
+    Vector internalLights[MAXLIGHTS] = {0}; //	Vector length == light source power.
 
-    Fixed ambientLight; //	Intensity of ambient (nondirectional) light
-    long ambientLightColor; // Color of ambient (nondirectional) light.
+    Fixed ambientLight = 0; //	Intensity of ambient (nondirectional) light
+    long ambientLightColor = 0; // Color of ambient (nondirectional) light.
 
-    Fixed yonBound;
-    Fixed hitherBound;
-    Fixed horizonBound;
+    Fixed yonBound = 0;
+    Fixed hitherBound = 0;
+    Fixed horizonBound = 0;
 
-    long lightSeed;
-    short lightSourceCount;
-    Boolean dirtyLook;
-    Boolean inverseDone;
-    Boolean showTransparent;
+    long lightSeed = 0;
+    short lightSourceCount = 0;
+    Boolean dirtyLook = false;
+    Boolean inverseDone = false;
+    Boolean showTransparent = false;
 
     virtual void IViewParameters();
     virtual void CalculateViewPyramidCorners();
