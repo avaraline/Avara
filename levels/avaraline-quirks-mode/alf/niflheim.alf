@@ -9,8 +9,7 @@
     light.0.a="30"
     light.0.b="10"
     light.1.i="0.5"
-    gameLength="6563"
-    wigReveal="4950"
+    gameLength="3750"
     defaultLives="999"
     lightHull="131"
     mediumHull="132"
@@ -26,19 +25,14 @@
     missileLaunched.c = "#b3ffcc"
     wallHeight="0"
   />
+  <enum start="int((gameLength * 0.33) + (random * (gameLength * 0.33)))" vars="wigReveal" />
 
   <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" spin="false" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
   <Teleporter y="20" shape="0" group="@recenter" spin="false" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
+  <Timer in="@killGoodies" out="@killGoodies" wait="1" />
+  <Timer in="@start" out="@killGoodies" wait="wigReveal" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="1000" yon=".01" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="2000" shape="0" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
 
   <Sound y="200" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="0" cz="0" angle="225" />
   <Sound y="200" sound="snUnderwater" isAmbient="true" loopCount="-1" volume="70" cx="0" cz="0" angle="225" />
@@ -136,175 +130,126 @@
   <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="2.5" z="52.5" w="15" d="5" h="0" angle="90" />
   <Wall fill="#e2fbff" frame="#000000" x="10" z="52.5" w="0" d="5" h="2" />
 
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="10 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="25" cz="0" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="10 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="25" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="10 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-25" cz="0" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="10 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-25" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="10 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="16" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="-25" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="10 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="16" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="-25" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="250" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="10 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="16" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="25" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="10 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="16" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="25" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="5" cz="35" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="5" cz="35" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-5" cz="-35" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-5" cz="-35" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="35" cz="-5" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="35" cz="-5" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-35" cz="5" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-35" cz="5" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-10" cz="52.5" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-10" cz="52.5" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="10" cz="-52.5" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="10" cz="-52.5" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="52.5" cz="10" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="52.5" cz="10" angle="225" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-52.5" cz="-10" angle="225" />
+  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-52.5" cz="-10" angle="225" />
 
   <!-- INCARNATORS AND HIDDEN AMMO TOP-OFFERS -->
   <Incarnator y="20" cx="-30" cz="-40" angle="135" />
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-30" cz="-40" angle="135" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-30" cz="-40" angle="135" />
 
   <Incarnator y="20" cx="30" cz="40" angle="315" />
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="30" cz="40" angle="315" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="30" cz="40" angle="315" />
 
   <Incarnator y="20" cx="-40" cz="30" angle="45" />
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-40" cz="30" angle="45" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-40" cz="30" angle="45" />
 
   <Incarnator y="20" cx="40" cz="-30" angle="225" />
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="40" cz="-30" angle="225" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="40" cz="-30" angle="225" />
 
   <Incarnator y="20" cx="-10" cz="60" angle="0" />
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-10" cz="60" angle="0" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-10" cz="60" angle="0" />
 
   <Incarnator y="20" cx="10" cz="-60" angle="180" />
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="10" cz="-60" angle="180" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="10" cz="-60" angle="180" />
 
   <Incarnator y="20" cx="-60" cz="-10" angle="90" />
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="-60" cz="-10" angle="90" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-60" cz="-10" angle="90" />
 
   <Incarnator y="20" cx="60" cz="10" angle="270" />
-  <unique vars="mShow mTaken mOff" />
+  <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="1" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff" out="mOff" wait="1" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="mOff" out="mTaken" fill="#e2fbff" frame="#000000" cx="60" cz="10" angle="270" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="60" cz="10" angle="270" />
+
+  <Timer in="@start" out="@killStartOnlyGoodies" wait="5" />
 
   <Incarnator y="20" cx="5" cz="7.5" angle="180" stop="@start" />
-  <unique vars="mShow mOff" />
-  <Timer in="@start" out="mOff" wait="5" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="mOff" fill="#e2fbff" frame="#000000" cx="5" cz="7.5" angle="135" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="@killStartOnlyGoodies" fill="#e2fbff" frame="#000000" cx="5" cz="7.5" angle="135" />
 
   <Incarnator y="20" cx="-5" cz="-7.5" angle="0" stop="@start" />
-  <unique vars="mShow mOff" />
-  <Timer in="@start" out="mOff" wait="5" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="mOff" fill="#e2fbff" frame="#000000" cx="-5" cz="-7.5" angle="135" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="@killStartOnlyGoodies" fill="#e2fbff" frame="#000000" cx="-5" cz="-7.5" angle="135" />
 
   <Incarnator y="20" cx="-7.5" cz="5" angle="270" stop="@start" />
-  <unique vars="mShow mOff" />
-  <Timer in="@start" out="mOff" wait="5" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="mOff" fill="#e2fbff" frame="#000000" cx="-7.5" cz="5" angle="135" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="@killStartOnlyGoodies" fill="#e2fbff" frame="#000000" cx="-7.5" cz="5" angle="135" />
 
   <Incarnator y="20" cx="7.5" cz="-5" angle="90" stop="@start" />
-  <unique vars="mShow mOff" />
-  <Timer in="@start" out="mOff" wait="5" />
-  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="mOff" fill="#e2fbff" frame="#000000" cx="7.5" cz="-5" angle="135" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="@killStartOnlyGoodies" fill="#e2fbff" frame="#000000" cx="7.5" cz="-5" angle="135" />
 
   <set wallYon="defaultYon" />
 
   <!-- CENTER GOODIES, PRE- AND POST-WIG REVEAL -->
-  <unique vars="mShow mTaken mOff mOff1 mShow2 mTaken2" />
+  <unique vars="mShow mTaken mShow2 mTaken2" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="400" />
-  <Timer in="@start" out="mOff" wait="wigReveal" />
-  <Timer in="mOff1" out="mOff1" wait="1" />
-  <Goody y="mGoodyOffset" shape="bspAvaraA" speed="-2" grenades="8" missiles="6" start="mShow" stop="mOff1" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="0" angle="225" />
-  <And in="mOff" out="mShow2" />
-  <And in="mOff" out="mOff1" />
+  <Goody y="mGoodyOffset" shape="bspAvaraA" speed="-2" grenades="8" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="0" angle="225" />
+  <Timer in="@start" out="mShow2" wait="wigReveal" />
   <Timer in="mTaken2" out="mShow2" wait="50" />
   <Goody y="mGoodyOffset" shape="bspStandardPill" speed="-2" grenades="8" missiles="6" start="mShow2" out="mTaken2" fill="#e2fbff" frame="#ffffff" cx="0" cz="0" angle="225" />
 
