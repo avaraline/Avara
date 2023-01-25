@@ -71,6 +71,10 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
         return true;
     });
     TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/dbg flag     <- toggles named debugging flag",
+                          METHOD_TO_LAMBDA(CommandManager::SetDebugFlag));
+    TextCommand::Register(cmd);
 }
 
 
@@ -351,5 +355,18 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
         itsApp->AddMessageLine(pref + " changed from " + currentValue + " to " + value);
         itsApp->CApplication::PrefChanged(pref);
     }
+    return true;
+}
+
+bool CommandManager::SetDebugFlag(VectorOfArgs vargs) {
+    if (vargs.size() == 0) {
+        itsApp->AddMessageLine("Need to specify a key");
+        return false;
+    }
+    auto key = vargs[0];
+    bool dbg = itsApp->ToggleDebug(key);
+    std::ostringstream os;
+    os << "Debugging is now " << (dbg ? "ON" : "OFF") << " for " << key;
+    itsApp->AddMessageLine(os.str());
     return true;
 }

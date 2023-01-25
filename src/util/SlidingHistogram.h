@@ -78,7 +78,10 @@ public:
         float markers[] = {0.5, 0.99, 0.993, 0.995};  // smallest to biggest
         int nextMarker = 0;
         int prec = -log2(sh.stepSize);  // approx how many digits to show
-        os << std::setfill(' ') << std::setw(prec+5) << " " << sh.displayTitle << std::endl;
+
+        if (sh.displayTitle.size() > 0) {
+            os << std::setfill(' ') << std::setw(prec+5) << " " << sh.displayTitle << std::endl;
+        }
 
         for (int i = 0; i < sh.cellCounts.size(); i++) {
             sum += sh.cellCounts[i];
