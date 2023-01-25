@@ -40,8 +40,8 @@ void DetachResource(Handle theResource);
 
 void GetIndString(Str255 theString, short strListID, short index);
 
-char *BundlePath(const char *rel);
-char *BundlePath(std::stringstream &buffa);
+void BundlePath(const char *rel, char *dest);
+void BundlePath(std::stringstream &buffa, char *dest);
 
 void LevelDirListing();
 std::vector<std::string> LevelDirNameListing();
@@ -51,7 +51,7 @@ nlohmann::json LoadLevelListFromJSON(std::string set);
 nlohmann::json GetManifestJSON(std::string set);
 nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id);
 
-char* GetBSPPath(int resId);
+void GetBSPPath(int resId, char* dest);
 std::string GetALFPath(std::string alfname);
 std::string GetDefaultScript();
 std::string GetBaseScript();

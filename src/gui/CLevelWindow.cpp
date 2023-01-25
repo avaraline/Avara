@@ -20,7 +20,9 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
             std::string set = sets.at(i);
             std::stringstream subDir;
             subDir << LEVELDIR << PATHSEP << set;
-            if (cf_file_exists(BundlePath(subDir))) {
+            char subDirPath[PATH_MAX];
+            BundlePath(subDir, subDirPath);
+            if (cf_file_exists(subDirPath)) {
                 recentSets.push_back(set);
                 recentLevels.push_back(levels.at(i));
             }

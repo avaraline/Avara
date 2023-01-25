@@ -18,6 +18,12 @@
 
 #include <stb_vorbis.h>
 
+#ifndef PATH_MAX
+#define PATH_MAX 260
+#endif
+
+std::string sdlBasePath = "";
+
 static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
 
 static std::string currentResource("");
@@ -179,11 +185,15 @@ void GetIndString(Str255 theString, short strListID, short index) {
     theString[0] = 0;
 }
 
-char *BundlePath(const char *rel) {
-    char *path = new char[256];
-    snprintf(path, 256, "%s%s", SDL_GetBasePath(), rel);
+void BundlePath(const char *rel, char *dest) {
+
+    if (sdlBasePath.length() < 1) {
+        sdlBasePath = SDL_GetBasePath();
+    }
+    //char *path = new char[256];
+    snprintf(dest, PATH_MAX, "%s%s", sdlBasePath.c_str(), rel);
 #ifdef _WIN32
-    char *c = path;
+    char *c = dest;
     while (*c != 0) {
         if (*c == '/') {
             *c = '\\';
@@ -191,11 +201,10 @@ char *BundlePath(const char *rel) {
         c++;
     }
 #endif
-    return path;
 }
 
-char *BundlePath(std::stringstream &buffa) {
-    return BundlePath(buffa.str().c_str());
+void BundlePath(std::stringstream &buffa, char *dest) {
+    return BundlePath(buffa.str().c_str(), dest);
 }
 
 struct AvaraDirListEntry {
@@ -223,9 +232,9 @@ char* PathForLevelSet(std::string set) {
 
 void LevelDirListing() {
     cf_dir_t dir;
-    const char* ldir = BundlePath(LEVELDIR);
+    char ldir[PATH_MAX]; 
+    BundlePath(LEVELDIR, ldir);
     cf_dir_open(&dir, ldir);
-    delete [] ldir;
 
     std::vector<AvaraDirListEntry> raw_dir_listing;
 
@@ -255,15 +264,15 @@ void LevelDirListing() {
 
                 std::stringstream ss;
                 ss << LEVELDIR << PATHSEP << file_str << PATHSEP << SETFILE;
-                char * manf = BundlePath(ss);
-                if (cf_file_exists(manf)) {
+                char manf_path[PATH_MAX];
+                BundlePath(ss, manf_path);
+                if (cf_file_exists(manf_path)) {
                     // we found a set json file so add it (as version 2)
-                    char * manft = BundlePath(file_str.c_str());
-                    it->full_path = manft;
+                    it->full_path = new char[PATH_MAX];
+                    BundlePath(file_str.c_str(), it->full_path);
                     level_sets.insert(std::make_pair(file_str, (*it)));
                     set_name_list.push_back(file_str);
                 }
-                delete [] manf;
             }
         }
     }
@@ -277,7 +286,10 @@ nlohmann::json LoadLevelListFromJSON(std::string set) {
 nlohmann::json GetDefaultManifestJSON() {
     std::stringstream setManifestName;
     setManifestName << "rsrc" << PATHSEP << SETFILE;
-    std::ifstream setManifestFile(std::string(BundlePath(setManifestName)));
+    char * setManifestPath = new char [PATH_MAX];
+    BundlePath(setManifestName, setManifestPath);
+    std::ifstream setManifestFile((std::string(setManifestPath)));
+    delete [] setManifestPath;
     return nlohmann::json::parse(setManifestFile);
 }
 
@@ -285,7 +297,9 @@ nlohmann::json GetManifestJSON(std::string set) {
     if (set.length() < 1) return GetDefaultManifestJSON();
     std::stringstream setManifestName;
     setManifestName << LEVELDIR << PATHSEP << set << PATHSEP << SETFILE;
-    std::ifstream setManifestFile(BundlePath(setManifestName));
+    char setManifestPath[PATH_MAX];
+    BundlePath(setManifestName, setManifestPath);
+    std::ifstream setManifestFile(setManifestPath);
     if (setManifestFile.fail()) {
         SDL_Log("Couldn't read %s", setManifestName.str().c_str());
         return -1;
@@ -315,41 +329,44 @@ void LoadHullFromSetJSON(HullConfigRecord *hull, short resId) {
     hull->jumpPowerRatio = ToFixed(hullJson["Jump Power"]);
 }
 
-char* GetBSPPath(int resId) {
-    char* bspName = NULL;
+void GetBSPPath(int resId, char* dest) {
     std::stringstream relPath;
 
     // first check for the resource in the levelset directory
     relPath << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     relPath << BSPSDIR << PATHSEP << resId << BSPSEXT;
-    bspName = BundlePath(relPath);
-    std::ifstream testFile(bspName);
+    BundlePath(relPath, dest);
+    bool loaded = false;
+    std::ifstream testFile(dest);
     if (testFile.fail()) {
-        bspName = NULL;
     } else {
-        SDL_Log("Using BSP file in %s\n", bspName);
+        SDL_Log("Using BSP file in %s\n", dest);
+        loaded = true;
     }
     // haven't found the BSP file yet, try the top-level bsps directory
-    if (bspName == NULL) {
+    if (!loaded) {
         relPath.str("");
         relPath << RSRCDIR << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
-        bspName = BundlePath(relPath);
+        BundlePath(relPath, dest);
     }
-    return bspName;
 }
 
 std::string GetALFPath(std::string alfname) {
     std::stringstream buffa;
     buffa << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     buffa << ALFDIR << PATHSEP << alfname;
-    return std::string(BundlePath(buffa.str().c_str()));
+    char alfpath[PATH_MAX];
+    BundlePath(buffa.str().c_str(), alfpath);
+    return std::string(alfpath);
 }
 
 std::string GetDefaultScript() {
     std::stringstream buffa;
     buffa << LEVELDIR << PATHSEP << currentLevelDir  << PATHSEP;
     buffa << DEFAULTSCRIPT;
-    auto path = std::string(BundlePath(buffa));
+    char temp [PATH_MAX];
+    BundlePath(buffa, temp);
+    auto path = std::string(temp);
     std::ifstream t(path);
     if (t.good()) {
         std::string defaultscript;
@@ -368,7 +385,9 @@ std::string GetDefaultScript() {
 std::string GetBaseScript() {
     std::stringstream buffa;
     buffa << "rsrc" << PATHSEP << DEFAULTSCRIPT;
-    auto path = std::string(BundlePath(buffa));
+    char basepath [PATH_MAX];
+    BundlePath(buffa, basepath);
+    auto path = std::string(basepath);
     std::ifstream t(path);
     if (t.good()) {
         std::string defaultscript;
@@ -418,15 +437,15 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     std::stringstream buffa;
     buffa << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     buffa << OGGDIR << PATHSEP << filename;
-    char* fullpath = BundlePath(buffa.str().c_str());
+    char fullpath[PATH_MAX];
+    BundlePath(buffa.str().c_str(), fullpath);
     std::ifstream t(fullpath);
     if(!t.good()) {
         std::stringstream temp;
         buffa.swap(temp);
         buffa << RSRCDIR << PATHSEP;
         buffa << OGGDIR << PATHSEP << filename;
-        delete [] fullpath;
-        fullpath = BundlePath(buffa.str().c_str());
+        BundlePath(buffa.str().c_str(), fullpath);
     }
 
     SDL_Log("Loading %s", fullpath);
@@ -450,7 +469,6 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     }
     cash[resId] = sound;
     stb_vorbis_close(v);
-    delete [] fullpath;
 }
 
 void LoadDefaultOggFiles() {

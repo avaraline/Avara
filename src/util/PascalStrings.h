@@ -1,6 +1,16 @@
 #include "Memory.h"
 #include <limits.h>
 
+
+/* TODO: NO! BAD!
+// For a variety of reasons, the original Avara used Pascal strings in
+// several places. The internal parser and dictionary (which serves as
+// storage for the simple scripting language) are places you will see 
+// these awful, terrible functions used, until they can be ported to 
+// use... something else. If your stack trace ends here, I'm sorry in 
+// advance.
+*/
+
 static char *PascalStringtoCString(const unsigned char *p, int len) {
     if (len == 0) return const_cast<char *>("");
     char *s = new char[len + 1];
@@ -19,7 +29,6 @@ static size_t my_strnlen_s(const char* s, size_t len) {
     return i;
 }
 
-// TODO: NO! BAD!
 static unsigned char *CStringtoPascalString(const char *s) {
     size_t len = my_strnlen_s(s, UCHAR_MAX);
     if (len == 0) return 0;

@@ -39,7 +39,8 @@ ColorRecord ***bspColorLookupTable = 0;
 using json = nlohmann::json;
 
 void CBSPPart::IBSPPart(short resId) {
-    char *bspName = GetBSPPath(resId);
+    char bspPath[PATH_MAX];
+    GetBSPPath(resId, bspPath);
     //SDL_Log("Loading BSP: %s\n", bspName);
     lightSeed = 0;
     nextTemp = NULL;
@@ -57,9 +58,9 @@ void CBSPPart::IBSPPart(short resId) {
     yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
     userFlags = 0;
 
-    std::ifstream infile(bspName);
+    std::ifstream infile(bspPath);
     if (infile.fail()) {
-        SDL_Log("*** Failed to load BSP %d\n", resId);
+        SDL_Log("*** Failed to load BSP %s (id: %d)\n", bspPath, resId);
         polyCount = 0;
         pointCount = 0;
         return;
