@@ -201,7 +201,11 @@ void CRosterWindow::UpdateRoster() {
                 long rtt = theNet->itsCommManager->GetMaxRoundTrip(1 << i);
                 float loss = 100*theNet->itsCommManager->GetMaxMeanReceiveCount(1 << i);
                 std::ostringstream os;
-                os << theName << " (" << rtt << "/" << std::setprecision(loss < 2 ? 1 : 0) << std::fixed << loss << "%)";
+                os << theName << " (" << rtt << "ms";
+                if (gApplication->Debug("loss")) {
+                    os << "/" << std::setprecision(loss < 2 ? 1 : 0) << std::fixed << loss << "%";
+                }
+                os << ")";
                 theName = os.str();
                 maxRtt = std::max(maxRtt, rtt);
             }
