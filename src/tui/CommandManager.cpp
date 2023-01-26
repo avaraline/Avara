@@ -15,7 +15,7 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     TextCommand* cmd;
     cmd = new TextCommand("/help            <- show list of all commands\n"
                           "/help /xyz       <- show help for command /xyz",
-                          METHOD_TO_LAMBDA(CommandManager::CommandHelp));
+                          METHOD_TO_LAMBDA_VARGS(CommandHelp));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/beep            <- ring the bell",
@@ -35,30 +35,30 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
     cmd = new TextCommand("/pref name       <- display value of named preference\n"
                           "/pref name value <- set value of named preference",
-                          METHOD_TO_LAMBDA(CommandManager::GetSetPreference));
+                          METHOD_TO_LAMBDA_VARGS(GetSetPreference));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/gg              <- good game!\n"
                           "/gg new phrase   <- change the /gg phrase",
-                          METHOD_TO_LAMBDA(CommandManager::GoodGame));
+                          METHOD_TO_LAMBDA_VARGS(GoodGame));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/kick slot       <- kick player in given slot. slots start at 1",
-                          METHOD_TO_LAMBDA(CommandManager::KickPlayer));
+                          METHOD_TO_LAMBDA_VARGS(KickPlayer));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/away            <- toggle my presence\n"
                           "/away slot       <- toggle presence of given slot, starting from 1",
-                          METHOD_TO_LAMBDA(CommandManager::ToggleAwayState));
+                          METHOD_TO_LAMBDA_VARGS(ToggleAwayState));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'",
-                          METHOD_TO_LAMBDA(CommandManager::LoadNamedLevel));
+                          METHOD_TO_LAMBDA_VARGS(LoadNamedLevel));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/random       <- load random level from all available levels\n"
                           "/random aa ex <- load random level from any set name containing either 'aa' or 'ex'",
-                          METHOD_TO_LAMBDA(CommandManager::LoadRandomLevel));
+                          METHOD_TO_LAMBDA_VARGS(LoadRandomLevel));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/vvvvv        <- clear line then output ready checkmarks \xE2\x88\x9A",
@@ -73,7 +73,7 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/dbg flag     <- toggles named debugging flag",
-                          METHOD_TO_LAMBDA(CommandManager::SetDebugFlag));
+                          METHOD_TO_LAMBDA_VARGS(SetDebugFlag));
     TextCommand::Register(cmd);
 }
 
