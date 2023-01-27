@@ -101,7 +101,7 @@ public:
     bool operator<=(const T value) { return !(*this > value); }
 
     bool operator==(const T value) { return (counter == value); }
-    bool operator==(const int value) { return (counter == value); }
+    // bool operator==(const int value) { return (counter == value); }
 
     T operator&(T value) { return counter & value; }
     T operator&(int value) { return counter & value; }

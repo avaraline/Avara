@@ -1087,8 +1087,9 @@ void DeallocParser() {
 
 short IndexForEntry(const char* entry) {
     unsigned char* tempPString = CStringtoPascalString(entry);
-    return symTable->SearchForEntry(tempPString, -1) - firstVariable;
+    short t = symTable->SearchForEntry(tempPString, -1) - firstVariable;
     delete [] tempPString;
+    return t;
 }
 
 double ReadVariable(short index) {

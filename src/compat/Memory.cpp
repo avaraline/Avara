@@ -31,7 +31,7 @@ void DisposeHandle(Handle hand) {
     if (hand) {
         handleSizeMap.erase(hand);
         std::free(*hand);
-        //std::free(hand);
+        std::free(hand);
     }
 }
 
