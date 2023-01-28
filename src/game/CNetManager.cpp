@@ -751,7 +751,6 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, MsgAlignment::Center);
                 itsGame->itsApp->AddMessageLine(FragmentMapToString(), MsgAlignment::Left, MsgCategory::Error);
-                SDL_Log("FRAGMENTATION, fragmentMap ...\n%s\n", FragmentMapToString().c_str());
             }
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {

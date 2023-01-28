@@ -72,29 +72,3 @@ long CApplication::Number(const std::string name, const long defaultValue) {
     }
     return defaultValue;
 }
-
-// for now it's just a list of keys that you can turn on/off
-bool CApplication::ToggleDebug(const std::string& key) {
-    bool hasKey = Debug(key);
-    if (hasKey) {
-        debugMap.erase(key);
-    } else {
-        debugMap[key] = -1;  // value doesn't matter for on/off debug
-    }
-    return !hasKey;
-}
-
-bool CApplication::Debug(const std::string& key) {
-    return (debugMap.find(key) != debugMap.end());
-}
-
-int CApplication::SetDebugValue(const std::string& key, int value) {
-    return debugMap[key] = value;
-}
-
-int CApplication::DebugValue(const std::string& key) {
-    if (debugMap.find(key) != debugMap.end()) {
-        return debugMap[key];
-    }
-    return -1;
-}

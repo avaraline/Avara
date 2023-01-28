@@ -7,6 +7,7 @@
 
 #include "CommDefs.h"       // kdEveryone
 #include "Resource.h"       // LevelDirNameListing
+#include "Debug.h"          // Debug::methods
 #include <random>           // std::random_device
 
 CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
@@ -367,10 +368,10 @@ bool CommandManager::SetDebugFlag(VectorOfArgs vargs) {
     auto key = vargs[0];
     std::ostringstream os;
     if (vargs.size() == 1) {
-        bool dbg = itsApp->ToggleDebug(key);
+        bool dbg = Debug::Toggle(key);
         os << "Debugging flag " << key << " is " << (dbg ? "ON" : "OFF");
     } else {
-        int val = itsApp->SetDebugValue(key, std::stoi(vargs[1]));
+        int val = Debug::SetValue(key, std::stoi(vargs[1]));
         os << "Debugging flag " << key << " = " << val;
     }
     itsApp->AddMessageLine(os.str());
