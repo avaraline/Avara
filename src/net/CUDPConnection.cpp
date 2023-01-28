@@ -13,6 +13,7 @@
 #include "System.h"
 #include "CAvaraGame.h"  // gCurrentGame->fpsScale
 #include "CApplication.h"  // gApplication
+#include "Debug.h"
 
 #include <SDL2/SDL.h>
 
@@ -453,7 +454,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
                         myId, thePacket->packet.command, roundTrip, meanRoundTripTime, stdevRoundTripTime, retransmitTime, urgentRetransmitTime);
             #endif
 
-            if (gApplication->Debug("hist")) {
+            if (Debug::IsEnabled("hist")) {
                 latencyHistogram->push(roundTrip / (2.0*CLASSICFRAMETIME));
                 if (thePacket->serialNumber % (latencyHistogram->size()*2/3) == 0) {  // 1/3 overlap each output
                     SDL_Log("\n       LT histogram for connection #%d", myId);

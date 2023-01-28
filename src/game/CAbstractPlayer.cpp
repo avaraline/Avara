@@ -37,6 +37,8 @@
 #include "Parser.h"
 #include "Preferences.h"
 
+#include "Debug.h"
+
 #define MOUSESHOOTDELAY 8
 // replaced by kFOV preference
 //#define MAXFOV FIX(60)
@@ -946,6 +948,13 @@ void CAbstractPlayer::FrameAction() {
 
         if (doIncarnateSound) {
             IncarnateSound();
+        }
+
+        // if a frag frame is specified with /dbg, force a frag on that frame by messing with FRandSeed
+        int fragFrame = Debug::GetValue("frag");
+        if (fragFrame > 0 && itsGame->frameNumber == fragFrame) {
+            extern Fixed FRandSeed; // to intentionally cause frags below
+            FRandSeed += 1;
         }
     }
 }

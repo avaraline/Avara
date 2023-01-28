@@ -9,6 +9,7 @@
 #include "CScoreKeeper.h"
 #include "Preferences.h"
 #include "RGBAColor.h"
+#include "Debug.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
@@ -202,7 +203,7 @@ void CRosterWindow::UpdateRoster() {
                 float loss = 100*theNet->itsCommManager->GetMaxMeanReceiveCount(1 << i);
                 std::ostringstream os;
                 os << theName << " (" << rtt << "ms";
-                if (gApplication->Debug("loss")) {
+                if (Debug::IsEnabled("loss")) {
                     os << "/" << std::setprecision(loss < 2 ? 1 : 0) << std::fixed << loss << "%";
                 }
                 os << ")";

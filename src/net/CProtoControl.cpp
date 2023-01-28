@@ -159,38 +159,9 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->HandleDisconnect(itsManager->myId, kpKickClient);
             break;
 
-        case kpLatencyVote: {
-            int32_t p3 = thePacket->p3;
-
-            theNet->autoLatencyVoteCount++;
-            theNet->autoLatencyVote += thePacket->p1;
-
-            if (thePacket->p2 > theNet->maxRoundTripLatency)
-                theNet->maxRoundTripLatency = thePacket->p2;
-
-            theNet->playerTable[thePacket->sender]->RandomKey(p3);
-
-            // to be considered for fragmentation, packet must be received in the voting time window
-            if (theNet->IsFragmentCheckWindowOpen()) {
-                if (theNet->fragmentCheck == 0) {
-                    // the first vote received dictates what the fragmentCheck value is, not necessarily the current player
-                    theNet->fragmentDetected = false;
-                    theNet->fragmentCheck = p3;
-                    // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %ld", theNet->fragmentCheck, theGame->frameNumber);
-                } else {
-                    // any votes after the first must have a matching p3 value
-                    if (theNet->fragmentCheck != p3) {
-                        SDL_Log("FRAGMENTATION %d != %d in frameNumber %ld", theNet->fragmentCheck, p3, theGame->frameNumber);
-                        theNet->fragmentDetected = true;
-                    // } else {
-                    //     SDL_Log("No frags detected so far %d == %d in frameNumber %ld", theNet->fragmentCheck, p3, theGame->frameNumber);
-                    }
-                }
-            } else {
-                SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%ld",
-                        p3, theGame->frameNumber);
-            }
-        } break;
+        case kpLatencyVote:
+            theNet->ReceiveLatencyVote(thePacket->sender, thePacket->p1, thePacket->p2, thePacket->p3);
+            break;
 
         case kpResultsReport:
             theNet->ResultsReport(thePacket->dataBuffer);

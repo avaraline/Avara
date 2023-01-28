@@ -7,7 +7,6 @@
 #include <nanogui/nanogui.h>
 #include <string>
 #include <vector>
-#include <set>
 
 using json = nlohmann::json;
 
@@ -56,14 +55,9 @@ public:
         PrefChanged(name);
     }
 
-    // debug flags that can be toggled on/off by user
-    bool ToggleDebug(const std::string& key);
-    bool Debug(const std::string& key);
-
 protected:
     static json _prefs;
     std::vector<CWindow *> windowList;
-    std::set<std::string> debugKeys;
 };
 
 #ifdef APPLICATIONMAIN

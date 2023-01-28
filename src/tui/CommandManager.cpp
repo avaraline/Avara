@@ -7,6 +7,7 @@
 
 #include "CommDefs.h"       // kdEveryone
 #include "Resource.h"       // LevelDirNameListing
+#include "Debug.h"          // Debug::methods
 #include <random>           // std::random_device
 
 CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
@@ -72,7 +73,8 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     });
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/dbg flag     <- toggles named debugging flag",
+    cmd = new TextCommand("/dbg flag     <- toggles named debugging flag on/off\n"
+                          "/dbg flag val <- sets debug flag to integer value",
                           METHOD_TO_LAMBDA_VARGS(SetDebugFlag));
     TextCommand::Register(cmd);
 }
@@ -364,9 +366,14 @@ bool CommandManager::SetDebugFlag(VectorOfArgs vargs) {
         return false;
     }
     auto key = vargs[0];
-    bool dbg = itsApp->ToggleDebug(key);
     std::ostringstream os;
-    os << "Debugging is now " << (dbg ? "ON" : "OFF") << " for " << key;
+    if (vargs.size() == 1) {
+        bool dbg = Debug::Toggle(key);
+        os << "Debugging flag " << key << " is " << (dbg ? "ON" : "OFF");
+    } else {
+        int val = Debug::SetValue(key, std::stoi(vargs[1]));
+        os << "Debugging flag " << key << " = " << val;
+    }
     itsApp->AddMessageLine(os.str());
     return true;
 }

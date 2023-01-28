@@ -72,18 +72,3 @@ long CApplication::Number(const std::string name, const long defaultValue) {
     }
     return defaultValue;
 }
-
-// for now it's just a list of keys that you can turn on/off
-bool CApplication::ToggleDebug(const std::string& key) {
-    bool hasKey = Debug(key);
-    if (hasKey) {
-        debugKeys.erase(key);
-    } else {
-        debugKeys.insert(key);
-    }
-    return !hasKey;
-}
-
-bool CApplication::Debug(const std::string& key) {
-    return (debugKeys.find(key) != debugKeys.end());
-}
