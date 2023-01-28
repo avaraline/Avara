@@ -77,13 +77,24 @@ long CApplication::Number(const std::string name, const long defaultValue) {
 bool CApplication::ToggleDebug(const std::string& key) {
     bool hasKey = Debug(key);
     if (hasKey) {
-        debugKeys.erase(key);
+        debugMap.erase(key);
     } else {
-        debugKeys.insert(key);
+        debugMap[key] = -1;  // value doesn't matter for on/off debug
     }
     return !hasKey;
 }
 
 bool CApplication::Debug(const std::string& key) {
-    return (debugKeys.find(key) != debugKeys.end());
+    return (debugMap.find(key) != debugMap.end());
+}
+
+int CApplication::SetDebugValue(const std::string& key, int value) {
+    return debugMap[key] = value;
+}
+
+int CApplication::DebugValue(const std::string& key) {
+    if (debugMap.find(key) != debugMap.end()) {
+        return debugMap[key];
+    }
+    return -1;
 }
