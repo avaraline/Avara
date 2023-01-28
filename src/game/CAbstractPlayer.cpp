@@ -949,7 +949,7 @@ void CAbstractPlayer::FrameAction() {
         }
 
         // if a frag frame is specified with /dbg, force a frag on that frame by messing with FRandSeed
-        int fragFrame = gApplication->DebugValue("frag");
+        int fragFrame = gApplication != nullptr ? gApplication->DebugValue("frag") : -1;
         if (fragFrame > 0 && itsGame->frameNumber == fragFrame) {
             extern Fixed FRandSeed; // to intentionally cause frags below
             FRandSeed += 1;
