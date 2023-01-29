@@ -50,6 +50,7 @@
 #include "Preferences.h"
 #include "Resource.h"
 #include "RGBAColor.h"
+#include "Debug.h"
 
 #define kHighShadeCount 12
 
@@ -868,11 +869,16 @@ bool CAvaraGame::GameTick() {
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        // send pings periodically to maintain connection & improve estimate for LT
-        itsNet->SendPingCommand(2);
-        long pingInterval = 500; //msec
+        long pingInterval = 2000; //msec
         if (statusRequest == kPlayingStatus) {
-            pingInterval = 2000;
+            // experimental: '/dbg ping' will turn pings on/off during game
+            if (Debug::IsEnabled("ping")) {
+                itsNet->SendPingCommand(2);
+            }
+        } else {
+            // less frequent larger bursts seems to give better LT estimates when not playing
+            // (this is better than sending 2 every 0.5 sec)
+            itsNet->SendPingCommand(8);
         }
         nextPingTime = startTime + pingInterval;
     }
