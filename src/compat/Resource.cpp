@@ -22,6 +22,8 @@
 #define PATH_MAX 260
 #endif
 
+using json = nlohmann::json;
+
 std::string sdlBasePath = "";
 
 static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.r");
@@ -284,21 +286,21 @@ void LevelDirListing() {
     listingDone = true;
 };
 
-nlohmann::json LoadLevelListFromJSON(std::string set) {
+json LoadLevelListFromJSON(std::string set) {
     return GetManifestJSON(set)["LEDI"];
 }
 
-nlohmann::json GetDefaultManifestJSON() {
+json GetDefaultManifestJSON() {
     std::stringstream setManifestName;
     setManifestName << "rsrc" << PATHSEP << SETFILE;
     char * setManifestPath = new char [PATH_MAX];
     BundlePath(setManifestName, setManifestPath);
     std::ifstream setManifestFile((std::string(setManifestPath)));
     delete [] setManifestPath;
-    return nlohmann::json::parse(setManifestFile);
+    return json::parse(setManifestFile);
 }
 
-nlohmann::json GetManifestJSON(std::string set) {
+json GetManifestJSON(std::string set) {
     if (set.length() < 1) return GetDefaultManifestJSON();
     std::stringstream setManifestName;
     setManifestName << LEVELDIR << PATHSEP << set << PATHSEP << SETFILE;
@@ -310,12 +312,12 @@ nlohmann::json GetManifestJSON(std::string set) {
         return -1;
     }
 
-    return nlohmann::json::parse(setManifestFile);
+    return json::parse(setManifestFile);
 }
 
 void LoadHullFromSetJSON(HullConfigRecord *hull, short resId) {
     std::string key = std::to_string(resId);
-    nlohmann::json hullJson = GetKeyFromSetJSON("HULL", key, "129");
+    json hullJson = GetKeyFromSetJSON("HULL", key, "129");
 
     hull->hullBSP = (short)hullJson["Hull Res ID"];
     hull->maxMissiles = (short)hullJson["Max Missiles"];
@@ -334,26 +336,51 @@ void LoadHullFromSetJSON(HullConfigRecord *hull, short resId) {
     hull->jumpPowerRatio = ToFixed(hullJson["Jump Power"]);
 }
 
-void GetBSPPath(int resId, char* dest) {
+bool GetBSPPath(int resId, char* dest) {
     std::stringstream relPath;
 
     // first check for the resource in the levelset directory
     relPath << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     relPath << BSPSDIR << PATHSEP << resId << BSPSEXT;
     BundlePath(relPath, dest);
-    bool loaded = false;
+    bool found = false;
     std::ifstream testFile(dest);
-    if (testFile.fail()) {
-    } else {
-        SDL_Log("Using BSP file in %s\n", dest);
-        loaded = true;
+    if (!testFile.fail()) {
+        found = true;
     }
     // haven't found the BSP file yet, try the top-level bsps directory
-    if (!loaded) {
+    if (!found) {
         relPath.str("");
         relPath << RSRCDIR << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
         BundlePath(relPath, dest);
+        std::ifstream testFile(dest);
+        if (!testFile.fail()) {
+            found = true;
+        }
     }
+    return found;
+}
+
+std::map<std::string, json> bspCash;
+
+json GetBSPJSON(int resId) {
+    char bspPath[PATH_MAX];
+    bool found = GetBSPPath(resId, bspPath);
+
+    if (bspCash.count(bspPath) < 1) {
+        std::ifstream infile(bspPath);
+        if (!infile.fail()) {
+            //SDL_Log("Loading BSP: %s", bspPath);
+            bspCash[bspPath] = json::parse(infile);
+        }
+    }
+
+    if (!found || bspCash.count(bspPath) < 1) {
+        SDL_Log("*** Failed to load BSP %s (id: %d)\n", bspPath, resId);
+        return nullptr;
+    }
+
+    return bspCash[bspPath];
 }
 
 std::string GetALFPath(std::string alfname) {
@@ -431,12 +458,13 @@ nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string 
     }
 }
 #include <math.h>
-
-std::map<short, std::vector<uint8_t>> app_sound_cash;
-std::map<short, std::vector<uint8_t>> level_sound_cash;
+typedef std::vector<uint8_t> SoundCashSound;
+typedef std::map<int16_t, SoundCashSound> SoundCash;
+SoundCash app_sound_cash;
+SoundCash level_sound_cash;
 std::string current_sound_cash_dir;
 
-void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<uint8_t>> &cash) {
+void LoadOggFile(short resId, std::string filename, SoundCash &cash) {
     if (cash.count(resId) > 0) return;
 
     std::stringstream buffa;
@@ -461,22 +489,25 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     //stb_vorbis_info info = stb_vorbis_get_info(v);
     //SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
 
-    auto sound = std::vector<uint8_t>();
+    auto sound = SoundCashSound();
 
     for(;;) {
-        const int buffa_length = 512;
-        short buffa[buffa_length];
+        const size_t buffa_length = 512;
+        int16_t buffa[buffa_length];
+        uint8_t sample;
         int n = stb_vorbis_get_samples_short_interleaved(v, 1, buffa, buffa_length);
         if (n == 0) break;
-        for (int i = 0; i < buffa_length; ++i) {
-            sound.push_back((buffa[i] + 32768) >> 9);
+        for (size_t i = 0; i < buffa_length; ++i) {
+            // it is a mystery
+            sample = (buffa[i] + INT16_MAX + 1) >> 9;
+            sound.push_back(sample);
         }
     }
     cash[resId] = sound;
     stb_vorbis_close(v);
 }
 
-void LoadOggFiles(nlohmann::json &manifest, std::map<short, std::vector<uint8_t>>  &target_cash) {
+void LoadOggFiles(nlohmann::json &manifest, SoundCash &target_cash) {
     size_t loaded = 0;
     if (manifest != -1 && manifest.find("HSND") != manifest.end()) {
         for (auto &hsnd: manifest["HSND"].items()) {
@@ -508,7 +539,7 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     std::string key = std::to_string(resId);
     nlohmann::json hsndJson = GetKeyFromSetJSON("HSND", key, "129");
     int8_t version = hsndJson["Version"];
-    std::map<short, std::vector<uint8_t>> cash;
+    SoundCash cash;
 
     size_t found = 0;
 

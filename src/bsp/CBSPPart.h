@@ -106,10 +106,10 @@ public:
     BSPResourceHeader	header;
     */
     // Moved here from BSPResourceHeader
-    FixedPoint enclosurePoint = {0};
+    FixedPoint enclosurePoint = {0, 0, 0, 0};
     Fixed enclosureRadius = 0;
-    FixedPoint minBounds = {0}; //  Bounding box minimums for x, y, z
-    FixedPoint maxBounds = {0}; //  Bounding box maximums for x, y, z
+    FixedPoint minBounds = {0, 0, 0, 0}; //  Bounding box minimums for x, y, z
+    FixedPoint maxBounds = {0, 0, 0, 0}; //  Bounding box maximums for x, y, z
     enum { frontVisible = 1, backVisible, bothVisible };
 
     CViewParameters *currentView = 0;
@@ -174,7 +174,7 @@ public:
     virtual void BuildBoundingVolumes();
     virtual void Dispose();
 
-    virtual void ReplaceColor(int origColor, int newColor);
+    virtual void ReplaceColor(uint32_t origColor, uint32_t newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();

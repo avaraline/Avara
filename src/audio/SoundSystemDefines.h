@@ -36,21 +36,21 @@
 #define SILENCE 128
 #define WORDSILENCE 0
 
-typedef unsigned char Sample;
-typedef short WordSample;
+typedef uint8_t Sample;
+typedef int16_t WordSample;
 
 enum { metaNoData, metaNewData, metaKillNow, metaSuspend, metaFade };
 
 typedef struct {
     int32_t i;
-    unsigned short f;
+    uint16_t f;
 } SampleIndex;
 
-#define FIXSAMPLEINDEX(ind) *(long *)(1 + (short *)&ind)
+#define FIXSAMPLEINDEX(ind) *(long *)(1 + (int16_t *)&ind)
 
 typedef struct {
-    short refCount;
-    short meta;
+    int16_t refCount;
+    int16_t meta;
 
     Fixed loc[3];
     Fixed speed[3];
@@ -62,15 +62,15 @@ typedef struct {
 } SoundLink;
 
 struct SampleHeader {
-    short resId;
-    short refCount;
-    int32_t len;
-    int32_t loopStart;
-    int32_t loopEnd;
-    int32_t loopCount;
-    Fixed baseRate;
+    int16_t resId;
+    int16_t refCount;
+    uint32_t len;
+    uint32_t loopStart;
+    uint32_t loopEnd;
+    uint32_t loopCount;
+    UnsignedFixed baseRate;
     struct SampleHeader **nextSample;
-    short flags;
+    int16_t flags;
 };
 
 enum { kOldSampleFlag = 1 };
@@ -82,20 +82,20 @@ typedef SampleHeaderPtr *SampleHeaderHandle;
 typedef WordSample SampleConvert[SAMPLERANGE];
 
 typedef struct {
-    int32_t versNum;
-    int32_t loopStart;
-    int32_t loopEnd;
-    int32_t loopCount;
-    int32_t dataOffset;
-    Fixed baseRate;
+    uint32_t versNum;
+    uint32_t loopStart;
+    uint32_t loopEnd;
+    uint32_t loopCount;
+    uint32_t dataOffset;
+    UnsignedFixed baseRate;
 } HSNDRecord;
 
-short RateMixer(Sample *source,
+int16_t RateMixer(Sample *source,
     WordSample *dest,
     WordSample *converter,
-    short outCount,
-    int endOffset,
+    int16_t outCount,
+    int32_t endOffset,
     SampleIndex *current,
-    Fixed theRate);
+    UnsignedFixed theRate);
 
-void InterleaveStereoChannels(WordSample *leftCh, WordSample *rightCh, WordSample *blendTo, short bufferSize);
+void InterleaveStereoChannels(WordSample *leftCh, WordSample *rightCh, WordSample *blendTo, size_t bufferSize);

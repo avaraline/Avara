@@ -24,8 +24,8 @@ public:
     Matrix viewMatrix = {{0}};
     Matrix inverseViewMatrix = {{0}};
 
-    Point viewPixelDimensions = {0};
-    Point viewPixelCenter = {0};
+    Point viewPixelDimensions = {0, 0};
+    Point viewPixelCenter = {0, 0};
     float viewPixelRatio = 0;
 
     Fixed viewWidth = 0;

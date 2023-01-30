@@ -49,9 +49,9 @@ typedef struct {
 
 class CSoundMixer : public CDirectObject {
 public:
-    int globRegister = 0;
-    int volumeMax = 0;
-    unsigned int frameCounter = 0;
+    int32_t globRegister = 0;
+    int32_t volumeMax = 0;
+    uint32_t frameCounter = 0;
 
     int16_t *currentBuffer = 0;
     int16_t *doubleBuffers[2] = {0};
@@ -64,15 +64,15 @@ public:
     Ptr scaleLookup = 0;
     Ptr scaleLookupZero = 0;
 
-    MixerInfo dummyChannel = {0};
+    MixerInfo dummyChannel = {0, 0, 0, 0, 0, 0};
     MixerInfo *infoTable = 0;
     MixerInfo **sortSpace[2] = {0};
 
     uint64_t baseTime = 0;
 
-    int frameTime = 0;
-    int frameStartTime = 0;
-    int frameEndTime = 0;
+    int32_t frameTime = 0;
+    int32_t frameStartTime = 0;
+    int32_t frameEndTime = 0;
 
     UnsignedFixed samplingRate = 0;
     UnsignedFixed standardRate = 0;
@@ -84,7 +84,7 @@ public:
     Fixed maxAdjustedVolume = 0;
 
     CSoundHub *motionHub = 0;
-    SoundMotionInfo motion = {{0}};
+    SoundMotionInfo motion = {{0}, {0}};
     SoundLink *motionLink = 0;
     SoundLink *altLink = 0;
     Boolean useAltLink = false;
@@ -94,12 +94,12 @@ public:
 
     Vector rightVector = {0};
 
-    short minimumVolume = 0;
-    short maxChannels = 0;
-    short maxMix = 0;
+    int16_t minimumVolume = 0;
+    int16_t maxChannels = 0;
+    int16_t maxMix = 0;
 
-    short soundBufferSize = 0;
-    short soundBufferBits = 0;
+    size_t soundBufferSize = 0;
+    int16_t soundBufferBits = 0;
 
     Boolean hushFlag = false;
     Boolean sample16flag = false;
@@ -107,8 +107,8 @@ public:
     Boolean strongStereo = false;
 
     void ISoundMixer(Fixed sampRate,
-        short maxChannelCount,
-        short maxMixCount,
+        int16_t maxChannelCount,
+        int16_t maxMixCount,
         Boolean stereoEnable,
         Boolean sample16Enable,
         Boolean interpolateEnable);

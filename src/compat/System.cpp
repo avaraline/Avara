@@ -45,7 +45,7 @@ OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader) {
         if (q.empty()) {
             return qErr;
         }
-        for (int i = 0; i < q.size(); i++) {
+        for (size_t i = 0; i < q.size(); i++) {
             QElemPtr curElement = q.at(i);
             if (curElement == qElement) {
                 if (lastElement) {

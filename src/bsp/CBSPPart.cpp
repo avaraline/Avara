@@ -39,8 +39,6 @@ ColorRecord ***bspColorLookupTable = 0;
 using json = nlohmann::json;
 
 void CBSPPart::IBSPPart(short resId) {
-    char bspPath[PATH_MAX];
-    GetBSPPath(resId, bspPath);
     //SDL_Log("Loading BSP: %s\n", bspName);
     lightSeed = 0;
     nextTemp = NULL;
@@ -58,15 +56,13 @@ void CBSPPart::IBSPPart(short resId) {
     yon = FIX(500); //  500 m   sets the flags above and forgets to set the values.
     userFlags = 0;
 
-    std::ifstream infile(bspPath);
-    if (infile.fail()) {
-        SDL_Log("*** Failed to load BSP %s (id: %d)\n", bspPath, resId);
+    json doc = GetBSPJSON(resId);
+    if (doc == nullptr) {
         polyCount = 0;
         pointCount = 0;
         return;
     }
 
-    json doc = json::parse(infile);
     polyCount = doc["polys"].size();
     pointCount = doc["points"].size();
 
@@ -78,28 +74,28 @@ void CBSPPart::IBSPPart(short resId) {
     enclosurePoint.z = ToFixed(doc["center"][2]);
     enclosurePoint.w = FIX1;
 
-    float minX = doc["bounds"]["min"][0];
-    float minY = doc["bounds"]["min"][1];
-    float minZ = doc["bounds"]["min"][2];
+    float mnX = doc["bounds"]["min"][0];
+    float mnY = doc["bounds"]["min"][1];
+    float mnZ = doc["bounds"]["min"][2];
 
-    minBounds.x = ToFixed(minX);
-    minBounds.y = ToFixed(minY);
-    minBounds.z = ToFixed(minZ);
+    minBounds.x = ToFixed(mnX);
+    minBounds.y = ToFixed(mnY);
+    minBounds.z = ToFixed(mnZ);
     minBounds.w = FIX1;
 
-    float maxX = doc["bounds"]["max"][0];
-    float maxY = doc["bounds"]["max"][1];
-    float maxZ = doc["bounds"]["max"][2];
+    float mxX = doc["bounds"]["max"][0];
+    float mxY = doc["bounds"]["max"][1];
+    float mxZ = doc["bounds"]["max"][2];
 
-    maxBounds.x = ToFixed(maxX);
-    maxBounds.y = ToFixed(maxY);
-    maxBounds.z = ToFixed(maxZ);
+    maxBounds.x = ToFixed(mxX);
+    maxBounds.y = ToFixed(mxY);
+    maxBounds.z = ToFixed(mxZ);
     maxBounds.w = FIX1;
 
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
     polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
 
-    for (int i = 0; i < pointCount; i++) {
+    for (uint32_t i = 0; i < pointCount; i++) {
         json pt = doc["points"][i];
         pointTable[i][0] = ToFixed(pt[0]);
         pointTable[i][1] = ToFixed(pt[1]);
@@ -109,7 +105,7 @@ void CBSPPart::IBSPPart(short resId) {
 
     totalPoints = 0;
 
-    for (int i = 0; i < polyCount; i++) {
+    for (uint32_t i = 0; i < polyCount; i++) {
         json poly = doc["polys"][i];
         // Color
         polyTable[i].color = poly["color"];
@@ -121,9 +117,9 @@ void CBSPPart::IBSPPart(short resId) {
         // Triangle points
         polyTable[i].triCount = poly["tris"].size();
         polyTable[i].triPoints = (uint16_t *)NewPtr(polyTable[i].triCount * 3 * sizeof(uint16_t));
-        for (int j = 0; j < polyTable[i].triCount; j++) {
+        for (size_t j = 0; j < polyTable[i].triCount; j++) {
             json tri = poly["tris"][j];
-            for (int k = 0; k < 3; k++) {
+            for (size_t k = 0; k < 3; k++) {
                 polyTable[i].triPoints[(j * 3) + k] = (uint16_t)tri[k];
                 totalPoints += 1;
             }
@@ -131,12 +127,12 @@ void CBSPPart::IBSPPart(short resId) {
         if (poly.contains("front")) {
             polyTable[i].front = poly["front"];
         }
-        else polyTable[i].front = -1;
+        else polyTable[i].front = uint16_t(-1);
 
         if (poly.contains("back")) {
             polyTable[i].back = poly["back"];
         }
-        else polyTable[i].back = -1;
+        else polyTable[i].back = uint16_t(-1);
     }
 
     BuildBoundingVolumes();
@@ -170,8 +166,8 @@ void CBSPPart::DrawPolygons() {
 
 Boolean CBSPPart::InViewPyramid() {
     CViewParameters *vp;
-    short i;
-    Vector *norms;
+    //short i;
+    //Vector *norms;
     Fixed radius;
     Fixed distance;
     Fixed x, y;
@@ -397,7 +393,7 @@ Matrix *CBSPPart::GetInverseTransform() {
     return &invGlobTransform;
 }
 
-void CBSPPart::ReplaceColor(int origColor, int newColor) {
+void CBSPPart::ReplaceColor(uint32_t origColor, uint32_t newColor) {
     for (int i = 0; i < polyCount; i++) {
         if (polyTable[i].origColor == origColor) {
             polyTable[i].color = newColor;
@@ -429,7 +425,7 @@ void CBSPPart::Dispose() {
         CDirectObject::Dispose();
         return;
     }
-    for (int i = 0; i < polyCount; i++) {
+    for (uint32_t i = 0; i < polyCount; i++) {
         DisposePtr((Ptr)polyTable[i].triPoints);
     }
 
@@ -546,10 +542,10 @@ static long totalCases = 0;
 #endif
 
 Boolean CBSPPart::Obscures(CBSPPart *other) {
-    Fixed *v;
-    Fixed delta;
-    Fixed sum;
-    Vector deltaV;
+    //Fixed *v;
+    //Fixed delta;
+    //Fixed sum;
+    //Vector deltaV;
     Vector center;
     Vector otherCorners[8];
     Vector myCorners[8];
