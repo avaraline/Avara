@@ -39,9 +39,6 @@ void CGuardActor::BeginScript() {
 }
 
 CAbstractActor *CGuardActor::EndScript() {
-    short resId;
-    CBSPWorld *theWorld;
-
     CGlowActors::EndScript();
 
     maskBits |= kSolidBit;

@@ -164,7 +164,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     };
 
     for(const auto &heading : headings) {
-        auto t = scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
+        scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
     }
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {

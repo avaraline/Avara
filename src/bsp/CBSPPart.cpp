@@ -25,12 +25,7 @@
  */
 short *bspIndexStack = 0;
 
-static long tempLockCount = 0;
-
-static short colorLookupSize = 0;
-
 Vector **bspPointTemp = 0;
-static long pointTempMem = 0;
 
 #define MINIMUM_TOLERANCE FIX3(10)
 

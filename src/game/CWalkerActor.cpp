@@ -670,8 +670,6 @@ void CWalkerActor::MotionControl() {
 }
 
 void CWalkerActor::KeyboardControl(FunctionTable *ft) {
-    Fixed savedAcceleration;
-
     PrepareForLegUndo();
 
     if (tractionFlag && !oldTractionFlag)

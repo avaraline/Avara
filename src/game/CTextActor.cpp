@@ -37,8 +37,6 @@ void CTextActor::BeginScript() {
 
 CAbstractActor *CTextActor::EndScript() {
     if (CAbstractActor::EndScript()) {
-        MsgType inMsg;
-
         radius = GetLastOval(location);
         location[1] = ReadFixedVar(iHeight) + ReadFixedVar(iBaseHeight);
 

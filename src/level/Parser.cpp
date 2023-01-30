@@ -854,7 +854,6 @@ void SetupCompiler(StringPtr theInput) {
 
 void WriteVariable(long token, double value) {
     variableValue *theVar;
-    double temp;
 
     theVar = (variableValue *)variableBase->GetEntryPointer(token);
     if (theVar) {
@@ -976,8 +975,6 @@ double EvalVariable(long token, Boolean forceCalc) {
     return theVar->value;
 }
 
-static unsigned long oldTicks = 0;
-
 char *fixedString(unsigned char *s) {
     int len = std::strlen((char *)s);
     char *fixed = new char[len + 1];
@@ -992,7 +989,6 @@ char *fixedString(unsigned char *s) {
 
 void RunThis(unsigned char *script) {
     LexSymbol statement;
-    unsigned long newTicks;
 
 #ifdef DEBUGPARSER
     char *formattedScript = fixedString(script);
@@ -1132,9 +1128,6 @@ const std::optional<uint32_t> ReadColorVar(const char *s) {
 }
 
 std::string ReadStringVar(short index) {
-    short len;
-    Handle result;
-
     index = EvalVariable(index + firstVariable, false);
     if (index) {
         return symTable->GetIndEntry(index);

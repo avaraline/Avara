@@ -90,7 +90,6 @@ OSErr CCommManager::SendPacket(short distribution,
                                long p3,
                                short dataLen,
                                Ptr dataPtr) {
-    long len;
     Ptr ps, pd;
 
     PacketInfo *thePacket;
@@ -136,7 +135,6 @@ OSErr CCommManager::SendUrgentPacket(short distribution,
     long p3,
     short dataLen,
     Ptr dataPtr) {
-    long len;
     Ptr ps, pd;
 
     PacketInfo *thePacket;

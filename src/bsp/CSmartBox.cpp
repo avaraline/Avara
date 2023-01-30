@@ -32,7 +32,6 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     Vector *p;
     short i;
     Fixed x, y, z;
-    ColorRecord *oldColors;
     Vector normalAdjust;
     Vector newNormal;
 
@@ -77,11 +76,8 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
 }
 
 void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
-    Vector *p;
     short i;
     Fixed x, y, z;
-    ColorRecord *oldColors;
-    Vector normalAdjust;
     Fixed dx, dy, dz;
     Fixed stretchBound;
 
@@ -122,9 +118,6 @@ void CSmartBox::ISmartBox(short resId,
     long altColor,
     CAbstractActor *anActor,
     short aPartCode) {
-    OSErr iErr;
-    Vector *p;
-    short i;
     bspsResource **config;
     Fixed baseSize;
     Boolean stretchFlag;
@@ -189,7 +182,7 @@ void CSmartBox::FindEnclosure() {
 
     Fixed xspan, yspan, zspan;
     Fixed maxspan;
-    Fixed rad, radsq;
+    Fixed rad;
 
     FixedPoint xmin, xmax, ymin, ymax, zmin, zmax;
     FixedPoint dia1, dia2, cen;

@@ -145,7 +145,6 @@ SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
 
     if (!aSample) {
         Handle compressedData;
-        Handle soundInfo;
 
         compressedData = GetResource(HSOUNDRESTYPE, resId);
         if (compressedData) {

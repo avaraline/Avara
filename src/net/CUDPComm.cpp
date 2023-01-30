@@ -140,7 +140,6 @@ static Boolean ImmedProtoHandler(PacketInfo *thePacket, Ptr userData) {
 
 void CUDPComm::WriteAndSignPacket(PacketInfo *thePacket) {
     CUDPConnection *conn;
-    short dummyStackVar;
 
     thePacket->sender = myId; //	Sign it.
 

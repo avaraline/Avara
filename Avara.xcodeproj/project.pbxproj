@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E5641C412987FFB300568A52 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5641C3F2987FFB300568A52 /* Debug.cpp */; };
+		E5641C4229881F2A00568A52 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E58145CF298338D400AB75DD /* SDL2.framework */; };
 		E5814557298336D400AB75DD /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E581444D298336D400AB75DD /* Memory.cpp */; };
 		E5814558298336D400AB75DD /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E581444E298336D400AB75DD /* Resource.cpp */; };
 		E5814559298336D400AB75DD /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5814450298336D400AB75DD /* Files.cpp */; };
@@ -123,7 +125,6 @@
 		E58145CB298336D400AB75DD /* CBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5814552298336D400AB75DD /* CBaseObject.cpp */; };
 		E58145CC298336D400AB75DD /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5814553298336D400AB75DD /* CTagBase.cpp */; };
 		E58145CD298336D400AB75DD /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5814556298336D400AB75DD /* CDirectObject.cpp */; };
-		E58145D0298338D400AB75DD /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E58145CF298338D400AB75DD /* SDL2.framework */; };
 		E58147972983392B00AB75DD /* minisoap.c in Sources */ = {isa = PBXBuildFile; fileRef = E58145D82983392B00AB75DD /* minisoap.c */; };
 		E58147982983392B00AB75DD /* addr_is_reserved.c in Sources */ = {isa = PBXBuildFile; fileRef = E58145DB2983392B00AB75DD /* addr_is_reserved.c */; };
 		E58147992983392B00AB75DD /* portlistingparse.c in Sources */ = {isa = PBXBuildFile; fileRef = E58145DE2983392B00AB75DD /* portlistingparse.c */; };
@@ -193,6 +194,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E5641C3F2987FFB300568A52 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
+		E5641C402987FFB300568A52 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		E5814441298335A700AB75DD /* Avara */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Avara; sourceTree = BUILT_PRODUCTS_DIR; };
 		E581444D298336D400AB75DD /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
 		E581444E298336D400AB75DD /* Resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Resource.cpp; sourceTree = "<group>"; };
@@ -851,9 +854,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5641C4229881F2A00568A52 /* SDL2.framework in Frameworks */,
 				E58147D3298339DA00AB75DD /* AppKit.framework in Frameworks */,
 				E58147D1298339D300AB75DD /* OpenGL.framework in Frameworks */,
-				E58145D0298338D400AB75DD /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,6 +949,8 @@
 				E581446C298336D400AB75DD /* CRC.h */,
 				E5814479298336D400AB75DD /* CStringDictionary.cpp */,
 				E5814465298336D400AB75DD /* CStringDictionary.h */,
+				E5641C3F2987FFB300568A52 /* Debug.cpp */,
+				E5641C402987FFB300568A52 /* Debug.h */,
 				E5814477298336D400AB75DD /* FastMat.cpp */,
 				E581446A298336D400AB75DD /* FastMat.h */,
 				E5814469298336D400AB75DD /* GitVersion.h */,
@@ -1970,6 +1975,7 @@
 				E581457D298336D400AB75DD /* CGuardActor.cpp in Sources */,
 				E581458B298336D400AB75DD /* CUfo.cpp in Sources */,
 				E581479A2983392B00AB75DD /* connecthostport.c in Sources */,
+				E5641C412987FFB300568A52 /* Debug.cpp in Sources */,
 				E58147CF2983392B00AB75DD /* nanovg.c in Sources */,
 				E58147A22983392B00AB75DD /* minissdpc.c in Sources */,
 				E58145C3298336D400AB75DD /* CWindow.cpp in Sources */,
@@ -2012,7 +2018,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -2042,7 +2048,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2056,7 +2062,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2070,7 +2076,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -2100,7 +2106,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -2108,7 +2114,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

@@ -52,7 +52,6 @@ void CHuffProcessor::CreateLookupBuffer() {
         do {
             if (codeLen == HUFFHANDLELOOKUPBITS || (theNode->left < 0 && codeLen < HUFFHANDLELOOKUPBITS)) {
                 int codeIndex;
-                short i;
                 codeIndex = codeString << (HUFFHANDLELOOKUPBITS - codeLen);
                 lastNode = lookupBuf[lastLookup];
                 while (lastLookup < codeIndex) {
@@ -301,9 +300,6 @@ int CHuffProcessor::GetCompressedLen(Ptr sourceData, int sourceLen) {
 
 void CHuffProcessor::Compress(Ptr fromPtr, Ptr destPtr) {
     short i, j, k;
-    int outputLen;
-    int outputBits = 0;
-    short nonZero = 0;
     HuffDataHeader *outHeader;
 
     LockThis();
@@ -337,7 +333,7 @@ void CHuffProcessor::Compress(Ptr fromPtr, Ptr destPtr) {
 
         k = 0;
         for (i = 0; i < (NUMSYMBOLS >> 5); i++) {
-            int flags;
+            int flags = 0;
             for (j = 0; j < 32; j++) {
                 flags += flags;
                 flags |= (symbCounters[k++] != 0);

@@ -58,7 +58,6 @@ void CProtoControl::Attach(CCommManager *aManager) {
 Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
     CNetManager *theNet = theGame->itsNet;
     Boolean didHandle = true;
-    short slot;
 
     switch (thePacket->command) {
         case kpKillConnection:

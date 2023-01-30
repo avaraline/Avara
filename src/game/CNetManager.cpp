@@ -133,7 +133,7 @@ void CNetManager::ChangeNet(short netKind, std::string address) {
 void CNetManager::ChangeNet(short netKind, std::string address, std::string password) {
     CCommManager *newManager = NULL;
     Boolean confirm = true;
-    CAvaraApp *theApp = itsGame->itsApp;
+    //CAvaraApp *theApp = itsGame->itsApp;
 
     if (netKind != netStatus || !isConnected) {
         if (netStatus != kNullNet || !isConnected) {
@@ -612,7 +612,6 @@ void CNetManager::ResumeGame() {
     CPlayerManager *thePlayerManager;
     long lastTime;
     Boolean notReady;
-    Boolean allOk = false;
 
     SDL_Log("CNetManager::ResumeGame\n");
     config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
@@ -1072,7 +1071,7 @@ void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std:
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         nlohmann::json message = nlohmann::json::parse(json);
         playerTable[slotId]->RandomKey(randomKey);
-
+        /*
         if(message.type() == nlohmann::json::value_t::object) {
             auto it = message.begin();
 
@@ -1080,6 +1079,7 @@ void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std:
                 bool xyz = it.value();
             }
         }
+        */
     }
 }
 
