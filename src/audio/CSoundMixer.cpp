@@ -99,8 +99,8 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     Boolean stereoEnable,
     Boolean sample16Enable,
     Boolean interpolateEnable) {
-    OSErr iErr;
-    int globTemp;
+    //OSErr iErr;
+    //int globTemp;
     short i, j;
     Vector rightVect = {FIX(1), 0, 0, 0};
 
@@ -192,8 +192,8 @@ void CSoundMixer::ISoundMixer(Fixed sampRate,
     StartTiming();
 
     size_t bufferRAM = sizeof(WordSample) * 2 * soundBufferSize;
-    doubleBuffers[0] = (WordSample *)malloc(bufferRAM);
-    doubleBuffers[1] = (WordSample *)malloc(bufferRAM);
+    doubleBuffers[0] = (WordSample *)NewPtr(bufferRAM);
+    doubleBuffers[1] = (WordSample *)NewPtr(bufferRAM);
 
     SilenceBuffers();
 
@@ -275,7 +275,7 @@ void CSoundMixer::SilenceBuffers() {
 }
 
 void CSoundMixer::Dispose() {
-    OSErr iErr;
+    //OSErr iErr;
     short i;
     MixerInfo *mix;
 

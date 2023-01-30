@@ -71,7 +71,7 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     soundHub->MixerDispose();
 
     aMixer = new CSoundMixer;
-    aMixer->ISoundMixer(rate22khz, 32, 4, true, true, false);
+    aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false);
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
     aMixer->SetVolume(gApplication->Get<uint8_t>(kSoundVolume));
@@ -612,8 +612,8 @@ void CAvaraGame::EndScript() {
                 .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
-            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
-                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
+            // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
+            //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color); 
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
             AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);

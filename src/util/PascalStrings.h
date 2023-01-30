@@ -1,5 +1,6 @@
 #include "Memory.h"
 #include <limits.h>
+#include <string.h>
 
 
 /* TODO: NO! BAD!
@@ -24,9 +25,13 @@ static char *PascalStringtoCString(const unsigned char *p) {
 }
 
 static size_t my_strnlen_s(const char* s, size_t len) {
+    #ifdef strnlen_s
+    return strnlen_s(s, len);
+    #else
     size_t i = 0;
     for (; i < len && s[i] != '\0'; ++i);
     return i;
+    #endif
 }
 
 static unsigned char *CStringtoPascalString(const char *s) {

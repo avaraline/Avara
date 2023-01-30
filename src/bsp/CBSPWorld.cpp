@@ -182,7 +182,7 @@ void CBSPWorldImpl::OverheadPoint(Fixed *c, Fixed *e) {
 */
 
 #define FASTOBSCURETEST(a, b) (b->maxZ > a->minZ)
-static long totalObsCount = 0;
+//static long totalObsCount = 0;
 
 void CBSPWorldImpl::VisibilitySort(CBSPPart **parts, short overlapCount) {
     CBSPPart *thePart;

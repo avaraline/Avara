@@ -120,11 +120,11 @@ public:
 
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
-    Matrix itsTransform = {0}; //	Transforms to world coordinates. (model)
-    Matrix invGlobTransform = {0}; // (inverse model)
+    Matrix itsTransform = {{0}}; //	Transforms to world coordinates. (model)
+    Matrix invGlobTransform = {{0}}; // (inverse model)
 
-    Matrix fullTransform = {0}; // modelview
-    Matrix invFullTransform = {0}; // inverse modelview
+    Matrix fullTransform = {{0}}; // modelview
+    Matrix invFullTransform = {{0}}; // inverse modelview
 
     Fixed hither = 0;
     Fixed yon = 0;
