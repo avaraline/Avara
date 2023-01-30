@@ -33,7 +33,7 @@ void CBasicSound::SetRate(Fixed theRate) {
     //	Not applicable
 }
 
-Fixed CBasicSound::GetSampleRate() {
+UnsignedFixed CBasicSound::GetSampleRate() {
     return itsMixer->samplingRate;
 }
 
@@ -163,7 +163,7 @@ void CBasicSound::UseSamples(SampleHeaderHandle theSample) {
     }
 }
 
-void CBasicSound::CalculatePosition(int t) {
+void CBasicSound::CalculatePosition(int32_t t) {
     CSoundMixer *m;
     SoundLink *s;
     short i;
@@ -276,7 +276,7 @@ void CBasicSound::CalculateMotionVolume() {
         volumes[1] = volumeMax;
 }
 
-short CBasicSound::CalcVolume(short theChannel) {
+int16_t CBasicSound::CalcVolume(int16_t theChannel) {
     if (controlLink) {
         if (controlLink->meta == metaSuspend)
             return 0;
@@ -300,7 +300,7 @@ short CBasicSound::CalcVolume(short theChannel) {
     return volumes[theChannel];
 }
 
-void CBasicSound::WriteFrame(short theChannel, short volumeAllowed) {
+void CBasicSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
     //Sample *s;
     //WordSample *d;
     //SampleConvert *converter;

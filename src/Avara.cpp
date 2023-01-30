@@ -11,6 +11,7 @@
 #include "AvaraTCP.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
+#include "CPlayerManager.h"
 #include "CBSPPart.h"
 #include "FastMat.h"
 #include "Preferences.h"
@@ -61,6 +62,7 @@ int main(int argc, char *argv[]) {
 
     // process command-line arguments
     std::string connectAddress;
+    std::string textCommand;
     bool host = false;
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
@@ -76,10 +78,21 @@ int main(int argc, char *argv[]) {
         } else if (arg == "-f" || arg == "--frametime") {
             long frameTime = atol(argv[++i]);  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
+        } else if (arg == "--command") {
+            textCommand = std::string(argv[++i]);
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
         }
+    }
+
+    auto p = CPlayerManagerImpl::LocalPlayer();
+    auto *tui = ((CAvaraAppImpl *)app)->GetTui();
+    auto defaultCmd = "/rand -normal -tre avaraline emo not-aa ex";
+    if (textCommand.size() > 0) {
+        tui->ExecuteMatchingCommand(textCommand, p);
+    } else {
+        tui->ExecuteMatchingCommand(defaultCmd, p);
     }
 
     if(host == true) {
@@ -87,7 +100,7 @@ int main(int argc, char *argv[]) {
     } else if(connectAddress.size() > 0) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
-
+    
     // the mainloop should be sufficiently fast so that frames occur near their scheduled time
     mainloop(app->GetGame()->frameTime / 4);
 

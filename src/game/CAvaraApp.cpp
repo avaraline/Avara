@@ -121,7 +121,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     );
 
     // load up a random decent starting level
-    itsTui->ExecuteMatchingCommand("/rand -normal -tre avaraline emo not-aa ex", CPlayerManagerImpl::LocalPlayer());
+    
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -369,9 +369,6 @@ void CAvaraAppImpl::MessageLine(short index, MsgAlignment align) {
             break;
         case kmSelfDestruct:
             AddMessageLine("Self-destruct activated.", align);
-            break;
-        case kmSelfDestruct2:
-            AddMessageLine("Mission aborted.", align);
             break;
         case kmFragmentAlert:
             AddMessageLine(
