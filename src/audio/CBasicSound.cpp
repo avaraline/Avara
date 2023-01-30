@@ -301,27 +301,27 @@ short CBasicSound::CalcVolume(short theChannel) {
 }
 
 void CBasicSound::WriteFrame(short theChannel, short volumeAllowed) {
-    Sample *s;
-    WordSample *d;
-    SampleConvert *converter;
+    //Sample *s;
+    //WordSample *d;
+    //SampleConvert *converter;
     int thisCount;
     int remaining;
     int baseCount = currentCount[0].i;
     int loopCopy = loopCount[0];
 
-    converter = &itsMixer->volumeLookup[volumeAllowed - 1];
-    d = itsMixer->mixTo[theChannel];
+    //converter = &itsMixer->volumeLookup[volumeAllowed - 1];
+    //d = itsMixer->mixTo[theChannel];
 
     if (baseCount >= 0) {
         thisCount = itsMixer->soundBufferSize;
     } else {
-        d -= baseCount;
+        //d -= baseCount;
         thisCount = itsMixer->soundBufferSize + baseCount;
         baseCount = 0;
     }
 
     do {
-        s = sampleData + baseCount;
+        //s = sampleData + baseCount;
 
         remaining = baseCount + thisCount - loopEnd;
         if (loopCopy && remaining > 0) {

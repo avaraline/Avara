@@ -13,7 +13,7 @@
 
 typedef bool Boolean;
 
-typedef long Size;
+typedef size_t Size;
 typedef char *Ptr;
 typedef Ptr *Handle;
 
@@ -21,25 +21,25 @@ typedef int32_t Fixed;
 typedef int32_t Fract;
 typedef uint32_t UnsignedFixed;
 
-typedef unsigned char *StringPtr;
-typedef unsigned char Str255[256];
+typedef uint8_t *StringPtr;
+typedef uint8_t Str255[256];
 
-typedef unsigned char Byte;
-typedef signed char SignedByte;
+typedef uint8_t Byte;
+typedef int8_t SignedByte;
 
 typedef uint32_t ip_addr;
 typedef uint16_t port_num;
 
 struct Rect {
-    short top;
-    short left;
-    short bottom;
-    short right;
+    int16_t top;
+    int16_t left;
+    int16_t bottom;
+    int16_t right;
 };
 typedef struct Rect Rect;
 
-typedef short OSErr;
-typedef unsigned int OSType;
+typedef int16_t OSErr;
+typedef uint32_t OSType;
 
 // This is certainly not the right way to do this.
 #define noErr 0
@@ -53,20 +53,20 @@ typedef unsigned int OSType;
 #define afpPwdExpiredErr -5042
 
 struct Point {
-    short v;
-    short h;
+    int16_t v;
+    int16_t h;
 };
 typedef struct Point Point;
 
 struct QElem {
     struct QElem *qLink;
-    short qType;
-    short qData[1];
+    int16_t qType;
+    int16_t qData[1];
 };
 typedef struct QElem QElem;
 typedef QElem *QElemPtr;
 struct QHdr {
-    volatile short qFlags;
+    volatile int16_t qFlags;
     volatile QElemPtr qHead;
     volatile QElemPtr qTail;
 };

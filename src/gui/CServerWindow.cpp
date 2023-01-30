@@ -41,7 +41,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     nanogui::CheckBox *registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
         this->trackerBox->setEditable(checked);
         this->trackerBox->setEnabled(checked);
-        app->Set(kTrackerRegister, checked);
+        app->Set(kTrackerRegister, (int)checked);
     });
     bool shouldRegister = app->Number(kTrackerRegister) != 0;
     registerBox->setChecked(shouldRegister);

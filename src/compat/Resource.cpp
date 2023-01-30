@@ -68,12 +68,16 @@ bool IsEquals(const std::string& str1, const std::string& str2) {
 Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string name) {
     uint32_t dataOffset = SDL_ReadBE32(file);
     uint32_t mapOffset = SDL_ReadBE32(file);
-    uint32_t dataLen = SDL_ReadBE32(file);
-    uint32_t mapLen = SDL_ReadBE32(file);
+    // uint32_t dataLen = 
+    SDL_ReadBE32(file);
+    // uint32_t mapLen = 
+    SDL_ReadBE32(file);
 
     SDL_RWseek(file, mapOffset + 22, 0);
 
-    uint16_t forkAttrs = SDL_ReadBE16(file);
+    //uint16_t forkAttrs = 
+    SDL_ReadBE16(file);
+
     uint16_t typeListOffset = SDL_ReadBE16(file);
     uint16_t nameListOffset = SDL_ReadBE16(file);
     int16_t numTypes = SDL_ReadBE16(file);
@@ -210,7 +214,7 @@ void BundlePath(std::stringstream &buffa, char *dest) {
 struct AvaraDirListEntry {
     int8_t is_dir;
     std::string file_name;
-    char *full_path;
+    std::string full_path;
 };
 
 std::map<std::string, AvaraDirListEntry> level_sets;
@@ -224,10 +228,10 @@ std::vector<std::string> LevelDirNameListing() {
     return set_name_list;
 }
 
-char* PathForLevelSet(std::string set) {
+const char* PathForLevelSet(std::string set) {
     if (!listingDone)
         LevelDirListing();
-    return level_sets.at(set).full_path;
+    return level_sets.at(set).full_path.c_str();
 }
 
 void LevelDirListing() {
@@ -268,8 +272,9 @@ void LevelDirListing() {
                 BundlePath(ss, manf_path);
                 if (cf_file_exists(manf_path)) {
                     // we found a set json file so add it (as version 2)
-                    it->full_path = new char[PATH_MAX];
-                    BundlePath(file_str.c_str(), it->full_path);
+                    char manf_full_path[PATH_MAX];
+                    BundlePath(file_str.c_str(), manf_full_path);
+                    it->full_path = manf_full_path;
                     level_sets.insert(std::make_pair(file_str, (*it)));
                     set_name_list.push_back(file_str);
                 }
@@ -448,13 +453,13 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
         BundlePath(buffa.str().c_str(), fullpath);
     }
 
-    SDL_Log("Loading %s", fullpath);
+    //SDL_Log("Loading %s", fullpath);
 
     int error;
     stb_vorbis *v = stb_vorbis_open_filename(fullpath, &error, NULL);
     
-    stb_vorbis_info info = stb_vorbis_get_info(v);
-    SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
+    //stb_vorbis_info info = stb_vorbis_get_info(v);
+    //SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
 
     auto sound = std::vector<uint8_t>();
 
@@ -471,13 +476,23 @@ void LoadOggFile(short resId, std::string filename, std::map<short, std::vector<
     stb_vorbis_close(v);
 }
 
-void LoadDefaultOggFiles() {
-    nlohmann::json manifest = GetDefaultManifestJSON();
+void LoadOggFiles(nlohmann::json &manifest, std::map<short, std::vector<uint8_t>>  &target_cash) {
+    size_t loaded = 0;
     if (manifest != -1 && manifest.find("HSND") != manifest.end()) {
         for (auto &hsnd: manifest["HSND"].items()) {
-            LoadOggFile(stoi(hsnd.key()), hsnd.value()["Ogg"], app_sound_cash);
+            LoadOggFile(stoi(hsnd.key()), hsnd.value()["Ogg"], target_cash);
+            loaded++;
         }
     }
+    if (loaded > 0) {
+        SDL_Log("Loaded %lu sounds", loaded);
+    }
+}
+
+void LoadDefaultOggFiles() {
+    SDL_Log("Loading default sounds...");
+    nlohmann::json manifest = GetDefaultManifestJSON();
+    LoadOggFiles(manifest, app_sound_cash);
 }
 
 void LoadLevelOggFiles(std::string set) {
@@ -485,21 +500,17 @@ void LoadLevelOggFiles(std::string set) {
     level_sound_cash.clear();
     current_sound_cash_dir = set;
     nlohmann::json manifest = GetManifestJSON(set);
-    if (manifest != -1 && manifest.find("HSND") != manifest.end()) {
-        for (auto &hsnd: manifest["HSND"].items()) {
-            LoadOggFile(stoi(hsnd.key()), hsnd.value()["Ogg"], level_sound_cash);
-        }
-    }
+    LoadOggFiles(manifest, level_sound_cash);
 }
 
 SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList) {
 
     std::string key = std::to_string(resId);
     nlohmann::json hsndJson = GetKeyFromSetJSON("HSND", key, "129");
-    int version = hsndJson["Version"];
+    int8_t version = hsndJson["Version"];
     std::map<short, std::vector<uint8_t>> cash;
 
-    int found = 0;
+    size_t found = 0;
 
     if (level_sound_cash.count(resId) > 0) {
         cash = level_sound_cash;
@@ -518,7 +529,7 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
 
     SampleHeaderHandle aSample;
     SampleHeaderPtr sampP;
-    int len = cash[resId].size();
+    size_t len = cash[resId].size();
 
     aSample = (SampleHeaderHandle)NewHandle(sizeof(SampleHeader) + len);
 
@@ -533,11 +544,11 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     sampP->nextSample = sampleList;
     sampP->len = len;
 
-    unsigned char *p;
+    uint8_t *p;
     HLock((Handle)aSample);
-    p = sizeof(SampleHeader) + (unsigned char *)sampP;
+    p = sizeof(SampleHeader) + (uint8_t*)sampP;
 
-    for (int i = 0; i < len; ++i) {
+    for (size_t i = 0; i < len; ++i) {
         *p++ = cash[resId][i];
     }
 

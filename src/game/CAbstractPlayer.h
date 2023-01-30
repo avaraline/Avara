@@ -40,125 +40,125 @@ enum {
 
 class CAbstractPlayer : public CRealMovers {
 public:
-    CPlayerManager *itsManager;
-    CAbstractPlayer *nextPlayer;
-    PlayerConfigRecord defaultConfig;
+    CPlayerManager *itsManager = 0;
+    CAbstractPlayer *nextPlayer = 0;
+    PlayerConfigRecord defaultConfig = {0};
 
-    long longTeamColor; // Hull color in 0x00RRGGBB format.
+    long longTeamColor = 0; // Hull color in 0x00RRGGBB format.
 
     //	Shields & energy:
-    Fixed energy;
-    Fixed maxEnergy; //	Maximum stored energy level
-    Fixed classicGeneratorPower, generatorPower; //	Energy gain/frame
-    long boostEndFrame;
-    long boostsRemaining;
+    Fixed energy = 0;
+    Fixed maxEnergy = 0; //	Maximum stored energy level
+    Fixed classicGeneratorPower, generatorPower = 0; //	Energy gain/frame
+    long boostEndFrame = 0;
+    long boostsRemaining = 0;
 
-    Fixed maxShields; //	Maximum shield energy
-    Fixed classicShieldRegen, shieldRegen; //	Shield regeneration rate
+    Fixed maxShields = 0; //	Maximum shield energy
+    Fixed classicShieldRegen, shieldRegen = 0; //	Shield regeneration rate
 
-    short missileCount;
-    short grenadeCount;
-    long nextGrenadeLoad;
-    long nextMissileLoad;
+    short missileCount = 0;
+    short grenadeCount = 0;
+    long nextGrenadeLoad = 0;
+    long nextMissileLoad = 0;
 
-    short missileLimit;
-    short grenadeLimit;
-    short boosterLimit;
+    short missileLimit = 0;
+    short grenadeLimit = 0;
+    short boosterLimit = 0;
 
     //	Movement related variables:
-    Fixed baseMass;
-    Fixed motors[2]; //	Left/right speed
-    Fixed maxAcceleration;
-    Fixed classicMotorFriction;
-    Fixed motorFriction;
-    Fixed classicMotorAcceleration;
-    Fixed motorAcceleration;
-    Fixed fpsMotorOffset;
-    Fixed turningEffect; //	How far apart are the legs or wheels?
-    Fixed movementCost; //	Cost of acceleration
-    Fixed proximityRadius;
+    Fixed baseMass = 0;
+    Fixed motors[2] = {0, 0}; //	Left/right speed
+    Fixed maxAcceleration = 0;
+    Fixed classicMotorFriction = 0;
+    Fixed motorFriction = 0;
+    Fixed classicMotorAcceleration = 0;
+    Fixed motorAcceleration = 0;
+    Fixed fpsMotorOffset = 0;
+    Fixed turningEffect = 0; //	How far apart are the legs or wheels?
+    Fixed movementCost = 0; //	Cost of acceleration
+    Fixed proximityRadius = 0;
 
-    Vector groundSlide;
+    Vector groundSlide = {0};
 
-    Fixed distance; //	Movement within one frame
-    Fixed headChange;
-    Boolean didBump;
+    Fixed distance = 0; //	Movement within one frame
+    Fixed headChange = 0;
+    Boolean didBump = false;
 
     //	Guns:
-    Fixed gunEnergy[2]; //	Left/right guns
-    Fixed fullGunEnergy;
-    Fixed activeGunEnergy;
-    Fixed classicChargeGunPerFrame, chargeGunPerFrame;
-    long mouseShootTime; //	To pace mouse button autofire.
-    Vector gunOffset;
-    Boolean fireGun;
+    Fixed gunEnergy[2] = {0, 0}; //	Left/right guns
+    Fixed fullGunEnergy = 0;
+    Fixed activeGunEnergy = 0;
+    Fixed classicChargeGunPerFrame, chargeGunPerFrame = 0;
+    long mouseShootTime = 0; //	To pace mouse button autofire.
+    Vector gunOffset = {0};
+    Boolean fireGun = 0;
 
     //	Weapons (Grenades & missiles)
-    long weaponIdent;
+    long weaponIdent = 0;
 
     //	View related variables:
-    CSmartPart *viewPortPart; //	We look out from this one.
-    CScout *itsScout; //
-    short scoutCommand;
+    CSmartPart *viewPortPart = 0; //	We look out from this one.
+    CScout *itsScout = 0; //
+    short scoutCommand = 0;
 
     //	Control module (and view) orientation:
-    Fixed viewYaw;
-    Fixed viewPitch;
-    Vector viewOffset;
-    Fixed lookDirection;
+    Fixed viewYaw = 0;
+    Fixed viewPitch = 0;
+    Vector viewOffset = {0};
+    Fixed lookDirection = 0;
 
-    Fixed minPitch;
-    Fixed maxPitch;
-    Fixed maxYaw;
-    Fixed oldYaw; //	We have to be able to undo the motion.
-    Fixed oldPitch;
+    Fixed minPitch = 0;
+    Fixed maxPitch = 0;
+    Fixed maxYaw = 0;
+    Fixed oldYaw = 0; //	We have to be able to undo the motion.
+    Fixed oldPitch = 0;
 
-    Fixed yonBound;
-    Fixed maxFOV;
-    Fixed fieldOfView; //	Angle of field of view.
-    Fixed scoutBaseHeight;
+    Fixed yonBound = 0;
+    Fixed maxFOV = 0;
+    Fixed fieldOfView = 0; //	Angle of field of view.
+    Fixed scoutBaseHeight = 0;
 
-    SoundLink *teleportSoundLink;
-    SoundLink *boostControlLink;
+    SoundLink *teleportSoundLink = 0;
+    SoundLink *boostControlLink = 0;
 
     //	Reincarnation:
-    long limboCount;
-    Fixed incarnateVolume;
-    short incarnateSound;
-    Boolean doIncarnateSound;
-    Boolean reEnergize;
-    Boolean didSelfDestruct;
+    long limboCount = 0;
+    Fixed incarnateVolume = 0;
+    short incarnateSound = 0;
+    Boolean doIncarnateSound = 0;
+    Boolean reEnergize = 0;
+    Boolean didSelfDestruct = 0;
 
     //	Winning/loosing:
-    long winFrame;
-    Quaternion winStart;
-    Quaternion winEnd;
-    Boolean isOut;
-    short lives;
+    long winFrame = 0;
+    Quaternion winStart = {0};
+    Quaternion winEnd = {0};
+    Boolean isOut = 0;
+    short lives = 0;
 
-    short winSound;
-    Fixed winVolume;
+    short winSound = 0;
+    Fixed winVolume = 0;
 
-    short loseSound;
-    Fixed loseVolume;
+    short loseSound = 0;
+    Fixed loseVolume = 0;
 
-    short chatMode;
+    short chatMode = 0;
 
-    long scoutIdent; //	true, if scout is out.
-    Boolean scoutView; //	true = scout view, false = normal view
-    Boolean isInLimbo;
-    Boolean debugView;
-    Boolean netDestruct;
+    long scoutIdent = 0; //	true, if scout is out.
+    Boolean scoutView = 0; //	true = scout view, false = normal view
+    Boolean isInLimbo = 0;
+    Boolean debugView = 0;
+    Boolean netDestruct = 0;
 
-    Fixed supportTraction;
-    Fixed supportFriction;
+    Fixed supportTraction = 0;
+    Fixed supportFriction = 0;
 
     //	Hud parts:
-    CBSPPart *dirArrow;
-    Fixed dirArrowHeight;
+    CBSPPart *dirArrow = 0;
+    Fixed dirArrowHeight = 0;
 
-    CBSPPart *targetOffs[2];
-    CBSPPart *targetOns[2];
+    CBSPPart *targetOffs[2] = {0, 0};
+    CBSPPart *targetOns[2] = {0, 0};
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

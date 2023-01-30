@@ -530,7 +530,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
 }
 
 void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag) {
-    short i;
+    size_t i;
 
     SDL_Log("LevelLoadStatus(senderSlot=%d, crc=%d, err=%d, tag=%s)\n", senderSlot, crc, err, theTag.c_str());
     SDL_Log("   loaderSlot = %d\n", loaderSlot);
@@ -545,9 +545,10 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
     if (senderSlot == loaderSlot) {
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             playerTable[i]->LoadStatusChange(crc, err, theTag);
-            SDL_Log("CNetManager::LevelLoadStatus loop\n");
 
         }
+
+        SDL_Log("CNetManager::LevelLoadStatus loop x%i\n", i);
     } else {
         thePlayer->LoadStatusChange(
             playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());

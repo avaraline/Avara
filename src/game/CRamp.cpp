@@ -53,7 +53,7 @@ void CRamp::BeginScript() {
 CAbstractActor *CRamp::EndScript() {
     if (CPlacedActors::EndScript()) {
         Fixed deltaY;
-        Fixed dimX, dimZ;
+        //Fixed dimX, dimZ;
         Fixed angle;
         Vector dims;
         CSmartBox *box;

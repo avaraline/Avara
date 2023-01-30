@@ -92,8 +92,8 @@ void CBSPPart::IBSPPart(short resId) {
     float maxZ = doc["bounds"]["max"][2];
 
     maxBounds.x = ToFixed(maxX);
-    maxBounds.y = ToFixed(doc["bounds"]["max"][1]);
-    maxBounds.z = ToFixed(doc["bounds"]["max"][2]);
+    maxBounds.y = ToFixed(maxY);
+    maxBounds.z = ToFixed(maxZ);
     maxBounds.w = FIX1;
 
     pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
@@ -148,7 +148,7 @@ void CBSPPart::PostRender() {}
 
 void CBSPPart::TransformLights() {
     CViewParameters *vp;
-    Matrix *invFull;
+    //Matrix *invFull;
 
     vp = currentView;
     if (!ignoreDirectionalLights) {

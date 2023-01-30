@@ -84,7 +84,7 @@ public:
     Fixed maxAdjustedVolume = 0;
 
     CSoundHub *motionHub = 0;
-    SoundMotionInfo motion = {0};
+    SoundMotionInfo motion = {{0}};
     SoundLink *motionLink = 0;
     SoundLink *altLink = 0;
     Boolean useAltLink = false;

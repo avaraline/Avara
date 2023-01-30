@@ -344,7 +344,7 @@ void CAvaraAppImpl::AddMessageLine(
 }
 
 void CAvaraAppImpl::MessageLine(short index, MsgAlignment align) {
-    SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
+    //SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
     switch(index) {
         case kmWelcome1:
         case kmWelcome2:
@@ -369,6 +369,9 @@ void CAvaraAppImpl::MessageLine(short index, MsgAlignment align) {
             break;
         case kmSelfDestruct:
             AddMessageLine("Self-destruct activated.", align);
+            break;
+        case kmSelfDestruct2:
+            AddMessageLine("Mission aborted.", align);
             break;
         case kmFragmentAlert:
             AddMessageLine(

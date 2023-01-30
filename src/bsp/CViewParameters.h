@@ -37,14 +37,14 @@ public:
     Fixed fWidth = 0;
     Fixed fHeight = 0;
 
-    Vector normal[4] = {0}; //	Normals for viewing pyramid bounds.
+    Vector normal[4] = {{0}}; //	Normals for viewing pyramid bounds.
 
-    Vector corners[8] = {0}; //	Corners of truncated viewing pyramid.
+    Vector corners[8] = {{0}}; //	Corners of truncated viewing pyramid.
 
-    Vector lightSources[MAXLIGHTS] = {0};
+    Vector lightSources[MAXLIGHTS] = {{0}};
 
     short lightMode[MAXLIGHTS] = {0};
-    Vector internalLights[MAXLIGHTS] = {0}; //	Vector length == light source power.
+    Vector internalLights[MAXLIGHTS] = {{0}}; //	Vector length == light source power.
 
     Fixed ambientLight = 0; //	Intensity of ambient (nondirectional) light
     long ambientLightColor = 0; // Color of ambient (nondirectional) light.

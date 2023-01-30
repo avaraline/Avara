@@ -68,9 +68,9 @@ void CRateSound::FirstFrame() {
 }
 
 short CRateSound::CalcVolume(short theChannel) {
-    short theVol;
-    int endSample;
-    unsigned int fracAdd;
+    //short theVol;
+    //int endSample;
+    //unsigned int fracAdd;
 
     if (controlLink) {
         if (controlLink->meta == metaSuspend)
@@ -149,7 +149,7 @@ void CRateSound::WriteFrame(short theChannel, short volumeAllowed) {
     SampleIndex ind;
     short thisCount;
     int didCount;
-    int maxOutput;
+    //int maxOutput;
     int loopCopy = loopCount[theChannel];
     Fixed rateCopy = chanRate[theChannel];
 

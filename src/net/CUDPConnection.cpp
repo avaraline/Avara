@@ -558,7 +558,7 @@ char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
 
 void CUDPConnection::Dispose() {
     FlushQueues();
-
+    delete latencyHistogram;
     CDirectObject::Dispose();
 }
 

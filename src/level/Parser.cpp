@@ -525,17 +525,15 @@ void LexRead(LexSymbol *theSymbol) {
             } else {
                 matchCount = MatchFloat(parserVar.input);
                 if (matchCount > 0) {
-                    char temp;
-                    unsigned char *pstr = (unsigned char *)parserVar.input - 1;
-                    char *tempString = PascalStringtoCString(pstr);
-
-                    temp = parserVar.input[-1];
-                    parserVar.input[-1] = matchCount;
+                    char *tempString = new char[matchCount + 1];
+                    strncpy(tempString, (char *)parserVar.input, matchCount);
+                    tempString[matchCount] = 0;
+                    // auto len = my_strnlen_s(tempString, UCHAR_MAX);
                     theSymbol->kind = kLexConstant;
                     // theSymbol->value.floating = StringToLongDouble(parserVar.input-1);
                     theSymbol->value.floating = atof(tempString);
                     // SDL_Log("\natof(%s) --> %f\n", tempString, theSymbol->value.floating);
-                    parserVar.input[-1] = temp;
+                    // parserVar.input[-1] = temp;
                     parserVar.input += matchCount;
                     delete [] tempString;
                 }
@@ -1057,8 +1055,12 @@ void AllocParser() {
     stackP = (double *)stackMem;
 
     currentActor = NULL;
-    RunThis((StringPtr)GetBaseScript().c_str());
-    RunThis((StringPtr)GetDefaultScript().c_str());
+    std::string base = GetBaseScript();
+    if (base.length() > 0)
+    RunThis((StringPtr)base.c_str());
+    std::string def = GetDefaultScript();
+    if (def.length() > 0)
+    RunThis((StringPtr)def.c_str());
 }
 
 void DeallocParser() {
