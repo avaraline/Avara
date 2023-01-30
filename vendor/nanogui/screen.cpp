@@ -170,7 +170,8 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
 #if defined(NANOGUI_GLAD)
     if (!gladInitialized) {
         gladInitialized = true;
-        if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
+        if (!gladLoadGL((GLADloadfunc) SDL_GL_GetProcAddress))
+        //if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress))
             throw std::runtime_error("Could not initialize GLAD!");
         glGetError(); // pull and ignore unhandled errors like GL_INVALID_ENUM
     }
@@ -214,7 +215,8 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
 #if defined(NANOGUI_GLAD)
     if (!gladInitialized) {
         gladInitialized = true;
-        if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
+        if (!gladLoadGL((GLADloadfunc) SDL_GL_GetProcAddress))
+        //if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
             throw std::runtime_error("Could not initialize GLAD!");
         glGetError(); // pull and ignore unhandled errors like GL_INVALID_ENUM
     }

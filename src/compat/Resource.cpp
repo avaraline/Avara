@@ -18,10 +18,6 @@
 
 #include <stb_vorbis.h>
 
-#ifndef PATH_MAX
-#define PATH_MAX 260
-#endif
-
 using json = nlohmann::json;
 
 std::string sdlBasePath = "";

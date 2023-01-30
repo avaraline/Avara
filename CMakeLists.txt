@@ -19,6 +19,8 @@ find_package(SDL2 CONFIG REQUIRED)
 find_path(MINIUPNPC_INCLUDE_DIRS NAMES miniupnpc.h PATH_SUFFIXES miniupnpc)
 find_library(MINIUPNPC_LIBRARIES miniupnpc)
 
+find_package(glad CONFIG REQUIRED)
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
@@ -72,7 +74,6 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "src/gui/*.cpp" 
     "src/tui/*.cpp"
     "vendor/nanogui/*.cpp"
-    "vendor/glad/glad.c"
     "vendor/glm/detail/glm.cpp"
     "vendor/nanovg/nanovg.c"
     "vendor/pugixml/pugixml.cpp"
@@ -162,7 +163,7 @@ target_include_directories(hsnd2wav PUBLIC ${CORE_INCLUDES})
 set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main ${MINIUPNPC_LIBRARIES} {OPENGL_LIBRARIES} dl pthread)
 
 if(WIN32)
-set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main ${MINIUPNPC_LIBRARIES} ${OPENGL_LIBRARIES})
+set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main glad::glad ${MINIUPNPC_LIBRARIES} ${OPENGL_LIBRARIES})
 endif()
 
 target_link_libraries(Avara ${AVARA_LIBS})

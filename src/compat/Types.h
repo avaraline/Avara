@@ -24,7 +24,7 @@ typedef uint32_t UnsignedFixed;
 typedef uint8_t *StringPtr;
 typedef uint8_t Str255[256];
 
-typedef uint8_t Byte;
+typedef uint8_t UnsignedByte;
 typedef int8_t SignedByte;
 
 typedef uint32_t ip_addr;
@@ -87,4 +87,8 @@ typedef struct GLData {
 #include <Windows.h>
 #else
 #include <arpa/inet.h>
+#endif
+
+#ifndef PATH_MAX
+#define PATH_MAX 260
 #endif
