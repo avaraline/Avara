@@ -15,7 +15,7 @@
 
 #include <string>
 
-#define INITIAL_SERIAL_NUMBER     0  // must be even
+#define INITIAL_SERIAL_NUMBER     SerialNumber(0)  // must be even
 
 #define ROUTE_THRU_SERVER 0  // non-zero to route all messages through the server
 
@@ -148,6 +148,8 @@ public:
     virtual Boolean ReconfigureAvailable();
     virtual void Reconfigure();
     virtual long GetMaxRoundTrip(short distribution, short *slowPlayerId = nullptr);
+    virtual float GetMaxMeanSendCount(short distribution);
+    virtual float GetMaxMeanReceiveCount(short distribution);
 
     virtual void BuildServerTags();
 };

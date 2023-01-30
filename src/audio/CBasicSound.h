@@ -17,23 +17,23 @@ class CSoundHub;
 class CBasicSound : public CDirectObject {
 public:
     Fixed masterVolume;
-    unsigned short volumes[2];
-    short volumeMax;
+    int16_t volumes[2];
+    int16_t volumeMax;
 
-    short hubId;
+    int16_t hubId;
     CSoundHub *itsHub;
     SampleHeaderHandle itsSamples;
     CBasicSound *nextSound;
 
     CSoundMixer *itsMixer;
-    int sampleLen;
+    int32_t sampleLen;
     SampleIndex currentCount[2];
-    int loopStart;
-    int loopEnd;
-    int loopCount[2];
+    int32_t loopStart;
+    int32_t loopEnd;
+    int32_t loopCount[2];
     Sample *sampleData;
 
-    int squareAcc[2]; //	Distance squared
+    int32_t squareAcc[2]; //	Distance squared
     Fixed dSquare; //	Distance squared as a Fixed.
     Fixed distance; //	Distance (square root of squareAcc).
     Fixed relPos[3]; //	Distance as a vector
@@ -45,8 +45,8 @@ public:
     Boolean distanceDelay; //	Delay sound depending on position.
 
     //	The following four functions will usually be overridden:
-    virtual short CalcVolume(short theChannel); //	Return volume
-    virtual void WriteFrame(short theChannel, short volumeAllowed);
+    virtual int16_t CalcVolume(int16_t theChannel); //	Return volume
+    virtual void WriteFrame(int16_t theChannel, int16_t volumeAllowed);
     virtual Boolean EndFrame(); //	Return true after last frame.
     virtual void SanityCheck(); //	Check parameters for sanity.
     virtual void FirstFrame(); //	Perform interrupt time inits.
@@ -69,7 +69,7 @@ public:
     virtual void SetLoopCount(short count);
 
     virtual void SetRate(Fixed theRate);
-    virtual Fixed GetSampleRate(); //	Returns samples/second as a fixed!
+    virtual UnsignedFixed GetSampleRate(); //	Returns samples/second as a fixed!
     virtual void SetSoundLength(Fixed seconds);
 
     void SetSoundLink(SoundLink *linkPtr);

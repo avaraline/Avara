@@ -94,11 +94,14 @@ Fixed GetLastArcDirection() {
 struct ALFWalker: pugi::xml_tree_walker {
     virtual bool for_each(pugi::xml_node& node) {
         std::string tag = node.name();
+        std::string val;
 
         switch (node.type()){
             case pugi::node_element:
                 handle_element(node, tag);
-                RunThis((StringPtr)node.child_value());
+                val = node.child_value();
+                if (val.length() > 0)
+                RunThis((StringPtr)val.c_str());
                 break;
             default:
                 break;
@@ -134,6 +137,8 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_element(pugi::xml_node& node, std::string& name) {
         // eval ALL node attributes and put them into the symbol table
+        // unless it's a 'unique' and then it doesn't make any sense
+        if (name.compare("unique") != 0)
         handle_set(node);
         // Read any global state we can from the element.
         read_context(node);
@@ -254,12 +259,16 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_set(pugi::xml_node& node) {
         std::stringstream script;
+        bool wrote = false;
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             std::string attr = fix_attr(ait->name());
             std::string value = quote_attr(attr, ait->value());
-            script << attr << " = " << value << "\r";
+            script << attr << " = " << value << "\n";
+            wrote = true;
         }
-        RunThis((StringPtr)script.str().c_str());
+        std::string result = script.str();
+        if (wrote && result.length() > 0)
+        RunThis((StringPtr)result.c_str());
     }
 
     void handle_script(pugi::xml_node& node) {

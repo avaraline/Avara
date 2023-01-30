@@ -121,7 +121,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     );
 
     // load up a random decent starting level
-    itsTui->ExecuteMatchingCommand("/rand -normal -tre avaraline emo", CPlayerManagerImpl::LocalPlayer());
+    
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -344,7 +344,7 @@ void CAvaraAppImpl::AddMessageLine(
 }
 
 void CAvaraAppImpl::MessageLine(short index, MsgAlignment align) {
-    SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
+    //SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
     switch(index) {
         case kmWelcome1:
         case kmWelcome2:

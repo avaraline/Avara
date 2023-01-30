@@ -109,8 +109,8 @@ void CViewParameters::Recalculate() {
 }
 
 void CViewParameters::IViewParameters() {
-    Vector *vt;
-    short i;
+    //Vector *vt;
+    uint8_t i;
     // GrafPtr			curPort;
 
     lightSeed = 1;

@@ -14,14 +14,25 @@ else
     BUILD_DIR ?= build
 		ZIPFLAGS := -r
 endif
-SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
+SRC_DIRS ?= $(shell find src -type d -not -path src)
+SRC_DIRS += vendor/glad vendor/nanovg vendor/nanogui vendor/pugixml vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
 INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor/gtest/include
+
 CPPFLAGS := ${CPPFLAGS}
-CPPFLAGS += $(INCFLAGS) -MMD -MP -g -Wno-multichar -DNANOGUI_GLAD
+CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g
+
+ifeq ($(AVARA_WARNINGS), TRUE)
+CPPFLAGS += -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy 
+CPPFLAGS += -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations 
+CPPFLAGS += -Wmissing-include-dirs -Woverloaded-virtual -Wredundant-decls -Wshadow 
+CPPFLAGS += -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef 
+CPPFLAGS += -Wno-unused-function -Wno-multichar -Wno-gnu-anonymous-struct -Wno-unused-parameter
+endif
+
 CXXFLAGS := ${CXXFLAGS}
 CXXFLAGS += -std=c++17
 LDFLAGS := ${LDFLAGS}

@@ -48,6 +48,7 @@ public:
     long masterCount; //	Amount of allocated master blocks.
     long realMasterSize; //	Real memory allocated to master blocks.
     long logicalMasterSize; //	Used memory for master blocks.
+    Handle masterBlocksHandle;
     TagMasterBlock **masterBlocks; //	Handle to master blocks.
 
     long firstFreeMaster; //	Index of first free master block or -1 if none.

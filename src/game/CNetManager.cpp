@@ -530,7 +530,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
 }
 
 void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag) {
-    short i;
+    size_t i;
 
     SDL_Log("LevelLoadStatus(senderSlot=%d, crc=%d, err=%d, tag=%s)\n", senderSlot, crc, err, theTag.c_str());
     SDL_Log("   loaderSlot = %d\n", loaderSlot);
@@ -545,9 +545,10 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
     if (senderSlot == loaderSlot) {
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             playerTable[i]->LoadStatusChange(crc, err, theTag);
-            SDL_Log("CNetManager::LevelLoadStatus loop\n");
 
         }
+
+        SDL_Log("CNetManager::LevelLoadStatus loop x%lu\n", i);
     } else {
         thePlayer->LoadStatusChange(
             playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());
@@ -750,7 +751,7 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, MsgAlignment::Center);
-                fragmentDetected = false;
+                itsGame->itsApp->AddMessageLine(FragmentMapToString(), MsgAlignment::Left, MsgCategory::Error);
             }
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
@@ -798,6 +799,63 @@ void CNetManager::ResetLatencyVote() {
     maxRoundTripLatency = 0;
     maxPlayer = nullptr;
     latencyVoteOpen = false;
+    fragmentMap.clear();
+}
+
+void CNetManager::ReceiveLatencyVote(int16_t sender,
+                                     int8_t p1,         // localLatencyVote
+                                     int16_t p2,        // maxRoundLatency
+                                     int32_t p3) {      // FRandSeed
+
+    SDL_Log("CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
+    autoLatencyVoteCount++;
+    autoLatencyVote += p1;
+
+    maxRoundTripLatency = std::max(maxRoundTripLatency, p2);
+
+    playerTable[sender]->RandomKey(p3);
+
+    // to be considered for fragmentation, packet must be received in the voting time window
+    if (IsFragmentCheckWindowOpen()) {
+        // keep track of who is which FRandSeed. Normally everyone on the same value, but with frags this identifies who is different
+        if (fragmentMap.find(p3) == fragmentMap.end()) {
+            fragmentMap[p3] = std::vector<int16_t>();
+        }
+        fragmentMap[p3].push_back(sender);
+
+        if (fragmentCheck == 0) {
+            // the first vote received dictates what the fragmentCheck value is, not necessarily the current player
+            fragmentDetected = false;
+            fragmentCheck = p3;
+            // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %ld", fragmentCheck, itsGame->frameNumber);
+        } else {
+            // any votes after the first must have a matching p3 value
+            if (fragmentCheck != p3) {
+                SDL_Log("FRAGMENTATION %d != %d in frameNumber %ld", fragmentCheck, p3, itsGame->frameNumber);
+                fragmentDetected = true;
+            // } else {
+            //     SDL_Log("No frags detected so far %d == %d in frameNumber %ld", fragmentCheck, p3, itsGame->frameNumber);
+            }
+        }
+    } else {
+        SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%ld",
+                p3, itsGame->frameNumber);
+    }
+}
+
+std::string CNetManager::FragmentMapToString() {
+    std::ostringstream os;
+    bool firstFrag = true;
+    for (auto const& pair : fragmentMap) {
+        if (!firstFrag) { os << std::endl; }
+        os << std::hex << std::setfill('0') << std::setw(sizeof(int32_t)*2) << pair.first << ": [";
+        for (auto const& slot : pair.second) {
+            os << " " << playerTable[slot]->GetPlayerName();
+        }
+        os << " ]";
+        firstFrag = false;
+    }
+    return os.str();
 }
 
 void CNetManager::ViewControl() {

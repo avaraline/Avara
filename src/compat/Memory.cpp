@@ -9,12 +9,12 @@
 std::map<Handle, Size> handleSizeMap;
 
 Ptr NewPtr(Size logicalSize) {
-    return (Ptr)std::malloc(logicalSize);
+    return (Ptr)(operator new(logicalSize));
 }
 
 void DisposePtr(Ptr p) {
     if (p) {
-        std::free(p);
+        delete p;
     }
 }
 
@@ -32,8 +32,8 @@ Handle NewHandleClear(Size byteCount) {
 void DisposeHandle(Handle hand) {
     if (hand) {
         handleSizeMap.erase(hand);
-        std::free(*hand);
-        std::free(hand);
+        delete *hand;
+        delete hand;
     }
 }
 
@@ -80,8 +80,8 @@ void SetHandleSize(Handle hand, Size newSize) {
     if (newSize > oldSize) {
         Ptr newData = NewPtr(newSize);
         // Wonder if this needs to zero out first?
-        BlockMoveData(*hand, newData, std::min<Size>(oldSize, newSize));
-        std::free(*hand);
+        BlockMoveData(*hand, newData, std::min(oldSize, newSize));
+        delete *hand;
         *hand = newData;
     }
     handleSizeMap[hand] = newSize;

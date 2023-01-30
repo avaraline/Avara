@@ -402,3 +402,9 @@ void CCommManager::Reconfigure() {}
 long CCommManager::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
     return 0; //	Local net.
 }
+float CCommManager::GetMaxMeanSendCount(short distribution) {
+    return 0; //	Local net.
+}
+float CCommManager::GetMaxMeanReceiveCount(short distribution) {
+    return 0; //	Local net.
+}

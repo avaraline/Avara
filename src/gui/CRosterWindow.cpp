@@ -9,6 +9,7 @@
 #include "CScoreKeeper.h"
 #include "Preferences.h"
 #include "RGBAColor.h"
+#include "Debug.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
@@ -199,7 +200,14 @@ void CRosterWindow::UpdateRoster() {
             std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             if (i != theNet->itsCommManager->myId && theName.length() > 0) {
                 long rtt = theNet->itsCommManager->GetMaxRoundTrip(1 << i);
-                theName += std::string(" (") + std::to_string(rtt) + " ms)";
+                float loss = 100*theNet->itsCommManager->GetMaxMeanReceiveCount(1 << i);
+                std::ostringstream os;
+                os << theName << " (" << rtt << "ms";
+                if (Debug::IsEnabled("loss")) {
+                    os << "/" << std::setprecision(loss < 2 ? 1 : 0) << std::fixed << loss << "%";
+                }
+                os << ")";
+                theName = os.str();
                 maxRtt = std::max(maxRtt, rtt);
             }
             std::string theStatus = GetStringStatus(thisPlayer);

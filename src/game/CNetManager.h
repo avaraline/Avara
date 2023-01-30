@@ -17,6 +17,7 @@
 
 #include <SDL.h>
 #include <string>
+#include <map>
 #include <vector>
 
 #define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
@@ -107,6 +108,7 @@ public:
     short addOneLatency;
     CPlayerManager *maxPlayer;
     Boolean latencyVoteOpen;
+    std::map<int32_t, std::vector<int16_t>> fragmentMap;  // maps FRandSeed to list of players having that seed
 
     long lastLoginRefusal;
 
@@ -179,6 +181,9 @@ public:
     virtual bool IsAutoLatencyEnabled();
     virtual bool IsFragmentCheckWindowOpen();
     virtual void ResetLatencyVote();
+    virtual void ReceiveLatencyVote(int16_t sender, int8_t p1, int16_t p2, int32_t p3);
+    virtual std::string FragmentMapToString();
+
     virtual void ViewControl();
     virtual void AttachPlayers(CAbstractPlayer *thePlayer);
 

@@ -21,9 +21,9 @@ public:
     virtual void Reset();
     virtual void UseSamplePtr(Sample *samples, int numSamples);
     virtual void FirstFrame();
-    virtual void WriteFrame(short theChannel, short volumeAllowed);
-    virtual short CalcVolume(short theChannel); //	Return volume
+    virtual void WriteFrame(int16_t theChannel, int16_t volumeAllowed);
+    virtual int16_t CalcVolume(int16_t theChannel); //	Return volume
     virtual Boolean EndFrame();
     virtual void SetRate(Fixed aRate);
-    virtual Fixed GetSampleRate(); //	Returns samples/second as a fixed!
+    virtual UnsignedFixed GetSampleRate(); //	Returns samples/second as a fixed!
 };

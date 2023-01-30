@@ -71,7 +71,7 @@ Fixed EstimateTravelTime(Fixed *delta, Fixed *targSpeed, Fixed missileSpeed, Fix
     Vector v2;
     Fixed divMS;
     Fixed ft, fdt;
-    short i, j;
+    short i;//, j;
 
     divMS = FDivNZ(FIX(1), missileSpeed);
     for (i = 0; i < 3; i++) {

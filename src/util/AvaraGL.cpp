@@ -225,7 +225,11 @@ void AvaraGLSetDepthTest(bool doTest) {
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
-    gProgram = LoadShaders(BundlePath(OBJ_VERT), BundlePath(OBJ_FRAG));
+    char vertPath[PATH_MAX];
+    char fragPath[PATH_MAX];
+    BundlePath(OBJ_VERT, vertPath);
+    BundlePath(OBJ_FRAG, fragPath);
+    gProgram = LoadShaders(vertPath, fragPath);
     glUseProgram(gProgram);
 
     projLoc = glGetUniformLocation(gProgram, "proj");
@@ -250,8 +254,10 @@ void AvaraGLInitContext() {
 
     AvaraGLLightDefaults();
     glCheckErrors();
-
-    skyProgram = LoadShaders(BundlePath(SKY_VERT), BundlePath(SKY_FRAG));
+    char skyVertPath[PATH_MAX], skyFragPath[PATH_MAX];
+    BundlePath(SKY_VERT, skyVertPath);
+    BundlePath(SKY_FRAG, skyFragPath);
+    skyProgram = LoadShaders(skyVertPath, skyFragPath);
     glGenVertexArrays(1, &skyVertArray);
     glGenBuffers(1, &skyBuffer);
     skyViewLoc = glGetUniformLocation(skyProgram, "view");
@@ -338,8 +344,13 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
 void AvaraGLUpdateData(CBSPPart *part) {
     if (!AvaraGLIsRendering()) return;
+    if(part->glDataSize > 0) {
+        delete [] part->glData;
+    }
+
+
     part->glDataSize = part->totalPoints * sizeof(GLData);
-    part->glData = (GLData *)NewPtr(part->glDataSize);
+    part->glData = new GLData[part->glDataSize];
 
     glGenVertexArrays(1, &part->vertexArray);
     glGenBuffers(1, &part->vertexBuffer);

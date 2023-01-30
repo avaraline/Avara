@@ -138,15 +138,16 @@ void CSmartBox::ISmartBox(short resId,
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
-    config = (bspsResource **)GetResource(BSPSCALETYPE, resId);
+    auto scalingRes = GetResource(BSPSCALETYPE, resId);
+    config = (bspsResource **)scalingRes;
     if (config) {
         stretchFlag = ntohs((*config)->scaleStyle);
         baseSize = ntohl((*config)->baseSize);
-        ReleaseResource((Handle)config);
     } else {
         stretchFlag = false;
         baseSize = FIX(1);
     }
+    ReleaseResource(scalingRes);
 
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);

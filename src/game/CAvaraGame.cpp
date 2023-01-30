@@ -50,6 +50,7 @@
 #include "Preferences.h"
 #include "Resource.h"
 #include "RGBAColor.h"
+#include "Debug.h"
 
 #define kHighShadeCount 12
 
@@ -71,7 +72,7 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     soundHub->MixerDispose();
 
     aMixer = new CSoundMixer;
-    aMixer->ISoundMixer(rate22khz, 32, 4, true, true, false);
+    aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false);
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
     aMixer->SetVolume(gApplication->Get<uint8_t>(kSoundVolume));
@@ -612,8 +613,8 @@ void CAvaraGame::EndScript() {
                 .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
-            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
-                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
+            // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
+            //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color); 
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
             AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
@@ -868,10 +869,18 @@ bool CAvaraGame::GameTick() {
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        // send pings periodically to maintain connection & improve estimate for LT
-        itsNet->SendPingCommand(statusRequest != kPlayingStatus ? 8 : 2);
-        static long PING_INTERVAL_MSEC = 2000;
-        nextPingTime = startTime + PING_INTERVAL_MSEC;
+        long pingInterval = 2000; //msec
+        if (statusRequest == kPlayingStatus) {
+            // experimental: '/dbg ping' will turn pings on/off during game
+            if (Debug::IsEnabled("ping")) {
+                itsNet->SendPingCommand(2);
+            }
+        } else {
+            // less frequent larger bursts seems to give better LT estimates when not playing
+            // (this is better than sending 2 every 0.5 sec)
+            itsNet->SendPingCommand(8);
+        }
+        nextPingTime = startTime + pingInterval;
     }
 
     // Not playing? Nothing to do!

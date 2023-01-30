@@ -8,7 +8,7 @@
 
 typedef std::vector<std::string> VectorOfArgs;
 typedef std::function<bool(VectorOfArgs)> TextCommandCallbackArgs;
-typedef std::function<bool(std::string)>  TextCommandCallbackCmd;
+typedef std::function<bool(const std::string)>  TextCommandCallbackCmd;
 
 // why doesn't C++ have stuff like this?
 #define join_with(vargs, sep) \
@@ -17,7 +17,8 @@ typedef std::function<bool(std::string)>  TextCommandCallbackCmd;
 
 // This crazy macro allows you to use an instance method as a lambda/callback
 // For example: METHOD_TO_LAMBDA(MyClass::SomeMethod) allows SomeMethod to be used as a callback
-#define METHOD_TO_LAMBDA(method) std::bind(&method, this, std::placeholders::_1)
+#define METHOD_TO_LAMBDA_VARGS(method) [&](VectorOfArgs args) { return method(args); }
+#define METHOD_TO_LAMBDA_CMD(method)   [&](const std::string) { return method(cmd); }
 
 class TextCommand {
 private:

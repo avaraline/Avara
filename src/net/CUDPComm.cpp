@@ -648,7 +648,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                     conn = ConnectionForPacket(packet);
                     // NULL conn suggests this packet needs no further processing
                     if (conn) {
-                        inData.c = conn->ValidateReceivedPackets(inData.c, curTime);
+                        inData.c = conn->ValidatePackets(inData.c, curTime);
                         if (inLen == 7) {
                             // done processing ACK
                             inData.c = inEnd;
@@ -658,7 +658,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                     for (conn = connections; conn; conn = conn->next) {
                         if (conn->port == packet->address.port /*receivePB.csParam.receive.remotePort*/ &&
                             conn->ipAddr == packet->address.host /*receivePB.csParam.receive.remoteHost*/) {
-                            inData.c = conn->ValidateReceivedPackets(inData.c, curTime);
+                            inData.c = conn->ValidatePackets(inData.c, curTime);
                             break;
                         }
                     }
@@ -685,6 +685,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         p = &thePacket->packet;
 
                         thePacket->serialNumber = *inData.uw++;
+                        thePacket->sendCount = *inData.uc++;
                         flags = *inData.uc++;
                         p->flags = flags;
                         p->command = *inData.c++;
@@ -705,8 +706,8 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             p->sender = conn != NULL ? conn->myId : 0;
 
                         #if PACKET_DEBUG > 1
-                            SDL_Log("        CUDPComm::ReadComplete sn=%d cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
-                                    thePacket->serialNumber, p->command, p->flags, p->sender, p->distribution);
+                            SDL_Log("        CUDPComm::ReadComplete sn=%d-%hd cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+                                    thePacket->serialNumber, thePacket->sendCount, p->command, p->flags, p->sender, p->distribution);
                         #endif
 
                         if (p->dataLen) {
@@ -904,7 +905,9 @@ Boolean CUDPComm::AsyncWrite() {
 
         if (thePacket == kPleaseSendAcknowledge) {
             packetList = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
-            SDL_Log("Sending ACK to %s\n", FormatAddr(theConnection).c_str());
+            #if PACKET_DEBUG > 1
+                SDL_Log("Sending ACK to %s\n", FormatAddr(theConnection).c_str());
+            #endif
             #if ROUTE_THRU_SERVER
                 // if going through server, add the sender/dist so the server can figure out where to forward it
                 *outData.c++ = myId;                        // sender
@@ -921,6 +924,7 @@ Boolean CUDPComm::AsyncWrite() {
             p = &thePacket->packet;
 
             *outData.uw++ = thePacket->serialNumber;
+            *outData.uc++ = thePacket->sendCount;
             fp = outData.c++;
 
             *outData.c++ = p->command;
@@ -1974,6 +1978,26 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
     maxTrip = maxTrip*MSEC_PER_GET_CLOCK;
 
     return maxTrip;
+}
+
+float CUDPComm::GetMaxMeanSendCount(short distribution) {
+    float maxCount = 0;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if (conn->port && (distribution & (1 << conn->myId))) {
+            maxCount = std::max(maxCount, conn->meanSendCount);
+        }
+    }
+    return maxCount;
+}
+
+float CUDPComm::GetMaxMeanReceiveCount(short distribution) {
+    float maxCount = 0;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if (conn->port && (distribution & (1 << conn->myId))) {
+            maxCount = std::max(maxCount, conn->meanReceiveCount);
+        }
+    }
+    return maxCount;
 }
 
 void CUDPComm::BuildServerTags() {

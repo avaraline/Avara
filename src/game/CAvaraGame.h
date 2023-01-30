@@ -89,11 +89,11 @@ public:
     short pausePlayer;
 
     CAbstractActor *actorList;
-    CAbstractActor *nextActor;
+    CAbstractActor *nextActor = {0};
 
     CAbstractPlayer *playerList;
-    CAbstractPlayer *nextPlayer;
-    CAbstractPlayer *spectatePlayer;
+    CAbstractPlayer *nextPlayer = {0};
+    CAbstractPlayer *spectatePlayer = {0};
     long playersStanding;
     short teamsStandingMask;
     short teamsStanding;
