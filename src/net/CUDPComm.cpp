@@ -1963,11 +1963,11 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
-                    SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
-                            conn->myId,
-                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
-                            stdev*MSEC_PER_GET_CLOCK,
-                            rtt*MSEC_PER_GET_CLOCK);
+                    // SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
+                    //         conn->myId,
+                    //         conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
+                    //         stdev*MSEC_PER_GET_CLOCK,
+                    //         rtt*MSEC_PER_GET_CLOCK);
                 }
             }
         }
