@@ -1773,6 +1773,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5890B3D29894DB4007A875D /* Build configuration list for PBXNativeTarget "Avara" */;
 			buildPhases = (
+				E5C57BC3298997B6008740F4 /* Update GitVersion.h */,
 				E5890B2029894DB3007A875D /* Sources */,
 				E5890B2129894DB3007A875D /* Frameworks */,
 				E5890B2229894DB3007A875D /* Resources */,
@@ -1831,6 +1832,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E5C57BC3298997B6008740F4 /* Update GitVersion.h */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update GitVersion.h";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "GIT_HASH=`/usr/bin/git describe --always --dirty`\necho \"#define GIT_VERSION \\\"$GIT_HASH\\\"\" > src/util/GitVersion.h\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E5890B2029894DB3007A875D /* Sources */ = {
