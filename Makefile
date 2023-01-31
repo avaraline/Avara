@@ -94,7 +94,7 @@ frandom: $(BUILD_DIR)/frandom
 
 fixed: $(BUILD_DIR)/fixed
 
-macapp: clean
+macapp: clean set-version
 	xcodebuild -configuration Debug -scheme Avara \
            -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
            -derivedDataPath $(BUILD_DIR)/DerivedData \
