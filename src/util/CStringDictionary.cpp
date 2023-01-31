@@ -91,6 +91,7 @@ tokentype CStringDictionary::AddDictEntry(const unsigned char *entry, short len)
     if (len < 0) {
         len = entry[0];
     }
+    if (len == 0) { return -1; }
     char *s = PascalStringtoCString(entry, len);
     tokentype tt = AddDictEntry(s, len);
     delete[] s;
@@ -119,6 +120,7 @@ tokentype CStringDictionary::SearchForEntry(const unsigned char *entry, short le
     if (len < 0) {
         len = entry[0];
     }
+    if (len == 0) { return 0; }
     char *s = PascalStringtoCString(entry, len);
     tokentype tt = SearchForEntry(s, len);
     delete[] s;
