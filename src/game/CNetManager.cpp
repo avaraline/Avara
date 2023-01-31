@@ -31,12 +31,13 @@
 #include "System.h"
 #include "Beeper.h"
 
+#include "Debug.h"
 #include <string.h>
 
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
 #define LOWERLATENCYCOUNT   2
-#define HIGHERLATENCYCOUNT  10    // 4*(10/240) frames at fps=16ms, 1*10/60 frames at fps=64ms, works for all fps values
+#define HIGHERLATENCYCOUNT  12    // 4*(10/240) frames at fps=16ms, 1*10/60 frames at fps=64ms, works for all fps values
 #define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*8))  // 30.72 seconds
 
 #if ROUTE_THRU_SERVER
@@ -758,23 +759,24 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 autoLatencyVote /= autoLatencyVoteCount;
-                SDL_Log("    autoLatencyVote = %ld\n", autoLatencyVote);
+                bool debuglt = Debug::IsEnabled("lt");
+                if (debuglt) { SDL_Log("====autoLatencyVote = %ld\n", autoLatencyVote); }
                 // if, on average, players had to wait more than some percent of frames during this latency vote period,
                 // then add 1 frame to the LT calculation
                 if (autoLatencyVote > HIGHERLATENCYCOUNT) {
                     addOneLatency++;
                     // don't let it go above 1.0 LT
                     addOneLatency = std::min(short(1.0/itsGame->fpsScale), addOneLatency);
-                    SDL_Log("  ++addOneLatency increased = %hd\n", addOneLatency);
+                    if (debuglt) { SDL_Log("  ++addOneLatency increased = %hd\n", addOneLatency); }
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (autoLatencyVote > LOWERLATENCYCOUNT) {
                     // vote too high to reduce addOneLatency, push subtractOneCheck forward
-                    SDL_Log("   >addOneLatency keeping = %hd\n", addOneLatency);
+                    if (debuglt) { SDL_Log("   >addOneLatency keeping = %hd\n", addOneLatency); }
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (addOneLatency > 0 && frameNumber >= subtractOneCheck) {
                     // if no significant waiting seen for 8 CONSECUTIVE autoLatency votes, about 30 seconds, let it creep back down 1 fps frame
                     addOneLatency--;
-                    SDL_Log("  --addOneLatency decreased = %hd\n", addOneLatency);
+                    if (debuglt) { SDL_Log("  --addOneLatency decreased = %hd\n", addOneLatency); }
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 }
 
@@ -824,7 +826,7 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
                                      int16_t p2,        // maxRoundLatency
                                      int32_t p3) {      // FRandSeed
 
-    SDL_Log("CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
+    if (Debug::IsEnabled("lt")) { SDL_Log("CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3); }
     autoLatencyVoteCount++;
     autoLatencyVote += p1;
 
