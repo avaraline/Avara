@@ -62,8 +62,8 @@ jobs:
     steps:
       - name: install dependencies
         run: |
-          wget -q "https://www.libsdl.org/release/SDL2-2.0.14.dmg"
-          hdiutil attach SDL2-2.0.14.dmg
+          wget -q "https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.dmg"
+          hdiutil attach SDL2-2.26.2.dmg
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
       - uses: actions/checkout@v2
       - name: make
@@ -83,7 +83,7 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build/MacAvara.zip
+          asset_path: ./build-main/MacAvara.zip
           asset_name: Avara-macOS-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1

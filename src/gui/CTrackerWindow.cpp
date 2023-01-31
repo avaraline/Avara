@@ -86,7 +86,7 @@ public:
             //connect if not hosting
             if(avara->GetNet()->netStatus != kServerNet) {
                 if(password == true)
-                    CWindow *passwordWindow = new PasswordConnect(avara, line1);
+                    new PasswordConnect(avara, line1);
                 else
                     avara->GetNet()->ChangeNet(kClientNet, line1);
             }

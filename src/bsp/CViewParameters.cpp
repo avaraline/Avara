@@ -204,6 +204,7 @@ void CViewParameters::PointCamera() {
         smallVector[1] = delta[2];
 
         length = VectorLength(2, smallVector);
+        if (length == 0) { return; }
         mb[0][0] = FDiv(smallVector[1], length);
         mb[2][2] = mb[0][0];
         mb[0][2] = FDiv(smallVector[0], length);

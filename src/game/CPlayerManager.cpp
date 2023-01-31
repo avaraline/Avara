@@ -416,8 +416,6 @@ void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short com
     if (ff->validFrame == theFrame) {
         outPacket = theComm->GetPacket();
         if (outPacket) {
-            long *pd;
-
             outPacket->command = commandCode;
             outPacket->distribution = 1 << requesterId;
 
@@ -945,8 +943,6 @@ void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std:
                 loadingStatus = kLNotFound;
         } else {
             if (serverCRC == levelCRC && serverTag.compare(levelTag) == 0) {
-                short i;
-
                 SDL_Log("Setting loadingStatus = kLLoaded for slot = %d\n", slot);
                 loadingStatus = kLLoaded;
 #if 0
@@ -1008,8 +1004,6 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
     actorList = newList;
 
     if (itsPlayer == NULL) {
-        CIncarnator *spotAvailable;
-
         itsPlayer = new CWalkerActor;
         itsPlayer->IAbstractActor();
         itsPlayer->BeginScript();
@@ -1035,10 +1029,7 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
 }
 
 Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
-    short i;
-    CIncarnator *spotAvailable;
-
-    for (i = 1; i <= kMaxTeamColors; i++) {
+    for (short i = 1; i <= kMaxTeamColors; i++) {
         itsPlayer = new CWalkerActor;
         itsPlayer->IAbstractActor();
         itsPlayer->BeginScript();

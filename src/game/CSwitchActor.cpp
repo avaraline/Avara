@@ -106,7 +106,6 @@ void CSwitchActor::PlaceParts() {
 CSmartPart *CSwitchActor::CollisionTest() {
     CAbstractActor *theActor;
     CSmartPart *thePart;
-    CSmartPart **thePartList;
     CSmartPart *myPart;
 
     myPart = partList[shownState];

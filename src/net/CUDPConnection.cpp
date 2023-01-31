@@ -52,7 +52,6 @@ void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
 #endif
 
 void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
-    OSErr err = noErr;
     short i;
 
     killed = false;
@@ -297,10 +296,6 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
 
 UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long urgencyAdjust) {
     UDPPacketInfo *thePacket = NULL;
-    UDPPacketInfo *nextPacket;
-    UDPPacketInfo *bestPacket;
-    OSErr theErr;
-    long bestSendTime, theSendTime;
 
     if (port) {
         ProcessBusyQueue(curTime);
@@ -511,7 +506,6 @@ void CUDPConnection::RunValidate() {
 
 char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
     SerialNumber transmittedSerial;
-    short dummyStackVar;
     UDPPacketInfo *thePacket, *nextPacket;
 
     // received something, reset the counter
@@ -692,12 +686,9 @@ char *CUDPConnection::WriteAcks(char *dest) {
 
     if (offsetBufferBusy == NULL && ackBase & 1) {
         short dummyShort;
-        char offset;
 
         offsetBufferBusy = &dummyShort;
         if (offsetBufferBusy == &dummyShort) {
-            char *deltas;
-
             *mainAck = ackBase;
             *(int32_t *)dest = ackBitmap;
             dest += sizeof(ackBitmap);

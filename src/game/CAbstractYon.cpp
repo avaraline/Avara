@@ -22,8 +22,6 @@ void CAbstractYon::BeginScript() {
 
 CAbstractActor *CAbstractYon::EndScript() {
     if (CAbstractActor::EndScript()) {
-        short shapeId;
-
         RegisterReceiver(&startMsg, ReadLongVar(iStartMsg));
         RegisterReceiver(&stopMsg, ReadLongVar(iStopMsg));
         status = ReadLongVar(iStatus);

@@ -106,6 +106,7 @@ public:
     long latencyVoteFrame;
     short maxRoundTripLatency;
     short addOneLatency;
+    long subtractOneCheck;
     CPlayerManager *maxPlayer;
     Boolean latencyVoteOpen;
     std::map<int32_t, std::vector<int16_t>> fragmentMap;  // maps FRandSeed to list of players having that seed
@@ -181,7 +182,7 @@ public:
     virtual bool IsAutoLatencyEnabled();
     virtual bool IsFragmentCheckWindowOpen();
     virtual void ResetLatencyVote();
-    virtual void ReceiveLatencyVote(int16_t sender, int8_t p1, int16_t p2, int32_t p3);
+    virtual void ReceiveLatencyVote(int16_t sender, uint8_t p1, int16_t p2, int32_t p3);
     virtual std::string FragmentMapToString();
 
     virtual void ViewControl();

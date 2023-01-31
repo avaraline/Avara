@@ -66,8 +66,6 @@ static Fixed menuRates[] = {-1, //	index from 1
 
 void CAvaraGame::InitMixer(Boolean silentFlag) {
     CSoundMixer *aMixer;
-    Fixed theRate;
-    short maxChan;
 
     soundHub->MixerDispose();
 
@@ -103,9 +101,6 @@ CAvaraGame::CAvaraGame(int frameTime) {
     SetFrameTime(frameTime);
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
-    short i;
-
-
     itsApp = theApp;
 
     itsNet = CreateNetManager();
@@ -191,7 +186,6 @@ CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
 }
 
 void CAvaraGame::Dispose() {
-    short i;
     CAbstractActor *nextActor;
 
     spectatePlayer = NULL;
@@ -510,8 +504,6 @@ void CAvaraGame::ChangeDirectoryFile() {
 void CAvaraGame::LevelReset(Boolean clearReset) {
     short i;
     CAbstractActor *anActor, *nextActor;
-    Size growBytes;
-    Size freeBytes;
 
     gameStatus = kAbortStatus;
 
@@ -741,11 +733,6 @@ void CAvaraGame::ResumeGame() {
     SDL_Log("CAvaraGame::ResumeGame (start=%d)\n", doStart);
 
     if (doStart) {
-        UnsignedByte oldCursorScale;
-        short resRef;
-        long powerGestalt;
-        short oldEventMask;
-
         if (freshMission) {
             itsApp->GameStarted(loadedSet,
                                 loadedLevel);

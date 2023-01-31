@@ -335,7 +335,6 @@ void MTranslate(Fixed xt, Fixed yt, Fixed zt, Matrix *theMatrix) {
 }
 
 void MRotateX(Fixed s, Fixed c, Matrix *theMatrix) {
-    short i;
     Fixed *vm;
     Fixed *em;
 

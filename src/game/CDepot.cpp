@@ -60,7 +60,6 @@ void CDepot::IDepot(CAvaraGame *theGame) {
 void CDepot::Dispose() {
     short i;
     CSliverPart *nextSliver, *slivers;
-    CAbstractActor *nextActor;
 
     DisposeMissiles();
     DisposeWeapons();
@@ -182,7 +181,7 @@ void CDepot::FireSlivers(short n,
 }
 
 CAbstractMissile *CDepot::MakeMissile(short kind) {
-    CAbstractMissile *newMissile;
+    CAbstractMissile *newMissile = NULL;
 
     switch (kind) {
         case kmiFlat:
@@ -194,6 +193,8 @@ CAbstractMissile *CDepot::MakeMissile(short kind) {
         case kmiShuriken:
             newMissile = new CShuriken;
             break;
+        default:
+            return newMissile;
     }
 
     newMissile->IAbstractMissile(this);
@@ -301,7 +302,7 @@ void CDepot::LevelReset() {
 }
 
 CWeapon *CDepot::MakeWeapon(short kind) {
-    CWeapon *newWeapon;
+    CWeapon *newWeapon = NULL;
 
     switch (kind) {
         case kweGrenade:
@@ -310,6 +311,8 @@ CWeapon *CDepot::MakeWeapon(short kind) {
         case kweSmart:
             newWeapon = new CSmart;
             break;
+        default:
+            return newWeapon;
     }
 
     newWeapon->IWeapon(this);

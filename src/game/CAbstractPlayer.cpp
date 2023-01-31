@@ -233,8 +233,6 @@ void CAbstractPlayer::BeginScript() {
 }
 
 CAbstractActor *CAbstractPlayer::EndScript() {
-    short i;
-
     CRealMovers::EndScript();
 
     doIncarnateSound = true;
@@ -347,7 +345,6 @@ void CAbstractPlayer::PlaceHUDParts() {
     Matrix *mt;
     CBSPPart *theSight;
     CAbstractActor *theActor;
-    CSmartPart **thePartList;
     RayHitRecord theHit;
     CWeapon *weapon = NULL;
 
@@ -445,7 +442,6 @@ void CAbstractPlayer::PlaceHUDParts() {
 
 void CAbstractPlayer::ControlSoundPoint() {
     Fixed theRight[] = {FIX(-1), 0, 0};
-    SoundLink *listener;
     Matrix *m;
 
     m = &viewPortPart->itsTransform;
@@ -459,7 +455,6 @@ void CAbstractPlayer::ControlSoundPoint() {
 
 void CAbstractPlayer::ControlViewPoint() {
     CViewParameters *theView;
-    Matrix tempMat;
     Fixed viewDist;
     // CInfoPanel       *infoPanel;
     Fixed frameYon;
@@ -1335,7 +1330,6 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
         CBasicSound *theSound;
         short count = 10;
         short life = 8;
-        SoundLink *aLink;
 
         if (options & kFragmentOption) {
             location[0] = oldLoc[0];

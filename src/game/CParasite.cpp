@@ -128,7 +128,6 @@ void CParasite::ClampOn(CSmartPart *clampTo) {
 }
 
 void CParasite::CourseCheck() {
-    CAbstractPlayer *closestTry;
     CAbstractPlayer *aPlayer;
     Fixed bestDistance;
     RayHitRecord ray;

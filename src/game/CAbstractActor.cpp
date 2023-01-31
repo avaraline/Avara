@@ -351,7 +351,6 @@ void CAbstractActor::Blast() {
     if (isInGame) {
         short i;
         CSmartPart *thePart, *maxPart;
-        SoundLink *blastLink;
         short maxCount = 0;
 
         Shatter(0, kSliverSizes, sliverCounts, sliverLives, FIX3(500));
@@ -940,7 +939,6 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 void CAbstractActor::GetBlastPoint(BlastHitRecord *theHit, RayHitRecord *rayHit) {
     Fixed theDistance;
     Fixed shortestDistance;
-    Vector *hitPoint;
     CSmartPart **pp, *thePart;
 
     shortestDistance = FIX(128);

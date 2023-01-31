@@ -31,12 +31,14 @@
 #include "System.h"
 #include "Beeper.h"
 
+#include "Debug.h"
 #include <string.h>
 
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
-#define LOWERLATENCYCOUNT 3
-#define HIGHERLATENCYCOUNT 8
+#define LOWERLATENCYCOUNT   2
+#define HIGHERLATENCYCOUNT  12    // 4*(10/240) frames at fps=16ms, 1*10/60 frames at fps=64ms, works for all fps values
+#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*8))  // 30.72 seconds
 
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
@@ -133,7 +135,7 @@ void CNetManager::ChangeNet(short netKind, std::string address) {
 void CNetManager::ChangeNet(short netKind, std::string address, std::string password) {
     CCommManager *newManager = NULL;
     Boolean confirm = true;
-    CAvaraApp *theApp = itsGame->itsApp;
+    //CAvaraApp *theApp = itsGame->itsApp;
 
     if (netKind != netStatus || !isConnected) {
         if (netStatus != kNullNet || !isConnected) {
@@ -612,7 +614,6 @@ void CNetManager::ResumeGame() {
     CPlayerManager *thePlayerManager;
     long lastTime;
     Boolean notReady;
-    Boolean allOk = false;
 
     SDL_Log("CNetManager::ResumeGame\n");
     config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
@@ -641,6 +642,7 @@ void CNetManager::ResumeGame() {
 
     ResetLatencyVote();
     addOneLatency = 0;
+    subtractOneCheck = 0;
     localLatencyVote = 0;
     latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
@@ -733,12 +735,13 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
                 latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
                 maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
                 maxPlayer = playerTable[maxId];
+                uint8_t llv = std::min(long(UINT8_MAX), localLatencyVote);  // just in case, p1 can only accept a max of 256
 
                 itsCommManager->SendUrgentPacket(
-                    activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
+                    activePlayersDistribution, kpLatencyVote, llv, maxRoundLatency, FRandSeed, 0, NULL);
                 #if LATENCY_DEBUG
-                    SDL_Log("*** fn=%ld activePlayersDistribution=%hx, deadOrDonePlayers=%hx, aliveDistribution=%hx maxRoundLatency=%ld FRandSeed=%d\n",
-                            frameNumber, activePlayersDistribution, deadOrDonePlayers, AlivePlayersDistribution(), maxRoundLatency, FRandSeed);
+                    SDL_Log("*** fn=%ld SENDING kpLatencyVote to %hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
+                            frameNumber, activePlayersDistribution, localLatencyVote, maxRoundLatency, FRandSeed);
                 #endif
             } else {
                 // spectator just sends FRandSeed to self for fragmentation check
@@ -755,19 +758,35 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             }
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
-                short maxFrameLatency;
-
                 autoLatencyVote /= autoLatencyVoteCount;
+                bool debuglt = Debug::IsEnabled("lt");
+                if (debuglt) { SDL_Log("====autoLatencyVote = %ld\n", autoLatencyVote); }
+                // if, on average, players had to wait more than some percent of frames during this latency vote period,
+                // then add 1 frame to the LT calculation
+                if (autoLatencyVote > HIGHERLATENCYCOUNT) {
+                    addOneLatency++;
+                    // don't let it go above 1.0 LT
+                    addOneLatency = std::min(short(1.0/itsGame->fpsScale), addOneLatency);
+                    if (debuglt) { SDL_Log("  ++addOneLatency increased = %hd\n", addOneLatency); }
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                } else if (autoLatencyVote > LOWERLATENCYCOUNT) {
+                    // vote too high to reduce addOneLatency, push subtractOneCheck forward
+                    if (debuglt) { SDL_Log("   >addOneLatency keeping = %hd\n", addOneLatency); }
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                } else if (addOneLatency > 0 && frameNumber >= subtractOneCheck) {
+                    // if no significant waiting seen for 8 CONSECUTIVE autoLatency votes, about 30 seconds, let it creep back down 1 fps frame
+                    addOneLatency--;
+                    if (debuglt) { SDL_Log("  --addOneLatency decreased = %hd\n", addOneLatency); }
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                }
 
-                // if (autoLatencyVote > HIGHERLATENCYCOUNT) {
-                //     addOneLatency = 1;
-                // }
+                // Usually maxFrameLatency is determined primarily by maxRoundTripLatency...
+                // but addOneLatency helps account for deficiencies in the calculation by measuring how often clients had to wait too long for packets to arrive
+                short maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
-
-                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, FL=%d\n",
+                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
                         frameNumber, maxRoundTripLatency,
-                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), maxFrameLatency);
+                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, maxFrameLatency);
 
                 itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer);
             }
@@ -803,11 +822,11 @@ void CNetManager::ResetLatencyVote() {
 }
 
 void CNetManager::ReceiveLatencyVote(int16_t sender,
-                                     int8_t p1,         // localLatencyVote
+                                     uint8_t p1,        // localLatencyVote (uint8_t because it can go as high as 3840/16=240)
                                      int16_t p2,        // maxRoundLatency
                                      int32_t p3) {      // FRandSeed
 
-    SDL_Log("CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
+    if (Debug::IsEnabled("lt")) { SDL_Log("CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3); }
     autoLatencyVoteCount++;
     autoLatencyVote += p1;
 
@@ -1072,7 +1091,7 @@ void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std:
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         nlohmann::json message = nlohmann::json::parse(json);
         playerTable[slotId]->RandomKey(randomKey);
-
+        /*
         if(message.type() == nlohmann::json::value_t::object) {
             auto it = message.begin();
 
@@ -1080,6 +1099,7 @@ void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std:
                 bool xyz = it.value();
             }
         }
+        */
     }
 }
 

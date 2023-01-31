@@ -356,7 +356,7 @@ void AvaraGLUpdateData(CBSPPart *part) {
     glGenBuffers(1, &part->vertexBuffer);
 
     PolyRecord *poly;
-    float scale = 1.0; // ToFloat(currentView->screenScale);
+    //float scale = 1.0; // ToFloat(currentView->screenScale);
     int p = 0;
     for (int i = 0; i < part->polyCount; i++) {
         poly = &part->polyTable[i];
