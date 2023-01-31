@@ -26,10 +26,10 @@ CPPFLAGS := ${CPPFLAGS}
 CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g
 
 ifeq ($(AVARA_WARNINGS), TRUE)
-CPPFLAGS += -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy 
-CPPFLAGS += -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations 
-CPPFLAGS += -Wmissing-include-dirs -Woverloaded-virtual -Wredundant-decls -Wshadow 
-CPPFLAGS += -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef 
+CPPFLAGS += -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
+CPPFLAGS += -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations
+CPPFLAGS += -Wmissing-include-dirs -Woverloaded-virtual -Wredundant-decls -Wshadow
+CPPFLAGS += -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef
 CPPFLAGS += -Wno-unused-function -Wno-multichar -Wno-gnu-anonymous-struct -Wno-unused-parameter
 endif
 
@@ -94,16 +94,12 @@ frandom: $(BUILD_DIR)/frandom
 
 fixed: $(BUILD_DIR)/fixed
 
-macapp: avara
-	rm -rf $(BUILD_DIR)/Avara.app
-	$(MKDIR_P) $(BUILD_DIR)/Avara.app/Contents/{Frameworks,MacOS,Resources}
-	cp platform/macos/Info.plist $(BUILD_DIR)/Avara.app/Contents
-	cp $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.app/Contents/MacOS
-	cp -r $(BUILD_DIR)/{levels,rsrc} $(BUILD_DIR)/Avara.app/Contents/Resources
-	cp platform/macos/Avara.icns $(BUILD_DIR)/Avara.app/Contents/Resources
-	cp -a $(FRAMEWORK_PATH)/SDL2.framework $(BUILD_DIR)/Avara.app/Contents/Frameworks
-	install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
-	if [ $(SIGNING_ID) = "NONE" ]; then echo "Not signing app bundle."; else codesign -vvv --no-strict --deep --force -s $(SIGNING_ID) $(BUILD_DIR)/Avara.app; fi
+macapp: clean
+	xcodebuild -configuration Debug -scheme Avara \
+           -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
+           -derivedDataPath $(BUILD_DIR)/DerivedData \
+           ONLY_ACTIVE_ARCH=NO \
+           CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
 	cd $(BUILD_DIR) && zip $(ZIPFLAGS) MacAvara.zip Avara.app && cd ..
 
 winapp: avara
