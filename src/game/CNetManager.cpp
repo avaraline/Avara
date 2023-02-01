@@ -759,24 +759,23 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 autoLatencyVote /= autoLatencyVoteCount;
-                bool debuglt = Debug::IsEnabled("lt");
-                if (debuglt) { SDL_Log("====autoLatencyVote = %ld\n", autoLatencyVote); }
+                DBG_Log("lt", "====autoLatencyVote = %ld\n", autoLatencyVote);
                 // if, on average, players had to wait more than some percent of frames during this latency vote period,
                 // then add 1 frame to the LT calculation
                 if (autoLatencyVote > HIGHERLATENCYCOUNT) {
                     addOneLatency++;
                     // don't let it go above 1.0 LT
                     addOneLatency = std::min(short(1.0/itsGame->fpsScale), addOneLatency);
-                    if (debuglt) { SDL_Log("  ++addOneLatency increased = %hd\n", addOneLatency); }
+                    DBG_Log("lt", "  ++addOneLatency increased = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (autoLatencyVote > LOWERLATENCYCOUNT) {
                     // vote too high to reduce addOneLatency, push subtractOneCheck forward
-                    if (debuglt) { SDL_Log("   >addOneLatency keeping = %hd\n", addOneLatency); }
+                    DBG_Log("lt", "   >addOneLatency keeping = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (addOneLatency > 0 && frameNumber >= subtractOneCheck) {
                     // if no significant waiting seen for 8 CONSECUTIVE autoLatency votes, about 30 seconds, let it creep back down 1 fps frame
                     addOneLatency--;
-                    if (debuglt) { SDL_Log("  --addOneLatency decreased = %hd\n", addOneLatency); }
+                    DBG_Log("lt", "  --addOneLatency decreased = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 }
 
@@ -826,7 +825,7 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
                                      int16_t p2,        // maxRoundLatency
                                      int32_t p3) {      // FRandSeed
 
-    if (Debug::IsEnabled("lt")) { SDL_Log("CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3); }
+    DBG_Log("lt", "CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
     autoLatencyVoteCount++;
     autoLatencyVote += p1;
 
