@@ -163,7 +163,7 @@ $(BUILD_DIR)/%.mm.o: %.mm
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-.PHONY: clean publish
+.PHONY: clean
 
 set-version:
 	grep -q $(GIT_HASH) src/util/GitVersion.h || (echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h)
@@ -178,7 +178,7 @@ build-link: $(BUILD_DIR)/Avara
 
 clean:
 	$(RM) -f src/util/GitVersion.h
-	$(RM) -r $(BUILD_DIR)
+	$(RM) -rf $(BUILD_DIR) build
 
 clean-levels:
 	$(RM) -r levels/*/alf/*.alf
@@ -186,9 +186,6 @@ clean-levels:
 	$(RM) -r levels/*/set.json
 	$(RM) -r levels/*/ogg/*.ogg
 	$(RM) -r levels/*/wav/*.wav
-
-publish:
-	scp $(BUILD_DIR)/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
 	# python3 bin/pict2svg.py
