@@ -222,7 +222,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
 
         if (!node.attribute("angle").empty()) {
-            int arcAngle = ReadLongVar("angle");
+            short arcAngle = ReadShortVar("angle");
 
             lastArcAngle = (900 - arcAngle) % 360;
             lastDomeAngle = 360 - arcAngle;
@@ -236,7 +236,7 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_dome(pugi::xml_node& node) {
         if (!node.attribute("quarters").empty()) {
-            int extent = ReadLongVar("quarters") * 90;
+            short extent = ReadShortVar("quarters") * 90;
             lastDomeSpan = (extent >= 90 && extent <= 360)
                 ? extent
                 : 360;

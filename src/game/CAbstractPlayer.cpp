@@ -1542,8 +1542,7 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
 }
 
 Fixed CAbstractPlayer::GetTotalMass() {
-    return (((long)boostsRemaining) << 18) + (((long)grenadeCount) << 16) + (((long)missileCount) << 16) +
-           CRealMovers::GetTotalMass();
+    return (FIX(boostsRemaining) << 2) + FIX(grenadeCount) + FIX(missileCount) + CRealMovers::GetTotalMass();
 }
 
 void CAbstractPlayer::PlayerWasMoved() {

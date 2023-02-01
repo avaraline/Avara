@@ -573,7 +573,7 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
     sampP->loopEnd = hsndJson["Loop End"];
     sampP->loopCount = hsndJson["Loop Count"];
     sampP->nextSample = sampleList;
-    sampP->len = len;
+    sampP->len = (uint32_t)len;
 
     uint8_t *p;
     HLock((Handle)aSample);

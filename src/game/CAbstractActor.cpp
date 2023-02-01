@@ -76,7 +76,7 @@ void CAbstractActor::LinkBox(Fixed minX, Fixed minZ, Fixed maxX, Fixed maxZ) {
     short *linkTable;
     ActorLocator *head;
     ActorLocator *loc;
-    long mask = LOCCOORDMASK;
+    uint32_t mask = LOCCOORDMASK;
 
     minX = (minX & mask) >> (LOCATORTABLESCALE - LOCATORTABLEBITS);
     maxX = (maxX & mask) >> (LOCATORTABLESCALE - LOCATORTABLEBITS);
@@ -350,7 +350,7 @@ void CAbstractActor::Shatter(short firstSliverType,
 void CAbstractActor::Blast() {
     if (isInGame) {
         short i;
-        CSmartPart *thePart, *maxPart;
+        CSmartPart *thePart, *maxPart = NULL;
         short maxCount = 0;
 
         Shatter(0, kSliverSizes, sliverCounts, sliverLives, FIX3(500));
@@ -363,7 +363,7 @@ void CAbstractActor::Blast() {
             }
         }
 
-        if (maxCount) {
+        if (maxCount && maxPart) {
             DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX(1));
         }
     }

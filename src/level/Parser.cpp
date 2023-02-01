@@ -1114,6 +1114,13 @@ long ReadLongVar(const char *s) {
     return ReadLongVar(IndexForEntry(s));
 }
 
+short ReadShortVar(short index) {
+    return (short)ReadLongVar(index);
+}
+short ReadShortVar(const char *s) {
+    return ReadShortVar(IndexForEntry(s));
+}
+
 const std::optional<uint32_t> ReadColorVar(short index) {
     // first just try parsing the color string (e.g. fill="#ffcc44" or fill="rgba(255,204,68)")
     std::optional<uint32_t> color = ParseColor(ReadStringVar(index));

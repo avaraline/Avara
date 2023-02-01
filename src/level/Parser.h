@@ -118,6 +118,8 @@ Fixed ReadFixedVar(short index);
 Fixed ReadFixedVar(const char *);
 long ReadLongVar(short index);
 long ReadLongVar(const char *);
+short ReadShortVar(short index);
+short ReadShortVar(const char *s);
 const std::optional<uint32_t> ReadColorVar(short index);
 const std::optional<uint32_t> ReadColorVar(const char *);
 std::string ReadStringVar(short index);
