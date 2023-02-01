@@ -465,7 +465,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
     SDL_Log("ReceiveLoadLevel(%d, %d, %s, %d)\n", senderSlot, originalSender, theSetAndTag, seed);
 
     std::string setAndTag(theSetAndTag);
-    int pos = setAndTag.find("/");
+    auto pos = setAndTag.find("/");
     std::string set = setAndTag.substr(0, pos);
     std::string tag = setAndTag.substr(pos + 1, std::string::npos);
 
@@ -1358,19 +1358,6 @@ void CNetManager::NewArrival(short slot) {
 
 void CNetManager::ResultsReport(Ptr results) {
     itsGame->scoreKeeper->ReceiveResults((int32_t *)results);
-}
-
-void CNetManager::Beep() {
-    Beep();
-    /*
-    if(gAsyncBeeper)
-    {	Str255		bellSoundName;
-        Handle		theSound;
-
-        gApplication->ReadStringPref(kBellSoundTag, bellSoundName);
-        gAsyncBeeper->PlayNamedBeep(bellSoundName);
-    }
-    */
 }
 
 /*

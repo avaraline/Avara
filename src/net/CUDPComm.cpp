@@ -303,7 +303,6 @@ CUDPConnection * CUDPComm::ConnectionForPacket(UDPpacket *udp) {
 
 void CUDPComm::ForwardPacket(PacketInfo *thePacket) {
     CUDPConnection *conn;
-    short dummyStackVar;
 
     // SDL_Log("CUDPComm::ForwardPacket cmd=%d sndr=%d dist=0x%02x myId=%d\n", thePacket->command,
     //         thePacket->sender, thePacket->distribution, myId);
@@ -800,7 +799,6 @@ OSErr CUDPComm::AsyncRead() {
 #define kNumConnectionTypes (kFastestConnectionCmd - kSlowestConnectionCmd + 1)
 
 Boolean CUDPComm::AsyncWrite() {
-    OSErr theErr;
     CUDPConnection *theConnection;
     CUDPConnection *firstSender;
     UDPPacketInfo *thePacket = NULL;
@@ -918,7 +916,6 @@ Boolean CUDPComm::AsyncWrite() {
             PacketInfo *p;
             char *fp;
             uint8_t flags = 0;
-            short len;
 
             p = &thePacket->packet;
 
@@ -1105,8 +1102,6 @@ long CUDPComm::GetClock() {
 **	no other data to send within twice that period.
 */
 void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, long urgentTimePeriod) {
-    OSErr theErr;
-
     ICommManager(bufferCount);
 
     inviteString[0] = 0;
@@ -1368,8 +1363,6 @@ void ForwardPorts(port_num port) {
 }
 
 void CUDPComm::CreateServer() {
-    OSErr theErr;
-
     localPort = gApplication->Number(kDefaultUDPPort);
 
     std::thread forwardPorts(ForwardPorts, localPort);
@@ -1473,7 +1466,7 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     localPort = gApplication->Number(kDefaultClientUDPPort, serverPort);
 
     IPaddress addr;
-    CAvaraApp *app = (CAvaraAppImpl *)gApplication;
+    // CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();

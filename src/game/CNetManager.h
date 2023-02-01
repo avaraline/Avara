@@ -204,8 +204,6 @@ public:
 
     virtual void ResultsReport(Ptr results);
 
-    virtual void Beep();
-
     // virtual	void			BuildTrackerTags(CTracker *tracker);
     virtual void LoginRefused();
 };

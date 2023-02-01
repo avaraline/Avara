@@ -20,9 +20,9 @@ class CWorldShader;
 
 
 GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path);
-void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth, long color);
+void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth, uint32_t color);
 void AvaraGLSetDepthTest(bool doTest);
-void AvaraGLSetAmbient(float ambient, long color);
+void AvaraGLSetAmbient(float ambient, uint32_t color);
 void AvaraGLSetView(glm::mat4 view);
 void AvaraGLSetFOV(float fov);
 void AvaraGLUpdateProjectionMatrix();

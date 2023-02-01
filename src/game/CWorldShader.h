@@ -21,9 +21,9 @@ class CWorldShader : public CDirectObject {
 public:
     CAvaraGame *itsGame;
 
-    long lowSkyColor;
-    long highSkyColor;
-    long groundColor;
+    uint32_t lowSkyColor;
+    uint32_t highSkyColor;
+    uint32_t groundColor;
     short skyShadeCount;
     Fixed lowSkyAltitude;
     Fixed highSkyAltitude;

@@ -94,12 +94,14 @@ frandom: $(BUILD_DIR)/frandom
 
 fixed: $(BUILD_DIR)/fixed
 
-macapp: clean set-version
+macapp: set-version
 	xcodebuild -configuration Debug -scheme Avara \
            -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
            -derivedDataPath $(BUILD_DIR)/DerivedData \
            ONLY_ACTIVE_ARCH=NO \
            CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
+
+macdist: macapp
 	cd $(BUILD_DIR) && zip $(ZIPFLAGS) MacAvara.zip Avara.app && cd ..
 
 winapp: avara
@@ -109,6 +111,8 @@ winapp: avara
 	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc,vendor,src} $(BUILD_DIR)/WinAvara
 	# cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2,libminiupnpc}.dll $(BUILD_DIR)/WinAvara
+
+windist: winapp
 	cd $(BUILD_DIR) && zip $(ZIPFLAGS) WinAvara.zip WinAvara && cd ..
 
 # Avara
@@ -173,6 +177,7 @@ build-link: $(BUILD_DIR)/Avara
 	fi
 
 clean:
+	$(RM) -f src/util/GitVersion.h
 	$(RM) -r $(BUILD_DIR)
 
 clean-levels:

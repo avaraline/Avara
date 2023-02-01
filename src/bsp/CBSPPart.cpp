@@ -58,8 +58,8 @@ void CBSPPart::IBSPPart(short resId) {
         return;
     }
 
-    polyCount = doc["polys"].size();
-    pointCount = doc["points"].size();
+    polyCount = (uint32_t)doc["polys"].size();
+    pointCount = (uint32_t)doc["points"].size();
 
     enclosureRadius = ToFixed(doc["radius1"]);
     bigRadius = ToFixed(doc["radius2"]);

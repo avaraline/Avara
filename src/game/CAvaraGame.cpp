@@ -54,16 +54,6 @@
 
 #define kHighShadeCount 12
 
-static Fixed menuRates[] = {-1, //	index from 1
-    0, //	system auto
-    -1, //	dividing line
-    rate11025hz,
-    rate22050hz,
-    rate44khz,
-    -1,
-    rate11khz,
-    rate22khz};
-
 void CAvaraGame::InitMixer(Boolean silentFlag) {
     CSoundMixer *aMixer;
 
@@ -850,13 +840,13 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
 }
 
 bool CAvaraGame::GameTick() {
-    int32_t startTime = SDL_GetTicks();
+    uint32_t startTime = SDL_GetTicks();
 
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        long pingInterval = 2000; //msec
+        uint32_t pingInterval = 2000; //msec
         if (statusRequest == kPlayingStatus) {
             // experimental: '/dbg ping' will turn pings on/off during game
             if (Debug::IsEnabled("ping")) {
@@ -1051,7 +1041,7 @@ void CAvaraGame::Render(NVGcontext *ctx) {
         gameStatus == kLoseStatus) {
         ViewControl();
         itsWorld->Render(itsView);
-        AvaraGLSetAmbient(.7, LONG_MAX);
+        AvaraGLSetAmbient(.7, UINT_MAX);
         AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
         AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);

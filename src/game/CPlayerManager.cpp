@@ -1211,19 +1211,13 @@ void	CPlayerManagerImpl::GetLoadingStatusString(
 
 void CPlayerManagerImpl::SpecialColorControl() {
     if (itsPlayer) {
-        long repColor = -1;
-
         switch (spaceCount) {
             case 2:
-                repColor = ColorManager::getSpecialBlackColor();
+                itsPlayer->SetSpecialColor(ColorManager::getSpecialBlackColor());
                 break;
             case 3:
-                repColor = ColorManager::getSpecialWhiteColor();
+                itsPlayer->SetSpecialColor(ColorManager::getSpecialWhiteColor());
                 break;
-        }
-
-        if (repColor >= 0) {
-            itsPlayer->SetSpecialColor(repColor);
         }
     }
 }

@@ -976,7 +976,7 @@ double EvalVariable(long token, Boolean forceCalc) {
 }
 
 char *fixedString(unsigned char *s) {
-    int len = std::strlen((char *)s);
+    auto len = std::strlen((char *)s);
     char *fixed = new char[len + 1];
     memcpy(fixed, s, len);
     fixed[len] = 0;

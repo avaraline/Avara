@@ -197,7 +197,7 @@ void CAbstractPlayer::ReplacePartColors() {
     }
 }
 
-void CAbstractPlayer::SetSpecialColor(long specialColor) {
+void CAbstractPlayer::SetSpecialColor(uint32_t specialColor) {
     longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
