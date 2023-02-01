@@ -906,7 +906,7 @@ bool CAvaraGame::GameTick() {
     // increment frameNumber, set nextScheduledFrame time
     IncrementFrame();
 
-    timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
+    timeInSeconds = frameNumber * frameTime / 1000;
 
     if (latencyTolerance)
         while (FramesFromNow(latencyTolerance) > topSentFrame)

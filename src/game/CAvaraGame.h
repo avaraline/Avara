@@ -74,7 +74,7 @@ public:
     std::string loadedDesigner = "";
     std::string loadedInfo = "";
     long loadedTimeLimit;
-    Fixed timeInSeconds;
+    uint32_t timeInSeconds;
     uint32_t frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
