@@ -846,18 +846,18 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
             // the first vote received dictates what the fragmentCheck value is, not necessarily the current player
             fragmentDetected = false;
             fragmentCheck = p3;
-            // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %ld", fragmentCheck, itsGame->frameNumber);
+            // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %u", fragmentCheck, itsGame->frameNumber);
         } else {
             // any votes after the first must have a matching p3 value
             if (fragmentCheck != p3) {
-                SDL_Log("FRAGMENTATION %d != %d in frameNumber %ld", fragmentCheck, p3, itsGame->frameNumber);
+                SDL_Log("FRAGMENTATION %d != %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
                 fragmentDetected = true;
             // } else {
-            //     SDL_Log("No frags detected so far %d == %d in frameNumber %ld", fragmentCheck, p3, itsGame->frameNumber);
+            //     SDL_Log("No frags detected so far %d == %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
             }
         }
     } else {
-        SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%ld",
+        SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%u",
                 p3, itsGame->frameNumber);
     }
 }

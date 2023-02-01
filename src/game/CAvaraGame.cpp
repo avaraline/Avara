@@ -87,7 +87,7 @@ CNetManager* CAvaraGame::CreateNetManager() {
     return new CNetManager;
 }
 
-CAvaraGame::CAvaraGame(int frameTime) {
+CAvaraGame::CAvaraGame(uint16_t frameTime) {
     SetFrameTime(frameTime);
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
@@ -596,7 +596,7 @@ void CAvaraGame::EndScript() {
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
             // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
-            //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color); 
+            //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
             AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
@@ -1096,8 +1096,6 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
 
         // if it changed
         if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
-            SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
-
             std::ostringstream oss;
             std::time_t t = std::time(nullptr);
             oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
@@ -1123,12 +1121,12 @@ long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
 }
 
-void CAvaraGame::SetFrameTime(long ft) {
+void CAvaraGame::SetFrameTime(uint16_t ft) {
     if (ft != 2 && ft != 4 && ft != 8 && ft != 16 && ft != 32 && ft != 64) {
       SDL_Log("ERROR! frameTime MUST be 2, 4, 8, 16, 32 or 64 msec");
       exit(1); // is exit too dramatic?
     }
-    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %ld)\n", ft);
+    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %u)\n", ft);
     this->frameTime = ft;
     this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
     if (gApplication) gApplication->Set(kFrameTimeTag, frameTime);
