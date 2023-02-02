@@ -33,6 +33,8 @@ typedef signed long long int ssize_t;
 #include <unistd.h>
 #include <sys/time.h>
 
+#define PUNCHTIME 5000
+
 typedef struct {
     ReadCompleteProc *callback;
     void *userData;
@@ -41,6 +43,10 @@ typedef struct {
 static Boolean gAvaraTCPOpen = false;
 static int gReadSocket = -1;
 UDPReadData gReadCallback;
+
+static int gPunchSocket = -1;
+static IPaddress punchServer = {0, 0};
+static uint32_t lastPunchPing = 0;
 
 OSErr PascalStringToAddress(StringPtr name, ip_addr *addr) {
     return noErr;
@@ -55,6 +61,11 @@ OSErr OpenAvaraTCP() {
         return noErr;
     }
     SDL_Log("OpenAvaraTCP\n");
+    
+    // TODO: make this configurable
+    gPunchSocket = CreateSocket(19555);
+    ResolveHost(&punchServer, "avara.io", 19555);
+
     gAvaraTCPOpen = true;
     return noErr;
 }
@@ -122,28 +133,110 @@ int ResolveHost(IPaddress *address, const char *host, uint16_t port) {
     return noErr;
 }
 
+void PingPunchServer() {
+    if (gPunchSocket == -1) return;
+
+    //SDL_Log("Pinging the punch server");
+
+    struct sockaddr_in sock_addr;
+    memset(&sock_addr, 0, sizeof(sock_addr));
+    sock_addr.sin_addr.s_addr = punchServer.host;
+    sock_addr.sin_port = punchServer.port;
+    sock_addr.sin_family = AF_INET;
+    sendto(
+        gPunchSocket,
+        "",
+        0,
+        0,
+        (struct sockaddr *)&sock_addr,
+        sizeof(sock_addr)
+    );
+}
+
+void RequestPunch(IPaddress &addr) {
+    if (gPunchSocket == -1) return;
+
+    SDL_Log("Requesting that %s punch a hole", FormatAddress(addr).c_str());
+
+    struct sockaddr_in sock_addr;
+    memset(&sock_addr, 0, sizeof(sock_addr));
+    sock_addr.sin_addr.s_addr = punchServer.host;
+    sock_addr.sin_port = punchServer.port;
+    sock_addr.sin_family = AF_INET;
+    sendto(
+        gPunchSocket,
+        (char *)&addr,
+        6,
+        0,
+        (struct sockaddr *)&sock_addr,
+        sizeof(sock_addr)
+    );
+}
+
+void Punch(IPaddress &addr) {
+    if (gPunchSocket == -1) return;
+
+    SDL_Log("Punching a hole for %s", FormatAddress(addr).c_str());
+
+    struct sockaddr_in sock_addr;
+    memset(&sock_addr, 0, sizeof(sock_addr));
+    sock_addr.sin_addr.s_addr = addr.host;
+    sock_addr.sin_port = addr.port;
+    sock_addr.sin_family = AF_INET;
+    sendto(
+        gReadSocket,
+        "",
+        0,
+        0,
+        (struct sockaddr *)&sock_addr,
+        sizeof(sock_addr)
+    );
+}
+
 void CheckSockets() {
     if (!gAvaraTCPOpen) {
         SDL_Log("CheckSockets called before OpenAvaraTCP\n");
         return;
     }
 
-    if (gReadSocket == -1) return;
+    if (gReadSocket == -1 && gPunchSocket == -1) return;
 
+    if (lastPunchPing == 0 || (SDL_GetTicks() - lastPunchPing >= PUNCHTIME)) {
+        PingPunchServer();
+        lastPunchPing = SDL_GetTicks();
+    }
+    
     fd_set readSet;
     FD_ZERO(&readSet);
-    FD_SET(gReadSocket, &readSet);
+    if (gPunchSocket != -1) FD_SET(gPunchSocket, &readSet);
+    if (gReadSocket != -1) FD_SET(gReadSocket, &readSet);
 
     timeval timeout;
     timeout.tv_sec = 0;
     timeout.tv_usec = 0;
 
-    if (select(gReadSocket + 1, &readSet, NULL, NULL, &timeout) > 0) {
+    int n = std::max(gReadSocket, gPunchSocket) + 1;
+    
+    if (select(n, &readSet, NULL, NULL, &timeout) > 0) {
+        if (FD_ISSET(gPunchSocket, &readSet)) {
+            IPaddress addr;
+            auto bytesRead = recvfrom(
+                gPunchSocket,
+                (char *)&addr,
+                6,
+                0,
+                NULL,
+                NULL
+            );
+            if (bytesRead == 6) {
+                Punch(addr);
+            }
+        }
         if (FD_ISSET(gReadSocket, &readSet)) {
             struct sockaddr_in addr;
             socklen_t len = sizeof(addr);
             UDPpacket *packet = CreatePacket(UDPSTREAMBUFFERSIZE);
-            int status = recvfrom(
+            auto bytesRead = recvfrom(
                 gReadSocket,
                 (char *)packet->data,
                 UDPSTREAMBUFFERSIZE,
@@ -151,8 +244,8 @@ void CheckSockets() {
                 (struct sockaddr *)&addr,
                 &len
             );
-            if (status > 0) {
-                packet->len = status;
+            if (bytesRead > 0) {
+                packet->len = static_cast<int>(bytesRead);
                 packet->address.host = addr.sin_addr.s_addr;
                 packet->address.port = addr.sin_port;
                 gReadCallback.callback(packet, gReadCallback.userData);
@@ -201,4 +294,8 @@ std::string FormatHostPort(uint32_t host, uint16_t port) {
        << (ipaddr & 0xff) <<  ":"
        << SDL_SwapBE16(port);
     return os.str();
+}
+
+std::string FormatAddress(IPaddress &addr) {
+    return FormatHostPort(addr.host, addr.port);
 }

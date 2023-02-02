@@ -455,7 +455,7 @@ void CAvaraAppImpl::TrackerUpdate() {
     trackerState["description"] = String(kServerDescription);
     trackerState["password"] = String(kServerPassword).length() > 0 ? true : false;
 
-    SDL_Log("TrackerUpdate: %s", trackerState.dump().c_str());
+    // SDL_Log("TrackerUpdate: %s", trackerState.dump().c_str());
 
     trackerUpdatePending = true;
     nextTrackerUpdate = SDL_GetTicks() + (freq * 1000);

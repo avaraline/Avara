@@ -1365,8 +1365,8 @@ void ForwardPorts(port_num port) {
 void CUDPComm::CreateServer() {
     localPort = gApplication->Number(kDefaultUDPPort);
 
-    std::thread forwardPorts(ForwardPorts, localPort);
-    forwardPorts.detach();
+    //std::thread forwardPorts(ForwardPorts, localPort);
+    //forwardPorts.detach();
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
@@ -1457,8 +1457,8 @@ void CUDPComm::Connect(std::string address) {
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
     SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
-    std::thread forwardPorts(ForwardPorts, localPort);
-    forwardPorts.detach();
+    //std::thread forwardPorts(ForwardPorts, localPort);
+    //forwardPorts.detach();
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
@@ -1468,6 +1468,7 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     IPaddress addr;
     // CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     ResolveHost(&addr, address.c_str(), serverPort);
+    RequestPunch(addr);
 
     password[0] = passwordStr.length();
     BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
