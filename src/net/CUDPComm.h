@@ -131,7 +131,7 @@ public:
     virtual OSErr CreateStream(port_num streamPort);
 
     virtual void CreateServer();
-    virtual OSErr ContactServer(ip_addr serverHost, port_num serverPort);
+    virtual OSErr ContactServer(IPaddress &serverAddr);
 
     virtual Boolean ServerSetupDialog(Boolean disableSome);
 

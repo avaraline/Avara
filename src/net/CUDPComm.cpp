@@ -1370,6 +1370,7 @@ void CUDPComm::CreateServer() {
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
+        RegisterPunchServer(stream);
         isConnected = true;
         isServing = true;
         myId = 0;
@@ -1386,15 +1387,18 @@ void CUDPComm::CreateServer() {
     */
 }
 
-OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
+OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
     if (noErr == CreateStream(localPort)) {
         long startTime;
         SDL_Event theEvent;
 
+        // Before we "connect", notify the punch server so it can tell the host to open a hole.
+        RequestPunch(stream, serverAddr);
+
         seed = TickCount();
         connections->myId = 0;
-        connections->port = serverPort;
-        connections->ipAddr = serverHost;
+        connections->port = serverAddr.port;
+        connections->ipAddr = serverAddr.host;
 
         SDL_Log("Connecting to %s (seed=%ld) from port %d\n", FormatAddr(connections).c_str(), seed, localPort);
 
@@ -1468,12 +1472,11 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     IPaddress addr;
     // CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     ResolveHost(&addr, address.c_str(), serverPort);
-    RequestPunch(addr);
 
     password[0] = passwordStr.length();
     BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
 
-    ContactServer(addr.host, addr.port);
+    ContactServer(addr);
     /*
     DialogPtr		clientDialog;
     short			itemHit;

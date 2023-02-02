@@ -37,7 +37,9 @@ UDPpacket * CreatePacket(int bufferSize);
 void FreePacket(UDPpacket *packet);
 
 int ResolveHost(IPaddress *address, const char *host, uint16_t port);
-void RequestPunch(IPaddress &addr);
+
+void RegisterPunchServer(int sock);
+void RequestPunch(int sock, IPaddress &addr);
 
 int CreateSocket(uint16_t port);
 void DestroySocket(int sock);
