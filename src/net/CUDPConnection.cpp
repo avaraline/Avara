@@ -699,15 +699,13 @@ char *CUDPConnection::WriteAcks(char *dest) {
 }
 
 void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
-    short i;
-
     if (next)  // recurse down the chain of connections
         next->MarkOpenConnections(table);
 
     if (port && myId != 0) {
-        for (i = 0; i < itsOwner->maxClients; i++) {
+        for (int i = 0; i < itsOwner->maxClients; i++) {
             if (table->host == ipAddr && table->port == port) {
-                table->host = 0; // this connection is already open
+                table->host = 0; // this connection is being used
                 table->port = 0;
                 return;
             }
@@ -719,6 +717,29 @@ void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
         ipAddr = 0;
         myId = -1;
         FlushQueues();
+    }
+}
+
+bool IsLocalhost(in_addr_t host) {
+    static in_addr_t localhost = inet_addr("127.0.0.1");
+    return (host == localhost);
+}
+
+void CUDPConnection::RewriteConnections(CompleteAddress *table) {
+    // this is called from CUDPComm::connections[0] which should point to the server's connection
+    ip_addr serverHost = ipAddr;
+
+    // the connection table represents what the server sees as connections coming in, so
+    // we may need to rewrite some of those hosts/ports to allow this client to connect to another client
+    // depending on the LAN/WAN situation
+    for (int i = 0; i < itsOwner->maxClients; i++) {
+        if (IsLocalhost(table->host)) {
+            // if the server sees the connection coming from localhost, change the host to whatever host we connected to server with
+            table->host = serverHost;
+        }
+        // TODO: what if host is the IP of the router?  e.g. someone connects to a LAN game using the WAN address
+        // else if (IsWanRouter(table->host)) { /* do something, might have to send local IP address to the server??? */ }
+        table++;
     }
 }
 
@@ -746,7 +767,7 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
 
 
 void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16_t firstReceiveSerial) {
-    SDL_Log("CUDPConnection::FreshClient connecting from %s\n", FormatHostPort(remoteHost, remotePort).c_str());
+    SDL_Log("CUDPConnection::FreshClient connection = %s\n", FormatHostPort(remoteHost, remotePort).c_str());
     FlushQueues();
     serialNumber = INITIAL_SERIAL_NUMBER;
     receiveSerial = serialNumber + firstReceiveSerial;
@@ -774,7 +795,7 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
 
     ipAddr = remoteHost;
     port = remotePort;
-    
+
     //IPaddress addr = { remoteHost, remotePort };
     //Punch(itsOwner->stream, addr);
 }

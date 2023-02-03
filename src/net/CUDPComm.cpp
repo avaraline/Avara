@@ -40,6 +40,7 @@ int numToDrop = 0;
 #include "CommandList.h"
 #include "Preferences.h"
 #include "System.h"
+#include "Debug.h"
 
 #include <miniupnpc/miniupnpc.h>
 #include <miniupnpc/upnpcommands.h>
@@ -375,6 +376,18 @@ void CUDPComm::ProcessQueue() {
     */
 }
 
+std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
+    std::ostringstream oss;
+    oss << " Slot   myId   Host:Port\n";
+    oss << "------+------+---------------\n";
+    // oss << "   1   | " << FormatHostPort(table->host, table->port) << "\n";
+    int slot = 2;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next, table++, slot++) {
+        oss << "   " << slot << "  |   " << conn->myId + 1 << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    }
+    return oss.str();
+}
+
 /*
 **	The connection table contains the Id number for the receiver
 **	and an IP address + port number for every participating Id.
@@ -395,9 +408,14 @@ void CUDPComm::SendConnectionTable() {
         tablePack->command = kpPacketProtocolTOC;
 
         //	Fill in the table first:
+        // int i=0;
         for (conn = connections; conn; conn = conn->next) {
             if (conn->port && !conn->killed) {
+                // if (i++ < 1) {
+                //     table->host = SDL_SwapBE32(0x68e809d0);
+                // } else {
                 table->host = conn->ipAddr;
+                // }
                 table->port = conn->port;
             } else {
                 table->host = 0;
@@ -405,6 +423,8 @@ void CUDPComm::SendConnectionTable() {
             }
             table++;
         }
+
+        DBG_Log("login", "Sending Connection Table ...\n%s", FormatConnectionTable((CompleteAddress *)tablePack->dataBuffer).c_str());
 
         tablePack->dataLen = ((Ptr)table) - tablePack->dataBuffer;
 
@@ -537,11 +557,18 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     clientReady = true;
 
     table = (CompleteAddress *)thePacket->dataBuffer;
+    DBG_Log("login", "Received Connection Table ...\n%s", FormatConnectionTable(table).c_str());
+
     table[myId - 1].host = 0; // don't want to connect to myself
     table[myId - 1].port = 0;
-
     connections->MarkOpenConnections(table);
+    DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
+
+    connections->RewriteConnections(table);
+    DBG_Log("login", "After rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+
     connections->OpenNewConnections(table);
+    DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
@@ -561,6 +588,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
         case kpPacketProtocolTOC:
             if (!isServing && thePacket->p3 == seed) {
                 ReadFromTOC(thePacket);
+                DBG_Log("login", "sending kpPacketProtocolTOC to kdEveryone\n");
                 SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
             }
             break;

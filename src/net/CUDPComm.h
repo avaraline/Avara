@@ -12,6 +12,7 @@
 #include "CCommManager.h"
 #include "CommDefs.h"
 #include "Types.h"
+#include "CUDPConnection.h"
 
 #include <string>
 
@@ -114,6 +115,7 @@ public:
     virtual void ForwardPacket(PacketInfo *thePacket);
     virtual void ProcessQueue();
 
+    virtual std::string FormatConnectionTable(CompleteAddress *table);
     virtual void SendConnectionTable();
     virtual void ReadFromTOC(PacketInfo *thePacket);
 

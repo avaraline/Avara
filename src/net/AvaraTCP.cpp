@@ -9,7 +9,7 @@
 
 #define MAIN_AVARA_TCP
 
-#ifdef _WIN32 
+#ifdef _WIN32
 typedef int socklen_t;
 /* POSIX ssize_t is not a thing on Windows */
 typedef signed long long int ssize_t;
@@ -311,6 +311,7 @@ void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *use
 
 // A utility function to byte-swap the host & port and create a human-readable format
 #include <sstream>
+
 std::string FormatHostPort(uint32_t host, uint16_t port) {
     std::ostringstream os;
     ip_addr ipaddr = SDL_SwapBE32(host);
