@@ -775,8 +775,8 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     ipAddr = remoteHost;
     port = remotePort;
     
-    IPaddress addr = { remoteHost, remotePort };
-    Punch(itsOwner->stream, addr);
+    //IPaddress addr = { remoteHost, remotePort };
+    //Punch(itsOwner->stream, addr);
 }
 
 Boolean CUDPConnection::AreYouDone() {

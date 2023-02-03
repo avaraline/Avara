@@ -289,7 +289,7 @@ void UDPRead(int sock, ReadCompleteProc callback, void *userData) {
 
 void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *userData) {
     if (sock != -1) {
-        SDL_Log("writing %d bytes to %s", packet->len, FormatAddress(packet->address).c_str());
+        //SDL_Log("writing %d bytes to %s", packet->len, FormatAddress(packet->address).c_str());
         struct sockaddr_in sock_addr;
         memset(&sock_addr, 0, sizeof(sock_addr));
         sock_addr.sin_addr.s_addr = packet->address.host;
