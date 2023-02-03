@@ -40,12 +40,20 @@ typedef struct {
     void *userData;
 } UDPReadData;
 
+typedef struct __attribute__((packed)) {
+    uint8_t command;
+    IPaddress address;
+} PunchPacket;
+
+enum { kPunchPing = 1, kPunchRequest = 2, kPunch = 3 };
+
 static Boolean gAvaraTCPOpen = false;
 static int gReadSocket = -1;
 UDPReadData gReadCallback;
 
 static int gPunchSocket = -1;
 static IPaddress punchServer = {0, 0};
+static IPaddress punchLocal = {0, 0};
 static uint32_t lastPunchPing = 0;
 
 OSErr PascalStringToAddress(StringPtr name, ip_addr *addr) {
@@ -62,8 +70,8 @@ OSErr OpenAvaraTCP() {
     }
     SDL_Log("OpenAvaraTCP\n");
     
-    // TODO: this could be random?
-    //gPunchSocket = CreateSocket(29555);
+    // TODO: this should probably be random?
+    gPunchSocket = CreateSocket(29555);
 
     // TODO: make this configurable
     ResolveHost(&punchServer, "avara.io", 19555);
@@ -96,7 +104,7 @@ int CreateSocket(uint16_t port) {
 
 void DestroySocket(int sock) {
     if(sock != -1) {
-        gReadSocket = -1;
+        if (sock == gReadSocket) gReadSocket = -1;
         if (sock == gPunchSocket) gPunchSocket = -1;
         close(sock);
     }
@@ -136,11 +144,9 @@ int ResolveHost(IPaddress *address, const char *host, uint16_t port) {
     return noErr;
 }
 
-void PingPunchServer() {
-    if (gPunchSocket == -1) return;
-
-    SDL_Log("Pinging the punch server");
-
+void PunchSend(uint8_t cmd, IPaddress &addr) {
+    PunchPacket pp = {cmd, addr};
+    //SDL_Log("Sending PunchPacket %d = %s", cmd, FormatAddress(pp.address).c_str());
     struct sockaddr_in sock_addr;
     memset(&sock_addr, 0, sizeof(sock_addr));
     sock_addr.sin_addr.s_addr = punchServer.host;
@@ -148,37 +154,29 @@ void PingPunchServer() {
     sock_addr.sin_family = AF_INET;
     sendto(
         gPunchSocket,
-        "",
-        0,
+        (char *)&pp,
+        sizeof(PunchPacket),
         0,
         (struct sockaddr *)&sock_addr,
         sizeof(sock_addr)
     );
 }
 
-void RegisterPunchServer(int sock) {
-    gPunchSocket = sock;
+void PingPunchServer() {
+    if (gPunchSocket == -1 || punchLocal.port == 0) return;
+    PunchSend(kPunchPing, punchLocal);
+}
+
+void RegisterPunchServer(IPaddress &localAddr) {
+    memcpy(&punchLocal, &localAddr, sizeof(IPaddress));
+    SDL_Log("Registering server at %s", FormatAddress(localAddr).c_str());
     PingPunchServer();
 }
 
-void RequestPunch(int sock, IPaddress &addr) {
-    if (sock == -1) return;
-
+void RequestPunch(IPaddress &addr) {
+    if (gPunchSocket == -1) return;
     SDL_Log("Requesting that %s punch a hole", FormatAddress(addr).c_str());
-
-    struct sockaddr_in sock_addr;
-    memset(&sock_addr, 0, sizeof(sock_addr));
-    sock_addr.sin_addr.s_addr = punchServer.host;
-    sock_addr.sin_port = punchServer.port;
-    sock_addr.sin_family = AF_INET;
-    sendto(
-        sock,
-        (char *)&addr,
-        6,
-        0,
-        (struct sockaddr *)&sock_addr,
-        sizeof(sock_addr)
-    );
+    PunchSend(kPunchRequest, addr);
 }
 
 void Punch(int sock, IPaddress &addr) {
@@ -192,13 +190,13 @@ void Punch(int sock, IPaddress &addr) {
     sock_addr.sin_port = addr.port;
     sock_addr.sin_family = AF_INET;
     sendto(
-        sock,
-        "",
-        0,
-        0,
-        (struct sockaddr *)&sock_addr,
-        sizeof(sock_addr)
-    );
+       sock,
+       "",
+       0,
+       0,
+       (struct sockaddr *)&sock_addr,
+       sizeof(sock_addr)
+   );
 }
 
 void CheckSockets() {
@@ -207,24 +205,53 @@ void CheckSockets() {
         return;
     }
 
-    if (gPunchSocket != -1) {
+    if (gReadSocket == -1 && gPunchSocket == -1) return;
+
+    if (gPunchSocket != -1 ) {
         if (lastPunchPing == 0 || (SDL_GetTicks() - lastPunchPing >= PUNCHTIME)) {
             PingPunchServer();
             lastPunchPing = SDL_GetTicks();
         }
     }
-    
-    if (gReadSocket == -1) return;
 
     fd_set readSet;
     FD_ZERO(&readSet);
-    FD_SET(gReadSocket, &readSet);
+    if (gReadSocket != -1) FD_SET(gReadSocket, &readSet);
+    if (gPunchSocket != -1) FD_SET(gPunchSocket, &readSet);
 
     timeval timeout;
     timeout.tv_sec = 0;
     timeout.tv_usec = 0;
     
-    if (select(gReadSocket + 1, &readSet, NULL, NULL, &timeout) > 0) {
+    auto n = std::max(gReadSocket, gPunchSocket) + 1;
+    if (select(n, &readSet, NULL, NULL, &timeout) > 0) {
+        if (FD_ISSET(gPunchSocket, &readSet)) {
+            PunchPacket pp;
+            struct sockaddr_in addr;
+            socklen_t len = sizeof(addr);
+            auto bytesRead = recvfrom(
+                gPunchSocket,
+                (char *)&pp,
+                sizeof(PunchPacket),
+                0,
+                (struct sockaddr *)&addr,
+                &len
+            );
+            if (bytesRead == sizeof(PunchPacket)) {
+                SDL_Log("Got packet from punch server - (%d) %s", pp.command, FormatAddress(pp.address).c_str());
+                if (pp.command == kPunch) {
+                    if (gReadSocket != -1) {
+                        Punch(gReadSocket, pp.address);
+                    }
+                    else {
+                        SDL_Log("gReadSocket is not valid");
+                    }
+                }
+            }
+            else {
+                SDL_Log("Unknown response from punch server, %ld bytes", bytesRead);
+            }
+        }
         if (FD_ISSET(gReadSocket, &readSet)) {
             struct sockaddr_in addr;
             socklen_t len = sizeof(addr);
@@ -237,19 +264,14 @@ void CheckSockets() {
                 (struct sockaddr *)&addr,
                 &len
             );
+            packet->len = static_cast<int>(bytesRead);
+            packet->address.host = addr.sin_addr.s_addr;
+            packet->address.port = addr.sin_port;
             if (bytesRead > 0) {
-                packet->len = static_cast<int>(bytesRead);
-                packet->address.host = addr.sin_addr.s_addr;
-                packet->address.port = addr.sin_port;
-                if (packet->address.host == punchServer.host && packet->address.port == punchServer.port && packet->len == 6) {
-                    IPaddress addr;
-                    memcpy(&addr, packet->data, 6);
-                    SDL_Log("Got address from punch server - %s", FormatAddress(addr).c_str());
-                    Punch(gReadSocket, addr);
-                }
-                else {
-                    gReadCallback.callback(packet, gReadCallback.userData);
-                }
+                gReadCallback.callback(packet, gReadCallback.userData);
+            }
+            else {
+                SDL_Log("Read 0 bytes from %s", FormatAddress(packet->address).c_str());
             }
             FreePacket(packet);
         }
@@ -267,6 +289,7 @@ void UDPRead(int sock, ReadCompleteProc callback, void *userData) {
 
 void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *userData) {
     if (sock != -1) {
+        SDL_Log("writing %d bytes to %s", packet->len, FormatAddress(packet->address).c_str());
         struct sockaddr_in sock_addr;
         memset(&sock_addr, 0, sizeof(sock_addr));
         sock_addr.sin_addr.s_addr = packet->address.host;

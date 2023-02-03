@@ -14,7 +14,7 @@
 #define UDPSTREAMBUFFERSIZE 16384
 #define UDPSENDBUFFERSIZE 1024
 
-typedef struct {
+typedef struct __attribute__((packed)) {
     uint32_t host;
     uint16_t port;
 } IPaddress;
@@ -38,8 +38,9 @@ void FreePacket(UDPpacket *packet);
 
 int ResolveHost(IPaddress *address, const char *host, uint16_t port);
 
-void RegisterPunchServer(int sock);
-void RequestPunch(int sock, IPaddress &addr);
+void RegisterPunchServer(IPaddress &localAddr);
+void RequestPunch(IPaddress &addr);
+void Punch(int sock, IPaddress &addr);
 
 int CreateSocket(uint16_t port);
 void DestroySocket(int sock);

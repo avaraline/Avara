@@ -1370,7 +1370,9 @@ void CUDPComm::CreateServer() {
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
-        RegisterPunchServer(stream);
+        IPaddress localAddr = {htonl(localIP), htons(localPort)};
+        RegisterPunchServer(localAddr);
+
         isConnected = true;
         isServing = true;
         myId = 0;
@@ -1393,7 +1395,7 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
         SDL_Event theEvent;
 
         // Before we "connect", notify the punch server so it can tell the host to open a hole.
-        RequestPunch(stream, serverAddr);
+        RequestPunch(serverAddr);
 
         seed = TickCount();
         connections->myId = 0;
