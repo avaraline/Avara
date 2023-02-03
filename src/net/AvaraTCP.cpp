@@ -95,6 +95,7 @@ int CreateSocket(uint16_t port) {
         if (bind(sock, (struct sockaddr *)&sock_addr, sizeof(sock_addr)) == -1) {
             SDL_Log("Failed to bind socket to port %d", port);
             DestroySocket(sock);
+            return -1;
         }
     } else {
         SDL_Log("Failed to create socket on port %d", port);
