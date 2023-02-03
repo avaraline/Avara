@@ -141,10 +141,7 @@ void CAvaraAppImpl::Done() {
 void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
-    if(itsGame->GameTick()) {
-        RenderContents();
-    }
-
+    itsGame->GameTick();
     itsGUI->Update();
 }
 
@@ -160,14 +157,6 @@ void CAvaraAppImpl::drawContents() {
     }
     itsGame->Render(nvg_context);
     itsGUI->Render(nvg_context);
-}
-
-// display only the game screen, not the widgets
-void CAvaraAppImpl::RenderContents() {
-    glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    drawContents();
-    SDL_GL_SwapWindow(mSDLWindow);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {

@@ -57,6 +57,7 @@ nlohmann::json LoadLevelListFromJSON(std::string set);
 nlohmann::json GetManifestJSON(std::string set);
 nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id);
 
+bool GetBSPPath(int resId, char* dest);
 nlohmann::json GetBSPJSON(int resId);
 std::string GetALFPath(std::string alfname);
 std::string GetDefaultScript();

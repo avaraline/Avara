@@ -33,6 +33,7 @@ class CNetManager;
 class CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) = 0;
+    virtual void drawContents() = 0;
     virtual void GameStarted(std::string set, std::string level) = 0;
     virtual void MessageLine(short index, MsgAlignment align) = 0;
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) = 0;
@@ -86,7 +87,7 @@ public:
 
     virtual std::deque<MsgLine>& MessageLines() override;
     virtual void idle();
-    virtual void drawContents();
+    virtual void drawContents() override;
 
     virtual bool DoCommand(int theCommand) override;
     virtual void WindowResized(int width, int height) override;

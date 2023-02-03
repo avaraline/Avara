@@ -125,6 +125,7 @@ public:
 class TestApp : public CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) {return false;}
+    virtual void drawContents() {}
     virtual void MessageLine(short index, MsgAlignment align) {}
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) {}
     virtual void RenderContents() {};

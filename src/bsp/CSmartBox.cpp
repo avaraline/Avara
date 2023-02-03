@@ -106,12 +106,12 @@ void CSmartBox::ISmartBox(short resId,
     uint32_t altColor,
     CAbstractActor *anActor,
     short aPartCode) {
-    bspsResource **config;
     Fixed baseSize;
     Boolean stretchFlag;
 
-    char* bsp = GetBSPPath(resId);
-    if (bsp == NULL) {
+    char bsp[PATH_MAX];
+    bool found = GetBSPPath(resId, bsp);
+    if (!found) {
         resId = dimensions[1] ? BOXTEMPLATERESOURCE : PLATETEMPLATERESOURCE;
     } 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);

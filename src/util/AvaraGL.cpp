@@ -153,7 +153,7 @@ glm::vec3 AvaraGLScreenSpaceToWorldSpace(CViewParameters *theView, glm::vec4 *ss
     return glm::vec3(pv * (*ss_vec));
 }
 
-void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, long color) {
+void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, uint32_t color) {
     if (!actuallyRender) return;
 
     float x = cos(Deg2Rad(elevation)) * intensity;
