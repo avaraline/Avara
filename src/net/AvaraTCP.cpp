@@ -70,8 +70,8 @@ OSErr OpenAvaraTCP() {
     }
     SDL_Log("OpenAvaraTCP\n");
     
-    // TODO: this should probably be random?
-    gPunchSocket = CreateSocket(29555);
+    // Any random unused port is fine for this (what are the odds it picks 19567?)
+    gPunchSocket = CreateSocket(0);
 
     // TODO: make this configurable
     ResolveHost(&punchServer, "avara.io", 19555);
