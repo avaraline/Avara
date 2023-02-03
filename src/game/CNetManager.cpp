@@ -31,12 +31,14 @@
 #include "System.h"
 #include "Beeper.h"
 
+#include "Debug.h"
 #include <string.h>
 
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
-#define LOWERLATENCYCOUNT 3
-#define HIGHERLATENCYCOUNT 8
+#define LOWERLATENCYCOUNT   2
+#define HIGHERLATENCYCOUNT  12    // 4*(10/240) frames at fps=16ms, 1*10/60 frames at fps=64ms, works for all fps values
+#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*8))  // 30.72 seconds
 
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
@@ -133,7 +135,7 @@ void CNetManager::ChangeNet(short netKind, std::string address) {
 void CNetManager::ChangeNet(short netKind, std::string address, std::string password) {
     CCommManager *newManager = NULL;
     Boolean confirm = true;
-    CAvaraApp *theApp = itsGame->itsApp;
+    //CAvaraApp *theApp = itsGame->itsApp;
 
     if (netKind != netStatus || !isConnected) {
         if (netStatus != kNullNet || !isConnected) {
@@ -463,7 +465,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
     SDL_Log("ReceiveLoadLevel(%d, %d, %s, %d)\n", senderSlot, originalSender, theSetAndTag, seed);
 
     std::string setAndTag(theSetAndTag);
-    int pos = setAndTag.find("/");
+    auto pos = setAndTag.find("/");
     std::string set = setAndTag.substr(0, pos);
     std::string tag = setAndTag.substr(pos + 1, std::string::npos);
 
@@ -530,7 +532,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
 }
 
 void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag) {
-    short i;
+    size_t i;
 
     SDL_Log("LevelLoadStatus(senderSlot=%d, crc=%d, err=%d, tag=%s)\n", senderSlot, crc, err, theTag.c_str());
     SDL_Log("   loaderSlot = %d\n", loaderSlot);
@@ -545,9 +547,10 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
     if (senderSlot == loaderSlot) {
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             playerTable[i]->LoadStatusChange(crc, err, theTag);
-            SDL_Log("CNetManager::LevelLoadStatus loop\n");
 
         }
+
+        SDL_Log("CNetManager::LevelLoadStatus loop x%lu\n", i);
     } else {
         thePlayer->LoadStatusChange(
             playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());
@@ -574,7 +577,7 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     do {
         if (TickCount() > debugTime) {
             SDL_Log("CNetManager::GatherPlayers loop\n");
-            debugTime = TickCount() + 1000 / MSEC_PER_TICK_COUNT;
+            debugTime = TickCount() + MSEC_TO_TICK_COUNT(1000);
         }
         ProcessQueue();
         goAhead = (TickCount() - lastTime < 1800);
@@ -611,7 +614,6 @@ void CNetManager::ResumeGame() {
     CPlayerManager *thePlayerManager;
     long lastTime;
     Boolean notReady;
-    Boolean allOk = false;
 
     SDL_Log("CNetManager::ResumeGame\n");
     config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
@@ -640,6 +642,7 @@ void CNetManager::ResumeGame() {
 
     ResetLatencyVote();
     addOneLatency = 0;
+    subtractOneCheck = 0;
     localLatencyVote = 0;
     latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
@@ -726,39 +729,65 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             long maxRoundLatency;
             short maxId = 0;
 
-            latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
-            maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution, &maxId);
-            maxPlayer = playerTable[maxId];
+            // only compute latency numbers to/from players still playing
+            if (IAmAlive()) {
 
-            itsCommManager->SendUrgentPacket(
-                activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
-            #if LATENCY_DEBUG
-                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld FRandSeed=%d\n",
-                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency, FRandSeed);
-            #endif
+                latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
+                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
+                maxPlayer = playerTable[maxId];
+                uint8_t llv = std::min(long(UINT8_MAX), localLatencyVote);  // just in case, p1 can only accept a max of 256
+
+                itsCommManager->SendUrgentPacket(
+                    activePlayersDistribution, kpLatencyVote, llv, maxRoundLatency, FRandSeed, 0, NULL);
+                #if LATENCY_DEBUG
+                    SDL_Log("*** fn=%ld SENDING kpLatencyVote to %hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
+                            frameNumber, activePlayersDistribution, localLatencyVote, maxRoundLatency, FRandSeed);
+                #endif
+            } else {
+                // spectator just sends FRandSeed to self for fragmentation check
+                itsCommManager->SendUrgentPacket(
+                    SelfDistribution(), kpLatencyVote, 0, 0, FRandSeed, 0, NULL);
+            }
             localLatencyVote = 0;
-        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
+            latencyVoteOpen = true;
+        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && latencyVoteOpen) {
+
             if (fragmentDetected) {
                 itsGame->itsApp->MessageLine(kmFragmentAlert, MsgAlignment::Center);
-                fragmentDetected = false;
+                itsGame->itsApp->AddMessageLine(FragmentMapToString(), MsgAlignment::Left, MsgCategory::Error);
             }
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
-                short maxFrameLatency;
-
                 autoLatencyVote /= autoLatencyVoteCount;
+                DBG_Log("lt", "====autoLatencyVote = %ld\n", autoLatencyVote);
+                // if, on average, players had to wait more than some percent of frames during this latency vote period,
+                // then add 1 frame to the LT calculation
+                if (autoLatencyVote > HIGHERLATENCYCOUNT) {
+                    addOneLatency++;
+                    // don't let it go above 1.0 LT
+                    addOneLatency = std::min(short(1.0/itsGame->fpsScale), addOneLatency);
+                    DBG_Log("lt", "  ++addOneLatency increased = %hd\n", addOneLatency);
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                } else if (autoLatencyVote > LOWERLATENCYCOUNT) {
+                    // vote too high to reduce addOneLatency, push subtractOneCheck forward
+                    DBG_Log("lt", "   >addOneLatency keeping = %hd\n", addOneLatency);
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                } else if (addOneLatency > 0 && frameNumber >= subtractOneCheck) {
+                    // if no significant waiting seen for 8 CONSECUTIVE autoLatency votes, about 30 seconds, let it creep back down 1 fps frame
+                    addOneLatency--;
+                    DBG_Log("lt", "  --addOneLatency decreased = %hd\n", addOneLatency);
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                }
 
-                // if (autoLatencyVote > HIGHERLATENCYCOUNT) {
-                //     addOneLatency = 1;
-                // }
+                // Usually maxFrameLatency is determined primarily by maxRoundTripLatency...
+                // but addOneLatency helps account for deficiencies in the calculation by measuring how often clients had to wait too long for packets to arrive
+                short maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
-
-                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, FL=%d\n",
+                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
                         frameNumber, maxRoundTripLatency,
-                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), maxFrameLatency);
+                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, maxFrameLatency);
 
-                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
+                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer);
             }
 
             ResetLatencyVote();
@@ -787,6 +816,64 @@ void CNetManager::ResetLatencyVote() {
     autoLatencyVoteCount = 0;
     maxRoundTripLatency = 0;
     maxPlayer = nullptr;
+    latencyVoteOpen = false;
+    fragmentMap.clear();
+}
+
+void CNetManager::ReceiveLatencyVote(int16_t sender,
+                                     uint8_t p1,        // localLatencyVote (uint8_t because it can go as high as 3840/16=240)
+                                     int16_t p2,        // maxRoundLatency
+                                     int32_t p3) {      // FRandSeed
+
+    DBG_Log("lt", "CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
+    autoLatencyVoteCount++;
+    autoLatencyVote += p1;
+
+    maxRoundTripLatency = std::max(maxRoundTripLatency, p2);
+
+    playerTable[sender]->RandomKey(p3);
+
+    // to be considered for fragmentation, packet must be received in the voting time window
+    if (IsFragmentCheckWindowOpen()) {
+        // keep track of who is which FRandSeed. Normally everyone on the same value, but with frags this identifies who is different
+        if (fragmentMap.find(p3) == fragmentMap.end()) {
+            fragmentMap[p3] = std::vector<int16_t>();
+        }
+        fragmentMap[p3].push_back(sender);
+
+        if (fragmentCheck == 0) {
+            // the first vote received dictates what the fragmentCheck value is, not necessarily the current player
+            fragmentDetected = false;
+            fragmentCheck = p3;
+            // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %u", fragmentCheck, itsGame->frameNumber);
+        } else {
+            // any votes after the first must have a matching p3 value
+            if (fragmentCheck != p3) {
+                SDL_Log("FRAGMENTATION %d != %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
+                fragmentDetected = true;
+            // } else {
+            //     SDL_Log("No frags detected so far %d == %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
+            }
+        }
+    } else {
+        SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%u",
+                p3, itsGame->frameNumber);
+    }
+}
+
+std::string CNetManager::FragmentMapToString() {
+    std::ostringstream os;
+    bool firstFrag = true;
+    for (auto const& pair : fragmentMap) {
+        if (!firstFrag) { os << std::endl; }
+        os << std::hex << std::setfill('0') << std::setw(sizeof(int32_t)*2) << pair.first << ": [";
+        for (auto const& slot : pair.second) {
+            os << " " << playerTable[slot]->GetPlayerName();
+        }
+        os << " ]";
+        firstFrag = false;
+    }
+    return os.str();
 }
 
 void CNetManager::ViewControl() {
@@ -817,7 +904,7 @@ void CNetManager::SendStartCommand(int16_t originalSender) {
         // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if (playerTable[i]->LoadingStatus() == kLLoaded) {
+            if (playerTable[i]->LoadingStatus() == kLLoaded || playerTable[i]->LoadingStatus() == kLReady) {
                 activePlayersDistribution |= 1 << i;
             }
         }
@@ -1003,7 +1090,7 @@ void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std:
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         nlohmann::json message = nlohmann::json::parse(json);
         playerTable[slotId]->RandomKey(randomKey);
-
+        /*
         if(message.type() == nlohmann::json::value_t::object) {
             auto it = message.begin();
 
@@ -1011,6 +1098,7 @@ void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std:
                 bool xyz = it.value();
             }
         }
+        */
     }
 }
 
@@ -1028,6 +1116,18 @@ short CNetManager::PlayerCount() {
     }
 
     return playerCount;
+}
+
+short CNetManager::SelfDistribution() {
+    return (1 << itsCommManager->myId);
+}
+
+short CNetManager::AlivePlayersDistribution() {
+    return activePlayersDistribution & ~deadOrDonePlayers;
+}
+
+bool CNetManager::IAmAlive() {
+    return AlivePlayersDistribution() & SelfDistribution();
 }
 
 void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
@@ -1257,19 +1357,6 @@ void CNetManager::NewArrival(short slot) {
 
 void CNetManager::ResultsReport(Ptr results) {
     itsGame->scoreKeeper->ReceiveResults((int32_t *)results);
-}
-
-void CNetManager::Beep() {
-    Beep();
-    /*
-    if(gAsyncBeeper)
-    {	Str255		bellSoundName;
-        Handle		theSound;
-
-        gApplication->ReadStringPref(kBellSoundTag, bellSoundName);
-        gAsyncBeeper->PlayNamedBeep(bellSoundName);
-    }
-    */
 }
 
 /*

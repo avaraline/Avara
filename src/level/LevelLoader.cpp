@@ -55,8 +55,8 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     theLoc[0] = lastDomeCenter.h;
     theLoc[2] = lastDomeCenter.v;
     theLoc[3] = 0;
-    *startAngle = FDegToOne(((long)lastDomeAngle) << 16);
-    *spanAngle = FDegToOne(((long)lastDomeSpan) << 16);
+    *startAngle = FDegToOne(FIX(lastDomeAngle));
+    *spanAngle = FDegToOne(FIX(lastDomeSpan));
 
     return lastDomeRadius;
 }
@@ -88,17 +88,20 @@ Fixed GetLastOval(Fixed *theLoc) {
 }
 
 Fixed GetLastArcDirection() {
-    return FDegToOne(((long)lastArcAngle) << 16);
+    return FDegToOne(FIX(lastArcAngle));
 }
 
 struct ALFWalker: pugi::xml_tree_walker {
     virtual bool for_each(pugi::xml_node& node) {
         std::string tag = node.name();
+        std::string val;
 
         switch (node.type()){
             case pugi::node_element:
                 handle_element(node, tag);
-                RunThis((StringPtr)node.child_value());
+                val = node.child_value();
+                if (val.length() > 0)
+                RunThis((StringPtr)val.c_str());
                 break;
             default:
                 break;
@@ -134,6 +137,8 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_element(pugi::xml_node& node, std::string& name) {
         // eval ALL node attributes and put them into the symbol table
+        // unless it's a 'unique' and then it doesn't make any sense
+        if (name.compare("unique") != 0)
         handle_set(node);
         // Read any global state we can from the element.
         read_context(node);
@@ -217,7 +222,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
 
         if (!node.attribute("angle").empty()) {
-            int arcAngle = ReadLongVar("angle");
+            short arcAngle = ReadShortVar("angle");
 
             lastArcAngle = (900 - arcAngle) % 360;
             lastDomeAngle = 360 - arcAngle;
@@ -231,7 +236,7 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_dome(pugi::xml_node& node) {
         if (!node.attribute("quarters").empty()) {
-            int extent = ReadLongVar("quarters") * 90;
+            short extent = ReadShortVar("quarters") * 90;
             lastDomeSpan = (extent >= 90 && extent <= 360)
                 ? extent
                 : 360;
@@ -254,12 +259,16 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_set(pugi::xml_node& node) {
         std::stringstream script;
+        bool wrote = false;
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             std::string attr = fix_attr(ait->name());
             std::string value = quote_attr(attr, ait->value());
-            script << attr << " = " << value << "\r";
+            script << attr << " = " << value << "\n";
+            wrote = true;
         }
-        RunThis((StringPtr)script.str().c_str());
+        std::string result = script.str();
+        if (wrote && result.length() > 0)
+        RunThis((StringPtr)result.c_str());
     }
 
     void handle_script(pugi::xml_node& node) {

@@ -9,6 +9,7 @@
 #include "CScoreKeeper.h"
 #include "Preferences.h"
 #include "RGBAColor.h"
+#include "Debug.h"
 
 //#include <nanogui/colorcombobox.h>
 //#include <nanogui/layout.h>
@@ -168,7 +169,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     };
     /*
     for(const auto &heading : headings) {
-        auto t = scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
+        scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
     }
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
@@ -206,7 +207,14 @@ void CRosterWindow::UpdateRoster() {
             std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             if (i != theNet->itsCommManager->myId && theName.length() > 0) {
                 long rtt = theNet->itsCommManager->GetMaxRoundTrip(1 << i);
-                theName += std::string(" (") + std::to_string(rtt) + " ms)";
+                float loss = 100*theNet->itsCommManager->GetMaxMeanReceiveCount(1 << i);
+                std::ostringstream os;
+                os << theName << " (" << rtt << "ms";
+                if (Debug::IsEnabled("loss")) {
+                    os << "/" << std::setprecision(loss < 2 ? 1 : 0) << std::fixed << loss << "%";
+                }
+                os << ")";
+                theName = os.str();
                 maxRtt = std::max(maxRtt, rtt);
             }
             std::string theStatus = GetStringStatus(thisPlayer);
@@ -228,7 +236,7 @@ void CRosterWindow::UpdateRoster() {
 
         if (maxRtt > 0 && theNet->IsAutoLatencyEnabled() && !theGame->IsPlaying()) {
             // set initial frame latency from client ping/RTT times
-            maxRtt = std::min(maxRtt, long(CLASSICFRAMETIME*2*4));  // max of 4 LT on the UI
+            maxRtt = std::min(maxRtt+CLASSICFRAMETIME, long(CLASSICFRAMETIME*2*4));  // max of 4 LT on the UI
             theGame->SetFrameLatency(theGame->RoundTripToFrameLatency(maxRtt), -1);
         }
 
@@ -302,6 +310,8 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
     } else if (status == kLConnected) {
         strStatus = "connected";
     } else if (status == kLLoaded) {
+        strStatus = "loaded";
+    } else if (status == kLReady) {
         strStatus = "ready";
     } else if (status == kLWaiting) {
         strStatus = "waiting";

@@ -90,7 +90,6 @@ OSErr CCommManager::SendPacket(short distribution,
                                long p3,
                                short dataLen,
                                Ptr dataPtr) {
-    long len;
     Ptr ps, pd;
 
     PacketInfo *thePacket;
@@ -136,7 +135,6 @@ OSErr CCommManager::SendUrgentPacket(short distribution,
     long p3,
     short dataLen,
     Ptr dataPtr) {
-    long len;
     Ptr ps, pd;
 
     PacketInfo *thePacket;
@@ -400,5 +398,11 @@ Boolean CCommManager::ReconfigureAvailable() {
 void CCommManager::Reconfigure() {}
 
 long CCommManager::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
+    return 0; //	Local net.
+}
+float CCommManager::GetMaxMeanSendCount(short distribution) {
+    return 0; //	Local net.
+}
+float CCommManager::GetMaxMeanReceiveCount(short distribution) {
     return 0; //	Local net.
 }

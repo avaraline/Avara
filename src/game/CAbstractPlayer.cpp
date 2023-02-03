@@ -37,6 +37,8 @@
 #include "Parser.h"
 #include "Preferences.h"
 
+#include "Debug.h"
+
 #define MOUSESHOOTDELAY 8
 // replaced by kFOV preference
 //#define MAXFOV FIX(60)
@@ -195,7 +197,7 @@ void CAbstractPlayer::ReplacePartColors() {
     }
 }
 
-void CAbstractPlayer::SetSpecialColor(long specialColor) {
+void CAbstractPlayer::SetSpecialColor(uint32_t specialColor) {
     longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
@@ -231,8 +233,6 @@ void CAbstractPlayer::BeginScript() {
 }
 
 CAbstractActor *CAbstractPlayer::EndScript() {
-    short i;
-
     CRealMovers::EndScript();
 
     doIncarnateSound = true;
@@ -345,7 +345,6 @@ void CAbstractPlayer::PlaceHUDParts() {
     Matrix *mt;
     CBSPPart *theSight;
     CAbstractActor *theActor;
-    CSmartPart **thePartList;
     RayHitRecord theHit;
     CWeapon *weapon = NULL;
 
@@ -443,7 +442,6 @@ void CAbstractPlayer::PlaceHUDParts() {
 
 void CAbstractPlayer::ControlSoundPoint() {
     Fixed theRight[] = {FIX(-1), 0, 0};
-    SoundLink *listener;
     Matrix *m;
 
     m = &viewPortPart->itsTransform;
@@ -457,7 +455,6 @@ void CAbstractPlayer::ControlSoundPoint() {
 
 void CAbstractPlayer::ControlViewPoint() {
     CViewParameters *theView;
-    Matrix tempMat;
     Fixed viewDist;
     // CInfoPanel       *infoPanel;
     Fixed frameYon;
@@ -947,6 +944,13 @@ void CAbstractPlayer::FrameAction() {
         if (doIncarnateSound) {
             IncarnateSound();
         }
+
+        // if a frag frame is specified with /dbg, force a frag on that frame by messing with FRandSeed
+        int fragFrame = Debug::GetValue("frag");
+        if (fragFrame > 0 && itsGame->frameNumber == fragFrame) {
+            extern Fixed FRandSeed; // to intentionally cause frags below
+            FRandSeed += 1;
+        }
     }
 }
 
@@ -1326,7 +1330,6 @@ Boolean CAbstractPlayer::TryTransport(Fixed *where, short soundId, Fixed volume,
         CBasicSound *theSound;
         short count = 10;
         short life = 8;
-        SoundLink *aLink;
 
         if (options & kFragmentOption) {
             location[0] = oldLoc[0];
@@ -1539,8 +1542,7 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
 }
 
 Fixed CAbstractPlayer::GetTotalMass() {
-    return (((long)boostsRemaining) << 18) + (((long)grenadeCount) << 16) + (((long)missileCount) << 16) +
-           CRealMovers::GetTotalMass();
+    return (FIX(boostsRemaining) << 2) + FIX(grenadeCount) + FIX(missileCount) + CRealMovers::GetTotalMass();
 }
 
 void CAbstractPlayer::PlayerWasMoved() {

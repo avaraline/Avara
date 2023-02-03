@@ -74,14 +74,14 @@ public:
     std::string loadedDesigner = "";
     std::string loadedInfo = "";
     long loadedTimeLimit;
-    long timeInSeconds;
-    long frameNumber;
+    uint32_t timeInSeconds;
+    uint32_t frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
 
     long topSentFrame;
 
-    long frameTime; //	In milliseconds.
+    uint16_t frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
     short gameStatus;
@@ -89,11 +89,11 @@ public:
     short pausePlayer;
 
     CAbstractActor *actorList;
-    CAbstractActor *nextActor;
+    CAbstractActor *nextActor = {0};
 
     CAbstractPlayer *playerList;
-    CAbstractPlayer *nextPlayer;
-    CAbstractPlayer *spectatePlayer;
+    CAbstractPlayer *nextPlayer = {0};
+    CAbstractPlayer *spectatePlayer = {0};
     long playersStanding;
     short teamsStandingMask;
     short teamsStanding;
@@ -183,7 +183,7 @@ public:
     long oldPlayersStanding;
     short oldTeamsStanding;
 
-    CAvaraGame(int frameTime = 64);
+    CAvaraGame(uint16_t frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
@@ -216,6 +216,7 @@ public:
     virtual void ReadGamePrefs();
 
     virtual void SendStartCommand();
+    virtual void StartIfReady();
     virtual void ResumeGame();
     virtual bool IsPlaying();
     virtual void HandleEvent(SDL_Event &event);
@@ -247,10 +248,10 @@ public:
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
     virtual long RoundTripToFrameLatency(long rtt);
-    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, const char *slowPlayer = nullptr);
+    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, CPlayerManager *slowPlayer = nullptr);
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
-    virtual void SetFrameTime(long ft);
+    virtual void SetFrameTime(uint16_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
     virtual long FramesFromNow(long classicFrames);
 

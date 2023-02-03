@@ -14,9 +14,9 @@
 #include "AvaraGL.h"
 
 void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
-    OSErr iErr;
+    //OSErr iErr;
     Vector *p;
-    short i;
+    size_t i;
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 

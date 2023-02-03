@@ -102,9 +102,6 @@ CAbstractActor *CTeleporter::EndScript() {
 }
 
 void CTeleporter::FrameAction() {
-    ActorLocator *loc;
-    short i;
-
     CPlacedActors::FrameAction();
 
     if (isActive & kHasMessage) {

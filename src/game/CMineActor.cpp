@@ -158,8 +158,6 @@ void CMineActor::Dispose() {
 }
 
 void CMineActor::FrameAction() {
-    long shapeTime;
-
     if (isActive & kHasMessage) {
         if (stopMsg.triggerCount > startMsg.triggerCount)
             enabled = false;

@@ -69,7 +69,6 @@ void CRealMovers::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 void CRealMovers::FindBestMovement(CSmartPart *objHit) {
     Vector newSpeed;
     Vector deltaSpeed, deltaLoc;
-    Fixed yDir;
     Fixed dotProd;
     Fixed absDot;
     Fixed *norm;

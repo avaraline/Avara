@@ -36,7 +36,7 @@ jobs:
         shell: msys2 {0}
         run: |
           make set-version
-          make -j2 winapp
+          make -j2 windist
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
@@ -49,35 +49,18 @@ jobs:
           asset_name: Avara-Windows-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1
-      - name: deploy fps-hybrid nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'fps-hybrid')
-        uses: WebFreak001/deploy-nightly@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/49395858/assets{?name,label}
-          release_id: 49395858
-          asset_path: ./build-main/WinAvara.zip
-          asset_name: Avara-FPS-Windows-Nightly-$$.zip
-          asset_content_type: application/zip
-          max_releases: 1
-
   macOS:
     name: macOS
     runs-on: macOS-latest
     steps:
       - name: install dependencies
         run: |
-          wget -q "https://www.libsdl.org/release/SDL2-2.0.14.dmg"
-          hdiutil attach SDL2-2.0.14.dmg
+          wget -q "https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-2.26.2.dmg"
+          hdiutil attach SDL2-2.26.2.dmg
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
       - uses: actions/checkout@v2
       - name: make
-        run: make -j2 macapp SIGNING_ID=NONE
-      - name: make tests
-        run: make tests
-      - name: print env variables
-        run: echo $GITHUB_REPOSITORY && echo $GITHUB_REF
+        run: make macdist
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
@@ -86,19 +69,7 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build/MacAvara.zip
+          asset_path: ./build-main/MacAvara.zip
           asset_name: Avara-macOS-Nightly-$$.zip
-          asset_content_type: application/zip
-          max_releases: 1
-      - name: deploy fps-hybrid nightly
-        if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'fps-hybrid')
-        uses: WebFreak001/deploy-nightly@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/49395858/assets{?name,label}
-          release_id: 49395858
-          asset_path: ./build/MacAvara.zip
-          asset_name: Avara-FPS-macOS-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1

@@ -201,7 +201,7 @@ void CFreeSolid::FrameAction() {
             if (hitPart) { //	If we hit something, cause damage to it.
                 FPS_DEBUG("---- collision with object of type " << typeid(*hitPart->theOwner).name() << " -----\n");
 
-                CAbstractActor *anActor, *next;
+                CAbstractActor *anActor;//, *next;
                 CSmartPart *thePart;
 
                 if (hitPower) {

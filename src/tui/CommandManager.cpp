@@ -8,6 +8,7 @@
 
 #include "CommDefs.h"       // kdEveryone
 #include "Resource.h"       // LevelDirNameListing
+#include "Debug.h"          // Debug::methods
 #include <random>           // std::random_device
 
 CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
@@ -16,7 +17,7 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     TextCommand* cmd;
     cmd = new TextCommand("/help            <- show list of all commands\n"
                           "/help /xyz       <- show help for command /xyz",
-                          METHOD_TO_LAMBDA(CommandManager::CommandHelp));
+                          METHOD_TO_LAMBDA_VARGS(CommandHelp));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/beep            <- ring the bell",
@@ -38,30 +39,30 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
     cmd = new TextCommand("/pref name       <- display value of named preference\n"
                           "/pref name value <- set value of named preference",
-                          METHOD_TO_LAMBDA(CommandManager::GetSetPreference));
+                          METHOD_TO_LAMBDA_VARGS(GetSetPreference));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/gg              <- good game!\n"
                           "/gg new phrase   <- change the /gg phrase",
-                          METHOD_TO_LAMBDA(CommandManager::GoodGame));
+                          METHOD_TO_LAMBDA_VARGS(GoodGame));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/kick slot       <- kick player in given slot. slots start at 1",
-                          METHOD_TO_LAMBDA(CommandManager::KickPlayer));
+                          METHOD_TO_LAMBDA_VARGS(KickPlayer));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/away            <- toggle my presence\n"
                           "/away slot       <- toggle presence of given slot, starting from 1",
-                          METHOD_TO_LAMBDA(CommandManager::ToggleAwayState));
+                          METHOD_TO_LAMBDA_VARGS(ToggleAwayState));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'",
-                          METHOD_TO_LAMBDA(CommandManager::LoadNamedLevel));
+                          METHOD_TO_LAMBDA_VARGS(LoadNamedLevel));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/random       <- load random level from all available levels\n"
                           "/random aa ex <- load random level from any set name containing either 'aa' or 'ex'",
-                          METHOD_TO_LAMBDA(CommandManager::LoadRandomLevel));
+                          METHOD_TO_LAMBDA_VARGS(LoadRandomLevel));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/vvvvv        <- clear line then output ready checkmarks \xE2\x88\x9A",
@@ -74,6 +75,11 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
         // itsApp->rosterWindow->SendRosterMessage(readyStr);
         return true;
     });
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/dbg flag     <- toggles named debugging flag on/off\n"
+                          "/dbg flag val <- sets debug flag to integer value",
+                          METHOD_TO_LAMBDA_VARGS(SetDebugFlag));
     TextCommand::Register(cmd);
 }
 
@@ -360,16 +366,20 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
     return true;
 }
 
-void CommandManager::SendRosterMessage(std::string& message) {
-    SendRosterMessage(message.length(), (char*)message.c_str());
-}
-
-void CommandManager::SendRosterMessage(const char* message) {
-    // message assumed to be NULL terminated
-    SendRosterMessage(strlen(message), (char*)message);
-}
-
-void CommandManager::SendRosterMessage(int len, char *message) {
-    itsApp->GetNet()->SendRosterMessage(len, message);
-    //chatInput->setCaption(chatInput->caption() + message);
+bool CommandManager::SetDebugFlag(VectorOfArgs vargs) {
+    if (vargs.size() == 0) {
+        itsApp->AddMessageLine("Need to specify a key");
+        return false;
+    }
+    auto key = vargs[0];
+    std::ostringstream os;
+    if (vargs.size() == 1) {
+        bool dbg = Debug::Toggle(key);
+        os << "Debugging flag " << key << " is " << (dbg ? "ON" : "OFF");
+    } else {
+        int val = Debug::SetValue(key, std::stoi(vargs[1]));
+        os << "Debugging flag " << key << " = " << val;
+    }
+    itsApp->AddMessageLine(os.str());
+    return true;
 }

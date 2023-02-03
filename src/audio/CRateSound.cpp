@@ -45,7 +45,7 @@ void CRateSound::SetRate(Fixed aRate) {
     chanRate[1] = masterRate;
 }
 
-Fixed CRateSound::GetSampleRate() {
+UnsignedFixed CRateSound::GetSampleRate() {
     return FMul(itsMixer->samplingRate, masterRate);
 }
 
@@ -67,10 +67,10 @@ void CRateSound::FirstFrame() {
     }
 }
 
-short CRateSound::CalcVolume(short theChannel) {
-    short theVol;
-    int endSample;
-    unsigned int fracAdd;
+short CRateSound::CalcVolume(int16_t theChannel) {
+    //short theVol;
+    //int endSample;
+    //unsigned int fracAdd;
 
     if (controlLink) {
         if (controlLink->meta == metaSuspend)
@@ -143,13 +143,13 @@ short CRateSound::CalcVolume(short theChannel) {
     return volumes[theChannel];
 }
 
-void CRateSound::WriteFrame(short theChannel, short volumeAllowed) {
+void CRateSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
     WordSample *d;
     WordSample *converter;
     SampleIndex ind;
     short thisCount;
     int didCount;
-    int maxOutput;
+    //int maxOutput;
     int loopCopy = loopCount[theChannel];
     Fixed rateCopy = chanRate[theChannel];
 

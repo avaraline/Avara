@@ -124,7 +124,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     );
 
     // load up a random decent starting level
-    itsTui->ExecuteMatchingCommand("/rand -normal -tre avaraline emo", CPlayerManagerImpl::LocalPlayer());
+    
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -141,7 +141,10 @@ void CAvaraAppImpl::Done() {
 void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
-    itsGame->GameTick();
+    if(itsGame->GameTick()) {
+        RenderContents();
+    }
+
     itsGUI->Update();
 }
 
@@ -157,6 +160,14 @@ void CAvaraAppImpl::drawContents() {
     }
     itsGame->Render(nvg_context);
     itsGUI->Render(nvg_context);
+}
+
+// display only the game screen, not the widgets
+void CAvaraAppImpl::RenderContents() {
+    glClearColor(mBackground[0], mBackground[1], mBackground[2], mBackground[3]);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    drawContents();
+    SDL_GL_SwapWindow(mSDLWindow);
 }
 
 void CAvaraAppImpl::WindowResized(int width, int height) {
@@ -337,7 +348,7 @@ void CAvaraAppImpl::AddMessageLine(
 }
 
 void CAvaraAppImpl::MessageLine(short index, MsgAlignment align) {
-    SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
+    //SDL_Log("CAvaraAppImpl::MessageLine(%d)\n", index);
     switch(index) {
         case kmWelcome1:
         case kmWelcome2:
@@ -398,7 +409,7 @@ void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1,
             buffa << "Game paused by " << a << ".";
             break;
         case kmWaitingForPlayer:
-            buffa << "Waiting for " << a << ".";
+            buffa << "Waiting for " << a << "... (abort to exit)";
             category = MsgCategory::Error;
             break;
         case kmAKilledBPlayer:

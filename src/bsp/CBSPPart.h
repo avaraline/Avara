@@ -112,75 +112,75 @@ public:
     BSPResourceHeader	header;
     */
     // Moved here from BSPResourceHeader
-    FixedPoint enclosurePoint;
-    Fixed enclosureRadius;
-    FixedPoint minBounds; //  Bounding box minimums for x, y, z
-    FixedPoint maxBounds; //  Bounding box maximums for x, y, z
+    FixedPoint enclosurePoint = {0, 0, 0, 0};
+    Fixed enclosureRadius = 0;
+    FixedPoint minBounds = {0, 0, 0, 0}; //  Bounding box minimums for x, y, z
+    FixedPoint maxBounds = {0, 0, 0, 0}; //  Bounding box maximums for x, y, z
     enum { frontVisible = 1, backVisible, bothVisible };
 
-    CViewParameters *currentView;
+    CViewParameters *currentView = 0;
 
-    GLData *glData;
-    GLuint vertexArray, vertexBuffer;
-    GLsizeiptr glDataSize;
+    GLData *glData = 0;
+    GLuint vertexArray, vertexBuffer = 0;
+    GLsizeiptr glDataSize = 0;
 
     // Handle				colorReplacements;	//	Table of colors that replace defaults.
 
-    Matrix itsTransform; //	Transforms to world coordinates. (model)
-    Matrix invGlobTransform; // (inverse model)
+    Matrix itsTransform = {{0}}; //	Transforms to world coordinates. (model)
+    Matrix invGlobTransform = {{0}}; // (inverse model)
 
-    Matrix fullTransform; // modelview
-    Matrix invFullTransform; // inverse modelview
+    Matrix fullTransform = {{0}}; // modelview
+    Matrix invFullTransform = {{0}}; // inverse modelview
 
-    Fixed hither;
-    Fixed yon;
-    Fixed extraAmbient;
-    Fixed privateAmbient;
+    Fixed hither = 0;
+    Fixed yon = 0;
+    Fixed extraAmbient = 0;
+    Fixed privateAmbient = 0;
 
     //	Bounding volumes:
-    Vector sphereCenter; //	In view coordinates.
-    Vector sphereGlobCenter; //	In global coordinates.
-    Vector localViewOrigin; //	View origin point in local coordinates
+    Vector sphereCenter = {0}; //	In view coordinates.
+    Vector sphereGlobCenter = {0}; //	In global coordinates.
+    Vector localViewOrigin = {0}; //	View origin point in local coordinates
 
-    Fixed bigRadius; //	Bounding sphere radius from origin of object coordinates
-    Fixed tolerance;
+    Fixed bigRadius = 0; //	Bounding sphere radius from origin of object coordinates
+    Fixed tolerance = 0;
 
-    Fixed minZ; //	In view coordinates
-    Fixed maxZ; //	In view coordinates
+    Fixed minZ = 0; //	In view coordinates
+    Fixed maxZ = 0; //	In view coordinates
 
-    Fixed minX; //	In screen coordinates.
-    Fixed maxX;
-    Fixed minY;
-    Fixed maxY;
+    Fixed minX = 0; //	In screen coordinates.
+    Fixed maxX = 0;
+    Fixed minY = 0;
+    Fixed maxY = 0;
 
     //	members used during rendering:
-    Vector *pointTable;
-    uint32_t pointCount;
-    PolyRecord *polyTable;
-    uint32_t polyCount;
-    int totalPoints;
+    Vector *pointTable = 0;
+    uint32_t pointCount = 0;
+    PolyRecord *polyTable = 0;
+    uint32_t polyCount = 0;
+    int totalPoints = 0;
 
     //	Lighting vectors in object space
-    long lightSeed; //	Seed value to detect lights change
+    long lightSeed = 0; //	Seed value to detect lights change
     Vector objLights[MAXLIGHTS]; //	Object space lights.
 
     //	Used by a CBSPWorld to score and sort objects:
-    short worldIndex;
-    Boolean worldFlag;
-    CBSPPart *nextTemp; //	Used temporarily for linked lists.
+    short worldIndex = 0;
+    Boolean worldFlag = 0;
+    CBSPPart *nextTemp = 0; //	Used temporarily for linked lists.
 
-    Boolean invGlobDone;
-    Boolean usesPrivateHither;
-    Boolean usesPrivateYon;
-    Boolean isTransparent;
-    Boolean ignoreDirectionalLights;
-    short userFlags; //	Can be used for various flags by user.
+    Boolean invGlobDone = 0;
+    Boolean usesPrivateHither = 0;
+    Boolean usesPrivateYon = 0;
+    Boolean isTransparent = 0;
+    Boolean ignoreDirectionalLights = 0;
+    short userFlags = 0; //	Can be used for various flags by user.
 
     virtual void IBSPPart(short resId);
     virtual void BuildBoundingVolumes();
     virtual void Dispose();
 
-    virtual void ReplaceColor(int origColor, int newColor);
+    virtual void ReplaceColor(uint32_t origColor, uint32_t newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();

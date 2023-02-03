@@ -34,7 +34,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         AvaraScoreRecord theScores = itsGame->scoreKeeper->localScores;
         CNetManager *net = itsGame->itsApp->GetNet();
         float colorBoxWidth = 30.0;
-        int bufferWidth = view->viewPixelDimensions.h;
+        //int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
         float boardWidth = 620;
         float boardHeight = 60 + (colorBoxWidth + 10) * playingCount;

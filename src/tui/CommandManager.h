@@ -45,4 +45,7 @@ public:
     void SendRosterMessage(std::string& message);
     void SendRosterMessage(const char* message); // arg must be null-terminated
     void SendRosterMessage(int length, char *message);
+
+    // Coding helpers
+    bool SetDebugFlag(VectorOfArgs);
 };

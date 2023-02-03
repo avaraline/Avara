@@ -32,7 +32,8 @@ void CTagBase::ITagBase() {
     masterCount = 0;
     realMasterSize = 0;
     logicalMasterSize = 0;
-    masterBlocks = (TagMasterBlock **)NewHandle(0);
+    masterBlocksHandle = NewHandle(0);
+    masterBlocks = (TagMasterBlock **)masterBlocksHandle;
 
     firstFreeMaster = -1; //	No free masters.
 
@@ -454,7 +455,7 @@ short CTagBase::SetFlags(long index, short flags) {
 
 void CTagBase::ReleaseFlagged(short flagMask, short flagValue) {
     TagMasterBlock *masterP;
-    short theFlags;
+    //short theFlags;
     long i;
 
     i = masterCount;
@@ -471,8 +472,9 @@ void CTagBase::ReleaseFlagged(short flagMask, short flagValue) {
 }
 
 void CTagBase::Dispose() {
-    DisposHandle(tagBaseBlocks);
-    DisposHandle((Handle)masterBlocks);
+    DisposeHandle(tagBaseBlocks);
+    masterBlocks = 0;
+    DisposeHandle(masterBlocksHandle);
 
     CBaseObject::Dispose();
 }
@@ -611,7 +613,7 @@ Handle CTagBase::ReadHandle(long tag) {
     long totalSize;
     Handle returnHandle = 0;
     long foundIndex;
-    TagMasterBlock *masterP;
+    //TagMasterBlock *masterP;
     TagDataBlock *dataP;
 
     totalSize = 0;
@@ -635,9 +637,9 @@ Handle CTagBase::ReadHandle(long tag) {
 OSErr CTagBase::ReadOldHandle(long tag, Handle oldHandle) {
     long totalSize;
     long foundIndex;
-    TagMasterBlock *masterP;
+    //TagMasterBlock *masterP;
     TagDataBlock *dataP;
-    OSErr iErr;
+    OSErr iErr = 0;
 
     totalSize = 0;
 

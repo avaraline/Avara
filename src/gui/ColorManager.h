@@ -143,7 +143,7 @@ public:
 
     static inline uint32_t getMessageColor(MsgCategory category) {
         uint32_t color = 0xffffffff;
-        int idx = static_cast<int>(category);
+        size_t idx = static_cast<size_t>(category);
         if (idx < sizeof(messageColors) / sizeof(uint32_t)) {
             color = messageColors[idx];
         }

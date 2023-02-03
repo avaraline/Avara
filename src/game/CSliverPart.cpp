@@ -47,7 +47,6 @@ void CSliverPart::Activate(Fixed *origin,
 
     ReplaceColor(*ColorManager::getMarkerColor(0), c);
 
-    Matrix tm;
     Fixed vLen;
     Fixed smallVector[2];
 

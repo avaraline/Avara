@@ -29,6 +29,7 @@ enum {
     kLPaused,
     kLNoVehicle,
     kLAway,
+    kLReady,    // implies kLLoaded, i.e. Loaded & Ready to start
 
     kStringNorth,
     kStringSouth,
@@ -85,7 +86,7 @@ public:
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
     virtual void SetPosition(short pos) = 0;
     virtual void RosterKeyPress(unsigned char c) = 0;
-    virtual void RosterMessageText(short len, char *c) = 0;
+    virtual void RosterMessageText(short len, const char *c) = 0;
     virtual short LevelCRC() = 0;
     virtual OSErr LevelErr() = 0;
     virtual std::string LevelTag() = 0;
@@ -210,10 +211,10 @@ public:
 
     virtual void Dispose();
 
-    virtual Boolean TestHeldKey(short funcCode);
+    virtual Boolean TestKeyPressed(short funcCode);
 
     // virtual	void			FlushMessageText(Boolean forceAll);
-    virtual void RosterMessageText(short len, char *c);
+    virtual void RosterMessageText(short len, const char *c);
     virtual std::string GetChatString(int maxChars);
     virtual std::string GetChatLine();
 
@@ -224,6 +225,7 @@ public:
     virtual void ChangeNameAndLocation(StringPtr theName, Point location);
     virtual void SetPosition(short pos);
     virtual void SetPlayerStatus(short newStatus, long theWin);
+    virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
     virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
 

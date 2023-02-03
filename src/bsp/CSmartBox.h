@@ -19,8 +19,8 @@ class CSmartBox : public CSmartPart {
 public:
     virtual void ISmartBox(short resId,
         Fixed *dimensions,
-        long color,
-        long altColor,
+        uint32_t color,
+        uint32_t altColor,
         CAbstractActor *anActor,
         short aPartCode);
     virtual void Dispose();

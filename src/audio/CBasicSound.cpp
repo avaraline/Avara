@@ -33,7 +33,7 @@ void CBasicSound::SetRate(Fixed theRate) {
     //	Not applicable
 }
 
-Fixed CBasicSound::GetSampleRate() {
+UnsignedFixed CBasicSound::GetSampleRate() {
     return itsMixer->samplingRate;
 }
 
@@ -163,7 +163,7 @@ void CBasicSound::UseSamples(SampleHeaderHandle theSample) {
     }
 }
 
-void CBasicSound::CalculatePosition(int t) {
+void CBasicSound::CalculatePosition(int32_t t) {
     CSoundMixer *m;
     SoundLink *s;
     short i;
@@ -276,7 +276,7 @@ void CBasicSound::CalculateMotionVolume() {
         volumes[1] = volumeMax;
 }
 
-short CBasicSound::CalcVolume(short theChannel) {
+int16_t CBasicSound::CalcVolume(int16_t theChannel) {
     if (controlLink) {
         if (controlLink->meta == metaSuspend)
             return 0;
@@ -300,28 +300,28 @@ short CBasicSound::CalcVolume(short theChannel) {
     return volumes[theChannel];
 }
 
-void CBasicSound::WriteFrame(short theChannel, short volumeAllowed) {
-    Sample *s;
-    WordSample *d;
-    SampleConvert *converter;
+void CBasicSound::WriteFrame(int16_t theChannel, int16_t volumeAllowed) {
+    //Sample *s;
+    //WordSample *d;
+    //SampleConvert *converter;
     int thisCount;
     int remaining;
     int baseCount = currentCount[0].i;
     int loopCopy = loopCount[0];
 
-    converter = &itsMixer->volumeLookup[volumeAllowed - 1];
-    d = itsMixer->mixTo[theChannel];
+    //converter = &itsMixer->volumeLookup[volumeAllowed - 1];
+    //d = itsMixer->mixTo[theChannel];
 
     if (baseCount >= 0) {
         thisCount = itsMixer->soundBufferSize;
     } else {
-        d -= baseCount;
+        //d -= baseCount;
         thisCount = itsMixer->soundBufferSize + baseCount;
         baseCount = 0;
     }
 
     do {
-        s = sampleData + baseCount;
+        //s = sampleData + baseCount;
 
         remaining = baseCount + thisCount - loopEnd;
         if (loopCopy && remaining > 0) {

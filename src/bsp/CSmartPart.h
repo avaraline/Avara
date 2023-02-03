@@ -15,9 +15,9 @@ class CAbstractActor;
 
 class CSmartPart : public CBSPPart {
 public:
-    CAbstractActor *theOwner;
-    short partCode;
-    int rSquare[2];
+    CAbstractActor *theOwner = 0;
+    short partCode = 0;
+    int rSquare[2] = {0, 0};
 
     virtual void ISmartPart(short resId, CAbstractActor *anActor, short aPartCode);
     virtual Boolean CollisionTest(CSmartPart *other); //	Test for overlap.

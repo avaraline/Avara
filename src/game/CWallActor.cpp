@@ -22,11 +22,8 @@ CWallActor *lastWallActor = 0;
 
 void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWalls, Boolean isOrigWall) {
     Boolean tooBig;
-    Boolean rotated;
     Fixed centerX, centerZ;
     Vector dim;
-    short deltaX, deltaY;
-    short resIndex;
     Fixed addAlt;
     CSmartBox *box;
     short resId;

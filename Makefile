@@ -14,14 +14,25 @@ else
     BUILD_DIR ?= build
 		ZIPFLAGS := -r
 endif
-SRC_DIRS ?= $(shell find src -type d -not -path src) vendor/glad vendor/nanovg vendor/pugixml vendor
+SRC_DIRS ?= $(shell find src -type d -not -path src)
+SRC_DIRS += vendor/glad vendor/nanovg vendor/pugixml vendor
 
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
 INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor/gtest/include
+
 CPPFLAGS := ${CPPFLAGS}
-CPPFLAGS += $(INCFLAGS) -MMD -MP -g -Wno-multichar
+CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g
+
+ifeq ($(AVARA_WARNINGS), TRUE)
+CPPFLAGS += -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
+CPPFLAGS += -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations
+CPPFLAGS += -Wmissing-include-dirs -Woverloaded-virtual -Wredundant-decls -Wshadow
+CPPFLAGS += -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef
+CPPFLAGS += -Wno-unused-function -Wno-multichar -Wno-gnu-anonymous-struct -Wno-unused-parameter
+endif
+
 CXXFLAGS := ${CXXFLAGS}
 CXXFLAGS += -std=c++17
 LDFLAGS := ${LDFLAGS}
@@ -83,16 +94,14 @@ frandom: $(BUILD_DIR)/frandom
 
 fixed: $(BUILD_DIR)/fixed
 
-macapp: avara
-	rm -rf $(BUILD_DIR)/Avara.app
-	$(MKDIR_P) $(BUILD_DIR)/Avara.app/Contents/{Frameworks,MacOS,Resources}
-	cp platform/macos/Info.plist $(BUILD_DIR)/Avara.app/Contents
-	cp $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.app/Contents/MacOS
-	cp -r $(BUILD_DIR)/{levels,rsrc} $(BUILD_DIR)/Avara.app/Contents/Resources
-	cp platform/macos/Avara.icns $(BUILD_DIR)/Avara.app/Contents/Resources
-	cp -a $(FRAMEWORK_PATH)/SDL2.framework $(BUILD_DIR)/Avara.app/Contents/Frameworks
-	install_name_tool -change @rpath/SDL2.framework/Versions/A/SDL2 @executable_path/../Frameworks/SDL2.framework/Versions/A/SDL2 $(BUILD_DIR)/Avara.app/Contents/MacOS/Avara
-	if [ $(SIGNING_ID) = "NONE" ]; then echo "Not signing app bundle."; else codesign -vvv --no-strict --deep --force -s $(SIGNING_ID) $(BUILD_DIR)/Avara.app; fi
+macapp: set-version
+	xcodebuild -configuration Debug -scheme Avara \
+           -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
+           -derivedDataPath $(BUILD_DIR)/DerivedData \
+           ONLY_ACTIVE_ARCH=NO \
+           CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
+
+macdist: macapp
 	cd $(BUILD_DIR) && zip $(ZIPFLAGS) MacAvara.zip Avara.app && cd ..
 
 winapp: avara
@@ -102,6 +111,8 @@ winapp: avara
 	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc,vendor,src} $(BUILD_DIR)/WinAvara
 	# cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2,libminiupnpc}.dll $(BUILD_DIR)/WinAvara
+
+windist: winapp
 	cd $(BUILD_DIR) && zip $(ZIPFLAGS) WinAvara.zip WinAvara && cd ..
 
 # Avara
@@ -152,7 +163,7 @@ $(BUILD_DIR)/%.mm.o: %.mm
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-.PHONY: clean publish
+.PHONY: clean
 
 set-version:
 	grep -q $(GIT_HASH) src/util/GitVersion.h || (echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h)
@@ -166,7 +177,8 @@ build-link: $(BUILD_DIR)/Avara
 	fi
 
 clean:
-	$(RM) -r $(BUILD_DIR)
+	$(RM) -f src/util/GitVersion.h
+	$(RM) -rf $(BUILD_DIR) build
 
 clean-levels:
 	$(RM) -r levels/*/alf/*.alf
@@ -174,9 +186,6 @@ clean-levels:
 	$(RM) -r levels/*/set.json
 	$(RM) -r levels/*/ogg/*.ogg
 	$(RM) -r levels/*/wav/*.wav
-
-publish:
-	scp $(BUILD_DIR)/Avara-*.zip avaraline.net:/srv/http/avaraline/dev/builds/
 
 resources:
 	# python3 bin/pict2svg.py

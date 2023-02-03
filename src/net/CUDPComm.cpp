@@ -10,10 +10,10 @@
 #define RANDOMLY_DROP_PACKETS 0
 #if SIMULATE_LATENCY_ON_CLIENTS || RANDOMLY_DROP_PACKETS
 #include <unistd.h> // for usleep()
-#define SIMULATE_LATENCY_LT 2
-#define SIMULATE_LATENCY_MSEC_PER_LT 58  // less than 64 because of overhead of running multiple clients
+#define SIMULATE_LATENCY_LT 0.2
+#define SIMULATE_LATENCY_MSEC_PER_LT 15  // less than 64 because of overhead of running multiple clients
 #define SIMULATE_LATENCY_MEAN   (SIMULATE_LATENCY_LT*SIMULATE_LATENCY_MSEC_PER_LT*1000)
-#define SIMULATE_LATENCY_JITTER  0
+#define SIMULATE_LATENCY_JITTER  4
 #define SIMULATE_LATENCY_DISTRIBUTION  0x02  // bitmask of who gets the latency
 
 #define SIMULATE_LATENCY_CODE(text) \
@@ -25,6 +25,7 @@ if ((1 << myId) & SIMULATE_LATENCY_DISTRIBUTION) { \
 
 #endif
 #if RANDOMLY_DROP_PACKETS
+#define RANDOM_DROP_DISTRIBUTION 0x02  // which clients drop packets
 int numToDrop = 0;
 #endif
 
@@ -139,7 +140,6 @@ static Boolean ImmedProtoHandler(PacketInfo *thePacket, Ptr userData) {
 
 void CUDPComm::WriteAndSignPacket(PacketInfo *thePacket) {
     CUDPConnection *conn;
-    short dummyStackVar;
 
     thePacket->sender = myId; //	Sign it.
 
@@ -303,7 +303,6 @@ CUDPConnection * CUDPComm::ConnectionForPacket(UDPpacket *udp) {
 
 void CUDPComm::ForwardPacket(PacketInfo *thePacket) {
     CUDPConnection *conn;
-    short dummyStackVar;
 
     // SDL_Log("CUDPComm::ForwardPacket cmd=%d sndr=%d dist=0x%02x myId=%d\n", thePacket->command,
     //         thePacket->sender, thePacket->distribution, myId);
@@ -647,7 +646,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                     conn = ConnectionForPacket(packet);
                     // NULL conn suggests this packet needs no further processing
                     if (conn) {
-                        inData.c = conn->ValidateReceivedPackets(inData.c, curTime);
+                        inData.c = conn->ValidatePackets(inData.c, curTime);
                         if (inLen == 7) {
                             // done processing ACK
                             inData.c = inEnd;
@@ -657,7 +656,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                     for (conn = connections; conn; conn = conn->next) {
                         if (conn->port == packet->address.port /*receivePB.csParam.receive.remotePort*/ &&
                             conn->ipAddr == packet->address.host /*receivePB.csParam.receive.remoteHost*/) {
-                            inData.c = conn->ValidateReceivedPackets(inData.c, curTime);
+                            inData.c = conn->ValidatePackets(inData.c, curTime);
                             break;
                         }
                     }
@@ -684,6 +683,7 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         p = &thePacket->packet;
 
                         thePacket->serialNumber = *inData.uw++;
+                        thePacket->sendCount = *inData.uc++;
                         flags = *inData.uc++;
                         p->flags = flags;
                         p->command = *inData.c++;
@@ -704,8 +704,8 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                             p->sender = conn != NULL ? conn->myId : 0;
 
                         #if PACKET_DEBUG > 1
-                            SDL_Log("        CUDPComm::ReadComplete sn=%d cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
-                                    thePacket->serialNumber, p->command, p->flags, p->sender, p->distribution);
+                            SDL_Log("        CUDPComm::ReadComplete sn=%d-%hd cmd=%d flags=0x%02x sndr=%d dist=0x%02x\n",
+                                    thePacket->serialNumber, thePacket->sendCount, p->command, p->flags, p->sender, p->distribution);
                         #endif
 
                         if (p->dataLen) {
@@ -799,7 +799,6 @@ OSErr CUDPComm::AsyncRead() {
 #define kNumConnectionTypes (kFastestConnectionCmd - kSlowestConnectionCmd + 1)
 
 Boolean CUDPComm::AsyncWrite() {
-    OSErr theErr;
     CUDPConnection *theConnection;
     CUDPConnection *firstSender;
     UDPPacketInfo *thePacket = NULL;
@@ -903,7 +902,9 @@ Boolean CUDPComm::AsyncWrite() {
 
         if (thePacket == kPleaseSendAcknowledge) {
             packetList = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
-            SDL_Log("Sending ACK to %s\n", FormatAddr(theConnection).c_str());
+            #if PACKET_DEBUG > 1
+                SDL_Log("Sending ACK to %s\n", FormatAddr(theConnection).c_str());
+            #endif
             #if ROUTE_THRU_SERVER
                 // if going through server, add the sender/dist so the server can figure out where to forward it
                 *outData.c++ = myId;                        // sender
@@ -915,11 +916,11 @@ Boolean CUDPComm::AsyncWrite() {
             PacketInfo *p;
             char *fp;
             uint8_t flags = 0;
-            short len;
 
             p = &thePacket->packet;
 
             *outData.uw++ = thePacket->serialNumber;
+            *outData.uc++ = thePacket->sendCount;
             fp = outData.c++;
 
             *outData.c++ = p->command;
@@ -1061,7 +1062,7 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
 
             #if RANDOMLY_DROP_PACKETS
-                if (rand() < RAND_MAX/256 || numToDrop > 0) {          // drop frequency = (1/N)
+                if (((1 << myId) & RANDOM_DROP_DISTRIBUTION) && rand() < RAND_MAX/40 || numToDrop > 0) {          // drop frequency = (1/N)
                     numToDrop = (numToDrop <= 0) ? 2 : numToDrop - 1;  // how many more to drop
                     SDL_Log("           ---------> DROPPING PACKET <---------\n");
                 } else {
@@ -1101,8 +1102,6 @@ long CUDPComm::GetClock() {
 **	no other data to send within twice that period.
 */
 void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, long urgentTimePeriod) {
-    OSErr theErr;
-
     ICommManager(bufferCount);
 
     inviteString[0] = 0;
@@ -1364,8 +1363,6 @@ void ForwardPorts(port_num port) {
 }
 
 void CUDPComm::CreateServer() {
-    OSErr theErr;
-
     localPort = gApplication->Number(kDefaultUDPPort);
 
     std::thread forwardPorts(ForwardPorts, localPort);
@@ -1469,7 +1466,7 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     localPort = gApplication->Number(kDefaultClientUDPPort, serverPort);
 
     IPaddress addr;
-    CAvaraApp *app = (CAvaraAppImpl *)gApplication;
+    // CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();
@@ -1959,11 +1956,11 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
                     *slowPlayerId = conn->myId;
-                    SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
-                            conn->myId,
-                            conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
-                            stdev*MSEC_PER_GET_CLOCK,
-                            rtt*MSEC_PER_GET_CLOCK);
+                    // SDL_Log("meanRTT[%d] = %.1f, stdevRTT = %.1f, maxRtt=%.1f\n",
+                    //         conn->myId,
+                    //         conn->meanRoundTripTime*MSEC_PER_GET_CLOCK,
+                    //         stdev*MSEC_PER_GET_CLOCK,
+                    //         rtt*MSEC_PER_GET_CLOCK);
                 }
             }
         }
@@ -1973,6 +1970,26 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
     maxTrip = maxTrip*MSEC_PER_GET_CLOCK;
 
     return maxTrip;
+}
+
+float CUDPComm::GetMaxMeanSendCount(short distribution) {
+    float maxCount = 0;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if (conn->port && (distribution & (1 << conn->myId))) {
+            maxCount = std::max(maxCount, conn->meanSendCount);
+        }
+    }
+    return maxCount;
+}
+
+float CUDPComm::GetMaxMeanReceiveCount(short distribution) {
+    float maxCount = 0;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if (conn->port && (distribution & (1 << conn->myId))) {
+            maxCount = std::max(maxCount, conn->meanReceiveCount);
+        }
+    }
+    return maxCount;
 }
 
 void CUDPComm::BuildServerTags() {
