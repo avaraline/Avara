@@ -43,6 +43,7 @@ typedef struct {
 typedef struct __attribute__((packed)) {
     uint8_t command;
     IPaddress address;
+    uint16_t localPort;
 } PunchPacket;
 
 enum { kPunchPing = 1, kPunchRequest = 2, kPunch = 3 };
@@ -145,8 +146,8 @@ int ResolveHost(IPaddress *address, const char *host, uint16_t port) {
     return noErr;
 }
 
-void PunchSend(uint8_t cmd, IPaddress &addr) {
-    PunchPacket pp = {cmd, addr};
+void PunchSend(uint8_t cmd, IPaddress &addr, u_int16_t localPort) {
+    PunchPacket pp = {cmd, addr, htons(localPort)};
     //SDL_Log("Sending PunchPacket %d = %s", cmd, FormatAddress(pp.address).c_str());
     struct sockaddr_in sock_addr;
     memset(&sock_addr, 0, sizeof(sock_addr));
@@ -165,7 +166,7 @@ void PunchSend(uint8_t cmd, IPaddress &addr) {
 
 void PingPunchServer() {
     if (gPunchSocket == -1 || punchLocal.port == 0) return;
-    PunchSend(kPunchPing, punchLocal);
+    PunchSend(kPunchPing, punchLocal, punchLocal.port);
 }
 
 void RegisterPunchServer(IPaddress &localAddr) {
@@ -174,10 +175,10 @@ void RegisterPunchServer(IPaddress &localAddr) {
     PingPunchServer();
 }
 
-void RequestPunch(IPaddress &addr) {
+void RequestPunch(IPaddress &addr, uint16_t localPort) {
     if (gPunchSocket == -1) return;
     SDL_Log("Requesting that %s punch a hole", FormatAddress(addr).c_str());
-    PunchSend(kPunchRequest, addr);
+    PunchSend(kPunchRequest, addr, localPort);
 }
 
 void Punch(int sock, IPaddress &addr) {

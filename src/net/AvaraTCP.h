@@ -39,7 +39,7 @@ void FreePacket(UDPpacket *packet);
 int ResolveHost(IPaddress *address, const char *host, uint16_t port);
 
 void RegisterPunchServer(IPaddress &localAddr);
-void RequestPunch(IPaddress &addr);
+void RequestPunch(IPaddress &addr, uint16_t localPort);
 void Punch(int sock, IPaddress &addr);
 
 int CreateSocket(uint16_t port);

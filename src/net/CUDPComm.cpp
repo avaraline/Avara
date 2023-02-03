@@ -1394,8 +1394,8 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
         long startTime;
         SDL_Event theEvent;
 
-        // Before we "connect", notify the punch server so it can tell the host to open a hole.
-        RequestPunch(serverAddr);
+        // Before we "connect", notify the punch server so it can tell the host to open a hole (to our localPort)
+        RequestPunch(serverAddr, localPort);
 
         seed = TickCount();
         connections->myId = 0;
