@@ -115,16 +115,16 @@ public:
     virtual void IUDPConnection(CUDPComm *theMaster);
     virtual void SendQueuePacket(UDPPacketInfo *thePacket, short theDistribution);
     virtual void RoutePacket(UDPPacketInfo *thePacket);
-    virtual UDPPacketInfo *GetOutPacket(long curTime, long cramTime, long urgencyAdjust);
-    virtual UDPPacketInfo *FindBestPacket(long curTime, long cramTime, long urgencyAdjust);
-    virtual void ProcessBusyQueue(long curTime);
+    virtual UDPPacketInfo *GetOutPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust);
+    virtual UDPPacketInfo *FindBestPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust);
+    virtual void ProcessBusyQueue(int32_t curTime);
 
     virtual char *WriteAcks(char *dest);
     virtual void RunValidate();
 
-    virtual void ValidatePacket(UDPPacketInfo *thePacket, long when);
+    virtual void ValidatePacket(UDPPacketInfo *thePacket, int32_t when);
     virtual void ValidateReceivedPacket(UDPPacketInfo *thePacket);
-    virtual char *ValidatePackets(char *validateInfo, long curTime);
+    virtual char *ValidatePackets(char *validateInfo, int32_t curTime);
     virtual void ReceivedPacket(UDPPacketInfo *thePacket);
 
     virtual void FlushQueues();

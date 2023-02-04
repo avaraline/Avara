@@ -16,6 +16,7 @@
 #include "Debug.h"
 
 #include <SDL2/SDL.h>
+#include <arpa/inet.h>  // in_addr_t
 
 #define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
 #define kInitialRoundTripTime     (500 / MSEC_PER_GET_CLOCK)   // 0.5 second
@@ -167,7 +168,7 @@ void CUDPConnection::RoutePacket(UDPPacketInfo *thePacket) {
     thePacket->packet.distribution &= ~extendedRouting;
 }
 
-void CUDPConnection::ProcessBusyQueue(long curTime) {
+void CUDPConnection::ProcessBusyQueue(int32_t curTime) {
     UDPPacketInfo *thePacket = NULL;
 
     while ((thePacket = (UDPPacketInfo *)queues[kBusyQ].qHead)) {
@@ -186,7 +187,7 @@ void CUDPConnection::ProcessBusyQueue(long curTime) {
     busyQLen = 0;
 }
 
-UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long urgencyAdjust) {
+UDPPacketInfo *CUDPConnection::FindBestPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust) {
     UDPPacketInfo *thePacket = NULL;
     UDPPacketInfo *nextPacket;
     UDPPacketInfo *bestPacket;
@@ -293,7 +294,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
     return thePacket;
 }
 
-UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long urgencyAdjust) {
+UDPPacketInfo *CUDPConnection::GetOutPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust) {
     UDPPacketInfo *thePacket = NULL;
 
     if (port) {
@@ -363,7 +364,7 @@ float CommandMultiplierForStats(long command) {
     return multiplier;
 }
 
-void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
+void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
     #if PACKET_DEBUG || LATENCY_DEBUG
         DebugPacket('V', thePacket);
     #endif
@@ -503,7 +504,7 @@ void CUDPConnection::RunValidate() {
     }
 }
 
-char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
+char *CUDPConnection::ValidatePackets(char *validateInfo, int32_t curTime) {
     SerialNumber transmittedSerial;
     UDPPacketInfo *thePacket, *nextPacket;
 
