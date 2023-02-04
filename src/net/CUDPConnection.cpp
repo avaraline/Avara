@@ -16,7 +16,6 @@
 #include "Debug.h"
 
 #include <SDL2/SDL.h>
-#include <arpa/inet.h>  // in_addr_t
 
 #define kInitialRetransmitTime    (2000 / MSEC_PER_GET_CLOCK)  // 2 seconds
 #define kInitialRoundTripTime     (500 / MSEC_PER_GET_CLOCK)   // 0.5 second
@@ -721,8 +720,8 @@ void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
     }
 }
 
-bool IsLocalhost(in_addr_t host) {
-    static in_addr_t localhost = inet_addr("127.0.0.1");
+bool IsLocalhost(uint32_t host) {
+    static uint32_t localhost = inet_addr("127.0.0.1");
     return (host == localhost);
 }
 
@@ -735,7 +734,7 @@ void CUDPConnection::RewriteConnections(CompleteAddress *table) {
     // depending on the LAN/WAN situation
     for (int i = 0; i < itsOwner->maxClients; i++) {
         if (IsLocalhost(table->host)) {
-            // if the server sees the connection coming from localhost, change the host to whatever host we connected to server with
+            // if the server sees the connection coming from localhost, change the host to whatever host we connected to server with (which could ALSO be localhost)
             table->host = serverHost;
         }
         // TODO: what if host is the IP of the router?  e.g. someone connects to a LAN game using the WAN address

@@ -1113,7 +1113,7 @@ Boolean CUDPComm::AsyncWrite() {
     return result;
 }
 
-long CUDPComm::GetClock() {
+int32_t CUDPComm::GetClock() {
     // Apparently this clock is about 240/second?
     // Upon further investigation, the original code,
     // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);

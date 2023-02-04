@@ -23,7 +23,7 @@ private:
     std::deque<T> dataFifo;             // where data values are stored
     std::size_t windowSize;             // the size the dataFifo will grow to when full
 
-    int displayWidth = 100;
+    uint16_t displayWidth = 100;
     std::string displayTitle = "";
 
     std::size_t cellIndex(T value) {
@@ -88,7 +88,7 @@ public:
             // label
             os << std::setprecision(prec) << std::fixed << std::setw(prec+3) << sh.minValue + (i+1)*sh.stepSize << ": ";
             // histogram bar
-            int ticks = sh.displayWidth * sh.cellCounts[i] / sh.dataFifo.size();
+            std::size_t ticks = sh.displayWidth * sh.cellCounts[i] / sh.dataFifo.size();
             for (int j = 0; j < ticks; j++) {
                 os << '+';
             }

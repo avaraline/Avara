@@ -79,7 +79,7 @@ public:
     long nextAckTime;
     long nextWriteTime;
 
-    long validTime;
+    int32_t validTime;
 
     float meanRoundTripTime;
     float varRoundTripTime;

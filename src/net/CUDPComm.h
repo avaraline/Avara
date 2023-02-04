@@ -102,7 +102,7 @@ public:
     virtual void WritePrefs();
     virtual void Dispose();
 
-    long GetClock();
+    int32_t GetClock();
 
     virtual void ReadComplete(UDPpacket *packet);
     virtual void WriteComplete(int result);
