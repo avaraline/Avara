@@ -96,7 +96,8 @@ frandom: $(BUILD_DIR)/frandom
 
 fixed: $(BUILD_DIR)/fixed
 
-macapp: $(BUILD_SYMLINK)
+macapp: avarax $(BUILD_SYMLINK)
+avarax:
 	xcodebuild -configuration Debug -scheme Avara \
            -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
            -derivedDataPath $(BUILD_DIR)/DerivedData \
@@ -171,7 +172,7 @@ set-version:
 	grep -q $(GIT_HASH) src/util/GitVersion.h || (echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h)
 
 build-link:
-	if [ ! -e build ] || [ -h build ] ; then \
+	@if [ ! -e build ] || [ -h build ] ; then \
 		ln -sfnv "$(BUILD_DIR)" build ; \
 	else \
 		echo "build is not a link so not linking build -> $(BUILD_DIR)" ; \
