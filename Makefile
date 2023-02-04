@@ -169,8 +169,9 @@ set-version:
 	grep -q $(GIT_HASH) src/util/GitVersion.h || (echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h)
 
 build-link:
-	if [ ! -e build ] || [ -h build ]; then \
-		rm -f build && ln -sfv "$(BUILD_DIR)" _build && mv _build build ; \
+	if [ ! -e build ] || [ -h build ] || [ ! -d build ]; then \
+		ls -l ; \
+		rm -f build && ln -sfv "$(BUILD_DIR)" build ; \
 	else \
 		echo "build is not a link so not linking build -> $(BUILD_DIR)" ; \
 	fi
