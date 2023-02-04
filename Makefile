@@ -10,6 +10,7 @@ ifneq ($(GIT_BRANCH),)
     BUILD_DIR ?= build-$(GIT_BRANCH)
 		# quiet zip on dev branches
 		ZIPFLAGS := -rq
+		BUILD_SYMLINK := build-link
 else
     BUILD_DIR ?= build
 		ZIPFLAGS := -r
@@ -55,6 +56,7 @@ endif
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
+	BUILD_SYMLINK = ""
 	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lglu32 -lopengl32 -lws2_32 -lcomdlg32 -lminiupnpc
 	CFLAGS +=  -DMINIUPNP_EXPORTS -D_WIN32_WINNT=0x501
 	POST_PROCESS ?= ls -lh
@@ -79,7 +81,7 @@ DEPS := $(OBJS:.o=.d)
 # Alternatively set this to "NONE" for no code signing.
 SIGNING_ID := NONE
 
-avara: set-version $(BUILD_DIR)/Avara resources build-link
+avara: set-version $(BUILD_DIR)/Avara resources $(BUILD_SYMLINK)
 
 tests: $(BUILD_DIR)/tests resources
 	$(BUILD_DIR)/tests
@@ -94,7 +96,7 @@ frandom: $(BUILD_DIR)/frandom
 
 fixed: $(BUILD_DIR)/fixed
 
-macapp: build-link
+macapp: $(BUILD_SYMLINK)
 	xcodebuild -configuration Debug -scheme Avara \
            -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
            -derivedDataPath $(BUILD_DIR)/DerivedData \
@@ -169,9 +171,8 @@ set-version:
 	grep -q $(GIT_HASH) src/util/GitVersion.h || (echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h)
 
 build-link:
-	if [ ! -e build ] || [ -h build ] || [ ! -d build ]; then \
-		ls -l ; \
-		rm -f build && ln -sfv "$(BUILD_DIR)" build ; \
+	if [ ! -e build ] || [ -h build ] ; then \
+		ln -sfnv "$(BUILD_DIR)" build ; \
 	else \
 		echo "build is not a link so not linking build -> $(BUILD_DIR)" ; \
 	fi
