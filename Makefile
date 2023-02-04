@@ -170,7 +170,7 @@ set-version:
 
 build-link:
 	if [ ! -e build ] || [ -h build ]; then \
-		rm -f build && ln -sfv "$(BUILD_DIR)" build ; \
+		rm -f build && ln -sfv "$(BUILD_DIR)" _build && mv _build build ; \
 	else \
 		echo "build is not a link so not linking build -> $(BUILD_DIR)" ; \
 	fi
