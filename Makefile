@@ -94,7 +94,7 @@ frandom: $(BUILD_DIR)/frandom
 
 fixed: $(BUILD_DIR)/fixed
 
-macapp: avara
+macapp: build-link
 	xcodebuild -configuration Debug -scheme Avara \
            -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
            -derivedDataPath $(BUILD_DIR)/DerivedData \
@@ -168,7 +168,7 @@ $(BUILD_DIR)/%.mm.o: %.mm
 set-version:
 	grep -q $(GIT_HASH) src/util/GitVersion.h || (echo "#define GIT_VERSION \"$(GIT_HASH)\"" > src/util/GitVersion.h)
 
-build-link: $(BUILD_DIR)/Avara
+build-link:
 	@if [ ! -e build ] || [ -h build ]; then \
 		echo "build -> $(BUILD_DIR)" ; \
 		ln -fns $(BUILD_DIR) build ; \

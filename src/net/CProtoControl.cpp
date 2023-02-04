@@ -19,6 +19,8 @@
 #include "Preferences.h"
 #include "Debug.h"
 
+#include <bitset>
+
 static Boolean ImmedProtoHandler(PacketInfo *thePacket, Ptr userData) {
     CProtoControl *theControl;
 

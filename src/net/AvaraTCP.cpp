@@ -70,7 +70,7 @@ OSErr OpenAvaraTCP() {
         return noErr;
     }
     SDL_Log("OpenAvaraTCP\n");
-    
+
     // Any random unused port is fine for this (what are the odds it picks 19567?)
     gPunchSocket = CreateSocket(0);
 
@@ -146,7 +146,7 @@ int ResolveHost(IPaddress *address, const char *host, uint16_t port) {
     return noErr;
 }
 
-void PunchSend(uint8_t cmd, IPaddress &addr, u_int16_t localPort) {
+void PunchSend(uint8_t cmd, IPaddress &addr, uint16_t localPort) {
     PunchPacket pp = {cmd, addr, htons(localPort)};
     //SDL_Log("Sending PunchPacket %d = %s", cmd, FormatAddress(pp.address).c_str());
     struct sockaddr_in sock_addr;
@@ -224,7 +224,7 @@ void CheckSockets() {
     timeval timeout;
     timeout.tv_sec = 0;
     timeout.tv_usec = 0;
-    
+
     auto n = std::max(gReadSocket, gPunchSocket) + 1;
     if (select(n, &readSet, NULL, NULL, &timeout) > 0) {
         if (FD_ISSET(gPunchSocket, &readSet)) {
@@ -251,7 +251,7 @@ void CheckSockets() {
                 }
             }
             else {
-                SDL_Log("Unknown response from punch server, %ld bytes", bytesRead);
+                SDL_Log("Unknown response from punch server, %ld bytes", long(bytesRead));
             }
         }
         if (FD_ISSET(gReadSocket, &readSet)) {
