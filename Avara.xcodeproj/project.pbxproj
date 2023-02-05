@@ -125,20 +125,6 @@
 		E5890D1329895118007A875D /* CBaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9929895118007A875D /* CBaseObject.cpp */; };
 		E5890D1429895118007A875D /* CTagBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9A29895118007A875D /* CTagBase.cpp */; };
 		E5890D1529895118007A875D /* CDirectObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C9D29895118007A875D /* CDirectObject.cpp */; };
-		E5890EDC29895124007A875D /* minisoap.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D1D29895123007A875D /* minisoap.c */; };
-		E5890EDD29895124007A875D /* addr_is_reserved.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D2029895123007A875D /* addr_is_reserved.c */; };
-		E5890EDF29895124007A875D /* portlistingparse.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D2329895123007A875D /* portlistingparse.c */; };
-		E5890EE029895124007A875D /* connecthostport.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D2429895123007A875D /* connecthostport.c */; };
-		E5890EE129895124007A875D /* upnpreplyparse.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D2529895123007A875D /* upnpreplyparse.c */; };
-		E5890EE229895124007A875D /* receivedata.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D2729895123007A875D /* receivedata.c */; };
-		E5890EE329895124007A875D /* miniwget.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D2929895123007A875D /* miniwget.c */; };
-		E5890EE429895124007A875D /* upnpdev.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D2C29895123007A875D /* upnpdev.c */; };
-		E5890EE529895124007A875D /* upnpcommands.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3029895123007A875D /* upnpcommands.c */; };
-		E5890EE629895124007A875D /* upnperrors.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3529895123007A875D /* upnperrors.c */; };
-		E5890EE729895124007A875D /* minixml.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3829895123007A875D /* minixml.c */; };
-		E5890EE829895124007A875D /* minissdpc.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3B29895123007A875D /* minissdpc.c */; };
-		E5890EE929895124007A875D /* miniupnpc.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3C29895123007A875D /* miniupnpc.c */; };
-		E5890EEA29895124007A875D /* igd_desc_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3E29895123007A875D /* igd_desc_parse.c */; };
 		E5890EEB29895124007A875D /* csscolorparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D3F29895123007A875D /* csscolorparser.cpp */; };
 		E5890EEC29895124007A875D /* widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4729895123007A875D /* widget.cpp */; };
 		E5890EED29895124007A875D /* colorcombobox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890D4829895123007A875D /* colorcombobox.cpp */; };
@@ -456,41 +442,6 @@
 		E5890D1729895123007A875D /* httplib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = httplib.h; sourceTree = "<group>"; };
 		E5890D1829895123007A875D /* cute_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cute_files.h; sourceTree = "<group>"; };
 		E5890D1929895123007A875D /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
-		E5890D1B29895123007A875D /* win32_snprintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = win32_snprintf.h; sourceTree = "<group>"; };
-		E5890D1C29895123007A875D /* miniwget_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miniwget_private.h; sourceTree = "<group>"; };
-		E5890D1D29895123007A875D /* minisoap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minisoap.c; sourceTree = "<group>"; };
-		E5890D1E29895123007A875D /* miniupnpcstrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miniupnpcstrings.h; sourceTree = "<group>"; };
-		E5890D1F29895123007A875D /* miniupnpc_declspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miniupnpc_declspec.h; sourceTree = "<group>"; };
-		E5890D2029895123007A875D /* addr_is_reserved.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = addr_is_reserved.c; sourceTree = "<group>"; };
-		E5890D2129895123007A875D /* upnpcommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = upnpcommands.h; sourceTree = "<group>"; };
-		E5890D2329895123007A875D /* portlistingparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = portlistingparse.c; sourceTree = "<group>"; };
-		E5890D2429895123007A875D /* connecthostport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = connecthostport.c; sourceTree = "<group>"; };
-		E5890D2529895123007A875D /* upnpreplyparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = upnpreplyparse.c; sourceTree = "<group>"; };
-		E5890D2629895123007A875D /* minixml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minixml.h; sourceTree = "<group>"; };
-		E5890D2729895123007A875D /* receivedata.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = receivedata.c; sourceTree = "<group>"; };
-		E5890D2829895123007A875D /* miniupnpc_socketdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miniupnpc_socketdef.h; sourceTree = "<group>"; };
-		E5890D2929895123007A875D /* miniwget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = miniwget.c; sourceTree = "<group>"; };
-		E5890D2A29895123007A875D /* upnperrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = upnperrors.h; sourceTree = "<group>"; };
-		E5890D2B29895123007A875D /* igd_desc_parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = igd_desc_parse.h; sourceTree = "<group>"; };
-		E5890D2C29895123007A875D /* upnpdev.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = upnpdev.c; sourceTree = "<group>"; };
-		E5890D2D29895123007A875D /* minissdpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minissdpc.h; sourceTree = "<group>"; };
-		E5890D2E29895123007A875D /* miniupnpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miniupnpc.h; sourceTree = "<group>"; };
-		E5890D2F29895123007A875D /* miniupnpctypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miniupnpctypes.h; sourceTree = "<group>"; };
-		E5890D3029895123007A875D /* upnpcommands.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = upnpcommands.c; sourceTree = "<group>"; };
-		E5890D3129895123007A875D /* addr_is_reserved.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addr_is_reserved.h; sourceTree = "<group>"; };
-		E5890D3229895123007A875D /* minisoap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minisoap.h; sourceTree = "<group>"; };
-		E5890D3329895123007A875D /* portlistingparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = portlistingparse.h; sourceTree = "<group>"; };
-		E5890D3429895123007A875D /* connecthostport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connecthostport.h; sourceTree = "<group>"; };
-		E5890D3529895123007A875D /* upnperrors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = upnperrors.c; sourceTree = "<group>"; };
-		E5890D3629895123007A875D /* miniwget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = miniwget.h; sourceTree = "<group>"; };
-		E5890D3729895123007A875D /* codelength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = codelength.h; sourceTree = "<group>"; };
-		E5890D3829895123007A875D /* minixml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minixml.c; sourceTree = "<group>"; };
-		E5890D3929895123007A875D /* receivedata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = receivedata.h; sourceTree = "<group>"; };
-		E5890D3A29895123007A875D /* upnpreplyparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = upnpreplyparse.h; sourceTree = "<group>"; };
-		E5890D3B29895123007A875D /* minissdpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = minissdpc.c; sourceTree = "<group>"; };
-		E5890D3C29895123007A875D /* miniupnpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = miniupnpc.c; sourceTree = "<group>"; };
-		E5890D3D29895123007A875D /* upnpdev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = upnpdev.h; sourceTree = "<group>"; };
-		E5890D3E29895123007A875D /* igd_desc_parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = igd_desc_parse.c; sourceTree = "<group>"; };
 		E5890D3F29895123007A875D /* csscolorparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = csscolorparser.cpp; sourceTree = "<group>"; };
 		E5890D4129895123007A875D /* cpp17.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpp17.h; sourceTree = "<group>"; };
 		E5890D4229895123007A875D /* core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core.h; sourceTree = "<group>"; };
@@ -1255,7 +1206,6 @@
 				E5890DC029895123007A875D /* glm */,
 				E5890D1729895123007A875D /* httplib.h */,
 				E5890D1929895123007A875D /* json.hpp */,
-				E5890D1A29895123007A875D /* miniupnpc */,
 				E5890D4629895123007A875D /* nanogui */,
 				E5890ECF29895124007A875D /* nanovg */,
 				E5890DBC29895123007A875D /* pugixml */,
@@ -1265,48 +1215,6 @@
 				E5890EDA29895124007A875D /* utf8.h */,
 			);
 			path = vendor;
-			sourceTree = "<group>";
-		};
-		E5890D1A29895123007A875D /* miniupnpc */ = {
-			isa = PBXGroup;
-			children = (
-				E5890D2029895123007A875D /* addr_is_reserved.c */,
-				E5890D3129895123007A875D /* addr_is_reserved.h */,
-				E5890D3729895123007A875D /* codelength.h */,
-				E5890D2429895123007A875D /* connecthostport.c */,
-				E5890D3429895123007A875D /* connecthostport.h */,
-				E5890D3E29895123007A875D /* igd_desc_parse.c */,
-				E5890D2B29895123007A875D /* igd_desc_parse.h */,
-				E5890D1D29895123007A875D /* minisoap.c */,
-				E5890D3229895123007A875D /* minisoap.h */,
-				E5890D3B29895123007A875D /* minissdpc.c */,
-				E5890D2D29895123007A875D /* minissdpc.h */,
-				E5890D1F29895123007A875D /* miniupnpc_declspec.h */,
-				E5890D2829895123007A875D /* miniupnpc_socketdef.h */,
-				E5890D3C29895123007A875D /* miniupnpc.c */,
-				E5890D2E29895123007A875D /* miniupnpc.h */,
-				E5890D1E29895123007A875D /* miniupnpcstrings.h */,
-				E5890D2F29895123007A875D /* miniupnpctypes.h */,
-				E5890D1C29895123007A875D /* miniwget_private.h */,
-				E5890D2929895123007A875D /* miniwget.c */,
-				E5890D3629895123007A875D /* miniwget.h */,
-				E5890D3829895123007A875D /* minixml.c */,
-				E5890D2629895123007A875D /* minixml.h */,
-				E5890D2329895123007A875D /* portlistingparse.c */,
-				E5890D3329895123007A875D /* portlistingparse.h */,
-				E5890D2729895123007A875D /* receivedata.c */,
-				E5890D3929895123007A875D /* receivedata.h */,
-				E5890D3029895123007A875D /* upnpcommands.c */,
-				E5890D2129895123007A875D /* upnpcommands.h */,
-				E5890D2C29895123007A875D /* upnpdev.c */,
-				E5890D3D29895123007A875D /* upnpdev.h */,
-				E5890D3529895123007A875D /* upnperrors.c */,
-				E5890D2A29895123007A875D /* upnperrors.h */,
-				E5890D2529895123007A875D /* upnpreplyparse.c */,
-				E5890D3A29895123007A875D /* upnpreplyparse.h */,
-				E5890D1B29895123007A875D /* win32_snprintf.h */,
-			);
-			path = miniupnpc;
 			sourceTree = "<group>";
 		};
 		E5890D4029895123007A875D /* utf8 */ = {
@@ -1870,7 +1778,6 @@
 				E5890EF829895124007A875D /* layout.cpp in Sources */,
 				E5890CF129895118007A875D /* CSliverPart.cpp in Sources */,
 				E5890CD329895118007A875D /* CUfo.cpp in Sources */,
-				E5890EE629895124007A875D /* upnperrors.c in Sources */,
 				E5890D0A29895118007A875D /* ColorManager.cpp in Sources */,
 				E5890CDD29895118007A875D /* CLogicAnd.cpp in Sources */,
 				E5890CFC29895118007A875D /* CScaledBSP.cpp in Sources */,
@@ -1883,7 +1790,6 @@
 				E5890CFA29895118007A875D /* CSmartBox.cpp in Sources */,
 				E5890D1529895118007A875D /* CDirectObject.cpp in Sources */,
 				E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */,
-				E5890EE829895124007A875D /* minissdpc.c in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
 				E5890CE129895118007A875D /* CAbstractMovers.cpp in Sources */,
@@ -1900,9 +1806,7 @@
 				E5890D0829895118007A875D /* CServerWindow.cpp in Sources */,
 				E5890CD029895118007A875D /* CSphereActor.cpp in Sources */,
 				E5890CCE29895118007A875D /* CTriPyramidActor.cpp in Sources */,
-				E5890EE429895124007A875D /* upnpdev.c in Sources */,
 				E5890EF629895124007A875D /* screen.cpp in Sources */,
-				E5890EE929895124007A875D /* miniupnpc.c in Sources */,
 				E5890CA129895118007A875D /* System.cpp in Sources */,
 				E5890CFB29895118007A875D /* CViewParameters.cpp in Sources */,
 				E5890CCA29895118007A875D /* CWorldShader.cpp in Sources */,
@@ -1931,16 +1835,12 @@
 				E5890CCC29895118007A875D /* CAvaraApp.cpp in Sources */,
 				E5890C9E29895118007A875D /* Memory.cpp in Sources */,
 				E5890F0629895124007A875D /* popupbutton.cpp in Sources */,
-				E5890EEA29895124007A875D /* igd_desc_parse.c in Sources */,
 				E5890EFD29895124007A875D /* progressbar.cpp in Sources */,
 				E5890D0429895118007A875D /* CBasicSound.cpp in Sources */,
-				E5890EE329895124007A875D /* miniwget.c in Sources */,
-				E5890EDF29895124007A875D /* portlistingparse.c in Sources */,
 				E5890CE529895118007A875D /* CWalkerActor.cpp in Sources */,
 				E5890D0629895118007A875D /* Avara.cpp in Sources */,
 				E5890EF929895124007A875D /* nanogui_resources.cpp in Sources */,
 				E5890CBD29895118007A875D /* CScout.cpp in Sources */,
-				E5890EE729895124007A875D /* minixml.c in Sources */,
 				E5890CA429895118007A875D /* AvaraTCP.cpp in Sources */,
 				E5890EFB29895124007A875D /* darwin.mm in Sources */,
 				E5890CBC29895118007A875D /* CAbstractMissile.cpp in Sources */,
@@ -1953,7 +1853,6 @@
 				E5890EF729895124007A875D /* popup.cpp in Sources */,
 				E5890CBA29895118007A875D /* CWeapon.cpp in Sources */,
 				E5890CE429895118007A875D /* CAreaActor.cpp in Sources */,
-				E5890EDC29895124007A875D /* minisoap.c in Sources */,
 				E5890D0929895118007A875D /* CNetworkWindow.cpp in Sources */,
 				E5890EFA29895124007A875D /* glcanvas.cpp in Sources */,
 				E5890CB029895118007A875D /* RamFiles.cpp in Sources */,
@@ -1966,14 +1865,12 @@
 				E5890CBE29895118007A875D /* CSwitchActor.cpp in Sources */,
 				E5890CDB29895118007A875D /* CAvaraGame.cpp in Sources */,
 				E5890D0229895118007A875D /* CSoundHub.cpp in Sources */,
-				E5890EE229895124007A875D /* receivedata.c in Sources */,
 				E5890D0F29895118007A875D /* CLevelWindow.cpp in Sources */,
 				E5890CC329895118007A875D /* CLogicTimer.cpp in Sources */,
 				E5890D0D29895118007A875D /* CTrackerWindow.cpp in Sources */,
 				E5890CB629895118007A875D /* CIncarnator.cpp in Sources */,
 				E5890CC229895118007A875D /* CDoorActor.cpp in Sources */,
 				E5890CB829895118007A875D /* CPlacedActors.cpp in Sources */,
-				E5890EE129895124007A875D /* upnpreplyparse.c in Sources */,
 				E5890CE929895118007A875D /* CNetManager.cpp in Sources */,
 				E5890CA729895118007A875D /* CRC.cpp in Sources */,
 				E5890CA029895118007A875D /* Files.cpp in Sources */,
@@ -2001,7 +1898,6 @@
 				E5890CF829895118007A875D /* CDoor2Actor.cpp in Sources */,
 				E5890CB429895118007A875D /* CLogic.cpp in Sources */,
 				E5890CC129895118007A875D /* CParasite.cpp in Sources */,
-				E5890EE529895124007A875D /* upnpcommands.c in Sources */,
 				E5890D1429895118007A875D /* CTagBase.cpp in Sources */,
 				E5890EEE29895124007A875D /* common.cpp in Sources */,
 				E5890CDC29895118007A875D /* CTextActor.cpp in Sources */,
@@ -2009,14 +1905,12 @@
 				E5890CF229895118007A875D /* CPill.cpp in Sources */,
 				E5890EED29895124007A875D /* colorcombobox.cpp in Sources */,
 				E5890CC429895118007A875D /* CLogicCounter.cpp in Sources */,
-				E5890EE029895124007A875D /* connecthostport.c in Sources */,
 				E5890CD629895118007A875D /* CAbstractYon.cpp in Sources */,
 				E5890D0C29895118007A875D /* CPlayerWindow.cpp in Sources */,
 				E5890CE029895118007A875D /* CLogicDelay.cpp in Sources */,
 				E5890CEB29895118007A875D /* CPlayerActor.cpp in Sources */,
 				E5890F0029895124007A875D /* label.cpp in Sources */,
 				E5890EEC29895124007A875D /* widget.cpp in Sources */,
-				E5890EDD29895124007A875D /* addr_is_reserved.c in Sources */,
 				E5890CE829895118007A875D /* CSkyColorAdjuster.cpp in Sources */,
 				E5890CEE29895118007A875D /* CScoreKeeper.cpp in Sources */,
 				E5890D0129895118007A875D /* CRateSound.cpp in Sources */,
