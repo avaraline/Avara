@@ -40,19 +40,19 @@ typedef struct {
     void *userData;
 } UDPReadData;
 
-typedef struct __attribute__((packed)) {
+#pragma pack(1)
+typedef struct {
     uint8_t command;
     IPaddress address;
-    uint16_t localPort;
 } PunchPacket;
+#pragma pack()
 
 enum { kPunchPing = 1, kPunchRequest = 2, kPunch = 3 };
 
 static Boolean gAvaraTCPOpen = false;
-static int gReadSocket = -1;
+static int gAvaraSocket = -1;
 UDPReadData gReadCallback;
 
-static int gPunchSocket = -1;
 static IPaddress punchServer = {0, 0};
 static IPaddress punchLocal = {0, 0};
 static uint32_t lastPunchPing = 0;
@@ -70,9 +70,6 @@ OSErr OpenAvaraTCP() {
         return noErr;
     }
     SDL_Log("OpenAvaraTCP\n");
-
-    // Any random unused port is fine for this (what are the odds it picks 19567?)
-    gPunchSocket = CreateSocket(0);
 
     // TODO: make this configurable
     ResolveHost(&punchServer, "avara.io", 19555);
@@ -98,6 +95,9 @@ int CreateSocket(uint16_t port) {
             DestroySocket(sock);
             return -1;
         }
+        
+        // This is taking advantage of the fact that Avara only ever creates one socket at a time.
+        gAvaraSocket = sock;
     } else {
         SDL_Log("Failed to create socket on port %d", port);
     }
@@ -106,8 +106,11 @@ int CreateSocket(uint16_t port) {
 
 void DestroySocket(int sock) {
     if(sock != -1) {
-        if (sock == gReadSocket) gReadSocket = -1;
-        if (sock == gPunchSocket) gPunchSocket = -1;
+        if (sock == gAvaraSocket) {
+            gAvaraSocket = -1;
+            punchLocal.host = 0;
+            punchLocal.port = 0;
+        }
         close(sock);
     }
 }
@@ -146,8 +149,8 @@ int ResolveHost(IPaddress *address, const char *host, uint16_t port) {
     return noErr;
 }
 
-void PunchSend(uint8_t cmd, IPaddress &addr, uint16_t localPort) {
-    PunchPacket pp = {cmd, addr, htons(localPort)};
+void PunchSend(uint8_t cmd, IPaddress &addr) {
+    PunchPacket pp = {cmd, addr};
     //SDL_Log("Sending PunchPacket %d = %s", cmd, FormatAddress(pp.address).c_str());
     struct sockaddr_in sock_addr;
     memset(&sock_addr, 0, sizeof(sock_addr));
@@ -155,7 +158,7 @@ void PunchSend(uint8_t cmd, IPaddress &addr, uint16_t localPort) {
     sock_addr.sin_port = punchServer.port;
     sock_addr.sin_family = AF_INET;
     sendto(
-        gPunchSocket,
+        gAvaraSocket,
         (char *)&pp,
         sizeof(PunchPacket),
         0,
@@ -165,8 +168,8 @@ void PunchSend(uint8_t cmd, IPaddress &addr, uint16_t localPort) {
 }
 
 void PingPunchServer() {
-    if (gPunchSocket == -1 || punchLocal.port == 0) return;
-    PunchSend(kPunchPing, punchLocal, punchLocal.port);
+    if (gAvaraSocket == -1 || punchLocal.port == 0) return;
+    PunchSend(kPunchPing, punchLocal);
 }
 
 void RegisterPunchServer(IPaddress &localAddr) {
@@ -175,14 +178,14 @@ void RegisterPunchServer(IPaddress &localAddr) {
     PingPunchServer();
 }
 
-void RequestPunch(IPaddress &addr, uint16_t localPort) {
-    if (gPunchSocket == -1) return;
+void RequestPunch(IPaddress &addr) {
+    if (gAvaraSocket == -1) return;
     SDL_Log("Requesting that %s punch a hole", FormatAddress(addr).c_str());
-    PunchSend(kPunchRequest, addr, localPort);
+    PunchSend(kPunchRequest, addr);
 }
 
-void Punch(int sock, IPaddress &addr) {
-    if (sock == -1) return;
+void Punch(IPaddress &addr) {
+    if (gAvaraSocket == -1) return;
 
     SDL_Log("Punching a hole for %s", FormatAddress(addr).c_str());
 
@@ -192,13 +195,25 @@ void Punch(int sock, IPaddress &addr) {
     sock_addr.sin_port = addr.port;
     sock_addr.sin_family = AF_INET;
     sendto(
-       sock,
-       "",
-       0,
-       0,
-       (struct sockaddr *)&sock_addr,
-       sizeof(sock_addr)
+        gAvaraSocket,
+        "",
+        0,
+        0,
+        (struct sockaddr *)&sock_addr,
+        sizeof(sock_addr)
    );
+}
+
+void HandlePunchPacket(UDPpacket *packet) {
+    if (packet->len != sizeof(PunchPacket)) {
+        SDL_Log("Invalid PunchPacket size (%d)", packet->len);
+        return;
+    }
+    PunchPacket *pp = (PunchPacket *)packet->data;
+    SDL_Log("Got packet from punch server - (%d) %s", pp->command, FormatAddress(pp->address).c_str());
+    if (pp->command == kPunch) {
+        Punch(pp->address);
+    }
 }
 
 void CheckSockets() {
@@ -207,59 +222,28 @@ void CheckSockets() {
         return;
     }
 
-    if (gReadSocket == -1 && gPunchSocket == -1) return;
+    if (gAvaraSocket == -1) return;
 
-    if (gPunchSocket != -1 ) {
-        if (lastPunchPing == 0 || (SDL_GetTicks() - lastPunchPing >= PUNCHTIME)) {
-            PingPunchServer();
-            lastPunchPing = SDL_GetTicks();
-        }
+    if (lastPunchPing == 0 || (SDL_GetTicks() - lastPunchPing >= PUNCHTIME)) {
+        PingPunchServer();
+        lastPunchPing = SDL_GetTicks();
     }
 
     fd_set readSet;
     FD_ZERO(&readSet);
-    if (gReadSocket != -1) FD_SET(gReadSocket, &readSet);
-    if (gPunchSocket != -1) FD_SET(gPunchSocket, &readSet);
+    FD_SET(gAvaraSocket, &readSet);
 
     timeval timeout;
     timeout.tv_sec = 0;
     timeout.tv_usec = 0;
 
-    auto n = std::max(gReadSocket, gPunchSocket) + 1;
-    if (select(n, &readSet, NULL, NULL, &timeout) > 0) {
-        if (FD_ISSET(gPunchSocket, &readSet)) {
-            PunchPacket pp;
-            struct sockaddr_in addr;
-            socklen_t len = sizeof(addr);
-            auto bytesRead = recvfrom(
-                gPunchSocket,
-                (char *)&pp,
-                sizeof(PunchPacket),
-                0,
-                (struct sockaddr *)&addr,
-                &len
-            );
-            if (bytesRead == sizeof(PunchPacket)) {
-                SDL_Log("Got packet from punch server - (%d) %s", pp.command, FormatAddress(pp.address).c_str());
-                if (pp.command == kPunch) {
-                    if (gReadSocket != -1) {
-                        Punch(gReadSocket, pp.address);
-                    }
-                    else {
-                        SDL_Log("gReadSocket is not valid");
-                    }
-                }
-            }
-            else {
-                SDL_Log("Unknown response from punch server, %ld bytes", long(bytesRead));
-            }
-        }
-        if (FD_ISSET(gReadSocket, &readSet)) {
+    if (select(gAvaraSocket + 1, &readSet, NULL, NULL, &timeout) > 0) {
+        if (FD_ISSET(gAvaraSocket, &readSet)) {
             struct sockaddr_in addr;
             socklen_t len = sizeof(addr);
             UDPpacket *packet = CreatePacket(UDPSTREAMBUFFERSIZE);
             auto bytesRead = recvfrom(
-                gReadSocket,
+                gAvaraSocket,
                 (char *)packet->data,
                 UDPSTREAMBUFFERSIZE,
                 0,
@@ -270,10 +254,15 @@ void CheckSockets() {
             packet->address.host = addr.sin_addr.s_addr;
             packet->address.port = addr.sin_port;
             if (bytesRead > 0) {
-                gReadCallback.callback(packet, gReadCallback.userData);
+                if (packet->address.host == punchServer.host && packet->address.port == punchServer.port) {
+                    HandlePunchPacket(packet);
+                }
+                else {
+                    gReadCallback.callback(packet, gReadCallback.userData);
+                }
             }
             else {
-                SDL_Log("Read 0 bytes from %s", FormatAddress(packet->address).c_str());
+                SDL_Log("Read 0 bytes from %s - PUNCH", FormatAddress(packet->address).c_str());
             }
             FreePacket(packet);
         }
@@ -284,8 +273,6 @@ void UDPRead(int sock, ReadCompleteProc callback, void *userData) {
     if (sock != -1) {
         gReadCallback.callback = callback;
         gReadCallback.userData = userData;
-        // setting gReadSocket signals to CheckSockets that we're ready to start accepting data
-        gReadSocket = sock;
     }
 }
 

@@ -16,9 +16,6 @@ endif()
 
 find_package(SDL2 CONFIG REQUIRED)
 
-find_path(MINIUPNPC_INCLUDE_DIRS NAMES miniupnpc.h PATH_SUFFIXES miniupnpc)
-find_library(MINIUPNPC_LIBRARIES miniupnpc)
-
 find_package(glad CONFIG REQUIRED)
 
 find_package(GTest CONFIG REQUIRED)
@@ -50,13 +47,6 @@ if(NOT WIN32)
    find_package(OpenGL REQUIRED)
 endif()
 
-if(WIN32 OR MSVC)
-    set(CMAKE_CXX_FLAGS "/EHsc /std:c++17 /DNANOGUI_GLAD")
-    set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/platform/win/appicon.rc")
-    list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 opengl32 glu32 wsock32 ws2_32)
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:mainCRTStartup")
-    add_compile_definitions(NOMINMAX)
-endif()
 
 file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} 
     "src/audio/*.cpp" 
@@ -76,6 +66,14 @@ file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR}
     "vendor/csscolorparser.cpp"
     "vendor/stb_vorbis.c"
 )
+
+if(WIN32 OR MSVC)
+    set(CMAKE_CXX_FLAGS "/EHsc /std:c++17 /DNANOGUI_GLAD")
+    set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/platform/windows/appicon.rc")
+    list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 opengl32 glu32 wsock32 ws2_32)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:mainCRTStartup")
+    add_compile_definitions(NOMINMAX)
+endif()
 
 if(APPLE)
 	list(APPEND CORE_SOURCE "vendor/nanogui/darwin.mm")
@@ -145,10 +143,10 @@ target_include_directories(tests PUBLIC
     ${CORE_INCLUDES}
 )
 
-set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main ${MINIUPNPC_LIBRARIES} {OPENGL_LIBRARIES} dl pthread)
+set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main {OPENGL_LIBRARIES} dl pthread)
 
 if(WIN32)
-set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main glad::glad ${MINIUPNPC_LIBRARIES} ${OPENGL_LIBRARIES})
+set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main glad::glad ${OPENGL_LIBRARIES})
 add_custom_command(TARGET Avara POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:Avara> $<TARGET_FILE_DIR:Avara>
   COMMAND_EXPAND_LISTS
@@ -177,7 +175,6 @@ install(DIRECTORY rsrc/ DESTINATION rsrc)
 install(DIRECTORY levels/ DESTINATION levels)
 if(WIN32)
 install(FILES $<TARGET_RUNTIME_DLLS:Avara> DESTINATION ".")
-install(FILES ${PROJECT_BINARY_DIR}/miniupnpc.dll DESTINATION ".")
 endif()
 
 
@@ -186,16 +183,16 @@ set(CPACK_PACKAGE_VENDOR "Avaraline")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
-set(CPACK_PACKAGE_VERSION_MINOR "1")
+set(CPACK_PACKAGE_VERSION_MINOR "7")
 set(CPACK_PACKAGE_VERSION_PATCH "1")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "Avara")
 if(WIN32 AND NOT UNIX)
-	set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\avara.ico")
+	set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\windows\\\\avara.ico")
 	set(CPACK_NSIS_INSTALLED_ICON_NAME "Avara.exe")
-    set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\install.ico")
-    set(CPACK_NSIS_MUI_UNIICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\uninstall.ico")
-    set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\installsplash.bmp")
-    set(CPACK_NSIS_MUI_HEADERIMAGE "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\installheader.bmp")
+    set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\windows\\\\install.ico")
+    set(CPACK_NSIS_MUI_UNIICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\windows\\\\uninstall.ico")
+    set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\windows\\\\installsplash.bmp")
+    set(CPACK_NSIS_MUI_HEADERIMAGE "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\windows\\\\installheader.bmp")
     set(CPACK_NSIS_MANIFEST_DPI_AWARE ON)
     set(CPACK_NSIS_BRANDING_TEXT " ")
 	set(CPACK_NSIS_DISPLAY_NAME "Avara")
