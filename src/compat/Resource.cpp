@@ -286,14 +286,21 @@ json LoadLevelListFromJSON(std::string set) {
     return GetManifestJSON(set)["LEDI"];
 }
 
+bool haveDefaultManifest = false;
+json defaultManifest;
+
 json GetDefaultManifestJSON() {
-    std::stringstream setManifestName;
-    setManifestName << "rsrc" << PATHSEP << SETFILE;
-    char * setManifestPath = new char [PATH_MAX];
-    BundlePath(setManifestName, setManifestPath);
-    std::ifstream setManifestFile((std::string(setManifestPath)));
-    delete [] setManifestPath;
-    return json::parse(setManifestFile);
+    if (!haveDefaultManifest) {
+        std::stringstream setManifestName;
+        setManifestName << "rsrc" << PATHSEP << SETFILE;
+        char *setManifestPath = new char[PATH_MAX];
+        BundlePath(setManifestName, setManifestPath);
+        std::ifstream setManifestFile((std::string(setManifestPath)));
+        delete[] setManifestPath;
+        defaultManifest = json::parse(setManifestFile);
+        haveDefaultManifest = true;
+    }
+    return defaultManifest;
 }
 
 json GetManifestJSON(std::string set) {
@@ -581,4 +588,11 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
 
     HUnlock((Handle)aSample);
     return aSample;
+}
+
+void ClearCaches() {
+    bspCash.clear();
+    app_sound_cash.clear();
+    level_sound_cash.clear();
+    level_sets.clear();
 }

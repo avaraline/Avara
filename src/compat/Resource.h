@@ -60,3 +60,4 @@ void LoadDefaultOggFiles();
 void LoadLevelOggFiles(std::string set);
 void LoadOggFile(short resId, const char* filename);
 SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle sampleList);
+void ClearCaches();
