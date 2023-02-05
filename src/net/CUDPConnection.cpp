@@ -796,8 +796,10 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
     ipAddr = remoteHost;
     port = remotePort;
 
-    //IPaddress addr = { remoteHost, remotePort };
-    //Punch(itsOwner->stream, addr);
+    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary.
+    // But maybe this could speed things up?
+    // IPaddress addr = { remoteHost, remotePort };
+    // Punch(addr);
 }
 
 Boolean CUDPConnection::AreYouDone() {

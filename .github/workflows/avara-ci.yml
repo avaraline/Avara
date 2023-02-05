@@ -2,7 +2,7 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ main, fps-hybrid ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -30,12 +30,12 @@ jobs:
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
         with:
-          install: rsync git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make mingw-w64-x86_64-miniupnpc
+          install: rsync git zip mingw-w64-x86_64-SDL2 mingw-w64-x86_64-clang mingw-w64-x86_64-glbinding mingw-w64-x86_64-glew make
       - uses: actions/checkout@v2
       - name: make
         shell: msys2 {0}
         run: |
-          make set-version
+          make clean
           make -j2 windist
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
@@ -45,7 +45,7 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build-main/WinAvara.zip
+          asset_path: ./build/WinAvara.zip
           asset_name: Avara-Windows-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1
@@ -60,7 +60,7 @@ jobs:
           sudo cp -R /Volumes/SDL2/SDL2.framework /Library/Frameworks/
       - uses: actions/checkout@v2
       - name: make
-        run: make macdist
+        run: make clean macdist
       - name: deploy main nightly
         if: startsWith(github.repository_owner, 'avaraline') && endsWith(github.ref, 'main')
         uses: WebFreak001/deploy-nightly@v1.0.1
@@ -69,7 +69,7 @@ jobs:
         with:
           upload_url: https://uploads.github.com/repos/avaraline/Avara/releases/28954246/assets{?name,label}
           release_id: 28954246
-          asset_path: ./build-main/MacAvara.zip
+          asset_path: ./build/MacAvara.zip
           asset_name: Avara-macOS-Nightly-$$.zip
           asset_content_type: application/zip
           max_releases: 1
