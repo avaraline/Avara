@@ -87,7 +87,7 @@ CNetManager* CAvaraGame::CreateNetManager() {
     return new CNetManager;
 }
 
-CAvaraGame::CAvaraGame(uint16_t frameTime) {
+CAvaraGame::CAvaraGame(int32_t frameTime) {
     SetFrameTime(frameTime);
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
@@ -1121,12 +1121,12 @@ long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
 }
 
-void CAvaraGame::SetFrameTime(uint16_t ft) {
+void CAvaraGame::SetFrameTime(int32_t ft) {
     if (ft != 2 && ft != 4 && ft != 8 && ft != 16 && ft != 32 && ft != 64) {
       SDL_Log("ERROR! frameTime MUST be 2, 4, 8, 16, 32 or 64 msec");
       exit(1); // is exit too dramatic?
     }
-    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %u)\n", ft);
+    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %i)\n", ft);
     this->frameTime = ft;
     this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
     if (gApplication) gApplication->Set(kFrameTimeTag, frameTime);
