@@ -1,0 +1,23 @@
+1 VERSIONINFO
+FILEVERSION     0,7,2,0
+PRODUCTVERSION  0,7,2,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    BEGIN
+      VALUE "CompanyName", "Avaraline"
+      VALUE "FileDescription", "A retro 90s action-arcade shooter with networked multiplayer"
+      VALUE "FileVersion", "0.7.2"
+      VALUE "InternalName", "Avara"
+      VALUE "LegalCopyright", "Avaraline"
+      VALUE "OriginalFilename", "Avara.exe"
+      VALUE "ProductName", "Avara"
+      VALUE "ProductVersion", "0.7.2"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x409, 1252
+  END
+END
