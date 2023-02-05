@@ -14,10 +14,13 @@
 #define UDPSTREAMBUFFERSIZE 16384
 #define UDPSENDBUFFERSIZE 1024
 
-typedef struct __attribute__((packed)) {
+
+#pragma pack(1)
+typedef struct {
     uint32_t host;
     uint16_t port;
 } IPaddress;
+#pragma pack()
 
 typedef struct {
     uint8_t *data;

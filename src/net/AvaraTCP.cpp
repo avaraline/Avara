@@ -40,11 +40,13 @@ typedef struct {
     void *userData;
 } UDPReadData;
 
-typedef struct __attribute__((packed)) {
+#pragma pack(1)
+typedef struct {
     uint8_t command;
     IPaddress address;
     uint16_t localPort;
 } PunchPacket;
+#pragma pack()
 
 enum { kPunchPing = 1, kPunchRequest = 2, kPunch = 3 };
 
