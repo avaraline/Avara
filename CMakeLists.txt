@@ -21,9 +21,11 @@ find_library(MINIUPNPC_LIBRARIES miniupnpc)
 
 find_package(glad CONFIG REQUIRED)
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+find_package(GTest CONFIG REQUIRED)
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}$<0:>")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}$<0:>")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}$<0:>")
 
 execute_process (
     COMMAND git describe --always --dirty
@@ -38,10 +40,11 @@ execute_process (
 
 add_compile_definitions(GIT_VERSION="${GIT_HASH}")
 
-# Modules for copying file, finding OpenGL and SDL libraries
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules")
+add_custom_target(copy_assets
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/rsrc ${PROJECT_BINARY_DIR}/rsrc
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/levels ${PROJECT_BINARY_DIR}/levels
+)
 
-include(TargetCopyFiles)
 
 if(NOT WIN32)
    find_package(OpenGL REQUIRED)
@@ -49,18 +52,11 @@ endif()
 
 if(WIN32 OR MSVC)
     set(CMAKE_CXX_FLAGS "/EHsc /std:c++17 /DNANOGUI_GLAD")
+    set(APP_ICON_RESOURCE_WINDOWS "${CMAKE_CURRENT_SOURCE_DIR}/platform/win/appicon.rc")
     list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid advapi32 shell32 opengl32 glu32 wsock32 ws2_32)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:mainCRTStartup")
     add_compile_definitions(NOMINMAX)
 endif()
-
-
-add_custom_target(datafiles ALL)
-add_copy_directory(datafiles shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/shaders)
-add_copy_directory(datafiles rsrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/rsrc)
-add_copy_directory(datafiles bsps DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bsps)
-add_copy_directory(datafiles levels DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/levels)
-
 
 file(GLOB_RECURSE CORE_SOURCE RELATIVE ${CMAKE_SOURCE_DIR} 
     "src/audio/*.cpp" 
@@ -135,40 +131,35 @@ add_executable(Avara
 add_executable(tests
     src/tests.cpp
     $<TARGET_OBJECTS:AvaraCore>
-    vendor/gtest/src/gtest-all.cc
 )
 
-add_executable(hsnd2wav 
-    src/hsnd2wav.cpp
-    $<TARGET_OBJECTS:AvaraCore>
-)
-
-add_dependencies(Avara datafiles)
-add_dependencies(tests datafiles)
-add_dependencies(hsnd2wav datafiles)
+add_dependencies(Avara copy_assets)
+add_dependencies(tests copy_assets)
 
 target_compile_options(Avara PRIVATE ${AVARA_COMPILE_OPTIONS})
 target_compile_options(tests PRIVATE ${AVARA_COMPILE_OPTIONS})
-target_compile_options(hsnd2wav PRIVATE ${AVARA_COMPILE_OPTIONS})
 
 target_include_directories(AvaraCore PUBLIC ${CORE_INCLUDES})
 target_include_directories(Avara PUBLIC ${CORE_INCLUDES})
 target_include_directories(tests PUBLIC 
     ${CORE_INCLUDES}
-    vendor/gtest
-    vendor/gtest/include
 )
-target_include_directories(hsnd2wav PUBLIC ${CORE_INCLUDES})
 
 set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main ${MINIUPNPC_LIBRARIES} {OPENGL_LIBRARIES} dl pthread)
 
 if(WIN32)
 set(AVARA_LIBS SDL2::SDL2 SDL2::SDL2main glad::glad ${MINIUPNPC_LIBRARIES} ${OPENGL_LIBRARIES})
+add_custom_command(TARGET Avara POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:Avara> $<TARGET_FILE_DIR:Avara>
+  COMMAND_EXPAND_LISTS
+  )
 endif()
 
 target_link_libraries(Avara ${AVARA_LIBS})
-target_link_libraries(tests ${AVARA_LIBS} ${EXTRA_LIBS})
-target_link_libraries(hsnd2wav ${AVARA_LIBS} ${EXTRA_LIBS})
+
+target_link_libraries(tests ${AVARA_LIBS} ${EXTRA_LIBS} GTest::gtest GTest::gtest_main)
+
+#target_link_libraries(hsnd2wav ${AVARA_LIBS} ${EXTRA_LIBS})
 
 
 if(WIN32)
@@ -177,17 +168,18 @@ endif()
 
 
 install(TARGETS Avara
-    RUNTIME DESTINATION bin
-    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION "."
+    LIBRARY DESTINATION "."
+    ARCHIVE DESTINATION "."
 )
-install(DIRECTORY rsrc/ DESTINATION bin/rsrc/)
-install(DIRECTORY shaders/ DESTINATION bin/shaders/)
-install(DIRECTORY bsps/ DESTINATION bin/bsps/)
-install(DIRECTORY levels/ DESTINATION bin/levels/)
 
+install(DIRECTORY rsrc/ DESTINATION rsrc)
+install(DIRECTORY levels/ DESTINATION levels)
 if(WIN32)
-    install(FILES platform/windows/SDL2-2.0.12/lib/x64/SDL2.dll DESTINATION bin/)
+install(FILES $<TARGET_RUNTIME_DLLS:Avara> DESTINATION ".")
+install(FILES ${PROJECT_BINARY_DIR}/miniupnpc.dll DESTINATION ".")
 endif()
+
 
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Avara - a 3d networked multiplayer shooter")
 set(CPACK_PACKAGE_VENDOR "Avaraline")
@@ -196,17 +188,25 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "1")
 set(CPACK_PACKAGE_VERSION_PATCH "1")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "Avara 0.1.1")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "Avara")
 if(WIN32 AND NOT UNIX)
-	#set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/platform/windows\\\\avara.bmp")
-	set(CPACK_NSIS_INSTALLED_ICON_NAME "build\\\\Avara.exe")
+	set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\avara.ico")
+	set(CPACK_NSIS_INSTALLED_ICON_NAME "Avara.exe")
+    set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\install.ico")
+    set(CPACK_NSIS_MUI_UNIICON "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\uninstall.ico")
+    set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\installsplash.bmp")
+    set(CPACK_NSIS_MUI_HEADERIMAGE "${CMAKE_CURRENT_SOURCE_DIR}\\\\platform\\\\win\\\\installheader.bmp")
+    set(CPACK_NSIS_MANIFEST_DPI_AWARE ON)
+    set(CPACK_NSIS_BRANDING_TEXT " ")
 	set(CPACK_NSIS_DISPLAY_NAME "Avara")
+    set(CPACK_NSIS_PACKAGE_NAME "Avara")
 	set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.github.com\\\\avaraline\\\\avara")
 	set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\avara.io")
 	set(CPACK_NSIS_CONTACT "#avaraline@avaraline.net")
-	set(CPACK_NSIS_MODIFY_PATH ON)
+	set(CPACK_NSIS_MODIFY_PATH OFF)
+    set(CPACK_NSIS_MUI_FINISHPAGE_RUN "Avara.exe")
 else()
-	set(CPACK_STRIP_FILES "build/Avara")
+	set(CPACK_STRIP_FILES "Avara")
 	set(CPACK_SOURCE_STRIP_FILES "")
 endif()
 set(CPACK_PACKAGE_EXECUTABLES "Avara" "Avara")
