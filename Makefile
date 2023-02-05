@@ -58,7 +58,7 @@ else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
 	undefine BUILD_SYMLINK
 	WINDRES := $(shell which windres)
-	PLATFORM := platform/win
+	PLATFORM := platform/windows
 	PRE_PROCESS += $(WINDRES) $(PLATFORM)/appicon.rc -O coff $(BUILD_DIR)/appicon.o;
 	PRE_PROCESS += $(WINDRES) $(PLATFORM)/version.rc -O coff $(BUILD_DIR)/version.o;
 	EXTRA_OBJS += $(BUILD_DIR)/appicon.o $(BUILD_DIR)/version.o
@@ -116,8 +116,8 @@ winapp: avara
 	rm -rf $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
 	if [ -f $(BUILD_DIR)/Avara ]; then mv $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe; fi
-	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc,vendor,src} $(BUILD_DIR)/WinAvara
-	# cp platform/windows/*.dll $(BUILD_DIR)/WinAvara
+	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc} $(BUILD_DIR)/WinAvara
+# Copy DLLs from mingw64
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2,libminiupnpc}.dll $(BUILD_DIR)/WinAvara
 
 windist: winapp
