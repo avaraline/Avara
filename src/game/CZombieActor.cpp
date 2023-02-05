@@ -226,7 +226,7 @@ void CZombieActor::FrameAction() {
             newScore = 0;
         } else {
             if (theHit.distance > FIX(16))
-                newScore += FIX(1);
+                newScore = FIX(1);
             else
                 newScore = theHit.distance >> 4;
         }

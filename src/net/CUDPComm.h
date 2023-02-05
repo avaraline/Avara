@@ -12,6 +12,7 @@
 #include "CCommManager.h"
 #include "CommDefs.h"
 #include "Types.h"
+#include "CUDPConnection.h"
 
 #include <string>
 
@@ -101,7 +102,7 @@ public:
     virtual void WritePrefs();
     virtual void Dispose();
 
-    long GetClock();
+    int32_t GetClock();
 
     virtual void ReadComplete(UDPpacket *packet);
     virtual void WriteComplete(int result);
@@ -114,6 +115,7 @@ public:
     virtual void ForwardPacket(PacketInfo *thePacket);
     virtual void ProcessQueue();
 
+    virtual std::string FormatConnectionTable(CompleteAddress *table);
     virtual void SendConnectionTable();
     virtual void ReadFromTOC(PacketInfo *thePacket);
 
@@ -131,7 +133,7 @@ public:
     virtual OSErr CreateStream(port_num streamPort);
 
     virtual void CreateServer();
-    virtual OSErr ContactServer(ip_addr serverHost, port_num serverPort);
+    virtual OSErr ContactServer(IPaddress &serverAddr);
 
     virtual Boolean ServerSetupDialog(Boolean disableSome);
 

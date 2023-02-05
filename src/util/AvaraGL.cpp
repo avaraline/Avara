@@ -146,7 +146,7 @@ void AvaraGLUpdateProjectionMatrix() {
     glCheckErrors();
 }
 
-void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, long color) {
+void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, uint32_t color) {
     if (!actuallyRender) return;
 
     float x = cos(Deg2Rad(elevation)) * intensity;
@@ -178,7 +178,7 @@ void AvaraGLSetLight(int light_index, float intensity, float elevation, float az
     }
 }
 
-void AvaraGLSetAmbient(float ambient, long color) {
+void AvaraGLSetAmbient(float ambient, uint32_t color) {
     if (!actuallyRender) return;
 
     float rgb[3];

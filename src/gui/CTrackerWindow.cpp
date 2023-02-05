@@ -184,7 +184,7 @@ void CTrackerWindow::Query() {
         while (resultsBox->childCount() > 0) {
             resultsBox->removeChild(0);
         }
-        int serverCount = apiData["games"].size();
+        auto serverCount = apiData["games"].size();
         for (int i = 0; i < serverCount; i++) {
             auto game = apiData["games"][i];
             std::string players;

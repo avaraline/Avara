@@ -33,7 +33,7 @@ Fixed FixATan2(Fixed x, Fixed y) {
 }
 
 void InitTrigTables() {
-    long i;
+    int i;
 
     {
         arcTanTable = (unsigned short *)NewPtr(sizeof(unsigned short) * ARCUSTABLESIZE * 2);
@@ -85,7 +85,7 @@ Fixed NormalizeVector(long n, Fixed *v) {
 
 void InitMatrix() {
     InitTrigTables();
-    FRandSeed = TickCount();
+    FRandSeed = (Fixed)TickCount();
 }
 
 void CloseMatrix() {

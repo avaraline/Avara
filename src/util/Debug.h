@@ -4,6 +4,8 @@
 #include <string>
 #include <map>
 
+#define DBG_Log(key, ...)  if (Debug::IsEnabled(key)) { SDL_Log( key "> " __VA_ARGS__); }
+
 class Debug {
 private:
     static std::map<std::string, int> debugMap;

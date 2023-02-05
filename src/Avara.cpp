@@ -73,10 +73,11 @@ int main(int argc, char *argv[]) {
             app->Set(kPlayerNameTag, std::string(argv[++i]));
         } else if (arg == "-c" || arg == "--connect") {
             connectAddress = std::string(argv[++i]);
+            app->Set(kLastAddress, connectAddress);
         } else if (arg == "-h" || arg == "--host") {
             host = true;
         } else if (arg == "-f" || arg == "--frametime") {
-            long frameTime = atol(argv[++i]);  // pre-inc to next arg
+            uint16_t frameTime = atol(argv[++i]);  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
         } else if (arg == "--command") {
             textCommand = std::string(argv[++i]);
@@ -100,7 +101,7 @@ int main(int argc, char *argv[]) {
     } else if(connectAddress.size() > 0) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
-    
+
     // the mainloop should be sufficiently fast so that frames occur near their scheduled time
     mainloop(app->GetGame()->frameTime / 4);
 

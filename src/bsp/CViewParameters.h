@@ -47,7 +47,7 @@ public:
     Vector internalLights[MAXLIGHTS] = {{0}}; //	Vector length == light source power.
 
     Fixed ambientLight = 0; //	Intensity of ambient (nondirectional) light
-    long ambientLightColor = 0; // Color of ambient (nondirectional) light.
+    uint32_t ambientLightColor = 0; // Color of ambient (nondirectional) light.
 
     Fixed yonBound = 0;
     Fixed hitherBound = 0;

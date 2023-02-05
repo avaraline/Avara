@@ -17,6 +17,9 @@
 #include "CommDefs.h"
 #include "CommandList.h"
 #include "Preferences.h"
+#include "Debug.h"
+
+#include <bitset>
 
 static Boolean ImmedProtoHandler(PacketInfo *thePacket, Ptr userData) {
     CProtoControl *theControl;
@@ -180,6 +183,11 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
     return didHandle;
 }
 
+static std::string FormatDist(uint16_t distribution) {
+    std::bitset<kMaxAvaraPlayers> bits{distribution};
+    return bits.to_string();
+}
+
 Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
     CNetManager *theNet = theGame->itsNet;
@@ -189,14 +197,18 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
         case kpLogin: //	Only servers see this
         {
             short senderDistr = 1 << thePacket->sender;
-
+            DBG_Log("login", "kpLogin received from = %d\n", thePacket->sender);
+            DBG_Log("login", "sending kpLoginAck to = %s\n", FormatDist(senderDistr).c_str());
             itsManager->SendPacket(senderDistr, kpLoginAck, thePacket->sender, 0, 0, 0, NULL);
+            DBG_Log("login", "sending kpNameQuery(%d) to = %s\n", thePacket->sender, FormatDist(kdEveryone).c_str());
             itsManager->SendPacket(kdEveryone, kpNameQuery, thePacket->sender, 0, 0, 0, NULL);
+            DBG_Log("login", "sending kpNewArrival(%d) to = %s\n", thePacket->sender, FormatDist(~senderDistr).c_str());
             itsManager->SendPacket(~senderDistr, kpNewArrival, thePacket->sender, 0, 0, 0, NULL);
             didHandle = false;
         } break;
         case kpLoginAck:
             itsManager->myId = thePacket->p1;
+            DBG_Log("login", "kpLoginAck received with myId = %d\n", itsManager->myId);
             itsManager->SendPacket(kdEveryone - (1 << thePacket->p1), kpPing, 0, 0, 32, 0, NULL);
             // kpLoginAck is called when anyone joins/exits, so good place to check where the "local" player is
             for (int i = 0; i < kMaxAvaraPlayers; i++) {

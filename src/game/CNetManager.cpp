@@ -465,7 +465,7 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
     SDL_Log("ReceiveLoadLevel(%d, %d, %s, %d)\n", senderSlot, originalSender, theSetAndTag, seed);
 
     std::string setAndTag(theSetAndTag);
-    int pos = setAndTag.find("/");
+    auto pos = setAndTag.find("/");
     std::string set = setAndTag.substr(0, pos);
     std::string tag = setAndTag.substr(pos + 1, std::string::npos);
 
@@ -759,24 +759,23 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
                 autoLatencyVote /= autoLatencyVoteCount;
-                bool debuglt = Debug::IsEnabled("lt");
-                if (debuglt) { SDL_Log("====autoLatencyVote = %ld\n", autoLatencyVote); }
+                DBG_Log("lt", "====autoLatencyVote = %ld\n", autoLatencyVote);
                 // if, on average, players had to wait more than some percent of frames during this latency vote period,
                 // then add 1 frame to the LT calculation
                 if (autoLatencyVote > HIGHERLATENCYCOUNT) {
                     addOneLatency++;
                     // don't let it go above 1.0 LT
                     addOneLatency = std::min(short(1.0/itsGame->fpsScale), addOneLatency);
-                    if (debuglt) { SDL_Log("  ++addOneLatency increased = %hd\n", addOneLatency); }
+                    DBG_Log("lt", "  ++addOneLatency increased = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (autoLatencyVote > LOWERLATENCYCOUNT) {
                     // vote too high to reduce addOneLatency, push subtractOneCheck forward
-                    if (debuglt) { SDL_Log("   >addOneLatency keeping = %hd\n", addOneLatency); }
+                    DBG_Log("lt", "   >addOneLatency keeping = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (addOneLatency > 0 && frameNumber >= subtractOneCheck) {
                     // if no significant waiting seen for 8 CONSECUTIVE autoLatency votes, about 30 seconds, let it creep back down 1 fps frame
                     addOneLatency--;
-                    if (debuglt) { SDL_Log("  --addOneLatency decreased = %hd\n", addOneLatency); }
+                    DBG_Log("lt", "  --addOneLatency decreased = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 }
 
@@ -826,7 +825,7 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
                                      int16_t p2,        // maxRoundLatency
                                      int32_t p3) {      // FRandSeed
 
-    if (Debug::IsEnabled("lt")) { SDL_Log("CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3); }
+    DBG_Log("lt", "CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
     autoLatencyVoteCount++;
     autoLatencyVote += p1;
 
@@ -846,18 +845,18 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
             // the first vote received dictates what the fragmentCheck value is, not necessarily the current player
             fragmentDetected = false;
             fragmentCheck = p3;
-            // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %ld", fragmentCheck, itsGame->frameNumber);
+            // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %u", fragmentCheck, itsGame->frameNumber);
         } else {
             // any votes after the first must have a matching p3 value
             if (fragmentCheck != p3) {
-                SDL_Log("FRAGMENTATION %d != %d in frameNumber %ld", fragmentCheck, p3, itsGame->frameNumber);
+                SDL_Log("FRAGMENTATION %d != %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
                 fragmentDetected = true;
             // } else {
-            //     SDL_Log("No frags detected so far %d == %d in frameNumber %ld", fragmentCheck, p3, itsGame->frameNumber);
+            //     SDL_Log("No frags detected so far %d == %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
             }
         }
     } else {
-        SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%ld",
+        SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%u",
                 p3, itsGame->frameNumber);
     }
 }
@@ -1351,26 +1350,12 @@ void CNetManager::ChangedServerOptions(short curOptions) {
 void CNetManager::NewArrival(short slot) {
     CPlayerManager *thePlayer = playerTable[slot];
     itsGame->itsApp->NotifyUser();
-    std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
-    SDL_Log("%s has joined!!\n", name.c_str());
+    SDL_Log("someone has joined in slot #%d\n", slot+1);
     itsGame->scoreKeeper->PlayerJoined();
 }
 
 void CNetManager::ResultsReport(Ptr results) {
     itsGame->scoreKeeper->ReceiveResults((int32_t *)results);
-}
-
-void CNetManager::Beep() {
-    Beep();
-    /*
-    if(gAsyncBeeper)
-    {	Str255		bellSoundName;
-        Handle		theSound;
-
-        gApplication->ReadStringPref(kBellSoundTag, bellSoundName);
-        gAsyncBeeper->PlayNamedBeep(bellSoundName);
-    }
-    */
 }
 
 /*

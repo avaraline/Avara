@@ -114,8 +114,8 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
 
 void CSmartBox::ISmartBox(short resId,
     Fixed *dimensions,
-    long color,
-    long altColor,
+    uint32_t color,
+    uint32_t altColor,
     CAbstractActor *anActor,
     short aPartCode) {
     bspsResource **config;

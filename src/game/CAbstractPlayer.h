@@ -44,7 +44,7 @@ public:
     CAbstractPlayer *nextPlayer = 0;
     PlayerConfigRecord defaultConfig = {0};
 
-    long longTeamColor = 0; // Hull color in 0x00RRGGBB format.
+    uint32_t longTeamColor = 0; // Hull color in 0x00RRGGBB format.
 
     //	Shields & energy:
     Fixed energy = 0;
@@ -165,7 +165,7 @@ public:
     virtual void AdaptableSettings();
     virtual void LoadHUDParts();
     virtual void ReplacePartColors();
-    virtual void SetSpecialColor(long specialColor);
+    virtual void SetSpecialColor(uint32_t specialColor);
     virtual void LoadParts();
     virtual void LoadScout();
     virtual void StartSystems();

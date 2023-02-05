@@ -54,16 +54,6 @@
 
 #define kHighShadeCount 12
 
-static Fixed menuRates[] = {-1, //	index from 1
-    0, //	system auto
-    -1, //	dividing line
-    rate11025hz,
-    rate22050hz,
-    rate44khz,
-    -1,
-    rate11khz,
-    rate22khz};
-
 void CAvaraGame::InitMixer(Boolean silentFlag) {
     CSoundMixer *aMixer;
 
@@ -97,7 +87,7 @@ CNetManager* CAvaraGame::CreateNetManager() {
     return new CNetManager;
 }
 
-CAvaraGame::CAvaraGame(int frameTime) {
+CAvaraGame::CAvaraGame(uint16_t frameTime) {
     SetFrameTime(frameTime);
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
@@ -606,7 +596,7 @@ void CAvaraGame::EndScript() {
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
             // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
-            //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color); 
+            //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
             AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
@@ -850,13 +840,13 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
 }
 
 bool CAvaraGame::GameTick() {
-    int32_t startTime = SDL_GetTicks();
+    uint32_t startTime = SDL_GetTicks();
 
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        long pingInterval = 2000; //msec
+        uint32_t pingInterval = 2000; //msec
         if (statusRequest == kPlayingStatus) {
             // experimental: '/dbg ping' will turn pings on/off during game
             if (Debug::IsEnabled("ping")) {
@@ -916,7 +906,7 @@ bool CAvaraGame::GameTick() {
     // increment frameNumber, set nextScheduledFrame time
     IncrementFrame();
 
-    timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
+    timeInSeconds = frameNumber * frameTime / 1000;
 
     if (latencyTolerance)
         while (FramesFromNow(latencyTolerance) > topSentFrame)
@@ -1051,7 +1041,7 @@ void CAvaraGame::Render(NVGcontext *ctx) {
         gameStatus == kLoseStatus) {
         ViewControl();
         itsWorld->Render(itsView);
-        AvaraGLSetAmbient(.7, LONG_MAX);
+        AvaraGLSetAmbient(.7, UINT_MAX);
         AvaraGLSetDepthTest(false);
         hudWorld->Render(itsView);
         AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
@@ -1106,8 +1096,6 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
 
         // if it changed
         if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
-            SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
-
             std::ostringstream oss;
             std::time_t t = std::time(nullptr);
             oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
@@ -1133,12 +1121,12 @@ long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
 }
 
-void CAvaraGame::SetFrameTime(long ft) {
+void CAvaraGame::SetFrameTime(uint16_t ft) {
     if (ft != 2 && ft != 4 && ft != 8 && ft != 16 && ft != 32 && ft != 64) {
       SDL_Log("ERROR! frameTime MUST be 2, 4, 8, 16, 32 or 64 msec");
       exit(1); // is exit too dramatic?
     }
-    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %ld)\n", ft);
+    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %u)\n", ft);
     this->frameTime = ft;
     this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
     if (gApplication) gApplication->Set(kFrameTimeTag, frameTime);

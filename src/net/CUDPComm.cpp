@@ -40,6 +40,7 @@ int numToDrop = 0;
 #include "CommandList.h"
 #include "Preferences.h"
 #include "System.h"
+#include "Debug.h"
 
 #include <miniupnpc.h>
 #include <upnpcommands.h>
@@ -303,7 +304,6 @@ CUDPConnection * CUDPComm::ConnectionForPacket(UDPpacket *udp) {
 
 void CUDPComm::ForwardPacket(PacketInfo *thePacket) {
     CUDPConnection *conn;
-    short dummyStackVar;
 
     // SDL_Log("CUDPComm::ForwardPacket cmd=%d sndr=%d dist=0x%02x myId=%d\n", thePacket->command,
     //         thePacket->sender, thePacket->distribution, myId);
@@ -376,6 +376,18 @@ void CUDPComm::ProcessQueue() {
     */
 }
 
+std::string CUDPComm::FormatConnectionTable(CompleteAddress *table) {
+    std::ostringstream oss;
+    oss << " Slot   myId   Host:Port\n";
+    oss << "------+------+---------------\n";
+    // oss << "   1   | " << FormatHostPort(table->host, table->port) << "\n";
+    int slot = 2;
+    for (CUDPConnection *conn = connections; conn; conn = conn->next, table++, slot++) {
+        oss << "   " << slot << "  |   " << conn->myId + 1 << "  | " << FormatHostPort(table->host, table->port) << "\n";
+    }
+    return oss.str();
+}
+
 /*
 **	The connection table contains the Id number for the receiver
 **	and an IP address + port number for every participating Id.
@@ -396,9 +408,14 @@ void CUDPComm::SendConnectionTable() {
         tablePack->command = kpPacketProtocolTOC;
 
         //	Fill in the table first:
+        // int i=0;
         for (conn = connections; conn; conn = conn->next) {
             if (conn->port && !conn->killed) {
+                // if (i++ < 1) {
+                //     table->host = SDL_SwapBE32(0x68e809d0);
+                // } else {
                 table->host = conn->ipAddr;
+                // }
                 table->port = conn->port;
             } else {
                 table->host = 0;
@@ -406,6 +423,8 @@ void CUDPComm::SendConnectionTable() {
             }
             table++;
         }
+
+        DBG_Log("login", "Sending Connection Table ...\n%s", FormatConnectionTable((CompleteAddress *)tablePack->dataBuffer).c_str());
 
         tablePack->dataLen = ((Ptr)table) - tablePack->dataBuffer;
 
@@ -538,11 +557,18 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     clientReady = true;
 
     table = (CompleteAddress *)thePacket->dataBuffer;
+    DBG_Log("login", "Received Connection Table ...\n%s", FormatConnectionTable(table).c_str());
+
     table[myId - 1].host = 0; // don't want to connect to myself
     table[myId - 1].port = 0;
-
     connections->MarkOpenConnections(table);
+    DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
+
+    connections->RewriteConnections(table);
+    DBG_Log("login", "After rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+
     connections->OpenNewConnections(table);
+    DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
@@ -562,6 +588,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
         case kpPacketProtocolTOC:
             if (!isServing && thePacket->p3 == seed) {
                 ReadFromTOC(thePacket);
+                DBG_Log("login", "sending kpPacketProtocolTOC to kdEveryone\n");
                 SendPacket(kdEveryone, kpPacketProtocolControl, udpCramInfo, cramData, 0, 0, NULL);
             }
             break;
@@ -800,7 +827,6 @@ OSErr CUDPComm::AsyncRead() {
 #define kNumConnectionTypes (kFastestConnectionCmd - kSlowestConnectionCmd + 1)
 
 Boolean CUDPComm::AsyncWrite() {
-    OSErr theErr;
     CUDPConnection *theConnection;
     CUDPConnection *firstSender;
     UDPPacketInfo *thePacket = NULL;
@@ -918,7 +944,6 @@ Boolean CUDPComm::AsyncWrite() {
             PacketInfo *p;
             char *fp;
             uint8_t flags = 0;
-            short len;
 
             p = &thePacket->packet;
 
@@ -1088,7 +1113,7 @@ Boolean CUDPComm::AsyncWrite() {
     return result;
 }
 
-long CUDPComm::GetClock() {
+int32_t CUDPComm::GetClock() {
     // Apparently this clock is about 240/second?
     // Upon further investigation, the original code,
     // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);
@@ -1105,8 +1130,6 @@ long CUDPComm::GetClock() {
 **	no other data to send within twice that period.
 */
 void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, long urgentTimePeriod) {
-    OSErr theErr;
-
     ICommManager(bufferCount);
 
     inviteString[0] = 0;
@@ -1368,15 +1391,16 @@ void ForwardPorts(port_num port) {
 }
 
 void CUDPComm::CreateServer() {
-    OSErr theErr;
-
     localPort = gApplication->Number(kDefaultUDPPort);
 
-    std::thread forwardPorts(ForwardPorts, localPort);
-    forwardPorts.detach();
+    //std::thread forwardPorts(ForwardPorts, localPort);
+    //forwardPorts.detach();
     OpenAvaraTCP();
 
     if (noErr == CreateStream(localPort)) {
+        IPaddress localAddr = {htonl(localIP), htons(localPort)};
+        RegisterPunchServer(localAddr);
+
         isConnected = true;
         isServing = true;
         myId = 0;
@@ -1393,15 +1417,18 @@ void CUDPComm::CreateServer() {
     */
 }
 
-OSErr CUDPComm::ContactServer(ip_addr serverHost, port_num serverPort) {
+OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
     if (noErr == CreateStream(localPort)) {
         long startTime;
         SDL_Event theEvent;
 
+        // Before we "connect", notify the punch server so it can tell the host to open a hole (to our localPort)
+        RequestPunch(serverAddr, localPort);
+
         seed = TickCount();
         connections->myId = 0;
-        connections->port = serverPort;
-        connections->ipAddr = serverHost;
+        connections->port = serverAddr.port;
+        connections->ipAddr = serverAddr.host;
 
         SDL_Log("Connecting to %s (seed=%ld) from port %d\n", FormatAddr(connections).c_str(), seed, localPort);
 
@@ -1464,8 +1491,8 @@ void CUDPComm::Connect(std::string address) {
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
     SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
-    std::thread forwardPorts(ForwardPorts, localPort);
-    forwardPorts.detach();
+    //std::thread forwardPorts(ForwardPorts, localPort);
+    //forwardPorts.detach();
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
@@ -1473,13 +1500,13 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     localPort = gApplication->Number(kDefaultClientUDPPort, serverPort);
 
     IPaddress addr;
-    CAvaraApp *app = (CAvaraAppImpl *)gApplication;
+    // CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();
     BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
 
-    ContactServer(addr.host, addr.port);
+    ContactServer(addr);
     /*
     DialogPtr		clientDialog;
     short			itemHit;

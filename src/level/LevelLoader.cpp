@@ -55,8 +55,8 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     theLoc[0] = lastDomeCenter.h;
     theLoc[2] = lastDomeCenter.v;
     theLoc[3] = 0;
-    *startAngle = FDegToOne(((long)lastDomeAngle) << 16);
-    *spanAngle = FDegToOne(((long)lastDomeSpan) << 16);
+    *startAngle = FDegToOne(FIX(lastDomeAngle));
+    *spanAngle = FDegToOne(FIX(lastDomeSpan));
 
     return lastDomeRadius;
 }
@@ -88,7 +88,7 @@ Fixed GetLastOval(Fixed *theLoc) {
 }
 
 Fixed GetLastArcDirection() {
-    return FDegToOne(((long)lastArcAngle) << 16);
+    return FDegToOne(FIX(lastArcAngle));
 }
 
 struct ALFWalker: pugi::xml_tree_walker {
@@ -222,7 +222,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
 
         if (!node.attribute("angle").empty()) {
-            int arcAngle = ReadLongVar("angle");
+            short arcAngle = ReadShortVar("angle");
 
             lastArcAngle = (900 - arcAngle) % 360;
             lastDomeAngle = 360 - arcAngle;
@@ -236,7 +236,7 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_dome(pugi::xml_node& node) {
         if (!node.attribute("quarters").empty()) {
-            int extent = ReadLongVar("quarters") * 90;
+            short extent = ReadShortVar("quarters") * 90;
             lastDomeSpan = (extent >= 90 && extent <= 360)
                 ? extent
                 : 360;

@@ -197,7 +197,7 @@ void CAbstractPlayer::ReplacePartColors() {
     }
 }
 
-void CAbstractPlayer::SetSpecialColor(long specialColor) {
+void CAbstractPlayer::SetSpecialColor(uint32_t specialColor) {
     longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
@@ -1542,8 +1542,7 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
 }
 
 Fixed CAbstractPlayer::GetTotalMass() {
-    return (((long)boostsRemaining) << 18) + (((long)grenadeCount) << 16) + (((long)missileCount) << 16) +
-           CRealMovers::GetTotalMass();
+    return (FIX(boostsRemaining) << 2) + FIX(grenadeCount) + FIX(missileCount) + CRealMovers::GetTotalMass();
 }
 
 void CAbstractPlayer::PlayerWasMoved() {
