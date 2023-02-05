@@ -718,7 +718,7 @@ void CNetManager::FrameAction() {
     }
 }
 
-void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
+void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
     if (didWait) {
         localLatencyVote++;
     }

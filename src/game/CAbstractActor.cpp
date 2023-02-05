@@ -1258,10 +1258,10 @@ double CAbstractActor::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
     return pow(fpsCoeff1, fpsScale);
 }
 
-long CAbstractActor::FpsFramesPerClassic(long classicFrames)
+FrameNumber CAbstractActor::FpsFramesPerClassic(FrameNumber classicFrames)
 {
     if (HandlesFastFPS()) {
-        return long(classicFrames / itsGame->fpsScale);
+        return (classicFrames / itsGame->fpsScale);
     } else {
         return 1;
     }

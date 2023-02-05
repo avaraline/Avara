@@ -44,8 +44,8 @@ public:
     virtual std::deque<MsgLine>& MessageLines() = 0;
     virtual void DrawUserInfoPart(short i, short partList) = 0;
     virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2 = NULL) = 0;
-    virtual void StartFrame(long frameNum) = 0;
-    virtual void BrightBox(long frameNum, short position) = 0;
+    virtual void StartFrame(FrameNumber frameNum) = 0;
+    virtual void BrightBox(FrameNumber frameNum, short position) = 0;
     virtual void LevelReset() = 0;
     virtual long Number(const std::string name) = 0;
     virtual bool Boolean(const std::string name) = 0;
@@ -116,11 +116,11 @@ public:
     virtual void SetIndicatorDisplay(short i, short v);
     virtual void NumberLine(long theNum, short align);
     virtual void DrawUserInfoPart(short i, short partList) override;
-    virtual void BrightBox(long frameNum, short position) override;
+    virtual void BrightBox(FrameNumber frameNum, short position) override;
     virtual void MessageLine(short index, MsgAlignment align) override;
     virtual void LevelReset() override;
     virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) override;
-    virtual void StartFrame(long frameNum) override;
+    virtual void StartFrame(FrameNumber frameNum) override;
     virtual void StringLine(std::string theString, MsgAlignment align) override;
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) override;
     virtual void SetNet(CNetManager*) override;

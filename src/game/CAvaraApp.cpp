@@ -67,7 +67,7 @@ void TrackerPinger(CAvaraAppImpl *app) {
 }
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-    itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
+    itsGame = new CAvaraGame(gApplication->Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
@@ -424,7 +424,7 @@ void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1,
 
     AddMessageLine(buffa.str(), align, category);
 }
-void CAvaraAppImpl::StartFrame(long frameNum) {}
+void CAvaraAppImpl::StartFrame(FrameNumber frameNum) {}
 
 void CAvaraAppImpl::StringLine(std::string theString, MsgAlignment align) {
     AddMessageLine(theString.c_str(), align, MsgCategory::Level);
@@ -473,4 +473,4 @@ std::string CAvaraAppImpl::TrackerPayload() {
 void CAvaraAppImpl::SetIndicatorDisplay(short i, short v) {}
 void CAvaraAppImpl::NumberLine(long theNum, short align) {}
 void CAvaraAppImpl::DrawUserInfoPart(short i, short partList) {}
-void CAvaraAppImpl::BrightBox(long frameNum, short position) {}
+void CAvaraAppImpl::BrightBox(FrameNumber frameNum, short position) {}

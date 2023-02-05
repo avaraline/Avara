@@ -284,7 +284,7 @@ void CBall::BuzzControl(Boolean doBuzz) {
 
 void CBall::MagnetAction() {
     CAbstractActor *theActor;
-    long thisFrame = itsGame->frameNumber;
+    FrameNumber thisFrame = itsGame->frameNumber;
     Boolean didAttract = false;
 
     BuildActorProximityList(location, partList[0]->bigRadius, kBallSnapBit);

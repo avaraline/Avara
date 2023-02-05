@@ -14,8 +14,8 @@
 
 class CLogicDelay : public CLogic {
 public:
-    long theDelay;
-    long scheduledFrame[DELAY_PIPELINE];
+    FrameNumber theDelay;
+    FrameNumber scheduledFrame[DELAY_PIPELINE];
 
     virtual void FrameAction();
     virtual void BeginScript();

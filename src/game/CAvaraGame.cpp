@@ -87,7 +87,7 @@ CNetManager* CAvaraGame::CreateNetManager() {
     return new CNetManager;
 }
 
-CAvaraGame::CAvaraGame(int32_t frameTime) {
+CAvaraGame::CAvaraGame(FrameTime frameTime) {
     SetFrameTime(frameTime);
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
@@ -1107,17 +1107,17 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
     }
 }
 
-long CAvaraGame::TimeToFrameCount(long timeInMsec) {
+FrameNumber CAvaraGame::TimeToFrameCount(long timeInMsec) {
     // how many frames occur in timeInMsec?
-    return timeInMsec / frameTime;
+    return FrameNumber(timeInMsec / frameTime);
 }
 
-long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
+FrameNumber CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     // Jump forward to the next full period.
     // For example, if we are changing latencies such that we start with 48 frames/period
     // and we're moving to 60 frames/period, and we're on frame 48, we want to
     // move forward to frame 120 and NOT frame 60.
-    long periodFrames = TimeToFrameCount(period);
+    FrameNumber periodFrames = TimeToFrameCount(period);
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
 }
 
@@ -1143,6 +1143,6 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
     isClassicFrame = (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
 }
 
-long CAvaraGame::FramesFromNow(long classicFrameCount) {
+FrameNumber CAvaraGame::FramesFromNow(FrameNumber classicFrameCount) {
     return frameNumber + classicFrameCount / fpsScale;
 }

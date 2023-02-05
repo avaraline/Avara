@@ -22,7 +22,7 @@ CAbstractActor *CLogicDelay::EndScript() {
     }
 
     if (CLogic::EndScript()) {
-        theDelay = ReadLongVar(iTimer);
+        theDelay = FrameNumber(ReadLongVar(iTimer));
         if (theDelay < 0) {
             theDelay = -theDelay;
             sleepTimer = theDelay + 1;
@@ -39,7 +39,7 @@ CAbstractActor *CLogicDelay::EndScript() {
 void CLogicDelay::FrameAction() {
     short i;
     short theCount;
-    long thisFrame = itsGame->frameNumber;
+    FrameNumber thisFrame = itsGame->frameNumber;
     long closestAlarm;
     Boolean foundAlarm;
 
