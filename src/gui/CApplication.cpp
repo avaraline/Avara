@@ -19,44 +19,6 @@
 
 
 static float get_pixel_ratio(SDL_Window *window) {
-#if defined(_WIN32)
-    SDL_SysWMinfo info;
-    SDL_VERSION(&info.version);
-    SDL_GetWindowWMInfo(window, &info);
-    HWND hWnd = info.info.win.window;
-    HMONITOR monitor = nullptr;
-    #if defined(MONITOR_DEFAULTTONEAREST)
-        monitor = MonitorFromWindow(hWnd, MONITOR_DEFAULTTONEAREST);
-    #else
-        static HMONITOR (WINAPI *MonitorFromWindow_)(HWND, DWORD) = nullptr;
-        static bool MonitorFromWindow_tried = false;
-        if (!MonitorFromWindow_tried) {
-            auto user32 = LoadLibrary(TEXT("user32"));
-            if (user32)
-                MonitorFromWindow_ = (decltype(MonitorFromWindow_)) GetProcAddress(user32, "MonitorFromWindow");
-            MonitorFromWindow_tried = true;
-        }
-        if (MonitorFromWindow_)
-            monitor = MonitorFromWindow_(hWnd, 2);
-    #endif  // defined(MONITOR_DEFAULTTONEAREST)
-    /* The following function only exists on Windows 8.1+, but we don't want to make that a dependency */
-    static HRESULT (WINAPI *GetDpiForMonitor_)(HMONITOR, UINT, UINT*, UINT*) = nullptr;
-    static bool GetDpiForMonitor_tried = false;
-
-    if (!GetDpiForMonitor_tried) {
-        auto shcore = LoadLibrary(TEXT("shcore"));
-        if (shcore)
-            GetDpiForMonitor_ = (decltype(GetDpiForMonitor_)) GetProcAddress(shcore, "GetDpiForMonitor");
-        GetDpiForMonitor_tried = true;
-    }
-
-    if (GetDpiForMonitor_ && monitor) {
-        uint32_t dpiX, dpiY;
-        if (GetDpiForMonitor_(monitor, 0 /* effective DPI */, &dpiX, &dpiY) == S_OK)
-            return dpiX / 96.0;
-    }
-    return 1.f;
-#else
     //Vector2i fbSize, size;
     int fbx, fby, wx, wy;
     SDL_GL_GetDrawableSize(window, &fbx, &fby);
@@ -64,8 +26,6 @@ static float get_pixel_ratio(SDL_Window *window) {
     SDL_Log("fb: %i x %i -- win: %i x %i", fbx, fby, wx, wy);
     return (float)fbx / (float)wx;
 }
-#endif
-
 
 json CApplication::_prefs = ReadPrefs();
 
