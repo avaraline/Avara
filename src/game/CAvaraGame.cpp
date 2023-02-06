@@ -693,8 +693,6 @@ void CAvaraGame::StartIfReady() {
 
 #define MAXSKIPSINAROW 2
 
-static Boolean takeShot = false;
-
 void CAvaraGame::ReadGamePrefs() {
     moJoOptions = 0;
     /*
@@ -1034,20 +1032,17 @@ void CAvaraGame::UpdateViewRect(int width, int height, float pixelRatio) {
 }
 
 void CAvaraGame::Render(NVGcontext *ctx) {
-
     worldShader->ShadeWorld(itsView);
 
-    if (true || gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus ||
-        gameStatus == kLoseStatus) {
-        ViewControl();
-        itsWorld->Render(itsView);
-        AvaraGLSetAmbient(.7, UINT_MAX);
-        AvaraGLSetDepthTest(false);
-        hudWorld->Render(itsView);
-        AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
-        hud->Render(itsView, ctx);
-        AvaraGLSetDepthTest(true);
-    }
+    //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
+    ViewControl();
+    itsWorld->Render(itsView);
+    AvaraGLSetAmbient(.7, UINT_MAX);
+    AvaraGLSetDepthTest(false);
+    hudWorld->Render(itsView);
+    AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
+    hud->Render(itsView, ctx);
+    AvaraGLSetDepthTest(true);
 }
 
 CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {

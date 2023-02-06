@@ -41,6 +41,7 @@ void FreePacket(UDPpacket *packet);
 
 int ResolveHost(IPaddress *address, const char *host, uint16_t port);
 
+void PunchSetup(const char *host, uint16_t port);
 void RegisterPunchServer(IPaddress &localAddr);
 void RequestPunch(IPaddress &addr);
 void Punch(IPaddress &addr);
