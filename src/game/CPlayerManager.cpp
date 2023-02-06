@@ -28,6 +28,7 @@
 #include "Parser.h"
 #include "Preferences.h"
 #include "System.h"
+#include "Debug.h"
 
 #include <SDL2/SDL.h>
 #include <utf8.h>
@@ -908,6 +909,10 @@ void CPlayerManagerImpl::ChangeNameAndLocation(StringPtr theName, Point location
         globalLocation = location;
         // theRoster->InvalidateArea(kFullMapBox, position);
         // theRoster->InvalidateArea(kMapInfoBox, position);
+    }
+
+    if (strncmp((char*)&playerName[1], (char*)&theName[1], size_t(theName[0])) != 0) {
+        SDL_Log("player #%d name set to '%.*s'\n", slot+1, int(theName[0]), &theName[1]);
     }
 
     BlockMoveData(theName, playerName, theName[0] + 1);

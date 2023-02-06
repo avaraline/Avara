@@ -74,14 +74,14 @@ public:
     std::string loadedDesigner = "";
     std::string loadedInfo = "";
     long loadedTimeLimit;
-    uint32_t timeInSeconds;
-    uint32_t frameNumber;
+    int32_t timeInSeconds;
+    int32_t frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
 
     long topSentFrame;
 
-    uint16_t frameTime; //	In milliseconds.
+    int32_t frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
     short gameStatus;
@@ -183,7 +183,7 @@ public:
     long oldPlayersStanding;
     short oldTeamsStanding;
 
-    CAvaraGame(uint16_t frameTime = 64);
+    CAvaraGame(int32_t frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
@@ -251,7 +251,7 @@ public:
     virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, CPlayerManager *slowPlayer = nullptr);
     virtual long TimeToFrameCount(long timeInMsec);
     virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
-    virtual void SetFrameTime(uint16_t ft);
+    virtual void SetFrameTime(int32_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
     virtual long FramesFromNow(long classicFrames);
 

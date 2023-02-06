@@ -80,6 +80,7 @@ int main(int argc, char *argv[]) {
             app->Set(kPlayerNameTag, std::string(argv[++i]));
         } else if (arg == "-c" || arg == "--connect") {
             connectAddress = std::string(argv[++i]);
+            app->Set(kLastAddress, connectAddress);
         } else if (arg == "-h" || arg == "--host") {
             host = true;
         } else if (arg == "-f" || arg == "--frametime") {

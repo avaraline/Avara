@@ -167,7 +167,7 @@ void CUDPConnection::RoutePacket(UDPPacketInfo *thePacket) {
     thePacket->packet.distribution &= ~extendedRouting;
 }
 
-void CUDPConnection::ProcessBusyQueue(long curTime) {
+void CUDPConnection::ProcessBusyQueue(int32_t curTime) {
     UDPPacketInfo *thePacket = NULL;
 
     while ((thePacket = (UDPPacketInfo *)queues[kBusyQ].qHead)) {
@@ -186,7 +186,7 @@ void CUDPConnection::ProcessBusyQueue(long curTime) {
     busyQLen = 0;
 }
 
-UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long urgencyAdjust) {
+UDPPacketInfo *CUDPConnection::FindBestPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust) {
     UDPPacketInfo *thePacket = NULL;
     UDPPacketInfo *nextPacket;
     UDPPacketInfo *bestPacket;
@@ -293,7 +293,7 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(long curTime, long cramTime, long 
     return thePacket;
 }
 
-UDPPacketInfo *CUDPConnection::GetOutPacket(long curTime, long cramTime, long urgencyAdjust) {
+UDPPacketInfo *CUDPConnection::GetOutPacket(int32_t curTime, int32_t cramTime, int32_t urgencyAdjust) {
     UDPPacketInfo *thePacket = NULL;
 
     if (port) {
@@ -363,7 +363,7 @@ float CommandMultiplierForStats(long command) {
     return multiplier;
 }
 
-void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, long when) {
+void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
     #if PACKET_DEBUG || LATENCY_DEBUG
         DebugPacket('V', thePacket);
     #endif
@@ -503,7 +503,7 @@ void CUDPConnection::RunValidate() {
     }
 }
 
-char *CUDPConnection::ValidatePackets(char *validateInfo, long curTime) {
+char *CUDPConnection::ValidatePackets(char *validateInfo, int32_t curTime) {
     SerialNumber transmittedSerial;
     UDPPacketInfo *thePacket, *nextPacket;
 
@@ -699,15 +699,13 @@ char *CUDPConnection::WriteAcks(char *dest) {
 }
 
 void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
-    short i;
-
     if (next)  // recurse down the chain of connections
         next->MarkOpenConnections(table);
 
     if (port && myId != 0) {
-        for (i = 0; i < itsOwner->maxClients; i++) {
+        for (int i = 0; i < itsOwner->maxClients; i++) {
             if (table->host == ipAddr && table->port == port) {
-                table->host = 0; // this connection is already open
+                table->host = 0; // this connection is being used
                 table->port = 0;
                 return;
             }
@@ -719,6 +717,29 @@ void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
         ipAddr = 0;
         myId = -1;
         FlushQueues();
+    }
+}
+
+bool IsLocalhost(uint32_t host) {
+    static uint32_t localhost = inet_addr("127.0.0.1");
+    return (host == localhost);
+}
+
+void CUDPConnection::RewriteConnections(CompleteAddress *table) {
+    // this is called from CUDPComm::connections[0] which should point to the server's connection
+    ip_addr serverHost = ipAddr;
+
+    // the connection table represents what the server sees as connections coming in, so
+    // we may need to rewrite some of those hosts/ports to allow this client to connect to another client
+    // depending on the LAN/WAN situation
+    for (int i = 0; i < itsOwner->maxClients; i++) {
+        if (IsLocalhost(table->host)) {
+            // if the server sees the connection coming from localhost, change the host to whatever host we connected to server with (which could ALSO be localhost)
+            table->host = serverHost;
+        }
+        // TODO: what if host is the IP of the router?  e.g. someone connects to a LAN game using the WAN address
+        // else if (IsWanRouter(table->host)) { /* do something, might have to send local IP address to the server??? */ }
+        table++;
     }
 }
 
@@ -746,7 +767,7 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
 
 
 void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16_t firstReceiveSerial) {
-    SDL_Log("CUDPConnection::FreshClient connecting from %s\n", FormatHostPort(remoteHost, remotePort).c_str());
+    SDL_Log("CUDPConnection::FreshClient connection = %s\n", FormatHostPort(remoteHost, remotePort).c_str());
     FlushQueues();
     serialNumber = INITIAL_SERIAL_NUMBER;
     receiveSerial = serialNumber + firstReceiveSerial;
@@ -774,6 +795,11 @@ void CUDPConnection::FreshClient(ip_addr remoteHost, port_num remotePort, uint16
 
     ipAddr = remoteHost;
     port = remotePort;
+
+    // Normal client-client Avara packets will do the hole-punching for us, so this is unnecessary.
+    // But maybe this could speed things up?
+    // IPaddress addr = { remoteHost, remotePort };
+    // Punch(addr);
 }
 
 Boolean CUDPConnection::AreYouDone() {

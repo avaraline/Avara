@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-#define DBG_Log(key, ...)  if (Debug::IsEnabled(key)) { SDL_Log(__VA_ARGS__); }
+#define DBG_Log(key, ...)  if (Debug::IsEnabled(key)) { SDL_Log( key "> " __VA_ARGS__); }
 
 class Debug {
 private:

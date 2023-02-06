@@ -34,6 +34,7 @@
 #include "httplib.h"
 #include <chrono>
 #include <json.hpp>
+#include "Debug.h"
 
 // included while we fake things out
 #include "CPlayerManager.h"
@@ -159,7 +160,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
     Str255 userName;
     userName[0] = name.length();
     BlockMoveData(name.c_str(), userName + 1, name.length());
-    SDL_Log("DoCommand %d\n", theCommand);
+    // SDL_Log("DoCommand %d\n", theCommand);
     switch (theCommand) {
         case kReportNameCmd:
             gameNet->NameChange(userName);
@@ -418,7 +419,7 @@ void CAvaraAppImpl::TrackerUpdate() {
     trackerState["description"] = String(kServerDescription);
     trackerState["password"] = String(kServerPassword).length() > 0 ? true : false;
 
-    SDL_Log("TrackerUpdate: %s", trackerState.dump().c_str());
+    DBG_Log("tracker", "%s", trackerState.dump().c_str());
 
     trackerUpdatePending = true;
     nextTrackerUpdate = SDL_GetTicks() + (freq * 1000);
