@@ -9,11 +9,12 @@
 #include "Preferences.h"
 #include "CSoundHub.h"
 
-CGUI::CGUI(CAvaraGame *game) {
-    itsGame = game;
+CGUI::CGUI(CAvaraAppImpl *app) {
+    itsApp = app;
+    itsGame = app->GetGame();
     itsWorld = new CBSPWorldImpl;
     itsWorld->IBSPWorld(50);
-    itsView = game->itsView;
+    itsView = itsGame->itsView;
     LookAtGUI();
     
     mui_ctx = (mu_Context*)malloc(sizeof(mu_Context));
@@ -21,11 +22,9 @@ CGUI::CGUI(CAvaraGame *game) {
     mui_ctx->text_width = text_width;
     mui_ctx->text_height = text_height;
 
-    //itsGame->itsApp->LoadLevel("aa-normal", "bwadi.alf", NULL);
-
     itsCursor = new CScaledBSP;
     itsCursor->IScaledBSP(FIX3(100), kCursorBSP, 0, 0);
-    //itsCursor->privateAmbient = FIX3(800);
+    itsCursor->privateAmbient = FIX3(800);
     AvaraGLUpdateData(itsCursor);
     cursorWorld = new CBSPWorldImpl;
     cursorWorld->IBSPWorld(1);
@@ -33,8 +32,6 @@ CGUI::CGUI(CAvaraGame *game) {
     
     started = SDL_GetTicks();
     anim_timer = 0;
-
-    //screen = new CGUIScreen(MainMenu, itsWorld, this);
 }
 
 void CGUI::LookAtGUI() {
@@ -85,17 +82,19 @@ void CGUI::Update() {
         mu_end_window(mui_ctx);
     }
     mu_end(mui_ctx);
+
     if (anim_timer > 16) {
         itsGame->itsDepot->RunSliverActions();
         anim_timer = 0;
     }
+
 }
 
 int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
     Point mid = pt(r.x + (r.w / 2), r.y + (r.h / 2));
     glm::vec3 worldpos = screenToWorld(&mid);
 
-    if (boxes.count(mu_id) > (std::size_t)0) {
+    if (boxes.count(mu_id) > std::size_t(0)) {
         //CSmartBox* _part = boxes.at(mu_id);
         CWallActor* _wall = boxes.at(mu_id);
         CSmartPart* _part = _wall->partList[0];
@@ -108,7 +107,7 @@ int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
             _part->ReplaceColor(0xfefefe, color);
         }
         _part->Reset();
-        TranslatePart(_part, ToFixed(worldpos.x + anim_timer * .002), ToFixed(worldpos.y), 0);
+        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), ToFixed(0));
         //_part->MoveDone();
         if (res & MU_RES_SUBMIT) {
             _wall->Blast();
@@ -256,7 +255,7 @@ void CGUI::Render(NVGcontext *ctx) {
     //nvgSave(ctx);
     nvgBeginFrame(ctx, gApplication->win_size_x, gApplication->win_size_y, gApplication->pixel_ratio);
     nvgBeginPath(ctx);
-    LookAtGUI();
+    //LookAtGUI();
     itsWorld->Render(itsView);
     
     //screen->Render(ctx);

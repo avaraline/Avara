@@ -79,39 +79,13 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     previewAngle = 0;
     previewRadius = 0;
     animatePreview = false;
-    /*
-    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
-
-    playerWindow = new CPlayerWindow(this);
-    playerWindow->setFixedWidth(200);
-
-    levelWindow = new CLevelWindow(this);
-    levelWindow->setFixedWidth(200);
-
-    networkWindow = new CNetworkWindow(this);
-    networkWindow->setFixedWidth(200);
-
-    serverWindow = new CServerWindow(this);
-    serverWindow->setFixedWidth(200);
-
-    trackerWindow = new CTrackerWindow(this);
-    trackerWindow->setFixedWidth(325);
-
-    rosterWindow = new CRosterWindow(this);
-
-    performLayout();
-    
-    for (auto win : windowList) {
-        win->restoreState();
-    }
-    */
     nextTrackerUpdate = 0;
     trackerUpdatePending = false;
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
 
 
-    itsGUI = new CGUI(itsGame);
+    itsGUI = new CGUI(this);
     LoadDefaultOggFiles();
 
     // register and handle text commands
@@ -122,9 +96,6 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
         "Type /help and press return for a list of chat commands.",
         MsgAlignment::Center
     );
-
-    // load up a random decent starting level
-    
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -162,7 +133,6 @@ void CAvaraAppImpl::drawContents() {
 void CAvaraAppImpl::WindowResized(int width, int height) {
     //SDL_Log("Resize event: %i %i", width, height);
     itsGame->UpdateViewRect(width, height, pixel_ratio);
-    //performLayout();
 }
 
 bool CAvaraAppImpl::handleSDLEvent(SDL_Event &event) {

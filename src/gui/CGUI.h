@@ -22,13 +22,13 @@ extern "C" {
 #define kBlockBSP 400
 #define kOutlineBSP 722
 
-class CGUIScreen;
-class CAvaraGame;
+class CAvaraAppImpl;
 
 class CGUI : public CDirectObject {
 public:
     CAvaraGame *itsGame;
-    CGUI(CAvaraGame *game);
+    CAvaraAppImpl *itsApp;
+    CGUI(CAvaraAppImpl *app);
 
     void LookAtGUI();
     void PlaySound(short theSound);
@@ -121,8 +121,6 @@ public:
 
 
 protected:
-
-    CGUIScreen *screen;
 
     void mouse();
     void kb();
