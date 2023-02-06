@@ -6,19 +6,31 @@
 #include "Preferences.h"
 #include "Resource.h"
 
+#include <cute_files.h>
+
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Searches "levels/" directory alongside application.
     // will eventually use level search API
     levelSets = LevelDirNameListing();
 
     json sets = app->Get(kRecentSets);
-    for (json::iterator it = sets.begin(); it != sets.end(); ++it) {
-        recentSets.push_back(it.value());
-    }
     json levels = app->Get(kRecentLevels);
-    for (json::iterator itLev = levels.begin(); itLev != levels.end(); ++itLev) {
-        recentLevels.push_back(itLev.value());
+    if (sets.size() == levels.size()) {
+        for (unsigned i = 0; i < sets.size(); ++i) {
+            std::string set = sets.at(i);
+            std::stringstream subDir;
+            subDir << LEVELDIR << PATHSEP << set;
+            char subDirPath[PATH_MAX];
+            BundlePath(subDir, subDirPath);
+            if (cf_file_exists(subDirPath)) {
+                recentSets.push_back(set);
+                recentLevels.push_back(levels.at(i));
+            }
+        }
     }
+
+    app->Set(kRecentSets, recentSets);
+    app->Set(kRecentLevels, recentLevels);
 
     setLayout(new nanogui::BoxLayout(nanogui::Orientation::Vertical, nanogui::Alignment::Fill, 10, 10));
 
@@ -48,12 +60,8 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     startBtn = new nanogui::Button(this, "Start Game");
     startBtn->setCallback([app] { ((CAvaraAppImpl *)app)->GetGame()->SendStartCommand(); });
 
-    if (recentSets.size() > 0) {
-        SelectLevel(recentSets[0], recentLevels[0]);
-    } else {
-        SelectSet(0);
-        levelBox->setSelectedIndex(0);
-    }
+    SelectSet(0);
+    levelBox->setSelectedIndex(0);
 }
 
 CLevelWindow::~CLevelWindow() {}

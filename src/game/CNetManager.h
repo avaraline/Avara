@@ -17,6 +17,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <map>
 #include <vector>
 
 #define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
@@ -86,6 +87,7 @@ public:
     short deadOrDonePlayers;
     Boolean isConnected;
     Boolean isPlaying;
+    Boolean startingGame;
 
     short serverOptions;
     short loaderSlot;
@@ -101,10 +103,13 @@ public:
     long localLatencyVote;
     long autoLatencyVote;
     long autoLatencyVoteCount;
-    long latencyVoteFrame;
+    FrameNumber latencyVoteFrame;
     short maxRoundTripLatency;
     short addOneLatency;
+    long subtractOneCheck;
     CPlayerManager *maxPlayer;
+    Boolean latencyVoteOpen;
+    std::map<int32_t, std::vector<int16_t>> fragmentMap;  // maps FRandSeed to list of players having that seed
 
     long lastLoginRefusal;
 
@@ -127,6 +132,7 @@ public:
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
     virtual void RecordNameAndLocation(short slotId, StringPtr theName, short status, Point location);
+    virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
     virtual void PositionsChanged(char *p);
@@ -141,21 +147,28 @@ public:
     virtual void DisconnectSome(short mask);
     virtual void HandleDisconnect(short slotId, short why);
 
-    virtual void SendLoadLevel(std::string theSet, std::string theTag);
-    virtual void ReceiveLoadLevel(short senderSlot, char *setAndTag, Fixed seed);
+    virtual void SendLoadLevel(std::string theSet, std::string theTag, int16_t originalSender = 0);
+    virtual void ReceiveLoadLevel(short senderSlot, int16_t distribution, char *setAndTag, Fixed seed);
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag);
 
     virtual void SendPingCommand(int totalTrips = 0);
-    virtual void SendStartCommand();
-    virtual void SendResumeCommand();
     virtual Boolean ResumeEnabled();
-    virtual void ReceiveStartCommand(short activeDistribution, short fromSlot);
-    virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey);
+    virtual bool CanPlay();
+    virtual void SendStartCommand(int16_t originalSender = 0);
+    virtual void ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender);
+
+    virtual void SendResumeCommand(int16_t originalSender = 0);
+    virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
     virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);
+    virtual void ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json);
 
     virtual short PlayerCount();
+
+    virtual short SelfDistribution();
+    virtual short AlivePlayersDistribution();
+    virtual bool IAmAlive();
 
     //	Game loop methods:
 
@@ -165,10 +178,13 @@ public:
     virtual void ResumeGame();
     virtual void FrameAction();
     virtual void HandleEvent(SDL_Event &event);
-    virtual void AutoLatencyControl(long frameNumber, Boolean didWait);
+    virtual void AutoLatencyControl(FrameNumber frameNumber, Boolean didWait);
     virtual bool IsAutoLatencyEnabled();
     virtual bool IsFragmentCheckWindowOpen();
     virtual void ResetLatencyVote();
+    virtual void ReceiveLatencyVote(int16_t sender, uint8_t p1, int16_t p2, int32_t p3);
+    virtual std::string FragmentMapToString();
+
     virtual void ViewControl();
     virtual void AttachPlayers(CAbstractPlayer *thePlayer);
 
@@ -187,8 +203,6 @@ public:
     virtual void NewArrival(short slot);
 
     virtual void ResultsReport(Ptr results);
-
-    virtual void Beep();
 
     // virtual	void			BuildTrackerTags(CTracker *tracker);
     virtual void LoginRefused();

@@ -1,0 +1,307 @@
+<map>
+  <SkyColor fill="#ffffff" frame="#acc6d2" />
+  <GroundColor fill="#5c6970" />
+  <set
+    designer="$mSilverfox"
+    information="Winston's eyes snapped open in response to the sudden, biting cold. He found himself on a windswept beach piled high with corpses. Above him, a giant malevolent serpent gnawed on a tree. This was without a doubt the worst place he'd ever been."
+    ambient.c="#add6eb"
+    light.0.i="0.7"
+    light.0.a="30"
+    light.0.b="10"
+    light.1.i="0.5"
+    gameLength="3750"
+    defaultLives="999"
+    lightHull="131"
+    mediumHull="132"
+    heavyHull="133"
+    levelShields="1000"
+    maxStartGrenades="16"
+    maxStartMissiles="12"
+    maxStartBoosts="1"
+    missileAcceleration="0.4"
+    missilePower="0.7"
+    missileTurnRate="0.05"
+    missileArmed.c = "#333333"
+    missileLaunched.c = "#b3ffcc"
+    wallHeight="0"
+  />
+  <enum start="int((gameLength * 0.33) + (random * (gameLength * 0.33)))" vars="wigReveal" />
+
+  <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" spin="false" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter y="20" shape="0" group="@recenter" spin="false" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
+  <Timer in="@killGoodies" out="@killGoodies" wait="1" />
+  <Timer in="@start" out="@killGoodies" wait="wigReveal" />
+  <Timer in="@start" out="@gameEnds" wait="gameLength" />
+  <Teleporter start="@gameEnds" y="-10" activeRange="2000" shape="0" win="0" fill="#ffffff" frame="#000000" cx="0" cz="0" angle="45" />
+
+  <Sound y="200" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="0" cz="0" angle="225" />
+  <Sound y="200" sound="snUnderwater" isAmbient="true" loopCount="-1" volume="70" cx="0" cz="0" angle="225" />
+
+  <Ramp y="2" deltaY="4" fill="#d7eff5" frame="#000000" x="-30" z="5" w="20" d="10" h="0" angle="90" />
+  <Ramp y="2" deltaY="4" fill="#d7eff5" frame="#000000" x="30" z="-5" w="20" d="10" h="0" angle="270" />
+  <Ramp y="2" deltaY="4" fill="#d7eff5" frame="#000000" x="-5" z="-30" w="10" d="20" h="0" angle="180" />
+  <Ramp y="2" deltaY="4" fill="#d7eff5" frame="#000000" x="5" z="30" w="10" d="20" h="0" angle="0" />
+  <Wall fill="#3d3e43" frame="#000000" x="-0.625" z="25" w="1.25" d="10" h="4" />
+  <Wall fill="#3d3e43" frame="#000000" x="0.625" z="-25" w="1.25" d="10" h="4" />
+  <Wall fill="#3d3e43" frame="#000000" x="25" z="0.625" w="10" d="1.25" h="4" />
+  <Wall fill="#3d3e43" frame="#000000" x="-25" z="-0.625" w="10" d="1.25" h="4" />
+  <Ramp y="0" deltaY="2" fill="#d7eff5" frame="#000000" x="30" z="25" w="20" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="#d7eff5" frame="#000000" x="-30" z="-25" w="20" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="#d7eff5" frame="#000000" x="25" z="-30" w="10" d="20" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" fill="#d7eff5" frame="#000000" x="-25" z="30" w="10" d="20" h="0" angle="270" />
+  <Wall fill="#3d3e43" frame="#000000" x="-15" z="30" w="10" d="20" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="15" z="-30" w="10" d="20" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="-30" z="-15" w="20" d="10" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="30" z="15" w="20" d="10" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="25" z="5.625" w="10" d="8.75" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="-25" z="-5.625" w="10" d="8.75" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="5.625" z="-25" w="8.75" d="10" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="-5.625" z="25" w="8.75" d="10" h="2" />
+  <Ramp y="0" deltaY="2" fill="#a3b7c5" frame="#000000" x="-5" z="35" w="10" d="10" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" fill="#a3b7c5" frame="#000000" x="5" z="-35" w="10" d="10" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" fill="#a3b7c5" frame="#000000" x="-35" z="-5" w="10" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="#a3b7c5" frame="#000000" x="35" z="5" w="10" d="10" h="0" angle="0" />
+  <Wall fill="#3d3e43" frame="#000000" x="40" z="10" w="0" d="10" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="-40" z="-10" w="0" d="10" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="10" z="-40" w="10" d="0" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="-10" z="40" w="10" d="0" h="2" />
+  <Ramp y="0" deltaY="2" fill="#ffffff" frame="#000000" x="10" z="-45" w="10" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="#ffffff" frame="#000000" x="-10" z="45" w="10" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="#ffffff" frame="#000000" x="45" z="10" w="10" d="10" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" fill="#ffffff" frame="#000000" x="-45" z="-10" w="10" d="10" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" fill="#ffffff" frame="#000000" x="-15" z="5" w="10" d="10" h="0" angle="90" />
+  <Ramp y="0" deltaY="2" fill="#ffffff" frame="#000000" x="15" z="-5" w="10" d="10" h="0" angle="270" />
+  <Ramp y="0" deltaY="2" fill="#ffffff" frame="#000000" x="-5" z="-15" w="10" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="#ffffff" frame="#000000" x="5" z="15" w="10" d="10" h="0" angle="0" />
+  <Wall fill="#3d3e43" frame="#000000" x="-10" z="15" w="20" d="10" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="10" z="-15" w="20" d="10" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="-15" z="-10" w="10" d="20" h="2" />
+  <Wall fill="#3d3e43" frame="#000000" x="15" z="10" w="10" d="20" h="2" />
+  <Ramp y="6" deltaY="4" fill="#d7eff5" frame="#000000" x="-35" z="-25" w="10" d="10" h="0" angle="270" />
+  <Ramp y="6" deltaY="4" fill="#d7eff5" frame="#000000" x="35" z="25" w="10" d="10" h="0" angle="90" />
+  <Ramp y="6" deltaY="4" fill="#d7eff5" frame="#000000" x="-25" z="35" w="10" d="10" h="0" angle="180" />
+  <Ramp y="6" deltaY="4" fill="#d7eff5" frame="#000000" x="25" z="-35" w="10" d="10" h="0" angle="0" />
+
+  <Solid y="0" shape="bspVines" scale="2.3" canGlow="true" shield="5" fill="#bdd3dd" frame="rgba(0, 0, 0, 0)" cx="-20.05" cz="-25" angle="270" />
+  <Solid y="0" shape="bspVines" scale="2.3" canGlow="true" shield="5" fill="#bdd3dd" frame="rgba(0, 0, 0, 0)" cx="20.05" cz="25" angle="90" />
+  <Solid y="0" shape="bspVines" scale="2.3" canGlow="true" shield="5" fill="#bdd3dd" frame="rgba(0, 0, 0, 0)" cx="-25" cz="20.05" angle="180" />
+  <Solid y="0" shape="bspVines" scale="2.3" canGlow="true" shield="5" fill="#bdd3dd" frame="rgba(0, 0, 0, 0)" cx="25" cz="-20.05" angle="0" />
+
+  <!-- CENTER DECOR -->
+  <WallDoor midYaw="45" fill="#f2f2f2" frame="#000000" x="0" z="0" y="-0.001" w="3.75" d="10" h="0" />
+  <WallDoor midYaw="45" fill="#f2f2f2" frame="#000000" x="0" z="0" y="-0.001" w="10" d="3.75" h="0" />
+  <Wall fill="#f2f2f2" frame="#000000" x="0" z="0" y="-0.001" w="6.25" d="6.25" h="0" />
+  <Hologram y="-0.001" shape="bspGroundArrow" fill="#f2f2f2" frame="#000000" cx="0" cz="-2.5" angle="0" />
+  <Hologram y="-0.001" shape="bspGroundArrow" fill="#f2f2f2" frame="#000000" cx="0" cz="2.5" angle="180" />
+  <Hologram y="-0.001" shape="bspGroundArrow" fill="#f2f2f2" frame="#000000" cx="2.5" cz="0" angle="90" />
+  <Hologram y="-0.001" shape="bspGroundArrow" fill="#f2f2f2" frame="#000000" cx="-2.5" cz="0" angle="270" />
+  <Wall fill="#f2f2f2" frame="#000000" x="-5" z="0" y="-0.001" w="1.25" d="11.25" h="0" />
+  <Wall fill="#f2f2f2" frame="#000000" x="5" z="0" y="-0.001" w="1.25" d="11.25" h="0" />
+  <Wall fill="#f2f2f2" frame="#000000" x="0" z="-5" y="-0.001" w="8.75" d="1.25" h="0" />
+  <Wall fill="#f2f2f2" frame="#000000" x="0" z="5" y="-0.001" w="8.75" d="1.25" h="0" />
+
+  <Solid y="2" shape="bspIce" canGlow="true" shield="3" fill="hsla(188, 100%, 94%, 0.25)" frame="#000000" cx="-2.5" cz="12.5" angle="0" />
+  <Solid y="2" shape="bspIce" canGlow="true" shield="3" fill="hsla(188, 100%, 94%, 0.25)" frame="#000000" cx="-12.5" cz="-2.5" angle="90" />
+  <Solid y="2" shape="bspIce" canGlow="true" shield="3" fill="hsla(188, 100%, 94%, 0.25)" frame="#000000" cx="2.5" cz="-12.5" angle="180" />
+  <Solid y="2" shape="bspIce" canGlow="true" shield="3" fill="hsla(188, 100%, 94%, 0.25)" frame="#000000" cx="12.5" cz="2.5" angle="270" />
+  <Solid y="9.5" shape="bspIce" canGlow="true" roll="180" shield="3" fill="hsla(188, 100%, 94%, 0.25)" frame="#000000" cx="-22.5" cz="8.75" angle="270" />
+  <Solid y="9.5" shape="bspIce" canGlow="true" roll="180" shield="3" fill="hsla(188, 100%, 94%, 0.25)" frame="#000000" cx="22.5" cz="-8.75" angle="90" />
+  <Solid y="9.5" shape="bspIce" canGlow="true" roll="180" shield="3" fill="hsla(188, 100%, 94%, 0.25)" frame="#000000" cx="-8.75" cz="-22.5" angle="0" />
+  <Solid y="9.5" shape="bspIce" canGlow="true" roll="180" shield="3" fill="hsla(188, 100%, 94%, 0.25)" frame="#000000" cx="8.75" cz="22.5" angle="180" />
+
+  <WallDoor canGlow="true" shield="25" fill="rgba(255, 255, 255, 0.25)" frame="#000000" x="10" z="-45" w="10" d="10" h="1" y="5" />
+  <WallDoor canGlow="true" shield="25" fill="rgba(255, 255, 255, 0.25)" frame="#000000" x="45" z="10" w="10" d="10" h="1" y="5" />
+  <WallDoor canGlow="true" shield="25" fill="rgba(255, 255, 255, 0.25)" frame="#000000" x="-10" z="45" w="10" d="10" h="1" y="5" />
+  <WallDoor canGlow="true" shield="25" fill="rgba(255, 255, 255, 0.25)" frame="#000000" x="-45" z="-10" w="10" d="10" h="1" y="5" />
+  <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="-22.5" z="52.5" w="15" d="5" h="0" angle="270" />
+  <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="22.5" z="-52.5" w="15" d="5" h="0" angle="90" />
+  <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="52.5" z="22.5" w="5" d="15" h="0" angle="180" />
+  <Wall fill="#e2fbff" frame="#000000" x="30" z="-52.5" w="0" d="5" h="2" />
+  <Wall fill="#e2fbff" frame="#000000" x="-30" z="52.5" w="0" d="5" h="2" />
+  <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="-52.5" z="-22.5" w="5" d="15" h="0" angle="0" />
+  <Wall fill="#e2fbff" frame="#000000" x="-52.5" z="-30" w="5" d="0" h="2" />
+  <Wall fill="#e2fbff" frame="#000000" x="52.5" z="30" w="5" d="0" h="2" />
+  <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="-52.5" z="2.5" w="5" d="15" h="0" angle="180" />
+  <Wall fill="#e2fbff" frame="#000000" x="-52.5" z="10" w="5" d="0" h="2" />
+  <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="52.5" z="-2.5" w="5" d="15" h="0" angle="0" />
+  <Wall fill="#e2fbff" frame="#000000" x="52.5" z="-10" w="5" d="0" h="2" />
+  <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="-2.5" z="-52.5" w="15" d="5" h="0" angle="270" />
+  <Wall fill="#e2fbff" frame="#000000" x="-10" z="-52.5" w="0" d="5" h="2" />
+  <Ramp y="2" deltaY="4" fill="#e2fbff" frame="#000000" x="2.5" z="52.5" w="15" d="5" h="0" angle="90" />
+  <Wall fill="#e2fbff" frame="#000000" x="10" z="52.5" w="0" d="5" h="2" />
+
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody y="10 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="25" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody y="10 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-25" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <Goody y="10 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="16" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="-25" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <Goody y="10 + mGoodyOffset" shape="bspGrenade" speed="-2" grenades="16" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="25" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="5" cz="35" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-5" cz="-35" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="35" cz="-5" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody y="mGoodyOffset" shape="bspGrenade" speed="-2" grenades="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-35" cz="5" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-10" cz="52.5" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="10" cz="-52.5" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="52.5" cz="10" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody y="6 + mGoodyOffset" shape="bspMissile" speed="-2" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-52.5" cz="-10" angle="225" />
+
+  <!-- INCARNATORS AND HIDDEN AMMO TOP-OFFERS -->
+  <Incarnator y="20" cx="-30" cz="-40" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-30" cz="-40" angle="135" />
+
+  <Incarnator y="20" cx="30" cz="40" angle="315" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="30" cz="40" angle="315" />
+
+  <Incarnator y="20" cx="-40" cz="30" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-40" cz="30" angle="45" />
+
+  <Incarnator y="20" cx="40" cz="-30" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="40" cz="-30" angle="225" />
+
+  <Incarnator y="20" cx="-10" cz="60" angle="0" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-10" cz="60" angle="0" />
+
+  <Incarnator y="20" cx="10" cz="-60" angle="180" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="10" cz="-60" angle="180" />
+
+  <Incarnator y="20" cx="-60" cz="-10" angle="90" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="-60" cz="-10" angle="90" />
+
+  <Incarnator y="20" cx="60" cz="10" angle="270" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="1" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="60" cz="10" angle="270" />
+
+  <Timer in="@start" out="@killStartOnlyGoodies" wait="5" />
+
+  <Incarnator y="20" cx="5" cz="7.5" angle="180" stop="@start" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="@killStartOnlyGoodies" fill="#e2fbff" frame="#000000" cx="5" cz="7.5" angle="135" />
+
+  <Incarnator y="20" cx="-5" cz="-7.5" angle="0" stop="@start" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="@killStartOnlyGoodies" fill="#e2fbff" frame="#000000" cx="-5" cz="-7.5" angle="135" />
+
+  <Incarnator y="20" cx="-7.5" cz="5" angle="270" stop="@start" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="@killStartOnlyGoodies" fill="#e2fbff" frame="#000000" cx="-7.5" cz="5" angle="135" />
+
+  <Incarnator y="20" cx="7.5" cz="-5" angle="90" stop="@start" />
+  <Goody y="20" yon=".001" speed="-2" volume="0" grenades="16" missiles="12" start="@start" stop="@killStartOnlyGoodies" fill="#e2fbff" frame="#000000" cx="7.5" cz="-5" angle="135" />
+
+  <set wallYon="defaultYon" />
+
+  <!-- CENTER GOODIES, PRE- AND POST-WIG REVEAL -->
+  <unique vars="mShow mTaken mShow2 mTaken2" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="400" />
+  <Goody y="mGoodyOffset" shape="bspAvaraA" speed="-2" grenades="8" missiles="6" start="mShow" stop="@killGoodies" out="mTaken" fill="#e2fbff" frame="#000000" cx="0" cz="0" angle="225" />
+  <Timer in="@start" out="mShow2" wait="wigReveal" />
+  <Timer in="mTaken2" out="mShow2" wait="50" />
+  <Goody y="mGoodyOffset" shape="bspStandardPill" speed="-2" grenades="8" missiles="6" start="mShow2" out="mTaken2" fill="#e2fbff" frame="#ffffff" cx="0" cz="0" angle="225" />
+
+  <!-- THE WIG, I GUESS -->
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="-2.5" z="-45" w="15" d="10" h="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="22.5" z="-45" w="15" d="10" h="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="45" z="22.5" w="10" d="15" h="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="2.5" z="45" w="15" d="10" h="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="-22.5" z="45" w="15" d="10" h="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="45" z="-2.5" w="10" d="15" h="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="-45" z="2.5" w="10" d="15" h="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="-45" z="-22.5" w="10" d="15" h="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="-15" z="-25" w="10" d="10" h="10" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="25" z="-15" w="10" d="10" h="10" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="15" z="25" w="10" d="10" h="10" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="-25" z="15" w="10" d="10" h="10" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="-52.5" z="-10" w="5" d="10" h="0" y="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="52.5" z="10" w="5" d="10" h="0" y="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="-10" z="52.5" w="10" d="5" h="0" y="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#6d7178" frame="#000000" x="10" z="-52.5" w="10" d="5" h="0" y="6" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="-25" z="0" w="10" d="20" h="1" y="9" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="25" z="0" w="10" d="20" h="1" y="9" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="25" z="20" w="10" d="20" h="1" y="9" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="0" z="25" w="20" d="10" h="1" y="9" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="-20" z="25" w="20" d="10" h="1" y="9" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="0" z="-25" w="20" d="10" h="1" y="9" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="20" z="-25" w="20" d="10" h="1" y="9" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="-25" z="-20" w="10" d="20" h="1" y="9" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="-30" z="5" w="0" d="10" h="4" y="0" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="30" z="-5" w="0" d="10" h="4" y="0" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="-5" z="-30" w="10" d="0" h="4" y="0" />
+  <WallDoor shield="levelShields" canGlow="false" fill="#262626" frame="#000000" x="5" z="30" w="10" d="0" h="4" y="0" />
+
+  <!-- WIG REMOVERS -->
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-15" cz="-25" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="25" cz="-15" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="15" cz="25" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-25" cz="15" angle="315" />
+  <Mine start="@start" shield="-1" y="9.5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-10" cz="25" angle="315" />
+  <Mine start="@start" shield="-1" y="9.5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="25" cz="10" angle="315" />
+  <Mine start="@start" shield="-1" y="9.5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="10" cz="-25.625" angle="315" />
+  <Mine start="@start" shield="-1" y="9.5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-25" cz="-10" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-10" cz="50" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-50" cz="-10" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="10" cz="-50" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-2.5" cz="-45" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="22.5" cz="-45" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="45" cz="22.5" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="50" cz="10" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="45" cz="-3.125" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-45" cz="2.5" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-45" cz="-22.5" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="2.5" cz="45" angle="315" />
+  <Mine start="@start" shield="-1" y="5" yon="0.001" scale="0.001" activate="@start" activeTimer="wigReveal" activeRange="100" hitSound="0" blastVolume="1" activateVolume="0" power="1500" hitScore="0" destructScore="0" fill="#b41700" frame="#000000" cx="-22.5" cz="45" angle="315" />
+</map>

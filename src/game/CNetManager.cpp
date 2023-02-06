@@ -23,6 +23,7 @@
 //#include "CInfoPanel.h"
 #include "CScoreKeeper.h"
 #include "InfoMessages.h"
+#include "Messages.h"
 //#include "CAsyncBeeper.h"
 //#include "Ambrosia_Reg.h"
 //#include "CTracker.h"
@@ -30,12 +31,14 @@
 #include "System.h"
 #include "Beeper.h"
 
+#include "Debug.h"
 #include <string.h>
 
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
-#define LOWERLATENCYCOUNT 3
-#define HIGHERLATENCYCOUNT 8
+#define LOWERLATENCYCOUNT   2
+#define HIGHERLATENCYCOUNT  12    // 4*(10/240) frames at fps=16ms, 1*10/60 frames at fps=64ms, works for all fps values
+#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*8))  // 30.72 seconds
 
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
@@ -76,6 +79,7 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     playerCount = 0;
     isConnected = false;
     isPlaying = false;
+    startingGame = false;
 
     netOwner = NULL;
     loaderSlot = 0;
@@ -131,7 +135,7 @@ void CNetManager::ChangeNet(short netKind, std::string address) {
 void CNetManager::ChangeNet(short netKind, std::string address, std::string password) {
     CCommManager *newManager = NULL;
     Boolean confirm = true;
-    CAvaraApp *theApp = itsGame->itsApp;
+    //CAvaraApp *theApp = itsGame->itsApp;
 
     if (netKind != netStatus || !isConnected) {
         if (netStatus != kNullNet || !isConnected) {
@@ -256,6 +260,13 @@ void CNetManager::NameChange(StringPtr newName) {
     */
     theStatus = playerTable[itsCommManager->myId]->LoadingStatus();
     itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, theStatus, 0, newName[0] + 1, (Ptr)newName);
+}
+
+void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
+    std::string json = "{\"" + attributeName + "\":" + (value == true ? "true" : "false") + "}";
+    char* c = const_cast<char*>(json.c_str());
+    SDL_Log("sending json %s", c);
+    itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
 }
 
 void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, short status, Point location) {
@@ -402,9 +413,10 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
     }
 }
 
-void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
+void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_t originalSender /* default = 0 */) {
     CAvaraApp *theApp;
     PacketInfo *aPacket;
+    SDL_Log("SendLoadLevel(%s, %s, %d)\n", theSet.c_str(), levelTag.c_str(), originalSender);
 
     ProcessQueue();
 
@@ -414,13 +426,19 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
 
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
-    aPacket->p2 = 0;
+    aPacket->p2 = originalSender;
     aPacket->p3 = FRandSeed;
-    aPacket->distribution = kdEveryone;
+    if (itsCommManager->myId == 0) {
+        // to avoid multiple simultaneous loads, only the server sends the kpLoadLevel requests to everyone
+        SDL_Log("  server sending to everyone\n");
+        aPacket->distribution = kdEveryone;
+    } else {
+        // clients ask the server to forward the kpLoadLevel request to everyone
+        SDL_Log("  client sending to server only\n");
+        aPacket->distribution = kdServerOnly;
+    }
 
-    std::stringstream buffa;
-    buffa << theSet << "/" << levelTag;
-    std::string setAndLevel = buffa.str();
+    std::string setAndLevel = theSet + "/" + levelTag;
 
     aPacket->dataLen = setAndLevel.length() + 1;
     BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, setAndLevel.length() + 1);
@@ -439,18 +457,33 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag) {
     itsCommManager->WriteAndSignPacket(aPacket);
 }
 
-void CNetManager::ReceiveLoadLevel(short senderSlot, char *theSetAndTag, Fixed seed) {
+void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, char *theSetAndTag, Fixed seed) {
     CAvaraApp *theApp;
     OSErr iErr;
     short crc = 0;
 
-    if (!isPlaying) {
-        CPlayerManager *sendingPlayer = playerTable[senderSlot];
+    SDL_Log("ReceiveLoadLevel(%d, %d, %s, %d)\n", senderSlot, originalSender, theSetAndTag, seed);
 
-        std::string setAndTag(theSetAndTag);
-        int pos = setAndTag.find("/");
-        std::string set = setAndTag.substr(0, pos);
-        std::string tag = setAndTag.substr(pos + 1, std::string::npos);
+    std::string setAndTag(theSetAndTag);
+    auto pos = setAndTag.find("/");
+    std::string set = setAndTag.substr(0, pos);
+    std::string tag = setAndTag.substr(pos + 1, std::string::npos);
+
+    if (senderSlot != 0) {
+        // The server will forward clients' kpLoadLevel message to kdEveryone.
+        // Everyone else waits until they get the message from the server.
+        // This ensures that all kpLoadLevel requests are processed in the same order for everyone.
+        if (itsCommManager->myId == 0) {
+            SDL_Log("  server sending level load of %s on behalf of %s\n",
+                    theSetAndTag, playerTable[senderSlot]->GetPlayerName().c_str());
+            SendLoadLevel(set, tag, senderSlot);
+        }
+    } else if (isPlaying) {
+        // save off the player that originally loaded this level to help loading side games
+        loaderSlot = originalSender;
+    } else {
+        loaderSlot = originalSender;
+        CPlayerManager *sendingPlayer = playerTable[originalSender];
 
         theApp = itsGame->itsApp;
         FRandSeed = seed;
@@ -499,7 +532,10 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, char *theSetAndTag, Fixed s
 }
 
 void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag) {
-    short i;
+    size_t i;
+
+    SDL_Log("LevelLoadStatus(senderSlot=%d, crc=%d, err=%d, tag=%s)\n", senderSlot, crc, err, theTag.c_str());
+    SDL_Log("   loaderSlot = %d\n", loaderSlot);
 
     CPlayerManager *thePlayer;
 
@@ -511,17 +547,23 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
     if (senderSlot == loaderSlot) {
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             playerTable[i]->LoadStatusChange(crc, err, theTag);
+
         }
+
+        SDL_Log("CNetManager::LevelLoadStatus loop x%lu\n", i);
     } else {
         thePlayer->LoadStatusChange(
             playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());
     }
+
+    // reset startingGame flag whenever a new level is loaded
+    startingGame = false;
 }
 
 Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     short i;
     Boolean goAhead;
-    long lastTime;
+    long lastTime, debugTime;
 
     totalDistribution = 0;
     for (i = 0; i < kMaxAvaraPlayers; i++) {
@@ -529,12 +571,13 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     }
 
     // itsCommManager->SendUrgentPacket(kdEveryone, kpFastTrack, 0, 0, fastTrack.addr.value, 0,0);
-
+    SDL_Log("CNetManager::GatherPlayers activePlayersDistribution = 0x%02x\n", activePlayersDistribution);
     itsCommManager->SendUrgentPacket(activePlayersDistribution, kpReadySynch, 0, 0, 0, 0, 0);
-    lastTime = TickCount();
+    lastTime = debugTime = TickCount();
     do {
-        if (TickCount() % 1000 == 0) {
+        if (TickCount() > debugTime) {
             SDL_Log("CNetManager::GatherPlayers loop\n");
+            debugTime = TickCount() + MSEC_TO_TICK_COUNT(1000);
         }
         ProcessQueue();
         goAhead = (TickCount() - lastTime < 1800);
@@ -556,6 +599,7 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
 
     readyPlayers = 0;
     unavailablePlayers = 0;
+    startingGame = false;
 
     return goAhead;
 }
@@ -570,7 +614,6 @@ void CNetManager::ResumeGame() {
     CPlayerManager *thePlayerManager;
     long lastTime;
     Boolean notReady;
-    Boolean allOk = false;
 
     SDL_Log("CNetManager::ResumeGame\n");
     config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
@@ -599,6 +642,7 @@ void CNetManager::ResumeGame() {
 
     ResetLatencyVote();
     addOneLatency = 0;
+    subtractOneCheck = 0;
     localLatencyVote = 0;
     latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
@@ -674,7 +718,7 @@ void CNetManager::FrameAction() {
     }
 }
 
-void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
+void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
     if (didWait) {
         localLatencyVote++;
     }
@@ -685,39 +729,65 @@ void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
             long maxRoundLatency;
             short maxId = 0;
 
-            latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
-            maxRoundLatency = itsCommManager->GetMaxRoundTrip(activePlayersDistribution, &maxId);
-            maxPlayer = playerTable[maxId];
+            // only compute latency numbers to/from players still playing
+            if (IAmAlive()) {
 
-            itsCommManager->SendUrgentPacket(
-                activePlayersDistribution, kpLatencyVote, localLatencyVote, maxRoundLatency, FRandSeed, 0, NULL);
-            #if LATENCY_DEBUG
-                SDL_Log("*** fn=%ld autoLatencyPeriod=%ld, localLatencyVote=%ld maxRoundLatency=%ld FRandSeed=%d\n",
-                        frameNumber, autoLatencyPeriod, localLatencyVote, maxRoundLatency, FRandSeed);
-            #endif
+                latencyVoteFrame = frameNumber;  // record the actual frame where the vote is initiated
+                maxRoundLatency = itsCommManager->GetMaxRoundTrip(AlivePlayersDistribution(), &maxId);
+                maxPlayer = playerTable[maxId];
+                uint8_t llv = std::min(long(UINT8_MAX), localLatencyVote);  // just in case, p1 can only accept a max of 256
+
+                itsCommManager->SendUrgentPacket(
+                    activePlayersDistribution, kpLatencyVote, llv, maxRoundLatency, FRandSeed, 0, NULL);
+                #if LATENCY_DEBUG
+                    SDL_Log("*** fn=%ld SENDING kpLatencyVote to %hx, localLatencyVote=%ld, maxRoundLatency=%ld FRandSeed=%d\n",
+                            frameNumber, activePlayersDistribution, localLatencyVote, maxRoundLatency, FRandSeed);
+                #endif
+            } else {
+                // spectator just sends FRandSeed to self for fragmentation check
+                itsCommManager->SendUrgentPacket(
+                    SelfDistribution(), kpLatencyVote, 0, 0, FRandSeed, 0, NULL);
+            }
             localLatencyVote = 0;
-        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && maxPlayer != nullptr) {
+            latencyVoteOpen = true;
+        } else if ((frameNumber % autoLatencyPeriod) == itsGame->TimeToFrameCount(AUTOLATENCYDELAY) && latencyVoteOpen) {
+
             if (fragmentDetected) {
-                itsGame->itsApp->MessageLine(kmFragmentAlert, centerAlign);
-                fragmentDetected = false;
+                itsGame->itsApp->MessageLine(kmFragmentAlert, MsgAlignment::Center);
+                itsGame->itsApp->AddMessageLine(FragmentMapToString(), MsgAlignment::Left, MsgCategory::Error);
             }
 
             if (IsAutoLatencyEnabled() && autoLatencyVoteCount) {
-                short maxFrameLatency;
-
                 autoLatencyVote /= autoLatencyVoteCount;
+                DBG_Log("lt", "====autoLatencyVote = %ld\n", autoLatencyVote);
+                // if, on average, players had to wait more than some percent of frames during this latency vote period,
+                // then add 1 frame to the LT calculation
+                if (autoLatencyVote > HIGHERLATENCYCOUNT) {
+                    addOneLatency++;
+                    // don't let it go above 1.0 LT
+                    addOneLatency = std::min(short(1.0/itsGame->fpsScale), addOneLatency);
+                    DBG_Log("lt", "  ++addOneLatency increased = %hd\n", addOneLatency);
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                } else if (autoLatencyVote > LOWERLATENCYCOUNT) {
+                    // vote too high to reduce addOneLatency, push subtractOneCheck forward
+                    DBG_Log("lt", "   >addOneLatency keeping = %hd\n", addOneLatency);
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                } else if (addOneLatency > 0 && frameNumber >= subtractOneCheck) {
+                    // if no significant waiting seen for 8 CONSECUTIVE autoLatency votes, about 30 seconds, let it creep back down 1 fps frame
+                    addOneLatency--;
+                    DBG_Log("lt", "  --addOneLatency decreased = %hd\n", addOneLatency);
+                    subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
+                }
 
-                // if (autoLatencyVote > HIGHERLATENCYCOUNT) {
-                //     addOneLatency = 1;
-                // }
+                // Usually maxFrameLatency is determined primarily by maxRoundTripLatency...
+                // but addOneLatency helps account for deficiencies in the calculation by measuring how often clients had to wait too long for packets to arrive
+                short maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
-
-                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, FL=%d\n",
+                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
                         frameNumber, maxRoundTripLatency,
-                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), maxFrameLatency);
+                        (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, maxFrameLatency);
 
-                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer->GetPlayerName().c_str());
+                itsGame->SetFrameLatency(maxFrameLatency, 2, maxPlayer);
             }
 
             ResetLatencyVote();
@@ -746,6 +816,64 @@ void CNetManager::ResetLatencyVote() {
     autoLatencyVoteCount = 0;
     maxRoundTripLatency = 0;
     maxPlayer = nullptr;
+    latencyVoteOpen = false;
+    fragmentMap.clear();
+}
+
+void CNetManager::ReceiveLatencyVote(int16_t sender,
+                                     uint8_t p1,        // localLatencyVote (uint8_t because it can go as high as 3840/16=240)
+                                     int16_t p2,        // maxRoundLatency
+                                     int32_t p3) {      // FRandSeed
+
+    DBG_Log("lt", "CNetManager::ReceiveLatencyVote(%d, %d, %hd, %d)\n", sender, p1, p2, p3);
+    autoLatencyVoteCount++;
+    autoLatencyVote += p1;
+
+    maxRoundTripLatency = std::max(maxRoundTripLatency, p2);
+
+    playerTable[sender]->RandomKey(p3);
+
+    // to be considered for fragmentation, packet must be received in the voting time window
+    if (IsFragmentCheckWindowOpen()) {
+        // keep track of who is which FRandSeed. Normally everyone on the same value, but with frags this identifies who is different
+        if (fragmentMap.find(p3) == fragmentMap.end()) {
+            fragmentMap[p3] = std::vector<int16_t>();
+        }
+        fragmentMap[p3].push_back(sender);
+
+        if (fragmentCheck == 0) {
+            // the first vote received dictates what the fragmentCheck value is, not necessarily the current player
+            fragmentDetected = false;
+            fragmentCheck = p3;
+            // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %u", fragmentCheck, itsGame->frameNumber);
+        } else {
+            // any votes after the first must have a matching p3 value
+            if (fragmentCheck != p3) {
+                SDL_Log("FRAGMENTATION %d != %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
+                fragmentDetected = true;
+            // } else {
+            //     SDL_Log("No frags detected so far %d == %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
+            }
+        }
+    } else {
+        SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%u",
+                p3, itsGame->frameNumber);
+    }
+}
+
+std::string CNetManager::FragmentMapToString() {
+    std::ostringstream os;
+    bool firstFrag = true;
+    for (auto const& pair : fragmentMap) {
+        if (!firstFrag) { os << std::endl; }
+        os << std::hex << std::setfill('0') << std::setw(sizeof(int32_t)*2) << pair.first << ": [";
+        for (auto const& slot : pair.second) {
+            os << " " << playerTable[slot]->GetPlayerName();
+        }
+        os << " ]";
+        firstFrag = false;
+    }
+    return os.str();
 }
 
 void CNetManager::ViewControl() {
@@ -759,51 +887,119 @@ void CNetManager::SendPingCommand(int totalTrips) {
    }
 }
 
-void CNetManager::SendStartCommand() {
-    short i;
+bool CNetManager::CanPlay() {
+   return (!isPlaying && !playerTable[itsCommManager->myId]->IsAway());
+}
+
+void CNetManager::SendStartCommand(int16_t originalSender) {
+    SDL_Log("CNetManager::SendStartCommand(%d)\n", originalSender);
 
     activePlayersDistribution = 0;
     startPlayersDistribution = 0;
+    // set readyPlayers partly as an indicator that a start command is being processed
     readyPlayers = 0;
     unavailablePlayers = 0;
 
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->LoadingStatus() == kLLoaded) {
-            activePlayersDistribution |= 1 << i;
+    if (itsCommManager->myId == 0) {
+        // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
+            if (playerTable[i]->LoadingStatus() == kLLoaded || playerTable[i]->LoadingStatus() == kLReady) {
+                activePlayersDistribution |= 1 << i;
+            }
+        }
+        SDL_Log("  server sending kpStartLevel to everyone = 0x%02x\n", activePlayersDistribution);
+        startingGame = true;
+    } else {
+        // clients ask the server to forward the kpStartLevel request to everyone
+        SDL_Log("  client sending kpStartLevel to server only = 0x01\n");
+        activePlayersDistribution = kdServerOnly;
+        startingGame = false;
+    }
+
+    itsCommManager->SendPacket(activePlayersDistribution, kpStartLevel, originalSender, activePlayersDistribution, 0, 0, 0);
+}
+
+void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSlot, int16_t originalSender) {
+    SDL_Log("CNetManager::ReceiveStartCommand(0x%02x, %d, %d)\n", activeDistribution, senderSlot, originalSender);
+
+    if (senderSlot != 0) {
+        // The server will forward clients' kpStartLevel message to kdEveryone,
+        // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
+        if (itsCommManager->myId == 0) {
+            if (!startingGame) {
+                SDL_Log("  server sending kpStartLevel on behalf of %s\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str());
+                SendStartCommand(senderSlot);
+            } else {
+                SDL_Log("  server NOT sending kpStartLevel on behalf of %s because it's already trying to start a game\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str());
+            }
+        }
+    } else {
+        if (CanPlay()) {
+            deadOrDonePlayers = 0;
+            activePlayersDistribution = activeDistribution;
+            startPlayersDistribution = activeDistribution;
+            itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
+            isPlaying = true;
+            itsGame->ResumeGame();
+        } else {
+            SDL_Log("  sending kpUnavailableSync\n");
+            itsCommManager->SendPacket(activeDistribution, kpUnavailableSynch, originalSender, 0, 0, 0, NULL);
         }
     }
-
-    SDL_Log("SENDING START PACKET\n");
-    itsCommManager->SendPacket(activePlayersDistribution, kpStartLevel, 0, activePlayersDistribution, 0, 0, 0);
 }
 
-void CNetManager::ReceiveStartCommand(short activeDistribution, short fromSlot) {
-    SDL_Log("CNetManager::ReceiveStartCommand\n");
-    if (/*gApplication->modelessLevel == 0 && */ !isPlaying) {
-        deadOrDonePlayers = 0;
-        activePlayersDistribution = activeDistribution;
-        startPlayersDistribution = activeDistribution;
-        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
-        isPlaying = true;
-        itsGame->ResumeGame();
+void CNetManager::SendResumeCommand(int16_t originalSender) {
+    SDL_Log("CNetManager::SendResumeCommand(%d)\n", originalSender);
+
+    activePlayersDistribution = 0;
+
+    if (itsCommManager->myId == 0) {
+        // to avoid multiple simultaneous starts, only the server sends the kpResumeLevel requests to everyone
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->isOut) {
+                activePlayersDistribution |= 1 << i;
+            }
+        }
+        startingGame = true;
+        SDL_Log("  server sending kpResumeLevel to everyone = 0x%02x\n", activePlayersDistribution);
     } else {
-        itsCommManager->SendPacket(activeDistribution, kpUnavailableSynch, fromSlot, 0, 0, 0, NULL);
+        // clients ask the server to forward the kpStartLevel request to everyone
+        activePlayersDistribution = kdServerOnly;
+        startingGame = false;
+        SDL_Log("  client sending kpResumeLevel to server only = 0x01\n");
     }
+
+    itsCommManager->SendPacket(activePlayersDistribution, kpResumeLevel, originalSender, activePlayersDistribution, FRandSeed, 0, 0);
 }
 
-void CNetManager::ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey) {
-    short i;
-    activePlayersDistribution = activeDistribution;
+void CNetManager::ReceiveResumeCommand(short activeDistribution, short senderSlot, Fixed randomKey, int16_t originalSender) {
+    SDL_Log("CNetManager::ReceiveResumeCommand(0x%02x, %d, 0x%08x, %d)\n", activeDistribution, senderSlot, randomKey, originalSender);
 
-    if (/*gApplication->modelessLevel == 0 &&*/
-        !isPlaying && randomKey == FRandSeed) { // itsGame->itsApp->DoUpdate();
-
-        itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
-
-        isPlaying = true;
-        itsGame->ResumeGame();
+    if (senderSlot != 0) {
+        // The server will forward clients' kpStartLevel message to kdEveryone,
+        // iff readyPlayers hasn't been set, to make sure we aren't sending multiple start commands.
+        if (itsCommManager->myId == 0) {
+            if (!startingGame) {
+                SDL_Log("  server sending kpResumeLevel on behalf of %s\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str());
+                SendResumeCommand(senderSlot);
+            } else {
+                SDL_Log("  server NOT sending kpResumeLevel on behalf of %s because it's already trying to resume a game\n",
+                        playerTable[senderSlot]->GetPlayerName().c_str());
+            }
+        }
     } else {
-        itsCommManager->SendPacket(activeDistribution, kpUnavailableSynch, fromSlot, 0, 0, 0, NULL);
+        activePlayersDistribution = activeDistribution;
+        if (CanPlay() && randomKey == FRandSeed) {
+            itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
+            isPlaying = true;
+            itsGame->ResumeGame();
+        } else {
+            itsCommManager->SendPacket(activePlayersDistribution, kpUnavailableSynch, originalSender, 0, 0, 0, NULL);
+        }
     }
 }
 
@@ -811,25 +1007,10 @@ void CNetManager::ReceivedUnavailable(short slot, short fromSlot) {
     unavailablePlayers |= 1 << slot;
 
     if (slot == itsCommManager->myId) {
-        itsGame->itsApp->ParamLine(kmStartFailure, centerAlign, playerTable[fromSlot]->PlayerName(), NULL);
+        itsGame->itsApp->ParamLine(kmStartFailure, MsgAlignment::Center, playerTable[fromSlot]->PlayerName(), NULL);
     } else {
-        itsGame->itsApp->ParamLine(kmUnavailableNote, centerAlign, playerTable[slot]->PlayerName(), NULL);
+        itsGame->itsApp->ParamLine(kmUnavailableNote, MsgAlignment::Center, playerTable[slot]->PlayerName(), NULL);
     }
-}
-
-void CNetManager::SendResumeCommand() {
-    short i;
-    Fixed myKey;
-
-    activePlayersDistribution = 0;
-
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->isOut) {
-            activePlayersDistribution |= 1 << i;
-        }
-    }
-
-    itsCommManager->SendPacket(activePlayersDistribution, kpResumeLevel, 0, activePlayersDistribution, FRandSeed, 0, 0);
 }
 
 Boolean CNetManager::ResumeEnabled() {
@@ -891,15 +1072,33 @@ void CNetManager::StopGame(short newStatus) {
     }
 
     itsCommManager->SendPacket(
-        kdEveryone, kpPlayerStatusChange, 0, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
+        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
 
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
 void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
-        playerTable[slotId]->RandomKey(randomKey);
+        if (randomKey != 0) {
+            playerTable[slotId]->RandomKey(randomKey);
+        }
         playerTable[slotId]->SetPlayerStatus(newStatus, winFrame);
+    }
+}
+
+void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json){
+    if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
+        nlohmann::json message = nlohmann::json::parse(json);
+        playerTable[slotId]->RandomKey(randomKey);
+        /*
+        if(message.type() == nlohmann::json::value_t::object) {
+            auto it = message.begin();
+
+            if(it.key() == "xyz") {
+                bool xyz = it.value();
+            }
+        }
+        */
     }
 }
 
@@ -917,6 +1116,18 @@ short CNetManager::PlayerCount() {
     }
 
     return playerCount;
+}
+
+short CNetManager::SelfDistribution() {
+    return (1 << itsCommManager->myId);
+}
+
+short CNetManager::AlivePlayersDistribution() {
+    return activePlayersDistribution & ~deadOrDonePlayers;
+}
+
+bool CNetManager::IAmAlive() {
+    return AlivePlayersDistribution() & SelfDistribution();
 }
 
 void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
@@ -959,7 +1170,7 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
                     long noWin = -1;
 
                     itsCommManager->SendPacket(
-                        kdEveryone, kpPlayerStatusChange, 0, kLNoVehicle, 0, sizeof(long), (Ptr)&noWin);
+                        kdEveryone, kpPlayerStatusChange, slot, kLNoVehicle, 0, sizeof(long), (Ptr)&noWin);
                 }
             }
         }
@@ -1137,28 +1348,14 @@ void CNetManager::ChangedServerOptions(short curOptions) {
 }
 
 void CNetManager::NewArrival(short slot) {
-    CPlayerManager *thePlayer = playerTable[slot];
+    //CPlayerManager *thePlayer = playerTable[slot];
     itsGame->itsApp->NotifyUser();
-    std::string name((char *)thePlayer->PlayerName() + 1, thePlayer->PlayerName()[0]);
-    SDL_Log("%s has joined!!\n", name.c_str());
+    SDL_Log("someone has joined in slot #%d\n", slot+1);
     itsGame->scoreKeeper->PlayerJoined();
 }
 
 void CNetManager::ResultsReport(Ptr results) {
     itsGame->scoreKeeper->ReceiveResults((int32_t *)results);
-}
-
-void CNetManager::Beep() {
-    Beep();
-    /*
-    if(gAsyncBeeper)
-    {	Str255		bellSoundName;
-        Handle		theSound;
-
-        gApplication->ReadStringPref(kBellSoundTag, bellSoundName);
-        gAsyncBeeper->PlayNamedBeep(bellSoundName);
-    }
-    */
 }
 
 /*
@@ -1224,6 +1421,6 @@ void CNetManager::LoginRefused() {
     if (((unsigned long)thisTime - lastLoginRefusal) > 60 * 60 * 4) {
         lastLoginRefusal = thisTime;
 
-        itsGame->itsApp->MessageLine(kmRefusedLogin, centerAlign);
+        itsGame->itsApp->MessageLine(kmRefusedLogin, MsgAlignment::Center);
     }
 }

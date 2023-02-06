@@ -1,64 +1,63 @@
 <map>
-  <Sound y="60" sound="snBubbles" isAmbient="true" loopCount="-1" volume="500" cx="62.777777777777786" cz="72.77777777777779" angle="225" />
-  <Incarnator mask="allTeams" cx="38.26388888888889" cz="61.80555555555556" angle="270" />
-  <Wall fill="#bbbbbb" frame="#000000" x="41.5625" z="15.3125" w="3.125" d="3.125" h="6" />
-  <Wall fill="#bbbbbb" frame="#000000" x="41.5625" z="22.1875" w="3.125" d="3.125" h="6" />
-  <Wall fill="#bbbbbb" frame="#000000" x="41.5625" z="18.75" w="3.125" d="10" h="1" y="6" />
-  <Wall fill="#bbbbbb" frame="#000000" x="36.25" z="0.9375" w="47.5" d="1.875" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="41.5625" z="7.8125" w="3.125" d="11.875" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="11.25" z="20.9375" w="2.5" d="41.875" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="41.5625" z="32.8125" w="3.125" d="18.125" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="29.6875" z="40.3125" w="3.125" d="3.125" h="6" />
-  <Wall fill="#bbbbbb" frame="#000000" x="22.8125" z="40.3125" w="3.125" d="3.125" h="6" />
-  <Wall fill="#bbbbbb" frame="#000000" x="26.25" z="40.3125" w="10" d="3.125" h="1" y="6" />
-  <Wall fill="#bbbbbb" frame="#000000" x="16.875" z="40.3125" w="8.75" d="3.125" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="35.625" z="40.3125" w="8.75" d="3.125" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="51.5625" z="40.3125" w="16.875" d="3.125" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="68.4375" z="40.3125" w="16.875" d="3.125" h="4.5" />
-  <Wall fill="#bbbbbb" frame="#000000" x="78.4375" z="20.9375" w="3.125" d="41.875" h="6" />
-  <Wall fill="#bbbbbb" frame="#000000" x="68.4375" z="0.9375" w="16.875" d="1.875" h="4.5" />
-  <Wall fill="#bbbbbb" frame="#000000" x="22.5" z="59.375" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="17.5" z="117.5" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="47.5" z="54.375" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="112.5" z="127.5" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="5" z="87.5" w="10" d="5" h="0" />
-  <Incarnator mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="90" />
-  <Incarnator y="3" mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="90" />
-  <Incarnator y="6" mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="90" />
-  <Incarnator y="9" mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="90" />
-  <Incarnator y="12" mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="90" />
-  <Wall fill="#bbbbbb" frame="#000000" x="78.4375" z="48.4375" w="3.125" d="13.125" h="1" y="2" />
-  <Wall fill="#bbbbbb" frame="#000000" x="77.5" z="57.5" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="80" z="90" w="10" d="10" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="80" z="90" w="5" d="5" h="0.75" y="3" />
-  <Wall fill="#bbbbbb" frame="#000000" x="60" z="107.5" w="10" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="77.5" z="130" w="5" d="10" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="40" z="130" w="10" d="10" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="115" z="66.25" w="20" d="2.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="115" z="83.75" w="20" d="2.5" h="0" />
-  <Wall fill="#ccccff" frame="#000000" x="136.25" z="75" w="2.5" d="20" h="0" />
-  <Wall fill="#ccccff" frame="#000000" x="127.5" z="53.75" w="20" d="2.5" h="0" />
-  <Wall fill="#ccccff" frame="#000000" x="127.5" z="96.25" w="20" d="2.5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="107.5" z="42.5" w="5" d="5" h="0" />
-  <Wall fill="#bbbbbb" frame="#000000" x="107.5" z="107.5" w="5" d="5" h="0" />
-  <Teleporter win="1000" start="@winAll" activeRange="2000" fill="#cc0099" frame="#000000" cx="61.94444444444444" cz="48.19444444444444" angle="225" />
-  <Ufo watch="playerMask + scoutMask" killMsg="@killUfo" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" angle="45" />
-  <Ufo y="200" start="@killUfo" killMsg="@wave1kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" angle="45" />
-  <Ufo y="205" start="@killUfo" killMsg="@wave1kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" angle="45" />
-  <Ufo y="210" start="@killUfo" killMsg="@wave1kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" angle="45" />
-  <Ufo y="220" start="@wave2" killMsg="@wave2kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" angle="45" />
-  <Ufo y="225" start="@wave2" killMsg="@wave2kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" angle="45" />
-  <Ufo y="230" start="@wave2" killMsg="@wave2kill" fill="#ffff66" frame="#ff33cc" cx="61.25" cz="64.375" angle="45" />
+  <Sound y="60" sound="snBubbles" isAmbient="true" loopCount="-1" volume="500" cx="62.777777777777786" cz="72.77777777777779" angle="45" />
+  <Incarnator mask="allTeams" cx="38.26388888888889" cz="61.80555555555556" angle="90" />
+  <Wall fill="#c7c7c7" frame="#000000" x="41.5625" z="15.3125" w="3.125" d="3.125" h="6" />
+  <Wall fill="#c7c7c7" frame="#000000" x="41.5625" z="22.1875" w="3.125" d="3.125" h="6" />
+  <Wall fill="#c7c7c7" frame="#000000" x="41.5625" z="18.75" w="3.125" d="10" h="1" y="6" />
+  <Wall fill="#c7c7c7" frame="#000000" x="36.25" z="0.9375" w="47.5" d="1.875" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="41.5625" z="7.8125" w="3.125" d="11.875" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="11.25" z="20.9375" w="2.5" d="41.875" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="41.5625" z="32.8125" w="3.125" d="18.125" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="29.6875" z="40.3125" w="3.125" d="3.125" h="6" />
+  <Wall fill="#c7c7c7" frame="#000000" x="22.8125" z="40.3125" w="3.125" d="3.125" h="6" />
+  <Wall fill="#c7c7c7" frame="#000000" x="26.25" z="40.3125" w="10" d="3.125" h="1" y="6" />
+  <Wall fill="#c7c7c7" frame="#000000" x="16.875" z="40.3125" w="8.75" d="3.125" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="35.625" z="40.3125" w="8.75" d="3.125" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="51.5625" z="40.3125" w="16.875" d="3.125" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="68.4375" z="40.3125" w="16.875" d="3.125" h="4.5" />
+  <Wall fill="#c7c7c7" frame="#000000" x="78.4375" z="20.9375" w="3.125" d="41.875" h="6" />
+  <Wall fill="#c7c7c7" frame="#000000" x="68.4375" z="0.9375" w="16.875" d="1.875" h="4.5" />
+  <Wall fill="#c7c7c7" frame="#000000" x="22.5" z="59.375" w="5" d="5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="17.5" z="117.5" w="5" d="5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="47.5" z="54.375" w="5" d="5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="112.5" z="127.5" w="5" d="5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="5" z="87.5" w="10" d="5" h="0" />
+  <Incarnator mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="270" />
+  <Incarnator y="3" mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="270" />
+  <Incarnator y="6" mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="270" />
+  <Incarnator y="9" mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="270" />
+  <Incarnator y="12" mask="allTeams" cx="31.319444444444443" cz="78.05555555555556" angle="270" />
+  <Wall fill="#c7c7c7" frame="#000000" x="78.4375" z="48.4375" w="3.125" d="13.125" h="1" y="2" />
+  <Wall fill="#c7c7c7" frame="#000000" x="77.5" z="57.5" w="5" d="5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="80" z="90" w="10" d="10" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="80" z="90" w="5" d="5" h="0.75" y="3" />
+  <Wall fill="#c7c7c7" frame="#000000" x="60" z="107.5" w="10" d="5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="77.5" z="130" w="5" d="10" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="40" z="130" w="10" d="10" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="115" z="66.25" w="20" d="2.5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="115" z="83.75" w="20" d="2.5" h="0" />
+  <Wall fill="#d6d7ff" frame="#000000" x="136.25" z="75" w="2.5" d="20" h="0" />
+  <Wall fill="#d6d7ff" frame="#000000" x="127.5" z="53.75" w="20" d="2.5" h="0" />
+  <Wall fill="#d6d7ff" frame="#000000" x="127.5" z="96.25" w="20" d="2.5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="107.5" z="42.5" w="5" d="5" h="0" />
+  <Wall fill="#c7c7c7" frame="#000000" x="107.5" z="107.5" w="5" d="5" h="0" />
+  <Teleporter win="1000" start="@winAll" activeRange="2000" fill="#d82da9" frame="#000000" cx="61.94444444444444" cz="48.19444444444444" angle="45" />
+  <Ufo watch="playerMask + scoutMask" killMsg="@killUfo" fill="#fffc79" frame="#ff56d6" cx="61.25" cz="64.375" angle="225" />
+  <Ufo y="200" start="@killUfo" killMsg="@wave1kill" fill="#fffc79" frame="#ff56d6" cx="61.25" cz="64.375" angle="225" />
+  <Ufo y="205" start="@killUfo" killMsg="@wave1kill" fill="#fffc79" frame="#ff56d6" cx="61.25" cz="64.375" angle="225" />
+  <Ufo y="210" start="@killUfo" killMsg="@wave1kill" fill="#fffc79" frame="#ff56d6" cx="61.25" cz="64.375" angle="225" />
+  <Ufo y="220" start="@wave2" killMsg="@wave2kill" fill="#fffc79" frame="#ff56d6" cx="61.25" cz="64.375" angle="225" />
+  <Ufo y="225" start="@wave2" killMsg="@wave2kill" fill="#fffc79" frame="#ff56d6" cx="61.25" cz="64.375" angle="225" />
+  <Ufo y="230" start="@wave2" killMsg="@wave2kill" fill="#fffc79" frame="#ff56d6" cx="61.25" cz="64.375" angle="225" />
   <Counter n="3" in="@wave1kill" out="@wave2" />
   <Counter n="3" in="@wave2kill" out="@winAll" />
-  <set designer="Juri Munkki" information="There have been several raids on this small outpost. 
-Your task is to make sure they stop." />
-  <SkyColor verticalRangeMin="20" verticalRangeMax="300" n="5" fill="#ffcc66" frame="#9966ff" />
-  <GroundColor fill="#222222" />
-  <Solid shape="804" scale="4" fill="#bbbbbb" frame="#000000" cx="45" cz="95" angle="45" />
-  <Dome fill="#bbbbbb" frame="#000000" cx="82.5" cz="107.5" r="2.5" angle="0" quarters="4" />
+  <set designer="Juri Munkki" information="There have been several raids on this small outpost. &#10;Your task is to make sure they stop." />
+  <SkyColor verticalRangeMin="20" verticalRangeMax="300" n="5" fill="#ffd479" frame="#ab82ff" />
+  <GroundColor fill="#2d2d2d" />
+  <Solid shape="804" scale="4" fill="#c7c7c7" frame="#000000" cx="45" cz="95" angle="225" />
+  <Dome fill="#c7c7c7" frame="#000000" cx="82.5" cz="107.5" r="2.5" angle="0" quarters="4" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="300" />
-  <Goody shape="bspGrenade" y="4" speed="2" grenades="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="82.5" cz="107.5" angle="225" />
+  <Goody shape="bspGrenade" y="4" speed="2" grenades="2" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="82.5" cz="107.5" angle="45" />
 </map>

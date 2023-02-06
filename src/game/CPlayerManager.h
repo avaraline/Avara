@@ -28,6 +28,8 @@ enum {
     kLNotFound,
     kLPaused,
     kLNoVehicle,
+    kLAway,
+    kLReady,    // implies kLLoaded, i.e. Loaded & Ready to start
 
     kStringNorth,
     kStringSouth,
@@ -43,16 +45,28 @@ class CNetManager;
 
 #define kMaxMessageChars 127
 
+static const char* lThing_utf8    = "\xC2\xAC ";     // ¬
+static const char* checkMark_utf8 = "\xE2\x88\x9A";  // ✓
+static const char* triangle_utf8  = "\xCE\x94";      // Δ
+static const char* clearChat_utf8 = "\x1B";          // Fn-Del on Mac
+
 
 class CPlayerManager {
+protected:
+    static CPlayerManager* theLocalPlayer;
 public:
+    static CPlayerManager* LocalPlayer() { return theLocalPlayer; };  // the current/local player
+
     virtual std::string GetChatString(int maxChars) = 0;
     virtual std::string GetChatLine() = 0;
     virtual CAbstractPlayer* GetPlayer() = 0;
     virtual void SetPlayer(CAbstractPlayer*) = 0;
     virtual short Slot() = 0;
+    virtual void SetLocal() = 0;
     virtual void AbortRequest() = 0;
     virtual Boolean IsLocalPlayer() = 0;
+    virtual bool CalculateIsLocalPlayer() = 0;
+
     virtual void GameKeyPress(char c) = 0;
     virtual FunctionTable *GetFunctions() = 0;
     virtual void DeadOrDone() = 0;
@@ -67,10 +81,12 @@ public:
     virtual Str255& PlayerRegName() = 0;
     virtual short LoadingStatus() = 0;
     virtual void SetPlayerStatus(short newStatus, long theWin) = 0;
+    virtual bool IsAway() = 0;
+
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
     virtual void SetPosition(short pos) = 0;
     virtual void RosterKeyPress(unsigned char c) = 0;
-    virtual void RosterMessageText(short len, char *c) = 0;
+    virtual void RosterMessageText(short len, const char *c) = 0;
     virtual short LevelCRC() = 0;
     virtual OSErr LevelErr() = 0;
     virtual std::string LevelTag() = 0;
@@ -109,11 +125,11 @@ public:
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
     virtual bool GetShowScoreboard() = 0;
-
 };
 
 class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
 private:
+
     CAbstractPlayer *itsPlayer;
     CAvaraGame *itsGame;
     // CRosterWindow	*theRoster;
@@ -154,7 +170,7 @@ private:
     unsigned char message[kMaxMessageChars + 1];
     std::deque<char> lineBuffer;
 
-    long winFrame;
+    FrameNumber winFrame;
     short loadingStatus;
     short slot;
     short playerColor;
@@ -173,10 +189,12 @@ private:
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 
 public:
+
     virtual void IPlayerManager(CAvaraGame *theGame, short id, CNetManager *aNetManager);
 
     virtual void SetPlayer(CAbstractPlayer *thePlayer);
 
+    virtual bool CalculateIsLocalPlayer();
     virtual uint32_t GetKeyBits();
     virtual uint32_t DoMouseControl(Point *deltaMouse, Boolean doCenter);
     virtual void HandleEvent(SDL_Event &event);
@@ -193,10 +211,10 @@ public:
 
     virtual void Dispose();
 
-    virtual Boolean TestHeldKey(short funcCode);
+    virtual Boolean TestKeyPressed(short funcCode);
 
     // virtual	void			FlushMessageText(Boolean forceAll);
-    virtual void RosterMessageText(short len, char *c);
+    virtual void RosterMessageText(short len, const char *c);
     virtual std::string GetChatString(int maxChars);
     virtual std::string GetChatLine();
 
@@ -207,7 +225,8 @@ public:
     virtual void ChangeNameAndLocation(StringPtr theName, Point location);
     virtual void SetPosition(short pos);
     virtual void SetPlayerStatus(short newStatus, long theWin);
-
+    virtual void SetPlayerReady(bool isReady);
+    virtual bool IsAway();
     virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
 
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
@@ -230,6 +249,7 @@ public:
 
     virtual void SpecialColorControl();
     virtual short Slot();
+    virtual void SetLocal();
     virtual Boolean IsLocalPlayer();
     virtual short Position();
     virtual Str255& PlayerName();

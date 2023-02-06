@@ -3,12 +3,13 @@
 #include "AvaraDefines.h"
 #include "CAbstractPlayer.h"
 #include "CAvaraApp.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CNetManager.h"
 #include "CPlayerManager.h"
 #include "CScoreKeeper.h"
 #include "Preferences.h"
 #include "RGBAColor.h"
+#include "Debug.h"
 
 #include <nanogui/colorcombobox.h>
 #include <nanogui/layout.h>
@@ -60,14 +61,14 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     panel->setLayout(layout);
     theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
     std::vector<long> player_colors = {
-        (long) CColorManager::getTeamColor(1).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(2).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(3).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(4).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(5).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(6).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(7).value_or(CColorManager::getDefaultTeamColor()),
-        (long) CColorManager::getTeamColor(8).value_or(CColorManager::getDefaultTeamColor())
+        (long) ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(4).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(5).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(6).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(7).value_or(ColorManager::getDefaultTeamColor()),
+        (long) ColorManager::getTeamColor(8).value_or(ColorManager::getDefaultTeamColor())
     };
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
@@ -163,7 +164,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     };
 
     for(const auto &heading : headings) {
-        auto t = scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
+        scoreLayer->add<Text>(heading, false, SCORE_FONT_SIZE);
     }
 
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
@@ -199,11 +200,17 @@ void CRosterWindow::UpdateRoster() {
             std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             if (i != theNet->itsCommManager->myId && theName.length() > 0) {
                 long rtt = theNet->itsCommManager->GetMaxRoundTrip(1 << i);
-                theName += std::string(" (") + std::to_string(rtt) + " ms)";
+                float loss = 100*theNet->itsCommManager->GetMaxMeanReceiveCount(1 << i);
+                std::ostringstream os;
+                os << theName << " (" << rtt << "ms";
+                if (Debug::IsEnabled("loss")) {
+                    os << "/" << std::setprecision(loss < 2 ? 1 : 0) << std::fixed << loss << "%";
+                }
+                os << ")";
+                theName = os.str();
                 maxRtt = std::max(maxRtt, rtt);
             }
-            short status = thisPlayer->LoadingStatus();
-            std::string theStatus = GetStringStatus(status, thisPlayer->WinFrame());
+            std::string theStatus = GetStringStatus(thisPlayer);
 
             std::string theChat = thisPlayer->GetChatString(CHAT_CHARS);
 
@@ -211,10 +218,10 @@ void CRosterWindow::UpdateRoster() {
             chats[i]->setValue(theChat.c_str());
             colors[i]->setSelectedIndex(theNet->teamColors[i]);
             colors[i]->setTextColor(nanogui::Color(
-                LongToR(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToG(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToB(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
-                LongToA(*CColorManager::getTeamTextColor(theNet->teamColors[i] + 1))
+                LongToR(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToG(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToB(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1)),
+                LongToA(*ColorManager::getTeamTextColor(theNet->teamColors[i] + 1))
             ));
             colors[i]->setCaption(theName.c_str());
             colors[i]->popup()->setAnchorPos(nanogui::Vector2i(235, 68 + 60 * i));
@@ -222,7 +229,7 @@ void CRosterWindow::UpdateRoster() {
 
         if (maxRtt > 0 && theNet->IsAutoLatencyEnabled() && !theGame->IsPlaying()) {
             // set initial frame latency from client ping/RTT times
-            maxRtt = std::min(maxRtt, long(CLASSICFRAMETIME*2*4));  // max of 4 LT on the UI
+            maxRtt = std::min(maxRtt+CLASSICFRAMETIME, long(CLASSICFRAMETIME*2*4));  // max of 4 LT on the UI
             theGame->SetFrameLatency(theGame->RoundTripToFrameLatency(maxRtt), -1);
         }
 
@@ -269,10 +276,11 @@ bool CRosterWindow::DoCommand(int theCommand) {
     return false;
 }
 
-std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
+std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
+    short status = player->LoadingStatus();
     std::string strStatus;
-    if (winFrame >= 0) {
-        long timeTemp = FMulDiv(winFrame, ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
+    if (player->WinFrame() >= 0) {
+        long timeTemp = FMulDiv(player->WinFrame(), ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
         auto hundreds1 = timeTemp % 10;
         timeTemp /= 10;
         auto hundreds2 = timeTemp % 10;
@@ -289,9 +297,13 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
         return strStatus;
     }
 
-    if (status == kLConnected) {
+    if(status == kLAway) {
+        strStatus = "not playing";
+    } else if (status == kLConnected) {
         strStatus = "connected";
     } else if (status == kLLoaded) {
+        strStatus = "loaded";
+    } else if (status == kLReady) {
         strStatus = "ready";
     } else if (status == kLWaiting) {
         strStatus = "waiting";
@@ -311,6 +323,15 @@ std::string CRosterWindow::GetStringStatus(short status, Fixed winFrame) {
         strStatus = "";
     }
     return strStatus;
+}
+
+void CRosterWindow::SendRosterMessage(std::string& message) {
+    SendRosterMessage(message.length(), (char*)message.c_str());
+}
+
+void CRosterWindow::SendRosterMessage(const char* message) {
+    // message assumed to be NULL terminated
+    SendRosterMessage(strlen(message), (char*)message);
 }
 
 void CRosterWindow::SendRosterMessage(int len, char *message) {
@@ -360,6 +381,14 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         //SDL_Log("CRosterWindow::handleSDLEvent SDL_KEYDOWN");
 
         switch (event.key.keysym.sym) {
+            case SDLK_UP:
+                ((CAvaraAppImpl *)gApplication)->GetTui()->HistoryOlder();
+
+                return true;
+            case SDLK_DOWN:
+                ((CAvaraAppImpl *)gApplication)->GetTui()->HistoryNewer();
+
+                return true;
             case SDLK_BACKSPACE:
                 SendRosterMessage(1, backspace);
                 ChatLineDelete();

@@ -24,7 +24,7 @@ void CDome::BeginScript() {
 CAbstractActor *CDome::EndScript() {
     short resId;
     short showFloor;
-    Fixed startAngle, spanAngle;
+    Fixed spanAngle;
 
     CGlowActors::EndScript();
 
@@ -55,6 +55,8 @@ CAbstractActor *CDome::EndScript() {
             partList[1]->MoveDone();
             partCount = 2;
             break;
+        default:
+            resId = 0;
     }
 
     LoadPartWithColors(0, resId);

@@ -1,0 +1,255 @@
+<map>
+  <SkyColor fill="hsl(280, 100%, 70%)" frame="hsl(220, 10%, 10%)" />
+  <GroundColor fill="hsl(220, 10%, 10%)" />
+  <set
+    designer="$mSilverfox"
+    information="The structure was static and immutable, the particulars of its configuration written long before its manifestation. Clanless, its identity was composed purely of its own utility and function. It was beautiful."
+    ambient.c="hsl(280, 100%, 80%)"
+    light.0.i="0.9"
+    light.0.a="30"
+    light.0.b="10"
+    light.1.i="0.7"
+    wallHeight="0"
+  />
+
+  <!-- VFX TIMING -->
+  <And in="@start" out="@tik" />
+  <Timer in="@tik" out="@tok" wait="16" />
+  <Timer in="@tok" out="@tik" wait="15" />
+
+  <!-- CENTER -->
+  <Wall fill="hsl(250, 10%, 10%)" frame="#000000" x="0" z="-2.6" w="10" d="4.8" h="0" y="6" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-3.25" z="0" w="3.5" d="0.4" h="0" y="6" />
+  <Wall fill="hsl(250, 10%, 10%)" frame="#000000" x="0" z="0" w="3" d="0.4" h="0" y="6" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="3.25" z="0" w="3.5" d="0.4" h="0" y="6" />
+  <Wall fill="hsl(250, 10%, 10%)" frame="#000000" x="0" z="2.6" w="10" d="4.8" h="0" y="6" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="-5" z="0" w="0" d="10" h="6" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="5" z="0" w="0" d="10" h="6" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-15" z="0" w="0" d="10" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="15" z="0" w="0" d="10" h="4" />
+  <Ramp y="4" deltaY="2" fill="hsl(250, 10%, 12.5%)" frame="#000000" x="10" z="-2.6" w="10" d="4.8" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="10" z="0" w="10" d="0.4" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" fill="hsl(250, 10%, 12.5%)" frame="#000000" x="10" z="2.6" w="10" d="4.8" h="0" angle="90" />
+  <Ramp y="4" deltaY="2" fill="hsl(250, 10%, 12.5%)" frame="#000000" x="-10" z="-2.6" w="10" d="4.8" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="-10" z="0" w="10" d="0.4" h="0" angle="270" />
+  <Ramp y="4" deltaY="2" fill="hsl(250, 10%, 12.5%)" frame="#000000" x="-10" z="2.6" w="10" d="4.8" h="0" angle="270" />
+  <Teleporter mask="0" speed="2" fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="0" y="6.005" angle="225" scale="5.25" shape="bspEnso" />
+
+  <!-- PILLARS -->
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="0" z="-10" w="10" d="10" h="8" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="0" z="10" w="10" d="10" h="8" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="-20" z="-30" w="10" d="10" h="8" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="-20" z="30" w="10" d="10" h="8" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="20" z="-30" w="10" d="10" h="8" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="20" z="30" w="10" d="10" h="8" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="-30" z="0" w="10" d="10" h="8" />
+  <Wall fill="hsl(250, 20%, 5%)" frame="#000000" x="30" z="0" w="10" d="10" h="8" />
+  <Hologram cx="0" cz="-15.05" y="2" fill="hsl(280, 100%, 82%)" frame="#ffffff" scale="1.5" shape="bspVines" angle="0" />
+  <Hologram cx="0" cz="15.05" y="2" fill="hsl(280, 100%, 82%)" frame="#ffffff" scale="1.5" shape="bspVines" angle="180" />
+
+  <!-- CONTINUING OUTWARD -->
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-22.6" z="0" w="4.8" d="10" h="0" y="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-20" z="0" w="0.4" d="10" h="0" y="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-17.4" z="-2.6" w="4.8" d="4.8" h="0" y="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-17.4" z="0" w="4.8" d="0.4" h="0" y="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-17.4" z="2.6" w="4.8" d="4.8" h="0" y="4" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="-20" cz="0" y="4.005" angle="225" mask="0" speed="0" shape="bspGroundStar" scale="0.35" start="@tik" stop="@tok" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="-20" cz="0" y="4.005" angle="180" mask="0" speed="0" shape="bspGroundStar" scale="0.50" start="@tok" stop="@tik" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="22.6" z="0" w="4.8" d="10" h="0" y="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="20" z="0" w="0.4" d="10" h="0" y="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="17.4" z="-2.6" w="4.8" d="4.8" h="0" y="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="17.4" z="0" w="4.8" d="0.4" h="0" y="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="17.4" z="2.6" w="4.8" d="4.8" h="0" y="4" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="20" cz="0" y="4.005" angle="225" mask="0" speed="0" shape="bspGroundStar" scale="0.35" start="@tik" stop="@tok" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="20" cz="0" y="4.005" angle="180" mask="0" speed="0" shape="bspGroundStar" scale="0.50" start="@tok" stop="@tik" />
+
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-22.6" z="12.6" w="4.8" d="4.8" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-22.6" z="10" w="4.8" d="0.4" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-22.6" z="7.4" w="4.8" d="4.8" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-20" z="12.6" w="0.4" d="4.8" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-20" z="10" w="0.4" d="0.4" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-20" z="7.4" w="0.4" d="4.8" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-17.4" z="10" w="4.8" d="10" h="4" />
+
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-22.6" z="-12.6" w="4.8" d="4.8" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-22.6" z="-10" w="4.8" d="0.4" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-22.6" z="-7.4" w="4.8" d="4.8" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-20" z="-12.6" w="0.4" d="4.8" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-20" z="-10" w="0.4" d="0.4" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-20" z="-7.4" w="0.4" d="4.8" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-17.4" z="-10" w="4.8" d="10" h="4" />
+
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="22.6" z="12.6" w="4.8" d="4.8" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="22.6" z="10" w="4.8" d="0.4" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="22.6" z="7.4" w="4.8" d="4.8" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="20" z="12.6" w="0.4" d="4.8" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="20" z="10" w="0.4" d="0.4" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="20" z="7.4" w="0.4" d="4.8" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="17.4" z="10" w="4.8" d="10" h="4" />
+
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="22.6" z="-12.6" w="4.8" d="4.8" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="22.6" z="-10" w="4.8" d="0.4" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="22.6" z="-7.4" w="4.8" d="4.8" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="20" z="-12.6" w="0.4" d="4.8" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="20" z="-10" w="0.4" d="0.4" h="4" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="20" z="-7.4" w="0.4" d="4.8" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="17.4" z="-10" w="4.8" d="10" h="4" />
+
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="-30" z="-12.6" w="10" d="4.8" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="-30" z="-10" w="10" d="0.4" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="-30" z="-7.4" w="10" d="4.8" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="-30" z="12.6" w="10" d="4.8" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="-30" z="10" w="10" d="0.4" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="-30" z="7.4" w="10" d="4.8" h="0" angle="270" />
+
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="30" z="-12.6" w="10" d="4.8" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="30" z="-10" w="10" d="0.4" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="30" z="-7.4" w="10" d="4.8" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="30" z="12.6" w="10" d="4.8" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="30" z="10" w="10" d="0.4" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="30" z="7.4" w="10" d="4.8" h="0" angle="90" />
+
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="30" z="-20" w="10" d="10" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="30" z="20" w="10" d="10" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-30" z="20" w="10" d="10" h="4" />
+  <Wall fill="hsl(250, 10%, 15%)" frame="#000000" x="-30" z="-20" w="10" d="10" h="4" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="-20" z="-20" w="10" d="10" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="-20" z="20" w="10" d="10" h="0" angle="90" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="20" z="20" w="10" d="10" h="0" angle="270" />
+  <Ramp y="2" deltaY="2" fill="hsl(250, 10%, 11.5%)" frame="#000000" x="20" z="-20" w="10" d="10" h="0" angle="270" />
+
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-40" z="-13.25" w="10" d="6.05" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-42.6" z="0" w="4.8" d="20.4" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-40" z="-5.25" w="0.4" d="9.9" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-40" z="0" w="0.4" d="0.6" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-40" z="5.25" w="0.4" d="9.9" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-37.4" z="-10" w="4.8" d="0.4" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-37.4" z="0" w="4.8" d="19.6" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-37.4" z="10" w="4.8" d="0.4" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-40" z="13.25" w="10" d="6.05" h="2" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="-40" cz="0" y="2.005" angle="225" mask="0" speed="0" shape="bspFloorFrame" scale="0.15" start="@tik" stop="@tok" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="-40" cz="0" y="2.005" angle="180" mask="0" speed="0" shape="bspFloorFrame" scale="0.10" start="@tok" stop="@tik" />
+
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="40" z="-13.25" w="10" d="6.05" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="42.6" z="0" w="4.8" d="20.4" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="40" z="-5.25" w="0.4" d="9.9" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="40" z="0" w="0.4" d="0.6" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="40" z="5.25" w="0.4" d="9.9" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="37.4" z="-10" w="4.8" d="0.4" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="37.4" z="0" w="4.8" d="19.6" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="37.4" z="10" w="4.8" d="0.4" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="40" z="13.25" w="10" d="6.05" h="2" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="40" cz="0" y="2.005" angle="225" mask="0" speed="0" shape="bspFloorFrame" scale="0.15" start="@tik" stop="@tok" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="40" cz="0" y="2.005" angle="180" mask="0" speed="0" shape="bspFloorFrame" scale="0.10" start="@tok" stop="@tik" />
+
+  <!-- SECONDARY CIRCUIT FROM OUTER MISSILES -->
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="-40" y="0" angle="225" mask="0" speed="0" shape="bspGroundStar" scale="0.35" start="@tik" stop="@tok" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="-40" y="0" angle="180" mask="0" speed="0" shape="bspGroundStar" scale="0.50" start="@tok" stop="@tik" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="40" y="0" angle="225" mask="0" speed="0" shape="bspGroundStar" scale="0.35" start="@tik" stop="@tok" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="40" y="0" angle="180" mask="0" speed="0" shape="bspGroundStar" scale="0.50" start="@tok" stop="@tik" />
+  <Field deltaY="0" visible="true" fill="hsl(280, 100%, 82%)" frame="#000000" x="0" z="-35" y="0" w="0.4" d="10" h="0" />
+  <Field deltaY="0" visible="true" fill="hsl(280, 100%, 82%)" frame="#000000" x="0" z="35" y="0" w="0.4" d="10" h="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 10%, 8%)" frame="#000000" x="-7.6" z="-30" w="14.8" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="0" z="-30" w="0.4" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 10%, 8%)" frame="#000000" x="7.6" z="-30" w="14.8" d="10" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 10%, 8%)" frame="#000000" x="-7.6" z="30" w="14.8" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="0" z="30" w="0.4" d="10" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 10%, 8%)" frame="#000000" x="7.6" z="30" w="14.8" d="10" h="0" angle="180" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-7.6" z="-22.6" w="14.8" d="4.8" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="0" z="-22.6" w="0.4" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="7.6" z="-22.6" w="14.8" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-12.6" z="-20" w="4.8" d="0.4" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="0" z="-20" w="20.4" d="0.4" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="12.6" z="-20" w="4.8" d="0.4" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-12.6" z="-17.4" w="4.8" d="4.8" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-10" z="-17.4" w="0.4" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="0" z="-17.4" w="19.6" d="4.8" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="10" z="-17.4" w="0.4" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="12.6" z="-17.4" w="4.8" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-7.6" z="22.6" w="14.8" d="4.8" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="0" z="22.6" w="0.4" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="7.6" z="22.6" w="14.8" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-12.6" z="20" w="4.8" d="0.4" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="0" z="20" w="20.4" d="0.4" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="12.6" z="20" w="4.8" d="0.4" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="-12.6" z="17.4" w="4.8" d="4.8" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="-10" z="17.4" w="0.4" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="0" z="17.4" w="19.6" d="4.8" h="2" />
+  <Wall fill="hsl(280, 100%, 82%)" frame="#000000" x="10" z="17.4" w="0.4" d="4.8" h="2" />
+  <Wall fill="hsl(250, 10%, 8%)" frame="#000000" x="12.6" z="17.4" w="4.8" d="4.8" h="2" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 5%, 12%)" frame="#000000" x="-12.6" z="-12.5" w="4.8" d="5" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="-10" z="-12.5" w="0.4" d="5" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 5%, 12%)" frame="#000000" x="-7.4" z="-12.5" w="4.8" d="5" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 5%, 12%)" frame="#000000" x="-12.6" z="12.5" w="4.8" d="5" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="-10" z="12.5" w="0.4" d="5" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 5%, 12%)" frame="#000000" x="-7.4" z="12.5" w="4.8" d="5" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 5%, 12%)" frame="#000000" x="12.6" z="-12.5" w="4.8" d="5" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="10" z="-12.5" w="0.4" d="5" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 5%, 12%)" frame="#000000" x="7.4" z="-12.5" w="4.8" d="5" h="0" angle="180" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 5%, 12%)" frame="#000000" x="12.6" z="12.5" w="4.8" d="5" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(280, 100%, 82%)" frame="#000000" x="10" z="12.5" w="0.4" d="5" h="0" angle="0" />
+  <Ramp y="0" deltaY="2" fill="hsl(250, 5%, 12%)" frame="#000000" x="7.4" z="12.5" w="4.8" d="5" h="0" angle="0" />
+  <Field deltaY="0" visible="true" fill="hsl(280, 100%, 82%)" frame="#000000" x="-10" z="-5.15" y="0" w="0.4" d="9.7" h="0" />
+  <Field deltaY="0" visible="true" fill="hsl(280, 100%, 82%)" frame="#000000" x="-10" z="5.15" y="0" w="0.4" d="9.7" h="0" />
+  <Field deltaY="0" visible="true" fill="hsl(280, 100%, 82%)" frame="#000000" x="10" z="-5.15" y="0" w="0.4" d="9.7" h="0" />
+  <Field deltaY="0" visible="true" fill="hsl(280, 100%, 82%)" frame="#000000" x="10" z="5.15" y="0" w="0.4" d="9.7" h="0" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="-10" cz="0" y="0" angle="225" mask="0" speed="0" shape="bspFloorFrame" scale="0.15" start="@tik" stop="@tok" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="-10" cz="0" y="0" angle="180" mask="0" speed="0" shape="bspFloorFrame" scale="0.10" start="@tok" stop="@tik" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="10" cz="0" y="0" angle="225" mask="0" speed="0" shape="bspFloorFrame" scale="0.15" start="@tik" stop="@tok" />
+  <Teleporter fill="hsl(280, 100%, 82%)" frame="#000000" cx="10" cz="0" y="0" angle="180" mask="0" speed="0" shape="bspFloorFrame" scale="0.10" start="@tok" stop="@tik" />
+
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="400" />
+  <Goody shape="bspAvaraA" y="6 + mGoodyOffset" speed="-2" grenades="mLgGrenade" missiles="mLgMissile" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#dcf4ff" cx="0" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <Goody shape="bspGrenade" y="2 + mGoodyOffset" speed="-2" grenades="mLgGrenade" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#dcf4ff" cx="-40" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="250" />
+  <Goody shape="bspGrenade" y="2 + mGoodyOffset" speed="-2" grenades="mLgGrenade" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#dcf4ff" cx="40" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="150" />
+  <Goody shape="bspMissile" y="mGoodyOffset" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="-40" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="150" />
+  <Goody shape="bspMissile" y="mGoodyOffset" speed="-2" missiles="mLgMissile" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="40" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="mGoodyOffset" speed="-2" grenades="mMdGrenade" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#dcf4ff" cx="10" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="200" />
+  <Goody shape="bspGrenade" y="mGoodyOffset" speed="-2" grenades="mMdGrenade" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#dcf4ff" cx="-10" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody shape="bspMissile" y="4 + mGoodyOffset" speed="-2" missiles="mMdMissile" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#000000" cx="-20" cz="0" angle="225" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="100" />
+  <Goody shape="bspMissile" y="4 + mGoodyOffset" speed="-2" missiles="mMdMissile" start="mShow" out="mTaken" fill="hsl(280, 100%, 82%)" frame="#000000" cx="20" cz="0" angle="225" />
+
+  <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter y="20" shape="0" group="@recenter" mask="0" fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="-10" angle="45" />
+  <Teleporter y="20" shape="0" group="@recenter" mask="0" fill="hsl(280, 100%, 82%)" frame="#000000" cx="0" cz="10" angle="45" />
+
+  <Incarnator y="16" cx="-20" cz="-30" angle="135" />
+  <Incarnator y="16" cx="20" cz="30" angle="315" />
+  <Incarnator y="16" cx="-20" cz="30" angle="45" />
+  <Incarnator y="16" cx="20" cz="-30" angle="225" />
+  <Incarnator y="16" cx="-30" cz="0" angle="90" />
+  <Incarnator y="16" cx="30" cz="0" angle="270" />
+  <Incarnator y="8" cx="0" cz="60" angle="0" />
+  <Incarnator y="8" cx="0" cz="-60" angle="180" />
+  <Incarnator y="8" cx="-50" cz="50" angle="45" stop="@start" />
+  <Incarnator y="8" cx="50" cz="-50" angle="225" stop="@start" />
+  <Incarnator y="8" cx="50" cz="50" angle="315" stop="@start" />
+  <Incarnator y="8" cx="-50" cz="-50" angle="135" stop="@start" />
+</map>

@@ -9,6 +9,7 @@
 
 #include "CSmartPart.h"
 #include "CAbstractActor.h"
+#include "AvaraGL.h"
 
 #include "FastMat.h"
 
@@ -23,12 +24,12 @@ void CSmartPart::ISmartPart(short resId, CAbstractActor *anActor, short aPartCod
     FSquareAccumulate(enclosureRadius, rSquare);
 
     MoveDone();
-    UpdateOpenGLData();
+    AvaraGLUpdateData(this);
 }
 
 Boolean CSmartPart::HitTestBoxes(CSmartPart *other) {
     Vector otherCorners[8];
-    Vector bupCorners[8];
+    //Vector bupCorners[8];
     int vCount;
     Vector *v;
     Fixed boundary;
@@ -248,7 +249,7 @@ void CSmartPart::RayTest(RayHitRecord *hitRec) {
                 Boolean inside = true;
                 short quadrant[NUMDIM];
                 short i;
-                short whichPlane;
+                //short whichPlane;
                 Fixed maxT[NUMDIM];
                 Fixed candidate[NUMDIM];
 
@@ -396,7 +397,7 @@ void CSmartPart::MinMaxGlobalSphere(Fixed *minPoint, Fixed *maxPoint) {
 
 void CSmartPart::OffsetPart(Fixed *offset) {
     Fixed x, y, z;
-    short i;
+    //short i;
 
     x = offset[0];
     y = offset[1];

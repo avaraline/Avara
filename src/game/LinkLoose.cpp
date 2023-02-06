@@ -189,7 +189,8 @@ void *CreateObjectByIndex(short objectId) {
 }
 
 void InitLinkLoose() {
-    char *objectsPath = BundlePath("rsrc/objects.json");
+    char *objectsPath = new char [1024];
+    BundlePath("rsrc/objects.json", objectsPath);
     std::ifstream infile(objectsPath);
     if (infile.fail()) {
         SDL_Log("*** Failed to load objects.json");
@@ -198,6 +199,7 @@ void InitLinkLoose() {
         objectDescriptor = json::parse(infile);
         infile.close();
     }
+    delete [] objectsPath;
 }
 
 void *CreateNamedObject(StringPtr theName) {

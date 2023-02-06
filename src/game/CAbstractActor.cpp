@@ -9,7 +9,7 @@
 // #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
 #include "CAbstractActor.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 
 #include "CDepot.h"
 #include "CScaledBSP.h"
@@ -35,8 +35,8 @@ void CAbstractActor::LoadPart(short ind, short resId) {
 
 void CAbstractActor::LoadPartWithColors(short ind, short resId) {
     LoadPart(ind, resId);
-    partList[ind]->ReplaceColor(kMarkerColor, GetPixelColor());
-    partList[ind]->ReplaceColor(kOtherMarkerColor, GetOtherPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
 }
 
 void CAbstractActor::InitLocationLinks() {
@@ -76,7 +76,7 @@ void CAbstractActor::LinkBox(Fixed minX, Fixed minZ, Fixed maxX, Fixed maxZ) {
     short *linkTable;
     ActorLocator *head;
     ActorLocator *loc;
-    long mask = LOCCOORDMASK;
+    uint32_t mask = LOCCOORDMASK;
 
     minX = (minX & mask) >> (LOCATORTABLESCALE - LOCATORTABLEBITS);
     maxX = (maxX & mask) >> (LOCATORTABLESCALE - LOCATORTABLEBITS);
@@ -350,8 +350,7 @@ void CAbstractActor::Shatter(short firstSliverType,
 void CAbstractActor::Blast() {
     if (isInGame) {
         short i;
-        CSmartPart *thePart, *maxPart;
-        SoundLink *blastLink;
+        CSmartPart *thePart, *maxPart = NULL;
         short maxCount = 0;
 
         Shatter(0, kSliverSizes, sliverCounts, sliverLives, FIX3(500));
@@ -364,7 +363,7 @@ void CAbstractActor::Blast() {
             }
         }
 
-        if (maxCount) {
+        if (maxCount && maxPart) {
             DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX(1));
         }
     }
@@ -940,7 +939,6 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 void CAbstractActor::GetBlastPoint(BlastHitRecord *theHit, RayHitRecord *rayHit) {
     Fixed theDistance;
     Fixed shortestDistance;
-    Vector *hitPoint;
     CSmartPart **pp, *thePart;
 
     shortestDistance = FIX(128);
@@ -1176,7 +1174,7 @@ short CAbstractActor::GetPlayerPosition() {
 }
 
 uint32_t CAbstractActor::GetTeamColorOr(uint32_t defaultColor) {
-    return CColorManager::getTeamColor(teamColor).value_or(defaultColor);
+    return ColorManager::getTeamColor(teamColor).value_or(defaultColor);
 }
 
 short CAbstractActor::GetBallSnapPoint(long theGroup,
@@ -1260,10 +1258,10 @@ double CAbstractActor::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
     return pow(fpsCoeff1, fpsScale);
 }
 
-long CAbstractActor::FpsFramesPerClassic(long classicFrames)
+FrameNumber CAbstractActor::FpsFramesPerClassic(FrameNumber classicFrames)
 {
     if (HandlesFastFPS()) {
-        return long(classicFrames / itsGame->fpsScale);
+        return (classicFrames / itsGame->fpsScale);
     } else {
         return 1;
     }

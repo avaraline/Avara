@@ -17,6 +17,9 @@
 #include "CommDefs.h"
 #include "CommandList.h"
 #include "Preferences.h"
+#include "Debug.h"
+
+#include <bitset>
 
 static Boolean ImmedProtoHandler(PacketInfo *thePacket, Ptr userData) {
     CProtoControl *theControl;
@@ -92,7 +95,8 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceiveColorChange(thePacket->dataBuffer);
             break;
         case kpLoadLevel:
-            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->dataBuffer, thePacket->p3);
+            // p2 is proxy for which slot originally sent the kpLoadLevel command
+            theNet->ReceiveLoadLevel(thePacket->sender, thePacket->p2, thePacket->dataBuffer, thePacket->p3);
             break;
         case kpLevelLoaded:
             theNet->LevelLoadStatus(thePacket->sender, thePacket->p2, 0, std::string(thePacket->dataBuffer));
@@ -104,13 +108,14 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theGame->itsApp->BroadcastCommand(kNetChangedCmd);
             break;
         case kpStartLevel:
-            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender);
+            theNet->ReceiveStartCommand(thePacket->p2, thePacket->sender, thePacket->p1);
             break;
         case kpResumeLevel:
-            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3);
+            theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3, thePacket->p1);
             break;
         case kpReadySynch:
             theNet->readyPlayers |= 1 << thePacket->sender;
+            SDL_Log("--- readyPlayers = 0x%02x\n", theNet->readyPlayers);
             break;
         case kpUnavailableSynch:
             theNet->ReceivedUnavailable(thePacket->sender, thePacket->p1);
@@ -124,9 +129,12 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
         case kpPlayerStatusChange:
             theNet->ReceivePlayerStatus(
-                thePacket->sender, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
+                thePacket->p1, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
             break;
-
+        case kpJSON:
+            theNet->ReceiveJSON(
+                thePacket->p1, thePacket->p2, thePacket->p3, std::string(thePacket->dataBuffer));
+            break;
         case kpKeyAndMouseRequest: {
             theGame->itsNet->playerTable[itsManager->myId]->ResendFrame(
                 thePacket->p3, thePacket->sender, kpKeyAndMouse);
@@ -153,38 +161,9 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->HandleDisconnect(itsManager->myId, kpKickClient);
             break;
 
-        case kpLatencyVote: {
-            int32_t p3 = thePacket->p3;
-
-            theNet->autoLatencyVoteCount++;
-            theNet->autoLatencyVote += thePacket->p1;
-
-            if (thePacket->p2 > theNet->maxRoundTripLatency)
-                theNet->maxRoundTripLatency = thePacket->p2;
-
-            theNet->playerTable[thePacket->sender]->RandomKey(p3);
-
-            // to be considered for fragmentation, packet must be received in the voting time window
-            if (theNet->IsFragmentCheckWindowOpen()) {
-                if (theNet->fragmentCheck == 0) {
-                    // the first vote received dictates what the fragmentCheck value is, not necessarily the current player
-                    theNet->fragmentDetected = false;
-                    theNet->fragmentCheck = p3;
-                    // SDL_Log("autoLatencyVoteCount = 1, setting fragmentCheck = %d, in frameNumber %ld", theNet->fragmentCheck, theGame->frameNumber);
-                } else {
-                    // any votes after the first must have a matching p3 value
-                    if (theNet->fragmentCheck != p3) {
-                        SDL_Log("FRAGMENTATION %d != %d in frameNumber %ld", theNet->fragmentCheck, p3, theGame->frameNumber);
-                        theNet->fragmentDetected = true;
-                    // } else {
-                    //     SDL_Log("No frags detected so far %d == %d in frameNumber %ld", theNet->fragmentCheck, p3, theGame->frameNumber);
-                    }
-                }
-            } else {
-                SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%ld",
-                        p3, theGame->frameNumber);
-            }
-        } break;
+        case kpLatencyVote:
+            theNet->ReceiveLatencyVote(thePacket->sender, thePacket->p1, thePacket->p2, thePacket->p3);
+            break;
 
         case kpResultsReport:
             theNet->ResultsReport(thePacket->dataBuffer);
@@ -204,6 +183,11 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
     return didHandle;
 }
 
+static std::string FormatDist(uint16_t distribution) {
+    std::bitset<kMaxAvaraPlayers> bits{distribution};
+    return bits.to_string();
+}
+
 Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
     CNetManager *theNet = theGame->itsNet;
@@ -213,15 +197,23 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
         case kpLogin: //	Only servers see this
         {
             short senderDistr = 1 << thePacket->sender;
-
+            DBG_Log("login", "kpLogin received from = %d\n", thePacket->sender);
+            DBG_Log("login", "sending kpLoginAck to = %s\n", FormatDist(senderDistr).c_str());
             itsManager->SendPacket(senderDistr, kpLoginAck, thePacket->sender, 0, 0, 0, NULL);
+            DBG_Log("login", "sending kpNameQuery(%d) to = %s\n", thePacket->sender, FormatDist(kdEveryone).c_str());
             itsManager->SendPacket(kdEveryone, kpNameQuery, thePacket->sender, 0, 0, 0, NULL);
+            DBG_Log("login", "sending kpNewArrival(%d) to = %s\n", thePacket->sender, FormatDist(~senderDistr).c_str());
             itsManager->SendPacket(~senderDistr, kpNewArrival, thePacket->sender, 0, 0, 0, NULL);
             didHandle = false;
         } break;
         case kpLoginAck:
             itsManager->myId = thePacket->p1;
+            DBG_Log("login", "kpLoginAck received with myId = %d\n", itsManager->myId);
             itsManager->SendPacket(kdEveryone - (1 << thePacket->p1), kpPing, 0, 0, 32, 0, NULL);
+            // kpLoginAck is called when anyone joins/exits, so good place to check where the "local" player is
+            for (int i = 0; i < kMaxAvaraPlayers; i++) {
+                theNet->playerTable[i]->SetLocal(); // reset which player is "local"
+            }
             break;
         case kpKeyAndMouseRequest:
 

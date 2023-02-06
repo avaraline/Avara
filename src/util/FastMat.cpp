@@ -33,7 +33,7 @@ Fixed FixATan2(Fixed x, Fixed y) {
 }
 
 void InitTrigTables() {
-    long i;
+    int i;
 
     {
         arcTanTable = (unsigned short *)NewPtr(sizeof(unsigned short) * ARCUSTABLESIZE * 2);
@@ -85,7 +85,7 @@ Fixed NormalizeVector(long n, Fixed *v) {
 
 void InitMatrix() {
     InitTrigTables();
-    FRandSeed = TickCount();
+    FRandSeed = (Fixed)TickCount();
 }
 
 void CloseMatrix() {
@@ -335,7 +335,6 @@ void MTranslate(Fixed xt, Fixed yt, Fixed zt, Matrix *theMatrix) {
 }
 
 void MRotateX(Fixed s, Fixed c, Matrix *theMatrix) {
-    short i;
     Fixed *vm;
     Fixed *em;
 
@@ -728,6 +727,20 @@ std::string FormatVector(Fixed *v, int size) {
     oss << "[";
     for (int i = 0; i < size; i++) {
         oss << v[i];
+        if (i < size-1) {
+            oss << ", ";
+        }
+    }
+    oss << "]";
+    return oss.str();
+}
+
+std::string FormatVectorFloat(Fixed *v, int size) {
+    std::ostringstream oss;
+    oss.precision(6);
+    oss << "[";
+    for (int i = 0; i < size; i++) {
+        oss << ToFloat(v[i]);
         if (i < size-1) {
             oss << ", ";
         }

@@ -12,8 +12,8 @@
 
 class CLogicTimer : public CLogic {
 public:
-    long theDelay;
-    long whenFrame;
+    FrameNumber theDelay;
+    FrameNumber whenFrame;
 
     virtual void FrameAction();
     virtual void BeginScript();

@@ -45,8 +45,7 @@ void CScout::IScout(CAbstractPlayer *thePlayer, short theTeam, uint32_t longTeam
 
     partCount = 1;
     LoadPart(0, kScoutBSP);
-    partList[0]->ReplaceColor(kMarkerColor, longTeamColor);
-    partList[0]->userFlags |= CBSPUserFlags::kCullBackfaces;
+    partList[0]->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
 
     hitSoundId = 220;
     gHub->PreLoadSample(hitSoundId);
@@ -71,7 +70,6 @@ void CScout::PlaceParts() {
 Fixed CScout::MoveToTarget() {
     Vector delta;
     Vector course;
-    short alpha;
     Fixed dist;
 
     FPS_DEBUG("CScout::MoveToTarget frameNumber = " << itsGame->frameNumber <<
@@ -88,10 +86,6 @@ Fixed CScout::MoveToTarget() {
         course[1] = -speed[1] >> 1;
         course[2] = -speed[2] >> 1;
     } else {
-        Fixed speedEstimate;
-        Fixed framesEstimate;
-        Fixed revisedDistance;
-
         delta[0] -= speed[0] * kScoutCourseCorrector;
         delta[1] -= speed[1] * kScoutCourseCorrector;
         delta[2] -= speed[2] * kScoutCourseCorrector;
@@ -123,7 +117,6 @@ Fixed CScout::MoveToTarget() {
 
 void CScout::FrameAction() {
     Vector oldLocation;
-    Fixed delta[2];
     Fixed distance;
     Fixed oldHeading;
     Fixed baseHeight = itsPlayer->scoutBaseHeight + itsPlayer->location[1];

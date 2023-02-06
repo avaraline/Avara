@@ -96,7 +96,6 @@ void CWeapon::Disarm() {
 
 long CWeapon::Arm(CSmartPart *aPart) {
     CAbstractActor *host;
-    Matrix *invHost;
     long result;
 
     ResetWeapon();

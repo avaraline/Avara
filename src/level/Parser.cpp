@@ -11,20 +11,21 @@
 
 #include "CAbstractActor.h"
 #include "CStringDictionary.h"
+#include "PascalStrings.h"
 #include "CTagBase.h"
 #include "InternalVars.h"
-#include "LevelLoader.h"
 #include "LinkLoose.h"
 #include "RamFiles.h"
 
 #include <cstring>
 #include <math.h>
 #include <stdio.h>
-//#include "CommandList.h"
+
 #include "CApplication.h"
 #include "FastMat.h"
 #include "Resource.h"
 #include "Types.h"
+#include "RGBAColor.h"
 
 //#define DEBUGPARSER 1
 #ifdef DEBUGPARSER
@@ -38,12 +39,12 @@
 
 typedef short tokentype;
 
-ParserVariables parserVar;
-long lastKeyword;
-long lastVariable;
-static short currentLevel;
+ParserVariables parserVar = {0, 0, 0, 0, 0, 0, 0};
+long lastKeyword = 0;
+long lastVariable = 0;
+static short currentLevel = 0;
 static CAbstractActor *currentActor = NULL;
-static short uniqueBase;
+static short uniqueBase = 0;
 
 typedef struct {
     double value;
@@ -94,32 +95,24 @@ void CreateTheAdjuster() {
     }
 }
 
-// TODO: NO! BAD!
-static unsigned char *pstr(const char *s) {
-    size_t len = std::strlen(s);
-    unsigned char *p = new unsigned char[len];
-    p[0] = len;
-    memmove(p + 1, s, len);
-    return p;
-}
+
 
 void InitSymbols() {
     symTable = new CStringDictionary;
     symTable->IStringDictionary();
+    unsigned char * tempPString;
 
-    symTable->AddDictEntry(pstr("min"), -1);
-    symTable->AddDictEntry(pstr("max"), -1);
-    symTable->AddDictEntry(pstr("random"), -1);
-    symTable->AddDictEntry(pstr("sin"), -1);
-    symTable->AddDictEntry(pstr("cos"), -1);
-    symTable->AddDictEntry(pstr("int"), -1);
-    symTable->AddDictEntry(pstr("round"), -1);
-    symTable->AddDictEntry(pstr("enum"), -1);
-    symTable->AddDictEntry(pstr("unique"), -1);
-    symTable->AddDictEntry(pstr("end"), -1);
-    symTable->AddDictEntry(pstr("adjust"), -1);
-    lastKeyword = symTable->AddDictEntry(pstr("object"), -1);
+    const char* symbols[] = {"min", "max", "random", "sin", "cos", "int", "round", "enum", "unique", "end", "adjust"};
+
+    for (size_t i = 0; i <= 10; i++) {
+        tempPString = CStringtoPascalString(symbols[i]);
+        symTable->AddDictEntry(tempPString, -1);
+        delete [] tempPString;
+    }
+    tempPString = CStringtoPascalString("object");
+    lastKeyword = symTable->AddDictEntry(tempPString, -1);
     lastVariable = lastKeyword;
+    delete [] tempPString;
 
     variableBase = new CTagBase;
     variableBase->ITagBase();
@@ -409,8 +402,8 @@ tokentype LexStringConstant() {
 }
 
 void LexRead(LexSymbol *theSymbol) {
-    unsigned char theChar;
-    short matchCount;
+    unsigned char theChar = 0;
+    short matchCount = 0;
 
     //	First, skip any whitespace like returns, tabs, spaces and control characters.
 
@@ -517,7 +510,7 @@ void LexRead(LexSymbol *theSymbol) {
             break;
 
         default:
-            matchCount = MatchVariable(parserVar.input);
+            matchCount = MatchVariable(parserVar.input);  // matchCount == string length of matched thing
             if (matchCount > 0) {
                 theSymbol->value.token = symTable->FindEntry(parserVar.input - 1, matchCount);
                 if (theSymbol->value.token > lastVariable) {
@@ -532,22 +525,17 @@ void LexRead(LexSymbol *theSymbol) {
             } else {
                 matchCount = MatchFloat(parserVar.input);
                 if (matchCount > 0) {
-                    char temp;
-                    char tempString[256];
-                    char *pstr = (char *)parserVar.input - 1;
-
-                    // From StringToLongDouble
-                    BlockMoveData(pstr + 1, tempString, pstr[0]); //<fp.h>
-                    tempString[pstr[0]] = '\0';
-
-                    temp = parserVar.input[-1];
-                    parserVar.input[-1] = matchCount;
+                    char *tempString = new char[matchCount + 1];
+                    strncpy(tempString, (char *)parserVar.input, matchCount);
+                    tempString[matchCount] = 0;
+                    // auto len = my_strnlen_s(tempString, UCHAR_MAX);
                     theSymbol->kind = kLexConstant;
                     // theSymbol->value.floating = StringToLongDouble(parserVar.input-1);
                     theSymbol->value.floating = atof(tempString);
                     // SDL_Log("\natof(%s) --> %f\n", tempString, theSymbol->value.floating);
-                    parserVar.input[-1] = temp;
+                    // parserVar.input[-1] = temp;
                     parserVar.input += matchCount;
+                    delete [] tempString;
                 }
             }
 
@@ -857,7 +845,7 @@ void ParseStatement(LexSymbol *statement) {
 
 void SetupCompiler(StringPtr theInput) {
     parserVar.input = theInput;
-    parserVar.output = NewHandle(128);
+    parserVar.output = NewHandle(1024);
     parserVar.realSize = 128;
     parserVar.logicalSize = 0;
     parserVar.stackDepth = 0;
@@ -866,7 +854,6 @@ void SetupCompiler(StringPtr theInput) {
 
 void WriteVariable(long token, double value) {
     variableValue *theVar;
-    double temp;
 
     theVar = (variableValue *)variableBase->GetEntryPointer(token);
     if (theVar) {
@@ -960,7 +947,7 @@ double EvalVariable(long token, Boolean forceCalc) {
                             stackP[0] = -stackP[0];
                         break;
                     case kLexFun0:
-                        *(++stackP) = FRandom() / 65536.0;
+                        *(++stackP) = ToFloat(FRandom());
                         break;
                     case kLexFun1:
                         switch (theProgram->value.token) {
@@ -988,10 +975,8 @@ double EvalVariable(long token, Boolean forceCalc) {
     return theVar->value;
 }
 
-static unsigned long oldTicks = 0;
-
 char *fixedString(unsigned char *s) {
-    int len = std::strlen((char *)s);
+    auto len = std::strlen((char *)s);
     char *fixed = new char[len + 1];
     memcpy(fixed, s, len);
     fixed[len] = 0;
@@ -1004,7 +989,6 @@ char *fixedString(unsigned char *s) {
 
 void RunThis(unsigned char *script) {
     LexSymbol statement;
-    unsigned long newTicks;
 
 #ifdef DEBUGPARSER
     char *formattedScript = fixedString(script);
@@ -1046,7 +1030,7 @@ void RunThis(unsigned char *script) {
                 programBase->Unlock();
             }
         }
-        DisposHandle(parserVar.output);
+        DisposeHandle(parserVar.output);
         SetupCompiler(parserVar.input);
 
         // On parse error, skip ahead a line to see if we can read past the garbage
@@ -1067,8 +1051,12 @@ void AllocParser() {
     stackP = (double *)stackMem;
 
     currentActor = NULL;
-    RunThis((StringPtr)GetBaseScript().c_str());
-    RunThis((StringPtr)GetDefaultScript().c_str());
+    std::string base = GetBaseScript();
+    if (base.length() > 0)
+    RunThis((StringPtr)base.c_str());
+    std::string def = GetDefaultScript();
+    if (def.length() > 0)
+    RunThis((StringPtr)def.c_str());
 }
 
 void DeallocParser() {
@@ -1094,36 +1082,68 @@ void DeallocParser() {
     }
 }
 
+
+short IndexForEntry(const char* entry) {
+    unsigned char* tempPString = CStringtoPascalString(entry);
+    short t = symTable->SearchForEntry(tempPString, -1) - firstVariable;
+    delete [] tempPString;
+    return t;
+}
+
 double ReadVariable(short index) {
     return EvalVariable(index + firstVariable, false);
 }
+double ReadVariable(const char *s) {
+    return ReadDoubleVar(s);
+}
+double ReadDoubleVar(const char *s) {
+    return ReadVariable(IndexForEntry(s));
+}
 
 Fixed ReadFixedVar(short index) {
-    return 65536 * EvalVariable(index + firstVariable, false);
+    return ToFixed(EvalVariable(index + firstVariable, false));
+}
+Fixed ReadFixedVar(const char *s) {
+    return ReadFixedVar(IndexForEntry(s));
 }
 
 long ReadLongVar(short index) {
     return EvalVariable(index + firstVariable, false);
 }
+long ReadLongVar(const char *s) {
+    return ReadLongVar(IndexForEntry(s));
+}
 
-long ReadColorVar(short index) {
-    long theColor;
+short ReadShortVar(short index) {
+    return (short)ReadLongVar(index);
+}
+short ReadShortVar(const char *s) {
+    return ReadShortVar(IndexForEntry(s));
+}
 
-    theColor = ReadVariable(index);
-
-    return (((theColor / 1000000) << 16) | (((theColor / 1000) % 1000) << 8) | (theColor % 1000));
+const std::optional<uint32_t> ReadColorVar(short index) {
+    // first just try parsing the color string (e.g. fill="#ffcc44" or fill="rgba(255,204,68)")
+    std::optional<uint32_t> color = ParseColor(ReadStringVar(index));
+    if (!color) {
+        // try dereferencing color to a variable (e.g. myFill='"#ffcc44"' --> fill="myFill")
+        color = ParseColor(ReadStringVar(ReadStringVar(index).c_str()));
+    }
+    return color;
+}
+const std::optional<uint32_t> ReadColorVar(const char *s) {
+    return ReadColorVar(IndexForEntry(s));
 }
 
 std::string ReadStringVar(short index) {
-    short len;
-    Handle result;
-
     index = EvalVariable(index + firstVariable, false);
     if (index) {
         return symTable->GetIndEntry(index);
     } else {
         return "";
     }
+}
+std::string ReadStringVar(const char *s) {
+    return ReadStringVar(IndexForEntry(s));
 }
 
 void ProgramVariable(short index, double value) {
@@ -1182,7 +1202,7 @@ void ProgramOffsetMultiply(short index, short ref, long multValue) {
 }
 
 void ProgramFixedVar(short index, Fixed value) {
-    ProgramVariable(index, value / 65536.0);
+    ProgramVariable(index, ToFloat(value));
 }
 
 void ProgramLongVar(short index, long value) {

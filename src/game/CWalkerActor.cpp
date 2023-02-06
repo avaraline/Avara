@@ -82,16 +82,16 @@ void CWalkerActor::StartSystems() {
 
     legConstant = FMul(LEGHIGHLEN, LEGHIGHLEN) - FMul(LEGLOWLEN, LEGLOWLEN);
 
+    headHeight = MAXHEADHEIGHT;
     legPhase = 0;
     absAvgSpeed = 0;
-    legs[0].x = 0;
-    legs[0].y = 0;
-    legs[0].touchIdent = 0;
-    legs[1].x = 0;
-    legs[1].y = 0;
-    legs[1].touchIdent = 0;
     targetHeight = 0;
 
+    phaseUndo = 0;
+    stanceUndo = 0;
+    crouchUndo = 0;
+
+    speedLimit = 0;
     jumpBasePower = FIX3(700);
 
     viewPortHeight = FIX3(350);
@@ -670,8 +670,6 @@ void CWalkerActor::MotionControl() {
 }
 
 void CWalkerActor::KeyboardControl(FunctionTable *ft) {
-    Fixed savedAcceleration;
-
     PrepareForLegUndo();
 
     if (tractionFlag && !oldTractionFlag)
@@ -776,8 +774,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         LoadPart(0, hullRes);
 
         viewPortPart = partList[0];
-        viewPortPart->userFlags |= CBSPUserFlags::kCullBackfaces;
-        viewPortPart->ReplaceColor(kMarkerColor, longTeamColor);
+        viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 

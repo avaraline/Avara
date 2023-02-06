@@ -14,6 +14,7 @@
 #include "CSmart.h"
 #include "CScout.h"
 #include "AvaraGL.h"
+#include "Messages.h"
 
 #include "CUDPConnection.h"
 
@@ -42,8 +43,10 @@ public:
     virtual CAbstractPlayer* GetPlayer() { return playa; }
     virtual void SetPlayer(CAbstractPlayer* p) { playa = p; }
     virtual short Slot() { return 0; }
+    virtual void SetLocal() {};
     virtual void AbortRequest() {}
     virtual Boolean IsLocalPlayer() { return true; }
+    virtual Boolean CalculateIsLocalPlayer() { return true; }
     virtual void GameKeyPress(char c) {}
     virtual FunctionTable *GetFunctions() { return ft; }
     virtual void DeadOrDone() {}
@@ -59,10 +62,12 @@ public:
     virtual short LoadingStatus() { return 0; }
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
     virtual void SetPlayerStatus(short newStatus, long theWin) {}
+    virtual bool IsAway() { return false; };
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) {}
     virtual void SetPosition(short pos) {}
+
     virtual void RosterKeyPress(unsigned char c) {}
-    virtual void RosterMessageText(short len, char *c) {}
+    virtual void RosterMessageText(short len, const char *c) {}
     virtual short LevelCRC() { return 0; }
     virtual OSErr LevelErr() { return noErr; }
     virtual std::string LevelTag() { return 0; }
@@ -121,12 +126,13 @@ public:
 class TestApp : public CAvaraApp {
 public:
     virtual bool DoCommand(int theCommand) {return false;}
-    virtual void MessageLine(short index, short align) {}
-    virtual void AddMessageLine(std::string line) {}
+    virtual void MessageLine(short index, MsgAlignment align) {}
+    virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) {}
+    virtual void RenderContents() {};
     virtual void DrawUserInfoPart(short i, short partList) {}
-    virtual void ParamLine(short index, short align, StringPtr param1, StringPtr param2) {}
-    virtual void StartFrame(long frameNum) {}
-    virtual void BrightBox(long frameNum, short position) {}
+    virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) {}
+    virtual void StartFrame(FrameNumber frameNum) {}
+    virtual void BrightBox(FrameNumber frameNum, short position) {}
     virtual void LevelReset() {}
     virtual long Number(const std::string name) { return 0; }
     virtual bool Boolean(const std::string name) { return false; }
@@ -141,15 +147,16 @@ public:
     virtual CNetManager* GetNet() { return itsNet; }
     virtual void SetNet(CNetManager* net) { itsNet = net; }
     virtual SDL_Window* sdlWindow() { return 0; }
-    virtual void StringLine(std::string theString, short align) {}
+    virtual void StringLine(std::string theString, MsgAlignment align) {}
     virtual CAvaraGame* GetGame() { return 0; }
     virtual void Done() {}
     virtual void BroadcastCommand(int) {}
     virtual void GameStarted(std::string set, std::string level) {};
-    virtual std::deque<std::string>& MessageLines() { return msgLines; }
+    virtual std::deque<MsgLine>& MessageLines() { return msgLines; }
+    virtual CommandManager* GetTui() { return 0; }
 private:
     CNetManager *itsNet;
-    std::deque<std::string> msgLines;
+    std::deque<MsgLine> msgLines;
 };
 
 class TestGame : public CAvaraGame {

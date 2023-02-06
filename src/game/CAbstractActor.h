@@ -10,6 +10,7 @@
 #pragma once
 #include "CAvaraGame.h"
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "CSoundHub.h"
 #include "FastMat.h"
 #include "LevelLoader.h"
@@ -23,9 +24,6 @@
 #else
 #define FPS_DEBUG(stuff) // noop
 #endif
-
-#define kMarkerColor 0x00fefefe
-#define kOtherMarkerColor 0x00fe0000
 
 #define MAXPARTS 6
 #define DEFAULTHITVOLUME 25
@@ -103,7 +101,7 @@ public:
     CAbstractActor *nextActor;
     CAbstractActor *identLink;
     long ident;
-    long sleepTimer;
+    FrameNumber sleepTimer;
 
     CAbstractActor *postMortemLink;
     Fixed blastPower;
@@ -231,7 +229,7 @@ public:
     Fixed FpsCoefficient1(Fixed classicMultiplier1);
     Fixed FpsCoefficient2(Fixed classicMultiplier2);
     Fixed FpsOffset(Fixed classicCoeff2);
-    long FpsFramesPerClassic(long classicFrames = 1);
+    FrameNumber FpsFramesPerClassic(FrameNumber classicFrames = 1);
     Fixed ClassicCoefficient2(Fixed fpsValue);
 private:
     virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);

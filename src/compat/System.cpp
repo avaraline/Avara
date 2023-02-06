@@ -10,7 +10,7 @@ uint64_t TickCount() {
     // see https://stackoverflow.com/a/35962360 ?
     // Approximate ms -> tick (1/60th of a second in old mac parlance)
     // return SDL_GetTicks() >> 4;
-    return (uint64_t)((double)SDL_GetTicks() / MSEC_PER_TICK_COUNT);
+    return MSEC_TO_TICK_COUNT(SDL_GetTicks());
 }
 
 static std::map<QHdrPtr, std::deque<QElemPtr>> gQueues;
@@ -45,7 +45,7 @@ OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader) {
         if (q.empty()) {
             return qErr;
         }
-        for (int i = 0; i < q.size(); i++) {
+        for (size_t i = 0; i < q.size(); i++) {
             QElemPtr curElement = q.at(i);
             if (curElement == qElement) {
                 if (lastElement) {

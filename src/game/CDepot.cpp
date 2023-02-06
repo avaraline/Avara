@@ -12,7 +12,7 @@
 #include "CAbstractMissile.h"
 #include "CAvaraGame.h"
 #include "CBSPWorld.h"
-#include "CColorManager.h"
+#include "ColorManager.h"
 #include "CGrenade.h"
 #include "CMissile.h"
 #include "CPlayerMissile.h"
@@ -27,26 +27,26 @@ void CDepot::IDepot(CAvaraGame *theGame) {
 
     smartSight = new CBSPPart;
     smartSight->IBSPPart(208);
-    smartSight->ReplaceColor(0x00ffff00, CColorManager::getMissileSightPrimaryColor());
-    smartSight->ReplaceColor(0x00ff0000, CColorManager::getMissileSightSecondaryColor());
+    smartSight->ReplaceColor(0xfffffb00, ColorManager::getMissileSightPrimaryColor());
+    smartSight->ReplaceColor(0xffff2600, ColorManager::getMissileSightSecondaryColor());
     smartSight->ignoreDirectionalLights = true;
     smartSight->privateAmbient = FIX(1);
 
     smartHairs = new CBSPPart;
     smartHairs->IBSPPart(207);
-    smartHairs->ReplaceColor(0x00ff0000, CColorManager::getMissileLockColor());
+    smartHairs->ReplaceColor(0xffff2600, ColorManager::getMissileLockColor());
     smartHairs->ignoreDirectionalLights = true;
     smartHairs->privateAmbient = FIX(1);
 
     grenadeSight = new CBSPPart;
     grenadeSight->IBSPPart(200);
-    grenadeSight->ReplaceColor(0x00ffff00, CColorManager::getGrenadeSightPrimaryColor());
+    grenadeSight->ReplaceColor(0xfffffb00, ColorManager::getGrenadeSightPrimaryColor());
     grenadeSight->ignoreDirectionalLights = true;
     grenadeSight->privateAmbient = FIX(1);
 
     grenadeTop = new CBSPPart;
     grenadeTop->IBSPPart(201);
-    grenadeTop->ReplaceColor(0x00ff0000, CColorManager::getGrenadeSightSecondaryColor());
+    grenadeTop->ReplaceColor(0xffff2600, ColorManager::getGrenadeSightSecondaryColor());
     grenadeTop->ignoreDirectionalLights = true;
     grenadeTop->privateAmbient = FIX(1);
 
@@ -60,7 +60,6 @@ void CDepot::IDepot(CAvaraGame *theGame) {
 void CDepot::Dispose() {
     short i;
     CSliverPart *nextSliver, *slivers;
-    CAbstractActor *nextActor;
 
     DisposeMissiles();
     DisposeWeapons();
@@ -182,7 +181,7 @@ void CDepot::FireSlivers(short n,
 }
 
 CAbstractMissile *CDepot::MakeMissile(short kind) {
-    CAbstractMissile *newMissile;
+    CAbstractMissile *newMissile = NULL;
 
     switch (kind) {
         case kmiFlat:
@@ -194,6 +193,8 @@ CAbstractMissile *CDepot::MakeMissile(short kind) {
         case kmiShuriken:
             newMissile = new CShuriken;
             break;
+        default:
+            return newMissile;
     }
 
     newMissile->IAbstractMissile(this);
@@ -301,7 +302,7 @@ void CDepot::LevelReset() {
 }
 
 CWeapon *CDepot::MakeWeapon(short kind) {
-    CWeapon *newWeapon;
+    CWeapon *newWeapon = NULL;
 
     switch (kind) {
         case kweGrenade:
@@ -310,6 +311,8 @@ CWeapon *CDepot::MakeWeapon(short kind) {
         case kweSmart:
             newWeapon = new CSmart;
             break;
+        default:
+            return newWeapon;
     }
 
     newWeapon->IWeapon(this);

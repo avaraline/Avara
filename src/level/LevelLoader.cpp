@@ -17,7 +17,6 @@
 #include "Parser.h"
 #include "Resource.h"
 #include "pugixml.hpp"
-#include "RGBAColor.h"
 
 #include <SDL2/SDL.h>
 
@@ -26,16 +25,6 @@
 #include <fstream>
 #include <streambuf>
 #include <regex>
-
-#ifdef __has_include
-#  if __has_include(<optional>)                // Check for a standard library
-#    include <optional>
-#  elif __has_include(<experimental/optional>) // Check for an experimental version
-#    include <experimental/optional>           // Check if __has_include is present
-#  else                                        // Not found at all
-#     error "Missing <optional>"
-#  endif
-#endif
 
 #define POINTTOUNIT(pt) (pt * 20480 / 9)
 #define UNITPOINTS (double)14.4 // 72 / 5
@@ -66,8 +55,8 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     theLoc[0] = lastDomeCenter.h;
     theLoc[2] = lastDomeCenter.v;
     theLoc[3] = 0;
-    *startAngle = FDegToOne(((long)lastDomeAngle) << 16);
-    *spanAngle = FDegToOne(((long)lastDomeSpan) << 16);
+    *startAngle = FDegToOne(FIX(lastDomeAngle));
+    *spanAngle = FDegToOne(FIX(lastDomeSpan));
 
     return lastDomeRadius;
 }
@@ -99,17 +88,20 @@ Fixed GetLastOval(Fixed *theLoc) {
 }
 
 Fixed GetLastArcDirection() {
-    return FDegToOne(((long)lastArcAngle) << 16);
+    return FDegToOne(FIX(lastArcAngle));
 }
 
 struct ALFWalker: pugi::xml_tree_walker {
     virtual bool for_each(pugi::xml_node& node) {
         std::string tag = node.name();
+        std::string val;
 
         switch (node.type()){
             case pugi::node_element:
                 handle_element(node, tag);
-                RunThis((StringPtr)node.child_value());
+                val = node.child_value();
+                if (val.length() > 0)
+                RunThis((StringPtr)val.c_str());
                 break;
             default:
                 break;
@@ -129,6 +121,8 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("text") == 0 ||
             attr.compare("designer") == 0 ||
             attr.compare("information") == 0 ||
+            attr.compare("fill") == 0 ||
+            attr.compare("frame") == 0 ||
             (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
         ) {
             if (value[0] == '$') {
@@ -142,6 +136,10 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_element(pugi::xml_node& node, std::string& name) {
+        // eval ALL node attributes and put them into the symbol table
+        // unless it's a 'unique' and then it doesn't make any sense
+        if (name.compare("unique") != 0)
+        handle_set(node);
         // Read any global state we can from the element.
         read_context(node);
 
@@ -171,41 +169,29 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     bool read_context(pugi::xml_node& node) {
-        std::string fill = node.attribute("fill").value(),
-               frame = node.attribute("frame").value(),
-               x = node.attribute("x").value(),
-               // y = node.attribute("y").value(),
-               z = node.attribute("z").value(),
-               w = node.attribute("w").value(),
-               h = node.attribute("h").value(),
-               d = node.attribute("d").value(),
-               cx = node.attribute("cx").value(),
-               cz = node.attribute("cz").value(),
-               r = node.attribute("r").value(),
-               angle = node.attribute("angle").value();
+        gLastBoxRounding = node.attribute("h").empty() ? 0 : ReadFixedVar("h");
 
-        gLastBoxRounding = h.empty() ? 0 : ToFixed(std::stod(h));
-
-        if (!fill.empty()) {
-            const std::optional<uint32_t> color = ParseColor(fill);
+        if (!node.attribute("fill").empty()) {
+            const std::optional<uint32_t> color = ReadColorVar("fill");
             if (color) {
                 fillColor = *color;
             }
         }
 
-        if (!frame.empty()) {
-            const std::optional<uint32_t> color = ParseColor(frame);
+        if (!node.attribute("frame").empty()) {
+            const std::optional<uint32_t> color = ReadColorVar("frame");
             if (color) {
                 frameColor = *color;
             }
         }
 
-        if (!x.empty() && !z.empty() && !w.empty() && !d.empty()) {
-            double boxCenterX = std::stod(x) * UNITPOINTS,
-                   boxCenterZ = std::stod(z) * UNITPOINTS,
-                   boxWidth = std::stod(w) * UNITPOINTS,
-                   boxDepth = std::stod(d) * UNITPOINTS,
-                   boxLeft = boxCenterX - (boxWidth / 2.0),
+        if (!node.attribute("x").empty() && !node.attribute("z").empty() &&
+            !node.attribute("w").empty() && !node.attribute("d").empty()) {
+            double boxCenterX = ReadDoubleVar("x") * UNITPOINTS,
+                   boxCenterZ = ReadDoubleVar("z") * UNITPOINTS,
+                   boxWidth = ReadDoubleVar("w") * UNITPOINTS,
+                   boxDepth = ReadDoubleVar("d") * UNITPOINTS;
+            double boxLeft = boxCenterX - (boxWidth / 2.0),
                    boxRight = boxLeft + boxWidth,
                    boxTop = boxCenterZ - (boxDepth / 2.0),
                    boxBottom = boxTop + boxDepth;
@@ -215,9 +201,9 @@ struct ALFWalker: pugi::xml_tree_walker {
             gLastBoxRect.right = std::lround(boxRight);
         }
 
-        if (!cx.empty() && !cz.empty()) {
-            Fixed centerX = ToFixed(std::stod(cx)),
-                  centerZ = ToFixed(std::stod(cz));
+        if (!node.attribute("cx").empty() && !node.attribute("cz").empty()) {
+            Fixed centerX = ReadFixedVar("cx"),
+                  centerZ = ReadFixedVar("cz");
 
             lastArcPoint.h = centerX;
             lastArcPoint.v = centerZ;
@@ -229,16 +215,16 @@ struct ALFWalker: pugi::xml_tree_walker {
             lastOvalPoint.v = centerZ;
         }
 
-        if (!r.empty()) {
-            Fixed radius = ToFixed(std::stod(r));
+        if (!node.attribute("r").empty()) {
+            Fixed radius = ReadFixedVar("r");
             lastDomeRadius = radius;
             lastOvalRadius = radius;
         }
 
-        if (!angle.empty()) {
-            int arcAngle = std::stoi(angle);
+        if (!node.attribute("angle").empty()) {
+            short arcAngle = ReadShortVar("angle");
 
-            lastArcAngle = (720 - arcAngle) % 360;
+            lastArcAngle = (900 - arcAngle) % 360;
             lastDomeAngle = 360 - arcAngle;
         }
 
@@ -249,9 +235,8 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     void handle_dome(pugi::xml_node& node) {
-        std::string quarters = node.attribute("quarters").value();
-        if (!quarters.empty()) {
-            int extent = std::stoi(quarters) * 90;
+        if (!node.attribute("quarters").empty()) {
+            short extent = ReadShortVar("quarters") * 90;
             lastDomeSpan = (extent >= 90 && extent <= 360)
                 ? extent
                 : 360;
@@ -274,12 +259,16 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_set(pugi::xml_node& node) {
         std::stringstream script;
+        bool wrote = false;
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             std::string attr = fix_attr(ait->name());
             std::string value = quote_attr(attr, ait->value());
-            script << attr << " = " << value << "\r";
+            script << attr << " = " << value << "\n";
+            wrote = true;
         }
-        RunThis((StringPtr)script.str().c_str());
+        std::string result = script.str();
+        if (wrote && result.length() > 0)
+        RunThis((StringPtr)result.c_str());
     }
 
     void handle_script(pugi::xml_node& node) {
@@ -304,21 +293,6 @@ struct ALFWalker: pugi::xml_tree_walker {
         for (pugi::xml_attribute_iterator ait = node.attributes_begin(); ait != node.attributes_end(); ++ait) {
             std::string attr = fix_attr(ait->name());
             std::string value = quote_attr(attr, ait->value());
-            // Ignore all the standard context attributes when parsing objects.
-            if (
-                attr.compare("fill") == 0 ||
-                attr.compare("frame") == 0 ||
-                attr.compare("x") == 0 ||
-                //attr.compare("y") == 0 ||
-                attr.compare("z") == 0 ||
-                attr.compare("w") == 0 ||
-                attr.compare("h") == 0 ||
-                attr.compare("d") == 0 ||
-                attr.compare("cx") == 0 ||
-                attr.compare("cz") == 0 ||
-                attr.compare("r") == 0 ||
-                attr.compare("angle") == 0
-            ) continue;
             script << attr << " = " << value << "\n";
         }
         script << "end";

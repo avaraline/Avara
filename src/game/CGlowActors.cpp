@@ -70,5 +70,5 @@ void CGlowActors::FrameAction() {
     // then this number will be different and will be noticed in CNetManager::AutoLatencyControl
     Fixed locsum = location[0] + location[1] + location[2];
     FRandSeed += locsum;
-    // SDL_Log("frameNumber = %ld, FRandSeed = %10d, locsum = %8d, Actor = %s", gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
+    // SDL_Log("frameNumber = %u, FRandSeed = %10d, locsum = %8d, Actor = %s", gCurrentGame->frameNumber, (Fixed)FRandSeed, locsum, typeid(*this).name());
 }

@@ -49,7 +49,6 @@ void CAbstractMissile::LevelReset() {
 
 void CAbstractMissile::FrameAction() {
     CAbstractActor *anActor;
-    CSmartPart **thePart;
     CAbstractActor *theOwner;
     Fixed negOrigin1;
 

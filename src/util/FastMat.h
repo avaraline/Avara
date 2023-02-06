@@ -47,10 +47,10 @@ typedef struct {
 #define MINFIXED 0x80000000L
 
 /*	FIX3 results in the n/1000 as a fixed point number								*/
-#define FIX3(n) ((long)((n)*8192L / 125L))
+#define FIX3(n) ((Fixed)((n)*8192L / 125L))
 /*	FIX results in the integer number as a fixed point number						*/
-#define FIX(n) ((long)((n) * 65536L))
-#define FRound(n) (std::lround((n) * 65536L))
+#define FIX(n) ((Fixed)((n) * 65536L))
+#define FRound(n) ((Fixed)std::lround((n) * 65536L))
 
 /*	Prototypes for internal routines:												*/
 void VectorMatrixProduct(long n, Vector *vs, Vector *vd, Matrix *m);
@@ -67,33 +67,49 @@ void MRotateY(Fixed s, Fixed c, Matrix *theMatrix);
 void MRotateZ(Fixed s, Fixed c, Matrix *theMatrix);
 void MTranslate(Fixed xt, Fixed yt, Fixed zt, Matrix *theMatrix);
 
-static inline Fixed FMul(Fixed a, Fixed b) { return ((int64_t)a * (int64_t)b) / (1 << 16); }
-static inline Fixed FDiv(Fixed a, Fixed b) { return ((int64_t)a * (1 << 16)) / b; }
-static inline Fixed FMulDiv(Fixed a, Fixed b, Fixed c) { return (long)(((double)a) * b / c); }
+static inline Fixed FMul(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * (int64_t)b) / (1 << 16)); }
+static inline Fixed _FDiv(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * (1 << 16)) / b); }
+static inline Fixed _FMulDiv(Fixed a, Fixed b, Fixed c) { return (Fixed)(((double)a) * b / c); }
 
-#define FDivNZ FDiv
-#define FMulDivNZ FMulDiv
-#define FMulDivV FMulDiv
-#define FMulDivVNZ FMulDiv
+// #define FM_CHECK_DIV_BY_ZERO
+#ifdef FM_CHECK_DIV_BY_ZERO
+    #include <sstream>
+    static inline bool FThrowDivideZero(const char* errFile, int errLine) {
+        std::ostringstream oss;
+        oss << "FastMat Error: " << errFile << ":" << errLine << " Divide by zero\n";
+        throw std::invalid_argument(oss.str());
+    }
+
+    #define FDivNZ(a, b)        (b == 0 ? FThrowDivideZero(__FILE__, __LINE__) : _FDiv(a, b))
+    #define FMulDivNZ(a, b, c)  (c == 0 ? FThrowDivideZero(__FILE__, __LINE__) : _FMulDiv(a, b, c))
+#else
+    #define FDivNZ(a, b)        _FDiv(a, b)
+    #define FMulDivNZ(a, b, c)  _FMulDiv(a, b, c)
+#endif
+
+#define FDiv                FDivNZ
+#define FMulDiv             FMulDivNZ
+#define FMulDivV            FMulDiv
+#define FMulDivVNZ          FMulDivNZ
 
 #define FHALFPI 102944
 #define FONEPI 205887
 #define FTWOPI 411775
 
 //	Full circle is 2 Pi (fixed point, of course)
-static inline Fixed FRadSin(Fixed a) { return (long)(65536L * sin(a / 65536.0)); }
-static inline Fixed FRadCos(Fixed a) { return (long)(65536L * cos(a / 65536.0)); }
-static inline Fixed FRadTan(Fixed a) { return (long)(65536L * tan(a / 65536.0)); }
+static inline Fixed FRadSin(Fixed a) { return (Fixed)(65536L * sin(a / 65536.0)); }
+static inline Fixed FRadCos(Fixed a) { return (Fixed)(65536L * cos(a / 65536.0)); }
+static inline Fixed FRadTan(Fixed a) { return (Fixed)(65536L * tan(a / 65536.0)); }
 
 //	Full circle is 360.0 (fixed point)
-static inline Fixed FDegSin(Fixed a) { return (long)(65536.0 * sin(a / 3754936.206169363)); }
-static inline Fixed FDegCos(Fixed a) { return (long)(65536.0 * cos(a / 3754936.206169363)); }
-static inline Fixed FDegTan(Fixed a) { return (long)(65536.0 * tan(a / 3754936.206169363)); }
+static inline Fixed FDegSin(Fixed a) { return (Fixed)(65536.0 * sin(a / 3754936.206169363)); }
+static inline Fixed FDegCos(Fixed a) { return (Fixed)(65536.0 * cos(a / 3754936.206169363)); }
+static inline Fixed FDegTan(Fixed a) { return (Fixed)(65536.0 * tan(a / 3754936.206169363)); }
 
 //	Full circle is 1.0 (fixed point)
-static inline Fixed FOneSin(Fixed a) { return (long)(65536.0 * sin(a / 10430.3783505)); }
-static inline Fixed FOneCos(Fixed a) { return (long)(65536.0 * cos(a / 10430.3783505)); }
-static inline Fixed FOneTan(Fixed a) { return (long)(65536.0 * tan(a / 10430.3783505)); }
+static inline Fixed FOneSin(Fixed a) { return (Fixed)(65536.0 * sin(a / 10430.3783505)); }
+static inline Fixed FOneCos(Fixed a) { return (Fixed)(65536.0 * cos(a / 10430.3783505)); }
+static inline Fixed FOneTan(Fixed a) { return (Fixed)(65536.0 * tan(a / 10430.3783505)); }
 
 Fixed FRadArcCos(Fixed n); //	Instead of FRadArcSin and FRadArcCos use FRadArcTan2
 Fixed FRadArcSin(Fixed n); //	when you can! ArcSin and ArcCos are for small values only.
@@ -126,3 +142,4 @@ void InverseTransform(Matrix *trans, Matrix *inv);
 
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2);
 std::string FormatVector(Fixed *v, int size);
+std::string FormatVectorFloat(Fixed *v, int size);

@@ -14,6 +14,7 @@
 
 #include "RamFiles.h"
 #include "Resource.h"
+#include "PascalStrings.h"
 
 #include <cstring>
 
@@ -75,16 +76,7 @@ short CStringDictionary::GetIndEntrySize(short index) {
     }
 }
 
-char *cstr(const unsigned char *p, int len) {
-    char *s = new char[len + 1];
-    memcpy(s, p + 1, len);
-    s[len] = 0;
-    return s;
-}
 
-char *cstr(const unsigned char *p) {
-    return cstr(p, p[0]);
-}
 /*
 **	Add a dictionary entry regardless
 **	of wether it already is there or not. Normally you would
@@ -99,7 +91,8 @@ tokentype CStringDictionary::AddDictEntry(const unsigned char *entry, short len)
     if (len < 0) {
         len = entry[0];
     }
-    char *s = cstr(entry, len);
+    if (len == 0) { return -1; }
+    char *s = PascalStringtoCString(entry, len);
     tokentype tt = AddDictEntry(s, len);
     delete[] s;
     return tt;
@@ -113,7 +106,7 @@ tokentype CStringDictionary::AddDictEntry(const char *entry, short len) {
         s.append(entry);
     }
 
-    unsigned int idx = wordList.size();
+    auto idx = wordList.size();
     wordList.push_back(s);
     index.insert(std::pair<std::string, size_t>(s, idx));
     return idx;
@@ -127,7 +120,8 @@ tokentype CStringDictionary::SearchForEntry(const unsigned char *entry, short le
     if (len < 0) {
         len = entry[0];
     }
-    char *s = cstr(entry, len);
+    if (len == 0) { return 0; }
+    char *s = PascalStringtoCString(entry, len);
     tokentype tt = SearchForEntry(s, len);
     delete[] s;
     return tt;

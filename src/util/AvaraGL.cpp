@@ -3,6 +3,7 @@
 #include "Resource.h"
 #include "CViewParameters.h"
 #include "RGBAColor.h"
+#include "CBSPPart.h"
 
 #include <fstream>
 #include <iostream>
@@ -23,7 +24,7 @@ bool actuallyRender = true;
 bool ready = false;
 
 glm::mat4 proj;
-const float near_dist = .1f;
+const float near_dist = .099f;
 const float far_dist = 1000.0f;
 
 float current_fov = 60.0f;
@@ -145,7 +146,7 @@ void AvaraGLUpdateProjectionMatrix() {
     glCheckErrors();
 }
 
-void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, long color) {
+void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, uint32_t color) {
     if (!actuallyRender) return;
 
     float x = cos(Deg2Rad(elevation)) * intensity;
@@ -177,7 +178,7 @@ void AvaraGLSetLight(int light_index, float intensity, float elevation, float az
     }
 }
 
-void AvaraGLSetAmbient(float ambient, long color) {
+void AvaraGLSetAmbient(float ambient, uint32_t color) {
     if (!actuallyRender) return;
 
     float rgb[3];
@@ -224,7 +225,11 @@ void AvaraGLSetDepthTest(bool doTest) {
 void AvaraGLInitContext() {
     //glEnable(GL_DEBUG_OUTPUT);
     if (!actuallyRender) return;
-    gProgram = LoadShaders(BundlePath(OBJ_VERT), BundlePath(OBJ_FRAG));
+    char vertPath[PATH_MAX];
+    char fragPath[PATH_MAX];
+    BundlePath(OBJ_VERT, vertPath);
+    BundlePath(OBJ_FRAG, fragPath);
+    gProgram = LoadShaders(vertPath, fragPath);
     glUseProgram(gProgram);
 
     projLoc = glGetUniformLocation(gProgram, "proj");
@@ -236,7 +241,6 @@ void AvaraGLInitContext() {
     ambColorLoc = glGetUniformLocation(gProgram, "ambientColor");
     lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
     glCheckErrors();
-
 
     light0Loc = glGetUniformLocation(gProgram, "light0");
     light0ColorLoc = glGetUniformLocation(gProgram, "light0Color");
@@ -250,8 +254,10 @@ void AvaraGLInitContext() {
 
     AvaraGLLightDefaults();
     glCheckErrors();
-
-    skyProgram = LoadShaders(BundlePath(SKY_VERT), BundlePath(SKY_FRAG));
+    char skyVertPath[PATH_MAX], skyFragPath[PATH_MAX];
+    BundlePath(SKY_VERT, skyVertPath);
+    BundlePath(SKY_FRAG, skyFragPath);
+    skyProgram = LoadShaders(skyVertPath, skyFragPath);
     glGenVertexArrays(1, &skyVertArray);
     glGenBuffers(1, &skyBuffer);
     skyViewLoc = glGetUniformLocation(skyProgram, "view");
@@ -259,6 +265,10 @@ void AvaraGLInitContext() {
     groundColorLoc = glGetUniformLocation(skyProgram, "groundColor");
     horizonColorLoc = glGetUniformLocation(skyProgram, "horizonColor");
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
+
+    glEnable(GL_BLEND);
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE, GL_ONE);
+
     ready = true;
 }
 
@@ -278,10 +288,12 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STREAM_DRAW);
     glCheckErrors();
 
-    for (int i = 0; i < 3; i++) {
-        glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(i * 3 * sizeof(float)));
-        glEnableVertexAttribArray(i);
-    }
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer (2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *) (7 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     // custom per-object lighting
     float extra_amb = ToFloat(part->extraAmbient);
@@ -298,15 +310,9 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
-    // we want to render only the
-    // front faces of these so we can see thru
-    // the back of the faces with the camera
-    bool cull_back_faces = (part->userFlags & CBSPUserFlags::kCullBackfaces) > 0;
-    if (cull_back_faces) {
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-        glFrontFace(GL_CCW);
-    }
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 
     SetTransforms(&part->fullTransform, &part->itsTransform);
     glCheckErrors();
@@ -328,18 +334,45 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
-    // turn backface culling back off for
-    // all other geometry
-    if (cull_back_faces) {
-        glDisable(GL_CULL_FACE);
-    }
-
     glBindVertexArray(NULL);
     glCheckErrors();
 
     glBindBuffer(GL_ARRAY_BUFFER, NULL);
     glCheckErrors();
 
+}
+
+void AvaraGLUpdateData(CBSPPart *part) {
+    if (!AvaraGLIsRendering()) return;
+    if(part->glDataSize > 0) {
+        delete [] part->glData;
+    }
+
+
+    part->glDataSize = part->totalPoints * sizeof(GLData);
+    part->glData = new GLData[part->glDataSize];
+
+    glGenVertexArrays(1, &part->vertexArray);
+    glGenBuffers(1, &part->vertexBuffer);
+
+    PolyRecord *poly;
+    //float scale = 1.0; // ToFloat(currentView->screenScale);
+    int p = 0;
+    for (int i = 0; i < part->polyCount; i++) {
+        poly = &part->polyTable[i];
+        for (int v = 0; v < poly->triCount * 3; v++) {
+            Vector *pt = &part->pointTable[poly->triPoints[v]];
+            part->glData[p].x = ToFloat((*pt)[0]);
+            part->glData[p].y = ToFloat((*pt)[1]);
+            part->glData[p].z = ToFloat((*pt)[2]);
+            LongToRGBA(poly->color, &part->glData[p].r, 4);
+
+            part->glData[p].nx = poly->normal[0];
+            part->glData[p].ny = poly->normal[1];
+            part->glData[p].nz = poly->normal[2];
+            p++;
+        }
+    }
 }
 
 
@@ -368,6 +401,8 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     LongToRGBA(theShader->highSkyColor, highSkyColorRGB, 3);
 
     glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
+
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, NULL);
     glEnableVertexAttribArray(0);
     glUseProgram(skyProgram);

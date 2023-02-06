@@ -45,7 +45,7 @@ void CRealMovers::Accelerate(Fixed *direction) {
         speed[0] += FMulDivNZ(direction[0], baseMass, theMass);
         speed[1] += FMulDivNZ(direction[1], baseMass, theMass);
         speed[2] += FMulDivNZ(direction[2], baseMass, theMass);
-        FPS_DEBUG("CRealMovers::Accelerate: speed = " << FDistanceEstimate(speed[0], speed[1], speed[2]) << "\n");
+        FPS_DEBUG("CRealMovers::Accelerate: speed = " << FormatVectorFloat(speed, 3) << "\n");
     }
 }
 
@@ -69,7 +69,6 @@ void CRealMovers::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 void CRealMovers::FindBestMovement(CSmartPart *objHit) {
     Vector newSpeed;
     Vector deltaSpeed, deltaLoc;
-    Fixed yDir;
     Fixed dotProd;
     Fixed absDot;
     Fixed *norm;

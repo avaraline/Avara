@@ -67,7 +67,7 @@ void CDoorActor::BeginScript() {
 CSmartPart *CDoorActor::CollisionTest() {
     CAbstractActor *theActor;
     CSmartPart *thePart;
-    CSmartPart **thePartList;
+    //CSmartPart **thePartList;
 
     theActor = itsGame->actorList;
 
@@ -82,7 +82,7 @@ CSmartPart *CDoorActor::CollisionTest() {
 }
 
 void CDoorActor::TouchDamage() {
-    CAbstractActor *anActor, *next;
+    CAbstractActor *anActor;//, *next;
     CSmartPart *thePart;
 
     if (hitPower) {
@@ -151,7 +151,7 @@ CAbstractActor *CDoorActor::EndScript() {
     resId = ReadLongVar(iShape);
 
     if (GetResource('BSPT', resId)) {
-        CBSPWorld *theWorld;
+        //CBSPWorld *theWorld;
 
         RegisterReceiver(&openActivator, ReadLongVar(iOpenMsg));
         RegisterReceiver(&closeActivator, ReadLongVar(iCloseMsg));

@@ -32,6 +32,7 @@
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 #include "InfoMessages.h"
+#include "Messages.h"
 //#include "CCapMaster.h"
 #include "AvaraDefines.h"
 #include "CSoundHub.h"
@@ -49,28 +50,17 @@
 #include "Preferences.h"
 #include "Resource.h"
 #include "RGBAColor.h"
+#include "Debug.h"
 
 #define kHighShadeCount 12
 
-static Fixed menuRates[] = {-1, //	index from 1
-    0, //	system auto
-    -1, //	dividing line
-    rate11025hz,
-    rate22050hz,
-    rate44khz,
-    -1,
-    rate11khz,
-    rate22khz};
-
 void CAvaraGame::InitMixer(Boolean silentFlag) {
     CSoundMixer *aMixer;
-    Fixed theRate;
-    short maxChan;
 
     soundHub->MixerDispose();
 
     aMixer = new CSoundMixer;
-    aMixer->ISoundMixer(rate22khz, 32, 4, true, true, false);
+    aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false);
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
     aMixer->SetVolume(gApplication->Get<uint8_t>(kSoundVolume));
@@ -97,13 +87,10 @@ CNetManager* CAvaraGame::CreateNetManager() {
     return new CNetManager;
 }
 
-CAvaraGame::CAvaraGame(int frameTime) {
+CAvaraGame::CAvaraGame(FrameTime frameTime) {
     SetFrameTime(frameTime);
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
-    short i;
-
-
     itsApp = theApp;
 
     itsNet = CreateNetManager();
@@ -191,7 +178,6 @@ CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
 }
 
 void CAvaraGame::Dispose() {
-    short i;
     CAbstractActor *nextActor;
 
     spectatePlayer = NULL;
@@ -510,8 +496,6 @@ void CAvaraGame::ChangeDirectoryFile() {
 void CAvaraGame::LevelReset(Boolean clearReset) {
     short i;
     CAbstractActor *anActor, *nextActor;
-    Size growBytes;
-    Size freeBytes;
 
     gameStatus = kAbortStatus;
 
@@ -585,7 +569,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
 void CAvaraGame::EndScript() {
     short i;
-    uint32_t lightColor;
+    uint32_t color;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -609,20 +593,25 @@ void CAvaraGame::EndScript() {
             y = FMul(FDegSin(-angle1), intensity);
             z = FMul(FDegCos(angle2), x);
             x = FMul(FDegSin(-angle2), x);
-            lightColor = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
+            color = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
                 .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
-            SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
-                    i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), lightColor);
+            // SDL_Log("Light from light table - idx: %d i: %f a: %f b: %f c: %x",
+            //        i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
 
             //The b angle is the compass reading and the a angle is the angle from the horizon.
-            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), lightColor);
+            AvaraGLSetLight(i, ToFloat(intensity), ToFloat(angle1), ToFloat(angle2), color);
         } else {
             itsView->SetLightValues(i, 0, 0, 0, kLightOff);
             AvaraGLSetLight(i, 0, 0, 0, DEFAULT_LIGHT_COLOR);
         }
     }
+
+    color = *ParseColor(ReadStringVar(iMissileArmedColor));
+    ColorManager::setMissileArmedColor(color);
+    color = *ParseColor(ReadStringVar(iMissileLaunchedColor));
+    ColorManager::setMissileLaunchedColor(color);
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
 
@@ -675,18 +664,36 @@ void CAvaraGame::PauseActors() {
 
 void CAvaraGame::SendStartCommand() {
     if (gameStatus == kReadyStatus) {
+        SDL_Log("CAvaraGame::SendStartCommand(), gameStatus = kReadyStatus\n");
         itsNet->SendStartCommand();
     } else if (gameStatus == kPauseStatus) {
+        SDL_Log("CAvaraGame::SendStartCommand(), gameStatus = kPauseStatus\n");
         CAbstractPlayer *player = GetLocalPlayer();
         if(player != NULL && player->lives > 0) {
+            SDL_Log("  calling SendResumeCommand()\n");
             itsNet->SendResumeCommand();
         }
     }
 }
 
-#define MAXSKIPSINAROW 2
+void CAvaraGame::StartIfReady() {
+    // server sends the start command if everyone is "ready"
+    if (itsNet->itsCommManager->myId == 0) {
+        bool allReady = true;
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            CPlayerManager *mgr = itsNet->playerTable[i];
+            if (mgr && mgr->LoadingStatus() == kLLoaded) {
+                allReady = false;
+                break;
+            }
+        }
+        if (allReady) {
+            SendStartCommand();
+        }
+    }
+}
 
-static Boolean takeShot = false;
+#define MAXSKIPSINAROW 2
 
 void CAvaraGame::ReadGamePrefs() {
     moJoOptions = 0;
@@ -716,11 +723,6 @@ void CAvaraGame::ResumeGame() {
     SDL_Log("CAvaraGame::ResumeGame (start=%d)\n", doStart);
 
     if (doStart) {
-        Byte oldCursorScale;
-        short resRef;
-        long powerGestalt;
-        short oldEventMask;
-
         if (freshMission) {
             itsApp->GameStarted(loadedSet,
                                 loadedLevel);
@@ -728,7 +730,7 @@ void CAvaraGame::ResumeGame() {
             freshPlayerList = NULL;
             InitMixer(false);
         } else {
-            itsApp->MessageLine(kmRestarted, centerAlign);
+            itsApp->MessageLine(kmRestarted, MsgAlignment::Center);
             soundHub->MuteFlag(false);
         }
 
@@ -795,6 +797,8 @@ void CAvaraGame::GameStart() {
         itsNet->FrameAction();
     }
 
+    loadedLevel = "";
+
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);
     SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -819,9 +823,9 @@ void CAvaraGame::GameStop() {
     itsNet->StopGame(gameStatus);
 
     if (gameStatus == kAbortStatus) {
-        itsApp->MessageLine(kmAborted, centerAlign);
+        itsApp->MessageLine(kmAborted, MsgAlignment::Center);
     } else if (gameStatus == kPauseStatus) {
-        itsApp->ParamLine(kmPaused, centerAlign, itsNet->playerTable[pausePlayer]->PlayerName(), NULL);
+        itsApp->ParamLine(kmPaused, MsgAlignment::Center, itsNet->playerTable[pausePlayer]->PlayerName(), NULL);
     }
 
     scoreKeeper->StopPause(gameStatus == kPauseStatus);
@@ -836,16 +840,24 @@ void CAvaraGame::HandleEvent(SDL_Event &event) {
 }
 
 bool CAvaraGame::GameTick() {
-    int32_t startTime = SDL_GetTicks();
+    uint32_t startTime = SDL_GetTicks();
 
     // No matter what, process any pending network packets
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        // send pings periodically to maintain connection & improve estimate for LT
-        itsNet->SendPingCommand(statusRequest != kPlayingStatus ? 8 : 2);
-        static long PING_INTERVAL_MSEC = 2000;
-        nextPingTime = startTime + PING_INTERVAL_MSEC;
+        uint32_t pingInterval = 2000; //msec
+        if (statusRequest == kPlayingStatus) {
+            // experimental: '/dbg ping' will turn pings on/off during game
+            if (Debug::IsEnabled("ping")) {
+                itsNet->SendPingCommand(2);
+            }
+        } else {
+            // less frequent larger bursts seems to give better LT estimates when not playing
+            // (this is better than sending 2 every 0.5 sec)
+            itsNet->SendPingCommand(8);
+        }
+        nextPingTime = startTime + pingInterval;
     }
 
     // Not playing? Nothing to do!
@@ -894,12 +906,7 @@ bool CAvaraGame::GameTick() {
     // increment frameNumber, set nextScheduledFrame time
     IncrementFrame();
 
-    // if the game hasn't kept up with the frame schedule, reset the next frame (prevents chipmunk mode)
-    if (nextScheduledFrame < startTime) {
-        nextScheduledFrame = startTime + frameTime;
-    }
-
-    timeInSeconds = FMulDivNZ(frameNumber, frameTime, 1000);
+    timeInSeconds = frameNumber * frameTime / 1000;
 
     if (latencyTolerance)
         while (FramesFromNow(latencyTolerance) > topSentFrame)
@@ -907,8 +914,8 @@ bool CAvaraGame::GameTick() {
 
     canPreSend = true;
 
-    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode)
-    if (nextScheduledFrame < startTime) {
+    // if the game hasn't kept up with the frame schedule, reset the next frame time (prevents chipmunk mode, unless player is dead)
+    if (nextScheduledFrame < startTime && itsNet->IAmAlive()) {
         nextScheduledFrame = startTime + frameTime;
     }
 
@@ -1027,20 +1034,17 @@ void CAvaraGame::UpdateViewRect(int width, int height, float pixelRatio) {
 }
 
 void CAvaraGame::Render(NVGcontext *ctx) {
-
     worldShader->ShadeWorld(itsView);
 
-    if (true || gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus ||
-        gameStatus == kLoseStatus) {
-        ViewControl();
-        itsWorld->Render(itsView);
-        AvaraGLSetAmbient(.7, LONG_MAX);
-        AvaraGLSetDepthTest(false);
-        hudWorld->Render(itsView);
-        AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
-        hud->Render(itsView, ctx);
-        AvaraGLSetDepthTest(true);
-    }
+    //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
+    ViewControl();
+    itsWorld->Render(itsView);
+    AvaraGLSetAmbient(.7, UINT_MAX);
+    AvaraGLSetDepthTest(false);
+    hudWorld->Render(itsView);
+    AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
+    hud->Render(itsView, ctx);
+    AvaraGLSetDepthTest(true);
 }
 
 CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
@@ -1064,7 +1068,7 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
 
 // "frameLatency" is the integer number of frames to delay;
 // latencyTolerance is the number of classic (64ms) frames (= frameLatency * fpsScale).
-void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const char* slowPlayer) {
+void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayerManager* slowPlayer) {
     double newLatency = newFrameLatency * fpsScale;
     if (latencyTolerance != newLatency) {
         #define MAX_LATENCY (8)   // in classic units
@@ -1088,40 +1092,38 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, const c
         gApplication->Set(kLatencyToleranceTag, latencyTolerance);
 
         // if it changed
-        if (latencyTolerance != oldLatency) {
-            SDL_Log("*** LT set to %s, frameTime = %ld ms\n", ltOss.str().c_str(), frameTime);
-
+        if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
+            std::ostringstream oss;
+            std::time_t t = std::time(nullptr);
+            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
             if (slowPlayer != nullptr) {
-                std::ostringstream oss;
-                std::time_t t = std::time(nullptr);
-                oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ")
-                    << ltOss.str() << " (" << slowPlayer << ")";
-                itsApp->AddMessageLine(oss.str());
+                oss << " (" << slowPlayer->GetPlayerName() << ")";
             }
+            itsApp->AddMessageLine(oss.str());
         }
     }
 }
 
-long CAvaraGame::TimeToFrameCount(long timeInMsec) {
+FrameNumber CAvaraGame::TimeToFrameCount(long timeInMsec) {
     // how many frames occur in timeInMsec?
-    return timeInMsec / frameTime;
+    return FrameNumber(timeInMsec / frameTime);
 }
 
-long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
+FrameNumber CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     // Jump forward to the next full period.
     // For example, if we are changing latencies such that we start with 48 frames/period
     // and we're moving to 60 frames/period, and we're on frame 48, we want to
     // move forward to frame 120 and NOT frame 60.
-    long periodFrames = TimeToFrameCount(period);
+    FrameNumber periodFrames = TimeToFrameCount(period);
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
 }
 
-void CAvaraGame::SetFrameTime(long ft) {
+void CAvaraGame::SetFrameTime(int32_t ft) {
     if (ft != 2 && ft != 4 && ft != 8 && ft != 16 && ft != 32 && ft != 64) {
       SDL_Log("ERROR! frameTime MUST be 2, 4, 8, 16, 32 or 64 msec");
       exit(1); // is exit too dramatic?
     }
-    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %ld)\n", ft);
+    SDL_Log("CAvaraGame::SetFrameTime(frameTime = %i)\n", ft);
     this->frameTime = ft;
     this->fpsScale = double(frameTime)/CLASSICFRAMETIME;
     if (gApplication) gApplication->Set(kFrameTimeTag, frameTime);
@@ -1138,6 +1140,6 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
     isClassicFrame = (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
 }
 
-long CAvaraGame::FramesFromNow(long classicFrameCount) {
+FrameNumber CAvaraGame::FramesFromNow(FrameNumber classicFrameCount) {
     return frameNumber + classicFrameCount / fpsScale;
 }

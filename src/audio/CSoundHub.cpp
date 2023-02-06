@@ -145,14 +145,13 @@ SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
 
     if (!aSample) {
         Handle compressedData;
-        Handle soundInfo;
 
         compressedData = GetResource(HSOUNDRESTYPE, resId);
         if (compressedData) {
             int len;
-            short tryCount;
+            //short tryCount;
             Ptr soundData;
-            float base;
+            //float base;
             HSNDRecord *ir;
 
             // MoveHHi(compressedData);
@@ -167,10 +166,11 @@ SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
             ir->dataOffset = ntohl(ir->dataOffset);
             if (ir->versNum >= 2) {
                 ir->baseRate = ntohl(ir->baseRate);
-                base = ir->baseRate / 65536.0;
-            } else {
-                base = 1.0;
-            }
+                //base = ir->baseRate / 65536.0;
+            } 
+            //else {
+            //    base = 1.0;
+            //}
 
             soundData = ir->dataOffset + *compressedData;
             len = itsCompressor->GetUncompressedLen(soundData);
@@ -190,9 +190,9 @@ SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
             }
 
             if (aSample) {
-                unsigned char value;
-                unsigned char *p;
-                int i;
+                uint8_t value;
+                uint8_t *p;
+                size_t i;
 
                 sampP = *aSample;
                 sampP->resId = resId;

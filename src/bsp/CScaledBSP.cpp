@@ -11,11 +11,12 @@
 
 #include "Memory.h"
 #include "Resource.h"
+#include "AvaraGL.h"
 
 void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
-    OSErr iErr;
+    //OSErr iErr;
     Vector *p;
-    short i;
+    size_t i;
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
@@ -43,7 +44,7 @@ void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, s
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    UpdateOpenGLData();
+    AvaraGLUpdateData(this);
 }
 
 void CScaledBSP::Dispose() {

@@ -74,14 +74,14 @@ public:
     std::string loadedDesigner = "";
     std::string loadedInfo = "";
     long loadedTimeLimit;
-    long timeInSeconds;
-    long frameNumber;
+    int32_t timeInSeconds;
+    FrameNumber frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
 
-    long topSentFrame;
+    FrameNumber topSentFrame;
 
-    long frameTime; //	In milliseconds.
+    FrameTime frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
     short gameStatus;
@@ -89,11 +89,11 @@ public:
     short pausePlayer;
 
     CAbstractActor *actorList;
-    CAbstractActor *nextActor;
+    CAbstractActor *nextActor = {0};
 
     CAbstractPlayer *playerList;
-    CAbstractPlayer *nextPlayer;
-    CAbstractPlayer *spectatePlayer;
+    CAbstractPlayer *nextPlayer = {0};
+    CAbstractPlayer *spectatePlayer = {0};
     long playersStanding;
     short teamsStandingMask;
     short teamsStanding;
@@ -185,7 +185,7 @@ public:
     long oldPlayersStanding;
     short oldTeamsStanding;
 
-    CAvaraGame(int frameTime = 64);
+    CAvaraGame(FrameTime frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
@@ -218,6 +218,7 @@ public:
     virtual void ReadGamePrefs();
 
     virtual void SendStartCommand();
+    virtual void StartIfReady();
     virtual void ResumeGame();
     virtual bool IsPlaying();
     virtual void HandleEvent(SDL_Event &event);
@@ -249,12 +250,12 @@ public:
     virtual CPlayerManager *FindPlayerManager(CAbstractPlayer *thePlayer);
 
     virtual long RoundTripToFrameLatency(long rtt);
-    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, const char *slowPlayer = nullptr);
-    virtual long TimeToFrameCount(long timeInMsec);
-    virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
-    virtual void SetFrameTime(long ft);
+    virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, CPlayerManager *slowPlayer = nullptr);
+    virtual FrameNumber TimeToFrameCount(long timeInMsec);
+    virtual FrameNumber NextFrameForPeriod(long period, long referenceFrame = 0);
+    virtual void SetFrameTime(int32_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
-    virtual long FramesFromNow(long classicFrames);
+    virtual FrameNumber FramesFromNow(FrameNumber classicFrames);
 
     void SetKeysFromStdin() { keysFromStdin = true; };
     void SetKeysToStdout() { keysToStdout = true; };

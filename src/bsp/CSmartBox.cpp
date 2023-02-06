@@ -11,6 +11,7 @@
 
 #include "Memory.h"
 #include "Resource.h"
+#include "AvaraGL.h"
 
 #define DIMEPSILON 16
 
@@ -31,7 +32,6 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     Vector *p;
     short i;
     Fixed x, y, z;
-    ColorRecord *oldColors;
     Vector normalAdjust;
     Vector newNormal;
 
@@ -76,11 +76,8 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
 }
 
 void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
-    Vector *p;
     short i;
     Fixed x, y, z;
-    ColorRecord *oldColors;
-    Vector normalAdjust;
     Fixed dx, dy, dz;
     Fixed stretchBound;
 
@@ -115,18 +112,12 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
     FindEnclosure();
 }
 
-#define kMarkerColor 0x00fefefe
-#define kOtherMarkerColor 0x00fe0000
-
 void CSmartBox::ISmartBox(short resId,
     Fixed *dimensions,
-    long color,
-    long altColor,
+    uint32_t color,
+    uint32_t altColor,
     CAbstractActor *anActor,
     short aPartCode) {
-    OSErr iErr;
-    Vector *p;
-    short i;
     bspsResource **config;
     Fixed baseSize;
     Boolean stretchFlag;
@@ -140,15 +131,16 @@ void CSmartBox::ISmartBox(short resId,
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
-    config = (bspsResource **)GetResource(BSPSCALETYPE, resId);
+    auto scalingRes = GetResource(BSPSCALETYPE, resId);
+    config = (bspsResource **)scalingRes;
     if (config) {
         stretchFlag = ntohs((*config)->scaleStyle);
         baseSize = ntohl((*config)->baseSize);
-        ReleaseResource((Handle)config);
     } else {
         stretchFlag = false;
         baseSize = FIX(1);
     }
+    ReleaseResource(scalingRes);
 
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);
@@ -167,7 +159,7 @@ void CSmartBox::ISmartBox(short resId,
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    UpdateOpenGLData();
+    AvaraGLUpdateData(this);
 }
 
 void CSmartBox::Dispose() {
@@ -190,7 +182,7 @@ void CSmartBox::FindEnclosure() {
 
     Fixed xspan, yspan, zspan;
     Fixed maxspan;
-    Fixed rad, radsq;
+    Fixed rad;
 
     FixedPoint xmin, xmax, ymin, ymax, zmin, zmax;
     FixedPoint dia1, dia2, cen;

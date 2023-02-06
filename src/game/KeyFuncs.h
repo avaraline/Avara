@@ -29,7 +29,7 @@ struct FunctionTable {
 
 typedef struct {
     FunctionTable ft;
-    uint32_t validFrame;
+    FrameNumber validFrame;
 } FrameFunction;
 
 //	Flags for "p1" of packet.
