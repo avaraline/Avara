@@ -67,7 +67,7 @@ void TrackerPinger(CAvaraAppImpl *app) {
 }
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-    itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
+    itsGame = new CAvaraGame(static_cast<int32_t>(Number(kFrameTimeTag)));
     gCurrentGame = itsGame;
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
@@ -123,6 +123,12 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     // load up a random decent starting level
 
+    if (Boolean(kPunchHoles)) {
+        std::string host = String(kPunchServerAddress);
+        uint16_t port = static_cast<uint16_t>(Number(kPunchServerPort));
+        SDL_Log("Enabling UDP hole punching via %s:%d", host.c_str(), port);
+        PunchSetup(host.c_str(), port);
+    }
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
