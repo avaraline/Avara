@@ -318,7 +318,8 @@ void CPlayerManagerImpl::HandleKeyUp(uint32_t keyFunc) {
 
 void CPlayerManagerImpl::SendFrame() {
     // guard against overwriting frames that aren't done yet
-    if (itsGame->topSentFrame - itsGame->frameNumber >= FUNCTIONBUFFERS - 1) {
+    if (itsGame->topSentFrame >= itsGame->frameNumber + FUNCTIONBUFFERS - 1) {
+        // this shouldn't happen because the latency maxes at 8.0*8(max frame rate) = 64 < FUNCTIONBUFFERS
         SDL_Log("frameFuncs BUFFER IS FULL, not sending new frames until we catch up! <-- tell Head you saw this.");
         return;
     }
@@ -326,8 +327,7 @@ void CPlayerManagerImpl::SendFrame() {
     // Sends the next game frame.
     itsGame->topSentFrame += 1;
 
-    // uint32_t ffi = itsGame->topSentFrame * itsGame->fpsScale;
-    uint32_t ffi = itsGame->topSentFrame;
+    FrameNumber ffi = itsGame->topSentFrame;
     FrameFunction *ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
 
     ff->validFrame = itsGame->topSentFrame;
@@ -458,15 +458,14 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
     uint32_t *pd;
     uint16_t *spd;
     FrameFunction *ff;
-    uint32_t frameNumber;
+    FrameNumber frameNumber;
     char p1;
 
     p1 = thePacket->p1;
     frameNumber = thePacket->p3;
 
     pd = (uint32_t *)thePacket->dataBuffer;
-    // uint32_t ffi = frameNumber * itsGame->fpsScale;
-    uint32_t ffi = frameNumber;
+    FrameNumber ffi = frameNumber;
     ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     ff->validFrame = frameNumber;
 
@@ -501,7 +500,7 @@ void CPlayerManagerImpl::SendResendRequest(short askCount) {
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
     // SDL_Log("CPlayerManagerImpl::GetFunctions, %u, %hd\n", itsGame->frameNumber, slot);
-    uint32_t ffi = (itsGame->frameNumber);
+    FrameNumber ffi = (itsGame->frameNumber);
     short i = (FUNCTIONBUFFERS - 1) & ffi;
     static int WAITING_MESSAGE_COUNT = 2;
 

@@ -50,7 +50,7 @@ public:
     Fixed energy = 0;
     Fixed maxEnergy = 0; //	Maximum stored energy level
     Fixed classicGeneratorPower, generatorPower = 0; //	Energy gain/frame
-    long boostEndFrame = 0;
+    FrameNumber boostEndFrame = 0;
     long boostsRemaining = 0;
 
     Fixed maxShields = 0; //	Maximum shield energy
@@ -58,8 +58,8 @@ public:
 
     short missileCount = 0;
     short grenadeCount = 0;
-    long nextGrenadeLoad = 0;
-    long nextMissileLoad = 0;
+    FrameNumber nextGrenadeLoad = 0;
+    FrameNumber nextMissileLoad = 0;
 
     short missileLimit = 0;
     short grenadeLimit = 0;
@@ -130,7 +130,7 @@ public:
     Boolean didSelfDestruct = 0;
 
     //	Winning/loosing:
-    long winFrame = 0;
+    FrameNumber winFrame = 0;
     Quaternion winStart = {0};
     Quaternion winEnd = {0};
     Boolean isOut = 0;

@@ -31,7 +31,7 @@ public:
     short ownerSlot;
     short weaponKind;
 
-    long flyCount;
+    FrameNumber flyCount;
     Boolean doExplode;
 
     virtual void IWeapon(CDepot *theDepot);

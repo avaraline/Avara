@@ -27,6 +27,9 @@ typedef uint8_t Str255[256];
 typedef uint8_t Byte;
 typedef int8_t SignedByte;
 
+typedef int32_t FrameNumber;
+typedef int32_t FrameTime;   // 64,32,16(default),8
+
 typedef uint32_t ip_addr;
 typedef uint16_t port_num;
 
