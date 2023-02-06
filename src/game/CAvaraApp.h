@@ -136,6 +136,7 @@ public:
     virtual SDL_Window* sdlWindow() override { return CApplication::sdlWindow(); }
     virtual long Number(const std::string name) override { return CApplication::Number(name); }
     virtual bool Boolean(const std::string name) override { return CApplication::Boolean(name); }
+    template <class T> T Get(const std::string name) { return CApplication::Get<T>(name); }
 
     void TrackerUpdate();
     std::string TrackerPayload();
