@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include "ARGBColor.h"
 #include "CBSPPart.h"
 #include "CDirectObject.h"
 
@@ -47,7 +48,7 @@ public:
     Vector internalLights[MAXLIGHTS] = {{0}}; //	Vector length == light source power.
 
     Fixed ambientLight = 0; //	Intensity of ambient (nondirectional) light
-    uint32_t ambientLightColor = 0; // Color of ambient (nondirectional) light.
+    ARGBColor ambientLightColor = 0xffffffff; // Color of ambient (nondirectional) light.
 
     Fixed yonBound = 0;
     Fixed hitherBound = 0;

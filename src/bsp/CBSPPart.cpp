@@ -14,7 +14,6 @@
 #include "Memory.h"
 #include "Resource.h"
 #include "AvaraDefines.h"
-#include "RGBAColor.h"
 
 #include <fstream>
 #include <iostream>
@@ -103,8 +102,8 @@ void CBSPPart::IBSPPart(short resId) {
     for (uint32_t i = 0; i < polyCount; i++) {
         json poly = doc["polys"][i];
         // Color
-        polyTable[i].color = poly["color"];
-        polyTable[i].origColor = poly["color"];
+        polyTable[i].color = static_cast<uint32_t>(poly["color"]);
+        polyTable[i].origColor = static_cast<uint32_t>(poly["color"]);
         // Normal
         polyTable[i].normal[0] = poly["normal"][0];
         polyTable[i].normal[1] = poly["normal"][1];
@@ -388,7 +387,7 @@ Matrix *CBSPPart::GetInverseTransform() {
     return &invGlobTransform;
 }
 
-void CBSPPart::ReplaceColor(uint32_t origColor, uint32_t newColor) {
+void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
     for (int i = 0; i < polyCount; i++) {
         if (polyTable[i].origColor == origColor) {
             polyTable[i].color = newColor;

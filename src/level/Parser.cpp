@@ -25,7 +25,6 @@
 #include "FastMat.h"
 #include "Resource.h"
 #include "Types.h"
-#include "RGBAColor.h"
 
 //#define DEBUGPARSER 1
 #ifdef DEBUGPARSER
@@ -1121,16 +1120,16 @@ short ReadShortVar(const char *s) {
     return ReadShortVar(IndexForEntry(s));
 }
 
-const std::optional<uint32_t> ReadColorVar(short index) {
+const std::optional<ARGBColor> ReadColorVar(short index) {
     // first just try parsing the color string (e.g. fill="#ffcc44" or fill="rgba(255,204,68)")
-    std::optional<uint32_t> color = ParseColor(ReadStringVar(index));
+    std::optional<ARGBColor> color = ARGBColor::Parse(ReadStringVar(index));
     if (!color) {
         // try dereferencing color to a variable (e.g. myFill='"#ffcc44"' --> fill="myFill")
-        color = ParseColor(ReadStringVar(ReadStringVar(index).c_str()));
+        color = ARGBColor::Parse(ReadStringVar(ReadStringVar(index).c_str()));
     }
     return color;
 }
-const std::optional<uint32_t> ReadColorVar(const char *s) {
+const std::optional<ARGBColor> ReadColorVar(const char *s) {
     return ReadColorVar(IndexForEntry(s));
 }
 

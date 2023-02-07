@@ -742,6 +742,11 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         #endif
 
                         if (p->dataLen) {
+                            if (p->dataLen > PACKETDATABUFFERSIZE) {
+                                SDL_Log("CUDPComm::ReadComplete BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
+                                        p->command, p->sender, p->dataLen);
+                                p->dataLen = PACKETDATABUFFERSIZE;
+                            }
                             BlockMoveData(inData.c, p->dataBuffer, p->dataLen);
                             inData.c += p->dataLen;
                         }
@@ -1013,6 +1018,11 @@ Boolean CUDPComm::AsyncWrite() {
             p->flags = flags;  // stick flags in the packet structure
 
             if (p->dataLen) {
+                if (p->dataLen > PACKETDATABUFFERSIZE) {
+                    SDL_Log("CUDPComm::AsyncWrite BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
+                            p->command, p->sender, p->dataLen);
+                    p->dataLen = PACKETDATABUFFERSIZE;
+                }
                 BlockMoveData(p->dataBuffer, outData.c, p->dataLen);
                 outData.c += p->dataLen;
             }

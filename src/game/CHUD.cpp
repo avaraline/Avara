@@ -5,7 +5,7 @@
 #include "CPlayerManager.h"
 #include "AvaraDefines.h"
 #include "CScoreKeeper.h"
-#include "RGBAColor.h"
+#include "ARGBColor.h"
 
 #include <stdint.h>
 
@@ -40,7 +40,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
         float x = 20;
         float y = bufferHeight-chudHeight-boardHeight - 20;
         float fontsz_m = 28.0, fontsz_s = 18.0;
-        uint32_t longTeamColor;
+        ARGBColor longTeamColor = 0;
         float teamColorRGB[3];
         NVGcolor aliveColor = nvgRGBA(255, 255, 255, 255);
         NVGcolor deadColor = nvgRGBA(165, 165, 165, 255);
@@ -113,7 +113,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
             const std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             std::string ping = "--";
             longTeamColor = *ColorManager::getTeamColor(net->teamColors[playerTableIndex] + 1);
-            LongToRGBA(longTeamColor, teamColorRGB, 3);
+            longTeamColor.ExportGLFloats(teamColorRGB, 3);
             NVGcolor textColor = aliveColor;
 
             if(playerName.size() > 0 && thisPlayer->GetPlayer() != NULL) {
@@ -303,15 +303,13 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgBeginPath(ctx);
         nvgTextAlign(ctx, textAlign | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
-        nvgFillColor(ctx, LongToNVG(
-            ColorManager::getMessageColor(i.category)
-        ));
+        nvgFillColor(ctx, ColorManager::getMessageColor(i.category).IntoNVG());
         nvgText(ctx, mX, mY, i.text.c_str(), NULL);
         mY += 11;
     }
 
     float pY;
-    uint32_t longTeamColor;
+    ARGBColor longTeamColor = 0;
     float teamColorRGB[3];
     float colorBoxAlpha = 1.0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
@@ -320,7 +318,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         if (playerName.length() < 1) continue;
         pY = (bufferHeight - chudHeight + 8) + (11 * i);
         longTeamColor = *ColorManager::getTeamColor(net->teamColors[i] + 1);
-        LongToRGBA(longTeamColor, teamColorRGB, 3);
+        longTeamColor.ExportGLFloats(teamColorRGB, 3);
         std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
         NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
 
@@ -340,7 +338,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
         //highlight player if spectating
         if (spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
-            textColor = LongToNVG(*ColorManager::getTeamTextColor(net->teamColors[i] + 1));
+            textColor = (*ColorManager::getTeamTextColor(net->teamColors[i] + 1)).IntoNVG();
             colorBoxWidth = 150.0;
         }
 
@@ -510,16 +508,16 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
                 {g2X4 + (g2s * 4), g2Y4 - (g2s * 4)},
                 {g2X4 + (g2s * 3), g2Y4 - (g2s * 5)}}}};
     NVGcolor g1c[] = {
-        LongToNVG(ColorManager::getEnergyGaugeColor()),
-        LongToNVG(ColorManager::getPlasmaGauge1Color()),
-        LongToNVG(ColorManager::getPlasmaGauge2Color()),
-        LongToNVG(ColorManager::getShieldGaugeColor())
+        ColorManager::getEnergyGaugeColor().IntoNVG(),
+        ColorManager::getPlasmaGauge1Color().IntoNVG(),
+        ColorManager::getPlasmaGauge2Color().IntoNVG(),
+        ColorManager::getShieldGaugeColor().IntoNVG()
     };
     NVGcolor g2c[] = {
-        LongToNVG(ColorManager::getPinwheel1Color()),
-        LongToNVG(ColorManager::getPinwheel2Color()),
-        LongToNVG(ColorManager::getPinwheel3Color()),
-        LongToNVG(ColorManager::getPinwheel4Color())
+        ColorManager::getPinwheel1Color().IntoNVG(),
+        ColorManager::getPinwheel2Color().IntoNVG(),
+        ColorManager::getPinwheel3Color().IntoNVG(),
+        ColorManager::getPinwheel4Color().IntoNVG()
     };
     for (i = 0; i < 4; i++) { // referred to as GrafPanel in original Avara
         nvgBeginPath(ctx);
@@ -554,13 +552,13 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     if (itsGame->veryLongWait) {
         nvgBeginPath(ctx);
         nvgRect(ctx, g1X, gY, 8.0, 8.0);
-        nvgFillColor(ctx, LongToNVG(ColorManager::getNetDelay2Color()));
+        nvgFillColor(ctx, ColorManager::getNetDelay2Color().IntoNVG());
         nvgFill(ctx);
     }
     if (itsGame->longWait) {
         nvgBeginPath(ctx);
         nvgRect(ctx, g1X + 4, gY + 4, 8.0, 8.0);
-        nvgFillColor(ctx, LongToNVG(ColorManager::getNetDelay1Color()));
+        nvgFillColor(ctx, ColorManager::getNetDelay1Color().IntoNVG());
         nvgFill(ctx);
     }
     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
