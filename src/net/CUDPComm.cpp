@@ -1988,10 +1988,3 @@ void CUDPComm::BuildServerTags() {
     }
     */
 }
-
-ip_addr CUDPComm::ServerHost() {
-    if (connections->myId == 0) {
-        return connections->ipAddr;
-    }
-    return 0;
-}

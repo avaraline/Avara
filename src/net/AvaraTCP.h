@@ -55,5 +55,3 @@ void UDPWrite(int sock, UDPpacket *packet, WriteCompleteProc callback, void *use
 
 std::string FormatHostPort(uint32_t host, uint16_t port);
 std::string FormatAddress(IPaddress &addr);
-
-bool IsLocal(uint32_t host);

@@ -154,6 +154,4 @@ public:
     virtual float GetMaxMeanReceiveCount(short distribution);
 
     virtual void BuildServerTags();
-
-    virtual ip_addr ServerHost();
 };

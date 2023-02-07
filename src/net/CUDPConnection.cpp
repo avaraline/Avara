@@ -751,12 +751,6 @@ void CUDPConnection::OpenNewConnections(CompleteAddress *table) {
         for (i = 1; i <= itsOwner->maxClients; i++) {
             if (table->host && table->port) {
                 myId = i;
-                if (IsLocal(table->host) && !IsLocal(itsOwner->ServerHost())) {
-                    // when an address == localhost, then use the server's host IP...
-                    // this is for when a remote server has attached clients/bots running locally,
-                    // so that clients connecting remotely will connect to the correct IP
-                    table->host = itsOwner->ServerHost();
-                }
                 FreshClient(table->host, table->port, 0);
                 table->host = 0;
                 table->port = 0;
