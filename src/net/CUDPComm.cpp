@@ -565,16 +565,16 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     DBG_Log("login", "Received Connection Table ...\n%s", FormatConnectionTable(table).c_str());
 
     CompleteAddress myAddressFromTOC = table[myId - 1];
-    table[myId - 1].host = 0; // don't want to connect to myself
-    table[myId - 1].port = 0;
+    table[myId - 1] = {}; // don't want to connect to myself
+
     connections->MarkOpenConnections(table);
-    DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
+    // DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
 
     connections->RewriteConnections(table, myAddressFromTOC);
-    DBG_Log("login", "After rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+    DBG_Log("login", "Connection Table after rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
 
     connections->OpenNewConnections(table);
-    DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
+    // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
