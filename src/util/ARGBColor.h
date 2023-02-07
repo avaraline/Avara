@@ -3,6 +3,7 @@
 #include "nanovg.h"
 
 #include <stdint.h>
+#include <string>
 
 #ifdef __has_include
 #  if __has_include(<optional>)                // Check for a standard library
