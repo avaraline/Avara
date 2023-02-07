@@ -1173,7 +1173,7 @@ short CAbstractActor::GetPlayerPosition() {
     return -1; //	Not a player, as far as we know, so return -1 (invalid position)
 }
 
-uint32_t CAbstractActor::GetTeamColorOr(uint32_t defaultColor) {
+ARGBColor CAbstractActor::GetTeamColorOr(ARGBColor defaultColor) {
     return ColorManager::getTeamColor(teamColor).value_or(defaultColor);
 }
 

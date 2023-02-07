@@ -49,7 +49,7 @@
 #include "CHUD.h"
 #include "Preferences.h"
 #include "Resource.h"
-#include "RGBAColor.h"
+#include "ARGBColor.h"
 #include "Debug.h"
 
 #define kHighShadeCount 12
@@ -567,7 +567,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
 void CAvaraGame::EndScript() {
     short i;
-    uint32_t color;
+    ARGBColor color = 0;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -576,7 +576,7 @@ void CAvaraGame::EndScript() {
     worldShader->Apply();
 
     itsView->ambientLight = ReadFixedVar(iAmbient);
-    itsView->ambientLightColor = ParseColor(ReadStringVar(iAmbientColor))
+    itsView->ambientLightColor = ARGBColor::Parse(ReadStringVar(iAmbientColor))
         .value_or(DEFAULT_LIGHT_COLOR);
     AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
 
@@ -591,7 +591,7 @@ void CAvaraGame::EndScript() {
             y = FMul(FDegSin(-angle1), intensity);
             z = FMul(FDegCos(angle2), x);
             x = FMul(FDegSin(-angle2), x);
-            color = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
+            color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 4 * i))
                 .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
@@ -606,9 +606,9 @@ void CAvaraGame::EndScript() {
         }
     }
 
-    color = *ParseColor(ReadStringVar(iMissileArmedColor));
+    color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);
-    color = *ParseColor(ReadStringVar(iMissileLaunchedColor));
+    color = *ARGBColor::Parse(ReadStringVar(iMissileLaunchedColor));
     ColorManager::setMissileLaunchedColor(color);
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);

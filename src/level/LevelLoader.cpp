@@ -48,7 +48,7 @@ static short lastDomeAngle;
 static short lastDomeSpan;
 static Fixed lastDomeRadius;
 
-static uint32_t fillColor, frameColor;
+static ARGBColor fillColor(0), frameColor(0);
 
 
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
@@ -61,11 +61,11 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
     return lastDomeRadius;
 }
 
-uint32_t GetPixelColor() {
+ARGBColor GetPixelColor() {
     return fillColor;
 }
 
-uint32_t GetOtherPixelColor() {
+ARGBColor GetOtherPixelColor() {
     return frameColor;
 }
 
@@ -172,14 +172,14 @@ struct ALFWalker: pugi::xml_tree_walker {
         gLastBoxRounding = node.attribute("h").empty() ? 0 : ReadFixedVar("h");
 
         if (!node.attribute("fill").empty()) {
-            const std::optional<uint32_t> color = ReadColorVar("fill");
+            const std::optional<ARGBColor> color = ReadColorVar("fill");
             if (color) {
                 fillColor = *color;
             }
         }
 
         if (!node.attribute("frame").empty()) {
-            const std::optional<uint32_t> color = ReadColorVar("frame");
+            const std::optional<ARGBColor> color = ReadColorVar("frame");
             if (color) {
                 frameColor = *color;
             }

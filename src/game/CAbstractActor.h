@@ -214,7 +214,7 @@ public:
     virtual void RayTestWithGround(RayHitRecord *hitRec, MaskType testMask);
     virtual short GetPlayerPosition();
 
-    uint32_t GetTeamColorOr(uint32_t defaultColor);
+    ARGBColor GetTeamColorOr(ARGBColor defaultColor);
 
     virtual short GetBallSnapPoint(long theGroup,
         Fixed *ballLocation,
