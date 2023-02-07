@@ -14,6 +14,7 @@ using json = nlohmann::json;
 #define kLatencyToleranceTag "latencyTolerance"
 #define kHullTypeTag "hull"
 #define kFrameTimeTag "frameTime"
+#define kPollEvents "pollEvents"
 
 // TODO: split this into separate prefs
 #define kServerOptionsTag "_serverOptions"
@@ -123,7 +124,8 @@ static json defaultPrefs = {
     {kRecentSets, {}},
     {kRecentLevels, {}},
     {kSoundVolume, 100},
-    {kIgnoreCustomGoodySound, false}
+    {kIgnoreCustomGoodySound, false},
+    {kPollEvents, true}
 };
 
 

@@ -63,6 +63,7 @@ void init() {
 }
 
 static bool mainloop_active = false;
+bool pollEvents = false;
 
 void mainloop(int refresh) {
     if (mainloop_active)
@@ -91,7 +92,8 @@ void mainloop(int refresh) {
             }
 
             /* Wait for mouse/keyboard or empty refresh events */
-            if(SDL_WaitEventTimeout(&theEvent, refresh)) {
+            int result = pollEvents ? SDL_PollEvent(&theEvent) : SDL_WaitEventTimeout(&theEvent, refresh);
+            if(result) {
                 if (theEvent.type == SDL_QUIT) {
                     mainloop_active = false;
                 }
