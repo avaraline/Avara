@@ -8,6 +8,7 @@
 */
 
 #pragma once
+#include "ARGBColor.h"
 #include "CDirectObject.h"
 #include "FastMat.h"
 #include "Types.h"
@@ -35,8 +36,8 @@ typedef struct {
 } FixedPoint;
 
 typedef struct {
-    uint32_t color;
-    uint32_t origColor;
+    ARGBColor color;
+    ARGBColor origColor;
     float normal[3];
     uint16_t triCount;
     uint16_t *triPoints;
@@ -44,7 +45,7 @@ typedef struct {
     uint16_t back;
 } PolyRecord;
 
-typedef uint32_t ColorRecord;
+typedef ARGBColor ColorRecord;
 
 namespace CBSPUserFlags {
     constexpr short kIsAmbient = 1;
@@ -174,7 +175,7 @@ public:
     virtual void BuildBoundingVolumes();
     virtual void Dispose();
 
-    virtual void ReplaceColor(uint32_t origColor, uint32_t newColor);
+    virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();
