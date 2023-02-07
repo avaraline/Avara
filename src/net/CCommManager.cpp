@@ -258,6 +258,11 @@ PacketInfo *CCommManager::DuplicatePacket(PacketInfo *original) {
         duplicate->p3 = original->p3;
         duplicate->dataLen = original->dataLen;
         if (duplicate->dataLen) {
+            if (duplicate->dataLen > PACKETDATABUFFERSIZE) {
+                SDL_Log("CCommManager::DuplicatePacket BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
+                        duplicate->command, duplicate->sender, duplicate->dataLen);
+                duplicate->dataLen = PACKETDATABUFFERSIZE;
+            }
             BlockMoveData(original->dataBuffer, duplicate->dataBuffer, duplicate->dataLen);
         }
     }
