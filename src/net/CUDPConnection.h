@@ -131,7 +131,7 @@ public:
     virtual void Dispose();
 
     virtual void MarkOpenConnections(CompleteAddress *table);
-    virtual void RewriteConnections(CompleteAddress *table);
+    virtual void RewriteConnections(CompleteAddress *table, const CompleteAddress &myAddressInTOC);
     virtual void OpenNewConnections(CompleteAddress *table);
 
     virtual Boolean AreYouDone();

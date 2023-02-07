@@ -720,12 +720,8 @@ void CUDPConnection::MarkOpenConnections(CompleteAddress *table) {
     }
 }
 
-bool IsLocalhost(uint32_t host) {
-    static uint32_t localhost = inet_addr("127.0.0.1");
-    return (host == localhost);
-}
-
-void CUDPConnection::RewriteConnections(CompleteAddress *table) {
+void CUDPConnection::RewriteConnections(CompleteAddress *table, const CompleteAddress &myAddressInTOC) {
+    static uint32_t LOCALHOST = inet_addr("127.0.0.1");
     // this is called from CUDPComm::connections[0] which should point to the server's connection
     ip_addr serverHost = ipAddr;
 
@@ -733,11 +729,17 @@ void CUDPConnection::RewriteConnections(CompleteAddress *table) {
     // we may need to rewrite some of those hosts/ports to allow this client to connect to another client
     // depending on the LAN/WAN situation
     for (int i = 0; i < itsOwner->maxClients; i++) {
-        if (IsLocalhost(table->host)) {
+        if (table->host == LOCALHOST) {
             // if the server sees the connection coming from localhost, change the host to whatever host we connected to server with (which could ALSO be localhost)
             table->host = serverHost;
         }
-        // TODO: what if host is the IP of the router?  e.g. someone connects to a LAN game using the WAN address
+        else if (table->host == myAddressInTOC.host && table->port != myAddressInTOC.port) {
+            // if I have the same host IP as the client in the connection table, and a diff port, assume we're on the same machine
+            // (this helps with the case of connecting a couple of clients/bots out to an external server)
+            table->host = LOCALHOST;
+        }
+        // TODO: what if host is the IP of the router?  e.g. someone connects to a LAN game using the WAN address...
+        // the workaround for this is to have everyone in the LAN game use the LAN address but it would be nice to make it automatic
         // else if (IsWanRouter(table->host)) { /* do something, might have to send local IP address to the server??? */ }
         table++;
     }
