@@ -21,12 +21,6 @@ class ARGBColor final {
 public:
     void* operator new(std::size_t) = delete;
     bool operator==(const ARGBColor& other) { return color == other.color; }
-    ARGBColor(CSSColorParser::Color value) {
-        color = (static_cast<uint32_t>((value.a * 255.0) + 0.5) << 24) +
-            (value.r << 16) +
-            (value.g << 8) +
-            value.b;
-    }
     constexpr ARGBColor(uint32_t value): color(value) {}
     static std::optional<ARGBColor> Parse(const std::string& str);
     inline uint32_t GetRaw() { return color; }

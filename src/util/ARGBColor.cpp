@@ -5,10 +5,14 @@
 
 std::optional<ARGBColor> ARGBColor::Parse(const std::string& str)
 {
-    std::optional<CSSColorParser::Color> color = CSSColorParser::parse(str);
+    std::optional<CSSColorParser::Color> c = CSSColorParser::parse(str);
 
-    if (color) {
-        return ARGBColor(*color);
+    if (c) {
+        uint32_t value = (static_cast<uint32_t>(((*c).a * 255.0) + 0.5) << 24) +
+            ((*c).r << 16) +
+            ((*c).g << 8) +
+            (*c).b;
+        return ARGBColor(value);
     }
 
     std::string tmp = str;
