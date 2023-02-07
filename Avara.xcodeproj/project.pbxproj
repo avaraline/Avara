@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
 		E5890B8D29895078007A875D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5890B8A29895078007A875D /* Assets.xcassets */; };
 		E5890C9E29895118007A875D /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
 		E5890C9F29895118007A875D /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
@@ -181,6 +182,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E20A3C552991CC72005741F7 /* KeyFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFuncs.cpp; sourceTree = "<group>"; };
 		E5890B2429894DB3007A875D /* Avara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5890B8A29895078007A875D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5890B9129895118007A875D /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
@@ -956,6 +958,7 @@
 		E5890BCC29895118007A875D /* game */ = {
 			isa = PBXGroup;
 			children = (
+				E20A3C552991CC72005741F7 /* KeyFuncs.cpp */,
 				E5890C0429895118007A875D /* AvaraDefines.h */,
 				E5890C0A29895118007A875D /* AvaraScoreInterface.h */,
 				E5890BDE29895118007A875D /* AvaraTypes.h */,
@@ -1833,6 +1836,7 @@
 				E5890CAE29895118007A875D /* Debug.cpp in Sources */,
 				E5890F3829895124007A875D /* glm.cpp in Sources */,
 				E5890CCC29895118007A875D /* CAvaraApp.cpp in Sources */,
+				E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */,
 				E5890C9E29895118007A875D /* Memory.cpp in Sources */,
 				E5890F0629895124007A875D /* popupbutton.cpp in Sources */,
 				E5890EFD29895124007A875D /* progressbar.cpp in Sources */,
