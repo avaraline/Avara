@@ -16,7 +16,7 @@ void CLogicTimer::BeginScript() {
 
 CAbstractActor *CLogicTimer::EndScript() {
     if (CLogic::EndScript()) {
-        theDelay = ReadLongVar(iTimer);
+        theDelay = FrameNumber(ReadLongVar(iTimer));
 
         if (theDelay)
             return this;

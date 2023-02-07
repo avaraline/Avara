@@ -47,8 +47,8 @@ CAbstractActor *CRealShooters::EndScript() {
         visionRange = ReadFixedVar(iRange);
         shotPower = ReadFixedVar(iShotPower);
         burstLength = ReadLongVar(iBurstLength);
-        burstSpeed = ReadLongVar(iBurstSpeed);
-        burstCharge = ReadLongVar(iBurstCharge);
+        burstSpeed = FrameNumber(ReadLongVar(iBurstSpeed));
+        burstCharge = FrameNumber(ReadLongVar(iBurstCharge));
 
         watchTeams = ReadLongVar(iMask);
         watchMask = ReadLongVar(iWatchMask);

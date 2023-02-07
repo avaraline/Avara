@@ -106,7 +106,7 @@ tokentype CStringDictionary::AddDictEntry(const char *entry, short len) {
         s.append(entry);
     }
 
-    unsigned int idx = wordList.size();
+    auto idx = wordList.size();
     wordList.push_back(s);
     index.insert(std::pair<std::string, size_t>(s, idx));
     return idx;

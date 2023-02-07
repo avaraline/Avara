@@ -80,8 +80,8 @@ typedef struct {
     long maxPlayers; //	ksiInit sets this. (current default is 6)
     long maxTeams; //	ksiInit sets this. (current default is 6) Doesn't include neutral team!!
 
-    long frameTime; //	Time for each frame in milliseconds.
-    long frameNumber; //	Number of current frame (starts at 0)
+    FrameTime frameTime; //	Time for each frame in milliseconds.
+    FrameNumber frameNumber; //	Number of current frame (starts at 0)
 
     /*
     **	The results are stored in a text handle called resultsHandle.
@@ -131,7 +131,7 @@ typedef struct {
     long playerTeam; //	From -1 to 5 (0 to 5 are players. Unless Avara is changed!)
     long playerLives; //	Not valid when playerID == -1 (computer)
     StringPtr playerName; //	Player name, when appropriate
-    long winFrame; //	Frame at which player exited (won) or -1.
+    FrameNumber winFrame; //	Frame at which player exited (won) or -1.
 
     /*
     **	The following are only valid for ksiScore calls:

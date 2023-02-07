@@ -1399,7 +1399,7 @@ void CAbstractPlayer::ResumeLevel() {
 
 extern Fixed sliverGravity;
 
-#define INTERPTIME FpsFramesPerClassic(20)
+#define INTERPTIME Fixed(FpsFramesPerClassic(20))
 
 void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     short count = 16;
@@ -1468,7 +1468,7 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
 }
 
 void CAbstractPlayer::WinAction() {
-    long interFrame;
+    Fixed interFrame;
     Fixed inter2;
 
     interFrame = itsGame->frameNumber - winFrame;

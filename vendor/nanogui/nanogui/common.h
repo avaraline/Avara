@@ -388,18 +388,6 @@ extern NANOGUI_EXPORT void shutdown();
  *     once every ``refresh`` milliseconds. To disable the refresh timer,
  *     specify a negative value here.
  *
- * \param detach
- *     This parameter only exists in the Python bindings. When the active
- *     \c Screen instance is provided via the \c detach parameter, the
- *     ``mainloop()`` function becomes non-blocking and returns
- *     immediately (in this case, the main loop runs in parallel on a newly
- *     created thread). This feature is convenient for prototyping user
- *     interfaces on an interactive Python command prompt. When
- *     ``detach != None``, the function returns an opaque handle that
- *     will release any resources allocated by the created thread when the
- *     handle's ``join()`` method is invoked (or when it is garbage
- *     collected).
- *
  * \remark
  *     Unfortunately, Mac OS X strictly requires all event processing to take
  *     place on the application's main thread, which is fundamentally

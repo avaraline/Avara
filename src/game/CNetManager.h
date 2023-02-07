@@ -103,7 +103,7 @@ public:
     long localLatencyVote;
     long autoLatencyVote;
     long autoLatencyVoteCount;
-    long latencyVoteFrame;
+    FrameNumber latencyVoteFrame;
     short maxRoundTripLatency;
     short addOneLatency;
     long subtractOneCheck;
@@ -178,7 +178,7 @@ public:
     virtual void ResumeGame();
     virtual void FrameAction();
     virtual void HandleEvent(SDL_Event &event);
-    virtual void AutoLatencyControl(long frameNumber, Boolean didWait);
+    virtual void AutoLatencyControl(FrameNumber frameNumber, Boolean didWait);
     virtual bool IsAutoLatencyEnabled();
     virtual bool IsFragmentCheckWindowOpen();
     virtual void ResetLatencyVote();

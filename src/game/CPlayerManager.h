@@ -170,7 +170,7 @@ private:
     unsigned char message[kMaxMessageChars + 1];
     std::deque<char> lineBuffer;
 
-    long winFrame;
+    FrameNumber winFrame;
     short loadingStatus;
     short slot;
     short playerColor;

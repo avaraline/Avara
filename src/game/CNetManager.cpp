@@ -718,7 +718,7 @@ void CNetManager::FrameAction() {
     }
 }
 
-void CNetManager::AutoLatencyControl(long frameNumber, Boolean didWait) {
+void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
     if (didWait) {
         localLatencyVote++;
     }
@@ -1348,7 +1348,7 @@ void CNetManager::ChangedServerOptions(short curOptions) {
 }
 
 void CNetManager::NewArrival(short slot) {
-    CPlayerManager *thePlayer = playerTable[slot];
+    //CPlayerManager *thePlayer = playerTable[slot];
     itsGame->itsApp->NotifyUser();
     SDL_Log("someone has joined in slot #%d\n", slot+1);
     itsGame->scoreKeeper->PlayerJoined();

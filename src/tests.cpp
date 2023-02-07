@@ -131,8 +131,8 @@ public:
     virtual void RenderContents() {};
     virtual void DrawUserInfoPart(short i, short partList) {}
     virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) {}
-    virtual void StartFrame(long frameNum) {}
-    virtual void BrightBox(long frameNum, short position) {}
+    virtual void StartFrame(FrameNumber frameNum) {}
+    virtual void BrightBox(FrameNumber frameNum, short position) {}
     virtual void LevelReset() {}
     virtual long Number(const std::string name) { return 0; }
     virtual bool Boolean(const std::string name) { return false; }

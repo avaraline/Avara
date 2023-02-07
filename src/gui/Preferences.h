@@ -49,6 +49,9 @@ using json = nlohmann::json;
 #define kTrackerRegisterAddress "trackerRegisterAddress"
 #define kTrackerRegisterFrequency "trackerRegisterFrequency"
 #define kTrackerAddress "trackerAddress"
+#define kPunchServerAddress "udpPunchServerAddress"
+#define kPunchServerPort "udpPunchServerPort"
+#define kPunchHoles "udpHolePunch"
 
 // Levels
 #define kRecentSets "recentSets"
@@ -114,6 +117,9 @@ static json defaultPrefs = {
     {kTrackerRegister, 1},
     {kTrackerRegisterAddress, "avara.io"},
     {kTrackerRegisterFrequency, 5},
+    {kPunchServerAddress, "avara.io"},
+    {kPunchServerPort, 19555},
+    {kPunchHoles, true},
     {kRecentSets, {}},
     {kRecentLevels, {}},
     {kSoundVolume, 100},
@@ -129,7 +135,7 @@ static std::string PrefPath() {
     return jsonPath;
 }
 
-static json ReadPrefs() {
+static inline json ReadPrefs() {
     json prefs;
     std::ifstream in(PrefPath());
 
@@ -157,7 +163,7 @@ static json ReadPrefs() {
     return prefs;
 }
 
-static void WritePrefs(json prefs) {
+static inline void WritePrefs(json prefs) {
     try {
         std::ostringstream oss;
         oss << std::setw(4) << prefs << std::endl;
