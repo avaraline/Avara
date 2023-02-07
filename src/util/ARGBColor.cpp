@@ -1,7 +1,9 @@
 #include <assert.h>
+#include <regex>
 
 #include "ARGBColor.h"
 #include "ColorManager.h"
+#include "csscolorparser.hpp"
 
 std::optional<ARGBColor> ARGBColor::Parse(const std::string& str)
 {
