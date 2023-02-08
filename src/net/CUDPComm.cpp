@@ -635,7 +635,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
 
 void CUDPComm::ReadComplete(UDPpacket *packet) {
     if (packet) { //	We actually received some data...let's put it into packets.
-        long curTime;
+        ClockTick curTime;
         UDPPacketInfo *thePacket;
         charWordLongP inData;
         char *inEnd;
@@ -831,7 +831,7 @@ Boolean CUDPComm::AsyncWrite() {
     CUDPConnection *theConnection;
     CUDPConnection *firstSender;
     UDPPacketInfo *thePacket = NULL;
-    long curTime = GetClock();
+    ClockTick curTime = GetClock();
     long deltaQuotas[kNumConnectionTypes];
     long delta, acc;
     short i;
@@ -1119,7 +1119,7 @@ Boolean CUDPComm::AsyncWrite() {
     return result;
 }
 
-int32_t CUDPComm::GetClock() {
+ClockTick CUDPComm::GetClock() {
     // Apparently this clock is about 240/second?
     // Upon further investigation, the original code,
     // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);
@@ -1135,7 +1135,7 @@ int32_t CUDPComm::GetClock() {
 **	more urgent data. If not, any data marked urgent will be resent even if there
 **	no other data to send within twice that period.
 */
-void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, long urgentTimePeriod) {
+void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod) {
     ICommManager(bufferCount);
 
     inviteString[0] = 0;

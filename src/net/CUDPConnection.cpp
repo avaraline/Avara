@@ -427,7 +427,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
 
             // don't let the retransmit times fall below urgentResendTime (LT =~ 2) or go above kMaxAllowedRetransmitTime
             retransmitTime = std::max(retransmitTime, itsOwner->urgentResendTime);
-            retransmitTime = std::min(retransmitTime, (long)kMaxAllowedRetransmitTime);
+            retransmitTime = std::min(retransmitTime, kMaxAllowedRetransmitTime);
 
             // If we want the game to stay smooth, resend urgent/game packets with the goal that both the orignal packet and
             // the 1st resend packet could arrive before they need to be acted on.
@@ -442,7 +442,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
                 2*gCurrentGame->latencyTolerance * CLASSICFRAMECLOCK - meanRoundTripTime - RESEND_PACKET_BUFFER;
             // make sure it doesn't go below urgentResendTime or above retransmitTime
             urgentRetransmitTime = std::max(urgentRetransmitTime, itsOwner->urgentResendTime);
-            urgentRetransmitTime = std::min(urgentRetransmitTime, (long)retransmitTime);
+            urgentRetransmitTime = std::min(urgentRetransmitTime, retransmitTime);
 
             #if PACKET_DEBUG || LATENCY_DEBUG
                 SDL_Log("                               cn=%d cmd=%d roundTrip=%ld mean=%.1f std = %.1f retransmitTime=%ld urgentRetransmit=%ld\n",

@@ -33,6 +33,8 @@ typedef int32_t FrameTime;   // 64,32,16(default),8
 typedef uint32_t ip_addr;
 typedef uint16_t port_num;
 
+typedef int32_t ClockTick;   // integer counter returned by UDPComm::GetClock()
+
 struct Rect {
     int16_t top;
     int16_t left;

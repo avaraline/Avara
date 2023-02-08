@@ -76,10 +76,10 @@ public:
     SerialNumber maxValid;
 
     Boolean haveToSendAck;
-    long nextAckTime;
-    long nextWriteTime;
+    ClockTick nextAckTime;
+    ClockTick nextWriteTime;
 
-    int32_t validTime;
+    ClockTick validTime;
 
     float meanRoundTripTime;
     float varRoundTripTime;
@@ -87,8 +87,8 @@ public:
     float meanReceiveCount;
     SlidingHistogram<float>* latencyHistogram;
 
-    long retransmitTime;
-    long urgentRetransmitTime;
+    ClockTick retransmitTime;
+    ClockTick urgentRetransmitTime;
 
     long quota;
     short cramData;
