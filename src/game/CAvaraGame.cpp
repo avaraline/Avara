@@ -806,6 +806,8 @@ void CAvaraGame::GameStart() {
 
     // HideCursor();
     // FlushEvents(everyEvent, 0);
+
+    nanogui::pollEvents = itsApp->Boolean(kPollEvents);
 }
 
 // Run when the game is paused or aborted
@@ -831,6 +833,8 @@ void CAvaraGame::GameStop() {
     scoreKeeper->StopPause(gameStatus == kPauseStatus);
 
     itsNet->UngatherPlayers();
+    
+    nanogui::pollEvents = false;
 }
 
 void CAvaraGame::HandleEvent(SDL_Event &event) {
