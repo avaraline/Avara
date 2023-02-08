@@ -545,15 +545,6 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
     return newConn;
 }
 
-void LogConnectionsTable(const char* prefix, CompleteAddress* table) {
-    // zero index reserved for server
-    for (int i = 1; i < kMaxAvaraPlayers; i++) {
-        // IPaddress and CompleteAddress are basically the same structure, should consolidate
-        SDL_Log("%s%d\t%s\n", prefix, i, FormatAddr(*(IPaddress*)table).c_str());
-        table++;
-    }
-}
-
 void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     // SDL_Log("CUDPComm::ReadFromTOC\n");
     CompleteAddress *table;
