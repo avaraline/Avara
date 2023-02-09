@@ -805,7 +805,9 @@ void CAvaraGame::GameStart() {
     // HideCursor();
     // FlushEvents(everyEvent, 0);
 
-    nanogui::pollEvents = itsApp->Boolean(kPollEvents);
+    // change the event processing time during the game (0 = poll)
+    nanogui::eventTimeout = itsApp->Get(kEventTimeout);
+    SDL_Log("CAvaraGame::GameStart, eventTimeout = %d\n", nanogui::eventTimeout);
 }
 
 // Run when the game is paused or aborted
@@ -831,8 +833,10 @@ void CAvaraGame::GameStop() {
     scoreKeeper->StopPause(gameStatus == kPauseStatus);
 
     itsNet->UngatherPlayers();
-    
-    nanogui::pollEvents = false;
+
+    // event wait timeout used by mainloop()
+    nanogui::eventTimeout = INACTIVE_EVENT_TIMEOUT;
+    SDL_Log("CAvaraGame::GameStop, eventTimeout = %d\n", nanogui::eventTimeout);
 }
 
 void CAvaraGame::HandleEvent(SDL_Event &event) {

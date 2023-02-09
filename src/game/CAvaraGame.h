@@ -41,6 +41,8 @@
 #define kFootStepToggle 16
 #define kMusicToggle 32
 
+#define INACTIVE_EVENT_TIMEOUT 16
+
 enum { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
 
 class CAbstractActor;
