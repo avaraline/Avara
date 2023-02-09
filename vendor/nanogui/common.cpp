@@ -71,7 +71,7 @@ void mainloop(int refresh) {
 
     mainloop_active = true;
 
-#define MAINLOOP_STATS
+// #define MAINLOOP_STATS
 #ifdef MAINLOOP_STATS
     uint32_t stat_start = SDL_GetTicks();  // for debugging, probably delete this
     uint32_t total_wait_time = 0;
