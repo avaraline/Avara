@@ -103,10 +103,8 @@ void mainloop(int refresh) {
             }
             /* Wait for mouse/keyboard or empty refresh events */
             auto now = SDL_GetTicks64();
-            while(last_frame + refresh > now) { 
-                SDL_Delay(1);
-                now = SDL_GetTicks64(); 
-            }
+            auto next = last_frame + refresh;
+            if(next > now) SDL_Delay(next - now);
         }
 
         /* Process events once more */
