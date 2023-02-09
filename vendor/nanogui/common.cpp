@@ -92,8 +92,8 @@ void mainloop(int refresh) {
                 break;
             }
 
-            int result = SDL_PollEvent(&theEvent);
-            if(result) {
+            int result;
+            while((result = SDL_PollEvent(&theEvent))) {
                 if (theEvent.type == SDL_QUIT) {
                     mainloop_active = false;
                 }
@@ -101,7 +101,7 @@ void mainloop(int refresh) {
                     screen->handleSDLEvent(theEvent);
                 }
             }
-            /* Wait for mouse/keyboard or empty refresh events */
+            /* If there's still time, wait for the next refresh interval */
             auto now = SDL_GetTicks64();
             auto next = last_frame + refresh;
             if(next > now) SDL_Delay(next - now);
