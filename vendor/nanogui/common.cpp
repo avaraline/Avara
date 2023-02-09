@@ -63,6 +63,7 @@ void init() {
 }
 
 static bool mainloop_active = false;
+uint64_t last_frame = 0;
 bool pollEvents = false;
 
 void mainloop(int refresh) {
@@ -90,9 +91,12 @@ void mainloop(int refresh) {
                 mainloop_active = false;
                 break;
             }
-
             /* Wait for mouse/keyboard or empty refresh events */
-            int result = pollEvents ? SDL_PollEvent(&theEvent) : SDL_WaitEventTimeout(&theEvent, refresh);
+            auto now = SDL_GetTicks64();
+            while(last_frame + refresh > now) { now = SDL_GetTicks64(); }
+            last_frame = now;
+            
+            int result = SDL_PollEvent(&theEvent);
             if(result) {
                 if (theEvent.type == SDL_QUIT) {
                     mainloop_active = false;
