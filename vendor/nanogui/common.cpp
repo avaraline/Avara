@@ -64,7 +64,6 @@ void init() {
 
 static bool mainloop_active = false;
 uint64_t last_frame = 0;
-bool pollEvents = false;
 
 void mainloop(int refresh) {
     if (mainloop_active)
@@ -76,6 +75,7 @@ void mainloop(int refresh) {
         SDL_Event theEvent;
 
         while (mainloop_active) {
+            last_frame = SDL_GetTicks64();
             int numScreens = 0;
             for(auto screen : __nanogui_screens) {
                 if (!screen->visible()) {
@@ -91,11 +91,7 @@ void mainloop(int refresh) {
                 mainloop_active = false;
                 break;
             }
-            /* Wait for mouse/keyboard or empty refresh events */
-            auto now = SDL_GetTicks64();
-            while(last_frame + refresh > now) { now = SDL_GetTicks64(); }
-            last_frame = now;
-            
+
             int result = SDL_PollEvent(&theEvent);
             if(result) {
                 if (theEvent.type == SDL_QUIT) {
@@ -105,6 +101,9 @@ void mainloop(int refresh) {
                     screen->handleSDLEvent(theEvent);
                 }
             }
+            /* Wait for mouse/keyboard or empty refresh events */
+            auto now = SDL_GetTicks64();
+            while(last_frame + refresh > now) { now = SDL_GetTicks64(); }
         }
 
         /* Process events once more */
