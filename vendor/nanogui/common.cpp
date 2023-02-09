@@ -71,16 +71,18 @@ void mainloop(int refresh) {
 
     mainloop_active = true;
 
-// #define MAINLOOP_STATS
+#define MAINLOOP_STATS
 #ifdef MAINLOOP_STATS
     uint32_t stat_start = SDL_GetTicks();  // for debugging, probably delete this
     uint32_t total_wait_time = 0;
+    uint32_t max_wait_time = 0;
+    SDL_Log("-----------------mainloop(%d)\n", refresh);
 #endif
     //try {
         SDL_Event theEvent;
 
         while (mainloop_active) {
-            next_frame = SDL_GetTicks() + refresh;
+            next_frame = SDL_GetTicks() + refresh - 1;
             int numScreens = 0;
             for(auto screen : __nanogui_screens) {
                 if (!screen->visible()) {
@@ -118,14 +120,20 @@ void mainloop(int refresh) {
             }
 #ifdef MAINLOOP_STATS
             uint32_t wait_end = SDL_GetTicks();
-            total_wait_time += (wait_end - wait_begin);
+            uint32_t wait_time = (wait_end - wait_begin);
+            //            SDL_Log("loop wait time = %d\n", wait_time);
+            total_wait_time += wait_time;
+            if (wait_time > max_wait_time) {
+                max_wait_time = wait_time;
+            }
 
             // spit out stats every 3 seconds
             if (wait_end - stat_start >= 3000) {
-                SDL_Log("Total time in wait_loop / main_loop = %d / %d = %.1f%%\n",
-                        total_wait_time, wait_end - stat_start, (100.0*total_wait_time)/(wait_end - stat_start));
+                SDL_Log("Max wait time = %d, Total time in wait_loop / main_loop = %d / %d = %.1f%%\n",
+                        max_wait_time, total_wait_time, wait_end - stat_start, (100.0*total_wait_time)/(wait_end - stat_start));
                 stat_start = wait_end;
                 total_wait_time = 0;
+                max_wait_time = 0;
             }
 #endif
         }
