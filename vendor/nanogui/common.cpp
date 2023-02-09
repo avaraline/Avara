@@ -63,7 +63,7 @@ void init() {
 }
 
 static bool mainloop_active = false;
-uint64_t last_frame = 0;
+uint64_t next_frame = 0;
 
 void mainloop(int refresh) {
     if (mainloop_active)
@@ -75,7 +75,7 @@ void mainloop(int refresh) {
         SDL_Event theEvent;
 
         while (mainloop_active) {
-            last_frame = SDL_GetTicks64();
+            next_frame = SDL_GetTicks64() + refresh;
             int numScreens = 0;
             for(auto screen : __nanogui_screens) {
                 if (!screen->visible()) {
@@ -103,8 +103,7 @@ void mainloop(int refresh) {
             }
             /* If there's still time, wait for the next refresh interval */
             auto now = SDL_GetTicks64();
-            auto next = last_frame + refresh;
-            while(next > now) {
+            while(next_frame > now) {
                 SDL_Delay(1);
                 SDL_PumpEvents();
                 if (SDL_PeepEvents(0, 1, SDL_PEEKEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT)) break;
