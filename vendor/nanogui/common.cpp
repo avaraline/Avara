@@ -104,7 +104,12 @@ void mainloop(int refresh) {
             /* If there's still time, wait for the next refresh interval */
             auto now = SDL_GetTicks64();
             auto next = last_frame + refresh;
-            if(next > now) SDL_Delay(next - now);
+            while(next > now) {
+                SDL_Delay(1);
+                SDL_PumpEvents();
+                if (SDL_PeepEvents(0, 1, SDL_PEEKEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT)) break;
+                now = SDL_GetTicks64();
+            }
         }
 
         /* Process events once more */
