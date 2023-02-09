@@ -63,7 +63,7 @@ void init() {
 }
 
 static bool mainloop_active = false;
-uint64_t next_frame = 0;
+uint32_t next_frame = 0;
 
 void mainloop(int refresh) {
     if (mainloop_active)
@@ -71,11 +71,16 @@ void mainloop(int refresh) {
 
     mainloop_active = true;
 
+#define MAINLOOP_STATS
+#ifdef MAINLOOP_STATS
+    uint32_t stat_start = SDL_GetTicks();  // for debugging, probably delete this
+    uint32_t total_wait_time = 0;
+#endif
     //try {
         SDL_Event theEvent;
 
         while (mainloop_active) {
-            next_frame = SDL_GetTicks64() + refresh;
+            next_frame = SDL_GetTicks() + refresh;
             int numScreens = 0;
             for(auto screen : __nanogui_screens) {
                 if (!screen->visible()) {
@@ -102,13 +107,27 @@ void mainloop(int refresh) {
                 }
             }
             /* If there's still time, wait for the next refresh interval */
-            auto now = SDL_GetTicks64();
-            while(next_frame > now) {
+#ifdef MAINLOOP_STATS
+            uint32_t wait_begin = SDL_GetTicks();
+#endif
+            // if next_frame rolls over after ~49.7 days, this loop will be skipped for ~refresh msec at that time
+            while(next_frame > SDL_GetTicks()) {
                 SDL_Delay(1);
                 SDL_PumpEvents();
                 if (SDL_PeepEvents(0, 1, SDL_PEEKEVENT, SDL_FIRSTEVENT, SDL_LASTEVENT)) break;
-                now = SDL_GetTicks64();
             }
+#ifdef MAINLOOP_STATS
+            uint32_t wait_end = SDL_GetTicks();
+            total_wait_time += (wait_end - wait_begin);
+
+            // spit out stats every 3 seconds
+            if (wait_end - stat_start >= 3000) {
+                SDL_Log("Total time in wait_loop / main_loop = %d / %d = %.1f%%\n",
+                        total_wait_time, wait_end - stat_start, (100.0*total_wait_time)/(wait_end - stat_start));
+                stat_start = wait_end;
+                total_wait_time = 0;
+            }
+#endif
         }
 
         /* Process events once more */
@@ -337,4 +356,3 @@ void Object::decRef(bool dealloc) const noexcept {
 Object::~Object() { }
 
 NAMESPACE_END(nanogui)
-
