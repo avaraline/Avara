@@ -380,7 +380,7 @@ extern NANOGUI_EXPORT void init();
 extern NANOGUI_EXPORT void shutdown();
 
 /// How long to wait/timeout between events (poll events if <= 0)
-extern int eventTimeout;
+extern int throttle;
 
 /**
  * \brief Enter the application main loop

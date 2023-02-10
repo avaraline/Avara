@@ -63,10 +63,10 @@ void init() {
 }
 
 static bool mainloop_active = false;
-int eventTimeout = 0;
+int throttle = 0;
 
 void mainloop(int refresh) {
-    eventTimeout = refresh;
+    throttle = refresh;
     if (mainloop_active)
         throw std::runtime_error("Main loop is already running!");
 
@@ -93,7 +93,7 @@ void mainloop(int refresh) {
             }
 
             /* Wait for mouse/keyboard or empty refresh events */
-            int result = eventTimeout > 0 ? SDL_WaitEventTimeout(&theEvent, eventTimeout) : SDL_PollEvent(&theEvent);
+            int result = SDL_WaitEventTimeout(&theEvent, throttle);  // uses SDL_PollEvent(&theEvent) when throttle == 0
             if(result) {
                 if (theEvent.type == SDL_QUIT) {
                     mainloop_active = false;
