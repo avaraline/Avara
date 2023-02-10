@@ -113,7 +113,7 @@ void mainloop(int refresh) {
             uint32_t wait_begin = SDL_GetTicks();
 #endif
             // if next_frame rolls over after ~49.7 days, this loop will be skipped for ~refresh msec at that time
-#if HAVE_NANOSLEEP
+#ifndef WIN32
             if (next_frame > SDL_GetTicks()) SDL_Delay(next_frame - SDL_GetTicks());
 #endif
 #ifdef MAINLOOP_STATS
