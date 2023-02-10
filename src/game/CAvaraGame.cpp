@@ -806,7 +806,11 @@ void CAvaraGame::GameStart() {
     // FlushEvents(everyEvent, 0);
 
     // change the event processing time during the game (0 = poll)
+#ifdef _WIN32
+    nanogui::throttle = 0;   // let 'er rip
+#else
     nanogui::throttle = std::min(int(itsApp->Get(kThrottle)), frameTime);
+#endif
     SDL_Log("CAvaraGame::GameStart, throttle = %d\n", nanogui::throttle);
 }
 
