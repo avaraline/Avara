@@ -161,8 +161,8 @@ public:
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
-    virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);
-    virtual void ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json);
+    virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, FrameNumber winFrame);
+    virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
 
     virtual short PlayerCount();
 

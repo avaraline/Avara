@@ -1076,7 +1076,7 @@ CAbstractPlayer *CPlayerManagerImpl::TakeAnyActor(CAbstractPlayer *actorList) {
 
     return nextPlayer;
 }
-void CPlayerManagerImpl::SetPlayerStatus(short newStatus, long theWin) {
+void CPlayerManagerImpl::SetPlayerStatus(short newStatus, FrameNumber theWin) {
     winFrame = theWin;
 
     if (newStatus != loadingStatus) {
@@ -1316,7 +1316,7 @@ long CPlayerManagerImpl::MugSize() {
 long CPlayerManagerImpl::MugState() {
     return mugState;
 }
-long CPlayerManagerImpl::WinFrame() {
+FrameNumber CPlayerManagerImpl::WinFrame() {
     return winFrame;
 }
 void CPlayerManagerImpl::IncrementAskAgainTime(int amt) {

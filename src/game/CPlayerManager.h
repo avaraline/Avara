@@ -80,7 +80,7 @@ public:
     virtual void IsRegistered(short) = 0;
     virtual Str255& PlayerRegName() = 0;
     virtual short LoadingStatus() = 0;
-    virtual void SetPlayerStatus(short newStatus, long theWin) = 0;
+    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
 
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
@@ -120,7 +120,7 @@ public:
     virtual long MugState() = 0;
     virtual void MugSize(long) = 0;
     virtual void MugState(long) = 0;
-    virtual long WinFrame() = 0;
+    virtual FrameNumber WinFrame() = 0;
     virtual void ProtocolHandler(struct PacketInfo *thePacket) = 0;
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
@@ -224,7 +224,7 @@ public:
     virtual void NetDisconnect();
     virtual void ChangeNameAndLocation(StringPtr theName, Point location);
     virtual void SetPosition(short pos);
-    virtual void SetPlayerStatus(short newStatus, long theWin);
+    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin);
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
     virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
@@ -277,7 +277,7 @@ public:
     virtual long MugState();
     virtual void MugSize(long);
     virtual void MugState(long);
-    virtual long WinFrame();
+    virtual FrameNumber WinFrame();
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();

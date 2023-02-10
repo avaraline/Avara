@@ -1035,7 +1035,7 @@ void CNetManager::StopGame(short newStatus) {
     short slot = itsCommManager->myId;
     CPlayerManager *thePlayerManager;
     CAbstractPlayer *thePlayer;
-    long winFrame = 0;
+    FrameNumber winFrame = 0;
 
     SDL_Log("CNetManager::StopGame\n");
     isPlaying = false;
@@ -1077,7 +1077,7 @@ void CNetManager::StopGame(short newStatus) {
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
-void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame) {
+void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, FrameNumber winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         if (randomKey != 0) {
             playerTable[slotId]->RandomKey(randomKey);
@@ -1086,7 +1086,7 @@ void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed rando
     }
 }
 
-void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json){
+void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json){
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         nlohmann::json message = nlohmann::json::parse(json);
         playerTable[slotId]->RandomKey(randomKey);

@@ -33,7 +33,7 @@ CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
     hullBox = new nanogui::ComboBox(this, hullTypes);
     hullBox->setCallback([app](int selectedIdx) { app->Set(kHullTypeTag, selectedIdx); });
     hullBox->popup()->setSize(nanogui::Vector2i(180, 140));
-    hullBox->setSelectedIndex(app->Number(kHullTypeTag));
+    hullBox->setSelectedIndex(app->Get<int>(kHullTypeTag));
 }
 
 CPlayerWindow::~CPlayerWindow() {}
@@ -48,5 +48,5 @@ bool CPlayerWindow::DoCommand(int theCommand) {
 
 void CPlayerWindow::PrefChanged(std::string name) {
     nameBox->setValue(mApplication->String(kPlayerNameTag));
-    hullBox->setSelectedIndex(mApplication->Number(kHullTypeTag));
+    hullBox->setSelectedIndex(mApplication->Get<int>(kHullTypeTag));
 }

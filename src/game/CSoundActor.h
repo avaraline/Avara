@@ -26,7 +26,7 @@ public:
     long phase = 0;
 
     SampleIndex savedPosition[2] = {0};
-    long savedLoopCount[2] = {0};
+    int32_t savedLoopCount[2] = {0};
     Fixed savedBalance = 0;
     Boolean needsResume = false;
 

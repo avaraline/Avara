@@ -150,7 +150,7 @@ public:
     CHUD *hud;
 
     //	Sound related variables:
-    long soundTime;
+    int soundTime;
     short soundOutputStyle; //	Mono, speakers stereo, headphones stereo
     short sound16BitStyle; //	true = try 16 bit, false = 8 bit
     short soundSwitches; //	kAmbientSoundToggle & kTuijaToggle
