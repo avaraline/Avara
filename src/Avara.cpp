@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
     }
 
     // the mainloop should be sufficiently fast so that frames occur near their scheduled time
-    mainloop(app->GetGame()->frameTime / 4);
+    mainloop(app->GetGame()->frameTime / 8);
 
     app->Done();
 
