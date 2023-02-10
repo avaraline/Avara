@@ -807,7 +807,13 @@ void CAvaraGame::GameStart() {
     // HideCursor();
     // FlushEvents(everyEvent, 0);
 
-    nanogui::pollEvents = itsApp->Boolean(kPollEvents);
+    // change the event processing time during the game (0 = poll)
+#ifdef _WIN32
+    nanogui::throttle = 0;   // let 'er rip
+#else
+    nanogui::throttle = std::min(int(itsApp->Get(kThrottle)), frameTime);
+#endif
+    SDL_Log("CAvaraGame::GameStart, throttle = %d\n", nanogui::throttle);
 }
 
 // Run when the game is paused or aborted
@@ -833,8 +839,10 @@ void CAvaraGame::GameStop() {
     scoreKeeper->StopPause(gameStatus == kPauseStatus);
 
     itsNet->UngatherPlayers();
-    
-    nanogui::pollEvents = false;
+
+    // event wait timeout used by mainloop()
+    nanogui::throttle = INACTIVE_LOOP_REFRESH;
+    SDL_Log("CAvaraGame::GameStop, throttle = %d\n", nanogui::throttle);
 }
 
 void CAvaraGame::HandleEvent(SDL_Event &event) {

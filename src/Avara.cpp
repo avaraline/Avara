@@ -106,8 +106,8 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    // the mainloop should be sufficiently fast so that frames occur near their scheduled time
-    mainloop(app->GetGame()->frameTime / 4);
+    // outside of the game, use INACTIVE_LOOP_REFRESH (no need to poll when not playing)
+    mainloop(INACTIVE_LOOP_REFRESH);
 
     app->Done();
 

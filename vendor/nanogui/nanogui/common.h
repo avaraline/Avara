@@ -379,8 +379,8 @@ extern NANOGUI_EXPORT void init();
 /// Static shutdown; should be called before the application terminates.
 extern NANOGUI_EXPORT void shutdown();
 
-/// Whether to poll events (the default is to wait/timeout)
-extern bool pollEvents;
+/// How long to wait/timeout between events (poll events if <= 0)
+extern int throttle;
 
 /**
  * \brief Enter the application main loop
