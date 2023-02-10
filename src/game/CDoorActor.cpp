@@ -193,9 +193,9 @@ CAbstractActor *CDoorActor::EndScript() {
         action = kDoorStopped;
         isActive = kIsActive;
 
-        classicOpenDelay = ReadLongVar(iOpenDelay);
-        classicCloseDelay = ReadLongVar(iCloseDelay);
-        classicGuardDelay = ReadLongVar(iGuardDelay);
+        classicOpenDelay = FrameNumber(ReadLongVar(iOpenDelay));
+        classicCloseDelay = FrameNumber(ReadLongVar(iCloseDelay));
+        classicGuardDelay = FrameNumber(ReadLongVar(iGuardDelay));
         classicOpenSpeed = ReadFixedVar(iOpenSpeed);
         classicCloseSpeed = ReadFixedVar(iCloseSpeed);
     }
