@@ -198,7 +198,7 @@ public:
     virtual short GetActorScoringId();
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
 
-    virtual void GoLimbo(long limboDelay);
+    virtual void GoLimbo(FrameNumber limboDelay);
     virtual void Reincarnate();
     virtual bool ReincarnateComplete(CIncarnator *newSpot);
     virtual void IncarnateSound();

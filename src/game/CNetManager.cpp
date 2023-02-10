@@ -319,7 +319,7 @@ void CNetManager::FlushMessageBuffer() {
     }
 }
 
-void CNetManager::BufferMessage(short len, char *c) {
+void CNetManager::BufferMessage(size_t len, char *c) {
     if (len) {
         lastMsgTick = TickCount();
         if (msgBuffer.size() == 0) {
@@ -337,7 +337,7 @@ void CNetManager::BufferMessage(short len, char *c) {
     }
 }
 
-void CNetManager::SendRosterMessage(short len, char *c) {
+void CNetManager::SendRosterMessage(size_t len, char *c) {
     if (len > kMaxChatMessageBufferLen) {
         FlushMessageBuffer();
         itsCommManager->SendPacket(kdEveryone, kpRosterMessage, 0, 0, 0, len, c);
@@ -783,7 +783,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 // but addOneLatency helps account for deficiencies in the calculation by measuring how often clients had to wait too long for packets to arrive
                 short maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
+                SDL_Log("*** fn=%d RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
                         frameNumber, maxRoundTripLatency,
                         (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, maxFrameLatency);
 
@@ -1072,7 +1072,7 @@ void CNetManager::StopGame(short newStatus) {
     }
 
     itsCommManager->SendPacket(
-        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
+        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(winFrame), (Ptr)&winFrame);
 
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
@@ -1167,10 +1167,10 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
                 }
 
                 if (thePlayerMan->GetPlayer() == NULL && slot == itsCommManager->myId) {
-                    long noWin = -1;
+                    FrameNumber noWin = -1;
 
                     itsCommManager->SendPacket(
-                        kdEveryone, kpPlayerStatusChange, slot, kLNoVehicle, 0, sizeof(long), (Ptr)&noWin);
+                        kdEveryone, kpPlayerStatusChange, slot, kLNoVehicle, 0, sizeof(noWin), (Ptr)&noWin);
                 }
             }
         }

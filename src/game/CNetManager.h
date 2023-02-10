@@ -138,8 +138,8 @@ public:
     virtual void PositionsChanged(char *p);
 
     virtual void FlushMessageBuffer();
-    virtual void BufferMessage(short len, char *c);
-    virtual void SendRosterMessage(short len, char *c);
+    virtual void BufferMessage(size_t len, char *c);
+    virtual void SendRosterMessage(size_t len, char *c);
     virtual void ReceiveRosterMessage(short slotId, short len, char *c);
     virtual void SendColorChange();
     virtual void ReceiveColorChange(char *newColors);

@@ -1027,7 +1027,7 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
 
             // See if there are other messages that could be sent in this packet payload
-            udp->len = outData.c - (char *)udp->data;
+            udp->len = static_cast<uint32_t>(outData.c - (char *)udp->data);
             if (udp->len < CRAMPACKSIZE && udp->len < theConnection->quota) {
                 thePacket = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
             } else {
@@ -1051,7 +1051,7 @@ Boolean CUDPComm::AsyncWrite() {
             SDL_Log("     transmitting packet(s) to %s\n", FormatAddr(udp->address).c_str());
         #endif
 
-        udp->len = outData.c - (char *)udp->data;
+        udp->len = static_cast<uint32_t>(outData.c - (char *)udp->data);
 
         *versionCheck = CRC16(udp->data, udp->len);
         // SDL_Log("... len=%d, CRC=0x%04x\n", udp->len, *versionCheck);
@@ -1363,12 +1363,12 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
         // Before we "connect", notify the punch server so it can tell the host to open a hole to us
         RequestPunch(serverAddr);
 
-        seed = TickCount();
+        seed = static_cast<int32_t>(TickCount());
         connections->myId = 0;
         connections->port = serverAddr.port;
         connections->ipAddr = serverAddr.host;
 
-        SDL_Log("Connecting to %s (seed=%ld) from port %d\n", FormatAddr(connections).c_str(), seed, localPort);
+        SDL_Log("Connecting to %s (seed=%d) from port %d\n", FormatAddr(connections).c_str(), seed, localPort);
 
         AsyncRead();
         SendPacket(kdServerOnly, kpPacketProtocolLogin, 0, 0, seed, password[0] + 1, (Ptr)password);

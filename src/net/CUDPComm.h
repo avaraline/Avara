@@ -32,7 +32,7 @@ enum { udpCramInfo }; //	Selectors for kpPacketProtocolControl packer p1 params.
 
 class CUDPComm : public CCommManager {
 public:
-    long seed;
+    int32_t seed;
     short softwareVersion;
     short maxClients;
     short clientLimit;

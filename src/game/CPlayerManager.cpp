@@ -405,7 +405,7 @@ void CPlayerManagerImpl::SendFrame() {
     // next->ft.held = ff->ft.held;
 }
 
-void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short commandCode) {
+void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, short commandCode) {
     CCommManager *theComm;
     PacketInfo *outPacket;
     FrameFunction *ff;

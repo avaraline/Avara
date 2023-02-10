@@ -221,7 +221,9 @@ void CWalkerActor::AvoidBumping() {
                         legPhase = phaseUndo;
                         break;
                     }
+#ifdef TESTIT
                     undoStep++;
+#endif
 
                 case undoTurn:
                     // FPS_DEBUG("AvoidBumping: undoTurn\n");

@@ -64,7 +64,7 @@ public:
 
     QHdr queues[kQueueCount];
 
-    long seed;
+    int32_t seed;
 
     ip_addr ipAddr;
     port_num port;

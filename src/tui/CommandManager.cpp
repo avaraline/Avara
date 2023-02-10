@@ -235,9 +235,9 @@ bool CommandManager::ToggleAwayState(VectorOfArgs vargs) {
     }
 
     short newStatus = (playerToChange->LoadingStatus() == kLAway) ? kLConnected : kLAway;
-    long noWinFrame = -1;
+    FrameNumber noWinFrame = -1;
     itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange,
-                                        playerToChange->Slot(), newStatus, 0, sizeof(long), (Ptr)&noWinFrame);
+                                        playerToChange->Slot(), newStatus, 0, sizeof(noWinFrame), (Ptr)&noWinFrame);
     itsApp->AddMessageLine("Status of " + playerToChange->GetPlayerName() +
                    " changed to " + std::string(newStatus == kLConnected ? "available" : "away"));
     return true;

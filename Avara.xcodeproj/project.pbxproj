@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
 		94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
+		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
+		E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */; };
 		E5890B8D29895078007A875D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5890B8A29895078007A875D /* Assets.xcassets */; };
 		E5890C9E29895118007A875D /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
 		E5890C9F29895118007A875D /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
@@ -183,9 +184,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E20A3C552991CC72005741F7 /* KeyFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFuncs.cpp; sourceTree = "<group>"; };
 		94F17DDB2991FACE001F5950 /* ARGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGBColor.h; sourceTree = "<group>"; };
 		94F17DDC29920D90001F5950 /* ARGBColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ARGBColor.cpp; sourceTree = "<group>"; };
+		E20A3C552991CC72005741F7 /* KeyFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFuncs.cpp; sourceTree = "<group>"; };
+		E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PascalStrings.cpp; sourceTree = "<group>"; };
 		E5890B2429894DB3007A875D /* Avara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5890B8A29895078007A875D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5890B9129895118007A875D /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
@@ -922,6 +924,7 @@
 				E5890BAF29895118007A875D /* FastMat.h */,
 				E5890BAE29895118007A875D /* GitVersion.h */,
 				E5890BB429895118007A875D /* huffman */,
+				E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */,
 				E5890BC529895118007A875D /* PascalStrings.h */,
 				E5890BC129895118007A875D /* RamFiles.cpp */,
 				E5890BAD29895118007A875D /* RamFiles.h */,
@@ -1798,6 +1801,7 @@
 				E5890CAC29895118007A875D /* CHandlePipe.cpp in Sources */,
 				E5890CC729895118007A875D /* LinkLoose.cpp in Sources */,
 				E5890F0329895124007A875D /* textbox.cpp in Sources */,
+				E5253ED92996DD2200F8C1E8 /* PascalStrings.cpp in Sources */,
 				E5890CE129895118007A875D /* CAbstractMovers.cpp in Sources */,
 				E5890EF529895124007A875D /* window.cpp in Sources */,
 				E5890CB229895118007A875D /* CommandManager.cpp in Sources */,

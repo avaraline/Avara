@@ -1179,7 +1179,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
 }
 
-void CAbstractPlayer::GoLimbo(long limboDelay) {
+void CAbstractPlayer::GoLimbo(FrameNumber limboDelay) {
     CSmartPart **thePart;
 
     if (boostControlLink) {

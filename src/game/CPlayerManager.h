@@ -111,7 +111,7 @@ public:
     virtual CAbstractPlayer *TakeAnyActor(CAbstractPlayer *actorList) = 0;
     virtual short PlayerColor() = 0;
     virtual Boolean IncarnateInAnyColor() = 0;
-    virtual void ResendFrame(long theFrame, short requesterId, short commandCode) = 0;
+    virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode) = 0;
     virtual void SpecialColorControl() = 0;
     virtual PlayerConfigRecord& TheConfiguration() = 0;
     virtual Handle MugPict() = 0;
@@ -227,7 +227,7 @@ public:
     virtual void SetPlayerStatus(short newStatus, FrameNumber theWin);
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
-    virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
+    virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode);
 
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
 

@@ -19,7 +19,7 @@ public:
     bool handleSDLEvent(SDL_Event &event);
     void SendRosterMessage(std::string& message);
     void SendRosterMessage(const char* message); // arg must be null-terminated
-    void SendRosterMessage(int length, char *message);
+    void SendRosterMessage(size_t length, char *message);
     void NewChatLine(Str255 playerName, std::string message);
     void ChatLineDelete();
 

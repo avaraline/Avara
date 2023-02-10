@@ -129,7 +129,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
         case kpPlayerStatusChange:
             theNet->ReceivePlayerStatus(
-                thePacket->p1, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
+                thePacket->p1, thePacket->p2, thePacket->p3, *(FrameNumber *)thePacket->dataBuffer);
             break;
         case kpJSON:
             theNet->ReceiveJSON(
