@@ -61,7 +61,7 @@ public:
     virtual Str255& PlayerRegName() { return str; }
     virtual short LoadingStatus() { return 0; }
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
-    virtual void SetPlayerStatus(short newStatus, long theWin) {}
+    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin) {}
     virtual bool IsAway() { return false; };
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) {}
     virtual void SetPosition(short pos) {}
@@ -92,7 +92,7 @@ public:
     virtual CAbstractPlayer *TakeAnyActor(CAbstractPlayer *actorList) { return 0; }
     virtual short PlayerColor() { return 0; }
     virtual Boolean IncarnateInAnyColor() { return false; }
-    virtual void ResendFrame(long theFrame, short requesterId, short commandCode) {}
+    virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode) {}
     virtual void SpecialColorControl() {}
     virtual PlayerConfigRecord& TheConfiguration() { return pcr; }
     virtual Handle MugPict() { return 0; }
@@ -101,7 +101,7 @@ public:
     virtual long MugState() { return 0; }
     virtual void MugSize(long) {}
     virtual void MugState(long) {}
-    virtual long WinFrame() { return 0; }
+    virtual FrameNumber WinFrame() { return 0; }
     virtual void ProtocolHandler(struct PacketInfo *thePacket) {}
     virtual void IncrementAskAgainTime(int) {}
     virtual void SetShowScoreboard(bool b) {}
