@@ -1,4 +1,6 @@
 #include "PascalStrings.h"
+#include <limits.h>
+#include <string.h>
 
 
 char *PascalStringtoCString(const unsigned char *p, int len) {
