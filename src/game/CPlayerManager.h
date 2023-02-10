@@ -281,4 +281,6 @@ public:
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
+
+    void PlaybackAndRecord(FunctionTable &ft);
 };

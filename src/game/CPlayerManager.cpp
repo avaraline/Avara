@@ -361,6 +361,9 @@ void CPlayerManagerImpl::SendFrame() {
     ff->ft.mouseDelta.v = mouseY;
     ff->ft.buttonStatus = buttonStatus;
 
+    // if in playback mode, update the FunctionTable right before sending the frame
+    PlaybackAndRecord(ff->ft);
+
     CCommManager *theComm = theNetManager->itsCommManager;
 
     PacketInfo *outPacket = theComm->GetPacket();
@@ -1324,4 +1327,28 @@ void CPlayerManagerImpl::SetShowScoreboard(bool b) {
 }
 bool CPlayerManagerImpl::GetShowScoreboard() {
     return showScoreboard;
+}
+
+void CPlayerManagerImpl::PlaybackAndRecord(FunctionTable &ft) {
+    if (isLocalPlayer && itsGame->keysFromStdin) {
+        FunctionTable replayFt;
+        // de-serialize the FunctionTable from stdin
+        std::cin >> replayFt;
+        // merge the playback FunctionTable in with the actual keyboard entry
+        ft.merge(replayFt);
+    }
+
+    if (isLocalPlayer && itsGame->keysToStdout) {
+        static bool headerWritten = false;
+        if (!headerWritten) {
+            std::cout << "# keysDn  keysUp  keysHeld ms.v ms.h btn\n";
+            headerWritten = true;
+        }
+        // comment out any record that initiates a game pause
+        if (TESTFUNC(kfuPauseGame, ft.down)) {
+            std::cout << "#pause>";
+        }
+        // serialize the FunctionTable to stdout
+        std::cout << ft;
+    }
 }

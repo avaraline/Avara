@@ -555,25 +555,25 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     table = (CompleteAddress *)thePacket->dataBuffer;
     DBG_Log("login", "Received Connection Table ...\n%s", FormatConnectionTable(table).c_str());
 
-    table[myId - 1].host = 0; // don't want to connect to myself
-    table[myId - 1].port = 0;
-    connections->MarkOpenConnections(table);
-    DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
+    CompleteAddress myAddressFromTOC = table[myId - 1];
+    table[myId - 1] = {}; // don't want to connect to myself
 
-    connections->RewriteConnections(table);
-    DBG_Log("login", "After rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+    connections->MarkOpenConnections(table);
+    // DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
+
+    connections->RewriteConnections(table, myAddressFromTOC);
+    DBG_Log("login", "Connection Table after rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
 
     connections->OpenNewConnections(table);
-    DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
+    // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
 
-    // SDL_Log("CUDPComm::PacketHandler command=%d p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->p1,
-    // thePacket->p2, thePacket->p3);
-    // SDL_Log("   CUDPComm::PacketHandler    <<<<  cmd=%d sender=%d  p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->sender,
-    //         thePacket->p1, thePacket->p2, thePacket->p3);
+    // SDL_Log("CUDPComm::PacketHandler <<<<   cmd=%d p1=%d p2=%d p3=%d sndr=%d dist=0x%02hx\n",
+    //         thePacket->command, thePacket->p1, thePacket->p2, thePacket->p3,
+    //         thePacket->sender, thePacket->distribution);
 
     switch (thePacket->command) {
         case kpPacketProtocolReject:
@@ -635,7 +635,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
 
 void CUDPComm::ReadComplete(UDPpacket *packet) {
     if (packet) { //	We actually received some data...let's put it into packets.
-        long curTime;
+        ClockTick curTime;
         UDPPacketInfo *thePacket;
         charWordLongP inData;
         char *inEnd;
@@ -831,7 +831,7 @@ Boolean CUDPComm::AsyncWrite() {
     CUDPConnection *theConnection;
     CUDPConnection *firstSender;
     UDPPacketInfo *thePacket = NULL;
-    long curTime = GetClock();
+    ClockTick curTime = GetClock();
     long deltaQuotas[kNumConnectionTypes];
     long delta, acc;
     short i;
@@ -1119,7 +1119,7 @@ Boolean CUDPComm::AsyncWrite() {
     return result;
 }
 
-int32_t CUDPComm::GetClock() {
+ClockTick CUDPComm::GetClock() {
     // Apparently this clock is about 240/second?
     // Upon further investigation, the original code,
     // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);
@@ -1135,7 +1135,7 @@ int32_t CUDPComm::GetClock() {
 **	more urgent data. If not, any data marked urgent will be resent even if there
 **	no other data to send within twice that period.
 */
-void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, long urgentTimePeriod) {
+void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod) {
     ICommManager(bufferCount);
 
     inviteString[0] = 0;

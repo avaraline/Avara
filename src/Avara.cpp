@@ -74,11 +74,15 @@ int main(int argc, char *argv[]) {
         } else if (arg == "-c" || arg == "--connect") {
             connectAddress = std::string(argv[++i]);
             app->Set(kLastAddress, connectAddress);
-        } else if (arg == "-h" || arg == "--host") {
+        } else if (arg == "-s" || arg == "--serve") {
             host = true;
         } else if (arg == "-f" || arg == "--frametime") {
             uint16_t frameTime = atol(argv[++i]);  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
+        } else if (arg == "-i" || arg == "--keys-from-stdin") {
+            app->GetGame()->SetKeysFromStdin();
+        } else if (arg == "-o" || arg == "--keys-to-stdout") {
+            app->GetGame()->SetKeysToStdout();
         } else if (arg == "--command") {
             textCommand = std::string(argv[++i]);
         } else {
