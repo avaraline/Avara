@@ -102,8 +102,8 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    // outside of the game, use INACTIVE_EVENT_TIMEOUT (no need to poll when not playing)
-    mainloop(INACTIVE_EVENT_TIMEOUT);
+    // outside of the game, use INACTIVE_LOOP_REFRESH (no need to poll when not playing)
+    mainloop(INACTIVE_LOOP_REFRESH);
 
     app->Done();
 

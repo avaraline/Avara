@@ -839,7 +839,7 @@ void CAvaraGame::GameStop() {
     itsNet->UngatherPlayers();
 
     // event wait timeout used by mainloop()
-    nanogui::throttle = INACTIVE_EVENT_TIMEOUT;
+    nanogui::throttle = INACTIVE_LOOP_REFRESH;
     SDL_Log("CAvaraGame::GameStop, throttle = %d\n", nanogui::throttle);
 }
 
