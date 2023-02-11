@@ -12,9 +12,9 @@
 #include "Memory.h"
 
 #define TALKERSTRINGS 1000
-#define PACKETDATABUFFERSIZE 128*8
-#define MINIMUMBUFFERRESERVE 64*8
-#define FRESHALLOCSIZE 64*8
+#define PACKETDATABUFFERSIZE 1024   // need at least sizeof(CompleteAddress) * kMaxAvaraPlayers for TOC message, what about mug shot?
+#define FRESHALLOCSIZE 64*8    // how big of a chunk to allocate when we have less than MINIMUMBUFFERRESERVE left in queue
+#define MINIMUMBUFFERRESERVE FRESHALLOCSIZE/2  // allocate more when we have less than this number of unused items in queue
 
 #pragma pack(1)
 typedef struct PacketInfo {
