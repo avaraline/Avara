@@ -811,7 +811,7 @@ void CAvaraGame::GameStart() {
 #ifdef _WIN32
     nanogui::throttle = 0;   // let 'er rip
 #else
-    nanogui::throttle = std::min(int(itsApp->Get(kThrottle)), frameTime);
+    nanogui::throttle = std::min(static_cast<FrameTime>(itsApp->Number(kThrottle)), frameTime);
 #endif
     SDL_Log("CAvaraGame::GameStart, throttle = %d\n", nanogui::throttle);
 }
