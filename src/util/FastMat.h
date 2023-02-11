@@ -50,7 +50,8 @@ typedef struct {
 #define FIX3(n) ((Fixed)((n)*8192L / 125L))
 /*	FIX results in the integer number as a fixed point number						*/
 #define FIX(n) ((Fixed)((n) * 65536L))
-#define FRound(n) ((Fixed)std::lround((n) * 65536L))
+#define FRound(n) (static_cast<Fixed>(std::lround((n))))   // round float that's in Fixed units
+#define ToFixedRound(n) FRound((n) * FIX1)                 // convert to fixed as float then round
 
 /*	Prototypes for internal routines:												*/
 void VectorMatrixProduct(long n, Vector *vs, Vector *vd, Matrix *m);

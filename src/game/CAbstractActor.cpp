@@ -1200,9 +1200,9 @@ void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
                                      Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed *fpsOffset) {
     if (HandlesFastFPS()) {
         double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale);
-        *fpsCoeff1 = FRound(fps1);
+        *fpsCoeff1 = ToFixedRound(fps1);
         if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
-            *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
+            *fpsCoeff2 = FRound(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
         } else { // 0.999-1.001
             // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsScale
             *fpsCoeff2 = FpsCoefficient2(classicCoeff2);
@@ -1222,7 +1222,7 @@ void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
 //   x[i+1] = x[i] * a
 Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
     if (HandlesFastFPS()) {
-        return FRound(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
+        return ToFixedRound(FpsCoefficient1(ToFloat(classicCoeff1), itsGame->fpsScale));
     } else {
         return classicCoeff1;
     }
@@ -1232,7 +1232,7 @@ Fixed CAbstractActor::FpsCoefficient1(Fixed classicCoeff1) {
 Fixed CAbstractActor::FpsCoefficient2(Fixed classicCoeff2) {
     if (HandlesFastFPS()) {
         // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
-        return std::lround(classicCoeff2 * itsGame->fpsScale);
+        return FRound(classicCoeff2 * itsGame->fpsScale);
     } else {
         return classicCoeff2;
     }
@@ -1271,7 +1271,7 @@ FrameNumber CAbstractActor::FpsFramesPerClassic(FrameNumber classicFrames)
 Fixed CAbstractActor::ClassicCoefficient2(Fixed fpsValue) {
     if (HandlesFastFPS()) {
         // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
-        return std::lround(fpsValue / itsGame->fpsScale);
+        return FRound(fpsValue / itsGame->fpsScale);
     } else {
         return fpsValue;
     }
