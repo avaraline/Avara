@@ -44,7 +44,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     });
 
     setBox = new nanogui::ComboBox(this, levelSets);
-    setBox->setCallback([this, app](int selectedIdx) {
+    setBox->setCallback([this](int selectedIdx) {
         this->SelectSet(selectedIdx);
         levelBox->setSelectedIndex(0);
     });

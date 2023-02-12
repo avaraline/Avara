@@ -38,7 +38,7 @@
 
 typedef short tokentype;
 
-ParserVariables parserVar = {0, 0, 0, 0, 0, 0, 0};
+ParserVariables parserVar = {0, 0, 0, 0, {0}, 0, 0};
 long lastKeyword = 0;
 long lastVariable = 0;
 static short currentLevel = 0;

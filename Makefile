@@ -20,10 +20,10 @@ SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 INCFLAGS := $(addprefix -I, $(SRC_DIRS))
 
 CPPFLAGS := ${CPPFLAGS}
-CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g
+CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g -Wall
 
 ifeq ($(AVARA_WARNINGS), TRUE)
-CPPFLAGS += -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
+CPPFLAGS += -pedantic -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
 CPPFLAGS += -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations
 CPPFLAGS += -Wmissing-include-dirs -Woverloaded-virtual -Wredundant-decls -Wshadow
 CPPFLAGS += -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef
