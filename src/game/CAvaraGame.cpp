@@ -439,7 +439,7 @@ void CAvaraGame::Score(short team, short player, long points, Fixed energy, shor
     lastReason = scoreReason;
 
     if (hitTeam == team) {
-        points = FMul(friendlyHitMultiplier, points);
+        points = LMul(points, friendlyHitMultiplier);
     }
 
     if (player >= 0 && player < kMaxAvaraPlayers) {

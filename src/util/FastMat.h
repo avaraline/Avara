@@ -68,8 +68,9 @@ void MRotateY(Fixed s, Fixed c, Matrix *theMatrix);
 void MRotateZ(Fixed s, Fixed c, Matrix *theMatrix);
 void MTranslate(Fixed xt, Fixed yt, Fixed zt, Matrix *theMatrix);
 
-static inline Fixed FMul(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * (int64_t)b) / (1 << 16)); }
-static inline Fixed _FDiv(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * (1 << 16)) / b); }
+static inline int64_t LMul(int64_t a, Fixed b) { return (int64_t)((a * b) / FIX1); };
+static inline Fixed FMul(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * (int64_t)b) / FIX1); }
+static inline Fixed _FDiv(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * FIX1) / b); }
 static inline Fixed _FMulDiv(Fixed a, Fixed b, Fixed c) { return (Fixed)(((double)a) * b / c); }
 
 // #define FM_CHECK_DIV_BY_ZERO

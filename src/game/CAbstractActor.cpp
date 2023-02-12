@@ -909,7 +909,7 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     // SDL_Log("WasHit: player = %d, shields = %d, hitEnergy = %d\n", theHit->playerId, shields, hitEnergy);
     if (shields < 0 || shields > hitEnergy) {
         itsGame->Score(
-            theHit->team, theHit->playerId, FMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
+            theHit->team, theHit->playerId, LMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
         DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX(1));
         itsGame->FlagMessage(hitMessage);
 
@@ -920,7 +920,7 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
             ScoreInterfaceReasons savedReason;
 
             itsGame->Score(
-                theHit->team, theHit->playerId, FMul(hitScore, shields), shields, teamColor, GetActorScoringId());
+                theHit->team, theHit->playerId, LMul(hitScore, shields), shields, teamColor, GetActorScoringId());
 
             savedReason = itsGame->scoreReason;
             itsGame->scoreReason = ksiKillBonus;

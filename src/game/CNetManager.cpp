@@ -1251,7 +1251,7 @@ void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
                     kpMugShot,
                     0,
                     sendPoint / PACKETDATABUFFERSIZE,
-                    mugSize,
+                    static_cast<int32_t>(mugSize),
                     sendLen,
                     (*myPlayer->MugPict()) + sendPoint);
 
@@ -1292,7 +1292,7 @@ void CNetManager::ReceiveMugShot(short fromPlayer, short seqNumber, long totalLe
 
             nextRequest = thePlayer->MugState() + (kMugShotWindowSize - 1) * PACKETDATABUFFERSIZE;
             if (nextRequest < totalLength) {
-                itsCommManager->SendPacket(1L << fromPlayer, kpGetMugShot, 0, 0, nextRequest, 0, NULL);
+                itsCommManager->SendPacket(1L << fromPlayer, kpGetMugShot, 0, 0, static_cast<int32_t>(nextRequest), 0, NULL);
             }
         }
 
