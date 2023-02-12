@@ -75,6 +75,8 @@ void CCommManager::Dispose() {
         DisposePtr(packetBuffers);
         packetBuffers = nextDispose;
     }
+    DisposeQueue(&freeQ);
+    DisposeQueue(&inQ);
 
     CDirectObject::Dispose();
 }

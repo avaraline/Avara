@@ -9,3 +9,4 @@ uint64_t TickCount();
 
 void Enqueue(QElemPtr qElement, QHdrPtr qHeader);
 OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader);
+bool HasQueue(QHdrPtr qHeader);

@@ -31,7 +31,8 @@ void Enqueue(QElemPtr qElement, QHdrPtr qHeader) {
         std::deque<QElemPtr> newQueue = {qElement};
         gQueues.insert(std::make_pair(qHeader, newQueue));
         qHeader->qHead = qHeader->qTail = qElement;
-        // SDL_Log("  - inserting\n");
+        SDL_Log("gQueues has %ld elements\n", gQueues.size());
+        SDL_Log("  - inserting into gQueues with key %lx\n", qHeader);
     }
     // New element has no next link
     qElement->qLink = NULL;
@@ -64,3 +65,4 @@ OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader) {
     }
     return qErr;
 }
+    SDL_Log("DisposeQueues: gQueues now has %ld elements\n", gQueues.size());

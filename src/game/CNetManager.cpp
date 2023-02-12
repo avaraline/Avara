@@ -616,9 +616,9 @@ void CNetManager::ResumeGame() {
     Boolean notReady;
 
     SDL_Log("CNetManager::ResumeGame\n");
-    config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
+    config.frameLatency = gApplication ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
     config.frameTime = itsGame->frameTime;
-    config.hullType = gApplication->Number(kHullTypeTag);
+    config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
     config.numGrenades = 6;
     config.numMissiles = 3;
     config.numBoosters = 3;
