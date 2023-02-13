@@ -1,4 +1,5 @@
 #include "System.h"
+#include "Debug.h"
 
 #include <SDL2/SDL.h>
 #include <deque>
@@ -32,7 +33,7 @@ void Enqueue(QElemPtr qElement, QHdrPtr qHeader) {
         gQueues.insert(std::make_pair(qHeader, newQueue));
         qHeader->qHead = qHeader->qTail = qElement;
         // SDL_Log("  - inserting into gQueues with key %lx\n", qHeader);
-        SDL_Log("Enqueue: gQueues has %ld elements\n", gQueues.size());
+        DBG_Log("q", "Enqueue: gQueues has %ld elements\n", gQueues.size());
     }
     // New element has no next link
     qElement->qLink = NULL;
@@ -68,5 +69,9 @@ OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader) {
 
 void DisposeQueue(QHdrPtr qHeader) {
     gQueues.erase(qHeader);
-    SDL_Log("DisposeQueues: gQueues now has %ld elements\n", gQueues.size());
+    DBG_Log("q", "DisposeQueues: gQueues now has %ld elements\n", gQueues.size());
+}
+
+size_t QueueSize() {
+    return gQueues.size();
 }

@@ -1212,6 +1212,12 @@ OSErr CUDPComm::AllocatePacketBuffers(short packetSpace) {
     OSErr theErr;
     Ptr mem;
     UDPPacketInfo *pp;
+    
+    if (freeQ.qHead != nullptr) {
+        // should only happen when called when extending buffer, see CCommManager::ProcessQueue
+        DBG_Log("q", "CUDPComm::AllocatePacketBuffers adding chunk of %hd packet buffers to an EXISTING &freeQ = %p\n",
+                packetSpace, &freeQ);
+    }
 
     mem = NewPtr(sizeof(Ptr) + sizeof(UDPPacketInfo) * packetSpace);
     theErr = MemError();

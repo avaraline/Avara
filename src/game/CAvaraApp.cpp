@@ -67,8 +67,8 @@ void TrackerPinger(CAvaraAppImpl *app) {
 }
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
-    itsGame = new CAvaraGame(Get<FrameTime>(kFrameTimeTag));
-    gCurrentGame = itsGame;
+    itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
+    gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
 
@@ -265,7 +265,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) {
     SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
     itsGame->LevelReset(false);
-    gCurrentGame = itsGame;
+    gCurrentGame = itsGame.get();
     itsGame->loadedSet = set;
     UseLevelFolder(set);
 
@@ -312,7 +312,7 @@ void CAvaraAppImpl::NotifyUser() {
 }
 
 CAvaraGame* CAvaraAppImpl::GetGame() {
-    return itsGame;
+    return itsGame.get();
 }
 
 CNetManager* CAvaraAppImpl::GetNet() {

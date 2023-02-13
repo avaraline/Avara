@@ -15,10 +15,6 @@
 
 #include <SDL2/SDL.h>
 
-CCommManager::~CCommManager() {
-    Dispose();
-}
-
 /*
 **	Initialize the packet buffer queues and allocate space
 **	for buffers.
@@ -57,10 +53,6 @@ OSErr CCommManager::AllocatePacketBuffers(short packetSpace) {
         packetBuffers = mem;
 
         pp = (PacketInfo *)(packetBuffers + sizeof(Ptr));
-        if (freeCount != 0) {
-            // should only happen when called when extending buffer, see CCommManager::ProcessQueue
-            SDL_Log("  - adding chunk of packet buffers to an EXISTING &freeQ = %lx\n", &freeQ);
-        }
 
         while (packetSpace--) {
             Enqueue((QElemPtr)pp, &freeQ);

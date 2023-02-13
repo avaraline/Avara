@@ -83,8 +83,8 @@ void CAvaraGame::InitLocatorTable() {
     }
 }
 
-CNetManager* CAvaraGame::CreateNetManager() {
-    return new CNetManager;
+std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
+    return std::make_unique<CNetManager>();
 }
 
 CAvaraGame::CAvaraGame(FrameTime frameTime) {
@@ -95,7 +95,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     itsNet = CreateNetManager();
     itsNet->INetManager(this);
-    itsApp->SetNet(itsNet);
+    itsApp->SetNet(itsNet.get());
 
     searchCount = 0;
     locatorTable = (ActorLocator **)NewPtr(sizeof(ActorLocator *) * LOCATORTABLESIZE);
@@ -206,8 +206,8 @@ void CAvaraGame::Dispose() {
         itsView->Dispose();
     if (soundHub)
         soundHub->Dispose();
-    if (itsNet)
-        itsNet->Dispose();
+//    if (itsNet)
+//        itsNet->Dispose();
     if (worldShader)
         worldShader->Dispose();
     ReleaseResource(mapRes);

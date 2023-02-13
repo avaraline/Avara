@@ -14,6 +14,7 @@
 #include "AvaraTypes.h"
 #include "CDirectObject.h"
 #include "Types.h"
+#include "CNetManager.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -60,7 +61,6 @@ class CDepot;
 class CAvaraApp;
 
 class CSoundHub;
-class CNetManager;
 class CIncarnator;
 class CWorldShader;
 class CScoreKeeper;
@@ -144,7 +144,7 @@ public:
     // CInfoPanel		*infoPanel;
     CDepot *itsDepot; //	Storage maintenance for ammo
     CSoundHub *soundHub; //	Sound playback and control hub
-    CNetManager *itsNet; //	Networking management
+    std::unique_ptr<CNetManager> itsNet; //	Networking management
     CWorldShader *worldShader; //	Manages ground and sky colors.
     CScoreKeeper *scoreKeeper;
     CHUD *hud;
@@ -192,7 +192,7 @@ public:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
     virtual CSoundHub* CreateSoundHub();
-    virtual CNetManager* CreateNetManager();
+    virtual std::unique_ptr<CNetManager> CreateNetManager();
 
     virtual void InitLocatorTable();
 

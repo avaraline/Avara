@@ -67,7 +67,7 @@ public:
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
-    CAvaraGame *itsGame;
+    std::unique_ptr<CAvaraGame> itsGame;
     CNetManager *gameNet;
     CommandManager *itsTui;
 

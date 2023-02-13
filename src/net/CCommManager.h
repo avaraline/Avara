@@ -64,7 +64,7 @@ public:
     short genericInfoTextRes;
 
     //	For method documentation, see .c-file:
-    ~CCommManager();
+    ~CCommManager() { Dispose(); }
 
     virtual void ICommManager(short packetSpace);
     virtual OSErr AllocatePacketBuffers(short numPackets);
