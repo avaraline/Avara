@@ -252,21 +252,21 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     DrawLevelName(view, ctx);
     DrawPaused(view, ctx);
 
-    int playerCount = 0;
     int playingCount = 0;
+    int lastPlayerSlot = 0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = net->playerTable[i];
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
         if (playerName.length() > 0) {
-            playerCount++;
+            lastPlayerSlot = i;
 
             if(thisPlayer->GetPlayer() != NULL) {
                 playingCount++;
             }
         }
     }
-    int playerSlots = std::max(6, playerCount);
-
+    int playerSlots = std::max(6, lastPlayerSlot + 1);
+    
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
     int chudHeight = 13 * playerSlots;
 
