@@ -16,7 +16,6 @@
 #include <SDL2/SDL.h>
 
 CCommManager::~CCommManager() {
-//    SDL_Log("~CCommManager called!!!");
     Dispose();
 }
 

@@ -201,8 +201,9 @@ public:
     }
     
     ~HectorTestScenario() {
-        // disposes of memory queues in CommManager
-        delete app.GetNet()->itsCommManager;
+        // disposes of memory queues in CommManager,
+        // when we make app.itsNet a unique_ptr then we may not need this destructor
+        delete app.GetNet();
     }
 };
 

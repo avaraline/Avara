@@ -364,7 +364,7 @@ void CPlayerManagerImpl::SendFrame() {
     // if in playback mode, update the FunctionTable right before sending the frame
     PlaybackAndRecord(ff->ft);
 
-    CCommManager *theComm = theNetManager->itsCommManager;
+    CCommManager *theComm = theNetManager->itsCommManager.get();
 
     PacketInfo *outPacket = theComm->GetPacket();
     if (outPacket) { // long	*pd;
@@ -410,7 +410,7 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
     PacketInfo *outPacket;
     FrameFunction *ff;
 
-    theComm = theNetManager->itsCommManager;
+    theComm = theNetManager->itsCommManager.get();
 
     // short ffi = theFrame * itsGame->fpsScale;
     short ffi = theFrame;

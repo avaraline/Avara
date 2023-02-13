@@ -66,7 +66,7 @@ typedef union
 class CNetManager : public CDirectObject {
 public:
     CAvaraGame *itsGame;
-    CCommManager *itsCommManager;
+    std::unique_ptr<CCommManager> itsCommManager;
     CProtoControl *itsProtoControl;
     // CRosterWindow	*theRoster;
 
@@ -119,7 +119,6 @@ public:
     //char msgBuffer[kMaxChatMessageBufferLen];
     std::vector<char> msgBuffer;
 
-    ~CNetManager();
     virtual void INetManager(CAvaraGame *theGame);
     virtual CPlayerManager* CreatePlayerManager(short);
     virtual void LevelReset();
