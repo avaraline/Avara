@@ -77,7 +77,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
         ColorComboBox *color = panel->add<ColorComboBox>(player_colors);
         //color->setFixedHeight(23);
         color->setSelectedIndex(theNet->teamColors[i]);
-        color->setCallback([this, color, i](int selectedIdx) {
+        color->setCallback([this, i](int selectedIdx) {
             theNet->teamColors[i] = selectedIdx;
             theNet->SendColorChange();
         });

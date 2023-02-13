@@ -74,8 +74,8 @@ public:
     CPlayerManager *playerTable[kMaxAvaraPlayers];
 
     char teamColors[kMaxAvaraPlayers];
-    char slotToPosition[kMaxAvaraPlayers];
-    char positionToSlot[kMaxAvaraPlayers];
+    int8_t slotToPosition[kMaxAvaraPlayers];
+    int8_t positionToSlot[kMaxAvaraPlayers];
 
     short activePlayersDistribution;
     short readyPlayers;

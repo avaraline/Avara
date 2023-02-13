@@ -408,15 +408,12 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
 }
 
 void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_t originalSender /* default = 0 */) {
-    CAvaraApp *theApp;
     PacketInfo *aPacket;
     SDL_Log("SendLoadLevel(%s, %s, %d)\n", theSet.c_str(), levelTag.c_str(), originalSender);
 
     ProcessQueue();
 
     aPacket = itsCommManager->GetPacket();
-
-    theApp = itsGame->itsApp;
 
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
@@ -438,7 +435,7 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_
     BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, setAndLevel.length() + 1);
 
     /* TODO: implement
-    theApp->GetDirectoryLocator((DirectoryLocator *)aPacket->dataBuffer);
+     itsGame->itsApp->GetDirectoryLocator((DirectoryLocator *)aPacket->dataBuffer);
 
     *(Fixed *)(aPacket->dataBuffer+sizeof(DirectoryLocator)) = TickCount();
     aPacket->dataLen = sizeof(DirectoryLocator)+sizeof(Fixed);
@@ -1245,7 +1242,7 @@ void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
                     kpMugShot,
                     0,
                     sendPoint / PACKETDATABUFFERSIZE,
-                    mugSize,
+                    static_cast<int32_t>(mugSize),
                     sendLen,
                     (*myPlayer->MugPict()) + sendPoint);
 
@@ -1286,7 +1283,7 @@ void CNetManager::ReceiveMugShot(short fromPlayer, short seqNumber, long totalLe
 
             nextRequest = thePlayer->MugState() + (kMugShotWindowSize - 1) * PACKETDATABUFFERSIZE;
             if (nextRequest < totalLength) {
-                itsCommManager->SendPacket(1L << fromPlayer, kpGetMugShot, 0, 0, nextRequest, 0, NULL);
+                itsCommManager->SendPacket(1L << fromPlayer, kpGetMugShot, 0, 0, static_cast<int32_t>(nextRequest), 0, NULL);
             }
         }
 

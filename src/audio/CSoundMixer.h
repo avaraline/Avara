@@ -98,7 +98,7 @@ public:
     int16_t maxChannels = 0;
     int16_t maxMix = 0;
 
-    size_t soundBufferSize = 0;
+    int32_t soundBufferSize = 0;
     int16_t soundBufferBits = 0;
 
     Boolean hushFlag = false;
