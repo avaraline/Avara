@@ -119,6 +119,7 @@ public:
     //char msgBuffer[kMaxChatMessageBufferLen];
     std::vector<char> msgBuffer;
 
+    ~CNetManager();
     virtual void INetManager(CAvaraGame *theGame);
     virtual CPlayerManager* CreatePlayerManager(short);
     virtual void LevelReset();

@@ -52,6 +52,10 @@
 
 extern Fixed FRandSeed;
 
+CNetManager::~CNetManager() {
+    delete itsCommManager;  // disposes of memory queues in CommManager... TODO: use unique_ptr
+}
+
 void CNetManager::INetManager(CAvaraGame *theGame) {
     short i;
 
@@ -171,7 +175,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
 
         if (confirm && newManager) {
             itsProtoControl->Detach();
-            itsCommManager->Dispose();
+            delete itsCommManager;
             itsCommManager = newManager;
             itsProtoControl->Attach(itsCommManager);
             netStatus = netKind;
@@ -187,7 +191,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
             itsGame->itsApp->BroadcastCommand(kNetChangedCmd);
         } else {
             if (newManager)
-                newManager->Dispose();
+                delete newManager;
         }
     } else {
         playerTable[itsCommManager->myId]->NetDisconnect();

@@ -199,6 +199,11 @@ public:
         game->AddActor(hector);
         game->GameStart();
     }
+    
+    ~HectorTestScenario() {
+        // disposes of memory queues in CommManager
+        delete app.GetNet()->itsCommManager;
+    }
 };
 
 class HectorEnergyReadings {
