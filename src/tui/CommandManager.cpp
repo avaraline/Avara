@@ -115,7 +115,6 @@ void CommandManager::HistoryNewer() {
     }
 
     chatCommandHistoryIterator++;
-    itsApp->rosterWindow->SendRosterMessage(clearChat_utf8);
     if (chatCommandHistoryIterator != chatCommandHistory.end()) {
         std::string command = *chatCommandHistoryIterator;
         itsApp->rosterWindow->SendRosterMessage(command);
@@ -130,7 +129,6 @@ void CommandManager::HistoryOlder() {
 
     chatCommandHistoryIterator--;
     std::string command = *chatCommandHistoryIterator;
-    itsApp->rosterWindow->SendRosterMessage(clearChat_utf8);
     itsApp->rosterWindow->SendRosterMessage(command);
 }
 

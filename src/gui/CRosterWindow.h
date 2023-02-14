@@ -22,6 +22,8 @@ public:
     void SendRosterMessage(size_t length, char *message);
     void NewChatLine(Str255 playerName, std::string message);
     void ChatLineDelete();
+    void ResetChatPrompt();
+    std::string ChatPromptFor(std::string name);
 
     nanogui::Text *levelLoaded;
     nanogui::Text *levelDesigner;
