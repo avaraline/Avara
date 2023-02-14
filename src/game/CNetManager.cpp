@@ -168,8 +168,9 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
         }
 
         if (confirm && newManager) {
+            itsCommManager->Dispose();        // send kpPacketProtocolLogout message before being destroyed
             itsProtoControl->Detach();
-            itsCommManager.swap(newManager);  // deletes old itsCommManager and replaces it with newManager
+            itsCommManager.swap(newManager);  // newManager takes place existing CCommManager which gets deleted when out of scope
             itsProtoControl->Attach(itsCommManager.get());
             netStatus = netKind;
             isConnected = true;
