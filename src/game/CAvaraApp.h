@@ -27,6 +27,7 @@
 #include <thread>
 #include <mutex>
 #include <iterator>
+#include <memory>
 
 using json = nlohmann::json;
 

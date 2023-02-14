@@ -19,6 +19,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <memory>
 
 #define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
 #define SERVERNETPACKETS (16 * 2 * kMaxAvaraPlayers)
