@@ -27,6 +27,7 @@
 #include <thread>
 #include <mutex>
 #include <iterator>
+#include <memory>
 
 using json = nlohmann::json;
 
@@ -67,7 +68,7 @@ public:
 };
 class CAvaraAppImpl : public CApplication, public CAvaraApp {
 private:
-    CAvaraGame *itsGame;
+    std::unique_ptr<CAvaraGame> itsGame;
     CNetManager *gameNet;
     CommandManager *itsTui;
 

@@ -30,7 +30,7 @@ typedef struct {
     int32_t nextSendTime;
     SerialNumber serialNumber;
     uint8_t sendCount;
-    uint8_t _spare; // not sure if needed, just to be safe
+    uint8_t _spares[5]; // for 8-byte alignment in queues
 
 } UDPPacketInfo;
 #pragma pack()

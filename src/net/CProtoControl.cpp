@@ -59,7 +59,7 @@ void CProtoControl::Attach(CCommManager *aManager) {
 }
 
 Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
-    CNetManager *theNet = theGame->itsNet;
+    CNetManager *theNet = theGame->itsNet.get();
     Boolean didHandle = true;
 
     switch (thePacket->command) {
@@ -190,7 +190,7 @@ static std::string FormatDist(uint16_t distribution) {
 
 Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
-    CNetManager *theNet = theGame->itsNet;
+    CNetManager *theNet = theGame->itsNet.get();
 
     // SDL_Log("CProtoControl::PacketHandler cmd=%d sender=%d\n", thePacket->command, thePacket->sender);
     switch (thePacket->command) {

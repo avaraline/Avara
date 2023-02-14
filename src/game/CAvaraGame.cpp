@@ -63,7 +63,7 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false);
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
-    aMixer->SetVolume(gApplication->Get<uint8_t>(kSoundVolume));
+    aMixer->SetVolume(gApplication ? gApplication->Get<uint8_t>(kSoundVolume) : 0);
     soundHub->AttachMixer(aMixer);
     soundHub->MuteFlag(silentFlag); //(soundOutputStyle < 0);
 }
@@ -83,8 +83,8 @@ void CAvaraGame::InitLocatorTable() {
     }
 }
 
-CNetManager* CAvaraGame::CreateNetManager() {
-    return new CNetManager;
+std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
+    return std::make_unique<CNetManager>();
 }
 
 CAvaraGame::CAvaraGame(FrameTime frameTime) {
@@ -95,7 +95,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     itsNet = CreateNetManager();
     itsNet->INetManager(this);
-    itsApp->SetNet(itsNet);
+    itsApp->SetNet(itsNet.get());
 
     searchCount = 0;
     locatorTable = (ActorLocator **)NewPtr(sizeof(ActorLocator *) * LOCATORTABLESIZE);
@@ -206,8 +206,8 @@ void CAvaraGame::Dispose() {
         itsView->Dispose();
     if (soundHub)
         soundHub->Dispose();
-    if (itsNet)
-        itsNet->Dispose();
+//    if (itsNet)
+//        itsNet->Dispose();
     if (worldShader)
         worldShader->Dispose();
     ReleaseResource(mapRes);

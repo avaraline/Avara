@@ -12,7 +12,7 @@
 #include "Memory.h"
 
 #define TALKERSTRINGS 1000
-#define PACKETDATABUFFERSIZE 128*8
+#define PACKETDATABUFFERSIZE (1024-40)          // -40 to get UDPPacketInfo to 1024 bytes
 #define MINIMUMBUFFERRESERVE 64*8
 #define FRESHALLOCSIZE 64*8
 
@@ -64,6 +64,7 @@ public:
     short genericInfoTextRes;
 
     //	For method documentation, see .c-file:
+    ~CCommManager() { Dispose(); }
 
     virtual void ICommManager(short packetSpace);
     virtual OSErr AllocatePacketBuffers(short numPackets);

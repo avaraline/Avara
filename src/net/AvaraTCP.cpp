@@ -108,7 +108,11 @@ void DestroySocket(int sock) {
             punchLocal.host = 0;
             punchLocal.port = 0;
         }
+#ifdef WIN32
+        closesocket(sock);
+#else
         close(sock);
+#endif
     }
 }
 

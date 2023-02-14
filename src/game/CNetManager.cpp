@@ -60,11 +60,11 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     unavailablePlayers = 0;
 
     netStatus = kNullNet;
-    itsCommManager = new CCommManager;
+    itsCommManager = std::make_unique<CCommManager>();
     itsCommManager->ICommManager(NULLNETPACKETS);
 
     itsProtoControl = new CProtoControl;
-    itsProtoControl->IProtoControl(itsCommManager, itsGame);
+    itsProtoControl->IProtoControl(itsCommManager.get(), itsGame);
 
     // theRoster = ((CAvaraApp *)gApplication)->theRosterWind;
 
@@ -133,7 +133,7 @@ void CNetManager::ChangeNet(short netKind, std::string address) {
 }
 
 void CNetManager::ChangeNet(short netKind, std::string address, std::string password) {
-    CCommManager *newManager = NULL;
+    std::unique_ptr<CCommManager> newManager = nullptr;
     Boolean confirm = true;
     //CAvaraApp *theApp = itsGame->itsApp;
 
@@ -147,33 +147,31 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
         if (confirm) {
             switch (netKind) {
                 case kNullNet:
-                    newManager = new CCommManager;
+                    newManager = std::make_unique<CCommManager>();
                     newManager->ICommManager(NULLNETPACKETS);
                     break;
-                case kServerNet:
-                    CUDPComm *theServer;
-                    theServer = new CUDPComm;
+                case kServerNet: {
+                    newManager = std::make_unique<CUDPComm>();
+                    CUDPComm *theServer = (CUDPComm*)(newManager.get());
                     theServer->IUDPComm(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
                     theServer->StartServing();
-                    newManager = theServer;
                     confirm = theServer->isConnected;
-                    break;
+                }   break;
                 case kClientNet:
-                    CUDPComm *theClient;
-                    theClient = new CUDPComm;
+                    newManager = std::make_unique<CUDPComm>();
+                    CUDPComm *theClient = (CUDPComm *)(newManager.get());
                     theClient->IUDPComm(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
                     theClient->Connect(address, password);
-                    newManager = theClient;
                     confirm = theClient->isConnected;
                     break;
             }
         }
 
         if (confirm && newManager) {
+            itsCommManager->Dispose();        // send kpPacketProtocolLogout message before being destroyed
             itsProtoControl->Detach();
-            itsCommManager->Dispose();
-            itsCommManager = newManager;
-            itsProtoControl->Attach(itsCommManager);
+            itsCommManager.swap(newManager);  // newManager takes place existing CCommManager which gets deleted when out of scope
+            itsProtoControl->Attach(itsCommManager.get());
             netStatus = netKind;
             isConnected = true;
             DisconnectSome(kdEveryone);
@@ -185,9 +183,6 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
                 // theRoster->InvalidateArea(kBottomBox, 0);
             }
             itsGame->itsApp->BroadcastCommand(kNetChangedCmd);
-        } else {
-            if (newManager)
-                newManager->Dispose();
         }
     } else {
         playerTable[itsCommManager->myId]->NetDisconnect();
@@ -613,9 +608,9 @@ void CNetManager::ResumeGame() {
     Boolean notReady;
 
     SDL_Log("CNetManager::ResumeGame\n");
-    config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
+    config.frameLatency = gApplication ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
     config.frameTime = itsGame->frameTime;
-    config.hullType = gApplication->Number(kHullTypeTag);
+    config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
     config.numGrenades = 6;
     config.numMissiles = 3;
     config.numBoosters = 3;

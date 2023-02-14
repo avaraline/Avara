@@ -19,6 +19,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <memory>
 
 #define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
 #define SERVERNETPACKETS (16 * 2 * kMaxAvaraPlayers)
@@ -66,7 +67,7 @@ typedef union
 class CNetManager : public CDirectObject {
 public:
     CAvaraGame *itsGame;
-    CCommManager *itsCommManager;
+    std::unique_ptr<CCommManager> itsCommManager;
     CProtoControl *itsProtoControl;
     // CRosterWindow	*theRoster;
 
@@ -119,6 +120,7 @@ public:
     //char msgBuffer[kMaxChatMessageBufferLen];
     std::vector<char> msgBuffer;
 
+    ~CNetManager() { Dispose(); };
     virtual void INetManager(CAvaraGame *theGame);
     virtual CPlayerManager* CreatePlayerManager(short);
     virtual void LevelReset();

@@ -21,7 +21,7 @@
 */
 void CCommManager::ICommManager(short packetSpace) {
     myId = 0; //	Default to server.
-    packetBuffers = 0;
+    packetBuffers = nullptr;
 
     freeQ.qFlags = 0;
     freeQ.qHead = 0;
@@ -49,7 +49,7 @@ OSErr CCommManager::AllocatePacketBuffers(short packetSpace) {
     theErr = MemError();
 
     if (theErr == noErr) {
-        *(Ptr *)mem = packetBuffers;
+        *(Ptr *)mem = packetBuffers;  // point to the previous chunk of packet buffers, if any, so they are all removed in Dispose()
         packetBuffers = mem;
 
         pp = (PacketInfo *)(packetBuffers + sizeof(Ptr));
@@ -75,8 +75,11 @@ void CCommManager::Dispose() {
         DisposePtr(packetBuffers);
         packetBuffers = nextDispose;
     }
-
-    CDirectObject::Dispose();
+    
+    // SDL_Log("  - called Dispose with &inQ = %lx, &freeQ = %lx\n", &inQ, &freeQ);
+    DisposeQueue(&freeQ);
+    freeCount = 0;
+    DisposeQueue(&inQ);
 }
 
 /*
