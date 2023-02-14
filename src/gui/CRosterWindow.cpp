@@ -336,7 +336,9 @@ void CRosterWindow::SendRosterMessage(const char* message) {
 
 void CRosterWindow::SendRosterMessage(size_t len, char *message) {
     ((CAvaraAppImpl *)gApplication)->GetNet()->SendRosterMessage(len, message);
-    chatInput->setCaption(chatInput->caption() + message);
+    std::string newCaption = chatInput->caption();
+    newCaption.append(message, len);  // message not always null-terminated, use len!
+    chatInput->setCaption(newCaption);
 }
 
 void CRosterWindow::ChatLineDelete() {
