@@ -841,7 +841,9 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
         } else {
             // any votes after the first must have a matching p3 value
             if (fragmentCheck != p3) {
-                SDL_Log("FRAGMENTATION %d != %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
+                if (IAmAlive()) {
+                    SDL_Log("FRAGMENTATION %d != %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
+                }
                 fragmentDetected = true;
             // } else {
             //     SDL_Log("No frags detected so far %d == %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);

@@ -384,8 +384,8 @@ void CPlayerManagerImpl::SendFrame() {
 
         // theNetManager->FastTrackDeliver(outPacket);
         outPacket->flags |= kpUrgentFlag;
-        #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 1000 ~= 15sec
-        #if DONT_SEND_FRAME != 0
+        #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 1111 ~= 18sec
+        #if DONT_SEND_FRAME > 0
             if (theNetManager->itsCommManager->myId == 1) {
                 if (ffi >= DONT_SEND_FRAME & ffi < DONT_SEND_FRAME+4)
                     outPacket->distribution &= ~1; // don't send packet from player 2 to player 1
@@ -516,7 +516,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         itsGame->didWait = true;
 
         if (frameFuncs[(FUNCTIONBUFFERS - 1) & (i + 1)].validFrame < itsGame->frameNumber) {
-            askAgainTime += 5 + (rand() & 3);
+            askAgainTime += 5 + (rand() & 3);  // 5-8 ticks = 83-133ms = 5.2-8.3 frames
         }
 
         do {
@@ -536,15 +536,12 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             quickTick = TickCount();
 
             if (quickTick - askAgainTime >= 0) {
-                if (theNetManager->IAmAlive() || askCount > 0) {
-                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(2000); //	2 seconds = 120 ticks
-                } else {
-                    // spectators may not be able to wait as long because players could still be going and
-                    // the FUNCTIONBUFFERS might overflow, so ask for first resend within 2.0LT ≈ (8 ticks = 133ms)
-                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(2.0*CLASSICFRAMETIME) + 0.5;
-                }
-
                 SendResendRequest(askCount++);
+
+                // FUNCIONBUFFERS*16 = 512*15 = 7680msec...
+                // divide that into 10%, 20%, 30%, 40% (divide by 10 gives you 10%) so that increasing
+                // askAgainTime will ask upto 4 times leaving a little time before the frame buffer rolls over
+                askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*15/10);
 
                 if (askCount == WAITING_MESSAGE_COUNT) {
                     SDL_Log("Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
@@ -556,15 +553,24 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                 }
 
-                // spectator gives up after newer frames appear in the frameFuncs buffer
-                // which indicates the buffer has wrapped around and this frame won't be arriving
-                if (!theNetManager->IAmAlive() && frameFuncs[i].validFrame > itsGame->frameNumber) {
-                    itsGame->statusRequest = kAbortStatus;
-                    itsGame->itsApp->AddMessageLine(
-                        "Exiting game - missing data from: " + GetPlayerName(),
-                        MsgAlignment::Center, MsgCategory::Error);
-                    break;
-                }
+                #if DONT_SEND_FRAME > 0
+                    if (itsGame->frameNumber == DONT_SEND_FRAME) {
+                        SDL_Log("frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
+                                itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
+                    }
+                #endif
+            }
+
+            // all players give up after newer frames appear in the frameFuncs buffer because
+            // that indicates the frame buffer has wrapped around and this frame won't be arriving
+            if (frameFuncs[i].validFrame > itsGame->frameNumber) {
+                itsGame->statusRequest = kAbortStatus;
+                // jump way forward to forget about all those frames we can't process
+                itsGame->frameNumber += FUNCTIONBUFFERS;
+                itsGame->itsApp->AddMessageLine(
+                    "Exiting game - missing data from: " + GetPlayerName(),
+                    MsgAlignment::Center, MsgCategory::Error);
+                break;
             }
 
             // allow immediate abort after the kmWaitingForPlayer message displays
