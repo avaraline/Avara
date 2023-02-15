@@ -13,6 +13,8 @@
 #include "FastMat.h"
 #include "Types.h"
 
+#include <memory>
+
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -40,7 +42,7 @@ typedef struct {
     ARGBColor origColor;
     float normal[3];
     uint16_t triCount;
-    uint16_t *triPoints;
+    std::unique_ptr<uint16_t[]> triPoints;
     uint16_t front;
     uint16_t back;
 } PolyRecord;
@@ -149,11 +151,11 @@ public:
     Fixed maxY = 0;
 
     //	members used during rendering:
-    Vector *pointTable = 0;
     uint32_t pointCount = 0;
-    PolyRecord *polyTable = 0;
     uint32_t polyCount = 0;
     int totalPoints = 0;
+    std::unique_ptr<Vector[]> pointTable;
+    std::unique_ptr<PolyRecord[]> polyTable;
 
     //	Lighting vectors in object space
     long lightSeed = 0; //	Seed value to detect lights change

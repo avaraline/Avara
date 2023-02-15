@@ -42,7 +42,7 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     if (y == 0)
         y = baseSize;
 
-    p = pointTable;
+    p = pointTable.get();
     for (i = 0; i < pointCount; i++) {
         (*p)[0] = FMulDiv((*p)[0], x, baseSize);
         (*p)[1] = FMulDiv((*p)[1], y, baseSize);
@@ -192,7 +192,7 @@ void CSmartBox::FindEnclosure() {
     xmin.x = ymin.y = zmin.z = 0x7fFFffFF;
     xmax.x = ymax.y = zmax.z = -0x7fFFffFF;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     for (i = 0; i < pointCount; i++) {
         if (p->x < xmin.x)
             xmin = *p;
@@ -254,7 +254,7 @@ void CSmartBox::FindEnclosure() {
 
     rad = maxspan / 2;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     for (i = 0; i < pointCount; i++) {
         Fixed newrad;
 
@@ -281,7 +281,7 @@ void CSmartBox::FindEnclosure() {
 
     enclosurePoint = cen;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     xspan = 0;
     for (i = 0; i < pointCount; i++) {
         if (FDistanceOverEstimate(p->x, p->y, p->z) > xspan) {

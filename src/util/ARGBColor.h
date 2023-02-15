@@ -17,6 +17,7 @@
 
 class ARGBColor final {
 public:
+    ARGBColor() { ARGBColor(0); }
     void* operator new(std::size_t) = delete;
     bool operator==(const ARGBColor& other) { return color == other.color; }
     constexpr ARGBColor(uint32_t value): color(value) {}

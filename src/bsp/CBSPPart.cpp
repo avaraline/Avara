@@ -86,8 +86,8 @@ void CBSPPart::IBSPPart(short resId) {
     maxBounds.z = ToFixed(mxZ);
     maxBounds.w = FIX1;
 
-    pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
-    polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
+    pointTable = std::make_unique<Vector[]>(pointCount);
+    polyTable = std::make_unique<PolyRecord[]>(polyCount);
 
     for (uint32_t i = 0; i < pointCount; i++) {
         json pt = doc["points"][i];
@@ -110,7 +110,7 @@ void CBSPPart::IBSPPart(short resId) {
         polyTable[i].normal[2] = poly["normal"][2];
         // Triangle points
         polyTable[i].triCount = poly["tris"].size();
-        polyTable[i].triPoints = (uint16_t *)NewPtr(polyTable[i].triCount * 3 * sizeof(uint16_t));
+        polyTable[i].triPoints = std::make_unique<uint16_t[]>(polyTable[i].triCount * 3);
         for (size_t j = 0; j < polyTable[i].triCount; j++) {
             json tri = poly["tris"][j];
             for (size_t k = 0; k < 3; k++) {
@@ -419,12 +419,6 @@ void CBSPPart::Dispose() {
         CDirectObject::Dispose();
         return;
     }
-    for (uint32_t i = 0; i < polyCount; i++) {
-        DisposePtr((Ptr)polyTable[i].triPoints);
-    }
-
-    DisposePtr((Ptr)pointTable);
-    DisposePtr((Ptr)polyTable);
     if (AvaraGLIsRendering()) {
         delete [] glData;
         glDataSize = 0;
