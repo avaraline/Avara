@@ -17,10 +17,9 @@
 
 class ARGBColor final {
 public:
-    ARGBColor() { ARGBColor(0); }
     void* operator new(std::size_t) = delete;
     bool operator==(const ARGBColor& other) { return color == other.color; }
-    constexpr ARGBColor(uint32_t value): color(value) {}
+    constexpr ARGBColor(uint32_t value = 0x00000000): color(value) {}
     static std::optional<ARGBColor> Parse(const std::string& str);
     inline uint32_t GetRaw() { return color; }
     inline uint8_t GetA() { return color >> 24; }
@@ -34,5 +33,5 @@ public:
     inline NVGcolor IntoNVG() { return nvgRGBA(GetR(), GetG(), GetB(), GetA()); }
     void ExportGLFloats(float *out, int n = 4);
 private:
-    uint32_t color = 0x00000000;
+    uint32_t color;
 };
