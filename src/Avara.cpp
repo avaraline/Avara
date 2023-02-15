@@ -83,8 +83,11 @@ int main(int argc, char *argv[]) {
             app->GetGame()->SetKeysFromStdin();
         } else if (arg == "-o" || arg == "--keys-to-stdout") {
             app->GetGame()->SetKeysToStdout();
-        } else if (arg == "--command") {
-            textCommand = std::string(argv[++i]);
+        } else if (arg == "-/" || arg == "--command") {
+            textCommand = argv[++i];
+            if (textCommand[0] != '/') {
+                textCommand.insert(0, "/");
+            }
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);

@@ -37,7 +37,7 @@ enum {
     kStringWest
 };
 
-#define FUNCTIONBUFFERS 32*8  // 8x to accommodate extra frames with high-FPS
+#define FUNCTIONBUFFERS 64*8  // 512 frames at 16ms/frame = 8.192s rollover time
 
 class CAbstractPlayer;
 class CAvaraGame;
