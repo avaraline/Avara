@@ -210,7 +210,7 @@ void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
     teamMask = 1 << teamColor;
     ownerScoringId = ownerId;
 
-    uint32_t longTeamColor = GetTeamColorOr(origLongColor);
+    ARGBColor longTeamColor = GetTeamColorOr(origLongColor);
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
@@ -333,12 +333,12 @@ void CBall::MagnetAction() {
 
             if (snapCode == kSnapAttract) {
                 Vector delta;
-                Fixed len;
+                //Fixed len;
 
                 delta[0] = snapTo[0] - location[0];
                 delta[1] = snapTo[1] - location[1];
                 delta[2] = snapTo[2] - location[2];
-                len = NormalizeVector(3, delta);
+                //len = NormalizeVector(3, delta);
                 speed[0] += (delta[0] - speed[0]) >> 2;
                 speed[1] += (delta[1] - speed[1]) >> 2;
                 speed[2] += (delta[2] - speed[2]) >> 2;

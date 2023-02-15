@@ -36,9 +36,9 @@ public:
     long closeCounter;
     long openCounter;
 
-    long classicOpenDelay, openDelay;
-    long classicCloseDelay, closeDelay;
-    long classicGuardDelay, collisionGuardTime;
+    FrameNumber classicOpenDelay, openDelay;
+    FrameNumber classicCloseDelay, closeDelay;
+    FrameNumber classicGuardDelay, collisionGuardTime;
 
     short action;
 

@@ -14,9 +14,11 @@
 #include "AvaraTypes.h"
 #include "CDirectObject.h"
 #include "Types.h"
+#include "CNetManager.h"
 
 #include <SDL.h>
 #include <string>
+#include <memory>
 
 #define IDENTTABLESIZE 512
 
@@ -41,6 +43,8 @@
 #define kFootStepToggle 16
 #define kMusicToggle 32
 
+#define INACTIVE_LOOP_REFRESH 16
+
 enum { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
 
 class CAbstractActor;
@@ -58,7 +62,6 @@ class CDepot;
 class CAvaraApp;
 
 class CSoundHub;
-class CNetManager;
 class CIncarnator;
 class CWorldShader;
 class CScoreKeeper;
@@ -142,13 +145,13 @@ public:
     // CInfoPanel		*infoPanel;
     CDepot *itsDepot; //	Storage maintenance for ammo
     CSoundHub *soundHub; //	Sound playback and control hub
-    CNetManager *itsNet; //	Networking management
+    std::unique_ptr<CNetManager> itsNet; //	Networking management
     CWorldShader *worldShader; //	Manages ground and sky colors.
     CScoreKeeper *scoreKeeper;
     CHUD *hud;
 
     //	Sound related variables:
-    long soundTime;
+    int soundTime;
     short soundOutputStyle; //	Mono, speakers stereo, headphones stereo
     short sound16BitStyle; //	true = try 16 bit, false = 8 bit
     short soundSwitches; //	kAmbientSoundToggle & kTuijaToggle
@@ -175,6 +178,8 @@ public:
     Boolean veryLongWait;
     Boolean allowBackgroundProcessing;
     Boolean simpleExplosions;
+    Boolean keysFromStdin;
+    Boolean keysToStdout;
 
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
@@ -188,7 +193,7 @@ public:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
     virtual CSoundHub* CreateSoundHub();
-    virtual CNetManager* CreateNetManager();
+    virtual std::unique_ptr<CNetManager> CreateNetManager();
 
     virtual void InitLocatorTable();
 
@@ -254,6 +259,9 @@ public:
     virtual void SetFrameTime(int32_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
     virtual FrameNumber FramesFromNow(FrameNumber classicFrames);
+
+    void SetKeysFromStdin() { keysFromStdin = true; };
+    void SetKeysToStdout() { keysToStdout = true; };
 };
 
 #ifndef MAINAVARAGAME

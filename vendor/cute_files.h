@@ -170,7 +170,7 @@ void cf_do_unit_tests();
 		char ext[CUTE_FILES_MAX_EXT];
 		int is_dir;
 		int is_reg;
-		int size;
+		off_t size;
 		struct stat info;
 	};
 

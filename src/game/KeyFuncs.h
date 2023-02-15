@@ -11,7 +11,7 @@
 
 #include "Types.h"
 
-typedef struct {
+struct FunctionTable {
     uint32_t down;
     uint32_t up;
     uint32_t held;
@@ -23,7 +23,9 @@ typedef struct {
     Point mouseDelta;
     uint8_t buttonStatus;
     char msgChar;
-} FunctionTable;
+
+    void merge(const FunctionTable& ft);
+};
 
 typedef struct {
     FunctionTable ft;
@@ -99,3 +101,7 @@ extern	Byte			CrsrNew;
 extern	Byte			CrsrCouple;
 extern	Byte			CrsrScale;
 */
+
+// serialize & deserialize FunctionTable
+std::ostream& operator<< (std::ostream& os, const FunctionTable& ft);
+std::istream& operator>> (std::istream& is, FunctionTable& ft);

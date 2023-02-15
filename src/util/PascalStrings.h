@@ -1,6 +1,6 @@
-#include "Memory.h"
-#include <limits.h>
-#include <string.h>
+#pragma once
+
+#include "Types.h"
 
 
 /* TODO: NO! BAD!
@@ -12,33 +12,7 @@
 // advance.
 */
 
-static char *PascalStringtoCString(const unsigned char *p, int len) {
-    if (len == 0) return const_cast<char *>("");
-    char *s = new char[len + 1];
-    memcpy(s, p + 1, len);
-    s[len] = 0;
-    return s;
-}
-
-static char *PascalStringtoCString(const unsigned char *p) {
-    return PascalStringtoCString(p, p[0]);
-}
-
-static size_t my_strnlen_s(const char* s, size_t len) {
-    #ifdef strnlen_s
-    return strnlen_s(s, len);
-    #else
-    size_t i = 0;
-    for (; i < len && s[i] != '\0'; ++i);
-    return i;
-    #endif
-}
-
-static unsigned char *CStringtoPascalString(const char *s) {
-    size_t len = my_strnlen_s(s, UCHAR_MAX);
-    if (len == 0) return 0;
-    unsigned char *p = new unsigned char[len + 1];
-    p[0] = len;
-    memmove(p + 1, s, len);
-    return p;
-}
+char *PascalStringtoCString(const unsigned char *p, int len);
+char *PascalStringtoCString(const unsigned char *p);
+size_t my_strnlen_s(const char* s, size_t len);
+unsigned char *CStringtoPascalString(const char *s);

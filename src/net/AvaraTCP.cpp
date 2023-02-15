@@ -92,7 +92,7 @@ int CreateSocket(uint16_t port) {
             DestroySocket(sock);
             return -1;
         }
-        
+
         // This is taking advantage of the fact that Avara only ever creates one socket at a time.
         gAvaraSocket = sock;
     } else {
@@ -108,7 +108,11 @@ void DestroySocket(int sock) {
             punchLocal.host = 0;
             punchLocal.port = 0;
         }
+#ifdef WIN32
+        closesocket(sock);
+#else
         close(sock);
+#endif
     }
 }
 

@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+#include "ARGBColor.h"
 #include "FastMat.h"
 #include "Memory.h"
 
@@ -20,9 +21,9 @@ class CWorldShader;
 
 
 GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path);
-void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth, uint32_t color);
+void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth, ARGBColor color);
 void AvaraGLSetDepthTest(bool doTest);
-void AvaraGLSetAmbient(float ambient, uint32_t color);
+void AvaraGLSetAmbient(float ambient, ARGBColor color);
 void AvaraGLSetView(glm::mat4 view);
 void AvaraGLSetFOV(float fov);
 void AvaraGLUpdateProjectionMatrix();

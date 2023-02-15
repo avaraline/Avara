@@ -8,11 +8,13 @@
 */
 
 #pragma once
+#include "ARGBColor.h"
 #include "CDirectObject.h"
 #include "FastMat.h"
 #include "Types.h"
 
 #include <SDL.h>
+#include <memory>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
@@ -35,16 +37,16 @@ typedef struct {
 } FixedPoint;
 
 typedef struct {
-    uint32_t color;
-    uint32_t origColor;
+    ARGBColor color;
+    ARGBColor origColor;
     float normal[3];
     uint16_t triCount;
-    uint16_t *triPoints;
+    std::unique_ptr<uint16_t[]> triPoints;
     uint16_t front;
     uint16_t back;
 } PolyRecord;
 
-typedef uint32_t ColorRecord;
+typedef ARGBColor ColorRecord;
 
 namespace CBSPUserFlags {
     constexpr short kIsAmbient = 1;
@@ -148,11 +150,11 @@ public:
     Fixed maxY = 0;
 
     //	members used during rendering:
-    Vector *pointTable = 0;
     uint32_t pointCount = 0;
-    PolyRecord *polyTable = 0;
     uint32_t polyCount = 0;
     int totalPoints = 0;
+    std::unique_ptr<Vector[]> pointTable;
+    std::unique_ptr<PolyRecord[]> polyTable;
 
     //	Lighting vectors in object space
     long lightSeed = 0; //	Seed value to detect lights change
@@ -174,7 +176,7 @@ public:
     virtual void BuildBoundingVolumes();
     virtual void Dispose();
 
-    virtual void ReplaceColor(uint32_t origColor, uint32_t newColor);
+    virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();

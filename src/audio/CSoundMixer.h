@@ -68,7 +68,7 @@ public:
     MixerInfo *infoTable = 0;
     MixerInfo **sortSpace[2] = {0};
 
-    uint64_t baseTime = 0;
+    uint32_t baseTime = 0;
 
     int32_t frameTime = 0;
     int32_t frameStartTime = 0;
@@ -98,7 +98,7 @@ public:
     int16_t maxChannels = 0;
     int16_t maxMix = 0;
 
-    size_t soundBufferSize = 0;
+    int32_t soundBufferSize = 0;
     int16_t soundBufferBits = 0;
 
     Boolean hushFlag = false;

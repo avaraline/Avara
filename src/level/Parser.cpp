@@ -25,7 +25,8 @@
 #include "FastMat.h"
 #include "Resource.h"
 #include "Types.h"
-#include "RGBAColor.h"
+
+#define STACKSIZE 256
 
 //#define DEBUGPARSER 1
 #ifdef DEBUGPARSER
@@ -39,7 +40,7 @@
 
 typedef short tokentype;
 
-ParserVariables parserVar = {0, 0, 0, 0, 0, 0, 0};
+ParserVariables parserVar = {0, 0, 0, 0, {0}, 0, 0};
 long lastKeyword = 0;
 long lastVariable = 0;
 static short currentLevel = 0;
@@ -51,7 +52,7 @@ typedef struct {
     short calcLevel;
 } variableValue;
 
-Ptr stackMem = NULL;
+double stackMem[STACKSIZE] = {0};
 double *stackP = 0;
 CStringDictionary *symTable = 0;
 CTagBase *variableBase = 0;
@@ -1047,8 +1048,10 @@ void RunThis(unsigned char *script) {
 void AllocParser() {
     currentLevel = 0;
     InitSymbols();
-    stackMem = NewPtr(sizeof(double) * 256);
-    stackP = (double *)stackMem;
+    for(int i = 0; i < STACKSIZE; i++) {
+        stackMem[i] = 0;
+    }
+    stackP = stackMem;
 
     currentActor = NULL;
     std::string base = GetBaseScript();
@@ -1060,17 +1063,13 @@ void AllocParser() {
 }
 
 void DeallocParser() {
-    if (stackMem)
-        DisposePtr(stackMem);
-
     if (symTable)
         symTable->Dispose();
     if (variableBase)
         variableBase->Dispose();
     if (programBase)
         programBase->Dispose();
-
-    stackMem = NULL;
+    
     stackP = NULL;
     symTable = NULL;
     variableBase = NULL;
@@ -1121,16 +1120,16 @@ short ReadShortVar(const char *s) {
     return ReadShortVar(IndexForEntry(s));
 }
 
-const std::optional<uint32_t> ReadColorVar(short index) {
+const std::optional<ARGBColor> ReadColorVar(short index) {
     // first just try parsing the color string (e.g. fill="#ffcc44" or fill="rgba(255,204,68)")
-    std::optional<uint32_t> color = ParseColor(ReadStringVar(index));
+    std::optional<ARGBColor> color = ARGBColor::Parse(ReadStringVar(index));
     if (!color) {
         // try dereferencing color to a variable (e.g. myFill='"#ffcc44"' --> fill="myFill")
-        color = ParseColor(ReadStringVar(ReadStringVar(index).c_str()));
+        color = ARGBColor::Parse(ReadStringVar(ReadStringVar(index).c_str()));
     }
     return color;
 }
-const std::optional<uint32_t> ReadColorVar(const char *s) {
+const std::optional<ARGBColor> ReadColorVar(const char *s) {
     return ReadColorVar(IndexForEntry(s));
 }
 

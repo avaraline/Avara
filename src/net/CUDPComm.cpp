@@ -555,25 +555,25 @@ void CUDPComm::ReadFromTOC(PacketInfo *thePacket) {
     table = (CompleteAddress *)thePacket->dataBuffer;
     DBG_Log("login", "Received Connection Table ...\n%s", FormatConnectionTable(table).c_str());
 
-    table[myId - 1].host = 0; // don't want to connect to myself
-    table[myId - 1].port = 0;
-    connections->MarkOpenConnections(table);
-    DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
+    CompleteAddress myAddressFromTOC = table[myId - 1];
+    table[myId - 1] = {}; // don't want to connect to myself
 
-    connections->RewriteConnections(table);
-    DBG_Log("login", "After rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
+    connections->MarkOpenConnections(table);
+    // DBG_Log("login", "After removing open connections ...\n%s", FormatConnectionTable(table).c_str());
+
+    connections->RewriteConnections(table, myAddressFromTOC);
+    DBG_Log("login", "Connection Table after rewriting addresses ...\n%s", FormatConnectionTable(table).c_str());
 
     connections->OpenNewConnections(table);
-    DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
+    // DBG_Log("login", "After opening connections ...\n%s", FormatConnectionTable(table).c_str());
 }
 
 Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
 
-    // SDL_Log("CUDPComm::PacketHandler command=%d p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->p1,
-    // thePacket->p2, thePacket->p3);
-    // SDL_Log("   CUDPComm::PacketHandler    <<<<  cmd=%d sender=%d  p1=%d p2=%d p3=%d\n", thePacket->command, thePacket->sender,
-    //         thePacket->p1, thePacket->p2, thePacket->p3);
+    // SDL_Log("CUDPComm::PacketHandler <<<<   cmd=%d p1=%d p2=%d p3=%d sndr=%d dist=0x%02hx\n",
+    //         thePacket->command, thePacket->p1, thePacket->p2, thePacket->p3,
+    //         thePacket->sender, thePacket->distribution);
 
     switch (thePacket->command) {
         case kpPacketProtocolReject:
@@ -635,7 +635,7 @@ Boolean CUDPComm::PacketHandler(PacketInfo *thePacket) {
 
 void CUDPComm::ReadComplete(UDPpacket *packet) {
     if (packet) { //	We actually received some data...let's put it into packets.
-        long curTime;
+        ClockTick curTime;
         UDPPacketInfo *thePacket;
         charWordLongP inData;
         char *inEnd;
@@ -733,6 +733,11 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         #endif
 
                         if (p->dataLen) {
+                            if (p->dataLen > PACKETDATABUFFERSIZE) {
+                                SDL_Log("CUDPComm::ReadComplete BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
+                                        p->command, p->sender, p->dataLen);
+                                p->dataLen = PACKETDATABUFFERSIZE;
+                            }
                             BlockMoveData(inData.c, p->dataBuffer, p->dataLen);
                             inData.c += p->dataLen;
                         }
@@ -826,7 +831,7 @@ Boolean CUDPComm::AsyncWrite() {
     CUDPConnection *theConnection;
     CUDPConnection *firstSender;
     UDPPacketInfo *thePacket = NULL;
-    long curTime = GetClock();
+    ClockTick curTime = GetClock();
     long deltaQuotas[kNumConnectionTypes];
     long delta, acc;
     short i;
@@ -1004,6 +1009,11 @@ Boolean CUDPComm::AsyncWrite() {
             p->flags = flags;  // stick flags in the packet structure
 
             if (p->dataLen) {
+                if (p->dataLen > PACKETDATABUFFERSIZE) {
+                    SDL_Log("CUDPComm::AsyncWrite BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
+                            p->command, p->sender, p->dataLen);
+                    p->dataLen = PACKETDATABUFFERSIZE;
+                }
                 BlockMoveData(p->dataBuffer, outData.c, p->dataLen);
                 outData.c += p->dataLen;
             }
@@ -1017,7 +1027,7 @@ Boolean CUDPComm::AsyncWrite() {
             #endif
 
             // See if there are other messages that could be sent in this packet payload
-            udp->len = outData.c - (char *)udp->data;
+            udp->len = static_cast<uint32_t>(outData.c - (char *)udp->data);
             if (udp->len < CRAMPACKSIZE && udp->len < theConnection->quota) {
                 thePacket = theConnection->GetOutPacket(curTime, (cramCount-- > 0) ? CRAMTIME : 0, CRAMTIME);
             } else {
@@ -1041,7 +1051,7 @@ Boolean CUDPComm::AsyncWrite() {
             SDL_Log("     transmitting packet(s) to %s\n", FormatAddr(udp->address).c_str());
         #endif
 
-        udp->len = outData.c - (char *)udp->data;
+        udp->len = static_cast<uint32_t>(outData.c - (char *)udp->data);
 
         *versionCheck = CRC16(udp->data, udp->len);
         // SDL_Log("... len=%d, CRC=0x%04x\n", udp->len, *versionCheck);
@@ -1109,7 +1119,7 @@ Boolean CUDPComm::AsyncWrite() {
     return result;
 }
 
-int32_t CUDPComm::GetClock() {
+ClockTick CUDPComm::GetClock() {
     // Apparently this clock is about 240/second?
     // Upon further investigation, the original code,
     // 	  return lastClock = (microTime[0] << 20) | (microTime[1] >> 12);
@@ -1125,7 +1135,7 @@ int32_t CUDPComm::GetClock() {
 **	more urgent data. If not, any data marked urgent will be resent even if there
 **	no other data to send within twice that period.
 */
-void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, long urgentTimePeriod) {
+void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod) {
     ICommManager(bufferCount);
 
     inviteString[0] = 0;
@@ -1202,6 +1212,12 @@ OSErr CUDPComm::AllocatePacketBuffers(short packetSpace) {
     OSErr theErr;
     Ptr mem;
     UDPPacketInfo *pp;
+    
+    if (freeQ.qHead != nullptr) {
+        // should only happen when called when extending buffer, see CCommManager::ProcessQueue
+        DBG_Log("q", "CUDPComm::AllocatePacketBuffers adding chunk of %hd packet buffers to an EXISTING &freeQ = %p\n",
+                packetSpace, &freeQ);
+    }
 
     mem = NewPtr(sizeof(Ptr) + sizeof(UDPPacketInfo) * packetSpace);
     theErr = MemError();
@@ -1353,12 +1369,12 @@ OSErr CUDPComm::ContactServer(IPaddress &serverAddr) {
         // Before we "connect", notify the punch server so it can tell the host to open a hole to us
         RequestPunch(serverAddr);
 
-        seed = TickCount();
+        seed = static_cast<int32_t>(TickCount());
         connections->myId = 0;
         connections->port = serverAddr.port;
         connections->ipAddr = serverAddr.host;
 
-        SDL_Log("Connecting to %s (seed=%ld) from port %d\n", FormatAddr(connections).c_str(), seed, localPort);
+        SDL_Log("Connecting to %s (seed=%d) from port %d\n", FormatAddr(connections).c_str(), seed, localPort);
 
         AsyncRead();
         SendPacket(kdServerOnly, kpPacketProtocolLogin, 0, 0, seed, password[0] + 1, (Ptr)password);

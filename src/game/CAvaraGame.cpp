@@ -49,7 +49,7 @@
 #include "CHUD.h"
 #include "Preferences.h"
 #include "Resource.h"
-#include "RGBAColor.h"
+#include "ARGBColor.h"
 #include "Debug.h"
 
 #define kHighShadeCount 12
@@ -63,7 +63,7 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false);
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
-    aMixer->SetVolume(gApplication->Get<uint8_t>(kSoundVolume));
+    aMixer->SetVolume(gApplication ? gApplication->Get<uint8_t>(kSoundVolume) : 0);
     soundHub->AttachMixer(aMixer);
     soundHub->MuteFlag(silentFlag); //(soundOutputStyle < 0);
 }
@@ -83,8 +83,8 @@ void CAvaraGame::InitLocatorTable() {
     }
 }
 
-CNetManager* CAvaraGame::CreateNetManager() {
-    return new CNetManager;
+std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
+    return std::make_unique<CNetManager>();
 }
 
 CAvaraGame::CAvaraGame(FrameTime frameTime) {
@@ -95,7 +95,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     itsNet = CreateNetManager();
     itsNet->INetManager(this);
-    itsApp->SetNet(itsNet);
+    itsApp->SetNet(itsNet.get());
 
     searchCount = 0;
     locatorTable = (ActorLocator **)NewPtr(sizeof(ActorLocator *) * LOCATORTABLESIZE);
@@ -152,6 +152,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     loadedTimeLimit = 600;
     timeInSeconds = 0;
     simpleExplosions = false;
+    keysFromStdin = false;
+    keysToStdout = false;
 
     statusRequest = -1; // who decided to make "playing" 0??
 
@@ -204,8 +206,8 @@ void CAvaraGame::Dispose() {
         itsView->Dispose();
     if (soundHub)
         soundHub->Dispose();
-    if (itsNet)
-        itsNet->Dispose();
+//    if (itsNet)
+//        itsNet->Dispose();
     if (worldShader)
         worldShader->Dispose();
     ReleaseResource(mapRes);
@@ -437,7 +439,7 @@ void CAvaraGame::Score(short team, short player, long points, Fixed energy, shor
     lastReason = scoreReason;
 
     if (hitTeam == team) {
-        points = FMul(friendlyHitMultiplier, points);
+        points = LMul(points, friendlyHitMultiplier);
     }
 
     if (player >= 0 && player < kMaxAvaraPlayers) {
@@ -567,7 +569,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
 void CAvaraGame::EndScript() {
     short i;
-    uint32_t color;
+    ARGBColor color = 0;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -576,7 +578,7 @@ void CAvaraGame::EndScript() {
     worldShader->Apply();
 
     itsView->ambientLight = ReadFixedVar(iAmbient);
-    itsView->ambientLightColor = ParseColor(ReadStringVar(iAmbientColor))
+    itsView->ambientLightColor = ARGBColor::Parse(ReadStringVar(iAmbientColor))
         .value_or(DEFAULT_LIGHT_COLOR);
     AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
 
@@ -591,7 +593,7 @@ void CAvaraGame::EndScript() {
             y = FMul(FDegSin(-angle1), intensity);
             z = FMul(FDegCos(angle2), x);
             x = FMul(FDegSin(-angle2), x);
-            color = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
+            color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 4 * i))
                 .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
@@ -606,9 +608,9 @@ void CAvaraGame::EndScript() {
         }
     }
 
-    color = *ParseColor(ReadStringVar(iMissileArmedColor));
+    color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);
-    color = *ParseColor(ReadStringVar(iMissileLaunchedColor));
+    color = *ARGBColor::Parse(ReadStringVar(iMissileLaunchedColor));
     ColorManager::setMissileLaunchedColor(color);
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
@@ -804,6 +806,14 @@ void CAvaraGame::GameStart() {
 
     // HideCursor();
     // FlushEvents(everyEvent, 0);
+
+    // change the event processing time during the game (0 = poll)
+#ifdef _WIN32
+    nanogui::throttle = 0;   // let 'er rip
+#else
+    nanogui::throttle = std::min(static_cast<FrameTime>(itsApp->Number(kThrottle)), frameTime);
+#endif
+    SDL_Log("CAvaraGame::GameStart, throttle = %d\n", nanogui::throttle);
 }
 
 // Run when the game is paused or aborted
@@ -829,6 +839,10 @@ void CAvaraGame::GameStop() {
     scoreKeeper->StopPause(gameStatus == kPauseStatus);
 
     itsNet->UngatherPlayers();
+
+    // event wait timeout used by mainloop()
+    nanogui::throttle = INACTIVE_LOOP_REFRESH;
+    SDL_Log("CAvaraGame::GameStop, throttle = %d\n", nanogui::throttle);
 }
 
 void CAvaraGame::HandleEvent(SDL_Event &event) {

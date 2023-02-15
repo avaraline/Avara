@@ -20,8 +20,8 @@
 #define ARCUSTABLESIZE (1 + (1 << ARCUSTABLEBITS))
 #define TRIGTABLESIZE 4096L /*  Don't change this number!   */
 
-static unsigned short *arcTanTable = 0;
-static unsigned short *arcTanOneTable = 0;
+static uint16_t arcTanTable[ARCUSTABLESIZE] = {0};
+static uint16_t arcTanOneTable[ARCUSTABLESIZE] = {0};
 
 Fixed FRandSeed = 1;
 
@@ -33,22 +33,9 @@ Fixed FixATan2(Fixed x, Fixed y) {
 }
 
 void InitTrigTables() {
-    int i;
-
-    {
-        arcTanTable = (unsigned short *)NewPtr(sizeof(unsigned short) * ARCUSTABLESIZE * 2);
-        arcTanOneTable = arcTanTable + ARCUSTABLESIZE;
-
-        for (i = 0; i < ARCUSTABLESIZE; i++) {
-            arcTanTable[i] = FixATan2(ARCUSTABLESIZE - 1, i);
-            arcTanOneTable[i] = FRadToOne(arcTanTable[i]);
-        }
-    }
-}
-
-void CloseTrigTables() {
-    if (arcTanTable) {
-        DisposePtr((Ptr)arcTanTable);
+    for (int i = 0; i < ARCUSTABLESIZE; i++) {
+        arcTanTable[i] = FixATan2(ARCUSTABLESIZE - 1, i);
+        arcTanOneTable[i] = FRadToOne(arcTanTable[i]);
     }
 }
 
@@ -86,10 +73,6 @@ Fixed NormalizeVector(long n, Fixed *v) {
 void InitMatrix() {
     InitTrigTables();
     FRandSeed = (Fixed)TickCount();
-}
-
-void CloseMatrix() {
-    CloseTrigTables();
 }
 
 Fixed FSqroot(int *ab) {

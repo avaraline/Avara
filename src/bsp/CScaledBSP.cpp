@@ -20,7 +20,7 @@ void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, s
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
 
-    p = (Vector *)pointTable;
+    p = pointTable.get();
     for (i = 0; i < pointCount; i++) {
         (*p)[0] = FMul((*p)[0], scale);
         (*p)[1] = FMul((*p)[1], scale);

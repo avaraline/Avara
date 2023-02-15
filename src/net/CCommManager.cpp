@@ -21,7 +21,7 @@
 */
 void CCommManager::ICommManager(short packetSpace) {
     myId = 0; //	Default to server.
-    packetBuffers = 0;
+    packetBuffers = nullptr;
 
     freeQ.qFlags = 0;
     freeQ.qHead = 0;
@@ -49,7 +49,7 @@ OSErr CCommManager::AllocatePacketBuffers(short packetSpace) {
     theErr = MemError();
 
     if (theErr == noErr) {
-        *(Ptr *)mem = packetBuffers;
+        *(Ptr *)mem = packetBuffers;  // point to the previous chunk of packet buffers, if any, so they are all removed in Dispose()
         packetBuffers = mem;
 
         pp = (PacketInfo *)(packetBuffers + sizeof(Ptr));
@@ -75,8 +75,11 @@ void CCommManager::Dispose() {
         DisposePtr(packetBuffers);
         packetBuffers = nextDispose;
     }
-
-    CDirectObject::Dispose();
+    
+    // SDL_Log("  - called Dispose with &inQ = %lx, &freeQ = %lx\n", &inQ, &freeQ);
+    DisposeQueue(&freeQ);
+    freeCount = 0;
+    DisposeQueue(&inQ);
 }
 
 /*
@@ -86,9 +89,9 @@ void CCommManager::Dispose() {
 OSErr CCommManager::SendPacket(short distribution,
                                char command,
                                char p1,
-                               short p2,
-                               long p3,
-                               short dataLen,
+                               int16_t p2,
+                               int32_t p3,
+                               int16_t dataLen,
                                Ptr dataPtr) {
     Ptr ps, pd;
 
@@ -131,9 +134,9 @@ OSErr CCommManager::SendPacket(short distribution,
 OSErr CCommManager::SendUrgentPacket(short distribution,
     char command,
     char p1,
-    short p2,
-    long p3,
-    short dataLen,
+    int16_t p2,
+    int32_t p3,
+    int16_t dataLen,
     Ptr dataPtr) {
     Ptr ps, pd;
 
@@ -258,6 +261,11 @@ PacketInfo *CCommManager::DuplicatePacket(PacketInfo *original) {
         duplicate->p3 = original->p3;
         duplicate->dataLen = original->dataLen;
         if (duplicate->dataLen) {
+            if (duplicate->dataLen > PACKETDATABUFFERSIZE) {
+                SDL_Log("CCommManager::DuplicatePacket BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
+                        duplicate->command, duplicate->sender, duplicate->dataLen);
+                duplicate->dataLen = PACKETDATABUFFERSIZE;
+            }
             BlockMoveData(original->dataBuffer, duplicate->dataBuffer, duplicate->dataLen);
         }
     }

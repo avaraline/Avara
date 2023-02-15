@@ -125,7 +125,7 @@ void BoxLayout::performLayout(NVGcontext *ctx, Widget *widget) const {
 }
 
 FlowLayout::FlowLayout(Orientation orientation, bool packed, int margin, int spacing)
-    : mOrientation(orientation), mPacked(packed), mMargin(margin), mSpacing(spacing) {
+    : mOrientation(orientation), mMargin(margin), mSpacing(spacing), mPacked(packed) {
 }
 
 Vector2i FlowLayout::preferredSize(NVGcontext *ctx, const Widget *widget) const {

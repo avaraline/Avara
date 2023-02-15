@@ -40,7 +40,7 @@ void CLogicDelay::FrameAction() {
     short i;
     short theCount;
     FrameNumber thisFrame = itsGame->frameNumber;
-    long closestAlarm;
+    FrameNumber closestAlarm;
     Boolean foundAlarm;
 
     CLogic::FrameAction();

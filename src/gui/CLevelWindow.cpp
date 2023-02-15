@@ -44,7 +44,7 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     });
 
     setBox = new nanogui::ComboBox(this, levelSets);
-    setBox->setCallback([this, app](int selectedIdx) {
+    setBox->setCallback([this](int selectedIdx) {
         this->SelectSet(selectedIdx);
         levelBox->setSelectedIndex(0);
     });
@@ -106,7 +106,7 @@ void CLevelWindow::SelectLevel(std::string set, std::string levelName) {
     int levelIndex = 0;
     auto levelIt = std::find(levelNames.begin(), levelNames.end(), levelName);
     if (levelIt != levelNames.end()) {
-        levelIndex = std::distance(levelNames.begin(), levelIt);
+        levelIndex = static_cast<int>(std::distance(levelNames.begin(), levelIt));
     }
 
     levelBox->setSelectedIndex(levelIndex);
@@ -122,7 +122,7 @@ void CLevelWindow::SelectSet(std::string set) {
     std::vector<std::string>::iterator itr = std::find(levelSets.begin(), levelSets.end(), set);
     int level_idx = 0;
     if (itr != levelSets.end()) {
-        level_idx = std::distance(levelSets.begin(), itr);
+        level_idx = static_cast<int>(std::distance(levelSets.begin(), itr));
         setBox->setSelectedIndex(level_idx);
     }
     levelNames.clear();

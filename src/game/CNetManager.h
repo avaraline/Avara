@@ -19,6 +19,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <memory>
 
 #define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
 #define SERVERNETPACKETS (16 * 2 * kMaxAvaraPlayers)
@@ -66,7 +67,7 @@ typedef union
 class CNetManager : public CDirectObject {
 public:
     CAvaraGame *itsGame;
-    CCommManager *itsCommManager;
+    std::unique_ptr<CCommManager> itsCommManager;
     CProtoControl *itsProtoControl;
     // CRosterWindow	*theRoster;
 
@@ -74,8 +75,8 @@ public:
     CPlayerManager *playerTable[kMaxAvaraPlayers];
 
     char teamColors[kMaxAvaraPlayers];
-    char slotToPosition[kMaxAvaraPlayers];
-    char positionToSlot[kMaxAvaraPlayers];
+    int8_t slotToPosition[kMaxAvaraPlayers];
+    int8_t positionToSlot[kMaxAvaraPlayers];
 
     short activePlayersDistribution;
     short readyPlayers;
@@ -119,6 +120,7 @@ public:
     //char msgBuffer[kMaxChatMessageBufferLen];
     std::vector<char> msgBuffer;
 
+    ~CNetManager() { Dispose(); };
     virtual void INetManager(CAvaraGame *theGame);
     virtual CPlayerManager* CreatePlayerManager(short);
     virtual void LevelReset();
@@ -138,8 +140,8 @@ public:
     virtual void PositionsChanged(char *p);
 
     virtual void FlushMessageBuffer();
-    virtual void BufferMessage(short len, char *c);
-    virtual void SendRosterMessage(short len, char *c);
+    virtual void BufferMessage(size_t len, char *c);
+    virtual void SendRosterMessage(size_t len, char *c);
     virtual void ReceiveRosterMessage(short slotId, short len, char *c);
     virtual void SendColorChange();
     virtual void ReceiveColorChange(char *newColors);
@@ -161,8 +163,8 @@ public:
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
-    virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);
-    virtual void ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json);
+    virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, FrameNumber winFrame);
+    virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
 
     virtual short PlayerCount();
 

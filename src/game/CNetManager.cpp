@@ -60,11 +60,11 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
     unavailablePlayers = 0;
 
     netStatus = kNullNet;
-    itsCommManager = new CCommManager;
+    itsCommManager = std::make_unique<CCommManager>();
     itsCommManager->ICommManager(NULLNETPACKETS);
 
     itsProtoControl = new CProtoControl;
-    itsProtoControl->IProtoControl(itsCommManager, itsGame);
+    itsProtoControl->IProtoControl(itsCommManager.get(), itsGame);
 
     // theRoster = ((CAvaraApp *)gApplication)->theRosterWind;
 
@@ -133,7 +133,7 @@ void CNetManager::ChangeNet(short netKind, std::string address) {
 }
 
 void CNetManager::ChangeNet(short netKind, std::string address, std::string password) {
-    CCommManager *newManager = NULL;
+    std::unique_ptr<CCommManager> newManager = nullptr;
     Boolean confirm = true;
     //CAvaraApp *theApp = itsGame->itsApp;
 
@@ -147,33 +147,31 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
         if (confirm) {
             switch (netKind) {
                 case kNullNet:
-                    newManager = new CCommManager;
+                    newManager = std::make_unique<CCommManager>();
                     newManager->ICommManager(NULLNETPACKETS);
                     break;
-                case kServerNet:
-                    CUDPComm *theServer;
-                    theServer = new CUDPComm;
+                case kServerNet: {
+                    newManager = std::make_unique<CUDPComm>();
+                    CUDPComm *theServer = (CUDPComm*)(newManager.get());
                     theServer->IUDPComm(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
                     theServer->StartServing();
-                    newManager = theServer;
                     confirm = theServer->isConnected;
-                    break;
+                }   break;
                 case kClientNet:
-                    CUDPComm *theClient;
-                    theClient = new CUDPComm;
+                    newManager = std::make_unique<CUDPComm>();
+                    CUDPComm *theClient = (CUDPComm *)(newManager.get());
                     theClient->IUDPComm(kMaxAvaraPlayers - 1, TCPNETPACKETS, kAvaraNetVersion, itsGame->frameTime);
                     theClient->Connect(address, password);
-                    newManager = theClient;
                     confirm = theClient->isConnected;
                     break;
             }
         }
 
         if (confirm && newManager) {
+            itsCommManager->Dispose();        // send kpPacketProtocolLogout message before being destroyed
             itsProtoControl->Detach();
-            itsCommManager->Dispose();
-            itsCommManager = newManager;
-            itsProtoControl->Attach(itsCommManager);
+            itsCommManager.swap(newManager);  // newManager takes place existing CCommManager which gets deleted when out of scope
+            itsProtoControl->Attach(itsCommManager.get());
             netStatus = netKind;
             isConnected = true;
             DisconnectSome(kdEveryone);
@@ -185,9 +183,6 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
                 // theRoster->InvalidateArea(kBottomBox, 0);
             }
             itsGame->itsApp->BroadcastCommand(kNetChangedCmd);
-        } else {
-            if (newManager)
-                newManager->Dispose();
         }
     } else {
         playerTable[itsCommManager->myId]->NetDisconnect();
@@ -319,7 +314,7 @@ void CNetManager::FlushMessageBuffer() {
     }
 }
 
-void CNetManager::BufferMessage(short len, char *c) {
+void CNetManager::BufferMessage(size_t len, char *c) {
     if (len) {
         lastMsgTick = TickCount();
         if (msgBuffer.size() == 0) {
@@ -337,7 +332,7 @@ void CNetManager::BufferMessage(short len, char *c) {
     }
 }
 
-void CNetManager::SendRosterMessage(short len, char *c) {
+void CNetManager::SendRosterMessage(size_t len, char *c) {
     if (len > kMaxChatMessageBufferLen) {
         FlushMessageBuffer();
         itsCommManager->SendPacket(kdEveryone, kpRosterMessage, 0, 0, 0, len, c);
@@ -414,15 +409,12 @@ void CNetManager::HandleDisconnect(short slotId, short why) {
 }
 
 void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_t originalSender /* default = 0 */) {
-    CAvaraApp *theApp;
     PacketInfo *aPacket;
     SDL_Log("SendLoadLevel(%s, %s, %d)\n", theSet.c_str(), levelTag.c_str(), originalSender);
 
     ProcessQueue();
 
     aPacket = itsCommManager->GetPacket();
-
-    theApp = itsGame->itsApp;
 
     aPacket->command = kpLoadLevel;
     aPacket->p1 = 0;
@@ -444,7 +436,7 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_
     BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, setAndLevel.length() + 1);
 
     /* TODO: implement
-    theApp->GetDirectoryLocator((DirectoryLocator *)aPacket->dataBuffer);
+     itsGame->itsApp->GetDirectoryLocator((DirectoryLocator *)aPacket->dataBuffer);
 
     *(Fixed *)(aPacket->dataBuffer+sizeof(DirectoryLocator)) = TickCount();
     aPacket->dataLen = sizeof(DirectoryLocator)+sizeof(Fixed);
@@ -616,9 +608,9 @@ void CNetManager::ResumeGame() {
     Boolean notReady;
 
     SDL_Log("CNetManager::ResumeGame\n");
-    config.frameLatency = gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale;
+    config.frameLatency = gApplication ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
     config.frameTime = itsGame->frameTime;
-    config.hullType = gApplication->Number(kHullTypeTag);
+    config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
     config.numGrenades = 6;
     config.numMissiles = 3;
     config.numBoosters = 3;
@@ -783,7 +775,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                 // but addOneLatency helps account for deficiencies in the calculation by measuring how often clients had to wait too long for packets to arrive
                 short maxFrameLatency = addOneLatency + itsGame->RoundTripToFrameLatency(maxRoundTripLatency);
 
-                SDL_Log("*** fn=%ld RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
+                SDL_Log("*** fn=%d RTT=%d, Classic LT=%.2lf, add=%lf --> FL=%d\n",
                         frameNumber, maxRoundTripLatency,
                         (maxRoundTripLatency) / (2.0*CLASSICFRAMETIME), addOneLatency*itsGame->fpsScale, maxFrameLatency);
 
@@ -849,7 +841,9 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
         } else {
             // any votes after the first must have a matching p3 value
             if (fragmentCheck != p3) {
-                SDL_Log("FRAGMENTATION %d != %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
+                if (IAmAlive()) {
+                    SDL_Log("FRAGMENTATION %d != %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
+                }
                 fragmentDetected = true;
             // } else {
             //     SDL_Log("No frags detected so far %d == %d in frameNumber %u", fragmentCheck, p3, itsGame->frameNumber);
@@ -1035,7 +1029,7 @@ void CNetManager::StopGame(short newStatus) {
     short slot = itsCommManager->myId;
     CPlayerManager *thePlayerManager;
     CAbstractPlayer *thePlayer;
-    long winFrame = 0;
+    FrameNumber winFrame = 0;
 
     SDL_Log("CNetManager::StopGame\n");
     isPlaying = false;
@@ -1072,12 +1066,12 @@ void CNetManager::StopGame(short newStatus) {
     }
 
     itsCommManager->SendPacket(
-        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(long), (Ptr)&winFrame);
+        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(winFrame), (Ptr)&winFrame);
 
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
-void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame) {
+void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, FrameNumber winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         if (randomKey != 0) {
             playerTable[slotId]->RandomKey(randomKey);
@@ -1086,7 +1080,7 @@ void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed rando
     }
 }
 
-void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json){
+void CNetManager::ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json){
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         nlohmann::json message = nlohmann::json::parse(json);
         playerTable[slotId]->RandomKey(randomKey);
@@ -1167,10 +1161,10 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
                 }
 
                 if (thePlayerMan->GetPlayer() == NULL && slot == itsCommManager->myId) {
-                    long noWin = -1;
+                    FrameNumber noWin = -1;
 
                     itsCommManager->SendPacket(
-                        kdEveryone, kpPlayerStatusChange, slot, kLNoVehicle, 0, sizeof(long), (Ptr)&noWin);
+                        kdEveryone, kpPlayerStatusChange, slot, kLNoVehicle, 0, sizeof(noWin), (Ptr)&noWin);
                 }
             }
         }
@@ -1251,7 +1245,7 @@ void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
                     kpMugShot,
                     0,
                     sendPoint / PACKETDATABUFFERSIZE,
-                    mugSize,
+                    static_cast<int32_t>(mugSize),
                     sendLen,
                     (*myPlayer->MugPict()) + sendPoint);
 
@@ -1292,7 +1286,7 @@ void CNetManager::ReceiveMugShot(short fromPlayer, short seqNumber, long totalLe
 
             nextRequest = thePlayer->MugState() + (kMugShotWindowSize - 1) * PACKETDATABUFFERSIZE;
             if (nextRequest < totalLength) {
-                itsCommManager->SendPacket(1L << fromPlayer, kpGetMugShot, 0, 0, nextRequest, 0, NULL);
+                itsCommManager->SendPacket(1L << fromPlayer, kpGetMugShot, 0, 0, static_cast<int32_t>(nextRequest), 0, NULL);
             }
         }
 

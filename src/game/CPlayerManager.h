@@ -37,7 +37,7 @@ enum {
     kStringWest
 };
 
-#define FUNCTIONBUFFERS 32*8  // 8x to accommodate extra frames with high-FPS
+#define FUNCTIONBUFFERS 64*8  // 512 frames at 16ms/frame = 8.192s rollover time
 
 class CAbstractPlayer;
 class CAvaraGame;
@@ -80,7 +80,7 @@ public:
     virtual void IsRegistered(short) = 0;
     virtual Str255& PlayerRegName() = 0;
     virtual short LoadingStatus() = 0;
-    virtual void SetPlayerStatus(short newStatus, long theWin) = 0;
+    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
 
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
@@ -111,7 +111,7 @@ public:
     virtual CAbstractPlayer *TakeAnyActor(CAbstractPlayer *actorList) = 0;
     virtual short PlayerColor() = 0;
     virtual Boolean IncarnateInAnyColor() = 0;
-    virtual void ResendFrame(long theFrame, short requesterId, short commandCode) = 0;
+    virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode) = 0;
     virtual void SpecialColorControl() = 0;
     virtual PlayerConfigRecord& TheConfiguration() = 0;
     virtual Handle MugPict() = 0;
@@ -120,7 +120,7 @@ public:
     virtual long MugState() = 0;
     virtual void MugSize(long) = 0;
     virtual void MugState(long) = 0;
-    virtual long WinFrame() = 0;
+    virtual FrameNumber WinFrame() = 0;
     virtual void ProtocolHandler(struct PacketInfo *thePacket) = 0;
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
@@ -224,10 +224,10 @@ public:
     virtual void NetDisconnect();
     virtual void ChangeNameAndLocation(StringPtr theName, Point location);
     virtual void SetPosition(short pos);
-    virtual void SetPlayerStatus(short newStatus, long theWin);
+    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin);
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
-    virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
+    virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode);
 
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
 
@@ -277,8 +277,10 @@ public:
     virtual long MugState();
     virtual void MugSize(long);
     virtual void MugState(long);
-    virtual long WinFrame();
+    virtual FrameNumber WinFrame();
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
+
+    void PlaybackAndRecord(FunctionTable &ft);
 };

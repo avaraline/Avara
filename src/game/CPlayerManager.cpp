@@ -361,7 +361,10 @@ void CPlayerManagerImpl::SendFrame() {
     ff->ft.mouseDelta.v = mouseY;
     ff->ft.buttonStatus = buttonStatus;
 
-    CCommManager *theComm = theNetManager->itsCommManager;
+    // if in playback mode, update the FunctionTable right before sending the frame
+    PlaybackAndRecord(ff->ft);
+
+    CCommManager *theComm = theNetManager->itsCommManager.get();
 
     PacketInfo *outPacket = theComm->GetPacket();
     if (outPacket) { // long	*pd;
@@ -381,8 +384,8 @@ void CPlayerManagerImpl::SendFrame() {
 
         // theNetManager->FastTrackDeliver(outPacket);
         outPacket->flags |= kpUrgentFlag;
-        #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 1000 ~= 15sec
-        #if DONT_SEND_FRAME != 0
+        #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 1111 ~= 18sec
+        #if DONT_SEND_FRAME > 0
             if (theNetManager->itsCommManager->myId == 1) {
                 if (ffi >= DONT_SEND_FRAME & ffi < DONT_SEND_FRAME+4)
                     outPacket->distribution &= ~1; // don't send packet from player 2 to player 1
@@ -402,12 +405,12 @@ void CPlayerManagerImpl::SendFrame() {
     // next->ft.held = ff->ft.held;
 }
 
-void CPlayerManagerImpl::ResendFrame(long theFrame, short requesterId, short commandCode) {
+void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, short commandCode) {
     CCommManager *theComm;
     PacketInfo *outPacket;
     FrameFunction *ff;
 
-    theComm = theNetManager->itsCommManager;
+    theComm = theNetManager->itsCommManager.get();
 
     // short ffi = theFrame * itsGame->fpsScale;
     short ffi = theFrame;
@@ -513,7 +516,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         itsGame->didWait = true;
 
         if (frameFuncs[(FUNCTIONBUFFERS - 1) & (i + 1)].validFrame < itsGame->frameNumber) {
-            askAgainTime += 5 + (rand() & 3);
+            askAgainTime += 5 + (rand() & 3);  // 5-8 ticks = 83-133ms = 5.2-8.3 frames
         }
 
         do {
@@ -533,15 +536,12 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             quickTick = TickCount();
 
             if (quickTick - askAgainTime >= 0) {
-                if (theNetManager->IAmAlive() || askCount > 0) {
-                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(2000); //	2 seconds = 120 ticks
-                } else {
-                    // spectators may not be able to wait as long because players could still be going and
-                    // the FUNCTIONBUFFERS might overflow, so ask for first resend within 2.0LT ≈ (8 ticks = 133ms)
-                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(2.0*CLASSICFRAMETIME) + 0.5;
-                }
-
                 SendResendRequest(askCount++);
+
+                // FUNCIONBUFFERS*16 = 512*15 = 7680msec...
+                // divide that into 10%, 20%, 30%, 40% (divide by 10 gives you 10%) so that increasing
+                // askAgainTime will ask upto 4 times leaving a little time before the frame buffer rolls over
+                askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*15/10);
 
                 if (askCount == WAITING_MESSAGE_COUNT) {
                     SDL_Log("Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
@@ -553,15 +553,24 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                 }
 
-                // spectator gives up after newer frames appear in the frameFuncs buffer
-                // which indicates the buffer has wrapped around and this frame won't be arriving
-                if (!theNetManager->IAmAlive() && frameFuncs[i].validFrame > itsGame->frameNumber) {
-                    itsGame->statusRequest = kAbortStatus;
-                    itsGame->itsApp->AddMessageLine(
-                        "Exiting game - missing data from: " + GetPlayerName(),
-                        MsgAlignment::Center, MsgCategory::Error);
-                    break;
-                }
+                #if DONT_SEND_FRAME > 0
+                    if (itsGame->frameNumber == DONT_SEND_FRAME) {
+                        SDL_Log("frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
+                                itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
+                    }
+                #endif
+            }
+
+            // all players give up after newer frames appear in the frameFuncs buffer because
+            // that indicates the frame buffer has wrapped around and this frame won't be arriving
+            if (frameFuncs[i].validFrame > itsGame->frameNumber) {
+                itsGame->statusRequest = kAbortStatus;
+                // jump way forward to forget about all those frames we can't process
+                itsGame->frameNumber += FUNCTIONBUFFERS;
+                itsGame->itsApp->AddMessageLine(
+                    "Exiting game - missing data from: " + GetPlayerName(),
+                    MsgAlignment::Center, MsgCategory::Error);
+                break;
             }
 
             // allow immediate abort after the kmWaitingForPlayer message displays
@@ -1073,7 +1082,7 @@ CAbstractPlayer *CPlayerManagerImpl::TakeAnyActor(CAbstractPlayer *actorList) {
 
     return nextPlayer;
 }
-void CPlayerManagerImpl::SetPlayerStatus(short newStatus, long theWin) {
+void CPlayerManagerImpl::SetPlayerStatus(short newStatus, FrameNumber theWin) {
     winFrame = theWin;
 
     if (newStatus != loadingStatus) {
@@ -1313,7 +1322,7 @@ long CPlayerManagerImpl::MugSize() {
 long CPlayerManagerImpl::MugState() {
     return mugState;
 }
-long CPlayerManagerImpl::WinFrame() {
+FrameNumber CPlayerManagerImpl::WinFrame() {
     return winFrame;
 }
 void CPlayerManagerImpl::IncrementAskAgainTime(int amt) {
@@ -1324,4 +1333,28 @@ void CPlayerManagerImpl::SetShowScoreboard(bool b) {
 }
 bool CPlayerManagerImpl::GetShowScoreboard() {
     return showScoreboard;
+}
+
+void CPlayerManagerImpl::PlaybackAndRecord(FunctionTable &ft) {
+    if (isLocalPlayer && itsGame->keysFromStdin) {
+        FunctionTable replayFt;
+        // de-serialize the FunctionTable from stdin
+        std::cin >> replayFt;
+        // merge the playback FunctionTable in with the actual keyboard entry
+        ft.merge(replayFt);
+    }
+
+    if (isLocalPlayer && itsGame->keysToStdout) {
+        static bool headerWritten = false;
+        if (!headerWritten) {
+            std::cout << "# keysDn  keysUp  keysHeld ms.v ms.h btn\n";
+            headerWritten = true;
+        }
+        // comment out any record that initiates a game pause
+        if (TESTFUNC(kfuPauseGame, ft.down)) {
+            std::cout << "#pause>";
+        }
+        // serialize the FunctionTable to stdout
+        std::cout << ft;
+    }
 }

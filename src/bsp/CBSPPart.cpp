@@ -14,7 +14,6 @@
 #include "Memory.h"
 #include "Resource.h"
 #include "AvaraDefines.h"
-#include "RGBAColor.h"
 
 #include <fstream>
 #include <iostream>
@@ -87,8 +86,8 @@ void CBSPPart::IBSPPart(short resId) {
     maxBounds.z = ToFixed(mxZ);
     maxBounds.w = FIX1;
 
-    pointTable = (Vector *)NewPtr(pointCount * sizeof(Vector));
-    polyTable = (PolyRecord *)NewPtr(polyCount * sizeof(PolyRecord));
+    pointTable = std::make_unique<Vector[]>(pointCount);
+    polyTable = std::make_unique<PolyRecord[]>(polyCount);
 
     for (uint32_t i = 0; i < pointCount; i++) {
         json pt = doc["points"][i];
@@ -103,15 +102,15 @@ void CBSPPart::IBSPPart(short resId) {
     for (uint32_t i = 0; i < polyCount; i++) {
         json poly = doc["polys"][i];
         // Color
-        polyTable[i].color = poly["color"];
-        polyTable[i].origColor = poly["color"];
+        polyTable[i].color = static_cast<uint32_t>(poly["color"]);
+        polyTable[i].origColor = static_cast<uint32_t>(poly["color"]);
         // Normal
         polyTable[i].normal[0] = poly["normal"][0];
         polyTable[i].normal[1] = poly["normal"][1];
         polyTable[i].normal[2] = poly["normal"][2];
         // Triangle points
         polyTable[i].triCount = poly["tris"].size();
-        polyTable[i].triPoints = (uint16_t *)NewPtr(polyTable[i].triCount * 3 * sizeof(uint16_t));
+        polyTable[i].triPoints = std::make_unique<uint16_t[]>(polyTable[i].triCount * 3);
         for (size_t j = 0; j < polyTable[i].triCount; j++) {
             json tri = poly["tris"][j];
             for (size_t k = 0; k < 3; k++) {
@@ -388,7 +387,7 @@ Matrix *CBSPPart::GetInverseTransform() {
     return &invGlobTransform;
 }
 
-void CBSPPart::ReplaceColor(uint32_t origColor, uint32_t newColor) {
+void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
     for (int i = 0; i < polyCount; i++) {
         if (polyTable[i].origColor == origColor) {
             polyTable[i].color = newColor;
@@ -420,12 +419,6 @@ void CBSPPart::Dispose() {
         CDirectObject::Dispose();
         return;
     }
-    for (uint32_t i = 0; i < polyCount; i++) {
-        DisposePtr((Ptr)polyTable[i].triPoints);
-    }
-
-    DisposePtr((Ptr)pointTable);
-    DisposePtr((Ptr)polyTable);
     if (AvaraGLIsRendering()) {
         delete [] glData;
         glDataSize = 0;

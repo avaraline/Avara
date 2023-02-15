@@ -74,13 +74,20 @@ int main(int argc, char *argv[]) {
         } else if (arg == "-c" || arg == "--connect") {
             connectAddress = std::string(argv[++i]);
             app->Set(kLastAddress, connectAddress);
-        } else if (arg == "-h" || arg == "--host") {
+        } else if (arg == "-s" || arg == "--serve") {
             host = true;
         } else if (arg == "-f" || arg == "--frametime") {
             uint16_t frameTime = atol(argv[++i]);  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
-        } else if (arg == "--command") {
-            textCommand = std::string(argv[++i]);
+        } else if (arg == "-i" || arg == "--keys-from-stdin") {
+            app->GetGame()->SetKeysFromStdin();
+        } else if (arg == "-o" || arg == "--keys-to-stdout") {
+            app->GetGame()->SetKeysToStdout();
+        } else if (arg == "-/" || arg == "--command") {
+            textCommand = argv[++i];
+            if (textCommand[0] != '/') {
+                textCommand.insert(0, "/");
+            }
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
@@ -102,8 +109,8 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    // the mainloop should be sufficiently fast so that frames occur near their scheduled time
-    mainloop(app->GetGame()->frameTime / 4);
+    // outside of the game, use INACTIVE_LOOP_REFRESH (no need to poll when not playing)
+    mainloop(INACTIVE_LOOP_REFRESH);
 
     app->Done();
 

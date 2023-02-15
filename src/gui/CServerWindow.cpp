@@ -58,7 +58,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     latencyBox->setValue(std::to_string(app->Get<float>(kLatencyToleranceTag)).substr(0, 5));
     latencyBox->setEditable(false);
     latencyBox->setEnabled(false);
-    latencyBox->setCallback([this, app](std::string value) -> bool {
+    latencyBox->setCallback([this](std::string value) -> bool {
         double newLT = std::stod(value);
         // let SetFrameLatency() enforce limits on latencyTolerance AND set the pref
         gCurrentGame->SetFrameLatency(std::ceil(newLT/gCurrentGame->fpsScale), -1);
@@ -86,7 +86,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
     };
     std::vector<std::string> frameTimeOptionsShort = { "64 ms", "32 ms", "16 ms", "8 ms" };
     frameTimeBox = new nanogui::ComboBox(this, frameTimeOptions, frameTimeOptionsShort);
-    frameTimeBox->setCallback([this, app](int selectedIdx) {
+    frameTimeBox->setCallback([this](int selectedIdx) {
         gCurrentGame->SetFrameTime(pow(2, 6-selectedIdx));
         latencyBox->callback()(latencyBox->value()); // forces LT to be re-evaluated
     });

@@ -30,7 +30,7 @@ typedef struct {
     int32_t nextSendTime;
     SerialNumber serialNumber;
     uint8_t sendCount;
-    uint8_t _spare; // not sure if needed, just to be safe
+    uint8_t _spares[5]; // for 8-byte alignment in queues
 
 } UDPPacketInfo;
 #pragma pack()
@@ -64,7 +64,7 @@ public:
 
     QHdr queues[kQueueCount];
 
-    long seed;
+    int32_t seed;
 
     ip_addr ipAddr;
     port_num port;
@@ -76,10 +76,10 @@ public:
     SerialNumber maxValid;
 
     Boolean haveToSendAck;
-    long nextAckTime;
-    long nextWriteTime;
+    ClockTick nextAckTime;
+    ClockTick nextWriteTime;
 
-    int32_t validTime;
+    ClockTick validTime;
 
     float meanRoundTripTime;
     float varRoundTripTime;
@@ -87,8 +87,8 @@ public:
     float meanReceiveCount;
     SlidingHistogram<float>* latencyHistogram;
 
-    long retransmitTime;
-    long urgentRetransmitTime;
+    ClockTick retransmitTime;
+    ClockTick urgentRetransmitTime;
 
     long quota;
     short cramData;
@@ -131,7 +131,7 @@ public:
     virtual void Dispose();
 
     virtual void MarkOpenConnections(CompleteAddress *table);
-    virtual void RewriteConnections(CompleteAddress *table);
+    virtual void RewriteConnections(CompleteAddress *table, const CompleteAddress &myAddressInTOC);
     virtual void OpenNewConnections(CompleteAddress *table);
 
     virtual Boolean AreYouDone();

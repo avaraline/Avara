@@ -197,7 +197,7 @@ void CAbstractPlayer::ReplacePartColors() {
     }
 }
 
-void CAbstractPlayer::SetSpecialColor(uint32_t specialColor) {
+void CAbstractPlayer::SetSpecialColor(ARGBColor specialColor) {
     longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
@@ -1179,7 +1179,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
 }
 
-void CAbstractPlayer::GoLimbo(long limboDelay) {
+void CAbstractPlayer::GoLimbo(FrameNumber limboDelay) {
     CSmartPart **thePart;
 
     if (boostControlLink) {

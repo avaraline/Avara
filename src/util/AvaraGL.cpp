@@ -2,7 +2,7 @@
 #include "FastMat.h"
 #include "Resource.h"
 #include "CViewParameters.h"
-#include "RGBAColor.h"
+#include "ARGBColor.h"
 #include "CBSPPart.h"
 
 #include <fstream>
@@ -146,7 +146,7 @@ void AvaraGLUpdateProjectionMatrix() {
     glCheckErrors();
 }
 
-void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, uint32_t color) {
+void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, ARGBColor color) {
     if (!actuallyRender) return;
 
     float x = cos(Deg2Rad(elevation)) * intensity;
@@ -155,7 +155,7 @@ void AvaraGLSetLight(int light_index, float intensity, float elevation, float az
     float rgb[3];
 
     x = sin(Deg2Rad(-azimuth)) * intensity;
-    LongToRGBA(color, rgb, 3);
+    color.ExportGLFloats(rgb, 3);
 
     glUseProgram(gProgram);
     switch (light_index) {
@@ -178,11 +178,11 @@ void AvaraGLSetLight(int light_index, float intensity, float elevation, float az
     }
 }
 
-void AvaraGLSetAmbient(float ambient, uint32_t color) {
+void AvaraGLSetAmbient(float ambient, ARGBColor color) {
     if (!actuallyRender) return;
 
     float rgb[3];
-    LongToRGBA(color, rgb, 3);
+    color.ExportGLFloats(rgb, 3);
 
     glUseProgram(gProgram);
     glUniform1f(ambLoc, ambient);
@@ -365,7 +365,7 @@ void AvaraGLUpdateData(CBSPPart *part) {
             part->glData[p].x = ToFloat((*pt)[0]);
             part->glData[p].y = ToFloat((*pt)[1]);
             part->glData[p].z = ToFloat((*pt)[2]);
-            LongToRGBA(poly->color, &part->glData[p].r, 4);
+            poly->color.ExportGLFloats(&part->glData[p].r, 4);
 
             part->glData[p].nx = poly->normal[0];
             part->glData[p].ny = poly->normal[1];
@@ -396,9 +396,9 @@ void AvaraGLShadeWorld(CWorldShader *theShader, CViewParameters *theView) {
     float groundColorRGB[3];
     float lowSkyColorRGB[3];
     float highSkyColorRGB[3];
-    LongToRGBA(theShader->groundColor, groundColorRGB, 3);
-    LongToRGBA(theShader->lowSkyColor, lowSkyColorRGB, 3);
-    LongToRGBA(theShader->highSkyColor, highSkyColorRGB, 3);
+    theShader->groundColor.ExportGLFloats(groundColorRGB, 3);
+    theShader->lowSkyColor.ExportGLFloats(lowSkyColorRGB, 3);
+    theShader->highSkyColor.ExportGLFloats(highSkyColorRGB, 3);
 
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
@@ -453,7 +453,7 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
     int InfoLogLength;
 
     // Compile Vertex Shader
-    printf("Compiling shader : %s\n", vertex_file_path);
+    fprintf(stderr, "Compiling shader : %s\n", vertex_file_path);
     char const *VertexSourcePointer = VertexShaderCode.c_str();
     glShaderSource(VertexShaderID, 1, &VertexSourcePointer, NULL);
     glCompileShader(VertexShaderID);
@@ -468,7 +468,7 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
     }
 
     // Compile Fragment Shader
-    printf("Compiling shader : %s\n", fragment_file_path);
+    fprintf(stderr, "Compiling shader : %s\n", fragment_file_path);
     char const *FragmentSourcePointer = FragmentShaderCode.c_str();
     glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer, NULL);
     glCompileShader(FragmentShaderID);
@@ -483,7 +483,7 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
     }
 
     // Link the program
-    printf("Linking program\n");
+    fprintf(stderr, "Linking program\n");
     GLuint ProgramID = glCreateProgram();
     glAttachShader(ProgramID, VertexShaderID);
     glAttachShader(ProgramID, FragmentShaderID);

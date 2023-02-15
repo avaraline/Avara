@@ -44,7 +44,7 @@ public:
     CAbstractPlayer *nextPlayer = 0;
     PlayerConfigRecord defaultConfig = {0};
 
-    uint32_t longTeamColor = 0; // Hull color in 0x00RRGGBB format.
+    ARGBColor longTeamColor = 0; // Hull color in 0x00RRGGBB format.
 
     //	Shields & energy:
     Fixed energy = 0;
@@ -165,7 +165,7 @@ public:
     virtual void AdaptableSettings();
     virtual void LoadHUDParts();
     virtual void ReplacePartColors();
-    virtual void SetSpecialColor(uint32_t specialColor);
+    virtual void SetSpecialColor(ARGBColor specialColor);
     virtual void LoadParts();
     virtual void LoadScout();
     virtual void StartSystems();
@@ -198,7 +198,7 @@ public:
     virtual short GetActorScoringId();
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
 
-    virtual void GoLimbo(long limboDelay);
+    virtual void GoLimbo(FrameNumber limboDelay);
     virtual void Reincarnate();
     virtual bool ReincarnateComplete(CIncarnator *newSpot);
     virtual void IncarnateSound();

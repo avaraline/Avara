@@ -11,14 +11,14 @@
 #include "ColorManager.h"
 #include "CSmartPart.h"
 
-class CSliverPart;
+// class CSliverPart;
 
 class CSliverPart : public CSmartPart {
 public:
     CSliverPart *nextSliver;
     Vector speed;
     short lifeCount;
-    ColorRecord borrowedColors;
+    ColorRecord borrowedColors = 0;
     ColorRecord *fakeMaster;
     Fixed friction, gravity;
     Fixed fpsScale, fpsFriction, fpsGravity;

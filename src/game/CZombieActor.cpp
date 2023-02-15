@@ -35,7 +35,7 @@ CAbstractActor *CZombieActor::EndScript() {
     short i;
 
     if (CGlowActors::EndScript()) {
-        long repColor;
+        ARGBColor repColor(0);
 
         isActive = kIsActive;
         maskBits |= kTargetBit + kSolidBit;

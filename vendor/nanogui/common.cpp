@@ -63,8 +63,10 @@ void init() {
 }
 
 static bool mainloop_active = false;
+int throttle = 0;
 
 void mainloop(int refresh) {
+    throttle = refresh;
     if (mainloop_active)
         throw std::runtime_error("Main loop is already running!");
 
@@ -91,7 +93,8 @@ void mainloop(int refresh) {
             }
 
             /* Wait for mouse/keyboard or empty refresh events */
-            if(SDL_WaitEventTimeout(&theEvent, refresh)) {
+            int result = SDL_WaitEventTimeout(&theEvent, throttle);  // uses SDL_PollEvent(&theEvent) when throttle == 0
+            if(result) {
                 if (theEvent.type == SDL_QUIT) {
                     mainloop_active = false;
                 }
@@ -327,4 +330,3 @@ void Object::decRef(bool dealloc) const noexcept {
 Object::~Object() { }
 
 NAMESPACE_END(nanogui)
-

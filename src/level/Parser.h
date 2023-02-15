@@ -8,6 +8,7 @@
 */
 
 #pragma once
+#include "ARGBColor.h"
 #include "Types.h"
 
 #ifdef __has_include
@@ -120,8 +121,8 @@ long ReadLongVar(short index);
 long ReadLongVar(const char *);
 short ReadShortVar(short index);
 short ReadShortVar(const char *s);
-const std::optional<uint32_t> ReadColorVar(short index);
-const std::optional<uint32_t> ReadColorVar(const char *);
+const std::optional<ARGBColor> ReadColorVar(short index);
+const std::optional<ARGBColor> ReadColorVar(const char *);
 std::string ReadStringVar(short index);
 std::string ReadStringVar(const char *);
 

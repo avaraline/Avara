@@ -59,7 +59,7 @@ void CProtoControl::Attach(CCommManager *aManager) {
 }
 
 Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
-    CNetManager *theNet = theGame->itsNet;
+    CNetManager *theNet = theGame->itsNet.get();
     Boolean didHandle = true;
 
     switch (thePacket->command) {
@@ -129,7 +129,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
         case kpPlayerStatusChange:
             theNet->ReceivePlayerStatus(
-                thePacket->p1, thePacket->p2, thePacket->p3, *(long *)thePacket->dataBuffer);
+                thePacket->p1, thePacket->p2, thePacket->p3, *(FrameNumber *)thePacket->dataBuffer);
             break;
         case kpJSON:
             theNet->ReceiveJSON(
@@ -190,7 +190,7 @@ static std::string FormatDist(uint16_t distribution) {
 
 Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
     Boolean didHandle = true;
-    CNetManager *theNet = theGame->itsNet;
+    CNetManager *theNet = theGame->itsNet.get();
 
     // SDL_Log("CProtoControl::PacketHandler cmd=%d sender=%d\n", thePacket->command, thePacket->sender);
     switch (thePacket->command) {

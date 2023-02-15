@@ -24,7 +24,7 @@ typedef struct {
 
 typedef struct {
     uint8_t *data;
-    unsigned int len;
+    uint32_t len; // could/should probably be uint16_t?
     IPaddress address;
 } UDPpacket;
 
