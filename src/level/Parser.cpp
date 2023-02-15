@@ -26,6 +26,8 @@
 #include "Resource.h"
 #include "Types.h"
 
+#define STACKSIZE 256
+
 //#define DEBUGPARSER 1
 #ifdef DEBUGPARSER
 #include "stdio.h"
@@ -50,7 +52,7 @@ typedef struct {
     short calcLevel;
 } variableValue;
 
-Ptr stackMem = NULL;
+double stackMem[STACKSIZE] = {0};
 double *stackP = 0;
 CStringDictionary *symTable = 0;
 CTagBase *variableBase = 0;
@@ -1046,8 +1048,10 @@ void RunThis(unsigned char *script) {
 void AllocParser() {
     currentLevel = 0;
     InitSymbols();
-    stackMem = NewPtr(sizeof(double) * 256);
-    stackP = (double *)stackMem;
+    for(int i = 0; i < STACKSIZE; i++) {
+        stackMem[i] = 0;
+    }
+    stackP = stackMem;
 
     currentActor = NULL;
     std::string base = GetBaseScript();
@@ -1059,17 +1063,13 @@ void AllocParser() {
 }
 
 void DeallocParser() {
-    if (stackMem)
-        DisposePtr(stackMem);
-
     if (symTable)
         symTable->Dispose();
     if (variableBase)
         variableBase->Dispose();
     if (programBase)
         programBase->Dispose();
-
-    stackMem = NULL;
+    
     stackP = NULL;
     symTable = NULL;
     variableBase = NULL;

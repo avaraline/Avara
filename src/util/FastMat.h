@@ -21,7 +21,6 @@ static inline Fixed ToFixed(float a) { float temp = a * FIX1; return (Fixed)temp
 static inline float Deg2Rad(float deg) { return deg * PI / 180.0; }
 
 void InitMatrix();
-void CloseMatrix();
 
 typedef Fixed Vector[4]; /*	A vector consists of 4 fixed point numbers: x,y,z,w	*/
 typedef Vector Matrix[4]; /*	A matrix consists of 4 vectors.						*/
