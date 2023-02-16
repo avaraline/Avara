@@ -850,8 +850,10 @@ void CNetManager::ReceiveLatencyVote(int16_t sender,
             }
         }
     } else {
-        SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%u",
-                p3, itsGame->frameNumber);
+        if (IAmAlive()) {
+            SDL_Log("LatencyVote with checksum=%d received outside of the normal voting window not used for fragment check. fn=%u",
+                    p3, itsGame->frameNumber);
+        }
     }
 }
 

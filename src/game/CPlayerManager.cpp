@@ -495,10 +495,13 @@ void CPlayerManagerImpl::Dispose() {
 }
 
 void CPlayerManagerImpl::SendResendRequest(short askCount) {
+#if DONT_SEND_FRAME > 0
+#else
     if (/* theNetManager->fastTrack.addr.value || */ askCount > 0) {
         theNetManager->playerTable[theNetManager->itsCommManager->myId]->ResendFrame(
             itsGame->frameNumber, slot, kpKeyAndMouseRequest);
     }
+#endif
 }
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
@@ -572,8 +575,6 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             // that indicates the frame buffer has wrapped around and this frame won't be arriving
             if (frameFuncs[i].validFrame > itsGame->frameNumber || askCount > MAX_ASKS) {
                 itsGame->statusRequest = kAbortStatus;
-                // jump way forward to forget about all those frames we can't process
-                itsGame->frameNumber += FUNCTIONBUFFERS;
                 itsGame->itsApp->AddMessageLine(
                     "Exiting game - missing data from: " + GetPlayerName(),
                     MsgAlignment::Center, MsgCategory::Error);
@@ -588,7 +589,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 
         } while (frameFuncs[i].validFrame != itsGame->frameNumber);
 
-        if (askCount >= WAITING_MESSAGE_COUNT) {
+        if (askCount >= WAITING_MESSAGE_COUNT && frameFuncs[i].validFrame == itsGame->frameNumber) {
             gApplication->BroadcastCommand(kBusyEndCmd);
             itsGame->itsApp->AddMessageLine("...resuming game", MsgAlignment::Center);
             // HideCursor();
