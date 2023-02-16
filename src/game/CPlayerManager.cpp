@@ -512,6 +512,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         long quickTick;
         long firstTime = askAgainTime = TickCount();
         short askCount = 0;
+        static int MAX_ASKS = 4;
 
         itsGame->didWait = true;
 
@@ -541,7 +542,13 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 // FUNCIONBUFFERS*16 = 512*15 = 7680msec...
                 // divide that into 10%, 20%, 30%, 40% (divide by 10 gives you 10%) so that increasing
                 // askAgainTime will ask upto 4 times leaving a little time before the frame buffer rolls over
-                askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*15/10);
+                if (askCount <= MAX_ASKS) {
+                    int sum = (MAX_ASKS + 1) * MAX_ASKS / 2;  // = sum(1..MAX_ASKS)
+                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*15/sum);
+                } else {
+                    // don't wait long after last ask, get out of the loop (abort logic below)
+                    askAgainTime = quickTick + CLASSICFRAMETIME;
+                }
 
                 if (askCount == WAITING_MESSAGE_COUNT) {
                     SDL_Log("Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
@@ -563,7 +570,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 
             // all players give up after newer frames appear in the frameFuncs buffer because
             // that indicates the frame buffer has wrapped around and this frame won't be arriving
-            if (frameFuncs[i].validFrame > itsGame->frameNumber) {
+            if (frameFuncs[i].validFrame > itsGame->frameNumber || askCount > MAX_ASKS) {
                 itsGame->statusRequest = kAbortStatus;
                 // jump way forward to forget about all those frames we can't process
                 itsGame->frameNumber += FUNCTIONBUFFERS;
