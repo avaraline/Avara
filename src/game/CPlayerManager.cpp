@@ -1036,7 +1036,7 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->itsManager = this;
 
         itsPlayer->teamMask = myTeamMask;
-        itsPlayer->Reincarnate();
+        itsPlayer->Incarnate();
 
         if (itsPlayer->isInLimbo) {
             itsPlayer->Dispose();

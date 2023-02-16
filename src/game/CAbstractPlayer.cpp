@@ -1212,7 +1212,9 @@ void CAbstractPlayer::IncarnateSound() {
     gHub->ReleaseLink(aLink);
 }
 
-void CAbstractPlayer::Reincarnate() {
+void CAbstractPlayer::Incarnate() {
+    itsGame->itsApp->AddMessageLine("INCARNATE", MsgAlignment::Center, MsgCategory::Error);
+
     CIncarnator *placeList;
     long bestCount = LONG_MAX;
 
@@ -1245,6 +1247,94 @@ void CAbstractPlayer::Reincarnate() {
         }
     }
 }
+
+void CAbstractPlayer::Reincarnate() {
+    CIncarnator *incarnator;
+    CIncarnator *safeIncarn;
+    long bestCount = LONG_MAX;
+    Fixed furthest = MINFIXED;
+    
+    itsGame->itsApp->AddMessageLine("REINCARNATE", MsgAlignment::Left, MsgCategory::Error);
+    SDL_Log("ReincarnateFurthest SLOT= %d", itsManager->Slot());
+    SDL_Log("dist min= %.4f", ToFloat(furthest));
+
+    for (incarnator = itsGame->incarnatorList; incarnator != nullptr; incarnator = incarnator->nextIncarnator) {
+        if (incarnator->enabled && (incarnator->colorMask & teamMask)) { //} && incarnator->useCount == 0) {
+            bestCount = incarnator->useCount;
+
+            SDL_Log("\n");
+            SDL_Log("INCARN LOC= %s", FormatVectorFloat(incarnator->location, 3).c_str());
+            SDL_Log("    THIS Player LOC= %s", FormatVectorFloat(itsGame->itsNet->playerTable[itsManager->Slot()]->GetPlayer()->location, 3).c_str());
+
+            for (int i = 0; i < kMaxAvaraPlayers; i++) {
+                if(i != itsManager->Slot()) {
+                    CAbstractPlayer* player = itsGame->itsNet->playerTable[i]->GetPlayer();
+                    if (player != NULL && !player->isOut) {
+                        SDL_Log("FOUND PLAYER!");
+                        SDL_Log("    PLAYER= %d", i);
+                        SDL_Log("    Player LOC= %s", FormatVectorFloat(player->location, 3).c_str());
+
+                        if(i != itsManager->Slot()) {
+                            //Fixed d = DistanceEstimate(player->location[0], incarnator->location[0], player->location[2], incarnator->location[2]);
+                            Fixed d = FDistanceEstimate(player->location[0] - incarnator->location[0],
+                                                        player->location[1] - incarnator->location[1],
+                                                        player->location[2] - incarnator->location[2]);
+
+                            SDL_Log("         checking..");
+                            SDL_Log("         p0= %.4f p2= %.4f i0= %.4f i2= %.4f", ToFloat(player->location[0]),
+                                    ToFloat(player->location[2]), ToFloat(incarnator->location[0]), ToFloat(incarnator->location[2]));
+                            SDL_Log("         dist= %.4f", ToFloat(d));
+                            
+                            if(d > furthest) {
+                                furthest = d;
+                                safeIncarn = incarnator;
+                                SDL_Log("         FOUND FURTHEST");
+                            }
+                            else if(d == furthest) {
+                                SDL_Log("         d == furthest!!!!!!!!!");
+
+                                if(safeIncarn != NULL && incarnator->useCount < safeIncarn->useCount) {
+                                    bestCount = incarnator->useCount;
+                                    safeIncarn = incarnator;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // if couldn't find an available Incarnator above, try creating a random one
+    if (safeIncarn == nullptr) {
+        // why 3 tries?  it's somewhat arbitrary but if there's a (high) 10% chance of not working,
+        // then 3 tries will get that down to 0.1%.  In most levels, the not-working chance is probably
+        // closer to 1% so 3 tries = 0.0001%
+        for (int tries = 3; isInLimbo && tries > 0; tries--) {
+            CRandomIncarnator waldo(itsGame->actorList);
+            if (ReincarnateComplete(&waldo)) {
+                break;
+            }
+        }
+    }
+    else {
+        SDL_Log("SAFE LOC= %s", FormatVector(safeIncarn->location, 3).c_str());
+        ReincarnateComplete(safeIncarn);
+    }
+    
+     
+     
+    /*
+    // try the least-visited Incarnators until one works
+    for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
+        if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
+            if (ReincarnateComplete(placeList)) {
+                break;
+            }
+        }
+    }
+    */
+}
+
 
 bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
     // increment useCount regardless of success, so the next player doesn't try to use this spot
