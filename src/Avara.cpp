@@ -74,8 +74,10 @@ int main(int argc, char *argv[]) {
         } else if (arg == "-c" || arg == "--connect") {
             connectAddress = std::string(argv[++i]);
             app->Set(kLastAddress, connectAddress);
-        } else if (arg == "-s" || arg == "--serve") {
+        } else if (arg == "-s" || arg == "--serve" ||
+                   arg == "-S" || arg == "--Serve") {
             host = true;
+            app->Set(kTrackerRegister, arg[1] == 'S' || arg[2] == 'S');
         } else if (arg == "-f" || arg == "--frametime") {
             uint16_t frameTime = atol(argv[++i]);  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
