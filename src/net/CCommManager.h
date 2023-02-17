@@ -11,6 +11,7 @@
 #include "CDirectObject.h"
 #include "Memory.h"
 #include <list>
+#include <vector>
 
 #define TALKERSTRINGS 1000
 #define PACKETDATABUFFERSIZE (1024-40)          // -40 to get UDPPacketInfo to 1024 bytes
