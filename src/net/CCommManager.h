@@ -10,6 +10,7 @@
 #pragma once
 #include "CDirectObject.h"
 #include "Memory.h"
+#include <list>
 
 #define TALKERSTRINGS 1000
 #define PACKETDATABUFFERSIZE (1024-40)          // -40 to get UDPPacketInfo to 1024 bytes
@@ -54,10 +55,10 @@ class CCommManager : public CDirectObject {
 public:
     short myId; //	Required/accessed publicly
 
-    Ptr packetBuffers;
+    std::size_t packetSize;
+    std::list<std::vector<std::byte>> packetBuffers;
     QHdr freeQ;
     QHdr inQ;
-    long freeCount;
 
     ReceiverRecord *firstReceivers[2]; //	Receiver queues
 
@@ -67,7 +68,9 @@ public:
     ~CCommManager() { Dispose(); }
 
     virtual void ICommManager(short packetSpace);
-    virtual OSErr AllocatePacketBuffers(short numPackets);
+
+    void InitializePacketQueues(int numPackets, size_t packetSize);
+    void AllocatePacketBuffers(int numPackets);
     virtual void AddReceiver(ReceiverRecord *aReceiver, Boolean delayed);
     virtual void RemoveReceiver(ReceiverRecord *aReceiver, Boolean delayed);
 

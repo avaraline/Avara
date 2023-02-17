@@ -97,7 +97,7 @@ public:
     Str255 inviteString;
 
     virtual void IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod);
-    virtual OSErr AllocatePacketBuffers(short numPackets);
+
     virtual void Disconnect();
     virtual void WritePrefs();
     virtual void Dispose();

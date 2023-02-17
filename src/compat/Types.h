@@ -71,7 +71,6 @@ struct QElem {
 typedef struct QElem QElem;
 typedef QElem *QElemPtr;
 struct QHdr {
-    volatile int16_t qFlags;
     volatile QElemPtr qHead;
     volatile QElemPtr qTail;
 };

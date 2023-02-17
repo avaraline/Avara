@@ -61,7 +61,6 @@ void CUDPConnection::IUDPConnection(CUDPComm *theOwner) {
     port = 0;
 
     for (i = 0; i < kQueueCount; i++) {
-        queues[i].qFlags = 0;
         queues[i].qHead = 0;
         queues[i].qTail = 0;
     }
