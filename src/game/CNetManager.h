@@ -21,7 +21,7 @@
 #include <vector>
 #include <memory>
 
-#define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
+#define NULLNETPACKETS (MINIMUMBUFFERRESERVE)
 #define SERVERNETPACKETS (16 * 2 * kMaxAvaraPlayers)
 #define CLIENTNETPACKETS (16 * kMaxAvaraPlayers)
 #define TCPNETPACKETS (32 * kMaxAvaraPlayers)
