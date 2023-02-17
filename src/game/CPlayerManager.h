@@ -17,7 +17,7 @@
 #include <deque>
 #include <string>
 
-enum {
+enum LoadingStatus {
     kLNotConnected,
     kLConnected,
     kLActive,
@@ -29,6 +29,7 @@ enum {
     kLPaused,
     kLNoVehicle,
     kLAway,
+    kLSpectating,
     kLReady,    // implies kLLoaded, i.e. Loaded & Ready to start
 
     kStringNorth,

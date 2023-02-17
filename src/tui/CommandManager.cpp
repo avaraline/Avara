@@ -53,6 +53,11 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           METHOD_TO_LAMBDA_VARGS(ToggleAwayState));
     TextCommand::Register(cmd);
 
+    cmd = new TextCommand("/spectate        <- toggle spectator mode\n"
+                          "/spectate slot   <- toggle spectator mode of slot, starting from 1",
+                          METHOD_TO_LAMBDA_VARGS(ToggleSpectatorState));
+    TextCommand::Register(cmd);
+
     cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'",
                           METHOD_TO_LAMBDA_VARGS(LoadNamedLevel));
     TextCommand::Register(cmd);
@@ -198,6 +203,14 @@ bool CommandManager::KickPlayer(VectorOfArgs vargs) {
 }
 
 bool CommandManager::ToggleAwayState(VectorOfArgs vargs) {
+    return CommandManager::ToggleState(vargs, kLAway, "away");
+}
+
+bool CommandManager::ToggleSpectatorState(VectorOfArgs vargs) {
+    return CommandManager::ToggleState(vargs, kLSpectating, "spectating");
+}
+
+bool CommandManager::ToggleState(VectorOfArgs vargs, LoadingStatus toggleState, std::string stateName) {
     short slot = itsApp->GetNet()->itsCommManager->myId;
 
     if (vargs.size() > 0) {
@@ -232,12 +245,12 @@ bool CommandManager::ToggleAwayState(VectorOfArgs vargs) {
         return false;
     }
 
-    short newStatus = (playerToChange->LoadingStatus() == kLAway) ? kLConnected : kLAway;
+    short newStatus = (playerToChange->LoadingStatus() == toggleState) ? kLConnected : toggleState;
     FrameNumber noWinFrame = -1;
     itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange,
                                         playerToChange->Slot(), newStatus, 0, sizeof(noWinFrame), (Ptr)&noWinFrame);
     itsApp->AddMessageLine("Status of " + playerToChange->GetPlayerName() +
-                   " changed to " + std::string(newStatus == kLConnected ? "available" : "away"));
+                   " changed to " + std::string(newStatus == kLConnected ? "available" : stateName));
     return true;
 }
 

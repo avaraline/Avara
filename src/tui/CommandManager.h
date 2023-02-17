@@ -2,9 +2,9 @@
 #pragma once
 
 class CAvaraAppImpl;
-class CPlayerManager;
 
 #include "TextCommand.h"
+#include "CPlayerManager.h"
 
 #include <deque>
 
@@ -37,6 +37,8 @@ public:
     // ServerCommands
     bool KickPlayer(VectorOfArgs);
     bool ToggleAwayState(VectorOfArgs);
+    bool ToggleSpectatorState(VectorOfArgs);
+    bool ToggleState(VectorOfArgs, LoadingStatus, std::string);
 
     // LevelCommands
     bool LoadNamedLevel(VectorOfArgs);
