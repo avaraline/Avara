@@ -50,7 +50,12 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
     cmd = new TextCommand("/away            <- toggle my presence\n"
                           "/away slot       <- toggle presence of given slot, starting from 1",
-                          METHOD_TO_LAMBDA_VARGS(ToggleAwayState));
+                          METHOD_TO_LAMBDA_VARGS(ToggleAway));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/spectate        <- toggle spectator mode\n"
+                          "/spectate slot   <- toggle spectator mode of slot, starting from 1",
+                          METHOD_TO_LAMBDA_VARGS(ToggleSpectator));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'",
@@ -197,7 +202,15 @@ bool CommandManager::KickPlayer(VectorOfArgs vargs) {
     return true;
 }
 
-bool CommandManager::ToggleAwayState(VectorOfArgs vargs) {
+bool CommandManager::ToggleAway(VectorOfArgs vargs) {
+    return CommandManager::TogglePresence(vargs, kzAway, "away");
+}
+
+bool CommandManager::ToggleSpectator(VectorOfArgs vargs) {
+    return CommandManager::TogglePresence(vargs, kzSpectating, "spectating");
+}
+
+bool CommandManager::TogglePresence(VectorOfArgs vargs, PresenceType togglePresence, std::string stateName) {
     short slot = itsApp->GetNet()->itsCommManager->myId;
 
     if (vargs.size() > 0) {
@@ -232,12 +245,18 @@ bool CommandManager::ToggleAwayState(VectorOfArgs vargs) {
         return false;
     }
 
-    short newStatus = (playerToChange->LoadingStatus() == kLAway) ? kLConnected : kLAway;
+    PresenceType newPresence = togglePresence;
+    if (playerToChange->Presence() == togglePresence) {
+        newPresence = kzAvailable;
+    }
+
     FrameNumber noWinFrame = -1;
+//    itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpPlayerPresenceChange,
+//                               playerToChange->Slot(), newPresence, FRandom(), 0, NULL);
     itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange,
-                                        playerToChange->Slot(), newStatus, 0, sizeof(noWinFrame), (Ptr)&noWinFrame);
+            playerToChange->Slot(), playerToChange->LoadingStatus(), newPresence, sizeof(FrameNumber), (Ptr)&noWinFrame);
     itsApp->AddMessageLine("Status of " + playerToChange->GetPlayerName() +
-                   " changed to " + std::string(newStatus == kLConnected ? "available" : "away"));
+                   " changed to " + std::string(newPresence == kzAvailable ? "available" : stateName));
     return true;
 }
 

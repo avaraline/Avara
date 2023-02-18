@@ -41,6 +41,7 @@ void CPlayerManagerImpl::IPlayerManager(CAvaraGame *theGame, short id, CNetManag
     itsGame = theGame;
     itsPlayer = NULL;
     slot = id;
+    presence = kzAvailable;
 
     int width, height;
     SDL_GetWindowSize(itsGame->itsApp->sdlWindow(), &width, &height);
@@ -911,18 +912,12 @@ void CPlayerManagerImpl::NetDisconnect() {
     // theRoster->InvalidateArea(kOnePlayerBox, position);
 }
 
-void CPlayerManagerImpl::ChangeNameAndLocation(StringPtr theName, Point location) {
+void CPlayerManagerImpl::ChangeName(StringPtr theName) {
     StringPtr lastChar;
 
     if (loadingStatus == kLNotConnected) {
         loadingStatus = kLConnected;
         // theRoster->InvalidateArea(kOnePlayerBox, position);
-    }
-
-    if (location.h != globalLocation.h || location.v != globalLocation.v) {
-        globalLocation = location;
-        // theRoster->InvalidateArea(kFullMapBox, position);
-        // theRoster->InvalidateArea(kMapInfoBox, position);
     }
 
     if (strncmp((char*)&playerName[1], (char*)&theName[1], size_t(theName[0])) != 0) {
@@ -952,7 +947,8 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && loadingStatus != kLAway) {
+    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && presence != kzAway)
+    {
         oldStatus = loadingStatus;
 
         if (serverErr || levelErr) {
@@ -1090,16 +1086,11 @@ CAbstractPlayer *CPlayerManagerImpl::TakeAnyActor(CAbstractPlayer *actorList) {
 
     return nextPlayer;
 }
-void CPlayerManagerImpl::SetPlayerStatus(short newStatus, FrameNumber theWin) {
+void CPlayerManagerImpl::SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) {
     winFrame = theWin;
 
-    if (newStatus != loadingStatus) {
-        if (loadingStatus == kLNotConnected) { // theRoster->InvalidateArea(kOnePlayerBox, position);
-        }
-
-        loadingStatus = newStatus;
-        // theRoster->InvalidateArea(kUserBoxTopLine, position);
-    }
+    loadingStatus = newStatus;
+    presence = newPresence;
 }
 
 void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
@@ -1113,7 +1104,7 @@ void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
 }
 
 bool CPlayerManagerImpl::IsAway() {
-    return (loadingStatus == kLAway);
+    return (presence == kzAway);
 }
 
 void CPlayerManagerImpl::AbortRequest() {
@@ -1279,8 +1270,11 @@ void CPlayerManagerImpl::IsRegistered(short reg) {
 Str255& CPlayerManagerImpl::PlayerRegName() {
     return playerRegName;
 }
-short CPlayerManagerImpl::LoadingStatus() {
+LoadingState CPlayerManagerImpl::LoadingStatus() {
     return loadingStatus;
+}
+PresenceType CPlayerManagerImpl::Presence() {
+    return presence;
 }
 short CPlayerManagerImpl::LevelCRC() {
     return levelCRC;

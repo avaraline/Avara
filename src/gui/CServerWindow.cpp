@@ -38,7 +38,7 @@ CServerWindow::CServerWindow(CApplication *app) : CWindow(app, "Server") {
             avara->GetNet()->ChangeNet(kServerNet, "");
     });
 
-    nanogui::CheckBox *registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
+    registerBox = new nanogui::CheckBox(this, "Register With Tracker:", [this, app](bool checked) {
         this->trackerBox->setEditable(checked);
         this->trackerBox->setEnabled(checked);
         app->Set(kTrackerRegister, (int)checked);
@@ -129,6 +129,7 @@ bool CServerWindow::DoCommand(int theCommand) {
 void CServerWindow::PrefChanged(std::string name) {
     frameTimeBox->setSelectedIndex(6-log2(gCurrentGame->frameTime));
     latencyBox->setValue(std::to_string(mApplication->Get<float>(kLatencyToleranceTag)).substr(0, 5));
+    registerBox->setChecked(mApplication->Get<int>(kTrackerRegister) != 0);
 }
 
 void CServerWindow::EnableLatencyOptions(bool enable) {

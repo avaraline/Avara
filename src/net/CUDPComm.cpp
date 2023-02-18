@@ -1136,7 +1136,8 @@ ClockTick CUDPComm::GetClock() {
 **	no other data to send within twice that period.
 */
 void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod) {
-    ICommManager(bufferCount);
+    // create queues big enough to hold UDPPacketInfo packets
+    InitializePacketQueues(bufferCount, sizeof(UDPPacketInfo));
 
     inviteString[0] = 0;
 
@@ -1206,36 +1207,6 @@ void CUDPComm::IUDPComm(short clientCount, short bufferCount, short version, Clo
     localPort = 0;
     localIP = 0;
     password[0] = 0;
-}
-
-OSErr CUDPComm::AllocatePacketBuffers(short packetSpace) {
-    OSErr theErr;
-    Ptr mem;
-    UDPPacketInfo *pp;
-    
-    if (freeQ.qHead != nullptr) {
-        // should only happen when called when extending buffer, see CCommManager::ProcessQueue
-        DBG_Log("q", "CUDPComm::AllocatePacketBuffers adding chunk of %hd packet buffers to an EXISTING &freeQ = %p\n",
-                packetSpace, &freeQ);
-    }
-
-    mem = NewPtr(sizeof(Ptr) + sizeof(UDPPacketInfo) * packetSpace);
-    theErr = MemError();
-
-    if (theErr == noErr) {
-        *(Ptr *)mem = packetBuffers;
-        packetBuffers = mem;
-
-        pp = (UDPPacketInfo *)(packetBuffers + sizeof(Ptr));
-
-        while (packetSpace--) {
-            Enqueue((QElemPtr)pp, &freeQ);
-            freeCount++;
-            pp++;
-        }
-    }
-
-    return theErr;
 }
 
 void CUDPComm::Disconnect() {
