@@ -24,7 +24,6 @@
 		E517F05F299713DB0036B206 /* CSmartBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6329895118007A875D /* CSmartBox.cpp */; };
 		E517F060299713DB0036B206 /* CSmartPart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6B29895118007A875D /* CSmartPart.cpp */; };
 		E517F061299713DB0036B206 /* CViewParameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C6529895118007A875D /* CViewParameters.cpp */; };
-		E517F062299713DB0036B206 /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9429895118007A875D /* Files.cpp */; };
 		E517F063299713DB0036B206 /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
 		E517F064299713DB0036B206 /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
 		E517F065299713DB0036B206 /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
@@ -171,7 +170,6 @@
 		E5890B8D29895078007A875D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5890B8A29895078007A875D /* Assets.xcassets */; };
 		E5890C9E29895118007A875D /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9129895118007A875D /* Memory.cpp */; };
 		E5890C9F29895118007A875D /* Resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9229895118007A875D /* Resource.cpp */; };
-		E5890CA029895118007A875D /* Files.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9429895118007A875D /* Files.cpp */; };
 		E5890CA129895118007A875D /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9529895118007A875D /* System.cpp */; };
 		E5890CA229895118007A875D /* CCommManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890B9C29895118007A875D /* CCommManager.cpp */; };
 		E5890CA329895118007A875D /* CUDPComm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890BA129895118007A875D /* CUDPComm.cpp */; };
@@ -364,12 +362,10 @@
 		E5890B9129895118007A875D /* Memory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Memory.cpp; sourceTree = "<group>"; };
 		E5890B9229895118007A875D /* Resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Resource.cpp; sourceTree = "<group>"; };
 		E5890B9329895118007A875D /* Types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
-		E5890B9429895118007A875D /* Files.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Files.cpp; sourceTree = "<group>"; };
 		E5890B9529895118007A875D /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
 		E5890B9629895118007A875D /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
 		E5890B9729895118007A875D /* Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Memory.h; sourceTree = "<group>"; };
 		E5890B9829895118007A875D /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
-		E5890B9929895118007A875D /* Files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Files.h; sourceTree = "<group>"; };
 		E5890B9B29895118007A875D /* CCommManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCommManager.h; sourceTree = "<group>"; };
 		E5890B9C29895118007A875D /* CCommManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCommManager.cpp; sourceTree = "<group>"; };
 		E5890B9D29895118007A875D /* UDPTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPTags.h; sourceTree = "<group>"; };
@@ -1054,8 +1050,6 @@
 		E5890B9029895118007A875D /* compat */ = {
 			isa = PBXGroup;
 			children = (
-				E5890B9429895118007A875D /* Files.cpp */,
-				E5890B9929895118007A875D /* Files.h */,
 				E5890B9129895118007A875D /* Memory.cpp */,
 				E5890B9729895118007A875D /* Memory.h */,
 				E5890B9229895118007A875D /* Resource.cpp */,
@@ -2000,7 +1994,6 @@
 				E517F05F299713DB0036B206 /* CSmartBox.cpp in Sources */,
 				E517F060299713DB0036B206 /* CSmartPart.cpp in Sources */,
 				E517F061299713DB0036B206 /* CViewParameters.cpp in Sources */,
-				E517F062299713DB0036B206 /* Files.cpp in Sources */,
 				E517F063299713DB0036B206 /* Memory.cpp in Sources */,
 				E517F064299713DB0036B206 /* Resource.cpp in Sources */,
 				E517F065299713DB0036B206 /* System.cpp in Sources */,
@@ -2249,7 +2242,6 @@
 				E5890CB829895118007A875D /* CPlacedActors.cpp in Sources */,
 				E5890CE929895118007A875D /* CNetManager.cpp in Sources */,
 				E5890CA729895118007A875D /* CRC.cpp in Sources */,
-				E5890CA029895118007A875D /* Files.cpp in Sources */,
 				E5890EF329895124007A875D /* stackedwidget.cpp in Sources */,
 				E5890EF029895124007A875D /* vscrollpanel.cpp in Sources */,
 				E5890CCF29895118007A875D /* CAbstractPlayer.cpp in Sources */,

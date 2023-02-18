@@ -57,7 +57,7 @@ public:
     // OSErr				writeErr;
     // OSErr				readErr;
 
-    class CTagBase *prefs;
+    // class CTagBase *prefs;
     class CUDPConnection *connections;
     class CUDPConnection *nextSender;
     /*
