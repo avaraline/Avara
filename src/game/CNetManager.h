@@ -14,6 +14,7 @@
 #include "KeyFuncs.h"
 //#include "LevelScoreRecord.h"
 #include "PlayerConfig.h"
+#include "CPlayerManager.h"
 
 #include <SDL2/SDL.h>
 #include <string>
@@ -50,7 +51,6 @@ void ServerOptionsDialog();
 #define kAllowTeamControlBitMask ((1 << kFreeColorBit) + (1 << kAllowOwnColorBit))
 class CAvaraGame;
 class CCommManager;
-class CPlayerManager;
 class CProtoControl;
 // class	CRosterWindow;
 class CAbstractPlayer;
@@ -133,7 +133,7 @@ public:
     virtual void SendRealName(short toSlot);
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
-    virtual void RecordNameAndLocation(short slotId, StringPtr theName, short status, Point location);
+    virtual void RecordNameAndLocation(short slotId, StringPtr theName, LoadingState status, Point location);
     virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
@@ -163,7 +163,7 @@ public:
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
-    virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, FrameNumber winFrame);
+    virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, Fixed randomKey, FrameNumber winFrame);
     virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
 
     virtual short PlayerCount();

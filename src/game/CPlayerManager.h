@@ -17,7 +17,7 @@
 #include <deque>
 #include <string>
 
-enum LoadingStatus {
+enum LoadingState {
     kLNotConnected,
     kLConnected,
     kLActive,
@@ -81,8 +81,9 @@ public:
     virtual void IsRegistered(short) = 0;
     virtual Str255& PlayerRegName() = 0;
     virtual short LoadingStatus() = 0;
-    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin) = 0;
+    virtual void SetPlayerStatus(LoadingState newStatus, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
+    virtual bool IsActive() = 0;
 
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
     virtual void SetPosition(short pos) = 0;
@@ -172,7 +173,7 @@ private:
     std::deque<char> lineBuffer;
 
     FrameNumber winFrame;
-    short loadingStatus;
+    LoadingState loadingStatus;
     short slot;
     short playerColor;
 
@@ -225,9 +226,10 @@ public:
     virtual void NetDisconnect();
     virtual void ChangeNameAndLocation(StringPtr theName, Point location);
     virtual void SetPosition(short pos);
-    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin);
+    virtual void SetPlayerStatus(LoadingState newStatus, FrameNumber theWin);
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
+    virtual bool IsActive();
     virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode);
 
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);

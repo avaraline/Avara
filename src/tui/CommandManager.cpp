@@ -210,7 +210,7 @@ bool CommandManager::ToggleSpectatorState(VectorOfArgs vargs) {
     return CommandManager::ToggleState(vargs, kLSpectating, "spectating");
 }
 
-bool CommandManager::ToggleState(VectorOfArgs vargs, LoadingStatus toggleState, std::string stateName) {
+bool CommandManager::ToggleState(VectorOfArgs vargs, LoadingState toggleState, std::string stateName) {
     short slot = itsApp->GetNet()->itsCommManager->myId;
 
     if (vargs.size() > 0) {

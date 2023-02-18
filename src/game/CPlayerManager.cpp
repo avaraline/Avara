@@ -952,7 +952,8 @@ void CPlayerManagerImpl::SetPosition(short pos) {
 void CPlayerManagerImpl::LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {
     short oldStatus;
 
-    if (loadingStatus != kLNotConnected && loadingStatus != kLActive && loadingStatus != kLAway) {
+    if (loadingStatus != kLNotConnected && !IsActive() && !IsAway())
+    {
         oldStatus = loadingStatus;
 
         if (serverErr || levelErr) {
@@ -1090,14 +1091,16 @@ CAbstractPlayer *CPlayerManagerImpl::TakeAnyActor(CAbstractPlayer *actorList) {
 
     return nextPlayer;
 }
-void CPlayerManagerImpl::SetPlayerStatus(short newStatus, FrameNumber theWin) {
+void CPlayerManagerImpl::SetPlayerStatus(LoadingState newStatus, FrameNumber theWin) {
     winFrame = theWin;
 
     if (newStatus != loadingStatus) {
-        if (loadingStatus == kLNotConnected) { // theRoster->InvalidateArea(kOnePlayerBox, position);
+        if (loadingStatus == kLSpectating && newStatus == kLActive /* || newStatus == kLConnected */) {
+            // don't change from kLSpectating to kLActive, or from kLSpectating back to kL
+            return;
         }
 
-        loadingStatus = newStatus;
+        loadingStatus = (LoadingState)newStatus;
         // theRoster->InvalidateArea(kUserBoxTopLine, position);
     }
 }
@@ -1115,6 +1118,12 @@ void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
 bool CPlayerManagerImpl::IsAway() {
     return (loadingStatus == kLAway);
 }
+
+bool CPlayerManagerImpl::IsActive() {
+    // the loadingStatus is holding too many states at once...but kLSpectating is treated like Active
+    return (loadingStatus == kLActive || loadingStatus == kLSpectating);
+}
+
 
 void CPlayerManagerImpl::AbortRequest() {
     theNetManager->activePlayersDistribution &= ~(1 << slot);

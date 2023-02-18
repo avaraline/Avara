@@ -955,6 +955,14 @@ void CAbstractPlayer::FrameAction() {
 }
 
 void CAbstractPlayer::PlayerAction() {
+    if (itsGame->frameNumber == 0 && itsManager->LoadingStatus() == kLSpectating) {
+        lives = 0;
+#define EXPLODING_SPECTATORS
+#ifdef EXPLODING_SPECTATORS
+        WasDestroyed();
+#endif
+        GoLimbo(0);  // hides the hector
+    }
     if (lives) {
         itsGame->playersStanding++;
         // Send score updates to other players every 17 seconds worth of frames

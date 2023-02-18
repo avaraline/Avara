@@ -38,7 +38,7 @@ public:
     bool KickPlayer(VectorOfArgs);
     bool ToggleAwayState(VectorOfArgs);
     bool ToggleSpectatorState(VectorOfArgs);
-    bool ToggleState(VectorOfArgs, LoadingStatus, std::string);
+    bool ToggleState(VectorOfArgs, LoadingState, std::string);
 
     // LevelCommands
     bool LoadNamedLevel(VectorOfArgs);

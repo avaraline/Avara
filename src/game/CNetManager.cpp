@@ -264,7 +264,7 @@ void CNetManager::ValueChange(short slot, std::string attributeName, bool value)
     itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
 }
 
-void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, short status, Point location) {
+void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, LoadingState status, Point location) {
     if (theId >= 0 && theId < kMaxAvaraPlayers) {
         totalDistribution |= 1 << theId;
         if (status != 0)
@@ -662,7 +662,7 @@ void CNetManager::ResumeGame() {
 
             statusTest = 0;
             for (i = 0; i < kMaxAvaraPlayers; i++) {
-                if (playerTable[i]->LoadingStatus() == kLActive) {
+                if (playerTable[i]->IsActive()) {
                     statusTest |= 1 << i;
                 }
             }
@@ -900,7 +900,9 @@ void CNetManager::SendStartCommand(int16_t originalSender) {
         // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if (playerTable[i]->LoadingStatus() == kLLoaded || playerTable[i]->LoadingStatus() == kLReady) {
+            if (playerTable[i]->LoadingStatus() == kLLoaded ||
+                playerTable[i]->LoadingStatus() == kLReady ||
+                playerTable[i]->LoadingStatus() == kLSpectating) {
                 activePlayersDistribution |= 1 << i;
             }
         }
@@ -1033,7 +1035,9 @@ void CNetManager::StopGame(short newStatus) {
     CAbstractPlayer *thePlayer;
     FrameNumber winFrame = 0;
 
-    SDL_Log("CNetManager::StopGame\n");
+    thePlayerManager = playerTable[slot];
+
+    SDL_Log("CNetManager::StopGame(%d)\n", newStatus);
     isPlaying = false;
     if (newStatus == kPauseStatus) {
         playerStatus = kLPaused;
@@ -1041,10 +1045,14 @@ void CNetManager::StopGame(short newStatus) {
         if (newStatus == kNoVehicleStatus)
             playerStatus = kLNoVehicle;
         else
-            playerStatus = isConnected ? kLConnected : kLNotConnected;
+            if (thePlayerManager->LoadingStatus() == kLSpectating) {
+                // don't change from kLSpectating after the game is over
+                playerStatus = kLSpectating;
+            } else {
+                playerStatus = isConnected ? kLConnected : kLNotConnected;
+            }
     }
 
-    thePlayerManager = playerTable[slot];
     thePlayer = thePlayerManager->GetPlayer();
 
     if (thePlayer) {
@@ -1073,7 +1081,7 @@ void CNetManager::StopGame(short newStatus) {
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
-void CNetManager::ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, FrameNumber winFrame) {
+void CNetManager::ReceivePlayerStatus(short slotId, LoadingState newStatus, Fixed randomKey, FrameNumber winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         if (randomKey != 0) {
             playerTable[slotId]->RandomKey(randomKey);
