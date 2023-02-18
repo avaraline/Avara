@@ -955,7 +955,7 @@ void CAbstractPlayer::FrameAction() {
 }
 
 void CAbstractPlayer::PlayerAction() {
-    if (itsGame->frameNumber == 0 && itsManager->LoadingStatus() == kLSpectating) {
+    if (itsGame->frameNumber == 0 && itsManager->Presence() == kzSpectating) {
         lives = 0;
 #define EXPLODING_SPECTATORS
 #ifdef EXPLODING_SPECTATORS

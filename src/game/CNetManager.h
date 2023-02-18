@@ -133,7 +133,7 @@ public:
     virtual void SendRealName(short toSlot);
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
-    virtual void RecordNameAndLocation(short slotId, StringPtr theName, LoadingState status, Point location);
+    virtual void RecordNameAndState(short slotId, StringPtr theName, LoadingState status, PresenceType presence);
     virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
@@ -163,7 +163,7 @@ public:
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
     virtual void ReceivedUnavailable(short slot, short fromSlot);
 
-    virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, Fixed randomKey, FrameNumber winFrame);
+    virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame);
     virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
 
     virtual short PlayerCount();

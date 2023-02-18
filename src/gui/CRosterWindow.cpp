@@ -277,7 +277,6 @@ bool CRosterWindow::DoCommand(int theCommand) {
 }
 
 std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
-    short status = player->LoadingStatus();
     std::string strStatus;
     if (player->WinFrame() >= 0) {
         long timeTemp = FMulDiv(player->WinFrame(), ((CAvaraAppImpl *)gApplication)->GetGame()->frameTime, 10);
@@ -297,32 +296,40 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
         return strStatus;
     }
 
-    if(status == kLAway) {
-        strStatus = "not playing";
-    } else if(status == kLSpectating) {
-        strStatus = "spectator";
-    } else if (status == kLConnected) {
-        strStatus = "connected";
-    } else if (status == kLLoaded) {
-        strStatus = "loaded";
-    } else if (status == kLReady) {
-        strStatus = "ready";
-    } else if (status == kLWaiting) {
-        strStatus = "waiting";
-    } else if (status == kLTrying) {
-        strStatus = "loading";
-    } else if (status == kLMismatch) {
-        strStatus = "version mismatch";
-    } else if (status == kLNotFound) {
-        strStatus = "level not found";
-    } else if (status == kLPaused) {
-        strStatus = "paused";
-    } else if (status == kLActive) {
-        strStatus = "active";
-    } else if (status == kLNoVehicle) {
-        strStatus = "HECTOR not available";
+    LoadingState status = player->LoadingStatus();
+    PresenceType presence = player->Presence();
+    if (presence != kzAway) {
+        if (status == kLConnected) {
+            strStatus = "connected";
+        } else if (status == kLLoaded) {
+            strStatus = "loaded";
+        } else if (status == kLReady) {
+            strStatus = "ready";
+        } else if (status == kLWaiting) {
+            strStatus = "waiting";
+        } else if (status == kLTrying) {
+            strStatus = "loading";
+        } else if (status == kLMismatch) {
+            strStatus = "version mismatch";
+        } else if (status == kLNotFound) {
+            strStatus = "level not found";
+        } else if (status == kLPaused) {
+            strStatus = "paused";
+        } else if (status == kLActive) {
+            strStatus = "active";
+        } else if (status == kLNoVehicle) {
+            strStatus = "HECTOR not available";
+        } else {
+            strStatus = "";
+        }
     } else {
-        strStatus = "";
+        strStatus = "away";
+    }
+    if (presence == kzSpectating) {
+        if (status == kLConnected || status == kLActive || status == kLLoaded) {
+            strStatus = "spectator";
+        }
+//        strStatus += eyeballs_utf8;
     }
     return strStatus;
 }

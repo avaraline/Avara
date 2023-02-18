@@ -59,12 +59,12 @@ public:
     virtual short IsRegistered() { return 0; }
     virtual void IsRegistered(short) {}
     virtual Str255& PlayerRegName() { return str; }
-    virtual short LoadingStatus() { return 0; }
+    virtual LoadingState LoadingStatus() { return kLNotConnected; }
+    virtual PresenceType Presence() { return kzAvailable; }
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
-    virtual void SetPlayerStatus(LoadingState newStatus, FrameNumber theWin) {}
+    virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) {}
     virtual bool IsAway() { return false; };
-    virtual bool IsActive() { return true; };
-    virtual void ChangeNameAndLocation(StringPtr theName, Point location) {}
+    virtual void ChangeName(StringPtr theName) {}
     virtual void SetPosition(short pos) {}
 
     virtual void RosterKeyPress(unsigned char c) {}

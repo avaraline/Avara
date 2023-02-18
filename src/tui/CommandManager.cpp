@@ -50,12 +50,12 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
     cmd = new TextCommand("/away            <- toggle my presence\n"
                           "/away slot       <- toggle presence of given slot, starting from 1",
-                          METHOD_TO_LAMBDA_VARGS(ToggleAwayState));
+                          METHOD_TO_LAMBDA_VARGS(ToggleAway));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/spectate        <- toggle spectator mode\n"
                           "/spectate slot   <- toggle spectator mode of slot, starting from 1",
-                          METHOD_TO_LAMBDA_VARGS(ToggleSpectatorState));
+                          METHOD_TO_LAMBDA_VARGS(ToggleSpectator));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/load chok       <- load level with name containing the letters 'chok'",
@@ -202,15 +202,15 @@ bool CommandManager::KickPlayer(VectorOfArgs vargs) {
     return true;
 }
 
-bool CommandManager::ToggleAwayState(VectorOfArgs vargs) {
-    return CommandManager::ToggleState(vargs, kLAway, "away");
+bool CommandManager::ToggleAway(VectorOfArgs vargs) {
+    return CommandManager::TogglePresence(vargs, kzAway, "away");
 }
 
-bool CommandManager::ToggleSpectatorState(VectorOfArgs vargs) {
-    return CommandManager::ToggleState(vargs, kLSpectating, "spectating");
+bool CommandManager::ToggleSpectator(VectorOfArgs vargs) {
+    return CommandManager::TogglePresence(vargs, kzSpectating, "spectating");
 }
 
-bool CommandManager::ToggleState(VectorOfArgs vargs, LoadingState toggleState, std::string stateName) {
+bool CommandManager::TogglePresence(VectorOfArgs vargs, PresenceType togglePresence, std::string stateName) {
     short slot = itsApp->GetNet()->itsCommManager->myId;
 
     if (vargs.size() > 0) {
@@ -245,12 +245,18 @@ bool CommandManager::ToggleState(VectorOfArgs vargs, LoadingState toggleState, s
         return false;
     }
 
-    short newStatus = (playerToChange->LoadingStatus() == toggleState) ? kLConnected : toggleState;
+    PresenceType newPresence = togglePresence;
+    if (playerToChange->Presence() == togglePresence) {
+        newPresence = kzAvailable;
+    }
+
     FrameNumber noWinFrame = -1;
+//    itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpPlayerPresenceChange,
+//                               playerToChange->Slot(), newPresence, FRandom(), 0, NULL);
     itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange,
-                                        playerToChange->Slot(), newStatus, 0, sizeof(noWinFrame), (Ptr)&noWinFrame);
+            playerToChange->Slot(), playerToChange->LoadingStatus(), newPresence, sizeof(FrameNumber), (Ptr)&noWinFrame);
     itsApp->AddMessageLine("Status of " + playerToChange->GetPlayerName() +
-                   " changed to " + std::string(newStatus == kLConnected ? "available" : stateName));
+                   " changed to " + std::string(newPresence == kzAvailable ? "available" : stateName));
     return true;
 }
 

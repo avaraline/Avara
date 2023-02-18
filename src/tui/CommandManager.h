@@ -36,9 +36,9 @@ public:
 
     // ServerCommands
     bool KickPlayer(VectorOfArgs);
-    bool ToggleAwayState(VectorOfArgs);
-    bool ToggleSpectatorState(VectorOfArgs);
-    bool ToggleState(VectorOfArgs, LoadingState, std::string);
+    bool ToggleAway(VectorOfArgs);
+    bool ToggleSpectator(VectorOfArgs);
+    bool TogglePresence(VectorOfArgs, PresenceType, std::string);
 
     // LevelCommands
     bool LoadNamedLevel(VectorOfArgs);

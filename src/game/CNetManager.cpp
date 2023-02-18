@@ -244,7 +244,6 @@ void CNetManager::RealNameReport(short slotId, short regStatus, StringPtr realNa
 }
 
 void CNetManager::NameChange(StringPtr newName) {
-    short theStatus;
     /*
     MachineLocation		myLocation;
     Point				loc;
@@ -253,8 +252,9 @@ void CNetManager::NameChange(StringPtr newName) {
     loc.h = myLocation.longitude >> 16;
     loc.v = myLocation.latitude >> 16;
     */
-    theStatus = playerTable[itsCommManager->myId]->LoadingStatus();
-    itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, theStatus, 0, newName[0] + 1, (Ptr)newName);
+    LoadingState status = playerTable[itsCommManager->myId]->LoadingStatus();
+    PresenceType presence = playerTable[itsCommManager->myId]->Presence();
+    itsCommManager->SendPacket(kdEveryone, kpNameChange, 0, status, presence, newName[0] + 1, (Ptr)newName);
 }
 
 void CNetManager::ValueChange(short slot, std::string attributeName, bool value) {
@@ -264,13 +264,13 @@ void CNetManager::ValueChange(short slot, std::string attributeName, bool value)
     itsCommManager->SendPacket(kdEveryone, kpJSON, slot, 0, 0, strlen(c), c);
 }
 
-void CNetManager::RecordNameAndLocation(short theId, StringPtr theName, LoadingState status, Point location) {
+void CNetManager::RecordNameAndState(short theId, StringPtr theName, LoadingState status, PresenceType presence) {
     if (theId >= 0 && theId < kMaxAvaraPlayers) {
         totalDistribution |= 1 << theId;
         if (status != 0)
-            playerTable[theId]->SetPlayerStatus(status, -1);
+            playerTable[theId]->SetPlayerStatus(status, presence, -1);
 
-        playerTable[theId]->ChangeNameAndLocation(theName, location);
+        playerTable[theId]->ChangeName(theName);
     }
 }
 
@@ -384,11 +384,19 @@ void CNetManager::ReceiveColorChange(char *newColors) {
 
 void CNetManager::DisconnectSome(short mask) {
     short i;
+    CPlayerManager* prevPlayer = playerTable[itsCommManager->myId];
+    PresenceType prevPresence = playerTable[itsCommManager->myId]->Presence();
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         if ((1L << i) & mask) {
             playerTable[i]->NetDisconnect();
         }
+    }
+
+    // keep my presence state on disconnect
+    if (mask == kdEveryone) {
+        prevPlayer->SetPlayerStatus(kLNotConnected, kzAvailable, -1);
+        playerTable[0]->SetPlayerStatus(kLNotConnected, prevPresence, -1);
     }
 
     totalDistribution &= ~mask;
@@ -662,7 +670,7 @@ void CNetManager::ResumeGame() {
 
             statusTest = 0;
             for (i = 0; i < kMaxAvaraPlayers; i++) {
-                if (playerTable[i]->IsActive()) {
+                if (playerTable[i]->LoadingStatus() == kLActive) {
                     statusTest |= 1 << i;
                 }
             }
@@ -900,9 +908,10 @@ void CNetManager::SendStartCommand(int16_t originalSender) {
         // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             SDL_Log("  loadingStatus[%d] = %d\n", i, playerTable[i]->LoadingStatus());
-            if (playerTable[i]->LoadingStatus() == kLLoaded ||
-                playerTable[i]->LoadingStatus() == kLReady ||
-                playerTable[i]->LoadingStatus() == kLSpectating) {
+            if ((playerTable[i]->LoadingStatus() == kLLoaded ||
+                 playerTable[i]->LoadingStatus() == kLReady) &&
+                playerTable[i]->Presence() != kzAway)
+            {
                 activePlayersDistribution |= 1 << i;
             }
         }
@@ -1045,12 +1054,7 @@ void CNetManager::StopGame(short newStatus) {
         if (newStatus == kNoVehicleStatus)
             playerStatus = kLNoVehicle;
         else
-            if (thePlayerManager->LoadingStatus() == kLSpectating) {
-                // don't change from kLSpectating after the game is over
-                playerStatus = kLSpectating;
-            } else {
-                playerStatus = isConnected ? kLConnected : kLNotConnected;
-            }
+            playerStatus = isConnected ? kLConnected : kLNotConnected;
     }
 
     thePlayer = thePlayerManager->GetPlayer();
@@ -1076,17 +1080,21 @@ void CNetManager::StopGame(short newStatus) {
     }
 
     itsCommManager->SendPacket(
-        kdEveryone, kpPlayerStatusChange, slot, playerStatus, FRandSeed, sizeof(winFrame), (Ptr)&winFrame);
+        kdEveryone, kpPlayerStatusChange, slot, playerStatus, thePlayerManager->Presence(), sizeof(winFrame), (Ptr)&winFrame);
 
     itsGame->itsApp->BroadcastCommand(kGameResultAvailableCmd);
 }
 
-void CNetManager::ReceivePlayerStatus(short slotId, LoadingState newStatus, Fixed randomKey, FrameNumber winFrame) {
+void CNetManager::ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame) {
     if (slotId >= 0 && slotId < kMaxAvaraPlayers) {
         if (randomKey != 0) {
             playerTable[slotId]->RandomKey(randomKey);
         }
-        playerTable[slotId]->SetPlayerStatus(newStatus, winFrame);
+        if (newPresence == kzUnknown) {
+            // don't change presence
+            newPresence =  playerTable[slotId]->Presence();
+        }
+        playerTable[slotId]->SetPlayerStatus(newStatus, newPresence, winFrame);
     }
 }
 

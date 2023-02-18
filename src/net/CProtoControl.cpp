@@ -82,8 +82,8 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->SendRealName(thePacket->p1);
             break;
         case kpNameChange:
-            theNet->RecordNameAndLocation(
-                thePacket->sender, (StringPtr)thePacket->dataBuffer, (LoadingState)thePacket->p2, *(Point *)&thePacket->p3);
+            theNet->RecordNameAndState(
+                thePacket->sender, (StringPtr)thePacket->dataBuffer, (LoadingState)thePacket->p2, (PresenceType)thePacket->p3);
             break;
         case kpOrderChange:
             theNet->PositionsChanged(thePacket->dataBuffer);
@@ -125,11 +125,11 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
         case kpStartSynch:
             theNet->ConfigPlayer(thePacket->sender, thePacket->dataBuffer);
-            theNet->ReceivePlayerStatus(thePacket->sender, (LoadingState)thePacket->p2, thePacket->p3, -1);
+            theNet->ReceivePlayerStatus(thePacket->sender, (LoadingState)thePacket->p2, kzUnknown, (PresenceType)thePacket->p3, -1);
             break;
         case kpPlayerStatusChange:
             theNet->ReceivePlayerStatus(
-                thePacket->p1, (LoadingState)thePacket->p2, thePacket->p3, *(FrameNumber *)thePacket->dataBuffer);
+                                        thePacket->p1, (LoadingState)thePacket->p2, (PresenceType)thePacket->p3, 0, *(FrameNumber *)thePacket->dataBuffer);
             break;
         case kpJSON:
             theNet->ReceiveJSON(
