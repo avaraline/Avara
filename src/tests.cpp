@@ -61,8 +61,9 @@ public:
     virtual Str255& PlayerRegName() { return str; }
     virtual short LoadingStatus() { return 0; }
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
-    virtual void SetPlayerStatus(short newStatus, FrameNumber theWin) {}
+    virtual void SetPlayerStatus(LoadingState newStatus, FrameNumber theWin) {}
     virtual bool IsAway() { return false; };
+    virtual bool IsActive() { return true; };
     virtual void ChangeNameAndLocation(StringPtr theName, Point location) {}
     virtual void SetPosition(short pos) {}
 
