@@ -22,8 +22,8 @@ typedef struct PacketInfo {
 
     int16_t sender;
     int16_t distribution;
-    char command;
-    char p1;
+    int8_t command;
+    int8_t p1;
     int16_t p2;
     int32_t p3;
     int16_t dataLen;
@@ -71,9 +71,8 @@ public:
     virtual void AddReceiver(ReceiverRecord *aReceiver, Boolean delayed);
     virtual void RemoveReceiver(ReceiverRecord *aReceiver, Boolean delayed);
 
-    virtual OSErr SendPacket(short distribution, char command, char p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr);
-    virtual OSErr
-    SendUrgentPacket(short distribution, char command, char p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr);
+    virtual OSErr SendPacket(short distribution, int8_t command, int8_t p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr);
+    virtual OSErr SendUrgentPacket(short distribution, int8_t command, int8_t p1, int16_t p2, int32_t p3, int16_t dataLen, Ptr dataPtr);
     virtual void Dispose();
 
     virtual PacketInfo *GetPacket();

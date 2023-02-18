@@ -132,7 +132,7 @@ Fixed CZombieActor::JudgePlace(Fixed *place) {
 
 void CZombieActor::RememberExperience(Fixed *place, Fixed weight) {
     Fixed *smarts;
-    static long expoCount = 0;
+    // static long expoCount = 0;
 
     smarts = smartMem[nextSmart++];
 
@@ -144,7 +144,7 @@ void CZombieActor::RememberExperience(Fixed *place, Fixed weight) {
     smarts[2] = place[2];
     smarts[3] = weight;
 
-    expoCount++;
+    // expoCount++;
 }
 
 void CZombieActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
