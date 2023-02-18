@@ -153,7 +153,7 @@ void CAvaraAppImpl::idle() {
 void CAvaraAppImpl::drawContents() {
     if(animatePreview) {
         Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
-        Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX(1));
+        Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX1);
         Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
         itsGame->itsView->LookFrom(x, y, z);
         itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);

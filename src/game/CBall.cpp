@@ -32,7 +32,7 @@ void CBall::IAbstractActor() {
     shieldsCharge = 0;
     maxShields = -1;
     shootShields = FIX(10000);
-    dropDamage = FIX(1);
+    dropDamage = FIX1;
 
     holderScoreId = -1;
     holderTeam = 0;
@@ -59,19 +59,19 @@ void CBall::IAbstractActor() {
     goalScore = 0;
 
     ejectPitch = FIX(20);
-    ejectPower = FIX(1);
+    ejectPower = FIX1;
 
     buzzSound = 430;
     buzzVolume = FIX3(500);
 
     snapSound = 431;
-    snapVolume = FIX(1);
+    snapVolume = FIX1;
 
     ejectSound = 432;
-    ejectVolume = FIX(1);
+    ejectVolume = FIX1;
 
     reprogramSound = 0;
-    reprogramVolume = FIX(1);
+    reprogramVolume = FIX1;
 }
 
 void CBall::BeginScript() {
@@ -326,7 +326,7 @@ void CBall::MagnetAction() {
                     releaseHoldAccumulator = 0;
                     carryScoreAccumulator = 0;
 
-                    DoSound(snapSound, snapTo, snapVolume, FIX(1));
+                    DoSound(snapSound, snapTo, snapVolume, FIX1);
                     break;
                 }
             }
@@ -377,7 +377,7 @@ void CBall::FrameAction() {
         CAbstractActor *theOwner;
 
         carryScoreAccumulator += carryScore;
-        if (carryScoreAccumulator > FIX(1)) {
+        if (carryScoreAccumulator > FIX1) {
             theOwner = itsGame->FindIdent(hostIdent);
             if (theOwner && theOwner->maskBits & kPlayerBit) {
                 itsGame->scoreReason = ksiHoldBall;
@@ -395,7 +395,7 @@ void CBall::FrameAction() {
                 ChangeOwnership(theOwner->GetActorScoringId(), theOwner->teamColor);
                 watchTeams = ~(1 << teamColor);
 
-                DoSound(reprogramSound, partList[0]->sphereGlobCenter, reprogramVolume, FIX(1));
+                DoSound(reprogramSound, partList[0]->sphereGlobCenter, reprogramVolume, FIX1);
             }
 
             ownerChangeCount = -32767;
@@ -519,7 +519,7 @@ long CBall::ReceiveSignal(long theSignal, void *miscData) {
             speed[1] += FMul(pitchZ, theBall->itsTransform[2][1]) + FMul(pitchY, theBall->itsTransform[1][1]);
             speed[2] += FMul(pitchZ, theBall->itsTransform[2][2]) + FMul(pitchY, theBall->itsTransform[1][2]);
 
-            DoSound(ejectSound, partList[0]->sphereGlobCenter, ejectVolume, FIX(1));
+            DoSound(ejectSound, partList[0]->sphereGlobCenter, ejectVolume, FIX1);
             return true;
         }
 

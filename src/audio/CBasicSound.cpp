@@ -239,8 +239,8 @@ void CBasicSound::CalculateMotionVolume() {
             //	Sound position	LEFT		MIDDLE		RIGHT
             //	Left channel	1.0			0.5			0.0
             //	Right channel	0.0			0.5			1.0
-            volumes[0] = FMul(FIX(1) - rightDot, adjustedVolume) >> (18 - VOLUMEBITS);
-            volumes[1] = FMul(FIX(1) + rightDot, adjustedVolume) >> (18 - VOLUMEBITS);
+            volumes[0] = FMul(FIX1 - rightDot, adjustedVolume) >> (18 - VOLUMEBITS);
+            volumes[1] = FMul(FIX1 + rightDot, adjustedVolume) >> (18 - VOLUMEBITS);
         } else { //	"Soft" stereo effect for headphones users.
             //	Sound position	LEFT		MIDDLE		RIGHT
             //	Left channel	1.0			0.66		0.33

@@ -150,7 +150,7 @@ CAbstractActor *CDoorActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
+    if (HasBSP(resId)) {
         //CBSPWorld *theWorld;
 
         RegisterReceiver(&openActivator, ReadLongVar(iOpenMsg));

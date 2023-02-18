@@ -158,7 +158,7 @@ public:
     short groundStepSound;
 
     //	Networking & user control related stuff:
-    Handle mapRes; //	Keyboard mapping resource handle.
+    // Handle mapRes; //	Keyboard mapping resource handle.
 
     short moJoOptions; //	Mouse and Joystick options.
     double sensitivity;

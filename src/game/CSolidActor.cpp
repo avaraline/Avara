@@ -28,7 +28,7 @@ CAbstractActor *CSolidActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
+    if (HasBSP(resId)) {
         LoadPartWithColors(0, resId);
         partList[0]->Reset();
         partList[0]->RotateZ(ReadFixedVar(iRoll));

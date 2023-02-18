@@ -16,7 +16,7 @@
 #include "CSoundMixer.h"
 
 void CAbstractActor::LoadPart(short ind, short resId) {
-    if (partScale == FIX(1)) {
+    if (partScale == FIX1) {
         partList[ind] = new CSmartPart;
         partList[ind]->ISmartPart(resId, this, ind);
     } else {
@@ -236,7 +236,7 @@ void CAbstractActor::IAbstractActor() {
         partList[i] = NULL;
     }
 
-    partScale = FIX(1);
+    partScale = FIX1;
     partYon = 0;
 
     for (i = 0; i < kSliverSizes; i++) {
@@ -294,7 +294,7 @@ void CAbstractActor::Shatter(short firstSliverType,
     short i;
     CSmartPart **partInd, *thePart;
     long totalPolys;
-    Vector noDirection = {0, FIX(1), 0, 0};
+    Vector noDirection = {0, FIX1, 0, 0};
 
     partInd = partList;
     totalPolys = 0;
@@ -364,7 +364,7 @@ void CAbstractActor::Blast() {
         }
 
         if (maxCount && maxPart) {
-            DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX(1));
+            DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX1);
         }
     }
 }
@@ -910,7 +910,7 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     if (shields < 0 || shields > hitEnergy) {
         itsGame->Score(
             theHit->team, theHit->playerId, LMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
-        DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX(1));
+        DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX1);
         itsGame->FlagMessage(hitMessage);
 
         if (shields >= 0)
@@ -978,8 +978,8 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
 
         distance = NormalizeVector(3, blastRay.direction) - thePart->enclosureRadius;
         FPS_DEBUG("CAbstractActor::BlastHit: len(blastRay.direction) = " << distance + thePart->enclosureRadius << ", enclosureRadius = " << thePart->enclosureRadius << ", distance = " << distance << "\n");
-        if (distance < FIX(1)) {
-            distance = FIX(1);
+        if (distance < FIX1) {
+            distance = FIX1;
             blastRay.origin[0] = theHit->blastPoint[0];
             blastRay.origin[1] = theHit->blastPoint[1];
             blastRay.origin[2] = theHit->blastPoint[2];

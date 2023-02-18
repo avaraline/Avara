@@ -376,7 +376,7 @@ void InverseTransform(Matrix *t, Matrix *i) {
     (*i)[2][2] = (*t)[2][2];
 
     (*i)[0][3] = (*i)[1][3] = (*i)[2][3] = 0;
-    (*i)[3][3] = FIX(1);
+    (*i)[3][3] = FIX1;
     (*i)[3][0] = (*i)[3][1] = (*i)[3][2] = 0;
 
     /*  Find translate part of matrix:
@@ -414,9 +414,9 @@ void QuaternionToMatrix(Quaternion *q, Matrix *m) {
     wz2 = FMul(z2, q->w);
     zz2 = FMul(z2, q->z);
 
-    (*m)[0][0] = FIX(1) - yy2 - zz2;
-    (*m)[1][1] = FIX(1) - xx2 - zz2;
-    (*m)[2][2] = FIX(1) - xx2 - yy2;
+    (*m)[0][0] = FIX1 - yy2 - zz2;
+    (*m)[1][1] = FIX1 - xx2 - zz2;
+    (*m)[2][2] = FIX1 - xx2 - yy2;
 
     (*m)[0][1] = yx2 + wz2;
     (*m)[0][2] = zx2 - wy2;
@@ -438,7 +438,7 @@ void QuaternionToMatrix(Quaternion *q, Matrix *m) {
 void MatrixToQuaternion(Matrix *m, Quaternion *q) {
     Fixed squared;
 
-    squared = 4 * (FIX(1) + (*m)[0][0] + (*m)[1][1] + (*m)[2][2]);
+    squared = 4 * (FIX1 + (*m)[0][0] + (*m)[1][1] + (*m)[2][2]);
 
     if (squared > EPSILON) {
         q->w = FSqrt(squared);
@@ -459,7 +459,7 @@ void MatrixToQuaternion(Matrix *m, Quaternion *q) {
             q->x /= 2;
         } else {
             q->x = 0;
-            squared = FIX(1) - (*m)[2][2];
+            squared = FIX1 - (*m)[2][2];
 
             if (squared > EPSILON) {
                 q->y = FSqrt(squared);
@@ -467,7 +467,7 @@ void MatrixToQuaternion(Matrix *m, Quaternion *q) {
                 q->y /= 2;
             } else {
                 q->y = 0;
-                q->z = FIX(1);
+                q->z = FIX1;
             }
         }
     }
@@ -624,7 +624,7 @@ void TransformMinMax(Matrix *m, Fixed *min, Fixed *max, Vector *dest) {
 
 void TransformBoundingBox(Matrix *m, Fixed *min, Fixed *max, Vector *dest) {
     Fixed *dp;
-    Fixed f1 = FIX(1);
+    Fixed f1 = FIX1;
     Fixed x, y, z;
     Vector comp[6];
 

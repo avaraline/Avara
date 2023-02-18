@@ -23,7 +23,7 @@ void CViewParameters::CalculateViewPyramidCorners() {
     fixedDimV = FIX(viewPixelDimensions.v);
 
     for (i = 0; i < 8; i++)
-        corners[i][3] = FIX(1); //	W components for all corners.
+        corners[i][3] = FIX1; //	W components for all corners.
 
     for (i = 0; i < 4; i++) //	Z components at hither and yon.
     {

@@ -56,7 +56,7 @@ CAbstractActor *CGoal::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
+    if (HasBSP(resId)) {
         LoadPartWithColors(0, resId);
         partList[0]->Reset();
         partList[0]->RotateZ(ReadFixedVar(iRoll));
@@ -113,7 +113,7 @@ long CGoal::ReceiveSignal(long theSignal, void *miscData) {
     if (theSignal == kBallAttached) {
         theBall = (CBall *)miscData;
 
-        DoSound(goalSound, location, goalVolume, FIX(1));
+        DoSound(goalSound, location, goalVolume, FIX1);
         itsGame->FlagMessage(goalMsg);
 
         itsGame->scoreReason = ksiScoreGoal;

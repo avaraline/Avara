@@ -51,9 +51,9 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     }
 
     if (dimensions[0] > DIMEPSILON && dimensions[1] > DIMEPSILON && dimensions[2] > DIMEPSILON) {
-        normalAdjust[0] = FDiv(FIX(1), x);
-        normalAdjust[1] = FDiv(FIX(1), y);
-        normalAdjust[2] = FDiv(FIX(1), z);
+        normalAdjust[0] = FDiv(FIX1, x);
+        normalAdjust[1] = FDiv(FIX1, y);
+        normalAdjust[2] = FDiv(FIX1, z);
         NormalizeVector(3, normalAdjust);
 
         for (i = 0; i < polyCount; i++) {
@@ -138,7 +138,7 @@ void CSmartBox::ISmartBox(short resId,
         baseSize = ntohl((*config)->baseSize);
     } else {
         stretchFlag = false;
-        baseSize = FIX(1);
+        baseSize = FIX1;
     }
     ReleaseResource(scalingRes);
 

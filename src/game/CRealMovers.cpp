@@ -76,7 +76,7 @@ void CRealMovers::FindBestMovement(CSmartPart *objHit) {
     Fixed bestDot;
     Vector bestSpeed;
 
-    bestDot = FIX(1);
+    bestDot = FIX1;
     bestSpeed[0] = 0;
     bestSpeed[1] = 0;
     bestSpeed[2] = 0;

@@ -237,7 +237,8 @@ void CNetManager::RealNameReport(short slotId, short regStatus, StringPtr realNa
         BlockMoveData(realName, thePlayer->PlayerRegName(), realName[0] + 1);
     } else {
         thePlayer->IsRegistered(false);
-        GetIndString(thePlayer->PlayerRegName(), 133, 5 + regStatus);
+        thePlayer->PlayerRegName()[0] = 0;
+        // GetIndString(thePlayer->PlayerRegName(), 133, 5 + regStatus);
     }
 
     // theRoster->InvalidateArea(kRealNameBox, slotToPosition[slotId]);
@@ -611,23 +612,14 @@ void CNetManager::ResumeGame() {
     config.frameLatency = gApplication ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
     config.frameTime = itsGame->frameTime;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
-    config.numGrenades = 6;
-    config.numMissiles = 3;
-    config.numBoosters = 3;
 
     // Pull grenade/missile/booster counts from HULL resource
     long hullRes = ReadLongVar(iFirstHull + config.hullType);
-    Handle hullHandle = GetResource('HULL', hullRes);
-    if (hullHandle) {
-        HullConfigRecord hull = **(HullConfigRecord **)hullHandle;
-        hull.maxMissiles = ntohs(hull.maxMissiles);
-        hull.maxGrenades = ntohs(hull.maxGrenades);
-        hull.maxBoosters = ntohs(hull.maxBoosters);
-        config.numGrenades = hull.maxGrenades;
-        config.numMissiles = hull.maxMissiles;
-        config.numBoosters = hull.maxBoosters;
-        ReleaseResource(hullHandle);
-    }
+    HullConfigRecord hull;
+    LoadHullFromSetJSON(&hull, hullRes);
+    config.numGrenades = hull.maxGrenades;
+    config.numMissiles = hull.maxMissiles;
+    config.numBoosters = hull.maxBoosters;
 
     // This is what pulled the counts from CLevelListWind
     itsGame->itsApp->BroadcastCommand(kConfigurePlayerCmd);

@@ -433,12 +433,12 @@ void CWalkerActor::DoLegTouches() {
             }
 
             if (power[0] > FIX3(10) && soundId[0]) {
-                DoSound(soundId[0], spot, power[0], FIX(1));
+                DoSound(soundId[0], spot, power[0], FIX1);
             }
         } else {
             for (i = 0; i < 2; i++) {
                 if (power[i] > FpsCoefficient2(FIX3(10)) && soundId[i]) {
-                    DoSound(soundId[i], legs[i].where, power[i], FIX(1));
+                    DoSound(soundId[i], legs[i].where, power[i], FIX1);
                 }
             }
         }
