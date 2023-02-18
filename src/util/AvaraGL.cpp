@@ -334,10 +334,10 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
 
-    glBindVertexArray(NULL);
+    glBindVertexArray(0);
     glCheckErrors();
 
-    glBindBuffer(GL_ARRAY_BUFFER, NULL);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glCheckErrors();
 
 }
