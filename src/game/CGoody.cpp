@@ -46,7 +46,7 @@ void CGoody::BeginScript() {
     ProgramLongVar(iOutVar, 0);
 
     ProgramLongVar(iSound, kGoodySound);
-    ProgramFixedVar(iVolume, FIX(1));
+    ProgramFixedVar(iVolume, FIX1);
     ProgramLongVar(iOpenSound, 0);
     ProgramLongVar(iCloseSound, 0);
 
@@ -132,13 +132,13 @@ void CGoody::FrameAction() {
 
         if (stopMsg.triggerCount) {
             stopMsg.triggerCount = 0;
-            DoSound(closeSoundId, location, volume, FIX(1));
+            DoSound(closeSoundId, location, volume, FIX1);
             enabled = false;
         }
 
         if (startMsg.triggerCount) {
             startMsg.triggerCount = 0;
-            DoSound(openSoundId, location, volume, FIX(1));
+            DoSound(openSoundId, location, volume, FIX1);
             enabled = true;
         }
     }
@@ -164,7 +164,7 @@ void CGoody::FrameAction() {
 
                 theActor = (CAbstractPlayer *)thePart->theOwner;
                 theActor->TakeGoody(&gr);
-                DoSound(soundId, location, volume, FIX(1));
+                DoSound(soundId, location, volume, FIX1);
 
                 itsGame->FlagMessage(outMsg);
                 enabled = false;

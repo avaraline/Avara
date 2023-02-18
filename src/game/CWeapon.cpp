@@ -26,7 +26,7 @@ void CWeapon::IWeapon(CDepot *theDepot) {
     itsDepot = theDepot;
     itsGame = itsDepot->itsGame;
     blastSound = MINEBLOWSOUND;
-    blastPower = FIX(1);
+    blastPower = FIX1;
     sliverCounts[kSmallSliver] = 4;
 
     ResetWeapon();
@@ -133,7 +133,7 @@ void CWeapon::DoTargeting() {}
 void CWeapon::ShowTarget() {}
 
 void CWeapon::Explode() {
-    Vector temp = {0, FIX(1), 0, 0};
+    Vector temp = {0, FIX1, 0, 0};
 
     WasDestroyed();
 

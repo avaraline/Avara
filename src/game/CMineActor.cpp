@@ -22,7 +22,7 @@
 
 void CMineActor::BeginScript() {
     maskBits |= kTargetBit + kSolidBit;
-    shields = FIX(1);
+    shields = FIX1;
     hitScore = 5;
     destructScore = 20;
 

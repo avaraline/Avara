@@ -144,7 +144,7 @@ void CSwitchActor::FrameAction() {
         }
         onActivator.triggerCount = 0;
         offActivator.triggerCount = 0;
-        DoSound(hitSoundId, location, hitSoundVolume << 15, FIX(1));
+        DoSound(hitSoundId, location, hitSoundVolume << 15, FIX1);
     }
 
     if (enabled) {

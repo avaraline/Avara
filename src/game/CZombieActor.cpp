@@ -117,7 +117,7 @@ Fixed CZombieActor::JudgePlace(Fixed *place) {
     for (i = 0; i < SMARTMEMSIZE; i++) {
         distance = FDistanceEstimate(place[0] - (*smarts)[0], place[1] - (*smarts)[1], place[2] - (*smarts)[2]);
 
-        if (distance > FIX(1)) {
+        if (distance > FIX1) {
             feeling = (*smarts)[3];
             placeScore += FDiv(feeling, distance);
             feeling -= feeling >> 3;
@@ -171,7 +171,7 @@ void CZombieActor::MoveForward() {
     if (delta > 0x4000)
         delta = 0x8000 - delta;
 
-    friction = FMul(zombieFriction, FIX(1) - delta);
+    friction = FMul(zombieFriction, FIX1 - delta);
 
     location[0] += speed[0];
     location[1] += speed[1];
@@ -226,7 +226,7 @@ void CZombieActor::FrameAction() {
             newScore = 0;
         } else {
             if (theHit.distance > FIX(16))
-                newScore = FIX(1);
+                newScore = FIX1;
             else
                 newScore = theHit.distance >> 4;
         }
@@ -255,7 +255,7 @@ void CZombieActor::FrameAction() {
     }
 
     if (DoCollisionTest(&proximityList.p)) {
-        collisionPain += FIX(1);
+        collisionPain += FIX1;
         RememberExperience(location, -collisionPain);
 
         speed[0] = 0;

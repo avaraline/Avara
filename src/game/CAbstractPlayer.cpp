@@ -85,7 +85,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrow->IBSPPart(kDirIndBSP);
     dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
     dirArrow->ignoreDirectionalLights = true;
-    dirArrow->privateAmbient = FIX(1);
+    dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
     hudWorld->AddPart(dirArrow);
 }

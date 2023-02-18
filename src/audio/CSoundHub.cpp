@@ -205,7 +205,7 @@ SampleHeaderHandle CSoundHubImpl::LoadSampleLegacy(short resId) {
                 sampP->nextSample = sampleList;
 
                 if (ir->versNum < 2) {
-                    sampP->baseRate = FIX(1);
+                    sampP->baseRate = FIX1;
                 } else {
                     sampP->baseRate = ir->baseRate;
                 }
@@ -343,7 +343,7 @@ CBasicSound *CSoundHubImpl::GetSoundSampler(short kind, short resId) {
         else
             theSamples = RequestSample(resId);
         aSound->UseSamples(theSamples);
-        aSound->SetRate(FIX(1));
+        aSound->SetRate(FIX1);
     }
 
     return aSound;
