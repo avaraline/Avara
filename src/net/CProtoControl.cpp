@@ -154,7 +154,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->serverOptions = thePacket->p2;
             break;
         case kpNewArrival:
-            theNet->NewArrival(thePacket->p1);
+            theNet->NewArrival(thePacket->p1, (PresenceType)thePacket->p2);
             break;
 
         case kpKickClient:
@@ -197,13 +197,13 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
         case kpLogin: //	Only servers see this
         {
             short senderDistr = 1 << thePacket->sender;
-            DBG_Log("login", "kpLogin received from = %d\n", thePacket->sender);
+            DBG_Log("login", "kpLogin received from = %d, presence=%d\n", thePacket->sender, thePacket->p2);
             DBG_Log("login", "sending kpLoginAck to = %s\n", FormatDist(senderDistr).c_str());
             itsManager->SendPacket(senderDistr, kpLoginAck, thePacket->sender, 0, 0, 0, NULL);
             DBG_Log("login", "sending kpNameQuery(%d) to = %s\n", thePacket->sender, FormatDist(kdEveryone).c_str());
             itsManager->SendPacket(kdEveryone, kpNameQuery, thePacket->sender, 0, 0, 0, NULL);
-            DBG_Log("login", "sending kpNewArrival(%d) to = %s\n", thePacket->sender, FormatDist(~senderDistr).c_str());
-            itsManager->SendPacket(~senderDistr, kpNewArrival, thePacket->sender, 0, 0, 0, NULL);
+            DBG_Log("login", "sending kpNewArrival(%d, %d) to = %s\n", thePacket->sender, thePacket->p2, FormatDist(~senderDistr).c_str());
+            itsManager->SendPacket(~senderDistr, kpNewArrival, thePacket->sender, thePacket->p2, 0, 0, NULL);
             didHandle = false;
         } break;
         case kpLoginAck:

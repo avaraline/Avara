@@ -1276,6 +1276,9 @@ LoadingState CPlayerManagerImpl::LoadingStatus() {
 PresenceType CPlayerManagerImpl::Presence() {
     return presence;
 }
+void CPlayerManagerImpl::SetPresence(PresenceType newPresence) {
+    presence = newPresence;
+}
 short CPlayerManagerImpl::LevelCRC() {
     return levelCRC;
 }

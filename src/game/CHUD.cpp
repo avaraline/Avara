@@ -357,6 +357,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             std::string playerLives = std::to_string(status);
             if (status == 10) playerLives = "%";
             if (status == 12) playerLives = "C";
+            if (thisPlayer->Presence() == kzSpectating) playerLives = "*";
             nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
             nvgFontSize(ctx, fontsz_s);
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));

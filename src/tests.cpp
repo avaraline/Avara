@@ -61,6 +61,7 @@ public:
     virtual Str255& PlayerRegName() { return str; }
     virtual LoadingState LoadingStatus() { return kLNotConnected; }
     virtual PresenceType Presence() { return kzAvailable; }
+    virtual void SetPresence(PresenceType pt) { }
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
     virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) {}
     virtual bool IsAway() { return false; };

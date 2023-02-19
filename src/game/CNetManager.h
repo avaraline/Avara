@@ -202,7 +202,7 @@ public:
 
     virtual Boolean PermissionQuery(short reason, short index);
     virtual void ChangedServerOptions(short curOptions);
-    virtual void NewArrival(short slot);
+    virtual void NewArrival(short slot, PresenceType presence);
 
     virtual void ResultsReport(Ptr results);
 
