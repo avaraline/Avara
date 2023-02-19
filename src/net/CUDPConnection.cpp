@@ -618,12 +618,12 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                 }
             }
         } else { //	We're obviously missing a packet somewhere...queue this one for later.
-            short receiveQueueLength = 0;
+            // short receiveQueueLength = 0;
 
             for (pack = (UDPPacketInfo *)queues[kReceiveQ].qHead;
                  pack != NULL && pack->serialNumber != thePacket->serialNumber;
                  pack = (UDPPacketInfo *)pack->packet.qLink) {
-                receiveQueueLength++;
+                // receiveQueueLength++;
             }
 
             if (pack) { //	The queue already contains this packet.

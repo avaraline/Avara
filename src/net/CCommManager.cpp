@@ -66,8 +66,8 @@ void CCommManager::Dispose() {
 **	send the packet.
 */
 OSErr CCommManager::SendPacket(short distribution,
-                               char command,
-                               char p1,
+                               int8_t command,
+                               int8_t p1,
                                int16_t p2,
                                int32_t p3,
                                int16_t dataLen,
@@ -111,8 +111,8 @@ OSErr CCommManager::SendPacket(short distribution,
 **	send the packet.
 */
 OSErr CCommManager::SendUrgentPacket(short distribution,
-    char command,
-    char p1,
+    int8_t command,
+    int8_t p1,
     int16_t p2,
     int32_t p3,
     int16_t dataLen,
