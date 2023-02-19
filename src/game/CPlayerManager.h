@@ -88,7 +88,11 @@ public:
     virtual void IsRegistered(short) = 0;
     virtual Str255& PlayerRegName() = 0;
     virtual LoadingState LoadingStatus() = 0;
+    template<typename ... T> bool LoadingStatusIsIn(T && ... state) {
+        return ((LoadingStatus() == state) || ...);  // compares LoadingStatus() to all args
+    }
     virtual PresenceType Presence() = 0;
+    virtual void SetPresence(PresenceType) = 0;
     virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
 
@@ -273,6 +277,7 @@ public:
     virtual Str255& PlayerRegName();
     virtual LoadingState LoadingStatus();
     virtual PresenceType Presence();
+    virtual void SetPresence(PresenceType);
     virtual short LevelCRC();
     virtual OSErr LevelErr();
     virtual std::string LevelTag();

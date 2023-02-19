@@ -322,14 +322,15 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
         } else {
             strStatus = "";
         }
-    } else {
+    } else if (status != kLNotConnected) {
         strStatus = "away";
     }
     if (presence == kzSpectating) {
-        if (status == kLConnected || status == kLActive || status == kLLoaded) {
+        if (player->LoadingStatusIsIn(kLConnected, kLActive, kLLoaded, kLPaused)) {
             strStatus = "spectator";
+        } else {
+            strStatus += "*";   // make this into an eyeball char?
         }
-//        strStatus += eyeballs_utf8;
     }
     return strStatus;
 }

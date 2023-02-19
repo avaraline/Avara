@@ -168,16 +168,19 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
         }
 
         if (confirm && newManager) {
+            PresenceType keepPresence = playerTable[itsCommManager->myId]->Presence();
             itsCommManager->Dispose();        // send kpPacketProtocolLogout message before being destroyed
             itsProtoControl->Detach();
             itsCommManager.swap(newManager);  // newManager takes place existing CCommManager which gets deleted when out of scope
+            playerTable[itsCommManager->myId]->SetPresence(keepPresence);
             itsProtoControl->Attach(itsCommManager.get());
             netStatus = netKind;
             isConnected = true;
             DisconnectSome(kdEveryone);
 
             totalDistribution = 0;
-            itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, 0, 0, 0L, NULL);
+            DBG_Log("login", "sending kpLogin to server with presence=%d\n", keepPresence);
+            itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, keepPresence, 0, 0L, NULL);
             if (itsGame->loadedTag.length() > 0) {
                 itsGame->LevelReset(true);
                 // theRoster->InvalidateArea(kBottomBox, 0);
@@ -186,7 +189,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
         }
     } else {
         playerTable[itsCommManager->myId]->NetDisconnect();
-        itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, 0, 0, 0L, NULL);
+        itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, playerTable[itsCommManager->myId]->Presence(), 0, 0L, NULL);
         itsCommManager->SendPacket(kdEveryone, kpZapMugShot, 0, 0, 0, 0L, NULL);
         gApplication->BroadcastCommand(kNetChangedCmd);
     }
@@ -384,22 +387,11 @@ void CNetManager::ReceiveColorChange(char *newColors) {
 }
 
 void CNetManager::DisconnectSome(short mask) {
-    short i;
-    CPlayerManager* prevPlayer = playerTable[itsCommManager->myId];
-    PresenceType prevPresence = playerTable[itsCommManager->myId]->Presence();
-
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
+    for (short i = 0; i < kMaxAvaraPlayers; i++) {
         if ((1L << i) & mask) {
             playerTable[i]->NetDisconnect();
         }
     }
-
-    // keep my presence state on disconnect
-    if (mask == kdEveryone) {
-        prevPlayer->SetPlayerStatus(kLNotConnected, kzAvailable, -1);
-        playerTable[0]->SetPlayerStatus(kLNotConnected, prevPresence, -1);
-    }
-
     totalDistribution &= ~mask;
 }
 
@@ -1351,8 +1343,8 @@ void CNetManager::ChangedServerOptions(short curOptions) {
     }
 }
 
-void CNetManager::NewArrival(short slot) {
-    //CPlayerManager *thePlayer = playerTable[slot];
+void CNetManager::NewArrival(short slot, PresenceType presence) {
+    playerTable[slot]->SetPresence(presence);
     itsGame->itsApp->NotifyUser();
     SDL_Log("someone has joined in slot #%d\n", slot+1);
     itsGame->scoreKeeper->PlayerJoined();
