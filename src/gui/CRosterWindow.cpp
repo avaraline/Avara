@@ -328,7 +328,7 @@ std::string CRosterWindow::GetStringStatus(CPlayerManager *player) {
     if (presence == kzSpectating) {
         if (player->LoadingStatusIsIn(kLConnected, kLActive, kLLoaded, kLPaused)) {
             strStatus = "spectator";
-        } else {
+        } else if (strStatus.length() > 0) {
             strStatus += "*";   // make this into an eyeball char?
         }
     }
@@ -367,7 +367,7 @@ std::string CRosterWindow::ChatPromptFor(std::string theName) {
 void CRosterWindow::NewChatLine(Str255 playerName, std::string message) {
     std::string name = std::string((char *)playerName + 1, playerName[0]);
     std::string chatLine = ChatPromptFor(name) + message;
-    
+
     AdvancedGridLayout *gridLayout = (AdvancedGridLayout*) chatPanel->layout();
     gridLayout->appendRow(1, 0.1);
     gridLayout->appendCol(1, 1);
