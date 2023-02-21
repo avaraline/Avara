@@ -12,6 +12,7 @@
 #include "Memory.h"
 #include "Resource.h"
 #include "System.h"
+#include "Debug.h"
 
 #include <SDL2/SDL.h>
 
@@ -210,6 +211,7 @@ PacketInfo* CCommManager::GetPacket() {
             Dequeue((QElemPtr)thePacket, &freeQ);
             break;
         } else {
+            DBG_Log("q", "CCommManager::GetPacket myId=%d, allocating %d more packets, inQ size = %zu\n", myId, FRESHALLOCSIZE, QueueSize(&inQ));
             // no packets left? dynamically increase the freeQ then try again
             AllocatePacketBuffers(FRESHALLOCSIZE);
         }

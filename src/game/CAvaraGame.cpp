@@ -155,7 +155,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     keysFromStdin = false;
     keysToStdout = false;
 
-    statusRequest = -1; // who decided to make "playing" 0??
+    statusRequest = kNoVehicleStatus;
 
     nextPingTime = 0;
 

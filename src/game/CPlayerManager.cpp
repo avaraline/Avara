@@ -388,9 +388,15 @@ void CPlayerManagerImpl::SendFrame() {
         #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 1111 ~= 18sec
         #if DONT_SEND_FRAME > 0
             if (theNetManager->itsCommManager->myId == 1) {
-                if (ffi >= DONT_SEND_FRAME & ffi < DONT_SEND_FRAME+4)
-                    outPacket->distribution &= ~1; // don't send packet from player 2 to player 1
-                SDL_Log("ffi = %u, distro = %hx\n", ffi, outPacket->distribution);
+                if (ffi >= DONT_SEND_FRAME) {
+                    if (ffi < DONT_SEND_FRAME+10) {
+                        outPacket->distribution &= ~1; // don't send packet from player 2 to player 1
+                    }
+                    if (theNetManager->activePlayersDistribution & 1) {
+                        // this should stop logging after player 1 aborts
+                        SDL_Log("ffi = %u, distro = %hx\n", ffi, outPacket->distribution);
+                    }
+                }
             }
         #endif
         theComm->WriteAndSignPacket(outPacket);
@@ -1112,6 +1118,12 @@ void CPlayerManagerImpl::AbortRequest() {
     if (isLocalPlayer) {
         itsGame->statusRequest = kAbortStatus;
     }
+    // will call RemoveFromGame after game loop exits
+}
+
+void CPlayerManagerImpl::RemoveFromGame() {
+    theNetManager->activePlayersDistribution &= ~(1 << slot);
+    theNetManager->itsCommManager->SendUrgentPacket(kdEveryone, kpRemoveMeFromGame, 0, 0, 0, 0, 0);
 }
 
 void CPlayerManagerImpl::DeadOrDone() {

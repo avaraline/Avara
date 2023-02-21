@@ -45,7 +45,7 @@
 
 #define INACTIVE_LOOP_REFRESH 16
 
-enum { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
+enum GameStatus { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
 
 class CAbstractActor;
 class CAbstractPlayer;
@@ -87,8 +87,8 @@ public:
     FrameTime frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
-    short gameStatus;
-    short statusRequest;
+    GameStatus gameStatus;
+    GameStatus statusRequest;
     short pausePlayer;
 
     CAbstractActor *actorList;

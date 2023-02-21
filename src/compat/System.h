@@ -11,4 +11,5 @@ void Enqueue(QElemPtr qElement, QHdrPtr qHeader);
 OSErr Dequeue(QElemPtr qElement, QHdrPtr qHeader);
 
 void DisposeQueue(QHdrPtr qHeader);
-size_t QueueSize();
+size_t QueueCount();
+size_t QueueSize(QHdrPtr);
