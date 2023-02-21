@@ -151,7 +151,7 @@ void CAvaraAppImpl::Done() {
 void CAvaraAppImpl::idle() {
     CheckSockets();
     TrackerUpdate();
-    if(itsGame->GameTick()) {
+    if(itsGame->GameTick() && !headless) {
         RenderContents();
     }
 }
