@@ -1234,7 +1234,7 @@ void CAbstractPlayer::Reincarnate() {
     // try the least-visited Incarnators until one works
     for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
         if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
-            if (ReincarnateComplete(placeList)) {
+            if (itsManager->Presence() != kzSpectating && ReincarnateComplete(placeList)) {
                 break;
             }
         }
