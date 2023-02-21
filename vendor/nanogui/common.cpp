@@ -84,11 +84,8 @@ void mainloop(int refresh) {
         while (mainloop_active) {
             int numScreens = 0;
             for(auto screen : __nanogui_screens) {
-                if (!screen->visible() && !headless) {
-                    continue;
-                }
                 screen->idle();
-                screen->drawAll();
+                if (!headless) screen->drawAll();
                 numScreens++;
             }
 

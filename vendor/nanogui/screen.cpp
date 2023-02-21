@@ -31,6 +31,8 @@
 
 NAMESPACE_BEGIN(nanogui)
 
+bool headless = false;
+
 std::vector<Screen *> __nanogui_screens;
 
 #if defined(NANOGUI_GLAD)
@@ -155,27 +157,27 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
     if (fullscreen) {
         flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
-    bool headless = false;
     if (const char* hide = std::getenv("AVARA_HEADLESS")) {
         if (strcmp(hide, "1") == 0) {
             flags |= SDL_WINDOW_HIDDEN;
             headless = true;
-            return;
         }
     }
     
 
     mSDLWindow = SDL_CreateWindow(caption.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, flags);
     mWindowID = SDL_GetWindowID(mSDLWindow);
-    if (headless) return;
-    mGLContext = SDL_GL_CreateContext(mSDLWindow);
 
-    if (!mSDLWindow || !mGLContext)
-        throw std::runtime_error("Could not create an OpenGL " +
-                                 std::to_string(glMajor) + "." +
-                                 std::to_string(glMinor) + " context!");
+    if (!headless) {
+        mGLContext = SDL_GL_CreateContext(mSDLWindow);
 
-    SDL_GL_MakeCurrent(mSDLWindow, mGLContext);
+        if (!mSDLWindow || !mGLContext)
+            throw std::runtime_error("Could not create an OpenGL " +
+                                    std::to_string(glMajor) + "." +
+                                    std::to_string(glMinor) + " context!");
+
+        SDL_GL_MakeCurrent(mSDLWindow, mGLContext);
+    
 
 #if defined(NANOGUI_GLAD)
     if (!gladInitialized) {
@@ -192,7 +194,7 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     SDL_GL_SetSwapInterval(0);
     SDL_GL_SwapWindow(mSDLWindow);
-
+    }
 #if defined(__APPLE__)
     /* Poll for events once before starting a potentially
        lengthy loading process. This is needed to be
@@ -215,7 +217,7 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
     SDL_GL_GetDrawableSize(mSDLWindow, &mFBSize[0], &mFBSize[1]);
 
     mPixelRatio = get_pixel_ratio(window);
-
+    if (!headless) {
 #if defined(_WIN32) || defined(__linux__)
     if (mPixelRatio != 1 && !mFullscreen)
         SDL_SetWindowSize(window, mSize.x * mPixelRatio, mSize.y * mPixelRatio);
@@ -248,9 +250,10 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
     mNVGContext = nvgCreateGL3(flags);
     if (mNVGContext == nullptr)
         throw std::runtime_error("Could not initialize NanoVG!");
-
-    mVisible = true; // glfwGetWindowAttrib(window, GLFW_VISIBLE) != 0;
+    
     setTheme(new Theme(mNVGContext));
+    }
+    mVisible = true; // glfwGetWindowAttrib(window, GLFW_VISIBLE) != 0;
     mMousePos = Vector2i();
     mMouseState = mModifiers = 0;
     mDragActive = false;
@@ -258,6 +261,8 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
     mProcessEvents = true;
     mLastDrawTime = 0;
     __nanogui_screens.push_back(this);
+
+    if (!headless) {
 
     mCursors.insert(std::pair<Cursor, SDL_Cursor *>(Cursor::Arrow, SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW)));
     mCursors.insert(std::pair<Cursor, SDL_Cursor *>(Cursor::IBeam, SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_IBEAM)));
@@ -269,6 +274,7 @@ void Screen::initialize(SDL_Window *window, bool shutdownSDLOnDestruct) {
     /// Fixes retina display-related font rendering issue (#185)
     nvgBeginFrame(mNVGContext, mSize[0], mSize[1], mPixelRatio);
     nvgEndFrame(mNVGContext);
+    }
 }
 
 Screen::~Screen() {
