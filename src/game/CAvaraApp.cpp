@@ -48,7 +48,7 @@ void TrackerPinger(CAvaraAppImpl *app) {
             if (payload.size() > 0) {
                 // Probably not thread-safe.
                std::string address = app->String(kTrackerRegisterAddress);
-                SDL_Log("Pinging %s", address.c_str());
+                DBG_Log("tracker", "Pinging %s", address.c_str());
                 size_t sepIndex = address.find(":");
                 if (sepIndex != std::string::npos) {
                     std::string host = address.substr(0, sepIndex);
