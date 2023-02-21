@@ -213,6 +213,7 @@ void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
     animatePreview = false;
     itsGame->itsView->showTransparent = false;
     MessageLine(kmStarted, MsgAlignment::Center);
+    if (!headless)
     levelWindow->AddRecent(set, level);
 }
 
