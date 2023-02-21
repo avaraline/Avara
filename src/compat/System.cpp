@@ -72,6 +72,10 @@ void DisposeQueue(QHdrPtr qHeader) {
     DBG_Log("q", "DisposeQueues: gQueues now has %ld elements\n", gQueues.size());
 }
 
-size_t QueueSize() {
+size_t QueueCount() {
     return gQueues.size();
+}
+
+size_t QueueSize(QHdrPtr qHeader) {
+    return gQueues.count(qHeader) ? gQueues.at(qHeader).size() : 0;
 }

@@ -14,6 +14,7 @@
 #include "CAvaraGame.h"  // gCurrentGame->fpsScale
 #include "CApplication.h"  // gApplication
 #include "Debug.h"
+#include "System.h"
 
 #include <SDL2/SDL.h>
 
@@ -285,7 +286,10 @@ UDPPacketInfo *CUDPConnection::FindBestPacket(int32_t curTime, int32_t cramTime,
     }
 
     if (transmitQueueLength > kMaxTransmitQueueLength) {
-        SDL_Log("Transmit Queue Overflow\n");
+        DBG_Log("q", "Transmit Queue Overflow - myId = %d\n", myId);
+        for (int i = 0; i < kQueueCount; i++) {
+            DBG_Log("q", "   Queue[%d] size = %zu\n", i, QueueSize(&queues[i]));
+        }
         ErrorKill();
     }
 
