@@ -71,6 +71,7 @@ int main(int argc, char *argv[]) {
     std::string connectAddress;
     std::string textCommand;
     bool host = false;
+    bool robot = false;
     for (int i = 1; i < argc; i++) {
         std::string arg = argv[i];
         if (arg == "-p" || arg == "--port") {
@@ -90,6 +91,7 @@ int main(int argc, char *argv[]) {
             app->GetGame()->SetFrameTime(frameTime);
         } else if (arg == "-i" || arg == "--keys-from-stdin") {
             app->GetGame()->SetKeysFromStdin();
+            robot = true;
         } else if (arg == "-o" || arg == "--keys-to-stdout") {
             app->GetGame()->SetKeysToStdout();
         } else if (arg == "-/" || arg == "--command") {
@@ -118,7 +120,7 @@ int main(int argc, char *argv[]) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
     }
 
-    if (headless) {
+    if (headless && !robot) {
         tui->ExecuteMatchingCommand("/away", p);
     }
 
