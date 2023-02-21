@@ -43,12 +43,12 @@ void SetHiDPI() {
 }
 
 void NullLogger(void *userdata, int category, SDL_LogPriority priority, const char *message) {}
-bool AVARA_HEADLESS = false;
+bool headless = false;
 
 int main(int argc, char *argv[]) {
     if (const char* hide = std::getenv("AVARA_HEADLESS")) {
         if (strcmp(hide, "1") == 0) {
-            AVARA_HEADLESS = true;
+            headless = true;
             AvaraGLToggleRendering(0);
         }
     }
@@ -110,6 +110,10 @@ int main(int argc, char *argv[]) {
         tui->ExecuteMatchingCommand(textCommand, p);
     } else {
         tui->ExecuteMatchingCommand(defaultCmd, p);
+    }
+
+    if (headless) {
+        tui->ExecuteMatchingCommand("/away", p);
     }
 
     if(host == true) {
