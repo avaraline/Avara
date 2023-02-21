@@ -86,6 +86,7 @@ public:
     Fixed overhead[3], extent[6];
     Fixed previewAngle, previewRadius;
     bool animatePreview;
+    bool headless = false;
 
     CAvaraAppImpl();
     ~CAvaraAppImpl();

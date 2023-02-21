@@ -67,6 +67,12 @@ int throttle = 0;
 
 void mainloop(int refresh) {
     throttle = refresh;
+    bool headless = false;
+    if (const char* hide = std::getenv("AVARA_HEADLESS")) {
+        if (strcmp(hide, "1") == 0) {
+            headless = true;
+        }
+    }
     if (mainloop_active)
         throw std::runtime_error("Main loop is already running!");
 
@@ -78,7 +84,7 @@ void mainloop(int refresh) {
         while (mainloop_active) {
             int numScreens = 0;
             for(auto screen : __nanogui_screens) {
-                if (!screen->visible()) {
+                if (!screen->visible() && !headless) {
                     continue;
                 }
                 screen->idle();
@@ -86,7 +92,7 @@ void mainloop(int refresh) {
                 numScreens++;
             }
 
-            if (numScreens == 0) {
+            if (numScreens == 0 && !headless) {
                 /* Give up if there was nothing to draw */
                 mainloop_active = false;
                 break;

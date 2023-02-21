@@ -67,6 +67,12 @@ void TrackerPinger(CAvaraAppImpl *app) {
 }
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
+    if (const char* hide = std::getenv("AVARA_HEADLESS")) {
+        if (strcmp(hide, "1") == 0) {
+            AvaraGLToggleRendering(0);
+            headless = true;
+        }
+    }
     itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
     gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
@@ -79,32 +85,32 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     previewAngle = 0;
     previewRadius = 0;
     animatePreview = false;
+    if (!headless) {
+        setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
 
-    setLayout(new nanogui::FlowLayout(nanogui::Orientation::Vertical, true, 20, 20));
+        playerWindow = new CPlayerWindow(this);
+        playerWindow->setFixedWidth(200);
 
-    playerWindow = new CPlayerWindow(this);
-    playerWindow->setFixedWidth(200);
+        levelWindow = new CLevelWindow(this);
+        levelWindow->setFixedWidth(200);
 
-    levelWindow = new CLevelWindow(this);
-    levelWindow->setFixedWidth(200);
+        networkWindow = new CNetworkWindow(this);
+        networkWindow->setFixedWidth(200);
 
-    networkWindow = new CNetworkWindow(this);
-    networkWindow->setFixedWidth(200);
+        serverWindow = new CServerWindow(this);
+        serverWindow->setFixedWidth(200);
 
-    serverWindow = new CServerWindow(this);
-    serverWindow->setFixedWidth(200);
+        trackerWindow = new CTrackerWindow(this);
+        trackerWindow->setFixedWidth(325);
 
-    trackerWindow = new CTrackerWindow(this);
-    trackerWindow->setFixedWidth(325);
+        rosterWindow = new CRosterWindow(this);
 
-    rosterWindow = new CRosterWindow(this);
+        performLayout();
 
-    performLayout();
-
-    for (auto win : windowList) {
-        win->restoreState();
+        for (auto win : windowList) {
+            win->restoreState();
+        }
     }
-
     nextTrackerUpdate = 0;
     trackerUpdatePending = false;
     trackerThread = new std::thread(TrackerPinger, this);

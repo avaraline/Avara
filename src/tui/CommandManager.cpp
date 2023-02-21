@@ -274,8 +274,13 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
 
             // find levelSubstr anywhere within the level name
             if(levelUpper.find(levelSubstr) != std::string::npos) {
-                itsApp->levelWindow->SelectLevel(set, level);
-                itsApp->levelWindow->SendLoad();
+                if (itsApp->headless) {
+                    itsApp->GetNet()->SendLoadLevel(set, level);
+                }
+                else {
+                    itsApp->levelWindow->SelectLevel(set, level);
+                    itsApp->levelWindow->SendLoad();
+                }
 
                 return true;
             }
@@ -323,14 +328,20 @@ bool CommandManager::LoadRandomLevel(VectorOfArgs matchArgs) {
             currentCount += levels.size();
 
             if(randomlevelIndex >= previousCount && randomlevelIndex < currentCount) {
+                if (!itsApp->headless)
                 itsApp->levelWindow->SelectSet(setName);
                 nlohmann::json randomLevel = levels[randomlevelIndex - previousCount];
                 //itsApp->AddMessageLine((std::ostringstream() << "LoadRandomLevel i=" << randomlevelIndex << " cur=" << currentCount
                 //                << " prev=" << previousCount << " index=" << randomlevelIndex - previousCount).str());
 
                 std::string levelName = randomLevel.at("Name");
-                itsApp->levelWindow->SelectLevel(setName, levelName);
-                itsApp->levelWindow->SendLoad();
+                if (itsApp->headless) {
+                    itsApp->GetNet()->SendLoadLevel(setName, levelName);
+                }
+                else {
+                    itsApp->levelWindow->SelectLevel(setName, levelName);
+                    itsApp->levelWindow->SendLoad();
+                }
                 return true;
             }
 

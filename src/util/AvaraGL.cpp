@@ -130,11 +130,13 @@ void AvaraGLSetView(glm::mat4 view) {
 
 
 void AvaraGLSetFOV(float fov) {
+    if (!actuallyRender) return;
     current_fov = fov;
     AvaraGLUpdateProjectionMatrix();
 }
 
 void AvaraGLUpdateProjectionMatrix() {
+    if (!actuallyRender) return;
     proj = glm::scale(glm::perspective(
                         glm::radians(current_fov),
                         (float)window_width / (float)window_height,
@@ -190,6 +192,7 @@ void AvaraGLSetAmbient(float ambient, ARGBColor color) {
 }
 
 void ActivateLights(float active) {
+    if (!actuallyRender) return;
     glUseProgram(gProgram);
     glUniform1f(lights_activeLoc, active);
 }
@@ -205,6 +208,7 @@ void AvaraGLLightDefaults() {
 }
 
 void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
+    if (!actuallyRender) return;
     glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(ToFloatMat(modelview)));
     glm::mat3 normal_mat = glm::mat3(1.0f);
 
@@ -218,6 +222,7 @@ void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
 }
 
 void AvaraGLSetDepthTest(bool doTest) {
+    if (!actuallyRender) return;
     if (doTest) glDepthFunc(GL_LEQUAL);
     else glDepthFunc(GL_ALWAYS);
 }
@@ -273,6 +278,7 @@ void AvaraGLInitContext() {
 }
 
 void AvaraGLViewport(short width, short height) {
+    if (!actuallyRender) return;
     window_width = width;
     window_height = height;
     AvaraGLUpdateProjectionMatrix();

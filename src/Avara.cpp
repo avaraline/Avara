@@ -43,8 +43,15 @@ void SetHiDPI() {
 }
 
 void NullLogger(void *userdata, int category, SDL_LogPriority priority, const char *message) {}
+bool AVARA_HEADLESS = false;
 
 int main(int argc, char *argv[]) {
+    if (const char* hide = std::getenv("AVARA_HEADLESS")) {
+        if (strcmp(hide, "1") == 0) {
+            AVARA_HEADLESS = true;
+            AvaraGLToggleRendering(0);
+        }
+    }
     // Allow Windows to run in HiDPI mode.
     SetHiDPI();
 
