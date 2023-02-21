@@ -112,14 +112,14 @@ int main(int argc, char *argv[]) {
         tui->ExecuteMatchingCommand(defaultCmd, p);
     }
 
-    if (headless) {
-        tui->ExecuteMatchingCommand("/away", p);
-    }
-
     if(host == true) {
         app->GetNet()->ChangeNet(kServerNet, "");
     } else if(connectAddress.size() > 0) {
         app->GetNet()->ChangeNet(kClientNet, connectAddress);
+    }
+
+    if (headless) {
+        tui->ExecuteMatchingCommand("/away", p);
     }
 
     // outside of the game, use INACTIVE_LOOP_REFRESH (no need to poll when not playing)
