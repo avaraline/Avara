@@ -296,7 +296,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
         if(sendingPlayer != NULL)
             msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
         AddMessageLine(msgPrefix + " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".");
-        levelWindow->SelectLevel(set, itsGame->loadedLevel);
+        if (!headless) levelWindow->SelectLevel(set, itsGame->loadedLevel);
 
         itsGame->itsWorld->OverheadPoint(overhead, extent);
         itsGame->itsView->yonBound = FIX(10000);
