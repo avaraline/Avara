@@ -237,6 +237,7 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
             */
 
         case kpRemoveMeFromGame:
+            SDL_Log("kpRemoveFromGame: removing player %d\n", thePacket->sender);
             theNet->activePlayersDistribution &= ~(1 << thePacket->sender);
             break;
 

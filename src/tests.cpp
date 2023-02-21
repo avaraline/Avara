@@ -45,6 +45,7 @@ public:
     virtual short Slot() { return 0; }
     virtual void SetLocal() {};
     virtual void AbortRequest() {}
+    virtual void RemoveFromGame() {}
     virtual Boolean IsLocalPlayer() { return true; }
     virtual Boolean CalculateIsLocalPlayer() { return true; }
     virtual void GameKeyPress(char c) {}
@@ -1156,7 +1157,7 @@ TEST(SERIAL_NUMBER, Rollover) {
 
 TEST(QUEUES, Clean) {
     // after all of the tests have run, the queues should be all cleaned up suggesting all destructors did their job
-    ASSERT_EQ(QueueSize(), 0)  << "queues not empty";
+    ASSERT_EQ(QueueCount(), 0)  << "queues not empty";
 }
 
 int main(int argc, char **argv) {

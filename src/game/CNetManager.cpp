@@ -1029,6 +1029,9 @@ void CNetManager::StopGame(short newStatus) {
     FrameNumber winFrame = 0;
 
     thePlayerManager = playerTable[slot];
+    if (newStatus == kAbortStatus) {
+        thePlayerManager->RemoveFromGame();
+    }
 
     SDL_Log("CNetManager::StopGame(%d)\n", newStatus);
     isPlaying = false;
