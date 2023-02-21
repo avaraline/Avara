@@ -155,10 +155,11 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
     if (fullscreen) {
         flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
-
+    bool headless = false;
     if (const char* hide = std::getenv("AVARA_HEADLESS")) {
         if (strcmp(hide, "1") == 0) {
             flags |= SDL_WINDOW_HIDDEN;
+            headless = true;
             return;
         }
     }
@@ -166,6 +167,7 @@ Screen::Screen(const Vector2i &size, const std::string &caption, bool resizable,
 
     mSDLWindow = SDL_CreateWindow(caption.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, flags);
     mWindowID = SDL_GetWindowID(mSDLWindow);
+    if (headless) return;
     mGLContext = SDL_GL_CreateContext(mSDLWindow);
 
     if (!mSDLWindow || !mGLContext)
