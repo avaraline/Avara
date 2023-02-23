@@ -427,6 +427,7 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
     ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     // ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
 
+    SDL_Log("ResendFrame: theFrame = %d, frameFuncs[]=%d\n", theFrame, ff->validFrame);
     if (ff->validFrame == theFrame) {
         outPacket = theComm->GetPacket();
         if (outPacket) {

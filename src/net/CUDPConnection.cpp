@@ -31,7 +31,7 @@
 #define RTTSMOOTHFACTOR_DOWN 200
 #define COUNTSMOOTHFACTOR 1000
 
-#define MAX_RESENDS_WITHOUT_RECEIVE 4
+#define MAX_RESENDS_WITHOUT_RECEIVE 2
 
 #if PACKET_DEBUG || LATENCY_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
@@ -617,14 +617,15 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                 Enqueue((QElemPtr)thePacket, &queues[kReceiveQ]);
 
                 size_t qsize = QueueSize(&queues[kReceiveQ]);
-                if (qsize % 10 == 0) {
-                    DBG_Log("q", "rsn=%d, queueing sn=%d to kReceivedQ.size = %zu\n", (int)receiveSerial, (int)thePacket->serialNumber, qsize);
+                if (Debug::IsEnabled("q")) {
+                    if (qsize % 5 == 0) {
+                        DBG_Log("q", "%d: rsn=%d, queued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)thePacket->serialNumber, qsize);
+                    }
                 }
-                // if i'm not playing, give up and forget about receiving sn=receiveSerial after awhile,
-                // (31 chosen because that's how big the ackBitmap is, 31-bits)
-                // but active players will wait and possibly abort if they don't get the packet
-                if (gCurrentGame->statusRequest != kPlayingStatus && qsize > 31) {
-                    DBG_Log("q", "GIVING UP on ever receiving sn=%d", (int)receiveSerial);
+                // give up and forget about receiving sn=receiveSerial after awhile,
+                // players will request a frame resend and it could be coming in a later packet so skip this one
+                if (qsize > 64) {  // about 1 sec
+                    DBG_Log("q", "GIVING UP on receiving sn=%d", (int)receiveSerial);
                     receiveSerial += kSerialNumberStepSize;
                     // now go back and look for all the queued-up packets starting from sn==receiveSerial
                     ReceiveQueuedPackets();
@@ -684,7 +685,12 @@ bool CUDPConnection::ReceiveQueuedPackets() {
 #if PACKET_DEBUG
                     DebugPacket('+', pack);
 #endif
-//                    DBG_Log("q", "rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
+                    if (Debug::IsEnabled("q")) {
+                        size_t qsize = QueueSize(&queues[kReceiveQ]);
+                        if (qsize > 0 && qsize % 5 == 0) {
+                            DBG_Log("q", "%d: rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", myId, (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
+                        }
+                    }
 
                     receiveSerial = pack->serialNumber + kSerialNumberStepSize;
                     ValidateReceivedPacket(pack);
