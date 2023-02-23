@@ -31,7 +31,7 @@
 #define RTTSMOOTHFACTOR_DOWN 200
 #define COUNTSMOOTHFACTOR 1000
 
-#define MAX_RESENDS_WITHOUT_RECEIVE 3
+#define MAX_RESENDS_WITHOUT_RECEIVE 4
 
 #if PACKET_DEBUG || LATENCY_DEBUG
 void CUDPConnection::DebugPacket(char eType, UDPPacketInfo *p) {
@@ -684,7 +684,7 @@ bool CUDPConnection::ReceiveQueuedPackets() {
 #if PACKET_DEBUG
                     DebugPacket('+', pack);
 #endif
-                    DBG_Log("q", "rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
+//                    DBG_Log("q", "rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
 
                     receiveSerial = pack->serialNumber + kSerialNumberStepSize;
                     ValidateReceivedPacket(pack);

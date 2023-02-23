@@ -557,7 +557,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 // askAgainTime will ask upto 4 times leaving a little time before the frame buffer rolls over
                 if (askCount <= MAX_ASKS) {
                     int sum = (MAX_ASKS + 1) * MAX_ASKS / 2;  // = sum(1..MAX_ASKS)
-                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*15/sum);
+                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*13/sum);
                 } else {
                     // don't wait long after last ask, get out of the loop (abort logic below)
                     askAgainTime = quickTick + CLASSICFRAMETIME;
@@ -573,12 +573,8 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                 }
 
-                #if DONT_SEND_FRAME > 0
-                    if (itsGame->frameNumber == DONT_SEND_FRAME) {
-                        SDL_Log("frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
-                                itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
-                    }
-                #endif
+                SDL_Log("frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
+                        itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
             }
 
             // all players give up after newer frames appear in the frameFuncs buffer because
