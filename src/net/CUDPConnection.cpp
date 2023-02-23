@@ -25,7 +25,7 @@
 #define kAckRetransmitBase (41 / MSEC_PER_GET_CLOCK)
 #define kULPTimeOut (120000 / MSEC_PER_GET_CLOCK) //	120 seconds
 #define kMaxTransmitQueueLength 128*8 //	128 packets going out... (times 8 for high FPS)
-#define kMaxReceiveQueueLength 32*8 //	32 packets...arbitrary guess
+#define kMaxReceiveQueueLength kMaxTransmitQueueLength   // receive as much as is sent
 
 #define RTTSMOOTHFACTOR_UP 100
 #define RTTSMOOTHFACTOR_DOWN 200
@@ -581,46 +581,19 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
     } else {
         if (thePacket->serialNumber ==
             receiveSerial) { //	Packet was next in line to arrive, so it may release others from the received queue
-            UDPPacketInfo *nextPack;
 
 #if PACKET_DEBUG > 1
             DebugPacket('%', thePacket);
 #endif
+            // receiveSerial = serial number of next serial number we're waiting for
             receiveSerial = thePacket->serialNumber + kSerialNumberStepSize;
 
+            // this will either handle the packet OR put it on a queue (inQ) for later handling
             ValidateReceivedPacket(thePacket);
 
-            for (pack = (UDPPacketInfo *)queues[kReceiveQ].qHead; pack; pack = nextPack) {
-                nextPack = (UDPPacketInfo *)pack->packet.qLink;
+            // see if any subsequent packets have already been queued up
+            changeInReceiveQueue = ReceiveQueuedPackets();
 
-                if (pack->serialNumber <= receiveSerial) {
-                    OSErr theErr;
-
-                    theErr = Dequeue((QElemPtr)pack, &queues[kReceiveQ]);
-                    if (theErr == noErr) {
-                        if (pack->serialNumber == receiveSerial) {
-#if PACKET_DEBUG
-                            DebugPacket('+', pack);
-#endif
-                            receiveSerial = pack->serialNumber + kSerialNumberStepSize;
-                            ValidateReceivedPacket(pack);
-                        } else {
-#if PACKET_DEBUG
-                            DebugPacket('-', pack);
-#endif
-                            itsOwner->ReleasePacket(&pack->packet);
-                        }
-
-                        changeInReceiveQueue = true;
-                        nextPack = (UDPPacketInfo *)queues[kReceiveQ].qHead;
-                    }
-#if PACKET_DEBUG
-                    else {
-                        SDL_Log("Dequeue failed for received packet.\n");
-                    }
-#endif
-                }
-            }
         } else { //	We're obviously missing a packet somewhere...queue this one for later.
             // short receiveQueueLength = 0;
 
@@ -639,8 +612,25 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 #if PACKET_DEBUG
                 DebugPacket('Q', thePacket);
 #endif
+                // we have received a serial number greater than the one we're waiting for so queue this one
                 changeInReceiveQueue = true;
                 Enqueue((QElemPtr)thePacket, &queues[kReceiveQ]);
+
+                size_t qsize = QueueSize(&queues[kReceiveQ]);
+                if (qsize % 10 == 0) {
+                    DBG_Log("q", "rsn=%d, queueing sn=%d to kReceivedQ.size = %zu\n", (int)receiveSerial, (int)thePacket->serialNumber, qsize);
+                }
+                // if i'm not playing, give up and forget about receiving sn=receiveSerial after awhile,
+                // (31 chosen because that's how big the ackBitmap is, 31-bits)
+                // but active players will wait and possibly abort if they don't get the packet
+                if (gCurrentGame->statusRequest != kPlayingStatus && qsize > 31) {
+                    DBG_Log("q", "GIVING UP on ever receiving sn=%d", (int)receiveSerial);
+                    receiveSerial += kSerialNumberStepSize;
+                    // now go back and look for all the queued-up packets starting from sn==receiveSerial
+                    ReceiveQueuedPackets();
+                    // set this flag regardless if the queues were affected because we shifted receiveSerial
+                    changeInReceiveQueue = true;
+                }
             }
         }
     }
@@ -650,6 +640,7 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 
         offsetBufferBusy = &dummyShort;
         if (offsetBufferBusy == &dummyShort) {
+            // ackBase is last sequential serial number received (i.e. haven't received sn=receiveSerial yet)
             ackBase = receiveSerial - kSerialNumberStepSize;
 
             if (queues[kReceiveQ].qHead) {
@@ -675,6 +666,47 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 
         *receiveSerials++ = -12345;
     }
+}
+
+bool CUDPConnection::ReceiveQueuedPackets() {
+    bool changeInReceiveQueue = false;
+    UDPPacketInfo *nextPack;
+
+    for (UDPPacketInfo* pack = (UDPPacketInfo *)queues[kReceiveQ].qHead; pack; pack = nextPack) {
+        nextPack = (UDPPacketInfo *)pack->packet.qLink;
+
+        if (pack->serialNumber <= receiveSerial) {
+            OSErr theErr;
+
+            theErr = Dequeue((QElemPtr)pack, &queues[kReceiveQ]);
+            if (theErr == noErr) {
+                if (pack->serialNumber == receiveSerial) {
+#if PACKET_DEBUG
+                    DebugPacket('+', pack);
+#endif
+                    DBG_Log("q", "rsn=%d, dequeued sn=%d to kReceivedQ.size = %zu\n", (int)receiveSerial, (int)pack->serialNumber, QueueSize(&queues[kReceiveQ]));
+
+                    receiveSerial = pack->serialNumber + kSerialNumberStepSize;
+                    ValidateReceivedPacket(pack);
+                } else {
+#if PACKET_DEBUG
+                    DebugPacket('-', pack);
+#endif
+                    itsOwner->ReleasePacket(&pack->packet);
+                }
+
+                changeInReceiveQueue = true;
+                nextPack = (UDPPacketInfo *)queues[kReceiveQ].qHead;
+            }
+#if PACKET_DEBUG
+            else {
+                SDL_Log("Dequeue failed for received packet.\n");
+            }
+#endif
+        }
+    }
+
+    return changeInReceiveQueue;
 }
 
 char *CUDPConnection::WriteAcks(char *dest) {

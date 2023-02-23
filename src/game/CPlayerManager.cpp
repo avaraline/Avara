@@ -13,6 +13,7 @@
 #include "CAbstractPlayer.h"
 #include "ColorManager.h"
 #include "CCommManager.h"
+#include "CUDPComm.h"
 #include "CIncarnator.h"
 #include "CRandomIncarnator.h"
 #include "CNetManager.h"
@@ -389,8 +390,10 @@ void CPlayerManagerImpl::SendFrame() {
         #if DONT_SEND_FRAME > 0
             if (theNetManager->itsCommManager->myId == 1) {
                 if (ffi >= DONT_SEND_FRAME) {
-                    if (ffi < DONT_SEND_FRAME+10) {
+                    if (ffi < DONT_SEND_FRAME+1) {
                         outPacket->distribution &= ~1; // don't send packet from player 2 to player 1
+                        // fake incrementing the serialNumber on the connection we aren't sending to
+                        dynamic_cast<CUDPComm*>(theComm)->connections[0].serialNumber += kSerialNumberStepSize;
                     }
                     if (theNetManager->activePlayersDistribution & 1) {
                         // this should stop logging after player 1 aborts

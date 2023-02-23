@@ -237,13 +237,14 @@ Boolean CProtoControl::PacketHandler(PacketInfo *thePacket) {
             */
 
         case kpRemoveMeFromGame:
-            SDL_Log("kpRemoveFromGame: removing player %d\n", thePacket->sender);
+            SDL_Log("kpRemoveMeFromGame: removing player %d\n", thePacket->sender);
             theNet->activePlayersDistribution &= ~(1 << thePacket->sender);
             break;
 
         case kpPing:
-            if (!theNet->isPlaying && thePacket->p3) {
-                itsManager->SendPacket(1 << thePacket->sender, kpPing, 0, 0, thePacket->p3 - 1, 0, NULL);
+            if (thePacket->p3) {
+                int counter = theNet->isPlaying ? 1 : thePacket->p3 - 1;
+                itsManager->SendPacket(1 << thePacket->sender, kpPing, 0, 0, counter, 0, NULL);
             }
             break;
 
