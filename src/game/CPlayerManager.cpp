@@ -13,6 +13,7 @@
 #include "CAbstractPlayer.h"
 #include "ColorManager.h"
 #include "CCommManager.h"
+#include "CUDPComm.h"
 #include "CIncarnator.h"
 #include "CRandomIncarnator.h"
 #include "CNetManager.h"
@@ -389,8 +390,10 @@ void CPlayerManagerImpl::SendFrame() {
         #if DONT_SEND_FRAME > 0
             if (theNetManager->itsCommManager->myId == 1) {
                 if (ffi >= DONT_SEND_FRAME) {
-                    if (ffi < DONT_SEND_FRAME+10) {
+                    if (ffi < DONT_SEND_FRAME+1) {
                         outPacket->distribution &= ~1; // don't send packet from player 2 to player 1
+                        // fake incrementing the serialNumber on the connection we aren't sending to
+                        dynamic_cast<CUDPComm*>(theComm)->connections[0].serialNumber += kSerialNumberStepSize;
                     }
                     if (theNetManager->activePlayersDistribution & 1) {
                         // this should stop logging after player 1 aborts
@@ -427,6 +430,12 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
     if (ff->validFrame == theFrame) {
         outPacket = theComm->GetPacket();
         if (outPacket) {
+            // this method used by both requester and sender...
+            if (commandCode == kpKeyAndMouseRequest) {
+                SDL_Log("CPlayerManagerImpl::ResendFrame: asking for frame %d from slot %hd\n", theFrame, requesterId);
+            } else {
+                SDL_Log("CPlayerManagerImpl::ResendFrame: re-sending frame %d  to  slot %hd\n", theFrame, requesterId);
+            }
             outPacket->command = commandCode;
             outPacket->distribution = 1 << requesterId;
 
@@ -437,7 +446,7 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
         }
     } else //	Ask me later packet
     {
-        SDL_Log("CPlayerManagerImpl::ResendFrame - ask me later\n");
+        SDL_Log("CPlayerManagerImpl::ResendFrame frame %d not in FUNCTIONBUFFERS, value = %d\n", theFrame, ff->validFrame);
         theComm->SendUrgentPacket(1 << requesterId, kpAskLater, 0, 0, theFrame, 0, 0);
     }
 }
@@ -473,6 +482,7 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
 
     p1 = thePacket->p1;
     frameNumber = thePacket->p3;
+    DBG_Log("q2", "inserting into FUNCTIONBUFFERS[%hd] << frame %d\n", slot, frameNumber);
 
     pd = (uint32_t *)thePacket->dataBuffer;
     FrameNumber ffi = frameNumber;
@@ -504,11 +514,18 @@ void CPlayerManagerImpl::Dispose() {
 void CPlayerManagerImpl::SendResendRequest(short askCount) {
 #if DONT_SEND_FRAME > 0
 #else
-    if (/* theNetManager->fastTrack.addr.value || */ askCount > 0) {
+    if (/* theNetManager->fastTrack.addr.value || */ askCount >= 0) {
         theNetManager->playerTable[theNetManager->itsCommManager->myId]->ResendFrame(
             itsGame->frameNumber, slot, kpKeyAndMouseRequest);
     }
 #endif
+}
+
+size_t CPlayerManagerImpl::SkipLostPackets() {
+    CUDPComm* theComm = dynamic_cast<CUDPComm*>(theNetManager->itsCommManager.get());
+    size_t remaining = theComm->SkipLostPackets(slot);
+    DBG_Log("q", "SkipLostPackets: remaining on queue[%d] = %zu", slot, remaining);
+    return remaining;
 }
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
@@ -548,13 +565,17 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 
             if (quickTick - askAgainTime >= 0) {
                 SendResendRequest(askCount++);
+//                Debug::Toggle("nq");
+                // if we get the packet from the Resend above, it might be stuck on the end of the readQ waiting for
+                // a packet that is lost, so skip 1 lost packet at a time until it frees up the queue again
+                SkipLostPackets();
 
                 // FUNCIONBUFFERS*16 = 512*15 = 7680msec...
                 // divide that into 10%, 20%, 30%, 40% (divide by 10 gives you 10%) so that increasing
                 // askAgainTime will ask upto 4 times leaving a little time before the frame buffer rolls over
                 if (askCount <= MAX_ASKS) {
                     int sum = (MAX_ASKS + 1) * MAX_ASKS / 2;  // = sum(1..MAX_ASKS)
-                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*15/sum);
+                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*13/sum);
                 } else {
                     // don't wait long after last ask, get out of the loop (abort logic below)
                     askAgainTime = quickTick + CLASSICFRAMETIME;
@@ -570,12 +591,8 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                 }
 
-                #if DONT_SEND_FRAME > 0
-                    if (itsGame->frameNumber == DONT_SEND_FRAME) {
-                        SDL_Log("frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
-                                itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
-                    }
-                #endif
+                SDL_Log("frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
+                        itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
             }
 
             // all players give up after newer frames appear in the frameFuncs buffer because

@@ -858,17 +858,8 @@ bool CAvaraGame::GameTick() {
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        uint32_t pingInterval = 2000; //msec
-        if (statusRequest == kPlayingStatus) {
-            // experimental: '/dbg ping' will turn pings on/off during game
-            if (Debug::IsEnabled("ping")) {
-                itsNet->SendPingCommand(2);
-            }
-        } else {
-            // less frequent larger bursts seems to give better LT estimates when not playing
-            // (this is better than sending 2 every 0.5 sec)
-            itsNet->SendPingCommand(8);
-        }
+        static uint32_t pingInterval = 2000; // msec
+        itsNet->SendPingCommand(8);
         nextPingTime = startTime + pingInterval;
     }
 

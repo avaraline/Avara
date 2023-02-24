@@ -868,11 +868,15 @@ void CNetManager::ViewControl() {
     playerTable[itsCommManager->myId]->ViewControl();
 }
 
-void CNetManager::SendPingCommand(int totalTrips) {
-    if (totalTrips > 0) {
-        itsCommManager->SendPacket(kdEveryone - (1 << itsCommManager->myId),
-                                   kpPing, 0, 0, totalTrips-1, 0, NULL);
-   }
+void CNetManager::SendPingCommand(int trips) {
+    // there & back = 2 trips... send less to/from players in game
+    int notMe = ~(1 << itsCommManager->myId);
+    int activeTrips = 2;
+    int inactiveTrips = isPlaying ? activeTrips : trips;
+    itsCommManager->SendPacket(activePlayersDistribution & notMe,
+                               kpPing, 0, 0, activeTrips-1, 0, NULL);
+    itsCommManager->SendPacket(~activePlayersDistribution & notMe,
+                               kpPing, 0, 0, inactiveTrips-1, 0, NULL);
 }
 
 bool CNetManager::CanPlay() {
