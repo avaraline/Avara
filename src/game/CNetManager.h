@@ -153,7 +153,7 @@ public:
     virtual void ReceiveLoadLevel(short senderSlot, int16_t distribution, char *setAndTag, Fixed seed);
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag);
 
-    virtual void SendPingCommand(int totalTrips = 0);
+    virtual void SendPingCommand(int trips);
     virtual Boolean ResumeEnabled();
     virtual bool CanPlay();
     virtual void SendStartCommand(int16_t originalSender = 0);

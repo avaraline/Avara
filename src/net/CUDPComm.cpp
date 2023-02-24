@@ -811,6 +811,15 @@ void CUDPComm::ReceivedGoodPacket(PacketInfo *thePacket) {
         DispatchAndReleasePacket(thePacket);
 }
 
+size_t CUDPComm::SkipLostPackets(int slot) {
+    for (CUDPConnection *conn = connections; conn; conn = conn->next) {
+        if (conn->myId == slot) {
+            return conn->ReceivedPacket(nullptr);
+        }
+    }
+    return 0;
+}
+
 void CUDPComm::WriteComplete(int result) {
     if (turboMode && turboCount-- > 0 && !isClosed && result == noErr) {
         AsyncWrite();
