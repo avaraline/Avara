@@ -631,7 +631,8 @@ size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                 }
                 // give up and forget about receiving sn=receiveSerial after awhile,
                 // players will request a frame resend and it could be coming in a later packet so skip this one
-                if (qsize >= 40) {  // LT of 8 would be 32 frame packets, plus a little for other packets
+                int PACKET_CLEANUP = 4.5/gCurrentGame->fpsScale;   // bigger is NOT better, don't go above 5-ish
+                if (qsize >= PACKET_CLEANUP) {  // LT of 8 would be 32 frame packets, plus a little for other packets
                     // call self recursively to skip receiveSerial
                     return ReceivedPacket(nullptr);
                 }
