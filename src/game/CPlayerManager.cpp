@@ -427,10 +427,15 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
     ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & ffi];
     // ff = &frameFuncs[(FUNCTIONBUFFERS - 1) & theFrame];
 
-    SDL_Log("ResendFrame: theFrame = %d, frameFuncs[]=%d\n", theFrame, ff->validFrame);
     if (ff->validFrame == theFrame) {
         outPacket = theComm->GetPacket();
         if (outPacket) {
+            // this method used by both requester and sender...
+            if (commandCode == kpKeyAndMouseRequest) {
+                SDL_Log("CPlayerManagerImpl::ResendFrame: asking for frame %d from slot %hd\n", theFrame, requesterId);
+            } else {
+                SDL_Log("CPlayerManagerImpl::ResendFrame: re-sending frame %d  to  slot %hd\n", theFrame, requesterId);
+            }
             outPacket->command = commandCode;
             outPacket->distribution = 1 << requesterId;
 
@@ -441,7 +446,7 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
         }
     } else //	Ask me later packet
     {
-        SDL_Log("CPlayerManagerImpl::ResendFrame - ask me later\n");
+        SDL_Log("CPlayerManagerImpl::ResendFrame frame %d not in FUNCTIONBUFFERS, value = %d\n", theFrame, ff->validFrame);
         theComm->SendUrgentPacket(1 << requesterId, kpAskLater, 0, 0, theFrame, 0, 0);
     }
 }
@@ -477,6 +482,7 @@ void CPlayerManagerImpl::ProtocolHandler(struct PacketInfo *thePacket) {
 
     p1 = thePacket->p1;
     frameNumber = thePacket->p3;
+    DBG_Log("q2", "inserting into FUNCTIONBUFFERS[%hd] << frame %d\n", slot, frameNumber);
 
     pd = (uint32_t *)thePacket->dataBuffer;
     FrameNumber ffi = frameNumber;
@@ -508,11 +514,18 @@ void CPlayerManagerImpl::Dispose() {
 void CPlayerManagerImpl::SendResendRequest(short askCount) {
 #if DONT_SEND_FRAME > 0
 #else
-    if (/* theNetManager->fastTrack.addr.value || */ askCount > 0) {
+    if (/* theNetManager->fastTrack.addr.value || */ askCount >= 0) {
         theNetManager->playerTable[theNetManager->itsCommManager->myId]->ResendFrame(
             itsGame->frameNumber, slot, kpKeyAndMouseRequest);
     }
 #endif
+}
+
+size_t CPlayerManagerImpl::SkipLostPackets() {
+    CUDPComm* theComm = dynamic_cast<CUDPComm*>(theNetManager->itsCommManager.get());
+    size_t remaining = theComm->SkipLostPackets(slot);
+    DBG_Log("q", "SkipLostPackets: remaining on queue[%d] = %zu", slot, remaining);
+    return remaining;
 }
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
@@ -552,6 +565,10 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 
             if (quickTick - askAgainTime >= 0) {
                 SendResendRequest(askCount++);
+//                Debug::Toggle("nq");
+                // if we get the packet from the Resend above, it might be stuck on the end of the readQ waiting for
+                // a packet that is lost, so skip 1 lost packet at a time until it frees up the queue again
+                SkipLostPackets();
 
                 // FUNCIONBUFFERS*16 = 512*15 = 7680msec...
                 // divide that into 10%, 20%, 30%, 40% (divide by 10 gives you 10%) so that increasing

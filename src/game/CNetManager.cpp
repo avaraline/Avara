@@ -873,10 +873,10 @@ void CNetManager::SendPingCommand(int trips) {
     int notMe = ~(1 << itsCommManager->myId);
     int activeTrips = 2;
     int inactiveTrips = isPlaying ? activeTrips : trips;
-    itsCommManager->SendUrgentPacket(activePlayersDistribution & notMe,
-                                     kpPing, 0, 0, activeTrips-1, 0, NULL);
-    itsCommManager->SendUrgentPacket(~activePlayersDistribution & notMe,
-                                     kpPing, 0, 0, inactiveTrips-1, 0, NULL);
+    itsCommManager->SendPacket(activePlayersDistribution & notMe,
+                               kpPing, 0, 0, activeTrips-1, 0, NULL);
+    itsCommManager->SendPacket(~activePlayersDistribution & notMe,
+                               kpPing, 0, 0, inactiveTrips-1, 0, NULL);
 }
 
 bool CNetManager::CanPlay() {

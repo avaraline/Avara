@@ -561,7 +561,7 @@ void CUDPConnection::Dispose() {
 
 static short receiveSerialStorage[512];
 
-void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
+size_t CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
     UDPPacketInfo *pack;
     Boolean changeInReceiveQueue = false;
 
@@ -573,7 +573,14 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 
     haveToSendAck = true;
 
-    if (thePacket->serialNumber < receiveSerial) { //	We already got this one, so just release it.
+    if (thePacket == nullptr) {
+        // nullptr indicates we need to skip forward and process packets in the queue
+        DBG_Log("q", "CUDPConnection::ReceivedPacket: SKIPPING sn=%d", (int)receiveSerial);
+        receiveSerial += kSerialNumberStepSize;
+        // now go look for all the queued-up packets starting from the new receiveSerial
+        changeInReceiveQueue = ReceiveQueuedPackets();
+
+    } else if (thePacket->serialNumber < receiveSerial) { //	We already got this one, so just release it.
         // if the sender re-sent a packet we already have, that indicates they didn't get the ACK before
         // they sent the message
 
@@ -624,13 +631,9 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
                 }
                 // give up and forget about receiving sn=receiveSerial after awhile,
                 // players will request a frame resend and it could be coming in a later packet so skip this one
-                if (qsize > 64) {  // about 1 sec
-                    DBG_Log("q", "GIVING UP on receiving sn=%d", (int)receiveSerial);
-                    receiveSerial += kSerialNumberStepSize;
-                    // now go back and look for all the queued-up packets starting from sn==receiveSerial
-                    ReceiveQueuedPackets();
-                    // set this flag regardless if the queues were affected because we shifted receiveSerial
-                    changeInReceiveQueue = true;
+                if (qsize >= 40) {  // LT of 8 would be 32 frame packets, plus a little for other packets
+                    // call self recursively to skip receiveSerial
+                    return ReceivedPacket(nullptr);
                 }
             }
         }
@@ -667,6 +670,8 @@ void CUDPConnection::ReceivedPacket(UDPPacketInfo *thePacket) {
 
         *receiveSerials++ = -12345;
     }
+
+    return QueueSize(&queues[kReceiveQ]);
 }
 
 bool CUDPConnection::ReceiveQueuedPackets() {

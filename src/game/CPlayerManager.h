@@ -223,6 +223,7 @@ public:
 
     virtual FunctionTable *GetFunctions();
     virtual void SendResendRequest(short askCount);
+    virtual size_t SkipLostPackets();
 
     virtual void Dispose();
 
