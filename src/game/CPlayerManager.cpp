@@ -544,7 +544,8 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         itsGame->didWait = true;
 
         if (frameFuncs[(FUNCTIONBUFFERS - 1) & (i + 1)].validFrame < itsGame->frameNumber) {
-            askAgainTime += 5 + (rand() & 3);  // 5-8 ticks = 83-133ms = 5.2-8.3 frames
+            // if next frame hasn't arrived yet, don't ask for resend on this one RIGHT away
+            askAgainTime += 2 + (rand() & 3);  // 2-5 ticks = 33-83ms = 2.1-5.2 frames (16ms)
         }
 
         do {
