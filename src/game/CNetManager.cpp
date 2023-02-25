@@ -556,21 +556,20 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
 Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     short i;
     Boolean goAhead;
-    long lastTime, debugTime;
+    long lastTime, resendTime;
 
     totalDistribution = 0;
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         playerTable[i]->ResumeGame();
     }
 
-    // itsCommManager->SendUrgentPacket(kdEveryone, kpFastTrack, 0, 0, fastTrack.addr.value, 0,0);
-    SDL_Log("CNetManager::GatherPlayers activePlayersDistribution = 0x%02x\n", activePlayersDistribution);
-    itsCommManager->SendUrgentPacket(activePlayersDistribution, kpReadySynch, 0, 0, 0, 0, 0);
-    lastTime = debugTime = TickCount();
+    lastTime = resendTime = TickCount();
     do {
-        if (TickCount() > debugTime) {
+        if (TickCount() > resendTime) {
             SDL_Log("CNetManager::GatherPlayers loop\n");
-            debugTime = TickCount() + MSEC_TO_TICK_COUNT(1000);
+            resendTime = TickCount() + MSEC_TO_TICK_COUNT(1000);
+            SDL_Log("CNetManager::GatherPlayers sending kpReadySynch to 0x%02x\n", activePlayersDistribution);
+            itsCommManager->SendUrgentPacket(activePlayersDistribution, kpReadySynch, 0, 0, 0, 0, 0);
         }
         ProcessQueue();
         goAhead = (TickCount() - lastTime < 1800);
