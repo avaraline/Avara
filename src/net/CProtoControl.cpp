@@ -114,14 +114,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3, thePacket->p1);
             break;
         case kpReadySynch:
-            theNet->readyPlayers |= 1 << thePacket->sender;
-            SDL_Log("--- readyPlayers = 0x%02x\n", theNet->readyPlayers);
-            break;
-        case kpUnavailableSynch:
-            theNet->ReceivedUnavailable(thePacket->sender, thePacket->p1);
-            break;
-        case kpUnavailableZero:
-            theNet->unavailablePlayers = 0;
+            theNet->ReceiveReady(thePacket->sender, theNet->readyPlayers);
             break;
         case kpStartSynch:
             theNet->ConfigPlayer(thePacket->sender, thePacket->dataBuffer);

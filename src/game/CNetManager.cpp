@@ -57,7 +57,6 @@ void CNetManager::INetManager(CAvaraGame *theGame) {
 
     itsGame = theGame;
     readyPlayers = 0;
-    unavailablePlayers = 0;
 
     netStatus = kNullNet;
     itsCommManager = std::make_unique<CCommManager>();
@@ -554,46 +553,82 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
 }
 
 Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
-    short i;
-    Boolean goAhead;
-    long lastTime, resendTime;
-
     totalDistribution = 0;
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        // reset frame buffers
         playerTable[i]->ResumeGame();
     }
 
-    lastTime = resendTime = TickCount();
-    do {
-        if (TickCount() > resendTime) {
-            SDL_Log("CNetManager::GatherPlayers loop\n");
-            resendTime = TickCount() + MSEC_TO_TICK_COUNT(1000);
-            SDL_Log("CNetManager::GatherPlayers sending kpReadySynch to 0x%02x\n", activePlayersDistribution);
-            itsCommManager->SendUrgentPacket(activePlayersDistribution, kpReadySynch, 0, 0, 0, 0, 0);
+    Boolean goAhead = false;
+    uint64_t currentTime = TickCount();
+    uint64_t resendTime = currentTime;
+    uint64_t timeLimit = currentTime + 300;
+    // wait to hear from everyone, within time limit
+    while (activePlayersDistribution != readyPlayersConsensus &&
+           currentTime < timeLimit) {
+        if (currentTime >= resendTime) {
+            uint16_t dist = activePlayersDistribution & ~readyPlayersConsensus;
+            SDL_Log("CNetManager::GatherPlayers sending kpReadySynch to 0x%02x with readyPlayers = 0x%02x\n", dist, readyPlayers);
+            itsCommManager->SendUrgentPacket(dist, kpReadySynch, 0, readyPlayers, 0, 0, 0);
+            resendTime += 12; // 200ms
         }
+        // processes kpReadySynch messages coming from other players
         ProcessQueue();
-        goAhead = (TickCount() - lastTime < 1800);
-        // TODO: waiting dialog with cancel
-    } while (
-        ((activePlayersDistribution & (unavailablePlayers | readyPlayers)) ^ activePlayersDistribution) && goAhead);
+        currentTime = TickCount();
+    }
 
-    if (unavailablePlayers) {
-        itsCommManager->SendPacket(unavailablePlayers, kpUnavailableZero, 0, 0, 0, 0, NULL);
-        if (goAhead) {
-            goAhead = isFreshMission;
-
-            if (goAhead) {
-                activePlayersDistribution &= ~unavailablePlayers;
-                startPlayersDistribution = activePlayersDistribution;
-            }
+    if (activePlayersDistribution == readyPlayersConsensus) {
+        // everybody agrees, all active players are ready (normal/good case)
+        goAhead = true;
+    } else {
+        // if less than all active players are ready, see if we have a majority
+        std::bitset<kMaxAvaraPlayers> activeBits{activePlayersDistribution};
+        std::bitset<kMaxAvaraPlayers> readyBits{readyPlayersConsensus};
+        if (readyBits.count() > activeBits.count() / 2) {
+            SDL_Log("CNetManager::GatherPlayers using majority decision to start playing with 0x%02x\n", readyPlayersConsensus);
+            // if the players in readyPlayers represent at least half of all active players
+            activePlayersDistribution = readyPlayersConsensus;
+            goAhead = true;
+        } else {
+            // i must be in the minority
+            activePlayersDistribution = 0;
         }
     }
 
+    if (isFreshMission) {
+        startPlayersDistribution = activePlayersDistribution;
+    }
+    SDL_Log("CNetManager::GatherPlayers activePlayers = 0x%02x startPlayers = 0x%02x\n", activePlayersDistribution, startPlayersDistribution);
+
+
+    // seems strange to initialize these after processing... the reason for this is that
+    // others can send you messages to modify these BEFORE this method is called so
+    // initialize them after each time we're done for the NEXT call
     readyPlayers = 0;
-    unavailablePlayers = 0;
+    readyPlayersConsensus = 0;
     startingGame = false;
 
     return goAhead;
+}
+
+void CNetManager::ReceiveReady(short senderSlot, uint32_t senderReadyPlayers) {
+    uint16_t senderBit = (1 << senderSlot);
+    if ((readyPlayers & senderBit) == 0) {
+        // if sender not already in readyPlayers mask add them
+        readyPlayers |= senderBit;
+        // reset consensus so we send our updated readyPlayers mask to everyone in GatherPlayers
+        readyPlayersConsensus = 0;
+    } else {
+        // after a reset, current player resets consensus with their readyPlayers mask
+        if (readyPlayersConsensus == 0 && senderSlot == itsCommManager->myId) {
+            readyPlayersConsensus = readyPlayers;
+        }
+
+        // combine our readyPlayers masks with others' to form consensus
+        readyPlayersConsensus &= senderReadyPlayers;
+    }
+    SDL_Log("CNetManager::ReceiveReady senderSlot=%d, senderReadyPlayers = 0x%02x, readyPlayers = 0x%02x, readyPlayersConsensus = 0x%02x\n",
+            senderSlot, senderReadyPlayers, readyPlayers, readyPlayersConsensus);
 }
 
 void CNetManager::UngatherPlayers() {
@@ -889,7 +924,7 @@ void CNetManager::SendStartCommand(int16_t originalSender) {
     startPlayersDistribution = 0;
     // set readyPlayers partly as an indicator that a start command is being processed
     readyPlayers = 0;
-    unavailablePlayers = 0;
+    readyPlayersConsensus = 0;
 
     if (itsCommManager->myId == 0) {
         // to avoid multiple simultaneous starts, only the server sends the kpStartLevel requests to everyone
@@ -938,9 +973,6 @@ void CNetManager::ReceiveStartCommand(short activeDistribution, int16_t senderSl
             itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
             isPlaying = true;
             itsGame->ResumeGame();
-        } else {
-            SDL_Log("  sending kpUnavailableSync\n");
-            itsCommManager->SendPacket(activeDistribution, kpUnavailableSynch, originalSender, 0, 0, 0, NULL);
         }
     }
 }
@@ -991,19 +1023,7 @@ void CNetManager::ReceiveResumeCommand(short activeDistribution, short senderSlo
             itsGame->itsApp->DoCommand(kGetReadyToStartCmd);
             isPlaying = true;
             itsGame->ResumeGame();
-        } else {
-            itsCommManager->SendPacket(activePlayersDistribution, kpUnavailableSynch, originalSender, 0, 0, 0, NULL);
         }
-    }
-}
-
-void CNetManager::ReceivedUnavailable(short slot, short fromSlot) {
-    unavailablePlayers |= 1 << slot;
-
-    if (slot == itsCommManager->myId) {
-        itsGame->itsApp->ParamLine(kmStartFailure, MsgAlignment::Center, playerTable[fromSlot]->PlayerName(), NULL);
-    } else {
-        itsGame->itsApp->ParamLine(kmUnavailableNote, MsgAlignment::Center, playerTable[slot]->PlayerName(), NULL);
     }
 }
 
