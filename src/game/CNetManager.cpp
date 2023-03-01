@@ -567,9 +567,10 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     while (activePlayersDistribution != readyPlayersConsensus &&
            currentTime < timeLimit) {
         if (currentTime >= resendTime) {
-            uint16_t dist = activePlayersDistribution & ~readyPlayersConsensus;
-            SDL_Log("CNetManager::GatherPlayers sending kpReadySynch to 0x%02x with readyPlayers = 0x%02x\n", dist, readyPlayers);
-            itsCommManager->SendUrgentPacket(dist, kpReadySynch, 0, readyPlayers, 0, 0, 0);
+            uint16_t distrib = activePlayersDistribution & ~readyPlayersConsensus;
+            bool resendYours = readyPlayersConsensus == 0 && readyPlayers != 0;
+            SDL_Log("CNetManager::GatherPlayers sending kpReadySynch to 0x%02x with readyPlayers = 0x%02x, resend=%d\n", distrib, readyPlayers, resendYours);
+            itsCommManager->SendUrgentPacket(distrib, kpReadySynch, resendYours, readyPlayers, 0, 0, 0);
             resendTime += 12; // 200ms
         }
         // processes kpReadySynch messages coming from other players
@@ -611,24 +612,27 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     return goAhead;
 }
 
-void CNetManager::ReceiveReady(short senderSlot, uint32_t senderReadyPlayers) {
+void CNetManager::ReceiveReady(short senderSlot, uint32_t senderReadyPlayers, bool resendOurs) {
     uint16_t senderBit = (1 << senderSlot);
     if ((readyPlayers & senderBit) == 0) {
         // if sender not already in readyPlayers mask add them
         readyPlayers |= senderBit;
-        // reset consensus so we send our updated readyPlayers mask to everyone in GatherPlayers
+        // reset consensus so we send our updated readyPlayers mask to everyone on next loop iteration
         readyPlayersConsensus = 0;
     } else {
-        // after a reset, current player resets consensus with their readyPlayers mask
-        if (readyPlayersConsensus == 0 && senderSlot == itsCommManager->myId) {
+        // after a reset, set consensus with the first readyPlayers value we get
+        if (readyPlayersConsensus == 0) {
             readyPlayersConsensus = readyPlayers;
         }
-
-        // combine our readyPlayers masks with others' to form consensus
+        // AND our readyPlayers masks with everyone else to form consensus
         readyPlayersConsensus &= senderReadyPlayers;
     }
-    SDL_Log("CNetManager::ReceiveReady senderSlot=%d, senderReadyPlayers = 0x%02x, readyPlayers = 0x%02x, readyPlayersConsensus = 0x%02x\n",
-            senderSlot, senderReadyPlayers, readyPlayers, readyPlayersConsensus);
+    if (resendOurs) {
+        // send our readyPlayers value back to the sender if requested
+        itsCommManager->SendUrgentPacket(senderBit, kpReadySynch, false, readyPlayers, 0, 0, 0);
+    }
+    SDL_Log("CNetManager::ReceiveReady(%d, 0x%02x, %d): readyPlayers = 0x%02x, readyPlayersConsensus = 0x%02x\n",
+            senderSlot, senderReadyPlayers, resendOurs, readyPlayers, readyPlayersConsensus);
 }
 
 void CNetManager::UngatherPlayers() {

@@ -161,7 +161,7 @@ public:
 
     virtual void SendResumeCommand(int16_t originalSender = 0);
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
-    virtual void ReceiveReady(short slot, uint32_t readyPlayers);
+    virtual void ReceiveReady(short slot, uint32_t readyPlayers, bool resendOurs);
 
     virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame);
     virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
