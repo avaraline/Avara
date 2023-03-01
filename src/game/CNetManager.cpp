@@ -7,6 +7,7 @@
     Modified: Tuesday, September 17, 1996, 03:21
 */
 #include <algorithm> // std::max
+#include <bitset>
 
 #include "CNetManager.h"
 
