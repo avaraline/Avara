@@ -803,7 +803,7 @@ void CAvaraGame::GameStart() {
     // SDL_CaptureMouse(SDL_TRUE);
 
     SDL_SetRelativeMouseMode(SDL_TRUE);
-#ifdef _WIN32
+#ifdef WIN32
 #else
     SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
 #endif
