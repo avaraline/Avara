@@ -588,7 +588,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             }
 
             // allow immediate abort after the kmWaitingForPlayer message displays
-            if (askCount >= 2 && TestKeyPressed(kfuAbortGame)) {
+            if (askCount >= WAITING_MESSAGE_COUNT && TestKeyPressed(kfuAbortGame)) {
                 itsGame->statusRequest = kAbortStatus;
                 break;
             }
