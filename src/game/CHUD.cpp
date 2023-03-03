@@ -266,7 +266,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         }
     }
     int playerSlots = std::max(6, lastPlayerSlot + 1);
-
+    
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
     int chudHeight = 13 * playerSlots;
 
