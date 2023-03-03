@@ -150,6 +150,10 @@ public:
         return color;
     }
 
+    static inline ARGBColor getPingColor(uint8_t num) {
+      return pingColors[num];
+    }
+
     static inline float getHudAlpha() {
         return hudAlpha;
     }
@@ -190,4 +194,5 @@ private:
     static ARGBColor teamTextColors[kMaxTeamColors + 1];
     static std::string teamColorNames[kMaxTeamColors + 1];
     static ARGBColor messageColors[3];
+    static ARGBColor pingColors[3];
 };
