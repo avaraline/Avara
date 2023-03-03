@@ -532,14 +532,14 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     // SDL_Log("CPlayerManagerImpl::GetFunctions, %u, %hd\n", itsGame->frameNumber, slot);
     FrameNumber ffi = (itsGame->frameNumber);
     short i = (FUNCTIONBUFFERS - 1) & ffi;
-    static int WAITING_MESSAGE_COUNT = 2;
+    static int ASK_INTERVAL = MSEC_TO_TICK_COUNT(500);
+    static int WAITING_MESSAGE_COUNT = 4;
 
     // if player is finished don't wait for their frames to sync up
     if (frameFuncs[i].validFrame != itsGame->frameNumber && itsPlayer->lives > 0) {
-        long quickTick;
         long firstTime = askAgainTime = TickCount();
+        long quickTick = firstTime;
         short askCount = 0;
-        static int MAX_ASKS = 4;
 
         itsGame->didWait = true;
 
@@ -548,7 +548,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             askAgainTime += 2 + (rand() & 3);  // 2-5 ticks = 33-83ms = 2.1-5.2 frames (16ms)
         }
 
-        do {
+        while (frameFuncs[i].validFrame < itsGame->frameNumber) {
             theNetManager->ProcessQueue();
 
             // While we're waiting for packets, process key/mouse events so they don't build up.
@@ -571,16 +571,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 // a packet that is lost, so skip 1 lost packet at a time until it frees up the queue again
                 SkipLostPackets();
 
-                // FUNCIONBUFFERS*16 = 512*15 = 7680msec...
-                // divide that into 10%, 20%, 30%, 40% (divide by 10 gives you 10%) so that increasing
-                // askAgainTime will ask upto 4 times leaving a little time before the frame buffer rolls over
-                if (askCount <= MAX_ASKS) {
-                    int sum = (MAX_ASKS + 1) * MAX_ASKS / 2;  // = sum(1..MAX_ASKS)
-                    askAgainTime = quickTick + MSEC_TO_TICK_COUNT(askCount*FUNCTIONBUFFERS*13/sum);
-                } else {
-                    // don't wait long after last ask, get out of the loop (abort logic below)
-                    askAgainTime = quickTick + CLASSICFRAMETIME;
-                }
+                askAgainTime = quickTick + ASK_INTERVAL;
 
                 if (askCount == WAITING_MESSAGE_COUNT) {
                     SDL_Log("Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
@@ -596,23 +587,22 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                         itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
             }
 
-            // all players give up after newer frames appear in the frameFuncs buffer because
-            // that indicates the frame buffer has wrapped around and this frame won't be arriving
-            if (frameFuncs[i].validFrame > itsGame->frameNumber || askCount > MAX_ASKS) {
-                itsGame->statusRequest = kAbortStatus;
-                itsGame->itsApp->AddMessageLine(
-                    "Exiting game - missing data from: " + GetPlayerName(),
-                    MsgAlignment::Center, MsgCategory::Error);
-                break;
-            }
-
             // allow immediate abort after the kmWaitingForPlayer message displays
-            if (askCount >= 2 && TestKeyPressed(kfuAbortGame)) {
+            if (askCount >= WAITING_MESSAGE_COUNT && TestKeyPressed(kfuAbortGame)) {
                 itsGame->statusRequest = kAbortStatus;
                 break;
             }
+        }
 
-        } while (frameFuncs[i].validFrame != itsGame->frameNumber);
+        // give up after newer frames appear in the frameFuncs buffer because that
+        // indicates the frame buffer has wrapped around and this frame won't be arriving
+        // ... should probably only happen for spectators whose connections can't keep up
+        if (frameFuncs[i].validFrame > itsGame->frameNumber) {
+            itsGame->statusRequest = kAbortStatus;
+            itsGame->itsApp->AddMessageLine("Exiting game - frame buffer full",
+                                            MsgAlignment::Center, MsgCategory::Error);
+        }
+
 
         if (askCount >= WAITING_MESSAGE_COUNT && frameFuncs[i].validFrame == itsGame->frameNumber) {
             gApplication->BroadcastCommand(kBusyEndCmd);
