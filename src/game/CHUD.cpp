@@ -383,7 +383,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
           case kLActive:
             // Ping Indicator
             NVGcolor pingColor;
-            if (rtt != 0) { // Don't draw ping for yourself
+            if (rtt != 0 && thisPlayer->Presence() != kzSpectating) { // Don't draw ping for yourself or spectators
               if (rtt < 100) {
                 pingColor = ColorManager::getPingColor(0).IntoNVG();
                 colorBoxHeight = 2;
