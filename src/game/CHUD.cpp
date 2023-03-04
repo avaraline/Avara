@@ -383,7 +383,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
         // Ping Indicator
         NVGcolor pingColor;
-        if (rtt != 0 || thisPlayer->IsAway()) { // Don't draw indicator if player is you or they are away
+        if (rtt != 0 && !thisPlayer->IsAway()) { // Don't draw indicator if player is you or they are away
           if (rtt < 100) {
             pingColor = ColorManager::getPingColor(0).IntoNVG();
             colorBoxHeight = 2;
