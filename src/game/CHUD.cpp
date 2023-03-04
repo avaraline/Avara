@@ -379,25 +379,27 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             nvgStroke(ctx);
             nvgClosePath(ctx);
             break;
-        }
 
-        // Ping Indicator
-        NVGcolor pingColor;
-        if (rtt != 0 && !thisPlayer->IsAway()) { // Don't draw indicator if player is you or they are away
-          if (rtt < 100) {
-            pingColor = ColorManager::getPingColor(0).IntoNVG();
-            colorBoxHeight = 2;
-          } else if (rtt <= 200) {
-            pingColor = ColorManager::getPingColor(1).IntoNVG();
-            colorBoxHeight = 6;
-          } else if (rtt > 200) {
-            pingColor = ColorManager::getPingColor(2).IntoNVG();
-            colorBoxHeight = 10;
-          }
-          nvgBeginPath(ctx);
-          nvgRect(ctx, bufferWidth - 147, pY + (10 - colorBoxHeight), 3, colorBoxHeight);
-          nvgFillColor(ctx, pingColor);
-          nvgFill(ctx);
+          case kLActive:
+            // Ping Indicator
+            NVGcolor pingColor;
+            if (rtt != 0) { // Don't draw ping for yourself
+              if (rtt < 100) {
+                pingColor = ColorManager::getPingColor(0).IntoNVG();
+                colorBoxHeight = 2;
+              } else if (rtt <= 200) {
+                pingColor = ColorManager::getPingColor(1).IntoNVG();
+                colorBoxHeight = 6;
+              } else if (rtt > 200) {
+                pingColor = ColorManager::getPingColor(2).IntoNVG();
+                colorBoxHeight = 10;
+              }
+              nvgBeginPath(ctx);
+              nvgRect(ctx, bufferWidth - 147, pY + (10 - colorBoxHeight), 3, colorBoxHeight);
+              nvgFillColor(ctx, pingColor);
+              nvgFill(ctx);
+            }
+            break;
         }
 
         //player name
