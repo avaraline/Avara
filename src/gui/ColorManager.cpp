@@ -69,6 +69,12 @@ ARGBColor ColorManager::messageColors[3] = {
     0xffff8185
 };
 
+ARGBColor ColorManager::pingColors[3] = {
+    0xff2eff2e,
+    0xffffee2e,
+    0xffff382e
+};
+
 void ColorManager::setColorBlind(ColorBlindMode mode) {
     switch (mode) {
         case Off:
@@ -113,6 +119,9 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::messageColors[0] = 0xffffffff;
             ColorManager::messageColors[1] = 0xff92ebe9;
             ColorManager::messageColors[2] = 0xffff8185;
+            ColorManager::pingColors[0] = 0xff2eff2e;
+            ColorManager::pingColors[1] = 0xffffee2e;
+            ColorManager::pingColors[2] = 0xffff382e;
             break;
         case Deuteranopia:
             ColorManager::energyGaugeColor = 0xff009ea0;

@@ -316,6 +316,13 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         CPlayerManager *thisPlayer = net->playerTable[i];
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
         if (playerName.length() < 1) continue;
+
+        // Get player RTT
+        long rtt = 0;
+        if (i != net->itsCommManager->myId && playerName.length() > 0) {
+            rtt = net->itsCommManager->GetMaxRoundTrip(1 << i);
+        }
+
         pY = (bufferHeight - chudHeight + 8) + (11 * i);
         longTeamColor = *ColorManager::getTeamColor(net->teamColors[i] + 1);
         longTeamColor.ExportGLFloats(teamColorRGB, 3);
@@ -334,6 +341,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
         //player color box
         float colorBoxWidth = 10.0;
+        float colorBoxHeight = 10.0;
         nvgBeginPath(ctx);
 
         //highlight player if spectating
@@ -342,15 +350,63 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             colorBoxWidth = 150.0;
         }
 
-        nvgRect(ctx, bufferWidth - 160, pY, colorBoxWidth, 10.0);
+        nvgRect(ctx, bufferWidth - 160, pY, colorBoxWidth, colorBoxHeight);
         nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], colorBoxAlpha));
         nvgFill(ctx);
+
+        // draw something based on the player status
+        switch (thisPlayer->LoadingStatus()) {
+          // Draw a dot
+          case kLReady:
+            nvgBeginPath(ctx);
+            nvgCircle(ctx, bufferWidth - 155, pY + (colorBoxHeight / 2), 3.0);
+            nvgFillColor(ctx, nvgRGBAf(0, 0, 0, 255));
+            nvgFill(ctx);
+
+            nvgBeginPath(ctx);
+            nvgCircle(ctx, bufferWidth - 155, pY + (colorBoxHeight / 2), 2.0);
+            nvgFillColor(ctx, nvgRGBAf(255, 255, 255, 255));
+            nvgFill(ctx);
+            break;
+
+          // Draw a slash
+          case kLWaiting:
+            nvgBeginPath(ctx);
+            nvgMoveTo(ctx, bufferWidth - 150, pY);
+            nvgLineTo(ctx, bufferWidth - 160, pY + colorBoxHeight);
+            nvgStrokeColor(ctx, nvgRGBAf(0, 0, 0, 255));
+            nvgStrokeWidth(ctx, 1);
+            nvgStroke(ctx);
+            nvgClosePath(ctx);
+            break;
+
+          case kLActive:
+            // Ping Indicator
+            NVGcolor pingColor;
+            if (rtt != 0 && thisPlayer->Presence() != kzSpectating) { // Don't draw ping for yourself or spectators
+              if (rtt < 100) {
+                pingColor = ColorManager::getPingColor(0).IntoNVG();
+                colorBoxHeight = 2;
+              } else if (rtt <= 200) {
+                pingColor = ColorManager::getPingColor(1).IntoNVG();
+                colorBoxHeight = 6;
+              } else if (rtt > 200) {
+                pingColor = ColorManager::getPingColor(2).IntoNVG();
+                colorBoxHeight = 10;
+              }
+              nvgBeginPath(ctx);
+              nvgRect(ctx, bufferWidth - 147, pY + (10 - colorBoxHeight), 3, colorBoxHeight);
+              nvgFillColor(ctx, pingColor);
+              nvgFill(ctx);
+            }
+            break;
+        }
 
         //player name
         nvgFillColor(ctx, textColor);
         nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
-        nvgText(ctx, bufferWidth - 148, pY - 3, playerName.c_str(), NULL);
+        nvgText(ctx, bufferWidth - 141, pY - 2, playerName.c_str(), NULL);
 
         short status = thisPlayer->GetStatusChar();
         if (status >= 0) {
@@ -370,7 +426,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
         nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-        nvgText(ctx, bufferWidth - 168, pY - 3, playerChat.c_str(), NULL);
+        nvgText(ctx, bufferWidth - 168, pY - 2, playerChat.c_str(), NULL);
 
         //spectating onscreen name
         if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
