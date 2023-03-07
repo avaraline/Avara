@@ -75,14 +75,18 @@
   <Dome y="4" fill="#cef2e6" frame="#000000" cx="12.5" cz="17.5" r="2.5" angle="180" quarters="4" />
   <Dome y="4" fill="#cef2e6" frame="#000000" cx="-12.5" cz="-17.5" r="2.5" angle="180" quarters="4" />
 
-  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="-47.5" cz="27.5" angle="45" />
-  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="-47.5" cz="27.5" angle="45" />
-  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="-40" cz="47.5" angle="45" />
-  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="-40" cz="47.5" angle="45" />
-  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="47.5" cz="-27.5" angle="45" />
-  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="47.5" cz="-27.5" angle="45" />
-  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="40" cz="-47.5" angle="45" />
-  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="40" cz="-47.5" angle="45" />
+  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" mask="0" fill="#ffe5f6" frame="#000000" cx="-47.5" cz="27.5" angle="45" />
+  <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="-47.5" cz="27.5" angle="45" />
+  <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="-47.5" cz="27.5" angle="45" />
+  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" mask="0" fill="#ffe5f6" frame="#000000" cx="-40" cz="47.5" angle="45" />
+  <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="-40" cz="47.5" angle="45" />
+  <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="-40" cz="47.5" angle="45" />
+  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" mask="0" fill="#ffe5f6" frame="#000000" cx="47.5" cz="-27.5" angle="45" />
+  <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="47.5" cz="-27.5" angle="45" />
+  <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="47.5" cz="-27.5" angle="45" />
+  <Teleporter y="0.05" shape="bspLotus" scale=".3" speed="2" mask="0" fill="#ffe5f6" frame="#000000" cx="40" cz="-47.5" angle="45" />
+  <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="40" cz="-47.5" angle="45" />
+  <Teleporter y="0" shape="0" group="@floor" destGroup="@pillar" spin="true" fill="#ffe5f6" frame="#000000" cx="40" cz="-47.5" angle="45" />
   <Teleporter y="17" shape="0" group="@pillar" mask="0" spin="true" fill="#ffffff" frame="#000000" cx="-47.5" cz="-12.5" angle="45" />
   <Teleporter y="17" shape="0" group="@pillar" mask="0" spin="true" fill="#ffffff" frame="#000000" cx="47.5" cz="12.5" angle="45" />
 
