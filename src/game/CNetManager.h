@@ -78,11 +78,11 @@ public:
     int8_t slotToPosition[kMaxAvaraPlayers];
     int8_t positionToSlot[kMaxAvaraPlayers];
 
-    short activePlayersDistribution;
-    short readyPlayers;
-    short unavailablePlayers;
-    short startPlayersDistribution;
-    short totalDistribution;
+    uint16_t activePlayersDistribution;
+    uint16_t readyPlayers;
+    uint16_t readyPlayersConsensus;
+    uint16_t startPlayersDistribution;
+    uint16_t totalDistribution;
     short netStatus;
     CDirectObject *netOwner;
     short deadOrDonePlayers;
@@ -161,7 +161,7 @@ public:
 
     virtual void SendResumeCommand(int16_t originalSender = 0);
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
-    virtual void ReceivedUnavailable(short slot, short fromSlot);
+    virtual void ReceiveReady(short slot, uint32_t readyPlayers, bool resendOurs);
 
     virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame);
     virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
