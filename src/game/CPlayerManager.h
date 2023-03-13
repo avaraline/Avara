@@ -9,6 +9,7 @@
 
 #pragma once
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "KeyFuncs.h"
 #include "PlayerConfig.h"
 
@@ -199,7 +200,11 @@ private:
     OSErr levelErr;
     std::string levelTag;
 
-    PlayerConfigRecord theConfiguration;
+    PlayerConfigRecord theConfiguration = {
+        0,
+        .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
+        .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
+    };
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 

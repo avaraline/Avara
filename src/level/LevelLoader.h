@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "ARGBColor.h"
+#include "ColorManager.h"
 #include "Parser.h"
 
 enum {
@@ -312,4 +313,6 @@ Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
 ARGBColor GetPixelColor();
 ARGBColor GetOtherPixelColor();
+ARGBColor GetTertiaryColor();
+ARGBColor GetQuaternaryColor();
 Fixed GetLastOval(Fixed *theLoc);

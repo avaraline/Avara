@@ -58,38 +58,38 @@
   <Text sound="kSnText" volume="kTextVolume" in="@redAt24" showEveryone="true" text="Red team has only 1 point to go!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
   <Text sound="kSnText" volume="kTextVolume" in="@redWins" showEveryone="true" text="Red team wins!" cx="203.8888888888889" cz="478.8888888888889" r="2.569444444444457" />
   <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
-  <Wall fill="#000000" frame="#000000" x="102.29166666666667" z="59.375" w="10" d="10" h="0" y="0" />
+  <Wall color="#000000" color.1="#000000" x="102.29166666666667" z="59.375" w="10" d="10" h="0" y="0" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="50" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" angle="45" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" color="#000000" color.1="#000000" cx="102.25694444444446" cz="59.34027777777778" angle="45" />
   <Timer in="mSwitch" out="mShow2" wait="50" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" angle="45" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" color="#000000" color.1="#000000" cx="102.25694444444446" cz="59.34027777777778" angle="45" />
   <set wallHeight=".1" />
-  <Wall fill="#ff2600" frame="#000000" x="102.29166666666667" z="59.375" w="8.75" d="8.75" h="0" />
-  <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T2" group="@yellow" destgroup="@yellow" out="@add1Yellow" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" angle="0.5" />
-  <Hologram y="9" fill="#000000" frame="#000000" cx="102.25694444444446" cz="59.34027777777778" angle="0.5" />
+  <Wall color="#ff2600" color.1="#000000" x="102.29166666666667" z="59.375" w="8.75" d="8.75" h="0" />
+  <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T2" group="@yellow" destgroup="@yellow" out="@add1Yellow" color="#000000" color.1="#000000" cx="102.25694444444446" cz="59.34027777777778" angle="0.5" />
+  <Hologram y="9" color="#000000" color.1="#000000" cx="102.25694444444446" cz="59.34027777777778" angle="0.5" />
   <set floorTemplate="bspFloorFrame" wallHeight="0" wallYon="100" />
-  <Wall fill="#000000" frame="#000000" x="187.43055555555557" z="59.30555555555556" w="10" d="10" h="0" y="0" />
+  <Wall color="#000000" color.1="#000000" x="187.43055555555557" z="59.30555555555556" w="10" d="10" h="0" y="0" />
   <set wallHeight=".1" />
-  <Wall fill="#fffb00" frame="#000000" x="187.43055555555557" z="59.30555555555556" w="8.75" d="8.75" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="187.43055555555557" z="59.30555555555556" w="8.75" d="8.75" h="0" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="8" cx="88.125" cz="65.48611111111111" angle="90" />
   <Incarnator y="10" mask="T3" cx="88.125" cz="65.48611111111111" angle="90" />
-  <Teleporter y="15" group="@red" shape="0" spin="0" fill="#ff2600" frame="#000000" cx="88.125" cz="65.48611111111111" angle="90" />
+  <Teleporter y="15" group="@red" shape="0" spin="0" color="#ff2600" color.1="#000000" cx="88.125" cz="65.48611111111111" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="88.125" cz="65.48611111111111" angle="90" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#ff2600" color.1="#000000" cx="88.125" cz="65.48611111111111" angle="90" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="8" cx="88.125" cz="59.30555555555556" angle="90" />
   <Incarnator y="10" mask="T3" cx="88.125" cz="59.30555555555556" angle="90" />
-  <Teleporter y="15" group="@red" shape="0" spin="0" fill="#ff2600" frame="#000000" cx="88.125" cz="59.30555555555556" angle="90" />
+  <Teleporter y="15" group="@red" shape="0" spin="0" color="#ff2600" color.1="#000000" cx="88.125" cz="59.30555555555556" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="88.125" cz="59.30555555555556" angle="90" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#ff2600" color.1="#000000" cx="88.125" cz="59.30555555555556" angle="90" />
   <Base in="@badHectors" out="@teleportTheRest" cx="121.45833333333334" cz="580.2777777777778" />
   <Text in="@badHectors" showEveryone="true" text="HECTORS must be red or yellow." sound="0" cx="121.45833333333334" cz="580.2777777777778" r="2.569444444444457" />
-  <Goody out="@badHectors" shape="bspW3x3" fill="#ff2600" frame="#000000" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
+  <Goody out="@badHectors" shape="bspW3x3" color="#ff2600" color.1="#000000" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
@@ -103,53 +103,53 @@
   <Walker team="6" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="6" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Special thanks to Taz!, Head, and other Geezer friends whose hours of testing and input made these levels possible. Teams are red and yellow. Up to three players per team. Reach your opponents side as many times as possible. 5 minutes or 25 points." />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
   <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="8" cx="88.125" cz="52.986111111111114" angle="90" />
   <Incarnator y="10" mask="T3" cx="88.125" cz="52.986111111111114" angle="90" />
-  <Teleporter y="15" group="@red" shape="0" spin="0" fill="#ff2600" frame="#000000" cx="88.125" cz="52.986111111111114" angle="90" />
+  <Teleporter y="15" group="@red" shape="0" spin="0" color="#ff2600" color.1="#000000" cx="88.125" cz="52.986111111111114" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="88.125" cz="52.986111111111114" angle="90" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#ff2600" color.1="#000000" cx="88.125" cz="52.986111111111114" angle="90" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="201.80555555555557" cz="65.48611111111111" angle="270" />
   <Incarnator y="10" mask="T2" cx="201.80555555555557" cz="65.48611111111111" angle="270" />
-  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="201.80555555555557" cz="65.48611111111111" angle="270" />
+  <Teleporter y="15" group="@yellow" shape="0" spin="0" color="#fffc41" color.1="#000000" cx="201.80555555555557" cz="65.48611111111111" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="201.80555555555557" cz="65.48611111111111" angle="270" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#fffc41" color.1="#000000" cx="201.80555555555557" cz="65.48611111111111" angle="270" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="201.80555555555557" cz="59.30555555555556" angle="270" />
   <Incarnator y="10" mask="T2" cx="201.80555555555557" cz="59.30555555555556" angle="270" />
-  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="201.80555555555557" cz="59.30555555555556" angle="270" />
+  <Teleporter y="15" group="@yellow" shape="0" spin="0" color="#fffc41" color.1="#000000" cx="201.80555555555557" cz="59.30555555555556" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="201.80555555555557" cz="59.30555555555556" angle="270" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#fffc41" color.1="#000000" cx="201.80555555555557" cz="59.30555555555556" angle="270" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="8" cx="201.94444444444446" cz="52.986111111111114" angle="270" />
   <Incarnator y="10" mask="T2" cx="201.94444444444446" cz="52.986111111111114" angle="270" />
-  <Teleporter y="15" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="201.94444444444446" cz="52.986111111111114" angle="270" />
+  <Teleporter y="15" group="@yellow" shape="0" spin="0" color="#fffc41" color.1="#000000" cx="201.94444444444446" cz="52.986111111111114" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="201.94444444444446" cz="52.986111111111114" angle="270" />
-  <SkyColor fill="#fffc41" frame="#ff7c00" />
-  <GroundColor fill="#d6a800" />
+  <Goody hitScore="1" y="14" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#fffc41" color.1="#000000" cx="201.94444444444446" cz="52.986111111111114" angle="270" />
+  <SkyColor color="#fffc41" color.1="#ff7c00" />
+  <GroundColor color="#d6a800" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="50" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#d6a800" frame="#000000" cx="187.39583333333334" cz="59.270833333333336" angle="45" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" color="#d6a800" color.1="#000000" cx="187.39583333333334" cz="59.270833333333336" angle="45" />
   <Timer in="mSwitch" out="mShow2" wait="50" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#d6a800" frame="#000000" cx="187.39583333333334" cz="59.270833333333336" angle="45" />
-  <Teleporter group="-1" y="-30" activeRange="130" deadRange="100" destGroup="@recenter" shape="0" fill="#0080ff" frame="#000000" cx="145" cz="59.375" angle="45" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#0080ff" frame="#000000" cx="145" cz="59.375" angle="45" />
-  <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T3" group="@red" destgroup="@red" out="@add1Red" fill="#000000" frame="#000000" cx="187.43055555555557" cz="59.30555555555556" angle="0.5" />
-  <Hologram y="9" fill="#000000" frame="#000000" cx="187.43055555555557" cz="59.30555555555556" angle="0.5" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" color="#d6a800" color.1="#000000" cx="187.39583333333334" cz="59.270833333333336" angle="45" />
+  <Teleporter group="-1" y="-30" activeRange="130" deadRange="100" destGroup="@recenter" shape="0" color="#0080ff" color.1="#000000" cx="145" cz="59.375" angle="45" />
+  <Teleporter y="30" shape="0" group="@recenter" color="#0080ff" color.1="#000000" cx="145" cz="59.375" angle="45" />
+  <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T3" group="@red" destgroup="@red" out="@add1Red" color="#000000" color.1="#000000" cx="187.43055555555557" cz="59.30555555555556" angle="0.5" />
+  <Hologram y="9" color="#000000" color.1="#000000" cx="187.43055555555557" cz="59.30555555555556" angle="0.5" />
   <Counter in="@add1Yellow" n="1" out="@yellowAt1" restart="false" />
   <Counter in="@add1Yellow" n="2" out="@yellowAt2" restart="false" />
   <Counter in="@add1Yellow" n="3" out="@yellowAt3" restart="false" />

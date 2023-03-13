@@ -48,7 +48,12 @@ static short lastDomeAngle;
 static short lastDomeSpan;
 static Fixed lastDomeRadius;
 
-static ARGBColor fillColor(0), frameColor(0);
+static ARGBColor palette[4] = {
+    0,
+    0,
+    (*ColorManager::getMarkerColor(2)).WithA(0xff),
+    (*ColorManager::getMarkerColor(3)).WithA(0xff)
+};
 
 
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
@@ -62,11 +67,19 @@ Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle) {
 }
 
 ARGBColor GetPixelColor() {
-    return fillColor;
+    return palette[0];
 }
 
 ARGBColor GetOtherPixelColor() {
-    return frameColor;
+    return palette[1];
+}
+
+ARGBColor GetTertiaryColor() {
+    return palette[2];
+}
+
+ARGBColor GetQuaternaryColor() {
+    return palette[3];
 }
 
 void GetLastArcLocation(Fixed *theLoc) {
@@ -111,6 +124,9 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
     std::string fix_attr(std::string attr) {
+        if (attr.compare("color") == 0) {
+            attr = "color.0";
+        }
         // XML attributes can't have brackets, so we turn light.0.i into light[0].i
         std::regex subscript("\\.(\\d+)");
         return std::regex_replace(attr, subscript, "[$1]");
@@ -121,8 +137,11 @@ struct ALFWalker: pugi::xml_tree_walker {
             attr.compare("text") == 0 ||
             attr.compare("designer") == 0 ||
             attr.compare("information") == 0 ||
-            attr.compare("fill") == 0 ||
-            attr.compare("frame") == 0 ||
+            attr.compare("color") == 0 ||
+            attr.compare("color[0]") == 0 ||
+            attr.compare("color[1]") == 0 ||
+            attr.compare("color[2]") == 0 ||
+            attr.compare("color[3]") == 0 ||
             (attr.size() > 2 && attr.compare(attr.size() - 2, 2, ".c") == 0)
         ) {
             if (value[0] == '$') {
@@ -171,17 +190,38 @@ struct ALFWalker: pugi::xml_tree_walker {
     bool read_context(pugi::xml_node& node) {
         gLastBoxRounding = node.attribute("h").empty() ? 0 : ReadFixedVar("h");
 
-        if (!node.attribute("fill").empty()) {
-            const std::optional<ARGBColor> color = ReadColorVar("fill");
+        if (!node.attribute("color").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[0]");
             if (color) {
-                fillColor = *color;
+                palette[0] = *color;
             }
         }
 
-        if (!node.attribute("frame").empty()) {
-            const std::optional<ARGBColor> color = ReadColorVar("frame");
+        if (!node.attribute("color.0").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[0]");
             if (color) {
-                frameColor = *color;
+                palette[0] = *color;
+            }
+        }
+
+        if (!node.attribute("color.1").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[1]");
+            if (color) {
+                palette[1] = *color;
+            }
+        }
+
+        if (!node.attribute("color.2").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[2]");
+            if (color) {
+                palette[2] = *color;
+            }
+        }
+
+        if (!node.attribute("color.3").empty()) {
+            const std::optional<ARGBColor> color = ReadColorVar("color[3]");
+            if (color) {
+                palette[3] = *color;
             }
         }
 

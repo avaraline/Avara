@@ -1,67 +1,67 @@
 <map>
   <set designer="Jim Doolittle 'Gimli'  &lt;gimli@avara.com&gt;" information="A simpler, more pure version on Monolith." />
-  <Wall fill="#8a8a8a" frame="#000000" x="148.33333333333334" z="92.70833333333334" w="5" d="5" h="5" />
-  <Wall fill="#8a8a8a" frame="#000000" x="148.33333333333334" z="107.70833333333334" w="5" d="5" h="5" />
-  <Wall fill="#8a8a8a" frame="#000000" x="168.33333333333334" z="107.70833333333334" w="5" d="5" h="5" />
-  <Wall fill="#8a8a8a" frame="#000000" x="168.33333333333334" z="92.70833333333334" w="5" d="5" h="5" />
-  <SkyColor fill="#ab30d6" frame="#7b23aa" />
-  <GroundColor fill="#000000" />
-  <Wall fill="#0048aa" frame="#000000" x="192.08333333333334" z="100.20833333333334" w="17.5" d="10" h="10" />
-  <Wall fill="#0048aa" frame="#000000" x="192.08333333333334" z="108.33333333333334" w="11.25" d="6.25" h="10" />
-  <Ramp y="5" thickness=".2" deltaY="5" fill="#00acff" frame="#000000" x="177.08333333333334" z="100.20833333333334" w="12.5" d="6.25" h="0" angle="275" />
-  <Teleporter y="10" group="@crossOver" destGroup="@crossOver" fill="#d82da9" frame="#000000" cx="192.1527777777778" cz="108.47222222222223" angle="45" />
-  <Ramp y="0" deltaY="5" thickness=".2" fill="#0048aa" frame="#000000" x="149.8263888888889" z="82.70833333333334" w="7.986111111111114" d="15" h="0" angle="5" />
-  <Ramp y="0" deltaY="5" thickness=".2" fill="#0048aa" frame="#000000" x="149.93055555555554" z="117.53472222222223" w="8.194444444444429" d="14.652777777777771" h="0" angle="185" />
-  <Wall fill="#e4e4e4" frame="#000000" x="123.88888888888889" z="57.77777777777778" w="18.75" d="2.5" h="2" />
-  <Wall fill="#e4e4e4" frame="#000000" x="132.01388888888889" z="51.90972222222222" w="2.5" d="9.375" h="2" />
+  <Wall color="#8a8a8a" color.1="#000000" x="148.33333333333334" z="92.70833333333334" w="5" d="5" h="5" />
+  <Wall color="#8a8a8a" color.1="#000000" x="148.33333333333334" z="107.70833333333334" w="5" d="5" h="5" />
+  <Wall color="#8a8a8a" color.1="#000000" x="168.33333333333334" z="107.70833333333334" w="5" d="5" h="5" />
+  <Wall color="#8a8a8a" color.1="#000000" x="168.33333333333334" z="92.70833333333334" w="5" d="5" h="5" />
+  <SkyColor color="#ab30d6" color.1="#7b23aa" />
+  <GroundColor color="#000000" />
+  <Wall color="#0048aa" color.1="#000000" x="192.08333333333334" z="100.20833333333334" w="17.5" d="10" h="10" />
+  <Wall color="#0048aa" color.1="#000000" x="192.08333333333334" z="108.33333333333334" w="11.25" d="6.25" h="10" />
+  <Ramp y="5" thickness=".2" deltaY="5" color="#00acff" color.1="#000000" x="177.08333333333334" z="100.20833333333334" w="12.5" d="6.25" h="0" angle="275" />
+  <Teleporter y="10" group="@crossOver" destGroup="@crossOver" color="#d82da9" color.1="#000000" cx="192.1527777777778" cz="108.47222222222223" angle="45" />
+  <Ramp y="0" deltaY="5" thickness=".2" color="#0048aa" color.1="#000000" x="149.8263888888889" z="82.70833333333334" w="7.986111111111114" d="15" h="0" angle="5" />
+  <Ramp y="0" deltaY="5" thickness=".2" color="#0048aa" color.1="#000000" x="149.93055555555554" z="117.53472222222223" w="8.194444444444429" d="14.652777777777771" h="0" angle="185" />
+  <Wall color="#e4e4e4" color.1="#000000" x="123.88888888888889" z="57.77777777777778" w="18.75" d="2.5" h="2" />
+  <Wall color="#e4e4e4" color.1="#000000" x="132.01388888888889" z="51.90972222222222" w="2.5" d="9.375" h="2" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspMissile" speed="2" yon="20" y="1.7" missiles="3" start="gShow" out="gTaken" fill="#ffd300" frame="#000000" cx="123.95833333333334" cz="53.88888888888889" angle="45" />
+  <Goody shape="bspMissile" speed="2" yon="20" y="1.7" missiles="3" start="gShow" out="gTaken" color="#ffd300" color.1="#000000" cx="123.95833333333334" cz="53.88888888888889" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspGrenade" speed="2" yon="20" y="2" grenades="4" start="gShow" out="gTaken" fill="#ffffff" frame="#000000" cx="157.43055555555557" cz="101.94444444444444" angle="45" />
+  <Goody shape="bspGrenade" speed="2" yon="20" y="2" grenades="4" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="157.43055555555557" cz="101.94444444444444" angle="45" />
   <Incarnator y="25" cx="156.45833333333334" cz="102.08333333333334" angle="135" />
   <Incarnator y="25" cx="196.45833333333334" cz="100.1388888888889" angle="272.5" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspMissile" speed="2" yon="20" y="11.7" missiles="3" start="gShow" out="gTaken" fill="#ffd300" frame="#000000" cx="190.2777777777778" cz="97.84722222222223" angle="45" />
-  <Wall fill="#0048aa" frame="#000000" x="158.33333333333334" z="100.20833333333334" w="25" d="20" h="0.25" y="5" />
-  <script pixelToThickness="0.125" designer="Jim Doolittle 'Gimli'  &lt;gimli@avara.com&gt;" information="A simpler, more pure version on Monolith." fill="#d6a800" frame="#000000" cx="123.8888888888889" cz="50.208333333333336" r="2.5" angle="182.5" x="149.93055555555554" z="117.53472222222223" w="8.194444444444429" d="14.652777777777771" h="0">
+  <Goody shape="bspMissile" speed="2" yon="20" y="11.7" missiles="3" start="gShow" out="gTaken" color="#ffd300" color.1="#000000" cx="190.2777777777778" cz="97.84722222222223" angle="45" />
+  <Wall color="#0048aa" color.1="#000000" x="158.33333333333334" z="100.20833333333334" w="25" d="20" h="0.25" y="5" />
+  <script pixelToThickness="0.125" designer="Jim Doolittle 'Gimli'  &lt;gimli@avara.com&gt;" information="A simpler, more pure version on Monolith." color="#d6a800" color.1="#000000" cx="123.8888888888889" cz="50.208333333333336" r="2.5" angle="182.5" x="149.93055555555554" z="117.53472222222223" w="8.194444444444429" d="14.652777777777771" h="0">
 object 
 Incarnator
 y=
 end</script>
-  <Wall fill="#ff2600" frame="#000000" x="136.63194444444446" z="141.80555555555557" w="4.375" d="3.75" h="2.25" />
-  <Wall fill="#ff2600" frame="#000000" x="154.40972222222223" z="141.80555555555557" w="4.375" d="3.75" h="2.25" />
-  <Wall fill="#ff2600" frame="#000000" x="170.65972222222223" z="141.80555555555557" w="4.375" d="3.75" h="2.25" />
-  <Wall fill="#ff2600" frame="#000000" x="144.82638888888889" z="156.11111111111111" w="4.375" d="3.75" h="2.25" />
-  <Wall fill="#ff2600" frame="#000000" x="162.53472222222223" z="156.18055555555557" w="4.375" d="3.75" h="2.25" />
+  <Wall color="#ff2600" color.1="#000000" x="136.63194444444446" z="141.80555555555557" w="4.375" d="3.75" h="2.25" />
+  <Wall color="#ff2600" color.1="#000000" x="154.40972222222223" z="141.80555555555557" w="4.375" d="3.75" h="2.25" />
+  <Wall color="#ff2600" color.1="#000000" x="170.65972222222223" z="141.80555555555557" w="4.375" d="3.75" h="2.25" />
+  <Wall color="#ff2600" color.1="#000000" x="144.82638888888889" z="156.11111111111111" w="4.375" d="3.75" h="2.25" />
+  <Wall color="#ff2600" color.1="#000000" x="162.53472222222223" z="156.18055555555557" w="4.375" d="3.75" h="2.25" />
   <Incarnator y="25" cx="131.25" cz="155" angle="357.5" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="200" />
-  <Goody shape="bspGrenade" speed="2" yon="20" y="2" grenades="4" start="gShow" out="gTaken" fill="#ffd300" frame="#000000" cx="145.20833333333334" cz="141.52777777777777" angle="45" />
+  <Goody shape="bspGrenade" speed="2" yon="20" y="2" grenades="4" start="gShow" out="gTaken" color="#ffd300" color.1="#000000" cx="145.20833333333334" cz="141.52777777777777" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="200" />
-  <Goody shape="bspMissile" speed="2" yon="20" y="2" missiles="3" start="gShow" out="gTaken" fill="#ffd300" frame="#000000" cx="163.26388888888889" cz="141.66666666666669" angle="45" />
-  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="25 * 5" destGroup="@recenter" shape="0" fill="#ffd300" frame="#000000" cx="156.04166666666669" cz="97.43055555555556" angle="45" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#ffd300" frame="#000000" cx="156.04166666666669" cz="97.43055555555556" angle="45" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffd300" frame="#000000" cx="159.16666666666669" cz="98.05555555555556" angle="45" />
-  <Wall fill="#e4e4e4" frame="#000000" x="115.7638888888889" z="51.84027777777778" w="2.5" d="9.375" h="2" />
-  <Wall fill="#0048aa" frame="#000000" x="114.16666666666667" z="101.94444444444446" w="19.72222222222223" d="9.8611111111111" h="0.25" y="2.5" />
-  <Wall fill="#ffffff" frame="#000000" x="103.99305555555557" z="96.31944444444444" w="2.430555555555557" d="2.5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="104.02777777777779" z="107.5" w="2.3611111111111143" d="2.5" h="4" />
-  <Teleporter group="@crossOver" destGroup="@crossOver" y="2.6" fill="#d82da9" frame="#000000" cx="108.2638888888889" cz="101.94444444444444" angle="45" />
+  <Goody shape="bspMissile" speed="2" yon="20" y="2" missiles="3" start="gShow" out="gTaken" color="#ffd300" color.1="#000000" cx="163.26388888888889" cz="141.66666666666669" angle="45" />
+  <Teleporter group="-1" y="-30" activeRange="35 * 5" deadRange="25 * 5" destGroup="@recenter" shape="0" color="#ffd300" color.1="#000000" cx="156.04166666666669" cz="97.43055555555556" angle="45" />
+  <Teleporter y="30" shape="0" group="@recenter" color="#ffd300" color.1="#000000" cx="156.04166666666669" cz="97.43055555555556" angle="45" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#ffd300" color.1="#000000" cx="159.16666666666669" cz="98.05555555555556" angle="45" />
+  <Wall color="#e4e4e4" color.1="#000000" x="115.7638888888889" z="51.84027777777778" w="2.5" d="9.375" h="2" />
+  <Wall color="#0048aa" color.1="#000000" x="114.16666666666667" z="101.94444444444446" w="19.72222222222223" d="9.8611111111111" h="0.25" y="2.5" />
+  <Wall color="#ffffff" color.1="#000000" x="103.99305555555557" z="96.31944444444444" w="2.430555555555557" d="2.5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="104.02777777777779" z="107.5" w="2.3611111111111143" d="2.5" h="4" />
+  <Teleporter group="@crossOver" destGroup="@crossOver" y="2.6" color="#d82da9" color.1="#000000" cx="108.2638888888889" cz="101.94444444444444" angle="45" />
   <unique vars="gShow gTaken" />
   <And in="@start" out="gShow" />
   <Timer in="gTaken" out="gShow" wait="300" />
-  <Goody shape="bspGrenade" speed="2" yon="20" y="4" grenades="4" start="gShow" out="gTaken" fill="#7b23aa" frame="#000000" cx="113.61111111111111" cz="102.43055555555557" angle="185" />
+  <Goody shape="bspGrenade" speed="2" yon="20" y="4" grenades="4" start="gShow" out="gTaken" color="#7b23aa" color.1="#000000" cx="113.61111111111111" cz="102.43055555555557" angle="185" />
   <Incarnator y="25" cx="120.55555555555556" cz="102.29166666666667" angle="92.5" />
   <Incarnator y="25" cx="170.69444444444446" cz="154.65277777777777" angle="357.5" />
-  <Wall fill="#ffffff" frame="#000000" x="124.47916666666669" z="96.3888888888889" w="2.430555555555557" d="2.5" h="4" />
-  <Wall fill="#ffffff" frame="#000000" x="124.54861111111111" z="107.15277777777779" w="2.430555555555557" d="2.5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="124.47916666666669" z="96.3888888888889" w="2.430555555555557" d="2.5" h="4" />
+  <Wall color="#ffffff" color.1="#000000" x="124.54861111111111" z="107.15277777777779" w="2.430555555555557" d="2.5" h="4" />
 </map>
