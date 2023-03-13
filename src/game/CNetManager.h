@@ -173,7 +173,7 @@ public:
     virtual bool IAmAlive();
 
     //	Game loop methods:
-
+    size_t SkipLostPackets(int16_t dist);
     virtual Boolean GatherPlayers(Boolean isFreshMission);
     virtual void UngatherPlayers();
 

@@ -553,6 +553,13 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
     startingGame = false;
 }
 
+size_t CNetManager::SkipLostPackets(int16_t dist) {
+    CUDPComm* theComm = dynamic_cast<CUDPComm*>(itsCommManager.get());
+    size_t remaining = theComm->SkipLostPackets(dist);
+    DBG_Log("q", "SkipLostPackets: remaining recv queues for 0x%02x = %zu", dist, remaining);
+    return remaining;
+}
+
 Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     totalDistribution = 0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
@@ -562,17 +569,33 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
 
     Boolean goAhead = false;
     uint64_t currentTime = TickCount();
+    int loopCount = 0;
     uint64_t resendTime = currentTime;
-    uint64_t timeLimit = currentTime + 300;
+    static int READY_SYNC_PERIOD = MSEC_TO_TICK_COUNT(4.0*CLASSICFRAMETIME);  // rounds to 250ms
+    uint64_t timeLimit = currentTime + READY_SYNC_PERIOD*24;  // ~6sec
     // wait to hear from everyone, within time limit
     while (activePlayersDistribution != readyPlayersConsensus &&
            currentTime < timeLimit) {
         if (currentTime >= resendTime) {
             uint16_t distrib = activePlayersDistribution & ~readyPlayersConsensus;
             bool resendYours = readyPlayersConsensus == 0 && readyPlayers != 0;
+//#define DONT_SEND_FIRST_READY  // debug what happens when slot 0 doesn't get packet from slot 1
+#ifdef DONT_SEND_FIRST_READY
+            if (itsCommManager->myId == 1 && loopCount == 0) {
+                distrib &= ~1; // don't send kpReadySynch from player 2 to player 1
+                // fake incrementing the serialNumber on the connection we aren't sending to
+                dynamic_cast<CUDPComm*>(itsCommManager.get())->connections[0].serialNumber += kSerialNumberStepSize;
+                SDL_Log("NOT SENDING kpReadySync to slot 0!!!\n");
+            }
+#endif
             SDL_Log("CNetManager::GatherPlayers sending kpReadySynch to 0x%02x with readyPlayers = 0x%02x, resend=%d\n", distrib, readyPlayers, resendYours);
             itsCommManager->SendUrgentPacket(distrib, kpReadySynch, resendYours, readyPlayers, 0, 0, 0);
-            resendTime += 12; // 200ms
+            resendTime += READY_SYNC_PERIOD;
+            // shouldn't take more than a couple tries... 
+            if (++loopCount > 2) {
+                // skip lost packets on the connections who don't agree with us yet
+                SkipLostPackets(distrib);
+            }
         }
         // processes kpReadySynch messages coming from other players
         ProcessQueue();
@@ -621,14 +644,13 @@ void CNetManager::ReceiveReady(short senderSlot, uint32_t senderReadyPlayers, bo
         // reset consensus so we send our updated readyPlayers mask to everyone on next loop iteration
         readyPlayersConsensus = 0;
     } else {
-        // after a reset, set consensus with the first readyPlayers value we get
-        if (readyPlayersConsensus == 0) {
-            readyPlayersConsensus = readyPlayers;
+        if (senderReadyPlayers == readyPlayers) {
+            // which players have the same value for readyPlayers as me
+            readyPlayersConsensus |= senderBit;
         }
-        // AND our readyPlayers masks with everyone else to form consensus
-        readyPlayersConsensus &= senderReadyPlayers;
     }
     if (resendOurs) {
+        SDL_Log("CNetManager::ReceiveReady resendOurs kpReadySynch to 0x%02x with readyPlayers = 0x%02x\n", senderBit, readyPlayers);
         // send our readyPlayers value back to the sender if requested
         itsCommManager->SendUrgentPacket(senderBit, kpReadySynch, false, readyPlayers, 0, 0, 0);
     }

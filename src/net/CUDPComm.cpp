@@ -811,13 +811,14 @@ void CUDPComm::ReceivedGoodPacket(PacketInfo *thePacket) {
         DispatchAndReleasePacket(thePacket);
 }
 
-size_t CUDPComm::SkipLostPackets(int slot) {
+size_t CUDPComm::SkipLostPackets(int16_t dist) {
+    size_t sumRecvQs = 0;
     for (CUDPConnection *conn = connections; conn; conn = conn->next) {
-        if (conn->myId == slot) {
-            return conn->ReceivedPacket(nullptr);
+        if ((1 << conn->myId) & dist) {
+            sumRecvQs += conn->ReceivedPacket(nullptr);
         }
     }
-    return 0;
+    return sumRecvQs;
 }
 
 void CUDPComm::WriteComplete(int result) {
