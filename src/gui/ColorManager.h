@@ -118,6 +118,10 @@ public:
                 return 0x00fefefe;
             case 1:
                 return 0x00fe0000;
+            case 2:
+                return 0x000333ff;
+            case 3:
+                return 0x00929292;
             default:
                 return std::optional<ARGBColor>{};
         }

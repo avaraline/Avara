@@ -37,6 +37,16 @@ void CAbstractActor::LoadPartWithColors(short ind, short resId) {
     LoadPart(ind, resId);
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
+
+    // Force other markers opaque. TODO: actually replace with a specified color
+    partList[ind]->ReplaceColor(
+        *ColorManager::getMarkerColor(2),
+        (*ColorManager::getMarkerColor(2)).WithA(0xff)
+    );
+    partList[ind]->ReplaceColor(
+        *ColorManager::getMarkerColor(3),
+        (*ColorManager::getMarkerColor(3)).WithA(0xff)
+    );
 }
 
 void CAbstractActor::InitLocationLinks() {

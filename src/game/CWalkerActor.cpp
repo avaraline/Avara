@@ -778,6 +778,20 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         viewPortPart = partList[0];
         viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
 
+        // Force other markers opaque. TODO: replace colors as specified in PlayerConfigRecord
+        viewPortPart->ReplaceColor(
+            *ColorManager::getMarkerColor(1),
+            (*ColorManager::getMarkerColor(1)).WithA(0xff)
+        );
+        viewPortPart->ReplaceColor(
+            *ColorManager::getMarkerColor(2),
+            (*ColorManager::getMarkerColor(2)).WithA(0xff)
+        );
+        viewPortPart->ReplaceColor(
+            *ColorManager::getMarkerColor(3),
+            (*ColorManager::getMarkerColor(3)).WithA(0xff)
+        );
+
         proximityRadius = viewPortPart->enclosureRadius << 2;
 
         itsGame->itsWorld->AddPart(viewPortPart);
