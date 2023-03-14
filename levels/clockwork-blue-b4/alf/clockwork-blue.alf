@@ -1,82 +1,82 @@
 <map>
   <set baseHeight="400" />
-  <Wall fill="#aa7942" frame="#000000" x="51.80555555555556" z="79.23611111111111" w="90.13888888888889" d="90.13888888888889" h="0.25" y="-0.25" />
-  <SkyColor fill="#ffafff" frame="#431579" />
-  <GroundColor fill="#aa7942" />
-  <Wall fill="#0048aa" frame="#000000" x="51.80555555555556" z="79.27083333333334" w="22.5" d="22.569444444444443" h="5" />
-  <Wall fill="#0048aa" frame="#000000" x="26.458333333333336" z="53.923611111111114" w="28.194444444444443" d="28.125" h="5" />
-  <Wall fill="#0048aa" frame="#000000" x="26.458333333333336" z="104.61805555555556" w="28.194444444444443" d="28.125" h="5" />
-  <Wall fill="#0048aa" frame="#000000" x="77.15277777777777" z="104.61805555555556" w="28.194444444444443" d="28.125" h="5" />
-  <Wall fill="#0048aa" frame="#000000" x="77.15277777777777" z="53.923611111111114" w="28.194444444444443" d="28.125" h="5" />
-  <Wall fill="#686868" frame="#000000" x="54.61805555555556" z="37.048611111111114" w="84.51388888888889" d="5.625" h="5" />
-  <Wall fill="#686868" frame="#000000" x="9.548611111111112" z="76.45833333333334" w="5.625" d="84.44444444444444" h="5" />
-  <Wall fill="#686868" frame="#000000" x="94.0625" z="82.08333333333334" w="5.625" d="84.44444444444444" h="5" />
+  <Wall color="#aa7942" color.1="#000000" x="51.80555555555556" z="79.23611111111111" w="90.13888888888889" d="90.13888888888889" h="0.25" y="-0.25" />
+  <SkyColor color="#ffafff" color.1="#431579" />
+  <GroundColor color="#aa7942" />
+  <Wall color="#0048aa" color.1="#000000" x="51.80555555555556" z="79.27083333333334" w="22.5" d="22.569444444444443" h="5" />
+  <Wall color="#0048aa" color.1="#000000" x="26.458333333333336" z="53.923611111111114" w="28.194444444444443" d="28.125" h="5" />
+  <Wall color="#0048aa" color.1="#000000" x="26.458333333333336" z="104.61805555555556" w="28.194444444444443" d="28.125" h="5" />
+  <Wall color="#0048aa" color.1="#000000" x="77.15277777777777" z="104.61805555555556" w="28.194444444444443" d="28.125" h="5" />
+  <Wall color="#0048aa" color.1="#000000" x="77.15277777777777" z="53.923611111111114" w="28.194444444444443" d="28.125" h="5" />
+  <Wall color="#686868" color.1="#000000" x="54.61805555555556" z="37.048611111111114" w="84.51388888888889" d="5.625" h="5" />
+  <Wall color="#686868" color.1="#000000" x="9.548611111111112" z="76.45833333333334" w="5.625" d="84.44444444444444" h="5" />
+  <Wall color="#686868" color.1="#000000" x="94.0625" z="82.08333333333334" w="5.625" d="84.44444444444444" h="5" />
   <Incarnator y="7.5" cx="83.68055555555556" cz="47.361111111111114" angle="225" />
-  <Ramp deltaY="5" fill="#ff7c00" frame="#000000" x="51.80555555555556" z="56.736111111111114" w="22.5" d="22.5" h="0.25" angle="0" />
+  <Ramp deltaY="5" color="#ff7c00" color.1="#000000" x="51.80555555555556" z="56.736111111111114" w="22.5" d="22.5" h="0.25" angle="0" />
   <Incarnator y="7.5" cx="19.930555555555557" cz="111.11111111111111" angle="45" />
   <Incarnator y="7.5" cx="20.27777777777778" cz="47.708333333333336" angle="135" />
   <Incarnator y="7.5" cx="83.40277777777779" cz="110.7638888888889" angle="315" />
-  <Ramp deltaY="5" fill="#ff7c00" frame="#000000" x="74.30555555555556" z="79.23611111111111" w="22.5" d="22.5" h="0" angle="90" />
-  <Ramp deltaY="5" fill="#ff7c00" frame="#000000" x="29.305555555555557" z="79.23611111111111" w="22.5" d="22.5" h="0" angle="270" />
-  <Ramp deltaY="5" fill="#ff7c00" frame="#000000" x="51.80555555555556" z="101.80555555555556" w="22.5" d="22.5" h="0" angle="180" />
+  <Ramp deltaY="5" color="#ff7c00" color.1="#000000" x="74.30555555555556" z="79.23611111111111" w="22.5" d="22.5" h="0" angle="90" />
+  <Ramp deltaY="5" color="#ff7c00" color.1="#000000" x="29.305555555555557" z="79.23611111111111" w="22.5" d="22.5" h="0" angle="270" />
+  <Ramp deltaY="5" color="#ff7c00" color.1="#000000" x="51.80555555555556" z="101.80555555555556" w="22.5" d="22.5" h="0" angle="180" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="200" />
-  <Goody shape="bspAvaraA" y="7" speed="1" grenades="12" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="79.23611111111111" angle="45" />
+  <Goody shape="bspAvaraA" y="7" speed="1" grenades="12" missiles="8" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="51.80555555555556" cz="79.23611111111111" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGrenade" y="2" speed="5" grenades="12" start="mShow" out="mTaken" fill="#ff7c00" frame="#e62100" cx="15.277777777777779" cz="79.375" angle="45" />
+  <Goody shape="bspGrenade" y="2" speed="5" grenades="12" start="mShow" out="mTaken" color="#ff7c00" color.1="#e62100" cx="15.277777777777779" cz="79.375" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspGrenade" y="2" speed="5" grenades="12" start="mShow" out="mTaken" fill="#ff7c00" frame="#e62100" cx="88.54166666666667" cz="79.375" angle="45" />
+  <Goody shape="bspGrenade" y="2" speed="5" grenades="12" start="mShow" out="mTaken" color="#ff7c00" color.1="#e62100" cx="88.54166666666667" cz="79.375" angle="45" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspMissile" y="2" speed="5" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="42.708333333333336" angle="45" />
-  <Teleporter group="-1" y="-200" activeRange="100" destGroup="@die" shape="0" volume="0" fill="#ffffff" frame="#000000" cx="52.01388888888889" cz="79.09722222222223" angle="225" />
-  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" fill="#ffffff" frame="#000000" cx="52.01388888888889" cz="79.09722222222223" angle="225" />
+  <Goody shape="bspMissile" y="2" speed="5" missiles="8" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="51.80555555555556" cz="42.708333333333336" angle="45" />
+  <Teleporter group="-1" y="-200" activeRange="100" destGroup="@die" shape="0" volume="0" color="#ffffff" color.1="#000000" cx="52.01388888888889" cz="79.09722222222223" angle="225" />
+  <Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#ffffff" color.1="#000000" cx="52.01388888888889" cz="79.09722222222223" angle="225" />
   <set designer="Poverty - mv10493@www.cedarnet.org" information="Give them the old ultra-violence." />
-  <Wall fill="#686868" frame="#000000" x="48.99305555555556" z="121.49305555555556" w="84.51388888888889" d="5.625" h="5" />
+  <Wall color="#686868" color.1="#000000" x="48.99305555555556" z="121.49305555555556" w="84.51388888888889" d="5.625" h="5" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="100" />
-  <Goody shape="bspMissile" y="2" speed="5" missiles="8" start="mShow" out="mTaken" fill="#ffffff" frame="#000000" cx="51.80555555555556" cz="115.90277777777779" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="496.1805555555556" cz="747.0486111111111" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="496.1805555555556" cz="747.0486111111111" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="434.3055555555556" cz="737.9166666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="434.3055555555556" cz="737.9166666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="532.4305555555555" cz="710.4166666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="532.4305555555555" cz="710.4166666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="453.0555555555556" cz="707.9166666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="453.0555555555556" cz="707.9166666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="375.5555555555556" cz="758.5416666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="375.5555555555556" cz="758.5416666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="391.1805555555556" cz="716.6666666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="391.1805555555556" cz="716.6666666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="554.3055555555555" cz="755.4166666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="554.3055555555555" cz="755.4166666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="554.9305555555555" cz="672.2916666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="554.9305555555555" cz="672.2916666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="499.3055555555556" cz="668.5416666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="499.3055555555556" cz="668.5416666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="439.9305555555556" cz="675.4166666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="439.9305555555556" cz="675.4166666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="391.1805555555556" cz="677.2916666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="391.1805555555556" cz="677.2916666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="376.1805555555556" cz="646.6666666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="376.1805555555556" cz="646.6666666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="561.1805555555555" cz="633.5416666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="561.1805555555555" cz="633.5416666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="490.5555555555556" cz="631.0416666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="490.5555555555556" cz="631.0416666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="444.9305555555556" cz="632.2916666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="444.9305555555556" cz="632.2916666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="286.18055555555554" cz="644.7916666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="286.18055555555554" cz="644.7916666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="287.43055555555554" cz="712.2916666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="287.43055555555554" cz="712.2916666666667" angle="45" />
-  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" fill="#8a8a8a" frame="#000000" cx="238.05555555555557" cz="687.2916666666667" angle="45" />
-  <Mine fill="#8a8a8a" frame="#000000" cx="238.05555555555557" cz="687.2916666666667" angle="45" />
+  <Goody shape="bspMissile" y="2" speed="5" missiles="8" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="51.80555555555556" cz="115.90277777777779" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="496.1805555555556" cz="747.0486111111111" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="496.1805555555556" cz="747.0486111111111" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="434.3055555555556" cz="737.9166666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="434.3055555555556" cz="737.9166666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="532.4305555555555" cz="710.4166666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="532.4305555555555" cz="710.4166666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="453.0555555555556" cz="707.9166666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="453.0555555555556" cz="707.9166666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="375.5555555555556" cz="758.5416666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="375.5555555555556" cz="758.5416666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="391.1805555555556" cz="716.6666666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="391.1805555555556" cz="716.6666666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="554.3055555555555" cz="755.4166666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="554.3055555555555" cz="755.4166666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="554.9305555555555" cz="672.2916666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="554.9305555555555" cz="672.2916666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="499.3055555555556" cz="668.5416666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="499.3055555555556" cz="668.5416666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="439.9305555555556" cz="675.4166666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="439.9305555555556" cz="675.4166666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="391.1805555555556" cz="677.2916666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="391.1805555555556" cz="677.2916666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="376.1805555555556" cz="646.6666666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="376.1805555555556" cz="646.6666666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="561.1805555555555" cz="633.5416666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="561.1805555555555" cz="633.5416666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="490.5555555555556" cz="631.0416666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="490.5555555555556" cz="631.0416666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="444.9305555555556" cz="632.2916666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="444.9305555555556" cz="632.2916666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="286.18055555555554" cz="644.7916666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="286.18055555555554" cz="644.7916666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="287.43055555555554" cz="712.2916666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="287.43055555555554" cz="712.2916666666667" angle="45" />
+  <Teleporter y="0" shape="0" volume="0" deadRange="3000" group="@die" color="#8a8a8a" color.1="#000000" cx="238.05555555555557" cz="687.2916666666667" angle="45" />
+  <Mine color="#8a8a8a" color.1="#000000" cx="238.05555555555557" cz="687.2916666666667" angle="45" />
 </map>

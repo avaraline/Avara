@@ -1,107 +1,107 @@
 <map>
   <set designer="Plastic Chicken" information="Mint...good 'ol Mexican Gum...mmm...yum?&#10;&#10;&#10;&#10;Light hull only...hehehehe..." hull.0="1004" hull.1="hull[0]" hull.2="hull[0]" FMM="2.1" />
   <set missilePower="1 * FMM" grenadePower="2.5 * FMM" gravity="1 / FMM / 1.8" defaultTraction=".40 * FMM" defaultFriction=".15 * FMM" lvl1height="2.5 * FMM" lvl2height="5 * FMM" lvl3height="9 * FMM" lvl4height="14 * FMM" lvl5height="19 * FMM" highness="1200 / FMM" baseHeight="highness" defaultLives="5" />
-  <SkyColor verticalRangeMax="7500" fill="#c7c7c7" frame="#000000" />
-  <GroundColor fill="#8a8a8a" />
+  <SkyColor verticalRangeMax="7500" color="#c7c7c7" color.1="#000000" />
+  <GroundColor color="#8a8a8a" />
   <set wallHeight="lvl1height" />
-  <Wall fill="#ffffff" frame="#000000" x="48.75" z="45.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="58.75" z="45.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="68.75" z="45.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="78.75" z="45.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="88.75" z="45.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="98.75" z="45.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="108.75" z="45.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="48.75" z="55.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="78.75" z="55.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="108.75" z="55.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="48.75" z="65.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="58.75" z="65.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="108.75" z="65.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="48.75" z="75.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="108.75" z="75.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="48.75" z="85.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="108.75" z="85.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="48.75" z="95.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="68.75" z="95.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="78.75" z="95.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="108.75" z="95.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="48.75" z="105.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="58.75" z="105.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="68.75" z="105.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="78.75" z="105.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="88.75" z="105.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="98.75" z="105.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="108.75" z="105.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="48.75" z="45.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.75" z="45.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="68.75" z="45.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="78.75" z="45.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="88.75" z="45.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="98.75" z="45.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="108.75" z="45.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="48.75" z="55.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="78.75" z="55.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="108.75" z="55.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="48.75" z="65.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.75" z="65.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="108.75" z="65.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="48.75" z="75.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="108.75" z="75.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="48.75" z="85.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="108.75" z="85.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="48.75" z="95.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="68.75" z="95.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="78.75" z="95.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="108.75" z="95.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="48.75" z="105.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.75" z="105.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="68.75" z="105.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="78.75" z="105.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="88.75" z="105.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="98.75" z="105.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="108.75" z="105.625" w="10" d="10" h="0" />
   <set wallHeight="lvl2height" />
-  <Wall fill="#ffffff" frame="#000000" x="58.75" z="55.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="68.75" z="55.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="88.75" z="55.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="98.75" z="55.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="68.75" z="65.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="98.75" z="65.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="58.75" z="75.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="68.75" z="85.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="58.75" z="95.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="88.75" z="95.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="98.75" z="75.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.75" z="55.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="68.75" z="55.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="88.75" z="55.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="98.75" z="55.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="68.75" z="65.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="98.75" z="65.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.75" z="75.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="68.75" z="85.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.75" z="95.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="88.75" z="95.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="98.75" z="75.625" w="10" d="10" h="0" />
   <set wallHeight="lvl3height" />
-  <Wall fill="#ffffff" frame="#000000" x="68.75" z="75.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="58.75" z="85.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="98.75" z="85.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="98.75" z="95.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="78.75" z="85.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="68.75" z="75.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="58.75" z="85.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="98.75" z="85.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="98.75" z="95.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="78.75" z="85.625" w="10" d="10" h="0" />
   <set wallHeight="lvl4height" />
-  <Wall fill="#ffffff" frame="#000000" x="78.75" z="65.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="88.75" z="65.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="78.75" z="75.625" w="10" d="10" h="0" />
-  <Wall fill="#ffffff" frame="#000000" x="88.75" z="85.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="78.75" z="65.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="88.75" z="65.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="78.75" z="75.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="88.75" z="85.625" w="10" d="10" h="0" />
   <set wallHeight="lvl5height" />
-  <Wall fill="#ffffff" frame="#000000" x="88.75" z="75.625" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="88.75" z="75.625" w="10" d="10" h="0" />
   <Incarnator y="10 * FMM" cx="45.625" cz="42.5" angle="135" />
-  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#d6d6d6" frame="#000000" cx="45.625" cz="42.5" angle="135" />
-  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#d6d6d6" frame="#000000" cx="45.625" cz="42.5" angle="135" />
+  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" color="#d6d6d6" color.1="#000000" cx="45.625" cz="42.5" angle="135" />
+  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" color="#d6d6d6" color.1="#000000" cx="45.625" cz="42.5" angle="135" />
   <Incarnator y="10 * FMM" cx="111.875" cz="42.5" angle="225" />
-  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#d6d6d6" frame="#000000" cx="111.875" cz="42.5" angle="225" />
-  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#d6d6d6" frame="#000000" cx="111.875" cz="42.5" angle="225" />
+  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" color="#d6d6d6" color.1="#000000" cx="111.875" cz="42.5" angle="225" />
+  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" color="#d6d6d6" color.1="#000000" cx="111.875" cz="42.5" angle="225" />
   <Incarnator y="10 * FMM" cx="111.875" cz="108.75" angle="315" />
-  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#d6d6d6" frame="#000000" cx="111.875" cz="108.75" angle="315" />
-  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#d6d6d6" frame="#000000" cx="111.875" cz="108.75" angle="315" />
+  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" color="#d6d6d6" color.1="#000000" cx="111.875" cz="108.75" angle="315" />
+  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" color="#d6d6d6" color.1="#000000" cx="111.875" cz="108.75" angle="315" />
   <Incarnator y="10 * FMM" cx="45.625" cz="108.75" angle="45" />
-  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" fill="#d6d6d6" frame="#000000" cx="45.625" cz="108.75" angle="45" />
-  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" fill="#d6d6d6" frame="#000000" cx="45.625" cz="108.75" angle="45" />
-  <Teleporter y="40 * FMM" activeRange="5000" deadRange="highness * .6" destGroup="2" group="3" shape="false" out="@kill" fill="#b8b8b8" frame="#000000" cx="78.75" cz="75" angle="135" />
+  <Teleporter sound="false" shape="false" y="30 * FMM" group="2" color="#d6d6d6" color.1="#000000" cx="45.625" cz="108.75" angle="45" />
+  <Door shape="bspFloorFrame" y="28 * FMM" open="@kill" close="@reset" guardDelay="0" shotPower="99" openSpeed="10" closeSpeed="100" deltaY="5 * FMM" didOpen="@reset" color="#d6d6d6" color.1="#000000" cx="45.625" cz="108.75" angle="45" />
+  <Teleporter y="40 * FMM" activeRange="5000" deadRange="highness * .6" destGroup="2" group="3" shape="false" out="@kill" color="#b8b8b8" color.1="#000000" cx="78.75" cz="75" angle="135" />
   <unique vars="mHi mDie" />
-  <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" fill="#fffc79" frame="#d84942" cx="61.875" cz="52.5" angle="225" />
+  <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" color="#fffc79" color.1="#d84942" cx="61.875" cz="52.5" angle="225" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" fill="#ff82d6" frame="#7b2cd6" cx="55.625" cz="58.75" angle="45" />
+  <Goody y="lvl2height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" color="#ff82d6" color.1="#7b2cd6" cx="55.625" cz="58.75" angle="45" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" fill="#fffc79" frame="#d84942" cx="81.875" cz="88.75" angle="315" />
+  <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="0" grenades="6" boosters="0" speed="6" color="#fffc79" color.1="#d84942" cx="81.875" cz="88.75" angle="315" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" fill="#ff82d6" frame="#7b2cd6" cx="75.625" cz="82.5" angle="135" />
+  <Goody y="lvl3height + 2" start="mHi" out="mDie" missiles="3" grenades="0" boosters="0" speed="3" color="#ff82d6" color.1="#7b2cd6" cx="75.625" cz="82.5" angle="135" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="25" out="mHi" />
   <unique vars="mHi mDie" />
-  <Goody shape="1001" scale=".5" y="lvl5height + 2" start="mHi" out="mDie" missiles="3" grenades="6" boosters="3" power="5000" boostTime="85" shield="5000" speed="14" fill="#000000" frame="#aa7ca9" cx="88.75" cz="75.625" angle="315" />
+  <Goody shape="1001" scale=".5" y="lvl5height + 2" start="mHi" out="mDie" missiles="3" grenades="6" boosters="3" power="5000" boostTime="85" shield="5000" speed="14" color="#000000" color.1="#aa7ca9" cx="88.75" cz="75.625" angle="315" />
   <And in="@start" out="mHi" />
   <Timer in="mDie" wait="250" out="mHi" />
   <Incarnator y="10 * FMM" cx="75.625" cz="58.75" angle="45" />
   <Incarnator y="10 * FMM" cx="81.875" cz="92.5" angle="225" />
   <set baseHeight="highness + lvl1height" />
-  <Hologram y="2" shape="1110" fill="#000000" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="90" />
-  <Hologram y="2" shape="1111" fill="#fffc41" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="90" />
-  <Hologram y="2" shape="1112" fill="#ff2600" frame="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="90" />
-  <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" fill="#d82679" frame="#d82679" cx="37.22222222222222" cz="6.25" angle="45" />
-  <Teleporter win="2500" start="@win" activeRange="2000" shape="false" fill="#d82679" frame="#d82679" cx="37.22222222222222" cz="6.25" angle="45" />
-  <TeamColor mask="T1" fill="#8b0f00" frame="#8b0f00" cx="56.04166666666667" cz="7.847222222222223" r="1.9444444444444464" angle="135" />
-  <TeamColor mask="T2" fill="#005400" frame="#005400" cx="56.04166666666667" cz="10.972222222222223" r="1.9444444444444464" angle="135" />
-  <TeamColor mask="T3" fill="#d6a800" frame="#d6a800" cx="56.04166666666667" cz="14.097222222222223" r="1.9444444444444464" angle="135" />
-  <TeamColor mask="T4" fill="#011eaa" frame="#011eaa" cx="56.04166666666667" cz="17.22222222222222" r="1.9444444444444464" angle="135" />
-  <TeamColor mask="T5" fill="#2d2d2d" frame="#2d2d2d" cx="56.04166666666667" cz="20.34722222222222" r="1.9444444444444464" angle="135" />
-  <TeamColor mask="T6" fill="#7b1142" frame="#7b1142" cx="56.04166666666667" cz="23.47222222222222" r="1.9444444444444464" angle="135" />
+  <Hologram y="2" shape="1110" color="#000000" color.1="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="90" />
+  <Hologram y="2" shape="1111" color="#fffc41" color.1="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="90" />
+  <Hologram y="2" shape="1112" color="#ff2600" color.1="#000000" cx="103.81944444444446" cz="65.48611111111111" angle="90" />
+  <Teleporter win="2500" start="@winTeam" activeRange="2000" shape="false" color="#d82679" color.1="#d82679" cx="37.22222222222222" cz="6.25" angle="45" />
+  <Teleporter win="2500" start="@win" activeRange="2000" shape="false" color="#d82679" color.1="#d82679" cx="37.22222222222222" cz="6.25" angle="45" />
+  <TeamColor mask="T1" color="#8b0f00" color.1="#8b0f00" cx="56.04166666666667" cz="7.847222222222223" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T2" color="#005400" color.1="#005400" cx="56.04166666666667" cz="10.972222222222223" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T3" color="#d6a800" color.1="#d6a800" cx="56.04166666666667" cz="14.097222222222223" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T4" color="#011eaa" color.1="#011eaa" cx="56.04166666666667" cz="17.22222222222222" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T5" color="#2d2d2d" color.1="#2d2d2d" cx="56.04166666666667" cz="20.34722222222222" r="1.9444444444444464" angle="135" />
+  <TeamColor mask="T6" color="#7b1142" color.1="#7b1142" cx="56.04166666666667" cz="23.47222222222222" r="1.9444444444444464" angle="135" />
 </map>

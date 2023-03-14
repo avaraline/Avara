@@ -11,7 +11,6 @@
 #include "CPlayerManager.h"
 
 #include "CAbstractPlayer.h"
-#include "ColorManager.h"
 #include "CCommManager.h"
 #include "CUDPComm.h"
 #include "CIncarnator.h"

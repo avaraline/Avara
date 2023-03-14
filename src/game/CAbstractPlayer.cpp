@@ -14,7 +14,6 @@
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
-#include "ColorManager.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"

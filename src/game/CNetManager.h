@@ -9,6 +9,7 @@
 
 #pragma once
 #include "AvaraDefines.h"
+#include "ColorManager.h"
 #include "CCommManager.h"
 #include "CDirectObject.h"
 #include "KeyFuncs.h"
@@ -93,7 +94,11 @@ public:
     short serverOptions;
     short loaderSlot;
 
-    PlayerConfigRecord config;
+    PlayerConfigRecord config = {
+        0,
+        .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
+        .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
+    };
 
     // TaggedGameResult	gameResult;
 

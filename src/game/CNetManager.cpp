@@ -44,7 +44,7 @@
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
 #else
-    #define kAvaraNetVersion 10
+    #define kAvaraNetVersion 11
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -651,6 +651,14 @@ void CNetManager::ResumeGame() {
     config.frameLatency = gApplication ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
     config.frameTime = itsGame->frameTime;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
+    config.cockpitColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerCockpitColorTag))
+            .value_or((*ColorManager::getMarkerColor(2)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(2)).WithA(0xff);
+    config.gunColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerGunColorTag))
+            .value_or((*ColorManager::getMarkerColor(3)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(3)).WithA(0xff);
 
     // Pull grenade/missile/booster counts from HULL resource
     long hullRes = ReadLongVar(iFirstHull + config.hullType);
@@ -681,6 +689,8 @@ void CNetManager::ResumeGame() {
         copy.hullType = ntohs(config.hullType);
         copy.frameLatency = ntohs(config.frameLatency);
         copy.frameTime = ntohs(config.frameTime);
+        copy.cockpitColor = ntohl(config.cockpitColor.GetRaw());
+        copy.gunColor = ntohl(config.gunColor.GetRaw());
 
         itsCommManager->SendUrgentPacket(
             kdEveryone, kpStartSynch, 0, kLActive, FRandSeed, sizeof(PlayerConfigRecord), (Ptr)&copy);
@@ -1229,6 +1239,8 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->hullType = ntohs(config->hullType);
     config->frameLatency = ntohs(config->frameLatency);
     config->frameTime = ntohs(config->frameTime);
+    config->cockpitColor = ntohl(config->cockpitColor.GetRaw());
+    config->gunColor = ntohl(config->gunColor.GetRaw());
     playerTable[senderSlot]->TheConfiguration() = *config;
 }
 

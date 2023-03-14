@@ -69,8 +69,22 @@ public:
             itsPart = new CBSPPart;
             itsPart->IBSPPart(id);
             if (itsPart->polyCount > 0) {
-                itsPart->ReplaceColor(*ColorManager::getMarkerColor(0), 0xffcccc00); // yellow
-                itsPart->ReplaceColor(*ColorManager::getMarkerColor(1), 0xfffe0000); // red
+                itsPart->ReplaceColor(
+                    *ColorManager::getMarkerColor(0),
+                    (*ColorManager::getMarkerColor(0)).WithA(0xff)
+                );
+                itsPart->ReplaceColor(
+                    *ColorManager::getMarkerColor(1),
+                    (*ColorManager::getMarkerColor(1)).WithA(0xff)
+                );
+                itsPart->ReplaceColor(
+                    *ColorManager::getMarkerColor(2),
+                    (*ColorManager::getMarkerColor(2)).WithA(0xff)
+                );
+                itsPart->ReplaceColor(
+                    *ColorManager::getMarkerColor(3),
+                    (*ColorManager::getMarkerColor(3)).WithA(0xff)
+                );
                 AvaraGLUpdateData(itsPart);
                 itsWorld->AddPart(itsPart);
                 SDL_Log("Loaded BSP %d", id);

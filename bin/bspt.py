@@ -212,10 +212,13 @@ class ColorRecord():
             (self.color_long & 0xff),
             ((self.color_long >> 24) & 0xff),
         ]
-        # leave marker colors alone but convert others to sRGB from AppleRGB
+        # leave first two marker colors alone but convert any other color to sRGB from AppleRGB
         if self.color != [254, 254, 254, 0] and self.color != [254, 0, 0, 0]:
             self.color = [int(round(255.0 * y)) for y in applergb_to_srgb([x / 255.0 for x in self.color[:3]])]
-            self.color.append(0xff) # use full alpha
+            if self.color != [3, 51, 255] and self.color != [146, 146, 146]:
+                self.color.append(0xff) # use full alpha for any non-marker color
+            else:
+                self.color.append(0x00) # use empty alpha for the remaining marker colors
         self.color_long = (self.color[3] << 24) | (self.color[0] << 16) | (self.color[1] << 8) | self.color[2]
 
         # colorCache[32] (COLORCACHESIZE)

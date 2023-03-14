@@ -37,6 +37,8 @@ void CAbstractActor::LoadPartWithColors(short ind, short resId) {
     LoadPart(ind, resId);
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(2), GetTertiaryColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(3), GetQuaternaryColor());
 }
 
 void CAbstractActor::InitLocationLinks() {

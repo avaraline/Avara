@@ -400,6 +400,9 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
               nvgFill(ctx);
             }
             break;
+
+          default:
+            break;
         }
 
         //player name

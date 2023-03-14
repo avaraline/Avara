@@ -11,6 +11,7 @@
 #include "CRealMovers.h"
 //#include "LevelScoreRecord.h"
 #include "CAvaraApp.h"
+#include "ColorManager.h"
 #include "GoodyRecord.h"
 #include "KeyFuncs.h"
 #include "PlayerConfig.h"
@@ -42,7 +43,11 @@ class CAbstractPlayer : public CRealMovers {
 public:
     CPlayerManager *itsManager = 0;
     CAbstractPlayer *nextPlayer = 0;
-    PlayerConfigRecord defaultConfig = {0};
+    PlayerConfigRecord defaultConfig = {
+        0,
+        .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
+        .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
+    };
 
     ARGBColor longTeamColor = 0; // Hull color in 0x00RRGGBB format.
 

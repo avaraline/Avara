@@ -267,9 +267,9 @@ class RectOp(AvaraOperation):
 
     def process(self, context):
         if self.verb == Verb.PAINT:
-            context["fill"] = self.color
+            context["color"] = self.color
         elif self.verb == Verb.FRAME:
-            context["frame"] = self.color
+            context["color.1"] = self.color
             h = (
                 0
                 if self.tag == "rect"
@@ -277,8 +277,8 @@ class RectOp(AvaraOperation):
             )
             if self.stroke == 1:
                 attrs = {
-                    "fill": context.get("fill", self.color),
-                    "frame": context.get("frame", self.color),
+                    "color": context.get("color", self.color),
+                    "color.1": context.get("color.1", self.color),
                     "x": dumb_round(self.rect.center.x),
                     "z": dumb_round(self.rect.center.y),
                     "w": dumb_round(self.rect.width),
@@ -323,9 +323,9 @@ class ArcOp(AvaraOperation):
 
     def process(self, context):
         if self.verb == Verb.PAINT:
-            context["fill"] = self.color
+            context["color"] = self.color
         elif self.verb == Verb.FRAME:
-            context["frame"] = self.color
+            context["color.1"] = self.color
 
         context.update(
             {
@@ -346,7 +346,7 @@ class OvalOp(ArcOp):
 
 
 def copy_attrs(wall, obj):
-    for attr in ("x", "z", "w", "d", "h", "fill", "frame"):
+    for attr in ("x", "z", "w", "d", "h", "color", "color.1"):
         if attr in wall.attrs:
             obj.attrs[attr] = wall.attrs[attr]
     if "y" in wall.attrs:

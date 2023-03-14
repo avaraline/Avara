@@ -53,14 +53,14 @@ script = pp.ZeroOrMore(
 )
 
 
-DEFAULT_CONTEXT = ("fill", "frame", "cx", "cz", "r", "angle", "extent")
+DEFAULT_CONTEXT = ("color", "color.1", "cx", "cz", "r", "angle", "extent")
 OBJ_CONTEXT = {
-    "SkyColor": ("fill", "frame"),
-    "GroundColor": ("fill", "frame"),
-    "Wall": ("fill", "frame", "x", "y", "z", "w", "d", "h"),
+    "SkyColor": ("color", "color.1"),
+    "GroundColor": ("color", "color.1"),
+    "Wall": ("color", "color.1", "x", "y", "z", "w", "d", "h"),
     "WallDoor": (
-        "fill",
-        "frame",
+        "color",
+        "color.1",
         "x",
         "y",
         "z",
@@ -74,8 +74,8 @@ OBJ_CONTEXT = {
         "extent",
     ),
     "WallSolid": (
-        "fill",
-        "frame",
+        "color",
+        "color.1",
         "x",
         "y",
         "z",
@@ -89,8 +89,8 @@ OBJ_CONTEXT = {
         "extent",
     ),
     "FreeSolid": (
-        "fill",
-        "frame",
+        "color",
+        "color.1",
         "x",
         "y",
         "z",
@@ -104,8 +104,8 @@ OBJ_CONTEXT = {
         "extent",
     ),
     "Field": (
-        "fill",
-        "frame",
+        "color",
+        "color.1",
         "x",
         "y",
         "z",
@@ -118,8 +118,8 @@ OBJ_CONTEXT = {
         "angle",
         "extent",
     ),
-    "YonBox": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
-    "Ramp": ("fill", "frame", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
+    "YonBox": ("color", "color.1", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
+    "Ramp": ("color", "color.1", "x", "y", "z", "w", "d", "h", "r", "angle", "extent"),
 }
 
 

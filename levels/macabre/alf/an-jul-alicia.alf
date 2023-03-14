@@ -1,14 +1,14 @@
 <map>
   <set wallHeight="2" />
-  <Wall fill="#ffd1a9" frame="#000000" x="851.8055555555555" z="7.916666666666668" w="3.75" d="3.75" h="0" />
+  <Wall color="#ffd1a9" color.1="#000000" x="851.8055555555555" z="7.916666666666668" w="3.75" d="3.75" h="0" />
   <Walker y="0" team="T2" cx="16.180555555555557" cz="22.291666666666668" angle="45" />
   <Walker y="0" team="T1" cx="6.180555555555555" cz="22.291666666666668" angle="45" />
   <Walker y="0" team="T3" cx="26.180555555555557" cz="22.291666666666668" angle="45" />
-  <Teleporter activeRange="100" destGroup="@river" start="@start" stop="@never" yon="0.01" volume="0" spin="false" fill="#fffc6b" frame="#000000" cx="23.680555555555557" cz="4.791666666666667" angle="225" />
-  <Teleporter group="@river" start="@ra" stop="@endelx" fill="#fffc6b" frame="#000000" cx="851.8055555555555" cz="7.916666666666668" angle="225" />
+  <Teleporter activeRange="100" destGroup="@river" start="@start" stop="@never" yon="0.01" volume="0" spin="false" color="#fffc6b" color.1="#000000" cx="23.680555555555557" cz="4.791666666666667" angle="225" />
+  <Teleporter group="@river" start="@ra" stop="@endelx" color="#fffc6b" color.1="#000000" cx="851.8055555555555" cz="7.916666666666668" angle="225" />
   <set groundStepSound="131" />
-  <GroundColor fill="#438329" />
-  <SkyColor n="5" verticalRangeMax="2000" fill="#dffefd" frame="#c4dfff" />
+  <GroundColor color="#438329" />
+  <SkyColor n="5" verticalRangeMax="2000" color="#dffefd" color.1="#c4dfff" />
   <Walker y="0" team="T4" cx="36.18055555555556" cz="22.291666666666668" angle="45" />
   <Walker y="0" team="T5" cx="46.18055555555556" cz="22.291666666666668" angle="45" />
   <Walker y="0" team="T6" cx="56.18055555555556" cz="22.291666666666668" angle="45" />
@@ -42,8 +42,8 @@
   <Walker y="0" team="T6" cx="56.18055555555556" cz="52.29166666666667" angle="45" />
   <Walker y="0" team="T6" cx="56.18055555555556" cz="62.29166666666667" angle="45" />
   <Walker y="0" team="T6" cx="56.18055555555556" cz="72.29166666666667" angle="45" />
-  <Hologram shape="bspFlower" y="0" wallYon="0" scale="35" fill="#59a638" frame="#8336ff" cx="88.68055555555556" cz="34.79166666666667" angle="135" />
+  <Hologram shape="bspFlower" y="0" wallYon="0" scale="35" color="#59a638" color.1="#8336ff" cx="88.68055555555556" cz="34.79166666666667" angle="135" />
   <set wallHeight="25" wallYon="0.01" />
-  <Wall fill="#ffffff" frame="#000000" x="88.36805555555556" z="34.47916666666667" w="1.875" d="1.875" h="0" />
-  <Solid shape="bspMarker" yon="0.01" y="25" scale="15" fill="#57412c" frame="#000000" cx="89.58333333333334" cz="34.16666666666667" angle="315" />
+  <Wall color="#ffffff" color.1="#000000" x="88.36805555555556" z="34.47916666666667" w="1.875" d="1.875" h="0" />
+  <Solid shape="bspMarker" yon="0.01" y="25" scale="15" color="#57412c" color.1="#000000" cx="89.58333333333334" cz="34.16666666666667" angle="315" />
 </map>
