@@ -578,8 +578,8 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
            currentTime < timeLimit) {
         if (currentTime >= resendTime) {
             uint16_t distrib = activePlayersDistribution & ~readyPlayersConsensus;
-            bool resendYours = readyPlayersConsensus == 0 && readyPlayers != 0;
 //#define DONT_SEND_FIRST_READY  // debug what happens when slot 0 doesn't get packet from slot 1
+            bool resendYours = readyPlayersConsensus != readyPlayers;
 #ifdef DONT_SEND_FIRST_READY
             if (itsCommManager->myId == 1 && loopCount == 0) {
                 distrib &= ~1; // don't send kpReadySynch from player 2 to player 1
@@ -644,8 +644,8 @@ void CNetManager::ReceiveReady(short senderSlot, uint32_t senderReadyPlayers, bo
         // reset consensus so we send our updated readyPlayers mask to everyone on next loop iteration
         readyPlayersConsensus = 0;
     } else {
-        if (senderReadyPlayers == readyPlayers) {
-            // which players have the same value for readyPlayers as me
+        if (senderReadyPlayers == activePlayersDistribution) {
+            // which players have heard from all other active players
             readyPlayersConsensus |= senderBit;
         }
     }
