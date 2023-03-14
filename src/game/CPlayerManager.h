@@ -43,7 +43,8 @@ enum PresenceType {
     kzUnknown,
     kzAvailable,
     kzSpectating,
-    kzAway
+    kzAway,
+    kzNetDelayed
 };
 
 #define FUNCTIONBUFFERS 64*8  // 512 frames at 16ms/frame = 8.192s rollover time
