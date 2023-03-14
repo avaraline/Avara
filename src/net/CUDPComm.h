@@ -129,7 +129,7 @@ public:
     virtual Boolean AsyncWrite();
 
     virtual void ReceivedGoodPacket(PacketInfo *thePacket);
-    virtual size_t SkipLostPackets(int slot);
+    virtual size_t SkipLostPackets(int16_t dist);
 
     virtual OSErr CreateStream(port_num streamPort);
 

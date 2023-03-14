@@ -511,20 +511,10 @@ void CPlayerManagerImpl::Dispose() {
 }
 
 void CPlayerManagerImpl::SendResendRequest(short askCount) {
-#if DONT_SEND_FRAME > 0
-#else
     if (/* theNetManager->fastTrack.addr.value || */ askCount >= 0) {
         theNetManager->playerTable[theNetManager->itsCommManager->myId]->ResendFrame(
             itsGame->frameNumber, slot, kpKeyAndMouseRequest);
     }
-#endif
-}
-
-size_t CPlayerManagerImpl::SkipLostPackets() {
-    CUDPComm* theComm = dynamic_cast<CUDPComm*>(theNetManager->itsCommManager.get());
-    size_t remaining = theComm->SkipLostPackets(slot);
-    DBG_Log("q", "SkipLostPackets: remaining on queue[%d] = %zu", slot, remaining);
-    return remaining;
 }
 
 FunctionTable *CPlayerManagerImpl::GetFunctions() {
@@ -568,7 +558,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 //                Debug::Toggle("nq");
                 // if we get the packet from the Resend above, it might be stuck on the end of the readQ waiting for
                 // a packet that is lost, so skip 1 lost packet at a time until it frees up the queue again
-                SkipLostPackets();
+                theNetManager->SkipLostPackets(1 << slot);
 
                 askAgainTime = quickTick + ASK_INTERVAL;
 

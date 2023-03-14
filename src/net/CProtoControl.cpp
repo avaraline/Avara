@@ -114,7 +114,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             theNet->ReceiveResumeCommand(thePacket->p2, thePacket->sender, thePacket->p3, thePacket->p1);
             break;
         case kpReadySynch:
-            theNet->ReceiveReady(thePacket->sender, theNet->readyPlayers, thePacket->p1);
+            theNet->ReceiveReady(thePacket->sender, thePacket->p2);
             break;
         case kpStartSynch:
             theNet->ConfigPlayer(thePacket->sender, thePacket->dataBuffer);

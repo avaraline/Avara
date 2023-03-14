@@ -166,7 +166,7 @@ public:
 
     virtual void SendResumeCommand(int16_t originalSender = 0);
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
-    virtual void ReceiveReady(short slot, uint32_t readyPlayers, bool resendOurs);
+    virtual void ReceiveReady(short slot, uint32_t readyPlayers);
 
     virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame);
     virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
@@ -178,7 +178,7 @@ public:
     virtual bool IAmAlive();
 
     //	Game loop methods:
-
+    size_t SkipLostPackets(int16_t dist);
     virtual Boolean GatherPlayers(Boolean isFreshMission);
     virtual void UngatherPlayers();
 
