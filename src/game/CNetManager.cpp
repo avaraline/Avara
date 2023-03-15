@@ -567,6 +567,9 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
         playerTable[i]->ResumeGame();
     }
 
+    readyPlayers = 0;
+    readyPlayersConsensus = 0;
+
     Boolean goAhead = false;
     uint64_t currentTime = TickCount();
     int loopCount = 0;
@@ -590,10 +593,10 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
             SDL_Log("CNetManager::GatherPlayers sending kpReadySynch to 0x%02x with readyPlayers = 0x%02x\n", distrib, readyPlayers);
             itsCommManager->SendUrgentPacket(distrib, kpReadySynch, 0, readyPlayers, 0, 0, 0);
             resendTime += READY_SYNC_PERIOD;
-            // shouldn't take more than a couple tries... 
-            if (++loopCount > 2) {
-                // skip lost packets on the connections who don't agree with consensus yet
-                SkipLostPackets(distrib);
+            if ((++loopCount % 5) == 0) {
+                // occasionally, skip lost packets on the connections who don't agree with consensus yet
+                // (don't do this too often because it can cause you to lose frame 0... i think)
+                SkipLostPackets(distrib & ~readyPlayersConsensus);
             }
         }
         // processes kpReadySynch messages coming from other players
@@ -624,12 +627,6 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
     }
     SDL_Log("CNetManager::GatherPlayers activePlayers = 0x%02x startPlayers = 0x%02x\n", activePlayersDistribution, startPlayersDistribution);
 
-
-    // seems strange to initialize these after processing... the reason for this is that
-    // others can send you messages to modify these BEFORE this method is called so
-    // initialize them after each time we're done for the NEXT call
-    readyPlayers = 0;
-    readyPlayersConsensus = 0;
     startingGame = false;
 
     return goAhead;
