@@ -29,6 +29,7 @@ enum LoadingState {
     kLNotFound,
     kLPaused,
     kLNoVehicle,
+    kLNetDelayed,
 //    kLAway,
 //    kLSpectating,
     kLReady,    // implies kLLoaded, i.e. Loaded & Ready to start
@@ -43,8 +44,7 @@ enum PresenceType {
     kzUnknown,
     kzAvailable,
     kzSpectating,
-    kzAway,
-    kzNetDelayed
+    kzAway
 };
 
 #define FUNCTIONBUFFERS 64*8  // 512 frames at 16ms/frame = 8.192s rollover time

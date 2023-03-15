@@ -389,18 +389,18 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
               nvgFillColor(ctx, pingColor);
               nvgFill(ctx);
             }
+          break;
 
-            // Draw a slash
-            if (thisPlayer->Presence() == kzNetDelayed) {
-              nvgBeginPath(ctx);
-              nvgMoveTo(ctx, bufferWidth - 150, pY);
-              nvgLineTo(ctx, bufferWidth - 160, pY + colorBoxHeight);
-              nvgStrokeColor(ctx, nvgRGBAf(0, 0, 0, 255));
-              nvgStrokeWidth(ctx, 1);
-              nvgStroke(ctx);
-              nvgClosePath(ctx);
-            }
-            break;
+          // Draw a slash
+          case kLNetDelayed:
+            nvgBeginPath(ctx);
+            nvgMoveTo(ctx, bufferWidth - 150, pY);
+            nvgLineTo(ctx, bufferWidth - 160, pY + colorBoxHeight);
+            nvgStrokeColor(ctx, nvgRGBAf(0, 0, 0, 255));
+            nvgStrokeWidth(ctx, 1);
+            nvgStroke(ctx);
+            nvgClosePath(ctx);
+          break;
 
           default:
             break;

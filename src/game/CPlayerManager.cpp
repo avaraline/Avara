@@ -529,7 +529,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
         short askCount = 0;
-        PresenceType oldPresc;
+        LoadingState oldStatus;
 
         itsGame->didWait = true;
 
@@ -564,9 +564,9 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 askAgainTime = quickTick + ASK_INTERVAL;
 
                 if (askCount == WAITING_MESSAGE_COUNT) {
-                    oldPresc = presence;
                     SDL_Log("Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
-                    presence = kzNetDelayed;
+                    oldStatus = loadingStatus;
+                    loadingStatus = kLNetDelayed;
                     itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName);
                     itsGame->itsApp->RenderContents();  // force render now so message shows up
                     // TODO: waiting for player dialog
@@ -599,7 +599,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
         if (askCount >= WAITING_MESSAGE_COUNT && frameFuncs[i].validFrame == itsGame->frameNumber) {
             gApplication->BroadcastCommand(kBusyEndCmd);
             itsGame->itsApp->AddMessageLine("...resuming game", MsgAlignment::Center);
-            presence = oldPresc;
+            loadingStatus = oldStatus;
             // HideCursor();
         }
 
