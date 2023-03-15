@@ -18,9 +18,6 @@ static std::map<QHdrPtr, std::deque<QElemPtr>> gQueues;
 
 void Enqueue(QElemPtr qElement, QHdrPtr qHeader) {
     // SDL_Log("Enqueue(%x, %x)\n", qElement, qHeader);
-//    if (Debug::IsEnabled("nq")) {
-//        Debug::Toggle("nq");
-//    }
     if (gQueues.count(qHeader) == 1) {
         std::deque<QElemPtr> &q = gQueues.at(qHeader);
         if (!q.empty()) {

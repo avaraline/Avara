@@ -385,7 +385,7 @@ void CPlayerManagerImpl::SendFrame() {
 
         // theNetManager->FastTrackDeliver(outPacket);
         outPacket->flags |= kpUrgentFlag;
-        #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 1111 ~= 18sec
+        #define DONT_SEND_FRAME 0  // to help testing specific packet-loss cases, 444 ~= 7sec
         #if DONT_SEND_FRAME > 0
             if (theNetManager->itsCommManager->myId == 1) {
                 if (ffi >= DONT_SEND_FRAME) {
@@ -555,10 +555,11 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
 
             if (quickTick - askAgainTime >= 0) {
                 SendResendRequest(askCount++);
-//                Debug::Toggle("nq");
                 // if we get the packet from the Resend above, it might be stuck on the end of the readQ waiting for
-                // a packet that is lost, so skip 1 lost packet at a time until it frees up the queue again
-                theNetManager->SkipLostPackets(1 << slot);
+                // a lost packet, so skip 1 lost packet every other time until it frees up the queue again
+                if (askCount % 2 == 1) {
+                    theNetManager->SkipLostPackets(1 << slot);
+                }
 
                 askAgainTime = quickTick + ASK_INTERVAL;
 
