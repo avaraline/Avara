@@ -29,6 +29,7 @@ enum LoadingState {
     kLNotFound,
     kLPaused,
     kLNoVehicle,
+    kLNetDelayed,
 //    kLAway,
 //    kLSpectating,
     kLReady,    // implies kLLoaded, i.e. Loaded & Ready to start

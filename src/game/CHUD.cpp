@@ -266,7 +266,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         }
     }
     int playerSlots = std::max(6, lastPlayerSlot + 1);
-    
+
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
     int chudHeight = 13 * playerSlots;
 
@@ -342,6 +342,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         //player color box
         float colorBoxWidth = 10.0;
         float colorBoxHeight = 10.0;
+        float pingBarHeight = 0.0;
         nvgBeginPath(ctx);
 
         //highlight player if spectating
@@ -354,7 +355,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], colorBoxAlpha));
         nvgFill(ctx);
 
-        // draw something based on the player status
+        // draw something based on the loading status
         switch (thisPlayer->LoadingStatus()) {
           // Draw a dot
           case kLReady:
@@ -369,8 +370,29 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             nvgFill(ctx);
             break;
 
+          case kLActive:
+            // Ping Indicator
+            NVGcolor pingColor;
+            if (rtt != 0 && thisPlayer->Presence() != kzSpectating) { // Don't draw ping for yourself or spectators
+              if (rtt < 100) {  // Green + Small
+                pingColor = ColorManager::getPingColor(0).IntoNVG();
+                pingBarHeight = 2;
+              } else if (rtt <= 200) { // Yellow + Medium
+                pingColor = ColorManager::getPingColor(1).IntoNVG();
+                pingBarHeight = 6;
+              } else if (rtt > 200) { // Red + Large
+                pingColor = ColorManager::getPingColor(2).IntoNVG();
+                pingBarHeight = 10;
+              }
+              nvgBeginPath(ctx);
+              nvgRect(ctx, bufferWidth - 147, pY + (10 - pingBarHeight), 3, pingBarHeight);
+              nvgFillColor(ctx, pingColor);
+              nvgFill(ctx);
+            }
+          break;
+
           // Draw a slash
-          case kLWaiting:
+          case kLNetDelayed:
             nvgBeginPath(ctx);
             nvgMoveTo(ctx, bufferWidth - 150, pY);
             nvgLineTo(ctx, bufferWidth - 160, pY + colorBoxHeight);
@@ -378,28 +400,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             nvgStrokeWidth(ctx, 1);
             nvgStroke(ctx);
             nvgClosePath(ctx);
-            break;
-
-          case kLActive:
-            // Ping Indicator
-            NVGcolor pingColor;
-            if (rtt != 0 && thisPlayer->Presence() != kzSpectating) { // Don't draw ping for yourself or spectators
-              if (rtt < 100) {
-                pingColor = ColorManager::getPingColor(0).IntoNVG();
-                colorBoxHeight = 2;
-              } else if (rtt <= 200) {
-                pingColor = ColorManager::getPingColor(1).IntoNVG();
-                colorBoxHeight = 6;
-              } else if (rtt > 200) {
-                pingColor = ColorManager::getPingColor(2).IntoNVG();
-                colorBoxHeight = 10;
-              }
-              nvgBeginPath(ctx);
-              nvgRect(ctx, bufferWidth - 147, pY + (10 - colorBoxHeight), 3, colorBoxHeight);
-              nvgFillColor(ctx, pingColor);
-              nvgFill(ctx);
-            }
-            break;
+          break;
 
           default:
             break;
