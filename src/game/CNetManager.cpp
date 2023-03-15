@@ -567,6 +567,9 @@ Boolean CNetManager::GatherPlayers(Boolean isFreshMission) {
         playerTable[i]->ResumeGame();
     }
 
+    readyPlayers = 0;
+    readyPlayersConsensus = 0;
+
     Boolean goAhead = false;
     uint64_t currentTime = TickCount();
     int loopCount = 0;
