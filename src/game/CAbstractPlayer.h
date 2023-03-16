@@ -46,6 +46,7 @@ public:
     PlayerConfigRecord defaultConfig {};
 
     ARGBColor longTeamColor = 0;
+    bool hasTeammates = false;
 
     //	Shields & energy:
     Fixed energy = 0;

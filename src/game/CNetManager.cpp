@@ -1219,7 +1219,30 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     }
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->didIncarnateMasked) {
+        short slot = positionToSlot[i];
+        short teammateCount = 0;
+        CPlayerManager *thePlayerMan = playerTable[slot];
+        if (thePlayerMan->GetPlayer()) {
+            for (short j = 0; j < kMaxAvaraPlayers; j++) {
+                if (i != j) {
+                    short otherSlot = positionToSlot[j];
+                    CPlayerManager *otherPlayerMan = playerTable[otherSlot];
+                    if (otherPlayerMan->GetPlayer() &&
+                        thePlayerMan->PlayerColor() == otherPlayerMan->PlayerColor()) {
+                        teammateCount++;
+                    }
+                }
+            }
+            if (teammateCount > 0) {
+                thePlayerMan->GetPlayer()->hasTeammates = true;
+            }
+        }
+    }
+
+    for (i = 0; i < kMaxAvaraPlayers; i++) {
+        if (playerTable[i]->GetPlayer() &&
+            !playerTable[i]->GetPlayer()->didIncarnateMasked &&
+            !playerTable[i]->GetPlayer()->hasTeammates) {
             playerTable[i]->SpecialColorControl();
         }
     }
