@@ -21,7 +21,6 @@ static inline Fixed ToFixed(float a) { float temp = a * FIX1; return (Fixed)temp
 static inline float Deg2Rad(float deg) { return deg * PI / 180.0; }
 
 void InitMatrix();
-void CloseMatrix();
 
 typedef Fixed Vector[4]; /*	A vector consists of 4 fixed point numbers: x,y,z,w	*/
 typedef Vector Matrix[4]; /*	A matrix consists of 4 vectors.						*/
@@ -50,7 +49,8 @@ typedef struct {
 #define FIX3(n) ((Fixed)((n)*8192L / 125L))
 /*	FIX results in the integer number as a fixed point number						*/
 #define FIX(n) ((Fixed)((n) * 65536L))
-#define FRound(n) ((Fixed)std::lround((n) * 65536L))
+#define FRound(n) (static_cast<Fixed>(std::lround((n))))   // round float that's in Fixed units
+#define ToFixedRound(n) FRound((n) * FIX1)                 // convert to fixed as float then round
 
 /*	Prototypes for internal routines:												*/
 void VectorMatrixProduct(long n, Vector *vs, Vector *vd, Matrix *m);
@@ -67,8 +67,9 @@ void MRotateY(Fixed s, Fixed c, Matrix *theMatrix);
 void MRotateZ(Fixed s, Fixed c, Matrix *theMatrix);
 void MTranslate(Fixed xt, Fixed yt, Fixed zt, Matrix *theMatrix);
 
-static inline Fixed FMul(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * (int64_t)b) / (1 << 16)); }
-static inline Fixed _FDiv(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * (1 << 16)) / b); }
+static inline int64_t LMul(int64_t a, Fixed b) { return (int64_t)((a * b) / FIX1); };
+static inline Fixed FMul(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * (int64_t)b) / FIX1); }
+static inline Fixed _FDiv(Fixed a, Fixed b) { return (Fixed)(((int64_t)a * FIX1) / b); }
 static inline Fixed _FMulDiv(Fixed a, Fixed b, Fixed c) { return (Fixed)(((double)a) * b / c); }
 
 // #define FM_CHECK_DIV_BY_ZERO

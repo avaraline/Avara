@@ -4,30 +4,30 @@
 
 ColorBlindMode ColorManager::colorBlindMode = Off;
 float ColorManager::hudAlpha = 1.f;
-uint32_t ColorManager::energyGaugeColor = 0xff009c00;
-uint32_t ColorManager::grenadeSightPrimaryColor = 0xfffefb00;
-uint32_t ColorManager::grenadeSightSecondaryColor = 0xffff2600;
-uint32_t ColorManager::lookForwardColor = 0xff000000;
-uint32_t ColorManager::missileLockColor = 0xffff2600;
-uint32_t ColorManager::missileSightPrimaryColor = 0xfffefb00;
-uint32_t ColorManager::missileSightSecondaryColor = 0xffff2600;
-uint32_t ColorManager::missileArmedColor = 0xff400000;
-uint32_t ColorManager::missileLaunchedColor = 0xfffe0000;
-uint32_t ColorManager::netDelay1Color = 0xffffc900;
-uint32_t ColorManager::netDelay2Color = 0xfffefb00;
-uint32_t ColorManager::pinwheel1Color = 0xff282d79;
-uint32_t ColorManager::pinwheel2Color = 0xff2833a9;
-uint32_t ColorManager::pinwheel3Color = 0xff283ad5;
-uint32_t ColorManager::pinwheel4Color = 0xff2941ff;
-uint32_t ColorManager::plasmaGauge1Color = 0xffb44900;
-uint32_t ColorManager::plasmaGauge2Color = 0xffff4e00;
-uint32_t ColorManager::plasmaSightsOffColor = 0xff008e00;
-uint32_t ColorManager::plasmaSightsOnColor = 0xffff2600;
-uint32_t ColorManager::shieldGaugeColor = 0xff0053b4;
-uint32_t ColorManager::specialBlackColor = 0xff3e3e3e;
-uint32_t ColorManager::specialWhiteColor = 0xffe6e6e6;
+ARGBColor ColorManager::energyGaugeColor = 0xff009c00;
+ARGBColor ColorManager::grenadeSightPrimaryColor = 0xfffefb00;
+ARGBColor ColorManager::grenadeSightSecondaryColor = 0xffff2600;
+ARGBColor ColorManager::lookForwardColor = 0xff000000;
+ARGBColor ColorManager::missileLockColor = 0xffff2600;
+ARGBColor ColorManager::missileSightPrimaryColor = 0xfffefb00;
+ARGBColor ColorManager::missileSightSecondaryColor = 0xffff2600;
+ARGBColor ColorManager::missileArmedColor = 0xff400000;
+ARGBColor ColorManager::missileLaunchedColor = 0xfffe0000;
+ARGBColor ColorManager::netDelay1Color = 0xffffc900;
+ARGBColor ColorManager::netDelay2Color = 0xfffefb00;
+ARGBColor ColorManager::pinwheel1Color = 0xff282d79;
+ARGBColor ColorManager::pinwheel2Color = 0xff2833a9;
+ARGBColor ColorManager::pinwheel3Color = 0xff283ad5;
+ARGBColor ColorManager::pinwheel4Color = 0xff2941ff;
+ARGBColor ColorManager::plasmaGauge1Color = 0xffb44900;
+ARGBColor ColorManager::plasmaGauge2Color = 0xffff4e00;
+ARGBColor ColorManager::plasmaSightsOffColor = 0xff008e00;
+ARGBColor ColorManager::plasmaSightsOnColor = 0xffff2600;
+ARGBColor ColorManager::shieldGaugeColor = 0xff0053b4;
+ARGBColor ColorManager::specialBlackColor = 0xff3e3e3e;
+ARGBColor ColorManager::specialWhiteColor = 0xffe6e6e6;
 
-uint32_t ColorManager::teamColors[kMaxTeamColors + 1] = {
+ARGBColor ColorManager::teamColors[kMaxTeamColors + 1] = {
     0xffffffff,
     0xff007600,
     0xffd5d200,
@@ -39,7 +39,7 @@ uint32_t ColorManager::teamColors[kMaxTeamColors + 1] = {
     0xff99ced1
 };
 
-uint32_t ColorManager::teamTextColors[kMaxTeamColors + 1] = {
+ARGBColor ColorManager::teamTextColors[kMaxTeamColors + 1] = {
     0xff333333,
     0xffffffff,
     0xff333333,
@@ -63,10 +63,16 @@ std::string ColorManager::teamColorNames[kMaxTeamColors + 1] = {
     "Teal"
 };
 
-uint32_t ColorManager::messageColors[3] = {
+ARGBColor ColorManager::messageColors[3] = {
     0xffffffff,
     0xff92ebe9,
     0xffff8185
+};
+
+ARGBColor ColorManager::pingColors[3] = {
+    0xff2eff2e,
+    0xffffee2e,
+    0xffff382e
 };
 
 void ColorManager::setColorBlind(ColorBlindMode mode) {
@@ -113,6 +119,9 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::messageColors[0] = 0xffffffff;
             ColorManager::messageColors[1] = 0xff92ebe9;
             ColorManager::messageColors[2] = 0xffff8185;
+            ColorManager::pingColors[0] = 0xff2eff2e;
+            ColorManager::pingColors[1] = 0xffffee2e;
+            ColorManager::pingColors[2] = 0xffff382e;
             break;
         case Deuteranopia:
             ColorManager::energyGaugeColor = 0xff009ea0;
@@ -252,24 +261,24 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
 
 void ColorManager::setHudAlpha(float alpha) {
     alpha = std::clamp(alpha, 0.f, 1.f);
-    uint32_t alphaSet = static_cast<uint32_t>((alpha * 255) + 0.5) << 24;
+    uint8_t a = static_cast<uint8_t>((alpha * 255) + 0.5);
 
-    ColorManager::grenadeSightPrimaryColor = (ColorManager::grenadeSightPrimaryColor & 0x00ffffff) | alphaSet;
-    ColorManager::grenadeSightSecondaryColor = (ColorManager::grenadeSightSecondaryColor & 0x00ffffff) | alphaSet;
-    ColorManager::lookForwardColor = (ColorManager::lookForwardColor & 0x00ffffff) | alphaSet;
-    ColorManager::missileLockColor = (ColorManager::missileLockColor & 0x00ffffff) | alphaSet;
-    ColorManager::missileSightPrimaryColor = (ColorManager::missileSightPrimaryColor & 0x00ffffff) | alphaSet;
-    ColorManager::missileSightSecondaryColor = (ColorManager::missileSightSecondaryColor & 0x00ffffff) | alphaSet;
-    ColorManager::plasmaSightsOffColor = (ColorManager::plasmaSightsOffColor & 0x00ffffff) | alphaSet;
-    ColorManager::plasmaSightsOnColor = (ColorManager::plasmaSightsOnColor & 0x00ffffff) | alphaSet;
+    ColorManager::grenadeSightPrimaryColor = ColorManager::grenadeSightPrimaryColor.WithA(a);
+    ColorManager::grenadeSightSecondaryColor = ColorManager::grenadeSightSecondaryColor.WithA(a);
+    ColorManager::lookForwardColor = ColorManager::lookForwardColor.WithA(a);
+    ColorManager::missileLockColor = ColorManager::missileLockColor.WithA(a);
+    ColorManager::missileSightPrimaryColor = ColorManager::missileSightPrimaryColor.WithA(a);
+    ColorManager::missileSightSecondaryColor = ColorManager::missileSightSecondaryColor.WithA(a);
+    ColorManager::plasmaSightsOffColor = ColorManager::plasmaSightsOffColor.WithA(a);
+    ColorManager::plasmaSightsOnColor = ColorManager::plasmaSightsOnColor.WithA(a);
 
     ColorManager::hudAlpha = alpha;
 }
 
-void ColorManager::setMissileArmedColor(uint32_t color) {
+void ColorManager::setMissileArmedColor(ARGBColor color) {
     ColorManager::missileArmedColor = color;
 }
 
-void ColorManager::setMissileLaunchedColor(uint32_t color) {
+void ColorManager::setMissileLaunchedColor(ARGBColor color) {
     ColorManager::missileLaunchedColor = color;
 }

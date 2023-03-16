@@ -17,13 +17,13 @@ SRC_DIRS += vendor/glad vendor/nanovg vendor/pugixml vendor
 UNAME := $(shell uname)
 SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 
-INCFLAGS := $(addprefix -I, $(SRC_DIRS)) -Ivendor/gtest/include
+INCFLAGS := $(addprefix -I, $(SRC_DIRS))
 
 CPPFLAGS := ${CPPFLAGS}
-CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g
+CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g -Wall
 
 ifeq ($(AVARA_WARNINGS), TRUE)
-CPPFLAGS += -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
+CPPFLAGS += -pedantic -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
 CPPFLAGS += -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations
 CPPFLAGS += -Wmissing-include-dirs -Woverloaded-virtual -Wredundant-decls -Wshadow
 CPPFLAGS += -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default -Wundef
@@ -37,16 +37,17 @@ LDFLAGS := ${LDFLAGS}
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
-	CXXFLAGS += -mmacosx-version-min=10.9
-	CPPFLAGS += -mmacosx-version-min=10.9
-	CFLAGS += -mmacosx-version-min=10.9
+	INC_EXTRA := -I/opt/homebrew/include
+	CXXFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
+	CPPFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
+	CFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
 ifneq ("$(wildcard $(HOME)/Library/Frameworks/SDL2.framework)", "")
 	FRAMEWORK_PATH = $(HOME)/Library/Frameworks
 else
 	FRAMEWORK_PATH = /Library/Frameworks
 endif
 	CPPFLAGS += -F$(FRAMEWORK_PATH)
-	LDFLAGS += -F$(FRAMEWORK_PATH) -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
+	LDFLAGS += -F$(FRAMEWORK_PATH) -L/opt/homebrew/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
@@ -79,7 +80,7 @@ SIGNING_ID := NONE
 
 avara: set-version $(BUILD_DIR)/Avara resources
 
-tests: $(BUILD_DIR)/tests resources
+tests: set-version $(BUILD_DIR)/tests resources
 	$(BUILD_DIR)/tests
 
 bspviewer: $(BUILD_DIR)/BSPViewer resources
@@ -119,13 +120,10 @@ $(BUILD_DIR)/Avara: $(OBJS) $(BUILD_DIR)/src/Avara.cpp.o
 	$(POST_PROCESS) $@
 
 # Tests
-$(BUILD_DIR)/tests: $(OBJS) $(BUILD_DIR)/src/tests.cpp.o $(BUILD_DIR)/vendor/gtest-all.cc.o
-	$(CXX) $(OBJS) $(BUILD_DIR)/vendor/gtest-all.cc.o $(BUILD_DIR)/src/tests.cpp.o -o $@ $(LDFLAGS)
+$(BUILD_DIR)/tests: $(OBJS) $(BUILD_DIR)/src/tests.cpp.o
+	$(CXX) $(OBJS) $(BUILD_DIR)/src/tests.cpp.o -o $@ $(LDFLAGS) -lgtest
 	$(POST_PROCESS) $@
 
-# Google test
-$(BUILD_DIR)/vendor/gtest-all.cc.o:
-	$(CXX) -isystem vendor/gtest/include/ -Ivendor/gtest/ -pthread -c vendor/gtest/src/gtest-all.cc -o $@
 # BSPViewer
 $(BUILD_DIR)/BSPViewer: $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o
 	$(CC) $(OBJS) $(BUILD_DIR)/src/BSPViewer.cpp.o -o $@ $(LDFLAGS)

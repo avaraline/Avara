@@ -14,6 +14,7 @@ using json = nlohmann::json;
 #define kLatencyToleranceTag "latencyTolerance"
 #define kHullTypeTag "hull"
 #define kFrameTimeTag "frameTime"
+#define kThrottle "throttle"
 
 // TODO: split this into separate prefs
 #define kServerOptionsTag "_serverOptions"
@@ -28,6 +29,8 @@ using json = nlohmann::json;
 #define kKeyboardMappingTag "keyboard"
 
 #define kPlayerNameTag "playerName"
+#define kPlayerCockpitColorTag "cockpitColor"
+#define kPlayerGunColorTag "gunColor"
 
 // GL stuff
 #define kWindowWidth "windowWidth"
@@ -49,6 +52,9 @@ using json = nlohmann::json;
 #define kTrackerRegisterAddress "trackerRegisterAddress"
 #define kTrackerRegisterFrequency "trackerRegisterFrequency"
 #define kTrackerAddress "trackerAddress"
+#define kPunchServerAddress "udpPunchServerAddress"
+#define kPunchServerPort "udpPunchServerPort"
+#define kPunchHoles "udpHolePunch"
 
 // Levels
 #define kRecentSets "recentSets"
@@ -98,7 +104,9 @@ static json defaultPrefs = {
         {"debug2", "6"}}
     },
     {kPlayerNameTag, "Unnamed Player"},
-    {kMultiSamplesTag, 8},
+    {kPlayerCockpitColorTag, "#0333ff"},
+    {kPlayerGunColorTag, "#929292"},
+    {kMultiSamplesTag, 0},
     {kWindowWidth, 1024},
     {kWindowHeight, 768},
     {kFullScreenTag, false},
@@ -114,10 +122,14 @@ static json defaultPrefs = {
     {kTrackerRegister, 1},
     {kTrackerRegisterAddress, "avara.io"},
     {kTrackerRegisterFrequency, 5},
+    {kPunchServerAddress, "avara.io"},
+    {kPunchServerPort, 19555},
+    {kPunchHoles, true},
     {kRecentSets, {}},
     {kRecentLevels, {}},
     {kSoundVolume, 100},
-    {kIgnoreCustomGoodySound, false}
+    {kIgnoreCustomGoodySound, false},
+    {kThrottle, 0}
 };
 
 
@@ -129,7 +141,7 @@ static std::string PrefPath() {
     return jsonPath;
 }
 
-static json ReadPrefs() {
+static inline json ReadPrefs() {
     json prefs;
     std::ifstream in(PrefPath());
 
@@ -157,7 +169,7 @@ static json ReadPrefs() {
     return prefs;
 }
 
-static void WritePrefs(json prefs) {
+static inline void WritePrefs(json prefs) {
     try {
         std::ostringstream oss;
         oss << std::setw(4) << prefs << std::endl;

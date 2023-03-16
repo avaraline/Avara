@@ -23,7 +23,7 @@ void CDoor2Actor::PlaceParts() {
     CSmartPart *theDoor;
 
     if (stat >= midState) {
-        stat = FDivNZ(stat - FIX(1), FIX(1) - midState);
+        stat = FDivNZ(stat - FIX1, FIX1 - midState);
         endTrans = deltas;
         endTwist = twists;
         deltaTrans[0] = deltas[0] - midDeltas[0];

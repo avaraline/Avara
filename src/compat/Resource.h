@@ -44,8 +44,6 @@ void ChangedResource(Handle theResource);
 void ReleaseResource(Handle theResource);
 void DetachResource(Handle theResource);
 
-void GetIndString(Str255 theString, short strListID, short index);
-
 void BundlePath(const char *rel, char *dest);
 void BundlePath(std::stringstream &buffa, char *dest);
 
@@ -59,6 +57,7 @@ nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string 
 
 bool GetBSPPath(int resId, char* dest);
 nlohmann::json GetBSPJSON(int resId);
+bool HasBSP(int resId);
 std::string GetALFPath(std::string alfname);
 std::string GetDefaultScript();
 std::string GetBaseScript();

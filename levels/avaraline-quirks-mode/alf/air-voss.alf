@@ -1,6 +1,6 @@
 <map>
-  <SkyColor fill="#333333" frame="#4e0606" />
-  <GroundColor fill="#bfbfbf" />
+  <SkyColor color="#333333" color.1="#4e0606" />
+  <GroundColor color="#bfbfbf" />
   <set
     designer="$mSilverheadtateboy"
     information="He fixated on his lapsang souchong and droned on about the force that binds joy and suffering. Finally, the satyr in basketball shorts peered up at me beneath his seven gnarled horns and confided that he was the reason bad things happen to good people."
@@ -14,61 +14,61 @@
     wallHeight="0"
   />
 
-  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" x="0" z="0" w="12.5" d="12.5" h="10" />
-  <Wall fill="#333333" frame="#000000" x="-34.375" z="0" w="2.5" d="20" h="2.7" />
-  <Wall fill="#333333" frame="#000000" x="34.375" z="0" w="2.5" d="20" h="2.7" />
-  <Wall fill="#333333" frame="#000000" x="0" z="-34.375" w="20" d="2.5" h="2.7" />
-  <Wall fill="#333333" frame="#000000" x="0" z="34.375" w="20" d="2.5" h="2.7" />
-  <Wall fill="#d62828" frame="#000000" x="-39.375" z="-16.25" w="3.75" d="3.75" h="0" y="-0.05" />
-  <Wall fill="#d62828" frame="#000000" x="-39.375" z="16.25" w="3.75" d="3.75" h="0" y="-0.05" />
-  <Wall fill="#d62828" frame="#000000" x="39.375" z="16.25" w="3.75" d="3.75" h="0" y="-0.05" />
-  <Wall fill="#d62828" frame="#000000" x="39.375" z="-16.25" w="3.75" d="3.75" h="0" y="-0.05" />
-  <Wall fill="#d62828" frame="#000000" x="16.25" z="-39.375" w="3.75" d="3.75" h="0" y="-0.05" />
-  <Wall fill="#d62828" frame="#000000" x="-16.25" z="-39.375" w="3.75" d="3.75" h="0" y="-0.05" />
-  <Wall fill="#d62828" frame="#000000" x="-16.25" z="39.375" w="3.75" d="3.75" h="0" y="-0.05" />
-  <Wall fill="#d62828" frame="#000000" x="16.25" z="39.375" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="22.5" fill="#d62828" frame="#000000" x="-25.625" z="-10" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="22.5" fill="#d62828" frame="#000000" x="24.375" z="10" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="22.5" fill="#d62828" frame="#000000" x="-10" z="24.375" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="22.5" fill="#d62828" frame="#000000" x="10" z="-24.375" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="-22.5" fill="#d62828" frame="#000000" x="-25.625" z="10" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="-22.5" fill="#d62828" frame="#000000" x="24.375" z="-10" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="-22.5" fill="#d62828" frame="#000000" x="-10" z="-24.375" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="-22.5" fill="#d62828" frame="#000000" x="10" z="24.375" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="45" fill="#d62828" frame="#000000" x="-10.625" z="-5" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="45" fill="#d62828" frame="#000000" x="10.625" z="5" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="45" fill="#d62828" frame="#000000" x="5" z="-10.625" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="45" fill="#d62828" frame="#000000" x="-5" z="10.625" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#d62828" frame="#000000" x="-10.625" z="5" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#d62828" frame="#000000" x="10.625" z="-5" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#d62828" frame="#000000" x="-5" z="-10.625" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="-45" fill="#d62828" frame="#000000" x="5" z="10.625" w="3.75" d="3.75" h="0" y="-0.05" />
-  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" x="-25.625" z="-24.375" w="3.75" d="3.75" h="10" />
-  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" x="-25.625" z="24.375" w="3.75" d="3.75" h="10" />
-  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" x="24.375" z="24.375" w="3.75" d="3.75" h="10" />
-  <WallDoor midYaw="45" fill="#f3f3f3" frame="#000000" x="24.375" z="-24.375" w="3.75" d="3.75" h="10" />
+  <WallDoor midYaw="45" color="#f3f3f3" color.1="#000000" x="0" z="0" w="12.5" d="12.5" h="10" />
+  <Wall color="#333333" color.1="#000000" x="-34.375" z="0" w="2.5" d="20" h="2.7" />
+  <Wall color="#333333" color.1="#000000" x="34.375" z="0" w="2.5" d="20" h="2.7" />
+  <Wall color="#333333" color.1="#000000" x="0" z="-34.375" w="20" d="2.5" h="2.7" />
+  <Wall color="#333333" color.1="#000000" x="0" z="34.375" w="20" d="2.5" h="2.7" />
+  <Wall color="#d62828" color.1="#000000" x="-39.375" z="-16.25" w="3.75" d="3.75" h="0" y="-0.05" />
+  <Wall color="#d62828" color.1="#000000" x="-39.375" z="16.25" w="3.75" d="3.75" h="0" y="-0.05" />
+  <Wall color="#d62828" color.1="#000000" x="39.375" z="16.25" w="3.75" d="3.75" h="0" y="-0.05" />
+  <Wall color="#d62828" color.1="#000000" x="39.375" z="-16.25" w="3.75" d="3.75" h="0" y="-0.05" />
+  <Wall color="#d62828" color.1="#000000" x="16.25" z="-39.375" w="3.75" d="3.75" h="0" y="-0.05" />
+  <Wall color="#d62828" color.1="#000000" x="-16.25" z="-39.375" w="3.75" d="3.75" h="0" y="-0.05" />
+  <Wall color="#d62828" color.1="#000000" x="-16.25" z="39.375" w="3.75" d="3.75" h="0" y="-0.05" />
+  <Wall color="#d62828" color.1="#000000" x="16.25" z="39.375" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="22.5" color="#d62828" color.1="#000000" x="-25.625" z="-10" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="22.5" color="#d62828" color.1="#000000" x="24.375" z="10" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="22.5" color="#d62828" color.1="#000000" x="-10" z="24.375" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="22.5" color="#d62828" color.1="#000000" x="10" z="-24.375" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-22.5" color="#d62828" color.1="#000000" x="-25.625" z="10" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-22.5" color="#d62828" color.1="#000000" x="24.375" z="-10" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-22.5" color="#d62828" color.1="#000000" x="-10" z="-24.375" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-22.5" color="#d62828" color.1="#000000" x="10" z="24.375" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="45" color="#d62828" color.1="#000000" x="-10.625" z="-5" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="45" color="#d62828" color.1="#000000" x="10.625" z="5" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="45" color="#d62828" color.1="#000000" x="5" z="-10.625" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="45" color="#d62828" color.1="#000000" x="-5" z="10.625" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" color="#d62828" color.1="#000000" x="-10.625" z="5" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" color="#d62828" color.1="#000000" x="10.625" z="-5" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" color="#d62828" color.1="#000000" x="-5" z="-10.625" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="-45" color="#d62828" color.1="#000000" x="5" z="10.625" w="3.75" d="3.75" h="0" y="-0.05" />
+  <WallDoor midYaw="45" color="#f3f3f3" color.1="#000000" x="-25.625" z="-24.375" w="3.75" d="3.75" h="10" />
+  <WallDoor midYaw="45" color="#f3f3f3" color.1="#000000" x="-25.625" z="24.375" w="3.75" d="3.75" h="10" />
+  <WallDoor midYaw="45" color="#f3f3f3" color.1="#000000" x="24.375" z="24.375" w="3.75" d="3.75" h="10" />
+  <WallDoor midYaw="45" color="#f3f3f3" color.1="#000000" x="24.375" z="-24.375" w="3.75" d="3.75" h="10" />
 
-  <Wall fill="#330000" frame="#000000" x="-50" z="0" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="-50" z="18.75" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="-50" z="-18.75" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="50" z="0" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="50" z="18.75" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="50" z="-18.75" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="0" z="-50" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="-18.75" z="-50" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="18.75" z="-50" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="0" z="50" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="-18.75" z="50" w="5" d="5" h="0.2" y="4.8" />
-  <Wall fill="#330000" frame="#000000" x="18.75" z="50" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="-50" z="0" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="-50" z="18.75" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="-50" z="-18.75" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="50" z="0" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="50" z="18.75" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="50" z="-18.75" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="0" z="-50" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="-18.75" z="-50" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="18.75" z="-50" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="0" z="50" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="-18.75" z="50" w="5" d="5" h="0.2" y="4.8" />
+  <Wall color="#330000" color.1="#000000" x="18.75" z="50" w="5" d="5" h="0.2" y="4.8" />
 
-  <Goody shape="bspGrenade" start="@start" out="@secondWaveNRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="16.25" cz="-39.375" angle="225" />
-  <Goody shape="bspGrenade" start="@start" out="@secondWaveNLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-16.25" cz="-39.375" angle="225" />
-  <Goody shape="bspGrenade" start="@start" out="@secondWaveERT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="39.375" cz="16.25" angle="225" />
-  <Goody shape="bspGrenade" start="@start" out="@secondWaveELT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="39.375" cz="-16.25" angle="225" />
-  <Goody shape="bspGrenade" start="@start" out="@secondWaveSRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-16.25" cz="39.375" angle="225" />
-  <Goody shape="bspGrenade" start="@start" out="@secondWaveSLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="16.25" cz="39.375" angle="225" />
-  <Goody shape="bspGrenade" start="@start" out="@secondWaveWRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-39.375" cz="-16.25" angle="225" />
-  <Goody shape="bspGrenade" start="@start" out="@secondWaveWLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-39.375" cz="16.25" angle="225" />
+  <Goody shape="bspGrenade" start="@start" out="@secondWaveNRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="16.25" cz="-39.375" angle="225" />
+  <Goody shape="bspGrenade" start="@start" out="@secondWaveNLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-16.25" cz="-39.375" angle="225" />
+  <Goody shape="bspGrenade" start="@start" out="@secondWaveERT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="39.375" cz="16.25" angle="225" />
+  <Goody shape="bspGrenade" start="@start" out="@secondWaveELT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="39.375" cz="-16.25" angle="225" />
+  <Goody shape="bspGrenade" start="@start" out="@secondWaveSRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-16.25" cz="39.375" angle="225" />
+  <Goody shape="bspGrenade" start="@start" out="@secondWaveSLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="16.25" cz="39.375" angle="225" />
+  <Goody shape="bspGrenade" start="@start" out="@secondWaveWRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-39.375" cz="-16.25" angle="225" />
+  <Goody shape="bspGrenade" start="@start" out="@secondWaveWLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-39.375" cz="16.25" angle="225" />
 
   <Timer in="@secondWaveNLT" out="@secondWaveNL" wait="260" />
   <Timer in="@secondWaveNRT" out="@secondWaveNR" wait="260" />
@@ -79,14 +79,14 @@
   <Timer in="@secondWaveWLT" out="@secondWaveWL" wait="260" />
   <Timer in="@secondWaveWRT" out="@secondWaveWR" wait="260" />
 
-  <Goody shape="bspGrenade" status="false" start="@secondWaveNR" out="@thirdWaveNRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="10" cz="-24.375" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@secondWaveNL" out="@thirdWaveNLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-10" cz="-24.375" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@secondWaveER" out="@thirdWaveERT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="24.375" cz="10" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@secondWaveEL" out="@thirdWaveELT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="24.375" cz="-10" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@secondWaveSR" out="@thirdWaveSRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-10" cz="24.375" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@secondWaveSL" out="@thirdWaveSLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="10" cz="24.375" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@secondWaveWR" out="@thirdWaveWRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-25.625" cz="-10" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@secondWaveWL" out="@thirdWaveWLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-25.625" cz="10" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@secondWaveNR" out="@thirdWaveNRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="10" cz="-24.375" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@secondWaveNL" out="@thirdWaveNLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-10" cz="-24.375" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@secondWaveER" out="@thirdWaveERT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="24.375" cz="10" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@secondWaveEL" out="@thirdWaveELT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="24.375" cz="-10" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@secondWaveSR" out="@thirdWaveSRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-10" cz="24.375" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@secondWaveSL" out="@thirdWaveSLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="10" cz="24.375" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@secondWaveWR" out="@thirdWaveWRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-25.625" cz="-10" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@secondWaveWL" out="@thirdWaveWLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-25.625" cz="10" angle="225" />
 
   <Timer in="@thirdWaveNLT" out="@thirdWaveNL" wait="320" />
   <Timer in="@thirdWaveNRT" out="@thirdWaveNR" wait="320" />
@@ -97,14 +97,14 @@
   <Timer in="@thirdWaveWLT" out="@thirdWaveWL" wait="320" />
   <Timer in="@thirdWaveWRT" out="@thirdWaveWR" wait="320" />
 
-  <Goody shape="bspGrenade" status="false" start="@thirdWaveNR" out="@thirdWaveNRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="5" cz="-10.625" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@thirdWaveNL" out="@thirdWaveNLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-5" cz="-10.625" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@thirdWaveER" out="@thirdWaveERT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="10.625" cz="5" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@thirdWaveEL" out="@thirdWaveELT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="10.625" cz="-5" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@thirdWaveSR" out="@thirdWaveSRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-5" cz="10.625" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@thirdWaveSL" out="@thirdWaveSLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="5" cz="10.625" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@thirdWaveWR" out="@thirdWaveWRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-10.625" cz="-5" angle="225" />
-  <Goody shape="bspGrenade" status="false" start="@thirdWaveWL" out="@thirdWaveWLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" fill="#02abea" frame="#000000" cx="-10.625" cz="5" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@thirdWaveNR" out="@thirdWaveNRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="5" cz="-10.625" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@thirdWaveNL" out="@thirdWaveNLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-5" cz="-10.625" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@thirdWaveER" out="@thirdWaveERT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="10.625" cz="5" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@thirdWaveEL" out="@thirdWaveELT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="10.625" cz="-5" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@thirdWaveSR" out="@thirdWaveSRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-5" cz="10.625" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@thirdWaveSL" out="@thirdWaveSLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="5" cz="10.625" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@thirdWaveWR" out="@thirdWaveWRT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-10.625" cz="-5" angle="225" />
+  <Goody shape="bspGrenade" status="false" start="@thirdWaveWL" out="@thirdWaveWLT" grenades="mLgGrenade" speed="1" y="mGoodyOffset" color="#02abea" color.1="#000000" cx="-10.625" cz="5" angle="225" />
 
   <Incarnator y="5" cx="-50" cz="18.75" angle="90" />
   <Incarnator y="5" cx="50" cz="-18.75" angle="270" />
@@ -119,9 +119,9 @@
   <Incarnator y="5" cx="0" cz="-50" angle="180" />
   <Incarnator y="5" cx="0" cz="50" angle="0" />
 
-  <Teleporter shape="0" y="21" group="@recenter" mask="0" fill="#fcf305" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter shape="0" status="true" activeRange="10000" deadRange="72" group="@bubble" destGroup="@recenter" y="30" fill="#fcf305" frame="#000000" cx="0" cz="0" angle="45" />
-  <Teleporter shape="0" status="false" win="0" start="@winTeam" activeRange="10000" fill="#fcf305" frame="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter shape="0" y="21" group="@recenter" mask="0" color="#fcf305" color.1="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter shape="0" status="true" activeRange="10000" deadRange="72" group="@bubble" destGroup="@recenter" y="30" color="#fcf305" color.1="#000000" cx="0" cz="0" angle="45" />
+  <Teleporter shape="0" status="false" win="0" start="@winTeam" activeRange="10000" color="#fcf305" color.1="#000000" cx="0" cz="0" angle="45" />
 
   <Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="80" cx="0" cz="0" angle="45" />
 </map>

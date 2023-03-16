@@ -11,7 +11,7 @@
 #include <SDL2/SDL.h>
 #include <glm/glm.hpp>
 #include "CViewParameters.h"
-#include "RGBAColor.h"
+#include "ARGBColor.h"
 #include "AvaraGL.h"
 extern "C" {
 #include "microui.h"

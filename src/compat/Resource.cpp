@@ -187,10 +187,6 @@ void ReleaseResource(Handle theResource) {
 
 void DetachResource(Handle theResource) {}
 
-void GetIndString(Str255 theString, short strListID, short index) {
-    theString[0] = 0;
-}
-
 void BundlePath(const char *rel, char *dest) {
 
     if (sdlBasePath.length() < 1) {
@@ -383,6 +379,12 @@ json GetBSPJSON(int resId) {
     return bspCash[bspPath];
 }
 
+bool HasBSP(int resId) {
+    char bspPath[PATH_MAX];
+    // Presume that parsing the JSON will succeed.
+    return GetBSPPath(resId, bspPath);
+}
+
 std::string GetALFPath(std::string alfname) {
     std::stringstream buffa;
     buffa << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
@@ -554,7 +556,7 @@ SampleHeaderHandle LoadSampleHeaderFromSetJSON(short resId, SampleHeaderHandle s
 
     if (!found) return NULL;
 
-    Fixed arate = FIX(1);
+    Fixed arate = FIX1;
     if (version > 1)
         arate = ToFixed((float)hsndJson["Base Rate"]);
 

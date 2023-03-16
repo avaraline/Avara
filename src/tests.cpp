@@ -14,7 +14,7 @@
 #include "CScout.h"
 #include "AvaraGL.h"
 #include "Messages.h"
-
+#include "System.h"
 #include "CUDPConnection.h"
 
 #include <iostream>
@@ -44,6 +44,7 @@ public:
     virtual short Slot() { return 0; }
     virtual void SetLocal() {};
     virtual void AbortRequest() {}
+    virtual void RemoveFromGame() {}
     virtual Boolean IsLocalPlayer() { return true; }
     virtual Boolean CalculateIsLocalPlayer() { return true; }
     virtual void GameKeyPress(char c) {}
@@ -58,11 +59,13 @@ public:
     virtual short IsRegistered() { return 0; }
     virtual void IsRegistered(short) {}
     virtual Str255& PlayerRegName() { return str; }
-    virtual short LoadingStatus() { return 0; }
+    virtual LoadingState LoadingStatus() { return kLNotConnected; }
+    virtual PresenceType Presence() { return kzAvailable; }
+    virtual void SetPresence(PresenceType pt) { }
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag) {}
-    virtual void SetPlayerStatus(short newStatus, long theWin) {}
+    virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) {}
     virtual bool IsAway() { return false; };
-    virtual void ChangeNameAndLocation(StringPtr theName, Point location) {}
+    virtual void ChangeName(StringPtr theName) {}
     virtual void SetPosition(short pos) {}
 
     virtual void RosterKeyPress(unsigned char c) {}
@@ -91,7 +94,7 @@ public:
     virtual CAbstractPlayer *TakeAnyActor(CAbstractPlayer *actorList) { return 0; }
     virtual short PlayerColor() { return 0; }
     virtual Boolean IncarnateInAnyColor() { return false; }
-    virtual void ResendFrame(long theFrame, short requesterId, short commandCode) {}
+    virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode) {}
     virtual void SpecialColorControl() {}
     virtual PlayerConfigRecord& TheConfiguration() { return pcr; }
     virtual Handle MugPict() { return 0; }
@@ -100,7 +103,7 @@ public:
     virtual long MugState() { return 0; }
     virtual void MugSize(long) {}
     virtual void MugState(long) {}
-    virtual long WinFrame() { return 0; }
+    virtual FrameNumber WinFrame() { return 0; }
     virtual void ProtocolHandler(struct PacketInfo *thePacket) {}
     virtual void IncrementAskAgainTime(int) {}
     virtual void SetShowScoreboard(bool b) {}
@@ -131,8 +134,8 @@ public:
     virtual void RenderContents() {};
     virtual void DrawUserInfoPart(short i, short partList) {}
     virtual void ParamLine(short index, MsgAlignment align, StringPtr param1, StringPtr param2) {}
-    virtual void StartFrame(long frameNum) {}
-    virtual void BrightBox(long frameNum, short position) {}
+    virtual void StartFrame(FrameNumber frameNum) {}
+    virtual void BrightBox(FrameNumber frameNum, short position) {}
     virtual void LevelReset() {}
     virtual long Number(const std::string name) { return 0; }
     virtual bool Boolean(const std::string name) { return false; }
@@ -154,6 +157,8 @@ public:
     virtual void GameStarted(std::string set, std::string level) {};
     virtual std::deque<MsgLine>& MessageLines() { return msgLines; }
     virtual CommandManager* GetTui() { return 0; }
+public:
+    std::unique_ptr<CAvaraGame> itsGame;
 private:
     CNetManager *itsNet;
     std::deque<MsgLine> msgLines;
@@ -162,7 +167,7 @@ private:
 class TestGame : public CAvaraGame {
 public:
     TestGame(int frameTime) : CAvaraGame(frameTime) {}
-    virtual CNetManager* CreateNetManager() { return new TestNetManager(); }
+    virtual std::unique_ptr<CNetManager> CreateNetManager() { return std::make_unique<TestNetManager>(); }
     virtual CSoundHub* CreateSoundHub() { TestSoundHub *t = new TestSoundHub(); t->ISoundHub(64,64); return t;}
     bool GameTick() {
         // force tick to happen by resetting nextScheduledFrame
@@ -179,7 +184,8 @@ public:
     CWalkerActor *hector;
 
     HectorTestScenario(int frameTime, Fixed hectorX, Fixed hectorY, Fixed hectorZ) {
-        game = new TestGame(frameTime);
+        app.itsGame = std::make_unique<TestGame>(frameTime);
+        game = (TestGame*)app.itsGame.get();
         gCurrentGame = game;
         InitParser();
         game->IAvaraGame(&app);
@@ -379,13 +385,9 @@ vector<VectorStruct> FireMissile(int hectorSettle, int scoutSettle, int steps, i
 
     // Find the Missile in the actor list
     CSmart *missile = NULL;
-    CScout *scout = NULL;
     for (CAbstractActor *aa = scenario.game->actorList; aa; aa = aa->nextActor) {
         if (typeid(*aa) == typeid(CSmart)) {
             missile = (CSmart*)aa;
-        } else if (typeid(*aa) == typeid(CScout)) {
-            scout = (CScout*)aa;
-            // std::cout << "scout location = " << FormatVector(scout->location, 3) << std::endl;
         }
     }
 
@@ -1151,6 +1153,11 @@ TEST(SERIAL_NUMBER, Rollover) {
     test_rollover("CUDPConnection::receiveSerial", conn1, conn2, &CUDPConnection::receiveSerial);
     test_rollover("CUDPConnection::maxValid", conn1, conn2, &CUDPConnection::maxValid);
     test_rollover("CUDPConnection::ackBase", conn1, conn2, &CUDPConnection::ackBase);
+}
+
+TEST(QUEUES, Clean) {
+    // after all of the tests have run, the queues should be all cleaned up suggesting all destructors did their job
+    ASSERT_EQ(QueueCount(), 0)  << "queues not empty";
 }
 
 int main(int argc, char **argv) {

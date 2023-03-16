@@ -13,6 +13,8 @@
 #include <string>
 #include <vector>
 
+#include "ARGBColor.h"
+#include "ColorManager.h"
 #include "Parser.h"
 
 enum {
@@ -309,6 +311,8 @@ bool LoadALF(std::string levelName);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);
-uint32_t GetPixelColor();
-uint32_t GetOtherPixelColor();
+ARGBColor GetPixelColor();
+ARGBColor GetOtherPixelColor();
+ARGBColor GetTertiaryColor();
+ARGBColor GetQuaternaryColor();
 Fixed GetLastOval(Fixed *theLoc);

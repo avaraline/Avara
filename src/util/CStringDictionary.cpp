@@ -106,7 +106,7 @@ tokentype CStringDictionary::AddDictEntry(const char *entry, short len) {
         s.append(entry);
     }
 
-    unsigned int idx = wordList.size();
+    auto idx = wordList.size();
     wordList.push_back(s);
     index.insert(std::pair<std::string, size_t>(s, idx));
     return idx;
@@ -170,20 +170,6 @@ void CStringDictionary::Lock() {
 */
 void CStringDictionary::Unlock() {
     CBaseObject::Unlock();
-}
-
-/*
-**	Read the dictionary string from a STR# resource.
-*/
-void CStringDictionary::ReadFromStringList(short strListID) {
-    Str255 theString;
-    short stringCount, i;
-
-    stringCount = **(short **)GetResource('STR#', strListID);
-    for (i = 1; i <= stringCount; i++) {
-        GetIndString(theString, strListID, i);
-        AddDictEntry(theString, -1);
-    }
 }
 
 Handle CStringDictionary::WriteToHandle() {

@@ -8,6 +8,8 @@
 */
 
 #pragma once
+#include "ARGBColor.h"
+
 typedef struct {
     short numGrenades;
     short numMissiles;
@@ -15,6 +17,8 @@ typedef struct {
     short hullType;
     short frameLatency;
     short frameTime;
+    ARGBColor cockpitColor;
+    ARGBColor gunColor;
 } PlayerConfigRecord;
 
 typedef struct {

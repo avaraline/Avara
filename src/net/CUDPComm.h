@@ -33,7 +33,7 @@ enum { udpCramInfo }; //	Selectors for kpPacketProtocolControl packer p1 params.
 
 class CUDPComm : public CCommManager {
 public:
-    long seed;
+    int32_t seed;
     short softwareVersion;
     short maxClients;
     short clientLimit;
@@ -58,7 +58,7 @@ public:
     // OSErr				writeErr;
     // OSErr				readErr;
 
-    class CTagBase *prefs;
+    // class CTagBase *prefs;
     class CUDPConnection *connections;
     class CUDPConnection *nextSender;
     /*
@@ -67,11 +67,11 @@ public:
 
     long retransmitToRoundTripRatio; //	In fixed point 24.8 format
 
-    long nextWriteTime;
+    ClockTick nextWriteTime;
     long latencyConvert;
-    long urgentResendTime;
-    long lastClock;
-    long lastQuotaTime;
+    ClockTick urgentResendTime;
+    ClockTick lastClock;
+    ClockTick lastQuotaTime;
 
     ip_addr localIP; //	Just a guess, but that's all we need for the tracker.
     port_num localPort;
@@ -97,13 +97,13 @@ public:
     Boolean specialWakeup;
     Str255 inviteString;
 
-    virtual void IUDPComm(short clientCount, short bufferCount, short version, long urgentTimePeriod);
-    virtual OSErr AllocatePacketBuffers(short numPackets);
+    virtual void IUDPComm(short clientCount, short bufferCount, short version, ClockTick urgentTimePeriod);
+
     virtual void Disconnect();
     virtual void WritePrefs();
     virtual void Dispose();
 
-    int32_t GetClock();
+    ClockTick GetClock();
 
     virtual void ReadComplete(UDPpacket *packet);
     virtual void WriteComplete(int result);
@@ -130,6 +130,7 @@ public:
     virtual Boolean AsyncWrite();
 
     virtual void ReceivedGoodPacket(PacketInfo *thePacket);
+    virtual size_t SkipLostPackets(int16_t dist);
 
     virtual OSErr CreateStream(port_num streamPort);
 

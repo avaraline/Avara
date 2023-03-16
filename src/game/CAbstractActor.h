@@ -101,7 +101,7 @@ public:
     CAbstractActor *nextActor;
     CAbstractActor *identLink;
     long ident;
-    long sleepTimer;
+    FrameNumber sleepTimer;
 
     CAbstractActor *postMortemLink;
     Fixed blastPower;
@@ -214,7 +214,7 @@ public:
     virtual void RayTestWithGround(RayHitRecord *hitRec, MaskType testMask);
     virtual short GetPlayerPosition();
 
-    uint32_t GetTeamColorOr(uint32_t defaultColor);
+    ARGBColor GetTeamColorOr(ARGBColor defaultColor);
 
     virtual short GetBallSnapPoint(long theGroup,
         Fixed *ballLocation,
@@ -229,7 +229,7 @@ public:
     Fixed FpsCoefficient1(Fixed classicMultiplier1);
     Fixed FpsCoefficient2(Fixed classicMultiplier2);
     Fixed FpsOffset(Fixed classicCoeff2);
-    long FpsFramesPerClassic(long classicFrames = 1);
+    FrameNumber FpsFramesPerClassic(FrameNumber classicFrames = 1);
     Fixed ClassicCoefficient2(Fixed fpsValue);
 private:
     virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);

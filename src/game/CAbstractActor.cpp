@@ -16,7 +16,7 @@
 #include "CSoundMixer.h"
 
 void CAbstractActor::LoadPart(short ind, short resId) {
-    if (partScale == FIX(1)) {
+    if (partScale == FIX1) {
         partList[ind] = new CSmartPart;
         partList[ind]->ISmartPart(resId, this, ind);
     } else {
@@ -37,6 +37,8 @@ void CAbstractActor::LoadPartWithColors(short ind, short resId) {
     LoadPart(ind, resId);
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(0), GetPixelColor());
     partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(1), GetOtherPixelColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(2), GetTertiaryColor());
+    partList[ind]->ReplaceColor(*ColorManager::getMarkerColor(3), GetQuaternaryColor());
 }
 
 void CAbstractActor::InitLocationLinks() {
@@ -236,7 +238,7 @@ void CAbstractActor::IAbstractActor() {
         partList[i] = NULL;
     }
 
-    partScale = FIX(1);
+    partScale = FIX1;
     partYon = 0;
 
     for (i = 0; i < kSliverSizes; i++) {
@@ -294,7 +296,7 @@ void CAbstractActor::Shatter(short firstSliverType,
     short i;
     CSmartPart **partInd, *thePart;
     long totalPolys;
-    Vector noDirection = {0, FIX(1), 0, 0};
+    Vector noDirection = {0, FIX1, 0, 0};
 
     partInd = partList;
     totalPolys = 0;
@@ -364,7 +366,7 @@ void CAbstractActor::Blast() {
         }
 
         if (maxCount && maxPart) {
-            DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX(1));
+            DoSound(blastSound, maxPart->sphereGlobCenter, blastVolume, FIX1);
         }
     }
 }
@@ -909,8 +911,8 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
     // SDL_Log("WasHit: player = %d, shields = %d, hitEnergy = %d\n", theHit->playerId, shields, hitEnergy);
     if (shields < 0 || shields > hitEnergy) {
         itsGame->Score(
-            theHit->team, theHit->playerId, FMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
-        DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX(1));
+            theHit->team, theHit->playerId, LMul(hitScore, hitEnergy), hitEnergy, teamColor, GetActorScoringId());
+        DoSound(hitSoundId, theHit->origin, hitSoundVolume * hitEnergy, FIX1);
         itsGame->FlagMessage(hitMessage);
 
         if (shields >= 0)
@@ -920,7 +922,7 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
             ScoreInterfaceReasons savedReason;
 
             itsGame->Score(
-                theHit->team, theHit->playerId, FMul(hitScore, shields), shields, teamColor, GetActorScoringId());
+                theHit->team, theHit->playerId, LMul(hitScore, shields), shields, teamColor, GetActorScoringId());
 
             savedReason = itsGame->scoreReason;
             itsGame->scoreReason = ksiKillBonus;
@@ -978,8 +980,8 @@ void CAbstractActor::BlastHit(BlastHitRecord *theHit) {
 
         distance = NormalizeVector(3, blastRay.direction) - thePart->enclosureRadius;
         FPS_DEBUG("CAbstractActor::BlastHit: len(blastRay.direction) = " << distance + thePart->enclosureRadius << ", enclosureRadius = " << thePart->enclosureRadius << ", distance = " << distance << "\n");
-        if (distance < FIX(1)) {
-            distance = FIX(1);
+        if (distance < FIX1) {
+            distance = FIX1;
             blastRay.origin[0] = theHit->blastPoint[0];
             blastRay.origin[1] = theHit->blastPoint[1];
             blastRay.origin[2] = theHit->blastPoint[2];
@@ -1173,7 +1175,7 @@ short CAbstractActor::GetPlayerPosition() {
     return -1; //	Not a player, as far as we know, so return -1 (invalid position)
 }
 
-uint32_t CAbstractActor::GetTeamColorOr(uint32_t defaultColor) {
+ARGBColor CAbstractActor::GetTeamColorOr(ARGBColor defaultColor) {
     return ColorManager::getTeamColor(teamColor).value_or(defaultColor);
 }
 
@@ -1200,15 +1202,13 @@ void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
                                      Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed *fpsOffset) {
     return itsGame->FpsCoefficients(HandlesFastFPS(), classicCoeff1, classicCoeff2, fpsCoeff1, fpsCoeff2, fpsOffset);
 }
-
-
 // convenience function for offset assuming equations of the form
 //   x[i+1] = x[i] + b
 Fixed CAbstractActor::FpsOffset(Fixed classicCoeff2) {
     return itsGame->FpsOffset(HandlesFastFPS(), classicCoeff2);
 }
 
-long CAbstractActor::FpsFramesPerClassic(long classicFrames)
+FrameNumber CAbstractActor::FpsFramesPerClassic(FrameNumber classicFrames)
 {
     return itsGame->FpsFramesPerClassic(HandlesFastFPS(), classicFrames);
 }

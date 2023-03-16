@@ -30,7 +30,7 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     if (y == 0)
         y = baseSize;
 
-    p = pointTable;
+    p = pointTable.get();
     for (i = 0; i < pointCount; i++) {
         (*p)[0] = FMulDiv((*p)[0], x, baseSize);
         (*p)[1] = FMulDiv((*p)[1], y, baseSize);
@@ -39,9 +39,9 @@ void CSmartBox::ScaleTemplate(Fixed *dimensions, Fixed baseSize) {
     }
 
     if (dimensions[0] > DIMEPSILON && dimensions[1] > DIMEPSILON && dimensions[2] > DIMEPSILON) {
-        normalAdjust[0] = FDiv(FIX(1), x);
-        normalAdjust[1] = FDiv(FIX(1), y);
-        normalAdjust[2] = FDiv(FIX(1), z);
+        normalAdjust[0] = FDiv(FIX1, x);
+        normalAdjust[1] = FDiv(FIX1, y);
+        normalAdjust[2] = FDiv(FIX1, z);
         NormalizeVector(3, normalAdjust);
 
         for (i = 0; i < polyCount; i++) {
@@ -102,8 +102,8 @@ void CSmartBox::StretchTemplate(Fixed *dimensions, Fixed baseSize) {
 
 void CSmartBox::ISmartBox(short resId,
     Fixed *dimensions,
-    uint32_t color,
-    uint32_t altColor,
+    ARGBColor color,
+    ARGBColor altColor,
     CAbstractActor *anActor,
     short aPartCode) {
     Fixed baseSize;
@@ -120,7 +120,6 @@ void CSmartBox::ISmartBox(short resId,
     stretchFlag = config->scaleStyle;
     baseSize = config->baseSize;
     delete config;
-
     if (stretchFlag) {
         ScaleTemplate(dimensions, baseSize);
     } else {
@@ -171,7 +170,7 @@ void CSmartBox::FindEnclosure() {
     xmin.x = ymin.y = zmin.z = 0x7fFFffFF;
     xmax.x = ymax.y = zmax.z = -0x7fFFffFF;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     for (i = 0; i < pointCount; i++) {
         if (p->x < xmin.x)
             xmin = *p;
@@ -233,7 +232,7 @@ void CSmartBox::FindEnclosure() {
 
     rad = maxspan / 2;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     for (i = 0; i < pointCount; i++) {
         Fixed newrad;
 
@@ -260,7 +259,7 @@ void CSmartBox::FindEnclosure() {
 
     enclosurePoint = cen;
 
-    p = (FixedPoint *)pointTable;
+    p = (FixedPoint *)pointTable.get();
     xspan = 0;
     for (i = 0; i < pointCount; i++) {
         if (FDistanceOverEstimate(p->x, p->y, p->z) > xspan) {

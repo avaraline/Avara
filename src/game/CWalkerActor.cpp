@@ -221,7 +221,9 @@ void CWalkerActor::AvoidBumping() {
                         legPhase = phaseUndo;
                         break;
                     }
+#ifdef TESTIT
                     undoStep++;
+#endif
 
                 case undoTurn:
                     // FPS_DEBUG("AvoidBumping: undoTurn\n");
@@ -431,12 +433,12 @@ void CWalkerActor::DoLegTouches() {
             }
 
             if (power[0] > FIX3(10) && soundId[0]) {
-                DoSound(soundId[0], spot, power[0], FIX(1));
+                DoSound(soundId[0], spot, power[0], FIX1);
             }
         } else {
             for (i = 0; i < 2; i++) {
                 if (power[i] > FpsCoefficient2(FIX3(10)) && soundId[i]) {
-                    DoSound(soundId[i], legs[i].where, power[i], FIX(1));
+                    DoSound(soundId[i], legs[i].where, power[i], FIX1);
                 }
             }
         }
@@ -775,6 +777,18 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         viewPortPart = partList[0];
         viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
+        viewPortPart->ReplaceColor(
+            *ColorManager::getMarkerColor(1),
+            (*ColorManager::getMarkerColor(1)).WithA(0xff)
+        );
+        viewPortPart->ReplaceColor(
+            *ColorManager::getMarkerColor(2),
+            config->cockpitColor.WithA(0xff)
+        );
+        viewPortPart->ReplaceColor(
+            *ColorManager::getMarkerColor(3),
+            config->gunColor.WithA(0xff)
+        );
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 

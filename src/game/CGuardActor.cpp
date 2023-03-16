@@ -205,7 +205,7 @@ void CGuardActor::FrameAction() {
             theHit.origin[0] = gunMatrix[3][0];
             theHit.origin[1] = gunMatrix[3][1];
             theHit.origin[2] = gunMatrix[3][2];
-            theHit.origin[3] = FIX(1);
+            theHit.origin[3] = FIX1;
 
             theHit.direction[0] = gunMatrix[2][0];
             theHit.direction[1] = gunMatrix[2][1];

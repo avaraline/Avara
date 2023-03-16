@@ -48,7 +48,7 @@ void TrackerPinger(CAvaraAppImpl *app) {
             if (payload.size() > 0) {
                 // Probably not thread-safe.
                std::string address = app->String(kTrackerRegisterAddress);
-                SDL_Log("Pinging %s", address.c_str());
+                DBG_Log("tracker", "Pinging %s", address.c_str());
                 size_t sepIndex = address.find(":");
                 if (sepIndex != std::string::npos) {
                     std::string host = address.substr(0, sepIndex);
@@ -68,8 +68,8 @@ void TrackerPinger(CAvaraAppImpl *app) {
 
 CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     AvaraGLInitContext();
-    itsGame = new CAvaraGame(gApplication->Number(kFrameTimeTag));
-    gCurrentGame = itsGame;
+    itsGame = std::make_unique<CAvaraGame>(Get<FrameTime>(kFrameTimeTag));
+    gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(win_size_x, win_size_y, pixel_ratio);
 
@@ -97,6 +97,13 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
         "Type /help and press return for a list of chat commands.",
         MsgAlignment::Center
     );
+
+    if (Boolean(kPunchHoles)) {
+        std::string host = String(kPunchServerAddress);
+        uint16_t port = static_cast<uint16_t>(Number(kPunchServerPort));
+        SDL_Log("Enabling UDP hole punching via %s:%d", host.c_str(), port);
+        PunchSetup(host.c_str(), port);
+    }
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
@@ -120,7 +127,7 @@ void CAvaraAppImpl::idle() {
 void CAvaraAppImpl::drawContents() {
     if(animatePreview) {
         Fixed x = overhead[0] + FMul(previewRadius, FOneCos(previewAngle));
-        Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX(1));
+        Fixed y = overhead[1] + FMul(FMul(extent[3], FIX(2)), FOneSin(previewAngle) + FIX1);
         Fixed z = overhead[2] + FMul(previewRadius, FOneSin(previewAngle));
         itsGame->itsView->LookFrom(x, y, z);
         itsGame->itsView->LookAt(overhead[0], overhead[1], overhead[2]);
@@ -210,7 +217,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
 OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerManager *sendingPlayer) {
     SDL_Log("LOADING LEVEL %s FROM %s\n", levelTag.c_str(), set.c_str());
     itsGame->LevelReset(false);
-    gCurrentGame = itsGame;
+    gCurrentGame = itsGame.get();
     itsGame->loadedSet = set;
     UseLevelFolder(set);
 
@@ -269,7 +276,7 @@ void CAvaraAppImpl::NotifyUser() {
 }
 
 CAvaraGame* CAvaraAppImpl::GetGame() {
-    return itsGame;
+    return itsGame.get();
 }
 
 CNetManager* CAvaraAppImpl::GetNet() {
@@ -387,7 +394,7 @@ void CAvaraAppImpl::ParamLine(short index, MsgAlignment align, StringPtr param1,
 
     AddMessageLine(buffa.str(), align, category);
 }
-void CAvaraAppImpl::StartFrame(long frameNum) {}
+void CAvaraAppImpl::StartFrame(FrameNumber frameNum) {}
 
 void CAvaraAppImpl::StringLine(std::string theString, MsgAlignment align) {
     AddMessageLine(theString.c_str(), align, MsgCategory::Level);
@@ -436,4 +443,4 @@ std::string CAvaraAppImpl::TrackerPayload() {
 void CAvaraAppImpl::SetIndicatorDisplay(short i, short v) {}
 void CAvaraAppImpl::NumberLine(long theNum, short align) {}
 void CAvaraAppImpl::DrawUserInfoPart(short i, short partList) {}
-void CAvaraAppImpl::BrightBox(long frameNum, short position) {}
+void CAvaraAppImpl::BrightBox(FrameNumber frameNum, short position) {}

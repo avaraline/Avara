@@ -12,7 +12,7 @@ typedef struct {
 class CHuffProcessor : public CAbstractHuffPipe {
 public:
     Ptr outPointer;
-    long outCount;
+    int outCount;
 
     HuffTreeNode **lookupBuf;
     Boolean singleSymbolData;

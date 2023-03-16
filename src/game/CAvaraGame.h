@@ -14,9 +14,11 @@
 #include "AvaraTypes.h"
 #include "CDirectObject.h"
 #include "Types.h"
+#include "CNetManager.h"
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <memory>
 
 #define IDENTTABLESIZE 512
 
@@ -41,7 +43,9 @@
 #define kFootStepToggle 16
 #define kMusicToggle 32
 
-enum { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
+#define INACTIVE_LOOP_REFRESH 16
+
+enum GameStatus { kPlayingStatus, kAbortStatus, kReadyStatus, kPauseStatus, kNoVehicleStatus, kWinStatus, kLoseStatus };
 
 class CAbstractActor;
 class CAbstractPlayer;
@@ -58,7 +62,6 @@ class CDepot;
 class CAvaraApp;
 
 class CSoundHub;
-class CNetManager;
 class CIncarnator;
 class CWorldShader;
 class CScoreKeeper;
@@ -75,17 +78,17 @@ public:
     std::string loadedInfo = "";
     long loadedTimeLimit;
     int32_t timeInSeconds;
-    int32_t frameNumber;
+    FrameNumber frameNumber;
     bool isClassicFrame;
     int32_t frameAdjust;
 
-    long topSentFrame;
+    FrameNumber topSentFrame;
 
-    int32_t frameTime; //	In milliseconds.
+    FrameTime frameTime; //	In milliseconds.
     double fpsScale;  // 0.25 => CLASSICFRAMETIME / 4
 
-    short gameStatus;
-    short statusRequest;
+    GameStatus gameStatus;
+    GameStatus statusRequest;
     short pausePlayer;
 
     CAbstractActor *actorList;
@@ -142,20 +145,20 @@ public:
     // CInfoPanel		*infoPanel;
     CDepot *itsDepot; //	Storage maintenance for ammo
     CSoundHub *soundHub; //	Sound playback and control hub
-    CNetManager *itsNet; //	Networking management
+    std::unique_ptr<CNetManager> itsNet; //	Networking management
     CWorldShader *worldShader; //	Manages ground and sky colors.
     CScoreKeeper *scoreKeeper;
     CHUD *hud;
 
     //	Sound related variables:
-    long soundTime;
+    int soundTime;
     short soundOutputStyle; //	Mono, speakers stereo, headphones stereo
     short sound16BitStyle; //	true = try 16 bit, false = 8 bit
     short soundSwitches; //	kAmbientSoundToggle & kTuijaToggle
     short groundStepSound;
 
     //	Networking & user control related stuff:
-    Handle mapRes; //	Keyboard mapping resource handle.
+    // Handle mapRes; //	Keyboard mapping resource handle.
 
     short moJoOptions; //	Mouse and Joystick options.
     double sensitivity;
@@ -175,6 +178,8 @@ public:
     Boolean veryLongWait;
     Boolean allowBackgroundProcessing;
     Boolean simpleExplosions;
+    Boolean keysFromStdin;
+    Boolean keysToStdout;
 
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
@@ -183,12 +188,12 @@ public:
     long oldPlayersStanding;
     short oldTeamsStanding;
 
-    CAvaraGame(int32_t frameTime = 64);
+    CAvaraGame(FrameTime frameTime = 64);
     //	Methods:
     virtual void IAvaraGame(CAvaraApp *theApp);
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
     virtual CSoundHub* CreateSoundHub();
-    virtual CNetManager* CreateNetManager();
+    virtual std::unique_ptr<CNetManager> CreateNetManager();
 
     virtual void InitLocatorTable();
 
@@ -249,20 +254,23 @@ public:
 
     virtual long RoundTripToFrameLatency(long rtt);
     virtual void SetFrameLatency(short newFrameLatency, short maxChange = 2, CPlayerManager *slowPlayer = nullptr);
-    virtual long TimeToFrameCount(long timeInMsec);
-    virtual long NextFrameForPeriod(long period, long referenceFrame = 0);
+    virtual FrameNumber TimeToFrameCount(long timeInMsec);
+    virtual FrameNumber NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(int32_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
-    virtual long FramesFromNow(long classicFrames);
 
     void FpsCoefficients(bool fastFPS, Fixed classicCoeff1, Fixed classicCoeff2,
                          Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed* fpsOffset = NULL);
     Fixed FpsCoefficient1(bool fastFPS, Fixed classicMultiplier1);
     Fixed FpsCoefficient2(bool fastFPS, Fixed classicMultiplier2);
     Fixed FpsOffset(bool fastFPS, Fixed classicCoeff2);
-    long FpsFramesPerClassic(bool fastFPS, long classicFrames = 1);
+    FrameNumber FpsFramesPerClassic(bool fastFPS, long classicFrames = 1);
     Fixed ClassicCoefficient2(bool fastFPS, Fixed fpsValue);
     virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);
+    virtual FrameNumber FramesFromNow(FrameNumber classicFrames);
+
+    void SetKeysFromStdin() { keysFromStdin = true; };
+    void SetKeysToStdout() { keysToStdout = true; };
 };
 
 #ifndef MAINAVARAGAME

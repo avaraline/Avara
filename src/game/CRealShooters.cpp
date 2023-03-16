@@ -47,8 +47,8 @@ CAbstractActor *CRealShooters::EndScript() {
         visionRange = ReadFixedVar(iRange);
         shotPower = ReadFixedVar(iShotPower);
         burstLength = ReadLongVar(iBurstLength);
-        burstSpeed = ReadLongVar(iBurstSpeed);
-        burstCharge = ReadLongVar(iBurstCharge);
+        burstSpeed = FrameNumber(ReadLongVar(iBurstSpeed));
+        burstCharge = FrameNumber(ReadLongVar(iBurstCharge));
 
         watchTeams = ReadLongVar(iMask);
         watchMask = ReadLongVar(iWatchMask);
@@ -73,7 +73,7 @@ Fixed EstimateTravelTime(Fixed *delta, Fixed *targSpeed, Fixed missileSpeed, Fix
     Fixed ft, fdt;
     short i;//, j;
 
-    divMS = FDivNZ(FIX(1), missileSpeed);
+    divMS = FDivNZ(FIX1, missileSpeed);
     for (i = 0; i < 3; i++) {
         s[i] = FMul(delta[i], divMS);
         v[i] = FMul(targSpeed[i], divMS);

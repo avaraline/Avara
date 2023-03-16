@@ -51,9 +51,9 @@ CAbstractActor *CTextActor::EndScript() {
 
         nextShowTime = 0;
         restartDelay = ReadLongVar(iRestartFlag);
-        frequency = ReadLongVar(iFrequency);
+        frequency = FrameNumber(ReadLongVar(iFrequency));
 
-        textTimer = ReadLongVar(iTimer);
+        textTimer = FrameNumber(ReadLongVar(iTimer));
         showTime = -1;
 
         soundId = ReadLongVar(iSound);

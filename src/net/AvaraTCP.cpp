@@ -71,9 +71,6 @@ OSErr OpenAvaraTCP() {
     }
     SDL_Log("OpenAvaraTCP\n");
 
-    // TODO: make this configurable
-    ResolveHost(&punchServer, "avara.io", 19555);
-
     gAvaraTCPOpen = true;
     return noErr;
 }
@@ -95,7 +92,7 @@ int CreateSocket(uint16_t port) {
             DestroySocket(sock);
             return -1;
         }
-        
+
         // This is taking advantage of the fact that Avara only ever creates one socket at a time.
         gAvaraSocket = sock;
     } else {
@@ -111,7 +108,11 @@ void DestroySocket(int sock) {
             punchLocal.host = 0;
             punchLocal.port = 0;
         }
+#ifdef WIN32
+        closesocket(sock);
+#else
         close(sock);
+#endif
     }
 }
 
@@ -149,6 +150,10 @@ int ResolveHost(IPaddress *address, const char *host, uint16_t port) {
     return noErr;
 }
 
+void PunchSetup(const char *host, uint16_t port) {
+    ResolveHost(&punchServer, host, port);
+}
+
 void PunchSend(uint8_t cmd, IPaddress &addr) {
     PunchPacket pp = {cmd, addr};
     //SDL_Log("Sending PunchPacket %d = %s", cmd, FormatAddress(pp.address).c_str());
@@ -168,18 +173,22 @@ void PunchSend(uint8_t cmd, IPaddress &addr) {
 }
 
 void PingPunchServer() {
-    if (gAvaraSocket == -1 || punchLocal.port == 0) return;
+    if (gAvaraSocket == -1 || punchLocal.port == 0 || punchServer.port == 0) return;
+
     PunchSend(kPunchPing, punchLocal);
 }
 
 void RegisterPunchServer(IPaddress &localAddr) {
-    memcpy(&punchLocal, &localAddr, sizeof(IPaddress));
+    if (gAvaraSocket == -1 || punchServer.port == 0) return;
+
     SDL_Log("Registering server at %s", FormatAddress(localAddr).c_str());
+    memcpy(&punchLocal, &localAddr, sizeof(IPaddress));
     PingPunchServer();
 }
 
 void RequestPunch(IPaddress &addr) {
-    if (gAvaraSocket == -1) return;
+    if (gAvaraSocket == -1 || punchServer.port == 0) return;
+
     SDL_Log("Requesting that %s punch a hole", FormatAddress(addr).c_str());
     PunchSend(kPunchRequest, addr);
 }
@@ -224,9 +233,11 @@ void CheckSockets() {
 
     if (gAvaraSocket == -1) return;
 
-    if (lastPunchPing == 0 || (SDL_GetTicks() - lastPunchPing >= PUNCHTIME)) {
-        PingPunchServer();
-        lastPunchPing = SDL_GetTicks();
+    if (punchServer.port != 0) {
+        if (lastPunchPing == 0 || (SDL_GetTicks() - lastPunchPing >= PUNCHTIME)) {
+            PingPunchServer();
+            lastPunchPing = SDL_GetTicks();
+        }
     }
 
     fd_set readSet;
@@ -254,7 +265,7 @@ void CheckSockets() {
             packet->address.host = addr.sin_addr.s_addr;
             packet->address.port = addr.sin_port;
             if (bytesRead > 0) {
-                if (packet->address.host == punchServer.host && packet->address.port == punchServer.port) {
+                if (packet->address.host == punchServer.host && packet->address.port == punchServer.port && punchServer.port != 0) {
                     HandlePunchPacket(packet);
                 }
                 else {

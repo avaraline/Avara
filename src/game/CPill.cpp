@@ -23,7 +23,7 @@ void CPill::IAbstractActor() {
     maxShields = FIX(17);
     shootShields = FIX(15);
     shields = maxShields;
-    dropDamage = FIX(1);
+    dropDamage = FIX1;
 
     holdShieldLimit = shootShields;
 

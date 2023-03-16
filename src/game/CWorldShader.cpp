@@ -26,16 +26,10 @@ void CWorldShader::IWorldShader() {
 }
 
 void CWorldShader::Reset() {
-#ifdef USE_OLD_COLORS
-    lowSkyColor = 0xC05020;
-    highSkyColor = 0x2050C0;
-    groundColor = 0;
-    skyShadeCount = 8;
-#endif
-    lowSkyColor = 0xCC;
-    highSkyColor = 0x33;
-    groundColor = 0x33;
-    skyShadeCount = 6;
+    lowSkyColor = DEFAULT_LOW_SKY_COLOR;
+    highSkyColor = DEFAULT_HIGH_SKY_COLOR;
+    groundColor = DEFAULT_GROUND_COLOR;
+    skyShadeCount = DEFAULT_SKY_SHADE_COUNT;
 
     lowSkyAltitude = FIX(0);
     highSkyAltitude = FIX(500);

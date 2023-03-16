@@ -14,7 +14,6 @@
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
 #include "CDepot.h"
-#include "ColorManager.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
 #include "CScout.h"
@@ -85,7 +84,7 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrow->IBSPPart(kDirIndBSP);
     dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
     dirArrow->ignoreDirectionalLights = true;
-    dirArrow->privateAmbient = FIX(1);
+    dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
     hudWorld->AddPart(dirArrow);
 }
@@ -197,7 +196,7 @@ void CAbstractPlayer::ReplacePartColors() {
     }
 }
 
-void CAbstractPlayer::SetSpecialColor(uint32_t specialColor) {
+void CAbstractPlayer::SetSpecialColor(ARGBColor specialColor) {
     longTeamColor = specialColor;
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
@@ -955,6 +954,14 @@ void CAbstractPlayer::FrameAction() {
 }
 
 void CAbstractPlayer::PlayerAction() {
+    if (itsGame->frameNumber == 0 && itsManager->Presence() == kzSpectating) {
+        lives = 0;
+#define EXPLODING_SPECTATORS
+#ifdef EXPLODING_SPECTATORS
+        WasDestroyed();
+#endif
+        GoLimbo(0);  // hides the hector
+    }
     if (lives) {
         itsGame->playersStanding++;
         // Send score updates to other players every 17 seconds worth of frames
@@ -1179,7 +1186,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
 }
 
-void CAbstractPlayer::GoLimbo(long limboDelay) {
+void CAbstractPlayer::GoLimbo(FrameNumber limboDelay) {
     CSmartPart **thePart;
 
     if (boostControlLink) {
@@ -1226,7 +1233,7 @@ void CAbstractPlayer::Reincarnate() {
     // try the least-visited Incarnators until one works
     for (placeList = itsGame->incarnatorList; placeList != nullptr; placeList = placeList->nextIncarnator) {
         if (placeList->enabled && (placeList->colorMask & teamMask) && (placeList->useCount == bestCount)) {
-            if (ReincarnateComplete(placeList)) {
+            if (itsManager->Presence() != kzSpectating && ReincarnateComplete(placeList)) {
                 break;
             }
         }
@@ -1399,7 +1406,7 @@ void CAbstractPlayer::ResumeLevel() {
 
 extern Fixed sliverGravity;
 
-#define INTERPTIME FpsFramesPerClassic(20)
+#define INTERPTIME Fixed(FpsFramesPerClassic(20))
 
 void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
     short count = 16;
@@ -1468,7 +1475,7 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
 }
 
 void CAbstractPlayer::WinAction() {
-    long interFrame;
+    Fixed interFrame;
     Fixed inter2;
 
     interFrame = itsGame->frameNumber - winFrame;

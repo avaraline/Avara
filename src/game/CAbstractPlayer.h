@@ -11,6 +11,7 @@
 #include "CRealMovers.h"
 //#include "LevelScoreRecord.h"
 #include "CAvaraApp.h"
+#include "ColorManager.h"
 #include "GoodyRecord.h"
 #include "KeyFuncs.h"
 #include "PlayerConfig.h"
@@ -42,15 +43,24 @@ class CAbstractPlayer : public CRealMovers {
 public:
     CPlayerManager *itsManager = 0;
     CAbstractPlayer *nextPlayer = 0;
-    PlayerConfigRecord defaultConfig = {0};
+    PlayerConfigRecord defaultConfig = {        
+        .numGrenades = 0,
+        .numMissiles = 0,
+        .numBoosters = 0,
+        .hullType = 0,
+        .frameLatency = 0,
+        .frameTime = 0,
+        .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
+        .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
+    };
 
-    uint32_t longTeamColor = 0; // Hull color in 0x00RRGGBB format.
+    ARGBColor longTeamColor = 0; // Hull color in 0x00RRGGBB format.
 
     //	Shields & energy:
     Fixed energy = 0;
     Fixed maxEnergy = 0; //	Maximum stored energy level
     Fixed classicGeneratorPower, generatorPower = 0; //	Energy gain/frame
-    long boostEndFrame = 0;
+    FrameNumber boostEndFrame = 0;
     long boostsRemaining = 0;
 
     Fixed maxShields = 0; //	Maximum shield energy
@@ -58,8 +68,8 @@ public:
 
     short missileCount = 0;
     short grenadeCount = 0;
-    long nextGrenadeLoad = 0;
-    long nextMissileLoad = 0;
+    FrameNumber nextGrenadeLoad = 0;
+    FrameNumber nextMissileLoad = 0;
 
     short missileLimit = 0;
     short grenadeLimit = 0;
@@ -130,7 +140,7 @@ public:
     Boolean didSelfDestruct = 0;
 
     //	Winning/loosing:
-    long winFrame = 0;
+    FrameNumber winFrame = 0;
     Quaternion winStart = {0};
     Quaternion winEnd = {0};
     Boolean isOut = 0;
@@ -165,7 +175,7 @@ public:
     virtual void AdaptableSettings();
     virtual void LoadHUDParts();
     virtual void ReplacePartColors();
-    virtual void SetSpecialColor(uint32_t specialColor);
+    virtual void SetSpecialColor(ARGBColor specialColor);
     virtual void LoadParts();
     virtual void LoadScout();
     virtual void StartSystems();
@@ -198,7 +208,7 @@ public:
     virtual short GetActorScoringId();
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
 
-    virtual void GoLimbo(long limboDelay);
+    virtual void GoLimbo(FrameNumber limboDelay);
     virtual void Reincarnate();
     virtual bool ReincarnateComplete(CIncarnator *newSpot);
     virtual void IncarnateSound();

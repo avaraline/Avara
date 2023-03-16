@@ -133,7 +133,7 @@ void CScoreKeeper::PlayerJoined() {
 
 void CScoreKeeper::PlayerIntros() {
     short i;
-    CNetManager *theNet = itsGame->itsNet;
+    CNetManager *theNet = itsGame->itsNet.get();
     CPlayerManager *thePlayer;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
@@ -159,7 +159,7 @@ void CScoreKeeper::StopPause(Boolean didPause) {
 }
 
 void CScoreKeeper::NetResultsUpdate() {
-    CNetManager *theNet = itsGame->itsNet;
+    CNetManager *theNet = itsGame->itsNet.get();
     short i, offset;
     CPlayerManager *thePlayer;
 

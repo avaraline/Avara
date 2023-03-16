@@ -27,8 +27,13 @@ typedef uint8_t Str255[256];
 typedef uint8_t Byte;
 typedef int8_t SignedByte;
 
+typedef int32_t FrameNumber;
+typedef int32_t FrameTime;   // 64,32,16(default),8
+
 typedef uint32_t ip_addr;
 typedef uint16_t port_num;
+
+typedef int32_t ClockTick;   // integer counter returned by UDPComm::GetClock()
 
 struct Rect {
     int16_t top;
@@ -66,7 +71,6 @@ struct QElem {
 typedef struct QElem QElem;
 typedef QElem *QElemPtr;
 struct QHdr {
-    volatile int16_t qFlags;
     volatile QElemPtr qHead;
     volatile QElemPtr qTail;
 };

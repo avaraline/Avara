@@ -1,5 +1,5 @@
 #pragma once
-
+#include "ARGBColor.h"
 #include "AvaraDefines.h"
 #include "Messages.h"
 
@@ -20,119 +20,123 @@ enum ColorBlindMode { Off, Deuteranopia, Protanopia, Tritanopia };
 
 class ColorManager {
 public:
-    static inline uint32_t getDefaultTeamColor() {
+    static inline ARGBColor getDefaultTeamColor() {
         return teamColors[0];
     }
 
-    static inline uint32_t getEnergyGaugeColor() {
+    static inline ARGBColor getEnergyGaugeColor() {
         return energyGaugeColor;
     }
 
-    static inline uint32_t getGrenadeSightPrimaryColor() {
+    static inline ARGBColor getGrenadeSightPrimaryColor() {
         return grenadeSightPrimaryColor;
     }
 
-    static inline uint32_t getGrenadeSightSecondaryColor() {
+    static inline ARGBColor getGrenadeSightSecondaryColor() {
         return grenadeSightSecondaryColor;
     }
 
-    static inline uint32_t getLookForwardColor() {
+    static inline ARGBColor getLookForwardColor() {
         return lookForwardColor;
     }
 
-    static inline uint32_t getMissileLockColor() {
+    static inline ARGBColor getMissileLockColor() {
         return missileLockColor;
     }
 
-    static inline uint32_t getMissileSightPrimaryColor() {
+    static inline ARGBColor getMissileSightPrimaryColor() {
         return missileSightPrimaryColor;
     }
 
-    static inline uint32_t getMissileSightSecondaryColor() {
+    static inline ARGBColor getMissileSightSecondaryColor() {
         return missileSightSecondaryColor;
     }
 
-    static inline uint32_t getMissileArmedColor() {
+    static inline ARGBColor getMissileArmedColor() {
         return missileArmedColor;
     }
 
-    static inline uint32_t getMissileLaunchedColor() {
+    static inline ARGBColor getMissileLaunchedColor() {
         return missileLaunchedColor;
     }
 
-    static inline uint32_t getNetDelay1Color() {
+    static inline ARGBColor getNetDelay1Color() {
         return netDelay1Color;
     }
 
-    static inline uint32_t getNetDelay2Color() {
+    static inline ARGBColor getNetDelay2Color() {
         return netDelay2Color;
     }
 
-    static inline uint32_t getPinwheel1Color() {
+    static inline ARGBColor getPinwheel1Color() {
         return pinwheel1Color;
     }
 
-    static inline uint32_t getPinwheel2Color() {
+    static inline ARGBColor getPinwheel2Color() {
         return pinwheel2Color;
     }
 
-    static inline uint32_t getPinwheel3Color() {
+    static inline ARGBColor getPinwheel3Color() {
         return pinwheel3Color;
     }
 
-    static inline uint32_t getPinwheel4Color() {
+    static inline ARGBColor getPinwheel4Color() {
         return pinwheel4Color;
     }
 
-    static inline uint32_t getPlasmaGauge1Color() {
+    static inline ARGBColor getPlasmaGauge1Color() {
         return plasmaGauge1Color;
     }
 
-    static inline uint32_t getPlasmaGauge2Color() {
+    static inline ARGBColor getPlasmaGauge2Color() {
         return plasmaGauge2Color;
     }
 
-    static inline uint32_t getPlasmaSightsOffColor() {
+    static inline ARGBColor getPlasmaSightsOffColor() {
         return plasmaSightsOffColor;
     }
 
-    static inline uint32_t getPlasmaSightsOnColor() {
+    static inline ARGBColor getPlasmaSightsOnColor() {
         return plasmaSightsOnColor;
     }
 
-    static inline uint32_t getShieldGaugeColor() {
+    static inline ARGBColor getShieldGaugeColor() {
         return shieldGaugeColor;
     }
 
-    static inline uint32_t getSpecialBlackColor() {
+    static inline ARGBColor getSpecialBlackColor() {
         return specialBlackColor;
     }
 
-    static inline uint32_t getSpecialWhiteColor() {
+    static inline ARGBColor getSpecialWhiteColor() {
         return specialWhiteColor;
     }
 
-    static inline std::optional<uint32_t> getMarkerColor(uint8_t num) {
+    static inline std::optional<ARGBColor> getMarkerColor(uint8_t num) {
         switch (num) {
             case 0:
                 return 0x00fefefe;
             case 1:
                 return 0x00fe0000;
+            case 2:
+                return 0x000333ff;
+            case 3:
+                return 0x00929292;
             default:
-                return std::optional<uint32_t>{};
+                return std::optional<ARGBColor>{};
         }
     }
 
-    static inline std::optional<uint32_t> getTeamColor(uint8_t num) {
+    static inline std::optional<ARGBColor> getTeamColor(uint8_t num) {
         return (num <= kMaxTeamColors)
             ? teamColors[num]
-            : std::optional<uint32_t>{};
+            : std::optional<ARGBColor>{};
     }
 
-    static inline std::optional<uint32_t> getTeamTextColor(uint8_t num) {
+    static inline std::optional<ARGBColor> getTeamTextColor(uint8_t num) {
         return (num <= kMaxTeamColors)
             ? teamTextColors[num]
-            : std::optional<uint32_t>{};
+            : std::optional<ARGBColor>{};
     }
 
     static inline std::optional<std::string> getTeamColorName(uint8_t num) {
@@ -141,13 +145,17 @@ public:
             : std::optional<std::string>{};
     }
 
-    static inline uint32_t getMessageColor(MsgCategory category) {
-        uint32_t color = 0xffffffff;
+    static inline ARGBColor getMessageColor(MsgCategory category) {
+        ARGBColor color = 0xffffffff;
         size_t idx = static_cast<size_t>(category);
-        if (idx < sizeof(messageColors) / sizeof(uint32_t)) {
+        if (idx < sizeof(messageColors) / sizeof(ARGBColor)) {
             color = messageColors[idx];
         }
         return color;
+    }
+
+    static inline ARGBColor getPingColor(uint8_t num) {
+      return pingColors[num];
     }
 
     static inline float getHudAlpha() {
@@ -156,38 +164,39 @@ public:
 
     static void setColorBlind(ColorBlindMode mode);
     static void setHudAlpha(float alpha);
-    static void setMissileArmedColor(uint32_t color);
-    static void setMissileLaunchedColor(uint32_t color);
+    static void setMissileArmedColor(ARGBColor color);
+    static void setMissileLaunchedColor(ARGBColor color);
 private:
     ColorManager() {}
 
     static ColorBlindMode colorBlindMode;
     static float hudAlpha;
 
-    static uint32_t energyGaugeColor;
-    static uint32_t grenadeSightPrimaryColor;
-    static uint32_t grenadeSightSecondaryColor;
-    static uint32_t lookForwardColor;
-    static uint32_t missileLockColor;
-    static uint32_t missileSightPrimaryColor;
-    static uint32_t missileSightSecondaryColor;
-    static uint32_t missileArmedColor;
-    static uint32_t missileLaunchedColor;
-    static uint32_t netDelay1Color;
-    static uint32_t netDelay2Color;
-    static uint32_t pinwheel1Color;
-    static uint32_t pinwheel2Color;
-    static uint32_t pinwheel3Color;
-    static uint32_t pinwheel4Color;
-    static uint32_t plasmaGauge1Color;
-    static uint32_t plasmaGauge2Color;
-    static uint32_t plasmaSightsOffColor;
-    static uint32_t plasmaSightsOnColor;
-    static uint32_t shieldGaugeColor;
-    static uint32_t specialBlackColor;
-    static uint32_t specialWhiteColor;
-    static uint32_t teamColors[kMaxTeamColors + 1];
-    static uint32_t teamTextColors[kMaxTeamColors + 1];
+    static ARGBColor energyGaugeColor;
+    static ARGBColor grenadeSightPrimaryColor;
+    static ARGBColor grenadeSightSecondaryColor;
+    static ARGBColor lookForwardColor;
+    static ARGBColor missileLockColor;
+    static ARGBColor missileSightPrimaryColor;
+    static ARGBColor missileSightSecondaryColor;
+    static ARGBColor missileArmedColor;
+    static ARGBColor missileLaunchedColor;
+    static ARGBColor netDelay1Color;
+    static ARGBColor netDelay2Color;
+    static ARGBColor pinwheel1Color;
+    static ARGBColor pinwheel2Color;
+    static ARGBColor pinwheel3Color;
+    static ARGBColor pinwheel4Color;
+    static ARGBColor plasmaGauge1Color;
+    static ARGBColor plasmaGauge2Color;
+    static ARGBColor plasmaSightsOffColor;
+    static ARGBColor plasmaSightsOnColor;
+    static ARGBColor shieldGaugeColor;
+    static ARGBColor specialBlackColor;
+    static ARGBColor specialWhiteColor;
+    static ARGBColor teamColors[kMaxTeamColors + 1];
+    static ARGBColor teamTextColors[kMaxTeamColors + 1];
     static std::string teamColorNames[kMaxTeamColors + 1];
-    static uint32_t messageColors[3];
+    static ARGBColor messageColors[3];
+    static ARGBColor pingColors[3];
 };

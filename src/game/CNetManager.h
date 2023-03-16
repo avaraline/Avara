@@ -9,18 +9,21 @@
 
 #pragma once
 #include "AvaraDefines.h"
+#include "ColorManager.h"
 #include "CCommManager.h"
 #include "CDirectObject.h"
 #include "KeyFuncs.h"
 //#include "LevelScoreRecord.h"
 #include "PlayerConfig.h"
+#include "CPlayerManager.h"
 
 #include <SDL2/SDL.h>
 #include <string>
 #include <map>
 #include <vector>
+#include <memory>
 
-#define NULLNETPACKETS (32 + MINIMUMBUFFERRESERVE)
+#define NULLNETPACKETS (MINIMUMBUFFERRESERVE)
 #define SERVERNETPACKETS (16 * 2 * kMaxAvaraPlayers)
 #define CLIENTNETPACKETS (16 * kMaxAvaraPlayers)
 #define TCPNETPACKETS (32 * kMaxAvaraPlayers)
@@ -49,7 +52,6 @@ void ServerOptionsDialog();
 #define kAllowTeamControlBitMask ((1 << kFreeColorBit) + (1 << kAllowOwnColorBit))
 class CAvaraGame;
 class CCommManager;
-class CPlayerManager;
 class CProtoControl;
 // class	CRosterWindow;
 class CAbstractPlayer;
@@ -66,7 +68,7 @@ typedef union
 class CNetManager : public CDirectObject {
 public:
     CAvaraGame *itsGame;
-    CCommManager *itsCommManager;
+    std::unique_ptr<CCommManager> itsCommManager;
     CProtoControl *itsProtoControl;
     // CRosterWindow	*theRoster;
 
@@ -74,14 +76,14 @@ public:
     CPlayerManager *playerTable[kMaxAvaraPlayers];
 
     char teamColors[kMaxAvaraPlayers];
-    char slotToPosition[kMaxAvaraPlayers];
-    char positionToSlot[kMaxAvaraPlayers];
+    int8_t slotToPosition[kMaxAvaraPlayers];
+    int8_t positionToSlot[kMaxAvaraPlayers];
 
-    short activePlayersDistribution;
-    short readyPlayers;
-    short unavailablePlayers;
-    short startPlayersDistribution;
-    short totalDistribution;
+    uint16_t activePlayersDistribution;
+    uint16_t readyPlayers;
+    uint16_t readyPlayersConsensus;
+    uint16_t startPlayersDistribution;
+    uint16_t totalDistribution;
     short netStatus;
     CDirectObject *netOwner;
     short deadOrDonePlayers;
@@ -92,7 +94,16 @@ public:
     short serverOptions;
     short loaderSlot;
 
-    PlayerConfigRecord config;
+    PlayerConfigRecord config = {        
+        .numGrenades = 0,
+        .numMissiles = 0,
+        .numBoosters = 0,
+        .hullType = 0,
+        .frameLatency = 0,
+        .frameTime = 0,
+        .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
+        .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
+    };
 
     // TaggedGameResult	gameResult;
 
@@ -103,7 +114,7 @@ public:
     long localLatencyVote;
     long autoLatencyVote;
     long autoLatencyVoteCount;
-    long latencyVoteFrame;
+    FrameNumber latencyVoteFrame;
     short maxRoundTripLatency;
     short addOneLatency;
     long subtractOneCheck;
@@ -119,6 +130,7 @@ public:
     //char msgBuffer[kMaxChatMessageBufferLen];
     std::vector<char> msgBuffer;
 
+    ~CNetManager() { Dispose(); };
     virtual void INetManager(CAvaraGame *theGame);
     virtual CPlayerManager* CreatePlayerManager(short);
     virtual void LevelReset();
@@ -131,15 +143,15 @@ public:
     virtual void SendRealName(short toSlot);
     virtual void RealNameReport(short slot, short regStatus, StringPtr realName);
     virtual void NameChange(StringPtr newName);
-    virtual void RecordNameAndLocation(short slotId, StringPtr theName, short status, Point location);
+    virtual void RecordNameAndState(short slotId, StringPtr theName, LoadingState status, PresenceType presence);
     virtual void ValueChange(short slot, std::string attributeName, bool value);
 
     virtual void SwapPositions(short ind1, short ind2);
     virtual void PositionsChanged(char *p);
 
     virtual void FlushMessageBuffer();
-    virtual void BufferMessage(short len, char *c);
-    virtual void SendRosterMessage(short len, char *c);
+    virtual void BufferMessage(size_t len, char *c);
+    virtual void SendRosterMessage(size_t len, char *c);
     virtual void ReceiveRosterMessage(short slotId, short len, char *c);
     virtual void SendColorChange();
     virtual void ReceiveColorChange(char *newColors);
@@ -151,7 +163,7 @@ public:
     virtual void ReceiveLoadLevel(short senderSlot, int16_t distribution, char *setAndTag, Fixed seed);
     virtual void LevelLoadStatus(short senderSlot, short crc, OSErr err, std::string theTag);
 
-    virtual void SendPingCommand(int totalTrips = 0);
+    virtual void SendPingCommand(int trips);
     virtual Boolean ResumeEnabled();
     virtual bool CanPlay();
     virtual void SendStartCommand(int16_t originalSender = 0);
@@ -159,10 +171,10 @@ public:
 
     virtual void SendResumeCommand(int16_t originalSender = 0);
     virtual void ReceiveResumeCommand(short activeDistribution, short fromSlot, Fixed randomKey, int16_t originalSender);
-    virtual void ReceivedUnavailable(short slot, short fromSlot);
+    virtual void ReceiveReady(short slot, uint32_t readyPlayers);
 
-    virtual void ReceivePlayerStatus(short slotId, short newStatus, Fixed randomKey, long winFrame);
-    virtual void ReceiveJSON(short slotId, Fixed randomKey, long winFrame, std::string json);
+    virtual void ReceivePlayerStatus(short slotId, LoadingState newStatus, PresenceType newPresence, Fixed randomKey, FrameNumber winFrame);
+    virtual void ReceiveJSON(short slotId, Fixed randomKey, FrameNumber winFrame, std::string json);
 
     virtual short PlayerCount();
 
@@ -171,14 +183,14 @@ public:
     virtual bool IAmAlive();
 
     //	Game loop methods:
-
+    size_t SkipLostPackets(int16_t dist);
     virtual Boolean GatherPlayers(Boolean isFreshMission);
     virtual void UngatherPlayers();
 
     virtual void ResumeGame();
     virtual void FrameAction();
     virtual void HandleEvent(SDL_Event &event);
-    virtual void AutoLatencyControl(long frameNumber, Boolean didWait);
+    virtual void AutoLatencyControl(FrameNumber frameNumber, Boolean didWait);
     virtual bool IsAutoLatencyEnabled();
     virtual bool IsFragmentCheckWindowOpen();
     virtual void ResetLatencyVote();
@@ -200,7 +212,7 @@ public:
 
     virtual Boolean PermissionQuery(short reason, short index);
     virtual void ChangedServerOptions(short curOptions);
-    virtual void NewArrival(short slot);
+    virtual void NewArrival(short slot, PresenceType presence);
 
     virtual void ResultsReport(Ptr results);
 

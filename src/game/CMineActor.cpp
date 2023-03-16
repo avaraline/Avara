@@ -22,7 +22,7 @@
 
 void CMineActor::BeginScript() {
     maskBits |= kTargetBit + kSolidBit;
-    shields = FIX(1);
+    shields = FIX1;
     hitScore = 5;
     destructScore = 20;
 
@@ -187,14 +187,14 @@ void CMineActor::FrameAction() {
             lookNextTime = phase + lookTime;
 
             if (lookTime) {
-                CAbstractActor *theActor;
+                //CAbstractActor *theActor;
                 CSmartPart *thePart;
 
                 BuildPartProximityList(location, radius, watchBits);
-                theActor = itsGame->actorList;
+                //theActor = itsGame->actorList;
 
                 for (thePart = proximityList.p; thePart; thePart = (CSmartPart *)thePart->nextTemp) {
-                    theActor = thePart->theOwner;
+                    //theActor = thePart->theOwner;
                     if (radius + thePart->enclosureRadius >
                         FDistanceEstimate(location[0] - thePart->sphereGlobCenter[0],
                             location[1] - thePart->sphereGlobCenter[1],

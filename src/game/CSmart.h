@@ -24,7 +24,7 @@ public:
     Fixed thrust;
     Fixed angleStep;
     short inSight;
-    long fireFrame;
+    FrameNumber fireFrame;
 
     virtual void IWeapon(CDepot *theDepot);
     virtual void ResetWeapon();

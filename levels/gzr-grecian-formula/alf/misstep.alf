@@ -1,167 +1,167 @@
 <map>
-  <Field deltaY="0" deltaZ=".3" visible="false" fill="#00d5ff" frame="#000000" x="79.93055555555556" z="25.79861111111111" w="25" d="3.125" h="0" />
-  <Field deltaY="0" deltaZ=".3" visible="false" fill="#00d5ff" frame="#000000" x="104.93055555555556" z="25.79861111111111" w="25" d="3.125" h="0" />
-  <Field deltaY="0" deltaZ="-.3" visible="false" fill="#00d5ff" frame="#000000" x="79.93055555555556" z="97.74305555555556" w="25" d="3.125" h="0" />
-  <Field deltaY="0" deltaZ="-.3" visible="false" fill="#00d5ff" frame="#000000" x="104.93055555555556" z="97.74305555555556" w="25" d="3.125" h="0" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br44" spin="0" fill="#000000" frame="#000000" cx="103.05555555555556" cz="94.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by44" spin="0" fill="#000000" frame="#000000" cx="103.05555555555556" cz="94.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@wr43" spin="0" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="84.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@wy43" spin="0" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="84.30555555555556" angle="270" />
+  <Field deltaY="0" deltaZ=".3" visible="false" color="#00d5ff" color.1="#000000" x="79.93055555555556" z="25.79861111111111" w="25" d="3.125" h="0" />
+  <Field deltaY="0" deltaZ=".3" visible="false" color="#00d5ff" color.1="#000000" x="104.93055555555556" z="25.79861111111111" w="25" d="3.125" h="0" />
+  <Field deltaY="0" deltaZ="-.3" visible="false" color="#00d5ff" color.1="#000000" x="79.93055555555556" z="97.74305555555556" w="25" d="3.125" h="0" />
+  <Field deltaY="0" deltaZ="-.3" visible="false" color="#00d5ff" color.1="#000000" x="104.93055555555556" z="97.74305555555556" w="25" d="3.125" h="0" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br44" spin="0" color="#000000" color.1="#000000" cx="103.05555555555556" cz="94.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by44" spin="0" color="#000000" color.1="#000000" cx="103.05555555555556" cz="94.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@wr43" spin="0" color="#ffffff" color.1="#000000" cx="102.43055555555556" cz="84.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@wy43" spin="0" color="#ffffff" color.1="#000000" cx="102.43055555555556" cz="84.30555555555556" angle="270" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="102.43055555555556" z="94.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="102.43055555555556" z="94.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br12" spin="0" fill="#000000" frame="#000000" cx="72.43055555555556" cz="49.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by12" spin="0" fill="#000000" frame="#000000" cx="72.43055555555556" cz="49.30555555555556" angle="270" />
+  <Wall color="#ffffff" color.1="#000000" x="72.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br12" spin="0" color="#000000" color.1="#000000" cx="72.43055555555556" cz="49.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by12" spin="0" color="#000000" color.1="#000000" cx="72.43055555555556" cz="49.30555555555556" angle="270" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="49.236111111111114" w="10" d="10" h="0" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br13" spin="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="69.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by13" spin="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="69.30555555555556" angle="270" />
+  <Wall color="#ffffff" color.1="#000000" x="72.43055555555556" z="49.236111111111114" w="10" d="10" h="0" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br13" spin="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="69.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by13" spin="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="69.30555555555556" angle="270" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="72.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="50" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#ffffff" frame="#000000" cx="62.465277777777786" cz="59.270833333333336" angle="45" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" color="#ffffff" color.1="#000000" cx="62.465277777777786" cz="59.270833333333336" angle="45" />
   <Timer in="mSwitch" out="mShow2" wait="50" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#ffffff" frame="#000000" cx="62.465277777777786" cz="59.270833333333336" angle="45" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br14" spin="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by14" spin="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" color="#ffffff" color.1="#000000" cx="62.465277777777786" cz="59.270833333333336" angle="45" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br14" spin="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by14" spin="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
   <set timeLimit="300" missilePower="1.75" missileAcceleration="0.2" grenadePower="2.5" kDefaultLives="300" kInfinity="10000" kTeleportTheRestDelay="20" kTeamScore1="15" kSnText="snTextBlip" kTextVolume="0.3" wh="0" gameLength="4685" />
   <Timer in="@start" out="@gameEnds" wait="gameLength" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" fill="#000000" frame="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row4" group="@wr53" spin="0" fill="#ffffff" frame="#000000" cx="112.43055555555556" cz="79.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@wy53" spin="0" fill="#ffffff" frame="#000000" cx="112.43055555555556" cz="79.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row4" group="@wr51" spin="0" fill="#ffffff" frame="#000000" cx="112.43055555555556" cz="39.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@wy51" spin="0" fill="#ffffff" frame="#000000" cx="112.43055555555556" cz="39.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@br52" spin="0" fill="#000000" frame="#000000" cx="112.43055555555556" cz="49.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowback" group="@by52" spin="0" fill="#000000" frame="#000000" cx="112.43055555555556" cz="49.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@wr41" spin="0" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="44.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@wy41" spin="0" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="44.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row4" group="@wr52" spin="0" fill="#ffffff" frame="#000000" cx="112.43055555555556" cz="59.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@wy52" spin="0" fill="#ffffff" frame="#000000" cx="112.43055555555556" cz="59.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br42" spin="0" fill="#000000" frame="#000000" cx="102.43055555555556" cz="54.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by42" spin="0" fill="#000000" frame="#000000" cx="102.43055555555556" cz="54.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br43" spin="0" fill="#000000" frame="#000000" cx="103.05555555555556" cz="74.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by43" spin="0" fill="#000000" frame="#000000" cx="103.05555555555556" cz="74.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@br53" spin="0" fill="#000000" frame="#000000" cx="113.05555555555556" cz="69.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowback" group="@by53" spin="0" fill="#000000" frame="#000000" cx="113.05555555555556" cz="69.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@wr42" spin="0" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="64.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@wy42" spin="0" fill="#ffffff" frame="#000000" cx="102.43055555555556" cz="64.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@br54" spin="0" fill="#000000" frame="#000000" cx="113.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowback" group="@by54" spin="0" fill="#000000" frame="#000000" cx="113.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br24" spin="0" fill="#000000" frame="#000000" cx="83.05555555555556" cz="94.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by24" spin="0" fill="#000000" frame="#000000" cx="83.05555555555556" cz="94.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@br34" spin="0" fill="#000000" frame="#000000" cx="93.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@by34" spin="0" fill="#000000" frame="#000000" cx="93.05555555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@wr33" spin="0" fill="#ffffff" frame="#000000" cx="92.43055555555556" cz="79.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@wy33" spin="0" fill="#ffffff" frame="#000000" cx="92.43055555555556" cz="79.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@wr23" spin="0" fill="#ffffff" frame="#000000" cx="82.43055555555556" cz="84.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@wy23" spin="0" fill="#ffffff" frame="#000000" cx="82.43055555555556" cz="84.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@br33" spin="0" fill="#000000" frame="#000000" cx="93.05555555555556" cz="69.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@by33" spin="0" fill="#000000" frame="#000000" cx="93.05555555555556" cz="69.30555555555556" angle="270" />
-  <Teleporter group="-1" y="-30" activeRange="130" deadRange="100" destGroup="@recenter" shape="0" fill="#0080ff" frame="#000000" cx="92.98611111111111" cz="59.30555555555556" angle="45" />
-  <Teleporter y="30" shape="0" group="@recenter" fill="#0080ff" frame="#000000" cx="92.98611111111111" cz="59.30555555555556" angle="45" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@wr32" spin="0" fill="#ffffff" frame="#000000" cx="92.43055555555556" cz="59.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@wy32" spin="0" fill="#ffffff" frame="#000000" cx="92.43055555555556" cz="59.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br23" spin="0" fill="#000000" frame="#000000" cx="83.05555555555556" cz="74.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by23" spin="0" fill="#000000" frame="#000000" cx="83.05555555555556" cz="74.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@wr22" spin="0" fill="#ffffff" frame="#000000" cx="82.43055555555556" cz="64.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@wy22" spin="0" fill="#ffffff" frame="#000000" cx="82.43055555555556" cz="64.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@wr21" spin="0" fill="#ffffff" frame="#000000" cx="82.43055555555556" cz="44.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@wy21" spin="0" fill="#ffffff" frame="#000000" cx="82.43055555555556" cz="44.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@br32" spin="0" fill="#000000" frame="#000000" cx="92.43055555555556" cz="49.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@by32" spin="0" fill="#000000" frame="#000000" cx="92.43055555555556" cz="49.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@wr12" spin="0" fill="#ffffff" frame="#000000" cx="72.43055555555556" cz="59.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row2" group="@wy12" spin="0" fill="#ffffff" frame="#000000" cx="72.43055555555556" cz="59.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br22" spin="0" fill="#000000" frame="#000000" cx="82.43055555555556" cz="54.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by22" spin="0" fill="#000000" frame="#000000" cx="82.43055555555556" cz="54.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@br51" spin="0" fill="#000000" frame="#000000" cx="112.43055555555556" cz="29.305555555555557" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowback" group="@by51" spin="0" fill="#000000" frame="#000000" cx="112.43055555555556" cz="29.305555555555557" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br41" spin="0" fill="#000000" frame="#000000" cx="102.43055555555556" cz="34.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by41" spin="0" fill="#000000" frame="#000000" cx="102.43055555555556" cz="34.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@br31" spin="0" fill="#000000" frame="#000000" cx="92.43055555555556" cz="29.305555555555557" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@by31" spin="0" fill="#000000" frame="#000000" cx="92.43055555555556" cz="29.305555555555557" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br21" spin="0" fill="#000000" frame="#000000" cx="82.43055555555556" cz="34.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by21" spin="0" fill="#000000" frame="#000000" cx="82.43055555555556" cz="34.30555555555556" angle="270" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter start="@gameEnds" y="0" activeRange="1000" yon="0.01" win="0" color="#000000" color.1="#000000" cx="73.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row4" group="@wr53" spin="0" color="#ffffff" color.1="#000000" cx="112.43055555555556" cz="79.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@wy53" spin="0" color="#ffffff" color.1="#000000" cx="112.43055555555556" cz="79.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row4" group="@wr51" spin="0" color="#ffffff" color.1="#000000" cx="112.43055555555556" cz="39.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@wy51" spin="0" color="#ffffff" color.1="#000000" cx="112.43055555555556" cz="39.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@br52" spin="0" color="#000000" color.1="#000000" cx="112.43055555555556" cz="49.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowback" group="@by52" spin="0" color="#000000" color.1="#000000" cx="112.43055555555556" cz="49.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@wr41" spin="0" color="#ffffff" color.1="#000000" cx="102.43055555555556" cz="44.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@wy41" spin="0" color="#ffffff" color.1="#000000" cx="102.43055555555556" cz="44.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row4" group="@wr52" spin="0" color="#ffffff" color.1="#000000" cx="112.43055555555556" cz="59.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@wy52" spin="0" color="#ffffff" color.1="#000000" cx="112.43055555555556" cz="59.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br42" spin="0" color="#000000" color.1="#000000" cx="102.43055555555556" cz="54.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by42" spin="0" color="#000000" color.1="#000000" cx="102.43055555555556" cz="54.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br43" spin="0" color="#000000" color.1="#000000" cx="103.05555555555556" cz="74.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by43" spin="0" color="#000000" color.1="#000000" cx="103.05555555555556" cz="74.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@br53" spin="0" color="#000000" color.1="#000000" cx="113.05555555555556" cz="69.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowback" group="@by53" spin="0" color="#000000" color.1="#000000" cx="113.05555555555556" cz="69.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@wr42" spin="0" color="#ffffff" color.1="#000000" cx="102.43055555555556" cz="64.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@wy42" spin="0" color="#ffffff" color.1="#000000" cx="102.43055555555556" cz="64.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@br54" spin="0" color="#000000" color.1="#000000" cx="113.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowback" group="@by54" spin="0" color="#000000" color.1="#000000" cx="113.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br24" spin="0" color="#000000" color.1="#000000" cx="83.05555555555556" cz="94.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by24" spin="0" color="#000000" color.1="#000000" cx="83.05555555555556" cz="94.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@br34" spin="0" color="#000000" color.1="#000000" cx="93.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@by34" spin="0" color="#000000" color.1="#000000" cx="93.05555555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@wr33" spin="0" color="#ffffff" color.1="#000000" cx="92.43055555555556" cz="79.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@wy33" spin="0" color="#ffffff" color.1="#000000" cx="92.43055555555556" cz="79.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@wr23" spin="0" color="#ffffff" color.1="#000000" cx="82.43055555555556" cz="84.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@wy23" spin="0" color="#ffffff" color.1="#000000" cx="82.43055555555556" cz="84.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@br33" spin="0" color="#000000" color.1="#000000" cx="93.05555555555556" cz="69.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@by33" spin="0" color="#000000" color.1="#000000" cx="93.05555555555556" cz="69.30555555555556" angle="270" />
+  <Teleporter group="-1" y="-30" activeRange="130" deadRange="100" destGroup="@recenter" shape="0" color="#0080ff" color.1="#000000" cx="92.98611111111111" cz="59.30555555555556" angle="45" />
+  <Teleporter y="30" shape="0" group="@recenter" color="#0080ff" color.1="#000000" cx="92.98611111111111" cz="59.30555555555556" angle="45" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@wr32" spin="0" color="#ffffff" color.1="#000000" cx="92.43055555555556" cz="59.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@wy32" spin="0" color="#ffffff" color.1="#000000" cx="92.43055555555556" cz="59.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br23" spin="0" color="#000000" color.1="#000000" cx="83.05555555555556" cz="74.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by23" spin="0" color="#000000" color.1="#000000" cx="83.05555555555556" cz="74.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@wr22" spin="0" color="#ffffff" color.1="#000000" cx="82.43055555555556" cz="64.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@wy22" spin="0" color="#ffffff" color.1="#000000" cx="82.43055555555556" cz="64.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@wr21" spin="0" color="#ffffff" color.1="#000000" cx="82.43055555555556" cz="44.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@wy21" spin="0" color="#ffffff" color.1="#000000" cx="82.43055555555556" cz="44.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@br32" spin="0" color="#000000" color.1="#000000" cx="92.43055555555556" cz="49.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@by32" spin="0" color="#000000" color.1="#000000" cx="92.43055555555556" cz="49.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@wr12" spin="0" color="#ffffff" color.1="#000000" cx="72.43055555555556" cz="59.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row2" group="@wy12" spin="0" color="#ffffff" color.1="#000000" cx="72.43055555555556" cz="59.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br22" spin="0" color="#000000" color.1="#000000" cx="82.43055555555556" cz="54.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by22" spin="0" color="#000000" color.1="#000000" cx="82.43055555555556" cz="54.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row3" group="@br51" spin="0" color="#000000" color.1="#000000" cx="112.43055555555556" cz="29.305555555555557" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowback" group="@by51" spin="0" color="#000000" color.1="#000000" cx="112.43055555555556" cz="29.305555555555557" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@br41" spin="0" color="#000000" color.1="#000000" cx="102.43055555555556" cz="34.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@yellowstart" group="@by41" spin="0" color="#000000" color.1="#000000" cx="102.43055555555556" cz="34.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row1" group="@br31" spin="0" color="#000000" color.1="#000000" cx="92.43055555555556" cz="29.305555555555557" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row5" group="@by31" spin="0" color="#000000" color.1="#000000" cx="92.43055555555556" cz="29.305555555555557" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@br21" spin="0" color="#000000" color.1="#000000" cx="82.43055555555556" cz="34.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@by21" spin="0" color="#000000" color.1="#000000" cx="82.43055555555556" cz="34.30555555555556" angle="270" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="92.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="92.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="82.43055555555556" z="34.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="82.43055555555556" z="34.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="82.43055555555556" z="74.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="82.43055555555556" z="74.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="112.43055555555556" z="49.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="112.43055555555556" z="49.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="112.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="112.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="112.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="112.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="92.43055555555556" z="49.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="92.43055555555556" z="49.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="92.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="92.43055555555556" z="69.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="92.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="92.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="72.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="72.43055555555556" z="89.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="102.43055555555556" z="34.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="102.43055555555556" z="34.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="102.43055555555556" z="54.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="102.43055555555556" z="54.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="102.43055555555556" z="74.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="102.43055555555556" z="74.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="82.43055555555556" z="54.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="82.43055555555556" z="54.30555555555556" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="112.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="112.43055555555556" z="29.305555555555557" w="10" d="10" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#ffffff" frame="#000000" x="82.43055555555556" z="94.30555555555556" w="10" d="10" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="82.43055555555556" z="94.30555555555556" w="10" d="10" h="0" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="5" cx="136.80555555555557" cz="65.48611111111111" angle="270" />
   <Incarnator y="10" mask="T2" cx="136.80555555555557" cz="65.48611111111111" angle="270" />
-  <Teleporter shape="0" y="15" mask="T2" group="@yellowstart" spin="0" fill="#fffc41" frame="#000000" cx="136.80555555555557" cz="65.48611111111111" angle="270" />
-  <Teleporter y="20" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="136.80555555555557" cz="65.48611111111111" angle="270" />
+  <Teleporter shape="0" y="15" mask="T2" group="@yellowstart" spin="0" color="#fffc41" color.1="#000000" cx="136.80555555555557" cz="65.48611111111111" angle="270" />
+  <Teleporter y="20" group="@yellow" shape="0" spin="0" color="#fffc41" color.1="#000000" cx="136.80555555555557" cz="65.48611111111111" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="136.80555555555557" cz="65.48611111111111" angle="270" />
+  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#fffc41" color.1="#000000" cx="136.80555555555557" cz="65.48611111111111" angle="270" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="5" cx="136.80555555555557" cz="59.30555555555556" angle="270" />
   <Incarnator y="10" mask="T2" cx="136.80555555555557" cz="59.30555555555556" angle="270" />
-  <Teleporter shape="0" y="15" mask="T2" group="@yellowstart" spin="0" fill="#fffc41" frame="#000000" cx="136.80555555555557" cz="59.30555555555556" angle="270" />
-  <Teleporter y="20" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="136.80555555555557" cz="59.30555555555556" angle="270" />
+  <Teleporter shape="0" y="15" mask="T2" group="@yellowstart" spin="0" color="#fffc41" color.1="#000000" cx="136.80555555555557" cz="59.30555555555556" angle="270" />
+  <Teleporter y="20" group="@yellow" shape="0" spin="0" color="#fffc41" color.1="#000000" cx="136.80555555555557" cz="59.30555555555556" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="136.80555555555557" cz="59.30555555555556" angle="270" />
+  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#fffc41" color.1="#000000" cx="136.80555555555557" cz="59.30555555555556" angle="270" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="5" cx="48.263888888888886" cz="52.84722222222223" angle="90" />
   <Incarnator y="10" mask="T3" cx="48.263888888888886" cz="52.84722222222223" angle="90" />
-  <Teleporter shape="0" y="15" mask="T3" group="@redstart" spin="0" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="52.84722222222223" angle="90" />
-  <Teleporter y="20" group="@red" shape="0" spin="0" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="52.84722222222223" angle="90" />
+  <Teleporter shape="0" y="15" mask="T3" group="@redstart" spin="0" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="52.84722222222223" angle="90" />
+  <Teleporter y="20" group="@red" shape="0" spin="0" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="52.84722222222223" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="52.84722222222223" angle="90" />
+  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="52.84722222222223" angle="90" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="5" cx="48.263888888888886" cz="59.16666666666667" angle="90" />
   <Incarnator y="10" mask="T3" cx="48.263888888888886" cz="59.16666666666667" angle="90" />
-  <Teleporter shape="0" y="15" mask="T3" group="@redstart" spin="0" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="59.16666666666667" angle="90" />
-  <Teleporter y="20" group="@red" shape="0" spin="0" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="59.16666666666667" angle="90" />
+  <Teleporter shape="0" y="15" mask="T3" group="@redstart" spin="0" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="59.16666666666667" angle="90" />
+  <Teleporter y="20" group="@red" shape="0" spin="0" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="59.16666666666667" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="59.16666666666667" angle="90" />
+  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="59.16666666666667" angle="90" />
   <unique vars="mShow1 mTaken1 mSwitch mShow2" />
   <And in="@start" out="mShow2" />
   <Timer in="mTaken1" out="mShow1" wait="50" />
-  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" fill="#ff2600" frame="#000000" cx="122.46527777777777" cz="59.34027777777778" angle="45" />
+  <Goody shape="bspMissile" y="2" speed="2" missiles="8" start="mShow1" out="mSwitch" color="#ff2600" color.1="#000000" cx="122.46527777777777" cz="59.34027777777778" angle="45" />
   <Timer in="mSwitch" out="mShow2" wait="50" />
-  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" fill="#ff2600" frame="#000000" cx="122.46527777777777" cz="59.34027777777778" angle="45" />
+  <Goody shape="bspGrenade" y="2" speed="2" grenades="12" start="mShow2" out="mTaken1" color="#ff2600" color.1="#000000" cx="122.46527777777777" cz="59.34027777777778" angle="45" />
   <Base in="@badHectors" out="@teleportTheRest" cx="121.45833333333334" cz="580.2777777777778" />
   <Text in="@badHectors" showEveryone="true" text="HECTORS must be red or yellow." sound="0" cx="121.45833333333334" cz="580.2777777777778" r="2.569444444444457" />
-  <Goody out="@badHectors" shape="bspW3x3" fill="#ff2600" frame="#000000" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
+  <Goody out="@badHectors" shape="bspW3x3" color="#ff2600" color.1="#000000" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="4" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
@@ -174,101 +174,101 @@
   <Walker team="6" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="6" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
   <Walker team="6" defaultLives="0" cx="121.45833333333334" cz="580.2777777777778" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
-  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" fill="#ff2600" frame="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
+  <Teleporter sound="0" shape="0" yon="0.01" status="false" y="20" activeRange="kInfinity" start="@teleportTheRest" win="0" color="#ff2600" color.1="#000000" cx="142.77777777777777" cz="580.3472222222223" angle="45" />
   <Timer in.0="@yellowWins" in.1="@blueWins" in.2="@redWins" in.3="@pinkWIns" in.4="@purpleWins" in.5="@cyanWins" wait="1" out="@teleportTheRest" />
   <set designer="Cowboy - jmcald@destiny.esd105.wednet.edu" information="Teams are red and yellow.  Up to three people on a team.  Reach your opponents side as many times as possible.  Black stars send you back two - white stars only one.  5 minutes or 15 points.  Idea by Taz, Head and Cowboy." />
-  <SkyColor fill="#fffc41" frame="#00d5ff" />
-  <GroundColor fill="#000000" />
+  <SkyColor color="#fffc41" color.1="#00d5ff" />
+  <GroundColor color="#000000" />
   <set wallHeight=".1" />
-  <Wall fill="#ff2600" frame="#000000" x="62.43055555555556" z="59.30555555555556" w="8.75" d="8.75" h="0" />
-  <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T2" group="@yellow" destGroup="@yellow" out="@add1Yellow" fill="#000000" frame="#000000" cx="10.45138888888889" cz="1.840277777777778" angle="0.5" />
+  <Wall color="#ff2600" color.1="#000000" x="62.43055555555556" z="59.30555555555556" w="8.75" d="8.75" h="0" />
+  <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T2" group="@yellow" destGroup="@yellow" out="@add1Yellow" color="#000000" color.1="#000000" cx="10.45138888888889" cz="1.840277777777778" angle="0.5" />
   <set wallHeight=".1" />
-  <Wall fill="#fffb00" frame="#000000" x="122.43055555555556" z="59.30555555555556" w="8.75" d="8.75" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="122.43055555555556" z="59.30555555555556" w="8.75" d="8.75" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#00d5ff" frame="#000000" x="94.93055555555557" z="23.993055555555557" w="116.25" d="0.625" h="0" />
+  <Wall color="#00d5ff" color.1="#000000" x="94.93055555555557" z="23.993055555555557" w="116.25" d="0.625" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#00d5ff" frame="#000000" x="94.93055555555557" z="99.61805555555556" w="116.25" d="0.625" h="0" />
+  <Wall color="#00d5ff" color.1="#000000" x="94.93055555555557" z="99.61805555555556" w="116.25" d="0.625" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#00d5ff" frame="#000000" x="37.11805555555556" z="61.80555555555556" w="0.625" d="75" h="0" />
+  <Wall color="#00d5ff" color.1="#000000" x="37.11805555555556" z="61.80555555555556" w="0.625" d="75" h="0" />
   <set wallHeight="0" />
-  <Wall fill="#00d5ff" frame="#000000" x="152.74305555555557" z="61.80555555555556" w="0.625" d="75" h="0" />
-  <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T3" group="@red" destGroup="@red" out="@add1Red" fill="#000000" frame="#000000" cx="122.43055555555556" cz="59.30555555555556" angle="0.5" />
+  <Wall color="#00d5ff" color.1="#000000" x="152.74305555555557" z="61.80555555555556" w="0.625" d="75" h="0" />
+  <Teleporter activeRange="5" shape="bspGroundStar" speed="0" y=".2" mask="T3" group="@red" destGroup="@red" out="@add1Red" color="#000000" color.1="#000000" cx="122.43055555555556" cz="59.30555555555556" angle="0.5" />
   <set wallYon=".001" />
-  <Wall fill="#00d5ff" frame="#000000" x="94.93055555555557" z="21.493055555555557" w="125" d="4.375" h="20" />
+  <Wall color="#00d5ff" color.1="#000000" x="94.93055555555557" z="21.493055555555557" w="125" d="4.375" h="20" />
   <set wallYon=".001" />
-  <Wall fill="#00d5ff" frame="#000000" x="94.93055555555557" z="102.11805555555556" w="125" d="4.375" h="20" />
+  <Wall color="#00d5ff" color.1="#000000" x="94.93055555555557" z="102.11805555555556" w="125" d="4.375" h="20" />
   <set wallYon=".001" />
-  <Wall fill="#00d5ff" frame="#000000" x="155.24305555555557" z="61.80555555555556" w="4.375" d="76.25" h="20" />
+  <Wall color="#00d5ff" color.1="#000000" x="155.24305555555557" z="61.80555555555556" w="4.375" d="76.25" h="20" />
   <set wallYon=".001" />
-  <Wall fill="#00d5ff" frame="#000000" x="34.61805555555556" z="61.80555555555556" w="4.375" d="76.25" h="20" />
-  <Teleporter shape="0" y="30" mask="T2" group="@yellowback" spin="0" fill="#000000" frame="#000000" cx="148.05555555555557" cz="27.708333333333336" angle="240" />
-  <Teleporter shape="0" y="30" mask="T3" group="@redback" spin="0" fill="#000000" frame="#000000" cx="41.736111111111114" cz="27.36111111111111" angle="120" />
-  <Teleporter shape="0" y="30" mask="T2" group="@yellowback" spin="0" fill="#000000" frame="#000000" cx="148.05555555555557" cz="96.18055555555556" angle="300" />
-  <Teleporter shape="0" y="30" mask="T3" group="@redback" spin="0" fill="#000000" frame="#000000" cx="41.736111111111114" cz="96.18055555555556" angle="60" />
+  <Wall color="#00d5ff" color.1="#000000" x="34.61805555555556" z="61.80555555555556" w="4.375" d="76.25" h="20" />
+  <Teleporter shape="0" y="30" mask="T2" group="@yellowback" spin="0" color="#000000" color.1="#000000" cx="148.05555555555557" cz="27.708333333333336" angle="240" />
+  <Teleporter shape="0" y="30" mask="T3" group="@redback" spin="0" color="#000000" color.1="#000000" cx="41.736111111111114" cz="27.36111111111111" angle="120" />
+  <Teleporter shape="0" y="30" mask="T2" group="@yellowback" spin="0" color="#000000" color.1="#000000" cx="148.05555555555557" cz="96.18055555555556" angle="300" />
+  <Teleporter shape="0" y="30" mask="T3" group="@redback" spin="0" color="#000000" color.1="#000000" cx="41.736111111111114" cz="96.18055555555556" angle="60" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="3" y="5" cx="48.263888888888886" cz="65.34722222222223" angle="90" />
   <Incarnator y="10" mask="T3" cx="48.263888888888886" cz="65.34722222222223" angle="90" />
-  <Teleporter shape="0" y="15" mask="T3" group="@redstart" spin="0" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="65.34722222222223" angle="90" />
-  <Teleporter y="20" group="@red" shape="0" spin="0" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="65.34722222222223" angle="90" />
+  <Teleporter shape="0" y="15" mask="T3" group="@redstart" spin="0" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="65.34722222222223" angle="90" />
+  <Teleporter y="20" group="@red" shape="0" spin="0" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="65.34722222222223" angle="90" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#ff2600" frame="#000000" cx="48.263888888888886" cz="65.34722222222223" angle="90" />
+  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#ff2600" color.1="#000000" cx="48.263888888888886" cz="65.34722222222223" angle="90" />
   <Walker lives="kDefaultLives" hitScore="0" killScore="0" team="2" y="5" cx="136.94444444444446" cz="52.986111111111114" angle="270" />
   <Incarnator y="10" mask="T2" cx="136.94444444444446" cz="52.986111111111114" angle="270" />
-  <Teleporter shape="0" y="15" mask="T2" group="@yellowstart" spin="0" fill="#fffc41" frame="#000000" cx="136.94444444444446" cz="52.986111111111114" angle="270" />
-  <Teleporter y="20" group="@yellow" shape="0" spin="0" fill="#fffc41" frame="#000000" cx="136.94444444444446" cz="52.986111111111114" angle="270" />
+  <Teleporter shape="0" y="15" mask="T2" group="@yellowstart" spin="0" color="#fffc41" color.1="#000000" cx="136.94444444444446" cz="52.986111111111114" angle="270" />
+  <Teleporter y="20" group="@yellow" shape="0" spin="0" color="#fffc41" color.1="#000000" cx="136.94444444444446" cz="52.986111111111114" angle="270" />
   <unique vars="mShow mTaken" />
   <And in="@start" out="mShow" />
   <Timer in="mTaken" out="mShow" wait="7" />
-  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" fill="#fffc41" frame="#000000" cx="136.94444444444446" cz="52.986111111111114" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@wr31" spin="0" fill="#ffffff" frame="#000000" cx="92.43055555555556" cz="39.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@wy31" spin="0" fill="#ffffff" frame="#000000" cx="92.43055555555556" cz="39.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@wr11" spin="0" fill="#ffffff" frame="#000000" cx="72.43055555555556" cz="39.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row2" group="@wy11" spin="0" fill="#ffffff" frame="#000000" cx="72.43055555555556" cz="39.30555555555556" angle="270" />
-  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="112.43055555555556" cz="34.30555555555556" angle="270" />
-  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="112.43055555555556" cz="44.30555555555556" angle="270" />
-  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="112.43055555555556" cz="94.30555555555556" angle="270" />
-  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="102.43055555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="112.43055555555556" cz="84.30555555555556" angle="270" />
-  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="112.43055555555556" cz="54.30555555555556" angle="270" />
-  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="102.43055555555556" cz="79.30555555555556" angle="270" />
-  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="102.43055555555556" cz="39.30555555555556" angle="270" />
-  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="92.43055555555556" cz="34.30555555555556" angle="270" />
-  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="102.43055555555556" cz="29.305555555555557" angle="270" />
-  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="112.43055555555556" cz="74.30555555555556" angle="270" />
-  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="112.43055555555556" cz="64.30555555555556" angle="270" />
-  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="92.43055555555556" cz="44.30555555555556" angle="270" />
-  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="102.43055555555556" cz="49.30555555555556" angle="270" />
-  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="102.43055555555556" cz="69.30555555555556" angle="270" />
-  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="102.43055555555556" cz="59.30555555555556" angle="270" />
-  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="92.43055555555556" cz="54.30555555555556" angle="270" />
-  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="92.43055555555556" cz="94.30555555555556" angle="270" />
-  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="92.43055555555556" cz="84.30555555555556" angle="270" />
-  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="92.43055555555556" cz="74.30555555555556" angle="270" />
-  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="82.43055555555556" cz="89.30555555555556" angle="270" />
-  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="82.43055555555556" cz="39.30555555555556" angle="270" />
-  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="92.43055555555556" cz="64.30555555555556" angle="270" />
-  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="82.43055555555556" cz="29.305555555555557" angle="270" />
-  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="82.43055555555556" cz="49.30555555555556" angle="270" />
-  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="72.43055555555556" cz="94.30555555555556" angle="270" />
-  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="72.43055555555556" cz="44.30555555555556" angle="270" />
-  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="82.43055555555556" cz="69.30555555555556" angle="270" />
-  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="72.43055555555556" cz="84.30555555555556" angle="270" />
-  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="82.43055555555556" cz="79.30555555555556" angle="270" />
-  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="72.43055555555556" cz="54.30555555555556" angle="270" />
-  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="82.43055555555556" cz="59.30555555555556" angle="270" />
-  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="72.43055555555556" cz="74.30555555555556" angle="270" />
-  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="72.43055555555556" cz="34.30555555555556" angle="270" />
-  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" fill="#3dacff" frame="#000000" cx="72.43055555555556" cz="64.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@wr13" spin="0" fill="#ffffff" frame="#000000" cx="72.43055555555556" cz="79.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row2" group="@wy13" spin="0" fill="#ffffff" frame="#000000" cx="72.43055555555556" cz="79.30555555555556" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br11" spin="0" fill="#000000" frame="#000000" cx="72.43055555555556" cz="29.305555555555557" angle="270" />
-  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by11" spin="0" fill="#000000" frame="#000000" cx="72.43055555555556" cz="29.305555555555557" angle="270" />
+  <Goody hitScore="1" y="19" yon=".001" speed="0" missiles="8" grenades="12" start="mShow" out="mTaken" color="#fffc41" color.1="#000000" cx="136.94444444444446" cz="52.986111111111114" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@row2" group="@wr31" spin="0" color="#ffffff" color.1="#000000" cx="92.43055555555556" cz="39.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row4" group="@wy31" spin="0" color="#ffffff" color.1="#000000" cx="92.43055555555556" cz="39.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@wr11" spin="0" color="#ffffff" color.1="#000000" cx="72.43055555555556" cz="39.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row2" group="@wy11" spin="0" color="#ffffff" color.1="#000000" cx="72.43055555555556" cz="39.30555555555556" angle="270" />
+  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="112.43055555555556" cz="34.30555555555556" angle="270" />
+  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="112.43055555555556" cz="44.30555555555556" angle="270" />
+  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="112.43055555555556" cz="94.30555555555556" angle="270" />
+  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="102.43055555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="112.43055555555556" cz="84.30555555555556" angle="270" />
+  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="112.43055555555556" cz="54.30555555555556" angle="270" />
+  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="102.43055555555556" cz="79.30555555555556" angle="270" />
+  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="102.43055555555556" cz="39.30555555555556" angle="270" />
+  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="92.43055555555556" cz="34.30555555555556" angle="270" />
+  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="102.43055555555556" cz="29.305555555555557" angle="270" />
+  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="112.43055555555556" cz="74.30555555555556" angle="270" />
+  <Teleporter group="@row5" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="112.43055555555556" cz="64.30555555555556" angle="270" />
+  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="92.43055555555556" cz="44.30555555555556" angle="270" />
+  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="102.43055555555556" cz="49.30555555555556" angle="270" />
+  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="102.43055555555556" cz="69.30555555555556" angle="270" />
+  <Teleporter group="@row4" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="102.43055555555556" cz="59.30555555555556" angle="270" />
+  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="92.43055555555556" cz="54.30555555555556" angle="270" />
+  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="92.43055555555556" cz="94.30555555555556" angle="270" />
+  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="92.43055555555556" cz="84.30555555555556" angle="270" />
+  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="92.43055555555556" cz="74.30555555555556" angle="270" />
+  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="82.43055555555556" cz="89.30555555555556" angle="270" />
+  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="82.43055555555556" cz="39.30555555555556" angle="270" />
+  <Teleporter group="@row3" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="92.43055555555556" cz="64.30555555555556" angle="270" />
+  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="82.43055555555556" cz="29.305555555555557" angle="270" />
+  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="82.43055555555556" cz="49.30555555555556" angle="270" />
+  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="72.43055555555556" cz="94.30555555555556" angle="270" />
+  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="72.43055555555556" cz="44.30555555555556" angle="270" />
+  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="82.43055555555556" cz="69.30555555555556" angle="270" />
+  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="72.43055555555556" cz="84.30555555555556" angle="270" />
+  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="82.43055555555556" cz="79.30555555555556" angle="270" />
+  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="72.43055555555556" cz="54.30555555555556" angle="270" />
+  <Teleporter group="@row2" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="82.43055555555556" cz="59.30555555555556" angle="270" />
+  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="72.43055555555556" cz="74.30555555555556" angle="270" />
+  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="72.43055555555556" cz="34.30555555555556" angle="270" />
+  <Teleporter group="@row1" speed="0" y="7" shape="0" spin="0" color="#3dacff" color.1="#000000" cx="72.43055555555556" cz="64.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redstart" group="@wr13" spin="0" color="#ffffff" color.1="#000000" cx="72.43055555555556" cz="79.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row2" group="@wy13" spin="0" color="#ffffff" color.1="#000000" cx="72.43055555555556" cz="79.30555555555556" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="bspGroundStar" y="0" mask="T3" destGroup="@redback" group="@br11" spin="0" color="#000000" color.1="#000000" cx="72.43055555555556" cz="29.305555555555557" angle="270" />
+  <Teleporter activeRange="1.5" speed="0" shape="0" y="0" mask="T2" destGroup="@row3" group="@by11" spin="0" color="#000000" color.1="#000000" cx="72.43055555555556" cz="29.305555555555557" angle="270" />
   <Counter in="@add1Red" n="1" out="@redAt1" restart="false" />
   <Counter in="@add1Red" n="2" out="@redAt2" restart="false" />
   <Counter in="@add1Red" n="3" out="@redAt3" restart="false" />

@@ -49,7 +49,7 @@
 #include "CHUD.h"
 #include "Preferences.h"
 #include "Resource.h"
-#include "RGBAColor.h"
+#include "ARGBColor.h"
 #include "Debug.h"
 
 #define kHighShadeCount 12
@@ -63,7 +63,7 @@ void CAvaraGame::InitMixer(Boolean silentFlag) {
     aMixer->ISoundMixer(rate22khz, 64, 8, true, true, false);
     aMixer->SetStereoSeparation(true);
     aMixer->SetSoundEnvironment(FIX(400), FIX(5), CLASSICFRAMETIME);
-    aMixer->SetVolume(gApplication->Get<uint8_t>(kSoundVolume));
+    aMixer->SetVolume(gApplication ? gApplication->Get<uint8_t>(kSoundVolume) : 0);
     soundHub->AttachMixer(aMixer);
     soundHub->MuteFlag(silentFlag); //(soundOutputStyle < 0);
 }
@@ -83,11 +83,11 @@ void CAvaraGame::InitLocatorTable() {
     }
 }
 
-CNetManager* CAvaraGame::CreateNetManager() {
-    return new CNetManager;
+std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
+    return std::make_unique<CNetManager>();
 }
 
-CAvaraGame::CAvaraGame(int32_t frameTime) {
+CAvaraGame::CAvaraGame(FrameTime frameTime) {
     SetFrameTime(frameTime);
 }
 void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
@@ -95,7 +95,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     itsNet = CreateNetManager();
     itsNet->INetManager(this);
-    itsApp->SetNet(itsNet);
+    itsApp->SetNet(itsNet.get());
 
     searchCount = 0;
     locatorTable = (ActorLocator **)NewPtr(sizeof(ActorLocator *) * LOCATORTABLESIZE);
@@ -132,8 +132,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     itsView->yonBound = LONGYON;
     itsView->horizonBound = FIX(16000); //	16 km
 
-    //mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
-
+    // mapRes = GetResource(FUNMAPTYPE, FUNMAPID);
     // IGameTimer(frameTime/TIMING_GRAIN);
 
     worldShader = new CWorldShader;
@@ -152,8 +151,10 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     loadedTimeLimit = 600;
     timeInSeconds = 0;
     simpleExplosions = false;
+    keysFromStdin = false;
+    keysToStdout = false;
 
-    statusRequest = -1; // who decided to make "playing" 0??
+    statusRequest = kNoVehicleStatus;
 
     nextPingTime = 0;
 
@@ -204,12 +205,11 @@ void CAvaraGame::Dispose() {
         itsView->Dispose();
     if (soundHub)
         soundHub->Dispose();
-    if (itsNet)
-        itsNet->Dispose();
+//    if (itsNet)
+//        itsNet->Dispose();
     if (worldShader)
         worldShader->Dispose();
-    //ReleaseResource(mapRes);
-
+    // ReleaseResource(mapRes);
     // DisposePolyWorld(&itsPolyWorld);
     DisposePtr((Ptr)locatorTable);
 
@@ -437,7 +437,7 @@ void CAvaraGame::Score(short team, short player, long points, Fixed energy, shor
     lastReason = scoreReason;
 
     if (hitTeam == team) {
-        points = FMul(friendlyHitMultiplier, points);
+        points = LMul(points, friendlyHitMultiplier);
     }
 
     if (player >= 0 && player < kMaxAvaraPlayers) {
@@ -465,7 +465,7 @@ void CAvaraGame::RunFrameActions() {
     }
 
     thePlayer = playerList;
-    while (thePlayer) { // itsNet->ProcessQueue();
+    while (thePlayer && statusRequest != kAbortStatus) { // itsNet->ProcessQueue();
         nextPlayer = thePlayer->nextPlayer;
         thePlayer->PlayerAction();
         thePlayer = nextPlayer;
@@ -567,7 +567,7 @@ void CAvaraGame::LevelReset(Boolean clearReset) {
 
 void CAvaraGame::EndScript() {
     short i;
-    uint32_t color;
+    ARGBColor color = 0;
     Fixed intensity, angle1, angle2;
     Fixed x, y, z;
 
@@ -576,7 +576,7 @@ void CAvaraGame::EndScript() {
     worldShader->Apply();
 
     itsView->ambientLight = ReadFixedVar(iAmbient);
-    itsView->ambientLightColor = ParseColor(ReadStringVar(iAmbientColor))
+    itsView->ambientLightColor = ARGBColor::Parse(ReadStringVar(iAmbientColor))
         .value_or(DEFAULT_LIGHT_COLOR);
     AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
 
@@ -591,7 +591,7 @@ void CAvaraGame::EndScript() {
             y = FMul(FDegSin(-angle1), intensity);
             z = FMul(FDegCos(angle2), x);
             x = FMul(FDegSin(-angle2), x);
-            color = ParseColor(ReadStringVar(iLightsTable + 3 + 4 * i))
+            color = ARGBColor::Parse(ReadStringVar(iLightsTable + 3 + 4 * i))
                 .value_or(DEFAULT_LIGHT_COLOR);
 
             itsView->SetLightValues(i, x, y, z, kLightGlobalCoordinates);
@@ -606,9 +606,9 @@ void CAvaraGame::EndScript() {
         }
     }
 
-    color = *ParseColor(ReadStringVar(iMissileArmedColor));
+    color = *ARGBColor::Parse(ReadStringVar(iMissileArmedColor));
     ColorManager::setMissileArmedColor(color);
-    color = *ParseColor(ReadStringVar(iMissileLaunchedColor));
+    color = *ARGBColor::Parse(ReadStringVar(iMissileLaunchedColor));
     ColorManager::setMissileLaunchedColor(color);
 
     friendlyHitMultiplier = ReadFixedVar(iFriendlyHitMultiplier);
@@ -680,7 +680,7 @@ void CAvaraGame::StartIfReady() {
         bool allReady = true;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             CPlayerManager *mgr = itsNet->playerTable[i];
-            if (mgr && mgr->LoadingStatus() == kLLoaded) {
+            if (mgr && mgr->LoadingStatus() == kLLoaded && mgr->Presence() == kzAvailable) {
                 allReady = false;
                 break;
             }
@@ -692,8 +692,6 @@ void CAvaraGame::StartIfReady() {
 }
 
 #define MAXSKIPSINAROW 2
-
-static Boolean takeShot = false;
 
 void CAvaraGame::ReadGamePrefs() {
     moJoOptions = 0;
@@ -802,11 +800,22 @@ void CAvaraGame::GameStart() {
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);
     SDL_SetRelativeMouseMode(SDL_TRUE);
+#ifdef WIN32
+#else
     SDL_SetHint(SDL_HINT_MOUSE_RELATIVE_MODE_WARP, "1");
-    SDL_WarpMouseInWindow(itsApp->sdlWindow(), (((CApplication*)itsApp)->win_size_x) / 2, ((CApplication*)itsApp)->win_size_y);
+#endif
 
+    SDL_WarpMouseInWindow(itsApp->sdlWindow(), (((CApplication*)itsApp)->win_size_x) / 2, ((CApplication*)itsApp)->win_size_y);
     // HideCursor();
     // FlushEvents(everyEvent, 0);
+
+    // change the event processing time during the game (0 = poll)
+#ifdef _WIN32
+    gApplication->throttle = 0;   // let 'er rip
+#else
+    gApplication->throttle = std::min(static_cast<FrameTime>(itsApp->Number(kThrottle)), frameTime);
+#endif
+    SDL_Log("CAvaraGame::GameStart, throttle = %d\n", gApplication->throttle);
 }
 
 // Run when the game is paused or aborted
@@ -832,6 +841,10 @@ void CAvaraGame::GameStop() {
     scoreKeeper->StopPause(gameStatus == kPauseStatus);
 
     itsNet->UngatherPlayers();
+
+    // event wait timeout used by mainloop()
+    gApplication->throttle = INACTIVE_LOOP_REFRESH;
+    SDL_Log("CAvaraGame::GameStop, throttle = %d\n", gApplication->throttle);
 }
 
 void CAvaraGame::HandleEvent(SDL_Event &event) {
@@ -847,17 +860,8 @@ bool CAvaraGame::GameTick() {
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        uint32_t pingInterval = 2000; //msec
-        if (statusRequest == kPlayingStatus) {
-            // experimental: '/dbg ping' will turn pings on/off during game
-            if (Debug::IsEnabled("ping")) {
-                itsNet->SendPingCommand(2);
-            }
-        } else {
-            // less frequent larger bursts seems to give better LT estimates when not playing
-            // (this is better than sending 2 every 0.5 sec)
-            itsNet->SendPingCommand(8);
-        }
+        static uint32_t pingInterval = 2000; // msec
+        itsNet->SendPingCommand(8);
         nextPingTime = startTime + pingInterval;
     }
 
@@ -1035,20 +1039,17 @@ void CAvaraGame::UpdateViewRect(int width, int height, float pixelRatio) {
 }
 
 void CAvaraGame::Render(NVGcontext *ctx) {
-
     worldShader->ShadeWorld(itsView);
 
-    if (true || gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus ||
-        gameStatus == kLoseStatus) {
-        ViewControl();
-        itsWorld->Render(itsView);
-        AvaraGLSetAmbient(.7, UINT_MAX);
-        AvaraGLSetDepthTest(false);
-        hudWorld->Render(itsView);
-        AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
-        hud->Render(itsView, ctx);
-        AvaraGLSetDepthTest(true);
-    }
+    //if (gameStatus == kPlayingStatus || gameStatus == kPauseStatus || gameStatus == kWinStatus || gameStatus == kLoseStatus) {
+    ViewControl();
+    itsWorld->Render(itsView);
+    AvaraGLSetAmbient(.7, UINT_MAX);
+    AvaraGLSetDepthTest(false);
+    hudWorld->Render(itsView);
+    AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
+    hud->Render(itsView, ctx);
+    AvaraGLSetDepthTest(true);
 }
 
 CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
@@ -1108,17 +1109,17 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
     }
 }
 
-long CAvaraGame::TimeToFrameCount(long timeInMsec) {
+FrameNumber CAvaraGame::TimeToFrameCount(long timeInMsec) {
     // how many frames occur in timeInMsec?
-    return timeInMsec / frameTime;
+    return FrameNumber(timeInMsec / frameTime);
 }
 
-long CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
+FrameNumber CAvaraGame::NextFrameForPeriod(long period, long referenceFrame) {
     // Jump forward to the next full period.
     // For example, if we are changing latencies such that we start with 48 frames/period
     // and we're moving to 60 frames/period, and we're on frame 48, we want to
     // move forward to frame 120 and NOT frame 60.
-    long periodFrames = TimeToFrameCount(period);
+    FrameNumber periodFrames = TimeToFrameCount(period);
     return periodFrames * ceil(double(referenceFrame + periodFrames) / periodFrames);
 }
 
@@ -1144,7 +1145,7 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
     isClassicFrame = (frameNumber % (CLASSICFRAMETIME / frameTime) == 0);
 }
 
-long CAvaraGame::FramesFromNow(long classicFrameCount) {
+FrameNumber CAvaraGame::FramesFromNow(FrameNumber classicFrameCount) {
     return frameNumber + classicFrameCount / fpsScale;
 }
 
@@ -1186,7 +1187,7 @@ void CAvaraGame::FpsCoefficients(bool fastFPS, Fixed classicCoeff1, Fixed classi
 //   x[i+1] = x[i] * a
 Fixed CAvaraGame::FpsCoefficient1(bool fastFPS, Fixed classicCoeff1) {
     if (fastFPS) {
-        return FRound(FpsCoefficient1(ToFloat(classicCoeff1), fpsScale));
+        return ToFixedRound(FpsCoefficient1(ToFloat(classicCoeff1), fpsScale));
     } else {
         return classicCoeff1;
     }
@@ -1196,7 +1197,7 @@ Fixed CAvaraGame::FpsCoefficient1(bool fastFPS, Fixed classicCoeff1) {
 Fixed CAvaraGame::FpsCoefficient2(bool fastFPS, Fixed classicCoeff2) {
     if (fastFPS) {
         // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
-        return std::lround(classicCoeff2 * fpsScale);
+        return FRound(classicCoeff2 * fpsScale);
     } else {
         return classicCoeff2;
     }
@@ -1222,7 +1223,7 @@ double CAvaraGame::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
     return pow(fpsCoeff1, fpsScale);
 }
 
-long CAvaraGame::FpsFramesPerClassic(bool fastFPS, long classicFrames)
+FrameNumber CAvaraGame::FpsFramesPerClassic(bool fastFPS, long classicFrames)
 {
     if (fastFPS) {
         return long(classicFrames / fpsScale);
@@ -1235,7 +1236,7 @@ long CAvaraGame::FpsFramesPerClassic(bool fastFPS, long classicFrames)
 Fixed CAvaraGame::ClassicCoefficient2(bool fastFPS, Fixed fpsValue) {
     if (fastFPS) {
         // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
-        return std::lround(fpsValue / fpsScale);
+        return FRound(fpsValue / fpsScale);
     } else {
         return fpsValue;
     }

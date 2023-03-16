@@ -27,7 +27,7 @@ void CGrenade::IWeapon(CDepot *theDepot) {
     partCount = 1;
     LoadPart(0, 820);
 
-    mass = FIX(1);
+    mass = FIX1;
 }
 
 void CGrenade::PlaceParts() {

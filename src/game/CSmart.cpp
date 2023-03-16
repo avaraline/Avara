@@ -26,7 +26,7 @@ void CSmart::IWeapon(CDepot *theDepot) {
     partList[0]->usesPrivateHither = true;
     partList[0]->hither = FIX3(100);
 
-    mass = FIX(1);
+    mass = FIX1;
 }
 
 void CSmart::ResetWeapon() {
@@ -203,7 +203,7 @@ void CSmart::Fire() {
     UpdateSoundLink(itsSoundLink, location, speed, itsGame->soundTime);
 
     theSound = gHub->GetSoundSampler(hubRate, 201);
-    theSound->SetRate(FIX(1));
+    theSound->SetRate(FIX1);
     theSound->SetVolume(FIX(3));
     theSound->SetSoundLink(itsSoundLink);
     theSound->SetLoopCount(-1);
@@ -349,10 +349,10 @@ if (IsClassicInterval()) { // indented like this because hope to remove it in th
             if (speedDotAccel < 0)
                 speedDotAccel = -speedDotAccel;
         } else {
-            speedDotAccel = FIX(1);
+            speedDotAccel = FIX1;
         }
 
-        friction = kSmartFriction + ((FIX(1) - speedDotAccel) >> 3);
+        friction = kSmartFriction + ((FIX1 - speedDotAccel) >> 3);
 
         speed[0] += FMul(thrust, accel[0]) - FMul(speed[0], friction);
         speed[1] += FMul(thrust, accel[1]) - FMul(speed[1], friction);

@@ -27,7 +27,7 @@ CAbstractActor *CHologramActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (GetResource('BSPT', resId)) {
+    if (HasBSP(resId)) {
         CBSPWorld *theWorld;
         CBSPPart *thePart;
 

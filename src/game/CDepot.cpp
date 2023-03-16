@@ -30,25 +30,25 @@ void CDepot::IDepot(CAvaraGame *theGame) {
     smartSight->ReplaceColor(0xfffffb00, ColorManager::getMissileSightPrimaryColor());
     smartSight->ReplaceColor(0xffff2600, ColorManager::getMissileSightSecondaryColor());
     smartSight->ignoreDirectionalLights = true;
-    smartSight->privateAmbient = FIX(1);
+    smartSight->privateAmbient = FIX1;
 
     smartHairs = new CBSPPart;
     smartHairs->IBSPPart(207);
     smartHairs->ReplaceColor(0xffff2600, ColorManager::getMissileLockColor());
     smartHairs->ignoreDirectionalLights = true;
-    smartHairs->privateAmbient = FIX(1);
+    smartHairs->privateAmbient = FIX1;
 
     grenadeSight = new CBSPPart;
     grenadeSight->IBSPPart(200);
     grenadeSight->ReplaceColor(0xfffffb00, ColorManager::getGrenadeSightPrimaryColor());
     grenadeSight->ignoreDirectionalLights = true;
-    grenadeSight->privateAmbient = FIX(1);
+    grenadeSight->privateAmbient = FIX1;
 
     grenadeTop = new CBSPPart;
     grenadeTop->IBSPPart(201);
     grenadeTop->ReplaceColor(0xffff2600, ColorManager::getGrenadeSightSecondaryColor());
     grenadeTop->ignoreDirectionalLights = true;
-    grenadeTop->privateAmbient = FIX(1);
+    grenadeTop->privateAmbient = FIX1;
 
     bspInGame = false;
 

@@ -9,6 +9,7 @@
 
 #pragma once
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "KeyFuncs.h"
 #include "PlayerConfig.h"
 
@@ -17,7 +18,7 @@
 #include <deque>
 #include <string>
 
-enum {
+enum LoadingState {
     kLNotConnected,
     kLConnected,
     kLActive,
@@ -28,7 +29,9 @@ enum {
     kLNotFound,
     kLPaused,
     kLNoVehicle,
-    kLAway,
+    kLNetDelayed,
+//    kLAway,
+//    kLSpectating,
     kLReady,    // implies kLLoaded, i.e. Loaded & Ready to start
 
     kStringNorth,
@@ -37,7 +40,14 @@ enum {
     kStringWest
 };
 
-#define FUNCTIONBUFFERS 32*8  // 8x to accommodate extra frames with high-FPS
+enum PresenceType {
+    kzUnknown,
+    kzAvailable,
+    kzSpectating,
+    kzAway
+};
+
+#define FUNCTIONBUFFERS 64*8  // 512 frames at 16ms/frame = 8.192s rollover time
 
 class CAbstractPlayer;
 class CAvaraGame;
@@ -49,7 +59,7 @@ static const char* lThing_utf8    = "\xC2\xAC ";     // ¬
 static const char* checkMark_utf8 = "\xE2\x88\x9A";  // ✓
 static const char* triangle_utf8  = "\xCE\x94";      // Δ
 static const char* clearChat_utf8 = "\x1B";          // Fn-Del on Mac
-
+static const char* eyeballs_utf8  = "\xF0\x9F\x91\x80";
 
 class CPlayerManager {
 protected:
@@ -64,6 +74,7 @@ public:
     virtual short Slot() = 0;
     virtual void SetLocal() = 0;
     virtual void AbortRequest() = 0;
+    virtual void RemoveFromGame() = 0;
     virtual Boolean IsLocalPlayer() = 0;
     virtual bool CalculateIsLocalPlayer() = 0;
 
@@ -79,11 +90,16 @@ public:
     virtual short IsRegistered() = 0;
     virtual void IsRegistered(short) = 0;
     virtual Str255& PlayerRegName() = 0;
-    virtual short LoadingStatus() = 0;
-    virtual void SetPlayerStatus(short newStatus, long theWin) = 0;
+    virtual LoadingState LoadingStatus() = 0;
+    template<typename ... T> bool LoadingStatusIsIn(T && ... state) {
+        return ((LoadingStatus() == state) || ...);  // compares LoadingStatus() to all args
+    }
+    virtual PresenceType Presence() = 0;
+    virtual void SetPresence(PresenceType) = 0;
+    virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin) = 0;
     virtual bool IsAway() = 0;
 
-    virtual void ChangeNameAndLocation(StringPtr theName, Point location) = 0;
+    virtual void ChangeName(StringPtr theName) = 0;
     virtual void SetPosition(short pos) = 0;
     virtual void RosterKeyPress(unsigned char c) = 0;
     virtual void RosterMessageText(short len, const char *c) = 0;
@@ -111,7 +127,7 @@ public:
     virtual CAbstractPlayer *TakeAnyActor(CAbstractPlayer *actorList) = 0;
     virtual short PlayerColor() = 0;
     virtual Boolean IncarnateInAnyColor() = 0;
-    virtual void ResendFrame(long theFrame, short requesterId, short commandCode) = 0;
+    virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode) = 0;
     virtual void SpecialColorControl() = 0;
     virtual PlayerConfigRecord& TheConfiguration() = 0;
     virtual Handle MugPict() = 0;
@@ -120,7 +136,7 @@ public:
     virtual long MugState() = 0;
     virtual void MugSize(long) = 0;
     virtual void MugState(long) = 0;
-    virtual long WinFrame() = 0;
+    virtual FrameNumber WinFrame() = 0;
     virtual void ProtocolHandler(struct PacketInfo *thePacket) = 0;
     virtual void IncrementAskAgainTime(int) = 0;
     virtual void SetShowScoreboard(bool b) = 0;
@@ -170,8 +186,9 @@ private:
     unsigned char message[kMaxMessageChars + 1];
     std::deque<char> lineBuffer;
 
-    long winFrame;
-    short loadingStatus;
+    FrameNumber winFrame;
+    LoadingState loadingStatus;
+    PresenceType presence;
     short slot;
     short playerColor;
 
@@ -184,7 +201,16 @@ private:
     OSErr levelErr;
     std::string levelTag;
 
-    PlayerConfigRecord theConfiguration;
+    PlayerConfigRecord theConfiguration = {        
+        .numGrenades = 0,
+        .numMissiles = 0,
+        .numBoosters = 0,
+        .hullType = 0,
+        .frameLatency = 0,
+        .frameTime = 0,
+        .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
+        .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
+    };
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 
@@ -222,12 +248,13 @@ public:
     virtual void GameKeyPress(char c);
 
     virtual void NetDisconnect();
-    virtual void ChangeNameAndLocation(StringPtr theName, Point location);
+    virtual void ChangeName(StringPtr theName);
     virtual void SetPosition(short pos);
-    virtual void SetPlayerStatus(short newStatus, long theWin);
+    virtual void SetPlayerStatus(LoadingState newStatus, PresenceType newPresence, FrameNumber theWin);
     virtual void SetPlayerReady(bool isReady);
     virtual bool IsAway();
-    virtual void ResendFrame(long theFrame, short requesterId, short commandCode);
+
+    virtual void ResendFrame(FrameNumber theFrame, short requesterId, short commandCode);
 
     virtual void LoadStatusChange(short serverCRC, OSErr serverErr, std::string serverTag);
 
@@ -236,6 +263,7 @@ public:
     virtual Boolean IncarnateInAnyColor();
 
     virtual void AbortRequest();
+    virtual void RemoveFromGame();
 
     virtual void DeadOrDone();
 
@@ -260,7 +288,9 @@ public:
     virtual short IsRegistered();
     virtual void IsRegistered(short);
     virtual Str255& PlayerRegName();
-    virtual short LoadingStatus();
+    virtual LoadingState LoadingStatus();
+    virtual PresenceType Presence();
+    virtual void SetPresence(PresenceType);
     virtual short LevelCRC();
     virtual OSErr LevelErr();
     virtual std::string LevelTag();
@@ -277,8 +307,10 @@ public:
     virtual long MugState();
     virtual void MugSize(long);
     virtual void MugState(long);
-    virtual long WinFrame();
+    virtual FrameNumber WinFrame();
     virtual void IncrementAskAgainTime(int);
     virtual void SetShowScoreboard(bool b);
     virtual bool GetShowScoreboard();
+
+    void PlaybackAndRecord(FunctionTable &ft);
 };

@@ -81,13 +81,22 @@ int main(int argc, char *argv[]) {
         } else if (arg == "-c" || arg == "--connect") {
             connectAddress = std::string(argv[++i]);
             app->Set(kLastAddress, connectAddress);
-        } else if (arg == "-h" || arg == "--host") {
+        } else if (arg == "-s" || arg == "--serve" ||
+                   arg == "-S" || arg == "--Serve") {
             host = true;
+            app->Set(kTrackerRegister, arg[1] == 'S' || arg[2] == 'S');
         } else if (arg == "-f" || arg == "--frametime") {
             uint16_t frameTime = atol(argv[++i]);  // pre-inc to next arg
             app->GetGame()->SetFrameTime(frameTime);
-        } else if (arg == "--command") {
-            textCommand = std::string(argv[++i]);
+        } else if (arg == "-i" || arg == "--keys-from-stdin") {
+            app->GetGame()->SetKeysFromStdin();
+        } else if (arg == "-o" || arg == "--keys-to-stdout") {
+            app->GetGame()->SetKeysToStdout();
+        } else if (arg == "-/" || arg == "--command") {
+            textCommand = argv[++i];
+            if (textCommand[0] != '/') {
+                textCommand.insert(0, "/");
+            }
         } else {
             SDL_Log("Unknown command-line argument '%s'\n", argv[i]);
             exit(1);
@@ -110,7 +119,6 @@ int main(int argc, char *argv[]) {
     }
 
     bool main_loop_active = true;
-    int refresh = app->GetGame()->frameTime / 4;
     SDL_Event event;
     
     while (main_loop_active) {
@@ -121,13 +129,14 @@ int main(int argc, char *argv[]) {
         app->drawContents();
         SDL_GL_SwapWindow(app->window);
         
-        if (SDL_WaitEventTimeout(&event, refresh)) {
+        if (SDL_WaitEventTimeout(&event, app->throttle)) {
             if (event.type == SDL_QUIT) {
                 main_loop_active = false;
             }
             app->handleSDLEvent(event);
         }
     }
+    SDL_PollEvent(&event);
     app->Done();
 
     // Shut it down!!
