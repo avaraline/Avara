@@ -9,17 +9,18 @@
 
 #pragma once
 #include "ARGBColor.h"
+#include "ColorManager.h"
 
-typedef struct {
-    short numGrenades;
-    short numMissiles;
-    short numBoosters;
-    short hullType;
-    short frameLatency;
-    short frameTime;
-    ARGBColor cockpitColor;
-    ARGBColor gunColor;
-} PlayerConfigRecord;
+struct PlayerConfigRecord {
+    short numGrenades {};
+    short numMissiles {};
+    short numBoosters {};
+    short hullType {};
+    short frameLatency {};
+    short frameTime {};
+    ARGBColor cockpitColor { (*ColorManager::getMarkerColor(2)).WithA(0xff) };
+    ARGBColor gunColor { (*ColorManager::getMarkerColor(3)).WithA(0xff) };
+};
 
 typedef struct {
     short hullBSP;

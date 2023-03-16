@@ -686,7 +686,7 @@ void CNetManager::ResumeGame() {
     if (thePlayerManager->GetPlayer()) {
         thePlayerManager->DoMouseControl(&tempPoint, !(itsGame->moJoOptions & kJoystickMode));
 
-        PlayerConfigRecord copy;
+        PlayerConfigRecord copy {};
         BlockMoveData(&config, &copy, sizeof(PlayerConfigRecord));
         copy.numGrenades = ntohs(config.numGrenades);
         copy.numMissiles = ntohs(config.numMissiles);

@@ -201,11 +201,7 @@ private:
     OSErr levelErr;
     std::string levelTag;
 
-    PlayerConfigRecord theConfiguration = {
-        0,
-        .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
-        .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
-    };
+    PlayerConfigRecord theConfiguration {};
 
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 

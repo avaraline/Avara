@@ -94,11 +94,7 @@ public:
     short serverOptions;
     short loaderSlot;
 
-    PlayerConfigRecord config = {
-        0,
-        .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
-        .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
-    };
+    PlayerConfigRecord config {};
 
     // TaggedGameResult	gameResult;
 
