@@ -14,7 +14,8 @@
 #include "ColorManager.h"
 #include "CViewParameters.h"
 #include "CWorldShader.h"
-#include "RGBAColor.h"
+#include "ARGBColor.h"
+#include "csscolorparser.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
@@ -37,8 +38,10 @@ public:
     bool update = true;
     bool skyToggle = true;
     bool helpToggle = true;
-    u_int32_t marker1;
-    u_int32_t marker2;
+    ARGBColor marker1 = (*ColorManager::getMarkerColor(0)).WithA(0xff);
+    ARGBColor marker2 = (*ColorManager::getMarkerColor(1)).WithA(0xff);
+    ARGBColor marker3 = (*ColorManager::getMarkerColor(2)).WithA(0xff);
+    ARGBColor marker4 = (*ColorManager::getMarkerColor(3)).WithA(0xff);
     std::string help_text;
 
     BSPViewer(int id) : CApplication("BSP Viewer") {
@@ -124,30 +127,22 @@ public:
             itsPart = new CBSPPart;
             itsPart->IBSPPart(id);
             if (itsPart->polyCount > 0) {
-<<<<<<< HEAD
-                itsPart->ReplaceColor(*ColorManager::getMarkerColor(0), marker1); // yellow
-                itsPart->ReplaceColor(*ColorManager::getMarkerColor(1), marker2); // red
-||||||| c6d44c5a
-                itsPart->ReplaceColor(*ColorManager::getMarkerColor(0), 0xffcccc00); // yellow
-                itsPart->ReplaceColor(*ColorManager::getMarkerColor(1), 0xfffe0000); // red
-=======
                 itsPart->ReplaceColor(
                     *ColorManager::getMarkerColor(0),
-                    (*ColorManager::getMarkerColor(0)).WithA(0xff)
+                    marker1
                 );
                 itsPart->ReplaceColor(
                     *ColorManager::getMarkerColor(1),
-                    (*ColorManager::getMarkerColor(1)).WithA(0xff)
+                    marker2
                 );
                 itsPart->ReplaceColor(
                     *ColorManager::getMarkerColor(2),
-                    (*ColorManager::getMarkerColor(2)).WithA(0xff)
+                    marker3
                 );
                 itsPart->ReplaceColor(
                     *ColorManager::getMarkerColor(3),
-                    (*ColorManager::getMarkerColor(3)).WithA(0xff)
+                    marker4
                 );
->>>>>>> 24c104f39c569865d3795ef46ea377576b6b42a0
                 AvaraGLUpdateData(itsPart);
                 itsWorld->AddPart(itsPart);
                 SDL_Log("Loaded BSP %d", id);
@@ -328,7 +323,7 @@ int main(int argc, char *argv[]) {
         }
         else if (arg == "--marker-color1") {
             std::string s = std::string(argv[++i]);
-            std::optional<u_int32_t> c = ParseColor(s);
+            std::optional<ARGBColor> c = ARGBColor::Parse(s);
             if (c.has_value()) {
                 app->marker1 = c.value();
                 app->newPart(app->current_id);
@@ -336,9 +331,25 @@ int main(int argc, char *argv[]) {
         }
         else if (arg == "--marker-color2") {
             std::string s = std::string(argv[++i]);
-            std::optional<u_int32_t> c = ParseColor(s);
+            std::optional<ARGBColor> c = ARGBColor::Parse(s);
             if (c.has_value()) {
                 app->marker2 = c.value();
+                app->newPart(app->current_id);
+            } 
+        }
+        else if (arg == "--marker-color3") {
+            std::string s = std::string(argv[++i]);
+            std::optional<ARGBColor> c = ARGBColor::Parse(s);
+            if (c.has_value()) {
+                app->marker3 = c.value();
+                app->newPart(app->current_id);
+            } 
+        }
+        else if (arg == "--marker-color4") {
+            std::string s = std::string(argv[++i]);
+            std::optional<ARGBColor> c = ARGBColor::Parse(s);
+            if (c.has_value()) {
+                app->marker4 = c.value();
                 app->newPart(app->current_id);
             } 
         }
