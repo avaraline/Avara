@@ -45,7 +45,7 @@ public:
     CAbstractPlayer *nextPlayer = 0;
     PlayerConfigRecord defaultConfig {};
 
-    ARGBColor longTeamColor = 0; // Hull color in 0x00RRGGBB format.
+    ARGBColor longTeamColor = 0;
 
     //	Shields & energy:
     Fixed energy = 0;
@@ -129,6 +129,7 @@ public:
     Boolean doIncarnateSound = 0;
     Boolean reEnergize = 0;
     Boolean didSelfDestruct = 0;
+    bool didIncarnateMasked = false;
 
     //	Winning/loosing:
     FrameNumber winFrame = 0;

@@ -1219,7 +1219,7 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     }
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->GetPlayer()) {
+        if (playerTable[i]->GetPlayer() && !playerTable[i]->GetPlayer()->didIncarnateMasked) {
             playerTable[i]->SpecialColorControl();
         }
     }

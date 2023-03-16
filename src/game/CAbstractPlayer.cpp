@@ -1303,6 +1303,10 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
         return false;
     }
 
+    if (newSpot->colorMask != -1) {
+        didIncarnateMasked = true;
+    }
+
     return true;
 }
 
