@@ -1222,12 +1222,13 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
         short slot = positionToSlot[i];
         short teammateCount = 0;
         CPlayerManager *thePlayerMan = playerTable[slot];
-        if (thePlayerMan->GetPlayer()) {
+        if (thePlayerMan->Presence() == kzAvailable && thePlayerMan->GetPlayer()) {
             for (short j = 0; j < kMaxAvaraPlayers; j++) {
                 if (i != j) {
                     short otherSlot = positionToSlot[j];
                     CPlayerManager *otherPlayerMan = playerTable[otherSlot];
-                    if (otherPlayerMan->GetPlayer() &&
+                    if (otherPlayerMan->Presence() == kzAvailable &&
+                        otherPlayerMan->GetPlayer() &&
                         thePlayerMan->PlayerColor() == otherPlayerMan->PlayerColor()) {
                         teammateCount++;
                     }
