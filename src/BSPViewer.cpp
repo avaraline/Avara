@@ -64,8 +64,8 @@ public:
 
         AvaraGLSetFOV(50);
 
-        marker1 = ColorManager::getTeamColor(3).value();
-        marker2 = ColorManager::getTeamColor(2).value(); 
+        marker1 = *ColorManager::getTeamColor(3);
+        marker2 = *ColorManager::getTeamColor(2);
         current_id = id;
         itsWorld = new CBSPWorldImpl;
         itsWorld->IBSPWorld(1);
@@ -114,7 +114,7 @@ public:
         info << "Model: " << current_id << "\n";
         info << "Translation: " << ToFloat(location[0]) << "," << ToFloat(location[1]) << "," << ToFloat(location[2]) << "\n";
         info << "Rotation: " << ToFloat(orientation[0]) << "," << ToFloat(orientation[1]) << "," << ToFloat(orientation[2]);
-        
+
         nvgBeginFrame(mNVGContext, mFBSize[0], mFBSize[1], 1.0);
         nvgFontSize(mNVGContext, 25);
         nvgFontFace(mNVGContext, "mono");
@@ -334,40 +334,40 @@ int main(int argc, char *argv[]) {
             std::string s = std::string(argv[++i]);
             std::optional<ARGBColor> c = ARGBColor::Parse(s);
             if (c.has_value()) {
-                app->marker1 = c.value();
+                app->marker1 = *c;
                 app->newPart(app->current_id);
-            } 
+            }
         }
         else if (arg == "--marker-color2") {
             std::string s = std::string(argv[++i]);
             std::optional<ARGBColor> c = ARGBColor::Parse(s);
             if (c.has_value()) {
-                app->marker2 = c.value();
+                app->marker2 = *c;
                 app->newPart(app->current_id);
-            } 
+            }
         }
         else if (arg == "--marker-color3") {
             std::string s = std::string(argv[++i]);
             std::optional<ARGBColor> c = ARGBColor::Parse(s);
             if (c.has_value()) {
-                app->marker3 = c.value();
+                app->marker3 = *c;
                 app->newPart(app->current_id);
-            } 
+            }
         }
         else if (arg == "--marker-color4") {
             std::string s = std::string(argv[++i]);
             std::optional<ARGBColor> c = ARGBColor::Parse(s);
             if (c.has_value()) {
-                app->marker4 = c.value();
+                app->marker4 = *c;
                 app->newPart(app->current_id);
-            } 
+            }
         }
         else if (arg == "--background-color") {
-            
+
             app->skyToggle = false;
             std::string s = std::string(argv[++i]);
             std::optional<CSSColorParser::Color> c = CSSColorParser::parse(s);
-            if (c.has_value()) app->updateClearColor(c.value());
+            if (c.has_value()) app->updateClearColor(*c);
         }
 
         else if (arg == "--output-file") {
@@ -383,18 +383,18 @@ int main(int argc, char *argv[]) {
             app->orientation[0] = ToFixed(14);
             app->orientation[1] = ToFixed(25.2);
             app->location[2] = ToFixed(-0.44007);
-            
+
             app->skyToggle = false;
             std::stringstream ss;
             int error = 0;
             for (size_t i = 0; i < 3; i++) {
                 for (size_t j = 0; j < kMaxTeamColors; j++) {
-                    
-                    app->marker1 = ColorManager::getTeamColor(j).value();
+
+                    app->marker1 = *ColorManager::getTeamColor(j);
                     app->newPart(hulls[i]);
                     app->drawContents();
                     ss.str("");
-                    ss << hull_names[i] << "-" << ColorManager::getTeamColorName(j).value() << ".png";
+                    ss << hull_names[i] << "-" << *ColorManager::getTeamColorName(j) << ".png";
                     error += app->capture(ss.str().c_str());
                 }
                 app->marker1 = ColorManager::getSpecialBlackColor();
