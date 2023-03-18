@@ -653,9 +653,24 @@ void CNetManager::ResumeGame() {
     Boolean notReady;
 
     SDL_Log("CNetManager::ResumeGame\n");
+
+    thePlayerManager = playerTable[itsCommManager->myId];
+
     config.frameLatency = gApplication ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
     config.frameTime = itsGame->frameTime;
     config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
+    config.hullColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerHullColorTag))
+            .value_or(
+                ColorManager::getTeamColor(thePlayerManager->PlayerColor())
+                    .value_or((*ColorManager::getMarkerColor(0)).WithA(0xff))
+            )
+        : ColorManager::getTeamColor(thePlayerManager->PlayerColor())
+            .value_or((*ColorManager::getMarkerColor(0)).WithA(0xff));
+    config.trimColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerHullTrimColorTag))
+            .value_or((*ColorManager::getMarkerColor(1)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(1)).WithA(0xff);
     config.cockpitColor = gApplication
         ? ARGBColor::Parse(gApplication->String(kPlayerCockpitColorTag))
             .value_or((*ColorManager::getMarkerColor(2)).WithA(0xff))
@@ -682,7 +697,6 @@ void CNetManager::ResumeGame() {
     localLatencyVote = 0;
     latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
-    thePlayerManager = playerTable[itsCommManager->myId];
     if (thePlayerManager->GetPlayer()) {
         thePlayerManager->DoMouseControl(&tempPoint, !(itsGame->moJoOptions & kJoystickMode));
 
@@ -694,6 +708,8 @@ void CNetManager::ResumeGame() {
         copy.hullType = ntohs(config.hullType);
         copy.frameLatency = ntohs(config.frameLatency);
         copy.frameTime = ntohs(config.frameTime);
+        copy.hullColor = ntohl(config.hullColor.GetRaw());
+        copy.trimColor = ntohl(config.trimColor.GetRaw());
         copy.cockpitColor = ntohl(config.cockpitColor.GetRaw());
         copy.gunColor = ntohl(config.gunColor.GetRaw());
 
@@ -1268,6 +1284,8 @@ void CNetManager::ConfigPlayer(short senderSlot, Ptr configData) {
     config->hullType = ntohs(config->hullType);
     config->frameLatency = ntohs(config->frameLatency);
     config->frameTime = ntohs(config->frameTime);
+    config->hullColor = ntohl(config->hullColor.GetRaw());
+    config->trimColor = ntohl(config->trimColor.GetRaw());
     config->cockpitColor = ntohl(config->cockpitColor.GetRaw());
     config->gunColor = ntohl(config->gunColor.GetRaw());
     playerTable[senderSlot]->TheConfiguration() = *config;

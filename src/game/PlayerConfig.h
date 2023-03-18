@@ -18,6 +18,8 @@ struct PlayerConfigRecord {
     short hullType {};
     short frameLatency {};
     short frameTime {};
+    ARGBColor hullColor { (*ColorManager::getMarkerColor(0)).WithA(0xff) };
+    ARGBColor trimColor { (*ColorManager::getMarkerColor(1)).WithA(0xff) };
     ARGBColor cockpitColor { (*ColorManager::getMarkerColor(2)).WithA(0xff) };
     ARGBColor gunColor { (*ColorManager::getMarkerColor(3)).WithA(0xff) };
 };
