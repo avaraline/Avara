@@ -24,8 +24,6 @@ ARGBColor ColorManager::plasmaGauge2Color = 0xffff4e00;
 ARGBColor ColorManager::plasmaSightsOffColor = 0xff008e00;
 ARGBColor ColorManager::plasmaSightsOnColor = 0xffff2600;
 ARGBColor ColorManager::shieldGaugeColor = 0xff0053b4;
-ARGBColor ColorManager::specialBlackColor = 0xff3e3e3e;
-ARGBColor ColorManager::specialWhiteColor = 0xffe6e6e6;
 
 ARGBColor ColorManager::teamColors[kMaxTeamColors + 1] = {
     0xffffffff,
@@ -35,8 +33,8 @@ ARGBColor ColorManager::teamColors[kMaxTeamColors + 1] = {
     0xffd72ca9,
     0xffab2fd5,
     0xff00a9d5,
-    0xffffb300,
-    0xff99ced1
+    0xff3e3e3e,
+    0xffe6e6e6
 };
 
 ARGBColor ColorManager::teamTextColors[kMaxTeamColors + 1] = {
@@ -47,7 +45,7 @@ ARGBColor ColorManager::teamTextColors[kMaxTeamColors + 1] = {
     0xffffffff,
     0xffffffff,
     0xff333333,
-    0xff333333,
+    0xffffffff,
     0xff333333
 };
 
@@ -59,8 +57,8 @@ std::string ColorManager::teamColorNames[kMaxTeamColors + 1] = {
     "Pink",
     "Purple",
     "Blue",
-    "Orange",
-    "Teal"
+    "Black",
+    "White"
 };
 
 ARGBColor ColorManager::messageColors[3] = {
@@ -96,8 +94,6 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::plasmaSightsOffColor = 0xff008e00;
             ColorManager::plasmaSightsOnColor = 0xffff2600;
             ColorManager::shieldGaugeColor = 0xff0053b4;
-            ColorManager::specialBlackColor = 0xff3e3e3e;
-            ColorManager::specialWhiteColor = 0xffe6e6e6;
             ColorManager::teamColors[0] = 0xffffffff;
             ColorManager::teamColors[1] = 0xff007600;
             ColorManager::teamColors[2] = 0xffd5d200;
@@ -105,8 +101,8 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamColors[4] = 0xffd72ca9;
             ColorManager::teamColors[5] = 0xffab2fd5;
             ColorManager::teamColors[6] = 0xff00a9d5;
-            ColorManager::teamColors[7] = 0xffffb300;
-            ColorManager::teamColors[8] = 0xff99ced1;
+            ColorManager::teamColors[7] = 0xff3e3e3e;
+            ColorManager::teamColors[8] = 0xffe6e6e6;
             ColorManager::teamTextColors[0] = 0xff333333;
             ColorManager::teamTextColors[1] = 0xffffffff;
             ColorManager::teamTextColors[2] = 0xff333333;
@@ -114,7 +110,7 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamTextColors[4] = 0xffffffff;
             ColorManager::teamTextColors[5] = 0xffffffff;
             ColorManager::teamTextColors[6] = 0xff333333;
-            ColorManager::teamTextColors[7] = 0xff333333;
+            ColorManager::teamTextColors[7] = 0xffffffff;
             ColorManager::teamTextColors[8] = 0xff333333;
             ColorManager::messageColors[0] = 0xffffffff;
             ColorManager::messageColors[1] = 0xff92ebe9;
@@ -142,8 +138,6 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::plasmaSightsOffColor = 0xff008f68;
             ColorManager::plasmaSightsOnColor = 0xffff6c00;
             ColorManager::shieldGaugeColor = 0xff0020b4;
-            ColorManager::specialBlackColor = 0xff3e3e3e;
-            ColorManager::specialWhiteColor = 0xffe6e6e6;
             ColorManager::teamColors[0] = 0xffffffff;
             ColorManager::teamColors[1] = 0xff007768;
             ColorManager::teamColors[2] = 0xffd5d200;
@@ -151,8 +145,8 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamColors[4] = 0xffd72ca9;
             ColorManager::teamColors[5] = 0xffab2fd5;
             ColorManager::teamColors[6] = 0xff00a9d5;
-            ColorManager::teamColors[7] = 0xfff7e0b2;
-            ColorManager::teamColors[8] = 0xff99ced1;
+            ColorManager::teamColors[7] = 0xff3e3e3e;
+            ColorManager::teamColors[8] = 0xffe6e6e6;
             ColorManager::teamTextColors[0] = 0xff333333;
             ColorManager::teamTextColors[1] = 0xffffffff;
             ColorManager::teamTextColors[2] = 0xff333333;
@@ -160,7 +154,7 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamTextColors[4] = 0xffffffff;
             ColorManager::teamTextColors[5] = 0xffffffff;
             ColorManager::teamTextColors[6] = 0xffffffff;
-            ColorManager::teamTextColors[7] = 0xff333333;
+            ColorManager::teamTextColors[7] = 0xffffffff;
             ColorManager::teamTextColors[8] = 0xff333333;
             ColorManager::messageColors[0] = 0xffffffff;
             ColorManager::messageColors[1] = 0xff8ee0ef;
@@ -185,8 +179,6 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::plasmaSightsOffColor = 0xff008f68;
             ColorManager::plasmaSightsOnColor = 0xffff6c00;
             ColorManager::shieldGaugeColor = 0xff0020b4;
-            ColorManager::specialBlackColor = 0xff3e3e3e;
-            ColorManager::specialWhiteColor = 0xffe6e6e6;
             ColorManager::teamColors[0] = 0xffffffff;
             ColorManager::teamColors[1] = 0xff007768;
             ColorManager::teamColors[2] = 0xffd5d200;
@@ -194,8 +186,8 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamColors[4] = 0xffd72ca9;
             ColorManager::teamColors[5] = 0xffab2fd5;
             ColorManager::teamColors[6] = 0xff00a9d5;
-            ColorManager::teamColors[7] = 0xfff7e0b2;
-            ColorManager::teamColors[8] = 0xff99ced1;
+            ColorManager::teamColors[7] = 0xff3e3e3e;
+            ColorManager::teamColors[8] = 0xffe6e6e6;
             ColorManager::teamTextColors[0] = 0xff333333;
             ColorManager::teamTextColors[1] = 0xffffffff;
             ColorManager::teamTextColors[2] = 0xff333333;
@@ -203,7 +195,7 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamTextColors[4] = 0xffffffff;
             ColorManager::teamTextColors[5] = 0xffffffff;
             ColorManager::teamTextColors[6] = 0xffffffff;
-            ColorManager::teamTextColors[7] = 0xff333333;
+            ColorManager::teamTextColors[7] = 0xffffffff;
             ColorManager::teamTextColors[8] = 0xff333333;
             ColorManager::messageColors[0] = 0xffffffff;
             ColorManager::messageColors[1] = 0xff8ee0ef;
@@ -228,8 +220,6 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::plasmaSightsOffColor = 0xff008e00;
             ColorManager::plasmaSightsOnColor = 0xffff2600;
             ColorManager::shieldGaugeColor = 0xff0053b4;
-            ColorManager::specialBlackColor = 0xff3e3e3e;
-            ColorManager::specialWhiteColor = 0xffe6e6e6;
             ColorManager::teamColors[0] = 0xffffffff;
             ColorManager::teamColors[1] = 0xff007600;
             ColorManager::teamColors[2] = 0xffd5d200;
@@ -237,8 +227,8 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamColors[4] = 0xffd72ca9;
             ColorManager::teamColors[5] = 0xffab2fd5;
             ColorManager::teamColors[6] = 0xff00a9d5;
-            ColorManager::teamColors[7] = 0xffffb300;
-            ColorManager::teamColors[8] = 0xff99ced1;
+            ColorManager::teamColors[7] = 0xff3e3e3e;
+            ColorManager::teamColors[8] = 0xffe6e6e6;
             ColorManager::teamTextColors[0] = 0xff333333;
             ColorManager::teamTextColors[1] = 0xffffffff;
             ColorManager::teamTextColors[2] = 0xff333333;
@@ -246,7 +236,7 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::teamTextColors[4] = 0xffffffff;
             ColorManager::teamTextColors[5] = 0xffffffff;
             ColorManager::teamTextColors[6] = 0xffffffff;
-            ColorManager::teamTextColors[7] = 0xff333333;
+            ColorManager::teamTextColors[7] = 0xffffffff;
             ColorManager::teamTextColors[8] = 0xff333333;
             ColorManager::messageColors[0] = 0xffffffff;
             ColorManager::messageColors[1] = 0xff92ebe9;

@@ -144,6 +144,8 @@ public:
     virtual void BufferMessage(size_t len, char *c);
     virtual void SendRosterMessage(size_t len, char *c);
     virtual void ReceiveRosterMessage(short slotId, short len, char *c);
+
+    // Color here refers to the team color, not custom color(s)!
     virtual void SendColorChange();
     virtual void ReceiveColorChange(char *newColors);
 
@@ -195,6 +197,7 @@ public:
 
     virtual void ConfigPlayer(short senderSlot, Ptr configData);
     virtual void DoConfig(short senderSlot);
+    virtual void UpdateLocalConfig();
 
     virtual void StoreMugShot(Handle mugPict);
     virtual void MugShotRequest(short sendTo, long sendFrom);

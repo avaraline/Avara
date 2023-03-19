@@ -779,7 +779,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
         viewPortPart->ReplaceColor(
             *ColorManager::getMarkerColor(1),
-            (*ColorManager::getMarkerColor(1)).WithA(0xff)
+            config->trimColor.WithA(0xff)
         );
         viewPortPart->ReplaceColor(
             *ColorManager::getMarkerColor(2),

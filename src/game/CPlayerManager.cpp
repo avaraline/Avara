@@ -1237,14 +1237,7 @@ void	CPlayerManagerImpl::GetLoadingStatusString(
 
 void CPlayerManagerImpl::SpecialColorControl() {
     if (itsPlayer) {
-        switch (spaceCount) {
-            case 2:
-                itsPlayer->SetSpecialColor(ColorManager::getSpecialBlackColor());
-                break;
-            case 3:
-                itsPlayer->SetSpecialColor(ColorManager::getSpecialWhiteColor());
-                break;
-        }
+        itsPlayer->SetSpecialColor(theConfiguration.hullColor.WithA(0xff));
     }
 }
 

@@ -29,6 +29,8 @@ using json = nlohmann::json;
 #define kKeyboardMappingTag "keyboard"
 
 #define kPlayerNameTag "playerName"
+#define kPlayerHullColorTag "hullColor"
+#define kPlayerHullTrimColorTag "hullTrimColor"
 #define kPlayerCockpitColorTag "cockpitColor"
 #define kPlayerGunColorTag "gunColor"
 
@@ -104,6 +106,8 @@ static json defaultPrefs = {
         {"debug2", "6"}}
     },
     {kPlayerNameTag, "Unnamed Player"},
+    {kPlayerHullColorTag, "default"},
+    {kPlayerHullTrimColorTag, "#2b2b2b"},
     {kPlayerCockpitColorTag, "#0333ff"},
     {kPlayerGunColorTag, "#929292"},
     {kMultiSamplesTag, 0},
