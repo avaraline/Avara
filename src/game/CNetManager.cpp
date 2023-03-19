@@ -44,7 +44,7 @@
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
 #else
-    #define kAvaraNetVersion 11
+    #define kAvaraNetVersion 12
 #endif
 
 #define kMessageBufferMaxAge 90
@@ -654,31 +654,7 @@ void CNetManager::ResumeGame() {
 
     SDL_Log("CNetManager::ResumeGame\n");
 
-    thePlayerManager = playerTable[itsCommManager->myId];
-
-    config.frameLatency = gApplication ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale : 0;
-    config.frameTime = itsGame->frameTime;
-    config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
-    config.hullColor = gApplication
-        ? ARGBColor::Parse(gApplication->String(kPlayerHullColorTag))
-            .value_or(
-                ColorManager::getTeamColor(thePlayerManager->PlayerColor())
-                    .value_or((*ColorManager::getMarkerColor(0)).WithA(0xff))
-            )
-        : ColorManager::getTeamColor(thePlayerManager->PlayerColor())
-            .value_or((*ColorManager::getMarkerColor(0)).WithA(0xff));
-    config.trimColor = gApplication
-        ? ARGBColor::Parse(gApplication->String(kPlayerHullTrimColorTag))
-            .value_or((*ColorManager::getMarkerColor(1)).WithA(0xff))
-        : (*ColorManager::getMarkerColor(1)).WithA(0xff);
-    config.cockpitColor = gApplication
-        ? ARGBColor::Parse(gApplication->String(kPlayerCockpitColorTag))
-            .value_or((*ColorManager::getMarkerColor(2)).WithA(0xff))
-        : (*ColorManager::getMarkerColor(2)).WithA(0xff);
-    config.gunColor = gApplication
-        ? ARGBColor::Parse(gApplication->String(kPlayerGunColorTag))
-            .value_or((*ColorManager::getMarkerColor(3)).WithA(0xff))
-        : (*ColorManager::getMarkerColor(3)).WithA(0xff);
+    UpdateLocalConfig();
 
     // Pull grenade/missile/booster counts from HULL resource
     long hullRes = ReadLongVar(iFirstHull + config.hullType);
@@ -697,6 +673,7 @@ void CNetManager::ResumeGame() {
     localLatencyVote = 0;
     latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
 
+    thePlayerManager = playerTable[itsCommManager->myId];
     if (thePlayerManager->GetPlayer()) {
         thePlayerManager->DoMouseControl(&tempPoint, !(itsGame->moJoOptions & kJoystickMode));
 
@@ -743,6 +720,13 @@ void CNetManager::ResumeGame() {
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             if (activePlayersDistribution & (1 << i)) {
                 DoConfig(i);
+
+                if (itsGame->frameNumber == 0 &&
+                    playerTable[i]->GetPlayer() &&
+                    !playerTable[i]->GetPlayer()->didIncarnateMasked &&
+                    !playerTable[i]->GetPlayer()->hasTeammates) {
+                    playerTable[i]->SpecialColorControl();
+                }
             }
         }
 
@@ -1194,6 +1178,8 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
     Boolean changedColors = false;
     char newColors[kMaxAvaraPlayers];
 
+    UpdateLocalConfig();
+
     //	Let active player managers choose actors for themselves.
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         short slot = positionToSlot[i];
@@ -1256,14 +1242,6 @@ void CNetManager::AttachPlayers(CAbstractPlayer *playerActorList) {
         }
     }
 
-    for (i = 0; i < kMaxAvaraPlayers; i++) {
-        if (playerTable[i]->GetPlayer() &&
-            !playerTable[i]->GetPlayer()->didIncarnateMasked &&
-            !playerTable[i]->GetPlayer()->hasTeammates) {
-            playerTable[i]->SpecialColorControl();
-        }
-    }
-
     if (changedColors) {
         itsCommManager->SendPacket(kdEveryone, kpColorChange, 0, 0, 0, kMaxAvaraPlayers, newColors);
     }
@@ -1305,6 +1283,38 @@ void CNetManager::DoConfig(short senderSlot) {
         itsGame->SetFrameLatency(theConfig->frameLatency, -1);
         latencyVoteFrame = itsGame->NextFrameForPeriod(AUTOLATENCYPERIOD);
     }
+}
+
+void CNetManager::UpdateLocalConfig() {
+    CPlayerManager *thePlayerManager = playerTable[itsCommManager->myId];
+
+    config.frameLatency = gApplication
+        ? gApplication->Get<float>(kLatencyToleranceTag) / itsGame->fpsScale
+        : 0;
+    config.frameTime = itsGame->frameTime;
+    config.hullType = gApplication ? gApplication->Number(kHullTypeTag) : 0;
+    config.hullColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerHullColorTag))
+            .value_or(
+                ColorManager::getTeamColor(thePlayerManager->PlayerColor())
+                    .value_or((*ColorManager::getMarkerColor(0)).WithA(0xff))
+            )
+        : ColorManager::getTeamColor(thePlayerManager->PlayerColor())
+            .value_or((*ColorManager::getMarkerColor(0)).WithA(0xff));
+    config.trimColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerHullTrimColorTag))
+            .value_or((*ColorManager::getMarkerColor(1)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(1)).WithA(0xff);
+    config.cockpitColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerCockpitColorTag))
+            .value_or((*ColorManager::getMarkerColor(2)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(2)).WithA(0xff);
+    config.gunColor = gApplication
+        ? ARGBColor::Parse(gApplication->String(kPlayerGunColorTag))
+            .value_or((*ColorManager::getMarkerColor(3)).WithA(0xff))
+        : (*ColorManager::getMarkerColor(3)).WithA(0xff);
+
+    thePlayerManager->TheConfiguration() = config;
 }
 
 void CNetManager::MugShotRequest(short sendTo, long sendFrom) {
