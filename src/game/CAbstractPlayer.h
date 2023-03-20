@@ -163,6 +163,10 @@ public:
     CBSPPart *targetOffs[2] = {0, 0};
     CBSPPart *targetOns[2] = {0, 0};
 
+    // Dashboard HUD
+    RayHitRecord dashBoardOrigin;
+    CBSPPart *lockLight = 0;
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void AdaptableSettings();
@@ -174,6 +178,7 @@ public:
     virtual void StartSystems();
 
     virtual void Dispose();
+    virtual void DisposeDashboard();
 
     virtual void ReturnWeapon(short theKind);
     virtual void ArmGrenade();
@@ -195,6 +200,9 @@ public:
     virtual void AvoidBumping();
 
     virtual void PlaceHUDParts();
+    virtual void LoadDashboardParts();
+    virtual void RenderDashboard();
+    virtual void ResetDashboard();
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
 

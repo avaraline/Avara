@@ -87,6 +87,8 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
     hudWorld->AddPart(dirArrow);
+
+    LoadDashboardParts();
 }
 
 void CAbstractPlayer::StartSystems() {
@@ -317,6 +319,7 @@ void CAbstractPlayer::Dispose() {
 
     hudWorld->RemovePart(dirArrow);
     dirArrow->Dispose();
+    DisposeDashboard();
 
     for (i = 0; i < 2; i++) {
         hudWorld->RemovePart(targetOns[i]);
@@ -328,6 +331,14 @@ void CAbstractPlayer::Dispose() {
     gHub->ReleaseLink(teleportSoundLink);
 
     CRealMovers::Dispose();
+}
+
+void CAbstractPlayer::DisposeDashboard() {
+    CBSPWorld *hudWorld;
+    hudWorld = itsGame->hudWorld;
+
+    hudWorld->RemovePart(lockLight);
+    lockLight->Dispose();
 }
 
 /*
@@ -437,6 +448,60 @@ void CAbstractPlayer::PlaceHUDParts() {
             theSight->MoveDone();
         }
     }
+
+    RenderDashboard();
+}
+
+void CAbstractPlayer::LoadDashboardParts() {
+    CBSPWorld *hudWorld;
+    hudWorld = itsGame->hudWorld;
+
+    lockLight = new CBSPPart;
+    lockLight->IBSPPart(207);
+    lockLight->ReplaceColor(0xffff2600, ColorManager::getDashboardColor());
+    lockLight->privateAmbient = FIX1;
+    lockLight->ignoreDirectionalLights = true;
+    lockLight->isTransparent = true;
+    hudWorld->AddPart(lockLight);
+}
+
+void CAbstractPlayer::RenderDashboard() {
+    CWeapon *weapon = NULL;
+    Matrix *mt;
+
+    // Setup origin
+    // Screen center should be (0,0)
+    mt = &viewPortPart->itsTransform;
+    dashBoardOrigin.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
+    dashBoardOrigin.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
+    dashBoardOrigin.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
+    dashBoardOrigin.direction[3] = 0;
+    NormalizeVector(3, dashBoardOrigin.direction);
+
+    dashBoardOrigin.distance = PLAYERMISSILERANGE / 8;
+    dashBoardOrigin.closestHit = NULL;
+    dashBoardOrigin.origin[0] = *mt[3][0];
+    dashBoardOrigin.origin[1] = *mt[3][1];
+    dashBoardOrigin.origin[2] = *mt[3][2];
+
+    if (weaponIdent)
+        weapon = (CWeapon *)gCurrentGame->FindIdent(weaponIdent);
+
+    // Part location and logic
+    if (weapon && weapon->isTargetLocked) {
+        lockLight->isTransparent = false;
+        lockLight->Reset();
+        TranslatePart(lockLight,
+            0,
+            -60000,
+            dashBoardOrigin.distance);
+        lockLight->ApplyMatrix(mt);
+        lockLight->MoveDone();
+    }
+}
+
+void CAbstractPlayer::ResetDashboard() {
+    lockLight->isTransparent = true;
 }
 
 void CAbstractPlayer::ControlSoundPoint() {
@@ -981,6 +1046,7 @@ void CAbstractPlayer::PlayerAction() {
         targetOns[1]->isTransparent = true; //  And reveal them if necessary
         targetOffs[0]->isTransparent = true; // in PlaceHUDParts.
         targetOffs[1]->isTransparent = true;
+        ResetDashboard();
 
         if (isInLimbo) {
             if (!netDestruct)

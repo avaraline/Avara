@@ -33,6 +33,7 @@ public:
 
     FrameNumber flyCount;
     Boolean doExplode;
+    Boolean isTargetLocked;
 
     virtual void IWeapon(CDepot *theDepot);
     virtual void ResetWeapon();
