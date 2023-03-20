@@ -44,6 +44,8 @@ using json = nlohmann::json;
 // Other graphics settings
 #define kColorBlindMode "colorBlindMode"
 #define kWeaponSightAlpha "weaponSightAlpha"
+#define kShowOldHUD "showOldHUD"
+#define kShowNewHUD "showNewHUD"
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
@@ -117,6 +119,8 @@ static json defaultPrefs = {
     {kFOV, 50.0},
     {kColorBlindMode, 0},
     {kWeaponSightAlpha, 1.0},
+    {kShowOldHUD, true},
+    {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},
     {kServerDescription, ""},
@@ -143,6 +147,10 @@ static std::string PrefPath() {
     std::string jsonPath = std::string(prefPath) + "prefs.json";
     SDL_free(prefPath);
     return jsonPath;
+}
+
+static inline json ReadDefaultPrefs() {
+    return defaultPrefs;
 }
 
 static inline json ReadPrefs() {

@@ -13,6 +13,7 @@
 
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
+#include "CScaledBSP.h"
 #include "CDepot.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
@@ -334,6 +335,8 @@ void CAbstractPlayer::Dispose() {
 }
 
 void CAbstractPlayer::DisposeDashboard() {
+    if (!itsGame->showNewHUD) return;
+
     CBSPWorld *hudWorld;
     hudWorld = itsGame->hudWorld;
 
@@ -452,12 +455,15 @@ void CAbstractPlayer::PlaceHUDParts() {
     RenderDashboard();
 }
 
+// Initialize dashboard parts
 void CAbstractPlayer::LoadDashboardParts() {
+    if (!itsGame->showNewHUD) return;
+
     CBSPWorld *hudWorld;
     hudWorld = itsGame->hudWorld;
 
-    lockLight = new CBSPPart;
-    lockLight->IBSPPart(207);
+    lockLight = new CScaledBSP;
+    lockLight->IScaledBSP(FIX(0.6), 207, this, 0);
     lockLight->ReplaceColor(0xffff2600, ColorManager::getDashboardColor());
     lockLight->privateAmbient = FIX1;
     lockLight->ignoreDirectionalLights = true;
@@ -465,7 +471,10 @@ void CAbstractPlayer::LoadDashboardParts() {
     hudWorld->AddPart(lockLight);
 }
 
+// Place parts on screen
 void CAbstractPlayer::RenderDashboard() {
+    if (!itsGame->showNewHUD) return;
+
     CWeapon *weapon = NULL;
     Matrix *mt;
 
@@ -501,6 +510,8 @@ void CAbstractPlayer::RenderDashboard() {
 }
 
 void CAbstractPlayer::ResetDashboard() {
+    if (!itsGame->showNewHUD) return;
+
     lockLight->isTransparent = true;
 }
 

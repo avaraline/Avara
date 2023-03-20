@@ -17,6 +17,7 @@
 #include "PlayerConfig.h"
 
 class CBSPPart;
+class CScaledBSP;
 class CScout;
 class CPlayerManager;
 class CIncarnator;
@@ -165,7 +166,7 @@ public:
 
     // Dashboard HUD
     RayHitRecord dashBoardOrigin;
-    CBSPPart *lockLight = 0;
+    CScaledBSP *lockLight = 0;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

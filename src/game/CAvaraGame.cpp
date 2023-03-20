@@ -708,6 +708,8 @@ void CAvaraGame::ReadGamePrefs() {
     sensitivity = pow(2.0, gApplication->Get<double>(kMouseSensitivityTag));
     SDL_Log("mouse sensitivity multiplier = %.2lf\n", sensitivity);
     latencyTolerance = gApplication->Get<double>(kLatencyToleranceTag);
+    showOldHUD = gApplication->Get<bool>(kShowOldHUD);
+    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
 }
 
 void CAvaraGame::ResumeGame() {
@@ -1049,7 +1051,8 @@ void CAvaraGame::Render(NVGcontext *ctx) {
     AvaraGLSetDepthTest(false);
     hudWorld->Render(itsView);
     AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
-    hud->Render(itsView, ctx);
+    if (showOldHUD)
+        hud->Render(itsView, ctx);
     AvaraGLSetDepthTest(true);
 }
 

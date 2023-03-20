@@ -12,6 +12,7 @@
 #include <vector>
 
 json CApplication::_prefs = ReadPrefs();
+json CApplication::_defaultPrefs = ReadDefaultPrefs();
 
 CApplication::CApplication(std::string title) :
 nanogui::Screen(nanogui::Vector2i(_prefs[kWindowWidth], _prefs[kWindowHeight]), title, true, _prefs[kFullScreenTag], 8, 8, 24, 8, _prefs[kMultiSamplesTag]) {
