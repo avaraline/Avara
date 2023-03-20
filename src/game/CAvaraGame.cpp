@@ -159,6 +159,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     nextPingTime = 0;
 
+    showOldHUD = gApplication->Get<bool>(kShowOldHUD);
+    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
     // CalcGameRect();
 
     // vg = AvaraVGContext();
@@ -708,8 +710,6 @@ void CAvaraGame::ReadGamePrefs() {
     sensitivity = pow(2.0, gApplication->Get<double>(kMouseSensitivityTag));
     SDL_Log("mouse sensitivity multiplier = %.2lf\n", sensitivity);
     latencyTolerance = gApplication->Get<double>(kLatencyToleranceTag);
-    showOldHUD = gApplication->Get<bool>(kShowOldHUD);
-    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
 }
 
 void CAvaraGame::ResumeGame() {
