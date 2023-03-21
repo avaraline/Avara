@@ -34,9 +34,13 @@ static std::string currentBaseDir("rsrc");
 
 static std::string currentLevelDir("");
 
-void UseLevelFolder(std::string set) {
-    currentLevelDir = set;
-    LoadLevelOggFiles(set);
+void UseBaseFolder(std::string folder) {
+    currentBaseDir = folder;
+    LoadDefaultOggFiles();
+}
+
+void UseLevelFolder(std::string folder) {
+    currentLevelDir = folder;
 }
 
 void UseResFile(std::string filename) {
@@ -466,7 +470,8 @@ typedef std::vector<uint8_t> SoundCashSound;
 typedef std::map<int16_t, SoundCashSound> SoundCash;
 SoundCash app_sound_cash;
 SoundCash level_sound_cash;
-std::string current_sound_cash_dir;
+std::string current_base_sound_cash_dir;
+std::string current_level_sound_cash_dir;
 
 void LoadOggFile(short resId, std::string filename, SoundCash &cash) {
     if (cash.count(resId) > 0) return;
@@ -525,15 +530,18 @@ void LoadOggFiles(nlohmann::json &manifest, SoundCash &target_cash) {
 }
 
 void LoadDefaultOggFiles() {
+    if (current_base_sound_cash_dir.compare(currentBaseDir) == 0) return;
+    app_sound_cash.clear();
+    current_base_sound_cash_dir = currentBaseDir;
     SDL_Log("Loading default sounds...");
     nlohmann::json manifest = GetDefaultManifestJSON();
     LoadOggFiles(manifest, app_sound_cash);
 }
 
 void LoadLevelOggFiles(std::string set) {
-    if (current_sound_cash_dir.compare(set) == 0) return;
+    if (current_level_sound_cash_dir.compare(set) == 0) return;
     level_sound_cash.clear();
-    current_sound_cash_dir = set;
+    current_level_sound_cash_dir = set;
     nlohmann::json manifest = GetManifestJSON(set);
     LoadOggFiles(manifest, level_sound_cash);
 }

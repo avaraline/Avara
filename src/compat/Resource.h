@@ -26,6 +26,7 @@
 #define WAVDIR "wav"
 
 void UseResFile(std::string filename);
+void UseBaseFolder(std::string folder);
 void UseLevelFolder(std::string folder);
 std::string OSTypeString(OSType t);
 OSType StringOSType(std::string s);
