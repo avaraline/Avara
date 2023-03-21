@@ -11,7 +11,7 @@
 
   designer = 0
   information = 0
-  timeLimit = 2400 // Default time limit is 30 minutes.
+  timeLimit = 2400 // Default time limit is 40 minutes.
 
   gravity = 1
   customGravity = 0.12
@@ -277,6 +277,23 @@
   hull[0] = 0
   hull[1] = 0
   hull[2] = 0
+  hull[3] = 0
+  hull[4] = 0
+  hull[5] = 0
+  hull[6] = 0
+  hull[7] = 0
+  hull[8] = 0
+  hull[9] = 0
+  hull[0].name = 0
+  hull[1].name = 0
+  hull[2].name = 0
+  hull[3].name = 0
+  hull[4].name = 0
+  hull[5].name = 0
+  hull[6].name = 0
+  hull[7].name = 0
+  hull[8].name = 0
+  hull[9].name = 0
 
   defaultTraction = 0.4
   defaultFriction = 0.15
@@ -504,6 +521,18 @@ designer = "unknown"
 information = "
 
 No additional information on this level is available."
+
+// Hull names
+hull[0].name = "Light"
+hull[1].name = "Medium"
+hull[2].name = "Heavy"
+hull[3].name = "Unnamed Hull"
+hull[4].name = "Unnamed Hull"
+hull[5].name = "Unnamed Hull"
+hull[6].name = "Unnamed Hull"
+hull[7].name = "Unnamed Hull"
+hull[8].name = "Unnamed Hull"
+hull[9].name = "Unnamed Hull"
 
 // Light colors
 ambient.c = "#ffffff"

@@ -265,7 +265,7 @@ enum {
     iAmbient,
     iAmbientColor,
     iLightsTable,
-    iLightsTableEnd = iLightsTable + 15, //	a 3 x 4 table
+    iLightsTableEnd = iLightsTable + 15, //	a 4 x 4 table
 
     // Advanced weapons
     iGrenadePower,
@@ -280,9 +280,26 @@ enum {
     iMaxStartBoosts,
 
     //	Hulls
-    iFirstHull,
-    iSecondHull,
-    iThirdHull,
+    iHull01,
+    iHull02,
+    iHull03,
+    iHull04,
+    iHull05,
+    iHull06,
+    iHull07,
+    iHull08,
+    iHull09,
+    iHull10,
+    iHullName01,
+    iHullName02,
+    iHullName03,
+    iHullName04,
+    iHullName05,
+    iHullName06,
+    iHullName07,
+    iHullName08,
+    iHullName09,
+    iHullName10,
 
     //	Traction/friction control:
     iDefaultTraction,
