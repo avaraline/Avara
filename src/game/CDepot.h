@@ -41,11 +41,11 @@ public:
     CSliverPart *freeSlivers[SLIVERSIZES];
     CSliverPart *activeSlivers[SLIVERSIZES];
 
-    CBSPPart *smartSight;
-    CBSPPart *smartHairs;
-    CBSPPart *grenadeSight;
-    CBSPPart *grenadeTop;
-    Boolean bspInGame;
+    CBSPPart *smartSight = 0;
+    CBSPPart *smartHairs = 0;
+    CBSPPart *grenadeSight = 0;
+    CBSPPart *grenadeTop = 0;
+    Boolean bspInGame = false;
 
     Fixed grenadePower;
     Fixed missilePower;
