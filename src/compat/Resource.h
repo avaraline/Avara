@@ -16,7 +16,6 @@
 #endif
 
 // files stuff
-#define RSRCDIR "rsrc"
 #define LEVELDIR "levels"
 #define SETFILE "set.json"
 #define ALFDIR "alf"

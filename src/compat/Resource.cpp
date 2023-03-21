@@ -30,6 +30,8 @@ static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.
 
 static std::string currentResource("");
 
+static std::string currentBaseDir("rsrc");
+
 static std::string currentLevelDir("");
 
 void UseLevelFolder(std::string set) {
@@ -288,7 +290,7 @@ json LoadLevelListFromJSON(std::string set) {
 
 json GetDefaultManifestJSON() {
     std::stringstream setManifestName;
-    setManifestName << "rsrc" << PATHSEP << SETFILE;
+    setManifestName << currentBaseDir << PATHSEP << SETFILE;
     char * setManifestPath = new char [PATH_MAX];
     BundlePath(setManifestName, setManifestPath);
     std::ifstream setManifestFile((std::string(setManifestPath)));
@@ -347,7 +349,7 @@ bool GetBSPPath(int resId, char* dest) {
     // haven't found the BSP file yet, try the top-level bsps directory
     if (!found) {
         relPath.str("");
-        relPath << RSRCDIR << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
+        relPath << currentBaseDir << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
         BundlePath(relPath, dest);
         std::ifstream testFile(dest);
         if (!testFile.fail()) {
@@ -418,7 +420,7 @@ std::string GetDefaultScript() {
 
 std::string GetBaseScript() {
     std::stringstream buffa;
-    buffa << "rsrc" << PATHSEP << DEFAULTSCRIPT;
+    buffa << currentBaseDir << PATHSEP << DEFAULTSCRIPT;
     char basepath [PATH_MAX];
     BundlePath(buffa, basepath);
     auto path = std::string(basepath);
@@ -478,7 +480,7 @@ void LoadOggFile(short resId, std::string filename, SoundCash &cash) {
     if(!t.good()) {
         std::stringstream temp;
         buffa.swap(temp);
-        buffa << RSRCDIR << PATHSEP;
+        buffa << currentBaseDir << PATHSEP;
         buffa << OGGDIR << PATHSEP << filename;
         BundlePath(buffa.str().c_str(), fullpath);
     }
