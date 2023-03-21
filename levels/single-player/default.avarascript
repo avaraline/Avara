@@ -1,11 +1,4 @@
-Drag and drop functions from the right to the keyboard above.
-
-Click on a function to see a brief description here.
-
-Each key may have up to 8 functions assigned.
-
-Drag a function away to remove it from a key.
-//	Avara variables and constants
+//    Avara variables and constants
 
 // Do not make changes to this resource. To use the
 // Variables described here, redefine them in your
@@ -129,7 +122,7 @@ Drag a function away to remove it from a key.
   deltaX = 0
   deltaY = 0
   deltaZ = 0
-  
+
   middle = 0
   midPitch = 0
   midYaw = 0
@@ -162,7 +155,7 @@ Drag a function away to remove it from a key.
   verticalRangeMax = 0
   burstLength = 0
   burstSpeed = 0
-  burstCharge = 0  
+  burstCharge = 0
 
   homeSick = 0
   homeRange = 0
@@ -219,20 +212,20 @@ Drag a function away to remove it from a key.
   ejectPower = 0
   ejectSound = 0
   ejectVolume = 0
-  
+
   shieldChargeRate = 0
   maxShield = 0
   shootShield = 0
   grabShield = 0
-  
+
   carryScore = 0
   dropEnergy = 0
   changeHolderEnergy = 0
   changeOwnerTime = 0
-  
+
   changeOwnerSound = 0
   changeOwnerVolume = 0
-  
+
   snapSound = 0
   snapVolume = 0
 
@@ -252,28 +245,30 @@ Drag a function away to remove it from a key.
   in = in[0]
   in[0] = 0    in[1] = 0    in[2] = 0    in[3] = 0    in[4] = 0
   in[5] = 0    in[6] = 0    in[7] = 0    in[8] = 0    in[9] = 0
-  
+
   out = out[0]
   out[0] = 0     out[1] = 0     out[2] = 0     out[3] = 0     out[4] = 0
   out[5] = 0     out[6] = 0     out[7] = 0     out[8] = 0     out[9] = 0
-  
+
   restart = 0
   n = 0
   wait = 0
 
   // Lights (default light settings are stored here)
-  ambient.i= 0.4
-  light[0].i = 0.4  light[0].a =  45  light[0].b = 20
-  light[1].i = 0.3  light[1].a =  20  light[1].b = 200
-  light[2].i = 0.0  light[2].a =  45  light[2].b = 90
-  light[3].i = 0.0  light[3].a =  45  light[3].b = 180
+  ambient.i  = 0.4  ambient.c  =  0
+  light[0].i = 0.4  light[0].a =  45  light[0].b = 20   light[0].c = 0
+  light[1].i = 0.3  light[1].a =  20  light[1].b = 200  light[1].c = 0
+  light[2].i = 0.0  light[2].a =  45  light[2].b = 90   light[2].c = 0
+  light[3].i = 0.0  light[3].a =  45  light[3].b = 180  light[3].c = 0
 
   // Advanced weapon powers:
   grenadePower = 2.25
   missilePower = 1.0
   missileTurnRate = 0.025
   missileAcceleration = 0.2
-  
+  missileArmed.c = 0
+  missileLaunched.c = 0
+
   maxStartGrenades = 20
   maxStartMissiles = 10
   maxStartBoosts = 5
@@ -295,7 +290,7 @@ Drag a function away to remove it from a key.
   wallShield = -1
   wallBlast = 4
 
- 	dummyVar = 0
+     dummyVar = 0
 
 //   some defines
   true = 1
@@ -322,6 +317,8 @@ Drag a function away to remove it from a key.
   T4 = 16
   T5 = 32
   T6 = 64
+  T7 = 128
+  T8 = 256
 
 // Doors:
   isClosed = 0
@@ -332,7 +329,7 @@ Drag a function away to remove it from a key.
   centerAlign = 1
   leftAlign = 0
 
-//	bsp resources...doesn't mean you should use them all:
+//    bsp resources...doesn't mean you should use them all:
   bspAvara = 100
   bspMissionComplete = 101
   bspAvaraA = 102
@@ -480,7 +477,7 @@ bspLargeDome = 806
   snWin = 412
   snLose = 413
   snParasiteAttach = 420
-  
+
   snBallBuzz = 430
   snBallSnap = 431
   snBallEject = 432
@@ -508,62 +505,15 @@ information = "
 
 No additional information on this level is available."
 
+// Light colors
+ambient.c = "#ffffff"
+light[0].c = "#ffffff"
+light[1].c = "#ffffff"
+light[2].c = "#ffffff"
+light[3].c = "#ffffff"
+
+// Other colors
+missileArmed.c = "#400000"
+missileLaunched.c = "#fe0000"
+
 unique 32000 end
-
-Internet Connection
-IP:
-BW:
-RT:Single Player ModeAppleTalk Connection
-This page is used by customized scorekeeping plug-ins.
-
-If you have one, you can open it by double-clicking on it in the Finder or you can select "Open…" from the File menu.
-
-Avara remembers the last used plug-in re-opens it at startup. If there is a problem and the plug-in is suspected, throw the plug-in file file away and empty the trash.
-•i
-•c
-•o ms optimistic (LT •1)
-•e ms estimated (LT •4)
-•r ms smoothed (LT •2)
-•p ms pessimistic (LT •3)
-
-  trackMsg = start
-  stopTrackMsg = stop
-
-∏A
-
-Version:
-IP:
-Distance:
-
-Status:
-Set:
-Mission:
-
-Status
-∏1
-∏2
-∏3
-∏4
-∏5
-∏6
-
-∏i
-
-∏V
-∏A
-∏d km
-
-∏s
-∏c
-∏m
-
-Player
-∏1
-∏2
-∏3
-∏4
-∏5
-∏6
-Internet Avara games are registered at Tracker.Avara.com
-
-Make sure that the tracker location is correct and click on “Search”.
