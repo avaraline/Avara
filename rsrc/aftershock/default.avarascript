@@ -262,10 +262,10 @@
   light[3].i = 0.0  light[3].a =  45  light[3].b = 180  light[3].c = 0
 
   // Advanced weapon powers:
-  grenadePower = 2.25
-  missilePower = 1.0
-  missileTurnRate = 0.025
-  missileAcceleration = 0.2
+  grenadePower = 2.05
+  missilePower = 2.15
+  missileTurnRate = 0.02
+  missileAcceleration = 0.5
   missileArmed.c = 0
   missileLaunched.c = 0
 
