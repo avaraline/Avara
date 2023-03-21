@@ -657,7 +657,7 @@ void CNetManager::ResumeGame() {
     UpdateLocalConfig();
 
     // Pull grenade/missile/booster counts from HULL resource
-    long hullRes = ReadLongVar(iFirstHull + config.hullType);
+    long hullRes = ReadLongVar(iHull01 + config.hullType);
     HullConfigRecord hull;
     LoadHullFromSetJSON(&hull, hullRes);
     config.numGrenades = hull.maxGrenades;
