@@ -292,6 +292,7 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     if(LoadALF(GetALFPath(levelTag))) result = noErr;
 
     if (result == noErr) {
+        playerWindow->RepopulateHullOptions();
         itsGame->loadedLevel = ledi["Name"];
         itsGame->loadedTag  = levelTag;
         std::string msgPrefix = "Loaded";
