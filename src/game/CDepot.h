@@ -87,6 +87,8 @@ public:
         Fixed energy,
         Fixed *speedVector);
 
+    virtual void ReloadParts();
+
     virtual void LevelReset();
 
     virtual void FrameAction();
