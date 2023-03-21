@@ -213,6 +213,8 @@ def convert_to_files(datafile, thedir):
         text = text.replace("\r", "\n")
         text = re.sub(r"ambient(\s*)=", "ambient.i\1=", text)
         textpath = os.path.join(thedir, SCRIPTFILE)
+        if datafile == "levels/single-player.r":
+            textpath += '.ignore'
         with open(textpath, "w", encoding="utf-8") as textfile:
             textfile.write(text)
     # print(forks);
