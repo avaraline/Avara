@@ -128,6 +128,7 @@ void CBSPPart::IBSPPart(short resId) {
         polyTable[i].normal[1] = poly["normal"][1];
         polyTable[i].normal[2] = poly["normal"][2];
         // Triangle points
+        polyTable[i].vis = static_cast<uint8_t>(poly["vis"]);
         polyTable[i].triCount = poly["tris"].size() / 3;
         polyTable[i].triPoints = std::make_unique<uint16_t[]>(poly["tris"].size());
         for (size_t j = 0; j < poly["tris"].size(); j += 3) {

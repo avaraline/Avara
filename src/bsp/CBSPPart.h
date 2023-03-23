@@ -45,6 +45,7 @@ typedef struct {
     uint16_t front;
     uint16_t back;
     uint16_t colorIdx;
+    uint8_t vis;
 } PolyRecord;
 
 namespace CBSPUserFlags {

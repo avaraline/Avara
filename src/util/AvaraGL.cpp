@@ -292,8 +292,10 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer (2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *) (7 * sizeof(float)));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
     glEnableVertexAttribArray(2);
+    glVertexAttribPointer(3, 1, GL_INT, GL_FALSE, sizeof(GLData), (void *)(10 * sizeof(float)));
+    glEnableVertexAttribArray(3);
 
     // custom per-object lighting
     float extra_amb = ToFloat(part->extraAmbient);
@@ -323,6 +325,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
+    glDisableVertexAttribArray(3);
 
     // restore previous lighting state
     if (part->privateAmbient != -1 || extra_amb > 0) {
@@ -366,6 +369,7 @@ void AvaraGLUpdateData(CBSPPart *part) {
             part->glData[p].y = ToFloat((*pt)[1]);
             part->glData[p].z = ToFloat((*pt)[2]);
             part->currColorTable[poly->colorIdx].ExportGLFloats(&part->glData[p].r, 4);
+            part->glData[p].v = (part->glData[p].a == 0xff) ? poly->vis : 3;
 
             part->glData[p].nx = poly->normal[0];
             part->glData[p].ny = poly->normal[1];
