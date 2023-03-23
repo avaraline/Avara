@@ -154,6 +154,7 @@ public:
     uint32_t pointCount = 0;
     uint32_t polyCount = 0;
     int totalPoints = 0;
+    int openGLPoints = 0;
     std::unique_ptr<ARGBColor[]> origColorTable;
     std::unique_ptr<ARGBColor[]> currColorTable;
     std::unique_ptr<Vector[]> pointTable;

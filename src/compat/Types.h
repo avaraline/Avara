@@ -84,7 +84,6 @@ typedef uint8_t GrafVerb;
 
 typedef struct GLData {
     float x, y, z, r, g, b, a, nx, ny, nz;
-    uint8_t v;
 } GLData;
 
 #ifdef _WIN32
