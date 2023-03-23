@@ -583,7 +583,7 @@ def readable_colors(color_list):
             out_list.append("marker(3)")
         else:
             # remaining colors implicitly given full alpha via CSS syntax
-            out_list.append("#" + hex(color)[2:])
+            out_list.append("#" + hex(color)[2:].zfill(6))
     return out_list
 
 

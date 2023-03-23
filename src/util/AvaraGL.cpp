@@ -365,7 +365,7 @@ void AvaraGLUpdateData(CBSPPart *part) {
             part->glData[p].x = ToFloat((*pt)[0]);
             part->glData[p].y = ToFloat((*pt)[1]);
             part->glData[p].z = ToFloat((*pt)[2]);
-            poly->color.ExportGLFloats(&part->glData[p].r, 4);
+            part->currColorTable[poly->colorIdx].ExportGLFloats(&part->glData[p].r, 4);
 
             part->glData[p].nx = poly->normal[0];
             part->glData[p].ny = poly->normal[1];
