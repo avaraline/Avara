@@ -126,9 +126,12 @@ void CBSPPart::IBSPPart(short resId) {
         // Color
         polyTable[i].colorIdx = static_cast<uint16_t>(poly["color"]);
         // Normal
-        polyTable[i].normal[0] = poly["normal"][0];
-        polyTable[i].normal[1] = poly["normal"][1];
-        polyTable[i].normal[2] = poly["normal"][2];
+        json norms = doc["normals"];
+        int idx = poly["normal"];
+        json norm = norms[idx];
+        polyTable[i].normal[0] = norm[0];
+        polyTable[i].normal[1] = norm[1];
+        polyTable[i].normal[2] = norm[2];
         // Triangle points
         polyTable[i].vis = static_cast<uint8_t>(poly["vis"]);
         polyTable[i].triCount = poly["tris"].size() / 3;

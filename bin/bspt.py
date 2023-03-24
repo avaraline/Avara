@@ -525,6 +525,7 @@ class BSP(object):
         out = {
             'colors': readable_colors(d['colors']),
             'points': [p[:3] for p in d['points']],
+            'normals': d['vectors'],
             'bounds': {
                 'min': d['min_bounds'][:3],
                 'max': d['max_bounds'][:3],
@@ -558,7 +559,7 @@ class BSP(object):
                 # the normal when rendering the back face, if requested by
                 # the flag
                 out['polys'].append({
-                    'normal': [x for x in normal],
+                    'normal': vec_idx,
                     'color': color_idx,
                     'front': fp, # index of the poly in front of this one
                     'back': bp, # index of the poly in back of this one
@@ -567,7 +568,7 @@ class BSP(object):
                 })
         except IndexError:
             raise
-        return json.dumps(out, indent=2, sort_keys=True)
+        return json.dumps(out, indent=None, separators=(", ", ":"), sort_keys=True)
 
 
 def readable_colors(color_list):

@@ -267,7 +267,7 @@ void AvaraGLInitContext() {
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
 
     glEnable(GL_BLEND);
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE, GL_ONE);
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE);
 
     ready = true;
 }
