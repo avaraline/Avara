@@ -107,6 +107,8 @@ void CBSPPart::IBSPPart(short resId) {
             currColorTable[i] = color;
         }
     }
+    
+    CheckForAlpha();
 
     for (uint32_t i = 0; i < pointCount; i++) {
         json pt = doc["points"][i];
@@ -413,6 +415,7 @@ void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
             currColorTable[i] = newColor;
         }
     }
+    CheckForAlpha();
     AvaraGLUpdateData(this);
 }
 
@@ -446,6 +449,20 @@ void CBSPPart::Dispose() {
         glDeleteBuffers(1, &vertexBuffer);
     }
     CDirectObject::Dispose();
+}
+
+void CBSPPart::CheckForAlpha() {
+    hasAlpha = false;
+    for (uint16_t i = 0; i < colorCount; i++) {
+        if (currColorTable[i].GetA() != 0xff) {
+            hasAlpha = true;
+            return;
+        }
+    }
+}
+
+bool CBSPPart::HasAlpha() {
+    return hasAlpha;
 }
 
 #define TESTBOUND(b, c) \
@@ -566,6 +583,11 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
     PROFILING_CODE(short theCase = 0;)
 
     PROFILING_CODE(totalCases++;)
+
+    // Never treat as obscuring if this shape has any translucency anywhere.
+    if (HasAlpha()) {
+        return false;
+    }
 
     VectorMatrixProduct(1, &other->sphereGlobCenter, &center, &invGlobTransform);
     r = other->enclosureRadius - tolerance;

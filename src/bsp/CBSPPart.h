@@ -210,10 +210,15 @@ public:
     virtual void PrependMatrix(Matrix *m); //	itsTransform = m * itsTransform
     virtual Matrix *GetInverseTransform();
 
+    virtual bool HasAlpha();
+
     //	Compare with another part to see which one is in front:
     virtual Boolean Obscures(CBSPPart *other);
     virtual Boolean HopeNotObscure(CBSPPart *other, Vector *otherCorners);
     virtual Boolean HopeDoesObscure(CBSPPart *other, Vector *otherCorners);
 
     void PrintMatrix(Matrix *m);
+protected:
+    bool hasAlpha = false;
+    virtual void CheckForAlpha();
 };

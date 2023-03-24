@@ -153,6 +153,7 @@ void CSmartBox::ISmartBox(short resId,
     for (int i = 0; i < polyCount; i++) {
         currColorTable[polyTable[i].colorIdx] = color;
     }
+    CheckForAlpha();
 
     MoveDone();
 
