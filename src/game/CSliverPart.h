@@ -18,8 +18,8 @@ public:
     CSliverPart *nextSliver;
     Vector speed;
     short lifeCount;
-    ColorRecord borrowedColors = 0;
-    ColorRecord *fakeMaster;
+    ARGBColor borrowedColors = 0;
+    ARGBColor *fakeMaster;
     Fixed friction, gravity;
     Fixed fpsScale, fpsFriction, fpsGravity;
 
