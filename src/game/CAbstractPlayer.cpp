@@ -584,14 +584,14 @@ void CAbstractPlayer::RenderDashboard() {
     grenadeLabel->isTransparent = false;
     grenadeLabel->Reset();
     grenadeLabel->RotateOneY(dashboardSpinHeading);
-    DashboardPosition(grenadeLabel, -0.15, -0.24);
+    DashboardPosition(grenadeLabel, 0.15, -0.24);
     grenadeLabel->ApplyMatrix(mt);
     grenadeLabel->MoveDone();
 
     missileLabel->isTransparent = false;
     missileLabel->Reset();
     missileLabel->RotateOneY(dashboardSpinHeading);
-    DashboardPosition(missileLabel, 0.15, -0.24);
+    DashboardPosition(missileLabel, -0.15, -0.24);
     missileLabel->ApplyMatrix(mt);
     missileLabel->MoveDone();
 
@@ -602,14 +602,14 @@ void CAbstractPlayer::RenderDashboard() {
             // Fill box
             grenadeMeter[i]->isTransparent = false;
             grenadeMeter[i]->Reset();
-            DashboardPosition(grenadeMeter[i], -0.15, -0.2+(float(i)/35));
+            DashboardPosition(grenadeMeter[i], 0.15, -0.2+(float(i)/35));
             grenadeMeter[i]->ApplyMatrix(mt);
             grenadeMeter[i]->MoveDone();
         } else {
             // Empty box
             grenadeBox[i]->isTransparent = false;
             grenadeBox[i]->Reset();
-            DashboardPosition(grenadeBox[i], -0.15, -0.2+(float(i)/35));
+            DashboardPosition(grenadeBox[i], 0.15, -0.2+(float(i)/35));
             grenadeBox[i]->ApplyMatrix(mt);
             grenadeBox[i]->MoveDone();
         }
@@ -618,14 +618,14 @@ void CAbstractPlayer::RenderDashboard() {
             // Fill box
             missileMeter[i]->isTransparent = false;
             missileMeter[i]->Reset();
-            DashboardPosition(missileMeter[i], 0.15, -0.2+(float(i)/35));
+            DashboardPosition(missileMeter[i], -0.15, -0.2+(float(i)/35));
             missileMeter[i]->ApplyMatrix(mt);
             missileMeter[i]->MoveDone();
         } else {
             // Empty box
             missileBox[i]->isTransparent = false;
             missileBox[i]->Reset();
-            DashboardPosition(missileBox[i], 0.15, -0.2+(float(i)/35));
+            DashboardPosition(missileBox[i], -0.15, -0.2+(float(i)/35));
             missileBox[i]->ApplyMatrix(mt);
             missileBox[i]->MoveDone();
         }
