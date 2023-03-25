@@ -10,6 +10,7 @@
 #pragma once
 #include "ARGBColor.h"
 #include "CDirectObject.h"
+#include "ColorManager.h"
 #include "FastMat.h"
 #include "Types.h"
 
@@ -38,16 +39,14 @@ typedef struct {
 } FixedPoint;
 
 typedef struct {
-    ARGBColor color;
-    ARGBColor origColor;
     float normal[3];
     uint16_t triCount;
     std::unique_ptr<uint16_t[]> triPoints;
     uint16_t front;
     uint16_t back;
+    uint16_t colorIdx;
+    uint8_t vis;
 } PolyRecord;
-
-typedef ARGBColor ColorRecord;
 
 namespace CBSPUserFlags {
     constexpr short kIsAmbient = 1;
@@ -151,9 +150,13 @@ public:
     Fixed maxY = 0;
 
     //	members used during rendering:
+    uint16_t colorCount = 0;
     uint32_t pointCount = 0;
     uint32_t polyCount = 0;
     int totalPoints = 0;
+    int openGLPoints = 0;
+    std::unique_ptr<ARGBColor[]> origColorTable;
+    std::unique_ptr<ARGBColor[]> currColorTable;
     std::unique_ptr<Vector[]> pointTable;
     std::unique_ptr<PolyRecord[]> polyTable;
 
@@ -208,10 +211,15 @@ public:
     virtual void PrependMatrix(Matrix *m); //	itsTransform = m * itsTransform
     virtual Matrix *GetInverseTransform();
 
+    virtual bool HasAlpha();
+
     //	Compare with another part to see which one is in front:
     virtual Boolean Obscures(CBSPPart *other);
     virtual Boolean HopeNotObscure(CBSPPart *other, Vector *otherCorners);
     virtual Boolean HopeDoesObscure(CBSPPart *other, Vector *otherCorners);
 
     void PrintMatrix(Matrix *m);
+protected:
+    bool hasAlpha = false;
+    virtual void CheckForAlpha();
 };

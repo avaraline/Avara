@@ -763,10 +763,10 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         HullConfigRecord hull;
 
         hullRes = config->hullType;
-        if (hullRes < 0 || hullRes > 2)
+        if (hullRes < 0 || hullRes > 9)
             hullRes = 1;
 
-        hullRes = ReadLongVar(iFirstHull + hullRes);
+        hullRes = ReadLongVar(iHull01 + hullRes);
 
         LoadHullFromSetJSON(&hull, hullRes);
 

@@ -30,11 +30,17 @@ static std::string defaultResource(std::string(SDL_GetBasePath()) + "rsrc/Avara.
 
 static std::string currentResource("");
 
+static std::string currentBaseDir("rsrc");
+
 static std::string currentLevelDir("");
 
-void UseLevelFolder(std::string set) {
-    currentLevelDir = set;
-    LoadLevelOggFiles(set);
+void UseBaseFolder(std::string folder) {
+    currentBaseDir = folder;
+    LoadDefaultOggFiles();
+}
+
+void UseLevelFolder(std::string folder) {
+    currentLevelDir = folder;
 }
 
 void UseResFile(std::string filename) {
@@ -288,7 +294,7 @@ json LoadLevelListFromJSON(std::string set) {
 
 json GetDefaultManifestJSON() {
     std::stringstream setManifestName;
-    setManifestName << "rsrc" << PATHSEP << SETFILE;
+    setManifestName << currentBaseDir << PATHSEP << SETFILE;
     char * setManifestPath = new char [PATH_MAX];
     BundlePath(setManifestName, setManifestPath);
     std::ifstream setManifestFile((std::string(setManifestPath)));
@@ -347,7 +353,7 @@ bool GetBSPPath(int resId, char* dest) {
     // haven't found the BSP file yet, try the top-level bsps directory
     if (!found) {
         relPath.str("");
-        relPath << RSRCDIR << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
+        relPath << currentBaseDir << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
         BundlePath(relPath, dest);
         std::ifstream testFile(dest);
         if (!testFile.fail()) {
@@ -418,7 +424,7 @@ std::string GetDefaultScript() {
 
 std::string GetBaseScript() {
     std::stringstream buffa;
-    buffa << "rsrc" << PATHSEP << DEFAULTSCRIPT;
+    buffa << currentBaseDir << PATHSEP << DEFAULTSCRIPT;
     char basepath [PATH_MAX];
     BundlePath(buffa, basepath);
     auto path = std::string(basepath);
@@ -464,7 +470,8 @@ typedef std::vector<uint8_t> SoundCashSound;
 typedef std::map<int16_t, SoundCashSound> SoundCash;
 SoundCash app_sound_cash;
 SoundCash level_sound_cash;
-std::string current_sound_cash_dir;
+std::string current_base_sound_cash_dir;
+std::string current_level_sound_cash_dir;
 
 void LoadOggFile(short resId, std::string filename, SoundCash &cash) {
     if (cash.count(resId) > 0) return;
@@ -478,7 +485,7 @@ void LoadOggFile(short resId, std::string filename, SoundCash &cash) {
     if(!t.good()) {
         std::stringstream temp;
         buffa.swap(temp);
-        buffa << RSRCDIR << PATHSEP;
+        buffa << currentBaseDir << PATHSEP;
         buffa << OGGDIR << PATHSEP << filename;
         BundlePath(buffa.str().c_str(), fullpath);
     }
@@ -523,15 +530,18 @@ void LoadOggFiles(nlohmann::json &manifest, SoundCash &target_cash) {
 }
 
 void LoadDefaultOggFiles() {
+    if (current_base_sound_cash_dir.compare(currentBaseDir) == 0) return;
+    app_sound_cash.clear();
+    current_base_sound_cash_dir = currentBaseDir;
     SDL_Log("Loading default sounds...");
     nlohmann::json manifest = GetDefaultManifestJSON();
     LoadOggFiles(manifest, app_sound_cash);
 }
 
 void LoadLevelOggFiles(std::string set) {
-    if (current_sound_cash_dir.compare(set) == 0) return;
+    if (current_level_sound_cash_dir.compare(set) == 0) return;
     level_sound_cash.clear();
-    current_sound_cash_dir = set;
+    current_level_sound_cash_dir = set;
     nlohmann::json manifest = GetManifestJSON(set);
     LoadOggFiles(manifest, level_sound_cash);
 }

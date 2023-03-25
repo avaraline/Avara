@@ -271,23 +271,32 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
     OSErr result = fnfErr;
     json setManifest = GetManifestJSON(set);
-    if(setManifest == -1) return result;
-    if(setManifest.find("LEDI") == setManifest.end()) return result;
+    if (setManifest == -1) return result;
+    if (setManifest.find("LEDI") == setManifest.end()) return result;
 
     json ledi = NULL;
     for (auto &ld : setManifest["LEDI"].items()) {
         if (ld.value()["Alf"] == levelTag)
             ledi = ld.value();
     }
-    if(ledi == NULL) return result;
+    if (ledi == NULL) return result;
+
+    if (ledi.contains("Aftershock") && ledi["Aftershock"] == true) {
+        UseBaseFolder("rsrc/aftershock");
+    } else {
+        UseBaseFolder("rsrc");
+    }
+
+    LoadLevelOggFiles(set);
 
     if(LoadALF(GetALFPath(levelTag))) result = noErr;
 
     if (result == noErr) {
+        playerWindow->RepopulateHullOptions();
         itsGame->loadedLevel = ledi["Name"];
         itsGame->loadedTag  = levelTag;
         std::string msgPrefix = "Loaded";
-        if(sendingPlayer != NULL)
+        if (sendingPlayer != NULL)
             msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
         AddMessageLine(msgPrefix + " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".");
         levelWindow->SelectLevel(set, itsGame->loadedLevel);

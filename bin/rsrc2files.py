@@ -20,6 +20,9 @@ ALFEXT = ".alf"
 SCRIPTFILE = "default.avarascript"
 OGGDIR = "ogg"
 WAVDIR = "wav"
+AFTERSHOCKSETS = [
+    "levels/aftershock.r"
+]
 
 EXPORT_SOUNDS = True
 KEEP_WAV = False
@@ -123,11 +126,14 @@ def convert_to_files(datafile, thedir):
                 print(alfpath)
                 writealf(alfpath, picts[pictk])
 
-        result["LEDI"].append({
+        lvlentry = {
             "Alf": alfname,
             "Name": le["Name"],
             "Message": le["Message"].strip(),
-        })
+        }
+        if datafile in AFTERSHOCKSETS:
+            lvlentry["Aftershock"] = True
+        result["LEDI"].append(lvlentry)
 
     if "HULL" in forks:
         result["HULL"] = get_tmpl(forks, "HULL")
@@ -138,6 +144,8 @@ def convert_to_files(datafile, thedir):
         result["HSND"] = get_tmpl(forks, "HSND")
         if datafile == "levels/single-player.r":
             oggdir = os.path.join("rsrc", OGGDIR)
+        elif datafile == "levels/aftershock.r":
+            oggdir = os.path.join("rsrc", "aftershock", OGGDIR)
         else:
             oggdir = os.path.join(thedir, OGGDIR)
         os.makedirs(oggdir, exist_ok=True)
@@ -173,6 +181,8 @@ def convert_to_files(datafile, thedir):
         rbsps = get_tmpl(forks, "BSPT")
         if datafile == "levels/single-player.r":
             bspspath = os.path.join("rsrc", BSPDIR)
+        elif datafile == "levels/aftershock.r":
+            bspspath = os.path.join("rsrc", "aftershock", BSPDIR)
         else:
             bspspath = os.path.join(thedir, BSPDIR)
         os.makedirs(bspspath, exist_ok=True)
@@ -203,16 +213,24 @@ def convert_to_files(datafile, thedir):
             except FileNotFoundError:
                 pass
 
-    setpath = os.path.join(thedir, SETFILE)
-    with open(setpath, "w", encoding="utf-8") as setfile:
-        setfile.write(json.dumps(result, indent=2, ensure_ascii=False))
-        setfile.write("\n")
+    dumpdirs = [os.path.join(thedir, SETFILE)]
+    if datafile == "levels/single-player.r":
+        dumpdirs.append(os.path.join("rsrc", SETFILE))
+    elif datafile == "levels/aftershock.r":
+        dumpdirs.append(os.path.join("rsrc", "aftershock", SETFILE))
+    for d in dumpdirs:
+        with open(d, "w", encoding="utf-8") as setfile:
+            setfile.write(json.dumps(result, indent=2, ensure_ascii=False))
+            setfile.write("\n")
+
 
     if "TEXT" in forks:
         text = "".join([e["data"].decode("macroman") for e in forks["TEXT"]])
         text = text.replace("\r", "\n")
         text = re.sub(r"ambient(\s*)=", "ambient.i\1=", text)
         textpath = os.path.join(thedir, SCRIPTFILE)
+        if datafile == "levels/single-player.r" or datafile == "levels/aftershock.r":
+            textpath += '.ignore'
         with open(textpath, "w", encoding="utf-8") as textfile:
             textfile.write(text)
     # print(forks);
