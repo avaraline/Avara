@@ -181,6 +181,7 @@ public:
     virtual void Dispose();
 
     virtual void ReplaceColor(ARGBColor origColor, ARGBColor newColor);
+    virtual void ReplaceAllColors(ARGBColor newColor);
 
     virtual Boolean PrepareForRender(CViewParameters *vp);
     virtual void DrawPolygons();

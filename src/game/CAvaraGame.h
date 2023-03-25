@@ -181,6 +181,9 @@ public:
     Boolean keysFromStdin;
     Boolean keysToStdout;
 
+    Boolean showOldHUD;
+    Boolean showNewHUD;
+
     // Moved here from GameLoop so it can run on the normal event loop
     // long            frameCredit;
     // long            frameAdvance;

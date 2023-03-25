@@ -159,6 +159,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     nextPingTime = 0;
 
+    showOldHUD = gApplication->Get<bool>(kShowOldHUD);
+    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
     // CalcGameRect();
 
     // vg = AvaraVGContext();
@@ -1049,7 +1051,8 @@ void CAvaraGame::Render(NVGcontext *ctx) {
     AvaraGLSetDepthTest(false);
     hudWorld->Render(itsView);
     AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
-    hud->Render(itsView, ctx);
+    if (showOldHUD)
+        hud->Render(itsView, ctx);
     AvaraGLSetDepthTest(true);
 }
 

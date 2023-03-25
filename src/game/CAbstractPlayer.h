@@ -17,6 +17,7 @@
 #include "PlayerConfig.h"
 
 class CBSPPart;
+class CScaledBSP;
 class CScout;
 class CPlayerManager;
 class CIncarnator;
@@ -163,6 +164,18 @@ public:
     CBSPPart *targetOffs[2] = {0, 0};
     CBSPPart *targetOns[2] = {0, 0};
 
+    // Dashboard HUD
+    RayHitRecord dashboardOrigin;
+    Fixed dashboardSpinHeading;
+    Fixed dashboardSpinSpeed;
+    CScaledBSP *lockLight = 0;
+    CScaledBSP *grenadeLabel = 0;
+    CScaledBSP *missileLabel = 0;
+    CScaledBSP *grenadeBox[4] = {0, 0, 0, 0};
+    CScaledBSP *missileBox[4] = {0, 0, 0, 0};
+    CScaledBSP *grenadeMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void AdaptableSettings();
@@ -174,6 +187,7 @@ public:
     virtual void StartSystems();
 
     virtual void Dispose();
+    virtual void DisposeDashboard();
 
     virtual void ReturnWeapon(short theKind);
     virtual void ArmGrenade();
@@ -195,6 +209,10 @@ public:
     virtual void AvoidBumping();
 
     virtual void PlaceHUDParts();
+    virtual void LoadDashboardParts();
+    virtual void RenderDashboard();
+    virtual void DashboardPosition(CBSPPart *part, float x, float y);
+    virtual void ResetDashboard();
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
 

@@ -104,6 +104,10 @@ public:
         return shieldGaugeColor;
     }
 
+    static inline ARGBColor getDashboardColor() {
+        return dashboardColor;
+    }
+
     static inline std::optional<ARGBColor> getMarkerColor(uint8_t num) {
         switch (num) {
             case 0:
@@ -184,6 +188,7 @@ private:
     static ARGBColor plasmaSightsOffColor;
     static ARGBColor plasmaSightsOnColor;
     static ARGBColor shieldGaugeColor;
+    static ARGBColor dashboardColor;
     static ARGBColor teamColors[kMaxTeamColors + 1];
     static ARGBColor teamTextColors[kMaxTeamColors + 1];
     static std::string teamColorNames[kMaxTeamColors + 1];

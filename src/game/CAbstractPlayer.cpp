@@ -13,6 +13,7 @@
 
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
+#include "CScaledBSP.h"
 #include "CDepot.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
@@ -87,6 +88,8 @@ void CAbstractPlayer::LoadHUDParts() {
     dirArrow->privateAmbient = FIX1;
     dirArrow->isTransparent = true;
     hudWorld->AddPart(dirArrow);
+
+    LoadDashboardParts();
 }
 
 void CAbstractPlayer::StartSystems() {
@@ -317,6 +320,7 @@ void CAbstractPlayer::Dispose() {
 
     hudWorld->RemovePart(dirArrow);
     dirArrow->Dispose();
+    DisposeDashboard();
 
     for (i = 0; i < 2; i++) {
         hudWorld->RemovePart(targetOns[i]);
@@ -328,6 +332,36 @@ void CAbstractPlayer::Dispose() {
     gHub->ReleaseLink(teleportSoundLink);
 
     CRealMovers::Dispose();
+}
+
+void CAbstractPlayer::DisposeDashboard() {
+    if (!itsGame->showNewHUD) return;
+
+    CBSPWorld *hudWorld;
+    hudWorld = itsGame->hudWorld;
+
+    hudWorld->RemovePart(lockLight);
+    lockLight->Dispose();
+
+    hudWorld->RemovePart(grenadeLabel);
+    grenadeLabel->Dispose();
+
+    hudWorld->RemovePart(missileLabel);
+    missileLabel->Dispose();
+
+    for (int i = 0; i < 4; i++) {
+        hudWorld->RemovePart(grenadeMeter[i]);
+        grenadeMeter[i]->Dispose();
+
+        hudWorld->RemovePart(missileMeter[i]);
+        missileMeter[i]->Dispose();
+
+        hudWorld->RemovePart(grenadeBox[i]);
+        grenadeBox[i]->Dispose();
+
+        hudWorld->RemovePart(missileBox[i]);
+        missileBox[i]->Dispose();
+    }
 }
 
 /*
@@ -436,6 +470,205 @@ void CAbstractPlayer::PlaceHUDParts() {
 
             theSight->MoveDone();
         }
+    }
+
+    RenderDashboard();
+}
+
+// Initialize dashboard parts
+void CAbstractPlayer::LoadDashboardParts() {
+    if (!itsGame->showNewHUD) return;
+
+    CBSPWorld *hudWorld;
+    hudWorld = itsGame->hudWorld;
+
+    dashboardSpinSpeed = ToFixed(.5);
+    dashboardSpinHeading = 0;
+
+    lockLight = new CScaledBSP;
+    lockLight->IScaledBSP(FIX(0.6), 207, this, 0);
+    lockLight->ReplaceAllColors(ColorManager::getDashboardColor());
+    lockLight->privateAmbient = FIX1;
+    lockLight->ignoreDirectionalLights = true;
+    lockLight->isTransparent = true;
+    hudWorld->AddPart(lockLight);
+
+    grenadeLabel = new CScaledBSP;
+    grenadeLabel->IScaledBSP(FIX(0.7), 820, this, 0);
+    grenadeLabel->ReplaceAllColors(ColorManager::getDashboardColor());
+    grenadeLabel->privateAmbient = FIX1;
+    grenadeLabel->ignoreDirectionalLights = false;
+    grenadeLabel->isTransparent = true;
+    hudWorld->AddPart(grenadeLabel);
+
+    missileLabel = new CScaledBSP;
+    missileLabel->IScaledBSP(FIX(0.7), 802, this, 0);
+    missileLabel->ReplaceAllColors(ColorManager::getDashboardColor());
+    missileLabel->privateAmbient = FIX1;
+    missileLabel->ignoreDirectionalLights = false;
+    missileLabel->isTransparent = true;
+    hudWorld->AddPart(missileLabel);
+
+    for (int i = 0; i < 4; i++) {
+        grenadeMeter[i] = new CScaledBSP;
+        grenadeMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
+        grenadeMeter[i]->ReplaceAllColors(ColorManager::getDashboardColor());
+        grenadeMeter[i]->ignoreDirectionalLights = false;
+        grenadeMeter[i]->isTransparent = true;
+        hudWorld->AddPart(grenadeMeter[i]);
+
+        missileMeter[i] = new CScaledBSP;
+        missileMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
+        missileMeter[i]->ReplaceAllColors(ColorManager::getDashboardColor());
+        missileMeter[i]->ignoreDirectionalLights = false;
+        missileMeter[i]->isTransparent = true;
+        hudWorld->AddPart(missileMeter[i]);
+
+        grenadeBox[i] = new CScaledBSP;
+        grenadeBox[i]->IScaledBSP(FIX(.2), 720, this, 0);
+        grenadeBox[i]->ReplaceAllColors(ColorManager::getDashboardColor());
+        grenadeBox[i]->ignoreDirectionalLights = false;
+        grenadeBox[i]->isTransparent = true;
+        hudWorld->AddPart(grenadeBox[i]);
+
+        missileBox[i] = new CScaledBSP;
+        missileBox[i]->IScaledBSP(FIX(.2), 720, this, 0);
+        missileBox[i]->ReplaceAllColors(ColorManager::getDashboardColor());
+        missileBox[i]->ignoreDirectionalLights = false;
+        missileBox[i]->isTransparent = true;
+        hudWorld->AddPart(missileBox[i]);
+    }
+}
+
+// Place parts on screen
+void CAbstractPlayer::RenderDashboard() {
+    if (!itsGame->showNewHUD) return;
+
+    CWeapon *weapon = NULL;
+    Matrix *mt;
+
+    dashboardSpinHeading += FpsCoefficient2(FDegToOne(dashboardSpinSpeed));
+    //SDL_Log("%d", dashboardSpinHeading);
+
+    // Setup origin
+    // Screen center should be (0,0)
+    mt = &viewPortPart->itsTransform;
+    dashboardOrigin.direction[0] = FMul((*mt)[2][0], PLAYERMISSILESPEED);
+    dashboardOrigin.direction[1] = FMul((*mt)[2][1], PLAYERMISSILESPEED);
+    dashboardOrigin.direction[2] = FMul((*mt)[2][2], PLAYERMISSILESPEED);
+    dashboardOrigin.direction[3] = 0;
+    NormalizeVector(3, dashboardOrigin.direction);
+
+    dashboardOrigin.distance = PLAYERMISSILERANGE / 8;
+    dashboardOrigin.closestHit = NULL;
+    dashboardOrigin.origin[0] = *mt[3][0];
+    dashboardOrigin.origin[1] = *mt[3][1];
+    dashboardOrigin.origin[2] = *mt[3][2];
+
+    if (weaponIdent)
+        weapon = (CWeapon *)gCurrentGame->FindIdent(weaponIdent);
+
+    // Part location and logic
+    if (weapon && weapon->isTargetLocked) {
+        lockLight->isTransparent = false;
+        lockLight->Reset();
+        DashboardPosition(lockLight, 0.0, -0.06);
+        lockLight->ApplyMatrix(mt);
+        lockLight->MoveDone();
+    }
+
+    // Ammo Labels
+    grenadeLabel->isTransparent = false;
+    grenadeLabel->Reset();
+    grenadeLabel->RotateOneY(dashboardSpinHeading);
+    DashboardPosition(grenadeLabel, 0.15, -0.24);
+    grenadeLabel->ApplyMatrix(mt);
+    grenadeLabel->MoveDone();
+
+    missileLabel->isTransparent = false;
+    missileLabel->Reset();
+    missileLabel->RotateOneY(dashboardSpinHeading);
+    DashboardPosition(missileLabel, -0.15, -0.24);
+    missileLabel->ApplyMatrix(mt);
+    missileLabel->MoveDone();
+
+
+    // Ammo counts
+    for (int i = 0; i < 4; i++) {
+        if (i < (grenadeCount+1)/2) {
+            // Fill box
+            grenadeMeter[i]->isTransparent = false;
+            grenadeMeter[i]->Reset();
+            DashboardPosition(grenadeMeter[i], 0.15, -0.2+(float(i)/35));
+            grenadeMeter[i]->ApplyMatrix(mt);
+            grenadeMeter[i]->MoveDone();
+        } else {
+            // Empty box
+            grenadeBox[i]->isTransparent = false;
+            grenadeBox[i]->Reset();
+            DashboardPosition(grenadeBox[i], 0.15, -0.2+(float(i)/35));
+            grenadeBox[i]->ApplyMatrix(mt);
+            grenadeBox[i]->MoveDone();
+        }
+
+        if (i < missileCount) {
+            // Fill box
+            missileMeter[i]->isTransparent = false;
+            missileMeter[i]->Reset();
+            DashboardPosition(missileMeter[i], -0.15, -0.2+(float(i)/35));
+            missileMeter[i]->ApplyMatrix(mt);
+            missileMeter[i]->MoveDone();
+        } else {
+            // Empty box
+            missileBox[i]->isTransparent = false;
+            missileBox[i]->Reset();
+            DashboardPosition(missileBox[i], -0.15, -0.2+(float(i)/35));
+            missileBox[i]->ApplyMatrix(mt);
+            missileBox[i]->MoveDone();
+        }
+    }
+}
+
+void CAbstractPlayer::DashboardPosition(CBSPPart *part, float x, float y) {
+    // Draw a part on the dashboard
+    // Coordinates on the screen are roughly described as a percentage of the screen away from the bottom and the left
+    // (-1.0, -1.0) is the bottom left of the screen
+    // (1.0, 1.0) is the top right of the screen
+    int xMax = 860000; // Distance from center to the edge of the screen. Need more descriptive units
+    int yMax = 540000;
+    int xAng = 0;
+
+    // Translate the input to screen location
+    int xPos = -xMax * x; // Positive x is on the left for some reason
+    int yPos = yMax * y;
+
+    // Turn elements toward the center of the screen for a better 3d look
+    // Being further away from the center results in greater rotation
+    if (x < 0.0) {
+        xAng = -60*x + 15;
+    } else if (x > 0.0) {
+        xAng = -60*x - 15;
+    }
+
+    part->RotateOneY(FDegToOne(ToFixed(xAng)));
+    TranslatePart(part,
+        xPos,
+        yPos,
+        dashboardOrigin.distance);
+}
+
+void CAbstractPlayer::ResetDashboard() {
+    if (!itsGame->showNewHUD) return;
+
+    lockLight->isTransparent = true;
+    grenadeLabel->isTransparent = true;
+    missileLabel->isTransparent = true;
+    for (int i = 0; i < 4; i++) {
+        grenadeMeter[i]->isTransparent = true;
+        missileMeter[i]->isTransparent = true;
+
+        grenadeBox[i]->isTransparent = true;
+        missileBox[i]->isTransparent = true;
     }
 }
 
@@ -981,6 +1214,7 @@ void CAbstractPlayer::PlayerAction() {
         targetOns[1]->isTransparent = true; //  And reveal them if necessary
         targetOffs[0]->isTransparent = true; // in PlaceHUDParts.
         targetOffs[1]->isTransparent = true;
+        ResetDashboard();
 
         if (isInLimbo) {
             if (!netDestruct)
