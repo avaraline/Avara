@@ -396,6 +396,13 @@ void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
     AvaraGLUpdateData(this);
 }
 
+void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
+    for (int i = 0; i < polyCount; i++) {
+        polyTable[i].color = newColor;
+    }
+    AvaraGLUpdateData(this);
+}
+
 void CBSPPart::BuildBoundingVolumes() {
     Fixed span;
 
