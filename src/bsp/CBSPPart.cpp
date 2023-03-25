@@ -423,9 +423,10 @@ void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
 }
 
 void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
-    for (int i = 0; i < polyCount; i++) {
-        polyTable[i].color = newColor;
+    for (int i = 0; i < colorCount; i++) {
+        currColorTable[i] = newColor;
     }
+    CheckForAlpha();
     AvaraGLUpdateData(this);
 }
 
