@@ -165,8 +165,16 @@ public:
     CBSPPart *targetOns[2] = {0, 0};
 
     // Dashboard HUD
-    RayHitRecord dashBoardOrigin;
+    RayHitRecord dashboardOrigin;
+    Fixed dashboardSpinHeading;
+    Fixed dashboardSpinSpeed;
     CScaledBSP *lockLight = 0;
+    CScaledBSP *grenadeLabel = 0;
+    CScaledBSP *missileLabel = 0;
+    CScaledBSP *grenadeBox[4] = {0, 0, 0, 0};
+    CScaledBSP *missileBox[4] = {0, 0, 0, 0};
+    CScaledBSP *grenadeMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
@@ -203,6 +211,7 @@ public:
     virtual void PlaceHUDParts();
     virtual void LoadDashboardParts();
     virtual void RenderDashboard();
+    virtual void DashboardPosition(CBSPPart *part, float x, float y);
     virtual void ResetDashboard();
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
