@@ -426,7 +426,7 @@ void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
     for (int i = 0; i < colorCount; i++) {
         currColorTable[i] = newColor;
     }
-    CheckForAlpha();
+    hasAlpha = (newColor.GetA() != 0xff);
     AvaraGLUpdateData(this);
 }
 

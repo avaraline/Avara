@@ -150,10 +150,7 @@ void CSmartBox::ISmartBox(short resId,
 
     // Just replace every color, because these shapes
     // always only have one. They're wall templates!
-    for (int i = 0; i < polyCount; i++) {
-        currColorTable[polyTable[i].colorIdx] = color;
-    }
-    CheckForAlpha();
+    ReplaceAllColors(color);
 
     MoveDone();
 
