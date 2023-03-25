@@ -363,7 +363,7 @@ void AvaraGLUpdateData(CBSPPart *part) {
     {
         poly = &part->polyTable[i];
         color = &part->currColorTable[poly->colorIdx];
-        vis = part->HasAlpha() ? 3 : poly->vis;
+        vis = (part->HasAlpha() && poly->vis != 0) ? 3 : poly->vis;
         if (!vis) vis = 0;
         switch (vis) {
             case 0:
@@ -393,7 +393,7 @@ void AvaraGLUpdateData(CBSPPart *part) {
     for (int i = 0; i < part->polyCount; i++) {
         poly = &part->polyTable[i];
         color = &part->currColorTable[poly->colorIdx];
-        uint8_t vis = part->HasAlpha() ? 3 : poly->vis;
+        uint8_t vis = (part->HasAlpha() && poly->vis != 0) ? 3 : poly->vis;
         if (!vis) vis = 0; // default to 0 (none) if vis is empty
         
         // vis can ONLY be 0 for None, 1 for Front, 2 for Back, or 3 for Both
