@@ -525,7 +525,7 @@ class BSP(object):
         out = {
             'colors': readable_colors(d['colors']),
             'points': [p[:3] for p in d['points']],
-            'normals': d['vectors'],
+            'normals': [v[:3] for v in d['vectors']],
             'bounds': {
                 'min': d['min_bounds'][:3],
                 'max': d['max_bounds'][:3],
@@ -541,9 +541,6 @@ class BSP(object):
                 # nvis is the normal record visibility flag, which i can't determine
                 # any use of
                 vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
-
-                # get values out from all the indexes
-                normal = d['vectors'][vec_idx][:3]
 
                 # these were set in the triangulation step
                 tris = d['triangles_poly'][idx]
