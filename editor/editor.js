@@ -394,17 +394,15 @@ function disposeArray() {
 }
 
 function loadBSP(number) {
-    return fetch("bsps/" + number + ".json").then(response => response.json()).then((data) => {
+    return fetch("../rsrc/bsps/" + number + ".json").then(response => response.json()).then((data) => {
         positions = [];
         normals = [];
         colors = [];
 
         for (const poly of data.polys) {
             for (const tri of poly.tris) {
-                for (const idx of tri) {
-                    Array.prototype.push.apply(positions, data.points[idx]);
-                    Array.prototype.push.apply(normals, poly.normal);
-                }
+                Array.prototype.push.apply(positions, data.points[tri]);
+                Array.prototype.push.apply(normals, data.normals[poly.normal]);
             }
         }
 
@@ -464,7 +462,7 @@ loadBSP(400).then((mesh) => {
     fetch("default.avarascript").then(r1 => r1.text()).then((d1) => {
         let data = AvaraScriptParser.parse(d1);
         handleScript({}, data);
-        fetch("grimoire.alf").then(r2 => r2.text()).then((d2) => {
+        fetch("../build/levels/classic-mix-up/alf/choke-daddy.alf").then(r2 => r2.text()).then((d2) => {
             source.value = d2;
             redraw();
         });
