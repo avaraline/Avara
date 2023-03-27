@@ -18,6 +18,7 @@
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 #include "KeyFuncs.h"
+#include "Preferences.h"
 
 #define SCOUTPLATFORM FIX3(1500)
 #define MAXHEADHEIGHT FIX3(1750)
@@ -777,18 +778,20 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         viewPortPart = partList[0];
         viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
-        viewPortPart->ReplaceColor(
-            *ColorManager::getMarkerColor(1),
-            config->trimColor.WithA(0xff)
-        );
-        viewPortPart->ReplaceColor(
-            *ColorManager::getMarkerColor(2),
-            config->cockpitColor.WithA(0xff)
-        );
-        viewPortPart->ReplaceColor(
-            *ColorManager::getMarkerColor(3),
-            config->gunColor.WithA(0xff)
-        );
+        if (!itsGame->itsApp->Get(kIgnoreCustomColorsTag)) {
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(1),
+                config->trimColor.WithA(0xff)
+            );
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(2),
+                config->cockpitColor.WithA(0xff)
+            );
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(3),
+                config->gunColor.WithA(0xff)
+            );
+        }
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 

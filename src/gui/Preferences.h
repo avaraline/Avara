@@ -33,6 +33,7 @@ using json = nlohmann::json;
 #define kPlayerHullTrimColorTag "hullTrimColor"
 #define kPlayerCockpitColorTag "cockpitColor"
 #define kPlayerGunColorTag "gunColor"
+#define kIgnoreCustomColorsTag "ignoreCustomColors"
 
 // GL stuff
 #define kWindowWidth "windowWidth"
@@ -136,6 +137,7 @@ static json defaultPrefs = {
     {kRecentSets, {}},
     {kRecentLevels, {}},
     {kSoundVolume, 100},
+    {kIgnoreCustomColorsTag, false},
     {kIgnoreCustomGoodySound, false},
     {kThrottle, 0}
 };

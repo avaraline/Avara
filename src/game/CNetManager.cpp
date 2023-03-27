@@ -717,11 +717,13 @@ void CNetManager::ResumeGame() {
             // TODO: waiting for players dialog with cancel
         } while (TickCount() - lastTime < 1800 && notReady);
 
+        bool ignoreCustomColors = itsGame->itsApp->Get(kIgnoreCustomColorsTag);
         for (i = 0; i < kMaxAvaraPlayers; i++) {
             if (activePlayersDistribution & (1 << i)) {
                 DoConfig(i);
 
-                if (itsGame->frameNumber == 0 &&
+                if (!ignoreCustomColors &&
+                    itsGame->frameNumber == 0 &&
                     playerTable[i]->GetPlayer() &&
                     !playerTable[i]->GetPlayer()->didIncarnateMasked &&
                     !playerTable[i]->GetPlayer()->hasTeammates) {
