@@ -44,7 +44,8 @@ using json = nlohmann::json;
 
 // Other graphics settings
 #define kColorBlindMode "colorBlindMode"
-#define kWeaponSightAlpha "weaponSightAlpha"
+#define kHUDColor "hudColor"
+#define kHUDAlpha "hudAlpha"
 #define kShowOldHUD "showOldHUD"
 #define kShowNewHUD "showNewHUD"
 
@@ -119,7 +120,8 @@ static json defaultPrefs = {
     {kFullScreenTag, false},
     {kFOV, 50.0},
     {kColorBlindMode, 0},
-    {kWeaponSightAlpha, 1.0},
+    {kHUDColor, "#03f5f5"},
+    {kHUDAlpha, 1.0},
     {kShowOldHUD, true},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},

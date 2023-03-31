@@ -20,8 +20,7 @@ nanogui::Screen(nanogui::Vector2i(_prefs[kWindowWidth], _prefs[kWindowHeight]), 
     AvaraGLInitContext();
     setResizeCallback([this](nanogui::Vector2i newSize) { this->WindowResized(newSize.x, newSize.y); });
 
-    ColorManager::setColorBlind(CApplication::Get(kColorBlindMode));
-    ColorManager::setHudAlpha(CApplication::Get(kWeaponSightAlpha));
+    ColorManager::refresh(this); // Init ColorManager from prefs.
 }
 
 CApplication::~CApplication() {}
@@ -53,6 +52,7 @@ void CApplication::BroadcastCommand(int theCommand) {
 }
 
 void CApplication::PrefChanged(std::string name) {
+    ColorManager::refresh(this);
     for (auto win : windowList) {
         win->PrefChanged(name);
     }

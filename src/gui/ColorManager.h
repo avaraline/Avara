@@ -1,7 +1,9 @@
 #pragma once
 #include "ARGBColor.h"
 #include "AvaraDefines.h"
+#include "CApplication.h"
 #include "Messages.h"
+#include "Preferences.h"
 
 #include <stdint.h>
 #include <string>
@@ -104,8 +106,12 @@ public:
         return shieldGaugeColor;
     }
 
-    static inline ARGBColor getDashboardColor() {
-        return dashboardColor;
+    static inline ARGBColor getHUDColor() {
+        return hudColor;
+    }
+
+    static inline ARGBColor getHUDAltColor() {
+        return hudAltColor;
     }
 
     static inline std::optional<ARGBColor> getMarkerColor(uint8_t num) {
@@ -159,13 +165,18 @@ public:
     }
 
     static void setColorBlind(ColorBlindMode mode);
+    static void setHudColor(ARGBColor color);
     static void setHudAlpha(float alpha);
     static void setMissileArmedColor(ARGBColor color);
     static void setMissileLaunchedColor(ARGBColor color);
+
+    static void refresh(CApplication *app);
 private:
     ColorManager() {}
 
     static ColorBlindMode colorBlindMode;
+    static ARGBColor hudColor;
+    static ARGBColor hudAltColor;
     static float hudAlpha;
 
     static ARGBColor energyGaugeColor;
@@ -188,7 +199,6 @@ private:
     static ARGBColor plasmaSightsOffColor;
     static ARGBColor plasmaSightsOnColor;
     static ARGBColor shieldGaugeColor;
-    static ARGBColor dashboardColor;
     static ARGBColor teamColors[kMaxTeamColors + 1];
     static ARGBColor teamTextColors[kMaxTeamColors + 1];
     static std::string teamColorNames[kMaxTeamColors + 1];
