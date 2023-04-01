@@ -253,6 +253,7 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
 
 void ColorManager::setHudColor(ARGBColor color) {
     ColorManager::hudColor = color.WithA(0xff);
+    ColorManager::hudAltColor = ColorManager::hudColor.GetContrastingShade();
 }
 
 void ColorManager::setHudAlpha(float alpha) {
@@ -284,6 +285,5 @@ void ColorManager::setMissileLaunchedColor(ARGBColor color) {
 void ColorManager::refresh(CApplication *app) {
     ColorManager::setColorBlind(app->Get(kColorBlindMode));
     ColorManager::setHudColor(ARGBColor::Parse(app->String(kHUDColor)).value_or(0xff03f5f5));
-    ColorManager::hudAltColor = ColorManager::hudColor.GetContrastingShade();
     ColorManager::setHudAlpha(app->Get(kHUDAlpha));
 }
