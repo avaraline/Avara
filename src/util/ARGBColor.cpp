@@ -5,7 +5,7 @@
 #include "ColorManager.h"
 #include "csscolorparser.hpp"
 
-ARGBColor::ARGBColor(HSLAColor hsla)
+ARGBColor::ARGBColor(const HSLAColor& hsla)
 {
     uint8_t a = round(hsla.GetA() * 255);
     uint8_t r = 0;
@@ -105,7 +105,7 @@ std::optional<ARGBColor> ARGBColor::Parse(const std::string& str)
     return {};
 }
 
-void ARGBColor::ExportGLFloats(float *out, int n)
+void ARGBColor::ExportGLFloats(float *out, int n) const
 {
     assert(n == 3 || n == 4);
 
@@ -118,9 +118,9 @@ void ARGBColor::ExportGLFloats(float *out, int n)
     }
 }
 
-ARGBColor ARGBColor::GetContrastingShade()
+ARGBColor ARGBColor::GetContrastingShade() const
 {
-    HSLAColor hsla = HSLAColor(ARGBColor(color));
+    HSLAColor hsla = HSLAColor(*this);
     if (hsla.GetL() > 0.4) {
         hsla = hsla.WithL(0.1);
     } else {
@@ -142,7 +142,7 @@ HSLAColor::HSLAColor(float h, float s, float l, float a)
     SetA(a);
 }
 
-HSLAColor::HSLAColor(ARGBColor argb)
+HSLAColor::HSLAColor(const ARGBColor& argb)
 {
     float h = 0.0;
     float s = 0.0;
