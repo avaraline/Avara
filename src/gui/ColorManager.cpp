@@ -24,7 +24,8 @@ ARGBColor ColorManager::plasmaGauge2Color = 0xffff4e00;
 ARGBColor ColorManager::plasmaSightsOffColor = 0xff008e00;
 ARGBColor ColorManager::plasmaSightsOnColor = 0xffff2600;
 ARGBColor ColorManager::shieldGaugeColor = 0xff0053b4;
-ARGBColor ColorManager::dashboardColor = 0xff03f5f5;
+ARGBColor ColorManager::hudColor = 0xff03f5f5;
+ARGBColor ColorManager::hudAltColor = ColorManager::hudColor.GetContrastingShade();
 
 ARGBColor ColorManager::teamColors[kMaxTeamColors + 1] = {
     0xffffffff,
@@ -95,7 +96,6 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::plasmaSightsOffColor = 0xff008e00;
             ColorManager::plasmaSightsOnColor = 0xffff2600;
             ColorManager::shieldGaugeColor = 0xff0053b4;
-            ColorManager::dashboardColor = 0xff03f5f5;
             ColorManager::teamColors[0] = 0xffffffff;
             ColorManager::teamColors[1] = 0xff007600;
             ColorManager::teamColors[2] = 0xffd5d200;
@@ -251,6 +251,10 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
     ColorManager::colorBlindMode = mode;
 }
 
+void ColorManager::setHudColor(ARGBColor color) {
+    ColorManager::hudColor = color.WithA(0xff);
+}
+
 void ColorManager::setHudAlpha(float alpha) {
     alpha = std::clamp(alpha, 0.f, 1.f);
     uint8_t a = static_cast<uint8_t>((alpha * 255) + 0.5);
@@ -263,7 +267,8 @@ void ColorManager::setHudAlpha(float alpha) {
     ColorManager::missileSightSecondaryColor = ColorManager::missileSightSecondaryColor.WithA(a);
     ColorManager::plasmaSightsOffColor = ColorManager::plasmaSightsOffColor.WithA(a);
     ColorManager::plasmaSightsOnColor = ColorManager::plasmaSightsOnColor.WithA(a);
-    ColorManager::dashboardColor = ColorManager::dashboardColor.WithA(a);
+    ColorManager::hudColor = ColorManager::hudColor.WithA(a);
+    ColorManager::hudAltColor = ColorManager::hudAltColor.WithA(a);
 
     ColorManager::hudAlpha = alpha;
 }
@@ -274,4 +279,11 @@ void ColorManager::setMissileArmedColor(ARGBColor color) {
 
 void ColorManager::setMissileLaunchedColor(ARGBColor color) {
     ColorManager::missileLaunchedColor = color;
+}
+
+void ColorManager::refresh(CApplication *app) {
+    ColorManager::setColorBlind(app->Get(kColorBlindMode));
+    ColorManager::setHudColor(ARGBColor::Parse(app->String(kHUDColor)).value_or(0xff03f5f5));
+    ColorManager::hudAltColor = ColorManager::hudColor.GetContrastingShade();
+    ColorManager::setHudAlpha(app->Get(kHUDAlpha));
 }

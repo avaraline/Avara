@@ -24,6 +24,7 @@ public:
     void ChatLineDelete();
     void ResetChatPrompt();
     std::string ChatPromptFor(std::string name);
+    virtual void PrefChanged(std::string name) override;
 
     nanogui::Text *levelLoaded;
     nanogui::Text *levelDesigner;

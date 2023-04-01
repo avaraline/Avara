@@ -487,7 +487,7 @@ void CAbstractPlayer::LoadDashboardParts() {
 
     lockLight = new CScaledBSP;
     lockLight->IScaledBSP(FIX(0.6), 207, this, 0);
-    lockLight->ReplaceAllColors(ColorManager::getDashboardColor());
+    lockLight->ReplaceAllColors(ColorManager::getHUDColor());
     lockLight->privateAmbient = FIX1;
     lockLight->ignoreDirectionalLights = true;
     lockLight->isTransparent = true;
@@ -495,7 +495,7 @@ void CAbstractPlayer::LoadDashboardParts() {
 
     grenadeLabel = new CScaledBSP;
     grenadeLabel->IScaledBSP(FIX(0.7), 820, this, 0);
-    grenadeLabel->ReplaceAllColors(ColorManager::getDashboardColor());
+    grenadeLabel->ReplaceAllColors(ColorManager::getHUDColor());
     grenadeLabel->privateAmbient = FIX1;
     grenadeLabel->ignoreDirectionalLights = false;
     grenadeLabel->isTransparent = true;
@@ -503,7 +503,7 @@ void CAbstractPlayer::LoadDashboardParts() {
 
     missileLabel = new CScaledBSP;
     missileLabel->IScaledBSP(FIX(0.7), 802, this, 0);
-    missileLabel->ReplaceAllColors(ColorManager::getDashboardColor());
+    missileLabel->ReplaceAllColors(ColorManager::getHUDColor());
     missileLabel->privateAmbient = FIX1;
     missileLabel->ignoreDirectionalLights = false;
     missileLabel->isTransparent = true;
@@ -512,28 +512,28 @@ void CAbstractPlayer::LoadDashboardParts() {
     for (int i = 0; i < 4; i++) {
         grenadeMeter[i] = new CScaledBSP;
         grenadeMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
-        grenadeMeter[i]->ReplaceAllColors(ColorManager::getDashboardColor());
+        grenadeMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
         grenadeMeter[i]->ignoreDirectionalLights = false;
         grenadeMeter[i]->isTransparent = true;
         hudWorld->AddPart(grenadeMeter[i]);
 
         missileMeter[i] = new CScaledBSP;
         missileMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
-        missileMeter[i]->ReplaceAllColors(ColorManager::getDashboardColor());
+        missileMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
         missileMeter[i]->ignoreDirectionalLights = false;
         missileMeter[i]->isTransparent = true;
         hudWorld->AddPart(missileMeter[i]);
 
         grenadeBox[i] = new CScaledBSP;
         grenadeBox[i]->IScaledBSP(FIX(.2), 720, this, 0);
-        grenadeBox[i]->ReplaceAllColors(ColorManager::getDashboardColor());
+        grenadeBox[i]->ReplaceAllColors(ColorManager::getHUDColor());
         grenadeBox[i]->ignoreDirectionalLights = false;
         grenadeBox[i]->isTransparent = true;
         hudWorld->AddPart(grenadeBox[i]);
 
         missileBox[i] = new CScaledBSP;
         missileBox[i]->IScaledBSP(FIX(.2), 720, this, 0);
-        missileBox[i]->ReplaceAllColors(ColorManager::getDashboardColor());
+        missileBox[i]->ReplaceAllColors(ColorManager::getHUDColor());
         missileBox[i]->ignoreDirectionalLights = false;
         missileBox[i]->isTransparent = true;
         hudWorld->AddPart(missileBox[i]);

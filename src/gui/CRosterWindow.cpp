@@ -60,7 +60,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     auto panel = playersLayer->add<Widget>();
     panel->setLayout(layout);
     theNet = ((CAvaraAppImpl *)gApplication)->GetNet();
-    std::vector<long> player_colors = {
+    std::vector<long> colorOptions = {
         static_cast<long>(ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
         static_cast<long>(ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
         static_cast<long>(ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
@@ -74,14 +74,14 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         layout->appendRow(1, 1);
         layout->appendCol(1, 1);
-        ColorComboBox *color = panel->add<ColorComboBox>(player_colors);
+        ColorComboBox *color = panel->add<ColorComboBox>(colorOptions);
         //color->setFixedHeight(23);
         color->setSelectedIndex(theNet->teamColors[i]);
         color->setCallback([this, i](int selectedIdx) {
             theNet->teamColors[i] = selectedIdx;
             theNet->SendColorChange();
         });
-        color->popup()->setSize(nanogui::Vector2i(50, 38 * player_colors.size()));
+        color->popup()->setSize(nanogui::Vector2i(50, 38 * colorOptions.size()));
         layout->setAnchor(color, AdvancedGridLayout::Anchor(0, i * 2));
         Text *status = panel->add<Text>("", false, ROSTER_FONT_SIZE + 2);
         layout->setAnchor(status, AdvancedGridLayout::Anchor(1, i * 2));
@@ -448,5 +448,24 @@ bool CRosterWindow::handleSDLEvent(SDL_Event &event) {
         }
     } else {
         return false;
+    }
+}
+
+void CRosterWindow::PrefChanged(std::string name) {
+    std::vector<long> colorOptions = {
+        static_cast<long>(ColorManager::getTeamColor(1).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(2).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(3).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(4).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(5).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(6).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(7).value_or(ColorManager::getDefaultTeamColor()).GetRaw()),
+        static_cast<long>(ColorManager::getTeamColor(8).value_or(ColorManager::getDefaultTeamColor()).GetRaw())
+    };
+    for (int i = 0; i < colors.size(); i++) {
+        auto current = colors[i]->selectedIndex();
+        colors[i]->setItems(colorOptions);
+        colors[i]->setSelectedIndex(current);
+        colors[i]->setNeedsLayout();
     }
 }
