@@ -466,7 +466,7 @@ void CBSPPart::PlanRender() {
     for (uint16_t i = 0; i < colorCount; i++) {
         if (currColorTable[i].GetA() != 0xff) {
             hasAlpha = true;
-            return;
+            break;
         }
     }
 
