@@ -349,39 +349,6 @@ void AvaraGLUpdateData(CBSPPart *part) {
         delete [] part->glData;
     }
 
-    PolyRecord *poly;
-    ARGBColor *color;
-    part->openGLPoints = 0;
-    uint8_t vis;
-    int tris, points;
-
-    // up front, calculate how many points we *actually* need
-    // for faces that should be visible on both sides, double
-    // the faces, triangles, and points to be reversed for the
-    // back side
-    for (size_t i = 0; i < part->polyCount; i++)
-    {
-        poly = &part->polyTable[i];
-        color = &part->currColorTable[poly->colorIdx];
-        vis = (part->HasAlpha() && poly->vis != 0) ? 3 : poly->vis;
-        if (!vis) vis = 0;
-        switch (vis) {
-            case 0:
-                tris = 0;
-                break;
-            case 3:
-                tris = poly->triCount * 2;
-                break;
-            default:
-                tris = poly->triCount;
-                break;
-        }
-        points = tris * 3;
-        part->openGLPoints += points;
-    }
-    
-    
-
     part->glDataSize = part->openGLPoints * sizeof(GLData);
     part->glData = new GLData[part->glDataSize];
 
@@ -390,17 +357,27 @@ void AvaraGLUpdateData(CBSPPart *part) {
 
     //float scale = 1.0; // ToFloat(currentView->screenScale);
     int p = 0;
-    for (int i = 0; i < part->polyCount; i++) {
-        poly = &part->polyTable[i];
+    PolyRecord *poly;
+    ARGBColor *color;
+    uint8_t vis;
+
+    // Draw the opaque polys first.
+    for (size_t polyIdx : part->opaquePolys) {
+        poly = &part->polyTable[polyIdx];
         color = &part->currColorTable[poly->colorIdx];
-        uint8_t vis = (part->HasAlpha() && poly->vis != 0) ? 3 : poly->vis;
-        if (!vis) vis = 0; // default to 0 (none) if vis is empty
-        
+        vis = (part->HasAlpha() && poly->vis != noneVisible) ? bothVisible : poly->vis;
+        if (!vis) vis = noneVisible; // default to none if vis is undefined
+
         // vis can ONLY be 0 for None, 1 for Front, 2 for Back, or 3 for Both
-        assert (vis == 0 || vis == 1 || vis == 2 || vis == 3);
+        assert(
+            vis == noneVisible ||
+            vis == frontVisible ||
+            vis == backVisible ||
+            vis == bothVisible
+        );
 
         // wrap forwards - front side
-        if (vis == 1 || vis == 3) {
+        if (vis == frontVisible || vis == bothVisible) {
             for (int v = 0; v < poly->triCount * 3; v++) {
                 Vector *pt = &part->pointTable[poly->triPoints[v]];
                 part->glData[p].x = ToFloat((*pt)[0]);
@@ -413,8 +390,9 @@ void AvaraGLUpdateData(CBSPPart *part) {
                 p++;
             }
         }
+
         // wrap backwards - back side
-        if (vis == 2 || vis == 3) {
+        if (vis == backVisible || vis == bothVisible) {
             for (int v = (poly->triCount * 3) - 1; v >= 0; v--) {
                 Vector *pt = &part->pointTable[poly->triPoints[v]];
                 part->glData[p].x = ToFloat((*pt)[0]);
@@ -428,6 +406,55 @@ void AvaraGLUpdateData(CBSPPart *part) {
             }
         }
     }
+
+    // TODO: SORT nonOpaquePolys HERE
+
+    // Draw the non-opaque polys.
+    for (size_t polyIdx : part->nonOpaquePolys) {
+        poly = &part->polyTable[polyIdx];
+        color = &part->currColorTable[poly->colorIdx];
+        vis = (part->HasAlpha() && poly->vis != noneVisible) ? bothVisible : poly->vis;
+        if (!vis) vis = noneVisible; // default to none if vis is undefined
+
+        // vis can ONLY be 0 for None, 1 for Front, 2 for Back, or 3 for Both
+        assert(
+            vis == noneVisible ||
+            vis == frontVisible ||
+            vis == backVisible ||
+            vis == bothVisible
+        );
+
+        // wrap forwards - front side
+        if (vis == frontVisible || vis == bothVisible) {
+            for (int v = 0; v < poly->triCount * 3; v++) {
+                Vector *pt = &part->pointTable[poly->triPoints[v]];
+                part->glData[p].x = ToFloat((*pt)[0]);
+                part->glData[p].y = ToFloat((*pt)[1]);
+                part->glData[p].z = ToFloat((*pt)[2]);
+                color->ExportGLFloats(&part->glData[p].r, 4);
+                part->glData[p].nx = poly->normal[0];
+                part->glData[p].ny = poly->normal[1];
+                part->glData[p].nz = poly->normal[2];
+                p++;
+            }
+        }
+
+        // wrap backwards - back side
+        if (vis == backVisible || vis == bothVisible) {
+            for (int v = (poly->triCount * 3) - 1; v >= 0; v--) {
+                Vector *pt = &part->pointTable[poly->triPoints[v]];
+                part->glData[p].x = ToFloat((*pt)[0]);
+                part->glData[p].y = ToFloat((*pt)[1]);
+                part->glData[p].z = ToFloat((*pt)[2]);
+                color->ExportGLFloats(&part->glData[p].r, 4);
+                part->glData[p].nx = -poly->normal[0];
+                part->glData[p].ny = -poly->normal[1];
+                part->glData[p].nz = -poly->normal[2];
+                p++;
+            }
+        }
+    }
+
     // make sure we filled in the array correctly
     assert(p == part->openGLPoints);
 }

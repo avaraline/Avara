@@ -30,6 +30,7 @@ class CBSPPart;
 class CViewParameters;
 
 enum { noLineClip = 0, touchFrontClip = 1, touchBackClip = 2, lineVisibleClip = 4, edgeExitsFlag = 0x8000 };
+enum { noneVisible, frontVisible, backVisible, bothVisible };
 
 typedef struct {
     Fixed x;
@@ -112,7 +113,6 @@ public:
     Fixed enclosureRadius = 0;
     FixedPoint minBounds = {0, 0, 0, 0}; //  Bounding box minimums for x, y, z
     FixedPoint maxBounds = {0, 0, 0, 0}; //  Bounding box maximums for x, y, z
-    enum { frontVisible = 1, backVisible, bothVisible };
 
     CViewParameters *currentView = 0;
 
@@ -159,6 +159,8 @@ public:
     std::unique_ptr<ARGBColor[]> currColorTable;
     std::unique_ptr<Vector[]> pointTable;
     std::unique_ptr<PolyRecord[]> polyTable;
+    std::vector<size_t> opaquePolys = {};
+    std::vector<size_t> nonOpaquePolys = {};
 
     //	Lighting vectors in object space
     long lightSeed = 0; //	Seed value to detect lights change
@@ -221,5 +223,5 @@ public:
     void PrintMatrix(Matrix *m);
 protected:
     bool hasAlpha = false;
-    virtual void CheckForAlpha();
+    virtual void PlanRender();
 };

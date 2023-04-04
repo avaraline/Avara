@@ -107,8 +107,6 @@ void CBSPPart::IBSPPart(short resId) {
             currColorTable[i] = color;
         }
     }
-    
-    CheckForAlpha();
 
     for (uint32_t i = 0; i < pointCount; i++) {
         json pt = doc["points"][i];
@@ -156,6 +154,7 @@ void CBSPPart::IBSPPart(short resId) {
 
     BuildBoundingVolumes();
     Reset();
+    PlanRender();
     AvaraGLUpdateData(this);
 }
 
@@ -418,7 +417,7 @@ void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
             currColorTable[i] = newColor;
         }
     }
-    CheckForAlpha();
+    PlanRender();
     AvaraGLUpdateData(this);
 }
 
@@ -426,7 +425,7 @@ void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
     for (int i = 0; i < colorCount; i++) {
         currColorTable[i] = newColor;
     }
-    hasAlpha = (newColor.GetA() != 0xff);
+    PlanRender();
     AvaraGLUpdateData(this);
 }
 
@@ -462,12 +461,48 @@ void CBSPPart::Dispose() {
     CDirectObject::Dispose();
 }
 
-void CBSPPart::CheckForAlpha() {
+void CBSPPart::PlanRender() {
     hasAlpha = false;
     for (uint16_t i = 0; i < colorCount; i++) {
         if (currColorTable[i].GetA() != 0xff) {
             hasAlpha = true;
             return;
+        }
+    }
+
+    // up front, calculate how many points we *actually* need
+    // for faces that should be visible on both sides, double
+    // the faces, triangles, and points to be reversed for the
+    // back side. partition polys into opaque vs. non-opaque
+    // triangle lists
+    uint8_t vis;
+    PolyRecord *poly;
+    openGLPoints = 0;
+    opaquePolys.clear();
+    nonOpaquePolys.clear();
+    for (size_t i = 0; i < polyCount; i++)
+    {
+        poly = &polyTable[i];
+
+        // Force front & back faces to visible if any part of this shape has
+        // translucency.
+        vis = (HasAlpha() && poly->vis != noneVisible) ? bothVisible : poly->vis;
+
+        // Default to no faces visible if visibility has not been defined.
+        if (!vis) vis = noneVisible;
+
+        if (vis != noneVisible) {
+            if (vis == bothVisible) {
+                openGLPoints += (poly->triCount * 3 * 2);
+            } else {
+                openGLPoints += (poly->triCount * 3);
+            }
+
+            if (currColorTable[poly->colorIdx].GetA() == 0xff) {
+                opaquePolys.push_back(i);
+            } else {
+                nonOpaquePolys.push_back(i);
+            }
         }
     }
 }
