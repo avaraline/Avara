@@ -528,6 +528,8 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     if (frameFuncs[i].validFrame != itsGame->frameNumber && itsPlayer->lives > 0) {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
+        long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);
+
         short askCount = 0;
         LoadingState oldStatus = loadingStatus;
 
@@ -580,7 +582,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
             }
 
             // allow immediate abort after the kmWaitingForPlayer message displays
-            if (askCount >= WAITING_MESSAGE_COUNT && TestKeyPressed(kfuAbortGame)) {
+            if ((askCount >= WAITING_MESSAGE_COUNT && TestKeyPressed(kfuAbortGame)) || quickTick > giveUpTime) {
                 itsGame->statusRequest = kAbortStatus;
                 break;
             }
