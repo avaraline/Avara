@@ -302,7 +302,7 @@ public:
 int main(int argc, char *argv[]) {
     // Init Avara stuff.
     InitMatrix();
-
+    nanogui::init();
     // The BSPViewer application itself.
     BSPViewer *app = new BSPViewer(215);
     for (int i = 1; i < argc; i++) {
@@ -397,14 +397,14 @@ int main(int argc, char *argv[]) {
                     ss << hull_names[i] << "-" << *ColorManager::getTeamColorName(j) << ".png";
                     error += app->capture(ss.str().c_str());
                 }
-                app->marker1 = ColorManager::getSpecialBlackColor();
+                app->marker1 = ColorManager::getMarkerColor(0).value_or(0xffffff);
                 app->newPart(hulls[i]);
                 app->drawContents();
                 ss.str("");
                 ss << hull_names[i] << "-Black.png";
                 error += app->capture(ss.str().c_str());
 
-                app->marker1 = ColorManager::getSpecialWhiteColor();
+                app->marker1 = ColorManager::getMarkerColor(1).value_or(0xffffff);
                 app->newPart(hulls[i]);
                 app->drawContents();
                 ss.str("");
