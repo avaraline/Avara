@@ -397,19 +397,6 @@ int main(int argc, char *argv[]) {
                     ss << hull_names[i] << "-" << *ColorManager::getTeamColorName(j) << ".png";
                     error += app->capture(ss.str().c_str());
                 }
-                app->marker1 = ColorManager::getMarkerColor(0).value_or(0xffffff);
-                app->newPart(hulls[i]);
-                app->drawContents();
-                ss.str("");
-                ss << hull_names[i] << "-Black.png";
-                error += app->capture(ss.str().c_str());
-
-                app->marker1 = ColorManager::getMarkerColor(1).value_or(0xffffff);
-                app->newPart(hulls[i]);
-                app->drawContents();
-                ss.str("");
-                ss << hull_names[i] << "-White.png";
-                error += app->capture(ss.str().c_str());
             }
             SDL_Quit();
             exit(error);
