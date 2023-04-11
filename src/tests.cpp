@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include <SDL2/SDL_log.h>
 #include "CAvaraApp.h"
 #include "CBSPPart.h"
 #include "CPlayerManager.h"
@@ -129,6 +130,10 @@ public:
 
 class TestApp : public CAvaraApp {
 public:
+    TestApp() {
+        // Silence SDL logging with a no-op callback.
+        SDL_LogSetOutputFunction([](void *d, int c, SDL_LogPriority p, const char *m){}, nullptr);
+    }
     virtual bool DoCommand(int theCommand) {return false;}
     virtual void MessageLine(short index, MsgAlignment align) {}
     virtual void AddMessageLine(std::string lines, MsgAlignment align = MsgAlignment::Left, MsgCategory category = MsgCategory::System) {}
@@ -140,7 +145,6 @@ public:
     virtual void LevelReset() {}
     virtual long Number(const std::string name) { return 0; }
     virtual bool Boolean(const std::string name) { return false; }
-    virtual OSErr LoadSVGLevel(std::string set, OSType theLevel) { return noErr; }
     virtual OSErr LoadLevel(std::string set, std::string leveltag, CPlayerManager* sendingPlayer) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
