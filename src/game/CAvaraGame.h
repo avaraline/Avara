@@ -132,7 +132,7 @@ public:
 
     Rect gameRect;
 
-    MessageRecord *messageBoard[MESSAGEHASH];
+    MessageRecord *messageBoard[MESSAGEHASH] = {};
     Fixed *baseLocation;
 
     Fixed gravityRatio;

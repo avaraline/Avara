@@ -37,7 +37,7 @@ LDFLAGS := ${LDFLAGS}
 ifeq ($(UNAME), Darwin)
 	# MacOS
 	SRCS += $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.mm')
-	INC_EXTRA := -I/opt/homebrew/include
+	INC_EXTRA := -I/opt/homebrew/include -I/usr/local/include
 	CXXFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
 	CPPFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
 	CFLAGS += -mmacosx-version-min=10.9 $(INC_EXTRA)
@@ -47,7 +47,7 @@ else
 	FRAMEWORK_PATH = /Library/Frameworks
 endif
 	CPPFLAGS += -F$(FRAMEWORK_PATH)
-	LDFLAGS += -F$(FRAMEWORK_PATH) -L/opt/homebrew/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
+	LDFLAGS += -F$(FRAMEWORK_PATH) -L/opt/homebrew/lib -L/usr/local/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10

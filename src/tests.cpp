@@ -15,6 +15,7 @@
 #include "CScout.h"
 #include "AvaraGL.h"
 #include "Messages.h"
+#include "Preferences.h"
 #include "System.h"
 #include "CUDPConnection.h"
 
@@ -143,7 +144,10 @@ public:
     virtual OSErr LoadLevel(std::string set, std::string leveltag, CPlayerManager* sendingPlayer) { return noErr; }
     virtual void ComposeParamLine(StringPtr destStr, short index, StringPtr param1, StringPtr param2) {}
     virtual void NotifyUser() {}
-    virtual json Get(const std::string name) { return json(); }
+    virtual json Get(const std::string name) { return ReadDefaultPrefs().at(name); }
+    template <class T> T Get(const std::string name) {
+        return static_cast<T>(ReadDefaultPrefs().at(name));
+    }
     virtual void Set(const std::string name, const std::string value) {}
     virtual void Set(const std::string name, long value) {}
     virtual void Set(const std::string name, json value) {}
