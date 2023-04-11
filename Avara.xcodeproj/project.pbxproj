@@ -2303,12 +2303,14 @@
 				HEADER_SEARCH_PATHS = (
 					"vendor/**",
 					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DNANOGUI_GLAD",
@@ -2327,12 +2329,14 @@
 				HEADER_SEARCH_PATHS = (
 					"vendor/**",
 					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DNANOGUI_GLAD",
