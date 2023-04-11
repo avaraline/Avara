@@ -64,8 +64,6 @@ public:
 
         AvaraGLSetFOV(50);
 
-        marker1 = *ColorManager::getTeamColor(3);
-        marker2 = *ColorManager::getTeamColor(2);
         current_id = id;
         itsWorld = new CBSPWorldImpl;
         itsWorld->IBSPWorld(1);
@@ -313,9 +311,16 @@ int main(int argc, char *argv[]) {
             app->newPart(id);
         }
 
+        if (arg == "--base") {
+            std::string lbase = std::string(argv[++i]);
+            UseBaseFolder(lbase);
+            app->newPart(app->current_id);
+        }
+
         if (arg == "--set") {
             std::string lset = std::string(argv[++i]);
             UseLevelFolder(lset);
+            app->newPart(app->current_id);
         }
 
         if (arg == "--orientation") {
