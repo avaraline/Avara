@@ -185,6 +185,7 @@ public:
     virtual void LoadParts();
     virtual void LoadScout();
     virtual void StartSystems();
+    virtual void LevelReset();
 
     virtual void Dispose();
     virtual void DisposeDashboard();
@@ -215,6 +216,7 @@ public:
     virtual void ResetDashboard();
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
+    virtual void RecalculateViewDistance();
 
     virtual short GetActorScoringId();
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
