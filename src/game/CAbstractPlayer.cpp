@@ -181,9 +181,7 @@ void CAbstractPlayer::StartSystems() {
 }
 
 void CAbstractPlayer::LevelReset() {
-    fieldOfView = maxFOV;
-    AvaraGLSetFOV(ToFloat(fieldOfView));
-    RecalculateViewDistance();
+    ResetCamera();
     CAbstractActor::LevelReset();
 }
 
@@ -754,6 +752,12 @@ void CAbstractPlayer::RecalculateViewDistance() {
     }
 }
 
+void CAbstractPlayer::ResetCamera() {
+    fieldOfView = maxFOV;
+    AvaraGLSetFOV(ToFloat(fieldOfView));
+    RecalculateViewDistance();
+}
+
 void CAbstractPlayer::ReturnWeapon(short theKind) {
     switch (theKind) {
         case kweSmart:
@@ -1240,9 +1244,7 @@ void CAbstractPlayer::PlayerAction() {
                         viewYaw = 0;
                         viewPitch = 0;
                         if (!scoutView) {
-                            fieldOfView = maxFOV;
-                            AvaraGLSetFOV(ToFloat(fieldOfView));
-                            RecalculateViewDistance();
+                            ResetCamera();
                         }
                         Reincarnate();
                     } else {

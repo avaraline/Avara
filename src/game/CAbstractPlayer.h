@@ -217,6 +217,7 @@ public:
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
     virtual void RecalculateViewDistance();
+    virtual void ResetCamera();
 
     virtual short GetActorScoringId();
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
