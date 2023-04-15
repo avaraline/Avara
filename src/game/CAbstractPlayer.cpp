@@ -180,6 +180,11 @@ void CAbstractPlayer::StartSystems() {
     classicMotorFriction = CLASSICMOTORFRICTION;
 }
 
+void CAbstractPlayer::LevelReset() {
+    ResetCamera();
+    CAbstractActor::LevelReset();
+}
+
 void CAbstractPlayer::LoadScout() {
     scoutCommand = kScoutNullCommand;
 
@@ -687,9 +692,6 @@ void CAbstractPlayer::ControlSoundPoint() {
 
 void CAbstractPlayer::ControlViewPoint() {
     CViewParameters *theView;
-    Fixed viewDist;
-    // CInfoPanel       *infoPanel;
-    Fixed frameYon;
 
     theView = itsGame->itsView;
 
@@ -719,6 +721,19 @@ void CAbstractPlayer::ControlViewPoint() {
         theView->inverseDone = false;
     }
 
+    RecalculateViewDistance();
+
+    // SetPort(itsGame->itsWindow);
+    ControlSoundPoint();
+}
+
+void CAbstractPlayer::RecalculateViewDistance() {
+    CViewParameters *theView;
+    Fixed viewDist;
+    Fixed frameYon;
+
+    theView = itsGame->itsView;
+
     viewDist = FMulDivNZ(theView->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
 
     if (itsGame->yonList) {
@@ -735,9 +750,12 @@ void CAbstractPlayer::ControlViewPoint() {
         theView->Recalculate();
         theView->CalculateViewPyramidCorners();
     }
+}
 
-    // SetPort(itsGame->itsWindow);
-    ControlSoundPoint();
+void CAbstractPlayer::ResetCamera() {
+    fieldOfView = maxFOV;
+    AvaraGLSetFOV(ToFloat(fieldOfView));
+    RecalculateViewDistance();
 }
 
 void CAbstractPlayer::ReturnWeapon(short theKind) {
@@ -1225,7 +1243,9 @@ void CAbstractPlayer::PlayerAction() {
                     if (lives > 0) {
                         viewYaw = 0;
                         viewPitch = 0;
-                        fieldOfView = maxFOV;
+                        if (!scoutView) {
+                            ResetCamera();
+                        }
                         Reincarnate();
                     } else {
                         itsManager->DeadOrDone();
