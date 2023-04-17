@@ -926,12 +926,13 @@ void CNetManager::ViewControl() {
 void CNetManager::SendPingCommand(int trips) {
     // there & back = 2 trips... send less to/from players in game
     int notMe = totalDistribution & ~(1 << itsCommManager->myId);
+    int playingDist = (itsGame->gameStatus == kPlayingStatus) ? activePlayersDistribution : 0;
     // only send 1-way pings to/from active players just to keep the connection alive
     int activeTrips = 1;
     int inactiveTrips = isPlaying ? activeTrips : trips;
-    itsCommManager->SendPacket(activePlayersDistribution & notMe,
+    itsCommManager->SendPacket(playingDist & notMe,
                                kpPing, 0, 0, activeTrips-1, 0, NULL);
-    itsCommManager->SendPacket(~activePlayersDistribution & notMe,
+    itsCommManager->SendPacket(~playingDist & notMe,
                                kpPing, 0, 0, inactiveTrips-1, 0, NULL);
 }
 
