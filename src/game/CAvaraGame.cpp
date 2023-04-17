@@ -863,8 +863,9 @@ bool CAvaraGame::GameTick() {
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        static uint32_t pingInterval = 2000; // msec
-        itsNet->SendPingCommand(8);
+        // 3 pings every second, 1 ping used by each client for RTT calc (last ping not used)
+        static uint32_t pingInterval = 1000; // msec
+        itsNet->SendPingCommand(3);
         nextPingTime = startTime + pingInterval;
     }
 
