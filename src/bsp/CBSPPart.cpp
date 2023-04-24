@@ -58,6 +58,13 @@ void CBSPPart::IBSPPart(short resId) {
         return;
     }
 
+    // Fill in some default values in case values are missing.
+    doc.emplace("radius1", 0.0);
+    doc.emplace("radius2", 0.0);
+    doc.emplace("center", json::array({0.0, 0.0, 0.0}));
+    doc["bounds"].emplace("min", json::array({0.0, 0.0, 0.0}));
+    doc["bounds"].emplace("max", json::array({0.0, 0.0, 0.0}));
+
     colorCount = static_cast<uint16_t>(doc["colors"].size());
     polyCount = static_cast<uint32_t>(doc["polys"].size());
     pointCount = static_cast<uint32_t>(doc["points"].size());

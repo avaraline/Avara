@@ -1,0 +1,113 @@
+{
+  "LEDI": [
+    {
+      "Alf": "alpine.alf",
+      "Name": "Alpine",
+      "Message": "The winds of these tunnels whisper the names of past speeders."
+    },
+    {
+      "Alf": "snow-peak.alf",
+      "Name": "Snow Peak",
+      "Message": "The treachorous Snow Peak will prove a great challenge."
+    }
+  ],
+  "HULL": {
+    "154": {
+      "Hull Res ID": 217,
+      "Max Missiles": 2,
+      "Max Grenades": 4,
+      "Max boosters": 0,
+      "Mass": 119.01855497062638,
+      "Max Energy": 10.681162737468528,
+      "Energy Charge": 2.2888227664606697,
+      "Max Shields": 0.0,
+      "Shield Charge": 3.051758602273594,
+      "Min Shot": 0.5340657663843748,
+      "Max Shot": 0.45777065690089264,
+      "Shot Charge": 1.5258869306477454,
+      "Riding Height": 0.03219653620202945,
+      "Acceleration": 1.5258869306477454,
+      "Jump Power": 0.9918364232852674
+    },
+    "155": {
+      "Hull Res ID": 215,
+      "Max Missiles": 2,
+      "Max Grenades": 4,
+      "Max boosters": 0,
+      "Mass": 119.01855497062638,
+      "Max Energy": 10.681162737468528,
+      "Energy Charge": 2.2888227664606697,
+      "Max Shields": 0.0,
+      "Shield Charge": 3.051758602273594,
+      "Min Shot": 0.5340657663843748,
+      "Max Shot": 0.45777065690089264,
+      "Shot Charge": 1.5258869306477454,
+      "Riding Height": 0.03219653620202945,
+      "Acceleration": 1.5258869306477454,
+      "Jump Power": 0.9918364232852674
+    },
+    "156": {
+      "Hull Res ID": 216,
+      "Max Missiles": 2,
+      "Max Grenades": 4,
+      "Max boosters": 0,
+      "Mass": 119.01855497062638,
+      "Max Energy": 10.681162737468528,
+      "Energy Charge": 2.2888227664606697,
+      "Max Shields": 0.0,
+      "Shield Charge": 3.051758602273594,
+      "Min Shot": 0.5340657663843748,
+      "Max Shot": 0.45777065690089264,
+      "Shot Charge": 1.5258869306477454,
+      "Riding Height": 0.03219653620202945,
+      "Acceleration": 1.5258869306477454,
+      "Jump Power": 0.9918364232852674
+    }
+  },
+  "HSND": {
+    "1010": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.5140154116121156,
+      "Sound": 0,
+      "Ogg": "1010.ogg",
+      "Wav": "1010.wav"
+    },
+    "1011": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "1011.ogg",
+      "Wav": "1011.wav"
+    },
+    "1012": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.8737163347829404,
+      "Sound": 0,
+      "Ogg": "1012.ogg",
+      "Wav": "1012.wav"
+    }
+  },
+  "BSPT": {
+    "211": "levels/speeders/bsps/211.json",
+    "212": "levels/speeders/bsps/212.json",
+    "3003": "levels/speeders/bsps/3003.json",
+    "3001": "levels/speeders/bsps/3001.json",
+    "3000": "levels/speeders/bsps/3000.json",
+    "3002": "levels/speeders/bsps/3002.json",
+    "216": "levels/speeders/bsps/216.json",
+    "217": "levels/speeders/bsps/217.json",
+    "215": "levels/speeders/bsps/215.json"
+  }
+}

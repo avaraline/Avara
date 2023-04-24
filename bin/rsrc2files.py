@@ -21,7 +21,9 @@ SCRIPTFILE = "default.avarascript"
 OGGDIR = "ogg"
 WAVDIR = "wav"
 AFTERSHOCKSETS = [
-    "levels/aftershock.r"
+    "levels/aftershock.r",
+    "levels/as-00-a.r",
+    "levels/as-00-b.r"
 ]
 
 EXPORT_SOUNDS = True
