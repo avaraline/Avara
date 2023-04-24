@@ -1,0 +1,366 @@
+<map>
+  <set lives="3" wallYon="4000" />
+  <SkyColor color="#00d5ff" color.1="#d82042" />
+  <GroundColor color="#ab4500" />
+  <set designer="El Barto -&gt; els_headq@hotmail.com" information="Designed for a Large number of Players.&#10;When humans colonised Mars, they found a huge device which the ancients of Mars worshiped, with offerings to the Gods littered around it. Legend has it that it generated all of the mighty winds of the planet." />
+  <Ramp deltaY="6" thickness="0.8" y="0" yon="4000" color="#ffd300" color.1="#000000" x="383.7152777777778" z="250.24305555555557" w="19.9305555555556" d="7.430555555555543" h="0" angle="0" />
+  <Ramp deltaY="6" thickness="0.8" y="0" yon="4000" color="#ffd300" color.1="#000000" x="383.7152777777778" z="277.74305555555554" w="19.9305555555556" d="7.4305555555556" h="0" angle="180" />
+  <Ramp deltaY="6" thickness="0.8" y="0" yon="4000" color="#ffd300" color.1="#000000" x="397.4652777777778" z="263.9930555555556" w="7.4305555555556" d="19.93055555555557" h="0" angle="90" />
+  <Ramp deltaY="6" thickness="0.8" y="0" yon="4000" wallHeight="5.4" color="#ffd300" color.1="#000000" x="369.9652777777778" z="263.9930555555556" w="7.4305555555556" d="19.93055555555557" h="0" angle="270" />
+  <Wall color="#ffd300" color.1="#000000" x="383.7152777777778" z="256.4930555555556" w="19.9305555555556" d="4.930555555555571" h="0" />
+  <Wall color="#ffd300" color.1="#000000" x="391.2152777777778" z="263.99305555555554" w="4.9305555555556" d="9.9305555555556" h="0" />
+  <Wall color="#ffd300" color.1="#000000" x="383.7152777777778" z="271.49305555555554" w="19.9305555555556" d="4.9305555555556" h="0" />
+  <Wall color="#ffd300" color.1="#000000" x="376.2152777777778" z="263.99305555555554" w="4.9305555555556" d="9.9305555555556" h="0" />
+  <set baseHeight="hLev5" wallYon="0.01" />
+  <Wall color="#ffffff" color.1="#000000" x="383.7152777777778" z="263.99305555555554" w="9.9305555555556" d="9.9305555555556" h="0" />
+  <set floorTemplate="bspFloorFrame" baseHeight="hLev5" wallHeight="16" wallYon="4000" />
+  <Wall color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="267.43055555555554" w="7.4305555555556" d="0.5555555555555998" h="0" y="10" />
+  <Wall color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="260.55555555555554" w="7.4305555555556" d="0.5555555555555998" h="0" y="10" />
+  <Wall color="#f1f1f1" color.1="#000000" x="380.2777777777778" z="263.99305555555554" w="0.5555555555555998" d="6.1805555555556" h="0" y="10" />
+  <Wall color="#f1f1f1" color.1="#000000" x="387.1527777777778" z="263.99305555555554" w="0.5555555555555998" d="6.1805555555556" h="0" y="10" />
+  <set wallHeight="1" />
+  <Wall color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="257.7430555555556" w="17.4305555555556" d="4.930555555555571" h="0" y="25" />
+  <Wall color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="270.24305555555554" w="17.4305555555556" d="4.9305555555556" h="0" y="25" />
+  <Wall color="#f1f1f1" color.1="#000000" x="389.9652777777778" z="263.99305555555554" w="4.9305555555556" d="7.4305555555556" h="0" y="25" />
+  <Wall color="#f1f1f1" color.1="#000000" x="377.4652777777778" z="263.99305555555554" w="4.9305555555556" d="7.4305555555556" h="0" y="25" />
+  <set wallHeight="20.6" />
+  <Wall color="#ffffff" color.1="#000000" x="383.7152777777778" z="263.99305555555554" w="6.1805555555556" d="6.1805555555556" h="0" y="5.4" />
+  <unique vars="playWind" />
+  <Field shape="0" deltaY="0.2" enter="playWind" exit="stopWind" color="#ffffff" color.1="#000000" x="369.9652777777778" z="263.9930555555556" w="7.4305555555556" d="19.93055555555557" h="0" cx="367.39583333333337" cz="263.99305555555554" angle="270" />
+  <script pixelToThickness="0.125" lives="3" wallYon="4000" color="#ab4500" cx="478.7152777777778" cz="358.99305555555554" r="9.9652777777778" angle="315" color.1="#000000" designer="El Barto -&gt; els_headq@hotmail.com" information="Designed for a Large number of Players.&#10;When humans colonised Mars, they found a huge device which the ancients of Mars worshiped, with offerings to the Gods littered around it. Legend has it that it generated all of the mighty winds of the planet." x="369.9652777777778" z="263.9930555555556" w="7.4305555555556" d="19.93055555555557" h="0" baseHeight="hLev5" floorTemplate="bspFloorFrame" wallHeight="20.6">
+object 
+Dome
+y = 0
+yon = 
+
+wallHeight = 8.4</script>
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="343.99305555555554" w="19.9305555555556" d="19.9305555555556" h="0" />
+  <Ramp deltaY="8" thickness="0.4" yon="4000" color="#ffd300" color.1="#000000" x="463.75" z="356.52777777777777" w="20" d="5" h="0" angle="270" />
+  <Ramp deltaY="8" thickness="0.4" yon="4000" wallHeight="8.4" color="#ffd300" color.1="#000000" x="476.25" z="344.02777777777777" w="5" d="20" h="0" angle="0" />
+  <Wall color="#ffd300" color.1="#000000" x="476.2152777777778" z="356.49305555555554" w="4.9305555555556" d="4.9305555555556" h="0" />
+  <set wallHeight="8.4" />
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="183.99305555555554" w="19.930555555555543" d="19.93055555555557" h="0" />
+  <Ramp deltaY="8" thickness="0.4" yon="4000" color="#ffd300" color.1="#000000" x="303.75" z="171.52777777777777" w="20" d="5" h="0" angle="90" />
+  <Ramp deltaY="8" thickness="0.4" yon="4000" wallHeight="8.4" color="#ffd300" color.1="#000000" x="291.25" z="184.02777777777777" w="5" d="20" h="0" angle="180" />
+  <Wall color="#ffd300" color.1="#000000" x="291.21527777777777" z="171.49305555555554" w="4.930555555555543" d="4.930555555555571" h="0" />
+  <script pixelToThickness="0.125" lives="3" wallYon="4000" color="#ab4500" cx="288.71527777777777" cz="168.99305555555554" r="9.965277777777786" angle="135" color.1="#000000" designer="El Barto -&gt; els_headq@hotmail.com" information="Designed for a Large number of Players.&#10;When humans colonised Mars, they found a huge device which the ancients of Mars worshiped, with offerings to the Gods littered around it. Legend has it that it generated all of the mighty winds of the planet." x="291.25" z="184.02777777777777" w="5" d="20" h="0" baseHeight="hLev5" floorTemplate="bspFloorFrame" wallHeight="8.4">
+object 
+Dome
+y = 0
+yon = 
+
+wallHeight = 8.4</script>
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="183.99305555555554" w="19.9305555555556" d="19.93055555555557" h="0" />
+  <set wallHeight="8.4" />
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="343.99305555555554" w="19.930555555555543" d="19.9305555555556" h="0" />
+  <Ramp deltaY="8" thickness="0.4" yon="4000" color="#ffd300" color.1="#000000" x="291.25" z="344.02777777777777" w="5" d="20" h="0" angle="0" />
+  <Ramp deltaY="8" thickness="0.4" yon="4000" color="#ffd300" color.1="#000000" x="476.25" z="184.02777777777777" w="5" d="20" h="0" angle="180" />
+  <Ramp deltaY="8" thickness="0.4" yon="4000" color="#ffd300" color.1="#000000" x="463.75" z="171.52777777777777" w="20" d="5" h="0" angle="270" />
+  <Ramp deltaY="8" thickness="0.4" yon="4000" wallHeight="8.4" color="#ffd300" color.1="#000000" x="303.75" z="356.52777777777777" w="20" d="5" h="0" angle="90" />
+  <Wall color="#ffd300" color.1="#000000" x="291.21527777777777" z="356.49305555555554" w="4.930555555555543" d="4.9305555555556" h="0" />
+  <set wallHeight="8.4" />
+  <Wall color="#ffd300" color.1="#000000" x="476.2152777777778" z="171.49305555555554" w="4.9305555555556" d="4.930555555555571" h="0" />
+  <script pixelToThickness="0.125" lives="3" wallYon="4000" color="#ab4500" cx="288.71527777777777" cz="358.99305555555554" r="9.9652777777778" angle="45" color.1="#000000" designer="El Barto -&gt; els_headq@hotmail.com" information="Designed for a Large number of Players.&#10;When humans colonised Mars, they found a huge device which the ancients of Mars worshiped, with offerings to the Gods littered around it. Legend has it that it generated all of the mighty winds of the planet." x="303.75" z="356.52777777777777" w="20" d="5" h="0" baseHeight="hLev5" floorTemplate="bspFloorFrame" wallHeight="8.4">
+object 
+Dome
+y = 0
+yon =</script>
+  <script pixelToThickness="0.125" lives="3" wallYon="4000" color="#ab4500" cx="478.7152777777778" cz="168.99305555555554" r="9.9652777777778" angle="225" color.1="#000000" designer="El Barto -&gt; els_headq@hotmail.com" information="Designed for a Large number of Players.&#10;When humans colonised Mars, they found a huge device which the ancients of Mars worshiped, with offerings to the Gods littered around it. Legend has it that it generated all of the mighty winds of the planet." x="303.75" z="356.52777777777777" w="20" d="5" h="0" baseHeight="hLev5" floorTemplate="bspFloorFrame" wallHeight="8.4">
+object 
+Dome
+y = 0
+yon = 
+
+wallHeight =</script>
+  <Wall color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="183.99305555555557" w="7.4305555555556" d="7.430555555555543" h="0" />
+  <Ramp deltaY="2" y="18" yon="4000" color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="195.24305555555557" w="6.1805555555556" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="20" yon="4000" color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="210.24305555555557" w="6.1805555555556" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="22" yon="4000" color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="232.74305555555557" w="6.1805555555556" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="24" yon="4000" wallHeight="22" color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="247.74305555555557" w="6.1805555555556" d="14.930555555555543" h="0" angle="0" />
+  <Wall color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="221.49305555555557" w="7.4305555555556" d="7.430555555555543" h="0" />
+  <script pixelToThickness="0.125" lives="3" wallYon="4000" color="#f1f1f1" cx="383.7152777777778" cz="248.99305555555557" r="1.8402777777777999" angle="0" color.1="#000000" designer="El Barto -&gt; els_headq@hotmail.com" information="Designed for a Large number of Players.&#10;When humans colonised Mars, they found a huge device which the ancients of Mars worshiped, with offerings to the Gods littered around it. Legend has it that it generated all of the mighty winds of the planet." x="383.7152777777778" z="247.74305555555557" w="6.1805555555556" d="14.930555555555543" h="0" baseHeight="hLev5" floorTemplate="bspFloorFrame" wallHeight="8.4">
+wallHeight =</script>
+  <Wall color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="343.99305555555554" w="7.4305555555556" d="7.4305555555556" h="0" />
+  <Ramp deltaY="2" y="18" yon="4000" color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="332.74305555555554" w="6.1805555555556" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="20" yon="4000" color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="317.74305555555554" w="6.1805555555556" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="22" yon="4000" color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="295.24305555555554" w="6.1805555555556" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="24" yon="4000" wallHeight="22" color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="280.24305555555554" w="6.1805555555556" d="14.9305555555556" h="0" angle="180" />
+  <Wall color="#f1f1f1" color.1="#000000" x="383.7152777777778" z="306.49305555555554" w="7.4305555555556" d="7.4305555555556" h="0" />
+  <Ramp deltaY="2" y="24" yon="4000" color="#f1f1f1" color.1="#000000" x="367.4652777777778" z="263.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="270" />
+  <Ramp deltaY="2" y="22" yon="4000" color="#f1f1f1" color.1="#000000" x="352.4652777777778" z="263.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="270" />
+  <Ramp deltaY="2" y="20" yon="4000" color="#f1f1f1" color.1="#000000" x="329.96527777777777" z="263.99305555555554" w="14.930555555555543" d="6.1805555555556" h="0" angle="270" />
+  <Ramp deltaY="2" y="18" yon="4000" wallHeight="22" color="#f1f1f1" color.1="#000000" x="314.96527777777777" z="263.99305555555554" w="14.930555555555543" d="6.1805555555556" h="0" angle="270" />
+  <Wall color="#f1f1f1" color.1="#000000" x="341.21527777777777" z="263.99305555555554" w="7.430555555555543" d="7.4305555555556" h="0" />
+  <script pixelToThickness="0.125" lives="3" wallYon="4000" color="#f1f1f1" cx="310.24305555555554" cz="263.64583333333337" r="1.8402777777777999" angle="270" color.1="#000000" designer="El Barto -&gt; els_headq@hotmail.com" information="Designed for a Large number of Players.&#10;When humans colonised Mars, they found a huge device which the ancients of Mars worshiped, with offerings to the Gods littered around it. Legend has it that it generated all of the mighty winds of the planet." x="314.96527777777777" z="263.99305555555554" w="14.930555555555543" d="6.1805555555556" h="0" baseHeight="hLev5" floorTemplate="bspFloorFrame" wallHeight="8.4">
+wallHeight =</script>
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="263.99305555555554" w="7.430555555555543" d="7.4305555555556" h="0" />
+  <Ramp deltaY="2" y="24" yon="4000" color="#f1f1f1" color.1="#000000" x="399.9652777777778" z="263.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="90" />
+  <Ramp deltaY="2" y="22" yon="4000" color="#f1f1f1" color.1="#000000" x="414.9652777777778" z="263.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="90" />
+  <Ramp deltaY="2" y="20" yon="4000" color="#f1f1f1" color.1="#000000" x="437.4652777777778" z="263.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="90" />
+  <Ramp deltaY="2" y="18" yon="4000" wallHeight="22" color="#f1f1f1" color.1="#000000" x="452.4652777777778" z="263.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="90" />
+  <Wall color="#f1f1f1" color.1="#000000" x="426.2152777777778" z="263.99305555555554" w="7.4305555555556" d="7.4305555555556" h="0" />
+  <script pixelToThickness="0.125" lives="3" wallYon="4000" color="#f1f1f1" cx="449.61805555555554" cz="263.64583333333337" r="1.8402777777777999" angle="90" color.1="#000000" designer="El Barto -&gt; els_headq@hotmail.com" information="Designed for a Large number of Players.&#10;When humans colonised Mars, they found a huge device which the ancients of Mars worshiped, with offerings to the Gods littered around it. Legend has it that it generated all of the mighty winds of the planet." x="452.4652777777778" z="263.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" baseHeight="hLev5" floorTemplate="bspFloorFrame" wallHeight="8.4">
+wallHeight =</script>
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="263.99305555555554" w="7.4305555555556" d="7.4305555555556" h="0" />
+  <Ramp deltaY="2" y="16" yon="4000" color="#f1f1f1" color.1="#000000" x="372.4652777777778" z="343.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="270" />
+  <Ramp deltaY="2" y="14" yon="4000" wallHeight="14" color="#f1f1f1" color.1="#000000" x="357.4652777777778" z="343.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="270" />
+  <Wall color="#f1f1f1" color.1="#000000" x="346.21527777777777" z="343.99305555555554" w="7.430555555555543" d="7.4305555555556" h="0" />
+  <Ramp deltaY="2" y="12" yon="4000" color="#f1f1f1" color.1="#000000" x="334.96527777777777" z="343.99305555555554" w="14.930555555555543" d="6.1805555555556" h="0" angle="270" />
+  <Ramp deltaY="2" y="10" yon="4000" color="#f1f1f1" color.1="#000000" x="319.96527777777777" z="343.99305555555554" w="14.930555555555543" d="6.1805555555556" h="0" angle="270" />
+  <Ramp deltaY="2" y="16" yon="4000" color="#f1f1f1" color.1="#000000" x="394.9652777777778" z="343.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="90" />
+  <Ramp deltaY="2" y="14" yon="4000" wallHeight="14" color="#f1f1f1" color.1="#000000" x="409.9652777777778" z="343.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="90" />
+  <Wall color="#f1f1f1" color.1="#000000" x="421.2152777777778" z="343.99305555555554" w="7.4305555555556" d="7.4305555555556" h="0" />
+  <Ramp deltaY="2" y="10" yon="4000" color="#f1f1f1" color.1="#000000" x="447.4652777777778" z="343.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="90" />
+  <Ramp deltaY="2" y="12" yon="4000" color="#f1f1f1" color.1="#000000" x="432.4652777777778" z="343.99305555555554" w="14.9305555555556" d="6.1805555555556" h="0" angle="90" />
+  <Ramp deltaY="2" y="16" yon="4000" color="#f1f1f1" color.1="#000000" x="372.4652777777778" z="183.99305555555557" w="14.9305555555556" d="6.180555555555543" h="0" angle="270" />
+  <Ramp deltaY="2" y="14" yon="4000" wallHeight="14" color="#f1f1f1" color.1="#000000" x="357.4652777777778" z="183.99305555555557" w="14.9305555555556" d="6.180555555555543" h="0" angle="270" />
+  <Wall color="#f1f1f1" color.1="#000000" x="346.21527777777777" z="183.99305555555557" w="7.430555555555543" d="7.430555555555543" h="0" />
+  <Ramp deltaY="2" y="12" yon="4000" color="#f1f1f1" color.1="#000000" x="334.96527777777777" z="183.99305555555557" w="14.930555555555543" d="6.180555555555543" h="0" angle="270" />
+  <Ramp deltaY="2" y="10" yon="4000" color="#f1f1f1" color.1="#000000" x="319.96527777777777" z="183.99305555555557" w="14.930555555555543" d="6.180555555555543" h="0" angle="270" />
+  <Ramp deltaY="2" y="16" yon="4000" color="#f1f1f1" color.1="#000000" x="394.9652777777778" z="183.99305555555557" w="14.9305555555556" d="6.180555555555543" h="0" angle="90" />
+  <Ramp deltaY="2" y="14" yon="4000" wallHeight="14" color="#f1f1f1" color.1="#000000" x="409.9652777777778" z="183.99305555555557" w="14.9305555555556" d="6.180555555555543" h="0" angle="90" />
+  <Wall color="#f1f1f1" color.1="#000000" x="421.2152777777778" z="183.99305555555557" w="7.4305555555556" d="7.430555555555543" h="0" />
+  <Ramp deltaY="2" y="10" yon="4000" color="#f1f1f1" color.1="#000000" x="447.4652777777778" z="183.99305555555557" w="14.9305555555556" d="6.180555555555543" h="0" angle="90" />
+  <Ramp deltaY="2" y="12" yon="4000" color="#f1f1f1" color.1="#000000" x="432.4652777777778" z="183.99305555555557" w="14.9305555555556" d="6.180555555555543" h="0" angle="90" />
+  <Ramp deltaY="2" y="16" yon="4000" color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="275.24305555555554" w="6.180555555555543" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="12" yon="4000" color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="312.74305555555554" w="6.180555555555543" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="10" yon="4000" color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="327.74305555555554" w="6.180555555555543" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="10" yon="4000" color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="200.24305555555557" w="6.180555555555543" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="12" yon="4000" color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="215.24305555555557" w="6.180555555555543" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="14" yon="4000" color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="237.74305555555557" w="6.180555555555543" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="16" yon="4000" wallHeight="14" color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="252.7430555555556" w="6.180555555555543" d="14.930555555555571" h="0" angle="0" />
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="226.49305555555557" w="7.430555555555543" d="7.430555555555543" h="0" />
+  <Ramp deltaY="2" y="16" yon="4000" color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="275.24305555555554" w="6.1805555555556" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="14" yon="4000" color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="290.24305555555554" w="6.1805555555556" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="12" yon="4000" color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="312.74305555555554" w="6.1805555555556" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="10" yon="4000" color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="327.74305555555554" w="6.1805555555556" d="14.9305555555556" h="0" angle="180" />
+  <Ramp deltaY="2" y="10" yon="4000" color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="200.24305555555557" w="6.1805555555556" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="12" yon="4000" color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="215.24305555555557" w="6.1805555555556" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="14" yon="4000" color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="237.74305555555557" w="6.1805555555556" d="14.930555555555543" h="0" angle="0" />
+  <Ramp deltaY="2" y="16" yon="4000" wallHeight="14" color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="252.7430555555556" w="6.1805555555556" d="14.930555555555571" h="0" angle="0" />
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="226.49305555555557" w="7.4305555555556" d="7.430555555555543" h="0" />
+  <Ramp deltaY="2" y="14" yon="4000" wallHeight="14" color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="290.24305555555554" w="6.180555555555543" d="14.9305555555556" h="0" angle="180" />
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="301.49305555555554" w="7.4305555555556" d="7.4305555555556" h="0" />
+  <set wallHeight="14" />
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="301.49305555555554" w="7.430555555555543" d="7.4305555555556" h="0" />
+  <set wallHeight="1" />
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="336.18055555555554" w="8.680555555555543" d="4.3055555555556" h="0" y="8" />
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="335.55555555555554" w="6.180555555555543" d="3.0555555555555998" h="0" y="9" />
+  <set wallHeight="1" />
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="336.18055555555554" w="8.6805555555556" d="4.3055555555556" h="0" y="8" />
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="335.55555555555554" w="6.1805555555556" d="3.0555555555555998" h="0" y="9" />
+  <set wallHeight="1" />
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="191.80555555555557" w="8.6805555555556" d="4.305555555555543" h="0" y="8" />
+  <Wall color="#f1f1f1" color.1="#000000" x="463.7152777777778" z="192.43055555555557" w="6.1805555555556" d="3.055555555555543" h="0" y="9" />
+  <set wallHeight="1" />
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="191.80555555555557" w="8.680555555555543" d="4.305555555555543" h="0" y="8" />
+  <Wall color="#f1f1f1" color.1="#000000" x="303.71527777777777" z="192.43055555555557" w="6.180555555555543" d="3.055555555555543" h="0" y="9" />
+  <Wall color="#f1f1f1" color.1="#000000" x="455.9027777777778" z="183.99305555555557" w="4.3055555555556" d="8.680555555555543" h="0" y="8" />
+  <Wall color="#f1f1f1" color.1="#000000" x="455.2777777777778" z="183.99305555555557" w="3.0555555555555998" d="6.180555555555543" h="0" y="9" />
+  <Wall color="#f1f1f1" color.1="#000000" x="455.9027777777778" z="343.99305555555554" w="4.3055555555556" d="8.6805555555556" h="0" y="8" />
+  <Wall color="#f1f1f1" color.1="#000000" x="455.2777777777778" z="343.99305555555554" w="3.0555555555555998" d="6.1805555555556" h="0" y="9" />
+  <Wall color="#f1f1f1" color.1="#000000" x="311.52777777777777" z="343.99305555555554" w="4.305555555555543" d="8.6805555555556" h="0" y="8" />
+  <Wall color="#f1f1f1" color.1="#000000" x="312.15277777777777" z="343.99305555555554" w="3.055555555555543" d="6.1805555555556" h="0" y="9" />
+  <Wall color="#f1f1f1" color.1="#000000" x="311.52777777777777" z="183.99305555555557" w="4.305555555555543" d="8.680555555555543" h="0" y="8" />
+  <Wall color="#f1f1f1" color.1="#000000" x="312.15277777777777" z="183.99305555555557" w="3.055555555555543" d="6.180555555555543" h="0" y="9" />
+  <Sound y="15" sound="snArcticWind" isAmbient="false" loopCount="1" volume="100" start="playWind" stop="stopWind" cx="384.3402777777778" cz="263.2291666666667" angle="45" />
+  <Teleporter group="1" y="0" color="#ffd300" color.1="#000000" cx="383.7152777777778" cz="351.49305555555554" angle="135" />
+  <Teleporter shape="0" group="1" y="24" color="#ffd300" color.1="#000000" cx="383.7152777777778" cz="343.99305555555554" angle="135" />
+  <Teleporter group="2" y="0" color="#ffd300" color.1="#000000" cx="296.21527777777777" cz="263.99305555555554" angle="135" />
+  <Teleporter shape="0" group="2" y="24" color="#ffd300" color.1="#000000" cx="303.71527777777777" cz="263.99305555555554" angle="135" />
+  <Teleporter group="3" y="0" color="#ffd300" color.1="#000000" cx="383.7152777777778" cz="176.49305555555554" angle="135" />
+  <Teleporter shape="0" group="3" y="24" color="#ffd300" color.1="#000000" cx="383.7152777777778" cz="183.99305555555557" angle="135" />
+  <Teleporter group="4" y="0" color="#ffd300" color.1="#000000" cx="471.2152777777778" cz="263.99305555555554" angle="135" />
+  <Teleporter shape="0" group="4" y="24" yon="4000" color="#ffd300" color.1="#000000" cx="463.7152777777778" cz="263.99305555555554" angle="135" />
+  <Incarnator y="20" cx="463.0902777777778" cz="184.61805555555557" angle="225" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="19" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="463.0902777777778" cz="184.61805555555557" angle="225" />
+  <Incarnator y="20" cx="296.21527777777777" cz="263.99305555555554" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="19" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="296.21527777777777" cz="263.99305555555554" angle="315" />
+  <Incarnator y="30" cx="383.7152777777778" cz="221.49305555555557" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="383.7152777777778" cz="221.49305555555557" angle="315" />
+  <Incarnator y="20" cx="304.34027777777777" cz="343.36805555555554" angle="45" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="19" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="304.34027777777777" cz="343.36805555555554" angle="45" />
+  <Incarnator y="30" cx="426.2152777777778" cz="263.99305555555554" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="426.2152777777778" cz="263.99305555555554" angle="315" />
+  <Incarnator y="20" cx="383.7152777777778" cz="176.49305555555554" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="19" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="383.7152777777778" cz="176.49305555555554" angle="315" />
+  <Incarnator y="30" cx="341.21527777777777" cz="263.99305555555554" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="341.21527777777777" cz="263.99305555555554" angle="315" />
+  <Incarnator y="20" cx="383.7152777777778" cz="351.49305555555554" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="19" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="383.7152777777778" cz="351.49305555555554" angle="315" />
+  <Incarnator y="30" cx="383.7152777777778" cz="306.49305555555554" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="29" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="383.7152777777778" cz="306.49305555555554" angle="315" />
+  <Incarnator y="20" cx="471.2152777777778" cz="263.99305555555554" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="19" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="471.2152777777778" cz="263.99305555555554" angle="315" />
+  <Incarnator y="20" cx="463.7152777777778" cz="343.36805555555554" angle="315" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="19" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="463.7152777777778" cz="343.36805555555554" angle="315" />
+  <Incarnator y="20" cx="303.71527777777777" cz="184.61805555555557" angle="135" />
+  <unique vars="rShow rTaken" />
+  <And in="@start" out="rShow" />
+  <Timer in="rTaken" out="rShow" wait="1" />
+  <Goody shape="bspAvaraA" speed="5" y="19" power="1000" shield="1000" volume="0" color="#ffffff" color.1="#000000" cx="303.71527777777777" cz="184.61805555555557" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspClip" y="10.4" speed="3" sound="snReload" power="1000" color="#2d2d2d" color.1="#000000" cx="303.75" cz="184.6527777777778" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspKit" y="10.4" shield="1000" speed="3" color="#ffffff" color.1="#f42300" cx="300.625" cz="343.40277777777777" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspKit" y="10.4" shield="1000" speed="3" color="#ffffff" color.1="#f42300" cx="463.125" cz="184.6527777777778" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspClip" y="10.4" speed="3" sound="snReload" power="1000" color="#2d2d2d" color.1="#000000" cx="463.75" cz="343.40277777777777" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspClip" y="28" speed="3" sound="snReload" power="1000" color="#2d2d2d" color.1="#000000" cx="377.5" cz="257.77777777777777" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspKit" y="28" shield="1000" speed="3" color="#ffffff" color.1="#f42300" cx="390" cz="270.27777777777777" angle="135" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspMissile" speed="2" yon="200" y="28" missiles="3" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="377.04861111111114" cz="270.9375" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="2" yon="200" y="28" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="390.17361111111114" cz="257.1875" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspMissile" speed="2" yon="200" y="24" missiles="2" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="426.42361111111114" cz="264.0625" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="2" yon="200" y="24" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="341.3888888888889" cz="264.0277777777778" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspMissile" speed="2" yon="200" y="24" missiles="3" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="383.92361111111114" cz="221.5625" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="2" yon="200" y="24" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="383.92361111111114" cz="306.5625" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspKit" y="20" shield="1000" speed="3" color="#ffffff" color.1="#f42300" cx="463.75" cz="264.02777777777777" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspKit" y="20" shield="1000" speed="3" color="#ffffff" color.1="#f42300" cx="303.75" cz="264.02777777777777" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspClip" y="20" speed="3" sound="snReload" power="1000" color="#2d2d2d" color.1="#000000" cx="383.75" cz="184.0277777777778" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspClip" y="20" speed="3" sound="snReload" power="1000" color="#2d2d2d" color.1="#000000" cx="383.75" cz="344.02777777777777" angle="135" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="2" yon="200" y="16" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="421.3888888888889" cz="343.4027777777778" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspMissile" speed="2" yon="200" y="16" missiles="3" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="346.42361111111114" cz="344.0625" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="2" yon="200" y="16" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="421.3888888888889" cz="183.40277777777777" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspMissile" speed="2" yon="200" y="16" missiles="3" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="345.79861111111114" cz="183.4375" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspMissile" speed="2" yon="200" y="16" missiles="3" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="303.92361111111114" cz="300.9375" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="2" yon="200" y="16" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="303.92361111111114" cz="225.9375" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspMissile" speed="2" yon="200" y="16" missiles="3" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="463.92361111111114" cz="300.9375" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="2" yon="200" y="16" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="463.92361111111114" cz="225.9375" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspAvaraA" y="2" speed="3" sound="snReload" power="1000" grenades="6" color="#f1f1f1" color.1="#f1f1f1" cx="345.625" cz="306.52777777777777" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspAvaraA" y="2" speed="3" sound="snReload" power="1000" grenades="6" color="#f1f1f1" color.1="#f1f1f1" cx="421.25" cz="306.52777777777777" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspAvaraA" y="2" speed="3" sound="snReload" power="1000" grenades="6" color="#f1f1f1" color.1="#f1f1f1" cx="346.25" cz="221.5277777777778" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspAvaraA" y="2" speed="3" sound="snReload" power="1000" grenades="6" color="#f1f1f1" color.1="#f1f1f1" cx="421.25" cz="221.5277777777778" angle="135" />
+  <Teleporter group="-1" y="-30" activeRange="55 * 5" deadRange="45 * 5" destGroup="@recenter" shape="0" color="#ffffff" color.1="#000000" cx="384.40972222222223" cz="263.15972222222223" angle="45" />
+  <Teleporter y="6.4" shape="0" group="@recenter" color="#ffffff" color.1="#000000" cx="384.40972222222223" cz="263.15972222222223" angle="45" />
+  <Teleporter shape="0" y="200" win="10000" start="@winTeam" activeRange="2000" color="#ffffff" color.1="#000000" cx="384.27083333333337" cz="263.2291666666667" angle="45" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspClip" y="2" speed="3" sound="snReload" power="1000" color="#2d2d2d" color.1="#000000" cx="371.25" cz="264.02777777777777" angle="135" />
+  <unique vars="mShow mTaken" />
+  <And in="@start" out="mShow" />
+  <Timer in="mTaken" out="mShow" wait="300" />
+  <Goody shape="bspKit" y="2" shield="1000" speed="3" color="#ffffff" color.1="#f42300" cx="396.25" cz="264.02777777777777" angle="135" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspGrenade" speed="2" yon="200" y="2" grenades="6" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="383.92361111111114" cz="251.5625" angle="45" />
+  <unique vars="gShow gTaken" />
+  <And in="@start" out="gShow" />
+  <Timer in="gTaken" out="gShow" wait="300" />
+  <Goody shape="bspMissile" speed="2" yon="200" y="2" missiles="3" start="gShow" out="gTaken" color="#ffffff" color.1="#000000" cx="383.92361111111114" cz="275.3125" angle="45" />
+</map>

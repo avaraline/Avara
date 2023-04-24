@@ -257,7 +257,6 @@ class BSP(object):
         self.unique_edge_count = bytes_to_unsigned_long(raw_data[80:84])
 
         if self.poly_count == 0:
-            print("Shape %s has no faces, making empty shape" % self.name)
             self.normals = []
             self.polys = []
             self.edges = []

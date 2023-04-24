@@ -1,0 +1,182 @@
+<map>
+  <set designer="Plastic Chicken" information="A normal level on top of a big building.  Coffee cup pillboxes drop in after about 2 and a half minutes, pick them up to gain control of them." gravity=".9" />
+  <set defaultLives="3" />
+  <set bspChicken="1250" bspStopSign="1251" bspRedButton="1252" bspMonoTrain="1253" bspDescentShip="1255" bspTransportShip="1256" bspBigRadar="1258" bspPaveway="1259" bspTeamFlag="1260" bspiMac="1261" bspCrate="1262" bspIdleMissile="1263" bspBigMissile="1264" bspShrub="1265" bspByPlasticChicken="1266" bspSlenderTreeA="1267" bspSlenderTreeB="1268" bspPolyTree="1269" bspCoffee="1270" snBigBoom="1251" blastSoundDefault="snBigBoom" />
+  <Teleporter y="50" shape="false" start="@winTeam" win="1000" activeRange="2000" color="#d82679" color.1="#d82679" cx="136.875" cz="4.375" angle="135" />
+  <SkyColor verticalRangeMax="9000" n="1024" color="#000000" color.1="#ffffff" />
+  <GroundColor color="#432200" />
+  <set wallHeight="200" />
+  <Wall color="#7a4300" color.1="#000000" x="77.5" z="93.125" w="115" d="115" h="0" />
+  <set baseHeight="200" />
+  <set wallHeight="1.5" />
+  <Wall color="#ffffff" color.1="#000000" x="77.5" z="35.3125" w="115" d="0.625" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="19.6875" z="93.125" w="0.625" d="115" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="135.3125" z="93.125" w="0.625" d="115" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="77.5" z="150.9375" w="115" d="0.625" h="0" />
+  <unique vars="zHi" />
+  <Goody y="20" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#ab4642" color.1="#000000" cx="133.125" cz="37.5" angle="225" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="20" cx="133.125" cz="37.5" angle="225" />
+  <unique vars="zHi" />
+  <Goody y="20" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#ab4642" color.1="#000000" cx="133.125" cz="148.75" angle="315" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="20" cx="133.125" cz="148.75" angle="315" />
+  <unique vars="zHi" />
+  <Goody y="20" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#ab4642" color.1="#000000" cx="21.875" cz="148.75" angle="45" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="20" cx="21.875" cz="148.75" angle="45" />
+  <unique vars="zHi" />
+  <Goody y="20" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#ab4642" color.1="#000000" cx="21.875" cz="37.5" angle="135" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="20" cx="21.875" cz="37.5" angle="135" />
+  <Teleporter activeRange="2000" deadRange="200" y="70" shape="false" destGroup="2" color="#ffd479" color.1="#000000" cx="77.43055555555556" cz="92.91666666666667" angle="135" />
+  <Teleporter activeRange="0" deadRange="1" y="60" shape="false" group="2" color="#ffd479" color.1="#000000" cx="77.43055555555556" cz="92.91666666666667" angle="135" />
+  <unique vars="gHi gDie" />
+  <Goody scale="2" shape="bspCoffee" y="2" speed="-10" missiles="3" grenades="8" shield="100" power="100" start="gHi" out="gDie" color="#9a9a9a" color.1="#371b00" cx="77.43055555555556" cz="92.91666666666667" angle="225" />
+  <Timer in="gDie" wait="15.625 * 20" out="gHi" />
+  <And in="@start" out="gHi" />
+  <unique vars="gHi gDie" />
+  <Goody scale=".8" shape="bspCoffee" y="2" speed="2" missiles="3" grenades="8" power="10" start="gHi" out="gDie" color="#ffffff" color.1="#371b00" cx="93.125" cz="43.75" angle="225" />
+  <Timer in="gDie" wait="15.625 * 10" out="gHi" />
+  <And in="@start" out="gHi" />
+  <set wallHeight="3" />
+  <Wall color="#ffffff" color.1="#000000" x="62.5" z="62.8125" w="47.5" d="24.375" h="0" />
+  <Wall color="#7a4300" color.1="#000000" x="62.5" z="62.8125" w="53.75" d="30.625" h="0" y="3" />
+  <set wallHeight="6.3" />
+  <Wall color="#9a9a9a" color.1="#000000" x="45.9375" z="47.1875" w="0.625" d="0.625" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="49.6875" z="47.1875" w="0.625" d="0.625" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="77.8125" z="78.4375" w="0.625" d="0.625" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="81.5625" z="78.4375" w="0.625" d="0.625" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="79.6875" z="78.4375" w="3.125" d="0.625" h="0" />
+  <Field shape="false" deltaX="0" deltaY=".15" deltaZ="0" color="#9a9a9a" color.1="#000000" cx="93.125" cz="43.75" angle="225" />
+  <Wall color="#9a9a9a" color.1="#000000" x="47.8125" z="47.1875" w="3.125" d="0.625" h="0" />
+  <Field shape="false" deltaX="0" deltaY=".15" deltaZ="0" color="#9a9a9a" color.1="#000000" cx="93.125" cz="43.75" angle="225" />
+  <set baseHeight="200.5" />
+  <set wallHeight=".3" />
+  <Wall color="#9a9a9a" color.1="#000000" x="47.8125" z="47.5" w="3.125" d="0" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="79.6875" z="78.125" w="3.125" d="0" h="0" />
+  <set baseHeight="201.5" />
+  <Wall color="#9a9a9a" color.1="#000000" x="47.8125" z="47.5" w="3.125" d="0" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="79.6875" z="78.125" w="3.125" d="0" h="0" />
+  <set baseHeight="202.5" />
+  <Wall color="#9a9a9a" color.1="#000000" x="47.8125" z="47.5" w="3.125" d="0" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="79.6875" z="78.125" w="3.125" d="0" h="0" />
+  <set baseHeight="203.5" />
+  <Wall color="#9a9a9a" color.1="#000000" x="47.8125" z="47.5" w="3.125" d="0" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="79.6875" z="78.125" w="3.125" d="0" h="0" />
+  <set baseHeight="204.5" />
+  <Wall color="#9a9a9a" color.1="#000000" x="47.8125" z="47.5" w="3.125" d="0" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="79.6875" z="78.125" w="3.125" d="0" h="0" />
+  <set baseHeight="205.5" />
+  <Wall color="#9a9a9a" color.1="#000000" x="47.8125" z="47.5" w="3.125" d="0" h="0" />
+  <Wall color="#9a9a9a" color.1="#000000" x="79.6875" z="78.125" w="3.125" d="0" h="0" />
+  <set baseHeight="206" />
+  <set wallHeight="4" />
+  <Wall color="#7a4300" color.1="#000000" x="34.375" z="46.25" w="2.5" d="2.5" h="0" />
+  <Wall color="#7a4300" color.1="#000000" x="90.625" z="46.25" w="2.5" d="2.5" h="0" />
+  <Wall color="#7a4300" color.1="#000000" x="90.625" z="79.375" w="2.5" d="2.5" h="0" />
+  <Wall color="#7a4300" color.1="#000000" x="34.375" z="79.375" w="2.5" d="2.5" h="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="36.875" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="40.625" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="44.375" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="48.125" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="51.875" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="55.625" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="59.375" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="63.125" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="66.875" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="70.625" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="74.375" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="84.375" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="88.125" z="79.375" w="2.5" d="2.5" h="0" angle="0" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="90.625" z="76.875" w="2.5" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="90.625" z="73.125" w="2.5" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="90.625" z="69.375" w="2.5" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="90.625" z="65.625" w="2.5" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="90.625" z="61.875" w="2.5" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="90.625" z="58.125" w="2.5" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="90.625" z="54.375" w="2.5" d="2.5" h="0" angle="270" />
+  <Ramp deltaY="4" color="#ffffff" color.1="#000000" x="90.625" z="49.6875" w="2.5" d="4.375" h="0" angle="270" />
+  <Wall color="#ffffff" color.1="#000000" x="70.3125" z="45.625" w="38.125" d="0" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="40" z="45.625" w="8.75" d="0" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="44.375" z="46.875" w="0" d="2.5" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="51.25" z="46.875" w="0" d="2.5" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="33.75" z="62.8125" w="0" d="30.625" h="0" />
+  <unique vars="gHi gDie" />
+  <Goody scale=".8" shape="bspCoffee" y="2" speed="2" missiles="3" grenades="8" power="10" start="gHi" out="gDie" color="#ffffff" color.1="#371b00" cx="83.75" cz="72.5" angle="315" />
+  <Timer in="gDie" wait="15.625 * 10" out="gHi" />
+  <And in="@start" out="gHi" />
+  <unique vars="gHi gDie" />
+  <Goody scale=".8" shape="bspCoffee" y="2" speed="2" missiles="3" grenades="8" power="10" start="gHi" out="gDie" color="#ffffff" color.1="#371b00" cx="41.25" cz="53.125" angle="135" />
+  <Timer in="gDie" wait="15.625 * 10" out="gHi" />
+  <And in="@start" out="gHi" />
+  <set baseHeight="210" />
+  <set wallHeight=".5" />
+  <Wall color="#ffffff" color.1="#000000" x="62.8125" z="44.6875" w="59.375" d="0.625" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="62.1875" z="80.9375" w="59.375" d="0.625" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="32.8125" z="62.5" w="0.625" d="36.25" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="92.1875" z="63.125" w="0.625" d="36.25" h="0" />
+  <set baseHeight="212.5" />
+  <set wallHeight="1" />
+  <Wall color="#ffffff" color.1="#000000" x="62.5" z="62.8125" w="61.25" d="38.125" h="0" />
+  <set baseHeight="200" />
+  <set wallHeight="3" />
+  <unique vars="gHi gDie" />
+  <Goody scale=".8" shape="bspCoffee" y="2" speed="2" missiles="3" grenades="8" power="10" start="gHi" out="gDie" color="#ffffff" color.1="#371b00" cx="31.875" cz="81.875" angle="225" />
+  <Timer in="gDie" wait="15.625 * 10" out="gHi" />
+  <And in="@start" out="gHi" />
+  <unique vars="gHi gDie" />
+  <Goody scale=".8" shape="bspCoffee" y="2" speed="2" missiles="3" grenades="8" power="10" start="gHi" out="gDie" color="#ffffff" color.1="#371b00" cx="55.625" cz="123.75" angle="225" />
+  <Timer in="gDie" wait="15.625 * 10" out="gHi" />
+  <And in="@start" out="gHi" />
+  <unique vars="gHi gDie" />
+  <Goody scale=".8" shape="bspCoffee" y="2" speed="2" missiles="3" grenades="8" power="10" start="gHi" out="gDie" color="#ffffff" color.1="#371b00" cx="114.375" cz="96.875" angle="225" />
+  <Timer in="gDie" wait="15.625 * 10" out="gHi" />
+  <And in="@start" out="gHi" />
+  <unique vars="gHi gDie" />
+  <Goody scale=".8" shape="bspCoffee" y="2" speed="2" missiles="3" grenades="8" power="10" start="gHi" out="gDie" color="#ffffff" color.1="#371b00" cx="116.875" cz="145" angle="225" />
+  <Timer in="gDie" wait="15.625 * 10" out="gHi" />
+  <And in="@start" out="gHi" />
+  <Wall color="#ffffff" color.1="#000000" x="114.375" z="74.0625" w="2.5" d="21.875" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="69.0625" z="122.5" w="21.875" d="2.5" h="0" />
+  <set wallHeight="1.5" />
+  <Wall color="#aa7a79" color.1="#000000" x="105.9375" z="141.5625" w="1.875" d="1.875" h="0" />
+  <script pixelToThickness="0.125" designer="Plastic Chicken" information="A normal level on top of a big building.  Coffee cup pillboxes drop in after about 2 and a half minutes, pick them up to gain control of them." gravity=".9" defaultLives="3" bspChicken="1250" bspStopSign="1251" bspRedButton="1252" bspMonoTrain="1253" bspDescentShip="1255" bspTransportShip="1256" bspBigRadar="1258" bspPaveway="1259" bspTeamFlag="1260" bspiMac="1261" bspCrate="1262" bspIdleMissile="1263" bspBigMissile="1264" bspShrub="1265" bspByPlasticChicken="1266" bspSlenderTreeA="1267" bspSlenderTreeB="1268" bspPolyTree="1269" bspCoffee="1270" snBigBoom="1251" blastSoundDefault="snBigBoom" color="#aa7a79" cx="116.875" cz="145" r="1.875" angle="225" color.1="#000000" wallHeight="1.5" baseHeight="200" x="90.625" z="49.6875" w="2.5" d="4.375" h="0">
+object WallDoor
+midYaw = 10
+endd</script>
+  <Wall color="#aa7a79" color.1="#000000" x="107.8125" z="139.6875" w="1.875" d="1.875" h="0" />
+  <script pixelToThickness="0.125" designer="Plastic Chicken" information="A normal level on top of a big building.  Coffee cup pillboxes drop in after about 2 and a half minutes, pick them up to gain control of them." gravity=".9" defaultLives="3" bspChicken="1250" bspStopSign="1251" bspRedButton="1252" bspMonoTrain="1253" bspDescentShip="1255" bspTransportShip="1256" bspBigRadar="1258" bspPaveway="1259" bspTeamFlag="1260" bspiMac="1261" bspCrate="1262" bspIdleMissile="1263" bspBigMissile="1264" bspShrub="1265" bspByPlasticChicken="1266" bspSlenderTreeA="1267" bspSlenderTreeB="1268" bspPolyTree="1269" bspCoffee="1270" snBigBoom="1251" blastSoundDefault="snBigBoom" color="#aa7a79" cx="116.875" cz="145" r="1.875" angle="225" color.1="#000000" wallHeight="1.5" baseHeight="200" x="90.625" z="49.6875" w="2.5" d="4.375" h="0">
+object WallDoor
+midYaw = 45
+endd</script>
+  <WallDoor midYaw="-20" midY="1.5" color="#aa7a79" color.1="#000000" x="106.5625" z="140.3125" w="1.875" d="1.875" h="0" />
+  <WallDoor midYaw="45" color="#aa7a79" color.1="#000000" x="114.0625" z="137.8125" w="1.875" d="1.875" h="0" />
+  <WallDoor midYaw="45" color="#aa7a79" color.1="#000000" x="115.9375" z="135.9375" w="1.875" d="1.875" h="0" />
+  <WallDoor midYaw="-20" midY="1.5" color="#aa7a79" color.1="#000000" x="115.3125" z="136.5625" w="1.875" d="1.875" h="0" />
+  <WallDoor midYaw="45" color="#aa7a79" color.1="#000000" x="117.1875" z="134.0625" w="1.875" d="1.875" h="0" />
+  <WallDoor midYaw="0" color="#aa7a79" color.1="#000000" x="119.0625" z="132.1875" w="1.875" d="1.875" h="0" />
+  <WallDoor midYaw="20" midY="1.5" color="#aa7a79" color.1="#000000" x="117.8125" z="133.4375" w="1.875" d="1.875" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="90.9375" z="122.5" w="21.875" d="2.5" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="47.1875" z="120" w="21.875" d="2.5" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="104.6875" z="61.875" w="21.875" d="2.5" h="0" />
+  <Wall color="#ffffff" color.1="#000000" x="112.8125" z="86.25" w="21.875" d="2.5" h="0" />
+  <Wall color="#aa7a79" color.1="#000000" x="121.5625" z="130.3125" w="1.875" d="1.875" h="0" />
+  <script pixelToThickness="0.125" designer="Plastic Chicken" information="A normal level on top of a big building.  Coffee cup pillboxes drop in after about 2 and a half minutes, pick them up to gain control of them." gravity=".9" defaultLives="3" bspChicken="1250" bspStopSign="1251" bspRedButton="1252" bspMonoTrain="1253" bspDescentShip="1255" bspTransportShip="1256" bspBigRadar="1258" bspPaveway="1259" bspTeamFlag="1260" bspiMac="1261" bspCrate="1262" bspIdleMissile="1263" bspBigMissile="1264" bspShrub="1265" bspByPlasticChicken="1266" bspSlenderTreeA="1267" bspSlenderTreeB="1268" bspPolyTree="1269" bspCoffee="1270" snBigBoom="1251" blastSoundDefault="snBigBoom" color="#aa7a79" cx="116.875" cz="145" r="1.875" angle="225" color.1="#000000" wallHeight="1.5" baseHeight="200" x="90.625" z="49.6875" w="2.5" d="4.375" h="0">
+object WallDoor
+midYaw = 10
+endd</script>
+  <Wall color="#aa7a79" color.1="#000000" x="124.0625" z="129.0625" w="1.875" d="1.875" h="0" />
+  <WallDoor midYaw="-20" midY="1.5" color="#aa7a79" color.1="#000000" x="122.8125" z="129.6875" w="1.875" d="1.875" h="0" />
+  <Pill y="1000" shape="bspCoffee" team="0" shotPower="0.25" burstLength="3" burstSpeed="3" burstCharge="40" shieldChargeRate="0.05" maxShield="1000" shootShield="1" grabShield="1001" changeOwnerTime="1" acceleration="0.8" ejectPitch="40" ejectPower="1" watch="playerMask + scoutMask + robotMask" mask="allTeams" color="#2d2d2d" color.1="#371b00" cx="51.25" cz="98.125" angle="225" />
+  <Pill y="1000" shape="bspCoffee" team="0" shotPower="0.25" burstLength="3" burstSpeed="3" burstCharge="40" shieldChargeRate="0.05" maxShield="1000" shootShield="1" grabShield="1001" changeOwnerTime="1" acceleration="0.8" ejectPitch="40" ejectPower="1" watch="playerMask + scoutMask + robotMask" mask="allTeams" color="#2d2d2d" color.1="#371b00" cx="122.5" cz="138.125" angle="225" />
+  <Pill y="1000" shape="bspCoffee" team="0" shotPower="0.25" burstLength="3" burstSpeed="3" burstCharge="40" shieldChargeRate="0.05" maxShield="1000" shootShield="1" grabShield="1001" changeOwnerTime="1" acceleration="0.8" ejectPitch="40" ejectPower="1" watch="playerMask + scoutMask + robotMask" mask="allTeams" color="#2d2d2d" color.1="#371b00" cx="105.48611111111111" cz="40" angle="225" />
+  <unique vars="zHi" />
+  <Goody y="20" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#ab4642" color.1="#000000" cx="91.25" cz="80" angle="135" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="20" cx="91.25" cz="80" angle="135" />
+  <unique vars="zHi" />
+  <Goody y="20" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#ab4642" color.1="#000000" cx="33.75" cz="45.625" angle="315" />
+  <And in="@start" out="zHi" />
+  <Incarnator y="20" cx="33.75" cz="45.625" angle="315" />
+</map>

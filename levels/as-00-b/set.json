@@ -1,0 +1,87 @@
+{
+  "LEDI": [
+    {
+      "Alf": "shockwave-city.alf",
+      "Name": "Shockwave City",
+      "Message": "An Aftershock City, aka Tactical Paradise\rBy Plastic Chicken\rSometimes crashed when loaded more than once",
+      "Aftershock": true
+    },
+    {
+      "Alf": "lightwave-city.alf",
+      "Name": "Lightwave City",
+      "Message": "Reduced Cholesterol City\rBy Plastic Chicken\rSometimes crashes when loaded more than once",
+      "Aftershock": true
+    },
+    {
+      "Alf": "ctf6.alf",
+      "Name": "CTF6",
+      "Message": "Combo of capture the flag and a killfest\r\rBy Plastic Chicken",
+      "Aftershock": true
+    }
+  ],
+  "HULL": {
+    "1250": {
+      "Hull Res ID": 1257,
+      "Max Missiles": 5,
+      "Max Grenades": 0,
+      "Max boosters": 0,
+      "Mass": 78.9648584725719,
+      "Max Energy": 4.719249256122683,
+      "Energy Charge": 4.5776455329213395,
+      "Max Shields": 0.5948271915770199,
+      "Shield Charge": 0.45777065690089264,
+      "Min Shot": 0.45477988860914015,
+      "Max Shot": 0.45477988860914015,
+      "Shot Charge": 3.743907835507744,
+      "Riding Height": 0.5000076295109483,
+      "Acceleration": 0.30518043793392846,
+      "Jump Power": 1.0
+    }
+  },
+  "HSND": {
+    "1251": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "1251.ogg",
+      "Wav": "1251.wav"
+    },
+    "1252": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.504646372167544,
+      "Sound": 0,
+      "Ogg": "1252.ogg",
+      "Wav": "1252.wav"
+    }
+  },
+  "BSPT": {
+    "1250": "levels/as-00-b/bsps/1250.json",
+    "1251": "levels/as-00-b/bsps/1251.json",
+    "1252": "levels/as-00-b/bsps/1252.json",
+    "1253": "levels/as-00-b/bsps/1253.json",
+    "1255": "levels/as-00-b/bsps/1255.json",
+    "1256": "levels/as-00-b/bsps/1256.json",
+    "1257": "levels/as-00-b/bsps/1257.json",
+    "1258": "levels/as-00-b/bsps/1258.json",
+    "1259": "levels/as-00-b/bsps/1259.json",
+    "1260": "levels/as-00-b/bsps/1260.json",
+    "1261": "levels/as-00-b/bsps/1261.json",
+    "1262": "levels/as-00-b/bsps/1262.json",
+    "1263": "levels/as-00-b/bsps/1263.json",
+    "1264": "levels/as-00-b/bsps/1264.json",
+    "1265": "levels/as-00-b/bsps/1265.json",
+    "1266": "levels/as-00-b/bsps/1266.json",
+    "1267": "levels/as-00-b/bsps/1267.json",
+    "1268": "levels/as-00-b/bsps/1268.json",
+    "1269": "levels/as-00-b/bsps/1269.json",
+    "1270": "levels/as-00-b/bsps/1270.json"
+  }
+}
