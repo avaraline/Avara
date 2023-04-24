@@ -1212,7 +1212,11 @@ void CAbstractActor::FpsCoefficients(Fixed classicCoeff1, Fixed classicCoeff2,
         if (fpsOffset != NULL) {
             // Dividing by classicCoeff1(A) seems to improve cases like this:
             //   s=As+B
-            *fpsOffset = FDiv(FpsOffset(classicCoeff2), classicCoeff1);
+            if (classicCoeff1) {
+                *fpsOffset = FDiv(FpsOffset(classicCoeff2), classicCoeff1);
+            } else {
+                *fpsOffset = 0;
+            }
         }
     } else {
         *fpsCoeff1 = classicCoeff1;
