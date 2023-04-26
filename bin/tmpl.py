@@ -27,14 +27,14 @@ def bytes_to_fixed(some_bytes):
     # maximum unsigned 8-bit int is 65535
     frac = bytes_to_unsigned_short(some_bytes[2:4]) / 65535.0
     # print("Whole: %d Frac: %f" % (whole, frac))
-    return whole + frac
+    return -1 if whole == -1 and frac == 1 else whole + frac
 
 
 def parse_tmpl(tmpl, data):
     result = {}
 
     structure = []
-    # we consume all the template values into a structure 
+    # we consume all the template values into a structure
     # to use later
     while len(tmpl) > 1:
         # name is a pascal string with no padding
@@ -61,9 +61,9 @@ def read_data_with_template(data, structure):
     end = -1
     panic = 0
     for i, dtype in enumerate(structure):
-        
+
         if i < end:
-            # skip items if we're inside a list 
+            # skip items if we're inside a list
             continue
 
         t = dtype["type"]
@@ -72,14 +72,14 @@ def read_data_with_template(data, structure):
             # a OCNT means we have a sub-list of records coming up, with the fields
             # of the records being between the LSTC and LSTE records following
             data, count = get_value(data, t)
-            
+
             # the next index is a LSTC and we don't need that for the sub records
             start = i + 2
 
             # get the last field on the sub records
-            end = next((index for (index, d) in 
+            end = next((index for (index, d) in
                 enumerate(structure) if d["name"] == structure[start - 1]["name"] and d["type"] == "LSTE"))
-            
+
             # print ("list of %d things, start: %d end: %d" % (count, start, end))
 
             # create a "substructure" for those records in this list
@@ -93,7 +93,7 @@ def read_data_with_template(data, structure):
             the_list = []
 
             if count == 0:
-                # zero count list means there will be nothing 
+                # zero count list means there will be nothing
                 # left to parse, move on to the next thing
                 # print("zero count list")
                 continue
@@ -121,19 +121,19 @@ def get_value(the_data, dtype):
     # this data was compiled from ResEdit Reference For ResEdit 2.1
     # published by Apple Computer Developer Press 1995
     # page 79-80 (93-94 of PDF)
-    # I only added the datatypes we needed. There are quite a few 
+    # I only added the datatypes we needed. There are quite a few
     # more available for TMPL fields. This is where you want to add
     # more field types if you need them for something else.
 
     # TNAM: Type Name (Four characters)
     if dtype == "TNAM":
         return (the_data[4:], bytes_to_string(the_data[:4]))
-    
+
     # OCNT: "One Count" works with LSTC and LSTE to define a list type.
     if dtype == "OCNT":
         value = bytes_to_short(the_data[:2])
         return (the_data[2:], value)
-    
+
     # ESTR: Pascal string (length byte followed by characters)
     # padded to even length
     if dtype == "ESTR":
@@ -150,7 +150,7 @@ def get_value(the_data, dtype):
             return (the_data[length + 2:], the_str)
         else:
             return (the_data[length + 1:], the_str)
-    
+
     # DWRD: Decimal word (two bytes)
     if dtype == "DWRD":
         value = bytes_to_short(the_data[:2])
@@ -168,13 +168,13 @@ def get_value(the_data, dtype):
     if dtype == "FIXD":
         value = bytes_to_fixed(the_data[:4])
         return (the_data[4:], value)
-    
+
     # BOOL: Boolean (two bytes)
     if dtype == "BOOL":
         value = bytes_to_short(the_data[:2])
         the_bool = value > 0
         return (the_data[2:], the_bool)
-    
+
     # HLNG: Hex long word (four bytes)
     if dtype == "HLNG":
         value = bytes_to_int(the_data[:4])
@@ -190,7 +190,7 @@ def get_value(the_data, dtype):
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
-        print("Usage: tmpl.py <TMPL.r> <RSRC.r>")  
+        print("Usage: tmpl.py <TMPL.r> <RSRC.r>")
         sys.exit(1)
     else:
         with open(sys.argv[1], "rb") as tmpl_file:
