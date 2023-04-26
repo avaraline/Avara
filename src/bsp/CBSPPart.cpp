@@ -98,6 +98,7 @@ void CBSPPart::IBSPPart(short resId) {
     origColorTable = std::make_unique<ARGBColor[]>(colorCount);
     currColorTable = std::make_unique<ARGBColor[]>(colorCount);
     pointTable = std::make_unique<Vector[]>(pointCount);
+    origPointTable = std::make_unique<Vector[]>(pointCount);
     polyTable = std::make_unique<PolyRecord[]>(polyCount);
 
     for (uint16_t i = 0; i < colorCount; i++) {
@@ -123,6 +124,11 @@ void CBSPPart::IBSPPart(short resId) {
         pointTable[i][1] = ToFixed(pt[1]);
         pointTable[i][2] = ToFixed(pt[2]);
         pointTable[i][3] = FIX1;
+
+        origPointTable[i][0] = ToFixed(pt[0]);
+        origPointTable[i][1] = ToFixed(pt[1]);
+        origPointTable[i][2] = ToFixed(pt[2]);
+        origPointTable[i][3] = FIX1;
     }
 
     totalPoints = 0;

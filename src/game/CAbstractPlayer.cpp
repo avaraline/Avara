@@ -354,18 +354,37 @@ void CAbstractPlayer::DisposeDashboard() {
     hudWorld->RemovePart(missileLabel);
     missileLabel->Dispose();
 
+    hudWorld->RemovePart(shieldGauge);
+    shieldGauge->Dispose();
+
+    hudWorld->RemovePart(shieldGaugeBackLight);
+    shieldGaugeBackLight->Dispose();
+
+    hudWorld->RemovePart(energyGauge);
+    energyGauge->Dispose();
+
+    hudWorld->RemovePart(energyGaugeBackLight);
+    energyGaugeBackLight->Dispose();
+
+
     for (int i = 0; i < 4; i++) {
         hudWorld->RemovePart(grenadeMeter[i]);
         grenadeMeter[i]->Dispose();
 
-        hudWorld->RemovePart(missileMeter[i]);
-        missileMeter[i]->Dispose();
-
         hudWorld->RemovePart(grenadeBox[i]);
         grenadeBox[i]->Dispose();
 
+        hudWorld->RemovePart(missileMeter[i]);
+        missileMeter[i]->Dispose();
+
         hudWorld->RemovePart(missileBox[i]);
         missileBox[i]->Dispose();
+
+        hudWorld->RemovePart(boosterMeter[i]);
+        boosterMeter[i]->Dispose();
+
+        hudWorld->RemovePart(boosterBox[i]);
+        boosterBox[i]->Dispose();
     }
 }
 
@@ -498,50 +517,117 @@ void CAbstractPlayer::LoadDashboardParts() {
     lockLight->isTransparent = true;
     hudWorld->AddPart(lockLight);
 
-    grenadeLabel = new CScaledBSP;
-    grenadeLabel->IScaledBSP(FIX(0.7), 820, this, 0);
-    grenadeLabel->ReplaceAllColors(ColorManager::getHUDColor());
-    grenadeLabel->privateAmbient = FIX1;
-    grenadeLabel->ignoreDirectionalLights = false;
-    grenadeLabel->isTransparent = true;
-    hudWorld->AddPart(grenadeLabel);
+    // Shields
+    shieldGauge = new CScaledBSP;
+    shieldGauge->IScaledBSP(FIX(1), 400, this, 0);
+    shieldGauge->ReplaceAllColors(ColorManager::getHUDColor());
+    shieldGauge->privateAmbient = FIX1;
+    shieldGauge->ignoreDirectionalLights = true;
+    shieldGauge->isTransparent = true;
+    shieldGauge->isMorphable = true;
+    hudWorld->AddPart(shieldGauge);
 
-    missileLabel = new CScaledBSP;
-    missileLabel->IScaledBSP(FIX(0.7), 802, this, 0);
-    missileLabel->ReplaceAllColors(ColorManager::getHUDColor());
-    missileLabel->privateAmbient = FIX1;
-    missileLabel->ignoreDirectionalLights = false;
-    missileLabel->isTransparent = true;
-    hudWorld->AddPart(missileLabel);
+    shieldGaugeBackLight = new CScaledBSP;
+    shieldGaugeBackLight->IScaledBSP(FIX(1), 400, this, 0);
+    shieldGaugeBackLight->ReplaceAllColors(ColorManager::getHUDBackLightColor());
+    shieldGaugeBackLight->privateAmbient = FIX3(100);
+    shieldGaugeBackLight->ignoreDirectionalLights = true;
+    shieldGaugeBackLight->isTransparent = true;
+    shieldGaugeBackLight->isMorphable = true;
+    hudWorld->AddPart(shieldGaugeBackLight);
+
+    // Energy
+    energyGauge = new CScaledBSP;
+    energyGauge->IScaledBSP(FIX(1), 400, this, 0);
+    energyGauge->ReplaceAllColors(ColorManager::getHUDColor());
+    energyGauge->privateAmbient = FIX1;
+    energyGauge->ignoreDirectionalLights = true;
+    energyGauge->isTransparent = true;
+    energyGauge->isMorphable = true;
+    hudWorld->AddPart(energyGauge);
+
+    energyGaugeBackLight = new CScaledBSP;
+    energyGaugeBackLight->IScaledBSP(FIX(1), 400, this, 0);
+    energyGaugeBackLight->ReplaceAllColors(ColorManager::getHUDBackLightColor());
+    energyGaugeBackLight->privateAmbient = FIX3(100);
+    energyGaugeBackLight->ignoreDirectionalLights = true;
+    energyGaugeBackLight->isTransparent = true;
+    energyGaugeBackLight->isMorphable = true;
+    hudWorld->AddPart(energyGaugeBackLight);
+
+    // Weapons
+    if (grenadeLimit != 0) {
+        grenadeLabel = new CScaledBSP;
+        grenadeLabel->IScaledBSP(FIX(0.7), 820, this, 0);
+        grenadeLabel->ReplaceAllColors(ColorManager::getHUDColor());
+        grenadeLabel->privateAmbient = FIX1;
+        grenadeLabel->ignoreDirectionalLights = true;
+        grenadeLabel->isTransparent = true;
+        hudWorld->AddPart(grenadeLabel);
+    }
+
+    if (missileLimit != 0) {
+        missileLabel = new CScaledBSP;
+        missileLabel->IScaledBSP(FIX(0.7), 802, this, 0);
+        missileLabel->ReplaceAllColors(ColorManager::getHUDColor());
+        missileLabel->privateAmbient = FIX1;
+        missileLabel->ignoreDirectionalLights = true;
+        missileLabel->isTransparent = true;
+        hudWorld->AddPart(missileLabel);
+    }
+
+    if (boosterLimit != 0) {
+        boosterLabel = new CScaledBSP;
+        boosterLabel->IScaledBSP(FIX(0.04), 600, this, 0);
+        boosterLabel->ReplaceAllColors(ColorManager::getHUDColor());
+        boosterLabel->privateAmbient = FIX1;
+        boosterLabel->ignoreDirectionalLights = true;
+        boosterLabel->isTransparent = true;
+        hudWorld->AddPart(boosterLabel);
+    }
 
     for (int i = 0; i < 4; i++) {
         grenadeMeter[i] = new CScaledBSP;
         grenadeMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
         grenadeMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
-        grenadeMeter[i]->ignoreDirectionalLights = false;
+        grenadeMeter[i]->ignoreDirectionalLights = true;
         grenadeMeter[i]->isTransparent = true;
         hudWorld->AddPart(grenadeMeter[i]);
-
-        missileMeter[i] = new CScaledBSP;
-        missileMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
-        missileMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
-        missileMeter[i]->ignoreDirectionalLights = false;
-        missileMeter[i]->isTransparent = true;
-        hudWorld->AddPart(missileMeter[i]);
 
         grenadeBox[i] = new CScaledBSP;
         grenadeBox[i]->IScaledBSP(FIX(.2), 720, this, 0);
         grenadeBox[i]->ReplaceAllColors(ColorManager::getHUDColor());
-        grenadeBox[i]->ignoreDirectionalLights = false;
+        grenadeBox[i]->ignoreDirectionalLights = true;
         grenadeBox[i]->isTransparent = true;
         hudWorld->AddPart(grenadeBox[i]);
+
+        missileMeter[i] = new CScaledBSP;
+        missileMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
+        missileMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        missileMeter[i]->ignoreDirectionalLights = true;
+        missileMeter[i]->isTransparent = true;
+        hudWorld->AddPart(missileMeter[i]);
 
         missileBox[i] = new CScaledBSP;
         missileBox[i]->IScaledBSP(FIX(.2), 720, this, 0);
         missileBox[i]->ReplaceAllColors(ColorManager::getHUDColor());
-        missileBox[i]->ignoreDirectionalLights = false;
+        missileBox[i]->ignoreDirectionalLights = true;
         missileBox[i]->isTransparent = true;
         hudWorld->AddPart(missileBox[i]);
+
+        boosterMeter[i] = new CScaledBSP;
+        boosterMeter[i]->IScaledBSP(FIX(.04), 400, this, 0);
+        boosterMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        boosterMeter[i]->ignoreDirectionalLights = true;
+        boosterMeter[i]->isTransparent = true;
+        hudWorld->AddPart(boosterMeter[i]);
+
+        boosterBox[i] = new CScaledBSP;
+        boosterBox[i]->IScaledBSP(FIX(.08), 720, this, 0);
+        boosterBox[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        boosterBox[i]->ignoreDirectionalLights = true;
+        boosterBox[i]->isTransparent = true;
+        hudWorld->AddPart(boosterBox[i]);
     }
 }
 
@@ -577,61 +663,157 @@ void CAbstractPlayer::RenderDashboard() {
     if (weapon && weapon->isTargetLocked) {
         lockLight->isTransparent = false;
         lockLight->Reset();
-        DashboardPosition(lockLight, 0.0, -0.06);
+        DashboardPosition(lockLight, 0.0, -0.1);
+        lockLight->Scale(FIX(.6));
         lockLight->ApplyMatrix(mt);
         lockLight->MoveDone();
     }
 
     // Ammo Labels
-    grenadeLabel->isTransparent = false;
-    grenadeLabel->Reset();
-    grenadeLabel->RotateOneY(dashboardSpinHeading);
-    DashboardPosition(grenadeLabel, 0.15, -0.24);
-    grenadeLabel->ApplyMatrix(mt);
-    grenadeLabel->MoveDone();
+    if (grenadeLimit != 0) {
+        grenadeLabel->isTransparent = false;
+        grenadeLabel->Reset();
+        grenadeLabel->RotateOneY(dashboardSpinHeading);
+        DashboardPosition(grenadeLabel, 0.15, -0.26);
+        grenadeLabel->ApplyMatrix(mt);
+        grenadeLabel->MoveDone();
+    }
 
-    missileLabel->isTransparent = false;
-    missileLabel->Reset();
-    missileLabel->RotateOneY(dashboardSpinHeading);
-    DashboardPosition(missileLabel, -0.15, -0.24);
-    missileLabel->ApplyMatrix(mt);
-    missileLabel->MoveDone();
+    if (missileLimit != 0) {
+        missileLabel->isTransparent = false;
+        missileLabel->Reset();
+        missileLabel->RotateOneY(dashboardSpinHeading);
+        DashboardPosition(missileLabel, -0.15, -0.26);
+        missileLabel->ApplyMatrix(mt);
+        missileLabel->MoveDone();
+    }
 
+    if (boosterLimit != 0) {
+        boosterLabel->isTransparent = false;
+        boosterLabel->Reset();
+        boosterLabel->RotateOneY(FDegToOne(FIX(45.0)));
+        boosterLabel->RotateOneX(FDegToOne(FIX(90.0)));
+        DashboardPosition(boosterLabel, 0.21, -0.11);
+        boosterLabel->ApplyMatrix(mt);
+        boosterLabel->MoveDone();
+    }
 
     // Ammo counts
     for (int i = 0; i < 4; i++) {
-        if (i < (grenadeCount+1)/2) {
-            // Fill box
-            grenadeMeter[i]->isTransparent = false;
-            grenadeMeter[i]->Reset();
-            DashboardPosition(grenadeMeter[i], 0.15, -0.2+(float(i)/35));
-            grenadeMeter[i]->ApplyMatrix(mt);
-            grenadeMeter[i]->MoveDone();
-        } else {
-            // Empty box
-            grenadeBox[i]->isTransparent = false;
-            grenadeBox[i]->Reset();
-            DashboardPosition(grenadeBox[i], 0.15, -0.2+(float(i)/35));
-            grenadeBox[i]->ApplyMatrix(mt);
-            grenadeBox[i]->MoveDone();
+        if (0 < grenadeLimit) {
+            if (float(i)/4.0 < float(grenadeCount)/float(grenadeLimit)) {
+                // Fill box
+                grenadeMeter[i]->isTransparent = false;
+                grenadeMeter[i]->Reset();
+                DashboardPosition(grenadeMeter[i], 0.15, -0.22+(float(i)/35)); // (x,y) screen position
+                grenadeMeter[i]->ApplyMatrix(mt);
+                grenadeMeter[i]->MoveDone();
+            } else {
+                // Empty box
+                grenadeBox[i]->isTransparent = false;
+                grenadeBox[i]->Reset();
+                DashboardPosition(grenadeBox[i], 0.15, -0.22+(float(i)/35)); // (x,y) screen position
+                grenadeBox[i]->ApplyMatrix(mt);
+                grenadeBox[i]->MoveDone();
+            }
         }
 
-        if (i < missileCount) {
-            // Fill box
-            missileMeter[i]->isTransparent = false;
-            missileMeter[i]->Reset();
-            DashboardPosition(missileMeter[i], -0.15, -0.2+(float(i)/35));
-            missileMeter[i]->ApplyMatrix(mt);
-            missileMeter[i]->MoveDone();
-        } else {
-            // Empty box
-            missileBox[i]->isTransparent = false;
-            missileBox[i]->Reset();
-            DashboardPosition(missileBox[i], -0.15, -0.2+(float(i)/35));
-            missileBox[i]->ApplyMatrix(mt);
-            missileBox[i]->MoveDone();
+        if (0 < missileLimit) {
+            if (i < missileCount) {
+                // Fill box
+                missileMeter[i]->isTransparent = false;
+                missileMeter[i]->Reset();
+                DashboardPosition(missileMeter[i], -0.15, -0.22+(float(i)/35)); // (x,y) screen position
+                missileMeter[i]->ApplyMatrix(mt);
+                missileMeter[i]->MoveDone();
+            } else {
+                // Empty box
+                missileBox[i]->isTransparent = false;
+                missileBox[i]->Reset();
+                DashboardPosition(missileBox[i], -0.15, -0.22+(float(i)/35)); // (x,y) screen position
+                missileBox[i]->ApplyMatrix(mt);
+                missileBox[i]->MoveDone();
+            }
+        }
+
+        if (0 < boosterLimit) {
+            if (i < boostsRemaining) {
+                // Fill box
+                boosterMeter[i]->isTransparent = false;
+                boosterMeter[i]->Reset();
+                DashboardPosition(boosterMeter[i], 0.21, -0.09+(float(i)/65)); // (x,y) screen position
+                boosterMeter[i]->ApplyMatrix(mt);
+                boosterMeter[i]->MoveDone();
+            } else {
+                // Empty box
+                boosterBox[i]->isTransparent = false;
+                boosterBox[i]->Reset();
+                DashboardPosition(boosterBox[i], 0.21, -0.09+(float(i)/65)); // (x,y) screen position
+                boosterBox[i]->ApplyMatrix(mt);
+                boosterBox[i]->MoveDone();
+            }
         }
     }
+
+    // Shields
+    shieldGaugeBackLight->isTransparent = false;
+    shieldGaugeBackLight->Reset();
+    DashboardPosition(shieldGaugeBackLight, 0.19, -0.12);
+    shieldGaugeBackLight->ScaleXYZ(FIX(.1), FIX(.7), FIX(.01));
+    shieldGaugeBackLight->ApplyMatrix(mt);
+    shieldGaugeBackLight->MoveDone();
+
+    shieldGauge->isTransparent = false;
+    shieldGauge->Reset();
+    Fixed shieldPercent = _FDiv(shields, maxShields);
+
+    if (shieldPercent <= FIX(.25)) {
+        shieldGauge->ReplaceAllColors(ColorManager::getHUDCriticalColor());
+    } else {
+        shieldGauge->ReplaceAllColors(ColorManager::getHUDColor());
+    }
+
+    // Scale the gauge size then scale it further based on damage taken
+    Fixed maxShieldScale = FIX(.7);
+    Fixed shieldHeight = FMul(maxShieldScale, shieldPercent);
+
+    // Adjust position of the gauge because scaling moved the bottom of the gauge
+    float shieldYOffset = abs(ToFloat(FIX(1) - shieldPercent));
+
+    DashboardPosition(shieldGauge, 0.19, -0.12 - (.085 * shieldYOffset));
+    shieldGauge->ScaleXYZ(FIX(.1), shieldHeight, FIX(.01));
+    shieldGauge->ApplyMatrix(mt);
+    shieldGauge->MoveDone();
+
+    // Energy
+    energyGaugeBackLight->isTransparent = false;
+    energyGaugeBackLight->Reset();
+    DashboardPosition(energyGaugeBackLight, -0.19, -0.12);
+    energyGaugeBackLight->ScaleXYZ(FIX(.1), FIX(.7), FIX(.01));
+    energyGaugeBackLight->ApplyMatrix(mt);
+    energyGaugeBackLight->MoveDone();
+
+    energyGauge->isTransparent = false;
+    energyGauge->Reset();
+    Fixed energyPercent = _FDiv(energy, maxEnergy);
+
+    if (energyPercent <= FIX(.25)) {
+        energyGauge->ReplaceAllColors(ColorManager::getHUDCriticalColor());
+    } else {
+        energyGauge->ReplaceAllColors(ColorManager::getHUDColor());
+    }
+
+    // Scale the gauge size then scale it further based on energy lost
+    Fixed maxEnergyScale = FIX(.7);
+    Fixed energyHeight = FMul(maxEnergyScale, energyPercent);
+
+    // Adjust position of the gauge because scaling moved the bottom of the gauge
+    float energyYOffset = abs(ToFloat(FIX(1) - energyPercent));
+
+    DashboardPosition(energyGauge, -0.19, -0.12 - (.085 * energyYOffset));
+    energyGauge->ScaleXYZ(FIX(.1), energyHeight, FIX(.01));
+    energyGauge->ApplyMatrix(mt);
+    energyGauge->MoveDone();
 }
 
 void CAbstractPlayer::DashboardPosition(CBSPPart *part, float x, float y) {
@@ -668,12 +850,20 @@ void CAbstractPlayer::ResetDashboard() {
     lockLight->isTransparent = true;
     grenadeLabel->isTransparent = true;
     missileLabel->isTransparent = true;
+    shieldGauge->isTransparent = true;
+    shieldGaugeBackLight->isTransparent = true;
+    energyGauge->isTransparent = true;
+    energyGaugeBackLight->isTransparent = true;
+
     for (int i = 0; i < 4; i++) {
         grenadeMeter[i]->isTransparent = true;
-        missileMeter[i]->isTransparent = true;
-
         grenadeBox[i]->isTransparent = true;
+
+        missileMeter[i]->isTransparent = true;
         missileBox[i]->isTransparent = true;
+
+        boosterMeter[i]->isTransparent = true;
+        boosterBox[i]->isTransparent = true;
     }
 }
 

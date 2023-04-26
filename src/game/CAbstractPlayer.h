@@ -169,12 +169,19 @@ public:
     Fixed dashboardSpinHeading;
     Fixed dashboardSpinSpeed;
     CScaledBSP *lockLight = 0;
+    CScaledBSP *shieldGauge = 0;
+    CScaledBSP *shieldGaugeBackLight = 0;
+    CScaledBSP *energyGauge = 0;
+    CScaledBSP *energyGaugeBackLight = 0;
     CScaledBSP *grenadeLabel = 0;
     CScaledBSP *missileLabel = 0;
+    CScaledBSP *boosterLabel = 0;
     CScaledBSP *grenadeBox[4] = {0, 0, 0, 0};
     CScaledBSP *missileBox[4] = {0, 0, 0, 0};
+    CScaledBSP *boosterBox[4] = {0, 0, 0, 0};
     CScaledBSP *grenadeMeter[4] = {0, 0, 0, 0};
     CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *boosterMeter[4] = {0, 0, 0, 0};
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();

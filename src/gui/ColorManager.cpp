@@ -25,6 +25,8 @@ ARGBColor ColorManager::plasmaSightsOffColor = 0xff008e00;
 ARGBColor ColorManager::plasmaSightsOnColor = 0xffff2600;
 ARGBColor ColorManager::shieldGaugeColor = 0xff0053b4;
 ARGBColor ColorManager::hudColor = 0xff03f5f5;
+ARGBColor ColorManager::hudCriticalColor = 0xfffa1313;
+ARGBColor ColorManager::hudBackLightColor = 0x2203c5c5;
 ARGBColor ColorManager::hudAltColor = ColorManager::hudColor.GetContrastingShade();
 
 ARGBColor ColorManager::teamColors[kMaxTeamColors + 1] = {
@@ -96,6 +98,9 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::plasmaSightsOffColor = 0xff008e00;
             ColorManager::plasmaSightsOnColor = 0xffff2600;
             ColorManager::shieldGaugeColor = 0xff0053b4;
+            ColorManager::hudColor = 0xff03f5f5;
+            ColorManager::hudCriticalColor = 0x22fa1313;
+            ColorManager::hudBackLightColor = 0x2203c5c5;
             ColorManager::teamColors[0] = 0xffffffff;
             ColorManager::teamColors[1] = 0xff007600;
             ColorManager::teamColors[2] = 0xffd5d200;
@@ -246,17 +251,17 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             break;
     }
     if (ColorManager::hudAlpha != 1.f) {
-        ColorManager::setHudAlpha(ColorManager::hudAlpha);
+        ColorManager::setHUDAlpha(ColorManager::hudAlpha);
     }
     ColorManager::colorBlindMode = mode;
 }
 
-void ColorManager::setHudColor(ARGBColor color) {
+void ColorManager::setHUDColor(ARGBColor color) {
     ColorManager::hudColor = color.WithA(0xff);
     ColorManager::hudAltColor = ColorManager::hudColor.GetContrastingShade();
 }
 
-void ColorManager::setHudAlpha(float alpha) {
+void ColorManager::setHUDAlpha(float alpha) {
     alpha = std::clamp(alpha, 0.f, 1.f);
     uint8_t a = static_cast<uint8_t>((alpha * 255) + 0.5);
 
@@ -284,6 +289,6 @@ void ColorManager::setMissileLaunchedColor(ARGBColor color) {
 
 void ColorManager::refresh(CApplication *app) {
     ColorManager::setColorBlind(app->Get(kColorBlindMode));
-    ColorManager::setHudColor(ARGBColor::Parse(app->String(kHUDColor)).value_or(0xff03f5f5));
-    ColorManager::setHudAlpha(app->Get(kHUDAlpha));
+    ColorManager::setHUDColor(ARGBColor::Parse(app->String(kHUDColor)).value_or(0xff03f5f5));
+    ColorManager::setHUDAlpha(app->Get(kHUDAlpha));
 }

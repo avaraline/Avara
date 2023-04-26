@@ -114,6 +114,15 @@ public:
         return hudAltColor;
     }
 
+    static inline ARGBColor getHUDBackLightColor() {
+        return hudBackLightColor;
+    }
+
+    static inline ARGBColor getHUDCriticalColor() {
+        return hudCriticalColor;
+    }
+
+
     static inline std::optional<ARGBColor> getMarkerColor(uint8_t num) {
         switch (num) {
             case 0:
@@ -160,13 +169,13 @@ public:
       return pingColors[num];
     }
 
-    static inline float getHudAlpha() {
+    static inline float getHUDAlpha() {
         return hudAlpha;
     }
 
     static void setColorBlind(ColorBlindMode mode);
-    static void setHudColor(ARGBColor color);
-    static void setHudAlpha(float alpha);
+    static void setHUDColor(ARGBColor color);
+    static void setHUDAlpha(float alpha);
     static void setMissileArmedColor(ARGBColor color);
     static void setMissileLaunchedColor(ARGBColor color);
 
@@ -177,6 +186,9 @@ private:
     static ColorBlindMode colorBlindMode;
     static ARGBColor hudColor;
     static ARGBColor hudAltColor;
+    static ARGBColor hudCriticalColor;
+    static ARGBColor hudBackLightColor;
+
     static float hudAlpha;
 
     static ARGBColor energyGaugeColor;
