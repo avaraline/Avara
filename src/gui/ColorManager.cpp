@@ -97,8 +97,6 @@ void ColorManager::setColorBlind(ColorBlindMode mode) {
             ColorManager::plasmaSightsOffColor = 0xff008e00;
             ColorManager::plasmaSightsOnColor = 0xffff2600;
             ColorManager::shieldGaugeColor = 0xff0053b4;
-            ColorManager::hudColor = 0xff03f5f5;
-            ColorManager::hudCriticalColor = 0x22fa1313;
             ColorManager::teamColors[0] = 0xffffffff;
             ColorManager::teamColors[1] = 0xff007600;
             ColorManager::teamColors[2] = 0xffd5d200;
