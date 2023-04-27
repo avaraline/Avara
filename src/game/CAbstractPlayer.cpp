@@ -519,7 +519,7 @@ void CAbstractPlayer::LoadDashboardParts() {
 
     // Shields
     shieldGauge = new CScaledBSP;
-    shieldGauge->IScaledBSP(FIX(1), 400, this, 0);
+    shieldGauge->IScaledBSP(FIX(1), 402, this, 0);
     shieldGauge->ReplaceAllColors(ColorManager::getHUDColor());
     shieldGauge->privateAmbient = FIX1;
     shieldGauge->ignoreDirectionalLights = true;
@@ -528,9 +528,9 @@ void CAbstractPlayer::LoadDashboardParts() {
     hudWorld->AddPart(shieldGauge);
 
     shieldGaugeBackLight = new CScaledBSP;
-    shieldGaugeBackLight->IScaledBSP(FIX(1), 400, this, 0);
-    shieldGaugeBackLight->ReplaceAllColors(ColorManager::getHUDBackLightColor());
-    shieldGaugeBackLight->privateAmbient = FIX3(100);
+    shieldGaugeBackLight->IScaledBSP(FIX(1), 402, this, 0);
+    shieldGaugeBackLight->ReplaceAllColors(ColorManager::getHUDColor());
+    shieldGaugeBackLight->privateAmbient = FIX3(80);
     shieldGaugeBackLight->ignoreDirectionalLights = true;
     shieldGaugeBackLight->isTransparent = true;
     shieldGaugeBackLight->isMorphable = true;
@@ -538,7 +538,7 @@ void CAbstractPlayer::LoadDashboardParts() {
 
     // Energy
     energyGauge = new CScaledBSP;
-    energyGauge->IScaledBSP(FIX(1), 400, this, 0);
+    energyGauge->IScaledBSP(FIX(1), 402, this, 0);
     energyGauge->ReplaceAllColors(ColorManager::getHUDColor());
     energyGauge->privateAmbient = FIX1;
     energyGauge->ignoreDirectionalLights = true;
@@ -547,9 +547,9 @@ void CAbstractPlayer::LoadDashboardParts() {
     hudWorld->AddPart(energyGauge);
 
     energyGaugeBackLight = new CScaledBSP;
-    energyGaugeBackLight->IScaledBSP(FIX(1), 400, this, 0);
-    energyGaugeBackLight->ReplaceAllColors(ColorManager::getHUDBackLightColor());
-    energyGaugeBackLight->privateAmbient = FIX3(100);
+    energyGaugeBackLight->IScaledBSP(FIX(1), 402, this, 0);
+    energyGaugeBackLight->ReplaceAllColors(ColorManager::getHUDColor());
+    energyGaugeBackLight->privateAmbient = FIX3(80);
     energyGaugeBackLight->ignoreDirectionalLights = true;
     energyGaugeBackLight->isTransparent = true;
     energyGaugeBackLight->isMorphable = true;
@@ -590,6 +590,7 @@ void CAbstractPlayer::LoadDashboardParts() {
         grenadeMeter[i] = new CScaledBSP;
         grenadeMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
         grenadeMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        grenadeMeter[i]->privateAmbient = FIX1;
         grenadeMeter[i]->ignoreDirectionalLights = true;
         grenadeMeter[i]->isTransparent = true;
         hudWorld->AddPart(grenadeMeter[i]);
@@ -597,6 +598,7 @@ void CAbstractPlayer::LoadDashboardParts() {
         grenadeBox[i] = new CScaledBSP;
         grenadeBox[i]->IScaledBSP(FIX(.2), 720, this, 0);
         grenadeBox[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        grenadeBox[i]->privateAmbient = FIX1;
         grenadeBox[i]->ignoreDirectionalLights = true;
         grenadeBox[i]->isTransparent = true;
         hudWorld->AddPart(grenadeBox[i]);
@@ -604,6 +606,7 @@ void CAbstractPlayer::LoadDashboardParts() {
         missileMeter[i] = new CScaledBSP;
         missileMeter[i]->IScaledBSP(FIX(.1), 400, this, 0);
         missileMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        missileMeter[i]->privateAmbient = FIX1;
         missileMeter[i]->ignoreDirectionalLights = true;
         missileMeter[i]->isTransparent = true;
         hudWorld->AddPart(missileMeter[i]);
@@ -611,6 +614,7 @@ void CAbstractPlayer::LoadDashboardParts() {
         missileBox[i] = new CScaledBSP;
         missileBox[i]->IScaledBSP(FIX(.2), 720, this, 0);
         missileBox[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        missileBox[i]->privateAmbient = FIX1;
         missileBox[i]->ignoreDirectionalLights = true;
         missileBox[i]->isTransparent = true;
         hudWorld->AddPart(missileBox[i]);
@@ -618,6 +622,7 @@ void CAbstractPlayer::LoadDashboardParts() {
         boosterMeter[i] = new CScaledBSP;
         boosterMeter[i]->IScaledBSP(FIX(.04), 400, this, 0);
         boosterMeter[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        boosterMeter[i]->privateAmbient = FIX1;
         boosterMeter[i]->ignoreDirectionalLights = true;
         boosterMeter[i]->isTransparent = true;
         hudWorld->AddPart(boosterMeter[i]);
@@ -625,6 +630,7 @@ void CAbstractPlayer::LoadDashboardParts() {
         boosterBox[i] = new CScaledBSP;
         boosterBox[i]->IScaledBSP(FIX(.08), 720, this, 0);
         boosterBox[i]->ReplaceAllColors(ColorManager::getHUDColor());
+        boosterBox[i]->privateAmbient = FIX1;
         boosterBox[i]->ignoreDirectionalLights = true;
         boosterBox[i]->isTransparent = true;
         hudWorld->AddPart(boosterBox[i]);
@@ -639,7 +645,6 @@ void CAbstractPlayer::RenderDashboard() {
     Matrix *mt;
 
     dashboardSpinHeading += FpsCoefficient2(FDegToOne(dashboardSpinSpeed));
-    //SDL_Log("%d", dashboardSpinHeading);
 
     // Setup origin
     // Screen center should be (0,0)
@@ -759,7 +764,6 @@ void CAbstractPlayer::RenderDashboard() {
     shieldGaugeBackLight->isTransparent = false;
     shieldGaugeBackLight->Reset();
     DashboardPosition(shieldGaugeBackLight, 0.19, -0.12);
-    shieldGaugeBackLight->ScaleXYZ(FIX(.1), FIX(.7), FIX(.01));
     shieldGaugeBackLight->ApplyMatrix(mt);
     shieldGaugeBackLight->MoveDone();
 
@@ -773,15 +777,14 @@ void CAbstractPlayer::RenderDashboard() {
         shieldGauge->ReplaceAllColors(ColorManager::getHUDColor());
     }
 
-    // Scale the gauge size then scale it further based on damage taken
-    Fixed maxShieldScale = FIX(.7);
-    Fixed shieldHeight = FMul(maxShieldScale, shieldPercent);
+    // Scale based on damage taken
+    Fixed shieldHeight = FMul(FIX(1), shieldPercent);
 
     // Adjust position of the gauge because scaling moved the bottom of the gauge
     float shieldYOffset = abs(ToFloat(FIX(1) - shieldPercent));
 
     DashboardPosition(shieldGauge, 0.19, -0.12 - (.085 * shieldYOffset));
-    shieldGauge->ScaleXYZ(FIX(.1), shieldHeight, FIX(.01));
+    shieldGauge->ScaleXYZ(FIX(1), shieldHeight, FIX(1));
     shieldGauge->ApplyMatrix(mt);
     shieldGauge->MoveDone();
 
@@ -789,7 +792,6 @@ void CAbstractPlayer::RenderDashboard() {
     energyGaugeBackLight->isTransparent = false;
     energyGaugeBackLight->Reset();
     DashboardPosition(energyGaugeBackLight, -0.19, -0.12);
-    energyGaugeBackLight->ScaleXYZ(FIX(.1), FIX(.7), FIX(.01));
     energyGaugeBackLight->ApplyMatrix(mt);
     energyGaugeBackLight->MoveDone();
 
@@ -803,15 +805,14 @@ void CAbstractPlayer::RenderDashboard() {
         energyGauge->ReplaceAllColors(ColorManager::getHUDColor());
     }
 
-    // Scale the gauge size then scale it further based on energy lost
-    Fixed maxEnergyScale = FIX(.7);
-    Fixed energyHeight = FMul(maxEnergyScale, energyPercent);
+    // Scale based on energy lost
+    Fixed energyHeight = FMul(FIX(1), energyPercent);
 
     // Adjust position of the gauge because scaling moved the bottom of the gauge
     float energyYOffset = abs(ToFloat(FIX(1) - energyPercent));
 
     DashboardPosition(energyGauge, -0.19, -0.12 - (.085 * energyYOffset));
-    energyGauge->ScaleXYZ(FIX(.1), energyHeight, FIX(.01));
+    energyGauge->ScaleXYZ(FIX(1), energyHeight, FIX(1));
     energyGauge->ApplyMatrix(mt);
     energyGauge->MoveDone();
 }
@@ -850,6 +851,7 @@ void CAbstractPlayer::ResetDashboard() {
     lockLight->isTransparent = true;
     grenadeLabel->isTransparent = true;
     missileLabel->isTransparent = true;
+    boosterLabel->isTransparent = true;
     shieldGauge->isTransparent = true;
     shieldGaugeBackLight->isTransparent = true;
     energyGauge->isTransparent = true;
