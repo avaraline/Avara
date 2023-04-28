@@ -35,10 +35,12 @@ public:
     bool GoodGame(VectorOfArgs);
 
     // ServerCommands
-    bool KickPlayer(VectorOfArgs);
+    bool ForEachSlot(VectorOfArgs vargs, std::function<bool(int)> slotCallback);
+    bool KickPlayers(VectorOfArgs vargs);
+    bool KickPlayer(int slot);
     bool ToggleAway(VectorOfArgs);
     bool ToggleSpectator(VectorOfArgs);
-    bool TogglePresence(VectorOfArgs, PresenceType, std::string);
+    bool TogglePresence(int slot, PresenceType, std::string);
 
     // LevelCommands
     bool LoadNamedLevel(VectorOfArgs);

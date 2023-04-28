@@ -44,8 +44,11 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           METHOD_TO_LAMBDA_VARGS(GoodGame));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/kick slot       <- kick player in given slot. slots start at 1",
-                          METHOD_TO_LAMBDA_VARGS(KickPlayer));
+    cmd = new TextCommand("/kick 3          <- kick player in slot 3. (numbers start at 1)\n"
+                          "/kick 2 4 5      <- kick multiple players\n"
+                          "/kick 5-8        <- kick range of players\n"
+                          "/kick *          <- /kick 2-8",
+                          METHOD_TO_LAMBDA_VARGS(KickPlayers));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/away            <- toggle my presence\n"
@@ -166,8 +169,78 @@ bool CommandManager::GoodGame(VectorOfArgs vargs) {
     return true;
 }
 
-bool CommandManager::KickPlayer(VectorOfArgs vargs) {
-    std::string slotString(vargs[0]);
+bool CommandManager::ForEachSlot(VectorOfArgs vargs, std::function<bool(int)> SlotCallback) {
+    bool success = true;
+    for (auto arg: vargs) {
+        // handle string with various combinations of commas and dashes like "2,4-6"
+        std::stringstream commaStream(arg);
+        std::string commaStr;
+        // split on commas first
+        while (std::getline(commaStream, commaStr, ',')) {
+            if (commaStr == "*") {
+                // will match all slots below
+                commaStr = "-";
+            }
+            std::stringstream dashStream(commaStr);
+            std::string dashStr;
+            // split on dashes
+            int firstSlot = 0, lastSlot = 0;
+            while (std::getline(dashStream, dashStr, '-')) {
+                try {
+                    if (firstSlot == 0) {
+                        if (dashStr == commaStr) {
+                            // example: "4"
+                            firstSlot = std::stoi(dashStr);
+                            lastSlot = firstSlot;
+                        } else if (dashStr != "") {
+                            // example: "4-" or "4-6"
+                            firstSlot = std::stoi(dashStr);
+                            lastSlot = kMaxAvaraPlayers;
+                        } else {
+                            // example: "-4" or "-"
+                            firstSlot = 1;
+                            lastSlot = kMaxAvaraPlayers;
+                        }
+                    } else {
+                        lastSlot = std::stoi(dashStr);
+                    }
+                }
+                catch (std::invalid_argument& e) {
+                    // user probably entered non-numeric value
+                    itsApp->AddMessageLine(
+                        "Invalid slot number: " + dashStr,
+                        MsgAlignment::Left,
+                        MsgCategory::Error
+                    );
+
+                }
+            }
+            // loop over range (usually just a single value unless there's a dash)
+            for (int slot = firstSlot; slot > 0 && slot <= lastSlot; slot++) {
+                if (itsApp->GetNet()->playerTable[slot-1]->LoadingStatus() != kLNotConnected) {
+                    success = success && SlotCallback(slot);
+                } else {
+                    // quietly do nothing for empty slots
+                }
+            }
+        }
+    }
+    // if no slot(s) specified, send -1 as the slot and let the callback decide what to do
+    if (vargs.size() == 0) {
+        success = SlotCallback(-1);
+    }
+    return success;
+}
+
+bool CommandManager::KickPlayers(VectorOfArgs vargs) {
+    return ForEachSlot(vargs, [&](int slot) -> bool {
+        return KickPlayer(slot);
+    });
+}
+
+bool CommandManager::KickPlayer(int slot) {
+
+    std::string slotString(std::to_string(slot));
 
     if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
         itsApp->AddMessageLine(
@@ -175,11 +248,10 @@ bool CommandManager::KickPlayer(VectorOfArgs vargs) {
             MsgAlignment::Left,
             MsgCategory::Error
         );
+        return false;
     }
-    else if(!slotString.empty() && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
-        int slot = std::stoi(slotString) - 1;
-
-        if(slot == 0) {
+    else if (slot > 0 && slot <= kMaxAvaraPlayers) {
+        if(slot == 1) {
             itsApp->AddMessageLine(
                 "Host cannot be kicked.",
                 MsgAlignment::Left,
@@ -189,7 +261,7 @@ bool CommandManager::KickPlayer(VectorOfArgs vargs) {
         else {
             itsApp->AddMessageLine("Kicking player in slot " + slotString);
             // Tell everyone to kill their connection to the kicked player.
-            itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot, 0, 0, 0, NULL);
+            itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpKillConnection, slot-1, 0, 0, 0, NULL);
         }
     }
     else {
@@ -198,36 +270,31 @@ bool CommandManager::KickPlayer(VectorOfArgs vargs) {
             MsgAlignment::Left,
             MsgCategory::Error
         );
+        return false;
     }
     return true;
 }
 
 bool CommandManager::ToggleAway(VectorOfArgs vargs) {
-    return CommandManager::TogglePresence(vargs, kzAway, "away");
+    return ForEachSlot(vargs, [&](int slot) -> bool {
+        return TogglePresence(slot, kzAway, "away");
+    });
 }
 
 bool CommandManager::ToggleSpectator(VectorOfArgs vargs) {
-    return CommandManager::TogglePresence(vargs, kzSpectating, "spectating");
+    return ForEachSlot(vargs, [&](int slot) -> bool {
+        return TogglePresence(slot, kzSpectating, "spectating");
+    });
 }
 
-bool CommandManager::TogglePresence(VectorOfArgs vargs, PresenceType togglePresence, std::string stateName) {
-    short slot = itsApp->GetNet()->itsCommManager->myId;
+bool CommandManager::TogglePresence(int slot, PresenceType togglePresence, std::string stateName) {
 
-    if (vargs.size() > 0) {
-        std::string slotString(vargs[0]);
-        if(slotString.length() > 0 && std::all_of(slotString.begin(), slotString.end(), ::isdigit)) {
-            if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
-                itsApp->AddMessageLine(
-                    "Only the host can issue active commands for other players.",
-                    MsgAlignment::Left,
-                    MsgCategory::Error
-                );
-                return false;
-            }
-            slot = std::stoi(slotString) - 1;
-        } else {
+    if (slot < 0) {
+        slot = itsApp->GetNet()->itsCommManager->myId + 1;
+    } else {
+        if(CPlayerManagerImpl::LocalPlayer()->Slot() != 0) {
             itsApp->AddMessageLine(
-                "No player found with slot = " + slotString,
+                "Only the host can issue this command for other players.",
                 MsgAlignment::Left,
                 MsgCategory::Error
             );
@@ -235,7 +302,7 @@ bool CommandManager::TogglePresence(VectorOfArgs vargs, PresenceType togglePrese
         }
     }
 
-    CPlayerManager* playerToChange = itsApp->GetNet()->playerTable[slot];
+    CPlayerManager* playerToChange = itsApp->GetNet()->playerTable[slot-1];
     if(playerToChange->LoadingStatus() == kLActive || playerToChange->LoadingStatus() == kLPaused) {
         itsApp->AddMessageLine(
             "State can not be changed on players in a game.",
@@ -251,8 +318,6 @@ bool CommandManager::TogglePresence(VectorOfArgs vargs, PresenceType togglePrese
     }
 
     FrameNumber noWinFrame = -1;
-//    itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpPlayerPresenceChange,
-//                               playerToChange->Slot(), newPresence, FRandom(), 0, NULL);
     itsApp->GetNet()->itsCommManager->SendPacket(kdEveryone, kpPlayerStatusChange,
             playerToChange->Slot(), playerToChange->LoadingStatus(), newPresence, sizeof(FrameNumber), (Ptr)&noWinFrame);
     itsApp->AddMessageLine("Status of " + playerToChange->GetPlayerName() +
