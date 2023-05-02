@@ -213,6 +213,10 @@ public:
     virtual Matrix *GetInverseTransform();
 
     virtual bool HasAlpha();
+    virtual void SetScale(Fixed x, Fixed y, Fixed z);
+    virtual void ResetScale();
+    Vector scale = {FIX1, FIX1, FIX1, FIX1};
+    bool hasScale = false;
 
     //	Compare with another part to see which one is in front:
     virtual Boolean Obscures(CBSPPart *other);

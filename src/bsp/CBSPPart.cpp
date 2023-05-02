@@ -489,6 +489,21 @@ bool CBSPPart::HasAlpha() {
     return hasAlpha;
 }
 
+void CBSPPart::SetScale(Fixed x, Fixed y, Fixed z) {
+    hasScale = true;
+    scale[0] = x;
+    scale[1] = y;
+    scale[2] = z;
+}
+
+void CBSPPart::ResetScale() {
+    hasScale = false;
+    scale[0] = FIX1;
+    scale[1] = FIX1;
+    scale[2] = FIX1;
+    scale[3] = FIX1;
+}
+
 #define TESTBOUND(b, c) \
     (otherCorners[0][b] c boundary) && (otherCorners[1][b] c boundary) && (otherCorners[2][b] c boundary) && \
         (otherCorners[3][b] c boundary) && (otherCorners[4][b] c boundary) && (otherCorners[5][b] c boundary) && \

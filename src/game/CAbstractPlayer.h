@@ -26,6 +26,13 @@ class CAbstractPlayer;
 #define kDirIndBSP 204
 #define kTargetOff 205
 #define kTargetOk 206
+#define kLockLight 207
+#define kFilledBox 400
+#define kEmptyBox 720
+#define kGaugeBSP 402
+#define kMissileBSP 802
+#define kGrenadeBSP 820
+#define kBoosterBSP 600
 
 #define kDefaultTeleportSound 410
 
@@ -217,10 +224,17 @@ public:
     virtual void AvoidBumping();
 
     virtual void PlaceHUDParts();
+    
+    //
     virtual void LoadDashboardParts();
+    virtual CScaledBSP* DashboardPart(uint16_t id);
+    virtual CScaledBSP* DashboardPart(uint16_t id, Fixed scale);
     virtual void RenderDashboard();
-    virtual void DashboardPosition(CBSPPart *part, float x, float y);
+    virtual void DashboardPosition(CScaledBSP *part, float x, float y);
+    virtual void DashboardPosition(CScaledBSP *part, float x, float y, Fixed x_rot, Fixed y_rot);
     virtual void ResetDashboard();
+    //
+
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
     virtual void RecalculateViewDistance();

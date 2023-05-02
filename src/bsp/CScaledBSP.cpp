@@ -14,21 +14,9 @@
 #include "AvaraGL.h"
 
 void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, short aPartCode) {
-    //OSErr iErr;
-    Vector *p;
-    size_t i;
-
     isMorphable = false;
 
     CSmartPart::ISmartPart(resId, anActor, aPartCode);
-
-    p = pointTable.get();
-    for (i = 0; i < pointCount; i++) {
-        (*p)[0] = FMul((*p)[0], scale);
-        (*p)[1] = FMul((*p)[1], scale);
-        (*p)[2] = FMul((*p)[2], scale);
-        p++;
-    }
 
     minBounds.x = FMul(minBounds.x, scale);
     minBounds.y = FMul(minBounds.y, scale);
@@ -46,23 +34,15 @@ void CScaledBSP::IScaledBSP(Fixed scale, short resId, CAbstractActor *anActor, s
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    AvaraGLUpdateData(this);
+    
+    SetScale(scale, scale, scale);
 }
 
 void CScaledBSP::Scale(Fixed scale) {
     if (!isMorphable) return;
+
     
-    Vector *p;
-    size_t i;
-
-    p = pointTable.get();
-    for (i = 0; i < pointCount; i++) {
-        (*p)[0] = FMul((*p)[0], scale);
-        (*p)[1] = FMul((*p)[1], scale);
-        (*p)[2] = FMul((*p)[2], scale);
-        p++;
-    }
-
+    SetScale(scale, scale, scale);
     minBounds.x = FMul(minBounds.x, scale);
     minBounds.y = FMul(minBounds.y, scale);
     minBounds.z = FMul(minBounds.z, scale);
@@ -78,56 +58,21 @@ void CScaledBSP::Scale(Fixed scale) {
     rSquare[0] = 0;
     rSquare[1] = 0;
     FSquareAccumulate(enclosureRadius, rSquare);
-    AvaraGLUpdateData(this);
 }
 
 void CScaledBSP::ScaleXYZ(Fixed scaleX, Fixed scaleY, Fixed scaleZ) {
     if (!isMorphable) return;
-
-    Vector *p;
-    size_t i;
-    Fixed avgScale = (scaleX + scaleY + scaleZ) / 3;
-
-    p = pointTable.get();
-    for (i = 0; i < pointCount; i++) {
-        (*p)[0] = FMul((*p)[0], scaleX);
-        (*p)[1] = FMul((*p)[1], scaleY);
-        (*p)[2] = FMul((*p)[2], scaleZ);
-        p++;
-    }
-
-    AvaraGLUpdateData(this);
+   SetScale(scaleX, scaleY, scaleZ);
 }
 
 void CScaledBSP::Reset() {
     CBSPPart::Reset();
 
     if (isMorphable) {
-        Vector *p, *orig;
-        size_t i;
-
-        orig = origPointTable.get();
-        p = pointTable.get();
-        for (i = 0; i < pointCount; i++) {
-            (*p)[0] = (*orig)[0];
-            (*p)[1] = (*orig)[1];
-            (*p)[2] = (*orig)[2];
-            p++;
-            orig++;
-        }
+       ResetScale();
     }
 }
 
 void CScaledBSP::Dispose() {
-    /*
-    Handle				handCopy;
-    BSPResourceHeader	*bp;
-
-    handCopy = itsBSPResource;
-    bp = (BSPResourceHeader *)*handCopy;
-    bp->refCount = 99;	//	Prevent ReleaseResource call!
-    */
     CSmartPart::Dispose();
-
-    // DisposeHandle(handCopy);
 }

@@ -25,6 +25,8 @@ ARGBColor ColorManager::plasmaSightsOffColor = 0xff008e00;
 ARGBColor ColorManager::plasmaSightsOnColor = 0xffff2600;
 ARGBColor ColorManager::shieldGaugeColor = 0xff0053b4;
 ARGBColor ColorManager::hudColor = 0xff03f5f5;
+ARGBColor ColorManager::hudPositiveColor = 0xff51e87e;
+ARGBColor ColorManager::hudWarningColor = 0xffedd62d;
 ARGBColor ColorManager::hudCriticalColor = 0xfffa1313;
 ARGBColor ColorManager::hudAltColor = ColorManager::hudColor.GetContrastingShade();
 
@@ -257,6 +259,14 @@ void ColorManager::setHUDColor(ARGBColor color) {
     ColorManager::hudAltColor = ColorManager::hudColor.GetContrastingShade();
 }
 
+void ColorManager::setHUDPositiveColor(ARGBColor color) {
+    ColorManager::hudPositiveColor = color.WithA(0xff);
+}
+
+void ColorManager::setHUDWarningColor(ARGBColor color) {
+    ColorManager::hudWarningColor = color.WithA(0xff);
+}
+
 void ColorManager::setHUDCriticalColor(ARGBColor color) {
     ColorManager::hudCriticalColor = color.WithA(0xff);
 }
@@ -274,6 +284,8 @@ void ColorManager::setHUDAlpha(float alpha) {
     ColorManager::plasmaSightsOffColor = ColorManager::plasmaSightsOffColor.WithA(a);
     ColorManager::plasmaSightsOnColor = ColorManager::plasmaSightsOnColor.WithA(a);
     ColorManager::hudColor = ColorManager::hudColor.WithA(a);
+    ColorManager::hudPositiveColor = ColorManager::hudPositiveColor.WithA(a);
+    ColorManager::hudWarningColor = ColorManager::hudWarningColor.WithA(a);
     ColorManager::hudCriticalColor = ColorManager::hudCriticalColor.WithA(a);
     ColorManager::hudAltColor = ColorManager::hudAltColor.WithA(a);
 
@@ -291,6 +303,8 @@ void ColorManager::setMissileLaunchedColor(ARGBColor color) {
 void ColorManager::refresh(CApplication *app) {
     ColorManager::setColorBlind(app->Get(kColorBlindMode));
     ColorManager::setHUDColor(ARGBColor::Parse(app->String(kHUDColor)).value_or(0xff03f5f5));
+    ColorManager::setHUDPositiveColor(ARGBColor::Parse(app->String(kHUDPositiveColor)).value_or(0xff51e87e));
+    ColorManager::setHUDWarningColor(ARGBColor::Parse(app->String(kHUDWarningColor)).value_or(0xffedd62d));
     ColorManager::setHUDCriticalColor(ARGBColor::Parse(app->String(kHUDCriticalColor)).value_or(0xfffa1313));
     ColorManager::setHUDAlpha(app->Get(kHUDAlpha));
 }

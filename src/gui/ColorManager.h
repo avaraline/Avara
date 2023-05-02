@@ -113,6 +113,14 @@ public:
     static inline ARGBColor getHUDAltColor() {
         return hudAltColor;
     }
+    
+    static inline ARGBColor getHUDPositiveColor() {
+        return hudPositiveColor;
+    }
+
+    static inline ARGBColor getHUDWarningColor() {
+        return hudWarningColor;
+    }
 
     static inline ARGBColor getHUDCriticalColor() {
         return hudCriticalColor;
@@ -171,6 +179,8 @@ public:
 
     static void setColorBlind(ColorBlindMode mode);
     static void setHUDColor(ARGBColor color);
+    static void setHUDPositiveColor(ARGBColor color);
+    static void setHUDWarningColor(ARGBColor color);
     static void setHUDCriticalColor(ARGBColor color);
     static void setHUDAlpha(float alpha);
     static void setMissileArmedColor(ARGBColor color);
@@ -183,6 +193,8 @@ private:
     static ColorBlindMode colorBlindMode;
     static ARGBColor hudColor;
     static ARGBColor hudAltColor;
+    static ARGBColor hudPositiveColor;
+    static ARGBColor hudWarningColor;
     static ARGBColor hudCriticalColor;
 
     static float hudAlpha;
