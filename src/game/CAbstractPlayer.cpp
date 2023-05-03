@@ -495,7 +495,6 @@ void CAbstractPlayer::PlaceHUDParts() {
             theSight->MoveDone();
         }
     }
-
     RenderDashboard();
 }
 
@@ -518,43 +517,81 @@ CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id) {
 void CAbstractPlayer::LoadDashboardParts() {
     if (!itsGame->showNewHUD) return;
 
-    //CBSPWorld *hudWorld;
-    //hudWorld = itsGame->hudWorld;
-
-    dashboardSpinSpeed = ToFixed(.5);
+    dashboardSpinSpeed = ToFixed(5);
     dashboardSpinHeading = 0;
+
+    int layout = itsGame->itsApp->Get(kHUDPreset);
+    //float alpha = itsGame->itsApp->Get(kHUDAlpha);
+    //Fixed hudAlpha = FIX1 * alpha;
+
+    switch (layout-1) {
+        case Close:
+            gaugeBSP = kGaugeBSP;
+            layoutScale = 1.0;
+            boosterPosition[0] = 0.21f;
+            boosterPosition[1] = -0.09f;
+            grenadePosition[0] = 0.15f;
+            grenadePosition[1] = -0.22f;
+            missilePosition[0] = -0.15f;
+            missilePosition[1] = -0.22f;
+            shieldPosition[0] = 0.19f;
+            shieldPosition[1] = -0.12f;
+            energyPosition[0] = -0.19f;
+            energyPosition[1] = -0.12f;
+            offsetMultiplier = .085f;
+            boosterSpacing = 65.0f;
+            weaponSpacing = 35.0f;
+            break;
+        case Far:
+            gaugeBSP = kLargeGaugeBSP;
+            layoutScale = 2.0;
+            boosterPosition[0] = -0.87f;
+            boosterPosition[1] = -0.13f;
+            grenadePosition[0] = 0.96f;
+            grenadePosition[1] = -0.35f;
+            missilePosition[0] = 0.85f;
+            missilePosition[1] = -0.35f;
+            shieldPosition[0] = -0.91f;
+            shieldPosition[1] = -0.20f;
+            energyPosition[0] = -0.97f;
+            energyPosition[1] = -0.20f;
+            offsetMultiplier = .17f;
+            boosterSpacing = 40.0f;
+            weaponSpacing = 16.0f;
+            break;
+    }
 
     lockLight = DashboardPart(kLockLight, FIX3(600));
 
     // Shields
-    shieldGauge = DashboardPart(kGaugeBSP);
+    shieldGauge = DashboardPart(gaugeBSP);
     shieldGauge->isMorphable = true;
 
-    shieldGaugeBackLight = DashboardPart(kGaugeBSP);
+    shieldGaugeBackLight = DashboardPart(gaugeBSP);
     shieldGaugeBackLight->isMorphable = true;
     shieldGaugeBackLight->privateAmbient = FIX3(80);
 
     // Energy
-    energyGauge = DashboardPart(kGaugeBSP);
+    energyGauge = DashboardPart(gaugeBSP);
     energyGauge->isMorphable = true;
 
-    energyGaugeBackLight = DashboardPart(kGaugeBSP);
+    energyGaugeBackLight = DashboardPart(gaugeBSP);
     energyGaugeBackLight->isMorphable = true;
     energyGaugeBackLight->privateAmbient = FIX3(80);
 
     // Weapons
-    grenadeLabel = DashboardPart(kGrenadeBSP, FIX3(700));
-    missileLabel = DashboardPart(kMissileBSP, FIX3(700));
-    boosterLabel = DashboardPart(kBoosterBSP, FIX3(40));
+    grenadeLabel = DashboardPart(kGrenadeBSP, FIX3(700*layoutScale));
+    missileLabel = DashboardPart(kMissileBSP, FIX3(700*layoutScale));
+    boosterLabel = DashboardPart(kBoosterBSP, FIX3(40*layoutScale));
     for (int i = 0; i < 4; i++) {
-        grenadeMeter[i] = DashboardPart(kFilledBox, FIX3(100));
-        grenadeBox[i] = DashboardPart(kEmptyBox, FIX3(200));
+        grenadeMeter[i] = DashboardPart(kFilledBox, FIX3(100*layoutScale));
+        grenadeBox[i] = DashboardPart(kEmptyBox, FIX3(200*layoutScale));
 
-        missileMeter[i] = DashboardPart(kFilledBox, FIX3(100));
-        missileBox[i] = DashboardPart(kEmptyBox, FIX3(200));
+        missileMeter[i] = DashboardPart(kFilledBox, FIX3(100*layoutScale));
+        missileBox[i] = DashboardPart(kEmptyBox, FIX3(200*layoutScale));
 
-        boosterMeter[i] = DashboardPart(kFilledBox, FIX3(40));
-        boosterBox[i] = DashboardPart(kEmptyBox, FIX3(80));
+        boosterMeter[i] = DashboardPart(kFilledBox, FIX3(40*layoutScale));
+        boosterBox[i] = DashboardPart(kEmptyBox, FIX3(80*layoutScale));
     }
 }
 
@@ -572,7 +609,6 @@ void CAbstractPlayer::RenderDashboard() {
     if (weaponIdent)
         weapon = (CWeapon *)gCurrentGame->FindIdent(weaponIdent);
 
-    // Part location and logic
     if (weapon && weapon->isTargetLocked) {
         DashboardPosition(lockLight, 0.0, -0.1);
         lockLight->Scale(FIX(.6));
@@ -580,15 +616,15 @@ void CAbstractPlayer::RenderDashboard() {
 
     // Ammo Labels
     if (grenadeLimit != 0) {
-        DashboardPosition(grenadeLabel, 0.15, -0.26, 0, dashboardSpinHeading);
+        DashboardPosition(grenadeLabel, grenadePosition[0], grenadePosition[1]-(.09f*(layoutScale/2.0)), 0, dashboardSpinHeading, 0);
     }
 
     if (missileLimit != 0) {
-        DashboardPosition(missileLabel, -0.15, -0.26, 0, dashboardSpinHeading);
+        DashboardPosition(missileLabel, missilePosition[0], missilePosition[1]-(.09f*(layoutScale/2.0)), 0, dashboardSpinHeading, 0);
     }
 
     if (boosterLimit != 0) {
-        DashboardPosition(boosterLabel, 0.21, -0.11, 90.0, 45.0);
+        DashboardPosition(boosterLabel, boosterPosition[0], boosterPosition[1]-(.05f*(layoutScale/2.0)), FIX(90.0), FIX(70.0), 0);
     }
 
     // Ammo counts
@@ -596,36 +632,36 @@ void CAbstractPlayer::RenderDashboard() {
         if (0 < grenadeLimit) {
             if (float(i)/4.0 < float(grenadeCount)/float(grenadeLimit)) {
                 // Fill box
-                DashboardPosition(grenadeMeter[i], 0.15, -0.22+(float(i)/35)); // (x,y) screen position
+                DashboardPosition(grenadeMeter[i], grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
             } else {
                 // Empty box
-                DashboardPosition(grenadeBox[i], 0.15, -0.22+(float(i)/35)); // (x,y) screen position
+                DashboardPosition(grenadeBox[i], grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
             }
         }
 
         if (0 < missileLimit) {
             if (i < missileCount) {
                 // Fill box
-                DashboardPosition(missileMeter[i], -0.15, -0.22+(float(i)/35)); // (x,y) screen position
+                DashboardPosition(missileMeter[i], missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
             } else {
                 // Empty box
-                DashboardPosition(missileBox[i], -0.15, -0.22+(float(i)/35)); // (x,y) screen position
+                DashboardPosition(missileBox[i], missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
             }
         }
 
         if (0 < boosterLimit) {
             if (i < boostsRemaining) {
                 // Fill box
-                DashboardPosition(boosterMeter[i], 0.21, -0.09+(float(i)/65)); // (x,y) screen position
+                DashboardPosition(boosterMeter[i], boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing)); // (x,y) screen position
             } else {
                 // Empty box
-                DashboardPosition(boosterBox[i], 0.21, -0.09+(float(i)/65)); // (x,y) screen position
+                DashboardPosition(boosterBox[i], boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing)); // (x,y) screen position
             }
         }
     }
 
     // Shields
-    DashboardPosition(shieldGaugeBackLight, 0.19, -0.12);
+    DashboardPosition(shieldGaugeBackLight, shieldPosition[0], shieldPosition[1]);
 
     Fixed shieldPercent = 0;
     if (maxShields > 0) shieldPercent = FDiv(shields, maxShields);
@@ -641,14 +677,15 @@ void CAbstractPlayer::RenderDashboard() {
     // Scale based on damage taken
     Fixed shieldHeight = FMul(FIX(1), shieldPercent);
 
-    // Adjust position of the gauge because scaling moved the bottom of the gauge
+    // Get the inverse of the shield percent
+    // Gauge moves further when energy is lower
     float shieldYOffset = abs(ToFloat(FIX(1) - shieldPercent));
 
-    DashboardPosition(shieldGauge, 0.19, -0.12 - (.085 * shieldYOffset));
+    DashboardPosition(shieldGauge, shieldPosition[0], shieldPosition[1] - (offsetMultiplier * shieldYOffset));
     shieldGauge->ScaleXYZ(FIX(1), shieldHeight, FIX(1));
 
     // Energy
-    DashboardPosition(energyGaugeBackLight, -0.19, -0.12);
+    DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
 
     Fixed energyPercent = 0;
     if (maxEnergy > 0) energyPercent = FDiv(energy, maxEnergy);
@@ -665,17 +702,18 @@ void CAbstractPlayer::RenderDashboard() {
     // Scale based on energy lost
     Fixed energyHeight = FMul(FIX(1), energyPercent);
 
-    // Adjust position of the gauge because scaling moved the bottom of the gauge
+    // Get the inverse of the energy percent
+    // Gauge moves further when energy is lower
     float energyYOffset = abs(ToFloat(FIX(1) - energyPercent));
 
-    DashboardPosition(energyGauge, -0.19, -0.12 - (.085 * energyYOffset));
+    DashboardPosition(energyGauge, energyPosition[0], energyPosition[1] - (offsetMultiplier * energyYOffset ));
     energyGauge->ScaleXYZ(FIX(1), energyHeight, FIX(1));
 }
 
 void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y) {
-    DashboardPosition(part, x, y, 0, 0);
+    DashboardPosition(part, x, y, 0, 0, 0);
 }
-void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y, Fixed x_rot, Fixed y_rot) {
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot) {
     // Draw a part on the dashboard
     // Coordinates on the screen are roughly described as a percentage of the screen away from the bottom and the left
     // (-1.0, -1.0) is the bottom left of the screen
@@ -685,24 +723,27 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y, Fixe
     // TODO: Adjust these until it looks good, then go multiply 
     // all the DashboardPosition parameters by these numbers, and
     // then delete these
-    float scale_x = 16.0;
-    float scale_y = 10.0;
+    float scale_x = 13.12;
+    float scale_y = 8.23;
 
     // Turn elements toward the center of the screen for a better 3d look
     // Being further away from the center results in greater rotation
-    float xAng = 0;
+    float yAng = 0;
 
     if (x < 0.0) {
-        xAng = -60*x + 15;
+        yAng = -60*x + 15;
     }
 
     if (x > 0.0) {
-        xAng = -60*x - 15;
+        yAng = -60*x - 15;
     }
-    InitialRotatePartX(part, FDegToRad(ToFixed(xAng)) + x_rot)
-    InitialRotatePartY(part, y_rot);
+    //InitialRotatePartX(part, FDegToRad(x_rot));
+    //InitialRotatePartY(part, FDegToRad(y_rot + ToFixed(yAng)));
+    //InitialRotatePartZ(part, FDegToRad(z_rot));
     part->isTransparent = false;
     part->Reset();
+    part->RotateOneY(FDegToOne(ToFixed(yAng) + y_rot));
+    part->RotateOneX(FDegToOne(x_rot));
     TranslatePart(part, -ToFixed(x * scale_x), ToFixed(y * scale_y), PLAYERMISSILERANGE / 8);
     part->ApplyMatrix(&viewPortPart->itsTransform);
     part->MoveDone();

@@ -29,7 +29,8 @@ class CAbstractPlayer;
 #define kLockLight 207
 #define kFilledBox 400
 #define kEmptyBox 720
-#define kGaugeBSP 402
+#define kGaugeBSP 403
+#define kLargeGaugeBSP 402
 #define kMissileBSP 802
 #define kGrenadeBSP 820
 #define kBoosterBSP 600
@@ -45,6 +46,12 @@ enum {
     kSpinOption = 1,
     kFragmentOption = 2,
     kShowAlwaysOption = 4 //	Used by teleporter itself
+};
+
+// HUD Preset options
+enum HUDPreset {
+    Close,
+    Far
 };
 
 class CAbstractPlayer : public CRealMovers {
@@ -190,6 +197,20 @@ public:
     CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
     CScaledBSP *boosterMeter[4] = {0, 0, 0, 0};
 
+    // HUD Layout Prefs
+    int layout;
+    float layoutScale;
+    Fixed hudAlpha;
+    int gaugeBSP;
+    float boosterPosition[2];
+    float grenadePosition[2];
+    float missilePosition[2];
+    float shieldPosition[2];
+    float energyPosition[2];
+    float offsetMultiplier;
+    float boosterSpacing;
+    float weaponSpacing;
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void AdaptableSettings();
@@ -231,7 +252,7 @@ public:
     virtual CScaledBSP* DashboardPart(uint16_t id, Fixed scale);
     virtual void RenderDashboard();
     virtual void DashboardPosition(CScaledBSP *part, float x, float y);
-    virtual void DashboardPosition(CScaledBSP *part, float x, float y, Fixed x_rot, Fixed y_rot);
+    virtual void DashboardPosition(CScaledBSP *part, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot);
     virtual void ResetDashboard();
     //
 
