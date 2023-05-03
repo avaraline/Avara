@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
 
     auto p = CPlayerManagerImpl::LocalPlayer();
     auto *tui = ((CAvaraAppImpl *)app)->GetTui();
-    auto defaultCmd = "/rand -normal -tre avaraline emo not-aa ex";
+    auto defaultCmd = "/rand avara aa emo ex #fav -#bad -#koth";
     if (textCommand.size() > 0) {
         tui->ExecuteMatchingCommand(textCommand, p);
     } else {

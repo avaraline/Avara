@@ -181,7 +181,7 @@ void CNetManager::ChangeNet(short netKind, std::string address, std::string pass
             totalDistribution = 0;
             DBG_Log("login", "sending kpLogin to server with presence=%d\n", keepPresence);
             itsCommManager->SendPacket(kdServerOnly, kpLogin, 0, keepPresence, 0, 0L, NULL);
-            if (itsGame->loadedTag.length() > 0) {
+            if (itsGame->loadedFilename.length() > 0) {
                 itsGame->LevelReset(true);
                 // theRoster->InvalidateArea(kBottomBox, 0);
             }
@@ -1097,7 +1097,7 @@ void CNetManager::StopGame(short newStatus) {
 
         /*
         GetDateTime(&gameResult.r.when);
-        gameResult.levelTag = itsGame->loadedTag;
+        gameResult.levelTag = itsGame->loadedFilename;
         gameResult.directoryTag = itsGame->loadedDirectory;
         thePlayer->FillGameResultRecord(&gameResult);
 
@@ -1467,7 +1467,7 @@ void	CNetManager::BuildTrackerTags(
     CScoreKeeper	*keeper;
     char			gameStat = ktgsNotLoaded;
 
-    if(itsGame->loadedTag)
+    if(itsGame->loadedFilename)
     {	if(theApp->directorySpec.name[0])
                 tracker->WriteStringTag(ktsLevelDirectory, theApp->directorySpec.name);
         else	tracker->WriteStringTag(ktsLevelDirectory, theApp->appSpec.name);

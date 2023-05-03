@@ -181,7 +181,7 @@ CRosterWindow::CRosterWindow(CApplication *app) : CWindow(app, "Roster") {
     }
 
     tabWidget->setActiveTab(0);
-    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedTag;
+    currentLevel = ((CAvaraAppImpl *)gApplication)->GetGame()->loadedFilename;
 
     UpdateRoster();
 
@@ -233,7 +233,7 @@ void CRosterWindow::UpdateRoster() {
             theGame->SetFrameLatency(theGame->RoundTripToFrameLatency(maxRtt), -1);
         }
 
-        if (theGame->loadedTag.compare(currentLevel) != 0) {
+        if (theGame->loadedFilename.compare(currentLevel) != 0) {
             std::string theLevel = theGame->loadedLevel;
             std::string theDesigner = theGame->loadedDesigner;
 
@@ -244,7 +244,7 @@ void CRosterWindow::UpdateRoster() {
 
             if (theGame->loadedInfo.length() > 0) levelDescription->setCaption(theGame->loadedInfo);
             else levelDescription->setCaption("No additional information about this mission is available.");
-            currentLevel = theGame->loadedTag;
+            currentLevel = theGame->loadedFilename;
         }
     }
     else if (tabWidget->activeTab() == 2) {

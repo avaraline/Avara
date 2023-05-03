@@ -19,6 +19,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <memory>
+#include <set>
 
 #define IDENTTABLESIZE 512
 
@@ -71,11 +72,12 @@ class CHUD;
 
 class CAvaraGame : public CDirectObject {
 public:
-    std::string loadedTag = "";
+    std::string loadedFilename = "";
     std::string loadedLevel = "";
     std::string loadedSet = "";
     std::string loadedDesigner = "";
     std::string loadedInfo = "";
+    std::set<std::string> loadedTags;
     long loadedTimeLimit;
     int32_t timeInSeconds;
     FrameNumber frameNumber;

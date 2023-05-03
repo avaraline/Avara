@@ -45,6 +45,7 @@ public:
     // LevelCommands
     bool LoadNamedLevel(VectorOfArgs);
     bool LoadRandomLevel(VectorOfArgs);
+    bool HandleTags(VectorOfArgs);
 
     // Coding helpers
     bool SetDebugFlag(VectorOfArgs);

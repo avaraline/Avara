@@ -9,6 +9,7 @@
 #include "Resource.h"       // LevelDirNameListing
 #include "Debug.h"          // Debug::methods
 #include <random>           // std::random_device
+#include "Tags.h"
 
 CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
 
@@ -65,8 +66,10 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           METHOD_TO_LAMBDA_VARGS(LoadNamedLevel));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/random       <- load random level from all available levels\n"
-                          "/random aa ex <- load random level from any set name containing either 'aa' or 'ex'",
+    cmd = new TextCommand("/random           <- load random level from all available levels\n"
+                          "/random aa ex     <- load random level from any set name containing either 'aa' or 'ex'\n"
+                          "/random #fav      <- load random level having the 'fav' tag\n"
+                          "/random aa -#koth <- load random level from 'aa' sets excluding those with the 'koth' tag",
                           METHOD_TO_LAMBDA_VARGS(LoadRandomLevel));
     TextCommand::Register(cmd);
 
@@ -79,6 +82,12 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
         itsApp->rosterWindow->SendRosterMessage(readyStr);
         return true;
     });
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/tags          <- list tags for loaded level\n"
+                          "/tags foo      <- adds tag #foo to loaded level\n"
+                          "/tags -foo bar <- removes tag #foo, adds tag #bar",
+                          METHOD_TO_LAMBDA_VARGS(HandleTags));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/dbg flag     <- toggles named debugging flag on/off\n"
@@ -352,55 +361,64 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
 bool CommandManager::LoadRandomLevel(VectorOfArgs matchArgs) {
     if (matchArgs.size() == 0) {
         matchArgs.push_back(""); // to match all sets
+    } else if (matchArgs[0][0] == '-') {
+        // if first arg has a - in front, assume they want to load all levels first...
+        // example: /rand -#bad -#koth
+        matchArgs.insert(matchArgs.begin(), "");  // matchArgs.push_front("")
     }
-    // std::cout << "LoadRandomLevel matchArgs[0] = " << matchArgs[0] << std::endl;
 
-    std::vector<std::string> levelSets = LevelDirNameListing();
-    std::vector<std::string> matchingSets;
+    std::set<Tags::LevelURL> allLevels;
+
     for (auto matchStr : matchArgs) {
-        for (auto setName : levelSets) {
-            if (setName.find(matchStr, 0) != std::string::npos) {
-                matchingSets.push_back(setName);
+        bool addLevels = true;
+        if (matchStr[0] == '-') {
+            addLevels = false;
+            matchStr = matchStr.substr(1);
+        } else if (matchStr[0] == '+') {
+            matchStr = matchStr.substr(1);
+        }
+        if (matchStr[0] == '#') {
+            for (auto levelUrl: Tags::GetLevelsMatchingTag(matchStr)) {
+                if (addLevels) {
+                    allLevels.insert(levelUrl);
+                } else {
+                    allLevels.erase(levelUrl);
+                }
+            }
+        } else {
+            for (auto setName : LevelDirNameListing()) {
+                if (setName.find(matchStr, 0) != std::string::npos) {
+                    nlohmann::json levels = LoadLevelListFromJSON(setName);
+                    for (auto level : levels) {
+                        if (addLevels) {
+                            allLevels.insert(Tags::LevelURL(setName, level.at("Name")));
+                        } else {
+                            allLevels.erase(Tags::LevelURL(setName, level.at("Name")));
+                        }
+                    }
+                }
             }
         }
     }
 
-    itsApp->AddMessageLine("Choosing random level from " + std::to_string(matchingSets.size()) + " sets");
-
-    if (matchingSets.size() > 0) {
-        //count levels
-        int levelCount = 0;
-        for (auto setName : matchingSets) {
-            nlohmann::json levels = LoadLevelListFromJSON(setName);
-            levelCount += levels.size();
-        }
+    if (allLevels.size() > 0) {
+        itsApp->AddMessageLine("Choosing random level from " + std::to_string(allLevels.size()) + " levels");
 
         std::random_device rd; // obtain a random number from hardware
         std::mt19937 gen(rd()); // seed the generator
-        std::uniform_int_distribution<> distr(0, levelCount - 1); // define the range
-        int randomlevelIndex = distr(gen);
+        std::uniform_int_distribution<> distr(0, int(allLevels.size() - 1)); // define the range
+        int randomLevelIndex = distr(gen);
 
-        //load level
-        int currentCount = 0;
-        int previousCount = 0;
-        for (auto setName : matchingSets) {
-            nlohmann::json levels = LoadLevelListFromJSON(setName);
-            currentCount += levels.size();
+        // advance allLevels iterator random amount then get that element
+        auto it = allLevels.cbegin();
+        std::advance(it, randomLevelIndex);
+        Tags::LevelURL randomLevel = *it;
 
-            if(randomlevelIndex >= previousCount && randomlevelIndex < currentCount) {
-                itsApp->levelWindow->SelectSet(setName);
-                nlohmann::json randomLevel = levels[randomlevelIndex - previousCount];
-                //itsApp->AddMessageLine((std::ostringstream() << "LoadRandomLevel i=" << randomlevelIndex << " cur=" << currentCount
-                //                << " prev=" << previousCount << " index=" << randomlevelIndex - previousCount).str());
-
-                std::string levelName = randomLevel.at("Name");
-                itsApp->levelWindow->SelectLevel(setName, levelName);
-                itsApp->levelWindow->SendLoad();
-                return true;
-            }
-
-            previousCount = currentCount;
-        }
+        itsApp->levelWindow->SelectLevel(randomLevel.first, randomLevel.second);
+        itsApp->levelWindow->SendLoad();
+        return true;
+    } else {
+        itsApp->AddMessageLine("No matching levels found.");
     }
     return false;
 }
@@ -439,6 +457,33 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
         itsApp->AddMessageLine(pref + " changed from " + currentValue + " to " + value);
         itsApp->CApplication::PrefChanged(pref);
     }
+    return true;
+}
+
+bool CommandManager::HandleTags(VectorOfArgs vargs) {
+    Tags::LevelURL curLevel(itsApp->GetGame()->loadedSet,
+                            itsApp->GetGame()->loadedLevel);
+
+    if (vargs.size() > 0) {
+        for (auto tag: vargs) {
+            if (tag[0] == '-') {
+                tag = tag.substr(1);
+                Tags::DeleteTagFromLevel(curLevel, tag);
+            } else {
+                if (tag[0] == '+') {
+                    tag = tag.substr(1);
+                }
+                Tags::AddTagToLevel(curLevel, tag);
+            }
+        }
+    }
+
+    std::string msg = "tags for \"" + curLevel.first + "/" + curLevel.second + "\":";
+    for (auto tag: Tags::GetTagsForLevel(curLevel)) {
+        msg +=  " " + tag;
+    }
+    itsApp->AddMessageLine(msg);
+
     return true;
 }
 
