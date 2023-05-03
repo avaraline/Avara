@@ -26,6 +26,14 @@ class CAbstractPlayer;
 #define kDirIndBSP 204
 #define kTargetOff 205
 #define kTargetOk 206
+#define kLockLight 207
+#define kFilledBox 400
+#define kEmptyBox 720
+#define kGaugeBSP 403
+#define kLargeGaugeBSP 402
+#define kMissileBSP 802
+#define kGrenadeBSP 820
+#define kBoosterBSP 600
 
 #define kDefaultTeleportSound 410
 
@@ -38,6 +46,12 @@ enum {
     kSpinOption = 1,
     kFragmentOption = 2,
     kShowAlwaysOption = 4 //	Used by teleporter itself
+};
+
+// HUD Preset options
+enum HUDPreset {
+    Close,
+    Far
 };
 
 class CAbstractPlayer : public CRealMovers {
@@ -169,12 +183,33 @@ public:
     Fixed dashboardSpinHeading;
     Fixed dashboardSpinSpeed;
     CScaledBSP *lockLight = 0;
+    CScaledBSP *shieldGauge = 0;
+    CScaledBSP *shieldGaugeBackLight = 0;
+    CScaledBSP *energyGauge = 0;
+    CScaledBSP *energyGaugeBackLight = 0;
     CScaledBSP *grenadeLabel = 0;
     CScaledBSP *missileLabel = 0;
+    CScaledBSP *boosterLabel = 0;
     CScaledBSP *grenadeBox[4] = {0, 0, 0, 0};
     CScaledBSP *missileBox[4] = {0, 0, 0, 0};
+    CScaledBSP *boosterBox[4] = {0, 0, 0, 0};
     CScaledBSP *grenadeMeter[4] = {0, 0, 0, 0};
     CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *boosterMeter[4] = {0, 0, 0, 0};
+
+    // HUD Layout Prefs
+    int layout;
+    float layoutScale;
+    Fixed hudAlpha;
+    int gaugeBSP;
+    float boosterPosition[2];
+    float grenadePosition[2];
+    float missilePosition[2];
+    float shieldPosition[2];
+    float energyPosition[2];
+    float offsetMultiplier;
+    float boosterSpacing;
+    float weaponSpacing;
 
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
@@ -210,10 +245,17 @@ public:
     virtual void AvoidBumping();
 
     virtual void PlaceHUDParts();
+    
+    //
     virtual void LoadDashboardParts();
+    virtual CScaledBSP* DashboardPart(uint16_t id);
+    virtual CScaledBSP* DashboardPart(uint16_t id, Fixed scale);
     virtual void RenderDashboard();
-    virtual void DashboardPosition(CBSPPart *part, float x, float y);
+    virtual void DashboardPosition(CScaledBSP *part, float x, float y);
+    virtual void DashboardPosition(CScaledBSP *part, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot);
     virtual void ResetDashboard();
+    //
+
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
     virtual void RecalculateViewDistance();

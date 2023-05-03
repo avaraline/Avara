@@ -204,14 +204,23 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR);
 }
 
-void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
-    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(ToFloatMat(modelview)));
+void SetTransforms(CBSPPart *part) {
+    glm::mat4 mv = ToFloatMat(&part->fullTransform);
+    if (part->hasScale) {
+        glm::vec3 sc = glm::vec3(
+            ToFloat(part->scale[0]), 
+            ToFloat(part->scale[1]), 
+            ToFloat(part->scale[2])
+        );
+        mv = glm::scale(mv, sc);
+    }
+    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(mv));
     glm::mat3 normal_mat = glm::mat3(1.0f);
 
     for (int i = 0; i < 3; i ++) {
-        normal_mat[0][i] = ToFloat((*normal_transform)[0][i]);
-        normal_mat[1][i] = ToFloat((*normal_transform)[1][i]);
-        normal_mat[2][i] = ToFloat((*normal_transform)[2][i]);
+        normal_mat[0][i] = ToFloat((part->itsTransform)[0][i]);
+        normal_mat[1][i] = ToFloat((part->itsTransform)[1][i]);
+        normal_mat[2][i] = ToFloat((part->itsTransform)[2][i]);
     }
 
     glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
@@ -314,7 +323,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    SetTransforms(&part->fullTransform, &part->itsTransform);
+    SetTransforms(part);
     glCheckErrors();
 
     glBindVertexArray(part->vertexArray);

@@ -158,6 +158,7 @@ public:
     std::unique_ptr<ARGBColor[]> origColorTable;
     std::unique_ptr<ARGBColor[]> currColorTable;
     std::unique_ptr<Vector[]> pointTable;
+    std::unique_ptr<Vector[]> origPointTable;
     std::unique_ptr<PolyRecord[]> polyTable;
 
     //	Lighting vectors in object space
@@ -212,6 +213,10 @@ public:
     virtual Matrix *GetInverseTransform();
 
     virtual bool HasAlpha();
+    virtual void SetScale(Fixed x, Fixed y, Fixed z);
+    virtual void ResetScale();
+    Vector scale = {FIX1, FIX1, FIX1, FIX1};
+    bool hasScale = false;
 
     //	Compare with another part to see which one is in front:
     virtual Boolean Obscures(CBSPPart *other);
