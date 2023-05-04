@@ -10,6 +10,7 @@
 
 #include <map>
 #include <set>
+#include <string>
 
 class Tags {
     typedef std::map<std::string, std::map<std::string, std::set<std::string>>> TagMap;  // set->level->tags
