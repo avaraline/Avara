@@ -70,7 +70,7 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     iface.levelName = itsGame->loadedLevel;
     iface.levelName = itsGame->loadedDesigner;
     iface.levelName = itsGame->loadedInfo;
-    iface.directory = itsGame->loadedTag;
+    iface.directory = itsGame->loadedFilename;
     iface.playerID = 0;
     iface.playerTeam = 0;
     iface.playerLives = 0;

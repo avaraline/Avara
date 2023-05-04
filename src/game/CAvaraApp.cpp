@@ -34,6 +34,7 @@
 #include "httplib.h"
 #include <chrono>
 #include <json.hpp>
+#include "Tags.h"
 #include "Debug.h"
 
 // included while we fake things out
@@ -294,11 +295,22 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     if (result == noErr) {
         playerWindow->RepopulateHullOptions();
         itsGame->loadedLevel = ledi["Name"];
-        itsGame->loadedTag  = levelTag;
-        std::string msgPrefix = "Loaded";
-        if (sendingPlayer != NULL)
-            msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
-        AddMessageLine(msgPrefix + " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".");
+        itsGame->loadedFilename  = levelTag;
+        itsGame->loadedTags = Tags::GetTagsForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
+        std::string msgStr = "Loaded";
+        if (sendingPlayer != NULL) {
+            msgStr = sendingPlayer->GetPlayerName() + " loaded";
+        }
+        msgStr += " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".";
+        if (!itsGame->loadedTags.empty()) {
+            msgStr += " (tags:";
+            for (auto tag: itsGame->loadedTags) {
+                msgStr += " " + tag;
+            }
+            msgStr += ")";
+        }
+        AddMessageLine(msgStr);
+
         levelWindow->SelectLevel(set, itsGame->loadedLevel);
 
         itsGame->itsWorld->OverheadPoint(overhead, extent);

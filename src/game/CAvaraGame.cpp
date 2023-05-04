@@ -145,7 +145,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     allowBackgroundProcessing = false;
 
-    loadedTag = "";
+    loadedFilename = "";
     loadedLevel = "";
     loadedDesigner = "";
     loadedInfo = "";
@@ -798,8 +798,6 @@ void CAvaraGame::GameStart() {
     while (FramesFromNow(latencyTolerance) > topSentFrame) {
         itsNet->FrameAction();
     }
-
-    loadedLevel = "";
 
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);
