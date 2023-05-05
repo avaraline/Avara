@@ -9,7 +9,6 @@
 #include <fstream>
 #include <nanogui/nanogui.h>
 #include <string>
-#include <string.h>    // strcasestr
 #include <vector>
 
 json CApplication::_prefs = ReadPrefs();
@@ -75,11 +74,19 @@ long CApplication::Number(const std::string name, const long defaultValue) {
     return defaultValue;
 }
 
+std::string ToLower(const std::string source) {
+    std::string result = source;
+    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+    return result;
+}
+
 std::vector<std::string> CApplication::Matches(const std::string matchStr) {
     std::vector<std::string> results;
+    std::string matchLower = ToLower(matchStr);
     for (auto& el : _prefs.items()) {
+        std::string keyLower = ToLower(el.key());
         if (!el.value().is_object() && !el.value().is_array() &&
-            strcasestr(el.key().c_str(), matchStr.c_str())) {
+            keyLower.find(matchLower) != std::string::npos) {
             results.push_back(el.key());
         }
     }
