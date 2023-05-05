@@ -564,19 +564,17 @@ void CAbstractPlayer::LoadDashboardParts() {
     lockLight = DashboardPart(kLockLight, FIX3(600));
 
     // Shields
-    shieldGauge = DashboardPart(gaugeBSP, ToFixed(layoutScale));
+    shieldGauge = DashboardPart(gaugeBSP);
     shieldGauge->isMorphable = true;
 
     shieldGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
-    shieldGaugeBackLight->isMorphable = true;
     shieldGaugeBackLight->privateAmbient = FIX3(80);
 
     // Energy
-    energyGauge = DashboardPart(gaugeBSP, ToFixed(layoutScale));
+    energyGauge = DashboardPart(gaugeBSP);
     energyGauge->isMorphable = true;
 
     energyGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
-    energyGaugeBackLight->isMorphable = true;
     energyGaugeBackLight->privateAmbient = FIX3(80);
 
     // Weapons
@@ -683,7 +681,6 @@ void CAbstractPlayer::RenderDashboard() {
 
     DashboardPosition(shieldGauge, shieldPosition[0], shieldPosition[1] - (offsetMultiplier * shieldYOffset));
     shieldGauge->ScaleXYZ(ToFixed(layoutScale), shieldHeight, ToFixed(layoutScale));
-    shieldGaugeBackLight->Scale(ToFixed(layoutScale));
 
     // Energy
     DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
@@ -709,7 +706,6 @@ void CAbstractPlayer::RenderDashboard() {
 
     DashboardPosition(energyGauge, energyPosition[0], energyPosition[1] - (offsetMultiplier * energyYOffset ));
     energyGauge->ScaleXYZ(ToFixed(layoutScale), energyHeight, ToFixed(layoutScale));
-    energyGaugeBackLight->Scale(ToFixed(layoutScale));
 }
 
 void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y) {

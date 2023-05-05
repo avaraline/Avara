@@ -50,7 +50,7 @@ enum {
 // HUD Preset options
 enum HUDPreset {
     Close,
-    Far
+    Far 
 };
 
 class CAbstractPlayer : public CRealMovers {
