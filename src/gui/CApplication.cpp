@@ -9,6 +9,7 @@
 #include <fstream>
 #include <nanogui/nanogui.h>
 #include <string>
+#include <string.h>    // strcasestr
 #include <vector>
 
 json CApplication::_prefs = ReadPrefs();
@@ -72,4 +73,26 @@ long CApplication::Number(const std::string name, const long defaultValue) {
         return _prefs[name];
     }
     return defaultValue;
+}
+
+std::vector<std::string> CApplication::Matches(const std::string matchStr) {
+    std::vector<std::string> results;
+    for (auto& el : _prefs.items()) {
+        if (!el.value().is_object() && !el.value().is_array() &&
+            strcasestr(el.key().c_str(), matchStr.c_str())) {
+            results.push_back(el.key());
+        }
+    }
+    return results;
+}
+
+void CApplication::Update(const std::string name, std::string &value) {
+    // construct json from the inputs and update the internal JSON object
+    if (_prefs.at(name).is_string()) {
+        // wrap string values in quotes
+        value = '"' + value + '"';
+    }
+    json updatePref = json::parse("{ \"" + name + "\": " + value + "}");
+    _prefs.update(updatePref);
+    WritePrefs(_prefs);
 }

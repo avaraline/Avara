@@ -430,10 +430,10 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
     }
 
     // find all matching prefs
-    std::vector<const std::string> prefs = itsApp->Matches(vargs[0]);
+    std::vector<std::string> prefs = itsApp->Matches(vargs[0]);
     if (prefs.size() == 0) {
         itsApp->AddMessageLine("no prefs matching '" + vargs[0] + "'");
-        return false;
+        return true;
     }
 
     std::string prefName;
@@ -444,13 +444,16 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
         prefName = pref;
     }
 
-    if (vargs.size() == 2) {
+    if (vargs.size() >= 2) {
         if (prefs.size() > 1) {
             itsApp->AddMessageLine("only 1 preference can be updated at a time");
-            return false;
+            return true;
         } else {
             std::string oldValue = itsApp->Get(prefName).dump();
             std::string newValue = vargs[1];
+            for (int i = 2; i < vargs.size(); i++) {
+                newValue += " " + vargs[i];
+            }
             // update pref
             itsApp->Update(prefName, newValue);
             //write prefs
