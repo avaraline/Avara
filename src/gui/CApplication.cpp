@@ -9,6 +9,7 @@
 #include <fstream>
 #include <nanogui/nanogui.h>
 #include <string>
+#include <string.h>    // strcasestr
 #include <vector>
 
 json CApplication::_prefs = ReadPrefs();
