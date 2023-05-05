@@ -57,9 +57,30 @@ public:
     bool Boolean(const std::string name)             { return Get<bool>(name); }
     json Get(const std::string name)                 { return Get<json>(name); }
 
+    std::vector<const std::string> Matches(const std::string matchStr) {
+        std::vector<const std::string> results;
+        for (auto& el : _prefs.items()) {
+            if (el.key().find(matchStr) != std::string::npos) {
+//                std::cout << el.key() << " : " << el.value() << "\n";
+                results.push_back(el.key());
+            }
+        }
+        return results;
+    }
+
     template <class T> void Set(const std::string name, const T value) {
         _prefs[name] = value;
         PrefChanged(name);
+    }
+
+    void Update(const std::string name, std::string &value) {
+        // construct json from the inputs and update the internal JSON object
+        if (_prefs.at(name).is_string()) {
+            // wrap string values in quotes
+            value = '"' + value + '"';
+        }
+        json updatePref = json::parse("{ \"" + name + "\": " + value + "}");
+        _prefs.update(updatePref);
     }
 
 protected:

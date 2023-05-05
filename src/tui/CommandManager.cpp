@@ -424,38 +424,39 @@ bool CommandManager::LoadRandomLevel(VectorOfArgs matchArgs) {
 }
 
 bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
-    std::string pref(vargs.size() > 0 ? vargs[0] : "");
-    std::string value(vargs.size() > 1 ? vargs[1] : "");
-    std::string currentValue;
-    try {
-        currentValue = itsApp->Get(pref).dump();
-    } catch (json::out_of_range &e) {
-        itsApp->AddMessageLine(pref + " is not a valid preference");
+    if (vargs.size() == 0) {
+        itsApp->AddMessageLine("usage: /pref matchString [setValue]");
         return false;
     }
-    if(value.length() == 0) {
-        //read prefs
-        itsApp->AddMessageLine(pref + " = " + currentValue);
+
+    // find all matching prefs
+    std::vector<const std::string> prefs = itsApp->Matches(vargs[0]);
+    if (prefs.size() == 0) {
+        itsApp->AddMessageLine("no prefs matching '" + vargs[0] + "'");
+        return false;
     }
-    else {
-        //write prefs
-        nlohmann::json currentValueJSON = itsApp->Get(pref); //get current type
-        if (currentValueJSON.is_string()) {
-            itsApp->Set(pref, value);
+
+    std::string prefName;
+    for (auto pref: prefs) {
+        if (vargs.size() == 1) {
+            itsApp->AddMessageLine(pref + " = " + itsApp->Get(pref).dump());
         }
-        else if (currentValueJSON.is_number_float() || value.find('.') != std::string::npos ) {
-            nlohmann::json jsonFloat = nlohmann::json(stof(value));
-            itsApp->Set(pref, jsonFloat);
+        prefName = pref;
+    }
+
+    if (vargs.size() == 2) {
+        if (prefs.size() > 1) {
+            itsApp->AddMessageLine("only 1 preference can be updated at a time");
+            return false;
+        } else {
+            std::string oldValue = itsApp->Get(prefName).dump();
+            std::string newValue = vargs[1];
+            // update pref
+            itsApp->Update(prefName, newValue);
+            //write prefs
+            itsApp->AddMessageLine(prefName + " changed from " + oldValue + " to " + newValue);
+            itsApp->CApplication::PrefChanged(prefName);
         }
-        else if (currentValueJSON.is_number_integer()) {
-            itsApp->Set(pref, stoi(value));
-        }
-        else if (currentValueJSON.is_boolean()) {
-            nlohmann::json bvalue = nlohmann::json(value == "true" ? true : false);
-            itsApp->Set(pref, bvalue);
-        }
-        itsApp->AddMessageLine(pref + " changed from " + currentValue + " to " + value);
-        itsApp->CApplication::PrefChanged(pref);
     }
     return true;
 }
