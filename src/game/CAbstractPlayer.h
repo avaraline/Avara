@@ -29,8 +29,7 @@ class CAbstractPlayer;
 #define kLockLight 207
 #define kFilledBox 400
 #define kEmptyBox 720
-#define kGaugeBSP 403
-#define kLargeGaugeBSP 402
+#define kGaugeBSP 402
 #define kMissileBSP 802
 #define kGrenadeBSP 820
 #define kBoosterBSP 600

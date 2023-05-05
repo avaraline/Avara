@@ -543,7 +543,7 @@ void CAbstractPlayer::LoadDashboardParts() {
             weaponSpacing = 35.0f;
             break;
         case Far:
-            gaugeBSP = kLargeGaugeBSP;
+            gaugeBSP = kGaugeBSP;
             layoutScale = 2.0;
             boosterPosition[0] = -0.87f;
             boosterPosition[1] = -0.13f;
@@ -564,18 +564,18 @@ void CAbstractPlayer::LoadDashboardParts() {
     lockLight = DashboardPart(kLockLight, FIX3(600));
 
     // Shields
-    shieldGauge = DashboardPart(gaugeBSP);
+    shieldGauge = DashboardPart(gaugeBSP, ToFixed(layoutScale));
     shieldGauge->isMorphable = true;
 
-    shieldGaugeBackLight = DashboardPart(gaugeBSP);
+    shieldGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
     shieldGaugeBackLight->isMorphable = true;
     shieldGaugeBackLight->privateAmbient = FIX3(80);
 
     // Energy
-    energyGauge = DashboardPart(gaugeBSP);
+    energyGauge = DashboardPart(gaugeBSP, ToFixed(layoutScale));
     energyGauge->isMorphable = true;
 
-    energyGaugeBackLight = DashboardPart(gaugeBSP);
+    energyGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
     energyGaugeBackLight->isMorphable = true;
     energyGaugeBackLight->privateAmbient = FIX3(80);
 
@@ -675,14 +675,15 @@ void CAbstractPlayer::RenderDashboard() {
     }
 
     // Scale based on damage taken
-    Fixed shieldHeight = FMul(FIX(1), shieldPercent);
+    Fixed shieldHeight = FMul(ToFixed(layoutScale), shieldPercent);
 
     // Get the inverse of the shield percent
     // Gauge moves further when energy is lower
-    float shieldYOffset = abs(ToFloat(FIX(1) - shieldPercent));
+    float shieldYOffset = abs(ToFloat(FIX1 - shieldPercent));
 
     DashboardPosition(shieldGauge, shieldPosition[0], shieldPosition[1] - (offsetMultiplier * shieldYOffset));
-    shieldGauge->ScaleXYZ(FIX(1), shieldHeight, FIX(1));
+    shieldGauge->ScaleXYZ(ToFixed(layoutScale), shieldHeight, ToFixed(layoutScale));
+    shieldGaugeBackLight->Scale(ToFixed(layoutScale));
 
     // Energy
     DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
@@ -700,14 +701,15 @@ void CAbstractPlayer::RenderDashboard() {
     }
 
     // Scale based on energy lost
-    Fixed energyHeight = FMul(FIX(1), energyPercent);
+    Fixed energyHeight = FMul(ToFixed(layoutScale), energyPercent);
 
     // Get the inverse of the energy percent
     // Gauge moves further when energy is lower
-    float energyYOffset = abs(ToFloat(FIX(1) - energyPercent));
+    float energyYOffset = abs(ToFloat(FIX1 - energyPercent));
 
     DashboardPosition(energyGauge, energyPosition[0], energyPosition[1] - (offsetMultiplier * energyYOffset ));
-    energyGauge->ScaleXYZ(FIX(1), energyHeight, FIX(1));
+    energyGauge->ScaleXYZ(ToFixed(layoutScale), energyHeight, ToFixed(layoutScale));
+    energyGaugeBackLight->Scale(ToFixed(layoutScale));
 }
 
 void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y) {
