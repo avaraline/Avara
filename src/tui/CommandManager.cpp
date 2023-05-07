@@ -24,14 +24,14 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           [this](VectorOfArgs vargs) -> bool {
         std::string ringBell("\a\b");    // \a = bell, \b = backspace
         itsApp->rosterWindow->SendRosterMessage(ringBell);
-        return true;
+        return false;
     });
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/clear           <- clear chat text",
                           [this](VectorOfArgs vargs) -> bool {
         itsApp->rosterWindow->SendRosterMessage(clearChat_utf8);
-        return true;
+        return false;
     });
     TextCommand::Register(cmd);
 
@@ -41,7 +41,7 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/gg              <- good game!\n"
-                          "/gg new phrase   <- change the /gg phrase",
+                          "/gg new phrase   <- add phrase to list phrases used",
                           METHOD_TO_LAMBDA_VARGS(GoodGame));
     TextCommand::Register(cmd);
 
@@ -168,11 +168,23 @@ bool CommandManager::CommandHelp(VectorOfArgs vargs) {
 }
 
 bool CommandManager::GoodGame(VectorOfArgs vargs) {
-    static std::string gg("Well played sir or madam! gg!\r");
+    json ggs = itsApp->Get(kGoodGamePhrases);
     if (vargs.size() > 0) {
-        gg = join_with(vargs, " ") + "\r";
-        itsApp->AddMessageLine("/gg text changed to: " + gg);
+        std::string gg = join_with(vargs, " ") + "\r";
+        std::vector<std::string> ggVec;
+        if (ggs.is_array()) {
+            ggVec = ggs.get<std::vector<std::string>>();
+        }
+        ggVec.push_back(gg);
+        itsApp->Set(kGoodGamePhrases, ggVec);
+        itsApp->SavePrefs();
+        itsApp->AddMessageLine("/gg text added to prefs");
     } else {
+        std::string gg("Well played sir or madam! gg!\r");
+        if (ggs.size() > 0) {
+            // randomly pull GG from prefs
+            gg = ggs.at(rand() % ggs.size());
+        }
         itsApp->rosterWindow->SendRosterMessage(gg);
     }
     return true;

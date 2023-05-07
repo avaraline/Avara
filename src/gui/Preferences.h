@@ -74,6 +74,9 @@ using json = nlohmann::json;
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
 #define kSoundVolume "soundVolume"
 
+// other
+#define kGoodGamePhrases "ggs"
+
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
     {kYonPrefTag, 0},
@@ -149,7 +152,8 @@ static json defaultPrefs = {
     {kSoundVolume, 100},
     {kIgnoreCustomColorsTag, false},
     {kIgnoreCustomGoodySound, false},
-    {kThrottle, 0}
+    {kThrottle, 0},
+    {kGoodGamePhrases, {}},
 };
 
 

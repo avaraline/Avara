@@ -103,3 +103,7 @@ void CApplication::Update(const std::string name, std::string &value) {
     _prefs.update(updatePref);
     WritePrefs(_prefs);
 }
+
+void CApplication::SavePrefs() {
+    WritePrefs(_prefs);
+}
