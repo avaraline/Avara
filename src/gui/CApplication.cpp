@@ -87,7 +87,15 @@ std::vector<std::string> CApplication::Matches(const std::string matchStr) {
         std::string keyLower = ToLower(el.key());
         if (!el.value().is_object() && !el.value().is_array() &&
             keyLower.find(matchLower) != std::string::npos) {
-            results.push_back(el.key());
+            if (keyLower.length() == matchLower.length()) {
+                // if it matches completely, ignore all other substring matches
+                // example: "hull" matches "hull" and "hullColor" (if you want to see both, pass "hul")
+                results.clear();
+                results.push_back(el.key());
+                break;
+            } else {
+                results.push_back(el.key());
+            }
         }
     }
     return results;

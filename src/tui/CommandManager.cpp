@@ -456,7 +456,7 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
         prefName = pref;
     }
 
-    if (vargs.size() >= 2) {
+    if (vargs.size() > 1) {
         if (prefs.size() > 1) {
             itsApp->AddMessageLine("only 1 preference can be updated at a time");
             return true;
