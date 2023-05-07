@@ -65,6 +65,7 @@ public:
     }
 
     void Update(const std::string name, std::string &value);
+    void SavePrefs();
 
 protected:
     static json _prefs;
