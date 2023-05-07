@@ -73,3 +73,33 @@ long CApplication::Number(const std::string name, const long defaultValue) {
     }
     return defaultValue;
 }
+
+std::string ToLower(const std::string source) {
+    std::string result = source;
+    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+    return result;
+}
+
+std::vector<std::string> CApplication::Matches(const std::string matchStr) {
+    std::vector<std::string> results;
+    std::string matchLower = ToLower(matchStr);
+    for (auto& el : _prefs.items()) {
+        std::string keyLower = ToLower(el.key());
+        if (!el.value().is_object() && !el.value().is_array() &&
+            keyLower.find(matchLower) != std::string::npos) {
+            results.push_back(el.key());
+        }
+    }
+    return results;
+}
+
+void CApplication::Update(const std::string name, std::string &value) {
+    // construct json from the inputs and update the internal JSON object
+    if (_prefs.at(name).is_string()) {
+        // wrap string values in quotes
+        value = '"' + value + '"';
+    }
+    json updatePref = json::parse("{ \"" + name + "\": " + value + "}");
+    _prefs.update(updatePref);
+    WritePrefs(_prefs);
+}

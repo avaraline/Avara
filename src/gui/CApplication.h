@@ -57,10 +57,14 @@ public:
     bool Boolean(const std::string name)             { return Get<bool>(name); }
     json Get(const std::string name)                 { return Get<json>(name); }
 
+    std::vector<std::string> Matches(const std::string matchStr);
+
     template <class T> void Set(const std::string name, const T value) {
         _prefs[name] = value;
         PrefChanged(name);
     }
+
+    void Update(const std::string name, std::string &value);
 
 protected:
     static json _prefs;
