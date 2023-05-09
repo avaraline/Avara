@@ -294,7 +294,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glUseProgram(gProgram);
     glBindVertexArray(part->vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, part->vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData.get(), GL_STREAM_DRAW);
     glCheckErrors();
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
@@ -355,7 +355,8 @@ void AvaraGLUpdateData(CBSPPart *part) {
     if (!AvaraGLIsRendering()) return;
 
     if(part->glDataSize > 0) {
-        delete [] part->glData;
+        glDeleteVertexArrays(1, &part->vertexArray);
+        glDeleteBuffers(1, &part->vertexBuffer);
     }
 
     PolyRecord *poly;
@@ -388,11 +389,8 @@ void AvaraGLUpdateData(CBSPPart *part) {
         points = tris * 3;
         part->openGLPoints += points;
     }
-    
-    
-
     part->glDataSize = part->openGLPoints * sizeof(GLData);
-    part->glData = new GLData[part->glDataSize];
+    part->glData = std::make_unique<GLData[]>(part->glDataSize);
 
     glGenVertexArrays(1, &part->vertexArray);
     glGenBuffers(1, &part->vertexBuffer);

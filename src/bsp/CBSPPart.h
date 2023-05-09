@@ -116,7 +116,7 @@ public:
 
     CViewParameters *currentView = 0;
 
-    GLData *glData = 0;
+    std::unique_ptr<GLData[]> glData = 0;
     GLuint vertexArray, vertexBuffer = 0;
     GLsizeiptr glDataSize = 0;
 
