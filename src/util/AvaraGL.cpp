@@ -290,17 +290,20 @@ void AvaraGLViewport(short width, short height) {
 void AvaraGLDrawPolygons(CBSPPart* part) {
     glCheckErrors();
     if(!actuallyRender || !ready) return;
-    // Create a buffer big enough to hold vertex/color/normal for every point we draw.
+    // Bind the vertex array and buffer that we set up earlier
     glUseProgram(gProgram);
     glBindVertexArray(part->vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, part->vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData.get(), GL_STREAM_DRAW);
     glCheckErrors();
 
+    // position
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
     glEnableVertexAttribArray(0);
+    // RGBAColor
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+    // normal
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
@@ -354,9 +357,18 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 void AvaraGLUpdateData(CBSPPart *part) {
     if (!AvaraGLIsRendering()) return;
 
+    // If we haven't generated OpenGL data for this
+    // BSP yet, glDataSize will be 0
     if(part->glDataSize > 0) {
-        delete [] part->glData;
+        // Free previously used memory on the GPU
+        glDeleteVertexArrays(1, &part->vertexArray);
+        glDeleteBuffers(1, &part->vertexBuffer);
     }
+    // Vertex buffer and array for this shape
+    // We use these pointers later to refer to the 
+    // vertex data in the draw step
+    glGenVertexArrays(1, &part->vertexArray);
+    glGenBuffers(1, &part->vertexBuffer);
 
     PolyRecord *poly;
     ARGBColor *color;
@@ -388,16 +400,11 @@ void AvaraGLUpdateData(CBSPPart *part) {
         points = tris * 3;
         part->openGLPoints += points;
     }
-    
-    
-
     part->glDataSize = part->openGLPoints * sizeof(GLData);
-    part->glData = new GLData[part->glDataSize];
+    part->glData = std::make_unique<GLData[]>(part->glDataSize);
 
-    glGenVertexArrays(1, &part->vertexArray);
-    glGenBuffers(1, &part->vertexBuffer);
-
-    //float scale = 1.0; // ToFloat(currentView->screenScale);
+    // Count all the points we output so that we can make sure
+    // it matches what we just calculated above
     int p = 0;
     for (int i = 0; i < part->polyCount; i++) {
         poly = &part->polyTable[i];

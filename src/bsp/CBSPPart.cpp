@@ -467,7 +467,6 @@ void CBSPPart::Dispose() {
         return;
     }
     if (AvaraGLIsRendering()) {
-        delete [] glData;
         glDataSize = 0;
         glDeleteVertexArrays(1, &vertexArray);
         glDeleteBuffers(1, &vertexBuffer);
