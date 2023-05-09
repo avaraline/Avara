@@ -158,7 +158,6 @@ public:
     std::unique_ptr<ARGBColor[]> origColorTable;
     std::unique_ptr<ARGBColor[]> currColorTable;
     std::unique_ptr<Vector[]> pointTable;
-    std::unique_ptr<Vector[]> origPointTable;
     std::unique_ptr<PolyRecord[]> polyTable;
 
     //	Lighting vectors in object space
