@@ -1077,6 +1077,7 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
 // "frameLatency" is the integer number of frames to delay;
 // latencyTolerance is the number of classic (64ms) frames (= frameLatency * fpsScale).
 void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayerManager* slowPlayer) {
+    static int reduceLatencyCounter = 0;
     double newLatency = newFrameLatency * fpsScale;
     if (latencyTolerance != newLatency) {
         #define MAX_LATENCY (8)   // in classic units
@@ -1087,9 +1088,14 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
 
         double oldLatency = latencyTolerance;
         if (newLatency < latencyTolerance) {
-            latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+            // need 4 consecutive requests to reduce latency
+            if (maxChange == MAX_LATENCY || ++reduceLatencyCounter > 3) {
+                latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+                reduceLatencyCounter = 0;
+            }
         } else {
             latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
+            reduceLatencyCounter = 0;
         }
 
         // make prettier version of the LT string (C++ sucks with strings)
@@ -1102,8 +1108,10 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         // if it changed
         if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
             std::ostringstream oss;
-            std::time_t t = std::time(nullptr);
-            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
+            int gameSeconds = frameNumber * frameTime / 1000;
+            int gameMinutes = gameSeconds / 60;
+            gameSeconds = gameSeconds % 60;
+            oss << "T+" << std::setfill('0') << std::setw(2) << gameMinutes << ":" << std::setw(2) << gameSeconds << "> LT set to " << ltOss.str();
             if (slowPlayer != nullptr) {
                 oss << " (" << slowPlayer->GetPlayerName() << ")";
             }
