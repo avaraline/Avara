@@ -431,9 +431,9 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
         if (outPacket) {
             // this method used by both requester and sender...
             if (commandCode == kpKeyAndMouseRequest) {
-                SDL_Log("CPlayerManagerImpl::ResendFrame: asking for frame %d from slot %hd\n", theFrame, requesterId);
+                DBG_Log("resend", "asking for frame %d from slot %hd\n", theFrame, requesterId);
             } else {
-                SDL_Log("CPlayerManagerImpl::ResendFrame: re-sending frame %d  to  slot %hd\n", theFrame, requesterId);
+                DBG_Log("resend", "re-sending frame %d  to  slot %hd\n", theFrame, requesterId);
             }
             outPacket->command = commandCode;
             outPacket->distribution = 1 << requesterId;
@@ -445,7 +445,7 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
         }
     } else //	Ask me later packet
     {
-        SDL_Log("CPlayerManagerImpl::ResendFrame frame %d not in FUNCTIONBUFFERS, value = %d\n", theFrame, ff->validFrame);
+        DBG_Log("resend", "frame %d not in FUNCTIONBUFFERS, value = %d\n", theFrame, ff->validFrame);
         theComm->SendUrgentPacket(1 << requesterId, kpAskLater, 0, 0, theFrame, 0, 0);
     }
 }
@@ -567,7 +567,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 askAgainTime = quickTick + ASK_INTERVAL;
 
                 if (askCount == WAITING_MESSAGE_COUNT) {
-                    SDL_Log("Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
+                    DBG_Log("resend", "Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
                     loadingStatus = kLNetDelayed;
                     itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName);
                     itsGame->itsApp->RenderContents();  // force render now so message shows up
@@ -577,7 +577,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                 }
 
-                SDL_Log("frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
+                DBG_Log("resend", "frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
                         itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
             }
 
