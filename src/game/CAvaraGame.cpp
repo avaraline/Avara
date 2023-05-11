@@ -1078,6 +1078,7 @@ long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
 // latencyTolerance is the number of classic (64ms) frames (= frameLatency * fpsScale).
 void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayerManager* slowPlayer) {
     static int reduceLatencyCounter = 0;
+    static const int REDUCE_LATENCY_COUNT = 5;
     double newLatency = newFrameLatency * fpsScale;
     if (latencyTolerance != newLatency) {
         #define MAX_LATENCY (8)   // in classic units
@@ -1088,8 +1089,8 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
 
         double oldLatency = latencyTolerance;
         if (newLatency < latencyTolerance) {
-            // need 4 consecutive requests to reduce latency
-            if (maxChange == MAX_LATENCY || ++reduceLatencyCounter > 3) {
+            // need REDUCE_LATENCY_COUNT consecutive requests to reduce latency
+            if (maxChange == MAX_LATENCY || ++reduceLatencyCounter >= REDUCE_LATENCY_COUNT) {
                 latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
                 reduceLatencyCounter = 0;
             }
