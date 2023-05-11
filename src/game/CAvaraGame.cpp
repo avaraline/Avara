@@ -1086,10 +1086,24 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         }
 
         double oldLatency = latencyTolerance;
+
+        static int reduceLatencyCounter = 0;
+        static int increaseLatencyCounter = 0;
         if (newLatency < latencyTolerance) {
-            latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+            static const int REDUCE_LATENCY_COUNT = 5;
+            // need REDUCE_LATENCY_COUNT consecutive requests to reduce latency
+            if (maxChange == MAX_LATENCY || ++reduceLatencyCounter >= REDUCE_LATENCY_COUNT) {
+                latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+                reduceLatencyCounter = 0;
+                increaseLatencyCounter = 0;
+            }
         } else {
-            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
+            static const int INCREASE_LATENCY_COUNT = 2;
+            if (maxChange == MAX_LATENCY || ++increaseLatencyCounter >= INCREASE_LATENCY_COUNT) {
+                latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
+                reduceLatencyCounter = 0;
+                increaseLatencyCounter = 0;
+            }
         }
 
         // make prettier version of the LT string (C++ sucks with strings)
@@ -1102,8 +1116,10 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         // if it changed
         if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
             std::ostringstream oss;
-            std::time_t t = std::time(nullptr);
-            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
+            int gameSeconds = frameNumber * frameTime / 1000;
+            int gameMinutes = gameSeconds / 60;
+            gameSeconds = gameSeconds % 60;
+            oss << "T+" << std::setfill('0') << std::setw(2) << gameMinutes << ":" << std::setw(2) << gameSeconds << "> LT set to " << ltOss.str();
             if (slowPlayer != nullptr) {
                 oss << " (" << slowPlayer->GetPlayerName() << ")";
             }
