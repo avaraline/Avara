@@ -47,6 +47,7 @@
 //#include "CRosterWindow.h"
 //#include "Sound.h"
 #include "CHUD.h"
+#include "PlayerRatingsSimpleElo.h"
 #include "Preferences.h"
 #include "Resource.h"
 #include "ARGBColor.h"
@@ -119,6 +120,9 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     gHub = soundHub;
 
     InitMixer(true);
+
+    playerResults = {};
+    playerRatings = std::make_unique<PlayerRatingsSimpleElo>();
 
     scoreKeeper = new CScoreKeeper;
     scoreKeeper->IScoreKeeper(this);
@@ -731,6 +735,7 @@ void CAvaraGame::ResumeGame() {
             itsNet->AttachPlayers((CAbstractPlayer *)freshPlayerList);
             freshPlayerList = NULL;
             InitMixer(false);
+            playerResults = {};
         } else {
             itsApp->MessageLine(kmRestarted, MsgAlignment::Center);
             soundHub->MuteFlag(false);
@@ -932,6 +937,8 @@ bool CAvaraGame::GameTick() {
 
     if ((itsNet->activePlayersDistribution & itsNet->deadOrDonePlayers) == itsNet->activePlayersDistribution) {
         statusRequest = kWinStatus; //	Just a guess, really. StopGame will change this.
+        // the game is over, update player ratings based on results
+        playerRatings->UpdateRatings(playerResults);
     }
 
     if (statusRequest != kPlayingStatus)
@@ -1166,4 +1173,9 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
 
 FrameNumber CAvaraGame::FramesFromNow(FrameNumber classicFrameCount) {
     return frameNumber + classicFrameCount / fpsScale;
+}
+
+void CAvaraGame::PlayerFinished(CPlayerManager* player, int lives) {
+    DBG_Log("elo", "player <%s> eliminated in frame number %d\n", player->GetPlayerName().c_str(), frameNumber);
+    playerResults.push_back({player->GetPlayerName(), player->PlayerColor(), frameNumber, lives, scores[player->Slot()]});
 }

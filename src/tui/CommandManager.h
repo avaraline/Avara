@@ -30,6 +30,7 @@ public:
 
     // PlayerCommands
     bool GetSetPreference(VectorOfArgs);
+    bool DisplayRatings(VectorOfArgs);
 
     // RosterCommands
     bool GoodGame(VectorOfArgs);

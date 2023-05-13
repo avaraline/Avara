@@ -15,11 +15,13 @@
 #include "CDirectObject.h"
 #include "Types.h"
 #include "CNetManager.h"
+#include "PlayerRatingsSimpleElo.h"
 
 #include <SDL2/SDL.h>
 #include <string>
 #include <memory>
 #include <set>
+#include <vector>
 
 #define IDENTTABLESIZE 512
 
@@ -144,6 +146,10 @@ public:
 
     //	Object oriented submanagers:
 
+    // player ratings stuff
+    std::vector<PlayerResult> playerResults = {};
+    std::unique_ptr<PlayerRatingsSimpleElo> playerRatings;
+
     // CInfoPanel		*infoPanel;
     CDepot *itsDepot; //	Storage maintenance for ammo
     CSoundHub *soundHub; //	Sound playback and control hub
@@ -267,6 +273,9 @@ public:
 
     void SetKeysFromStdin() { keysFromStdin = true; };
     void SetKeysToStdout() { keysToStdout = true; };
+
+    // record stats used by player ratings calculation
+    void PlayerFinished(CPlayerManager* player, int lives);
 };
 
 #ifndef MAINAVARAGAME

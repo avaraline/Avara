@@ -40,6 +40,11 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           METHOD_TO_LAMBDA_VARGS(GetSetPreference));
     TextCommand::Register(cmd);
 
+    cmd = new TextCommand("/elo             <- display ratings of current players\n"
+                          "/elo name [name] <- display ratings of named players",
+                          METHOD_TO_LAMBDA_VARGS(DisplayRatings));
+    TextCommand::Register(cmd);
+
     cmd = new TextCommand("/gg              <- good game!\n"
                           "/gg new phrase   <- add phrase to list phrases used",
                           METHOD_TO_LAMBDA_VARGS(GoodGame));
@@ -475,6 +480,31 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
     }
     return true;
 }
+
+bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
+    if (vargs.size() == 0) {
+        // there must be an easier way to get the player names...
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            CPlayerManager *mgr = itsApp->GetNet()->playerTable[i];
+            auto name = mgr->GetPlayerName();
+            if (!name.empty()) {
+                vargs.push_back(name);
+            }
+        }
+    }
+
+    std::ostringstream os;
+    int endline = 0;
+    for (auto rating: itsApp->GetGame()->playerRatings->GetRatings(vargs)) {
+        os << std::right << std::setw(24) << rating.first + " = " + std::to_string(int(rating.second.rating)) + " ";
+        if (++endline % 3 == 0) {
+            os << std::endl;
+        }
+    }
+    itsApp->AddMessageLine(os.str());
+    return true;
+}
+
 
 bool CommandManager::HandleTags(VectorOfArgs vargs) {
     Tags::LevelURL curLevel(itsApp->GetGame()->loadedSet,
