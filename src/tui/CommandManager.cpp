@@ -4,6 +4,8 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
+#include "CAbstractActor.h" // TeamColor
+
 
 #include "CommDefs.h"       // kdEveryone
 #include "Resource.h"       // LevelDirNameListing
@@ -93,6 +95,11 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           "/tags foo      <- adds tag #foo to loaded level\n"
                           "/tags -foo bar <- removes tag #foo, adds tag #bar",
                           METHOD_TO_LAMBDA_VARGS(HandleTags));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/teams             <- split into red and yellow teams\n"
+                          "/teams r|y|b|g ... <- split into however many colored teams",
+                          METHOD_TO_LAMBDA_VARGS(SplitIntoTeams));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/dbg flag     <- toggles named debugging flag on/off\n"
@@ -502,6 +509,60 @@ bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
         }
     }
     itsApp->AddMessageLine(os.str());
+    return true;
+}
+
+std::vector<int> TeamColorsFromArgs(VectorOfArgs vargs) {
+    if (vargs.size() == 0) {
+        vargs.push_back("r");
+        vargs.push_back("y");
+    }
+    std::vector<int> colors;
+    for (auto arg: vargs) {
+        switch (std::tolower(arg[0])) {
+            case 'r':
+                colors.push_back(kRedTeam);
+                break;
+            case 'y':
+                colors.push_back(kYellowTeam);
+                break;
+            case 'g':
+                colors.push_back(kGreenTeam);
+                break;
+            case 'b':
+                colors.push_back(kBlueTeam);
+                break;
+            case 'p':
+                colors.push_back(kPinkTeam);
+                break;
+            case 'w':
+                colors.push_back(kLimeTeam);  /* white */
+                break;
+            case '*':
+                // reset all the colors
+                for (int i = 0; i < kMaxTeamColors; i++) {
+                    colors.push_back(int(colors.size() + kGreenTeam));
+                }
+                return colors;
+                break;
+            default:
+                colors.push_back(kOrangeTeam);
+                break;
+        }
+    }
+    return colors;
+}
+
+bool CommandManager::SplitIntoTeams(VectorOfArgs vargs) {
+    std::vector<int> colors = TeamColorsFromArgs(vargs);
+    std::vector<std::string> playerNames;
+    for (auto player: itsApp->GetNet()->AvailablePlayers()) {
+        playerNames.push_back(player->GetPlayerName());
+    }
+
+    std::map<int, std::vector<std::string>> colorTeamMap = itsApp->GetGame()->playerRatings->SplitIntoTeams(colors, playerNames);
+    itsApp->GetNet()->ChangeTeamColors(colorTeamMap);
+
     return true;
 }
 

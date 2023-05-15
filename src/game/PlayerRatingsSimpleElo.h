@@ -50,6 +50,8 @@ public:
 
     RatingsMap GetRatings(std::vector<std::string> playerIds);
     void UpdateRatings(std::vector<PlayerResult> &playerResults);
+
+    std::map<int, std::vector<std::string>> SplitIntoTeams(std::vector<int>, std::vector<std::string> playerIds);
 };
 
 #endif /* PlayerRatingsSimpleElo_h */

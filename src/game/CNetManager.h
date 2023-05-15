@@ -175,6 +175,11 @@ public:
     virtual short AlivePlayersDistribution();
     virtual bool IAmAlive();
 
+    std::vector<CPlayerManager*> PlayersWithPresence(PresenceType presence);
+    std::vector<CPlayerManager*> AvailablePlayers();
+    virtual int PlayerSlot(std::string playerName);
+    virtual void ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap);
+
     //	Game loop methods:
     size_t SkipLostPackets(int16_t dist);
     virtual Boolean GatherPlayers(Boolean isFreshMission);

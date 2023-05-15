@@ -31,6 +31,7 @@ public:
     // PlayerCommands
     bool GetSetPreference(VectorOfArgs);
     bool DisplayRatings(VectorOfArgs);
+    bool SplitIntoTeams(VectorOfArgs);
 
     // RosterCommands
     bool GoodGame(VectorOfArgs);
