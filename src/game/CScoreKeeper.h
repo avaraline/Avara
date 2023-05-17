@@ -11,6 +11,7 @@
 #include "AvaraDefines.h"
 #include "AvaraScoreInterface.h"
 #include "CDirectObject.h"
+#include "PlayerRatingsSimpleElo.h"
 
 #define PLAYER_SCORE_FIELD_COUNT 6
 #define NET_SCORES_LEN ((kMaxAvaraPlayers * PLAYER_SCORE_FIELD_COUNT) + (kMaxTeamColors + 1)) * 4
@@ -32,6 +33,15 @@ typedef struct {
     int32_t teamPoints[kMaxTeamColors + 1];
 } AvaraScoreRecord;
 
+struct FinishRecord {
+    int playerIndex;
+    std::string playerName;
+    int teamColor;
+    int lives;
+    long score;
+};
+
+
 class CScoreKeeper : public CDirectObject {
 public:
     CAvaraGame *itsGame;
@@ -46,6 +56,9 @@ public:
     ScoreInterfaceCallType *entryPoint;
 
     int32_t scorePayload[NET_SCORES_LEN / 4];
+
+    // player ratings stuff
+    std::unique_ptr<PlayerRatingsSimpleElo> playerRatings;
 
     virtual void IScoreKeeper(CAvaraGame *theGame);
     virtual void Dispose();
@@ -85,4 +98,7 @@ public:
     // virtual	void			RegularClick(EventRecord *theEvent, Rect *theRect);
 
     // virtual	void			FilterConsoleLine(StringPtr theString, short align);
+
+    std::vector<FinishRecord> DetermineFinishOrder();
+    void UpdatePlayerRatings(std::vector<FinishRecord>);
 };

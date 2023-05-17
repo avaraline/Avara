@@ -159,6 +159,7 @@ Boolean CProtoControl::DelayedPacketHandler(PacketInfo *thePacket) {
             break;
 
         case kpResultsReport:
+            DBG_Log("score", "Received score report from %d\n", thePacket->sender);
             theNet->ResultsReport(thePacket->dataBuffer);
             break;
 

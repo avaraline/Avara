@@ -64,25 +64,16 @@ inline float expectation(float player1Rating, float player2Rating) {
     return 1.0 / (1.0 + pow(10, exponent));
 }
 
+// playerResults are assumed to be in order from worst to first
 void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResults) {
     // can't currently handle multiple players on the same team
     std::map<short, int> teamMap = {};
     for (auto player: playerResults) {
-        if (++teamMap[player.teamColor] > 1) {
-            DBG_Log("elo", "more than 1 player on teamColor = %d, not computing player ratings\n", player.teamColor);
+        if (++teamMap[player.teamId] > 1) {
+            DBG_Log("elo", "more than 1 player on teamId = %d, not computing player ratings\n", player.teamId);
             return;
         }
     }
-
-    // sort results according to remaining lives and score... worst to first
-    std::sort(playerResults.begin(), playerResults.end(), [](PlayerResult const &lhs, PlayerResult const &rhs) {
-        // if only 1 person has lives > 0, they are the winner      (last man standing)
-        // if multiple people have lives > 0, compare their scores  (e.g. timed levels with 99 lives)
-        // all people with lives==0 compares scores
-        return
-            ((lhs.lives == 0 && (rhs.lives > 0 || lhs.score < rhs.score)) ||
-             (lhs.lives > 0 && rhs.lives > 0 && lhs.score < rhs.score));
-    });
 
     std::map<std::string, Rating> adjustments = {};
     PlayerResult prevPlayer = {};

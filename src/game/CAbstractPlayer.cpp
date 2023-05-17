@@ -1527,11 +1527,8 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
     missileCount = defaultConfig.numMissiles;
     grenadeCount = defaultConfig.numGrenades;
     GoLimbo(60);
-    if (lives == 0) {
-        itsGame->PlayerFinished(itsManager, lives);
-        if (itsManager->IsLocalPlayer()) {
-            itsGame->itsApp->MessageLine(kmGameOver, MsgAlignment::Center);
-        }
+    if (lives == 0 && itsManager->IsLocalPlayer()) {
+        itsGame->itsApp->MessageLine(kmGameOver, MsgAlignment::Center);
     }
 
     itsGame->itsApp->DrawUserInfoPart(itsManager->Position(), kipDrawColorBox);
@@ -1826,7 +1823,6 @@ void CAbstractPlayer::Win(long winScore, CAbstractActor *teleport) {
         itsGame->itsApp->MessageLine(kmWin, MsgAlignment::Center);
     }
 
-    itsGame->PlayerFinished(itsManager, lives);
     // itsGame->itsApp->DrawUserInfoPart(itsManager->slot, kipDrawColorBox);
 }
 

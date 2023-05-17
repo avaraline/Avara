@@ -5,7 +5,7 @@
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
 #include "CAbstractActor.h" // TeamColor
-
+#include "CScoreKeeper.h"
 
 #include "CommDefs.h"       // kdEveryone
 #include "Resource.h"       // LevelDirNameListing
@@ -502,9 +502,9 @@ bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
 
     std::ostringstream os;
     int endline = 0;
-    for (auto rating: itsApp->GetGame()->playerRatings->GetRatings(vargs)) {
-        os << std::right << std::setw(24) << rating.first + " = " + std::to_string(int(rating.second.rating)) + " ";
-        if (++endline % 3 == 0) {
+    for (auto rating: itsApp->GetGame()->scoreKeeper->playerRatings->GetRatings(vargs)) {
+        os << std::right << std::setw(16) << rating.first << " = " << int(rating.second.rating+0.5) << " ";
+        if (++endline % 2 == 0) {
             os << std::endl;
         }
     }
@@ -560,7 +560,7 @@ bool CommandManager::SplitIntoTeams(VectorOfArgs vargs) {
         playerNames.push_back(player->GetPlayerName());
     }
 
-    std::map<int, std::vector<std::string>> colorTeamMap = itsApp->GetGame()->playerRatings->SplitIntoTeams(colors, playerNames);
+    std::map<int, std::vector<std::string>> colorTeamMap = itsApp->GetGame()->scoreKeeper->playerRatings->SplitIntoTeams(colors, playerNames);
     itsApp->GetNet()->ChangeTeamColors(colorTeamMap);
 
     return true;
@@ -603,10 +603,10 @@ bool CommandManager::SetDebugFlag(VectorOfArgs vargs) {
     std::ostringstream os;
     if (vargs.size() == 1) {
         bool dbg = Debug::Toggle(key);
-        os << "Debugging flag " << key << " is " << (dbg ? "ON" : "OFF");
+        os << "Debugging flag '" << key << "' is " << (dbg ? "ON" : "OFF");
     } else {
         int val = Debug::SetValue(key, std::stoi(vargs[1]));
-        os << "Debugging flag " << key << " = " << val;
+        os << "Debugging flag '" << key << "' = " << val;
     }
     itsApp->AddMessageLine(os.str());
     return true;

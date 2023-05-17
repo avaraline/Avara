@@ -15,6 +15,7 @@
 //  Created by Tom on 5/12/23.
 //
 
+#pragma once
 #ifndef PlayerRatingsSimpleElo_h
 #define PlayerRatingsSimpleElo_h
 
@@ -27,10 +28,9 @@
 
 struct PlayerResult {
     std::string playerId;
-    int teamColor;
-    FrameNumber frame;
-    int lives;
-    long score;
+    int teamId;
+//    int lives;
+//    long score;
 };
 
 struct Rating {
