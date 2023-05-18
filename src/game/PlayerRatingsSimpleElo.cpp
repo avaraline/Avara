@@ -16,42 +16,12 @@
 
 #include "Debug.h"
 
-
-PlayerRatingsSimpleElo::PlayerRatingsSimpleElo() {
-    ReadRatings();
-}
-
-std::string PlayerRatingsSimpleElo::RatingsPath() {
-    char *path = SDL_GetPrefPath("Avaraline", "Avara");
-    std::string jsonPath = std::string(path) + "playerRatings.json";
-    SDL_free(path);
-    return jsonPath;
-}
+PlayerRatingsSimpleElo::PlayerRatingsSimpleElo() :
+    ratingsMap("playerRatings")
+{};
 
 // this macro tells nholmann::json how to serialize/deserialize the Rating struct
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Rating, count, rating);
-void PlayerRatingsSimpleElo::ReadRatings() {
-    std::ifstream in(RatingsPath());
-    if (!in.fail()) {
-        nlohmann::json jrat;
-        in >> jrat;
-        ratingsMap = jrat.get<RatingsMap>();
-    } else {
-        ratingsMap = {};
-    }
-}
-
-void PlayerRatingsSimpleElo::WriteRatings() {
-    try {
-        std::ostringstream oss;
-        nlohmann::json jrat = ratingsMap;
-        oss << std::setw(4) << jrat << std::endl;
-        std::ofstream out(RatingsPath());
-        out << oss.str();
-    } catch (std::exception& e) {
-        SDL_Log("ERROR WRITING TAGS FILE=%s", e.what());
-    }
-}
 
 inline float kFactor(int count) {
     // for first 40 games kFactor is higher then it sticks at 24 after that
@@ -109,7 +79,7 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
                 ratingsMap[playerId].count, playerId.c_str(), ratingsMap[playerId].rating, adjustments[playerId].rating);
     }
 
-    WriteRatings();
+    ratingsMap.Write();
 }
 
 

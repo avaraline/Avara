@@ -25,6 +25,7 @@
 #include <functional>
 
 #include "Types.h"
+#include "JSONify.h"
 
 struct PlayerResult {
     std::string playerId;
@@ -39,12 +40,9 @@ struct Rating {
 };
 
 class PlayerRatingsSimpleElo {
-    typedef std::map<std::string, Rating> RatingsMap;  // set->level->tags
-    RatingsMap ratingsMap;
+    typedef std::map<std::string, Rating> RatingsMap;  // set->[level->[tags]]
+    JSONify<RatingsMap> ratingsMap;
 
-    std::string RatingsPath();
-    void ReadRatings();
-    void WriteRatings();
 public:
     PlayerRatingsSimpleElo();
 

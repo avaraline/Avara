@@ -363,6 +363,7 @@
 		E247DE232A0EB51B001CA630 /* PlayerRatingsSimpleElo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = PlayerRatingsSimpleElo.h; sourceTree = "<group>"; };
 		E248724C29A480990079337E /* prefs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = prefs.json; path = "~/Library/Application Support/Avaraline/Avara/prefs.json"; sourceTree = "<group>"; };
 		E2B62D7D2997052B00600401 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		E2D76F732A1680FD000D24B3 /* JSONify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONify.h; sourceTree = "<group>"; };
 		E517F04C299713990036B206 /* AvaraTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AvaraTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PascalStrings.cpp; sourceTree = "<group>"; };
 		E5890B2429894DB3007A875D /* Avara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avara.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1117,6 +1118,7 @@
 				E5890BC229895118007A875D /* RayHit.h */,
 				E5890BB029895118007A875D /* RolloverCounter.h */,
 				E5890BB129895118007A875D /* SlidingHistogram.h */,
+				E2D76F732A1680FD000D24B3 /* JSONify.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
