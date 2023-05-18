@@ -503,7 +503,7 @@ bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
     std::ostringstream os;
     int endline = 0;
     for (auto rating: itsApp->GetGame()->scoreKeeper->playerRatings->GetRatings(vargs)) {
-        os << std::right << std::setw(16) << rating.first << " = " << int(rating.second.rating+0.5) << " ";
+        os << std::right << std::setw(16) << rating.first << " = " << std::setw(4) << int(rating.second.rating+0.5) << " ";
         if (++endline % 2 == 0) {
             os << std::endl;
         }

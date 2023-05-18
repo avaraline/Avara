@@ -41,10 +41,8 @@ class JSONify : public T {
     void _Backup() {
         if (!_backedUp) {
             std::string backup = _path + ".bak";
-            // move the current file to the backup
-            std::rename(_path.c_str(), backup.c_str());
-            // save the current instance
-            Write();
+            // copy the current instance as the backup (keep old one in place in case multiple instances reading it)
+            Write(backup);
             _backedUp = true;
         }
     }
@@ -71,14 +69,18 @@ public:
     }
 
     void Write() {
+        Write(_path);
+    }
+
+    void Write(std::string writePath) {
         try {
             std::ostringstream oss;
             nlohmann::json j = *this;
             oss << std::setw(4) << j << std::endl;
-            std::ofstream out(_path);
+            std::ofstream out(writePath);
             out << oss.str();
         } catch (std::exception& e) {
-            SDL_Log("ERROR WRITING FILE %s: %s", _path.c_str(), e.what());
+            SDL_Log("ERROR WRITING FILE %s: %s", writePath.c_str(), e.what());
         }
     }
 };
