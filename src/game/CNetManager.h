@@ -177,6 +177,8 @@ public:
 
     std::vector<CPlayerManager*> PlayersWithPresence(PresenceType presence);
     std::vector<CPlayerManager*> AvailablePlayers();
+    std::vector<CPlayerManager*> ActivePlayers();
+
     virtual int PlayerSlot(std::string playerName);
     virtual void ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap);
 

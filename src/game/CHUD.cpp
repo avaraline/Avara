@@ -25,18 +25,18 @@ bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecor
     }
 }
 
-void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NVGcontext *ctx) {
+void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CPlayerManager *playerManager = itsGame->FindPlayerManager(player);
 
-    if(playingCount > 0 && (playerManager->GetShowScoreboard() || itsGame->gameStatus != kPlayingStatus)) {
+    if(thePlayers.size() > 0 && (playerManager->GetShowScoreboard() || itsGame->gameStatus != kPlayingStatus)) {
         AvaraScoreRecord theScores = itsGame->scoreKeeper->localScores;
         CNetManager *net = itsGame->itsApp->GetNet();
         float colorBoxWidth = 30.0;
         //int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
         float boardWidth = 620;
-        float boardHeight = 60 + (colorBoxWidth + 10) * playingCount;
+        float boardHeight = 60 + (colorBoxWidth + 10) * thePlayers.size();
         float x = 20;
         float y = bufferHeight-chudHeight-boardHeight - 20;
         float fontsz_m = 28.0, fontsz_s = 18.0;
@@ -116,7 +116,7 @@ void CHUD::DrawScore(int playingCount, int chudHeight, CViewParameters *view, NV
             longTeamColor.ExportGLFloats(teamColorRGB, 3);
             NVGcolor textColor = aliveColor;
 
-            if(playerName.size() > 0 && thisPlayer->GetPlayer() != NULL) {
+            if (std::any_of(thePlayers.begin(), thePlayers.end(), [&](CPlayerManager * pm) { return pm == thisPlayer; })) {
                 if(theScores.player[playerTableIndex].points != previousScore)
                     playerRank++;
 
@@ -252,25 +252,17 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     DrawLevelName(view, ctx);
     DrawPaused(view, ctx);
 
-    int playingCount = 0;
-    int lastPlayerSlot = 0;
-    for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        CPlayerManager *thisPlayer = net->playerTable[i];
-        std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
-        if (playerName.length() > 0) {
-            lastPlayerSlot = i;
+    std::vector<CPlayerManager*> thePlayers = net->ActivePlayers(); // only players actively playing
 
-            if(thisPlayer->GetPlayer() != NULL) {
-                playingCount++;
-            }
-        }
+    int lastPlayerSlot = 6;  // limits HUD height
+    for (auto player: thePlayers) {
+        lastPlayerSlot = std::max(lastPlayerSlot, int(player->Slot() + 1));
     }
-    int playerSlots = std::max(6, lastPlayerSlot + 1);
 
     int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
-    int chudHeight = 13 * playerSlots;
+    int chudHeight = 13 * lastPlayerSlot;
 
-    DrawScore(playingCount, chudHeight, view, ctx);
+    DrawScore(thePlayers, chudHeight, view, ctx);
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
