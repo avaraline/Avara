@@ -514,8 +514,7 @@ bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
 
 std::vector<int> TeamColorsFromArgs(VectorOfArgs vargs) {
     if (vargs.size() == 0) {
-        vargs.push_back("r");
-        vargs.push_back("y");
+        vargs = {"r", "y"};
     }
     std::vector<int> colors;
     for (auto arg: vargs) {
@@ -526,27 +525,24 @@ std::vector<int> TeamColorsFromArgs(VectorOfArgs vargs) {
             case 'y':
                 colors.push_back(kYellowTeam);
                 break;
-            case 'g':
-                colors.push_back(kGreenTeam);
-                break;
             case 'b':
                 colors.push_back(kBlueTeam);
+                break;
+            case 'g':
+                colors.push_back(kGreenTeam);
                 break;
             case 'p':
                 colors.push_back(kPinkTeam);
                 break;
             case 'w':
-                colors.push_back(kLimeTeam);  /* white */
+                colors.push_back(kWhiteTeam);
                 break;
             case '*':
-                // reset all the colors
-                for (int i = 0; i < kMaxTeamColors; i++) {
-                    colors.push_back(int(colors.size() + kGreenTeam));
-                }
-                return colors;
+                // reset all the colors, brightest colors to to the best players
+                return {kRedTeam, kYellowTeam, kBlueTeam, kPinkTeam, kGreenTeam, kPurpleTeam, kWhiteTeam, kBlackTeam};
                 break;
             default:
-                colors.push_back(kOrangeTeam);
+                colors.push_back(kBlackTeam);
                 break;
         }
     }

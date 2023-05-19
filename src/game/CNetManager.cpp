@@ -1546,6 +1546,10 @@ int CNetManager::PlayerSlot(std::string playerName) {
 }
 
 void CNetManager::ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap) {
+    // first set everyone to black then overwrite below
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        teamColors[i] = kBlackTeam - kGreenTeam;
+    }
     for (auto [color, team]: colorTeamMap) {
         for (auto playerName: team) {
             int slot = PlayerSlot(playerName);
@@ -1554,6 +1558,7 @@ void CNetManager::ChangeTeamColors(std::map<int, std::vector<std::string>> color
             }
         }
     }
+    
     SendColorChange();
 }
 
