@@ -1,5 +1,5 @@
 //
-//  JsonPref.h
+//  JSONify.h
 //  Avara
 //
 //  Created by Tom on 5/18/23.
