@@ -79,6 +79,8 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
                 ratingsMap[playerId].count, playerId.c_str(), ratingsMap[playerId].rating, adjustments[playerId].rating);
     }
 
+    // remove blank playerId from ratings (could happen if someone disonnects before game is recorded)
+    ratingsMap.erase("");
     ratingsMap.Write();
 }
 
