@@ -502,8 +502,8 @@ bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
 
     std::ostringstream os;
     int endline = 0;
-    for (auto rating: itsApp->GetGame()->scoreKeeper->playerRatings->GetRatings(vargs)) {
-        os << std::right << std::setw(16) << rating.first << " = " << std::setw(4) << int(rating.second.rating+0.5) << " ";
+    for (auto [name, rating]: itsApp->GetGame()->scoreKeeper->playerRatings->GetRatings(vargs)) {
+        os << std::right << std::setw(16) << name << " = " << std::setw(4) << int(rating.rating+0.5) << " ";
         if (++endline % 2 == 0) {
             os << std::endl;
         }
@@ -538,8 +538,8 @@ std::vector<int> TeamColorsFromArgs(VectorOfArgs vargs) {
                 colors.push_back(kWhiteTeam);
                 break;
             case '*':
-                // reset all the colors, brightest colors to to the best players
-                return {kRedTeam, kYellowTeam, kBlueTeam, kPinkTeam, kGreenTeam, kPurpleTeam, kWhiteTeam, kBlackTeam};
+                // reset all the colors, brightest colors go to the best players
+                return {kRedTeam, kYellowTeam, kPinkTeam, kBlueTeam, kGreenTeam, kPurpleTeam, kWhiteTeam, kBlackTeam};
                 break;
             default:
                 colors.push_back(kBlackTeam);

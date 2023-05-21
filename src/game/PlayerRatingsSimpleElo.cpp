@@ -85,25 +85,29 @@ void PlayerRatingsSimpleElo::UpdateRatings(std::vector<PlayerResult> &playerResu
 }
 
 
-PlayerRatingsSimpleElo::RatingsMap PlayerRatingsSimpleElo::GetRatings(std::vector<std::string> playerIds) {
-    RatingsMap ratings;
+// return player ratings ordered from highest to lowest
+std::vector<std::pair<std::string,Rating>> PlayerRatingsSimpleElo::GetRatings(std::vector<std::string> playerIds) {
+    std::vector<std::pair<std::string,Rating>> ratings;
     for (auto player: playerIds) {
-        if (ratingsMap.find(player) == ratingsMap.end()) {
-            // don't add it to ratingsMap just yet, return the default initial rating for this player
-            ratings[player] = {};
+        auto iter = ratingsMap.find(player);
+        if (iter == ratingsMap.end()) {
+            // don't add it to ratingsMap just yet, return the default initial rating (1500) for this named player
+            ratings.push_back({player, {}});
         } else {
-            ratings[player] = ratingsMap[player];
+            // use the actual key/value in the map to match the case
+            ratings.push_back(*iter);
         }
     }
+    // sort players by their ratings, best to worst
+    std::sort(ratings.begin(), ratings.end(), [&](std::pair<std::string,Rating> const &lhs, std::pair<std::string,Rating> const &rhs) {
+        return rhs.second.rating < lhs.second.rating;
+    });
     return ratings;
 }
 
 std::map<int, std::vector<std::string>> PlayerRatingsSimpleElo::SplitIntoTeams(std::vector<int> colors, std::vector<std::string> playerIds) {
-    RatingsMap playerRatings = GetRatings(playerIds);
-    // sort players by their ratings, best to worst
-    std::sort(playerIds.begin(), playerIds.end(), [&](std::string const &lhs, std::string const &rhs) {
-        return playerRatings[rhs].rating < playerRatings[lhs].rating;
-    });
+    // ratings already sorted from best to worst
+    std::vector<std::pair<std::string,Rating>> playerRatings = GetRatings(playerIds);
 
     // compute halfway between best and worst ratings
     float midRating = (playerRatings.begin()->second.rating + playerRatings.rbegin()->second.rating) / 2.0;
@@ -118,16 +122,16 @@ std::map<int, std::vector<std::string>> PlayerRatingsSimpleElo::SplitIntoTeams(s
     // this will effectively put the top 1..N players in different teams, then player N+1 will go on team N,
     // player N+2 will go onto whichever team has the smallest total (likely team N-1) and so on.
     // (another possibile algorithm: multiply probabilities of player losing to midRating?)
-    for (auto player: playerIds) {
+    for (auto [player, rating]: playerRatings) {
         // the first team in the multimap will always contain the lowest sum because it sorts on the key where we put the sum,
         // so extract the node with the first team, add this player, update the sum, then put it back in the multimap.  rinse. repeat.
         auto node = teamMap.extract(teamMap.begin());
         node.mapped().push_back(player);
-        node.key() = node.key() + expectation(playerRatings[player].rating, midRating);
+        node.key() = node.key() + expectation(rating.rating, midRating);
         teamMap.insert(std::move(node));
     }
 
-    // now put all the results into a map of color=>vector<name> ("strongest" team first)
+    // now put all the results into a map of color=>vector{names} ("strongest" team first)
     std::map<int, std::vector<std::string>> colorTeamMap;
     int colorIdx = 0;
     for (auto iter = teamMap.rbegin(); iter != teamMap.rend(); iter++, colorIdx++) {
@@ -135,7 +139,7 @@ std::map<int, std::vector<std::string>> PlayerRatingsSimpleElo::SplitIntoTeams(s
         if (Debug::IsEnabled("elo")) {
             std::ostringstream oss;
             for (auto player: players) {
-                oss << player << "(" << playerRatings[player].rating-midRating << ") ";
+                oss << player << "(" << ratingsMap[player].rating-midRating << ") ";
             }
             DBG_Log("elo", "team %lu: sum = %.3f, [ %s]\n", colorTeamMap.size()+1, iter->first, oss.str().c_str());
         }

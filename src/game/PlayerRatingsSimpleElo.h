@@ -39,14 +39,25 @@ struct Rating {
     float rating = 1500; // Elo rating
 };
 
+// use this to make map keys case-insenstive
+struct CaseInsensitiveCompare {
+    bool operator() (const std::string& lhs, const std::string& rhs) const {
+        std::string s1(lhs);
+        std::string s2(rhs);
+        std::transform(s1.begin(), s1.end(), s1.begin(), ::tolower);
+        std::transform(s2.begin(), s2.end(), s2.begin(), ::tolower);
+        return s1 < s2;
+     }
+};
+
 class PlayerRatingsSimpleElo {
-    typedef std::map<std::string, Rating> RatingsMap;  // set->[level->[tags]]
+    typedef std::map<std::string, Rating, CaseInsensitiveCompare> RatingsMap;  // set->[level->[tags]]
     JSONify<RatingsMap> ratingsMap;
 
 public:
     PlayerRatingsSimpleElo();
 
-    RatingsMap GetRatings(std::vector<std::string> playerIds);
+    std::vector<std::pair<std::string,Rating>> GetRatings(std::vector<std::string> playerIds);
     void UpdateRatings(std::vector<PlayerResult> &playerResults);
 
     std::map<int, std::vector<std::string>> SplitIntoTeams(std::vector<int>, std::vector<std::string> playerIds);
