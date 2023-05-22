@@ -49,6 +49,15 @@ endif
 	CPPFLAGS += -F$(FRAMEWORK_PATH)
 	LDFLAGS += -F$(FRAMEWORK_PATH) -L/opt/homebrew/lib -L/usr/local/lib -lstdc++ -lm -lpthread -framework SDL2 -framework OpenGL -framework AppKit
 	POST_PROCESS ?= dsymutil
+
+	JOBS := $(shell sysctl -n hw.ncpu)
+	# if the -j option was passed, use that instead
+	MAKE_PID := $(shell echo $$PPID)
+	JOB_FLAG := $(filter -j%, $(subst -j ,-j,$(shell ps T | grep "^\s*$(MAKE_PID).*$(MAKE)")))
+	ifneq ($(JOB_FLAG),)
+		JOBS := $(subst -j,,$(JOB_FLAG))
+	endif
+
 else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	# Windows - should match for MSYS2 on Win10
 	WINDRES := $(shell which windres)
@@ -95,7 +104,7 @@ fixed: $(BUILD_DIR)/fixed
 
 macapp:
 	xcodebuild -configuration Debug -scheme Avara \
-        -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=`sysctl -n hw.ncpu` \
+        -IDEBuildOperationMaxNumberOfConcurrentCompileTasks=$(JOBS) \
         -derivedDataPath $(BUILD_DIR)/DerivedData \
         ONLY_ACTIVE_ARCH=NO \
         CONFIGURATION_BUILD_DIR=$(BUILD_DIR)
