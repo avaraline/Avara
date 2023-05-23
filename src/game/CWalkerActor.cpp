@@ -719,7 +719,7 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             }
         }
 
-        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
+        if (TESTFUNC(kfuJump, ft->up) && tractionFlag && !jumpFlag) {
             FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", crouch = " << crouch << ", initial speed = " << speed[1] << std::endl);
             speed[1] >>= 1;
             // it's an impulse power up so don't scale the jump

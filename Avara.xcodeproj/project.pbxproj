@@ -12,6 +12,7 @@
 		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
 		E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
 		E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
+		E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E517F053299713DB0036B206 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2B62D7D2997052B00600401 /* tests.cpp */; };
 		E517F054299713DB0036B206 /* CBasicSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7529895118007A875D /* CBasicSound.cpp */; };
 		E517F055299713DB0036B206 /* CRateSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7029895118007A875D /* CRateSound.cpp */; };
@@ -2044,6 +2045,7 @@
 				E517F083299713DB0036B206 /* CLogicDelay.cpp in Sources */,
 				E517F084299713DB0036B206 /* CLogicDistributor.cpp in Sources */,
 				E517F085299713DB0036B206 /* CLogicTimer.cpp in Sources */,
+				E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */,
 				E517F086299713DB0036B206 /* CMarkerActor.cpp in Sources */,
 				E517F087299713DB0036B206 /* CMineActor.cpp in Sources */,
 				E517F088299713DB0036B206 /* CMissile.cpp in Sources */,
