@@ -627,11 +627,13 @@ void test_jump(int peakStep, int peakHeight, int numHeldKeys) {
     vector<VectorStruct> at64ms = JumpHector(20, 20, jumpSteps, 64, numHeldKeys);
     vector<VectorStruct> at32ms = JumpHector(20, 20, jumpSteps, 32, numHeldKeys);
     vector<VectorStruct> at16ms = JumpHector(20, 20, jumpSteps, 16, numHeldKeys);
+    vector<VectorStruct> at8ms = JumpHector(20, 20, jumpSteps, 8, numHeldKeys);
 
     // peak of jump is near frame 6
     ASSERT_EQ(at64ms.size(), jumpSteps) << "not enough steps recorded at 64ms";
     ASSERT_EQ(at32ms.size(), jumpSteps) << "not enough steps recorded at 32ms";
     ASSERT_EQ(at16ms.size(), jumpSteps) << "not enough steps recorded at 16ms";
+    ASSERT_EQ(at8ms.size(), jumpSteps) << "not enough steps recorded at 8ms";
 
     ASSERT_NEAR(at64ms[peakStep].theVec[1], peakHeight, 3*MILLIMETER) << "64ms simulation peaked with wrong amount";
     ASSERT_NEAR(at32ms[peakStep].theVec[1], peakHeight, 3*MILLIMETER) << "32ms simulation peaked with wrong amount";
