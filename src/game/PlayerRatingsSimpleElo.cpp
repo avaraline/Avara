@@ -148,3 +148,49 @@ std::map<int, std::vector<std::string>> PlayerRatingsSimpleElo::SplitIntoTeams(s
 
     return colorTeamMap;
 }
+
+std::map<int, std::vector<std::string>> PlayerRatingsSimpleElo::SplitIntoBestTeams(std::vector<int> colors, std::vector<std::string> playerIds) {
+
+    // ratings already sorted from best to worst
+    std::vector<std::pair<std::string,Rating>> playerRatings = GetRatings(playerIds);
+    // compute halfway between best and worst ratings
+    float midRating = (playerRatings.begin()->second.rating + playerRatings.rbegin()->second.rating) / 2.0;
+
+    // gather up the expectation values for each player
+    std::map<std::string, float> expectations;
+    for (auto [player, rating]: playerRatings) {
+        expectations[player] = expectation(rating.rating, midRating);
+    }
+
+    // loop over the possible number of teams and compute expectation variance
+    int maxTeams = int(std::min(colors.size(), playerIds.size()));
+    int bestNumTeams = 2;
+    float bestVariance = std::numeric_limits<float>::max();
+    std::map<int, std::map<int, std::vector<std::string>>> splitCandidates {};
+    for (int numTeams = 2; numTeams <= maxTeams; numTeams++) {
+        // start with 2 teams and work up
+        // slice out numTeams colors and split into that many teams
+        std::vector<int> subColors(&colors[0], &colors[0]+numTeams);
+        splitCandidates[numTeams] = SplitIntoTeams(subColors, playerIds);
+        // compute the total expectation for each team and the overall variance of this combination of teams
+        float sum = 0;
+        float sumSqr = 0;
+        for (auto [teamColor, teamPlayers]: splitCandidates[numTeams]) {
+            float teamExp = 0;
+            for (auto playerId: teamPlayers) {
+                // sum of expectations for a team is used as the measure that we want to minimize variance on
+                teamExp += expectations[playerId];
+            }
+            sum += teamExp;
+            sumSqr += teamExp*teamExp;
+        }
+        float var = (sumSqr - (sum * sum) / numTeams) / (numTeams - 1);
+        DBG_Log("elo", "%d-team split variance = %.3f\n", numTeams, var);
+        if (var < bestVariance) {
+            bestVariance = var;
+            bestNumTeams = numTeams;
+        }
+    }
+
+    return splitCandidates[bestNumTeams];
+}

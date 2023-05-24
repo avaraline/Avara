@@ -97,7 +97,7 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           METHOD_TO_LAMBDA_VARGS(HandleTags));
     TextCommand::Register(cmd);
 
-    cmd = new TextCommand("/teams             <- split into red and yellow teams\n"
+    cmd = new TextCommand("/teams             <- split into 2-5 teams, whichever combination is best\n"
                           "/teams r|y|b|g ... <- split into however many colored teams",
                           METHOD_TO_LAMBDA_VARGS(SplitIntoTeams));
     TextCommand::Register(cmd);
@@ -513,9 +513,6 @@ bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
 }
 
 std::vector<int> TeamColorsFromArgs(VectorOfArgs vargs) {
-    if (vargs.size() == 0) {
-        vargs = {"r", "y"};
-    }
     std::vector<int> colors;
     for (auto arg: vargs) {
         switch (std::tolower(arg[0])) {
@@ -538,6 +535,7 @@ std::vector<int> TeamColorsFromArgs(VectorOfArgs vargs) {
                 colors.push_back(kWhiteTeam);
                 break;
             case '*':
+            case '-':
                 // reset all the colors, brightest colors go to the best players
                 return {kRedTeam, kYellowTeam, kPinkTeam, kBlueTeam, kGreenTeam, kPurpleTeam, kWhiteTeam, kBlackTeam};
                 break;
@@ -550,15 +548,22 @@ std::vector<int> TeamColorsFromArgs(VectorOfArgs vargs) {
 }
 
 bool CommandManager::SplitIntoTeams(VectorOfArgs vargs) {
-    std::vector<int> colors = TeamColorsFromArgs(vargs);
+    std::map<int, std::vector<std::string>> colorTeamMap;
     std::vector<std::string> playerNames;
     for (auto player: itsApp->GetNet()->AvailablePlayers()) {
         playerNames.push_back(player->GetPlayerName());
     }
 
-    std::map<int, std::vector<std::string>> colorTeamMap = itsApp->GetGame()->scoreKeeper->playerRatings->SplitIntoTeams(colors, playerNames);
-    itsApp->GetNet()->ChangeTeamColors(colorTeamMap);
+    if (vargs.size() == 0) {
+        // with no arguments try to find fairest split of 2, 3, 4 or 5 teams
+        colorTeamMap = itsApp->GetGame()->scoreKeeper->playerRatings->SplitIntoBestTeams({kRedTeam, kYellowTeam, kBlueTeam, kGreenTeam, kPurpleTeam}, playerNames);
 
+    } else {
+        std::vector<int> colors = TeamColorsFromArgs(vargs);
+        colorTeamMap = itsApp->GetGame()->scoreKeeper->playerRatings->SplitIntoTeams(colors, playerNames);
+    }
+
+    itsApp->GetNet()->ChangeTeamColors(colorTeamMap);
     return true;
 }
 
