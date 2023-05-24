@@ -12,12 +12,11 @@
 #include <set>
 #include <string>
 
+#include "JSONify.h"
+
 class Tags {
     typedef std::map<std::string, std::map<std::string, std::set<std::string>>> TagMap;  // set->level->tags
-    static TagMap _tags;
-    static std::string TagsPath();
-    static bool ReadTags();
-    static bool WriteTags();
+    static JSONify<TagMap> _tags;
     static void TrimTags();
 
 public:

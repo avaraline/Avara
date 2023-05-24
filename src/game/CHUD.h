@@ -1,5 +1,7 @@
 #include "CDirectObject.h"
+#include <vector>
 #include "CViewParameters.h"
+#include "CPlayerManager.h"
 #include "nanovg.h"
 
 class CAvaraGame;
@@ -14,6 +16,6 @@ public:
     void Render(CViewParameters *view, NVGcontext *ctx);
     void DrawLevelName(CViewParameters *view, NVGcontext *ctx);
     void DrawPaused(CViewParameters *view, NVGcontext *ctx);
-    void DrawScore(int playingCount, int chudHeight, CViewParameters *view, NVGcontext *ctx);
+    void DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx);
 
 };

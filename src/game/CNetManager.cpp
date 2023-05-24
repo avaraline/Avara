@@ -1521,3 +1521,55 @@ void CNetManager::LoginRefused() {
         itsGame->itsApp->MessageLine(kmRefusedLogin, MsgAlignment::Center);
     }
 }
+
+std::vector<CPlayerManager*> CNetManager::PlayersWithPresence(PresenceType presence) {
+    std::vector<CPlayerManager*> players;
+    for (auto player: playerTable) {
+        if (player->LoadingStatus() != kLNotConnected && player->Presence() == presence) {
+            players.push_back(player);
+        }
+    }
+    return players;
+}
+
+std::vector<CPlayerManager*> CNetManager::AvailablePlayers() {
+    return PlayersWithPresence(kzAvailable);
+}
+
+std::vector<CPlayerManager*> CNetManager::ActivePlayers() {
+    std::vector<CPlayerManager*> players;
+    for (auto player: playerTable) {
+        // players who are actually playing in a game
+        if (player->LoadingStatus() != kLNotConnected && player->Presence() == kzAvailable && player->GetPlayer() != NULL) {
+            players.push_back(player);
+        }
+    }
+    return players;
+}
+
+int CNetManager::PlayerSlot(std::string playerName) {
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        if (playerTable[i]->GetPlayerName() == playerName) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void CNetManager::ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap) {
+    // first set everyone to black then overwrite below
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        teamColors[i] = kBlackTeam - kGreenTeam;
+    }
+    for (auto [color, team]: colorTeamMap) {
+        for (auto playerName: team) {
+            int slot = PlayerSlot(playerName);
+            if (slot >= 0) {
+                teamColors[slot] = color - kGreenTeam;
+            }
+        }
+    }
+    
+    SendColorChange();
+}
+

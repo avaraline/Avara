@@ -22,6 +22,7 @@
 //#include "CInfoPanel.h"
 #include "InfoMessages.h"
 //#include "Palettes.h"
+#include "Debug.h"
 
 #define kScoringStringsList 135
 
@@ -43,8 +44,6 @@ enum { //	For personal pages:
 
     kTeamNames
 };
-
-static short ExitPointsTable[kMaxAvaraPlayers] = {10, 6, 3, 2, 1, 0};
 
 void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     itsGame = theGame;
@@ -91,6 +90,8 @@ void CScoreKeeper::IScoreKeeper(CAvaraGame *theGame) {
     ResetScores();
 
     netScores = localScores;
+
+    playerRatings = std::make_unique<PlayerRatingsSimpleElo>();
 }
 
 void CScoreKeeper::Dispose() {
@@ -167,7 +168,11 @@ void CScoreKeeper::NetResultsUpdate() {
         thePlayer = theNet->playerTable[i];
         offset = i * PLAYER_SCORE_FIELD_COUNT;
         if (thePlayer->GetPlayer()) {
-            localScores.player[i].lives = thePlayer->GetPlayer()->lives;
+            if (thePlayer->Presence() == kzSpectating) {
+                localScores.player[i].lives = -2;
+            } else {
+                localScores.player[i].lives = thePlayer->GetPlayer()->lives;
+            }
 
             scorePayload[offset] = htonl(localScores.player[i].points);
             scorePayload[offset + 1] = htonl(localScores.player[i].team);
@@ -236,7 +241,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     if (player >= 0 && player < kMaxAvaraPlayers) {
         localScores.player[player].points += points;
         if (reason == ksiExitBonus) {
-            localScores.player[player].exitRank = ExitPointsTable[exitCount];
+            localScores.player[player].exitRank = 1;
             localScores.player[player].serverWins++;
             exitCount++;
         }
@@ -277,6 +282,9 @@ void CScoreKeeper::ResetScores() {
 
 void CScoreKeeper::ReceiveResults(int32_t *newResults) {
     short i, offset;
+    bool gameIsFinal = false;
+    int sumPoints = 0;
+    static int sumPointsCheck = 0;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         offset = i * PLAYER_SCORE_FIELD_COUNT;
@@ -287,12 +295,71 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
         netScores.player[i].kills = (int16_t) ntohl(newResults[offset + 4]);
         netScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
 
+        // if any exitRank is set, the game is over
+        gameIsFinal = gameIsFinal || (netScores.player[i].exitRank > 0);
+        sumPoints += netScores.player[i].points;
+
         //copy serverWins to localScores
         localScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
+
+        DBG_Log("score", "player=%d, points=%6d, team=%d, exitRank=%d, lives=%d, kills=%d, wins=%d\n",
+                i,
+                netScores.player[i].points,
+                netScores.player[i].team,
+                netScores.player[i].exitRank,
+                netScores.player[i].lives,
+                netScores.player[i].kills,
+                netScores.player[i].serverWins);
     }
 
     offset = PLAYER_SCORE_FIELD_COUNT * kMaxAvaraPlayers;
     for (i = 0; i <= kMaxTeamColors; i++) {
         netScores.teamPoints[i] = ntohl(newResults[offset + i]);
     }
+
+    // the sumPointsCheck helps to ensure we only execute this code block once (maybe better if we added a gameId?)
+    if (gameIsFinal && sumPoints != sumPointsCheck) {
+        sumPointsCheck = sumPoints;
+        std::vector<FinishRecord> rankings = DetermineFinishOrder();
+        UpdatePlayerRatings(rankings);
+    }
+}
+
+std::vector<FinishRecord> CScoreKeeper::DetermineFinishOrder() {
+    CNetManager *theNet = itsGame->itsNet.get();
+    std::vector<FinishRecord> finishOrder = {};
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        // deduce whether player is playing (TODO: after this software version is on main, should be able to rely on lives>=0)
+        if (theNet->playerTable[i]->Presence() == kzAvailable && netScores.player[i].lives >= 0) {
+            auto playerName = theNet->playerTable[i]->GetPlayerName();
+            finishOrder.push_back({
+                i,
+                playerName,
+                netScores.player[i].team,
+                netScores.player[i].lives,
+                netScores.player[i].points});
+        }
+    }
+
+    // sort results according to remaining lives and score... worst to first
+    std::sort(finishOrder.begin(), finishOrder.end(), [](FinishRecord const &lhs, FinishRecord const &rhs) {
+        // if only 1 person has lives > 0, they are the winner      (last man standing)
+        // if multiple people have lives > 0, compare their scores  (e.g. timed levels with 99 lives)
+        // all people with lives==0 compares scores
+        return
+            ((lhs.lives == 0 && (rhs.lives > 0 || lhs.score < rhs.score)) ||
+             (lhs.lives > 0 && rhs.lives > 0 && lhs.score < rhs.score));
+    });
+
+    return finishOrder;
+}
+
+void CScoreKeeper::UpdatePlayerRatings(std::vector<FinishRecord> finishOrder) {
+    // send the final results to playerRatings
+    std::vector<PlayerResult> playerResults = {};
+    for (auto finRec: finishOrder) {
+        playerResults.push_back({finRec.playerName, finRec.teamColor});
+    }
+    // must pass in the results ordered last to first
+    playerRatings->UpdateRatings(playerResults);
 }

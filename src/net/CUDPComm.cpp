@@ -1419,8 +1419,8 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
-    // if kDefaultClientUDPPort not specified, fall back to kDefaultUDPPort
-    localPort = gApplication->Number(kDefaultClientUDPPort, serverPort);
+    // if kDefaultClientUDPPort not specified, fall back to 0 (random port) for the client
+    localPort = gApplication->Number(kDefaultClientUDPPort, 0);
 
     IPaddress addr;
     // CAvaraApp *app = (CAvaraAppImpl *)gApplication;

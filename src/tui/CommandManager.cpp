@@ -4,6 +4,8 @@
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
+#include "CAbstractActor.h" // TeamColor
+#include "CScoreKeeper.h"
 
 #include "CommDefs.h"       // kdEveryone
 #include "Resource.h"       // LevelDirNameListing
@@ -38,6 +40,11 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
     cmd = new TextCommand("/pref name       <- display value of named preference\n"
                           "/pref name value <- set value of named preference",
                           METHOD_TO_LAMBDA_VARGS(GetSetPreference));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/elo             <- display ratings of current players\n"
+                          "/elo name [name] <- display ratings of named players",
+                          METHOD_TO_LAMBDA_VARGS(DisplayRatings));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/gg              <- good game!\n"
@@ -88,6 +95,11 @@ CommandManager::CommandManager(CAvaraAppImpl *theApp) : itsApp(theApp) {
                           "/tags foo      <- adds tag #foo to loaded level\n"
                           "/tags -foo bar <- removes tag #foo, adds tag #bar",
                           METHOD_TO_LAMBDA_VARGS(HandleTags));
+    TextCommand::Register(cmd);
+
+    cmd = new TextCommand("/teams             <- split into 2-5 teams, whichever combination is best\n"
+                          "/teams r|y|b|g ... <- split into however many colored teams",
+                          METHOD_TO_LAMBDA_VARGS(SplitIntoTeams));
     TextCommand::Register(cmd);
 
     cmd = new TextCommand("/dbg flag     <- toggles named debugging flag on/off\n"
@@ -476,6 +488,86 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
     return true;
 }
 
+bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
+    if (vargs.size() == 0) {
+        // there must be an easier way to get the player names...
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            CPlayerManager *mgr = itsApp->GetNet()->playerTable[i];
+            auto name = mgr->GetPlayerName();
+            if (!name.empty()) {
+                vargs.push_back(name);
+            }
+        }
+    }
+
+    std::ostringstream os;
+    int endline = 0;
+    for (auto [name, rating]: itsApp->GetGame()->scoreKeeper->playerRatings->GetRatings(vargs)) {
+        os << std::right << std::setw(16) << name << " = " << std::setw(4) << int(rating.rating+0.5) << " ";
+        if (++endline % 2 == 0) {
+            os << std::endl;
+        }
+    }
+    itsApp->AddMessageLine(os.str());
+    return true;
+}
+
+std::vector<int> TeamColorsFromArgs(VectorOfArgs vargs) {
+    std::vector<int> colors;
+    for (auto arg: vargs) {
+        switch (std::tolower(arg[0])) {
+            case 'r':
+                colors.push_back(kRedTeam);
+                break;
+            case 'y':
+                colors.push_back(kYellowTeam);
+                break;
+            case 'b':
+                colors.push_back(kBlueTeam);
+                break;
+            case 'g':
+                colors.push_back(kGreenTeam);
+                break;
+            case 'p':
+                colors.push_back(kPinkTeam);
+                break;
+            case 'w':
+                colors.push_back(kWhiteTeam);
+                break;
+            case '*':
+            case '-':
+                // reset all the colors, brightest colors go to the best players
+                return {kRedTeam, kYellowTeam, kPinkTeam, kBlueTeam, kGreenTeam, kPurpleTeam, kWhiteTeam, kBlackTeam};
+                break;
+            default:
+                colors.push_back(kBlackTeam);
+                break;
+        }
+    }
+    return colors;
+}
+
+bool CommandManager::SplitIntoTeams(VectorOfArgs vargs) {
+    std::map<int, std::vector<std::string>> colorTeamMap;
+    std::vector<std::string> playerNames;
+    for (auto player: itsApp->GetNet()->AvailablePlayers()) {
+        playerNames.push_back(player->GetPlayerName());
+    }
+
+    if (vargs.size() == 0) {
+        // with no arguments try to find fairest split of 2, 3, 4 or 5 teams
+        colorTeamMap = itsApp->GetGame()->scoreKeeper->playerRatings->SplitIntoBestTeams({kRedTeam, kYellowTeam, kBlueTeam, kGreenTeam, kPurpleTeam}, playerNames);
+
+    } else {
+        std::vector<int> colors = TeamColorsFromArgs(vargs);
+        colorTeamMap = itsApp->GetGame()->scoreKeeper->playerRatings->SplitIntoTeams(colors, playerNames);
+    }
+
+    itsApp->GetNet()->ChangeTeamColors(colorTeamMap);
+    return true;
+}
+
+
 bool CommandManager::HandleTags(VectorOfArgs vargs) {
     Tags::LevelURL curLevel(itsApp->GetGame()->loadedSet,
                             itsApp->GetGame()->loadedLevel);
@@ -512,10 +604,10 @@ bool CommandManager::SetDebugFlag(VectorOfArgs vargs) {
     std::ostringstream os;
     if (vargs.size() == 1) {
         bool dbg = Debug::Toggle(key);
-        os << "Debugging flag " << key << " is " << (dbg ? "ON" : "OFF");
+        os << "Debugging flag '" << key << "' is " << (dbg ? "ON" : "OFF");
     } else {
         int val = Debug::SetValue(key, std::stoi(vargs[1]));
-        os << "Debugging flag " << key << " = " << val;
+        os << "Debugging flag '" << key << "' = " << val;
     }
     itsApp->AddMessageLine(os.str());
     return true;
