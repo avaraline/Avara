@@ -215,7 +215,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
     std::string name = String(kPlayerNameTag);
     Str255 userName;
     userName[0] = name.length();
-    BlockMoveData(name.c_str(), userName + 1, name.length());
+    BlockMoveData(name.c_str(), userName + 1, userName[0]);
     // SDL_Log("DoCommand %d\n", theCommand);
     switch (theCommand) {
         case kReportNameCmd:

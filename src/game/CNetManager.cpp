@@ -433,8 +433,8 @@ void CNetManager::SendLoadLevel(std::string theSet, std::string levelTag, int16_
 
     std::string setAndLevel = theSet + "/" + levelTag;
 
-    aPacket->dataLen = setAndLevel.length() + 1;
-    BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, setAndLevel.length() + 1);
+    aPacket->dataLen = std::max<int16_t>(setAndLevel.length() + 1, PACKETDATABUFFERSIZE);
+    BlockMoveData(setAndLevel.c_str(), aPacket->dataBuffer, aPacket->dataLen);
 
     /* TODO: implement
      itsGame->itsApp->GetDirectoryLocator((DirectoryLocator *)aPacket->dataBuffer);
@@ -497,8 +497,8 @@ void CNetManager::ReceiveLoadLevel(short senderSlot, int16_t originalSender, cha
             //itsCommManager->SendPacket(kdEveryone, kpLevelLoaded, 0, crc, 0, 0, 0);
         }
 
-        aPacket->dataLen = tag.length() + 1;
-        BlockMoveData(tag.c_str(), aPacket->dataBuffer, tag.length() + 1);
+        aPacket->dataLen = std::max<int16_t>(tag.length() + 1, PACKETDATABUFFERSIZE);
+        BlockMoveData(tag.c_str(), aPacket->dataBuffer, aPacket->dataLen);
         itsCommManager->WriteAndSignPacket(aPacket);
     }
 
