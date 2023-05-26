@@ -1573,3 +1573,23 @@ void CNetManager::ChangeTeamColors(std::map<int, std::vector<std::string>> color
     SendColorChange();
 }
 
+void CNetManager::SetTeamColor(int slot, int color) {
+    if (color > kNeutralTeam) {
+        teamColors[slot] = color - kGreenTeam;
+    } else {
+        // pick first color not being used by other slots
+        for (int newColor = 0; newColor < kMaxAvaraPlayers; newColor++) {
+            bool colorUsed = false;
+            for (int i = 0; i < kMaxAvaraPlayers && !colorUsed; i++) {
+                if (i != slot && teamColors[i] == newColor) {
+                    colorUsed = true;
+                }
+            }
+            if (!colorUsed) {
+                teamColors[slot] = newColor;
+                break;
+            }
+        }
+    }
+    SendColorChange();
+}

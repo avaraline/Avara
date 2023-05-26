@@ -355,6 +355,10 @@ bool CommandManager::TogglePresence(int slot, PresenceType togglePresence, std::
             playerToChange->Slot(), playerToChange->LoadingStatus(), newPresence, sizeof(FrameNumber), (Ptr)&noWinFrame);
     itsApp->AddMessageLine("Status of " + playerToChange->GetPlayerName() +
                    " changed to " + std::string(newPresence == kzAvailable ? "available" : stateName));
+
+    int newColor = (newPresence == kzAvailable) ? kNeutralTeam : kBlackTeam;
+    itsApp->GetNet()->SetTeamColor(slot-1, newColor);
+
     return true;
 }
 

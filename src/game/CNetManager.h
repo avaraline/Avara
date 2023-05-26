@@ -181,6 +181,7 @@ public:
 
     virtual int PlayerSlot(std::string playerName);
     virtual void ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap);
+    virtual void SetTeamColor(int slot, int color);
 
     //	Game loop methods:
     size_t SkipLostPackets(int16_t dist);
