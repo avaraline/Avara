@@ -523,7 +523,7 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
         } else {
             std::string passwordStr =  gApplication->String(kServerPassword);
             password[0] = passwordStr.length();
-            BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+            BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
             for (i = 0; i <= password[0]; i++) {
                 if (password[i] != thePacket->dataBuffer[i]) {
@@ -733,10 +733,11 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         #endif
 
                         if (p->dataLen) {
-                            if (p->dataLen > PACKETDATABUFFERSIZE) {
-                                SDL_Log("CUDPComm::ReadComplete BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
-                                        p->command, p->sender, p->dataLen);
-                                p->dataLen = PACKETDATABUFFERSIZE;
+                            if (p->dataLen > PACKETDATABUFFERSIZE || p->dataLen < 0) {
+                                SDL_Log("CUDPComm::ReadComplete BUFFER SIZE ERROR (ignoring packet)!! sn=%d-%hd cmd=%d, sndr=%d dataLen = %d\n",
+                                        int(thePacket->serialNumber), thePacket->sendCount, p->command, p->sender, p->dataLen);
+                                ReleasePacket((PacketInfo *)thePacket);
+                                break;
                             }
                             BlockMoveData(inData.c, p->dataBuffer, p->dataLen);
                             inData.c += p->dataLen;
@@ -1427,7 +1428,7 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();
-    BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+    BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
     ContactServer(addr);
     /*

@@ -24,7 +24,7 @@ CPlayerWindow::CPlayerWindow(CApplication *app) : CWindow(app, "Player") {
 
         Str255 the_name;
         the_name[0] = value.length();
-        BlockMoveData(value.c_str(), the_name + 1, value.length());
+        BlockMoveData(value.c_str(), the_name + 1, the_name[0]);
 
         ((CAvaraAppImpl *)gApplication)->GetNet()->NameChange(the_name);
         return true;

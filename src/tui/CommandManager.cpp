@@ -355,14 +355,20 @@ bool CommandManager::TogglePresence(int slot, PresenceType togglePresence, std::
             playerToChange->Slot(), playerToChange->LoadingStatus(), newPresence, sizeof(FrameNumber), (Ptr)&noWinFrame);
     itsApp->AddMessageLine("Status of " + playerToChange->GetPlayerName() +
                    " changed to " + std::string(newPresence == kzAvailable ? "available" : stateName));
+
+    int newColor = (newPresence == kzAvailable) ? kNeutralTeam : kBlackTeam;
+    itsApp->GetNet()->SetTeamColor(slot-1, newColor);
+
     return true;
 }
 
 bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
+    static int loadNumber = 0;
     std::vector<std::string> levelSets = LevelDirNameListing();
     std::string levelSubstr = join_with(vargs, " ");
     std::transform(levelSubstr.begin(), levelSubstr.end(),levelSubstr.begin(), ::toupper);
 
+    std::vector<std::pair<std::string, std::string>> bestLevels = {};
     for(std::string set : levelSets) {
         nlohmann::json ledis = LoadLevelListFromJSON(set);
         for (auto &ld : ledis.items()) {
@@ -372,14 +378,26 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
 
             // find levelSubstr anywhere within the level name
             if(levelUpper.find(levelSubstr) != std::string::npos) {
-                itsApp->levelWindow->SelectLevel(set, level);
-                itsApp->levelWindow->SendLoad();
-
-                return true;
+                // the shorter the match string, the better (e.g. match string "bwadi" picks "Bwadi" over "Bwadi Remix")
+                if (bestLevels.empty() || level.size() < bestLevels[0].second.size()) {
+                    bestLevels.clear();
+                    bestLevels.push_back({set, level});
+                    SDL_Log("/load leading candidate: %s/%s\n", set.c_str(), level.c_str());
+                } else if (!bestLevels.empty() && level.size() == bestLevels[0].second.size()) {
+                    bestLevels.push_back({set, level});
+                    SDL_Log("/load   equal candidate: %s/%s\n", set.c_str(), level.c_str());
+                } else {
+                    SDL_Log("/load         not using: %s/%s\n", set.c_str(), level.c_str());
+                }
             }
         }
     }
-    return false;
+    if (!bestLevels.empty()) {
+        int loadIndex = loadNumber++ % bestLevels.size();  // alternates between candidates
+        itsApp->levelWindow->SelectLevel(bestLevels[loadIndex].first, bestLevels[loadIndex].second);
+        itsApp->levelWindow->SendLoad();
+    }
+    return true;
 }
 
 bool CommandManager::LoadRandomLevel(VectorOfArgs matchArgs) {
