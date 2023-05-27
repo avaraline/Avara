@@ -782,10 +782,10 @@ void CAbstractPlayer::RenderDashboard() {
 void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y) {
     DashboardPosition(part, false, x, y, 0, 0, 0);
 }
-void CAbstractPlayer::DashboardPosition(CScaledBSP *part, boolean autoRot, float x, float y) {
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y) {
     DashboardPosition(part, autoRot, x, y, 0, 0, 0);
 }
-void CAbstractPlayer::DashboardPosition(CScaledBSP *part, boolean autoRot, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot) {
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot) {
     // Draw a part on the dashboard
     // Coordinates on the screen are roughly described as a percentage of the screen away from the bottom and the left
     // (-1.0, -1.0) is the bottom left of the screen
