@@ -146,7 +146,9 @@ void CWalkerActor::PlaceParts() {
     aPart->RotateOneX(legs[1].highAngle);
     TranslatePartX(aPart, LEGSPACE);
 
+    dElevation = oldElevation - (location[1] + headHeight);
     deltaY = location[1] + headHeight;
+    oldElevation = deltaY;
 
     for (i = 0; i < partCount; i++) {
         aPart = partList[i];

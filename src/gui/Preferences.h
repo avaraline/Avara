@@ -50,6 +50,10 @@ using json = nlohmann::json;
 #define kHUDCriticalColor "hudCriticalColor"
 #define kHUDAlpha "hudAlpha"
 #define kHUDPreset "hudPreset"
+#define kHUDArrowStyle "hudArrowStyle"
+#define kHUDArrowScale "hudArrowScale"
+#define kHUDArrowDistance "hudArrowDistance"
+#define kHUDShowMissileLock "hudShowMissileLock"
 #define kShowOldHUD "showOldHUD"
 #define kShowNewHUD "showNewHUD"
 
@@ -133,6 +137,10 @@ static json defaultPrefs = {
     {kHUDCriticalColor, "#fa1313"},
     {kHUDAlpha, 1.0},
     {kHUDPreset, 1},
+    {kHUDArrowScale, 1.0},
+    {kHUDArrowDistance, 8.0},
+    {kHUDArrowStyle, 2},
+    {kHUDShowMissileLock, true},
     {kShowOldHUD, true},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},

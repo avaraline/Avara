@@ -731,3 +731,29 @@ std::string FormatVectorFloat(Fixed *v, int size) {
     oss << "]";
     return oss.str();
 }
+
+void pidReset(PidMotion *p) {
+    p->previousError = 0.0f;
+    p->integralError = 0.0f;
+    p->fresh = true;
+}
+
+// Calculation for PID Motion to smoothly interpolate movement
+// from a current value to a target value
+// This algorithm came from http://ps3computing.blogspot.com/2013/03/proportional-integral-differential.html
+float pidUpdate(PidMotion *p, float dt, float current, float target) {
+    if (dt <= 0.0) return 0.0;
+    float error = current - target;
+    if (p->angular) {
+        // normalize angular error
+        error = ( error < -PI ) ? error + 2 * PI : error;
+        error = ( error > PI ) ? error - 2 * PI : error;
+    }
+    p->integralError = ( p->fresh ) ? error : p->integralError;
+    p->previousError = ( p->fresh ) ? error : p->previousError;
+    p->integralError = ( 1.0f - dt ) * p->integralError +  dt * error;
+    float derivativeError = ( error - p->previousError ) / dt;
+    p->previousError = error;
+    p->fresh = false;
+    return p->P * error + p->I * p->integralError + p->D * derivativeError;
+}
