@@ -83,6 +83,10 @@ int main(int argc, char *argv[]) {
             app->GetGame()->SetFrameTime(frameTime);
         } else if (arg == "-i" || arg == "--keys-from-stdin") {
             app->GetGame()->SetKeysFromStdin();
+        } else if (arg == "-if" || arg == "--keys-from-file") {
+            // redirect a playback file to stdin
+            freopen(argv[++i], "r", stdin);
+            app->GetGame()->SetKeysFromStdin();
         } else if (arg == "-o" || arg == "--keys-to-stdout") {
             app->GetGame()->SetKeysToStdout();
         } else if (arg == "-/" || arg == "--command") {
