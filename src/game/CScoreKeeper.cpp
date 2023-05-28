@@ -105,6 +105,10 @@ void CScoreKeeper::EndScript() {
     iface.command = ksiLevelLoaded;
     iface.levelName = itsGame->loadedLevel;
     iface.directory = itsGame->loadedSet;
+    // this method called on level-load regardless if local player is playing or not, clear out the names here
+    for (auto &name: playerNames) {
+        name.clear();
+    }
 }
 
 void CScoreKeeper::StartResume(Boolean didStart) {
@@ -288,6 +292,10 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
         offset = i * PLAYER_SCORE_FIELD_COUNT;
+        if (playerNames[i].empty()) {
+            // get the name as soon as available (and keep around in case they leave before game end)
+            playerNames[i] = itsGame->itsNet->playerTable[i]->GetPlayerName();
+        }
         netScores.player[i].points = ntohl(newResults[offset]);
         netScores.player[i].team = (char) ntohl(newResults[offset + 1]);
         netScores.player[i].exitRank = (char) ntohl(newResults[offset + 2]);
@@ -302,8 +310,8 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
         //copy serverWins to localScores
         localScores.player[i].serverWins = (int16_t) ntohl(newResults[offset + 5]);
 
-        DBG_Log("score", "player=%d, points=%6d, team=%d, exitRank=%d, lives=%d, kills=%d, wins=%d\n",
-                i,
+        DBG_Log("score", "player=%s, points=%6d, team=%d, exitRank=%d, lives=%d, kills=%d, wins=%d\n",
+                playerNames[i].c_str(),
                 netScores.player[i].points,
                 netScores.player[i].team,
                 netScores.player[i].exitRank,
@@ -326,15 +334,13 @@ void CScoreKeeper::ReceiveResults(int32_t *newResults) {
 }
 
 std::vector<FinishRecord> CScoreKeeper::DetermineFinishOrder() {
-    CNetManager *theNet = itsGame->itsNet.get();
     std::vector<FinishRecord> finishOrder = {};
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        // deduce whether player is playing (TODO: after this software version is on main, should be able to rely on lives>=0)
-        if (theNet->playerTable[i]->Presence() == kzAvailable && netScores.player[i].lives >= 0) {
-            auto playerName = theNet->playerTable[i]->GetPlayerName();
+        // deduce whether player is playing
+        if (netScores.player[i].lives >= 0) {
             finishOrder.push_back({
                 i,
-                playerName,
+                playerNames[i],
                 netScores.player[i].team,
                 netScores.player[i].lives,
                 netScores.player[i].points});

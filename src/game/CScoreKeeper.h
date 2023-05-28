@@ -49,6 +49,7 @@ public:
 
     AvaraScoreRecord localScores;
     AvaraScoreRecord netScores;
+    std::string playerNames[kMaxAvaraPlayers];    // maybe put this in PlayerScoreRecord?
     short exitCount;
 
     short resRefNum;
