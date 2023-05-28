@@ -249,12 +249,10 @@ void CRosterWindow::UpdateRoster() {
     }
     else if (tabWidget->activeTab() == 2) {
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *thisPlayer = theNet->playerTable[i];
-            const std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             AvaraScoreRecord theScores = theGame->scoreKeeper->netScores;
-            if(theName.size() > 0) {
+            scoreNames[i]->setValue(theGame->scoreKeeper->playerNames[i]);
+            if(theScores.player[i].lives >= 0) {
                 scoreTeams[i]->setValue(std::to_string(theNet->teamColors[i]));
-                scoreNames[i]->setValue(theName.c_str());
                 scoreExitRanks[i]->setValue(std::to_string(theScores.player[i].exitRank));
                 scoreScores[i]->setValue(std::to_string(theScores.player[i].points));
                 scoreKills[i]->setValue(std::to_string(theScores.player[i].kills));
@@ -262,7 +260,6 @@ void CRosterWindow::UpdateRoster() {
             }
             else {
                 scoreTeams[i]->setValue("");
-                scoreNames[i]->setValue("");
                 scoreExitRanks[i]->setValue("");
                 scoreScores[i]->setValue("");
                 scoreKills[i]->setValue("");
