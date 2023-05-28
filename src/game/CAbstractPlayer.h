@@ -27,6 +27,9 @@ class CAbstractPlayer;
 #define kTargetOff 205
 #define kTargetOk 206
 #define kLockLight 207
+#define kGroundDirArrow 190
+#define kGroundDirArrowSlow 191
+#define kGroundDirArrowFast 192
 #define kFilledBox 400
 #define kEmptyBox 720
 #define kGaugeBSP 402
@@ -119,7 +122,11 @@ public:
 
     //	Control module (and view) orientation:
     Fixed viewYaw = 0;
+    Fixed dYaw = 0;
     Fixed viewPitch = 0;
+    Fixed dPitch = 0;
+    Fixed oldElevation = 0;
+    Fixed dElevation = 0;
     Vector viewOffset = {0};
     Fixed lookDirection = 0;
 
@@ -181,7 +188,16 @@ public:
     RayHitRecord dashboardOrigin;
     Fixed dashboardSpinHeading;
     Fixed dashboardSpinSpeed;
+    float hudRestingX;
+    float hudRestingY;
+    float hudTargetX;
+    float hudTargetY;
+    PidMotion pMotionX;
+    PidMotion pMotionY;
     CScaledBSP *lockLight = 0;
+    CScaledBSP *groundDirArrow = 0;
+    CScaledBSP *groundDirArrowSlow = 0;
+    CScaledBSP *groundDirArrowFast = 0;
     CScaledBSP *shieldGauge = 0;
     CScaledBSP *shieldGaugeBackLight = 0;
     CScaledBSP *energyGauge = 0;
@@ -201,6 +217,8 @@ public:
     float layoutScale;
     Fixed hudAlpha;
     int gaugeBSP;
+    float arrowDistance;
+    float arrowScale;
     float boosterPosition[2];
     float grenadePosition[2];
     float missilePosition[2];
@@ -251,7 +269,10 @@ public:
     virtual CScaledBSP* DashboardPart(uint16_t id, Fixed scale);
     virtual void RenderDashboard();
     virtual void DashboardPosition(CScaledBSP *part, float x, float y);
-    virtual void DashboardPosition(CScaledBSP *part, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot);
+    virtual void DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y);
+    virtual void DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot);
+    virtual void DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle);
+    virtual void DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle, float height, Fixed x_rot, Fixed y_rot, Fixed z_rot);
     virtual void ResetDashboard();
     //
 
