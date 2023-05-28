@@ -224,12 +224,11 @@ void CFreeSolid::FrameAction() {
                         }
                     }
 
-                    SecondaryDamage(teamColor, -1);
-
-                    // if part blew up, we're done here
-                    if (!partList[0]) {
+                    if (SecondaryDamage(teamColor, -1)) {
+                        // just deallocated myself so return
                         return;
                     }
+
                     BuildPartProximityList(location,
                                            partList[0]->bigRadius + FDistanceOverEstimate(locOffset[0], locOffset[1], locOffset[2]),
                                            kSolidBit);

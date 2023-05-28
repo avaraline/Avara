@@ -175,7 +175,7 @@ public:
 
     virtual void RadiateDamage(BlastHitRecord *blastRecord);
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
-    virtual void SecondaryDamage(short scoreTeam, short scoreColor);
+    virtual bool SecondaryDamage(short scoreTeam, short scoreColor);
 
     virtual CSmartPart *DoCollisionTest(CSmartPart **hitList);
     virtual void BuildPartProximityList(Fixed *origin, Fixed range, MaskType filterMask);
