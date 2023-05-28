@@ -363,6 +363,13 @@ bool CommandManager::TogglePresence(int slot, PresenceType togglePresence, std::
 }
 
 bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
+    if (vargs.size() == 0) {
+        std::string cmd = "/load";
+        std::string usage = TextCommand::UsageForCommand(cmd);
+        itsApp->AddMessageLine(usage);
+        return false;
+    }
+
     static int loadNumber = 0;
     std::vector<std::string> levelSets = LevelDirNameListing();
     std::string levelSubstr = join_with(vargs, " ");

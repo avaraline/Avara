@@ -617,7 +617,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
     nvgFontSize(ctx, fontsz_m);
     nvgTextAlign(ctx, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
-    if(player->itsManager != NULL) {
+    if(player->itsManager != nullptr) {
         snprintf(scoreText, sizeof(scoreText), "%ld", itsGame->scores[player->itsManager->Slot()]);
         nvgText(ctx, g1X + 22.5, gY + full + 10.0, scoreText, NULL);
     }
