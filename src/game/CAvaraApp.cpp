@@ -44,7 +44,7 @@ std::mutex trackerLock;
 
 void TrackerPinger(CAvaraAppImpl *app) {
     while (true) {
-        if(app->Number(kTrackerRegister) == 1) {
+        if(app->Number(kTrackerRegister) == 1 && app->GetNet()->netStatus == kServerNet) {
             std::string payload = app->TrackerPayload();
             if (payload.size() > 0) {
                 // Probably not thread-safe.
