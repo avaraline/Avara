@@ -287,7 +287,8 @@ void CAvaraGame::AddActor(CAbstractActor *theActor) {
     actorList = theActor;
 
     for (i = 0; i < theActor->partCount; i++) {
-        itsWorld->AddPart(theActor->partList[i]);
+        // currently actors own unique_ptr's to each part... maybe we should make it shared_ptr so itsWorld can have copy?
+        itsWorld->AddPart(theActor->partList[i].get());
     }
 
     GetIdent(theActor);
@@ -313,7 +314,7 @@ void CAvaraGame::RemoveActor(CAbstractActor *theActor) {
                 anActor->nextActor = NULL;
 
                 for (i = 0; i < anActor->partCount; i++) {
-                    itsWorld->RemovePart(anActor->partList[i]);
+                    itsWorld->RemovePart(anActor->partList[i].get());
                 }
                 anActor = NULL;
             } else {

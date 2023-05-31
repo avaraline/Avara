@@ -9,4 +9,4 @@
 
 #include "CDirectObject.h"
 
-void CDirectObject::Dispose() { delete this; }
+void CDirectObject::Dispose() { }

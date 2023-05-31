@@ -87,7 +87,7 @@ short CGoal::GetBallSnapPoint(long theGroup,
         delta[1] = deltas[1];
         delta[2] = deltas[2];
 
-        *hostPart = partList[0];
+        *hostPart = partList[0].get();
         VectorMatrixProduct(1, (Vector *)delta, (Vector *)snapDest, &partList[0]->itsTransform);
 
         globDelta[0] = ballLocation[0] - snapDest[0];

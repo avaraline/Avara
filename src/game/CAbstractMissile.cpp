@@ -131,7 +131,7 @@ void CAbstractMissile::FireSlivers() {
         DoSound(GROUNDHITSOUNDID, hitRec.origin, 8 * energy, FIX1);
     }
 
-    itsDepot->FireSlivers(numSlivers, hitRec.origin, sliverDir, FIX3(200), FIX3(3000), spread, 15, 0, partList[0]);
+    itsDepot->FireSlivers(numSlivers, hitRec.origin, sliverDir, FIX3(200), FIX3(3000), spread, 15, 0, partList[0].get());
 }
 
 void CAbstractMissile::Launch(Matrix *startMatrix,

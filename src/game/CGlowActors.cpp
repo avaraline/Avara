@@ -47,7 +47,7 @@ void CGlowActors::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 }
 
 void CGlowActors::FrameAction() {
-    CSmartPart **thePart;
+    std::unique_ptr<CSmartPart> *thePart;
 
     CPlacedActors::FrameAction();
 

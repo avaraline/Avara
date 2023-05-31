@@ -108,7 +108,7 @@ CSmartPart *CSwitchActor::CollisionTest() {
     CSmartPart *thePart;
     CSmartPart *myPart;
 
-    myPart = partList[shownState];
+    myPart = partList[shownState].get();
 
     theActor = itsGame->actorList;
 

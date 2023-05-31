@@ -25,7 +25,6 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     Fixed centerX, centerZ;
     Vector dim;
     Fixed addAlt;
-    CSmartBox *box;
     short resId;
 
     maskBits |= kSolidBit + kDoorIgnoreBit;
@@ -82,7 +81,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
     resId = ReadLongVar(dim[1] == 0 ? iFloorTemplateResource : iWallTemplateResource);
 
     partCount = 1;
-    box = new CSmartBox;
+    auto box = std::make_unique<CSmartBox>();
     box->ISmartBox(resId, dim, GetPixelColor(), GetOtherPixelColor(), this, 0);
     box->Reset();
     TranslatePart(box, centerX, addAlt + dim[1], centerZ);
@@ -92,7 +91,7 @@ void CWallActor::MakeWallFromRect(Rect *theRect, Fixed height, short decimateWal
         box->usesPrivateYon = true;
     }
 
-    partList[0] = box;
+    partList[0] = std::move(box);
 
     if (partList[0]) {
         if (isOrigWall) {

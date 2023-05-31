@@ -17,14 +17,12 @@
 
 void CAbstractActor::LoadPart(short ind, short resId) {
     if (partScale == FIX1) {
-        partList[ind] = new CSmartPart;
+        partList[ind] = std::make_unique<CSmartPart>();
         partList[ind]->ISmartPart(resId, this, ind);
     } else {
-        CScaledBSP *part;
-
-        part = new CScaledBSP;
+        auto part = std::make_unique<CScaledBSP>();
         part->IScaledBSP(partScale, resId, this, ind);
-        partList[ind] = part;
+        partList[ind] = std::move(part);
     }
 
     if (partYon != 0 && partList[ind]) {
@@ -131,7 +129,7 @@ void CAbstractActor::LinkSphere(Fixed *origin, Fixed range) {
 }
 
 void CAbstractActor::LinkPartBoxes() {
-    CSmartPart **thePart;
+    std::unique_ptr<CSmartPart> *thePart;
     Vector minPoint;
     Vector maxPoint;
 
@@ -152,7 +150,7 @@ void CAbstractActor::LinkPartBoxes() {
 }
 
 void CAbstractActor::LinkPartSpheres() {
-    CSmartPart **thePart;
+    std::unique_ptr<CSmartPart> *thePart;
     Vector minPoint;
     Vector maxPoint;
 
@@ -173,7 +171,7 @@ void CAbstractActor::LinkPartSpheres() {
 }
 
 void CAbstractActor::BuildPartSpheresProximityList(MaskType filterMask) {
-    CSmartPart **thePart;
+    std::unique_ptr<CSmartPart> *thePart;
     Vector minPoint;
     Vector maxPoint;
 
@@ -279,6 +277,7 @@ void CAbstractActor::Dispose() {
 
     for (i = 0; i < partCount; i++) {
         partList[i]->Dispose();
+        partList[i] = nullptr; // also releases the memory pointed to by the unique_ptr
     }
 
     if (itsSoundLink) {
@@ -294,14 +293,15 @@ void CAbstractActor::Shatter(short firstSliverType,
     short *sLives,
     Fixed speedFactor) {
     short i;
-    CSmartPart **partInd, *thePart;
+    std::unique_ptr<CSmartPart> *partInd;
+    CSmartPart *thePart;
     long totalPolys;
     Vector noDirection = {0, FIX1, 0, 0};
 
     partInd = partList;
     totalPolys = 0;
 
-    while ((thePart = *partInd++)) {
+    while ((thePart = (*partInd++).get())) {
         if (!thePart->isTransparent)
             totalPolys += thePart->polyCount;
     }
@@ -319,7 +319,7 @@ void CAbstractActor::Shatter(short firstSliverType,
         while (partInd-- != partList) {
             Fixed blowSpeed;
 
-            thePart = *partInd;
+            thePart = (*partInd).get();
             blowSpeed = FMul(speedFactor, FRadArcTan2(FIX3(500), thePart->enclosureRadius) >> 1);
             // FSqrt(thePart->enclosureRadius));
 
@@ -358,7 +358,7 @@ void CAbstractActor::Blast() {
         Shatter(0, kSliverSizes, sliverCounts, sliverLives, FIX3(500));
 
         for (i = 0; i < partCount; i++) {
-            thePart = partList[i];
+            thePart = partList[i].get();
             if ((!thePart->isTransparent) && thePart->polyCount > maxCount) {
                 maxCount = thePart->polyCount;
                 maxPart = thePart;
@@ -472,7 +472,6 @@ void CAbstractActor::BuildPartProximityList(Fixed *origin, Fixed range, MaskType
     ActorLocator *head;
     ActorLocator **lists;
     CAbstractActor *anActor;
-    CSmartPart **thePart;
     ActorAttachment *parasites;
     long coordMask = ((1L << LOCATORTABLEBITS) - 1);
 
@@ -503,10 +502,11 @@ void CAbstractActor::BuildPartProximityList(Fixed *origin, Fixed range, MaskType
                 if (anActor->searchCount != searchCount) {
                     anActor->searchCount = searchCount;
                     if (anActor->maskBits & filterMask) {
+                        std::unique_ptr<CSmartPart> *thePart;
                         for (thePart = anActor->partList; *thePart; thePart++) {
                             if ((*thePart)->IsInRange(origin, range)) {
                                 (*thePart)->nextTemp = proximityList.p;
-                                proximityList.p = *thePart;
+                                proximityList.p = (*thePart).get();
                             }
                         }
                     }
@@ -614,7 +614,7 @@ CSmartPart *CAbstractActor::DoCollisionTest(CSmartPart **hitList) {
     /*	First, look for the cached part only.
      */
     for (i = 0; i < partCount; i++) {
-        myPart = partList[i];
+        myPart = partList[i].get();
         if (cachePart == myPart && myPart->isTransparent == false) {
             prevP = hitList;
             for (thePart = *hitList; thePart; thePart = *(prevP = (CSmartPart **)&thePart->nextTemp)) {
@@ -632,7 +632,7 @@ CSmartPart *CAbstractActor::DoCollisionTest(CSmartPart **hitList) {
     /*	Next, look for the other parts.
      */
     for (i = 0; i < partCount; i++) {
-        myPart = partList[i];
+        myPart = partList[i].get();
         if (cachePart != myPart && myPart->isTransparent == false) {
             prevP = hitList;
             for (thePart = *hitList; thePart; thePart = *(prevP = (CSmartPart **)&thePart->nextTemp)) {
@@ -678,7 +678,7 @@ void CAbstractActor::RadiateDamage(BlastHitRecord *blastRecord) {
 }
 
 Boolean CAbstractActor::GetActorCenter(Fixed *loc) {
-    CSmartPart **thePart;
+    std::unique_ptr<CSmartPart> *thePart;
     Vector minPoint;
     Vector maxPoint;
     Boolean gotLocation = false;
@@ -770,7 +770,8 @@ void CAbstractActor::RayTest(RayHitRecord *hitRec, MaskType testMask) {
     ActorLocator *head;
     ActorLocator **lists;
     CAbstractActor *anActor;
-    CSmartPart **thePartList;
+
+    std::unique_ptr<CSmartPart> *thePartList;
     ActorAttachment *parasites;
 
     dx = hitRec->direction[0];
@@ -946,13 +947,14 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 void CAbstractActor::GetBlastPoint(BlastHitRecord *theHit, RayHitRecord *rayHit) {
     Fixed theDistance;
     Fixed shortestDistance;
-    CSmartPart **pp, *thePart;
+    std::unique_ptr<CSmartPart> *pp;
+    CSmartPart *thePart;
 
     shortestDistance = FIX(128);
     rayHit->closestHit = NULL;
 
     pp = partList;
-    while ((thePart = *pp++)) {
+    while ((thePart = (*pp++).get())) {
         if (!thePart->isTransparent) {
             theDistance = FDistanceEstimate(theHit->blastPoint[0] - thePart->sphereGlobCenter[0],
                               theHit->blastPoint[1] - thePart->sphereGlobCenter[1],
@@ -1055,7 +1057,7 @@ void CAbstractActor::ImmediateMessage() {
 }
 
 void CAbstractActor::OffsetParts(Fixed *offset) {
-    CSmartPart **partL;
+    std::unique_ptr<CSmartPart> *partL;
     ActorAttachment *parasites;
 
     partL = partList;

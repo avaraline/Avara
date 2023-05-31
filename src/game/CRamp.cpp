@@ -56,7 +56,6 @@ CAbstractActor *CRamp::EndScript() {
         //Fixed dimX, dimZ;
         Fixed angle;
         Vector dims;
-        CSmartBox *box;
         short resId;
 
         maskBits |= kSolidBit + kDoorIgnoreBit;
@@ -81,7 +80,7 @@ CAbstractActor *CRamp::EndScript() {
         location[2] = FMulDivNZ(gLastBoxRect.bottom + gLastBoxRect.top, FIX(5), 144);
 
         partCount = 1;
-        box = new CSmartBox;
+        auto box = std::make_unique<CSmartBox>();
 
         if ((heading - 0x2000) & 0x4000) {
             SolveOrientation(dims[2], deltaY, dims[1], &dims[2], &angle);
@@ -118,7 +117,7 @@ CAbstractActor *CRamp::EndScript() {
             box->yon = partYon;
         }
 
-        partList[0] = box;
+        partList[0] = std::move(box);
         LinkPartBoxes();
 
         return this;

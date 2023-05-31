@@ -54,20 +54,17 @@ CAbstractActor *CForceField::EndScript() {
             TranslatePart(partList[0], location[0], location[1], location[2]);
             partList[0]->MoveDone();
         } else if (lastWallActor) {
-            CSmartPart *thePart;
-
-            thePart = lastWallActor->partList[0];
+            partList[0] = std::move(lastWallActor->partList[0]);
+            CSmartPart *thePart = partList[0].get();
             thePart->theOwner = this;
-
             partCount = 1;
-            partList[0] = thePart;
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
             VECTORCOPY(location, thePart->itsTransform[3]);
             itsGame->itsWorld->RemovePart(thePart);
 
             heading = 0;
-            lastWallActor->partList[0] = NULL;
+            lastWallActor->partList[0] = nullptr;
             lastWallActor->partCount = 0;
             lastWallActor->Dispose();
             lastWallActor = NULL;
@@ -128,7 +125,7 @@ void CForceField::FrameAction() {
 
             theActor = (CAbstractActor *)thePart->theOwner;
             if ((theActor->searchCount != searchCount) && (theActor->teamMask & watchTeams) &&
-                thePart->CollisionTest(partList[0])) {
+                thePart->CollisionTest(partList[0].get())) {
                 theActor->searchCount = searchCount;
                 theActor->Accelerate(force);
                 isWorking = true;

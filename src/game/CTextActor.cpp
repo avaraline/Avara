@@ -113,7 +113,7 @@ void CTextActor::FrameAction() {
                 newFlag = true;
             }
         } else {
-            CSmartPart **partP;
+            std::unique_ptr<CSmartPart> *partP;
 
             player = itsGame->GetLocalPlayer();
             proximityList.p = NULL;
@@ -121,7 +121,7 @@ void CTextActor::FrameAction() {
             for (partP = player->partList; *partP; partP++) {
                 if (!(*partP)->isTransparent) {
                     (*partP)->nextTemp = proximityList.p;
-                    proximityList.p = *partP;
+                    proximityList.p = (*partP).get();
                 }
             }
         }

@@ -39,7 +39,7 @@
 void CWalkerActor::LoadParts() {
     short i;
 
-    viewPortPart = partList[0];
+    viewPortPart = partList[0].get();
 
 #ifdef MARKERCUBE
     markerCube = new CBSPPart;
@@ -59,7 +59,7 @@ void CWalkerActor::LoadParts() {
         partList[i]->hither = FIX3(100);
     }
 
-    viewPortPart = partList[0];
+    viewPortPart = partList[0].get();
     proximityRadius = viewPortPart->enclosureRadius << 2;
 }
 
@@ -111,33 +111,33 @@ void CWalkerActor::PlaceParts() {
     CSmartPart *aPart;
     Fixed deltaY;
 
-    aPart = partList[0];
+    aPart = partList[0].get();
     aPart->Reset();
     InitialRotatePartZ(aPart, FMul(viewYaw, -30)); //	Divide by -6 and convert to "one" angles
     aPart->RotateX(viewPitch);
     aPart->RotateY(viewYaw);
     TranslatePartY(aPart, viewPortHeight);
 
-    aPart = partList[1];
+    aPart = partList[1].get();
     aPart->Reset();
     InitialRotatePartX(aPart, legs[0].highAngle);
     TranslatePartX(aPart, -LEGSPACE);
 
-    aPart = partList[2];
+    aPart = partList[2].get();
     aPart->Reset();
     InitialRotatePartX(aPart, legs[1].highAngle);
     PreFlipY(aPart);
 
     TranslatePartX(aPart, LEGSPACE);
 
-    aPart = partList[3];
+    aPart = partList[3].get();
     aPart->Reset();
     InitialRotatePartX(aPart, legs[0].lowAngle);
     TranslatePartY(aPart, -LEGHIGHLEN);
     aPart->RotateOneX(legs[0].highAngle);
     TranslatePartX(aPart, -LEGSPACE);
 
-    aPart = partList[4];
+    aPart = partList[4].get();
     aPart->Reset();
     InitialRotatePartX(aPart, legs[1].lowAngle);
     PreFlipY(aPart);
@@ -151,7 +151,7 @@ void CWalkerActor::PlaceParts() {
     oldElevation = deltaY;
 
     for (i = 0; i < partCount; i++) {
-        aPart = partList[i];
+        aPart = partList[i].get();
 
         aPart->RotateOneY(heading);
         TranslatePart(aPart, location[0], deltaY, location[2]);
@@ -778,7 +778,7 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         viewPortPart->Dispose();
         LoadPart(0, hullRes);
 
-        viewPortPart = partList[0];
+        viewPortPart = partList[0].get();
         viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
         if (!itsGame->itsApp->Get(kIgnoreCustomColorsTag)) {
             viewPortPart->ReplaceColor(

@@ -115,7 +115,7 @@ void CDoorActor::PlaceParts() {
     Fixed stat = doorStatus;
     CSmartPart *theDoor;
 
-    theDoor = partList[0];
+    theDoor = partList[0].get();
     theDoor->Reset();
 
     if (stat) {

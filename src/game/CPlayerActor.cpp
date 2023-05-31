@@ -26,7 +26,7 @@ void CPlayerActor::LoadParts() {
     partList[1]->usesPrivateHither = true;
     partList[1]->hither = FIX3(100);
 
-    viewPortPart = partList[1];
+    viewPortPart = partList[1].get();
 
     proximityRadius = 2 * partList[0]->enclosureRadius;
 }

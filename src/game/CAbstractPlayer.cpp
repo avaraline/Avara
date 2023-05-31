@@ -202,14 +202,14 @@ void CAbstractPlayer::ReplacePartColors() {
     teamMask = 1 << teamColor;
     longTeamColor = GetTeamColorOr(ColorManager::getDefaultTeamColor());
 
-    for (CSmartPart **thePart = partList; *thePart; thePart++) {
+    for (std::unique_ptr<CSmartPart> *thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
     }
 }
 
 void CAbstractPlayer::SetSpecialColor(ARGBColor specialColor) {
     longTeamColor = specialColor;
-    for (CSmartPart **thePart = partList; *thePart; thePart++) {
+    for (std::unique_ptr<CSmartPart> *thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), specialColor);
     }
 
@@ -1646,7 +1646,7 @@ void CAbstractPlayer::PostMortemBlast(short scoreTeam, short scoreColor, Boolean
 }
 
 void CAbstractPlayer::GoLimbo(FrameNumber limboDelay) {
-    CSmartPart **thePart;
+    std::unique_ptr<CSmartPart> *thePart;
 
     if (boostControlLink) {
         gHub->ReleaseLinkAndKillSounds(boostControlLink);
@@ -1724,7 +1724,7 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
     heading = newSpot->heading;
 
     // make player visible before the collision test
-    for (CSmartPart **thePart = partList; *thePart; thePart++) {
+    for (std::unique_ptr<CSmartPart> *thePart = partList; *thePart; thePart++) {
         (*thePart)->isTransparent = false;
     }
     PlayerWasMoved();
@@ -1756,7 +1756,7 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
 
     } else {
         // make player invisible again since it failed the collision test
-        for (CSmartPart **thePart = partList; *thePart; thePart++) {
+        for (std::unique_ptr<CSmartPart> *thePart = partList; *thePart; thePart++) {
             (*thePart)->isTransparent = true;
         }
         return false;

@@ -16,6 +16,7 @@
 #include "LevelLoader.h"
 #include "RayHit.h"
 #include "Resource.h"
+#include "CSmartPart.h"  // needed by automatic ~unique_ptr<CSmartPart> destructor
 
 // define ENABLE_FPS_DEBUG in files where you want FPS_DEBUG output, BEFORE including this header
 #ifdef ENABLE_FPS_DEBUG
@@ -89,7 +90,7 @@ public:
     unsigned long searchCount;
     ActorLocator locLinks[4]; //	Location link table.
 
-    CSmartPart *partList[MAXPARTS + 1];
+    std::unique_ptr<CSmartPart> partList[MAXPARTS + 1];
     CSmartPart *cachePart; //	Collision detection cache part.
     Fixed partScale;
     Fixed partYon;

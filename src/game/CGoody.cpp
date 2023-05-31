@@ -150,7 +150,7 @@ void CGoody::FrameAction() {
 
         searchCount = ++itsGame->searchCount;
         for (thePart = proximityList.p; thePart; thePart = (CSmartPart *)thePart->nextTemp) {
-            if (thePart->CollisionTest(partList[0])) {
+            if (thePart->CollisionTest(partList[0].get())) {
                 CAbstractPlayer *theActor;
                 GoodyRecord gr;
 

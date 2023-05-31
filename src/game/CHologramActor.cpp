@@ -34,7 +34,7 @@ CAbstractActor *CHologramActor::EndScript() {
         theWorld = gCurrentGame->itsWorld;
 
         LoadPartWithColors(0, resId);
-        thePart = (CBSPPart *)partList[0];
+        thePart = (CBSPPart *)partList[0].get();
         if (ReadLongVar(iIsAmbient) > 0)
             thePart->userFlags |= CBSPUserFlags::kIsAmbient;
         thePart->Reset();
@@ -42,7 +42,7 @@ CAbstractActor *CHologramActor::EndScript() {
         thePart->RotateOneY(heading);
         TranslatePart(thePart, location[0], location[1], location[2]);
         thePart->MoveDone();
-        partList[0] = NULL;
+//        partList[0] = nullptr;  // why was this being removed from partList?
 
         theWorld->AddPart(thePart);
     }

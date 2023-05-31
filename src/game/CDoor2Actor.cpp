@@ -46,7 +46,7 @@ void CDoor2Actor::PlaceParts() {
         deltaTwist[2] = midTwists[2];
     }
 
-    theDoor = partList[0];
+    theDoor = partList[0].get();
     theDoor->Reset();
 
     r = endTwist[0] + FMul(deltaTwist[0], stat);

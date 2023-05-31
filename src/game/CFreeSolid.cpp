@@ -63,20 +63,19 @@ CAbstractActor *CFreeSolid::EndScript() {
             LoadPartWithColors(0, shapeId); //	Create our shape
         } else if (lastWallActor) //	Use the last wall brick as our shape
         {
-            CSmartPart *thePart;
-
-            thePart = lastWallActor->partList[0];
+            // claim ownership of the last made wall
+            partList[0] = std::move(lastWallActor->partList[0]);
+            CSmartPart *thePart = partList[0].get();
             thePart->theOwner = this;
 
             partCount = 1;
-            partList[0] = thePart;
 
             //TranslatePartY(thePart, ReadLongVar(iHeight));
             VECTORCOPY(location, thePart->itsTransform[3]);
             itsGame->itsWorld->RemovePart(thePart);
 
             heading = 0;
-            lastWallActor->partList[0] = NULL;
+            lastWallActor->partList[0] = nullptr;
             lastWallActor->partCount = 0;
             lastWallActor->Dispose(); //	Destroy wall actor (now without shape).
             lastWallActor = NULL;

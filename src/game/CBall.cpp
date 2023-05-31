@@ -214,7 +214,7 @@ void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
         ? GetTeamColorOr(origLongColor)
         : origLongColor;
 
-    for (CSmartPart **thePart = partList; *thePart; thePart++) {
+    for (std::unique_ptr<CSmartPart> *thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
     }
 }
@@ -222,7 +222,7 @@ void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
 void CBall::PlaceParts() {
     CSmartPart *theBall;
 
-    theBall = partList[0];
+    theBall = partList[0].get();
     theBall->Reset();
     if (hostPart) {
         TranslatePart(theBall, localSnap[0], localSnap[1], localSnap[2]);
@@ -512,7 +512,7 @@ long CBall::ReceiveSignal(long theSignal, void *miscData) {
             break;
 
         case kBallReleaseSignal: {
-            CSmartPart *theBall = partList[0];
+            CSmartPart *theBall = partList[0].get();
 
             looseFrame = itsGame->FramesFromNow(32);
             oldHost = hostIdent;

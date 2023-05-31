@@ -17,19 +17,16 @@ extern CWallActor *lastWallActor;
 
 void CWallDoor::LoadPart(short ind, short resId) {
     if (lastWallActor) {
-        CSmartPart *thePart;
-
-        thePart = lastWallActor->partList[0];
+        partList[ind] = std::move(lastWallActor->partList[0]);
+        CSmartPart *thePart = partList[ind].get();
         thePart->theOwner = this;
-
-        partList[ind] = thePart;
 
         //TranslatePartY(thePart, ReadLongVar(iHeight));
         VECTORCOPY(location, thePart->itsTransform[3]);
         itsGame->itsWorld->RemovePart(thePart);
 
         heading = 0;
-        lastWallActor->partList[0] = NULL;
+        lastWallActor->partList[0] = nullptr;
         lastWallActor->partCount = 0;
         lastWallActor->Dispose();
         lastWallActor = NULL;

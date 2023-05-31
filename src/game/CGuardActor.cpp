@@ -101,7 +101,7 @@ CSmartPart *CGuardActor::FindClosestTarget() {
 
     while (theActor) {
         if (theActor->teamMask & watchTeams) {
-            thePart = theActor->partList[0];
+            thePart = theActor->partList[0].get();
             if (thePart) {
                 current = FDistanceEstimate(location[0] - thePart->itsTransform[3][0],
                     location[1] - thePart->itsTransform[3][1],
