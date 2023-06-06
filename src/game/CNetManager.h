@@ -73,7 +73,7 @@ public:
     // CRosterWindow	*theRoster;
 
     short playerCount;
-    CPlayerManager *playerTable[kMaxAvaraPlayers];
+    std::shared_ptr<CPlayerManager> playerTable[kMaxAvaraPlayers];
 
     char teamColors[kMaxAvaraPlayers];
     int8_t slotToPosition[kMaxAvaraPlayers];
@@ -123,7 +123,7 @@ public:
 
     ~CNetManager() { Dispose(); };
     virtual void INetManager(CAvaraGame *theGame);
-    virtual CPlayerManager* CreatePlayerManager(short);
+    virtual std::shared_ptr<CPlayerManager> CreatePlayerManager(short);
     virtual void LevelReset();
     virtual void Dispose();
     virtual Boolean ConfirmNetChange();

@@ -335,7 +335,7 @@ bool CommandManager::TogglePresence(int slot, PresenceType togglePresence, std::
         }
     }
 
-    CPlayerManager* playerToChange = itsApp->GetNet()->playerTable[slot-1];
+    CPlayerManager* playerToChange = itsApp->GetNet()->playerTable[slot-1].get();
     if(playerToChange->LoadingStatus() == kLActive || playerToChange->LoadingStatus() == kLPaused) {
         itsApp->AddMessageLine(
             "State can not be changed on players in a game.",
@@ -517,7 +517,7 @@ bool CommandManager::DisplayRatings(VectorOfArgs vargs) {
     if (vargs.size() == 0) {
         // there must be an easier way to get the player names...
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *mgr = itsApp->GetNet()->playerTable[i];
+            CPlayerManager *mgr = itsApp->GetNet()->playerTable[i].get();
             auto name = mgr->GetPlayerName();
             if (!name.empty()) {
                 vargs.push_back(name);

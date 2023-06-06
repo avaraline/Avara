@@ -195,7 +195,7 @@ void CRosterWindow::UpdateRoster() {
     if (tabWidget->activeTab() == 0) {
         long maxRtt = 0;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i];
+            CPlayerManager *thisPlayer = ((CAvaraAppImpl *)gApplication)->GetNet()->playerTable[i].get();
 
             std::string theName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             if (i != theNet->itsCommManager->myId && theName.length() > 0) {

@@ -109,7 +109,7 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, C
         int16_t previousScore = -32768;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
             int playerTableIndex = sortedPlayers[i].second;
-            CPlayerManager *thisPlayer = net->playerTable[playerTableIndex];
+            CPlayerManager *thisPlayer = net->playerTable[playerTableIndex].get();
             const std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
             std::string ping = "--";
             longTeamColor = *ColorManager::getTeamColor(net->teamColors[playerTableIndex] + 1);
@@ -305,7 +305,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     float teamColorRGB[3];
     float colorBoxAlpha = 1.0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        CPlayerManager *thisPlayer = net->playerTable[i];
+        CPlayerManager *thisPlayer = net->playerTable[i].get();
         std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
         if (playerName.length() < 1) continue;
 

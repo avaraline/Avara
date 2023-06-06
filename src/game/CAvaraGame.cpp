@@ -270,7 +270,7 @@ CAbstractPlayer *CAvaraGame::GetSpectatePlayer() {
 
 CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        CPlayerManager *mgr = itsNet->playerTable[i];
+        CPlayerManager *mgr = itsNet->playerTable[i].get();
         if (mgr && mgr->IsLocalPlayer()) {
             return mgr->GetPlayer();
         }
@@ -683,7 +683,7 @@ void CAvaraGame::StartIfReady() {
     if (itsNet->itsCommManager->myId == 0) {
         bool allReady = true;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *mgr = itsNet->playerTable[i];
+            CPlayerManager *mgr = itsNet->playerTable[i].get();
             if (mgr && mgr->LoadingStatus() == kLLoaded && mgr->Presence() == kzAvailable) {
                 allReady = false;
                 break;
@@ -1021,9 +1021,9 @@ void CAvaraGame::SpectatePrevious() {
 CPlayerManager *CAvaraGame::FindPlayerManager(CAbstractPlayer *thePlayer) {
     for (int i = 0; i < kMaxAvaraPlayers; i++)
         if(itsNet->playerTable[i] != NULL && itsNet->playerTable[i]->GetPlayer() == thePlayer)
-            return itsNet->playerTable[i];
+            return itsNet->playerTable[i].get();
 
-    return NULL;
+    return nullptr;
 }
 
 void CAvaraGame::StopGame() {
@@ -1056,10 +1056,10 @@ void CAvaraGame::Render(NVGcontext *ctx) {
 }
 
 CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
-    CPlayerManager *theManager = NULL;
+    CPlayerManager *theManager = nullptr;
 
     if (itsNet->playerCount < kMaxAvaraPlayers) {
-        theManager = itsNet->playerTable[itsNet->playerCount];
+        theManager = itsNet->playerTable[itsNet->playerCount].get();
         theManager->SetPlayer(thePlayer);
         itsNet->playerCount++;
     }
