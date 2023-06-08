@@ -142,7 +142,7 @@ void CScoreKeeper::PlayerIntros() {
     CPlayerManager *thePlayer;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        thePlayer = theNet->playerTable[i];
+        thePlayer = theNet->playerTable[i].get();
         if (thePlayer->GetPlayer()) {
             localScores.player[i].lives = thePlayer->GetPlayer()->lives;
             localScores.player[i].team = thePlayer->GetPlayer()->teamColor;
@@ -169,7 +169,7 @@ void CScoreKeeper::NetResultsUpdate() {
     CPlayerManager *thePlayer;
 
     for (i = 0; i < kMaxAvaraPlayers; i++) {
-        thePlayer = theNet->playerTable[i];
+        thePlayer = theNet->playerTable[i].get();
         offset = i * PLAYER_SCORE_FIELD_COUNT;
         if (thePlayer->GetPlayer()) {
             if (thePlayer->Presence() == kzSpectating) {
@@ -268,7 +268,7 @@ void CScoreKeeper::ResetScores() {
         localScores.player[i].exitRank = 0;
         localScores.player[i].kills = 0;
 
-        thePlayer = itsGame->itsNet->playerTable[i];
+        thePlayer = itsGame->itsNet->playerTable[i].get();
         if (thePlayer->GetPlayer() == NULL) {
             localScores.player[i].serverWins = 0;
         }

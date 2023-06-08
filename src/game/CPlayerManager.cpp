@@ -149,7 +149,7 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
 }
 
 Boolean CPlayerManagerImpl::TestKeyPressed(short funcCode) {
-    CPlayerManagerImpl* localManager = ((CPlayerManagerImpl*)itsGame->GetLocalPlayer()->itsManager);
+    CPlayerManagerImpl* localManager = ((CPlayerManagerImpl*)itsGame->GetLocalPlayer()->itsManager.get());
     return TESTFUNC(funcCode, localManager->keysDown);
 }
 
@@ -1013,7 +1013,7 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         if (actorList->teamColor == myTeamColor) { //	Good enough for me.
 
             itsPlayer = actorList;
-            itsPlayer->itsManager = this;
+            itsPlayer->itsManager = shared_from_this();
             itsPlayer->didIncarnateMasked = true;
             itsPlayer->PlayerWasMoved();
             itsPlayer->BuildPartProximityList(itsPlayer->location, itsPlayer->proximityRadius, kSolidBit);
@@ -1039,7 +1039,7 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->EndScript();
         itsPlayer->isInLimbo = true;
         itsPlayer->limboCount = 0;
-        itsPlayer->itsManager = this;
+        itsPlayer->itsManager = shared_from_this();
 
         itsPlayer->teamMask = myTeamMask;
         itsPlayer->Reincarnate();
@@ -1065,7 +1065,7 @@ Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
         itsPlayer->EndScript();
         itsPlayer->isInLimbo = true;
         itsPlayer->limboCount = 0;
-        itsPlayer->itsManager = this;
+        itsPlayer->itsManager = shared_from_this();
 
         itsPlayer->teamMask = 1 << i;  // set in case Incarnators discriminate on color
         itsPlayer->Reincarnate();
@@ -1091,7 +1091,7 @@ CAbstractPlayer *CPlayerManagerImpl::TakeAnyActor(CAbstractPlayer *actorList) {
     playerColor = actorList->teamColor;
 
     itsPlayer = actorList;
-    itsPlayer->itsManager = this;
+    itsPlayer->itsManager = shared_from_this();
     itsPlayer->AddToGame();
 
     return nextPlayer;

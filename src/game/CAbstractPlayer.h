@@ -58,7 +58,7 @@ enum HUDPreset {
 
 class CAbstractPlayer : public CRealMovers {
 public:
-    CPlayerManager *itsManager = 0;
+    std::shared_ptr<CPlayerManager> itsManager;
     CAbstractPlayer *nextPlayer = 0;
     PlayerConfigRecord defaultConfig {};
 

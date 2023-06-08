@@ -143,7 +143,7 @@ public:
     virtual bool GetShowScoreboard() = 0;
 };
 
-class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
+class CPlayerManagerImpl : public CDirectObject, public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
 private:
 
     CAbstractPlayer *itsPlayer;
