@@ -1,15 +1,15 @@
 
 # Avara
 
-![avara](https://vastan.net/dump/avara2.gif)
+![avara](https://lychee.vastan.net/uploads/original/66/8e/07b5c97bd403a62523679d46c334.gif)
 
 [Avara Discord](https://discord.gg/yw5qnBtJd5) | IRC: avaraline.net:6667 #avaraline
 
 A port of the [1996 game by Juri Munkki](https://en.wikipedia.org/wiki/Avara), published by Ambrosia Software, [released under MIT license](https://github.com/jmunkki/Avara).
 
-Avara is a cult-classic three-dimensional networked action FPS where the player controls a remote-controlled bipedal tank. 
+Avara is a cult-classic three-dimensional networked action FPS with remote-controlled bipedal tanks. 
 
-The game was originally developed in the early 1990s for Apple Macintosh. This port uses SDL2 and OpenGL to replace legacy code, and is intended to run on Windows, macOS, and Linux.
+The game was originally developed in the early 1990s for Apple Macintosh. This port uses SDL2 and OpenGL to replace legacy system APIs, and is intended to run *at 60fps* on Windows, macOS, and Linux.
 
 #### [💾 Download the alpha version!](https://github.com/avaraline/Avara/releases/tag/0.7.0-nightly.20201230)
 
