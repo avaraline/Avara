@@ -724,8 +724,9 @@ void CAbstractActor::PostMortemBlast(short scoreTeam, short scoreId, Boolean doD
         Dispose();
 }
 
-void CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
+bool CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
     CAbstractActor *blastToo;
+    bool imDead = false;
 
 #if DEBUG_AVARA
     proximityList.p = (CSmartPart *)-1;
@@ -736,8 +737,12 @@ void CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
         if (blastToo != this) {
             gCurrentGame->scoreReason = ksiSecondaryDamage;
         }
+        if (blastToo == this) {
+            imDead = true;
+        }
         blastToo->PostMortemBlast(scoreTeam, scoreColor, true);
     }
+    return imDead;
 }
 
 // perhaps we should rename this RayTestPlusGround because it does a RayTest on all actors and on the ground...

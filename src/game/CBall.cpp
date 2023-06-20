@@ -120,8 +120,8 @@ void CBall::BeginScript() {
 
 CAbstractActor *CBall::EndScript() {
     if (CRealShooters::EndScript()) {
-        customGravity = ReadFixedVar(iCustomGravity);
-        acceleration = ReadFixedVar(iAccelerate);
+        classicGravity = ReadFixedVar(iCustomGravity);
+        classicAcceleration = ReadFixedVar(iAccelerate);
 
         ejectPitch = ReadFixedVar(iEjectPitch);
         ejectPower = ReadFixedVar(iEjectPower);
@@ -205,12 +205,18 @@ void CBall::Dispose() {
     CRealShooters::Dispose();
 }
 
+void CBall::AdaptableSettings() {
+    FpsCoefficients(classicAcceleration, classicGravity, &acceleration, &customGravity);
+}
+
 void CBall::ChangeOwnership(short ownerId, short ownerTeamColor) {
     teamColor = ownerTeamColor;
     teamMask = 1 << teamColor;
     ownerScoringId = ownerId;
 
-    ARGBColor longTeamColor = GetTeamColorOr(origLongColor);
+    ARGBColor longTeamColor = (teamColor != 0)
+        ? GetTeamColorOr(origLongColor)
+        : origLongColor;
 
     for (CSmartPart **thePart = partList; *thePart; thePart++) {
         (*thePart)->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
@@ -420,27 +426,34 @@ void CBall::FrameAction() {
         speed[1] = FMul(speed[1], acceleration);
         speed[2] = FMul(speed[2], acceleration);
 
-        if (speed[1] < 0 && speed[1] + location[1] < -partList[0]->minBounds.y) {
-            speed[1] = -partList[0]->minBounds.y - location[1];
+        // Check for ground collision (not done by regular collision checks later)
+        Fixed craterSpeed = ClassicCoefficient2(-partList[0]->minBounds.y - location[1]);
+        if (speed[1] < craterSpeed) {
+            speed[1] = craterSpeed;
         }
 
         if (speed[0] > MINSPEED || speed[0] < -MINSPEED || speed[1] > MINSPEED || speed[1] < -MINSPEED ||
             speed[2] > MINSPEED || speed[2] < -MINSPEED) {
             VECTORCOPY(oldLocation, location);
-            location[0] += speed[0];
-            location[1] += speed[1];
-            location[2] += speed[2];
-            OffsetParts(speed);
+            Vector locOffset;
+            locOffset[0] = FpsCoefficient2(speed[0]);
+            locOffset[1] = FpsCoefficient2(speed[1]);
+            locOffset[2] = FpsCoefficient2(speed[2]);
+            location[0] += locOffset[0];
+            location[1] += locOffset[1];
+            location[2] += locOffset[2];
+            OffsetParts(locOffset);
+
             BuildPartProximityList(
-                location, partList[0]->bigRadius + FDistanceOverEstimate(speed[0], speed[1], speed[2]), kSolidBit);
+                location, partList[0]->bigRadius + FDistanceOverEstimate(locOffset[0], locOffset[1], locOffset[2]), kSolidBit);
 
             hitPart = DoCollisionTest(&proximityList.p);
             if (hitPart) {
                 Vector negSpeed;
 
-                negSpeed[0] = -speed[0];
-                negSpeed[1] = -speed[1];
-                negSpeed[2] = -speed[2];
+                negSpeed[0] = FpsCoefficient2(-speed[0]);
+                negSpeed[1] = FpsCoefficient2(-speed[1]);
+                negSpeed[2] = FpsCoefficient2(-speed[2]);
                 VECTORCOPY(location, oldLocation);
                 OffsetParts(negSpeed);
                 FindBestMovement(hitPart);

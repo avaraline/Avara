@@ -144,3 +144,16 @@ void InverseTransform(Matrix *trans, Matrix *inv);
 Fixed DistanceEstimate(Fixed x1, Fixed y1, Fixed x2, Fixed y2);
 std::string FormatVector(Fixed *v, int size);
 std::string FormatVectorFloat(Fixed *v, int size);
+
+typedef struct {
+    float P;
+    float I;
+    float D;
+    float previousError; // Last error
+    float integralError; // Historic error
+    bool  fresh; // If set, we have no 'last error' yet.
+    bool  angular; // Angular PIDs have errors wrap around at -pi and +pi.
+} PidMotion;
+
+void pidReset(PidMotion *p);
+float pidUpdate(PidMotion *p, float dt, float current, float target);

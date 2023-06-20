@@ -34,6 +34,7 @@
 #include "httplib.h"
 #include <chrono>
 #include <json.hpp>
+#include "Tags.h"
 #include "Debug.h"
 
 // included while we fake things out
@@ -43,7 +44,7 @@ std::mutex trackerLock;
 
 void TrackerPinger(CAvaraAppImpl *app) {
     while (true) {
-        if(app->Number(kTrackerRegister) == 1) {
+        if(app->Number(kTrackerRegister) == 1 && app->GetNet()->netStatus == kServerNet) {
             std::string payload = app->TrackerPayload();
             if (payload.size() > 0) {
                 // Probably not thread-safe.
@@ -166,7 +167,7 @@ bool CAvaraAppImpl::DoCommand(int theCommand) {
     std::string name = String(kPlayerNameTag);
     Str255 userName;
     userName[0] = name.length();
-    BlockMoveData(name.c_str(), userName + 1, name.length());
+    BlockMoveData(name.c_str(), userName + 1, userName[0]);
     // SDL_Log("DoCommand %d\n", theCommand);
     switch (theCommand) {
         case kReportNameCmd:
@@ -223,34 +224,45 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
 
     OSErr result = fnfErr;
     json setManifest = GetManifestJSON(set);
-    if(setManifest == -1) {
-        SDL_Log("File read error");
-        return result;
-    }
-    if(setManifest.find("LEDI") == setManifest.end()){
-        SDL_Log("LEDI key not found in set.json for %s", set.c_str());
-        return result;
-    } 
+    if (setManifest == -1) return result;
+    if (setManifest.find("LEDI") == setManifest.end()) return result;
 
     json ledi = NULL;
     for (auto &ld : setManifest["LEDI"].items()) {
         if (ld.value()["Alf"] == levelTag)
             ledi = ld.value();
     }
-    if(ledi == NULL) {
-        SDL_Log("LEDI for %s in %s not found.", levelTag.c_str(), set.c_str());
-        return result;
+    if (ledi == NULL) return result;
+
+    if (ledi.contains("Aftershock") && ledi["Aftershock"] == true) {
+        UseBaseFolder("rsrc/aftershock");
+    } else {
+        UseBaseFolder("rsrc");
     }
+
+    LoadLevelOggFiles(set);
 
     if(LoadALF(GetALFPath(levelTag))) result = noErr;
 
     if (result == noErr) {
+        //playerWindow->RepopulateHullOptions();
         itsGame->loadedLevel = ledi["Name"];
-        itsGame->loadedTag  = levelTag;
-        std::string msgPrefix = "Loaded";
-        if(sendingPlayer != NULL)
-            msgPrefix = sendingPlayer->GetPlayerName() + " loaded";
-        AddMessageLine(msgPrefix + " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".");
+        itsGame->loadedFilename  = levelTag;
+        itsGame->loadedTags = Tags::GetTagsForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
+        std::string msgStr = "Loaded";
+        if (sendingPlayer != NULL) {
+            msgStr = sendingPlayer->GetPlayerName() + " loaded";
+        }
+        msgStr += " \"" + itsGame->loadedLevel + "\" from \"" + set + "\".";
+        if (!itsGame->loadedTags.empty()) {
+            msgStr += " (tags:";
+            for (auto tag: itsGame->loadedTags) {
+                msgStr += " " + tag;
+            }
+            msgStr += ")";
+        }
+        AddMessageLine(msgStr);
+
         //levelWindow->SelectLevel(set, itsGame->loadedLevel);
 
         itsGame->itsWorld->OverheadPoint(overhead, extent);

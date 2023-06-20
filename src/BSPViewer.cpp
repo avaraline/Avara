@@ -16,6 +16,7 @@
 #include "CWorldShader.h"
 #include "ARGBColor.h"
 #include "csscolorparser.hpp"
+#include "Resource.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
@@ -119,7 +120,6 @@ public:
         nvgTextBox(nvg_context, 10, 30, 500, info.str().c_str(), NULL);
         nvgEndFrame(nvg_context);
     }
-
     bool newPart(int id) {
             if (itsWorld->GetPartCount() > 0) {
                 itsWorld->RemovePart(itsPart);
@@ -210,7 +210,7 @@ public:
                     case SDLK_r:
                         do {
                             current_id++;
-                            if (current_id > 1500) {
+                            if (current_id > INT32_MAX) {
                                 current_id = 1;
                             }
                         } while (newPart(current_id) != true);
@@ -219,7 +219,7 @@ public:
                         do{
                             current_id--;
                             if (current_id < 1) {
-                                current_id = 1500;
+                                current_id = INT32_MAX;
                             }
                         } while(newPart(current_id) != true);
                         return true;
@@ -240,6 +240,7 @@ public:
                 }
                 break;
         }
+        
         if (update) {
             if (prevLocation[0] != location[0] ||
                 prevLocation[1] != location[1] ||
@@ -270,14 +271,19 @@ public:
         }
         SDL_Log("Writing %s", fn);
         return stbi_write_png(fn, w, h, comp, pic.data(), w * comp);
+
     }
 
     void drawContents() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         AvaraGLViewport(fb_size_x, fb_size_y);
         itsView->SetViewRect(fb_size_x, fb_size_y, fb_size_x / 2, fb_size_y / 2);
+        // Maybe put this at the CApplication level?
+        glEnable(GL_DEPTH_TEST);
+        glDepthFunc(GL_LEQUAL);
+        glBlendFunc(GL_ONE, GL_ZERO);
         itsView->viewPixelRatio = FIX(4.0/3.0);
-            itsView->CalculateViewPyramidCorners();
+        itsView->CalculateViewPyramidCorners();
         itsView->PointCamera();
 
         itsPart->Reset();
@@ -291,11 +297,14 @@ public:
         worldShader->ShadeWorld(itsView);
 
         itsWorld->Render(itsView);
+
+        helpText();
     }
 
 };
 
 int main(int argc, char *argv[]) {
+
     // Init Avara stuff.
     InitMatrix();
 
@@ -388,14 +397,14 @@ int main(int argc, char *argv[]) {
                     ss << hull_names[i] << "-" << ColorManager::getTeamColorName(j).value() << ".png";
                     error += app->capture(ss.str().c_str());
                 }
-                app->marker1 = ColorManager::getSpecialBlackColor();
+                app->marker1 = ColorManager::getTeamColor(7).value();
                 app->newPart(hulls[i]);
                 app->drawContents();
                 ss.str("");
                 ss << hull_names[i] << "-Black.png";
                 error += app->capture(ss.str().c_str());
 
-                app->marker1 = ColorManager::getSpecialWhiteColor();
+                app->marker1 = ColorManager::getTeamColor(8).value();
                 app->newPart(hulls[i]);
                 app->drawContents();
                 ss.str("");

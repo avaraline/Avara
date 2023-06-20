@@ -170,19 +170,12 @@ void CWallActor::MakeWallFromDims(Vector dims, Fixed x, Fixed y, Fixed z) {
     if (partList[0]) {
         LinkPartBoxes();
 
-        shields = ReadFixedVar(iWallShields);
-        blastPower = ReadFixedVar(iWallPower);
-
-        traction = ReadFixedVar(iWallTraction);
-        friction = ReadFixedVar(iWallFriction);
-
-        hitSoundId = ReadLongVar(iHitSoundDefault);
         hitSoundVolume = DEFAULTHITVOLUME;
         itsGame = gCurrentGame;
         itsGame->AddActor(this);
 
-        stepSound = ReadLongVar(iStepSound);
-        gHub->LoadSample(stepSound);
+        //stepSound = ReadLongVar(iStepSound);
+        //gHub->LoadSample(stepSound);
 
         lastWallActor = this;
     } else {

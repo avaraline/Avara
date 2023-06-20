@@ -73,7 +73,7 @@ public:
     // CRosterWindow	*theRoster;
 
     short playerCount;
-    CPlayerManager *playerTable[kMaxAvaraPlayers];
+    std::shared_ptr<CPlayerManager> playerTable[kMaxAvaraPlayers];
 
     char teamColors[kMaxAvaraPlayers];
     int8_t slotToPosition[kMaxAvaraPlayers];
@@ -132,7 +132,7 @@ public:
 
     ~CNetManager() { Dispose(); };
     virtual void INetManager(CAvaraGame *theGame);
-    virtual CPlayerManager* CreatePlayerManager(short);
+    virtual std::shared_ptr<CPlayerManager> CreatePlayerManager(short);
     virtual void LevelReset();
     virtual void Dispose();
     virtual Boolean ConfirmNetChange();
@@ -153,6 +153,8 @@ public:
     virtual void BufferMessage(size_t len, char *c);
     virtual void SendRosterMessage(size_t len, char *c);
     virtual void ReceiveRosterMessage(short slotId, short len, char *c);
+
+    // Color here refers to the team color, not custom color(s)!
     virtual void SendColorChange();
     virtual void ReceiveColorChange(char *newColors);
 
@@ -182,6 +184,14 @@ public:
     virtual short AlivePlayersDistribution();
     virtual bool IAmAlive();
 
+    std::vector<CPlayerManager*> PlayersWithPresence(PresenceType presence);
+    std::vector<CPlayerManager*> AvailablePlayers();
+    std::vector<CPlayerManager*> ActivePlayers();
+
+    virtual int PlayerSlot(std::string playerName);
+    virtual void ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap);
+    virtual void SetTeamColor(int slot, int color);
+
     //	Game loop methods:
     size_t SkipLostPackets(int16_t dist);
     virtual Boolean GatherPlayers(Boolean isFreshMission);
@@ -204,6 +214,7 @@ public:
 
     virtual void ConfigPlayer(short senderSlot, Ptr configData);
     virtual void DoConfig(short senderSlot);
+    virtual void UpdateLocalConfig();
 
     virtual void StoreMugShot(Handle mugPict);
     virtual void MugShotRequest(short sendTo, long sendFrom);

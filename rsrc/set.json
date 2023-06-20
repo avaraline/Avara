@@ -4,585 +4,721 @@
     "401": {"1:1 size": 1.0, "Stretch/Scale (0/1)": 0},
     "722": {"1:1 size": 5.0, "Stretch/Scale (0/1)": 0}
   },
-  "HSND": {
-    "129": {
-      "Base Rate": 0.5000076295109483,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 72920,
-      "Loop Start": 0,
-      "Ogg": "129.ogg",
-      "Sound": 0,
-      "Version": 2
+  "LEDI": [
+    {
+      "Alf": "arctic-research-lab.alf",
+      "Name": "Arctic Research Lab",
+      "Message": "Break into the lab and destroy its contents."
     },
-    "130": {
-      "Base Rate": 0.5000076295109483,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 155648,
-      "Loop Start": 0,
-      "Ogg": "130.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "anak-city.alf",
+      "Name": "Anak City",
+      "Message": "Take back Anak City."
     },
-    "131": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 80582,
-      "Loop Start": 0,
-      "Ogg": "131.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "midnight-raid.alf",
+      "Name": "Midnight Raid",
+      "Message": "Raid enemy complex."
     },
-    "132": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 208374,
-      "Loop Start": 0,
-      "Ogg": "132.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "testing-facility.alf",
+      "Name": "Testing Facility",
+      "Message": "Escape testing site."
     },
-    "133": {
-      "Base Rate": 0.5000076295109483,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 62682,
-      "Loop Start": 0,
-      "Ogg": "133.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "desert-base.alf",
+      "Name": "Desert Base",
+      "Message": "Capture enemy base."
     },
-    "150": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "150.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "rescue.alf",
+      "Name": "Rescue",
+      "Message": "Rescue a captured starfighter."
     },
-    "151": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "151.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "bomb-deposit.alf",
+      "Name": "Bomb Deposit",
+      "Message": "Flee an alien fort."
     },
-    "152": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "152.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "syoal-recycling-plant.alf",
+      "Name": "Syoal Recycling Plant",
+      "Message": "Escape from complex."
     },
-    "160": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 2260,
-      "Loop Start": 858,
-      "Ogg": "160.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "boake-maze.alf",
+      "Name": "Boake Maze",
+      "Message": "Find a way to get to the transporter."
     },
-    "161": {
-      "Base Rate": 0.7500114442664225,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "161.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "stranded.alf",
+      "Name": "Stranded",
+      "Message": "Borrow an enemy transporter to return home."
     },
-    "162": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "162.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "nuclear-winter.alf",
+      "Name": "Nuclear Winter",
+      "Message": "Finish what bombing should have done."
     },
-    "163": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "163.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "bluewater-documents.alf",
+      "Name": "Bluewater Documents",
+      "Message": "Steal secret files."
     },
-    "164": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "164.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "spy-hunt.alf",
+      "Name": "Spy Hunt",
+      "Message": "Prevent spies from escaping with stolen material."
     },
-    "200": {
-      "Base Rate": 0.340337224383917,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 22304,
-      "Loop Start": 3008,
-      "Ogg": "200.ogg",
-      "Sound": 0,
-      "Version": 1
+    {
+      "Alf": "practice-run.alf",
+      "Name": "Practice Run",
+      "Message": "Practice makes perfect."
     },
-    "201": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 17728,
-      "Loop Start": 3008,
-      "Ogg": "201.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "outpost-zombie.alf",
+      "Name": "Outpost Zombie",
+      "Message": "Protect the outpost from a minor raid."
     },
-    "210": {
-      "Base Rate": 0.22119478141451132,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "210.ogg",
-      "Sound": 0,
-      "Version": 1
+    {
+      "Alf": "fort-of-bob.alf",
+      "Name": "Fort of Bob",
+      "Message": "Re-capture Bob's Fort"
     },
-    "211": {
-      "Base Rate": 0.24805065995269704,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "211.ogg",
-      "Sound": 0,
-      "Version": 1
+    {
+      "Alf": "training-grounds-2.alf",
+      "Name": "Training Grounds 2",
+      "Message": "a) Hit switch\rb) Step onto the round platform\rc) Exit"
     },
-    "220": {
-      "Base Rate": 0.330083161669337,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "220.ogg",
-      "Sound": 0,
-      "Version": 1
-    },
-    "221": {
-      "Base Rate": 0.23828488593881134,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "221.ogg",
-      "Sound": 0,
-      "Version": 1
-    },
-    "222": {
-      "Base Rate": 0.5000076295109483,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "222.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "230": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "230.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "231": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "231.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "240": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "240.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "250": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "250.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "300": {
-      "Base Rate": 0.04022278171969177,
-      "Data offset": 20,
-      "Loop Count": -1,
-      "Loop End": 2636,
-      "Loop Start": 0,
-      "Ogg": "300.ogg",
-      "Sound": 0,
-      "Version": 1
-    },
-    "301": {
-      "Base Rate": 0.4101625085831998,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 13552,
-      "Loop Start": 12336,
-      "Ogg": "301.ogg",
-      "Sound": 0,
-      "Version": 1
-    },
-    "310": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "310.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "311": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "311.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "400": {
-      "Base Rate": 0.17009231708247502,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 8048,
-      "Loop Start": 4080,
-      "Ogg": "400.ogg",
-      "Sound": 0,
-      "Version": 1
-    },
-    "401": {
-      "Base Rate": 0.16650644693675135,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "401.ogg",
-      "Sound": 0,
-      "Version": 1
-    },
-    "410": {
-      "Base Rate": 0.337773708705272,
-      "Data offset": 20,
-      "Loop Count": 0,
-      "Loop End": 22136,
-      "Loop Start": 0,
-      "Ogg": "410.ogg",
-      "Sound": 0,
-      "Version": 1
-    },
-    "411": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 12960,
-      "Loop Start": 0,
-      "Ogg": "411.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "412": {
-      "Base Rate": 0.5000076295109483,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 34880,
-      "Loop Start": 0,
-      "Ogg": "412.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "413": {
-      "Base Rate": 0.5000076295109483,
-      "Data offset": 24,
-      "Loop Count": 5,
-      "Loop End": 12018,
-      "Loop Start": 3115,
-      "Ogg": "413.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "430": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": -1,
-      "Loop End": 4781,
-      "Loop Start": 0,
-      "Ogg": "430.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "431": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "431.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "432": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "432.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "433": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "433.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "434": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 0,
-      "Loop Start": 0,
-      "Ogg": "434.ogg",
-      "Sound": 0,
-      "Version": 2
-    },
-    "440": {
-      "Base Rate": 1.0,
-      "Data offset": 24,
-      "Loop Count": 0,
-      "Loop End": 4368,
-      "Loop Start": 0,
-      "Ogg": "440.ogg",
-      "Sound": 0,
-      "Version": 2
+    {
+      "Alf": "training-grounds.alf",
+      "Name": "Training Grounds",
+      "Message": "Click here to load the mission you want.\rThen read the briefing in the Roster window.\rNew missions appear as old ones are completed."
     }
-  },
+  ],
   "HULL": {
-    "128": {
-      "Acceleration": 1.0,
-      "Energy Charge": 1.0500038147554742,
-      "Hull Res ID": 215,
-      "Jump Power": 1.0,
-      "Mass": 140.0,
-      "Max Energy": 0.9000076295109484,
-      "Max Grenades": 6,
-      "Max Missiles": 3,
-      "Max Shields": 0.9000076295109484,
-      "Max Shot": 0.9000076295109484,
-      "Max boosters": 3,
-      "Min Shot": 1.0,
-      "Riding Height": 0.2500038147554742,
-      "Shield Charge": 1.0500038147554742,
-      "Shot Charge": 1.0500038147554742
-    },
     "129": {
-      "Acceleration": 1.1000076295109484,
-      "Energy Charge": 1.0249942778667887,
       "Hull Res ID": 216,
-      "Jump Power": 1.0,
+      "Max Missiles": 4,
+      "Max Grenades": 8,
+      "Max boosters": 4,
       "Mass": 155.0,
       "Max Energy": 1.1000076295109484,
-      "Max Grenades": 8,
-      "Max Missiles": 4,
+      "Energy Charge": 1.0249942778667887,
       "Max Shields": 1.0,
-      "Max Shot": 1.0,
-      "Max boosters": 4,
-      "Min Shot": 1.0,
-      "Riding Height": 0.3500114442664225,
       "Shield Charge": 1.0,
-      "Shot Charge": 1.0
+      "Min Shot": 1.0,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.1000076295109484,
+      "Jump Power": 1.0
     },
     "130": {
-      "Acceleration": 1.0,
-      "Energy Charge": 1.0500038147554742,
       "Hull Res ID": 217,
-      "Jump Power": 1.1000076295109484,
+      "Max Missiles": 8,
+      "Max Grenades": 12,
+      "Max boosters": 5,
       "Mass": 170.0,
       "Max Energy": 1.1000076295109484,
-      "Max Grenades": 12,
-      "Max Missiles": 8,
+      "Energy Charge": 1.0500038147554742,
       "Max Shields": 1.1000076295109484,
-      "Max Shot": 1.0,
-      "Max boosters": 5,
-      "Min Shot": 1.1000076295109484,
-      "Riding Height": 0.3500114442664225,
       "Shield Charge": 1.0,
-      "Shot Charge": 1.0500038147554742
+      "Min Shot": 1.1000076295109484,
+      "Max Shot": 1.0,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.3500114442664225,
+      "Acceleration": 1.0,
+      "Jump Power": 1.1000076295109484
     },
     "131": {
-      "Acceleration": 1.0,
-      "Energy Charge": 1.0500038147554742,
       "Hull Res ID": 215,
-      "Jump Power": 1.0,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
       "Mass": 140.0,
       "Max Energy": 0.9000076295109484,
-      "Max Grenades": 6,
-      "Max Missiles": 3,
+      "Energy Charge": 1.0500038147554742,
       "Max Shields": 0.9000076295109484,
-      "Max Shot": 0.9000076295109484,
-      "Max boosters": 3,
-      "Min Shot": 1.0,
-      "Riding Height": 0.2500038147554742,
       "Shield Charge": 1.0500038147554742,
-      "Shot Charge": 1.0500038147554742
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
+    },
+    "128": {
+      "Hull Res ID": 215,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
+      "Mass": 140.0,
+      "Max Energy": 0.9000076295109484,
+      "Energy Charge": 1.0500038147554742,
+      "Max Shields": 0.9000076295109484,
+      "Shield Charge": 1.0500038147554742,
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
     },
     "132": {
-      "Acceleration": 1.0,
-      "Energy Charge": 1.0500038147554742,
       "Hull Res ID": 210,
-      "Jump Power": 1.0,
+      "Max Missiles": 3,
+      "Max Grenades": 6,
+      "Max boosters": 3,
       "Mass": 140.0,
       "Max Energy": 0.9000076295109484,
-      "Max Grenades": 6,
-      "Max Missiles": 3,
+      "Energy Charge": 1.0500038147554742,
       "Max Shields": 0.9000076295109484,
-      "Max Shot": 0.9000076295109484,
-      "Max boosters": 3,
-      "Min Shot": 1.0,
-      "Riding Height": 0.2500038147554742,
       "Shield Charge": 1.0500038147554742,
-      "Shot Charge": 1.0500038147554742
+      "Min Shot": 1.0,
+      "Max Shot": 0.9000076295109484,
+      "Shot Charge": 1.0500038147554742,
+      "Riding Height": 0.2500038147554742,
+      "Acceleration": 1.0,
+      "Jump Power": 1.0
     }
   },
-  "LEDI": {
-    "BOAK": {
-      "Alf": "BoakeMazepict.alf",
-      "Message": "\rFind a way to get to the transporter.\r",
-      "Name": "Boake Maze"
+  "HSND": {
+    "200": {
+      "Version": 1,
+      "Loop Start": 3008,
+      "Loop End": 22304,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.340337224383917,
+      "Sound": 0,
+      "Ogg": "200.ogg",
+      "Wav": "200.wav"
     },
-    "BOMB": {
-      "Alf": "Bombdepositpict.alf",
-      "Message": "\rFlee an alien fort.\r",
-      "Name": "Bomb Deposit"
+    "210": {
+      "Version": 1,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.22119478141451132,
+      "Sound": 0,
+      "Ogg": "210.ogg",
+      "Wav": "210.wav"
     },
-    "CITY": {
-      "Alf": "AnakCitypict.alf",
-      "Message": "\rTake back Anak City.\r",
-      "Name": "Anak City"
+    "211": {
+      "Version": 1,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.24805065995269704,
+      "Sound": 0,
+      "Ogg": "211.ogg",
+      "Wav": "211.wav"
     },
-    "DBAS": {
-      "Alf": "DesertBasepict.alf",
-      "Message": "\rCapture enemy base.\r",
-      "Name": "Desert Base"
+    "220": {
+      "Version": 1,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.330083161669337,
+      "Sound": 0,
+      "Ogg": "220.ogg",
+      "Wav": "220.wav"
     },
-    "DOCS": {
-      "Alf": "BluewaterDocumentspict.alf",
-      "Message": "\rSteal secret files.\r",
-      "Name": "Bluewater Documents"
+    "400": {
+      "Version": 1,
+      "Loop Start": 4080,
+      "Loop End": 8048,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.17009231708247502,
+      "Sound": 0,
+      "Ogg": "400.ogg",
+      "Wav": "400.wav"
     },
-    "FORT": {
-      "Alf": "FortofBobpict.alf",
-      "Message": "\rRe-capture Bob's Fort\r",
-      "Name": "Fort of Bob"
+    "401": {
+      "Version": 1,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.16650644693675135,
+      "Sound": 0,
+      "Ogg": "401.ogg",
+      "Wav": "401.wav"
     },
-    "ICED": {
-      "Alf": "ArcticResearchLabpict.alf",
-      "Message": "\rBreak into the lab and destroy its contents.\r",
-      "Name": "Arctic Research Lab"
+    "410": {
+      "Version": 1,
+      "Loop Start": 0,
+      "Loop End": 22136,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.337773708705272,
+      "Sound": 0,
+      "Ogg": "410.ogg",
+      "Wav": "410.wav"
     },
-    "LOST": {
-      "Alf": "Strandedpict.alf",
-      "Message": "\rBorrow an enemy transporter to return home.\r",
-      "Name": "Stranded"
+    "301": {
+      "Version": 1,
+      "Loop Start": 12336,
+      "Loop End": 13552,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.4101625085831998,
+      "Sound": 0,
+      "Ogg": "301.ogg",
+      "Wav": "301.wav"
     },
-    "MRAD": {
-      "Alf": "MidnightRaidpict.alf",
-      "Message": "\rRaid enemy complex.\r",
-      "Name": "Midnight Raid"
+    "300": {
+      "Version": 1,
+      "Loop Start": 0,
+      "Loop End": 2636,
+      "Loop Count": -1,
+      "Data offset": 20,
+      "Base Rate": 0.04022278171969177,
+      "Sound": 0,
+      "Ogg": "300.ogg",
+      "Wav": "300.wav"
     },
-    "NUKE": {
-      "Alf": "NuclearWinterpict.alf",
-      "Message": "\rFinish what bombing should have done.\r",
-      "Name": "Nuclear Winter"
+    "221": {
+      "Version": 1,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 20,
+      "Base Rate": 0.23828488593881134,
+      "Sound": 0,
+      "Ogg": "221.ogg",
+      "Wav": "221.wav"
     },
-    "RCYC": {
-      "Alf": "RecyclingPlantpict.alf",
-      "Message": "\rEscape from complex.\r",
-      "Name": "Syoal Recycling Plant"
+    "230": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "230.ogg",
+      "Wav": "230.wav"
     },
-    "Resc": {
-      "Alf": "Rescuepict.alf",
-      "Message": "\rRescue a captured starfighter.",
-      "Name": "Rescue"
+    "222": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.5000076295109483,
+      "Sound": 0,
+      "Ogg": "222.ogg",
+      "Wav": "222.wav"
     },
-    "SIMM": {
-      "Alf": "PracticeRunpict.alf",
-      "Message": "\rPractice makes perfect.\r",
-      "Name": "Practice Run"
+    "411": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 12960,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "411.ogg",
+      "Wav": "411.wav"
     },
-    "SpyH": {
-      "Alf": "SpyHuntpict.alf",
-      "Message": "\rPrevent spies from escaping with stolen material.",
-      "Name": "Spy Hunt"
+    "310": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "310.ogg",
+      "Wav": "310.wav"
     },
-    "TFAC": {
-      "Alf": "TestingFacilitypict.alf",
-      "Message": "\rEscape testing site.\r",
-      "Name": "Testing Facility"
+    "311": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "311.ogg",
+      "Wav": "311.wav"
     },
-    "TrC1": {
-      "Alf": "Tutorial1pict.alf",
-      "Message": "Click here to load the mission you want.\rThen read the briefing in the Roster window.\rNew missions appear as old ones are completed.",
-      "Name": "Training Grounds"
+    "412": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 34880,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.5000076295109483,
+      "Sound": 0,
+      "Ogg": "412.ogg",
+      "Wav": "412.wav"
     },
-    "TrC2": {
-      "Alf": "Training2.alf",
-      "Message": "a) Hit switch\rb) Step onto the round platform\rc) Exit",
-      "Name": "Training Grounds 2"
+    "413": {
+      "Version": 2,
+      "Loop Start": 3115,
+      "Loop End": 12018,
+      "Loop Count": 5,
+      "Data offset": 24,
+      "Base Rate": 0.5000076295109483,
+      "Sound": 0,
+      "Ogg": "413.ogg",
+      "Wav": "413.wav"
     },
-    "UFOZ": {
-      "Alf": "Outpostpict.alf",
-      "Message": "\rProtect the outpost from a minor raid.",
-      "Name": "Outpost Zombie"
+    "129": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 72920,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.5000076295109483,
+      "Sound": 0,
+      "Ogg": "129.ogg",
+      "Wav": "129.wav"
+    },
+    "130": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 155648,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.5000076295109483,
+      "Sound": 0,
+      "Ogg": "130.ogg",
+      "Wav": "130.wav"
+    },
+    "240": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "240.ogg",
+      "Wav": "240.wav"
+    },
+    "201": {
+      "Version": 2,
+      "Loop Start": 3008,
+      "Loop End": 17728,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "201.ogg",
+      "Wav": "201.wav"
+    },
+    "150": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "150.ogg",
+      "Wav": "150.wav"
+    },
+    "151": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "151.ogg",
+      "Wav": "151.wav"
+    },
+    "152": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "152.ogg",
+      "Wav": "152.wav"
+    },
+    "250": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "250.ogg",
+      "Wav": "250.wav"
+    },
+    "131": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 80582,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "131.ogg",
+      "Wav": "131.wav"
+    },
+    "160": {
+      "Version": 2,
+      "Loop Start": 858,
+      "Loop End": 2260,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "160.ogg",
+      "Wav": "160.wav"
+    },
+    "162": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "162.ogg",
+      "Wav": "162.wav"
+    },
+    "163": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "163.ogg",
+      "Wav": "163.wav"
+    },
+    "164": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "164.ogg",
+      "Wav": "164.wav"
+    },
+    "161": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.7500114442664225,
+      "Sound": 0,
+      "Ogg": "161.ogg",
+      "Wav": "161.wav"
+    },
+    "132": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 208374,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "132.ogg",
+      "Wav": "132.wav"
+    },
+    "440": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 4368,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "440.ogg",
+      "Wav": "440.wav"
+    },
+    "231": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "231.ogg",
+      "Wav": "231.wav"
+    },
+    "431": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "431.ogg",
+      "Wav": "431.wav"
+    },
+    "432": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "432.ogg",
+      "Wav": "432.wav"
+    },
+    "433": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "433.ogg",
+      "Wav": "433.wav"
+    },
+    "434": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 0,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "434.ogg",
+      "Wav": "434.wav"
+    },
+    "430": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 4781,
+      "Loop Count": -1,
+      "Data offset": 24,
+      "Base Rate": 1.0,
+      "Sound": 0,
+      "Ogg": "430.ogg",
+      "Wav": "430.wav"
+    },
+    "133": {
+      "Version": 2,
+      "Loop Start": 0,
+      "Loop End": 62682,
+      "Loop Count": 0,
+      "Data offset": 24,
+      "Base Rate": 0.5000076295109483,
+      "Sound": 0,
+      "Ogg": "133.ogg",
+      "Wav": "133.wav"
     }
+  },
+  "BSPT": {
+    "411": "rsrc/bsps/411.json",
+    "421": "rsrc/bsps/421.json",
+    "431": "rsrc/bsps/431.json",
+    "441": "rsrc/bsps/441.json",
+    "451": "rsrc/bsps/451.json",
+    "422": "rsrc/bsps/422.json",
+    "432": "rsrc/bsps/432.json",
+    "433": "rsrc/bsps/433.json",
+    "202": "rsrc/bsps/202.json",
+    "203": "rsrc/bsps/203.json",
+    "204": "rsrc/bsps/204.json",
+    "205": "rsrc/bsps/205.json",
+    "206": "rsrc/bsps/206.json",
+    "502": "rsrc/bsps/502.json",
+    "501": "rsrc/bsps/501.json",
+    "503": "rsrc/bsps/503.json",
+    "600": "rsrc/bsps/600.json",
+    "601": "rsrc/bsps/601.json",
+    "602": "rsrc/bsps/602.json",
+    "650": "rsrc/bsps/650.json",
+    "550": "rsrc/bsps/550.json",
+    "800": "rsrc/bsps/800.json",
+    "801": "rsrc/bsps/801.json",
+    "217": "rsrc/bsps/217.json",
+    "211": "rsrc/bsps/211.json",
+    "220": "rsrc/bsps/220.json",
+    "230": "rsrc/bsps/230.json",
+    "311": "rsrc/bsps/311.json",
+    "310": "rsrc/bsps/310.json",
+    "500": "rsrc/bsps/500.json",
+    "803": "rsrc/bsps/803.json",
+    "804": "rsrc/bsps/804.json",
+    "806": "rsrc/bsps/806.json",
+    "807": "rsrc/bsps/807.json",
+    "808": "rsrc/bsps/808.json",
+    "809": "rsrc/bsps/809.json",
+    "212": "rsrc/bsps/212.json",
+    "560": "rsrc/bsps/560.json",
+    "561": "rsrc/bsps/561.json",
+    "562": "rsrc/bsps/562.json",
+    "563": "rsrc/bsps/563.json",
+    "812": "rsrc/bsps/812.json",
+    "820": "rsrc/bsps/820.json",
+    "802": "rsrc/bsps/802.json",
+    "207": "rsrc/bsps/207.json",
+    "208": "rsrc/bsps/208.json",
+    "201": "rsrc/bsps/201.json",
+    "200": "rsrc/bsps/200.json",
+    "240": "rsrc/bsps/240.json",
+    "216": "rsrc/bsps/216.json",
+    "210": "rsrc/bsps/210.json",
+    "215": "rsrc/bsps/215.json",
+    "462": "rsrc/bsps/462.json",
+    "460": "rsrc/bsps/460.json",
+    "461": "rsrc/bsps/461.json",
+    "463": "rsrc/bsps/463.json",
+    "464": "rsrc/bsps/464.json",
+    "465": "rsrc/bsps/465.json",
+    "832": "rsrc/bsps/832.json",
+    "831": "rsrc/bsps/831.json",
+    "830": "rsrc/bsps/830.json",
+    "720": "rsrc/bsps/720.json",
+    "721": "rsrc/bsps/721.json",
+    "400": "rsrc/bsps/400.json",
+    "401": "rsrc/bsps/401.json",
+    "722": "rsrc/bsps/722.json",
+    "724": "rsrc/bsps/724.json",
+    "723": "rsrc/bsps/723.json",
+    "251": "rsrc/bsps/251.json",
+    "252": "rsrc/bsps/252.json",
+    "250": "rsrc/bsps/250.json",
+    "100": "rsrc/bsps/100.json",
+    "102": "rsrc/bsps/102.json",
+    "101": "rsrc/bsps/101.json",
+    "611": "rsrc/bsps/611.json",
+    "610": "rsrc/bsps/610.json",
+    "701": "rsrc/bsps/701.json",
+    "702": "rsrc/bsps/702.json",
+    "703": "rsrc/bsps/703.json",
+    "704": "rsrc/bsps/704.json",
+    "705": "rsrc/bsps/705.json",
+    "706": "rsrc/bsps/706.json",
+    "707": "rsrc/bsps/707.json",
+    "708": "rsrc/bsps/708.json",
+    "709": "rsrc/bsps/709.json",
+    "710": "rsrc/bsps/710.json",
+    "711": "rsrc/bsps/711.json",
+    "712": "rsrc/bsps/712.json",
+    "713": "rsrc/bsps/713.json",
+    "714": "rsrc/bsps/714.json",
+    "715": "rsrc/bsps/715.json",
+    "716": "rsrc/bsps/716.json",
+    "717": "rsrc/bsps/717.json",
+    "300": "rsrc/bsps/300.json"
   }
 }

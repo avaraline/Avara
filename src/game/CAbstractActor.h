@@ -49,7 +49,7 @@
 
 #define kAllKindsBits -1
 
-enum { kNeutralTeam, kGreenTeam, kYellowTeam, kRedTeam, kPinkTeam, kPurpleTeam, kBlueTeam, kOrangeTeam, kLimeTeam };
+enum { kNeutralTeam, kGreenTeam, kYellowTeam, kRedTeam, kPinkTeam, kPurpleTeam, kBlueTeam, kBlackTeam, kWhiteTeam };
 
 enum { kIsInactive = 0, kIsActive = 1, kIsGlowing = 2, kHasImpulse = 4, kHasMessage = 8 };
 
@@ -175,7 +175,7 @@ public:
 
     virtual void RadiateDamage(BlastHitRecord *blastRecord);
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);
-    virtual void SecondaryDamage(short scoreTeam, short scoreColor);
+    virtual bool SecondaryDamage(short scoreTeam, short scoreColor);
 
     virtual CSmartPart *DoCollisionTest(CSmartPart **hitList);
     virtual void BuildPartProximityList(Fixed *origin, Fixed range, MaskType filterMask);

@@ -28,7 +28,7 @@ Vector **bspPointTemp = 0;
 
 #define MINIMUM_TOLERANCE FIX3(10)
 
-ColorRecord ***bspColorLookupTable = 0;
+ARGBColor ***bspColorLookupTable = 0;
 
 using json = nlohmann::json;
 
@@ -52,13 +52,22 @@ void CBSPPart::IBSPPart(short resId) {
 
     json doc = GetBSPJSON(resId);
     if (doc == nullptr) {
+        colorCount = 0;
         polyCount = 0;
         pointCount = 0;
         return;
     }
 
-    polyCount = (uint32_t)doc["polys"].size();
-    pointCount = (uint32_t)doc["points"].size();
+    // Fill in some default values in case values are missing.
+    doc.emplace("radius1", 0.0);
+    doc.emplace("radius2", 0.0);
+    doc.emplace("center", json::array({0.0, 0.0, 0.0}));
+    doc["bounds"].emplace("min", json::array({0.0, 0.0, 0.0}));
+    doc["bounds"].emplace("max", json::array({0.0, 0.0, 0.0}));
+
+    colorCount = static_cast<uint16_t>(doc["colors"].size());
+    polyCount = static_cast<uint32_t>(doc["polys"].size());
+    pointCount = static_cast<uint32_t>(doc["points"].size());
 
     enclosureRadius = ToFixed(doc["radius1"]);
     bigRadius = ToFixed(doc["radius2"]);
@@ -86,8 +95,27 @@ void CBSPPart::IBSPPart(short resId) {
     maxBounds.z = ToFixed(mxZ);
     maxBounds.w = FIX1;
 
+    origColorTable = std::make_unique<ARGBColor[]>(colorCount);
+    currColorTable = std::make_unique<ARGBColor[]>(colorCount);
     pointTable = std::make_unique<Vector[]>(pointCount);
     polyTable = std::make_unique<PolyRecord[]>(polyCount);
+
+    for (uint16_t i = 0; i < colorCount; i++) {
+        json value = doc["colors"][i];
+        ARGBColor color = ARGBColor::Parse(value)
+            .value_or(ARGBColor(0x00ffffff)); // Fallback to invisible "white."
+        origColorTable[i] = color;
+        if (color == *ColorManager::getMarkerColor(0) ||
+            color == *ColorManager::getMarkerColor(1) ||
+            color == *ColorManager::getMarkerColor(2) ||
+            color == *ColorManager::getMarkerColor(3)) {
+            currColorTable[i] = color.WithA(0xff);
+        } else {
+            currColorTable[i] = color;
+        }
+    }
+    
+    CheckForAlpha();
 
     for (uint32_t i = 0; i < pointCount; i++) {
         json pt = doc["points"][i];
@@ -101,20 +129,24 @@ void CBSPPart::IBSPPart(short resId) {
 
     for (uint32_t i = 0; i < polyCount; i++) {
         json poly = doc["polys"][i];
+        json pt;
         // Color
-        polyTable[i].color = static_cast<uint32_t>(poly["color"]);
-        polyTable[i].origColor = static_cast<uint32_t>(poly["color"]);
+        polyTable[i].colorIdx = static_cast<uint16_t>(poly["color"]);
         // Normal
-        polyTable[i].normal[0] = poly["normal"][0];
-        polyTable[i].normal[1] = poly["normal"][1];
-        polyTable[i].normal[2] = poly["normal"][2];
+        json norms = doc["normals"];
+        int idx = poly["normal"];
+        json norm = norms[idx];
+        polyTable[i].normal[0] = norm[0];
+        polyTable[i].normal[1] = norm[1];
+        polyTable[i].normal[2] = norm[2];
         // Triangle points
-        polyTable[i].triCount = poly["tris"].size();
-        polyTable[i].triPoints = std::make_unique<uint16_t[]>(polyTable[i].triCount * 3);
-        for (size_t j = 0; j < polyTable[i].triCount; j++) {
-            json tri = poly["tris"][j];
+        polyTable[i].vis = static_cast<uint8_t>(poly["vis"]);
+        polyTable[i].triCount = poly["tris"].size() / 3;
+        polyTable[i].triPoints = std::make_unique<uint16_t[]>(poly["tris"].size());
+        for (size_t j = 0; j < poly["tris"].size(); j += 3) {
             for (size_t k = 0; k < 3; k++) {
-                polyTable[i].triPoints[(j * 3) + k] = (uint16_t)tri[k];
+                pt = poly["tris"][j + k];
+                polyTable[i].triPoints[j + k] = (uint16_t)pt;
                 totalPoints += 1;
             }
         }
@@ -388,11 +420,20 @@ Matrix *CBSPPart::GetInverseTransform() {
 }
 
 void CBSPPart::ReplaceColor(ARGBColor origColor, ARGBColor newColor) {
-    for (int i = 0; i < polyCount; i++) {
-        if (polyTable[i].origColor == origColor) {
-            polyTable[i].color = newColor;
+    for (int i = 0; i < colorCount; i++) {
+        if (origColorTable[i] == origColor) {
+            currColorTable[i] = newColor;
         }
     }
+    CheckForAlpha();
+    AvaraGLUpdateData(this);
+}
+
+void CBSPPart::ReplaceAllColors(ARGBColor newColor) {
+    for (int i = 0; i < colorCount; i++) {
+        currColorTable[i] = newColor;
+    }
+    hasAlpha = (newColor.GetA() != 0xff);
     AvaraGLUpdateData(this);
 }
 
@@ -420,12 +461,40 @@ void CBSPPart::Dispose() {
         return;
     }
     if (AvaraGLIsRendering()) {
-        delete [] glData;
         glDataSize = 0;
         glDeleteVertexArrays(1, &vertexArray);
         glDeleteBuffers(1, &vertexBuffer);
     }
     CDirectObject::Dispose();
+}
+
+void CBSPPart::CheckForAlpha() {
+    hasAlpha = false;
+    for (uint16_t i = 0; i < colorCount; i++) {
+        if (currColorTable[i].GetA() != 0xff) {
+            hasAlpha = true;
+            return;
+        }
+    }
+}
+
+bool CBSPPart::HasAlpha() {
+    return hasAlpha;
+}
+
+void CBSPPart::SetScale(Fixed x, Fixed y, Fixed z) {
+    hasScale = true;
+    scale[0] = x;
+    scale[1] = y;
+    scale[2] = z;
+}
+
+void CBSPPart::ResetScale() {
+    hasScale = false;
+    scale[0] = FIX1;
+    scale[1] = FIX1;
+    scale[2] = FIX1;
+    scale[3] = FIX1;
 }
 
 #define TESTBOUND(b, c) \
@@ -546,6 +615,11 @@ Boolean CBSPPart::Obscures(CBSPPart *other) {
     PROFILING_CODE(short theCase = 0;)
 
     PROFILING_CODE(totalCases++;)
+
+    // Never treat as obscuring if this shape has any translucency anywhere.
+    if (HasAlpha()) {
+        return false;
+    }
 
     VectorMatrixProduct(1, &other->sphereGlobCenter, &center, &invGlobTransform);
     r = other->enclosureRadius - tolerance;

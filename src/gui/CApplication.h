@@ -61,7 +61,14 @@ public:
     // templated version works for new types too (float, double, short, etc.)
     template <class T> T Get(const std::string name) {
         // throws json::out_of_range exception if 'name' not a known key
-        return static_cast<T>(_prefs.at(name));
+        try {
+            return static_cast<T>(_prefs.at(name));
+        }
+        catch (json::type_error &ex) {
+            // Type from json didn't match requested type so use hardcoded default instead
+            SDL_Log("Type Error trying to read '%s'. Using default", name.c_str());
+            return static_cast<T>(_defaultPrefs.at(name));
+        }
     }
     // these getters are here for backwards compatibility and/or readability
     std::string String(const std::string name)       { return Get<std::string>(name); };
@@ -70,13 +77,19 @@ public:
     bool Boolean(const std::string name)             { return Get<bool>(name); }
     json Get(const std::string name)                 { return Get<json>(name); }
 
+    std::vector<std::string> Matches(const std::string matchStr);
+
     template <class T> void Set(const std::string name, const T value) {
         _prefs[name] = value;
         PrefChanged(name);
     }
 
+    void Update(const std::string name, std::string &value);
+    void SavePrefs();
+
 protected:
     static json _prefs;
+    static json _defaultPrefs;
     std::vector<CWindow *> windowList;
     std::function<bool(int, int)> resize_callback;
     uint32_t window_id;

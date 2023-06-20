@@ -149,7 +149,7 @@ uint32_t CPlayerManagerImpl::DoMouseControl(Point *deltaMouse, Boolean doCenter)
 }
 
 Boolean CPlayerManagerImpl::TestKeyPressed(short funcCode) {
-    CPlayerManagerImpl* localManager = ((CPlayerManagerImpl*)itsGame->GetLocalPlayer()->itsManager);
+    CPlayerManagerImpl* localManager = ((CPlayerManagerImpl*)itsGame->GetLocalPlayer()->itsManager.get());
     return TESTFUNC(funcCode, localManager->keysDown);
 }
 
@@ -431,9 +431,9 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
         if (outPacket) {
             // this method used by both requester and sender...
             if (commandCode == kpKeyAndMouseRequest) {
-                SDL_Log("CPlayerManagerImpl::ResendFrame: asking for frame %d from slot %hd\n", theFrame, requesterId);
+                DBG_Log("resend", "asking for frame %d from slot %hd\n", theFrame, requesterId);
             } else {
-                SDL_Log("CPlayerManagerImpl::ResendFrame: re-sending frame %d  to  slot %hd\n", theFrame, requesterId);
+                DBG_Log("resend", "re-sending frame %d  to  slot %hd\n", theFrame, requesterId);
             }
             outPacket->command = commandCode;
             outPacket->distribution = 1 << requesterId;
@@ -445,7 +445,7 @@ void CPlayerManagerImpl::ResendFrame(FrameNumber theFrame, short requesterId, sh
         }
     } else //	Ask me later packet
     {
-        SDL_Log("CPlayerManagerImpl::ResendFrame frame %d not in FUNCTIONBUFFERS, value = %d\n", theFrame, ff->validFrame);
+        DBG_Log("resend", "frame %d not in FUNCTIONBUFFERS, value = %d\n", theFrame, ff->validFrame);
         theComm->SendUrgentPacket(1 << requesterId, kpAskLater, 0, 0, theFrame, 0, 0);
     }
 }
@@ -528,8 +528,10 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
     if (frameFuncs[i].validFrame != itsGame->frameNumber && itsPlayer->lives > 0) {
         long firstTime = askAgainTime = TickCount();
         long quickTick = firstTime;
+        long giveUpTime = firstTime + MSEC_TO_TICK_COUNT(15000);
+
         short askCount = 0;
-        LoadingState oldStatus;
+        LoadingState oldStatus = loadingStatus;
 
         itsGame->didWait = true;
 
@@ -565,8 +567,7 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                 askAgainTime = quickTick + ASK_INTERVAL;
 
                 if (askCount == WAITING_MESSAGE_COUNT) {
-                    SDL_Log("Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
-                    oldStatus = loadingStatus;
+                    DBG_Log("resend", "Waiting for '%s' to resend frame #%u\n", GetPlayerName().c_str(), itsGame->frameNumber);
                     loadingStatus = kLNetDelayed;
                     itsGame->itsApp->ParamLine(kmWaitingForPlayer, MsgAlignment::Center, playerName);
                     itsGame->itsApp->drawContents();  // force render now so message shows up
@@ -576,12 +577,12 @@ FunctionTable *CPlayerManagerImpl::GetFunctions() {
                     // gApplication->BroadcastCommand(kBusyStartCmd);
                 }
 
-                SDL_Log("frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
+                DBG_Log("resend", "frameNumber = %d, validFrame = %d, askCount = %d, askAgainTime = %ld ticks\n",
                         itsGame->frameNumber, frameFuncs[i].validFrame, askCount, askAgainTime-quickTick);
             }
 
             // allow immediate abort after the kmWaitingForPlayer message displays
-            if (askCount >= WAITING_MESSAGE_COUNT && TestKeyPressed(kfuAbortGame)) {
+            if ((askCount >= WAITING_MESSAGE_COUNT && TestKeyPressed(kfuAbortGame)) || quickTick > giveUpTime) {
                 itsGame->statusRequest = kAbortStatus;
                 break;
             }
@@ -1014,7 +1015,8 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         if (actorList->teamColor == myTeamColor) { //	Good enough for me.
 
             itsPlayer = actorList;
-            itsPlayer->itsManager = this;
+            itsPlayer->itsManager = shared_from_this();
+            itsPlayer->didIncarnateMasked = true;
             itsPlayer->PlayerWasMoved();
             itsPlayer->BuildPartProximityList(itsPlayer->location, itsPlayer->proximityRadius, kSolidBit);
             itsPlayer->AddToGame();
@@ -1039,7 +1041,7 @@ CAbstractPlayer *CPlayerManagerImpl::ChooseActor(CAbstractPlayer *actorList, sho
         itsPlayer->EndScript();
         itsPlayer->isInLimbo = true;
         itsPlayer->limboCount = 0;
-        itsPlayer->itsManager = this;
+        itsPlayer->itsManager = shared_from_this();
 
         itsPlayer->teamMask = myTeamMask;
         itsPlayer->Reincarnate();
@@ -1065,7 +1067,7 @@ Boolean CPlayerManagerImpl::IncarnateInAnyColor() {
         itsPlayer->EndScript();
         itsPlayer->isInLimbo = true;
         itsPlayer->limboCount = 0;
-        itsPlayer->itsManager = this;
+        itsPlayer->itsManager = shared_from_this();
 
         itsPlayer->teamMask = 1 << i;  // set in case Incarnators discriminate on color
         itsPlayer->Reincarnate();
@@ -1091,7 +1093,7 @@ CAbstractPlayer *CPlayerManagerImpl::TakeAnyActor(CAbstractPlayer *actorList) {
     playerColor = actorList->teamColor;
 
     itsPlayer = actorList;
-    itsPlayer->itsManager = this;
+    itsPlayer->itsManager = shared_from_this();
     itsPlayer->AddToGame();
 
     return nextPlayer;
@@ -1239,14 +1241,7 @@ void	CPlayerManagerImpl::GetLoadingStatusString(
 
 void CPlayerManagerImpl::SpecialColorControl() {
     if (itsPlayer) {
-        switch (spaceCount) {
-            case 2:
-                itsPlayer->SetSpecialColor(ColorManager::getSpecialBlackColor());
-                break;
-            case 3:
-                itsPlayer->SetSpecialColor(ColorManager::getSpecialWhiteColor());
-                break;
-        }
+        itsPlayer->SetSpecialColor(theConfiguration.hullColor.WithA(0xff));
     }
 }
 

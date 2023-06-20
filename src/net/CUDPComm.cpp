@@ -523,7 +523,7 @@ CUDPConnection *CUDPComm::DoLogin(PacketInfo *thePacket, UDPpacket *udp) {
         } else {
             std::string passwordStr =  gApplication->String(kServerPassword);
             password[0] = passwordStr.length();
-            BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+            BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
             for (i = 0; i <= password[0]; i++) {
                 if (password[i] != thePacket->dataBuffer[i]) {
@@ -733,10 +733,11 @@ void CUDPComm::ReadComplete(UDPpacket *packet) {
                         #endif
 
                         if (p->dataLen) {
-                            if (p->dataLen > PACKETDATABUFFERSIZE) {
-                                SDL_Log("CUDPComm::ReadComplete BUFFER TOO BIG ERROR!! cmd=%d, sndr=%d dataLen = %d\n",
-                                        p->command, p->sender, p->dataLen);
-                                p->dataLen = PACKETDATABUFFERSIZE;
+                            if (p->dataLen > PACKETDATABUFFERSIZE || p->dataLen < 0) {
+                                SDL_Log("CUDPComm::ReadComplete BUFFER SIZE ERROR (ignoring packet)!! sn=%d-%hd cmd=%d, sndr=%d dataLen = %d\n",
+                                        int(thePacket->serialNumber), thePacket->sendCount, p->command, p->sender, p->dataLen);
+                                ReleasePacket((PacketInfo *)thePacket);
+                                break;
                             }
                             BlockMoveData(inData.c, p->dataBuffer, p->dataLen);
                             inData.c += p->dataLen;
@@ -1419,15 +1420,15 @@ void CUDPComm::Connect(std::string address, std::string passwordStr) {
     OpenAvaraTCP();
 
     long serverPort = gApplication->Number(kDefaultUDPPort);
-    // if kDefaultClientUDPPort not specified, fall back to kDefaultUDPPort
-    localPort = gApplication->Number(kDefaultClientUDPPort, serverPort);
+    // if kDefaultClientUDPPort not specified, fall back to 0 (random port) for the client
+    localPort = gApplication->Number(kDefaultClientUDPPort, 0);
 
     IPaddress addr;
     // CAvaraApp *app = (CAvaraAppImpl *)gApplication;
     ResolveHost(&addr, address.c_str(), serverPort);
 
     password[0] = passwordStr.length();
-    BlockMoveData(passwordStr.c_str(), password + 1, passwordStr.length());
+    BlockMoveData(passwordStr.c_str(), password + 1, password[0]);
 
     ContactServer(addr);
     /*
@@ -1905,10 +1906,10 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            // add in 1.9*stdev (~97% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // add in 2.58*stdev (~99% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
             // note: is this really a erlang distribution?  if so, what's the proper equation?
             float stdev = sqrt(conn->varRoundTripTime);
-            float rtt = conn->meanRoundTripTime + std::min(1.9*stdev, (1.0*CLASSICFRAMECLOCK));
+            float rtt = conn->meanRoundTripTime + std::min(2.58*stdev, (1.0*CLASSICFRAMECLOCK));
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {

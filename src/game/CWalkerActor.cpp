@@ -18,6 +18,7 @@
 #include "CSmartPart.h"
 #include "CViewParameters.h"
 #include "KeyFuncs.h"
+#include "Preferences.h"
 
 #define SCOUTPLATFORM FIX3(1500)
 #define MAXHEADHEIGHT FIX3(1750)
@@ -145,7 +146,9 @@ void CWalkerActor::PlaceParts() {
     aPart->RotateOneX(legs[1].highAngle);
     TranslatePartX(aPart, LEGSPACE);
 
+    dElevation = oldElevation - (location[1] + headHeight);
     deltaY = location[1] + headHeight;
+    oldElevation = deltaY;
 
     for (i = 0; i < partCount; i++) {
         aPart = partList[i];
@@ -718,7 +721,7 @@ void CWalkerActor::KeyboardControl(FunctionTable *ft) {
             }
         }
 
-        if (TESTFUNC(kfuJump, ft->up) && tractionFlag) {
+        if (TESTFUNC(kfuJump, ft->up) && tractionFlag && !jumpFlag) {
             FPS_DEBUG("*** kfuJump UP!!, fn=" << itsGame->frameNumber << ", crouch = " << crouch << ", initial speed = " << speed[1] << std::endl);
             speed[1] >>= 1;
             // it's an impulse power up so don't scale the jump
@@ -763,10 +766,10 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
         HullConfigRecord hull;
 
         hullRes = config->hullType;
-        if (hullRes < 0 || hullRes > 2)
+        if (hullRes < 0 || hullRes > 9)
             hullRes = 1;
 
-        hullRes = ReadLongVar(iFirstHull + hullRes);
+        hullRes = ReadLongVar(iHull01 + hullRes);
 
         LoadHullFromSetJSON(&hull, hullRes);
 
@@ -777,18 +780,20 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         viewPortPart = partList[0];
         viewPortPart->ReplaceColor(*ColorManager::getMarkerColor(0), longTeamColor);
-        viewPortPart->ReplaceColor(
-            *ColorManager::getMarkerColor(1),
-            (*ColorManager::getMarkerColor(1)).WithA(0xff)
-        );
-        viewPortPart->ReplaceColor(
-            *ColorManager::getMarkerColor(2),
-            config->cockpitColor.WithA(0xff)
-        );
-        viewPortPart->ReplaceColor(
-            *ColorManager::getMarkerColor(3),
-            config->gunColor.WithA(0xff)
-        );
+        if (!itsGame->itsApp->Get(kIgnoreCustomColorsTag)) {
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(1),
+                config->trimColor.WithA(0xff)
+            );
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(2),
+                config->cockpitColor.WithA(0xff)
+            );
+            viewPortPart->ReplaceColor(
+                *ColorManager::getMarkerColor(3),
+                config->gunColor.WithA(0xff)
+            );
+        }
 
         proximityRadius = viewPortPart->enclosureRadius << 2;
 

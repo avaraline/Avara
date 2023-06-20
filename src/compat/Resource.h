@@ -22,7 +22,6 @@ typedef struct {
 #endif
 
 // files stuff
-#define RSRCDIR "rsrc"
 #define LEVELDIR "levels"
 #define SETFILE "set.json"
 #define ALFDIR "alf"
@@ -33,6 +32,7 @@ typedef struct {
 #define WAVDIR "wav"
 
 void UseResFile(std::string filename);
+void UseBaseFolder(std::string folder);
 void UseLevelFolder(std::string folder);
 std::string OSTypeString(OSType t);
 OSType StringOSType(std::string s);

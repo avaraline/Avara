@@ -29,8 +29,11 @@ using json = nlohmann::json;
 #define kKeyboardMappingTag "keyboard"
 
 #define kPlayerNameTag "playerName"
+#define kPlayerHullColorTag "hullColor"
+#define kPlayerHullTrimColorTag "hullTrimColor"
 #define kPlayerCockpitColorTag "cockpitColor"
 #define kPlayerGunColorTag "gunColor"
+#define kIgnoreCustomColorsTag "ignoreCustomColors"
 
 // GL stuff
 #define kWindowWidth "windowWidth"
@@ -41,7 +44,18 @@ using json = nlohmann::json;
 
 // Other graphics settings
 #define kColorBlindMode "colorBlindMode"
-#define kWeaponSightAlpha "weaponSightAlpha"
+#define kHUDColor "hudColor"
+#define kHUDPositiveColor "hudPositiveColor"
+#define kHUDWarningColor "hudWarningColor"
+#define kHUDCriticalColor "hudCriticalColor"
+#define kHUDAlpha "hudAlpha"
+#define kHUDPreset "hudPreset"
+#define kHUDArrowStyle "hudArrowStyle"
+#define kHUDArrowScale "hudArrowScale"
+#define kHUDArrowDistance "hudArrowDistance"
+#define kHUDShowMissileLock "hudShowMissileLock"
+#define kShowOldHUD "showOldHUD"
+#define kShowNewHUD "showNewHUD"
 
 // Network & Tracker
 #define kLastAddress "lastAddress"
@@ -63,6 +77,9 @@ using json = nlohmann::json;
 // Sound
 #define kIgnoreCustomGoodySound "ignoreCustomGoodySound"
 #define kSoundVolume "soundVolume"
+
+// other
+#define kGoodGamePhrases "ggs"
 
 // Key names are from https://wiki.libsdl.org/SDL_Scancode
 static json defaultPrefs = {
@@ -104,6 +121,8 @@ static json defaultPrefs = {
         {"debug2", "6"}}
     },
     {kPlayerNameTag, "Unnamed Player"},
+    {kPlayerHullColorTag, "default"},
+    {kPlayerHullTrimColorTag, "#2b2b2b"},
     {kPlayerCockpitColorTag, "#0333ff"},
     {kPlayerGunColorTag, "#929292"},
     {kMultiSamplesTag, 0},
@@ -112,7 +131,18 @@ static json defaultPrefs = {
     {kFullScreenTag, false},
     {kFOV, 50.0},
     {kColorBlindMode, 0},
-    {kWeaponSightAlpha, 1.0},
+    {kHUDColor, "#03f5f5"},
+    {kHUDPositiveColor, "#51e87e"},
+    {kHUDWarningColor, "#edd62d"},
+    {kHUDCriticalColor, "#fa1313"},
+    {kHUDAlpha, 1.0},
+    {kHUDPreset, 1},
+    {kHUDArrowScale, 1.0},
+    {kHUDArrowDistance, 8.0},
+    {kHUDArrowStyle, 2},
+    {kHUDShowMissileLock, true},
+    {kShowOldHUD, true},
+    {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},
     {kServerDescription, ""},
@@ -128,8 +158,10 @@ static json defaultPrefs = {
     {kRecentSets, {}},
     {kRecentLevels, {}},
     {kSoundVolume, 100},
+    {kIgnoreCustomColorsTag, false},
     {kIgnoreCustomGoodySound, false},
-    {kThrottle, 0}
+    {kThrottle, 0},
+    {kGoodGamePhrases, {}},
 };
 
 
@@ -139,6 +171,10 @@ static std::string PrefPath() {
     std::string jsonPath = std::string(prefPath) + "prefs.json";
     SDL_free(prefPath);
     return jsonPath;
+}
+
+static inline json ReadDefaultPrefs() {
+    return defaultPrefs;
 }
 
 static inline json ReadPrefs() {

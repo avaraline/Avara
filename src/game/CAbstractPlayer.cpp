@@ -13,6 +13,7 @@
 
 #include "AvaraDefines.h"
 #include "CBSPWorld.h"
+#include "CScaledBSP.h"
 #include "CDepot.h"
 #include "CPlayerManager.h"
 #include "CPlayerMissile.h"
@@ -35,6 +36,7 @@
 #include "ComputerVoice.h"
 #include "Parser.h"
 #include "Preferences.h"
+#include "FastMat.h"
 
 #include "Debug.h"
 
@@ -79,14 +81,18 @@ void CAbstractPlayer::LoadHUDParts() {
         hudWorld->AddPart(targetOffs[i]);
     }
 
-    dirArrowHeight = FIX3(750);
-    dirArrow = new CBSPPart;
-    dirArrow->IBSPPart(kDirIndBSP);
-    dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
-    dirArrow->ignoreDirectionalLights = true;
-    dirArrow->privateAmbient = FIX1;
-    dirArrow->isTransparent = true;
-    hudWorld->AddPart(dirArrow);
+    if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
+        dirArrowHeight = FIX3(750);
+        dirArrow = new CBSPPart;
+        dirArrow->IBSPPart(kDirIndBSP);
+        dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
+        dirArrow->ignoreDirectionalLights = true;
+        dirArrow->privateAmbient = FIX1;
+        dirArrow->isTransparent = true;
+        hudWorld->AddPart(dirArrow);
+    }
+
+    LoadDashboardParts();
 }
 
 void CAbstractPlayer::StartSystems() {
@@ -175,6 +181,11 @@ void CAbstractPlayer::StartSystems() {
     classicShieldRegen = FIX3(30);       //  Use 0.030 per frame to repair shields
     classicChargeGunPerFrame = FIX3(35); //    Charge gun at 0.035 units per frame
     classicMotorFriction = CLASSICMOTORFRICTION;
+}
+
+void CAbstractPlayer::LevelReset() {
+    ResetCamera();
+    CAbstractActor::LevelReset();
 }
 
 void CAbstractPlayer::LoadScout() {
@@ -315,8 +326,10 @@ void CAbstractPlayer::Dispose() {
 
     hudWorld = itsGame->hudWorld;
 
-    hudWorld->RemovePart(dirArrow);
-    dirArrow->Dispose();
+    if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
+        hudWorld->RemovePart(dirArrow);
+        dirArrow->Dispose();
+    }
 
     for (i = 0; i < 2; i++) {
         hudWorld->RemovePart(targetOns[i]);
@@ -324,10 +337,73 @@ void CAbstractPlayer::Dispose() {
         hudWorld->RemovePart(targetOffs[i]);
         targetOffs[i]->Dispose();
     }
+    DisposeDashboard();
 
     gHub->ReleaseLink(teleportSoundLink);
 
     CRealMovers::Dispose();
+}
+
+void CAbstractPlayer::DisposeDashboard() {
+    if (!itsGame->showNewHUD) return;
+
+    CBSPWorld *hudWorld;
+    hudWorld = itsGame->hudWorld;
+
+    if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
+        hudWorld->RemovePart(lockLight);
+        lockLight->Dispose();
+    }
+
+    if (itsGame->itsApp->Get(kHUDArrowStyle) == 2) {
+        hudWorld->RemovePart(groundDirArrow);
+        groundDirArrow->Dispose();
+
+        hudWorld->RemovePart(groundDirArrowSlow);
+        groundDirArrowSlow->Dispose();
+
+        hudWorld->RemovePart(groundDirArrowFast);
+        groundDirArrowFast->Dispose();
+    }
+
+    hudWorld->RemovePart(grenadeLabel);
+    grenadeLabel->Dispose();
+
+    hudWorld->RemovePart(missileLabel);
+    missileLabel->Dispose();
+
+    hudWorld->RemovePart(shieldGauge);
+    shieldGauge->Dispose();
+
+    hudWorld->RemovePart(shieldGaugeBackLight);
+    shieldGaugeBackLight->Dispose();
+
+    hudWorld->RemovePart(energyGauge);
+    energyGauge->Dispose();
+
+    hudWorld->RemovePart(energyGaugeBackLight);
+    energyGaugeBackLight->Dispose();
+
+
+    for (int i = 0; i < 4; i++) {
+        hudWorld->RemovePart(grenadeMeter[i]);
+        grenadeMeter[i]->Dispose();
+
+        hudWorld->RemovePart(grenadeBox[i]);
+        grenadeBox[i]->Dispose();
+
+        hudWorld->RemovePart(missileMeter[i]);
+        missileMeter[i]->Dispose();
+
+        hudWorld->RemovePart(missileBox[i]);
+        missileBox[i]->Dispose();
+
+        hudWorld->RemovePart(boosterMeter[i]);
+        boosterMeter[i]->Dispose();
+
+        hudWorld->RemovePart(boosterBox[i]);
+        boosterBox[i]->Dispose();
+    }
 }
 
 /*
@@ -347,11 +423,13 @@ void CAbstractPlayer::PlaceHUDParts() {
     RayHitRecord theHit;
     CWeapon *weapon = NULL;
 
-    dirArrow->Reset();
-    InitialRotatePartY(dirArrow, heading);
-    TranslatePart(dirArrow, location[0], location[1] + dirArrowHeight, location[2]);
-    dirArrow->isTransparent = scoutView; // Invisible if scout view is on.
-    dirArrow->MoveDone();
+    if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
+        dirArrow->Reset();
+        InitialRotatePartY(dirArrow, heading);
+        TranslatePart(dirArrow, location[0], location[1] + dirArrowHeight, location[2]);
+        dirArrow->isTransparent = scoutView; // Invisible if scout view is on.
+        dirArrow->MoveDone();
+    }
 
     if (weaponIdent)
         weapon = (CWeapon *)gCurrentGame->FindIdent(weaponIdent);
@@ -437,6 +515,362 @@ void CAbstractPlayer::PlaceHUDParts() {
             theSight->MoveDone();
         }
     }
+    RenderDashboard();
+}
+
+CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id, Fixed scale) {
+    CScaledBSP* bsp = new CScaledBSP;
+    bsp->IScaledBSP(scale, id, this, 0);
+    bsp->ReplaceAllColors(ColorManager::getHUDColor());
+    bsp->privateAmbient = FIX1;
+    bsp->ignoreDirectionalLights = true;
+    bsp->isTransparent = true;
+    itsGame->hudWorld->AddPart(bsp);
+    return bsp;
+}
+
+CScaledBSP* CAbstractPlayer::DashboardPart(uint16_t id) {
+    return DashboardPart(id, FIX1);
+}
+
+// Initialize dashboard parts
+void CAbstractPlayer::LoadDashboardParts() {
+    if (!itsGame->showNewHUD) return;
+
+    dashboardSpinSpeed = ToFixed(100);
+    dashboardSpinHeading = 0;
+
+    int layout = itsGame->itsApp->Get(kHUDPreset);
+    //float alpha = itsGame->itsApp->Get(kHUDAlpha);
+    //Fixed hudAlpha = FIX1 * alpha;
+
+    // Init components for PID Motion in the HUD
+    // These scalars affect how quickly the two values converge
+    pidReset(&pMotionY);
+    pidReset(&pMotionX);
+    pMotionX.P = -1.0;
+    pMotionX.I = -.50;
+    pMotionX.D = -.10;
+    pMotionX.angular = false;
+    pMotionY.P = -1.0;
+    pMotionY.I = -0.50;
+    pMotionY.D = -0.10;
+    pMotionY.angular = false;
+    hudRestingX = 0;
+    hudRestingY = 0;
+
+    arrowDistance = itsGame->itsApp->Get(kHUDArrowDistance);
+    arrowScale = itsGame->itsApp->Get(kHUDArrowScale);
+    switch (layout-1) {
+        case Close:
+            gaugeBSP = kGaugeBSP;
+            layoutScale = 1.0;
+            boosterPosition[0] = 0.21f;
+            boosterPosition[1] = -0.09f;
+            grenadePosition[0] = 0.15f;
+            grenadePosition[1] = -0.22f;
+            missilePosition[0] = -0.15f;
+            missilePosition[1] = -0.22f;
+            shieldPosition[0] = 0.19f;
+            shieldPosition[1] = -0.12f;
+            energyPosition[0] = -0.19f;
+            energyPosition[1] = -0.12f;
+            offsetMultiplier = .085f;
+            boosterSpacing = 65.0f;
+            weaponSpacing = 35.0f;
+            break;
+        case Far:
+            gaugeBSP = kGaugeBSP;
+            layoutScale = 2.0;
+            boosterPosition[0] = -0.87f;
+            boosterPosition[1] = -0.13f;
+            grenadePosition[0] = 0.96f;
+            grenadePosition[1] = -0.35f;
+            missilePosition[0] = 0.85f;
+            missilePosition[1] = -0.35f;
+            shieldPosition[0] = -0.91f;
+            shieldPosition[1] = -0.20f;
+            energyPosition[0] = -0.97f;
+            energyPosition[1] = -0.20f;
+            offsetMultiplier = .17f;
+            boosterSpacing = 40.0f;
+            weaponSpacing = 16.0f;
+            break;
+    }
+
+    if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
+        lockLight = DashboardPart(kLockLight, FIX3(600));
+    }
+
+    if (itsGame->itsApp->Get(kHUDArrowStyle) == 2) {
+        groundDirArrow = DashboardPart(kGroundDirArrow, FIX3(1000 * arrowScale));
+        groundDirArrowSlow = DashboardPart(kGroundDirArrowSlow, FIX3(1000 * arrowScale));
+        groundDirArrowFast = DashboardPart(kGroundDirArrowFast, FIX3(1000 * arrowScale));
+    }
+
+    // Shields
+    shieldGauge = DashboardPart(gaugeBSP);
+    shieldGauge->isMorphable = true;
+
+    shieldGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
+    shieldGaugeBackLight->privateAmbient = FIX3(80);
+
+    // Energy
+    energyGauge = DashboardPart(gaugeBSP);
+    energyGauge->isMorphable = true;
+
+    energyGaugeBackLight = DashboardPart(gaugeBSP, ToFixed(layoutScale));
+    energyGaugeBackLight->privateAmbient = FIX3(80);
+
+    // Weapons
+    grenadeLabel = DashboardPart(kGrenadeBSP, FIX3(700*layoutScale));
+    missileLabel = DashboardPart(kMissileBSP, FIX3(700*layoutScale));
+    boosterLabel = DashboardPart(kBoosterBSP, FIX3(40*layoutScale));
+    for (int i = 0; i < 4; i++) {
+        grenadeMeter[i] = DashboardPart(kFilledBox, FIX3(100*layoutScale));
+        grenadeBox[i] = DashboardPart(kEmptyBox, FIX3(200*layoutScale));
+
+        missileMeter[i] = DashboardPart(kFilledBox, FIX3(100*layoutScale));
+        missileBox[i] = DashboardPart(kEmptyBox, FIX3(200*layoutScale));
+
+        boosterMeter[i] = DashboardPart(kFilledBox, FIX3(40*layoutScale));
+        boosterBox[i] = DashboardPart(kEmptyBox, FIX3(80*layoutScale));
+    }
+}
+
+// Place parts on screen
+void CAbstractPlayer::RenderDashboard() {
+    if (!itsGame->showNewHUD) return;
+    if (scoutView) {
+        ResetDashboard();
+        return;
+    }
+    
+    // Push HUD elements away from resting position based on movement factors
+    hudRestingX += ToFloat(FMul(FIX(.05), dYaw));
+    hudRestingY += ToFloat(FMul(FIX(.15), dPitch - FMul(dElevation, FIX(10))));
+
+    if (hudRestingX > 1) hudRestingX = 1;
+    if (hudRestingY > 1) hudRestingY = 1;
+
+    // Use PID Motion to move HUD elements back to resting position
+    hudRestingX += pidUpdate(&pMotionX, .65, hudRestingX, 0.0);
+    hudRestingY += pidUpdate(&pMotionY, .65, hudRestingY, 0.0);
+
+    CWeapon *weapon = NULL;
+    dashboardSpinHeading += FpsCoefficient2(FDegToOne(dashboardSpinSpeed));
+
+    if (weaponIdent)
+        weapon = (CWeapon *)gCurrentGame->FindIdent(weaponIdent);
+
+    if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
+        if (weapon && weapon->isTargetLocked) {
+            DashboardPosition(lockLight, 0.0, -0.1);
+            lockLight->Scale(FIX(.6));
+        }
+    }
+
+    if (itsGame->itsApp->Get(kHUDArrowStyle) == 2) {
+        CScaledBSP *arrow;
+        if (distance > FIX3(650)) {
+            arrow = groundDirArrowFast;
+        } else if (distance > FIX3(250)) {
+            arrow = groundDirArrowSlow;
+        } else {
+            arrow = groundDirArrow;
+        }
+        float dist = itsGame->itsApp->Get(kHUDArrowDistance);
+        DashboardFixedPosition(arrow, dist, 0);
+    }
+
+    // Ammo Labels
+    if (grenadeLimit != 0) {
+        DashboardPosition(grenadeLabel, false, grenadePosition[0], grenadePosition[1]-(.09f*(layoutScale/2.0)), 0, dashboardSpinHeading, 0);
+    }
+
+    if (missileLimit != 0) {
+        DashboardPosition(missileLabel, false, missilePosition[0], missilePosition[1]-(.09f*(layoutScale/2.0)), 0, dashboardSpinHeading, 0);
+    }
+
+    if (boosterLimit != 0) {
+        DashboardPosition(boosterLabel, false, boosterPosition[0], boosterPosition[1]-(.05f*(layoutScale/2.0)), FIX(90.0), FIX(70.0), 0);
+    }
+
+    // Ammo counts
+    for (int i = 0; i < 4; i++) {
+        if (0 < grenadeLimit) {
+            if (float(i)/4.0 < float(grenadeCount)/float(grenadeLimit)) {
+                // Fill box
+                DashboardPosition(grenadeMeter[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
+            } else {
+                // Empty box
+                DashboardPosition(grenadeBox[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
+            }
+        }
+
+        if (0 < missileLimit) {
+            if (i < missileCount) {
+                // Fill box
+                DashboardPosition(missileMeter[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
+            } else {
+                // Empty box
+                DashboardPosition(missileBox[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
+            }
+        }
+
+        if (0 < boosterLimit) {
+            if (i < boostsRemaining) {
+                // Fill box
+                DashboardPosition(boosterMeter[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing)); // (x,y) screen position
+            } else {
+                // Empty box
+                DashboardPosition(boosterBox[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing)); // (x,y) screen position
+            }
+        }
+    }
+
+    // Shields
+    DashboardPosition(shieldGaugeBackLight, shieldPosition[0], shieldPosition[1]);
+
+    Fixed shieldPercent = 0;
+    if (maxShields > 0) shieldPercent = FDiv(shields, maxShields);
+
+    if (shieldPercent <= FIX3(333)) {
+        shieldGauge->ReplaceAllColors(ColorManager::getHUDCriticalColor());
+    } else if (shieldPercent <= FIX3(666)) {
+        shieldGauge->ReplaceAllColors(ColorManager::getHUDWarningColor());
+    } else {
+        shieldGauge->ReplaceAllColors(ColorManager::getHUDColor());
+    }
+
+    // Scale based on damage taken
+    Fixed shieldHeight = FMul(ToFixed(layoutScale), shieldPercent);
+
+    // Get the inverse of the shield percent
+    // Gauge moves further when energy is lower
+    float shieldYOffset = abs(ToFloat(FIX1 - shieldPercent));
+
+    DashboardPosition(shieldGauge, shieldPosition[0], shieldPosition[1] - (offsetMultiplier * shieldYOffset));
+    shieldGauge->ScaleXYZ(ToFixed(layoutScale), shieldHeight, ToFixed(layoutScale));
+
+    // Energy
+    DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
+
+    Fixed energyPercent = 0;
+    if (maxEnergy > 0) energyPercent = FDiv(energy, maxEnergy);
+
+    if (boostEndFrame > itsGame->frameNumber) {
+        energyGauge->ReplaceAllColors(ColorManager::getHUDPositiveColor());
+    }
+    else if (energyPercent <= FIX(.25)) {
+        energyGauge->ReplaceAllColors(ColorManager::getHUDCriticalColor());
+    } else {
+        energyGauge->ReplaceAllColors(ColorManager::getHUDColor());
+    }
+
+    // Scale based on energy lost
+    Fixed energyHeight = FMul(ToFixed(layoutScale), energyPercent);
+
+    // Get the inverse of the energy percent
+    // Gauge moves further when energy is lower
+    float energyYOffset = abs(ToFloat(FIX1 - energyPercent));
+
+    DashboardPosition(energyGauge, energyPosition[0], energyPosition[1] - (offsetMultiplier * energyYOffset ));
+    energyGauge->ScaleXYZ(ToFixed(layoutScale), energyHeight, ToFixed(layoutScale));
+}
+
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y) {
+    DashboardPosition(part, false, x, y, 0, 0, 0);
+}
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y) {
+    DashboardPosition(part, autoRot, x, y, 0, 0, 0);
+}
+void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot) {
+    // Draw a part on the dashboard
+    // Coordinates on the screen are roughly described as a percentage of the screen away from the bottom and the left
+    // (-1.0, -1.0) is the bottom left of the screen
+    // (1.0, 1.0) is the top right of the screen
+
+
+    // TODO: Adjust these until it looks good, then go multiply 
+    // all the DashboardPosition parameters by these numbers, and
+    // then delete these
+    float scale_x = 13.12;
+    float scale_y = 8.23;
+    Fixed hud_dist = (FIX3(6000) * 25)/8;
+
+    // Turn elements toward the center of the screen for a better 3d look
+    // Being further away from the center results in greater rotation
+    float yAng = 0;
+
+    if (autoRot) {
+        if (x < 0.0) {
+            yAng = -60*x + 15;
+        }
+
+        if (x > 0.0) {
+            yAng = -60*x - 15;
+        }
+    }
+
+    //InitialRotatePartX(part, FDegToRad(x_rot));
+    //InitialRotatePartY(part, FDegToRad(y_rot + ToFixed(yAng)));
+    //InitialRotatePartZ(part, FDegToRad(z_rot));
+    part->isTransparent = false;
+    part->Reset();
+    part->RotateOneY(FDegToOne(ToFixed(yAng) + y_rot));
+    part->RotateOneX(FDegToOne(x_rot));
+    TranslatePart(part, -ToFixed((x * scale_x) + hudRestingX), ToFixed((y * scale_y) + hudRestingY), hud_dist);
+    part->ApplyMatrix(&viewPortPart->itsTransform);
+    part->MoveDone();
+}
+
+void CAbstractPlayer::DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle) {
+    DashboardFixedPosition(part, dist, angle, 0, 0, 0, 0);
+}
+void CAbstractPlayer::DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle, float height, Fixed x_rot, Fixed y_rot, Fixed z_rot) {
+    // Place a part in a fixed position relative to the HECTOR.
+    // Part rotates with the HECTOR facing instead of the head
+    Fixed finalAngle = heading - FDegToOne(angle);
+    part->isTransparent = false;
+    part->Reset();
+    part->RotateOneY(finalAngle);
+
+    TranslatePart(part, location[0] + FMul(FIX(dist), FOneSin(finalAngle)),
+                        location[1] + FIX(height),
+                        location[2] + FMul(FIX(dist), FOneCos(finalAngle)));
+    part->MoveDone();
+}
+
+void CAbstractPlayer::ResetDashboard() {
+    if (!itsGame->showNewHUD) return;
+
+    if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
+        lockLight->isTransparent = true;
+    }
+    if (itsGame->itsApp->Get(kHUDArrowStyle) == 2) {
+        groundDirArrow->isTransparent = true;
+        groundDirArrowSlow->isTransparent = true;
+        groundDirArrowFast->isTransparent = true;
+    }
+    grenadeLabel->isTransparent = true;
+    missileLabel->isTransparent = true;
+    boosterLabel->isTransparent = true;
+    shieldGauge->isTransparent = true;
+    shieldGaugeBackLight->isTransparent = true;
+    energyGauge->isTransparent = true;
+    energyGaugeBackLight->isTransparent = true;
+
+    for (int i = 0; i < 4; i++) {
+        grenadeMeter[i]->isTransparent = true;
+        grenadeBox[i]->isTransparent = true;
+
+        missileMeter[i]->isTransparent = true;
+        missileBox[i]->isTransparent = true;
+
+        boosterMeter[i]->isTransparent = true;
+        boosterBox[i]->isTransparent = true;
+    }
 }
 
 void CAbstractPlayer::ControlSoundPoint() {
@@ -454,9 +888,6 @@ void CAbstractPlayer::ControlSoundPoint() {
 
 void CAbstractPlayer::ControlViewPoint() {
     CViewParameters *theView;
-    Fixed viewDist;
-    // CInfoPanel       *infoPanel;
-    Fixed frameYon;
 
     theView = itsGame->itsView;
 
@@ -465,7 +896,9 @@ void CAbstractPlayer::ControlViewPoint() {
 
     if (scoutView && scoutIdent) // && winFrame < 0)
     {
-        dirArrow->isTransparent = true;
+        if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
+            dirArrow->isTransparent = true;
+        }
 
         if (scoutIdent && !debugView) {
             itsScout = (CScout *)itsGame->FindIdent(scoutIdent);
@@ -486,6 +919,19 @@ void CAbstractPlayer::ControlViewPoint() {
         theView->inverseDone = false;
     }
 
+    RecalculateViewDistance();
+
+    // SetPort(itsGame->itsWindow);
+    ControlSoundPoint();
+}
+
+void CAbstractPlayer::RecalculateViewDistance() {
+    CViewParameters *theView;
+    Fixed viewDist;
+    Fixed frameYon;
+
+    theView = itsGame->itsView;
+
     viewDist = FMulDivNZ(theView->viewWidth, FDegCos(fieldOfView), 2 * FDegSin(fieldOfView));
 
     if (itsGame->yonList) {
@@ -502,9 +948,12 @@ void CAbstractPlayer::ControlViewPoint() {
         theView->Recalculate();
         theView->CalculateViewPyramidCorners();
     }
+}
 
-    // SetPort(itsGame->itsWindow);
-    ControlSoundPoint();
+void CAbstractPlayer::ResetCamera() {
+    fieldOfView = maxFOV;
+    AvaraGLSetFOV(ToFloat(fieldOfView));
+    RecalculateViewDistance();
 }
 
 void CAbstractPlayer::ReturnWeapon(short theKind) {
@@ -586,6 +1035,8 @@ void CAbstractPlayer::ArmGrenade() {
 void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
     if (ft) {
         short motionFlags;
+        Fixed yaw = viewYaw;
+        Fixed pitch = viewPitch;
 
         viewYaw -= ft->mouseDelta.h * FIX(.0625);
         viewPitch += ft->mouseDelta.v * FIX(.03125);
@@ -598,6 +1049,9 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
             viewPitch = minPitch;
         if (viewPitch > maxPitch)
             viewPitch = maxPitch;
+
+        dYaw = yaw - viewYaw;
+        dPitch = pitch - viewPitch;
 
         if (TESTFUNC(kfuAimForward, ft->held)) {
             Fixed scale = FpsCoefficient1(FIX(0.5));
@@ -976,11 +1430,14 @@ void CAbstractPlayer::PlayerAction() {
     }
 
     if (!isOut) {
-        dirArrow->isTransparent = true; //  No HUD display by default
-        targetOns[0]->isTransparent = true; //  So we hide all HUD parts now
-        targetOns[1]->isTransparent = true; //  And reveal them if necessary
-        targetOffs[0]->isTransparent = true; // in PlaceHUDParts.
-        targetOffs[1]->isTransparent = true;
+        if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
+            dirArrow->isTransparent = true; 
+        }
+        targetOns[0]->isTransparent = true; //  No HUD display by default
+        targetOns[1]->isTransparent = true; //  So we hide all HUD parts now
+        targetOffs[0]->isTransparent = true; //  And reveal them if necessary
+        targetOffs[1]->isTransparent = true; // in PlaceHUDParts.
+        ResetDashboard();
 
         if (isInLimbo) {
             if (!netDestruct)
@@ -991,7 +1448,9 @@ void CAbstractPlayer::PlayerAction() {
                     if (lives > 0) {
                         viewYaw = 0;
                         viewPitch = 0;
-                        fieldOfView = maxFOV;
+                        if (!scoutView) {
+                            ResetCamera();
+                        }
                         Reincarnate();
                     } else {
                         itsManager->DeadOrDone();
@@ -1301,6 +1760,10 @@ bool CAbstractPlayer::ReincarnateComplete(CIncarnator* newSpot) {
             (*thePart)->isTransparent = true;
         }
         return false;
+    }
+
+    if (newSpot->colorMask != -1) {
+        didIncarnateMasked = true;
     }
 
     return true;

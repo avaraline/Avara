@@ -112,9 +112,6 @@ struct ALFWalker: pugi::xml_tree_walker {
         switch (node.type()){
             case pugi::node_element:
                 handle_element(node, tag);
-                val = node.child_value();
-                if (val.length() > 0)
-                RunThis((StringPtr)val.c_str());
                 break;
             default:
                 break;

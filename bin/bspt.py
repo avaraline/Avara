@@ -213,12 +213,10 @@ class ColorRecord():
             ((self.color_long >> 24) & 0xff),
         ]
         # leave first two marker colors alone but convert any other color to sRGB from AppleRGB
+        # marker colors three & four were not in the original game, so we still want to adjust them
         if self.color != [254, 254, 254, 0] and self.color != [254, 0, 0, 0]:
             self.color = [int(round(255.0 * y)) for y in applergb_to_srgb([x / 255.0 for x in self.color[:3]])]
-            if self.color != [3, 51, 255] and self.color != [146, 146, 146]:
-                self.color.append(0xff) # use full alpha for any non-marker color
-            else:
-                self.color.append(0x00) # use empty alpha for the remaining marker colors
+            self.color.append(0x00) # use empty alpha for now
         self.color_long = (self.color[3] << 24) | (self.color[0] << 16) | (self.color[1] << 8) | self.color[2]
 
         # colorCache[32] (COLORCACHESIZE)
@@ -259,7 +257,6 @@ class BSP(object):
         self.unique_edge_count = bytes_to_unsigned_long(raw_data[80:84])
 
         if self.poly_count == 0:
-            print("Shape %s has no faces, making empty shape" % self.name)
             self.normals = []
             self.polys = []
             self.edges = []
@@ -525,7 +522,9 @@ class BSP(object):
     def avara_format(self):
         d = self.triangulate(int_colors=True)
         out = {
+            'colors': readable_colors(d['colors']),
             'points': [p[:3] for p in d['points']],
+            'normals': [v[:3] for v in d['vectors']],
             'bounds': {
                 'min': d['min_bounds'][:3],
                 'max': d['max_bounds'][:3],
@@ -542,53 +541,52 @@ class BSP(object):
                 # any use of
                 vec_idx, basept, color_idx, nvis = d['normals'][normal_idx]
 
-                # get values out from all the indexes
-                normal = d['vectors'][vec_idx][:3]
-                color = d['colors'][color_idx]
-
                 # these were set in the triangulation step
                 tris = d['triangles_poly'][idx]
                 tri_points = d['triangles_verts_poly'][idx]
+                tri_list = [pt for tri in [[tri_points[i] for i in t] for t in tris] for pt in tri]
 
                 # in avara, each poly has a flag to determine if the front,
-                # back, or both sides should be drawn. in OpenGL, we use
-                # back face culling with CCW winding.
-                #
-                # This means we both need to wind in the correct direction
-                # to respect the front/back flag, but also duplicate faces
-                # that need to be seen from both sides. The back face has
-                # both its normal and triangles reversed.
-                #
-                # this first poly is the
-                # 'front' face.
-                the_poly = {
-                    'normal': [x for x in normal],
-                    'color': color,
+                # back, or both sides should be drawn.
+                #   1: front
+                #   2: back
+                #   3: both
+                # the normal is for the front face. the shader will reverse
+                # the normal when rendering the back face, if requested by
+                # the flag
+                out['polys'].append({
+                    'normal': vec_idx,
+                    'color': color_idx,
                     'front': fp, # index of the poly in front of this one
                     'back': bp, # index of the poly in back of this one
-                    'tris': [[tri_points[i] for i in t] for t in tris]
-                }
-                # check the poly visibility flags
-                if pvis == 1 or pvis == 3:
-                    # front or both
-                    out['polys'].append(the_poly)
-
-                if pvis == 2 or pvis == 3:
-                    # back or both
-                    # reverse triangles of front poly and reverse normal
-                    reverse = the_poly.copy()
-                    reverse['normal'] = [-x for x in normal]
-                    reverse['tris'] = [[tri_points[i] for i in t][::-1] for t in tris]
-                    out['polys'].append(reverse)
-
-
+                    'tris': tri_list,
+                    'vis': pvis,
+                })
         except IndexError:
             raise
-        return json.dumps(out, indent=2, sort_keys=True)
+        return json.dumps(out, indent=None, separators=(", ", ":"), sort_keys=True)
+
+
+def readable_colors(color_list):
+    out_list = []
+    for color in color_list:
+        if color == 0x00fefefe:
+            out_list.append("marker(0)")
+        elif color == 0x00fe0000:
+            out_list.append("marker(1)")
+        elif color == 0x000333ff:
+            out_list.append("marker(2)")
+        elif color == 0x00929292:
+            out_list.append("marker(3)")
+        else:
+            # remaining colors implicitly given full alpha via CSS syntax
+            out_list.append("#" + hex(color)[2:].zfill(6))
+    return out_list
 
 
 def serialize_list(the_list):
     return [x.serialize() for x in the_list]
+
 
 def bsp2json(data):
     bsp = BSP(data)

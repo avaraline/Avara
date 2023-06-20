@@ -349,19 +349,23 @@ UDPPacketInfo *CUDPConnection::GetOutPacket(int32_t curTime, int32_t cramTime, i
     return thePacket;
 }
 
-float CommandMultiplierForStats(long command) {
+float CommandMultiplierForStats(const PacketInfo& thePacketInfo) {
     float multiplier = 0;
     // only use faster commands for stats
     // keep multiplier value below RTTSMOOTHFACTOR_UP.
-    switch(command) {
+    switch(thePacketInfo.command) {
         case kpKeyAndMouse:
             // normal game play commands (multiply by fpsScale to make influence consistent across frame rates)
             multiplier = gCurrentGame->fpsScale;
             break;
-       case kpPing:
-           // ping times are an important influence on RTT (not affected by frame rate)
-           multiplier = (RTTSMOOTHFACTOR_UP) * 0.1;
-           break;
+        case kpPing:
+            // ping times are an important influence on RTT (not affected by frame rate)
+            if (thePacketInfo.p3 > 0) {
+                // the last ping time can be too big if there aren't other messages coming after it
+                // because the receiver may have no reason to respond in a timely manner so ignore p3==0
+                multiplier = (RTTSMOOTHFACTOR_UP) * 0.3;
+            }
+            break;
     }
     return multiplier;
 }
@@ -374,7 +378,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
         long roundTrip;
 
         roundTrip = when - thePacket->birthDate;
-        float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
+        float commandMultiplier = CommandMultiplierForStats(thePacket->packet);
 
         if (uint16_t(maxValid) <= 10) {
             // use best RTT of early message(s) to prime initial values of RTT mean/var
@@ -474,7 +478,7 @@ void CUDPConnection::ValidatePacket(UDPPacketInfo *thePacket, int32_t when) {
 }
 
 void CUDPConnection::ValidateReceivedPacket(UDPPacketInfo *thePacket) {
-    float commandMultiplier = CommandMultiplierForStats(thePacket->packet.command);
+    float commandMultiplier = CommandMultiplierForStats(thePacket->packet);
     if (commandMultiplier > 0) {
         float alpha = commandMultiplier / COUNTSMOOTHFACTOR;
 

@@ -72,7 +72,8 @@ OSErr CCommManager::SendPacket(short distribution,
                                int16_t p2,
                                int32_t p3,
                                int16_t dataLen,
-                               Ptr dataPtr) {
+                               Ptr dataPtr,
+                               int16_t flags) {
     Ptr ps, pd;
 
     PacketInfo *thePacket;
@@ -80,15 +81,18 @@ OSErr CCommManager::SendPacket(short distribution,
     if (distribution) {
         thePacket = GetPacket();
         if (thePacket) {
-            thePacket->flags = 0;
+            thePacket->flags = flags;
             thePacket->distribution = distribution;
             thePacket->command = command;
             thePacket->p1 = p1;
             thePacket->p2 = p2;
             thePacket->p3 = p3;
 
-            if (dataLen > PACKETDATABUFFERSIZE)
-                dataLen = PACKETDATABUFFERSIZE;
+            if (dataLen > PACKETDATABUFFERSIZE || dataLen < 0) {
+                SDL_Log("SENDPACKET ERROR, cmd=%d, dataLen = %d", command, dataLen);
+                // will be caught by nanogui event handler
+                throw std::length_error(std::string("Invalid packet buffer data size = ") + std::to_string(dataLen));
+            }
             thePacket->dataLen = dataLen;
 
             ps = dataPtr;
@@ -112,44 +116,13 @@ OSErr CCommManager::SendPacket(short distribution,
 **	send the packet.
 */
 OSErr CCommManager::SendUrgentPacket(short distribution,
-    int8_t command,
-    int8_t p1,
-    int16_t p2,
-    int32_t p3,
-    int16_t dataLen,
-    Ptr dataPtr) {
-    Ptr ps, pd;
-
-    PacketInfo *thePacket;
-
-    if (distribution) {
-        thePacket = GetPacket();
-        if (thePacket) {
-            thePacket->flags = kpUrgentFlag;
-            thePacket->distribution = distribution;
-            thePacket->command = command;
-            thePacket->p1 = p1;
-            thePacket->p2 = p2;
-            thePacket->p3 = p3;
-
-            if (dataLen > PACKETDATABUFFERSIZE)
-                dataLen = PACKETDATABUFFERSIZE;
-            thePacket->dataLen = dataLen;
-
-            ps = dataPtr;
-            pd = thePacket->dataBuffer;
-
-            while (dataLen--) {
-                *pd++ = *ps++;
-            }
-
-            WriteAndSignPacket(thePacket);
-        } else {
-            return tmfoErr;
-        }
-    }
-
-    return noErr;
+                                     int8_t command,
+                                     int8_t p1,
+                                     int16_t p2,
+                                     int32_t p3,
+                                     int16_t dataLen,
+                                     Ptr dataPtr) {
+    return SendPacket(distribution, command, p1, p2, p3, dataLen, dataPtr, kpUrgentFlag);
 }
 
 /*

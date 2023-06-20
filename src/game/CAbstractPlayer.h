@@ -17,6 +17,7 @@
 #include "PlayerConfig.h"
 
 class CBSPPart;
+class CScaledBSP;
 class CScout;
 class CPlayerManager;
 class CIncarnator;
@@ -25,6 +26,16 @@ class CAbstractPlayer;
 #define kDirIndBSP 204
 #define kTargetOff 205
 #define kTargetOk 206
+#define kLockLight 207
+#define kGroundDirArrow 190
+#define kGroundDirArrowSlow 191
+#define kGroundDirArrowFast 192
+#define kFilledBox 400
+#define kEmptyBox 720
+#define kGaugeBSP 402
+#define kMissileBSP 802
+#define kGrenadeBSP 820
+#define kBoosterBSP 600
 
 #define kDefaultTeleportSound 410
 
@@ -39,9 +50,15 @@ enum {
     kShowAlwaysOption = 4 //	Used by teleporter itself
 };
 
+// HUD Preset options
+enum HUDPreset {
+    Close,
+    Far 
+};
+
 class CAbstractPlayer : public CRealMovers {
 public:
-    CPlayerManager *itsManager = 0;
+    std::shared_ptr<CPlayerManager> itsManager;
     CAbstractPlayer *nextPlayer = 0;
     PlayerConfigRecord defaultConfig = {        
         .numGrenades = 0,
@@ -54,7 +71,8 @@ public:
         .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
     };
 
-    ARGBColor longTeamColor = 0; // Hull color in 0x00RRGGBB format.
+    ARGBColor longTeamColor = 0;
+    bool hasTeammates = false;
 
     //	Shields & energy:
     Fixed energy = 0;
@@ -113,7 +131,11 @@ public:
 
     //	Control module (and view) orientation:
     Fixed viewYaw = 0;
+    Fixed dYaw = 0;
     Fixed viewPitch = 0;
+    Fixed dPitch = 0;
+    Fixed oldElevation = 0;
+    Fixed dElevation = 0;
     Vector viewOffset = {0};
     Fixed lookDirection = 0;
 
@@ -138,6 +160,7 @@ public:
     Boolean doIncarnateSound = 0;
     Boolean reEnergize = 0;
     Boolean didSelfDestruct = 0;
+    bool didIncarnateMasked = false;
 
     //	Winning/loosing:
     FrameNumber winFrame = 0;
@@ -170,6 +193,50 @@ public:
     CBSPPart *targetOffs[2] = {0, 0};
     CBSPPart *targetOns[2] = {0, 0};
 
+    // Dashboard HUD
+    RayHitRecord dashboardOrigin;
+    Fixed dashboardSpinHeading;
+    Fixed dashboardSpinSpeed;
+    float hudRestingX;
+    float hudRestingY;
+    float hudTargetX;
+    float hudTargetY;
+    PidMotion pMotionX;
+    PidMotion pMotionY;
+    CScaledBSP *lockLight = 0;
+    CScaledBSP *groundDirArrow = 0;
+    CScaledBSP *groundDirArrowSlow = 0;
+    CScaledBSP *groundDirArrowFast = 0;
+    CScaledBSP *shieldGauge = 0;
+    CScaledBSP *shieldGaugeBackLight = 0;
+    CScaledBSP *energyGauge = 0;
+    CScaledBSP *energyGaugeBackLight = 0;
+    CScaledBSP *grenadeLabel = 0;
+    CScaledBSP *missileLabel = 0;
+    CScaledBSP *boosterLabel = 0;
+    CScaledBSP *grenadeBox[4] = {0, 0, 0, 0};
+    CScaledBSP *missileBox[4] = {0, 0, 0, 0};
+    CScaledBSP *boosterBox[4] = {0, 0, 0, 0};
+    CScaledBSP *grenadeMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *boosterMeter[4] = {0, 0, 0, 0};
+
+    // HUD Layout Prefs
+    int layout;
+    float layoutScale;
+    Fixed hudAlpha;
+    int gaugeBSP;
+    float arrowDistance;
+    float arrowScale;
+    float boosterPosition[2];
+    float grenadePosition[2];
+    float missilePosition[2];
+    float shieldPosition[2];
+    float energyPosition[2];
+    float offsetMultiplier;
+    float boosterSpacing;
+    float weaponSpacing;
+
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void AdaptableSettings();
@@ -179,8 +246,10 @@ public:
     virtual void LoadParts();
     virtual void LoadScout();
     virtual void StartSystems();
+    virtual void LevelReset();
 
     virtual void Dispose();
+    virtual void DisposeDashboard();
 
     virtual void ReturnWeapon(short theKind);
     virtual void ArmGrenade();
@@ -202,8 +271,24 @@ public:
     virtual void AvoidBumping();
 
     virtual void PlaceHUDParts();
+    
+    //
+    virtual void LoadDashboardParts();
+    virtual CScaledBSP* DashboardPart(uint16_t id);
+    virtual CScaledBSP* DashboardPart(uint16_t id, Fixed scale);
+    virtual void RenderDashboard();
+    virtual void DashboardPosition(CScaledBSP *part, float x, float y);
+    virtual void DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y);
+    virtual void DashboardPosition(CScaledBSP *part, bool autoRot, float x, float y, Fixed x_rot, Fixed y_rot, Fixed z_rot);
+    virtual void DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle);
+    virtual void DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle, float height, Fixed x_rot, Fixed y_rot, Fixed z_rot);
+    virtual void ResetDashboard();
+    //
+
     virtual void ControlSoundPoint();
     virtual void ControlViewPoint();
+    virtual void RecalculateViewDistance();
+    virtual void ResetCamera();
 
     virtual short GetActorScoringId();
     virtual void PostMortemBlast(short scoreTeam, short scoreId, Boolean doDispose);

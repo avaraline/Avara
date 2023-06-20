@@ -143,7 +143,7 @@ public:
     virtual bool GetShowScoreboard() = 0;
 };
 
-class CPlayerManagerImpl : public CDirectObject, public CPlayerManager {
+class CPlayerManagerImpl : public CDirectObject, public CPlayerManager, public std::enable_shared_from_this<CPlayerManagerImpl> {
 private:
 
     CAbstractPlayer *itsPlayer;
@@ -211,7 +211,6 @@ private:
         .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
         .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
     };
-
     std::unordered_map<SDL_Scancode, uint32_t> keyMap; // maps keyboard key to keyFunc
 
 public:

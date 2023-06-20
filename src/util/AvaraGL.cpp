@@ -211,14 +211,23 @@ void AvaraGLLightDefaults() {
     AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR);
 }
 
-void SetTransforms(Matrix *modelview, Matrix *normal_transform) {
-    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(ToFloatMat(modelview)));
+void SetTransforms(CBSPPart *part) {
+    glm::mat4 mv = ToFloatMat(&part->fullTransform);
+    if (part->hasScale) {
+        glm::vec3 sc = glm::vec3(
+            ToFloat(part->scale[0]), 
+            ToFloat(part->scale[1]), 
+            ToFloat(part->scale[2])
+        );
+        mv = glm::scale(mv, sc);
+    }
+    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(mv));
     glm::mat3 normal_mat = glm::mat3(1.0f);
 
     for (int i = 0; i < 3; i ++) {
-        normal_mat[0][i] = ToFloat((*normal_transform)[0][i]);
-        normal_mat[1][i] = ToFloat((*normal_transform)[1][i]);
-        normal_mat[2][i] = ToFloat((*normal_transform)[2][i]);
+        normal_mat[0][i] = ToFloat((part->itsTransform)[0][i]);
+        normal_mat[1][i] = ToFloat((part->itsTransform)[1][i]);
+        normal_mat[2][i] = ToFloat((part->itsTransform)[2][i]);
     }
 
     glUniformMatrix3fv(ntLoc, 1, GL_TRUE, glm::value_ptr(normal_mat));
@@ -275,7 +284,7 @@ void AvaraGLInitContext() {
     skyColorLoc = glGetUniformLocation(skyProgram, "skyColor");
 
     glEnable(GL_BLEND);
-    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE, GL_ONE);
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE);
 
     ready = true;
 }
@@ -290,18 +299,21 @@ void AvaraGLViewport(short width, short height) {
 void AvaraGLDrawPolygons(CBSPPart* part) {
     glCheckErrors();
     if(!actuallyRender || !ready) return;
-    // Create a buffer big enough to hold vertex/color/normal for every point we draw.
+    // Bind the vertex array and buffer that we set up earlier
     glUseProgram(gProgram);
     glBindVertexArray(part->vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, part->vertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, part->glDataSize, part->glData.get(), GL_STREAM_DRAW);
     glCheckErrors();
 
+    // position
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), 0);
     glEnableVertexAttribArray(0);
+    // RGBAColor
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer (2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *) (7 * sizeof(float)));
+    // normal
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(GLData), (void *)(7 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
     // custom per-object lighting
@@ -323,11 +335,11 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    SetTransforms(&part->fullTransform, &part->itsTransform);
+    SetTransforms(part);
     glCheckErrors();
 
     glBindVertexArray(part->vertexArray);
-    glDrawArrays(GL_TRIANGLES, 0, part->totalPoints);
+    glDrawArrays(GL_TRIANGLES, 0, part->openGLPoints);
 
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
@@ -353,35 +365,96 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
 
 void AvaraGLUpdateData(CBSPPart *part) {
     if (!AvaraGLIsRendering()) return;
+
+    // If we haven't generated OpenGL data for this
+    // BSP yet, glDataSize will be 0
     if(part->glDataSize > 0) {
-        delete [] part->glData;
+        // Free previously used memory on the GPU
+        glDeleteVertexArrays(1, &part->vertexArray);
+        glDeleteBuffers(1, &part->vertexBuffer);
     }
-
-
-    part->glDataSize = part->totalPoints * sizeof(GLData);
-    part->glData = new GLData[part->glDataSize];
-
+    // Vertex buffer and array for this shape
+    // We use these pointers later to refer to the 
+    // vertex data in the draw step
     glGenVertexArrays(1, &part->vertexArray);
     glGenBuffers(1, &part->vertexBuffer);
 
     PolyRecord *poly;
-    //float scale = 1.0; // ToFloat(currentView->screenScale);
+    ARGBColor *color;
+    part->openGLPoints = 0;
+    uint8_t vis;
+    int tris, points;
+
+    // up front, calculate how many points we *actually* need
+    // for faces that should be visible on both sides, double
+    // the faces, triangles, and points to be reversed for the
+    // back side
+    for (size_t i = 0; i < part->polyCount; i++)
+    {
+        poly = &part->polyTable[i];
+        color = &part->currColorTable[poly->colorIdx];
+        vis = (part->HasAlpha() && poly->vis != 0) ? 3 : poly->vis;
+        if (!vis) vis = 0;
+        switch (vis) {
+            case 0:
+                tris = 0;
+                break;
+            case 3:
+                tris = poly->triCount * 2;
+                break;
+            default:
+                tris = poly->triCount;
+                break;
+        }
+        points = tris * 3;
+        part->openGLPoints += points;
+    }
+    part->glDataSize = part->openGLPoints * sizeof(GLData);
+    part->glData = std::make_unique<GLData[]>(part->glDataSize);
+
+    // Count all the points we output so that we can make sure
+    // it matches what we just calculated above
     int p = 0;
     for (int i = 0; i < part->polyCount; i++) {
         poly = &part->polyTable[i];
-        for (int v = 0; v < poly->triCount * 3; v++) {
-            Vector *pt = &part->pointTable[poly->triPoints[v]];
-            part->glData[p].x = ToFloat((*pt)[0]);
-            part->glData[p].y = ToFloat((*pt)[1]);
-            part->glData[p].z = ToFloat((*pt)[2]);
-            poly->color.ExportGLFloats(&part->glData[p].r, 4);
+        color = &part->currColorTable[poly->colorIdx];
+        uint8_t vis = (part->HasAlpha() && poly->vis != 0) ? 3 : poly->vis;
+        if (!vis) vis = 0; // default to 0 (none) if vis is empty
+        
+        // vis can ONLY be 0 for None, 1 for Front, 2 for Back, or 3 for Both
+        assert (vis == 0 || vis == 1 || vis == 2 || vis == 3);
 
-            part->glData[p].nx = poly->normal[0];
-            part->glData[p].ny = poly->normal[1];
-            part->glData[p].nz = poly->normal[2];
-            p++;
+        // wrap forwards - front side
+        if (vis == 1 || vis == 3) {
+            for (int v = 0; v < poly->triCount * 3; v++) {
+                Vector *pt = &part->pointTable[poly->triPoints[v]];
+                part->glData[p].x = ToFloat((*pt)[0]);
+                part->glData[p].y = ToFloat((*pt)[1]);
+                part->glData[p].z = ToFloat((*pt)[2]);
+                color->ExportGLFloats(&part->glData[p].r, 4);
+                part->glData[p].nx = poly->normal[0];
+                part->glData[p].ny = poly->normal[1];
+                part->glData[p].nz = poly->normal[2];
+                p++;
+            }
+        }
+        // wrap backwards - back side
+        if (vis == 2 || vis == 3) {
+            for (int v = (poly->triCount * 3) - 1; v >= 0; v--) {
+                Vector *pt = &part->pointTable[poly->triPoints[v]];
+                part->glData[p].x = ToFloat((*pt)[0]);
+                part->glData[p].y = ToFloat((*pt)[1]);
+                part->glData[p].z = ToFloat((*pt)[2]);
+                color->ExportGLFloats(&part->glData[p].r, 4);
+                part->glData[p].nx = -poly->normal[0];
+                part->glData[p].ny = -poly->normal[1];
+                part->glData[p].nz = -poly->normal[2];
+                p++;
+            }
         }
     }
+    // make sure we filled in the array correctly
+    assert(p == part->openGLPoints);
 }
 
 

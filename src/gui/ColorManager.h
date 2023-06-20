@@ -1,7 +1,9 @@
 #pragma once
 #include "ARGBColor.h"
 #include "AvaraDefines.h"
+#include "CApplication.h"
 #include "Messages.h"
+#include "Preferences.h"
 
 #include <stdint.h>
 #include <string>
@@ -104,13 +106,26 @@ public:
         return shieldGaugeColor;
     }
 
-    static inline ARGBColor getSpecialBlackColor() {
-        return specialBlackColor;
+    static inline ARGBColor getHUDColor() {
+        return hudColor;
     }
 
-    static inline ARGBColor getSpecialWhiteColor() {
-        return specialWhiteColor;
+    static inline ARGBColor getHUDAltColor() {
+        return hudAltColor;
     }
+    
+    static inline ARGBColor getHUDPositiveColor() {
+        return hudPositiveColor;
+    }
+
+    static inline ARGBColor getHUDWarningColor() {
+        return hudWarningColor;
+    }
+
+    static inline ARGBColor getHUDCriticalColor() {
+        return hudCriticalColor;
+    }
+
 
     static inline std::optional<ARGBColor> getMarkerColor(uint8_t num) {
         switch (num) {
@@ -158,18 +173,30 @@ public:
       return pingColors[num];
     }
 
-    static inline float getHudAlpha() {
+    static inline float getHUDAlpha() {
         return hudAlpha;
     }
 
     static void setColorBlind(ColorBlindMode mode);
-    static void setHudAlpha(float alpha);
+    static void setHUDColor(ARGBColor color);
+    static void setHUDPositiveColor(ARGBColor color);
+    static void setHUDWarningColor(ARGBColor color);
+    static void setHUDCriticalColor(ARGBColor color);
+    static void setHUDAlpha(float alpha);
     static void setMissileArmedColor(ARGBColor color);
     static void setMissileLaunchedColor(ARGBColor color);
+
+    static void refresh(CApplication *app);
 private:
     ColorManager() {}
 
     static ColorBlindMode colorBlindMode;
+    static ARGBColor hudColor;
+    static ARGBColor hudAltColor;
+    static ARGBColor hudPositiveColor;
+    static ARGBColor hudWarningColor;
+    static ARGBColor hudCriticalColor;
+
     static float hudAlpha;
 
     static ARGBColor energyGaugeColor;
@@ -192,8 +219,6 @@ private:
     static ARGBColor plasmaSightsOffColor;
     static ARGBColor plasmaSightsOnColor;
     static ARGBColor shieldGaugeColor;
-    static ARGBColor specialBlackColor;
-    static ARGBColor specialWhiteColor;
     static ARGBColor teamColors[kMaxTeamColors + 1];
     static ARGBColor teamTextColors[kMaxTeamColors + 1];
     static std::string teamColorNames[kMaxTeamColors + 1];

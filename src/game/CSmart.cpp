@@ -106,6 +106,7 @@ void CSmart::ShowTarget() {
     Fixed *v, *u;
 
     dist = sightDistance - FIX3(250);
+    isTargetLocked = false;
 
     itsGame->itsApp->BrightBox(itsGame->frameNumber, inSight);
 
@@ -137,6 +138,8 @@ void CSmart::ShowTarget() {
 
             rayHit.distance = FIX(5) + NormalizeVector(3, rayHit.direction);
             rayHit.closestHit = NULL;
+
+            isTargetLocked = true;
 
             if (rayHit.distance < FIX(160)) {
                 RayTestWithGround(&rayHit, kSolidBit);

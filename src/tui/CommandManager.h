@@ -30,19 +30,24 @@ public:
 
     // PlayerCommands
     bool GetSetPreference(VectorOfArgs);
+    bool DisplayRatings(VectorOfArgs);
+    bool SplitIntoTeams(VectorOfArgs);
 
     // RosterCommands
     bool GoodGame(VectorOfArgs);
 
     // ServerCommands
-    bool KickPlayer(VectorOfArgs);
+    bool ForEachSlot(VectorOfArgs vargs, std::function<bool(int)> slotCallback);
+    bool KickPlayers(VectorOfArgs vargs);
+    bool KickPlayer(int slot);
     bool ToggleAway(VectorOfArgs);
     bool ToggleSpectator(VectorOfArgs);
-    bool TogglePresence(VectorOfArgs, PresenceType, std::string);
+    bool TogglePresence(int slot, PresenceType, std::string);
 
     // LevelCommands
     bool LoadNamedLevel(VectorOfArgs);
     bool LoadRandomLevel(VectorOfArgs);
+    bool HandleTags(VectorOfArgs);
 
     void SendRosterMessage(std::string& message);
     void SendRosterMessage(const char* message); // arg must be null-terminated

@@ -144,7 +144,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     allowBackgroundProcessing = false;
 
-    loadedTag = "";
+    loadedFilename = "";
     loadedLevel = "";
     loadedDesigner = "";
     loadedInfo = "";
@@ -158,6 +158,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     nextPingTime = 0;
 
+    showOldHUD = gApplication->Get<bool>(kShowOldHUD);
+    showNewHUD = gApplication->Get<bool>(kShowNewHUD);
     // CalcGameRect();
 
     // vg = AvaraVGContext();
@@ -266,7 +268,7 @@ CAbstractPlayer *CAvaraGame::GetSpectatePlayer() {
 
 CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        CPlayerManager *mgr = itsNet->playerTable[i];
+        CPlayerManager *mgr = itsNet->playerTable[i].get();
         if (mgr && mgr->IsLocalPlayer()) {
             return mgr->GetPlayer();
         }
@@ -679,7 +681,7 @@ void CAvaraGame::StartIfReady() {
     if (itsNet->itsCommManager->myId == 0) {
         bool allReady = true;
         for (int i = 0; i < kMaxAvaraPlayers; i++) {
-            CPlayerManager *mgr = itsNet->playerTable[i];
+            CPlayerManager *mgr = itsNet->playerTable[i].get();
             if (mgr && mgr->LoadingStatus() == kLLoaded && mgr->Presence() == kzAvailable) {
                 allReady = false;
                 break;
@@ -795,8 +797,6 @@ void CAvaraGame::GameStart() {
         itsNet->FrameAction();
     }
 
-    loadedLevel = "";
-
     // SDL_ShowCursor(SDL_DISABLE);
     // SDL_CaptureMouse(SDL_TRUE);
     SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -860,8 +860,9 @@ bool CAvaraGame::GameTick() {
     itsNet->ProcessQueue();
 
     if (startTime > nextPingTime) {
-        static uint32_t pingInterval = 2000; // msec
-        itsNet->SendPingCommand(8);
+        // 3 pings every second, 1 ping used by each client for RTT calc (last ping not used)
+        static uint32_t pingInterval = 1000; // msec
+        itsNet->SendPingCommand(3);
         nextPingTime = startTime + pingInterval;
     }
 
@@ -1019,9 +1020,9 @@ void CAvaraGame::SpectatePrevious() {
 CPlayerManager *CAvaraGame::FindPlayerManager(CAbstractPlayer *thePlayer) {
     for (int i = 0; i < kMaxAvaraPlayers; i++)
         if(itsNet->playerTable[i] != NULL && itsNet->playerTable[i]->GetPlayer() == thePlayer)
-            return itsNet->playerTable[i];
+            return itsNet->playerTable[i].get();
 
-    return NULL;
+    return nullptr;
 }
 
 void CAvaraGame::StopGame() {
@@ -1048,15 +1049,16 @@ void CAvaraGame::Render(NVGcontext *ctx) {
     AvaraGLSetDepthTest(false);
     hudWorld->Render(itsView);
     AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
-    hud->Render(itsView, ctx);
+    if (showOldHUD)
+        hud->Render(itsView, ctx);
     AvaraGLSetDepthTest(true);
 }
 
 CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
-    CPlayerManager *theManager = NULL;
+    CPlayerManager *theManager = nullptr;
 
     if (itsNet->playerCount < kMaxAvaraPlayers) {
-        theManager = itsNet->playerTable[itsNet->playerCount];
+        theManager = itsNet->playerTable[itsNet->playerCount].get();
         theManager->SetPlayer(thePlayer);
         itsNet->playerCount++;
     }
@@ -1083,10 +1085,24 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         }
 
         double oldLatency = latencyTolerance;
+
+        static int reduceLatencyCounter = 0;
+        static int increaseLatencyCounter = 0;
         if (newLatency < latencyTolerance) {
-            latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+            static const int REDUCE_LATENCY_COUNT = 5;
+            // need REDUCE_LATENCY_COUNT consecutive requests to reduce latency
+            if (maxChange == MAX_LATENCY || ++reduceLatencyCounter >= REDUCE_LATENCY_COUNT) {
+                latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
+                reduceLatencyCounter = 0;
+                increaseLatencyCounter = 0;
+            }
         } else {
-            latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
+            static const int INCREASE_LATENCY_COUNT = 2;
+            if (maxChange == MAX_LATENCY || ++increaseLatencyCounter >= INCREASE_LATENCY_COUNT) {
+                latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
+                reduceLatencyCounter = 0;
+                increaseLatencyCounter = 0;
+            }
         }
 
         // make prettier version of the LT string (C++ sucks with strings)
@@ -1099,8 +1115,10 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         // if it changed
         if (latencyTolerance != oldLatency && statusRequest == kPlayingStatus) {
             std::ostringstream oss;
-            std::time_t t = std::time(nullptr);
-            oss << std::put_time(std::localtime(&t), "%H:%M:%S> LT set to ") << ltOss.str();
+            int gameSeconds = frameNumber * frameTime / 1000;
+            int gameMinutes = gameSeconds / 60;
+            gameSeconds = gameSeconds % 60;
+            oss << "T+" << std::setfill('0') << std::setw(2) << gameMinutes << ":" << std::setw(2) << gameSeconds << "> LT set to " << ltOss.str();
             if (slowPlayer != nullptr) {
                 oss << " (" << slowPlayer->GetPlayerName() << ")";
             }
@@ -1175,7 +1193,11 @@ void CAvaraGame::FpsCoefficients(bool fastFPS, Fixed classicCoeff1, Fixed classi
         if (fpsOffset != NULL) {
             // Dividing by classicCoeff1(A) seems to improve cases like this:
             //   s=As+B
-            *fpsOffset = FDiv(FpsOffset(fastFPS, classicCoeff2), classicCoeff1);
+            if (classicCoeff1) {
+                *fpsOffset = FDiv(FpsOffset(fastFPS, classicCoeff2), classicCoeff1);
+            } else {
+                *fpsOffset = 0;
+            }
         }
     } else {
         *fpsCoeff1 = classicCoeff1;
@@ -1226,7 +1248,7 @@ double CAvaraGame::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
 FrameNumber CAvaraGame::FpsFramesPerClassic(bool fastFPS, long classicFrames)
 {
     if (fastFPS) {
-        return long(classicFrames / fpsScale);
+        return (classicFrames / fpsScale);
     } else {
         return 1;
     }

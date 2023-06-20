@@ -1,0 +1,593 @@
+<map>
+  <set designer="Plastic Chicken" information="Teams are red and blue.  8 minute team killfest, or instant win by capturing the enemy's flag.&#10;&#10;Red button launches a homing missile.  Homing missiles attack ANYONE.  The on/off switch turns on auto-retaliate, which automatically fires missiles." gravity=".9" />
+  <set defaultLives="99" />
+  <set bspChicken="1250" bspStopSign="1251" bspRedButton="1252" bspMonoTrain="1253" bspDescentShip="1255" bspTransportShip="1256" bspBigRadar="1258" bspPaveway="1259" bspTeamFlag="1260" bspiMac="1261" bspCrate="1262" bspIdleMissile="1263" bspBigMissile="1264" bspShrub="1265" bspByPlasticChicken="1266" bspSlenderTreeA="1267" bspSlenderTreeB="1268" bspPolyTree="1269" snBigBoom="1251" blastSoundDefault="snBigBoom" screenHeight="0" />
+  <SkyColor n="1024" verticalRangeMax="4000" color="#000115" color.1="#00aad6" />
+  <GroundColor color="#005400" />
+  <Teleporter y="50" win="1000" start="@winTeam" shape="false" activeRange="2000" color="#a9a700" color.1="#007dd6" cx="48.75" cz="5" angle="135" />
+  <Walker y="20" team="3" power="1" cx="41.875" cz="36.25" angle="135" />
+  <Walker y="20" team="3" power="1" cx="40" cz="38.125" angle="135" />
+  <Walker y="20" team="3" power="1" cx="38.125" cz="40" angle="135" />
+  <Walker y="20" team="3" power="1" cx="36.25" cz="41.875" angle="135" />
+  <Walker y="20" team="6" power="1" cx="168.125" cz="173.75" angle="315" />
+  <TeamColor mask="T1" color="#d6d6d6" color.1="#d6d6d6" cx="92.5" cz="2.5" r="1.875" angle="135" />
+  <TeamColor mask="T2" color="#d6d6d6" color.1="#d6d6d6" cx="92.5" cz="4.375" r="1.875" angle="135" />
+  <TeamColor mask="T3" color="#ff2600" color.1="#000000" cx="92.5" cz="6.25" r="1.875" angle="135" />
+  <TeamColor mask="T4" color="#d6d6d6" color.1="#d6d6d6" cx="92.5" cz="8.125" r="1.875" angle="135" />
+  <TeamColor mask="T5" color="#d6d6d6" color.1="#d6d6d6" cx="92.5" cz="10" r="1.875" angle="135" />
+  <TeamColor mask="T6" color="#0333ff" color.1="#000000" cx="92.5" cz="11.875" r="1.875" angle="135" />
+  <Walker y="20" team="6" power="1" cx="170" cz="171.875" angle="315" />
+  <Walker y="20" team="6" power="1" cx="171.875" cz="170" angle="315" />
+  <Walker y="20" team="6" power="1" cx="173.75" cz="168.125" angle="315" />
+  <Teleporter y="50" shape="false" start="@over[9]" win="9" activeRange="2000" winScore="9000" color="#d82679" color.1="#d82679" cx="60" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[9]" win="9" activeRange="2000" winScore="9000" color="#d82679" color.1="#d82679" cx="60" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[9]" win="9" activeRange="2000" winScore="9000" color="#d82679" color.1="#d82679" cx="60" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[9]" win="9" activeRange="2000" winScore="9000" color="#d82679" color.1="#d82679" cx="60" cz="4.375" angle="135" />
+  <Timer in.0="@gameOver" in.1="@endPlyr" wait="5" out="@endPlyr" />
+  <Distributor in="@endPlyr" out.0="@over[0]" />
+  <Timer in="@start" wait="1875 * 4" out="@gameOver" />
+  <Base in.0="@rWin" in.1="@bWin" out="@gameOver" cx="60" cz="4.375" />
+  <Teleporter y="50" shape="false" start="@over[8]" win="8" activeRange="2000" winScore="8000" color="#d82679" color.1="#d82679" cx="70" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[8]" win="8" activeRange="2000" winScore="8000" color="#d82679" color.1="#d82679" cx="70" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[8]" win="8" activeRange="2000" winScore="8000" color="#d82679" color.1="#d82679" cx="70" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[8]" win="8" activeRange="2000" winScore="8000" color="#d82679" color.1="#d82679" cx="70" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[7]" win="7" activeRange="2000" winScore="7000" color="#d82679" color.1="#d82679" cx="108.75" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[7]" win="7" activeRange="2000" winScore="7000" color="#d82679" color.1="#d82679" cx="108.75" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[7]" win="7" activeRange="2000" winScore="7000" color="#d82679" color.1="#d82679" cx="108.75" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[7]" win="7" activeRange="2000" winScore="7000" color="#d82679" color.1="#d82679" cx="108.75" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[6]" win="6" activeRange="2000" winScore="6000" color="#d82679" color.1="#d82679" cx="118.125" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[6]" win="6" activeRange="2000" winScore="6000" color="#d82679" color.1="#d82679" cx="118.125" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[6]" win="6" activeRange="2000" winScore="6000" color="#d82679" color.1="#d82679" cx="118.125" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[6]" win="6" activeRange="2000" winScore="6000" color="#d82679" color.1="#d82679" cx="118.125" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[5]" win="5" activeRange="2000" winScore="5000" color="#d82679" color.1="#d82679" cx="127.5" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[5]" win="5" activeRange="2000" winScore="5000" color="#d82679" color.1="#d82679" cx="127.5" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[5]" win="5" activeRange="2000" winScore="5000" color="#d82679" color.1="#d82679" cx="127.5" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[5]" win="5" activeRange="2000" winScore="5000" color="#d82679" color.1="#d82679" cx="127.5" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[4]" win="4" activeRange="2000" winScore="4000" color="#d82679" color.1="#d82679" cx="136.875" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[4]" win="4" activeRange="2000" winScore="4000" color="#d82679" color.1="#d82679" cx="136.875" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[4]" win="4" activeRange="2000" winScore="4000" color="#d82679" color.1="#d82679" cx="136.875" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[4]" win="4" activeRange="2000" winScore="4000" color="#d82679" color.1="#d82679" cx="136.875" cz="4.375" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[3]" win="3" activeRange="2000" winScore="3000" color="#d82679" color.1="#d82679" cx="1.875" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[3]" win="3" activeRange="2000" winScore="3000" color="#d82679" color.1="#d82679" cx="1.875" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[3]" win="3" activeRange="2000" winScore="3000" color="#d82679" color.1="#d82679" cx="1.875" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[3]" win="3" activeRange="2000" winScore="3000" color="#d82679" color.1="#d82679" cx="1.875" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[2]" win="2" activeRange="2000" winScore="2000" color="#d82679" color.1="#d82679" cx="11.25" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[2]" win="2" activeRange="2000" winScore="2000" color="#d82679" color.1="#d82679" cx="11.25" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[2]" win="2" activeRange="2000" winScore="2000" color="#d82679" color.1="#d82679" cx="11.25" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[2]" win="2" activeRange="2000" winScore="2000" color="#d82679" color.1="#d82679" cx="11.25" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[1]" win="1" activeRange="2000" winScore="1000" color="#d82679" color.1="#d82679" cx="20.625" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[1]" win="1" activeRange="2000" winScore="1000" color="#d82679" color.1="#d82679" cx="20.625" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[1]" win="1" activeRange="2000" winScore="1000" color="#d82679" color.1="#d82679" cx="20.625" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[1]" win="1" activeRange="2000" winScore="1000" color="#d82679" color.1="#d82679" cx="20.625" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[0]" win="0" activeRange="2000" color="#d82679" color.1="#d82679" cx="30" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[0]" win="0" activeRange="2000" color="#d82679" color.1="#d82679" cx="30" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[0]" win="0" activeRange="2000" color="#d82679" color.1="#d82679" cx="30" cz="3.125" angle="135" />
+  <Teleporter y="50" shape="false" start="@over[0]" win="0" activeRange="2000" color="#d82679" color.1="#d82679" cx="30" cz="3.125" angle="135" />
+  <Ball shape="bspTeamFlag" scale=".7" changeOwnerTime="99999" group="2" color="#0333ff" color.1="#000000" cx="182.5" cz="182.5" angle="135" />
+  <Area enter="@rnAA" exit="@rxAA" mask="T3" y="2" cx="17.5" cz="17.5" r="8.75" />
+  <Area enter="@bnAA" exit="@bxAA" mask="T6" y="2" cx="17.5" cz="17.5" r="8.75" />
+  <Area enter="@rnBA" exit="@rxBA" mask="T3" y="2" cx="52.5" cz="17.5" r="8.75" />
+  <Area enter="@bnBA" exit="@bxBA" mask="T6" y="2" cx="52.5" cz="17.5" r="8.75" />
+  <Area enter="@rnCA" exit="@rxCA" mask="T3" y="2" cx="87.5" cz="17.5" r="8.75" />
+  <Area enter="@bnCA" exit="@bxCA" mask="T6" y="2" cx="87.5" cz="17.5" r="8.75" />
+  <Area enter="@rnDA" exit="@rxDA" mask="T3" y="2" cx="122.5" cz="17.5" r="8.75" />
+  <Area enter="@bnDA" exit="@bxDA" mask="T6" y="2" cx="122.5" cz="17.5" r="8.75" />
+  <Area enter="@rnEA" exit="@rxEA" mask="T3" y="2" cx="157.5" cz="17.5" r="8.75" />
+  <Area enter="@bnEA" exit="@bxEA" mask="T6" y="2" cx="157.5" cz="17.5" r="8.75" />
+  <Area enter="@rnFA" exit="@rxFA" mask="T3" y="2" cx="192.5" cz="17.5" r="8.75" />
+  <Area enter="@bnFA" exit="@bxFA" mask="T6" y="2" cx="192.5" cz="17.5" r="8.75" />
+  <Area enter="@rnAB" exit="@rxAB" mask="T3" y="2" cx="17.5" cz="52.5" r="8.75" />
+  <Area enter="@bnAB" exit="@bxAB" mask="T6" y="2" cx="17.5" cz="52.5" r="8.75" />
+  <Area enter="@rnBB" exit="@rxBB" mask="T3" y="2" cx="52.5" cz="52.5" r="8.75" />
+  <Area enter="@bnBB" exit="@bxBB" mask="T6" y="2" cx="52.5" cz="52.5" r="8.75" />
+  <Area enter="@rnCB" exit="@rxCB" mask="T3" y="2" cx="87.5" cz="52.5" r="8.75" />
+  <Area enter="@bnCB" exit="@bxCB" mask="T6" y="2" cx="87.5" cz="52.5" r="8.75" />
+  <Area enter="@rnDB" exit="@rxDB" mask="T3" y="2" cx="122.5" cz="52.5" r="8.75" />
+  <Area enter="@bnDB" exit="@bxDB" mask="T6" y="2" cx="122.5" cz="52.5" r="8.75" />
+  <Area enter="@rnEB" exit="@rxEB" mask="T3" y="2" cx="157.5" cz="52.5" r="8.75" />
+  <Area enter="@bnEB" exit="@bxEB" mask="T6" y="2" cx="157.5" cz="52.5" r="8.75" />
+  <Area enter="@rnFB" exit="@rxFB" mask="T3" y="2" cx="192.5" cz="52.5" r="8.75" />
+  <Area enter="@bnFB" exit="@bxFB" mask="T6" y="2" cx="192.5" cz="52.5" r="8.75" />
+  <Area enter="@rnAC" exit="@rxAC" mask="T3" y="2" cx="17.5" cz="87.5" r="8.75" />
+  <Area enter="@bnAC" exit="@bxAC" mask="T6" y="2" cx="17.5" cz="87.5" r="8.75" />
+  <Area enter="@rnBC" exit="@rxBC" mask="T3" y="2" cx="52.5" cz="87.5" r="8.75" />
+  <Area enter="@bnBC" exit="@bxBC" mask="T6" y="2" cx="52.5" cz="87.5" r="8.75" />
+  <Area enter="@rnCC" exit="@rxCC" mask="T3" y="2" cx="87.5" cz="87.5" r="8.75" />
+  <Area enter="@bnCC" exit="@bxCC" mask="T6" y="2" cx="87.5" cz="87.5" r="8.75" />
+  <Area enter="@rnDC" exit="@rxDC" mask="T3" y="2" cx="122.5" cz="87.5" r="8.75" />
+  <Area enter="@bnDC" exit="@bxDC" mask="T6" y="2" cx="122.5" cz="87.5" r="8.75" />
+  <Area enter="@rnEC" exit="@rxEC" mask="T3" y="2" cx="157.5" cz="87.5" r="8.75" />
+  <Area enter="@bnEC" exit="@bxEC" mask="T6" y="2" cx="157.5" cz="87.5" r="8.75" />
+  <Area enter="@rnFC" exit="@rxFC" mask="T3" y="2" cx="192.5" cz="87.5" r="8.75" />
+  <Area enter="@bnFC" exit="@bxFC" mask="T6" y="2" cx="192.5" cz="87.5" r="8.75" />
+  <Area enter="@rnAD" exit="@rxAD" mask="T3" y="2" cx="17.5" cz="122.5" r="8.75" />
+  <Area enter="@bnAD" exit="@bxAD" mask="T6" y="2" cx="17.5" cz="122.5" r="8.75" />
+  <Area enter="@rnBD" exit="@rxBD" mask="T3" y="2" cx="52.5" cz="122.5" r="8.75" />
+  <Area enter="@bnBD" exit="@bxBD" mask="T6" y="2" cx="52.5" cz="122.5" r="8.75" />
+  <Area enter="@rnCD" exit="@rxCD" mask="T3" y="2" cx="87.5" cz="122.5" r="8.75" />
+  <Area enter="@bnCD" exit="@bxCD" mask="T6" y="2" cx="87.5" cz="122.5" r="8.75" />
+  <Area enter="@rnDD" exit="@rxDD" mask="T3" y="2" cx="122.5" cz="122.5" r="8.75" />
+  <Area enter="@bnDD" exit="@bxDD" mask="T6" y="2" cx="122.5" cz="122.5" r="8.75" />
+  <Area enter="@rnED" exit="@rxED" mask="T3" y="2" cx="157.5" cz="122.5" r="8.75" />
+  <Area enter="@bnED" exit="@bxED" mask="T6" y="2" cx="157.5" cz="122.5" r="8.75" />
+  <Area enter="@rnFD" exit="@rxFD" mask="T3" y="2" cx="192.5" cz="122.5" r="8.75" />
+  <Area enter="@bnFD" exit="@bxFD" mask="T6" y="2" cx="192.5" cz="122.5" r="8.75" />
+  <Area enter="@rnAE" exit="@rxAE" mask="T3" y="2" cx="17.5" cz="157.5" r="8.75" />
+  <Area enter="@bnAE" exit="@bxAE" mask="T6" y="2" cx="17.5" cz="157.5" r="8.75" />
+  <Area enter="@rnBE" exit="@rxBE" mask="T3" y="2" cx="52.5" cz="157.5" r="8.75" />
+  <Area enter="@bnBE" exit="@bxBE" mask="T6" y="2" cx="52.5" cz="157.5" r="8.75" />
+  <Area enter="@rnCE" exit="@rxCE" mask="T3" y="2" cx="87.5" cz="157.5" r="8.75" />
+  <Area enter="@bnCE" exit="@bxCE" mask="T6" y="2" cx="87.5" cz="157.5" r="8.75" />
+  <Area enter="@rnDE" exit="@rxDE" mask="T3" y="2" cx="122.5" cz="157.5" r="8.75" />
+  <Area enter="@bnDE" exit="@bxDE" mask="T6" y="2" cx="122.5" cz="157.5" r="8.75" />
+  <Area enter="@rnEE" exit="@rxEE" mask="T3" y="2" cx="157.5" cz="157.5" r="8.75" />
+  <Area enter="@bnEE" exit="@bxEE" mask="T6" y="2" cx="157.5" cz="157.5" r="8.75" />
+  <Area enter="@rnFE" exit="@rxFE" mask="T3" y="2" cx="192.5" cz="157.5" r="8.75" />
+  <Area enter="@bnFE" exit="@bxFE" mask="T6" y="2" cx="192.5" cz="157.5" r="8.75" />
+  <Area enter="@rnAF" exit="@rxAF" mask="T3" y="2" cx="17.5" cz="192.5" r="8.75" />
+  <Area enter="@bnAF" exit="@bxAF" mask="T6" y="2" cx="17.5" cz="192.5" r="8.75" />
+  <Area enter="@rnBF" exit="@rxBF" mask="T3" y="2" cx="52.5" cz="192.5" r="8.75" />
+  <Area enter="@bnBF" exit="@bxBF" mask="T6" y="2" cx="52.5" cz="192.5" r="8.75" />
+  <Area enter="@rnCF" exit="@rxCF" mask="T3" y="2" cx="87.5" cz="192.5" r="8.75" />
+  <Area enter="@bnCF" exit="@bxCF" mask="T6" y="2" cx="87.5" cz="192.5" r="8.75" />
+  <Area enter="@rnDF" exit="@rxDF" mask="T3" y="2" cx="122.5" cz="192.5" r="8.75" />
+  <Area enter="@bnDF" exit="@bxDF" mask="T6" y="2" cx="122.5" cz="192.5" r="8.75" />
+  <Area enter="@rnEF" exit="@rxEF" mask="T3" y="2" cx="157.5" cz="192.5" r="8.75" />
+  <Area enter="@bnEF" exit="@bxEF" mask="T6" y="2" cx="157.5" cz="192.5" r="8.75" />
+  <Area enter="@rnFF" exit="@rxFF" mask="T3" y="2" cx="192.5" cz="192.5" r="8.75" />
+  <Area enter="@bnFF" exit="@bxFF" mask="T6" y="2" cx="192.5" cz="192.5" r="8.75" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnFF" stop="@rxFF" color="#ff2600" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnFE" stop="@rxFE" color="#ff2600" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnFD" stop="@rxFD" color="#ff2600" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnFC" stop="@rxFC" color="#ff2600" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnFB" stop="@rxFB" color="#ff2600" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnFA" stop="@rxFA" color="#ff2600" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnEF" stop="@rxEF" color="#ff2600" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnEE" stop="@rxEE" color="#ff2600" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnED" stop="@rxED" color="#ff2600" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnEC" stop="@rxEC" color="#ff2600" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnEB" stop="@rxEB" color="#ff2600" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnEA" stop="@rxEA" color="#ff2600" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnDF" stop="@rxDF" color="#ff2600" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnDE" stop="@rxDE" color="#ff2600" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnDD" stop="@rxDD" color="#ff2600" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnDC" stop="@rxDC" color="#ff2600" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnDB" stop="@rxDB" color="#ff2600" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnDA" stop="@rxDA" color="#ff2600" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnCF" stop="@rxCF" color="#ff2600" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnCE" stop="@rxCE" color="#ff2600" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnCD" stop="@rxCD" color="#ff2600" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnCC" stop="@rxCC" color="#ff2600" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnCB" stop="@rxCB" color="#ff2600" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnCA" stop="@rxCA" color="#ff2600" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnBF" stop="@rxBF" color="#ff2600" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnBE" stop="@rxBE" color="#ff2600" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnBD" stop="@rxBD" color="#ff2600" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnBC" stop="@rxBC" color="#ff2600" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnBB" stop="@rxBB" color="#ff2600" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnBA" stop="@rxBA" color="#ff2600" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnAF" stop="@rxAF" color="#ff2600" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnAE" stop="@rxAE" color="#ff2600" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnAD" stop="@rxAD" color="#ff2600" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnAC" stop="@rxAC" color="#ff2600" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnAB" stop="@rxAB" color="#ff2600" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnAA" stop="@rxAA" color="#ff2600" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Hologram shape="300" scale=".07" y="screenHeight + 3" color="#ff2600" color.1="#000000" cx="25" cz="9.375" angle="180" />
+  <Hologram shape="300" scale=".07" y="screenHeight + .5" color="#0333ff" color.1="#000000" cx="28.125" cz="9.375" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnFF" stop="@bxFF" color="#0333ff" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnFE" stop="@bxFE" color="#0333ff" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnFD" stop="@bxFD" color="#0333ff" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnFC" stop="@bxFC" color="#0333ff" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnFB" stop="@bxFB" color="#0333ff" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnFA" stop="@bxFA" color="#0333ff" color.1="#000000" cx="28.125" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnEF" stop="@bxEF" color="#0333ff" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnEE" stop="@bxEE" color="#0333ff" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnED" stop="@bxED" color="#0333ff" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnEC" stop="@bxEC" color="#0333ff" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnEB" stop="@bxEB" color="#0333ff" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnEA" stop="@bxEA" color="#0333ff" color.1="#000000" cx="27.5" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnDF" stop="@bxDF" color="#0333ff" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnDE" stop="@bxDE" color="#0333ff" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnDD" stop="@bxDD" color="#0333ff" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnDC" stop="@bxDC" color="#0333ff" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnDB" stop="@bxDB" color="#0333ff" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnDA" stop="@bxDA" color="#0333ff" color.1="#000000" cx="26.875" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnCF" stop="@rxCF" color="#0333ff" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnCE" stop="@bxCE" color="#0333ff" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnCD" stop="@bxCD" color="#0333ff" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnCC" stop="@bxCC" color="#0333ff" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnCB" stop="@bxCB" color="#0333ff" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnCA" stop="@bxCA" color="#0333ff" color.1="#000000" cx="26.25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnBF" stop="@bxBF" color="#0333ff" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnBE" stop="@bxBE" color="#0333ff" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnBD" stop="@bxBD" color="#0333ff" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnBC" stop="@bxBC" color="#0333ff" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnBB" stop="@bxBB" color="#0333ff" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnBA" stop="@bxBA" color="#0333ff" color.1="#000000" cx="25.625" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnAF" stop="@bxAF" color="#0333ff" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnAE" stop="@bxAE" color="#0333ff" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnAD" stop="@bxAD" color="#0333ff" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnAC" stop="@bxAC" color="#0333ff" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnAB" stop="@bxAB" color="#0333ff" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnAA" stop="@bxAA" color="#0333ff" color.1="#000000" cx="25" cz="9.375" angle="0" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="19.375" z="2.5" w="30" d="3.75" h="0" angle="0" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="2.5" z="19.375" w="3.75" d="30" h="0" angle="270" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="36.25" z="19.375" w="3.75" d="30" h="0" angle="90" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="19.375" z="36.25" w="30" d="3.75" h="0" angle="180" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="190.625" z="173.75" w="30" d="3.75" h="0" angle="0" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="173.75" z="190.625" w="3.75" d="30" h="0" angle="270" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="207.5" z="190.625" w="3.75" d="30" h="0" angle="90" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="190.625" z="207.5" w="30" d="3.75" h="0" angle="180" />
+  <set wallHeight=".5" />
+  <Wall color="#005400" color.1="#000000" x="173.75" z="173.75" w="3.75" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="207.5" z="173.75" w="3.75" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="207.5" z="207.5" w="3.75" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="173.75" z="207.5" w="3.75" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="2.5" z="2.5" w="3.75" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="36.25" z="2.5" w="3.75" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="36.25" z="36.25" w="3.75" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="2.5" z="36.25" w="3.75" d="3.75" h="0" />
+  <set baseHeight=".5" />
+  <Wall color="#005400" color.1="#000000" x="174.6875" z="174.6875" w="1.875" d="1.875" h="0" />
+  <Wall color="#005400" color.1="#000000" x="206.5625" z="174.6875" w="1.875" d="1.875" h="0" />
+  <Wall color="#005400" color.1="#000000" x="206.5625" z="206.5625" w="1.875" d="1.875" h="0" />
+  <Wall color="#005400" color.1="#000000" x="174.6875" z="206.5625" w="1.875" d="1.875" h="0" />
+  <Wall color="#005400" color.1="#000000" x="3.4375" z="3.4375" w="1.875" d="1.875" h="0" />
+  <Wall color="#005400" color.1="#000000" x="35.3125" z="3.4375" w="1.875" d="1.875" h="0" />
+  <Wall color="#005400" color.1="#000000" x="35.3125" z="35.3125" w="1.875" d="1.875" h="0" />
+  <Wall color="#005400" color.1="#000000" x="3.4375" z="35.3125" w="1.875" d="1.875" h="0" />
+  <set baseHeight="1" />
+  <set wallHeight="0" />
+  <Wall color="#005400" color.1="#000000" x="188.75" z="177.5" w="26.25" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="203.75" z="188.75" w="3.75" d="26.25" h="0" />
+  <Wall color="#005400" color.1="#000000" x="192.5" z="203.75" w="26.25" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="177.5" z="192.5" w="3.75" d="26.25" h="0" />
+  <Wall color="#005400" color.1="#000000" x="17.5" z="6.25" w="26.25" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="32.5" z="17.5" w="3.75" d="26.25" h="0" />
+  <Wall color="#005400" color.1="#000000" x="21.25" z="32.5" w="26.25" d="3.75" h="0" />
+  <Wall color="#005400" color.1="#000000" x="6.25" z="21.25" w="3.75" d="26.25" h="0" />
+  <set baseHeight="0" />
+  <set wallHeight="1.2" />
+  <Wall color="#424242" color.1="#000000" x="179.6875" z="190.3125" w="0.625" d="21.875" h="0" />
+  <Wall color="#424242" color.1="#000000" x="190.625" z="179.6875" w="21.25" d="0.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="30.3125" z="19.6875" w="0.625" d="21.875" h="0" />
+  <Wall color="#424242" color.1="#000000" x="19.375" z="30.3125" w="21.25" d="0.625" h="0" />
+  <set wallHeight="3.5" />
+  <Wall color="#424242" color.1="#000000" x="201.5625" z="190.625" w="0.625" d="22.5" h="0" />
+  <Wall color="#424242" color.1="#000000" x="188.4375" z="201.5625" w="18.125" d="0.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="8.4375" z="19.375" w="0.625" d="22.5" h="0" />
+  <Wall color="#424242" color.1="#000000" x="21.5625" z="8.4375" w="18.125" d="0.625" h="0" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="10.625" z="8.4375" w="3.75" d="0.625" h="0" angle="180" />
+  <Ramp deltaY="1" color="#005400" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" angle="0" />
+  <Ball shape="bspTeamFlag" scale=".7" changeOwnerTime="99999" group="1" color="#ff2600" color.1="#000000" cx="27.5" cz="27.5" angle="315" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnFF" stop="@rxFF" color="#ff2600" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnFE" stop="@rxFE" color="#ff2600" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnFD" stop="@rxFD" color="#ff2600" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnFC" stop="@rxFC" color="#ff2600" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnFB" stop="@rxFB" color="#ff2600" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnFA" stop="@rxFA" color="#ff2600" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnEF" stop="@rxEF" color="#ff2600" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnEE" stop="@rxEE" color="#ff2600" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnED" stop="@rxED" color="#ff2600" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnEC" stop="@rxEC" color="#ff2600" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnEB" stop="@rxEB" color="#ff2600" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnEA" stop="@rxEA" color="#ff2600" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnDF" stop="@rxDF" color="#ff2600" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnDE" stop="@rxDE" color="#ff2600" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnDD" stop="@rxDD" color="#ff2600" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnDC" stop="@rxDC" color="#ff2600" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnDB" stop="@rxDB" color="#ff2600" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnDA" stop="@rxDA" color="#ff2600" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnCF" stop="@rxCF" color="#ff2600" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnCE" stop="@rxCE" color="#ff2600" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnCD" stop="@rxCD" color="#ff2600" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnCC" stop="@rxCC" color="#ff2600" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnCB" stop="@rxCB" color="#ff2600" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnCA" stop="@rxCA" color="#ff2600" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnBF" stop="@rxBF" color="#ff2600" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnBE" stop="@rxBE" color="#ff2600" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnBD" stop="@rxBD" color="#ff2600" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnBC" stop="@rxBC" color="#ff2600" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnBB" stop="@rxBB" color="#ff2600" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnBA" stop="@rxBA" color="#ff2600" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnAF" stop="@rxAF" color="#ff2600" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@rnAE" stop="@rxAE" color="#ff2600" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@rnAD" stop="@rxAD" color="#ff2600" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@rnAC" stop="@rxAC" color="#ff2600" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@rnAB" stop="@rxAB" color="#ff2600" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@rnAA" stop="@rxAA" color="#ff2600" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Hologram shape="300" scale=".07" y="screenHeight + 3" color="#ff2600" color.1="#000000" cx="185" cz="200.625" angle="0" />
+  <Hologram shape="300" scale=".07" y="screenHeight + .5" color="#0333ff" color.1="#000000" cx="181.875" cz="200.625" angle="0" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnFF" stop="@bxFF" color="#0333ff" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnFE" stop="@bxFE" color="#0333ff" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnFD" stop="@bxFD" color="#0333ff" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnFC" stop="@bxFC" color="#0333ff" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnFB" stop="@bxFB" color="#0333ff" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnFA" stop="@bxFA" color="#0333ff" color.1="#000000" cx="181.875" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnEF" stop="@bxEF" color="#0333ff" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnEE" stop="@bxEE" color="#0333ff" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnED" stop="@bxED" color="#0333ff" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnEC" stop="@bxEC" color="#0333ff" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnEB" stop="@bxEB" color="#0333ff" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnEA" stop="@bxEA" color="#0333ff" color.1="#000000" cx="182.5" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnDF" stop="@bxDF" color="#0333ff" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnDE" stop="@bxDE" color="#0333ff" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnDD" stop="@bxDD" color="#0333ff" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnDC" stop="@bxDC" color="#0333ff" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnDB" stop="@bxDB" color="#0333ff" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnDA" stop="@bxDA" color="#0333ff" color.1="#000000" cx="183.125" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@rnCF" stop="@rxCF" color="#0333ff" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnCE" stop="@bxCE" color="#0333ff" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnCD" stop="@bxCD" color="#0333ff" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnCC" stop="@bxCC" color="#0333ff" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnCB" stop="@bxCB" color="#0333ff" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnCA" stop="@bxCA" color="#0333ff" color.1="#000000" cx="183.75" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnBF" stop="@bxBF" color="#0333ff" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnBE" stop="@bxBE" color="#0333ff" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnBD" stop="@bxBD" color="#0333ff" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnBC" stop="@bxBC" color="#0333ff" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnBB" stop="@bxBB" color="#0333ff" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnBA" stop="@bxBA" color="#0333ff" color.1="#000000" cx="184.375" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + .5" shape="500" mask="false" start="@bnAF" stop="@bxAF" color="#0333ff" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1" shape="500" mask="false" start="@bnAE" stop="@bxAE" color="#0333ff" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 1.5" shape="500" mask="false" start="@bnAD" stop="@bxAD" color="#0333ff" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2" shape="500" mask="false" start="@bnAC" stop="@bxAC" color="#0333ff" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 2.5" shape="500" mask="false" start="@bnAB" stop="@bxAB" color="#0333ff" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <Teleporter y="screenHeight + 3" shape="500" mask="false" start="@bnAA" stop="@bxAA" color="#0333ff" color.1="#000000" cx="185" cz="200.625" angle="180" />
+  <set baseHeight="1.9" wallHeight="1.6" />
+  <Wall color="#424242" color.1="#000000" x="179.6875" z="190.3125" w="0.625" d="21.875" h="0" />
+  <Wall color="#424242" color.1="#000000" x="190.625" z="179.6875" w="21.25" d="0.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="30.3125" z="19.6875" w="0.625" d="21.875" h="0" />
+  <Wall color="#424242" color.1="#000000" x="19.375" z="30.3125" w="21.25" d="0.625" h="0" />
+  <set wallHeight="3.5" />
+  <set baseHeight="0" />
+  <Wall color="#424242" color.1="#000000" x="185.3125" z="194.0625" w="0.625" d="8.125" h="0" />
+  <Wall color="#424242" color.1="#000000" x="24.6875" z="15.625" w="0.625" d="7.5" h="0" />
+  <unique vars="xSwitch" />
+  <Switch y="1.5" shape="bspRedButton" altShape="bspRedButton" out.1="@bFire" in.0="xSwitch" hitVolume="12" color="#424242" color.1="#000000" cx="185.90277777777777" cz="196.875" angle="270" />
+  <Timer in="@bFire" wait="5" out="xSwitch" />
+  <unique vars="xSwitch" />
+  <Switch y="1.5" shape="bspRedButton" altShape="bspRedButton" out.1="@rFire" in.0="xSwitch" hitVolume="12" color="#f1f1f1" color.1="#000000" cx="24.09722222222222" cz="13.125" angle="90" />
+  <Timer in="@rFire" wait="5" out="xSwitch" />
+  <Switch y="1.5" shape="bspOffSwitch" altShape="bspOnSwitch" out.0="@bAutoOff" out.1="@bAutoOn" in.0="@bDefend" hitVolume="12" color="#008700" color.1="#ff2600" cx="185.625" cz="191.875" angle="270" />
+  <Wall color="#424242" color.1="#000000" x="209.6875" z="209.6875" w="0.625" d="0.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="209.6875" z="0.3125" w="0.625" d="0.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="0.3125" z="0.3125" w="0.625" d="0.625" h="0" />
+  <Switch y="1.5" shape="bspOffSwitch" altShape="bspOnSwitch" out.0="@rAutoOff" out.1="@rAutoOn" in.0="@rDefend" hitVolume="12" color="#008700" color.1="#ff2600" cx="24.375" cz="18.125" angle="90" />
+  <Wall color="#424242" color.1="#000000" x="0.3125" z="209.6875" w="0.625" d="0.625" h="0" />
+  <unique vars="zHi zDie" />
+  <Goody y="2" shape="bspClip" power="1000" shield=".3" sound="snReload" start="zHi" out="zDie" speed="6" color="#fffb00" color.1="#000000" cx="193.125" cz="186.25" angle="225" />
+  <Timer in="zDie" wait="200" out="zHi" />
+  <And in="@start" out="zHi" />
+  <unique vars="zHi zDie" />
+  <Goody y="2" shape="bspGrenade" grenades="8" start="zHi" out="zDie" speed="6" color="#022ff2" color.1="#000000" cx="193.125" cz="188.75" angle="225" />
+  <Timer in="zDie" wait="200" out="zHi" />
+  <And in="@start" out="zHi" />
+  <unique vars="zHi zDie" />
+  <Goody y="2" shape="bspMissile" missiles="3" start="zHi" out="zDie" speed="6" color="#f42300" color.1="#000000" cx="193.125" cz="191.25" angle="225" />
+  <Timer in="zDie" wait="200" out="zHi" />
+  <And in="@start" out="zHi" />
+  <unique vars="zHi zDie" />
+  <Goody y="2" shape="bspClip" power="1000" shield=".3" sound="snReload" start="zHi" out="zDie" speed="6" color="#fffb00" color.1="#000000" cx="16.875" cz="23.125" angle="45" />
+  <Timer in="zDie" wait="200" out="zHi" />
+  <And in="@start" out="zHi" />
+  <unique vars="zHi zDie" />
+  <Goody y="2" shape="bspGrenade" grenades="8" start="zHi" out="zDie" speed="6" color="#022ff2" color.1="#000000" cx="16.875" cz="20.625" angle="45" />
+  <Timer in="zDie" wait="200" out="zHi" />
+  <And in="@start" out="zHi" />
+  <unique vars="zHi zDie" />
+  <Goody y="2" shape="bspMissile" missiles="3" start="zHi" out="zDie" speed="6" color="#f42300" color.1="#000000" cx="16.875" cz="18.125" angle="45" />
+  <Timer in="zDie" wait="200" out="zHi" />
+  <And in="@start" out="zHi" />
+  <Wall color="#ff2600" color.1="#000000" x="4.6875" z="38.4375" w="0.625" d="0.625" h="0" />
+  <Wall color="#ff2600" color.1="#000000" x="38.4375" z="4.6875" w="0.625" d="0.625" h="0" />
+  <Wall color="#0333ff" color.1="#000000" x="171.5625" z="205.3125" w="0.625" d="0.625" h="0" />
+  <Wall color="#0333ff" color.1="#000000" x="205.3125" z="171.5625" w="0.625" d="0.625" h="0" />
+  <set baseHeight="3.5" />
+  <set wallHeight=".6" />
+  <Wall color="#424242" color.1="#000000" x="184.6875" z="190.625" w="10.625" d="22.5" h="0" />
+  <Wall color="#424242" color.1="#000000" x="198.125" z="190.625" w="7.5" d="22.5" h="0" />
+  <Wall color="#424242" color.1="#000000" x="192.1875" z="185.625" w="4.375" d="12.5" h="0" />
+  <Wall color="#424242" color.1="#000000" x="192.1875" z="199.0625" w="4.375" d="5.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="25.3125" z="19.375" w="10.625" d="22.5" h="0" />
+  <Wall color="#424242" color.1="#000000" x="11.875" z="19.375" w="7.5" d="22.5" h="0" />
+  <Wall color="#424242" color.1="#000000" x="17.8125" z="24.375" w="4.375" d="12.5" h="0" />
+  <Wall color="#424242" color.1="#000000" x="17.8125" z="10.9375" w="4.375" d="5.625" h="0" />
+  <Wall color="#565656" color.1="#000000" x="17.8125" z="15.9375" w="4.375" d="4.375" h="0" />
+  <FreeSolid shape="0" isTarget="true" canGlow="true" shield="10" start="@rBunkHit" hitMsg="@rBunkHit" color="#565656" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="16.875" cz="18.125" angle="45" />
+  <Wall color="#565656" color.1="#000000" x="192.1875" z="194.0625" w="4.375" d="4.375" h="0" />
+  <FreeSolid shape="0" isTarget="true" canGlow="true" shield="10" start="@bBunkHit" hitMsg="@bBunkHit" color="#565656" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="16.875" cz="18.125" angle="45" />
+  <set baseHeight="4.1" />
+  <set wallHeight="4" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#0333ff" color.1="#000000" cx="185" cz="184.375" angle="270" />
+  <Wall color="#424242" color.1="#000000" x="185" z="183.4375" w="1.25" d="0.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="184.0625" z="188.75" w="0.625" d="11.25" h="0" />
+  <Wall color="#424242" color.1="#000000" x="185.9375" z="188.75" w="0.625" d="11.25" h="0" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#0333ff" color.1="#000000" cx="185" cz="185.625" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#0333ff" color.1="#000000" cx="185" cz="186.875" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#0333ff" color.1="#000000" cx="185" cz="188.125" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#0333ff" color.1="#000000" cx="185" cz="189.375" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#0333ff" color.1="#000000" cx="185" cz="190.625" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#0333ff" color.1="#000000" cx="185" cz="191.875" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#0333ff" color.1="#000000" cx="185" cz="193.125" angle="270" />
+  <Wall color="#424242" color.1="#000000" x="185" z="194.0625" w="1.25" d="0.625" h="0" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#ff2600" color.1="#000000" cx="25" cz="16.875" angle="270" />
+  <Wall color="#424242" color.1="#000000" x="25" z="15.9375" w="1.25" d="0.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="24.0625" z="21.25" w="0.625" d="11.25" h="0" />
+  <Wall color="#424242" color.1="#000000" x="25.9375" z="21.25" w="0.625" d="11.25" h="0" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#ff2600" color.1="#000000" cx="25" cz="18.125" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#ff2600" color.1="#000000" cx="25" cz="19.375" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#ff2600" color.1="#000000" cx="25" cz="20.625" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#ff2600" color.1="#000000" cx="25" cz="21.875" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#ff2600" color.1="#000000" cx="25" cz="23.125" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#ff2600" color.1="#000000" cx="25" cz="24.375" angle="270" />
+  <Parasite shape="bspBigMissile" scale=".6" accel=".035" power="3.5" shield="5" y="2" yon="55" activeRange="1000" color="#ff2600" color.1="#000000" cx="25" cz="25.625" angle="270" />
+  <Wall color="#424242" color.1="#000000" x="25" z="26.5625" w="1.25" d="0.625" h="0" />
+  <Wall color="#424242" color.1="#000000" x="25" z="21.25" w="1.25" d="10" h="0" />
+  <Field shape="0" deltaX="0" deltaY=".02" deltaZ="0" color="#424242" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="25" cz="25.625" angle="270" />
+  <Wall color="#424242" color.1="#000000" x="185" z="188.75" w="1.25" d="10" h="0" />
+  <Field shape="0" deltaX="0" deltaY=".02" deltaZ="0" color="#424242" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="25" cz="25.625" angle="270" />
+  <Distributor in.0="@bFire" in.1="@bDefend" out.0="@bMissileA" out.1="@bMissileB" out.2="@bMissileC" out.3="@bMissileD" out.4="@bMissileE" out.5="@bMissileF" out.6="@bMissileG" out.7="@bMissileH" />
+  <set baseHeight="8.1" />
+  <set wallHeight=".4" />
+  <unique vars="dClose" />
+  <WallDoor open="@bMissileA" close="dClose" deltaX="1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="185" z="184.375" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@bMissileB" close="dClose" deltaX="1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="185" z="185.625" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@bMissileC" close="dClose" deltaX="1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="185" z="186.875" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@bMissileD" close="dClose" deltaX="1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="185" z="188.125" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@bMissileE" close="dClose" deltaX="1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="185" z="189.375" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@bMissileF" close="dClose" deltaX="1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="185" z="190.625" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@bMissileG" close="dClose" deltaX="1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="185" z="191.875" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@bMissileH" close="dClose" deltaX="1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="185" z="193.125" w="1.25" d="1.25" h="0" />
+  <Distributor in.0="@rFire" in.1="@rDefend" out.0="@rMissileA" out.1="@rMissileB" out.2="@rMissileC" out.3="@rMissileD" out.4="@rMissileE" out.5="@rMissileF" out.6="@rMissileG" out.7="@rMissileH" />
+  <unique vars="dClose" />
+  <WallDoor open="@rMissileA" close="dClose" deltaX="-1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="25" z="25.625" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@rMissileB" close="dClose" deltaX="-1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="25" z="24.375" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@rMissileC" close="dClose" deltaX="-1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="25" z="23.125" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@rMissileD" close="dClose" deltaX="-1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="25" z="21.875" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@rMissileE" close="dClose" deltaX="-1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="25" z="20.625" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@rMissileF" close="dClose" deltaX="-1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="25" z="19.375" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@rMissileG" close="dClose" deltaX="-1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="25" z="18.125" w="1.25" d="1.25" h="0" />
+  <unique vars="dClose" />
+  <WallDoor open="@rMissileH" close="dClose" deltaX="-1" deltaY="0" deltaZ="0" closeDelay="50" openSpeed="5" closeSpeed="5" didOpen="dClose" stopSound="false" color="#424242" color.1="#000000" x="25" z="16.875" w="1.25" d="1.25" h="0" />
+  <unique vars="dStep dReset zHi" />
+  <Incarnator y="40" mask="T3" cx="208.125" cz="8.125" angle="270" />
+  <Door2 shape="bspTransportShip" scale="1.5" yon="55" y="40" midY="0" deltaY="-30" deltaZ="170" deltaX="0" stepOnMsg="dStep" didOpen="dReset" open="dStep" close="dReset" openSpeed=".5" closeSpeed="100" stopSound="false" color="#ffd6d5" color.1="#000000" cx="208.125" cz="8.125" angle="270" />
+  <And in="@start" out="zHi" />
+  <Goody y="40" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#ffd6d5" color.1="#000000" cx="208.125" cz="8.125" angle="270" />
+  <unique vars="dStep dReset zHi" />
+  <Incarnator y="40" mask="T3" cx="8.125" cz="208.125" angle="0" />
+  <Door2 shape="bspTransportShip" scale="1.5" yon="55" y="40" midY="0" deltaY="-30" deltaZ="170" deltaX="0" stepOnMsg="dStep" didOpen="dReset" open="dStep" close="dReset" openSpeed=".5" closeSpeed="100" stopSound="false" color="#ffd6d5" color.1="#000000" cx="8.125" cz="208.125" angle="0" />
+  <And in="@start" out="zHi" />
+  <Goody y="40" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#ffd6d5" color.1="#000000" cx="8.125" cz="208.125" angle="0" />
+  <unique vars="dStep dReset zHi" />
+  <Incarnator y="40" mask="T6" cx="1.875" cz="201.875" angle="90" />
+  <Door2 shape="bspTransportShip" scale="1.5" yon="55" y="40" midY="0" deltaY="-30" deltaZ="170" deltaX="0" stepOnMsg="dStep" didOpen="dReset" open="dStep" close="dReset" openSpeed=".5" closeSpeed="100" stopSound="false" color="#a8d6ff" color.1="#000000" cx="1.875" cz="201.875" angle="90" />
+  <And in="@start" out="zHi" />
+  <Goody y="40" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#a8d6ff" color.1="#000000" cx="1.875" cz="201.875" angle="90" />
+  <unique vars="dStep dReset zHi" />
+  <Incarnator y="40" mask="T6" cx="201.875" cz="1.875" angle="180" />
+  <Door2 shape="bspTransportShip" scale="1.5" yon="55" y="40" midY="0" deltaY="-30" deltaZ="170" deltaX="0" stepOnMsg="dStep" didOpen="dReset" open="dStep" close="dReset" openSpeed=".5" closeSpeed="100" stopSound="false" color="#a8d6ff" color.1="#000000" cx="201.875" cz="1.875" angle="180" />
+  <And in="@start" out="zHi" />
+  <Goody y="40" power="1000" shield="1000" sound="false" start="zHi" out="zHi" yon=".001" color="#a8d6ff" color.1="#000000" cx="201.875" cz="1.875" angle="180" />
+  <set baseHeight="0" />
+  <set wallHeight="20" />
+  <Wall color="#a8d6ff" color.1="#000000" x="147.5" z="202.8125" w="2.5" d="14.375" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="147.5" z="188.4375" w="2.5" d="14.375" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="147.5" z="174.0625" w="2.5" d="14.375" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="147.5" z="159.6875" w="2.5" d="14.375" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="147.5" z="149.375" w="2.5" d="6.25" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="202.8125" z="147.5" w="14.375" d="2.5" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="188.4375" z="147.5" w="14.375" d="2.5" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="174.0625" z="147.5" w="14.375" d="2.5" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="159.6875" z="147.5" w="14.375" d="2.5" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="149.375" z="147.5" w="6.25" d="2.5" h="0" />
+  <Field shape="0" start="@bAutoOn" stop="@bAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T3" enter="@bDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="62.5" z="7.1875" w="2.5" d="14.375" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="62.5" z="21.5625" w="2.5" d="14.375" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="62.5" z="35.9375" w="2.5" d="14.375" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="62.5" z="50.3125" w="2.5" d="14.375" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="62.5" z="60.625" w="2.5" d="6.25" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="7.1875" z="62.5" w="14.375" d="2.5" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="21.5625" z="62.5" w="14.375" d="2.5" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="35.9375" z="62.5" w="14.375" d="2.5" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="50.3125" z="62.5" w="14.375" d="2.5" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <Wall color="#a8d6ff" color.1="#000000" x="60.625" z="62.5" w="6.25" d="2.5" h="0" />
+  <Field shape="0" start="@rAutoOn" stop="@rAutoOff" deltaX="0" deltaY="0" deltaZ="0" mask="T6" enter="@rDefend" color="#a8d6ff" color.1="#000000" x="199.375" z="201.5625" w="3.75" d="0.625" h="0" cx="201.875" cz="1.875" angle="180" />
+  <set baseHeight="4.1" />
+  <set wallHeight="10" />
+  <Wall color="#424242" color.1="#000000" x="200.625" z="200.625" w="1.25" d="1.25" h="0" />
+  <unique vars="dOp dCl" />
+  <Door2 y="10.7" midPitch="45" deltaX="0" deltaY="0" deltaZ="0" pitch="45" yaw="360" shape="bspBigRadar" open="dOp" close="dCl" didOpen="dCl" didClose="dOp" stopSound="false" openSound="false" closeSound="false" closeSpeed="100" color="#b8b8b8" color.1="#000000" cx="200.625" cz="200.83333333333334" angle="135" />
+  <And in="@start" out="dOp" />
+  <unique vars="dOp dCl" />
+  <Door2 y="10.7" midPitch="45" deltaX="0" deltaY="0" deltaZ="0" pitch="45" yaw="360" shape="bspBigRadar" open="dOp" close="dCl" didOpen="dCl" didClose="dOp" stopSound="false" openSound="false" closeSound="false" closeSpeed="100" color="#b8b8b8" color.1="#000000" cx="9.375" cz="9.583333333333334" angle="135" />
+  <And in="@start" out="dOp" />
+  <Wall color="#424242" color.1="#000000" x="9.375" z="9.375" w="1.25" d="1.25" h="0" />
+  <set baseHeight="0" />
+  <set wallHeight="0" />
+  <Wall color="#151515" color.1="#000000" x="106.5625" z="105" w="6.875" d="210" h="0" />
+  <set baseHeight=".03" />
+  <set wallHeight="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="3.4375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="12.1875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="20.9375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="29.6875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="38.4375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="47.1875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="55.9375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="64.6875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="73.4375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="82.1875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="90.9375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="99.6875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="108.4375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="117.1875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="125.9375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="134.6875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="143.4375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="152.1875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="160.9375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="169.6875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="178.4375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="187.1875" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="195.9375" w="0.625" d="3.125" h="0" />
+  <Wall color="#fffb00" color.1="#000000" x="106.5625" z="204.6875" w="0.625" d="3.125" h="0" />
+  <Goal y="20" pitch="90" activeRange="2" motionRange="20" yon="55" group="2" goalMsg="@rWin" goalAction="2" color="#ff2600" color.1="#000000" cx="13.75" cz="13.75" angle="135" />
+  <Goal y="20" pitch="90" activeRange="2" motionRange="20" yon="55" group="1" goalMsg="@bWin" goalAction="2" color="#0333ff" color.1="#000000" cx="196.25" cz="196.25" angle="315" />
+  <set baseHeight="0" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="154.375" cz="102.5" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="127.5" cz="152.5" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="78.75" cz="178.75" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="66.25" cz="145" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="0" cz="107.5" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="58.75" cz="87.5" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="35" cz="197.5" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="95" cz="38.125" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="173.125" cz="20" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="172.43055555555557" cz="66.25" angle="315" />
+  <Solid shape="bspPolyTree" scale="1 + random * 2" color="#38d142" color.1="#000000" cx="118.68055555555556" cz="74.375" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="31.875" cz="140" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="32.5" cz="110.625" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="91.875" cz="71.875" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="170.625" cz="35" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="177.70833333333334" cz="105" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="114.58333333333334" cz="110.625" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="70.83333333333334" cz="35.625" angle="315" />
+  <Solid shape="bspShrub" scale="1 + random" color="#38d142" color.1="#000000" cx="199.58333333333334" cz="140.625" angle="315" />
+  <Text in="@rWin" text="Red captures blue flag - Red Wins" showEveryone="true" cx="199.58333333333334" cz="140.625" r="1.875" />
+  <Text in="@bWin" text="Blue captures red flag - Blue Wins" showEveryone="true" cx="199.58333333333334" cz="140.625" r="1.875" />
+  <Teleporter activeRange="2000" deadRange="250" y="70" shape="false" destGroup="2" color="#ffd479" color.1="#000000" cx="93.68055555555556" cz="110.41666666666667" angle="135" />
+  <Teleporter activeRange="0" deadRange="1" y="60" shape="false" group="2" color="#ffd479" color.1="#000000" cx="93.68055555555556" cz="110.41666666666667" angle="135" />
+</map>

@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
+		E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
+		E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
+		E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */; };
+		E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E517F053299713DB0036B206 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2B62D7D2997052B00600401 /* tests.cpp */; };
 		E517F054299713DB0036B206 /* CBasicSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7529895118007A875D /* CBasicSound.cpp */; };
 		E517F055299713DB0036B206 /* CRateSound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5890C7029895118007A875D /* CRateSound.cpp */; };
@@ -353,9 +357,14 @@
 /* Begin PBXFileReference section */
 		94F17DDB2991FACE001F5950 /* ARGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGBColor.h; sourceTree = "<group>"; };
 		94F17DDC29920D90001F5950 /* ARGBColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ARGBColor.cpp; sourceTree = "<group>"; };
+		E20752ED29FF1EC500DCC210 /* Tags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tags.h; sourceTree = "<group>"; };
+		E20752EE2A003EC600DCC210 /* Tags.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tags.cpp; sourceTree = "<group>"; };
 		E20A3C552991CC72005741F7 /* KeyFuncs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyFuncs.cpp; sourceTree = "<group>"; };
+		E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerRatingsSimpleElo.cpp; sourceTree = "<group>"; };
+		E247DE232A0EB51B001CA630 /* PlayerRatingsSimpleElo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = PlayerRatingsSimpleElo.h; sourceTree = "<group>"; };
 		E248724C29A480990079337E /* prefs.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = prefs.json; path = "~/Library/Application Support/Avaraline/Avara/prefs.json"; sourceTree = "<group>"; };
 		E2B62D7D2997052B00600401 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		E2D76F732A1680FD000D24B3 /* JSONify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONify.h; sourceTree = "<group>"; };
 		E517F04C299713990036B206 /* AvaraTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AvaraTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5253ED82996DD2200F8C1E8 /* PascalStrings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PascalStrings.cpp; sourceTree = "<group>"; };
 		E5890B2429894DB3007A875D /* Avara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avara.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1110,6 +1119,7 @@
 				E5890BC229895118007A875D /* RayHit.h */,
 				E5890BB029895118007A875D /* RolloverCounter.h */,
 				E5890BB129895118007A875D /* SlidingHistogram.h */,
+				E2D76F732A1680FD000D24B3 /* JSONify.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -1290,6 +1300,8 @@
 				E5890C0229895118007A875D /* LinkLoose.cpp */,
 				E5890BDD29895118007A875D /* Messages.h */,
 				E5890BE429895118007A875D /* PlayerConfig.h */,
+				E247DE222A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp */,
+				E247DE232A0EB51B001CA630 /* PlayerRatingsSimpleElo.h */,
 			);
 			path = game;
 			sourceTree = "<group>";
@@ -1353,6 +1365,8 @@
 				E5890C7F29895118007A875D /* CWindow.cpp */,
 				E5890C8E29895118007A875D /* CWindow.h */,
 				E5890C8429895118007A875D /* Preferences.h */,
+				E20752ED29FF1EC500DCC210 /* Tags.h */,
+				E20752EE2A003EC600DCC210 /* Tags.cpp */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -2031,6 +2045,7 @@
 				E517F083299713DB0036B206 /* CLogicDelay.cpp in Sources */,
 				E517F084299713DB0036B206 /* CLogicDistributor.cpp in Sources */,
 				E517F085299713DB0036B206 /* CLogicTimer.cpp in Sources */,
+				E2210CC12A1C9D9C000712AA /* Tags.cpp in Sources */,
 				E517F086299713DB0036B206 /* CMarkerActor.cpp in Sources */,
 				E517F087299713DB0036B206 /* CMineActor.cpp in Sources */,
 				E517F088299713DB0036B206 /* CMissile.cpp in Sources */,
@@ -2108,6 +2123,7 @@
 				E517F0D0299713DB0036B206 /* combobox.cpp in Sources */,
 				E517F0D1299713DB0036B206 /* common.cpp in Sources */,
 				E517F0D2299713DB0036B206 /* desccombobox.cpp in Sources */,
+				E247DE252A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */,
 				E517F0D3299713DB0036B206 /* glcanvas.cpp in Sources */,
 				E517F0D4299713DB0036B206 /* glutil.cpp in Sources */,
 				E517F0D5299713DB0036B206 /* label.cpp in Sources */,
@@ -2190,6 +2206,7 @@
 				E5890CA829895118007A875D /* Beeper.cpp in Sources */,
 				E5890CDE29895118007A875D /* CYonBox.cpp in Sources */,
 				E5890EF429895124007A875D /* tabheader.cpp in Sources */,
+				E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */,
 				E5890D1029895118007A875D /* CApplication.cpp in Sources */,
 				E5890EEB29895124007A875D /* csscolorparser.cpp in Sources */,
 				E5890CF329895118007A875D /* CSoundActor.cpp in Sources */,
@@ -2223,6 +2240,7 @@
 				E5890CA929895118007A875D /* CHuffProcessor.cpp in Sources */,
 				E5890EF729895124007A875D /* popup.cpp in Sources */,
 				E5890CBA29895118007A875D /* CWeapon.cpp in Sources */,
+				E247DE242A0EB51B001CA630 /* PlayerRatingsSimpleElo.cpp in Sources */,
 				E5890CE429895118007A875D /* CAreaActor.cpp in Sources */,
 				E5890D0929895118007A875D /* CNetworkWindow.cpp in Sources */,
 				E5890EFA29895124007A875D /* glcanvas.cpp in Sources */,
@@ -2303,12 +2321,14 @@
 				HEADER_SEARCH_PATHS = (
 					"vendor/**",
 					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DNANOGUI_GLAD",
@@ -2327,12 +2347,14 @@
 				HEADER_SEARCH_PATHS = (
 					"vendor/**",
 					/opt/homebrew/include,
+					/usr/local/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/lib,
+					/usr/local/lib,
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DNANOGUI_GLAD",
