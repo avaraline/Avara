@@ -1070,8 +1070,8 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 // FrameLatency is slightly different than LatencyTolerance.  It is in terms of integer frames
 // at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
-    // half of the roundTripTime in units of frameTime, rounded
-    return (roundTrip + frameTime) / (2*frameTime);
+    // half of the roundTripTime in units of frameTime, rounded up (ceil)
+    return (roundTrip/2 + frameTime) / frameTime;
 }
 
 // "frameLatency" is the integer number of frames to delay;
@@ -1090,7 +1090,7 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
         static int reduceLatencyCounter = 0;
         static int increaseLatencyCounter = 0;
         if (newLatency < latencyTolerance) {
-            static const int REDUCE_LATENCY_COUNT = 5;
+            static const int REDUCE_LATENCY_COUNT = 8;
             // need REDUCE_LATENCY_COUNT consecutive requests to reduce latency
             if (maxChange == MAX_LATENCY || ++reduceLatencyCounter >= REDUCE_LATENCY_COUNT) {
                 latencyTolerance = std::max(latencyTolerance-maxChange, std::max(newLatency, double(0.0)));
@@ -1098,7 +1098,7 @@ void CAvaraGame::SetFrameLatency(short newFrameLatency, short maxChange, CPlayer
                 increaseLatencyCounter = 0;
             }
         } else {
-            static const int INCREASE_LATENCY_COUNT = 2;
+            static const int INCREASE_LATENCY_COUNT = 1;
             if (maxChange == MAX_LATENCY || ++increaseLatencyCounter >= INCREASE_LATENCY_COUNT) {
                 latencyTolerance = std::min(latencyTolerance+maxChange, std::min(newLatency, double(MAX_LATENCY)));
                 reduceLatencyCounter = 0;
