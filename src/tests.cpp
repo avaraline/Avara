@@ -123,8 +123,8 @@ private:
 
 class TestNetManager : public CNetManager {
 public:
-    CPlayerManager* CreatePlayerManager(short id) {
-        return new TestPlayerManager(itsGame);
+    std::shared_ptr<CPlayerManager> CreatePlayerManager(short id) {
+        return std::make_shared<TestPlayerManager>(itsGame);
     }
 };
 
