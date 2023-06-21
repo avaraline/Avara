@@ -96,8 +96,8 @@ void CSliverPart::Activate(Fixed *origin,
     friction = FIX3(980);
     gravity = FMul(sliverGravity, gCurrentGame->gravityRatio);
 
-    fpsScale = gCurrentGame->FpsCoefficient2(true, FIX1);
-    gCurrentGame->FpsCoefficients(true, friction, gravity, &fpsFriction, &fpsGravity);
+    fpsScale = gCurrentGame->actorList->FpsCoefficient2(FIX1);
+    gCurrentGame->actorList->FpsCoefficients(friction, gravity, &fpsFriction, &fpsGravity);
     lifeCount = age / ToFloat(fpsScale);
 }
 

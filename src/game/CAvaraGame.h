@@ -263,15 +263,6 @@ public:
     virtual FrameNumber NextFrameForPeriod(long period, long referenceFrame = 0);
     virtual void SetFrameTime(int32_t ft);
     virtual void IncrementFrame(bool firstFrame = false);
-
-    void FpsCoefficients(bool fastFPS, Fixed classicCoeff1, Fixed classicCoeff2,
-                         Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed* fpsOffset = NULL);
-    Fixed FpsCoefficient1(bool fastFPS, Fixed classicMultiplier1);
-    Fixed FpsCoefficient2(bool fastFPS, Fixed classicMultiplier2);
-    Fixed FpsOffset(bool fastFPS, Fixed classicCoeff2);
-    FrameNumber FpsFramesPerClassic(bool fastFPS, long classicFrames = 1);
-    Fixed ClassicCoefficient2(bool fastFPS, Fixed fpsValue);
-    virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);
     virtual FrameNumber FramesFromNow(FrameNumber classicFrames);
 
     void SetKeysFromStdin() { keysFromStdin = true; };

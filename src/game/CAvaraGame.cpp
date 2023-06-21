@@ -164,6 +164,8 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     // vg = AvaraVGContext();
     // font = nvgCreateFont(vg, "sans", BundlePath("fonts/Roboto-Regular.ttf"));
+
+    SetFrameTime(16);
 }
 
 CSoundHub* CAvaraGame::CreateSoundHub() {
@@ -810,12 +812,14 @@ void CAvaraGame::GameStart() {
     // FlushEvents(everyEvent, 0);
 
     // change the event processing time during the game (0 = poll)
+    if (gApplication) {
 #ifdef _WIN32
-    gApplication->throttle = 0;   // let 'er rip
+        gApplication->throttle = 0;   // let 'er rip
 #else
-    gApplication->throttle = std::min(static_cast<FrameTime>(itsApp->Number(kThrottle)), frameTime);
+        gApplication->throttle = std::min(static_cast<FrameTime>(itsApp->Number(kThrottle)), frameTime);
 #endif
-    SDL_Log("CAvaraGame::GameStart, throttle = %d\n", gApplication->throttle);
+        SDL_Log("CAvaraGame::GameStart, throttle = %d\n", gApplication->throttle);
+    }
 }
 
 // Run when the game is paused or aborted
@@ -1165,101 +1169,4 @@ void CAvaraGame::IncrementFrame(bool firstFrame) {
 
 FrameNumber CAvaraGame::FramesFromNow(FrameNumber classicFrameCount) {
     return frameNumber + classicFrameCount / fpsScale;
-}
-
-
-// Computes the coefficients used for high-FPS computations.
-// The arguments are commonly used to represent "friction" and "gravity" in many of the
-// speed calculations. For example, the grenade calculation for vertical speed (speed[1])
-// looks like this:
-//    speed[Y] = speed[Y] * friction - gravity
-// But there are many cases that are a general linear equation where some variable
-// is updated from one frame to the next like this:
-//    x[i+1] = x[i] * a + b
-// This method converts the coefficients (a, b) from "classic" to "fps" equivalents so that
-// the computation after multiple FPS frames is the nearly same as it would have would been
-// over the span of a single "classic" frame.
-void CAvaraGame::FpsCoefficients(bool fastFPS, Fixed classicCoeff1, Fixed classicCoeff2,
-                                     Fixed* fpsCoeff1, Fixed* fpsCoeff2, Fixed *fpsOffset) {
-    if (fastFPS) {
-        double fps1 = FpsCoefficient1(ToFloat(classicCoeff1), fpsScale);
-        *fpsCoeff1 = FRound(fps1);
-        if (abs(FIX1 - classicCoeff1) > 66) {  // not within 0.001 of 1.0
-            *fpsCoeff2 = std::lround(classicCoeff2 * (1.0-fps1) / (1.0-ToFloat(classicCoeff1)));
-        } else { // 0.999-1.001
-            // avoid divide by zero... mathematical limit(classicCoeff1 --> 1) = classicCoeff2*fpsScale
-            *fpsCoeff2 = FpsCoefficient2(fastFPS, classicCoeff2);
-        }
-        if (fpsOffset != NULL) {
-            // Dividing by classicCoeff1(A) seems to improve cases like this:
-            //   s=As+B
-            if (classicCoeff1) {
-                *fpsOffset = FDiv(FpsOffset(fastFPS, classicCoeff2), classicCoeff1);
-            } else {
-                *fpsOffset = 0;
-            }
-        }
-    } else {
-        *fpsCoeff1 = classicCoeff1;
-        *fpsCoeff2 = classicCoeff2;
-    }
-}
-
-// convenience function for equations of the form (returns fps-scaled version of a),
-//   x[i+1] = x[i] * a
-Fixed CAvaraGame::FpsCoefficient1(bool fastFPS, Fixed classicCoeff1) {
-    if (fastFPS) {
-        return ToFixedRound(FpsCoefficient1(ToFloat(classicCoeff1), fpsScale));
-    } else {
-        return classicCoeff1;
-    }
-}
-// convenience function for equations of the form (returns fps-scaled version of b),
-//   x[i+1] = x[i] + b
-Fixed CAvaraGame::FpsCoefficient2(bool fastFPS, Fixed classicCoeff2) {
-    if (fastFPS) {
-        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
-        return FRound(classicCoeff2 * fpsScale);
-    } else {
-        return classicCoeff2;
-    }
-}
-
-// convenience function for offset assuming equations of the form
-//   x[i+1] = x[i] + b
-Fixed CAvaraGame::FpsOffset(bool fastFPS, Fixed classicCoeff2) {
-    // Here's an oversimplication... if you are calculating speed every
-    // classic frame (64ms) like this,
-    //   s=s+8     (classicCoeff1=1, classicCoeff2=8)
-    // then the high FPS (16ms) case might do this for 4 frames.
-    //   s=s+2     (fpsCoeff1=1, fpsCoeff2=2)
-    // but the FPS case will only add a total of (2+4+6+8)*0.25=5 to the location
-    // whereas the classic case adds 8.  To compensate, add an initial offset of
-    // 1.5*2=3 to the speed in the first frame so that the location is incremented
-    // by (5+7+9+11)*0.25=8, same as the classic case.
-    return 0.5 * (1 / fpsScale - 1) * FpsCoefficient2(fastFPS, classicCoeff2);
-}
-
-// the most accurate version of coefficient1 is computed using doubles
-double CAvaraGame::FpsCoefficient1(double fpsCoeff1, double fpsScale) {
-    return pow(fpsCoeff1, fpsScale);
-}
-
-FrameNumber CAvaraGame::FpsFramesPerClassic(bool fastFPS, long classicFrames)
-{
-    if (fastFPS) {
-        return (classicFrames / fpsScale);
-    } else {
-        return 1;
-    }
-}
-
-// basically the inverse of FpsCoefficient2... convert FPS values to Classic units
-Fixed CAvaraGame::ClassicCoefficient2(bool fastFPS, Fixed fpsValue) {
-    if (fastFPS) {
-        // lround rounds both positive and negative values away from zero (adding 0.5 doesn't)
-        return FRound(fpsValue / fpsScale);
-    } else {
-        return fpsValue;
-    }
 }
