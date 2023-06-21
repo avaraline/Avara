@@ -50,11 +50,24 @@ using json = nlohmann::json;
 #define kHUDCriticalColor "hudCriticalColor"
 #define kHUDAlpha "hudAlpha"
 #define kHUDPreset "hudPreset"
+#define kHUDInertia "hudInertia"
 #define kHUDArrowStyle "hudArrowStyle"
 #define kHUDArrowScale "hudArrowScale"
 #define kHUDArrowDistance "hudArrowDistance"
 #define kHUDShowMissileLock "hudShowMissileLock"
-#define kShowOldHUD "showOldHUD"
+#define kHUDShowShieldGauge "hudShowShieldGauge"
+#define kHUDShowEnergyGauge "hudShowEnergyGauge"
+#define kHUDShowBoosterCount "hudShowBoosterCount"
+#define kHUDShowGrenadeCount "hudShowGrenadeCount"
+#define kHUDShowMissileCount "hudShowMissileCount"
+#define kHUDShowLivesCount "hudShowLivesCount"
+#define kHUDShowLevelMessages "hudShowLevelMessages"
+#define kHUDShowSystemMessages "hudShowSystemMessages"
+#define kHUDShowPlayerList "hudShowPlayerList"
+#define kHUDShowDirArrow "hudShowDirArrow"
+#define kHUDShowScore "hudShowScore"
+#define kHUDShowTime "hudShowTime"
+#define kShowClassicHUD "showClassicHUD"
 #define kShowNewHUD "showNewHUD"
 
 // Network & Tracker
@@ -136,12 +149,24 @@ static json defaultPrefs = {
     {kHUDWarningColor, "#edd62d"},
     {kHUDCriticalColor, "#fa1313"},
     {kHUDAlpha, 1.0},
-    {kHUDPreset, 1},
+    {kHUDPreset, 2},
+    {kHUDInertia, 1.0},
     {kHUDArrowScale, 1.0},
     {kHUDArrowDistance, 8.0},
     {kHUDArrowStyle, 2},
     {kHUDShowMissileLock, true},
-    {kShowOldHUD, true},
+    {kHUDShowShieldGauge, true},
+    {kHUDShowEnergyGauge, true},
+    {kHUDShowBoosterCount, true},
+    {kHUDShowGrenadeCount, true},
+    {kHUDShowMissileCount, true},
+    {kHUDShowLivesCount, true},
+    {kHUDShowSystemMessages, true},
+    {kHUDShowLevelMessages, true},
+    {kHUDShowPlayerList, true},
+    {kHUDShowScore, true},
+    {kHUDShowTime, true},
+    {kShowClassicHUD, false},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},

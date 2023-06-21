@@ -14,6 +14,7 @@ public:
     virtual ~CHUD() {}
 
     void Render(CViewParameters *view, NVGcontext *ctx);
+    void RenderNewHUD(CViewParameters *view, NVGcontext *ctx);
     void DrawLevelName(CViewParameters *view, NVGcontext *ctx);
     void DrawPaused(CViewParameters *view, NVGcontext *ctx);
     void DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx);

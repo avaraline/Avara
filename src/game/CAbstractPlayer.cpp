@@ -403,6 +403,12 @@ void CAbstractPlayer::DisposeDashboard() {
 
         hudWorld->RemovePart(boosterBox[i]);
         boosterBox[i]->Dispose();
+
+        hudWorld->RemovePart(livesMeter[i]);
+        livesMeter[i]->Dispose();
+
+        hudWorld->RemovePart(livesBox[i]);
+        livesBox[i]->Dispose();
     }
 }
 
@@ -548,13 +554,13 @@ void CAbstractPlayer::LoadDashboardParts() {
     // These scalars affect how quickly the two values converge
     pidReset(&pMotionY);
     pidReset(&pMotionX);
-    pMotionX.P = -1.0;
-    pMotionX.I = -.50;
-    pMotionX.D = -.10;
+    pMotionX.P = -1.2;
+    pMotionX.I = -0.7;
+    pMotionX.D = -.04;
     pMotionX.angular = false;
-    pMotionY.P = -1.0;
-    pMotionY.I = -0.50;
-    pMotionY.D = -0.10;
+    pMotionY.P = -1.2;
+    pMotionY.I = -0.7;
+    pMotionY.D = -0.04;
     pMotionY.angular = false;
     hudRestingX = 0;
     hudRestingY = 0;
@@ -565,18 +571,21 @@ void CAbstractPlayer::LoadDashboardParts() {
         case Close:
             gaugeBSP = kGaugeBSP;
             layoutScale = 1.0;
-            boosterPosition[0] = 0.21f;
-            boosterPosition[1] = -0.09f;
-            grenadePosition[0] = 0.15f;
-            grenadePosition[1] = -0.22f;
-            missilePosition[0] = -0.15f;
-            missilePosition[1] = -0.22f;
-            shieldPosition[0] = 0.19f;
-            shieldPosition[1] = -0.12f;
-            energyPosition[0] = -0.19f;
-            energyPosition[1] = -0.12f;
+            boosterPosition[0] = 0.25f;
+            boosterPosition[1] = -0.11f;
+            livesPosition[0] = -.25f;
+            livesPosition[1] = -0.11f;
+            grenadePosition[0] = 0.19f;
+            grenadePosition[1] = -0.26f;
+            missilePosition[0] = -0.19f;
+            missilePosition[1] = -0.26f;
+            shieldPosition[0] = 0.23f;
+            shieldPosition[1] = -0.14f;
+            energyPosition[0] = -0.23f;
+            energyPosition[1] = -0.14f;
             offsetMultiplier = .085f;
             boosterSpacing = 65.0f;
+            livesSpacing = 65.0f;
             weaponSpacing = 35.0f;
             break;
         case Far:
@@ -584,6 +593,8 @@ void CAbstractPlayer::LoadDashboardParts() {
             layoutScale = 2.0;
             boosterPosition[0] = -0.87f;
             boosterPosition[1] = -0.13f;
+            livesPosition[0] = 0.79f;
+            livesPosition[1] = -0.23f;
             grenadePosition[0] = 0.96f;
             grenadePosition[1] = -0.35f;
             missilePosition[0] = 0.85f;
@@ -593,7 +604,7 @@ void CAbstractPlayer::LoadDashboardParts() {
             energyPosition[0] = -0.97f;
             energyPosition[1] = -0.20f;
             offsetMultiplier = .17f;
-            boosterSpacing = 40.0f;
+            livesSpacing = 40.0f;
             weaponSpacing = 16.0f;
             break;
     }
@@ -626,6 +637,8 @@ void CAbstractPlayer::LoadDashboardParts() {
     grenadeLabel = DashboardPart(kGrenadeBSP, FIX3(700*layoutScale));
     missileLabel = DashboardPart(kMissileBSP, FIX3(700*layoutScale));
     boosterLabel = DashboardPart(kBoosterBSP, FIX3(40*layoutScale));
+    int livesLabelBSP = itsGame->itsApp->Number(kHullTypeTag);
+    livesLabel = DashboardPart(215 + livesLabelBSP, FIX3(140*layoutScale));
     for (int i = 0; i < 4; i++) {
         grenadeMeter[i] = DashboardPart(kFilledBox, FIX3(100*layoutScale));
         grenadeBox[i] = DashboardPart(kEmptyBox, FIX3(200*layoutScale));
@@ -635,6 +648,9 @@ void CAbstractPlayer::LoadDashboardParts() {
 
         boosterMeter[i] = DashboardPart(kFilledBox, FIX3(40*layoutScale));
         boosterBox[i] = DashboardPart(kEmptyBox, FIX3(80*layoutScale));
+
+        livesMeter[i] = DashboardPart(kFilledBox, FIX3(40*layoutScale));
+        livesBox[i] = DashboardPart(kEmptyBox, FIX3(80*layoutScale));
     }
 }
 
@@ -645,17 +661,24 @@ void CAbstractPlayer::RenderDashboard() {
         ResetDashboard();
         return;
     }
-    
-    // Push HUD elements away from resting position based on movement factors
-    hudRestingX += ToFloat(FMul(FIX(.05), dYaw));
-    hudRestingY += ToFloat(FMul(FIX(.15), dPitch - FMul(dElevation, FIX(10))));
 
-    if (hudRestingX > 1) hudRestingX = 1;
-    if (hudRestingY > 1) hudRestingY = 1;
+    float customInertia = itsGame->itsApp->Get(kHUDInertia);
+
+    // Push HUD elements away from resting position based on movement factors
+    hudRestingX += ToFloat(FMul(FIX(.05), dYaw)) * customInertia; // Head (mouse) movement
+    hudRestingY += ToFloat(FMul(FIX(.15), dPitch - FMul(dElevation, FIX(10)))) * customInertia; // Head (mouse) movement and jumping/falling
+
+    if (hudRestingX > 2) hudRestingX = 2;
+    if (hudRestingY > 2) hudRestingY = 2;
 
     // Use PID Motion to move HUD elements back to resting position
-    hudRestingX += pidUpdate(&pMotionX, .65, hudRestingX, 0.0);
-    hudRestingY += pidUpdate(&pMotionY, .65, hudRestingY, 0.0);
+    hudRestingX += pidUpdate(&pMotionX, .55, hudRestingX, 0.0);
+    hudRestingY += pidUpdate(&pMotionY, .55, hudRestingY, 0.0);
+
+    // Prevent jitter for values that are very close to zero
+    // Specifically prevents alternating between 0 and -0
+    if (abs(hudRestingX) < .01f) hudRestingX = abs(hudRestingX);
+    if (abs(hudRestingY) < .01f) hudRestingY = abs(hudRestingY);
 
     CWeapon *weapon = NULL;
     dashboardSpinHeading += FpsCoefficient2(FDegToOne(dashboardSpinSpeed));
@@ -684,21 +707,26 @@ void CAbstractPlayer::RenderDashboard() {
     }
 
     // Ammo Labels
-    if (grenadeLimit != 0) {
+    if (itsGame->itsApp->Get(kHUDShowGrenadeCount) && grenadeLimit != 0) {
         DashboardPosition(grenadeLabel, false, grenadePosition[0], grenadePosition[1]-(.09f*(layoutScale/2.0)), 0, dashboardSpinHeading, 0);
     }
 
-    if (missileLimit != 0) {
+    if (itsGame->itsApp->Get(kHUDShowMissileCount) && missileLimit != 0) {
         DashboardPosition(missileLabel, false, missilePosition[0], missilePosition[1]-(.09f*(layoutScale/2.0)), 0, dashboardSpinHeading, 0);
     }
 
-    if (boosterLimit != 0) {
-        DashboardPosition(boosterLabel, false, boosterPosition[0], boosterPosition[1]-(.05f*(layoutScale/2.0)), FIX(90.0), FIX(70.0), 0);
+    if (itsGame->itsApp->Get(kHUDShowBoosterCount) && boosterLimit != 0) {
+        DashboardPosition(boosterLabel, false, boosterPosition[0], boosterPosition[1]-(.05f*(layoutScale/2.0)), FIX(90.0), FIX(60.0), 0);
+    }
+
+    int status = itsManager->GetStatusChar(); // Check if lives are being used in the game
+    if (itsGame->itsApp->Get(kHUDShowLivesCount) && status != 10 && lives > 0) {
+        DashboardPosition(livesLabel, false, livesPosition[0], livesPosition[1]-(.045f*(layoutScale/2.0)), 0, dashboardSpinHeading, FIX(40.0));
     }
 
     // Ammo counts
     for (int i = 0; i < 4; i++) {
-        if (0 < grenadeLimit) {
+        if (itsGame->itsApp->Get(kHUDShowGrenadeCount) && 0 < grenadeLimit) {
             if (float(i)/4.0 < float(grenadeCount)/float(grenadeLimit)) {
                 // Fill box
                 DashboardPosition(grenadeMeter[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
@@ -708,7 +736,7 @@ void CAbstractPlayer::RenderDashboard() {
             }
         }
 
-        if (0 < missileLimit) {
+        if (itsGame->itsApp->Get(kHUDShowMissileCount) && 0 < missileLimit) {
             if (i < missileCount) {
                 // Fill box
                 DashboardPosition(missileMeter[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
@@ -718,7 +746,7 @@ void CAbstractPlayer::RenderDashboard() {
             }
         }
 
-        if (0 < boosterLimit) {
+        if (itsGame->itsApp->Get(kHUDShowBoosterCount) && 0 < boosterLimit) {
             if (i < boostsRemaining) {
                 // Fill box
                 DashboardPosition(boosterMeter[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing)); // (x,y) screen position
@@ -727,56 +755,70 @@ void CAbstractPlayer::RenderDashboard() {
                 DashboardPosition(boosterBox[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing)); // (x,y) screen position
             }
         }
+
+        if (itsGame->itsApp->Get(kHUDShowLivesCount) && 0 < lives) {
+            if (i < lives) {
+                // Fill box
+                DashboardPosition(livesMeter[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing)); // (x,y) screen position
+            } else {
+                // Empty box
+                DashboardPosition(livesBox[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing)); // (x,y) screen position
+            }
+        }
     }
 
     // Shields
-    DashboardPosition(shieldGaugeBackLight, shieldPosition[0], shieldPosition[1]);
+    if (itsGame->itsApp->Get(kHUDShowShieldGauge)) {
+        DashboardPosition(shieldGaugeBackLight, shieldPosition[0], shieldPosition[1]);
 
-    Fixed shieldPercent = 0;
-    if (maxShields > 0) shieldPercent = FDiv(shields, maxShields);
+        Fixed shieldPercent = 0;
+        if (maxShields > 0) shieldPercent = FDiv(shields, maxShields);
 
-    if (shieldPercent <= FIX3(333)) {
-        shieldGauge->ReplaceAllColors(ColorManager::getHUDCriticalColor());
-    } else if (shieldPercent <= FIX3(666)) {
-        shieldGauge->ReplaceAllColors(ColorManager::getHUDWarningColor());
-    } else {
-        shieldGauge->ReplaceAllColors(ColorManager::getHUDColor());
+        if (shieldPercent <= FIX3(333)) {
+            shieldGauge->ReplaceAllColors(ColorManager::getHUDCriticalColor());
+        } else if (shieldPercent <= FIX3(666)) {
+            shieldGauge->ReplaceAllColors(ColorManager::getHUDWarningColor());
+        } else {
+            shieldGauge->ReplaceAllColors(ColorManager::getHUDColor());
+        }
+
+        // Scale based on damage taken
+        Fixed shieldHeight = FMul(ToFixed(layoutScale), shieldPercent);
+
+        // Get the inverse of the shield percent
+        // Gauge moves further when energy is lower
+        float shieldYOffset = abs(ToFloat(FIX1 - shieldPercent));
+
+        DashboardPosition(shieldGauge, shieldPosition[0], shieldPosition[1] - (offsetMultiplier * shieldYOffset));
+        shieldGauge->ScaleXYZ(ToFixed(layoutScale), shieldHeight, ToFixed(layoutScale));
     }
-
-    // Scale based on damage taken
-    Fixed shieldHeight = FMul(ToFixed(layoutScale), shieldPercent);
-
-    // Get the inverse of the shield percent
-    // Gauge moves further when energy is lower
-    float shieldYOffset = abs(ToFloat(FIX1 - shieldPercent));
-
-    DashboardPosition(shieldGauge, shieldPosition[0], shieldPosition[1] - (offsetMultiplier * shieldYOffset));
-    shieldGauge->ScaleXYZ(ToFixed(layoutScale), shieldHeight, ToFixed(layoutScale));
 
     // Energy
-    DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
+    if (itsGame->itsApp->Get(kHUDShowEnergyGauge)) {
+        DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
 
-    Fixed energyPercent = 0;
-    if (maxEnergy > 0) energyPercent = FDiv(energy, maxEnergy);
+        Fixed energyPercent = 0;
+        if (maxEnergy > 0) energyPercent = FDiv(energy, maxEnergy);
 
-    if (boostEndFrame > itsGame->frameNumber) {
-        energyGauge->ReplaceAllColors(ColorManager::getHUDPositiveColor());
+        if (boostEndFrame > itsGame->frameNumber) {
+            energyGauge->ReplaceAllColors(ColorManager::getHUDPositiveColor());
+        }
+        else if (energyPercent <= FIX(.25)) {
+            energyGauge->ReplaceAllColors(ColorManager::getHUDCriticalColor());
+        } else {
+            energyGauge->ReplaceAllColors(ColorManager::getHUDColor());
+        }
+
+        // Scale based on energy lost
+        Fixed energyHeight = FMul(ToFixed(layoutScale), energyPercent);
+
+        // Get the inverse of the energy percent
+        // Gauge moves further when energy is lower
+        float energyYOffset = abs(ToFloat(FIX1 - energyPercent));
+
+        DashboardPosition(energyGauge, energyPosition[0], energyPosition[1] - (offsetMultiplier * energyYOffset ));
+        energyGauge->ScaleXYZ(ToFixed(layoutScale), energyHeight, ToFixed(layoutScale));
     }
-    else if (energyPercent <= FIX(.25)) {
-        energyGauge->ReplaceAllColors(ColorManager::getHUDCriticalColor());
-    } else {
-        energyGauge->ReplaceAllColors(ColorManager::getHUDColor());
-    }
-
-    // Scale based on energy lost
-    Fixed energyHeight = FMul(ToFixed(layoutScale), energyPercent);
-
-    // Get the inverse of the energy percent
-    // Gauge moves further when energy is lower
-    float energyYOffset = abs(ToFloat(FIX1 - energyPercent));
-
-    DashboardPosition(energyGauge, energyPosition[0], energyPosition[1] - (offsetMultiplier * energyYOffset ));
-    energyGauge->ScaleXYZ(ToFixed(layoutScale), energyHeight, ToFixed(layoutScale));
 }
 
 void CAbstractPlayer::DashboardPosition(CScaledBSP *part, float x, float y) {
@@ -795,7 +837,7 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x,
     // TODO: Adjust these until it looks good, then go multiply 
     // all the DashboardPosition parameters by these numbers, and
     // then delete these
-    float scale_x = 13.12;
+    float scale_x = 11.12;
     float scale_y = 8.23;
     Fixed hud_dist = (FIX3(6000) * 25)/8;
 
@@ -856,6 +898,7 @@ void CAbstractPlayer::ResetDashboard() {
     grenadeLabel->isTransparent = true;
     missileLabel->isTransparent = true;
     boosterLabel->isTransparent = true;
+    livesLabel->isTransparent = true;
     shieldGauge->isTransparent = true;
     shieldGaugeBackLight->isTransparent = true;
     energyGauge->isTransparent = true;
@@ -870,6 +913,9 @@ void CAbstractPlayer::ResetDashboard() {
 
         boosterMeter[i]->isTransparent = true;
         boosterBox[i]->isTransparent = true;
+
+        livesMeter[i]->isTransparent = true;
+        livesBox[i]->isTransparent = true;
     }
 }
 

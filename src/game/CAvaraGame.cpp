@@ -83,6 +83,10 @@ void CAvaraGame::InitLocatorTable() {
     }
 }
 
+void CAvaraGame::IncrementGameCounter() {
+    currentGameId++;
+}
+
 std::unique_ptr<CNetManager> CAvaraGame::CreateNetManager() {
     return std::make_unique<CNetManager>();
 }
@@ -159,7 +163,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
 
     nextPingTime = 0;
 
-    showOldHUD = gApplication->Get<bool>(kShowOldHUD);
+    showClassicHUD = gApplication->Get<bool>(kShowClassicHUD);
     showNewHUD = gApplication->Get<bool>(kShowNewHUD);
     // CalcGameRect();
 
@@ -1050,8 +1054,15 @@ void CAvaraGame::Render(NVGcontext *ctx) {
     AvaraGLSetDepthTest(false);
     hudWorld->Render(itsView);
     AvaraGLSetAmbient(ToFloat(itsView->ambientLight), itsView->ambientLightColor);
-    if (showOldHUD)
+
+    if (showClassicHUD) {
         hud->Render(itsView, ctx);
+    }
+
+    if (showNewHUD) {
+        hud->RenderNewHUD(itsView, ctx);
+    }
+
     AvaraGLSetDepthTest(true);
 }
 

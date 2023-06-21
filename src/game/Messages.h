@@ -18,4 +18,5 @@ struct MsgLine {
     std::string text;
     MsgAlignment align;
     MsgCategory category;
+    int gameId;
 };

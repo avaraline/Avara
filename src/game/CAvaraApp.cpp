@@ -207,6 +207,7 @@ void CAvaraAppImpl::drawAll() {
 void CAvaraAppImpl::GameStarted(std::string set, std::string level) {
     animatePreview = false;
     itsGame->itsView->showTransparent = false;
+    itsGame->IncrementGameCounter();
     MessageLine(kmStarted, MsgAlignment::Center);
     levelWindow->AddRecent(set, level);
 }
@@ -359,13 +360,14 @@ void CAvaraAppImpl::AddMessageLine(
 
     msg.align = align;
     msg.category = category;
+    msg.gameId = itsGame->currentGameId;
 
     // split string on newlines
     while(std::getline(iss, line)) {
         SDL_Log("Message: %s", line.c_str());
         msg.text = line;
         messageLines.push_back(msg);
-        if (messageLines.size() > 5) {
+        if (messageLines.size() > 500) {
             messageLines.pop_front();
         }
     }

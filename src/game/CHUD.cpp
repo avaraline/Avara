@@ -277,8 +277,10 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     float mX = 20.0;
     float mY = (bufferHeight - chudHeight + 8);
     short textAlign = NVG_ALIGN_LEFT;
-    for (auto i : itsGame->itsApp->MessageLines()) {
-        switch (i.align) {
+    int messageCount = 0, maxMessageCount = 5;
+    for (auto iter = itsGame->itsApp->MessageLines().rbegin(); iter != itsGame->itsApp->MessageLines().rend(); iter++) {
+        MsgLine msg = *iter;
+        switch (msg.align) {
             case MsgAlignment::Left:
                 mX = 20.0;
                 textAlign = NVG_ALIGN_LEFT;
@@ -295,9 +297,13 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
         nvgBeginPath(ctx);
         nvgTextAlign(ctx, textAlign | NVG_ALIGN_TOP);
         nvgFontSize(ctx, fontsz_m);
-        nvgFillColor(ctx, ColorManager::getMessageColor(i.category).IntoNVG());
-        nvgText(ctx, mX, mY, i.text.c_str(), NULL);
+        nvgFillColor(ctx, ColorManager::getMessageColor(msg.category).IntoNVG());
+        nvgText(ctx, mX, mY, msg.text.c_str(), NULL);
+        if (messageCount >= maxMessageCount) {
+            break;
+        }
         mY += 11;
+        messageCount++;
     }
 
     float pY;
@@ -306,7 +312,7 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     float colorBoxAlpha = 1.0;
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         CPlayerManager *thisPlayer = net->playerTable[i].get();
-        std::string playerName((char *)thisPlayer->PlayerName() + 1, thisPlayer->PlayerName()[0]);
+        std::string playerName = thisPlayer->GetPlayerName();
         if (playerName.length() < 1) continue;
 
         // Get player RTT
@@ -630,6 +636,382 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
     nvgTextAlign(ctx, NVG_ALIGN_CENTER | NVG_ALIGN_MIDDLE);
     nvgText(ctx, g2X1 + 7.5, gY + full + 10.0, timeText, NULL);
+
+    nvgEndFrame(ctx);
+}
+
+
+void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
+    CAbstractPlayer *player = itsGame->GetLocalPlayer();
+    CAbstractPlayer *spectatePlayer = itsGame->GetSpectatePlayer();
+    CNetManager *net = itsGame->itsApp->GetNet();
+
+    DrawLevelName(view, ctx);
+    DrawPaused(view, ctx);
+
+    std::vector<CPlayerManager*> thePlayers = net->ActivePlayers(); // only players actively playing
+
+    int playerCount = (int)net->PlayerCount();
+    int highestUsedSlot = 0;
+    // Find the highest numbered occupied slot
+    // Empty slots will only show up if they are between occupied slots
+    for (int i = 0; i < kMaxAvaraPlayers; i++) {
+        CPlayerManager *thisPlayer = net->playerTable[i].get();
+        std::string playerName = thisPlayer->GetPlayerName();
+        if (playerName.length() < 1) continue;
+        highestUsedSlot = std::max(highestUsedSlot, (int)(thisPlayer->Slot() + 1));
+    }
+
+    int bufferWidth = view->viewPixelDimensions.h, bufferHeight = view->viewPixelDimensions.v;
+    int chudHeight = 13 * playerCount;
+
+    DrawScore(thePlayers, chudHeight, view, ctx);
+
+    nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
+
+    int hudRestingX = 0, hudRestingY = 0;
+    if (player) {
+        hudRestingX = player->hudRestingX*70;
+        hudRestingY = player->hudRestingY*70;
+    }
+
+    float fontsz_l = 25.0, fontsz_m = 17.0, fontsz_s = 12.0;
+    nvgFontFace(ctx, "mono");
+
+    // Parameters for drawing UI elements on the screen
+    // Units for position and size are set as a percentage of the screen size to make elements look the same after the screen resolution changes
+    float levelMessagePosition[2] = {50.0f + hudRestingX, (float)bufferHeight - 240.0f - hudRestingY};
+    float levelMessageSize[2] = {350.0f, 90.0f};
+    int levelMessageSpacing = 16;
+    int levelMessageMaxLines = 5;
+
+    float systemMessagePosition[2] = {50.0f + hudRestingX, (float)bufferHeight - 140.0f - hudRestingY};
+    float systemMessageSize[2] = {520.0f, 90.0f};
+    int systemMessageSpacing = 16;
+    int systemMessageMaxLines = 5;
+
+    int playerLineHeight = 17;
+    float playerListPosition[2] = {(float)bufferWidth - 530.0f + hudRestingX, (float)bufferHeight - 50.0f - (highestUsedSlot * playerLineHeight) - hudRestingY};
+    float playerListSize[2] = {520.0f, (highestUsedSlot * playerLineHeight) + 10.0f};
+    float timePosition[2] = {(float)bufferWidth - 350.0f + hudRestingX, playerListPosition[1] - 37.0f};
+    float timeSize[2] = {75.0f, 27.0f};
+    float scorePosition[2] = {(float)bufferWidth - 500.0f + hudRestingX, playerListPosition[1] - 37.0f};
+    float scoreSize[2] = {75.0f, 27.0f};
+
+    // System Message Backdrop
+    if (itsGame->itsApp->Get(kHUDShowSystemMessages)) {
+        nvgBeginPath(ctx);
+        nvgRect(ctx, systemMessagePosition[0], systemMessagePosition[1], systemMessageSize[0], systemMessageSize[1]);
+        nvgFillColor(ctx, BACKGROUND_COLOR);
+        nvgFill(ctx);
+    } else {
+        systemMessageMaxLines = 0;
+    }
+
+    // Level Message Backdrop
+    if (itsGame->itsApp->Get(kHUDShowLevelMessages)) {
+        nvgBeginPath(ctx);
+        nvgRect(ctx, levelMessagePosition[0], levelMessagePosition[1], levelMessageSize[0], levelMessageSize[1]);
+        nvgFillColor(ctx, BACKGROUND_COLOR);
+        nvgFill(ctx);
+    } else {
+        levelMessageMaxLines = 0;
+    }
+
+    // Player List Backdrop
+    if (itsGame->itsApp->Get(kHUDShowPlayerList)) {
+        nvgBeginPath(ctx);
+        nvgRect(ctx, playerListPosition[0], playerListPosition[1], playerListSize[0], playerListSize[1]);
+        nvgFillColor(ctx, BACKGROUND_COLOR);
+        nvgFill(ctx);
+    }
+
+
+    // Read the message list starting at the end and reading backwards.
+    // As newer messages are added, older messages travel up in the display
+    // Messages will be displayed on the screen like this:
+    //
+    // Less Recent  ^  Read last
+    //              |
+    //              |
+    // Most Recent  |  Read first
+    float mX = 0, mY = 0, sX = 0, sY = 0;
+    int levelMsgCount = 0, sysMsgCount = 0;
+    short textAlign = NVG_ALIGN_LEFT;
+    for (auto iter = itsGame->itsApp->MessageLines().rbegin(); iter != itsGame->itsApp->MessageLines().rend(); iter++) {
+        MsgLine msg = *iter;
+
+        // Filter messages that are older than the current game
+        // Don't keep reading messages when a message from a previous game is found
+        if (msg.gameId < itsGame->currentGameId) break; 
+
+        // Set initial message params based on category
+        // This determines which display panel the message gets added to
+        // Check if we can still display messages of the given category
+        switch (msg.category) {
+            case MsgCategory::System:
+            case MsgCategory::Error:
+                mX = systemMessagePosition[0];
+                sX = systemMessageSize[0];
+                mY = (systemMessagePosition[1] - 20.0 + systemMessageSize[1]) - (float)(systemMessageSpacing * sysMsgCount);
+                if (sysMsgCount >= systemMessageMaxLines) {
+                    // This queue is full. Move on to the next message
+                    continue;
+                } else {
+                    sysMsgCount++;
+                }
+                break;
+            case MsgCategory::Level:
+                mX = levelMessagePosition[0];
+                sX = levelMessageSize[0];
+                mY = (levelMessagePosition[1] - 20.0 + levelMessageSize[1]) - (float)(levelMessageSpacing * levelMsgCount);
+                if (levelMsgCount >= levelMessageMaxLines) {
+                    // This queue is full. Move on to the next message
+                    continue;
+                } else {
+                    levelMsgCount++;
+                }
+                break;
+        }
+
+        // Message alignment
+        switch (msg.align) {
+            case MsgAlignment::Left:
+                mX += 10.0;
+                textAlign = NVG_ALIGN_LEFT;
+                break;
+            case MsgAlignment::Center:
+                if (msg.category == MsgCategory::Level) {
+                    mX += 10.0;
+                    textAlign = NVG_ALIGN_LEFT;
+                    break;
+                }
+                mX += (sX / 2.0);
+                textAlign = NVG_ALIGN_CENTER;
+                break;
+            case MsgAlignment::Right:
+                mX += sX - 10;
+                textAlign = NVG_ALIGN_RIGHT;
+                break;
+        }
+
+        // Draw the message
+        nvgBeginPath(ctx);
+        nvgTextAlign(ctx, textAlign | NVG_ALIGN_TOP);
+        nvgFontSize(ctx, fontsz_m);
+        nvgFillColor(ctx, ColorManager::getMessageColor(msg.category).IntoNVG());
+        nvgText(ctx, mX, mY, msg.text.c_str(), NULL);
+
+        // If all display queues are full then we don't need to continue reading messages
+        if (sysMsgCount >= systemMessageMaxLines && levelMsgCount >= levelMessageMaxLines) {
+            break;
+        }
+    }
+
+
+    float pY;
+    ARGBColor longTeamColor = 0;
+    float teamColorRGB[3];
+    float colorBoxAlpha = 1.0;
+    if (itsGame->itsApp->Get(kHUDShowPlayerList)) {
+        for (int i = 0; i < kMaxAvaraPlayers; i++) {
+            CPlayerManager *thisPlayer = net->playerTable[i].get();
+            std::string playerName = thisPlayer->GetPlayerName();
+            if (playerName.length() < 1) continue;
+
+            // Get player RTT
+            long rtt = 0;
+            if (i != net->itsCommManager->myId && playerName.length() > 0) {
+                rtt = net->itsCommManager->GetMaxRoundTrip(1 << i);
+            }
+
+            pY = (playerListPosition[1] + 8) + (playerLineHeight * i); // Base y position for the entire player line
+            longTeamColor = *ColorManager::getTeamColor(net->teamColors[i] + 1);
+            longTeamColor.ExportGLFloats(teamColorRGB, 3);
+            std::string playerChat = thisPlayer->GetChatString(CHAT_CHARS);
+            NVGcolor textColor = nvgRGBA(255, 255, 255, 255);
+
+            //check for not playing
+            if(thisPlayer->IsAway()) {
+                textColor = nvgRGBA(255, 255, 255, 150);
+                colorBoxAlpha = 0.5;
+            }
+            else {
+                textColor = nvgRGBA(255, 255, 255, 255);
+                colorBoxAlpha = 1.0;
+            }
+
+            //player color box
+            float colorBoxWidth = 15.0;
+            float colorBoxHeight = 15.0;
+            float pingBarHeight = 0.0;
+            nvgBeginPath(ctx);
+
+            //highlight player if spectating
+            if (spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
+                textColor = (*ColorManager::getTeamTextColor(net->teamColors[i] + 1)).IntoNVG();
+                colorBoxWidth = 142.0;
+            }
+
+            nvgRect(ctx, playerListPosition[0] + 370, pY - 2, colorBoxWidth, colorBoxHeight);
+            nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], colorBoxAlpha));
+            nvgFill(ctx);
+
+            // draw something based on the loading status
+            switch (thisPlayer->LoadingStatus()) {
+            // Draw a dot
+            case kLReady:
+                nvgBeginPath(ctx);
+                nvgCircle(ctx, playerListPosition[0] + 378, pY + (colorBoxHeight / 2) - 2, 5.0);
+                nvgFillColor(ctx, nvgRGBAf(0, 0, 0, 255));
+                nvgFill(ctx);
+
+                nvgBeginPath(ctx);
+                nvgCircle(ctx, playerListPosition[0] + 378, pY + (colorBoxHeight / 2) - 2, 4.0);
+                nvgFillColor(ctx, nvgRGBAf(255, 255, 255, 255));
+                nvgFill(ctx);
+                break;
+
+            case kLActive:
+                // Ping Indicator
+                NVGcolor pingColor;
+                if (rtt != 0 && thisPlayer->Presence() != kzSpectating) { // Don't draw ping for yourself or spectators
+                if (rtt < 100) {  // Green + Small
+                    pingColor = ColorManager::getPingColor(0).IntoNVG();
+                    pingBarHeight = 3;
+                } else if (rtt <= 200) { // Yellow + Medium
+                    pingColor = ColorManager::getPingColor(1).IntoNVG();
+                    pingBarHeight = 9;
+                } else if (rtt > 200) { // Red + Large
+                    pingColor = ColorManager::getPingColor(2).IntoNVG();
+                    pingBarHeight = 16;
+                }
+                nvgBeginPath(ctx);
+                nvgRect(ctx, playerListPosition[0] + 389, pY + (10 - pingBarHeight) + 3, 5, pingBarHeight);
+                nvgFillColor(ctx, pingColor);
+                nvgFill(ctx);
+                }
+            break;
+
+            // Draw a slash
+            case kLNetDelayed:
+                nvgBeginPath(ctx);
+                nvgMoveTo(ctx, playerListPosition[0] + 370, pY + colorBoxHeight - 3);
+                nvgLineTo(ctx, playerListPosition[0] + 384, pY - 3);
+                nvgStrokeColor(ctx, nvgRGBAf(0, 0, 0, 255));
+                nvgStrokeWidth(ctx, 1);
+                nvgStroke(ctx);
+                nvgClosePath(ctx);
+            break;
+
+            default:
+                break;
+            }
+
+            //player name
+            nvgFillColor(ctx, textColor);
+            nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
+            nvgFontSize(ctx, fontsz_m);
+            nvgText(ctx, playerListPosition[0] + 396, pY - 2, playerName.c_str(), NULL);
+
+            // Player status
+            short status = thisPlayer->GetStatusChar();
+            if (status >= 0) {
+                std::string playerLives = std::to_string(status);
+                if (status == 10) playerLives = "%";
+                if (status == 12) playerLives = "C";
+                if (thisPlayer->Presence() == kzSpectating) playerLives = "*";
+                nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
+                nvgFontSize(ctx, fontsz_s);
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, playerListPosition[0] + 369, pY - 3, playerLives.c_str(), NULL);
+                if (thisPlayer->GetMessageIndicator() > 0) {
+                    nvgText(ctx, playerListPosition[0] + 369, pY + 4, "<", NULL);
+                }
+            }
+
+            // Player message string
+            nvgTextAlign(ctx, NVG_ALIGN_RIGHT | NVG_ALIGN_TOP);
+            nvgFontSize(ctx, fontsz_m);
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            nvgText(ctx, playerListPosition[0] + 360, pY - 2, playerChat.c_str(), NULL);
+
+            //spectating onscreen name
+            if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
+                int x = 20;
+                int y = 20;
+                float fontsz_m = 24.0;
+                float bounds[4];
+                std::string specMessage("Spectating " + playerName);
+
+                nvgBeginPath(ctx);
+                nvgFontFace(ctx, "mono");
+                nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
+                nvgFontSize(ctx, fontsz_m);
+                nvgTextBounds(ctx, x,y, specMessage.c_str(), NULL, bounds);
+
+                //draw box for text
+                nvgBeginPath(ctx);
+                nvgRoundedRect(ctx, x, y, (bounds[2]-bounds[0])+10, 28.0, 3.0);
+                nvgFillColor(ctx, BACKGROUND_COLOR);
+                nvgFill(ctx);
+
+                //draw text
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, x + 5, y + 14, specMessage.c_str(), NULL);
+            }
+        }
+    }
+
+    if (!player)
+        return;
+
+    if(spectatePlayer != NULL)
+        player = spectatePlayer;
+
+    char scoreText[20];
+    char timeText[9];
+
+    // Score Backdrop
+    if (itsGame->itsApp->Get(kHUDShowScore)) {
+        nvgBeginPath(ctx);
+        nvgRect(ctx, scorePosition[0], scorePosition[1], scoreSize[0], scoreSize[1]);
+        nvgFillColor(ctx, BACKGROUND_COLOR);
+        nvgFill(ctx);
+    }
+
+    // Draw Score
+    if (itsGame->itsApp->Get(kHUDShowScore)) {
+        nvgBeginPath(ctx);
+        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+        nvgFontSize(ctx, fontsz_l);
+        nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
+        if(player->itsManager != nullptr) {
+            snprintf(scoreText, sizeof(scoreText), "%ld", itsGame->scores[player->itsManager->Slot()]);
+            nvgText(ctx, scorePosition[0] + 5.0f, scorePosition[1] + 14.0f, scoreText, NULL);
+        }
+    }
+
+    // Time Backdrop
+    if (itsGame->itsApp->Get(kHUDShowTime)) {
+        nvgBeginPath(ctx);
+        nvgRect(ctx, timePosition[0], timePosition[1], timeSize[0], timeSize[1]);
+        nvgFillColor(ctx, BACKGROUND_COLOR);
+        nvgFill(ctx);
+    }
+
+    // Draw time elapsed
+    if (itsGame->itsApp->Get(kHUDShowTime)) {
+        long timeTemp = itsGame->timeInSeconds;
+        int secs, mins;
+        secs = timeTemp % 60;
+        timeTemp /= 60;
+        mins = timeTemp % 60;
+        snprintf(timeText, sizeof(timeText), "%02d:%02d", mins, secs);
+        nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+        nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_MIDDLE);
+        nvgText(ctx, timePosition[0] + 5.0f, timePosition[1] + 14.0f, timeText, NULL);
+    }
 
     nvgEndFrame(ctx);
 }
