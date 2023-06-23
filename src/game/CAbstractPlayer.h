@@ -205,12 +205,15 @@ public:
     CScaledBSP *grenadeLabel = 0;
     CScaledBSP *missileLabel = 0;
     CScaledBSP *boosterLabel = 0;
+    CScaledBSP *livesLabel = 0;
     CScaledBSP *grenadeBox[4] = {0, 0, 0, 0};
     CScaledBSP *missileBox[4] = {0, 0, 0, 0};
     CScaledBSP *boosterBox[4] = {0, 0, 0, 0};
+    CScaledBSP *livesBox[4] = {0, 0, 0, 0};
     CScaledBSP *grenadeMeter[4] = {0, 0, 0, 0};
     CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
     CScaledBSP *boosterMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *livesMeter[4] = {0, 0, 0, 0};
 
     // HUD Layout Prefs
     int layout;
@@ -219,6 +222,7 @@ public:
     int gaugeBSP;
     float arrowDistance;
     float arrowScale;
+    float livesPosition[2];
     float boosterPosition[2];
     float grenadePosition[2];
     float missilePosition[2];
@@ -226,6 +230,7 @@ public:
     float energyPosition[2];
     float offsetMultiplier;
     float boosterSpacing;
+    float livesSpacing;
     float weaponSpacing;
 
     virtual void BeginScript();
