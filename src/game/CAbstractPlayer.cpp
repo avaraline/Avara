@@ -604,6 +604,7 @@ void CAbstractPlayer::LoadDashboardParts() {
             energyPosition[0] = -0.97f;
             energyPosition[1] = -0.20f;
             offsetMultiplier = .17f;
+            boosterSpacing = 40.0f;
             livesSpacing = 40.0f;
             weaponSpacing = 16.0f;
             break;
@@ -636,7 +637,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     // Weapons
     grenadeLabel = DashboardPart(kGrenadeBSP, FIX3(700*layoutScale));
     missileLabel = DashboardPart(kMissileBSP, FIX3(700*layoutScale));
-    boosterLabel = DashboardPart(kBoosterBSP, FIX3(40*layoutScale));
+    boosterLabel = DashboardPart(kBoosterBSP, FIX3(20*layoutScale));
     int livesLabelBSP = itsGame->itsApp->Number(kHullTypeTag);
     livesLabel = DashboardPart(215 + livesLabelBSP, FIX3(140*layoutScale));
     for (int i = 0; i < 4; i++) {
@@ -716,12 +717,12 @@ void CAbstractPlayer::RenderDashboard() {
     }
 
     if (itsGame->itsApp->Get(kHUDShowBoosterCount) && boosterLimit != 0) {
-        DashboardPosition(boosterLabel, false, boosterPosition[0], boosterPosition[1]-(.05f*(layoutScale/2.0)), FIX(90.0), FIX(60.0), 0);
+        DashboardPosition(boosterLabel, false, boosterPosition[0], boosterPosition[1]-(.03f*(layoutScale/2.0)), FIX(90.0), FIX(60.0), 0);
     }
 
     int status = itsManager->GetStatusChar(); // Check if lives are being used in the game
     if (itsGame->itsApp->Get(kHUDShowLivesCount) && status != 10 && lives > 0) {
-        DashboardPosition(livesLabel, false, livesPosition[0], livesPosition[1]-(.045f*(layoutScale/2.0)), 0, dashboardSpinHeading, FIX(40.0));
+        DashboardPosition(livesLabel, false, livesPosition[0], livesPosition[1]-(.045f*(layoutScale/2.0)), FIX(40.0), dashboardSpinHeading, 0);
     }
 
     // Ammo counts
@@ -756,7 +757,8 @@ void CAbstractPlayer::RenderDashboard() {
             }
         }
 
-        if (itsGame->itsApp->Get(kHUDShowLivesCount) && 0 < lives) {
+        // Status is 10 when the player has more than 10 lives
+        if (itsGame->itsApp->Get(kHUDShowLivesCount) && status != 10 && 0 < lives) {
             if (i < lives) {
                 // Fill box
                 DashboardPosition(livesMeter[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing)); // (x,y) screen position
@@ -860,8 +862,9 @@ void CAbstractPlayer::DashboardPosition(CScaledBSP *part, bool autoRot, float x,
     //InitialRotatePartZ(part, FDegToRad(z_rot));
     part->isTransparent = false;
     part->Reset();
-    part->RotateOneY(FDegToOne(ToFixed(yAng) + y_rot));
     part->RotateOneX(FDegToOne(x_rot));
+    part->RotateOneZ(FDegToOne(z_rot));
+    part->RotateOneY(FDegToOne(ToFixed(yAng) + y_rot));
     TranslatePart(part, -ToFixed((x * scale_x) + hudRestingX), ToFixed((y * scale_y) + hudRestingY), hud_dist);
     part->ApplyMatrix(&viewPortPart->itsTransform);
     part->MoveDone();

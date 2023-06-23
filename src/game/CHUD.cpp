@@ -33,12 +33,12 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, C
         AvaraScoreRecord theScores = itsGame->scoreKeeper->localScores;
         CNetManager *net = itsGame->itsApp->GetNet();
         float colorBoxWidth = 30.0;
-        //int bufferWidth = view->viewPixelDimensions.h;
+        int bufferWidth = view->viewPixelDimensions.h;
         int bufferHeight = view->viewPixelDimensions.v;
         float boardWidth = 620;
         float boardHeight = 60 + (colorBoxWidth + 10) * thePlayers.size();
-        float x = 20;
-        float y = bufferHeight-chudHeight-boardHeight - 20;
+        float x = bufferWidth - boardWidth - 20;
+        float y = 20; //bufferHeight-chudHeight-boardHeight - 20;
         float fontsz_m = 28.0, fontsz_s = 18.0;
         ARGBColor longTeamColor = 0;
         float teamColorRGB[3];
@@ -640,6 +640,15 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
     nvgEndFrame(ctx);
 }
 
+void CHUD::DrawShadowBox(NVGcontext *ctx, int x, int y, int width, int height) {
+    NVGpaint shadowPaint = nvgBoxGradient(ctx, x, y+2, width, height, 8, 10, BACKGROUND_COLOR, nvgRGBA(0,0,0,0));
+    nvgBeginPath(ctx);
+    nvgRect(ctx, x-10,y-10, width+20, height+30);
+    nvgRoundedRect(ctx, x,y, width, height, 4.0);
+    nvgPathWinding(ctx, NVG_HOLE);
+    nvgFillPaint(ctx, shadowPaint);
+    nvgFill(ctx);
+}
 
 void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
@@ -700,28 +709,26 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
 
     // System Message Backdrop
     if (itsGame->itsApp->Get(kHUDShowSystemMessages)) {
+        DrawShadowBox(ctx, systemMessagePosition[0], systemMessagePosition[1], systemMessageSize[0], systemMessageSize[1]);
         nvgBeginPath(ctx);
-        nvgRect(ctx, systemMessagePosition[0], systemMessagePosition[1], systemMessageSize[0], systemMessageSize[1]);
+        nvgRoundedRect(ctx, systemMessagePosition[0], systemMessagePosition[1], systemMessageSize[0], systemMessageSize[1], 4.0);
         nvgFillColor(ctx, BACKGROUND_COLOR);
         nvgFill(ctx);
     } else {
         systemMessageMaxLines = 0;
     }
 
-    // Level Message Backdrop
-    if (itsGame->itsApp->Get(kHUDShowLevelMessages)) {
-        nvgBeginPath(ctx);
-        nvgRect(ctx, levelMessagePosition[0], levelMessagePosition[1], levelMessageSize[0], levelMessageSize[1]);
-        nvgFillColor(ctx, BACKGROUND_COLOR);
-        nvgFill(ctx);
-    } else {
+    // Level Messages
+    // Backdrop is not drawn until a level message is going to be displayed
+    if (!itsGame->itsApp->Get(kHUDShowLevelMessages)) {
         levelMessageMaxLines = 0;
     }
 
     // Player List Backdrop
     if (itsGame->itsApp->Get(kHUDShowPlayerList)) {
+        DrawShadowBox(ctx, playerListPosition[0], playerListPosition[1], playerListSize[0], playerListSize[1]);
         nvgBeginPath(ctx);
-        nvgRect(ctx, playerListPosition[0], playerListPosition[1], playerListSize[0], playerListSize[1]);
+        nvgRoundedRect(ctx, playerListPosition[0], playerListPosition[1], playerListSize[0], playerListSize[1], 4.0);
         nvgFillColor(ctx, BACKGROUND_COLOR);
         nvgFill(ctx);
     }
@@ -754,22 +761,31 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
                 mX = systemMessagePosition[0];
                 sX = systemMessageSize[0];
                 mY = (systemMessagePosition[1] - 20.0 + systemMessageSize[1]) - (float)(systemMessageSpacing * sysMsgCount);
-                if (sysMsgCount >= systemMessageMaxLines) {
+                if (sysMsgCount < systemMessageMaxLines) {
+                    sysMsgCount++;
+                } else {
                     // This queue is full. Move on to the next message
                     continue;
-                } else {
-                    sysMsgCount++;
                 }
                 break;
             case MsgCategory::Level:
                 mX = levelMessagePosition[0];
                 sX = levelMessageSize[0];
                 mY = (levelMessagePosition[1] - 20.0 + levelMessageSize[1]) - (float)(levelMessageSpacing * levelMsgCount);
-                if (levelMsgCount >= levelMessageMaxLines) {
+                if (levelMsgCount < levelMessageMaxLines) {
+                    // Level Message Backdrop -- Only draw this once, the first time a level message is found
+                    if (levelMsgCount == 0) {
+                        DrawShadowBox(ctx, levelMessagePosition[0], levelMessagePosition[1], levelMessageSize[0], levelMessageSize[1]);
+                        nvgBeginPath(ctx);
+                        nvgRoundedRect(ctx, levelMessagePosition[0], levelMessagePosition[1], levelMessageSize[0], levelMessageSize[1], 4.0);
+                        nvgFillColor(ctx, BACKGROUND_COLOR);
+                        nvgFill(ctx);
+                    }
+
+                    levelMsgCount++;
+                } else {
                     // This queue is full. Move on to the next message
                     continue;
-                } else {
-                    levelMsgCount++;
                 }
                 break;
         }
@@ -974,8 +990,9 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
 
     // Score Backdrop
     if (itsGame->itsApp->Get(kHUDShowScore)) {
+        DrawShadowBox(ctx, scorePosition[0], scorePosition[1], scoreSize[0], scoreSize[1]);
         nvgBeginPath(ctx);
-        nvgRect(ctx, scorePosition[0], scorePosition[1], scoreSize[0], scoreSize[1]);
+        nvgRoundedRect(ctx, scorePosition[0], scorePosition[1], scoreSize[0], scoreSize[1], 4.0);
         nvgFillColor(ctx, BACKGROUND_COLOR);
         nvgFill(ctx);
     }
@@ -994,8 +1011,9 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
 
     // Time Backdrop
     if (itsGame->itsApp->Get(kHUDShowTime)) {
+        DrawShadowBox(ctx, timePosition[0], timePosition[1], timeSize[0], timeSize[1]);
         nvgBeginPath(ctx);
-        nvgRect(ctx, timePosition[0], timePosition[1], timeSize[0], timeSize[1]);
+        nvgRoundedRect(ctx, timePosition[0], timePosition[1], timeSize[0], timeSize[1], 4.0);
         nvgFillColor(ctx, BACKGROUND_COLOR);
         nvgFill(ctx);
     }

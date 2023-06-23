@@ -18,5 +18,6 @@ public:
     void DrawLevelName(CViewParameters *view, NVGcontext *ctx);
     void DrawPaused(CViewParameters *view, NVGcontext *ctx);
     void DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx);
+    void DrawShadowBox(NVGcontext *ctx, int x, int y, int height, int width);
 
 };
