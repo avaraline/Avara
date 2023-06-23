@@ -720,8 +720,7 @@ void CAbstractPlayer::RenderDashboard() {
         DashboardPosition(boosterLabel, false, boosterPosition[0], boosterPosition[1]-(.03f*(layoutScale/2.0)), FIX(90.0), FIX(60.0), 0);
     }
 
-    int status = itsManager->GetStatusChar(); // Check if lives are being used in the game
-    if (itsGame->itsApp->Get(kHUDShowLivesCount) && status != 10 && lives > 0) {
+    if (itsGame->itsApp->Get(kHUDShowLivesCount) && lives > 0 && lives <= 10) {
         DashboardPosition(livesLabel, false, livesPosition[0], livesPosition[1]-(.045f*(layoutScale/2.0)), FIX(40.0), dashboardSpinHeading, 0);
     }
 
@@ -757,8 +756,7 @@ void CAbstractPlayer::RenderDashboard() {
             }
         }
 
-        // Status is 10 when the player has more than 10 lives
-        if (itsGame->itsApp->Get(kHUDShowLivesCount) && status != 10 && 0 < lives) {
+        if (itsGame->itsApp->Get(kHUDShowLivesCount) && lives > 0 && lives <= 10) {
             if (i < lives) {
                 // Fill box
                 DashboardPosition(livesMeter[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing)); // (x,y) screen position
