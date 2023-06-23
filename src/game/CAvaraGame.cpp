@@ -1082,7 +1082,7 @@ CPlayerManager *CAvaraGame::GetPlayerManager(CAbstractPlayer *thePlayer) {
 // at the current frame rate.
 long CAvaraGame::RoundTripToFrameLatency(long roundTrip) {
     // half of the roundTripTime in units of frameTime, rounded up (ceil)
-    return (roundTrip/2 + frameTime) / frameTime;
+    return std::ceil(roundTrip/2.0/frameTime);
 }
 
 // "frameLatency" is the integer number of frames to delay;
