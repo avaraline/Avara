@@ -372,6 +372,12 @@ void CAbstractPlayer::DisposeDashboard() {
     hudWorld->RemovePart(missileLabel);
     missileLabel->Dispose();
 
+    hudWorld->RemovePart(boosterLabel);
+    boosterLabel->Dispose();
+
+    hudWorld->RemovePart(livesLabel);
+    livesLabel->Dispose();
+
     hudWorld->RemovePart(shieldGauge);
     shieldGauge->Dispose();
 
@@ -638,8 +644,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     grenadeLabel = DashboardPart(kGrenadeBSP, FIX3(700*layoutScale));
     missileLabel = DashboardPart(kMissileBSP, FIX3(700*layoutScale));
     boosterLabel = DashboardPart(kBoosterBSP, FIX3(20*layoutScale));
-    int livesLabelBSP = itsGame->itsApp->Number(kHullTypeTag);
-    livesLabel = DashboardPart(215 + livesLabelBSP, FIX3(140*layoutScale));
+    livesLabel = DashboardPart(hullConfig.hullBSP, FIX3(140*layoutScale));
     for (int i = 0; i < 4; i++) {
         grenadeMeter[i] = DashboardPart(kFilledBox, FIX3(100*layoutScale));
         grenadeBox[i] = DashboardPart(kEmptyBox, FIX3(200*layoutScale));
@@ -2057,6 +2062,13 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
 
         if (grenadeCount > defaultConfig.numGrenades)
             grenadeCount = defaultConfig.numGrenades;
+
+        // Reload the livesLabel to reflect the hull shape.
+        CBSPWorld *hudWorld;
+        hudWorld = itsGame->hudWorld;
+        hudWorld->RemovePart(livesLabel);
+        livesLabel->Dispose();
+        livesLabel = DashboardPart(hullConfig.hullBSP, FIX3(140*layoutScale));
     }
 }
 

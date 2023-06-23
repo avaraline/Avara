@@ -61,6 +61,7 @@ public:
     std::shared_ptr<CPlayerManager> itsManager;
     CAbstractPlayer *nextPlayer = 0;
     PlayerConfigRecord defaultConfig {};
+    HullConfigRecord hullConfig {};
 
     ARGBColor longTeamColor = 0;
     bool hasTeammates = false;
