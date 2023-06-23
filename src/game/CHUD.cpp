@@ -34,7 +34,7 @@ void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, C
         CNetManager *net = itsGame->itsApp->GetNet();
         float colorBoxWidth = 30.0;
         int bufferWidth = view->viewPixelDimensions.h;
-        int bufferHeight = view->viewPixelDimensions.v;
+        //int bufferHeight = view->viewPixelDimensions.v;
         float boardWidth = 620;
         float boardHeight = 60 + (colorBoxWidth + 10) * thePlayers.size();
         float x = bufferWidth - boardWidth - 20;
@@ -664,10 +664,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     int highestUsedSlot = 0;
     // Find the highest numbered occupied slot
     // Empty slots will only show up if they are between occupied slots
-    for (int i = 0; i < kMaxAvaraPlayers; i++) {
-        CPlayerManager *thisPlayer = net->playerTable[i].get();
-        std::string playerName = thisPlayer->GetPlayerName();
-        if (playerName.length() < 1) continue;
+    for (auto thisPlayer: net->ActivePlayers()) {
         highestUsedSlot = std::max(highestUsedSlot, (int)(thisPlayer->Slot() + 1));
     }
 
@@ -742,7 +739,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     //              |
     //              |
     // Most Recent  |  Read first
-    float mX = 0, mY = 0, sX = 0, sY = 0;
+    float mX = 0, mY = 0, sX = 0;
     int levelMsgCount = 0, sysMsgCount = 0;
     short textAlign = NVG_ALIGN_LEFT;
     for (auto iter = itsGame->itsApp->MessageLines().rbegin(); iter != itsGame->itsApp->MessageLines().rend(); iter++) {
