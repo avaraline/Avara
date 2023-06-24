@@ -4,7 +4,6 @@
 
 #include <SDL2/SDL.h>
 #include <json.hpp>
-#include <nanogui/nanogui.h>
 #include <string>
 #include <vector>
 

@@ -544,7 +544,7 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
 
         }
 
-        SDL_Log("CNetManager::LevelLoadStatus loop x%lu\n", i);
+        SDL_Log("CNetManager::LevelLoadStatus loop x%zu\n", i);
     } else {
         thePlayer->LoadStatusChange(
             playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());
