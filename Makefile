@@ -20,7 +20,7 @@ SRCS := $(shell find $(SRC_DIRS) -maxdepth 1 -name '*.cpp' -or -name '*.c')
 INCFLAGS := $(addprefix -I, $(SRC_DIRS))
 
 CPPFLAGS := ${CPPFLAGS}
-CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g -Wall -Wno-unknown-pragmas
+CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g -Wall
 
 ifeq ($(AVARA_WARNINGS), TRUE)
 CPPFLAGS += -pedantic -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
@@ -66,6 +66,7 @@ else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	PRE_PROCESS += $(WINDRES) $(PLATFORM)/version.rc -O coff $(BUILD_DIR)/version.o;
 	EXTRA_OBJS += $(BUILD_DIR)/appicon.o $(BUILD_DIR)/version.o
 	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	CPPFLAGS += -Wno-unknown-pragmas
 	CFLAGS += -D_WIN32_WINNT=0x501
 	POST_PROCESS ?= ls -lh
 else
