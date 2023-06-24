@@ -11,6 +11,9 @@
 
 #pragma once
 
+#ifndef NANOGUI_H
+#define NANOGUI_H
+
 #include <nanogui/common.h>
 #include <nanogui/widget.h>
 #include <nanogui/screen.h>
@@ -35,3 +38,6 @@
 #include <nanogui/tabheader.h>
 #include <nanogui/tabwidget.h>
 #include <nanogui/glcanvas.h>
+
+#endif
+
