@@ -141,7 +141,7 @@ std::map<int, std::vector<std::string>> PlayerRatingsSimpleElo::SplitIntoTeams(s
             for (auto player: players) {
                 oss << player << "(" << ratingsMap[player].rating-midRating << ") ";
             }
-            DBG_Log("elo", "team %lu: sum = %.3f, [ %s]\n", colorTeamMap.size()+1, iter->first, oss.str().c_str());
+            DBG_Log("elo", "team %zu: sum = %.3f, [ %s]\n", colorTeamMap.size()+1, iter->first, oss.str().c_str());
         }
         colorTeamMap[colors[colorIdx]] = players;
     }
