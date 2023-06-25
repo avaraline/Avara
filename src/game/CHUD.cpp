@@ -664,7 +664,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     int highestUsedSlot = 0;
     // Find the highest numbered occupied slot
     // Empty slots will only show up if they are between occupied slots
-    for (auto thisPlayer: net->ActivePlayers()) {
+    for (auto thisPlayer: net->AvailablePlayers()) {
         highestUsedSlot = std::max(highestUsedSlot, (int)(thisPlayer->Slot() + 1));
     }
 
