@@ -2062,6 +2062,7 @@ void CAbstractPlayer::ReceiveConfig(PlayerConfigRecord *config) {
             grenadeCount = defaultConfig.numGrenades;
 
         // Reload the livesLabel to reflect the hull shape.
+        if (!itsGame->showNewHUD) return;
         CBSPWorld *hudWorld;
         hudWorld = itsGame->hudWorld;
         hudWorld->RemovePart(livesLabel);
