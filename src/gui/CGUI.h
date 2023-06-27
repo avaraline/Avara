@@ -101,18 +101,18 @@ public:
     mu_Context *mui_ctx;
     //std::map<mu_Id, CSmartBox*> boxes;
     //std::map<mu_Id, CSmartBox*> outlines;
-    std::map<mu_Id, CWallActor*> boxes;
+    std::map<mu_Id, CAbstractActor*> actors;
     int BSPButton(std::string label);
     int BSPWidget(mu_Rect r, int res, mu_Id mu_id);
-    int BSPTextInput(std::string s);
+    int BSPTextInput(const char *id, std::string &s);
+    int BSPCheckbox(const char *label, int *state);
 
     void ClearParts() {
-        for (const auto &x: boxes) {
+        for (const auto &x: actors) {
             x.second->Dispose();
             delete x.second;
         }
-
-        boxes.clear();
+        actors.clear();
     }
     
     virtual ~CGUI() {
@@ -130,13 +130,14 @@ protected:
 
     StateFunction _startup();
     StateFunction _transitionScreen();
+    StateFunction _test();
 
     StateFunction _inactive();
     StateFunction _active();
     StateFunction _textInput(); 
     StateFunction _modal();
 
-    StateFunction state = std::bind(&CGUI::_startup, this);
+    StateFunction state = std::bind(&CGUI::_test, this);
 };
 
 enum GUIScreen {
