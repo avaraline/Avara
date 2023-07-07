@@ -1,7 +1,7 @@
 
 # Avara
 
-![avara](https://lychee.vastan.net/uploads/original/66/8e/07b5c97bd403a62523679d46c334.gif)
+![avara](https://img.avara.gg/uploads/original/30/fe/42a79ba9b5843fc858a824ae8231.gif)
 
 [Avara Discord](https://discord.gg/yw5qnBtJd5) | IRC: avaraline.net:6667 #avaraline
 
