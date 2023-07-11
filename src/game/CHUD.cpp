@@ -704,33 +704,27 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
-    int hudRestingX = 0, hudRestingY = 0;
-    if (player) {
-        hudRestingX = player->hudRestingX*70;
-        hudRestingY = player->hudRestingY*70;
-    }
-
     float fontsz_l = 25.0, fontsz_m = 17.0, fontsz_s = 12.0;
     nvgFontFace(ctx, "mono");
 
     // Parameters for drawing UI elements on the screen
     // Units for position and size are set as a percentage of the screen size to make elements look the same after the screen resolution changes
-    float levelMessagePosition[2] = {50.0f + hudRestingX, (float)bufferHeight - 240.0f - hudRestingY};
+    float levelMessagePosition[2] = {50.0f, (float)bufferHeight - 240.0f};
     float levelMessageSize[2] = {350.0f, 90.0f};
     int levelMessageSpacing = 16;
     int levelMessageMaxLines = 5;
 
-    float systemMessagePosition[2] = {50.0f + hudRestingX, (float)bufferHeight - 140.0f - hudRestingY};
+    float systemMessagePosition[2] = {50.0f, (float)bufferHeight - 140.0f};
     float systemMessageSize[2] = {520.0f, 90.0f};
     int systemMessageSpacing = 16;
     int systemMessageMaxLines = 5;
 
     int playerLineHeight = 17;
-    float playerListPosition[2] = {(float)bufferWidth - 570.0f + hudRestingX, (float)bufferHeight - 60.0f - (highestUsedSlot * playerLineHeight) - hudRestingY};
+    float playerListPosition[2] = {(float)bufferWidth - 570.0f, (float)bufferHeight - 60.0f - (highestUsedSlot * playerLineHeight)};
     float playerListSize[2] = {520.0f, (highestUsedSlot * playerLineHeight) + 10.0f};
-    float timePosition[2] = {(float)bufferWidth - 350.0f + hudRestingX, playerListPosition[1] - 37.0f};
+    float timePosition[2] = {(float)bufferWidth - 350.0f, playerListPosition[1] - 37.0f};
     float timeSize[2] = {75.0f, 27.0f};
-    float scorePosition[2] = {(float)bufferWidth - 500.0f + hudRestingX, playerListPosition[1] - 37.0f};
+    float scorePosition[2] = {(float)bufferWidth - 500.0f, playerListPosition[1] - 37.0f};
     float scoreSize[2] = {75.0f, 27.0f};
     float spectatePlayerPosition[2] = {(float)bufferWidth / 2.0f, 50.0f};
 
