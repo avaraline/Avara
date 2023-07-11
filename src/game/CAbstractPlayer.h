@@ -123,9 +123,9 @@ public:
 
     //	Control module (and view) orientation:
     Fixed viewYaw = 0;
-    Fixed dYaw = 0;
+    Fixed dYaw = 0;  // Delta Yaw - How far the yaw changed since the last frame
     Fixed viewPitch = 0;
-    Fixed dPitch = 0;
+    Fixed dPitch = 0; // Delta Pitch - How far the pitch changed since the last frame
     Fixed oldElevation = 0;
     Fixed dElevation = 0;
     Vector viewOffset = {0};

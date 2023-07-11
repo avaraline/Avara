@@ -42,10 +42,15 @@ void CRealMovers::Accelerate(Fixed *direction) {
 
     theMass = GetTotalMass();
     if (theMass) {
+        Vector oldSpeed = {speed[0], speed[1], speed[2], 0};
         speed[0] += FMulDivNZ(direction[0], baseMass, theMass);
         speed[1] += FMulDivNZ(direction[1], baseMass, theMass);
         speed[2] += FMulDivNZ(direction[2], baseMass, theMass);
         FPS_DEBUG("CRealMovers::Accelerate: speed = " << FormatVectorFloat(speed, 3) << "\n");
+
+        dSpeed[0] = speed[0] - oldSpeed[0];
+        dSpeed[1] = speed[1] - oldSpeed[1];
+        dSpeed[2] = speed[2] - oldSpeed[2];
     }
 }
 

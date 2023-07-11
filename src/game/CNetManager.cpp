@@ -1548,6 +1548,17 @@ std::vector<CPlayerManager*> CNetManager::ActivePlayers() {
     return players;
 }
 
+std::vector<CPlayerManager*> CNetManager::AllPlayers() {
+    std::vector<CPlayerManager*> players;
+    for (auto player: playerTable) {
+        // All players connected to the server regardless of status
+        if (player->LoadingStatus() != kLNotConnected && player->Presence() != kzUnknown) {
+            players.push_back(player.get());
+        }
+    }
+    return players;
+}
+
 int CNetManager::PlayerSlot(std::string playerName) {
     for (int i = 0; i < kMaxAvaraPlayers; i++) {
         if (playerTable[i].get()->GetPlayerName() == playerName) {
