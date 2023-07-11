@@ -1,0 +1,128 @@
+<map>
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="32.56944444444444" cz="17.77777777777778" angle="135" />
+  <Teleporter activeRange="10" shape="0" group="0" spin="false" destGroup="@top" color="#fffed5" color.1="#000000" cx="7.5" cz="7.708333333333334" angle="135" />
+  <Teleporter activeRange="10" shape="0" group="0" spin="false" destGroup="@top" color="#fffed5" color.1="#000000" cx="17.5" cz="7.708333333333334" angle="135" />
+  <Teleporter activeRange="10" shape="0" group="0" spin="false" destGroup="@top" color="#fffed5" color.1="#000000" cx="27.5" cz="7.708333333333334" angle="135" />
+  <Teleporter activeRange="10" shape="0" group="0" spin="false" destGroup="@top" color="#fffed5" color.1="#000000" cx="37.5" cz="7.708333333333334" angle="135" />
+  <Teleporter activeRange="10" shape="0" group="0" spin="false" destGroup="@top" color="#fffed5" color.1="#000000" cx="47.5" cz="7.708333333333334" angle="135" />
+  <set wallYon="0.01" />
+  <Wall color="#fffed5" color.1="#000000" x="1.25" z="22.708333333333336" w="2.5" d="30" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="63.75" z="22.708333333333336" w="2.5" d="30" h="25" />
+  <Teleporter activeRange="10" shape="0" group="0" spin="false" destGroup="@top" color="#fffed5" color.1="#000000" cx="57.5" cz="7.708333333333334" angle="135" />
+  <Ramp deltaY="15" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="17.5" z="22.708333333333336" w="30" d="30" h="0" angle="0" />
+  <GroundColor color="#ffffff" />
+  <Ramp deltaY="15" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="47.5" z="22.708333333333336" w="30" d="30" h="0" angle="0" />
+  <SkyColor color="#010e68" color.1="#000000" />
+  <set baseHeight="15" />
+  <Wall color="#fffed5" color.1="#000000" x="60" z="50.208333333333336" w="5" d="25" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="5" z="50.208333333333336" w="5" d="25" h="25" />
+  <Ramp deltaY="25" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="20" z="50.208333333333336" w="25" d="25" h="0" angle="0" />
+  <Ramp deltaY="25" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="45" z="50.208333333333336" w="25" d="25" h="0" angle="0" />
+  <set baseHeight="40" />
+  <Wall color="#fffed5" color.1="#000000" x="55" z="72.70833333333334" w="5" d="20" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="10" z="72.70833333333334" w="5" d="20" h="25" />
+  <Ramp deltaY="20" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="22.5" z="72.70833333333334" w="20" d="20" h="0" angle="0" />
+  <Wall color="#fffed5" color.1="#000000" x="60" z="50.208333333333336" w="5" d="25" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="5" z="50.208333333333336" w="5" d="25" h="25" />
+  <Ramp deltaY="20" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="42.5" z="72.70833333333334" w="20" d="20" h="0" angle="0" />
+  <set baseHeight="60" />
+  <Ramp deltaY="25" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="32.5" z="95.20833333333334" w="30" d="25" h="0" angle="0" />
+  <Wall color="#fffed5" color.1="#000000" x="15" z="95.20833333333334" w="5" d="25" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="50" z="95.20833333333334" w="5" d="25" h="25" />
+  <set baseHeight="10" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="7.569444444444445" cz="27.77777777777778" angle="135" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="22.569444444444446" cz="27.77777777777778" angle="135" />
+  <set baseHeight="15" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="12.569444444444445" cz="37.77777777777778" angle="135" />
+  <set baseHeight="25" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="20.069444444444446" cz="47.77777777777778" angle="135" />
+  <set baseHeight="20" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="27.569444444444446" cz="42.77777777777778" angle="135" />
+  <set baseHeight="30" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="12.569444444444445" cz="52.77777777777778" angle="135" />
+  <set baseHeight="35" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="32.56944444444444" cz="57.77777777777778" angle="135" />
+  <set baseHeight="40" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="22.569444444444446" cz="62.777777777777786" angle="135" />
+  <set baseHeight="45" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="37.56944444444444" cz="67.77777777777779" angle="135" />
+  <set baseHeight="50" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="27.569444444444446" cz="72.77777777777779" angle="135" />
+  <set baseHeight="55" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="47.56944444444445" cz="77.77777777777779" angle="135" />
+  <Mine shape="bspTree" altShape="bspTree" shield="-1" isTarget="false" hitScore="0" killScore="0" activateEnergy="30000" activeRange="5" activeAltShapeTimer="0" activateSound="0" blastSound="0" power="15" destructScore="0" color="#009600" color.1="#000000" cx="17.569444444444446" cz="77.77777777777779" angle="135" />
+  <set baseHeight="60" />
+  <Ramp deltaY="0.5" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="28.75" z="81.45833333333334" w="12.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="0.5" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="45" z="81.45833333333334" w="5" d="2.5" h="0" angle="180" />
+  <set baseHeight="40" />
+  <Wall color="#fffed5" color.1="#000000" x="60" z="50.208333333333336" w="5" d="25" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="5" z="50.208333333333336" w="5" d="25" h="25" />
+  <set baseHeight="60" />
+  <Wall color="#fffed5" color.1="#000000" x="55" z="72.70833333333334" w="5" d="20" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="10" z="72.70833333333334" w="5" d="20" h="25" />
+  <set baseHeight="15" />
+  <Wall color="#fffed5" color.1="#000000" x="63.75" z="22.708333333333336" w="2.5" d="30" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="1.25" z="22.708333333333336" w="2.5" d="30" h="25" />
+  <set baseHeight="20" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="38.68055555555556" z="41.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="43.68055555555556" z="41.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="48.68055555555556" z="41.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="53.68055555555556" z="41.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="33.68055555555556" z="41.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="22.5" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="36.18055555555556" z="43.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="41.18055555555556" z="43.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="46.18055555555556" z="43.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="51.18055555555556" z="43.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="25" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="53.68055555555556" z="46.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="38.68055555555556" z="46.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="43.68055555555556" z="46.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="48.68055555555556" z="46.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="27.5" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="41.18055555555556" z="48.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="46.18055555555556" z="48.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="51.18055555555556" z="48.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="30" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="38.68055555555556" z="51.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="43.68055555555556" z="51.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="48.68055555555556" z="51.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="53.68055555555556" z="51.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="32.5" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="41.18055555555556" z="53.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="46.18055555555556" z="53.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="51.18055555555556" z="53.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="35" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="43.68055555555556" z="56.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="48.68055555555556" z="56.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="37.5" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="41.18055555555556" z="58.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="46.18055555555556" z="58.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="51.18055555555556" z="58.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="40" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="43.68055555555556" z="61.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="48.68055555555556" z="61.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="42.5" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="46.18055555555556" z="63.888888888888886" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="51.18055555555556" z="63.888888888888886" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="41.18055555555556" z="63.888888888888886" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="45" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="48.68055555555556" z="66.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="43.68055555555556" z="66.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="47.5" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="46.18055555555556" z="68.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="51.18055555555556" z="68.88888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set baseHeight="50" />
+  <Ramp deltaY="-1" friction="-4" traction=".2" color="#ffffff" color.1="#000000" x="48.68055555555556" z="71.38888888888889" w="2.5" d="2.5" h="0" angle="180" />
+  <set designer="Lord Anon III" information="downhill skiing" baseHeight="85" />
+  <Wall color="#fffed5" color.1="#000000" x="50" z="95.13888888888889" w="5" d="25" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="15" z="95.13888888888889" w="5" d="25" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="44.93055555555556" z="115.27777777777779" w="5" d="15" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="19.930555555555557" z="115.27777777777779" w="5" d="15" h="25" />
+  <Wall color="#fffed5" color.1="#000000" x="32.43055555555556" z="125.27777777777779" w="20" d="5" h="25" />
+  <Ramp deltaY="0" color="#c7c7c7" color.1="#000000" x="32.361111111111114" z="115.20833333333334" w="20" d="15" h="0" angle="0" />
+  <Teleporter group="@top" y="10" shape="0" spin="false" color="#c7c7c7" color.1="#000000" cx="32.361111111111114" cz="120.20833333333334" angle="0" />
+  <Incarnator y="1" cx="32.361111111111114" cz="120.20833333333334" angle="0" />
+  <Field deltaY="-0.2" deltaZ="-0.1" color="#fffed5" color.1="#000000" x="32.43055555555556" z="108.40277777777779" w="20" d="3.75" h="25" cx="32.361111111111114" cz="120.20833333333334" angle="0" />
+  <Hologram shape="bspGroundArrow" color="#ffffff" color.1="#000000" cx="32.361111111111114" cz="115.20833333333334" angle="0" />
+</map>

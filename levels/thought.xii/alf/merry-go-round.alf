@@ -1,0 +1,25 @@
+<map>
+  <set baseHeight="0.5" wallHeight="0.01" />
+  <WallDoor deltaY="0" yaw="0" open="@go" close="@rest" didOpen="@rest" didClose="@go" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#aa7942" color.1="#000000" x="26.25" z="24.930555555555557" w="25" d="25" h="0" />
+  <Door2 shape="bspUfo" midY="1" deltaY="1" deltaZ="20" yaw="-90" open="@go" close="@rest" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#009600" color.1="#00acff" cx="15.972222222222221" cz="15.277777777777779" angle="90" />
+  <Door2 shape="bspUfo" midY="1" deltaY="1" deltaZ="20" yaw="-90" open="@go" close="@rest" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#009600" color.1="#00acff" cx="35.97222222222222" cz="15.208333333333336" angle="180" />
+  <Door2 shape="bspUfo" midY="1" deltaY="1" deltaZ="20" yaw="-90" open="@go" close="@rest" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#009600" color.1="#00acff" cx="35.97222222222222" cz="35.27777777777778" angle="270" />
+  <Door2 shape="bspUfo" midY="1" deltaY="1" deltaZ="20" yaw="-90" open="@go" close="@rest" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#009600" color.1="#00acff" cx="15.972222222222221" cz="33.958333333333336" angle="0" />
+  <GroundColor color="#009600" />
+  <SkyColor color="#009600" color.1="#00acff" />
+  <WallDoor deltaY="0" yaw="-90" open="@go" close="@rest" hitMsg="@go" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#000000" color.1="#000000" x="26.25" z="24.930555555555557" w="2.5" d="2.5" h="10" />
+  <Incarnator cx="3.75" cz="7.430555555555555" angle="135" />
+  <Door2 shape="bspAvaraA" scale="12" midY="12" deltaY="12" yaw="-180" open="@go1" close="@rest1" didOpen="@rest1" didClose="@go1" openSpeed="1" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#7a4300" color.1="#000000" cx="26.25" cz="24.930555555555557" angle="135" />
+  <Distributor in="@go" out="@go1" />
+  <set baseHeight="1.5" />
+  <Door2 shape="bspStarFighter" scale=".5" middle=".5" midZ="10" midYaw="-45" deltaY="0" deltaZ="10" deltaX="-10" yaw="-90" open="@go" close="@rest" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#ff2600" color.1="#00acff" cx="26.180555555555557" cz="15.069444444444446" angle="90" />
+  <Door2 shape="bspStarFighter" scale=".5" middle=".5" midZ="10" midYaw="-45" deltaY="0" deltaZ="10" deltaX="-10" yaw="-90" open="@go" close="@rest" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#ff2600" color.1="#00acff" cx="37.01388888888889" cz="24.930555555555557" angle="180" />
+  <Door2 shape="bspStarFighter" scale=".5" middle=".5" midZ="10" midYaw="-45" deltaY="0" deltaZ="10" deltaX="-10" yaw="-90" open="@go" close="@rest" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#ff2600" color.1="#00acff" cx="26.319444444444446" cz="35.06944444444444" angle="270" />
+  <Door2 shape="bspStarFighter" scale=".5" middle=".5" midZ="10" midYaw="-45" deltaY="0" deltaZ="10" deltaX="-10" yaw="-90" open="@go" close="@rest" closeSpeed="100" closeSound="0" openSound="0" stopSound="0" color="#ff2600" color.1="#00acff" cx="14.51388888888889" cz="24.930555555555557" angle="0" />
+  <Incarnator cx="21.25" cz="4.930555555555556" angle="135" />
+  <Incarnator cx="38.75" cz="2.430555555555556" angle="135" />
+  <Incarnator cx="1.25" cz="22.430555555555557" angle="135" />
+  <Incarnator cx="1.25" cz="37.43055555555556" angle="135" />
+  <Incarnator cx="26.25" cz="7.430555555555555" angle="135" />
+  <set designer="Carlos Castillo-Garsow" information="shoot the black pole" />
+</map>
