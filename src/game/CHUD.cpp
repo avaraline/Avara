@@ -432,11 +432,14 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
         //spectating onscreen name
         if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
-            int x = 20;
-            int y = 20;
+            int x = (int)(bufferWidth / 2.0);
+            int y = 50;
             float fontsz_m = 24.0;
-            float bounds[4];
+            float fontsz_s = 18.0;
+            float bounds[4], nextBounds[4], prevBounds[4];
             std::string specMessage("Spectating " + playerName);
+            std::string nextMessage("Spectate Next: [");
+            std::string prevMessage("Spectate Previous: ]");
 
             nvgBeginPath(ctx);
             nvgFontFace(ctx, "mono");
@@ -446,13 +449,39 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
 
             //draw box for text
             nvgBeginPath(ctx);
-            nvgRoundedRect(ctx, x, y, (bounds[2]-bounds[0])+10, 28.0, 3.0);
+            nvgRoundedRect(ctx, x - 100, y, (bounds[2]-bounds[0])+10, 28.0, 3.0);
             nvgFillColor(ctx, BACKGROUND_COLOR);
             nvgFill(ctx);
 
             //draw text
             nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-            nvgText(ctx, x + 5, y + 14, specMessage.c_str(), NULL);
+            nvgText(ctx, x - 100 + 5, y + 14, specMessage.c_str(), NULL);
+
+            nvgBeginPath(ctx);
+            nvgFontFace(ctx, "mono");
+            nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
+            nvgFontSize(ctx, fontsz_s);
+            nvgTextBounds(ctx, x, y, nextMessage.c_str(), NULL, nextBounds);
+            nvgTextBounds(ctx, x, y, prevMessage.c_str(), NULL, prevBounds);
+
+            //Spectate Next
+            nvgBeginPath(ctx);
+            nvgFontSize(ctx, fontsz_s);
+            nvgRoundedRect(ctx, x + 25, y + 30, (nextBounds[2]-nextBounds[0])+10, 28.0, 3.0);
+            nvgFillColor(ctx, BACKGROUND_COLOR);
+            nvgFill(ctx);
+
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            nvgText(ctx, x + 25 + 5, y + 44, nextMessage.c_str(), NULL);
+            
+            //Spectate Previous
+            nvgBeginPath(ctx);
+            nvgRoundedRect(ctx, x - 220, y + 30, (prevBounds[2]-prevBounds[0])+10, 28.0, 3.0);
+            nvgFillColor(ctx, BACKGROUND_COLOR);
+            nvgFill(ctx);
+
+            nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+            nvgText(ctx, x - 220 + 5, y + 44, prevMessage.c_str(), NULL);
         }
     }
 
@@ -664,7 +693,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     int highestUsedSlot = 0;
     // Find the highest numbered occupied slot
     // Empty slots will only show up if they are between occupied slots
-    for (auto thisPlayer: net->AvailablePlayers()) {
+    for (auto thisPlayer: net->AllPlayers()) {
         highestUsedSlot = std::max(highestUsedSlot, (int)(thisPlayer->Slot() + 1));
     }
 
@@ -675,34 +704,29 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
 
     nvgBeginFrame(ctx, bufferWidth, bufferHeight, view->viewPixelRatio);
 
-    int hudRestingX = 0, hudRestingY = 0;
-    if (player) {
-        hudRestingX = player->hudRestingX*70;
-        hudRestingY = player->hudRestingY*70;
-    }
-
     float fontsz_l = 25.0, fontsz_m = 17.0, fontsz_s = 12.0;
     nvgFontFace(ctx, "mono");
 
     // Parameters for drawing UI elements on the screen
     // Units for position and size are set as a percentage of the screen size to make elements look the same after the screen resolution changes
-    float levelMessagePosition[2] = {50.0f + hudRestingX, (float)bufferHeight - 240.0f - hudRestingY};
+    float levelMessagePosition[2] = {50.0f, (float)bufferHeight - 240.0f};
     float levelMessageSize[2] = {350.0f, 90.0f};
     int levelMessageSpacing = 16;
     int levelMessageMaxLines = 5;
 
-    float systemMessagePosition[2] = {50.0f + hudRestingX, (float)bufferHeight - 140.0f - hudRestingY};
+    float systemMessagePosition[2] = {50.0f, (float)bufferHeight - 140.0f};
     float systemMessageSize[2] = {520.0f, 90.0f};
     int systemMessageSpacing = 16;
     int systemMessageMaxLines = 5;
 
     int playerLineHeight = 17;
-    float playerListPosition[2] = {(float)bufferWidth - 530.0f + hudRestingX, (float)bufferHeight - 50.0f - (highestUsedSlot * playerLineHeight) - hudRestingY};
+    float playerListPosition[2] = {(float)bufferWidth - 570.0f, (float)bufferHeight - 60.0f - (highestUsedSlot * playerLineHeight)};
     float playerListSize[2] = {520.0f, (highestUsedSlot * playerLineHeight) + 10.0f};
-    float timePosition[2] = {(float)bufferWidth - 350.0f + hudRestingX, playerListPosition[1] - 37.0f};
+    float timePosition[2] = {(float)bufferWidth - 350.0f, playerListPosition[1] - 37.0f};
     float timeSize[2] = {75.0f, 27.0f};
-    float scorePosition[2] = {(float)bufferWidth - 500.0f + hudRestingX, playerListPosition[1] - 37.0f};
+    float scorePosition[2] = {(float)bufferWidth - 500.0f, playerListPosition[1] - 37.0f};
     float scoreSize[2] = {75.0f, 27.0f};
+    float spectatePlayerPosition[2] = {(float)bufferWidth / 2.0f, 50.0f};
 
     // System Message Backdrop
     if (itsGame->itsApp->Get(kHUDShowSystemMessages)) {
@@ -909,8 +933,8 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
             // Draw a slash
             case kLNetDelayed:
                 nvgBeginPath(ctx);
-                nvgMoveTo(ctx, playerListPosition[0] + 370, pY + colorBoxHeight - 3);
-                nvgLineTo(ctx, playerListPosition[0] + 384, pY - 3);
+                nvgMoveTo(ctx, playerListPosition[0] + 371, pY + colorBoxHeight - 2);
+                nvgLineTo(ctx, playerListPosition[0] + 385, pY - 2);
                 nvgStrokeColor(ctx, nvgRGBAf(0, 0, 0, 255));
                 nvgStrokeWidth(ctx, 1);
                 nvgStroke(ctx);
@@ -951,27 +975,54 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
 
             //spectating onscreen name
             if(spectatePlayer != NULL && thisPlayer->GetPlayer() == spectatePlayer) {
-                int x = 20;
-                int y = 20;
                 float fontsz_m = 24.0;
-                float bounds[4];
+                float fontsz_s = 18.0;
+                float bounds[4], nextBounds[4], prevBounds[4];
                 std::string specMessage("Spectating " + playerName);
+                std::string nextMessage("Spectate Next: [");
+                std::string prevMessage("Spectate Previous: ]");
 
                 nvgBeginPath(ctx);
                 nvgFontFace(ctx, "mono");
                 nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
                 nvgFontSize(ctx, fontsz_m);
-                nvgTextBounds(ctx, x,y, specMessage.c_str(), NULL, bounds);
+                nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], specMessage.c_str(), NULL, bounds);
 
                 //draw box for text
                 nvgBeginPath(ctx);
-                nvgRoundedRect(ctx, x, y, (bounds[2]-bounds[0])+10, 28.0, 3.0);
+                nvgRoundedRect(ctx, spectatePlayerPosition[0] - 100, spectatePlayerPosition[1], (bounds[2]-bounds[0])+10, 28.0, 3.0);
                 nvgFillColor(ctx, BACKGROUND_COLOR);
                 nvgFill(ctx);
 
                 //draw text
                 nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                nvgText(ctx, x + 5, y + 14, specMessage.c_str(), NULL);
+                nvgText(ctx, spectatePlayerPosition[0] - 100 + 5, spectatePlayerPosition[1] + 14, specMessage.c_str(), NULL);
+
+                nvgBeginPath(ctx);
+                nvgFontFace(ctx, "mono");
+                nvgTextAlign(ctx, NVG_ALIGN_MIDDLE | NVG_ALIGN_BOTTOM);
+                nvgFontSize(ctx, fontsz_s);
+                nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], nextMessage.c_str(), NULL, nextBounds);
+                nvgTextBounds(ctx, spectatePlayerPosition[0], spectatePlayerPosition[1], prevMessage.c_str(), NULL, prevBounds);
+
+                //Spectate Next
+                nvgBeginPath(ctx);
+                nvgFontSize(ctx, fontsz_s);
+                nvgRoundedRect(ctx, spectatePlayerPosition[0] + 25, spectatePlayerPosition[1] + 30, (nextBounds[2]-nextBounds[0])+10, 28.0, 3.0);
+                nvgFillColor(ctx, BACKGROUND_COLOR);
+                nvgFill(ctx);
+
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, spectatePlayerPosition[0] + 25 + 5, spectatePlayerPosition[1] + 44, nextMessage.c_str(), NULL);
+                
+                //Spectate Previous
+                nvgBeginPath(ctx);
+                nvgRoundedRect(ctx, spectatePlayerPosition[0] - 220, spectatePlayerPosition[1] + 30, (prevBounds[2]-prevBounds[0])+10, 28.0, 3.0);
+                nvgFillColor(ctx, BACKGROUND_COLOR);
+                nvgFill(ctx);
+
+                nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                nvgText(ctx, spectatePlayerPosition[0] - 220 + 5, spectatePlayerPosition[1] + 44, prevMessage.c_str(), NULL);
             }
         }
     }

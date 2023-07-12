@@ -560,13 +560,13 @@ void CAbstractPlayer::LoadDashboardParts() {
     // These scalars affect how quickly the two values converge
     pidReset(&pMotionY);
     pidReset(&pMotionX);
-    pMotionX.P = -1.2;
-    pMotionX.I = -0.7;
-    pMotionX.D = -.04;
+    pMotionX.P = -.1;
+    pMotionX.I = -0.005;
+    pMotionX.D = -.0004;
     pMotionX.angular = false;
-    pMotionY.P = -1.2;
-    pMotionY.I = -0.7;
-    pMotionY.D = -0.04;
+    pMotionY.P = -.1;
+    pMotionY.I = -0.09;
+    pMotionY.D = -0.0014;
     pMotionY.angular = false;
     hudRestingX = 0;
     hudRestingY = 0;
@@ -669,22 +669,69 @@ void CAbstractPlayer::RenderDashboard() {
     }
 
     float customInertia = itsGame->itsApp->Get(kHUDInertia);
+    Vector relativeImpulse;
+
+    relativeImpulse[0] = 0;
+    relativeImpulse[1] = 0;
+    relativeImpulse[2] = 0;
+    if (dSpeed[0] != 0) {
+        // Compare the vector of the incoming hit against which way the hector head is facing
+        // Determine which quadrant the impact came from (TOP, BOTTOM) and (LEFT, RIGHT)
+        // Lastly set relativeImpulse based on the impact location of the hit to bump the HUD
+        Fixed hitAngle = FOneArcTan2(dSpeed[2], dSpeed[0]);
+        Fixed angleDiff = hitAngle - viewYaw;
+        
+        if (angleDiff > 0) {
+            // Hit from the right side
+            relativeImpulse[0] = FIX(1.0);
+        } else if (angleDiff < 0) {
+            // Hit from the left side
+            relativeImpulse[0] = FIX(-1.0);
+        }
+
+        if (dSpeed[1] > FIX(.5)) {
+            // Hit from the top
+            relativeImpulse[1] = FIX(1.0);
+        } else if (dSpeed[1] < FIX(-.5)) {
+            // Hit from the bottom
+            relativeImpulse[1] = FIX(-1.0);
+        }
+
+        pidReset(&pMotionX);
+        pidReset(&pMotionY);
+    }
 
     // Push HUD elements away from resting position based on movement factors
-    hudRestingX += ToFloat(FMul(FIX(.05), dYaw)) * customInertia; // Head (mouse) movement
-    hudRestingY += ToFloat(FMul(FIX(.15), dPitch - FMul(dElevation, FIX(10)))) * customInertia; // Head (mouse) movement and jumping/falling
+    hudRestingX -= ToFloat(FMul(FIX(.005), dYaw) + relativeImpulse[0]) * customInertia; // Head (mouse) movement
+    hudRestingY -= ToFloat(FMul(FIX(.02), dPitch - FMul(dElevation, FIX(10))) + relativeImpulse[1]) * customInertia; // Head (mouse) movement and jumping/falling
 
-    if (hudRestingX > 2) hudRestingX = 2;
-    if (hudRestingY > 2) hudRestingY = 2;
+    // Reset delta impulse values so they only apply once
+    // pidMotion handles the rest of the HUD movement after the impact is over
+    dSpeed[0] = 0;
+    dSpeed[1] = 0;
+    dSpeed[2] = 0;
+    relativeImpulse[0] = 0;
+    relativeImpulse[1] = 0;
+    relativeImpulse[2] = 0;
+
+    // Clamp HUD movement values
+    if (hudRestingX > 3) hudRestingX = 3;
+    if (hudRestingX < -3) hudRestingX = -3;
+    if (hudRestingY > 3) hudRestingY = 3;
+    if (hudRestingY < -3) hudRestingY = -3;
 
     // Use PID Motion to move HUD elements back to resting position
-    hudRestingX += pidUpdate(&pMotionX, .55, hudRestingX, 0.0);
-    hudRestingY += pidUpdate(&pMotionY, .55, hudRestingY, 0.0);
+    hudRestingX += pidUpdate(&pMotionX, .75, hudRestingX, 0.0);
+    hudRestingY += pidUpdate(&pMotionY, .75, hudRestingY, 0.0);
 
     // Prevent jitter for values that are very close to zero
     // Specifically prevents alternating between 0 and -0
     if (abs(hudRestingX) < .01f) hudRestingX = abs(hudRestingX);
     if (abs(hudRestingY) < .01f) hudRestingY = abs(hudRestingY);
+
+    // Reset pidMotion if movement has fully equalized
+    if (hudRestingX == 0.0f && !pMotionX.fresh) pidReset(&pMotionX);
+    if (hudRestingY == 0.0f && !pMotionY.fresh) pidReset(&pMotionY);
 
     CWeapon *weapon = NULL;
     dashboardSpinHeading += FpsCoefficient2(FDegToOne(dashboardSpinSpeed));
@@ -1506,6 +1553,9 @@ void CAbstractPlayer::PlayerAction() {
                         Reincarnate();
                     } else {
                         itsManager->DeadOrDone();
+                        if (itsGame->GetSpectatePlayer() == NULL && itsManager->IsLocalPlayer()) {
+                            itsGame->SpectateNext();
+                        }
                     }
                 }
             } else {

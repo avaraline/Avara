@@ -14,6 +14,7 @@ class CRealMovers : public CGlowActors {
 public:
     Fixed baseMass;
     Vector speed;
+    Vector dSpeed; // Track delta velocity when Hector gets hit
 
     virtual void IAbstractActor();
     virtual void GetSpeedEstimate(Fixed *theSpeed);
