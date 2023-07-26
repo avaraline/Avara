@@ -11,7 +11,7 @@
 #include "CSwitchActor.h"
 
 std::string teststring = "hella";
-char testbuffa[256];
+#define TEXT_INPUT_TEMP_BUFFER_SIZE 1024
 
 CGUI::CGUI(CAvaraAppImpl *app) {
     itsApp = app;
@@ -149,9 +149,21 @@ int CGUI::BSPTextInput(const char *id, std::string &s) {
     BSPWidget(r, res, mu_id);
     CAbstractActor* _wall = actors.at(mu_id);
     CSmartPart* _part = _wall->partList[0];
-    //const size_t len = s.length();
-    std::strcpy(testbuffa, s.c_str());
-    res |= mu_textbox_raw(mui_ctx, testbuffa, sizeof(testbuffa), mu_id, r, 0);
+
+    // TODO: something different than this
+    // can the mu_textbox use a std::string buffa somehow?
+    const size_t len = TEXT_INPUT_TEMP_BUFFER_SIZE;
+    char temp[len];
+    std::strncpy(temp, s.c_str(), len);
+    if (temp[len - 1] != '\0') {
+        // overflow, truncating
+        temp[len - 1] = '\0';
+    }
+
+    res |= mu_textbox_raw(mui_ctx, temp, len, mu_id, r, 0);
+    
+    // temp now contains updated string
+    
     //res |= mu_textbox(mui_ctx, buffa, len);
     if (mui_ctx->focus == mu_id) {
 
@@ -161,7 +173,8 @@ int CGUI::BSPTextInput(const char *id, std::string &s) {
         long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
         _part->ReplaceColor(0x00fefefe, color);
     }
-    s.assign(testbuffa);
+
+    s.assign(temp);
     return res;
 }
 

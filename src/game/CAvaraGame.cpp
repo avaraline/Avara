@@ -118,7 +118,7 @@ void CAvaraGame::IAvaraGame(CAvaraApp *theApp) {
     soundHub = CreateSoundHub();
     gHub = soundHub;
 
-    InitMixer(true);
+    InitMixer(false);
 
     scoreKeeper = new CScoreKeeper;
     scoreKeeper->IScoreKeeper(this);
