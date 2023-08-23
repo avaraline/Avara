@@ -157,3 +157,5 @@ typedef struct {
 
 void pidReset(PidMotion *p);
 float pidUpdate(PidMotion *p, float dt, float current, float target);
+
+void UpdateFRandSeed(uint32_t value);

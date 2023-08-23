@@ -25,6 +25,16 @@ static uint16_t arcTanOneTable[ARCUSTABLESIZE] = {0};
 
 Fixed FRandSeed = 1;
 
+void UpdateFRandSeed(uint32_t value) {
+    if (value != 0) {
+        // Use an unsigned intermediate value to calculate the update to FRandSeed
+        // to make sure we don't do the signed overflow (which is undefined behavior)
+        uint32_t newseed = (uint32_t)FRandSeed + value;
+        // cast back to unsigned, but that's OK, as long as everyone is the same
+        FRandSeed = (Fixed) newseed;
+    }
+}
+
 /* FixMath */
 
 Fixed FixATan2(Fixed x, Fixed y) {
