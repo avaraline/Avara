@@ -1,0 +1,75 @@
+{
+  "Graphics": [
+    ["fov", "int", "Field of View"],
+    ["fullscreen", "bool", "Fullscreen"],
+    ["colorBlindMode", "choice", "Color vision impairment mode", [
+      [0, "something"],
+      [1, "something else"],
+      [2, "third thing"]
+    ]],
+    ["multiSamples", "choice", "Multisampling", [
+      [0, "off"],
+      [4, "medium"],
+      [8, "high"]
+    ]]
+  ],
+  "Game": [
+    ["yon", "int", "Yon (render distance)"],
+    ["mouseSensitivity", "choice", "Mouse Sensitivity", [
+      [0, "low"],
+      [1, "medium"],
+      [2, "high"]
+    ]],
+    ["invertYAxis", "bool", "Invert Mouse Y-Axis"],
+    ["showOldHUD", "bool" "Classic HUD"],
+    ["showNewHUD", "bool" "Updated HUD"],
+    ["soundVolume", "int", "Volume"],
+    ["ignoreCustomColors", "bool", "Ignore Custom Hull Colors"],
+    ["ignoreCustomGoodySound", "bool", "Ignore Custom Goody Sounds"],
+  ],
+  "Network": [
+    ["playerName", "string", "Player Name"],
+    ["udpDefaultPort", "int", "UDP host port"],
+    ["udpHolePunch", "bool" "NAT hole punching"],
+    ["udpPunchServerAddress", "string", "NAT hole punching server"],
+    ["udpPunchServerPort", "int", "NAT hole punching port"]
+  ],
+  "Keyboard": [["keyboard", "keyboard", "Controls"]]
+  "Colors": [
+    ["hullColor", "color", "Hull Color"],
+    ["hullTrimColor", "color", "Trim Color"],
+    ["cockpitColor", "color", "Cockpit Color"],
+    ["gunColor", "color", "Gun Color"],
+    ["hudColor", "color", "HUD Color"],
+    ["hudWarningColor", "color" "HUD Warning"],
+    ["hudCriticalColor", "color", "HUD Critical"],
+    ["hudPositiveColor", "color", "HUD Positive"],
+  ],
+  "HUD": [
+    ["hudPreset", "choice", "Layout Preset", [
+      [0, "The first one"],
+      [1, "The second one"],
+      [2, "The new one"]
+    ]],
+    ["hudAlpha", "float", "Alpha"],
+    ["hudArrowDistance", "float", "Arrow Distance"],
+    ["hudArrowScale", "float", "Arrow Scale"],
+    ["hudArrowStyle", "choice", "Arrow Style", [
+      [0, "Overhead arrow"],
+      [1, "Mystery"],
+      [2, "Ground arrow"]
+    ]],
+    ["hudInertia", "float", "Inertia effect multiplier"],
+    ["hudShowGrenadeCount", "bool", "Show Grenade Count"],
+    ["hudShowMissileCount", "bool", "Show Missile Count"],
+    ["hudShowBoosterCount", "bool", "Show Booster Count"],
+    ["hudShowLivesCount", "bool", "Show Life Count"],
+    ["hudShowEnergyGauge", "bool", "Show Energy Gauge"],
+    ["hudShowShieldGauge", "bool", "Show Shield Gauge"],
+    ["hudShowPlayerList", "bool", "Show Player List"],
+    ["hudShowScore", "bool", "Show Score"],
+    ["hudShowTime", "bool", "Show Time"],
+    ["hudShowSystemMessages", "bool", "Show System Messages"],
+    ["hudShowLevelMessages", "bool", "Show Level Messages"],
+  ]
+}

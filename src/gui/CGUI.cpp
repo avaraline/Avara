@@ -9,6 +9,7 @@
 #include "Preferences.h"
 #include "CSoundHub.h"
 #include "CSwitchActor.h"
+#include <cstring>
 
 std::string teststring = "hella";
 #define TEXT_INPUT_TEMP_BUFFER_SIZE 1024
@@ -20,7 +21,7 @@ CGUI::CGUI(CAvaraAppImpl *app) {
     itsWorld->IBSPWorld(50);
     itsView = itsGame->itsView;
     LookAtGUI();
-    
+
     mui_ctx = (mu_Context*)malloc(sizeof(mu_Context));
     mu_init(mui_ctx);
     mui_ctx->text_width = text_width;
@@ -33,7 +34,7 @@ CGUI::CGUI(CAvaraAppImpl *app) {
     cursorWorld = new CBSPWorldImpl;
     cursorWorld->IBSPWorld(1);
     cursorWorld->AddPart(itsCursor);
-    
+
     started = SDL_GetTicks();
     anim_timer = 0;
 
@@ -95,7 +96,7 @@ int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
         dims[0] = ToFixed((ws_bottomright.x - ws_topleft.x) / 2.0);
         dims[1] = ToFixed((ws_bottomright.y - ws_topleft.y) / 2.0);
         dims[2] = FIX3(1);
-        
+
         //CSmartBox* _part = new CSmartBox;
 
         CWallActor *theWall = new CWallActor;
@@ -104,7 +105,7 @@ int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
         long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
 
         theWall->partList[0]->ReplaceColor(0x00fefefe, color);
-        Vector _partLoc;
+        //Vector _partLoc;
         //AvaraGLUpdateData(_part);
         //itsWorld->AddPart(_part);
         //_part->Reset();
@@ -161,10 +162,8 @@ int CGUI::BSPTextInput(const char *id, std::string &s) {
     }
 
     res |= mu_textbox_raw(mui_ctx, temp, len, mu_id, r, 0);
-    
     // temp now contains updated string
-    
-    //res |= mu_textbox(mui_ctx, buffa, len);
+    s.assign(temp);
     if (mui_ctx->focus == mu_id) {
 
         _part->ReplaceColor(0xfefefe, ColorManager::getEnergyGaugeColor());
@@ -173,8 +172,6 @@ int CGUI::BSPTextInput(const char *id, std::string &s) {
         long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
         _part->ReplaceColor(0x00fefefe, color);
     }
-
-    s.assign(temp);
     return res;
 }
 
@@ -192,7 +189,7 @@ int CGUI::BSPCheckbox(const char *label, int *state) {
     glm::vec3 ws_bottomright = screenToWorld(&s_bottomright);
     int res = 0;
     if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
-        res != MU_RES_CHANGE;
+        res |= MU_RES_CHANGE;
         *state = !*state;
     }
 
@@ -201,14 +198,13 @@ int CGUI::BSPCheckbox(const char *label, int *state) {
         CSmartPart* _part = _wall->partList[0];
         _part->Reset();
 
-        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), ToFixed(0));   
+        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), ToFixed(0));
     }
     else {
         Vector dims;
         dims[0] = ToFixed((ws_bottomright.x - ws_topleft.x) / 2.0);
         dims[1] = ToFixed((ws_bottomright.y - ws_topleft.y) / 2.0);
         dims[2] = FIX3(1);
-        
         CSwitchActor *sw = new CSwitchActor;
         //sw->enabled = true;
         actors.emplace(mu_id, sw);
@@ -216,7 +212,7 @@ int CGUI::BSPCheckbox(const char *label, int *state) {
 
     r = mu_rect(r.x + box.w, r.y, r.w - box.w, r.h);
     mu_draw_control_text(mui_ctx, label, r, MU_COLOR_TEXT, 0);
-    return 0;
+    return res;
 }
 
 
@@ -282,10 +278,10 @@ bool CGUI::handleSDLEvent(SDL_Event &event) {
         case SDL_KEYDOWN:
         case SDL_KEYUP: {
             int c = key_map[event.key.keysym.sym & 0xff];
-            if (c && event.type == SDL_KEYDOWN) { 
-                mu_input_keydown(mui_ctx, c); 
+            if (c && event.type == SDL_KEYDOWN) {
+                mu_input_keydown(mui_ctx, c);
             }
-            if (c && event.type ==   SDL_KEYUP) { 
+            if (c && event.type == SDL_KEYUP) {
                 mu_input_keyup(mui_ctx, c);
             }
             return true;
@@ -324,28 +320,28 @@ StateFunction CGUI::_transitionScreen() {
 }
 
 StateFunction CGUI::_test() {
-        std::stringstream fps;
-        fps << "frame in: " << dt << "ms";
-        mu_label(mui_ctx, fps.str().c_str());
-        if (BSPButton("PLAY")) {
-            itsGame->SendStartCommand();
-            active = false;
-        }
-        if (BSPButton("ABOUT")) {
-            PlaySound(411);
-        }
-        if (BSPButton("QUIT")) {
-            SDL_Event sdlevent;
-            sdlevent.type = SDL_QUIT;
-            SDL_PushEvent(&sdlevent);
-        }
-        const char* label = "A text input:";
-        int w = text_width(0, label, sizeof(label));
-        mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 400 }, 0);
-        mu_label(mui_ctx, label);
-        BSPTextInput("myinputid", teststring);
+    std::stringstream fps;
+    fps << "frame in: " << dt << "ms";
+    mu_label(mui_ctx, fps.str().c_str());
+    if (BSPButton("PLAY")) {
+        itsGame->SendStartCommand();
+        active = false;
+    }
+    if (BSPButton("ABOUT")) {
+        PlaySound(411);
+    }
+    if (BSPButton("QUIT")) {
+        SDL_Event sdlevent;
+        sdlevent.type = SDL_QUIT;
+        SDL_PushEvent(&sdlevent);
+    }
+    const char* label = "A text input:";
+    int w = text_width(0, label, strlen(label));
+    mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 400 }, 0);
+    mu_label(mui_ctx, label);
+    BSPTextInput("myinputid", teststring);
 
-        //BSPCheckbox("A Checkbox", 0);
+    //BSPCheckbox("A Checkbox", 0);
     return STAY;
 }
 
@@ -356,7 +352,6 @@ void CGUI::Render(NVGcontext *ctx) {
     nvgBeginPath(ctx);
     //LookAtGUI();
     itsWorld->Render(itsView);
-    
     //screen->Render(ctx);
 
     mu_Command *cmd = NULL;
@@ -372,14 +367,13 @@ void CGUI::Render(NVGcontext *ctx) {
             nvgStroke(ctx);
             nvgFill(ctx);
             nvgClosePath(ctx);
-            
         }
         */
         if (cmd->type == MU_COMMAND_TEXT) {
             nvgFontFace(ctx, "archivo");
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
             nvgFillColor(ctx, toNVGcolor(cmd->text.color));
-            nvgFontSize(ctx, 65);
+            nvgFontSize(ctx, 55);
             nvgText(ctx, cmd->text.pos.x, cmd->text.pos.y, cmd->text.str, NULL);
         }
     }
