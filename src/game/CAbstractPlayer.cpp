@@ -366,6 +366,12 @@ void CAbstractPlayer::DisposeDashboard() {
         groundDirArrowFast->Dispose();
     }
 
+    hudWorld->RemovePart(energyLabel);
+    energyLabel->Dispose();
+
+    hudWorld->RemovePart(shieldLabel);
+    shieldLabel->Dispose();
+
     hudWorld->RemovePart(grenadeLabel);
     grenadeLabel->Dispose();
 
@@ -627,6 +633,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     }
 
     // Shields
+    shieldLabel = DashboardPart(kShieldBSP, FIX3(70*layoutScale));
     shieldGauge = DashboardPart(gaugeBSP);
     shieldGauge->isMorphable = true;
 
@@ -634,6 +641,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     shieldGaugeBackLight->privateAmbient = FIX3(80);
 
     // Energy
+    energyLabel = DashboardPart(kShurikenBSP, FIX3(170*layoutScale));
     energyGauge = DashboardPart(gaugeBSP);
     energyGauge->isMorphable = true;
 
@@ -781,46 +789,47 @@ void CAbstractPlayer::RenderDashboard() {
         if (itsGame->itsApp->Get(kHUDShowGrenadeCount) && 0 < grenadeLimit) {
             if (float(i)/4.0 < float(grenadeCount)/float(grenadeLimit)) {
                 // Fill box
-                DashboardPosition(grenadeMeter[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
+                DashboardPosition(grenadeMeter[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing));
             } else {
                 // Empty box
-                DashboardPosition(grenadeBox[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
+                DashboardPosition(grenadeBox[i], true, grenadePosition[0], grenadePosition[1]+(float(i)/weaponSpacing));
             }
         }
 
         if (itsGame->itsApp->Get(kHUDShowMissileCount) && 0 < missileLimit) {
             if (i < missileCount) {
                 // Fill box
-                DashboardPosition(missileMeter[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
+                DashboardPosition(missileMeter[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing));
             } else {
                 // Empty box
-                DashboardPosition(missileBox[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing)); // (x,y) screen position
+                DashboardPosition(missileBox[i], true, missilePosition[0], missilePosition[1]+(float(i)/weaponSpacing));
             }
         }
 
         if (itsGame->itsApp->Get(kHUDShowBoosterCount) && 0 < boosterLimit) {
             if (i < boostsRemaining) {
                 // Fill box
-                DashboardPosition(boosterMeter[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing)); // (x,y) screen position
+                DashboardPosition(boosterMeter[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing));
             } else {
                 // Empty box
-                DashboardPosition(boosterBox[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing)); // (x,y) screen position
+                DashboardPosition(boosterBox[i], true, boosterPosition[0], boosterPosition[1]+(float(i)/boosterSpacing));
             }
         }
 
         if (itsGame->itsApp->Get(kHUDShowLivesCount) && lives > 0 && lives <= 10) {
             if (i < lives) {
                 // Fill box
-                DashboardPosition(livesMeter[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing)); // (x,y) screen position
+                DashboardPosition(livesMeter[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing));
             } else {
                 // Empty box
-                DashboardPosition(livesBox[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing)); // (x,y) screen position
+                DashboardPosition(livesBox[i], true, livesPosition[0], livesPosition[1]+(float(i)/livesSpacing));
             }
         }
     }
 
     // Shields
     if (itsGame->itsApp->Get(kHUDShowShieldGauge)) {
+        DashboardPosition(shieldLabel, false, shieldPosition[0], shieldPosition[1]-(.22f*(layoutScale/2.0)));
         DashboardPosition(shieldGaugeBackLight, shieldPosition[0], shieldPosition[1]);
 
         Fixed shieldPercent = 0;
@@ -847,6 +856,7 @@ void CAbstractPlayer::RenderDashboard() {
 
     // Energy
     if (itsGame->itsApp->Get(kHUDShowEnergyGauge)) {
+        DashboardPosition(energyLabel, true, energyPosition[0], energyPosition[1]-(.21f*(layoutScale/2.0)), FIX(20.0), dashboardSpinHeading, 0);
         DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
 
         Fixed energyPercent = 0;
@@ -948,6 +958,8 @@ void CAbstractPlayer::ResetDashboard() {
         groundDirArrowSlow->isTransparent = true;
         groundDirArrowFast->isTransparent = true;
     }
+    shieldLabel->isTransparent = true;
+    energyLabel->isTransparent = true;
     grenadeLabel->isTransparent = true;
     missileLabel->isTransparent = true;
     boosterLabel->isTransparent = true;
@@ -1553,7 +1565,8 @@ void CAbstractPlayer::PlayerAction() {
                         Reincarnate();
                     } else {
                         itsManager->DeadOrDone();
-                        if (itsGame->GetSpectatePlayer() == NULL && itsManager->IsLocalPlayer()) {
+                        if ((itsGame->GetSpectatePlayer() == NULL && itsManager->IsLocalPlayer()) ||                // Player is out of lives
+                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0)) {    // Spectate player is out of lives
                             itsGame->SpectateNext();
                         }
                     }

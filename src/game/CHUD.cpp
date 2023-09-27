@@ -438,8 +438,8 @@ void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
             float fontsz_s = 18.0;
             float bounds[4], nextBounds[4], prevBounds[4];
             std::string specMessage("Spectating " + playerName);
-            std::string nextMessage("Spectate Next: [");
-            std::string prevMessage("Spectate Previous: ]");
+            std::string nextMessage("Spectate Next: ]");
+            std::string prevMessage("Spectate Previous: [");
 
             nvgBeginPath(ctx);
             nvgFontFace(ctx, "mono");
