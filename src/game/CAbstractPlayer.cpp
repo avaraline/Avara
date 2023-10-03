@@ -641,7 +641,7 @@ void CAbstractPlayer::LoadDashboardParts() {
     shieldGaugeBackLight->privateAmbient = FIX3(80);
 
     // Energy
-    energyLabel = DashboardPart(kShurikenBSP, FIX3(170*layoutScale));
+    energyLabel = DashboardPart(kEnergyBSP, FIX3(170*layoutScale));
     energyGauge = DashboardPart(gaugeBSP);
     energyGauge->isMorphable = true;
 
@@ -856,7 +856,7 @@ void CAbstractPlayer::RenderDashboard() {
 
     // Energy
     if (itsGame->itsApp->Get(kHUDShowEnergyGauge)) {
-        DashboardPosition(energyLabel, true, energyPosition[0], energyPosition[1]-(.21f*(layoutScale/2.0)), FIX(20.0), dashboardSpinHeading, 0);
+        DashboardPosition(energyLabel, false, energyPosition[0], energyPosition[1]-(.21f*(layoutScale/2.0)));
         DashboardPosition(energyGaugeBackLight, energyPosition[0], energyPosition[1]);
 
         Fixed energyPercent = 0;

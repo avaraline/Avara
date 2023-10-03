@@ -35,7 +35,7 @@ class CAbstractPlayer;
 #define kGaugeBSP 402
 #define kMissileBSP 802
 #define kGrenadeBSP 820
-#define kShurikenBSP 203
+#define kEnergyBSP 604
 #define kShieldBSP 603
 #define kBoosterBSP 600
 
