@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 #endif
 
 #if defined(__APPLE__)
-    disable_saved_application_state_osx();
+    //disable_saved_application_state_osx();
 #endif
 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
