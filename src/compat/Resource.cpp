@@ -525,7 +525,7 @@ void LoadOggFiles(nlohmann::json &manifest, SoundCash &target_cash) {
         }
     }
     if (loaded > 0) {
-        SDL_Log("Loaded %lu sounds", loaded);
+        SDL_Log("Loaded %zu sounds", loaded);
     }
 }
 

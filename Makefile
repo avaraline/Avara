@@ -66,6 +66,7 @@ else ifneq (,$(findstring NT-10.0,$(UNAME)))
 	PRE_PROCESS += $(WINDRES) $(PLATFORM)/version.rc -O coff $(BUILD_DIR)/version.o;
 	EXTRA_OBJS += $(BUILD_DIR)/appicon.o $(BUILD_DIR)/version.o
 	LDFLAGS += -lstdc++ -lm -lpthread -lmingw32 -lSDL2main -lSDL2 -lglu32 -lopengl32 -lws2_32 -lcomdlg32
+	CPPFLAGS += -Wno-unknown-pragmas
 	CFLAGS += -D_WIN32_WINNT=0x501
 	POST_PROCESS ?= ls -lh
 else
@@ -115,7 +116,6 @@ macdist: macapp
 winapp: avara
 	$(RMDIR) $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
-	if [ -f $(BUILD_DIR)/Avara ]; then mv $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe; fi
 	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc} $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2}.dll $(BUILD_DIR)/WinAvara
 

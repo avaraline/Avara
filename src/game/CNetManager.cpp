@@ -38,8 +38,9 @@
 #define AUTOLATENCYPERIOD 3840  // msec (divisible by 64)
 #define AUTOLATENCYDELAY  448   // msec (divisible by 64)
 #define LOWERLATENCYCOUNT   2
-#define HIGHERLATENCYCOUNT  12    // 4*(10/240) frames at fps=16ms, 1*10/60 frames at fps=64ms, works for all fps values
-#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*8))  // 30.72 seconds
+#define HIGHERLATENCYCOUNT  (0.25 * AUTOLATENCYPERIOD / itsGame->frameTime)       // 25% of frames
+#define DECREASELATENCYPERIOD (itsGame->TimeToFrameCount(AUTOLATENCYPERIOD*16))  // 16 consecutive votes ≈ 61 sec
+
 
 #if ROUTE_THRU_SERVER
     #define kAvaraNetVersion 666
@@ -543,7 +544,7 @@ void CNetManager::LevelLoadStatus(short senderSlot, short crc, OSErr err, std::s
 
         }
 
-        SDL_Log("CNetManager::LevelLoadStatus loop x%lu\n", i);
+        SDL_Log("CNetManager::LevelLoadStatus loop x%zu\n", i);
     } else {
         thePlayer->LoadStatusChange(
             playerTable[loaderSlot]->LevelCRC(), playerTable[loaderSlot]->LevelErr(), playerTable[loaderSlot]->LevelTag());
@@ -810,7 +811,7 @@ void CNetManager::AutoLatencyControl(FrameNumber frameNumber, Boolean didWait) {
                     DBG_Log("lt+", "   >addOneLatency keeping = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
                 } else if (addOneLatency > 0 && frameNumber >= subtractOneCheck) {
-                    // if no significant waiting seen for 8 CONSECUTIVE autoLatency votes, about 30 seconds, let it creep back down 1 fps frame
+                    // if no significant waiting seen for DECREASELATENCYPERIOD, let it creep back down 1 fps frame
                     addOneLatency--;
                     DBG_Log("lt+", "  --addOneLatency decreased = %hd\n", addOneLatency);
                     subtractOneCheck = frameNumber + DECREASELATENCYPERIOD;
@@ -1541,6 +1542,17 @@ std::vector<CPlayerManager*> CNetManager::ActivePlayers() {
     for (auto player: playerTable) {
         // players who are actually playing in a game
         if (player->LoadingStatus() != kLNotConnected && player->Presence() == kzAvailable && player->GetPlayer() != NULL) {
+            players.push_back(player.get());
+        }
+    }
+    return players;
+}
+
+std::vector<CPlayerManager*> CNetManager::AllPlayers() {
+    std::vector<CPlayerManager*> players;
+    for (auto player: playerTable) {
+        // All players connected to the server regardless of status
+        if (player->LoadingStatus() != kLNotConnected && player->Presence() != kzUnknown) {
             players.push_back(player.get());
         }
     }

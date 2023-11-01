@@ -130,7 +130,7 @@ public:
     //char msgBuffer[kMaxChatMessageBufferLen];
     std::vector<char> msgBuffer;
 
-    ~CNetManager() { Dispose(); };
+    virtual ~CNetManager() { Dispose(); };
     virtual void INetManager(CAvaraGame *theGame);
     virtual std::shared_ptr<CPlayerManager> CreatePlayerManager(short);
     virtual void LevelReset();
@@ -187,6 +187,7 @@ public:
     std::vector<CPlayerManager*> PlayersWithPresence(PresenceType presence);
     std::vector<CPlayerManager*> AvailablePlayers();
     std::vector<CPlayerManager*> ActivePlayers();
+    std::vector<CPlayerManager*> AllPlayers();
 
     virtual int PlayerSlot(std::string playerName);
     virtual void ChangeTeamColors(std::map<int, std::vector<std::string>> colorTeamMap);

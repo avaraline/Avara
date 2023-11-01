@@ -84,6 +84,8 @@ public:
     bool isClassicFrame;
     int32_t frameAdjust;
 
+    int currentGameId = 0; // Increments when a new game starts
+
     FrameNumber topSentFrame;
 
     FrameTime frameTime; //	In milliseconds.
@@ -183,7 +185,7 @@ public:
     Boolean keysFromStdin;
     Boolean keysToStdout;
 
-    Boolean showOldHUD;
+    Boolean showClassicHUD;
     Boolean showNewHUD;
 
     // Moved here from GameLoop so it can run on the normal event loop
@@ -201,6 +203,7 @@ public:
     virtual std::unique_ptr<CNetManager> CreateNetManager();
 
     virtual void InitLocatorTable();
+    virtual void IncrementGameCounter();
 
     virtual CAbstractActor *FindIdent(long ident);
     virtual void GetIdent(CAbstractActor *theActor);

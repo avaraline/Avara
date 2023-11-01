@@ -763,7 +763,6 @@ void CWalkerActor::UndoLegs() {
 void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
     if (itsGame->frameNumber == 0) {
         short hullRes;
-        HullConfigRecord hull;
 
         hullRes = config->hullType;
         if (hullRes < 0 || hullRes > 9)
@@ -771,9 +770,9 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         hullRes = ReadLongVar(iHull01 + hullRes);
 
-        LoadHullFromSetJSON(&hull, hullRes);
+        LoadHullFromSetJSON(&hullConfig, hullRes);
 
-        hullRes = hull.hullBSP;
+        hullRes = hullConfig.hullBSP;
         itsGame->itsWorld->RemovePart(viewPortPart);
         viewPortPart->Dispose();
         LoadPart(0, hullRes);
@@ -799,35 +798,35 @@ void CWalkerActor::ReceiveConfig(PlayerConfigRecord *config) {
 
         itsGame->itsWorld->AddPart(viewPortPart);
 
-        viewPortHeight = hull.rideHeight;
+        viewPortHeight = hullConfig.rideHeight;
 
         PlaceParts();
 
-        mass = hull.mass;
+        mass = hullConfig.mass;
 
-        if (hull.maxBoosters < boosterLimit)
-            boosterLimit = hull.maxBoosters;
+        if (hullConfig.maxBoosters < boosterLimit)
+            boosterLimit = hullConfig.maxBoosters;
 
-        if (hull.maxMissiles < missileLimit)
-            missileLimit = hull.maxMissiles;
+        if (hullConfig.maxMissiles < missileLimit)
+            missileLimit = hullConfig.maxMissiles;
 
-        if (hull.maxGrenades < grenadeLimit)
-            grenadeLimit = hull.maxGrenades;
+        if (hullConfig.maxGrenades < grenadeLimit)
+            grenadeLimit = hullConfig.maxGrenades;
 
-        maxShields = FMul(maxShields, hull.shieldsRatio);
-        classicShieldRegen = FMul(classicShieldRegen, hull.shieldsChargeRatio);
+        maxShields = FMul(maxShields, hullConfig.shieldsRatio);
+        classicShieldRegen = FMul(classicShieldRegen, hullConfig.shieldsChargeRatio);
         shields = maxShields;
 
-        maxEnergy = FMul(maxEnergy, hull.energyRatio);
+        maxEnergy = FMul(maxEnergy, hullConfig.energyRatio);
         energy = maxEnergy;
-        classicGeneratorPower = FMul(classicGeneratorPower, hull.energyChargeRatio);
+        classicGeneratorPower = FMul(classicGeneratorPower, hullConfig.energyChargeRatio);
 
-        classicChargeGunPerFrame = FMul(classicChargeGunPerFrame, hull.shotChargeRatio);
-        activeGunEnergy = FMul(activeGunEnergy, hull.minShotRatio);
-        fullGunEnergy = FMul(fullGunEnergy, hull.maxShotRatio);
+        classicChargeGunPerFrame = FMul(classicChargeGunPerFrame, hullConfig.shotChargeRatio);
+        activeGunEnergy = FMul(activeGunEnergy, hullConfig.minShotRatio);
+        fullGunEnergy = FMul(fullGunEnergy, hullConfig.maxShotRatio);
 
-        maxAcceleration = FMul(maxAcceleration, hull.accelerationRatio);
-        jumpBasePower = FMul(jumpBasePower, hull.jumpPowerRatio);
+        maxAcceleration = FMul(maxAcceleration, hullConfig.accelerationRatio);
+        jumpBasePower = FMul(jumpBasePower, hullConfig.jumpPowerRatio);
 
         gunEnergy[0] = fullGunEnergy;
         gunEnergy[1] = fullGunEnergy;

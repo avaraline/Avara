@@ -35,6 +35,8 @@ class CAbstractPlayer;
 #define kGaugeBSP 402
 #define kMissileBSP 802
 #define kGrenadeBSP 820
+#define kEnergyBSP 604
+#define kShieldBSP 603
 #define kBoosterBSP 600
 
 #define kDefaultTeleportSound 410
@@ -70,6 +72,7 @@ public:
         .cockpitColor = (*ColorManager::getMarkerColor(2)).WithA(0xff),
         .gunColor = (*ColorManager::getMarkerColor(3)).WithA(0xff)
     };
+    HullConfigRecord hullConfig {};
 
     ARGBColor longTeamColor = 0;
     bool hasTeammates = false;
@@ -131,9 +134,9 @@ public:
 
     //	Control module (and view) orientation:
     Fixed viewYaw = 0;
-    Fixed dYaw = 0;
+    Fixed dYaw = 0;  // Delta Yaw - How far the yaw changed since the last frame
     Fixed viewPitch = 0;
-    Fixed dPitch = 0;
+    Fixed dPitch = 0; // Delta Pitch - How far the pitch changed since the last frame
     Fixed oldElevation = 0;
     Fixed dElevation = 0;
     Vector viewOffset = {0};
@@ -211,15 +214,20 @@ public:
     CScaledBSP *shieldGaugeBackLight = 0;
     CScaledBSP *energyGauge = 0;
     CScaledBSP *energyGaugeBackLight = 0;
+    CScaledBSP *energyLabel = 0;
+    CScaledBSP *shieldLabel = 0;
     CScaledBSP *grenadeLabel = 0;
     CScaledBSP *missileLabel = 0;
     CScaledBSP *boosterLabel = 0;
+    CScaledBSP *livesLabel = 0;
     CScaledBSP *grenadeBox[4] = {0, 0, 0, 0};
     CScaledBSP *missileBox[4] = {0, 0, 0, 0};
     CScaledBSP *boosterBox[4] = {0, 0, 0, 0};
+    CScaledBSP *livesBox[4] = {0, 0, 0, 0};
     CScaledBSP *grenadeMeter[4] = {0, 0, 0, 0};
     CScaledBSP *missileMeter[4] = {0, 0, 0, 0};
     CScaledBSP *boosterMeter[4] = {0, 0, 0, 0};
+    CScaledBSP *livesMeter[4] = {0, 0, 0, 0};
 
     // HUD Layout Prefs
     int layout;
@@ -228,6 +236,7 @@ public:
     int gaugeBSP;
     float arrowDistance;
     float arrowScale;
+    float livesPosition[2];
     float boosterPosition[2];
     float grenadePosition[2];
     float missilePosition[2];
@@ -235,6 +244,7 @@ public:
     float energyPosition[2];
     float offsetMultiplier;
     float boosterSpacing;
+    float livesSpacing;
     float weaponSpacing;
 
     virtual void BeginScript();

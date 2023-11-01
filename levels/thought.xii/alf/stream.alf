@@ -1,0 +1,304 @@
+<map>
+  <set wallHeight="0.01" />
+  <Wall color="#c7c7c7" color.1="#000000" x="7.5" z="115.76388888888889" w="5" d="30" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="7.5" z="85.76388888888889" w="5" d="30" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="7.5" z="145.76388888888889" w="5" d="30" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="7.5" z="175.76388888888889" w="5" d="30" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="77.5" z="115.76388888888889" w="5" d="30" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="77.5" z="85.76388888888889" w="5" d="30" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="77.5" z="145.76388888888889" w="5" d="30" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="77.5" z="175.76388888888889" w="5" d="30" h="0" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="70" z="170.76388888888889" w="10" d="30" h="0" angle="90" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="15" z="170.76388888888889" w="10" d="30" h="0" angle="270" />
+  <Ramp deltaY="3" color="#c7c7c7" color.1="#000000" x="70" z="188.26388888888889" w="10" d="5" h="0" angle="90" />
+  <Wall color="#aa7942" color.1="#000000" x="42.5" z="188.26388888888889" w="25" d="5" h="0" y="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="25" z="188.26388888888889" w="10" d="5" h="0" y="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="60" z="188.26388888888889" w="10" d="5" h="0" y="3" />
+  <Ramp deltaY="3" color="#c7c7c7" color.1="#000000" x="15" z="188.26388888888889" w="10" d="5" h="0" angle="270" />
+  <Ramp deltaY="3" color="#c7c7c7" color.1="#000000" x="70" z="73.26388888888889" w="10" d="5" h="0" angle="90" />
+  <Ramp deltaY="3" color="#c7c7c7" color.1="#000000" x="15" z="73.26388888888889" w="10" d="5" h="0" angle="270" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="70" z="140.76388888888889" w="10" d="30" h="0" angle="90" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="70" z="110.7638888888889" w="10" d="30" h="0" angle="90" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="70" z="85.76388888888889" w="10" d="20" h="0" angle="90" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="15" z="140.76388888888889" w="10" d="30" h="0" angle="270" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="15" z="110.7638888888889" w="10" d="30" h="0" angle="270" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="15" z="85.76388888888889" w="10" d="20" h="0" angle="270" />
+  <set baseHeight="3" />
+  <Wall color="#009600" color.1="#000000" x="25" z="170.76388888888889" w="10" d="30" h="0" />
+  <Wall color="#009600" color.1="#000000" x="60" z="170.76388888888889" w="10" d="30" h="0" />
+  <Wall color="#009600" color.1="#000000" x="25" z="140.76388888888889" w="10" d="30" h="0" />
+  <Wall color="#009600" color.1="#000000" x="60" z="140.76388888888889" w="10" d="30" h="0" />
+  <Wall color="#009600" color.1="#000000" x="25" z="110.7638888888889" w="10" d="30" h="0" />
+  <Wall color="#009600" color.1="#000000" x="60" z="110.7638888888889" w="10" d="30" h="0" />
+  <Wall color="#009600" color.1="#000000" x="25" z="85.76388888888889" w="10" d="20" h="0" />
+  <Wall color="#009600" color.1="#000000" x="60" z="85.76388888888889" w="10" d="20" h="0" />
+  <set baseHeight="0" />
+  <Incarnator cx="2.5" cz="90.76388888888889" angle="135" />
+  <GroundColor color="#009600" />
+  <SkyColor color="#d4feff" color.1="#00d5ff" />
+  <Wall color="#c7c7c7" color.1="#000000" x="65" z="69.51388888888889" w="20" d="2.5" h="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="20" z="69.51388888888889" w="20" d="2.5" h="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="7.5" z="69.51388888888889" w="5" d="2.5" h="0" />
+  <Wall color="#c7c7c7" color.1="#000000" x="77.5" z="69.51388888888889" w="5" d="2.5" h="0" />
+  <Wall color="#aa7942" color.1="#000000" x="42.5" z="73.26388888888889" w="25" d="5" h="0" y="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="25" z="73.26388888888889" w="10" d="5" h="0" y="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="60" z="73.26388888888889" w="10" d="5" h="0" y="3" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#007879" color.1="#000000" x="42.5" z="74.51388888888889" w="25" d="2.5" h="2" cx="5.069444444444445" cz="45.833333333333336" angle="315" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#00a8aa" color.1="#000000" x="42.5" z="72.01388888888889" w="25" d="2.5" h="2" cx="5.069444444444445" cz="45.833333333333336" angle="315" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#00d4d6" color.1="#000000" x="42.5" z="69.51388888888889" w="25" d="2.5" h="2" cx="5.069444444444445" cz="45.833333333333336" angle="315" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#004242" color.1="#000000" x="42.5" z="187.01388888888889" w="25" d="2.5" h="2" cx="5.069444444444445" cz="45.833333333333336" angle="315" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#002c00" color.1="#000000" x="42.5" z="189.51388888888889" w="25" d="2.5" h="2" cx="5.069444444444445" cz="45.833333333333336" angle="315" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="50" z="205.76388888888889" w="5" d="30" h="0" angle="270" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="35" z="205.76388888888889" w="5" d="30" h="0" angle="90" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="53.75" z="205.76388888888889" w="2.5" d="30" h="0" angle="270" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="31.25" z="205.76388888888889" w="2.5" d="30" h="0" angle="90" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="50" z="170.76388888888889" w="5" d="30" h="0" angle="270" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="35" z="170.76388888888889" w="5" d="30" h="0" angle="90" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="53.75" z="170.76388888888889" w="2.5" d="30" h="0" angle="270" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="31.25" z="170.76388888888889" w="2.5" d="30" h="0" angle="90" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="50" z="140.76388888888889" w="5" d="30" h="0" angle="270" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="35" z="140.76388888888889" w="5" d="30" h="0" angle="90" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="53.75" z="140.76388888888889" w="2.5" d="30" h="0" angle="270" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="31.25" z="140.76388888888889" w="2.5" d="30" h="0" angle="90" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="50" z="110.7638888888889" w="5" d="30" h="0" angle="270" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="35" z="110.7638888888889" w="5" d="30" h="0" angle="90" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="53.75" z="110.7638888888889" w="2.5" d="30" h="0" angle="270" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="31.25" z="110.7638888888889" w="2.5" d="30" h="0" angle="90" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#407979" color.1="#000000" x="42.5" z="170.76388888888889" w="20" d="30" h="2" cx="32.5" cz="113.2638888888889" angle="90" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#407979" color.1="#000000" x="42.5" z="140.76388888888889" w="20" d="30" h="2" cx="32.5" cz="113.2638888888889" angle="90" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#407979" color.1="#000000" x="42.5" z="110.7638888888889" w="20" d="30" h="2" cx="32.5" cz="113.2638888888889" angle="90" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#002c00" color.1="#000000" x="42.5" z="205.76388888888889" w="20" d="30" h="2" cx="32.5" cz="113.2638888888889" angle="90" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="50" z="85.76388888888889" w="5" d="20" h="0" angle="270" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="53.75" z="85.76388888888889" w="2.5" d="20" h="0" angle="270" />
+  <Ramp deltaY="1" y="2" color="#009600" color.1="#000000" x="31.25" z="85.76388888888889" w="2.5" d="20" h="0" angle="90" />
+  <Ramp deltaY="2" yon="0.01" color="#009600" color.1="#000000" x="35" z="85.76388888888889" w="5" d="20" h="0" angle="90" />
+  <Field visible="true" deltaY="0.06" deltaZ="0.09" color="#407979" color.1="#000000" x="42.5" z="85.76388888888889" w="20" d="20" h="2" cx="35" cz="83.26388888888889" angle="90" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="15" z="205.76388888888889" w="10" d="30" h="0" angle="270" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="70" z="205.76388888888889" w="10" d="30" h="0" angle="90" />
+  <set baseHeight="3" />
+  <Wall color="#009600" color.1="#000000" x="25" z="205.76388888888889" w="10" d="30" h="0" />
+  <Wall color="#009600" color.1="#000000" x="60" z="205.76388888888889" w="10" d="30" h="0" />
+  <set baseHeight="0" wallHeight="11 -1.6" />
+  <Wall color="#8a8a8a" color.1="#000000" x="42.5" z="223.26388888888889" w="5" d="5" h="0" y="1.6" />
+  <set wallHeight="0.01" />
+  <Ramp deltaY="2" y="1" color="#8a8a8a" color.1="#000000" x="32.5" z="240.7638888888889" w="5" d="30" h="0" angle="90" />
+  <Wall color="#aa7942" color.1="#000000" x="37.5" z="240.7638888888889" w="5" d="30" h="1" />
+  <Ramp deltaY="2" y="1" color="#8a8a8a" color.1="#000000" x="52.5" z="240.7638888888889" w="5" d="30" h="0" angle="270" />
+  <Wall color="#aa7942" color.1="#000000" x="47.5" z="240.7638888888889" w="5" d="30" h="1" />
+  <Field visible="true" deltaY="0.05" deltaZ="0.05" color="#002c00" color.1="#000000" x="42.5" z="240.7638888888889" w="5" d="30" h="0.75" cx="50" cz="243.26388888888889" angle="270" />
+  <Wall color="#8a8a8a" color.1="#000000" x="28.75" z="240.7638888888889" w="2.5" d="30" h="9" />
+  <Wall color="#8a8a8a" color.1="#000000" x="56.25" z="240.7638888888889" w="2.5" d="30" h="9" />
+  <Ramp deltaY="2" y="9" color="#8a8a8a" color.1="#000000" x="32.5" z="240.7638888888889" w="5" d="30" h="0" angle="270" />
+  <Ramp deltaY="2" y="9" color="#8a8a8a" color.1="#000000" x="52.5" z="240.7638888888889" w="5" d="30" h="0" angle="90" />
+  <Wall color="#8a8a8a" color.1="#000000" x="42.5" z="240.7638888888889" w="15" d="30" h="0" y="11" />
+  <set wallHeight="11" />
+  <Wall color="#8a8a8a" color.1="#000000" x="30" z="223.26388888888889" w="20" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="55" z="223.26388888888889" w="20" d="5" h="0" />
+  <set wallHeight="11" />
+  <Wall color="#8a8a8a" color.1="#000000" x="33.75" z="258.2638888888889" w="12.5" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="51.25" z="258.2638888888889" w="12.5" d="5" h="0" />
+  <set wallHeight="11 -1.6" />
+  <Wall color="#8a8a8a" color.1="#000000" x="42.5" z="258.2638888888889" w="5" d="5" h="0" y="1.6" />
+  <Field visible="true" deltaY="0.05" deltaZ="0.05" color="#002c00" color.1="#000000" x="56.25" z="240.7638888888889" w="2.5" d="30" h="0.75" cx="52.5" cz="243.26388888888889" angle="90" />
+  <set wallHeight="11" />
+  <WallDoor shield="10" color="#8a8a8a" color.1="#000000" x="42.5" z="262.0138888888889" w="5" d="2.5" h="0" />
+  <Field visible="true" deltaY="0.05" deltaZ="0.05" color="#002c00" color.1="#000000" x="42.5" z="223.26388888888889" w="5" d="5" h="0.75" cx="52.5" cz="243.26388888888889" angle="90" />
+  <Wall color="#8a8a8a" color.1="#000000" x="70" z="223.26388888888889" w="10" d="5" h="0" />
+  <Wall color="#8a8a8a" color.1="#000000" x="15" z="223.26388888888889" w="10" d="5" h="0" />
+  <set wallHeight="0.01" baseHeight="3.01" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="203.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="78.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="85.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="83.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="88.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="80.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="90.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="90.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="98.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="95.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="100.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="93.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="103.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="103.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="110.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="108.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="113.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="105.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="115.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="115.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="123.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="120.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="125.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="118.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="128.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="128.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="135.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="133.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="138.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="130.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="140.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="140.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="148.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="145.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="150.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="143.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="153.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="153.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="160.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="158.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="163.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="155.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="165.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="165.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="173.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="170.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="175.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="168.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="178.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="178.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="183.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="180.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="198.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="195.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="200.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="193.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="203.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="27.430555555555557" cz="210.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="19.930555555555557" cz="208.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="24.930555555555557" cz="213.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="205.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="27.430555555555557" cz="215.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="19.930555555555557" cz="215.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="22.430555555555557" cz="218.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="80.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="88.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="85.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="90.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="83.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="93.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="93.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="100.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="98.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="103.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="95.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="105.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="105.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="113.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="110.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="115.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="108.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="118.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="118.19444444444444" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="125.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="123.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="128.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="120.69444444444444" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="130.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="130.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="138.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="135.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="140.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="133.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="143.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="143.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="150.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="148.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="153.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="145.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="155.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="155.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="163.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="160.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="165.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="158.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="168.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="168.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="175.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="173.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="178.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="170.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="180.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="180.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="185.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="183.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="200.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="198.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="203.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="195.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="57.43055555555556" cz="205.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="64.93055555555556" cz="213.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="57.43055555555556" cz="210.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="62.43055555555556" cz="215.69444444444446" angle="225" />
+  <Solid yon="25" shape="bspDeadTree" scale="2" shield="10" color="#fffed5" color.1="#000000" cx="59.93055555555556" cz="208.19444444444446" angle="225" />
+  <Solid yon="25" shape="bspTree" shield="20" color="#d4fdd5" color.1="#000000" cx="64.93055555555556" cz="218.19444444444446" angle="225" />
+  <set baseHeight="0" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="15" cz="230.76388888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="20" cz="235.76388888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="15" cz="240.76388888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="20" cz="245.76388888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="15" cz="250.7638888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="20" cz="255.7638888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="65" cz="230.76388888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="70" cz="235.76388888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="65" cz="240.76388888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="70" cz="245.76388888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="65" cz="250.7638888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Goody shape="bspFlower" grenades="20" missiles="10" boosters="5" start="@good" out="@got" color="#ffd6d5" color.1="#000000" cx="70" cz="255.7638888888889" angle="135" />
+  <Timer in="@start" out="@good" />
+  <Timer in="@got" out="@good" wait="50" />
+  <Wall color="#c7c7c7" color.1="#000000" x="22.5" z="53.263888888888886" w="5" d="30" h="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="62.5" z="53.263888888888886" w="5" d="30" h="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="31.25" z="28.26388888888889" w="22.5" d="5" h="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="53.75" z="28.26388888888889" w="22.5" d="5" h="3" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="70" z="53.263888888888886" w="10" d="30" h="0" angle="90" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="15" z="53.263888888888886" w="10" d="30" h="0" angle="270" />
+  <Wall color="#c7c7c7" color.1="#000000" x="22.5" z="34.51388888888889" w="5" d="7.5" h="3" />
+  <Wall color="#c7c7c7" color.1="#000000" x="62.5" z="34.51388888888889" w="5" d="7.5" h="3" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="15" z="32.01388888888889" w="10" d="12.5" h="0" angle="270" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="70" z="32.01388888888889" w="10" d="12.5" h="0" angle="90" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="31.25" z="20.76388888888889" w="22.5" d="10" h="0" angle="0" />
+  <Ramp deltaY="3" color="#009600" color.1="#000000" x="53.75" z="20.76388888888889" w="22.5" d="10" h="0" angle="0" />
+  <Wall color="#009600" color.1="#000000" x="17.5" z="23.26388888888889" w="5" d="5" h="3" />
+  <Wall color="#009600" color.1="#000000" x="67.5" z="23.26388888888889" w="5" d="5" h="3" />
+  <Wall color="#009600" color.1="#000000" x="15" z="18.26388888888889" w="10" d="5" h="1.5" />
+  <Wall color="#009600" color.1="#000000" x="70" z="18.26388888888889" w="10" d="5" h="1.5" />
+  <Wall color="#009600" color.1="#000000" x="12.5" z="23.26388888888889" w="5" d="5" h="1.5" />
+  <Wall color="#009600" color.1="#000000" x="72.5" z="23.26388888888889" w="5" d="5" h="1.5" />
+  <Wall color="#00d4d6" color.1="#000000" x="42.5" z="39.51388888888889" w="35" d="17.5" h="0" />
+  <Wall color="#00d4d6" color.1="#000000" x="42.5" z="58.263888888888886" w="35" d="20" h="0" />
+  <Field visible="true" color="#00d4d6" color.1="#000000" x="34.375" z="40.76388888888889" w="16.25" d="17.5" h="0" cx="48.71527777777778" cz="19.444444444444446" angle="0" y="2.5" />
+  <Wall color="#00d4d6" color.1="#000000" x="25.625" z="40.13888888888889" w="1.25" d="18.75" h="2.5" />
+  <Wall color="#00d4d6" color.1="#000000" x="25.625" z="58.888888888888886" w="1.25" d="18.75" h="2.5" />
+  <Wall color="#00d4d6" color.1="#000000" x="59.375" z="40.13888888888889" w="1.25" d="18.75" h="2.5" />
+  <Wall color="#00d4d6" color.1="#000000" x="59.375" z="58.888888888888886" w="1.25" d="18.75" h="2.5" />
+  <Wall color="#00d4d6" color.1="#000000" x="34.375" z="31.388888888888893" w="16.25" d="1.25" h="2.5" />
+  <Wall color="#00d4d6" color.1="#000000" x="50.625" z="31.388888888888893" w="16.25" d="1.25" h="2.5" />
+  <Field visible="true" color="#00d4d6" color.1="#000000" x="34.375" z="58.263888888888886" w="16.25" d="17.5" h="0" cx="48.71527777777778" cz="19.444444444444446" angle="0" y="2.5" />
+  <Field visible="true" color="#00d4d6" color.1="#000000" x="50.625" z="40.76388888888889" w="16.25" d="17.5" h="0" cx="48.71527777777778" cz="19.444444444444446" angle="0" y="2.5" />
+  <Field visible="true" color="#00d4d6" color.1="#000000" x="50.625" z="58.263888888888886" w="16.25" d="17.5" h="0" cx="48.71527777777778" cz="19.444444444444446" angle="0" y="2.5" />
+  <Field visible="true" color="#00d4d6" color.1="#000000" x="34.375" z="67.63888888888889" w="16.25" d="1.25" h="2.5" cx="48.71527777777778" cz="19.444444444444446" angle="0" />
+  <Field visible="true" color="#00d4d6" color.1="#000000" x="50.625" z="67.63888888888889" w="16.25" d="1.25" h="2.5" cx="48.71527777777778" cz="19.444444444444446" angle="0" />
+  <set designer="Lord Anon III--cc96@cornell.edu" information="a stream, a pool, and a sewer &#10;tunnel." />
+</map>

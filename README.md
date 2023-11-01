@@ -1,7 +1,7 @@
 
 # Avara
 
-![avara](https://lychee.vastan.net/uploads/original/66/8e/07b5c97bd403a62523679d46c334.gif)
+![avara](https://img.avara.gg/uploads/original/30/fe/42a79ba9b5843fc858a824ae8231.gif)
 
 [Avara Discord](https://discord.gg/yw5qnBtJd5) | IRC: avaraline.net:6667 #avaraline
 
@@ -15,8 +15,8 @@ The game was originally developed in the early 1990s for Apple Macintosh. This p
 
 Otherwise, see [build instructions](https://github.com/avaraline/Avara/wiki/Build-instructions).
 
-#### [🔍 Game server tracker](http://avara.io/)
-[Check the tracker](http://avara.io/) to get a list of currently active Avara servers. There's also a JSON feed available [here](http://avara.io/api/v1/games/)!
+#### [🔍 Game server tracker](http://tracker.avara.gg/)
+[Check the tracker](http://tracker.avara.gg/) to get a list of currently active Avara servers. There's also a JSON feed available [here](http://tracker.avara.gg/api/v1/games/)!
 
 _Please note that this tracker is **not** compatible with the Mac OS 9 version of Avara._
 
@@ -27,7 +27,7 @@ _Please note that this tracker is **not** compatible with the Mac OS 9 version o
 * [YouTube: Testing Grimoire (and UI preview)](https://www.youtube.com/watch?v=OX4I18PXXOI&)
 
 ## Resources 
-- [Game server tracker](http://avara.io/) and [API](http://avara.io/api/v1/games/)
+- [Game server tracker](http://tracker.avara.gg/) and [API](http://tracker.avara.gg/api/v1/games/)
 - [👷 Build Instructions](https://github.com/avaraline/Avara/wiki/Build-instructions) (tl;dr run `make`)
 - **[How to play](https://github.com/avaraline/Avara/wiki/How-to-Play)**
 - **[⌨️ Configuring your Controls](https://github.com/avaraline/Avara/wiki/Configuring-your-Controls)**

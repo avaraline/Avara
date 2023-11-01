@@ -1415,7 +1415,7 @@ void CUDPComm::Connect(std::string address) {
 }
 
 void CUDPComm::Connect(std::string address, std::string passwordStr) {
-    SDL_Log("Connect address = %s pw length=%lu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
+    SDL_Log("Connect address = %s pw length=%zu %s", address.c_str(), passwordStr.size(), passwordStr.c_str());
 
     OpenAvaraTCP();
 
@@ -1906,10 +1906,10 @@ long CUDPComm::GetMaxRoundTrip(short distribution, short *slowPlayerId) {
 
     for (conn = connections; conn; conn = conn->next) {
         if (conn->port && (distribution & (1 << conn->myId))) {
-            // add in 2.58*stdev (~99% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
+            // add in 3.0*stdev (~99.7% prob) but max it at CLASSICFRAMETIME (don't add more than 0.5 to LT)
             // note: is this really a erlang distribution?  if so, what's the proper equation?
             float stdev = sqrt(conn->varRoundTripTime);
-            float rtt = conn->meanRoundTripTime + std::min(2.58*stdev, (1.0*CLASSICFRAMECLOCK));
+            float rtt = conn->meanRoundTripTime + std::min(3.0*stdev, (1.0*CLASSICFRAMECLOCK));
             if (rtt > maxTrip) {
                 maxTrip = rtt;
                 if (slowPlayerId != nullptr) {
