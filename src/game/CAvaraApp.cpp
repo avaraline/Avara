@@ -72,6 +72,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
+    itsGame->LoadImages(mNVGContext);
 
     AvaraGLSetFOV(Number(kFOV));
 

@@ -214,6 +214,14 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     iface.scoreReason = reason;
     iface.playerID = player;
     iface.playerTeam = team;
+
+    ScoreInterfaceEvent event;
+    event.player = itsGame->GetPlayerName(player);
+    event.team = team;
+    event.playerTarget = itsGame->GetPlayerName(hitPlayer);
+    event.teamTarget = hitTeam;
+    event.damage = points;
+
     if (player >= 0 && player <= kMaxAvaraPlayers) {
         iface.playerName = itsGame->itsNet->playerTable[player]->PlayerName();
         if (reason == ksiKillBonus && hitPlayer >= 0 && hitPlayer <= kMaxAvaraPlayers) {
@@ -226,6 +234,10 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
             itsGame->itsApp->ComposeParamLine(
                 destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
 
+            event.scoreType = ksiKillBonus;
+            event.weaponUsed = itsGame->killReason;
+            itsGame->AddScoreNotify(event);
+
             iface.consoleLine = destStr;
             iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
         }
@@ -235,6 +247,18 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
 
     if (reason == ksiExitBonus) {
         iface.winFrame = itsGame->frameNumber;
+    }
+
+    if(iface.scoreReason == ksiHoldBall) {
+        event.scoreType = ksiHoldBall;
+        itsGame->AddScoreNotify(event);
+        SDL_Log("CAvaraGame::Score Event: HOLD BALL!!");
+    }
+
+    if(iface.scoreReason == ksiScoreGoal) {
+        event.scoreType = ksiScoreGoal;
+        itsGame->AddScoreNotify(event);
+        SDL_Log("CAvaraGame::Score Event: GOAL!!");
     }
 
     iface.scorePoints = points;
@@ -254,6 +278,8 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     if (team >= 0 && team <= kMaxTeamColors) {
         localScores.teamPoints[team] += points;
     }
+
+    SDL_Log("CAvaraGame::Score Event: player:%d, hit:%d, reason:%d,\n", iface.playerID, iface.scoreID, iface.scoreReason);
 }
 
 void CScoreKeeper::ResetScores() {

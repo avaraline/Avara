@@ -46,7 +46,7 @@ typedef enum {
 typedef enum {
     ksiNoReason = -1,
 
-    ksiShotHit,
+    ksiPlasmaHit,
     ksiGrenadeHit,
     ksiMissileHit,
     ksiMineBlast,
@@ -149,5 +149,20 @@ typedef struct {
     long consoleJustify; //	Which way to justify text -1, 0, 1 (right, center, left)
 
 } ScoreInterfaceRecord;
+
+typedef struct {
+    std::string player;                 // Player who caused the event
+    std::string playerTarget;           // Player affected by the event
+
+    short team;                         // Team that created the event
+    short teamTarget;                   // Team affected by the event
+
+    long damage;                        // Damage caused for the event
+    FrameNumber frameNumber;            // Frame number the event occurred
+    int gameId;                         // Frame number the event occurred
+    ScoreInterfaceReasons scoreType;    // Weapon that caused the event
+    ScoreInterfaceReasons weaponUsed;   // Weapon that caused the event
+
+} ScoreInterfaceEvent;
 
 typedef void ScoreInterfaceCallType(ScoreInterfaceRecord *rec);
