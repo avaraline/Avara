@@ -183,6 +183,10 @@ CBSPWorld* CAvaraGame::CreateCBSPWorld(short initialObjectSpace) {
     return w;
 }
 
+void CAvaraGame::LoadImages(NVGcontext *ctx) {
+    hud->LoadImages(ctx);
+}
+
 void CAvaraGame::Dispose() {
     CAbstractActor *nextActor;
 
@@ -281,6 +285,14 @@ CAbstractPlayer *CAvaraGame::GetLocalPlayer() {
     }
 
     return NULL;
+}
+
+std::string CAvaraGame::GetPlayerName(short id) {
+    if (id != -1) {
+        CPlayerManager *mgr = itsNet->playerTable[id].get();
+        return mgr->GetPlayerName();
+    }
+    return "";
 }
 
 void CAvaraGame::AddActor(CAbstractActor *theActor) {
@@ -455,6 +467,15 @@ void CAvaraGame::Score(short team, short player, long points, Fixed energy, shor
     scoreKeeper->Score(scoreReason, team, player, points, energy, hitTeam, hitPlayer);
 }
 
+void CAvaraGame::AddScoreNotify(ScoreInterfaceEvent event) {
+    event.frameNumber = frameNumber;
+    event.gameId = currentGameId;
+    scoreEventList.push_back(event);
+    if (scoreEventList.size() > 20) {
+        scoreEventList.pop_front();
+    }
+}
+
 void CAvaraGame::RunFrameActions() {
     // SDL_Log("CAvaraGame::RunFrameActions\n");
     CAbstractPlayer *thePlayer;
@@ -477,6 +498,14 @@ void CAvaraGame::RunFrameActions() {
         nextPlayer = thePlayer->nextPlayer;
         thePlayer->PlayerAction();
         thePlayer = nextPlayer;
+    }
+
+    // Time out old score events
+    if (!scoreEventList.empty()) {
+        ScoreInterfaceEvent event = scoreEventList.front();
+        if (event.frameNumber + 480 < frameNumber || event.gameId < currentGameId) {
+            scoreEventList.pop_front();
+        }
     }
 }
 

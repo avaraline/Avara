@@ -25,6 +25,10 @@ bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecor
     }
 }
 
+void CHUD::LoadImages(NVGcontext *ctx) {
+    images = nvgCreateImage(ctx, "rsrc/img/atlas.png", NULL);
+}
+
 void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx) {
     CAbstractPlayer *player = itsGame->GetLocalPlayer();
     CPlayerManager *playerManager = itsGame->FindPlayerManager(player);
@@ -242,6 +246,29 @@ void CHUD::DrawPaused(CViewParameters *view, NVGcontext *ctx) {
         nvgFillColor(ctx, nvgRGBA(255,255,255,180));
         nvgFill(ctx);
     }
+}
+
+void CHUD::DrawImage(NVGcontext* ctx, int image, float alpha,
+		float sx, float sy, float sw, float sh, // sprite location on texture
+		float x, float y, float w, float h) // position and size of the sprite rectangle on screen
+{
+	float ax, ay;
+	int iw,ih;
+	NVGpaint img;
+	
+	nvgImageSize(ctx, image, &iw, &ih);
+
+	// Aspect ration of pixel in x an y dimensions. This allows us to scale
+	// the sprite to fill the whole rectangle.
+	ax = w / sw;
+	ay = h / sh;
+
+	img = nvgImagePattern(ctx, x - sx*ax, y - sy*ay, (float)iw*ax, (float)ih*ay,
+				0, image, alpha);
+	nvgBeginPath(ctx);
+	nvgRect(ctx, x,y, w,h);
+	nvgFillPaint(ctx, img);
+	nvgFill(ctx);
 }
 
 void CHUD::Render(CViewParameters *view, NVGcontext *ctx) {
@@ -719,6 +746,12 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     int systemMessageSpacing = 16;
     int systemMessageMaxLines = 5;
 
+    float killEventBounds[4] = {0,0,0,0};
+    float killEventKillerNameBounds[4] = {0,0,0,0};
+    float killEventPosition[2] = {(float)bufferWidth - 50.0f, 200.0f};
+    float killEventSize[2] = {0, 0};
+    float killEventIconXPosition = 0;
+
     int playerLineHeight = 17;
     float playerListPosition[2] = {(float)bufferWidth - 570.0f, (float)bufferHeight - 60.0f - (highestUsedSlot * playerLineHeight)};
     float playerListSize[2] = {520.0f, (highestUsedSlot * playerLineHeight) + 10.0f};
@@ -752,6 +785,87 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
         nvgRoundedRect(ctx, playerListPosition[0], playerListPosition[1], playerListSize[0], playerListSize[1], 4.0);
         nvgFillColor(ctx, BACKGROUND_COLOR);
         nvgFill(ctx);
+    }
+
+    // Kill Events
+    if (itsGame->itsApp->Get(kHUDShowKillFeed) && !itsGame->scoreEventList.empty()) {
+        int count = 0;
+        for (auto iter = itsGame->scoreEventList.begin(); iter != itsGame->scoreEventList.end(); iter++) {
+            ScoreInterfaceEvent event = *iter;
+            NVGpaint img;
+
+            switch(event.scoreType) {
+                case ksiKillBonus:
+                    // Event player names
+                    std::string killerName = event.player;
+                    std::string killedName = event.playerTarget;
+
+                    // Get how wide the event rect needs to be
+                    std::string eventText = killerName + "     " + killedName;
+                    nvgBeginPath(ctx);
+                    nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
+                    nvgFontSize(ctx, fontsz_l);
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    nvgTextBounds(ctx, 0, 0, eventText.c_str(), NULL, killEventBounds);             // Size of the entire rendered text
+                    nvgTextBounds(ctx, 0, 0, killerName.c_str(), NULL, killEventKillerNameBounds);  // Size of the killer name text (used to place the icon)
+
+                    // Get Measurements based on text size for the total size of the event box
+                    killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
+                    killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
+                    killEventIconXPosition = killEventKillerNameBounds[2] - killEventKillerNameBounds[0] + 23.0f;   // Position the icon in the empty space
+                    float eventPositionY = killEventPosition[1] + ((float)count * (killEventSize[1] + 10.0f));
+
+                    // Background box
+                    DrawShadowBox(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1]);
+                    nvgBeginPath(ctx);
+                    nvgRoundedRect(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1], 4.0);
+                    nvgFillColor(ctx, BACKGROUND_COLOR);
+                    nvgFill(ctx);
+
+                    // Locations/Dimensions of the icons in the sprite atlas
+                    float ix, iy, iWidth, iHeight;
+                    switch(event.weaponUsed) {
+                        case ksiPlasmaHit:
+                            ix = 118.0;
+                            iy = 0.0;
+                            iWidth = 55.0;
+                            iHeight = 51.0;
+                            break;
+                        case ksiGrenadeHit:
+                            ix = 0.0;
+                            iy = 0.0;
+                            iWidth = 60.0;
+                            iHeight = 51.0;
+                            break;
+                        case ksiMissileHit:
+                            ix = 60.0;
+                            iy = 0.0;
+                            iWidth = 58.0;
+                            iHeight = 51.0;
+                            break;
+                        case ksiObjectCollision:
+                            break;
+                    }
+
+                    DrawImage(ctx, images, 1.0, ix, iy, iWidth, iHeight, 
+                        killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, 36.0, killEventSize[1] - 10.0f);
+                    nvgBeginPath(ctx);
+                    nvgTextAlign(ctx, NVG_ALIGN_LEFT);
+                    nvgFontSize(ctx, fontsz_l);
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    nvgText(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 25.0f, eventText.c_str(), NULL);
+                    break;
+
+                /*case ksiScoreGoal:
+                    break;
+
+                case ksiHoldBall:
+                    break;*/
+
+            }
+
+            count++;
+        }
     }
 
 
@@ -979,8 +1093,8 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
                 float fontsz_s = 18.0;
                 float bounds[4], nextBounds[4], prevBounds[4];
                 std::string specMessage("Spectating " + playerName);
-                std::string nextMessage("Spectate Next: [");
-                std::string prevMessage("Spectate Previous: ]");
+                std::string nextMessage("Spectate Next: ]");
+                std::string prevMessage("Spectate Previous: [");
 
                 nvgBeginPath(ctx);
                 nvgFontFace(ctx, "mono");

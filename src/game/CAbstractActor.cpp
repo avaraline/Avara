@@ -931,8 +931,10 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 
             savedReason = itsGame->scoreReason;
             itsGame->scoreReason = ksiKillBonus;
+            itsGame->killReason = savedReason;
             itsGame->Score(theHit->team, theHit->playerId, destructScore, 0, teamColor, GetActorScoringId());
             itsGame->scoreReason = savedReason;
+            itsGame->killReason = ksiNoReason;
 
             itsGame->FlagMessage(hitMessage);
             itsGame->FlagMessage(destructMessage);
