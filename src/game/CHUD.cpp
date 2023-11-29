@@ -788,7 +788,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
     }
 
     // Kill Events
-    if (!itsGame->scoreEventList.empty()) {
+    if (itsGame->itsApp->Get(kHUDShowKillFeed) && !itsGame->scoreEventList.empty()) {
         int count = 0;
         for (auto iter = itsGame->scoreEventList.begin(); iter != itsGame->scoreEventList.end(); iter++) {
             ScoreInterfaceEvent event = *iter;
@@ -799,7 +799,6 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
                     // Event player names
                     std::string killerName = event.player;
                     std::string killedName = event.playerTarget;
-                    std::string weapon;
 
                     // Get how wide the event rect needs to be
                     std::string eventText = killerName + "     " + killedName;
@@ -807,13 +806,13 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
                     nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
                     nvgFontSize(ctx, fontsz_l);
                     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
-                    nvgTextBounds(ctx, 0, 0, eventText.c_str(), NULL, killEventBounds);
-                    nvgTextBounds(ctx, 0, 0, killerName.c_str(), NULL, killEventKillerNameBounds);
+                    nvgTextBounds(ctx, 0, 0, eventText.c_str(), NULL, killEventBounds);             // Size of the entire rendered text
+                    nvgTextBounds(ctx, 0, 0, killerName.c_str(), NULL, killEventKillerNameBounds);  // Size of the killer name text (used to place the icon)
 
                     // Get Measurements based on text size for the total size of the event box
                     killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
                     killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
-                    killEventIconXPosition = killEventKillerNameBounds[2] - killEventKillerNameBounds[0] + 23.0f;
+                    killEventIconXPosition = killEventKillerNameBounds[2] - killEventKillerNameBounds[0] + 23.0f;   // Position the icon in the empty space
                     float eventPositionY = killEventPosition[1] + ((float)count * (killEventSize[1] + 10.0f));
 
                     // Background box
@@ -823,32 +822,33 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
                     nvgFillColor(ctx, BACKGROUND_COLOR);
                     nvgFill(ctx);
 
-                    int w, h;
+                    // Locations/Dimensions of the icons in the sprite atlas
+                    float ix, iy, iWidth, iHeight;
                     switch(event.weaponUsed) {
                         case ksiPlasmaHit:
-                            DrawImage(ctx, images, 1.0, 
-                            118.0, 0.0, 55.0, 51.0, 
-                            killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, 36.0, killEventSize[1] - 10.0f);
+                            ix = 118.0;
+                            iy = 0.0;
+                            iWidth = 55.0;
+                            iHeight = 51.0;
                             break;
                         case ksiGrenadeHit:
-                            DrawImage(ctx, images, 1.0, 
-                            0.0, 0.0, 60.0, 51.0, 
-                            killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, 36.0, killEventSize[1] - 10.0f);
+                            ix = 0.0;
+                            iy = 0.0;
+                            iWidth = 60.0;
+                            iHeight = 51.0;
                             break;
                         case ksiMissileHit:
-                            DrawImage(ctx, images, 1.0, 
-                            60.0, 0.0, 58.0, 51.0, 
-                            killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, 36.0, killEventSize[1] - 10.0f);
+                            ix = 60.0;
+                            iy = 0.0;
+                            iWidth = 58.0;
+                            iHeight = 51.0;
                             break;
                         case ksiObjectCollision:
-                            weapon = "Wall";
                             break;
                     }
-                    //nvgBeginPath(ctx);
-                    //nvgRect(ctx, killEventPosition[0] + 50, eventPositionY, w,h);
-                    //nvgFillPaint(ctx, img);
-		            //nvgFill(ctx);
 
+                    DrawImage(ctx, images, 1.0, ix, iy, iWidth, iHeight, 
+                        killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, 36.0, killEventSize[1] - 10.0f);
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_LEFT);
                     nvgFontSize(ctx, fontsz_l);

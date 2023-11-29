@@ -231,8 +231,10 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
             if (hitTeam != team) {
                 localScores.player[player].kills++;
             }
-            itsGame->itsApp->ComposeParamLine(
-                destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
+            if (!itsGame->itsApp->Get(kHUDShowKillFeed)) {
+                itsGame->itsApp->ComposeParamLine(
+                    destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
+            }
 
             event.scoreType = ksiKillBonus;
             event.weaponUsed = itsGame->killReason;

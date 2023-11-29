@@ -67,6 +67,7 @@ using json = nlohmann::json;
 #define kHUDShowDirArrow "hudShowDirArrow"
 #define kHUDShowScore "hudShowScore"
 #define kHUDShowTime "hudShowTime"
+#define kHUDShowKillFeed "hudShowKillFeed"
 #define kShowClassicHUD "showClassicHUD"
 #define kShowNewHUD "showNewHUD"
 
@@ -166,6 +167,7 @@ static json defaultPrefs = {
     {kHUDShowPlayerList, true},
     {kHUDShowScore, true},
     {kHUDShowTime, true},
+    {kHUDShowKillFeed, true},
     {kShowClassicHUD, false},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},
