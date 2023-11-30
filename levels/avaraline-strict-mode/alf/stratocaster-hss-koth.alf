@@ -1,0 +1,16 @@
+<map>
+  <include alf="layout/stratocaster-hss.alf" />
+
+  <set floorTemplate="bspFloorFrame" hillSize="13.5" />
+  <Wall x="0" y="4.01" z="0" w="hillSize" d="hillSize" h="0" color="#ffcc33" />
+
+  <set
+    pHillX="0"
+    pHillY="4"
+    pHillZ="0"
+    pHillW="hillSize"
+    pHillD="hillSize"
+    pHillH="4"
+  />
+  <include alf="logic/koth.alf" />
+</map>
