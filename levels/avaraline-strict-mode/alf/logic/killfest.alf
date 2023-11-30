@@ -1,0 +1,7 @@
+<!-- @param int pGameLength the length of the game in ticks -->
+
+<set defaultLives="999" />
+
+<unique vars="mGameEnds" />
+<Timer in="@start" out="mGameEnds" wait="pGameLength" />
+<Teleporter start="mGameEnds" y="-10" activeRange="10000" shape="0" win="0" cx="0" cz="0" />

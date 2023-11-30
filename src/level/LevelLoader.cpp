@@ -105,6 +105,8 @@ Fixed GetLastArcDirection() {
 }
 
 struct ALFWalker: pugi::xml_tree_walker {
+    ALFWalker(std::string levelPath): levelPath(levelPath) {};
+
     virtual bool for_each(pugi::xml_node& node) {
         std::string tag = node.name();
         std::string val;
@@ -181,6 +183,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             handle_object(node, name);
         }
         else if (name.compare("Wall") == 0) handle_wall(node);
+        else if (name.compare("include") == 0) handle_include(node);
         else handle_object(node, name);
     }
 
@@ -324,6 +327,31 @@ struct ALFWalker: pugi::xml_tree_walker {
         theWall->MakeWallFromRect(&gLastBoxRect, gLastBoxRounding, 0, true);
     }
 
+    void handle_include(pugi::xml_node& node) {
+        std::string path = node.attribute("alf").value();
+        if (!path.empty() &&
+            // Relative paths only.
+            path.rfind("..", 1) != 0 &&
+            path.rfind("/", 0) != 0 &&
+            path.rfind("./", 1) != 0 &&
+            path.rfind("\\", 0) != 0 &&
+            path.rfind(".\\", 1) != 0 &&
+            // Disallow recursive (infinite) includes!
+            path.compare(levelPath) != 0) {
+            // Ensure path separators are appropriate for the current platform.
+            std::regex pattern("\\\\|/");
+            path = std::regex_replace(path, pattern, PATHSEP);
+            path = GetALFPath(path);
+
+            pugi::xml_document shard;
+            pugi::xml_parse_result result = shard.load_file(path.c_str());
+            if (result) {
+                ALFWalker includeWalker(path);
+                shard.traverse(includeWalker);
+            }
+        }
+    }
+
     void handle_object(pugi::xml_node& node, std::string& name) {
         std::stringstream script;
         script << "object " << name << "\n";
@@ -335,16 +363,19 @@ struct ALFWalker: pugi::xml_tree_walker {
         script << "end";
         RunThis((StringPtr)script.str().c_str());
     }
+
+private:
+    std::string levelPath;
 };
 
-bool LoadALF(std::string levelName) {
+bool LoadALF(std::string levelPath) {
     AvaraGLLightDefaults();
     InitParser();
 
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(levelName.c_str());
+    pugi::xml_parse_result result = doc.load_file(levelPath.c_str());
 
-    ALFWalker walker;
+    ALFWalker walker(levelPath);
     doc.traverse(walker);
 
     FreshCalc();
