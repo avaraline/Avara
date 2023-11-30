@@ -105,7 +105,7 @@ Fixed GetLastArcDirection() {
 }
 
 struct ALFWalker: pugi::xml_tree_walker {
-    ALFWalker(std::string levelPath): levelPath(levelPath) {};
+    ALFWalker(uint8_t depth = 0): depth(depth) {};
 
     virtual bool for_each(pugi::xml_node& node) {
         std::string tag = node.name();
@@ -329,15 +329,14 @@ struct ALFWalker: pugi::xml_tree_walker {
 
     void handle_include(pugi::xml_node& node) {
         std::string path = node.attribute("alf").value();
-        if (!path.empty() &&
+        if (depth < 5 &&
             // Relative paths only.
+            !path.empty() &&
             path.rfind("..", 1) != 0 &&
             path.rfind("/", 0) != 0 &&
             path.rfind("./", 1) != 0 &&
             path.rfind("\\", 0) != 0 &&
-            path.rfind(".\\", 1) != 0 &&
-            // Disallow recursive (infinite) includes!
-            path.compare(levelPath) != 0) {
+            path.rfind(".\\", 1) != 0) {
             // Ensure path separators are appropriate for the current platform.
             std::regex pattern("\\\\|/");
             path = std::regex_replace(path, pattern, PATHSEP);
@@ -346,7 +345,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             pugi::xml_document shard;
             pugi::xml_parse_result result = shard.load_file(path.c_str());
             if (result) {
-                ALFWalker includeWalker(path);
+                ALFWalker includeWalker(depth + 1);
                 shard.traverse(includeWalker);
             }
         }
@@ -365,7 +364,7 @@ struct ALFWalker: pugi::xml_tree_walker {
     }
 
 private:
-    std::string levelPath;
+    uint8_t depth;
 };
 
 bool LoadALF(std::string levelPath) {
@@ -375,7 +374,7 @@ bool LoadALF(std::string levelPath) {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(levelPath.c_str());
 
-    ALFWalker walker(levelPath);
+    ALFWalker walker;
     doc.traverse(walker);
 
     FreshCalc();
