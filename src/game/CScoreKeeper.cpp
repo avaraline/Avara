@@ -251,10 +251,14 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
         iface.winFrame = itsGame->frameNumber;
     }
 
+    if(iface.scoreReason == ksiGrabBall) {
+        event.scoreType = ksiGrabBall;
+        itsGame->AddScoreNotify(event);
+    }
+
     if(iface.scoreReason == ksiHoldBall) {
         event.scoreType = ksiHoldBall;
-        itsGame->AddScoreNotify(event);
-        SDL_Log("CAvaraGame::Score Event: HOLD BALL!!");
+        //itsGame->AddScoreNotify(event);
     }
 
     if(iface.scoreReason == ksiScoreGoal) {
@@ -281,7 +285,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
         localScores.teamPoints[team] += points;
     }
 
-    SDL_Log("CAvaraGame::Score Event: player:%d, hit:%d, reason:%d,\n", iface.playerID, iface.scoreID, iface.scoreReason);
+    //SDL_Log("CAvaraGame::Score Event: player:%d, hit:%d, reason:%d,\n", iface.playerID, iface.scoreID, iface.scoreReason);
 }
 
 void CScoreKeeper::ResetScores() {

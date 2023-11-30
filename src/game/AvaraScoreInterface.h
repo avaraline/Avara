@@ -58,6 +58,7 @@ typedef enum {
     ksiExitBonus,
     ksiGoodyBonus,
 
+    ksiGrabBall,
     ksiHoldBall,
     ksiScoreGoal
 

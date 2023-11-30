@@ -789,16 +789,19 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
 
     // Kill Events
     if (itsGame->itsApp->Get(kHUDShowKillFeed) && !itsGame->scoreEventList.empty()) {
-        int count = 0;
+        int eventCount = 0;
         for (auto iter = itsGame->scoreEventList.begin(); iter != itsGame->scoreEventList.end(); iter++) {
             ScoreInterfaceEvent event = *iter;
             NVGpaint img;
+            float imgWidth = 36.0;
+            float eventPositionY;
 
             switch(event.scoreType) {
-                case ksiKillBonus:
+                case ksiKillBonus: {
                     // Event player names
-                    std::string killerName = event.player;
-                    std::string killedName = event.playerTarget;
+                    std::string killerName = " " + event.player;
+                    std::string killedName = " " + event.playerTarget;
+                    float teamColorRGB[3], teamTargetColorRGB[3];
 
                     // Get how wide the event rect needs to be
                     std::string eventText = killerName + "     " + killedName;
@@ -813,7 +816,7 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
                     killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
                     killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
                     killEventIconXPosition = killEventKillerNameBounds[2] - killEventKillerNameBounds[0] + 23.0f;   // Position the icon in the empty space
-                    float eventPositionY = killEventPosition[1] + ((float)count * (killEventSize[1] + 10.0f));
+                    eventPositionY = killEventPosition[1] + ((float)eventCount * (killEventSize[1] + 10.0f));
 
                     // Background box
                     DrawShadowBox(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1]);
@@ -845,26 +848,130 @@ void CHUD::RenderNewHUD(CViewParameters *view, NVGcontext *ctx) {
                             break;
                         case ksiObjectCollision:
                             break;
+                        default:
+                            break;
                     }
+                    ARGBColor longTeamColor = *ColorManager::getTeamColor(net->teamColors[event.team]);
+                    longTeamColor.ExportGLFloats(teamColorRGB, 3);
+                    ARGBColor longTeamTargetColor = *ColorManager::getTeamColor(net->teamColors[event.teamTarget]);
+                    longTeamTargetColor.ExportGLFloats(teamTargetColorRGB, 3);
+                    float teamTargetColorPosition = killEventPosition[0] - killEventSize[0] + killEventIconXPosition + imgWidth + 15.0f;
+
+                    nvgBeginPath(ctx);
+                    nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
+                    nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
+                    nvgFill(ctx);
+                    
+                    nvgBeginPath(ctx);
+                    nvgRect(ctx, teamTargetColorPosition, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
+                    nvgFillColor(ctx, nvgRGBAf(teamTargetColorRGB[0], teamTargetColorRGB[1], teamTargetColorRGB[2], 1.0));
+                    nvgFill(ctx);
 
                     DrawImage(ctx, images, 1.0, ix, iy, iWidth, iHeight, 
-                        killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, 36.0, killEventSize[1] - 10.0f);
+                        killEventPosition[0] - killEventSize[0] + killEventIconXPosition, eventPositionY + 5.0f, imgWidth, killEventSize[1] - 10.0f);
+
                     nvgBeginPath(ctx);
                     nvgTextAlign(ctx, NVG_ALIGN_LEFT);
                     nvgFontSize(ctx, fontsz_l);
                     nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
                     nvgText(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 25.0f, eventText.c_str(), NULL);
-                    break;
 
-                /*case ksiScoreGoal:
+                    eventCount++;
                     break;
+                }
 
-                case ksiHoldBall:
+                case ksiScoreGoal: {
+                    // Event player names
+                    std::string playerName = " " + event.player;
+                    float teamColorRGB[3];
+
+                    // Get how wide the event rect needs to be
+                    std::string eventText = playerName + " scored!";
+                    nvgBeginPath(ctx);
+                    nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
+                    nvgFontSize(ctx, fontsz_l);
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    nvgTextBounds(ctx, 0, 0, eventText.c_str(), NULL, killEventBounds);             // Size of the entire rendered text
+
+                    // Get Measurements based on text size for the total size of the event box
+                    killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
+                    killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
+                    eventPositionY = killEventPosition[1] + ((float)eventCount * (killEventSize[1] + 10.0f));
+
+                    // Background box
+                    DrawShadowBox(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1]);
+                    nvgBeginPath(ctx);
+                    nvgRoundedRect(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1], 4.0);
+                    nvgFillColor(ctx, BACKGROUND_COLOR);
+                    nvgFill(ctx);
+
+                    ARGBColor longTeamColor = *ColorManager::getTeamColor(net->teamColors[event.team]);
+                    longTeamColor.ExportGLFloats(teamColorRGB, 3);
+
+                    nvgBeginPath(ctx);
+                    nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
+                    nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
+                    nvgFill(ctx);
+
+                    nvgBeginPath(ctx);
+                    nvgTextAlign(ctx, NVG_ALIGN_LEFT);
+                    nvgFontSize(ctx, fontsz_l);
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    nvgText(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 25.0f, eventText.c_str(), NULL);
+
+                    eventCount++;
+                    break;
+                }
+
+                case ksiGrabBall:
+                {
+                    // Event player names
+                    std::string playerName = " " + event.player;
+                    float teamColorRGB[3];
+
+                    // Get how wide the event rect needs to be
+                    std::string eventText = playerName + " has the ball!";
+                    nvgBeginPath(ctx);
+                    nvgTextAlign(ctx, NVG_ALIGN_RIGHT);
+                    nvgFontSize(ctx, fontsz_l);
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    nvgTextBounds(ctx, 0, 0, eventText.c_str(), NULL, killEventBounds);             // Size of the entire rendered text
+
+                    // Get Measurements based on text size for the total size of the event box
+                    killEventSize[0] = killEventBounds[2] - killEventBounds[0] + 20.0f;
+                    killEventSize[1] = killEventBounds[3] - killEventBounds[1] + 10.0f;
+                    eventPositionY = killEventPosition[1] + ((float)eventCount * (killEventSize[1] + 10.0f));
+
+                    // Background box
+                    DrawShadowBox(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1]);
+                    nvgBeginPath(ctx);
+                    nvgRoundedRect(ctx, killEventPosition[0] - killEventSize[0], eventPositionY, killEventSize[0], killEventSize[1], 4.0);
+                    nvgFillColor(ctx, BACKGROUND_COLOR);
+                    nvgFill(ctx);
+
+                    ARGBColor longTeamColor = *ColorManager::getTeamColor(net->teamColors[event.team]);
+                    longTeamColor.ExportGLFloats(teamColorRGB, 3);
+
+                    nvgBeginPath(ctx);
+                    nvgRect(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 10.0f, 9.0, killEventSize[1] - 20.0f);
+                    nvgFillColor(ctx, nvgRGBAf(teamColorRGB[0], teamColorRGB[1], teamColorRGB[2], 1.0));
+                    nvgFill(ctx);
+
+                    nvgBeginPath(ctx);
+                    nvgTextAlign(ctx, NVG_ALIGN_LEFT);
+                    nvgFontSize(ctx, fontsz_l);
+                    nvgFillColor(ctx, nvgRGBA(255, 255, 255, 255));
+                    nvgText(ctx, killEventPosition[0] - killEventSize[0] + 10.0f, eventPositionY + 25.0f, eventText.c_str(), NULL);
+
+                    eventCount++;
+                    break;
+                }
+
+                /*case ksiHoldBall:
                     break;*/
 
             }
 
-            count++;
         }
     }
 
