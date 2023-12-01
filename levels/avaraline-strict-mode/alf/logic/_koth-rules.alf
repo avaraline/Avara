@@ -26,6 +26,8 @@
 <Timer in="pPulse" wait="1" out="pPulseEnd" />
 <Timer in="pPulse" wait="10" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mBlackClose" out.7="mWhiteClose" />
 
+<set wallYon="0.001" />
+
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pGreenEnters" didOpen="mIncrement" close="mGreenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(1)" x="-7" y="-10" z="0" w="1" d="1" h="2" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
@@ -209,6 +211,8 @@
 <Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="White team has 80 seconds!" />
 <Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="White team has only 10 seconds to go!" />
 <Text sound="kSnText" volume="kTextVolume" in="mWhiteWins" showEveryone="true" text="White team wins!" />
+
+<set wallYon="defaultYon" />
 
 <!-- Hill ownership must be exclusive! -->
 <Timer in="pGreenEnters" wait="2" out.0="mYellowClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
