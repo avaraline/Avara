@@ -1,0 +1,162 @@
+<SkyColor color="#8a96af" color.1="#e8d395" />
+<GroundColor color="#45484c" />
+<set
+  designer="$mSilverfox"
+  information="The thick, decrepit tome was stuffed with incantations of all sorts. Some were utilitarian in nature, allowing the magus to send messages halfway across the world. Others were more...whimsical, and could transform an owl into a mongoose."
+  ambient.i="0.3"
+  light.0.i="0.6"
+  light.0.a="60"
+  light.0.b="30"
+  wallHeight="0"
+/>
+
+<Ramp y="0" deltaY="6" color="#e3c97a" color.1="#000000" x="2.5" z="-15" w="10" d="15" h="0" angle="0" />
+<Ramp y="0" deltaY="6" color="#e3c97a" color.1="#000000" x="-2.5" z="15" w="10" d="15" h="0" angle="180" />
+<Ramp y="0" deltaY="6" color="#e3c97a" color.1="#000000" x="15" z="-2.5" w="15" d="10" h="0" angle="90" />
+<Ramp y="0" deltaY="6" color="#e3c97a" color.1="#000000" x="-15" z="2.5" w="15" d="10" h="0" angle="270" />
+<Wall color="#aebbd3" color.1="#000000" x="-15" z="-15" w="15" d="15" h="6" />
+<Wall color="#aebbd3" color.1="#000000" x="15" z="15" w="15" d="15" h="6" />
+<Wall color="#aebbd3" color.1="#000000" x="-15" z="-5" w="15" d="5" h="6" />
+<Wall color="#aebbd3" color.1="#000000" x="15" z="-15" w="15" d="15" h="1.5" y="4.5" />
+<Wall color="#aebbd3" color.1="#000000" x="15" z="-13.4375" w="15" d="11.875" h="4.5" />
+<Wall color="#aebbd3" color.1="#000000" x="13.4375" z="-20.9375" w="11.875" d="3.125" h="4.5" />
+<Wall color="#aebbd3" color.1="#000000" x="15" z="5" w="15" d="5" h="6" />
+<Wall color="#aebbd3" color.1="#000000" x="-5" z="-15" w="5" d="15" h="6" />
+<Wall color="#aebbd3" color.1="#000000" x="5" z="15" w="5" d="15" h="6" />
+<Wall color="#aebbd3" color.1="#000000" x="-15" z="15" w="15" d="15" h="1.5" y="4.5" />
+<Wall color="#aebbd3" color.1="#000000" x="-15" z="13.4375" w="15" d="11.875" h="4.5" />
+<Wall color="#aebbd3" color.1="#000000" x="-13.4375" z="20.9375" w="11.875" d="3.125" h="4.5" />
+<Wall color="#26334c" color.1="#000000" x="-20" z="7.5" w="5" d="30" h="0.4" y="11.6" />
+<Wall color="#26334c" color.1="#000000" x="20" z="-7.5" w="5" d="30" h="0.4" y="11.6" />
+<Wall color="#26334c" color.1="#000000" x="-5" z="20" w="25" d="5" h="0.4" y="11.6" />
+<Wall color="#26334c" color.1="#000000" x="5" z="-20" w="25" d="5" h="0.4" y="11.6" />
+<Wall color="#26334c" color.1="#000000" x="-25" z="-5" w="5" d="5" h="12" />
+<Wall color="#26334c" color.1="#000000" x="5" z="25" w="5" d="5" h="12" />
+<Wall color="#26334c" color.1="#000000" x="25" z="5" w="5" d="5" h="12" />
+<Wall color="#26334c" color.1="#000000" x="-5" z="-25" w="5" d="5" h="12" />
+<Ramp y="6" deltaY="6" color="#debe5d" color.1="#000000" x="15" z="30" w="15" d="15" h="0" angle="0" />
+<Ramp y="6" deltaY="6" color="#debe5d" color.1="#000000" x="30" z="15" w="15" d="15" h="0" angle="270" />
+<Ramp y="6" deltaY="6" color="#debe5d" color.1="#000000" x="-15" z="-30" w="15" d="15" h="0" angle="180" />
+<Ramp y="6" deltaY="6" color="#debe5d" color.1="#000000" x="-30" z="-15" w="15" d="15" h="0" angle="90" />
+<Wall color="#6a7790" color.1="#000000" x="-30" z="-30" w="15" d="15" h="12" y="6" />
+<Wall color="#6a7790" color.1="#000000" x="30" z="30" w="15" d="15" h="12" y="6" />
+<Wall color="#6a7790" color.1="#000000" x="-35" z="-35" w="5" d="5" h="6" />
+<Wall color="#6a7790" color.1="#000000" x="35" z="35" w="5" d="5" h="6" />
+<Wall color="#6a7790" color.1="#000000" x="45" z="45" w="15" d="15" h="0" y="18" />
+<Wall color="#6a7790" color.1="#000000" x="40" z="40" w="5" d="5" h="17.95" />
+<Wall color="#6a7790" color.1="#000000" x="-45" z="-45" w="15" d="15" h="0" y="18" />
+<Wall color="#6a7790" color.1="#000000" x="-40" z="-40" w="5" d="5" h="17.95" />
+<Ramp y="12" deltaY="6" color="#d9b341" color.1="#000000" x="-45" z="-30" w="15" d="15" h="0" angle="180" />
+<Ramp y="12" deltaY="6" color="#d9b341" color.1="#000000" x="-30" z="-45" w="15" d="15" h="0" angle="90" />
+<Ramp y="12" deltaY="6" color="#d9b341" color.1="#000000" x="45" z="30" w="15" d="15" h="0" angle="0" />
+<Ramp y="12" deltaY="6" color="#d9b341" color.1="#000000" x="30" z="45" w="15" d="15" h="0" angle="270" />
+<Wall color="#8c99b1" color.1="#000000" x="15" z="45" w="15" d="15" h="0" y="12" />
+<Wall color="#8c99b1" color.1="#000000" x="45" z="15" w="15" d="15" h="0" y="12" />
+<Wall color="#8c99b1" color.1="#000000" x="-15" z="-45" w="15" d="15" h="0" y="12" />
+<Wall color="#8c99b1" color.1="#000000" x="-45" z="-15" w="15" d="15" h="0" y="12" />
+<WallDoor midYaw="45" color="#26334c" color.1="#000000" x="-13.125" z="-13.125" w="25" d="5" h="0.4" y="11.6" />
+<WallDoor midYaw="45" color="#aebbd3" color.1="#000000" x="-13.159722222222223" z="-13.159722222222223" w="3.125" d="3.125" h="5.6" y="6" />
+<WallDoor midYaw="45" color="#26334c" color.1="#000000" x="13.125" z="13.125" w="25" d="5" h="0.4" y="11.6" />
+<WallDoor midYaw="45" color="#aebbd3" color.1="#000000" x="13.090277777777779" z="13.090277777777779" w="3.125" d="3.125" h="5.6" y="6" />
+<WallDoor midYaw="45" color="#aebbd3" color.1="#000000" x="-20.03472222222222" z="19.96527777777778" w="3.125" d="3.125" h="5.6" y="6" />
+<WallDoor midYaw="45" color="#aebbd3" color.1="#000000" x="19.96527777777778" z="-20.03472222222222" w="3.125" d="3.125" h="5.6" y="6" />
+<Wall color="#dae7f3" color.1="#000000" x="3.75" z="3.75" w="7.5" d="7.5" h="6" />
+<Wall color="#dae7f3" color.1="#000000" x="-3.75" z="-3.75" w="7.5" d="7.5" h="6" />
+<Wall color="#f3eace" color.1="#000000" x="3.75" z="-3.75" w="7.5" d="7.5" h="6" />
+<Wall color="#f3eace" color.1="#000000" x="-3.75" z="3.75" w="7.5" d="7.5" h="6" />
+<WallDoor midYaw="45" color="#818890" color.1="#000000" x="0" z="-2.5" w="1.25" d="1.25" h="0" y="6.05" />
+<WallDoor midYaw="45" color="#818890" color.1="#000000" x="0" z="2.5" w="1.25" d="1.25" h="0" y="6.05" />
+<WallDoor midYaw="45" color="#818890" color.1="#000000" x="2.5" z="0" w="1.25" d="1.25" h="0" y="6.05" />
+<WallDoor midYaw="45" color="#818890" color.1="#000000" x="-2.5" z="0" w="1.25" d="1.25" h="0" y="6.05" />
+<Wall color="#d9b341" color.1="#000000" x="-4.375" z="-4.375" w="1.25" d="1.25" h="0" y="6.05" />
+<Wall color="#d9b341" color.1="#000000" x="4.375" z="4.375" w="1.25" d="1.25" h="0" y="6.05" />
+<Wall color="#26334c" color.1="#000000" x="-4.375" z="4.375" w="1.25" d="1.25" h="0" y="6.05" />
+<Wall color="#26334c" color.1="#000000" x="4.375" z="-4.375" w="1.25" d="1.25" h="0" y="6.05" />
+<Wall color="#818890" color.1="#000000" x="0" z="-1.875" w="5" d="1.25" h="0" y="6.05" />
+<Wall color="#818890" color.1="#000000" x="0" z="1.875" w="5" d="1.25" h="0" y="6.05" />
+<Wall color="#818890" color.1="#000000" x="-1.875" z="0" w="1.25" d="2.5" h="0" y="6.05" />
+<Wall color="#818890" color.1="#000000" x="1.875" z="0" w="1.25" d="2.5" h="0" y="6.05" />
+<Teleporter shape="bspFloorFrame" scale="0.15" speed="0" group="@shortCut1" destGroup="@shortCut2" spin="false" color="#26334c" color.1="#000000" cx="-20.625" cz="20.625" angle="315" />
+<Teleporter shape="bspFloorFrame" scale="0.15" speed="0" group="@shortCut2" destGroup="@shortCut1" spin="false" color="#26334c" color.1="#000000" cx="20.625" cz="-20.625" angle="315" />
+<WallDoor midYaw="-45" color="#f3eace" color.1="#000000" x="-26.25" z="26.25" w="2.5" d="20" h="0" y="-0.05" />
+<WallDoor midYaw="-45" color="#f3eace" color.1="#000000" x="-40" z="40" w="2.5" d="20" h="0" y="-0.05" />
+<WallDoor midYaw="-45" color="#f3eace" color.1="#000000" x="26.25" z="-26.25" w="2.5" d="20" h="0" y="-0.05" />
+<WallDoor midYaw="-45" color="#f3eace" color.1="#000000" x="40" z="-40" w="2.5" d="20" h="0" y="-0.05" />
+<WallDoor midYaw="-45" color="#f3eace" color.1="#000000" x="50.625" z="-50.625" w="3.75" d="3.75" h="0" y="-0.05" />
+<WallDoor midYaw="-45" color="#f3eace" color.1="#000000" x="-50.625" z="50.625" w="3.75" d="3.75" h="0" y="-0.05" />
+<Wall color="#68748e" color.1="#000000" x="-15" z="37.5" w="5" d="10" h="2" />
+<Wall color="#68748e" color.1="#000000" x="-37.5" z="15" w="10" d="5" h="2" />
+<Wall color="#68748e" color.1="#000000" x="15" z="-37.5" w="5" d="10" h="2" />
+<Wall color="#68748e" color.1="#000000" x="40.625" z="-15" w="10" d="5" h="2" />
+<WallDoor midYaw="-45" color="#f3eace" color.1="#000000" x="48.125" z="-48.125" w="2.5" d="5" h="0" y="-0.05" />
+<Dome color="#bcc7d1" color.1="#000000" cx="45" cz="-45" r="2.5" angle="180" quarters="4" />
+<WallDoor midYaw="-45" color="#f3eace" color.1="#000000" x="-48.125" z="48.125" w="2.5" d="5" h="0" y="-0.05" />
+<Dome color="#bcc7d1" color.1="#000000" cx="-45" cz="45" r="2.5" angle="180" quarters="4" />
+<Wall color="#d9b341" color.1="#000000" x="25" z="25" w="1.25" d="1.25" h="0" y="18.05" />
+<WallDoor midYaw="45" color="#d9b341" color.1="#000000" x="25" z="25" w="1.25" d="1.25" h="0" y="18.05" />
+<Wall color="#d9b341" color.1="#000000" x="-25" z="-25" w="1.25" d="1.25" h="0" y="18.05" />
+<WallDoor midYaw="45" color="#d9b341" color.1="#000000" x="-25" z="-25" w="1.25" d="1.25" h="0" y="18.05" />
+<Solid y="6.05" shape="bspGroundStar" scale="0.1" color="#818890" color.1="#000000" cx="0" cz="0" angle="135" />
+
+<Teleporter y="-10" activeRange="150" deadRange="96" group="@bubble" destGroup="@recenter" shape="0" color="#fcf305" color.1="#000000" cx="0" cz="0" angle="45" />
+<Teleporter y="200" activeRange="2000" shape="0" win="1000" start="@winTeam" color="#fcf305" color.1="#000000" cx="0" cz="0" angle="45" />
+<Teleporter y="25" group="@recenter" mask="0" shape="0" color="#fcf305" color.1="#000000" cx="-25" cz="-5" angle="90" />
+<Teleporter y="25" group="@recenter" mask="0" shape="0" color="#fcf305" color.1="#000000" cx="25" cz="5" angle="270" />
+<Teleporter y="25" group="@recenter" mask="0" shape="0" color="#fcf305" color.1="#000000" cx="5" cz="25" angle="0" />
+<Teleporter y="25" group="@recenter" mask="0" shape="0" color="#fcf305" color.1="#000000" cx="-5" cz="-25" angle="180" />
+
+<Incarnator y="8" cx="-50" cz="0" angle="90" />
+<Incarnator y="8" cx="50" cz="0" angle="270" />
+<Incarnator y="8" cx="0" cz="50" angle="0" />
+<Incarnator y="8" cx="0" cz="-50" angle="180" />
+<Incarnator y="26" cx="-47.5" cz="-47.5" angle="135" />
+<Incarnator y="26" cx="47.5" cz="47.5" angle="315" />
+<Incarnator y="8" cx="-55" cz="55" angle="45" />
+<Incarnator y="8" cx="55" cz="-55" angle="225" />
+<Incarnator y="20" cx="-25" cz="-5" angle="90" stop="@start" />
+<Incarnator y="20" cx="25" cz="5" angle="270" stop="@start" />
+<Incarnator y="20" cx="5" cz="25" angle="0" stop="@start" />
+<Incarnator y="20" cx="-5" cz="-25" angle="180" stop="@start" />
+
+<Sound y="200" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="0" cz="0" angle="225" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="940" />
+<Goody y="7.5" shape="bspMushroom" speed="1" boosters="1" start="mShow" out="mTaken" color="#e3c97a" color.1="#35425b" cx="0" cz="0" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="470" />
+<Goody y="19.75" shape="bspAvaraA" speed="1" missiles="mLgMissile" grenades="mLgGrenade" start="mShow" out="mTaken" color="#48556e" color.1="#000000" cx="25" cz="25" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="470" />
+<Goody y="19.75" shape="bspAvaraA" speed="1" missiles="mLgMissile" grenades="mLgGrenade" start="mShow" out="mTaken" color="#48556e" color.1="#000000" cx="-25" cz="-25" angle="135" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody y="4" shape="bspGrenade" grenades="mLgGrenade" start="mShow" out="mTaken" color="#02abea" color.1="#000000" cx="45" cz="-45" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody y="4" shape="bspGrenade" grenades="mLgGrenade" start="mShow" out="mTaken" color="#02abea" color.1="#000000" cx="-45" cz="45" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody y="1.75" shape="bspMissile" missiles="mLgMissile" start="mShow" out="mTaken" color="#02abea" color.1="#000000" cx="27.5" cz="27.5" angle="315" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mTaken" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody y="1.75" shape="bspMissile" missiles="mLgMissile" start="mShow" out="mTaken" color="#02abea" color.1="#000000" cx="-27.5" cz="-27.5" angle="135" />
+<unique vars="mMisShow mMisTaken mGreShow mGreTaken" />
+<And in="@start" out="mGreTaken" />
+<Timer in="mGreTaken" out="mMisShow" wait="140" />
+<Timer in="mMisTaken" out="mGreShow" wait="140" />
+<Goody y="13.75" shape="bspMissile" missiles="mMdMissile" start="mMisShow" out="mMisTaken" color="#02abea" color.1="#000000" cx="-20" cz="20" angle="45" />
+<Goody y="13.75" shape="bspGrenade" grenades="mMdGrenade" start="mGreShow" out="mGreTaken" color="#02abea" color.1="#000000" cx="-20" cz="20" angle="45" />
+<unique vars="mMisShow mMisTaken mGreShow mGreTaken" />
+<And in="@start" out="mGreTaken" />
+<Timer in="mGreTaken" out="mMisShow" wait="140" />
+<Timer in="mMisTaken" out="mGreShow" wait="140" />
+<Goody y="13.75" shape="bspMissile" missiles="mMdMissile" start="mMisShow" out="mMisTaken" color="#02abea" color.1="#000000" cx="20" cz="-20" angle="225" />
+<Goody y="13.75" shape="bspGrenade" grenades="mMdGrenade" start="mGreShow" out="mGreTaken" color="#02abea" color.1="#000000" cx="20" cz="-20" angle="225" />
