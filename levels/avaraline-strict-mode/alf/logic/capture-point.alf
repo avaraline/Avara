@@ -49,14 +49,14 @@
 <Timer in="mBlackFieldSuspend" wait="2" out="mBlackFieldOn" />
 <Timer in="mWhiteFieldSuspend" wait="2" out="mWhiteFieldOn" />
 
-<Field deltaY="0" mask="T1" start="mGreenFieldOn" stop="mGreenFieldSuspend" enter="mGreenEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T2" start="mYellowFieldOn" stop="mYellowFieldSuspend" enter="mYellowEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T3" start="mRedFieldOn" stop="mRedFieldSuspend" enter="mRedEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T4" start="mPinkFieldOn" stop="mPinkFieldSuspend" enter="mPinkEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T5" start="mPurpleFieldOn" stop="mPurpleFieldSuspend" enter="mPurpleEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T6" start="mBlueFieldOn" stop="mBlueFieldSuspend" enter="mBlueEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T7" start="mBlackFieldOn" stop="mBlackFieldSuspend" enter="mBlackEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T8" start="mWhiteFieldOn" stop="mWhiteFieldSuspend" enter="mWhiteEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T1" watch="playerMask" start="mGreenFieldOn" stop="mGreenFieldSuspend" enter="mGreenEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T2" watch="playerMask" start="mYellowFieldOn" stop="mYellowFieldSuspend" enter="mYellowEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T3" watch="playerMask" start="mRedFieldOn" stop="mRedFieldSuspend" enter="mRedEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T4" watch="playerMask" start="mPinkFieldOn" stop="mPinkFieldSuspend" enter="mPinkEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T5" watch="playerMask" start="mPurpleFieldOn" stop="mPurpleFieldSuspend" enter="mPurpleEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T6" watch="playerMask" start="mBlueFieldOn" stop="mBlueFieldSuspend" enter="mBlueEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T7" watch="playerMask" start="mBlackFieldOn" stop="mBlackFieldSuspend" enter="mBlackEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T8" watch="playerMask" start="mWhiteFieldOn" stop="mWhiteFieldSuspend" enter="mWhiteEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And in="mGreenEnters" out="mGreenOpen" />
 <And in="mYellowEnters" out="mYellowOpen" />
