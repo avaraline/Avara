@@ -26,10 +26,8 @@
 <Timer in="pPulse" wait="1" out="pPulseEnd" />
 <Timer in="pPulse" wait="10" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mBlackClose" out.7="mWhiteClose" />
 
-<set wallYon="0.001" />
-
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
-<WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pGreenEnters" didOpen="mIncrement" close="mGreenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(1)" x="-7" y="-10" z="0" w="1" d="1" h="2" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="pGreenEnters" didOpen="mIncrement" close="mGreenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(1)" cx="-7" cz="0" y="-10" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
 <Counter in="mIncrement" n="20" out="mAt20" restart="false" />
 <Counter in="mIncrement" n="30" out="mAt30" restart="false" />
@@ -52,7 +50,7 @@
 <Text sound="kSnText" volume="kTextVolume" in="mGreenWins" showEveryone="true" text="Green team wins!" />
 
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
-<WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pYellowEnters" didOpen="mIncrement" close="mYellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(2)" x="-5" y="-10" z="0" w="1" d="1" h="2" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="pYellowEnters" didOpen="mIncrement" close="mYellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(2)" cx="-5" cz="0" y="-10" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
 <Counter in="mIncrement" n="20" out="mAt20" restart="false" />
 <Counter in="mIncrement" n="30" out="mAt30" restart="false" />
@@ -75,7 +73,7 @@
 <Text sound="kSnText" volume="kTextVolume" in="mYellowWins" showEveryone="true" text="Yellow team wins!" />
 
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
-<WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pRedEnters" didOpen="mIncrement" close="mRedClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(3)" x="-3" y="-10" z="0" w="1" d="1" h="2" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="pRedEnters" didOpen="mIncrement" close="mRedClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(3)" cx="-3" cz="0" y="-10" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
 <Counter in="mIncrement" n="20" out="mAt20" restart="false" />
 <Counter in="mIncrement" n="30" out="mAt30" restart="false" />
@@ -98,7 +96,7 @@
 <Text sound="kSnText" volume="kTextVolume" in="mRedWins" showEveryone="true" text="Red team wins!" />
 
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
-<WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pPinkEnters" didOpen="mIncrement" close="mPinkClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(4)" x="-1" y="-10" z="0" w="1" d="1" h="2" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="pPinkEnters" didOpen="mIncrement" close="mPinkClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(4)" cx="-1" cz="0" y="-10" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
 <Counter in="mIncrement" n="20" out="mAt20" restart="false" />
 <Counter in="mIncrement" n="30" out="mAt30" restart="false" />
@@ -121,7 +119,7 @@
 <Text sound="kSnText" volume="kTextVolume" in="mPinkWins" showEveryone="true" text="Pink team wins!" />
 
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
-<WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pPurpleEnters" didOpen="mIncrement" close="mPurpleClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(5)" x="1" y="-10" z="0" w="1" d="1" h="2" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="pPurpleEnters" didOpen="mIncrement" close="mPurpleClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(5)" cx="1" cz="0" y="-10" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
 <Counter in="mIncrement" n="20" out="mAt20" restart="false" />
 <Counter in="mIncrement" n="30" out="mAt30" restart="false" />
@@ -144,7 +142,7 @@
 <Text sound="kSnText" volume="kTextVolume" in="mPurpleWins" showEveryone="true" text="Purple team wins!" />
 
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
-<WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pBlueEnters" didOpen="mIncrement" close="mBlueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(6)" x="3" y="-10" z="0" w="1" d="1" h="2" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="pBlueEnters" didOpen="mIncrement" close="mBlueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(6)" cx="3" cz="0" y="-10" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
 <Counter in="mIncrement" n="20" out="mAt20" restart="false" />
 <Counter in="mIncrement" n="30" out="mAt30" restart="false" />
@@ -167,7 +165,7 @@
 <Text sound="kSnText" volume="kTextVolume" in="mBlueWins" showEveryone="true" text="Blue team wins!" />
 
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
-<WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pBlackEnters" didOpen="mIncrement" close="mBlackClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(7)" x="5" y="-10" z="0" w="1" d="1" h="2" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="pBlackEnters" didOpen="mIncrement" close="mBlackClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(7)" cx="5" cz="0" y="-10" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
 <Counter in="mIncrement" n="20" out="mAt20" restart="false" />
 <Counter in="mIncrement" n="30" out="mAt30" restart="false" />
@@ -190,7 +188,7 @@
 <Text sound="kSnText" volume="kTextVolume" in="mBlackWins" showEveryone="true" text="Black team wins!" />
 
 <unique vars="mIncrement mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
-<WallDoor deltaY="3" openSpeed="20" closeSpeed="100" open="pWhiteEnters" didOpen="mIncrement" close="mWhiteClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(8)" x="7" y="-10" z="0" w="1" d="1" h="2" />
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="pWhiteEnters" didOpen="mIncrement" close="mWhiteClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(8)" cx="7" cz="0" y="-10" />
 <Counter in="mIncrement" n="10" out="mAt10" restart="false" />
 <Counter in="mIncrement" n="20" out="mAt20" restart="false" />
 <Counter in="mIncrement" n="30" out="mAt30" restart="false" />
@@ -211,8 +209,6 @@
 <Text sound="kSnText" volume="kTextVolume" in="mAt80" showEveryone="true" text="White team has 80 seconds!" />
 <Text sound="kSnText" volume="kTextVolume" in="mAt90" showEveryone="true" text="White team has only 10 seconds to go!" />
 <Text sound="kSnText" volume="kTextVolume" in="mWhiteWins" showEveryone="true" text="White team wins!" />
-
-<set wallYon="defaultYon" />
 
 <!-- Hill ownership must be exclusive! -->
 <Timer in="pGreenEnters" wait="2" out.0="mYellowClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />

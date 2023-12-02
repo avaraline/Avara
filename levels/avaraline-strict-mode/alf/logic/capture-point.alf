@@ -1,0 +1,307 @@
+<!-- @param number pCaptureX the x-coordinate for the capture point collision box -->
+<!-- @param number pCaptureY the y-coordinate for the capture point collision box -->
+<!-- @param number pCaptureZ the z-coordinate for the capture point collision box -->
+<!-- @param number pCaptureW the width of the capture point collision box -->
+<!-- @param number pCaptureD the depth of the capture point collision box -->
+<!-- @param number pCaptureH the height of the capture point collision box -->
+<!-- @param number pCaptureVizX the x-coordinate for the capture point visual indicator -->
+<!-- @param number pCaptureVizY the y-coordinate for the capture point visual indicator -->
+<!-- @param number pCaptureVizZ the z-coordinate for the capture point visual indicator -->
+<!-- @param int pCaptureVizShape the bsp resource ID for the capture point visual indicator -->
+<!-- @param number pCaptureVizScale the scale for the capture point visual indicator -->
+<!-- @param number pCaptureVizSpeed the spin speed for the capture point visual indicator -->
+<!-- @param int pGreenPoint triggering event for adding a point to the green team -->
+<!-- @param int pYellowPoint triggering event for adding a point to the yellow team -->
+<!-- @param int pRedPoint triggering event for adding a point to the red team -->
+<!-- @param int pPinkPoint triggering event for adding a point to the pink team -->
+<!-- @param int pPurplePoint triggering event for adding a point to the purple team -->
+<!-- @param int pBluePoint triggering event for adding a point to the blue team -->
+<!-- @param int pBlackPoint triggering event for adding a point to the black team -->
+<!-- @param int pWhitePoint triggering event for adding a point to the white team -->
+<!-- @param int pCaptureDoorZOffset offset for the z-coordinate for this capture point's door (handled automatically) -->
+
+<unique vars="mGreenFieldOn mYellowFieldOn mRedFieldOn mPinkFieldOn mPurpleFieldOn mBlueFieldOn mBlackFieldOn mWhiteFieldOn" />
+<unique vars="mGreenFieldSuspend mYellowFieldSuspend mRedFieldSuspend mPinkFieldSuspend mPurpleFieldSuspend mBlueFieldSuspend mBlackFieldSuspend mWhiteFieldSuspend" />
+<unique vars="mGreenEnters mYellowEnters mRedEnters mPinkEnters mPurpleEnters mBlueEnters mBlackEnters mWhiteEnters" />
+<unique vars="mGreenOpen mYellowOpen mRedOpen mPinkOpen mPurpleOpen mBlueOpen mBlackOpen mWhiteOpen" />
+<unique vars="mGreenDidOpen mYellowDidOpen mRedDidOpen mPinkDidOpen mPurpleDidOpen mBlueDidOpen mBlackDidOpen mWhiteDidOpen" />
+<unique vars="mGreenClose mYellowClose mRedClose mPinkClose mPurpleClose mBlueClose mBlackClose mWhiteClose" />
+<unique vars="mNeutralOff mGreenOff mYellowOff mRedOff mPinkOff mPurpleOff mBlueOff mBlackOff mWhiteOff" />
+
+<And
+  in="@start"
+  out.0="mGreenFieldOn"
+  out.1="mYellowFieldOn"
+  out.2="mRedFieldOn"
+  out.3="mPinkFieldOn"
+  out.4="mPurpleFieldOn"
+  out.5="mBlueFieldOn"
+  out.6="mBlackFieldOn"
+  out.7="mWhiteFieldOn"
+/>
+
+<Timer in="mGreenFieldSuspend" wait="2" out="mGreenFieldOn" />
+<Timer in="mYellowFieldSuspend" wait="2" out="mYellowFieldOn" />
+<Timer in="mRedFieldSuspend" wait="2" out="mRedFieldOn" />
+<Timer in="mPinkFieldSuspend" wait="2" out="mPinkFieldOn" />
+<Timer in="mPurpleFieldSuspend" wait="2" out="mPurpleFieldOn" />
+<Timer in="mBlueFieldSuspend" wait="2" out="mBlueFieldOn" />
+<Timer in="mBlackFieldSuspend" wait="2" out="mBlackFieldOn" />
+<Timer in="mWhiteFieldSuspend" wait="2" out="mWhiteFieldOn" />
+
+<Field deltaY="0" mask="T1" start="mGreenFieldOn" stop="mGreenFieldSuspend" enter="mGreenEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T2" start="mYellowFieldOn" stop="mYellowFieldSuspend" enter="mYellowEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T3" start="mRedFieldOn" stop="mRedFieldSuspend" enter="mRedEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T4" start="mPinkFieldOn" stop="mPinkFieldSuspend" enter="mPinkEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T5" start="mPurpleFieldOn" stop="mPurpleFieldSuspend" enter="mPurpleEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T6" start="mBlueFieldOn" stop="mBlueFieldSuspend" enter="mBlueEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T7" start="mBlackFieldOn" stop="mBlackFieldSuspend" enter="mBlackEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T8" start="mWhiteFieldOn" stop="mWhiteFieldSuspend" enter="mWhiteEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+
+<And in="mGreenEnters" out="mGreenOpen" />
+<And in="mYellowEnters" out="mYellowOpen" />
+<And in="mRedEnters" out="mRedOpen" />
+<And in="mPinkEnters" out="mPinkOpen" />
+<And in="mPurpleEnters" out="mPurpleOpen" />
+<And in="mBlueEnters" out="mBlueOpen" />
+<And in="mBlackEnters" out="mBlackOpen" />
+<And in="mWhiteEnters" out="mWhiteOpen" />
+
+<And
+  in="mGreenEnters"
+  out.0="mNeutralOff"
+  out.1="mYellowOff"
+  out.2="mRedOff"
+  out.3="mPinkOff"
+  out.4="mPurpleOff"
+  out.5="mBlueOff"
+  out.6="mBlackOff"
+  out.7="mWhiteOff"
+/>
+<And
+  in="mYellowEnters"
+  out.0="mNeutralOff"
+  out.1="mGreenOff"
+  out.2="mRedOff"
+  out.3="mPinkOff"
+  out.4="mPurpleOff"
+  out.5="mBlueOff"
+  out.6="mBlackOff"
+  out.7="mWhiteOff"
+/>
+<And
+  in="mRedEnters"
+  out.0="mNeutralOff"
+  out.1="mGreenOff"
+  out.2="mYellowOff"
+  out.3="mPinkOff"
+  out.4="mPurpleOff"
+  out.5="mBlueOff"
+  out.6="mBlackOff"
+  out.7="mWhiteOff"
+/>
+<And
+  in="mPinkEnters"
+  out.0="mNeutralOff"
+  out.1="mGreenOff"
+  out.2="mYellowOff"
+  out.3="mRedOff"
+  out.4="mPurpleOff"
+  out.5="mBlueOff"
+  out.6="mBlackOff"
+  out.7="mWhiteOff"
+/>
+<And
+  in="mPurpleEnters"
+  out.0="mNeutralOff"
+  out.1="mGreenOff"
+  out.2="mYellowOff"
+  out.3="mRedOff"
+  out.4="mPinkOff"
+  out.5="mBlueOff"
+  out.6="mBlackOff"
+  out.7="mWhiteOff"
+/>
+<And
+  in="mBlueEnters"
+  out.0="mNeutralOff"
+  out.1="mGreenOff"
+  out.2="mYellowOff"
+  out.3="mRedOff"
+  out.4="mPinkOff"
+  out.5="mPurpleOff"
+  out.6="mBlackOff"
+  out.7="mWhiteOff"
+/>
+<And
+  in="mBlackEnters"
+  out.0="mNeutralOff"
+  out.1="mGreenOff"
+  out.2="mYellowOff"
+  out.3="mRedOff"
+  out.4="mPinkOff"
+  out.5="mPurpleOff"
+  out.6="mBlueOff"
+  out.7="mWhiteOff"
+/>
+<And
+  in="mWhiteEnters"
+  out.0="mNeutralOff"
+  out.1="mGreenOff"
+  out.2="mYellowOff"
+  out.3="mRedOff"
+  out.4="mPinkOff"
+  out.5="mPurpleOff"
+  out.6="mBlueOff"
+  out.7="mBlackOff"
+/>
+
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="@start" stop="mNeutralOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="rgba(80, 80, 80, 0.15)" />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mGreenEnters" stop="mGreenOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(1)" status="0"  />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mYellowEnters" stop="mYellowOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(2)" status="0"  />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mRedEnters" stop="mRedOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(3)" status="0"  />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mPinkEnters" stop="mPinkOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(4)" status="0"  />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mPurpleEnters" stop="mPurpleOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(5)" status="0"  />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mBlueEnters" stop="mBlueOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(6)" status="0"  />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mBlackEnters" stop="mBlackOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(7)" status="0"  />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mWhiteEnters" stop="mWhiteOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(8)" status="0"  />
+
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mGreenOpen" didOpen="mGreenDidOpen" close="mGreenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(1)" cx="-7" cz="pCaptureDoorZOffset" y="-10" />
+<And
+  in="mGreenDidOpen"
+  out.0="pGreenPoint"
+  out.1="mGreenClose"
+  out.2="mGreenFieldSuspend"
+  out.3="mYellowFieldSuspend"
+  out.4="mRedFieldSuspend"
+  out.5="mPinkFieldSuspend"
+  out.6="mPurpleFieldSuspend"
+  out.7="mBlueFieldSuspend"
+  out.8="mBlackFieldSuspend"
+  out.9="mWhiteFieldSuspend"
+/>
+<Timer in="mGreenDidOpen" wait="1" out="mGreenOpen" />
+
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mYellowOpen" didOpen="mYellowDidOpen" close="mYellowClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(2)" cx="-5" cz="pCaptureDoorZOffset" y="-10" />
+<And
+  in="mYellowDidOpen"
+  out.0="pYellowPoint"
+  out.1="mYellowClose"
+  out.2="mGreenFieldSuspend"
+  out.3="mYellowFieldSuspend"
+  out.4="mRedFieldSuspend"
+  out.5="mPinkFieldSuspend"
+  out.6="mPurpleFieldSuspend"
+  out.7="mBlueFieldSuspend"
+  out.8="mBlackFieldSuspend"
+  out.9="mWhiteFieldSuspend"
+/>
+<Timer in="mYellowDidOpen" wait="1" out="mYellowOpen" />
+
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mRedOpen" didOpen="mRedDidOpen" close="mRedClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(3)" cx="-3" cz="pCaptureDoorZOffset" y="-10" />
+<And
+  in="mRedDidOpen"
+  out.0="pRedPoint"
+  out.1="mRedClose"
+  out.2="mGreenFieldSuspend"
+  out.3="mYellowFieldSuspend"
+  out.4="mRedFieldSuspend"
+  out.5="mPinkFieldSuspend"
+  out.6="mPurpleFieldSuspend"
+  out.7="mBlueFieldSuspend"
+  out.8="mBlackFieldSuspend"
+  out.9="mWhiteFieldSuspend"
+/>
+<Timer in="mRedDidOpen" wait="1" out="mRedOpen" />
+
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mPinkOpen" didOpen="mPinkDidOpen" close="mPinkClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(4)" cx="-1" cz="pCaptureDoorZOffset" y="-10" />
+<And
+  in="mPinkDidOpen"
+  out.0="pPinkPoint"
+  out.1="mPinkClose"
+  out.2="mGreenFieldSuspend"
+  out.3="mYellowFieldSuspend"
+  out.4="mRedFieldSuspend"
+  out.5="mPinkFieldSuspend"
+  out.6="mPurpleFieldSuspend"
+  out.7="mBlueFieldSuspend"
+  out.8="mBlackFieldSuspend"
+  out.9="mWhiteFieldSuspend"
+/>
+<Timer in="mPinkDidOpen" wait="1" out="mPinkOpen" />
+
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mPurpleOpen" didOpen="mPurpleDidOpen" close="mPurpleClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(5)" cx="1" cz="pCaptureDoorZOffset" y="-10" />
+<And
+  in="mPurpleDidOpen"
+  out.0="pPurplePoint"
+  out.1="mPurpleClose"
+  out.2="mGreenFieldSuspend"
+  out.3="mYellowFieldSuspend"
+  out.4="mRedFieldSuspend"
+  out.5="mPinkFieldSuspend"
+  out.6="mPurpleFieldSuspend"
+  out.7="mBlueFieldSuspend"
+  out.8="mBlackFieldSuspend"
+  out.9="mWhiteFieldSuspend"
+/>
+<Timer in="mPurpleDidOpen" wait="1" out="mPurpleOpen" />
+
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mBlueOpen" didOpen="mBlueDidOpen" close="mBlueClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(6)" cx="3" cz="pCaptureDoorZOffset" y="-10" />
+<And
+  in="mBlueDidOpen"
+  out.0="pBluePoint"
+  out.1="mBlueClose"
+  out.2="mGreenFieldSuspend"
+  out.3="mYellowFieldSuspend"
+  out.4="mRedFieldSuspend"
+  out.5="mPinkFieldSuspend"
+  out.6="mPurpleFieldSuspend"
+  out.7="mBlueFieldSuspend"
+  out.8="mBlackFieldSuspend"
+  out.9="mWhiteFieldSuspend"
+/>
+<Timer in="mBlueDidOpen" wait="1" out="mBlueOpen" />
+
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mBlackOpen" didOpen="mBlackDidOpen" close="mBlackClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(7)" cx="5" cz="pCaptureDoorZOffset" y="-10" />
+<And
+  in="mBlackDidOpen"
+  out.0="pBlackPoint"
+  out.1="mBlackClose"
+  out.2="mGreenFieldSuspend"
+  out.3="mYellowFieldSuspend"
+  out.4="mRedFieldSuspend"
+  out.5="mPinkFieldSuspend"
+  out.6="mPurpleFieldSuspend"
+  out.7="mBlueFieldSuspend"
+  out.8="mBlackFieldSuspend"
+  out.9="mWhiteFieldSuspend"
+/>
+<Timer in="mBlackDidOpen" wait="1" out="mBlackOpen" />
+
+<Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mWhiteOpen" didOpen="mWhiteDidOpen" close="mWhiteClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(8)" cx="7" cz="pCaptureDoorZOffset" y="-10" />
+<And
+  in="mWhiteDidOpen"
+  out.0="pWhitePoint"
+  out.1="mWhiteClose"
+  out.2="mGreenFieldSuspend"
+  out.3="mYellowFieldSuspend"
+  out.4="mRedFieldSuspend"
+  out.5="mPinkFieldSuspend"
+  out.6="mPurpleFieldSuspend"
+  out.7="mBlueFieldSuspend"
+  out.8="mBlackFieldSuspend"
+  out.9="mWhiteFieldSuspend"
+/>
+<Timer in="mWhiteDidOpen" wait="1" out="mWhiteOpen" />
+
+<!-- When a door "loop" is started for one team, ensure that the other loops are killed. -->
+<Timer in="mGreenOpen" wait="2" out.0="mYellowClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mYellowOpen" wait="2" out.0="mGreenClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mRedOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mPinkOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mPurpleOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mBlueOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mBlackOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mWhiteClose" />
+<Timer in="mWhiteOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mBlackClose" />
+
+<set pCaptureDoorZOffset="pCaptureDoorZOffset + 2" />
