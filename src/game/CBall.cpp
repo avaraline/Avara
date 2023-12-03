@@ -494,7 +494,7 @@ void CBall::FrameAction() {
         switch (actionCommand) {
             case kDoSelfDestruct:
                 WasDestroyed();
-                SecondaryDamage(teamColor, -1);
+                SecondaryDamage(teamColor, -1, ksiObjectCollision);
                 return; //	*** return after dispose! ***
             case kDoRelease:
                 looseFrame = itsGame->FramesFromNow(100);

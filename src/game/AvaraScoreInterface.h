@@ -50,6 +50,7 @@ typedef enum {
     ksiGrenadeHit,
     ksiMissileHit,
     ksiMineBlast,
+    ksiParasiteBlast,
     ksiSelfDestructBlast,
     ksiObjectCollision, //	Running into a moving door for instance (not supported yet)
     ksiSecondaryDamage,

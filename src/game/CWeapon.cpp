@@ -134,13 +134,19 @@ void CWeapon::ShowTarget() {}
 
 void CWeapon::Explode() {
     Vector temp = {0, FIX1, 0, 0};
+    ScoreInterfaceReasons source = ksiNoReason;
 
     WasDestroyed();
 
     itsDepot->FireSlivers(
         15, location, temp, partList[0]->bigRadius >> 2, blastPower << 1, 160, 20, 0, itsDepot->smartSight);
 
-    SecondaryDamage(teamColor, ownerSlot);
+    if (weaponKind == 0) {
+        source = ksiGrenadeHit;
+    } else if (weaponKind == 1) {
+        source = ksiMissileHit;
+    }
+    SecondaryDamage(teamColor, ownerSlot, source);
 }
 
 void CWeapon::PostMortemBlast(short scoreTeam, short scoreColor, Boolean doDispose) {
