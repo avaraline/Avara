@@ -58,15 +58,6 @@
 <Field deltaY="0" mask="T7" watch="playerMask" start="mBlackFieldOn" stop="mBlackFieldSuspend" enter="mBlackEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 <Field deltaY="0" mask="T8" watch="playerMask" start="mWhiteFieldOn" stop="mWhiteFieldSuspend" enter="mWhiteEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
-<And in="mGreenEnters" out="mGreenOpen" />
-<And in="mYellowEnters" out="mYellowOpen" />
-<And in="mRedEnters" out="mRedOpen" />
-<And in="mPinkEnters" out="mPinkOpen" />
-<And in="mPurpleEnters" out="mPurpleOpen" />
-<And in="mBlueEnters" out="mBlueOpen" />
-<And in="mBlackEnters" out="mBlackOpen" />
-<And in="mWhiteEnters" out="mWhiteOpen" />
-
 <And
   in="mGreenEnters"
   out.0="mNeutralOff"
@@ -77,6 +68,7 @@
   out.5="mBlueOff"
   out.6="mBlackOff"
   out.7="mWhiteOff"
+  out.8="mGreenOpen"
 />
 <And
   in="mYellowEnters"
@@ -88,6 +80,7 @@
   out.5="mBlueOff"
   out.6="mBlackOff"
   out.7="mWhiteOff"
+  out.8="mYellowOpen"
 />
 <And
   in="mRedEnters"
@@ -99,6 +92,7 @@
   out.5="mBlueOff"
   out.6="mBlackOff"
   out.7="mWhiteOff"
+  out.8="mRedOpen"
 />
 <And
   in="mPinkEnters"
@@ -110,6 +104,7 @@
   out.5="mBlueOff"
   out.6="mBlackOff"
   out.7="mWhiteOff"
+  out.8="mPinkOpen"
 />
 <And
   in="mPurpleEnters"
@@ -121,6 +116,7 @@
   out.5="mBlueOff"
   out.6="mBlackOff"
   out.7="mWhiteOff"
+  out.8="mPurpleOpen"
 />
 <And
   in="mBlueEnters"
@@ -132,6 +128,7 @@
   out.5="mPurpleOff"
   out.6="mBlackOff"
   out.7="mWhiteOff"
+  out.8="mBlueOpen"
 />
 <And
   in="mBlackEnters"
@@ -143,6 +140,7 @@
   out.5="mPurpleOff"
   out.6="mBlueOff"
   out.7="mWhiteOff"
+  out.8="mBlackOpen"
 />
 <And
   in="mWhiteEnters"
@@ -154,6 +152,7 @@
   out.5="mPurpleOff"
   out.6="mBlueOff"
   out.7="mBlackOff"
+  out.8="mWhiteOpen"
 />
 
 <Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="@start" stop="mNeutralOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="rgba(80, 80, 80, 0.15)" />
