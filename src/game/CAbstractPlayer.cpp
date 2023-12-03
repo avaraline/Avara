@@ -1308,7 +1308,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
                 WasDestroyed();
                 itsGame->scoreReason = ksiSelfDestructBlast;
-                SecondaryDamage(teamColor, GetActorScoringId());
+                SecondaryDamage(teamColor, GetActorScoringId(), ksiSelfDestructBlast);
                 didSelfDestruct = true;
             }
         }

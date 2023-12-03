@@ -105,7 +105,7 @@ void CDoorActor::TouchDamage() {
             }
         }
 
-        SecondaryDamage(teamColor, -1);
+        SecondaryDamage(teamColor, -1, ksiObjectCollision);
     }
 }
 

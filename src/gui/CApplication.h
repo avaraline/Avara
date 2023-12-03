@@ -44,7 +44,8 @@ public:
             return static_cast<T>(_prefs.at(name));
         }
         catch (json::type_error &ex) {
-            // Type from json didn't match requested type so use hardcoded default instead
+            // This error is when the prefs file was changed manually and the value has the wrong type
+            // Type from user prefs json file didn't match requested type so use hardcoded default instead
             SDL_Log("Type Error trying to read '%s'. Using default", name.c_str());
             return static_cast<T>(_defaultPrefs.at(name));
         }
@@ -63,7 +64,7 @@ public:
         PrefChanged(name);
     }
 
-    void Update(const std::string name, std::string &value);
+    bool Update(const std::string name, std::string &value);
     void SavePrefs();
 
 protected:

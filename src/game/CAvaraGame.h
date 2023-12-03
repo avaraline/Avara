@@ -187,7 +187,6 @@ public:
     Boolean keysFromStdin;
     Boolean keysToStdout;
 
-    Boolean showClassicHUD;
     Boolean showNewHUD;
 
     // Moved here from GameLoop so it can run on the normal event loop

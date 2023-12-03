@@ -181,7 +181,7 @@ void CMineActor::FrameAction() {
         if (activated) {
             WasDestroyed();
             itsGame->scoreReason = ksiMineBlast;
-            SecondaryDamage(teamColor, -1);
+            SecondaryDamage(teamColor, -1, ksiMineBlast);
             return;
         } else {
             lookNextTime = phase + lookTime;

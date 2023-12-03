@@ -101,15 +101,23 @@ std::vector<std::string> CApplication::Matches(const std::string matchStr) {
     return results;
 }
 
-void CApplication::Update(const std::string name, std::string &value) {
+bool CApplication::Update(const std::string name, std::string &value) {
     // construct json from the inputs and update the internal JSON object
     if (_prefs.at(name).is_string()) {
         // wrap string values in quotes
         value = '"' + value + '"';
     }
-    json updatePref = json::parse("{ \"" + name + "\": " + value + "}");
-    _prefs.update(updatePref);
-    WritePrefs(_prefs);
+    try {
+        json updatePref = json::parse("{ \"" + name + "\": " + value + "}");
+        _prefs.update(updatePref);
+        WritePrefs(_prefs);
+    }
+    catch (json::parse_error &ex) {
+        // User typed in the command to change a pref. The value type did not match for the given pref
+        SDL_Log("User input value '%s' did not parse to the correct type.", name.c_str());
+        return false;  // Did not update pref
+    }
+    return true;  // Successfully updated pref
 }
 
 void CApplication::SavePrefs() {

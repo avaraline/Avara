@@ -82,7 +82,7 @@ void CAbstractMissile::FrameAction() {
             }
             anActor = hitRec.closestHit->theOwner;
             anActor->WasHit(&hitRec, energy);
-            SecondaryDamage(hitRec.team, hitRec.playerId);
+            SecondaryDamage(hitRec.team, hitRec.playerId, ksiMissileHit);
         }
 
         Deactivate();

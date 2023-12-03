@@ -68,7 +68,6 @@ using json = nlohmann::json;
 #define kHUDShowScore "hudShowScore"
 #define kHUDShowTime "hudShowTime"
 #define kHUDShowKillFeed "hudShowKillFeed"
-#define kShowClassicHUD "showClassicHUD"
 #define kShowNewHUD "showNewHUD"
 
 // Network & Tracker
@@ -168,7 +167,6 @@ static json defaultPrefs = {
     {kHUDShowScore, true},
     {kHUDShowTime, true},
     {kHUDShowKillFeed, true},
-    {kShowClassicHUD, false},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},
