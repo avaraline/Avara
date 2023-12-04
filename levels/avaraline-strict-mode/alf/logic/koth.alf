@@ -8,13 +8,13 @@
 <unique vars="pPulse pPulseEnd" />
 <unique vars="pGreenEnters pYellowEnters pRedEnters pPinkEnters pPurpleEnters pBlueEnters pBlackEnters pWhiteEnters" />
 
-<Field deltaY="0" mask="T1" stop="pPulseEnd" start="pPulse" enter="pGreenEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
-<Field deltaY="0" mask="T2" stop="pPulseEnd" start="pPulse" enter="pYellowEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
-<Field deltaY="0" mask="T3" stop="pPulseEnd" start="pPulse" enter="pRedEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
-<Field deltaY="0" mask="T4" stop="pPulseEnd" start="pPulse" enter="pPinkEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
-<Field deltaY="0" mask="T5" stop="pPulseEnd" start="pPulse" enter="pPurpleEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
-<Field deltaY="0" mask="T6" stop="pPulseEnd" start="pPulse" enter="pBlueEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
-<Field deltaY="0" mask="T7" stop="pPulseEnd" start="pPulse" enter="pBlackEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
-<Field deltaY="0" mask="T8" stop="pPulseEnd" start="pPulse" enter="pWhiteEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
+<Field deltaY="0" mask="T1" watch="playerMask" stop="pPulseEnd" start="pPulse" enter="pGreenEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
+<Field deltaY="0" mask="T2" watch="playerMask" stop="pPulseEnd" start="pPulse" enter="pYellowEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
+<Field deltaY="0" mask="T3" watch="playerMask" stop="pPulseEnd" start="pPulse" enter="pRedEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
+<Field deltaY="0" mask="T4" watch="playerMask" stop="pPulseEnd" start="pPulse" enter="pPinkEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
+<Field deltaY="0" mask="T5" watch="playerMask" stop="pPulseEnd" start="pPulse" enter="pPurpleEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
+<Field deltaY="0" mask="T6" watch="playerMask" stop="pPulseEnd" start="pPulse" enter="pBlueEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
+<Field deltaY="0" mask="T7" watch="playerMask" stop="pPulseEnd" start="pPulse" enter="pBlackEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
+<Field deltaY="0" mask="T8" watch="playerMask" stop="pPulseEnd" start="pPulse" enter="pWhiteEnters" x="pHillX" y="pHillY" z="pHillZ" w="pHillW" d="pHillD" h="pHillH" />
 
 <include alf="logic/_koth-rules.alf" />
