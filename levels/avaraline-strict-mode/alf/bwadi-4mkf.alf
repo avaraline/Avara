@@ -1,7 +1,7 @@
 <map>
+  <set pCenterGoodyRespawn="350" />
   <include alf="layout/bwadi.alf" />
 
   <set pGameLength="3750" />
   <include alf="logic/killfest.alf" />
 </map>
-
