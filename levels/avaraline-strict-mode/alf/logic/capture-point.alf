@@ -23,6 +23,7 @@
 <unique vars="mGreenFieldOn mYellowFieldOn mRedFieldOn mPinkFieldOn mPurpleFieldOn mBlueFieldOn mBlackFieldOn mWhiteFieldOn" />
 <unique vars="mGreenFieldSuspend mYellowFieldSuspend mRedFieldSuspend mPinkFieldSuspend mPurpleFieldSuspend mBlueFieldSuspend mBlackFieldSuspend mWhiteFieldSuspend" />
 <unique vars="mGreenEnters mYellowEnters mRedEnters mPinkEnters mPurpleEnters mBlueEnters mBlackEnters mWhiteEnters" />
+<unique vars="mGreenLeaves mYellowLeaves mRedLeaves mPinkLeaves mPurpleLeaves mBlueLeaves mBlackLeaves mWhiteLeaves" />
 <unique vars="mGreenOpen mYellowOpen mRedOpen mPinkOpen mPurpleOpen mBlueOpen mBlackOpen mWhiteOpen" />
 <unique vars="mGreenDidOpen mYellowDidOpen mRedDidOpen mPinkDidOpen mPurpleDidOpen mBlueDidOpen mBlackDidOpen mWhiteDidOpen" />
 <unique vars="mGreenClose mYellowClose mRedClose mPinkClose mPurpleClose mBlueClose mBlackClose mWhiteClose" />
@@ -40,23 +41,124 @@
   out.7="mWhiteFieldOn"
 />
 
-<Timer in="mGreenFieldSuspend" wait="2" out="mGreenFieldOn" />
-<Timer in="mYellowFieldSuspend" wait="2" out="mYellowFieldOn" />
-<Timer in="mRedFieldSuspend" wait="2" out="mRedFieldOn" />
-<Timer in="mPinkFieldSuspend" wait="2" out="mPinkFieldOn" />
-<Timer in="mPurpleFieldSuspend" wait="2" out="mPurpleFieldOn" />
-<Timer in="mBlueFieldSuspend" wait="2" out="mBlueFieldOn" />
-<Timer in="mBlackFieldSuspend" wait="2" out="mBlackFieldOn" />
-<Timer in="mWhiteFieldSuspend" wait="2" out="mWhiteFieldOn" />
+<Base
+  cx="0"
+  y="-10"
+  cz="0"
+  in.0="mGreenLeaves"
+  in.1="mYellowLeaves"
+  in.2="mRedLeaves"
+  in.3="mPinkLeaves"
+  in.4="mPurpleLeaves"
+  in.5="mBlueLeaves"
+  in.6="mBlackLeaves"
+  in.7="mWhiteLeaves"
+  out.0="mGreenFieldOn"
+  out.1="mYellowFieldOn"
+  out.2="mRedFieldOn"
+  out.3="mPinkFieldOn"
+  out.4="mPurpleFieldOn"
+  out.5="mBlueFieldOn"
+  out.6="mBlackFieldOn"
+  out.7="mWhiteFieldOn"
+/>
 
-<Field deltaY="0" mask="T1" watch="playerMask" start="mGreenFieldOn" stop="mGreenFieldSuspend" enter="mGreenEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T2" watch="playerMask" start="mYellowFieldOn" stop="mYellowFieldSuspend" enter="mYellowEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T3" watch="playerMask" start="mRedFieldOn" stop="mRedFieldSuspend" enter="mRedEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T4" watch="playerMask" start="mPinkFieldOn" stop="mPinkFieldSuspend" enter="mPinkEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T5" watch="playerMask" start="mPurpleFieldOn" stop="mPurpleFieldSuspend" enter="mPurpleEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T6" watch="playerMask" start="mBlueFieldOn" stop="mBlueFieldSuspend" enter="mBlueEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T7" watch="playerMask" start="mBlackFieldOn" stop="mBlackFieldSuspend" enter="mBlackEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T8" watch="playerMask" start="mWhiteFieldOn" stop="mWhiteFieldSuspend" enter="mWhiteEnters" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<And
+  in="mGreenEnters"
+  out.1="mYellowFieldSuspend"
+  out.2="mRedFieldSuspend"
+  out.3="mPinkFieldSuspend"
+  out.4="mPurpleFieldSuspend"
+  out.5="mBlueFieldSuspend"
+  out.6="mBlackFieldSuspend"
+  out.7="mWhiteFieldSuspend"
+/>
+
+<And
+  in="mYellowEnters"
+  out.1="mGreenFieldSuspend"
+  out.2="mRedFieldSuspend"
+  out.3="mPinkFieldSuspend"
+  out.4="mPurpleFieldSuspend"
+  out.5="mBlueFieldSuspend"
+  out.6="mBlackFieldSuspend"
+  out.7="mWhiteFieldSuspend"
+/>
+
+<And
+  in="mRedEnters"
+  out.1="mGreenFieldSuspend"
+  out.2="mYellowFieldSuspend"
+  out.3="mPinkFieldSuspend"
+  out.4="mPurpleFieldSuspend"
+  out.5="mBlueFieldSuspend"
+  out.6="mBlackFieldSuspend"
+  out.7="mWhiteFieldSuspend"
+/>
+
+<And
+  in="mPinkEnters"
+  out.1="mGreenFieldSuspend"
+  out.2="mYellowFieldSuspend"
+  out.3="mRedFieldSuspend"
+  out.4="mPurpleFieldSuspend"
+  out.5="mBlueFieldSuspend"
+  out.6="mBlackFieldSuspend"
+  out.7="mWhiteFieldSuspend"
+/>
+
+<And
+  in="mPurpleEnters"
+  out.1="mGreenFieldSuspend"
+  out.2="mYellowFieldSuspend"
+  out.3="mRedFieldSuspend"
+  out.4="mPinkFieldSuspend"
+  out.5="mBlueFieldSuspend"
+  out.6="mBlackFieldSuspend"
+  out.7="mWhiteFieldSuspend"
+/>
+
+<And
+  in="mBlueEnters"
+  out.1="mGreenFieldSuspend"
+  out.2="mYellowFieldSuspend"
+  out.3="mRedFieldSuspend"
+  out.4="mPinkFieldSuspend"
+  out.5="mPurpleFieldSuspend"
+  out.6="mBlackFieldSuspend"
+  out.7="mWhiteFieldSuspend"
+/>
+
+<And
+  in="mBlackEnters"
+  out.1="mGreenFieldSuspend"
+  out.2="mYellowFieldSuspend"
+  out.3="mRedFieldSuspend"
+  out.4="mPinkFieldSuspend"
+  out.5="mPurpleFieldSuspend"
+  out.6="mBlueFieldSuspend"
+  out.7="mWhiteFieldSuspend"
+/>
+
+<And
+  in="mWhiteEnters"
+  out.1="mGreenFieldSuspend"
+  out.2="mYellowFieldSuspend"
+  out.3="mRedFieldSuspend"
+  out.4="mPinkFieldSuspend"
+  out.5="mPurpleFieldSuspend"
+  out.6="mBlueFieldSuspend"
+  out.7="mBlackFieldSuspend"
+/>
+
+<Field deltaY="0" mask="T1" watch="playerMask" start="mGreenFieldOn" stop="mGreenFieldSuspend" enter="mGreenEnters" exit="mGreenLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T2" watch="playerMask" start="mYellowFieldOn" stop="mYellowFieldSuspend" enter="mYellowEnters" exit="mYellowLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T3" watch="playerMask" start="mRedFieldOn" stop="mRedFieldSuspend" enter="mRedEnters" exit="mRedLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T4" watch="playerMask" start="mPinkFieldOn" stop="mPinkFieldSuspend" enter="mPinkEnters" exit="mPinkLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T5" watch="playerMask" start="mPurpleFieldOn" stop="mPurpleFieldSuspend" enter="mPurpleEnters" exit="mPurpleLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T6" watch="playerMask" start="mBlueFieldOn" stop="mBlueFieldSuspend" enter="mBlueEnters" exit="mBlueLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T7" watch="playerMask" start="mBlackFieldOn" stop="mBlackFieldSuspend" enter="mBlackEnters" exit="mBlackLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
+<Field deltaY="0" mask="T8" watch="playerMask" start="mWhiteFieldOn" stop="mWhiteFieldSuspend" enter="mWhiteEnters" exit="mWhiteLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
   in="mGreenEnters"
@@ -170,14 +272,6 @@
   in="mGreenDidOpen"
   out.0="pGreenPoint"
   out.1="mGreenClose"
-  out.2="mGreenFieldSuspend"
-  out.3="mYellowFieldSuspend"
-  out.4="mRedFieldSuspend"
-  out.5="mPinkFieldSuspend"
-  out.6="mPurpleFieldSuspend"
-  out.7="mBlueFieldSuspend"
-  out.8="mBlackFieldSuspend"
-  out.9="mWhiteFieldSuspend"
 />
 <Timer in="mGreenDidOpen" wait="1" out="mGreenOpen" />
 
@@ -186,14 +280,6 @@
   in="mYellowDidOpen"
   out.0="pYellowPoint"
   out.1="mYellowClose"
-  out.2="mGreenFieldSuspend"
-  out.3="mYellowFieldSuspend"
-  out.4="mRedFieldSuspend"
-  out.5="mPinkFieldSuspend"
-  out.6="mPurpleFieldSuspend"
-  out.7="mBlueFieldSuspend"
-  out.8="mBlackFieldSuspend"
-  out.9="mWhiteFieldSuspend"
 />
 <Timer in="mYellowDidOpen" wait="1" out="mYellowOpen" />
 
@@ -202,14 +288,6 @@
   in="mRedDidOpen"
   out.0="pRedPoint"
   out.1="mRedClose"
-  out.2="mGreenFieldSuspend"
-  out.3="mYellowFieldSuspend"
-  out.4="mRedFieldSuspend"
-  out.5="mPinkFieldSuspend"
-  out.6="mPurpleFieldSuspend"
-  out.7="mBlueFieldSuspend"
-  out.8="mBlackFieldSuspend"
-  out.9="mWhiteFieldSuspend"
 />
 <Timer in="mRedDidOpen" wait="1" out="mRedOpen" />
 
@@ -218,14 +296,6 @@
   in="mPinkDidOpen"
   out.0="pPinkPoint"
   out.1="mPinkClose"
-  out.2="mGreenFieldSuspend"
-  out.3="mYellowFieldSuspend"
-  out.4="mRedFieldSuspend"
-  out.5="mPinkFieldSuspend"
-  out.6="mPurpleFieldSuspend"
-  out.7="mBlueFieldSuspend"
-  out.8="mBlackFieldSuspend"
-  out.9="mWhiteFieldSuspend"
 />
 <Timer in="mPinkDidOpen" wait="1" out="mPinkOpen" />
 
@@ -234,14 +304,6 @@
   in="mPurpleDidOpen"
   out.0="pPurplePoint"
   out.1="mPurpleClose"
-  out.2="mGreenFieldSuspend"
-  out.3="mYellowFieldSuspend"
-  out.4="mRedFieldSuspend"
-  out.5="mPinkFieldSuspend"
-  out.6="mPurpleFieldSuspend"
-  out.7="mBlueFieldSuspend"
-  out.8="mBlackFieldSuspend"
-  out.9="mWhiteFieldSuspend"
 />
 <Timer in="mPurpleDidOpen" wait="1" out="mPurpleOpen" />
 
@@ -250,14 +312,6 @@
   in="mBlueDidOpen"
   out.0="pBluePoint"
   out.1="mBlueClose"
-  out.2="mGreenFieldSuspend"
-  out.3="mYellowFieldSuspend"
-  out.4="mRedFieldSuspend"
-  out.5="mPinkFieldSuspend"
-  out.6="mPurpleFieldSuspend"
-  out.7="mBlueFieldSuspend"
-  out.8="mBlackFieldSuspend"
-  out.9="mWhiteFieldSuspend"
 />
 <Timer in="mBlueDidOpen" wait="1" out="mBlueOpen" />
 
@@ -266,14 +320,6 @@
   in="mBlackDidOpen"
   out.0="pBlackPoint"
   out.1="mBlackClose"
-  out.2="mGreenFieldSuspend"
-  out.3="mYellowFieldSuspend"
-  out.4="mRedFieldSuspend"
-  out.5="mPinkFieldSuspend"
-  out.6="mPurpleFieldSuspend"
-  out.7="mBlueFieldSuspend"
-  out.8="mBlackFieldSuspend"
-  out.9="mWhiteFieldSuspend"
 />
 <Timer in="mBlackDidOpen" wait="1" out="mBlackOpen" />
 
@@ -282,25 +328,17 @@
   in="mWhiteDidOpen"
   out.0="pWhitePoint"
   out.1="mWhiteClose"
-  out.2="mGreenFieldSuspend"
-  out.3="mYellowFieldSuspend"
-  out.4="mRedFieldSuspend"
-  out.5="mPinkFieldSuspend"
-  out.6="mPurpleFieldSuspend"
-  out.7="mBlueFieldSuspend"
-  out.8="mBlackFieldSuspend"
-  out.9="mWhiteFieldSuspend"
 />
 <Timer in="mWhiteDidOpen" wait="1" out="mWhiteOpen" />
 
 <!-- When a door "loop" is started for one team, ensure that the other loops are killed. -->
-<Timer in="mGreenOpen" wait="2" out.0="mYellowClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
-<Timer in="mYellowOpen" wait="2" out.0="mGreenClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
-<Timer in="mRedOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
-<Timer in="mPinkOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
-<Timer in="mPurpleOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
-<Timer in="mBlueOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlackClose" out.6="mWhiteClose" />
-<Timer in="mBlackOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mWhiteClose" />
-<Timer in="mWhiteOpen" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mBlackClose" />
+<Timer in="mGreenEnters" wait="2" out.0="mYellowClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mYellowEnters" wait="2" out.0="mGreenClose" out.1="mRedClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mRedEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mPinkClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mPinkEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPurpleClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mPurpleEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mBlueClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mBlueEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlackClose" out.6="mWhiteClose" />
+<Timer in="mBlackEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mWhiteClose" />
+<Timer in="mWhiteEnters" wait="2" out.0="mGreenClose" out.1="mYellowClose" out.2="mRedClose" out.3="mPinkClose" out.4="mPurpleClose" out.5="mBlueClose" out.6="mBlackClose" />
 
 <set pCaptureDoorZOffset="pCaptureDoorZOffset + 2" />
