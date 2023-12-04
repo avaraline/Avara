@@ -1,3 +1,5 @@
+<!-- @param int pCenterGoodyRespawn center goody respawn delay in ticks -->
+
 <SkyColor color="#99fdff" color.1="#c3cde6" />
 <GroundColor color="#3a404d" color.1="#000000" />
 <set
@@ -50,7 +52,7 @@
 
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
-<Timer in="mTaken" out="mShow" wait="350" />
+<Timer in="mTaken" out="mShow" wait="pCenterGoodyRespawn" />
 <Goody shape="bspAvaraA" y="4 + mGoodyOffset" speed="2" grenades="mLgGrenade" missiles="mLgMissile" start="mShow" out="mTaken" color="#00a8aa" color.1="#000000" cx="0" cz="0" angle="45" />
 <unique vars="mShow mTaken" />
 <And in="@start" out="mShow" />
