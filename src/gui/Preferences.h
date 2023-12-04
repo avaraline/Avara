@@ -68,7 +68,7 @@ using json = nlohmann::json;
 #define kHUDShowDirArrow "hudShowDirArrow"
 #define kHUDShowScore "hudShowScore"
 #define kHUDShowTime "hudShowTime"
-#define kShowClassicHUD "showClassicHUD"
+#define kHUDShowKillFeed "hudShowKillFeed"
 #define kShowNewHUD "showNewHUD"
 
 // Network & Tracker
@@ -167,7 +167,7 @@ static json defaultPrefs = {
     {kHUDShowPlayerList, true},
     {kHUDShowScore, true},
     {kHUDShowTime, true},
-    {kShowClassicHUD, false},
+    {kHUDShowKillFeed, true},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},
@@ -224,7 +224,6 @@ static json optionsScreens {
             {2, "high"}
         }},
         {"Invert Mouse Y-Axis", kInvertYAxisTag, kOptionTypeBool},
-        {"Classic HUD", kShowClassicHUD, kOptionTypeBool},
         {"Updated HUD", kShowNewHUD, kOptionTypeBool},
         {"Volume", kSoundVolume, kOptionTypeInteger},
         {"Ignore Custom Hull Colors", kIgnoreCustomColorsTag, kOptionTypeBool},

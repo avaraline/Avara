@@ -401,10 +401,19 @@ void CBall::FrameAction() {
                 ChangeOwnership(theOwner->GetActorScoringId(), theOwner->teamColor);
                 watchTeams = ~(1 << teamColor);
 
+                if (lastOwner != theOwner->GetActorScoringId()) {
+                    itsGame->scoreReason = ksiGrabBall;
+                    itsGame->Score(
+                        theOwner->teamColor, theOwner->GetActorScoringId(), 0, 0, 0, -1);
+                    lastOwner = theOwner->GetActorScoringId();  // Only need to display the score message once
+                }
+
                 DoSound(reprogramSound, partList[0]->sphereGlobCenter, reprogramVolume, FIX1);
             }
 
             ownerChangeCount = -32767;
+        } else {
+            lastOwner = -1;
         }
     }
 
@@ -485,7 +494,7 @@ void CBall::FrameAction() {
         switch (actionCommand) {
             case kDoSelfDestruct:
                 WasDestroyed();
-                SecondaryDamage(teamColor, -1);
+                SecondaryDamage(teamColor, -1, ksiObjectCollision);
                 return; //	*** return after dispose! ***
             case kDoRelease:
                 looseFrame = itsGame->FramesFromNow(100);

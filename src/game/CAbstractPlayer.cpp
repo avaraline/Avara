@@ -81,16 +81,14 @@ void CAbstractPlayer::LoadHUDParts() {
         hudWorld->AddPart(targetOffs[i]);
     }
 
-    if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
-        dirArrowHeight = FIX3(750);
-        dirArrow = new CBSPPart;
-        dirArrow->IBSPPart(kDirIndBSP);
-        dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
-        dirArrow->ignoreDirectionalLights = true;
-        dirArrow->privateAmbient = FIX1;
-        dirArrow->isTransparent = true;
-        hudWorld->AddPart(dirArrow);
-    }
+    dirArrowHeight = FIX3(750);
+    dirArrow = new CBSPPart;
+    dirArrow->IBSPPart(kDirIndBSP);
+    dirArrow->ReplaceColor(0xff000000, ColorManager::getLookForwardColor());
+    dirArrow->ignoreDirectionalLights = true;
+    dirArrow->privateAmbient = FIX1;
+    dirArrow->isTransparent = true;
+    hudWorld->AddPart(dirArrow);
 
     LoadDashboardParts();
 }
@@ -326,10 +324,8 @@ void CAbstractPlayer::Dispose() {
 
     hudWorld = itsGame->hudWorld;
 
-    if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
-        hudWorld->RemovePart(dirArrow);
-        dirArrow->Dispose();
-    }
+    hudWorld->RemovePart(dirArrow);
+    dirArrow->Dispose();
 
     for (i = 0; i < 2; i++) {
         hudWorld->RemovePart(targetOns[i]);
@@ -355,16 +351,14 @@ void CAbstractPlayer::DisposeDashboard() {
         lockLight->Dispose();
     }
 
-    if (itsGame->itsApp->Get(kHUDArrowStyle) == 2) {
-        hudWorld->RemovePart(groundDirArrow);
-        groundDirArrow->Dispose();
+    hudWorld->RemovePart(groundDirArrow);
+    groundDirArrow->Dispose();
 
-        hudWorld->RemovePart(groundDirArrowSlow);
-        groundDirArrowSlow->Dispose();
+    hudWorld->RemovePart(groundDirArrowSlow);
+    groundDirArrowSlow->Dispose();
 
-        hudWorld->RemovePart(groundDirArrowFast);
-        groundDirArrowFast->Dispose();
-    }
+    hudWorld->RemovePart(groundDirArrowFast);
+    groundDirArrowFast->Dispose();
 
     hudWorld->RemovePart(energyLabel);
     energyLabel->Dispose();
@@ -626,11 +620,9 @@ void CAbstractPlayer::LoadDashboardParts() {
         lockLight = DashboardPart(kLockLight, FIX3(600));
     }
 
-    if (itsGame->itsApp->Get(kHUDArrowStyle) == 2) {
-        groundDirArrow = DashboardPart(kGroundDirArrow, FIX3(1000 * arrowScale));
-        groundDirArrowSlow = DashboardPart(kGroundDirArrowSlow, FIX3(1000 * arrowScale));
-        groundDirArrowFast = DashboardPart(kGroundDirArrowFast, FIX3(1000 * arrowScale));
-    }
+    groundDirArrow = DashboardPart(kGroundDirArrow, FIX3(1000 * arrowScale));
+    groundDirArrowSlow = DashboardPart(kGroundDirArrowSlow, FIX3(1000 * arrowScale));
+    groundDirArrowFast = DashboardPart(kGroundDirArrowFast, FIX3(1000 * arrowScale));
 
     // Shields
     shieldLabel = DashboardPart(kShieldBSP, FIX3(70*layoutScale));
@@ -934,6 +926,8 @@ void CAbstractPlayer::DashboardFixedPosition(CScaledBSP *part, float dist, Fixed
     DashboardFixedPosition(part, dist, angle, 0, 0, 0, 0);
 }
 void CAbstractPlayer::DashboardFixedPosition(CScaledBSP *part, float dist, Fixed angle, float height, Fixed x_rot, Fixed y_rot, Fixed z_rot) {
+    if (part == nullptr) return;
+
     // Place a part in a fixed position relative to the HECTOR.
     // Part rotates with the HECTOR facing instead of the head
     Fixed finalAngle = heading - FDegToOne(angle);
@@ -953,11 +947,9 @@ void CAbstractPlayer::ResetDashboard() {
     if (itsGame->itsApp->Get(kHUDShowMissileLock)) {
         lockLight->isTransparent = true;
     }
-    if (itsGame->itsApp->Get(kHUDArrowStyle) == 2) {
-        groundDirArrow->isTransparent = true;
-        groundDirArrowSlow->isTransparent = true;
-        groundDirArrowFast->isTransparent = true;
-    }
+    groundDirArrow->isTransparent = true;
+    groundDirArrowSlow->isTransparent = true;
+    groundDirArrowFast->isTransparent = true;
     shieldLabel->isTransparent = true;
     energyLabel->isTransparent = true;
     grenadeLabel->isTransparent = true;
@@ -1007,9 +999,7 @@ void CAbstractPlayer::ControlViewPoint() {
 
     if (scoutView && scoutIdent) // && winFrame < 0)
     {
-        if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
-            dirArrow->isTransparent = true;
-        }
+        dirArrow->isTransparent = true;
 
         if (scoutIdent && !debugView) {
             itsScout = (CScout *)itsGame->FindIdent(scoutIdent);
@@ -1318,7 +1308,7 @@ void CAbstractPlayer::KeyboardControl(FunctionTable *ft) {
 
                 WasDestroyed();
                 itsGame->scoreReason = ksiSelfDestructBlast;
-                SecondaryDamage(teamColor, GetActorScoringId());
+                SecondaryDamage(teamColor, GetActorScoringId(), ksiSelfDestructBlast);
                 didSelfDestruct = true;
             }
         }
@@ -1541,9 +1531,7 @@ void CAbstractPlayer::PlayerAction() {
     }
 
     if (!isOut) {
-        if (itsGame->itsApp->Get(kHUDArrowStyle) == 1) {
-            dirArrow->isTransparent = true; 
-        }
+        dirArrow->isTransparent = true;
         targetOns[0]->isTransparent = true; //  No HUD display by default
         targetOns[1]->isTransparent = true; //  So we hide all HUD parts now
         targetOffs[0]->isTransparent = true; //  And reveal them if necessary

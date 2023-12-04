@@ -1,0 +1,1004 @@
+<SkyColor color="#fffff0" color.1="#d9f2ff" />
+<GroundColor color="#fff9d9" />
+<set
+  designer="$mSilverfox"
+  information="Between the sun, sand, and glint of metal, it was nearly impossible to trust my eyes, but I swear the place was not as I left it."
+  ambient.c="#fffff0"
+  light.0.i="0.9"
+  light.0.a="30"
+  light.0.b="10"
+  wallHeight="0"
+/>
+
+<!-- CENTER -->
+<Wall d="15" color="#262522" color.1="#000000" h="3" w="15" x="0" z="0" />
+<Ramp angle="180" d="10" deltaY="3" color="#82d9cb" color.1="#000000" h="0" w="15" x="0" y="0" z="12.5" />
+<Ramp angle="0" d="10" deltaY="3" color="#82d9cb" color.1="#000000" h="0" w="15" x="0" y="0" z="-12.5" />
+<Ramp angle="270" d="15" deltaY="3" color="#82d9cb" color.1="#000000" h="0" w="10" x="-12.5" y="0" z="0" />
+<Ramp angle="90" d="15" deltaY="3" color="#82d9cb" color.1="#000000" h="0" w="10" x="12.5" y="0" z="0" />
+
+<!-- BASALT PILLAR 1 -->
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-17" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-16" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-15" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-14" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-13" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-12" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-11" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-10" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-9" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="-8" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-17" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-16" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-15" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-14" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-13" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-12" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-11" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-10" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-9" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="-8" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-17" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-16" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-15" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-14" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-13" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-12" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-11" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-10" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-9" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="-8" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-17" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-16" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-15" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-14" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-13" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-12" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-11" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-10" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-9" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="-8" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-17" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-16" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-15" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-14" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-13" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-12" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-11" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-10" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-9" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="-8" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-17" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-16" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-15" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-14" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-13" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-12" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-11" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-10" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-9" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="-8" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-17" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-16" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-15" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-14" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-13" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-12" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-11" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-10" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-9" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="-8" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-17" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-16" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-15" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-14" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-13" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-12" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-11" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-10" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-9" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="-8" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-16" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-15" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-14" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-13" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-12" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-11" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-10" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="-8" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="-15" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="-14" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="-13" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="-12" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="-11" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="-10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="-9" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="-8" />
+
+<!-- BASALT PILLAR 2 -->
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="8" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="9" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="10" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="11" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="12" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="13" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="14" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="15" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="8" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="9" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="10" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="11" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="12" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="13" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="14" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="16" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="8" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="9" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="10" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="11" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="12" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="13" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="14" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="15" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="17" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="8" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="9" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="10" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="11" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="12" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="13" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="14" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="15" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="16" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="17" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="8" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="9" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="10" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="11" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="12" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="13" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="14" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="15" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="16" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="17" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="8" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="9" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="10" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="11" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="12" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="13" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="14" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="15" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="16" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="17" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="8" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="9" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="10" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="11" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="12" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="13" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="14" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="15" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="16" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="17" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="8" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="9" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="10" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="11" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="12" />
+<set wallHeight="round ( ( 9 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="13" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="14" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="15" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="16" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="17" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="8" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="9" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="10" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="11" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="12" />
+<set wallHeight="round ( ( 8 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="13" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="14" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="15" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="16" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="17" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="8" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="9" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="10" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="11" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="12" />
+<set wallHeight="round ( ( 6.75 + ( random * 1.25 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="13" />
+<set wallHeight="round ( ( 5 + ( random * 1.75 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="14" />
+<set wallHeight="round ( ( 3 + ( random * 2 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="15" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="17" />
+
+<!-- BASALT FORMATION 1 -->
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="8" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="9" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="10" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="11" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="12" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="13" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="14" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="15" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="8" z="17" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="8" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="9" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="10" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="11" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="12" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="13" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="14" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="15" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="9" z="17" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="8" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="11" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="12" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="13" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="14" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="15" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="10" z="17" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="8" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="11" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="12" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="13" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="14" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="15" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="11" z="17" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="8" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="11" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="12" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="13" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="14" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="12" z="17" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="8" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="11" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="12" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="13" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="14" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="13" z="17" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="8" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="9" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="10" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="11" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="12" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="13" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="14" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="14" z="17" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="8" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="9" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="10" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="11" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="12" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="13" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="14" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="15" z="17" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="8" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="9" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="10" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="11" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="12" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="13" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="14" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="16" z="16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="8" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="9" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="10" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="11" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="12" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="13" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="14" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="17" z="15" />
+
+<!-- BASALT FORMATION 2 -->
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="-15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="-14" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="-13" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="-12" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="-11" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="-10" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="-9" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-17" z="-8" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-14" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-13" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-12" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-11" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-10" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-9" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-16" z="-8" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-17" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-14" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-13" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-12" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-11" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-15" z="-8" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-17" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-16" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-15" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-14" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-13" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-12" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-11" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-14" z="-8" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-17" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-15" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-14" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-13" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-12" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-11" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-13" z="-8" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-17" />
+<set wallHeight="round ( ( 0.5 + ( random * 1.5 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-15" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-14" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-13" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-12" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-11" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-10" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-9" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-12" z="-8" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-17" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-15" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-14" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-13" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-12" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-11" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-10" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-9" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-11" z="-8" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-17" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-16" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-15" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-14" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-13" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-12" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-11" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-10" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-9" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-10" z="-8" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-17" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-16" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-15" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-14" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-13" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-12" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-11" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-10" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-9" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-9" z="-8" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-17" />
+<set wallHeight="round ( ( 1 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-16" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-15" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-14" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-13" />
+<set wallHeight="round ( ( 2 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-12" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-11" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-10" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-9" />
+<set wallHeight="round ( ( 3 + ( random * 1 ) ) * 10.0 ) / 10.0" />
+<Wall d="1" color="#262522" color.1="#000000" w="1" x="-8" z="-8" />
+
+<!-- RESET -->
+<set wallHeight="0" />
+
+<!-- OUTSKIRTS 1 -->
+<Wall d="20" color="#403b36" color.1="#000000" h="2" w="10" x="-37.5" z="-32.5" />
+<Wall d="10" color="#403b36" color.1="#000000" h="2" w="35" x="-40" z="-47.5" />
+<Ramp angle="270" d="19.9" deltaY="1.95" color="#a1e6da" color.1="#000000" h="0.2" w="5" x="-44.95" y="0" z="-32.55" />
+<Ramp angle="270" d="19.9" deltaY="1.8" color="#a1e6da" color.1="#000000" h="0.4" w="4.6" x="-44.55" y="0" z="-32.55" />
+<Ramp angle="270" d="19.9" deltaY="1.4" color="#a1e6da" color.1="#000000" h="0.6" w="4.2" x="-44.15" y="0" z="-32.55" />
+<Wall d="0" color="#a1e6da" color.1="#000000" h="0.75" w="3" x="-44" y="0" z="-22.6" />
+<Wall d="19.9" color="#a1e6da" color.1="#000000" h="0.2" w="4.9" x="-44.9" z="-32.55" />
+<Ramp angle="180" d="5" deltaY="1.95" color="#a1e6da" color.1="#000000" h="0.2" w="14.9" x="-49.95" y="0" z="-40.05" />
+<Ramp angle="180" d="4.6" deltaY="1.8" color="#a1e6da" color.1="#000000" h="0.4" w="14.9" x="-49.95" y="0" z="-40.45" />
+<Ramp angle="180" d="4.2" deltaY="1.4" color="#a1e6da" color.1="#000000" h="0.6" w="14.9" x="-49.95" y="0" z="-40.85" />
+<Wall d="3" color="#a1e6da" color.1="#000000" h="0.75" w="0" x="-57.4" y="0" z="-41" />
+<Wall d="4.9" color="#a1e6da" color.1="#000000" h="0.2" w="14.9" x="-49.95" z="-40.1" />
+
+<!-- OUTSKIRTS 2 -->
+<Wall d="20" color="#403b36" color.1="#000000" h="2" w="10" x="37.5" z="32.5" />
+<Wall d="10" color="#403b36" color.1="#000000" h="2" w="35" x="40" z="47.5" />
+<Ramp angle="90" d="19.9" deltaY="1.95" color="#a1e6da" color.1="#000000" h="0.2" w="5" x="44.95" y="0" z="32.55" />
+<Ramp angle="90" d="19.9" deltaY="1.8" color="#a1e6da" color.1="#000000" h="0.4" w="4.6" x="44.55" y="0" z="32.55" />
+<Ramp angle="90" d="19.9" deltaY="1.4" color="#a1e6da" color.1="#000000" h="0.6" w="4.2" x="44.15" y="0" z="32.55" />
+<Wall d="0" color="#a1e6da" color.1="#000000" h="0.75" w="3" x="44" y="0" z="22.6" />
+<Wall d="19.9" color="#a1e6da" color.1="#000000" h="0.2" w="4.9" x="44.9" z="32.55" />
+<Ramp angle="0" d="5" deltaY="1.95" color="#a1e6da" color.1="#000000" h="0.2" w="14.9" x="49.95" y="0" z="40.05" />
+<Ramp angle="0" d="4.6" deltaY="1.8" color="#a1e6da" color.1="#000000" h="0.4" w="14.9" x="49.95" y="0" z="40.45" />
+<Ramp angle="0" d="4.2" deltaY="1.4" color="#a1e6da" color.1="#000000" h="0.6" w="14.9" x="49.95" y="0" z="40.85" />
+<Wall d="3" color="#a1e6da" color.1="#000000" h="0.75" w="0" x="57.4" y="0" z="41" />
+<Wall d="4.9" color="#a1e6da" color.1="#000000" h="0.2" w="14.9" x="49.95" z="40.1" />
+
+<!-- MISSILE STRUCTURE 1 -->
+<Wall d="17" color="#ffe9a6" color.1="#000000" h="3.4" w="10" x="-22.5" z="39" />
+<Wall d="10" color="#ffe9a6" color.1="#000000" h="3.4" w="17" x="-9" z="52.5" />
+<Wall d="10" color="#fff4b3" color.1="#000000" h="3" w="10" x="-32.5" z="32.5" />
+<Wall d="10" color="#fff4b3" color.1="#000000" h="3" w="10" x="-2.5" z="62.5" />
+<Ramp angle="180" d="8.2" deltaY="3" color="#fff4b3" color.1="#000000" h="0.2" w="10" x="-32.5" y="0" z="41.5" />
+<Ramp angle="180" d="8" deltaY="2.9" color="#fff4b3" color.1="#000000" h="0.4" w="10" x="-32.5" y="0" z="41.1" />
+<Ramp angle="180" d="7" deltaY="2.8" color="#fff4b3" color.1="#000000" h="0.6" w="10" x="-32.5" y="0" z="40.5" />
+<Ramp angle="180" d="5.5" deltaY="2.2" color="#fff4b3" color.1="#000000" h="0.8" w="10" x="-32.5" y="0" z="39.9" />
+<Wall d="8.1" color="#fff4b3" color.1="#000000" h="0.2" w="10" x="-32.5" y="0" z="41.5" />
+<Wall d="7" color="#fff4b3" color.1="#000000" h="0.3" w="0" x="-37.5" y="0.2" z="41" />
+<Wall d="3.5" color="#fff4b3" color.1="#000000" h="1" w="0" x="-37.5" y="0.5" z="39.25" />
+<Ramp angle="270" d="10" deltaY="3" color="#fff4b3" color.1="#000000" h="0.2" w="8.2" x="-11.5" y="0" z="62.5" />
+<Ramp angle="270" d="10" deltaY="2.9" color="#fff4b3" color.1="#000000" h="0.4" w="8" x="-11.1" y="0" z="62.5" />
+<Ramp angle="270" d="10" deltaY="2.8" color="#fff4b3" color.1="#000000" h="0.6" w="7" x="-10.5" y="0" z="62.5" />
+<Ramp angle="270" d="10" deltaY="2.2" color="#fff4b3" color.1="#000000" h="0.8" w="5.5" x="-9.9" y="0" z="62.5" />
+<Wall d="10" color="#fff4b3" color.1="#000000" h="0.2" w="8.1" x="-11.5" y="0" z="62.5" />
+<Wall d="0" color="#fff4b3" color.1="#000000" h="0.3" w="7" x="-11" y="0.2" z="67.5" />
+<Wall d="0" color="#fff4b3" color.1="#000000" h="1" w="3.5" x="-9.25" y="0.5" z="67.5" />
+<Wall d="10" color="#66ccbb" color.1="#000000" h="1.7" w="10" x="-12.5" z="42.5" />
+<Wall d="8" color="#66ccbb" color.1="#000000" h="1.7" w="8" x="-21.5" z="51.5" />
+<Dome color="#ffe9a6" color.1="#000000" cx="-27.5" y="0" cz="32" r="3" angle="0" quarters="1" />
+<Dome color="#ffe9a6" color.1="#000000" cx="-25.5" y="0" cz="32" r="2" angle="270" quarters="2" />
+<Dome color="#ffe9a6" color.1="#000000" cx="-3.5" y="0" cz="49" r="2.75" angle="270" quarters="2" />
+<Dome color="#ffe9a6" color.1="#000000" cx="-1.125" y="0" cz="48.5" r="1.5" angle="270" quarters="3" />
+
+<!-- MISSILE STRUCTURE 2 -->
+<Wall d="17" color="#ffe9a6" color.1="#000000" h="3.4" w="10" x="22.5" z="-39" />
+<Wall d="10" color="#ffe9a6" color.1="#000000" h="3.4" w="17" x="9" z="-52.5" />
+<Wall d="10" color="#fff4b3" color.1="#000000" h="3" w="10" x="32.5" z="-32.5" />
+<Wall d="10" color="#fff4b3" color.1="#000000" h="3" w="10" x="2.5" z="-62.5" />
+<Ramp angle="0" d="8.2" deltaY="3" color="#fff4b3" color.1="#000000" h="0.2" w="10" x="32.5" y="0" z="-41.5" />
+<Ramp angle="0" d="8" deltaY="2.9" color="#fff4b3" color.1="#000000" h="0.4" w="10" x="32.5" y="0" z="-41.1" />
+<Ramp angle="0" d="7" deltaY="2.8" color="#fff4b3" color.1="#000000" h="0.6" w="10" x="32.5" y="0" z="-40.5" />
+<Ramp angle="0" d="5.5" deltaY="2.2" color="#fff4b3" color.1="#000000" h="0.8" w="10" x="32.5" y="0" z="-39.9" />
+<Wall d="8.1" color="#fff4b3" color.1="#000000" h="0.2" w="10" x="32.5" y="0" z="-41.5" />
+<Wall d="7" color="#fff4b3" color.1="#000000" h="0.3" w="0" x="37.5" y="0.2" z="-41" />
+<Wall d="3.5" color="#fff4b3" color.1="#000000" h="1" w="0" x="37.5" y="0.5" z="-39.25" />
+<Ramp angle="90" d="10" deltaY="3" color="#fff4b3" color.1="#000000" h="0.2" w="8.2" x="11.5" y="0" z="-62.5" />
+<Ramp angle="90" d="10" deltaY="2.9" color="#fff4b3" color.1="#000000" h="0.4" w="8" x="11.1" y="0" z="-62.5" />
+<Ramp angle="90" d="10" deltaY="2.8" color="#fff4b3" color.1="#000000" h="0.6" w="7" x="10.5" y="0" z="-62.5" />
+<Ramp angle="90" d="10" deltaY="2.2" color="#fff4b3" color.1="#000000" h="0.8" w="5.5" x="9.9" y="0" z="-62.5" />
+<Wall d="10" color="#fff4b3" color.1="#000000" h="0.2" w="8.1" x="11.5" y="0" z="-62.5" />
+<Wall d="0" color="#fff4b3" color.1="#000000" h="0.3" w="7" x="11" y="0.2" z="-67.5" />
+<Wall d="0" color="#fff4b3" color.1="#000000" h="1" w="3.5" x="9.25" y="0.5" z="-67.5" />
+<Wall d="10" color="#66ccbb" color.1="#000000" h="1.7" w="10" x="12.5" z="-42.5" />
+<Wall d="8" color="#66ccbb" color.1="#000000" h="1.7" w="8" x="21.5" z="-51.5" />
+<Dome color="#ffe9a6" color.1="#000000" cx="27.5" y="0" cz="-32" r="3" angle="180" quarters="1" />
+<Dome color="#ffe9a6" color.1="#000000" cx="25.5" y="0" cz="-32" r="2" angle="90" quarters="2" />
+<Dome color="#ffe9a6" color.1="#000000" cx="3.5" y="0" cz="-49" r="2.75" angle="90" quarters="2" />
+<Dome color="#ffe9a6" color.1="#000000" cx="1.125" y="0" cz="-48.5" r="1.5" angle="90" quarters="3" />
+
+<!-- GRENADE STRUCTURE 1 -->
+<Wall d="9" color="#33302e" color.1="#000000" h="3" w="7.5" x="-47.5" z="2.5" />
+<Ramp angle="0" d="2.3" deltaY="3" color="#33302e" color.1="#000000" h="1.3" w="3.75" x="-45.625" y="0" z="-2" />
+<Wall d="2.3" color="#33302e" color.1="#000000" h="0.53" w="3.75" x="-45.625" y="0" z="-2" />
+<Ramp angle="180" d="2.3" deltaY="3" color="#33302e" color.1="#000000" h="1.3" w="3.75" x="-49.375" y="0" z="7" />
+<Wall d="2.3" color="#33302e" color.1="#000000" h="0.53" w="3.75" x="-49.375" y="0" z="7" />
+<Wall d="1.5" color="#666561" color.1="#000000" h="2.4" w="7.5" x="-40" z="1.75" />
+<Wall d="1.5" color="#666561" color.1="#000000" h="2.4" w="7.5" x="-55" z="3.25" />
+<Ramp angle="180" d="5.6" deltaY="2.4" color="#666561" color.1="#000000" h="0.2" w="7.5" x="-40" y="0" z="5.2" />
+<Ramp angle="180" d="5.2" deltaY="2.25" color="#666561" color.1="#000000" h="0.3" w="7.5" x="-40" y="0" z="4.9" />
+<Ramp angle="180" d="4.4" deltaY="2.1" color="#666561" color.1="#000000" h="0.5" w="7.5" x="-40" y="0" z="4.5" />
+<Ramp angle="180" d="3.4" deltaY="1.6" color="#666561" color.1="#000000" h="1" w="7.5" x="-40" y="0" z="3.8" />
+<Wall d="4.5" color="#666561" color.1="#000000" h="0.4" w="0" x="-36.25" y="0.2" z="4.7" />
+<Ramp angle="0" d="5.6" deltaY="2.4" color="#666561" color.1="#000000" h="0.2" w="7.5" x="-55" y="0" z="-0.2" />
+<Ramp angle="0" d="5.2" deltaY="2.25" color="#666561" color.1="#000000" h="0.3" w="7.5" x="-55" y="0" z="0.1" />
+<Ramp angle="0" d="4.4" deltaY="2.1" color="#666561" color.1="#000000" h="0.5" w="7.5" x="-55" y="0" z="0.5" />
+<Ramp angle="0" d="3.4" deltaY="1.6" color="#666561" color.1="#000000" h="1" w="7.5" x="-55" y="0" z="1.2" />
+<Wall d="4.5" color="#666561" color.1="#000000" h="0.4" w="0" x="-58.75" y="0.2" z="0.3" />
+<Wall d="5.5" color="#666561" color.1="#000000" h="0.2" w="7.5" x="-40" y="0" z="5.2" />
+<Wall d="5.5" color="#666561" color.1="#000000" h="0.2" w="7.5" x="-55" y="0" z="-0.2" />
+<Ramp angle="180" d="1.8" deltaY="2.4" color="#666561" color.1="#000000" h="1" w="7.5" x="-40" y="0" z="1" />
+<Ramp angle="0" d="1.8" deltaY="2.4" color="#666561" color.1="#000000" h="1" w="7.5" x="-55" y="0" z="4" />
+
+<!-- GRENADE STRUCTURE 2 -->
+<Wall d="9" color="#33302e" color.1="#000000" h="3" w="7.5" x="47.5" z="-2.5" />
+<Ramp angle="180" d="2.3" deltaY="3" color="#33302e" color.1="#000000" h="1.3" w="3.75" x="45.625" y="0" z="2" />
+<Wall d="2.3" color="#33302e" color.1="#000000" h="0.53" w="3.75" x="45.625" y="0" z="2" />
+<Ramp angle="0" d="2.3" deltaY="3" color="#33302e" color.1="#000000" h="1.3" w="3.75" x="49.375" y="0" z="-7" />
+<Wall d="2.3" color="#33302e" color.1="#000000" h="0.53" w="3.75" x="49.375" y="0" z="-7" />
+<Wall d="1.5" color="#666561" color.1="#000000" h="2.4" w="7.5" x="40" z="-1.75" />
+<Wall d="1.5" color="#666561" color.1="#000000" h="2.4" w="7.5" x="55" z="-3.25" />
+<Ramp angle="0" d="5.6" deltaY="2.4" color="#666561" color.1="#000000" h="0.2" w="7.5" x="40" y="0" z="-5.2" />
+<Ramp angle="0" d="5.2" deltaY="2.25" color="#666561" color.1="#000000" h="0.3" w="7.5" x="40" y="0" z="-4.9" />
+<Ramp angle="0" d="4.4" deltaY="2.1" color="#666561" color.1="#000000" h="0.5" w="7.5" x="40" y="0" z="-4.5" />
+<Ramp angle="0" d="3.4" deltaY="1.6" color="#666561" color.1="#000000" h="1" w="7.5" x="40" y="0" z="-3.8" />
+<Wall d="4.5" color="#666561" color.1="#000000" h="0.4" w="0" x="36.25" y="0.2" z="-4.7" />
+<Ramp angle="180" d="5.6" deltaY="2.4" color="#666561" color.1="#000000" h="0.2" w="7.5" x="55" y="0" z="0.2" />
+<Ramp angle="180" d="5.2" deltaY="2.25" color="#666561" color.1="#000000" h="0.3" w="7.5" x="55" y="0" z="-0.1" />
+<Ramp angle="180" d="4.4" deltaY="2.1" color="#666561" color.1="#000000" h="0.5" w="7.5" x="55" y="0" z="-0.5" />
+<Ramp angle="180" d="3.4" deltaY="1.6" color="#666561" color.1="#000000" h="1" w="7.5" x="55" y="0" z="-1.2" />
+<Wall d="4.5" color="#666561" color.1="#000000" h="0.4" w="0" x="58.75" y="0.2" z="-0.3" />
+<Wall d="5.5" color="#666561" color.1="#000000" h="0.2" w="7.5" x="40" y="0" z="-5.2" />
+<Wall d="5.5" color="#666561" color.1="#000000" h="0.2" w="7.5" x="55" y="0" z="0.2" />
+<Ramp angle="0" d="1.8" deltaY="2.4" color="#666561" color.1="#000000" h="1" w="7.5" x="40" y="0" z="-1" />
+<Ramp angle="180" d="1.8" deltaY="2.4" color="#666561" color.1="#000000" h="1" w="7.5" x="55" y="0" z="-4" />
+
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="0" y="3.05" z="0" />
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="-47.5" y="3.05" z="2.5" />
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="47.5" y="3.05" z="-2.5" />
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="37.5" y="2.05" z="42.5" />
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="-37.5" y="2.05" z="-42.5" />
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="-32.5" z="62.5" />
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="32.5" z="-62.5" />
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="-15" z="-30" />
+<Field deltaY="0" visible="true" d="1" color="#aaf2da" color.1="#000000" h="0" w="1" x="15" z="30" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="400" />
+<Goody angle="225" cx="0" cz="0" color="#ffe9a6" color.1="#000000" grenades="mLgGrenade" missiles="mLgMissile" out="mTaken" shape="bspAvaraA" speed="2" start="mShow" y="3 + mGoodyOffset" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="150" />
+<Goody angle="225" cx="-15" cz="-30" color="#ffffff" color.1="#000000" grenades="mMdGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="mGoodyOffset" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="150" />
+<Goody angle="225" cx="15" cz="30" color="#ffffff" color.1="#000000" missiles="mMdMissile" out="mTaken" shape="bspMissile" speed="2" start="mShow" y="mGoodyOffset" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="150" />
+<Goody angle="225" cx="37.5" cz="42.5" color="#ffffff" color.1="#000000" grenades="mMdGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="2 + mGoodyOffset" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="150" />
+<Goody angle="225" cx="-37.5" cz="-42.5" color="#ffffff" color.1="#000000" missiles="mMdMissile" out="mTaken" shape="bspMissile" speed="2" start="mShow" y="2 + mGoodyOffset" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody angle="225" cx="-47.5" cz="2.5" color="#ffffff" color.1="#000000" grenades="mLgGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="3 + mGoodyOffset" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody angle="225" cx="47.5" cz="-2.5" color="#ffffff" color.1="#000000" grenades="mLgGrenade" out="mTaken" shape="bspGrenade" speed="2" start="mShow" y="3 + mGoodyOffset" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody angle="225" cx="32.5" cz="-62.5" color="#ffffff" color.1="#000000" missiles="mLgMissile" out="mTaken" shape="bspMissile" speed="2" start="mShow" y="mGoodyOffset" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody angle="225" cx="-32.5" cz="62.5" color="#ffffff" color.1="#000000" missiles="mLgMissile" out="mTaken" shape="bspMissile" speed="2" start="mShow" y="mGoodyOffset" />
+
+<Incarnator angle="135" cx="-62.5" cz="-57.5" y="20" />
+<Incarnator angle="315" cx="62.5" cz="57.5" y="20" />
+<Incarnator angle="225" cx="37.5" cz="-67.5" y="20" />
+<Incarnator angle="45" cx="-37.5" cz="67.5" y="20" />
+<Incarnator angle="90" cx="-57.5" cz="7.5" y="20" />
+<Incarnator angle="270" cx="57.5" cz="-7.5" y="20" />
+<Incarnator angle="180" cx="-20" cz="-62.5" y="20" />
+<Incarnator angle="0" cx="20" cz="62.5" y="20" />
+<Incarnator angle="0" cx="0" cz="-12.5" y="21.5" stop="@start" />
+<Incarnator angle="180" cx="0" cz="12.5" y="21.5" stop="@start" />
+<Incarnator angle="90" cx="12.5" cz="0" y="21.5" stop="@start" />
+<Incarnator angle="270" cx="-12.5" cz="0" y="21.5" stop="@start" />
+
+<Teleporter activeRange="150" deadRange="105" cx="0" cz="0" destGroup="@recenter" group="-1" shape="0" spin="true" y="-30" />
+<Teleporter activeRange="2000" cx="0" cz="0" shape="0" start="@winTeam" win="1000" y="200" />
+<Teleporter cx="10" cz="-10" group="@recenter" mask="0" shape="0" spin="true" y="20" />
+<Teleporter cx="-10" cz="10" group="@recenter" mask="0" shape="0" spin="true" y="20" />

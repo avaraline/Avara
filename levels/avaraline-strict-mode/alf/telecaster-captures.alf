@@ -1,0 +1,81 @@
+<map>
+  <include alf="layout/telecaster.alf" />
+
+  <set pReqPointMultiplier="1" />
+  <include alf="logic/capture-rules.alf" />
+
+  <set
+    pCaptureVizShape="bspAvaraA"
+    pCaptureVizScale="1"
+    pCaptureVizSpeed="2"
+    captureSize="2.5"
+    outerCaptureX="24"
+    outerCaptureY="10"
+    outerCaptureZ="39"
+  />
+
+  <set
+    pCaptureX="0"
+    pCaptureY="0"
+    pCaptureZ="0"
+    pCaptureW="captureSize"
+    pCaptureD="captureSize"
+    pCaptureH="captureSize"
+    pCaptureVizX="0"
+    pCaptureVizY="1.75"
+    pCaptureVizZ="0"
+  />
+  <include alf="logic/capture-point.alf" />
+
+  <set
+    pCaptureX="-outerCaptureX"
+    pCaptureY="outerCaptureY"
+    pCaptureZ="-outerCaptureZ"
+    pCaptureW="captureSize"
+    pCaptureD="captureSize"
+    pCaptureH="captureSize"
+    pCaptureVizX="-outerCaptureX"
+    pCaptureVizY="outerCaptureY + 1.75"
+    pCaptureVizZ="-outerCaptureZ"
+  />
+  <include alf="logic/capture-point.alf" />
+
+  <set
+    pCaptureX="outerCaptureX"
+    pCaptureY="outerCaptureY"
+    pCaptureZ="outerCaptureZ"
+    pCaptureW="captureSize"
+    pCaptureD="captureSize"
+    pCaptureH="captureSize"
+    pCaptureVizX="outerCaptureX"
+    pCaptureVizY="outerCaptureY + 1.75"
+    pCaptureVizZ="outerCaptureZ"
+  />
+  <include alf="logic/capture-point.alf" />
+
+  <set
+    pCaptureX="-outerCaptureZ"
+    pCaptureY="outerCaptureY"
+    pCaptureZ="outerCaptureX"
+    pCaptureW="captureSize"
+    pCaptureD="captureSize"
+    pCaptureH="captureSize"
+    pCaptureVizX="-outerCaptureZ"
+    pCaptureVizY="outerCaptureY + 1.75"
+    pCaptureVizZ="outerCaptureX"
+  />
+  <include alf="logic/capture-point.alf" />
+
+  <set
+    pCaptureX="outerCaptureZ"
+    pCaptureY="outerCaptureY"
+    pCaptureZ="-outerCaptureX"
+    pCaptureW="captureSize"
+    pCaptureD="captureSize"
+    pCaptureH="captureSize"
+    pCaptureVizX="outerCaptureZ"
+    pCaptureVizY="outerCaptureY + 1.75"
+    pCaptureVizZ="-outerCaptureX"
+  />
+  <include alf="logic/capture-point.alf" />
+</map>

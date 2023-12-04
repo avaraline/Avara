@@ -170,7 +170,9 @@ public:
     double latencyTolerance;
 
     ScoreInterfaceReasons scoreReason;
+    ScoreInterfaceReasons killReason;
     ScoreInterfaceReasons lastReason;
+    std::deque<ScoreInterfaceEvent> scoreEventList;
 
     uint32_t nextScheduledFrame;
     uint32_t nextPingTime;
@@ -185,7 +187,6 @@ public:
     Boolean keysFromStdin;
     Boolean keysToStdout;
 
-    Boolean showClassicHUD;
     Boolean showNewHUD;
 
     // Moved here from GameLoop so it can run on the normal event loop
@@ -201,6 +202,7 @@ public:
     virtual CBSPWorld* CreateCBSPWorld(short initialObjectSpace);
     virtual CSoundHub* CreateSoundHub();
     virtual std::unique_ptr<CNetManager> CreateNetManager();
+    virtual void LoadImages(NVGcontext *ctx);
 
     virtual void InitLocatorTable();
     virtual void IncrementGameCounter();
@@ -211,6 +213,7 @@ public:
 
     virtual CAbstractPlayer *GetSpectatePlayer();
     virtual CAbstractPlayer *GetLocalPlayer();
+    virtual std::string GetPlayerName(short id);
 
     virtual void AddActor(CAbstractActor *theActor);
     virtual void RemoveActor(CAbstractActor *theActor);
@@ -221,6 +224,7 @@ public:
     virtual void RunActorFrameActions();
 
     virtual void Score(short team, short player, long points, Fixed energy, short hitTeam, short hitPlayer);
+    virtual void AddScoreNotify(ScoreInterfaceEvent event);
 
     virtual void ChangeDirectoryFile();
     virtual void LevelReset(Boolean clearReset);

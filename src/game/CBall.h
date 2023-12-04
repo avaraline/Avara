@@ -50,6 +50,7 @@ public:
     long ownerChangeCount;
     long ownerChangeTime;
     short ownerScoringId;
+    short lastOwner;
     ARGBColor origLongColor = 0;
 
     short origTeam;

@@ -306,15 +306,22 @@ StateFunction CGUI::_transitionScreen() {
     //itsGame->RunFrameActions();
     return STAY;
 }
-
+bool levelloaded = false;
 StateFunction CGUI::_test() {
     std::stringstream fps;
     fps << "frame in: " << dt << "ms";
     mu_label(mui_ctx, fps.str().c_str());
-    if (BSPButton("PLAY")) {
-        itsTui->ExecuteMatchingCommand("/rand avara aa emo ex", itsLocalPlayer);
-        //itsGame->SendStartCommand();
-        active = false;
+    if (levelloaded) {
+        if (BSPButton("PLAY")) {
+            itsGame->SendStartCommand();
+            active = false;
+        }
+    }
+    else {
+        if (BSPButton("LOAD")) {
+            itsTui->ExecuteMatchingCommand("/rand avara aa emo ex", itsLocalPlayer);
+            levelloaded = true;
+        }
     }
     if (BSPButton("ABOUT")) {
         PlaySound(411);

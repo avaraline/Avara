@@ -1,0 +1,123 @@
+<SkyColor color="#73ace5" color.1="#334d66" />
+<GroundColor color="#00274d" />
+<set
+  designer="$mSilvermantis"
+  wallHeight="0"
+/>
+
+<Wall w="24.89625" d="7.5" h="12" x="-30.0525" y="0" z="-46.25" color="#528fcc" color.1="#000000" />
+<Wall w="24.89625" d="7.5" h="12" x="30.0525" y="0" z="-46.25" color="#528fcc" color.1="#000000" />
+<WallDoor midYaw="45" w="24.89625" d="7.5" h="12" x="-11.45375" y="0" z="-53.95375" color="#528fcc" color.1="#000000" />
+<WallDoor midYaw="-45" w="24.89625" d="7.5" h="12" x="11.45375" y="0" z="-53.95375" color="#528fcc" color.1="#000000" />
+<Wall w="7.5" d="24.89625" h="12" x="46.25" y="0" z="-30.0525" color="#528fcc" color.1="#000000" />
+<Wall w="7.5" d="24.89625" h="12" x="46.25" y="0" z="30.0525" color="#528fcc" color.1="#000000" />
+<WallDoor midYaw="45" w="7.5" d="24.89625" h="12" x="53.95375" y="0" z="-11.45375" color="#528fcc" color.1="#000000" />
+<WallDoor midYaw="-45" w="7.5" d="24.89625" h="12" x="53.95375" y="0" z="11.45375" color="#528fcc" color.1="#000000" />
+<Wall w="24.89625" d="7.5" h="12" x="30.0525" y="0" z="46.25" color="#528fcc" color.1="#000000" />
+<Wall w="24.89625" d="7.5" h="12" x="-30.0525" y="0" z="46.25" color="#528fcc" color.1="#000000" />
+<WallDoor midYaw="45" w="24.89625" d="7.5" h="12" x="11.45375" y="0" z="53.95375" color="#528fcc" color.1="#000000" />
+<WallDoor midYaw="-45" w="24.89625" d="7.5" h="12" x="-11.45375" y="0" z="53.95375" color="#528fcc" color.1="#000000" />
+<Wall w="7.5" d="24.89625" h="12" x="-46.25" y="0" z="30.0525" color="#528fcc" color.1="#000000" />
+<Wall w="7.5" d="24.89625" h="12" x="-46.25" y="0" z="-30.0525" color="#528fcc" color.1="#000000" />
+<WallDoor midYaw="45" w="7.5" d="24.89625" h="12" x="-53.95375" y="0" z="11.45375" color="#528fcc" color.1="#000000" />
+<WallDoor midYaw="-45" w="7.5" d="24.89625" h="12" x="-53.95375" y="0" z="-11.45375" color="#528fcc" color.1="#000000" />
+
+<Wall w="10" d="10" h="20" x="-47.5" y="0" z="-47.5" color="#1a2633" color.1="#000000" />
+<WallDoor midYaw="45" w="10" d="10" h="20" x="0" y="0" z="-67.17625" color="#1a2633" color.1="#000000" />
+<Wall w="10" d="10" h="20" x="47.5" y="0" z="-47.5" color="#1a2633" color.1="#000000" />
+<WallDoor midYaw="45" w="10" d="10" h="20" x="67.17625" y="0" z="0" color="#1a2633" color.1="#000000" />
+<Wall w="10" d="10" h="20" x="47.5" y="0" z="47.5" color="#1a2633" color.1="#000000" />
+<WallDoor midYaw="45" w="10" d="10" h="20" x="0" y="0" z="67.17625" color="#1a2633" color.1="#000000" />
+<Wall w="10" d="10" h="20" x="-47.5" y="0" z="47.5" color="#1a2633" color.1="#000000" />
+<WallDoor midYaw="45" w="10" d="10" h="20" x="-67.17625" y="0" z="0" color="#1a2633" color.1="#000000" />
+
+<Wall w="7.5" d="7.5" h="3" x="-38.75" y="0" z="-38.75" color="#1a2633" color.1="#000000" />
+<WallDoor midYaw="45" w="7.5" d="7.5" h="3" x="0" y="0" z="-54.8025" color="#1a2633" color.1="#000000" />
+<Wall w="7.5" d="7.5" h="3" x="38.75" y="0" z="-38.75" color="#1a2633" color.1="#000000" />
+<WallDoor midYaw="45" w="7.5" d="7.5" h="3" x="54.8025" y="0" z="0" color="#1a2633" color.1="#000000" />
+<Wall w="7.5" d="7.5" h="3" x="38.75" y="0" z="38.75" color="#1a2633" color.1="#000000" />
+<WallDoor midYaw="45" w="7.5" d="7.5" h="3" x="0" y="0" z="54.8025" color="#1a2633" color.1="#000000" />
+<Wall w="7.5" d="7.5" h="3" x="-38.75" y="0" z="38.75" color="#1a2633" color.1="#000000" />
+<WallDoor midYaw="45" w="7.5" d="7.5" h="3" x="-54.8025" y="0" z="0" color="#1a2633" color.1="#000000" />
+
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="-10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="30" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="20" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="10" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="30" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="20" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-30" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-20" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+<FreeSolid w="5" d="5" h="3" shotPower="10" mass="20" x="-10" z="10" y="0" color="rgba(204, 229, 255, 0.4)" color.1="#000000" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody start="mShow" out="mTaken" color="#ffffff" color.1="#000000" angle="90" cx="38.75" cz="-38.75" y="5" grenades="mMdGrenade" shape="bspGrenade" speed="2" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody start="mShow" out="mTaken" color="#ffffff" color.1="#000000" angle="90" cx="-38.75" cz="38.75" y="5" grenades="mMdGrenade" shape="bspGrenade" speed="2" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody start="mShow" out="mTaken" color="#ffffff" color.1="#000000" angle="90" cx="-38.75" cz="-38.75" y="5" grenades="mMdGrenade" shape="bspGrenade" speed="2" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody start="mShow" out="mTaken" color="#ffffff" color.1="#000000" angle="90" cx="38.75" cz="38.75" y="5" grenades="mMdGrenade" shape="bspGrenade" speed="2" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody start="mShow" out="mTaken" color="#ffffff" color.1="#000000" angle="90" cx="0" cz="-54.8025" y="5" missiles="mLgMissile" shape="bspMissile" speed="2" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody start="mShow" out="mTaken" color="#ffffff" color.1="#000000" angle="90" cx="54.8025" cz="0" y="5" missiles="mLgMissile" shape="bspMissile" speed="2" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody start="mShow" out="mTaken" color="#ffffff" color.1="#000000" angle="90" cx="0" cz="54.8025" y="5" missiles="mLgMissile" shape="bspMissile" speed="2" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody start="mShow" out="mTaken" color="#ffffff" color.1="#000000" angle="90" cx="-54.8025" cz="0" y="5" missiles="mLgMissile" shape="bspMissile" speed="2" />
+
+<Teleporter group="-1" y="-30" activeRange="175" deadRange="140" destGroup="@recenter" shape="0" spin="true" color="#000000" color.1="#000000" cx="0" cz="0" angle="225" />
+<Teleporter group="@recenter" mask="0" y="30" shape="0" spin="true" color="#000000" color.1="#000000" cx="0" cz="0" angle="225" />
+<Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#ffc68c" color.1="#000000" cx="0" cz="0" angle="225" />
+
+<Incarnator cx="-20" cz="-20" y="30" angle="135" />
+<Incarnator cx="20" cz="-20" y="30" angle="225" />
+<Incarnator cx="20" cz="20" y="30" angle="315" />
+<Incarnator cx="-20" cz="20" y="30" angle="45" />
+<Incarnator cx="0" cz="-20" y="30" angle="180" />
+<Incarnator cx="20" cz="0" y="30" angle="270" />
+<Incarnator cx="0" cz="20" y="30" angle="0" />
+<Incarnator cx="-20" cz="0" y="30" angle="90" />

@@ -505,10 +505,13 @@ bool CommandManager::GetSetPreference(VectorOfArgs vargs) {
                 newValue += " " + vargs[i];
             }
             // update pref
-            itsApp->Update(prefName, newValue);
-            //write prefs
-            itsApp->AddMessageLine(prefName + " changed from " + oldValue + " to " + newValue);
-            itsApp->CApplication::PrefChanged(prefName);
+            bool success = itsApp->Update(prefName, newValue);
+
+            if (success) {
+                //write prefs
+                itsApp->AddMessageLine(prefName + " changed from " + oldValue + " to " + newValue);
+                itsApp->CApplication::PrefChanged(prefName);
+            }
         }
     }
     return true;

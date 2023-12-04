@@ -77,10 +77,12 @@ void CAbstractMissile::FrameAction() {
         FireSlivers();
 
         if (hitRec.closestHit) {
-            itsGame->scoreReason = ksiShotHit;
+            if (missileKind == kmiTurning) {
+                itsGame->scoreReason = ksiPlasmaHit;
+            }
             anActor = hitRec.closestHit->theOwner;
             anActor->WasHit(&hitRec, energy);
-            SecondaryDamage(hitRec.team, hitRec.playerId);
+            SecondaryDamage(hitRec.team, hitRec.playerId, ksiMissileHit);
         }
 
         Deactivate();
