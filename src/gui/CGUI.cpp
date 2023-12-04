@@ -12,14 +12,17 @@
 #include <cstring>
 
 std::string teststring = "hella";
+bool testbool = false;
 #define TEXT_INPUT_TEMP_BUFFER_SIZE 1024
 
 CGUI::CGUI(CAvaraAppImpl *app) {
     itsApp = app;
     itsGame = app->GetGame();
+    itsTui = app->GetTui();
     itsWorld = new CBSPWorldImpl;
     itsWorld->IBSPWorld(50);
     itsView = itsGame->itsView;
+    itsLocalPlayer = CPlayerManagerImpl::LocalPlayer();
     LookAtGUI();
 
     mui_ctx = (mu_Context*)malloc(sizeof(mu_Context));
@@ -48,6 +51,7 @@ void CGUI::LookAtGUI() {
 }
 
 void CGUI::Update() {
+    if (!active) return;
     last_t = t;
     t = SDL_GetTicks();
     dt = t - last_t;
@@ -83,7 +87,7 @@ int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
         CAbstractActor* _wall = actors.at(mu_id);
         CSmartPart* _part = _wall->partList[0];
         _part->Reset();
-        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), ToFixed(0));
+        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
         //_part->MoveDone();
     }
     else {
@@ -137,6 +141,7 @@ int CGUI::BSPButton(std::string s) {
     if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
         res |= MU_RES_SUBMIT;
         _wall->Blast();
+        return res;
     }
     /* draw */
     if (s.length() > 0) { mu_draw_control_text(mui_ctx, s.c_str(), r, MU_COLOR_TEXT, 0); }
@@ -165,56 +170,39 @@ int CGUI::BSPTextInput(const char *id, std::string &s) {
     // temp now contains updated string
     s.assign(temp);
     if (mui_ctx->focus == mu_id) {
-
+        // TODO: fix marker
         _part->ReplaceColor(0xfefefe, ColorManager::getEnergyGaugeColor());
     }
     else {
         long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
-        _part->ReplaceColor(0x00fefefe, color);
+        _part->ReplaceColor(0xfefefe, color);
     }
     return res;
 }
 
-int CGUI::BSPCheckbox(const char *label, int *state) {
+int CGUI::BSPCheckbox(const char *label, bool *state) {
     mu_Id mu_id = mu_get_id(mui_ctx, &state, sizeof(state));
     mu_Rect r = mu_layout_next(mui_ctx);
     mu_Rect box = mu_rect(r.x, r.y, r.h, r.h);
     mu_update_control(mui_ctx, mu_id, r, 0);
-
-    Point s_topleft = pt(r.x, r.y);
-    Point s_bottomright = pt(r.x + r.w, r.y + r.h);
-    Point mid = pt(r.x + (r.w / 2), r.y + (r.h / 2));
-    glm::vec3 worldpos = screenToWorld(&mid);
-    glm::vec3 ws_topleft = screenToWorld(&s_topleft);
-    glm::vec3 ws_bottomright = screenToWorld(&s_bottomright);
     int res = 0;
+    BSPWidget(r, res, mu_id);
+    CAbstractActor* _wall = actors.at(mu_id);
+    CSmartPart* _part = _wall->partList[0];
     if (mui_ctx->mouse_pressed == MU_MOUSE_LEFT && mui_ctx->focus == mu_id) {
         res |= MU_RES_CHANGE;
         *state = !*state;
     }
-
-    if (actors.count(mu_id) > std::size_t(0)) {
-        CAbstractActor* _wall = actors.at(mu_id);
-        CSmartPart* _part = _wall->partList[0];
-        _part->Reset();
-
-        TranslatePart(_part, ToFixed(worldpos.x), ToFixed(worldpos.y), ToFixed(0));
+    // TODO: fix marker, use hud colors, uhhh something other than yes/no
+    if (*state) {
+        mu_draw_control_text(mui_ctx, "yes", r, MU_COLOR_TEXT, 0);
     }
     else {
-        Vector dims;
-        dims[0] = ToFixed((ws_bottomright.x - ws_topleft.x) / 2.0);
-        dims[1] = ToFixed((ws_bottomright.y - ws_topleft.y) / 2.0);
-        dims[2] = FIX3(1);
-        CSwitchActor *sw = new CSwitchActor;
-        //sw->enabled = true;
-        actors.emplace(mu_id, sw);
+        mu_draw_control_text(mui_ctx, "no", r, MU_COLOR_TEXT, 0);
     }
-
     r = mu_rect(r.x + box.w, r.y, r.w - box.w, r.h);
-    mu_draw_control_text(mui_ctx, label, r, MU_COLOR_TEXT, 0);
     return res;
 }
-
 
 void CGUI::PlaySound(short theSound) {
     CBasicSound *aSound;
@@ -324,7 +312,8 @@ StateFunction CGUI::_test() {
     fps << "frame in: " << dt << "ms";
     mu_label(mui_ctx, fps.str().c_str());
     if (BSPButton("PLAY")) {
-        itsGame->SendStartCommand();
+        itsTui->ExecuteMatchingCommand("/rand avara aa emo ex", itsLocalPlayer);
+        //itsGame->SendStartCommand();
         active = false;
     }
     if (BSPButton("ABOUT")) {
@@ -335,13 +324,19 @@ StateFunction CGUI::_test() {
         sdlevent.type = SDL_QUIT;
         SDL_PushEvent(&sdlevent);
     }
+
     const char* label = "A text input:";
     int w = text_width(0, label, strlen(label));
     mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 400 }, 0);
     mu_label(mui_ctx, label);
     BSPTextInput("myinputid", teststring);
 
-    //BSPCheckbox("A Checkbox", 0);
+    const char* label2 = "A checkbox:";
+    w = text_width(0, label2, strlen(label2));
+    mu_layout_row(mui_ctx, 2, (int[]) { w + 50, 75 }, 0);
+    mu_label(mui_ctx, label2);
+    BSPCheckbox("checkboxid", &testbool);
+
     return STAY;
 }
 
@@ -350,6 +345,9 @@ void CGUI::Render(NVGcontext *ctx) {
     //nvgSave(ctx);
     nvgBeginFrame(ctx, gApplication->win_size_x, gApplication->win_size_y, gApplication->pixel_ratio);
     nvgBeginPath(ctx);
+
+    nvgFontFace(ctx, "mono");
+    nvgFontSize(ctx, 55);
     //LookAtGUI();
     itsWorld->Render(itsView);
     //screen->Render(ctx);
@@ -370,10 +368,8 @@ void CGUI::Render(NVGcontext *ctx) {
         }
         */
         if (cmd->type == MU_COMMAND_TEXT) {
-            nvgFontFace(ctx, "archivo");
             nvgTextAlign(ctx, NVG_ALIGN_LEFT | NVG_ALIGN_TOP);
             nvgFillColor(ctx, toNVGcolor(cmd->text.color));
-            nvgFontSize(ctx, 55);
             nvgText(ctx, cmd->text.pos.x, cmd->text.pos.y, cmd->text.str, NULL);
         }
     }

@@ -191,6 +191,93 @@ static json defaultPrefs = {
 };
 
 
+static enum optionTypes {
+    kOptionTypeString, 
+    kOptionTypeFloat, 
+    kOptionTypeInteger, 
+    kOptionTypeChoice, 
+    kOptionTypeColor,
+    kOptionTypeBool,
+    kOptionTypeKeyboard
+} final;
+
+static json optionsScreens {
+    {"Graphics", {
+        {"Field of View", kFOV, kOptionTypeInteger},
+        {"Fullscreen", kFullScreenTag, kOptionTypeBool},
+        {"Color vision impariment mode", kColorBlindMode, kOptionTypeChoice, {
+            {0, "something"},
+            {1, "something else"},
+            {2, "third thing"}}}
+        },
+        {"Multisampling", kMultiSamplesTag, kOptionTypeChoice, {
+            {0, "off"},
+            {4, "medium"},
+            {8, "high"}
+        }},  
+    },
+    {"Game", {
+        {"Yon (render distance)", kYonPrefTag, kOptionTypeInteger},
+        {"Mouse Sensitivity", kMouseSensitivityTag, kOptionTypeChoice, {
+            {0, "low"},
+            {1, "medium"},
+            {2, "high"}
+        }},
+        {"Invert Mouse Y-Axis", kInvertYAxisTag, kOptionTypeBool},
+        {"Classic HUD", kShowClassicHUD, kOptionTypeBool},
+        {"Updated HUD", kShowNewHUD, kOptionTypeBool},
+        {"Volume", kSoundVolume, kOptionTypeInteger},
+        {"Ignore Custom Hull Colors", kIgnoreCustomColorsTag, kOptionTypeBool},
+        {"Ignore Custom Goody Sounds", kIgnoreCustomGoodySound, kOptionTypeBool},
+    }},
+    {"Network", {
+        {"Player Name", kPlayerNameTag, kOptionTypeString},
+        {"UDP host port", kDefaultUDPPort, kOptionTypeInteger},
+        {"NAT hole punching", kPunchHoles, kOptionTypeBool},
+        {"NAT hole punching server", kPunchServerAddress, kOptionTypeString},
+        {"NAT hole punching port", kPunchServerPort, kOptionTypeInteger}
+    }},
+    {"Keyboard", {
+        {"Controls", kKeyboardMappingTag, kOptionTypeKeyboard}
+    }},
+    {"Colors", {
+        {"Hull Color", kPlayerHullColorTag, kOptionTypeColor},
+        {"Trim Color", kPlayerHullTrimColorTag, kOptionTypeColor},
+        {"Cockpit Color", kPlayerCockpitColorTag, kOptionTypeColor},
+        {"Gun Color", kPlayerGunColorTag, kOptionTypeColor},
+        {"HUD Color", kHUDColor, kOptionTypeColor},
+        {"HUD Warning", kHUDWarningColor, kOptionTypeColor},
+        {"HUD Critical", kHUDCriticalColor, kOptionTypeColor},
+        {"HUD Positive", kHUDPositiveColor, kOptionTypeColor}
+    }},
+    {"HUD", {
+        {"Layout Preset", kHUDPreset, kOptionTypeChoice, {
+            {0, "First one"},
+            {1, "Second one"},
+            {2, "Newest one"}}
+        },
+        {"Alpha", kHUDAlpha, kOptionTypeFloat},
+        {"Arrow Distance", kHUDArrowDistance, kOptionTypeFloat},
+        {"Arrow Scale", kHUDArrowScale, kOptionTypeFloat},
+        {"Arrow Style", kHUDArrowStyle, kOptionTypeChoice, {
+            {0, "Overhead arrow"},
+            {1, "Mystery"},
+            {2, "Ground arrow"}
+        }},
+        {"Inertia effect multiplier", kHUDInertia, kOptionTypeFloat},
+        {"Show Grenade count", kHUDShowGrenadeCount, kOptionTypeBool},
+        {"Show Missile count", kHUDShowMissileCount, kOptionTypeBool},
+        {"Show Booster count", kHUDShowBoosterCount, kOptionTypeBool},
+        {"Show Life count", kHUDShowLivesCount, kOptionTypeBool},
+        {"Show Energy gauge", kHUDShowEnergyGauge, kOptionTypeBool},
+        {"Show Shield gauge", kHUDShowShieldGauge, kOptionTypeBool},
+        {"Show Player list", kHUDShowPlayerList, kOptionTypeBool},
+        {"Show Score", kHUDShowScore, kOptionTypeBool},
+        {"Show Time", kHUDShowTime, kOptionTypeBool},
+        {"Show System Messages", kHUDShowSystemMessages, kOptionTypeBool},
+        {"Show Level Messages", kHUDShowLevelMessages, kOptionTypeBool}
+    }}
+};
 
 static std::string PrefPath() {
     char *prefPath = SDL_GetPrefPath("Avaraline", "Avara");

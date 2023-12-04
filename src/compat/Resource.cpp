@@ -366,6 +366,7 @@ bool GetBSPPath(int resId, char* dest) {
 std::map<std::string, json> bspCash;
 
 json GetBSPJSON(int resId) {
+    if (resId < 1) return nullptr;
     char bspPath[PATH_MAX];
     bool found = GetBSPPath(resId, bspPath);
 

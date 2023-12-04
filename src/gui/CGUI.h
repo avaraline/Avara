@@ -1,5 +1,6 @@
 #pragma once
 #include "ARGBColor.h"
+#include "CommandManager.h"
 #include "AvaraGL.h"
 #include "CApplication.h"
 #include "CBSPPart.h"
@@ -46,6 +47,8 @@ public:
 protected:
   CAvaraGame *itsGame;
   CAvaraAppImpl *itsApp;
+  CommandManager *itsTui;
+  CPlayerManager *itsLocalPlayer;
   void LookAtGUI();
   void PlaySound(short theSound);
 
@@ -74,7 +77,7 @@ protected:
   int BSPButton(std::string label);
   int BSPWidget(mu_Rect r, int res, mu_Id mu_id);
   int BSPTextInput(const char *id, std::string &s);
-  int BSPCheckbox(const char *label, int *state);
+  int BSPCheckbox(const char *label, bool *state);
   CBSPWorldImpl *itsWorld;
   CBSPWorldImpl *cursorWorld;
   CViewParameters *itsView;

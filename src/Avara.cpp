@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
     // Init Avara stuff.
     InitMatrix();
     OpenAvaraTCP();
-
+    SDL_PumpEvents();
     // The Avara application itself.
     CAvaraAppImpl *app = new CAvaraAppImpl();
 
@@ -110,7 +110,7 @@ int main(int argc, char *argv[]) {
 
     auto p = CPlayerManagerImpl::LocalPlayer();
     auto *tui = ((CAvaraAppImpl *)app)->GetTui();
-    auto defaultCmd = "/rand avara aa emo ex #fav -#bad -#koth";
+    auto defaultCmd = "";//"/rand avara aa emo ex #fav -#bad -#koth";
     if (textCommands.size() > 0) {
         for (auto cmd: textCommands) {
             tui->ExecuteMatchingCommand(cmd, p);

@@ -80,15 +80,11 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
 
     previewAngle = 0;
     previewRadius = 0;
-    animatePreview = false;
+    animatePreview = true;
     nextTrackerUpdate = 0;
     trackerUpdatePending = false;
     trackerThread = new std::thread(TrackerPinger, this);
     trackerThread->detach();
-
-
-    itsGUI = new CGUI(this);
-    LoadDefaultOggFiles();
 
     // register and handle text commands
     itsTui = new CommandManager(this);
@@ -105,6 +101,9 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
         SDL_Log("Enabling UDP hole punching via %s:%d", host.c_str(), port);
         PunchSetup(host.c_str(), port);
     }
+
+    itsGUI = new CGUI(this);
+    LoadDefaultOggFiles();
 }
 
 CAvaraAppImpl::~CAvaraAppImpl() {
