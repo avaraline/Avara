@@ -271,7 +271,7 @@
 />
 <Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mWhiteEnters" stop="mWhiteOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(8)" status="0"  />
 
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="@start" stop="mNeutralOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="rgba(80, 80, 80, 0.15)" />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="@start" stop="mNeutralOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="rgba(80, 80, 80, 0.35)" />
 
 <Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mGreenOpen" didOpen="mGreenDidOpen" close="mGreenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(1)" cx="-7" cz="pCaptureDoorZOffset" y="-10" />
 <And
