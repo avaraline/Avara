@@ -73,6 +73,7 @@
   out.6="mBlackFieldSuspend"
   out.7="mWhiteFieldSuspend"
 />
+<Field deltaY="0" mask="T1" watch="playerMask" start="mGreenFieldOn" stop="mGreenFieldSuspend" enter="mGreenEnters" exit="mGreenLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
   in="mYellowEnters"
@@ -84,6 +85,7 @@
   out.6="mBlackFieldSuspend"
   out.7="mWhiteFieldSuspend"
 />
+<Field deltaY="0" mask="T2" watch="playerMask" start="mYellowFieldOn" stop="mYellowFieldSuspend" enter="mYellowEnters" exit="mYellowLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
   in="mRedEnters"
@@ -95,6 +97,7 @@
   out.6="mBlackFieldSuspend"
   out.7="mWhiteFieldSuspend"
 />
+<Field deltaY="0" mask="T3" watch="playerMask" start="mRedFieldOn" stop="mRedFieldSuspend" enter="mRedEnters" exit="mRedLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
   in="mPinkEnters"
@@ -106,6 +109,7 @@
   out.6="mBlackFieldSuspend"
   out.7="mWhiteFieldSuspend"
 />
+<Field deltaY="0" mask="T4" watch="playerMask" start="mPinkFieldOn" stop="mPinkFieldSuspend" enter="mPinkEnters" exit="mPinkLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
   in="mPurpleEnters"
@@ -117,6 +121,7 @@
   out.6="mBlackFieldSuspend"
   out.7="mWhiteFieldSuspend"
 />
+<Field deltaY="0" mask="T5" watch="playerMask" start="mPurpleFieldOn" stop="mPurpleFieldSuspend" enter="mPurpleEnters" exit="mPurpleLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
   in="mBlueEnters"
@@ -128,6 +133,7 @@
   out.6="mBlackFieldSuspend"
   out.7="mWhiteFieldSuspend"
 />
+<Field deltaY="0" mask="T6" watch="playerMask" start="mBlueFieldOn" stop="mBlueFieldSuspend" enter="mBlueEnters" exit="mBlueLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
   in="mBlackEnters"
@@ -139,6 +145,7 @@
   out.6="mBlueFieldSuspend"
   out.7="mWhiteFieldSuspend"
 />
+<Field deltaY="0" mask="T7" watch="playerMask" start="mBlackFieldOn" stop="mBlackFieldSuspend" enter="mBlackEnters" exit="mBlackLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
   in="mWhiteEnters"
@@ -150,14 +157,6 @@
   out.6="mBlueFieldSuspend"
   out.7="mBlackFieldSuspend"
 />
-
-<Field deltaY="0" mask="T1" watch="playerMask" start="mGreenFieldOn" stop="mGreenFieldSuspend" enter="mGreenEnters" exit="mGreenLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T2" watch="playerMask" start="mYellowFieldOn" stop="mYellowFieldSuspend" enter="mYellowEnters" exit="mYellowLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T3" watch="playerMask" start="mRedFieldOn" stop="mRedFieldSuspend" enter="mRedEnters" exit="mRedLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T4" watch="playerMask" start="mPinkFieldOn" stop="mPinkFieldSuspend" enter="mPinkEnters" exit="mPinkLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T5" watch="playerMask" start="mPurpleFieldOn" stop="mPurpleFieldSuspend" enter="mPurpleEnters" exit="mPurpleLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T6" watch="playerMask" start="mBlueFieldOn" stop="mBlueFieldSuspend" enter="mBlueEnters" exit="mBlueLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
-<Field deltaY="0" mask="T7" watch="playerMask" start="mBlackFieldOn" stop="mBlackFieldSuspend" enter="mBlackEnters" exit="mBlackLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 <Field deltaY="0" mask="T8" watch="playerMask" start="mWhiteFieldOn" stop="mWhiteFieldSuspend" enter="mWhiteEnters" exit="mWhiteLeaves" x="pCaptureX" y="pCaptureY" z="pCaptureZ" w="pCaptureW" d="pCaptureD" h="pCaptureH" />
 
 <And
@@ -172,6 +171,8 @@
   out.7="mWhiteOff"
   out.8="mGreenOpen"
 />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mGreenEnters" stop="mGreenOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(1)" status="0"  />
+
 <And
   in="mYellowEnters"
   out.0="mNeutralOff"
@@ -184,6 +185,8 @@
   out.7="mWhiteOff"
   out.8="mYellowOpen"
 />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mYellowEnters" stop="mYellowOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(2)" status="0"  />
+
 <And
   in="mRedEnters"
   out.0="mNeutralOff"
@@ -196,6 +199,8 @@
   out.7="mWhiteOff"
   out.8="mRedOpen"
 />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mRedEnters" stop="mRedOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(3)" status="0"  />
+
 <And
   in="mPinkEnters"
   out.0="mNeutralOff"
@@ -208,6 +213,8 @@
   out.7="mWhiteOff"
   out.8="mPinkOpen"
 />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mPinkEnters" stop="mPinkOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(4)" status="0"  />
+
 <And
   in="mPurpleEnters"
   out.0="mNeutralOff"
@@ -220,6 +227,8 @@
   out.7="mWhiteOff"
   out.8="mPurpleOpen"
 />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mPurpleEnters" stop="mPurpleOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(5)" status="0"  />
+
 <And
   in="mBlueEnters"
   out.0="mNeutralOff"
@@ -232,6 +241,8 @@
   out.7="mWhiteOff"
   out.8="mBlueOpen"
 />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mBlueEnters" stop="mBlueOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(6)" status="0"  />
+
 <And
   in="mBlackEnters"
   out.0="mNeutralOff"
@@ -244,6 +255,8 @@
   out.7="mWhiteOff"
   out.8="mBlackOpen"
 />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mBlackEnters" stop="mBlackOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(7)" status="0"  />
+
 <And
   in="mWhiteEnters"
   out.0="mNeutralOff"
@@ -256,16 +269,9 @@
   out.7="mBlackOff"
   out.8="mWhiteOpen"
 />
+<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mWhiteEnters" stop="mWhiteOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(8)" status="0"  />
 
 <Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="@start" stop="mNeutralOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="rgba(80, 80, 80, 0.15)" />
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mGreenEnters" stop="mGreenOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(1)" status="0"  />
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mYellowEnters" stop="mYellowOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(2)" status="0"  />
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mRedEnters" stop="mRedOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(3)" status="0"  />
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mPinkEnters" stop="mPinkOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(4)" status="0"  />
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mPurpleEnters" stop="mPurpleOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(5)" status="0"  />
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mBlueEnters" stop="mBlueOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(6)" status="0"  />
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mBlackEnters" stop="mBlackOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(7)" status="0"  />
-<Teleporter cx="pCaptureVizX" y="pCaptureVizY" cz="pCaptureVizZ" mask="0" start="mWhiteEnters" stop="mWhiteOff" speed="pCaptureVizSpeed" shape="pCaptureVizShape" scale="pCaptureVizScale" color="team(8)" status="0"  />
 
 <Door yon="0.001" shape="bspSliver0" deltaY="3" openSpeed="20" closeSpeed="100" open="mGreenOpen" didOpen="mGreenDidOpen" close="mGreenClose" openSound="0" stopSound="0" closeSound="0" hitSound="0" color="team(1)" cx="-7" cz="pCaptureDoorZOffset" y="-10" />
 <And
