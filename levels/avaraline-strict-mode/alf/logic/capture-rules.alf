@@ -1,8 +1,8 @@
-<!-- @param number pReqPointMultiplier scale the amount of *real* points required to win (it will always *report* 150 and increments of 15) -->
+<!-- @param number pReqPointMultiplier scale the amount of *real* points required to win (it will always *report* 100 and increments of 10) -->
 
 <set
   defaultLives="999"
-  kScaledPoints="round(pReqPointMultiplier * 120)"
+  kScaledPoints="round(pReqPointMultiplier * 104)"
   kSnText="snTextBlip"
   kTextVolume="0.3"
 />
@@ -17,122 +17,114 @@
 <Timer in.0="mGreenWins" in.1="mYellowWins" in.2="mRedWins" in.3="mPinkWins" in.4="mPurpleWins" in.5="mBlueWins" in.6="mBlackWins" in.7="mWhiteWins" wait="1" out="mGameEnds" />
 <Teleporter start="mGameEnds" y="-10" activeRange="10000" shape="0" win="0" cx="0" cz="0" />
 
-<unique vars="mNotify mAt15 mAt30 mAt45 mAt60 mAt75 mAt90 mAt105 mAt120 mAt135 mAt150" />
+<unique vars="mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <Counter in="pGreenPoint" out="mNotify" n="kScaledPoints" />
-<Distributor in="mNotify" out.0="mAt15" out.1="mAt30" out.2="mAt45" out.3="mAt60" out.4="mAt75" out.5="mAt90" out.6="mAt105" out.7="mAt120" out.8="mAt135" out.9="mAt150" restart="false" />
-<And in="mAt150" out="mGreenWins" />
-<Text showEveryone="true" text="Green has 15 points." in="mAt15" sound="kSnText" volume="kTextVolume" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mGreenWins" restart="false" />
+<Text showEveryone="true" text="Green has 10 points." in="mAt10" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Green has 20 points." in="mAt20" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Green has 30 points." in="mAt30" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Green has 45 points." in="mAt45" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Green has 40 points." in="mAt40" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Green team has made it halfway!" in="mAt50" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Green has 60 points." in="mAt60" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Green has 75 points." in="mAt75" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Green has 90 points." in="mAt90" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Green has 105 points." in="mAt105" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Green has 120 points." in="mAt120" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Green has 135 points." in="mAt135" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Green has 150 points. Green team wins!" in="mAt150" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Green has 70 points." in="mAt70" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Green has 80 points." in="mAt80" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Green team has only 10 points to go!" in="mAt90" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Green team wins!" in="mGreenWins" sound="kSnText" volume="kTextVolume" />
 
-<unique vars="mNotify mAt15 mAt30 mAt45 mAt60 mAt75 mAt90 mAt105 mAt120 mAt135 mAt150" />
+<unique vars="mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <Counter in="pYellowPoint" out="mNotify" n="kScaledPoints" />
-<Distributor in="mNotify" out.0="mAt15" out.1="mAt30" out.2="mAt45" out.3="mAt60" out.4="mAt75" out.5="mAt90" out.6="mAt105" out.7="mAt120" out.8="mAt135" out.9="mAt150" restart="false" />
-<And in="mAt150" out="mYellowWins" />
-<Text showEveryone="true" text="Yellow has 15 points." in="mAt15" sound="kSnText" volume="kTextVolume" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mYellowWins" restart="false" />
+<Text showEveryone="true" text="Yellow has 10 points." in="mAt10" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Yellow has 20 points." in="mAt20" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Yellow has 30 points." in="mAt30" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Yellow has 45 points." in="mAt45" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Yellow has 40 points." in="mAt40" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Yellow team has made it halfway!" in="mAt50" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Yellow has 60 points." in="mAt60" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Yellow has 75 points." in="mAt75" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Yellow has 90 points." in="mAt90" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Yellow has 105 points." in="mAt105" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Yellow has 120 points." in="mAt120" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Yellow has 135 points." in="mAt135" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Yellow has 150 points. Yellow team wins!" in="mAt150" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Yellow has 70 points." in="mAt70" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Yellow has 80 points." in="mAt80" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Yellow team has only 10 points to go!" in="mAt90" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Yellow team wins!" in="mYellowWins" sound="kSnText" volume="kTextVolume" />
 
-<unique vars="mNotify mAt15 mAt30 mAt45 mAt60 mAt75 mAt90 mAt105 mAt120 mAt135 mAt150" />
+<unique vars="mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <Counter in="pRedPoint" out="mNotify" n="kScaledPoints" />
-<Distributor in="mNotify" out.0="mAt15" out.1="mAt30" out.2="mAt45" out.3="mAt60" out.4="mAt75" out.5="mAt90" out.6="mAt105" out.7="mAt120" out.8="mAt135" out.9="mAt150" restart="false" />
-<And in="mAt150" out="mRedWins" />
-<Text showEveryone="true" text="Red has 15 points." in="mAt15" sound="kSnText" volume="kTextVolume" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mRedWins" restart="false" />
+<Text showEveryone="true" text="Red has 10 points." in="mAt10" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Red has 20 points." in="mAt20" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Red has 30 points." in="mAt30" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Red has 45 points." in="mAt45" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Red has 40 points." in="mAt40" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Red team has made it halfway!" in="mAt50" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Red has 60 points." in="mAt60" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Red has 75 points." in="mAt75" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Red has 90 points." in="mAt90" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Red has 105 points." in="mAt105" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Red has 120 points." in="mAt120" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Red has 135 points." in="mAt135" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Red has 150 points. Red team wins!" in="mAt150" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Red has 70 points." in="mAt70" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Red has 80 points." in="mAt80" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Red team has only 10 points to go!" in="mAt90" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Red team wins!" in="mRedWins" sound="kSnText" volume="kTextVolume" />
 
-<unique vars="mNotify mAt15 mAt30 mAt45 mAt60 mAt75 mAt90 mAt105 mAt120 mAt135 mAt150" />
+<unique vars="mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <Counter in="pPinkPoint" out="mNotify" n="kScaledPoints" />
-<Distributor in="mNotify" out.0="mAt15" out.1="mAt30" out.2="mAt45" out.3="mAt60" out.4="mAt75" out.5="mAt90" out.6="mAt105" out.7="mAt120" out.8="mAt135" out.9="mAt150" restart="false" />
-<And in="mAt150" out="mPinkWins" />
-<Text showEveryone="true" text="Pink has 15 points." in="mAt15" sound="kSnText" volume="kTextVolume" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mPinkWins" restart="false" />
+<Text showEveryone="true" text="Pink has 10 points." in="mAt10" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Pink has 20 points." in="mAt20" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Pink has 30 points." in="mAt30" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Pink has 45 points." in="mAt45" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Pink has 40 points." in="mAt40" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Pink team has made it halfway!" in="mAt50" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Pink has 60 points." in="mAt60" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Pink has 75 points." in="mAt75" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Pink has 90 points." in="mAt90" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Pink has 105 points." in="mAt105" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Pink has 120 points." in="mAt120" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Pink has 135 points." in="mAt135" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Pink has 150 points. Pink team wins!" in="mAt150" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Pink has 70 points." in="mAt70" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Pink has 80 points." in="mAt80" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Pink team has only 10 points to go!" in="mAt90" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Pink team wins!" in="mPinkWins" sound="kSnText" volume="kTextVolume" />
 
-<unique vars="mNotify mAt15 mAt30 mAt45 mAt60 mAt75 mAt90 mAt105 mAt120 mAt135 mAt150" />
+<unique vars="mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <Counter in="pPurplePoint" out="mNotify" n="kScaledPoints" />
-<Distributor in="mNotify" out.0="mAt15" out.1="mAt30" out.2="mAt45" out.3="mAt60" out.4="mAt75" out.5="mAt90" out.6="mAt105" out.7="mAt120" out.8="mAt135" out.9="mAt150" restart="false" />
-<And in="mAt150" out="mPurpleWins" />
-<Text showEveryone="true" text="Purple has 15 points." in="mAt15" sound="kSnText" volume="kTextVolume" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mPurpleWins" restart="false" />
+<Text showEveryone="true" text="Purple has 10 points." in="mAt10" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Purple has 20 points." in="mAt20" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Purple has 30 points." in="mAt30" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Purple has 45 points." in="mAt45" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Purple has 40 points." in="mAt40" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Purple team has made it halfway!" in="mAt50" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Purple has 60 points." in="mAt60" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Purple has 75 points." in="mAt75" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Purple has 90 points." in="mAt90" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Purple has 105 points." in="mAt105" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Purple has 120 points." in="mAt120" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Purple has 135 points." in="mAt135" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Purple has 150 points. Purple team wins!" in="mAt150" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Purple has 70 points." in="mAt70" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Purple has 80 points." in="mAt80" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Purple team has only 10 points to go!" in="mAt90" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Purple team wins!" in="mPurpleWins" sound="kSnText" volume="kTextVolume" />
 
-<unique vars="mNotify mAt15 mAt30 mAt45 mAt60 mAt75 mAt90 mAt105 mAt120 mAt135 mAt150" />
+<unique vars="mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <Counter in="pBluePoint" out="mNotify" n="kScaledPoints" />
-<Distributor in="mNotify" out.0="mAt15" out.1="mAt30" out.2="mAt45" out.3="mAt60" out.4="mAt75" out.5="mAt90" out.6="mAt105" out.7="mAt120" out.8="mAt135" out.9="mAt150" restart="false" />
-<And in="mAt150" out="mBlueWins" />
-<Text showEveryone="true" text="Blue has 15 points." in="mAt15" sound="kSnText" volume="kTextVolume" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mBlueWins" restart="false" />
+<Text showEveryone="true" text="Blue has 10 points." in="mAt10" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Blue has 20 points." in="mAt20" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Blue has 30 points." in="mAt30" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Blue has 45 points." in="mAt45" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Blue has 40 points." in="mAt40" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Blue team has made it halfway!" in="mAt50" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Blue has 60 points." in="mAt60" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Blue has 75 points." in="mAt75" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Blue has 90 points." in="mAt90" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Blue has 105 points." in="mAt105" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Blue has 120 points." in="mAt120" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Blue has 135 points." in="mAt135" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Blue has 150 points. Blue team wins!" in="mAt150" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Blue has 70 points." in="mAt70" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Blue has 80 points." in="mAt80" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Blue team has only 10 points to go!" in="mAt90" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Blue team wins!" in="mBlueWins" sound="kSnText" volume="kTextVolume" />
 
-<unique vars="mNotify mAt15 mAt30 mAt45 mAt60 mAt75 mAt90 mAt105 mAt120 mAt135 mAt150" />
+<unique vars="mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <Counter in="pBlackPoint" out="mNotify" n="kScaledPoints" />
-<Distributor in="mNotify" out.0="mAt15" out.1="mAt30" out.2="mAt45" out.3="mAt60" out.4="mAt75" out.5="mAt90" out.6="mAt105" out.7="mAt120" out.8="mAt135" out.9="mAt150" restart="false" />
-<And in="mAt150" out="mBlackWins" />
-<Text showEveryone="true" text="Black has 15 points." in="mAt15" sound="kSnText" volume="kTextVolume" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mBlackWins" restart="false" />
+<Text showEveryone="true" text="Black has 10 points." in="mAt10" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Black has 20 points." in="mAt20" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Black has 30 points." in="mAt30" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Black has 45 points." in="mAt45" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Black has 40 points." in="mAt40" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Black team has made it halfway!" in="mAt50" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="Black has 60 points." in="mAt60" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Black has 75 points." in="mAt75" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Black has 90 points." in="mAt90" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Black has 105 points." in="mAt105" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Black has 120 points." in="mAt120" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Black has 135 points." in="mAt135" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="Black has 150 points. Black team wins!" in="mAt150" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Black has 70 points." in="mAt70" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Black has 80 points." in="mAt80" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Black team has only 10 points to go!" in="mAt90" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="Black team wins!" in="mBlackWins" sound="kSnText" volume="kTextVolume" />
 
-<unique vars="mNotify mAt15 mAt30 mAt45 mAt60 mAt75 mAt90 mAt105 mAt120 mAt135 mAt150" />
+<unique vars="mNotify mAt10 mAt20 mAt30 mAt40 mAt50 mAt60 mAt70 mAt80 mAt90" />
 <Counter in="pWhitePoint" out="mNotify" n="kScaledPoints" />
-<Distributor in="mNotify" out.0="mAt15" out.1="mAt30" out.2="mAt45" out.3="mAt60" out.4="mAt75" out.5="mAt90" out.6="mAt105" out.7="mAt120" out.8="mAt135" out.9="mAt150" restart="false" />
-<And in="mAt150" out="mWhiteWins" />
-<Text showEveryone="true" text="White has 15 points." in="mAt15" sound="kSnText" volume="kTextVolume" />
+<Distributor in="mNotify" out.0="mAt10" out.1="mAt20" out.2="mAt30" out.3="mAt40" out.4="mAt50" out.5="mAt60" out.6="mAt70" out.7="mAt80" out.8="mAt90" out.9="mWhiteWins" restart="false" />
+<Text showEveryone="true" text="White has 10 points." in="mAt10" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="White has 20 points." in="mAt20" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="White has 30 points." in="mAt30" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="White has 45 points." in="mAt45" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="White has 40 points." in="mAt40" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="White team has made it halfway!" in="mAt50" sound="kSnText" volume="kTextVolume" />
 <Text showEveryone="true" text="White has 60 points." in="mAt60" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="White has 75 points." in="mAt75" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="White has 90 points." in="mAt90" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="White has 105 points." in="mAt105" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="White has 120 points." in="mAt120" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="White has 135 points." in="mAt135" sound="kSnText" volume="kTextVolume" />
-<Text showEveryone="true" text="White has 150 points. White team wins!" in="mAt150" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="White has 70 points." in="mAt70" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="White has 80 points." in="mAt80" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="White team has only 10 points to go!" in="mAt90" sound="kSnText" volume="kTextVolume" />
+<Text showEveryone="true" text="White team wins!" in="mWhiteWins" sound="kSnText" volume="kTextVolume" />
