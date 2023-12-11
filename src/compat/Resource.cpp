@@ -32,11 +32,21 @@ static std::string currentResource("");
 
 static std::string currentBaseDir("rsrc");
 
+static std::vector<std::string> currentExtPkgDirs({});
+
 static std::string currentLevelDir("");
 
 void UseBaseFolder(std::string folder) {
     currentBaseDir = folder;
     LoadDefaultOggFiles();
+}
+
+void AddExternalPackage(std::string folder) {
+    currentExtPkgDirs.push_back(folder);
+}
+
+void ClearExternalPackages() {
+    currentExtPkgDirs.clear();
 }
 
 void UseLevelFolder(std::string folder) {
@@ -397,6 +407,23 @@ std::string GetALFPath(std::string alfname) {
     buffa << ALFDIR << PATHSEP << alfname;
     char alfpath[PATH_MAX];
     BundlePath(buffa.str().c_str(), alfpath);
+
+    std::ifstream testFile(alfpath);
+    if (testFile.fail()) {
+        // Check external packages!
+        for (auto &pkg : currentExtPkgDirs) {
+            buffa.str("");
+            buffa << LEVELDIR << PATHSEP << pkg << PATHSEP;
+            buffa << ALFDIR << PATHSEP << alfname;
+            char altalfpath[PATH_MAX];
+            BundlePath(buffa.str().c_str(), altalfpath);
+            testFile.open(altalfpath);
+            if (!testFile.fail()) {
+                return std::string(altalfpath);
+            }
+        }
+    }
+
     return std::string(alfpath);
 }
 
