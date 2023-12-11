@@ -11,10 +11,12 @@ uniform mat3 normal_transform;
 
 out vec4 fragmentColor;
 out vec3 fragmentNormal;
+out vec3 fragPos;
 
 void main() {
     vec4 pos = vec4(vertexPosition_modelspace, 1.0);
     gl_Position = proj * (modelview * pos);
     fragmentColor = vertexColor;
     fragmentNormal = vertexNormal * normal_transform;
+    fragPos = gl_Position.xyz;
 }

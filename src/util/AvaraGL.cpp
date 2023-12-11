@@ -77,11 +77,12 @@ float skyboxVertices[] = {
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, ambColorLoc, lights_activeLoc, projLoc, viewLoc;
+GLuint mvLoc, ntLoc, ambLoc, ambColorLoc, lightsActiveLoc, projLoc, viewLoc;
 GLuint light0Loc, light0ColorLoc;
 GLuint light1Loc, light1ColorLoc;
 GLuint light2Loc, light2ColorLoc;
 GLuint light3Loc, light3ColorLoc;
+GLuint specularStrengthLoc;
 
 GLuint skyProgram;
 GLuint skyVertArray, skyBuffer;
@@ -191,7 +192,12 @@ void AvaraGLSetAmbient(float ambient, ARGBColor color) {
 
 void ActivateLights(float active) {
     glUseProgram(gProgram);
-    glUniform1f(lights_activeLoc, active);
+    glUniform1f(lightsActiveLoc, active);
+}
+
+void AvaraGLSetSpecular(float spec) {
+    glUseProgram(gProgram);
+    glUniform1f(specularStrengthLoc, spec);
 }
 
 void AvaraGLLightDefaults() {
@@ -248,7 +254,8 @@ void AvaraGLInitContext() {
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
     ambLoc = glGetUniformLocation(gProgram, "ambient");
     ambColorLoc = glGetUniformLocation(gProgram, "ambientColor");
-    lights_activeLoc = glGetUniformLocation(gProgram, "lights_active");
+    lightsActiveLoc = glGetUniformLocation(gProgram, "lightsActive");
+    specularStrengthLoc = glGetUniformLocation(gProgram, "specularStrength");
     glCheckErrors();
 
     light0Loc = glGetUniformLocation(gProgram, "light0");
@@ -262,6 +269,7 @@ void AvaraGLInitContext() {
     glCheckErrors();
 
     AvaraGLLightDefaults();
+    AvaraGLSetSpecular(0.5);
     glCheckErrors();
     char skyVertPath[PATH_MAX], skyFragPath[PATH_MAX];
     BundlePath(SKY_VERT, skyVertPath);
