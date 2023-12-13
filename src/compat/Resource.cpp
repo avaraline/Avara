@@ -86,14 +86,14 @@ bool IsEquals(const std::string& str1, const std::string& str2) {
 Handle FindResource(SDL_RWops *file, OSType theType, short theID, std::string name) {
     uint32_t dataOffset = SDL_ReadBE32(file);
     uint32_t mapOffset = SDL_ReadBE32(file);
-    // uint32_t dataLen = 
+    // uint32_t dataLen =
     SDL_ReadBE32(file);
-    // uint32_t mapLen = 
+    // uint32_t mapLen =
     SDL_ReadBE32(file);
 
     SDL_RWseek(file, mapOffset + 22, 0);
 
-    //uint16_t forkAttrs = 
+    //uint16_t forkAttrs =
     SDL_ReadBE16(file);
 
     uint16_t typeListOffset = SDL_ReadBE16(file);
@@ -250,7 +250,7 @@ const char* PathForLevelSet(std::string set) {
 
 void LevelDirListing() {
     cf_dir_t dir;
-    char ldir[PATH_MAX]; 
+    char ldir[PATH_MAX];
     BundlePath(LEVELDIR, ldir);
     cf_dir_open(&dir, ldir);
 
@@ -350,17 +350,32 @@ void LoadHullFromSetJSON(HullConfigRecord *hull, short resId) {
 
 bool GetBSPPath(int resId, char* dest) {
     std::stringstream relPath;
+    bool found = false;
 
-    // first check for the resource in the levelset directory
+    // First, check for the resource in the levelset directory.
     relPath << LEVELDIR << PATHSEP << currentLevelDir << PATHSEP;
     relPath << BSPSDIR << PATHSEP << resId << BSPSEXT;
     BundlePath(relPath, dest);
-    bool found = false;
     std::ifstream testFile(dest);
     if (!testFile.fail()) {
         found = true;
     }
-    // haven't found the BSP file yet, try the top-level bsps directory
+
+    // Haven't found the BSP file yet, fall back and check required packages.
+    if (!found) {
+        for (auto &pkg : currentExtPkgDirs) {
+            relPath.str("");
+            relPath << LEVELDIR << PATHSEP << pkg << PATHSEP;
+            relPath << BSPSDIR << PATHSEP << resId << BSPSEXT;
+            BundlePath(relPath, dest);
+            std::ifstream testFile(dest);
+            if (!testFile.fail()) {
+                found = true;
+            }
+        }
+    }
+
+    // Still haven't found the BSP file, finally try the base BSP directory.
     if (!found) {
         relPath.str("");
         relPath << currentBaseDir << PATHSEP << BSPSDIR << PATHSEP << resId << BSPSEXT;
@@ -449,6 +464,35 @@ std::string GetDefaultScript() {
     return "";
 }
 
+std::vector<std::string> GetExternalScripts() {
+    std::vector<std::string> scripts = {};
+    std::stringstream buffa;
+
+    // Note that we are retrieving the scripts in reverse order, here!
+    for (auto pkg = currentExtPkgDirs.rbegin(); pkg != currentExtPkgDirs.rend(); ++pkg) {
+        buffa.str("");
+        buffa << LEVELDIR << PATHSEP << *pkg << PATHSEP;
+        buffa << DEFAULTSCRIPT;
+        char temp[PATH_MAX];
+        BundlePath(buffa.str().c_str(), temp);
+        std::ifstream t(temp);
+        if (t.good()) {
+            std::string defaultscript;
+            t.seekg(0, std::ios::end);
+            defaultscript.reserve(t.tellg());
+            t.seekg(0, std::ios::beg);
+
+            defaultscript.assign((std::istreambuf_iterator<char>(t)),
+                                std::istreambuf_iterator<char>());
+            scripts.push_back(defaultscript);
+        } else {
+            SDL_Log("There was an error opening %s", temp);
+        }
+    }
+
+    return scripts;
+}
+
 std::string GetBaseScript() {
     std::stringstream buffa;
     buffa << currentBaseDir << PATHSEP << DEFAULTSCRIPT;
@@ -521,7 +565,7 @@ void LoadOggFile(short resId, std::string filename, SoundCash &cash) {
 
     int error;
     stb_vorbis *v = stb_vorbis_open_filename(fullpath, &error, NULL);
-    
+
     //stb_vorbis_info info = stb_vorbis_get_info(v);
     //SDL_Log("%d channels, %d samples/sec\n", info.channels, info.sample_rate);
 
