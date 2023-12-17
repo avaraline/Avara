@@ -1101,6 +1101,12 @@ void CPlayerManagerImpl::SetPlayerStatus(LoadingState newStatus, PresenceType ne
 
     loadingStatus = newStatus;
     presence = newPresence;
+    
+    // Check if the game is ready to start if a player set themselves to away or spectator
+    // Only the server can start the game this way to prevent multiple game start commands
+    if ((newPresence == kzSpectating || newPresence == kzAway) && theNetManager->itsCommManager->myId == 0) {
+        SetPlayerReady(true);
+    }
 }
 
 void CPlayerManagerImpl::SetPlayerReady(bool isReady) {
