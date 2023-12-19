@@ -19,7 +19,7 @@ public:
     Fixed rotation;
     Fixed spin;
 
-    virtual void IAbstractMissile(CDepot *theDepot);
+    CPlayerMissile(CDepot *theDepot);
     virtual void SetSpin(Boolean spinDirection);
     virtual void MoveForward();
     virtual bool HandlesFastFPS() { return true; }

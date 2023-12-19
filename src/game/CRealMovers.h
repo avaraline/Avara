@@ -16,7 +16,7 @@ public:
     Vector speed;
     Vector dSpeed; // Track delta velocity when Hector gets hit
 
-    virtual void IAbstractActor();
+    CRealMovers();
     virtual void GetSpeedEstimate(Fixed *theSpeed);
     virtual void Push(Fixed *direction);
     virtual void Accelerate(Fixed *direction);

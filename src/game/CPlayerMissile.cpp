@@ -13,9 +13,7 @@
 #define kPlayerMissileBSP 203
 #define MISSILESPIN FpsCoefficient2(FIX(17))
 
-void CPlayerMissile::IAbstractMissile(CDepot *theDepot) {
-    CAbstractMissile::IAbstractMissile(theDepot);
-
+CPlayerMissile::CPlayerMissile(CDepot *theDepot) : CAbstractMissile(theDepot) {
     speed = PLAYERMISSILESPEED;
     maxFrameCount = FpsFramesPerClassic(PLAYERMISSILELIFE);
 

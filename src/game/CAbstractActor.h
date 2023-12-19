@@ -82,20 +82,17 @@ typedef union {
     CAbstractActor *a;
 } ActorOrPartLink;
 
+enum {
+    PCDOME,
+    POTHER,
+};
+
 class CAbstractActor : public CDirectObject {
 public:
+    CAbstractActor();
     CAvaraGame *itsGame;
-
     unsigned long searchCount;
-    ActorLocator locLinks[4]; //	Location link table.
-
     CSmartPart *partList[MAXPARTS + 1];
-    CSmartPart *cachePart; //	Collision detection cache part.
-    Fixed partScale;
-    Fixed partYon;
-
-    ActorAttachment *attachmentList;
-
     ActorOrPartLink proximityList;
 
     CAbstractActor *nextActor;
@@ -103,47 +100,21 @@ public:
     long ident;
     FrameNumber sleepTimer;
 
-    CAbstractActor *postMortemLink;
-    Fixed blastPower;
-
     MaskType maskBits;
 
-    Fixed mass;
     Fixed shields;
-    SoundLink *itsSoundLink;
 
     short partCount;
     short isActive;
 
-    short blastSound;
-    Fixed blastVolume;
-
     short teamMask;
     short teamColor;
 
-    long hitScore;
-    short hitSoundId;
-    short hitSoundVolume;
-
-    long destructScore;
-
     short stepSound;
 
-    MsgType hitMessage;
-    MsgType destructMessage;
-    MsgType stepOnMessage;
-
-    short sliverCounts[kSliverSizes];
-    short sliverLives[kSliverSizes];
-
     Boolean isInGame;
-
-    Fixed traction;
-    Fixed friction;
-
     virtual void LoadPart(short ind, short resId);
     virtual void LoadPartWithColors(short ind, short resId);
-    virtual void IAbstractActor();
     virtual void BeginScript();
     virtual CAbstractActor *EndScript();
     virtual void AdaptableSettings();
@@ -231,6 +202,31 @@ public:
     Fixed FpsOffset(Fixed classicCoeff2);
     FrameNumber FpsFramesPerClassic(FrameNumber classicFrames = 1);
     Fixed ClassicCoefficient2(Fixed fpsValue);
+protected:
+    ActorLocator locLinks[4]; //	Location link table.
+    CSmartPart *cachePart; //	Collision detection cache part.
+    Fixed partScale;
+    Fixed partYon;
+    ActorAttachment *attachmentList;
+    CAbstractActor *postMortemLink;
+    Fixed blastPower;
+    Fixed mass;
+
+    SoundLink *itsSoundLink;
+    short blastSound;
+    Fixed blastVolume;
+    long hitScore;
+    short hitSoundId;
+    short hitSoundVolume;
+    long destructScore;
+    MsgType hitMessage;
+    MsgType destructMessage;
+    MsgType stepOnMessage;
+    short sliverCounts[kSliverSizes];
+    short sliverLives[kSliverSizes];
+    Fixed traction;
+    Fixed friction;
+
 private:
     virtual double FpsCoefficient1(double classicCoeef1, double fpsScale);
 };

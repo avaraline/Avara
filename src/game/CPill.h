@@ -12,5 +12,5 @@
 
 class CPill : public CBall {
 public:
-    virtual void IAbstractActor();
+    CPill();
 };
