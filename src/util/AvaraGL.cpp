@@ -24,6 +24,8 @@ bool actuallyRender = true;
 bool ready = false;
 
 glm::mat4 proj;
+glm::vec4 lights_state = glm::vec4(0, 0, 0, 0);
+static glm::vec4 lights_off = glm::vec4(0, 0, 0, 0);
 const float near_dist = .099f;
 const float far_dist = 1000.0f;
 
@@ -77,7 +79,8 @@ float skyboxVertices[] = {
     };
 
 GLuint gProgram;
-GLuint mvLoc, ntLoc, ambLoc, ambColorLoc, lightsActiveLoc, projLoc, viewLoc;
+GLuint mvLoc, ntLoc, ambLoc, ambColorLoc, lightsActiveLoc;
+GLuint projLoc, viewLoc, invViewLoc;
 GLuint light0Loc, light0ColorLoc;
 GLuint light1Loc, light1ColorLoc;
 GLuint light2Loc, light2ColorLoc;
@@ -122,10 +125,11 @@ bool AvaraGLIsRendering() {
     return actuallyRender;
 }
 
-void AvaraGLSetView(glm::mat4 view) {
+void AvaraGLSetView(glm::mat4 view, glm::mat4 inverseView) {
     if (!actuallyRender) return;
     glUseProgram(gProgram);
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(invViewLoc, 1, GL_FALSE, glm::value_ptr(inverseView));
     glCheckErrors();
 }
 
@@ -149,10 +153,11 @@ void AvaraGLUpdateProjectionMatrix() {
 
 void AvaraGLSetLight(int light_index, float intensity, float elevation, float azimuth, ARGBColor color) {
     if (!actuallyRender) return;
-
+    SDL_Log("Light %d set to intensity: %f / elevation: %f / azimuth: %f", light_index, intensity, elevation, azimuth);
     float x = cos(Deg2Rad(elevation)) * intensity;
     float y = sin(Deg2Rad(-elevation)) * intensity;
     float z = cos(Deg2Rad(azimuth)) * intensity;
+    SDL_Log("Light %i xyz: %f %f %f", light_index, x, y, z);
     float rgb[3];
 
     x = sin(Deg2Rad(-azimuth)) * intensity;
@@ -177,6 +182,7 @@ void AvaraGLSetLight(int light_index, float intensity, float elevation, float az
             glUniform3fv(light3ColorLoc, 1, rgb);
             break;
     }
+    lights_state[light_index] = 1.0;
 }
 
 void AvaraGLSetAmbient(float ambient, ARGBColor color) {
@@ -190,9 +196,9 @@ void AvaraGLSetAmbient(float ambient, ARGBColor color) {
     glUniform3fv(ambColorLoc, 1, rgb);
 }
 
-void ActivateLights(float active) {
+void AvaraGLActivateLights(glm::vec4 active) {
     glUseProgram(gProgram);
-    glUniform1f(lightsActiveLoc, active);
+    glUniform4fv(lightsActiveLoc, 1, glm::value_ptr(active));
 }
 
 void AvaraGLSetSpecular(float spec) {
@@ -208,6 +214,8 @@ void AvaraGLLightDefaults() {
     AvaraGLSetLight(2, 0, 0, 0, DEFAULT_LIGHT_COLOR);
     AvaraGLSetLight(3, 0, 0, 0, DEFAULT_LIGHT_COLOR);
     AvaraGLSetAmbient(0.4f, DEFAULT_LIGHT_COLOR);
+    lights_state = glm::vec4(1, 1, 0, 0);
+    AvaraGLActivateLights(lights_state);
 }
 
 void SetTransforms(CBSPPart *part) {
@@ -249,6 +257,7 @@ void AvaraGLInitContext() {
 
     projLoc = glGetUniformLocation(gProgram, "proj");
     viewLoc = glGetUniformLocation(gProgram, "view");
+    invViewLoc = glGetUniformLocation(gProgram, "inverseView");
     AvaraGLUpdateProjectionMatrix();
     mvLoc = glGetUniformLocation(gProgram, "modelview");
     ntLoc = glGetUniformLocation(gProgram, "normal_transform");
@@ -326,7 +335,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         AvaraGLSetAmbient(current_amb + extra_amb, part->currentView->ambientLightColor);
     }
     if (part->ignoreDirectionalLights) {
-        ActivateLights(0);
+        AvaraGLActivateLights(lights_off);
         glCheckErrors();
     }
 
@@ -350,7 +359,7 @@ void AvaraGLDrawPolygons(CBSPPart* part) {
         glCheckErrors();
     }
     if (part->ignoreDirectionalLights) {
-        ActivateLights(1);
+        AvaraGLActivateLights(lights_state);
         glCheckErrors();
     }
 
@@ -547,6 +556,9 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
         glGetShaderInfoLog(VertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
         printf("%s\n", &VertexShaderErrorMessage[0]);
     }
+    if (Result == GL_FALSE) {
+        exit(1);
+    }
 
     // Compile Fragment Shader
     fprintf(stderr, "Compiling shader : %s\n", fragment_file_path);
@@ -561,6 +573,9 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
         std::vector<char> FragmentShaderErrorMessage(InfoLogLength + 1);
         glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
         printf("%s\n", &FragmentShaderErrorMessage[0]);
+    }
+    if (Result == GL_FALSE) {
+        exit(1);
     }
 
     // Link the program

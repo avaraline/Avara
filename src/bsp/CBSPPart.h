@@ -222,7 +222,7 @@ public:
     virtual Boolean HopeNotObscure(CBSPPart *other, Vector *otherCorners);
     virtual Boolean HopeDoesObscure(CBSPPart *other, Vector *otherCorners);
 
-    void PrintMatrix(Matrix *m);
+    static void PrintMatrix(Matrix *m);
 protected:
     bool hasAlpha = false;
     virtual void CheckForAlpha();

@@ -24,7 +24,8 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
 void AvaraGLSetLight(int light, float intensity, float elevation, float azimuth, ARGBColor color);
 void AvaraGLSetDepthTest(bool doTest);
 void AvaraGLSetAmbient(float ambient, ARGBColor color);
-void AvaraGLSetView(glm::mat4 view);
+void AvaraGLSetView(glm::mat4 view, glm::mat4 inverseView);
+void AvaraGLSetCamPos(float x, float y, float z);
 void AvaraGLSetFOV(float fov);
 void AvaraGLUpdateProjectionMatrix();
 void AvaraGLLightDefaults();
@@ -45,6 +46,14 @@ static inline glm::mat4 ToFloatMat(Matrix *m) {
         mat[3][i] = ToFloat((*m)[3][i]);
     }
     return mat;
+}
+
+static inline glm::vec3 ToFloatVec(Vector *v) {
+    glm::vec3 vec(1.0);
+    vec.x = ToFloat(*v[0]);
+    vec.y = ToFloat(*v[1]);
+    vec.z = ToFloat(*v[2]);
+    return vec;
 }
 
 extern GLuint gProgram;

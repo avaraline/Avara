@@ -259,7 +259,7 @@ void CBSPPart::PrintMatrix(Matrix *m) {
             ToFloat((*m)[2][i]),
             ToFloat((*m)[3][i]));
     }
-}
+};
 
 /*
 **  See if the part is in the viewing pyramid and do calculations
