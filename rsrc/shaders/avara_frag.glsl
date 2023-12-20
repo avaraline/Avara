@@ -36,17 +36,17 @@ vec3 diffuse() {
 
 vec3 specLight(int index, vec3 light, vec3 lightColor) {
     vec3 viewDir = normalize(camPos - fragPos);
-    vec4 lightPos = vec4(light * 1000, 1) * modelView;
+    vec4 lightPos = modelView * vec4(light * 1000, 1);
     vec3 lightDir = normalize(lightPos.xyz - fragPos);
     vec3 reflectDir = reflect(-lightDir, fragmentNormal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 4);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 2);
     return mix(vec3(0), specularStrengh * spec * lightColor, lightsActive[index]);
 }
 
 vec3 spec() {
-    return specLight(0, light0, light0Color);/*
-            + specLight(1, light1, light1Color)
-            + specLight(2, light2, light2Color)
+    return specLight(0, light0, light0Color)
+            + specLight(1, light1, light1Color);
+            /*+ specLight(2, light2, light2Color)
             + specLight(3, light3, light3Color);*/
 }
 

@@ -23,5 +23,5 @@ void main() {
     fragmentNormal = vertexNormal * normal_transform;
     fragPos = gl_Position.xyz;
     camPos = vec3(invView[0][3], invView[1][3], invView[2][3]);
-    modelView = modelview;
+    modelView = proj * modelview;
 }
