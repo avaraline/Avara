@@ -9,9 +9,9 @@
     pCaptureVizScale="1"
     pCaptureVizSpeed="2"
     captureSize="2.5"
-    outerCaptureX="24"
+    outerCaptureX="24.1875"
     outerCaptureY="10"
-    outerCaptureZ="39"
+    outerCaptureZ="39.1875"
   />
 
   <set
@@ -22,7 +22,7 @@
     pCaptureD="captureSize"
     pCaptureH="captureSize"
     pCaptureVizX="0"
-    pCaptureVizY="1.75"
+    pCaptureVizY="mGoodyOffset"
     pCaptureVizZ="0"
   />
   <include alf="logic/capture-point.alf" />
@@ -35,9 +35,11 @@
     pCaptureD="captureSize"
     pCaptureH="captureSize"
     pCaptureVizX="-outerCaptureX"
-    pCaptureVizY="outerCaptureY + 1.75"
+    pCaptureVizY="outerCaptureY + mGoodyOffset"
     pCaptureVizZ="-outerCaptureZ"
   />
+  <Hologram cx="-outerCaptureX" y="outerCaptureY + 0.05" cz="-outerCaptureZ" angle="45" shape="bspGroundStar" scale="0.5" color="#260019" />
+  <Field visible="true" deltaY="0" x="-outerCaptureX" z="-outerCaptureZ" y="outerCaptureY + 0.05" w="1.25" d="1.25" h="0" color="#260019" />
   <include alf="logic/capture-point.alf" />
 
   <set
@@ -48,9 +50,11 @@
     pCaptureD="captureSize"
     pCaptureH="captureSize"
     pCaptureVizX="outerCaptureX"
-    pCaptureVizY="outerCaptureY + 1.75"
+    pCaptureVizY="outerCaptureY + mGoodyOffset"
     pCaptureVizZ="outerCaptureZ"
   />
+  <Hologram cx="outerCaptureX" y="outerCaptureY + 0.05" cz="outerCaptureZ" angle="45" shape="bspGroundStar" scale="0.5" color="#260019" />
+  <Field visible="true" deltaY="0" x="outerCaptureX" z="outerCaptureZ" y="outerCaptureY + 0.05" w="1.25" d="1.25" h="0" color="#260019" />
   <include alf="logic/capture-point.alf" />
 
   <set
@@ -61,9 +65,11 @@
     pCaptureD="captureSize"
     pCaptureH="captureSize"
     pCaptureVizX="-outerCaptureZ"
-    pCaptureVizY="outerCaptureY + 1.75"
+    pCaptureVizY="outerCaptureY + mGoodyOffset"
     pCaptureVizZ="outerCaptureX"
   />
+  <Hologram cx="-outerCaptureZ" y="outerCaptureY + 0.05" cz="outerCaptureX" angle="45" shape="bspGroundStar" scale="0.5" color="#260019" />
+  <Field visible="true" deltaY="0" x="-outerCaptureZ" z="outerCaptureX" y="outerCaptureY + 0.05" w="1.25" d="1.25" h="0" color="#260019" />
   <include alf="logic/capture-point.alf" />
 
   <set
@@ -74,8 +80,10 @@
     pCaptureD="captureSize"
     pCaptureH="captureSize"
     pCaptureVizX="outerCaptureZ"
-    pCaptureVizY="outerCaptureY + 1.75"
+    pCaptureVizY="outerCaptureY + mGoodyOffset"
     pCaptureVizZ="-outerCaptureX"
   />
+  <Hologram cx="outerCaptureZ" y="outerCaptureY + 0.05" cz="-outerCaptureX" angle="45" shape="bspGroundStar" scale="0.5" color="#260019" />
+  <Field visible="true" deltaY="0" x="outerCaptureZ" z="-outerCaptureX" y="outerCaptureY + 0.05" w="1.25" d="1.25" h="0" color="#260019" />
   <include alf="logic/capture-point.alf" />
 </map>

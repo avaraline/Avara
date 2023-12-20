@@ -851,7 +851,7 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     nvgFillColor(ctx, BACKGROUND_COLOR);
                     nvgFill(ctx);
 
-                    ARGBColor longTeamColor = *ColorManager::getTeamColor(net->teamColors[event.team]);
+                    ARGBColor longTeamColor = *ColorManager::getTeamColor(event.team);
                     longTeamColor.ExportGLFloats(teamColorRGB, 3);
 
                     nvgBeginPath(ctx);
@@ -895,7 +895,7 @@ void CHUD::DrawKillFeed(NVGcontext *ctx, CNetManager *net, int bufferWidth, floa
                     nvgFillColor(ctx, BACKGROUND_COLOR);
                     nvgFill(ctx);
 
-                    ARGBColor longTeamColor = *ColorManager::getTeamColor(net->teamColors[event.team]);
+                    ARGBColor longTeamColor = *ColorManager::getTeamColor(event.team);
                     longTeamColor.ExportGLFloats(teamColorRGB, 3);
 
                     nvgBeginPath(ctx);

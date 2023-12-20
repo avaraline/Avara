@@ -1553,8 +1553,12 @@ void CAbstractPlayer::PlayerAction() {
                         Reincarnate();
                     } else {
                         itsManager->DeadOrDone();
-                        if ((itsGame->GetSpectatePlayer() == NULL && itsManager->IsLocalPlayer()) ||                // Player is out of lives
-                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0)) {    // Spectate player is out of lives
+
+                        // Auto spectate another player if:
+                        //   - The player runs out of lives
+                        //   - The player being spectated runs out of lives
+                        if ((itsGame->GetSpectatePlayer() == NULL && itsManager->IsLocalPlayer()) ||
+                            (itsGame->GetSpectatePlayer() != NULL && itsGame->GetSpectatePlayer()->lives == 0)) {
                             itsGame->SpectateNext();
                         }
                     }
