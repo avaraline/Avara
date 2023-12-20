@@ -13,9 +13,6 @@
 #include <map>
 #include <sstream>
 
-#define CUTE_FILES_IMPLEMENTATION
-#include <cute_files.h>
-
 #include <stb_vorbis.h>
 
 #ifndef PATH_MAX
@@ -224,79 +221,6 @@ void BundlePath(const char *rel, char *dest) {
 void BundlePath(std::stringstream &buffa, char *dest) {
     return BundlePath(buffa.str().c_str(), dest);
 }
-
-struct AvaraDirListEntry {
-    int8_t is_dir;
-    std::string file_name;
-    std::string full_path;
-};
-
-std::map<std::string, AvaraDirListEntry> level_sets;
-std::vector<std::string> set_name_list;
-
-bool listingDone = false;
-
-std::vector<std::string> LevelDirNameListing() {
-    if (!listingDone)
-        LevelDirListing();
-    return set_name_list;
-}
-
-const char* PathForLevelSet(std::string set) {
-    if (!listingDone)
-        LevelDirListing();
-    return level_sets.at(set).full_path.c_str();
-}
-
-void LevelDirListing() {
-    cf_dir_t dir;
-    char ldir[PATH_MAX];
-    BundlePath(LEVELDIR, ldir);
-    cf_dir_open(&dir, ldir);
-
-    std::vector<AvaraDirListEntry> raw_dir_listing;
-
-    while (dir.has_next) {
-        cf_file_t file;
-        cf_read_file(&dir, &file);
-        AvaraDirListEntry entry;
-        entry.is_dir = file.is_dir;
-        entry.file_name = std::string(file.name);
-        raw_dir_listing.push_back(entry);
-        cf_dir_next(&dir);
-    }
-    cf_dir_close(&dir);
-    // sort directory listing alphabetically
-    std::sort(raw_dir_listing.begin(), raw_dir_listing.end(),
-        [](AvaraDirListEntry &a, AvaraDirListEntry &b) -> bool {
-            return a.file_name < b.file_name; });
-
-    for (std::vector<AvaraDirListEntry>::iterator it = raw_dir_listing.begin(); it != raw_dir_listing.end(); ++it) {
-        auto file_str = it->file_name;
-        auto is_dir = it->is_dir;
-        if (file_str.size() >= 2) {
-
-            if (file_str.compare(0, 1, ".") != 0 && file_str.compare(0, 2, "..") != 0  &&
-                is_dir > 0) {
-                // this is a directory, try to see if there's a manifest inside
-
-                std::stringstream ss;
-                ss << LEVELDIR << PATHSEP << file_str << PATHSEP << SETFILE;
-                char manf_path[PATH_MAX];
-                BundlePath(ss, manf_path);
-                if (cf_file_exists(manf_path)) {
-                    // we found a set json file so add it (as version 2)
-                    char manf_full_path[PATH_MAX];
-                    BundlePath(file_str.c_str(), manf_full_path);
-                    it->full_path = manf_full_path;
-                    level_sets.insert(std::make_pair(file_str, (*it)));
-                    set_name_list.push_back(file_str);
-                }
-            }
-        }
-    }
-    listingDone = true;
-};
 
 json LoadLevelListFromJSON(std::string set) {
     return GetManifestJSON(set)["LEDI"];

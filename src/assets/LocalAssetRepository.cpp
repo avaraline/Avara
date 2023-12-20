@@ -4,6 +4,8 @@
 #define CUTE_FILES_IMPLEMENTATION
 #include <cute_files.h>
 
+#include <SDL2/SDL.h>
+
 #include <fstream>
 #include <sstream>
 
@@ -21,18 +23,11 @@ std::shared_ptr<std::vector<std::string>> LocalAssetRepository::GetPackageList()
     return packageList;
 }
 
-std::optional<std::string> LocalAssetRepository::GetPackagePath(std::string packageName)
+std::string LocalAssetRepository::GetRootPath()
 {
     std::stringstream path;
-    path << SDL_GetBasePath() << PATHSEP << LEVELDIR << packageName;
-
-    std::stringstream manifestPath;
-    manifestPath << path.str() << PATHSEP << MANIFESTFILE;
-
-    std::ifstream testFile(manifestPath.str());
-    return testFile.fail()
-        ? std::optional<std::string>{}
-        : path.str();
+    path << SDL_GetBasePath() << "levels";
+    return path.str();
 }
 
 void LocalAssetRepository::Refresh()
@@ -43,11 +38,10 @@ void LocalAssetRepository::Refresh()
 
 void LocalAssetRepository::BuildPackageList()
 {
-    std::stringstream path;
-    path << SDL_GetBasePath() << PATHSEP << LEVELDIR;
+    std::string rootPath(GetRootPath());
 
     cf_dir_t dir;
-    cf_dir_open(&dir, path.str().c_str());
+    cf_dir_open(&dir, rootPath.c_str());
 
     while (dir.has_next) {
         cf_file_t file;
@@ -58,10 +52,11 @@ void LocalAssetRepository::BuildPackageList()
             filename.compare(0, 1, ".") != 0 &&
             filename.compare(0, 2, "..") != 0) {
             // This is a directory, check to see if there's a manifest inside.
-            path.str("");
-            path << SDL_GetBasePath() << PATHSEP << LEVELDIR << PATHSEP;
-            path << filename << PATHSEP << MANIFESTFILE;
-            if (cf_file_exists(path.str().c_str())) {
+            std::stringstream manifestPath;
+            manifestPath << rootPath << PATHSEP << filename << PATHSEP << MANIFESTFILE;
+
+            std::ifstream testFile(manifestPath.str());
+            if (testFile.good()) {
                 packageList->push_back(filename);
             }
         }
@@ -69,13 +64,6 @@ void LocalAssetRepository::BuildPackageList()
     }
 
     cf_dir_close(&dir);
-
-    // Sort alphabetically.
-    std::sort(packageList->begin(), packageList->end(),
-        [](std::string &a, std::string &b) -> bool {
-            return a < b;
-        }
-    );
 
     populatedList = true;
 };

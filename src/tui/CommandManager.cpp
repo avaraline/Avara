@@ -1,6 +1,7 @@
 
 #include "CommandManager.h"
 
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CPlayerManager.h"
@@ -8,7 +9,6 @@
 #include "CScoreKeeper.h"
 
 #include "CommDefs.h"       // kdEveryone
-#include "Resource.h"       // LevelDirNameListing
 #include "Debug.h"          // Debug::methods
 #include <random>           // std::random_device
 #include "Tags.h"
@@ -371,7 +371,7 @@ bool CommandManager::LoadNamedLevel(VectorOfArgs vargs) {
     }
 
     static int loadNumber = 0;
-    std::vector<std::string> levelSets = LevelDirNameListing();
+    std::vector<std::string> levelSets = AssetManager::GetAvailablePackages();
     std::string levelSubstr = join_with(vargs, " ");
     std::transform(levelSubstr.begin(), levelSubstr.end(),levelSubstr.begin(), ::toupper);
 
@@ -435,7 +435,7 @@ bool CommandManager::LoadRandomLevel(VectorOfArgs matchArgs) {
                 }
             }
         } else {
-            for (auto setName : LevelDirNameListing()) {
+            for (auto setName : AssetManager::GetAvailablePackages()) {
                 if (setName.find(matchStr, 0) != std::string::npos) {
                     nlohmann::json levels = LoadLevelListFromJSON(setName);
                     for (auto level : levels) {

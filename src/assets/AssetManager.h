@@ -1,5 +1,6 @@
 #pragma once
-#include "LocalAssetRepository.h"
+#include "AssetStorage.h"
+#include "AssetRepository.h"
 #include "PackageManifest.h"
 
 #include <json.hpp>
@@ -65,12 +66,29 @@ private:
 
 class AssetManager {
 public:
+    /**
+     * Get an exhaustive list of all available packages (excluding base packages).
+     *
+     * @return the list of available packages
+     */
+    static std::vector<std::string> GetAvailablePackages();
+
+    /**
+     * Get the filesystem path for the specified package, if it's available.
+     *
+     * @param packageName The package we want the path for.
+     * @return the path to the package, if available
+     */
+    static std::optional<std::string> GetPackagePath(std::string packageName);
+    
     static void LoadLevel(std::string packageName, std::string levelTag);
 private:
     AssetManager() {}
 
     static BasePackage basePackage;
     static std::vector<std::string> externalPackages;
+    static std::shared_ptr<AssetStorage> baseStorage;
+    static std::shared_ptr<AssetStorage> assetStorage;
     static std::vector<std::shared_ptr<AssetRepository>> repositoryStack;
     static std::map<std::string, PackageManifest> manifestCache;
     static std::map<std::string, std::string> avarascriptCache;
@@ -85,14 +103,6 @@ private:
      * @return the path to the base package
      */
     static std::string GetBasePackagePath(BasePackage basePackage) throw();
-
-    /**
-     * Get the filesystem path for the specified package, if it's available.
-     *
-     * @param packageName The package we want the path for.
-     * @return the path to the package, if available
-     */
-    static std::optional<std::string> GetPackagePath(std::string packageName);
 
     /**
      * Change which base package is being used (e.g. Avara vs. Aftershock). If it differs from the

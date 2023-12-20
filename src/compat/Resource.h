@@ -43,8 +43,6 @@ void DetachResource(Handle theResource);
 void BundlePath(const char *rel, char *dest);
 void BundlePath(std::stringstream &buffa, char *dest);
 
-void LevelDirListing();
-std::vector<std::string> LevelDirNameListing();
 int8_t GetVersionForLevelSet(std::string levelset);
 
 nlohmann::json LoadLevelListFromJSON(std::string set);

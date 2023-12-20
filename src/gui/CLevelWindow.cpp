@@ -1,28 +1,24 @@
 #include "CLevelWindow.h"
 
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CAvaraGame.h"
 #include "CNetManager.h"
 #include "Preferences.h"
 #include "Resource.h"
 
-#include <cute_files.h>
-
 CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     // Searches "levels/" directory alongside application.
     // will eventually use level search API
-    levelSets = LevelDirNameListing();
+    levelSets = AssetManager::GetAvailablePackages();
 
     json sets = app->Get(kRecentSets);
     json levels = app->Get(kRecentLevels);
     if (sets.size() == levels.size()) {
         for (unsigned i = 0; i < sets.size(); ++i) {
             std::string set = sets.at(i);
-            std::stringstream subDir;
-            subDir << LEVELDIR << PATHSEP << set;
-            char subDirPath[PATH_MAX];
-            BundlePath(subDir, subDirPath);
-            if (cf_file_exists(subDirPath)) {
+            auto setPath = AssetManager::GetPackagePath(set);
+            if (setPath) {
                 recentSets.push_back(set);
                 recentLevels.push_back(levels.at(i));
             }

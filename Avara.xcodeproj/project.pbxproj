@@ -13,6 +13,8 @@
 		9465BFD32B30C2A00050681C /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD12B30C2A00050681C /* AssetManager.cpp */; };
 		9465BFD72B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
 		9465BFD82B30EF680050681C /* PackageManifest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9465BFD52B30EF680050681C /* PackageManifest.cpp */; };
+		948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
+		948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */; };
 		94F17DDD29920D90001F5950 /* ARGBColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F17DDC29920D90001F5950 /* ARGBColor.cpp */; };
 		E20752EF2A003EC600DCC210 /* Tags.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20752EE2A003EC600DCC210 /* Tags.cpp */; };
 		E20A3C562991CC72005741F7 /* KeyFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20A3C552991CC72005741F7 /* KeyFuncs.cpp */; };
@@ -368,6 +370,9 @@
 		9465BFD12B30C2A00050681C /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		9465BFD52B30EF680050681C /* PackageManifest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PackageManifest.cpp; sourceTree = "<group>"; };
 		9465BFD92B30EFB40050681C /* PackageManifest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PackageManifest.h; sourceTree = "<group>"; };
+		948CBF112B33581D00147E80 /* AssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetStorage.h; sourceTree = "<group>"; };
+		948CBF122B3359D700147E80 /* BaseAssetStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAssetStorage.h; sourceTree = "<group>"; };
+		948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BaseAssetStorage.cpp; sourceTree = "<group>"; };
 		94F17DDB2991FACE001F5950 /* ARGBColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGBColor.h; sourceTree = "<group>"; };
 		94F17DDC29920D90001F5950 /* ARGBColor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ARGBColor.cpp; sourceTree = "<group>"; };
 		E20752ED29FF1EC500DCC210 /* Tags.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tags.h; sourceTree = "<group>"; };
@@ -1028,6 +1033,9 @@
 				944F2F6D2B32379C00856E53 /* AssetRepository.h */,
 				944F2F6F2B323F1900856E53 /* LocalAssetRepository.cpp */,
 				944F2F6E2B323E2100856E53 /* LocalAssetRepository.h */,
+				948CBF112B33581D00147E80 /* AssetStorage.h */,
+				948CBF122B3359D700147E80 /* BaseAssetStorage.h */,
+				948CBF132B335A1400147E80 /* BaseAssetStorage.cpp */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -2030,6 +2038,7 @@
 				E517F057299713DB0036B206 /* CSoundMixer.cpp in Sources */,
 				E517F058299713DB0036B206 /* DopplerPlug.cpp in Sources */,
 				E517F059299713DB0036B206 /* CBaseObject.cpp in Sources */,
+				948CBF152B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E517F05A299713DB0036B206 /* CDirectObject.cpp in Sources */,
 				E517F05B299713DB0036B206 /* CTagBase.cpp in Sources */,
 				E517F05C299713DB0036B206 /* CBSPPart.cpp in Sources */,
@@ -2194,6 +2203,7 @@
 				E5890CF129895118007A875D /* CSliverPart.cpp in Sources */,
 				E5890CD329895118007A875D /* CUfo.cpp in Sources */,
 				E5890D0A29895118007A875D /* ColorManager.cpp in Sources */,
+				948CBF142B335A1400147E80 /* BaseAssetStorage.cpp in Sources */,
 				E5890CDD29895118007A875D /* CLogicAnd.cpp in Sources */,
 				E5890CFC29895118007A875D /* CScaledBSP.cpp in Sources */,
 				E5890CD429895118007A875D /* CSmart.cpp in Sources */,

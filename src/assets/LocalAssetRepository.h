@@ -1,8 +1,9 @@
 #pragma once
 
 #include "AssetRepository.h"
+#include "AssetStorage.h"
 
-class LocalAssetRepository final: public AssetRepository {
+class LocalAssetRepository final: public AssetRepository, public AssetStorage {
 public:
     static std::shared_ptr<LocalAssetRepository> GetInstance();
 
@@ -14,12 +15,11 @@ public:
     std::shared_ptr<std::vector<std::string>> GetPackageList();
 
     /**
-     * Get the filesystem path for the specified package, if it's available.
+     * Get the root filesystem path for this storage destination.
      *
-     * @param packageName The package we want the path for.
-     * @return the path to the package, if available
+     * @return the filesystem path
      */
-    std::optional<std::string> GetPackagePath(std::string packageName);
+    std::string GetRootPath();
 
     /**
      * Refresh the list of available packages.
