@@ -10,6 +10,7 @@
 #pragma once
 #include "ARGBColor.h"
 #include "ColorManager.h"
+#include "FastMat.h"
 
 struct PlayerConfigRecord {
     short numGrenades {};
