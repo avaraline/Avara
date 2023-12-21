@@ -208,7 +208,7 @@ void CParasite::FrameAction() {
 
         if (blastPower >= maxPower) {
             WasDestroyed();
-            SecondaryDamage(teamColor, -1);
+            SecondaryDamage(teamColor, -1, ksiParasiteBlast);
             return;
         }
     } else {

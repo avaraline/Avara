@@ -214,6 +214,14 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     iface.scoreReason = reason;
     iface.playerID = player;
     iface.playerTeam = team;
+
+    ScoreInterfaceEvent event;
+    event.player = itsGame->GetPlayerName(player);
+    event.team = team;
+    event.playerTarget = itsGame->GetPlayerName(hitPlayer);
+    event.teamTarget = hitTeam;
+    event.damage = points;
+
     if (player >= 0 && player <= kMaxAvaraPlayers) {
         iface.playerName = itsGame->itsNet->playerTable[player]->PlayerName();
         if (reason == ksiKillBonus && hitPlayer >= 0 && hitPlayer <= kMaxAvaraPlayers) {
@@ -223,8 +231,15 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
             if (hitTeam != team) {
                 localScores.player[player].kills++;
             }
-            itsGame->itsApp->ComposeParamLine(
-                destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
+            if (!itsGame->itsApp->Get(kHUDShowKillFeed)) {
+                itsGame->itsApp->ComposeParamLine(
+                    destStr, kmAKilledBPlayer, iface.playerName, itsGame->itsNet->playerTable[hitPlayer]->PlayerName());
+            }
+
+            event.scoreType = ksiKillBonus;
+            event.weaponUsed = itsGame->killReason;
+            itsGame->AddScoreNotify(event);
+            SDL_Log("CAvaraGame::Kill Event: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, weapon: %d, reason:%lu\n", iface.playerID, iface.playerTeam, iface.scoreID, iface.scoreTeam, event.weaponUsed, iface.scoreReason);
 
             iface.consoleLine = destStr;
             iface.consoleJustify = static_cast<long>(MsgAlignment::Center);
@@ -235,6 +250,23 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
 
     if (reason == ksiExitBonus) {
         iface.winFrame = itsGame->frameNumber;
+    }
+
+    if(iface.scoreReason == ksiGrabBall) {
+        event.scoreType = ksiGrabBall;
+        itsGame->AddScoreNotify(event);
+        SDL_Log("CAvaraGame::Grab Ball Event: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, reason:%lu\n", iface.playerID, iface.playerTeam, iface.scoreID, iface.scoreTeam, iface.scoreReason);
+    }
+
+    if(iface.scoreReason == ksiHoldBall) {
+        event.scoreType = ksiHoldBall;
+        //itsGame->AddScoreNotify(event);
+    }
+
+    if(iface.scoreReason == ksiScoreGoal) {
+        event.scoreType = ksiScoreGoal;
+        itsGame->AddScoreNotify(event);
+        SDL_Log("CAvaraGame::Score Goal Event: player:%lu, team:%lu, hit:%lu, hitTeam:%lu, reason:%lu\n", iface.playerID, iface.playerTeam, iface.scoreID, iface.scoreTeam, iface.scoreReason);
     }
 
     iface.scorePoints = points;
@@ -254,6 +286,7 @@ void CScoreKeeper::Score(ScoreInterfaceReasons reason,
     if (team >= 0 && team <= kMaxTeamColors) {
         localScores.teamPoints[team] += points;
     }
+
 }
 
 void CScoreKeeper::ResetScores() {

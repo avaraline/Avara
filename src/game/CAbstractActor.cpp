@@ -724,7 +724,7 @@ void CAbstractActor::PostMortemBlast(short scoreTeam, short scoreId, Boolean doD
         Dispose();
 }
 
-bool CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
+bool CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor, ScoreInterfaceReasons damageSource) {
     CAbstractActor *blastToo;
     bool imDead = false;
 
@@ -735,7 +735,7 @@ bool CAbstractActor::SecondaryDamage(short scoreTeam, short scoreColor) {
     while ((blastToo = gCurrentGame->postMortemList)) {
         gCurrentGame->postMortemList = blastToo->postMortemLink;
         if (blastToo != this) {
-            gCurrentGame->scoreReason = ksiSecondaryDamage;
+            gCurrentGame->scoreReason = damageSource;
         }
         if (blastToo == this) {
             imDead = true;
@@ -931,8 +931,10 @@ void CAbstractActor::WasHit(RayHitRecord *theHit, Fixed hitEnergy) {
 
             savedReason = itsGame->scoreReason;
             itsGame->scoreReason = ksiKillBonus;
+            itsGame->killReason = savedReason;
             itsGame->Score(theHit->team, theHit->playerId, destructScore, 0, teamColor, GetActorScoringId());
             itsGame->scoreReason = savedReason;
+            itsGame->killReason = ksiNoReason;
 
             itsGame->FlagMessage(hitMessage);
             itsGame->FlagMessage(destructMessage);

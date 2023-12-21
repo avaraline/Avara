@@ -27,6 +27,8 @@
 
 void UseResFile(std::string filename);
 void UseBaseFolder(std::string folder);
+void AddExternalPackage(std::string folder);
+void ClearExternalPackages();
 void UseLevelFolder(std::string folder);
 std::string OSTypeString(OSType t);
 OSType StringOSType(std::string s);
@@ -53,6 +55,7 @@ nlohmann::json GetBSPJSON(int resId);
 bool HasBSP(int resId);
 std::string GetALFPath(std::string alfname);
 std::string GetDefaultScript();
+std::vector<std::string> GetExternalScripts();
 std::string GetBaseScript();
 void LoadHullFromSetJSON(HullConfigRecord *hull, short resId);
 void LoadDefaultOggFiles();

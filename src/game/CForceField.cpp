@@ -77,6 +77,11 @@ CAbstractActor *CForceField::EndScript() {
         }
 
         partList[0]->isTransparent = !ReadLongVar(iVisible);
+        if (!ReadLongVar(iVisible)) {
+            // Force yon when visible is false, to hide from level previews.
+            partList[0]->yon = FIX(0.001);
+            partList[0]->usesPrivateYon = true;
+        }
 
         exitMsg = ReadLongVar(iExit);
         enterMsg = ReadLongVar(iEnter);

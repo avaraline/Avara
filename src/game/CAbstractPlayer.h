@@ -35,6 +35,8 @@ class CAbstractPlayer;
 #define kGaugeBSP 402
 #define kMissileBSP 802
 #define kGrenadeBSP 820
+#define kEnergyBSP 604
+#define kShieldBSP 603
 #define kBoosterBSP 600
 
 #define kDefaultTeleportSound 410
@@ -203,6 +205,8 @@ public:
     CScaledBSP *shieldGaugeBackLight = 0;
     CScaledBSP *energyGauge = 0;
     CScaledBSP *energyGaugeBackLight = 0;
+    CScaledBSP *energyLabel = 0;
+    CScaledBSP *shieldLabel = 0;
     CScaledBSP *grenadeLabel = 0;
     CScaledBSP *missileLabel = 0;
     CScaledBSP *boosterLabel = 0;

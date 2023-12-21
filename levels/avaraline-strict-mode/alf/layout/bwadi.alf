@@ -1,0 +1,93 @@
+<!-- @param int pCenterGoodyRespawn center goody respawn delay in ticks -->
+
+<SkyColor color="#99fdff" color.1="#c3cde6" />
+<GroundColor color="#3a404d" color.1="#000000" />
+<set
+  designer="$mMalkfox"
+  information="Does anyone else think about what it would be like to watch your children grow up?"
+  ambient.c="#f0ffff"
+  light.0.i="0.8"
+  light.0.a="30"
+  light.0.b="10"
+  light.1.i="0.5"
+  wallHeight="0"
+/>
+
+<Teleporter group="-1" y="-30" activeRange="27 * 5" deadRange="22 * 5" destGroup="@recenter" shape="0" color="#009600" color.1="#000000" cx="0" cz="0" angle="45" />
+<Teleporter y="30" shape="0" group="@recenter" mask="0" color="#009600" color.1="#000000" cx="0" cz="0" angle="45" />
+<Teleporter shape="0" y="200" win="1000" start="@winTeam" activeRange="2000" color="#009600" color.1="#000000" cx="0" cz="0" angle="45" />
+<Sound y="50" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="115.625" cz="112.25694444444444" angle="45" />
+
+<Wall color="#ccfeff" color.1="#000000" x="0" z="0" w="20" d="20" h="2" />
+<Wall color="#99fdff" color.1="#000000" x="0" z="0" w="10" d="10" h="2" y="2" />
+<Wall color="#003399" color.1="#000000" x="0" z="0" w="1.25" d="1.25" h="0" y="4.05" />
+<WallDoor midYaw="45" color="#003399" color.1="#000000" x="0" z="0" w="1.25" d="1.25" h="0" y="4.05" />
+
+<Wall color="#ccfeff" color.1="#000000" x="-42.5" z="-15" w="5" d="10" h="2" />
+<Wall color="#ccfeff" color.1="#000000" x="-27.5" z="-15" w="5" d="20" h="2" />
+<Wall color="#ccfeff" color.1="#000000" x="27.5" z="15" w="5" d="20" h="2" />
+<Wall color="#ccfeff" color.1="#000000" x="42.5" z="15" w="5" d="10" h="2" />
+<Wall color="#cceeff" color.1="#000000" x="-22.5" z="30" w="5" d="20" h="2.5" />
+<Wall color="#cceeff" color.1="#000000" x="22.5" z="-30" w="5" d="20" h="2.5" />
+<Wall color="#ccfeff" color.1="#000000" x="-37.5" z="-22.5" w="15" d="5" h="2" />
+<Wall color="#ccfeff" color.1="#000000" x="-37.5" z="-7.5" w="15" d="5" h="2" />
+<Wall color="#ccfeff" color.1="#000000" x="37.5" z="7.5" w="15" d="5" h="2" />
+<Wall color="#ccfeff" color.1="#000000" x="37.5" z="22.5" w="15" d="5" h="2" />
+<Wall color="#cceeff" color.1="#000000" x="-32.5" z="22.5" w="15" d="5" h="2.5" />
+<Wall color="#cceeff" color.1="#000000" x="32.5" z="-22.5" w="15" d="5" h="2.5" />
+<Wall color="#99ddff" color.1="#000000" x="22.5" z="-7.5" w="5" d="5" h="2.5" />
+<Wall color="#99ddff" color.1="#000000" x="-22.5" z="7.5" w="5" d="5" h="2.5" />
+<Wall color="#99ddff" color.1="#000000" x="7.5" z="-22.5" w="5" d="5" h="2.5" />
+<Wall color="#99ddff" color.1="#000000" x="-7.5" z="22.5" w="5" d="5" h="2.5" />
+<Wall color="#d9e6ff" color.1="#000000" x="-7.5" z="-37.5" w="25" d="5" h="4.5" />
+<Wall color="#d9e6ff" color.1="#000000" x="7.5" z="-50" w="5" d="30" h="4.5" />
+<Wall color="#d9e6ff" color.1="#000000" x="1" z="-44" w="8" d="8" h="4.5" />
+<Ramp y="0" deltaY="4.5" color="#293333" color.1="#000000" x="1" z="-55.5" w="8" d="15" h="0" angle="0" />
+<Ramp y="0" deltaY="4.5" color="#293333" color.1="#000000" x="-10.25" z="-44" w="14.5" d="8" h="0" angle="270" />
+<Wall color="#d9e6ff" color.1="#000000" x="7.5" z="37.5" w="25" d="5" h="4.5" />
+<Wall color="#d9e6ff" color.1="#000000" x="-7.5" z="50" w="5" d="30" h="4.5" />
+<Wall color="#d9e6ff" color.1="#000000" x="-1" z="44" w="8" d="8" h="4.5" />
+<Ramp y="0" deltaY="4.5" color="#293333" color.1="#000000" x="-1" z="55.5" w="8" d="15" h="0" angle="180" />
+<Ramp y="0" deltaY="4.5" color="#293333" color.1="#000000" x="10.25" z="44" w="14.5" d="8" h="0" angle="90" />
+
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="pCenterGoodyRespawn" />
+<Goody shape="bspAvaraA" y="4 + mGoodyOffset" speed="2" grenades="mLgGrenade" missiles="mLgMissile" start="mShow" out="mTaken" color="#00a8aa" color.1="#000000" cx="0" cz="0" angle="45" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody shape="bspGrenade" y="mGoodyOffset" speed="2" grenades="mMdGrenade" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="35" cz="15" angle="45" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody shape="bspGrenade" y="mGoodyOffset" speed="2" grenades="mMdGrenade" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="-30" cz="30" angle="45" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="250" />
+<Goody shape="bspGrenade" y="mGoodyOffset" speed="2" grenades="mMdGrenade" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="-35" cz="-15" angle="45" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="300" />
+<Goody shape="bspGrenade" y="mGoodyOffset" speed="2" grenades="mMdGrenade" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="30" cz="-30" angle="45" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody shape="bspMissile" y="4.5 + mGoodyOffset" speed="2" missiles="mLgMissile" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="1" cz="-44" angle="45" />
+<unique vars="mShow mTaken" />
+<And in="@start" out="mShow" />
+<Timer in="mTaken" out="mShow" wait="200" />
+<Goody shape="bspMissile" y="4.5 + mGoodyOffset" speed="2" missiles="mLgMissile" start="mShow" out="mTaken" color="#ffffff" color.1="#000000" cx="-1" cz="44" angle="45" />
+
+<Incarnator y="30" cx="-35" cz="35" angle="45" />
+<Incarnator y="30" cx="35" cz="-35" angle="225" />
+<Incarnator y="30" cx="10" cz="55" angle="315" />
+<Incarnator y="30" cx="-10" cz="-55" angle="135" />
+<Incarnator y="30" cx="42.5" cz="22.5" angle="315" />
+<Incarnator y="30" cx="-42.5" cz="-22.5" angle="135" />
+<Incarnator y="30" cx="57" cz="-7.5" angle="270" stop="@start" />
+<Incarnator y="30" cx="-57" cz="7.5" angle="90" stop="@start" />
+<Incarnator y="30" cx="0" cz="-15" angle="0" stop="@start" />
+<Incarnator y="30" cx="0" cz="15" angle="180" stop="@start" />
+<Incarnator y="30" cx="-15" cz="0" angle="270" stop="@start" />
+<Incarnator y="30" cx="15" cz="0" angle="90" stop="@start" />

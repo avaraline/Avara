@@ -324,7 +324,7 @@ enum {
     StringEnd = 153 //	0	NIL	End string delimitation
 };
 
-bool LoadALF(std::string levelName);
+bool LoadALF(std::string levelPath);
 void GetLastArcLocation(Fixed *theLoc);
 Fixed GetLastArcDirection();
 Fixed GetDome(Fixed *theLoc, Fixed *startAngle, Fixed *spanAngle);

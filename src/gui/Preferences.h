@@ -67,7 +67,7 @@ using json = nlohmann::json;
 #define kHUDShowDirArrow "hudShowDirArrow"
 #define kHUDShowScore "hudShowScore"
 #define kHUDShowTime "hudShowTime"
-#define kShowClassicHUD "showClassicHUD"
+#define kHUDShowKillFeed "hudShowKillFeed"
 #define kShowNewHUD "showNewHUD"
 
 // Network & Tracker
@@ -166,18 +166,18 @@ static json defaultPrefs = {
     {kHUDShowPlayerList, true},
     {kHUDShowScore, true},
     {kHUDShowTime, true},
-    {kShowClassicHUD, false},
+    {kHUDShowKillFeed, true},
     {kShowNewHUD, true},
     {kFrameTimeTag, 16},
     {kLastAddress, ""},
     {kServerDescription, ""},
     {kServerPassword, ""},
     {kClientPassword, ""},
-    {kTrackerAddress, "avara.io"},
+    {kTrackerAddress, "tracker.avara.gg"},
     {kTrackerRegister, 1},
-    {kTrackerRegisterAddress, "avara.io"},
+    {kTrackerRegisterAddress, "tracker.avara.gg"},
     {kTrackerRegisterFrequency, 5},
-    {kPunchServerAddress, "avara.io"},
+    {kPunchServerAddress, "tracker.avara.gg"},
     {kPunchServerPort, 19555},
     {kPunchHoles, true},
     {kRecentSets, {}},

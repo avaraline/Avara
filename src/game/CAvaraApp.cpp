@@ -72,6 +72,7 @@ CAvaraAppImpl::CAvaraAppImpl() : CApplication("Avara") {
     gCurrentGame = itsGame.get();
     itsGame->IAvaraGame(this);
     itsGame->UpdateViewRect(mSize.x, mSize.y, mPixelRatio);
+    itsGame->LoadImages(mNVGContext);
 
     AvaraGLSetFOV(Number(kFOV));
 
@@ -275,6 +276,23 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     json setManifest = GetManifestJSON(set);
     if (setManifest == -1) return result;
     if (setManifest.find("LEDI") == setManifest.end()) return result;
+
+    if (setManifest.find("REQD") == setManifest.end()) {
+        ClearExternalPackages();
+    } else {
+        for (auto &ext : setManifest["REQD"].items()) {
+            json pkg = ext.value();
+            std::string pkgPath = pkg.value("Package", "");
+            // TODO: Support version constraints?
+            if (!pkgPath.empty() &&
+                pkgPath.rfind(".", 0) != 0 &&
+                pkgPath.find("..") == std::string::npos &&
+                pkgPath.find("/") == std::string::npos &&
+                pkgPath.find("\\") == std::string::npos) {
+                AddExternalPackage(pkgPath);
+            }
+        }
+    }
 
     json ledi = NULL;
     for (auto &ld : setManifest["LEDI"].items()) {

@@ -9,8 +9,6 @@
     light.0.a="30"
     light.0.b="10"
     light.1.i="0.5"
-    gameLength="3750"
-    defaultLives="999"
     lightHull="131"
     mediumHull="132"
     heavyHull="133"
@@ -24,15 +22,15 @@
     missileArmed.c = "#333333"
     missileLaunched.c = "#b3ffcc"
     wallHeight="0"
+    pGameLength="3750"
   />
-  <enum start="int((gameLength * 0.33) + (random * (gameLength * 0.33)))" vars="wigReveal" />
+  <include alf="logic/killfest.alf" />
+  <enum start="int((pGameLength * 0.33) + (random * (pGameLength * 0.33)))" vars="wigReveal" />
 
   <Teleporter group="-1" y="-30" activeRange="30 * 5" deadRange="20 * 5" destGroup="@recenter" shape="0" spin="false" color="#ffffff" color.1="#000000" cx="0" cz="0" angle="45" />
   <Teleporter y="20" shape="0" group="@recenter" spin="false" color="#ffffff" color.1="#000000" cx="0" cz="0" angle="45" />
   <Timer in="@killGoodies" out="@killGoodies" wait="1" />
   <Timer in="@start" out="@killGoodies" wait="wigReveal" />
-  <Timer in="@start" out="@gameEnds" wait="gameLength" />
-  <Teleporter start="@gameEnds" y="-10" activeRange="2000" shape="0" win="0" color="#ffffff" color.1="#000000" cx="0" cz="0" angle="45" />
 
   <Sound y="200" sound="snArcticWind" isAmbient="true" loopCount="-1" volume="100" cx="0" cz="0" angle="225" />
   <Sound y="200" sound="snUnderwater" isAmbient="true" loopCount="-1" volume="70" cx="0" cz="0" angle="225" />

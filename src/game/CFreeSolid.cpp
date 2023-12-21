@@ -224,7 +224,7 @@ void CFreeSolid::FrameAction() {
                         }
                     }
 
-                    if (SecondaryDamage(teamColor, -1)) {
+                    if (SecondaryDamage(teamColor, -1, ksiObjectCollision)) {
                         // just deallocated myself so return
                         return;
                     }

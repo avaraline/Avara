@@ -124,7 +124,6 @@ macdist: macapp
 winapp: avara
 	$(RMDIR) $(BUILD_DIR)/WinAvara
 	$(MKDIR_P) $(BUILD_DIR)/WinAvara
-	if [ -f $(BUILD_DIR)/Avara ]; then mv $(BUILD_DIR)/Avara $(BUILD_DIR)/Avara.exe; fi
 	cp -r $(BUILD_DIR)/{Avara.exe,levels,rsrc} $(BUILD_DIR)/WinAvara
 	cp /mingw64/bin/{libstdc++-6,libwinpthread-1,libgcc_s_seh-1,SDL2}.dll $(BUILD_DIR)/WinAvara
 
