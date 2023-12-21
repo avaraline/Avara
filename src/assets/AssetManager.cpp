@@ -200,14 +200,12 @@ void AssetManager::SwitchBasePackage(BasePackage newBase)
 
 void AssetManager::SwitchContext(std::string packageName)
 {
-    std::vector<std::string> oldContext = externalPackages;
-
     std::vector<std::string> newContext = {};
 
     BuildDependencyList(packageName, newContext);
 
     std::vector<MaybePackage> needsCacheClear = {};
-    for (auto const &pkg : oldContext) {
+    for (auto const &pkg : externalPackages) {
         if (std::find(newContext.begin(), newContext.end(), pkg) == newContext.end()) {
             needsCacheClear.push_back(pkg);
         }
@@ -240,8 +238,12 @@ void AssetManager::BuildDependencyList(std::string currentPackage, std::vector<s
     // try to read from it. If there's no manifest, technically there's nothing more to do and we
     // can't recurse further down this branch.
     if (manifestCache.count(currentPackage) > 0) {
+        // Add this package to the list as long as it isn't in the list already.
+        if (std::find(list.begin(), list.end(), currentPackage) == list.end()) {
+            list.push_back(currentPackage);
+        }
+
         auto manifest = manifestCache.at(currentPackage);
-        list.push_back(currentPackage);
         for (auto const &req : manifest->requiredPackages) {
             BuildDependencyList(req.packageName, list);
         }
