@@ -82,11 +82,6 @@ typedef union {
     CAbstractActor *a;
 } ActorOrPartLink;
 
-enum {
-    PCDOME,
-    POTHER,
-};
-
 class CAbstractActor : public CDirectObject {
 public:
     CAbstractActor();

@@ -67,7 +67,7 @@ public:
     ARGBColor longTeamColor = 0;
     bool hasTeammates = false;
 
-    // //	Shields & energy:
+    //	Shields & energy:
     Fixed energy = 0;
     Fixed maxEnergy = 0; //	Maximum stored energy level
     Fixed classicGeneratorPower; //	Energy gain/frame
@@ -83,7 +83,7 @@ public:
     short grenadeLimit = 0;
     short boosterLimit = 0;
 
-    // //	Movement related variables:
+    //	Movement related variables:
     Fixed baseMass = 0;
     Fixed motors[2] = {0, 0}; //	Left/right speed
     Fixed maxAcceleration = 0;
@@ -95,18 +95,18 @@ public:
     Fixed headChange = 0;
     Boolean didBump = false;
 
-    // //	Guns:
+    //	Guns:
     Fixed gunEnergy[2] = {0, 0}; //	Left/right guns
     Fixed fullGunEnergy = 0;
     Fixed activeGunEnergy = 0;
     Fixed classicChargeGunPerFrame;
 
-    // //	Weapons (Grenades & missiles)
+    //	Weapons (Grenades & missiles)
 
-    // //	View related variables:
+    //	View related variables:
     CSmartPart *viewPortPart = 0; //	We look out from this one.
 
-    // //	Control module (and view) orientation:
+    //	Control module (and view) orientation:
     Fixed viewYaw = 0;
     Fixed viewPitch = 0;
     Fixed oldElevation = 0;
@@ -120,11 +120,11 @@ public:
     Fixed scoutBaseHeight = 0;
 
 
-    // //	Reincarnation:
+    //	Reincarnation:
     long limboCount = 0;
     bool didIncarnateMasked = false;
 
-    // //	Winning/loosing:
+    //	Winning/loosing:
     FrameNumber winFrame = 0;
     Boolean isOut = 0;
     short lives = 0;
