@@ -555,6 +555,11 @@ GLuint LoadShaders(const char *vertex_file_path, const char *fragment_file_path)
         printf("%s\n", &FragmentShaderErrorMessage[0]);
     }
 
+    if (Result == GL_FALSE) {
+        // exit on shader compilation failure
+        exit(1);
+    }
+
     // Link the program
     fprintf(stderr, "Linking program\n");
     GLuint ProgramID = glCreateProgram();
