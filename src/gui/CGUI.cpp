@@ -103,8 +103,7 @@ int CGUI::BSPWidget(mu_Rect r, int res, mu_Id mu_id) {
 
         //CSmartBox* _part = new CSmartBox;
 
-        CWallActor *theWall = new CWallActor;
-        theWall->IAbstractActor();
+        CWallActor *theWall = new CWallActor();
         theWall->MakeWallFromDims(dims, ToFixed(worldpos.x), ToFixed(worldpos.y), 0);
         long color = RGBAToLong(mui_ctx->style->colors[MU_COLOR_BASE]);
 

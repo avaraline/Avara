@@ -14,9 +14,7 @@
 #define kPillGravity FIX3(120)
 #define kFriction FIX3(800)
 
-void CPill::IAbstractActor() {
-    CBall::IAbstractActor();
-
+CPill::CPill() {
     mass = kStandardPillMass;
 
     shieldsCharge = FIX3(5);

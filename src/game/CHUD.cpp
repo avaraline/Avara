@@ -27,7 +27,7 @@ bool sortByScore(std::pair<PlayerScoreRecord, int> i, std::pair<PlayerScoreRecor
 }
 
 void CHUD::LoadImages(NVGcontext *ctx) {
-    images = nvgCreateImage(ctx, "rsrc/img/atlas.png", NULL);
+    images = nvgCreateImage(ctx, "rsrc/img/atlas.png", 0);
 }
 
 void CHUD::DrawScore(std::vector<CPlayerManager*>& thePlayers, int chudHeight, CViewParameters *view, NVGcontext *ctx) {

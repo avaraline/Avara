@@ -189,8 +189,7 @@ void CAbstractPlayer::LevelReset() {
 void CAbstractPlayer::LoadScout() {
     scoutCommand = kScoutNullCommand;
 
-    itsScout = new CScout;
-    itsScout->IScout(this, teamColor, GetTeamColorOr(ColorManager::getDefaultTeamColor()));
+    itsScout = new CScout(this, teamColor, GetTeamColorOr(ColorManager::getDefaultTeamColor()));
     itsScout->BeginScript();
     FreshCalc();
     itsScout->EndScript();

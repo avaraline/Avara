@@ -19,9 +19,7 @@
 #define kGravity FIX3(120)
 #define kGrenadeFriction FIX3(10)
 
-void CGrenade::IWeapon(CDepot *theDepot) {
-    CWeapon::IWeapon(theDepot);
-
+CGrenade::CGrenade(CDepot *theDepot) : CWeapon(theDepot) {
     blastSound = 231;
 
     partCount = 1;
