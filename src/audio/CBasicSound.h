@@ -33,11 +33,11 @@ public:
     int32_t loopCount[2];
     Sample *sampleData;
 
-    int32_t squareAcc[2]; //	Distance squared
-    Fixed dSquare; //	Distance squared as a Fixed.
-    Fixed distance; //	Distance (square root of squareAcc).
-    Fixed relPos[3]; //	Distance as a vector
-    Fixed balance;
+    int32_t squareAcc[2] = {0, 0};//	Distance squared
+    Fixed dSquare = 0; //	Distance squared as a Fixed.
+    Fixed distance = 0; //	Distance (square root of squareAcc).
+    Fixed relPos[3] = {0, 0, 0}; //	Distance as a vector
+    Fixed balance = 0;
 
     SoundLink *motionLink; //	Location information.
     SoundLink *controlLink; //	For control, when motionLink is not good enough.

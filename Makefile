@@ -22,6 +22,14 @@ INCFLAGS := $(addprefix -I, $(SRC_DIRS))
 CPPFLAGS := ${CPPFLAGS}
 CPPFLAGS += $(INCFLAGS) -MMD -MP -DNANOGUI_GLAD -g -Wall
 
+# Compile with clang UBSAN
+ifeq ($(AVARA_UBSAN), TRUE)
+LD = clang++
+CPPFLAGS += -fsanitize=undefined -g -fno-omit-frame-pointer
+LDFLAGS += -fsanitize=undefined -g
+endif
+
+# Compile with extra warnings
 ifeq ($(AVARA_WARNINGS), TRUE)
 CPPFLAGS += -pedantic -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
 CPPFLAGS += -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations

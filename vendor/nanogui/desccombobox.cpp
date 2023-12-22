@@ -35,9 +35,9 @@ DescComboBox::DescComboBox(Widget *parent, const std::vector<std::string> &items
 void DescComboBox::setSelectedIndex(int idx) {
     if (mItemsShort.empty())
         return;
-    const std::vector<Widget *> &children = mButtonWrapper->children();
-    ((Button *) children[mSelectedIndex])->setPushed(false);
-    ((Button *) children[idx])->setPushed(true);
+    //const std::vector<Widget *> &children = mButtonWrapper->children();
+    //((Button *) children[mSelectedIndex])->setPushed(false);
+    //((Button *) children[idx])->setPushed(true);
     mSelectedIndex = idx;
     //setCaption(mItemsShort[idx]);
     setCaption(mItems[idx]);
