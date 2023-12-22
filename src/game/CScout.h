@@ -28,12 +28,8 @@ enum {
 
 class CScout : public CRealMovers {
 public:
-    Vector targetPosition;
-    CAbstractPlayer *itsPlayer;
-    short action;
-    Boolean nextRotateFlag;
 
-    virtual void IScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor);
+    CScout(CAbstractPlayer *thePlayer, short theTeam, ARGBColor longTeamColor);
     virtual void PlaceParts();
     virtual void FrameAction();
     virtual void ControlViewPoint();
@@ -41,4 +37,9 @@ public:
 
     virtual Fixed MoveToTarget();
     virtual bool HandlesFastFPS() { return true; }
+private:
+    Vector targetPosition;
+    CAbstractPlayer *itsPlayer;
+    short action;
+    Boolean nextRotateFlag;
 };

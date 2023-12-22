@@ -14,9 +14,7 @@
 #define GROUNDHITSOUNDID 211
 #define DEFAULTMISSILESOUND 200
 
-void CAbstractMissile::IAbstractMissile(CDepot *theDepot) {
-    IAbstractActor();
-
+CAbstractMissile::CAbstractMissile(CDepot *theDepot) {
     isActive = kIsActive;
     itsDepot = theDepot;
     itsGame = itsDepot->itsGame;
