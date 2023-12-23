@@ -32,9 +32,6 @@
 
 // Package structure
 #define MANIFESTFILE "set.json"
-#define ALFDIR "alf"
-#define BSPSDIR "bsps"
-#define BSPSEXT ".json"
 #define OGGDIR "ogg"
 #define WAVDIR "wav"
 
@@ -45,7 +42,15 @@ typedef std::optional<std::string> MaybePackage;
 #define NoPackage std::optional<std::string>{}
 
 template <typename T>
-using SimpleAssetCache = std::map<MaybePackage, std::shared_ptr<T>>;
+class SimpleAssetCache : public std::map<MaybePackage, std::shared_ptr<T>> {
+public:
+    /**
+     * Remove any items from the cache that belong to any of the packages in `packageList`.
+     *
+     * @param packageList The list of package names we are looking to remove from the cache.
+     */
+    void RemoveAll(std::vector<MaybePackage> &packageList);
+};
 
 template <typename T>
 class Asset {
@@ -56,7 +61,7 @@ public:
 };
 
 template <typename T>
-class AssetCache {
+class AssetCache : public std::map<int16_t, Asset<T>> {
 public:
     /**
      * Remove any items from the cache that belong to any of the packages in `packageList`.
@@ -64,8 +69,6 @@ public:
      * @param packageList The list of package names we are looking to remove from the cache.
      */
     void RemoveAll(std::vector<MaybePackage> &packageList);
-private:
-    std::map<int16_t, Asset<T>> collection = {};
 };
 
 class AssetManager {
@@ -78,14 +81,50 @@ public:
     static std::vector<std::string> GetAvailablePackages();
 
     /**
-     * Get the filesystem path for the specified package, if it's available.
+     * Get the full filesystem path for an ALF file, if it is available.
      *
-     * @param packageName The package we want the path for.
-     * @return the path to the package, if available
+     * @param relativePath The relative path to look for.
+     * @return the full path to the ALF file
      */
-    static std::optional<std::string> GetPackagePath(std::string packageName);
+    static std::optional<std::string> GetResolvedAlfPath(std::string relativePath);
+
+    /**
+     * Get the default scripts for all loaded packages in the order in which they should run.
+     *
+     * @return the default scripts
+     */
+    static std::vector<std::shared_ptr<std::string>> GetAllScripts();
+
+    /**
+     * Get the BSP with the provided resource ID, if available.
+     *
+     * @param id The resource ID.
+     * @return the BSP json
+     */
+    static std::optional<std::shared_ptr<nlohmann::json>> GetBsp(int16_t id);
+
+    /**
+     * Get the hull with the provided resource ID, if available.
+     *
+     * @param id The resource ID.
+     * @return the hull configuration
+     */
+    static std::optional<std::shared_ptr<HullConfigRecord>> GetHull(int16_t id);
+
+    /**
+     * Run important operations at application start.
+     */
+    static void Init();
     
-    static OSErr LoadLevel(std::string packageName, std::string levelTag);
+    static OSErr LoadLevel(std::string packageName, std::string levelTag, std::string &levelName);
+
+    /**
+     * Checks to see if a package with the given name is stored locally.
+     *
+     * @param packageName The package we want to search for.
+     * @return whether the package is stored locally
+     */
+    static bool PackageInStorage(std::string packageName);
 private:
     AssetManager() {}
 
@@ -96,9 +135,9 @@ private:
     static std::vector<std::shared_ptr<AssetRepository>> repositoryStack;
     static SimpleAssetCache<PackageManifest> manifestCache;
     static SimpleAssetCache<std::string> avarascriptCache;
-    static AssetCache<HullConfigRecord> hullCache;
     static AssetCache<nlohmann::json> bspCache;
     static AssetCache<std::vector<uint8_t>> sndCache;
+    static AssetCache<HullConfigRecord> hullCache;
 
     /**
      * Get the filesystem path for the specified base package.
@@ -108,6 +147,14 @@ private:
      * @return the path to the base package
      */
     static std::string GetBasePackagePath(BasePackage basePackage) throw();
+
+    /**
+     * Get the filesystem path for the specified package, if it's available.
+     *
+     * @param packageName The package we want the path for.
+     * @return the path to the package, if available
+     */
+    static std::optional<std::string> GetPackagePath(std::string packageName);
 
     /**
      * Get the filesystem path for the specified relative path for the specified package.
@@ -135,6 +182,32 @@ private:
     static std::string GetScriptPath(MaybePackage package);
 
     /**
+     * Get the filesystem path for an ALF file within the specified package.
+     *
+     * @param package The package we want the path for.
+     * @return the path to the ALF file
+     */
+    static std::string GetAlfPath(MaybePackage package, std::string relativePath);
+
+    /**
+     * Get the filesystem path for a BSP file with the specified id and package.
+     *
+     * @param package The package we want the path for.
+     * @param id The BSP's resource ID.
+     * @return the path to the BSP file
+     */
+    static std::string GetBspPath(MaybePackage package, int16_t id);
+
+    /**
+     * Get the filesystem path for an OGG file with the specified id and package.
+     *
+     * @param package The package we want the path for.
+     * @param id The OGG's resource ID.
+     * @return the path to the OGG file
+     */
+    static std::string GetOggPath(MaybePackage package, int16_t id);
+
+    /**
      * Load the specified package's manifest file.
      *
      * @param package The package whose manifest we want to load.
@@ -147,6 +220,23 @@ private:
      * @param package The package whose default script we want to load.
      */
     static void LoadScript(MaybePackage package);
+
+    /**
+     * Load the specified package's BSP json file.
+     *
+     * @param package The package whose BSP we want to load.
+     * @param id The resource ID of the BSP.
+     */
+    static void LoadBsp(MaybePackage package, int16_t id);
+
+    /**
+     * Load the specified package's hull configuration. (Despite its name, nothing is actually
+     * loaded here--merely put into the hull cache to speed future lookups.)
+     *
+     * @param package The package whose hull configuration we want to load.
+     * @param id The resource ID of the hull configuration.
+     */
+    static void LoadHull(MaybePackage package, int16_t id);
 
     /**
      * Change which base package is being used (e.g. Avara vs. Aftershock). If it differs from the
@@ -174,4 +264,13 @@ private:
      * @param list The list we are in the process of modifying.
      */
     static void BuildDependencyList(std::string currentPackage, std::vector<std::string> &list);
+
+    /**
+     * Compare items currently in the provided cache with the list of external packages, and remove
+     * items from the cache that should be overridden by higher priority packages.
+     *
+     * @param cache The cache to review.
+     */
+    template <typename T>
+    void ReviewPriorities(AssetCache<T> &cache);
 };

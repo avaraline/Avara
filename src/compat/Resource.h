@@ -43,19 +43,10 @@ void DetachResource(Handle theResource);
 void BundlePath(const char *rel, char *dest);
 void BundlePath(std::stringstream &buffa, char *dest);
 
-int8_t GetVersionForLevelSet(std::string levelset);
-
 nlohmann::json LoadLevelListFromJSON(std::string set);
 nlohmann::json GetManifestJSON(std::string set);
 nlohmann::json GetKeyFromSetJSON(std::string rsrc, std::string key, std::string default_id);
 
-nlohmann::json GetBSPJSON(int resId);
-bool HasBSP(int resId);
-std::string GetALFPath(std::string alfname);
-std::string GetDefaultScript();
-std::vector<std::string> GetExternalScripts();
-std::string GetBaseScript();
-void LoadHullFromSetJSON(HullConfigRecord *hull, short resId);
 void LoadDefaultOggFiles();
 void LoadLevelOggFiles(std::string set);
 void LoadOggFile(short resId, const char* filename);

@@ -11,6 +11,7 @@
 
 #include "CAvaraApp.h"
 
+#include "AssetManager.h"
 #include "AvaraGL.h"
 #include "AvaraScoreInterface.h"
 #include "AvaraTCP.h"
@@ -270,50 +271,13 @@ OSErr CAvaraAppImpl::LoadLevel(std::string set, std::string levelTag, CPlayerMan
     itsGame->LevelReset(false);
     gCurrentGame = itsGame.get();
     itsGame->loadedSet = set;
-    UseLevelFolder(set);
 
-    OSErr result = fnfErr;
-    json setManifest = GetManifestJSON(set);
-    if (setManifest == -1) return result;
-    if (setManifest.find("LEDI") == setManifest.end()) return result;
-
-    if (setManifest.find("REQD") == setManifest.end()) {
-        ClearExternalPackages();
-    } else {
-        for (auto &ext : setManifest["REQD"].items()) {
-            json pkg = ext.value();
-            std::string pkgPath = pkg.value("Package", "");
-            // TODO: Support version constraints?
-            if (!pkgPath.empty() &&
-                pkgPath.rfind(".", 0) != 0 &&
-                pkgPath.find("..") == std::string::npos &&
-                pkgPath.find("/") == std::string::npos &&
-                pkgPath.find("\\") == std::string::npos) {
-                AddExternalPackage(pkgPath);
-            }
-        }
-    }
-
-    json ledi = NULL;
-    for (auto &ld : setManifest["LEDI"].items()) {
-        if (ld.value()["Alf"] == levelTag)
-            ledi = ld.value();
-    }
-    if (ledi == NULL) return result;
-
-    if (ledi.contains("Aftershock") && ledi["Aftershock"] == true) {
-        UseBaseFolder("rsrc/aftershock");
-    } else {
-        UseBaseFolder("rsrc");
-    }
-
-    LoadLevelOggFiles(set);
-
-    if(LoadALF(GetALFPath(levelTag))) result = noErr;
+    std::string levelName;
+    OSErr result = AssetManager::LoadLevel(set, levelTag, levelName);
 
     if (result == noErr) {
         playerWindow->RepopulateHullOptions();
-        itsGame->loadedLevel = ledi["Name"];
+        itsGame->loadedLevel = levelName;
         itsGame->loadedFilename  = levelTag;
         itsGame->loadedTags = Tags::GetTagsForLevel(Tags::LevelURL(itsGame->loadedSet, itsGame->loadedLevel));
         std::string msgStr = "Loaded";

@@ -8,6 +8,7 @@
 */
 // #define ENABLE_FPS_DEBUG  // uncomment if you want to see FPS_DEBUG output for this file
 
+#include "AssetManager.h"
 #include "CDoorActor.h"
 
 #include "CSmartPart.h"
@@ -150,7 +151,8 @@ CAbstractActor *CDoorActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (HasBSP(resId)) {
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
         //CBSPWorld *theWorld;
 
         RegisterReceiver(&openActivator, ReadLongVar(iOpenMsg));

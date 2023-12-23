@@ -9,13 +9,13 @@
 
 #include "LevelLoader.h"
 
+#include "AssetManager.h"
 #include "AvaraGL.h"
 #include "CAvaraGame.h"
 #include "CWallActor.h"
 #include "FastMat.h"
 #include "Memory.h"
 #include "Parser.h"
-#include "Resource.h"
 #include "pugixml.hpp"
 
 #include <SDL2/SDL.h>
@@ -340,13 +340,15 @@ struct ALFWalker: pugi::xml_tree_walker {
             // Ensure path separators are appropriate for the current platform.
             std::regex pattern("\\\\|/");
             path = std::regex_replace(path, pattern, PATHSEP);
-            path = GetALFPath(path);
 
-            pugi::xml_document shard;
-            pugi::xml_parse_result result = shard.load_file(path.c_str());
-            if (result) {
-                ALFWalker includeWalker(depth + 1);
-                shard.traverse(includeWalker);
+            std::optional<std::string> maybePath = AssetManager::GetResolvedAlfPath(path);
+            if (maybePath) {
+                pugi::xml_document shard;
+                pugi::xml_parse_result result = shard.load_file(maybePath->c_str());
+                if (result) {
+                    ALFWalker includeWalker(depth + 1);
+                    shard.traverse(includeWalker);
+                }
             }
         }
     }

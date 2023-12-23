@@ -17,8 +17,8 @@ CLevelWindow::CLevelWindow(CApplication *app) : CWindow(app, "Levels") {
     if (sets.size() == levels.size()) {
         for (unsigned i = 0; i < sets.size(); ++i) {
             std::string set = sets.at(i);
-            auto setPath = AssetManager::GetPackagePath(set);
-            if (setPath) {
+            auto exists = AssetManager::PackageInStorage(set);
+            if (exists) {
                 recentSets.push_back(set);
                 recentLevels.push_back(levels.at(i));
             }

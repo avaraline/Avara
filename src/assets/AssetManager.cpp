@@ -2,17 +2,19 @@
 #include "BaseAssetStorage.h"
 #include "LocalAssetRepository.h"
 
+#include "LevelLoader.h"
+#include "Resource.h" // TODO: REMOVE THIS ONCE SOUND LOADING WORKS
+
 #include <algorithm>
 #include <fstream>
 #include <regex>
 #include <set>
 
 template <typename T>
-void SimpleCacheRemoveAll(SimpleAssetCache<T> &simpleCache,
-                          std::vector<MaybePackage> &packageList)
+void SimpleAssetCache<T>::RemoveAll(std::vector<MaybePackage> &packageList)
 {
     for (auto const &pkg : packageList) {
-        simpleCache.erase(pkg);
+        this->erase(pkg);
     }
 };
 
@@ -20,7 +22,7 @@ template <typename T>
 void AssetCache<T>::RemoveAll(std::vector<MaybePackage> &packageList)
 {
     std::vector<int16_t> cacheHits = {};
-    for (auto const &[id, asset] : collection) {
+    for (auto const &[id, asset] : *this) {
         for (auto &pkg : packageList) {
             if (pkg == asset.packageName) {
                 cacheHits.push_back(id);
@@ -28,7 +30,7 @@ void AssetCache<T>::RemoveAll(std::vector<MaybePackage> &packageList)
         }
     }
     for (auto &id : cacheHits) {
-        collection.erase(id);
+        this->erase(id);
     }
 };
 
@@ -46,9 +48,9 @@ std::vector<std::shared_ptr<AssetRepository>> AssetManager::repositoryStack = {
 };
 SimpleAssetCache<PackageManifest> AssetManager::manifestCache = {};
 SimpleAssetCache<std::string> AssetManager::avarascriptCache = {};
-AssetCache<HullConfigRecord> AssetManager::hullCache = AssetCache<HullConfigRecord>();
-AssetCache<nlohmann::json> AssetManager::bspCache = AssetCache<nlohmann::json>();
-AssetCache<std::vector<uint8_t>> AssetManager::sndCache = AssetCache<std::vector<uint8_t>>();
+AssetCache<HullConfigRecord> AssetManager::hullCache = {};
+AssetCache<nlohmann::json> AssetManager::bspCache = {};
+AssetCache<std::vector<uint8_t>> AssetManager::sndCache = {};
 
 std::vector<std::string> AssetManager::GetAvailablePackages()
 {
@@ -63,21 +65,104 @@ std::vector<std::string> AssetManager::GetAvailablePackages()
     return pkgs;
 }
 
-std::optional<std::string> AssetManager::GetPackagePath(std::string packageName)
+std::optional<std::string> AssetManager::GetResolvedAlfPath(std::string relativePath)
 {
-    std::stringstream path;
-    path << assetStorage->GetRootPath() << PATHSEP << packageName;
+    // Attempt to load from packages in priority order.
+    for (auto const &pkg : externalPackages) {
+        auto path = GetAlfPath(pkg, relativePath);
+        std::ifstream file(path);
+        if (file.good()) {
+            return path;
+        }
+    }
 
-    std::stringstream manifestPath;
-    manifestPath << path.str() << PATHSEP << MANIFESTFILE;
+    // Attempt to fall back to the base package.
+    auto path = GetAlfPath(NoPackage, relativePath);
+    std::ifstream file(path);
+    if (file.good()) {
+        return path;
+    }
 
-    std::ifstream testFile(manifestPath.str());
-    return testFile.good()
-        ? path.str()
-        : std::optional<std::string>{};
+    return std::optional<std::string>{};
 }
 
-OSErr AssetManager::LoadLevel(std::string packageName, std::string levelTag)
+std::vector<std::shared_ptr<std::string>> AssetManager::GetAllScripts()
+{
+    std::vector<std::shared_ptr<std::string>> scripts = {};
+
+    // Quick note, the scripts should already be loaded thanks to `Init`, `SwitchBasePackage`, and
+    // `BuildDependencyList`. We don't need to try and load them here!
+
+    // Add the base script first.
+    if (avarascriptCache.count(NoPackage) > 0) {
+        scripts.push_back(avarascriptCache.at(NoPackage));
+    }
+
+    // Add scripts from the other packages--in reverse order!
+    for (auto pkg = externalPackages.rbegin(); pkg != externalPackages.rend(); ++pkg) {
+        if (avarascriptCache.count(*pkg) > 0) {
+            scripts.push_back(avarascriptCache.at(*pkg));
+        }
+    }
+
+    return scripts;
+}
+
+std::optional<std::shared_ptr<nlohmann::json>> AssetManager::GetBsp(int16_t id)
+{
+    // Already cached?
+    if (bspCache.count(id) > 0) {
+        return bspCache.at(id).data;
+    }
+
+    // Attempt to load from packages in priority order.
+    for (auto const &pkg : externalPackages) {
+        LoadBsp(pkg, id);
+        if (bspCache.count(id) > 0) {
+            return bspCache.at(id).data;
+        }
+    }
+
+    // Attempt to fall back to the base package.
+    LoadBsp(NoPackage, id);
+    if (bspCache.count(id) > 0) {
+        return bspCache.at(id).data;
+    }
+
+    return std::optional<std::shared_ptr<nlohmann::json>>{};
+}
+
+std::optional<std::shared_ptr<HullConfigRecord>> AssetManager::GetHull(int16_t id)
+{
+    // Already cached?
+    if (hullCache.count(id) > 0) {
+        return hullCache.at(id).data;
+    }
+
+    // Attempt to retrieve from packages in priority order.
+    for (auto const &pkg : externalPackages) {
+        LoadHull(pkg, id);
+        if (hullCache.count(id) > 0) {
+            return hullCache.at(id).data;
+        }
+    }
+
+    // Attempt to fall back to the base package.
+    LoadHull(NoPackage, id);
+    if (hullCache.count(id) > 0) {
+        return hullCache.at(id).data;
+    }
+
+    return std::optional<std::shared_ptr<HullConfigRecord>>{};
+}
+
+void AssetManager::Init()
+{
+    LoadManifest(NoPackage);
+    LoadScript(NoPackage);
+}
+
+OSErr AssetManager::LoadLevel(std::string packageName, std::string levelTag, std::string &levelName)
 {
     if (externalPackages.size() == 0 || externalPackages[0] != packageName) {
         SwitchContext(packageName);
@@ -101,13 +186,40 @@ OSErr AssetManager::LoadLevel(std::string packageName, std::string levelTag)
         if (basePackage != newBase) {
             SwitchBasePackage(newBase);
         }
+        levelName = ledi->levelName;
+
+        // TODO: REMOVE THIS ONCE SOUND LOADING WORKS
+        UseLevelFolder(packageName);
+        switch (basePackage) {
+            case BasePackage::Avara:
+                UseBaseFolder("rsrc");
+                break;
+            case BasePackage::Aftershock:
+                UseBaseFolder("rsrc/aftershock");
+                break;
+        }
+        LoadLevelOggFiles(packageName);
+        // END OF CODE SLATED FOR DEMOLITION
     } else {
         return fnfErr;
     }
 
-    // TODO: actually load the level
+    std::optional<std::string> alfPath = GetResolvedAlfPath(ledi->alfPath);
+    if (!alfPath) {
+        return fnfErr;
+    }
+
+    bool wasSuccessful = LoadALF(*alfPath);
+    if (!wasSuccessful) {
+        return fnfErr;
+    }
 
     return noErr;
+}
+
+bool AssetManager::PackageInStorage(std::string packageName)
+{
+    return (bool)GetPackagePath(packageName);
 }
 
 std::string AssetManager::GetBasePackagePath(BasePackage basePackage) throw()
@@ -125,6 +237,20 @@ std::string AssetManager::GetBasePackagePath(BasePackage basePackage) throw()
             throw std::invalid_argument("No defined path for base package");
     }
     return path.str();
+}
+
+std::optional<std::string> AssetManager::GetPackagePath(std::string packageName)
+{
+    std::stringstream path;
+    path << assetStorage->GetRootPath() << PATHSEP << packageName;
+
+    std::stringstream manifestPath;
+    manifestPath << path.str() << PATHSEP << MANIFESTFILE;
+
+    std::ifstream testFile(manifestPath.str());
+    return testFile.good()
+        ? path.str()
+        : std::optional<std::string>{};
 }
 
 std::string AssetManager::GetFullPath(MaybePackage package, std::string relativePath)
@@ -154,6 +280,27 @@ std::string AssetManager::GetScriptPath(MaybePackage package)
     return GetFullPath(package, "default.avarascript");
 }
 
+std::string AssetManager::GetAlfPath(MaybePackage package, std::string relativePath)
+{
+    std::stringstream path;
+    path << "alf" << PATHSEP << relativePath;
+    return GetFullPath(package, path.str());
+}
+
+std::string AssetManager::GetBspPath(MaybePackage package, int16_t id)
+{
+    std::stringstream relativePath;
+    relativePath << "bsps" << PATHSEP << id << ".json";
+    return GetFullPath(package, relativePath.str());
+}
+
+std::string AssetManager::GetOggPath(MaybePackage package, int16_t id)
+{
+    std::stringstream relativePath;
+    relativePath << "ogg" << PATHSEP << id << ".ogg";
+    return GetFullPath(package, relativePath.str());
+}
+
 void AssetManager::LoadManifest(MaybePackage package)
 {
     std::string path = GetManifestPath(package);
@@ -171,23 +318,45 @@ void AssetManager::LoadScript(MaybePackage package)
     std::string path = GetScriptPath(package);
     std::ifstream file(path);
     if (file.good()) {
-        std::string contents;
-        file.seekg(0, std::ios::end);
-        contents.reserve(file.tellg());
-        file.seekg(0, std::ios::beg);
+        std::stringstream script;
+        script << file.rdbuf();
 
-        contents.assign((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+        avarascriptCache.insert_or_assign(package, std::make_shared<std::string>(script.str()));
+    }
+}
 
-        auto script = std::make_shared<std::string>(contents);
-        avarascriptCache.insert_or_assign(package, script);
+void AssetManager::LoadBsp(MaybePackage package, int16_t id)
+{
+    std::string path = GetBspPath(package, id);
+    std::ifstream file(path);
+    if (file.good()) {
+        auto bsp = std::make_shared<nlohmann::json>(nlohmann::json::parse(file));
+        Asset<nlohmann::json> asset;
+        asset.data = bsp;
+        asset.packageName = package;
+        bspCache.insert_or_assign(id, asset);
+    }
+}
+
+void AssetManager::LoadHull(MaybePackage package, int16_t id)
+{
+    // Note that all manifests should already be loaded due to `Init`, `SwitchBasePackage`, and
+    // `BuildDependencyList`.
+    auto manifest = manifestCache.at(package);
+    if (manifest->hullResources.count(id) > 0) {
+        auto hull = std::make_shared<HullConfigRecord>(manifest->hullResources.at(id));
+        Asset<HullConfigRecord> asset;
+        asset.data = hull;
+        asset.packageName = package;
+        hullCache.insert_or_assign(id, asset);
     }
 }
 
 void AssetManager::SwitchBasePackage(BasePackage newBase)
 {
     std::vector<MaybePackage> packageList = {NoPackage};
-    SimpleCacheRemoveAll(manifestCache, packageList);
-    SimpleCacheRemoveAll(avarascriptCache, packageList);
+    manifestCache.RemoveAll(packageList);
+    avarascriptCache.RemoveAll(packageList);
     hullCache.RemoveAll(packageList);
     bspCache.RemoveAll(packageList);
     sndCache.RemoveAll(packageList);
@@ -212,8 +381,8 @@ void AssetManager::SwitchContext(std::string packageName)
     }
 
     if (needsCacheClear.size() > 0) {
-        SimpleCacheRemoveAll(manifestCache, needsCacheClear);
-        SimpleCacheRemoveAll(avarascriptCache, needsCacheClear);
+        manifestCache.RemoveAll(needsCacheClear);
+        avarascriptCache.RemoveAll(needsCacheClear);
         hullCache.RemoveAll(needsCacheClear);
         bspCache.RemoveAll(needsCacheClear);
         sndCache.RemoveAll(needsCacheClear);
@@ -249,3 +418,33 @@ void AssetManager::BuildDependencyList(std::string currentPackage, std::vector<s
         }
     }
 }
+
+template <>
+void AssetManager::ReviewPriorities(AssetCache<nlohmann::json> &cache)
+{
+    std::vector<int16_t> needsRemoval = {};
+    for (auto const &[id, asset] : cache) {
+        MaybePackage assetPkg = asset.packageName;
+        for (auto const &pkg : externalPackages) {
+            if (assetPkg == pkg) {
+                // We've reached the point in the package list where the cached asset is of equal
+                // or higher priority than the remaining packages, so we can stop looking for this
+                // particular asset ID.
+                break;
+            }
+
+            std::string path = GetBspPath(pkg, id);
+            std::ifstream testFile(path);
+            if (testFile.good()) {
+                needsRemoval.push_back(id);
+
+                // We've found a higher priority asset than the one in the cache, so we can stop
+                // looking for this particular asset ID.
+                break;
+            }
+        }
+    }
+    for (auto &id : needsRemoval) {
+        cache.erase(id);
+    }
+};

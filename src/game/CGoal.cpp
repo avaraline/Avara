@@ -7,6 +7,7 @@
     Modified: Wednesday, September 4, 1996, 00:06
 */
 
+#include "AssetManager.h"
 #include "CGoal.h"
 
 #include "CBall.h"
@@ -56,7 +57,8 @@ CAbstractActor *CGoal::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (HasBSP(resId)) {
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
         LoadPartWithColors(0, resId);
         partList[0]->Reset();
         partList[0]->RotateZ(ReadFixedVar(iRoll));

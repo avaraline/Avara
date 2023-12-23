@@ -7,6 +7,7 @@
     Modified: Friday, March 29, 1996, 10:44
 */
 
+#include "AssetManager.h"
 #include "CHologramActor.h"
 
 #include "CBSPPart.h"
@@ -27,7 +28,8 @@ CAbstractActor *CHologramActor::EndScript() {
 
     resId = ReadLongVar(iShape);
 
-    if (HasBSP(resId)) {
+    auto bsp = AssetManager::GetBsp(resId);
+    if (bsp) {
         CBSPWorld *theWorld;
         CBSPPart *thePart;
 
