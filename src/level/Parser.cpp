@@ -1058,7 +1058,11 @@ void AllocParser() {
     std::vector<std::shared_ptr<std::string>> scripts = AssetManager::GetAllScripts();
     for (auto const &script : scripts) {
         if (script->length() > 0) {
-            RunThis((StringPtr)script->c_str());
+            // TODO: fix this so we don't need to copy the string into a C string
+            char *asCStr = new char[script->length() + 1];
+            strcpy(asCStr, script->c_str());
+            RunThis((StringPtr)asCStr);
+            delete [] asCStr;
         }
     }
 }
