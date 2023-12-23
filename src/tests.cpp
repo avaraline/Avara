@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <SDL2/SDL_log.h>
+#include "AssetManager.h"
 #include "CAvaraApp.h"
 #include "CBSPPart.h"
 #include "CPlayerManager.h"
@@ -131,6 +132,8 @@ public:
 class TestApp : public CAvaraApp {
 public:
     TestApp() {
+        AssetManager::Init();
+        
         // Silence SDL logging with a no-op callback.
         SDL_LogSetOutputFunction([](void *d, int c, SDL_LogPriority p, const char *m){}, nullptr);
     }
