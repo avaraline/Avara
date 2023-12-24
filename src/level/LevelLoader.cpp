@@ -288,13 +288,13 @@ struct ALFWalker: pugi::xml_tree_walker {
     void handle_enum(pugi::xml_node& node) {
         std::stringstream script;
         script << "enum " << node.attribute("start").value() << " " << node.attribute("vars").value() << " end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
 
     void handle_unique(pugi::xml_node& node) {
         std::stringstream script;
         script << "unique " << node.attribute("vars").value() << " end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
 
     void handle_set(pugi::xml_node& node) {
@@ -308,11 +308,11 @@ struct ALFWalker: pugi::xml_tree_walker {
         }
         std::string result = script.str();
         if (wrote && result.length() > 0)
-        RunThis((StringPtr)result.c_str());
+        RunThis(result);
     }
 
     void handle_script(pugi::xml_node& node) {
-        RunThis((StringPtr)node.child_value());
+        RunThis(std::string(node.child_value()));
     }
 
     void handle_wall(pugi::xml_node& node) {
@@ -320,7 +320,7 @@ struct ALFWalker: pugi::xml_tree_walker {
         if (!y.empty()) {
             std::stringstream script;
             script << "wa = " << y << "\n";
-            RunThis((StringPtr)script.str().c_str());
+            RunThis(script.str());
         }
         CWallActor *theWall = new CWallActor;
         theWall->IAbstractActor();
@@ -362,7 +362,7 @@ struct ALFWalker: pugi::xml_tree_walker {
             script << attr << " = " << value << "\n";
         }
         script << "end";
-        RunThis((StringPtr)script.str().c_str());
+        RunThis(script.str());
     }
 
 private:

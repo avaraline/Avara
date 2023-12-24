@@ -988,11 +988,13 @@ char *fixedString(unsigned char *s) {
     return fixed;
 }
 
-void RunThis(unsigned char *script) {
+void RunThis(std::string script) {
     LexSymbol statement;
 
+    StringPtr scriptPtr = (StringPtr)script.c_str();
+
 #ifdef DEBUGPARSER
-    char *formattedScript = fixedString(script);
+    char *formattedScript = fixedString(scriptPtr);
     SDL_Log("Running script:\n%s\n", formattedScript);
     std::free(formattedScript);
 #endif
@@ -1014,7 +1016,7 @@ void RunThis(unsigned char *script) {
     }
     */
 
-    SetupCompiler(script);
+    SetupCompiler(scriptPtr);
     LexRead(&parserVar.lookahead);
 
     do {
@@ -1058,11 +1060,7 @@ void AllocParser() {
     std::vector<std::shared_ptr<std::string>> scripts = AssetManager::GetAllScripts();
     for (auto const &script : scripts) {
         if (script->length() > 0) {
-            // TODO: fix this so we don't need to copy the string into a C string
-            char *asCStr = new char[script->length() + 1];
-            strcpy(asCStr, script->c_str());
-            RunThis((StringPtr)asCStr);
-            delete [] asCStr;
+            RunThis(*script);
         }
     }
 }

@@ -270,7 +270,16 @@ private:
      * items from the cache that should be overridden by higher priority packages.
      *
      * @param cache The cache to review.
+     * @tparam T The type of the assets in the cache.
      */
     template <typename T>
-    void ReviewPriorities(AssetCache<T> &cache);
+    static void ReviewPriorities(AssetCache<T> &cache);
+
+    /** @copydoc */
+    template <>
+    void ReviewPriorities(AssetCache<nlohmann::json> &cache);
+
+    /** @copydoc */
+    template <>
+    void ReviewPriorities(AssetCache<HullConfigRecord> &cache);
 };

@@ -389,6 +389,9 @@ void AssetManager::SwitchContext(std::string packageName)
     }
 
     externalPackages = newContext;
+
+    ReviewPriorities(bspCache);
+    ReviewPriorities(hullCache);
 }
 
 void AssetManager::BuildDependencyList(std::string currentPackage, std::vector<std::string> &list)
@@ -436,6 +439,35 @@ void AssetManager::ReviewPriorities(AssetCache<nlohmann::json> &cache)
             std::string path = GetBspPath(pkg, id);
             std::ifstream testFile(path);
             if (testFile.good()) {
+                needsRemoval.push_back(id);
+
+                // We've found a higher priority asset than the one in the cache, so we can stop
+                // looking for this particular asset ID.
+                break;
+            }
+        }
+    }
+    for (auto &id : needsRemoval) {
+        cache.erase(id);
+    }
+};
+
+template <>
+void AssetManager::ReviewPriorities(AssetCache<HullConfigRecord> &cache)
+{
+    std::vector<int16_t> needsRemoval = {};
+    for (auto const &[id, asset] : cache) {
+        MaybePackage assetPkg = asset.packageName;
+        for (auto const &pkg : externalPackages) {
+            if (assetPkg == pkg) {
+                // We've reached the point in the package list where the cached asset is of equal
+                // or higher priority than the remaining packages, so we can stop looking for this
+                // particular asset ID.
+                break;
+            }
+
+            auto manifest = manifestCache.at(pkg);
+            if (manifest->hullResources.count(id) > 0) {
                 needsRemoval.push_back(id);
 
                 // We've found a higher priority asset than the one in the cache, so we can stop
