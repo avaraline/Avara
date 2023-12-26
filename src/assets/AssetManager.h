@@ -3,6 +3,7 @@
 #include "AssetRepository.h"
 #include "PackageManifest.h"
 #include "PlayerConfig.h"
+#include "SoundSystemDefines.h"
 #include "Types.h"
 
 #include <json.hpp>
@@ -115,8 +116,16 @@ public:
      * Run important operations at application start.
      */
     static void Init();
-    
-    static OSErr LoadLevel(std::string packageName, std::string levelTag, std::string &levelName);
+
+    /**
+     * Attempt to load the level with the provided relative path from the provided package name.
+     *
+     * @param packageName The package we want to load from.
+     * @param relativePath The relative path to an ALF file.
+     * @param[out] levelName The name of the level as defined by the package's manifest.
+     * @return a status code indicating either no error or that the file was not found
+     */
+    static OSErr LoadLevel(std::string packageName, std::string relativePath, std::string &levelName);
 
     /**
      * Checks to see if a package with the given name is stored locally.
@@ -136,7 +145,7 @@ private:
     static SimpleAssetCache<PackageManifest> manifestCache;
     static SimpleAssetCache<std::string> avarascriptCache;
     static AssetCache<nlohmann::json> bspCache;
-    static AssetCache<std::vector<uint8_t>> sndCache;
+    static AssetCache<std::vector<Sample>> sndCache;
     static AssetCache<HullConfigRecord> hullCache;
 
     /**

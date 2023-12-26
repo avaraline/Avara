@@ -162,7 +162,7 @@ void AssetManager::Init()
     LoadScript(NoPackage);
 }
 
-OSErr AssetManager::LoadLevel(std::string packageName, std::string levelTag, std::string &levelName)
+OSErr AssetManager::LoadLevel(std::string packageName, std::string relativePath, std::string &levelName)
 {
     if (externalPackages.size() == 0 || externalPackages[0] != packageName) {
         SwitchContext(packageName);
@@ -175,7 +175,7 @@ OSErr AssetManager::LoadLevel(std::string packageName, std::string levelTag, std
     auto manifest = manifestCache.at(packageName);
     std::optional<LevelDirectoryEntry> ledi;
     for (auto const &level : manifest->levelDirectory) {
-        if (level.alfPath == levelTag) {
+        if (level.alfPath == relativePath) {
             ledi = level;
         }
     }
